@@ -1,4 +1,4 @@
-# 📓 Cuaderno de Profesorado - Gestión Docente y Evaluación Interactiva
+# 📓 Cuaderno Digital Docente Ciclos FP
 
 Una aplicación web interactiva desarrollada en **Python** con **Streamlit** diseñada para facilitar la labor del profesorado de Formación Profesional (o cualquier otra etapa educativa) en la gestión diaria de sus clases. Automatiza la planificación, el seguimiento en vivo, y el cálculo de evaluaciones en sintonía con los Resultados de Aprendizaje (RA).
 
