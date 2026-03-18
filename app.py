@@ -9,7 +9,7 @@ import os
 # ==========================================
 # 1. CONFIGURACIÓN DE PÁGINA
 # ==========================================
-st.toast("✅ Aplicación v8.2 - Afinación visual del PDF")
+st.toast("✅ RSP v8.2")
 
 # ==========================================
 # 2. FUNCIONES DE GUARDADO Y CARGA (JSON) / PDF
@@ -273,7 +273,7 @@ if 'info_fechas' not in st.session_state:
 for k, v in {"ini_feoe": date(2026, 3, 16), "fin_feoe": date(2026, 5, 29), "h_sem_feoe": 8}.items():
     st.session_state.info_fechas.setdefault(k, v)
 if 'horario' not in st.session_state:
-    st.session_state.horario = {"Lun": 2, "Mar": 0, "Mié": 0, "Jue": 4, "Vie": 2}
+    st.session_state.horario = {"Lun": 1, "Mar": 2, "Mié": 1, "Jue": 1, "Vie": 0}
 if 'calendar_notes' not in st.session_state: 
     st.session_state.calendar_notes = {}
 if 'df_ra' not in st.session_state: 
@@ -303,6 +303,13 @@ if 'daily_ledger' not in st.session_state:
 
 if 'planning_ledger' not in st.session_state:
     st.session_state.planning_ledger = {}
+
+# --- CARGAR FICHERO POR DEFECTO ---
+if 'app_init_done' not in st.session_state:
+    st.session_state.app_init_done = True
+    st.session_state.active_module = "0237-ictve"
+    if os.path.exists("0237-ictve.json"):
+        cargar_datos("0237-ictve.json")
 
 # ==========================================
 # 5. INTERFAZ: MENÚ LATERAL Y ESTILOS
@@ -496,16 +503,51 @@ with st.sidebar:
     st.title("Cuaderno Digital Docente Ciclos FP")
     st.markdown("<br>", unsafe_allow_html=True)    
     # 5.2 Gestión de Archivos (Movido arriba)
-    with st.expander("Gestión de módulos"):
-        n_file = st.text_input("Módulo actual:", value="0237-ictve")
-        if st.button("💾 Guardar"):
-            guardar_datos(n_file)
-            st.success("¡Guardado!")
+    with st.expander("📚 Gestión de módulos"):
         f_list = [f for f in os.listdir(".") if f.endswith(".json")]
-        if f_list:
-            sel = st.selectbox("Cargar módulo:", ["--"] + f_list)
-            if sel != "--" and st.button("📂 Cargar"):
-                cargar_datos(sel)
+        
+        st.markdown("**📂 Cargar módulo**")
+        default_idx = f_list.index("0237-ictve.json") if "0237-ictve.json" in f_list else 0
+        sel = st.selectbox("Selecciona archivo", f_list, index=default_idx, label_visibility="collapsed", key="load_sel")
+        
+        if st.button("📂 Iniciar Carga", use_container_width=True):
+            st.session_state.confirm_load = sel
+
+        if st.session_state.get("confirm_load"):
+            st.warning(f"⚠️ Al cargar `{st.session_state.confirm_load}` perderás los cambios no guardados. ¿Continuar?")
+            c1, c2 = st.columns(2)
+            if c1.button("✅ Sí, cargar", type="primary", use_container_width=True):
+                cargar_datos(st.session_state.confirm_load)
+                st.session_state.active_module = st.session_state.confirm_load.replace(".json", "")
+                st.session_state.confirm_load = None
+                st.rerun()
+            if c2.button("❌ Cancelar", use_container_width=True, key="canc_load"):
+                st.session_state.confirm_load = None
+                st.rerun()
+                
+        st.divider()
+        st.markdown("**💾 Guardar módulo**")
+        n_file = st.text_input("Nombre del módulo", value=st.session_state.get("active_module", "0237-ictve"), label_visibility="collapsed")
+        
+        if st.button("💾 Iniciar Guardado", use_container_width=True):
+            st.session_state.confirm_save = n_file
+            
+        if st.session_state.get("confirm_save"):
+            file_to_save = st.session_state.confirm_save
+            filename_full = file_to_save if file_to_save.endswith(".json") else f"{file_to_save}.json"
+            if os.path.exists(filename_full):
+                st.warning(f"⚠️ `{filename_full}` ya existe. ¿Sobreescribir datos?")
+            else:
+                st.info(f"✅ Se creará un nuevo archivo: `{filename_full}`. ¿Continuar?")
+                
+            c3, c4 = st.columns(2)
+            if c3.button("✅ Sí, guardar", type="primary", use_container_width=True):
+                guardar_datos(file_to_save)
+                st.session_state.active_module = file_to_save.replace(".json", "")
+                st.session_state.confirm_save = None
+                st.success("¡Guardado!")
+            if c4.button("❌ Cancelar", use_container_width=True, key="canc_save"):
+                st.session_state.confirm_save = None
                 st.rerun()
 
     st.markdown("<hr>", unsafe_allow_html=True)
@@ -640,15 +682,15 @@ if menu == "Datos":
     suma_criterios = st.session_state.info_modulo["criterio_conocimiento"] + st.session_state.info_modulo["criterio_procedimiento_ejercicios"] + st.session_state.info_modulo["criterio_procedimiento_practicas"] + st.session_state.info_modulo.get("criterio_tareas", st.session_state.info_modulo.get("criterio_actitud_participacion", 30))
     cc1, cc2 = st.columns([3, 1])
     with cc1:
-        st.markdown("### 🧾 Criterios de calificación")
+        st.markdown("### 🧾 Instrumentos de evaluación. Criterios")
     with cc2:
         st.markdown(badge(suma_criterios - 100, suma_criterios, "%"), unsafe_allow_html=True)
 
     col_a, col_b, col_c, col_d = st.columns(4)
     with col_a:
-        st.session_state.info_modulo["criterio_conocimiento"] = st.number_input("Examen Teórico", 0, 100, st.session_state.info_modulo["criterio_conocimiento"], key="crit_conocimiento")
+        st.session_state.info_modulo["criterio_conocimiento"] = st.number_input("Examen teórico", 0, 100, st.session_state.info_modulo["criterio_conocimiento"], key="crit_conocimiento")
     with col_b:
-        st.session_state.info_modulo["criterio_procedimiento_practicas"] = st.number_input("Examen Práctico", 0, 100, st.session_state.info_modulo["criterio_procedimiento_practicas"], key="crit_procedimiento_practicas")
+        st.session_state.info_modulo["criterio_procedimiento_practicas"] = st.number_input("Examen práctico", 0, 100, st.session_state.info_modulo["criterio_procedimiento_practicas"], key="crit_procedimiento_practicas")
     with col_c:
         st.session_state.info_modulo["criterio_procedimiento_ejercicios"] = st.number_input("Informes de ejercicios", 0, 100, st.session_state.info_modulo["criterio_procedimiento_ejercicios"], key="crit_procedimiento_ejercicios")
     with col_d:
@@ -658,14 +700,14 @@ if menu == "Datos":
     suma_ra = round(pd.to_numeric(st.session_state.df_ra["% Pond"], errors="coerce").fillna(0).sum(), 2)
     c_ra1, c_ra2 = st.columns([3, 1])
     with c_ra1:
-        st.markdown("### 📚 Resultados de Aprendizaje")
+        st.markdown("###🎓 Resultados de Aprendizaje")
     with c_ra2:
         st.markdown(badge(suma_ra - 100, suma_ra, "%"), unsafe_allow_html=True)
 
     ed_ra = st.data_editor(st.session_state.df_ra, column_config={
         "ID": st.column_config.TextColumn("ID-RA", width="small", disabled=True),
         "% Pond": st.column_config.NumberColumn("% RA", width="small", min_value=0.0, max_value=100.0, format="%.1f"),
-        "Descripción": st.column_config.TextColumn("Resultados de aprendizaje"),
+        "Descripción": st.column_config.TextColumn("Resultados de Aprendizaje"),
     }, num_rows="dynamic", hide_index=True, width="stretch", key="tabla_ra")
     
     # Manejo de nuevos RA
