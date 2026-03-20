@@ -64,7 +64,7 @@ def _draw_page_decorations(canv, doc):
     canv.drawString(1.5 * cm, 1 * cm, f"Página {doc.page}")
     canv.restoreState()
 
-def generar_pdf_boletin(info_modulo, info_fechas, df_al, df_eval, df_ra, df_ud, df_pr, planning_ledger):
+def generar_pdf_boletin(info_modulo, info_fechas, df_al, df_eval, df_ra, df_ud, df_pr, planning_ledger, df_ce=None, df_act=None, df_feoe=None):
     buffer = io.BytesIO()
     W, H = portrait(A4)
     margin = 1.5 * cm
@@ -123,6 +123,19 @@ def generar_pdf_boletin(info_modulo, info_fechas, df_al, df_eval, df_ra, df_ud, 
                 "tris": tris_found if tris_found else ["1T", "2T", "3T"]
             }
 
+    peso_ce = {}
+    ra_of_ce = {}
+    df_ce_clean = pd.DataFrame()
+    if df_ce is not None and not df_ce.empty:
+        df_ce_clean = df_ce.dropna(subset=["Criterio Evaluación (CE)"])
+        df_ce_clean = df_ce_clean[df_ce_clean["Criterio Evaluación (CE)"].str.strip() != ""]
+        for _, ce_row in df_ce_clean.iterrows():
+            ce_id = str(ce_row["Criterio Evaluación (CE)"])
+            r_id = str(ce_row.get("RA", ""))
+            if pd.notna(ce_id) and pd.notna(r_id) and ce_id != "nan" and r_id != "nan":
+                peso_ce[ce_id] = pd.to_numeric(ce_row["Ponderación en RA (%)"], errors="coerce") if pd.notna(ce_row["Ponderación en RA (%)"]) else 0.0
+                ra_of_ce[ce_id] = r_id
+
     df_evaluable = df_al[df_al.get("Estado", "") != "Baja"] if not df_al.empty else pd.DataFrame()
     df_al_sorted = df_evaluable.sort_values("Apellidos").reset_index(drop=True) if not df_al.empty else pd.DataFrame()
 
@@ -161,40 +174,82 @@ def generar_pdf_boletin(info_modulo, info_fechas, df_al, df_eval, df_ra, df_ud, 
         
         elements.append(Spacer(1, 15))
         
-        # Bloque 2. CALIFICACIÓN NUMÉRICA
-        elements.append(Paragraph("Evaluación Numérica", h2_style))
+        # Cálculo de notas CE y RA para este alumno
+        new_vals = {}
+        if df_act is not None and not df_act.empty:
+            for _, act in df_act.iterrows():
+                act_id = str(act["ID"])
+                if act_id in df_eval.columns:
+                    val = float(df_eval.at[idx, act_id]) if pd.notna(df_eval.at[idx, act_id]) else 0.0
+                    new_vals[act_id] = val
+
+        notas_ce = {}
+        for ce_id in peso_ce.keys():
+            act_vals = []
+            if df_act is not None and not df_act.empty:
+                for _, act in df_act.iterrows():
+                    if ce_id in act.index and act[ce_id] == True:
+                        act_id = str(act["ID"])
+                        if act_id in new_vals:
+                            act_vals.append(new_vals[act_id])
+            if act_vals:
+                notas_ce[ce_id] = sum(act_vals) / len(act_vals)
+            else:
+                notas_ce[ce_id] = 0.0
         
-        e_data = [["Trimestre", "Teoría", "Práctica", "P./Tareas", "Cuaderno", "Nota Trimestral"]]
-        for t_pfx, t_name in [("1T", "1T"), ("2T", "2T"), ("3T", "3T")]:
-            teo = float(df_eval.at[idx, f"{t_pfx}_Teoria"]) if not pd.isna(df_eval.at[idx, f"{t_pfx}_Teoria"]) else 0.0
-            pra = float(df_eval.at[idx, f"{t_pfx}_Practica"]) if not pd.isna(df_eval.at[idx, f"{t_pfx}_Practica"]) else 0.0
-            inf = float(df_eval.at[idx, f"{t_pfx}_Informes"]) if not pd.isna(df_eval.at[idx, f"{t_pfx}_Informes"]) else 0.0
-            cua = float(df_eval.at[idx, f"{t_pfx}_Cuaderno"]) if not pd.isna(df_eval.at[idx, f"{t_pfx}_Cuaderno"]) else 0.0
-            nota_t = float(df_eval.at[idx, f"{t_pfx}_Nota"]) if not pd.isna(df_eval.at[idx, f"{t_pfx}_Nota"]) else 0.0
+        notas_ra = {}
+        for ce_id, n_ce in notas_ce.items():
+            r = ra_of_ce.get(ce_id)
+            if r:
+                if r not in notas_ra: notas_ra[r] = 0.0
+                notas_ra[r] += n_ce * (peso_ce[ce_id] / 100.0)
+
+        # --- FEOE SCORE INTEGRATION ---
+        if not df_ra.empty and "Dualizado" in df_ra.columns:
+            for r_id in notas_ra.keys():
+                ra_row = df_ra[df_ra["ID"] == r_id]
+                if not ra_row.empty and ra_row.iloc[0].get("Dualizado", False):
+                    emp_grade = 0.0
+                    if df_feoe is not None and not df_feoe.empty and r_id in df_feoe.columns:
+                        fe_row = df_feoe[df_feoe["ID"] == al_id]
+                        if not fe_row.empty:
+                            emp_grade = float(fe_row.iloc[0][r_id])
+                            
+                    if emp_grade >= 1:
+                        conv = {1: 3.0, 2: 5.0, 3: 7.5, 4: 10.0}
+                        nota_empresa = conv.get(int(emp_grade), 0.0)
+                        notas_ra[r_id] = (notas_ra[r_id] + nota_empresa) / 2.0
+
+        # Bloque 2. CALIFICACIÓN COMPETENCIAL
+        elements.append(Paragraph("Evaluación Competencial por Criterios (CE)", h2_style))
+        
+        if notas_ce:
+            e_data = [["RA", "Criterio Evaluación", "Peso RA", "Nota Calculada"]]
+            # sorted by RA then CE
+            for ce_id in sorted(notas_ce.keys(), key=lambda x: (ra_of_ce.get(x, ""), x)):
+                r = ra_of_ce.get(ce_id, "")
+                p = peso_ce.get(ce_id, 0.0)
+                n_c = notas_ce[ce_id]
+                e_data.append([r, ce_id, f"{p:.0f}%", f"{n_c:.2f}"])
             
-            e_data.append([t_name, f"{teo:.1f}", f"{pra:.1f}", f"{inf:.1f}", f"{cua:.1f}", f"{nota_t:.2f}"])
+            te = Table(e_data, colWidths=[2.5*cm, 5.5*cm, 2.5*cm, 3.5*cm], hAlign='LEFT')
+            te.setStyle(TableStyle([
+                ('BACKGROUND', (0,0), (-1,0), colors.HexColor("#333333")),
+                ('TEXTCOLOR', (0,0), (-1,0), colors.white),
+                ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+                ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
+                ('FONTSIZE', (0,0), (-1,-1), 9),
+                ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor("#dddddd")),
+            ]))
+            elements.append(te)
+        else:
+            elements.append(Paragraph("No hay Criterios de Evaluación definidos o calificados.", norm_style))
             
         nota_final = float(df_eval.at[idx, "Nota_Final"]) if not pd.isna(df_eval.at[idx, "Nota_Final"]) else 0.0
         n_int, sigad_cod, sigad_txt, sigad_col = get_sigad_info(nota_final)
         
-        e_data.append(["FINAL", "-", "-", "-", "-", f"{nota_final:.2f}"])
-        
-        te = Table(e_data, colWidths=[3*cm, 2.5*cm, 2.5*cm, 2.5*cm, 2.5*cm, 3.5*cm], hAlign='LEFT')
-        te.setStyle(TableStyle([
-            ('BACKGROUND', (0,0), (-1,0), colors.HexColor("#333333")),
-            ('TEXTCOLOR', (0,0), (-1,0), colors.white),
-            ('ALIGN', (0,0), (-1,-1), 'CENTER'),
-            ('ALIGN', (0,0), (0,-1), 'LEFT'),
-            ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
-            ('FONTSIZE', (0,0), (-1,-1), 9),
-            ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor("#dddddd")),
-            ('FONTNAME', (0,-1), (-1,-1), 'Helvetica-Bold'),
-            ('BACKGROUND', (0,-1), (-1,-1), colors.HexColor("#f4f4f4")),
-        ]))
-        elements.append(te)
-        
-        elements.append(Spacer(1, 5))
-        sigad_p = Paragraph(f"<b>Equivalencia oficial SIGAD:</b> <font color='{sigad_col.hexval()}'><b>{n_int} - {sigad_cod} ({sigad_txt})</b></font>", norm_style)
+        elements.append(Spacer(1, 10))
+        sigad_p = Paragraph(f"<b>Nota Final Módulo (oficial SIGAD):</b> <font color='{sigad_col.hexval()}'><b>{n_int} - {sigad_cod} ({sigad_txt})</b></font>", norm_style)
         elements.append(sigad_p)
         
         elements.append(Spacer(1, 15))
@@ -205,16 +260,10 @@ def generar_pdf_boletin(info_modulo, info_fechas, df_al, df_eval, df_ra, df_ud, 
         pct_global_cumplido = 0.0
         suma_pond_ra = 0.0
         
-        n1 = float(df_eval.at[idx, "1T_Nota"]) if not pd.isna(df_eval.at[idx, "1T_Nota"]) else 0.0
-        n2 = float(df_eval.at[idx, "2T_Nota"]) if not pd.isna(df_eval.at[idx, "2T_Nota"]) else 0.0
-        n3 = float(df_eval.at[idx, "3T_Nota"]) if not pd.isna(df_eval.at[idx, "3T_Nota"]) else 0.0
-        notas_student = {"1T": n1, "2T": n2, "3T": n3}
-        
         ra_data = [["RA", "Descripción", "Nota RA", "Progreso"]]
         
         for ra_id, info in ra_info.items():
-            tris = ra_to_tri[ra_id]["tris"]
-            avg_nota_ra = sum(notas_student[t] for t in tris) / len(tris) if tris else nota_final
+            avg_nota_ra = notas_ra.get(ra_id, 0.0)
             
             prop = min(100.0, max(0.0, (avg_nota_ra / 5.0) * 100.0) if avg_nota_ra >= 5.0 else (avg_nota_ra/5.0)*100.0)
             obtenido_peso = info["pond"] * (prop / 100.0)

@@ -37,6 +37,9 @@ def guardar_datos(nombre_archivo):
         "df_ud": st.session_state.df_ud.to_dict(orient="records"),
         "df_pr": st.session_state.df_pr.to_dict(orient="records"),
         "df_al": st.session_state.df_al.to_dict(orient="records"),
+        "df_ce": st.session_state.df_ce.to_dict(orient="records") if 'df_ce' in st.session_state else [],
+        "df_act": st.session_state.df_act.to_dict(orient="records") if 'df_act' in st.session_state else [],
+        "df_feoe": st.session_state.df_feoe.to_dict(orient="records") if 'df_feoe' in st.session_state else [],
         "df_eval": st.session_state.df_eval.to_dict(orient="records") if 'df_eval' in st.session_state else [],
         "df_sgmt": st.session_state.df_sgmt.to_dict(orient="records") if 'df_sgmt' in st.session_state else [],
         "daily_ledger": st.session_state.daily_ledger if 'daily_ledger' in st.session_state else {},
@@ -70,6 +73,9 @@ def cargar_datos(nombre_archivo):
         st.session_state.df_pr = st.session_state.df_pr[new_order]
 
     st.session_state.df_al = pd.DataFrame(data.get("df_al", []))
+    st.session_state.df_ce = pd.DataFrame(data.get("df_ce", []))
+    st.session_state.df_act = pd.DataFrame(data.get("df_act", []))
+    st.session_state.df_feoe = pd.DataFrame(data.get("df_feoe", []))
     
     # Asegurar la estructura correcta para df_eval aunque venga vacío del JSON (v7.2.3)
     loaded_eval = data.get("df_eval", [])
@@ -295,13 +301,28 @@ if 'horario' not in st.session_state:
 if 'calendar_notes' not in st.session_state: 
     st.session_state.calendar_notes = {}
 if 'df_ra' not in st.session_state: 
-    st.session_state.df_ra = pd.DataFrame(columns=["ID", "% Pond", "Descripción"])
+    st.session_state.df_ra = pd.DataFrame(columns=["ID", "% Pond", "Dualizado", "Descripción"])
+else:
+    if "Dualizado" not in st.session_state.df_ra.columns:
+        st.session_state.df_ra["Dualizado"] = False
 if 'df_ud' not in st.session_state: 
     st.session_state.df_ud = pd.DataFrame(columns=["ID", "Horas", "Título"])
 if 'df_pr' not in st.session_state: 
     st.session_state.df_pr = pd.DataFrame(columns=["ID", "Práctica"])
 if 'df_al' not in st.session_state: 
     st.session_state.df_al = pd.DataFrame(columns=["ID", "Estado", "Apellidos", "Nombre", "Nacimiento", "Repite", "Matrícula", "Edad", "Comentarios", "email", "Móvil"])
+
+if 'df_ce' not in st.session_state:
+    st.session_state.df_ce = pd.DataFrame(columns=[
+        "RA", "OG Vinculados", "CPE Vinculadas", "Criterio Evaluación (CE)", 
+        "Descripción CE", "Ponderación en RA (%)", "Unidad Didáctica (UD)"
+    ])
+
+if 'df_act' not in st.session_state:
+    st.session_state.df_act = pd.DataFrame(columns=["ID", "Trimestre", "Tipo", "Actividad"])
+
+if 'df_feoe' not in st.session_state:
+    st.session_state.df_feoe = pd.DataFrame(columns=["ID"])
 
 if 'df_eval' not in st.session_state:
     st.session_state.df_eval = pd.DataFrame(columns=[
@@ -574,7 +595,7 @@ with st.sidebar:
     st.markdown("<br>", unsafe_allow_html=True)
 
     # 5.1 Menú de Navegación (Real Buttons)
-    opciones_menu = ["Módulo didáctico", "Calendario lectivo", "Matriz programación", "Resumen docente", "Seguimiento diario", "Matrícula alumnado", "Calificación numérica", "Progreso porcentual"]
+    opciones_menu = ["Módulo didáctico", "Calendario lectivo", "Matriz programación", "Resumen docente", "Seguimiento diario", "Matrícula alumnado", "Instrumentos de evaluación", "Evaluación FEOE", "Calificación numérica", "Progreso porcentual"]
     # Redirigir si el menú activo era uno de los eliminados
     if st.session_state.menu not in opciones_menu:
         st.session_state.menu = "Módulo didáctico"
@@ -640,7 +661,10 @@ with st.sidebar:
             st.session_state.df_ra,
             st.session_state.df_ud,
             st.session_state.df_pr,
-            st.session_state.planning_ledger
+            st.session_state.planning_ledger,
+            st.session_state.df_ce,
+            st.session_state.df_act,
+            st.session_state.df_feoe
         )
         st.download_button(
             label="Boletín competencial",
@@ -768,6 +792,7 @@ if menu == "Módulo didáctico":
     ed_ra = st.data_editor(st.session_state.df_ra, column_config={
         "ID": st.column_config.TextColumn("ID-RA", width="small", disabled=True),
         "% Pond": st.column_config.NumberColumn("% RA", width="small", min_value=0.0, max_value=100.0, format="%.1f"),
+        "Dualizado": st.column_config.CheckboxColumn("FEOE", default=False, width="small"),
         "Descripción": st.column_config.TextColumn("Resultados de Aprendizaje"),
     }, num_rows="dynamic", hide_index=True, width="stretch", key="tabla_ra")
     
@@ -782,6 +807,48 @@ if menu == "Módulo didáctico":
 
 # --- PESTAÑA: Planificación ---
 elif menu == "Matriz programación":
+    st.subheader("🧩 Matriz Curricular: Criterios de Evaluación y Elementos")
+    st.markdown("**Relación jerárquica: RA -> CE -> UD**")
+    st.caption("Añade Criterios de Evaluación, establece su peso en el RA y asígnalos a una Unidad Didáctica. También puedes vincular OG y CPE.")
+
+    columnas_config_ce = {
+        "RA": st.column_config.SelectboxColumn("RA", options=st.session_state.df_ra["ID"].tolist()),
+        "OG Vinculados": st.column_config.TextColumn("OG Vinculados"),
+        "CPE Vinculadas": st.column_config.TextColumn("CPE Vinculadas"),
+        "Criterio Evaluación (CE)": st.column_config.TextColumn("ID CE (Ej. CE1.a)"),
+        "Descripción CE": st.column_config.TextColumn("Descripción CE"),
+        "Ponderación en RA (%)": st.column_config.NumberColumn(
+            "Peso %", min_value=0, max_value=100, step=1
+        ),
+        "Unidad Didáctica (UD)": st.column_config.SelectboxColumn(
+            "Asignar a UD",
+            options=st.session_state.df_ud["ID"].tolist() + ["Sin asignar"]
+        )
+    }
+
+    ed_ce = st.data_editor(
+        st.session_state.df_ce,
+        column_config=columnas_config_ce,
+        num_rows="dynamic",
+        hide_index=True,
+        use_container_width=True,
+        key="tabla_ce"
+    )
+
+    # Validar ponderaciones
+    if not ed_ce.empty:
+        # Rellenar RA vacíos temporalmente para agrupar
+        ed_ce_val = ed_ce.copy()
+        ed_ce_val["RA"] = ed_ce_val["RA"].fillna("")
+        ed_ce_val["Ponderación en RA (%)"] = pd.to_numeric(ed_ce_val["Ponderación en RA (%)"], errors="coerce").fillna(0)
+        errores_ponderacion = ed_ce_val.groupby('RA')['Ponderación en RA (%)'].sum()
+        for ra, total in errores_ponderacion.items():
+            if ra != "" and total != 100:
+                st.warning(f"⚠️ ¡Atención! La suma de ponderaciones de los CE del **{ra}** es {total}%. Debería ser 100%.")
+
+    st.session_state.df_ce = ed_ce
+    st.divider()
+
     st.subheader("📚 Unidades. Matriz de Resultados de Aprendizaje")
     lista_ra_ids = st.session_state.df_ra["ID"].tolist()
     
@@ -1339,141 +1406,271 @@ elif menu == "Seguimiento diario":
                 repartir_horas_previstas()
                 st.rerun()
 
+# --- PESTAÑA: INSTRUMENTOS ---
+elif menu == "Instrumentos de evaluación":
+    st.subheader("🛠️ Instrumentos y Actividades de Evaluación")
+    st.markdown("Define las tareas, exámenes y registros de observación, y vincula qué Criterios de Evaluación califican.")
+
+    if st.session_state.df_ce.empty:
+        st.warning("⚠️ Primero añade Criterios de Evaluación en la pestaña 'Matriz programación'.")
+    else:
+        df_ce_clean = st.session_state.df_ce.dropna(subset=["Criterio Evaluación (CE)"])
+        df_ce_clean = df_ce_clean[df_ce_clean["Criterio Evaluación (CE)"].str.strip() != ""]
+        lista_ce_ids = df_ce_clean["Criterio Evaluación (CE)"].tolist()
+
+        columnas_config_act = {
+            "ID": st.column_config.TextColumn("ID", disabled=True, width="small"),
+            "Trimestre": st.column_config.SelectboxColumn("Trimestre", options=["1T", "2T", "3T"], width="small"),
+            "Tipo": st.column_config.SelectboxColumn("Tipo", options=["Teoría", "Práctica", "Informes", "Tareas"], width="medium"),
+            "Actividad": st.column_config.TextColumn("Descripción Actividad", width="large"),
+        }
+        
+        cols_basicas = ["ID", "Trimestre", "Tipo", "Actividad"]
+        for col in cols_basicas:
+            if col not in st.session_state.df_act.columns:
+                st.session_state.df_act[col] = ""
+
+        for ce in lista_ce_ids:
+            if ce not in st.session_state.df_act.columns:
+                st.session_state.df_act[ce] = False
+            columnas_config_act[ce] = st.column_config.CheckboxColumn(ce, default=False, width="small")
+
+        cols_a_borrar = [c for c in st.session_state.df_act.columns if c not in lista_ce_ids and c not in cols_basicas]
+        if cols_a_borrar:
+            st.session_state.df_act = st.session_state.df_act.drop(columns=cols_a_borrar)
+        
+        st.session_state.df_act = st.session_state.df_act[cols_basicas + lista_ce_ids]
+
+        ed_act = st.data_editor(
+            st.session_state.df_act,
+            column_config=columnas_config_act,
+            num_rows="dynamic",
+            hide_index=True,
+            use_container_width=True,
+            key="tabla_act",
+            height=max(400, (len(st.session_state.df_act) + 1) * 35 + 39)
+        )
+        
+        if len(ed_act) > len(st.session_state.df_act):
+            new_id = generar_siguiente_id(st.session_state.df_act, "ACT")
+            ed_act.iloc[-1, 0] = new_id
+
+        st.session_state.df_act = ed_act
+
+
+# --- PESTAÑA: FEOE ---
+elif menu == "Evaluación FEOE":
+    st.subheader("🏢 Evaluación en Empresa (FEOE)")
+    st.caption("Introduce la calificación del tutor de empresa (1-4) para cada Resultado de Aprendizaje Dualizado.")
+    
+    ras_dualizados = []
+    if not st.session_state.df_ra.empty and "Dualizado" in st.session_state.df_ra.columns:
+        ras_dualizados = st.session_state.df_ra[st.session_state.df_ra["Dualizado"] == True]["ID"].tolist()
+        
+    if not ras_dualizados:
+        st.warning("⚠️ No hay ningún Resultado de Aprendizaje marcado como 'Dualizado' (FEOE) en la pestaña 'Módulo didáctico'.")
+    elif st.session_state.df_al.empty:
+        st.info("No hay alumnado registrado con estado 'Alta'.")
+    else:
+        ids_alumnos = st.session_state.df_al["ID"].tolist()
+        if "ID" not in st.session_state.df_feoe.columns:
+            st.session_state.df_feoe["ID"] = ids_alumnos
+        st.session_state.df_feoe = st.session_state.df_feoe[st.session_state.df_feoe["ID"].isin(ids_alumnos)]
+        
+        exist_ids = st.session_state.df_feoe["ID"].tolist()
+        nuevos = [{"ID": a_id} for a_id in ids_alumnos if a_id not in exist_ids]
+        if nuevos:
+            st.session_state.df_feoe = pd.concat([st.session_state.df_feoe, pd.DataFrame(nuevos)], ignore_index=True)
+            
+        for ra_id in ras_dualizados:
+            if ra_id not in st.session_state.df_feoe.columns:
+                st.session_state.df_feoe[ra_id] = 0.0
+                
+        cols_b = ["ID"]
+        cols_drop = [c for c in st.session_state.df_feoe.columns if c not in ras_dualizados and c not in cols_b]
+        if cols_drop:
+            st.session_state.df_feoe = st.session_state.df_feoe.drop(columns=cols_drop)
+
+        df_al_feoe = st.session_state.df_al[["ID", "Apellidos", "Nombre"]].copy()
+        df_al_feoe["Alumno"] = df_al_feoe["Apellidos"] + ", " + df_al_feoe["Nombre"]
+        df_feoe_disp = pd.merge(st.session_state.df_feoe, df_al_feoe[["ID", "Alumno"]], on="ID", how="left")
+        
+        cols_disp = ["ID", "Alumno"] + ras_dualizados
+        df_feoe_disp = df_feoe_disp[cols_disp]
+        
+        col_cfg = {
+            "ID": st.column_config.TextColumn(disabled=True, width="small"),
+            "Alumno": st.column_config.TextColumn(disabled=True, width="large"),
+        }
+        for ra in ras_dualizados:
+            col_cfg[ra] = st.column_config.NumberColumn(f"{ra} (1-4)", min_value=0.0, max_value=4.0, step=1.0, width="small")
+            
+        st.markdown("**Calificaciones de la empresa:**\n* `0`: Sin evaluar\n* `1`: No Superado\n* `2`: Superado (Suficiente)\n* `3`: Bien/Notable\n* `4`: Excelente")
+        
+        ed_feoe = st.data_editor(
+            df_feoe_disp,
+            column_config=col_cfg,
+            hide_index=True,
+            use_container_width=True,
+            key="tabla_feoe"
+        )
+        
+        for ra in ras_dualizados:
+            st.session_state.df_feoe[ra] = ed_feoe[ra]
+
 # --- PESTAÑA: EVALUACIÓN ---
 elif menu == "Calificación numérica":
-    st.subheader("📊 Evaluación del Alumnado")
+    st.subheader("📊 Evaluación Competencial Jerárquica")
+    st.caption("Introduce las notas de las actividades; el sistema calculará la nota de los CE, RA y la Nota Final automáticamente.")
     
-    # 1. Sincronizar df_eval con df_al (Asegurar que existan todos los alumnos)
-    if not st.session_state.df_al.empty:
+    if st.session_state.df_act.empty or st.session_state.df_ce.empty:
+        st.warning("⚠️ Primero define Criterios de Evaluación y Actividades/Instrumentos.")
+    elif st.session_state.df_al.empty:
+        st.info("No hay alumnos activos registrados. Por favor, a\u00f1ade alumnos con estado 'Alta' en la pesta\u00f1a 'Alumnado'.")
+    else:
+        # 1. Sincronizar df_eval con df_al
         ids_alumnado = st.session_state.df_al["ID"].tolist()
-        
-        # Filtrar df_eval para mantener solo IDs que aún existen en df_al
         st.session_state.df_eval = st.session_state.df_eval[st.session_state.df_eval["ID"].isin(ids_alumnado)]
-        
-        # Añadir nuevos alumnos a df_eval
         ids_eval = st.session_state.df_eval["ID"].tolist()
         nuevos_alumnos = []
         for _, row in st.session_state.df_al.iterrows():
             if row["ID"] not in ids_eval:
-                nuevo = {
-                    "ID": row["ID"],
-                    "1T_Teoria": 0, "1T_Practica": 0, "1T_Informes": 0, "1T_Cuaderno": 0, "1T_Nota": 0,
-                    "2T_Teoria": 0, "2T_Practica": 0, "2T_Informes": 0, "2T_Cuaderno": 0, "2T_Nota": 0,
-                    "3T_Teoria": 0, "3T_Practica": 0, "3T_Informes": 0, "3T_Cuaderno": 0, "3T_Nota": 0,
-                    "Nota_Final": 0
-                }
+                nuevo = {"ID": row["ID"], "Nota_Final": 0.0}
                 nuevos_alumnos.append(nuevo)
-                
         if nuevos_alumnos:
             st.session_state.df_eval = pd.concat([st.session_state.df_eval, pd.DataFrame(nuevos_alumnos)], ignore_index=True)
 
-        # 2. Ponderaciones de criterios y trimestres
-        pto_teo = st.session_state.info_modulo.get("criterio_conocimiento", 30) / 100
-        pto_pra = st.session_state.info_modulo.get("criterio_procedimiento_practicas", 20) / 100
-        pto_inf = st.session_state.info_modulo.get("criterio_procedimiento_ejercicios", 20) / 100
-        pto_cua = st.session_state.info_modulo.get("criterio_tareas", st.session_state.info_modulo.get("criterio_actitud_participacion", 30)) / 100
-        pond_1t = st.session_state.info_modulo.get("pond_1t", 30) / 100
-        pond_2t = st.session_state.info_modulo.get("pond_2t", 30) / 100
-        pond_3t = st.session_state.info_modulo.get("pond_3t", 40) / 100
+        # 2. Asegurar que las actividades existen como columnas
+        act_ids = st.session_state.df_act["ID"].dropna().tolist()
+        for act in act_ids:
+            if act not in st.session_state.df_eval.columns:
+                st.session_state.df_eval[act] = 0.0
 
         def get_sigad_info(nota):
-            n = round(nota)
+            import math
+            if nota < 5: n = math.floor(nota)
+            else: n = math.floor(nota + 0.5)
+            n = max(1, min(10, int(n)))
             if nota < 5:   return n, "IN", "Insuficiente",  "#e74c3c"
             elif nota < 6: return n, "SU", "Suficiente",    "#e67e22"
             elif nota < 7: return n, "BI", "Bien",          "#3498db"
             elif nota < 9: return n, "NT", "Notable",       "#2ecc71"
             else:          return n, "SB", "Sobresaliente", "#1abc9c"
 
-        # 3. Ordenar alumnado por apellidos (Excluyendo Bajas)
+        # Organizar Actividades por Trimestre
+        acts_by_tri = {"1T": [], "2T": [], "3T": []}
+        for _, row in st.session_state.df_act.iterrows():
+            tri = row.get("Trimestre", "1T")
+            if tri not in acts_by_tri: tri = "1T"
+            acts_by_tri[tri].append(row)
+
         df_evaluable = st.session_state.df_al[st.session_state.df_al.get("Estado", "") != "Baja"]
         df_al_sorted = df_evaluable.sort_values("Apellidos").reset_index(drop=True)
 
+        # Mapeo CE -> Actividades
+        df_ce_clean = st.session_state.df_ce.dropna(subset=["Criterio Evaluación (CE)"])
+        df_ce_clean = df_ce_clean[df_ce_clean["Criterio Evaluación (CE)"].str.strip() != ""]
+        
+        peso_ra = {}
+        for _, ra_row in st.session_state.df_ra.iterrows():
+            if pd.notna(ra_row["ID"]):
+                peso_ra[ra_row["ID"]] = pd.to_numeric(ra_row["% Pond"], errors="coerce") if pd.notna(ra_row["% Pond"]) else 0.0
+                
+        peso_ce = {}
+        ra_of_ce = {}
+        for _, ce_row in df_ce_clean.iterrows():
+            ce_id = ce_row["Criterio Evaluación (CE)"]
+            ra_id = ce_row.get("RA", "")
+            if pd.notna(ce_id) and pd.notna(ra_id):
+                peso_ce[ce_id] = pd.to_numeric(ce_row["Ponderación en RA (%)"], errors="coerce") if pd.notna(ce_row["Ponderación en RA (%)"]) else 0.0
+                ra_of_ce[ce_id] = ra_id
+
         for _, al in df_al_sorted.iterrows():
-            al_id     = al["ID"]
+            al_id = al["ID"]
             apellidos = str(al.get("Apellidos", ""))
-            nombre    = str(al.get("Nombre", ""))
+            nombre = str(al.get("Nombre", ""))
 
             mask = st.session_state.df_eval["ID"] == al_id
-            if not mask.any():
-                continue
+            if not mask.any(): continue
             idx = st.session_state.df_eval[mask].index[0]
 
-            nota_prev = float(st.session_state.df_eval.at[idx, "Nota_Final"])
+            nota_prev = float(st.session_state.df_eval.at[idx, "Nota_Final"]) if pd.notna(st.session_state.df_eval.at[idx, "Nota_Final"]) else 0.0
             n_int, sigad_cod, sigad_txt, sigad_col = get_sigad_info(nota_prev)
             header_label = f"\U0001f464  {apellidos}, {nombre}   \u2014   {n_int} \u00b7 {sigad_cod} ({sigad_txt})"
 
             with st.expander(header_label):
-                c1t, c2t, c3t, cf, cs = st.columns([2, 2, 2, 2, 1.5])
-
-                notas_t  = {}
+                co_left, co_right = st.columns([2, 1.5])
+                
                 new_vals = {}
-
-                for col, t_pref, t_label, pond_t in [
-                    (c1t, "1T", f"\U0001f4d8 1\u00ba Tri.  ({int(pond_1t*100)}%)", pond_1t),
-                    (c2t, "2T", f"\U0001f4d7 2\u00ba Tri.  ({int(pond_2t*100)}%)", pond_2t),
-                    (c3t, "3T", f"\U0001f4d9 3\u00ba Tri.  ({int(pond_3t*100)}%)", pond_3t),
-                ]:
-                    with col:
-                        st.markdown(f"**{t_label}**")
-                        teo = st.number_input(
-                            f"Ex. T\u00aa  ({int(pto_teo*100)}%)", 0.0, 10.0,
-                            float(st.session_state.df_eval.at[idx, f"{t_pref}_Teoria"]),
-                            0.1, key=f"ev_{al_id}_{t_pref}_teo", format="%.1f"
-                        )
-                        pra = st.number_input(
-                            f"Ex. P\u00aa  ({int(pto_pra*100)}%)", 0.0, 10.0,
-                            float(st.session_state.df_eval.at[idx, f"{t_pref}_Practica"]),
-                            0.1, key=f"ev_{al_id}_{t_pref}_pra", format="%.1f"
-                        )
-                        inf = st.number_input(
-                            f"Pr.  ({int(pto_inf*100)}%)", 0.0, 10.0,
-                            float(st.session_state.df_eval.at[idx, f"{t_pref}_Informes"]),
-                            0.1, key=f"ev_{al_id}_{t_pref}_inf", format="%.1f"
-                        )
-                        cua = st.number_input(
-                            f"Tareas  ({int(pto_cua*100)}%)", 0.0, 10.0,
-                            float(st.session_state.df_eval.at[idx, f"{t_pref}_Cuaderno"]),
-                            0.1, key=f"ev_{al_id}_{t_pref}_cua", format="%.1f"
-                        )
-                        nota_t = round(teo * pto_teo + pra * pto_pra + inf * pto_inf + cua * pto_cua, 2)
-                        notas_t[t_pref] = nota_t
-                        st.metric("\U0001f4ca Nota trimestral", f"{nota_t:.2f}")
-                        new_vals[f"{t_pref}_Teoria"]   = teo
-                        new_vals[f"{t_pref}_Practica"]  = pra
-                        new_vals[f"{t_pref}_Informes"]  = inf
-                        new_vals[f"{t_pref}_Cuaderno"]  = cua
-                        new_vals[f"{t_pref}_Nota"]      = nota_t
-
-                nota_final_calc = round(
-                    notas_t["1T"] * pond_1t +
-                    notas_t["2T"] * pond_2t +
-                    notas_t["3T"] * pond_3t, 2
-                )
-                fin_teo_calc = new_vals["1T_Teoria"] * pond_1t + new_vals["2T_Teoria"] * pond_2t + new_vals["3T_Teoria"] * pond_3t
-                fin_pra_calc = new_vals["1T_Practica"] * pond_1t + new_vals["2T_Practica"] * pond_2t + new_vals["3T_Practica"] * pond_3t
-                fin_inf_calc = new_vals["1T_Informes"] * pond_1t + new_vals["2T_Informes"] * pond_2t + new_vals["3T_Informes"] * pond_3t
-                fin_cua_calc = new_vals["1T_Cuaderno"] * pond_1t + new_vals["2T_Cuaderno"] * pond_2t + new_vals["3T_Cuaderno"] * pond_3t
-
-                with cf:
-                    st.markdown("**\U0001f4cb Final  (100%)**")
-                    fin_teo = st.number_input(f"Ex. T\u00aa  ({int(pto_teo*100)}%)", value=float(fin_teo_calc), key=f"ev_{al_id}_fin_teo", format="%.2f")
-                    fin_pra = st.number_input(f"Ex. P\u00aa  ({int(pto_pra*100)}%)", value=float(fin_pra_calc), key=f"ev_{al_id}_fin_pra", format="%.2f")
-                    fin_inf = st.number_input(f"Pr.  ({int(pto_inf*100)}%)", value=float(fin_inf_calc), key=f"ev_{al_id}_fin_inf", format="%.2f")
-                    fin_cua = st.number_input(f"Tareas  ({int(pto_cua*100)}%)", value=float(fin_cua_calc), key=f"ev_{al_id}_fin_cua", format="%.2f")
+                with co_left:
+                    st.markdown("**Evaluación por Instrumentos**")
+                    t1, t2, t3 = st.tabs(["1º Tri", "2º Tri", "3º Tri"])
                     
-                    nota_final_calc = round(fin_teo * pto_teo + fin_pra * pto_pra + fin_inf * pto_inf + fin_cua * pto_cua, 2)
+                    for tb, tri_key in zip([t1, t2, t3], ["1T", "2T", "3T"]):
+                        with tb:
+                            if not acts_by_tri[tri_key]:
+                                st.info("No hay actividades evaluables definidas para este trimestre.")
+                            for act in acts_by_tri[tri_key]:
+                                act_id = act["ID"]
+                                val_prev = float(st.session_state.df_eval.at[idx, act_id]) if pd.notna(st.session_state.df_eval.at[idx, act_id]) else 0.0
+                                val_new = st.number_input(
+                                    f"[{act['Tipo']}] {act.get('Actividad', act_id)}", 
+                                    0.0, 10.0, val_prev, 0.1, 
+                                    key=f"ev_{al_id}_{act_id}", format="%.1f"
+                                )
+                                new_vals[act_id] = val_new
+
+                with co_right:
+                    st.markdown("**Cálculo Jerárquico**")
+                    notas_ce = {}
+                    for ce_id in peso_ce.keys():
+                        act_vals = []
+                        for _, act in st.session_state.df_act.iterrows():
+                            if ce_id in act.index and act[ce_id] == True:
+                                act_id = act["ID"]
+                                if act_id in new_vals:
+                                    act_vals.append(new_vals[act_id])
+                        if act_vals:
+                            notas_ce[ce_id] = sum(act_vals) / len(act_vals)
+                        else:
+                            notas_ce[ce_id] = 0.0
                     
+                    notas_ra = {}
+                    for ce_id, n_ce in notas_ce.items():
+                        r = ra_of_ce.get(ce_id)
+                        if r:
+                            if r not in notas_ra: notas_ra[r] = 0.0
+                            notas_ra[r] += n_ce * (peso_ce[ce_id] / 100.0)
+                            
+                    # === FEOE SCORE INTEGRATION ===
+                    if not st.session_state.df_ra.empty and "Dualizado" in st.session_state.df_ra.columns:
+                        for r_id in notas_ra.keys():
+                            ra_row = st.session_state.df_ra[st.session_state.df_ra["ID"] == r_id]
+                            if not ra_row.empty and ra_row.iloc[0].get("Dualizado", False):
+                                emp_grade = 0.0
+                                if not st.session_state.df_feoe.empty and r_id in st.session_state.df_feoe.columns:
+                                    fe_row = st.session_state.df_feoe[st.session_state.df_feoe["ID"] == al_id]
+                                    if not fe_row.empty:
+                                        emp_grade = float(fe_row.iloc[0][r_id])
+                                        
+                                if emp_grade >= 1:
+                                    conv = {1: 3.0, 2: 5.0, 3: 7.5, 4: 10.0}
+                                    nota_empresa = conv.get(int(emp_grade), 0.0)
+                                    notas_ra[r_id] = (notas_ra[r_id] + nota_empresa) / 2.0
+
+                    nota_final_calc = 0.0
+                    for r_id, n_ra in notas_ra.items():
+                        nota_final_calc += n_ra * (peso_ra.get(r_id, 0.0) / 100.0)
+
                     nota_final = st.number_input(
                         "\U0001f31f Nota Final", min_value=1.0, max_value=10.0,
-                        value=float(max(1.0, nota_final_calc)),
-                        step=0.1, format="%.1f", key=f"ev_{al_id}_notaf"
+                        value=float(max(1.0, round(nota_final_calc, 2))),
+                        step=0.1, format="%.2f", key=f"ev_{al_id}_notaf"
                     )
+                    
+                    new_vals["Nota_Final"] = nota_final
+                    n_int_new, sigad_cod_new, sigad_txt_new, sigad_col_new = get_sigad_info(nota_final)
 
-                new_vals["Nota_Final"] = nota_final
-                n_int_new, sigad_cod_new, sigad_txt_new, sigad_col_new = get_sigad_info(nota_final)
-
-                with cs:
-                    st.markdown("**\U0001f3eb SIGAD**")
                     st.markdown(
                         f'<div style="background:{sigad_col_new}22;border:2px solid {sigad_col_new};border-radius:14px;padding:18px 8px;text-align:center;margin-top:6px;">'
                         f'<div style="font-size:2.8rem;font-weight:900;color:{sigad_col_new};line-height:1;">{n_int_new}</div>'
@@ -1485,9 +1682,6 @@ elif menu == "Calificación numérica":
 
                 for key, val in new_vals.items():
                     st.session_state.df_eval.at[idx, key] = val
-
-    else:
-        st.info("No hay alumnos activos registrados. Por favor, a\u00f1ade alumnos con estado 'Alta' en la pesta\u00f1a 'Alumnado'.")
 
 # --- PESTAÑA: RESULTADOS ---
 elif menu == "Progreso porcentual":
