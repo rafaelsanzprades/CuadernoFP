@@ -9,12 +9,11 @@ import os
 # ==========================================
 # 1. CONFIGURACIÓN DE PÁGINA
 # ==========================================
-st.toast("✅ RSP v8.2")
 
 # ==========================================
-# 2. FUNCIONES DE GUARDADO Y CARGA (JSON) / PDF
-# ==========================================
 from pdf_calendario_academico import generar_pdf_calendario
+from pdf_seguimiento_diario import generar_pdf_seguimiento
+from pdf_boletin_competencial import generar_pdf_boletin
 def serialize_date(obj):
     if isinstance(obj, (date, datetime)): return obj.strftime("%d/%m/%Y")
     return obj
@@ -547,7 +546,7 @@ with st.sidebar:
                 st.session_state.confirm_load = None
                 st.rerun()
                 
-        st.divider()
+        st.markdown('<hr style="border: none; border-top: 1px solid #444; margin: 15px 0;">', unsafe_allow_html=True)
         st.markdown("**💾 Guardar módulo**")
         n_file = st.text_input("Nombre del módulo", value=st.session_state.get("active_module", "0237-ictve"), label_visibility="collapsed")
         
@@ -572,24 +571,25 @@ with st.sidebar:
                 st.session_state.confirm_save = None
                 st.rerun()
 
-    st.markdown("<hr>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
 
     # 5.1 Menú de Navegación (Real Buttons)
-    opciones_menu = ["Módulo didáctico", "Calendario lectivo", "Matriz programación", "Resumen docente", "Seguimiento diario", "Matrícula alumnado", "Calificación numérica", "Resultado porcentual"]
+    opciones_menu = ["Módulo didáctico", "Calendario lectivo", "Matriz programación", "Resumen docente", "Seguimiento diario", "Matrícula alumnado", "Calificación numérica", "Progreso porcentual"]
     # Redirigir si el menú activo era uno de los eliminados
     if st.session_state.menu not in opciones_menu:
         st.session_state.menu = "Módulo didáctico"
-    for opcion in opciones_menu:
-        # Añadir subrayado Unicode para el label de Resumen (Desactivado al cambiar el nombre)
-        btn_label = opcion
-        if st.button(
-            btn_label, 
-            width="stretch", 
-            type="primary" if st.session_state.menu == opcion else "secondary",
-            key=f"btn_{opcion}"
-        ):
-            st.session_state.menu = opcion
-            st.rerun()
+    with st.expander("🗂️ Contenido", expanded=True):
+        for opcion in opciones_menu:
+            # Añadir subrayado Unicode para el label de Resumen (Desactivado al cambiar el nombre)
+            btn_label = opcion
+            if st.button(
+                btn_label, 
+                use_container_width=True, 
+                type="primary" if st.session_state.menu == opcion else "secondary",
+                key=f"btn_{opcion}"
+            ):
+                st.session_state.menu = opcion
+                st.rerun()
     
     # Variable de control para el resto de la app
     menu = st.session_state.menu
@@ -598,10 +598,10 @@ with st.sidebar:
     # Recalcular reparto de horas automáticamente en cada interacción
     repartir_horas_previstas()
 
-    st.markdown("<hr>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
     
     with st.expander("📥 Descargas .pdf"):
-        pdf_buffer = generar_pdf_calendario(
+        pdf_buffer_cal = generar_pdf_calendario(
             st.session_state.info_modulo,
             st.session_state.info_fechas,
             st.session_state.planning_ledger,
@@ -609,8 +609,43 @@ with st.sidebar:
         )
         st.download_button(
             label="Calendario académico",
-            data=pdf_buffer,
+            data=pdf_buffer_cal,
             file_name=f"Calendario_{st.session_state.info_modulo.get('modulo', 'Gestor')}.pdf",
+            mime="application/pdf",
+            type="secondary",
+            use_container_width=True
+        )
+
+        pdf_buffer_seg = generar_pdf_seguimiento(
+            st.session_state.info_modulo,
+            st.session_state.info_fechas,
+            st.session_state.horario,
+            st.session_state.planning_ledger,
+            st.session_state.calendar_notes
+        )
+        st.download_button(
+            label="Seguimiento diario",
+            data=pdf_buffer_seg,
+            file_name=f"Seguimiento_diario_{st.session_state.info_modulo.get('modulo', 'Gestor')}.pdf",
+            mime="application/pdf",
+            type="secondary",
+            use_container_width=True
+        )
+
+        pdf_buffer_bol = generar_pdf_boletin(
+            st.session_state.info_modulo,
+            st.session_state.info_fechas,
+            st.session_state.df_al,
+            st.session_state.df_eval,
+            st.session_state.df_ra,
+            st.session_state.df_ud,
+            st.session_state.df_pr,
+            st.session_state.planning_ledger
+        )
+        st.download_button(
+            label="Boletín competencial",
+            data=pdf_buffer_bol,
+            file_name=f"Boletin_Competencial_{st.session_state.info_modulo.get('modulo', 'Gestor')}.pdf",
             mime="application/pdf",
             type="secondary",
             use_container_width=True
@@ -747,7 +782,7 @@ if menu == "Módulo didáctico":
 
 # --- PESTAÑA: Planificación ---
 elif menu == "Matriz programación":
-    st.subheader("📚 Unidades didácticas y su relación con los Resultados de Aprendizaje")
+    st.subheader("📚 Unidades. Matriz de Resultados de Aprendizaje")
     lista_ra_ids = st.session_state.df_ra["ID"].tolist()
     
     # Sincronizar columnas de UD con RA actuales
@@ -785,7 +820,7 @@ elif menu == "Matriz programación":
     st.session_state.df_ud = ed_ud
 
     st.divider()
-    st.subheader("🛠️ Prácticas y su relación con los Resultados de Aprendizaje")
+    st.subheader("🛠️ Prácticas. Matriz de Resultados de Aprendizaje")
 
     # 1. Columnas básicas de df_pr
     cols_basicas_pr = ["ID", "Práctica"]
@@ -1455,8 +1490,8 @@ elif menu == "Calificación numérica":
         st.info("No hay alumnos activos registrados. Por favor, a\u00f1ade alumnos con estado 'Alta' en la pesta\u00f1a 'Alumnado'.")
 
 # --- PESTAÑA: RESULTADOS ---
-elif menu == "Resultado porcentual":
-    st.subheader("🎓 Resultados del Alumnado")
+elif menu == "Progreso porcentual":
+    st.subheader("🎓 Progreso porcentual por Alumnado")
     
     if not st.session_state.df_al.empty and not st.session_state.df_ra.empty:
         # Calcular proyección de Trimestres para cada RA
@@ -1686,4 +1721,4 @@ elif menu == "Resumen docente":
 
                 st.markdown(html_hijas, unsafe_allow_html=True)
     else:
-        st.info("No hay Resultados de Aprendizaje (RAs) definidos.")
+        st.info("No hay Resultados de Aprendizaje definidos.")

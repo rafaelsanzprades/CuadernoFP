@@ -7,34 +7,20 @@ Una aplicación web interactiva desarrollada en **Python** con **Streamlit** dis
 
 La herramienta se divide en **7 pilares fundamentales** accesibles mediante un menú de navegación rápido y oscuro:
 
-1. **Datos Generales:** 
-   * Parametrización del módulo (Nombre, curso, horas BOA, horas semanales).
-   * Asignación de ponderaciones a cada una de los criterios de calificación.
-   * Seleccionador universal y ágil de archivos en formato JSON para alternar fácilmente múltiples Módulos o Aulas.
+1. **Módulo didáctico:** Parametrización operativa del módulo (Nombre, curso, centro) y selección ágil de bases de datos JSON para rotar entre múltiples asignaturas.
+2. **Calendario lectivo:** Configuración global del curso, trimestres y periodo FEOE, indicando las horas semanales impartidas por día.
+3. **Matriz programación:** Asignación en tiempo real de qué RA tributan a qué Unidades Didácticas o Prácticas.
+4. **Resumen docente:** Visualización transparente sobre cómo se evalúa cada RA y estructuración de UDs a lo largo de los tres trimestres.
+5. **Seguimiento diario:** Verificador mensual para cuadrar las horas estimadas frente a las horas reales impartidas.
+6. **Matrícula alumnado:** Ficha completa y editable de la clase. Control de estados (Alta, Baja).
+7. **Calificación numérica:** Cuaderno tabular de notas por instrumentos. Interfaz matemática de medias y conversión automática al sistema de calificación cualitativa **SIGAD**.
+8. **Progreso porcentual:** Gráficos integrales de consecución por Resultados de Aprendizaje para cada estudiante.
 
-2. **Fechas:** 
-   * Calendario lectivo global con inicio y fin de curso e intervalos de los 3 trimestres.
-   * Gestión visual del horario escolar indicando las horas semanales impartidas por día.
-   * Segmentación del intervalo **FEOE** (Formación en la Empresa) para excluirlo del seguimiento si así se estima.
-
-3. **Planificación:**
-   * Desglose de Unidades Didácticas (UD) y Prácticas.
-   * Asignación en tiempo real de qué RA tributan a qué UD o qué Prácticas impartidas.
-   
-4. **Resumen:**
-   * Visualización organizada de qué UD pertenece a qué trimestre.
-   * Justificación transparente sobre cómo se evalúa cada Resultado de Aprendizaje a través y gracias a sus relativas Unidades y Prácticas.
-
-5. **Seguimiento:**
-   * Tabla dinámica que compara las horas "Previstas" (estimadas al organizar las UDs) vs las horas "Impartidas" reales adaptando automáticamente las horas al curso o parando los cálculos al empezar prácticas de empresa.
-   * Verificador mensual calendario en mano de tu ritmo docencial.
-
-6. **Alumnado:**
-   * Ficha completa editable. Control de estados y comunicaciones (Alta, Baja).
-
-7. **Evaluación y Resultados:**
-   * Cuaderno de notas tabular individual trimestral. Media final matemática con interfaz optimizada a toques color de insignia institucional (**SIGAD**).
-   * Gráficos dinámicos integrales de consecución de capacidades puramente por RA.
+### 📥 Motor de Informes PDF Autónomos
+El cuaderno incluye un avanzado sistema de renderizado (basado en `ReportLab`) para descargar al instante los anexos administrativos y docentes de tu aula. Tres formatos a un clic:
+* **Calendario académico:** Un cronograma por meses en A4 apaisado indicando huecos laborales y semestrales.
+* **Seguimiento diario:** Tablas mensuales en A4 vertical, adaptadas al horario real del ciclo para las firmas de asistencia presencial.
+* **Boletín competencial:** Un reporte completo, personal y de varias páginas por alumno con toda su progresión trimestral y el grado de logro exacto de todos sus Resultados de Aprendizaje.
 
 ## 🛠️ Tecnologías Empleadas
 
