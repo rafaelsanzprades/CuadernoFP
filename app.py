@@ -260,7 +260,7 @@ def repartir_horas_previstas():
 # 4. INICIALIZACIÓN DE DATOS (ESTADO DE SESIÓN)
 # ==========================================
 if 'menu' not in st.session_state:
-    st.session_state.menu = "Datos"
+    st.session_state.menu = "Módulo didáctico"
 
 if 'info_modulo' not in st.session_state:
     st.session_state.info_modulo = {
@@ -575,13 +575,13 @@ with st.sidebar:
     st.markdown("<hr>", unsafe_allow_html=True)
 
     # 5.1 Menú de Navegación (Real Buttons)
-    opciones_menu = ["Datos", "Fechas", "Planificación", "Resumen", "Seguimiento", "Alumnado", "Evaluación", "Resultados"]
+    opciones_menu = ["Módulo didáctico", "Calendario lectivo", "Matriz programación", "Resumen docente", "Seguimiento diario", "Matrícula alumnado", "Calificación numérica", "Resultado porcentual"]
     # Redirigir si el menú activo era uno de los eliminados
     if st.session_state.menu not in opciones_menu:
-        st.session_state.menu = "Datos"
+        st.session_state.menu = "Módulo didáctico"
     for opcion in opciones_menu:
-        # Añadir subrayado Unicode para el label de Resumen
-        btn_label = "R\u0332e\u0332s\u0332u\u0332m\u0332e\u0332n\u0332" if opcion == "Resumen" else opcion
+        # Añadir subrayado Unicode para el label de Resumen (Desactivado al cambiar el nombre)
+        btn_label = opcion
         if st.button(
             btn_label, 
             width="stretch", 
@@ -649,7 +649,7 @@ def badge(diff, valor_real, unidad=""):
 # ==========================================
 
 # --- PESTAÑA: DATOS ---
-if menu == "Datos":
+if menu == "Módulo didáctico":
     st.subheader("📝 Datos generales")
 
     # Fila 1: Módulo didáctico y Curso
@@ -726,7 +726,7 @@ if menu == "Datos":
     suma_ra = round(pd.to_numeric(st.session_state.df_ra["% Pond"], errors="coerce").fillna(0).sum(), 2)
     c_ra1, c_ra2 = st.columns([3, 1])
     with c_ra1:
-        st.markdown("###🎓 Resultados de Aprendizaje")
+        st.markdown("### 🎓 Resultados de Aprendizaje")
     with c_ra2:
         st.markdown(badge(suma_ra - 100, suma_ra, "%"), unsafe_allow_html=True)
 
@@ -746,8 +746,7 @@ if menu == "Datos":
 
 
 # --- PESTAÑA: Planificación ---
-elif menu == "Planificación":
-    st.divider()
+elif menu == "Matriz programación":
     st.subheader("📚 Unidades didácticas y su relación con los Resultados de Aprendizaje")
     lista_ra_ids = st.session_state.df_ra["ID"].tolist()
     
@@ -840,7 +839,7 @@ elif menu == "Planificación":
 
 
 # --- PESTAÑA: FECHAS ---
-elif menu == "Fechas":
+elif menu == "Calendario lectivo":
     st.subheader("📚 Fechas curso académico")
     c_fc1, c_fc2, c_fc3, c_fc4 = st.columns(4)
     with c_fc1:
@@ -1068,7 +1067,7 @@ elif menu == "Fechas":
 
 
 # --- PESTAÑA: ALUMNADO ---
-elif menu == "Alumnado":
+elif menu == "Matrícula alumnado":
     st.subheader("👥 Listado de Alumnado")
     
     # Hemos vuelto a la versión con todas las columnas confirmadas
@@ -1095,7 +1094,7 @@ elif menu == "Alumnado":
         st.rerun()
 
 # --- PESTAÑA: SEGUIMIENTO ---
-elif menu == "Seguimiento":
+elif menu == "Seguimiento diario":
     st.subheader("📍 Seguimiento de las planificación")
     
     meses_display = ["Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "May", "Jun"]
@@ -1306,7 +1305,7 @@ elif menu == "Seguimiento":
                 st.rerun()
 
 # --- PESTAÑA: EVALUACIÓN ---
-elif menu == "Evaluación":
+elif menu == "Calificación numérica":
     st.subheader("📊 Evaluación del Alumnado")
     
     # 1. Sincronizar df_eval con df_al (Asegurar que existan todos los alumnos)
@@ -1456,7 +1455,7 @@ elif menu == "Evaluación":
         st.info("No hay alumnos activos registrados. Por favor, a\u00f1ade alumnos con estado 'Alta' en la pesta\u00f1a 'Alumnado'.")
 
 # --- PESTAÑA: RESULTADOS ---
-elif menu == "Resultados":
+elif menu == "Resultado porcentual":
     st.subheader("🎓 Resultados del Alumnado")
     
     if not st.session_state.df_al.empty and not st.session_state.df_ra.empty:
@@ -1597,7 +1596,7 @@ elif menu == "Resultados":
         st.info("Falta información. Asegúrate de tener alumnado matriculado y Resultados de Aprendizaje definidos en su correspondiente pestaña.")
 
 # --- PESTAÑA: RESUMEN ---
-elif menu == "Resumen":
+elif menu == "Resumen docente":
     # --- Resumen N.UD. y N.Práct. ---
     st.subheader("📊 Unidades Didácticas y Prácticas")
     rd1, rd2 = st.columns(2)
