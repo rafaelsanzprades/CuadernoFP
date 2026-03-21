@@ -4066,5 +4066,80 @@
             "Aspectos_Clave": "Desarrollo dual: escrito y soporte práctico.",
             "Recursos": "Aula CM1 y CM3"
         }
-    ]
+    ],
+    "df_dua": [
+        {
+            "ID": "DUA01",
+            "Barrera": "Dificultad comprensión de manuales técnicos",
+            "Medida_Metodologica": "Apoyo visual en esquemas, fraccionamiento de tareas de montaje",
+            "Medida_Acceso": "Textos resumidos con pictogramas de herramientas",
+            "Medida_Evaluacion": "Tiempo adicional (+20%) en pruebas escritas",
+            "Alumnado_Aula": "Alumno A (NEAE)"
+        },
+        {
+            "ID": "DUA02",
+            "Barrera": "Diferentes ritmos de aprendizaje en taller",
+            "Medida_Metodologica": "Aprendizaje cooperativo, tutoría entre iguales",
+            "Medida_Acceso": "Videotutoriales accesibles en plataforma escolar",
+            "Medida_Evaluacion": "Uso de rúbricas gráficas simplificadas",
+            "Alumnado_Aula": "Grupal (Aula)"
+        }
+    ],
+    "df_contingencia": [
+        {
+            "ID": "PC01",
+            "Escenario": "Ausencia de Profesorado",
+            "Organizacion": "Apertura de Moodle por profesor de guardia",
+            "Actividades": "Cuestionarios de repaso teóricos y simuladores de circuitos online",
+            "Seguimiento": "Evaluación automática en Moodle"
+        },
+        {
+            "ID": "PC02",
+            "Escenario": "Ausencia de Alumnado",
+            "Organizacion": "Tutorización telemática síncrona disponible",
+            "Actividades": "Prácticas sustitutivas mediante software de diseño CAD de telecomunicaciones",
+            "Seguimiento": "Revisión de informes técnicos en GDocs"
+        }
+    ],
+    "df_ace": [
+        {
+            "ID": "ACE01",
+            "Tipo": "Complementaria",
+            "RA_Vinculados": "RA1, RA2",
+            "Actividad": "Visita guiada a una instalación ICT real en edificio de nueva construcción.",
+            "Trimestre": "1T",
+            "Entidad": "Empresa Promotora Local",
+            "Evaluacion": "Informe fotográfico de la topología de red instalada"
+        },
+        {
+            "ID": "ACE02",
+            "Tipo": "Extraescolar",
+            "RA_Vinculados": "RA4",
+            "Actividad": "Asistencia a charla técnica sobre despliegue 5G e IoT en viviendas",
+            "Trimestre": "2T",
+            "Entidad": "Colegio Oficial de Ingenieros de Telecomunicación",
+            "Evaluacion": "Asistencia y resumen de las nuevas tecnologías"
+        }
+    ],
+    "df_tareas": [
+        {
+            "ID": "TC01",
+            "Nombre_Tarea": "Diseño global de red RTV y SAT",
+            "Reto": "El alumnado actúa como empresa instaladora homologada para presupuestar y dimensionar el equipamiento de captación terrestre y satélite de un bloque residencial de 12 PAUs.",
+            "RA_Asociados": "RA1, RA3, RA5",
+            "Instrumento": "Rúbrica de Proyecto y Dossier Documental"
+        },
+        {
+            "ID": "TC02",
+            "Nombre_Tarea": "Despliegue y certificación de FO (FTTH)",
+            "Reto": "En el taller, realizar las fusiones y el conexionado desde el RITI, pasando por registros secundarios hasta llegar a la toma del usuario final, verificando atenuación.",
+            "RA_Asociados": "RA2, RA4",
+            "Instrumento": "Lista de cotejo de taller y certificación"
+        }
+    ],
+    "config_contexto": {
+        "entorno": "Entorno urbano e industrial con gran demanda de técnicos instaladores de telecomunicaciones (Tipo A y F).",
+        "perfil": "Alumnado de Grado Medio de entre 16 y 20 años, con alta motivación práctica pero carencias en base matemática y científica.",
+        "metodologia": "Aprendizaje Basado en Retos (ABR) eminentemente práctico en taller, apoyado por simuladores de redes y clase invertida."
+    }
 }
