@@ -33,11 +33,29 @@ def unserialize_date(d_str):
 
 def guardar_datos(nombre_archivo):
     if not nombre_archivo.endswith(".json"): nombre_archivo += ".json"
-    data = {
-        "info_modulo": st.session_state.info_modulo,
+    
+    # --- Datos Globales ---
+    info_docente = {
+        "centro": st.session_state.info_modulo.get("centro", ""),
+        "profesorado": st.session_state.info_modulo.get("profesorado", "")
+    }
+    global_data = {
+        "info_docente": info_docente,
         "info_fechas": {k: serialize_date(v) for k, v in st.session_state.info_fechas.items()},
-        "horario": st.session_state.horario,
         "calendar_notes": st.session_state.calendar_notes,
+        "config_contexto": st.session_state.config_contexto if 'config_contexto' in st.session_state else {}
+    }
+    with open("ciclos-fp.json", "w", encoding="utf-8") as f:
+        json.dump(global_data, f, ensure_ascii=False, indent=4)
+        
+    # --- Datos del Módulo ---
+    info_modulo_to_save = st.session_state.info_modulo.copy()
+    info_modulo_to_save.pop("centro", None)
+    info_modulo_to_save.pop("profesorado", None)
+
+    data = {
+        "info_modulo": info_modulo_to_save,
+        "horario": st.session_state.horario,
         "df_ra": st.session_state.df_ra.to_dict(orient="records"),
         "df_ud": st.session_state.df_ud.to_dict(orient="records"),
         "df_pr": st.session_state.df_pr.to_dict(orient="records"),
@@ -51,7 +69,6 @@ def guardar_datos(nombre_archivo):
         "planning_ledger": st.session_state.planning_ledger if 'planning_ledger' in st.session_state else {},
         "config_aula": st.session_state.config_aula if 'config_aula' in st.session_state else {},
         "df_sesiones": st.session_state.df_sesiones.to_dict(orient="records") if 'df_sesiones' in st.session_state else [],
-        "config_contexto": st.session_state.config_contexto if 'config_contexto' in st.session_state else {},
         "df_dua": st.session_state.df_dua.to_dict(orient="records") if 'df_dua' in st.session_state else [],
         "df_contingencia": st.session_state.df_contingencia.to_dict(orient="records") if 'df_contingencia' in st.session_state else [],
         "df_ace": st.session_state.df_ace.to_dict(orient="records") if 'df_ace' in st.session_state else [],
@@ -65,9 +82,26 @@ def cargar_datos(nombre_archivo):
     with open(nombre_archivo, "r", encoding="utf-8") as f:
         data = json.load(f)
     st.session_state.info_modulo = data.get("info_modulo", {})
-    st.session_state.info_fechas = {k: unserialize_date(v) for k, v in data.get("info_fechas", {}).items()}
+    
+    # Retrocompatibilidad de Globales vs Carga de ciclos-fp
+    if os.path.exists("ciclos-fp.json"):
+        with open("ciclos-fp.json", "r", encoding="utf-8") as fg:
+            global_data = json.load(fg)
+        st.session_state.info_fechas = {k: unserialize_date(v) for k, v in global_data.get("info_fechas", {}).items()}
+        st.session_state.calendar_notes = global_data.get("calendar_notes", {})
+        st.session_state.config_contexto = global_data.get("config_contexto", {"entorno": "", "perfil": "", "metodologia": ""})
+        
+        info_docente = global_data.get("info_docente", {})
+        st.session_state.info_modulo["centro"] = info_docente.get("centro", "")
+        st.session_state.info_modulo["profesorado"] = info_docente.get("profesorado", "")
+    else:
+        st.session_state.info_fechas = {k: unserialize_date(v) for k, v in data.get("info_fechas", {}).items()}
+        st.session_state.calendar_notes = data.get("calendar_notes", {})
+        st.session_state.config_contexto = data.get("config_contexto", {"entorno": "", "perfil": "", "metodologia": ""})
+        # Si todavía no había ciclos-fp.json, los datos de info_modulo originales (centro, profesorado) siguen ahí
+
     st.session_state.horario = data.get("horario", {})
-    st.session_state.calendar_notes = data.get("calendar_notes", {})
+    
     st.session_state.df_ra = pd.DataFrame(data.get("df_ra", []))
     st.session_state.df_ud = pd.DataFrame(data.get("df_ud", []))
     st.session_state.df_pr = pd.DataFrame(data.get("df_pr", []))
@@ -79,7 +113,6 @@ def cargar_datos(nombre_archivo):
         # Asegurar orden: ID, UD, H, Práctica (v7.2.1)
         cols = st.session_state.df_pr.columns.tolist()
         desired_order = ["ID", "UD", "H", "Práctica"]
-        # Filtrar solo las que existen
         new_order = [c for c in desired_order if c in cols]
         new_order += [c for c in cols if c not in desired_order]
         st.session_state.df_pr = st.session_state.df_pr[new_order]
@@ -109,7 +142,6 @@ def cargar_datos(nombre_archivo):
     st.session_state.planning_ledger = data.get("planning_ledger", {})
     st.session_state.config_aula = data.get("config_aula", {"Metodología": "", "Atención a la diversidad": ""})
     st.session_state.df_sesiones = pd.DataFrame(data.get("df_sesiones", []))
-    st.session_state.config_contexto = data.get("config_contexto", {"entorno": "", "perfil": "", "metodologia": ""})
     st.session_state.df_dua = pd.DataFrame(data.get("df_dua", []))
     st.session_state.df_contingencia = pd.DataFrame(data.get("df_contingencia", []))
     st.session_state.df_ace = pd.DataFrame(data.get("df_ace", []))
@@ -633,26 +665,50 @@ with st.sidebar:
     st.markdown("<br>", unsafe_allow_html=True)
 
     # 5.1 Menú de Navegación (Real Buttons)
-    opciones_menu = [
-        "Módulo didáctico", "Calendario lectivo", "Matriz programación", 
-        "Programación de aula", "Atención a la diversidad (DUA)", 
-        "Plan de contingencia", "AC y Extraescolares (ACE)", 
-        "Desarrollo Tareas (TC)", "Resumen docente", "Seguimiento diario", 
-        "Matrícula alumnado", "Instrumentos de evaluación", 
-        "Evaluación FEOE", "Calificación numérica", "Progreso porcentual"
+    opciones_globales = [
+        "Contextualización", "Calendario académico"
     ]
-    # Redirigir si el menú activo era uno de los eliminados
-    if st.session_state.menu not in opciones_menu:
+    opciones_modulo = [
+        "Módulo didáctico", "Matriz curricular", 
+        "Instrumentos de evaluación", "Planes e inclusión", 
+        "Matrícula alumnado", "Resumen docente", 
+        "Programación de aula", "Seguimiento diario", 
+        "Calificación académica", "Calificación FEOE", "Evaluación continua"
+    ]
+    
+    opciones_totales = opciones_globales + opciones_modulo
+    
+    # Redirigir si el menú activo era uno de los eliminados o le cambiamos el nombre
+    if st.session_state.menu == "Perfil y Contexto": st.session_state.menu = "Resumen docente"
+    if st.session_state.menu == "Calendario lectivo": st.session_state.menu = "Calendario Escolar"
+    if st.session_state.menu == "Evaluación FEOE": st.session_state.menu = "Calificación FEOE"
+    if st.session_state.menu == "Calificación numérica": st.session_state.menu = "Calificación académica"
+    if st.session_state.menu == "Progreso porcentual": st.session_state.menu = "Evaluación continua"
+        
+    if st.session_state.menu not in opciones_totales:
         st.session_state.menu = "Módulo didáctico"
-    with st.expander("🗂️ Contenido", expanded=True):
-        for opcion in opciones_menu:
-            # Añadir subrayado Unicode para el label de Resumen (Desactivado al cambiar el nombre)
-            btn_label = opcion
+        
+    with st.expander("🌍 Configuración global", expanded=False):
+        for opcion in opciones_globales:
             if st.button(
-                btn_label, 
+                opcion, 
                 use_container_width=True, 
                 type="primary" if st.session_state.menu == opcion else "secondary",
-                key=f"btn_{opcion}"
+                key=f"btn_glb_{opcion}"
+            ):
+                st.session_state.menu = opcion
+                st.rerun()
+                
+    with st.expander("🗂️ Programación didáctica", expanded=True):
+        for opcion in opciones_modulo:
+            if opcion in ["Programación de aula", "Calificación académica", "Evaluación continua"]:
+                st.markdown("<hr style='margin: 5px 0 15px 0; border: none; border-top: 1px solid #444;'>", unsafe_allow_html=True)
+                
+            if st.button(
+                opcion, 
+                use_container_width=True, 
+                type="primary" if st.session_state.menu == opcion else "secondary",
+                key=f"btn_mod_{opcion}"
             ):
                 st.session_state.menu = opcion
                 st.rerun()
@@ -868,7 +924,19 @@ if menu == "Módulo didáctico":
     with col_d:
         st.session_state.info_modulo["criterio_tareas"] = st.number_input("Cuaderno de tareas", 0, 100, st.session_state.info_modulo.get("criterio_tareas", st.session_state.info_modulo.get("criterio_actitud_participacion", 30)), key="crit_tareas")
 
+ 
     st.divider()
+    st.markdown("### ⚙️ Configuración del Módulo")
+    st.session_state.config_contexto["metodologia"] = st.text_area("Estrategias metodológicas, recursos, espacios y desdobles", value=st.session_state.config_contexto.get("metodologia", ""), height=150)
+    new_met = st.text_area("Metodología (ej. activa, participativa, ABP)", value=st.session_state.config_aula.get("Metodología", ""), height=100)
+    new_div = st.text_area("Atención a la diversidad (adaptaciones no significativas)", value=st.session_state.config_aula.get("Atención a la diversidad", ""), height=100)
+        
+    if new_met != st.session_state.config_aula.get("Metodología") or new_div != st.session_state.config_aula.get("Atención a la diversidad"):
+        st.session_state.config_aula["Metodología"] = new_met
+        st.session_state.config_aula["Atención a la diversidad"] = new_div
+
+# --- PESTAÑA: Planificación ---
+elif menu == "Matriz curricular":
     suma_ra = round(pd.to_numeric(st.session_state.df_ra["% Pond"], errors="coerce").fillna(0).sum(), 2)
     c_ra1, c_ra2 = st.columns([3, 1])
     with c_ra1:
@@ -891,20 +959,91 @@ if menu == "Módulo didáctico":
     st.session_state.df_ra = ed_ra
 
     st.divider()
-    st.subheader("🌍 Contextualización y Metodología")
-    with st.expander("Entorno socioeconómico y perfil del alumnado", expanded=False):
-        c_entorno, c_perfil = st.columns(2)
-        with c_entorno:
-            st.session_state.config_contexto["entorno"] = st.text_area("Entorno socioeconómico", value=st.session_state.config_contexto.get("entorno", ""), height=120)
-        with c_perfil:
-            st.session_state.config_contexto["perfil"] = st.text_area("Perfil del alumnado", value=st.session_state.config_contexto.get("perfil", ""), height=120)
-            
-    with st.expander("Metodología General del Módulo", expanded=False):
-        st.session_state.config_contexto["metodologia"] = st.text_area("Estrategias metodológicas, recursos, espacios y desdobles", value=st.session_state.config_contexto.get("metodologia", ""), height=150)
+    st.subheader("📚 Unidades Didácticas. Resultados de Aprendizaje")
+    lista_ra_ids = st.session_state.df_ra["ID"].tolist()
+    
+    # Sincronizar columnas de UD con RA actuales
+    # 1. Asegurar que las columnas básicas existan
+    columnas_basicas = ["ID", "Horas", "Título"]
+    for col in columnas_basicas:
+        if col not in st.session_state.df_ud.columns:
+            st.session_state.df_ud[col] = "" if col != "Horas" else 0
 
-# --- PESTAÑA: Planificación ---
-elif menu == "Matriz programación":
-    st.subheader("🧩 Matriz Curricular: Criterios de Evaluación y Elementos")
+    # 2. Añadir nuevas columnas de RA si no existen y forzar numérico ocultando ceros visualmente
+    for ra in lista_ra_ids:
+        if ra not in st.session_state.df_ud.columns:
+            st.session_state.df_ud[ra] = 0.0
+        else:
+            # Convertir antiguos valores a float
+            st.session_state.df_ud[ra] = pd.to_numeric(st.session_state.df_ud[ra], errors="coerce").fillna(0.0).astype(float)
+            
+    # 3. Eliminar columnas de RA que ya no existen
+    cols_a_borrar = [c for c in st.session_state.df_ud.columns if c not in lista_ra_ids and c not in columnas_basicas]
+    if cols_a_borrar:
+        st.session_state.df_ud = st.session_state.df_ud.drop(columns=cols_a_borrar)
+
+    config_ud = {
+        "ID": st.column_config.TextColumn("ID-UD", width="small", disabled=True, pinned=True),
+        "Horas": st.column_config.NumberColumn("Horas", width="small", min_value=0, pinned=True),
+        "Título": st.column_config.TextColumn("Unidades didácticas", pinned=True)
+    }
+    
+    for ra in lista_ra_ids:
+        ra_pond = 0.0
+        if not st.session_state.df_ra.empty:
+            match_ra = st.session_state.df_ra[st.session_state.df_ra["ID"] == ra]
+            if not match_ra.empty:
+                ra_pond = match_ra.iloc[0].get("% Pond", 0.0)
+                
+        config_ud[ra] = st.column_config.TextColumn(
+            f"{ra[2:]} ({ra_pond}%)", 
+            width="small"
+        )
+    
+    # Preparamos un DataFrame puramente visual para que los ceros sean strings vacíos
+    df_visual = st.session_state.df_ud.copy()
+    for ra in lista_ra_ids:
+        df_visual[ra] = pd.to_numeric(df_visual[ra], errors="coerce").fillna(0.0)
+        df_visual[ra] = df_visual[ra].apply(lambda x: f"{int(x)}%" if x > 0.0 else "")
+
+    def align_right(val):
+        return 'text-align: right;'
+        
+    df_visual_styled = df_visual.style.map(align_right, subset=lista_ra_ids)
+
+    ed_ud = st.data_editor(df_visual_styled, column_config=config_ud, num_rows="dynamic", hide_index=True, width="stretch", height=(len(st.session_state.df_ud) + 1) * 35 + 39, key="tabla_ud")
+    
+    # Manejo de nuevas UD
+    if len(ed_ud) > len(st.session_state.df_ud):
+        new_id_ud = generar_siguiente_id(st.session_state.df_ud, "UD")
+        ed_ud.iloc[-1, 0] = new_id_ud
+        
+    for ra in lista_ra_ids:
+        # Convertimos lo que el usuario haya escrito (ej. '15', '15%', '') de vuelta a un float real
+        s_str = ed_ud[ra].astype(str).str.replace("%", "").str.strip()
+        ed_ud[ra] = pd.to_numeric(s_str, errors="coerce").fillna(0.0).astype(float)
+        
+    st.session_state.df_ud = ed_ud
+    
+    # ---- VALIDACIÓN DE PORCENTAJES DE LA MATRIZ UD-RA ----
+    if not ed_ud.empty:
+        for ra in lista_ra_ids:
+            ra_pond_esperada = 0.0
+            if not st.session_state.df_ra.empty:
+                match_ra = st.session_state.df_ra[st.session_state.df_ra["ID"] == ra]
+                if not match_ra.empty:
+                    ra_pond_esperada = float(match_ra.iloc[0].get("% Pond", 0.0))
+            
+            # Sumar lo que se ha asignado a este RA en las distintas UDs
+            suma_asignada = float(ed_ud[ra].sum())
+            
+            # Comparamos si difiere en más de 0.01 por temas de redondeo flotante
+            if abs(suma_asignada - ra_pond_esperada) > 0.01:
+                st.warning(f"⚠️ **{ra}:** Has repartido un **{suma_asignada:.1f}%** entre las Unidades, pero el valor total del RA es **{ra_pond_esperada:.1f}%**. Revisalo para que cuadren.")
+
+    st.divider()
+
+    st.subheader("🧩 Criterios de Evaluación. Resultados de aprendizaje")
     st.markdown("**Relación jerárquica: RA -> CE -> UD**")
     st.caption("Añade Criterios de Evaluación, establece su peso en el RA y asígnalos a una Unidad Didáctica. También puedes vincular OG y CPE.")
 
@@ -944,101 +1083,12 @@ elif menu == "Matriz programación":
                 st.warning(f"⚠️ ¡Atención! La suma de ponderaciones de los CE del **{ra}** es {total}%. Debería ser 100%.")
 
     st.session_state.df_ce = ed_ce
-    st.divider()
-
-    st.subheader("📚 Unidades. Matriz de Resultados de Aprendizaje")
-    lista_ra_ids = st.session_state.df_ra["ID"].tolist()
-    
-    # Sincronizar columnas de UD con RA actuales
-    # 1. Asegurar que las columnas básicas existan
-    columnas_basicas = ["ID", "Horas", "Título"]
-    for col in columnas_basicas:
-        if col not in st.session_state.df_ud.columns:
-            st.session_state.df_ud[col] = "" if col != "Horas" else 0
-
-    # 2. Añadir nuevas columnas de RA si no existen
-    for ra in lista_ra_ids:
-        if ra not in st.session_state.df_ud.columns:
-            st.session_state.df_ud[ra] = False
-            
-    # 3. Eliminar columnas de RA que ya no existen
-    cols_a_borrar = [c for c in st.session_state.df_ud.columns if c not in lista_ra_ids and c not in columnas_basicas]
-    if cols_a_borrar:
-        st.session_state.df_ud = st.session_state.df_ud.drop(columns=cols_a_borrar)
-
-    config_ud = {
-        "ID": st.column_config.TextColumn("ID-UD", width="small", disabled=True, pinned=True),
-        "Horas": st.column_config.NumberColumn("Horas", width="small", min_value=0, pinned=True),
-        "Título": st.column_config.TextColumn("Unidades didácticas", pinned=True)
-    }
-    for ra in lista_ra_ids:
-        config_ud[ra] = st.column_config.CheckboxColumn(ra[2:], default=False, width="small")
-    
-    ed_ud = st.data_editor(st.session_state.df_ud, column_config=config_ud, num_rows="dynamic", hide_index=True, width="stretch", height=(len(st.session_state.df_ud) + 1) * 35 + 39, key="tabla_ud")
-    
-    # Manejo de nuevas UD
-    if len(ed_ud) > len(st.session_state.df_ud):
-        new_id_ud = generar_siguiente_id(st.session_state.df_ud, "UD")
-        ed_ud.iloc[-1, 0] = new_id_ud
-        
-    st.session_state.df_ud = ed_ud
-
-    st.divider()
-    st.subheader("🛠️ Prácticas. Matriz de Resultados de Aprendizaje")
-
-    # 1. Columnas básicas de df_pr
-    cols_basicas_pr = ["ID", "Práctica"]
-    for col in cols_basicas_pr:
-        if col not in st.session_state.df_pr.columns:
-            st.session_state.df_pr[col] = ""
-
-    # 2. Añadir nuevas columnas de RA si no existen
-    for ra in lista_ra_ids:
-        if ra not in st.session_state.df_pr.columns:
-            st.session_state.df_pr[ra] = False
-
-    # 3. Eliminar columnas que ya no son básicas ni RA actuales
-    #    (limpia columnas antiguas como "UD", "H", RAs eliminados, etc.)
-    cols_a_borrar_pr = [
-        c for c in st.session_state.df_pr.columns
-        if c not in lista_ra_ids and c not in cols_basicas_pr
-    ]
-    if cols_a_borrar_pr:
-        st.session_state.df_pr = st.session_state.df_pr.drop(columns=cols_a_borrar_pr)
-
-    # 4. Forzar orden: ID, Práctica, RA01, RA02, ...
-    orden_pr = cols_basicas_pr + [ra for ra in lista_ra_ids if ra in st.session_state.df_pr.columns]
-    st.session_state.df_pr = st.session_state.df_pr[orden_pr]
-
-    # 5. Config del editor (igual que UD-RA)
-    config_pr = {
-        "ID":       st.column_config.TextColumn("ID-PR", width="small", disabled=True, pinned=True),
-        "Práctica": st.column_config.TextColumn("Prácticas", pinned=True),
-    }
-    for ra in lista_ra_ids:
-        config_pr[ra] = st.column_config.CheckboxColumn(ra[2:], default=False, width="small")
-
-    ed_pr = st.data_editor(
-        st.session_state.df_pr,
-        column_config=config_pr,
-        num_rows="dynamic",
-        hide_index=True,
-        width="stretch",
-        height=(len(st.session_state.df_pr) + 1) * 35 + 39,
-        key="tabla_pr"
-    )
-
-    # 6. Autogenerar ID para nuevas filas
-    if len(ed_pr) > len(st.session_state.df_pr):
-        ed_pr.iloc[-1, 0] = generar_siguiente_id(st.session_state.df_pr, "Pr")
-
-    st.session_state.df_pr = ed_pr
 
 
 
 
 # --- PESTAÑA: FECHAS ---
-elif menu == "Calendario lectivo":
+elif menu == "Calendario académico":
     st.subheader("📚 Fechas curso académico")
     c_fc1, c_fc2, c_fc3, c_fc4 = st.columns(4)
     with c_fc1:
@@ -1509,7 +1559,7 @@ elif menu == "Instrumentos de evaluación":
     st.markdown("Define las tareas, exámenes y registros de observación, y vincula qué Criterios de Evaluación califican.")
 
     if st.session_state.df_ce.empty:
-        st.warning("⚠️ Primero añade Criterios de Evaluación en la pestaña 'Matriz programación'.")
+        st.warning("⚠️ Primero añade Criterios de Evaluación en la pestaña 'Matriz curricular'.")
     else:
         df_ce_clean = st.session_state.df_ce.dropna(subset=["Criterio Evaluación (CE)"])
         df_ce_clean = df_ce_clean[df_ce_clean["Criterio Evaluación (CE)"].str.strip() != ""]
@@ -1556,7 +1606,7 @@ elif menu == "Instrumentos de evaluación":
 
 
 # --- PESTAÑA: FEOE ---
-elif menu == "Evaluación FEOE":
+elif menu == "Calificación FEOE":
     st.subheader("🏢 Evaluación en Empresa (FEOE)")
     st.caption("Introduce la calificación del tutor de empresa (1-4) para cada Resultado de Aprendizaje Dualizado.")
     
@@ -1616,7 +1666,7 @@ elif menu == "Evaluación FEOE":
             st.session_state.df_feoe[ra] = ed_feoe[ra]
 
 # --- PESTAÑA: EVALUACIÓN ---
-elif menu == "Calificación numérica":
+elif menu == "Calificación académica":
     st.subheader("📊 Evaluación Competencial Jerárquica")
     st.caption("Introduce las notas de las actividades; el sistema calculará la nota de los CE, RA y la Nota Final automáticamente.")
     
@@ -1781,8 +1831,8 @@ elif menu == "Calificación numérica":
                     st.session_state.df_eval.at[idx, key] = val
 
 # --- PESTAÑA: RESULTADOS ---
-elif menu == "Progreso porcentual":
-    st.subheader("🎓 Progreso porcentual por Alumnado")
+elif menu == "Evaluación continua":
+    st.subheader("🎓 Evaluación continua por Alumnado")
     
     if not st.session_state.df_al.empty and not st.session_state.df_ra.empty:
         # Calcular proyección de Trimestres para cada RA
@@ -1926,58 +1976,6 @@ elif menu == "Programación de aula":
     st.subheader("📚 Programación de Aula (Secuenciación de Sesiones)")
     st.markdown("Diseña y estructura las sesiones para cada Unidad Didáctica, definiendo la tipología, RA/CE asociados, contenidos y recursos.")
     
-    # 1. Configuración General (Metodología y Atención a la diversidad)
-    with st.expander("⚙️ Configuración General de la Unidad", expanded=False):
-        c_met, c_div = st.columns(2)
-        with c_met:
-            new_met = st.text_area("Metodología (ej. activa, participativa, ABP)", value=st.session_state.config_aula.get("Metodología", ""), height=100)
-        with c_div:
-            new_div = st.text_area("Atención a la diversidad (adaptaciones no significativas)", value=st.session_state.config_aula.get("Atención a la diversidad", ""), height=100)
-            
-        if new_met != st.session_state.config_aula.get("Metodología") or new_div != st.session_state.config_aula.get("Atención a la diversidad"):
-            st.session_state.config_aula["Metodología"] = new_met
-            st.session_state.config_aula["Atención a la diversidad"] = new_div
-            
-    st.divider()
-    
-    # 2. Formulario de Registro de Sesiones
-    with st.form("registro_sesion"):
-        st.markdown("**➕ Añadir Nueva Sesión**")
-        c1, c2, c3 = st.columns([1, 2, 2])
-        with c1:
-            num_ses = st.number_input("Nº Sesión", min_value=1, step=1, value=len(st.session_state.df_sesiones)+1)
-        with c2:
-            tipo_act = st.selectbox("Tipo de Actividad", options=["Tª (Teoría)", "Pª (Práctica)", "IE (Instrumento de Evaluación)", "Pª+ (Ampliación/Refuerzo)"])
-        with c3:
-            ra_ce_input = st.text_input("RA / CE vinculados", placeholder="Ej: RA1, CE1.a")
-            
-        c4, c5 = st.columns(2)
-        with c4:
-            contenidos_input = st.text_area("Contenidos / Descripción de la actividad", placeholder="Ej: Preparación del taller, Examen teórico...", height=80)
-        with c5:
-            aspectos_input = st.text_area("Aspectos Clave", placeholder="Ej: Seguridad e higiene, Conceptos básicos...", height=80)
-        
-        recursos_input = st.text_input("Recursos", placeholder="Ej: Aula Taller, Proyector, Herramienta X...")
-        
-        submit_btn = st.form_submit_button("Añadir Sesión", type="primary")
-        
-        if submit_btn:
-            new_ses_id = generar_siguiente_id(st.session_state.df_sesiones, "SES")
-            new_session = {
-                "ID": new_ses_id,
-                "Num_Sesion": num_ses,
-                "Tipo_Actividad": tipo_act,
-                "RA_CE": ra_ce_input,
-                "Contenidos": contenidos_input,
-                "Aspectos_Clave": aspectos_input,
-                "Recursos": recursos_input
-            }
-            st.session_state.df_sesiones = pd.concat([st.session_state.df_sesiones, pd.DataFrame([new_session])], ignore_index=True)
-            st.success("Sesión añadida correctamente.")
-            st.rerun()
-
-    st.divider()
-
     # 3. Tabla de Secuenciación (Visualización y edición)
     st.markdown("### 📋 Secuenciación de Sesiones Registradas")
     if not st.session_state.df_sesiones.empty:
@@ -2002,32 +2000,103 @@ elif menu == "Programación de aula":
         )
         st.session_state.df_sesiones = ed_ses
     else:
-        st.info("No hay sesiones registradas. Utiliza el formulario arriba para empezar a añadir sesiones.")
+        st.info("No hay sesiones registradas. Utiliza la tabla o el formulario de abajo para empezar a añadir sesiones.")
+    
+    # 4. Formulario oculto bajo la tabla
+    with st.expander("➕ Añadir Nueva Sesión", expanded=False):
+        st.markdown("*💡 Utiliza este formulario si prefieres una introducción de datos más visual y guiada en lugar de escribir directamente en la tabla.*")
+        with st.form("registro_sesion"):
+            c1, c2, c3 = st.columns([1, 2, 2])
+            with c1:
+                num_ses = st.number_input("Nº Sesión", min_value=1, step=1, value=len(st.session_state.df_sesiones)+1)
+            with c2:
+                tipo_act = st.selectbox("Tipo de Actividad", options=["Tª (Teoría)", "Pª (Práctica)", "IE (Instrumento de Evaluación)", "Pª+ (Ampliación/Refuerzo)"])
+            with c3:
+                ra_ce_input = st.text_input("RA / CE vinculados", placeholder="Ej: RA1, CE1.a")
+                
+            c4, c5 = st.columns(2)
+            with c4:
+                contenidos_input = st.text_area("Contenidos / Descripción de la actividad", placeholder="Ej: Preparación del taller, Examen teórico...", height=80)
+            with c5:
+                aspectos_input = st.text_area("Aspectos Clave", placeholder="Ej: Seguridad e higiene, Conceptos básicos...", height=80)
+            
+            recursos_input = st.text_input("Recursos", placeholder="Ej: Aula Taller, Proyector, Herramienta X...")
+            
+            submit_btn = st.form_submit_button("Añadir Sesión", type="primary")
+            
+            if submit_btn:
+                new_ses_id = generar_siguiente_id(st.session_state.df_sesiones, "SES")
+                new_session = {
+                    "ID": new_ses_id,
+                    "Num_Sesion": num_ses,
+                    "Tipo_Actividad": tipo_act,
+                    "RA_CE": ra_ce_input,
+                    "Contenidos": contenidos_input,
+                    "Aspectos_Clave": aspectos_input,
+                    "Recursos": recursos_input
+                }
+                st.session_state.df_sesiones = pd.concat([st.session_state.df_sesiones, pd.DataFrame([new_session])], ignore_index=True)
+                st.success("Sesión añadida correctamente.")
+                st.rerun()
 
-    # 4. Diagrama de flujo opcional
-    with st.expander("🗺️ Ver Flujograma Tipo (Ejemplo)", expanded=False):
-        st.markdown(
-            "```mermaid\n"
-            "graph LR\n"
-            "    subgraph Evaluación Inicial\n"
-            "        A(Prueba Nivel) --> B[Teoría Tªxe]\n"
-            "    end\n"
-            "    subgraph Desarrollo\n"
-            "        B --> C[Preparación Pª0]\n"
-            "        C --> D[Práctica Pªx]\n"
-            "    end\n"
-            "    subgraph Cierre y Evaluación\n"
-            "        D --> E(Cuaderno Taller IE1)\n"
-            "        E --> F[Repaso IE2]\n"
-            "        F --> G((Examen IE3))\n"
-            "    end\n"
-            "```"
-        )
+
+
+    st.divider()
+
+    st.subheader("🎯 Diseño de Tareas Competenciales (TC)")
+    st.markdown("Define retos o productos integrados que evalúan varios Resultados de Aprendizaje de forma globalizada.")
+    
+    ed_tar = st.data_editor(
+        st.session_state.df_tareas,
+        column_config={
+            "ID": st.column_config.TextColumn("ID", disabled=True, width="small"),
+            "Nombre_Tarea": st.column_config.TextColumn("Título de la Tarea", width="medium"),
+            "Reto": st.column_config.TextColumn("Contexto Productivo y Reto", width="large"),
+            "RA_Asociados": st.column_config.TextColumn("RA y CE Relacionados", width="medium"),
+            "Instrumento": st.column_config.TextColumn("Instrumento de Calificación", width="medium"),
+        },
+        num_rows="dynamic", hide_index=True, use_container_width=True, key="tabla_tareas"
+    )
+    if len(ed_tar) > len(st.session_state.df_tareas):
+        ed_tar.iloc[-1, 0] = generar_siguiente_id(st.session_state.df_tareas, "TC")
+    st.session_state.df_tareas = ed_tar
+    
+    with st.expander("➕ Añadir Nueva Tarea Competencial", expanded=False):
+        st.markdown("*💡 Utiliza este formulario si prefieres una introducción de datos más visual y guiada en lugar de escribir directamente en la tabla.*")
+        with st.form("registro_tc"):
+            c1, c2 = st.columns(2)
+            with c1:
+                tc_nombre = st.text_input("Título de la Tarea")
+            with c2:
+                tc_ra = st.text_input("RA y CE Relacionados")
+            tc_reto = st.text_area("Contexto Productivo y Reto")
+            tc_inst = st.text_input("Instrumento de Calificación")
+            
+            if st.form_submit_button("Añadir Tarea", type="primary"):
+                new_id = generar_siguiente_id(st.session_state.df_tareas, "TC")
+                new_row = {"ID": new_id, "Nombre_Tarea": tc_nombre, "Reto": tc_reto, "RA_Asociados": tc_ra, "Instrumento": tc_inst}
+                st.session_state.df_tareas = pd.concat([st.session_state.df_tareas, pd.DataFrame([new_row])], ignore_index=True)
+                st.success("Añadida correctamente.")
+                st.rerun()
+
+elif menu == "Contextualización":
+    st.subheader("🏫 Centro Educativo. Equipo docente. Entorno socioeconómico")
+    st.session_state.config_contexto["instalaciones"] = st.text_area("Instalaciones", st.session_state.config_contexto.get("instalaciones", ""), height=120)
+    st.session_state.config_contexto["horario_lectivo"] = st.text_area("Horario lectivo", st.session_state.config_contexto.get("horario_lectivo", ""), height=120)
+    st.session_state.config_contexto["equipo_docente"] = st.text_area("Equipo docente", st.session_state.config_contexto.get("equipo_docente", ""), height=120)
+    st.session_state.config_contexto["entorno_socioeconomico"] = st.text_area("Entorno socioeconómico", st.session_state.config_contexto.get("entorno_socioeconomico", ""), height=120)
+
+    st.divider()
+    
+    st.subheader("👦🏻 Alumnado. Refuerzo y atención especial en ACNEAE")
+    st.session_state.config_contexto["inclusion"] = st.text_area("Inclusión", st.session_state.config_contexto.get("inclusion", ""), height=120)
+    st.session_state.config_contexto["elenco_situaciones"] = st.text_area("Elenco de situaciones", st.session_state.config_contexto.get("elenco_situaciones", ""), height=120)
+    st.session_state.config_contexto["circunstancias_ocultas"] = st.text_area("Circunstancias ocultas", st.session_state.config_contexto.get("circunstancias_ocultas", ""), height=120)
 
 # --- PESTAÑA: RESUMEN ---
 elif menu == "Resumen docente":
     # --- Resumen N.UD. y N.Práct. ---
-    st.subheader("📊 Unidades Didácticas y Prácticas")
+    st.subheader("📊 Módulo. Unidades Didácticas y Prácticas")
     rd1, rd2 = st.columns(2)
     with rd1:
         with st.container(border=True):
@@ -2070,7 +2139,7 @@ elif menu == "Resumen docente":
     render_caja_tri(c_tri3, "3er Tri.", uds_por_tri["3t"])
 
     st.divider()   
-    st.markdown("### 📊 Relación entre Resultados de Aprendizaje, Unidades Didácticas y Prácticas", unsafe_allow_html=True)
+    st.markdown("### 📊 Relación entre Resultados de Aprendizaje y Unidades Didácticas", unsafe_allow_html=True)
     
     lista_ra_ids = st.session_state.df_ra["ID"].tolist() if not st.session_state.df_ra.empty else []
     
@@ -2080,19 +2149,39 @@ elif menu == "Resumen docente":
             ra_info = {}
             if not st.session_state.df_ra.empty:
                 for _, row in st.session_state.df_ra.iterrows():
-                    ra_info[row["ID"]] = row.get("Descripción", "")
+                    try:
+                        pct_val = float(pd.to_numeric(row.get("% Pond", 0.0), errors="coerce"))
+                        if pd.isna(pct_val): pct_val = 0.0
+                    except Exception:
+                        pct_val = 0.0
+                    ra_info[row["ID"]] = {
+                        "desc": row.get("Descripción", ""),
+                        "pct": pct_val
+                    }
                 
             for ra_id in lista_ra_ids:
                 # Fila de RA (padre)
-                desc_ra_completa = ra_info.get(ra_id, "")
-                st.markdown(f"<div style='color: #fff; font-size: 1.05rem; margin-top: 5px;'><strong>{ra_id}</strong> <span style='color: #ccc; font-size: 0.95rem;'>{desc_ra_completa}</span></div>", unsafe_allow_html=True)
+                info = ra_info.get(ra_id, {"desc": "", "pct": 0.0})
+                desc_ra_completa = info.get("desc", "")
+                pct = info.get("pct", 0.0)
+                str_pct = f"{int(pct)}%" if pct.is_integer() else f"{pct:.1f}%"
                 
-                # Recopilar UDs que tienen check en este RA
+                st.markdown(f"<div style='color: #fff; font-size: 1.05rem; margin-top: 5px;'><strong>{ra_id} ({str_pct}).</strong> <span style='color: #ccc; font-size: 0.95rem;'>{desc_ra_completa}</span></div>", unsafe_allow_html=True)
+                
+                # Recopilar UDs que están asociadas a este RA (tienen % > 0)
                 uds_list = []
                 if not st.session_state.df_ud.empty and ra_id in st.session_state.df_ud.columns:
                     for _, ud_row in st.session_state.df_ud.iterrows():
-                        if ud_row.get(ra_id, False) == True:
-                            uds_list.append(str(ud_row["ID"]))
+                        try:
+                            val_ra = float(ud_row.get(ra_id, 0.0))
+                            val_h = int(ud_row.get("Horas", 0))
+                        except Exception:
+                            val_ra = 0.0
+                            val_h = 0
+                        
+                        if val_ra > 0.0:
+                            str_pct = f"{int(val_ra)}%" if val_ra.is_integer() else f"{val_ra:.1f}%"
+                            uds_list.append(f"{str(ud_row['ID'])} ({val_h}h) - {str_pct}")
 
                 # Recopilar Prácticas que tienen check en este RA
                 prs_list = []
@@ -2112,10 +2201,10 @@ elif menu == "Resumen docente":
     else:
         st.info("No hay Resultados de Aprendizaje definidos.")
 
-# --- PESTAÑA: DUA ---
-elif menu == "Atención a la diversidad (DUA)":
-    st.subheader("🧩 Medidas de Respuesta Educativa para la Inclusión (DUA)")
-    st.markdown("Registra las adaptaciones curriculares no significativas o medidas DUA aplicadas en el aula.")
+# --- PESTAÑA: PLANES E INCLUSIÓN ---
+elif menu == "Planes e inclusión":
+    st.subheader("🧩 Plan de Atención a la diversidad")
+    st.markdown("Adaptación curricular no significativas o medidas aplicadas en el aula")
     
     ed_dua = st.data_editor(
         st.session_state.df_dua,
@@ -2133,10 +2222,41 @@ elif menu == "Atención a la diversidad (DUA)":
         ed_dua.iloc[-1, 0] = generar_siguiente_id(st.session_state.df_dua, "DUA")
     st.session_state.df_dua = ed_dua
 
-# --- PESTAÑA: CONTINGENCIA ---
-elif menu == "Plan de contingencia":
-    st.subheader("🛡️ Plan de Contingencia")
-    st.markdown("Define las actuaciones ante situaciones excepcionales que impidan el desarrollo normal de las clases.")
+    with st.expander("➕ Añadir Nueva Atención a la diversidad", expanded=False):
+        st.markdown("*💡 Utiliza este formulario si prefieres una introducción de datos más visual para el Plan de Atención a la diversidad.*")
+        with st.form("registro_dua"):
+            c1, c2 = st.columns(2)
+            with c1:
+                dua_alumnado = st.text_input("Alumnado o Aula")
+            with c2:
+                dua_barrera = st.text_input("Barrera Detectada")
+            
+            dua_met = st.text_area("Medida Metodológica / Org.")
+            
+            c3, c4 = st.columns(2)
+            with c3:
+                dua_acc = st.text_area("Medida de Acceso")
+            with c4:
+                dua_eva = st.text_area("Medida de Evaluación")
+            
+            if st.form_submit_button("Añadir Medida", type="primary"):
+                new_id = generar_siguiente_id(st.session_state.df_dua, "DUA")
+                new_row = {
+                    "ID": new_id, 
+                    "Alumnado_Aula": dua_alumnado, 
+                    "Barrera": dua_barrera, 
+                    "Medida_Metodologica": dua_met, 
+                    "Medida_Acceso": dua_acc, 
+                    "Medida_Evaluacion": dua_eva
+                }
+                st.session_state.df_dua = pd.concat([st.session_state.df_dua, pd.DataFrame([new_row])], ignore_index=True)
+                st.success("Añadida correctamente.")
+                st.rerun()
+
+    st.divider()
+
+    st.subheader("🛡️ Plan de contingencia")
+    st.markdown("Definición de actividades ante situaciones excepcionales de la clase")
     
     ed_cont = st.data_editor(
         st.session_state.df_contingencia,
@@ -2153,10 +2273,25 @@ elif menu == "Plan de contingencia":
         ed_cont.iloc[-1, 0] = generar_siguiente_id(st.session_state.df_contingencia, "PC")
     st.session_state.df_contingencia = ed_cont
 
-# --- PESTAÑA: ACE ---
-elif menu == "AC y Extraescolares (ACE)":
-    st.subheader("🚌 Actividades Complementarias y Extraescolares")
-    st.markdown("Programa las salidas y actividades que refuerzan los Resultados de Aprendizaje.")
+    with st.expander("➕ Añadir Nueva Medida de Contingencia", expanded=False):
+        st.markdown("*💡 Utiliza este formulario si prefieres una introducción de datos más visual para el Plan de contingencia.*")
+        with st.form("registro_contingencia"):
+            cont_esc = st.selectbox("Escenario", options=["Ausencia de Profesorado", "Ausencia de Alumnado", "Interrupción Generalizada", "Otros"])
+            cont_org = st.text_area("Organización y Acceso")
+            cont_act = st.text_area("Actividades Alternativas")
+            cont_seg = st.text_input("Seguimiento y Ajustes")
+            
+            if st.form_submit_button("Añadir Medida", type="primary"):
+                new_id = generar_siguiente_id(st.session_state.df_contingencia, "PC")
+                new_row = {"ID": new_id, "Escenario": cont_esc, "Organizacion": cont_org, "Actividades": cont_act, "Seguimiento": cont_seg}
+                st.session_state.df_contingencia = pd.concat([st.session_state.df_contingencia, pd.DataFrame([new_row])], ignore_index=True)
+                st.success("Añadida correctamente.")
+                st.rerun()
+
+    st.divider()
+
+    st.subheader("🚌 Plan de Actividadesy Extraescolares")
+    st.markdown("Programación de actividades complementarias y salidas extraescolares")
     
     lista_ra_ids = st.session_state.df_ra["ID"].tolist() if not st.session_state.df_ra.empty else []
     
@@ -2176,24 +2311,32 @@ elif menu == "AC y Extraescolares (ACE)":
     if len(ed_ace) > len(st.session_state.df_ace):
         ed_ace.iloc[-1, 0] = generar_siguiente_id(st.session_state.df_ace, "ACE")
     st.session_state.df_ace = ed_ace
-
-# --- PESTAÑA: TAREAS COMPETENCIALES ---
-elif menu == "Desarrollo Tareas (TC)":
-    st.subheader("🎯 Diseño de Tareas Competenciales")
-    st.markdown("Define retos o productos integrados que evalúan varios Resultados de Aprendizaje de forma globalizada.")
     
-    ed_tar = st.data_editor(
-        st.session_state.df_tareas,
-        column_config={
-            "ID": st.column_config.TextColumn("ID", disabled=True, width="small"),
-            "Nombre_Tarea": st.column_config.TextColumn("Título de la Tarea", width="medium"),
-            "Reto": st.column_config.TextColumn("Contexto Productivo y Reto", width="large"),
-            "RA_Asociados": st.column_config.TextColumn("RA y CE Relacionados", width="medium"),
-            "Instrumento": st.column_config.TextColumn("Instrumento de Calificación", width="medium"),
-        },
-        num_rows="dynamic", hide_index=True, use_container_width=True, key="tabla_tareas"
-    )
-    if len(ed_tar) > len(st.session_state.df_tareas):
-        ed_tar.iloc[-1, 0] = generar_siguiente_id(st.session_state.df_tareas, "TC")
-    st.session_state.df_tareas = ed_tar
+    with st.expander("➕ Añadir Nueva Actividad (ACE)", expanded=False):
+        st.markdown("*💡 Utiliza este formulario para programar la actividad escolar.*")
+        with st.form("registro_ace"):
+            c1, c2, c3 = st.columns([1,1,1])
+            with c1:
+                ace_tipo = st.selectbox("Tipo", options=["Complementaria", "Extraescolar"])
+            with c2:
+                ace_ra = st.selectbox("RA Vinculados", options=st.session_state.df_ra["ID"].tolist() if not st.session_state.df_ra.empty else [""])
+            with c3:
+                ace_tri = st.selectbox("Trimestre", options=["1T", "2T", "3T"])
+            
+            ace_act = st.text_area("Descripción de la Actividad")
+            
+            c4, c5 = st.columns(2)
+            with c4:
+                ace_ent = st.text_input("Entidad Colaboradora")
+            with c5:
+                ace_eva = st.text_input("Actividad de Evaluación")
+            
+            if st.form_submit_button("Añadir Actividad", type="primary"):
+                new_id = generar_siguiente_id(st.session_state.df_ace, "ACE")
+                new_row = {"ID": new_id, "Tipo": ace_tipo, "RA_Vinculados": ace_ra, "Actividad": ace_act, "Trimestre": ace_tri, "Entidad": ace_ent, "Evaluacion": ace_eva}
+                st.session_state.df_ace = pd.concat([st.session_state.df_ace, pd.DataFrame([new_row])], ignore_index=True)
+                st.success("Añadida correctamente.")
+                st.rerun()
+
+
 
