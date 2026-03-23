@@ -859,12 +859,11 @@ if menu == "Módulo didáctico":
         })
 
     st.divider()
-    suma_t = st.session_state.info_modulo["pond_1t"] + st.session_state.info_modulo["pond_2t"] + st.session_state.info_modulo["pond_3t"]
     cs1, cs2 = st.columns([3, 1])
     with cs1:
         st.markdown("### ⚖️ Ponderación por Trimestres")
     with cs2:
-        st.markdown(badge(suma_t - 100, suma_t, "%"), unsafe_allow_html=True)
+        badge_trimestres = st.empty()
             
     cp1, cp2, cp3 = st.columns(3)
     with cp1:
@@ -873,14 +872,16 @@ if menu == "Módulo didáctico":
         st.session_state.info_modulo["pond_2t"] = st.number_input("2º Trimestre (%)", 0, 100, st.session_state.info_modulo.get("pond_2t", 30))
     with cp3:
         st.session_state.info_modulo["pond_3t"] = st.number_input("3er Trimestre (%)", 0, 100, st.session_state.info_modulo.get("pond_3t", 40))
+        
+    suma_t = st.session_state.info_modulo["pond_1t"] + st.session_state.info_modulo["pond_2t"] + st.session_state.info_modulo["pond_3t"]
+    badge_trimestres.markdown(badge(suma_t - 100, suma_t, "%"), unsafe_allow_html=True)
 
     st.divider()
-    suma_criterios = st.session_state.info_modulo["criterio_conocimiento"] + st.session_state.info_modulo["criterio_procedimiento_ejercicios"] + st.session_state.info_modulo["criterio_procedimiento_practicas"] + st.session_state.info_modulo.get("criterio_tareas", st.session_state.info_modulo.get("criterio_actitud_participacion", 30))
     cc1, cc2 = st.columns([3, 1])
     with cc1:
         st.markdown("### 🧾 Instrumentos de evaluación. Criterios")
     with cc2:
-        st.markdown(badge(suma_criterios - 100, suma_criterios, "%"), unsafe_allow_html=True)
+        badge_criterios = st.empty()
 
     col_a, col_b, col_c, col_d = st.columns(4)
     with col_a:
@@ -891,6 +892,9 @@ if menu == "Módulo didáctico":
         st.session_state.info_modulo["criterio_procedimiento_ejercicios"] = st.number_input("Informes de ejercicios", 0, 100, st.session_state.info_modulo["criterio_procedimiento_ejercicios"], key="crit_procedimiento_ejercicios")
     with col_d:
         st.session_state.info_modulo["criterio_tareas"] = st.number_input("Cuaderno de tareas", 0, 100, st.session_state.info_modulo.get("criterio_tareas", st.session_state.info_modulo.get("criterio_actitud_participacion", 30)), key="crit_tareas")
+        
+    suma_criterios = st.session_state.info_modulo["criterio_conocimiento"] + st.session_state.info_modulo["criterio_procedimiento_ejercicios"] + st.session_state.info_modulo["criterio_procedimiento_practicas"] + st.session_state.info_modulo.get("criterio_tareas", st.session_state.info_modulo.get("criterio_actitud_participacion", 30))
+    badge_criterios.markdown(badge(suma_criterios - 100, suma_criterios, "%"), unsafe_allow_html=True)
 
  
     st.divider()
@@ -905,16 +909,15 @@ if menu == "Módulo didáctico":
 
 # --- PESTAÑA: Planificación ---
 elif menu == "Matriz curricular":
-    suma_ra = round(pd.to_numeric(st.session_state.df_ra["% Pond"], errors="coerce").fillna(0).sum(), 2)
     c_ra1, c_ra2 = st.columns([3, 1])
     with c_ra1:
         st.markdown("### 🎓 Resultados de Aprendizaje")
     with c_ra2:
-        st.markdown(badge(suma_ra - 100, suma_ra, "%"), unsafe_allow_html=True)
+        badge_ra = st.empty()
 
     ed_ra = st.data_editor(st.session_state.df_ra, column_config={
         "ID": st.column_config.TextColumn("ID-RA", width="small", disabled=True),
-        "% Pond": st.column_config.NumberColumn("% RA", width="small", min_value=0.0, max_value=100.0, format="%.1f"),
+        "% Pond": st.column_config.NumberColumn("% RA", width="small", min_value=0.0, max_value=100.0, step=1, format="%d %%"),
         "Dualizado": st.column_config.CheckboxColumn("FEOE", default=False, width="small"),
         "Descripción": st.column_config.TextColumn("Resultados de Aprendizaje"),
     }, num_rows="dynamic", hide_index=True, width="stretch", key="tabla_ra")
@@ -925,6 +928,9 @@ elif menu == "Matriz curricular":
         ed_ra.iloc[-1, 0] = new_id
     
     st.session_state.df_ra = ed_ra
+    
+    suma_ra = round(pd.to_numeric(st.session_state.df_ra["% Pond"], errors="coerce").fillna(0).sum(), 2)
+    badge_ra.markdown(badge(suma_ra - 100, suma_ra, "%"), unsafe_allow_html=True)
 
     st.divider()
     st.subheader("📚 Unidades Didácticas. Resultados de Aprendizaje")
@@ -963,23 +969,23 @@ elif menu == "Matriz curricular":
             if not match_ra.empty:
                 ra_pond = match_ra.iloc[0].get("% Pond", 0.0)
                 
-        config_ud[ra] = st.column_config.TextColumn(
+        config_ud[ra] = st.column_config.NumberColumn(
             f"{ra[2:]} ({ra_pond}%)", 
-            width="small"
+            width="small",
+            min_value=0.0,
+            max_value=100.0,
+            step=1,
+            format="%d %%"
         )
     
-    # Preparamos un DataFrame puramente visual para que los ceros sean strings vacíos
+    # Preparamos un DataFrame puramente visual para que los ceros sean celdas vacías nativas de NumberColumn
     df_visual = st.session_state.df_ud.copy()
     for ra in lista_ra_ids:
-        df_visual[ra] = pd.to_numeric(df_visual[ra], errors="coerce").fillna(0.0)
-        df_visual[ra] = df_visual[ra].apply(lambda x: f"{int(x)}%" if x > 0.0 else "")
+        df_visual[ra] = pd.to_numeric(df_visual[ra], errors="coerce").astype(float)
+        # Sustituimos los ceros por None para que NumberColumn los dibuje vacíos
+        df_visual[ra] = df_visual[ra].replace(0.0, None)
 
-    def align_right(val):
-        return 'text-align: right;'
-        
-    df_visual_styled = df_visual.style.map(align_right, subset=lista_ra_ids)
-
-    ed_ud = st.data_editor(df_visual_styled, column_config=config_ud, num_rows="dynamic", hide_index=True, width="stretch", height=(len(st.session_state.df_ud) + 1) * 35 + 39, key="tabla_ud")
+    ed_ud = st.data_editor(df_visual, column_config=config_ud, num_rows="dynamic", hide_index=True, width="stretch", height=(len(st.session_state.df_ud) + 1) * 35 + 39, key="tabla_ud")
     
     # Manejo de nuevas UD
     if len(ed_ud) > len(st.session_state.df_ud):
@@ -987,9 +993,8 @@ elif menu == "Matriz curricular":
         ed_ud.iloc[-1, 0] = new_id_ud
         
     for ra in lista_ra_ids:
-        # Convertimos lo que el usuario haya escrito (ej. '15', '15%', '') de vuelta a un float real
-        s_str = ed_ud[ra].astype(str).str.replace("%", "").str.strip()
-        ed_ud[ra] = pd.to_numeric(s_str, errors="coerce").fillna(0.0).astype(float)
+        # Al ser un NumberColumn siempre nos devolverá float o None
+        ed_ud[ra] = pd.to_numeric(ed_ud[ra], errors="coerce").fillna(0.0).astype(float)
         
     st.session_state.df_ud = ed_ud
     
