@@ -33,180 +33,180 @@
     },
     "df_ra": [
         {
-            "ID": "RA1",
-            "% Pond": 60.0,
-            "Dualizado": false,
-            "Descripción": "Identifica los elementos de las infraestructuras comunes de telecomunicaciones en viviendas y edificios, analizando los sistemas que las integran."
+            "id_ra": "RA1",
+            "peso_ra": 60.0,
+            "is_dual": false,
+            "desc_ra": "Identifica los elementos de las infraestructuras comunes de telecomunicaciones en viviendas y edificios, analizando los sistemas que las integran."
         },
         {
-            "ID": "RA2",
-            "% Pond": 15.0,
-            "Dualizado": false,
-            "Descripción": "Configura pequeñas instalaciones de infraestructuras comunes de telecomunicaciones para viviendas y edificios, determinando los elementos que la conforman y seleccionando componentes y equipos."
+            "id_ra": "RA2",
+            "peso_ra": 15.0,
+            "is_dual": false,
+            "desc_ra": "Configura pequeñas instalaciones de infraestructuras comunes de telecomunicaciones para viviendas y edificios, determinando los elementos que la conforman y seleccionando componentes y equipos."
         },
         {
-            "ID": "RA3",
-            "% Pond": 5.0,
-            "Dualizado": false,
-            "Descripción": "Monta instalaciones de infraestructuras comunes de telecomunicaciones para viviendas y edificios interpretando documentación técnica y aplicando técnicas de montaje."
+            "id_ra": "RA3",
+            "peso_ra": 5.0,
+            "is_dual": false,
+            "desc_ra": "Monta instalaciones de infraestructuras comunes de telecomunicaciones para viviendas y edificios interpretando documentación técnica y aplicando técnicas de montaje."
         },
         {
-            "ID": "RA4",
-            "% Pond": 5.0,
-            "Dualizado": false,
-            "Descripción": "Verifica y ajusta los elementos de las instalaciones de infraestructuras comunes de telecomunicaciones midiendo los parámetros significativos e interpretando sus resultados."
+            "id_ra": "RA4",
+            "peso_ra": 5.0,
+            "is_dual": false,
+            "desc_ra": "Verifica y ajusta los elementos de las instalaciones de infraestructuras comunes de telecomunicaciones midiendo los parámetros significativos e interpretando sus resultados."
         },
         {
-            "ID": "RA5",
-            "% Pond": 5.0,
-            "Dualizado": false,
-            "Descripción": "Localiza averías y disfunciones en equipos e instalaciones de infraestructuras comunes de telecomunicaciones, aplicando técnicas de detección y relacionando la disfunción con la causa que la produce."
+            "id_ra": "RA5",
+            "peso_ra": 5.0,
+            "is_dual": false,
+            "desc_ra": "Localiza averías y disfunciones en equipos e instalaciones de infraestructuras comunes de telecomunicaciones, aplicando técnicas de detección y relacionando la disfunción con la causa que la produce."
         },
         {
-            "ID": "RA6",
-            "% Pond": 5.0,
-            "Dualizado": false,
-            "Descripción": "Repara instalaciones de infraestructuras de telecomunicaciones aplicando técnicas  de corrección de disfunciones y en su caso de sustitución de componentes teniendo en cuenta las recomendaciones de los fabricantes."
+            "id_ra": "RA6",
+            "peso_ra": 5.0,
+            "is_dual": false,
+            "desc_ra": "Repara instalaciones de infraestructuras de telecomunicaciones aplicando técnicas  de corrección de disfunciones y en su caso de sustitución de componentes teniendo en cuenta las recomendaciones de los fabricantes."
         },
         {
-            "ID": "RA7",
-            "% Pond": 5.0,
-            "Dualizado": false,
-            "Descripción": "Cumple las normas de prevención de riesgos laborales y de protección ambiental, identificando los riesgos asociados y las medidas y equipos para prevenirlos."
+            "id_ra": "RA7",
+            "peso_ra": 5.0,
+            "is_dual": false,
+            "desc_ra": "Cumple las normas de prevención de riesgos laborales y de protección ambiental, identificando los riesgos asociados y las medidas y equipos para prevenirlos."
         }
     ],
     "df_ud": [
         {
-            "ID": "UD01",
-            "Horas": 25,
-            "Título": "Infraestructuras comunes de telecomunicación",
             "RA1": 15.0,
             "RA2": 0.0,
             "RA3": 0.0,
             "RA4": 0.0,
             "RA5": 0.0,
             "RA6": 0.0,
-            "RA7": 0.0
+            "RA7": 0.0,
+            "id_ud": "UD01",
+            "horas_ud": 25,
+            "desc_ud": "Infraestructuras comunes de telecomunicación"
         },
         {
-            "ID": "UD02",
-            "Horas": 30,
-            "Título": "Transmisión señales radio y televisión (RTV)",
             "RA1": 15.0,
             "RA2": 0.0,
             "RA3": 0.0,
             "RA4": 0.0,
             "RA5": 0.0,
             "RA6": 0.0,
-            "RA7": 0.0
+            "RA7": 0.0,
+            "id_ud": "UD02",
+            "horas_ud": 30,
+            "desc_ud": "Transmisión señales radio y televisión (RTV)"
         },
         {
-            "ID": "UD03",
-            "Horas": 15,
-            "Título": "Antenas y líneas para RTV",
             "RA1": 10.0,
             "RA2": 0.0,
             "RA3": 0.0,
             "RA4": 0.0,
             "RA5": 0.0,
             "RA6": 0.0,
-            "RA7": 0.0
+            "RA7": 0.0,
+            "id_ud": "UD03",
+            "horas_ud": 15,
+            "desc_ud": "Antenas y líneas para RTV"
         },
         {
-            "ID": "UD04",
-            "Horas": 10,
-            "Título": "Equipos de procesado y distribución RTV",
             "RA1": 5.0,
             "RA2": 0.0,
             "RA3": 0.0,
             "RA4": 0.0,
             "RA5": 0.0,
             "RA6": 0.0,
-            "RA7": 0.0
+            "RA7": 0.0,
+            "id_ud": "UD04",
+            "horas_ud": 10,
+            "desc_ud": "Equipos de procesado y distribución RTV"
         },
         {
-            "ID": "UD05",
-            "Horas": 15,
-            "Título": "Config.inst. RTV (I): distribución captación",
             "RA1": 0.0,
             "RA2": 10.0,
             "RA3": 0.0,
             "RA4": 0.0,
             "RA5": 0.0,
             "RA6": 0.0,
-            "RA7": 0.0
+            "RA7": 0.0,
+            "id_ud": "UD05",
+            "horas_ud": 15,
+            "desc_ud": "Config.inst. RTV (I): distribución captación"
         },
         {
-            "ID": "UD06",
-            "Horas": 10,
-            "Título": "Config.inst. RTV (II): cabeceras TV-SAT",
             "RA1": 0.0,
             "RA2": 5.0,
             "RA3": 0.0,
             "RA4": 0.0,
             "RA5": 0.0,
             "RA6": 0.0,
-            "RA7": 0.0
+            "RA7": 0.0,
+            "id_ud": "UD06",
+            "horas_ud": 10,
+            "desc_ud": "Config.inst. RTV (II): cabeceras TV-SAT"
         },
         {
-            "ID": "UD07",
-            "Horas": 10,
-            "Título": "Montaje de sistemas de recepción RTV en ICT",
             "RA1": 0.0,
             "RA2": 0.0,
             "RA3": 5.0,
             "RA4": 0.0,
             "RA5": 0.0,
             "RA6": 0.0,
-            "RA7": 0.0
+            "RA7": 0.0,
+            "id_ud": "UD07",
+            "horas_ud": 10,
+            "desc_ud": "Montaje de sistemas de recepción RTV en ICT"
         },
         {
-            "ID": "UD08",
-            "Horas": 10,
-            "Título": "Verificación y ajustes en instalaciones en RTV",
             "RA1": 0.0,
             "RA2": 0.0,
             "RA3": 0.0,
             "RA4": 5.0,
             "RA5": 0.0,
             "RA6": 0.0,
-            "RA7": 0.0
+            "RA7": 0.0,
+            "id_ud": "UD08",
+            "horas_ud": 10,
+            "desc_ud": "Verificación y ajustes en instalaciones en RTV"
         },
         {
-            "ID": "UD09",
-            "Horas": 15,
-            "Título": "Instalaciones de telefonía en ICT",
             "RA1": 10.0,
             "RA2": 0.0,
             "RA3": 0.0,
             "RA4": 0.0,
             "RA5": 0.0,
             "RA6": 0.0,
-            "RA7": 0.0
+            "RA7": 0.0,
+            "id_ud": "UD09",
+            "horas_ud": 15,
+            "desc_ud": "Instalaciones de telefonía en ICT"
         },
         {
-            "ID": "UD10",
-            "Horas": 10,
-            "Título": "Instalaciones de interfonía y control de acceso",
             "RA1": 5.0,
             "RA2": 0.0,
             "RA3": 0.0,
             "RA4": 0.0,
             "RA5": 0.0,
             "RA6": 0.0,
-            "RA7": 0.0
+            "RA7": 0.0,
+            "id_ud": "UD10",
+            "horas_ud": 10,
+            "desc_ud": "Instalaciones de interfonía y control de acceso"
         },
         {
-            "ID": "UD11",
-            "Horas": 7,
-            "Título": "Mantenimiento de instalaciones de ICT",
             "RA1": 0.0,
             "RA2": 0.0,
             "RA3": 0.0,
             "RA4": 0.0,
             "RA5": 5.0,
             "RA6": 5.0,
-            "RA7": 5.0
+            "RA7": 5.0,
+            "id_ud": "UD11",
+            "horas_ud": 7,
+            "desc_ud": "Mantenimiento de instalaciones de ICT"
         }
     ],
     "df_pr": [
@@ -661,478 +661,476 @@
     ],
     "df_ce": [
         {
-            "Criterio Evaluación (CE)": "CE1.a",
-            "RA": "RA1",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD01",
             "Descripción (Competencial)": "Se ha analizado la normativa sobre infraestructuras comunes de telecomunicaciones en  edificios.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA1",
+            "id_ce": "CE1.a",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE1.b",
-            "RA": "RA1",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD01",
             "Descripción (Competencial)": "Se han identificado los elementos de las zonas comunes y privadas.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA1",
+            "id_ce": "CE1.b",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE1.c",
-            "RA": "RA1",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD01",
             "Descripción (Competencial)": "Se han descrito los tipos de instalaciones que componen una ICT (infraestructura común de telecomunicaciones).",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA1",
+            "id_ce": "CE1.c",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE1.d",
-            "RA": "RA1",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD01",
             "Descripción (Competencial)": "Se han descrito los tipos y la función de recintos (superior, inferior) y registros (enlace, secundario, entre otros) de una ICT.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA1",
+            "id_ce": "CE1.d",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE1.e",
-            "RA": "RA1",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD01",
             "Descripción (Competencial)": "Se han identificado los tipos de canalizaciones (externa, de enlace, principal, entre otras).",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA1",
+            "id_ce": "CE1.e",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE1.f",
-            "RA": "RA1",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD01",
             "Descripción (Competencial)": "Se han descrito los tipos de redes que componen la ICT (alimentación, distribución, dispersión    e interior).",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA1",
+            "id_ce": "CE1.f",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE1.g",
-            "RA": "RA1",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD01",
             "Descripción (Competencial)": "Se han identificado los elementos de conexión.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA1",
+            "id_ce": "CE1.g",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE1.h",
-            "RA": "RA1",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD01",
             "Descripción (Competencial)": "Se ha determinado la función y características de los elementos y equipos de cada sistema (televisión, telefonía, seguridad, entre otros).",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA1",
+            "id_ce": "CE1.h",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE2.a",
-            "RA": "RA2",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD02",
             "Descripción (Competencial)": "Se han identificado las especificaciones técnicas de la instalación.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA2",
+            "id_ce": "CE2.a",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE2.b",
-            "RA": "RA2",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD02",
             "Descripción (Competencial)": "Se ha aplicado la normativa de ICT y el REBT en la configuración de la instalación.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA2",
+            "id_ce": "CE2.b",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE2.c",
-            "RA": "RA2",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD02",
             "Descripción (Competencial)": "Se han utilizado herramientas informáticas de aplicación.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA2",
+            "id_ce": "CE2.c",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE2.d",
-            "RA": "RA2",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD02",
             "Descripción (Competencial)": "Se han calculado los parámetros de los elementos y equipos de la instalación.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA2",
+            "id_ce": "CE2.d",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE2.e",
-            "RA": "RA2",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD02",
             "Descripción (Competencial)": "Se han realizado los croquis y esquemas de la instalación con la calidad requerida.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA2",
+            "id_ce": "CE2.e",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE2.f",
-            "RA": "RA2",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD02",
             "Descripción (Competencial)": "Se ha utilizado la simbología normalizada.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA2",
+            "id_ce": "CE2.f",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE2.g",
-            "RA": "RA2",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD02",
             "Descripción (Competencial)": "Se han seleccionado los equipos y materiales que cumplen las especificaciones funcionales, técnicas y normativas.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA2",
+            "id_ce": "CE2.g",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE2.h",
-            "RA": "RA2",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD02",
             "Descripción (Competencial)": "Se ha elaborado el presupuesto correspondiente a la solución adoptada.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA2",
+            "id_ce": "CE2.h",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE3.a",
-            "RA": "RA3",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD03",
             "Descripción (Competencial)": "Se ha interpretado la documentación técnica de la instalación (planos, esquemas, reglamentación, entre otros).",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA3",
+            "id_ce": "CE3.a",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE3.b",
-            "RA": "RA3",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD03",
             "Descripción (Competencial)": "Se ha realizado el replanteo de la instalación.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA3",
+            "id_ce": "CE3.b",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE3.c",
-            "RA": "RA3",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD03",
             "Descripción (Competencial)": "Se han ubicado y fijado canalizaciones.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA3",
+            "id_ce": "CE3.c",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE3.d",
-            "RA": "RA3",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD03",
             "Descripción (Competencial)": "Se han realizado operaciones de montaje de mástiles y torretas, entre otros.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA3",
+            "id_ce": "CE3.d",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE3.e",
-            "RA": "RA3",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD03",
             "Descripción (Competencial)": "Se han ubicado y fijado los elementos de captación de señales y del equipo de cabecera.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA3",
+            "id_ce": "CE3.e",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE3.f",
-            "RA": "RA3",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD03",
             "Descripción (Competencial)": "Se ha tendido el cableado de los sistemas de la instalación (televisión, telefonía y comunicación interior, seguridad, entre otros).",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA3",
+            "id_ce": "CE3.f",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE3.g",
-            "RA": "RA3",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD03",
             "Descripción (Competencial)": "Se han conexionado los equipos y elementos de la instalación.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA3",
+            "id_ce": "CE3.g",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE3.h",
-            "RA": "RA3",
-            "Ponderación en RA (%)": 12.5,
             "UD": "UD03",
             "Descripción (Competencial)": "Se han aplicado los criterios de calidad en las operaciones de montaje.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA3",
+            "id_ce": "CE3.h",
+            "peso_ce": 12.5
         },
         {
-            "Criterio Evaluación (CE)": "CE4.a",
-            "RA": "RA4",
-            "Ponderación en RA (%)": 16.7,
             "UD": "UD04",
             "Descripción (Competencial)": "Se han descrito las unidades y los parámetros de los sistemas de la instalación (ganancia de la antena, de amplificadores, directividad, anchos de banda, atenuaciones, interferencias, entre otros).",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA4",
+            "id_ce": "CE4.a",
+            "peso_ce": 16.7
         },
         {
-            "Criterio Evaluación (CE)": "CE4.b",
-            "RA": "RA4",
-            "Ponderación en RA (%)": 16.7,
             "UD": "UD04",
             "Descripción (Competencial)": "Se han utilizado herramientas informáticas para la obtención de información: situación de repetidores, posicionamiento de satélites, entre otros.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA4",
+            "id_ce": "CE4.b",
+            "peso_ce": 16.7
         },
         {
-            "Criterio Evaluación (CE)": "CE4.c",
-            "RA": "RA4",
-            "Ponderación en RA (%)": 16.7,
             "UD": "UD04",
             "Descripción (Competencial)": "Se han orientado los elementos de captación de señales.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA4",
+            "id_ce": "CE4.c",
+            "peso_ce": 16.7
         },
         {
-            "Criterio Evaluación (CE)": "CE4.d",
-            "RA": "RA4",
-            "Ponderación en RA (%)": 16.7,
             "UD": "UD04",
             "Descripción (Competencial)": "Se han realizado las medidas de los parámetros significativos de las señales en los sistemas de la instalación.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA4",
+            "id_ce": "CE4.d",
+            "peso_ce": 16.7
         },
         {
-            "Criterio Evaluación (CE)": "CE4.e",
-            "RA": "RA4",
-            "Ponderación en RA (%)": 16.7,
             "UD": "UD04",
             "Descripción (Competencial)": "Se han relacionado los parámetros medidos con los característicos de la instalación.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA4",
+            "id_ce": "CE4.e",
+            "peso_ce": 16.7
         },
         {
-            "Criterio Evaluación (CE)": "CE4.f",
-            "RA": "RA4",
-            "Ponderación en RA (%)": 16.5,
             "UD": "UD04",
             "Descripción (Competencial)": "Se han realizado pruebas funcionales y ajustes.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA4",
+            "id_ce": "CE4.f",
+            "peso_ce": 16.5
         },
         {
-            "Criterio Evaluación (CE)": "CE5.a",
-            "RA": "RA5",
-            "Ponderación en RA (%)": 16.7,
             "UD": "UD05",
             "Descripción (Competencial)": "Se han realizado las medidas de los parámetros de funcionamiento, utilizando los medios, equipos e instrumentos específicos.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA5",
+            "id_ce": "CE5.a",
+            "peso_ce": 16.7
         },
         {
-            "Criterio Evaluación (CE)": "CE5.b",
-            "RA": "RA5",
-            "Ponderación en RA (%)": 16.7,
             "UD": "UD05",
             "Descripción (Competencial)": "Se ha operado con las herramientas e instrumentos adecuados para la diagnosis de averías.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA5",
+            "id_ce": "CE5.b",
+            "peso_ce": 16.7
         },
         {
-            "Criterio Evaluación (CE)": "CE5.c",
-            "RA": "RA5",
-            "Ponderación en RA (%)": 16.7,
             "UD": "UD05",
             "Descripción (Competencial)": "Se han identificado los síntomas de averías o disfunciones.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA5",
+            "id_ce": "CE5.c",
+            "peso_ce": 16.7
         },
         {
-            "Criterio Evaluación (CE)": "CE5.d",
-            "RA": "RA5",
-            "Ponderación en RA (%)": 16.7,
             "UD": "UD05",
             "Descripción (Competencial)": "Se han planteado hipótesis de las posibles causas de la avería y su repercusión en la instalación.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA5",
+            "id_ce": "CE5.d",
+            "peso_ce": 16.7
         },
         {
-            "Criterio Evaluación (CE)": "CE5.e",
-            "RA": "RA5",
-            "Ponderación en RA (%)": 16.7,
             "UD": "UD05",
             "Descripción (Competencial)": "Se ha localizado el subsistema, equipo o elemento responsable de la disfunción.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA5",
+            "id_ce": "CE5.e",
+            "peso_ce": 16.7
         },
         {
-            "Criterio Evaluación (CE)": "CE5.f",
-            "RA": "RA5",
-            "Ponderación en RA (%)": 16.5,
             "UD": "UD05",
             "Descripción (Competencial)": "Se ha operado con autonomía en las actividades propuestas",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA5",
+            "id_ce": "CE5.f",
+            "peso_ce": 16.5
         },
         {
-            "Criterio Evaluación (CE)": "CE6.a",
-            "RA": "RA6",
-            "Ponderación en RA (%)": 14.3,
             "UD": "UD06",
             "Descripción (Competencial)": "Se ha elaborado la secuencia de intervención para la reparación de la avería.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA6",
+            "id_ce": "CE6.a",
+            "peso_ce": 14.3
         },
         {
-            "Criterio Evaluación (CE)": "CE6.b",
-            "RA": "RA6",
-            "Ponderación en RA (%)": 14.3,
             "UD": "UD06",
             "Descripción (Competencial)": "Se han reparado o en su caso sustituido los componentes causantes de la avería.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA6",
+            "id_ce": "CE6.b",
+            "peso_ce": 14.3
         },
         {
-            "Criterio Evaluación (CE)": "CE6.c",
-            "RA": "RA6",
-            "Ponderación en RA (%)": 14.3,
             "UD": "UD06",
             "Descripción (Competencial)": "Se ha verificado la compatibilidad del nuevo elemento instalado.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA6",
+            "id_ce": "CE6.c",
+            "peso_ce": 14.3
         },
         {
-            "Criterio Evaluación (CE)": "CE6.d",
-            "RA": "RA6",
-            "Ponderación en RA (%)": 14.3,
             "UD": "UD06",
             "Descripción (Competencial)": "Se han restablecido las condiciones de normal funcionamiento del equipo o de la instalación.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA6",
+            "id_ce": "CE6.d",
+            "peso_ce": 14.3
         },
         {
-            "Criterio Evaluación (CE)": "CE6.e",
-            "RA": "RA6",
-            "Ponderación en RA (%)": 14.3,
             "UD": "UD06",
             "Descripción (Competencial)": "Se han realizado las intervenciones de mantenimiento con la calidad requerida.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA6",
+            "id_ce": "CE6.e",
+            "peso_ce": 14.3
         },
         {
-            "Criterio Evaluación (CE)": "CE6.f",
-            "RA": "RA6",
-            "Ponderación en RA (%)": 14.3,
             "UD": "UD06",
             "Descripción (Competencial)": "Se ha operado con autonomía en las actividades propuestas.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA6",
+            "id_ce": "CE6.f",
+            "peso_ce": 14.3
         },
         {
-            "Criterio Evaluación (CE)": "CE6.g",
-            "RA": "RA6",
-            "Ponderación en RA (%)": 14.2,
             "UD": "UD06",
             "Descripción (Competencial)": "Se ha elaborado un informe-memoria de las actividades desarrolladas, los procedimientos utilizados y resultados obtenidos.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA6",
+            "id_ce": "CE6.g",
+            "peso_ce": 14.2
         },
         {
-            "Criterio Evaluación (CE)": "CE7.a",
-            "RA": "RA7",
-            "Ponderación en RA (%)": 11.1,
             "UD": "UD07",
             "Descripción (Competencial)": "Se han identificado los riesgos y el nivel de peligrosidad que suponen la manipulación de los materiales, herramientas, útiles, máquinas y medios de transporte.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA7",
+            "id_ce": "CE7.a",
+            "peso_ce": 11.1
         },
         {
-            "Criterio Evaluación (CE)": "CE7.b",
-            "RA": "RA7",
-            "Ponderación en RA (%)": 11.1,
             "UD": "UD07",
             "Descripción (Competencial)": "Se han operado las máquinas respetando las normas de seguridad.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA7",
+            "id_ce": "CE7.b",
+            "peso_ce": 11.1
         },
         {
-            "Criterio Evaluación (CE)": "CE7.c",
-            "RA": "RA7",
-            "Ponderación en RA (%)": 11.1,
             "UD": "UD07",
             "Descripción (Competencial)": "Se han identificado las causas más frecuentes de accidentes en la manipulación de materiales, herramientas, máquinas de corte y conformado, entre otras.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA7",
+            "id_ce": "CE7.c",
+            "peso_ce": 11.1
         },
         {
-            "Criterio Evaluación (CE)": "CE7.d",
-            "RA": "RA7",
-            "Ponderación en RA (%)": 11.1,
             "UD": "UD07",
             "Descripción (Competencial)": "Se han descrito los elementos de seguridad (protecciones, alarmas, pasos de emergencia,  entre otros) de las máquinas y de los equipos de protección individual (calzado, protección ocular, indumentaria, entre otros) que se deben emplear en las distintas operaciones de mecanizado y montaje.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA7",
+            "id_ce": "CE7.d",
+            "peso_ce": 11.1
         },
         {
-            "Criterio Evaluación (CE)": "CE7.e",
-            "RA": "RA7",
-            "Ponderación en RA (%)": 11.1,
             "UD": "UD07",
             "Descripción (Competencial)": "Se ha relacionado la manipulación de materiales, herramientas y máquinas con las medidas de seguridad y protección personal requeridos.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA7",
+            "id_ce": "CE7.e",
+            "peso_ce": 11.1
         },
         {
-            "Criterio Evaluación (CE)": "CE7.f",
-            "RA": "RA7",
-            "Ponderación en RA (%)": 11.1,
             "UD": "UD07",
             "Descripción (Competencial)": "Se han determinado las medidas de seguridad y de protección personal que se deben adoptar  en la preparación y ejecución de las operaciones de montaje y mantenimiento de las instalaciones de infraestructuras comunes de telecomunicaciones en viviendas y edificios",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA7",
+            "id_ce": "CE7.f",
+            "peso_ce": 11.1
         },
         {
-            "Criterio Evaluación (CE)": "CE7.g",
-            "RA": "RA7",
-            "Ponderación en RA (%)": 11.1,
             "UD": "UD07",
             "Descripción (Competencial)": "Se han identificado las posibles fuentes de contaminación acústica, visual, entre otras del entorno ambiental.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA7",
+            "id_ce": "CE7.g",
+            "peso_ce": 11.1
         },
         {
-            "Criterio Evaluación (CE)": "CE7.h",
-            "RA": "RA7",
-            "Ponderación en RA (%)": 11.1,
             "UD": "UD07",
             "Descripción (Competencial)": "Se han clasificado los residuos generados para su retirada selectiva",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA7",
+            "id_ce": "CE7.h",
+            "peso_ce": 11.1
         },
         {
-            "Criterio Evaluación (CE)": "CE7.i",
-            "RA": "RA7",
-            "Ponderación en RA (%)": 11.2,
             "UD": "UD07",
             "Descripción (Competencial)": "Se ha valorado el orden y la limpieza de instalaciones y equipos como primer factor de prevención de riesgos.",
             "CPE Asociada": "",
-            "OG Asociado": ""
+            "OG Asociado": "",
+            "id_ra": "RA7",
+            "id_ce": "CE7.i",
+            "peso_ce": 11.2
         }
     ],
     "df_act": [
         {
-            "ID": "ACT01",
-            "Trimestre": "1T",
             "Tipo": "Teoría",
             "Actividad": "1T Ex. Teórico",
             "CE1.a": true,
@@ -1186,11 +1184,11 @@
             "CE7.f": false,
             "CE7.g": false,
             "CE7.h": false,
-            "CE7.i": false
+            "CE7.i": false,
+            "id_act": "ACT01",
+            "tri_act": "1T"
         },
         {
-            "ID": "ACT02",
-            "Trimestre": "1T",
             "Tipo": "Práctica",
             "Actividad": "1T Ex. Práctico",
             "CE1.a": true,
@@ -1244,11 +1242,11 @@
             "CE7.f": false,
             "CE7.g": false,
             "CE7.h": false,
-            "CE7.i": false
+            "CE7.i": false,
+            "id_act": "ACT02",
+            "tri_act": "1T"
         },
         {
-            "ID": "ACT03",
-            "Trimestre": "1T",
             "Tipo": "Informes",
             "Actividad": "1T Informes",
             "CE1.a": true,
@@ -1302,11 +1300,11 @@
             "CE7.f": false,
             "CE7.g": false,
             "CE7.h": false,
-            "CE7.i": false
+            "CE7.i": false,
+            "id_act": "ACT03",
+            "tri_act": "1T"
         },
         {
-            "ID": "ACT04",
-            "Trimestre": "1T",
             "Tipo": "Tareas",
             "Actividad": "1T Tareas",
             "CE1.a": true,
@@ -1360,11 +1358,11 @@
             "CE7.f": false,
             "CE7.g": false,
             "CE7.h": false,
-            "CE7.i": false
+            "CE7.i": false,
+            "id_act": "ACT04",
+            "tri_act": "1T"
         },
         {
-            "ID": "ACT05",
-            "Trimestre": "2T",
             "Tipo": "Teoría",
             "Actividad": "2T Ex. Teórico",
             "CE1.a": false,
@@ -1418,11 +1416,11 @@
             "CE7.f": false,
             "CE7.g": false,
             "CE7.h": false,
-            "CE7.i": false
+            "CE7.i": false,
+            "id_act": "ACT05",
+            "tri_act": "2T"
         },
         {
-            "ID": "ACT06",
-            "Trimestre": "2T",
             "Tipo": "Práctica",
             "Actividad": "2T Ex. Práctico",
             "CE1.a": false,
@@ -1476,11 +1474,11 @@
             "CE7.f": false,
             "CE7.g": false,
             "CE7.h": false,
-            "CE7.i": false
+            "CE7.i": false,
+            "id_act": "ACT06",
+            "tri_act": "2T"
         },
         {
-            "ID": "ACT07",
-            "Trimestre": "2T",
             "Tipo": "Informes",
             "Actividad": "2T Informes",
             "CE1.a": false,
@@ -1534,11 +1532,11 @@
             "CE7.f": false,
             "CE7.g": false,
             "CE7.h": false,
-            "CE7.i": false
+            "CE7.i": false,
+            "id_act": "ACT07",
+            "tri_act": "2T"
         },
         {
-            "ID": "ACT08",
-            "Trimestre": "2T",
             "Tipo": "Tareas",
             "Actividad": "2T Tareas",
             "CE1.a": false,
@@ -1592,11 +1590,11 @@
             "CE7.f": false,
             "CE7.g": false,
             "CE7.h": false,
-            "CE7.i": false
+            "CE7.i": false,
+            "id_act": "ACT08",
+            "tri_act": "2T"
         },
         {
-            "ID": "ACT09",
-            "Trimestre": "3T",
             "Tipo": "Teoría",
             "Actividad": "3T Ex. Teórico",
             "CE1.a": false,
@@ -1650,11 +1648,11 @@
             "CE7.f": true,
             "CE7.g": true,
             "CE7.h": true,
-            "CE7.i": true
+            "CE7.i": true,
+            "id_act": "ACT09",
+            "tri_act": "3T"
         },
         {
-            "ID": "ACT10",
-            "Trimestre": "3T",
             "Tipo": "Práctica",
             "Actividad": "3T Ex. Práctico",
             "CE1.a": false,
@@ -1708,11 +1706,11 @@
             "CE7.f": true,
             "CE7.g": true,
             "CE7.h": true,
-            "CE7.i": true
+            "CE7.i": true,
+            "id_act": "ACT10",
+            "tri_act": "3T"
         },
         {
-            "ID": "ACT11",
-            "Trimestre": "3T",
             "Tipo": "Informes",
             "Actividad": "3T Informes",
             "CE1.a": false,
@@ -1766,11 +1764,11 @@
             "CE7.f": true,
             "CE7.g": true,
             "CE7.h": true,
-            "CE7.i": true
+            "CE7.i": true,
+            "id_act": "ACT11",
+            "tri_act": "3T"
         },
         {
-            "ID": "ACT12",
-            "Trimestre": "3T",
             "Tipo": "Tareas",
             "Actividad": "3T Tareas",
             "CE1.a": false,
@@ -1824,7 +1822,9 @@
             "CE7.f": true,
             "CE7.g": true,
             "CE7.h": true,
-            "CE7.i": true
+            "CE7.i": true,
+            "id_act": "ACT12",
+            "tri_act": "3T"
         }
     ],
     "df_feoe": [],

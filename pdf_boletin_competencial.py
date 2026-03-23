@@ -105,16 +105,16 @@ def generar_pdf_boletin(info_modulo, info_fechas, df_al, df_eval, df_ra, df_ud, 
     ra_info = {}
     if not df_ra.empty:
         for _, ra_row in df_ra.iterrows():
-            ra_id = str(ra_row["ID"])
+            ra_id = str(ra_row["id_ra"])
             ra_info[ra_id] = {
-                "pond": float(pd.to_numeric(ra_row["% Pond"], errors="coerce")) if not pd.isna(ra_row["% Pond"]) else 0.0,
+                "pond": float(pd.to_numeric(ra_row["peso_ra"], errors="coerce")) if not pd.isna(ra_row["peso_ra"]) else 0.0,
                 "desc": str(ra_row.get("Descripción", ""))
             }
             tris_found = []
             if ra_id in df_ud.columns:
                 for _, ud_row in df_ud.iterrows():
                     if ud_row.get(ra_id, False):
-                        uid = str(ud_row["ID"])
+                        uid = str(ud_row["id_ud"])
                         for t_key in ["1T", "2T", "3T"]:
                             if uid in uds_por_tri[t_key] and t_key not in tris_found:
                                 tris_found.append(t_key)
@@ -127,13 +127,13 @@ def generar_pdf_boletin(info_modulo, info_fechas, df_al, df_eval, df_ra, df_ud, 
     ra_of_ce = {}
     df_ce_clean = pd.DataFrame()
     if df_ce is not None and not df_ce.empty:
-        df_ce_clean = df_ce.dropna(subset=["Criterio Evaluación (CE)"])
-        df_ce_clean = df_ce_clean[df_ce_clean["Criterio Evaluación (CE)"].str.strip() != ""]
+        df_ce_clean = df_ce.dropna(subset=["id_ce"])
+        df_ce_clean = df_ce_clean[df_ce_clean["id_ce"].str.strip() != ""]
         for _, ce_row in df_ce_clean.iterrows():
-            ce_id = str(ce_row["Criterio Evaluación (CE)"])
+            ce_id = str(ce_row["id_ce"])
             r_id = str(ce_row.get("RA", ""))
             if pd.notna(ce_id) and pd.notna(r_id) and ce_id != "nan" and r_id != "nan":
-                peso_ce[ce_id] = pd.to_numeric(ce_row["Ponderación en RA (%)"], errors="coerce") if pd.notna(ce_row["Ponderación en RA (%)"]) else 0.0
+                peso_ce[ce_id] = pd.to_numeric(ce_row["peso_ce"], errors="coerce") if pd.notna(ce_row["peso_ce"]) else 0.0
                 ra_of_ce[ce_id] = r_id
 
     df_evaluable = df_al[df_al.get("Estado", "") != "Baja"] if not df_al.empty else pd.DataFrame()
@@ -178,7 +178,7 @@ def generar_pdf_boletin(info_modulo, info_fechas, df_al, df_eval, df_ra, df_ud, 
         new_vals = {}
         if df_act is not None and not df_act.empty:
             for _, act in df_act.iterrows():
-                act_id = str(act["ID"])
+                act_id = str(act["id_act"])
                 if act_id in df_eval.columns:
                     val = float(df_eval.at[idx, act_id]) if pd.notna(df_eval.at[idx, act_id]) else 0.0
                     new_vals[act_id] = val
@@ -189,7 +189,7 @@ def generar_pdf_boletin(info_modulo, info_fechas, df_al, df_eval, df_ra, df_ud, 
             if df_act is not None and not df_act.empty:
                 for _, act in df_act.iterrows():
                     if ce_id in act.index and act[ce_id] == True:
-                        act_id = str(act["ID"])
+                        act_id = str(act["id_act"])
                         if act_id in new_vals:
                             act_vals.append(new_vals[act_id])
             if act_vals:
@@ -207,7 +207,7 @@ def generar_pdf_boletin(info_modulo, info_fechas, df_al, df_eval, df_ra, df_ud, 
         # --- FEOE SCORE INTEGRATION ---
         if not df_ra.empty and "Dualizado" in df_ra.columns:
             for r_id in notas_ra.keys():
-                ra_row = df_ra[df_ra["ID"] == r_id]
+                ra_row = df_ra[df_ra["id_ra"] == r_id]
                 if not ra_row.empty and ra_row.iloc[0].get("Dualizado", False):
                     emp_grade = 0.0
                     if df_feoe is not None and not df_feoe.empty and r_id in df_feoe.columns:
