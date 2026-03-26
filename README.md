@@ -1,54 +1,115 @@
-# 🚧 FASE DE PRUEBAS 🚧
-# 📓 Cuaderno Digital Docente Ciclos FP
+# 📓 Cuaderno Digital Docente — Ciclos FP
 
-Una aplicación web interactiva desarrollada en **Python** con **Streamlit** diseñada para facilitar la labor del profesorado de Formación Profesional (o cualquier otra etapa educativa) en la gestión diaria de sus clases. Automatiza la planificación, el seguimiento en vivo, y el cálculo de evaluaciones en sintonía con los Resultados de Aprendizaje (RA).
+Aplicación web interactiva desarrollada en **Python + Streamlit** para la gestión integral del trabajo docente en Formación Profesional: programación didáctica, seguimiento de aula y evaluación del alumnado.
 
-## 🚀 Características Principales
+---
 
-La herramienta se divide en **7 pilares fundamentales** accesibles mediante un menú de navegación rápido y oscuro:
+## 🗂️ Estructura de la aplicación
 
-1. **Módulo didáctico:** Parametrización operativa del módulo (Nombre, curso, centro) y selección ágil de bases de datos JSON para rotar entre múltiples asignaturas.
-2. **Calendario lectivo:** Configuración global del curso, trimestres y periodo FEOE, indicando las horas semanales impartidas por día.
-3. **Matriz programación:** Asignación en tiempo real de qué RA tributan a qué Unidades Didácticas o Prácticas.
-4. **Resumen docente:** Visualización transparente sobre cómo se evalúa cada RA y estructuración de UDs a lo largo de los tres trimestres.
-5. **Seguimiento diario:** Verificador mensual para cuadrar las horas estimadas frente a las horas reales impartidas.
-6. **Matrícula alumnado:** Ficha completa y editable de la clase. Control de estados (Alta, Baja).
-7. **Calificación numérica:** Cuaderno tabular de notas por instrumentos. Interfaz matemática de medias y conversión automática al sistema de calificación cualitativa **SIGAD**.
-8. **Progreso porcentual:** Gráficos integrales de consecución por Resultados de Aprendizaje para cada estudiante.
+La app se organiza en **3 bloques independientes**, cada uno con su propio fichero JSON:
 
-### 📥 Motor de Informes PDF Autónomos
-El cuaderno incluye un avanzado sistema de renderizado (basado en `ReportLab`) para descargar al instante los anexos administrativos y docentes de tu aula. Tres formatos a un clic:
-* **Calendario académico:** Un cronograma por meses en A4 apaisado indicando huecos laborales y semestrales.
-* **Seguimiento diario:** Tablas mensuales en A4 vertical, adaptadas al horario real del ciclo para las firmas de asistencia presencial.
-* **Boletín competencial:** Un reporte completo, personal y de varias páginas por alumno con toda su progresión trimestral y el grado de logro exacto de todos sus Resultados de Aprendizaje.
+| Bloque | Secciones | Fichero |
+|---|---|---|
+| 🌍 **Configuración global** | Contextualización, Calendario académico | `ciclos-fp.json` |
+| 🗂️ **Programación didáctica** | Módulo didáctico, Matrices RA→CE→UD, Instrumentos de evaluación, Planes e inclusión, Resumen docente, Programación de aula | `0237-ictve-pd.json` |
+| 📅 **Curso actual** | Seguimiento diario, Matrícula alumnado, Calificación académica, Calificación FEOE, Evaluación continua | `0237-ictve-curso-2025-26.json` |
 
-## 🛠️ Tecnologías Empleadas
+Esta separación permite **reutilizar la Programación Didáctica** en cursos futuros sin perder los datos del alumnado, y viceversa.
 
-- **[Python 3](https://www.python.org/):** Lenguaje base.
-- **[Streamlit](https://streamlit.io/):** Framework para la generación de la Interfaz de Usuario.
-- **[Pandas](https://pandas.pydata.org/):** Tratamiento y estructuración de los Dataframes (tablas de alumnos, notas, fechas).
-- Archivos locales **JSON** como motor de base de datos persistente dinámica.
+---
 
-## ⚙️ Instalación y Uso
+## 🚀 Funcionalidades implementadas
 
-1. Es recomendable crear un entorno virtual:
-   ```bash
-   python -m venv env
-   source env/bin/activate  # en Linux/Mac
-   env\Scripts\activate     # en Windows
-   ```
-2. Instala las dependencias necesarias:
-   ```bash
-   pip install streamlit pandas
-   ```
-3. Arranca el servidor local:
-   ```bash
-   streamlit run app.py
-   ```
+### 📐 Programación Didáctica
+- **Módulo didáctico:** Parametrización del módulo (nombre, código BOA, horas, centro, profesorado, horario semanal)
+- **Matrices RA → CE → UD:** Gestión de Resultados de Aprendizaje, Criterios de Evaluación, Unidades Didácticas e Instrumentos de evaluación
+- **Planes e inclusión:** DUA, Plan de Contingencia y Actividades Complementarias/Extraescolares
+- **Resumen docente:** Visión del reparto de horas por UD a lo largo de los trimestres
+- **Programación de aula:** Registro de sesiones con tipo de actividad, RA/CE vinculados y recursos
 
-## 📁 Archivos de Configuración
+### 📅 Curso actual
+- **Seguimiento diario:** Verificador mensual de horas previstas vs. impartidas con indicador de `Sin docencia`
+- **Matrícula alumnado:** Listado editable con fijación de columnas, detección automática de menores de 18 años (fondo rosa) y ordenación por apellidos
+- **Calificación académica:** Cuaderno de notas por instrumento y trimestre con cálculo automático de nota final y equivalencia SIGAD
+- **Calificación FEOE:** Integración de notas del tutor de empresa para módulos dualizados
+- **Evaluación continua:** Progreso porcentual por RA para cada alumno
 
-El guardado de progreso es modular. La aplicación rastrea dinámicamente tu directorio local buscando archivos JSON (ejemplo: `0238-id.json`, `0555-rt.json`). Si no hay nada, arranca un contenedor nuevo llamado `nuevo-modulo.json` protegiendo que jamás se rompa. Puedes exportar o importar asignaturas completas (alumnos incluidos) tan solo compartiendo ese único archivo JSON.
+### 📥 Informes PDF (ReportLab)
+- Calendario académico mensual con festivos
+- Seguimiento diario para firmas de asistencia
+- Boletín competencial por alumno (progresión trimestral completa)
+- Programación de aula
 
-## 🎨 Personalización Visual
-Todo el diseño se ha creado inyectando reglas CSS y HTML a medida para acercar la sensación a una auténtica aplicación web oscura (Dark Mode nativo). Las barras de carga, insignias SIGAD y celdas congeladas interactúan suavizando el trabajo habitual de las densas hojas de Excel.
+---
+
+## 🛡️ Características del sistema
+
+| Función | Descripción |
+|---|---|
+| 💾 Autoguardado | Cada 5 min, guarda PD y Curso en sus ficheros separados |
+| 🔒 Modo solo lectura | Por bloque (Global / PD / Curso) — protege de ediciones accidentales |
+| 🗄️ Backups automáticos | Copia con timestamp antes de cada guardado (máx. 5 por fichero) |
+| 🟢 Validador de coherencia | Comprueba horas lectivas reales vs. suma de horas UD y fechas de trimestres |
+| 🌍 Configuración global | Centro, profesorado, fechas lectivas y calendario compartidos entre módulos |
+
+---
+
+## ⚙️ Instalación y uso
+
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/rafaelsanzprades/CuadernoDigitalDocenteFP.git
+
+# 2. Crear entorno virtual (recomendado)
+python -m venv .venv
+.venv\Scripts\activate        # Windows
+source .venv/bin/activate     # Linux / Mac
+
+# 3. Instalar dependencias
+pip install -r requirements.txt
+
+# 4. Arrancar la aplicación
+streamlit run app.py
+```
+
+> También puedes usar el script `run.bat` en Windows.
+
+---
+
+## 📁 Ficheros de datos
+
+La app crea y gestiona automáticamente tres tipos de JSON en el directorio de trabajo:
+
+```
+ciclos-fp.json                    ← Configuración global (fechas, horario, contexto)
+{modulo}-pd.json                  ← Programación Didáctica
+{modulo}-curso-{año}.json         ← Datos del curso (alumnado, notas, seguimiento)
+backups/                          ← Copias automáticas con timestamp
+```
+
+Los ficheros son portables: comparte la PD con compañeros sin exponer datos de alumnado.
+
+---
+
+## 🛠️ Tecnologías
+
+- **Python 3** · **Streamlit** · **Pandas** · **ReportLab**
+- Persistencia en **JSON** local (sin base de datos externa)
+- Dark Mode nativo con CSS/HTML inyectado
+
+---
+
+## 📋 Hoja de ruta
+
+| # | Mejora | Estado |
+|---|---|---|
+| 1 | Autoguardado automático | ✅ |
+| 2 | Backup automático con timestamp | ✅ |
+| 3 | Separación de JSONs por bloque | ✅ |
+| 7 | Validador de coherencia | ✅ |
+| 8 | Indicador de módulo activo en sidebar | ✅ |
+| 9 | Modo solo lectura por bloque | ✅ |
+| 4 | PDF unificado de Programación Didáctica | ⬜ |
+| 5 | Exportación de calificaciones a Excel (.xlsx) | ⬜ |
+| 6 | Vista resumen por RA con barras de progreso | ⬜ |
+| 10 | Buscador de alumnado | ⬜ |

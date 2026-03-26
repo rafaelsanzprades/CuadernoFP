@@ -28,10 +28,24 @@ def unserialize_date(d_str):
             continue
     return d_str
 
-def guardar_datos(nombre_archivo):
-    if not nombre_archivo.endswith(".json"): nombre_archivo += ".json"
-    
-    # --- Datos Globales ---
+def _hacer_backup(nombre_archivo):
+    """Crea backup con timestamp antes de sobreescribir."""
+    import shutil
+    _BAK_DIR = "backups"
+    _BAK_MAX = 5
+    if os.path.exists(nombre_archivo):
+        os.makedirs(_BAK_DIR, exist_ok=True)
+        _ts = datetime.now().strftime("%Y%m%d_%H%M")
+        _base = nombre_archivo.replace(".json", "")
+        _bak_name = os.path.join(_BAK_DIR, f"{_base}_{_ts}.bak.json")
+        shutil.copy2(nombre_archivo, _bak_name)
+        _baks = sorted([f for f in os.listdir(_BAK_DIR)
+                        if f.startswith(_base) and f.endswith(".bak.json")])
+        while len(_baks) > _BAK_MAX:
+            os.remove(os.path.join(_BAK_DIR, _baks.pop(0)))
+
+# ─── GLOBALES ───────────────────────────────────────────────
+def guardar_global():
     info_docente = {
         "centro": st.session_state.info_modulo.get("centro", ""),
         "profesorado": st.session_state.info_modulo.get("profesorado", "")
@@ -44,86 +58,108 @@ def guardar_datos(nombre_archivo):
     }
     with open("ciclos-fp.json", "w", encoding="utf-8") as f:
         json.dump(global_data, f, ensure_ascii=False, indent=4)
-        
-    # --- Datos del Módulo ---
-    info_modulo_to_save = st.session_state.info_modulo.copy()
-    info_modulo_to_save.pop("centro", None)
-    info_modulo_to_save.pop("profesorado", None)
 
-    data = {
-        "info_modulo": info_modulo_to_save,
-        "horario": st.session_state.horario,
-        "df_ra": st.session_state.df_ra.to_dict(orient="records"),
-        "df_ud": st.session_state.df_ud.to_dict(orient="records"),
-        "df_pr": st.session_state.df_pr.to_dict(orient="records"),
-        "df_al": st.session_state.df_al.to_dict(orient="records"),
-        "df_ce": st.session_state.df_ce.to_dict(orient="records") if 'df_ce' in st.session_state else [],
-        "df_act": st.session_state.df_act.to_dict(orient="records") if 'df_act' in st.session_state else [],
-        "df_feoe": st.session_state.df_feoe.to_dict(orient="records") if 'df_feoe' in st.session_state else [],
-        "df_eval": st.session_state.df_eval.to_dict(orient="records") if 'df_eval' in st.session_state else [],
-        "df_sgmt": st.session_state.df_sgmt.to_dict(orient="records") if 'df_sgmt' in st.session_state else [],
-        "daily_ledger": st.session_state.daily_ledger if 'daily_ledger' in st.session_state else {},
-        "planning_ledger": st.session_state.planning_ledger if 'planning_ledger' in st.session_state else {},
-        "config_aula": st.session_state.config_aula if 'config_aula' in st.session_state else {},
-        "df_sesiones": st.session_state.df_sesiones.to_dict(orient="records") if 'df_sesiones' in st.session_state else [],
-        "df_dua": st.session_state.df_dua.to_dict(orient="records") if 'df_dua' in st.session_state else [],
-        "df_contingencia": st.session_state.df_contingencia.to_dict(orient="records") if 'df_contingencia' in st.session_state else [],
-        "df_ace": st.session_state.df_ace.to_dict(orient="records") if 'df_ace' in st.session_state else [],
-        "df_tareas": st.session_state.df_tareas.to_dict(orient="records") if 'df_tareas' in st.session_state else [],
-    }
-    with open(nombre_archivo, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
-    return nombre_archivo
-
-def cargar_datos(nombre_archivo):
-    with open(nombre_archivo, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    st.session_state.info_modulo = data.get("info_modulo", {})
-    
-    # Retrocompatibilidad de Globales vs Carga de ciclos-fp
+def cargar_global():
     if os.path.exists("ciclos-fp.json"):
         with open("ciclos-fp.json", "r", encoding="utf-8") as fg:
             global_data = json.load(fg)
         st.session_state.info_fechas = {k: unserialize_date(v) for k, v in global_data.get("info_fechas", {}).items()}
         st.session_state.calendar_notes = global_data.get("calendar_notes", {})
         st.session_state.config_contexto = global_data.get("config_contexto", {"entorno": "", "perfil": "", "metodologia": ""})
-        
         info_docente = global_data.get("info_docente", {})
         st.session_state.info_modulo["centro"] = info_docente.get("centro", "")
         st.session_state.info_modulo["profesorado"] = info_docente.get("profesorado", "")
-    else:
-        st.session_state.info_fechas = {k: unserialize_date(v) for k, v in data.get("info_fechas", {}).items()}
-        st.session_state.calendar_notes = data.get("calendar_notes", {})
-        st.session_state.config_contexto = data.get("config_contexto", {"entorno": "", "perfil": "", "metodologia": ""})
-        # Si todavía no había ciclos-fp.json, los datos de info_modulo originales (centro, profesorado) siguen ahí
 
+# ─── PROGRAMACIÓN DIDÁCTICA ──────────────────────────────────
+def guardar_pd(nombre_base):
+    """Guarda datos de Programación Didáctica en <nombre_base>-pd.json"""
+    # Normalizar: quitar .json y sufijos -pd acumulados
+    nombre_base = nombre_base.replace(".json", "")
+    while nombre_base.endswith("-pd"):
+        nombre_base = nombre_base[:-3]
+    nombre_archivo = nombre_base + "-pd.json"
+    _hacer_backup(nombre_archivo)
+    guardar_global()
+    info_modulo_to_save = st.session_state.info_modulo.copy()
+    info_modulo_to_save.pop("centro", None)
+    info_modulo_to_save.pop("profesorado", None)
+    data = {
+        "tipo": "pd",
+        "info_modulo": info_modulo_to_save,
+        "horario": st.session_state.horario,
+        "df_ra": st.session_state.df_ra.to_dict(orient="records"),
+        "df_ud": st.session_state.df_ud.to_dict(orient="records"),
+        "df_pr": st.session_state.df_pr.to_dict(orient="records"),
+        "df_ce": st.session_state.df_ce.to_dict(orient="records") if 'df_ce' in st.session_state else [],
+        "df_act": st.session_state.df_act.to_dict(orient="records") if 'df_act' in st.session_state else [],
+        "df_dua": st.session_state.df_dua.to_dict(orient="records") if 'df_dua' in st.session_state else [],
+        "df_contingencia": st.session_state.df_contingencia.to_dict(orient="records") if 'df_contingencia' in st.session_state else [],
+        "df_ace": st.session_state.df_ace.to_dict(orient="records") if 'df_ace' in st.session_state else [],
+        "df_tareas": st.session_state.df_tareas.to_dict(orient="records") if 'df_tareas' in st.session_state else [],
+        "df_sesiones": st.session_state.df_sesiones.to_dict(orient="records") if 'df_sesiones' in st.session_state else [],
+        "config_aula": st.session_state.config_aula if 'config_aula' in st.session_state else {},
+        "planning_ledger": st.session_state.planning_ledger if 'planning_ledger' in st.session_state else {},
+    }
+    with open(nombre_archivo, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+    return nombre_archivo
+
+def cargar_pd(nombre_archivo):
+    """Carga datos de Programación Didáctica desde <nombre>-pd.json"""
+    with open(nombre_archivo, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    st.session_state.info_modulo = data.get("info_modulo", {})
+    cargar_global()
     st.session_state.horario = data.get("horario", {})
-    
     st.session_state.df_ra = pd.DataFrame(data.get("df_ra", [])) if data.get("df_ra") else df_ra_empty()
     st.session_state.df_ud = pd.DataFrame(data.get("df_ud", [])) if data.get("df_ud") else df_ud_empty()
     st.session_state.df_pr = pd.DataFrame(data.get("df_pr", []))
-    # Migración v6.5: Renombrar 'Nombre' a 'Práctica' y reordenar
     if not st.session_state.df_pr.empty:
         if "Nombre" in st.session_state.df_pr.columns and "Práctica" not in st.session_state.df_pr.columns:
             st.session_state.df_pr = st.session_state.df_pr.rename(columns={"Nombre": "Práctica"})
-        
-        # Asegurar orden: ID, UD, H, Práctica (v7.2.1)
         cols = st.session_state.df_pr.columns.tolist()
         desired_order = ["ID", "UD", "H", "Práctica"]
-        new_order = [c for c in desired_order if c in cols]
-        new_order += [c for c in cols if c not in desired_order]
+        new_order = [c for c in desired_order if c in cols] + [c for c in cols if c not in desired_order]
         st.session_state.df_pr = st.session_state.df_pr[new_order]
-
-    st.session_state.df_al = pd.DataFrame(data.get("df_al", []))
     st.session_state.df_ce = pd.DataFrame(data.get("df_ce", [])) if data.get("df_ce") else df_ce_empty()
     st.session_state.df_act = pd.DataFrame(data.get("df_act", [])) if data.get("df_act") else df_act_empty()
+    st.session_state.df_dua = pd.DataFrame(data.get("df_dua", []))
+    st.session_state.df_contingencia = pd.DataFrame(data.get("df_contingencia", []))
+    st.session_state.df_ace = pd.DataFrame(data.get("df_ace", []))
+    st.session_state.df_tareas = pd.DataFrame(data.get("df_tareas", []))
+    st.session_state.df_sesiones = pd.DataFrame(data.get("df_sesiones", []))
+    st.session_state.config_aula = data.get("config_aula", {"Metodología": "", "Atención a la diversidad": ""})
+    st.session_state.planning_ledger = data.get("planning_ledger", {})
+
+# ─── CURSO ACTUAL ─────────────────────────────────────────────
+def guardar_curso(nombre_base):
+    """Guarda datos del Curso actual en <nombre_base>.json"""
+    # Normalizar: quitar .json si ya viene con él
+    nombre_base = nombre_base.replace(".json", "")
+    nombre_archivo = nombre_base + ".json"
+    _hacer_backup(nombre_archivo)
+    data_curso = {
+        "tipo": "curso",
+        "df_al": st.session_state.df_al.to_dict(orient="records"),
+        "df_eval": st.session_state.df_eval.to_dict(orient="records") if 'df_eval' in st.session_state else [],
+        "df_feoe": st.session_state.df_feoe.to_dict(orient="records") if 'df_feoe' in st.session_state else [],
+        "df_sgmt": st.session_state.df_sgmt.to_dict(orient="records") if 'df_sgmt' in st.session_state else [],
+        "daily_ledger": st.session_state.daily_ledger if 'daily_ledger' in st.session_state else {},
+    }
+    with open(nombre_archivo, "w", encoding="utf-8") as f:
+        json.dump(data_curso, f, ensure_ascii=False, indent=4)
+    return nombre_archivo
+
+def cargar_curso(nombre_archivo):
+    """Carga datos del Curso actual."""
+    with open(nombre_archivo, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    st.session_state.df_al = pd.DataFrame(data.get("df_al", []))
     st.session_state.df_feoe = pd.DataFrame(data.get("df_feoe", []))
-    
-    # Asegurar la estructura correcta para df_eval aunque venga vacío del JSON (v7.2.3)
     loaded_eval = data.get("df_eval", [])
     if not loaded_eval:
         st.session_state.df_eval = pd.DataFrame(columns=[
-            "ID", 
+            "ID",
             "1T_Teoria", "1T_Practica", "1T_Informes", "1T_Cuaderno", "1T_Nota",
             "2T_Teoria", "2T_Practica", "2T_Informes", "2T_Cuaderno", "2T_Nota",
             "3T_Teoria", "3T_Practica", "3T_Informes", "3T_Cuaderno", "3T_Nota",
@@ -133,16 +169,74 @@ def cargar_datos(nombre_archivo):
         st.session_state.df_eval = pd.DataFrame(loaded_eval)
         if "ID" not in st.session_state.df_eval.columns:
             st.session_state.df_eval["ID"] = ""
-            
     st.session_state.df_sgmt = pd.DataFrame(data.get("df_sgmt", []))
     st.session_state.daily_ledger = data.get("daily_ledger", {})
-    st.session_state.planning_ledger = data.get("planning_ledger", {})
-    st.session_state.config_aula = data.get("config_aula", {"Metodología": "", "Atención a la diversidad": ""})
-    st.session_state.df_sesiones = pd.DataFrame(data.get("df_sesiones", []))
-    st.session_state.df_dua = pd.DataFrame(data.get("df_dua", []))
-    st.session_state.df_contingencia = pd.DataFrame(data.get("df_contingencia", []))
-    st.session_state.df_ace = pd.DataFrame(data.get("df_ace", []))
-    st.session_state.df_tareas = pd.DataFrame(data.get("df_tareas", []))
+
+# ─── COMPATIBILIDAD: JSON UNIFICADO ANTERIOR ─────────────────
+def guardar_datos(nombre_base):
+    """Guarda PD y Curso en sus ficheros separados. Mantiene compatibilidad."""
+    guardar_pd(st.session_state.get("active_pd", nombre_base))
+    guardar_curso(st.session_state.get("active_curso", nombre_base + "-curso-2025-26"))
+    return nombre_base
+
+def cargar_datos(nombre_archivo):
+    """Carga un JSON. Detecta si es formato antiguo (unificado) o nuevo (pd/curso)."""
+    with open(nombre_archivo, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    tipo = data.get("tipo", "legacy")
+
+    if tipo == "pd":
+        cargar_pd(nombre_archivo)
+    elif tipo == "curso":
+        cargar_curso(nombre_archivo)
+    else:
+        # ─── Formato antiguo: cargar todo y migrar ───
+        st.session_state.info_modulo = data.get("info_modulo", {})
+        cargar_global()
+        if not os.path.exists("ciclos-fp.json"):
+            st.session_state.info_fechas = {k: unserialize_date(v) for k, v in data.get("info_fechas", {}).items()}
+            st.session_state.calendar_notes = data.get("calendar_notes", {})
+            st.session_state.config_contexto = data.get("config_contexto", {"entorno": "", "perfil": "", "metodologia": ""})
+        st.session_state.horario = data.get("horario", {})
+        st.session_state.df_ra = pd.DataFrame(data.get("df_ra", [])) if data.get("df_ra") else df_ra_empty()
+        st.session_state.df_ud = pd.DataFrame(data.get("df_ud", [])) if data.get("df_ud") else df_ud_empty()
+        st.session_state.df_pr = pd.DataFrame(data.get("df_pr", []))
+        if not st.session_state.df_pr.empty:
+            if "Nombre" in st.session_state.df_pr.columns and "Práctica" not in st.session_state.df_pr.columns:
+                st.session_state.df_pr = st.session_state.df_pr.rename(columns={"Nombre": "Práctica"})
+            cols = st.session_state.df_pr.columns.tolist()
+            desired_order = ["ID", "UD", "H", "Práctica"]
+            new_order = [c for c in desired_order if c in cols] + [c for c in cols if c not in desired_order]
+            st.session_state.df_pr = st.session_state.df_pr[new_order]
+        st.session_state.df_al = pd.DataFrame(data.get("df_al", []))
+        st.session_state.df_ce = pd.DataFrame(data.get("df_ce", [])) if data.get("df_ce") else df_ce_empty()
+        st.session_state.df_act = pd.DataFrame(data.get("df_act", [])) if data.get("df_act") else df_act_empty()
+        st.session_state.df_feoe = pd.DataFrame(data.get("df_feoe", []))
+        loaded_eval = data.get("df_eval", [])
+        if not loaded_eval:
+            st.session_state.df_eval = pd.DataFrame(columns=[
+                "ID",
+                "1T_Teoria", "1T_Practica", "1T_Informes", "1T_Cuaderno", "1T_Nota",
+                "2T_Teoria", "2T_Practica", "2T_Informes", "2T_Cuaderno", "2T_Nota",
+                "3T_Teoria", "3T_Practica", "3T_Informes", "3T_Cuaderno", "3T_Nota",
+                "Nota_Final"
+            ])
+        else:
+            st.session_state.df_eval = pd.DataFrame(loaded_eval)
+            if "ID" not in st.session_state.df_eval.columns:
+                st.session_state.df_eval["ID"] = ""
+        st.session_state.df_sgmt = pd.DataFrame(data.get("df_sgmt", []))
+        st.session_state.daily_ledger = data.get("daily_ledger", {})
+        st.session_state.planning_ledger = data.get("planning_ledger", {})
+        st.session_state.config_aula = data.get("config_aula", {"Metodología": "", "Atención a la diversidad": ""})
+        st.session_state.df_sesiones = pd.DataFrame(data.get("df_sesiones", []))
+        st.session_state.df_dua = pd.DataFrame(data.get("df_dua", []))
+        st.session_state.df_contingencia = pd.DataFrame(data.get("df_contingencia", []))
+        st.session_state.df_ace = pd.DataFrame(data.get("df_ace", []))
+        st.session_state.df_tareas = pd.DataFrame(data.get("df_tareas", []))
+
+
+
 
 # ==========================================
 # 3. FUNCIONES DE LÓGICA Y CÁLCULO
@@ -406,16 +500,58 @@ if 'df_ace' not in st.session_state:
 if 'df_tareas' not in st.session_state:
     st.session_state.df_tareas = pd.DataFrame(columns=["ID", "Nombre_Tarea", "Reto", "RA_Asociados", "Instrumento"])
 
-# --- CARGAR FICHERO POR DEFECTO ---
+# --- MEJORA #9: Modo solo lectura por bloque ---
+if 'lock_pd' not in st.session_state:
+    st.session_state.lock_pd = False
+if 'lock_curso' not in st.session_state:
+    st.session_state.lock_curso = False
+if 'lock_global' not in st.session_state:
+    st.session_state.lock_global = False
+
+# --- MEJORA #1: Estado de autoguardado ---
+if 'autosave_last' not in st.session_state:
+    st.session_state.autosave_last = datetime.now()
+if 'autosave_interval_min' not in st.session_state:
+    st.session_state.autosave_interval_min = 5  # minutos
+if 'autosave_msg' not in st.session_state:
+    st.session_state.autosave_msg = None
+
+# --- CARGAR FICHEROS POR DEFECTO ---
 if 'app_init_done' not in st.session_state:
     st.session_state.app_init_done = True
-    f_list = [f for f in os.listdir(".") if f.endswith(".json")]
-    if f_list:
-        # Cargar el primer archivo encontrado genéricamente
-        st.session_state.active_module = f_list[0].replace(".json", "")
-        cargar_datos(f_list[0])
+    # Buscar primero archivos -pd.json (nuevo formato)
+    pd_files = [f for f in os.listdir(".") if f.endswith("-pd.json")]
+    curso_files = [f for f in os.listdir(".") if f.endswith(".json")
+                   and not f.endswith("-pd.json") and f != "ciclos-fp.json"]
+    if pd_files:
+        _pd_file = pd_files[0]
+        st.session_state.active_pd = _pd_file.replace(".json", "")
+        cargar_pd(_pd_file)
+        # Intentar cargar el Curso asociado
+        _curso_guess = _pd_file.replace("-pd.json", "-curso-2025-26.json")
+        if os.path.exists(_curso_guess):
+            st.session_state.active_curso = _curso_guess.replace(".json", "")
+            cargar_curso(_curso_guess)
+        else:
+            st.session_state.active_curso = _pd_file.replace("-pd.json", "-curso-2025-26")
+        st.session_state.active_module = st.session_state.active_pd.replace("-pd", "")
+    elif curso_files:
+        # Formato legacy: un solo JSON
+        _leg_file = "0237-ictve.json" if "0237-ictve.json" in curso_files else curso_files[0]
+        _base = _leg_file.replace(".json", "")
+        st.session_state.active_module = _base
+        st.session_state.active_pd = _base + "-pd"
+        st.session_state.active_curso = _base + "-curso-2025-26"
+        cargar_datos(_leg_file)
     else:
         st.session_state.active_module = "nuevo-modulo"
+        st.session_state.active_pd = "nuevo-modulo-pd"
+        st.session_state.active_curso = "nuevo-modulo-curso-2025-26"
+
+if 'active_pd' not in st.session_state:
+    st.session_state.active_pd = st.session_state.get("active_module", "nuevo-modulo") + "-pd"
+if 'active_curso' not in st.session_state:
+    st.session_state.active_curso = st.session_state.get("active_module", "nuevo-modulo") + "-curso-2025-26"
 
 # ==========================================
 # 5. INTERFAZ: MENÚ LATERAL Y ESTILOS
@@ -607,108 +743,119 @@ st.markdown(
 
 with st.sidebar:
     st.title("Cuaderno Digital Docente Ciclos FP")
-    st.markdown("<br>", unsafe_allow_html=True)    
-    # 5.2 Gestión de Archivos (Movido arriba)
-    with st.expander("📚 Gestión de módulos"):
-        f_list = [f for f in os.listdir(".") if f.endswith(".json")]
-        
-        st.markdown("**📂 Cargar módulo**")
-        default_idx = f_list.index("0237-ictve.json") if "0237-ictve.json" in f_list else 0
-        sel = st.selectbox("Selecciona archivo", f_list, index=default_idx, label_visibility="collapsed", key="load_sel")
-        
-        if st.button("📂 Iniciar Carga", use_container_width=True):
-            st.session_state.confirm_load = sel
 
-        if st.session_state.get("confirm_load"):
-            st.warning(f"⚠️ Al cargar `{st.session_state.confirm_load}` perderá los cambios. ¿Seguro?")
-            c1, c2 = st.columns(2)
-            if c1.button("✅ Sí", type="primary", use_container_width=True, key="conf_load_btn"):
-                cargar_datos(st.session_state.confirm_load)
-                st.session_state.active_module = st.session_state.confirm_load.replace(".json", "")
-                st.session_state.confirm_load = None
-                st.rerun()
-            if c2.button("❌ No", use_container_width=True, key="canc_load"):
-                st.session_state.confirm_load = None
-                st.rerun()
-                
-        st.markdown('<hr style="border: none; border-top: 1px solid #444; margin: 15px 0;">', unsafe_allow_html=True)
-        st.markdown("**💾 Guardar módulo**")
-        n_file = st.text_input("Nombre del módulo", value=st.session_state.get("active_module", "0237-ictve"), label_visibility="collapsed")
-        
-        if st.button("💾 Iniciar Guardado", use_container_width=True):
-            st.session_state.confirm_save = n_file
-            
-        if st.session_state.get("confirm_save"):
-            file_to_save = st.session_state.confirm_save
-            filename_full = file_to_save if file_to_save.endswith(".json") else f"{file_to_save}.json"
-            if os.path.exists(filename_full):
-                st.warning(f"⚠️ `{filename_full}` ya existe. ¿Sobreescribir?")
-            else:
-                st.info(f"✅ Se creará un nuevo: `{filename_full}`. ¿Continuar?")
-                
-            c3, c4 = st.columns(2)
-            if c3.button("✅ Sí", type="primary", use_container_width=True, key="conf_save_btn"):
-                guardar_datos(file_to_save)
-                st.session_state.active_module = file_to_save.replace(".json", "")
-                st.session_state.confirm_save = None
-                st.success("¡Guardado!")
-            if c4.button("❌ No", use_container_width=True, key="canc_save"):
-                st.session_state.confirm_save = None
-                st.rerun()
+    # --- MEJORA #8 + MEJORA #1: Indicador visual de módulo activo + autoguardado ---
+    _modulo_nombre = st.session_state.info_modulo.get("modulo", "") or "—"
+    _modulo_archivo = st.session_state.get("active_module", "—")
 
-    st.markdown("<br>", unsafe_allow_html=True)
+    # Lógica autoguardado
+    _autosave_label = ""
+    _now = datetime.now()
+    _elapsed = (_now - st.session_state.autosave_last).total_seconds() / 60
+    _can_autosave = (_modulo_archivo not in ("", "nuevo-modulo", "—"))
+    if _can_autosave and _elapsed >= st.session_state.autosave_interval_min:
+        guardar_datos(_modulo_archivo)
+        st.session_state.autosave_last = _now
+        st.session_state.autosave_msg = f"✅ Autoguardado a las {_now.strftime('%H:%M')}"
+    if st.session_state.autosave_msg:
+        _autosave_label = st.session_state.autosave_msg
 
-    # 5.1 Menú de Navegación (Real Buttons)
-    opciones_globales = [
-        "Contextualización", "Calendario académico"
+    st.markdown(
+        f"""
+        <div style="
+            background: linear-gradient(135deg, #0d7377 0%, #0a5c60 100%);
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 12px;
+            border: 1px solid #14a085;
+        ">
+            <div style="font-size:0.68rem; color:#9ee8e0; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:2px;">
+                💾 Módulo activo
+            </div>
+            <div style="font-size:0.92rem; color:#ffffff; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="{_modulo_nombre}">
+                {_modulo_nombre}
+            </div>
+            <div style="font-size:0.72rem; color:#9ee8e0; margin-top:2px;">
+                📄 {_modulo_archivo}.json
+            </div>
+            {f'<div style="font-size:0.7rem; color:#b2f0e8; margin-top:4px;">{_autosave_label}</div>' if _autosave_label else ''}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    # --- FIN MEJORAS #8 / #1 ---
+
+
+
+    # 5.1 Menú de Navegación (3 bloques)
+    opciones_globales = ["Contextualización", "Calendario académico"]
+    opciones_pd = [
+        "Módulo didáctico", "Matrices RA → CE → UD",
+        "Instrumentos de evaluación", "Planes e inclusión",
+        "Resumen docente", "Programación de aula"
     ]
-    opciones_modulo = [
-        "Módulo didáctico", "Matriz curricular", 
-        "Instrumentos de evaluación", "Planes e inclusión", 
-        "Matrícula alumnado", "Resumen docente", 
-        "Programación de aula", "Seguimiento diario", 
-        "Calificación académica", "Calificación FEOE", "Evaluación continua"
+    opciones_curso = [
+        "Seguimiento diario", "Matrícula alumnado", "Calificación académica",
+        "Calificación FEOE", "Evaluación continua"
     ]
-    
-    opciones_totales = opciones_globales + opciones_modulo
-    
-    # Redirigir si el menú activo era uno de los eliminados o le cambiamos el nombre
+    opciones_totales = opciones_globales + opciones_pd + opciones_curso
+
+    # Redirecciones de nombres obsoletos
     if st.session_state.menu == "Perfil y Contexto": st.session_state.menu = "Resumen docente"
     if st.session_state.menu == "Calendario lectivo": st.session_state.menu = "Calendario Escolar"
     if st.session_state.menu == "Evaluación FEOE": st.session_state.menu = "Calificación FEOE"
     if st.session_state.menu == "Calificación numérica": st.session_state.menu = "Calificación académica"
     if st.session_state.menu == "Progreso porcentual": st.session_state.menu = "Evaluación continua"
-        
     if st.session_state.menu not in opciones_totales:
         st.session_state.menu = "Módulo didáctico"
-        
+    st.markdown("<br>", unsafe_allow_html=True)
     with st.expander("🌍 Configuración global", expanded=False):
+        _lock_label_glb = "🔒 Solo lectura" if st.session_state.lock_global else "🔓 Edición activa"
+        if st.button(_lock_label_glb, use_container_width=True, key="btn_lock_glb",
+                     type="primary" if st.session_state.lock_global else "secondary"):
+            st.session_state.lock_global = not st.session_state.lock_global
+            st.rerun()
+        st.markdown("<hr style='margin:4px 0 8px 0;border:none;border-top:1px solid #444'>", unsafe_allow_html=True)
         for opcion in opciones_globales:
-            if st.button(
-                opcion, 
-                use_container_width=True, 
-                type="primary" if st.session_state.menu == opcion else "secondary",
-                key=f"btn_glb_{opcion}"
-            ):
+            if st.button(opcion, use_container_width=True,
+                         type="primary" if st.session_state.menu == opcion else "secondary",
+                         key=f"btn_glb_{opcion}"):
                 st.session_state.menu = opcion
                 st.rerun()
-                
-    with st.expander("🗂️ Programación didáctica", expanded=True):
-        for opcion in opciones_modulo:
-            if opcion in ["Programación de aula", "Calificación académica", "Evaluación continua"]:
-                st.markdown("<hr style='margin: 5px 0 15px 0; border: none; border-top: 1px solid #444;'>", unsafe_allow_html=True)
-                
-            if st.button(
-                opcion, 
-                use_container_width=True, 
-                type="primary" if st.session_state.menu == opcion else "secondary",
-                key=f"btn_mod_{opcion}"
-            ):
+
+    with st.expander("🗂️ Programación didáctica", expanded=(st.session_state.menu in opciones_pd)):
+        _lock_label_pd = "🔒 Solo lectura" if st.session_state.lock_pd else "🔓 Edición activa"
+        if st.button(_lock_label_pd, use_container_width=True, key="btn_lock_pd",
+                     type="primary" if st.session_state.lock_pd else "secondary"):
+            st.session_state.lock_pd = not st.session_state.lock_pd
+            st.rerun()
+        st.markdown("<hr style='margin:4px 0 8px 0;border:none;border-top:1px solid #444'>", unsafe_allow_html=True)
+        for opcion in opciones_pd:
+            if st.button(opcion, use_container_width=True,
+                         type="primary" if st.session_state.menu == opcion else "secondary",
+                         key=f"btn_pd_{opcion}"):
+                st.session_state.menu = opcion
+                st.rerun()
+
+    with st.expander("📅 Curso actual", expanded=(st.session_state.menu in opciones_curso)):
+        _lock_label_cur = "🔒 Solo lectura" if st.session_state.lock_curso else "🔓 Edición activa"
+        if st.button(_lock_label_cur, use_container_width=True, key="btn_lock_cur",
+                     type="primary" if st.session_state.lock_curso else "secondary"):
+            st.session_state.lock_curso = not st.session_state.lock_curso
+            st.rerun()
+        st.markdown("<hr style='margin:4px 0 8px 0;border:none;border-top:1px solid #444'>", unsafe_allow_html=True)
+        for opcion in opciones_curso:
+            if st.button(opcion, use_container_width=True,
+                         type="primary" if st.session_state.menu == opcion else "secondary",
+                         key=f"btn_cur_{opcion}"):
                 st.session_state.menu = opcion
                 st.rerun()
     
     # Variable de control para el resto de la app
     menu = st.session_state.menu
+    ro_pd = st.session_state.lock_pd
+    ro_curso = st.session_state.lock_curso
+    ro_global = st.session_state.lock_global
     
     # --- AUTOMATIZACIÓN (v5.0) ---
     # Recalcular reparto de horas automáticamente en cada interacción
@@ -784,11 +931,175 @@ with st.sidebar:
             use_container_width=True
         )
     st.markdown("<br><hr>", unsafe_allow_html=True)
+
+    # --- MEJORA #7: Validador de coherencia ---
+    _val_avisos = []
+    _h_ud = int(st.session_state.df_ud["horas_ud"].sum()) if (
+        "df_ud" in st.session_state and not st.session_state.df_ud.empty
+        and "horas_ud" in st.session_state.df_ud.columns
+    ) else 0
+    _dias_semana = ["Lun", "Mar", "Mié", "Jue", "Vie"]
+    _h_reales = 0
+    for _tri in ["1t", "2t", "3t"]:
+        _ini_tri = st.session_state.info_fechas.get(f"ini_{_tri}")
+        _fin_tri = st.session_state.info_fechas.get(f"fin_{_tri}")
+        if not _ini_tri or not _fin_tri:
+            continue
+        _cur = _ini_tri
+        while _cur <= _fin_tri:
+            if _cur.weekday() < 5:
+                _f_str = _cur.strftime("%d/%m/%Y")
+                if not st.session_state.calendar_notes.get(f"f_{_f_str}"):
+                    _h_reales += st.session_state.horario.get(_dias_semana[_cur.weekday()], 0)
+            _cur += timedelta(days=1)
+    if _h_ud > 0 and _h_reales > 0 and _h_ud != _h_reales:
+        _diff_h = _h_reales - _h_ud
+        _icono = "🟡" if abs(_diff_h) <= 5 else "🔴"
+        _txt = "sobran" if _diff_h > 0 else "faltan"
+        _val_avisos.append(f"{_icono} Horas: UDs={_h_ud}h vs lectivas={_h_reales}h ({_txt} {abs(_diff_h)}h)")
+    _trimestres = [("1t","1T"), ("2t","2T"), ("3t","3T")]
+    _fechas_ok = True
+    for _key, _label in _trimestres:
+        _ini = st.session_state.info_fechas.get(f"ini_{_key}")
+        _fin = st.session_state.info_fechas.get(f"fin_{_key}")
+        if not _ini or not _fin:
+            _val_avisos.append(f"🔴 {_label}: fechas vacías"); _fechas_ok = False
+        elif _fin < _ini:
+            _val_avisos.append(f"🔴 {_label}: fin anterior al inicio"); _fechas_ok = False
+    if _fechas_ok:
+        for (_k1, _l1), (_k2, _l2) in [(("1t","1T"),("2t","2T")), (("2t","2T"),("3t","3T"))]:
+            _fin1 = st.session_state.info_fechas.get(f"fin_{_k1}")
+            _ini2 = st.session_state.info_fechas.get(f"ini_{_k2}")
+            if _fin1 and _ini2 and _ini2 <= _fin1:
+                _val_avisos.append(f"🟡 {_l1} y {_l2} se solapan")
+    if _val_avisos:
+        _val_icon = "🔴" if any(a.startswith("🔴") for a in _val_avisos) else "🟡"
+        with st.expander(f"{_val_icon} Validador · {len(_val_avisos)} aviso(s)"):
+            for _av in _val_avisos:
+                st.markdown(f"<small>{_av}</small>", unsafe_allow_html=True)
+    else:
+        st.markdown('<div style="font-size:0.75rem;color:#6ee06e;margin-bottom:4px;">🟢 Programación coherente</div>',
+                    unsafe_allow_html=True)
+
+    # 5.2 Gestión de Archivos
+    with st.expander("📚 Gestión de módulos"):
+        _pd_files = sorted([f for f in os.listdir(".") if f.endswith("-pd.json")])
+        _cur_files = sorted([f for f in os.listdir(".") if f.endswith(".json")
+                             and not f.endswith("-pd.json") and f != "ciclos-fp.json"])
+        st.markdown("**🗒️ Programación Didáctica**")
+        _pd_disp = _pd_files or [f for f in os.listdir(".") if f.endswith(".json") and f != "ciclos-fp.json"]
+        _pd_def = next((i for i, f in enumerate(_pd_disp) if st.session_state.get("active_pd", "") + ".json" == f), 0)
+        sel_pd = st.selectbox("PD archivo", _pd_disp, index=min(_pd_def, max(0, len(_pd_disp)-1)),
+                              label_visibility="collapsed", key="load_sel_pd") if _pd_disp else None
+        if sel_pd and st.button("📂 Cargar PD", use_container_width=True):
+            st.session_state.confirm_load_pd = sel_pd
+        if st.session_state.get("confirm_load_pd"):
+            st.warning(f"⚠️ Cargar `{st.session_state.confirm_load_pd}` (se perderán cambios PD). ¿Seguro?")
+            cp1, cp2 = st.columns(2)
+            if cp1.button("✅ Sí", type="primary", use_container_width=True, key="conf_load_pd_btn"):
+                _f = st.session_state.confirm_load_pd
+                if _f.endswith("-pd.json"):
+                    cargar_pd(_f); st.session_state.active_pd = _f.replace(".json", "")
+                else:
+                    cargar_datos(_f); st.session_state.active_pd = _f.replace(".json", "") + "-pd"
+                st.session_state.active_module = st.session_state.active_pd.replace("-pd", "")
+                st.session_state.confirm_load_pd = None; st.rerun()
+            if cp2.button("❌ No", use_container_width=True, key="canc_load_pd"):
+                st.session_state.confirm_load_pd = None; st.rerun()
+        _n_pd = st.text_input("Nombre PD", value=st.session_state.get("active_pd", "0237-ictve-pd"),
+                              label_visibility="collapsed", key="save_name_pd")
+        if st.button("💾 Guardar PD", use_container_width=True):
+            _n_pd_clean = _n_pd.replace(".json", "")
+            while _n_pd_clean.endswith("-pd"): _n_pd_clean = _n_pd_clean[:-3]
+            guardar_pd(_n_pd_clean)
+            st.session_state.active_pd = _n_pd_clean + "-pd"
+            st.session_state.active_module = _n_pd_clean
+            st.success(f"✅ PD guardada: {_n_pd_clean}-pd.json")
+        st.markdown('<hr style="border:none;border-top:1px solid #444;margin:10px 0">', unsafe_allow_html=True)
+        st.markdown("**📅 Curso actual**")
+        _cur_def = next((i for i, f in enumerate(_cur_files) if st.session_state.get("active_curso", "") + ".json" == f), 0)
+        sel_cur = st.selectbox("Curso archivo", _cur_files, index=min(_cur_def, max(0, len(_cur_files)-1)),
+                               label_visibility="collapsed", key="load_sel_cur") if _cur_files else None
+        if sel_cur and st.button("📂 Cargar Curso", use_container_width=True):
+            st.session_state.confirm_load_cur = sel_cur
+        if st.session_state.get("confirm_load_cur"):
+            st.warning(f"⚠️ Cargar `{st.session_state.confirm_load_cur}`. ¿Seguro?")
+            cc1, cc2 = st.columns(2)
+            if cc1.button("✅ Sí", type="primary", use_container_width=True, key="conf_load_cur_btn"):
+                _fc = st.session_state.confirm_load_cur
+                cargar_curso(_fc); st.session_state.active_curso = _fc.replace(".json", "")
+                st.session_state.confirm_load_cur = None; st.rerun()
+            if cc2.button("❌ No", use_container_width=True, key="canc_load_cur"):
+                st.session_state.confirm_load_cur = None; st.rerun()
+        _n_cur = st.text_input("Nombre Curso", value=st.session_state.get("active_curso", "0237-ictve-curso-2025-26"),
+                               label_visibility="collapsed", key="save_name_cur")
+        if st.button("💾 Guardar Curso", use_container_width=True):
+            guardar_curso(_n_cur); st.session_state.active_curso = _n_cur
+            st.success(f"✅ Curso guardado: {_n_cur}.json")
+
     st.markdown('<p class="user-subtitle">(c) Rafael Sanz Prades</p>', unsafe_allow_html=True)
+
     
 # ==========================================
 # Cabecera de página estilizada
 st.markdown(f'<div class="pestaña-header"><h2>{menu}</h2></div>', unsafe_allow_html=True)
+
+# --- MEJORA #9: Banner + CSS overlay de solo lectura ---
+_es_seccion_global = menu in ["Contextualización", "Calendario académico"]
+_es_seccion_pd = menu in ["Módulo didáctico", "Matrices RA → CE → UD",
+                           "Instrumentos de evaluación", "Planes e inclusión",
+                           "Resumen docente", "Programación de aula"]
+_es_seccion_curso = menu in ["Seguimiento diario", "Matrícula alumnado",
+                              "Calificación académica", "Calificación FEOE", "Evaluación continua"]
+
+if ro_global and _es_seccion_global:
+    st.markdown(
+        """<div style="background:#2e004f;border-left:4px solid #cc88ff;border-radius:6px;
+        padding:8px 14px;margin-bottom:16px;font-size:0.9rem;color:#ddb8ff;">
+        🔒 <strong>Configuración global en modo solo lectura.</strong>
+        Activa "🔓 Edición activa" en el menú lateral para editar.</div>""",
+        unsafe_allow_html=True
+    )
+    st.markdown("""<style>
+    section[data-testid="stMain"] input, section[data-testid="stMain"] textarea,
+    section[data-testid="stMain"] select,
+    section[data-testid="stMain"] [data-testid="stDataFrameResizable"],
+    section[data-testid="stMain"] [data-baseweb="select"] {
+        pointer-events: none !important; opacity: 0.65 !important;
+    }</style>""", unsafe_allow_html=True)
+
+if ro_pd and _es_seccion_pd:
+    st.markdown(
+        """<div style="background:#7c4a00;border-left:4px solid #ffaa00;border-radius:6px;
+        padding:8px 14px;margin-bottom:16px;font-size:0.9rem;color:#ffe0a0;">
+        🔒 <strong>Programación Didáctica en modo solo lectura.</strong>
+        Activa "🔓 Edición activa" en el menú lateral para editar.</div>""",
+        unsafe_allow_html=True
+    )
+    st.markdown("""<style>
+    section[data-testid="stMain"] input, section[data-testid="stMain"] textarea,
+    section[data-testid="stMain"] select,
+    section[data-testid="stMain"] [data-testid="stDataFrameResizable"],
+    section[data-testid="stMain"] [data-baseweb="select"] {
+        pointer-events: none !important; opacity: 0.65 !important;
+    }</style>""", unsafe_allow_html=True)
+
+if ro_curso and _es_seccion_curso:
+    st.markdown(
+        """<div style="background:#00407c;border-left:4px solid #00aaff;border-radius:6px;
+        padding:8px 14px;margin-bottom:16px;font-size:0.9rem;color:#a0d8ff;">
+        🔒 <strong>Curso en modo solo lectura.</strong>
+        Activa "🔓 Edición activa" en el menú lateral para editar.</div>""",
+        unsafe_allow_html=True
+    )
+    st.markdown("""<style>
+    section[data-testid="stMain"] input, section[data-testid="stMain"] textarea,
+    section[data-testid="stMain"] select,
+    section[data-testid="stMain"] [data-testid="stDataFrameResizable"],
+    section[data-testid="stMain"] [data-baseweb="select"] {
+        pointer-events: none !important; opacity: 0.65 !important;
+    }</style>""", unsafe_allow_html=True)
+# --- FIN MEJORA #9 ---
 
 # ============================================================
 # Helper: badge compacto para validadores (verde/amarillo/rojo)
@@ -839,20 +1150,20 @@ if menu == "Módulo didáctico":
     with c3_1:
         st.text_input("Nº de trimestres", value="3", disabled=True)
     with c3_2:
-        st.session_state.info_modulo["h_sem"] = st.number_input("H. Sem.", 0, 40, st.session_state.info_modulo.get("h_sem", 5))
+        st.session_state.info_modulo["h_sem"] = st.number_input("Horas/semana clase", 0, 40, st.session_state.info_modulo.get("h_sem", 5))
     with c3_3:
-        st.session_state.info_modulo["h_boa"] = st.number_input("H. BOA", 0, 500, st.session_state.info_modulo.get("h_boa", 149))
+        st.session_state.info_modulo["h_boa"] = st.number_input("Horas BOA", 0, 500, st.session_state.info_modulo.get("h_boa", 149))
     with c3_4:
-        st.session_state.info_modulo["p_ev"] = st.number_input("% P.Ev", 0, 100, st.session_state.info_modulo.get("p_ev", 15))
+        st.session_state.info_modulo["p_ev"] = st.number_input("% P.Ev.Continua", 0, 100, st.session_state.info_modulo.get("p_ev", 15))
     with c3_5:
-        st.session_state.info_modulo["h_feoe"] = st.number_input("H. FEOE", 0, 500, st.session_state.info_modulo.get("h_feoe", 400))
+        st.session_state.info_modulo["h_feoe"] = st.number_input("Horas FEOE", 0, 500, st.session_state.info_modulo.get("h_feoe", 400))
 
 
     if "criterio_conocimiento" not in st.session_state.info_modulo:
         st.session_state.info_modulo.update({
-            "criterio_conocimiento": 30, # Examen Teórico
+            "criterio_conocimiento": 30, # Examenes teóricos
             "criterio_procedimiento_ejercicios": 20, # Informes de ejercicios
-            "criterio_procedimiento_practicas": 20, # Examen Práctico
+            "criterio_procedimiento_practicas": 20, # Examenes prácticos
             "criterio_tareas": 30, # Cuaderno de tareas
         })
 
@@ -883,9 +1194,9 @@ if menu == "Módulo didáctico":
 
     col_a, col_b, col_c, col_d = st.columns(4)
     with col_a:
-        st.session_state.info_modulo["criterio_conocimiento"] = st.number_input("Examen teórico", 0, 100, st.session_state.info_modulo["criterio_conocimiento"], key="crit_conocimiento")
+        st.session_state.info_modulo["criterio_conocimiento"] = st.number_input("Exámenes teóricos", 0, 100, st.session_state.info_modulo["criterio_conocimiento"], key="crit_conocimiento")
     with col_b:
-        st.session_state.info_modulo["criterio_procedimiento_practicas"] = st.number_input("Examen práctico", 0, 100, st.session_state.info_modulo["criterio_procedimiento_practicas"], key="crit_procedimiento_practicas")
+        st.session_state.info_modulo["criterio_procedimiento_practicas"] = st.number_input("Exámenes prácticos", 0, 100, st.session_state.info_modulo["criterio_procedimiento_practicas"], key="crit_procedimiento_practicas")
     with col_c:
         st.session_state.info_modulo["criterio_procedimiento_ejercicios"] = st.number_input("Informes de ejercicios", 0, 100, st.session_state.info_modulo["criterio_procedimiento_ejercicios"], key="crit_procedimiento_ejercicios")
     with col_d:
@@ -906,10 +1217,10 @@ if menu == "Módulo didáctico":
         st.session_state.config_aula["Atención a la diversidad"] = new_div
 
 # --- PESTAÑA: Planificación ---
-elif menu == "Matriz curricular":
+elif menu == "Matrices RA → CE → UD":
     c_ra1, c_ra2 = st.columns([3, 1])
     with c_ra1:
-        st.markdown("### 🎓 RA. Resultados de aprendizaje")
+        st.markdown("### 🎓 RA. Resultados de Aprendizaje")
     with c_ra2:
         badge_ra = st.empty()
 
@@ -917,7 +1228,7 @@ elif menu == "Matriz curricular":
         "id_ra": st.column_config.TextColumn("ID-RA", width="small", disabled=True),
         "peso_ra": st.column_config.NumberColumn("% RA", width="small", min_value=0.0, max_value=100.0, step=1, format="%d %%"),
         "is_dual": st.column_config.CheckboxColumn("FEOE", default=False, width="small"),
-        "Descripción": st.column_config.TextColumn("Resultados de Aprendizaje"),
+        "desc_ra": st.column_config.TextColumn("Resultados de aprendizaje"),
     }, num_rows="dynamic", hide_index=True, width="stretch", key="tabla_ra")
     
     # Manejo de nuevos RA
@@ -931,7 +1242,42 @@ elif menu == "Matriz curricular":
     badge_ra.markdown(badge(suma_ra - 100, suma_ra, "%"), unsafe_allow_html=True)
 
     st.divider()
-    st.subheader("📚 UD. Unidades didácticas")
+    
+    from datetime import date, timedelta
+    ini_1 = st.session_state.info_fechas.get("ini_1t", date(2025, 9, 15))
+    fin_1 = st.session_state.info_fechas.get("fin_1t", date(2025, 12, 20))
+    ini_2 = st.session_state.info_fechas.get("ini_2t", date(2026, 1, 8))
+    fin_2 = st.session_state.info_fechas.get("fin_2t", date(2026, 3, 20))
+    ini_3 = st.session_state.info_fechas.get("ini_3t", date(2026, 4, 1))
+    fin_3 = st.session_state.info_fechas.get("fin_3t", date(2026, 6, 20))
+    h1_ud = calcular_horas_reales(ini_1, fin_1, st.session_state.horario, st.session_state.calendar_notes)
+    h2_ud = calcular_horas_reales(ini_2, fin_2, st.session_state.horario, st.session_state.calendar_notes)
+    h3_ud = calcular_horas_reales(ini_3, fin_3, st.session_state.horario, st.session_state.calendar_notes)
+    horas_reales = h1_ud + h2_ud + h3_ud
+    
+    ini_fo = st.session_state.info_fechas.get("ini_feoe", date(2026, 3, 20))
+    fin_fo = st.session_state.info_fechas.get("fin_feoe", date(2026, 6, 20))
+    dias_feoe_lv = sum(1 for i in range((fin_fo - ini_fo).days + 1) if (ini_fo + timedelta(days=i)).weekday() < 5)
+    h_real_feoe = dias_feoe_lv * 8
+    
+    st.markdown("##### Resumen de horas")
+    cf_a, cf_b, cf_c = st.columns(3)
+    with cf_a:
+        with st.container(border=True):
+            st.metric("H. BOA", f"{st.session_state.info_modulo.get('h_boa', 0)} h")
+    with cf_b:
+        with st.container(border=True):
+            st.metric("H. Clases real", f"{horas_reales} h")
+    with cf_c:
+        with st.container(border=True):
+            st.metric("H. FEOE real", f"{h_real_feoe} h")
+
+    st.divider()
+    c_ud1, c_ud2 = st.columns([3, 1])
+    with c_ud1:
+        st.subheader("📚 UD. Unidades Didácticas")
+    with c_ud2:
+        badge_ud = st.empty()
     lista_ra_ids = st.session_state.df_ra["id_ra"].tolist()
     
     # Sincronizar columnas de UD con RA actuales
@@ -996,6 +1342,9 @@ elif menu == "Matriz curricular":
         
     st.session_state.df_ud = ed_ud
     
+    suma_ud = float(st.session_state.df_ud["horas_ud"].sum()) if not st.session_state.df_ud.empty else 0.0
+    badge_ud.markdown(badge(suma_ud - horas_reales, suma_ud, " h"), unsafe_allow_html=True)
+    
     # ---- VALIDACIÓN DE PORCENTAJES DE LA MATRIZ UD-RA ----
     if not ed_ud.empty:
         for ra in lista_ra_ids:
@@ -1015,26 +1364,68 @@ elif menu == "Matriz curricular":
     st.divider()
 
     st.subheader("🧩 CE. Criterios de Evaluación")
-    st.markdown("**Relación jerárquica: RA -> CE -> UD**")
-    st.caption("Añade Criterios de Evaluación, establece su peso en el RA y asígnalos a una Unidad Didáctica. También puedes vincular OG y CPE.")
+    
+    with st.expander("➕ Añadir nuevo Criterio de evaluación", expanded=False):
+        st.markdown("*💡 Utiliza este formulario si prefieres una introducción de datos más visual para añadir Criterios en lugar de escribir directamente en la tabla inferior.*")
+        with st.form("form_nuevo_ce"):
+            col_f1, col_f2 = st.columns(2)
+            with col_f1:
+                f_ra = st.selectbox("RA Asociado", options=st.session_state.df_ra["id_ra"].tolist() if not st.session_state.df_ra.empty else [""])
+                f_id_ce = st.text_input("ID-CE (Ej: CE1.a)")
+                f_peso = st.number_input("Peso %", min_value=0, max_value=100, step=1, value=0)
+            with col_f2:
+                opts_ud = st.session_state.df_ud["id_ud"].tolist() + ["Sin asignar"] if not st.session_state.df_ud.empty else ["Sin asignar"]
+                f_ud = st.selectbox("Asignar a UD", options=opts_ud)
+                f_og = st.text_input("OG")
+                f_cpe = st.text_input("CPE")
+                
+            f_desc = st.text_area("Descripción CE", height=100)
+            
+            submit_ce = st.form_submit_button("Añadir Criterio", type="primary")
+            if submit_ce:
+                if f_id_ce.strip() == "":
+                    st.error("El ID-CE es obligatorio.")
+                else:
+                    nuevo_ce = {
+                        "id_ra": f_ra,
+                        "og_vinc": f_og,
+                        "cpe_vinc": f_cpe,
+                        "id_ce": f_id_ce,
+                        "desc_ce": f_desc,
+                        "peso_ce": f_peso,
+                        "id_ud": f_ud
+                    }
+                    st.session_state.df_ce = pd.concat([st.session_state.df_ce, pd.DataFrame([nuevo_ce])], ignore_index=True)
+                    st.rerun()
+
 
     columnas_config_ce = {
         "id_ra": st.column_config.SelectboxColumn("RA", options=st.session_state.df_ra["id_ra"].tolist()),
-        "og_vinc": st.column_config.TextColumn("OG Vinculados"),
-        "cpe_vinc": st.column_config.TextColumn("CPE Vinculadas (Ej. CPE1, CPE2)"),
-        "id_ce": st.column_config.TextColumn("ID CE (Ej. CE1.a)"),
-        "desc_ce": st.column_config.TextColumn("Descripción detallada del CE"),
+        "og_vinc": st.column_config.TextColumn("OG"),
+        "cpe_vinc": st.column_config.TextColumn("CPE"),
+        "id_ce": st.column_config.TextColumn("ID-CE"),
+        "desc_ce": st.column_config.TextColumn("Criterios de evaluación"),
         "peso_ce": st.column_config.NumberColumn(
-            "Peso %", min_value=0, max_value=100, step=1
+            "% CE", min_value=0, max_value=100, step=1
         ),
-        "Unidad Didáctica (UD)": st.column_config.SelectboxColumn(
-            "Asignar a UD",
+        "id_ud": st.column_config.SelectboxColumn(
+            "UD",
             options=st.session_state.df_ud["id_ud"].tolist() + ["Sin asignar"]
         )
     }
 
+    columnas_ordenadas = ["id_ce", "peso_ce", "id_ra", "id_ud", "desc_ce", "cpe_vinc", "og_vinc"]
+    
+    # Asegurar que existan y purgar el resto
+    for c in columnas_ordenadas:
+        if c not in st.session_state.df_ce.columns:
+            st.session_state.df_ce[c] = 0.0 if c == "peso_ce" else ""
+            
+    st.session_state.df_ce = st.session_state.df_ce[columnas_ordenadas]
+    
     ed_ce = st.data_editor(
         st.session_state.df_ce,
+        column_order=columnas_ordenadas,
         column_config=columnas_config_ce,
         num_rows="dynamic",
         hide_index=True,
@@ -1060,18 +1451,18 @@ elif menu == "Matriz curricular":
 
 # --- PESTAÑA: FECHAS ---
 elif menu == "Calendario académico":
-    st.subheader("📚 Fechas curso académico")
+    st.subheader("📚 Fechas de inicio y fin; de curso y de clases")
     c_fc1, c_fc2, c_fc3, c_fc4 = st.columns(4)
     with c_fc1:
-        st.session_state.info_fechas["ini_curso"] = st.date_input("Inicio curso", st.session_state.info_fechas.get("ini_curso", date(2025, 9, 1)), format="DD/MM/YYYY", key="d_ini_curso_v")
+        st.session_state.info_fechas["ini_curso"] = st.date_input("Inicio de curso", st.session_state.info_fechas.get("ini_curso", date(2025, 9, 1)), format="DD/MM/YYYY", key="d_ini_curso_v")
     with c_fc2:
-        ini_cls = st.date_input("Inicio clases (1T)", st.session_state.info_fechas.get("ini_1t", date(2025, 9, 15)), format="DD/MM/YYYY", key="d_ini_clases_v")
+        ini_cls = st.date_input("Inicio clases. 1er Tri.", st.session_state.info_fechas.get("ini_1t", date(2025, 9, 15)), format="DD/MM/YYYY", key="d_ini_clases_v")
         st.session_state.info_fechas["ini_1t"] = ini_cls
     with c_fc3:
-        fin_cls = st.date_input("Fin clases (3T)", st.session_state.info_fechas.get("fin_3t", date(2026, 6, 20)), format="DD/MM/YYYY", key="d_fin_clases_v")
+        fin_cls = st.date_input("Fin clases. 3er Tri.", st.session_state.info_fechas.get("fin_3t", date(2026, 6, 20)), format="DD/MM/YYYY", key="d_fin_clases_v")
         st.session_state.info_fechas["fin_3t"] = fin_cls
     with c_fc4:
-        st.session_state.info_fechas["fin_curso"] = st.date_input("Fin curso", st.session_state.info_fechas.get("fin_curso", date(2026, 6, 30)), format="DD/MM/YYYY", key="d_fin_curso_v")
+        st.session_state.info_fechas["fin_curso"] = st.date_input("Fin de curso", st.session_state.info_fechas.get("fin_curso", date(2026, 6, 30)), format="DD/MM/YYYY", key="d_fin_curso_v")
         
     st.divider()
 
@@ -1085,11 +1476,11 @@ elif menu == "Calendario académico":
     # Usamos exactamente 5 columnas para asegurar que aparezcan los botones + y -
     c_h1, c_h2, c_h3, c_h4, c_h5 = st.columns(5)
     
-    with c_h1: st.session_state.horario["Lun"] = st.number_input("Lun", 0, 8, st.session_state.horario["Lun"], key="h_in_Lun", step=1)
-    with c_h2: st.session_state.horario["Mar"] = st.number_input("Mar", 0, 8, st.session_state.horario["Mar"], key="h_in_Mar", step=1)
-    with c_h3: st.session_state.horario["Mié"] = st.number_input("Mié", 0, 8, st.session_state.horario["Mié"], key="h_in_Mié", step=1)
-    with c_h4: st.session_state.horario["Jue"] = st.number_input("Jue", 0, 8, st.session_state.horario["Jue"], key="h_in_Jue", step=1)
-    with c_h5: st.session_state.horario["Vie"] = st.number_input("Vie", 0, 8, st.session_state.horario["Vie"], key="h_in_Vie", step=1)
+    with c_h1: st.session_state.horario["Lun"] = st.number_input("Lunes", 0, 8, st.session_state.horario["Lun"], key="h_in_Lun", step=1)
+    with c_h2: st.session_state.horario["Mar"] = st.number_input("Martes", 0, 8, st.session_state.horario["Mar"], key="h_in_Mar", step=1)
+    with c_h3: st.session_state.horario["Mié"] = st.number_input("Miércoles", 0, 8, st.session_state.horario["Mié"], key="h_in_Mié", step=1)
+    with c_h4: st.session_state.horario["Jue"] = st.number_input("Jueves", 0, 8, st.session_state.horario["Jue"], key="h_in_Jue", step=1)
+    with c_h5: st.session_state.horario["Vie"] = st.number_input("Viernes", 0, 8, st.session_state.horario["Vie"], key="h_in_Vie", step=1)
     
     st.divider()
     h1_f = calcular_horas_reales(st.session_state.info_fechas["ini_1t"], st.session_state.info_fechas["fin_1t"], st.session_state.horario, st.session_state.calendar_notes)
@@ -1099,7 +1490,7 @@ elif menu == "Calendario académico":
     diff_boa_f = h_real_f - st.session_state.info_modulo.get('h_boa', 0)
     cf1, cf2 = st.columns([3, 1])
     with cf1:
-        st.subheader("🗓️ Fechas por Trimestres")
+        st.subheader("🗓️ Trimestres")
     with cf2:
         st.markdown(badge(diff_boa_f, h_real_f, " h"), unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
@@ -1107,50 +1498,50 @@ elif menu == "Calendario académico":
     with c1:
         st.markdown("<div style='text-align: center;'><strong>1er Trimestre</strong></div>", unsafe_allow_html=True)
         with st.container(border=True):
-            st.session_state.info_fechas["ini_1t"] = st.date_input("Inicio 1T", st.session_state.info_fechas["ini_1t"], key="d_ini_1t", format="DD/MM/YYYY")
-            st.session_state.info_fechas["fin_1t"] = st.date_input("Fin 1T", st.session_state.info_fechas["fin_1t"], key="d_fin_1t", format="DD/MM/YYYY")
+            st.session_state.info_fechas["ini_1t"] = st.date_input("Inicio 1er Tri.", st.session_state.info_fechas["ini_1t"], key="d_ini_1t", format="DD/MM/YYYY")
+            st.session_state.info_fechas["fin_1t"] = st.date_input("Fin 1er Tri.", st.session_state.info_fechas["fin_1t"], key="d_fin_1t", format="DD/MM/YYYY")
             h1 = calcular_horas_reales(st.session_state.info_fechas["ini_1t"], st.session_state.info_fechas["fin_1t"], st.session_state.horario, st.session_state.calendar_notes)
-            st.metric("Horas Reales 1T", f"{h1} h")
+            st.metric("Horas real 1er Tri.", f"{h1} h")
 
     with c2:
         st.markdown("<div style='text-align: center;'><strong>2º Trimestre</strong></div>", unsafe_allow_html=True)
         with st.container(border=True):
-            st.session_state.info_fechas["ini_2t"] = st.date_input("Inicio 2T", st.session_state.info_fechas["ini_2t"], key="d_ini_2t", format="DD/MM/YYYY")
-            st.session_state.info_fechas["fin_2t"] = st.date_input("Fin 2T", st.session_state.info_fechas["fin_2t"], key="d_fin_2t", format="DD/MM/YYYY")
+            st.session_state.info_fechas["ini_2t"] = st.date_input("Inicio 2º Tri.", st.session_state.info_fechas["ini_2t"], key="d_ini_2t", format="DD/MM/YYYY")
+            st.session_state.info_fechas["fin_2t"] = st.date_input("Fin 2º Tri.", st.session_state.info_fechas["fin_2t"], key="d_fin_2t", format="DD/MM/YYYY")
             h2 = calcular_horas_reales(st.session_state.info_fechas["ini_2t"], st.session_state.info_fechas["fin_2t"], st.session_state.horario, st.session_state.calendar_notes)
-            st.metric("Horas Reales 2T", f"{h2} h")
+            st.metric("Horas real 2º Tri.", f"{h2} h")
 
     with c3:
         st.markdown("<div style='text-align: center;'><strong>3er Trimestre</strong></div>", unsafe_allow_html=True)
         with st.container(border=True):
 
-            st.session_state.info_fechas["ini_3t"] = st.date_input("Inicio 3T", st.session_state.info_fechas["ini_3t"], key="d_ini_3t", format="DD/MM/YYYY")
-            st.session_state.info_fechas["fin_3t"] = st.date_input("Fin 3T", st.session_state.info_fechas["fin_3t"], key="d_fin_3t", format="DD/MM/YYYY")
+            st.session_state.info_fechas["ini_3t"] = st.date_input("Inicio 3er Tri.", st.session_state.info_fechas["ini_3t"], key="d_ini_3t", format="DD/MM/YYYY")
+            st.session_state.info_fechas["fin_3t"] = st.date_input("Fin 3er Tri.", st.session_state.info_fechas["fin_3t"], key="d_fin_3t", format="DD/MM/YYYY")
             h3 = calcular_horas_reales(st.session_state.info_fechas["ini_3t"], st.session_state.info_fechas["fin_3t"], st.session_state.horario, st.session_state.calendar_notes)
-            st.metric("Horas Reales 3T", f"{h3} h")
+            st.metric("Horas real 3er Tri.", f"{h3} h")
 
     # H.Real y H.PdEvC. debajo de las cajas de trimestres
     h_real_fechas = h1 + h2 + h3
     p_ev_val_f = st.session_state.info_modulo.get("p_ev", 15)
     h_p_ev_f = (p_ev_val_f / 100) * h_real_fechas
     
-    st.markdown("##### Resumen Fechas por Trimestres")
+    st.markdown("##### Relación horas BOA y clases reales; incluyendo límite P.Ev.Continua")
     cf_a, cf_b, cf_c = st.columns(3)
     with cf_a:
         with st.container(border=True):
-            st.metric("H. Reales totales", f"{h_real_fechas} h")
+            st.metric("Horas BOA", f"{st.session_state.info_modulo.get('h_boa', 0)} h")
     with cf_b:
         with st.container(border=True):
-            st.metric("H. P.Ev.C.", f"{h_p_ev_f:.1f} h".replace(".", ","))
+            st.metric("Horas clases real", f"{h_real_fechas} h")
     with cf_c:
         with st.container(border=True):
-            st.metric("H. BOA", f"{st.session_state.info_modulo.get('h_boa', 0)} h")
+            st.metric("Horas P.Ev.Continua", f"{int(round(h_p_ev_f))} h")
 
     # --- Caja FEOE ---
     st.divider()
     cfeoe1, cfeoe2 = st.columns([3, 1])
     with cfeoe1:
-        st.subheader("🏢 Fechas Formación en empresa (FEOE)")
+        st.subheader("🏢 Formación en empresa (FEOE)")
 
     with st.container():
         feo1, feo2, feo3 = st.columns(3)
@@ -1170,7 +1561,7 @@ elif menu == "Calendario académico":
             st.session_state.info_fechas["fin_feoe"] = fin_fo
         with feo3:
             h_sem_feoe_val = st.number_input(
-                "H.Sem FEOE", 0, 40,
+                "Horas/día en FEOE", 0, 40,
                 int(st.session_state.info_fechas.get("h_sem_feoe", 8)),
                 key="h_sem_feoe_f"
             )
@@ -1188,21 +1579,18 @@ elif menu == "Calendario académico":
         cf_feoe_a, cf_feoe_b = st.columns(2)
         with cf_feoe_a:
             with st.container(border=True):
-                st.metric("H. Reales FEOE", f"{h_real_feoe} h")
+                st.metric("Horas FEOE real", f"{h_real_feoe} h")
         with cf_feoe_b:
             with st.container(border=True):
-                st.metric("H. BOA FEOE", f"{h_feoe_boa} h")
+                st.metric("Horas BOA FEOE", f"{h_feoe_boa} h")
 
     # Verificador (se calcula con los valores frescos del container)
     diff_feoe = h_real_feoe - h_feoe_boa
     with cfeoe2:
         st.markdown(badge(diff_feoe, h_real_feoe, " h"), unsafe_allow_html=True)
 
-
-
-
     st.divider()
-    st.markdown('### 📌 Resumen Festivos y fechas relevantes')
+    st.markdown('### 📌 Resumen de días festivos y eventos relevantes')
 
     # 1. Recopilar datos
     ls = []
@@ -1250,15 +1638,15 @@ elif menu == "Calendario académico":
         c1, c2 = st.columns(2)
         with c1: 
             with st.container(border=True):
-                st.metric("Total Festivos", count_f)
+                st.metric("Total días festivos", count_f)
         with c2: 
             with st.container(border=True):
-                st.metric("Total Relevantes", count_r)
+                st.metric("Total eventos relevantes", count_r)
     else:
-        st.info('No hay anotaciones de festivos o eventos relevantes.')
+        st.info('No hay anotaciones de días festivos o eventos relevantes.')
 
     st.divider()
-    st.subheader("🗓️ Modificación de Festivos y Relevantes")
+    st.subheader("🗓️ Modificación de días festivos y eventos relevantes")
     meses_curso = [("Septiembre", 9, 2025), ("Octubre", 10, 2025), ("Noviembre", 11, 2025), ("Diciembre", 12, 2025), ("Enero", 1, 2026), ("Febrero", 2, 2026), ("Marzo", 3, 2026), ("Abril", 4, 2026), ("Mayo", 5, 2026), ("Junio", 6, 2026)]
     
     for n, m, a in meses_curso:
@@ -1289,29 +1677,68 @@ elif menu == "Calendario académico":
 # --- PESTAÑA: ALUMNADO ---
 elif menu == "Matrícula alumnado":
     st.subheader("👥 Listado de Alumnado")
-    
-    # Hemos vuelto a la versión con todas las columnas confirmadas
-    # Configuración de columnas con fijación lateral (v5.4)
+
+    df_al_work = st.session_state.df_al.copy()
+
+    # ── Orden de columnas ──────────────────────────────────────
+    _col_priority = ["ID", "Estado", "Apellidos", "Nombre", "Edad", "Nacimiento"]
+    _col_rest = [c for c in df_al_work.columns if c not in _col_priority]
+    _col_order = [c for c in _col_priority if c in df_al_work.columns] + _col_rest
+    df_al_work = df_al_work[_col_order]
+
+    # ── Detectar menores de 18 (columna Edad numérica) ─────────
+    _tiene_edad = "Edad" in df_al_work.columns
+    if _tiene_edad:
+        df_al_work["Edad"] = pd.to_numeric(df_al_work["Edad"], errors="coerce")
+        _menores_idx = df_al_work.index[df_al_work["Edad"].fillna(99) < 18].tolist()
+    else:
+        _menores_idx = []
+
+    # ── Vista estilizada (solo lectura) con fondo rosa ─────────
+    if _tiene_edad and _menores_idx:
+        st.caption(f"🌸 {len(_menores_idx)} alumno(s) menor(es) de 18 años aparecen con fondo rosa")
+
+    def _style_menores(row):
+        if row.name in _menores_idx:
+            return ["background-color: #ffccd5; color: #7a0020"] * len(row)
+        return [""] * len(row)
+
+    _styled = df_al_work.style.apply(_style_menores, axis=1)
+    st.dataframe(_styled, hide_index=True, use_container_width=True)
+
+    st.markdown("---")
+    st.caption("✏️ Editor — los cambios se guardan automáticamente al modificar")
+
+    # ── Editor de datos ────────────────────────────────────────
     config_al = {
-        "id_act": st.column_config.TextColumn("ID", width="small", disabled=True, pinned=True),
-        "Estado": st.column_config.SelectboxColumn("Estado", options=["Alta", "Baja"], default="Alta", pinned=True),
-        "Apellidos": st.column_config.TextColumn(pinned=True),
-        "Nombre": st.column_config.TextColumn(pinned=True)
+        "ID": st.column_config.TextColumn("ID-AL", width="small", disabled=True, pinned=True),
+        "Estado": st.column_config.SelectboxColumn("Estado", options=["Alta", "Baja"], default="Alta"),
+        "Apellidos": st.column_config.TextColumn("Apellidos"),
+        "Nombre": st.column_config.TextColumn("Nombre"),
+        "Edad": st.column_config.NumberColumn("Edad", min_value=0, max_value=99, step=1),
+        "Nacimiento": st.column_config.TextColumn("Fecha nacimiento"),
+        "Repite": st.column_config.CheckboxColumn("Repite"),
+        "Matrícula": st.column_config.TextColumn("Matrícula"),
+        "Comentarios": st.column_config.TextColumn("Comentarios"),
+        "email": st.column_config.TextColumn("email"),
+        "Móvil": st.column_config.TextColumn("Móvil"),
     }
-    
+
     ed_al = st.data_editor(
-        st.session_state.df_al, 
-        column_config=config_al, 
-        num_rows="dynamic", 
-        hide_index=True, 
-        width="stretch", 
-        key="tabla_alumnado"
+        df_al_work,
+        column_config=config_al,
+        num_rows="dynamic",
+        hide_index=True,
+        use_container_width=True,
+        key="tabla_alumnado",
+        disabled=ro_curso
     )
-    
-    # Autoguardado, ordenación automática y generación de IDs
-    if not ed_al.equals(st.session_state.df_al):
+
+    if not ed_al.equals(df_al_work):
+        # Devolver al orden interno original antes de procesar
         st.session_state.df_al = procesar_lista_alumnado(ed_al)
         st.rerun()
+
 
 # --- PESTAÑA: SEGUIMIENTO ---
 elif menu == "Seguimiento diario":
@@ -1434,7 +1861,7 @@ elif menu == "Seguimiento diario":
     
     st.write("")
     st.write("---")
-    st.subheader("🗓️ Seguimiento diario de clases (contingencias)")
+    st.subheader("🗓️ Seguimiento diario de clases. Contingencias")
     
     # 1. Obtener todos los días lectivos (con horas > 0 y no festivos)
     dias_semana = ["Lun", "Mar", "Mié", "Jue", "Vie"]
@@ -1526,25 +1953,57 @@ elif menu == "Seguimiento diario":
 
 # --- PESTAÑA: INSTRUMENTOS ---
 elif menu == "Instrumentos de evaluación":
-    st.subheader("🛠️ Instrumentos y Actividades de Evaluación")
+    st.subheader("🛠️ Instrumentos y/o Actividades de evaluación")
     st.markdown("Define las tareas, exámenes y registros de observación, y vincula qué Criterios de Evaluación califican.")
 
     if st.session_state.df_ce.empty:
-        st.warning("⚠️ Primero añade Criterios de Evaluación en la pestaña 'Matriz curricular'.")
+        st.warning("⚠️ Primero añade Criterios de evaluación en la pestaña 'Matrices RA → CE → UD'.")
     else:
         df_ce_clean = st.session_state.df_ce.dropna(subset=["id_ce"])
         df_ce_clean = df_ce_clean[df_ce_clean["id_ce"].str.strip() != ""]
         lista_ce_ids = df_ce_clean["id_ce"].tolist()
 
+        with st.expander("➕ Añadir nuevo Instrumento y/o Actividad", expanded=False):
+            st.markdown("*💡 Utiliza este formulario si prefieres una introducción de datos más visual para añadir Actividades en lugar de escribir directamente en la tabla inferior.*")
+            with st.form("form_nuevo_act"):
+                c_a1, c_a2, c_a3 = st.columns([1, 2, 3])
+                with c_a1:
+                    f_tri = st.selectbox("Trimestre", options=["1T", "2T", "3T"])
+                with c_a2:
+                    f_tipo = st.selectbox("Tipo", options=["Teoría", "Práctica", "Informes", "Tareas"])
+                with c_a3:
+                    f_id_act = st.text_input("ID-IA", value=f"ACT{(len(st.session_state.df_act)+1):02d}" if not st.session_state.df_act.empty else "ACT01")
+                    
+                f_desc_act = st.text_area("Instrumentos y/o Actividades", height=80)
+                
+                submit_act = st.form_submit_button("Añadir Instrumento y/o Actividad", type="primary")
+                if submit_act:
+                    if f_desc_act.strip() == "":
+                        st.error("La descripción es obligatoria.")
+                    else:
+                        nueva_act = {
+                            "id_act": f_id_act,
+                            "tri_act": f_tri,
+                            "Tipo": f_tipo,
+                            "desc_act": f_desc_act,
+                            "ce_vinc": "",
+                            "peso_act": 0.0,
+                            "crit_calif": "",
+                            "is_active": True
+                        }
+                        st.session_state.df_act = pd.concat([st.session_state.df_act, pd.DataFrame([nueva_act])], ignore_index=True)
+                        st.rerun()
+
         columnas_config_act = {
-            "id_act": st.column_config.TextColumn("ID", disabled=True, width="small"),
-            "tri_act": st.column_config.SelectboxColumn("Trimestre", options=["1T", "2T", "3T"], width="small"),
-            "Tipo": st.column_config.SelectboxColumn("Tipo", options=["Teoría", "Práctica", "Informes", "Tareas"], width="medium"),
-            "Actividad": st.column_config.TextColumn("Descripción Actividad", width="large"),
+            "id_act": st.column_config.TextColumn("ID-IA", disabled=True, width="small", pinned=True),
+            "tri_act": st.column_config.SelectboxColumn("Tri.", options=["1T", "2T", "3T"], width="small", pinned=True),
+            "Tipo": st.column_config.SelectboxColumn("Tipo", options=["Teoría", "Práctica", "Informes", "Tareas"], width="medium", pinned=True),
+            "desc_act": st.column_config.TextColumn("Instrumentos y/o Actividades", width="large", pinned=True),
         }
-        
-        cols_basicas = ["id_act", "tri_act", "Tipo", "desc_act", "ce_vinc", "peso_act", "crit_calif", "is_active"]
-        for col in cols_basicas:
+
+        # Columnas visibles: 4 fijas + checkboxes CE (sin auxiliares ce_vinc, peso_act, etc.)
+        cols_visibles = ["id_act", "tri_act", "Tipo", "desc_act"]
+        for col in cols_visibles:
             if col not in st.session_state.df_act.columns:
                 st.session_state.df_act[col] = ""
 
@@ -1553,22 +2012,20 @@ elif menu == "Instrumentos de evaluación":
                 st.session_state.df_act[ce] = False
             columnas_config_act[ce] = st.column_config.CheckboxColumn(ce, default=False, width="small")
 
-        cols_a_borrar = [c for c in st.session_state.df_act.columns if c not in lista_ce_ids and c not in cols_basicas]
-        if cols_a_borrar:
-            st.session_state.df_act = st.session_state.df_act.drop(columns=cols_a_borrar)
-        
-        st.session_state.df_act = st.session_state.df_act[cols_basicas + lista_ce_ids]
+        # Reestructurar df_act con SOLO columnas visibles (igual que hace UD con df_visual)
+        cols_finales = cols_visibles + lista_ce_ids
+        st.session_state.df_act = st.session_state.df_act.reindex(columns=cols_finales, fill_value=False)
 
         ed_act = st.data_editor(
             st.session_state.df_act,
             column_config=columnas_config_act,
             num_rows="dynamic",
             hide_index=True,
-            use_container_width=True,
+            width="stretch",
             key="tabla_act",
             height=max(400, (len(st.session_state.df_act) + 1) * 35 + 39)
         )
-        
+
         if len(ed_act) > len(st.session_state.df_act):
             new_id = generar_siguiente_id(st.session_state.df_act, "ACT")
             ed_act.iloc[-1, 0] = new_id
@@ -2177,22 +2634,6 @@ elif menu == "Planes e inclusión":
     st.subheader("🧩 Plan de Atención a la diversidad")
     st.markdown("Adaptación curricular no significativas o medidas aplicadas en el aula")
     
-    ed_dua = st.data_editor(
-        st.session_state.df_dua,
-        column_config={
-            "id_act": st.column_config.TextColumn("ID", disabled=True, width="small"),
-            "Alumnado_Aula": st.column_config.TextColumn("Alumnado o Aula", width="medium"),
-            "Barrera": st.column_config.TextColumn("Barrera Detectada", width="medium"),
-            "Medida_Metodologica": st.column_config.TextColumn("Medida Metodológica / Org.", width="large"),
-            "Medida_Acceso": st.column_config.TextColumn("Medida de Acceso", width="medium"),
-            "Medida_Evaluacion": st.column_config.TextColumn("Medida de Evaluación", width="medium"),
-        },
-        num_rows="dynamic", hide_index=True, use_container_width=True, key="tabla_dua"
-    )
-    if len(ed_dua) > len(st.session_state.df_dua):
-        ed_dua.iloc[-1, 0] = generar_siguiente_id(st.session_state.df_dua, "DUA")
-    st.session_state.df_dua = ed_dua
-
     with st.expander("➕ Añadir Nueva Atención a la diversidad", expanded=False):
         st.markdown("*💡 Utiliza este formulario si prefieres una introducción de datos más visual para el Plan de Atención a la diversidad.*")
         with st.form("registro_dua"):
@@ -2224,26 +2665,28 @@ elif menu == "Planes e inclusión":
                 st.success("Añadida correctamente.")
                 st.rerun()
 
+    ed_dua = st.data_editor(
+        st.session_state.df_dua,
+        column_config={
+            "id_act": st.column_config.TextColumn("ID", disabled=True, width="small"),
+            "Alumnado_Aula": st.column_config.TextColumn("Alumnado o Aula", width="medium"),
+            "Barrera": st.column_config.TextColumn("Barrera Detectada", width="medium"),
+            "Medida_Metodologica": st.column_config.TextColumn("Medida Metodológica / Org.", width="large"),
+            "Medida_Acceso": st.column_config.TextColumn("Medida de Acceso", width="medium"),
+            "Medida_Evaluacion": st.column_config.TextColumn("Medida de Evaluación", width="medium"),
+        },
+        num_rows="dynamic", hide_index=True, use_container_width=True, key="tabla_dua"
+    )
+    if len(ed_dua) > len(st.session_state.df_dua):
+        ed_dua.iloc[-1, 0] = generar_siguiente_id(st.session_state.df_dua, "DUA")
+    st.session_state.df_dua = ed_dua
+
+
     st.divider()
 
     st.subheader("🛡️ Plan de contingencia")
     st.markdown("Definición de actividades ante situaciones excepcionales de la clase")
     
-    ed_cont = st.data_editor(
-        st.session_state.df_contingencia,
-        column_config={
-            "id_act": st.column_config.TextColumn("ID", disabled=True, width="small"),
-            "Escenario": st.column_config.SelectboxColumn("Escenario", options=["Ausencia de Profesorado", "Ausencia de Alumnado", "Interrupción Generalizada", "Otros"], width="medium"),
-            "Organizacion": st.column_config.TextColumn("Organización y Acceso", width="large"),
-            "Actividades": st.column_config.TextColumn("Actividades Alternativas", width="large"),
-            "Seguimiento": st.column_config.TextColumn("Seguimiento y Ajustes", width="medium"),
-        },
-        num_rows="dynamic", hide_index=True, use_container_width=True, key="tabla_contingencia"
-    )
-    if len(ed_cont) > len(st.session_state.df_contingencia):
-        ed_cont.iloc[-1, 0] = generar_siguiente_id(st.session_state.df_contingencia, "PC")
-    st.session_state.df_contingencia = ed_cont
-
     with st.expander("➕ Añadir Nueva Medida de Contingencia", expanded=False):
         st.markdown("*💡 Utiliza este formulario si prefieres una introducción de datos más visual para el Plan de contingencia.*")
         with st.form("registro_contingencia"):
@@ -2259,29 +2702,27 @@ elif menu == "Planes e inclusión":
                 st.success("Añadida correctamente.")
                 st.rerun()
 
+    ed_cont = st.data_editor(
+        st.session_state.df_contingencia,
+        column_config={
+            "id_act": st.column_config.TextColumn("ID", disabled=True, width="small"),
+            "Escenario": st.column_config.SelectboxColumn("Escenario", options=["Ausencia de Profesorado", "Ausencia de Alumnado", "Interrupción Generalizada", "Otros"], width="medium"),
+            "Organizacion": st.column_config.TextColumn("Organización y Acceso", width="large"),
+            "Actividades": st.column_config.TextColumn("Actividades Alternativas", width="large"),
+            "Seguimiento": st.column_config.TextColumn("Seguimiento y Ajustes", width="medium"),
+        },
+        num_rows="dynamic", hide_index=True, use_container_width=True, key="tabla_contingencia"
+    )
+    if len(ed_cont) > len(st.session_state.df_contingencia):
+        ed_cont.iloc[-1, 0] = generar_siguiente_id(st.session_state.df_contingencia, "PC")
+    st.session_state.df_contingencia = ed_cont
+
     st.divider()
 
     st.subheader("🚌 Plan de Actividadesy Extraescolares")
     st.markdown("Programación de actividades complementarias y salidas extraescolares")
     
     lista_ra_ids = st.session_state.df_ra["id_ra"].tolist() if not st.session_state.df_ra.empty else []
-    
-    ed_ace = st.data_editor(
-        st.session_state.df_ace,
-        column_config={
-            "id_act": st.column_config.TextColumn("ID", disabled=True, width="small"),
-            "Tipo": st.column_config.SelectboxColumn("Tipo", options=["Complementaria", "Extraescolar"], width="medium"),
-            "RA_Vinculados": st.column_config.SelectboxColumn("RA Vinculados", options=lista_ra_ids, width="medium"),
-            "Actividad": st.column_config.TextColumn("Descripción de la Actividad", width="large"),
-            "tri_act": st.column_config.SelectboxColumn("Trimestre", options=["1T", "2T", "3T"], width="small"),
-            "Entidad": st.column_config.TextColumn("Entidad Colaboradora", width="medium"),
-            "Evaluacion": st.column_config.TextColumn("Actividad de Evaluación", width="medium"),
-        },
-        num_rows="dynamic", hide_index=True, use_container_width=True, key="tabla_ace"
-    )
-    if len(ed_ace) > len(st.session_state.df_ace):
-        ed_ace.iloc[-1, 0] = generar_siguiente_id(st.session_state.df_ace, "ACE")
-    st.session_state.df_ace = ed_ace
     
     with st.expander("➕ Añadir Nueva Actividad (ACE)", expanded=False):
         st.markdown("*💡 Utiliza este formulario para programar la actividad escolar.*")
@@ -2308,6 +2749,24 @@ elif menu == "Planes e inclusión":
                 st.session_state.df_ace = pd.concat([st.session_state.df_ace, pd.DataFrame([new_row])], ignore_index=True)
                 st.success("Añadida correctamente.")
                 st.rerun()
+
+    ed_ace = st.data_editor(
+        st.session_state.df_ace,
+        column_config={
+            "id_act": st.column_config.TextColumn("ID", disabled=True, width="small"),
+            "Tipo": st.column_config.SelectboxColumn("Tipo", options=["Complementaria", "Extraescolar"], width="medium"),
+            "RA_Vinculados": st.column_config.SelectboxColumn("RA Vinculados", options=lista_ra_ids, width="medium"),
+            "Actividad": st.column_config.TextColumn("Descripción de la Actividad", width="large"),
+            "tri_act": st.column_config.SelectboxColumn("Trimestre", options=["1T", "2T", "3T"], width="small"),
+            "Entidad": st.column_config.TextColumn("Entidad Colaboradora", width="medium"),
+            "Evaluacion": st.column_config.TextColumn("Actividad de Evaluación", width="medium"),
+        },
+        num_rows="dynamic", hide_index=True, use_container_width=True, key="tabla_ace"
+    )
+    if len(ed_ace) > len(st.session_state.df_ace):
+        ed_ace.iloc[-1, 0] = generar_siguiente_id(st.session_state.df_ace, "ACE")
+    st.session_state.df_ace = ed_ace
+
 
 
 
