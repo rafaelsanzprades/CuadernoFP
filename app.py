@@ -742,7 +742,7 @@ st.markdown(
 )
 
 with st.sidebar:
-    st.title("Cuaderno Digital Docente Ciclos FP")
+    st.title("Cuaderno Digital Docente Ciclos")
 
     # --- MEJORA #8 + MEJORA #1: Indicador visual de módulo activo + autoguardado ---
     _modulo_nombre = st.session_state.info_modulo.get("modulo", "") or "—"
