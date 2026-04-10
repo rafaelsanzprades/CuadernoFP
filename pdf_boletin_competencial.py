@@ -51,17 +51,11 @@ class ProgressBar(Flowable):
 def _draw_page_decorations(canv, doc):
     canv.saveState()
     W, H = portrait(A4)
-    # Título central
-    canv.setFont("Helvetica-Bold", 14)
-    canv.setFillColor(colors.HexColor("#222222"))
-    canv.drawCentredString(W / 2, H - 2 * cm, f"Boletín competencial. {doc.nombre_modulo}")
-    
-    # Pie
-    canv.setFont("Helvetica", 9)
+    canv.setFont("Helvetica-Bold", 10)
     canv.setFillColor(colors.HexColor("#777777"))
-    canv.drawRightString(W - 1.5 * cm, 1 * cm, doc.pie_texto)
-    # Página
-    canv.drawString(1.5 * cm, 1 * cm, f"Página {doc.page}")
+    canv.drawCentredString(W / 2, H - 1.5 * cm, f"Boletín competencial. {doc.nombre_modulo}")
+    canv.setFont("Helvetica", 9)
+    canv.drawRightString(W - 1 * cm, 1 * cm, doc.pie_texto)
     canv.restoreState()
 
 def generar_pdf_boletin(info_modulo, info_fechas, df_al, df_eval, df_ra, df_ud, df_pr, planning_ledger, df_ce=None, df_act=None, df_feoe=None):
@@ -234,12 +228,15 @@ def generar_pdf_boletin(info_modulo, info_fechas, df_al, df_eval, df_ra, df_ud, 
             
             te = Table(e_data, colWidths=[2.5*cm, 5.5*cm, 2.5*cm, 3.5*cm], hAlign='LEFT')
             te.setStyle(TableStyle([
-                ('BACKGROUND', (0,0), (-1,0), colors.HexColor("#333333")),
-                ('TEXTCOLOR', (0,0), (-1,0), colors.white),
-                ('ALIGN', (0,0), (-1,-1), 'CENTER'),
-                ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
-                ('FONTSIZE', (0,0), (-1,-1), 9),
-                ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor("#dddddd")),
+                ('BACKGROUND',    (0, 0), (-1, 0), colors.white),
+                ('TEXTCOLOR',     (0, 0), (-1, 0), colors.black),
+                ('ALIGN',         (0, 0), (-1,-1), 'CENTER'),
+                ('FONTNAME',      (0, 0), (-1, 0), 'Helvetica-Bold'),
+                ('FONTNAME',      (0, 1), (-1,-1), 'Helvetica'),
+                ('FONTSIZE',      (0, 0), (-1,-1), 9),
+                ('LINEBELOW',     (0, 0), (-1, 0), 1.5, colors.HexColor("#222222")),
+                ('BOX',           (0, 0), (-1,-1), 1.5, colors.HexColor("#222222")),
+                ('GRID',          (0, 0), (-1,-1), 0.5, colors.HexColor("#bbbbbb")),
             ]))
             elements.append(te)
         else:
@@ -285,16 +282,19 @@ def generar_pdf_boletin(info_modulo, info_fechas, df_al, df_eval, df_ra, df_ud, 
         if ra_info:
             tra = Table(ra_data, colWidths=[2.0*cm, 9.5*cm, 2.0*cm, 4.0*cm], hAlign='LEFT')
             tra.setStyle(TableStyle([
-                ('BACKGROUND', (0,0), (-1,0), colors.HexColor("#333333")),
-                ('TEXTCOLOR', (0,0), (-1,0), colors.white),
-                ('ALIGN', (0,0), (-1,-1), 'CENTER'),
-                ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-                ('ALIGN', (1,1), (1,-1), 'LEFT'),
-                ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
-                ('FONTSIZE', (0,0), (-1,-1), 8),
-                ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor("#dddddd")),
-                ('BOTTOMPADDING', (0,0), (-1,-1), 4),
-                ('TOPPADDING', (0,0), (-1,-1), 4),
+                ('BACKGROUND',    (0, 0), (-1, 0), colors.white),
+                ('TEXTCOLOR',     (0, 0), (-1, 0), colors.black),
+                ('ALIGN',         (0, 0), (-1,-1), 'CENTER'),
+                ('VALIGN',        (0, 0), (-1,-1), 'MIDDLE'),
+                ('ALIGN',         (1, 1), (1, -1), 'LEFT'),
+                ('FONTNAME',      (0, 0), (-1, 0), 'Helvetica-Bold'),
+                ('FONTNAME',      (0, 1), (-1,-1), 'Helvetica'),
+                ('FONTSIZE',      (0, 0), (-1,-1), 8),
+                ('LINEBELOW',     (0, 0), (-1, 0), 1.5, colors.HexColor("#222222")),
+                ('BOX',           (0, 0), (-1,-1), 1.5, colors.HexColor("#222222")),
+                ('GRID',          (0, 0), (-1,-1), 0.5, colors.HexColor("#bbbbbb")),
+                ('BOTTOMPADDING', (0, 0), (-1,-1), 4),
+                ('TOPPADDING',    (0, 0), (-1,-1), 4),
             ]))
             elements.append(tra)
             

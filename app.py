@@ -16,6 +16,7 @@ from pdf_calendario_academico import generar_pdf_calendario
 from pdf_seguimiento_diario import generar_pdf_seguimiento
 from pdf_boletin_competencial import generar_pdf_boletin
 from pdf_programacion_aula import generar_pdf_programacion_aula
+from pdf_boletin_grupal import generar_pdf_boletin_grupal
 def serialize_date(obj):
     if isinstance(obj, (date, datetime)): return obj.strftime("%d/%m/%Y")
     return obj
@@ -926,6 +927,24 @@ with st.sidebar:
             label="Programación de aula",
             data=pdf_buffer_prog,
             file_name=f"Programacion_Aula_{st.session_state.info_modulo.get('modulo', 'Gestor')}.pdf",
+            mime="application/pdf",
+            type="secondary",
+            use_container_width=True
+        )
+
+        # ── Boletín grupal 1T ────────────────────────────────────────────────
+        pdf_buffer_grupal_1t = generar_pdf_boletin_grupal(
+            trimestre="1T",
+            info_modulo=st.session_state.info_modulo,
+            df_al=st.session_state.df_al,
+            df_eval=st.session_state.df_eval,
+            df_act=st.session_state.df_act,
+        )
+        _mod_name = st.session_state.info_modulo.get('modulo', 'Grupo')
+        st.download_button(
+            label="Boletín grupal 1T",
+            data=pdf_buffer_grupal_1t,
+            file_name=f"Boletin_Grupal_1T_{_mod_name}.pdf",
             mime="application/pdf",
             type="secondary",
             use_container_width=True
@@ -2351,6 +2370,9 @@ elif menu == "Calificación académica":
         # Organizar Actividades por Trimestre
         acts_by_tri = {"1T": [], "2T": [], "3T": []}
         for _, row in st.session_state.df_act.iterrows():
+            # Saltar filas sin id_act válido (filas vacías del editor)
+            if not row.get("id_act") or pd.isna(row.get("id_act")):
+                continue
             tri = row.get("Trimestre", "1T")
             if tri not in acts_by_tri: tri = "1T"
             acts_by_tri[tri].append(row)
@@ -2403,6 +2425,8 @@ elif menu == "Calificación académica":
                                 st.info("No hay actividades evaluables definidas para este trimestre.")
                             for act in acts_by_tri[tri_key]:
                                 act_id = act["id_act"]
+                                if not act_id or pd.isna(act_id) or act_id not in st.session_state.df_eval.columns:
+                                    continue
                                 val_prev = float(st.session_state.df_eval.at[idx, act_id]) if pd.notna(st.session_state.df_eval.at[idx, act_id]) else 0.0
                                 val_new = st.number_input(
                                     f"[{act['Tipo']}] {act.get('Actividad', act_id)}", 

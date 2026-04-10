@@ -9,15 +9,11 @@ from reportlab.lib.units import cm
 def _draw_page_decorations(canv, doc):
     canv.saveState()
     W, H = landscape(A4)
-    # Header Title
-    canv.setFont("Helvetica-Bold", 14)
-    canv.setFillColor(colors.black)
-    canv.drawCentredString(W / 2, H - 1.5 * cm, doc.cal_titulo)
-    
-    # Footer
-    canv.setFont("Helvetica", 9)
+    canv.setFont("Helvetica-Bold", 10)
     canv.setFillColor(colors.HexColor("#777777"))
-    canv.drawRightString(W - 1.5 * cm, 1 * cm, doc.cal_pie)
+    canv.drawCentredString(W / 2, H - 1.5 * cm, doc.cal_titulo)
+    canv.setFont("Helvetica", 9)
+    canv.drawRightString(W - 1 * cm, 1 * cm, doc.cal_pie)
     canv.restoreState()
 
 def generar_pdf_programacion_aula(info_modulo, config_aula, df_sesiones):
@@ -87,20 +83,21 @@ def generar_pdf_programacion_aula(info_modulo, config_aula, df_sesiones):
     t = Table(t_data, colWidths=colWidths, repeatRows=1)
     
     t.setStyle(TableStyle([
-        ('BACKGROUND', (0,0), (-1,0), colors.white),
-        ('TEXTCOLOR', (0,0), (-1,0), colors.black),
-        ('ALIGN', (0,0), (-1,0), 'CENTER'),
-        ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-        ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0,0), (-1,0), 10),
-        
-        ('ALIGN', (0,1), (4,-1), 'CENTER'),  # Center align for checkboxes, RA/CE and SESION
-        ('ALIGN', (5,1), (-1,-1), 'LEFT'),   # Left align for texts
-        
-        ('BOX', (0,0), (-1,-1), 1.0, colors.black),
-        ('GRID', (0,0), (-1,-1), 0.5, colors.black),
-        ('TOPPADDING', (0,0), (-1,-1), 4),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 4),
+        ('BACKGROUND',    (0, 0), (-1, 0), colors.white),
+        ('TEXTCOLOR',     (0, 0), (-1, 0), colors.black),
+        ('ALIGN',         (0, 0), (-1, 0), 'CENTER'),
+        ('VALIGN',        (0, 0), (-1,-1), 'MIDDLE'),
+        ('FONTNAME',      (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE',      (0, 0), (-1, 0), 10),
+        ('LINEBELOW',     (0, 0), (-1, 0), 1.5, colors.HexColor("#222222")),
+        ('ALIGN',         (0, 1), (4, -1), 'CENTER'),
+        ('ALIGN',         (5, 1), (-1,-1), 'LEFT'),
+        ('FONTNAME',      (0, 1), (-1,-1), 'Helvetica'),
+        ('FONTSIZE',      (0, 1), (-1,-1), 9),
+        ('BOX',           (0, 0), (-1,-1), 1.5, colors.HexColor("#222222")),
+        ('GRID',          (0, 0), (-1,-1), 0.5, colors.HexColor("#bbbbbb")),
+        ('TOPPADDING',    (0, 0), (-1,-1), 4),
+        ('BOTTOMPADDING', (0, 0), (-1,-1), 4),
     ]))
     
     elements.append(t)
