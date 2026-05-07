@@ -384,7 +384,7 @@ with st.sidebar:
         )
         # --- FIN MEJORAS #8 / #1 ---
 
-        st.markdown('<p class="user-subtitle">(c) Rafael Sanz Prades</p>', unsafe_allow_html=True)
+    st.markdown('<p class="user-subtitle">(c) Rafael Sanz Prades</p>', unsafe_allow_html=True)
 
         
 # ==========================================
