@@ -136,7 +136,7 @@ section[data-testid="stSidebar"] [data-testid="baseButton-primary"] {
 }
 
 .pestaña-header h2 {
-    font-size: 2.8rem !important; /* Más grande que los h1 (2.0rem) */
+    font-size: 1.8rem !important;
     font-weight: 800 !important;
     letter-spacing: -0.01em;
     margin: 0 !important;
@@ -269,7 +269,8 @@ header { background: transparent !important; } /* Hacer cabecera transparente pe
 }
 
 [data-testid="stSidebar"] h1 {
-    font-size: 1.4rem !important;
+    font-size: 1.8rem !important;
+    font-weight: 800 !important;
     margin-bottom: 0.2rem !important;
     line-height: 1.2 !important;
 }
