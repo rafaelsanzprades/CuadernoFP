@@ -140,7 +140,7 @@ export default function FileManagement() {
               <p className="text-gray-400">Carga, guarda y administra los archivos de programación y curso.</p>
             </div>
             
-            <div className="flex flex-col gap-8">
+            <div className="grid grid-cols-2 gap-8">
               
               {/* Tarjeta de PD */}
               <div className="glass-card p-8 border-t-4 border-t-[#14a085] flex flex-col gap-6 transform transition-all duration-300 hover:shadow-2xl hover:shadow-[#14a085]/10">

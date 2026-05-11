@@ -119,7 +119,7 @@ export default function IntroduccionPage() {
           </div>
 
 
-          <section className="grid grid-cols-2 gap-6">
+          <section className="flex flex-col gap-6">
             <div className="glass-card p-6 border-t-4 border-t-indigo-500">
               <h2 className="text-xl font-bold mb-4 flex items-center gap-2">🏫 Contexto Escolar</h2>
               <div className="space-y-4">

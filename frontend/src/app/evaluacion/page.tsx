@@ -218,7 +218,7 @@ export default function EvaluacionPage() {
               const isWarning = pct_global_cumplido >= 40 && pct_global_cumplido < 50;
 
               return (
-                <details key={al_id} className="group bg-white/5 rounded-lg border border-white/10 overflow-hidden open:bg-white/10 transition-colors">
+                <details key={al_id} open className="group bg-white/5 rounded-lg border border-white/10 overflow-hidden open:bg-white/10 transition-colors">
                   <summary className="p-4 cursor-pointer flex items-center justify-between font-semibold text-lg select-none hover:bg-white/5">
                     <div className="flex items-center gap-4">
                       <span className="text-2xl">👤</span>

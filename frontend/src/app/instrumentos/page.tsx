@@ -151,7 +151,7 @@ export default function InstrumentosPage() {
                 const sumaPeso = actTri.reduce((sum: number, act: any) => sum + (Number(act.peso_act) || 0), 0);
 
                 return (
-                  <details key={tri.key} className="group bg-white/5 rounded-lg border border-white/10 overflow-hidden open:bg-white/10 transition-colors">
+                  <details key={tri.key} open className="group bg-white/5 rounded-lg border border-white/10 overflow-hidden open:bg-white/10 transition-colors">
                     <summary className="p-4 cursor-pointer flex items-center justify-between font-semibold text-lg select-none hover:bg-white/5">
                       <div className="flex items-center gap-4">
                         <span className="text-indigo-400">📋</span>
