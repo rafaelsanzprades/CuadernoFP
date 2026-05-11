@@ -1,12 +1,19 @@
-from fastapi import FastAPI, HTTPException, Request, Response
-from fastapi.middleware.cors import CORSMiddleware
-import json
-import os
 import sys
+import os
+
+# MUST be first: add backend/ to path before ANY other imports.
+# Fixes "ModuleNotFoundError: No module named 'database'" when Render
+# runs this as 'backend.main:app' from the repo root.
+_backend_dir = os.path.dirname(os.path.abspath(__file__))
+if _backend_dir not in sys.path:
+    sys.path.insert(0, _backend_dir)
+
+from fastapi import FastAPI, HTTPException, Request, Response, Depends
+from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.orm import Session
+import json
 import shutil
 import pandas as pd
-from sqlalchemy.orm import Session
-from fastapi import Depends
 
 from database import SessionLocal, engine, Base, get_db
 from models import ModuleDocument
