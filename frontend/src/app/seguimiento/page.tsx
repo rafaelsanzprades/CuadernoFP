@@ -71,7 +71,7 @@ export default function SeguimientoPage() {
           <main className="flex-1 p-8 content-area">
             <div className="glass-card p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">Falta seleccionar módulo o curso</h2>
-              <p className="text-gray-400">Por favor, ve a la Gestión de Archivos y carga tanto una PD como un Curso.</p>
+              <p className="text-gray-400">Por favor, ve a la Gestión de archivos y carga tanto una PD como un Curso.</p>
             </div>
           </main>
         </div>
@@ -197,6 +197,7 @@ export default function SeguimientoPage() {
             <h1 className="text-4xl font-extrabold text-white tracking-tight">
               📍 Seguimiento diario
             </h1>
+            <p className="text-gray-400 mt-2">Registro detallado del desarrollo diario de las clases y contingencias.</p>
           </div>
 
 
@@ -262,7 +263,7 @@ export default function SeguimientoPage() {
             </table>
           </section>
 
-          {/* Seguimiento Diario */}
+          {/* Seguimiento diario */}
           <section>
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
               <span>🗓️</span> Diario de clases. Contingencias

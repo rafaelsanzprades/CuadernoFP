@@ -52,7 +52,7 @@ export default function CalificacionFEOEPage() {
           <main className="flex-1 p-8 content-area">
             <div className="glass-card p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Curso o Módulo seleccionado</h2>
-              <p className="text-gray-400">Por favor, ve a la Gestión de Archivos y asegúrate de cargar ambos.</p>
+              <p className="text-gray-400">Por favor, ve a la Gestión de archivos y asegúrate de cargar ambos.</p>
             </div>
           </main>
         </div>
@@ -104,13 +104,13 @@ export default function CalificacionFEOEPage() {
             <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
               🏢 Calificación FEOE
             </h1>
-            <p className="text-gray-400 mt-2">Introduce la calificación del tutor de empresa (1-4) para cada RA Dualizado.</p>
+            <p className="text-gray-400 mt-2">Seguimiento y evaluación del periodo de Formación en Empresa u Organismo Equiparado (FEOE).</p>
           </div>
 
           {ras_dualizados.length === 0 ? (
             <div className="glass-card p-6 border-l-4 border-l-yellow-500">
               <h3 className="text-xl font-bold text-yellow-400 mb-2">No hay RAs Dualizados</h3>
-              <p className="text-gray-300">Ve a la pestaña Módulo Didáctico y marca al menos un RA como 'Dualizado' (FEOE).</p>
+              <p className="text-gray-300">Ve a la pestaña Módulo didáctico y marca al menos un RA como 'Dualizado' (FEOE).</p>
             </div>
           ) : df_evaluable.length === 0 ? (
             <div className="glass-card p-6 border-l-4 border-l-yellow-500">

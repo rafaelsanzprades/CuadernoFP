@@ -66,7 +66,7 @@ export default function MatriculaPage() {
           <main className="flex-1 p-8 content-area">
             <div className="glass-card p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Curso seleccionado</h2>
-              <p className="text-gray-400">Por favor, ve a la Gestión de Archivos y selecciona un Curso Activo.</p>
+              <p className="text-gray-400">Por favor, ve a la Gestión de archivos y selecciona un Curso Activo.</p>
             </div>
           </main>
         </div>
@@ -134,14 +134,14 @@ export default function MatriculaPage() {
             <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
               👥 Matrícula alumnado
             </h1>
-            <p className="text-gray-400 mt-2">Gestiona el alumnado matriculado en el curso activo.</p>
+            <p className="text-gray-400 mt-2">Listado oficial de estudiantes matriculados y sus datos básicos.</p>
           </div>
 
 
           <section className="glass-card p-6 border-t-4 border-t-blue-500">
             <div className="flex justify-between items-end mb-6">
               <h2 className="text-xl font-bold flex items-center gap-2">
-                <span>Lista Oficial</span>
+                <span>Lista oficial</span>
                 <span className="text-sm font-normal text-gray-400 bg-white/5 px-3 py-1 rounded-full">{df_al.length} alumnos</span>
               </h2>
               {n_menores > 0 && (

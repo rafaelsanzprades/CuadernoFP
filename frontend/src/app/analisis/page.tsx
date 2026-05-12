@@ -46,7 +46,7 @@ export default function AnalisisPage() {
           <main className="flex-1 p-8 content-area">
             <div className="glass-card p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Curso o Módulo seleccionado</h2>
-              <p className="text-gray-400">Por favor, ve a la Gestión de Archivos y asegúrate de cargar ambos.</p>
+              <p className="text-gray-400">Por favor, ve a la Gestión de archivos y asegúrate de cargar ambos.</p>
             </div>
           </main>
         </div>
@@ -189,7 +189,7 @@ export default function AnalisisPage() {
             <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
               📉 Análisis de grupo
             </h1>
-            <p className="text-gray-400 mt-2">Estadísticas interactivas y evolución del rendimiento del grupo.</p>
+            <p className="text-gray-400 mt-2">Visualiza las estadísticas globales, comparativas entre trimestres y evolución de las calificaciones.</p>
           </div>
 
           <section className="grid grid-cols-4 gap-6">
@@ -258,7 +258,7 @@ export default function AnalisisPage() {
               </div>
             </div>
             
-            {/* Gráfico de Radar: Resultados de Aprendizaje */}
+            {/* Gráfico de Radar: Resultados de aprendizaje */}
             {raData.length > 0 && (
               <div className="glass-card p-6">
                 <h2 className="text-xl font-bold mb-6 flex items-center gap-2">

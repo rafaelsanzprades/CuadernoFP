@@ -66,7 +66,7 @@ export default function InstrumentosPage() {
           <main className="flex-1 p-8 content-area">
             <div className="glass-card p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay módulo seleccionado</h2>
-              <p className="text-gray-400">Por favor, ve a la Gestión de Archivos y selecciona un módulo PD.</p>
+              <p className="text-gray-400">Por favor, ve a la Gestión de archivos y selecciona un módulo PD.</p>
             </div>
           </main>
         </div>
@@ -95,9 +95,9 @@ export default function InstrumentosPage() {
   const lista_ce_ids = ce_clean.map((ce: any) => ce.id_ce);
 
   const trimestres = [
-    { key: "1T", nombre: "1er Trimestre" },
-    { key: "2T", nombre: "2º Trimestre" },
-    { key: "3T", nombre: "3er Trimestre" }
+    { key: "1T", nombre: "1er trimestre" },
+    { key: "2T", nombre: "2º trimestre" },
+    { key: "3T", nombre: "3er trimestre" }
   ];
 
   const handleUpdateAct = (globalIdx: number, field: string, value: any) => {
@@ -135,13 +135,13 @@ export default function InstrumentosPage() {
             <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
               🛠️ Instrumentos de evaluación
             </h1>
-            <p className="text-gray-400 mt-2">Define las tareas, exámenes y vincula qué Criterios de Evaluación califican.</p>
+            <p className="text-gray-400 mt-2">Definición y ponderación de las herramientas y métodos de evaluación.</p>
           </div>
 
 
           {lista_ce_ids.length === 0 ? (
             <div className="glass-card p-6 border-l-4 border-l-yellow-500">
-              <h3 className="text-xl font-bold text-yellow-400 mb-2">Faltan Criterios de Evaluación</h3>
+              <h3 className="text-xl font-bold text-yellow-400 mb-2">Faltan Criterios de evaluación</h3>
               <p className="text-gray-300">Primero añade Criterios de evaluación en la pestaña 'Matrices'.</p>
             </div>
           ) : (

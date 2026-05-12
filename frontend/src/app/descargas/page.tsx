@@ -58,7 +58,7 @@ export default function DescargasPage() {
           <main className="flex-1 p-8 content-area">
             <div className="glass-card p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Curso o Módulo seleccionado</h2>
-              <p className="text-gray-400">Por favor, ve a la Gestión de Archivos y asegúrate de cargar ambos.</p>
+              <p className="text-gray-400">Por favor, ve a la Gestión de archivos y asegúrate de cargar ambos.</p>
             </div>
           </main>
         </div>
@@ -97,7 +97,7 @@ export default function DescargasPage() {
             <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
               📥 Descargas PDF
             </h1>
-            <p className="text-gray-400 mt-2">Genera y descarga los documentos oficiales de tu cuaderno digital.</p>
+            <p className="text-gray-400 mt-2">Genera y descarga los documentos oficiales de tu cuaderno digital en formato PDF.</p>
           </div>
 
           <section className="glass-card p-6 border-t-4 border-t-red-500">
@@ -105,7 +105,7 @@ export default function DescargasPage() {
             <div className="grid grid-cols-2 gap-6">
               <div className="bg-black/20 border border-white/10 rounded-xl p-6 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-lg font-bold mb-2">📆 Calendario Académico</h3>
+                  <h3 className="text-lg font-bold mb-2">📆 Calendario académico</h3>
                   <p className="text-sm text-gray-400 mb-6">Vista global del curso con fechas, sesiones y eventos.</p>
                 </div>
                 <button 
@@ -119,7 +119,7 @@ export default function DescargasPage() {
 
               <div className="bg-black/20 border border-white/10 rounded-xl p-6 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-lg font-bold mb-2">📝 Seguimiento Diario</h3>
+                  <h3 className="text-lg font-bold mb-2">📝 Seguimiento diario</h3>
                   <p className="text-sm text-gray-400 mb-6">Registro detallado de la planificación del día a día.</p>
                 </div>
                 <button 
@@ -127,7 +127,7 @@ export default function DescargasPage() {
                   disabled={downloadingStr === 'seguimiento'}
                   className="w-full bg-red-500 hover:bg-red-600 disabled:bg-red-500/50 text-white py-2 rounded-lg font-bold transition-colors flex justify-center gap-2"
                 >
-                  {downloadingStr === 'seguimiento' ? '⏳ Generando PDF...' : 'Generar Seguimiento Diario'}
+                  {downloadingStr === 'seguimiento' ? '⏳ Generando PDF...' : 'Generar Seguimiento diario'}
                 </button>
               </div>
             </div>
@@ -138,7 +138,7 @@ export default function DescargasPage() {
             <div className="grid grid-cols-4 gap-6">
               <div className="bg-black/20 border border-white/10 rounded-xl p-6 flex flex-col justify-between text-center">
                 <div>
-                  <h3 className="text-lg font-bold mb-2">👥 1er Trimestre</h3>
+                  <h3 className="text-lg font-bold mb-2">👥 1er trimestre</h3>
                   <p className="text-xs text-gray-400 mb-6">Boletín grupal 1T.</p>
                 </div>
                 <button 
@@ -152,7 +152,7 @@ export default function DescargasPage() {
 
               <div className="bg-black/20 border border-white/10 rounded-xl p-6 flex flex-col justify-between text-center">
                 <div>
-                  <h3 className="text-lg font-bold mb-2">👥 2º Trimestre</h3>
+                  <h3 className="text-lg font-bold mb-2">👥 2º trimestre</h3>
                   <p className="text-xs text-gray-400 mb-6">Boletín grupal 2T.</p>
                 </div>
                 <button 
@@ -166,7 +166,7 @@ export default function DescargasPage() {
 
               <div className="bg-black/20 border border-white/10 rounded-xl p-6 flex flex-col justify-between text-center">
                 <div>
-                  <h3 className="text-lg font-bold mb-2">👥 3er Trimestre</h3>
+                  <h3 className="text-lg font-bold mb-2">👥 3er trimestre</h3>
                   <p className="text-xs text-gray-400 mb-6">Boletín grupal 3T.</p>
                 </div>
                 <button 

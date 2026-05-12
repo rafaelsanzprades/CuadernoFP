@@ -32,7 +32,7 @@ export default function PortalPage() {
           <main className="flex-1 p-8 content-area">
             <div className="glass-card p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Curso o Módulo seleccionado</h2>
-              <p className="text-gray-400">Por favor, ve a la Gestión de Archivos y asegúrate de cargar ambos.</p>
+              <p className="text-gray-400">Por favor, ve a la Gestión de archivos y asegúrate de cargar ambos.</p>
             </div>
           </main>
         </div>
@@ -162,6 +162,7 @@ export default function PortalPage() {
         <main className="flex-1 p-8 pt-4 space-y-8">
           <div>
             <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3 mb-4">🎓 Portal alumnado</h1>
+            <p className="text-gray-400 mt-2">Vista individualizada por estudiante con sus calificaciones y adquisición de competencias.</p>
             
             <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-4 py-3 w-fit">
               <span className="text-gray-400 text-sm font-semibold">Viendo como:</span>
@@ -204,7 +205,7 @@ export default function PortalPage() {
           </section>
 
           <section className="glass-card p-6">
-            <h2 className="text-2xl font-bold mb-6">🎯 Adquisición de Competencias (RA)</h2>
+            <h2 className="text-2xl font-bold mb-6">🎯 Adquisición de competencias (RA)</h2>
             <div className="grid grid-cols-2 gap-6">
               {df_ra.map((ra: any) => {
                 if (!ra.id_ra) return null;
@@ -233,7 +234,7 @@ export default function PortalPage() {
           </section>
 
           <section className="glass-card p-6 border-t-4 border-t-purple-500 mt-8">
-            <h2 className="text-2xl font-bold mb-2">🎮 Simulador de Calificaciones</h2>
+            <h2 className="text-2xl font-bold mb-2">🎮 Simulador de calificaciones</h2>
             <p className="text-gray-400 mb-6 text-sm">Experimenta con tus notas para proyectar tu resultado final.</p>
 
             <div className="flex gap-8">

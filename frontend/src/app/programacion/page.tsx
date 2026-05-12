@@ -66,7 +66,7 @@ export default function ProgramacionPage() {
           <main className="flex-1 p-8 content-area">
             <div className="glass-card p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay módulo seleccionado</h2>
-              <p className="text-gray-400">Por favor, ve a la Gestión de Archivos y selecciona un módulo PD.</p>
+              <p className="text-gray-400">Por favor, ve a la Gestión de archivos y selecciona un módulo PD.</p>
             </div>
           </main>
         </div>
@@ -148,12 +148,12 @@ export default function ProgramacionPage() {
             <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
               📚 Programación de aula
             </h1>
-            <p className="text-gray-400 mt-2">Diseña y estructura las sesiones y tareas competenciales.</p>
+            <p className="text-gray-400 mt-2">Secuenciación temporal de las unidades didácticas y diseño de tareas competenciales.</p>
           </div>
 
           <section className="glass-card p-6 border-t-4 border-t-[#14a085]">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-              <span>📋</span> Secuenciación por Unidades Didácticas
+              <span>📋</span> Secuenciación por Unidades didácticas
             </h2>
 
             <div className="space-y-4">
@@ -289,7 +289,7 @@ export default function ProgramacionPage() {
 
           <section className="glass-card p-6 border-t-4 border-t-blue-500">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-              <span>🎯</span> Diseño de Tareas Competenciales (TC)
+              <span>🎯</span> Diseño de tareas competenciales (TC)
             </h2>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm border-collapse whitespace-nowrap">

@@ -63,7 +63,7 @@ export default function MatricesPage() {
           <main className="flex-1 p-8 content-area">
             <div className="glass-card p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay módulo seleccionado</h2>
-              <p className="text-gray-400">Por favor, ve a la Gestión de Archivos y selecciona un módulo PD.</p>
+              <p className="text-gray-400">Por favor, ve a la Gestión de archivos y selecciona un módulo PD.</p>
             </div>
           </main>
         </div>
@@ -100,13 +100,14 @@ export default function MatricesPage() {
             <h1 className="text-4xl font-extrabold text-white tracking-tight">
               🧮 Matrices RA → CE → UD
             </h1>
+            <p className="text-gray-400 mt-2">Relación y ponderación entre los RA, CE y las diferentes UD del módulo.</p>
           </div>
 
 
-          {/* Resultados de Aprendizaje */}
+          {/* Resultados de aprendizaje */}
           <section className="glass-card p-6 border-t-4 border-t-[#14a085]">
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-              <span>🎓</span> RA. Resultados de Aprendizaje
+              <span>🎓</span> RA. Resultados de aprendizaje
             </h2>
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
@@ -185,10 +186,10 @@ export default function MatricesPage() {
             </div>
           </section>
 
-          {/* Unidades Didácticas */}
+          {/* Unidades didácticas */}
           <section className="glass-card p-6 border-t-4 border-t-purple-500">
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-              <span>📚</span> UD. Unidades Didácticas
+              <span>📚</span> UD. Unidades didácticas
             </h2>
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
@@ -274,10 +275,10 @@ export default function MatricesPage() {
             </div>
           </section>
 
-          {/* Criterios de Evaluación */}
+          {/* Criterios de evaluación */}
           <section className="glass-card p-6 border-t-4 border-t-yellow-500">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-              <span>🧩</span> CE. Criterios de Evaluación
+              <span>🧩</span> CE. Criterios de evaluación
             </h2>
             
             <div className="space-y-4">

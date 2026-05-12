@@ -106,6 +106,7 @@ export default function Home() {
           <div className="space-y-8 pb-12">
             <div>
               <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3 mb-6">⚙️ Módulo didáctico</h1>
+            <p className="text-gray-400 mt-2">Configuración estructural del módulo didáctico, incluyendo RAs, CEs y UDs.</p>
             </div>
             
             {/* Tarjeta de Datos */}
@@ -230,7 +231,7 @@ export default function Home() {
               </h4>
               <div className="grid grid-cols-3 gap-6">
                  <div>
-                  <label className="block text-sm font-semibold text-gray-400 mb-2">1er Trimestre (%)</label>
+                  <label className="block text-sm font-semibold text-gray-400 mb-2">1er trimestre (%)</label>
                   <input type="number" 
                     value={data.pond_1t || 0} 
                     onChange={(e) => updateInfoModulo('pond_1t', Number(e.target.value))}
@@ -239,7 +240,7 @@ export default function Home() {
                   <div className="text-center bg-black/40 p-2 rounded text-emerald-400 font-mono font-bold">{h1} h reales</div>
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-400 mb-2">2º Trimestre (%)</label>
+                  <label className="block text-sm font-semibold text-gray-400 mb-2">2º trimestre (%)</label>
                   <input type="number" 
                     value={data.pond_2t || 0} 
                     onChange={(e) => updateInfoModulo('pond_2t', Number(e.target.value))}
@@ -248,7 +249,7 @@ export default function Home() {
                   <div className="text-center bg-black/40 p-2 rounded text-emerald-400 font-mono font-bold">{h2} h reales</div>
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-400 mb-2">3er Trimestre (%)</label>
+                  <label className="block text-sm font-semibold text-gray-400 mb-2">3er trimestre (%)</label>
                   <input type="number" 
                     value={data.pond_3t || 0} 
                     onChange={(e) => updateInfoModulo('pond_3t', Number(e.target.value))}
@@ -360,9 +361,9 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Resultados de Aprendizaje */}
+            {/* Resultados de aprendizaje */}
             <div className="mt-12 mb-8">
-              <h3 className="text-xl font-bold text-white mb-6">🎯 Relación entre Resultados de Aprendizaje y Unidades Didácticas</h3>
+              <h3 className="text-xl font-bold text-white mb-6">🎯 Relación entre Resultados de aprendizaje y Unidades didácticas</h3>
               
               {moduleData.df_ra && moduleData.df_ra.length > 0 ? (
                 <div className="glass-card p-6 space-y-6">
@@ -392,7 +393,7 @@ export default function Home() {
                 </div>
               ) : (
                 <div className="glass-card p-6 text-center text-gray-400">
-                  No hay Resultados de Aprendizaje definidos.
+                  No hay Resultados de aprendizaje definidos.
                 </div>
               )}
             </div>

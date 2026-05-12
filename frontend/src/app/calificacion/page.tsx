@@ -55,7 +55,7 @@ export default function CalificacionPage() {
           <main className="flex-1 p-8 content-area">
             <div className="glass-card p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Curso o Módulo seleccionado</h2>
-              <p className="text-gray-400">Por favor, ve a la Gestión de Archivos y asegúrate de cargar ambos.</p>
+              <p className="text-gray-400">Por favor, ve a la Gestión de archivos y asegúrate de cargar ambos.</p>
             </div>
           </main>
         </div>
@@ -203,7 +203,7 @@ export default function CalificacionPage() {
           <main className="flex-1 p-8 content-area">
             <div className="glass-card p-8 text-center border-l-4 border-l-yellow-500">
               <h2 className="text-2xl font-bold mb-4 text-yellow-400">Falta información</h2>
-              <p className="text-gray-400">Asegúrate de tener Criterios de Evaluación y Actividades definidos, y alumnado activo en la Matrícula.</p>
+              <p className="text-gray-400">Asegúrate de tener Criterios de evaluación y Actividades definidos, y alumnado activo en la Matrícula.</p>
             </div>
           </main>
         </div>
@@ -222,7 +222,7 @@ export default function CalificacionPage() {
             <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
               📊 Calificación académica
             </h1>
-            <p className="text-gray-400 mt-2">Introduce las notas de las actividades; el sistema calculará la nota final automáticamente.</p>
+            <p className="text-gray-400 mt-2">Registro y cálculo automático de las calificaciones por trimestre y evaluación final.</p>
           </div>
 
           <div className="space-y-4">

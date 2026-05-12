@@ -203,9 +203,9 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
       {/* Legend */}
       <div className="flex flex-wrap gap-4 mb-6 text-xs">
         {[
-          { cls: "bg-sky-600/40 border-sky-500/30",      label: "1er Trimestre" },
-          { cls: "bg-emerald-600/40 border-emerald-500/30", label: "2º Trimestre" },
-          { cls: "bg-purple-600/40 border-purple-500/30",  label: "3er Trimestre" },
+          { cls: "bg-sky-600/40 border-sky-500/30",      label: "1er trimestre" },
+          { cls: "bg-emerald-600/40 border-emerald-500/30", label: "2º trimestre" },
+          { cls: "bg-purple-600/40 border-purple-500/30",  label: "3er trimestre" },
           { cls: "bg-red-500/70 border-red-400/40",        label: "Festivo (clic para añadir/quitar)" },
           { cls: "bg-blue-500/70 border-blue-400/40",      label: "Evento relevante" },
           { cls: "bg-orange-500/30 border-orange-400/30",  label: "FEOE" },
@@ -372,7 +372,7 @@ export default function CalendarioPage() {
           <main className="flex-1 p-8 content-area">
             <div className="glass-card p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Módulo PD seleccionado</h2>
-              <p className="text-gray-400">Ve a Gestión de Archivos y selecciona un Módulo PD.</p>
+              <p className="text-gray-400">Ve a Gestión de archivos y selecciona un Módulo PD.</p>
             </div>
           </main>
         </div>
@@ -416,7 +416,7 @@ export default function CalendarioPage() {
           {/* Page heading */}
           <div>
             <h1 className="text-4xl font-extrabold text-white tracking-tight">🗓️ Calendario académico</h1>
-            <p className="text-gray-400 mt-1">Fechas, trimestres, horario semanal y eventos relevantes.</p>
+            <p className="text-gray-400 mt-1">Fechas generales, trimestres, horario semanal, festivos y eventos relevantes del curso.</p>
           </div>
 
           {/* Save message */}
@@ -426,10 +426,10 @@ export default function CalendarioPage() {
             </p>
           )}
 
-          {/* Fechas Generales */}
+          {/* Fechas generales */}
           <section className="glass-card p-6 border-t-4 border-t-blue-500">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold">Fechas Generales</h2>
+              <h2 className="text-xl font-bold">Fechas generales</h2>
               <button
                 onClick={() => {
                   const ledger = moduleData?.planning_ledger || {};
@@ -448,10 +448,10 @@ export default function CalendarioPage() {
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { label: "Inicio de Curso",   field: "ini_curso" },
-                { label: "Inicio Clases (1T)", field: "ini_1t"   },
-                { label: "Fin Clases (3T)",    field: "fin_3t"   },
-                { label: "Fin de Curso",       field: "fin_curso" },
+                { label: "Inicio de curso",   field: "ini_curso" },
+                { label: "Inicio clases (1T)", field: "ini_1t"   },
+                { label: "Fin clases (3T)",    field: "fin_3t"   },
+                { label: "Fin de curso",       field: "fin_curso" },
               ].map(({ label, field }) => (
                 <div key={field}>
                   <label className="text-sm text-gray-400 mb-1 block">{label}</label>
@@ -471,9 +471,9 @@ export default function CalendarioPage() {
             </div>
             <div className="grid grid-cols-3 gap-6">
               {[
-                { title: "1er Trimestre", ini: "ini_1t", fin: "fin_1t" },
-                { title: "2º Trimestre",  ini: "ini_2t", fin: "fin_2t" },
-                { title: "3er Trimestre", ini: "ini_3t", fin: "fin_3t" },
+                { title: "1er trimestre", ini: "ini_1t", fin: "fin_1t" },
+                { title: "2º trimestre",  ini: "ini_2t", fin: "fin_2t" },
+                { title: "3er trimestre", ini: "ini_3t", fin: "fin_3t" },
               ].map(t => (
                 <div key={t.title} className="bg-black/20 border border-white/10 rounded-xl p-4">
                   <h3 className="text-center font-bold mb-4">{t.title}</h3>
@@ -494,7 +494,7 @@ export default function CalendarioPage() {
 
           {/* Notes table + Interactive Calendar */}
           <section className="glass-card p-6 border-t-4 border-t-yellow-500">
-            <h2 className="text-xl font-bold mb-2">📌 Festivos y Eventos</h2>
+            <h2 className="text-xl font-bold mb-2">📌 Festivos y eventos</h2>
             <p className="text-gray-400 text-sm mb-4">
               Introduce manualmente o haz clic en el calendario. Los festivos excluyen horas del cómputo real.
             </p>
@@ -504,7 +504,7 @@ export default function CalendarioPage() {
 
             {/* Visual calendar */}
             <div className="mt-8">
-              <h3 className="text-lg font-bold mb-4 text-gray-300">📅 Calendario Visual</h3>
+              <h3 className="text-lg font-bold mb-4 text-gray-300">📅 Calendario visual</h3>
               <InteractiveCalendar
                 info_fechas={info_fechas}
                 horario={horario}

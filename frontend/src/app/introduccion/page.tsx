@@ -48,7 +48,7 @@ export default function IntroduccionPage() {
           <main className="flex-1 p-8 content-area">
             <div className="glass-card p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Módulo PD seleccionado</h2>
-              <p className="text-gray-400">Ve a Gestión de Archivos y selecciona un Módulo PD.</p>
+              <p className="text-gray-400">Ve a Gestión de archivos y selecciona un Módulo PD.</p>
             </div>
           </main>
         </div>
@@ -115,7 +115,7 @@ export default function IntroduccionPage() {
             <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
               📝 Introducción y planes
             </h1>
-            <p className="text-gray-400 mt-2">Configuración del contexto escolar, planes de inclusión y actividades complementarias.</p>
+            <p className="text-gray-400 mt-2">Información general del centro, profesorado, aulas y planes estratégicos.</p>
           </div>
 
 
@@ -190,7 +190,7 @@ export default function IntroduccionPage() {
               </div>
 
               <div className="glass-card p-6 border-t-4 border-t-pink-500">
-                <h2 className="text-xl font-bold mb-4 flex items-center gap-2">⚙️ Configuración del Aula</h2>
+                <h2 className="text-xl font-bold mb-4 flex items-center gap-2">⚙️ Configuración del aula</h2>
                 <div className="space-y-4">
                   <div>
                     <label className="text-sm text-gray-400 mb-1 block">Estrategias metodológicas / espacios</label>
@@ -223,7 +223,7 @@ export default function IntroduccionPage() {
 
           {/* DUA */}
           <section className="glass-card p-6 border-t-4 border-t-emerald-500">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">🧩 Plan de Atención a la Diversidad</h2>
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">🧩 Plan de atención a la diversidad</h2>
             <div className="overflow-x-auto mb-4">
               <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
                 <thead>
@@ -271,7 +271,7 @@ export default function IntroduccionPage() {
 
           {/* Contingencia */}
           <section className="glass-card p-6 border-t-4 border-t-orange-500">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">🛡️ Plan de Contingencia</h2>
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">🛡️ Plan de contingencia</h2>
             <div className="overflow-x-auto mb-4">
               <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
                 <thead>
@@ -320,7 +320,7 @@ export default function IntroduccionPage() {
 
           {/* ACE */}
           <section className="glass-card p-6 border-t-4 border-t-[#14a085]">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">🚌 Plan de Actividades Complementarias (ACE)</h2>
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">🚌 Plan de actividades complementarias (ACE)</h2>
             <div className="overflow-x-auto mb-4">
               <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
                 <thead>

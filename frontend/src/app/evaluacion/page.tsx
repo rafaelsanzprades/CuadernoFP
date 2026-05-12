@@ -45,7 +45,7 @@ export default function EvaluacionPage() {
           <main className="flex-1 p-8 content-area">
             <div className="glass-card p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">Falta seleccionar módulo o curso</h2>
-              <p className="text-gray-400">Por favor, ve a la Gestión de Archivos y carga tanto una PD como un Curso.</p>
+              <p className="text-gray-400">Por favor, ve a la Gestión de archivos y carga tanto una PD como un Curso.</p>
             </div>
           </main>
         </div>
@@ -84,7 +84,7 @@ export default function EvaluacionPage() {
           <main className="flex-1 p-8 content-area">
             <div className="glass-card p-8 text-center">
               <h2 className="text-2xl font-bold mb-4 text-yellow-400">Falta información</h2>
-              <p className="text-gray-400">Asegúrate de tener alumnado matriculado y Resultados de Aprendizaje definidos en su correspondiente pestaña.</p>
+              <p className="text-gray-400">Asegúrate de tener alumnado matriculado y Resultados de aprendizaje definidos en su correspondiente pestaña.</p>
             </div>
           </main>
         </div>
@@ -169,6 +169,7 @@ export default function EvaluacionPage() {
             <h1 className="text-4xl font-extrabold text-white tracking-tight">
               📈 Evaluación continua
             </h1>
+            <p className="text-gray-400 mt-2">Control de faltas de asistencia, incidencias y notas de clase diarias.</p>
           </div>
 
           <div className="space-y-4">
