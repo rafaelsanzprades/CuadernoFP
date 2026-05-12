@@ -76,24 +76,26 @@ export default function Header({ title }: { title?: string }) {
         {navGroups.map(group => {
           let badgeText = "";
           let badgeColor = "";
-          if (group.title === "Centro") {
+          if (group.title === "Centro educativo" || group.title === "Centro") {
             badgeText = "Global";
             badgeColor = "text-purple-300 bg-purple-500/10 border-purple-500/30";
-          } else if (group.title === "Módulo") {
+          } else if (group.title === "Módulo didáctico" || group.title === "Módulo") {
             badgeText = activeModuleId || "—";
             badgeColor = "text-[#14a085] bg-[#14a085]/10 border-[#14a085]/30";
-          } else if (group.title === "Curso") {
+          } else if (group.title === "Curso y alumnado" || group.title === "Curso") {
             badgeText = activeCursoId || "—";
             badgeColor = "text-blue-300 bg-blue-500/10 border-blue-500/30";
           }
 
           return (
             <div key={group.title} className="relative group">
-              <button className="text-[1.3rem] font-bold tracking-wide text-white px-5 py-2.5 rounded-lg hover:bg-white/5 transition-all flex items-center gap-3">
+              <button className="text-[1.1rem] font-bold tracking-wide text-white px-5 py-2.5 rounded-lg hover:bg-white/5 transition-all flex items-center gap-3">
                 {group.title}
-                <div className={`px-2 py-0.5 rounded text-[0.65rem] border font-semibold tracking-wider uppercase ${badgeColor}`}>
-                  {badgeText}
-                </div>
+                {badgeText && (
+                  <div className={`px-2 py-0.5 rounded text-[0.65rem] border font-semibold tracking-wider uppercase ${badgeColor}`}>
+                    {badgeText}
+                  </div>
+                )}
                 <span className="text-[0.55rem] text-gray-500 group-hover:text-white transition-colors">▼</span>
               </button>
 
