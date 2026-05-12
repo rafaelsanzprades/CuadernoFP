@@ -41,11 +41,11 @@ export default function IntroduccionPage() {
 
   if (!activeModuleId) {
     return (
-      <div className="flex h-screen overflow-hidden">
+      <div className="flex min-h-screen bg-[#0b1120]">
         <Sidebar />
-        <div className="flex-1 flex flex-col relative z-10">
+        <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
-          <main className="flex-1 overflow-y-auto p-8 content-area">
+          <main className="flex-1 p-8 content-area">
             <div className="glass-card p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Módulo PD seleccionado</h2>
               <p className="text-gray-400">Ve a Gestión de Archivos y selecciona un Módulo PD.</p>
@@ -58,9 +58,9 @@ export default function IntroduccionPage() {
 
   if (loading || !moduleData) {
     return (
-      <div className="flex h-screen overflow-hidden">
+      <div className="flex min-h-screen bg-[#0b1120]">
         <Sidebar />
-        <div className="flex-1 flex flex-col relative z-10">
+        <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
           <main className="flex-1 flex items-center justify-center content-area">
             <div className="text-xl text-[#14a085] animate-pulse">Cargando datos...</div>
@@ -105,12 +105,12 @@ export default function IntroduccionPage() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex min-h-screen bg-[#0b1120]">
       <Sidebar />
-      <div className="flex-1 flex flex-col relative z-10">
+      <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
         
-        <main className="flex-1 overflow-y-auto p-8 content-area space-y-8">
+        <main className="flex-1 p-8 content-area space-y-8">
           <div className="mb-8">
             <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
               📝 Introducción y planes

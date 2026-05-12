@@ -70,9 +70,9 @@ export default function Header({ title }: { title?: string }) {
   };
 
   return (
-    <div className="w-full flex flex-col z-40 relative">
+    <div className="w-full flex flex-col z-40 sticky top-0 bg-[#0b1120]/95 backdrop-blur-xl border-b border-[var(--glass-border)] pb-2 shadow-md">
       {/* Menú superior (Dropdowns) */}
-      <nav className="w-full bg-[#0b1120]/80 backdrop-blur-md border-b border-[var(--glass-border)] px-6 py-2 flex justify-center items-center gap-4">
+      <nav className="w-full px-6 py-2 flex justify-center items-center gap-4">
         {navGroups.map(group => {
           let badgeText = "";
           let badgeColor = "";
@@ -120,7 +120,7 @@ export default function Header({ title }: { title?: string }) {
         })}
       </nav>
 
-      <header className="w-full flex items-center justify-between p-8 pb-4 gap-4">
+      <header className="w-full flex items-center justify-between px-8 pt-4 pb-2 gap-4">
         <div className="hidden lg:block flex-1"></div>
 
         {title && (

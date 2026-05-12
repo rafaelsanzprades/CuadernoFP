@@ -45,11 +45,11 @@ export default function CalificacionFEOEPage() {
 
   if (!activeModuleId || !activeCursoId) {
     return (
-      <div className="flex h-screen overflow-hidden">
+      <div className="flex min-h-screen bg-[#0b1120]">
         <Sidebar />
-        <div className="flex-1 flex flex-col relative z-10">
+        <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
-          <main className="flex-1 overflow-y-auto p-8 content-area">
+          <main className="flex-1 p-8 content-area">
             <div className="glass-card p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Curso o Módulo seleccionado</h2>
               <p className="text-gray-400">Por favor, ve a la Gestión de Archivos y asegúrate de cargar ambos.</p>
@@ -62,9 +62,9 @@ export default function CalificacionFEOEPage() {
 
   if (loading || !cursoData || !moduleData) {
     return (
-      <div className="flex h-screen overflow-hidden">
+      <div className="flex min-h-screen bg-[#0b1120]">
         <Sidebar />
-        <div className="flex-1 flex flex-col relative z-10">
+        <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
           <main className="flex-1 flex items-center justify-center content-area">
             <div className="text-xl text-blue-400 animate-pulse">Cargando datos de FEOE...</div>
@@ -94,12 +94,12 @@ export default function CalificacionFEOEPage() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex min-h-screen bg-[#0b1120]">
       <Sidebar />
-      <div className="flex-1 flex flex-col relative z-10">
+      <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
         
-        <main className="flex-1 overflow-y-auto p-8 content-area space-y-8">
+        <main className="flex-1 p-8 content-area space-y-8">
           <div className="mb-8">
             <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
               🏢 Calificación FEOE

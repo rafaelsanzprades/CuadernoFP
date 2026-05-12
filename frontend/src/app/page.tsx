@@ -127,7 +127,7 @@ export default function FileManagement() {
 
   if (loading && modules.pd_modules.length === 0) {
     return (
-      <div className="flex h-screen overflow-hidden">
+      <div className="flex min-h-screen bg-[#0b1120]">
         <Sidebar />
         <main className="flex-1 flex flex-col h-screen items-center justify-center text-white">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#14a085] mb-4"></div>
@@ -138,9 +138,9 @@ export default function FileManagement() {
   }
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex min-h-screen bg-[#0b1120]">
       <Sidebar />
-      <main className="flex-1 flex flex-col relative z-10">
+      <main className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
         
         {notification && (
@@ -153,7 +153,7 @@ export default function FileManagement() {
           </div>
         )}
 
-        <div className="flex-1 overflow-y-auto p-8 pt-4">
+        <div className="flex-1 p-8 pt-4">
           <div className="space-y-8 pb-12">
             <div>
               <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3 mb-2">📁 Gestión de archivos</h1>
