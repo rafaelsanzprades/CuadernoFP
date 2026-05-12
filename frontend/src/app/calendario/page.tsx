@@ -402,43 +402,8 @@ export default function CalendarioPage() {
   const handleUpdateFechas = (field: string, value: string | number) =>
     updateModuleData("info_fechas", { ...info_fechas, [field]: value });
 
-  const handleUpdateHorario = (day: string, val: number) =>
-    updateModuleData("horario", { ...horario, [day]: val });
-
   const handleUpdateNote = (key: string, val: string) =>
     updateModuleData("calendar_notes", { ...calendar_notes, [key]: val });
-
-  // Hour calculations
-  const calculateRealHours = (startStr: string, endStr: string) => {
-    if (!startStr || !endStr) return 0;
-    try {
-      const [sy, sm, sd] = startStr.split("-").map(Number);
-      const [ey, em, ed] = endStr.split("-").map(Number);
-      if (!sy || !ey) return 0;
-      const start = new Date(sy, sm - 1, sd);
-      const end   = new Date(ey, em - 1, ed);
-      const dayMap = ["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
-      let total = 0, curr = new Date(start);
-      while (curr <= end) {
-        if (curr.getDay() !== 0 && curr.getDay() !== 6) {
-          const key = `f_${pad(curr.getDate())}/${pad(curr.getMonth()+1)}/${curr.getFullYear()}`;
-          if (!calendar_notes[key]) total += Number(horario[dayMap[curr.getDay()]]) || 0;
-        }
-        curr.setDate(curr.getDate() + 1);
-      }
-      return total;
-    } catch { return 0; }
-  };
-
-  const h1 = calculateRealHours(info_fechas.ini_1t, info_fechas.fin_1t);
-  const h2 = calculateRealHours(info_fechas.ini_2t, info_fechas.fin_2t);
-  const h3 = calculateRealHours(info_fechas.ini_3t, info_fechas.fin_3t);
-  const h_real = h1 + h2 + h3;
-  const h_boa  = Number(info_modulo.h_boa) || 0;
-  const h_sem  = Number(info_modulo.h_sem) || 0;
-  const p_ev   = Number(info_modulo.p_ev)  || 15;
-  const h_p_ev = Math.round((p_ev / 100) * h_real);
-  const suma_horario = Object.values(horario).reduce((a: any, b: any) => Number(a) + Number(b), 0) as number;
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -499,52 +464,20 @@ export default function CalendarioPage() {
             </div>
           </section>
 
-          {/* Horario Semanal */}
-          <section className="glass-card p-6 border-t-4 border-t-purple-500">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">Horario Semanal</h2>
-              <div className="bg-black/30 px-4 py-2 rounded-lg border border-white/10 text-sm">
-                Desfase con H/Semanal:{" "}
-                <span className={`font-bold ${suma_horario === h_sem ? "text-green-400" : "text-yellow-400"}`}>
-                  {suma_horario - h_sem} h
-                </span>
-              </div>
-            </div>
-            <div className="grid grid-cols-5 gap-4">
-              {["Lun","Mar","Mié","Jue","Vie"].map(day => (
-                <div key={day}>
-                  <label className="text-sm text-gray-400 mb-1 block text-center font-bold">{day}</label>
-                  <input
-                    type="number" min="0" max="8"
-                    value={Number(horario[day]) || 0}
-                    onChange={e => handleUpdateHorario(day, Number(e.target.value))}
-                    className="w-full bg-black/30 border border-white/10 rounded-lg p-2 text-white focus:border-purple-500 focus:outline-none text-center text-xl font-mono"
-                  />
-                </div>
-              ))}
-            </div>
-          </section>
-
           {/* Trimestres */}
           <section className="glass-card p-6 border-t-4 border-t-emerald-500">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold">Trimestres</h2>
-              <div className="bg-black/30 px-4 py-2 rounded-lg border border-white/10 text-sm">
-                Desfase BOA / Real:{" "}
-                <span className={`font-bold ${h_real === h_boa ? "text-green-400" : "text-yellow-400"}`}>
-                  {h_real - h_boa} h
-                </span>
-              </div>
             </div>
             <div className="grid grid-cols-3 gap-6">
               {[
-                { title: "1er Trimestre", ini: "ini_1t", fin: "fin_1t", h: h1 },
-                { title: "2º Trimestre",  ini: "ini_2t", fin: "fin_2t", h: h2 },
-                { title: "3er Trimestre", ini: "ini_3t", fin: "fin_3t", h: h3 },
+                { title: "1er Trimestre", ini: "ini_1t", fin: "fin_1t" },
+                { title: "2º Trimestre",  ini: "ini_2t", fin: "fin_2t" },
+                { title: "3er Trimestre", ini: "ini_3t", fin: "fin_3t" },
               ].map(t => (
                 <div key={t.title} className="bg-black/20 border border-white/10 rounded-xl p-4">
                   <h3 className="text-center font-bold mb-4">{t.title}</h3>
-                  <div className="space-y-3 mb-4">
+                  <div className="space-y-3">
                     <div>
                       <label className="text-xs text-gray-400">Inicio</label>
                       <DatePicker value={info_fechas[t.ini] || ""} onChange={v => handleUpdateFechas(t.ini, v)} />
@@ -554,41 +487,8 @@ export default function CalendarioPage() {
                       <DatePicker value={info_fechas[t.fin] || ""} onChange={v => handleUpdateFechas(t.fin, v)} />
                     </div>
                   </div>
-                  <div className="text-center bg-black/40 p-2 rounded text-emerald-400 font-mono font-bold">{t.h} h reales</div>
                 </div>
               ))}
-            </div>
-            <div className="grid grid-cols-3 gap-6 mt-6">
-              {[
-                { label: "Horas BOA",           value: `${h_boa} h`,  cls: "text-white" },
-                { label: "Horas clases real",    value: `${h_real} h`, cls: "text-emerald-400" },
-                { label: `Horas P.Ev. (${p_ev}%)`, value: `${h_p_ev} h`, cls: "text-yellow-400" },
-              ].map(s => (
-                <div key={s.label} className="bg-black/20 border border-white/10 rounded-xl p-4 text-center">
-                  <div className="text-sm text-gray-400">{s.label}</div>
-                  <div className={`text-2xl font-bold ${s.cls}`}>{s.value}</div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* FEOE */}
-          <section className="glass-card p-6 border-t-4 border-t-pink-500">
-            <h2 className="text-xl font-bold mb-4">🏢 Formación en Empresa (FEOE)</h2>
-            <div className="grid grid-cols-3 gap-6">
-              <div>
-                <label className="text-sm text-gray-400 mb-1 block">Inicio FEOE</label>
-                <DatePicker value={info_fechas.ini_feoe || ""} onChange={v => handleUpdateFechas("ini_feoe", v)} />
-              </div>
-              <div>
-                <label className="text-sm text-gray-400 mb-1 block">Fin FEOE</label>
-                <DatePicker value={info_fechas.fin_feoe || ""} onChange={v => handleUpdateFechas("fin_feoe", v)} />
-              </div>
-              <div>
-                <label className="text-sm text-gray-400 mb-1 block">Horas/día FEOE</label>
-                <input type="number" value={Number(info_fechas.h_sem_feoe) || 8} onChange={e => handleUpdateFechas("h_sem_feoe", Number(e.target.value))}
-                  className="w-full bg-black/30 border border-white/10 rounded-lg p-2 text-white focus:border-pink-500 focus:outline-none" />
-              </div>
             </div>
           </section>
 

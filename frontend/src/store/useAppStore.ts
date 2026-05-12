@@ -13,9 +13,13 @@ interface AppState {
   cursoData: any;
   setCursoData: (data: any) => void;
   updateCursoData: (key: string, data: any) => void;
+  isSidebarOpen: boolean;
+  toggleSidebar: () => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({
+  isSidebarOpen: true,
+  toggleSidebar: () => set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
   activeModuleId: '0237-ictve-pd', // ID por defecto para pruebas
   setActiveModuleId: (id) => set({ activeModuleId: id }),
   activeCursoId: '',
