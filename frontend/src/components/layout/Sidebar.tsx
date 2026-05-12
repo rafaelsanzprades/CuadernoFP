@@ -5,7 +5,7 @@ import { useAppStore } from '@/store/useAppStore';
 
 const navGroups = [
   {
-    title: "Centro",
+    title: "Centro educativo",
     items: [
       { href: "/", label: "Gestión de archivos", icon: "📁" },
       { href: "/introduccion", label: "Introducción y planes", icon: "📝" },
@@ -14,7 +14,7 @@ const navGroups = [
     ]
   },
   {
-    title: "Módulo",
+    title: "Módulo didáctico",
     items: [
       { href: "/modulo", label: "Módulo didáctico", icon: "⚙️" },
       { href: "/matrices", label: "Matrices RA→CE→UD", icon: "🧮" },
@@ -24,13 +24,13 @@ const navGroups = [
     ]
   },
   {
-    title: "Curso",
+    title: "Curso y alumnado",
     items: [
       { href: "/matricula", label: "Matrícula alumnado", icon: "👥" },
       { href: "/calificacion", label: "Calificación académica", icon: "📊" },
       { href: "/calificacion-feoe", label: "Calificación FEOE", icon: "🏢" },
       { href: "/evaluacion", label: "Evaluación continua", icon: "📈" },
-      { href: "/analisis", label: "Análisis de grupo", icon: "📉" },
+      { href: "/analisis", label: "Análisis grupal", icon: "📉" },
       { href: "/portal", label: "Portal alumnado", icon: "🎓" }
     ]
   }
@@ -45,9 +45,9 @@ export default function Sidebar() {
       {/* Header compacto */}
       <div className={`px-4 pt-4 pb-2 flex ${isSidebarOpen ? 'justify-between' : 'justify-center'} items-center`}>
         {isSidebarOpen && (
-          <h1 className="text-base font-extrabold leading-tight text-white mb-3 tracking-tight whitespace-nowrap">
-            Cuaderno Digital<br/>
-            <span className="text-[#14a085]">Docente Ciclos</span>
+          <h1 className="text-[1.3rem] font-extrabold leading-tight text-white mb-4 tracking-tight whitespace-nowrap">
+            Cuaderno Digital<br />
+            <span>Docente Ciclos FP</span>
           </h1>
         )}
         <button onClick={toggleSidebar} className="text-gray-400 hover:text-white p-1 rounded-md hover:bg-white/10 transition-colors mb-3">
@@ -61,7 +61,7 @@ export default function Sidebar() {
         {navGroups.map((group, idx) => (
           <div key={group.title} className="flex flex-col gap-0.5">
             {isSidebarOpen && (
-              <div className="text-xs font-bold text-gray-400 tracking-wide px-3 mb-1 mt-1">
+              <div className="text-[0.95rem] font-bold text-white tracking-wide px-3 mb-2 mt-2">
                 {group.title}
               </div>
             )}

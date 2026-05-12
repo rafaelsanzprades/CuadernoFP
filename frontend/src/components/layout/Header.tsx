@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 
 const navGroups = [
   {
-    title: "Centro",
+    title: "Centro educativo",
     items: [
       { href: "/", label: "Gestión de archivos", icon: "📁" },
       { href: "/introduccion", label: "Introducción y planes", icon: "📝" },
@@ -16,7 +16,7 @@ const navGroups = [
     ]
   },
   {
-    title: "Módulo",
+    title: "Módulo didáctico",
     items: [
       { href: "/modulo", label: "Módulo didáctico", icon: "⚙️" },
       { href: "/matrices", label: "Matrices RA→CE→UD", icon: "🧮" },
@@ -26,13 +26,13 @@ const navGroups = [
     ]
   },
   {
-    title: "Curso",
+    title: "Curso y alumnado",
     items: [
       { href: "/matricula", label: "Matrícula alumnado", icon: "👥" },
       { href: "/calificacion", label: "Calificación académica", icon: "📊" },
       { href: "/calificacion-feoe", label: "Calificación FEOE", icon: "🏢" },
       { href: "/evaluacion", label: "Evaluación continua", icon: "📈" },
-      { href: "/analisis", label: "Análisis de grupo", icon: "📉" },
+      { href: "/analisis", label: "Análisis grupal", icon: "📉" },
       { href: "/portal", label: "Portal alumnado", icon: "🎓" }
     ]
   }
@@ -88,32 +88,32 @@ export default function Header({ title }: { title?: string }) {
           }
 
           return (
-          <div key={group.title} className="relative group">
-            <button className="text-[1rem] font-bold tracking-wide text-gray-400 hover:text-white px-5 py-2.5 rounded-lg hover:bg-white/5 transition-all flex items-center gap-3">
-              {group.title}
-              <div className={`px-2 py-0.5 rounded text-[0.65rem] border font-semibold tracking-wider uppercase ${badgeColor}`}>
-                {badgeText}
-              </div>
-              <span className="text-[0.55rem] text-gray-500 group-hover:text-white transition-colors">▼</span>
-            </button>
+            <div key={group.title} className="relative group">
+              <button className="text-[1.3rem] font-bold tracking-wide text-white px-5 py-2.5 rounded-lg hover:bg-white/5 transition-all flex items-center gap-3">
+                {group.title}
+                <div className={`px-2 py-0.5 rounded text-[0.65rem] border font-semibold tracking-wider uppercase ${badgeColor}`}>
+                  {badgeText}
+                </div>
+                <span className="text-[0.55rem] text-gray-500 group-hover:text-white transition-colors">▼</span>
+              </button>
 
-            {/* Dropdown menu */}
-            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible w-64 bg-[#0b1120] border border-[var(--glass-border)] rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.6)] py-2 z-50 transition-all duration-200 transform translate-y-1 group-hover:translate-y-0 before:absolute before:top-[-10px] before:left-0 before:w-full before:h-[10px] before:content-['']">
-              {group.items.map(item => {
-                const isActive = pathname === item.href;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-colors ${isActive ? 'bg-gradient-to-r from-blue-500/10 to-transparent border-l-2 border-blue-400' : 'border-l-2 border-transparent'}`}
-                  >
-                    <span className="text-xl">{item.icon}</span>
-                    <span className={`text-[0.85rem] ${isActive ? 'text-white font-bold' : 'text-gray-300 font-medium'}`}>{item.label}</span>
-                  </Link>
-                );
-              })}
+              {/* Dropdown menu */}
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible w-64 bg-[#0b1120] border border-[var(--glass-border)] rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.6)] py-2 z-50 transition-all duration-200 transform translate-y-1 group-hover:translate-y-0 before:absolute before:top-[-10px] before:left-0 before:w-full before:h-[10px] before:content-['']">
+                {group.items.map(item => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-colors ${isActive ? 'bg-gradient-to-r from-blue-500/10 to-transparent border-l-2 border-blue-400' : 'border-l-2 border-transparent'}`}
+                    >
+                      <span className="text-xl">{item.icon}</span>
+                      <span className={`text-[0.85rem] ${isActive ? 'text-white font-bold' : 'text-gray-300 font-medium'}`}>{item.label}</span>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
-          </div>
           );
         })}
       </nav>
