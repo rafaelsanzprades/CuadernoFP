@@ -372,8 +372,8 @@ export default function AsignacionesPage() {
                         </tbody>
                       </table>
                     </div>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
 
               {/* Panel Derecho: Resumen de Carga Lectiva */}
