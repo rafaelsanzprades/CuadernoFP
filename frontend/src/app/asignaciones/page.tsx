@@ -39,7 +39,18 @@ export default function AsignacionesPage() {
   const [selectedFamilyId, setSelectedFamilyId] = useState("");
   const [selectedDegreeId, setSelectedDegreeId] = useState("");
 
+  const [viewFamilyId, setViewFamilyId] = useState("");
+  const [viewDegreeId, setViewDegreeId] = useState("");
+
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const searchParams = new URLSearchParams(window.location.search);
+      const initialFamilyId = searchParams.get("familyId");
+      const initialDegreeId = searchParams.get("degreeId");
+      if (initialFamilyId) setViewFamilyId(initialFamilyId);
+      if (initialDegreeId) setViewDegreeId(initialDegreeId);
+    }
+
     fetch("/api/users")
       .then(res => res.json())
       .then(json => {
@@ -65,25 +76,67 @@ export default function AsignacionesPage() {
   const [groups, setGroups] = useState<CourseGroup[]>([
     {
       id: 1,
-      name: "1º DAW - Grupo A (Mañana)",
-      degreeName: "Desarrollo de Aplicaciones Web",
-      level: "Grado Superior",
+      name: "1º Instalaciones de Telecomunicaciones",
+      degreeName: "Instalaciones de Telecomunicaciones",
+      level: "Grado Medio",
       modules: [
-        { id: 101, code: "0484", name: "Bases de Datos", hours: 192, isDual: true, assignedTeacherId: 3 },
-        { id: 102, code: "0485", name: "Entornos de Desarrollo", hours: 96, isDual: true, assignedTeacherId: 1 },
-        { id: 103, code: "0483", name: "Sistemas Informáticos", hours: 160, isDual: false, assignedTeacherId: null },
-        { id: 104, code: "0487", name: "Lenguajes de Marcas", hours: 128, isDual: true, assignedTeacherId: 4 },
+        { id: 101, code: "0237", name: "Infra. comunes de teleco en viviendas y edificios", hours: 167, isDual: false, assignedTeacherId: 2 },
+        { id: 102, code: "0359", name: "Electrónica aplicada", hours: 167, isDual: false, assignedTeacherId: 3 },
+        { id: 103, code: "0360", name: "Equipos microinformáticos", hours: 100, isDual: false, assignedTeacherId: 4 },
+        { id: 104, code: "0361", name: "Infra. de redes de datos y sistemas de telefonía", hours: 133, isDual: true, assignedTeacherId: 5 },
+        { id: 105, code: "0362", name: "Instalaciones eléctricas básicas", hours: 200, isDual: true, assignedTeacherId: 6 },
+        { id: 106, code: "1664", name: "Digitalización aplicada a los sectores productivos (GM)", hours: 33, isDual: false, assignedTeacherId: 4 },
+        { id: 107, code: "A997", name: "Tutoría I", hours: 33, isDual: false, assignedTeacherId: 2 },
+        { id: 108, code: "0156", name: "Inglés Profesional (GM)", hours: 67, isDual: false, assignedTeacherId: 7 },
+        { id: 109, code: "1709", name: "Itinerario personal para la empleabilidad I", hours: 100, isDual: false, assignedTeacherId: 8 }
       ]
     },
     {
       id: 2,
-      name: "2º DAW - Grupo Único (Tardes)",
-      degreeName: "Desarrollo de Aplicaciones Web",
+      name: "2º Instalaciones de Telecomunicaciones",
+      degreeName: "Instalaciones de Telecomunicaciones",
+      level: "Grado Medio",
+      modules: [
+        { id: 201, code: "0238", name: "Instalaciones domóticas", hours: 133, isDual: true, assignedTeacherId: 2 },
+        { id: 202, code: "0363", name: "Instalaciones de megafonía y sonorización", hours: 200, isDual: true, assignedTeacherId: 6 },
+        { id: 203, code: "0364", name: "Circuito cerrado de televisión y seguridad electrónica", hours: 200, isDual: true, assignedTeacherId: 9 },
+        { id: 204, code: "0365", name: "Instalaciones de radiocomunicaciones", hours: 167, isDual: true, assignedTeacherId: 3 },
+        { id: 205, code: "1708", name: "Sostenibilidad aplicada al sistema productivo", hours: 33, isDual: false, assignedTeacherId: 5 },
+        { id: 206, code: "A172", name: "Ofimática avanzada", hours: 100, isDual: true, assignedTeacherId: 4 },
+        { id: 207, code: "1713", name: "Proyecto intermodular", hours: 67, isDual: false, assignedTeacherId: 7 },
+        { id: 208, code: "A996", name: "Tutoría II", hours: 33, isDual: false, assignedTeacherId: 3 },
+        { id: 209, code: "1710", name: "Itinerario personal para la empleabilidad II", hours: 67, isDual: false, assignedTeacherId: 8 }
+      ]
+    },
+    {
+      id: 3,
+      name: "1º Sistemas de Telecomunicaciones e Informáticos",
+      degreeName: "Sistemas de Telecomunicaciones e Informáticos",
       level: "Grado Superior",
       modules: [
-        { id: 201, code: "0488", name: "Desarrollo Web en Entorno Cliente", hours: 140, isDual: true, assignedTeacherId: null },
-        { id: 202, code: "0489", name: "Desarrollo Web en Entorno Servidor", hours: 175, isDual: true, assignedTeacherId: null },
-        { id: 203, code: "0490", name: "Despliegue de Aplicaciones Web", hours: 88, isDual: false, assignedTeacherId: 2 },
+        { id: 301, code: "0525", name: "Configuración de infraestructuras de sistemas de tele", hours: 133, isDual: false, assignedTeacherId: 9 },
+        { id: 302, code: "0551", name: "Elementos de sistemas de telecomunicaciones", hours: 133, isDual: false, assignedTeacherId: 3 },
+        { id: 303, code: "0552", name: "Sistemas informáticos y redes locales", hours: 133, isDual: true, assignedTeacherId: 2 },
+        { id: 304, code: "0554", name: "Sistemas de producción audiovisual", hours: 200, isDual: true, assignedTeacherId: 4 },
+        { id: 305, code: "0601", name: "Gestión de proyectos de instalaciones de teleco", hours: 67, isDual: false, assignedTeacherId: 9 },
+        { id: 306, code: "0713", name: "Sistemas de telefonía fija y móvil", hours: 133, isDual: false, assignedTeacherId: 6 },
+        { id: 307, code: "1665", name: "Digitalización aplicada a los sectores productivos (GS)", hours: 33, isDual: false, assignedTeacherId: 6 },
+        { id: 308, code: "0179", name: "Inglés Profesional", hours: 67, isDual: false, assignedTeacherId: 7 },
+        { id: 309, code: "1709", name: "Itinerario personal para la empleabilidad I", hours: 100, isDual: false, assignedTeacherId: 8 }
+      ]
+    },
+    {
+      id: 4,
+      name: "2º Sistemas de Telecomunicaciones e Informáticos",
+      degreeName: "Sistemas de Telecomunicaciones e Informáticos",
+      level: "Grado Superior",
+      modules: [
+        { id: 401, code: "0553", name: "Técnicas y procesos en infraestructuras de teleco", hours: 133, isDual: true, assignedTeacherId: 4 },
+        { id: 402, code: "0555", name: "Redes telemáticas", hours: 233, isDual: true, assignedTeacherId: 5 },
+        { id: 403, code: "0556", name: "Sistemas de radiocomunicaciones", hours: 200, isDual: true, assignedTeacherId: 5 },
+        { id: 404, code: "0557", name: "Sistemas integrados y hogar digital", hours: 167, isDual: true, assignedTeacherId: 9 },
+        { id: 405, code: "1708", name: "Sostenibilidad aplicada al sistema productivo", hours: 33, isDual: false, assignedTeacherId: 3 },
+        { id: 406, code: "1713", name: "Proyecto intermodular", hours: 67, isDual: false, assignedTeacherId: 2 }
       ]
     }
   ]);
@@ -142,6 +195,13 @@ export default function AsignacionesPage() {
     setHasChanges(true);
   };
 
+  const viewFamily = families.find(f => f.id.toString() === viewFamilyId);
+  const viewDegree = viewFamily?.degrees.find((d: any) => d.id.toString() === viewDegreeId);
+
+  const displayedGroups = viewDegree
+    ? groups.filter(g => g.degreeName.toLowerCase() === viewDegree.name.toLowerCase())
+    : [];
+
   return (
     <div className="flex min-h-screen bg-[#0b1120]">
       <Sidebar />
@@ -191,12 +251,58 @@ export default function AsignacionesPage() {
               </button>
             </div>
 
+            {/* Filtros Superiores */}
+            <div className="glass-card p-5 flex flex-col md:flex-row gap-4 mb-2">
+              <div className="flex-1">
+                <label className="block text-sm font-medium text-gray-400 mb-2">Familia Profesional</label>
+                <select 
+                  className="w-full bg-[#0b1120] border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-accent/50 transition-colors"
+                  value={viewFamilyId}
+                  onChange={(e) => {
+                    setViewFamilyId(e.target.value);
+                    setViewDegreeId("");
+                  }}
+                >
+                  <option value="">-- Selecciona Familia --</option>
+                  {families.map((f: any) => (
+                    <option key={f.id} value={f.id}>{f.name}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex-1">
+                <label className="block text-sm font-medium text-gray-400 mb-2">Grado y Título</label>
+                <select 
+                  className="w-full bg-[#0b1120] border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-accent/50 transition-colors disabled:opacity-50"
+                  value={viewDegreeId}
+                  onChange={(e) => setViewDegreeId(e.target.value)}
+                  disabled={!viewFamilyId}
+                >
+                  <option value="">-- Selecciona Título --</option>
+                  {viewFamily?.degrees.map((d: any) => (
+                    <option key={d.id} value={d.id}>{d.level} - {d.name}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
               
               {/* Panel Izquierdo: Lista de Grupos */}
               <div className="lg:col-span-3 space-y-6">
-                {groups.map(group => (
-                  <div key={group.id} className="glass-card overflow-hidden">
+                {!viewDegreeId ? (
+                  <div className="glass-card p-12 text-center text-gray-400 flex flex-col items-center justify-center">
+                    <Filter className="w-12 h-12 mb-4 text-white/20" />
+                    <p className="text-lg">Selecciona una Familia y un Título para ver sus módulos.</p>
+                  </div>
+                ) : displayedGroups.length === 0 ? (
+                  <div className="glass-card p-12 text-center text-gray-400 flex flex-col items-center justify-center">
+                    <BookOpen className="w-12 h-12 mb-4 text-white/20" />
+                    <p className="text-lg">No hay grupos registrados para este Título.</p>
+                    <button onClick={() => setIsModalOpen(true)} className="mt-4 text-accent hover:text-accent/80 transition-colors">Añadir un nuevo grupo</button>
+                  </div>
+                ) : (
+                  displayedGroups.map(group => (
+                    <div key={group.id} className="glass-card overflow-hidden">
                     {/* Cabecera del Grupo */}
                     <div className="bg-white/5 border-b border-white/10 p-5 flex items-center justify-between">
                       <div>

@@ -35,12 +35,12 @@ const navGroups = [
     ]
   },
   {
-    title: "Gestión de usuarios",
+    title: "Gestión plataforma",
     items: [
       { href: "/perfiles", label: "Roles y permisos", icon: "🛡️" },
       { href: "/usuarios", label: "Gestión de usuarios", icon: "👥" },
-      { href: "/asignaciones", label: "Asignación de módulos", icon: "📋" },
-      { href: "/familias", label: "Familias profesionales", icon: "🗂️" }
+      { href: "/familias", label: "Familias profesionales", icon: "🗂️" },
+      { href: "/asignaciones", label: "Asignación de módulos", icon: "📋" }
     ]
   }
 ];

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
+import Link from "next/link";
 
 type Degree = {
   id: number;
@@ -118,12 +119,16 @@ export default function FamiliasPage() {
                             const badge = badgeMap[degree.level] || degree.level;
 
                             return (
-                              <div key={degree.id} className="text-sm bg-white/5 rounded-lg p-2.5 border border-white/10 hover:border-white/20 transition-colors flex items-center justify-between gap-3">
-                                <div className="text-gray-300 font-medium leading-tight flex-1">{degree.name}</div>
+                              <Link 
+                                href={`/asignaciones?familyId=${family.id}&degreeId=${degree.id}`} 
+                                key={degree.id} 
+                                className="block text-sm bg-white/5 rounded-lg p-2.5 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all flex items-center justify-between gap-3 group cursor-pointer"
+                              >
+                                <div className="text-gray-300 font-medium leading-tight flex-1 group-hover:text-white transition-colors">{degree.name}</div>
                                 <div className="text-[10px] font-bold text-white bg-black/40 border border-white/10 px-2 py-1 rounded shadow-inner tracking-wider">
                                   {badge}
                                 </div>
-                              </div>
+                              </Link>
                             );
                           })}
                         </div>
