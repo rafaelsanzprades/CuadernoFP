@@ -56,17 +56,17 @@ export default function FamiliasPage() {
       <Sidebar />
       <main className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
-        
+
         <div className="flex-1 p-8 pt-4 overflow-y-auto scrollbar-hide">
           <div className="max-w-7xl mx-auto space-y-6 animate-in fade-in duration-500">
-            
+
             {/* Cabecera */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
               <div>
                 <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3 mb-2">
                   <span className="text-3xl">🗂️</span> Familias Profesionales
                 </h1>
-                <p className="text-gray-400">Catálogo oficial de Aragón con sus respectivos Ciclos Formativos (Grado Medio, Superior, Especialización).</p>
+                <p className="text-gray-400">Catálogo oficial de Ciclos Formativos. Grado Básico, Grado Medio y Grado Superior</p>
               </div>
             </div>
 
@@ -78,15 +78,15 @@ export default function FamiliasPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {families.map(family => (
                   <div key={family.id} className="glass-card overflow-hidden hover:-translate-y-1 transition-transform duration-300">
-                    <div 
+                    <div
                       className="p-6 flex flex-col items-center text-center relative border-b border-white/5"
                       style={{ background: `linear-gradient(to bottom, ${family.color_hex}15, transparent)` }}
                     >
                       {/* Borde superior de color */}
                       <div className="absolute top-0 left-0 right-0 h-1" style={{ backgroundColor: family.color_hex }} />
-                      
+
                       {/* Icono */}
-                      <div 
+                      <div
                         className="w-20 h-20 rounded-2xl flex items-center justify-center mb-4 shadow-lg p-3"
                         style={{ backgroundColor: `${family.color_hex}20`, border: `1px solid ${family.color_hex}40` }}
                       >
@@ -96,7 +96,7 @@ export default function FamiliasPage() {
                           <img src={family.icon_url} alt={family.code} className="w-full h-full object-contain filter drop-shadow-md" />
                         )}
                       </div>
-                      
+
                       <div className="text-xs font-bold px-2 py-1 rounded-md mb-2" style={{ backgroundColor: `${family.color_hex}30`, color: family.color_hex }}>
                         {family.code}
                       </div>
@@ -119,9 +119,9 @@ export default function FamiliasPage() {
                             const badge = badgeMap[degree.level] || degree.level;
 
                             return (
-                              <Link 
-                                href={`/asignaciones?familyId=${family.id}&degreeId=${degree.id}`} 
-                                key={degree.id} 
+                              <Link
+                                href={`/asignaciones?familyId=${family.id}&degreeId=${degree.id}`}
+                                key={degree.id}
                                 className="block text-sm bg-white/5 rounded-lg p-2.5 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all flex items-center justify-between gap-3 group cursor-pointer"
                               >
                                 <div className="text-gray-300 font-medium leading-tight flex-1 group-hover:text-white transition-colors">{degree.name}</div>
@@ -142,7 +142,7 @@ export default function FamiliasPage() {
                 ))}
               </div>
             )}
-            
+
           </div>
         </div>
       </main>
