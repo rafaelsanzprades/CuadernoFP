@@ -109,7 +109,7 @@ export default function IntroduccionPage() {
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
-        
+
         <main className="flex-1 p-8 content-area space-y-8">
           <div className="mb-8">
             <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
@@ -125,32 +125,32 @@ export default function IntroduccionPage() {
               <div className="space-y-4">
                 <div>
                   <label className="text-sm text-gray-400 mb-1 block">Instalaciones</label>
-                  <textarea 
-                    value={config_contexto.instalaciones || ""} 
+                  <textarea
+                    value={config_contexto.instalaciones || ""}
                     onChange={e => handleContextoChange("instalaciones", e.target.value)}
                     className="w-full h-24 bg-black/30 border border-white/10 rounded-lg p-3 text-white focus:border-indigo-500 focus:outline-none"
                   />
                 </div>
                 <div>
                   <label className="text-sm text-gray-400 mb-1 block">Horario lectivo</label>
-                  <textarea 
-                    value={config_contexto.horario_lectivo || ""} 
+                  <textarea
+                    value={config_contexto.horario_lectivo || ""}
                     onChange={e => handleContextoChange("horario_lectivo", e.target.value)}
                     className="w-full h-24 bg-black/30 border border-white/10 rounded-lg p-3 text-white focus:border-indigo-500 focus:outline-none"
                   />
                 </div>
                 <div>
                   <label className="text-sm text-gray-400 mb-1 block">Equipo docente</label>
-                  <textarea 
-                    value={config_contexto.equipo_docente || ""} 
+                  <textarea
+                    value={config_contexto.equipo_docente || ""}
                     onChange={e => handleContextoChange("equipo_docente", e.target.value)}
                     className="w-full h-24 bg-black/30 border border-white/10 rounded-lg p-3 text-white focus:border-indigo-500 focus:outline-none"
                   />
                 </div>
                 <div>
                   <label className="text-sm text-gray-400 mb-1 block">Entorno socioeconómico</label>
-                  <textarea 
-                    value={config_contexto.entorno_socioeconomico || ""} 
+                  <textarea
+                    value={config_contexto.entorno_socioeconomico || ""}
                     onChange={e => handleContextoChange("entorno_socioeconomico", e.target.value)}
                     className="w-full h-24 bg-black/30 border border-white/10 rounded-lg p-3 text-white focus:border-indigo-500 focus:outline-none"
                   />
@@ -164,24 +164,24 @@ export default function IntroduccionPage() {
                 <div className="space-y-4">
                   <div>
                     <label className="text-sm text-gray-400 mb-1 block">Inclusión</label>
-                    <textarea 
-                      value={config_contexto.inclusion || ""} 
+                    <textarea
+                      value={config_contexto.inclusion || ""}
                       onChange={e => handleContextoChange("inclusion", e.target.value)}
                       className="w-full h-24 bg-black/30 border border-white/10 rounded-lg p-3 text-white focus:border-purple-500 focus:outline-none"
                     />
                   </div>
                   <div>
                     <label className="text-sm text-gray-400 mb-1 block">Elenco de situaciones</label>
-                    <textarea 
-                      value={config_contexto.elenco_situaciones || ""} 
+                    <textarea
+                      value={config_contexto.elenco_situaciones || ""}
                       onChange={e => handleContextoChange("elenco_situaciones", e.target.value)}
                       className="w-full h-24 bg-black/30 border border-white/10 rounded-lg p-3 text-white focus:border-purple-500 focus:outline-none"
                     />
                   </div>
                   <div>
                     <label className="text-sm text-gray-400 mb-1 block">Circunstancias ocultas</label>
-                    <textarea 
-                      value={config_contexto.circunstancias_ocultas || ""} 
+                    <textarea
+                      value={config_contexto.circunstancias_ocultas || ""}
                       onChange={e => handleContextoChange("circunstancias_ocultas", e.target.value)}
                       className="w-full h-24 bg-black/30 border border-white/10 rounded-lg p-3 text-white focus:border-purple-500 focus:outline-none"
                     />
@@ -193,25 +193,25 @@ export default function IntroduccionPage() {
                 <h2 className="text-xl font-bold mb-4 flex items-center gap-2">⚙️ Configuración del aula</h2>
                 <div className="space-y-4">
                   <div>
-                    <label className="text-sm text-gray-400 mb-1 block">Estrategias metodológicas / espacios</label>
-                    <textarea 
-                      value={config_contexto.metodologia || ""} 
+                    <label className="text-sm text-gray-400 mb-1 block">Estrategias metodológicas. Espacios</label>
+                    <textarea
+                      value={config_contexto.metodologia || ""}
                       onChange={e => handleContextoChange("metodologia", e.target.value)}
                       className="w-full h-24 bg-black/30 border border-white/10 rounded-lg p-3 text-white focus:border-pink-500 focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label className="text-sm text-gray-400 mb-1 block">Metodología general (ej. ABP)</label>
-                    <textarea 
-                      value={config_aula.Metodología || ""} 
+                    <label className="text-sm text-gray-400 mb-1 block">Metodología general (ej. ABR / ABP)</label>
+                    <textarea
+                      value={config_aula.Metodología || ""}
                       onChange={e => handleAulaChange("Metodología", e.target.value)}
                       className="w-full h-24 bg-black/30 border border-white/10 rounded-lg p-3 text-white focus:border-pink-500 focus:outline-none"
                     />
                   </div>
                   <div>
                     <label className="text-sm text-gray-400 mb-1 block">Atención a la diversidad (A. no significativas)</label>
-                    <textarea 
-                      value={config_aula["Atención a la diversidad"] || ""} 
+                    <textarea
+                      value={config_aula["Atención a la diversidad"] || ""}
                       onChange={e => handleAulaChange("Atención a la diversidad", e.target.value)}
                       className="w-full h-24 bg-black/30 border border-white/10 rounded-lg p-3 text-white focus:border-pink-500 focus:outline-none"
                     />
@@ -221,19 +221,26 @@ export default function IntroduccionPage() {
             </div>
           </section>
 
+          <div className="mb-8 mt-12">
+            <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
+              📝 Introducción y planes
+            </h1>
+            <p className="text-gray-400 mt-2">Información general del centro, profesorado, aulas y planes estratégicos.</p>
+          </div>
+
           {/* DUA */}
           <section className="glass-card p-6 border-t-4 border-t-emerald-500">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">🧩 Plan de atención a la diversidad</h2>
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">🧩 Plan de Atención a la diversidad</h2>
             <div className="overflow-x-auto mb-4">
               <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
                 <thead>
                   <tr className="border-b border-white/10 text-gray-400">
                     <th className="p-2 w-16">ID</th>
                     <th className="p-2 w-48">Alumnado / Aula</th>
-                    <th className="p-2 w-48">Barrera Detectada</th>
-                    <th className="p-2 min-w-[200px]">Medida Metodológica / Org.</th>
-                    <th className="p-2 w-48">Medida de Acceso</th>
-                    <th className="p-2 w-48">Medida de Evaluación</th>
+                    <th className="p-2 w-48">Barrera detectada</th>
+                    <th className="p-2 min-w-[200px]">Medida metodológica</th>
+                    <th className="p-2 w-48">Medida de acceso</th>
+                    <th className="p-2 w-48">Medida de evaluación</th>
                     <th className="p-2 w-10"></th>
                   </tr>
                 </thead>
@@ -264,23 +271,23 @@ export default function IntroduccionPage() {
                 </tbody>
               </table>
             </div>
-            <button onClick={() => addRow(df_dua, "df_dua", "DUA", { Alumnado_Aula:"", Barrera:"", Medida_Metodologica:"", Medida_Acceso:"", Medida_Evaluacion:"" })} className="text-sm text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1">
+            <button onClick={() => addRow(df_dua, "df_dua", "DUA", { Alumnado_Aula: "", Barrera: "", Medida_Metodologica: "", Medida_Acceso: "", Medida_Evaluacion: "" })} className="text-sm text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1">
               <span>+</span> Añadir Medida de Diversidad
             </button>
           </section>
 
           {/* Contingencia */}
           <section className="glass-card p-6 border-t-4 border-t-orange-500">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">🛡️ Plan de contingencia</h2>
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">🛡️ Plan de Contingencia</h2>
             <div className="overflow-x-auto mb-4">
               <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
                 <thead>
                   <tr className="border-b border-white/10 text-gray-400">
                     <th className="p-2 w-16">ID</th>
                     <th className="p-2 w-48">Escenario</th>
-                    <th className="p-2 min-w-[200px]">Organización y Acceso</th>
-                    <th className="p-2 min-w-[200px]">Actividades Alternativas</th>
-                    <th className="p-2 w-48">Seguimiento y Ajustes</th>
+                    <th className="p-2 min-w-[200px]">Organización y acceso</th>
+                    <th className="p-2 min-w-[200px]">Actividades alternativas</th>
+                    <th className="p-2 w-48">Seguimiento y corrección</th>
                     <th className="p-2 w-10"></th>
                   </tr>
                 </thead>
@@ -290,9 +297,9 @@ export default function IntroduccionPage() {
                       <td className="p-2 font-mono text-xs">{row.ID}</td>
                       <td className="p-2 pr-2">
                         <select value={row.Escenario || "Otros"} onChange={e => updateRow(df_contingencia, "df_contingencia", idx, "Escenario", e.target.value)} className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 focus:border-orange-500 focus:outline-none">
-                          <option value="Ausencia de Profesorado">Ausencia de Profesorado</option>
-                          <option value="Ausencia de Alumnado">Ausencia de Alumnado</option>
-                          <option value="Interrupción Generalizada">Interrupción Generalizada</option>
+                          <option value="Ausencia de Profesorado">Ausencia de profesorado</option>
+                          <option value="Ausencia de Alumnado">Ausencia de alumnado</option>
+                          <option value="Interrupción Generalizada">Interrupción generalizada</option>
                           <option value="Otros">Otros</option>
                         </select>
                       </td>
@@ -313,21 +320,21 @@ export default function IntroduccionPage() {
                 </tbody>
               </table>
             </div>
-            <button onClick={() => addRow(df_contingencia, "df_contingencia", "PC", { Escenario:"Otros", Organizacion:"", Actividades:"", Seguimiento:"" })} className="text-sm text-orange-400 hover:text-orange-300 font-semibold flex items-center gap-1">
+            <button onClick={() => addRow(df_contingencia, "df_contingencia", "PC", { Escenario: "Otros", Organizacion: "", Actividades: "", Seguimiento: "" })} className="text-sm text-orange-400 hover:text-orange-300 font-semibold flex items-center gap-1">
               <span>+</span> Añadir Medida de Contingencia
             </button>
           </section>
 
           {/* ACE */}
           <section className="glass-card p-6 border-t-4 border-t-[#14a085]">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">🚌 Plan de actividades complementarias (ACE)</h2>
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">🚌 Plan de Actividades complementarias</h2>
             <div className="overflow-x-auto mb-4">
               <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
                 <thead>
                   <tr className="border-b border-white/10 text-gray-400">
                     <th className="p-2 w-16">ID</th>
                     <th className="p-2 w-32">Tipo</th>
-                    <th className="p-2 w-32">RA Vinculados</th>
+                    <th className="p-2 w-32">RA vinculados</th>
                     <th className="p-2 min-w-[200px]">Descripción</th>
                     <th className="p-2 w-24">Trimestre</th>
                     <th className="p-2 w-48">Entidad</th>
@@ -375,7 +382,7 @@ export default function IntroduccionPage() {
                 </tbody>
               </table>
             </div>
-            <button onClick={() => addRow(df_ace, "df_ace", "ACE", { Tipo:"Complementaria", RA_Vinculados:"", Actividad:"", Trimestre:"1T", Entidad:"", Evaluacion:"" })} className="text-sm text-[#14a085] hover:text-[#1abc9c] font-semibold flex items-center gap-1">
+            <button onClick={() => addRow(df_ace, "df_ace", "ACE", { Tipo: "Complementaria", RA_Vinculados: "", Actividad: "", Trimestre: "1T", Entidad: "", Evaluacion: "" })} className="text-sm text-[#14a085] hover:text-[#1abc9c] font-semibold flex items-center gap-1">
               <span>+</span> Añadir Actividad Complementaria
             </button>
           </section>
