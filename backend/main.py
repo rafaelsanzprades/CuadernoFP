@@ -249,6 +249,8 @@ def generate_pdf(type: str, pd_id: str, curso_id: str, al_id: str = None, db: Se
         # Import PDF modules
         from pdf_calendario_academico import generar_pdf_calendario
         from pdf_seguimiento_diario import generar_pdf_seguimiento
+        from pdf_planificacion import generar_pdf_planificacion
+        from pdf_matrices import generar_pdf_matrices
         from pdf_boletin_grupal import generar_pdf_boletin_grupal, generar_pdf_boletin_grupal_final
         from pdf_boletin_individual import generar_pdf_boletin_individual
         
@@ -298,6 +300,12 @@ def generate_pdf(type: str, pd_id: str, curso_id: str, al_id: str = None, db: Se
             buffer = generar_pdf_calendario(info_modulo, info_fechas, planning_ledger, calendar_notes)
         elif type == "seguimiento":
             buffer = generar_pdf_seguimiento(info_modulo, info_fechas, horario, planning_ledger, calendar_notes, df_sesiones)
+        elif type == "planificacion":
+            df_sgmt = get_df(curso_data, "df_sgmt")
+            daily_ledger = curso_data.get("daily_ledger", {})
+            buffer = generar_pdf_planificacion(info_modulo, df_ud, df_sgmt, daily_ledger, horario, info_fechas, calendar_notes)
+        elif type == "matrices":
+            buffer = generar_pdf_matrices(info_modulo, df_ra, df_ud)
         elif type == "grupal_1t":
             buffer = generar_pdf_boletin_grupal("1T", info_modulo, df_al, df_eval, df_act)
         elif type == "grupal_2t":

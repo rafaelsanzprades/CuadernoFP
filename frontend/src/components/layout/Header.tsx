@@ -85,11 +85,8 @@ export default function Header({ title }: { title?: string }) {
     <div className="w-full flex flex-col z-40 sticky top-0 bg-[#0b1120]/95 backdrop-blur-xl border-b border-[var(--glass-border)] pb-2 shadow-md">
       {/* Menú superior (Dropdowns) */}
       <nav className="w-full px-6 py-2 flex items-center justify-between">
-        {/* Espaciador izquierdo */}
-        <div className="flex-1 hidden md:block"></div>
-
-        {/* Menús centrales */}
-        <div className="flex justify-center items-center gap-4">
+        {/* Menús */}
+        <div className="flex justify-start items-center gap-4">
           {navGroups.map(group => {
             let badgeText = "";
             let badgeColor = "";
@@ -144,8 +141,16 @@ export default function Header({ title }: { title?: string }) {
           })}
         </div>
 
-        {/* Botón Login/Logout (Derecha) */}
-        <div className="flex-1 flex justify-end">
+        {/* Botón Guardar + Login/Logout (Derecha) */}
+        <div className="flex-1 flex justify-end items-center gap-3">
+          {savedStatus === "error" && <span className="text-red-400 text-sm font-bold">❌ Error</span>}
+          <button
+            onClick={handleSave}
+            disabled={isSaving}
+            className={`glass-button ${savedStatus === "saved" ? "bg-green-500/20 text-green-400 border-green-500/30" : "bg-[#14a085]/10 text-[#14a085] border-[#14a085]/30 hover:bg-[#14a085]/20"} font-semibold py-1.5 px-4 text-sm rounded-lg flex items-center gap-2 transition-all`}>
+            <span>{isSaving ? "⏳" : (savedStatus === "saved" ? "✅" : "💾")}</span>
+            {isSaving ? "Guardando..." : (savedStatus === "saved" ? "¡Guardado!" : "Guardar")}
+          </button>
           <button
             onClick={() => {
               if (isLoggedIn) {
@@ -157,38 +162,20 @@ export default function Header({ title }: { title?: string }) {
             className="glass-button text-gray-300 font-semibold py-1.5 px-4 text-sm rounded-lg flex items-center gap-2 hover:bg-white/10 transition-colors"
           >
             <span>{isLoggedIn ? "🔒" : "👤"}</span>
-            {isLoggedIn ? "Cerrar sesión" : "Inicio de sesión"}
+            {isLoggedIn ? "Cerrar" : "Sesión"}
           </button>
         </div>
       </nav>
 
-      <header className="w-full flex items-center justify-between px-8 pt-4 pb-2 gap-4">
-        <div className="hidden lg:block flex-1"></div>
-
-        {title && (
-          <div className="flex-shrink-0 flex justify-center">
-            <div className="border-2 border-[#14a085] rounded-xl px-8 py-3 shadow-[0_4px_15px_rgba(20,160,133,0.1)] bg-[#0b1120]/50 backdrop-blur-sm">
-              <h2 className="text-3xl whitespace-nowrap font-extrabold tracking-tight primary-gradient-text m-0 leading-none">
-                {title}
-              </h2>
-            </div>
+      {title && (
+        <header className="w-full flex items-center justify-center px-8 pt-4 pb-2">
+          <div className="border-2 border-[#14a085] rounded-xl px-8 py-3 shadow-[0_4px_15px_rgba(20,160,133,0.1)] bg-[#0b1120]/50 backdrop-blur-sm">
+            <h2 className="text-3xl whitespace-nowrap font-extrabold tracking-tight primary-gradient-text m-0 leading-none">
+              {title}
+            </h2>
           </div>
-        )}
-
-        <div className="flex-1 flex justify-end items-center gap-3">
-          {savedStatus === "error" && <span className="text-red-400 text-sm font-bold">❌ Error</span>}
-          <button
-            onClick={handleSave}
-            disabled={isSaving}
-            className={`glass-button ${savedStatus === "saved" ? "bg-green-500/20 text-green-400 border-green-500/30" : "bg-[#14a085]/10 text-[#14a085] border-[#14a085]/30 hover:bg-[#14a085]/20"} font-semibold py-2.5 px-6 rounded-lg flex items-center gap-2 transition-all`}>
-            <span>{isSaving ? "⏳" : (savedStatus === "saved" ? "✅" : "💾")}</span>
-            {isSaving ? "Guardando..." : (savedStatus === "saved" ? "¡Guardado!" : "Guardar")}
-          </button>
-          <button className="glass-button text-gray-300 font-semibold py-2.5 px-6 rounded-lg flex items-center gap-2">
-            <span>🔓</span> Activado
-          </button>
-        </div>
-      </header>
+        </header>
+      )}
     </div>
   );
 }

@@ -56,8 +56,7 @@ export default function Sidebar() {
       <div className={`px-4 pt-4 pb-2 flex ${isSidebarOpen ? 'justify-between' : 'justify-center'} items-center`}>
         {isSidebarOpen && (
           <h1 className="text-[1.3rem] font-extrabold leading-tight text-white mb-4 tracking-tight whitespace-nowrap">
-            Cuaderno Digital<br />
-            <span>Docente Ciclos FP</span>
+            Cuaderno Ciclos FP
           </h1>
         )}
         <button onClick={toggleSidebar} className="text-gray-400 hover:text-white p-1 rounded-md hover:bg-white/10 transition-colors mb-3">

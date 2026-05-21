@@ -120,18 +120,18 @@ export default function SeguimientoPage() {
   let h_real_total = 0;
   let h_sin_docencia = 0;
   const dias_semana_list = ["Lun", "Mar", "Mié", "Jue", "Vie"];
-  
+
   const processTrimestre = (ini_str: string, fin_str: string) => {
     if (!ini_str || !fin_str) return;
     const ini = new Date(ini_str);
     const fin = new Date(fin_str);
     let curr = new Date(ini);
-    
+
     while (curr <= fin) {
       if (curr.getDay() >= 1 && curr.getDay() <= 5) {
         const diaSemana = dias_semana_list[curr.getDay() - 1];
         const dateStr = curr.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
-        
+
         if (!calendar_notes[`f_${dateStr}`]) {
           const h_dia = Number(horario[diaSemana]) || 0;
           h_real_total += h_dia;
@@ -147,12 +147,12 @@ export default function SeguimientoPage() {
   processTrimestre(info_fechas.ini_1t, info_fechas.fin_1t);
   processTrimestre(info_fechas.ini_2t, info_fechas.fin_2t);
   processTrimestre(info_fechas.ini_3t, info_fechas.fin_3t);
-  
+
   const perc_sin_docencia = h_real_total > 0 ? (h_sin_docencia / h_real_total) * 100 : 0;
 
   const meses_display = ["Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "May", "Jun"];
-  const meses_nombres = {"Sep": "Septiembre", "Oct": "Octubre", "Nov": "Noviembre", "Dic": "Diciembre", "Ene": "Enero", "Feb": "Febrero", "Mar": "Marzo", "Abr": "Abril", "May": "Mayo", "Jun": "Junio"};
-  const meses_num: any = {"Sep":9, "Oct":10, "Nov":11, "Dic":12, "Ene":1, "Feb":2, "Mar":3, "Abr":4, "May":5, "Jun":6};
+  const meses_nombres = { "Sep": "Septiembre", "Oct": "Octubre", "Nov": "Noviembre", "Dic": "Diciembre", "Ene": "Enero", "Feb": "Febrero", "Mar": "Marzo", "Abr": "Abril", "May": "Mayo", "Jun": "Junio" };
+  const meses_num: any = { "Sep": 9, "Oct": 10, "Nov": 11, "Dic": 12, "Ene": 1, "Feb": 2, "Mar": 3, "Abr": 4, "May": 5, "Jun": 6 };
 
   const getLectivosMes = (mes_num: number) => {
     const lectivos = [];
@@ -192,7 +192,7 @@ export default function SeguimientoPage() {
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
-        
+
         <main className="flex-1 p-8 content-area space-y-8">
           <div className="mb-8">
             <h1 className="text-4xl font-extrabold text-white tracking-tight">
@@ -200,6 +200,10 @@ export default function SeguimientoPage() {
             </h1>
             <p className="text-gray-400 mt-2">Registro detallado del desarrollo diario de las clases y contingencias.</p>
           </div>
+
+          <h2 className="text-2xl font-bold flex items-center gap-2">
+            <span>📊</span> Resumen planificación y seguimiento global
+          </h2>
 
           {/* Metrics */}
           <div className="grid grid-cols-5 gap-6">
@@ -224,6 +228,10 @@ export default function SeguimientoPage() {
               <span className="text-3xl font-bold text-white">{perc_sin_docencia.toFixed(1)}%</span>
             </div>
           </div>
+
+          <h2 className="text-2xl font-bold flex items-center gap-2">
+            <span>📅</span> Planificación y seguimiento mensual
+          </h2>
 
           {/* Data Table */}
           <section className="glass-card p-6 overflow-x-auto">
@@ -290,7 +298,7 @@ export default function SeguimientoPage() {
               {meses_display.map((m_short) => {
                 const lectivos = getLectivosMes(meses_num[m_short]);
                 if (lectivos.length === 0) return null;
-                
+
                 return (
                   <details key={m_short} open className="diario-details group bg-white/5 rounded-lg border border-white/10 overflow-hidden open:bg-white/10 transition-colors">
                     <summary className="p-4 cursor-pointer flex items-center justify-between font-semibold text-lg select-none hover:bg-white/5">
@@ -327,28 +335,28 @@ export default function SeguimientoPage() {
                                 <td className="py-3 text-gray-400">{diaSemana}</td>
                                 <td className="py-3 text-blue-400">{udPrev}</td>
                                 <td className="py-3 text-center">
-                                  <input 
-                                    type="checkbox" 
+                                  <input
+                                    type="checkbox"
                                     checked={ledgerEntry.sin_docencia}
                                     onChange={(e) => handleLedgerChange(dateStr, 'sin_docencia', e.target.checked)}
-                                    className="accent-yellow-500" 
+                                    className="accent-yellow-500"
                                   />
                                 </td>
                                 <td className="py-3 pr-4">
-                                  <input 
-                                    type="text" 
+                                  <input
+                                    type="text"
                                     value={ledgerEntry.seguimiento}
                                     onChange={(e) => handleLedgerChange(dateStr, 'seguimiento', e.target.value)}
                                     placeholder="Anotaciones de la clase..."
-                                    className="w-full bg-black/30 border border-white/10 rounded px-3 py-2 text-white focus:border-blue-500 focus:outline-none" 
+                                    className="w-full bg-black/30 border border-white/10 rounded px-3 py-2 text-white focus:border-blue-500 focus:outline-none"
                                   />
                                 </td>
                                 <td className="py-3 text-center">
-                                  <input 
-                                    type="checkbox" 
+                                  <input
+                                    type="checkbox"
                                     checked={ledgerEntry.publico}
                                     onChange={(e) => handleLedgerChange(dateStr, 'publico', e.target.checked)}
-                                    className="accent-green-500" 
+                                    className="accent-green-500"
                                   />
                                 </td>
                               </tr>

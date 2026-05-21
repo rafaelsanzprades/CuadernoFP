@@ -192,6 +192,11 @@ export default function AnalisisPage() {
             <p className="text-gray-400 mt-2">Visualiza las estadísticas globales, comparativas entre trimestres y evolución de las calificaciones.</p>
           </div>
 
+          {/* ── Subtítulo Resumen datos grupales ── */}
+          <h2 className="text-2xl font-extrabold text-white tracking-tight flex items-center gap-3">
+            📋 Resumen datos grupales
+          </h2>
+
           <section className="grid grid-cols-4 gap-6">
             <div className="glass-card p-6 border-l-4 border-l-blue-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
               <span className="text-gray-400 text-sm uppercase font-bold tracking-wider mb-2">Media Grupal</span>
