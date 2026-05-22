@@ -99,9 +99,9 @@ function AsignacionesContent() {
       .then(json => {
         if(json.status === "success") {
           const rasMap = json.data;
-          setGroups(prevGroups => prevGroups.map(g => ({
+          setGroups((prevGroups: CourseGroup[]) => prevGroups.map((g: CourseGroup) => ({
             ...g,
-            modules: g.modules.map(m => ({
+            modules: g.modules.map((m: Module) => ({
               ...m,
               ras: rasMap[m.code] || m.ras || []
             }))
@@ -111,11 +111,11 @@ function AsignacionesContent() {
   }, []);
 
   const handleAssignTeacher = (groupId: number, moduleId: number, teacherId: string) => {
-    setGroups(prev => prev.map(g => {
+    setGroups((prev: CourseGroup[]) => prev.map((g: CourseGroup) => {
       if (g.id !== groupId) return g;
       return {
         ...g,
-        modules: g.modules.map(m => {
+        modules: g.modules.map((m: Module) => {
           if (m.id !== moduleId) return m;
           return { ...m, assignedTeacherId: teacherId ? Number(teacherId) : null };
         })
@@ -135,8 +135,8 @@ function AsignacionesContent() {
 
   const calculateHours = (teacherId: number) => {
     let total = 0;
-    groups.forEach(g => {
-      g.modules.forEach(m => {
+    groups.forEach((g: CourseGroup) => {
+      g.modules.forEach((m: Module) => {
         if (m.assignedTeacherId === teacherId) total += m.hours;
       });
     });
@@ -280,7 +280,7 @@ function AsignacionesContent() {
                 ) : (
                   displayedGroups.map(group => {
                     const isCollapsed = collapsedGroups.has(group.id);
-                    const unassigned = group.modules.filter(m => !m.assignedTeacherId).length;
+                    const unassigned = group.modules.filter((m: Module) => !m.assignedTeacherId).length;
                     return (
                     <div key={group.id} className="glass-card overflow-hidden">
 
@@ -321,7 +321,7 @@ function AsignacionesContent() {
                       {/* Lista de Módulos — oculta cuando colapsado */}
                       {!isCollapsed && (
                         <div className="p-4 space-y-3 animate-in slide-in-from-top-1 duration-200">
-                          {group.modules.map(module => (
+                          {group.modules.map((module: Module) => (
                             <div key={module.id} className="bg-black/20 rounded-lg p-3 border border-white/5 hover:border-white/10 transition-colors flex flex-col gap-1.5">
                               {/* Primera línea: Código + Módulo y Horas */}
                               <div className="flex justify-between items-center w-full">
@@ -369,7 +369,7 @@ function AsignacionesContent() {
                                     <span className="text-accent text-xs">{module.ras.length} RA</span>
                                   </summary>
                                   <div className="mt-1.5 space-y-1.5 bg-black/40 p-2.5 rounded border border-white/5 max-h-40 overflow-y-auto custom-scrollbar">
-                                    {module.ras.map((ra, idx) => (
+                                    {module.ras.map((ra: any, idx: number) => (
                                       <div key={idx} className="text-xs text-gray-400 flex gap-2 w-full leading-tight">
                                         <span className="font-bold text-accent shrink-0">RA{ra.raNumber}.</span>
                                         <span>{ra.description}</span>

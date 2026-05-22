@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
-import { useAppStore } from "@/store/useAppStore";
+import { useAppStore, CourseGroup, ModuleAssignment } from "@/store/useAppStore";
 import { Search, Users, ShieldAlert, CheckCircle2, Clock, BookOpen, ChevronDown, ChevronUp } from "lucide-react";
 
 interface Teacher {
@@ -45,8 +45,8 @@ function DocentesContent() {
 
   const calculateHours = (teacherId: number) => {
     let total = 0;
-    groups.forEach(g => {
-      g.modules.forEach(m => {
+    groups.forEach((g: CourseGroup) => {
+      g.modules.forEach((m: ModuleAssignment) => {
         if (m.assignedTeacherId === teacherId) {
           total += m.hours;
         }
@@ -57,8 +57,8 @@ function DocentesContent() {
 
   const getTeacherModules = (teacherId: number) => {
     const assigned: { groupName: string; moduleName: string; hours: number; code: string }[] = [];
-    groups.forEach(g => {
-      g.modules.forEach(m => {
+    groups.forEach((g: CourseGroup) => {
+      g.modules.forEach((m: ModuleAssignment) => {
         if (m.assignedTeacherId === teacherId) {
           assigned.push({
             groupName: g.name,

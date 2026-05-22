@@ -66,7 +66,7 @@ export default function ProgramacionPage() {
     if (source.droppableId !== destination.droppableId) return; // Sólo reordenar dentro de la misma UD
 
     const udId = source.droppableId;
-    const newSesiones = [...moduleData.df_sesiones];
+    const newSesiones = [...(moduleData?.df_sesiones || [])];
     
     // Extraer sesiones de esta UD y ordenarlas por Num_Orden actual
     const udSesiones = newSesiones.filter(s => s.id_ud === udId).sort((a, b) => (Number(a.Num_Orden) || 0) - (Number(b.Num_Orden) || 0));
@@ -140,7 +140,7 @@ export default function ProgramacionPage() {
 
   const handleUpdateSesion = (globalIdx: number, field: string, value: any) => {
     const newSesiones = [...df_sesiones];
-    newSesiones[globalIdx][field] = value;
+    (newSesiones[globalIdx] as any)[field] = value;
     updateDataFrame("df_sesiones", newSesiones);
   };
 
@@ -159,7 +159,7 @@ export default function ProgramacionPage() {
 
   const handleUpdateTarea = (globalIdx: number, field: string, value: any) => {
     const newTareas = [...df_tareas];
-    newTareas[globalIdx][field] = value;
+    (newTareas[globalIdx] as any)[field] = value;
     updateDataFrame("df_tareas", newTareas);
   };
 
