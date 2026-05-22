@@ -16,11 +16,18 @@ import {
   UserCheck
 } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function RolesPage() {
   const [activeTab, setActiveTab] = useState<"roles" | "arquitectura">("roles");
   const [isLoginMode, setIsLoginMode] = useState(true);
-  const { isLoggedIn, login, logout } = useAppStore();
+  const { data: session, status } = useSession();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const roles = [
     {
@@ -96,7 +103,7 @@ export default function RolesPage() {
   ];
 
   return (
-    <div className="flex min-h-screen bg-[#0b1120]">
+    <div className="flex min-h-screen bg-background">
       <Sidebar />
       <main className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
@@ -109,8 +116,8 @@ export default function RolesPage() {
             </p>
           </div>
 
-          {!isLoggedIn ? (
-            <div className="max-w-md mx-auto glass-card p-8 animate-in fade-in slide-in-from-top-4 duration-500 mb-12 shadow-[0_8px_30px_rgba(0,0,0,0.4)] border border-[var(--glass-border)]">
+          {status === "unauthenticated" ? (
+            <Card className="max-w-md mx-auto p-8 animate-in fade-in slide-in-from-top-4 duration-500 mb-12 shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
               <div className="flex items-center justify-between mb-8">
                 <button 
                   onClick={() => setIsLoginMode(true)}
@@ -130,24 +137,24 @@ export default function RolesPage() {
                 {!isLoginMode && (
                   <div>
                     <label className="block text-sm font-medium text-gray-300 mb-1">Nombre Completo</label>
-                    <input type="text" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-accent transition-colors" placeholder="Tu nombre" />
+                    <Input type="text" placeholder="Tu nombre" />
                   </div>
                 )}
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-1">Correo Electrónico</label>
-                  <input type="email" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-accent transition-colors" placeholder="usuario@educa.aragon.es" />
+                  <Input type="email" placeholder="usuario@educa.aragon.es" value={email} onChange={e => setEmail(e.target.value)} />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-1">Contraseña</label>
-                  <input type="password" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-accent transition-colors" placeholder="••••••••" />
+                  <Input type="password" placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} />
                 </div>
 
-                <button 
-                  onClick={() => login()}
-                  className="w-full bg-accent hover:bg-accent/80 text-white font-bold py-3 rounded-lg transition-all transform hover:scale-[1.02] shadow-[0_4px_15px_rgba(20,160,133,0.3)] mt-6"
+                <Button 
+                  onClick={() => signIn('credentials', { email, password, callbackUrl: '/' })}
+                  className="w-full mt-6"
                 >
                   {isLoginMode ? 'Acceder' : 'Crear Cuenta'}
-                </button>
+                </Button>
 
                 <div className="relative flex items-center py-5">
                   <div className="flex-grow border-t border-white/10"></div>
@@ -156,57 +163,62 @@ export default function RolesPage() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <button onClick={() => login()} className="flex items-center justify-center gap-2 glass-button py-2.5 rounded-lg hover:bg-white/10 transition-colors border border-white/10">
+                  <Button variant="ghost" onClick={() => signIn('google')} className="flex items-center justify-center gap-2 border border-white/10">
                     <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
                     <span className="text-sm font-medium text-gray-200">Google</span>
-                  </button>
-                  <button onClick={() => login()} className="flex items-center justify-center gap-2 glass-button py-2.5 rounded-lg hover:bg-white/10 transition-colors border border-white/10">
+                  </Button>
+                  <Button variant="ghost" onClick={() => signIn('microsoft')} className="flex items-center justify-center gap-2 border border-white/10">
                     <img src="https://www.svgrepo.com/show/475667/microsoft-color.svg" alt="Microsoft" className="w-5 h-5" />
                     <span className="text-sm font-medium text-gray-200">Microsoft</span>
-                  </button>
+                  </Button>
                 </div>
               </div>
-            </div>
+            </Card>
+          ) : status === "loading" ? (
+            <div className="text-center text-gray-400 py-12">Verificando sesión...</div>
           ) : (
-            <div className="max-w-3xl mx-auto glass-card p-6 flex items-center justify-between mb-12 animate-in fade-in duration-500 border-l-4 border-accent shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+            <Card className="max-w-3xl mx-auto p-6 flex items-center justify-between mb-12 animate-in fade-in duration-500 border-l-4 border-accent shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-accent text-xl font-bold border border-accent/30">
                   <UserCheck className="w-6 h-6" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-white">Sesión Iniciada</h3>
-                  <p className="text-sm text-gray-400">Autenticado correctamente en el sistema</p>
+                  <p className="text-sm text-gray-400">Autenticado como {session?.user?.email}</p>
                 </div>
               </div>
-              <button 
-                onClick={() => logout()}
-                className="glass-button px-6 py-2.5 rounded-lg text-red-400 border border-red-500/30 hover:bg-red-500/10 transition-all font-semibold flex items-center gap-2"
+              <Button 
+                variant="danger"
+                onClick={() => signOut()}
+                className="px-6"
               >
                 <span>Cerrar Sesión</span>
-              </button>
-            </div>
+              </Button>
+            </Card>
           )}
 
       <div className="flex justify-center gap-4 mb-8">
-        <button 
+        <Button 
+          variant={activeTab === 'roles' ? 'primary' : 'ghost'}
           onClick={() => setActiveTab("roles")}
-          className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${activeTab === 'roles' ? 'bg-accent/20 border-accent/50 text-accent border' : 'glass-button text-muted'}`}
+          className="rounded-full px-6"
         >
           Catálogo de Perfiles
-        </button>
-        <button 
+        </Button>
+        <Button 
+          variant={activeTab === 'arquitectura' ? 'primary' : 'ghost'}
           onClick={() => setActiveTab("arquitectura")}
-          className={`px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center gap-2 ${activeTab === 'arquitectura' ? 'bg-accent/20 border-accent/50 text-accent border' : 'glass-button text-muted'}`}
+          className="rounded-full px-6 flex items-center gap-2"
         >
           <Database className="w-4 h-4" />
           Modelo Relacional
-        </button>
+        </Button>
       </div>
 
       {activeTab === "roles" && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
           {roles.map((role, idx) => (
-            <div key={idx} className={`glass-card p-6 border-t-4 ${role.color.split(' ')[0]} hover:-translate-y-1 transition-all duration-300`}>
+            <Card key={idx} className={`p-6 border-t-4 ${role.color.split(' ')[0]} hover:-translate-y-1 transition-all duration-300`}>
               <div className="flex items-start justify-between mb-4">
                 <div className={`p-3 rounded-xl ${role.color.split(' ')[1]}`}>
                   {role.icon}
@@ -219,7 +231,7 @@ export default function RolesPage() {
               <p className="text-sm text-gray-400 leading-relaxed">
                 {role.description}
               </p>
-            </div>
+            </Card>
           ))}
         </div>
       )}
@@ -228,7 +240,7 @@ export default function RolesPage() {
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
           
           {/* Cascade Explanation */}
-          <div className="glass-card p-8">
+          <Card className="p-8">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
               <Database className="w-6 h-6 text-accent" />
               Efecto Cascada y Relaciones
@@ -266,11 +278,11 @@ export default function RolesPage() {
               </div>
 
             </div>
-          </div>
+          </Card>
 
           {/* Database Entities */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="glass-card p-6 border-l-4 border-l-accent">
+            <Card className="p-6 border-l-4 border-l-accent">
               <h3 className="text-lg font-bold mb-4">Entidades Clave en BBDD (SQLAlchemy)</h3>
               <ul className="space-y-3 text-sm text-gray-300">
                 <li className="flex justify-between border-b border-white/5 pb-2">
@@ -290,9 +302,9 @@ export default function RolesPage() {
                   <span>Enlaza Alumno ↔ Empresa ↔ Tutor ↔ FEOE</span>
                 </li>
               </ul>
-            </div>
+            </Card>
 
-            <div className="glass-card p-6 bg-gradient-to-br from-accent/5 to-transparent border border-accent/20">
+            <Card className="p-6 bg-gradient-to-br from-accent/5 to-transparent border border-accent/20">
               <h3 className="text-lg font-bold mb-4 text-accent">Integración de Alumnado</h3>
               <p className="text-sm text-gray-300 mb-4 leading-relaxed">
                 El Alumno requiere su propia tabla o flag en la tabla `User` (ej: <code className="bg-black/30 px-1 text-white">is_student=True</code>). 
@@ -300,7 +312,7 @@ export default function RolesPage() {
               <p className="text-sm text-gray-300 leading-relaxed">
                 A través de la entidad <strong>Matrícula (Enrollment)</strong>, un alumno se vincula a N Módulos. Esto le da acceso a su propio dashboard ("Mi Cuaderno") donde ve el progreso de sus RA, su horario, y sus anexos de FP Dual, todo sincronizado con lo que introducen sus N profesores.
               </p>
-            </div>
+            </Card>
           </div>
         </div>
       )}

@@ -51,7 +51,7 @@ export default function Sidebar() {
   const { activeModuleId, activeCursoId, isSidebarOpen, toggleSidebar } = useAppStore();
 
   return (
-    <aside className={`${isSidebarOpen ? 'w-64' : 'w-[4.5rem]'} sticky top-0 h-screen border-r border-[var(--glass-border)] bg-[#0b1120] flex flex-col flex-shrink-0 transition-all duration-300 z-50`}>
+    <aside className={`${isSidebarOpen ? 'w-64' : 'w-[4.5rem]'} sticky top-0 h-screen border-r border-[var(--glass-border)] bg-background flex flex-col flex-shrink-0 transition-all duration-300 z-50`}>
       {/* Header compacto */}
       <div className={`px-4 pt-4 pb-2 flex ${isSidebarOpen ? 'justify-between' : 'justify-center'} items-center`}>
         {isSidebarOpen && (

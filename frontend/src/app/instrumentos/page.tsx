@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
 
 export default function InstrumentosPage() {
   const { activeModuleId, moduleData, setModuleData, updateDataFrame } = useAppStore();
@@ -60,15 +62,15 @@ export default function InstrumentosPage() {
 
   if (!activeModuleId) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
           <main className="flex-1 p-8 content-area">
-            <div className="glass-card p-8 text-center">
+            <Card className="p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay módulo seleccionado</h2>
               <p className="text-gray-400">Por favor, ve a la Gestión de archivos y selecciona un módulo PD.</p>
-            </div>
+            </Card>
           </main>
         </div>
       </div>
@@ -77,7 +79,7 @@ export default function InstrumentosPage() {
 
   if (loading || !moduleData) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
@@ -126,7 +128,7 @@ export default function InstrumentosPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#0b1120]">
+    <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
@@ -141,7 +143,7 @@ export default function InstrumentosPage() {
 
 
           {/* ── Resumen por trimestres ────────────────────────── */}
-          <div className="glass-card p-6">
+          <Card className="p-6">
             <h4 className="text-lg font-bold text-white mb-5 flex items-center gap-2">
               <span>📊</span> Resumen de instrumentos de evaluación por trimestres
             </h4>
@@ -203,7 +205,7 @@ export default function InstrumentosPage() {
                 </tbody>
               </table>
             </div>
-          </div>
+          </Card>
 
           {/* ── Subtítulo Desglose ───────────────────────────── */}
           <div className="flex items-center justify-between">
@@ -213,25 +215,25 @@ export default function InstrumentosPage() {
               </h2>
               <p className="text-gray-400 mt-1">Detalle de los instrumentos de evaluación organizados por trimestre.</p>
             </div>
-            <button
+            <Button
+              variant="secondary"
               onClick={() => {
                 setAllTriOpen(prev => !prev);
                 document.querySelectorAll('.tri-details').forEach((el) => {
                   (el as HTMLDetailsElement).open = !allTriOpen ? true : false;
                 });
               }}
-              className="text-sm font-semibold px-4 py-2 rounded-lg border border-white/10 bg-black/30 text-gray-300 hover:bg-white/10 hover:text-white transition-colors flex items-center gap-2"
             >
               <span>{allTriOpen ? '▲' : '▼'}</span>
               {allTriOpen ? 'Colapsar todos' : 'Expandir todos'}
-            </button>
+            </Button>
           </div>
 
           {lista_ce_ids.length === 0 ? (
-            <div className="glass-card p-6 border-l-4 border-l-yellow-500">
+            <Card className="p-6 border-l-4 border-l-yellow-500">
               <h3 className="text-xl font-bold text-yellow-400 mb-2">Faltan Criterios de evaluación</h3>
               <p className="text-gray-300">Primero añade Criterios de evaluación en la pestaña 'Matrices'.</p>
-            </div>
+            </Card>
           ) : (
             <div className="space-y-6">
               {trimestres.map((tri) => {
@@ -255,12 +257,12 @@ export default function InstrumentosPage() {
                     <div className="p-4 border-t border-white/10 bg-black/20 overflow-x-auto">
                       <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
                         <thead>
-                          <tr className="text-gray-400 border-b border-white/10 bg-[#0b1120]">
-                            <th className="p-2 sticky left-0 z-10 border-r border-white/10 bg-[#0b1120]">ID</th>
-                            <th className="p-2 sticky left-[60px] z-10 border-r border-white/10 bg-[#0b1120]">Tipo</th>
-                            <th className="p-2 sticky left-[160px] z-10 border-r border-white/10 bg-[#0b1120] w-64">Instrumento / Actividad</th>
-                            <th className="p-2 sticky left-[416px] z-10 border-r border-white/10 bg-[#0b1120]">% Pond.</th>
-                            <th className="p-2 sticky left-[486px] z-10 border-r border-white/10 bg-[#0b1120]">✓</th>
+                          <tr className="text-gray-400 border-b border-white/10 bg-background">
+                            <th className="p-2 sticky left-0 z-10 border-r border-white/10 bg-background">ID</th>
+                            <th className="p-2 sticky left-[60px] z-10 border-r border-white/10 bg-background">Tipo</th>
+                            <th className="p-2 sticky left-[160px] z-10 border-r border-white/10 bg-background w-64">Instrumento / Actividad</th>
+                            <th className="p-2 sticky left-[416px] z-10 border-r border-white/10 bg-background">% Pond.</th>
+                            <th className="p-2 sticky left-[486px] z-10 border-r border-white/10 bg-background">✓</th>
                             {lista_ce_ids.map((ce: string) => (
                               <th key={ce} className="p-2 text-center text-xs font-mono border-r border-white/10 text-indigo-300">
                                 {ce}
@@ -273,8 +275,8 @@ export default function InstrumentosPage() {
                             const globalIdx = df_act.findIndex((gAct: any) => gAct === act);
                             return (
                               <tr key={globalIdx} className="border-b border-white/5 hover:bg-white/5">
-                                <td className="p-2 font-mono sticky left-0 z-10 border-r border-white/10 bg-[#0b1120] group-hover:bg-[#111827]">{act.id_act}</td>
-                                <td className="p-2 sticky left-[60px] z-10 border-r border-white/10 bg-[#0b1120] group-hover:bg-[#111827]">
+                                <td className="p-2 font-mono sticky left-0 z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">{act.id_act}</td>
+                                <td className="p-2 sticky left-[60px] z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">
                                   <select 
                                     value={act.Tipo || "Teoria"}
                                     onChange={(e) => handleUpdateAct(globalIdx, "Tipo", e.target.value)}
@@ -286,7 +288,7 @@ export default function InstrumentosPage() {
                                     <option value="Tareas">Tareas</option>
                                   </select>
                                 </td>
-                                <td className="p-2 sticky left-[160px] z-10 border-r border-white/10 bg-[#0b1120] group-hover:bg-[#111827]">
+                                <td className="p-2 sticky left-[160px] z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">
                                   <input 
                                     type="text"
                                     value={act.desc_act || ""}
@@ -294,7 +296,7 @@ export default function InstrumentosPage() {
                                     className="w-full min-w-[200px] bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-indigo-500 focus:outline-none"
                                   />
                                 </td>
-                                <td className="p-2 sticky left-[416px] z-10 border-r border-white/10 bg-[#0b1120] group-hover:bg-[#111827]">
+                                <td className="p-2 sticky left-[416px] z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">
                                   <input 
                                     type="number"
                                     value={act.peso_act || 0}
@@ -302,7 +304,7 @@ export default function InstrumentosPage() {
                                     className="w-16 bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-indigo-500 focus:outline-none"
                                   />
                                 </td>
-                                <td className="p-2 text-center sticky left-[486px] z-10 border-r border-white/10 bg-[#0b1120] group-hover:bg-[#111827]">
+                                <td className="p-2 text-center sticky left-[486px] z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">
                                   <input 
                                     type="checkbox"
                                     checked={act.is_active !== false}
@@ -339,12 +341,13 @@ export default function InstrumentosPage() {
                         </tbody>
                       </table>
                       <div className="mt-4">
-                        <button 
+                        <Button 
+                          variant="ghost"
                           onClick={() => handleAddAct(tri.key)}
-                          className="text-sm text-indigo-400 hover:text-indigo-300 font-semibold flex items-center gap-1"
+                          className="text-indigo-400 hover:text-indigo-300 font-semibold flex items-center gap-1"
                         >
                           <span>+</span> Añadir Instrumento/Actividad en {tri.nombre}
-                        </button>
+                        </Button>
                       </div>
                     </div>
                   </details>

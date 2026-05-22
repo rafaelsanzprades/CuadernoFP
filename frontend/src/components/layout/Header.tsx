@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import toast from "react-hot-toast";
 import { Sun, Moon } from "lucide-react";
+import { useSession, signOut } from "next-auth/react";
 
 const navGroups = [
   {
@@ -42,7 +43,9 @@ const navGroups = [
 ];
 
 export default function Header({ title }: { title?: string }) {
-  const { activeModuleId, activeCursoId, moduleData, isLoggedIn, logout } = useAppStore();
+  const { activeModuleId, activeCursoId, moduleData } = useAppStore();
+  const { data: session, status } = useSession();
+  const isLoggedIn = status === "authenticated";
   const [isSaving, setIsSaving] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const pathname = usePathname();
@@ -136,7 +139,7 @@ export default function Header({ title }: { title?: string }) {
   };
 
   return (
-    <div className="w-full flex flex-col z-40 sticky top-0 bg-[#0b1120]/95 backdrop-blur-xl border-b border-[var(--glass-border)] pb-2 shadow-md">
+    <div className="w-full flex flex-col z-40 sticky top-0 bg-background/95 backdrop-blur-xl border-b border-[var(--glass-border)] pb-2 shadow-md">
       {/* Menú superior (Dropdowns) */}
       <nav className="w-full px-6 py-2 flex items-center justify-between">
         {/* Menús */}
@@ -173,7 +176,7 @@ export default function Header({ title }: { title?: string }) {
                 </button>
 
                 {/* Dropdown menu */}
-                <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-1 w-64 bg-[#0b1120] border border-[var(--glass-border)] rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.6)] py-2 z-50 transition-all duration-200 ${isOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible translate-y-1"
+                <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-1 w-64 bg-background border border-[var(--glass-border)] rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.6)] py-2 z-50 transition-all duration-200 ${isOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible translate-y-1"
                   }`}>
                   {group.items.map(item => {
                     const isActive = pathname === item.href;
@@ -228,7 +231,7 @@ export default function Header({ title }: { title?: string }) {
           <button
             onClick={() => {
               if (isLoggedIn) {
-                logout();
+                signOut();
                 toast("Sesión cerrada", { icon: "👋" });
               } else {
                 router.push("/perfiles");
@@ -244,7 +247,7 @@ export default function Header({ title }: { title?: string }) {
 
       {title && (
         <header className="w-full flex items-center justify-center px-8 pt-4 pb-2">
-          <div className="border-2 border-[#14a085] rounded-xl px-8 py-3 shadow-[0_4px_15px_rgba(20,160,133,0.1)] bg-[#0b1120]/50 backdrop-blur-sm">
+          <div className="border-2 border-[#14a085] rounded-xl px-8 py-3 shadow-[0_4px_15px_rgba(20,160,133,0.1)] bg-background/50 backdrop-blur-sm">
             <h2 className="text-3xl whitespace-nowrap font-extrabold tracking-tight primary-gradient-text m-0 leading-none">
               {title}
             </h2>

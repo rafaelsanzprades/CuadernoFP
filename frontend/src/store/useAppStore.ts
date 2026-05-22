@@ -1,24 +1,6 @@
 import { create } from 'zustand';
 
-export interface ModuleAssignment {
-  id: number;
-  code: string;
-  name: string;
-  hours: number;
-  isDual: boolean;
-  assignedTeacherId: number | null;
-  ras?: { raNumber: number; description: string }[];
-}
-
-export interface CourseGroup {
-  id: number;
-  name: string;
-  degreeName: string;
-  level: string;
-  modules: ModuleAssignment[];
-}
-
-import { AppState } from '@/types';
+import { AppState, CourseGroup, ModuleAssignment } from '@/types';
 
 const initialGroups: CourseGroup[] = [
   {
@@ -205,3 +187,31 @@ export const useAppStore = create<AppState>((set) => ({
     groups: typeof newGroups === 'function' ? newGroups(state.groups) : newGroups
   }))
 }));
+
+// Selectores
+export const calculateTeacherHours = (groups: CourseGroup[], teacherId: number) => {
+  let total = 0;
+  groups.forEach(g => {
+    g.modules.forEach(m => {
+      if (m.assignedTeacherId === teacherId) total += m.hours;
+    });
+  });
+  return total;
+};
+
+export const getTeacherAssignedModules = (groups: CourseGroup[], teacherId: number) => {
+  const assigned: { groupName: string; moduleName: string; hours: number; code: string }[] = [];
+  groups.forEach(g => {
+    g.modules.forEach(m => {
+      if (m.assignedTeacherId === teacherId) {
+        assigned.push({
+          groupName: g.name,
+          moduleName: m.name,
+          hours: m.hours,
+          code: m.code
+        });
+      }
+    });
+  });
+  return assigned;
+};

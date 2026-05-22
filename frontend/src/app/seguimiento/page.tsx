@@ -65,7 +65,7 @@ export default function SeguimientoPage() {
 
   if (!activeModuleId || !activeCursoId) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
@@ -82,7 +82,7 @@ export default function SeguimientoPage() {
 
   if (loading || !moduleData || !cursoData) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
@@ -188,7 +188,7 @@ export default function SeguimientoPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#0b1120]">
+    <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
@@ -260,9 +260,9 @@ export default function SeguimientoPage() {
               <tbody>
                 {df_sgmt_calculated.map((row: any, idx: number) => (
                   <tr key={idx} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                    <td className="p-3 font-mono sticky left-0 bg-[#0b1120] group-hover:bg-[#111827] border-r border-white/10 font-bold">{row.id_ud}</td>
-                    <td className="p-3 text-center sticky left-[60px] bg-[#0b1120] group-hover:bg-[#111827] text-blue-400">{row.horas_ud || ''}</td>
-                    <td className="p-3 text-center sticky left-[130px] bg-[#0b1120] group-hover:bg-[#111827] border-r border-white/10 text-[#14a085] font-bold">{row.Total_Imp || ''}</td>
+                    <td className="p-3 font-mono sticky left-0 bg-background group-hover:bg-[#111827] border-r border-white/10 font-bold">{row.id_ud}</td>
+                    <td className="p-3 text-center sticky left-[60px] bg-background group-hover:bg-[#111827] text-blue-400">{row.horas_ud || ''}</td>
+                    <td className="p-3 text-center sticky left-[130px] bg-background group-hover:bg-[#111827] border-r border-white/10 text-[#14a085] font-bold">{row.Total_Imp || ''}</td>
                     {meses_display.map((m) => (
                       <React.Fragment key={m}>
                         <td className="p-3 text-center text-white/60">{Number(row[`${m}_Prv`]) || ''}</td>

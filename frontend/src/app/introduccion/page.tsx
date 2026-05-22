@@ -58,7 +58,7 @@ export default function IntroduccionPage() {
 
   if (!activeModuleId) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
@@ -75,7 +75,7 @@ export default function IntroduccionPage() {
 
   if (loading || !moduleData) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
@@ -122,7 +122,7 @@ export default function IntroduccionPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#0b1120]">
+    <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />

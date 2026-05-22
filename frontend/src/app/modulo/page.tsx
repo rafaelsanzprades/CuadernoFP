@@ -5,6 +5,9 @@ import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
 import DatePicker from "@/components/ui/DatePicker";
+import { Card } from "@/components/ui/Card";
+import { Select } from "@/components/ui/Select";
+import { Input } from "@/components/ui/Input";
 
 export default function Home() {
   const {
@@ -163,7 +166,7 @@ export default function Home() {
   const numTareas = moduleData.df_act?.filter((a: any) => a.Tipo === "Tareas")?.length || 0;
 
   return (
-    <div className="flex min-h-screen bg-[#0b1120]">
+    <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
@@ -181,48 +184,41 @@ export default function Home() {
 
 
             {/* ── Tarjeta Datos ─────────────────────────────────── */}
-            <div className="glass-card p-6">
+            <Card className="p-6">
               <h4 className="text-lg font-bold text-white mb-5 flex items-center gap-2">
                 <span>📝</span> Selección del Módulo didáctico
               </h4>
 
               {/* Fila 1: Familia + Grado */}
               <div className="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-400 mb-2">Familia Profesional</label>
-                  <select
-                    className="w-full bg-[#0b1120] border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#14a085] transition-colors"
-                    value={viewFamilyId}
-                    onChange={e => { setViewFamilyId(e.target.value); setViewDegreeId(""); setSelectedModuleCode(""); }}
-                  >
-                    <option value="">-- Selecciona Familia --</option>
-                    {families.map((f: any) => (
-                      <option key={f.id} value={f.id}>{f.name}</option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-400 mb-2">Grado y Título</label>
-                  <select
-                    className="w-full bg-[#0b1120] border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#14a085] transition-colors disabled:opacity-50"
-                    value={viewDegreeId}
-                    onChange={e => { setViewDegreeId(e.target.value); setSelectedModuleCode(""); }}
-                    disabled={!viewFamilyId}
-                  >
-                    <option value="">-- Selecciona Título --</option>
-                    {viewFamily?.degrees.map((d: any) => (
-                      <option key={d.id} value={d.id}>{d.level} · {d.name}</option>
-                    ))}
-                  </select>
-                </div>
+                <Select
+                  label="Familia Profesional"
+                  value={viewFamilyId}
+                  onChange={e => { setViewFamilyId(e.target.value); setViewDegreeId(""); setSelectedModuleCode(""); }}
+                >
+                  <option value="">-- Selecciona Familia --</option>
+                  {families.map((f: any) => (
+                    <option key={f.id} value={f.id}>{f.name}</option>
+                  ))}
+                </Select>
+                <Select
+                  label="Grado y Título"
+                  value={viewDegreeId}
+                  onChange={e => { setViewDegreeId(e.target.value); setSelectedModuleCode(""); }}
+                  disabled={!viewFamilyId}
+                >
+                  <option value="">-- Selecciona Título --</option>
+                  {viewFamily?.degrees.map((d: any) => (
+                    <option key={d.id} value={d.id}>{d.level} · {d.name}</option>
+                  ))}
+                </Select>
               </div>
 
               {/* Fila 2: Módulo (desplegable DB) + Curso */}
               <div className="grid grid-cols-5 gap-4 mb-5">
                 <div className="col-span-4">
-                  <label className="block text-sm font-semibold text-gray-400 mb-2">Módulo didáctico</label>
-                  <select
-                    className="w-full bg-[#0b1120] border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#14a085] transition-colors disabled:opacity-50"
+                  <Select
+                    label="Módulo didáctico"
                     value={selectedModuleCode}
                     onChange={e => handleSelectModule(e.target.value)}
                     disabled={!viewDegreeId}
@@ -233,68 +229,58 @@ export default function Home() {
                         {mod.code} · {mod.name}
                       </option>
                     ))}
-                  </select>
+                  </Select>
                 </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-400 mb-2">Curso</label>
-                  <input type="text"
-                    value={data.curso || ""}
-                    onChange={e => updateInfoModulo('curso', e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#14a085] transition-colors"
-                  />
-                </div>
+                <Input 
+                  label="Curso"
+                  type="text"
+                  value={data.curso || ""}
+                  onChange={e => updateInfoModulo('curso', e.target.value)}
+                />
               </div>
 
               {/* Fila 3: Campos numéricos (autocompletados desde BBDD al seleccionar módulo) */}
               <div className="grid grid-cols-6 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-400 mb-2">Nº de trimestres</label>
-                  <input type="text"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-gray-500 cursor-not-allowed"
-                    disabled value="3"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-400 mb-2">Horas/semana clase</label>
-                  <input type="number"
-                    value={data.h_sem || 0}
-                    onChange={e => updateInfoModulo('h_sem', Number(e.target.value))}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#14a085] transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-400 mb-2">Horas BOA</label>
-                  <input type="number"
-                    value={data.h_boa || 0}
-                    onChange={e => updateInfoModulo('h_boa', Number(e.target.value))}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#14a085] transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-400 mb-2">% P.Ev.Continua</label>
-                  <input type="number"
-                    value={data.p_ev || 15}
-                    onChange={e => updateInfoModulo('p_ev', Number(e.target.value))}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#14a085] transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-400 mb-2">Horas P.Ev. ({p_ev}%)</label>
-                  <input type="text"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-yellow-400 cursor-not-allowed text-center font-bold"
-                    disabled value={`${h_p_ev} h`}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-400 mb-2">Horas FEOE</label>
-                  <input type="number"
-                    value={data.h_feoe || 0}
-                    onChange={e => updateInfoModulo('h_feoe', Number(e.target.value))}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#14a085] transition-colors"
-                  />
-                </div>
+                <Input 
+                  label="Nº de trimestres"
+                  type="text"
+                  className="text-gray-500 cursor-not-allowed"
+                  disabled 
+                  value="3"
+                />
+                <Input 
+                  label="Horas/semana clase"
+                  type="number"
+                  value={data.h_sem || 0}
+                  onChange={e => updateInfoModulo('h_sem', Number(e.target.value))}
+                />
+                <Input 
+                  label="Horas BOA"
+                  type="number"
+                  value={data.h_boa || 0}
+                  onChange={e => updateInfoModulo('h_boa', Number(e.target.value))}
+                />
+                <Input 
+                  label="% P.Ev.Continua"
+                  type="number"
+                  value={data.p_ev || 15}
+                  onChange={e => updateInfoModulo('p_ev', Number(e.target.value))}
+                />
+                <Input 
+                  label={`Horas P.Ev. (${p_ev}%)`}
+                  type="text"
+                  className="text-yellow-400 cursor-not-allowed text-center font-bold"
+                  disabled 
+                  value={`${h_p_ev} h`}
+                />
+                <Input 
+                  label="Horas FEOE"
+                  type="number"
+                  value={data.h_feoe || 0}
+                  onChange={e => updateInfoModulo('h_feoe', Number(e.target.value))}
+                />
               </div>
-            </div>
+            </Card>
 
             {/* ── Título Datos ────────────────────────────────────── */}
             <div>
@@ -305,32 +291,28 @@ export default function Home() {
             </div>
 
             {/* ── Tarjeta Datos del docente ─────────────────────── */}
-            <div className="glass-card p-6">
+            <Card className="p-6">
               <h4 className="text-lg font-bold text-white mb-5 flex items-center gap-2">
                 <span>🧑‍🏫</span> Datos del docente
               </h4>
               <div className="grid grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-400 mb-2">Centro educativo</label>
-                  <input type="text"
-                    value={data.centro || ""}
-                    onChange={e => updateInfoModulo('centro', e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#14a085] transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-400 mb-2">Profesorado</label>
-                  <input type="text"
-                    value={data.profesorado || data.profesor || ""}
-                    onChange={e => updateInfoModulo('profesorado', e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#14a085] transition-colors"
-                  />
-                </div>
+                <Input 
+                  label="Centro educativo"
+                  type="text"
+                  value={data.centro || ""}
+                  onChange={e => updateInfoModulo('centro', e.target.value)}
+                />
+                <Input 
+                  label="Profesorado"
+                  type="text"
+                  value={data.profesorado || data.profesor || ""}
+                  onChange={e => updateInfoModulo('profesorado', e.target.value)}
+                />
               </div>
-            </div>
+            </Card>
 
             {/* ── Sesiones semanales ─────────────────────────────── */}
-            <div className="glass-card p-6 border-l-4 border-l-purple-500">
+            <Card className="p-6 border-l-4 border-l-purple-500">
               <div className="flex justify-between items-center mb-6">
                 <h4 className="text-lg font-bold text-white flex items-center gap-2">
                   <span>🕒</span> Sesiones semanales
@@ -344,20 +326,20 @@ export default function Home() {
               </div>
               <div className="grid grid-cols-5 gap-4">
                 {["Lun", "Mar", "Mié", "Jue", "Vie"].map(day => (
-                  <div key={day}>
-                    <label className="text-sm text-gray-400 mb-2 block text-center font-bold">{day}</label>
-                    <input type="number" min="0" max="8"
-                      value={Number(horario[day]) || 0}
-                      onChange={e => handleUpdateHorario(day, Number(e.target.value))}
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-2 py-2.5 text-white focus:outline-none focus:border-[#14a085] transition-colors text-center text-xl font-mono"
-                    />
-                  </div>
+                  <Input 
+                    key={day}
+                    label={day}
+                    type="number" min="0" max="8"
+                    value={Number(horario[day]) || 0}
+                    onChange={e => handleUpdateHorario(day, Number(e.target.value))}
+                    className="text-center text-xl font-mono"
+                  />
                 ))}
               </div>
-            </div>
+            </Card>
 
             {/* ── Sesiones trimestrales ───────────────────────────── */}
-            <div className="glass-card p-6 border-l-4 border-l-emerald-500">
+            <Card className="p-6 border-l-4 border-l-emerald-500">
               <h4 className="text-lg font-bold text-white flex items-center gap-2 mb-6">
                 <span>📅</span> Sesiones trimestrales
               </h4>
@@ -389,10 +371,10 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-            </div>
+            </Card>
 
             {/* ── % Ponderación por trimestres ─────────────────── */}
-            <div className="glass-card p-6 border-l-4 border-l-[#14a085]">
+            <Card className="p-6 border-l-4 border-l-accent">
               <h4 className="text-lg font-bold text-white mb-6 flex items-center justify-between">
                 <span className="flex items-center gap-2"><span>⚖️</span> % Ponderación por trimestres</span>
                 <span className={`text-sm font-bold px-3 py-1 rounded-full ${sumaTrimestres === 100 ? 'bg-green-500/20 text-green-400 border border-green-500/50' : 'bg-red-500/20 text-red-400 border border-red-500/50'}`}>
@@ -401,17 +383,18 @@ export default function Home() {
               </h4>
               <div className="grid grid-cols-3 gap-6">
                 {[['pond_1t', '1er trimestre (%)'], ['pond_2t', '2º trimestre (%)'], ['pond_3t', '3er trimestre (%)']].map(([k, label]) => (
-                  <div key={k}>
-                    <label className="block text-sm font-semibold text-gray-400 mb-2 text-center">{label}</label>
-                    <input type="number" value={data[k] || 0} onChange={e => updateInfoModulo(k, Number(e.target.value))}
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#14a085] transition-colors text-center" />
-                  </div>
+                  <Input 
+                    key={k}
+                    label={label}
+                    type="number" value={data[k] || 0} onChange={e => updateInfoModulo(k, Number(e.target.value))}
+                    className="text-center" 
+                  />
                 ))}
               </div>
-            </div>
+            </Card>
 
             {/* ── FEOE ─────────────────────────────────────────── */}
-            <div className="glass-card p-6 border-l-4 border-l-pink-500">
+            <Card className="p-6 border-l-4 border-l-pink-500">
               <h4 className="text-lg font-bold text-white mb-6 flex items-center gap-2"><span>🏢</span> Formación en Empresa (FEOE)</h4>
               <div className="grid grid-cols-3 gap-6">
                 <div>
@@ -422,17 +405,17 @@ export default function Home() {
                   <label className="text-sm text-gray-400 mb-2 block font-semibold text-center">Fin FEOE</label>
                   <DatePicker value={info_fechas.fin_feoe || ""} onChange={v => handleUpdateFechas("fin_feoe", v)} className="text-center" />
                 </div>
-                <div>
-                  <label className="text-sm text-gray-400 mb-2 block font-semibold text-center">Horas/día FEOE</label>
-                  <input type="number" value={Number(info_fechas.h_sem_feoe) || 8}
-                    onChange={e => handleUpdateFechas("h_sem_feoe", Number(e.target.value))}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-pink-500 transition-colors text-center" />
-                </div>
+                <Input 
+                  label="Horas/día FEOE"
+                  type="number" value={Number(info_fechas.h_sem_feoe) || 8}
+                  onChange={e => handleUpdateFechas("h_sem_feoe", Number(e.target.value))}
+                  className="text-center" 
+                />
               </div>
-            </div>
+            </Card>
 
             {/* ── % Instrumentos de evaluación ─────────────────── */}
-            <div className="glass-card p-6 border-l-4 border-l-purple-500">
+            <Card className="p-6 border-l-4 border-l-purple-500">
               <h4 className="text-lg font-bold text-white mb-6 flex items-center justify-between">
                 <span className="flex items-center gap-2"><span>🧾</span> % Instrumentos de evaluación</span>
                 <span className={`text-sm font-bold px-3 py-1 rounded-full ${sumaCriterios === 100 ? 'bg-green-500/20 text-green-400 border border-green-500/50' : 'bg-red-500/20 text-red-400 border border-red-500/50'}`}>
@@ -446,14 +429,15 @@ export default function Home() {
                   ['criterio_procedimiento_ejercicios', 'Informes de ejercicios'],
                   ['criterio_tareas', 'Cuaderno de tareas'],
                 ].map(([k, label]) => (
-                  <div key={k}>
-                    <label className="block text-sm font-semibold text-gray-400 mb-2 text-center">{label}</label>
-                    <input type="number" value={data[k] || 0} onChange={e => updateInfoModulo(k, Number(e.target.value))}
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#14a085] transition-colors text-center" />
-                  </div>
+                  <Input 
+                    key={k}
+                    label={label}
+                    type="number" value={data[k] || 0} onChange={e => updateInfoModulo(k, Number(e.target.value))}
+                    className="text-center" 
+                  />
                 ))}
               </div>
-            </div>
+            </Card>
 
 
           </div>

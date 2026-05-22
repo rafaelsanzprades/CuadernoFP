@@ -1,45 +1,27 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
-import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import { GripVertical } from "lucide-react";
+import { useModule } from "@/hooks/useApi";
+import { SessionTable } from "@/components/features/programacion/SessionTable";
+import { TaskTable } from "@/components/features/programacion/TaskTable";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { Save, CheckCircle2 } from "lucide-react";
 import toast from "react-hot-toast";
-import { UnidadDidactica, Sesion } from "@/types";
 
 export default function ProgramacionPage() {
-  const { activeModuleId, moduleData, setModuleData, updateDataFrame } = useAppStore();
-  const [loading, setLoading] = useState(true);
+  const { activeModuleId, moduleData, updateDataFrame } = useAppStore();
+  const { isLoading } = useModule(activeModuleId);
   const [saving, setSaving] = useState(false);
-  const [saveMessage, setSaveMessage] = useState("");
+  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
   const [allUdsOpen, setAllUdsOpen] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        if (activeModuleId && !moduleData) {
-          const res = await fetch(`/api/module/${activeModuleId}`);
-          const data = await res.json();
-          if (data.status === "success") setModuleData(data.data);
-        }
-      } catch (err) {
-        console.error("Error fetching data:", err);
-      }
-      setLoading(false);
-    };
-
-    if (activeModuleId) {
-      fetchData();
-    } else {
-      setLoading(false);
-    }
-  }, [activeModuleId, moduleData]);
 
   const handleSave = async () => {
     if (!activeModuleId || !moduleData) return;
     setSaving(true);
+    setSaveStatus("saving");
     try {
       const res = await fetch(`/api/module/${activeModuleId}`, {
         method: "PUT",
@@ -49,12 +31,16 @@ export default function ProgramacionPage() {
       const result = await res.json();
       if (result.status === "success") {
         toast.success("Programación guardada correctamente");
+        setSaveStatus("saved");
+        setTimeout(() => setSaveStatus("idle"), 3000);
       } else {
         toast.error("Error al guardar");
+        setSaveStatus("idle");
       }
     } catch (err) {
       console.error(err);
       toast.error("Fallo de conexión");
+      setSaveStatus("idle");
     }
     setSaving(false);
   };
@@ -63,19 +49,16 @@ export default function ProgramacionPage() {
     if (!result.destination) return;
     
     const { source, destination } = result;
-    if (source.droppableId !== destination.droppableId) return; // Sólo reordenar dentro de la misma UD
+    if (source.droppableId !== destination.droppableId) return;
 
     const udId = source.droppableId;
     const newSesiones = [...(moduleData?.df_sesiones || [])];
     
-    // Extraer sesiones de esta UD y ordenarlas por Num_Orden actual
     const udSesiones = newSesiones.filter(s => s.id_ud === udId).sort((a, b) => (Number(a.Num_Orden) || 0) - (Number(b.Num_Orden) || 0));
     
-    // Reordenar en el array
     const [moved] = udSesiones.splice(source.index, 1);
     udSesiones.splice(destination.index, 0, moved);
     
-    // Reasignar Num_Orden de 1 a N
     udSesiones.forEach((ses, idx) => {
       ses.Num_Orden = idx + 1;
     });
@@ -85,29 +68,29 @@ export default function ProgramacionPage() {
 
   if (!activeModuleId) {
     return (
-      <div className="flex min-h-screen bg-[var(--background)]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
-          <main className="flex-1 p-8 content-area">
-            <div className="glass-card p-8 text-center">
+          <main className="flex-1 p-8">
+            <Card className="p-12 text-center text-gray-400 flex flex-col items-center justify-center">
               <h2 className="text-2xl font-bold mb-4">No hay módulo seleccionado</h2>
               <p className="text-gray-400">Por favor, ve a la Gestión de archivos y selecciona un módulo PD.</p>
-            </div>
+            </Card>
           </main>
         </div>
       </div>
     );
   }
 
-  if (loading || !moduleData) {
+  if (isLoading || !moduleData) {
     return (
-      <div className="flex min-h-screen bg-[var(--background)]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
-          <main className="flex-1 flex items-center justify-center content-area">
-            <div className="text-xl text-[#14a085] animate-pulse">Cargando programación de aula...</div>
+          <main className="flex-1 flex items-center justify-center">
+            <div className="text-xl text-accent animate-pulse">Cargando programación de aula...</div>
           </main>
         </div>
       </div>
@@ -144,6 +127,12 @@ export default function ProgramacionPage() {
     updateDataFrame("df_sesiones", newSesiones);
   };
 
+  const handleDeleteSesion = (globalIdx: number) => {
+    const newSesiones = [...df_sesiones];
+    newSesiones.splice(globalIdx, 1);
+    updateDataFrame("df_sesiones", newSesiones);
+  };
+
   const handleAddTarea = () => {
     const newTareas = [...df_tareas];
     const newId = `TC${(newTareas.length + 1).toString().padStart(2, '0')}`;
@@ -163,276 +152,80 @@ export default function ProgramacionPage() {
     updateDataFrame("df_tareas", newTareas);
   };
 
+  const handleDeleteTarea = (globalIdx: number) => {
+    const newTareas = [...df_tareas];
+    newTareas.splice(globalIdx, 1);
+    updateDataFrame("df_tareas", newTareas);
+  };
+
   return (
-    <div className="flex min-h-screen bg-[var(--background)]">
+    <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
         
-        <main className="flex-1 p-8 content-area space-y-8">
-          <div className="mb-8">
-            <h1 className="text-4xl font-extrabold text-[var(--foreground)] tracking-tight flex items-center gap-3">
-              📚 Programación de aula
-            </h1>
-            <p className="text-gray-400 mt-2">Secuenciación temporal de las unidades didácticas y diseño de tareas competenciales.</p>
+        <main className="flex-1 p-8 space-y-8 overflow-y-auto">
+          <div className="flex justify-between items-center mb-8">
+            <div>
+              <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
+                📚 Programación de aula
+              </h1>
+              <p className="text-gray-400 mt-2">Secuenciación temporal de las unidades didácticas y diseño de tareas competenciales.</p>
+            </div>
+            
+            <Button 
+              onClick={handleSave}
+              disabled={saving || saveStatus === "saved"}
+              variant={saveStatus === "saved" ? "success" : "primary"}
+            >
+              {saveStatus === "saving" ? (
+                <div className="w-5 h-5 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+              ) : saveStatus === "saved" ? (
+                <CheckCircle2 className="w-5 h-5" />
+              ) : (
+                <Save className="w-5 h-5" />
+              )}
+              <span>{saveStatus === "saving" ? "Guardando..." : saveStatus === "saved" ? "¡Guardado!" : "Guardar Cambios"}</span>
+            </Button>
           </div>
 
-          <section className="glass-card p-6 border-t-4 border-t-[#14a085]">
+          <Card className="p-6 border-t-4 border-t-accent">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold flex items-center gap-2">
+              <h2 className="text-2xl font-bold flex items-center gap-2 text-white">
                 <span>📋</span> Secuenciación por Unidades didácticas
               </h2>
-              <button
-                onClick={() => {
-                  setAllUdsOpen(prev => !prev);
-                  // Toggle all <details> elements in this section
-                  document.querySelectorAll('.ud-details').forEach((el) => {
-                    (el as HTMLDetailsElement).open = !allUdsOpen ? true : false;
-                  });
-                }}
-                className="text-sm font-semibold px-4 py-2 rounded-lg border border-white/10 bg-black/30 text-gray-300 hover:bg-white/10 hover:text-white transition-colors flex items-center gap-2"
+              <Button
+                variant="ghost"
+                onClick={() => setAllUdsOpen(prev => !prev)}
+                className="text-sm border border-white/10"
               >
                 <span>{allUdsOpen ? '▲' : '▼'}</span>
                 {allUdsOpen ? 'Colapsar todas' : 'Expandir todas'}
-              </button>
+              </Button>
             </div>
 
-            <div className="space-y-4">
-              <DragDropContext onDragEnd={onDragEnd}>
-              {df_ud.map((ud: UnidadDidactica) => {
-                const udSesiones = df_sesiones.filter((s: Sesion) => s.id_ud === ud.id_ud);
-                udSesiones.sort((a: Sesion, b: Sesion) => (Number(a.Num_Orden) || 0) - (Number(b.Num_Orden) || 0));
-                const totalHoras = udSesiones.reduce((sum: number, s: Sesion) => sum + (Number(s.Horas) || 0), 0);
+            <SessionTable 
+              df_ud={df_ud}
+              df_sesiones={df_sesiones}
+              onDragEnd={onDragEnd}
+              handleUpdateSesion={handleUpdateSesion}
+              handleAddSesion={handleAddSesion}
+              handleDeleteSesion={handleDeleteSesion}
+              allUdsOpen={allUdsOpen}
+            />
+          </Card>
 
-                return (
-                  <details key={ud.id_ud} open className="ud-details group bg-white/5 rounded-lg border border-white/10 overflow-hidden open:bg-white/10 transition-colors">
-                    <summary className="p-4 cursor-pointer flex items-center justify-between font-semibold text-lg select-none hover:bg-white/5">
-                      <div className="flex items-center gap-4">
-                        <span className="text-[#14a085]">{ud.id_ud}</span>
-                        <span className="text-sm text-gray-400 truncate max-w-xl">{ud.desc_ud}</span>
-                      </div>
-                      <div className="flex items-center gap-6 text-sm">
-                        <span className="text-gray-400">{udSesiones.length} sesiones</span>
-                        <span className="text-[#14a085] bg-[#14a085]/10 px-2 py-1 rounded">{totalHoras} h</span>
-                        <span className="ml-4 group-open:rotate-180 inline-block transition-transform text-gray-500">▼</span>
-                      </div>
-                    </summary>
-                    <div className="p-4 border-t border-white/10 bg-black/20 overflow-x-auto">
-                      <table className="w-full text-left text-sm whitespace-nowrap">
-                        <thead>
-                          <tr className="text-[var(--text-muted)] border-b border-[var(--glass-border)]">
-                            <th className="pb-2 w-10"></th>
-                            <th className="pb-2 w-16">Nº</th>
-                            <th className="pb-2 w-16">Horas</th>
-                            <th className="pb-2 w-48">Tipo</th>
-                            <th className="pb-2 w-32">RA/CE</th>
-                            <th className="pb-2 min-w-[200px]">Contenidos</th>
-                            <th className="pb-2 w-48">Aspectos Clave</th>
-                            <th className="pb-2 w-48">Recursos</th>
-                            <th className="pb-2 w-10"></th>
-                          </tr>
-                        </thead>
-                        <Droppable droppableId={ud.id_ud}>
-                          {(provided) => (
-                            <tbody ref={provided.innerRef} {...provided.droppableProps}>
-                              {udSesiones.map((ses: Sesion, idx: number) => {
-                                const globalIdx = df_sesiones.findIndex((gSes: Sesion) => gSes === ses);
-                                const dragId = ses.ID || `ses-${globalIdx}`;
-                                return (
-                                  <Draggable key={dragId} draggableId={dragId} index={idx}>
-                                    {(provided, snapshot) => (
-                                      <tr 
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        className={`border-b border-[var(--glass-border)] hover:bg-[var(--glass-bg)] ${snapshot.isDragging ? 'bg-[var(--background)] shadow-2xl z-50' : ''}`}
-                                        style={{ ...provided.draggableProps.style }}
-                                      >
-                                        <td className="py-2 pr-2" {...provided.dragHandleProps}>
-                                          <div className="p-1 hover:bg-gray-500/20 rounded cursor-grab active:cursor-grabbing inline-flex items-center justify-center">
-                                            <GripVertical className="text-gray-500 w-4 h-4" />
-                                          </div>
-                                        </td>
-                                        <td className="py-2 pr-2">
-                                  <input 
-                                    type="number" 
-                                    value={ses.Num_Orden || 0}
-                                    onChange={(e) => handleUpdateSesion(globalIdx, "Num_Orden", Number(e.target.value) || 0)}
-                                    className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-[#14a085] focus:outline-none" 
-                                  />
-                                </td>
-                                <td className="py-2 pr-2">
-                                  <input 
-                                    type="number" 
-                                    value={ses.Horas || 0}
-                                    onChange={(e) => handleUpdateSesion(globalIdx, "Horas", Number(e.target.value) || 0)}
-                                    className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-[#14a085] focus:outline-none" 
-                                  />
-                                </td>
-                                <td className="py-2 pr-2">
-                                  <select 
-                                    value={ses.Tipo_Actividad || "Tª (Teoria)"}
-                                    onChange={(e) => handleUpdateSesion(globalIdx, "Tipo_Actividad", e.target.value)}
-                                    className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-[#14a085] focus:outline-none appearance-none"
-                                  >
-                                    <option value="Tª (Teoria)">Tª (Teoria)</option>
-                                    <option value="Pª (Practica)">Pª (Practica)</option>
-                                    <option value="IE (Instrumento de Evaluacion)">IE (Inst. Eval.)</option>
-                                    <option value="Pª+ (Ampliacion/Refuerzo)">Pª+ (Amp/Ref)</option>
-                                  </select>
-                                </td>
-                                <td className="py-2 pr-2">
-                                  <input 
-                                    type="text" 
-                                    value={ses.RA_CE || ""}
-                                    onChange={(e) => handleUpdateSesion(globalIdx, "RA_CE", e.target.value)}
-                                    className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-[#14a085] focus:outline-none" 
-                                  />
-                                </td>
-                                <td className="py-2 pr-2">
-                                  <input 
-                                    type="text" 
-                                    value={ses.Contenidos || ""}
-                                    onChange={(e) => handleUpdateSesion(globalIdx, "Contenidos", e.target.value)}
-                                    className="w-full min-w-[200px] bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-[#14a085] focus:outline-none" 
-                                  />
-                                </td>
-                                <td className="py-2 pr-2">
-                                  <input 
-                                    type="text" 
-                                    value={ses.Aspectos_Clave || ""}
-                                    onChange={(e) => handleUpdateSesion(globalIdx, "Aspectos_Clave", e.target.value)}
-                                    className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-[#14a085] focus:outline-none" 
-                                  />
-                                </td>
-                                <td className="py-2 pr-2">
-                                  <input 
-                                    type="text" 
-                                    value={ses.Recursos || ""}
-                                    onChange={(e) => handleUpdateSesion(globalIdx, "Recursos", e.target.value)}
-                                    className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-[#14a085] focus:outline-none" 
-                                  />
-                                </td>
-                                <td className="py-2 text-center">
-                                  <button
-                                    onClick={() => {
-                                      const newSesiones = [...df_sesiones];
-                                      newSesiones.splice(globalIdx, 1);
-                                      updateDataFrame("df_sesiones", newSesiones);
-                                    }}
-                                    className="text-red-400 hover:text-red-300 font-bold"
-                                    title="Eliminar Sesión"
-                                  >
-                                    ×
-                                  </button>
-                                </td>
-                              </tr>
-                                    )}
-                                  </Draggable>
-                                );
-                              })}
-                              {provided.placeholder}
-                            </tbody>
-                          )}
-                        </Droppable>
-                      </table>
-                      <div className="mt-4">
-                        <button 
-                          onClick={() => handleAddSesion(ud.id_ud)}
-                          className="text-sm text-[#14a085] hover:text-[#1abc9c] font-semibold flex items-center gap-1"
-                        >
-                          <span>+</span> Añadir Sesión a {ud.id_ud}
-                        </button>
-                      </div>
-                    </div>
-                  </details>
-                );
-              })}
-              </DragDropContext>
-            </div>
-          </section>
-
-          <section className="glass-card p-6 border-t-4 border-t-blue-500">
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+          <Card className="p-6 border-t-4 border-t-blue-500">
+            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-white">
               <span>🎯</span> Diseño de tareas competenciales (TC)
             </h2>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
-                <thead>
-                  <tr className="border-b border-white/10 text-gray-400">
-                    <th className="pb-2 w-16">ID</th>
-                    <th className="pb-2 w-48">Título de la Tarea</th>
-                    <th className="pb-2 min-w-[200px]">Contexto Productivo y Reto</th>
-                    <th className="pb-2 w-48">RA y CE Relacionados</th>
-                    <th className="pb-2 w-48">Inst. Calificación</th>
-                    <th className="pb-2 w-10"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {df_tareas.map((tc: any) => {
-                    const globalIdx = df_tareas.findIndex((gTc: any) => gTc === tc);
-                    return (
-                      <tr key={globalIdx} className="border-b border-white/5 hover:bg-white/5">
-                        <td className="py-2 pr-2 font-mono">{tc.ID || tc.id_act}</td>
-                        <td className="py-2 pr-2">
-                          <input 
-                            type="text"
-                            value={tc.Nombre_Tarea || ""}
-                            onChange={(e) => handleUpdateTarea(globalIdx, "Nombre_Tarea", e.target.value)}
-                            className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-blue-500 focus:outline-none"
-                          />
-                        </td>
-                        <td className="py-2 pr-2">
-                          <input 
-                            type="text"
-                            value={tc.Reto || ""}
-                            onChange={(e) => handleUpdateTarea(globalIdx, "Reto", e.target.value)}
-                            className="w-full min-w-[200px] bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-blue-500 focus:outline-none"
-                          />
-                        </td>
-                        <td className="py-2 pr-2">
-                          <input 
-                            type="text"
-                            value={tc.RA_Asociados || ""}
-                            onChange={(e) => handleUpdateTarea(globalIdx, "RA_Asociados", e.target.value)}
-                            className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-blue-500 focus:outline-none"
-                          />
-                        </td>
-                        <td className="py-2 pr-2">
-                          <input 
-                            type="text"
-                            value={tc.Instrumento || tc.desc_act || ""}
-                            onChange={(e) => handleUpdateTarea(globalIdx, "Instrumento", e.target.value)}
-                            className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-blue-500 focus:outline-none"
-                          />
-                        </td>
-                        <td className="py-2 text-center">
-                          <button
-                            onClick={() => {
-                              const newTareas = [...df_tareas];
-                              newTareas.splice(globalIdx, 1);
-                              updateDataFrame("df_tareas", newTareas);
-                            }}
-                            className="text-red-400 hover:text-red-300 font-bold"
-                            title="Eliminar Tarea"
-                          >
-                            ×
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-              <div className="mt-4">
-                <button 
-                  onClick={handleAddTarea}
-                  className="text-sm text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-1"
-                >
-                  <span>+</span> Añadir Nueva Tarea Competencial
-                </button>
-              </div>
-            </div>
-          </section>
+            <TaskTable 
+              df_tareas={df_tareas}
+              handleUpdateTarea={handleUpdateTarea}
+              handleAddTarea={handleAddTarea}
+              handleDeleteTarea={handleDeleteTarea}
+            />
+          </Card>
 
         </main>
       </div>

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
 
 export default function EvaluacionPage() {
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData } = useAppStore();
@@ -39,15 +41,15 @@ export default function EvaluacionPage() {
 
   if (!activeModuleId || !activeCursoId) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
           <main className="flex-1 p-8 content-area">
-            <div className="glass-card p-8 text-center">
+            <Card className="p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">Falta seleccionar módulo o curso</h2>
               <p className="text-gray-400">Por favor, ve a la Gestión de archivos y carga tanto una PD como un Curso.</p>
-            </div>
+            </Card>
           </main>
         </div>
       </div>
@@ -56,7 +58,7 @@ export default function EvaluacionPage() {
 
   if (loading || !moduleData || !cursoData) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
@@ -78,15 +80,15 @@ export default function EvaluacionPage() {
 
   if (df_al.length === 0 || df_ra.length === 0) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
           <main className="flex-1 p-8 content-area">
-            <div className="glass-card p-8 text-center">
+            <Card className="p-8 text-center">
               <h2 className="text-2xl font-bold mb-4 text-yellow-400">Falta información</h2>
               <p className="text-gray-400">Asegúrate de tener alumnado matriculado y Resultados de aprendizaje definidos en su correspondiente pestaña.</p>
-            </div>
+            </Card>
           </main>
         </div>
       </div>
@@ -160,7 +162,7 @@ export default function EvaluacionPage() {
   df_evaluable.sort((a: any, b: any) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
 
   return (
-    <div className="flex min-h-screen bg-[#0b1120]">
+    <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
@@ -174,7 +176,7 @@ export default function EvaluacionPage() {
           </div>
 
           {/* ── Resumen de RA por trimestres ──────────────────── */}
-          <div className="glass-card p-6">
+          <Card className="p-6">
             <h4 className="text-lg font-bold text-white mb-5 flex items-center gap-2">
               <span>📊</span> Resumen de Resultados de aprendizaje por trimestres
             </h4>
@@ -309,7 +311,7 @@ export default function EvaluacionPage() {
                 );
               })}
             </div>
-          </div>
+          </Card>
 
           {/* ── Subtítulo Resultados de aprendizaje por alumnado ─ */}
           <div className="flex items-center justify-between">
@@ -319,18 +321,18 @@ export default function EvaluacionPage() {
               </h2>
               <p className="text-gray-400 mt-1">Progreso individual de cada alumnado en los Resultados de aprendizaje del módulo.</p>
             </div>
-            <button
+            <Button
+              variant="secondary"
               onClick={() => {
                 setAllEvalOpen(prev => !prev);
                 document.querySelectorAll('.eval-details').forEach((el) => {
                   (el as HTMLDetailsElement).open = !allEvalOpen ? true : false;
                 });
               }}
-              className="text-sm font-semibold px-4 py-2 rounded-lg border border-white/10 bg-black/30 text-gray-300 hover:bg-white/10 hover:text-white transition-colors flex items-center gap-2"
             >
               <span>{allEvalOpen ? '▲' : '▼'}</span>
               {allEvalOpen ? 'Colapsar todos' : 'Expandir todos'}
-            </button>
+            </Button>
           </div>
 
           <div className="space-y-4">

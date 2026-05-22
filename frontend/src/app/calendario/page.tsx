@@ -5,6 +5,8 @@ import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
 import DatePicker from "@/components/ui/DatePicker";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -365,15 +367,15 @@ export default function CalendarioPage() {
 
   if (!activeModuleId) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
           <main className="flex-1 p-8 content-area">
-            <div className="glass-card p-8 text-center">
+            <Card className="p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Módulo PD seleccionado</h2>
               <p className="text-gray-400">Ve a Gestión de archivos y selecciona un Módulo PD.</p>
-            </div>
+            </Card>
           </main>
         </div>
       </div>
@@ -382,7 +384,7 @@ export default function CalendarioPage() {
 
   if (!moduleData) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
@@ -406,7 +408,7 @@ export default function CalendarioPage() {
     updateModuleData("calendar_notes", { ...calendar_notes, [key]: val });
 
   return (
-    <div className="flex min-h-screen bg-[#0b1120]">
+    <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
@@ -427,10 +429,11 @@ export default function CalendarioPage() {
           )}
 
           {/* Fechas generales */}
-          <section className="glass-card p-6 border-t-4 border-t-blue-500">
+          <Card className="p-6 border-t-4 border-t-blue-500">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-bold">Fechas generales</h2>
-              <button
+              <Button
+                variant="ghost"
                 onClick={() => {
                   const ledger = moduleData?.planning_ledger || {};
                   const dates = Object.keys(ledger)
@@ -441,10 +444,10 @@ export default function CalendarioPage() {
                     handleUpdateFechas("fin_curso", dates[dates.length - 1]);
                   }
                 }}
-                className="text-xs px-3 py-1.5 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-300 hover:bg-blue-500/20 transition-all"
+                className="text-xs text-blue-300 hover:text-blue-200"
               >
                 🔍 Autodetectar desde Planning
-              </button>
+              </Button>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
@@ -462,10 +465,10 @@ export default function CalendarioPage() {
                 </div>
               ))}
             </div>
-          </section>
+          </Card>
 
           {/* Trimestres */}
-          <section className="glass-card p-6 border-t-4 border-t-emerald-500">
+          <Card className="p-6 border-t-4 border-t-emerald-500">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold">Trimestres</h2>
             </div>
@@ -490,10 +493,10 @@ export default function CalendarioPage() {
                 </div>
               ))}
             </div>
-          </section>
+          </Card>
 
           {/* Notes table + Interactive Calendar */}
-          <section className="glass-card p-6 border-t-4 border-t-yellow-500">
+          <Card className="p-6 border-t-4 border-t-yellow-500">
             <h2 className="text-xl font-bold mb-2">📌 Festivos y eventos</h2>
             <p className="text-gray-400 text-sm mb-4">
               Introduce manualmente o haz clic en el calendario. Los festivos excluyen horas del cómputo real.
@@ -512,7 +515,7 @@ export default function CalendarioPage() {
                 onUpdateNote={handleUpdateNote}
               />
             </div>
-          </section>
+          </Card>
 
         </main>
       </div>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
+import { Card } from "@/components/ui/Card";
 import {
   BarChart,
   Bar,
@@ -39,15 +40,15 @@ export default function AnalisisPage() {
 
   if (!activeCursoId || !activeModuleId) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
           <main className="flex-1 p-8 content-area">
-            <div className="glass-card p-8 text-center">
+            <Card className="p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Curso o Módulo seleccionado</h2>
               <p className="text-gray-400">Por favor, ve a la Gestión de archivos y asegúrate de cargar ambos.</p>
-            </div>
+            </Card>
           </main>
         </div>
       </div>
@@ -56,7 +57,7 @@ export default function AnalisisPage() {
 
   if (loading || !cursoData || !moduleData) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
@@ -79,15 +80,15 @@ export default function AnalisisPage() {
 
   if (df_eval_activos.length === 0) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
           <main className="flex-1 p-8 content-area">
-            <div className="glass-card p-8 text-center border-l-4 border-l-yellow-500">
+            <Card className="p-8 text-center border-l-4 border-l-yellow-500">
               <h2 className="text-xl font-bold text-yellow-400 mb-2">Faltan Datos</h2>
               <p className="text-gray-300">No hay datos de evaluación para alumnos activos. Ve a Evaluación Competencial primero.</p>
-            </div>
+            </Card>
           </main>
         </div>
       </div>
@@ -179,7 +180,7 @@ export default function AnalisisPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#0b1120]">
+    <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
@@ -198,27 +199,27 @@ export default function AnalisisPage() {
           </h2>
 
           <section className="grid grid-cols-4 gap-6">
-            <div className="glass-card p-6 border-l-4 border-l-blue-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
+            <Card className="p-6 border-l-4 border-l-blue-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
               <span className="text-gray-400 text-sm uppercase font-bold tracking-wider mb-2">Media Grupal</span>
               <span className="text-4xl font-black text-blue-400">{media_grupal.toFixed(2)}</span>
-            </div>
-            <div className="glass-card p-6 border-l-4 border-l-emerald-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
+            </Card>
+            <Card className="p-6 border-l-4 border-l-emerald-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
               <span className="text-gray-400 text-sm uppercase font-bold tracking-wider mb-2">% Aprobados</span>
               <span className="text-4xl font-black text-emerald-400">{tasa_aprobado.toFixed(1)}%</span>
-            </div>
-            <div className="glass-card p-6 border-l-4 border-l-purple-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
+            </Card>
+            <Card className="p-6 border-l-4 border-l-purple-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
               <span className="text-gray-400 text-sm uppercase font-bold tracking-wider mb-2">Nº Alumnos</span>
               <span className="text-4xl font-black text-purple-400">{total}</span>
-            </div>
-            <div className="glass-card p-6 border-l-4 border-l-pink-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
+            </Card>
+            <Card className="p-6 border-l-4 border-l-pink-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
               <span className="text-gray-400 text-sm uppercase font-bold tracking-wider mb-2">Cohesión (Desv.)</span>
               <span className="text-4xl font-black text-pink-400">{desv_tipica.toFixed(2)}</span>
-            </div>
+            </Card>
           </section>
 
           <section className="grid grid-cols-2 gap-6">
             {/* Gráfico de Barras: Distribución */}
-            <div className="glass-card p-6">
+            <Card className="p-6">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
                 📉 Distribución de Calificaciones
               </h2>
@@ -237,10 +238,10 @@ export default function AnalisisPage() {
                   </BarChart>
                 </ResponsiveContainer>
               </div>
-            </div>
+            </Card>
 
             {/* Gráfico de Área: Evolución Trimestral */}
-            <div className="glass-card p-6">
+            <Card className="p-6">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
                 📈 Evolución por Trimestres
               </h2>
@@ -261,12 +262,12 @@ export default function AnalisisPage() {
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
-            </div>
+            </Card>
           </section>
 
           {/* ── Rendimiento por RA (full width, barras horizontales) ── */}
           {raData.length > 0 && (
-            <section className="glass-card p-6">
+            <Card className="p-6">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
                 🎯 Rendimiento por RA
               </h2>
@@ -326,11 +327,11 @@ export default function AnalisisPage() {
                 <span>7.5</span>
                 <span>10</span>
               </div>
-            </section>
+            </Card>
           )}
 
           {/* ── Seguimiento de Riesgo Académico (full width) ── */}
-          <section className="glass-card p-6">
+          <Card className="p-6">
             <h2 className="text-xl font-bold mb-6">⚠️ Seguimiento de Riesgo Académico</h2>
             {risks.length > 0 ? (
               <>
@@ -366,7 +367,7 @@ export default function AnalisisPage() {
                 <span className="text-sm opacity-80">No hay alumnos en riesgo según la proyección actual.</span>
               </div>
             )}
-          </section>
+          </Card>
 
         </main>
       </div>

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
 
 export default function PortalPage() {
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData } = useAppStore();
@@ -47,15 +49,15 @@ export default function PortalPage() {
 
   if (!activeCursoId || !activeModuleId) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
           <main className="flex-1 p-8 content-area">
-            <div className="glass-card p-8 text-center">
+            <Card className="p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Curso o Módulo seleccionado</h2>
               <p className="text-gray-400">Por favor, ve a la Gestión de archivos y asegúrate de cargar ambos.</p>
-            </div>
+            </Card>
           </main>
         </div>
       </div>
@@ -64,7 +66,7 @@ export default function PortalPage() {
 
   if (loading || !cursoData || !moduleData) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
@@ -176,7 +178,7 @@ export default function PortalPage() {
   });
 
   return (
-    <div className="flex min-h-screen bg-[#0b1120]">
+    <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
@@ -207,26 +209,26 @@ export default function PortalPage() {
           </div>
 
           <section className="grid grid-cols-3 gap-6">
-            <div className="glass-card p-6 border-l-4 border-l-teal-500 flex flex-col justify-center items-center relative overflow-hidden">
+            <Card className="p-6 border-l-4 border-l-teal-500 flex flex-col justify-center items-center relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 opacity-10 text-6xl">📊</div>
               <span className="text-gray-400 text-sm uppercase font-bold tracking-wider mb-2">Nota Media Actual</span>
               <span className="text-5xl font-black text-teal-400">{realCalc.nota_final.toFixed(2)}</span>
-            </div>
-            <div className="glass-card p-6 border-l-4 border-l-blue-500 flex flex-col justify-center items-center relative overflow-hidden">
+            </Card>
+            <Card className="p-6 border-l-4 border-l-blue-500 flex flex-col justify-center items-center relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 opacity-10 text-6xl">🎯</div>
               <span className="text-gray-400 text-sm uppercase font-bold tracking-wider mb-2">Estado</span>
               <span className="text-4xl font-black text-blue-400">{realCalc.nota_final >= 5 ? 'Apto' : 'En Proceso'}</span>
-            </div>
-            <div className="glass-card p-6 border-l-4" style={{ borderLeftColor: realSigad.col }}>
+            </Card>
+            <Card className="p-6 border-l-4" style={{ borderLeftColor: realSigad.col }}>
               <div className="flex flex-col items-center justify-center h-full">
                 <span className="text-gray-400 text-sm uppercase font-bold tracking-wider mb-2">Calificación Oficial</span>
                 <div className="text-4xl font-black" style={{ color: realSigad.col }}>{realSigad.n} · {realSigad.cod}</div>
                 <div className="text-sm mt-1 text-gray-300 font-semibold">{realSigad.txt}</div>
               </div>
-            </div>
+            </Card>
           </section>
 
-          <section className="glass-card p-6">
+          <Card className="p-6">
             <h2 className="text-2xl font-bold mb-6">🎯 Adquisición de competencias (RA)</h2>
             <div className="grid grid-cols-2 gap-6">
               {df_ra.map((ra: any) => {
@@ -253,9 +255,9 @@ export default function PortalPage() {
                 );
               })}
             </div>
-          </section>
+          </Card>
 
-          <section className="glass-card p-6 border-t-4 border-t-purple-500 mt-8">
+          <Card className="p-6 border-t-4 border-t-purple-500 mt-8">
             <h2 className="text-2xl font-bold mb-2">🎮 Simulador de calificaciones</h2>
             <p className="text-gray-400 mb-6 text-sm">Experimenta con tus notas para proyectar tu resultado final.</p>
 
@@ -292,12 +294,13 @@ export default function PortalPage() {
                     </div>
                   ))}
                 </div>
-                <button 
+                <Button 
+                  variant="ghost"
                   onClick={() => setSimVals({})} 
-                  className="text-sm text-gray-400 hover:text-white flex items-center gap-1 transition-colors"
+                  className="text-sm flex items-center gap-1"
                 >
                   🔄 Restaurar a notas reales
-                </button>
+                </Button>
               </div>
 
               <div className="w-80">
@@ -316,7 +319,7 @@ export default function PortalPage() {
                 </div>
               </div>
             </div>
-          </section>
+          </Card>
 
         </main>
       </div>

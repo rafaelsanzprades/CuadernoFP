@@ -4,6 +4,9 @@ import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { UserPlus, Search, Filter, MoreVertical, Edit2, Shield, Trash2, CheckCircle2, X } from "lucide-react";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
 
 type RoleTag = {
   type: string;
@@ -92,7 +95,7 @@ export default function UsuariosPage() {
   );
 
   return (
-    <div className="flex min-h-screen bg-[#0b1120]">
+    <div className="flex min-h-screen bg-background">
       <Sidebar />
       <main className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
@@ -108,24 +111,25 @@ export default function UsuariosPage() {
                 </h1>
                 <p className="text-gray-400">Administra el claustro, asigna perfiles RBAC y define los contextos de actuación de cada docente.</p>
               </div>
-              <button 
+              <Button 
                 onClick={() => setIsModalOpen(true)}
-                className="glass-button bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 font-bold py-3 px-6 rounded-xl flex items-center gap-2 transition-all duration-300 shadow-lg shadow-accent/10">
+                className="py-3 px-6 shadow-lg shadow-accent/10"
+              >
                 <UserPlus className="w-5 h-5" />
                 <span>Añadir Profesorado</span>
-              </button>
+              </Button>
             </div>
 
             {/* Filtros */}
-            <div className="glass-card p-4 flex flex-col md:flex-row gap-4">
+            <Card className="p-4 flex flex-col md:flex-row gap-4">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 w-5 h-5" />
-                <input 
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 w-5 h-5 z-10" />
+                <Input 
                   type="text" 
                   placeholder="Buscar por nombre o email..." 
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full bg-black/20 border border-white/10 rounded-lg pl-10 pr-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors"
+                  className="pl-10"
                 />
               </div>
               <div className="flex items-center gap-2 min-w-[250px]">
@@ -146,10 +150,10 @@ export default function UsuariosPage() {
                   )}
                 </select>
               </div>
-            </div>
+            </Card>
 
             {/* Tabla de Usuarios */}
-            <div className="glass-card overflow-hidden">
+            <Card className="overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
@@ -230,7 +234,7 @@ export default function UsuariosPage() {
                   </tbody>
                 </table>
               </div>
-            </div>
+            </Card>
 
           </div>
         </div>
@@ -239,7 +243,7 @@ export default function UsuariosPage() {
       {/* Modal Nuevo Profesorado */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in">
-          <div className="bg-[#111827] border border-white/10 rounded-2xl w-full max-w-md shadow-2xl overflow-hidden">
+          <Card className="w-full max-w-md overflow-hidden p-0">
             <div className="flex items-center justify-between p-6 border-b border-white/10">
               <h2 className="text-xl font-bold text-white flex items-center gap-2">
                 <UserPlus className="w-5 h-5 text-accent" />
@@ -254,17 +258,17 @@ export default function UsuariosPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium text-gray-300">Nombre</label>
-                  <input type="text" required value={newUserName} onChange={e => setNewUserName(e.target.value)} className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-accent" />
+                  <Input type="text" required value={newUserName} onChange={e => setNewUserName(e.target.value)} />
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium text-gray-300">Apellidos</label>
-                  <input type="text" required value={newUserSurname} onChange={e => setNewUserSurname(e.target.value)} className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-accent" />
+                  <Input type="text" required value={newUserSurname} onChange={e => setNewUserSurname(e.target.value)} />
                 </div>
               </div>
 
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-gray-300">Email</label>
-                <input type="email" required value={newUserEmail} onChange={e => setNewUserEmail(e.target.value)} className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-accent" placeholder="profesorado@educa.aragon.es" />
+                <Input type="email" required value={newUserEmail} onChange={e => setNewUserEmail(e.target.value)} placeholder="profesorado@educa.aragon.es" />
               </div>
 
               <div className="space-y-1.5">
@@ -291,15 +295,15 @@ export default function UsuariosPage() {
               </div>
 
               <div className="pt-4 flex gap-3">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 py-2.5 rounded-lg border border-white/10 text-gray-300 hover:bg-white/5 transition-colors">
+                <Button variant="ghost" type="button" onClick={() => setIsModalOpen(false)} className="flex-1">
                   Cancelar
-                </button>
-                <button type="submit" className="flex-1 py-2.5 rounded-lg bg-accent text-white font-semibold hover:bg-accent/90 transition-colors shadow-lg shadow-accent/20">
+                </Button>
+                <Button type="submit" className="flex-1">
                   Guardar Profesorado
-                </button>
+                </Button>
               </div>
             </form>
-          </div>
+          </Card>
         </div>
       )}
     </div>

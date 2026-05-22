@@ -4,6 +4,8 @@ import React, { useEffect, useState, useMemo } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
 
 export default function CalificacionPage() {
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData, updateCursoData } = useAppStore();
@@ -66,15 +68,15 @@ export default function CalificacionPage() {
 
   if (!activeModuleId || !activeCursoId) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
           <main className="flex-1 p-8 content-area">
-            <div className="glass-card p-8 text-center">
+            <Card className="p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Curso o Módulo seleccionado</h2>
               <p className="text-gray-400">Por favor, ve a la Gestión de archivos y asegúrate de cargar ambos.</p>
-            </div>
+            </Card>
           </main>
         </div>
       </div>
@@ -83,7 +85,7 @@ export default function CalificacionPage() {
 
   if (loading || !cursoData || !moduleData) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
@@ -214,15 +216,15 @@ export default function CalificacionPage() {
 
   if (df_evaluable.length === 0 || df_act.length === 0 || df_ce.length === 0) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
           <main className="flex-1 p-8 content-area">
-            <div className="glass-card p-8 text-center border-l-4 border-l-yellow-500">
+            <Card className="p-8 text-center border-l-4 border-l-yellow-500">
               <h2 className="text-2xl font-bold mb-4 text-yellow-400">Falta información</h2>
               <p className="text-gray-400">Asegúrate de tener Criterios de evaluación y Actividades definidos, y alumnado activo en la Matrícula.</p>
-            </div>
+            </Card>
           </main>
         </div>
       </div>
@@ -230,7 +232,7 @@ export default function CalificacionPage() {
   }
 
   return (
-    <div className="flex min-h-screen bg-[#0b1120]">
+    <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
@@ -244,7 +246,7 @@ export default function CalificacionPage() {
           </div>
 
           {/* ── Resumen estadístico por trimestres ────────────── */}
-          <div className="glass-card p-6">
+          <Card className="p-6">
             <h4 className="text-lg font-bold text-white mb-5 flex items-center gap-2">
               <span>📊</span> Resumen de calificaciones por trimestres
             </h4>
@@ -358,7 +360,7 @@ export default function CalificacionPage() {
                 );
               })()}
             </div>
-          </div>
+          </Card>
 
           {/* ── Subtítulo Calificación por alumnado ──────────── */}
           <div className="flex items-center justify-between">
@@ -368,18 +370,18 @@ export default function CalificacionPage() {
               </h2>
               <p className="text-gray-400 mt-1">Notas individuales por alumno, trimestre e instrumento de evaluación.</p>
             </div>
-            <button
+            <Button
+              variant="secondary"
               onClick={() => {
                 setAllStudentsOpen(prev => !prev);
                 document.querySelectorAll('.cal-details').forEach((el) => {
                   (el as HTMLDetailsElement).open = !allStudentsOpen ? true : false;
                 });
               }}
-              className="text-sm font-semibold px-4 py-2 rounded-lg border border-white/10 bg-black/30 text-gray-300 hover:bg-white/10 hover:text-white transition-colors flex items-center gap-2"
             >
               <span>{allStudentsOpen ? '▲' : '▼'}</span>
               {allStudentsOpen ? 'Colapsar todos' : 'Expandir todos'}
-            </button>
+            </Button>
           </div>
 
           <div className="space-y-4">

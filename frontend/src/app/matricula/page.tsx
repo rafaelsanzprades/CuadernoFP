@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
 
 export default function MatriculaPage() {
   const { activeCursoId, cursoData, setCursoData, updateCursoData } = useAppStore();
@@ -59,15 +61,15 @@ export default function MatriculaPage() {
 
   if (!activeCursoId) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
           <main className="flex-1 p-8 content-area">
-            <div className="glass-card p-8 text-center">
+            <Card className="p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Curso seleccionado</h2>
               <p className="text-gray-400">Por favor, ve a la Gestión de archivos y selecciona un Curso Activo.</p>
-            </div>
+            </Card>
           </main>
         </div>
       </div>
@@ -76,7 +78,7 @@ export default function MatriculaPage() {
 
   if (loading || !cursoData) {
     return (
-      <div className="flex min-h-screen bg-[#0b1120]">
+      <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
@@ -124,7 +126,7 @@ export default function MatriculaPage() {
   const n_menores = df_al.filter((al: any) => Number(al.Edad) > 0 && Number(al.Edad) < 18).length;
 
   return (
-    <div className="flex min-h-screen bg-[#0b1120]">
+    <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
@@ -138,7 +140,7 @@ export default function MatriculaPage() {
           </div>
 
 
-          <section className="glass-card p-6 border-t-4 border-t-blue-500">
+          <Card className="p-6 border-t-4 border-t-blue-500">
             <div className="flex justify-between items-end mb-6">
               <h2 className="text-xl font-bold flex items-center gap-2">
                 <span>Lista oficial</span>
@@ -152,9 +154,9 @@ export default function MatriculaPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm whitespace-nowrap border-collapse">
                 <thead>
-                  <tr className="border-b border-white/10 text-gray-400 bg-[#0b1120]">
-                    <th className="p-2 sticky left-0 z-10 border-r border-white/10 bg-[#0b1120] w-16">ID</th>
-                    <th className="p-2 sticky left-[60px] z-10 border-r border-white/10 bg-[#0b1120] w-12 text-center">🌸</th>
+                  <tr className="border-b border-white/10 text-gray-400 bg-background">
+                    <th className="p-2 sticky left-0 z-10 border-r border-white/10 bg-background w-16">ID</th>
+                    <th className="p-2 sticky left-[60px] z-10 border-r border-white/10 bg-background w-12 text-center">🌸</th>
                     <th className="p-2 w-32">Estado</th>
                     <th className="p-2 w-48">Apellidos</th>
                     <th className="p-2 w-48">Nombre</th>
@@ -171,10 +173,10 @@ export default function MatriculaPage() {
                     const isMenor = Number(al.Edad) > 0 && Number(al.Edad) < 18;
                     return (
                       <tr key={idx} className="border-b border-white/5 hover:bg-white/5">
-                        <td className="p-2 font-mono text-xs sticky left-0 z-10 border-r border-white/10 bg-[#0b1120] group-hover:bg-[#111827]">
+                        <td className="p-2 font-mono text-xs sticky left-0 z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">
                           {al.ID}
                         </td>
-                        <td className="p-2 text-center sticky left-[60px] z-10 border-r border-white/10 bg-[#0b1120] group-hover:bg-[#111827]">
+                        <td className="p-2 text-center sticky left-[60px] z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">
                           {isMenor ? "🌸" : ""}
                         </td>
                         <td className="p-2 pr-2">
@@ -259,15 +261,16 @@ export default function MatriculaPage() {
                 </tbody>
               </table>
               <div className="mt-4">
-                <button 
+                <Button 
+                  variant="ghost"
                   onClick={handleAddAlumno}
-                  className="text-sm text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-1"
+                  className="text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-1"
                 >
                   <span>+</span> Añadir Alumno
-                </button>
+                </Button>
               </div>
             </div>
-          </section>
+          </Card>
 
         </main>
       </div>

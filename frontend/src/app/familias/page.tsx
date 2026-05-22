@@ -52,7 +52,7 @@ export default function FamiliasPage() {
   }, []);
 
   return (
-    <div className="flex min-h-screen bg-[#0b1120]">
+    <div className="flex min-h-screen bg-background">
       <Sidebar />
       <main className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />

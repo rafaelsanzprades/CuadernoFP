@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 };
 
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { AuthProvider } from "@/components/AuthProvider";
 import { Toaster } from "react-hot-toast";
 
 export default function RootLayout({
@@ -27,13 +28,15 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
       </head>
       <body className="antialiased bg-[var(--background)] text-[var(--foreground)] min-h-screen flex flex-col transition-colors duration-300">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          {children}
-          <Toaster position="bottom-right" toastOptions={{
-            style: { background: 'var(--glass-bg)', color: 'var(--foreground)', backdropFilter: 'blur(12px)', border: '1px solid var(--glass-border)' },
-            success: { iconTheme: { primary: '#14a085', secondary: '#fff' } }
-          }} />
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+            {children}
+            <Toaster position="bottom-right" toastOptions={{
+              style: { background: 'var(--glass-bg)', color: 'var(--foreground)', backdropFilter: 'blur(12px)', border: '1px solid var(--glass-border)' },
+              success: { iconTheme: { primary: '#14a085', secondary: '#fff' } }
+            }} />
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );
