@@ -1,5 +1,9 @@
 # Histórico de Cambios (UX/UI y Optimizaciones)
 
+## [Unreleased]
+- **Migración a SQL (Fase 3):** Finalizada la migración absoluta al modelo relacional. Se eliminó la dependencia del campo JSON para guardar `info_fechas`, `horario`, `info_modulo` y `planning_ledger`. Creadas tablas `ConfigDates`, `ScheduleItem`, `ModuleInfo` y `PlanningLedgerItem`.
+- **UI:** Fusión de las pestañas de Inicio y Datos de Módulos. Modificados los subtítulos de las pestañas a "Resumen" y "Gestión de ficheros".
+
 ## Fecha: 27 de Mayo de 2026
 
 ### 1. Mejoras en Dashboards y Menús (`/`, Menú Lateral/Superior)

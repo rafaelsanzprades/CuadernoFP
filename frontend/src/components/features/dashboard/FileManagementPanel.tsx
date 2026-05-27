@@ -66,12 +66,6 @@ export function FileManagementPanel({
 }: FileManagementPanelProps) {
   return (
     <div>
-      <div>
-        <h2 className="text-3xl font-extrabold text-foreground tracking-tight flex items-center gap-3 mb-2">
-          📁 Datos
-        </h2>
-        <p className="text-muted mb-6">Carga y guarda los datos de Centro educativo; módulo didáctico; y curso y alumnado.</p>
-      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         

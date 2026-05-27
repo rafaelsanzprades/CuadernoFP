@@ -350,3 +350,42 @@ class SgmtItem(Base):
     module_document_id = Column(String, ForeignKey("module_documents.id", ondelete="CASCADE"), index=True)
     id_ud = Column(String, index=True)
     data = Column(JSON, default={})
+
+class CalendarNoteItem(Base):
+    __tablename__ = "calendar_note_items"
+    id = Column(Integer, primary_key=True, index=True)
+    module_document_id = Column(String, ForeignKey("module_documents.id", ondelete="CASCADE"), index=True)
+    note_key = Column(String, index=True)
+    note_text = Column(String)
+
+# ==========================================
+# 7. NORMALIZED JSON DATA TABLES (PHASE 3)
+# ==========================================
+
+class ConfigDates(Base):
+    __tablename__ = "config_dates"
+    id = Column(Integer, primary_key=True, index=True)
+    module_document_id = Column(String, ForeignKey("module_documents.id", ondelete="CASCADE"), unique=True)
+    data = Column(JSON, default={})
+
+class ScheduleItem(Base):
+    __tablename__ = "schedule_items"
+    id = Column(Integer, primary_key=True, index=True)
+    module_document_id = Column(String, ForeignKey("module_documents.id", ondelete="CASCADE"), index=True)
+    day_of_week = Column(String, index=True)
+    hours = Column(Integer, default=0)
+
+class ModuleInfo(Base):
+    __tablename__ = "module_infos"
+    id = Column(Integer, primary_key=True, index=True)
+    module_document_id = Column(String, ForeignKey("module_documents.id", ondelete="CASCADE"), unique=True)
+    data = Column(JSON, default={})
+
+class PlanningLedgerItem(Base):
+    __tablename__ = "planning_ledger_items"
+    id = Column(Integer, primary_key=True, index=True)
+    module_document_id = Column(String, ForeignKey("module_documents.id", ondelete="CASCADE"), index=True)
+    date_str = Column(String, index=True)
+    id_ud = Column(String)
+
+

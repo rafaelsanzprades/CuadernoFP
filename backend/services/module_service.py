@@ -3,7 +3,8 @@ from fastapi import HTTPException
 from models import (
     ModuleDocument, DidacticUnit, SessionModel, CourseStudent, StudentEvaluation,
     LearningOutcomeItem, EvaluationCriterionItem, ActivityItem, InstrumentItem,
-    TaskItem, AceItem, DuaItem, ContingencyItem, FeoeItem, SgmtItem
+    TaskItem, AceItem, DuaItem, ContingencyItem, FeoeItem, SgmtItem, CalendarNoteItem,
+    ConfigDates, ScheduleItem, ModuleInfo, PlanningLedgerItem
 )
 
 def get_module_data(module_id: str, db: Session):
@@ -109,6 +110,39 @@ def get_module_data(module_id: str, db: Session):
                     d.update(item.data)
                 item_list.append(d)
             base_data[df_key] = item_list
+            
+    # Merge Calendar Notes
+    cal_notes = db.query(CalendarNoteItem).filter_by(module_document_id=module_id).all()
+    if cal_notes:
+        notes_dict = {}
+        for note in cal_notes:
+            notes_dict[note.note_key] = note.note_text
+        base_data["calendar_notes"] = notes_dict
+        
+    # Phase 3
+    conf_dates = db.query(ConfigDates).filter_by(module_document_id=module_id).first()
+    if conf_dates and conf_dates.data:
+        base_data["info_fechas"] = conf_dates.data
+
+    mod_info = db.query(ModuleInfo).filter_by(module_document_id=module_id).first()
+    if mod_info and mod_info.data:
+        base_data["info_modulo"] = mod_info.data
+
+    sched = db.query(ScheduleItem).filter_by(module_document_id=module_id).all()
+    if sched:
+        h = {}
+        for s in sched:
+            h[s.day_of_week] = s.hours
+        base_data["horario"] = h
+
+    ledger = db.query(PlanningLedgerItem).filter_by(module_document_id=module_id).all()
+    if ledger:
+        pl = {}
+        for item in ledger:
+            if item.date_str not in pl:
+                pl[item.date_str] = []
+            pl[item.date_str].append(item.id_ud)
+        base_data["planning_ledger"] = pl
         
     return base_data
 
@@ -130,6 +164,13 @@ def update_module_data(module_id: str, body: dict, db: Session):
     df_contingencia = body.pop("df_contingencia", [])
     df_feoe = body.pop("df_feoe", [])
     df_sgmt = body.pop("df_sgmt", [])
+    calendar_notes = body.pop("calendar_notes", {})
+    
+    # Phase 3 dicts
+    info_fechas = body.pop("info_fechas", {})
+    horario = body.pop("horario", {})
+    info_modulo = body.pop("info_modulo", {})
+    planning_ledger = body.pop("planning_ledger", {})
     
     # 2. Update JSON Blob
     doc = db.query(ModuleDocument).filter(ModuleDocument.id == module_id).first()
@@ -267,5 +308,33 @@ def update_module_data(module_id: str, body: dict, db: Session):
         for row in df_sgmt:
             d = {k: v for k, v in row.items() if k not in ["id_ud"]}
             db.add(SgmtItem(module_document_id=module_id, id_ud=safe_str(row.get("id_ud")), data=d))
+            
+    db.query(CalendarNoteItem).filter_by(module_document_id=module_id).delete()
+    if isinstance(calendar_notes, dict):
+        for key, val in calendar_notes.items():
+            db.add(CalendarNoteItem(module_document_id=module_id, note_key=safe_str(key), note_text=safe_str(val)))
+            
+    # Phase 3 updates
+    db.query(ConfigDates).filter_by(module_document_id=module_id).delete()
+    if info_fechas and isinstance(info_fechas, dict):
+        db.add(ConfigDates(module_document_id=module_id, data=info_fechas))
+
+    db.query(ModuleInfo).filter_by(module_document_id=module_id).delete()
+    if info_modulo and isinstance(info_modulo, dict):
+        db.add(ModuleInfo(module_document_id=module_id, data=info_modulo))
+
+    db.query(ScheduleItem).filter_by(module_document_id=module_id).delete()
+    if horario and isinstance(horario, dict):
+        for k, v in horario.items():
+            db.add(ScheduleItem(module_document_id=module_id, day_of_week=safe_str(k), hours=int(v) if str(v).isdigit() else 0))
+
+    db.query(PlanningLedgerItem).filter_by(module_document_id=module_id).delete()
+    if planning_ledger and isinstance(planning_ledger, dict):
+        for k, v in planning_ledger.items():
+            if isinstance(v, list):
+                for ud in v:
+                    db.add(PlanningLedgerItem(module_document_id=module_id, date_str=safe_str(k), id_ud=safe_str(ud)))
+            else:
+                db.add(PlanningLedgerItem(module_document_id=module_id, date_str=safe_str(k), id_ud=safe_str(v)))
     
     db.commit()

@@ -10,7 +10,35 @@ La aplicación ha sido modernizada completamente, abandonando el antiguo sistema
 
 - **Frontend (UI/UX):** Next.js, React, Tailwind CSS, Zustand (para gestión de estado global). Interfaz moderna con *glassmorphism* y menú superior desplegable por categorías.
 - **Backend (API REST):** Python con FastAPI, proporcionando endpoints rápidos y seguros.
-- **Base de Datos:** SQLite gestionado a través de SQLAlchemy, asegurando integridad relacional y centralización de los datos académicos.
+- **Base de Datos:** SQLite gestionado a través de SQLAlchemy, asegurando integridad relacional y centralización de los datos académicos. Toda la arquitectura se ha migrado a un esquema 100% relacional (SQL puro) organizado por bloques funcionales.
+
+---
+
+## 🏛️ Resumen de la Estructura de la Base de Datos
+
+La aplicación y su modelo de datos se dividen lógicamente en 4 grandes bloques:
+
+### 🏢 Bloque CENTRO
+*(Configuración global del centro educativo)*
+- **Tablas maestras**: `centers`, `academic_years`, `professional_families`, `degrees`, `modules` (Currículo oficial y catálogo de centros).
+- **Tablas de configuración de contexto**: `config_dates` (fechas globales) y `module_infos` (texto descriptivo o presentación del centro).
+
+### ⚙️ Bloque MÓDULO (Programación Didáctica - PD)
+*(Planificación teórica anual de la materia)*
+- **Tablas de temporalización**: `config_dates`, `calendar_note_items` (Festivos y eventos), `schedule_items` (Horario semanal), `module_infos` (Introducción, metodología).
+- **Tablas de currículo**: `learning_outcome_items` (RA), `evaluation_criterion_items` (CE), `didactic_units` (UD), `sessions` (Sesiones teóricas).
+- **Planificación diaria**: `planning_ledger_items` (El mapeo temporal: Día X -> Sesión/UD Y).
+- **Recursos y atención**: `task_items`, `activity_items`, `instrument_items`, `dua_items`, `contingency_items`, `ace_items`.
+
+### 📅 Bloque CURSO
+*(Aplicación real del módulo en un año académico con alumnado)*
+- **Tablas de alumnado**: `course_students` (Matrícula), `student_evaluations` (Notas de evaluación continua).
+- **Seguimiento**: `sgmt_items` (Seguimiento real de UDs impartidas vs planificadas), `feoe_items` (Seguimiento FEOE).
+
+### 🛠️ Bloque GESTIÓN
+*(Roles, carga lectiva y administración)*
+- **Usuarios y roles**: `users`, `center_staff`, `head_of_studies`, `department_heads`, `group_tutors`, `teaching_assignments`.
+- **Estructura organizativa**: `course_groups` (Ej. 1º DAW, 2º SMR).
 
 ---
 
