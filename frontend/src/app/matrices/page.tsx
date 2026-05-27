@@ -6,6 +6,7 @@ import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function MatricesPage() {
   const { activeModuleId, moduleData, setModuleData, updateDataFrame } = useAppStore();
@@ -13,6 +14,7 @@ export default function MatricesPage() {
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
   const [allCeOpen, setAllCeOpen] = useState(false);
+  const [openCEs, setOpenCEs] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     if (activeModuleId && !moduleData) {
@@ -324,10 +326,12 @@ export default function MatricesPage() {
               <Button
                 variant="secondary"
                 onClick={() => {
-                  setAllCeOpen(prev => !prev);
-                  document.querySelectorAll('.ce-details').forEach((el) => {
-                    (el as HTMLDetailsElement).open = !allCeOpen ? true : false;
-                  });
+                  if (allCeOpen) {
+                    setOpenCEs(new Set());
+                  } else {
+                    setOpenCEs(new Set(df_ra.map((ra: any) => ra.id_ra)));
+                  }
+                  setAllCeOpen(!allCeOpen);
                 }}
               >
                 <span>{allCeOpen ? '▲' : '▼'}</span>
@@ -341,8 +345,16 @@ export default function MatricesPage() {
                 const totalPeso = ceForRa.reduce((sum: number, ce: any) => sum + (Number(ce.peso_ce) || 0), 0);
 
                 return (
-                  <details key={ra.id_ra} className="ce-details group bg-white/5 rounded-lg border border-white/10 overflow-hidden open:bg-white/10 transition-colors">
-                    <summary className="p-4 cursor-pointer flex items-center justify-between font-semibold text-lg select-none hover:bg-white/5">
+                  <div key={ra.id_ra} className="group bg-white/5 rounded-lg border border-white/10 overflow-hidden transition-colors">
+                    <div 
+                      onClick={() => {
+                        const newSet = new Set(openCEs);
+                        if (newSet.has(ra.id_ra)) newSet.delete(ra.id_ra);
+                        else newSet.add(ra.id_ra);
+                        setOpenCEs(newSet);
+                      }}
+                      className="p-4 cursor-pointer flex items-center justify-between font-semibold text-lg select-none hover:bg-white/10 transition-colors"
+                    >
                       <div className="flex items-center gap-4">
                         <span className="text-yellow-400">{ra.id_ra}</span>
                         <span className="text-sm text-gray-400 font-normal truncate max-w-xl">{ra.desc_ra}</span>
@@ -352,141 +364,154 @@ export default function MatricesPage() {
                         <span className={`px-2 py-1 rounded ${totalPeso === 100 ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
                           Σ {totalPeso.toFixed(0)}%
                         </span>
-                        <span className="group-open:rotate-180 transition-transform text-gray-500">▼</span>
-                      </div>
-                    </summary>
-                    <div className="p-4 border-t border-white/10 bg-black/20">
-                      <table className="w-full text-left text-sm">
-                        <thead>
-                          <tr className="text-gray-400 border-b border-white/10">
-                            <th className="pb-2">ID-CE</th>
-                            <th className="pb-2 w-20">% CE</th>
-                            <th className="pb-2 w-16 text-center">FEOE</th>
-                            <th className="pb-2">Criterio de Evaluación</th>
-                            <th className="pb-2 w-32">OG</th>
-                            <th className="pb-2 w-32">CPE</th>
-                            <th className="pb-2 w-10"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {ceForRa.map((ce: any, ceIdx: number) => {
-                            const globalIdx = df_ce.findIndex((gCe: any) => gCe === ce);
-                            return (
-                              <tr key={ceIdx} className="border-b border-white/5 hover:bg-white/5">
-                                <td className="py-2 pr-2">
-                                  <input
-                                    type="text"
-                                    value={ce.id_ce || ""}
-                                    onChange={(e) => {
-                                      const newCe = [...df_ce];
-                                      newCe[globalIdx].id_ce = e.target.value;
-                                      updateDataFrame("df_ce", newCe);
-                                    }}
-                                    className="w-16 bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-yellow-500 focus:outline-none"
-                                  />
-                                </td>
-                                <td className="py-2 pr-2">
-                                  <input
-                                    type="number"
-                                    value={ce.peso_ce || 0}
-                                    onChange={(e) => {
-                                      const newCe = [...df_ce];
-                                      newCe[globalIdx].peso_ce = parseFloat(e.target.value) || 0;
-                                      updateDataFrame("df_ce", newCe);
-                                    }}
-                                    className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-yellow-500 focus:outline-none"
-                                  />
-                                </td>
-                                <td className="py-2 text-center">
-                                  <input
-                                    type="checkbox"
-                                    checked={ce.feoe || false}
-                                    onChange={(e) => {
-                                      const newCe = [...df_ce];
-                                      newCe[globalIdx].feoe = e.target.checked;
-                                      updateDataFrame("df_ce", newCe);
-                                    }}
-                                    className="accent-yellow-500"
-                                  />
-                                </td>
-                                <td className="py-2 pr-2">
-                                  <input
-                                    type="text"
-                                    value={ce.desc_ce || ""}
-                                    onChange={(e) => {
-                                      const newCe = [...df_ce];
-                                      newCe[globalIdx].desc_ce = e.target.value;
-                                      updateDataFrame("df_ce", newCe);
-                                    }}
-                                    className="w-full bg-black/30 border border-white/10 rounded px-3 py-1 text-white focus:border-yellow-500 focus:outline-none"
-                                  />
-                                </td>
-                                <td className="py-2 pr-2">
-                                  <input
-                                    type="text"
-                                    value={ce.og_vinc || ""}
-                                    onChange={(e) => {
-                                      const newCe = [...df_ce];
-                                      newCe[globalIdx].og_vinc = e.target.value;
-                                      updateDataFrame("df_ce", newCe);
-                                    }}
-                                    placeholder="Ej. OG1"
-                                    className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-yellow-500 focus:outline-none text-xs"
-                                  />
-                                </td>
-                                <td className="py-2 pr-2">
-                                  <input
-                                    type="text"
-                                    value={ce.cpe_vinc || ""}
-                                    onChange={(e) => {
-                                      const newCe = [...df_ce];
-                                      newCe[globalIdx].cpe_vinc = e.target.value;
-                                      updateDataFrame("df_ce", newCe);
-                                    }}
-                                    placeholder="Ej. CPE1"
-                                    className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-yellow-500 focus:outline-none text-xs"
-                                  />
-                                </td>
-                                <td className="py-2 text-center">
-                                  <button
-                                    onClick={() => {
-                                      const newCe = [...df_ce];
-                                      newCe.splice(globalIdx, 1);
-                                      updateDataFrame("df_ce", newCe);
-                                    }}
-                                    className="text-red-400 hover:text-red-300 font-bold"
-                                    title="Eliminar CE"
-                                  >
-                                    ×
-                                  </button>
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                      <div className="mt-3">
-                        <button
-                          onClick={() => {
-                            const newCe = [...df_ce];
-                            newCe.push({
-                              id_ra: ra.id_ra,
-                              id_ce: `${ra.id_ra.replace('RA', 'CE')}.`,
-                              peso_ce: 0,
-                              feoe: false,
-                              desc_ce: "",
-                              og_vinc: "",
-                              cpe_vinc: ""
-                            });
-                            updateDataFrame("df_ce", newCe);
-                          }}
-                          className="text-xs text-yellow-500 hover:text-yellow-400 font-semibold flex items-center gap-1"
-                        >
-                          <span>+</span> Añadir CE a {ra.id_ra}
-                        </button>
+                        <span className={`transition-transform duration-300 text-gray-500 ${openCEs.has(ra.id_ra) ? 'rotate-180' : ''}`}>▼</span>
                       </div>
                     </div>
-                  </details>
+                    
+                    <AnimatePresence initial={false}>
+                      {openCEs.has(ra.id_ra) && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <div className="p-4 border-t border-white/10 bg-black/20">
+                            <table className="w-full text-left text-sm">
+                              <thead>
+                                <tr className="text-gray-400 border-b border-white/10">
+                                  <th className="pb-2">ID-CE</th>
+                                  <th className="pb-2 w-20">% CE</th>
+                                  <th className="pb-2 w-16 text-center">FEOE</th>
+                                  <th className="pb-2">Criterio de Evaluación</th>
+                                  <th className="pb-2 w-32">OG</th>
+                                  <th className="pb-2 w-32">CPE</th>
+                                  <th className="pb-2 w-10"></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {ceForRa.map((ce: any, ceIdx: number) => {
+                                  const globalIdx = df_ce.findIndex((gCe: any) => gCe === ce);
+                                  return (
+                                    <tr key={ceIdx} className="border-b border-white/5 hover:bg-white/5">
+                                      <td className="py-2 pr-2">
+                                        <input
+                                          type="text"
+                                          value={ce.id_ce || ""}
+                                          onChange={(e) => {
+                                            const newCe = [...df_ce];
+                                            newCe[globalIdx].id_ce = e.target.value;
+                                            updateDataFrame("df_ce", newCe);
+                                          }}
+                                          className="w-16 bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-yellow-500 focus:outline-none"
+                                        />
+                                      </td>
+                                      <td className="py-2 pr-2">
+                                        <input
+                                          type="number"
+                                          value={ce.peso_ce || 0}
+                                          onChange={(e) => {
+                                            const newCe = [...df_ce];
+                                            newCe[globalIdx].peso_ce = parseFloat(e.target.value) || 0;
+                                            updateDataFrame("df_ce", newCe);
+                                          }}
+                                          className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-yellow-500 focus:outline-none"
+                                        />
+                                      </td>
+                                      <td className="py-2 text-center">
+                                        <input
+                                          type="checkbox"
+                                          checked={ce.feoe || false}
+                                          onChange={(e) => {
+                                            const newCe = [...df_ce];
+                                            newCe[globalIdx].feoe = e.target.checked;
+                                            updateDataFrame("df_ce", newCe);
+                                          }}
+                                          className="accent-yellow-500"
+                                        />
+                                      </td>
+                                      <td className="py-2 pr-2">
+                                        <input
+                                          type="text"
+                                          value={ce.desc_ce || ""}
+                                          onChange={(e) => {
+                                            const newCe = [...df_ce];
+                                            newCe[globalIdx].desc_ce = e.target.value;
+                                            updateDataFrame("df_ce", newCe);
+                                          }}
+                                          className="w-full bg-black/30 border border-white/10 rounded px-3 py-1 text-white focus:border-yellow-500 focus:outline-none"
+                                        />
+                                      </td>
+                                      <td className="py-2 pr-2">
+                                        <input
+                                          type="text"
+                                          value={ce.og_vinc || ""}
+                                          onChange={(e) => {
+                                            const newCe = [...df_ce];
+                                            newCe[globalIdx].og_vinc = e.target.value;
+                                            updateDataFrame("df_ce", newCe);
+                                          }}
+                                          placeholder="Ej. OG1"
+                                          className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-yellow-500 focus:outline-none text-xs"
+                                        />
+                                      </td>
+                                      <td className="py-2 pr-2">
+                                        <input
+                                          type="text"
+                                          value={ce.cpe_vinc || ""}
+                                          onChange={(e) => {
+                                            const newCe = [...df_ce];
+                                            newCe[globalIdx].cpe_vinc = e.target.value;
+                                            updateDataFrame("df_ce", newCe);
+                                          }}
+                                          placeholder="Ej. CPE1"
+                                          className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-yellow-500 focus:outline-none text-xs"
+                                        />
+                                      </td>
+                                      <td className="py-2 text-center">
+                                        <button
+                                          onClick={() => {
+                                            const newCe = [...df_ce];
+                                            newCe.splice(globalIdx, 1);
+                                            updateDataFrame("df_ce", newCe);
+                                          }}
+                                          className="text-red-400 hover:text-red-300 font-bold"
+                                          title="Eliminar CE"
+                                        >
+                                          ×
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  );
+                                })}
+                              </tbody>
+                            </table>
+                            <div className="mt-3">
+                              <button
+                                onClick={() => {
+                                  const newCe = [...df_ce];
+                                  newCe.push({
+                                    id_ra: ra.id_ra,
+                                    id_ce: `${ra.id_ra.replace('RA', 'CE')}.`,
+                                    peso_ce: 0,
+                                    feoe: false,
+                                    desc_ce: "",
+                                    og_vinc: "",
+                                    cpe_vinc: ""
+                                  });
+                                  updateDataFrame("df_ce", newCe);
+                                }}
+                                className="text-xs text-yellow-500 hover:text-yellow-400 font-semibold flex items-center gap-1"
+                              >
+                                <span>+</span> Añadir CE a {ra.id_ra}
+                              </button>
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 );
               })}
             </div>

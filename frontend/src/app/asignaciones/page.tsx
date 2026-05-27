@@ -1,228 +1,185 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
-import { useSearchParams } from "next/navigation";
-import { Save, Plus, CheckCircle2 } from "lucide-react";
-import { useAppStore } from "@/store/useAppStore";
-import { useUsers, useFamilies, useLearningOutcomes } from "@/hooks/useApi";
-import { CourseGroup, ModuleAssignment } from "@/types";
-import { Button } from "@/components/ui/Button";
+import { useSession } from "next-auth/react";
+import { useUsers, useAdminModules, useAssignments, saveAssignments } from "@/hooks/useApi";
 import { Card } from "@/components/ui/Card";
-import { Select } from "@/components/ui/Select";
-import { GroupList } from "@/components/features/asignaciones/GroupList";
-import { AddGroupModal } from "@/components/features/asignaciones/AddGroupModal";
+import { Button } from "@/components/ui/Button";
+import { UserCog, Save, CheckCircle2, ShieldAlert } from "lucide-react";
 
 export default function AsignacionesPage() {
-  return (
-    <React.Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center"><div className="w-8 h-8 border-4 border-accent border-t-transparent rounded-full animate-spin"></div></div>}>
-      <AsignacionesContent />
-    </React.Suspense>
-  );
-}
+  const { data: session, status } = useSession();
+  const { data: usersData, isLoading: loadingUsers } = useUsers();
+  const { data: modulesData, isLoading: loadingModules } = useAdminModules();
+  const { data: assignmentsData, mutate: mutateAssignments } = useAssignments();
 
-function AsignacionesContent() {
-  const { groups, setGroups } = useAppStore();
-  const searchParams = useSearchParams();
-  const initialFamilyId = searchParams.get("familyId");
-  const initialDegreeId = searchParams.get("degreeId");
+  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
+  const [localAssignments, setLocalAssignments] = useState<number[]>([]);
+  const [isSaving, setIsSaving] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
 
-  const [hasChanges, setHasChanges] = useState(false);
-  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
+  const users = usersData || [];
+  const modules = modulesData || [];
+  const assignments = assignmentsData || {};
 
-  const { data: usersData } = useUsers();
-  const { data: familiesData } = useFamilies();
-  const { data: rasData } = useLearningOutcomes();
+  const isSuperadmin = session?.user && (session.user as any).roles === "Superadmin";
 
-  const teachers = usersData?.map((u: any) => ({ id: u.id, name: u.name })) || [];
-  const families = familiesData || [];
-  
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newGroupName, setNewGroupName] = useState("");
-  const [selectedFamilyId, setSelectedFamilyId] = useState("");
-  const [selectedDegreeId, setSelectedDegreeId] = useState("");
-
-  const [viewFamilyId, setViewFamilyId] = useState("");
-  const [viewDegreeId, setViewDegreeId] = useState("");
-  const [collapsedGroups, setCollapsedGroups] = useState<Set<number>>(new Set());
-
-  const toggleGroup = (groupId: number) => {
-    setCollapsedGroups(prev => {
-      const next = new Set(prev);
-      if (next.has(groupId)) next.delete(groupId);
-      else next.add(groupId);
-      return next;
-    });
+  const handleSelectUser = (userId: string) => {
+    setSelectedUserId(userId);
+    setLocalAssignments(assignments[userId] || []);
+    setSuccessMsg("");
   };
 
-  useEffect(() => {
-    if (initialFamilyId) setViewFamilyId(initialFamilyId);
-    if (initialDegreeId) setViewDegreeId(initialDegreeId);
-  }, [initialFamilyId, initialDegreeId]);
+  const handleToggleModule = (moduleId: number) => {
+    setLocalAssignments(prev => 
+      prev.includes(moduleId)
+        ? prev.filter(id => id !== moduleId)
+        : [...prev, moduleId]
+    );
+  };
 
-  useEffect(() => {
-    if (rasData) {
-      setGroups((prevGroups: CourseGroup[]) => prevGroups.map((g: CourseGroup) => ({
-        ...g,
-        modules: g.modules.map((m: ModuleAssignment) => ({
-          ...m,
-          ras: rasData[m.code] || m.ras || []
-        }))
-      })));
+  const handleSave = async () => {
+    if (!selectedUserId) return;
+    setIsSaving(true);
+    try {
+      await saveAssignments(selectedUserId, localAssignments);
+      await mutateAssignments();
+      setSuccessMsg("Asignaciones guardadas correctamente");
+      setTimeout(() => setSuccessMsg(""), 3000);
+    } catch (e: any) {
+      alert("Error: " + e.message);
+    } finally {
+      setIsSaving(false);
     }
-  }, [rasData, setGroups]);
-
-  const handleAssignTeacher = (groupId: number, moduleId: number, teacherId: string) => {
-    setGroups((prev: CourseGroup[]) => prev.map((g: CourseGroup) => {
-      if (g.id !== groupId) return g;
-      return {
-        ...g,
-        modules: g.modules.map((m: ModuleAssignment) => {
-          if (m.id !== moduleId) return m;
-          return { ...m, assignedTeacherId: teacherId ? Number(teacherId) : null };
-        })
-      };
-    }));
-    setHasChanges(true);
   };
 
-  const handleSave = () => {
-    setSaveStatus("saving");
-    setTimeout(() => {
-      setSaveStatus("saved");
-      setHasChanges(false);
-      setTimeout(() => setSaveStatus("idle"), 3000);
-    }, 1000);
-  };
+  if (status === "loading" || loadingUsers || loadingModules) {
+    return (
+      <div className="flex min-h-screen bg-background items-center justify-center text-white">
+        Cargando Panel de Administración...
+      </div>
+    );
+  }
 
-  const handleAddGroup = () => {
-    if (!newGroupName || !selectedDegreeId) return;
-    const family = families.find((f: any) => f.id.toString() === selectedFamilyId);
-    const degree = family?.degrees.find((d: any) => d.id.toString() === selectedDegreeId);
+  if (!isSuperadmin) {
+    return (
+      <div className="flex min-h-screen bg-background">
+        <Sidebar />
+        <main className="flex-1 flex flex-col relative z-10 min-w-0">
+          <Header />
+          <div className="flex-1 p-8 flex items-center justify-center">
+            <Card className="p-8 text-center max-w-md border-red-500/30 bg-red-500/5">
+              <ShieldAlert className="w-16 h-16 text-red-500 mx-auto mb-4" />
+              <h2 className="text-xl font-bold text-white mb-2">Acceso Restringido</h2>
+              <p className="text-gray-400">Esta página es exclusiva para Superadministradores y equipos directivos.</p>
+            </Card>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
-    const newGroup: CourseGroup = {
-      id: Date.now(),
-      name: newGroupName,
-      degreeName: degree ? degree.name : "Desconocido",
-      level: degree ? degree.level : "Grado",
-      modules: []
-    };
-
-    setGroups([...groups, newGroup]);
-    setIsModalOpen(false);
-    setNewGroupName("");
-    setSelectedFamilyId("");
-    setSelectedDegreeId("");
-    setHasChanges(true);
-  };
-
-  const viewFamily = families.find((f: any) => f.id.toString() === viewFamilyId);
-  const viewDegree = viewFamily?.degrees.find((d: any) => d.id.toString() === viewDegreeId);
-
-  const displayedGroups = viewDegree
-    ? groups.filter((g: CourseGroup) => {
-        const clean = (str: string) => 
-          str.toLowerCase().replace(/^[a-z0-9]+\s*-\s*/i, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
-        return clean(g.degreeName) === clean(viewDegree.name);
-      })
-    : [];
+  const selectedUser = users.find((u: any) => u.id === parseInt(selectedUserId || "0") || u.id === selectedUserId);
 
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar />
       <main className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
-        
-        <div className="flex-1 p-8 pt-4 overflow-y-auto scrollbar-hide">
-          <div className="w-full space-y-6 animate-in fade-in duration-500">
-            
-            {/* Cabecera */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-              <div>
-                <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3 mb-2">
-                  <span className="text-3xl">📋</span> Asignación de módulos
-                </h1>
-                <p className="text-gray-400">Jefatura de Estudios: Asigna el profesorado a los módulos de cada ciclo formativo.</p>
+        <div className="flex-1 overflow-y-auto scrollbar-hide p-8">
+          <div className="mb-8">
+            <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3 mb-2">
+              <UserCog className="w-10 h-10 text-accent" />
+              Asignación de Módulos
+            </h1>
+            <p className="text-gray-400">
+              Selecciona un profesor y asínale los módulos que va a impartir este curso.
+            </p>
+          </div>
+
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Lista de Profesores */}
+            <Card className="p-4 lg:w-1/3 border-accent/20 bg-black/20">
+              <h3 className="text-lg font-bold text-white mb-4 px-2">Profesores</h3>
+              <div className="space-y-2 max-h-[600px] overflow-y-auto pr-2 scrollbar-hide">
+                {users.map((u: any) => (
+                  <button
+                    key={u.id}
+                    onClick={() => handleSelectUser(u.id)}
+                    className={`w-full text-left p-4 rounded-xl transition-all ${selectedUserId == u.id ? 'bg-accent/20 border border-accent/50 text-white' : 'bg-white/5 border border-transparent text-gray-300 hover:bg-white/10'}`}
+                  >
+                    <div className="font-semibold">{u.name}</div>
+                    <div className="text-xs text-gray-400 mt-1">{u.email}</div>
+                    <div className="text-xs text-accent mt-2 flex items-center gap-1">
+                      <CheckCircle2 className="w-3 h-3" />
+                      {(assignments[u.id] || []).length} módulos asignados
+                    </div>
+                  </button>
+                ))}
               </div>
-              <Button 
-                onClick={handleSave}
-                disabled={!hasChanges && saveStatus !== "saved"}
-                variant={saveStatus === "saved" ? "success" : hasChanges ? "primary" : "ghost"}
-                className={saveStatus === "saved" ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30" : ""}
-              >
-                {saveStatus === "saving" ? (
-                  <div className="w-5 h-5 border-2 border-accent border-t-transparent rounded-full animate-spin" />
-                ) : saveStatus === "saved" ? (
-                  <CheckCircle2 className="w-5 h-5" />
-                ) : (
-                  <Save className="w-5 h-5" />
-                )}
-                <span>
-                  {saveStatus === "saving" ? "Guardando..." : 
-                   saveStatus === "saved" ? "¡Guardado!" : 
-                   "Guardar Cambios"}
-                </span>
-              </Button>
-              
-              <Button onClick={() => setIsModalOpen(true)} variant="secondary">
-                <Plus className="w-5 h-5" />
-                <span>Añadir Grupo</span>
-              </Button>
-            </div>
-
-            {/* Filtros Superiores */}
-            <Card className="p-5 flex flex-col md:flex-row gap-4 mb-2">
-              <Select 
-                label="Familia Profesional"
-                value={viewFamilyId}
-                onChange={(e) => { setViewFamilyId(e.target.value); setViewDegreeId(""); }}
-              >
-                <option value="">-- Selecciona Familia --</option>
-                {families.map((f: any) => (
-                  <option key={f.id} value={f.id}>{f.name}</option>
-                ))}
-              </Select>
-
-              <Select 
-                label="Grado y Título"
-                value={viewDegreeId}
-                onChange={(e) => setViewDegreeId(e.target.value)}
-                disabled={!viewFamilyId}
-              >
-                <option value="">-- Selecciona Título --</option>
-                {viewFamily?.degrees.map((d: any) => (
-                  <option key={d.id} value={d.id}>{d.level} - {d.name}</option>
-                ))}
-              </Select>
             </Card>
 
-            <GroupList 
-              viewDegreeId={viewDegreeId}
-              displayedGroups={displayedGroups}
-              collapsedGroups={collapsedGroups}
-              toggleGroup={toggleGroup}
-              teachers={teachers}
-              handleAssignTeacher={handleAssignTeacher}
-              onOpenModal={() => setIsModalOpen(true)}
-            />
+            {/* Panel de Asignaciones */}
+            <Card className="p-6 lg:w-2/3 border-white/5 bg-black/20 flex flex-col">
+              {!selectedUser ? (
+                <div className="flex-1 flex items-center justify-center text-gray-500">
+                  Selecciona un profesor a la izquierda para gestionar sus módulos
+                </div>
+              ) : (
+                <>
+                  <div className="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
+                    <div>
+                      <h3 className="text-xl font-bold text-white">{selectedUser.name}</h3>
+                      <p className="text-sm text-gray-400">{selectedUser.email}</p>
+                    </div>
+                    <Button 
+                      onClick={handleSave} 
+                      disabled={isSaving}
+                      className="flex items-center gap-2"
+                    >
+                      <Save className="w-4 h-4" />
+                      {isSaving ? "Guardando..." : "Guardar Asignaciones"}
+                    </Button>
+                  </div>
+                  
+                  {successMsg && (
+                    <div className="bg-green-500/20 text-green-400 p-3 rounded-lg mb-6 border border-green-500/30 flex items-center gap-2 animate-in fade-in">
+                      <CheckCircle2 className="w-5 h-5" />
+                      {successMsg}
+                    </div>
+                  )}
 
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 overflow-y-auto max-h-[500px] pr-2 scrollbar-hide">
+                    {modules.map((m: any) => {
+                      const isAssigned = localAssignments.includes(m.id);
+                      return (
+                        <div 
+                          key={m.id}
+                          onClick={() => handleToggleModule(m.id)}
+                          className={`cursor-pointer p-4 rounded-xl border transition-all flex items-start gap-3 ${isAssigned ? 'bg-accent/10 border-accent/50' : 'bg-white/5 border-white/5 hover:bg-white/10'}`}
+                        >
+                          <div className={`mt-1 w-5 h-5 rounded flex-shrink-0 flex items-center justify-center border ${isAssigned ? 'bg-accent border-accent text-black' : 'border-gray-500'}`}>
+                            {isAssigned && <CheckCircle2 className="w-4 h-4" />}
+                          </div>
+                          <div>
+                            <div className={`font-bold text-sm ${isAssigned ? 'text-white' : 'text-gray-300'}`}>
+                              {m.code}
+                            </div>
+                            <div className={`text-xs mt-1 ${isAssigned ? 'text-gray-200' : 'text-gray-500'}`}>
+                              {m.name}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
+            </Card>
           </div>
         </div>
-
-        <AddGroupModal 
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          families={families}
-          selectedFamilyId={selectedFamilyId}
-          setSelectedFamilyId={setSelectedFamilyId}
-          selectedDegreeId={selectedDegreeId}
-          setSelectedDegreeId={setSelectedDegreeId}
-          newGroupName={newGroupName}
-          setNewGroupName={setNewGroupName}
-          handleAddGroup={handleAddGroup}
-        />
-
       </main>
     </div>
   );

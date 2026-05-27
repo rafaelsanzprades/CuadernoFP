@@ -6,6 +6,7 @@ import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function InstrumentosPage() {
   const { activeModuleId, moduleData, setModuleData, updateDataFrame } = useAppStore();
@@ -13,6 +14,7 @@ export default function InstrumentosPage() {
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
   const [allTriOpen, setAllTriOpen] = useState(true);
+  const [openTris, setOpenTris] = useState<Set<string>>(new Set(["1T", "2T", "3T"]));
 
   useEffect(() => {
     const fetchData = async () => {
@@ -218,10 +220,12 @@ export default function InstrumentosPage() {
             <Button
               variant="secondary"
               onClick={() => {
-                setAllTriOpen(prev => !prev);
-                document.querySelectorAll('.tri-details').forEach((el) => {
-                  (el as HTMLDetailsElement).open = !allTriOpen ? true : false;
-                });
+                if (allTriOpen) {
+                  setOpenTris(new Set());
+                } else {
+                  setOpenTris(new Set(["1T", "2T", "3T"]));
+                }
+                setAllTriOpen(!allTriOpen);
               }}
             >
               <span>{allTriOpen ? '▲' : '▼'}</span>
@@ -241,8 +245,16 @@ export default function InstrumentosPage() {
                 const sumaPeso = actTri.reduce((sum: number, act: any) => sum + (Number(act.peso_act) || 0), 0);
 
                 return (
-                  <details key={tri.key} open className="tri-details group bg-white/5 rounded-lg border border-white/10 overflow-hidden open:bg-white/10 transition-colors">
-                    <summary className="p-4 cursor-pointer flex items-center justify-between font-semibold text-lg select-none hover:bg-white/5">
+                  <div key={tri.key} className="group bg-white/5 rounded-lg border border-white/10 overflow-hidden transition-colors">
+                    <div 
+                      onClick={() => {
+                        const newSet = new Set(openTris);
+                        if (newSet.has(tri.key)) newSet.delete(tri.key);
+                        else newSet.add(tri.key);
+                        setOpenTris(newSet);
+                      }}
+                      className="p-4 cursor-pointer flex items-center justify-between font-semibold text-lg select-none hover:bg-white/10 transition-colors"
+                    >
                       <div className="flex items-center gap-4">
                         <span className="text-indigo-400">📋</span>
                         <span>{tri.nombre}</span>
@@ -250,107 +262,119 @@ export default function InstrumentosPage() {
                       <div className="flex items-center gap-6 text-sm">
                         <span className="text-gray-400">{actTri.length} actividades</span>
                         <span className="text-indigo-300 font-mono bg-indigo-500/10 px-2 py-1 rounded">Σ {sumaPeso.toFixed(0)}%</span>
-                        <span className="ml-4 group-open:rotate-180 inline-block transition-transform text-gray-500">▼</span>
-                      </div>
-                    </summary>
-                    
-                    <div className="p-4 border-t border-white/10 bg-black/20 overflow-x-auto">
-                      <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
-                        <thead>
-                          <tr className="text-gray-400 border-b border-white/10 bg-background">
-                            <th className="p-2 sticky left-0 z-10 border-r border-white/10 bg-background">ID</th>
-                            <th className="p-2 sticky left-[60px] z-10 border-r border-white/10 bg-background">Tipo</th>
-                            <th className="p-2 sticky left-[160px] z-10 border-r border-white/10 bg-background w-64">Instrumento / Actividad</th>
-                            <th className="p-2 sticky left-[416px] z-10 border-r border-white/10 bg-background">% Pond.</th>
-                            <th className="p-2 sticky left-[486px] z-10 border-r border-white/10 bg-background">✓</th>
-                            {lista_ce_ids.map((ce: string) => (
-                              <th key={ce} className="p-2 text-center text-xs font-mono border-r border-white/10 text-indigo-300">
-                                {ce}
-                              </th>
-                            ))}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {actTri.map((act: any) => {
-                            const globalIdx = df_act.findIndex((gAct: any) => gAct === act);
-                            return (
-                              <tr key={globalIdx} className="border-b border-white/5 hover:bg-white/5">
-                                <td className="p-2 font-mono sticky left-0 z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">{act.id_act}</td>
-                                <td className="p-2 sticky left-[60px] z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">
-                                  <select 
-                                    value={act.Tipo || "Teoria"}
-                                    onChange={(e) => handleUpdateAct(globalIdx, "Tipo", e.target.value)}
-                                    className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-indigo-500 focus:outline-none appearance-none"
-                                  >
-                                    <option value="Teoria">Teoria</option>
-                                    <option value="Practica">Practica</option>
-                                    <option value="Informes">Informes</option>
-                                    <option value="Tareas">Tareas</option>
-                                  </select>
-                                </td>
-                                <td className="p-2 sticky left-[160px] z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">
-                                  <input 
-                                    type="text"
-                                    value={act.desc_act || ""}
-                                    onChange={(e) => handleUpdateAct(globalIdx, "desc_act", e.target.value)}
-                                    className="w-full min-w-[200px] bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-indigo-500 focus:outline-none"
-                                  />
-                                </td>
-                                <td className="p-2 sticky left-[416px] z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">
-                                  <input 
-                                    type="number"
-                                    value={act.peso_act || 0}
-                                    onChange={(e) => handleUpdateAct(globalIdx, "peso_act", Number(e.target.value) || 0)}
-                                    className="w-16 bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-indigo-500 focus:outline-none"
-                                  />
-                                </td>
-                                <td className="p-2 text-center sticky left-[486px] z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">
-                                  <input 
-                                    type="checkbox"
-                                    checked={act.is_active !== false}
-                                    onChange={(e) => handleUpdateAct(globalIdx, "is_active", e.target.checked)}
-                                    className="accent-indigo-500"
-                                  />
-                                </td>
-                                {lista_ce_ids.map((ce: string) => (
-                                  <td key={ce} className="p-2 text-center border-r border-white/10 bg-black/10">
-                                    <input 
-                                      type="checkbox"
-                                      checked={act[ce] === true}
-                                      onChange={(e) => handleUpdateAct(globalIdx, ce, e.target.checked)}
-                                      className="accent-indigo-500"
-                                    />
-                                  </td>
-                                ))}
-                                <td className="p-2 text-center">
-                                  <button
-                                    onClick={() => {
-                                      const newAct = [...df_act];
-                                      newAct.splice(globalIdx, 1);
-                                      updateDataFrame("df_act", newAct);
-                                    }}
-                                    className="text-red-400 hover:text-red-300 font-bold px-2"
-                                    title="Eliminar Actividad"
-                                  >
-                                    ×
-                                  </button>
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                      <div className="mt-4">
-                        <Button 
-                          variant="ghost"
-                          onClick={() => handleAddAct(tri.key)}
-                          className="text-indigo-400 hover:text-indigo-300 font-semibold flex items-center gap-1"
-                        >
-                          <span>+</span> Añadir Instrumento/Actividad en {tri.nombre}
-                        </Button>
+                        <span className={`transition-transform duration-300 text-gray-500 ${openTris.has(tri.key) ? 'rotate-180' : ''}`}>▼</span>
                       </div>
                     </div>
-                  </details>
+                    
+                    <AnimatePresence initial={false}>
+                      {openTris.has(tri.key) && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <div className="p-4 border-t border-white/10 bg-black/20 overflow-x-auto">
+                            <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
+                              <thead>
+                                <tr className="text-gray-400 border-b border-white/10 bg-background">
+                                  <th className="p-2 sticky left-0 z-10 border-r border-white/10 bg-background">ID</th>
+                                  <th className="p-2 sticky left-[60px] z-10 border-r border-white/10 bg-background">Tipo</th>
+                                  <th className="p-2 sticky left-[160px] z-10 border-r border-white/10 bg-background w-64">Instrumento / Actividad</th>
+                                  <th className="p-2 sticky left-[416px] z-10 border-r border-white/10 bg-background">% Pond.</th>
+                                  <th className="p-2 sticky left-[486px] z-10 border-r border-white/10 bg-background">✓</th>
+                                  {lista_ce_ids.map((ce: string) => (
+                                    <th key={ce} className="p-2 text-center text-xs font-mono border-r border-white/10 text-indigo-300">
+                                      {ce}
+                                    </th>
+                                  ))}
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {actTri.map((act: any) => {
+                                  const globalIdx = df_act.findIndex((gAct: any) => gAct === act);
+                                  return (
+                                    <tr key={globalIdx} className="border-b border-white/5 hover:bg-white/5">
+                                      <td className="p-2 font-mono sticky left-0 z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">{act.id_act}</td>
+                                      <td className="p-2 sticky left-[60px] z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">
+                                        <select 
+                                          value={act.Tipo || "Teoria"}
+                                          onChange={(e) => handleUpdateAct(globalIdx, "Tipo", e.target.value)}
+                                          className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-indigo-500 focus:outline-none appearance-none"
+                                        >
+                                          <option value="Teoria">Teoria</option>
+                                          <option value="Practica">Practica</option>
+                                          <option value="Informes">Informes</option>
+                                          <option value="Tareas">Tareas</option>
+                                        </select>
+                                      </td>
+                                      <td className="p-2 sticky left-[160px] z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">
+                                        <input 
+                                          type="text"
+                                          value={act.desc_act || ""}
+                                          onChange={(e) => handleUpdateAct(globalIdx, "desc_act", e.target.value)}
+                                          className="w-full min-w-[200px] bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-indigo-500 focus:outline-none"
+                                        />
+                                      </td>
+                                      <td className="p-2 sticky left-[416px] z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">
+                                        <input 
+                                          type="number"
+                                          value={act.peso_act || 0}
+                                          onChange={(e) => handleUpdateAct(globalIdx, "peso_act", Number(e.target.value) || 0)}
+                                          className="w-16 bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-indigo-500 focus:outline-none"
+                                        />
+                                      </td>
+                                      <td className="p-2 text-center sticky left-[486px] z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">
+                                        <input 
+                                          type="checkbox"
+                                          checked={act.is_active !== false}
+                                          onChange={(e) => handleUpdateAct(globalIdx, "is_active", e.target.checked)}
+                                          className="accent-indigo-500"
+                                        />
+                                      </td>
+                                      {lista_ce_ids.map((ce: string) => (
+                                        <td key={ce} className="p-2 text-center border-r border-white/10 bg-black/10">
+                                          <input 
+                                            type="checkbox"
+                                            checked={act[ce] === true}
+                                            onChange={(e) => handleUpdateAct(globalIdx, ce, e.target.checked)}
+                                            className="accent-indigo-500"
+                                          />
+                                        </td>
+                                      ))}
+                                      <td className="p-2 text-center">
+                                        <button
+                                          onClick={() => {
+                                            const newAct = [...df_act];
+                                            newAct.splice(globalIdx, 1);
+                                            updateDataFrame("df_act", newAct);
+                                          }}
+                                          className="text-red-400 hover:text-red-300 font-bold px-2"
+                                          title="Eliminar Actividad"
+                                        >
+                                          ×
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  );
+                                })}
+                              </tbody>
+                            </table>
+                            <div className="mt-4">
+                              <Button 
+                                variant="ghost"
+                                onClick={() => handleAddAct(tri.key)}
+                                className="text-indigo-400 hover:text-indigo-300 font-semibold flex items-center gap-1"
+                              >
+                                <span>+</span> Añadir Instrumento/Actividad en {tri.nombre}
+                              </Button>
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 );
               })}
             </div>

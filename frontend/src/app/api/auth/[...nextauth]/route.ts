@@ -1,12 +1,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma) as any,
   session: {
     strategy: "jwt",
   },
@@ -20,18 +15,22 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
         
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
-        });
-
-        // Simulación: en producción usaríamos bcrypt para comparar hashes
-        if (user && user.password === credentials.password) {
-          return {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            roles: user.roles,
-          };
+        try {
+          const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/api/auth/login", {
+            method: 'POST',
+            body: JSON.stringify(credentials),
+            headers: { "Content-Type": "application/json" }
+          });
+          
+          if (!res.ok) return null;
+          
+          const data = await res.json();
+          if (data.status === "success" && data.user) {
+            return data.user; // { id, name, email, roles }
+          }
+        } catch (error) {
+          console.error("Auth error:", error);
+          return null;
         }
         return null;
       },

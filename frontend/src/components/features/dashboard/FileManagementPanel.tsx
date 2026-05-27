@@ -3,6 +3,31 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Select } from "@/components/ui/Select";
 import { Input } from "@/components/ui/Input";
+import { useDropzone } from "react-dropzone";
+import toast from "react-hot-toast";
+
+const DropzoneWrapper = ({ children, onDrop, acceptMessage }: { children: React.ReactNode, onDrop: (files: File[]) => void, acceptMessage: string }) => {
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: { 'application/json': ['.json'] },
+    multiple: false
+  });
+
+  return (
+    <div {...getRootProps()} className="h-full outline-none">
+      <input {...getInputProps()} />
+      <div className={`h-full transition-all duration-300 relative ${isDragActive ? 'scale-[1.02] z-10' : ''}`}>
+        {isDragActive && (
+          <div className="absolute inset-0 bg-accent/20 backdrop-blur-md rounded-2xl z-20 flex flex-col items-center justify-center border-2 border-dashed border-accent">
+            <span className="text-4xl animate-bounce">📥</span>
+            <p className="font-bold text-white text-center px-4 mt-2">{acceptMessage}</p>
+          </div>
+        )}
+        {children}
+      </div>
+    </div>
+  );
+};
 
 interface FileManagementPanelProps {
   modules: { centro_modules: string[], pd_modules: string[], curso_modules: string[] };
@@ -51,7 +76,11 @@ export function FileManagementPanel({
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         
         {/* Tarjeta de Centro educativo*/}
-        <Card className="p-6 border-t-4 border-t-purple-500 flex flex-col gap-6 transform transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/10">
+        <DropzoneWrapper 
+          onDrop={(files) => toast.success(`Archivo ${files[0].name} leído. La subida real se conectará próximamente.`)} 
+          acceptMessage="Suelte aquí el JSON del Centro"
+        >
+        <Card className="h-full p-6 border-t-4 border-t-purple-500 flex flex-col gap-6 transform transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/10">
           <div>
             <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
               <span>🏢</span> Centro educativo
@@ -100,9 +129,14 @@ export function FileManagementPanel({
             </Button>
           </div>
         </Card>
+        </DropzoneWrapper>
 
         {/* Tarjeta de Módulo (PD) */}
-        <Card className="p-6 border-t-4 border-t-accent flex flex-col gap-6 transform transition-all duration-300 hover:shadow-2xl hover:shadow-accent/10">
+        <DropzoneWrapper 
+          onDrop={(files) => toast.success(`Archivo ${files[0].name} leído. La subida real se conectará próximamente.`)} 
+          acceptMessage="Suelte aquí el JSON del Módulo"
+        >
+        <Card className="h-full p-6 border-t-4 border-t-accent flex flex-col gap-6 transform transition-all duration-300 hover:shadow-2xl hover:shadow-accent/10">
           <div>
             <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
               <span>⚙️</span> Módulo didáctico
@@ -154,9 +188,14 @@ export function FileManagementPanel({
             </Button>
           </div>
         </Card>
+        </DropzoneWrapper>
 
         {/* Tarjeta de Curso */}
-        <Card className="p-6 border-t-4 border-t-blue-500 flex flex-col gap-6 transform transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10">
+        <DropzoneWrapper 
+          onDrop={(files) => toast.success(`Archivo ${files[0].name} leído. La subida real se conectará próximamente.`)} 
+          acceptMessage="Suelte aquí el JSON del Curso"
+        >
+        <Card className="h-full p-6 border-t-4 border-t-blue-500 flex flex-col gap-6 transform transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10">
           <div>
             <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
               <span>📅</span> Curso y alumnado
@@ -205,6 +244,7 @@ export function FileManagementPanel({
             </Button>
           </div>
         </Card>
+        </DropzoneWrapper>
 
       </div>
     </div>

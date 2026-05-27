@@ -5,6 +5,7 @@ import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { UserPlus, Search, Filter, MoreVertical, Edit2, Shield, Trash2, CheckCircle2, X } from "lucide-react";
 import { Card } from "@/components/ui/Card";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 
@@ -167,7 +168,7 @@ export default function UsuariosPage() {
                   </thead>
                   <tbody className="divide-y divide-white/5">
                     {filteredUsers.map((user) => (
-                      <tr key={user.id} className="hover:bg-white/[0.02] transition-colors group">
+                      <tr key={user.id} className="hover:bg-white/[0.05] transition-all duration-200 group hover:scale-[1.005] hover:shadow-lg relative">
                         <td className="p-4">
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center text-white font-bold shadow-inner border border-white/10">
@@ -240,10 +241,25 @@ export default function UsuariosPage() {
         </div>
       </main>
 
-      {/* Modal Nuevo Profesorado */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in">
-          <Card className="w-full max-w-md overflow-hidden p-0">
+      {/* Slide-over Nuevo Profesorado */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsModalOpen(false)}
+              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm cursor-pointer" 
+            />
+            <motion.div 
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-background border-l border-[var(--glass-border)] shadow-2xl flex flex-col"
+            >
+              <div className="flex-1 overflow-y-auto">
             <div className="flex items-center justify-between p-6 border-b border-white/10">
               <h2 className="text-xl font-bold text-white flex items-center gap-2">
                 <UserPlus className="w-5 h-5 text-accent" />
@@ -294,18 +310,20 @@ export default function UsuariosPage() {
                 </select>
               </div>
 
-              <div className="pt-4 flex gap-3">
-                <Button variant="ghost" type="button" onClick={() => setIsModalOpen(false)} className="flex-1">
+              <div className="pt-4 flex gap-3 mt-6 border-t border-white/10">
+                <Button variant="ghost" type="button" onClick={() => setIsModalOpen(false)} className="flex-1 hover:bg-white/5 mt-4">
                   Cancelar
                 </Button>
-                <Button type="submit" className="flex-1">
+                <Button type="submit" className="flex-1 shadow-lg shadow-accent/20 mt-4">
                   Guardar Profesorado
                 </Button>
               </div>
             </form>
-          </Card>
-        </div>
-      )}
+            </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

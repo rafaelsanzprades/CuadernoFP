@@ -1,9 +1,13 @@
 import useSWR from 'swr';
+import { useSession } from 'next-auth/react';
 import { fetcher } from '@/services/api';
 import { ModuleData, CursoData, ModuleDataSchema, CursoDataSchema } from '@/types';
 
 export function useModulesList() {
-  return useSWR('/api/modules', fetcher);
+  const { data: session } = useSession();
+  const userId = (session?.user as any)?.id;
+  const url = userId ? `/api/modules?user_id=${userId}` : '/api/modules';
+  return useSWR(url, fetcher);
 }
 
 export function useModule(moduleId: string | null) {
@@ -52,6 +56,27 @@ export function useCurso(cursoId: string | null) {
 export function useUsers() {
   return useSWR('/api/users', fetcher);
 }
+
+export function useAdminModules() {
+  return useSWR('/api/admin/modules', fetcher);
+}
+
+export function useAssignments() {
+  return useSWR('/api/assignments', fetcher);
+}
+
+export const saveAssignments = async (userId: string, moduleIds: number[]) => {
+  const res = await fetch(`/api/assignments/${userId}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ module_ids: moduleIds })
+  });
+  const json = await res.json();
+  if (json.status !== 'success') {
+    throw new Error(json.message || 'Error guardando asignaciones');
+  }
+  return json;
+};
 
 export function useFamilies() {
   return useSWR('/api/families', fetcher);

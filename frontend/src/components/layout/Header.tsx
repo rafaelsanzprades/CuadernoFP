@@ -8,39 +8,7 @@ import { useTheme } from "next-themes";
 import toast from "react-hot-toast";
 import { Sun, Moon } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
-
-const navGroups = [
-  {
-    title: "Centro educativo",
-    items: [
-      { href: "/", label: "Gestión de archivos", icon: "📁" },
-      { href: "/introduccion", label: "Introducción. Planes", icon: "📝" },
-      { href: "/calendario", label: "Calendario académico", icon: "🗓️" },
-      { href: "/descargas", label: "Descargas PDF", icon: "📥" }
-    ]
-  },
-  {
-    title: "Módulo didáctico",
-    items: [
-      { href: "/modulo", label: "Configuración. Datos", icon: "⚙️" },
-      { href: "/matrices", label: "Matrices RA→CE→UD", icon: "🧮" },
-      { href: "/instrumentos", label: "Instrumentos de evaluación", icon: "🛠️" },
-      { href: "/programacion", label: "Programación de aula", icon: "📚" },
-      { href: "/seguimiento", label: "Seguimiento diario", icon: "📍" }
-    ]
-  },
-  {
-    title: "Curso y alumnado",
-    items: [
-      { href: "/matricula", label: "Matrícula alumnado", icon: "👥" },
-      { href: "/calificacion", label: "Calificación académica", icon: "📊" },
-      { href: "/calificacion-feoe", label: "Calificación FEOE", icon: "🏢" },
-      { href: "/evaluacion", label: "Evaluación por RA", icon: "📈" },
-      { href: "/analisis", label: "Análisis grupal", icon: "📉" },
-      { href: "/portal", label: "Portal alumnado", icon: "🎓" }
-    ]
-  }
-];
+import { navGroups } from "@/config/navigation";
 
 export default function Header({ title }: { title?: string }) {
   const { activeModuleId, activeCursoId, moduleData } = useAppStore();
@@ -50,14 +18,14 @@ export default function Header({ title }: { title?: string }) {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const pathname = usePathname();
   const router = useRouter();
-  
+
   const [autosaveStatus, setAutosaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const initialLoadRef = useRef<boolean>(true);
 
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -78,7 +46,7 @@ export default function Header({ title }: { title?: string }) {
       initialLoadRef.current = false;
       return;
     }
-    
+
     if (!moduleData || !activeModuleId) return;
 
     if (saveTimeoutRef.current) {
@@ -117,7 +85,7 @@ export default function Header({ title }: { title?: string }) {
       return;
     }
     setIsSaving(true);
-    
+
     try {
       const res = await fetch(`/api/module/${activeModuleId}`, {
         method: "PUT",
@@ -200,7 +168,7 @@ export default function Header({ title }: { title?: string }) {
 
         {/* Botón Guardar + Login/Logout + Tema (Derecha) */}
         <div className="flex-1 flex justify-end items-center gap-3">
-          
+
           {moduleData && (
             <div className="mr-2 flex items-center">
               {autosaveStatus === "saved" && <span className="text-green-500 text-sm font-medium">☁️ Guardado</span>}

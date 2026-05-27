@@ -23,6 +23,7 @@ export default function Home() {
   const [viewFamilyId, setViewFamilyId] = useState("");
   const [viewDegreeId, setViewDegreeId] = useState("");
   const [selectedModuleCode, setSelectedModuleCode] = useState("");
+  const [activeTab, setActiveTab] = useState("general");
 
   useEffect(() => {
     fetch("/api/families")
@@ -182,8 +183,28 @@ export default function Home() {
               <p className="text-gray-400 mt-1">Configuración básica del módulo didáctico.</p>
             </div>
 
+            <div className="flex border-b border-white/10 mt-6 mb-8 overflow-x-auto scrollbar-hide">
+              {[
+                { id: "general", label: "📄 Datos Generales" },
+                { id: "horarios", label: "🕒 Horarios y Fechas" },
+                { id: "evaluacion", label: "⚖️ Evaluación" }
+              ].map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`px-6 py-4 font-bold text-sm border-b-2 transition-colors whitespace-nowrap ${activeTab === tab.id ? 'border-[#14a085] text-[#14a085]' : 'border-transparent text-gray-500 hover:text-gray-300'}`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
 
-            {/* ── Tarjeta Datos ─────────────────────────────────── */}
+            {/* ============================================================== */}
+            {/* PESTAÑA: DATOS GENERALES                                       */}
+            {/* ============================================================== */}
+            {activeTab === "general" && (
+              <div className="space-y-8 animate-in fade-in duration-500">
+                {/* ── Tarjeta Datos ─────────────────────────────────── */}
             <Card className="p-6">
               <h4 className="text-lg font-bold text-white mb-5 flex items-center gap-2">
                 <span>📝</span> Selección del Módulo didáctico
@@ -311,7 +332,15 @@ export default function Home() {
               </div>
             </Card>
 
-            {/* ── Sesiones semanales ─────────────────────────────── */}
+              </div>
+            )}
+
+            {/* ============================================================== */}
+            {/* PESTAÑA: HORARIOS Y FECHAS                                     */}
+            {/* ============================================================== */}
+            {activeTab === "horarios" && (
+              <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
+                {/* ── Sesiones semanales ─────────────────────────────── */}
             <Card className="p-6 border-l-4 border-l-purple-500">
               <div className="flex justify-between items-center mb-6">
                 <h4 className="text-lg font-bold text-white flex items-center gap-2">
@@ -371,9 +400,38 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-            </Card>
+              </Card>
 
-            {/* ── % Ponderación por trimestres ─────────────────── */}
+              {/* ── FEOE ─────────────────────────────────────────── */}
+              <Card className="p-6 border-l-4 border-l-pink-500 hover:shadow-lg hover:shadow-pink-500/10 transition-shadow">
+                <h4 className="text-lg font-bold text-white mb-6 flex items-center gap-2"><span>🏢</span> Formación en Empresa (FEOE)</h4>
+                <div className="grid grid-cols-3 gap-6">
+                  <div>
+                    <label className="text-sm text-gray-400 mb-2 block font-semibold text-center">Inicio FEOE</label>
+                    <DatePicker value={info_fechas.ini_feoe || ""} onChange={v => handleUpdateFechas("ini_feoe", v)} className="text-center" />
+                  </div>
+                  <div>
+                    <label className="text-sm text-gray-400 mb-2 block font-semibold text-center">Fin FEOE</label>
+                    <DatePicker value={info_fechas.fin_feoe || ""} onChange={v => handleUpdateFechas("fin_feoe", v)} className="text-center" />
+                  </div>
+                  <Input 
+                    label="Horas/día FEOE"
+                    type="number" value={Number(info_fechas.h_sem_feoe) || 8}
+                    onChange={e => handleUpdateFechas("h_sem_feoe", Number(e.target.value))}
+                    className="text-center" 
+                  />
+                </div>
+              </Card>
+
+              </div>
+            )}
+
+            {/* ============================================================== */}
+            {/* PESTAÑA: EVALUACIÓN                                            */}
+            {/* ============================================================== */}
+            {activeTab === "evaluacion" && (
+              <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
+                {/* ── % Ponderación por trimestres ─────────────────── */}
             <Card className="p-6 border-l-4 border-l-accent">
               <h4 className="text-lg font-bold text-white mb-6 flex items-center justify-between">
                 <span className="flex items-center gap-2"><span>⚖️</span> % Ponderación por trimestres</span>
@@ -390,27 +448,6 @@ export default function Home() {
                     className="text-center" 
                   />
                 ))}
-              </div>
-            </Card>
-
-            {/* ── FEOE ─────────────────────────────────────────── */}
-            <Card className="p-6 border-l-4 border-l-pink-500">
-              <h4 className="text-lg font-bold text-white mb-6 flex items-center gap-2"><span>🏢</span> Formación en Empresa (FEOE)</h4>
-              <div className="grid grid-cols-3 gap-6">
-                <div>
-                  <label className="text-sm text-gray-400 mb-2 block font-semibold text-center">Inicio FEOE</label>
-                  <DatePicker value={info_fechas.ini_feoe || ""} onChange={v => handleUpdateFechas("ini_feoe", v)} className="text-center" />
-                </div>
-                <div>
-                  <label className="text-sm text-gray-400 mb-2 block font-semibold text-center">Fin FEOE</label>
-                  <DatePicker value={info_fechas.fin_feoe || ""} onChange={v => handleUpdateFechas("fin_feoe", v)} className="text-center" />
-                </div>
-                <Input 
-                  label="Horas/día FEOE"
-                  type="number" value={Number(info_fechas.h_sem_feoe) || 8}
-                  onChange={e => handleUpdateFechas("h_sem_feoe", Number(e.target.value))}
-                  className="text-center" 
-                />
               </div>
             </Card>
 

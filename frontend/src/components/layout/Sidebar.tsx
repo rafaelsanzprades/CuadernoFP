@@ -2,49 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAppStore } from '@/store/useAppStore';
-
-const navGroups = [
-  {
-    title: "Centro educativo",
-    items: [
-      { href: "/", label: "Gestión de archivos", icon: "📁" },
-      { href: "/introduccion", label: "Introducción. Planes", icon: "📝" },
-      { href: "/calendario", label: "Calendario académico", icon: "🗓️" },
-      { href: "/descargas", label: "Descargas PDF", icon: "📥" }
-    ]
-  },
-  {
-    title: "Módulo didáctico",
-    items: [
-      { href: "/modulo", label: "Configuración. Datos", icon: "⚙️" },
-      { href: "/matrices", label: "Matrices RA→CE→UD", icon: "🧮" },
-      { href: "/instrumentos", label: "Instrumentos de evaluación", icon: "🛠️" },
-      { href: "/programacion", label: "Programación de aula", icon: "📚" },
-      { href: "/seguimiento", label: "Seguimiento diario", icon: "📍" }
-    ]
-  },
-  {
-    title: "Curso y alumnado",
-    items: [
-      { href: "/matricula", label: "Matrícula alumnado", icon: "👥" },
-      { href: "/calificacion", label: "Calificación académica", icon: "📊" },
-      { href: "/calificacion-feoe", label: "Calificación FEOE", icon: "🏢" },
-      { href: "/evaluacion", label: "Evaluación por RA", icon: "📈" },
-      { href: "/analisis", label: "Análisis grupal", icon: "📉" },
-      { href: "/portal", label: "Portal alumnado", icon: "🎓" }
-    ]
-  },
-  {
-    title: "Gestión plataforma",
-    items: [
-      { href: "/perfiles", label: "Acceso usuarios", icon: "🛡️" },
-      { href: "/usuarios", label: "Gestión de usuarios", icon: "👥" },
-      { href: "/familias", label: "Familias profesionales", icon: "🗂️" },
-      { href: "/asignaciones", label: "Asignación de módulos", icon: "📋" },
-      { href: "/docentes", label: "Asignación de docentes", icon: "👨‍🏫" }
-    ]
-  }
-];
+import { navGroups } from '@/config/navigation';
 
 export default function Sidebar() {
   const pathname = usePathname();

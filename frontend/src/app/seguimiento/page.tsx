@@ -310,60 +310,69 @@ export default function SeguimientoPage() {
                         {lectivos.length} días lectivos <span className="ml-4 group-open:rotate-180 inline-block transition-transform">▼</span>
                       </div>
                     </summary>
-                    <div className="p-4 border-t border-white/10 bg-black/20">
-                      <table className="w-full text-left text-sm">
-                        <thead>
-                          <tr className="text-gray-400 border-b border-white/10">
-                            <th className="pb-2 w-24">Fecha</th>
-                            <th className="pb-2 w-16">Día</th>
-                            <th className="pb-2 w-32">UD Prev.</th>
-                            <th className="pb-2 w-24 text-center">Sin docencia</th>
-                            <th className="pb-2">Seguimiento</th>
-                            <th className="pb-2 w-16 text-center">👁️ Pub.</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {lectivos.map((d: Date, i: number) => {
-                            const dateStr = d.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
-                            const diaSemana = dias_semana_list[d.getDay() - 1];
-                            const udPrev = planning_ledger[dateStr] ? planning_ledger[dateStr].join(', ') : '';
-                            const ledgerEntry = daily_ledger[dateStr] || { sin_docencia: false, seguimiento: "", publico: false };
+                    <div className="p-6 border-t border-white/10 bg-black/20">
+                      <div className="relative border-l-2 border-white/10 ml-4 space-y-8 pb-4">
+                        {lectivos.map((d: Date, i: number) => {
+                          const dateStr = d.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+                          const diaSemana = dias_semana_list[d.getDay() - 1];
+                          const udPrev = planning_ledger[dateStr] ? planning_ledger[dateStr].join(', ') : '';
+                          const ledgerEntry = daily_ledger[dateStr] || { sin_docencia: false, seguimiento: "", publico: false };
+                          
+                          const nodeColor = ledgerEntry.sin_docencia ? 'bg-orange-500' : (ledgerEntry.seguimiento ? 'bg-blue-500' : 'bg-gray-600');
 
-                            return (
-                              <tr key={i} className="border-b border-white/5 hover:bg-white/5">
-                                <td className="py-3 font-mono text-xs">{dateStr}</td>
-                                <td className="py-3 text-gray-400">{diaSemana}</td>
-                                <td className="py-3 text-blue-400">{udPrev}</td>
-                                <td className="py-3 text-center">
-                                  <input
-                                    type="checkbox"
-                                    checked={ledgerEntry.sin_docencia}
-                                    onChange={(e) => handleLedgerChange(dateStr, 'sin_docencia', e.target.checked)}
-                                    className="accent-yellow-500"
-                                  />
-                                </td>
-                                <td className="py-3 pr-4">
-                                  <input
-                                    type="text"
+                          return (
+                            <div key={i} className="relative pl-8 group">
+                              {/* Timeline Node */}
+                              <div className={`absolute -left-[9px] top-4 w-4 h-4 rounded-full border-4 border-black ${nodeColor} shadow-[0_0_10px_rgba(0,0,0,0.5)] transition-colors duration-300 group-hover:scale-125 z-10`} />
+                              
+                              <div className="bg-white/5 border border-white/10 rounded-xl p-4 hover:bg-white/10 transition-all duration-300 shadow-sm">
+                                <div className="flex items-center justify-between mb-4">
+                                  <div className="flex items-center gap-3">
+                                    <span className="font-mono text-lg font-bold text-white tracking-widest">{dateStr.substring(0,5)}</span>
+                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wider bg-white/5 px-2 py-1 rounded">{diaSemana}</span>
+                                    {udPrev && <span className="bg-blue-500/20 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded text-xs font-bold shadow-sm">UD: {udPrev}</span>}
+                                  </div>
+                                  <div className="flex items-center gap-5">
+                                    <label className="flex items-center gap-2 text-xs font-bold text-gray-400 cursor-pointer hover:text-orange-400 transition-colors uppercase tracking-wider">
+                                      <input
+                                        type="checkbox"
+                                        checked={ledgerEntry.sin_docencia}
+                                        onChange={(e) => handleLedgerChange(dateStr, 'sin_docencia', e.target.checked)}
+                                        className="w-4 h-4 accent-orange-500 rounded bg-black/50 border-white/20 cursor-pointer"
+                                      />
+                                      Sin Docencia
+                                    </label>
+                                    <label className="flex items-center gap-2 text-xs font-bold text-gray-400 cursor-pointer hover:text-green-400 transition-colors uppercase tracking-wider">
+                                      <input
+                                        type="checkbox"
+                                        checked={ledgerEntry.publico}
+                                        onChange={(e) => handleLedgerChange(dateStr, 'publico', e.target.checked)}
+                                        className="w-4 h-4 accent-green-500 rounded bg-black/50 border-white/20 cursor-pointer"
+                                      />
+                                      Público
+                                    </label>
+                                  </div>
+                                </div>
+                                <div className="flex items-start gap-3">
+                                  <span className="text-xl mt-2 opacity-50 select-none">📝</span>
+                                  <textarea
                                     value={ledgerEntry.seguimiento}
                                     onChange={(e) => handleLedgerChange(dateStr, 'seguimiento', e.target.value)}
-                                    placeholder="Anotaciones de la clase..."
-                                    className="w-full bg-black/30 border border-white/10 rounded px-3 py-2 text-white focus:border-blue-500 focus:outline-none"
+                                    placeholder="Escribe aquí el seguimiento de la clase, incidencias o progreso real..."
+                                    className="w-full bg-black/40 border border-white/5 hover:border-white/20 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:bg-black/60 focus:outline-none transition-all resize-none overflow-hidden min-h-[60px] text-sm"
+                                    rows={1}
+                                    onInput={(e) => {
+                                      const target = e.target as HTMLTextAreaElement;
+                                      target.style.height = 'auto';
+                                      target.style.height = target.scrollHeight + 'px';
+                                    }}
                                   />
-                                </td>
-                                <td className="py-3 text-center">
-                                  <input
-                                    type="checkbox"
-                                    checked={ledgerEntry.publico}
-                                    onChange={(e) => handleLedgerChange(dateStr, 'publico', e.target.checked)}
-                                    className="accent-green-500"
-                                  />
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   </details>
                 );
