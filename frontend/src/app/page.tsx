@@ -10,6 +10,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import toast from "react-hot-toast";
 import { FileManagementPanel } from "@/components/features/dashboard/FileManagementPanel";
+import { WelcomeWizard } from "@/components/features/dashboard/WelcomeWizard";
 import { useModulesList } from "@/hooks/useApi";
 
 export default function Dashboard() {
@@ -32,9 +33,16 @@ export default function Dashboard() {
   const [newCursoName, setNewCursoName] = useState(activeCursoId || "nuevo-modulo-curso");
 
   const [activeTab, setActiveTab] = useState("resumen");
+  const [showWizard, setShowWizard] = useState(false);
 
   useEffect(() => {
     if (modulesList) {
+      if (modules.pd_modules.length === 0 && !activeModuleId) {
+        setShowWizard(true);
+      } else {
+        setShowWizard(false);
+      }
+
       if (!selectedCentro && modules.centro_modules.length > 0) setSelectedCentro(modules.centro_modules[0]);
 
       if (!selectedPd && modules.pd_modules.length > 0) {
@@ -130,7 +138,34 @@ export default function Dashboard() {
   };
 
   const handleSaveCurso = () => {
-    showNotification('warning', 'Guardar Curso y alumnado no implementado todavía en esta vista.');
+    if (!newCursoName || !activeModuleId) {
+      showNotification('error', 'Selecciona un módulo activo y un nombre para el nuevo curso.');
+      return;
+    }
+    
+    // newCursoName is just the suffix, e.g. "2026-27".
+    // We construct the full ID: e.g. "0237-ictve-curso-2026-27"
+    const pdPrefix = activeModuleId.replace("-pd", "");
+    const saveName = newCursoName.includes("-curso-") ? newCursoName : `${pdPrefix}-curso-${newCursoName}`;
+
+    fetch(`/api/module/${saveName}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({}) // Empezamos con el curso vacío, heredará del padre
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === "success") {
+          setActiveCursoId(saveName);
+          showNotification('success', `✅ Nuevo curso creado y activado: ${saveName}`);
+          fetchModules();
+        } else {
+          showNotification('error', `Error al crear curso: ${data.detail || 'Desconocido'}`);
+        }
+      })
+      .catch(err => {
+        showNotification('error', 'Fallo al conectar con el servidor.');
+      });
   };
 
   if (loadingModules && modules.pd_modules.length === 0) {
@@ -147,13 +182,21 @@ export default function Dashboard() {
 
   const TABS = [
     { id: "resumen", label: "📊 Resumen", cleanLabel: "Resumen" },
-    { id: "ficheros", label: "📂 Gestión de ficheros", cleanLabel: "Gestión de Ficheros" }
+    { id: "entorno", label: "📂 Entorno de trabajo", cleanLabel: "Entorno de trabajo" }
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex min-h-screen bg-background relative">
+      {showWizard && (
+        <WelcomeWizard
+          onComplete={() => setShowWizard(false)}
+          fetchModules={fetchModules}
+          setActiveModuleId={setActiveModuleId}
+          setActiveCursoId={setActiveCursoId}
+        />
+      )}
       <Sidebar />
       <main className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={activeTabCleanLabel} />
@@ -164,7 +207,7 @@ export default function Dashboard() {
               <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3 mb-2">
                 <BarChart3 className="w-10 h-10 text-accent" /> Inicio
               </h1>
-              <p className="text-muted">Panel de control y gestión de archivos del módulo y curso activos.</p>
+              <p className="text-muted">Selecciona el Módulo y el Curso en el que vas a trabajar.</p>
             </div>
 
             <div className="flex border-b border-[var(--glass-border)] mb-8 overflow-x-auto scrollbar-hide">
@@ -195,12 +238,12 @@ export default function Dashboard() {
                     title="¡Bienvenido a tu Cuaderno Digital!"
                     description={
                       <>
-                        Para visualizar tu panel de control con métricas y gráficos interactivos, por favor, <strong className="text-foreground">carga un Módulo didáctico o un archivo de Curso</strong> desde la pestaña Gestión de ficheros.
+                        Para visualizar tu panel de control con métricas y gráficos interactivos, por favor, <strong className="text-foreground">activa un Módulo didáctico o un Curso</strong> desde la pestaña Entorno de trabajo.
                       </>
                     }
                     action={
-                      <button onClick={() => setActiveTab("ficheros")} className="glass-button bg-accent/10 text-accent hover:bg-accent/20 px-6 py-3 rounded-lg font-bold flex items-center gap-2">
-                        Ir a Gestión de Ficheros <span className="text-xl">📁</span>
+                      <button onClick={() => setActiveTab("entorno")} className="glass-button bg-accent/10 text-accent hover:bg-accent/20 px-6 py-3 rounded-lg font-bold flex items-center gap-2">
+                        Ir a Entorno de trabajo <span className="text-xl">⚙️</span>
                       </button>
                     }
                   />
@@ -208,11 +251,19 @@ export default function Dashboard() {
               </div>
             )}
 
-            {activeTab === "ficheros" && (
+            {activeTab === "entorno" && (
               <div className="space-y-6 animate-in fade-in duration-500">
-                <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
-                  <span>📂</span> Gestión de ficheros
-                </h2>
+                <div className="flex justify-between items-center">
+                  <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
+                    <span>⚙️</span> Entorno de trabajo
+                  </h2>
+                  <button 
+                    onClick={() => setShowWizard(true)}
+                    className="text-sm px-4 py-2 bg-accent/10 text-accent hover:bg-accent/20 rounded-md font-bold transition-colors flex items-center gap-2"
+                  >
+                    <span>✨</span> Ver Asistente de Bienvenida
+                  </button>
+                </div>
                 <FileManagementPanel
                   modules={modules}
                   selectedCentro={selectedCentro}

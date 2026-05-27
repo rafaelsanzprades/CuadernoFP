@@ -14,8 +14,20 @@ def get_module_data(module_id: str, db: Session):
         
     base_data = dict(doc.data)
     
-    # Merge DidacticUnits
-    uds = db.query(DidacticUnit).filter_by(module_document_id=module_id).all()
+    # Determine PD ID and Curso ID
+    pd_id = module_id
+    if getattr(doc, "doc_type", "pd") == "curso" and getattr(doc, "parent_id", None):
+        pd_id = doc.parent_id
+        
+        # Merge PD base data with Curso base data
+        pd_doc = db.query(ModuleDocument).filter(ModuleDocument.id == pd_id).first()
+        if pd_doc:
+            merged_data = dict(pd_doc.data)
+            merged_data.update(base_data)
+            base_data = merged_data
+            
+    # Merge DidacticUnits (from pd_id)
+    uds = db.query(DidacticUnit).filter_by(module_document_id=pd_id).all()
     if uds:
         ud_list = []
         for ud in uds:
@@ -25,8 +37,8 @@ def get_module_data(module_id: str, db: Session):
             ud_list.append(d)
         base_data["df_ud"] = ud_list
         
-    # Merge Sessions
-    sessions = db.query(SessionModel).filter_by(module_document_id=module_id).all()
+    # Merge Sessions (from pd_id)
+    sessions = db.query(SessionModel).filter_by(module_document_id=pd_id).all()
     if sessions:
         ses_list = []
         for ses in sessions:
@@ -43,7 +55,7 @@ def get_module_data(module_id: str, db: Session):
             })
         base_data["df_sesiones"] = ses_list
         
-    # Merge Students
+    # Merge Students (from module_id / curso_id)
     students = db.query(CourseStudent).filter_by(module_document_id=module_id).all()
     if students:
         al_list = []
@@ -63,7 +75,7 @@ def get_module_data(module_id: str, db: Session):
             })
         base_data["df_al"] = al_list
         
-    # Merge Evaluations
+    # Merge Evaluations (from module_id)
     evals = db.query(StudentEvaluation).filter_by(module_document_id=module_id).all()
     if evals:
         ev_list = []
@@ -83,13 +95,11 @@ def get_module_data(module_id: str, db: Session):
         (TaskItem, "df_tareas", ["item_id", "nombre_tarea", "reto", "ra_asociados", "instrumento"]),
         (AceItem, "df_ace", ["item_id", "tipo"]),
         (DuaItem, "df_dua", ["item_id", "barrera"]),
-        (ContingencyItem, "df_contingencia", ["item_id", "escenario"]),
-        (FeoeItem, "df_feoe", ["item_id"]),
-        (SgmtItem, "df_sgmt", ["id_ud"])
+        (ContingencyItem, "df_contingencia", ["item_id", "escenario"])
     ]
     
     for ModelClass, df_key, field_names in models_map:
-        items = db.query(ModelClass).filter_by(module_document_id=module_id).all()
+        items = db.query(ModelClass).filter_by(module_document_id=pd_id).all()
         if items:
             item_list = []
             for item in items:
@@ -100,7 +110,6 @@ def get_module_data(module_id: str, db: Session):
                 elif df_key == "df_ace": d["ID"] = item.item_id; d["Tipo"] = item.tipo
                 elif df_key == "df_dua": d["ID"] = item.item_id; d["Barrera"] = item.barrera
                 elif df_key == "df_contingencia": d["ID"] = item.item_id; d["Escenario"] = item.escenario
-                elif df_key == "df_feoe": d["ID"] = item.item_id
                 elif df_key == "df_act": d["id_act"] = item.id_act; d["desc_act"] = item.desc_act; d["Tipo"] = item.tipo; d["tri_act"] = item.tri_act; d["peso_act"] = item.peso_act; d["is_active"] = item.is_active
                 else:
                     for f in field_names:
@@ -111,31 +120,50 @@ def get_module_data(module_id: str, db: Session):
                 item_list.append(d)
             base_data[df_key] = item_list
             
-    # Merge Calendar Notes
-    cal_notes = db.query(CalendarNoteItem).filter_by(module_document_id=module_id).all()
+    # Practical data from module_id
+    feoe_items = db.query(FeoeItem).filter_by(module_document_id=module_id).all()
+    if feoe_items:
+        feoe_list = []
+        for item in feoe_items:
+            d = {"ID": item.item_id}
+            if item.data: d.update(item.data)
+            feoe_list.append(d)
+        base_data["df_feoe"] = feoe_list
+        
+    sgmt_items = db.query(SgmtItem).filter_by(module_document_id=module_id).all()
+    if sgmt_items:
+        sgmt_list = []
+        for item in sgmt_items:
+            d = {"id_ud": item.id_ud}
+            if item.data: d.update(item.data)
+            sgmt_list.append(d)
+        base_data["df_sgmt"] = sgmt_list
+            
+    # Merge Calendar Notes (from pd_id)
+    cal_notes = db.query(CalendarNoteItem).filter_by(module_document_id=pd_id).all()
     if cal_notes:
         notes_dict = {}
         for note in cal_notes:
             notes_dict[note.note_key] = note.note_text
         base_data["calendar_notes"] = notes_dict
         
-    # Phase 3
-    conf_dates = db.query(ConfigDates).filter_by(module_document_id=module_id).first()
+    # Phase 3 (from pd_id)
+    conf_dates = db.query(ConfigDates).filter_by(module_document_id=pd_id).first()
     if conf_dates and conf_dates.data:
         base_data["info_fechas"] = conf_dates.data
 
-    mod_info = db.query(ModuleInfo).filter_by(module_document_id=module_id).first()
+    mod_info = db.query(ModuleInfo).filter_by(module_document_id=pd_id).first()
     if mod_info and mod_info.data:
         base_data["info_modulo"] = mod_info.data
 
-    sched = db.query(ScheduleItem).filter_by(module_document_id=module_id).all()
+    sched = db.query(ScheduleItem).filter_by(module_document_id=pd_id).all()
     if sched:
         h = {}
         for s in sched:
             h[s.day_of_week] = s.hours
         base_data["horario"] = h
 
-    ledger = db.query(PlanningLedgerItem).filter_by(module_document_id=module_id).all()
+    ledger = db.query(PlanningLedgerItem).filter_by(module_document_id=pd_id).all()
     if ledger:
         pl = {}
         for item in ledger:
@@ -172,16 +200,28 @@ def update_module_data(module_id: str, body: dict, db: Session):
     info_modulo = body.pop("info_modulo", {})
     planning_ledger = body.pop("planning_ledger", {})
     
-    # 2. Update JSON Blob
+    # Determine PD ID vs Curso ID
     doc = db.query(ModuleDocument).filter(ModuleDocument.id == module_id).first()
+    pd_id = module_id
+    if doc and getattr(doc, "doc_type", "pd") == "curso" and getattr(doc, "parent_id", None):
+        pd_id = doc.parent_id
+    
+    # 2. Update JSON Blob (always save base to active module)
     if doc:
         doc.data = body
     else:
-        new_doc = ModuleDocument(id=module_id, data=body)
+        is_curso = "-curso-" in module_id
+        new_doc_type = "curso" if is_curso else "pd"
+        new_parent_id = None
+        if is_curso:
+            parts = module_id.split("-curso-")
+            if len(parts) == 2:
+                new_parent_id = f"{parts[0]}-pd"
+        new_doc = ModuleDocument(id=module_id, doc_type=new_doc_type, parent_id=new_parent_id, data=body)
         db.add(new_doc)
         
-    # 3. Upsert DidacticUnits
-    db.query(DidacticUnit).filter_by(module_document_id=module_id).delete()
+    # 3. Upsert DidacticUnits (to pd_id)
+    db.query(DidacticUnit).filter_by(module_document_id=pd_id).delete()
     if isinstance(df_ud, list):
         for ud in df_ud:
             ra_mappings = {k: v for k, v in ud.items() if k not in ['id_ud', 'desc_ud', 'horas_ud']}
@@ -194,12 +234,12 @@ def update_module_data(module_id: str, body: dict, db: Session):
             )
             db.add(new_ud)
             
-    # 4. Upsert Sessions
-    db.query(SessionModel).filter_by(module_document_id=module_id).delete()
+    # 4. Upsert Sessions (to pd_id)
+    db.query(SessionModel).filter_by(module_document_id=pd_id).delete()
     if isinstance(df_sesiones, list):
         for ses in df_sesiones:
             new_ses = SessionModel(
-                module_document_id=module_id,
+                module_document_id=pd_id,
                 session_id=str(ses.get("ID", "")),
                 id_ud=str(ses.get("id_ud", "")),
                 num_orden=int(ses.get("Num_Orden", 0) or 0),
@@ -245,58 +285,59 @@ def update_module_data(module_id: str, body: dict, db: Session):
             )
             db.add(new_ev)
             
-    # 7. Upsert Phase 2 Lists
+    # 7. Upsert Phase 2 Lists (Theoretical to pd_id)
     def safe_str(val):
         return str(val) if val is not None else ""
         
-    db.query(LearningOutcomeItem).filter_by(module_document_id=module_id).delete()
+    db.query(LearningOutcomeItem).filter_by(module_document_id=pd_id).delete()
     if isinstance(df_ra, list):
         for row in df_ra:
             d = {k: v for k, v in row.items() if k not in ["id_ra", "desc_ra", "peso_ra", "is_dual"]}
-            db.add(LearningOutcomeItem(module_document_id=module_id, id_ra=safe_str(row.get("id_ra")), desc_ra=safe_str(row.get("desc_ra")), peso_ra=safe_str(row.get("peso_ra")), is_dual=safe_str(row.get("is_dual")), data=d))
+            db.add(LearningOutcomeItem(module_document_id=pd_id, id_ra=safe_str(row.get("id_ra")), desc_ra=safe_str(row.get("desc_ra")), peso_ra=safe_str(row.get("peso_ra")), is_dual=safe_str(row.get("is_dual")), data=d))
 
-    db.query(EvaluationCriterionItem).filter_by(module_document_id=module_id).delete()
+    db.query(EvaluationCriterionItem).filter_by(module_document_id=pd_id).delete()
     if isinstance(df_ce, list):
         for row in df_ce:
             d = {k: v for k, v in row.items() if k not in ["id_ce", "id_ra", "id_ud", "desc_ce", "peso_ce"]}
-            db.add(EvaluationCriterionItem(module_document_id=module_id, id_ce=safe_str(row.get("id_ce")), id_ra=safe_str(row.get("id_ra")), id_ud=safe_str(row.get("id_ud")), desc_ce=safe_str(row.get("desc_ce")), peso_ce=safe_str(row.get("peso_ce")), data=d))
+            db.add(EvaluationCriterionItem(module_document_id=pd_id, id_ce=safe_str(row.get("id_ce")), id_ra=safe_str(row.get("id_ra")), id_ud=safe_str(row.get("id_ud")), desc_ce=safe_str(row.get("desc_ce")), peso_ce=safe_str(row.get("peso_ce")), data=d))
 
-    db.query(ActivityItem).filter_by(module_document_id=module_id).delete()
+    db.query(ActivityItem).filter_by(module_document_id=pd_id).delete()
     if isinstance(df_act, list):
         for row in df_act:
             d = {k: v for k, v in row.items() if k not in ["id_act", "desc_act", "Tipo", "tri_act", "peso_act", "is_active"]}
-            db.add(ActivityItem(module_document_id=module_id, id_act=safe_str(row.get("id_act")), desc_act=safe_str(row.get("desc_act")), tipo=safe_str(row.get("Tipo")), tri_act=safe_str(row.get("tri_act")), peso_act=safe_str(row.get("peso_act")), is_active=safe_str(row.get("is_active")), data=d))
+            db.add(ActivityItem(module_document_id=pd_id, id_act=safe_str(row.get("id_act")), desc_act=safe_str(row.get("desc_act")), tipo=safe_str(row.get("Tipo")), tri_act=safe_str(row.get("tri_act")), peso_act=safe_str(row.get("peso_act")), is_active=safe_str(row.get("is_active")), data=d))
 
-    db.query(InstrumentItem).filter_by(module_document_id=module_id).delete()
+    db.query(InstrumentItem).filter_by(module_document_id=pd_id).delete()
     if isinstance(df_pr, list):
         for row in df_pr:
             d = {k: v for k, v in row.items() if k not in ["ID", "Práctica"]}
-            db.add(InstrumentItem(module_document_id=module_id, item_id=safe_str(row.get("ID")), practica=safe_str(row.get("Práctica")), data=d))
+            db.add(InstrumentItem(module_document_id=pd_id, item_id=safe_str(row.get("ID")), practica=safe_str(row.get("Práctica")), data=d))
 
-    db.query(TaskItem).filter_by(module_document_id=module_id).delete()
+    db.query(TaskItem).filter_by(module_document_id=pd_id).delete()
     if isinstance(df_tareas, list):
         for row in df_tareas:
             d = {k: v for k, v in row.items() if k not in ["ID", "Nombre_Tarea", "Reto", "RA_Asociados", "Instrumento"]}
-            db.add(TaskItem(module_document_id=module_id, item_id=safe_str(row.get("ID")), nombre_tarea=safe_str(row.get("Nombre_Tarea")), reto=safe_str(row.get("Reto")), ra_asociados=safe_str(row.get("RA_Asociados")), instrumento=safe_str(row.get("Instrumento")), data=d))
+            db.add(TaskItem(module_document_id=pd_id, item_id=safe_str(row.get("ID")), nombre_tarea=safe_str(row.get("Nombre_Tarea")), reto=safe_str(row.get("Reto")), ra_asociados=safe_str(row.get("RA_Asociados")), instrumento=safe_str(row.get("Instrumento")), data=d))
 
-    db.query(AceItem).filter_by(module_document_id=module_id).delete()
+    db.query(AceItem).filter_by(module_document_id=pd_id).delete()
     if isinstance(df_ace, list):
         for row in df_ace:
             d = {k: v for k, v in row.items() if k not in ["ID", "Tipo"]}
-            db.add(AceItem(module_document_id=module_id, item_id=safe_str(row.get("ID")), tipo=safe_str(row.get("Tipo")), data=d))
+            db.add(AceItem(module_document_id=pd_id, item_id=safe_str(row.get("ID")), tipo=safe_str(row.get("Tipo")), data=d))
 
-    db.query(DuaItem).filter_by(module_document_id=module_id).delete()
+    db.query(DuaItem).filter_by(module_document_id=pd_id).delete()
     if isinstance(df_dua, list):
         for row in df_dua:
             d = {k: v for k, v in row.items() if k not in ["ID", "Barrera"]}
-            db.add(DuaItem(module_document_id=module_id, item_id=safe_str(row.get("ID")), barrera=safe_str(row.get("Barrera")), data=d))
+            db.add(DuaItem(module_document_id=pd_id, item_id=safe_str(row.get("ID")), barrera=safe_str(row.get("Barrera")), data=d))
 
-    db.query(ContingencyItem).filter_by(module_document_id=module_id).delete()
+    db.query(ContingencyItem).filter_by(module_document_id=pd_id).delete()
     if isinstance(df_contingencia, list):
         for row in df_contingencia:
             d = {k: v for k, v in row.items() if k not in ["ID", "Escenario"]}
-            db.add(ContingencyItem(module_document_id=module_id, item_id=safe_str(row.get("ID")), escenario=safe_str(row.get("Escenario")), data=d))
+            db.add(ContingencyItem(module_document_id=pd_id, item_id=safe_str(row.get("ID")), escenario=safe_str(row.get("Escenario")), data=d))
 
+    # Practical updates to module_id
     db.query(FeoeItem).filter_by(module_document_id=module_id).delete()
     if isinstance(df_feoe, list):
         for row in df_feoe:
@@ -309,32 +350,33 @@ def update_module_data(module_id: str, body: dict, db: Session):
             d = {k: v for k, v in row.items() if k not in ["id_ud"]}
             db.add(SgmtItem(module_document_id=module_id, id_ud=safe_str(row.get("id_ud")), data=d))
             
-    db.query(CalendarNoteItem).filter_by(module_document_id=module_id).delete()
+    # Theoretical to pd_id
+    db.query(CalendarNoteItem).filter_by(module_document_id=pd_id).delete()
     if isinstance(calendar_notes, dict):
         for key, val in calendar_notes.items():
-            db.add(CalendarNoteItem(module_document_id=module_id, note_key=safe_str(key), note_text=safe_str(val)))
+            db.add(CalendarNoteItem(module_document_id=pd_id, note_key=safe_str(key), note_text=safe_str(val)))
             
-    # Phase 3 updates
-    db.query(ConfigDates).filter_by(module_document_id=module_id).delete()
+    # Phase 3 updates to pd_id
+    db.query(ConfigDates).filter_by(module_document_id=pd_id).delete()
     if info_fechas and isinstance(info_fechas, dict):
-        db.add(ConfigDates(module_document_id=module_id, data=info_fechas))
+        db.add(ConfigDates(module_document_id=pd_id, data=info_fechas))
 
-    db.query(ModuleInfo).filter_by(module_document_id=module_id).delete()
+    db.query(ModuleInfo).filter_by(module_document_id=pd_id).delete()
     if info_modulo and isinstance(info_modulo, dict):
-        db.add(ModuleInfo(module_document_id=module_id, data=info_modulo))
+        db.add(ModuleInfo(module_document_id=pd_id, data=info_modulo))
 
-    db.query(ScheduleItem).filter_by(module_document_id=module_id).delete()
+    db.query(ScheduleItem).filter_by(module_document_id=pd_id).delete()
     if horario and isinstance(horario, dict):
         for k, v in horario.items():
-            db.add(ScheduleItem(module_document_id=module_id, day_of_week=safe_str(k), hours=int(v) if str(v).isdigit() else 0))
+            db.add(ScheduleItem(module_document_id=pd_id, day_of_week=safe_str(k), hours=int(v) if str(v).isdigit() else 0))
 
-    db.query(PlanningLedgerItem).filter_by(module_document_id=module_id).delete()
+    db.query(PlanningLedgerItem).filter_by(module_document_id=pd_id).delete()
     if planning_ledger and isinstance(planning_ledger, dict):
         for k, v in planning_ledger.items():
             if isinstance(v, list):
                 for ud in v:
-                    db.add(PlanningLedgerItem(module_document_id=module_id, date_str=safe_str(k), id_ud=safe_str(ud)))
+                    db.add(PlanningLedgerItem(module_document_id=pd_id, date_str=safe_str(k), id_ud=safe_str(ud)))
             else:
-                db.add(PlanningLedgerItem(module_document_id=module_id, date_str=safe_str(k), id_ud=safe_str(v)))
+                db.add(PlanningLedgerItem(module_document_id=pd_id, date_str=safe_str(k), id_ud=safe_str(v)))
     
     db.commit()

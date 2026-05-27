@@ -15,6 +15,13 @@ export default function MatricesPage() {
   const [saveMessage, setSaveMessage] = useState("");
   const [allCeOpen, setAllCeOpen] = useState(false);
   const [openCEs, setOpenCEs] = useState<Set<string>>(new Set());
+  const [activeTab, setActiveTab] = useState("ra");
+
+  const TABS = [
+    { id: "ra", label: "RA y sus CE", icon: "🎓" },
+    { id: "ud", label: "UD Unidades didácticas", icon: "📚" },
+    { id: "relacion", label: "Relación entre RA y UD", icon: "🎯" },
+  ];
 
   useEffect(() => {
     if (activeModuleId && !moduleData) {
@@ -108,8 +115,22 @@ export default function MatricesPage() {
             <p className="text-muted mt-2">Relación y ponderación entre los RA, CE y las diferentes UD del módulo.</p>
           </div>
 
+          <div className="flex border-b border-[var(--glass-border)] mb-8 overflow-x-auto scrollbar-hide">
+            {TABS.map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-6 py-4 font-bold text-sm border-b-2 transition-colors whitespace-nowrap ${activeTab === tab.id ? 'border-[#14a085] text-[#14a085]' : 'border-transparent text-muted hover:text-foreground'}`}
+              >
+                <span className="mr-2">{tab.icon}</span>
+                {tab.label}
+              </button>
+            ))}
+          </div>
 
-          {/* Resultados de aprendizaje */}
+          {/* Resultados de aprendizaje y CE */}
+          {activeTab === "ra" && (
+            <div className="space-y-8 animate-in fade-in duration-500">
           <Card className="p-6 border-t-4 border-t-accent">
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
               <span>🎓</span> RA. Resultados de aprendizaje
@@ -190,131 +211,6 @@ export default function MatricesPage() {
                 </span>
               </Card>
             </div>
-          </Card>
-
-          {/* Unidades didácticas */}
-          <Card className="p-6 border-t-4 border-t-purple-500">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-              <span>📚</span> UD. Unidades didácticas
-            </h2>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="border-b border-[var(--glass-border)] text-sm text-muted">
-                    <th className="p-3 sticky left-0 bg-background z-10">ID-UD</th>
-                    <th className="p-3 sticky left-[80px] bg-background z-10">Horas</th>
-                    <th className="p-3 sticky left-[160px] bg-background z-10 w-64">Unidad Didáctica</th>
-                    {df_ra.map((ra: any, i: number) => (
-                      <th key={i} className="p-3 text-center min-w-[80px]">
-                        <div className="text-xs">{ra.id_ra}</div>
-                        <div className="text-[10px] text-purple-400">({ra.peso_ra || 0}%)</div>
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {df_ud.map((ud: any, idx: number) => (
-                    <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
-                      <td className="p-3 font-mono text-sm sticky left-0 bg-background group-hover:bg-[#111827]">{ud.id_ud}</td>
-                      <td className="p-3 sticky left-[80px] bg-background group-hover:bg-[#111827]">
-                        <input
-                          type="number"
-                          value={ud.horas_ud || 0}
-                          onChange={(e) => {
-                            const newUd = [...df_ud];
-                            newUd[idx].horas_ud = parseFloat(e.target.value) || 0;
-                            updateDataFrame("df_ud", newUd);
-                          }}
-                          className="w-16 bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-sm focus:border-purple-500 focus:outline-none"
-                        />
-                      </td>
-                      <td className="p-3 sticky left-[160px] bg-background group-hover:bg-[#111827]">
-                        <input
-                          type="text"
-                          value={ud.desc_ud || ""}
-                          onChange={(e) => {
-                            const newUd = [...df_ud];
-                            newUd[idx].desc_ud = e.target.value;
-                            updateDataFrame("df_ud", newUd);
-                          }}
-                          className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-3 py-1 text-foreground text-sm focus:border-purple-500 focus:outline-none"
-                        />
-                      </td>
-                      {df_ra.map((ra: any, raIdx: number) => (
-                        <td key={raIdx} className="p-3 text-center">
-                          <input
-                            type="number"
-                            value={ud[ra.id_ra] || ""}
-                            onChange={(e) => {
-                              const newUd = [...df_ud];
-                              newUd[idx][ra.id_ra] = parseFloat(e.target.value) || 0;
-                              updateDataFrame("df_ud", newUd);
-                            }}
-                            className="w-14 text-center bg-foreground/15 border border-[var(--glass-border)] rounded px-1 py-1 text-foreground text-sm focus:border-purple-500 focus:outline-none"
-                          />
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <div className="mt-4 flex justify-between items-center text-sm">
-              <Button
-                variant="ghost"
-                onClick={() => {
-                  const newUd = [...df_ud];
-                  const newId = `UD${(newUd.length + 1).toString().padStart(2, '0')}`;
-                  newUd.push({ id_ud: newId, horas_ud: 0, desc_ud: "" });
-                  updateDataFrame("df_ud", newUd);
-                }}
-                className="text-purple-400 hover:text-purple-300"
-              >
-                <span>+</span> Añadir nueva UD
-              </Button>
-
-              <Card className="px-4 py-2 inline-flex items-center gap-2 border-l-4 border-l-purple-500">
-                <span className="text-muted">Total horas UD:</span>
-                <span className="font-bold text-purple-400">
-                  {df_ud.reduce((sum: number, ud: any) => sum + (Number(ud.horas_ud) || 0), 0)} h
-                </span>
-              </Card>
-            </div>
-          </Card>
-
-          {/* ── RAs ↔ UDs ────────────────────────────────────── */}
-          <Card className="p-6 border-t-4 border-t-amber-500">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-              <span>🎯</span> Relación entre Resultados de aprendizaje y Unidades didácticas
-            </h2>
-            {df_ra && df_ra.length > 0 ? (
-              <div className="space-y-6">
-                {df_ra.map((ra: any, idx: number) => {
-                  const uds = df_ud?.filter((ud: any) => ud[ra.id_ra] > 0) || [];
-                  return (
-                    <div key={idx} className="border-b border-[var(--glass-border)] pb-6 last:border-0 last:pb-0">
-                      <div className="text-lg text-foreground mb-3">
-                        <strong>{ra.id_ra} ({ra.peso_ra}%).</strong>{" "}
-                        <span className="text-muted text-sm">{ra.desc_ra}</span>
-                      </div>
-                      {uds.length > 0 ? (
-                        <div className="ml-6 pl-4 border-l-2 border-[#d4af37] text-[#ffe599]">
-                          {uds.map((ud: any, uIdx: number) => (
-                            <div key={uIdx} className="mb-1">
-                              {ud.id_ud} ({ud.horas_ud || ud.Horas || 0}h) - {ud[ra.id_ra]}%
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="ml-6 pl-4 border-l-2 border-gray-600 text-muted italic">Sin UDs asignadas</div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <div className="text-center text-muted">No hay Resultados de aprendizaje definidos.</div>
-            )}
           </Card>
 
           {/* Criterios de evaluación */}
@@ -516,6 +412,141 @@ export default function MatricesPage() {
               })}
             </div>
           </Card>
+            </div>
+          )}
+
+          {/* Unidades didácticas */}
+          {activeTab === "ud" && (
+            <div className="animate-in fade-in duration-500">
+          <Card className="p-6 border-t-4 border-t-purple-500">
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+              <span>📚</span> UD. Unidades didácticas
+            </h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-[var(--glass-border)] text-sm text-muted">
+                    <th className="p-3 sticky left-0 bg-background z-10">ID-UD</th>
+                    <th className="p-3 sticky left-[80px] bg-background z-10">Horas</th>
+                    <th className="p-3 sticky left-[160px] bg-background z-10 w-64">Unidad Didáctica</th>
+                    {df_ra.map((ra: any, i: number) => (
+                      <th key={i} className="p-3 text-center min-w-[80px]">
+                        <div className="text-xs">{ra.id_ra}</div>
+                        <div className="text-[10px] text-purple-400">({ra.peso_ra || 0}%)</div>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {df_ud.map((ud: any, idx: number) => (
+                    <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
+                      <td className="p-3 font-mono text-sm sticky left-0 bg-background group-hover:bg-[#111827]">{ud.id_ud}</td>
+                      <td className="p-3 sticky left-[80px] bg-background group-hover:bg-[#111827]">
+                        <input
+                          type="number"
+                          value={ud.horas_ud || 0}
+                          onChange={(e) => {
+                            const newUd = [...df_ud];
+                            newUd[idx].horas_ud = parseFloat(e.target.value) || 0;
+                            updateDataFrame("df_ud", newUd);
+                          }}
+                          className="w-16 bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-sm focus:border-purple-500 focus:outline-none"
+                        />
+                      </td>
+                      <td className="p-3 sticky left-[160px] bg-background group-hover:bg-[#111827]">
+                        <input
+                          type="text"
+                          value={ud.desc_ud || ""}
+                          onChange={(e) => {
+                            const newUd = [...df_ud];
+                            newUd[idx].desc_ud = e.target.value;
+                            updateDataFrame("df_ud", newUd);
+                          }}
+                          className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-3 py-1 text-foreground text-sm focus:border-purple-500 focus:outline-none"
+                        />
+                      </td>
+                      {df_ra.map((ra: any, raIdx: number) => (
+                        <td key={raIdx} className="p-3 text-center">
+                          <input
+                            type="number"
+                            value={ud[ra.id_ra] || ""}
+                            onChange={(e) => {
+                              const newUd = [...df_ud];
+                              newUd[idx][ra.id_ra] = parseFloat(e.target.value) || 0;
+                              updateDataFrame("df_ud", newUd);
+                            }}
+                            className="w-14 text-center bg-foreground/15 border border-[var(--glass-border)] rounded px-1 py-1 text-foreground text-sm focus:border-purple-500 focus:outline-none"
+                          />
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="mt-4 flex justify-between items-center text-sm">
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  const newUd = [...df_ud];
+                  const newId = `UD${(newUd.length + 1).toString().padStart(2, '0')}`;
+                  newUd.push({ id_ud: newId, horas_ud: 0, desc_ud: "" });
+                  updateDataFrame("df_ud", newUd);
+                }}
+                className="text-purple-400 hover:text-purple-300"
+              >
+                <span>+</span> Añadir nueva UD
+              </Button>
+
+              <Card className="px-4 py-2 inline-flex items-center gap-2 border-l-4 border-l-purple-500">
+                <span className="text-muted">Total horas UD:</span>
+                <span className="font-bold text-purple-400">
+                  {df_ud.reduce((sum: number, ud: any) => sum + (Number(ud.horas_ud) || 0), 0)} h
+                </span>
+              </Card>
+            </div>
+          </Card>
+            </div>
+          )}
+
+          {/* ── RAs ↔ UDs ────────────────────────────────────── */}
+          {activeTab === "relacion" && (
+            <div className="animate-in fade-in duration-500">
+          <Card className="p-6 border-t-4 border-t-amber-500">
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+              <span>🎯</span> Relación entre Resultados de aprendizaje y Unidades didácticas
+            </h2>
+            {df_ra && df_ra.length > 0 ? (
+              <div className="space-y-6">
+                {df_ra.map((ra: any, idx: number) => {
+                  const uds = df_ud?.filter((ud: any) => ud[ra.id_ra] > 0) || [];
+                  return (
+                    <div key={idx} className="border-b border-[var(--glass-border)] pb-6 last:border-0 last:pb-0">
+                      <div className="text-lg text-foreground mb-3">
+                        <strong>{ra.id_ra} ({ra.peso_ra}%).</strong>{" "}
+                        <span className="text-muted text-sm">{ra.desc_ra}</span>
+                      </div>
+                      {uds.length > 0 ? (
+                        <div className="ml-6 pl-4 border-l-2 border-[#d4af37] text-[#ffe599]">
+                          {uds.map((ud: any, uIdx: number) => (
+                            <div key={uIdx} className="mb-1">
+                              {ud.id_ud} ({ud.horas_ud || ud.Horas || 0}h) - {ud[ra.id_ra]}%
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="ml-6 pl-4 border-l-2 border-gray-600 text-muted italic">Sin UDs asignadas</div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="text-center text-muted">No hay Resultados de aprendizaje definidos.</div>
+            )}
+          </Card>
+            </div>
+          )}
 
         </main>
       </div>

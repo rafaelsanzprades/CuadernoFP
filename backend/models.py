@@ -205,6 +205,8 @@ class Enrollment(Base):
 class ModuleDocument(Base):
     __tablename__ = "module_documents"
     id = Column(String, primary_key=True, index=True)
+    doc_type = Column(String, default="pd") # "pd" or "curso"
+    parent_id = Column(String, ForeignKey("module_documents.id"), nullable=True)
     data = Column(JSON, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())

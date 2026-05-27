@@ -19,7 +19,7 @@ export default function ProgramacionPage() {
   const [allUdsOpen, setAllUdsOpen] = useState(true);
 
   const TABS = [
-    { id: "secuenciacion", label: "📋 Secuenciación (UDs)", cleanLabel: "Secuenciación (UDs)" },
+    { id: "secuenciacion", label: "📋 Secuenciación de UD", cleanLabel: "Secuenciación de UD" },
     { id: "tareas", label: "🎯 Tareas competenciales", cleanLabel: "Tareas competenciales" }
   ];
 

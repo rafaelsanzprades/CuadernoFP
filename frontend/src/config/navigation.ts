@@ -3,8 +3,6 @@ export const navGroups = [
     title: "Centro",
     items: [
       { href: "/", label: "Inicio", icon: "🏠" },
-      { href: "/introduccion", label: "Introducción. Planes", icon: "📝" },
-      { href: "/calendario", label: "Calendario académico", icon: "🗓️" },
       { href: "/documentos", label: "Visor documental", icon: "📄" },
       { href: "/descargas", label: "Descargas PDF", icon: "📥" }
     ]
@@ -13,16 +11,18 @@ export const navGroups = [
     title: "Módulo",
     items: [
       { href: "/modulo", label: "Configuración. Datos", icon: "⚙️" },
+      { href: "/introduccion", label: "Introducción. Planes", icon: "📝" },
+      { href: "/calendario", label: "Calendario académico", icon: "🗓️" },
       { href: "/matrices", label: "Matrices RA→CE→UD", icon: "🧮" },
       { href: "/instrumentos", label: "Instrumentos de evaluación", icon: "🛠️" },
-      { href: "/programacion", label: "Programación de aula", icon: "📚" },
-      { href: "/seguimiento", label: "Seguimiento diario", icon: "📍" }
+      { href: "/programacion", label: "Programación de aula", icon: "📚" }
     ]
   },
   {
     title: "Curso",
     items: [
       { href: "/matricula", label: "Matrícula alumnado", icon: "👥" },
+      { href: "/seguimiento", label: "Seguimiento diario", icon: "📍" },
       { href: "/calificacion", label: "Calificación académica", icon: "📊" },
       { href: "/calificacion-feoe", label: "Calificación FEOE", icon: "🏢" },
       { href: "/evaluacion", label: "Evaluación por RA", icon: "📈" },
