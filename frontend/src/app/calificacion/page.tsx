@@ -78,7 +78,7 @@ export default function CalificacionPage() {
           <main className="flex-1 p-8 content-area">
             <Card className="p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Curso o Módulo seleccionado</h2>
-              <p className="text-gray-400">Por favor, ve a la Gestión de archivos y asegúrate de cargar ambos.</p>
+              <p className="text-muted">Por favor, ve a la sección de Datos y asegúrate de cargar ambos.</p>
             </Card>
           </main>
         </div>
@@ -226,7 +226,7 @@ export default function CalificacionPage() {
           <main className="flex-1 p-8 content-area">
             <Card className="p-8 text-center border-l-4 border-l-yellow-500">
               <h2 className="text-2xl font-bold mb-4 text-yellow-400">Falta información</h2>
-              <p className="text-gray-400">Asegúrate de tener Criterios de evaluación y Actividades definidos, y alumnado activo en la Matrícula.</p>
+              <p className="text-muted">Asegúrate de tener Criterios de evaluación y Actividades definidos, y alumnado activo en la Matrícula.</p>
             </Card>
           </main>
         </div>
@@ -242,15 +242,15 @@ export default function CalificacionPage() {
         
         <main className="flex-1 p-8 content-area space-y-6">
           <div className="mb-6">
-            <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
+            <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
               📊 Calificación académica
             </h1>
-            <p className="text-gray-400 mt-2">Registro y cálculo automático de las calificaciones por trimestre y evaluación final.</p>
+            <p className="text-muted mt-2">Registro y cálculo automático de las calificaciones por trimestre y evaluación final.</p>
           </div>
 
           {/* ── Resumen estadístico por trimestres ────────────── */}
           <Card className="p-6">
-            <h4 className="text-lg font-bold text-white mb-5 flex items-center gap-2">
+            <h4 className="text-lg font-bold text-foreground mb-5 flex items-center gap-2">
               <span>📊</span> Resumen de calificaciones por trimestres
             </h4>
             <div className="overflow-x-auto">
@@ -290,16 +290,16 @@ export default function CalificacionPage() {
                 return (
                   <table className="w-full text-sm border-collapse">
                     <thead>
-                      <tr className="border-b border-white/10">
-                        <th className="p-3 text-left text-gray-400 font-semibold" rowSpan={2}>Trimestre</th>
+                      <tr className="border-b border-[var(--glass-border)]">
+                        <th className="p-3 text-left text-muted font-semibold" rowSpan={2}>Trimestre</th>
                         {tipos.map(t => (
-                          <th key={t.key} colSpan={3} className={`p-2 text-center text-${t.color}-400 font-semibold border-l border-white/10`}>{t.label}</th>
+                          <th key={t.key} colSpan={3} className={`p-2 text-center text-${t.color}-400 font-semibold border-l border-[var(--glass-border)]`}>{t.label}</th>
                         ))}
                       </tr>
-                      <tr className="border-b border-white/20 text-xs text-gray-500">
+                      <tr className="border-b border-[var(--glass-border)] text-xs text-muted">
                         {tipos.map(t => (
                           <React.Fragment key={t.key}>
-                            <th className="p-2 text-center border-l border-white/10">Mín</th>
+                            <th className="p-2 text-center border-l border-[var(--glass-border)]">Mín</th>
                             <th className="p-2 text-center">Media</th>
                             <th className="p-2 text-center">Máx</th>
                           </React.Fragment>
@@ -308,13 +308,13 @@ export default function CalificacionPage() {
                     </thead>
                     <tbody>
                       {tris.map(tri => (
-                        <tr key={tri.key} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                          <td className="p-3 font-semibold text-white">{tri.label}</td>
+                        <tr key={tri.key} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
+                          <td className="p-3 font-semibold text-foreground">{tri.label}</td>
                           {tipos.map(t => {
                             const s = getStats(tri.key, t.key);
                             return (
                               <React.Fragment key={t.key}>
-                                <td className="p-3 text-center border-l border-white/10">
+                                <td className="p-3 text-center border-l border-[var(--glass-border)]">
                                   <span className={`text-${t.color}-400/70 font-mono`}>{s ? s.min.toFixed(1) : '—'}</span>
                                 </td>
                                 <td className="p-3 text-center">
@@ -328,8 +328,8 @@ export default function CalificacionPage() {
                           })}
                         </tr>
                       ))}
-                      <tr className="border-t-2 border-white/20 bg-white/5">
-                        <td className="p-4 font-extrabold text-white text-lg">Total</td>
+                      <tr className="border-t-2 border-[var(--glass-border)] bg-foreground/5">
+                        <td className="p-4 font-extrabold text-foreground text-lg">Total</td>
                         {tipos.map(t => {
                           const allGrades: number[] = [];
                           df_evaluable.forEach((al: any) => {
@@ -345,7 +345,7 @@ export default function CalificacionPage() {
                             : null;
                           return (
                             <React.Fragment key={t.key}>
-                              <td className="p-4 text-center border-l border-white/10">
+                              <td className="p-4 text-center border-l border-[var(--glass-border)]">
                                 <span className={`text-${t.color}-400/80 font-mono font-bold`}>{s ? s.min.toFixed(1) : '—'}</span>
                               </td>
                               <td className="p-4 text-center">
@@ -368,10 +368,10 @@ export default function CalificacionPage() {
           {/* ── Subtítulo Calificación por alumnado ──────────── */}
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-2xl font-extrabold text-white tracking-tight flex items-center gap-3">
+              <h2 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 👥 Calificación por alumnado
               </h2>
-              <p className="text-gray-400 mt-1">Notas individuales por alumno, trimestre e instrumento de evaluación.</p>
+              <p className="text-muted mt-1">Notas individuales por alumno, trimestre e instrumento de evaluación.</p>
             </div>
             <Button
               variant="secondary"
@@ -399,7 +399,7 @@ export default function CalificacionPage() {
               const activeTab = activeTabByStudent[al_id] || "1T";
 
               return (
-                <div key={al_id} className="group bg-white/5 rounded-lg border border-white/10 overflow-hidden transition-colors">
+                <div key={al_id} className="group bg-foreground/5 rounded-lg border border-[var(--glass-border)] overflow-hidden transition-colors">
                   <div 
                     onClick={() => {
                       const newSet = new Set(openStudents);
@@ -407,7 +407,7 @@ export default function CalificacionPage() {
                       else newSet.add(al_id);
                       setOpenStudents(newSet);
                     }}
-                    className="p-4 cursor-pointer flex items-center justify-between font-semibold text-lg select-none hover:bg-white/10 transition-colors"
+                    className="p-4 cursor-pointer flex items-center justify-between font-semibold text-lg select-none hover:bg-foreground/10 transition-colors"
                   >
                     <div className="flex items-center gap-4 w-1/3">
                       <span className="text-2xl">👤</span>
@@ -423,7 +423,7 @@ export default function CalificacionPage() {
                           if (!isNaN(v) && v > 0) allVals.push(v);
                         });
                         const data = allVals.map((v, i) => ({ name: i, value: v }));
-                        if (data.length < 2) return <span className="text-xs text-gray-500 italic">Sin datos suficientes para tendencia</span>;
+                        if (data.length < 2) return <span className="text-xs text-muted italic">Sin datos suficientes para tendencia</span>;
                         
                         return (
                           <ResponsiveContainer width="100%" height="100%">
@@ -438,9 +438,9 @@ export default function CalificacionPage() {
 
                     <div className="flex items-center gap-6 text-sm w-1/4 justify-end">
                       <span className="font-bold text-lg" style={{ color: sigad.col }}>
-                        {sigad.n} · {sigad.cod} <span className="text-sm font-normal text-gray-400">({sigad.txt})</span>
+                        {sigad.n} · {sigad.cod} <span className="text-sm font-normal text-muted">({sigad.txt})</span>
                       </span>
-                      <span className={`ml-4 inline-block transition-transform duration-300 text-gray-500 ${openStudents.has(al_id) ? 'rotate-180' : ''}`}>▼</span>
+                      <span className={`ml-4 inline-block transition-transform duration-300 text-muted ${openStudents.has(al_id) ? 'rotate-180' : ''}`}>▼</span>
                     </div>
                   </div>
                   
@@ -453,16 +453,16 @@ export default function CalificacionPage() {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
-                        <div className="p-6 border-t border-white/10 bg-black/20 flex gap-8">
+                        <div className="p-6 border-t border-[var(--glass-border)] bg-foreground/10 flex gap-8">
                           {/* Left: Tabs and Inputs */}
                           <div className="flex-1">
-                            <h3 className="font-bold text-gray-300 mb-4">Evaluación por Instrumentos</h3>
-                            <div className="flex border-b border-white/10 mb-4">
+                            <h3 className="font-bold text-foreground/80 mb-4">Evaluación por Instrumentos</h3>
+                            <div className="flex border-b border-[var(--glass-border)] mb-4">
                               {["1T", "2T", "3T"].map(tab => (
                                 <button 
                                   key={tab}
                                   onClick={() => setActiveTabByStudent(prev => ({ ...prev, [al_id]: tab }))}
-                                  className={`px-4 py-2 font-semibold text-sm border-b-2 transition-colors ${activeTab === tab ? 'border-blue-500 text-blue-400' : 'border-transparent text-gray-500 hover:text-gray-300'}`}
+                                  className={`px-4 py-2 font-semibold text-sm border-b-2 transition-colors ${activeTab === tab ? 'border-blue-500 text-blue-400' : 'border-transparent text-muted hover:text-foreground/80'}`}
                                 >
                                   {tab === "1T" ? "1º Tri" : tab === "2T" ? "2º Tri" : "3º Tri"}
                                 </button>
@@ -470,15 +470,15 @@ export default function CalificacionPage() {
                             </div>
                             <div className="space-y-4">
                               {acts_by_tri[activeTab].length === 0 ? (
-                                <div className="text-gray-500 text-sm italic">No hay actividades evaluables definidas para este trimestre.</div>
+                                <div className="text-muted text-sm italic">No hay actividades evaluables definidas para este trimestre.</div>
                               ) : (
                                 acts_by_tri[activeTab].map(act => {
                                   const act_id = act.id_act;
                                   const val = Number(evRow[act_id]) || 0;
                                   return (
                                     <div key={act_id} className="flex items-center justify-between gap-4">
-                                      <label className="text-sm text-gray-300 flex-1 truncate" title={act.desc_act}>
-                                        <span className="text-gray-500 font-mono mr-2">[{act.Tipo || "Act"}]</span>
+                                      <label className="text-sm text-foreground/80 flex-1 truncate" title={act.desc_act}>
+                                        <span className="text-muted font-mono mr-2">[{act.Tipo || "Act"}]</span>
                                         {act.desc_act || act_id}
                                       </label>
                                       <input 
@@ -488,7 +488,7 @@ export default function CalificacionPage() {
                                         step="0.1"
                                         value={val || ""}
                                         onChange={(e) => handleUpdateActNota(al_id, act_id, Number(e.target.value) || 0)}
-                                        className="w-20 bg-black/30 border border-white/10 rounded px-3 py-1 text-white focus:border-blue-500 focus:outline-none font-mono text-center"
+                                        className="w-20 bg-foreground/15 border border-[var(--glass-border)] rounded px-3 py-1 text-foreground focus:border-blue-500 focus:outline-none font-mono text-center"
                                       />
                                     </div>
                                   );
@@ -499,22 +499,22 @@ export default function CalificacionPage() {
 
                           {/* Right: Summary SIGAD */}
                           <div className="w-64 flex flex-col">
-                            <h3 className="font-bold text-gray-300 mb-4">Cálculo Jerárquico</h3>
+                            <h3 className="font-bold text-foreground/80 mb-4">Cálculo Jerárquico</h3>
                             <div className="mb-4">
-                              <label className="text-xs text-gray-400 uppercase tracking-wider mb-1 block">Nota Final (Manual / Calc)</label>
+                              <label className="text-xs text-muted uppercase tracking-wider mb-1 block">Nota Final (Manual / Calc)</label>
                               <input 
                                 type="number"
                                 min="1" max="10" step="0.1"
                                 value={nota_prev || ""}
                                 onChange={(e) => handleOverrideNotaFinal(al_id, Number(e.target.value) || 0)}
-                                className="w-full bg-black/30 border border-white/20 rounded px-3 py-2 text-xl font-bold text-white focus:border-blue-500 focus:outline-none"
+                                className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-3 py-2 text-xl font-bold text-foreground focus:border-blue-500 focus:outline-none"
                               />
                             </div>
                             
                             <div className="flex-1 rounded-xl flex flex-col items-center justify-center p-4 border-2" style={{ borderColor: sigad.col, backgroundColor: `${sigad.col}11` }}>
                               <div className="text-6xl font-black mb-2" style={{ color: sigad.col, lineHeight: 1 }}>{sigad.n}</div>
                               <div className="text-xl font-bold" style={{ color: sigad.col }}>{sigad.cod}</div>
-                              <div className="text-xs text-gray-400 mt-1 uppercase tracking-wider">{sigad.txt}</div>
+                              <div className="text-xs text-muted mt-1 uppercase tracking-wider">{sigad.txt}</div>
                             </div>
                           </div>
                         </div>

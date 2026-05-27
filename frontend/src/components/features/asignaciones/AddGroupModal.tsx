@@ -33,15 +33,15 @@ export function AddGroupModal({
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 animate-in fade-in duration-200">
-      <div className="bg-[#111827] border border-white/10 p-8 rounded-2xl w-full max-w-lg shadow-2xl relative">
+      <div className="bg-[#111827] border border-[var(--glass-border)] p-8 rounded-2xl w-full max-w-lg shadow-2xl relative">
         <button 
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+          className="absolute top-4 right-4 text-muted hover:text-foreground transition-colors"
         >
           <X className="w-6 h-6" />
         </button>
         
-        <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+        <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
           <BookOpen className="w-6 h-6 text-blue-400" />
           Nuevo Grupo Escolar
         </h2>

@@ -56,7 +56,7 @@ export default function PortalPage() {
           <main className="flex-1 p-8 content-area">
             <Card className="p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Curso o Módulo seleccionado</h2>
-              <p className="text-gray-400">Por favor, ve a la Gestión de archivos y asegúrate de cargar ambos.</p>
+              <p className="text-muted">Por favor, ve a la sección de Datos y asegúrate de cargar ambos.</p>
             </Card>
           </main>
         </div>
@@ -185,18 +185,18 @@ export default function PortalPage() {
         
         <main className="flex-1 p-8 pt-4 space-y-8">
           <div>
-            <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3 mb-4">🎓 Portal alumnado</h1>
-            <p className="text-gray-400 mt-2">Vista individualizada por estudiante con sus calificaciones y adquisición de competencias.</p>
+            <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3 mb-4">🎓 Portal alumnado</h1>
+            <p className="text-muted mt-2">Vista individualizada por estudiante con sus calificaciones y adquisición de competencias.</p>
             
-            <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-4 py-3 w-fit">
-              <span className="text-gray-400 text-sm font-semibold">Viendo como:</span>
+            <div className="flex items-center gap-3 bg-foreground/5 border border-[var(--glass-border)] rounded-xl px-4 py-3 w-fit">
+              <span className="text-muted text-sm font-semibold">Viendo como:</span>
               <select 
                 value={selectedAlId} 
                 onChange={e => {
                   setSelectedAlId(e.target.value);
                   setSimVals({}); // Reset sim on student change
                 }}
-                className="bg-transparent border-none p-0 text-white focus:outline-none font-bold text-lg cursor-pointer hover:text-teal-400 transition-colors pr-8"
+                className="bg-transparent border-none p-0 text-foreground focus:outline-none font-bold text-lg cursor-pointer hover:text-teal-400 transition-colors pr-8"
                 style={{ appearance: 'auto' }}
               >
                 {activeAlumnos.map((al: any) => (
@@ -211,19 +211,19 @@ export default function PortalPage() {
           <section className="grid grid-cols-3 gap-6">
             <Card className="p-6 border-l-4 border-l-teal-500 flex flex-col justify-center items-center relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 opacity-10 text-6xl">📊</div>
-              <span className="text-gray-400 text-sm uppercase font-bold tracking-wider mb-2">Nota Media Actual</span>
+              <span className="text-muted text-sm uppercase font-bold tracking-wider mb-2">Nota Media Actual</span>
               <span className="text-5xl font-black text-teal-400">{realCalc.nota_final.toFixed(2)}</span>
             </Card>
             <Card className="p-6 border-l-4 border-l-blue-500 flex flex-col justify-center items-center relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 opacity-10 text-6xl">🎯</div>
-              <span className="text-gray-400 text-sm uppercase font-bold tracking-wider mb-2">Estado</span>
+              <span className="text-muted text-sm uppercase font-bold tracking-wider mb-2">Estado</span>
               <span className="text-4xl font-black text-blue-400">{realCalc.nota_final >= 5 ? 'Apto' : 'En Proceso'}</span>
             </Card>
             <Card className="p-6 border-l-4" style={{ borderLeftColor: realSigad.col }}>
               <div className="flex flex-col items-center justify-center h-full">
-                <span className="text-gray-400 text-sm uppercase font-bold tracking-wider mb-2">Calificación Oficial</span>
+                <span className="text-muted text-sm uppercase font-bold tracking-wider mb-2">Calificación Oficial</span>
                 <div className="text-4xl font-black" style={{ color: realSigad.col }}>{realSigad.n} · {realSigad.cod}</div>
-                <div className="text-sm mt-1 text-gray-300 font-semibold">{realSigad.txt}</div>
+                <div className="text-sm mt-1 text-foreground/80 font-semibold">{realSigad.txt}</div>
               </div>
             </Card>
           </section>
@@ -237,15 +237,15 @@ export default function PortalPage() {
                 const progress = Math.min(100, (n_ra / 10) * 100);
                 
                 return (
-                  <div key={ra.id_ra} className="bg-black/20 border border-white/5 rounded-xl p-4">
+                  <div key={ra.id_ra} className="bg-foreground/10 border border-white/5 rounded-xl p-4">
                     <div className="flex justify-between items-start mb-2">
                       <div>
                         <h3 className="font-bold text-teal-400">{ra.id_ra}</h3>
-                        <p className="text-xs text-gray-400 truncate max-w-xs">{ra.desc_ra}</p>
+                        <p className="text-xs text-muted truncate max-w-xs">{ra.desc_ra}</p>
                       </div>
                       <div className="font-mono font-bold">{n_ra.toFixed(2)} / 10</div>
                     </div>
-                    <div className="w-full bg-black/40 rounded-full h-3">
+                    <div className="w-full bg-foreground/20 rounded-full h-3">
                       <div 
                         className="bg-gradient-to-r from-teal-500 to-blue-500 h-3 rounded-full transition-all duration-1000"
                         style={{ width: `${progress}%` }}
@@ -259,14 +259,14 @@ export default function PortalPage() {
 
           <Card className="p-6 border-t-4 border-t-purple-500 mt-8">
             <h2 className="text-2xl font-bold mb-2">🎮 Simulador de calificaciones</h2>
-            <p className="text-gray-400 mb-6 text-sm">Experimenta con tus notas para proyectar tu resultado final.</p>
+            <p className="text-muted mb-6 text-sm">Experimenta con tus notas para proyectar tu resultado final.</p>
 
             <div className="flex gap-8">
               <div className="flex-1">
                 <div className="grid grid-cols-3 gap-4 mb-6">
                   {["1T", "2T", "3T"].map(tri => (
-                    <div key={tri} className="bg-black/20 rounded-xl p-4 border border-white/5">
-                      <h3 className="font-bold text-center mb-4 border-b border-white/10 pb-2">{tri}</h3>
+                    <div key={tri} className="bg-foreground/10 rounded-xl p-4 border border-white/5">
+                      <h3 className="font-bold text-center mb-4 border-b border-[var(--glass-border)] pb-2">{tri}</h3>
                       <div className="space-y-4">
                         {acts_by_tri[tri].map(act => {
                           const act_id = act.id_act;
@@ -276,7 +276,7 @@ export default function PortalPage() {
                           return (
                             <div key={act_id}>
                               <div className="flex justify-between text-xs mb-1">
-                                <span className="text-gray-300 truncate w-32" title={act.desc_act}>{act.desc_act || act_id}</span>
+                                <span className="text-foreground/80 truncate w-32" title={act.desc_act}>{act.desc_act || act_id}</span>
                                 <span className="font-mono text-purple-400 font-bold">{sim_val.toFixed(1)}</span>
                               </div>
                               <input 
@@ -289,7 +289,7 @@ export default function PortalPage() {
                             </div>
                           );
                         })}
-                        {acts_by_tri[tri].length === 0 && <p className="text-xs text-gray-500 text-center">Sin actividades</p>}
+                        {acts_by_tri[tri].length === 0 && <p className="text-xs text-muted text-center">Sin actividades</p>}
                       </div>
                     </div>
                   ))}
@@ -305,7 +305,7 @@ export default function PortalPage() {
 
               <div className="w-80">
                 <div 
-                  className="rounded-2xl p-8 text-center text-white relative overflow-hidden h-full flex flex-col justify-center"
+                  className="rounded-2xl p-8 text-center text-foreground relative overflow-hidden h-full flex flex-col justify-center"
                   style={{ 
                     background: 'linear-gradient(135deg, rgba(20,160,133,0.8), rgba(41,128,185,0.8))',
                     boxShadow: '0 10px 30px rgba(20,160,133,0.3)',

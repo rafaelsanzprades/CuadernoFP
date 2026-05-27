@@ -102,16 +102,18 @@ export default function RolesPage() {
     }
   ];
 
+  const activeTabLabel = activeTab === "roles" ? "Catálogo de perfiles" : "Modelo relacional";
+
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar />
       <main className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header />
+        <Header breadcrumbSuffix={activeTabLabel} />
         <div className="flex-1 overflow-y-auto scrollbar-hide">
           <div className="min-h-screen p-8 w-full space-y-8">
           <div className="mb-8">
-            <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3 mb-2">🛡️ Acceso usuarios</h1>
-            <p className="text-gray-400">
+            <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3 mb-2">🛡️ Acceso usuarios</h1>
+            <p className="text-muted">
               Sistema de Roles Basado en Contextos (RBAC). Los permisos no son estáticos, dependen del contexto geográfico, organizativo y temporal.
             </p>
           </div>
@@ -121,13 +123,13 @@ export default function RolesPage() {
               <div className="flex items-center justify-between mb-8">
                 <button 
                   onClick={() => setIsLoginMode(true)}
-                  className={`flex-1 text-center py-2 text-lg font-bold border-b-2 transition-all ${isLoginMode ? 'border-accent text-accent' : 'border-transparent text-gray-400 hover:text-gray-200'}`}
+                  className={`flex-1 text-center py-2 text-lg font-bold border-b-2 transition-all ${isLoginMode ? 'border-accent text-accent' : 'border-transparent text-muted hover:text-foreground/90'}`}
                 >
                   Iniciar Sesión
                 </button>
                 <button 
                   onClick={() => setIsLoginMode(false)}
-                  className={`flex-1 text-center py-2 text-lg font-bold border-b-2 transition-all ${!isLoginMode ? 'border-accent text-accent' : 'border-transparent text-gray-400 hover:text-gray-200'}`}
+                  className={`flex-1 text-center py-2 text-lg font-bold border-b-2 transition-all ${!isLoginMode ? 'border-accent text-accent' : 'border-transparent text-muted hover:text-foreground/90'}`}
                 >
                   Registro
                 </button>
@@ -136,16 +138,16 @@ export default function RolesPage() {
               <div className="space-y-4">
                 {!isLoginMode && (
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-1">Nombre Completo</label>
+                    <label className="block text-sm font-medium text-foreground/80 mb-1">Nombre Completo</label>
                     <Input type="text" placeholder="Tu nombre" />
                   </div>
                 )}
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">Correo Electrónico</label>
+                  <label className="block text-sm font-medium text-foreground/80 mb-1">Correo Electrónico</label>
                   <Input type="email" placeholder="usuario@educa.aragon.es" value={email} onChange={e => setEmail(e.target.value)} />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">Contraseña</label>
+                  <label className="block text-sm font-medium text-foreground/80 mb-1">Contraseña</label>
                   <Input type="password" placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} />
                 </div>
 
@@ -157,25 +159,25 @@ export default function RolesPage() {
                 </Button>
 
                 <div className="relative flex items-center py-5">
-                  <div className="flex-grow border-t border-white/10"></div>
-                  <span className="flex-shrink-0 mx-4 text-gray-400 text-sm">o continuar con</span>
-                  <div className="flex-grow border-t border-white/10"></div>
+                  <div className="flex-grow border-t border-[var(--glass-border)]"></div>
+                  <span className="flex-shrink-0 mx-4 text-muted text-sm">o continuar con</span>
+                  <div className="flex-grow border-t border-[var(--glass-border)]"></div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <Button variant="ghost" onClick={() => signIn('google')} className="flex items-center justify-center gap-2 border border-white/10">
+                  <Button variant="ghost" onClick={() => signIn('google')} className="flex items-center justify-center gap-2 border border-[var(--glass-border)]">
                     <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
-                    <span className="text-sm font-medium text-gray-200">Google</span>
+                    <span className="text-sm font-medium text-foreground/90">Google</span>
                   </Button>
-                  <Button variant="ghost" onClick={() => signIn('microsoft')} className="flex items-center justify-center gap-2 border border-white/10">
+                  <Button variant="ghost" onClick={() => signIn('microsoft')} className="flex items-center justify-center gap-2 border border-[var(--glass-border)]">
                     <img src="https://www.svgrepo.com/show/475667/microsoft-color.svg" alt="Microsoft" className="w-5 h-5" />
-                    <span className="text-sm font-medium text-gray-200">Microsoft</span>
+                    <span className="text-sm font-medium text-foreground/90">Microsoft</span>
                   </Button>
                 </div>
               </div>
             </Card>
           ) : status === "loading" ? (
-            <div className="text-center text-gray-400 py-12">Verificando sesión...</div>
+            <div className="text-center text-muted py-12">Verificando sesión...</div>
           ) : (
             <Card className="max-w-3xl mx-auto p-6 flex items-center justify-between mb-12 animate-in fade-in duration-500 border-l-4 border-accent shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
               <div className="flex items-center gap-4">
@@ -183,8 +185,8 @@ export default function RolesPage() {
                   <UserCheck className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white">Sesión Iniciada</h3>
-                  <p className="text-sm text-gray-400">Autenticado como {session?.user?.email}</p>
+                  <h3 className="text-lg font-bold text-foreground">Sesión Iniciada</h3>
+                  <p className="text-sm text-muted">Autenticado como {session?.user?.email}</p>
                 </div>
               </div>
               <Button 
@@ -203,7 +205,7 @@ export default function RolesPage() {
           onClick={() => setActiveTab("roles")}
           className="rounded-full px-6"
         >
-          Catálogo de Perfiles
+          Catálogo de perfiles
         </Button>
         <Button 
           variant={activeTab === 'arquitectura' ? 'primary' : 'ghost'}
@@ -211,7 +213,7 @@ export default function RolesPage() {
           className="rounded-full px-6 flex items-center gap-2"
         >
           <Database className="w-4 h-4" />
-          Modelo Relacional
+          Modelo relacional
         </Button>
       </div>
 
@@ -225,10 +227,10 @@ export default function RolesPage() {
                 </div>
               </div>
               <h3 className="text-xl font-semibold mb-2">{role.title}</h3>
-              <div className="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-muted mb-4">
+              <div className="inline-block px-3 py-1 rounded-full bg-foreground/5 border border-[var(--glass-border)] text-xs font-mono text-muted mb-4">
                 Contexto: {role.scope}
               </div>
-              <p className="text-sm text-gray-400 leading-relaxed">
+              <p className="text-sm text-muted leading-relaxed">
                 {role.description}
               </p>
             </Card>
@@ -245,35 +247,35 @@ export default function RolesPage() {
               <Database className="w-6 h-6 text-accent" />
               Efecto Cascada y Relaciones
             </h2>
-            <p className="text-gray-300 mb-6 leading-relaxed">
+            <p className="text-foreground/80 mb-6 leading-relaxed">
               El diseño relacional garantiza que cualquier cambio estructural a nivel superior (Centro) se propague automáticamente hacia abajo. Esto se logra mediante llaves foráneas (`Foreign Keys`) estrictas.
             </p>
 
             <div className="space-y-6">
               
-              <div className="flex items-center gap-4 bg-white/5 p-4 rounded-xl border border-white/10">
+              <div className="flex items-center gap-4 bg-foreground/5 p-4 rounded-xl border border-[var(--glass-border)]">
                 <div className="p-3 bg-blue-500/20 text-blue-400 rounded-lg"><Building2 className="w-6 h-6" /></div>
                 <div className="flex-1">
                   <h4 className="font-semibold text-blue-300">Nivel Centro (COFOTAP modifica Calendario)</h4>
-                  <p className="text-sm text-gray-400">Si se altera el calendario escolar, los días lectivos se recalculan automáticamente en la tabla <code className="text-accent bg-black/30 px-1 rounded">AcademicCalendar</code> asociada al Centro.</p>
+                  <p className="text-sm text-muted">Si se altera el calendario escolar, los días lectivos se recalculan automáticamente en la tabla <code className="text-accent bg-foreground/15 px-1 rounded">AcademicCalendar</code> asociada al Centro.</p>
                 </div>
-                <ArrowRight className="w-6 h-6 text-gray-500 hidden md:block" />
+                <ArrowRight className="w-6 h-6 text-muted hidden md:block" />
               </div>
 
-              <div className="flex items-center gap-4 bg-white/5 p-4 rounded-xl border border-white/10 ml-0 md:ml-8">
+              <div className="flex items-center gap-4 bg-foreground/5 p-4 rounded-xl border border-[var(--glass-border)] ml-0 md:ml-8">
                 <div className="p-3 bg-indigo-500/20 text-indigo-400 rounded-lg"><BookOpen className="w-6 h-6" /></div>
                 <div className="flex-1">
                   <h4 className="font-semibold text-indigo-300">Nivel Módulo (Profesorado)</h4>
-                  <p className="text-sm text-gray-400">El Cuaderno Digital Docente (<code className="text-accent bg-black/30 px-1 rounded">Module</code>) recalcula instantáneamente las horas disponibles para impartir los RAs, ya que su cálculo depende del calendario del centro.</p>
+                  <p className="text-sm text-muted">El Cuaderno Digital Docente (<code className="text-accent bg-foreground/15 px-1 rounded">Module</code>) recalcula instantáneamente las horas disponibles para impartir los RAs, ya que su cálculo depende del calendario del centro.</p>
                 </div>
-                <ArrowRight className="w-6 h-6 text-gray-500 hidden md:block" />
+                <ArrowRight className="w-6 h-6 text-muted hidden md:block" />
               </div>
 
-              <div className="flex items-center gap-4 bg-white/5 p-4 rounded-xl border border-white/10 ml-0 md:ml-16">
+              <div className="flex items-center gap-4 bg-foreground/5 p-4 rounded-xl border border-[var(--glass-border)] ml-0 md:ml-16">
                 <div className="p-3 bg-green-500/20 text-green-400 rounded-lg"><GraduationCap className="w-6 h-6" /></div>
                 <div className="flex-1">
                   <h4 className="font-semibold text-green-300">Nivel Alumnado (Estudiante matriculado)</h4>
-                  <p className="text-sm text-gray-400">Sus fechas de evaluación y períodos de FEOE (<code className="text-accent bg-black/30 px-1 rounded">Enrollment</code>) se ajustan para reflejar los nuevos festivos, sin que el Tutor Dual tenga que reconfigurar uno por uno.</p>
+                  <p className="text-sm text-muted">Sus fechas de evaluación y períodos de FEOE (<code className="text-accent bg-foreground/15 px-1 rounded">Enrollment</code>) se ajustan para reflejar los nuevos festivos, sin que el Tutor Dual tenga que reconfigurar uno por uno.</p>
                 </div>
               </div>
 
@@ -284,7 +286,7 @@ export default function RolesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card className="p-6 border-l-4 border-l-accent">
               <h3 className="text-lg font-bold mb-4">Entidades Clave en BBDD (SQLAlchemy)</h3>
-              <ul className="space-y-3 text-sm text-gray-300">
+              <ul className="space-y-3 text-sm text-foreground/80">
                 <li className="flex justify-between border-b border-white/5 pb-2">
                   <span className="font-mono text-accent">CenterStaff</span>
                   <span>Enlaza User ↔ Center (Roles COFOTAP)</span>
@@ -306,10 +308,10 @@ export default function RolesPage() {
 
             <Card className="p-6 bg-gradient-to-br from-accent/5 to-transparent border border-accent/20">
               <h3 className="text-lg font-bold mb-4 text-accent">Integración de Alumnado</h3>
-              <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-                El Alumno requiere su propia tabla o flag en la tabla `User` (ej: <code className="bg-black/30 px-1 text-white">is_student=True</code>). 
+              <p className="text-sm text-foreground/80 mb-4 leading-relaxed">
+                El Alumno requiere su propia tabla o flag en la tabla `User` (ej: <code className="bg-foreground/15 px-1 text-foreground">is_student=True</code>). 
               </p>
-              <p className="text-sm text-gray-300 leading-relaxed">
+              <p className="text-sm text-foreground/80 leading-relaxed">
                 A través de la entidad <strong>Matrícula (Enrollment)</strong>, un alumno se vincula a N Módulos. Esto le da acceso a su propio dashboard ("Mi Cuaderno") donde ve el progreso de sus RA, su horario, y sus anexos de FP Dual, todo sincronizado con lo que introducen sus N profesores.
               </p>
             </Card>

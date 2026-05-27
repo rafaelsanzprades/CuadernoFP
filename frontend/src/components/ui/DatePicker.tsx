@@ -88,25 +88,25 @@ export default function DatePicker({ value, onChange, label, className, placehol
   return (
     <div className={`relative ${className || ""}`} ref={ref}>
       {label && (
-        <label className="block text-sm font-semibold text-gray-400 mb-1">{label}</label>
+        <label className="block text-sm font-semibold text-muted mb-1">{label}</label>
       )}
       <button
         type="button"
         onClick={() => setOpen(o => !o)}
-        className={`w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-white text-sm flex items-center hover:border-[#14a085] focus:outline-none focus:border-[#14a085] transition-colors group ${className?.includes('text-center') ? 'justify-center gap-2' : 'justify-between text-left'}`}
+        className={`w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground text-sm flex items-center hover:border-[#14a085] focus:outline-none focus:border-[#14a085] transition-colors group ${className?.includes('text-center') ? 'justify-center gap-2' : 'justify-between text-left'}`}
       >
-        <span className={selectedDate ? "text-white" : "text-gray-500"}>{displayValue}</span>
-        <span className="text-gray-400 group-hover:text-[#14a085] transition-colors">📅</span>
+        <span className={selectedDate ? "text-foreground" : "text-muted"}>{displayValue}</span>
+        <span className="text-muted group-hover:text-[#14a085] transition-colors">📅</span>
       </button>
 
       {open && (
-        <div className="absolute z-50 mt-1 bg-[#0d1726] border border-white/10 rounded-xl shadow-2xl shadow-black/70 p-3 w-60">
+        <div className="absolute z-50 mt-1 bg-[#0d1726] border border-[var(--glass-border)] rounded-xl shadow-2xl shadow-black/70 p-3 w-60">
           {/* Nav: prev / mes+año / next */}
           <div className="flex items-center justify-between mb-2">
             <button
               type="button"
               onClick={prevMonth}
-              className="text-gray-400 hover:text-white w-7 h-7 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors text-lg font-bold"
+              className="text-muted hover:text-foreground w-7 h-7 flex items-center justify-center rounded-lg hover:bg-foreground/10 transition-colors text-lg font-bold"
             >
               ‹
             </button>
@@ -114,7 +114,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
               <select
                 value={viewMonth}
                 onChange={e => setViewMonth(Number(e.target.value))}
-                className="bg-white/10 border border-white/10 rounded px-1 py-0.5 text-white text-xs focus:outline-none cursor-pointer"
+                className="bg-foreground/10 border border-[var(--glass-border)] rounded px-1 py-0.5 text-foreground text-xs focus:outline-none cursor-pointer"
               >
                 {MONTHS.map((m, i) => (
                   <option key={i} value={i} className="bg-[#0d1726]">{m}</option>
@@ -123,7 +123,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
               <select
                 value={viewYear}
                 onChange={e => setViewYear(Number(e.target.value))}
-                className="bg-white/10 border border-white/10 rounded px-1 py-0.5 text-white text-xs focus:outline-none cursor-pointer"
+                className="bg-foreground/10 border border-[var(--glass-border)] rounded px-1 py-0.5 text-foreground text-xs focus:outline-none cursor-pointer"
               >
                 {years.map(y => (
                   <option key={y} value={y} className="bg-[#0d1726]">{y}</option>
@@ -133,7 +133,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
             <button
               type="button"
               onClick={nextMonth}
-              className="text-gray-400 hover:text-white w-7 h-7 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors text-lg font-bold"
+              className="text-muted hover:text-foreground w-7 h-7 flex items-center justify-center rounded-lg hover:bg-foreground/10 transition-colors text-lg font-bold"
             >
               ›
             </button>
@@ -142,7 +142,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
           {/* Cabecera días */}
           <div className="grid grid-cols-7 mb-1">
             {DAYS_HEADER.map(d => (
-              <div key={d} className="text-center text-[0.6rem] text-gray-500 font-bold py-1">
+              <div key={d} className="text-center text-[0.6rem] text-muted font-bold py-1">
                 {d}
               </div>
             ))}
@@ -160,10 +160,10 @@ export default function DatePicker({ value, onChange, label, className, placehol
                   "aspect-square rounded-lg text-xs font-medium transition-all duration-100 flex items-center justify-center",
                   !day ? "invisible pointer-events-none" : "",
                   isSelected(day)
-                    ? "bg-[#14a085] text-white font-bold shadow-lg shadow-[#14a085]/40"
+                    ? "bg-[#14a085] text-foreground font-bold shadow-lg shadow-[#14a085]/40"
                     : isTodayCell(day)
                     ? "border border-[#14a085]/70 text-[#14a085] font-semibold hover:bg-[#14a085]/20"
-                    : "text-gray-300 hover:bg-white/10 hover:text-white"
+                    : "text-foreground/80 hover:bg-foreground/10 hover:text-foreground"
                 ].join(" ")}
               >
                 {day}
@@ -172,7 +172,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
           </div>
 
           {/* Hoy */}
-          <div className="mt-2 pt-2 border-t border-white/10 flex justify-between items-center">
+          <div className="mt-2 pt-2 border-t border-[var(--glass-border)] flex justify-between items-center">
             <button
               type="button"
               onClick={() => {
@@ -188,7 +188,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
               <button
                 type="button"
                 onClick={() => { onChange(""); setOpen(false); }}
-                className="text-xs text-gray-500 hover:text-red-400 transition-colors"
+                className="text-xs text-muted hover:text-red-400 transition-colors"
               >
                 Borrar
               </button>

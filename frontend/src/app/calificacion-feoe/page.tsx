@@ -72,7 +72,7 @@ export default function CalificacionFEOEPage() {
           <main className="flex-1 p-8 content-area">
             <Card className="p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Curso o Módulo seleccionado</h2>
-              <p className="text-gray-400">Por favor, ve a la Gestión de archivos y asegúrate de cargar ambos.</p>
+              <p className="text-muted">Por favor, ve a la sección de Datos y asegúrate de cargar ambos.</p>
             </Card>
           </main>
         </div>
@@ -121,29 +121,29 @@ export default function CalificacionFEOEPage() {
         
         <main className="flex-1 p-8 content-area space-y-8">
           <div className="mb-8">
-            <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
+            <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
               🏢 Calificación FEOE
             </h1>
-            <p className="text-gray-400 mt-2">Seguimiento y evaluación del periodo de Formación en Empresa u Organismo Equiparado (FEOE).</p>
+            <p className="text-muted mt-2">Seguimiento y evaluación del periodo de Formación en Empresa u Organismo Equiparado (FEOE).</p>
           </div>
 
           {ras_dualizados.length === 0 ? (
             <Card className="p-6 border-l-4 border-l-yellow-500">
               <h3 className="text-xl font-bold text-yellow-400 mb-2">No hay RAs Dualizados</h3>
-              <p className="text-gray-300">Ve a la pestaña Módulo didáctico y marca al menos un RA como 'Dualizado' (FEOE).</p>
+              <p className="text-foreground/80">Ve a la pestaña Módulo didáctico y marca al menos un RA como 'Dualizado' (FEOE).</p>
             </Card>
           ) : df_evaluable.length === 0 ? (
             <Card className="p-6 border-l-4 border-l-yellow-500">
               <h3 className="text-xl font-bold text-yellow-400 mb-2">No hay alumnado</h3>
-              <p className="text-gray-300">Asegúrate de añadir alumnos en la Gestión de Matrícula.</p>
+              <p className="text-foreground/80">Asegúrate de añadir alumnos en la Gestión de Matrícula.</p>
             </Card>
           ) : (
             <Card className="p-6 border-t-4 border-t-purple-500">
               <div className="mb-6 flex gap-6">
-                <div className="text-sm text-gray-300 bg-black/20 p-4 rounded-lg flex-1 border border-white/5">
+                <div className="text-sm text-foreground/80 bg-foreground/10 p-4 rounded-lg flex-1 border border-white/5">
                   <h4 className="font-bold text-purple-400 mb-2">Leyenda de Calificaciones</h4>
                   <ul className="space-y-1">
-                    <li><span className="font-mono text-gray-500 w-6 inline-block">0</span> Sin evaluar</li>
+                    <li><span className="font-mono text-muted w-6 inline-block">0</span> Sin evaluar</li>
                     <li><span className="font-mono text-red-400 w-6 inline-block">1</span> No Superado</li>
                     <li><span className="font-mono text-yellow-500 w-6 inline-block">2</span> Superado (Suficiente)</li>
                     <li><span className="font-mono text-blue-400 w-6 inline-block">3</span> Bien / Notable</li>
@@ -155,13 +155,13 @@ export default function CalificacionFEOEPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
                   <thead>
-                    <tr className="border-b border-white/10 text-gray-400 bg-background">
-                      <th className="p-3 sticky left-0 z-10 border-r border-white/10 bg-background w-16">ID</th>
-                      <th className="p-3 sticky left-[64px] z-10 border-r border-white/10 bg-background min-w-[250px]">Alumno</th>
+                    <tr className="border-b border-[var(--glass-border)] text-muted bg-background">
+                      <th className="p-3 sticky left-0 z-10 border-r border-[var(--glass-border)] bg-background w-16">ID</th>
+                      <th className="p-3 sticky left-[64px] z-10 border-r border-[var(--glass-border)] bg-background min-w-[250px]">Alumno</th>
                       {ras_dualizados.map((ra: string) => (
-                        <th key={ra} className="p-3 text-center border-r border-white/10 w-24">
+                        <th key={ra} className="p-3 text-center border-r border-[var(--glass-border)] w-24">
                           <div className="font-bold text-purple-400">{ra}</div>
-                          <div className="text-xs text-gray-500">(1-4)</div>
+                          <div className="text-xs text-muted">(1-4)</div>
                         </th>
                       ))}
                     </tr>
@@ -172,23 +172,23 @@ export default function CalificacionFEOEPage() {
                       const fRow = df_feoe.find((f: any) => f.ID === al_id) || {};
 
                       return (
-                        <tr key={al_id} className="border-b border-white/5 hover:bg-white/5">
-                          <td className="p-3 font-mono text-xs sticky left-0 z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">
+                        <tr key={al_id} className="border-b border-white/5 hover:bg-foreground/5">
+                          <td className="p-3 font-mono text-xs sticky left-0 z-10 border-r border-[var(--glass-border)] bg-background group-hover:bg-[#111827]">
                             {al_id}
                           </td>
-                          <td className="p-3 font-semibold sticky left-[64px] z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">
+                          <td className="p-3 font-semibold sticky left-[64px] z-10 border-r border-[var(--glass-border)] bg-background group-hover:bg-[#111827]">
                             {al.Apellidos}, {al.Nombre}
                           </td>
                           {ras_dualizados.map((ra: string) => {
                             const val = Number(fRow[ra]) || 0;
                             return (
-                              <td key={ra} className="p-3 border-r border-white/10 text-center">
+                              <td key={ra} className="p-3 border-r border-[var(--glass-border)] text-center">
                                 <input 
                                   type="number"
                                   min="0" max="4" step="1"
                                   value={val}
                                   onChange={(e) => handleUpdateFEOE(al_id, ra, Number(e.target.value) || 0)}
-                                  className="w-16 bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-purple-500 focus:outline-none text-center font-bold"
+                                  className="w-16 bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-purple-500 focus:outline-none text-center font-bold"
                                 />
                               </td>
                             );

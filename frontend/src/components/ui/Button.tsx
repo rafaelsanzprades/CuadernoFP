@@ -22,7 +22,7 @@ export function Button({ children, className = '', variant = 'primary', ...props
       variantStyle = "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/30";
       break;
     case 'ghost':
-      variantStyle = "bg-transparent shadow-none border-none hover:bg-white/5 text-gray-400 hover:text-white";
+      variantStyle = "bg-transparent shadow-none border-none hover:bg-foreground/5 text-muted hover:text-foreground";
       break;
   }
 

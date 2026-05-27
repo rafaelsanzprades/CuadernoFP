@@ -13,6 +13,14 @@ export default function MatriculaPage() {
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
 
+  const TABS = [
+    { id: "alumnado", label: "👥 Alumnado", cleanLabel: "Alumnado" },
+    { id: "empresas", label: "🏢 Empresas FEOE", cleanLabel: "Empresas FEOE" }
+  ];
+
+  const [activeTab, setActiveTab] = useState("alumnado");
+  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -68,7 +76,7 @@ export default function MatriculaPage() {
           <main className="flex-1 p-8 content-area">
             <Card className="p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Curso seleccionado</h2>
-              <p className="text-gray-400">Por favor, ve a la Gestión de archivos y selecciona un Curso Activo.</p>
+              <p className="text-muted">Por favor, ve a la sección de Datos y selecciona un Curso Activo.</p>
             </Card>
           </main>
         </div>
@@ -129,148 +137,168 @@ export default function MatriculaPage() {
     <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header />
+        <Header breadcrumbSuffix={activeTabCleanLabel} />
         
         <main className="flex-1 p-8 content-area space-y-8">
           <div className="mb-8">
-            <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
-              👥 Matrícula alumnado
+            <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
+              👥 Matrícula
             </h1>
-            <p className="text-gray-400 mt-2">Listado oficial de estudiantes matriculados y sus datos básicos.</p>
+            <p className="text-muted mt-2">Listado oficial de estudiantes matriculados y empresas de formación.</p>
           </div>
 
+          <div className="flex border-b border-[var(--glass-border)] mb-8 overflow-x-auto scrollbar-hide">
+            {TABS.map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-6 py-4 font-bold text-sm border-b-2 transition-colors whitespace-nowrap ${activeTab === tab.id ? 'border-accent text-accent' : 'border-transparent text-muted hover:text-foreground'}`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
 
-          <Card className="p-6 border-t-4 border-t-blue-500">
-            <div className="flex justify-between items-end mb-6">
-              <h2 className="text-xl font-bold flex items-center gap-2">
-                <span>Lista oficial</span>
-                <span className="text-sm font-normal text-gray-400 bg-white/5 px-3 py-1 rounded-full">{df_al.length} alumnos</span>
-              </h2>
-              {n_menores > 0 && (
-                <span className="text-pink-400 text-sm font-semibold">🌸 {n_menores} alumno(s) menor(es) de 18 años</span>
-              )}
-            </div>
-            
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm whitespace-nowrap border-collapse">
-                <thead>
-                  <tr className="border-b border-white/10 text-gray-400 bg-background">
-                    <th className="p-2 sticky left-0 z-10 border-r border-white/10 bg-background w-16">ID</th>
-                    <th className="p-2 sticky left-[60px] z-10 border-r border-white/10 bg-background w-12 text-center">🌸</th>
-                    <th className="p-2 w-32">Estado</th>
-                    <th className="p-2 w-48">Apellidos</th>
-                    <th className="p-2 w-48">Nombre</th>
-                    <th className="p-2 w-20">Edad</th>
-                    <th className="p-2 w-32">Nacimiento</th>
-                    <th className="p-2 w-16 text-center">Repite</th>
-                    <th className="p-2 w-64">Email</th>
-                    <th className="p-2 w-32">Móvil</th>
-                    <th className="p-2 w-10"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {df_al.map((al: any, idx: number) => {
-                    const isMenor = Number(al.Edad) > 0 && Number(al.Edad) < 18;
-                    return (
-                      <tr key={idx} className="border-b border-white/5 hover:bg-white/5">
-                        <td className="p-2 font-mono text-xs sticky left-0 z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">
-                          {al.ID}
-                        </td>
-                        <td className="p-2 text-center sticky left-[60px] z-10 border-r border-white/10 bg-background group-hover:bg-[#111827]">
-                          {isMenor ? "🌸" : ""}
-                        </td>
-                        <td className="p-2 pr-2">
-                          <select 
-                            value={al.Estado || "Alta"}
-                            onChange={(e) => handleUpdateAlumno(idx, "Estado", e.target.value)}
-                            className={`w-full bg-black/30 border border-white/10 rounded px-2 py-1 focus:outline-none appearance-none font-semibold ${al.Estado === 'Baja' ? 'text-red-400' : 'text-green-400'}`}
-                          >
-                            <option value="Alta">Alta</option>
-                            <option value="Baja">Baja</option>
-                          </select>
-                        </td>
-                        <td className="p-2 pr-2">
-                          <input 
-                            type="text"
-                            value={al.Apellidos || ""}
-                            onChange={(e) => handleUpdateAlumno(idx, "Apellidos", e.target.value)}
-                            className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-blue-500 focus:outline-none"
-                          />
-                        </td>
-                        <td className="p-2 pr-2">
-                          <input 
-                            type="text"
-                            value={al.Nombre || ""}
-                            onChange={(e) => handleUpdateAlumno(idx, "Nombre", e.target.value)}
-                            className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-blue-500 focus:outline-none"
-                          />
-                        </td>
-                        <td className="p-2 pr-2">
-                          <input 
-                            type="number"
-                            value={al.Edad || ""}
-                            onChange={(e) => handleUpdateAlumno(idx, "Edad", e.target.value)}
-                            className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-blue-500 focus:outline-none"
-                          />
-                        </td>
-                        <td className="p-2 pr-2">
-                          <input 
-                            type="text"
-                            value={al.Nacimiento || ""}
-                            onChange={(e) => handleUpdateAlumno(idx, "Nacimiento", e.target.value)}
-                            placeholder="DD/MM/YYYY"
-                            className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-blue-500 focus:outline-none text-sm"
-                          />
-                        </td>
-                        <td className="p-2 text-center">
-                          <input 
-                            type="checkbox"
-                            checked={al.Repite === true || al.Repite === "true"}
-                            onChange={(e) => handleUpdateAlumno(idx, "Repite", e.target.checked)}
-                            className="accent-blue-500"
-                          />
-                        </td>
-                        <td className="p-2 pr-2">
-                          <input 
-                            type="email"
-                            value={al.email || ""}
-                            onChange={(e) => handleUpdateAlumno(idx, "email", e.target.value)}
-                            className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-blue-500 focus:outline-none"
-                          />
-                        </td>
-                        <td className="p-2 pr-2">
-                          <input 
-                            type="text"
-                            value={al.Movil || ""}
-                            onChange={(e) => handleUpdateAlumno(idx, "Movil", e.target.value)}
-                            className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-blue-500 focus:outline-none"
-                          />
-                        </td>
-                        <td className="p-2 text-center">
-                          <button
-                            onClick={() => handleRemoveAlumno(idx)}
-                            className="text-red-400 hover:text-red-300 font-bold"
-                            title="Eliminar Alumno"
-                          >
-                            ×
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-              <div className="mt-4">
-                <Button 
-                  variant="ghost"
-                  onClick={handleAddAlumno}
-                  className="text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-1"
-                >
-                  <span>+</span> Añadir Alumno
-                </Button>
+          {activeTab === "alumnado" && (
+            <Card className="p-6 border-t-4 border-t-blue-500">
+              <div className="flex justify-between items-end mb-6">
+                <h2 className="text-xl font-bold flex items-center gap-2">
+                  <span>Lista oficial</span>
+                  <span className="text-sm font-normal text-muted bg-foreground/5 px-3 py-1 rounded-full">{df_al.length} alumnos</span>
+                </h2>
+                {n_menores > 0 && (
+                  <span className="text-pink-400 text-sm font-semibold">🌸 {n_menores} alumno(s) menor(es) de 18 años</span>
+                )}
               </div>
+              
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-sm whitespace-nowrap border-collapse">
+                  <thead>
+                    <tr className="border-b border-[var(--glass-border)] text-muted bg-background">
+                      <th className="p-2 sticky left-0 z-10 border-r border-[var(--glass-border)] bg-background w-16">ID</th>
+                      <th className="p-2 sticky left-[60px] z-10 border-r border-[var(--glass-border)] bg-background w-12 text-center">🌸</th>
+                      <th className="p-2 w-32">Estado</th>
+                      <th className="p-2 w-48">Apellidos</th>
+                      <th className="p-2 w-48">Nombre</th>
+                      <th className="p-2 w-20">Edad</th>
+                      <th className="p-2 w-32">Nacimiento</th>
+                      <th className="p-2 w-16 text-center">Repite</th>
+                      <th className="p-2 w-64">Email</th>
+                      <th className="p-2 w-32">Móvil</th>
+                      <th className="p-2 w-10"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {df_al.map((al: any, idx: number) => {
+                      const isMenor = Number(al.Edad) > 0 && Number(al.Edad) < 18;
+                      return (
+                        <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5">
+                          <td className="p-2 font-mono text-xs sticky left-0 z-10 border-r border-[var(--glass-border)] bg-background group-hover:bg-[#111827]">
+                            {al.ID}
+                          </td>
+                          <td className="p-2 text-center sticky left-[60px] z-10 border-r border-[var(--glass-border)] bg-background group-hover:bg-[#111827]">
+                            {isMenor ? "🌸" : ""}
+                          </td>
+                          <td className="p-2 pr-2">
+                            <select 
+                              value={al.Estado || "Alta"}
+                              onChange={(e) => handleUpdateAlumno(idx, "Estado", e.target.value)}
+                              className={`w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:outline-none appearance-none font-semibold ${al.Estado === 'Baja' ? 'text-red-400' : 'text-green-400'}`}
+                            >
+                              <option value="Alta">Alta</option>
+                              <option value="Baja">Baja</option>
+                            </select>
+                          </td>
+                          <td className="p-2 pr-2">
+                            <input 
+                              type="text"
+                              value={al.Apellidos || ""}
+                              onChange={(e) => handleUpdateAlumno(idx, "Apellidos", e.target.value)}
+                              className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-blue-500 focus:outline-none"
+                            />
+                          </td>
+                          <td className="p-2 pr-2">
+                            <input 
+                              type="text"
+                              value={al.Nombre || ""}
+                              onChange={(e) => handleUpdateAlumno(idx, "Nombre", e.target.value)}
+                              className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-blue-500 focus:outline-none"
+                            />
+                          </td>
+                          <td className="p-2 pr-2">
+                            <input 
+                              type="number"
+                              value={al.Edad || ""}
+                              onChange={(e) => handleUpdateAlumno(idx, "Edad", e.target.value)}
+                              className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-blue-500 focus:outline-none"
+                            />
+                          </td>
+                          <td className="p-2 pr-2">
+                            <input 
+                              type="text"
+                              value={al.Nacimiento || ""}
+                              onChange={(e) => handleUpdateAlumno(idx, "Nacimiento", e.target.value)}
+                              placeholder="DD/MM/YYYY"
+                              className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-blue-500 focus:outline-none text-sm"
+                            />
+                          </td>
+                          <td className="p-2 text-center">
+                            <input 
+                              type="checkbox"
+                              checked={al.Repite === true || al.Repite === "true"}
+                              onChange={(e) => handleUpdateAlumno(idx, "Repite", e.target.checked)}
+                              className="accent-blue-500"
+                            />
+                          </td>
+                          <td className="p-2 pr-2">
+                            <input 
+                              type="email"
+                              value={al.email || ""}
+                              onChange={(e) => handleUpdateAlumno(idx, "email", e.target.value)}
+                              className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-blue-500 focus:outline-none"
+                            />
+                          </td>
+                          <td className="p-2 pr-2">
+                            <input 
+                              type="text"
+                              value={al.Movil || ""}
+                              onChange={(e) => handleUpdateAlumno(idx, "Movil", e.target.value)}
+                              className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-blue-500 focus:outline-none"
+                            />
+                          </td>
+                          <td className="p-2 text-center">
+                            <button
+                              onClick={() => handleRemoveAlumno(idx)}
+                              className="text-red-400 hover:text-red-300 font-bold"
+                              title="Eliminar Alumno"
+                            >
+                              ×
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+                <div className="mt-4">
+                  <Button 
+                    variant="ghost"
+                    onClick={handleAddAlumno}
+                    className="text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-1"
+                  >
+                    <span>+</span> Añadir Alumno
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          )}
+
+          {activeTab === "empresas" && (
+            <div className="p-12 text-center text-muted border border-[var(--glass-border)] rounded-xl bg-foreground/5">
+              <h2 className="text-2xl font-bold mb-4">Empresas FEOE</h2>
+              <p>Esta sección estará disponible próximamente para gestionar la asignación de empresas y tutores duales.</p>
             </div>
-          </Card>
+          )}
 
         </main>
       </div>

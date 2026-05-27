@@ -77,7 +77,7 @@ export default function DescargasPage() {
           <main className="flex-1 p-8 content-area">
             <Card className="p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Curso o Módulo seleccionado</h2>
-              <p className="text-gray-400">Por favor, ve a la Gestión de archivos y asegúrate de cargar ambos.</p>
+              <p className="text-muted">Por favor, ve a la sección de Datos y asegúrate de cargar ambos.</p>
             </Card>
           </main>
         </div>
@@ -92,7 +92,7 @@ export default function DescargasPage() {
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
           <main className="flex-1 flex items-center justify-center content-area">
-            <div className="text-xl text-gray-400 animate-pulse flex items-center gap-3">
+            <div className="text-xl text-muted animate-pulse flex items-center gap-3">
               <span className="text-2xl">⏳</span> Cargando datos del módulo y curso...
             </div>
           </main>
@@ -113,20 +113,20 @@ export default function DescargasPage() {
 
         <main className="flex-1 p-8 content-area space-y-8">
           <div>
-            <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
+            <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
               📥 Descargas PDF
             </h1>
-            <p className="text-gray-400 mt-2">Genera y descarga los documentos oficiales de tu cuaderno digital en formato PDF.</p>
+            <p className="text-muted mt-2">Genera y descarga los documentos oficiales de tu cuaderno digital en formato PDF.</p>
           </div>
 
           <Card className="p-6 border-t-4 border-t-purple-500">
             <h2 className="text-2xl font-bold mb-1">📅 Gestión temporal global</h2>
-            <p className="text-sm text-gray-400 mb-6">Planificación y seguimiento mensual</p>
+            <p className="text-sm text-muted mb-6">Planificación y seguimiento mensual</p>
             <div className="grid grid-cols-3 gap-6">
-              <div className="bg-black/20 border border-white/10 rounded-xl p-6 flex flex-col justify-between">
+              <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                 <div>
                   <h3 className="text-lg font-bold mb-2">📆 Calendario académico</h3>
-                  <p className="text-sm text-gray-400 mb-6">Vista global del curso con fechas, sesiones y eventos.</p>
+                  <p className="text-sm text-muted mb-6">Vista global del curso con fechas, sesiones y eventos.</p>
                 </div>
                 <Button
                   onClick={() => handleDownload('calendario')}
@@ -137,10 +137,10 @@ export default function DescargasPage() {
                 </Button>
               </div>
 
-              <div className="bg-black/20 border border-white/10 rounded-xl p-6 flex flex-col justify-between">
+              <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                 <div>
                   <h3 className="text-lg font-bold mb-2">📊 Planificación mensual</h3>
-                  <p className="text-sm text-gray-400 mb-6">Horas previstas frente a impartidas por UD y mes.</p>
+                  <p className="text-sm text-muted mb-6">Horas previstas frente a impartidas por UD y mes.</p>
                 </div>
                 <Button
                   onClick={() => handleDownload('planificacion')}
@@ -156,12 +156,12 @@ export default function DescargasPage() {
 
           <Card className="p-6 border-t-4 border-t-emerald-500">
             <h2 className="text-2xl font-bold mb-1">📝 Clases mensual - por UD</h2>
-            <p className="text-sm text-gray-400 mb-6">Registro detallado de clases impartidas y secuenciación por unidad didáctica.</p>
+            <p className="text-sm text-muted mb-6">Registro detallado de clases impartidas y secuenciación por unidad didáctica.</p>
             <div className="grid grid-cols-3 gap-6">
-              <div className="bg-black/20 border border-white/10 rounded-xl p-6 flex flex-col justify-between">
+              <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                 <div>
                   <h3 className="text-lg font-bold mb-2">📝 Clases mensual</h3>
-                  <p className="text-sm text-gray-400 mb-6">Registro detallado de la planificación del día a día.</p>
+                  <p className="text-sm text-muted mb-6">Registro detallado de la planificación del día a día.</p>
                 </div>
                 <Button
                   onClick={() => handleDownload('seguimiento')}
@@ -172,10 +172,10 @@ export default function DescargasPage() {
                 </Button>
               </div>
 
-              <div className="bg-black/20 border border-white/10 rounded-xl p-6 flex flex-col justify-between">
+              <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                 <div>
                   <h3 className="text-lg font-bold mb-2">📚 Clases por UD</h3>
-                  <p className="text-sm text-gray-400 mb-6">Secuenciación de sesiones de cada Unidad Didáctica.</p>
+                  <p className="text-sm text-muted mb-6">Secuenciación de sesiones de cada Unidad Didáctica.</p>
                 </div>
                 <Button
                   onClick={() => handleDownload('clases_ud')}
@@ -190,12 +190,12 @@ export default function DescargasPage() {
 
           <Card className="p-6 border-t-4 border-t-accent">
             <h2 className="text-2xl font-bold mb-1">⚙️ Gestión del aprendizaje</h2>
-            <p className="text-sm text-gray-400 mb-6">Matrices y programación del módulo</p>
+            <p className="text-sm text-muted mb-6">Matrices y programación del módulo</p>
             <div className="grid grid-cols-3 gap-6">
-              <div className="bg-black/20 border border-white/10 rounded-xl p-6 flex flex-col justify-between">
+              <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                 <div>
                   <h3 className="text-lg font-bold mb-2">🧮 Matrices RA → UD</h3>
-                  <p className="text-sm text-gray-400 mb-6">Relación y ponderación entre RA y UD del módulo.</p>
+                  <p className="text-sm text-muted mb-6">Relación y ponderación entre RA y UD del módulo.</p>
                 </div>
                 <Button
                   onClick={() => handleDownload('matrices')}
@@ -211,7 +211,7 @@ export default function DescargasPage() {
           <Card className="p-6 border-t-4 border-t-blue-500">
             <h2 className="text-2xl font-bold mb-6">📊 Boletines de calificaciones grupales</h2>
             <div className="grid grid-cols-4 gap-6">
-              <div className="bg-black/20 border border-white/10 rounded-xl p-6 flex flex-col justify-between text-center">
+              <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center">
                 <div>
                   <h3 className="text-lg font-bold mb-2">👥 1er trimestre</h3>
                 </div>
@@ -225,7 +225,7 @@ export default function DescargasPage() {
                 </Button>
               </div>
 
-              <div className="bg-black/20 border border-white/10 rounded-xl p-6 flex flex-col justify-between text-center">
+              <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center">
                 <div>
                   <h3 className="text-lg font-bold mb-2">👥 2º trimestre</h3>
                 </div>
@@ -239,7 +239,7 @@ export default function DescargasPage() {
                 </Button>
               </div>
 
-              <div className="bg-black/20 border border-white/10 rounded-xl p-6 flex flex-col justify-between text-center">
+              <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center">
                 <div>
                   <h3 className="text-lg font-bold mb-2">👥 3er trimestre</h3>
                 </div>
@@ -253,7 +253,7 @@ export default function DescargasPage() {
                 </Button>
               </div>
 
-              <div className="bg-black/20 border border-white/10 rounded-xl p-6 flex flex-col justify-between text-center border-l-4 border-l-yellow-400">
+              <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center border-l-4 border-l-yellow-400">
                 <div>
                   <h3 className="text-lg font-bold mb-2">🎓 Eval. Final</h3>
                 </div>
@@ -272,11 +272,11 @@ export default function DescargasPage() {
           <Card className="p-6 border-t-4 border-t-blue-500">
             <h2 className="text-2xl font-bold mb-6">👤 Boletines individuales</h2>
             {activeAlumnos.length > 0 ? (
-              <div className="flex items-end gap-6 bg-black/20 border border-white/10 rounded-xl p-6">
+              <div className="flex items-end gap-6 bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6">
                 <div className="flex-1">
                   <h3 className="text-lg font-bold mb-2">📄 Boletín de alumnado</h3>
-                  <p className="text-sm text-gray-400 mb-4">Genera un boletín detallado de un alumnado específico.</p>
-                  <select id="alumno_select" className="w-full bg-black/50 border border-white/20 rounded-lg p-3 text-[var(--foreground)] focus:border-blue-500 focus:outline-none font-bold">
+                  <p className="text-sm text-muted mb-4">Genera un boletín detallado de un alumnado específico.</p>
+                  <select id="alumno_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-blue-500 focus:outline-none font-bold">
                     {activeAlumnos.map((al: Alumno) => (
                       <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre} ({al.ID})</option>
                     ))}
@@ -295,7 +295,7 @@ export default function DescargasPage() {
                 </Button>
               </div>
             ) : (
-              <p className="text-gray-400 italic">No hay estudiantes activos para generar boletines individuales.</p>
+              <p className="text-muted italic">No hay estudiantes activos para generar boletines individuales.</p>
             )}
           </Card>
 
@@ -316,7 +316,7 @@ export default function DescargasPage() {
                     a.download = previewFilename || "documento.pdf";
                     a.click();
                   }}
-                  className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors"
+                  className="bg-blue-600 hover:bg-blue-500 text-foreground px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors"
                 >
                   ⬇️ Descargar
                 </button>
@@ -325,7 +325,7 @@ export default function DescargasPage() {
                     setPreviewUrl(null);
                     setPreviewFilename(null);
                   }}
-                  className="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors"
+                  className="bg-red-600 hover:bg-red-500 text-foreground px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors"
                 >
                   ❌ Cerrar
                 </button>

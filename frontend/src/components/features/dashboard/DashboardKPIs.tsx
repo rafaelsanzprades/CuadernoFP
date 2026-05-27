@@ -42,8 +42,8 @@ export function DashboardKPIs({ cursoData, moduleData }: DashboardKPIsProps) {
           <Users className="w-8 h-8 text-blue-400" />
         </div>
         <div>
-          <p className="text-sm text-gray-400 font-semibold">Alumnado</p>
-          <p className="text-3xl font-bold text-white"><AnimatedCounter value={alumnosCount} /></p>
+          <p className="text-sm text-muted font-semibold">Alumnado</p>
+          <p className="text-3xl font-bold text-foreground"><AnimatedCounter value={alumnosCount} /></p>
         </div>
       </Card>
 
@@ -52,8 +52,8 @@ export function DashboardKPIs({ cursoData, moduleData }: DashboardKPIsProps) {
           <CheckCircle className="w-8 h-8 text-[#14a085]" />
         </div>
         <div>
-          <p className="text-sm text-gray-400 font-semibold">Progreso</p>
-          <p className="text-3xl font-bold text-white"><AnimatedCounter value={progreso} suffix="%" /></p>
+          <p className="text-sm text-muted font-semibold">Progreso</p>
+          <p className="text-3xl font-bold text-foreground"><AnimatedCounter value={progreso} suffix="%" /></p>
         </div>
       </Card>
 
@@ -62,9 +62,9 @@ export function DashboardKPIs({ cursoData, moduleData }: DashboardKPIsProps) {
           <Clock className="w-8 h-8 text-purple-400" />
         </div>
         <div>
-          <p className="text-sm text-gray-400 font-semibold">Impartidas</p>
-          <p className="text-3xl font-bold text-white">
-            <AnimatedCounter value={hImp} /> <span className="text-sm font-normal text-gray-400">h</span>
+          <p className="text-sm text-muted font-semibold">Impartidas</p>
+          <p className="text-3xl font-bold text-foreground">
+            <AnimatedCounter value={hImp} /> <span className="text-sm font-normal text-muted">h</span>
           </p>
         </div>
       </Card>
@@ -74,8 +74,8 @@ export function DashboardKPIs({ cursoData, moduleData }: DashboardKPIsProps) {
           <BarChart3 className="w-8 h-8 text-amber-400" />
         </div>
         <div>
-          <p className="text-sm text-gray-400 font-semibold">Tareas</p>
-          <p className="text-3xl font-bold text-white"><AnimatedCounter value={tareasCount} /></p>
+          <p className="text-sm text-muted font-semibold">Tareas</p>
+          <p className="text-3xl font-bold text-foreground"><AnimatedCounter value={tareasCount} /></p>
         </div>
       </Card>
     </div>

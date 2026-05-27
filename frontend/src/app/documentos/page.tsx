@@ -107,7 +107,7 @@ export default function DocumentosPage() {
     if (ext === 'pdf') return <FileText className="w-8 h-8 text-red-400" />;
     if (ext === 'xlsx' || ext === 'xls' || ext === 'csv') return <FileSpreadsheet className="w-8 h-8 text-green-400" />;
     if (ext === 'doc' || ext === 'docx') return <FileText className="w-8 h-8 text-blue-400" />;
-    return <File className="w-8 h-8 text-gray-400" />;
+    return <File className="w-8 h-8 text-muted" />;
   };
 
   // Generar breadcrumbs
@@ -134,25 +134,25 @@ export default function DocumentosPage() {
             {/* Cabecera */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
               <div>
-                <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3 mb-2">
+                <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3 mb-2">
                   <span className="text-3xl">📄</span> Visor documental
                 </h1>
-                <p className="text-gray-400">Carpetas y archivos de Boletines oficiales, modelos y plantillas.</p>
+                <p className="text-muted">Carpetas y archivos de Boletines oficiales, modelos y plantillas.</p>
               </div>
               <div className="flex items-center gap-4">
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
                   <input
                     type="text"
                     placeholder="Buscar archivo..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="bg-black/30 border border-white/10 text-white pl-10 pr-4 py-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all w-full md:w-64 placeholder-gray-500"
+                    className="bg-foreground/15 border border-[var(--glass-border)] text-foreground pl-10 pr-4 py-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all w-full md:w-64 placeholder-gray-500"
                   />
                 </div>
                 <button 
                   onClick={() => alert("Función de subida próximamente.")}
-                  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-2 px-5 rounded-xl shadow-lg shadow-blue-500/30 flex items-center gap-2 transition-all hover:scale-105 active:scale-95"
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-foreground font-bold py-2 px-5 rounded-xl shadow-lg shadow-blue-500/30 flex items-center gap-2 transition-all hover:scale-105 active:scale-95"
                 >
                   <UploadCloud className="w-5 h-5" />
                   <span>Subir</span>
@@ -161,11 +161,11 @@ export default function DocumentosPage() {
             </div>
 
             {/* Breadcrumb */}
-            <Card className="p-4 flex items-center gap-2 overflow-x-auto whitespace-nowrap bg-white/5 border border-white/10 rounded-xl shadow-lg">
+            <Card className="p-4 flex items-center gap-2 overflow-x-auto whitespace-nowrap bg-foreground/5 border border-[var(--glass-border)] rounded-xl shadow-lg">
               {currentPath && (
                 <button
                   onClick={handleGoUp}
-                  className="flex items-center justify-center p-2 mr-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                  className="flex items-center justify-center p-2 mr-2 text-muted hover:text-foreground hover:bg-foreground/10 rounded-lg transition-colors"
                   title="Subir un nivel"
                 >
                   <CornerLeftUp className="w-5 h-5" />
@@ -177,46 +177,46 @@ export default function DocumentosPage() {
                     onClick={() => handleNavigate(crumb.path)}
                     className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${idx === breadcrumbs.length - 1
                       ? 'bg-accent/20 text-accent border border-accent/30'
-                      : 'text-gray-400 hover:text-white hover:bg-white/10'
+                      : 'text-muted hover:text-foreground hover:bg-foreground/10'
                       }`}
                   >
                     {crumb.label}
                   </button>
                   {idx < breadcrumbs.length - 1 && (
-                    <ChevronRight className="w-4 h-4 text-gray-600 flex-shrink-0" />
+                    <ChevronRight className="w-4 h-4 text-muted/80 flex-shrink-0" />
                   )}
                 </React.Fragment>
               ))}
             </Card>
 
             {/* Listado de Archivos y Carpetas */}
-            <div className="bg-black/20 border border-white/10 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md">
+            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md">
               {loading ? (
-                <div className="p-12 text-center text-gray-400 flex flex-col items-center">
+                <div className="p-12 text-center text-muted flex flex-col items-center">
                   <div className="w-8 h-8 border-4 border-accent border-t-transparent rounded-full animate-spin mb-4"></div>
                   <p>Cargando documentos...</p>
                 </div>
               ) : error ? (
                 <div className="p-12 text-center">
                   <div className="text-red-400 mb-2">⚠️ Error</div>
-                  <p className="text-gray-300">{error}</p>
+                  <p className="text-foreground/80">{error}</p>
                 </div>
               ) : items.length === 0 ? (
-                <div className="p-16 text-center text-gray-500">
+                <div className="p-16 text-center text-muted">
                   <div className="text-4xl mb-4">📂</div>
                   <p className="text-lg">El directorio está vacío.</p>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-6">
                   {filteredItems.length === 0 ? (
-                    <div className="col-span-full p-12 text-center text-gray-500">
+                    <div className="col-span-full p-12 text-center text-muted">
                       <Search className="w-12 h-12 mx-auto mb-4 opacity-50" />
                       <p>No se encontraron resultados para "{searchQuery}"</p>
                     </div>
                   ) : filteredItems.map((item, idx) => (
                     <div
                       key={idx}
-                      className="group flex flex-col items-center p-6 bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-white/20 rounded-xl transition-all cursor-pointer duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 relative"
+                      className="group flex flex-col items-center p-6 bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-[var(--glass-border)] rounded-xl transition-all cursor-pointer duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 relative"
                       onClick={() => item.is_dir ? handleNavigate(item.path) : handleDownload(item.path, item.name)}
                     >
                       <div className="mb-4 transform group-hover:scale-110 transition-transform duration-300 relative">
@@ -229,12 +229,12 @@ export default function DocumentosPage() {
                         )}
                       </div>
 
-                      <h3 className="text-sm font-semibold text-gray-200 group-hover:text-white text-center line-clamp-2 w-full break-words">
+                      <h3 className="text-sm font-semibold text-foreground/90 group-hover:text-foreground text-center line-clamp-2 w-full break-words">
                         {item.name}
                       </h3>
 
                       {!item.is_dir && (
-                        <p className="text-xs text-gray-500 mt-2 font-mono">
+                        <p className="text-xs text-muted mt-2 font-mono">
                           {formatSize(item.size)}
                         </p>
                       )}
@@ -242,7 +242,7 @@ export default function DocumentosPage() {
                       {!item.is_dir && (
                         <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
                           <button
-                            className="p-1.5 bg-accent/20 text-accent rounded-md hover:bg-accent hover:text-white transition-colors"
+                            className="p-1.5 bg-accent/20 text-accent rounded-md hover:bg-accent hover:text-foreground transition-colors"
                             onClick={(e) => { e.stopPropagation(); handleDownload(item.path, item.name); }}
                           >
                             <Download className="w-4 h-4" />
@@ -273,7 +273,7 @@ export default function DocumentosPage() {
                     a.download = previewFilename || "documento";
                     a.click();
                   }}
-                  className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors"
+                  className="bg-blue-600 hover:bg-blue-500 text-foreground px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors"
                 >
                   ⬇️ Descargar
                 </button>
@@ -282,7 +282,7 @@ export default function DocumentosPage() {
                     setPreviewUrl(null);
                     setPreviewFilename(null);
                   }}
-                  className="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors"
+                  className="bg-red-600 hover:bg-red-500 text-foreground px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors"
                 >
                   ❌ Cerrar
                 </button>

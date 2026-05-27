@@ -6,11 +6,13 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import toast from "react-hot-toast";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, ChevronRight } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
 import { navGroups } from "@/config/navigation";
+import { showRichToast } from "@/utils/toast";
+import { motion } from "framer-motion";
 
-export default function Header({ title }: { title?: string }) {
+export default function Header({ title, breadcrumbSuffix }: { title?: string; breadcrumbSuffix?: string }) {
   const { activeModuleId, activeCursoId, moduleData } = useAppStore();
   const { data: session, status } = useSession();
   const isLoggedIn = status === "authenticated";
@@ -29,6 +31,17 @@ export default function Header({ title }: { title?: string }) {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  let currentGroup = "";
+  let currentItem = "";
+  for (const group of navGroups) {
+    const found = group.items.find(item => item.href === pathname);
+    if (found) {
+      currentGroup = group.title;
+      currentItem = found.label;
+      break;
+    }
+  }
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -94,13 +107,13 @@ export default function Header({ title }: { title?: string }) {
       });
       const data = await res.json();
       if (data.status === "success") {
-        toast.success(`Módulo ${activeModuleId} guardado con éxito`);
+        showRichToast.success(`Guardado con éxito`, `Módulo ${activeModuleId} actualizado.`);
       } else {
-        toast.error("Error al guardar el módulo");
+        showRichToast.error("Error al guardar", "Revisa la conexión o los datos.");
       }
     } catch (err) {
       console.error(err);
-      toast.error("Fallo de conexión al guardar");
+      showRichToast.error("Fallo de conexión", "No se pudo guardar el módulo.");
     } finally {
       setIsSaving(false);
     }
@@ -132,15 +145,21 @@ export default function Header({ title }: { title?: string }) {
               <div key={group.title} className="relative dropdown-group">
                 <button
                   onClick={() => setActiveDropdown(isOpen ? null : group.title)}
-                  className="text-[1.1rem] font-bold tracking-wide text-white px-5 py-2.5 rounded-lg hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
+                  className="px-5 py-2.5 rounded-lg hover:bg-foreground/5 transition-all flex items-center gap-3 cursor-pointer"
                 >
-                  {group.title}
-                  {badgeText && (
-                    <div className={`px-2 py-0.5 rounded text-[0.65rem] border font-semibold tracking-wider uppercase ${badgeColor}`}>
-                      {badgeText}
-                    </div>
-                  )}
-                  <span className={`text-[0.55rem] text-gray-500 transition-transform duration-200 ${isOpen ? 'rotate-180 text-white' : ''}`}>▼</span>
+                  <div className="flex flex-col items-start gap-1">
+                    <span className="text-[1.1rem] font-bold tracking-wide text-foreground leading-none">{group.title}</span>
+                    {badgeText ? (
+                      <div className={`px-2 py-0.5 rounded text-[0.65rem] border font-semibold tracking-wider uppercase leading-none ${badgeColor}`}>
+                        {badgeText}
+                      </div>
+                    ) : (
+                      <div className="px-2 py-0.5 rounded text-[0.65rem] border border-transparent font-semibold tracking-wider uppercase leading-none opacity-0 select-none">
+                        -
+                      </div>
+                    )}
+                  </div>
+                  <span className={`text-[0.55rem] text-muted transition-transform duration-200 ${isOpen ? 'rotate-180 text-foreground' : ''}`}>▼</span>
                 </button>
 
                 {/* Dropdown menu */}
@@ -153,10 +172,10 @@ export default function Header({ title }: { title?: string }) {
                         key={item.href}
                         href={item.href}
                         onClick={() => setActiveDropdown(null)}
-                        className={`flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-colors ${isActive ? 'bg-gradient-to-r from-blue-500/10 to-transparent border-l-2 border-blue-400' : 'border-l-2 border-transparent'}`}
+                        className={`flex items-center gap-3 px-4 py-3 hover:bg-foreground/5 transition-colors ${isActive ? 'bg-gradient-to-r from-blue-500/10 to-transparent border-l-2 border-blue-400' : 'border-l-2 border-transparent'}`}
                       >
                         <span className="text-xl">{item.icon}</span>
-                        <span className={`text-[0.85rem] ${isActive ? 'text-white font-bold' : 'text-gray-300 font-medium'}`}>{item.label}</span>
+                        <span className={`text-[0.85rem] ${isActive ? 'text-foreground font-bold' : 'text-foreground/80 font-medium'}`}>{item.label}</span>
                       </Link>
                     );
                   })}
@@ -179,39 +198,59 @@ export default function Header({ title }: { title?: string }) {
           )}
 
           {mounted && (
-            <button
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="glass-button text-gray-300 hover:text-amber-400 p-2 rounded-lg flex items-center justify-center transition-colors"
               title="Cambiar tema"
             >
               {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
+            </motion.button>
           )}
 
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={handleSave}
             disabled={isSaving}
             className="glass-button bg-[var(--accent-color)]/10 text-[var(--accent-color)] border-[var(--accent-color)]/30 hover:bg-[var(--accent-color)]/20 font-semibold py-1.5 px-4 text-sm rounded-lg flex items-center gap-2 transition-all"
           >
             <span>{isSaving ? "⏳" : "💾"}</span>
             {isSaving ? "Guardando..." : "Guardar"}
-          </button>
-          <button
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => {
               if (isLoggedIn) {
                 signOut();
-                toast("Sesión cerrada", { icon: "👋" });
+                showRichToast.success("Sesión cerrada", "Hasta pronto 👋");
               } else {
                 router.push("/perfiles");
               }
             }}
-            className="glass-button text-[var(--foreground)] font-semibold py-1.5 px-4 text-sm rounded-lg flex items-center gap-2 hover:bg-black/10 transition-colors"
+            className="glass-button text-[var(--foreground)] font-semibold py-1.5 px-4 text-sm rounded-lg flex items-center gap-2 hover:bg-foreground/5 transition-colors"
           >
             <span>{isLoggedIn ? "🔒" : "👤"}</span>
             {isLoggedIn ? "Cerrar" : "Sesión"}
-          </button>
+          </motion.button>
         </div>
       </nav>
+
+      {currentGroup && currentItem && (
+        <div className="w-full px-6 py-1.5 bg-white/[0.02] border-t border-[var(--glass-border)] flex items-center gap-1.5 text-[0.8rem] text-muted tracking-wide">
+          <span className="font-medium text-muted uppercase text-[0.7rem]">{currentGroup}</span>
+          <ChevronRight className="w-3 h-3 text-muted/80" />
+          <span className="text-foreground/90 font-semibold">{currentItem}</span>
+          {breadcrumbSuffix && (
+            <>
+              <ChevronRight className="w-3 h-3 text-muted/80" />
+              <span className="text-foreground/90 font-semibold">{breadcrumbSuffix}</span>
+            </>
+          )}
+        </div>
+      )}
 
       {title && (
         <header className="w-full flex items-center justify-center px-8 pt-4 pb-2">

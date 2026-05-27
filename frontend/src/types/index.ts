@@ -115,6 +115,18 @@ export interface CourseGroup {
   modules: ModuleAssignment[];
 }
 
+export interface Degree {
+  id: number;
+  name: string;
+  level: string;
+}
+
+export interface Family {
+  id: number;
+  name: string;
+  degrees: Degree[];
+}
+
 export interface AppState {
   activeModuleId: string;
   setActiveModuleId: (id: string) => void;

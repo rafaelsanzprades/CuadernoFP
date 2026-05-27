@@ -24,17 +24,17 @@ export default function ErrorBoundary({
           </div>
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-white mb-2">¡Ups! Algo ha fallado</h2>
-          <p className="text-gray-400 text-sm">
+          <h2 className="text-2xl font-bold text-foreground mb-2">¡Ups! Algo ha fallado</h2>
+          <p className="text-muted text-sm">
             Se ha producido un error inesperado al cargar esta página.
           </p>
         </div>
-        <div className="bg-black/30 p-3 rounded text-left overflow-x-auto text-xs text-red-300 font-mono">
+        <div className="bg-foreground/15 p-3 rounded text-left overflow-x-auto text-xs text-red-300 font-mono">
           {error.message || "Error desconocido"}
         </div>
         <button
           onClick={() => reset()}
-          className="w-full bg-accent hover:bg-accent/80 text-white font-bold py-3 px-4 rounded-lg transition-colors"
+          className="w-full bg-accent hover:bg-accent/80 text-foreground font-bold py-3 px-4 rounded-lg transition-colors"
         >
           Intentar de nuevo
         </button>

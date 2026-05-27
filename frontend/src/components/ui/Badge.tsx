@@ -22,7 +22,7 @@ export function Badge({ children, variant = 'default', className = '', ...props 
       variantStyle = "bg-blue-500/20 text-blue-300 border-blue-500/30";
       break;
     case 'default':
-      variantStyle = "bg-white/10 text-gray-300 border-white/20";
+      variantStyle = "bg-foreground/10 text-foreground/80 border-[var(--glass-border)]";
       break;
   }
 

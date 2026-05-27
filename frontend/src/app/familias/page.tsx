@@ -63,10 +63,10 @@ export default function FamiliasPage() {
             {/* Cabecera */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
               <div>
-                <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3 mb-2">
+                <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3 mb-2">
                   <span className="text-3xl">🗂️</span> Familias profesionales
                 </h1>
-                <p className="text-gray-400">Catálogo oficial de Ciclos Formativos. Grado Básico, Grado Medio y Grado Superior</p>
+                <p className="text-muted">Catálogo oficial de Ciclos Formativos. Grado Básico, Grado Medio y Grado Superior</p>
               </div>
             </div>
 
@@ -100,13 +100,13 @@ export default function FamiliasPage() {
                       <div className="text-xs font-bold px-2 py-1 rounded-md mb-2" style={{ backgroundColor: `${family.color_hex}30`, color: family.color_hex }}>
                         {family.code}
                       </div>
-                      <h2 className="text-lg font-bold text-white leading-tight">
+                      <h2 className="text-lg font-bold text-foreground leading-tight">
                         {family.name}
                       </h2>
                     </div>
 
-                    <div className="p-5 bg-black/20">
-                      <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Ciclos Formativos ({family.degrees.length})</h3>
+                    <div className="p-5 bg-foreground/10">
+                      <h3 className="text-xs font-semibold text-muted uppercase tracking-wider mb-3">Ciclos Formativos ({family.degrees.length})</h3>
                       {family.degrees.length > 0 ? (
                         <div className="space-y-2">
                           {family.degrees.map(degree => {
@@ -122,10 +122,10 @@ export default function FamiliasPage() {
                               <Link
                                 href={`/asignaciones?familyId=${family.id}&degreeId=${degree.id}`}
                                 key={degree.id}
-                                className="block text-sm bg-white/5 rounded-lg p-2.5 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all flex items-center justify-between gap-3 group cursor-pointer"
+                                className="block text-sm bg-foreground/5 rounded-lg p-2.5 border border-[var(--glass-border)] hover:border-[var(--glass-border)] hover:bg-foreground/10 transition-all flex items-center justify-between gap-3 group cursor-pointer"
                               >
-                                <div className="text-gray-300 font-medium leading-tight flex-1 group-hover:text-white transition-colors">{degree.name}</div>
-                                <div className="text-[10px] font-bold text-white bg-black/40 border border-white/10 px-2 py-1 rounded shadow-inner tracking-wider">
+                                <div className="text-foreground/80 font-medium leading-tight flex-1 group-hover:text-foreground transition-colors">{degree.name}</div>
+                                <div className="text-[10px] font-bold text-foreground bg-foreground/20 border border-[var(--glass-border)] px-2 py-1 rounded shadow-inner tracking-wider">
                                   {badge}
                                 </div>
                               </Link>
@@ -133,7 +133,7 @@ export default function FamiliasPage() {
                           })}
                         </div>
                       ) : (
-                        <div className="text-sm text-gray-500 italic text-center py-4">
+                        <div className="text-sm text-muted italic text-center py-4">
                           No hay ciclos formativos registrados.
                         </div>
                       )}

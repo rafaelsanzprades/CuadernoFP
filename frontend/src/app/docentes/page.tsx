@@ -50,21 +50,21 @@ function DocentesContent() {
             
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
               <div>
-                <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3 mb-2">
+                <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3 mb-2">
                   <span className="text-3xl">👨‍🏫</span> Asignación de docentes
                 </h1>
-                <p className="text-gray-400">Jefatura de Estudios: Control de carga horaria lectiva del profesorado y módulos asignados.</p>
+                <p className="text-muted">Jefatura de Estudios: Control de carga horaria lectiva del profesorado y módulos asignados.</p>
               </div>
             </div>
 
             <div className="glass-card p-4 mb-2 flex items-center gap-3">
-              <Search className="w-5 h-5 text-gray-400" />
+              <Search className="w-5 h-5 text-muted" />
               <input
                 type="text"
                 placeholder="Buscar docente por nombre o correo electrónico..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full bg-transparent border-none outline-none text-white placeholder-gray-500 text-sm focus:ring-0"
+                className="w-full bg-transparent border-none outline-none text-foreground placeholder-gray-500 text-sm focus:ring-0"
               />
             </div>
 
@@ -88,8 +88,8 @@ function DocentesContent() {
             </div>
 
             {filteredTeachers.length === 0 && (
-              <div className="glass-card p-12 text-center text-gray-400 flex flex-col items-center justify-center">
-                <Users className="w-12 h-12 mb-4 text-white/20" />
+              <div className="glass-card p-12 text-center text-muted flex flex-col items-center justify-center">
+                <Users className="w-12 h-12 mb-4 text-foreground/20" />
                 <p className="text-lg">No se han encontrado docentes que coincidan con la búsqueda.</p>
               </div>
             )}

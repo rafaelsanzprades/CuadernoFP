@@ -18,6 +18,14 @@ export default function ProgramacionPage() {
   const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
   const [allUdsOpen, setAllUdsOpen] = useState(true);
 
+  const TABS = [
+    { id: "secuenciacion", label: "📋 Secuenciación (UDs)", cleanLabel: "Secuenciación (UDs)" },
+    { id: "tareas", label: "🎯 Tareas competenciales", cleanLabel: "Tareas competenciales" }
+  ];
+
+  const [activeTab, setActiveTab] = useState("secuenciacion");
+  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+
   const handleSave = async () => {
     if (!activeModuleId || !moduleData) return;
     setSaving(true);
@@ -73,9 +81,9 @@ export default function ProgramacionPage() {
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
           <main className="flex-1 p-8">
-            <Card className="p-12 text-center text-gray-400 flex flex-col items-center justify-center">
+            <Card className="p-12 text-center text-muted flex flex-col items-center justify-center">
               <h2 className="text-2xl font-bold mb-4">No hay módulo seleccionado</h2>
-              <p className="text-gray-400">Por favor, ve a la Gestión de archivos y selecciona un módulo PD.</p>
+              <p className="text-muted">Por favor, ve a la sección de Datos y selecciona un módulo PD.</p>
             </Card>
           </main>
         </div>
@@ -162,15 +170,15 @@ export default function ProgramacionPage() {
     <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header />
+        <Header breadcrumbSuffix={activeTabCleanLabel} />
         
         <main className="flex-1 p-8 space-y-8 overflow-y-auto">
           <div className="flex justify-between items-center mb-8">
             <div>
-              <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
+              <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 📚 Programación de aula
               </h1>
-              <p className="text-gray-400 mt-2">Secuenciación temporal de las unidades didácticas y diseño de tareas competenciales.</p>
+              <p className="text-muted mt-2">Secuenciación temporal de las unidades didácticas y diseño de tareas competenciales.</p>
             </div>
             
             <Button 
@@ -189,43 +197,59 @@ export default function ProgramacionPage() {
             </Button>
           </div>
 
-          <Card className="p-6 border-t-4 border-t-accent">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold flex items-center gap-2 text-white">
-                <span>📋</span> Secuenciación por Unidades didácticas
-              </h2>
-              <Button
-                variant="ghost"
-                onClick={() => setAllUdsOpen(prev => !prev)}
-                className="text-sm border border-white/10"
+          <div className="flex border-b border-[var(--glass-border)] mb-8 overflow-x-auto scrollbar-hide">
+            {TABS.map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-6 py-4 font-bold text-sm border-b-2 transition-colors whitespace-nowrap ${activeTab === tab.id ? 'border-accent text-accent' : 'border-transparent text-muted hover:text-foreground'}`}
               >
-                <span>{allUdsOpen ? '▲' : '▼'}</span>
-                {allUdsOpen ? 'Colapsar todas' : 'Expandir todas'}
-              </Button>
-            </div>
+                {tab.label}
+              </button>
+            ))}
+          </div>
 
-            <SessionTable 
-              df_ud={df_ud}
-              df_sesiones={df_sesiones}
-              onDragEnd={onDragEnd}
-              handleUpdateSesion={handleUpdateSesion}
-              handleAddSesion={handleAddSesion}
-              handleDeleteSesion={handleDeleteSesion}
-              allUdsOpen={allUdsOpen}
-            />
-          </Card>
+          {activeTab === "secuenciacion" && (
+            <Card className="p-6 border-t-4 border-t-accent">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground">
+                  <span>📋</span> Secuenciación por Unidades didácticas
+                </h2>
+                <Button
+                  variant="ghost"
+                  onClick={() => setAllUdsOpen(prev => !prev)}
+                  className="text-sm border border-[var(--glass-border)]"
+                >
+                  <span>{allUdsOpen ? '▲' : '▼'}</span>
+                  {allUdsOpen ? 'Colapsar todas' : 'Expandir todas'}
+                </Button>
+              </div>
 
-          <Card className="p-6 border-t-4 border-t-blue-500">
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-white">
-              <span>🎯</span> Diseño de tareas competenciales (TC)
-            </h2>
-            <TaskTable 
-              df_tareas={df_tareas}
-              handleUpdateTarea={handleUpdateTarea}
-              handleAddTarea={handleAddTarea}
-              handleDeleteTarea={handleDeleteTarea}
-            />
-          </Card>
+              <SessionTable 
+                df_ud={df_ud}
+                df_sesiones={df_sesiones}
+                onDragEnd={onDragEnd}
+                handleUpdateSesion={handleUpdateSesion}
+                handleAddSesion={handleAddSesion}
+                handleDeleteSesion={handleDeleteSesion}
+                allUdsOpen={allUdsOpen}
+              />
+            </Card>
+          )}
+
+          {activeTab === "tareas" && (
+            <Card className="p-6 border-t-4 border-t-blue-500">
+              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-foreground">
+                <span>🎯</span> Diseño de tareas competenciales (TC)
+              </h2>
+              <TaskTable 
+                df_tareas={df_tareas}
+                handleUpdateTarea={handleUpdateTarea}
+                handleAddTarea={handleAddTarea}
+                handleDeleteTarea={handleDeleteTarea}
+              />
+            </Card>
+          )}
 
         </main>
       </div>

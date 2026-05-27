@@ -55,7 +55,7 @@ function NotesTable({ calendar_notes, onUpdateNote }) {
     <div className="overflow-x-auto">
       <table className="w-full text-left text-sm border-collapse">
         <thead>
-          <tr className="border-b border-white/10 text-gray-400">
+          <tr className="border-b border-[var(--glass-border)] text-muted">
             <th className="p-2 w-36">Fecha</th>
             <th className="p-2 w-24">Tipo</th>
             <th className="p-2">Descripción</th>
@@ -67,8 +67,8 @@ function NotesTable({ calendar_notes, onUpdateNote }) {
             const isF   = k.startsWith("f_");
             const dateStr = k.substring(2);
             return (
-              <tr key={k} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                <td className="p-2 font-mono text-gray-300">{dateStr}</td>
+              <tr key={k} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
+                <td className="p-2 font-mono text-foreground/80">{dateStr}</td>
                 <td className="p-2">
                   <span className={`text-xs px-2 py-0.5 rounded-full font-semibold ${
                     isF ? "bg-red-500/20 text-red-300" : "bg-blue-500/20 text-blue-300"
@@ -76,11 +76,11 @@ function NotesTable({ calendar_notes, onUpdateNote }) {
                     {isF ? "🔴 Festivo" : "🔵 Evento"}
                   </span>
                 </td>
-                <td className="p-2 text-gray-200">{v as string}</td>
+                <td className="p-2 text-foreground/90">{v as string}</td>
                 <td className="p-2 text-center">
                   <button
                     onClick={() => onUpdateNote(k, "")}
-                    className="text-gray-600 hover:text-red-400 font-bold text-lg leading-none transition-colors"
+                    className="text-muted/80 hover:text-red-400 font-bold text-lg leading-none transition-colors"
                   >×</button>
                 </td>
               </tr>
@@ -88,7 +88,7 @@ function NotesTable({ calendar_notes, onUpdateNote }) {
           })}
 
           {/* Add new row */}
-          <tr className="border-t border-white/20 bg-white/3">
+          <tr className="border-t border-[var(--glass-border)] bg-white/3">
             <td className="p-2">
               <DatePicker
                 value={newDate}
@@ -100,7 +100,7 @@ function NotesTable({ calendar_notes, onUpdateNote }) {
               <select
                 value={newType}
                 onChange={e => setNewType(e.target.value as "f" | "r")}
-                className="w-full bg-black/40 border border-white/10 rounded p-1 text-sm text-white focus:border-yellow-500 focus:outline-none"
+                className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-1 text-sm text-foreground focus:border-yellow-500 focus:outline-none"
               >
                 <option value="f">🔴 Festivo</option>
                 <option value="r">🔵 Evento</option>
@@ -113,7 +113,7 @@ function NotesTable({ calendar_notes, onUpdateNote }) {
                 onChange={e => setNewText(e.target.value)}
                 onKeyDown={e => e.key === "Enter" && addNote()}
                 placeholder="Descripción..."
-                className="w-full bg-black/40 border border-white/10 rounded p-1 text-sm text-white focus:border-yellow-500 focus:outline-none"
+                className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-1 text-sm text-foreground focus:border-yellow-500 focus:outline-none"
               />
             </td>
             <td className="p-2">
@@ -127,7 +127,7 @@ function NotesTable({ calendar_notes, onUpdateNote }) {
         </tbody>
       </table>
       {entries.length === 0 && (
-        <p className="text-center text-gray-600 text-sm py-4">
+        <p className="text-center text-muted/80 text-sm py-4">
           Sin festivos ni eventos aún. Añade uno arriba o haz clic en el calendario.
         </p>
       )}
@@ -169,14 +169,14 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
     const isFestivo = !!calendar_notes[`f_${dkey}`];
     const isEvento  = !!calendar_notes[`r_${dkey}`];
 
-    if (isFestivo)            return "bg-red-500/80 text-white font-bold ring-1 ring-red-400";
-    if (isEvento)             return "bg-blue-500/80 text-white font-bold ring-1 ring-blue-400";
-    if (isWeekend)            return "bg-white/5 text-gray-600 cursor-default";
+    if (isFestivo)            return "bg-red-500/80 text-foreground font-bold ring-1 ring-red-400";
+    if (isEvento)             return "bg-blue-500/80 text-foreground font-bold ring-1 ring-blue-400";
+    if (isWeekend)            return "bg-foreground/5 text-muted/80 cursor-default";
     if (inRange(date, feoS, feoE)) return "bg-orange-500/30 text-orange-200 hover:bg-orange-500/50 cursor-pointer";
     if (inRange(date, t1s, t1e))   return "bg-sky-600/30 text-sky-200 hover:bg-sky-500/50 cursor-pointer";
     if (inRange(date, t2s, t2e))   return "bg-emerald-600/30 text-emerald-200 hover:bg-emerald-500/50 cursor-pointer";
     if (inRange(date, t3s, t3e))   return "bg-purple-600/30 text-purple-200 hover:bg-purple-500/50 cursor-pointer";
-    if (inRange(date, cs, ce))     return "bg-white/5 text-gray-400 hover:bg-white/10 cursor-pointer";
+    if (inRange(date, cs, ce))     return "bg-foreground/5 text-muted hover:bg-foreground/10 cursor-pointer";
     return "text-gray-700 cursor-default";
   }
 
@@ -213,7 +213,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
           { cls: "bg-orange-500/30 border-orange-400/30",  label: "FEOE" },
         ].map(l => (
           <span key={l.label} className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full border ${l.cls}`}>
-            <span className="text-white/80">{l.label}</span>
+            <span className="text-foreground/80">{l.label}</span>
           </span>
         ))}
       </div>
@@ -231,13 +231,13 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
           while (cells.length % 7 !== 0) cells.push(null);
 
           return (
-            <div key={`${y}-${m}`} className="bg-black/20 border border-white/10 rounded-xl p-4">
-              <h3 className="text-center font-bold text-sm mb-3 text-gray-200">
+            <div key={`${y}-${m}`} className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-4">
+              <h3 className="text-center font-bold text-sm mb-3 text-foreground/90">
                 {MONTH_NAMES[m]} {y}
               </h3>
               <div className="grid grid-cols-7 gap-0.5">
                 {DAY_NAMES_SHORT.map(d => (
-                  <div key={d} className="text-center text-[10px] text-gray-600 font-bold pb-1">{d}</div>
+                  <div key={d} className="text-center text-[10px] text-muted/80 font-bold pb-1">{d}</div>
                 ))}
                 {cells.map((day, i) => {
                   if (!day) return <div key={`e-${i}`} />;
@@ -263,7 +263,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
       {/* Notes list */}
       {noteEntries.length > 0 && (
         <div className="mt-6">
-          <h3 className="text-sm font-semibold text-gray-400 mb-3">📋 Notas registradas ({noteEntries.length})</h3>
+          <h3 className="text-sm font-semibold text-muted mb-3">📋 Notas registradas ({noteEntries.length})</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
             {noteEntries
               .sort(([a], [b]) => a.localeCompare(b))
@@ -278,12 +278,12 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
                     }`}
                   >
                     <span className="flex-1 truncate">
-                      <span className="text-gray-500 mr-1">{k.substring(2)}</span>
+                      <span className="text-muted mr-1">{k.substring(2)}</span>
                       {v as string}
                     </span>
                     <button
                       onClick={() => onUpdateNote(k, "")}
-                      className="text-gray-600 hover:text-red-400 font-bold text-base leading-none"
+                      className="text-muted/80 hover:text-red-400 font-bold text-base leading-none"
                     >×</button>
                   </div>
                 );
@@ -297,20 +297,20 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
         <>
           <div className="fixed inset-0 z-40" onClick={() => setPopup(null)} />
           <div
-            className="fixed z-50 bg-gray-900 border border-white/20 rounded-xl p-4 shadow-2xl w-64"
+            className="fixed z-50 bg-gray-900 border border-[var(--glass-border)] rounded-xl p-4 shadow-2xl w-64"
             style={{
               left: Math.min(popup.x + 8, (typeof window !== "undefined" ? window.innerWidth : 800) - 270),
               top:  Math.min(popup.y + 8, (typeof window !== "undefined" ? window.innerHeight : 600) - 170),
             }}
           >
-            <p className="text-sm font-bold mb-3 text-gray-200">📌 {popup.key}</p>
+            <p className="text-sm font-bold mb-3 text-foreground/90">📌 {popup.key}</p>
             <div className="flex gap-2 mb-3">
               <button
                 onClick={() => setNoteType("f")}
                 className={`flex-1 text-xs py-1.5 rounded transition-all ${
                   noteType === "f"
                     ? "bg-red-500/30 text-red-300 border border-red-500/50"
-                    : "bg-white/5 text-gray-400 border border-white/10 hover:bg-white/10"
+                    : "bg-foreground/5 text-muted border border-[var(--glass-border)] hover:bg-foreground/10"
                 }`}
               >🔴 Festivo</button>
               <button
@@ -318,13 +318,13 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
                 className={`flex-1 text-xs py-1.5 rounded transition-all ${
                   noteType === "r"
                     ? "bg-blue-500/30 text-blue-300 border border-blue-500/50"
-                    : "bg-white/5 text-gray-400 border border-white/10 hover:bg-white/10"
+                    : "bg-foreground/5 text-muted border border-[var(--glass-border)] hover:bg-foreground/10"
                 }`}
               >🔵 Evento</button>
             </div>
             <input
               autoFocus
-              className="w-full bg-black/30 border border-white/10 rounded p-2 text-sm text-white mb-3 focus:border-blue-500 focus:outline-none"
+              className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded p-2 text-sm text-foreground mb-3 focus:border-blue-500 focus:outline-none"
               placeholder={noteType === "f" ? "Nombre del festivo..." : "Descripción del evento..."}
               value={noteText}
               onChange={e => setNoteText(e.target.value)}
@@ -340,7 +340,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
               >Añadir</button>
               <button
                 onClick={() => setPopup(null)}
-                className="text-gray-500 text-xs py-1.5 px-3 rounded hover:text-gray-300 transition-all"
+                className="text-muted text-xs py-1.5 px-3 rounded hover:text-foreground/80 transition-all"
               >Cancelar</button>
             </div>
           </div>
@@ -374,7 +374,7 @@ export default function CalendarioPage() {
           <main className="flex-1 p-8 content-area">
             <Card className="p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Módulo PD seleccionado</h2>
-              <p className="text-gray-400">Ve a Gestión de archivos y selecciona un Módulo PD.</p>
+              <p className="text-muted">Ve a Datos y selecciona un Módulo PD.</p>
             </Card>
           </main>
         </div>
@@ -407,18 +407,27 @@ export default function CalendarioPage() {
   const handleUpdateNote = (key: string, val: string) =>
     updateModuleData("calendar_notes", { ...calendar_notes, [key]: val });
 
+  const TABS = [
+    { id: "fechas", label: "⚙️ Configuración de fechas", cleanLabel: "Configuración de fechas" },
+    { id: "eventos", label: "📌 Eventos y festivos", cleanLabel: "Eventos y festivos" },
+    { id: "visual", label: "📅 Calendario visual", cleanLabel: "Calendario visual" }
+  ];
+
+  const [activeTab, setActiveTab] = useState("fechas");
+  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header />
+        <Header breadcrumbSuffix={activeTabCleanLabel} />
 
         <main className="flex-1 p-8 content-area space-y-8">
 
           {/* Page heading */}
           <div>
-            <h1 className="text-4xl font-extrabold text-white tracking-tight">🗓️ Calendario académico</h1>
-            <p className="text-gray-400 mt-1">Fechas generales, trimestres, horario semanal, festivos y eventos relevantes del curso.</p>
+            <h1 className="text-4xl font-extrabold text-foreground tracking-tight">🗓️ Calendario académico</h1>
+            <p className="text-muted mt-1">Fechas generales, trimestres, horario semanal, festivos y eventos relevantes del curso.</p>
           </div>
 
           {/* Save message */}
@@ -428,94 +437,111 @@ export default function CalendarioPage() {
             </p>
           )}
 
-          {/* Fechas generales */}
-          <Card className="p-6 border-t-4 border-t-blue-500">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold">Fechas generales</h2>
-              <Button
-                variant="ghost"
-                onClick={() => {
-                  const ledger = moduleData?.planning_ledger || {};
-                  const dates = Object.keys(ledger)
-                    .map(d => { const [dd,mm,yyyy] = d.split("/"); return `${yyyy}-${mm}-${dd}`; })
-                    .sort();
-                  if (dates.length > 0) {
-                    handleUpdateFechas("ini_curso", dates[0]);
-                    handleUpdateFechas("fin_curso", dates[dates.length - 1]);
-                  }
-                }}
-                className="text-xs text-blue-300 hover:text-blue-200"
+          <div className="flex border-b border-[var(--glass-border)] mb-8 overflow-x-auto scrollbar-hide">
+            {TABS.map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-6 py-4 font-bold text-sm border-b-2 transition-colors whitespace-nowrap ${activeTab === tab.id ? 'border-accent text-accent' : 'border-transparent text-muted hover:text-foreground'}`}
               >
-                🔍 Autodetectar desde Planning
-              </Button>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[
-                { label: "Inicio de curso",   field: "ini_curso" },
-                { label: "Inicio clases (1T)", field: "ini_1t"   },
-                { label: "Fin clases (3T)",    field: "fin_3t"   },
-                { label: "Fin de curso",       field: "fin_curso" },
-              ].map(({ label, field }) => (
-                <div key={field}>
-                  <label className="text-sm text-gray-400 mb-1 block">{label}</label>
-                  <DatePicker
-                    value={info_fechas[field] || ""}
-                    onChange={v => handleUpdateFechas(field, v)}
-                  />
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {activeTab === "fechas" && (
+            <div className="space-y-8">
+              {/* Fechas generales */}
+              <Card className="p-6 border-t-4 border-t-blue-500">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-xl font-bold">Fechas generales</h2>
+                  <Button
+                    variant="ghost"
+                    onClick={() => {
+                      const ledger = moduleData?.planning_ledger || {};
+                      const dates = Object.keys(ledger)
+                        .map(d => { const [dd,mm,yyyy] = d.split("/"); return `${yyyy}-${mm}-${dd}`; })
+                        .sort();
+                      if (dates.length > 0) {
+                        handleUpdateFechas("ini_curso", dates[0]);
+                        handleUpdateFechas("fin_curso", dates[dates.length - 1]);
+                      }
+                    }}
+                    className="text-xs text-blue-300 hover:text-blue-200"
+                  >
+                    🔍 Autodetectar desde Planning
+                  </Button>
                 </div>
-              ))}
-            </div>
-          </Card>
-
-          {/* Trimestres */}
-          <Card className="p-6 border-t-4 border-t-emerald-500">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">Trimestres</h2>
-            </div>
-            <div className="grid grid-cols-3 gap-6">
-              {[
-                { title: "1er trimestre", ini: "ini_1t", fin: "fin_1t" },
-                { title: "2º trimestre",  ini: "ini_2t", fin: "fin_2t" },
-                { title: "3er trimestre", ini: "ini_3t", fin: "fin_3t" },
-              ].map(t => (
-                <div key={t.title} className="bg-black/20 border border-white/10 rounded-xl p-4">
-                  <h3 className="text-center font-bold mb-4">{t.title}</h3>
-                  <div className="space-y-3">
-                    <div>
-                      <label className="text-xs text-gray-400">Inicio</label>
-                      <DatePicker value={info_fechas[t.ini] || ""} onChange={v => handleUpdateFechas(t.ini, v)} />
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {[
+                    { label: "Inicio de curso",   field: "ini_curso" },
+                    { label: "Inicio clases (1T)", field: "ini_1t"   },
+                    { label: "Fin clases (3T)",    field: "fin_3t"   },
+                    { label: "Fin de curso",       field: "fin_curso" },
+                  ].map(({ label, field }) => (
+                    <div key={field}>
+                      <label className="text-sm text-muted mb-1 block">{label}</label>
+                      <DatePicker
+                        value={info_fechas[field] || ""}
+                        onChange={v => handleUpdateFechas(field, v)}
+                      />
                     </div>
-                    <div>
-                      <label className="text-xs text-gray-400">Fin</label>
-                      <DatePicker value={info_fechas[t.fin] || ""} onChange={v => handleUpdateFechas(t.fin, v)} />
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              </Card>
+
+              {/* Trimestres */}
+              <Card className="p-6 border-t-4 border-t-emerald-500">
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-xl font-bold">Trimestres</h2>
+                </div>
+                <div className="grid grid-cols-3 gap-6">
+                  {[
+                    { title: "1er trimestre", ini: "ini_1t", fin: "fin_1t" },
+                    { title: "2º trimestre",  ini: "ini_2t", fin: "fin_2t" },
+                    { title: "3er trimestre", ini: "ini_3t", fin: "fin_3t" },
+                  ].map(t => (
+                    <div key={t.title} className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-4">
+                      <h3 className="text-center font-bold mb-4">{t.title}</h3>
+                      <div className="space-y-3">
+                        <div>
+                          <label className="text-xs text-muted">Inicio</label>
+                          <DatePicker value={info_fechas[t.ini] || ""} onChange={v => handleUpdateFechas(t.ini, v)} />
+                        </div>
+                        <div>
+                          <label className="text-xs text-muted">Fin</label>
+                          <DatePicker value={info_fechas[t.fin] || ""} onChange={v => handleUpdateFechas(t.fin, v)} />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
             </div>
-          </Card>
+          )}
 
-          {/* Notes table + Interactive Calendar */}
-          <Card className="p-6 border-t-4 border-t-yellow-500">
-            <h2 className="text-xl font-bold mb-2">📌 Festivos y eventos</h2>
-            <p className="text-gray-400 text-sm mb-4">
-              Introduce manualmente o haz clic en el calendario. Los festivos excluyen horas del cómputo real.
-            </p>
+          {activeTab === "eventos" && (
+            <Card className="p-6 border-t-4 border-t-yellow-500">
+              <h2 className="text-xl font-bold mb-2">📌 Festivos y eventos</h2>
+              <p className="text-muted text-sm mb-4">
+                Introduce manualmente o haz clic en el calendario. Los festivos excluyen horas del cómputo real.
+              </p>
+              {/* Manual entry table */}
+              <NotesTable calendar_notes={calendar_notes} onUpdateNote={handleUpdateNote} />
+            </Card>
+          )}
 
-            {/* Manual entry table */}
-            <NotesTable calendar_notes={calendar_notes} onUpdateNote={handleUpdateNote} />
-
-            {/* Visual calendar */}
-            <div className="mt-8">
-              <h3 className="text-lg font-bold mb-4 text-gray-300">📅 Calendario visual</h3>
+          {activeTab === "visual" && (
+            <Card className="p-6 border-t-4 border-t-purple-500">
+              <h3 className="text-lg font-bold mb-4 text-foreground/80">📅 Calendario visual</h3>
               <InteractiveCalendar
                 info_fechas={info_fechas}
                 horario={horario}
                 calendar_notes={calendar_notes}
                 onUpdateNote={handleUpdateNote}
               />
-            </div>
-          </Card>
+            </Card>
+          )}
 
         </main>
       </div>

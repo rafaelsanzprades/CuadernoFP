@@ -20,7 +20,7 @@ const DropzoneWrapper = ({ children, onDrop, acceptMessage }: { children: React.
         {isDragActive && (
           <div className="absolute inset-0 bg-accent/20 backdrop-blur-md rounded-2xl z-20 flex flex-col items-center justify-center border-2 border-dashed border-accent">
             <span className="text-4xl animate-bounce">📥</span>
-            <p className="font-bold text-white text-center px-4 mt-2">{acceptMessage}</p>
+            <p className="font-bold text-foreground text-center px-4 mt-2">{acceptMessage}</p>
           </div>
         )}
         {children}
@@ -67,10 +67,10 @@ export function FileManagementPanel({
   return (
     <div>
       <div>
-        <h2 className="text-3xl font-extrabold text-white tracking-tight flex items-center gap-3 mb-2">
-          📁 Gestión de archivos
+        <h2 className="text-3xl font-extrabold text-foreground tracking-tight flex items-center gap-3 mb-2">
+          📁 Datos
         </h2>
-        <p className="text-gray-400 mb-6">Carga y guarda los datos de Centro educativo; módulo didáctico; y curso y alumnado.</p>
+        <p className="text-muted mb-6">Carga y guarda los datos de Centro educativo; módulo didáctico; y curso y alumnado.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -82,10 +82,10 @@ export function FileManagementPanel({
         >
         <Card className="h-full p-6 border-t-4 border-t-purple-500 flex flex-col gap-6 transform transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/10">
           <div>
-            <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+            <h4 className="text-xl font-bold text-foreground mb-2 flex items-center gap-2">
               <span>🏢</span> Centro educativo
             </h4>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-muted">
               Información del Centro educativo, presentación, planes, calendario académico y descargar PDF.
             </p>
           </div>
@@ -110,7 +110,7 @@ export function FileManagementPanel({
             </Button>
           </div>
 
-          <div className="h-px bg-white/10 w-full my-2"></div>
+          <div className="h-px bg-foreground/10 w-full my-2"></div>
 
           <div className="space-y-4">
             <Input
@@ -138,10 +138,10 @@ export function FileManagementPanel({
         >
         <Card className="h-full p-6 border-t-4 border-t-accent flex flex-col gap-6 transform transition-all duration-300 hover:shadow-2xl hover:shadow-accent/10">
           <div>
-            <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+            <h4 className="text-xl font-bold text-foreground mb-2 flex items-center gap-2">
               <span>⚙️</span> Módulo didáctico
             </h4>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-muted">
               Programación del módulo didáctico, matrices RA→CE→UD, instrumentos de evaluación, programación de aula y seguimiento diario.
             </p>
           </div>
@@ -166,7 +166,7 @@ export function FileManagementPanel({
             </Button>
           </div>
 
-          <div className="h-px bg-white/10 w-full my-2"></div>
+          <div className="h-px bg-foreground/10 w-full my-2"></div>
 
           <div className="space-y-4">
             <div className="relative">
@@ -176,7 +176,7 @@ export function FileManagementPanel({
                 onChange={(e) => setNewPdName(e.target.value)}
                 placeholder="Nombre del archivo de Módulo"
               />
-              <span className="absolute right-4 top-10 text-gray-500 font-mono text-sm">-pd</span>
+              <span className="absolute right-4 top-10 text-muted font-mono text-sm">-pd</span>
             </div>
             <Button
               onClick={handleSavePd}
@@ -197,10 +197,10 @@ export function FileManagementPanel({
         >
         <Card className="h-full p-6 border-t-4 border-t-blue-500 flex flex-col gap-6 transform transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10">
           <div>
-            <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+            <h4 className="text-xl font-bold text-foreground mb-2 flex items-center gap-2">
               <span>📅</span> Curso y alumnado
             </h4>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-muted">
               Curso actual: Matrícula alumnado, calificación académica, calificación FEOE, evaluación continua, análisis grupal y portal alumnado.
             </p>
           </div>
@@ -225,7 +225,7 @@ export function FileManagementPanel({
             </Button>
           </div>
 
-          <div className="h-px bg-white/10 w-full my-2"></div>
+          <div className="h-px bg-foreground/10 w-full my-2"></div>
 
           <div className="space-y-4">
             <Input

@@ -14,12 +14,12 @@ export default function Sidebar() {
       <div className={`px-4 pt-4 pb-2 flex ${isSidebarOpen ? 'justify-between' : 'justify-center'} items-center`}>
         {isSidebarOpen && (
           <Link href="/">
-            <h1 className="text-[1.3rem] font-extrabold leading-tight text-white hover:text-blue-400 transition-colors mb-4 tracking-tight whitespace-nowrap cursor-pointer">
+            <h1 className="text-[1.3rem] font-extrabold leading-tight text-foreground hover:text-blue-400 transition-colors mb-4 tracking-tight whitespace-nowrap cursor-pointer">
               Cuaderno Ciclos FP
             </h1>
           </Link>
         )}
-        <button onClick={toggleSidebar} className="text-gray-400 hover:text-white p-1 rounded-md hover:bg-white/10 transition-colors mb-3">
+        <button onClick={toggleSidebar} className="text-muted hover:text-foreground p-1 rounded-md hover:bg-foreground/10 transition-colors mb-3">
           {isSidebarOpen ? "◀" : "▶"}
         </button>
       </div>
@@ -30,12 +30,12 @@ export default function Sidebar() {
         {navGroups.map((group, idx) => (
           <div key={group.title} className="flex flex-col gap-0.5">
             {isSidebarOpen && (
-              <div className="text-[0.95rem] font-bold text-white tracking-wide px-3 mb-2 mt-2">
+              <div className="text-[0.95rem] font-bold text-foreground tracking-wide px-3 mb-2 mt-2">
                 {group.title}
               </div>
             )}
             {!isSidebarOpen && idx > 0 && (
-              <div className="w-8 h-px bg-white/10 mx-auto my-2" />
+              <div className="w-8 h-px bg-foreground/10 mx-auto my-2" />
             )}
             {group.items.map((item) => (
               <Link
@@ -44,8 +44,8 @@ export default function Sidebar() {
                 title={!isSidebarOpen ? item.label : undefined}
                 className={`flex items-center ${isSidebarOpen ? 'gap-2.5 px-3' : 'justify-center px-0'} py-2 rounded-lg transition-all duration-150 group
                   ${pathname === item.href
-                    ? 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 text-white shadow-sm shadow-blue-500/10'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5 border border-transparent'
+                    ? 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 text-foreground shadow-sm shadow-blue-500/10'
+                    : 'text-muted hover:text-foreground hover:bg-foreground/5 border border-transparent'
                   }`}
               >
                 <span className={`text-base leading-none transition-transform duration-150 ${pathname === item.href ? 'scale-110' : 'group-hover:scale-110'}`}>
@@ -53,7 +53,7 @@ export default function Sidebar() {
                 </span>
                 {isSidebarOpen && (
                   <>
-                    <span className={`text-[0.8rem] leading-tight font-medium whitespace-nowrap ${pathname === item.href ? 'text-white font-semibold' : ''}`}>
+                    <span className={`text-[0.8rem] leading-tight font-medium whitespace-nowrap ${pathname === item.href ? 'text-foreground font-semibold' : ''}`}>
                       {item.label}
                     </span>
                     {pathname === item.href && (
@@ -70,7 +70,7 @@ export default function Sidebar() {
       {/* Footer compacto */}
       <div className={`px-4 py-3 border-t border-[var(--glass-border)] flex flex-col items-center`}>
         {isSidebarOpen && (
-          <p className="text-center text-[0.65rem] text-gray-600 mt-1 whitespace-nowrap">
+          <p className="text-center text-[0.65rem] text-muted/80 mt-1 whitespace-nowrap">
             © {new Date().getFullYear()} Rafael Sanz Prades
           </p>
         )}

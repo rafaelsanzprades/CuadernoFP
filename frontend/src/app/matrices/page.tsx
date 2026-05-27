@@ -68,7 +68,7 @@ export default function MatricesPage() {
           <main className="flex-1 p-8 content-area">
             <Card className="p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay módulo seleccionado</h2>
-              <p className="text-gray-400">Por favor, ve a la Gestión de archivos y selecciona un módulo PD.</p>
+              <p className="text-muted">Por favor, ve a la sección de Datos y selecciona un módulo PD.</p>
             </Card>
           </main>
         </div>
@@ -102,10 +102,10 @@ export default function MatricesPage() {
 
         <main className="flex-1 p-8 content-area space-y-8">
           <div className="mb-8">
-            <h1 className="text-4xl font-extrabold text-white tracking-tight">
+            <h1 className="text-4xl font-extrabold text-foreground tracking-tight">
               🧮 Matrices RA → CE → UD
             </h1>
-            <p className="text-gray-400 mt-2">Relación y ponderación entre los RA, CE y las diferentes UD del módulo.</p>
+            <p className="text-muted mt-2">Relación y ponderación entre los RA, CE y las diferentes UD del módulo.</p>
           </div>
 
 
@@ -117,7 +117,7 @@ export default function MatricesPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-white/10 text-sm text-gray-400">
+                  <tr className="border-b border-[var(--glass-border)] text-sm text-muted">
                     <th className="p-3">ID-RA</th>
                     <th className="p-3 w-24">% RA</th>
                     <th className="p-3 w-20 text-center">FEOE</th>
@@ -126,7 +126,7 @@ export default function MatricesPage() {
                 </thead>
                 <tbody>
                   {df_ra.map((ra: any, idx: number) => (
-                    <tr key={idx} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                    <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
                       <td className="p-3 font-mono text-sm">{ra.id_ra}</td>
                       <td className="p-3">
                         <input
@@ -137,7 +137,7 @@ export default function MatricesPage() {
                             newRa[idx].peso_ra = parseFloat(e.target.value) || 0;
                             updateDataFrame("df_ra", newRa);
                           }}
-                          className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white text-sm focus:border-[#14a085] focus:outline-none"
+                          className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-sm focus:border-[#14a085] focus:outline-none"
                         />
                       </td>
                       <td className="p-3 text-center">
@@ -161,7 +161,7 @@ export default function MatricesPage() {
                             newRa[idx].desc_ra = e.target.value;
                             updateDataFrame("df_ra", newRa);
                           }}
-                          className="w-full bg-black/30 border border-white/10 rounded px-3 py-1 text-white text-sm focus:border-[#14a085] focus:outline-none"
+                          className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-3 py-1 text-foreground text-sm focus:border-[#14a085] focus:outline-none"
                         />
                       </td>
                     </tr>
@@ -184,7 +184,7 @@ export default function MatricesPage() {
               </Button>
 
               <Card className="px-4 py-2 inline-flex items-center gap-2 border-l-4 border-l-blue-500">
-                <span className="text-gray-400">Total suma % RA:</span>
+                <span className="text-muted">Total suma % RA:</span>
                 <span className={`font-bold ${df_ra.reduce((sum: number, ra: any) => sum + (Number(ra.peso_ra) || 0), 0) === 100 ? 'text-green-400' : 'text-red-400'}`}>
                   {df_ra.reduce((sum: number, ra: any) => sum + (Number(ra.peso_ra) || 0), 0).toFixed(0)}%
                 </span>
@@ -200,7 +200,7 @@ export default function MatricesPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-white/10 text-sm text-gray-400">
+                  <tr className="border-b border-[var(--glass-border)] text-sm text-muted">
                     <th className="p-3 sticky left-0 bg-background z-10">ID-UD</th>
                     <th className="p-3 sticky left-[80px] bg-background z-10">Horas</th>
                     <th className="p-3 sticky left-[160px] bg-background z-10 w-64">Unidad Didáctica</th>
@@ -214,7 +214,7 @@ export default function MatricesPage() {
                 </thead>
                 <tbody>
                   {df_ud.map((ud: any, idx: number) => (
-                    <tr key={idx} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                    <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
                       <td className="p-3 font-mono text-sm sticky left-0 bg-background group-hover:bg-[#111827]">{ud.id_ud}</td>
                       <td className="p-3 sticky left-[80px] bg-background group-hover:bg-[#111827]">
                         <input
@@ -225,7 +225,7 @@ export default function MatricesPage() {
                             newUd[idx].horas_ud = parseFloat(e.target.value) || 0;
                             updateDataFrame("df_ud", newUd);
                           }}
-                          className="w-16 bg-black/30 border border-white/10 rounded px-2 py-1 text-white text-sm focus:border-purple-500 focus:outline-none"
+                          className="w-16 bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-sm focus:border-purple-500 focus:outline-none"
                         />
                       </td>
                       <td className="p-3 sticky left-[160px] bg-background group-hover:bg-[#111827]">
@@ -237,7 +237,7 @@ export default function MatricesPage() {
                             newUd[idx].desc_ud = e.target.value;
                             updateDataFrame("df_ud", newUd);
                           }}
-                          className="w-full bg-black/30 border border-white/10 rounded px-3 py-1 text-white text-sm focus:border-purple-500 focus:outline-none"
+                          className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-3 py-1 text-foreground text-sm focus:border-purple-500 focus:outline-none"
                         />
                       </td>
                       {df_ra.map((ra: any, raIdx: number) => (
@@ -250,7 +250,7 @@ export default function MatricesPage() {
                               newUd[idx][ra.id_ra] = parseFloat(e.target.value) || 0;
                               updateDataFrame("df_ud", newUd);
                             }}
-                            className="w-14 text-center bg-black/30 border border-white/10 rounded px-1 py-1 text-white text-sm focus:border-purple-500 focus:outline-none"
+                            className="w-14 text-center bg-foreground/15 border border-[var(--glass-border)] rounded px-1 py-1 text-foreground text-sm focus:border-purple-500 focus:outline-none"
                           />
                         </td>
                       ))}
@@ -274,7 +274,7 @@ export default function MatricesPage() {
               </Button>
 
               <Card className="px-4 py-2 inline-flex items-center gap-2 border-l-4 border-l-purple-500">
-                <span className="text-gray-400">Total horas UD:</span>
+                <span className="text-muted">Total horas UD:</span>
                 <span className="font-bold text-purple-400">
                   {df_ud.reduce((sum: number, ud: any) => sum + (Number(ud.horas_ud) || 0), 0)} h
                 </span>
@@ -292,10 +292,10 @@ export default function MatricesPage() {
                 {df_ra.map((ra: any, idx: number) => {
                   const uds = df_ud?.filter((ud: any) => ud[ra.id_ra] > 0) || [];
                   return (
-                    <div key={idx} className="border-b border-white/10 pb-6 last:border-0 last:pb-0">
-                      <div className="text-lg text-white mb-3">
+                    <div key={idx} className="border-b border-[var(--glass-border)] pb-6 last:border-0 last:pb-0">
+                      <div className="text-lg text-foreground mb-3">
                         <strong>{ra.id_ra} ({ra.peso_ra}%).</strong>{" "}
-                        <span className="text-gray-400 text-sm">{ra.desc_ra}</span>
+                        <span className="text-muted text-sm">{ra.desc_ra}</span>
                       </div>
                       {uds.length > 0 ? (
                         <div className="ml-6 pl-4 border-l-2 border-[#d4af37] text-[#ffe599]">
@@ -306,14 +306,14 @@ export default function MatricesPage() {
                           ))}
                         </div>
                       ) : (
-                        <div className="ml-6 pl-4 border-l-2 border-gray-600 text-gray-500 italic">Sin UDs asignadas</div>
+                        <div className="ml-6 pl-4 border-l-2 border-gray-600 text-muted italic">Sin UDs asignadas</div>
                       )}
                     </div>
                   );
                 })}
               </div>
             ) : (
-              <div className="text-center text-gray-400">No hay Resultados de aprendizaje definidos.</div>
+              <div className="text-center text-muted">No hay Resultados de aprendizaje definidos.</div>
             )}
           </Card>
 
@@ -345,7 +345,7 @@ export default function MatricesPage() {
                 const totalPeso = ceForRa.reduce((sum: number, ce: any) => sum + (Number(ce.peso_ce) || 0), 0);
 
                 return (
-                  <div key={ra.id_ra} className="group bg-white/5 rounded-lg border border-white/10 overflow-hidden transition-colors">
+                  <div key={ra.id_ra} className="group bg-foreground/5 rounded-lg border border-[var(--glass-border)] overflow-hidden transition-colors">
                     <div 
                       onClick={() => {
                         const newSet = new Set(openCEs);
@@ -353,18 +353,18 @@ export default function MatricesPage() {
                         else newSet.add(ra.id_ra);
                         setOpenCEs(newSet);
                       }}
-                      className="p-4 cursor-pointer flex items-center justify-between font-semibold text-lg select-none hover:bg-white/10 transition-colors"
+                      className="p-4 cursor-pointer flex items-center justify-between font-semibold text-lg select-none hover:bg-foreground/10 transition-colors"
                     >
                       <div className="flex items-center gap-4">
                         <span className="text-yellow-400">{ra.id_ra}</span>
-                        <span className="text-sm text-gray-400 font-normal truncate max-w-xl">{ra.desc_ra}</span>
+                        <span className="text-sm text-muted font-normal truncate max-w-xl">{ra.desc_ra}</span>
                       </div>
                       <div className="flex items-center gap-6 text-sm">
-                        <span className="text-gray-400">{ceForRa.length} CE</span>
+                        <span className="text-muted">{ceForRa.length} CE</span>
                         <span className={`px-2 py-1 rounded ${totalPeso === 100 ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
                           Σ {totalPeso.toFixed(0)}%
                         </span>
-                        <span className={`transition-transform duration-300 text-gray-500 ${openCEs.has(ra.id_ra) ? 'rotate-180' : ''}`}>▼</span>
+                        <span className={`transition-transform duration-300 text-muted ${openCEs.has(ra.id_ra) ? 'rotate-180' : ''}`}>▼</span>
                       </div>
                     </div>
                     
@@ -377,10 +377,10 @@ export default function MatricesPage() {
                           transition={{ duration: 0.3, ease: "easeInOut" }}
                           className="overflow-hidden"
                         >
-                          <div className="p-4 border-t border-white/10 bg-black/20">
+                          <div className="p-4 border-t border-[var(--glass-border)] bg-foreground/10">
                             <table className="w-full text-left text-sm">
                               <thead>
-                                <tr className="text-gray-400 border-b border-white/10">
+                                <tr className="text-muted border-b border-[var(--glass-border)]">
                                   <th className="pb-2">ID-CE</th>
                                   <th className="pb-2 w-20">% CE</th>
                                   <th className="pb-2 w-16 text-center">FEOE</th>
@@ -394,7 +394,7 @@ export default function MatricesPage() {
                                 {ceForRa.map((ce: any, ceIdx: number) => {
                                   const globalIdx = df_ce.findIndex((gCe: any) => gCe === ce);
                                   return (
-                                    <tr key={ceIdx} className="border-b border-white/5 hover:bg-white/5">
+                                    <tr key={ceIdx} className="border-b border-white/5 hover:bg-foreground/5">
                                       <td className="py-2 pr-2">
                                         <input
                                           type="text"
@@ -404,7 +404,7 @@ export default function MatricesPage() {
                                             newCe[globalIdx].id_ce = e.target.value;
                                             updateDataFrame("df_ce", newCe);
                                           }}
-                                          className="w-16 bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-yellow-500 focus:outline-none"
+                                          className="w-16 bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-yellow-500 focus:outline-none"
                                         />
                                       </td>
                                       <td className="py-2 pr-2">
@@ -416,7 +416,7 @@ export default function MatricesPage() {
                                             newCe[globalIdx].peso_ce = parseFloat(e.target.value) || 0;
                                             updateDataFrame("df_ce", newCe);
                                           }}
-                                          className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-yellow-500 focus:outline-none"
+                                          className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-yellow-500 focus:outline-none"
                                         />
                                       </td>
                                       <td className="py-2 text-center">
@@ -440,7 +440,7 @@ export default function MatricesPage() {
                                             newCe[globalIdx].desc_ce = e.target.value;
                                             updateDataFrame("df_ce", newCe);
                                           }}
-                                          className="w-full bg-black/30 border border-white/10 rounded px-3 py-1 text-white focus:border-yellow-500 focus:outline-none"
+                                          className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-3 py-1 text-foreground focus:border-yellow-500 focus:outline-none"
                                         />
                                       </td>
                                       <td className="py-2 pr-2">
@@ -453,7 +453,7 @@ export default function MatricesPage() {
                                             updateDataFrame("df_ce", newCe);
                                           }}
                                           placeholder="Ej. OG1"
-                                          className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-yellow-500 focus:outline-none text-xs"
+                                          className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-yellow-500 focus:outline-none text-xs"
                                         />
                                       </td>
                                       <td className="py-2 pr-2">
@@ -466,7 +466,7 @@ export default function MatricesPage() {
                                             updateDataFrame("df_ce", newCe);
                                           }}
                                           placeholder="Ej. CPE1"
-                                          className="w-full bg-black/30 border border-white/10 rounded px-2 py-1 text-white focus:border-yellow-500 focus:outline-none text-xs"
+                                          className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-yellow-500 focus:outline-none text-xs"
                                         />
                                       </td>
                                       <td className="py-2 text-center">

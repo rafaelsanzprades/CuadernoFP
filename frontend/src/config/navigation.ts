@@ -2,7 +2,8 @@ export const navGroups = [
   {
     title: "Centro",
     items: [
-      { href: "/", label: "Gestión de archivos", icon: "📁" },
+      { href: "/", label: "Inicio", icon: "🏠" },
+      { href: "/datos", label: "Datos", icon: "📁" },
       { href: "/introduccion", label: "Introducción. Planes", icon: "📝" },
       { href: "/calendario", label: "Calendario académico", icon: "🗓️" },
       { href: "/documentos", label: "Visor documental", icon: "📄" },

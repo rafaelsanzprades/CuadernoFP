@@ -47,7 +47,7 @@ export default function AnalisisPage() {
           <main className="flex-1 p-8 content-area">
             <Card className="p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">No hay Curso o Módulo seleccionado</h2>
-              <p className="text-gray-400">Por favor, ve a la Gestión de archivos y asegúrate de cargar ambos.</p>
+              <p className="text-muted">Por favor, ve a la sección de Datos y asegúrate de cargar ambos.</p>
             </Card>
           </main>
         </div>
@@ -87,7 +87,7 @@ export default function AnalisisPage() {
           <main className="flex-1 p-8 content-area">
             <Card className="p-8 text-center border-l-4 border-l-yellow-500">
               <h2 className="text-xl font-bold text-yellow-400 mb-2">Faltan Datos</h2>
-              <p className="text-gray-300">No hay datos de evaluación para alumnos activos. Ve a Evaluación Competencial primero.</p>
+              <p className="text-foreground/80">No hay datos de evaluación para alumnos activos. Ve a Evaluación Competencial primero.</p>
             </Card>
           </main>
         </div>
@@ -166,8 +166,8 @@ export default function AnalisisPage() {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-[#1e293b] border border-white/10 p-3 rounded-lg shadow-xl">
-          <p className="text-white font-bold mb-1">{label}</p>
+        <div className="bg-[#1e293b] border border-[var(--glass-border)] p-3 rounded-lg shadow-xl">
+          <p className="text-foreground font-bold mb-1">{label}</p>
           {payload.map((entry: any, index: number) => (
             <p key={index} style={{ color: entry.color || entry.fill }} className="text-sm font-semibold drop-shadow-md">
               {entry.name}: {entry.value}
@@ -187,32 +187,32 @@ export default function AnalisisPage() {
         
         <main className="flex-1 p-8 content-area space-y-8">
           <div>
-            <h1 className="text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
+            <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
               📉 Análisis de grupo
             </h1>
-            <p className="text-gray-400 mt-2">Visualiza las estadísticas globales, comparativas entre trimestres y evolución de las calificaciones.</p>
+            <p className="text-muted mt-2">Visualiza las estadísticas globales, comparativas entre trimestres y evolución de las calificaciones.</p>
           </div>
 
           {/* ── Subtítulo Resumen datos grupales ── */}
-          <h2 className="text-2xl font-extrabold text-white tracking-tight flex items-center gap-3">
+          <h2 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
             📋 Resumen datos grupales
           </h2>
 
           <section className="grid grid-cols-4 gap-6">
             <Card className="p-6 border-l-4 border-l-blue-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
-              <span className="text-gray-400 text-sm uppercase font-bold tracking-wider mb-2">Media Grupal</span>
+              <span className="text-muted text-sm uppercase font-bold tracking-wider mb-2">Media Grupal</span>
               <span className="text-4xl font-black text-blue-400">{media_grupal.toFixed(2)}</span>
             </Card>
             <Card className="p-6 border-l-4 border-l-emerald-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
-              <span className="text-gray-400 text-sm uppercase font-bold tracking-wider mb-2">% Aprobados</span>
+              <span className="text-muted text-sm uppercase font-bold tracking-wider mb-2">% Aprobados</span>
               <span className="text-4xl font-black text-emerald-400">{tasa_aprobado.toFixed(1)}%</span>
             </Card>
             <Card className="p-6 border-l-4 border-l-purple-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
-              <span className="text-gray-400 text-sm uppercase font-bold tracking-wider mb-2">Nº Alumnos</span>
+              <span className="text-muted text-sm uppercase font-bold tracking-wider mb-2">Nº Alumnos</span>
               <span className="text-4xl font-black text-purple-400">{total}</span>
             </Card>
             <Card className="p-6 border-l-4 border-l-pink-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
-              <span className="text-gray-400 text-sm uppercase font-bold tracking-wider mb-2">Cohesión (Desv.)</span>
+              <span className="text-muted text-sm uppercase font-bold tracking-wider mb-2">Cohesión (Desv.)</span>
               <span className="text-4xl font-black text-pink-400">{desv_tipica.toFixed(2)}</span>
             </Card>
           </section>
@@ -297,8 +297,8 @@ export default function AnalisisPage() {
 
                   return (
                     <div key={ra.subject} className="flex items-center gap-4">
-                      <span className="w-16 text-sm font-bold text-white shrink-0">{ra.subject}</span>
-                      <div className="flex-1 relative h-7 bg-black/40 rounded-full border border-white/10 overflow-hidden">
+                      <span className="w-16 text-sm font-bold text-foreground shrink-0">{ra.subject}</span>
+                      <div className="flex-1 relative h-7 bg-foreground/20 rounded-full border border-[var(--glass-border)] overflow-hidden">
                         <div
                           className="absolute top-0.5 bottom-0.5 left-0 rounded-full transition-all duration-700 flex items-center justify-end pr-3"
                           style={{
@@ -307,20 +307,20 @@ export default function AnalisisPage() {
                           }}
                         >
                           {pct > 12 && (
-                            <span className="text-[11px] font-bold text-white drop-shadow-md">{val.toFixed(1)}</span>
+                            <span className="text-[11px] font-bold text-foreground drop-shadow-md">{val.toFixed(1)}</span>
                           )}
                         </div>
                         {/* 5.0 threshold */}
                         <div className="absolute top-0 bottom-0 w-px bg-yellow-500/40" style={{ left: '50%' }} />
                       </div>
                       {pct <= 12 && (
-                        <span className="text-sm font-bold text-gray-300 w-10">{val.toFixed(1)}</span>
+                        <span className="text-sm font-bold text-foreground/80 w-10">{val.toFixed(1)}</span>
                       )}
                     </div>
                   );
                 })}
               </div>
-              <div className="flex justify-between text-xs text-gray-600 mt-2 px-20">
+              <div className="flex justify-between text-xs text-muted/80 mt-2 px-20">
                 <span>0</span>
                 <span>2.5</span>
                 <span>5.0</span>
@@ -341,7 +341,7 @@ export default function AnalisisPage() {
                 </div>
                 <table className="w-full text-left text-sm whitespace-nowrap">
                   <thead>
-                    <tr className="text-gray-400 border-b border-white/10">
+                    <tr className="text-muted border-b border-[var(--glass-border)]">
                       <th className="pb-2">Alumno</th>
                       <th className="pb-2 text-center">Nota</th>
                       <th className="pb-2">Nivel de Riesgo</th>
@@ -349,11 +349,11 @@ export default function AnalisisPage() {
                   </thead>
                   <tbody>
                     {risks.map((r, i) => (
-                      <tr key={i} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                        <td className="py-3 font-medium text-gray-200">{r.alumno}</td>
-                        <td className="py-3 font-mono text-center font-bold text-gray-300">{r.nota.toFixed(2)}</td>
+                      <tr key={i} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
+                        <td className="py-3 font-medium text-foreground/90">{r.alumno}</td>
+                        <td className="py-3 font-mono text-center font-bold text-foreground/80">{r.nota.toFixed(2)}</td>
                         <td className={`py-3 font-bold ${r.riskColor}`}>
-                          <span className="bg-white/5 px-2 py-1 rounded-md">{r.riskLevel}</span>
+                          <span className="bg-foreground/5 px-2 py-1 rounded-md">{r.riskLevel}</span>
                         </td>
                       </tr>
                     ))}
