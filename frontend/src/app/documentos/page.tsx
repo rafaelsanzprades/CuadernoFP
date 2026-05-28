@@ -5,6 +5,9 @@ import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { Folder, FileText, File, Download, ChevronRight, CornerLeftUp, FileSpreadsheet, Search, UploadCloud } from "lucide-react";
 import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { useAppStore } from "@/store/useAppStore";
+import { Alumno } from "@/types";
 
 type DocumentItem = {
   name: string;
@@ -14,9 +17,12 @@ type DocumentItem = {
 };
 
 export default function DocumentosPage() {
+  const [activeTab, setActiveTab] = useState<"explorador" | "descargas">("explorador");
+
+  // State for Explorador
   const [currentPath, setCurrentPath] = useState<string>("");
   const [items, setItems] = useState<DocumentItem[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loadingDocs, setLoadingDocs] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -24,8 +30,12 @@ export default function DocumentosPage() {
   const [previewFilename, setPreviewFilename] = useState<string | null>(null);
   const [downloadingStr, setDownloadingStr] = useState<string | null>(null);
 
+  // State for Descargas
+  const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData } = useAppStore();
+  const [loadingData, setLoadingData] = useState(true);
+
   const fetchDocuments = (path: string) => {
-    setLoading(true);
+    setLoadingDocs(true);
     setError(null);
     fetch(`/api/documents/list?path=${encodeURIComponent(path)}`)
       .then((res) => {
@@ -44,13 +54,41 @@ export default function DocumentosPage() {
         console.error("Error fetching documents:", err);
         setError(err.message);
       })
-      .finally(() => setLoading(false));
+      .finally(() => setLoadingDocs(false));
   };
 
   useEffect(() => {
     fetchDocuments("");
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoadingData(true);
+      try {
+        if (activeModuleId && !moduleData) {
+          const res = await fetch(`/api/module/${activeModuleId}`);
+          const data = await res.json();
+          if (data.status === "success") setModuleData(data.data);
+        }
+        if (activeCursoId && !cursoData) {
+          const res = await fetch(`/api/module/${activeCursoId}`);
+          const data = await res.json();
+          if (data.status === "success") setCursoData(data.data);
+        }
+      } catch (err) {
+        console.error("Error fetching data:", err);
+      }
+      setLoadingData(false);
+    };
+
+    if (activeModuleId || activeCursoId) {
+      fetchData();
+    } else {
+      setLoadingData(false);
+    }
+  }, [activeModuleId, moduleData, activeCursoId, cursoData, setModuleData, setCursoData]);
+
+  // Explorador Handlers
   const handleNavigate = (newPath: string) => {
     fetchDocuments(newPath);
   };
@@ -63,7 +101,7 @@ export default function DocumentosPage() {
     fetchDocuments(parentPath);
   };
 
-  const handleDownload = async (filePath: string, filename: string) => {
+  const handleDownloadDoc = async (filePath: string, filename: string) => {
     const ext = filename.split('.').pop()?.toLowerCase() || '';
     const previewable = ['pdf', 'txt', 'png', 'jpg', 'jpeg', 'docx'].includes(ext);
 
@@ -82,12 +120,38 @@ export default function DocumentosPage() {
       const objectUrl = window.URL.createObjectURL(blob);
 
       setPreviewUrl(objectUrl);
-      // Change filename extension to .pdf for docx so download button downloads the pdf version
       const displayFilename = ext === 'docx' ? filename.replace(/\.docx$/i, '.pdf') : filename;
       setPreviewFilename(displayFilename);
     } catch (err) {
       console.error(err);
       alert("Error al cargar la previsualización del documento.");
+    } finally {
+      setDownloadingStr(null);
+    }
+  };
+
+  // Descargas Handlers
+  const handleDownloadPdf = async (type: string, al_id?: string) => {
+    try {
+      setDownloadingStr(type);
+      let url = `/api/pdf?type=${type}&pd_id=${activeModuleId}&curso_id=${activeCursoId}`;
+      if (al_id) url += `&al_id=${al_id}`;
+
+      const response = await fetch(url);
+      if (!response.ok) throw new Error("Error generating PDF");
+
+      const blob = await response.blob();
+      const downloadUrl = window.URL.createObjectURL(blob);
+      const modName = moduleData?.info_modulo?.modulo || "Modulo";
+
+      let filename = `${type}_${modName}.pdf`;
+      if (al_id) filename = `Boletin_${al_id}_${modName}.pdf`;
+
+      setPreviewUrl(downloadUrl);
+      setPreviewFilename(filename);
+    } catch (err) {
+      console.error(err);
+      alert("Error al generar el PDF. Asegúrate de que el backend está configurado.");
     } finally {
       setDownloadingStr(null);
     }
@@ -110,7 +174,6 @@ export default function DocumentosPage() {
     return <File className="w-8 h-8 text-muted" />;
   };
 
-  // Generar breadcrumbs
   const pathParts = currentPath.split("/").filter(Boolean);
   const breadcrumbs = [
     { label: "Raíz", path: "" },
@@ -122,6 +185,10 @@ export default function DocumentosPage() {
 
   const filteredItems = items.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
+  const df_al = cursoData?.df_al || [];
+  const activeAlumnos = df_al.filter((al: Alumno) => al.Estado !== "Baja");
+  activeAlumnos.sort((a: Alumno, b: Alumno) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
+
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar />
@@ -131,146 +198,359 @@ export default function DocumentosPage() {
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <div className="w-full space-y-6 animate-in fade-in duration-500">
 
-            {/* Cabecera */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
               <div>
-              <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                  <span className="text-3xl">📄</span> Visor documental
+                <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
+                  <span className="text-3xl">📄</span> Documentos y descargas
                 </h1>
-                <p className="text-muted mt-2 text-lg">Carpetas y archivos de Boletines oficiales, modelos y plantillas.</p>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
-                  <input
-                    type="text"
-                    placeholder="Buscar archivo..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="bg-foreground/15 border border-[var(--glass-border)] text-foreground pl-10 pr-4 py-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all w-full md:w-64 placeholder-gray-500"
-                  />
-                </div>
-                <button 
-                  onClick={() => alert("Función de subida próximamente.")}
-                  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-foreground font-bold py-2 px-5 rounded-xl shadow-lg shadow-blue-500/30 flex items-center gap-2 transition-all hover:scale-105 active:scale-95"
-                >
-                  <UploadCloud className="w-5 h-5" />
-                  <span>Subir</span>
-                </button>
+                <p className="text-muted mt-2 text-lg">Explorador de archivos oficiales y generación de reportes PDF.</p>
               </div>
             </div>
 
-            {/* Breadcrumb */}
-            <Card className="p-4 flex items-center gap-2 overflow-x-auto whitespace-nowrap bg-foreground/5 border border-[var(--glass-border)] rounded-xl shadow-lg">
-              {currentPath && (
-                <button
-                  onClick={handleGoUp}
-                  className="flex items-center justify-center p-2 mr-2 text-muted hover:text-foreground hover:bg-foreground/10 rounded-lg transition-colors"
-                  title="Subir un nivel"
-                >
-                  <CornerLeftUp className="w-5 h-5" />
-                </button>
-              )}
-              {breadcrumbs.map((crumb, idx) => (
-                <React.Fragment key={crumb.path}>
-                  <button
-                    onClick={() => handleNavigate(crumb.path)}
-                    className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${idx === breadcrumbs.length - 1
-                      ? 'bg-accent/20 text-accent border border-accent/30'
-                      : 'text-muted hover:text-foreground hover:bg-foreground/10'
-                      }`}
+            <div className="flex border-b border-[var(--glass-border)] mb-6">
+              <button
+                className={`py-3 px-6 font-bold text-sm transition-all border-b-2 ${activeTab === 'explorador' ? 'border-blue-500 text-blue-400' : 'border-transparent text-muted hover:text-foreground'}`}
+                onClick={() => setActiveTab('explorador')}
+              >
+                📁 Explorador documental
+              </button>
+              <button
+                className={`py-3 px-6 font-bold text-sm transition-all border-b-2 ${activeTab === 'descargas' ? 'border-blue-500 text-blue-400' : 'border-transparent text-muted hover:text-foreground'}`}
+                onClick={() => setActiveTab('descargas')}
+              >
+                📥 Descargas PDF
+              </button>
+            </div>
+
+            {activeTab === "explorador" && (
+              <div className="space-y-6 animate-in fade-in duration-500">
+                <div className="flex flex-col md:flex-row justify-between gap-4">
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
+                    <input
+                      type="text"
+                      placeholder="Buscar archivo..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="bg-foreground/15 border border-[var(--glass-border)] text-foreground pl-10 pr-4 py-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all w-full md:w-64 placeholder-gray-500"
+                    />
+                  </div>
+                  <button 
+                    onClick={() => alert("Función de subida próximamente.")}
+                    className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-foreground font-bold py-2 px-5 rounded-xl shadow-lg shadow-blue-500/30 flex items-center gap-2 transition-all hover:scale-105 active:scale-95"
                   >
-                    {crumb.label}
+                    <UploadCloud className="w-5 h-5" />
+                    <span>Subir documento</span>
                   </button>
-                  {idx < breadcrumbs.length - 1 && (
-                    <ChevronRight className="w-4 h-4 text-muted/80 flex-shrink-0" />
-                  )}
-                </React.Fragment>
-              ))}
-            </Card>
+                </div>
 
-            {/* Listado de Archivos y Carpetas */}
-            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md">
-              {loading ? (
-                <div className="p-12 text-center text-muted flex flex-col items-center">
-                  <div className="w-8 h-8 border-4 border-accent border-t-transparent rounded-full animate-spin mb-4"></div>
-                  <p>Cargando documentos...</p>
-                </div>
-              ) : error ? (
-                <div className="p-12 text-center">
-                  <div className="text-red-400 mb-2">⚠️ Error</div>
-                  <p className="text-foreground/80">{error}</p>
-                </div>
-              ) : items.length === 0 ? (
-                <div className="p-16 text-center text-muted">
-                  <div className="text-4xl mb-4">📂</div>
-                  <p className="text-lg">El directorio está vacío.</p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-6">
-                  {filteredItems.length === 0 ? (
-                    <div className="col-span-full p-12 text-center text-muted">
-                      <Search className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                      <p>No se encontraron resultados para "{searchQuery}"</p>
-                    </div>
-                  ) : filteredItems.map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="group flex flex-col items-center p-6 bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-[var(--glass-border)] rounded-xl transition-all cursor-pointer duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 relative"
-                      onClick={() => item.is_dir ? handleNavigate(item.path) : handleDownload(item.path, item.name)}
+                <Card className="p-4 flex items-center gap-2 overflow-x-auto whitespace-nowrap bg-foreground/5 border border-[var(--glass-border)] rounded-xl shadow-lg">
+                  {currentPath && (
+                    <button
+                      onClick={handleGoUp}
+                      className="flex items-center justify-center p-2 mr-2 text-muted hover:text-foreground hover:bg-foreground/10 rounded-lg transition-colors"
+                      title="Subir un nivel"
                     >
-                      <div className="mb-4 transform group-hover:scale-110 transition-transform duration-300 relative">
-                        {downloadingStr === item.path ? (
-                          <div className="w-12 h-12 flex items-center justify-center animate-spin border-4 border-accent border-t-transparent rounded-full" />
-                        ) : item.is_dir ? (
-                          <Folder className="w-12 h-12 text-blue-400 drop-shadow-md" />
-                        ) : (
-                          getFileIcon(item.name)
-                        )}
-                      </div>
-
-                      <h3 className="text-sm font-semibold text-foreground/90 group-hover:text-foreground text-center line-clamp-2 w-full break-words">
-                        {item.name}
-                      </h3>
-
-                      {!item.is_dir && (
-                        <p className="text-xs text-muted mt-2 font-mono">
-                          {formatSize(item.size)}
-                        </p>
+                      <CornerLeftUp className="w-5 h-5" />
+                    </button>
+                  )}
+                  {breadcrumbs.map((crumb, idx) => (
+                    <React.Fragment key={crumb.path}>
+                      <button
+                        onClick={() => handleNavigate(crumb.path)}
+                        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${idx === breadcrumbs.length - 1
+                          ? 'bg-accent/20 text-accent border border-accent/30'
+                          : 'text-muted hover:text-foreground hover:bg-foreground/10'
+                          }`}
+                      >
+                        {crumb.label}
+                      </button>
+                      {idx < breadcrumbs.length - 1 && (
+                        <ChevronRight className="w-4 h-4 text-muted/80 flex-shrink-0" />
                       )}
-
-                      {!item.is_dir && (
-                        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <button
-                            className="p-1.5 bg-accent/20 text-accent rounded-md hover:bg-accent hover:text-foreground transition-colors"
-                            onClick={(e) => { e.stopPropagation(); handleDownload(item.path, item.name); }}
-                          >
-                            <Download className="w-4 h-4" />
-                          </button>
-                        </div>
-                      )}
-                    </div>
+                    </React.Fragment>
                   ))}
+                </Card>
+
+                <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md">
+                  {loadingDocs ? (
+                    <div className="p-12 text-center text-muted flex flex-col items-center">
+                      <div className="w-8 h-8 border-4 border-accent border-t-transparent rounded-full animate-spin mb-4"></div>
+                      <p>Cargando documentos...</p>
+                    </div>
+                  ) : error ? (
+                    <div className="p-12 text-center">
+                      <div className="text-red-400 mb-2">⚠️ Error</div>
+                      <p className="text-foreground/80">{error}</p>
+                    </div>
+                  ) : items.length === 0 ? (
+                    <div className="p-16 text-center text-muted">
+                      <div className="text-4xl mb-4">📂</div>
+                      <p className="text-lg">El directorio está vacío.</p>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-6">
+                      {filteredItems.length === 0 ? (
+                        <div className="col-span-full p-12 text-center text-muted">
+                          <Search className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                          <p>No se encontraron resultados para "{searchQuery}"</p>
+                        </div>
+                      ) : filteredItems.map((item, idx) => (
+                        <div
+                          key={idx}
+                          className="group flex flex-col items-center p-6 bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-[var(--glass-border)] rounded-xl transition-all cursor-pointer duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 relative"
+                          onClick={() => item.is_dir ? handleNavigate(item.path) : handleDownloadDoc(item.path, item.name)}
+                        >
+                          <div className="mb-4 transform group-hover:scale-110 transition-transform duration-300 relative">
+                            {downloadingStr === item.path ? (
+                              <div className="w-12 h-12 flex items-center justify-center animate-spin border-4 border-accent border-t-transparent rounded-full" />
+                            ) : item.is_dir ? (
+                              <Folder className="w-12 h-12 text-blue-400 drop-shadow-md" />
+                            ) : (
+                              getFileIcon(item.name)
+                            )}
+                          </div>
+
+                          <h3 className="text-sm font-semibold text-foreground/90 group-hover:text-foreground text-center line-clamp-2 w-full break-words">
+                            {item.name}
+                          </h3>
+
+                          {!item.is_dir && (
+                            <p className="text-xs text-muted mt-2 font-mono">
+                              {formatSize(item.size)}
+                            </p>
+                          )}
+
+                          {!item.is_dir && (
+                            <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                              <button
+                                className="p-1.5 bg-accent/20 text-accent rounded-md hover:bg-accent hover:text-foreground transition-colors"
+                                onClick={(e) => { e.stopPropagation(); handleDownloadDoc(item.path, item.name); }}
+                              >
+                                <Download className="w-4 h-4" />
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              </div>
+            )}
+
+            {activeTab === "descargas" && (
+              <div className="space-y-8 animate-in fade-in duration-500">
+                {(!activeCursoId || !activeModuleId) ? (
+                  <Card className="p-8 text-center">
+                    <h2 className="text-2xl font-bold mb-4">No hay Curso o Módulo seleccionado</h2>
+                    <p className="text-muted">Por favor, ve a la sección de Datos y asegúrate de cargar ambos para generar PDFs.</p>
+                  </Card>
+                ) : (loadingData || !cursoData || !moduleData) ? (
+                  <div className="text-xl text-muted animate-pulse flex items-center justify-center gap-3 p-12">
+                    <span className="text-2xl">⏳</span> Cargando datos del módulo y curso...
+                  </div>
+                ) : (
+                  <>
+                    <Card className="p-6 border-t-4 border-t-purple-500">
+                      <h2 className="text-2xl font-bold mb-1">📅 Gestión temporal global</h2>
+                      <p className="text-sm text-muted mb-6">Planificación y seguimiento mensual</p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                          <div>
+                            <h3 className="text-lg font-bold mb-2">📆 Calendario académico</h3>
+                            <p className="text-sm text-muted mb-6">Vista global del curso con fechas, sesiones y eventos.</p>
+                          </div>
+                          <Button
+                            onClick={() => handleDownloadPdf('calendario')}
+                            disabled={downloadingStr === 'calendario'}
+                            className="w-full"
+                          >
+                            {downloadingStr === 'calendario' ? '⏳ Generando PDF...' : 'PDF Calendario'}
+                          </Button>
+                        </div>
+
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                          <div>
+                            <h3 className="text-lg font-bold mb-2">📊 Planificación mensual</h3>
+                            <p className="text-sm text-muted mb-6">Horas previstas frente a impartidas por UD y mes.</p>
+                          </div>
+                          <Button
+                            onClick={() => handleDownloadPdf('planificacion')}
+                            disabled={downloadingStr === 'planificacion'}
+                            className="w-full"
+                          >
+                            {downloadingStr === 'planificacion' ? '⏳ Generando PDF...' : 'PDF Planificación'}
+                          </Button>
+                        </div>
+                      </div>
+                    </Card>
+
+                    <Card className="p-6 border-t-4 border-t-emerald-500">
+                      <h2 className="text-2xl font-bold mb-1">📝 Clases mensual - por UD</h2>
+                      <p className="text-sm text-muted mb-6">Registro detallado de clases impartidas y secuenciación por unidad didáctica.</p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                          <div>
+                            <h3 className="text-lg font-bold mb-2">📝 Clases mensual</h3>
+                            <p className="text-sm text-muted mb-6">Registro detallado de la planificación del día a día.</p>
+                          </div>
+                          <Button
+                            onClick={() => handleDownloadPdf('seguimiento')}
+                            disabled={downloadingStr === 'seguimiento'}
+                            className="w-full"
+                          >
+                            {downloadingStr === 'seguimiento' ? '⏳ Generando PDF...' : 'PDF Seguimiento'}
+                          </Button>
+                        </div>
+
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                          <div>
+                            <h3 className="text-lg font-bold mb-2">📚 Clases por UD</h3>
+                            <p className="text-sm text-muted mb-6">Secuenciación de sesiones de cada Unidad Didáctica.</p>
+                          </div>
+                          <Button
+                            onClick={() => handleDownloadPdf('clases_ud')}
+                            disabled={downloadingStr === 'clases_ud'}
+                            className="w-full"
+                          >
+                            {downloadingStr === 'clases_ud' ? '⏳ Generando PDF...' : 'PDF Clases por UD'}
+                          </Button>
+                        </div>
+                      </div>
+                    </Card>
+
+                    <Card className="p-6 border-t-4 border-t-accent">
+                      <h2 className="text-2xl font-bold mb-1">⚙️ Gestión del aprendizaje</h2>
+                      <p className="text-sm text-muted mb-6">Matrices y programación del módulo</p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                          <div>
+                            <h3 className="text-lg font-bold mb-2">🧮 Matrices RA → UD</h3>
+                            <p className="text-sm text-muted mb-6">Relación y ponderación entre RA y UD del módulo.</p>
+                          </div>
+                          <Button
+                            onClick={() => handleDownloadPdf('matrices')}
+                            disabled={downloadingStr === 'matrices'}
+                            className="w-full"
+                          >
+                            {downloadingStr === 'matrices' ? '⏳ Generando PDF...' : 'PDF Matrices'}
+                          </Button>
+                        </div>
+                      </div>
+                    </Card>
+
+                    <Card className="p-6 border-t-4 border-t-blue-500">
+                      <h2 className="text-2xl font-bold mb-6">📊 Boletines de calificaciones grupales</h2>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center">
+                          <div>
+                            <h3 className="text-lg font-bold mb-2">👥 1er trimestre</h3>
+                          </div>
+                          <Button
+                            variant="secondary"
+                            onClick={() => handleDownloadPdf('grupal_1t')}
+                            disabled={downloadingStr === 'grupal_1t'}
+                            className="w-full"
+                          >
+                            {downloadingStr === 'grupal_1t' ? '⏳' : 'PDF Boletín grupal 1T'}
+                          </Button>
+                        </div>
+
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center">
+                          <div>
+                            <h3 className="text-lg font-bold mb-2">👥 2º trimestre</h3>
+                          </div>
+                          <Button
+                            variant="secondary"
+                            onClick={() => handleDownloadPdf('grupal_2t')}
+                            disabled={downloadingStr === 'grupal_2t'}
+                            className="w-full"
+                          >
+                            {downloadingStr === 'grupal_2t' ? '⏳' : 'PDF Boletín grupal 2T'}
+                          </Button>
+                        </div>
+
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center">
+                          <div>
+                            <h3 className="text-lg font-bold mb-2">👥 3er trimestre</h3>
+                          </div>
+                          <Button
+                            variant="secondary"
+                            onClick={() => handleDownloadPdf('grupal_3t')}
+                            disabled={downloadingStr === 'grupal_3t'}
+                            className="w-full"
+                          >
+                            {downloadingStr === 'grupal_3t' ? '⏳' : 'PDF Boletín grupal 3T'}
+                          </Button>
+                        </div>
+
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center border-l-4 border-l-yellow-400">
+                          <div>
+                            <h3 className="text-lg font-bold mb-2">🎓 Eval. Final</h3>
+                          </div>
+                          <Button
+                            variant="secondary"
+                            onClick={() => handleDownloadPdf('grupal_final')}
+                            disabled={downloadingStr === 'grupal_final'}
+                            className="w-full"
+                          >
+                            {downloadingStr === 'grupal_final' ? '⏳' : 'PDF Boletín Final'}
+                          </Button>
+                        </div>
+                      </div>
+                    </Card>
+
+                    <Card className="p-6 border-t-4 border-t-blue-500">
+                      <h2 className="text-2xl font-bold mb-6">👤 Boletines individuales</h2>
+                      {activeAlumnos.length > 0 ? (
+                        <div className="flex flex-col md:flex-row md:items-end gap-6 bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6">
+                          <div className="flex-1">
+                            <h3 className="text-lg font-bold mb-2">📄 Boletín de alumnado</h3>
+                            <p className="text-sm text-muted mb-4">Genera un boletín detallado de un alumnado específico.</p>
+                            <select id="alumno_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-blue-500 focus:outline-none font-bold">
+                              {activeAlumnos.map((al: Alumno) => (
+                                <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre} ({al.ID})</option>
+                              ))}
+                            </select>
+                          </div>
+                          <Button
+                            variant="secondary"
+                            onClick={() => {
+                              const sel = document.getElementById('alumno_select') as HTMLSelectElement;
+                              if (sel && sel.value) handleDownloadPdf('individual', sel.value);
+                            }}
+                            disabled={downloadingStr === 'individual'}
+                            className="px-8 py-3 h-[50px] w-full md:w-auto"
+                          >
+                            {downloadingStr === 'individual' ? '⏳ Generando boletín...' : 'PDF Boletín individual'}
+                          </Button>
+                        </div>
+                      ) : (
+                        <p className="text-muted italic">No hay estudiantes activos para generar boletines individuales.</p>
+                      )}
+                    </Card>
+                  </>
+                )}
+              </div>
+            )}
 
           </div>
         </div>
 
-        {/* Modal de Previsualización */}
+        {/* Modal de Previsualización (Compartido para ambos) */}
         {previewUrl && (
           <div className="fixed inset-0 z-50 flex flex-col bg-black/90 backdrop-blur-md">
             <div className="flex items-center justify-between p-4 bg-[var(--glass-bg)] border-b border-[var(--glass-border)]">
               <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground">
-<span>📄</span> {previewFilename}
-</h2>
+                <span>📄</span> {previewFilename}
+              </h2>
               <div className="flex gap-4">
                 <button
                   onClick={() => {
                     const a = document.createElement("a");
                     a.href = previewUrl;
-                    a.download = previewFilename || "documento";
+                    a.download = previewFilename || "documento.pdf";
                     a.click();
                   }}
                   className="bg-blue-600 hover:bg-blue-500 text-foreground px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors"

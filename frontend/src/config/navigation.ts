@@ -8,8 +8,7 @@ export const navGroups = [
       { href: "/matrices", label: "Matrices OG→RA→CE→UD", icon: "🧮" },
       { href: "/instrumentos", label: "Instrumentos de evaluación", icon: "🛠️" },
       { href: "/programacion", label: "Programación de aula", icon: "📚" },
-      { href: "/documentos", label: "Visor documental", icon: "📄" },
-      { href: "/descargas", label: "Descargas PDF", icon: "📥" }
+      { href: "/documentos", label: "Documentos y descargas", icon: "📄" }
     ]
   },
   {
