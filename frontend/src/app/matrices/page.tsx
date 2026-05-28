@@ -138,20 +138,31 @@ export default function MatricesPage() {
 <span>🎓</span> RA. Resultados de aprendizaje
 </h2>
             <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
+              <table className="w-full text-left text-sm">
                 <thead>
-                  <tr className="border-b border-[var(--glass-border)] text-sm text-muted">
-                    <th className="p-3">ID-RA</th>
-                    <th className="p-3 w-24">% RA</th>
-                    <th className="p-3 w-20 text-center">FEOE</th>
-                    <th className="p-3">Resultados de aprendizaje</th>
+                  <tr className="text-muted border-b border-[var(--glass-border)]">
+                    <th className="pb-2 w-24">ID-RA</th>
+                    <th className="pb-2 w-24">% RA</th>
+                    <th className="pb-2 w-16 text-center">FEOE</th>
+                    <th className="pb-2">Resultados de aprendizaje</th>
                   </tr>
                 </thead>
                 <tbody>
                   {df_ra.map((ra: any, idx: number) => (
                     <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
-                      <td className="p-3 font-mono text-sm">{ra.id_ra}</td>
-                      <td className="p-3">
+                      <td className="py-2 pr-2">
+                        <input
+                          type="text"
+                          value={ra.id_ra || ""}
+                          onChange={(e) => {
+                            const newRa = [...df_ra];
+                            newRa[idx].id_ra = e.target.value;
+                            updateDataFrame("df_ra", newRa);
+                          }}
+                          className="w-16 bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-[#14a085] focus:outline-none font-mono text-sm"
+                        />
+                      </td>
+                      <td className="py-2 pr-2">
                         <input
                           type="number"
                           value={ra.peso_ra || 0}
@@ -163,7 +174,7 @@ export default function MatricesPage() {
                           className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-sm focus:border-[#14a085] focus:outline-none"
                         />
                       </td>
-                      <td className="p-3 text-center">
+                      <td className="py-2 text-center">
                         <button
                           onClick={() => {
                             const newRa = [...df_ra];
@@ -172,16 +183,16 @@ export default function MatricesPage() {
                             newRa[idx].is_dual = !isChecked;
                             updateDataFrame("df_ra", newRa);
                           }}
-                          className={`w-7 h-7 rounded-md flex items-center justify-center transition-all mx-auto ${
+                          className={`w-6 h-6 rounded flex items-center justify-center transition-all mx-auto ${
                             (ra.is_dual === true || String(ra.is_dual).toLowerCase() === 'true')
                               ? 'bg-[#14a085]/20 text-[#14a085] border border-[#14a085]/50 shadow-[0_0_10px_rgba(20,160,133,0.2)]'
                               : 'bg-background border border-[var(--glass-border)] text-transparent hover:border-[#14a085]/30 hover:bg-[#14a085]/10'
                           }`}
                         >
-                          {(ra.is_dual === true || String(ra.is_dual).toLowerCase() === 'true') && <span className="text-sm font-bold">✓</span>}
+                          {(ra.is_dual === true || String(ra.is_dual).toLowerCase() === 'true') && <span className="text-xs font-bold">✓</span>}
                         </button>
                       </td>
-                      <td className="p-3">
+                      <td className="py-2 pr-2">
                         <input
                           type="text"
                           value={ra.desc_ra || ""}
