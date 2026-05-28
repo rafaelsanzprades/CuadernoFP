@@ -135,15 +135,11 @@ export default function ContextoPage() {
         <Header breadcrumbSuffix={activeTabCleanLabel} />
 
         <main className="flex-1 p-8 content-area space-y-8">
-          <div className="mb-4">
+          <div className="mb-4 pl-6">
             <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-              {activeTab === "contexto" ? "📝 Contexto" : "📝 Planes"}
+              {activeTab === "contexto" ? "📝 Contexto" : "📄 Planes"}
             </h1>
-            <p className="text-muted mt-2">
-              {activeTab === "contexto" 
-                ? "Información general del centro, profesorado y aulas."
-                : "Programas educativos del Centro."}
-            </p>
+            <p className="text-muted mt-1">Configuración del entorno del IES y de los planes del departamento.</p>
           </div>
 
           <div className="flex border-b border-[var(--glass-border)] mb-8 overflow-x-auto scrollbar-hide">

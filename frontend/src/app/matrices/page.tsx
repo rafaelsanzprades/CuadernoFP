@@ -108,7 +108,7 @@ export default function MatricesPage() {
         <Header />
 
         <main className="flex-1 p-8 content-area space-y-8">
-          <div className="mb-8">
+          <div className="mb-8 pl-6">
             <h1 className="text-4xl font-extrabold text-foreground tracking-tight">
               🧮 Matrices RA → CE → UD
             </h1>
@@ -162,16 +162,22 @@ export default function MatricesPage() {
                         />
                       </td>
                       <td className="p-3 text-center">
-                        <input
-                          type="checkbox"
-                          checked={ra.is_dual || false}
-                          onChange={(e) => {
+                        <button
+                          onClick={() => {
                             const newRa = [...df_ra];
-                            newRa[idx].is_dual = e.target.checked;
+                            const currentVal = newRa[idx].is_dual;
+                            const isChecked = currentVal === true || String(currentVal).toLowerCase() === 'true';
+                            newRa[idx].is_dual = !isChecked;
                             updateDataFrame("df_ra", newRa);
                           }}
-                          className="accent-[#14a085]"
-                        />
+                          className={`w-7 h-7 rounded-md flex items-center justify-center transition-all mx-auto ${
+                            (ra.is_dual === true || String(ra.is_dual).toLowerCase() === 'true')
+                              ? 'bg-[#14a085]/20 text-[#14a085] border border-[#14a085]/50 shadow-[0_0_10px_rgba(20,160,133,0.2)]'
+                              : 'bg-background border border-[var(--glass-border)] text-transparent hover:border-[#14a085]/30 hover:bg-[#14a085]/10'
+                          }`}
+                        >
+                          {(ra.is_dual === true || String(ra.is_dual).toLowerCase() === 'true') && <span className="text-sm font-bold">✓</span>}
+                        </button>
                       </td>
                       <td className="p-3">
                         <input
@@ -316,16 +322,22 @@ export default function MatricesPage() {
                                         />
                                       </td>
                                       <td className="py-2 text-center">
-                                        <input
-                                          type="checkbox"
-                                          checked={ce.feoe || false}
-                                          onChange={(e) => {
+                                        <button
+                                          onClick={() => {
                                             const newCe = [...df_ce];
-                                            newCe[globalIdx].feoe = e.target.checked;
+                                            const currentVal = newCe[globalIdx].feoe;
+                                            const isChecked = currentVal === true || String(currentVal).toLowerCase() === 'true';
+                                            newCe[globalIdx].feoe = !isChecked;
                                             updateDataFrame("df_ce", newCe);
                                           }}
-                                          className="accent-yellow-500"
-                                        />
+                                          className={`w-6 h-6 rounded flex items-center justify-center transition-all mx-auto ${
+                                            (ce.feoe === true || String(ce.feoe).toLowerCase() === 'true')
+                                              ? 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/50 shadow-[0_0_10px_rgba(234,179,8,0.2)]'
+                                              : 'bg-background border border-[var(--glass-border)] text-transparent hover:border-yellow-500/30 hover:bg-yellow-500/10'
+                                          }`}
+                                        >
+                                          {(ce.feoe === true || String(ce.feoe).toLowerCase() === 'true') && <span className="text-xs font-bold">✓</span>}
+                                        </button>
                                       </td>
                                       <td className="py-2 pr-2">
                                         <input

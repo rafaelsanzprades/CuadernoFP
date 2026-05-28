@@ -2,11 +2,11 @@ export const navGroups = [
   {
     title: "Programación",
     items: [
-      { href: "/modulo", label: "Módulo", icon: "⚙️" },
+      { href: "/modulo", label: "Módulo didáctico", icon: "⚙️" },
       { href: "/contexto", label: "Contexto y planes", icon: "📝" },
       { href: "/calendario", label: "Calendario académico", icon: "🗓️" },
-      { href: "/resultados", label: "Resultados AP. RAs", icon: "🎯" },
       { href: "/matrices", label: "Matrices RA→CE→UD", icon: "🧮" },
+      { href: "/resultados", label: "Contribución RA→OG", icon: "🎯" },
       { href: "/instrumentos", label: "Instrumentos de evaluación", icon: "🛠️" },
       { href: "/programacion", label: "Programación de aula", icon: "📚" },
       { href: "/documentos", label: "Visor documental", icon: "📄" },
@@ -18,7 +18,7 @@ export const navGroups = [
     items: [
       { href: "/matricula", label: "Matrícula alumnado", icon: "👥" },
       { href: "/seguimiento", label: "Seguimiento diario", icon: "📍" },
-      { href: "/seguimiento/asistencia", label: "Control de asistencia", icon: "🙋‍♂️" },
+      { href: "/asistencia", label: "Control de asistencia", icon: "🙋‍♂️" },
       { href: "/calificacion", label: "Calificación académica", icon: "📊" },
       { href: "/calificacion-feoe", label: "Calificación FEOE", icon: "🏢" },
       { href: "/evaluacion", label: "Evaluación por RA", icon: "📈" },

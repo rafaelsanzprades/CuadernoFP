@@ -14,6 +14,7 @@ export default function CalificacionPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
+  const [activeTab, setActiveTab] = useState("resumen");
   const [activeTabByStudent, setActiveTabByStudent] = useState<Record<string, string>>({});
   const [allStudentsOpen, setAllStudentsOpen] = useState(true);
   const [openStudents, setOpenStudents] = useState<Set<string>>(new Set());
@@ -241,14 +242,33 @@ export default function CalificacionPage() {
         <Header />
         
         <main className="flex-1 p-8 content-area space-y-6">
-          <div className="mb-6">
+          <div className="mb-6 pl-6">
             <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
               📊 Calificación académica
             </h1>
             <p className="text-muted mt-2">Registro y cálculo automático de las calificaciones por trimestre y evaluación final.</p>
           </div>
 
-          {/* ── Resumen estadístico por trimestres ────────────── */}
+          <div className="flex border-b border-[var(--glass-border)] mb-6 overflow-x-auto scrollbar-hide">
+            {[
+              { id: "resumen", label: "📊 Resumen estadístico" },
+              { id: "detalle", label: "👥 Detalle por alumnado" },
+            ].map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-6 py-3 font-bold text-sm transition-all border-b-2 whitespace-nowrap ${
+                  activeTab === tab.id
+                    ? "border-blue-500 text-blue-400"
+                    : "border-transparent text-muted hover:text-foreground hover:bg-foreground/5"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {activeTab === "resumen" && (
           <Card className="p-6">
             <h4 className="text-lg font-bold text-foreground mb-5 flex items-center gap-2">
               <span>📊</span> Resumen de calificaciones por trimestres
@@ -364,9 +384,11 @@ export default function CalificacionPage() {
               })()}
             </div>
           </Card>
+          )}
 
-          {/* ── Subtítulo Calificación por alumnado ──────────── */}
-          <div className="flex items-center justify-between">
+          {activeTab === "detalle" && (
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
             <div>
               <h2 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 👥 Calificación por alumnado
@@ -525,6 +547,8 @@ export default function CalificacionPage() {
               );
             })}
           </div>
+            </div>
+          )}
 
         </main>
       </div>

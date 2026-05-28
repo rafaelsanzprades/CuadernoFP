@@ -89,7 +89,7 @@ export default function AsignacionesPage() {
       <main className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
         <div className="flex-1 overflow-y-auto scrollbar-hide p-8">
-          <div className="mb-8">
+          <div className="mb-8 pl-6">
             <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3 mb-2">
               <UserCog className="w-10 h-10 text-accent" />
               Asignación de Módulos

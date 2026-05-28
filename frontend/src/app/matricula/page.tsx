@@ -140,7 +140,7 @@ export default function MatriculaPage() {
         <Header breadcrumbSuffix={activeTabCleanLabel} />
         
         <main className="flex-1 p-8 content-area space-y-8">
-          <div className="mb-8">
+          <div className="mb-8 pl-6">
             <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
               👥 Matrícula
             </h1>

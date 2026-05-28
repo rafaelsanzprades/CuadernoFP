@@ -49,7 +49,7 @@ function DocentesContent() {
           <div className="w-full space-y-6 animate-in fade-in duration-500">
             
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-              <div>
+              <div className="pl-6">
                 <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3 mb-2">
                   <span className="text-3xl">👨‍🏫</span> Asignación de docentes
                 </h1>

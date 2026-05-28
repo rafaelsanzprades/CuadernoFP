@@ -4,15 +4,14 @@ import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
-import { GeneralTab } from "@/components/features/modulo/GeneralTab";
-import { HorariosTab } from "@/components/features/modulo/HorariosTab";
-import { EvaluacionTab } from "@/components/features/modulo/EvaluacionTab";
+import { DatosTab } from "@/components/features/modulo/DatosTab";
+import { FeoeTab } from "@/components/features/modulo/FeoeTab";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 
 export default function ModuloConfigPage() {
   const { activeModuleId, moduleData, setModuleData } = useAppStore();
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("general");
+  const [activeTab, setActiveTab] = useState("datos");
 
   useEffect(() => {
     fetch(`/api/module/${activeModuleId}`)
@@ -25,9 +24,8 @@ export default function ModuloConfigPage() {
   }, [activeModuleId, setModuleData]);
 
   const TABS = [
-    { id: "general", label: "📄 Datos generales", cleanLabel: "Datos generales" },
-    { id: "horarios", label: "🕒 Horarios y fechas", cleanLabel: "Horarios y fechas" },
-    { id: "evaluacion", label: "⚖️ Evaluación", cleanLabel: "Evaluación" }
+    { id: "datos", label: "📄 Datos", cleanLabel: "Datos del módulo" },
+    { id: "feoe", label: "🏢 Formación en Empresa (FEOE)", cleanLabel: "Formación en Empresa (FEOE)" }
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -54,9 +52,9 @@ export default function ModuloConfigPage() {
           <MotionWrapper className="space-y-8 pb-12">
 
             {/* ── Título ─────────────────────────────────────────── */}
-            <div>
+            <div className="pl-6">
               <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3 mb-1">
-                ⚙️ Módulo
+                ⚙️ Módulo didáctico
               </h1>
               <p className="text-muted mt-1">Configuración básica del módulo didáctico.</p>
             </div>
@@ -73,9 +71,8 @@ export default function ModuloConfigPage() {
               ))}
             </div>
 
-            {activeTab === "general" && <GeneralTab />}
-            {activeTab === "horarios" && <HorariosTab />}
-            {activeTab === "evaluacion" && <EvaluacionTab />}
+            {activeTab === "datos" && <DatosTab />}
+            {activeTab === "feoe" && <FeoeTab />}
 
           </MotionWrapper>
         </div>

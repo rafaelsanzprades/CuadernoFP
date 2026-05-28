@@ -176,7 +176,7 @@ export default function EvaluacionPage() {
         <Header breadcrumbSuffix={activeTabCleanLabel} />
 
         <main className="flex-1 p-8 content-area space-y-6">
-          <div className="mb-4">
+          <div className="mb-4 pl-6">
             <h1 className="text-4xl font-extrabold text-foreground tracking-tight">
               📈 Evaluación por RA
             </h1>

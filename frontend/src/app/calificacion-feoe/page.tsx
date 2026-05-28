@@ -113,6 +113,32 @@ export default function CalificacionFEOEPage() {
     updateCursoData("df_feoe", newFEOE);
   };
 
+  const handleUpdateFEOEColumn = (ra_id: string, val: number) => {
+    const newFEOE = [...df_feoe];
+    df_evaluable.forEach((al: any) => {
+      let rowIdx = newFEOE.findIndex((f: any) => f.ID === al.ID);
+      if (rowIdx === -1) {
+        newFEOE.push({ ID: al.ID });
+        rowIdx = newFEOE.length - 1;
+      }
+      newFEOE[rowIdx][ra_id] = val;
+    });
+    updateCursoData("df_feoe", newFEOE);
+  };
+
+  const handleUpdateFEOERow = (al_id: string, val: number) => {
+    const newFEOE = [...df_feoe];
+    let rowIdx = newFEOE.findIndex((f: any) => f.ID === al_id);
+    if (rowIdx === -1) {
+      newFEOE.push({ ID: al_id });
+      rowIdx = newFEOE.length - 1;
+    }
+    ras_dualizados.forEach((ra: string) => {
+      newFEOE[rowIdx][ra] = val;
+    });
+    updateCursoData("df_feoe", newFEOE);
+  };
+
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar />
@@ -120,7 +146,7 @@ export default function CalificacionFEOEPage() {
         <Header />
         
         <main className="flex-1 p-8 content-area space-y-8">
-          <div className="mb-8">
+          <div className="mb-8 pl-6">
             <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
               🏢 Calificación FEOE
             </h1>
@@ -139,29 +165,36 @@ export default function CalificacionFEOEPage() {
             </Card>
           ) : (
             <Card className="p-6 border-t-4 border-t-purple-500">
-              <div className="mb-6 flex gap-6">
-                <div className="text-sm text-foreground/80 bg-foreground/10 p-4 rounded-lg flex-1 border border-white/5">
-                  <h4 className="font-bold text-purple-400 mb-2">Leyenda de Calificaciones</h4>
-                  <ul className="space-y-1">
-                    <li><span className="font-mono text-muted w-6 inline-block">0</span> Sin evaluar</li>
-                    <li><span className="font-mono text-red-400 w-6 inline-block">1</span> No Superado</li>
-                    <li><span className="font-mono text-yellow-500 w-6 inline-block">2</span> Superado (Suficiente)</li>
-                    <li><span className="font-mono text-blue-400 w-6 inline-block">3</span> Bien / Notable</li>
-                    <li><span className="font-mono text-green-400 w-6 inline-block">4</span> Excelente</li>
-                  </ul>
-                </div>
-              </div>
+
 
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
                   <thead>
-                    <tr className="border-b border-[var(--glass-border)] text-muted bg-background">
-                      <th className="p-3 sticky left-0 z-10 border-r border-[var(--glass-border)] bg-background w-16">ID</th>
-                      <th className="p-3 sticky left-[64px] z-10 border-r border-[var(--glass-border)] bg-background min-w-[250px]">Alumno</th>
+                    <tr className="border-b border-[var(--glass-border)] text-muted bg-[#0b1120]">
+                      <th className="p-3 sticky left-0 z-50 border-r border-[var(--glass-border)] !bg-[#0b1120] w-16 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.3)]">ID</th>
+                      <th className="p-3 sticky left-[64px] z-50 border-r border-[var(--glass-border)] !bg-[#0b1120] min-w-[250px] shadow-[2px_0_5px_-2px_rgba(0,0,0,0.3)]">Alumnado</th>
                       {ras_dualizados.map((ra: string) => (
-                        <th key={ra} className="p-3 text-center border-r border-[var(--glass-border)] w-24">
+                        <th key={ra} className="p-3 text-center border-r border-[var(--glass-border)] min-w-[120px] align-top">
                           <div className="font-bold text-purple-400">{ra}</div>
-                          <div className="text-xs text-muted">(1-4)</div>
+                          <div className="text-[10px] text-muted mb-2">(1-4)</div>
+                          <select
+                            onChange={(e) => {
+                              if (e.target.value !== "") {
+                                handleUpdateFEOEColumn(ra, Number(e.target.value));
+                                e.target.value = "";
+                              }
+                            }}
+                            className="w-[110px] mx-auto block bg-foreground/15 text-muted font-bold border border-[var(--glass-border)] rounded px-2 py-1 text-xs focus:border-purple-500 focus:outline-none cursor-pointer transition-colors hover:bg-foreground/20"
+                            defaultValue=""
+                            title={`Valorar todos los alumnos para ${ra}`}
+                          >
+                            <option value="" disabled className="bg-background text-muted font-bold">Todos ↓</option>
+                            <option value="0" className="bg-background text-muted">0 - Sin evaluar</option>
+                            <option value="1" className="bg-background text-red-500">1 - No Superado</option>
+                            <option value="2" className="bg-background text-orange-500">2 - Superado</option>
+                            <option value="3" className="bg-background text-yellow-500">3 - Bien</option>
+                            <option value="4" className="bg-background text-green-500">4 - Excelente</option>
+                          </select>
                         </th>
                       ))}
                     </tr>
@@ -172,24 +205,54 @@ export default function CalificacionFEOEPage() {
                       const fRow = df_feoe.find((f: any) => f.ID === al_id) || {};
 
                       return (
-                        <tr key={al_id} className="border-b border-white/5 hover:bg-foreground/5">
-                          <td className="p-3 font-mono text-xs sticky left-0 z-10 border-r border-[var(--glass-border)] bg-background group-hover:bg-[#111827]">
+                        <tr key={al_id} className="group border-b border-white/5 hover:bg-foreground/5 relative z-0">
+                          <td className="p-3 font-mono text-xs sticky left-0 z-40 border-r border-[var(--glass-border)] !bg-[#0b1120] group-hover:!bg-[#111827] shadow-[2px_0_5px_-2px_rgba(0,0,0,0.3)]">
                             {al_id}
                           </td>
-                          <td className="p-3 font-semibold sticky left-[64px] z-10 border-r border-[var(--glass-border)] bg-background group-hover:bg-[#111827]">
-                            {al.Apellidos}, {al.Nombre}
+                          <td className="p-3 font-semibold sticky left-[64px] z-40 border-r border-[var(--glass-border)] !bg-[#0b1120] group-hover:!bg-[#111827] shadow-[2px_0_5px_-2px_rgba(0,0,0,0.3)]">
+                            <div className="flex items-center justify-between gap-4">
+                              <span>{al.Apellidos}, {al.Nombre}</span>
+                              <select
+                                onChange={(e) => {
+                                  if (e.target.value !== "") {
+                                    handleUpdateFEOERow(al_id, Number(e.target.value));
+                                    e.target.value = "";
+                                  }
+                                }}
+                                className="w-[100px] bg-foreground/15 text-muted font-bold border border-[var(--glass-border)] rounded px-2 py-1 text-xs focus:border-purple-500 focus:outline-none cursor-pointer transition-colors hover:bg-foreground/20"
+                                defaultValue=""
+                                title="Valorar todos los RA de este alumno"
+                              >
+                                <option value="" disabled className="bg-background text-muted font-bold">Todos →</option>
+                                <option value="0" className="bg-background text-muted">0 - Sin</option>
+                                <option value="1" className="bg-background text-red-500">1 - No Sup.</option>
+                                <option value="2" className="bg-background text-orange-500">2 - Sup.</option>
+                                <option value="3" className="bg-background text-yellow-500">3 - Bien</option>
+                                <option value="4" className="bg-background text-green-500">4 - Exc.</option>
+                              </select>
+                            </div>
                           </td>
                           {ras_dualizados.map((ra: string) => {
                             const val = Number(fRow[ra]) || 0;
                             return (
                               <td key={ra} className="p-3 border-r border-[var(--glass-border)] text-center">
-                                <input 
-                                  type="number"
-                                  min="0" max="4" step="1"
+                                <select
                                   value={val}
                                   onChange={(e) => handleUpdateFEOE(al_id, ra, Number(e.target.value) || 0)}
-                                  className="w-16 bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-purple-500 focus:outline-none text-center font-bold"
-                                />
+                                  className={`w-[160px] border border-[var(--glass-border)] rounded px-2 py-1 text-sm font-bold focus:border-purple-500 focus:outline-none cursor-pointer transition-colors ${
+                                    val === 1 ? 'bg-red-500/10 text-red-500' :
+                                    val === 2 ? 'bg-orange-500/10 text-orange-500' :
+                                    val === 3 ? 'bg-yellow-500/10 text-yellow-500' :
+                                    val === 4 ? 'bg-green-500/10 text-green-500' :
+                                    'bg-foreground/15 text-muted'
+                                  }`}
+                                >
+                                  <option value="0" className="bg-background text-muted">0 - Sin evaluar</option>
+                                  <option value="1" className="bg-background text-red-500">1 - No Superado</option>
+                                  <option value="2" className="bg-background text-orange-500">2 - Superado</option>
+                                  <option value="3" className="bg-background text-yellow-500">3 - Bien</option>
+                                  <option value="4" className="bg-background text-green-500">4 - Excelente</option>
+                                </select>
                               </td>
                             );
                           })}

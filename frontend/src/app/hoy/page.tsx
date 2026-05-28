@@ -51,10 +51,10 @@ export default function HoyPage() {
         <Header breadcrumbSuffix={activeTabCleanLabel} />
 
         <div className="flex-1 p-8 pt-4 overflow-y-auto scrollbar-hide">
-          <div className="max-w-6xl mx-auto space-y-8 pb-12">
+          <div className="w-full space-y-8 pb-12">
 
             {/* Título */}
-            <div>
+            <div className="pl-6">
               <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3 mb-1">
                 📅 Tu día y semana
               </h1>

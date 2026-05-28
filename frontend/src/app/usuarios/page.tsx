@@ -106,7 +106,7 @@ export default function UsuariosPage() {
             
             {/* Cabecera */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-              <div>
+              <div className="pl-6">
                 <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3 mb-2">
                   <span className="text-3xl">👥</span> Gestión de usuarios
                 </h1>

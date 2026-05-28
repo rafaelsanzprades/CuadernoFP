@@ -112,7 +112,7 @@ export default function DescargasPage() {
         <Header />
 
         <main className="flex-1 p-8 content-area space-y-8">
-          <div>
+          <div className="pl-6">
             <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
               📥 Descargas PDF
             </h1>

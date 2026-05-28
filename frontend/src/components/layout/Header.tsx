@@ -43,6 +43,12 @@ export default function Header({ title, breadcrumbSuffix }: { title?: string; br
     }
   }
 
+  // Fallback para rutas especiales que no están en el array principal (como /hoy)
+  if (!currentGroup && pathname === "/hoy") {
+    currentGroup = "Inicio";
+    currentItem = "Tu día y semana";
+  }
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (!(event.target as HTMLElement).closest(".dropdown-group")) {

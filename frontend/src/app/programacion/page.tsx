@@ -174,7 +174,7 @@ export default function ProgramacionPage() {
         
         <main className="flex-1 p-8 space-y-8 overflow-y-auto">
           <div className="flex justify-between items-center mb-8">
-            <div>
+            <div className="pl-6">
               <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 📚 Programación de aula
               </h1>
