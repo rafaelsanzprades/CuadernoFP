@@ -285,12 +285,9 @@ export default function MatricesPage() {
                             <table className="w-full text-left text-sm">
                               <thead>
                                 <tr className="text-muted border-b border-[var(--glass-border)]">
-                                  <th className="pb-2">ID-CE</th>
-                                  <th className="pb-2 w-20">% CE</th>
-                                  <th className="pb-2 w-16 text-center">FEOE</th>
+                                  <th className="pb-2 w-24">ID-CE</th>
+                                  <th className="pb-2 w-24">% CE</th>
                                   <th className="pb-2">Criterio de Evaluación</th>
-                                  <th className="pb-2 w-32">OG</th>
-                                  <th className="pb-2 w-32">CPE</th>
                                   <th className="pb-2 w-10"></th>
                                 </tr>
                               </thead>
@@ -317,29 +314,31 @@ export default function MatricesPage() {
                                           value={ce.peso_ce || 0}
                                           onChange={(e) => {
                                             const newCe = [...df_ce];
-                                            newCe[globalIdx].peso_ce = parseFloat(e.target.value) || 0;
+                                            const newVal = parseFloat(e.target.value) || 0;
+                                            newCe[globalIdx].peso_ce = newVal;
+                                            
+                                            const raCeIndexes = df_ce.map((c: any, i: number) => c.id_ra === ra.id_ra ? i : -1).filter((i: number) => i !== -1);
+                                            const currentLocalIdx = raCeIndexes.indexOf(globalIdx);
+                                            
+                                            if (currentLocalIdx < raCeIndexes.length - 1) {
+                                              let sumSoFar = 0;
+                                              for (let i = 0; i <= currentLocalIdx; i++) {
+                                                sumSoFar += Number(newCe[raCeIndexes[i]].peso_ce) || 0;
+                                              }
+                                              
+                                              const targetTotal = 100;
+                                              let remaining = Math.max(0, targetTotal - sumSoFar);
+                                              const remainingCount = raCeIndexes.length - 1 - currentLocalIdx;
+                                              const share = Number((remaining / remainingCount).toFixed(1));
+                                              
+                                              for (let i = currentLocalIdx + 1; i < raCeIndexes.length; i++) {
+                                                newCe[raCeIndexes[i]].peso_ce = share;
+                                              }
+                                            }
                                             updateDataFrame("df_ce", newCe);
                                           }}
                                           className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-yellow-500 focus:outline-none"
                                         />
-                                      </td>
-                                      <td className="py-2 text-center">
-                                        <button
-                                          onClick={() => {
-                                            const newCe = [...df_ce];
-                                            const currentVal = newCe[globalIdx].feoe;
-                                            const isChecked = currentVal === true || String(currentVal).toLowerCase() === 'true';
-                                            newCe[globalIdx].feoe = !isChecked;
-                                            updateDataFrame("df_ce", newCe);
-                                          }}
-                                          className={`w-6 h-6 rounded flex items-center justify-center transition-all mx-auto ${
-                                            (ce.feoe === true || String(ce.feoe).toLowerCase() === 'true')
-                                              ? 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/50 shadow-[0_0_10px_rgba(234,179,8,0.2)]'
-                                              : 'bg-background border border-[var(--glass-border)] text-transparent hover:border-yellow-500/30 hover:bg-yellow-500/10'
-                                          }`}
-                                        >
-                                          {(ce.feoe === true || String(ce.feoe).toLowerCase() === 'true') && <span className="text-xs font-bold">✓</span>}
-                                        </button>
                                       </td>
                                       <td className="py-2 pr-2">
                                         <input
@@ -353,37 +352,19 @@ export default function MatricesPage() {
                                           className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-3 py-1 text-foreground focus:border-yellow-500 focus:outline-none"
                                         />
                                       </td>
-                                      <td className="py-2 pr-2">
-                                        <input
-                                          type="text"
-                                          value={ce.og_vinc || ""}
-                                          onChange={(e) => {
-                                            const newCe = [...df_ce];
-                                            newCe[globalIdx].og_vinc = e.target.value;
-                                            updateDataFrame("df_ce", newCe);
-                                          }}
-                                          placeholder="Ej. OG1"
-                                          className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-yellow-500 focus:outline-none text-xs"
-                                        />
-                                      </td>
-                                      <td className="py-2 pr-2">
-                                        <input
-                                          type="text"
-                                          value={ce.cpe_vinc || ""}
-                                          onChange={(e) => {
-                                            const newCe = [...df_ce];
-                                            newCe[globalIdx].cpe_vinc = e.target.value;
-                                            updateDataFrame("df_ce", newCe);
-                                          }}
-                                          placeholder="Ej. CPE1"
-                                          className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-yellow-500 focus:outline-none text-xs"
-                                        />
-                                      </td>
                                       <td className="py-2 text-center">
                                         <button
                                           onClick={() => {
                                             const newCe = [...df_ce];
                                             newCe.splice(globalIdx, 1);
+                                            const raCeIndexes = newCe.map((c: any, i: number) => c.id_ra === ra.id_ra ? i : -1).filter((i: number) => i !== -1);
+                                            const count = raCeIndexes.length;
+                                            if (count > 0) {
+                                              const share = Number((100 / count).toFixed(1));
+                                              raCeIndexes.forEach(idx => {
+                                                newCe[idx].peso_ce = share;
+                                              });
+                                            }
                                             updateDataFrame("df_ce", newCe);
                                           }}
                                           className="text-red-400 hover:text-red-300 font-bold"
@@ -405,11 +386,16 @@ export default function MatricesPage() {
                                     id_ra: ra.id_ra,
                                     id_ce: `${ra.id_ra.replace('RA', 'CE')}.`,
                                     peso_ce: 0,
-                                    feoe: false,
-                                    desc_ce: "",
-                                    og_vinc: "",
-                                    cpe_vinc: ""
+                                    desc_ce: ""
                                   });
+                                  const raCeIndexes = newCe.map((c: any, i: number) => c.id_ra === ra.id_ra ? i : -1).filter((i: number) => i !== -1);
+                                  const count = raCeIndexes.length;
+                                  if (count > 0) {
+                                    const share = Number((100 / count).toFixed(1));
+                                    raCeIndexes.forEach(idx => {
+                                      newCe[idx].peso_ce = share;
+                                    });
+                                  }
                                   updateDataFrame("df_ce", newCe);
                                 }}
                                 className="text-xs text-yellow-500 hover:text-yellow-400 font-semibold flex items-center gap-1"
