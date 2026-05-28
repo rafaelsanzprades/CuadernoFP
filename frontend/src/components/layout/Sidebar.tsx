@@ -3,10 +3,25 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAppStore } from '@/store/useAppStore';
 import { navGroups } from '@/config/navigation';
+import { useEffect, useRef } from 'react';
 
 export default function Sidebar() {
   const pathname = usePathname();
   const { activeModuleId, activeCursoId, isSidebarOpen, toggleSidebar } = useAppStore();
+  const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (navRef.current) {
+      const savedScroll = sessionStorage.getItem('sidebar-scroll');
+      if (savedScroll) {
+        navRef.current.scrollTop = parseInt(savedScroll, 10);
+      }
+    }
+  }, []);
+
+  const handleScroll = (e: React.UIEvent<HTMLElement>) => {
+    sessionStorage.setItem('sidebar-scroll', e.currentTarget.scrollTop.toString());
+  };
 
   return (
     <aside className={`${isSidebarOpen ? 'w-64' : 'w-[4.5rem]'} sticky top-0 h-screen border-r border-[var(--glass-border)] bg-background flex flex-col flex-shrink-0 transition-all duration-300 z-50`}>
@@ -35,7 +50,11 @@ export default function Sidebar() {
 
 
       {/* Nav sin overflow */}
-      <nav className={`flex-1 ${isSidebarOpen ? 'px-3' : 'px-2'} py-2 space-y-4 overflow-x-hidden overflow-y-auto scrollbar-hide`}>
+      <nav 
+        ref={navRef}
+        onScroll={handleScroll}
+        className={`flex-1 ${isSidebarOpen ? 'px-3' : 'px-2'} py-2 space-y-4 overflow-x-hidden overflow-y-auto scrollbar-hide`}
+      >
         {navGroups.map((group, idx) => (
           <div key={group.title} className="flex flex-col gap-0.5">
             {isSidebarOpen && (
