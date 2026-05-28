@@ -17,6 +17,7 @@ export const AttendanceAccumulated = () => {
   const [loading, setLoading] = useState(false);
 
   const alumnos = cursoData?.df_al || [];
+  const menores = alumnos.filter((a: any) => parseInt(a.Edad || '18') < 18).length;
   const info_fechas = moduleData?.info_fechas || {};
   const info_modulo = moduleData?.info_modulo || {};
 
@@ -99,6 +100,13 @@ export const AttendanceAccumulated = () => {
 
   return (
     <div className="space-y-6">
+      {menores > 0 && (
+        <div className="flex justify-end">
+          <span className="text-pink-400 font-semibold text-sm flex items-center gap-1 bg-pink-400/10 px-3 py-1 rounded-full border border-pink-400/20">
+            🌸 {menores} alumno(s) menor(es) de 18 años
+          </span>
+        </div>
+      )}
       <div className="grid grid-cols-3 gap-6 animate-in slide-in-from-left-4 duration-500">
         <Card className="p-6 border-l-4 border-l-accent flex items-center justify-between">
           <div>
@@ -122,6 +130,7 @@ export const AttendanceAccumulated = () => {
             <thead>
               <tr className="bg-foreground/5 text-muted border-b border-[var(--glass-border)]">
                 <th className="p-4 font-semibold w-16 text-center">Nº</th>
+                <th className="p-4 font-semibold w-12 text-center" title="Menor de edad">🌸</th>
                 <th className="p-4 font-semibold">Alumnado</th>
                 <th className="p-4 font-semibold text-center w-24">1T</th>
                 <th className="p-4 font-semibold text-center w-24">2T</th>
@@ -149,6 +158,7 @@ export const AttendanceAccumulated = () => {
                 return (
                   <tr key={studentId} className="border-b border-[var(--glass-border)]/50 hover:bg-foreground/5 transition-colors">
                     <td className="p-4 text-center text-muted font-mono">{index + 1}</td>
+                    <td className="p-4 text-center text-sm">{parseInt(alumno.Edad || '18') < 18 ? '🌸' : ''}</td>
                     <td className="p-4 font-medium">
                       {alumno.Apellidos}, {alumno.Nombre}
                     </td>
