@@ -21,7 +21,7 @@ export const navGroups = [
       { href: "/asistencia", label: "Control de asistencia", icon: "🙋‍♂️" },
       { href: "/calificacion", label: "Calificación numérica", icon: "📊" },
       { href: "/evaluacion", label: "Evaluación por RA", icon: "📈" },
-      { href: "/analisis", label: "Análisis", icon: "📉" }
+      { href: "/analisis", label: "Análisis académico", icon: "📉" }
     ]
   },
   {

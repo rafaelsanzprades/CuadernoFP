@@ -61,7 +61,7 @@ export default function AnalisisPage() {
         <main className="flex-1 p-8 content-area space-y-6">
           <div>
             <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-              📉 Análisis
+              📉 Análisis académico
             </h1>
             <p className="text-muted mt-2 text-lg">Visualiza estadísticas globales o analiza el progreso individual de cada alumno.</p>
           </div>
