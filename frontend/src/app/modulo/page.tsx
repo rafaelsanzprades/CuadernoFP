@@ -6,6 +6,8 @@ import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
 import { DatosTab } from "@/components/features/modulo/DatosTab";
 import { FeoeTab } from "@/components/features/modulo/FeoeTab";
+import { ContextoTab } from "@/components/features/modulo/ContextoTab";
+import { PlanesTab } from "@/components/features/modulo/PlanesTab";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 
 export default function ModuloConfigPage() {
@@ -25,7 +27,9 @@ export default function ModuloConfigPage() {
 
   const TABS = [
     { id: "datos", label: "📄 Datos", cleanLabel: "Datos del módulo" },
-    { id: "feoe", label: "🏢 Formación en Empresa (FEOE)", cleanLabel: "Formación en Empresa (FEOE)" }
+    { id: "feoe", label: "🏢 Formación en Empresa (FEOE)", cleanLabel: "Formación en Empresa (FEOE)" },
+    { id: "contexto", label: "📝 Contexto", cleanLabel: "Contexto" },
+    { id: "planes", label: "📄 Planes", cleanLabel: "Planes" }
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -73,6 +77,8 @@ export default function ModuloConfigPage() {
 
             {activeTab === "datos" && <DatosTab />}
             {activeTab === "feoe" && <FeoeTab />}
+            {activeTab === "contexto" && <ContextoTab />}
+            {activeTab === "planes" && <PlanesTab />}
 
           </MotionWrapper>
         </div>

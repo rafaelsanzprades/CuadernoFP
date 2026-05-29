@@ -3,7 +3,6 @@ export const navGroups = [
     title: "Programación",
     items: [
       { href: "/modulo", label: "Módulo didáctico", icon: "⚙️" },
-      { href: "/contexto", label: "Contexto y planes", icon: "📝" },
       { href: "/calendario", label: "Calendario académico", icon: "🗓️" },
       { href: "/matrices", label: "Matrices OG→RA→CE→UD", icon: "🧮" },
       { href: "/instrumentos", label: "Instrumentos de evaluación", icon: "🛠️" },
