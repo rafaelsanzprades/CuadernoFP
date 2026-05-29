@@ -15,7 +15,6 @@ export const navGroups = [
     items: [
       { href: "/matricula", label: "Matrícula alumnado", icon: "👥" },
       { href: "/seguimiento", label: "Seguimiento diario", icon: "📍" },
-      { href: "/asistencia", label: "Control de asistencia", icon: "🙋‍♂️" },
       { href: "/calificacion", label: "Calificación numérica", icon: "📊" },
       { href: "/evaluacion", label: "Evaluación por RA", icon: "📈" },
       { href: "/analisis", label: "Análisis académico", icon: "📉" }
@@ -26,11 +25,8 @@ export const navGroups = [
     items: [
       { href: "#wizard", label: "Asistente de inicio", icon: "✨" },
       { href: "/gestion/entorno", label: "Entorno de trabajo", icon: "📂" },
-      { href: "/perfiles", label: "Acceso usuarios", icon: "🛡️" },
-      { href: "/usuarios", label: "Gestión de usuarios", icon: "👥" },
-      { href: "/familias", label: "Familias profesionales", icon: "🗂️" },
-      { href: "/asignaciones", label: "Asignación de módulos", icon: "📋" },
-      { href: "/docentes", label: "Asignación de docentes", icon: "👨‍🏫" }
+      { href: "/profesorado", label: "Profesorado", icon: "👨‍🏫" },
+      { href: "/familias", label: "Familias profesionales", icon: "🗂️" }
     ]
   }
 ];

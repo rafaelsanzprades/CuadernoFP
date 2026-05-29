@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Sidebar from "@/components/layout/Sidebar";
-import Header from "@/components/layout/Header";
 import { 
   Shield, 
   Building2, 
@@ -15,13 +13,12 @@ import {
   ArrowRight,
   UserCheck
 } from "lucide-react";
-import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-export default function RolesPage() {
+export function AccesoUsuariosTab() {
   const [activeTab, setActiveTab] = useState<"roles" | "arquitectura">("roles");
   const [isLoginMode, setIsLoginMode] = useState(true);
   const { data: session, status } = useSession();
@@ -102,104 +99,97 @@ export default function RolesPage() {
     }
   ];
 
-  const activeTabLabel = activeTab === "roles" ? "Catálogo de perfiles" : "Modelo relacional";
-
   return (
-    <div className="flex min-h-screen bg-background">
-      <Sidebar />
-      <main className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header breadcrumbSuffix={activeTabLabel} />
-        <div className="flex-1 overflow-y-auto scrollbar-hide">
-          <div className="min-h-screen p-8 w-full space-y-8">
-          <div>
-              <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3">🛡️ Acceso usuarios</h1>
-            <p className="text-muted mt-2 text-lg">
-              Sistema de Roles Basado en Contextos (RBAC). Los permisos no son estáticos, dependen del contexto geográfico, organizativo y temporal.
-            </p>
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-2xl font-bold text-foreground tracking-tight flex items-center gap-3">🛡️ Acceso usuarios</h2>
+        <p className="text-muted mt-2">
+          Sistema de Roles Basado en Contextos (RBAC). Los permisos no son estáticos, dependen del contexto geográfico, organizativo y temporal.
+        </p>
+      </div>
+
+      {status === "unauthenticated" ? (
+        <Card className="max-w-md mx-auto p-8 animate-in fade-in slide-in-from-top-4 duration-500 shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
+          <div className="flex items-center justify-between mb-8">
+            <button 
+              onClick={() => setIsLoginMode(true)}
+              className={`flex-1 text-center py-2 text-lg font-bold border-b-2 transition-all ${isLoginMode ? 'border-accent text-accent' : 'border-transparent text-muted hover:text-foreground/90'}`}
+            >
+              Iniciar Sesión
+            </button>
+            <button 
+              onClick={() => setIsLoginMode(false)}
+              className={`flex-1 text-center py-2 text-lg font-bold border-b-2 transition-all ${!isLoginMode ? 'border-accent text-accent' : 'border-transparent text-muted hover:text-foreground/90'}`}
+            >
+              Registro
+            </button>
           </div>
 
-          {status === "unauthenticated" ? (
-            <Card className="max-w-md mx-auto p-8 animate-in fade-in slide-in-from-top-4 duration-500 mb-12 shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
-              <div className="flex items-center justify-between mb-8">
-                <button 
-                  onClick={() => setIsLoginMode(true)}
-                  className={`flex-1 text-center py-2 text-lg font-bold border-b-2 transition-all ${isLoginMode ? 'border-accent text-accent' : 'border-transparent text-muted hover:text-foreground/90'}`}
-                >
-                  Iniciar Sesión
-                </button>
-                <button 
-                  onClick={() => setIsLoginMode(false)}
-                  className={`flex-1 text-center py-2 text-lg font-bold border-b-2 transition-all ${!isLoginMode ? 'border-accent text-accent' : 'border-transparent text-muted hover:text-foreground/90'}`}
-                >
-                  Registro
-                </button>
+          <div className="space-y-4">
+            {!isLoginMode && (
+              <div>
+                <label className="block text-sm font-medium text-foreground/80 mb-1">Nombre Completo</label>
+                <Input type="text" placeholder="Tu nombre" />
               </div>
+            )}
+            <div>
+              <label className="block text-sm font-medium text-foreground/80 mb-1">Correo Electrónico</label>
+              <Input type="email" placeholder="usuario@educa.aragon.es" value={email} onChange={e => setEmail(e.target.value)} />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground/80 mb-1">Contraseña</label>
+              <Input type="password" placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} />
+            </div>
 
-              <div className="space-y-4">
-                {!isLoginMode && (
-                  <div>
-                    <label className="block text-sm font-medium text-foreground/80 mb-1">Nombre Completo</label>
-                    <Input type="text" placeholder="Tu nombre" />
-                  </div>
-                )}
-                <div>
-                  <label className="block text-sm font-medium text-foreground/80 mb-1">Correo Electrónico</label>
-                  <Input type="email" placeholder="usuario@educa.aragon.es" value={email} onChange={e => setEmail(e.target.value)} />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-foreground/80 mb-1">Contraseña</label>
-                  <Input type="password" placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} />
-                </div>
+            <Button 
+              onClick={() => signIn('credentials', { email, password, callbackUrl: '/' })}
+              className="w-full mt-6"
+            >
+              {isLoginMode ? 'Acceder' : 'Crear Cuenta'}
+            </Button>
 
-                <Button 
-                  onClick={() => signIn('credentials', { email, password, callbackUrl: '/' })}
-                  className="w-full mt-6"
-                >
-                  {isLoginMode ? 'Acceder' : 'Crear Cuenta'}
-                </Button>
+            <div className="relative flex items-center py-5">
+              <div className="flex-grow border-t border-[var(--glass-border)]"></div>
+              <span className="flex-shrink-0 mx-4 text-muted text-sm">o continuar con</span>
+              <div className="flex-grow border-t border-[var(--glass-border)]"></div>
+            </div>
 
-                <div className="relative flex items-center py-5">
-                  <div className="flex-grow border-t border-[var(--glass-border)]"></div>
-                  <span className="flex-shrink-0 mx-4 text-muted text-sm">o continuar con</span>
-                  <div className="flex-grow border-t border-[var(--glass-border)]"></div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <Button variant="ghost" onClick={() => signIn('google')} className="flex items-center justify-center gap-2 border border-[var(--glass-border)]">
-                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
-                    <span className="text-sm font-medium text-foreground/90">Google</span>
-                  </Button>
-                  <Button variant="ghost" onClick={() => signIn('microsoft')} className="flex items-center justify-center gap-2 border border-[var(--glass-border)]">
-                    <img src="https://www.svgrepo.com/show/475667/microsoft-color.svg" alt="Microsoft" className="w-5 h-5" />
-                    <span className="text-sm font-medium text-foreground/90">Microsoft</span>
-                  </Button>
-                </div>
-              </div>
-            </Card>
-          ) : status === "loading" ? (
-            <div className="text-center text-muted py-12">Verificando sesión...</div>
-          ) : (
-            <Card className="max-w-3xl mx-auto p-6 flex items-center justify-between mb-12 animate-in fade-in duration-500 border-l-4 border-accent shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-accent text-xl font-bold border border-accent/30">
-                  <UserCheck className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-foreground">Sesión Iniciada</h3>
-                  <p className="text-sm text-muted">Autenticado como {session?.user?.email}</p>
-                </div>
-              </div>
-              <Button 
-                variant="danger"
-                onClick={() => signOut()}
-                className="px-6"
-              >
-                <span>Cerrar Sesión</span>
+            <div className="grid grid-cols-2 gap-4">
+              <Button variant="ghost" onClick={() => signIn('google')} className="flex items-center justify-center gap-2 border border-[var(--glass-border)]">
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
+                <span className="text-sm font-medium text-foreground/90">Google</span>
               </Button>
-            </Card>
-          )}
+              <Button variant="ghost" onClick={() => signIn('microsoft')} className="flex items-center justify-center gap-2 border border-[var(--glass-border)]">
+                <img src="https://www.svgrepo.com/show/475667/microsoft-color.svg" alt="Microsoft" className="w-5 h-5" />
+                <span className="text-sm font-medium text-foreground/90">Microsoft</span>
+              </Button>
+            </div>
+          </div>
+        </Card>
+      ) : status === "loading" ? (
+        <div className="text-center text-muted py-12">Verificando sesión...</div>
+      ) : (
+        <Card className="max-w-3xl mx-auto p-6 flex items-center justify-between animate-in fade-in duration-500 border-l-4 border-accent shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-accent text-xl font-bold border border-accent/30">
+              <UserCheck className="w-6 h-6" />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-foreground">Sesión Iniciada</h3>
+              <p className="text-sm text-muted">Autenticado como {session?.user?.email}</p>
+            </div>
+          </div>
+          <Button 
+            variant="danger"
+            onClick={() => signOut()}
+            className="px-6"
+          >
+            <span>Cerrar Sesión</span>
+          </Button>
+        </Card>
+      )}
 
-      <div className="flex justify-center gap-4 mb-8">
+      <div className="flex justify-center gap-4 pt-4">
         <Button 
           variant={activeTab === 'roles' ? 'primary' : 'ghost'}
           onClick={() => setActiveTab("roles")}
@@ -240,8 +230,6 @@ export default function RolesPage() {
 
       {activeTab === "arquitectura" && (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          
-          {/* Cascade Explanation */}
           <Card className="p-8">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
               <Database className="w-6 h-6 text-accent" />
@@ -252,7 +240,6 @@ export default function RolesPage() {
             </p>
 
             <div className="space-y-6">
-              
               <div className="flex items-center gap-4 bg-foreground/5 p-4 rounded-xl border border-[var(--glass-border)]">
                 <div className="p-3 bg-blue-500/20 text-blue-400 rounded-lg"><Building2 className="w-6 h-6" /></div>
                 <div className="flex-1">
@@ -278,11 +265,9 @@ export default function RolesPage() {
                   <p className="text-sm text-muted">Sus fechas de evaluación y períodos de FEOE (<code className="text-accent bg-foreground/15 px-1 rounded">Enrollment</code>) se ajustan para reflejar los nuevos festivos, sin que el Tutor Dual tenga que reconfigurar uno por uno.</p>
                 </div>
               </div>
-
             </div>
           </Card>
 
-          {/* Database Entities */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card className="p-6 border-l-4 border-l-accent">
               <h3 className="text-lg font-bold mb-4">Entidades Clave en BBDD (SQLAlchemy)</h3>
@@ -318,9 +303,6 @@ export default function RolesPage() {
           </div>
         </div>
       )}
-          </div>
-        </div>
-      </main>
     </div>
   );
 }

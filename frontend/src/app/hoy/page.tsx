@@ -13,10 +13,11 @@ import { Calendar } from "lucide-react";
 import { WelcomeWizard } from "@/components/features/dashboard/WelcomeWizard";
 import { useModulesList } from "@/hooks/useApi";
 import { useEffect } from "react";
+import { PlanificacionMensualTab } from "@/components/features/dashboard/PlanificacionMensualTab";
 
 export default function HoyPage() {
   const { moduleData, cursoData, isWizardOpen, setWizardOpen, activeModuleId, setActiveModuleId, setActiveCursoId } = useAppStore();
-  const [activeTab, setActiveTab] = useState("hoy");
+  const [activeTab, setActiveTab] = useState("actual");
   const { data: modulesList, mutate: fetchModules } = useModulesList();
 
   useEffect(() => {
@@ -30,8 +31,8 @@ export default function HoyPage() {
   }, [modulesList, activeModuleId, setWizardOpen]);
 
   const TABS = [
-    { id: "hoy", label: "📅 Hoy y semana", cleanLabel: "Hoy" },
-    { id: "resumen", label: "📊 Resumen global", cleanLabel: "Resumen" }
+    { id: "actual", label: "📅 Actual", cleanLabel: "Actual" },
+    { id: "resumen", label: "📊 Resumen", cleanLabel: "Resumen" }
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -74,20 +75,27 @@ export default function HoyPage() {
               ))}
             </div>
 
-            {/* Contenido Pestaña Hoy */}
-            {activeTab === "hoy" && (
-              <div className="space-y-8 animate-in fade-in duration-500">
+            {/* Contenido Pestaña Actual */}
+            {activeTab === "actual" && (
+              <div className="space-y-12 animate-in fade-in duration-500">
+                {/* 1. Hoy */}
                 <TodayClasses />
 
+                {/* 2. Semana */}
                 <MotionWrapper className="glass-panel p-6 border-l-4 border-l-blue-400">
                   <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-4">
-<Calendar className="w-6 h-6 text-blue-400" /> Previsión de la Semana
-</h2>
+                    <Calendar className="w-6 h-6 text-blue-400" /> Previsión de la Semana
+                  </h2>
                   <div className="bg-background/40 p-8 rounded-xl border border-[var(--glass-border)] text-center">
                     <p className="text-muted font-medium mb-2">Sección en construcción</p>
                     <p className="text-sm text-muted/70">Aquí aparecerá el desglose de las sesiones planificadas para los próximos días.</p>
                   </div>
                 </MotionWrapper>
+
+                {/* 3. Curso */}
+                <div className="pt-4 border-t border-[var(--glass-border)]">
+                  <PlanificacionMensualTab />
+                </div>
               </div>
             )}
 

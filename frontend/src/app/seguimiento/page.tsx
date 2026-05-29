@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
+import { AsistenciaTab } from "@/components/features/seguimiento/AsistenciaTab";
 
 export default function SeguimientoPage() {
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData, updateCursoData } = useAppStore();
@@ -13,11 +14,11 @@ export default function SeguimientoPage() {
   const [allDiarioOpen, setAllDiarioOpen] = useState(true);
 
   const TABS = [
-    { id: "resumen", label: "📊 Resumen mensual", cleanLabel: "Resumen mensual" },
-    { id: "diario", label: "📝 Diario de aula", cleanLabel: "Diario de aula" }
+    { id: "diario", label: "📝 Diario de aula", cleanLabel: "Diario de aula" },
+    { id: "asistencia", label: "🙋‍♂️ Control de asistencia", cleanLabel: "Control de asistencia" }
   ];
 
-  const [activeTab, setActiveTab] = useState("resumen");
+  const [activeTab, setActiveTab] = useState("diario");
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   useEffect(() => {
@@ -109,21 +110,6 @@ export default function SeguimientoPage() {
   const horario = moduleData?.horario || {};
   const calendar_notes = moduleData?.calendar_notes || {};
 
-  // Calcular Total Impartido por UD
-  const df_sgmt_calculated = df_sgmt.map((row: any) => {
-    let total_imp = 0;
-    Object.keys(row).forEach(k => {
-      if (k.endsWith('_Imp') && k !== 'Total_Imp') {
-        total_imp += (Number(row[k]) || 0);
-      }
-    });
-    return { ...row, Total_Imp: total_imp };
-  });
-
-  const total_previsto = moduleData?.df_ud?.reduce((sum: number, ud: any) => sum + (Number(ud.horas_ud) || 0), 0) || 0;
-  const total_impartido = df_sgmt_calculated.reduce((sum: number, row: any) => sum + (row.Total_Imp || 0), 0);
-  const porcentaje_progreso = total_previsto > 0 ? (total_impartido / total_previsto) * 100 : 0;
-
   // Calculo de horas sin docencia
   let h_real_total = 0;
   let h_sin_docencia = 0;
@@ -155,8 +141,6 @@ export default function SeguimientoPage() {
   processTrimestre(info_fechas.ini_1t, info_fechas.fin_1t);
   processTrimestre(info_fechas.ini_2t, info_fechas.fin_2t);
   processTrimestre(info_fechas.ini_3t, info_fechas.fin_3t);
-
-  const perc_sin_docencia = h_real_total > 0 ? (h_sin_docencia / h_real_total) * 100 : 0;
 
   const meses_display = ["Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "May", "Jun"];
   const meses_nombres = { "Sep": "Septiembre", "Oct": "Octubre", "Nov": "Noviembre", "Dic": "Diciembre", "Ene": "Enero", "Feb": "Febrero", "Mar": "Marzo", "Abr": "Abril", "May": "Mayo", "Jun": "Junio" };
@@ -220,58 +204,6 @@ export default function SeguimientoPage() {
               </button>
             ))}
           </div>
-
-          {activeTab === "resumen" && (
-            <>
-
-
-              <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground">
-<span>📅</span> Planificación y seguimiento mensual
-</h2>
-
-              {/* Data Table */}
-              <section className="glass-card p-6 overflow-x-auto">
-                <table className="w-full text-left border-collapse text-sm whitespace-nowrap">
-                  <thead>
-                    <tr className="border-b border-[var(--glass-border)] text-muted bg-foreground/5">
-                      <th className="p-3 sticky left-0 bg-[#111827] z-10 border-r border-[var(--glass-border)]">UD</th>
-                      <th className="p-3 sticky left-[60px] bg-[#111827] z-10 text-center">Cls. Prv</th>
-                      <th className="p-3 sticky left-[130px] bg-[#111827] z-10 text-center border-r border-[var(--glass-border)]">Cls. Imp</th>
-                      {meses_display.map((m) => (
-                        <th key={m} colSpan={2} className="p-2 text-center border-r border-[var(--glass-border)]">{m}</th>
-                      ))}
-                    </tr>
-                    <tr className="border-b border-[var(--glass-border)] text-xs text-muted bg-foreground/5">
-                      <th className="p-2 sticky left-0 bg-[#111827] z-10 border-r border-[var(--glass-border)]"></th>
-                      <th className="p-2 sticky left-[60px] bg-[#111827] z-10"></th>
-                      <th className="p-2 sticky left-[130px] bg-[#111827] z-10 border-r border-[var(--glass-border)]"></th>
-                      {meses_display.map((m) => (
-                        <React.Fragment key={m}>
-                          <th className="p-2 text-center text-blue-400/70">Prv</th>
-                          <th className="p-2 text-center text-[#14a085]/70 border-r border-[var(--glass-border)]">Imp</th>
-                        </React.Fragment>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {df_sgmt_calculated.map((row: any, idx: number) => (
-                      <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
-                        <td className="p-3 font-mono sticky left-0 bg-background group-hover:bg-[#111827] border-r border-[var(--glass-border)] font-bold">{row.id_ud}</td>
-                        <td className="p-3 text-center sticky left-[60px] bg-background group-hover:bg-[#111827] text-blue-400">{row.horas_ud || ''}</td>
-                        <td className="p-3 text-center sticky left-[130px] bg-background group-hover:bg-[#111827] border-r border-[var(--glass-border)] text-[#14a085] font-bold">{row.Total_Imp || ''}</td>
-                        {meses_display.map((m) => (
-                          <React.Fragment key={m}>
-                            <td className="p-3 text-center text-foreground/60">{Number(row[`${m}_Prv`]) || ''}</td>
-                            <td className="p-3 text-center text-[#14a085] font-semibold border-r border-[var(--glass-border)] bg-[#14a085]/5">{Number(row[`${m}_Imp`]) || ''}</td>
-                          </React.Fragment>
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </section>
-            </>
-          )}
 
           {activeTab === "diario" && (
             <section>
@@ -378,6 +310,10 @@ export default function SeguimientoPage() {
                 })}
               </div>
             </section>
+          )}
+
+          {activeTab === "asistencia" && (
+            <AsistenciaTab />
           )}
 
         </main>
