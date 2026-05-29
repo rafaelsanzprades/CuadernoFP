@@ -13,7 +13,7 @@ export default function EvaluacionPage() {
   const [allEvalOpen, setAllEvalOpen] = useState(true);
 
   const TABS = [
-    { id: "resumen", label: "📊 Resumen global", cleanLabel: "Resumen global" },
+    { id: "resumen", label: "📊 Resumen", cleanLabel: "Resumen" },
     { id: "progreso", label: "🎯 Progreso por alumnado", cleanLabel: "Progreso por alumnado" }
   ];
 
@@ -177,7 +177,7 @@ export default function EvaluacionPage() {
 
         <main className="flex-1 p-8 content-area space-y-6">
           <div>
-              <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
+            <h1 className="text-4xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
               📈 Evaluación por RA
             </h1>
             <p className="text-muted mt-2 text-lg">Control de faltas de asistencia, incidencias y notas de clase diarias.</p>
@@ -198,8 +198,8 @@ export default function EvaluacionPage() {
           {activeTab === "resumen" && (
             <Card className="p-6">
               <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-5">
-<span>📊</span> Resumen de Resultados de aprendizaje por trimestres
-</h2>
+                <span>📊</span> Resumen de Resultados de aprendizaje por trimestres
+              </h2>
               <div className="space-y-5">
                 {Object.keys(ra_info).map(ra_id => {
                   const info = ra_info[ra_id];
@@ -340,7 +340,7 @@ export default function EvaluacionPage() {
               <div className="flex items-center justify-between mt-8">
                 <div>
                   <h2 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                    🎯 Grado de consecución de los Resultados de aprendizaje por alumnado
+                    🎯 Grado de consecución de los RA por alumnado
                   </h2>
                   <p className="text-muted mt-1">Progreso individual de cada alumnado en los Resultados de aprendizaje del módulo.</p>
                 </div>
