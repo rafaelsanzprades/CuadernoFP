@@ -103,7 +103,7 @@ export default function HoyPage() {
                 ) : (
                   <EmptyState
                     title="No hay datos de resumen"
-                    description="Selecciona o crea una Programación y Curso en Gestión > Entorno de trabajo para ver las analíticas."
+                    description="Selecciona o crea una Programación y Curso en Entorno de trabajo para ver las analíticas."
                     icon={Calendar}
                   />
                 )}

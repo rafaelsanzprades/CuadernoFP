@@ -7,15 +7,15 @@ import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import toast from "react-hot-toast";
 import { Sun, Moon, ChevronRight } from "lucide-react";
-import { useSession, signOut } from "next-auth/react";
 import { navGroups } from "@/config/navigation";
+import { initialGroups } from "@/store/initialData";
 import { showRichToast } from "@/utils/toast";
 import { motion } from "framer-motion";
+import { fileManager } from "@/services/fileManager";
+
 
 export default function Header({ title, breadcrumbSuffix }: { title?: string; breadcrumbSuffix?: string }) {
   const { activeModuleId, activeCursoId, moduleData } = useAppStore();
-  const { data: session, status } = useSession();
-  const isLoggedIn = status === "authenticated";
   const [isSaving, setIsSaving] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const pathname = usePathname();
@@ -27,9 +27,18 @@ export default function Header({ title, breadcrumbSuffix }: { title?: string; br
 
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [sourceType, setSourceType] = useState<"demo" | "local">("demo");
+  const [cloudSynced, setCloudSynced] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    const updateStates = () => {
+      setSourceType(fileManager.getDataSourceType());
+      setCloudSynced(fileManager.isGoogleConnected() || fileManager.isOneDriveConnected());
+    };
+    updateStates();
+    window.addEventListener('cdd-datasource-changed', updateStates);
+    return () => window.removeEventListener('cdd-datasource-changed', updateStates);
   }, []);
 
   let currentGroup = "";
@@ -43,11 +52,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: string; br
     }
   }
 
-  // Fallback para rutas especiales que no están en el array principal (como /hoy)
-  if (!currentGroup && pathname === "/hoy") {
-    currentGroup = "Inicio";
-    currentItem = "Tu día y semana";
-  }
+
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -138,14 +143,32 @@ export default function Header({ title, breadcrumbSuffix }: { title?: string; br
               badgeText = "ciclos-fp";
               badgeColor = "text-purple-300 bg-purple-500/10 border-purple-500/30";
             } else if (group.title === "Programación" || group.title === "Módulo") {
-              badgeText = activeModuleId || "—";
+              let friendlyName = "—";
+              if (activeModuleId) {
+                const code = activeModuleId.split('-')[0];
+                let foundName = "";
+                for (const g of initialGroups) {
+                  const m = g.modules.find(mod => mod.code === code);
+                  if (m) { foundName = m.name; break; }
+                }
+                friendlyName = foundName ? `${code} - ${foundName.slice(0, 15)}...` : activeModuleId;
+              }
+              badgeText = friendlyName;
               badgeColor = "text-[#14a085] bg-[#14a085]/10 border-[#14a085]/30";
             } else if (group.title === "Curso y alumnado" || group.title === "Curso") {
-              badgeText = activeCursoId || "—";
+              let friendlyName = "—";
+              if (activeCursoId) {
+                const parts = activeCursoId.split('-');
+                const code = parts[0];
+                const year = parts[parts.length - 1];
+                let foundName = "";
+                for (const g of initialGroups) {
+                  if (g.modules.some(m => m.code === code)) { foundName = g.name; break; }
+                }
+                friendlyName = foundName ? `${foundName.slice(0, 15)}... (${year})` : activeCursoId;
+              }
+              badgeText = friendlyName;
               badgeColor = "text-blue-300 bg-blue-500/10 border-blue-500/30";
-            } else if (group.title === "Gestión") {
-              badgeText = session?.user?.name || session?.user?.email?.split('@')[0] || "Admin";
-              badgeColor = "text-amber-300 bg-amber-500/10 border-amber-500/30";
             }
 
             const isOpen = activeDropdown === group.title;
@@ -196,6 +219,23 @@ export default function Header({ title, breadcrumbSuffix }: { title?: string; br
 
         {/* Botón Guardar + Login/Logout + Tema (Derecha) */}
         <div className="flex-1 flex justify-end items-center gap-3">
+          <div className="mr-1">
+            <Link href="/entorno" className="inline-block transition-transform hover:scale-105">
+              {sourceType === 'demo' ? (
+                <span className="px-2.5 py-1 rounded-lg text-[9px] font-extrabold tracking-wider uppercase border border-amber-500/30 text-amber-400 bg-amber-500/10 hover:bg-amber-500/20 cursor-pointer flex items-center gap-1 transition-all" title="Haz clic para configurar tu Entorno de Trabajo">
+                  ⚠️ MODO DEMO
+                </span>
+              ) : cloudSynced ? (
+                <span className="px-2.5 py-1 rounded-lg text-[9px] font-extrabold tracking-wider uppercase border border-green-500/30 text-green-400 bg-green-500/10 hover:bg-green-500/20 cursor-pointer flex items-center gap-1 transition-all" title="Haz clic para configurar tu Entorno de Trabajo">
+                  🛡️ LOCAL + NUBE
+                </span>
+              ) : (
+                <span className="px-2.5 py-1 rounded-lg text-[9px] font-extrabold tracking-wider uppercase border border-blue-500/30 text-blue-300 bg-blue-500/10 hover:bg-blue-500/20 cursor-pointer flex items-center gap-1 transition-all" title="Haz clic para configurar tu Entorno de Trabajo">
+                  🛡️ DATOS LOCALES
+                </span>
+              )}
+            </Link>
+          </div>
 
           {moduleData && (
             <div className="mr-2 flex items-center">
@@ -227,22 +267,6 @@ export default function Header({ title, breadcrumbSuffix }: { title?: string; br
           >
             <span>{isSaving ? "⏳" : "💾"}</span>
             {isSaving ? "Guardando..." : "Guardar"}
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => {
-              if (isLoggedIn) {
-                signOut();
-                showRichToast.success("Sesión cerrada", "Hasta pronto 👋");
-              } else {
-                router.push("/perfiles");
-              }
-            }}
-            className="glass-button text-[var(--foreground)] font-semibold py-1.5 px-4 text-sm rounded-lg flex items-center gap-2 hover:bg-foreground/5 transition-colors"
-          >
-            <span>{isLoggedIn ? "🔒" : "👤"}</span>
-            {isLoggedIn ? "Cerrar" : "Sesión"}
           </motion.button>
         </div>
       </nav>

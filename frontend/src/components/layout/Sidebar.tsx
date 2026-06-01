@@ -39,14 +39,7 @@ export default function Sidebar() {
         </button>
       </div>
 
-      {/* Botón Hoy */}
-      {isSidebarOpen && (
-        <div className="px-4 pb-3">
-          <Link href="/hoy" className="w-full flex items-center justify-center gap-2 py-1.5 px-2 bg-accent/10 hover:bg-accent/20 text-accent border border-accent/20 hover:border-accent/40 rounded-md text-sm font-bold transition-all shadow-[0_0_10px_rgba(26,188,156,0.1)] hover:shadow-[0_0_15px_rgba(26,188,156,0.2)]">
-            <span>📅</span> Tu día y semana
-          </Link>
-        </div>
-      )}
+
 
 
       {/* Nav sin overflow */}
@@ -102,11 +95,16 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer compacto */}
-      <div className={`px-4 py-3 border-t border-[var(--glass-border)] flex flex-col items-center`}>
+      <div className={`px-4 py-3 border-t border-[var(--glass-border)] flex flex-col items-center gap-1`}>
         {isSidebarOpen && (
-          <p className="text-center text-[0.65rem] text-muted/80 mt-1 whitespace-nowrap">
-            © {new Date().getFullYear()} Rafael Sanz Prades
-          </p>
+          <>
+            <p className="text-center text-[0.65rem] text-muted/80 mt-1 whitespace-nowrap">
+              © {new Date().getFullYear()} Rafael Sanz Prades
+            </p>
+            <Link href="/avisolegal" className="text-[0.6rem] text-blue-400 hover:text-blue-300 hover:underline">
+              Aviso Legal y Privacidad
+            </Link>
+          </>
         )}
       </div>
     </aside>

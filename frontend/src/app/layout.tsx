@@ -16,6 +16,11 @@ export const metadata: Metadata = {
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { AuthProvider } from "@/components/AuthProvider";
 import { Toaster } from "react-hot-toast";
+import { apiInterceptor } from "@/services/apiInterceptor";
+
+if (typeof window !== 'undefined') {
+  apiInterceptor.init();
+}
 
 export default function RootLayout({
   children,

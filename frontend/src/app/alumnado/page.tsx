@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { TutoriaTab } from "@/components/features/alumnado/TutoriaTab";
 import { TutoriaMatrixTab } from "@/components/features/alumnado/TutoriaMatrixTab";
+import { PlanoClaseTab } from "@/components/features/alumnado/PlanoClaseTab";
 
 export default function AlumnadoPage() {
   const { activeCursoId, cursoData, setCursoData, updateCursoData } = useAppStore();
@@ -17,9 +18,9 @@ export default function AlumnadoPage() {
 
   const TABS = [
     { id: "alumnado", label: "👥 Alumnado", cleanLabel: "Alumnado" },
+    { id: "plano", label: "🪑 Plano de clase", cleanLabel: "Plano de clase" },
     { id: "tutoria", label: "🎯 Ficha de Tutoría", cleanLabel: "Ficha de Tutoría" },
-    { id: "matriz", label: "📊 Matriz de Tutoría", cleanLabel: "Matriz de Tutoría" },
-    { id: "empresas", label: "🏢 Empresas FEOE", cleanLabel: "Empresas FEOE" }
+    { id: "matriz", label: "📊 Matriz de Tutoría", cleanLabel: "Matriz de Tutoría" }
   ];
 
   const [activeTab, setActiveTab] = useState("alumnado");
@@ -334,12 +335,10 @@ export default function AlumnadoPage() {
             <TutoriaMatrixTab />
           )}
 
-          {/* Tab 4: Empresas FEOE */}
-          {activeTab === "empresas" && (
-            <div className="p-12 text-center text-muted border border-[var(--glass-border)] rounded-xl bg-foreground/5">
-              <h2 className="text-2xl font-bold mb-4">Empresas FEOE</h2>
-              <p>Esta sección estará disponible próximamente para gestionar la asignación de empresas y tutores duales.</p>
-            </div>
+
+          {/* Tab 5: Plano de clase */}
+          {activeTab === "plano" && (
+            <PlanoClaseTab />
           )}
 
         </main>

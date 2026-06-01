@@ -37,6 +37,11 @@ body {
   overflow-x: hidden;
 }
 
+option {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
 body::before {
   content: "";
   position: fixed;

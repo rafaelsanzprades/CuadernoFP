@@ -105,6 +105,7 @@ export const CursoDataSchema = z.object({
   tutoria_ledger: z.record(z.string(), z.any()).optional(),
   info_fechas: z.record(z.string(), z.any()).optional(),
   horario: z.record(z.string(), z.any()).optional(),
+  plano_clase: z.any().optional(),
 });
 export type CursoData = z.infer<typeof CursoDataSchema>;
 

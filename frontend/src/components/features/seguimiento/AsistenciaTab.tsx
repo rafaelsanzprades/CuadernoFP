@@ -50,7 +50,7 @@ export function AsistenciaTab() {
             </>
           }
           action={
-            <Link href="/gestion/entorno" className="glass-button bg-accent/10 text-accent hover:bg-accent/20 px-6 py-3 rounded-lg font-bold flex items-center gap-2">
+            <Link href="/entorno" className="glass-button bg-accent/10 text-accent hover:bg-accent/20 px-6 py-3 rounded-lg font-bold flex items-center gap-2">
               Ir al Entorno de Trabajo <span className="text-xl">⚙️</span>
             </Link>
           }
