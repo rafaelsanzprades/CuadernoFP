@@ -382,7 +382,7 @@ export default function EntornoTrabajoPage() {
                       )}
                     </div>
                     <p className="text-sm text-muted max-w-xl">
-                      Permite explorar la aplicación usando datos ficticios y preconfigurados de alumnos y asignaciones sin afectar tu información real.
+                      Permite explorar la aplicación usando datos ficticios y preconfigurados de alumnado y asignaciones sin afectar tu información real.
                     </p>
                   </div>
 
@@ -432,7 +432,7 @@ export default function EntornoTrabajoPage() {
                         <span className="text-amber-400 font-bold shrink-0">✓</span>
                         <div>
                           <strong className="text-foreground block">Alumnado y Asistencia Completa</strong>
-                          Fichas de alumnos de prueba cargadas con fotos simuladas, datos de contacto y registros históricos de asistencia.
+                          Fichas de alumnado de prueba cargadas con fotos simuladas, datos de contacto y registros históricos de asistencia.
                         </div>
                       </li>
                       <li className="flex items-start gap-3">
@@ -478,7 +478,7 @@ export default function EntornoTrabajoPage() {
                       )}
                     </div>
                     <p className="text-sm text-muted max-w-xl">
-                      Trabaja de forma totalmente segura con datos reales de tu centro, alumnos y evaluaciones cargados en local o respaldados en la nube.
+                      Trabaja de forma totalmente segura con datos reales de tu centro, alumnado y evaluaciones cargados en local o respaldados en la nube.
                     </p>
                   </div>
 

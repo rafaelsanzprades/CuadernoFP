@@ -600,7 +600,7 @@ export default function ProgresoPage() {
                   <h2 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
                     👥 Detalle por alumnado
                   </h2>
-                  <p className="text-muted mt-1">Notas individuales por alumno, instrumento de evaluación y nivel de adquisición de RA.</p>
+                  <p className="text-muted mt-1">Notas individuales por alumnado, instrumento de evaluación y nivel de adquisición de RA.</p>
                 </div>
                 <Button
                   variant="secondary"
@@ -627,7 +627,7 @@ export default function ProgresoPage() {
                   const sigad = getSigadInfo(nota_prev);
                   const activeStudentTab = activeTabByStudent[al_id] || "1T";
 
-                  // Calcular RAs para el alumno individual
+                  // Calcular RAs para el alumnado individual
                   const notas_student: Record<string, number> = {
                     "1T": Number(evRow["1T_Nota"]) || 0.0,
                     "2T": Number(evRow["2T_Nota"]) || 0.0,

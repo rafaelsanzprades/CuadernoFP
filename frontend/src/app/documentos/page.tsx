@@ -7,7 +7,7 @@ import { Folder, FileText, File, Download, ChevronRight, CornerLeftUp, FileSprea
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { useAppStore } from "@/store/useAppStore";
-import { Alumno } from "@/types";
+import { Alumnado } from "@/types";
 
 type DocumentItem = {
   name: string;
@@ -186,8 +186,8 @@ export default function DocumentosPage() {
   const filteredItems = items.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
   const df_al = cursoData?.df_al || [];
-  const activeAlumnos = df_al.filter((al: Alumno) => al.Estado !== "Baja");
-  activeAlumnos.sort((a: Alumno, b: Alumno) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
+  const activeAlumnos = df_al.filter((al: Alumnado) => al.Estado !== "Baja");
+  activeAlumnos.sort((a: Alumnado, b: Alumnado) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
 
   return (
     <div className="flex min-h-screen bg-background">

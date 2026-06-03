@@ -174,7 +174,7 @@ class CourseGroup(Base):
     academic_year_id = Column(Integer, ForeignKey("academic_years.id"))
     name = Column(String)
 
-# Rol: Tutor de Grupo / Tutor Dual de Alumnos
+# Rol: Tutor de Grupo / Tutor Dual de Alumnado
 class GroupTutor(Base):
     __tablename__ = "group_tutors"
     id = Column(Integer, primary_key=True, index=True)

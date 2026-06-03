@@ -114,7 +114,7 @@ export default function ProfesionalPage() {
                 🧭 Orientación profesional
               </h1>
               <p className="text-muted mt-2 text-lg">
-                Ficha individual de orientación, intereses, aspiraciones e inserción laboral por alumno.
+                Ficha individual de orientación, intereses, aspiraciones e inserción laboral por alumnado.
               </p>
             </div>
             <div className="flex items-center gap-4 shrink-0">

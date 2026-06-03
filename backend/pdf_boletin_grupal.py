@@ -158,7 +158,7 @@ def generar_pdf_boletin_grupal(
     row_header.append(Paragraph(f"<b>Nota<br/>Media {trimestre}</b>", smlB))
     table_data = [row_header]
 
-    # ── Filas de alumnos ──────────────────────────────────────────────────────
+    # ── Filas de alumnado ──────────────────────────────────────────────────────
     for idx_lista, (_, al) in enumerate(df_al_sorted.iterrows(), start=1):
         al_id  = al["ID"]
         apells = str(al.get("Apellidos", ""))
@@ -204,10 +204,10 @@ def generar_pdf_boletin_grupal(
         if suma_pesos_usados > 0:
             nota_media = nota_media * (100.0 / suma_pesos_usados)
 
-        alumno = f"{apells}, {nombre}" if nombre else apells
+        alumnado = f"{apells}, {nombre}" if nombre else apells
         row = (
             [Paragraph(str(idx_lista), sml),
-             Paragraph(alumno, norm),
+             Paragraph(alumnado, norm),
              Paragraph(edad, sml), Paragraph(repite, sml)]
             + row_acts
             + [Paragraph(f"<b>{nota_media:.1f}</b>", normB)]
@@ -366,7 +366,7 @@ def generar_pdf_boletin_grupal_final(
     ]
     table_data = [row_header]
 
-    # ── Filas de alumnos
+    # ── Filas de alumnado
     for idx_lista, (_, al) in enumerate(df_al_sorted.iterrows(), start=1):
         al_id  = al["ID"]
         apells = str(al.get("Apellidos", ""))
@@ -412,10 +412,10 @@ def generar_pdf_boletin_grupal_final(
             notas_medias_tri["3T"] * (pond_3t / total_pond)
         )
 
-        alumno = f"{apells}, {nombre}" if nombre else apells
+        alumnado = f"{apells}, {nombre}" if nombre else apells
         row = [
             Paragraph(str(idx_lista), sml),
-            Paragraph(alumno, norm),
+            Paragraph(alumnado, norm),
             Paragraph(edad, sml),
             Paragraph(repite, sml),
             Paragraph(f"{notas_medias_tri['1T']:.1f}", sml),

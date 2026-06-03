@@ -13,8 +13,8 @@ export const AttendanceGrid = () => {
   const [attendanceData, setAttendanceData] = useState<Record<string, AttendanceStatus>>({});
   const [loading, setLoading] = useState(false);
 
-  const alumnos = cursoData?.df_al || [];
-  const menores = alumnos.filter(a => parseInt(a.Edad || '18') < 18).length;
+  const alumnado = cursoData?.df_al || [];
+  const menores = alumnado.filter(a => parseInt(a.Edad || '18') < 18).length;
 
   const dateStr = format(currentDate, 'yyyy-MM-dd');
 
@@ -102,7 +102,7 @@ export const AttendanceGrid = () => {
           </h2>
           {menores > 0 && (
             <span className="text-pink-400 font-semibold text-sm flex items-center gap-1 bg-pink-400/10 px-3 py-1 rounded-full border border-pink-400/20">
-              🌸 {menores} alumno(s) menor(es) de 18 años
+              🌸 {menores} alumnado(s) menor(es) de 18 años
             </span>
           )}
         </div>
@@ -123,16 +123,16 @@ export const AttendanceGrid = () => {
               </tr>
             </thead>
             <tbody className={loading ? 'opacity-50' : ''}>
-              {alumnos.map((alumno, index) => {
-                const status = attendanceData[alumno.student_id || alumno.ID || String(index)] || null;
-                const studentId = alumno.student_id || alumno.ID || String(index);
+              {alumnado.map((alumnado, index) => {
+                const status = attendanceData[alumnado.student_id || alumnado.ID || String(index)] || null;
+                const studentId = alumnado.student_id || alumnado.ID || String(index);
                 
                 return (
                   <tr key={studentId} className="border-b border-[var(--glass-border)]/50 hover:bg-foreground/5 transition-colors">
                     <td className="p-4 text-center text-muted font-mono">{index + 1}</td>
-                    <td className="p-4 text-center text-sm">{parseInt(alumno.Edad || '18') < 18 ? '🌸' : ''}</td>
+                    <td className="p-4 text-center text-sm">{parseInt(alumnado.Edad || '18') < 18 ? '🌸' : ''}</td>
                     <td className="p-4 font-medium">
-                      {alumno.Apellidos}, {alumno.Nombre}
+                      {alumnado.Apellidos}, {alumnado.Nombre}
                     </td>
                     <td className="p-4 text-center">
                       <button 
@@ -146,10 +146,10 @@ export const AttendanceGrid = () => {
                   </tr>
                 );
               })}
-              {alumnos.length === 0 && (
+              {alumnado.length === 0 && (
                 <tr>
                   <td colSpan={3} className="p-8 text-center text-muted">
-                    No hay alumnos matriculados en este curso.
+                    No hay alumnado matriculados en este curso.
                   </td>
                 </tr>
               )}

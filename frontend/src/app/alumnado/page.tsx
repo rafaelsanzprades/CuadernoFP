@@ -175,10 +175,10 @@ export default function AlumnadoPage() {
               <div className="flex justify-between items-end mb-6">
                 <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground">
                   <span>Lista oficial</span>
-                  <span className="text-sm font-normal text-muted bg-foreground/5 px-3 py-1 rounded-full">{df_al.length} alumnos</span>
+                  <span className="text-sm font-normal text-muted bg-foreground/5 px-3 py-1 rounded-full">{df_al.length} alumnado</span>
                 </h2>
                 {n_menores > 0 && (
-                  <span className="text-pink-400 text-sm font-semibold">🌸 {n_menores} alumno(s) menor(es) de 18 años</span>
+                  <span className="text-pink-400 text-sm font-semibold">🌸 {n_menores} alumnado(s) menor(es) de 18 años</span>
                 )}
               </div>
               
@@ -281,7 +281,7 @@ export default function AlumnadoPage() {
                             <button
                               onClick={() => handleRemoveAlumno(idx)}
                               className="text-red-400 hover:text-red-300 font-bold"
-                              title="Eliminar Alumno"
+                              title="Eliminar Alumnado"
                             >
                               &times;
                             </button>
@@ -297,7 +297,7 @@ export default function AlumnadoPage() {
                     onClick={handleAddAlumno}
                     className="text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-1"
                   >
-                    <span>+</span> Añadir Alumno
+                    <span>+</span> Añadir Alumnado
                   </Button>
                 </div>
               </div>

@@ -79,7 +79,7 @@ export function AccesoUsuariosTab() {
     {
       icon: <UserCheck className="w-6 h-6 text-orange-400" />,
       title: "Tutor Dual (Seguimiento)",
-      scope: "Grupo/Alumno + Curso Académico",
+      scope: "Grupo/Alumnado + Curso Académico",
       description: "El docente en la 'trinchera'. Gestiona los planes formativos y evalúa junto con el instructor de la empresa.",
       color: "border-orange-500/30 bg-orange-500/10"
     },
@@ -87,7 +87,7 @@ export function AccesoUsuariosTab() {
       icon: <BookOpen className="w-6 h-6 text-indigo-400" />,
       title: "Profesorado",
       scope: "Módulo + Grupo + Curso Académico",
-      description: "Rol base en el aula. Accede exclusivamente a sus cuadernos docentes para calificar a sus alumnos.",
+      description: "Rol base en el aula. Accede exclusivamente a sus cuadernos docentes para calificar a sus alumnado.",
       color: "border-indigo-500/30 bg-indigo-500/10"
     },
     {
@@ -282,11 +282,11 @@ export function AccesoUsuariosTab() {
                 </li>
                 <li className="flex justify-between border-b border-white/5 pb-2">
                   <span className="font-mono text-accent">Enrollment</span>
-                  <span>Enlaza Alumno ↔ Módulo ↔ Grupo (Matrícula)</span>
+                  <span>Enlaza Alumnado ↔ Módulo ↔ Grupo (Matrícula)</span>
                 </li>
                 <li className="flex justify-between pb-2">
                   <span className="font-mono text-accent">DualAgreement</span>
-                  <span>Enlaza Alumno ↔ Empresa ↔ Tutor ↔ FEOE</span>
+                  <span>Enlaza Alumnado ↔ Empresa ↔ Tutor ↔ FEOE</span>
                 </li>
               </ul>
             </Card>
@@ -294,10 +294,10 @@ export function AccesoUsuariosTab() {
             <Card className="p-6 bg-gradient-to-br from-accent/5 to-transparent border border-accent/20">
               <h3 className="text-lg font-bold mb-4 text-accent">Integración de Alumnado</h3>
               <p className="text-sm text-foreground/80 mb-4 leading-relaxed">
-                El Alumno requiere su propia tabla o flag en la tabla `User` (ej: <code className="bg-foreground/15 px-1 text-foreground">is_student=True</code>). 
+                El Alumnado requiere su propia tabla o flag en la tabla `User` (ej: <code className="bg-foreground/15 px-1 text-foreground">is_student=True</code>). 
               </p>
               <p className="text-sm text-foreground/80 leading-relaxed">
-                A través de la entidad <strong>Matrícula (Enrollment)</strong>, un alumno se vincula a N Módulos. Esto le da acceso a su propio dashboard ("Mi Cuaderno") donde ve el progreso de sus RA, su horario, y sus anexos de FP Dual, todo sincronizado con lo que introducen sus N profesores.
+                A través de la entidad <strong>Matrícula (Enrollment)</strong>, un alumnado se vincula a N Módulos. Esto le da acceso a su propio dashboard ("Mi Cuaderno") donde ve el progreso de sus RA, su horario, y sus anexos de FP Dual, todo sincronizado con lo que introducen sus N profesores.
               </p>
             </Card>
           </div>

@@ -29,7 +29,7 @@ export const AnalisisIndividualTab = () => {
     return (
       <Card className="p-8 text-center border-l-4 border-l-yellow-500 mt-6">
         <h2 className="text-xl font-bold text-yellow-400 mb-2">Faltan Datos</h2>
-        <p className="text-foreground/80">No hay alumnos activos para analizar.</p>
+        <p className="text-foreground/80">No hay alumnado activos para analizar.</p>
       </Card>
     );
   }

@@ -46,7 +46,7 @@ export const AlumnoSchema = z.object({
   Email: z.string().optional().nullable(),
   Movil: z.string().optional().nullable(),
 });
-export type Alumno = z.infer<typeof AlumnoSchema>;
+export type Alumnado = z.infer<typeof AlumnoSchema>;
 
 export const ResultadoAprendizajeSchema = z.object({
   id_ra: z.string(),

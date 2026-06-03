@@ -62,7 +62,7 @@ export const CalificacionFEOETab = () => {
     return (
       <Card className="p-6 border-l-4 border-l-yellow-500 mt-6">
         <h3 className="text-xl font-bold text-yellow-400 mb-2">No hay alumnado</h3>
-        <p className="text-foreground/80">Asegúrate de añadir alumnos en la Gestión de Matrícula.</p>
+        <p className="text-foreground/80">Asegúrate de añadir alumnado en la Gestión de Matrícula.</p>
       </Card>
     );
   }
@@ -88,7 +88,7 @@ export const CalificacionFEOETab = () => {
                     }}
                     className="w-[110px] mx-auto block bg-foreground/15 text-muted font-bold border border-[var(--glass-border)] rounded px-2 py-1 text-xs focus:border-purple-500 focus:outline-none cursor-pointer transition-colors hover:bg-foreground/20"
                     defaultValue=""
-                    title={`Valorar todos los alumnos para ${ra}`}
+                    title={`Valorar todos los alumnado para ${ra}`}
                   >
                     <option value="" disabled className="bg-background text-muted font-bold">Todos ↓</option>
                     <option value="0" className="bg-background text-muted">0 - Sin evaluar</option>
@@ -123,7 +123,7 @@ export const CalificacionFEOETab = () => {
                         }}
                         className="w-[100px] bg-foreground/15 text-muted font-bold border border-[var(--glass-border)] rounded px-2 py-1 text-xs focus:border-purple-500 focus:outline-none cursor-pointer transition-colors hover:bg-foreground/20"
                         defaultValue=""
-                        title="Valorar todos los RA de este alumno"
+                        title="Valorar todos los RA de este alumnado"
                       >
                         <option value="" disabled className="bg-background text-muted font-bold">Todos →</option>
                         <option value="0" className="bg-background text-muted">0 - Sin</option>

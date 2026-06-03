@@ -16,8 +16,8 @@ export const AttendanceAccumulated = () => {
   const [attendanceData, setAttendanceData] = useState<AttendanceRecord[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const alumnos = cursoData?.df_al || [];
-  const menores = alumnos.filter((a: any) => parseInt(a.Edad || '18') < 18).length;
+  const alumnado = cursoData?.df_al || [];
+  const menores = alumnado.filter((a: any) => parseInt(a.Edad || '18') < 18).length;
   const info_fechas = moduleData?.info_fechas || {};
   const info_modulo = moduleData?.info_modulo || {};
 
@@ -103,7 +103,7 @@ export const AttendanceAccumulated = () => {
       {menores > 0 && (
         <div className="flex justify-end">
           <span className="text-pink-400 font-semibold text-sm flex items-center gap-1 bg-pink-400/10 px-3 py-1 rounded-full border border-pink-400/20">
-            🌸 {menores} alumno(s) menor(es) de 18 años
+            🌸 {menores} alumnado(s) menor(es) de 18 años
           </span>
         </div>
       )}
@@ -141,8 +141,8 @@ export const AttendanceAccumulated = () => {
               </tr>
             </thead>
             <tbody className={loading ? 'opacity-50' : ''}>
-              {alumnos.map((alumno, index) => {
-                const studentId = alumno.student_id || alumno.ID || String(index);
+              {alumnado.map((alumnado, index) => {
+                const studentId = alumnado.student_id || alumnado.ID || String(index);
                 const studentRecords = attendanceData.filter(r => r.student_id === studentId && r.status === 'falta');
                 
                 const faltas1T = studentRecords.filter(r => isDateInPeriod(r.date_str, info_fechas.ini_1t, info_fechas.fin_1t)).length;
@@ -158,9 +158,9 @@ export const AttendanceAccumulated = () => {
                 return (
                   <tr key={studentId} className="border-b border-[var(--glass-border)]/50 hover:bg-foreground/5 transition-colors">
                     <td className="p-4 text-center text-muted font-mono">{index + 1}</td>
-                    <td className="p-4 text-center text-sm">{parseInt(alumno.Edad || '18') < 18 ? '🌸' : ''}</td>
+                    <td className="p-4 text-center text-sm">{parseInt(alumnado.Edad || '18') < 18 ? '🌸' : ''}</td>
                     <td className="p-4 font-medium">
-                      {alumno.Apellidos}, {alumno.Nombre}
+                      {alumnado.Apellidos}, {alumnado.Nombre}
                     </td>
                     <td className="p-4 text-center font-mono text-muted">{faltas1T > 0 ? faltas1T : '-'}</td>
                     <td className="p-4 text-center font-mono text-muted">{faltas2T > 0 ? faltas2T : '-'}</td>
@@ -183,10 +183,10 @@ export const AttendanceAccumulated = () => {
                   </tr>
                 );
               })}
-              {alumnos.length === 0 && (
+              {alumnado.length === 0 && (
                 <tr>
                   <td colSpan={8} className="p-8 text-center text-muted">
-                    No hay alumnos matriculados en este curso.
+                    No hay alumnado matriculados en este curso.
                   </td>
                 </tr>
               )}
