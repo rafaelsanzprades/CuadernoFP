@@ -1,4 +1,5 @@
 import React from "react";
+import { Plus, X } from "lucide-react";
 
 export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handleDeleteTarea }: any) {
   return (
@@ -58,7 +59,7 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
                     className="text-red-400 hover:text-red-300 font-bold"
                     title="Eliminar Tarea"
                   >
-                    ×
+                    <X className="w-5 h-5" />
                   </button>
                 </td>
               </tr>
@@ -71,7 +72,7 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
           onClick={handleAddTarea}
           className="text-sm text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-1"
         >
-          <span>+</span> Añadir Nueva Tarea Competencial
+          <Plus className="w-4 h-4" /> Añadir Nueva Tarea Competencial
         </button>
       </div>
     </div>

@@ -1,4 +1,4 @@
-export const CRM_SEED_VERSION = 16;
+export const CRM_SEED_VERSION = 18;
 
 export const demoSeed = {
   "0237-ictve-curso-2025-26": {
@@ -2466,15 +2466,44 @@ export const demoSeed = {
         "Obtener los parámetros típicos de las instalaciones y equipos, aplicando procedimientos de cálculo y atendiendo a las especificaciones y prescripciones reglamentarias, para configurar y calcular la instalación.",
         "Valorar el coste de los materiales y mano de obra, consultando catálogos y unidades de obra, para elaborar el presupuesto del montaje o mantenimiento.",
         "Seleccionar el utillaje, herramientas, equipos y medios de montaje y de seguridad, analizando las condiciones de obra y considerando las operaciones a realizar, para acopiar los recursos y medios.",
-        "Identificar y marcar la posición de los elementos de la instalación o equipo y el trazado de los circuitos, relacionando los planos de la documentación técnica con su ubicación real, para replantear la instalación."
+        "Identificar y marcar la posición de los elementos de la instalación o equipo y el trazado de los circuitos, relacionando los planos de la documentación técnica con su ubicación real, para replantear la instalación.",
+        "Identificar, ensamblar e interconectar periféricos y componentes, atendiendo a las especificaciones técnicas, para montar o ampliar equipos informáticos y periféricos.",
+        "Reconocer y ejecutar los procedimientos de instalación y carga de programas, siguiendo las especificaciones del fabricante y aplicando criterios de calidad, para instalar y configurar software base, sistemas operativos y aplicaciones.",
+        "Aplicar técnicas de mecanizado, conexión, medición y montaje, manejando los equipos, herramientas e instrumentos, según procedimientos establecidos y en condiciones de calidad y seguridad, para efectuar el montaje o mantenimiento de los elementos componentes de infraestructuras.",
+        "Ubicar y fijar los equipos y elementos soporte y auxiliares, interpretando los planos y especificaciones de montaje, en condiciones de seguridad y calidad, para montar equipos, instalaciones e infraestructuras.",
+        "Conectar los equipos y elementos auxiliares mediante técnicas de conexión y empalme, de acuerdo con los esquemas de la documentación técnica, para montar las infraestructuras y para instalar los equipos.",
+        "Cargar o volcar programas siguiendo las instrucciones del fabricante y aplicando criterios de calidad para instalar equipos.",
+        "Analizar y localizar los efectos y causas de disfunción o avería en las instalaciones y equipos, utilizando equipos de medida e interpretando los resultados, para mantener y reparar instalaciones y equipos.",
+        "Comprobar la configuración y el software de control de los equipos siguiendo las instrucciones del fabricante, para mantener y reparar instalaciones y equipos.",
+        "Sustituir los elementos defectuosos desmontando y montando los equipos y realizando los ajustes necesarios, analizando planes de mantenimiento y protocolos de calidad y seguridad, para mantener y reparar instalaciones y equipos.",
+        "Comprobar el conexionado, software, señales y parámetros característicos, utilizando la instrumentación y protocolos establecidos, en condiciones de calidad y seguridad, para verificar el funcionamiento de la instalación o equipo.",
+        "Cumplimentar fichas de mantenimiento, informes de montaje y reparación y manuales de instrucciones, siguiendo los procedimientos y formatos establecidos, para elaborar la documentación de la instalación o equipo.",
+        "Analizar y describir los procedimientos de calidad, prevención de riesgos laborales y medioambientales, señalando las acciones que es preciso realizar en los casos definidos para actuar de acuerdo con las normas estandarizadas.",
+        "Mantener comunicaciones efectivas con su grupo de trabajo, interpretando y generando instrucciones, proponiendo soluciones ante contingencias y coordinando las actividades de los miembros del grupo con actitud abierta y responsable, para integrarse en la organización de la empresa.",
+        "Valorar las actividades de trabajo en un proceso productivo, identificando su aportación al proceso global, para participar activamente en los grupos de trabajo y conseguir los objetivos de la producción.",
+        "Reconocer sus derechos y deberes como agente activo en la sociedad, analizando el marco legal que regula las condiciones sociales y laborales, para participar como ciudadano democrático.",
+        "Identificar y valorar las oportunidades de aprendizaje y su relación con el mundo laboral, analizando las ofertas y demandas del mercado para adaptarse a diferentes puestos de trabajo.",
+        "Reconocer las oportunidades de negocio, identificando y analizando demandas del mercado para crear y gestionar una pequeña empresa."
       ],
       "ra_og_mapping": {
-        "0": ["RA1", "RA2"],
-        "1": ["RA2", "RA3"],
-        "2": ["RA4", "RA5"],
-        "3": ["RA6"],
-        "4": ["RA3", "RA07"],
-        "5": ["RA1", "RA4"]
+        "0": ["RA1"],
+        "1": ["RA2"],
+        "2": ["RA2"],
+        "3": ["RA2"],
+        "4": ["RA2", "RA3"],
+        "5": ["RA1", "RA3"],
+        "6": ["RA3"],
+        "8": ["RA3"],
+        "9": ["RA3"],
+        "10": ["RA3"],
+        "12": ["RA5"],
+        "13": ["RA4", "RA5"],
+        "14": ["RA5", "RA6"],
+        "15": ["RA4", "RA6"],
+        "16": ["RA4", "RA6"],
+        "17": ["RA7"],
+        "18": ["RA2", "RA3", "RA6"],
+        "19": ["RA7"]
       }
     },
     "config_contexto": {

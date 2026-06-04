@@ -9,6 +9,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { RaOgMatrix } from "@/components/features/resultados/RaOgMatrix";
 import { curriculos, CompetenciaCPP } from "@/data/curriculos";
+import { fetchWithTimeout } from "@/utils/fetchWithTimeout";
+import toast from "react-hot-toast";
 
 export default function MatricesPage() {
   const { activeModuleId, moduleData, setModuleData, updateDataFrame, saveModuleData, cursoData, updateCursoData } = useAppStore();
@@ -29,7 +31,7 @@ export default function MatricesPage() {
 
   useEffect(() => {
     if (activeModuleId && !moduleData) {
-      fetch(`/api/module/${activeModuleId}`)
+      fetchWithTimeout(`/api/module/${activeModuleId}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.status === "success") {
@@ -48,13 +50,11 @@ export default function MatricesPage() {
 
   const handleSave = async () => {
     setSaving(true);
-    setSaveMessage("");
     const ok = await saveModuleData();
     if (ok) {
-      setSaveMessage("Guardado correctamente");
-      setTimeout(() => setSaveMessage(""), 3000);
+      toast.success("Progrmación guardada correctamente");
     } else {
-      setSaveMessage("Error al guardar");
+      toast.error("Error al guardar los datos");
     }
     setSaving(false);
   };

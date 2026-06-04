@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useAppStore } from "@/store/useAppStore";
 import { AttendanceGrid } from "@/components/features/seguimiento/AttendanceGrid";
 import { AttendanceAccumulated } from "@/components/features/seguimiento/AttendanceAccumulated";
-import { Users } from "lucide-react";
+import { Users, ClipboardEdit, BarChart2, Settings } from "lucide-react";
 import { EmptyState } from "@/components/ui/EmptyState";
 import Link from "next/link";
 
@@ -13,8 +13,8 @@ export function AsistenciaTab() {
   const [activeTab, setActiveTab] = useState("hoy");
 
   const TABS = [
-    { id: "hoy", label: "📝 Hoy", cleanLabel: "Hoy" },
-    { id: "acumulado", label: "📊 Acumulado trimestral", cleanLabel: "Acumulado trimestral" }
+    { id: "hoy", label: <span className="flex items-center gap-2"><ClipboardEdit className="w-4 h-4"/> Hoy</span>, cleanLabel: "Hoy" },
+    { id: "acumulado", label: <span className="flex items-center gap-2"><BarChart2 className="w-4 h-4"/> Acumulado trimestral</span>, cleanLabel: "Acumulado trimestral" }
   ];
 
   return (
@@ -51,7 +51,7 @@ export function AsistenciaTab() {
           }
           action={
             <Link href="/entorno" className="glass-button bg-accent/10 text-accent hover:bg-accent/20 px-6 py-3 rounded-lg font-bold flex items-center gap-2">
-              Ir al Entorno de Trabajo <span className="text-xl">⚙️</span>
+              Ir al Entorno de Trabajo <Settings className="w-5 h-5" />
             </Link>
           }
         />

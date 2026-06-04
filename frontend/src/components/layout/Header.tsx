@@ -239,7 +239,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: string; br
                         onClick={() => setActiveDropdown(null)}
                         className={`flex items-center gap-3 px-4 py-3 hover:bg-foreground/5 transition-colors ${isActive ? 'bg-gradient-to-r from-blue-500/10 to-transparent border-l-2 border-blue-400' : 'border-l-2 border-transparent'}`}
                       >
-                        <span className="text-xl">{item.icon}</span>
+                        <span className="flex items-center justify-center w-5 h-5"><item.icon className="w-5 h-5" strokeWidth={1.75} /></span>
                         <span className={`text-[0.85rem] ${isActive ? 'text-foreground font-bold' : 'text-foreground/80 font-medium'}`}>{item.label}</span>
                       </Link>
                     );

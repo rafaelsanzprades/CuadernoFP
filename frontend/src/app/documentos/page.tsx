@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
-import { Folder, FileText, File, Download, ChevronRight, CornerLeftUp, FileSpreadsheet, Search, UploadCloud } from "lucide-react";
+import { Folder, FileText, File, Download, ChevronRight, CornerLeftUp, FileSpreadsheet, Search, UploadCloud, Scale, Play, MapPin, GraduationCap, X, DownloadCloud } from "lucide-react";
+import toast from "react-hot-toast";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { useAppStore } from "@/store/useAppStore";
@@ -126,7 +127,7 @@ export default function DocumentosPage() {
       setPreviewFilename(displayFilename);
     } catch (err) {
       console.error(err);
-      alert("Error al cargar la previsualización del documento.");
+      toast.error("Error al cargar la previsualización del documento.");
     } finally {
       setDownloadingStr(null);
     }
@@ -153,7 +154,7 @@ export default function DocumentosPage() {
       setPreviewFilename(filename);
     } catch (err) {
       console.error(err);
-      alert("Error al generar el PDF. Asegúrate de que el backend está configurado.");
+      toast.error("Error al generar el PDF. Asegúrate de que el backend está configurado.");
     } finally {
       setDownloadingStr(null);
     }
@@ -203,7 +204,7 @@ export default function DocumentosPage() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
               <div>
                 <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                  <span className="text-3xl">📄</span> Documentos y descargas
+                  <span className="text-3xl text-blue-400"><FileText className="w-8 h-8" strokeWidth={2.5} /></span> Documentos y descargas
                 </h1>
                 <p className="text-muted mt-2 text-lg">Explorador de archivos oficiales, legislación, otros documentos y generación de PDFs.</p>
               </div>
@@ -211,35 +212,35 @@ export default function DocumentosPage() {
 
             <div className="flex border-b border-[var(--glass-border)] mb-6 overflow-x-auto scrollbar-hide">
               <button
-                className={`py-3 px-6 font-bold text-sm transition-all border-b-2 whitespace-nowrap ${activeTab === 'legislacion' ? 'border-blue-500 text-blue-400' : 'border-transparent text-muted hover:text-foreground'}`}
+                className={`flex items-center gap-2 py-3 px-6 font-bold text-sm transition-all border-b-2 whitespace-nowrap ${activeTab === 'legislacion' ? 'border-blue-500 text-blue-400' : 'border-transparent text-muted hover:text-foreground'}`}
                 onClick={() => setActiveTab('legislacion')}
               >
-                ⚖️ Legislación general
+                <Scale className="w-4 h-4" /> Legislación general
               </button>
               <button
-                className={`py-3 px-6 font-bold text-sm transition-all border-b-2 whitespace-nowrap ${activeTab === 'varios' ? 'border-blue-500 text-blue-400' : 'border-transparent text-muted hover:text-foreground'}`}
+                className={`flex items-center gap-2 py-3 px-6 font-bold text-sm transition-all border-b-2 whitespace-nowrap ${activeTab === 'varios' ? 'border-blue-500 text-blue-400' : 'border-transparent text-muted hover:text-foreground'}`}
                 onClick={() => setActiveTab('varios')}
               >
-                📂 Varios
+                <Folder className="w-4 h-4" /> Varios
               </button>
               <div className="w-px h-8 bg-white/10 mx-2 self-center shrink-0"></div>
               <button
-                className={`py-3 px-6 font-bold text-sm transition-all border-b-2 whitespace-nowrap ${activeTab === 'inicio' ? 'border-blue-500 text-blue-400' : 'border-transparent text-muted hover:text-foreground'}`}
+                className={`flex items-center gap-2 py-3 px-6 font-bold text-sm transition-all border-b-2 whitespace-nowrap ${activeTab === 'inicio' ? 'border-blue-500 text-blue-400' : 'border-transparent text-muted hover:text-foreground'}`}
                 onClick={() => setActiveTab('inicio')}
               >
-                🏁 PDF Inicio
+                <Play className="w-4 h-4" /> PDF Inicio
               </button>
               <button
-                className={`py-3 px-6 font-bold text-sm transition-all border-b-2 whitespace-nowrap ${activeTab === 'seguimiento' ? 'border-blue-500 text-blue-400' : 'border-transparent text-muted hover:text-foreground'}`}
+                className={`flex items-center gap-2 py-3 px-6 font-bold text-sm transition-all border-b-2 whitespace-nowrap ${activeTab === 'seguimiento' ? 'border-blue-500 text-blue-400' : 'border-transparent text-muted hover:text-foreground'}`}
                 onClick={() => setActiveTab('seguimiento')}
               >
-                📍 PDF Seguimiento
+                <MapPin className="w-4 h-4" /> PDF Seguimiento
               </button>
               <button
-                className={`py-3 px-6 font-bold text-sm transition-all border-b-2 whitespace-nowrap ${activeTab === 'evaluacion' ? 'border-blue-500 text-blue-400' : 'border-transparent text-muted hover:text-foreground'}`}
+                className={`flex items-center gap-2 py-3 px-6 font-bold text-sm transition-all border-b-2 whitespace-nowrap ${activeTab === 'evaluacion' ? 'border-blue-500 text-blue-400' : 'border-transparent text-muted hover:text-foreground'}`}
                 onClick={() => setActiveTab('evaluacion')}
               >
-                🎓 PDF Evaluación
+                <GraduationCap className="w-4 h-4" /> PDF Evaluación
               </button>
             </div>
 
@@ -257,7 +258,7 @@ export default function DocumentosPage() {
                     />
                   </div>
                   <button 
-                    onClick={() => alert("Función de subida próximamente.")}
+                    onClick={() => toast("Función de subida próximamente.", { icon: "🚧" })}
                     className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-foreground font-bold py-2 px-5 rounded-xl shadow-lg shadow-blue-500/30 flex items-center gap-2 transition-all hover:scale-105 active:scale-95"
                   >
                     <UploadCloud className="w-5 h-5" />
@@ -527,8 +528,8 @@ export default function DocumentosPage() {
         {previewUrl && (
           <div className="fixed inset-0 z-50 flex flex-col bg-black/90 backdrop-blur-md">
             <div className="flex items-center justify-between p-4 bg-[var(--glass-bg)] border-b border-[var(--glass-border)]">
-              <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground">
-                <span>📄</span> {previewFilename}
+              <h2 className="text-2xl font-bold flex items-center gap-3 text-foreground">
+                <FileText className="w-6 h-6 text-blue-400" /> {previewFilename}
               </h2>
               <div className="flex gap-4">
                 <button
@@ -540,7 +541,7 @@ export default function DocumentosPage() {
                   }}
                   className="bg-blue-600 hover:bg-blue-500 text-foreground px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors"
                 >
-                  ⬇️ Descargar
+                  <DownloadCloud className="w-5 h-5" /> Descargar
                 </button>
                 <button
                   onClick={() => {
@@ -549,7 +550,7 @@ export default function DocumentosPage() {
                   }}
                   className="bg-red-600 hover:bg-red-500 text-foreground px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors"
                 >
-                  ❌ Cerrar
+                  <X className="w-5 h-5" /> Cerrar
                 </button>
               </div>
             </div>

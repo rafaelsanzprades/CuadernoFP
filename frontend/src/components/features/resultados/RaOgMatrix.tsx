@@ -2,6 +2,7 @@
 
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
+import { Link as LinkIcon, Check } from "lucide-react";
 
 export function RaOgMatrix() {
   const { moduleData, updateInfoModulo } = useAppStore();
@@ -38,8 +39,8 @@ export function RaOgMatrix() {
   return (
     <Card className="p-6 border-l-4 border-l-blue-500 overflow-hidden animate-in fade-in duration-500">
       <h2 className="text-[1.1rem] font-bold flex items-center gap-2 text-foreground mb-6">
-<span>🔗</span> Contribución de los RA a los OG del Título
-</h2>
+        <LinkIcon className="w-5 h-5 text-blue-400" /> Contribución de los RA a los OG del Título
+      </h2>
       
       <div className="overflow-x-auto pb-4 scrollbar-hide">
         <table className="w-full text-left border-collapse text-sm">
@@ -83,7 +84,7 @@ export function RaOgMatrix() {
                               : 'bg-background border border-[var(--glass-border)] text-transparent hover:border-blue-500/30 hover:bg-blue-500/10'
                           }`}
                         >
-                          {isChecked && <span className="text-lg font-bold">✓</span>}
+                          {isChecked && <Check className="w-5 h-5" strokeWidth={3} />}
                         </button>
                       </div>
                     </td>

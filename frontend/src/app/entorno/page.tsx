@@ -16,6 +16,7 @@ import {
   PowerOff, Power, Zap
 } from "lucide-react";
 import toast from "react-hot-toast";
+import { fetchWithTimeout } from "@/utils/fetchWithTimeout";
 
 export default function EntornoTrabajoPage() {
   const {
@@ -46,8 +47,8 @@ export default function EntornoTrabajoPage() {
     const loadFromBackend = async () => {
       try {
         const [pdRes, cursoRes] = await Promise.all([
-          fetch('/api/module/0237-ictve-pd'),
-          fetch('/api/module/0237-ictve-curso-2025-26')
+          fetchWithTimeout('/api/module/0237-ictve-pd'),
+          fetchWithTimeout('/api/module/0237-ictve-curso-2025-26')
         ]);
         const pdData = await pdRes.json();
         const cursoData = await cursoRes.json();
@@ -133,8 +134,8 @@ export default function EntornoTrabajoPage() {
       // Fetch real data from the backend API
       try {
         const [pdRes, cursoRes] = await Promise.all([
-          fetch('/api/module/0237-ictve-pd'),
-          fetch('/api/module/0237-ictve-curso-2025-26')
+          fetchWithTimeout('/api/module/0237-ictve-pd'),
+          fetchWithTimeout('/api/module/0237-ictve-curso-2025-26')
         ]);
         const pdData = await pdRes.json();
         const cursoData = await cursoRes.json();

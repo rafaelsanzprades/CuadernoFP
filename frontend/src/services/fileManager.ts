@@ -175,7 +175,22 @@ export const fileManager = {
   importFromJson(jsonStr: string): boolean {
     try {
       const parsed = JSON.parse(jsonStr);
-      if (typeof parsed !== 'object' || parsed === null) return false;
+      
+      // Validation to prevent importing malicious or broken JSON structures
+      if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) return false;
+      
+      // Ensure the keys look like our expected format (e.g. some -pd or -curso- keys)
+      // and that their values are objects (not strings/arrays that would crash the app)
+      const keys = Object.keys(parsed);
+      if (keys.length === 0) return false;
+      
+      for (const key of keys) {
+        const val = parsed[key];
+        if (typeof val !== 'object' || val === null || Array.isArray(val)) {
+          console.error(`Validation failed: Key ${key} is not an object.`);
+          return false;
+        }
+      }
       
       this.saveDb(parsed);
       // Dispatch change event to update the page state

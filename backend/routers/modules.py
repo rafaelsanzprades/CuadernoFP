@@ -3,6 +3,8 @@ from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from database import get_db
 from services.module_service import get_module_data, update_module_data
+from auth.dependencies import get_current_user
+from models import User
 
 router = APIRouter(prefix="/api/module", tags=["Modules"])
 

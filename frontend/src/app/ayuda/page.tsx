@@ -11,7 +11,7 @@ import {
   CheckCircle, AlertTriangle, XCircle, ArrowRight,
   BookOpen, Users, BarChart2, CalendarDays, Wrench,
   ClipboardList, FileText, Building2, Briefcase, HeartHandshake,
-  GraduationCap, Layers
+  GraduationCap, Layers, Activity
 } from "lucide-react";
 
 // ── Tipos ─────────────────────────────────────────────────────────────────
@@ -61,7 +61,7 @@ function CheckCard({ item }: { item: CheckItem }) {
         <div className="mt-0.5 text-muted">{item.icon}</div>
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap items-center gap-2 mb-1">
-            <h3 className="font-bold text-foreground text-base leading-tight">{item.title}</h3>
+            <h3 className="font-bold text-foreground text-sm leading-tight">{item.title}</h3>
             <StatusBadge status={item.status} />
           </div>
           {/* Detail lines */}
@@ -411,7 +411,7 @@ export default function AyudaPage() {
             {/* ── Título ─────────────────────────────────────────── */}
             <div>
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                🩺 Ayuda y verificación
+                <Activity className="w-6 h-6 text-accent" /> Ayuda y verificación
               </h1>
               <p className="text-muted mt-2 text-base">
                 Estado de los datos del cuaderno. Comprueba la coherencia de la programación activa y el curso.

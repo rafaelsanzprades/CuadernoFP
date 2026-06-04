@@ -5,6 +5,7 @@ import { format, subDays, addDays } from 'date-fns';
 import { es } from 'date-fns/locale';
 import toast from 'react-hot-toast';
 import { useVirtualizer } from '@tanstack/react-virtual';
+import { CheckCircle, XCircle, Clock, AlertCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 
 type AttendanceStatus = 'presente' | 'falta' | 'retraso' | null;
 
@@ -86,9 +87,9 @@ export const AttendanceGrid = () => {
 
   const getStatusIcon = (status: AttendanceStatus) => {
     switch (status) {
-      case 'presente': return '✅';
-      case 'falta': return '❌';
-      case 'retraso': return '⏱️';
+      case 'presente': return <CheckCircle className="w-4 h-4" />;
+      case 'falta': return <XCircle className="w-4 h-4" />;
+      case 'retraso': return <Clock className="w-4 h-4" />;
       default: return '-';
     }
   };
@@ -103,21 +104,21 @@ export const AttendanceGrid = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between glass-panel p-4">
-        <button onClick={() => setCurrentDate(subDays(currentDate, 1))} className="glass-button px-4 py-2">
-          ◀ Día anterior
+        <button onClick={() => setCurrentDate(subDays(currentDate, 1))} className="glass-button px-4 py-2 flex items-center gap-2">
+          <ChevronLeft className="w-4 h-4" /> Día anterior
         </button>
         <div className="flex items-center gap-4">
           <h2 className="text-xl font-bold">
             Asistencia: {format(currentDate, "EEEE d 'de' MMMM", { locale: es })}
           </h2>
           {menores > 0 && (
-            <span className="text-pink-400 font-semibold text-sm flex items-center gap-1 bg-pink-400/10 px-3 py-1 rounded-full border border-pink-400/20">
-              🌸 {menores} alumnado(s) menor(es) de 18 años
+            <span className="text-pink-400 font-semibold text-sm flex items-center gap-1.5 bg-pink-400/10 px-3 py-1 rounded-full border border-pink-400/20">
+              <AlertCircle className="w-4 h-4" /> {menores} alumnado(s) menor(es) de 18 años
             </span>
           )}
         </div>
-        <button onClick={() => setCurrentDate(addDays(currentDate, 1))} className="glass-button px-4 py-2">
-          Día siguiente ▶
+        <button onClick={() => setCurrentDate(addDays(currentDate, 1))} className="glass-button px-4 py-2 flex items-center gap-2">
+          Día siguiente <ChevronRight className="w-4 h-4" />
         </button>
       </div>
 
@@ -131,7 +132,7 @@ export const AttendanceGrid = () => {
             <thead className="sticky top-0 z-10 bg-[#0d1726]">
               <tr className="bg-foreground/5 text-muted border-b border-[var(--glass-border)]">
                 <th className="p-4 font-semibold w-16 text-center">Nº</th>
-                <th className="p-4 font-semibold w-12 text-center" title="Menor de edad">🌸</th>
+                <th className="p-4 font-semibold w-12 text-center" title="Menor de edad"><AlertCircle className="w-4 h-4 mx-auto" /></th>
                 <th className="p-4 font-semibold">Alumnado</th>
                 <th className="p-4 font-semibold text-center w-48">Estado</th>
               </tr>
@@ -160,7 +161,7 @@ export const AttendanceGrid = () => {
                     }}
                   >
                     <td className="p-4 text-center text-muted font-mono w-16 flex items-center justify-center shrink-0">{index + 1}</td>
-                    <td className="p-4 text-center text-sm w-12 flex items-center justify-center shrink-0">{parseInt(al.Edad || '18') < 18 ? '🌸' : ''}</td>
+                    <td className="p-4 text-center text-sm w-12 flex items-center justify-center shrink-0">{parseInt(al.Edad || '18') < 18 ? <AlertCircle className="w-4 h-4 text-pink-400" /> : ''}</td>
                     <td className="p-4 font-medium flex-1 flex items-center">
                       {al.Apellidos}, {al.Nombre}
                     </td>

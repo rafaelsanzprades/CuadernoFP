@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { MotionWrapper } from '@/components/ui/MotionWrapper';
 import { Card } from '@/components/ui/Card';
+import { AlertCircle, Clock, OctagonAlert } from 'lucide-react';
 
 type AttendanceStatus = 'presente' | 'falta' | 'retraso' | null;
 
@@ -102,8 +103,8 @@ export const AttendanceAccumulated = () => {
     <div className="space-y-6">
       {menores > 0 && (
         <div className="flex justify-end">
-          <span className="text-pink-400 font-semibold text-sm flex items-center gap-1 bg-pink-400/10 px-3 py-1 rounded-full border border-pink-400/20">
-            🌸 {menores} alumnado(s) menor(es) de 18 años
+          <span className="text-pink-400 font-semibold text-sm flex items-center gap-1.5 bg-pink-400/10 px-3 py-1 rounded-full border border-pink-400/20">
+            <AlertCircle className="w-4 h-4" /> {menores} alumnado(s) menor(es) de 18 años
           </span>
         </div>
       )}
@@ -113,14 +114,14 @@ export const AttendanceAccumulated = () => {
             <p className="text-sm font-semibold text-muted ">Horas totales del módulo</p>
             <p className="text-3xl font-extrabold text-foreground">{totalHours} h</p>
           </div>
-          <span className="text-4xl">🕒</span>
+          <Clock className="w-10 h-10 text-accent/80" />
         </Card>
         <Card className="p-6 border-l-4 border-l-yellow-500 flex items-center justify-between">
           <div>
             <p className="text-sm font-semibold text-muted ">Límite PdEvC ({p_ev_pct}%)</p>
             <p className="text-3xl font-extrabold text-foreground">{Math.round(totalHours * (p_ev_pct / 100))} faltas</p>
           </div>
-          <span className="text-4xl">🛑</span>
+          <OctagonAlert className="w-10 h-10 text-yellow-500/80" />
         </Card>
       </div>
 
@@ -130,7 +131,7 @@ export const AttendanceAccumulated = () => {
             <thead>
               <tr className="bg-foreground/5 text-muted border-b border-[var(--glass-border)]">
                 <th className="p-4 font-semibold w-16 text-center">Nº</th>
-                <th className="p-4 font-semibold w-12 text-center" title="Menor de edad">🌸</th>
+                <th className="p-4 font-semibold w-12 text-center" title="Menor de edad"><AlertCircle className="w-4 h-4 mx-auto" /></th>
                 <th className="p-4 font-semibold">Alumnado</th>
                 <th className="p-4 font-semibold text-center w-24">1t</th>
                 <th className="p-4 font-semibold text-center w-24">2t</th>
@@ -158,7 +159,7 @@ export const AttendanceAccumulated = () => {
                 return (
                   <tr key={studentId} className="border-b border-[var(--glass-border)]/50 hover:bg-foreground/5 transition-colors">
                     <td className="p-4 text-center text-muted font-mono">{index + 1}</td>
-                    <td className="p-4 text-center text-sm">{parseInt(alumnado.Edad || '18') < 18 ? '🌸' : ''}</td>
+                    <td className="p-4 text-center text-sm">{parseInt(alumnado.Edad || '18') < 18 ? <AlertCircle className="w-4 h-4 text-pink-400 mx-auto" /> : ''}</td>
                     <td className="p-4 font-medium">
                       {alumnado.Apellidos}, {alumnado.Nombre}
                     </td>

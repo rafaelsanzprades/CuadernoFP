@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import { Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface DatePickerProps {
   value: string; // YYYY-MM-DD
@@ -96,7 +97,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
         className={`w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground text-sm flex items-center hover:border-[#14a085] focus:outline-none focus:border-[#14a085] transition-colors group ${className?.includes('text-center') ? 'justify-center gap-2' : 'justify-between text-left'}`}
       >
         <span className={selectedDate ? "text-foreground" : "text-muted"}>{displayValue}</span>
-        <span className="text-muted group-hover:text-[#14a085] transition-colors">📅</span>
+        <span className="text-muted group-hover:text-[#14a085] transition-colors"><Calendar className="w-4 h-4" /></span>
       </button>
 
       {open && (
@@ -108,7 +109,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
               onClick={prevMonth}
               className="text-muted hover:text-foreground w-7 h-7 flex items-center justify-center rounded-lg hover:bg-foreground/10 transition-colors text-lg font-bold"
             >
-              ‹
+              <ChevronLeft className="w-5 h-5" />
             </button>
             <div className="flex gap-1">
               <select
@@ -135,7 +136,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
               onClick={nextMonth}
               className="text-muted hover:text-foreground w-7 h-7 flex items-center justify-center rounded-lg hover:bg-foreground/10 transition-colors text-lg font-bold"
             >
-              ›
+              <ChevronRight className="w-5 h-5" />
             </button>
           </div>
 

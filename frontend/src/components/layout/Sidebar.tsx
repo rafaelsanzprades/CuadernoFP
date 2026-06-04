@@ -4,18 +4,18 @@ import { usePathname } from 'next/navigation';
 import { useAppStore } from '@/store/useAppStore';
 import { navGroups } from '@/config/navigation';
 import { useEffect, useRef } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function Sidebar() {
   const pathname = usePathname();
   const { activeModuleId, activeCursoId, isSidebarOpen, toggleSidebar } = useAppStore();
-  const navRef = useRef<HTMLElement>(null);
-
   useEffect(() => {
-    if (navRef.current) {
-      const savedScroll = sessionStorage.getItem('sidebar-scroll');
-      if (savedScroll) {
-        navRef.current.scrollTop = parseInt(savedScroll, 10);
-      }
+    const savedScroll = sessionStorage.getItem('sidebar-scroll');
+    if (savedScroll) {
+      const elements = document.querySelectorAll('.sidebar-scroll-container');
+      elements.forEach(el => {
+        el.scrollTop = parseInt(savedScroll, 10);
+      });
     }
   }, []);
 
@@ -43,15 +43,14 @@ export default function Sidebar() {
           </Link>
         )}
         <button onClick={toggleSidebar} className="text-muted hover:text-foreground p-1 rounded-md hover:bg-foreground/10 transition-colors mb-3">
-          {isSidebarOpen ? "◀" : "▶"}
+          {isSidebarOpen ? <ChevronLeft className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
         </button>
       </div>
 
       <nav 
-        ref={navRef}
         aria-label="Navegación principal"
         onScroll={handleScroll}
-        className={`flex-1 ${isSidebarOpen ? 'px-3' : 'px-2'} py-2 space-y-4 overflow-x-hidden overflow-y-auto scrollbar-hide`}
+        className={`sidebar-scroll-container flex-1 ${isSidebarOpen ? 'px-3' : 'px-2'} py-2 space-y-4 overflow-x-hidden overflow-y-auto scrollbar-hide`}
       >
         {navGroups.map((group, idx) => (
           <div key={group.title} className="flex flex-col gap-0.5">
@@ -81,8 +80,8 @@ export default function Sidebar() {
                     : 'text-muted hover:text-foreground hover:bg-foreground/5 border border-transparent'
                   }`}
               >
-                <span className={`text-base leading-none transition-transform duration-150 ${pathname === item.href ? 'scale-110' : 'group-hover:scale-110'}`}>
-                  {item.icon}
+                <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === item.href ? 'scale-110 text-blue-400' : 'group-hover:scale-110'}`}>
+                  <item.icon className="w-5 h-5" strokeWidth={1.75} />
                 </span>
                 {isSidebarOpen && (
                   <>

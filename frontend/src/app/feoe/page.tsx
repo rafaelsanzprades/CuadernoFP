@@ -12,8 +12,9 @@ import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { fileManager } from "@/services/fileManager";
 import { demoSeed, CRM_SEED_VERSION } from "@/services/demoSeed";
 import type { CrmEmpresa, CrmInteraccion, CursoData } from "@/types";
+import { Building2, Phone, Mail, MapPin, Edit, Trash2, UserPlus, ClipboardList, Users } from "lucide-react";
 
-const TIPO_INTERACCION: Record<string, string> = { llamada: "📞 Llamada", email: "📧 Email", visita: "🏢 Visita", otro: "📌 Otro" };
+const TIPO_INTERACCION: Record<string, string> = { llamada: "Llamada", email: "Email", visita: "Visita", otro: "Otro" };
 
 function emptyEmpresa(): CrmEmpresa {
   return { id: "", nombre: "", contacto_nombre: "", contacto_cargo: "", telefono: "", email: "", direccion: "", ciudad: "Zaragoza", codigo_postal: "50001", provincia: "Zaragoza", sector: "", notas: "", estado: "pendiente", interacciones: [], alumnado_asignados: [] };
@@ -32,11 +33,18 @@ export default function FeoePage() {
     let cancelled = false;
     const fetchData = async () => {
       if (!activeCursoId) { setLoading(false); return; }
-      if (cursoData) { setLoading(false); return; }
+      
+      const seedEmpresas = (Object.values(demoSeed).find((d: any) => d?.crm_empresas) as any)?.crm_empresas || [];
+      
+      if (cursoData) { 
+        if (!cursoData.crm_empresas || cursoData.crm_empresas.length === 0) {
+          updateCursoData("crm_empresas", seedEmpresas);
+        }
+        setLoading(false); 
+        return; 
+      }
       setLoading(true);
       try {
-        // Always inject crm_empresas from seed, regardless of data source
-        const seedEmpresas = (Object.values(demoSeed).find((d: any) => d?.crm_empresas) as any)?.crm_empresas || [];
 
         // Try fileManager first
         const db = fileManager.getDb();
@@ -70,9 +78,9 @@ export default function FeoePage() {
   }, [activeCursoId, cursoData]);
 
   const TABS = [
-    { id: "empresas", label: "🏢 Empresas FEOE", cleanLabel: "Empresas FEOE" },
-    { id: "alumnado", label: "👥 Asignación Alumnado", cleanLabel: "Asignación Alumnado" },
-    { id: "seguimiento", label: "📋 Seguimiento Dual/FCT", cleanLabel: "Seguimiento Dual/FCT" },
+    { id: "empresas", label: <span className="flex items-center gap-2"><Building2 className="w-4 h-4"/> Empresas FEOE</span>, cleanLabel: "Empresas FEOE" },
+    { id: "alumnado", label: <span className="flex items-center gap-2"><Users className="w-4 h-4"/> Asignación Alumnado</span>, cleanLabel: "Asignación Alumnado" },
+    { id: "seguimiento", label: <span className="flex items-center gap-2"><ClipboardList className="w-4 h-4"/> Seguimiento Dual/FCT</span>, cleanLabel: "Seguimiento Dual/FCT" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -187,7 +195,9 @@ export default function FeoePage() {
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-8 pb-12">
             <div>
-              <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">🏢 Prácticas FEOE</h1>
+              <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
+                <Building2 className="w-6 h-6 text-accent" /> Prácticas FEOE
+              </h1>
               <p className="text-muted mt-2 text-lg">Gestión de empresas colaboradoras, asignación de alumnado y seguimiento de prácticas duales y FCT.</p>
             </div>
 
@@ -289,14 +299,14 @@ export default function FeoePage() {
                               <div><span className="text-muted text-xs">Contacto</span><p className="text-foreground">{emp.contacto_nombre} · {emp.contacto_cargo}</p></div>
                               <div><span className="text-muted text-xs">Email / Teléfono</span><p className="text-foreground">{emp.email} · {emp.telefono}</p></div>
                             </div>
-                            {emp.notas && <p className="text-sm text-foreground/80 italic">📝 {emp.notas}</p>}
+                            {emp.notas && <p className="text-sm text-foreground/80 italic flex items-start gap-2"><ClipboardList className="w-4 h-4 text-muted shrink-0" /> {emp.notas}</p>}
 
                             {/* Student assignment inline */}
                             <div>
                               <div className="flex items-center justify-between mb-2">
                                 <h4 className="text-xs font-bold text-muted ">Alumnado asignados</h4>
-                                <Button variant="ghost" className="text-xs" onClick={() => setAsignEmpresa(asignEmpresa === emp.id ? null : emp.id)}>
-                                  {asignEmpresa === emp.id ? "Cerrar" : "👤 Asignar / desasignar"}
+                                <Button variant="ghost" className="text-xs flex items-center gap-1.5" onClick={() => setAsignEmpresa(asignEmpresa === emp.id ? null : emp.id)}>
+                                  {asignEmpresa === emp.id ? "Cerrar" : <><UserPlus className="w-3.5 h-3.5" /> Asignar / desasignar</>}
                                 </Button>
                               </div>
                               {asignEmpresa === emp.id && (
@@ -333,10 +343,10 @@ export default function FeoePage() {
                               <div className="flex items-center justify-between">
                                 <h4 className="text-xs font-bold text-muted ">Historial de interacciones</h4>
                                 <div className="flex gap-2">
-                                  <Button variant="ghost" className="text-xs" onClick={() => handleDelete(emp.id)}>🗑️ Empresa</Button>
-                                  <Button variant="ghost" className="text-xs" onClick={() => openEdit(emp)}>✏️ Editar</Button>
-                                  <Button variant="ghost" className="text-xs" onClick={() => { setInterEmpresa(interEmpresa === emp.id ? null : emp.id); setEditIntId(null); setInterForm({ fecha: formatDate(new Date()), tipo: "llamada", descripcion: "", contacto: emp.contacto_nombre }); }}>
-                                    📞 Nueva interacción
+                                  <Button variant="ghost" className="text-xs flex items-center gap-1.5" onClick={() => handleDelete(emp.id)}><Trash2 className="w-3.5 h-3.5 text-red-400" /> Empresa</Button>
+                                  <Button variant="ghost" className="text-xs flex items-center gap-1.5" onClick={() => openEdit(emp)}><Edit className="w-3.5 h-3.5" /> Editar</Button>
+                                  <Button variant="ghost" className="text-xs flex items-center gap-1.5" onClick={() => { setInterEmpresa(interEmpresa === emp.id ? null : emp.id); setEditIntId(null); setInterForm({ fecha: formatDate(new Date()), tipo: "llamada", descripcion: "", contacto: emp.contacto_nombre }); }}>
+                                    <Phone className="w-3.5 h-3.5" /> Nueva interacción
                                   </Button>
                                 </div>
                               </div>
@@ -348,10 +358,10 @@ export default function FeoePage() {
                                   <div className="grid grid-cols-3 gap-3">
                                     <Input label="Fecha" value={interForm.fecha} onChange={e => setInterForm({ ...interForm, fecha: e.target.value })} />
                                     <Select label="Tipo" value={interForm.tipo} onChange={e => setInterForm({ ...interForm, tipo: e.target.value as "llamada" | "email" | "visita" | "otro" })}>
-                                      <option value="llamada">📞 Llamada</option>
-                                      <option value="email">📧 Email</option>
-                                      <option value="visita">🏢 Visita</option>
-                                      <option value="otro">📌 Otro</option>
+                                      <option value="llamada">Llamada</option>
+                                      <option value="email">Email</option>
+                                      <option value="visita">Visita</option>
+                                      <option value="otro">Otro</option>
                                     </Select>
                                     <Input label="Contacto" value={interForm.contacto} onChange={e => setInterForm({ ...interForm, contacto: e.target.value })} />
                                   </div>
@@ -382,8 +392,8 @@ export default function FeoePage() {
                                         <p className="text-foreground/80 mt-1">{int.descripcion}</p>
                                       </div>
                                       <div className="flex gap-1 shrink-0">
-                                        <button onClick={() => { setInterEmpresa(emp.id); setEditIntId(int.id); setInterForm({ fecha: int.fecha, tipo: int.tipo, descripcion: int.descripcion, contacto: int.contacto }); }} className="text-xs text-muted hover:text-accent transition-colors">✏️</button>
-                                        <button onClick={() => deleteInteraccion(emp.id, int.id)} className="text-xs text-muted hover:text-red-400 transition-colors">🗑️</button>
+                                        <button onClick={() => { setInterEmpresa(emp.id); setEditIntId(int.id); setInterForm({ fecha: int.fecha, tipo: int.tipo, descripcion: int.descripcion, contacto: int.contacto }); }} className="text-xs text-muted hover:text-accent transition-colors"><Edit className="w-4 h-4" /></button>
+                                        <button onClick={() => deleteInteraccion(emp.id, int.id)} className="text-xs text-muted hover:text-red-400 transition-colors"><Trash2 className="w-4 h-4" /></button>
                                       </div>
                                     </div>
                                   ))}
