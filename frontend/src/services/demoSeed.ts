@@ -2442,9 +2442,10 @@ export const demoSeed = {
     "info_modulo": {
       "codigo": "0237",
       "nombre": "Infraestructuras comunes de telecomunicaciones en viviendas y edificios",
-      "horas": 167,
+      "horas": 157,
+      "horas_totales": 157,
       "h_sem": 5,
-      "h_boa": 167,
+      "h_boa": 157,
       "p_ev": 15,
       "ciclo": "Técnico en Instalaciones de Telecomunicaciones",
       "nivel": "Grado Medio",
@@ -2515,12 +2516,13 @@ export const demoSeed = {
       "h_sem_feoe": 8
     },
     "df_ra": [
-      { "id_ra": "RA1", "desc_ra": "Identifica los elementos de las instalaciones de telecomunicaciones en viviendas y edificios, reconociendo su funcionalidad y características técnicas.", "peso_ra": 15, "is_dual": "No" },
-      { "id_ra": "RA2", "desc_ra": "Configura pequeñas instalaciones de infraestructuras comunes de telecomunicaciones, realizando los cálculos y ajustes necesarios.", "peso_ra": 20, "is_dual": "No" },
-      { "id_ra": "RA3", "desc_ra": "Monta instalaciones de infraestructuras comunes de telecomunicaciones, interpretando planos y esquemas.", "peso_ra": 25, "is_dual": "Sí" },
-      { "id_ra": "RA4", "desc_ra": "Verifica el funcionamiento de las instalaciones de telecomunicaciones, realizando las pruebas y mediciones reglamentarias.", "peso_ra": 15, "is_dual": "No" },
-      { "id_ra": "RA5", "desc_ra": "Mantiene y repara instalaciones de telecomunicaciones, diagnosticando averías y aplicando técnicas de mantenimiento.", "peso_ra": 15, "is_dual": "Sí" },
-      { "id_ra": "RA6", "desc_ra": "Cumple las normas de prevención de riesgos laborales y protección ambiental, evaluando los riesgos asociados.", "peso_ra": 10, "is_dual": "No" }
+      { "id_ra": "RA1", "desc_ra": "Identifica los elementos de las instalaciones de telecomunicaciones en viviendas y edificios, reconociendo su funcionalidad y características técnicas.", "peso_ra": 60, "is_dual": "No" },
+      { "id_ra": "RA2", "desc_ra": "Configura pequeñas instalaciones de infraestructuras comunes de telecomunicaciones, realizando los cálculos y ajustes necesarios.", "peso_ra": 15, "is_dual": "No" },
+      { "id_ra": "RA3", "desc_ra": "Monta instalaciones de infraestructuras comunes de telecomunicaciones, interpretando planos y esquemas.", "peso_ra": 5, "is_dual": "Sí" },
+      { "id_ra": "RA4", "desc_ra": "Verifica el funcionamiento de las instalaciones de telecomunicaciones, realizando las pruebas y mediciones reglamentarias.", "peso_ra": 5, "is_dual": "No" },
+      { "id_ra": "RA5", "desc_ra": "Mantiene y repara instalaciones de telecomunicaciones, diagnosticando averías y aplicando técnicas de mantenimiento.", "peso_ra": 5, "is_dual": "Sí" },
+      { "id_ra": "RA6", "desc_ra": "Cumple las normas de prevención de riesgos laborales y protección ambiental, evaluando los riesgos asociados.", "peso_ra": 5, "is_dual": "No" },
+      { "id_ra": "RA7", "desc_ra": "Nueva competencia añadida en base a currículo.", "peso_ra": 5, "is_dual": "No" }
     ],
     "df_ce": [
       { "id_ce": "CE01", "id_ra": "RA1", "id_ud": "UD01", "desc_ce": "Se han identificado los elementos que componen la ICT de una vivienda o edificio.", "peso_ce": 25 },
@@ -2542,15 +2544,21 @@ export const demoSeed = {
       { "id_ce": "CE17", "id_ra": "RA5", "id_ud": "UD06", "desc_ce": "Se han reparado las averías detectadas utilizando las herramientas adecuadas.", "peso_ce": 35 },
       { "id_ce": "CE18", "id_ra": "RA6", "id_ud": "UD01", "desc_ce": "Se han identificado los riesgos laborales asociados a las instalaciones de ICT.", "peso_ce": 30 },
       { "id_ce": "CE19", "id_ra": "RA6", "id_ud": "UD01", "desc_ce": "Se han aplicado las medidas de prevención y protección adecuadas.", "peso_ce": 35 },
-      { "id_ce": "CE20", "id_ra": "RA6", "id_ud": "UD01", "desc_ce": "Se ha cumplido la normativa de protección ambiental en la gestión de residuos.", "peso_ce": 35 }
+      { "id_ce": "CE20", "id_ra": "RA6", "id_ud": "UD01", "desc_ce": "Se ha cumplido la normativa de protección ambiental en la gestión de residuos.", "peso_ce": 35 },
+      { "id_ce": "CE21", "id_ra": "RA7", "id_ud": "UD11", "desc_ce": "Se aplica la calidad total al mantenimiento.", "peso_ce": 100 }
     ],
     "df_ud": [
-      { "id_ud": "UD01", "desc_ud": "ICT en viviendas y edificios: elementos, normativa y diseño", "horas_ud": 30, "ra_mappings": { "RA1": "RA1", "RA6": "RA6" }, "RA1": 50, "RA2": 0, "RA3": 0, "RA4": 0, "RA5": 0, "RA6": 10 },
-      { "id_ud": "UD02", "desc_ud": "Instalaciones de antenas y televisión satélite", "horas_ud": 30, "ra_mappings": { "RA1": "RA1", "RA2": "RA2" }, "RA1": 30, "RA2": 40, "RA3": 0, "RA4": 0, "RA5": 0, "RA6": 0 },
-      { "id_ud": "UD03", "desc_ud": "Infraestructuras de telecomunicaciones de banda ancha", "horas_ud": 28, "ra_mappings": { "RA2": "RA2", "RA3": "RA3" }, "RA1": 20, "RA2": 40, "RA3": 30, "RA4": 0, "RA5": 0, "RA6": 0 },
-      { "id_ud": "UD04", "desc_ud": "Instalaciones de telefonía y redes de datos", "horas_ud": 30, "ra_mappings": { "RA3": "RA3" }, "RA1": 0, "RA2": 20, "RA3": 40, "RA4": 0, "RA5": 0, "RA6": 0 },
-      { "id_ud": "UD05", "desc_ud": "Seguridad y verificación de instalaciones de telecomunicaciones", "horas_ud": 25, "ra_mappings": { "RA4": "RA4" }, "RA1": 0, "RA2": 0, "RA3": 10, "RA4": 60, "RA5": 0, "RA6": 0 },
-      { "id_ud": "UD06", "desc_ud": "Mantenimiento y reparación de instalaciones ICT", "horas_ud": 24, "ra_mappings": { "RA5": "RA5" }, "RA1": 0, "RA2": 0, "RA3": 20, "RA4": 40, "RA5": 10, "RA6": 0 }
+      { "id_ud": "UD01", "desc_ud": "Infraestructuras comunes de telecomunicación", "horas_ud": 25, "ra_mappings": { "RA1": "RA1" }, "RA1": 15, "RA2": 0, "RA3": 0, "RA4": 0, "RA5": 0, "RA6": 0, "RA7": 0 },
+      { "id_ud": "UD02", "desc_ud": "Transmisión señales radio y televisión (RTV)", "horas_ud": 30, "ra_mappings": { "RA1": "RA1" }, "RA1": 15, "RA2": 0, "RA3": 0, "RA4": 0, "RA5": 0, "RA6": 0, "RA7": 0 },
+      { "id_ud": "UD03", "desc_ud": "Antenas y líneas para RTV", "horas_ud": 15, "ra_mappings": { "RA1": "RA1" }, "RA1": 10, "RA2": 0, "RA3": 0, "RA4": 0, "RA5": 0, "RA6": 0, "RA7": 0 },
+      { "id_ud": "UD04", "desc_ud": "Equipos de procesado y distribución RTV", "horas_ud": 10, "ra_mappings": { "RA1": "RA1" }, "RA1": 5, "RA2": 0, "RA3": 0, "RA4": 0, "RA5": 0, "RA6": 0, "RA7": 0 },
+      { "id_ud": "UD05", "desc_ud": "Config.inst. RTV (I): distribución captación", "horas_ud": 15, "ra_mappings": { "RA2": "RA2" }, "RA1": 0, "RA2": 10, "RA3": 0, "RA4": 0, "RA5": 0, "RA6": 0, "RA7": 0 },
+      { "id_ud": "UD06", "desc_ud": "Config.inst. RTV (II): cabeceras TV-SAT", "horas_ud": 10, "ra_mappings": { "RA2": "RA2" }, "RA1": 0, "RA2": 5, "RA3": 0, "RA4": 0, "RA5": 0, "RA6": 0, "RA7": 0 },
+      { "id_ud": "UD07", "desc_ud": "Montaje de sistemas de recepción RTV en ICT", "horas_ud": 10, "ra_mappings": { "RA3": "RA3" }, "RA1": 0, "RA2": 0, "RA3": 5, "RA4": 0, "RA5": 0, "RA6": 0, "RA7": 0 },
+      { "id_ud": "UD08", "desc_ud": "Verificación y ajustes en instalaciones en RTV", "horas_ud": 10, "ra_mappings": { "RA4": "RA4" }, "RA1": 0, "RA2": 0, "RA3": 0, "RA4": 5, "RA5": 0, "RA6": 0, "RA7": 0 },
+      { "id_ud": "UD09", "desc_ud": "Instalaciones de telefonía en ICT", "horas_ud": 15, "ra_mappings": { "RA1": "RA1" }, "RA1": 10, "RA2": 0, "RA3": 0, "RA4": 0, "RA5": 0, "RA6": 0, "RA7": 0 },
+      { "id_ud": "UD10", "desc_ud": "Instalaciones de interfonía y control de acceso", "horas_ud": 10, "ra_mappings": { "RA1": "RA1" }, "RA1": 5, "RA2": 0, "RA3": 0, "RA4": 0, "RA5": 0, "RA6": 0, "RA7": 0 },
+      { "id_ud": "UD11", "desc_ud": "Mantenimiento de instalaciones de ICT", "horas_ud": 7, "ra_mappings": { "RA5": "RA5", "RA6": "RA6", "RA7": "RA7" }, "RA1": 0, "RA2": 0, "RA3": 0, "RA4": 0, "RA5": 5, "RA6": 5, "RA7": 5 }
     ],
     "df_sesiones": [
       { "ID": "S001", "id_ud": "UD01", "Num_Orden": 1, "Horas": 2, "Tipo_Actividad": "Teoría", "RA_CE": "RA1 / CE01-CE02", "Contenidos": "Introducción a las ICT. Elementos básicos de una instalación.", "Aspectos_Clave": "Identificar los componentes principales", "Recursos": "Presentación digital, muestras físicas de materiales" },
