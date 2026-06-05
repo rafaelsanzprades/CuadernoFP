@@ -1,4 +1,4 @@
-import { demoSeed, CRM_SEED_VERSION } from "./demoSeed";
+import { demoSeed, CRM_SEED_VERSION } from "./demo-ele203-0237ictve-curso202526";
 
 export type DataSourceType = 'demo' | 'local';
 

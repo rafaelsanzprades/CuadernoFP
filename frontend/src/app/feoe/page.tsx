@@ -10,7 +10,7 @@ import { Select } from "@/components/ui/Select";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { fileManager } from "@/services/fileManager";
-import { demoSeed, CRM_SEED_VERSION } from "@/services/demoSeed";
+import { demoSeed, CRM_SEED_VERSION } from "@/services/demo-ele203-0237ictve-curso202526";
 import type { CrmEmpresa, CrmInteraccion, CursoData } from "@/types";
 import { Building2, Phone, Mail, MapPin, Edit, Trash2, UserPlus, ClipboardList, Users } from "lucide-react";
 
