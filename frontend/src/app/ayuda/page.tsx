@@ -1,5 +1,5 @@
 "use client";
-import { Activity, AlertTriangle, ArrowRight, BarChart2, BookOpen, Briefcase, Building2, CalendarDays, Check, CheckCircle, ClipboardList, FileText, GraduationCap, HeartHandshake, Layers, Users, Wrench, XCircle } from "lucide-react";
+import { Activity, AlertTriangle, ArrowRight, BarChart2, BookOpen, Briefcase, Building2, CalendarDays, Check, CheckCircle, ClipboardList, FileText, GraduationCap, HeartHandshake, Layers, Users, Wrench, XCircle, ChevronDown, ListChecks, Info } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -7,6 +7,8 @@ import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import Link from "next/link";
+import { useState } from "react";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 
 // ── Tipos ─────────────────────────────────────────────────────────────────
 type CheckStatus = "ok" | "warning" | "empty";
@@ -61,8 +63,8 @@ function CheckCard({ item }: { item: CheckItem }) {
           {/* Detail lines */}
           <ul className="space-y-0.5">
             {item.lines.map((line, i) => (
-              <li key={i} className="text-sm text-muted flex items-center gap-1.5">
-                <StatusIcon status={item.status} />
+              <li key={i} className="text-sm text-muted flex items-start gap-1.5">
+                <span className="text-foreground/40 font-bold px-1 mt-0.5">•</span>
                 <span>{line}</span>
               </li>
             ))}
@@ -90,45 +92,148 @@ function CheckCard({ item }: { item: CheckItem }) {
   );
 }
 
-// ── Página ─────────────────────────────────────────────────────────────────
+// ── Componentes de Ayuda ──────────────────────────────────────────────────
+function AccordionItem({ question, answer }: { question: string, answer: React.ReactNode }) {
+  return (
+    <details className="group glass-card rounded-xl overflow-hidden [&_summary::-webkit-details-marker]:hidden mb-3 border border-white/5">
+      <summary className="flex cursor-pointer items-center justify-between p-4 font-semibold text-foreground hover:bg-foreground/5 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/50">
+        <span>{question}</span>
+        <span className="transition duration-300 group-open:-rotate-180 text-muted">
+          <ChevronDown className="w-5 h-5" />
+        </span>
+      </summary>
+      <div className="p-4 pt-0 text-muted leading-relaxed border-t border-white/5 mt-1 bg-foreground/5">
+        {answer}
+      </div>
+    </details>
+  );
+}
+
+const STEPS = [
+  { 
+    title: "Paso 1: Configurar el Entorno", 
+    desc: "Ve a la pantalla 'Entorno' y crea una nueva Programación Didáctica. Luego, crea un Curso y vincúlalo a esa programación para poder empezar a trabajar.",
+    links: [{ href: "/entorno", label: "Entorno de trabajo" }]
+  },
+  { 
+    title: "Paso 2: Detalles del Módulo", 
+    desc: "Entra en 'Módulo' y rellena los datos básicos: nombre, código, horas totales y contexto del aula. Asegúrate de guardar los cambios.",
+    links: [{ href: "/modulo", label: "Módulo didáctico" }]
+  },
+  { 
+    title: "Paso 3: Unidades y Resultados (Matrices)", 
+    desc: "En la sección 'Matrices', define tus Unidades Didácticas (UD) y Resultados de Aprendizaje (RA). No olvides configurar los porcentajes de cada RA para que sumen 100%.",
+    links: [{ href: "/matrices", label: "Matrices OG→RA→CE→UD" }]
+  },
+  { 
+    title: "Paso 4: Criterios de Evaluación", 
+    desc: "También en 'Matrices', vincula cada Criterio de Evaluación (CE) a sus respectivos RA y UD.",
+    links: [{ href: "/matrices", label: "Matrices OG→RA→CE→UD" }]
+  },
+  { 
+    title: "Paso 5: Instrumentos y Ponderaciones", 
+    desc: "En 'Instrumentos', configura qué herramientas usarás para evaluar (ej. Exámenes, Trabajos, Observación) y asígnales el peso que tendrán dentro de cada RA.",
+    links: [{ href: "/instrumentos", label: "Instrumentos de evaluación" }]
+  },
+  { 
+    title: "Paso 6: Añadir Alumnado", 
+    desc: "Ve a 'Alumnado' y añade tu lista de estudiantes usando la tabla interactiva.",
+    links: [{ href: "/alumnado", label: "Alumnado y tutoría" }]
+  },
+  { 
+    title: "Paso 7: Tareas y Seguimiento", 
+    desc: "Por último, utiliza 'Programación' para planificar y 'Seguimiento' para llevar el día a día de tu aula. ¡Ya estás listo para arrancar el curso!",
+    links: [
+      { href: "/programacion", label: "Programación de aula" },
+      { href: "/seguimiento", label: "Seguimiento diario" }
+    ]
+  },
+];
+
+const FAQS = [
+  {
+    group: "Seguridad de mis datos",
+    items: [
+      { q: "¿Dónde se guardan mis datos?", a: "Todos los datos se procesan localmente en tu sistema. No se envían a servidores externos ni bases de datos en la nube, garantizando la máxima privacidad para ti y tus alumnos." },
+      { q: "¿Cómo hago una copia de seguridad?", a: "Puedes exportar todos tus datos desde la sección 'Entorno' usando el botón de exportación. Te recomendamos descargar este archivo de respaldo de forma regular." },
+      { q: "¿Qué pasa si borro los datos de mi navegador?", a: "Si usas la versión web puramente basada en navegador y limpias el almacenamiento local, podrías perder los datos no exportados. Acuérdate de exportar tu trabajo a un archivo JSON frecuentemente." }
+    ]
+  },
+  {
+    group: "Inicio de curso",
+    items: [
+      { q: "¿Puedo importar alumnos desde Excel o CSV?", a: "En la sección de 'Alumnado' estamos preparando opciones de importación rápida. Mientras tanto, la tabla de datos te permite añadir rápidamente a los estudiantes uno a uno." },
+      { q: "¿Qué diferencia hay entre Programación y Curso?", a: "La 'Programación' contiene las reglas del juego (RA, CE, UD, Instrumentos) y puede reusarse en varios años escolares. El 'Curso' representa a un grupo concreto de alumnos en un año escolar específico." }
+    ]
+  },
+  {
+    group: "Desarrollo y seguimiento",
+    items: [
+      { q: "¿Cómo evalúo una tarea concreta?", a: "Ve a la sección 'Progreso' para introducir notas, o dentro de 'Alumnado' (Ficha Individual) para ver todo lo relacionado con un solo estudiante." },
+      { q: "¿Qué es el 'Diario de seguimiento'?", a: "Es un registro en la pestaña 'Seguimiento' que te permite anotar lo que ocurre en cada sesión: contenido impartido, ausencias generales o notas para ti mismo." },
+      { q: "¿Cómo registro las horas sin docencia (claustros, huelgas, excursiones)?", a: "En el Diario de Seguimiento puedes marcar una sesión con el flag de 'Sin docencia'. Automáticamente se descontarán las horas en las gráficas de progreso de la pestaña 'Hoy'." }
+    ]
+  },
+  {
+    group: "Cierre de curso",
+    items: [
+      { q: "¿Cómo se calcula la nota final?", a: "El cálculo se realiza automáticamente en 'Progreso'. Cruza las calificaciones obtenidas en las tareas con los pesos definidos para cada Instrumento y los pesos de los Resultados de Aprendizaje (RA)." },
+      { q: "¿Puedo generar informes o boletines?", a: "En 'Progreso' podrás visualizar informes completos que justifican la nota final en base a la evaluación continua de los Resultados de Aprendizaje." }
+    ]
+  },
+  {
+    group: "Cosicas técnicas y solución de problemas",
+    items: [
+      { q: "¿Qué pasa si las gráficas de 'Hoy' no cargan?", a: "Comprueba en 'Entorno' que tienes seleccionada una Programación y un Curso Activo. Las gráficas necesitan datos de alumnos y módulos para funcionar." },
+      { q: "¿Se puede usar la app en móviles o tablets?", a: "Sí, el diseño es responsivo y se adapta. Sin embargo, para tareas densas como rellenar las tablas de Matrices o Programación, recomendamos el uso de pantallas grandes." },
+      { q: "He detectado un error extraño (bug)", a: "Intenta recargar la página (F5 o Ctrl+R). Si el error sigue, exporta tus datos para asegurarlos y ponte en contacto con el soporte de la aplicación para revisar el archivo." }
+    ]
+  }
+];
+
+// ── Página Principal ──────────────────────────────────────────────────────
 export default function AyudaPage() {
   const { moduleData, cursoData, activeModuleId, activeCursoId } = useAppStore();
+  const [activeTab, setActiveTab] = useState("verificacion");
 
   // ── Comprobaciones Programación didáctica ────────────────────────────
   const m = moduleData;
 
   const udCount = m?.df_ud?.length ?? 0;
-  const udHoras = (m?.df_ud ?? []).reduce((a, u) => a + (parseFloat(String(u.horas_ud ?? 0)) || 0), 0);
+  const udHoras = (m?.df_ud ?? []).reduce((a: number, u: any) => a + (parseFloat(String(u.horas_ud ?? 0)) || 0), 0);
   const moduloHoras = parseFloat(String(m?.info_modulo?.horas_totales ?? 0)) || 0;
   const horasDiff = Math.abs(udHoras - moduloHoras);
 
   const raCount = m?.df_ra?.length ?? 0;
   const raPesoSum = sumPesos(m?.df_ra ?? [], "peso_ra");
 
-  const ceCount = m?.df_ce?.length ?? 0;
-  const ceHuerfanos = (m?.df_ce ?? []).filter(ce => {
+  const ceList = m?.df_ce ?? [];
+  const ceCount = ceList.length;
+  const ceHuerfanos = ceList.filter((ce: any) => {
     if (!ce.id_ra) return true;
-    return !(m?.df_ra ?? []).some(ra => ra.id_ra === ce.id_ra);
+    return !(m?.df_ra ?? []).some((ra: any) => ra.id_ra === ce.id_ra);
   }).length;
-  const ceSinUD = (m?.df_ce ?? []).filter(ce => {
+  const ceSinUD = ceList.filter((ce: any) => {
     if (!ce.id_ud) return true;
-    return !(m?.df_ud ?? []).some(ud => ud.id_ud === ce.id_ud);
+    return !(m?.df_ud ?? []).some((ud: any) => ud.id_ud === ce.id_ud);
   }).length;
 
-  const instrCount = m?.df_instr?.length ?? 0;
-  const instrPesoSum = sumPesos(m?.df_instr ?? [], "peso_ra");
+  const actCount = m?.df_act?.length ?? 0;
+  const actsSinCE = (m?.df_act ?? []).filter((act: any) => {
+    return !ceList.some((ce: any) => act[ce.id_ce] === true);
+  }).length;
 
   const tareasCount = m?.df_tareas?.length ?? 0;
-  const tareasSinRA = (m?.df_tareas ?? []).filter(t => {
+  const tareasSinRA = (m?.df_tareas ?? []).filter((t: any) => {
     if (!t.RA_Asociados) return true;
     if ((m?.df_ra ?? []).length === 0) return true;
     return false;
   }).length;
 
   const sesionesCount = m?.df_sesiones?.length ?? 0;
-  const sesionesSinUD = (m?.df_sesiones ?? []).filter(s => {
+  const sesionesSinUD = (m?.df_sesiones ?? []).filter((s: any) => {
     if (!s.id_ud) return true;
-    return !(m?.df_ud ?? []).some(ud => ud.id_ud === s.id_ud);
+    return !(m?.df_ud ?? []).some((ud: any) => ud.id_ud === s.id_ud);
   }).length;
 
   const tieneHorario = !!(m?.horario && Object.keys(m.horario).length > 0);
@@ -141,14 +246,14 @@ export default function AyudaPage() {
       icon: <BookOpen className="w-5 h-5" />,
       title: "Módulo didáctico",
       href: "/modulo",
-      hrefLabel: "Módulo",
-      status: !m ? "empty" : (m.info_modulo?.nombre_modulo ? "ok" : "warning"),
+      hrefLabel: "Módulo didáctico",
+      status: !m ? "empty" : "ok",
       lines: !m
         ? ["Sin datos de programación cargados"]
         : [
-          `Nombre: ${m.info_modulo?.nombre_modulo || "—"}`,
-          `Código: ${m.info_modulo?.codigo_modulo || "—"}`,
-          `Horas totales: ${moduloHoras || "—"}`,
+          `Módulo activo: ${activeModuleId}`,
+          `Horas semanales: ${m.info_modulo?.h_sem || "—"} h`,
+          `Horas BOA: ${m.info_modulo?.h_boa || "—"} h`,
         ],
       actionHref: !m ? "/modulo" : undefined,
       actionLabel: !m ? "Configurar módulo" : undefined,
@@ -158,7 +263,7 @@ export default function AyudaPage() {
       icon: <Layers className="w-5 h-5" />,
       title: "Unidades didácticas (UD)",
       href: "/matrices",
-      hrefLabel: "Matrices",
+      hrefLabel: "Matrices OG→RA→CE→UD",
       status: udCount === 0 ? "empty" : horasDiff > 2 ? "warning" : "ok",
       lines: udCount === 0
         ? ["No hay UD definidas"]
@@ -175,7 +280,7 @@ export default function AyudaPage() {
       icon: <GraduationCap className="w-5 h-5" />,
       title: "Resultados de aprendizaje (RA)",
       href: "/matrices",
-      hrefLabel: "Matrices",
+      hrefLabel: "Matrices OG→RA→CE→UD",
       status: raCount === 0 ? "empty" : Math.abs(raPesoSum - 100) > 1 ? "warning" : "ok",
       lines: raCount === 0
         ? ["No hay RA definidos"]
@@ -191,7 +296,7 @@ export default function AyudaPage() {
       icon: <ClipboardList className="w-5 h-5" />,
       title: "Criterios de evaluación (CE)",
       href: "/matrices",
-      hrefLabel: "Matrices",
+      hrefLabel: "Matrices OG→RA→CE→UD",
       status: ceCount === 0 ? "empty" : (ceHuerfanos > 0 || ceSinUD > 0) ? "warning" : "ok",
       lines: ceCount === 0
         ? ["No hay CE definidos"]
@@ -208,23 +313,23 @@ export default function AyudaPage() {
       icon: <Wrench className="w-5 h-5" />,
       title: "Instrumentos de evaluación",
       href: "/instrumentos",
-      hrefLabel: "Instrumentos",
-      status: instrCount === 0 ? "empty" : Math.abs(instrPesoSum - 100) > 1 ? "warning" : "ok",
-      lines: instrCount === 0
+      hrefLabel: "Instrumentos de evaluación",
+      status: actCount === 0 ? "empty" : actsSinCE > 0 ? "warning" : "ok",
+      lines: actCount === 0
         ? ["No hay instrumentos definidos"]
         : [
-          `${instrCount} instrumentos definidos`,
-          `Suma de pesos: ${instrPesoSum.toFixed(1)}% ${Math.abs(instrPesoSum - 100) > 1 ? <><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> no suman 100%</> : <><span className="inline-flex"><Check className="w-[1.2em] h-[1.2em] mr-1" /></span></>}`,
+          `${actCount} instrumentos/actividades definidos`,
+          actsSinCE > 0 ? `${actsSinCE} instrumentos sin CE asociado` : "Todos los instrumentos evalúan algún CE",
         ],
-      actionHref: instrCount === 0 ? "/instrumentos" : undefined,
-      actionLabel: instrCount === 0 ? "Añadir instrumento" : undefined,
+      actionHref: actCount === 0 ? "/instrumentos" : undefined,
+      actionLabel: actCount === 0 ? "Añadir instrumento" : undefined,
     },
     {
       id: "tareas",
       icon: <FileText className="w-5 h-5" />,
       title: "Tareas y actividades",
       href: "/programacion",
-      hrefLabel: "Programación",
+      hrefLabel: "Programación de aula",
       status: tareasCount === 0 ? "empty" : tareasSinRA > 0 ? "warning" : "ok",
       lines: tareasCount === 0
         ? ["No hay tareas definidas"]
@@ -240,7 +345,7 @@ export default function AyudaPage() {
       icon: <CalendarDays className="w-5 h-5" />,
       title: "Sesiones de clase",
       href: "/programacion",
-      hrefLabel: "Programación",
+      hrefLabel: "Programación de aula",
       status: sesionesCount === 0 ? "empty" : sesionesSinUD > 0 ? "warning" : "ok",
       lines: sesionesCount === 0
         ? ["No hay sesiones planificadas"]
@@ -256,7 +361,7 @@ export default function AyudaPage() {
       icon: <CalendarDays className="w-5 h-5" />,
       title: "Calendario académico",
       href: "/calendario",
-      hrefLabel: "Calendario",
+      hrefLabel: "Calendario académico",
       status: !tieneHorario && !tieneFechas ? "empty" : (!tieneHorario || !tieneFechas) ? "warning" : "ok",
       lines: [
         tieneHorario ? "Horario semanal definido" : "Sin horario semanal",
@@ -270,7 +375,7 @@ export default function AyudaPage() {
       icon: <BookOpen className="w-5 h-5" />,
       title: "Contexto del módulo",
       href: "/modulo",
-      hrefLabel: "Módulo (tab Contexto)",
+      hrefLabel: "Módulo didáctico",
       status: tieneContexto ? "ok" : "empty",
       lines: tieneContexto
         ? ["Contexto del aula configurado"]
@@ -284,17 +389,16 @@ export default function AyudaPage() {
   const c = cursoData;
 
   const alumnosCount = c?.df_al?.length ?? 0;
-  const alumnosIncompletos = (c?.df_al ?? []).filter(a => !a.Nombre || !a.Apellidos).length;
+  const alumnosIncompletos = (c?.df_al ?? []).filter((a: any) => !a.Nombre || !a.Apellidos).length;
   const sgmtCount = Object.keys(c?.daily_ledger ?? {}).length;
   const tieneFeoe = (c?.crm_empresas?.length ?? 0) > 0;
   const empresasCount = c?.crm_empresas?.length ?? 0;
-  const alumnosAsignados = (c?.crm_empresas ?? []).reduce((a, e) => a + (e.alumnado_asignados?.length ?? 0), 0);
+  const alumnosAsignados = (c?.crm_empresas ?? []).reduce((a: number, e: any) => a + (e.alumnado_asignados?.length ?? 0), 0);
   const tieneProfesional = !!(c?.profesional_ledger && Object.keys(c.profesional_ledger).length > 0);
   const tutoriaEntradas = Object.keys(c?.tutoria_ledger ?? {}).length;
 
-  // Evaluaciones: df_eval rows
   const evalCount = c?.df_eval?.length ?? 0;
-  const evalTotal = raCount * alumnosCount;
+  const evalTotal = alumnosCount;
 
   const courseChecks: CheckItem[] = [
     {
@@ -302,7 +406,7 @@ export default function AyudaPage() {
       icon: <Users className="w-5 h-5" />,
       title: "Alumnado y tutoría",
       href: "/alumnado",
-      hrefLabel: "Alumnado",
+      hrefLabel: "Alumnado y tutoría",
       status: alumnosCount === 0 ? "empty" : alumnosIncompletos > 0 ? "warning" : "ok",
       lines: alumnosCount === 0
         ? ["No hay alumnado registrado"]
@@ -318,7 +422,7 @@ export default function AyudaPage() {
       icon: <ClipboardList className="w-5 h-5" />,
       title: "Seguimiento diario",
       href: "/seguimiento",
-      hrefLabel: "Seguimiento",
+      hrefLabel: "Seguimiento diario",
       status: sgmtCount === 0 ? "empty" : "ok",
       lines: sgmtCount === 0
         ? ["Sin entradas de seguimiento diario"]
@@ -331,15 +435,15 @@ export default function AyudaPage() {
       icon: <BarChart2 className="w-5 h-5" />,
       title: "Progreso académico",
       href: "/progreso",
-      hrefLabel: "Progreso",
+      hrefLabel: "Progreso académico",
       status: evalCount === 0 ? "empty" : evalTotal > 0 && evalCount < evalTotal ? "warning" : "ok",
       lines: evalCount === 0
         ? ["Sin calificaciones introducidas"]
         : [
-          `${evalCount} calificaciones de ${evalTotal > 0 ? evalTotal : "?"} posibles (${pct(evalCount, evalTotal)})`,
+          `${evalCount} alumnos con registro de ${evalTotal > 0 ? evalTotal : "?"} posibles (${pct(evalCount, evalTotal)})`,
           evalTotal > 0 && evalCount < evalTotal
-            ? `Faltan ${evalTotal - evalCount} calificaciones`
-            : "Todas las calificaciones introducidas",
+            ? `Faltan ${evalTotal - evalCount} alumnos por evaluar`
+            : "Todos los alumnos tienen registros de calificación",
         ],
       actionHref: evalCount === 0 ? "/progreso" : undefined,
       actionLabel: evalCount === 0 ? "Ir a calificaciones" : undefined,
@@ -349,7 +453,7 @@ export default function AyudaPage() {
       icon: <Building2 className="w-5 h-5" />,
       title: "Prácticas FEOE",
       href: "/feoe",
-      hrefLabel: "FEOE",
+      hrefLabel: "Prácticas FEOE",
       status: !tieneFeoe ? "empty" : "ok",
       lines: !tieneFeoe
         ? ["Sin empresas colaboradoras registradas"]
@@ -365,7 +469,7 @@ export default function AyudaPage() {
       icon: <Briefcase className="w-5 h-5" />,
       title: "Orientación profesional",
       href: "/profesional",
-      hrefLabel: "Profesional",
+      hrefLabel: "Orientación profesional",
       status: tieneProfesional ? "ok" : "empty",
       lines: tieneProfesional
         ? ["Plan de orientación profesional configurado"]
@@ -378,7 +482,7 @@ export default function AyudaPage() {
       icon: <HeartHandshake className="w-5 h-5" />,
       title: "Tutoría",
       href: "/alumnado",
-      hrefLabel: "Alumnado (tab Tutoría)",
+      hrefLabel: "Alumnado y tutoría",
       status: tutoriaEntradas === 0 ? "empty" : "ok",
       lines: tutoriaEntradas === 0
         ? ["Sin entradas de tutoría registradas"]
@@ -388,11 +492,16 @@ export default function AyudaPage() {
     },
   ];
 
-  // ── Resumen global ────────────────────────────────────────────────────
   const allChecks = [...moduleChecks, ...courseChecks];
   const okCount = allChecks.filter(c => c.status === "ok").length;
   const warnCount = allChecks.filter(c => c.status === "warning").length;
   const emptyCount = allChecks.filter(c => c.status === "empty").length;
+
+  const TABS = [
+    { id: "verificacion", label: <><span className="inline-flex"><ListChecks className="w-[1.2em] h-[1.2em] mr-1" /></span> Verificación de datos</> },
+    { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Guía paso a paso</> },
+    { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> Preguntas frecuentes (FAQ)</> },
+  ];
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -401,69 +510,134 @@ export default function AyudaPage() {
         <Header />
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-8 pb-12">
-
-            {/* ── Título ─────────────────────────────────────────── */}
+            
+            {/* Título de la página */}
             <div>
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <Activity className="w-6 h-6 text-accent" /> Ayuda y verificación
+                <Activity className="w-6 h-6 text-accent" /> Centro de Ayuda
               </h1>
               <p className="text-muted mt-2 text-base">
-                Estado de los datos del cuaderno. Comprueba la coherencia de la programación activa y el curso.
+                Verifica la coherencia de tus datos, consulta la guía de inicio o encuentra respuestas a dudas comunes.
               </p>
-              <div className="flex flex-wrap gap-2 mt-3 text-sm text-muted">
-                <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1">
-                  Programación: <span className="font-semibold text-foreground">{activeModuleId || "—"}</span>
-                </span>
-                <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1">
-                  Curso: <span className="font-semibold text-foreground">{activeCursoId || "—"}</span>
-                </span>
+            </div>
+
+            {/* Pestañas de Navegación */}
+            <Tabs value={activeTab} onValueChange={setActiveTab}>
+              <TabsList className="mb-2 max-w-full">
+                {TABS.map(tab => (
+                  <TabsTrigger key={tab.id} value={tab.id}>
+                    {tab.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
+
+            {/* ── CONTENIDO: VERIFICACIÓN ──────────────────────────────── */}
+            {activeTab === "verificacion" && (
+              <div className="space-y-8 animate-in fade-in duration-500">
+                <div className="flex flex-wrap gap-2 text-sm text-muted">
+                  <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1">
+                    Programación Activa: <span className="font-semibold text-foreground">{activeModuleId || "—"}</span>
+                  </span>
+                  <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1">
+                    Curso Activo: <span className="font-semibold text-foreground">{activeCursoId || "—"}</span>
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-3 gap-4">
+                  <Card className="p-4 border border-success/30 bg-success/10 rounded-2xl text-center">
+                    <CheckCircle className="w-7 h-7 text-success mx-auto mb-1" />
+                    <div className="text-2xl font-extrabold text-success">{okCount}</div>
+                    <div className="text-xs text-muted mt-0.5">Correctos</div>
+                  </Card>
+                  <Card className="p-4 border border-warning/30 bg-warning/10 rounded-2xl text-center">
+                    <AlertTriangle className="w-7 h-7 text-warning mx-auto mb-1" />
+                    <div className="text-2xl font-extrabold text-warning">{warnCount}</div>
+                    <div className="text-xs text-muted mt-0.5">Advertencias</div>
+                  </Card>
+                  <Card className="p-4 border border-danger/30 bg-danger/10 rounded-2xl text-center">
+                    <XCircle className="w-7 h-7 text-danger mx-auto mb-1" />
+                    <div className="text-2xl font-extrabold text-danger">{emptyCount}</div>
+                    <div className="text-xs text-muted mt-0.5">Sin datos</div>
+                  </Card>
+                </div>
+
+                <div className="space-y-4">
+                  <h2 className="text-base font-bold text-foreground flex items-center gap-2 border-b border-white/5 pb-2">
+                    <BookOpen className="w-4 h-4 text-accent" />
+                    Programación didáctica
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                    {moduleChecks.map(item => (
+                      <CheckCard key={item.id} item={item} />
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h2 className="text-base font-bold text-foreground flex items-center gap-2 border-b border-white/5 pb-2">
+                    <Users className="w-4 h-4 text-accent" />
+                    Curso activo
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                    {courseChecks.map(item => (
+                      <CheckCard key={item.id} item={item} />
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
+            )}
 
-            {/* ── Resumen ────────────────────────────────────────── */}
-            <div className="grid grid-cols-3 gap-4">
-              <Card className="p-4 border border-success/30 bg-success/10 rounded-2xl text-center">
-                <CheckCircle className="w-7 h-7 text-success mx-auto mb-1" />
-                <div className="text-2xl font-extrabold text-success">{okCount}</div>
-                <div className="text-xs text-muted mt-0.5">Correctos</div>
-              </Card>
-              <Card className="p-4 border border-warning/30 bg-warning/10 rounded-2xl text-center">
-                <AlertTriangle className="w-7 h-7 text-warning mx-auto mb-1" />
-                <div className="text-2xl font-extrabold text-warning">{warnCount}</div>
-                <div className="text-xs text-muted mt-0.5">Advertencias</div>
-              </Card>
-              <Card className="p-4 border border-danger/30 bg-danger/10 rounded-2xl text-center">
-                <XCircle className="w-7 h-7 text-danger mx-auto mb-1" />
-                <div className="text-2xl font-extrabold text-danger">{emptyCount}</div>
-                <div className="text-xs text-muted mt-0.5">Sin datos</div>
-              </Card>
-            </div>
+            {/* ── CONTENIDO: GUÍA PASO A PASO ───────────────────────────── */}
+            {activeTab === "guia" && (
+              <div className="space-y-6 animate-in fade-in duration-500 w-full">
+                <Card glow className="p-6">
+                  <h2 className="text-xl font-bold mb-6 text-accent">Cómo empezar a usar la aplicación desde cero</h2>
+                  <div className="relative border-l-2 border-[var(--glass-border)] ml-3 space-y-8 pl-8 py-2">
+                    {STEPS.map((step, idx) => (
+                      <div key={idx} className="relative">
+                        <div className="absolute -left-[41px] top-0 w-8 h-8 rounded-full bg-accent/20 border-2 border-accent flex items-center justify-center text-sm font-bold text-accent">
+                          {idx + 1}
+                        </div>
+                        <h3 className="text-lg font-bold text-foreground mb-2">{step.title}</h3>
+                        <p className="text-muted leading-relaxed mb-3">{step.desc}</p>
+                        {step.links && step.links.length > 0 && (
+                          <div className="flex flex-wrap gap-3">
+                            {step.links.map((link, i) => (
+                              <Link 
+                                key={i} 
+                                href={link.href}
+                                className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border border-accent/30 bg-accent/10 text-accent hover:bg-accent/20 transition-all"
+                              >
+                                {link.label} <ArrowRight className="w-3.5 h-3.5" />
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              </div>
+            )}
 
-            {/* ── Sección A: Programación didáctica ─────────────── */}
-            <div className="space-y-4">
-              <h2 className="text-base font-bold text-foreground flex items-center gap-2 border-b border-white/5 pb-2">
-                <BookOpen className="w-4 h-4 text-accent" />
-                Programación didáctica
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                {moduleChecks.map(item => (
-                  <CheckCard key={item.id} item={item} />
+            {/* ── CONTENIDO: FAQ ────────────────────────────────────────── */}
+            {activeTab === "faq" && (
+              <div className="space-y-10 animate-in fade-in duration-500 w-full">
+                {FAQS.map((faqGroup, idx) => (
+                  <div key={idx}>
+                    <h2 className="text-xl font-bold mb-4 text-accent border-b border-white/5 pb-2">
+                      {faqGroup.group}
+                    </h2>
+                    <div className="space-y-1">
+                      {faqGroup.items.map((item, i) => (
+                        <AccordionItem key={i} question={item.q} answer={item.a} />
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
-            </div>
-
-            {/* ── Sección B: Curso activo ────────────────────────── */}
-            <div className="space-y-4">
-              <h2 className="text-base font-bold text-foreground flex items-center gap-2 border-b border-white/5 pb-2">
-                <Users className="w-4 h-4 text-accent" />
-                Curso activo
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                {courseChecks.map(item => (
-                  <CheckCard key={item.id} item={item} />
-                ))}
-              </div>
-            </div>
+            )}
 
           </MotionWrapper>
         </div>

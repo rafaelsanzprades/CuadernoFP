@@ -102,10 +102,10 @@ function CiclosContent() {
               <TabsList className="mb-2 max-w-full">
                 {(
                   [
-                    { id: "familias" as Tab, label: "Familias profesionales" },
-                    { id: "titulo" as Tab, label: "Título" },
-                    { id: "cursos" as Tab, label: "Cursos" },
-                    { id: "modulos" as Tab, label: "Módulos RA\u2192CE" },
+                    { id: "familias" as Tab, label: <span className="flex items-center gap-2"><FolderTree className="w-4 h-4" /> Familias profesionales</span> },
+                    { id: "titulo" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Título</span> },
+                    { id: "cursos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> Cursos</span> },
+                    { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> Módulos RA→CE</span> },
                   ]
                 ).map((t) => (
                   <TabsTrigger key={t.id} value={t.id}>

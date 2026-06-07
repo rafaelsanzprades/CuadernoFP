@@ -1,5 +1,5 @@
 "use client";
-import { Calendar, FileEdit, MapPin } from "lucide-react";
+import { Calendar, FileEdit, MapPin, ClipboardCheck } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -17,7 +17,7 @@ export default function SeguimientoPage() {
 
   const TABS = [
     { id: "diario", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Diario de aula</span>, cleanLabel: "Diario de aula" },
-    { id: "asistencia", label: "‍️ Control de asistencia", cleanLabel: "Control de asistencia" }
+    { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> Control de asistencia</span>, cleanLabel: "Control de asistencia" }
   ];
 
   const [activeTab, setActiveTab] = useState("diario");

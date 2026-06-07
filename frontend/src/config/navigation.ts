@@ -9,7 +9,7 @@ export const navGroups = [
       { href: "/ciclos", label: "Ciclos formativos", icon: GraduationCap, description: "Catálogo oficial de Ciclos Formativos. Grados Básico, Medio y Superior." },
       { href: "/hoy", label: "Tu día, semana y mes", icon: CalendarDays, description: "Revisa lo que toca impartir hoy y el estado general de tu clase." },
       { href: "/documentos", label: "Documentos y descargas", icon: FileText, description: "Explorador de archivos oficiales, legislación, otros documentos y generación de PDFs." },
-      { href: "/ayuda", label: "Ayuda y verificación", icon: Activity, description: "Panel de salud: verifica la coherencia y completitud de todos los datos del cuaderno." }
+      { href: "/ayuda", label: "Centro de ayuda", icon: Activity, description: "Panel de salud: verifica la coherencia y completitud de todos los datos del cuaderno." }
     ]
   },
   {

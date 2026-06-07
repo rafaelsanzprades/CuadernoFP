@@ -25,7 +25,7 @@ export function DashboardCharts({ cursoData }: DashboardChartsProps) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
       {/* Bar Chart */}
-      <Card className="p-6 lg:col-span-2 flex flex-col h-[400px]">
+      <Card glow className="p-6 lg:col-span-2 flex flex-col h-[400px]">
         <h3 className="text-lg font-bold text-foreground mb-4">Progreso por Unidad Didáctica</h3>
         <div className="flex-1">
           <ResponsiveContainer width="100%" height="100%">
@@ -45,7 +45,7 @@ export function DashboardCharts({ cursoData }: DashboardChartsProps) {
       </Card>
 
       {/* Pie Chart */}
-      <Card className="p-6 flex flex-col h-[400px]">
+      <Card glow className="p-6 flex flex-col h-[400px]">
         <h3 className="text-lg font-bold text-foreground mb-4">Alta y baja de alumnado</h3>
         <div className="flex-1">
           <ResponsiveContainer width="100%" height="100%">

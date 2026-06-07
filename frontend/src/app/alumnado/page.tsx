@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Save, Target, Users } from "lucide-react";
+import { BarChart, Save, Target, Users, LayoutGrid } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -20,7 +20,7 @@ export default function AlumnadoPage() {
 
   const TABS = [
     { id: "alumnado", label:  <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> Alumnado</span>, cleanLabel: "Alumnado" },
-    { id: "plano", label: "🪑 Plano de clase", cleanLabel: "Plano de clase" },
+    { id: "plano", label: <span className="flex items-center gap-2"><LayoutGrid className="w-4 h-4 shrink-0" /> Plano de clase</span>, cleanLabel: "Plano de clase" },
     { id: "tutoria", label:  <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> Ficha de Tutoría</span>, cleanLabel: "Ficha de Tutoría" },
     { id: "matriz", label:  <span className="flex items-center gap-2"><BarChart className="w-4 h-4 shrink-0" /> Matriz de Tutoría</span>, cleanLabel: "Matriz de Tutoría" }
   ];
@@ -200,24 +200,36 @@ export default function AlumnadoPage() {
                     </tr>
                   </thead>
                   <tbody>
+                    {df_al.length === 0 && (
+                      <tr>
+                        <td colSpan={10} className="p-0">
+                          <div className="flex flex-col items-center justify-center py-12 text-muted">
+                            <Users className="w-12 h-12 mb-3 opacity-20" />
+                            <p>No hay alumnado registrado aún.</p>
+                          </div>
+                        </td>
+                      </tr>
+                    )}
                     {df_al.map((al: any, idx: number) => {
                       const isMenor = Number(al.Edad) > 0 && Number(al.Edad) < 18;
+                      const inputClass = "w-full bg-transparent border border-transparent hover:border-[var(--glass-border)] focus:bg-foreground/5 rounded px-2 py-1 text-foreground focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none transition-all placeholder:text-muted/40";
+                      
                       return (
-                        <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5">
-                          <td className="p-2 font-mono text-xs sticky left-0 z-10 border-r border-[var(--glass-border)] bg-background group-hover:bg-[#111827]">
+                        <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5 transition-colors group">
+                          <td className="p-2 font-mono text-xs sticky left-0 z-10 border-r border-[var(--glass-border)] bg-background group-hover:bg-[#111827] transition-colors">
                             {al.ID}
                           </td>
-                          <td className="p-2 text-center sticky left-[60px] z-10 border-r border-[var(--glass-border)] bg-background group-hover:bg-[#111827]">
-                            {isMenor ? "" : ""}
+                          <td className="p-2 text-center sticky left-[60px] z-10 border-r border-[var(--glass-border)] bg-background group-hover:bg-[#111827] transition-colors">
+                            {isMenor ? <span className="text-danger font-bold text-lg" title="Menor de edad">!</span> : ""}
                           </td>
                           <td className="p-2 pr-2">
                             <select 
                               value={al.Estado || "Alta"}
                               onChange={(e) => handleUpdateAlumnado(idx, "Estado", e.target.value)}
-                              className={`w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:outline-none appearance-none font-semibold ${al.Estado === 'Baja' ? 'text-danger' : 'text-success'}`}
+                              className={`w-full bg-transparent border border-transparent hover:border-[var(--glass-border)] focus:bg-foreground/5 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-accent transition-all appearance-none font-semibold cursor-pointer ${al.Estado === 'Baja' ? 'text-danger' : 'text-success'}`}
                             >
-                              <option value="Alta">Alta</option>
-                              <option value="Baja">Baja</option>
+                              <option value="Alta" className="text-success">Alta</option>
+                              <option value="Baja" className="text-danger">Baja</option>
                             </select>
                           </td>
                           <td className="p-2 pr-2">
@@ -225,7 +237,8 @@ export default function AlumnadoPage() {
                               type="text"
                               value={al.Apellidos || ""}
                               onChange={(e) => handleUpdateAlumnado(idx, "Apellidos", e.target.value)}
-                              className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-info focus:outline-none"
+                              className={inputClass}
+                              placeholder="Apellidos..."
                             />
                           </td>
                           <td className="p-2 pr-2">
@@ -233,7 +246,8 @@ export default function AlumnadoPage() {
                               type="text"
                               value={al.Nombre || ""}
                               onChange={(e) => handleUpdateAlumnado(idx, "Nombre", e.target.value)}
-                              className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-info focus:outline-none"
+                              className={inputClass}
+                              placeholder="Nombre..."
                             />
                           </td>
                           <td className="p-2 pr-2">
@@ -241,7 +255,8 @@ export default function AlumnadoPage() {
                               type="number"
                               value={al.Edad || ""}
                               onChange={(e) => handleUpdateAlumnado(idx, "Edad", e.target.value)}
-                              className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-info focus:outline-none"
+                              className={inputClass}
+                              placeholder="Edad"
                             />
                           </td>
                           <td className="p-2 pr-2">
@@ -250,7 +265,7 @@ export default function AlumnadoPage() {
                               value={al.Nacimiento || ""}
                               onChange={(e) => handleUpdateAlumnado(idx, "Nacimiento", e.target.value)}
                               placeholder="DD/MM/YYYY"
-                              className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-info focus:outline-none text-sm"
+                              className={`${inputClass} text-sm`}
                             />
                           </td>
                           <td className="p-2 text-center">
@@ -258,7 +273,7 @@ export default function AlumnadoPage() {
                               type="checkbox"
                               checked={al.Repite === true || al.Repite === "true"}
                               onChange={(e) => handleUpdateAlumnado(idx, "Repite", e.target.checked)}
-                              className="accent-blue-500"
+                              className="w-4 h-4 accent-accent rounded cursor-pointer opacity-70 group-hover:opacity-100 transition-opacity"
                             />
                           </td>
                           <td className="p-2 pr-2">
@@ -266,7 +281,8 @@ export default function AlumnadoPage() {
                               type="email"
                               value={al.email || ""}
                               onChange={(e) => handleUpdateAlumnado(idx, "email", e.target.value)}
-                              className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-info focus:outline-none"
+                              className={inputClass}
+                              placeholder="correo@ejemplo.com"
                             />
                           </td>
                           <td className="p-2 pr-2">
@@ -274,13 +290,14 @@ export default function AlumnadoPage() {
                               type="text"
                               value={al.Movil || ""}
                               onChange={(e) => handleUpdateAlumnado(idx, "Movil", e.target.value)}
-                              className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-info focus:outline-none"
+                              className={inputClass}
+                              placeholder="Teléfono"
                             />
                           </td>
                           <td className="p-2 text-center">
                             <button
                               onClick={() => handleRemoveAlumnado(idx)}
-                              className="text-danger hover:text-danger font-bold"
+                              className="text-danger/50 hover:text-danger font-bold text-lg opacity-0 group-hover:opacity-100 transition-all hover:scale-110"
                               title="Eliminar Alumnado"
                             >
                               &times;

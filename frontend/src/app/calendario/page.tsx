@@ -1,5 +1,5 @@
 "use client";
-import { Calendar, Circle, ClipboardList, Search, Settings } from "lucide-react";
+import { Calendar, Circle, ClipboardList, Search, Settings, Flag } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -423,7 +423,7 @@ export default function CalendarioPage() {
 
   const TABS = [
     { id: "fechas", label: <><span className="inline-flex"><Settings className="w-[1.2em] h-[1.2em] mr-1" /></span> Configuración de fechas</>, cleanLabel: "Configuración de fechas" },
-    { id: "eventos", label: " Eventos y festivos", cleanLabel: "Eventos y festivos" },
+    { id: "eventos", label: <span className="flex items-center gap-2"><Flag className="w-[1.2em] h-[1.2em] mr-1 shrink-0" /> Eventos y festivos</span>, cleanLabel: "Eventos y festivos" },
     { id: "visual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> Calendario visual</>, cleanLabel: "Calendario visual" }
   ];
 

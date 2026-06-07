@@ -84,40 +84,40 @@ export function DashboardKPIs({ cursoData, moduleData }: DashboardKPIsProps) {
         <span><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Resumen planificación y seguimiento global
       </h2>
       <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-        <div className="glass-card p-6 flex flex-col items-center justify-center border-t-4 border-t-blue-500 hover:scale-[1.02] transition-transform shadow-lg hover:shadow-blue-500/20">
+        <Card glow accent="top" className="p-6 flex flex-col items-center justify-center border-t-blue-500 hover:scale-[1.02] transition-transform">
           <span className="text-sm text-muted mb-1 text-center">Horas Previstas</span>
           <span className="text-3xl font-bold text-foreground">
             <AnimatedCounter value={total_previsto} /> h
           </span>
-        </div>
+        </Card>
         
-        <div className="glass-card p-6 flex flex-col items-center justify-center border-t-4 border-t-[#14a085] hover:scale-[1.02] transition-transform shadow-lg hover:shadow-[#14a085]/20">
+        <Card glow accent="top" className="p-6 flex flex-col items-center justify-center border-t-[#14a085] hover:scale-[1.02] transition-transform">
           <span className="text-sm text-muted mb-1 text-center">Horas Impartidas</span>
           <span className="text-3xl font-bold text-foreground">
             <AnimatedCounter value={total_impartido} /> h
           </span>
-        </div>
+        </Card>
         
-        <div className="glass-card p-6 flex flex-col items-center justify-center border-t-4 border-t-purple-500 hover:scale-[1.02] transition-transform shadow-lg hover:shadow-purple-500/20">
+        <Card glow accent="top" className="p-6 flex flex-col items-center justify-center border-t-purple-500 hover:scale-[1.02] transition-transform">
           <span className="text-sm text-muted mb-1 text-center">% Progreso</span>
           <span className="text-3xl font-bold text-foreground">
             <AnimatedCounter value={porcentaje_progreso} suffix="%" decimals={1} />
           </span>
-        </div>
+        </Card>
         
-        <div className="glass-card p-6 flex flex-col items-center justify-center border-t-4 border-t-orange-500 hover:scale-[1.02] transition-transform shadow-lg hover:shadow-orange-500/20">
+        <Card glow accent="top" className="p-6 flex flex-col items-center justify-center border-t-orange-500 hover:scale-[1.02] transition-transform">
           <span className="text-sm text-muted mb-1 text-center">Horas sin docencia</span>
           <span className="text-3xl font-bold text-foreground">
             <AnimatedCounter value={h_sin_docencia} /> h
           </span>
-        </div>
+        </Card>
         
-        <div className="glass-card p-6 flex flex-col items-center justify-center border-t-4 border-t-yellow-500 hover:scale-[1.02] transition-transform shadow-lg hover:shadow-yellow-500/20">
+        <Card glow accent="top" className="p-6 flex flex-col items-center justify-center border-t-yellow-500 hover:scale-[1.02] transition-transform">
           <span className="text-sm text-muted mb-1 text-center">% Sin docencia</span>
           <span className="text-3xl font-bold text-foreground">
             <AnimatedCounter value={perc_sin_docencia} suffix="%" decimals={1} />
           </span>
-        </div>
+        </Card>
       </div>
     </div>
   );

@@ -28,6 +28,7 @@ import { Toaster } from "react-hot-toast";
 import { apiInterceptor } from "@/services/apiInterceptor";
 import { TourGuide } from "@/components/features/onboarding/TourGuide";
 import { GlobalErrorBoundary } from "@/components/GlobalErrorBoundary";
+import { PageTransition } from "@/components/layout/PageTransition";
 
 if (typeof window !== 'undefined') {
   apiInterceptor.init();
@@ -47,7 +48,9 @@ export default function RootLayout({
         <AuthProvider>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
             <GlobalErrorBoundary>
-              {children}
+              <PageTransition>
+                {children}
+              </PageTransition>
             </GlobalErrorBoundary>
             <TourGuide />
             <Toaster position="bottom-right" toastOptions={{
