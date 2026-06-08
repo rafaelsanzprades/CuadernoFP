@@ -13,6 +13,8 @@ import { initialGroups } from "@/store/initialData";
 import toast from "react-hot-toast";
 import { fetchWithTimeout } from "@/utils/fetchWithTimeout";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
+import { AISettingsPanel } from "@/components/features/ai/AISettingsPanel";
+import { AIWizardModal } from "@/components/features/ai/AIWizardModal";
 
 export default function EntornoTrabajoPage() {
   const {
@@ -24,6 +26,7 @@ export default function EntornoTrabajoPage() {
   const [dataSource, setDataSource] = useState<DataSourceType>('demo');
   const [activeTab, setActiveTab] = useState<"demo" | "real" | "backup">("demo");
   const [db, setDb] = useState<Record<string, any>>({});
+  const [aiModalOpen, setAiModalOpen] = useState(false);
 
   // Cloud mock states
   const [googleConnected, setGoogleConnected] = useState(false);
@@ -309,6 +312,15 @@ export default function EntornoTrabajoPage() {
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar />
+      <AIWizardModal 
+        isOpen={aiModalOpen} 
+        onClose={() => setAiModalOpen(false)} 
+        onSuccess={(data) => {
+          console.log("Datos recibidos de la IA:", data);
+          toast.success("Estructura guardada. Asegúrate de seleccionarla en el desplegable.");
+          // Aquí se integraría la lógica para mezclar 'data' con la store local.
+        }} 
+      />
       <div className="flex-1 flex flex-col h-screen min-w-0">
         <Header breadcrumbSuffix="Ajustes de datos" />
 
@@ -491,6 +503,11 @@ export default function EntornoTrabajoPage() {
                   </Card>
                 </div>
 
+                {/* Sección de Ajustes de IA */}
+                <div className="space-y-4">
+                  <AISettingsPanel />
+                </div>
+
                 {/* Aviso de Seguridad y RGPD al final (centrado) */}
                 <div className="flex flex-col items-center justify-center text-center space-y-3 pt-8 border-t border-[var(--glass-border)] max-w-2xl mx-auto">
                   <ShieldAlert className="w-8 h-8 text-info" />
@@ -545,6 +562,13 @@ export default function EntornoTrabajoPage() {
                         className="text-sm font-semibold flex items-center gap-2 bg-foreground/10 hover:bg-foreground/15 text-foreground border border-white/5 px-5 py-3 rounded-xl transition-all w-full justify-center"
                       >
                         <Upload className="w-4 h-4 text-info" /> Importar Base de datos (.cdd)
+                      </Button>
+
+                      <Button
+                        onClick={() => setAiModalOpen(true)}
+                        className="text-sm font-semibold flex items-center gap-2 bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 px-5 py-3 rounded-xl transition-all w-full justify-center"
+                      >
+                        <Sparkles className="w-4 h-4 text-accent" /> Importar Currículo con Asistente IA (PDF)
                       </Button>
 
                       <Button
