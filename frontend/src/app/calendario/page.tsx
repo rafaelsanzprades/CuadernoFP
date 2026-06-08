@@ -560,9 +560,6 @@ export default function CalendarioPage() {
               />
             </Card>
           )}
-
-            )}
-
           </MotionWrapper>
         </main>
       </div>
