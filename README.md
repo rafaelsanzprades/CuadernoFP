@@ -1,5 +1,10 @@
 # 📓 Cuaderno Digital Docente — Ciclos
 
+![License](https://img.shields.io/github/license/rafaelsanzprades/CuadernoCiclosFP?color=blue&style=flat-square)
+![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=flat-square&logo=fastapi)
+![Open Source](https://img.shields.io/badge/Open_Source-❤️-ff69b4?style=flat-square)
+
 Aplicación web interactiva desarrollada con **Next.js (React) + FastAPI + SQLite** para la gestión integral del trabajo docente en Formación Profesional: programación didáctica, seguimiento de aula y evaluación del alumnado.
 
 ---
@@ -112,3 +117,11 @@ La aplicación estará disponible en `http://localhost:3000`.
 - **Rediseño UI/UX:** Interfaz moderna (*glassmorphism*), menús superiores desplegables y modo oscuro nativo refinado.
 - **Base de datos relacional:** Transición de ficheros locales `.json` aislados a SQLite con modelos relacionales definidos.
 - **Limpieza de repositorio:** Todos los ficheros obsoletos (Streamlit legacy, antiguos JSON) centralizados en `RF BASURA` o eliminados para un mayor orden y mantenimiento de código.
+
+---
+
+## 🤝 Contribuciones y Licencia
+
+Este proyecto es de **código abierto** y se distribuye bajo la licencia **GNU GPLv3** (el contenido bajo CC BY-NC-SA 4.0).
+- Consulta el archivo [LICENSE.md](./LICENSE.md) para más detalles legales.
+- Si deseas colaborar o reportar un error, lee nuestra [Guía de Contribución](./CONTRIBUTING.md). ¡Toda ayuda es bienvenida!

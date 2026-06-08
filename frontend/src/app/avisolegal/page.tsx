@@ -34,8 +34,8 @@ export default function LegalNoticePage() {
               </p>
               <div className="text-xs text-muted space-y-1 bg-background/40 p-4 rounded-xl border border-white/5 font-mono">
                 <p><strong>Titular:</strong> Rafael Sanz Prades</p>
-                <p><strong>Contacto:</strong> [Tu Correo de Contacto]</p>
-                <p><strong>Sitio Web:</strong> [Tu URL de Producción]</p>
+                <p><strong>Contacto:</strong> <a href="mailto:rafaelsanzprades@gmail.com" className="text-info hover:underline">rafaelsanzprades@gmail.com</a></p>
+                <p><strong>Sitio Web:</strong> <a href="https://cuadernociclosfp.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">https://cuadernociclosfp.vercel.app/</a></p>
                 <p><strong>Actividad:</strong> Herramienta de productividad docente para ciclos formativos.</p>
               </div>
             </Card>

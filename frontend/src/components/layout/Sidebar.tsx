@@ -117,9 +117,15 @@ export default function Sidebar() {
             <p className="text-center text-[0.65rem] text-muted/80 mt-1 whitespace-nowrap">
               © {new Date().getFullYear()} Rafael Sanz Prades
             </p>
-            <Link href="/avisolegal" className="text-[0.6rem] text-info hover:text-info hover:underline" onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}>
-              Aviso Legal y Privacidad
-            </Link>
+            <div className="flex items-center gap-2">
+              <Link href="/avisolegal" className="text-[0.7rem] text-info hover:text-info hover:underline" onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}>
+                Legal
+              </Link>
+              <span className="text-[0.7rem] text-muted/40">•</span>
+              <a href="https://github.com/rafaelsanzprades/CuadernoCiclosFP/blob/main/LICENSE.md" target="_blank" rel="noopener noreferrer" className="text-[0.7rem] text-info hover:text-info hover:underline">
+                Licencia
+              </a>
+            </div>
           </>
         )}
       </div>
