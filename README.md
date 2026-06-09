@@ -1,6 +1,6 @@
 # 📓 Cuaderno Digital Docente — Ciclos
 
-![License](https://img.shields.io/github/license/rafaelsanzprades/CuadernoCiclosFP?color=blue&style=flat-square)
+![License](https://img.shields.io/github/license/rafaelsanzprades/CuadernoFP?color=blue&style=flat-square)
 ![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=flat-square&logo=fastapi)
 ![Open Source](https://img.shields.io/badge/Open_Source-❤️-ff69b4?style=flat-square)

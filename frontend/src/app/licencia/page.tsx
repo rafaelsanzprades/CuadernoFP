@@ -23,7 +23,7 @@ export default function LicenciaPage() {
               </p>
               
               <a 
-                href="https://github.com/rafaelsanzprades/CuadernoCiclosFP/blob/main/LICENSE.md" 
+                href="https://github.com/rafaelsanzprades/CuadernoFP/blob/main/LICENSE.md" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="mt-4 inline-flex items-center px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/80 transition-colors text-sm font-medium"

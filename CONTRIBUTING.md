@@ -5,12 +5,12 @@
 ## ¿Cómo puedes colaborar?
 
 ### 1. Reportar Errores o Sugerir Mejoras
-Si encuentras un fallo o tienes una idea para una nueva funcionalidad útil para el aula, por favor [abre un Issue](https://github.com/rafaelsanzprades/CuadernoCiclosFP/issues). Trata de detallar al máximo tu propuesta para poder reproducir el error o entender bien tu idea.
+Si encuentras un fallo o tienes una idea para una nueva funcionalidad útil para el aula, por favor [abre un Issue](https://github.com/rafaelsanzprades/CuadernoFP/issues). Trata de detallar al máximo tu propuesta para poder reproducir el error o entender bien tu idea.
 
-### 2. Contribuir con Código
-Si sabes programar o quieres adaptar la herramienta:
+### 💻 Contribuir con código (Pull Requests)
+
 1. Haz un **Fork** de este repositorio.
-2. Clona tu fork localmente: `git clone https://github.com/TU-USUARIO/CuadernoCiclosFP.git`
+2. Clona tu fork localmente: `git clone https://github.com/TU-USUARIO/CuadernoFP.git`
 3. Crea una rama para tu nueva funcionalidad: `git checkout -b mejora-increible`
 4. Realiza tus cambios. (Recuerda revisar la arquitectura en las carpetas `frontend` y `backend`).
 5. Haz commit de tus cambios de forma descriptiva: `git commit -m "Añade funcionalidad X"`
