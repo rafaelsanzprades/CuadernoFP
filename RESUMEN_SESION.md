@@ -22,10 +22,20 @@ Este documento sirve como registro de todo el trabajo realizado en la sesión de
    - Se reescribió por completo el `README.md` del proyecto en GitHub reflejando con exactitud los menús de la UI, la funcionalidad actual de la PWA y los pasos reales de despliegue.
    - Se actualizó el Centro de Ayuda interno (`/ayuda`) para explicar a los usuarios la nueva Arquitectura Híbrida (BYOC + Cloud Run) en las FAQs.
 
-## ✨ Interfaz de Usuario (UI)
-1. **Nueva funcionalidad en la Barra Lateral:**
+## ✨ Interfaz de Usuario (UI) y Navegación
+1. **Reestructuración del Menú Principal:**
+   - Se ha independizado la sección "Agenda", dándole máxima prioridad visual. Ahora aparece como un botón fijo y destacado tanto en el menú lateral (Sidebar) como en la cabecera (Header).
+   - Se han reorganizado las opciones en bloques más coherentes: Programación, Curso y General.
+   - La sección antigua de Documentos se ha desdoblado en dos rutas separadas: `/documentacion` (para el explorador de archivos y legislación) y `/descargas` (exclusiva para la generación de reportes PDF).
+
+2. **Refinamiento del Modo Demostración:**
+   - Se ha configurado una fecha fija ("2/may") para todas las vistas dependientes del tiempo (Agenda, Seguimientos y el Reloj general) cuando el usuario tiene activo el entorno con Datos Ficticios. Esto permite mantener la coherencia en las demostraciones independientemente del día real de consulta.
+   - La etiqueta indicativa de la fecha dinámica (2/may o el día actual) se ha integrado directamente debajo del nuevo botón de Agenda para mayor claridad.
+
+3. **Nueva funcionalidad en la Barra Lateral:**
    - Se añadió un reloj dinámico en tiempo real bajo el título principal "Cuaderno FP", en formato reducido (`DD/mes - HH:mmh`).
-2. **Rebranding Completo:**
+
+4. **Rebranding Completo:**
    - Se eliminaron rastros de nombres de proyectos anteriores y se consolidó toda la marca bajo **Cuaderno FP**.
 
 ## 🔜 Próximos pasos (Para Mañana)
