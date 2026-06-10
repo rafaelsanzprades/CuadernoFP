@@ -15,8 +15,8 @@ def parse_curriculum_with_gemini(text: str, api_key: str) -> dict:
     """
     genai.configure(api_key=api_key)
     
-    # Configuramos el modelo Gemini 1.5 Flash por su rapidez y bajo coste/capacidad
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    # Configuramos el modelo Gemini Flash por su rapidez y bajo coste/capacidad
+    model = genai.GenerativeModel('gemini-flash-latest')
     
     prompt = """
     Eres un experto en educación y Formación Profesional en España.

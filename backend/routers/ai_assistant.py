@@ -1,6 +1,8 @@
-from fastapi import APIRouter, UploadFile, Form, HTTPException
+from fastapi import APIRouter, UploadFile, Form, HTTPException, Body
 from services.pdf_extractor import extract_text_from_pdf
 from services.llm_parser import parse_curriculum
+from services.chatbot import get_chatbot_response
+from schemas import ChatRequest
 
 router = APIRouter(
     prefix="/api/ai",
@@ -35,4 +37,17 @@ async def parse_curriculum_endpoint(
         }
     except Exception as e:
         print(f"Error en AI parser: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/chat")
+async def chat_endpoint(request: ChatRequest = Body(...)):
+    try:
+        messages = [msg.model_dump() for msg in request.messages]
+        reply = get_chatbot_response(messages)
+        return {
+            "status": "success",
+            "reply": reply
+        }
+    except Exception as e:
+        print(f"Error en endpoint chat: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))

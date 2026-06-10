@@ -112,3 +112,10 @@ class ModuleUpdateBody(BaseModel):
     __version__: Optional[int] = None
 
     model_config = ConfigDict(extra="allow")
+
+class ChatMessage(BaseModel):
+    role: str
+    parts: str | list
+
+class ChatRequest(BaseModel):
+    messages: List[ChatMessage]

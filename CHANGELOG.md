@@ -5,6 +5,8 @@
 - **UI:** Fusión de las pestañas de Inicio y Datos de Módulos. Modificados los subtítulos de las pestañas a "Resumen" y "Gestión de ficheros".
 - **Navegación y Arquitectura:** Reestructuración de la barra lateral, eliminando el bloque "Centro", agrupando opciones en "Programación", y moviendo "Entorno de trabajo" a la primera posición de "Gestión".
 - **Nueva Vista 'Hoy':** Se estableció `/hoy` como página principal redirigida desde `/`, ofreciendo un resumen de tareas diarias, panel de bienvenida y acceso rápido mediante el botón "Tu día y semana".
+- **Chatbot Asistente:** Integración mejorada con Gemini 1.5 Flash. Añadido soporte nativo para adjuntar archivos (PDF e Imágenes) mediante conversión Base64 en el frontend y envío como `inline_data` al backend (FastAPI).
+- **Entorno de Desarrollo:** Sustitución de consolas múltiples por PM2 para gestionar el arranque dual (FastAPI/Next.js) en segundo plano (`start.bat` y `stop.bat`), solucionando bloqueos por sobrecarga de procesos huérfanos. Se eliminaron también los scripts VBScript del inicio automático de Windows que causaban fallos en cadena.
 - **Mantenimiento:** Limpieza profunda de directorios, eliminación de 18 scripts obsoletos de Python, bases de datos residuales en raíz y archivos temporales del frontend.
 - **Renombrado:** Actualización de la ruta `/introduccion` a `/contexto` en el código y navegación.
 - **Refactorización Visual:** Reemplazo integral de emojis clásicos (299 ocurrencias) por iconos vectoriales modernos de `lucide-react` a lo largo de toda la aplicación, logrando un diseño visual mucho más consistente y corporativo.
