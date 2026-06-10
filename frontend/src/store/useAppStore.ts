@@ -43,10 +43,7 @@ export const useAppStore = create<AppState>()(
         name: 'cdd-store-cache-v3',
         storage: createJSONStorage(() => idbStorage),
         version: 2, // Bump version to force cache clearing of old state
-        partialize: (state) => {
-          const { moduleData, cursoData, ...rest } = state;
-          return rest;
-        },
+
       }
     ),
     {

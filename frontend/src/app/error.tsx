@@ -17,7 +17,7 @@ export default function ErrorBoundary({
 
   const handleReset = () => {
     // If the app crashed due to corrupted local data, safely revert to demo mode
-    fileManager.setDataSourceType('demo');
+    fileManager.loadDemoData();
     window.location.href = '/entorno';
   };
 

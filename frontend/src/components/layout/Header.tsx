@@ -14,7 +14,7 @@ import { fileManager } from "@/services/fileManager";
 
 
 export default function Header({ title, breadcrumbSuffix }: { title?: React.ReactNode; breadcrumbSuffix?: React.ReactNode }) {
-  const { activeModuleId, activeCursoId, moduleData, cursoData, saveModuleData, saveCursoData, isSidebarOpen, toggleSidebar } = useAppStore();
+  const { activeModuleId, activeCursoId, moduleData, cursoData, saveModuleData, saveCursoData, isSidebarOpen, toggleSidebar, dataSource } = useAppStore();
   const [isSaving, setIsSaving] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const pathname = usePathname();
@@ -29,7 +29,6 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
 
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [sourceType, setSourceType] = useState<"demo" | "local">("demo");
   const [cloudSynced, setCloudSynced] = useState(false);
   const [timeStr, setTimeStr] = useState<string>("");
 
@@ -64,12 +63,9 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
   useEffect(() => {
     setMounted(true);
     const updateStates = () => {
-      setSourceType(fileManager.getDataSourceType());
       setCloudSynced(fileManager.isGoogleConnected() || fileManager.isOneDriveConnected());
     };
     updateStates();
-    window.addEventListener('cdd-datasource-changed', updateStates);
-    return () => window.removeEventListener('cdd-datasource-changed', updateStates);
   }, []);
 
   let currentGroup = "";
@@ -208,11 +204,11 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
           
           <Link
             href="/agenda"
-            className={`px-5 py-2.5 rounded-lg hover:bg-foreground/5 transition-all flex items-center gap-3 cursor-pointer group ${pathname === '/agenda' ? 'bg-accent/10 border-accent/30 shadow-[0_0_15px_rgba(var(--accent-color-rgb),0.3)]' : ''}`}
+            className={`px-5 py-2.5 rounded-lg hover:bg-foreground/5 transition-all flex items-center gap-3 cursor-pointer group ${pathname === '/agenda' ? (dataSource === 'demo' ? 'bg-warning/10 border border-warning/30 shadow-[0_0_15px_rgba(251,191,36,0.3)]' : 'bg-accent/10 border border-accent/30 shadow-[0_0_15px_rgba(var(--accent-color-rgb),0.3)]') : ''}`}
           >
             <div className="flex flex-col items-start gap-1">
-              <span className={`text-[0.95rem] font-bold tracking-wide leading-none ${pathname === '/agenda' ? 'text-accent' : 'text-foreground group-hover:text-accent'}`}>Agenda</span>
-              <div className="px-2 py-0.5 rounded text-[0.65rem] border font-semibold tracking-wider leading-none text-accent bg-accent/10 border-accent/30">
+              <span className={`text-[0.95rem] font-bold tracking-wide leading-none ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : 'text-foreground group-hover:text-accent'}`}>Agenda</span>
+              <div className={`px-2 py-0.5 rounded text-[0.65rem] border font-semibold tracking-wider leading-none ${dataSource === 'demo' ? 'text-warning bg-warning/10 border-warning/30' : 'text-accent bg-accent/10 border-accent/30'}`}>
                 {timeStr}
               </div>
             </div>
@@ -220,7 +216,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
 
           {navGroups.map(group => {
             let badgeText = "";
-            const badgeColor = "text-accent bg-accent/10 border-accent/30";
+            const badgeColor = dataSource === 'demo' ? "text-warning bg-warning/10 border-warning/30" : "text-accent bg-accent/10 border-accent/30";
             
             if (group.title === "Centro educativo" || group.title === "Centro") {
               badgeText = "ciclos-fp";
@@ -284,7 +280,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
                         key={item.href}
                         href={item.href}
                         onClick={() => setActiveDropdown(null)}
-                        className={`flex items-center gap-3 px-4 py-3 hover:bg-foreground/5 transition-colors ${isActive ? 'bg-gradient-to-r from-blue-500/10 to-transparent border-l-2 border-info' : 'border-l-2 border-transparent'}`}
+                        className={`flex items-center gap-3 px-4 py-3 hover:bg-foreground/5 transition-colors ${isActive ? (dataSource === 'demo' ? 'bg-gradient-to-r from-warning/10 to-transparent border-l-2 border-warning text-warning' : 'bg-gradient-to-r from-blue-500/10 to-transparent border-l-2 border-info text-info') : 'border-l-2 border-transparent'}`}
                       >
                         <span className="flex items-center justify-center w-5 h-5"><item.icon className="w-5 h-5" strokeWidth={1.75} /></span>
                         <span className={`text-[0.85rem] ${isActive ? 'text-foreground font-bold' : 'text-foreground/80 font-medium'}`}>{item.label}</span>
@@ -299,7 +295,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
 
         {/* Botón Guardar + Undo/Redo + Tema (Derecha) */}
         <div className="flex-1 flex justify-end items-center gap-3">
-          {sourceType !== 'demo' && (
+          {dataSource !== 'demo' && (
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -312,7 +308,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
             </motion.button>
           )}
 
-          {moduleData && sourceType !== 'demo' && (
+          {moduleData && dataSource !== 'demo' && (
             <div className="flex items-center">
               {autosaveStatus === "saved" && <span className="text-success text-sm font-medium"><span className="inline-flex"><Cloud className="w-[1.2em] h-[1.2em] mr-1" /></span> Guardado</span>}
               {autosaveStatus === "saving" && <span className="text-warning text-sm font-medium animate-pulse">⏳ Guardando...</span>}
@@ -323,7 +319,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
 
           <div>
             <Link href="/entorno" className="inline-block transition-transform hover:scale-105">
-              {sourceType === 'demo' ? (
+              {dataSource === 'demo' ? (
                 <span className="px-3 py-1.5 rounded-lg text-xs font-extrabold tracking-wider border border-warning/30 text-warning bg-warning/10 hover:bg-warning/10 cursor-pointer flex items-center gap-1 transition-all" title="Haz clic para configurar tu Entorno de Trabajo">
                   <span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> Datos ficticios
                 </span>
@@ -333,7 +329,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
                 </span>
               ) : (
                 <span className="px-3 py-1.5 rounded-lg text-xs font-extrabold tracking-wider border border-info/30 text-info bg-info/10 hover:bg-info/10 cursor-pointer flex items-center gap-1 transition-all" title="Haz clic para configurar tu Entorno de Trabajo">
-                  <span className="inline-flex"><Shield className="w-[1.2em] h-[1.2em] mr-1" /></span> Datos reales en local
+                  <span className="inline-flex"><Shield className="w-[1.2em] h-[1.2em] mr-1" /></span> Datos reales
                 </span>
               )}
             </Link>

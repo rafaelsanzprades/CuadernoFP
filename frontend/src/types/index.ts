@@ -201,4 +201,7 @@ export interface AppState {
   
   groups: CourseGroup[];
   setGroups: (groups: CourseGroup[] | ((prev: CourseGroup[]) => CourseGroup[])) => void;
+  
+  dataSource: 'demo' | 'local';
+  setDataSource: (source: 'demo' | 'local') => void;
 }

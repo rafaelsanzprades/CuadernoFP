@@ -10,7 +10,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { RaOgMatrix } from "@/components/features/resultados/RaOgMatrix";
 import { curriculos, CompetenciaCPP } from "@/data/curriculos";
-import { fetchWithTimeout } from "@/utils/fetchWithTimeout";
 import toast from "react-hot-toast";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -33,23 +32,8 @@ export default function MatricesPage() {
   ];
 
   useEffect(() => {
-    if (activeModuleId && !moduleData) {
-      fetchWithTimeout(`/api/module/${activeModuleId}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.status === "success") {
-            setModuleData(data.data);
-          }
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.error("Error fetching module:", err);
-          setLoading(false);
-        });
-    } else {
-      setLoading(false);
-    }
-  }, [activeModuleId, moduleData, setModuleData]);
+    setLoading(false);
+  }, [activeModuleId, moduleData]);
 
   const handleSave = async () => {
     setSaving(true);

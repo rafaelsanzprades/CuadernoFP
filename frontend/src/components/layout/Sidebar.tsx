@@ -10,7 +10,7 @@ import { Tooltip } from '@/components/ui/Tooltip';
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const { activeModuleId, activeCursoId, isSidebarOpen, toggleSidebar } = useAppStore();
+  const { activeModuleId, activeCursoId, isSidebarOpen, toggleSidebar, dataSource } = useAppStore();
   useEffect(() => {
     const savedScroll = sessionStorage.getItem('sidebar-scroll');
     if (savedScroll) {
@@ -92,17 +92,17 @@ export default function Sidebar() {
               <Link
                 href="/agenda"
                 onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
-                className={`flex items-center ${isSidebarOpen ? 'gap-2.5 px-3' : 'justify-center px-0'} py-3 rounded-lg transition-all duration-150 group shadow-md bg-gradient-to-r from-accent/20 to-accent/5 border border-accent/40 text-foreground hover:bg-accent/20`}
+                className={`flex items-center ${isSidebarOpen ? 'gap-2.5 px-3' : 'justify-center px-0'} py-3 rounded-lg transition-all duration-150 group shadow-md bg-gradient-to-r ${dataSource === 'demo' ? 'from-warning/20 to-warning/5 border border-warning/40 text-foreground hover:bg-warning/20' : 'from-accent/20 to-accent/5 border border-accent/40 text-foreground hover:bg-accent/20'}`}
               >
-                <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === '/agenda' ? 'scale-110 text-accent' : 'text-accent group-hover:scale-110'}`}>
+                <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === '/agenda' ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : (dataSource === 'demo' ? 'text-warning group-hover:scale-110' : 'text-accent group-hover:scale-110')}`}>
                   <CalendarDays className="w-5 h-5" strokeWidth={2} />
                 </span>
                 {isSidebarOpen && (
                   <div className="flex flex-col gap-1 items-start">
-                    <span className={`text-[0.85rem] leading-tight whitespace-nowrap font-bold ${pathname === '/agenda' ? 'text-accent' : ''}`}>
+                    <span className={`text-[0.85rem] leading-tight whitespace-nowrap font-bold ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
                       Agenda de clase
                     </span>
-                    <span className="px-2 py-0.5 rounded text-[0.65rem] border font-semibold tracking-wider leading-none text-accent bg-accent/10 border-accent/30">
+                    <span className={`px-2 py-0.5 rounded text-[0.65rem] border font-semibold tracking-wider leading-none ${dataSource === 'demo' ? 'text-warning bg-warning/10 border-warning/30' : 'text-accent bg-accent/10 border-accent/30'}`}>
                       {timeStr}
                     </span>
                   </div>
@@ -140,11 +140,11 @@ export default function Sidebar() {
                   }}
                   className={`flex items-center ${isSidebarOpen ? 'gap-2.5 px-3' : 'justify-center px-0'} py-2 rounded-lg transition-all duration-150 group
                     ${pathname === item.href
-                      ? 'bg-accent/10 border border-accent/30 text-foreground shadow-sm shadow-accent/10'
+                      ? (dataSource === 'demo' ? 'bg-warning/10 border border-warning/30 text-foreground shadow-sm shadow-warning/10' : 'bg-accent/10 border border-accent/30 text-foreground shadow-sm shadow-accent/10')
                       : 'text-muted hover:text-foreground hover:bg-foreground/5 border border-transparent'
                     }`}
                 >
-                  <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === item.href ? 'scale-110 text-accent' : 'group-hover:scale-110'}`}>
+                  <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === item.href ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : 'group-hover:scale-110'}`}>
                     <item.icon className="w-5 h-5" strokeWidth={1.75} />
                   </span>
                   {isSidebarOpen && (
@@ -153,7 +153,7 @@ export default function Sidebar() {
                         {item.label}
                       </span>
                       {pathname === item.href && (
-                        <div className="ml-auto w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_6px_var(--accent-color)] flex-shrink-0" />
+                        <div className={`ml-auto w-1.5 h-1.5 rounded-full flex-shrink-0 ${dataSource === 'demo' ? 'bg-warning shadow-[0_0_6px_var(--warning-color)]' : 'bg-accent shadow-[0_0_6px_var(--accent-color)]'}`} />
                       )}
                     </>
                   )}
