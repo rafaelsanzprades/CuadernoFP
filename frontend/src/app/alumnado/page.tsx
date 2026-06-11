@@ -16,7 +16,7 @@ import { FeoeAssignTab } from "@/components/features/alumnado/FeoeAssignTab";
 import { OrientacionTab } from "@/components/features/profesional/OrientacionTab";
 import { ResumenTab } from "@/components/features/profesional/ResumenTab";
 import { TendenciasTab } from "@/components/features/profesional/TendenciasTab";
-import { PanoramaTab } from "@/components/features/profesional/PanoramaTab";
+
 
 export default function AlumnadoPage() {
   const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData } = useAppStore();
@@ -26,14 +26,13 @@ export default function AlumnadoPage() {
 
   const TABS = [
     { id: "alumnado", label:  <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> Alumnado</span>, cleanLabel: "Alumnado" },
-    { id: "plano", label: <span className="flex items-center gap-2"><LayoutGrid className="w-4 h-4 shrink-0" /> Plano de clase <span className="flex items-center gap-1 bg-warning/20 text-warning px-1.5 py-0.5 ml-2 rounded text-[10px] font-bold uppercase border border-warning/30"><AlertTriangle className="w-3 h-3" /> En obra</span></span>, cleanLabel: "Plano de clase" },
+    { id: "plano", label: <span className="flex items-center gap-2"><LayoutGrid className="w-4 h-4 shrink-0" /> Plano de clase</span>, cleanLabel: "Plano de clase" },
     { id: "tutoria", label:  <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> Ficha de Tutoría</span>, cleanLabel: "Ficha de Tutoría" },
     { id: "matriz", label:  <span className="flex items-center gap-2"><BarChart className="w-4 h-4 shrink-0" /> Matriz de Tutoría</span>, cleanLabel: "Matriz de Tutoría" },
     { id: "feoe", label: <span className="flex items-center gap-2"><Building2 className="w-4 h-4 shrink-0" /> Prácticas FEOE</span>, cleanLabel: "Prácticas FEOE" },
     { id: "perfil", label: <span className="flex items-center gap-2"><Compass className="w-4 h-4 shrink-0" /> Perfil individual</span>, cleanLabel: "Perfil individual" },
     { id: "resumen", label: <span className="flex items-center gap-2"><ClipboardList className="w-4 h-4 shrink-0" /> Resumen alumnado</span>, cleanLabel: "Resumen del alumnado" },
-    { id: "tendencias", label: <span className="flex items-center gap-2"><BarChart className="w-4 h-4 shrink-0" /> Mapa tendencias</span>, cleanLabel: "Mapa de tendencias" },
-    { id: "panorama", label: <span className="flex items-center gap-2"><Map className="w-4 h-4 shrink-0" /> Panorama prof.</span>, cleanLabel: "Panorama profesional" }
+    { id: "tendencias", label: <span className="flex items-center gap-2"><BarChart className="w-4 h-4 shrink-0" /> Mapa tendencias</span>, cleanLabel: "Mapa de tendencias" }
   ];
 
   const [activeTab, setActiveTab] = useState("alumnado");
@@ -356,7 +355,6 @@ export default function AlumnadoPage() {
           {activeTab === "perfil" && <OrientacionTab />}
           {activeTab === "resumen" && <ResumenTab />}
           {activeTab === "tendencias" && <TendenciasTab />}
-          {activeTab === "panorama" && <PanoramaTab />}
 
           </MotionWrapper>
         </main>
