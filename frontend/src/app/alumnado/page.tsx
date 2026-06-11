@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle } from "lucide-react";
+import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -12,6 +12,11 @@ import { PlanoClaseTab } from "@/components/features/alumnado/PlanoClaseTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
+import { FeoeAssignTab } from "@/components/features/alumnado/FeoeAssignTab";
+import { OrientacionTab } from "@/components/features/profesional/OrientacionTab";
+import { ResumenTab } from "@/components/features/profesional/ResumenTab";
+import { TendenciasTab } from "@/components/features/profesional/TendenciasTab";
+import { PanoramaTab } from "@/components/features/profesional/PanoramaTab";
 
 export default function AlumnadoPage() {
   const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData } = useAppStore();
@@ -23,7 +28,12 @@ export default function AlumnadoPage() {
     { id: "alumnado", label:  <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> Alumnado</span>, cleanLabel: "Alumnado" },
     { id: "plano", label: <span className="flex items-center gap-2"><LayoutGrid className="w-4 h-4 shrink-0" /> Plano de clase <span className="flex items-center gap-1 bg-warning/20 text-warning px-1.5 py-0.5 ml-2 rounded text-[10px] font-bold uppercase border border-warning/30"><AlertTriangle className="w-3 h-3" /> En obra</span></span>, cleanLabel: "Plano de clase" },
     { id: "tutoria", label:  <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> Ficha de Tutoría</span>, cleanLabel: "Ficha de Tutoría" },
-    { id: "matriz", label:  <span className="flex items-center gap-2"><BarChart className="w-4 h-4 shrink-0" /> Matriz de Tutoría</span>, cleanLabel: "Matriz de Tutoría" }
+    { id: "matriz", label:  <span className="flex items-center gap-2"><BarChart className="w-4 h-4 shrink-0" /> Matriz de Tutoría</span>, cleanLabel: "Matriz de Tutoría" },
+    { id: "feoe", label: <span className="flex items-center gap-2"><Building2 className="w-4 h-4 shrink-0" /> Prácticas FEOE</span>, cleanLabel: "Prácticas FEOE" },
+    { id: "perfil", label: <span className="flex items-center gap-2"><Compass className="w-4 h-4 shrink-0" /> Perfil individual</span>, cleanLabel: "Perfil individual" },
+    { id: "resumen", label: <span className="flex items-center gap-2"><ClipboardList className="w-4 h-4 shrink-0" /> Resumen alumnado</span>, cleanLabel: "Resumen del alumnado" },
+    { id: "tendencias", label: <span className="flex items-center gap-2"><BarChart className="w-4 h-4 shrink-0" /> Mapa tendencias</span>, cleanLabel: "Mapa de tendencias" },
+    { id: "panorama", label: <span className="flex items-center gap-2"><Map className="w-4 h-4 shrink-0" /> Panorama prof.</span>, cleanLabel: "Panorama profesional" }
   ];
 
   const [activeTab, setActiveTab] = useState("alumnado");
@@ -143,7 +153,7 @@ export default function AlumnadoPage() {
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Alumnado y tutoría
               </h1>
-              <p className="text-muted mt-2 text-lg">Gestión oficial de estudiantes, ficha individual de orientación y matriz de tutoría.</p>
+              <p className="text-muted mt-2 text-lg">Gestión oficial de estudiantes, tutoría, asignación FEOE y orientación profesional.</p>
             </div>
             
             {/* Save Button */}
@@ -165,9 +175,9 @@ export default function AlumnadoPage() {
 
           {/* Navigation Tabs */}
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="mb-2 max-w-full">
+            <TabsList className="mb-2 max-w-full overflow-x-auto flex flex-nowrap scrollbar-hide border-b border-[var(--glass-border)] rounded-none bg-transparent">
               {TABS.map(tab => (
-                <TabsTrigger key={tab.id} value={tab.id}>
+                <TabsTrigger key={tab.id} value={tab.id} className="whitespace-nowrap shrink-0">
                   {tab.label}
                 </TabsTrigger>
               ))}
@@ -341,6 +351,12 @@ export default function AlumnadoPage() {
           {activeTab === "plano" && (
             <PlanoClaseTab />
           )}
+
+          {activeTab === "feoe" && <FeoeAssignTab />}
+          {activeTab === "perfil" && <OrientacionTab />}
+          {activeTab === "resumen" && <ResumenTab />}
+          {activeTab === "tendencias" && <TendenciasTab />}
+          {activeTab === "panorama" && <PanoramaTab />}
 
           </MotionWrapper>
         </main>

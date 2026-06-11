@@ -135,6 +135,8 @@ export const CursoDataSchema = z.object({
   profesional_ledger: z.record(z.string(), z.any()).optional(),
   info_fechas: z.record(z.string(), z.any()).optional(),
   horario: z.record(z.string(), z.any()).optional(),
+  calendar_notes: z.record(z.string(), z.any()).optional(),
+  info_modulo: z.record(z.string(), z.any()).optional(),
   plano_clase: z.any().optional(),
   crm_empresas: z.array(CrmEmpresaSchema).optional(),
   competencias_cpps: z.array(z.string()).optional(),

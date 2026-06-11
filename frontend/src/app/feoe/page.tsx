@@ -28,7 +28,6 @@ function formatDate(d: Date): string {
 export default function FeoePage() {
   const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData } = useAppStore();
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("empresas");
 
   useEffect(() => {
     let cancelled = false;
@@ -78,13 +77,7 @@ export default function FeoePage() {
     return () => { cancelled = true; };
   }, [activeCursoId, cursoData]);
 
-  const TABS = [
-    { id: "empresas", label: <span className="flex items-center gap-2"><Building2 className="w-4 h-4"/> Empresas FEOE</span>, cleanLabel: "Empresas FEOE" },
-    { id: "alumnado", label: <span className="flex items-center gap-2"><Users className="w-4 h-4"/> Asignación Alumnado</span>, cleanLabel: "Asignación Alumnado" },
-    { id: "seguimiento", label: <span className="flex items-center gap-2"><ClipboardList className="w-4 h-4"/> Seguimiento Dual/FCT</span>, cleanLabel: "Seguimiento Dual/FCT" },
-  ];
 
-  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   const [search, setSearch] = useState("");
   const [filterSector, setFilterSector] = useState("");
@@ -191,7 +184,7 @@ export default function FeoePage() {
     <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header breadcrumbSuffix={activeTabCleanLabel} />
+        <Header breadcrumbSuffix="Empresas FEOE" />
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-8 pb-12">
@@ -202,18 +195,7 @@ export default function FeoePage() {
               <p className="text-muted mt-2 text-lg">Gestión de empresas colaboradoras, asignación de alumnado y seguimiento de prácticas duales y FCT.</p>
             </div>
 
-            <Tabs value={activeTab} onValueChange={(val: any) => setActiveTab(val)}>
-              <TabsList className="mb-2 max-w-full">
-                {TABS.map(tab => (
-                  <TabsTrigger key={tab.id} value={tab.id}>
-                    {tab.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
 
-            {/* Tab 1: Empresas FEOE */}
-            {activeTab === "empresas" && (
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <h2 className="text-2xl font-bold text-foreground">Catálogo de empresas colaboradoras</h2>
@@ -410,70 +392,6 @@ export default function FeoePage() {
                   })}
                 </div>
               </div>
-            )}
-
-            {/* Tab 2: Asignación Alumnado */}
-            {activeTab === "alumnado" && (
-              <div className="space-y-6">
-                <h2 className="text-2xl font-bold text-foreground">Asignación de alumnado a empresas</h2>
-                {empresas.length === 0 ? (
-                  <Card className="p-12 text-center text-muted border border-[var(--glass-border)] rounded-xl bg-foreground/5">
-                    <p>No hay empresas registradas. Añade empresas en la pestaña "Empresas FEOE".</p>
-                  </Card>
-                ) : (
-                  <div className="space-y-4">
-                    {empresas.filter((e: CrmEmpresa) => e.alumnado_asignados.length > 0).length === 0 && (
-                      <Card className="p-8 text-center text-muted border border-[var(--glass-border)] rounded-xl bg-foreground/5">
-                        <p>Aún no hay alumnado asignados a ninguna empresa. Usa el panel de cada empresa para asignarlos.</p>
-                      </Card>
-                    )}
-                    {empresas.filter((e: CrmEmpresa) => e.alumnado_asignados.length > 0).map((emp: CrmEmpresa) => (
-                      <Card key={emp.id} className="p-5 border border-[var(--glass-border)]">
-                        <h3 className="text-lg font-bold text-foreground mb-3">{emp.nombre}</h3>
-                        <div className="flex flex-wrap gap-2">
-                          {emp.alumnado_asignados.map((sid: string) => {
-                            const al = alumnado.find((a: any) => a.ID === sid);
-                            return (
-                              <span key={sid} className="text-sm bg-info/10 text-info border border-info/30 px-3 py-1 rounded-full">
-                                {al ? `${al.Apellidos}, ${al.Nombre}` : sid}
-                              </span>
-                            );
-                          })}
-                        </div>
-                      </Card>
-                    ))}
-                    {alumnado.length > 0 && (
-                      <Card className="p-5 border border-[var(--glass-border)]">
-                        <h3 className="text-lg font-bold text-foreground mb-3">Alumnado sin asignar</h3>
-                        <div className="flex flex-wrap gap-2">
-                          {(() => {
-                            const asignados = new Set(empresas.flatMap((e: CrmEmpresa) => e.alumnado_asignados));
-                            return alumnado.filter((a: any) => !asignados.has(a.ID)).map((al: any) => (
-                              <span key={al.ID} className="text-sm bg-warning/10 text-warning border border-warning/30 px-3 py-1 rounded-full">
-                                {al.Apellidos}, {al.Nombre}
-                              </span>
-                            ));
-                          })()}
-                        </div>
-                      </Card>
-                    )}
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* Tab 3: Seguimiento */}
-            {activeTab === "seguimiento" && (
-              <Card className="p-12 text-center text-muted border border-[var(--glass-border)] rounded-xl bg-foreground/5">
-                <h2 className="text-2xl font-bold mb-4 text-foreground flex items-center justify-center gap-2">
-                  Seguimiento FCT / Dual
-                  <span className="flex items-center gap-1 bg-warning/20 text-warning px-2 py-0.5 rounded text-[10px] font-bold uppercase border border-warning/30"><AlertTriangle className="w-3 h-3" /> En obra</span>
-                </h2>
-                <p className="max-w-xl mx-auto">
-                  Esta sección estará disponible próximamente para registrar las horas realizadas por los alumnado, las visitas de seguimiento y la valoración final de las prácticas.
-                </p>
-              </Card>
-            )}
           </MotionWrapper>
         </div>
       </div>

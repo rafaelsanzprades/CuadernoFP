@@ -354,23 +354,30 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
 
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function CalendarioPage() {
-  const { activeModuleId, moduleData, setModuleData, updateModuleData, saveModuleData } = useAppStore();
+  const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, activeModuleId, moduleData, setModuleData } = useAppStore();
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
 
-  // Load module data if not in store
+  // Load data if not in store
   useEffect(() => {
-    if (!activeModuleId || moduleData) return;
-    fetch(`/api/module/${activeModuleId}`)
-      .then(r => r.json())
-      .then(json => { if (json.status === "success") setModuleData(json.data); })
-      .catch(console.error);
-  }, [activeModuleId, moduleData, setModuleData]);
+    if (activeCursoId && !cursoData) {
+      fetch(`/api/module/${activeCursoId}`)
+        .then(r => r.json())
+        .then(json => { if (json.status === "success") setCursoData(json.data); })
+        .catch(console.error);
+    }
+    if (activeModuleId && !moduleData) {
+      fetch(`/api/module/${activeModuleId}`)
+        .then(r => r.json())
+        .then(json => { if (json.status === "success") setModuleData(json.data); })
+        .catch(console.error);
+    }
+  }, [activeCursoId, cursoData, setCursoData, activeModuleId, moduleData, setModuleData]);
 
   const handleSave = async () => {
     setSaving(true);
     setSaveMessage("");
-    const ok = await saveModuleData();
+    const ok = await saveCursoData();
     if (ok) {
       setSaveMessage("Guardado correctamente");
       setTimeout(() => setSaveMessage(""), 3000);
@@ -380,7 +387,7 @@ export default function CalendarioPage() {
     setSaving(false);
   };
 
-  if (!activeModuleId) {
+  if (!activeCursoId) {
     return (
       <div className="flex min-h-screen bg-background">
         <Sidebar />
@@ -390,8 +397,8 @@ export default function CalendarioPage() {
             <MotionWrapper>
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4">
                 <Calendar className="w-12 h-12 text-muted" />
-                <h2 className="text-2xl font-bold">No hay Módulo PD seleccionado</h2>
-                <p className="text-muted">Ve a Entorno y selecciona un Módulo PD.</p>
+                <h2 className="text-2xl font-bold">No hay Curso Activo seleccionado</h2>
+                <p className="text-muted">Ve a Entorno y selecciona un Curso.</p>
               </Card>
             </MotionWrapper>
           </main>
@@ -400,7 +407,7 @@ export default function CalendarioPage() {
     );
   }
 
-  if (!moduleData) {
+  if (!cursoData) {
     return (
       <div className="flex min-h-screen bg-background">
         <Sidebar />
@@ -414,16 +421,16 @@ export default function CalendarioPage() {
     );
   }
 
-  const info_fechas   = moduleData?.info_fechas   || {};
-  const horario       = moduleData?.horario       || { Lun: 0, Mar: 0, "Mié": 0, Jue: 0, Vie: 0 };
-  const calendar_notes = moduleData?.calendar_notes || {};
-  const info_modulo   = moduleData?.info_modulo   || {};
+  const info_fechas   = cursoData?.info_fechas   || {};
+  const horario       = cursoData?.horario       || { Lun: 0, Mar: 0, "Mié": 0, Jue: 0, Vie: 0 };
+  const calendar_notes = cursoData?.calendar_notes || {};
+  const info_modulo   = cursoData?.info_modulo   || {};
 
   const handleUpdateFechas = (field: string, value: string | number) =>
-    updateModuleData("info_fechas", { ...info_fechas, [field]: value });
+    updateCursoData("info_fechas", { ...info_fechas, [field]: value });
 
   const handleUpdateNote = (key: string, val: string) =>
-    updateModuleData("calendar_notes", { ...calendar_notes, [key]: val });
+    updateCursoData("calendar_notes", { ...calendar_notes, [key]: val });
 
   const TABS = [
     { id: "fechas", label: <><span className="inline-flex"><Settings className="w-[1.2em] h-[1.2em] mr-1" /></span> Configuración de fechas</>, cleanLabel: "Configuración de fechas" },
