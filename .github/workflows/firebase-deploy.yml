@@ -26,10 +26,6 @@ jobs:
         run: npm run build
         
       - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy --only hosting,functions
-          projectId: cuadernofp
+        run: npx firebase-tools deploy --only hosting,functions --project cuadernofp
         env:
-          PROJECT_PATH: frontend
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
