@@ -6,12 +6,12 @@ import { ModuleData, CursoData, ModuleDataSchema, CursoDataSchema } from '@/type
 export function useModulesList() {
   const { data: session } = useSession();
   const userId = session?.user?.id;
-  const url = userId ? `/api/modules?user_id=${userId}` : '/api/modules';
+  const url = userId ? `${process.env.NEXT_PUBLIC_API_URL}/api/modules?user_id=${userId}` : `${process.env.NEXT_PUBLIC_API_URL}/api/modules`;
   return useSWR(url, fetcher);
 }
 
 export function useModule(moduleId: string | null) {
-  const { data, error, isLoading, mutate } = useSWR(moduleId ? `/api/module/${moduleId}` : null, fetcher);
+  const { data, error, isLoading, mutate } = useSWR(moduleId ? `${process.env.NEXT_PUBLIC_API_URL}/api/module/${moduleId}` : null, fetcher);
   
   // Opcional: Validar con Zod en tiempo de ejecución
   let parsedData: ModuleData | null = null;
@@ -33,7 +33,7 @@ export function useModule(moduleId: string | null) {
 }
 
 export function useCurso(cursoId: string | null) {
-  const { data, error, isLoading, mutate } = useSWR(cursoId ? `/api/module/${cursoId}` : null, fetcher);
+  const { data, error, isLoading, mutate } = useSWR(cursoId ? `${process.env.NEXT_PUBLIC_API_URL}/api/module/${cursoId}` : null, fetcher);
 
   let parsedData: CursoData | null = null;
   if (data) {

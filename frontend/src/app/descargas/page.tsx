@@ -107,13 +107,13 @@ export default function DocumentosPage() {
     const previewable = ['pdf', 'txt', 'png', 'jpg', 'jpeg', 'docx'].includes(ext);
 
     if (!previewable) {
-      window.open(`/api/documents/download?file_path=${encodeURIComponent(filePath)}`, "_blank");
+      window.open(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/download?file_path=${encodeURIComponent(filePath)}`, "_blank");
       return;
     }
 
     try {
       setDownloadingStr(filePath);
-      const url = `/api/documents/preview?file_path=${encodeURIComponent(filePath)}`;
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/documents/preview?file_path=${encodeURIComponent(filePath)}`;
       const response = await fetch(url);
       if (!response.ok) throw new Error("Error fetching document");
 
@@ -135,7 +135,7 @@ export default function DocumentosPage() {
   const handleDownloadPdf = async (type: string, al_id?: string) => {
     try {
       setDownloadingStr(type);
-      let url = `/api/pdf?type=${type}`;
+      let url = `${process.env.NEXT_PUBLIC_API_URL}/api/pdf?type=${type}`;
       if (al_id) url += `&al_id=${al_id}`;
 
       const response = await fetch(url, {
