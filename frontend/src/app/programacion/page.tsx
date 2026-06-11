@@ -198,15 +198,24 @@ export default function ProgramacionPage() {
                 </Button>
               </div>
 
-              <SessionTable 
-                df_ud={df_ud}
-                df_sesiones={df_sesiones}
-                onDragEnd={onDragEnd}
-                handleUpdateSesion={handleUpdateSesion}
-                handleAddSesion={handleAddSesion}
-                handleDeleteSesion={handleDeleteSesion}
-                allUdsOpen={allUdsOpen}
-              />
+              {df_ud.length === 0 ? (
+                <div className="text-center py-12">
+                  <ClipboardList className="w-16 h-16 text-muted-foreground opacity-50 mx-auto mb-4" />
+                  <h3 className="text-xl font-bold mb-2">No hay Unidades Didácticas</h3>
+                  <p className="text-muted">Aún no has creado ninguna Unidad Didáctica (UD).</p>
+                  <p className="text-muted mt-1">Para secuenciar sesiones, primero debes crear las UDs en la sección <strong>Matrices</strong>.</p>
+                </div>
+              ) : (
+                <SessionTable 
+                  df_ud={df_ud}
+                  df_sesiones={df_sesiones}
+                  onDragEnd={onDragEnd}
+                  handleUpdateSesion={handleUpdateSesion}
+                  handleAddSesion={handleAddSesion}
+                  handleDeleteSesion={handleDeleteSesion}
+                  allUdsOpen={allUdsOpen}
+                />
+              )}
             </Card>
           )}
 
