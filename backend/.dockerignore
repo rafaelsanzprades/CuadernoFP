@@ -5,3 +5,10 @@ __pycache__/
 tests/
 *.db
 alembic/versions/
+
+.venv
+.venv313
+*.err
+*.log
+cdd.db
+cdd_pro.db

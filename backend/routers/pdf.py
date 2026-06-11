@@ -4,10 +4,17 @@ import pandas as pd
 from database import get_db
 from models import ModuleDocument
 
+from pydantic import BaseModel
+from typing import Dict, Any, Optional
+
+class PdfRequest(BaseModel):
+    module_data: Dict[str, Any]
+    curso_data: Dict[str, Any]
+
 router = APIRouter(prefix="/api/pdf", tags=["PDF Generation"])
 
-@router.get("")
-def generate_pdf(type: str, pd_id: str, curso_id: str, al_id: str = None, db: Session = Depends(get_db)):
+@router.post("")
+def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None):
     try:
         # Import PDF modules
         from pdf_calendario_academico import generar_pdf_calendario
@@ -18,11 +25,8 @@ def generate_pdf(type: str, pd_id: str, curso_id: str, al_id: str = None, db: Se
         from pdf_boletin_individual import generar_pdf_boletin_individual
         from pdf_clases_ud import generar_pdf_clases_ud
         
-        # Load Data from DB
-        from services.module_service import get_module_data
-        
-        module_data = get_module_data(pd_id, db) if pd_id else {}
-        curso_data = get_module_data(curso_id, db) if curso_id else {}
+        module_data = request.module_data
+        curso_data = request.curso_data
         
         # Helper to get df
         def get_df(data_dict, key):
