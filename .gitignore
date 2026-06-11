@@ -36,7 +36,7 @@ env/
 # Base de datos local (usar PostgreSQL en producción)
 *.db
 *.sqlite
-
+!backend/cdd_pro.db
 # Node / Next.js
 node_modules/
 .next/
