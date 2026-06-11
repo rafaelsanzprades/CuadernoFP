@@ -1,0 +1,117 @@
+"use client";
+
+import { useAppStore } from "@/store/useAppStore";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { CheckCircle2, Cloud, CloudOff, Info, RefreshCw, XCircle } from "lucide-react";
+import toast from "react-hot-toast";
+
+export function GoogleDriveSyncPanel() {
+  const { isDriveConnected, driveUserEmail, autoSyncDrive, setDriveConnected, setDriveUserEmail, setAutoSyncDrive } = useAppStore();
+
+  const handleConnect = () => {
+    // Mock logic for now, until OAuth Client ID is provided
+    toast.success("Conectando con Google Drive...");
+    setTimeout(() => {
+      setDriveUserEmail("profesor@ejemplo.com");
+      setDriveConnected(true);
+      toast.success("Google Drive conectado correctamente");
+    }, 1500);
+  };
+
+  const handleDisconnect = () => {
+    setDriveConnected(false);
+    setDriveUserEmail(null);
+    setAutoSyncDrive(false);
+    toast("Desconectado de Google Drive", { icon: "👋" });
+  };
+
+  const toggleAutoSync = () => {
+    if (!isDriveConnected) {
+      toast.error("Debes conectar tu cuenta de Google Drive primero.");
+      return;
+    }
+    const newVal = !autoSyncDrive;
+    setAutoSyncDrive(newVal);
+    if (newVal) {
+      toast.success("Autoguardado en la nube activado.");
+    } else {
+      toast("Autoguardado en la nube desactivado.");
+    }
+  };
+
+  return (
+    <Card className="p-8 border border-[var(--glass-border)] rounded-2xl bg-foreground/5 shadow-lg relative overflow-hidden group max-w-3xl mx-auto">
+      <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+        <Cloud className="w-32 h-32 text-info" />
+      </div>
+
+      <div className="relative z-10 flex flex-col gap-6">
+        <div>
+          <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
+            <Cloud className="w-6 h-6 text-info" /> Sincronización con Google Drive
+          </h2>
+          <p className="text-muted mt-2">
+            Guarda tus archivos .cddp y .cddc automáticamente en la nube de Google para acceder a ellos desde cualquier dispositivo sin necesidad de descargarlos manualmente.
+          </p>
+        </div>
+
+        {/* Estado de conexión */}
+        <div className="flex flex-col md:flex-row gap-4 items-center justify-between p-5 rounded-xl border bg-background/50 border-[var(--glass-border)]">
+          <div className="flex items-center gap-4">
+            <div className={`p-3 rounded-full ${isDriveConnected ? "bg-success/20 text-success" : "bg-muted/20 text-muted"}`}>
+              {isDriveConnected ? <CheckCircle2 className="w-6 h-6" /> : <CloudOff className="w-6 h-6" />}
+            </div>
+            <div>
+              <p className="font-bold text-foreground">
+                {isDriveConnected ? "Conectado" : "No conectado"}
+              </p>
+              <p className="text-sm text-muted">
+                {isDriveConnected ? `Sincronizando con ${driveUserEmail}` : "Inicia sesión con tu cuenta de Google"}
+              </p>
+            </div>
+          </div>
+          <div>
+            {isDriveConnected ? (
+              <Button onClick={handleDisconnect} variant="ghost" className="text-danger hover:bg-danger/10">
+                Desconectar
+              </Button>
+            ) : (
+              <Button onClick={handleConnect} className="bg-info/20 text-info hover:bg-info/30 border border-info/30">
+                Conectar cuenta
+              </Button>
+            )}
+          </div>
+        </div>
+
+        {/* Auto-sync Switch */}
+        <div className={`p-5 rounded-xl border transition-colors ${autoSyncDrive ? "border-success/40 bg-success/5" : "border-[var(--glass-border)] bg-background/50"} flex items-center justify-between`}>
+          <div>
+            <h3 className="font-bold text-foreground flex items-center gap-2">
+              <RefreshCw className={`w-4 h-4 ${autoSyncDrive ? "text-success animate-spin-slow" : "text-muted"}`} />
+              Autoguardado Automático
+            </h3>
+            <p className="text-sm text-muted">
+              Sube automáticamente a Drive cada vez que pulses "Guardar" en la app.
+            </p>
+          </div>
+          <button
+            onClick={toggleAutoSync}
+            className={`w-14 h-8 rounded-full p-1 transition-colors ${autoSyncDrive ? "bg-success" : "bg-muted/30"}`}
+          >
+            <div className={`w-6 h-6 bg-white rounded-full shadow-md transform transition-transform ${autoSyncDrive ? "translate-x-6" : "translate-x-0"}`} />
+          </button>
+        </div>
+
+        {!isDriveConnected && (
+          <div className="flex items-start gap-3 p-4 rounded-lg bg-warning/10 text-warning border border-warning/20 text-sm">
+            <Info className="w-5 h-5 shrink-0 mt-0.5" />
+            <p>
+              Requiere que el administrador configure el <strong>Client ID de OAuth de Google Cloud</strong> para activar la funcionalidad real. Actualmente la interfaz está en modo "mock" para visualización.
+            </p>
+          </div>
+        )}
+      </div>
+    </Card>
+  );
+}

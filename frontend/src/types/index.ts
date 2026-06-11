@@ -206,4 +206,11 @@ export interface AppState {
   
   dataSource: 'demo' | 'local';
   setDataSource: (source: 'demo' | 'local') => void;
+  
+  isDriveConnected: boolean;
+  setDriveConnected: (connected: boolean) => void;
+  driveUserEmail: string | null;
+  setDriveUserEmail: (email: string | null) => void;
+  autoSyncDrive: boolean;
+  setAutoSyncDrive: (sync: boolean) => void;
 }

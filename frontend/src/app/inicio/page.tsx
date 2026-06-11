@@ -40,7 +40,7 @@ export default function InicioPage() {
         <Header breadcrumbSuffix="Inicio" />
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
-          <div className="max-w-7xl mx-auto space-y-12 pb-12">
+          <div className="w-full space-y-12 pb-12">
 
             {/* Header / Hero */}
             <div className="mb-10 text-center animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -66,7 +66,7 @@ export default function InicioPage() {
                       </p>
                     )}
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-6">
                       {group.items.map((item, itemIdx) => (
                         <Link key={item.href} href={item.href} className="block group">
                           <Card className="h-full p-5 flex flex-col gap-3 border border-[var(--glass-border)] bg-[var(--glass-bg)] hover:bg-accent/5 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/10 cursor-pointer">

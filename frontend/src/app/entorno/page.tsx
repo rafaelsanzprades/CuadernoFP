@@ -1,5 +1,5 @@
 "use client";
-import { AlertTriangle, BookOpen, CheckCircle, Download, FileJson, FolderOpen, Save, Shield, ShieldAlert, Sparkles, Upload, Users, Zap } from "lucide-react";
+import { AlertTriangle, BookOpen, CheckCircle, Cloud, Database, Download, FileJson, FolderOpen, Save, Shield, ShieldAlert, Sparkles, Upload, Users, Zap } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -12,6 +12,8 @@ import toast from "react-hot-toast";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { AISettingsPanel } from "@/components/features/ai/AISettingsPanel";
 import { AIWizardModal } from "@/components/features/ai/AIWizardModal";
+import { GoogleDriveSyncPanel } from "@/components/features/cloud/GoogleDriveSyncPanel";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { initialGroups } from "@/store/initialData";
 
 export default function EntornoTrabajoPage() {
@@ -20,6 +22,7 @@ export default function EntornoTrabajoPage() {
   } = useAppStore();
 
   const [aiModalOpen, setAiModalOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("datos");
 
   const pdInputRef = useRef<HTMLInputElement>(null);
   const cursoInputRef = useRef<HTMLInputElement>(null);
@@ -137,16 +140,22 @@ export default function EntornoTrabajoPage() {
     return `Curso ${year} (${cursoKey})`;
   };
 
+  const TABS = [
+    { id: "datos", label: <span className="flex items-center gap-2"><Database className="w-4 h-4 shrink-0" /> Datos Locales</span> },
+    { id: "ia", label: <span className="flex items-center gap-2"><Sparkles className="w-4 h-4 shrink-0" /> Inteligencia Artificial</span> },
+    { id: "nube", label: <span className="flex items-center gap-2"><Cloud className="w-4 h-4 shrink-0" /> Sincronización</span> }
+  ];
+
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar />
-      <AIWizardModal 
-        isOpen={aiModalOpen} 
-        onClose={() => setAiModalOpen(false)} 
+      <AIWizardModal
+        isOpen={aiModalOpen}
+        onClose={() => setAiModalOpen(false)}
         onSuccess={(data) => {
           console.log("Datos recibidos de la IA:", data);
           toast.success("Estructura guardada.");
-        }} 
+        }}
       />
       <div className="flex-1 flex flex-col h-screen min-w-0">
         <Header breadcrumbSuffix="Gestor de Archivos" />
@@ -165,34 +174,46 @@ export default function EntornoTrabajoPage() {
               </div>
 
               {/* Selector de Modo */}
-              <div className="bg-foreground/5 p-1 rounded-xl flex border border-white/10 shadow-inner">
-                <button
-                  onClick={switchToDemo}
-                  className={`px-5 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${
-                    isDemoLoaded 
-                    ? 'bg-warning/20 text-warning shadow-md' 
-                    : 'text-muted hover:text-foreground hover:bg-foreground/5'
-                  }`}
-                >
-                  <Zap className="w-4 h-4" /> Datos ficticios
-                </button>
-                <button
-                  onClick={switchToLocal}
-                  className={`px-5 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${
-                    !isDemoLoaded 
-                    ? 'bg-info/20 text-info shadow-md' 
-                    : 'text-muted hover:text-foreground hover:bg-foreground/5'
-                  }`}
-                >
-                  <Shield className="w-4 h-4" /> Datos reales
-                </button>
-              </div>
+              {activeTab === "datos" && (
+                <div className="bg-foreground/5 p-1 rounded-xl flex border border-white/10 shadow-inner">
+                  <button
+                    onClick={switchToDemo}
+                    className={`px-5 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${isDemoLoaded
+                        ? 'bg-warning/20 text-warning shadow-md'
+                        : 'text-muted hover:text-foreground hover:bg-foreground/5'
+                      }`}
+                  >
+                    <Zap className="w-4 h-4" /> Datos ficticios
+                  </button>
+                  <button
+                    onClick={switchToLocal}
+                    className={`px-5 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${!isDemoLoaded
+                        ? 'bg-info/20 text-info shadow-md'
+                        : 'text-muted hover:text-foreground hover:bg-foreground/5'
+                      }`}
+                  >
+                    <Shield className="w-4 h-4" /> Datos reales
+                  </button>
+                </div>
+              )}
             </div>
 
-            <div className="space-y-8 animate-in fade-in duration-300">
-              {/* Archivos Personales / Demo */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                
+            {/* Navigation Tabs */}
+            <Tabs value={activeTab} onValueChange={setActiveTab}>
+              <TabsList className="mb-2 max-w-full overflow-x-auto flex flex-nowrap scrollbar-hide border-b border-[var(--glass-border)] rounded-none bg-transparent">
+                {TABS.map(tab => (
+                  <TabsTrigger key={tab.id} value={tab.id} className="whitespace-nowrap shrink-0">
+                    {tab.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
+
+            <div className="space-y-8 animate-in fade-in duration-300 pt-4">
+              {/* PESTAÑA: DATOS LOCALES */}
+              {activeTab === "datos" && (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
                 {/* Panel Programación */}
                 <Card className={`p-8 border rounded-2xl shadow-lg space-y-6 flex flex-col relative overflow-hidden group ${isDemoLoaded ? 'bg-foreground/5 border-warning/20' : 'bg-foreground/5 border-info/20'}`}>
                   <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -206,7 +227,7 @@ export default function EntornoTrabajoPage() {
                       {moduleData && <Badge variant={isDemoLoaded ? 'warning' : 'info'}>Cargada</Badge>}
                     </div>
                     <p className="text-sm text-muted mt-1 relative z-10">
-                      Contiene tu currículo, unidades didácticas, instrumentos de evaluación y criterios asociados.
+                      Contiene tu currículo, unidades didácticas, instrumentos de evaluación y criterios.
                     </p>
                   </div>
 
@@ -288,33 +309,47 @@ export default function EntornoTrabajoPage() {
                 </Card>
 
               </div>
+              )}
 
-              {/* Botón de Creación Asistida */}
-              <div className="flex justify-center pt-4">
-                <Button
-                  onClick={() => setAiModalOpen(true)}
-                  className="text-sm font-semibold flex items-center gap-2 bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 px-6 py-4 rounded-xl transition-all relative overflow-hidden w-full max-w-md"
-                >
-                  <Sparkles className="w-5 h-5 text-accent" /> Crear Nueva Programación con IA (PDF)
-                  <span className="flex items-center gap-1 bg-warning/20 text-warning px-1.5 py-0.5 ml-auto rounded text-[10px] font-bold uppercase border border-warning/30"><AlertTriangle className="w-3 h-3" /> Beta</span>
-                </Button>
-              </div>
+              {/* PESTAÑA: INTELIGENCIA ARTIFICIAL */}
+              {activeTab === "ia" && (
+                <div className="space-y-8 max-w-4xl mx-auto">
+                  {/* Botón de Creación Asistida */}
+                  <div className="flex justify-center">
+                    <Button
+                      onClick={() => setAiModalOpen(true)}
+                      className="text-base font-semibold flex items-center justify-center gap-3 bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 px-8 py-6 h-auto rounded-xl transition-all relative overflow-hidden w-full max-w-md"
+                    >
+                      <Sparkles className="w-6 h-6 text-accent shrink-0" /> 
+                      <span className="flex-1 text-left">Crear Nueva Programación con IA (PDF)</span>
+                      <span className="flex items-center gap-1 bg-warning/20 text-warning px-2 py-1 rounded text-[10px] font-bold uppercase border border-warning/30 shrink-0"><AlertTriangle className="w-3 h-3" /> Beta</span>
+                    </Button>
+                  </div>
 
-              {/* Sección de Ajustes de IA */}
-              <div className="space-y-4 pt-4">
-                <AISettingsPanel />
-              </div>
-
-              {/* Aviso de Seguridad y RGPD */}
-              <div className="flex flex-col items-center justify-center text-center space-y-3 pt-12 max-w-2xl mx-auto">
-                <ShieldAlert className="w-8 h-8 text-info" />
-                <h3 className="text-xl font-extrabold text-foreground">Seguridad y RGPD garantizados</h3>
-                <div className="text-base text-muted space-y-2">
-                  <p>CuadernoFP procesa toda tu información confidencial exclusivamente en tu navegador.</p>
-                  <p>Ningún dato de tu alumnado se envía a la nube. **Tú eres el dueño de tus archivos (.cddp y .cddc)**.</p>
-                  <p className="font-semibold text-info">Asegúrate de pulsar "Guardar" y descargar tus archivos al finalizar tu sesión de trabajo para no perder los últimos cambios.</p>
+                  {/* Sección de Ajustes de IA */}
+                  <div className="space-y-4">
+                    <AISettingsPanel />
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {/* PESTAÑA: NUBE */}
+              {activeTab === "nube" && (
+                <GoogleDriveSyncPanel />
+              )}
+
+              {/* Aviso de Seguridad y RGPD (Sólo en Datos Locales) */}
+              {activeTab === "datos" && (
+                <div className="flex flex-col items-center justify-center text-center space-y-3 pt-12 max-w-2xl mx-auto">
+                  <ShieldAlert className="w-8 h-8 text-info" />
+                  <h3 className="text-xl font-extrabold text-foreground">Seguridad y RGPD garantizados</h3>
+                  <div className="text-base text-muted space-y-2">
+                    <p>CuadernoFP procesa toda tu información confidencial exclusivamente en tu navegador.</p>
+                    <p>Ningún dato de tu alumnado se envía a la nube (salvo que uses la Sincronización autorizada). **Tú eres el dueño de tus archivos**.</p>
+                    <p className="font-semibold text-info">Asegúrate de pulsar "Guardar" al finalizar tu sesión de trabajo para no perder los últimos cambios.</p>
+                  </div>
+                </div>
+              )}
 
             </div>
           </MotionWrapper>
