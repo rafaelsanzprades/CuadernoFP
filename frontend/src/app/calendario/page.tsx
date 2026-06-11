@@ -78,7 +78,7 @@ function NotesTable({ calendar_notes, onUpdateNote }: { calendar_notes: Record<s
                     {isF ? <><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> Festivo</> : <><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> Evento</>}
                   </span>
                 </td>
-                <td className="p-2 text-foreground/90">{v as string}</td>
+                <td className="p-2 text-foreground/90">{typeof v === 'object' ? JSON.stringify(v) : String(v)}</td>
                 <td className="p-2 text-center">
                   <button
                     onClick={() => onUpdateNote(k, "")}
@@ -281,7 +281,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
                   >
                     <span className="flex-1 truncate">
                       <span className="text-muted mr-1">{k.substring(2)}</span>
-                      {v as string}
+                      {typeof v === 'object' ? JSON.stringify(v) : String(v)}
                     </span>
                     <button
                       onClick={() => onUpdateNote(k, "")}
