@@ -76,7 +76,7 @@ export default function Sidebar() {
                 Cuaderno FP
               </h1>
             </Link>
-            <span className="text-xs text-muted/80 font-mono mt-0.5 ml-0.5">{timeStr}</span>
+            <span className="text-sm text-muted/80 font-mono mt-0.5 ml-0.5">{timeStr}</span>
           </div>
         )}
         <button onClick={toggleSidebar} className="text-muted hover:text-foreground p-1 rounded-md hover:bg-foreground/10 transition-colors mb-4">
