@@ -89,6 +89,7 @@ export const ModuleDataSchema = z.object({
   info_modulo: z.record(z.string(), z.any()).optional(),
   config_contexto: z.record(z.string(), z.any()).optional(),
   config_aula: z.record(z.string(), z.any()).optional(),
+  config_redondeo: z.record(z.string(), z.any()).optional(),
   __version__: z.number().optional(),
 });
 export type ModuleData = z.infer<typeof ModuleDataSchema>;

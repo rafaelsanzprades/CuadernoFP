@@ -1,5 +1,5 @@
 "use client";
-import { Award, BookOpen, Calculator, Check, GraduationCap, Puzzle, Target } from "lucide-react";
+import { Award, BookOpen, Calculator, Check, GraduationCap, Puzzle, Target, Settings } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -15,7 +15,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 
 export default function MatricesPage() {
-  const { activeModuleId, moduleData, setModuleData, updateDataFrame, saveModuleData, cursoData, updateCursoData } = useAppStore();
+  const { activeModuleId, moduleData, setModuleData, updateDataFrame, updateModuleData, saveModuleData, cursoData, updateCursoData } = useAppStore();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
@@ -26,9 +26,9 @@ export default function MatricesPage() {
   const TABS = [
     { id: "ra", label: "RA y sus CE", icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "ud", label: "UD Unidades didácticas", icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "relacion", label: "Relación entre RA y UD", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "matrices", label: "Relación entre RA y UD", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "contribucion", label: "Contribución de RA en OG", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "cpps", label: "Competencias (CPPS)", icon: <><span className="inline-flex"><Award className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "cpps", label: "Competencias (CPPS)", icon: <><span className="inline-flex"><Award className="w-[1.2em] h-[1.2em] mr-1" /></span></> }
   ];
 
   useEffect(() => {
@@ -565,6 +565,7 @@ export default function MatricesPage() {
               </Card>
             </div>
           )}
+
 
           </MotionWrapper>
         </main>

@@ -60,6 +60,12 @@ export const AnalisisIndividualTab = () => {
       }
     });
 
+    const config = moduleData?.config_redondeo || {
+      nota_aprobado: 5.0,
+      umbral_redondeo: 5.0,
+      max_compensables: 0
+    };
+
     const notas_ce: Record<string, number> = {};
     Object.keys(peso_ce).forEach(ce_id => {
       const act_vals: number[] = [];
@@ -74,11 +80,17 @@ export const AnalisisIndividualTab = () => {
     });
 
     const notas_ra: Record<string, number> = {};
+    const failed_ces_by_ra: Record<string, number> = {};
     Object.entries(notas_ce).forEach(([ce_id, n_ce]) => {
       const r_id = ra_of_ce[ce_id];
       if (r_id) {
         if (!notas_ra[r_id]) notas_ra[r_id] = 0;
         notas_ra[r_id] += n_ce * (peso_ce[ce_id] / 100);
+
+        if (!failed_ces_by_ra[r_id]) failed_ces_by_ra[r_id] = 0;
+        if (n_ce > 0 && n_ce < config.nota_aprobado) {
+          failed_ces_by_ra[r_id]++;
+        }
       }
     });
 
@@ -96,10 +108,25 @@ export const AnalisisIndividualTab = () => {
       }
     });
 
+    Object.keys(notas_ra).forEach(r_id => {
+      let n_ra = notas_ra[r_id];
+      if (n_ra >= config.umbral_redondeo && n_ra < config.nota_aprobado) {
+        n_ra = config.nota_aprobado;
+      }
+      if (failed_ces_by_ra[r_id] > config.max_compensables && n_ra >= config.nota_aprobado) {
+        n_ra = config.nota_aprobado - 0.1;
+      }
+      notas_ra[r_id] = n_ra;
+    });
+
     let nota_final = 0;
     Object.entries(notas_ra).forEach(([r_id, n_ra]) => {
       nota_final += n_ra * ((peso_ra[r_id] || 0) / 100);
     });
+
+    if (nota_final >= config.umbral_redondeo && nota_final < config.nota_aprobado) {
+      nota_final = config.nota_aprobado;
+    }
 
     return { notas_ra, nota_final, notas_ce };
   };

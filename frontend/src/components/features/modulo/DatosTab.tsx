@@ -1,5 +1,5 @@
 "use client";
-import { Calendar, FileEdit, Receipt, Scale, School, UserCircle } from "lucide-react";
+import { Calendar, FileEdit, Receipt, Scale, School, UserCircle, Settings } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
@@ -384,6 +384,59 @@ export function DatosTab() {
             />
           ))}
         </div>
+      </Card>
+
+      {/* 6. Reglas de redondeo y compensación */}
+      <Card className="p-6 border-l-4 border-l-orange-500">
+        <h4 className="text-lg font-bold text-foreground mb-6 flex items-center justify-between">
+          <span className="flex items-center gap-2"><span><span className="inline-flex"><Settings className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Reglas de redondeo y compensación</span>
+        </h4>
+        {(() => {
+          const config = moduleData?.config_redondeo || {
+            nota_aprobado: 5.0,
+            umbral_redondeo: 5.0,
+            max_compensables: 0
+          };
+          return (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-foreground">Nota mínima para aprobar</label>
+                <input 
+                  type="number" 
+                  step="0.1"
+                  value={config.nota_aprobado ?? 5.0}
+                  onChange={(e) => updateModuleData("config_redondeo", { ...config, nota_aprobado: parseFloat(e.target.value) })}
+                  className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
+                />
+                <p className="text-xs text-muted">Nota a partir de la cual un RA o Módulo se considera superado (típicamente 5.0).</p>
+              </div>
+              
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-foreground">Umbral de redondeo al alza</label>
+                <input 
+                  type="number" 
+                  step="0.1"
+                  value={config.umbral_redondeo ?? 5.0}
+                  onChange={(e) => updateModuleData("config_redondeo", { ...config, umbral_redondeo: parseFloat(e.target.value) })}
+                  className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
+                />
+                <p className="text-xs text-muted">Si un alumno obtiene esta nota o superior (ej. 4.8), se redondeará automáticamente a la nota de aprobado.</p>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-foreground">Criterios compensables por RA</label>
+                <input 
+                  type="number" 
+                  step="1"
+                  value={config.max_compensables ?? 0}
+                  onChange={(e) => updateModuleData("config_redondeo", { ...config, max_compensables: parseInt(e.target.value) })}
+                  className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
+                />
+                <p className="text-xs text-muted">Número máximo de Criterios suspensos que se permiten para aprobar un RA.</p>
+              </div>
+            </div>
+          );
+        })()}
       </Card>
 
     </div>

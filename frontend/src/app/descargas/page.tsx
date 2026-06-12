@@ -20,7 +20,7 @@ type DocumentItem = {
 };
 
 export default function DocumentosPage() {
-  const [activeTab, setActiveTab] = useState<"inicio" | "seguimiento" | "evaluacion">("inicio");
+  const [activeTab, setActiveTab] = useState<"inicio" | "seguimiento" | "grupales" | "individuales">("inicio");
 
   // State for Explorador
   const [currentPath, setCurrentPath] = useState<string>("");
@@ -36,6 +36,13 @@ export default function DocumentosPage() {
   // State for Descargas
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData } = useAppStore();
   const [loadingData, setLoadingData] = useState(true);
+
+  const [fecha1T, setFecha1T] = useState("");
+  const [fecha2T, setFecha2T] = useState("");
+  const [fecha3T, setFecha3T] = useState("");
+  const [fechaFinal, setFechaFinal] = useState("");
+
+  const [evaluacionTab, setEvaluacionTab] = useState('grupales'); // grupales, individuales
 
   const fetchDocuments = (path: string) => {
     setLoadingDocs(true);
@@ -89,6 +96,22 @@ export default function DocumentosPage() {
     }
   }, [activeModuleId, moduleData, activeCursoId, cursoData, setModuleData, setCursoData]);
 
+  useEffect(() => {
+    if (cursoData?.info_fechas) {
+      setFecha1T(cursoData.info_fechas.fin_1t || "");
+      setFecha2T(cursoData.info_fechas.fin_2t || "");
+      setFecha3T(cursoData.info_fechas.fin_3t || "");
+      setFechaFinal(cursoData.info_fechas.fin_curso || "");
+    }
+  }, [cursoData?.info_fechas]);
+
+  const formatD = (dStr: string | undefined) => {
+    if (!dStr) return "---";
+    const parts = dStr.split('-');
+    if (parts.length === 3) return `${parts[2]}/${parts[1]}/${parts[0]}`;
+    return dStr;
+  };
+
   // Explorador Handlers
   const handleNavigate = (newPath: string) => {
     fetchDocuments(newPath);
@@ -132,7 +155,7 @@ export default function DocumentosPage() {
   };
 
   // Descargas Handlers
-  const handleDownloadPdf = async (type: string, al_id?: string) => {
+  const handleDownloadPdf = async (type: string, al_id?: string, fechaCorte?: string) => {
     try {
       setDownloadingStr(type);
       let url = `${process.env.NEXT_PUBLIC_API_URL}/api/pdf?type=${type}`;
@@ -145,7 +168,8 @@ export default function DocumentosPage() {
         },
         body: JSON.stringify({
           module_data: moduleData || {},
-          curso_data: cursoData || {}
+          curso_data: cursoData || {},
+          fecha_corte: fechaCorte || null
         })
       });
       if (!response.ok) throw new Error("Error generating PDF");
@@ -165,6 +189,37 @@ export default function DocumentosPage() {
     } finally {
       setDownloadingStr(null);
     }
+  };
+
+  const handleExportCSV = (triKey: string, fechaCorte: string) => {
+    if (!cursoData || !cursoData.df_eval) return;
+    const df_eval = cursoData.df_eval;
+    const activeAl = activeAlumnado;
+    
+    let csvContent = `data:text/csv;charset=utf-8,\uFEFF`;
+    csvContent += `Boletin de Calificaciones - ${triKey}\n`;
+    csvContent += `Modulo: ${moduleData?.info_modulo?.modulo || ""}\n`;
+    csvContent += `Fecha de corte (Acta): ${fechaCorte}\n\n`;
+    
+    csvContent += `ID,Apellidos,Nombre,Nota Media ${triKey}\n`;
+    
+    activeAl.forEach((al: any) => {
+      const evRow = df_eval.find((e: any) => e.ID === al.ID);
+      let notaMedia = "";
+      if (evRow) {
+        if (triKey === 'Final') notaMedia = evRow.Nota_Final || "";
+        else notaMedia = evRow[`${triKey}_Nota`] || "";
+      }
+      csvContent += `${al.ID},"${al.Apellidos || ""}","${al.Nombre || ""}",${notaMedia}\n`;
+    });
+    
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `Notas_${triKey}_${moduleData?.info_modulo?.modulo || "modulo"}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const formatSize = (bytes: number | null) => {
@@ -218,22 +273,25 @@ export default function DocumentosPage() {
             </div>
 
             <Tabs value={activeTab} onValueChange={(val: any) => setActiveTab(val)}>
-              <TabsList className="mb-6 max-w-full">
+              <TabsList className="mb-6 max-w-full flex-wrap h-auto">
                 <TabsTrigger value="inicio">
                   <div className="flex items-center gap-2"><Play className="w-4 h-4" /> PDF Inicio</div>
                 </TabsTrigger>
                 <TabsTrigger value="seguimiento">
                   <div className="flex items-center gap-2"><MapPin className="w-4 h-4" /> PDF Seguimiento</div>
                 </TabsTrigger>
-                <TabsTrigger value="evaluacion">
-                  <div className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> PDF Evaluación</div>
+                <TabsTrigger value="grupales">
+                  <div className="flex items-center gap-2"><BarChart className="w-4 h-4" /> PDF Boletines grupales</div>
+                </TabsTrigger>
+                <TabsTrigger value="individuales">
+                  <div className="flex items-center gap-2"><User className="w-4 h-4" /> PDF Boletines individuales</div>
                 </TabsTrigger>
               </TabsList>
             </Tabs>
 
 
 
-            {['inicio', 'seguimiento', 'evaluacion'].includes(activeTab) && (
+            {['inicio', 'seguimiento', 'grupales', 'individuales'].includes(activeTab) && (
               <div className="space-y-8 animate-in fade-in duration-500">
                 {(!activeCursoId || !activeModuleId) ? (
                   <Card className="p-12 text-center flex flex-col items-center justify-center gap-4">
@@ -326,46 +384,129 @@ export default function DocumentosPage() {
                       </div>
                     )}
 
-                    {activeTab === 'evaluacion' && (
+                    {activeTab === 'grupales' && (
                       <div className="space-y-8 animate-in fade-in duration-500">
                         <Card className="p-6 border-t-4 border-t-blue-500">
-                          <h2 className="text-2xl font-bold mb-6"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletines de calificaciones grupales</h2>
-                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center">
+                          <h2 className="text-2xl font-bold mb-6"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletines grupales trimestrales</h2>
+                          
+                          {/* Primera fila: 3 Trimestres */}
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
                               <div>
-                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> 1er trimestre</h3>
+                                <h3 className="text-lg font-bold mb-1"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> 1er trimestre</h3>
+                                <div className="text-xs text-muted mb-2">
+                                  Inicio: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.ini_1t)}</span><br/>
+                                  Fin: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.fin_1t)}</span>
+                                </div>
                               </div>
-                              <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_1t')} disabled={downloadingStr === 'grupal_1t'} className="w-full">
-                                {downloadingStr === 'grupal_1t' ? '⏳' : 'PDF Boletín grupal 1T'}
-                              </Button>
+                              <div className="text-left mt-auto">
+                                <label className="block text-xs text-muted mb-1 font-bold">Fecha de corte / acta:</label>
+                                <input type="date" value={fecha1T} onChange={(e) => setFecha1T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-sm focus:border-info focus:outline-none" />
+                              </div>
+                              <div className="flex flex-col gap-2 mt-2">
+                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_1t', undefined, fecha1T)} disabled={downloadingStr === 'grupal_1t'} className="w-full text-xs">
+                                  {downloadingStr === 'grupal_1t' ? '⏳' : 'PDF Boletín'}
+                                </Button>
+                                <Button variant="ghost" onClick={() => handleExportCSV('1T', fecha1T)} className="w-full border border-success/30 text-success hover:bg-success/10 text-xs flex items-center justify-center gap-2">
+                                  <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
+                                </Button>
+                              </div>
                             </div>
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center">
+                            
+                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
                               <div>
-                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> 2º trimestre</h3>
+                                <h3 className="text-lg font-bold mb-1"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> 2º trimestre</h3>
+                                <div className="text-xs text-muted mb-2">
+                                  Inicio: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.ini_2t)}</span><br/>
+                                  Fin: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.fin_2t)}</span>
+                                </div>
                               </div>
-                              <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_2t')} disabled={downloadingStr === 'grupal_2t'} className="w-full">
-                                {downloadingStr === 'grupal_2t' ? '⏳' : 'PDF Boletín grupal 2T'}
-                              </Button>
+                              <div className="text-left mt-auto">
+                                <label className="block text-xs text-muted mb-1 font-bold">Fecha de corte / acta:</label>
+                                <input type="date" value={fecha2T} onChange={(e) => setFecha2T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-sm focus:border-info focus:outline-none" />
+                              </div>
+                              <div className="flex flex-col gap-2 mt-2">
+                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_2t', undefined, fecha2T)} disabled={downloadingStr === 'grupal_2t'} className="w-full text-xs">
+                                  {downloadingStr === 'grupal_2t' ? '⏳' : 'PDF Boletín'}
+                                </Button>
+                                <Button variant="ghost" onClick={() => handleExportCSV('2T', fecha2T)} className="w-full border border-success/30 text-success hover:bg-success/10 text-xs flex items-center justify-center gap-2">
+                                  <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
+                                </Button>
+                              </div>
                             </div>
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center">
+
+                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
                               <div>
-                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> 3er trimestre</h3>
+                                <h3 className="text-lg font-bold mb-1"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> 3er trimestre</h3>
+                                <div className="text-xs text-muted mb-2">
+                                  Inicio: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.ini_3t)}</span><br/>
+                                  Fin: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.fin_3t)}</span>
+                                </div>
                               </div>
-                              <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_3t')} disabled={downloadingStr === 'grupal_3t'} className="w-full">
-                                {downloadingStr === 'grupal_3t' ? '⏳' : 'PDF Boletín grupal 3T'}
-                              </Button>
-                            </div>
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center border-l-4 border-l-yellow-400">
-                              <div>
-                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Eval. Final</h3>
+                              <div className="text-left mt-auto">
+                                <label className="block text-xs text-muted mb-1 font-bold">Fecha de corte / acta:</label>
+                                <input type="date" value={fecha3T} onChange={(e) => setFecha3T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-sm focus:border-info focus:outline-none" />
                               </div>
-                              <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_final')} disabled={downloadingStr === 'grupal_final'} className="w-full">
-                                {downloadingStr === 'grupal_final' ? '⏳' : 'PDF Boletín Final'}
-                              </Button>
+                              <div className="flex flex-col gap-2 mt-2">
+                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_3t', undefined, fecha3T)} disabled={downloadingStr === 'grupal_3t'} className="w-full text-xs">
+                                  {downloadingStr === 'grupal_3t' ? '⏳' : 'PDF Boletín'}
+                                </Button>
+                                <Button variant="ghost" onClick={() => handleExportCSV('3T', fecha3T)} className="w-full border border-success/30 text-success hover:bg-success/10 text-xs flex items-center justify-center gap-2">
+                                  <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
+                                </Button>
+                              </div>
                             </div>
                           </div>
                         </Card>
 
+                        <Card className="p-6 border-t-4 border-t-blue-500">
+                          <h2 className="text-2xl font-bold mb-6"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletines grupales finales</h2>
+                          
+                          {/* Segunda fila: Finales */}
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center border-l-4 border-l-yellow-400 gap-4">
+                              <div>
+                                <h3 className="text-lg font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Eval. Final Ordinaria</h3>
+                                <div className="text-xs text-muted mb-2">
+                                  Inicio: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.ini_curso)}</span><br/>
+                                  Fin: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.fin_curso)}</span>
+                                </div>
+                              </div>
+                              <div className="flex flex-col gap-2 mt-auto">
+                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_final')} disabled={downloadingStr === 'grupal_final'} className="w-full text-xs">
+                                  {downloadingStr === 'grupal_final' ? '⏳' : 'PDF Boletín Final'}
+                                </Button>
+                                <Button variant="ghost" onClick={() => handleExportCSV('Final', fechaFinal)} className="w-full border border-success/30 text-success hover:bg-success/10 text-xs flex items-center justify-center gap-2">
+                                  <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
+                                </Button>
+                              </div>
+                            </div>
+
+                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center border-l-4 border-l-purple-500 gap-4 opacity-50">
+                              <div>
+                                <h3 className="text-lg font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Eval. Final Extraordinaria</h3>
+                                <div className="text-xs text-muted mb-2">
+                                  Inicio: <span className="font-mono text-foreground">---</span><br/>
+                                  Fin: <span className="font-mono text-foreground">---</span>
+                                </div>
+                                <p className="text-xs text-muted italic mt-2">Próximamente disponible</p>
+                              </div>
+                              <div className="flex flex-col gap-2 mt-auto">
+                                <Button variant="secondary" disabled className="w-full text-xs">
+                                  PDF Boletín Extraordinaria
+                                </Button>
+                                <Button variant="ghost" disabled className="w-full border border-success/30 text-success hover:bg-success/10 text-xs flex items-center justify-center gap-2">
+                                  <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
+                                </Button>
+                              </div>
+                            </div>
+                          </div>
+                        </Card>
+                      </div>
+                    )}
+
+                    {activeTab === 'individuales' && (
+                      <div className="space-y-8 animate-in fade-in duration-500">
                         <Card className="p-6 border-t-4 border-t-blue-500">
                           <h2 className="text-2xl font-bold mb-6"><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletines individuales</h2>
                           {activeAlumnado.length > 0 ? (

@@ -36,6 +36,7 @@ def generar_pdf_boletin_grupal(
     df_al: pd.DataFrame,
     df_eval: pd.DataFrame,
     df_act: pd.DataFrame,
+    fecha_corte: str = None
 ):
     buffer = io.BytesIO()
     W, H = portrait(A4)
@@ -53,7 +54,11 @@ def generar_pdf_boletin_grupal(
 
     nombre_modulo  = info_modulo.get("modulo", "Módulo")
     doc.cal_titulo = f"Boletín grupal {trimestre}  ·  {nombre_modulo}"
-    doc.cal_pie    = f"{info_modulo.get('centro', '')} ({info_modulo.get('profesorado', '')})"
+    
+    pie_text = f"{info_modulo.get('centro', '')} ({info_modulo.get('profesorado', '')})"
+    if fecha_corte:
+        pie_text = f"Fecha de acta: {fecha_corte} | {pie_text}"
+    doc.cal_pie = pie_text
 
     frame = Frame(
         left_m, bottom_m,
@@ -253,6 +258,7 @@ def generar_pdf_boletin_grupal_final(
     df_al: pd.DataFrame,
     df_eval: pd.DataFrame,
     df_act: pd.DataFrame,
+    fecha_corte: str = None
 ):
     buffer = io.BytesIO()
     W, H = portrait(A4)
@@ -270,7 +276,11 @@ def generar_pdf_boletin_grupal_final(
 
     nombre_modulo  = info_modulo.get("modulo", "Módulo")
     doc.cal_titulo = f"Boletín grupal Final  ·  {nombre_modulo}"
-    doc.cal_pie    = f"{info_modulo.get('centro', '')} ({info_modulo.get('profesorado', '')})"
+    
+    pie_text = f"{info_modulo.get('centro', '')} ({info_modulo.get('profesorado', '')})"
+    if fecha_corte:
+        pie_text = f"Fecha de acta: {fecha_corte} | {pie_text}"
+    doc.cal_pie = pie_text
 
     frame = Frame(left_m, bottom_m, W - left_m - right_m, H - top_m - bottom_m, id="main")
     doc.addPageTemplates([PageTemplate(id="port", frames=[frame], onPage=_draw_page_decorations)])

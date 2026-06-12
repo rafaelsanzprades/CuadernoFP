@@ -10,6 +10,7 @@ from typing import Dict, Any, Optional
 class PdfRequest(BaseModel):
     module_data: Dict[str, Any]
     curso_data: Dict[str, Any]
+    fecha_corte: Optional[str] = None
 
 router = APIRouter(prefix="/api/pdf", tags=["PDF Generation"])
 
@@ -27,6 +28,7 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None):
         
         module_data = request.module_data
         curso_data = request.curso_data
+        fecha_corte = request.fecha_corte
         
         # Helper to get df
         def get_df(data_dict, key):
@@ -76,13 +78,13 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None):
         elif type == "matrices":
             buffer = generar_pdf_matrices(info_modulo, df_ra, df_ud)
         elif type == "grupal_1t":
-            buffer = generar_pdf_boletin_grupal("1T", info_modulo, df_al, df_eval, df_act)
+            buffer = generar_pdf_boletin_grupal("1T", info_modulo, df_al, df_eval, df_act, fecha_corte)
         elif type == "grupal_2t":
-            buffer = generar_pdf_boletin_grupal("2T", info_modulo, df_al, df_eval, df_act)
+            buffer = generar_pdf_boletin_grupal("2T", info_modulo, df_al, df_eval, df_act, fecha_corte)
         elif type == "grupal_3t":
-            buffer = generar_pdf_boletin_grupal("3T", info_modulo, df_al, df_eval, df_act)
+            buffer = generar_pdf_boletin_grupal("3T", info_modulo, df_al, df_eval, df_act, fecha_corte)
         elif type == "grupal_final":
-            buffer = generar_pdf_boletin_grupal_final(info_modulo, df_al, df_eval, df_act)
+            buffer = generar_pdf_boletin_grupal_final(info_modulo, df_al, df_eval, df_act, fecha_corte)
         elif type == "individual":
             if not al_id: raise HTTPException(status_code=400, detail="al_id is required for individual PDF")
             buffer = generar_pdf_boletin_individual(
