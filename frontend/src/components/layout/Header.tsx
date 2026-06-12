@@ -205,10 +205,10 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
 
           {/* Nombres del módulo y curso (Oculto en pantallas muy pequeñas, con ellipsis si es muy largo) */}
           <div className="hidden sm:flex flex-col border-l border-foreground/10 pl-4 py-1 min-w-0">
-            <span className="text-[0.85rem] font-bold text-foreground leading-tight tracking-wide truncate max-w-[200px] md:max-w-[300px] lg:max-w-[450px]" title={friendlyModuleName}>
+            <span className="text-[0.95rem] font-bold text-foreground leading-tight tracking-wide truncate max-w-[200px] md:max-w-[300px] lg:max-w-[450px]" title={friendlyModuleName}>
               {friendlyModuleName}
             </span>
-            <span className="text-[0.75rem] text-muted font-medium leading-tight truncate max-w-[200px] md:max-w-[300px] lg:max-w-[450px]" title={friendlyCursoName}>
+            <span className="text-[0.85rem] text-muted font-medium leading-tight truncate max-w-[200px] md:max-w-[300px] lg:max-w-[450px]" title={friendlyCursoName}>
               {friendlyCursoName}
             </span>
           </div>
@@ -272,8 +272,8 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
       </nav>
 
       {currentGroup && currentItem && (
-        <div className="w-full px-6 py-1.5 bg-white/[0.02] border-t border-[var(--glass-border)] flex items-center gap-1.5 text-[0.8rem] text-muted tracking-wide">
-          <span className="font-medium text-muted text-[0.7rem]">{currentGroup}</span>
+        <div className="w-full px-6 py-1.5 bg-white/[0.02] border-t border-[var(--glass-border)] flex items-center gap-1.5 text-sm text-muted tracking-wide">
+          <span className="font-medium text-muted text-xs">{currentGroup}</span>
           <ChevronRight className="w-3 h-3 text-muted/80" />
           <span className="text-foreground/90 font-semibold">{currentItem}</span>
           {breadcrumbSuffix && (

@@ -76,7 +76,7 @@ export default function Sidebar() {
                 Cuaderno FP
               </h1>
             </Link>
-            <span className="text-[0.7rem] text-muted/80 font-mono mt-0.5 ml-0.5">{timeStr}</span>
+            <span className="text-xs text-muted/80 font-mono mt-0.5 ml-0.5">{timeStr}</span>
           </div>
         )}
         <button onClick={toggleSidebar} className="text-muted hover:text-foreground p-1 rounded-md hover:bg-foreground/10 transition-colors mb-4">
@@ -102,10 +102,10 @@ export default function Sidebar() {
                 </span>
                 {isSidebarOpen && (
                   <div className="flex flex-col gap-1 items-start">
-                    <span className={`text-[0.85rem] leading-tight whitespace-nowrap font-bold ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
+                    <span className={`text-[0.95rem] leading-tight whitespace-nowrap font-bold ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
                       Agenda de clase
                     </span>
-                    <span className={`px-2 py-0.5 rounded text-[0.65rem] border font-semibold tracking-wider leading-none ${dataSource === 'demo' ? 'text-warning bg-warning/10 border-warning/30' : 'text-accent bg-accent/10 border-accent/30'}`}>
+                    <span className={`px-2 py-0.5 rounded text-xs border font-semibold tracking-wider leading-none ${dataSource === 'demo' ? 'text-warning bg-warning/10 border-warning/30' : 'text-accent bg-accent/10 border-accent/30'}`}>
                       {dateStr}
                     </span>
                   </div>
@@ -123,7 +123,7 @@ export default function Sidebar() {
         {navGroups.map((group, idx) => (
           <div key={group.title} className="flex flex-col gap-0.5">
             {isSidebarOpen && (
-              <div className="text-[0.95rem] font-bold text-foreground tracking-wide px-3 mb-2 mt-2">
+              <div className="text-base font-bold text-foreground tracking-wide px-3 mb-2 mt-2">
                 {group.title}
               </div>
             )}
@@ -152,7 +152,7 @@ export default function Sidebar() {
                   </span>
                   {isSidebarOpen && (
                     <>
-                      <span className={`text-[0.8rem] leading-tight font-medium whitespace-nowrap ${pathname === item.href ? 'text-foreground font-semibold' : ''}`}>
+                      <span className={`text-sm leading-tight font-medium whitespace-nowrap ${pathname === item.href ? 'text-foreground font-semibold' : ''}`}>
                         {item.label}
                       </span>
                       {pathname === item.href && (
@@ -180,15 +180,15 @@ export default function Sidebar() {
       <div className={`px-4 py-3 border-t border-[var(--glass-border)] flex flex-col items-center gap-1`}>
         {isSidebarOpen && (
           <>
-            <p className="text-center text-[0.65rem] text-muted/80 mt-1 whitespace-nowrap">
+            <p className="text-center text-xs text-muted/80 mt-1 whitespace-nowrap">
               © {new Date().getFullYear()} Rafael Sanz Prades
             </p>
             <div className="flex items-center gap-2">
-              <Link href="/avisolegal" className="text-[0.7rem] text-info hover:text-info hover:underline" onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}>
+              <Link href="/avisolegal" className="text-xs text-info hover:text-info hover:underline" onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}>
                 Legal
               </Link>
-              <span className="text-[0.7rem] text-muted/40">•</span>
-              <Link href="/licencia" className="text-[0.7rem] text-info hover:text-info hover:underline">
+              <span className="text-xs text-muted/40">•</span>
+              <Link href="/licencia" className="text-xs text-info hover:text-info hover:underline">
                 Licencia y Términos
               </Link>
             </div>
