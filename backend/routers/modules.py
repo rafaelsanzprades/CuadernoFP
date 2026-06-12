@@ -27,6 +27,13 @@ def update_module(module_id: str, body: ModuleUpdateBody, db: Session = Depends(
     try:
         update_module_data(module_id, body.model_dump(exclude_none=True), db)
         return {"status": "success", "message": "Module updated successfully"}
+    except HTTPException:
+        db.rollback()
+        raise
     except Exception as e:
         db.rollback()
+        import traceback
+        with open("debug.log", "a") as f:
+            f.write(f"PUT Error on {module_id}:\n")
+            traceback.print_exc(file=f)
         raise HTTPException(status_code=500, detail=str(e))

@@ -81,7 +81,10 @@ def generar_pdf_matrices(
         ra_data = [ra_header]
         total_peso = 0
         for _, row in df_ra.iterrows():
-            peso = row.get("peso_ra", 0)
+            try:
+                peso = float(row.get("peso_ra", 0) or 0)
+            except ValueError:
+                peso = 0
             total_peso += peso
             is_dual = row.get("is_dual", False)
             ra_data.append([
@@ -141,8 +144,13 @@ def generar_pdf_matrices(
             Paragraph("<b>Unidad Didáctica</b>", smlB),
         ]
         for ra_id in ra_ids:
-            peso_ra = df_ra.loc[df_ra["id_ra"] == ra_id, "peso_ra"].values
-            peso_str = f"{int(peso_ra[0])}%" if len(peso_ra) > 0 else ""
+            peso_ra_arr = df_ra.loc[df_ra["id_ra"] == ra_id, "peso_ra"].values
+            peso_str = ""
+            if len(peso_ra_arr) > 0:
+                try:
+                    peso_str = f"{int(float(peso_ra_arr[0] or 0))}%"
+                except ValueError:
+                    peso_str = "0%"
             ud_header.append(Paragraph(f"<b>{ra_id}</b><br/><font size='7'>({peso_str})</font>", smlB))
 
         ud_data = [ud_header]
@@ -155,8 +163,12 @@ def generar_pdf_matrices(
             ]
             for ra_id in ra_ids:
                 val = row.get(ra_id, 0)
-                if val and val > 0:
-                    ud_row.append(Paragraph(f"<b>{int(val)}%</b>", normB))
+                try:
+                    val_float = float(val or 0)
+                except ValueError:
+                    val_float = 0
+                if val_float > 0:
+                    ud_row.append(Paragraph(f"<b>{int(val_float)}%</b>", normB))
                 else:
                     ud_row.append("")
             ud_data.append(ud_row)
@@ -171,7 +183,10 @@ def generar_pdf_matrices(
         for ra_id in ra_ids:
             col_sum = 0
             for _, row in df_ud.iterrows():
-                col_sum += (row.get(ra_id, 0) or 0)
+                try:
+                    col_sum += float(row.get(ra_id, 0) or 0)
+                except ValueError:
+                    pass
             color_sum = "#228B22" if col_sum == 100 else "#cc0000"
             total_row.append(Paragraph(f"<b><font color='{color_sum}'>{int(col_sum)}%</font></b>", normB))
         ud_data.append(total_row)
@@ -238,11 +253,15 @@ def generar_pdf_matrices(
             has_uds = False
             for _, ud_row in df_ud.iterrows():
                 val = ud_row.get(ra_id, 0)
-                if val and val > 0:
+                try:
+                    val_float = float(val or 0)
+                except ValueError:
+                    val_float = 0
+                if val_float > 0:
                     has_uds = True
                     ud_id = ud_row.get("id_ud", "")
-                    horas = int(ud_row.get("horas_ud", 0))
-                    elements.append(Paragraph(f"→ {ud_id} ({horas}h) — {int(val)}%", ud_item))
+                    horas = int(ud_row.get("horas_ud", 0) or 0)
+                    elements.append(Paragraph(f"→ {ud_id} ({horas}h) — {int(val_float)}%", ud_item))
 
             if not has_uds:
                 elements.append(Paragraph("Sin UDs asignadas", ud_none))

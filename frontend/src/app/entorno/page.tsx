@@ -39,7 +39,7 @@ export default function EntornoTrabajoPage() {
   const switchToDemo = () => {
     setDataSource("demo");
     fileManager.loadDemoData();
-    toast.success("Cambiado a Datos Ficticios.");
+    toast.success("Cambiado a Datos DEMO.");
   };
 
   const switchToLocal = () => {
@@ -189,7 +189,7 @@ export default function EntornoTrabajoPage() {
                         : 'text-muted hover:text-foreground hover:bg-foreground/5'
                       }`}
                   >
-                    <Zap className="w-4 h-4" /> Datos ficticios
+                    <Zap className="w-4 h-4" /> Datos DEMO
                   </button>
                   <button
                     onClick={switchToLocal}
@@ -251,7 +251,7 @@ export default function EntornoTrabajoPage() {
                   <div className="flex flex-col sm:flex-row gap-3 pt-2 mt-auto relative z-10">
                     {isDemoLoaded ? (
                       <Button onClick={handleLoadDemo} className="flex-1 bg-warning/20 hover:bg-warning/30 text-warning border border-warning/30">
-                        <Zap className="w-4 h-4 mr-2" /> Recargar Datos ficticios
+                        <Zap className="w-4 h-4 mr-2" /> Recargar Datos DEMO
                       </Button>
                     ) : (
                       <>
@@ -298,7 +298,7 @@ export default function EntornoTrabajoPage() {
                   <div className="flex flex-col sm:flex-row gap-3 pt-2 mt-auto relative z-10">
                     {isDemoLoaded ? (
                       <Button onClick={handleLoadDemo} className="flex-1 bg-warning/20 hover:bg-warning/30 text-warning border border-warning/30">
-                        <Zap className="w-4 h-4 mr-2" /> Recargar Datos ficticios
+                        <Zap className="w-4 h-4 mr-2" /> Recargar Datos DEMO
                       </Button>
                     ) : (
                       <>

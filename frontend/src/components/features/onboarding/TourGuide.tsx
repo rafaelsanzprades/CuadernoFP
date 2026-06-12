@@ -60,7 +60,7 @@ export function TourGuide() {
             element: "[href='/entorno']", // Entorno tab
             popover: {
               title: "Pestaña de Entorno",
-              description: "Para empezar, ve a Entorno y selecciona 'Datos Ficticios' para explorar sin miedo.",
+              description: "Para empezar, ve a Entorno y selecciona 'Datos DEMO' para explorar sin miedo.",
               side: "right",
               align: "center"
             }

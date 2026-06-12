@@ -189,7 +189,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
             <Link href="/entorno" className="inline-block transition-transform hover:scale-105">
               {dataSource === 'demo' ? (
                 <span className="px-3 py-1.5 rounded-lg text-xs font-extrabold tracking-wider border border-warning/30 text-warning bg-warning/10 hover:bg-warning/10 cursor-pointer flex items-center gap-1 transition-all" title="Haz clic para configurar tu Entorno de Trabajo">
-                  <span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> Datos ficticios
+                  <span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> Datos DEMO
                 </span>
               ) : cloudSynced ? (
                 <span className="px-3 py-1.5 rounded-lg text-xs font-extrabold tracking-wider border border-success/30 text-success bg-success/10 hover:bg-success/10 cursor-pointer flex items-center gap-1 transition-all" title="Haz clic para configurar tu Entorno de Trabajo">

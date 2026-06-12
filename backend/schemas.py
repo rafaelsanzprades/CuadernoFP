@@ -2,11 +2,11 @@ from pydantic import BaseModel, ConfigDict
 from typing import Optional, Dict, Any, List
 
 class Sesion(BaseModel):
-    ID: str
-    id_ud: str
-    Num_Orden: int | str
-    Horas: int | str
-    Tipo_Actividad: str
+    ID: Optional[str] = None
+    id_ud: Optional[str] = None
+    Num_Orden: int | str | None = None
+    Horas: int | str | None = None
+    Tipo_Actividad: Optional[str] = None
     RA_CE: Optional[str] = None
     Contenidos: Optional[str] = None
     Aspectos_Clave: Optional[str] = None
@@ -14,13 +14,13 @@ class Sesion(BaseModel):
 
 class UnidadDidactica(BaseModel):
     model_config = ConfigDict(extra='allow')
-    id_ud: str
-    desc_ud: str
-    horas_ud: int | str
+    id_ud: Optional[str] = None
+    desc_ud: Optional[str] = None
+    horas_ud: int | str | float | None = None
     ra_mappings: Optional[Dict[str, Any]] = None
 
 class Tarea(BaseModel):
-    ID: str
+    ID: Optional[str] = None
     id_act: Optional[str] = None
     Nombre_Tarea: Optional[str] = None
     Reto: Optional[str] = None
@@ -43,21 +43,21 @@ class Alumnado(BaseModel):
     Movil: Optional[str] = None
 
 class ResultadoAprendizaje(BaseModel):
-    id_ra: str
+    id_ra: Optional[str] = None
     desc_ra: Optional[str] = None
     peso_ra: int | str | float | None = None
     is_dual: Optional[str] = None
 
 class CriterioEvaluacion(BaseModel):
     model_config = ConfigDict(extra='allow')
-    id_ce: str
-    id_ra: str
+    id_ce: Optional[str] = None
+    id_ra: Optional[str] = None
     id_ud: Optional[str] = None
     desc_ce: Optional[str] = None
     peso_ce: int | str | float | None = None
 
 class SeguimientoUD(BaseModel):
-    id_ud: str
+    id_ud: Optional[str] = None
     horas_ud: int | str | float | None = None
     Total_Imp: int | str | float | None = None
     model_config = ConfigDict(extra="allow")

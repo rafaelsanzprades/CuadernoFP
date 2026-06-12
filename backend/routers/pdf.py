@@ -16,6 +16,7 @@ router = APIRouter(prefix="/api/pdf", tags=["PDF Generation"])
 
 @router.post("")
 def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None):
+    print(f"--- GENERATE_PDF CALLED! type={type} al_id={al_id} ---")
     try:
         # Import PDF modules
         from pdf_calendario_academico import generar_pdf_calendario
@@ -35,9 +36,9 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None):
             d = data_dict.get(key, [])
             return pd.DataFrame(d) if isinstance(d, list) else pd.DataFrame()
             
-        info_modulo = module_data.get("info_modulo", {})
+        info_modulo = module_data.get("info_modulo") or {}
         from datetime import datetime
-        info_fechas_raw = curso_data.get("info_fechas", {})
+        info_fechas_raw = curso_data.get("info_fechas") or {}
         info_fechas = {}
         for k, v in info_fechas_raw.items():
             if isinstance(v, str) and v.strip():
@@ -48,10 +49,10 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None):
                     info_fechas[k] = v
             else:
                 info_fechas[k] = v
-        horario_raw = curso_data.get("horario", {})
+        horario_raw = curso_data.get("horario") or {}
         horario = {k: int(v) if str(v).isdigit() else 0 for k, v in horario_raw.items()}
-        planning_ledger = curso_data.get("planning_ledger", {})
-        calendar_notes = curso_data.get("calendar_notes", {})
+        planning_ledger = curso_data.get("planning_ledger") or {}
+        calendar_notes = curso_data.get("calendar_notes") or {}
         df_sesiones = get_df(module_data, "df_sesiones")
         
         df_al = get_df(curso_data, "df_al")
@@ -101,17 +102,17 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None):
             from io import BytesIO
             
             data_pd = {
-                "departamento": module_data.get("info_modulo", {}).get("departamento", "Departamento"),
-                "ciclo": module_data.get("info_modulo", {}).get("ciclo", "Ciclo Formativo"),
-                "modulo": module_data.get("info_modulo", {}).get("modulo", "Módulo Profesional"),
-                "curso_academico": curso_data.get("info_curso", {}).get("curso_academico", "2024/2025"),
-                "horas_totales": module_data.get("info_modulo", {}).get("horas", 0),
-                "df_ra": module_data.get("df_ra", []),
-                "df_ud": module_data.get("df_ud", []),
-                "df_act": module_data.get("df_act", []),
-                "df_ce": module_data.get("df_ce", []),
-                "config_redondeo": curso_data.get("config_redondeo", {"nota_aprobado": 5.0, "umbral_redondeo": 4.5}),
-                "info_modulo": module_data.get("info_modulo", {})
+                "departamento": (module_data.get("info_modulo") or {}).get("departamento", "Departamento"),
+                "ciclo": (module_data.get("info_modulo") or {}).get("ciclo", "Ciclo Formativo"),
+                "modulo": (module_data.get("info_modulo") or {}).get("modulo", "Módulo Profesional"),
+                "curso_academico": (curso_data.get("info_curso") or {}).get("curso_academico", "2024/2025"),
+                "horas_totales": (module_data.get("info_modulo") or {}).get("horas", 0),
+                "df_ra": module_data.get("df_ra") or [],
+                "df_ud": module_data.get("df_ud") or [],
+                "df_act": module_data.get("df_act") or [],
+                "df_ce": module_data.get("df_ce") or [],
+                "config_redondeo": curso_data.get("config_redondeo") or {"nota_aprobado": 5.0, "umbral_redondeo": 4.5},
+                "info_modulo": module_data.get("info_modulo") or {}
             }
             
             with tempfile.TemporaryDirectory() as tmpdir:
@@ -145,5 +146,8 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None):
         
     except Exception as e:
         import traceback
-        traceback.print_exc()
+        with open("pdf_debug.log", "a", encoding="utf-8") as f:
+            f.write(f"--- ERROR IN GENERATE_PDF! type={type} ---\n")
+            traceback.print_exc(file=f)
+        print(f"--- ERROR IN GENERATE_PDF! {str(e)} ---")
         raise HTTPException(status_code=500, detail=str(e))

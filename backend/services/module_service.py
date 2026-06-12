@@ -214,7 +214,7 @@ def update_module_data(module_id: str, body: dict, db: Session):
         current_data = doc.data if isinstance(doc.data, dict) else {}
         current_version = current_data.get("__version__", 0)
         
-        if incoming_version is not None and incoming_version < current_version:
+        if incoming_version is not None and incoming_version > 0 and incoming_version < current_version:
             raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
             
         body["__version__"] = current_version + 1
@@ -237,7 +237,7 @@ def update_module_data(module_id: str, body: dict, db: Session):
         for ud in df_ud:
             ra_mappings = {k: v for k, v in ud.items() if k not in ['id_ud', 'desc_ud', 'horas_ud']}
             new_ud = DidacticUnit(
-                module_document_id=module_id,
+                module_document_id=pd_id,
                 id_ud=str(ud.get("id_ud", "")),
                 desc_ud=str(ud.get("desc_ud", "")),
                 horas_ud=int(ud.get("horas_ud", 0) or 0),
