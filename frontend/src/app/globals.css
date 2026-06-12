@@ -233,3 +233,8 @@ tr:hover td {
 .flex.min-h-screen:not(body) main {
   overflow-y: auto;
 }
+
+/* Global bottom breathing room — last cards never touch the edge */
+.content-area {
+  padding-bottom: 4rem !important;
+}
