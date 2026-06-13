@@ -1,5 +1,5 @@
 "use client";
-import { ChevronLeft, ChevronRight, CalendarDays } from "lucide-react";
+import { ChevronLeft, ChevronRight, CalendarDays, FolderOpen } from "lucide-react";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAppStore } from '@/store/useAppStore';
@@ -122,12 +122,18 @@ export default function Sidebar() {
 
         {navGroups.map((group, idx) => (
           <div key={group.title} className="flex flex-col gap-0.5">
-            {isSidebarOpen && (
+            {group.title && isSidebarOpen && (
               <div className="text-base font-bold text-foreground tracking-wide px-3 mb-2 mt-2">
                 {group.title}
               </div>
             )}
-            {!isSidebarOpen && idx > 0 && (
+            {!isSidebarOpen && idx > 0 && group.title && (
+              <div className="w-8 h-px bg-foreground/10 mx-auto my-2" />
+            )}
+            {group.title === "" && idx > 0 && isSidebarOpen && (
+              <div className="w-full h-px bg-foreground/10 my-2" />
+            )}
+            {group.title === "" && idx > 0 && !isSidebarOpen && (
               <div className="w-8 h-px bg-foreground/10 mx-auto my-2" />
             )}
             {group.items.map((item) => {

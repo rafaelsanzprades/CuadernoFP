@@ -36,7 +36,7 @@ export default function MatricesPage() {
   const TABS = [
     { id: "ra", label: "RA y sus CE", icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "ud", label: "UD Unidades didácticas", icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "matrices", label: "Relación entre RA y UD", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "relacion", label: "Relación entre RA y UD", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "contribucion", label: "Contribución de RA en OG", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "cpps", label: "Competencias (CPPS)", icon: <><span className="inline-flex"><Award className="w-[1.2em] h-[1.2em] mr-1" /></span></> }
   ];
@@ -305,7 +305,7 @@ export default function MatricesPage() {
                                           value={ce.peso_ce || 0}
                                           onChange={(e) => {
                                             const newCe = [...df_ce];
-                                            const newVal = parseFloat(e.target.value) || 0;
+                                            const newVal = e.target.value === "" ? 0 : Math.round(parseFloat(e.target.value)) || 0;
                                             newCe[globalIdx].peso_ce = newVal;
                                             
                                             const raCeIndexes = df_ce.map((c: any, i: number) => c.id_ra === ra.id_ra ? i : -1).filter((i: number) => i !== -1);
@@ -314,16 +314,19 @@ export default function MatricesPage() {
                                             if (currentLocalIdx < raCeIndexes.length - 1) {
                                               let sumSoFar = 0;
                                               for (let i = 0; i <= currentLocalIdx; i++) {
-                                                sumSoFar += Number(newCe[raCeIndexes[i]].peso_ce) || 0;
+                                                sumSoFar += Math.round(Number(newCe[raCeIndexes[i]].peso_ce)) || 0;
                                               }
                                               
                                               const targetTotal = 100;
                                               let remaining = Math.max(0, targetTotal - sumSoFar);
                                               const remainingCount = raCeIndexes.length - 1 - currentLocalIdx;
-                                              const share = Number((remaining / remainingCount).toFixed(1));
+                                              
+                                              const baseShare = Math.floor(remaining / remainingCount);
+                                              let rem = Math.round(remaining - (baseShare * remainingCount));
                                               
                                               for (let i = currentLocalIdx + 1; i < raCeIndexes.length; i++) {
-                                                newCe[raCeIndexes[i]].peso_ce = share;
+                                                newCe[raCeIndexes[i]].peso_ce = baseShare + (rem > 0 ? 1 : 0);
+                                                if (rem > 0) rem--;
                                               }
                                             }
                                             updateDataFrame("df_ce", newCe);
@@ -351,9 +354,11 @@ export default function MatricesPage() {
                                             const raCeIndexes = newCe.map((c: any, i: number) => c.id_ra === ra.id_ra ? i : -1).filter((i: number) => i !== -1);
                                             const count = raCeIndexes.length;
                                             if (count > 0) {
-                                              const share = Number((100 / count).toFixed(1));
+                                              const baseShare = Math.floor(100 / count);
+                                              let rem = 100 % count;
                                               raCeIndexes.forEach(idx => {
-                                                newCe[idx].peso_ce = share;
+                                                newCe[idx].peso_ce = baseShare + (rem > 0 ? 1 : 0);
+                                                if (rem > 0) rem--;
                                               });
                                             }
                                             updateDataFrame("df_ce", newCe);
@@ -382,9 +387,11 @@ export default function MatricesPage() {
                                   const raCeIndexes = newCe.map((c: any, i: number) => c.id_ra === ra.id_ra ? i : -1).filter((i: number) => i !== -1);
                                   const count = raCeIndexes.length;
                                   if (count > 0) {
-                                    const share = Number((100 / count).toFixed(1));
+                                    const baseShare = Math.floor(100 / count);
+                                    let rem = 100 % count;
                                     raCeIndexes.forEach(idx => {
-                                      newCe[idx].peso_ce = share;
+                                      newCe[idx].peso_ce = baseShare + (rem > 0 ? 1 : 0);
+                                      if (rem > 0) rem--;
                                     });
                                   }
                                   updateDataFrame("df_ce", newCe);

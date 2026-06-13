@@ -24,16 +24,9 @@ def get_module(module_id: str, db: Session = Depends(get_db)):
 
 @router.put("/{module_id}")
 def update_module(module_id: str, body: ModuleUpdateBody, db: Session = Depends(get_db)):
-    try:
-        update_module_data(module_id, body.model_dump(exclude_none=True), db)
-        return {"status": "success", "message": "Module updated successfully"}
-    except HTTPException:
-        db.rollback()
-        raise
-    except Exception as e:
-        db.rollback()
-        import traceback
-        with open("debug.log", "a") as f:
-            f.write(f"PUT Error on {module_id}:\n")
-            traceback.print_exc(file=f)
-        raise HTTPException(status_code=500, detail=str(e))
+    # Local-First Architecture: The database is read-only for users.
+    # User work should be persisted locally or in Google Drive.
+    raise HTTPException(
+        status_code=403, 
+        detail="The server database is read-only (Local-First Architecture). User data must be saved locally."
+    )

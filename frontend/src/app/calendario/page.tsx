@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
+import { generatePlanning } from "@/utils/planningGenerator";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -437,6 +438,21 @@ export default function CalendarioPage() {
   const handleUpdateNote = (key: string, val: string) =>
     updateCursoData("calendar_notes", { ...calendar_notes, [key]: val });
 
+  const handleAutoPlanificar = () => {
+    if (!moduleData || !cursoData) return;
+    const { newPlanningLedger, newDfSgmt, totalUdHours, totalScheduledHours } = generatePlanning(moduleData, cursoData);
+    updateCursoData("planning_ledger", newPlanningLedger);
+    updateCursoData("df_sgmt", newDfSgmt);
+    
+    if (totalScheduledHours < totalUdHours) {
+      setSaveMessage(`Aviso: Calendario lleno. Se han asignado ${totalScheduledHours}h de las ${totalUdHours}h requeridas. Faltan ${totalUdHours - totalScheduledHours}h.`);
+      setTimeout(() => setSaveMessage(""), 6000);
+    } else {
+      setSaveMessage("Planificación generada correctamente.");
+      setTimeout(() => setSaveMessage(""), 3000);
+    }
+  };
+
   const TABS = [
     { id: "fechas", label: <><span className="inline-flex"><Settings className="w-[1.2em] h-[1.2em] mr-1" /></span> Configuración de fechas</>, cleanLabel: "Configuración de fechas" },
     { id: "eventos", label: <span className="flex items-center gap-2"><Flag className="w-[1.2em] h-[1.2em] mr-1 shrink-0" /> Eventos y festivos</span>, cleanLabel: "Eventos y festivos" },
@@ -484,22 +500,31 @@ export default function CalendarioPage() {
               <Card className="p-6 border-t-4 border-t-blue-500">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-xl font-bold">Fechas generales</h2>
-                  <Button
-                    variant="ghost"
-                    onClick={() => {
-                      const ledger = cursoData?.planning_ledger || {};
-                      const dates = Object.keys(ledger)
-                        .map(d => { const [dd,mm,yyyy] = d.split("/"); return `${yyyy}-${mm}-${dd}`; })
-                        .sort();
-                      if (dates.length > 0) {
-                        handleUpdateFechas("ini_curso", dates[0]);
-                        handleUpdateFechas("fin_curso", dates[dates.length - 1]);
-                      }
-                    }}
-                    className="text-xs text-info hover:text-info"
-                  >
-                    <span className="inline-flex"><Search className="w-[1.2em] h-[1.2em] mr-1" /></span> Autodetectar desde Planning
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="ghost"
+                      onClick={handleAutoPlanificar}
+                      className="text-xs text-primary hover:text-primary/80 border border-primary/20"
+                    >
+                      <span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> Auto-Planificar UDs
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      onClick={() => {
+                        const ledger = cursoData?.planning_ledger || {};
+                        const dates = Object.keys(ledger)
+                          .map(d => { const [dd,mm,yyyy] = d.split("/"); return `${yyyy}-${mm}-${dd}`; })
+                          .sort();
+                        if (dates.length > 0) {
+                          handleUpdateFechas("ini_curso", dates[0]);
+                          handleUpdateFechas("fin_curso", dates[dates.length - 1]);
+                        }
+                      }}
+                      className="text-xs text-info hover:text-info border border-[var(--glass-border)]"
+                    >
+                      <span className="inline-flex"><Search className="w-[1.2em] h-[1.2em] mr-1" /></span> Autodetectar
+                    </Button>
+                  </div>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
@@ -547,20 +572,40 @@ export default function CalendarioPage() {
                 </div>
               </Card>
 
-              {/* FP Dual / FEOE - 4 columnas */}
+              {/* FP Dual / FEOE - 5 columnas */}
               <Card className="p-6 border-t-4 border-t-orange-500">
                 <h2 className="text-xl font-bold mb-6">FP Dual (FEOE)</h2>
-                <div className="grid grid-cols-4 gap-4 items-end">
+                <div className="grid grid-cols-5 gap-4 items-end">
                   {/* Col 1: Selector de tipo */}
                   <div>
                     <label className="text-sm text-muted mb-2 block font-semibold">Tipo de Dual</label>
                     <select
                       value={info_fechas.tipo_dual || "general"}
-                      onChange={e => handleUpdateFechas("tipo_dual", e.target.value)}
+                      onChange={e => {
+                        const newType = e.target.value;
+                        const defaultDocencia = newType === "intensiva" ? "con_docencia" : "sin_docencia";
+                        updateCursoData("info_fechas", { 
+                          ...info_fechas, 
+                          tipo_dual: newType,
+                          docencia_dual: defaultDocencia
+                        });
+                      }}
                       className="w-full bg-foreground/10 border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground focus:border-orange-500 focus:outline-none"
                     >
                       <option value="general">Dual General</option>
                       <option value="intensiva">Dual Intensiva</option>
+                    </select>
+                  </div>
+                  {/* Col 1.5: Selector de docencia */}
+                  <div>
+                    <label className="text-sm text-muted mb-2 block font-semibold">Docencia</label>
+                    <select
+                      value={info_fechas.docencia_dual || (info_fechas.tipo_dual === "intensiva" ? "con_docencia" : "sin_docencia")}
+                      onChange={e => handleUpdateFechas("docencia_dual", e.target.value)}
+                      className="w-full bg-foreground/10 border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground focus:border-orange-500 focus:outline-none"
+                    >
+                      <option value="sin_docencia">Sin docencia</option>
+                      <option value="con_docencia">Con docencia</option>
                     </select>
                   </div>
                   {/* Col 2: Inicio */}

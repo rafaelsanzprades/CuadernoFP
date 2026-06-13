@@ -10,28 +10,9 @@ type ModuleSlice = Pick<AppState,
   | 'saveModuleData' | 'saveCursoData'
 >;
 
-async function saveToApi(id: string, data: ModuleData | CursoData): Promise<boolean | "conflict"> {
-  try {
-    // Increment version before sending
-    const currentVersion = data.__version__ || 0;
-    const payload = { ...data, __version__: currentVersion };
-    
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    
-    if (res.status === 409) {
-      return "conflict";
-    }
-    
-    const result = await res.json();
-    return result.status === "success";
-  } catch {
-    return false;
-  }
-}
+// saveToApi has been removed as per the Local-First Architecture.
+// The Web DB acts as a read-only template provider for the user.
+// User data persistence is handled via local file downloads or Google Drive sync.
 
 export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (set, get) => ({
   activeModuleId: '0237-ictve-pd',
@@ -80,30 +61,36 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
   saveModuleData: async () => {
     const { activeModuleId, moduleData, isDriveConnected, autoSyncDrive } = get();
     if (!activeModuleId || !moduleData) return false;
-    const ok = await saveToApi(activeModuleId, moduleData);
-    if (ok === true) {
-      set({ moduleData: { ...moduleData, __version__: (moduleData.__version__ || 0) + 1 } });
-      if (isDriveConnected && autoSyncDrive) {
-        import('@/services/driveService').then(({ driveService }) => {
-          driveService.saveFile(`${activeModuleId}.cddp`, moduleData);
-        });
-      }
+    
+    // Increment version in memory
+    set({ moduleData: { ...moduleData, __version__: (moduleData.__version__ || 0) + 1 } });
+    
+    // Save to Google Drive if connected
+    if (isDriveConnected && autoSyncDrive) {
+      import('@/services/driveService').then(({ driveService }) => {
+        driveService.saveFile(`${activeModuleId}.cddp`, moduleData);
+      });
     }
-    return ok;
+    
+    // Always return true since we no longer depend on the backend API for saving user data
+    return true;
   },
 
   saveCursoData: async () => {
     const { activeCursoId, cursoData, isDriveConnected, autoSyncDrive } = get();
     if (!activeCursoId || !cursoData) return false;
-    const ok = await saveToApi(activeCursoId, cursoData);
-    if (ok === true) {
-      set({ cursoData: { ...cursoData, __version__: (cursoData.__version__ || 0) + 1 } });
-      if (isDriveConnected && autoSyncDrive) {
-        import('@/services/driveService').then(({ driveService }) => {
-          driveService.saveFile(`${activeCursoId}.cddc`, cursoData);
-        });
-      }
+    
+    // Increment version in memory
+    set({ cursoData: { ...cursoData, __version__: (cursoData.__version__ || 0) + 1 } });
+    
+    // Save to Google Drive if connected
+    if (isDriveConnected && autoSyncDrive) {
+      import('@/services/driveService').then(({ driveService }) => {
+        driveService.saveFile(`${activeCursoId}.cddc`, cursoData);
+      });
     }
-    return ok;
+    
+    // Always return true since we no longer depend on the backend API for saving user data
+    return true;
   },
 });

@@ -1,5 +1,5 @@
 "use client";
-import { AlertTriangle, ChevronRight, Cloud, Hourglass, Moon, Redo2, Save, Shield, Sun, Undo2, XCircle, CalendarDays } from "lucide-react";
+import { AlertTriangle, ChevronRight, Cloud, Hourglass, Moon, Redo2, Save, Shield, Sun, Undo2, XCircle, CalendarDays, FolderOpen } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useAppStore, useTemporalStore } from "@/store/useAppStore";
 import Link from "next/link";
@@ -184,22 +184,44 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
             </svg>
           </button>
           
-          {/* Botón Datos Reales/Ficticios */}
+          {/* Botón Datos Reales/Ficticios (Entorno de trabajo) */}
           <div className="shrink-0">
-            <Link href="/entorno" className="inline-block transition-transform hover:scale-105">
-              {dataSource === 'demo' ? (
-                <span className="px-3 py-1.5 rounded-lg text-xs font-extrabold tracking-wider border border-warning/30 text-warning bg-warning/10 hover:bg-warning/10 cursor-pointer flex items-center gap-1 transition-all" title="Haz clic para configurar tu Entorno de Trabajo">
-                  <span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> Datos DEMO
+            <Link 
+              href="/entorno" 
+              className={`inline-flex items-center gap-2.5 px-3 py-1.5 rounded-lg transition-all duration-150 group shadow-sm border ${
+                dataSource === 'demo' 
+                  ? 'bg-warning/10 border-warning/40 text-foreground hover:bg-warning/20' 
+                  : cloudSynced 
+                    ? 'bg-success/10 border-success/40 text-foreground hover:bg-success/20'
+                    : 'bg-info/10 border-info/40 text-foreground hover:bg-info/20'
+              }`}
+              title="Haz clic para configurar tu Entorno de Trabajo"
+            >
+              <span className={`flex items-center justify-center transition-transform duration-150 ${
+                pathname === '/entorno' 
+                  ? (dataSource === 'demo' ? 'scale-110 text-warning' : cloudSynced ? 'scale-110 text-success' : 'scale-110 text-info') 
+                  : (dataSource === 'demo' ? 'text-warning group-hover:scale-110' : cloudSynced ? 'text-success group-hover:scale-110' : 'text-info group-hover:scale-110')
+              }`}>
+                <FolderOpen className="w-5 h-5" strokeWidth={2} />
+              </span>
+              <div className="flex flex-col gap-0.5 items-start">
+                <span className={`text-[0.85rem] leading-none whitespace-nowrap font-bold ${
+                  pathname === '/entorno' 
+                    ? (dataSource === 'demo' ? 'text-warning' : cloudSynced ? 'text-success' : 'text-info') 
+                    : ''
+                }`}>
+                  Entorno de trabajo
                 </span>
-              ) : cloudSynced ? (
-                <span className="px-3 py-1.5 rounded-lg text-xs font-extrabold tracking-wider border border-success/30 text-success bg-success/10 hover:bg-success/10 cursor-pointer flex items-center gap-1 transition-all" title="Haz clic para configurar tu Entorno de Trabajo">
-                  <span className="inline-flex"><Shield className="w-[1.2em] h-[1.2em] mr-1" /></span> Datos reales en nube
+                <span className={`px-1.5 py-0.5 rounded text-[0.65rem] border font-bold tracking-wider leading-none ${
+                  dataSource === 'demo' 
+                    ? 'text-warning bg-warning/10 border-warning/30' 
+                    : cloudSynced
+                      ? 'text-success bg-success/10 border-success/30'
+                      : 'text-info bg-info/10 border-info/30'
+                }`}>
+                  {dataSource === 'demo' ? 'Datos DEMO' : cloudSynced ? 'Datos en nube' : 'Datos Reales'}
                 </span>
-              ) : (
-                <span className="px-3 py-1.5 rounded-lg text-xs font-extrabold tracking-wider border border-info/30 text-info bg-info/10 hover:bg-info/10 cursor-pointer flex items-center gap-1 transition-all" title="Haz clic para configurar tu Entorno de Trabajo">
-                  <span className="inline-flex"><Shield className="w-[1.2em] h-[1.2em] mr-1" /></span> Datos reales
-                </span>
-              )}
+              </div>
             </Link>
           </div>
 

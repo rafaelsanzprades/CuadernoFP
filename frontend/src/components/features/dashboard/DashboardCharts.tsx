@@ -8,7 +8,9 @@ interface DashboardChartsProps {
 
 export function DashboardCharts({ cursoData }: DashboardChartsProps) {
   const barData = (cursoData?.df_sgmt || []).map((ud: any) => ({
-    name: ud.id_ud,
+    name: (ud.id_ud === 'FEOE' || ud.id_ud === 'FEOE (Sin docencia)' || ud.id_ud === 'FEOE (Con docencia)') 
+      ? `FEOE (${cursoData?.info_fechas?.docencia_dual === 'con_docencia' ? 'Con docencia' : 'Sin docencia'})` 
+      : ud.id_ud,
     Planificadas: Number(ud.horas_ud || 0),
     Impartidas: Number(ud.Total_Imp || 0),
   }));

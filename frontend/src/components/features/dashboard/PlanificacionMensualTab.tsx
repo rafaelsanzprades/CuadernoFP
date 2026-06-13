@@ -61,7 +61,13 @@ export function PlanificacionMensualTab() {
           <tbody>
             {df_sgmt_calculated.map((row: any, idx: number) => (
               <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
-                <td className="p-3 font-mono sticky left-0 bg-background group-hover:bg-[#111827] border-r border-[var(--glass-border)] font-bold">{row.id_ud}</td>
+                <td className="p-3 font-mono sticky left-0 bg-background group-hover:bg-[#111827] border-r border-[var(--glass-border)] font-bold">
+                  {row.id_ud === 'FEOE' || row.id_ud === 'FEOE (Sin docencia)' || row.id_ud === 'FEOE (Con docencia)'
+                    ? `FEOE (${cursoData?.info_fechas?.docencia_dual === 'con_docencia' ? 'Con docencia' : 'Sin docencia'})`
+                    : row.id_ud === 'Sin docencia' 
+                      ? `Sin docencia` 
+                      : row.id_ud}
+                </td>
                 <td className="p-3 text-center sticky left-[60px] bg-background group-hover:bg-[#111827] text-info">{row.horas_ud || ''}</td>
                 <td className="p-3 text-center sticky left-[130px] bg-background group-hover:bg-[#111827] border-r border-[var(--glass-border)] text-[#14a085] font-bold">{row.Total_Imp || ''}</td>
                 {meses_display.map((m) => (

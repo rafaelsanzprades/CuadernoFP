@@ -13,15 +13,4 @@ export const fetcher = async (url: string) => {
   return json.data;
 };
 
-export const updateModule = async (moduleId: string, data: any) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${moduleId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
-  });
-  const json = await res.json();
-  if (json.status !== 'success') {
-    throw new Error(json.detail || 'Failed to update module');
-  }
-  return json;
-};
+
