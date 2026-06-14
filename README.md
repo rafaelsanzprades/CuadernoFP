@@ -97,6 +97,9 @@ La aplicación estará disponible en `http://localhost:3000`.
 - **Módulo de Pruebas Ficticias:** Integración de un seeder inteligente que inyecta datos de muestra (`demo`) coherentes al arrancar una base de datos vacía.
 - **Generador de PDFs Avanzado:** Reparado y ampliado el subsistema de ReportLab para exportar Seguimiento Diario, Planificación y Boletines Grupales/Individuales con el calendario lectivo real del centro.
 - **Nueva Interfaz UI/UX:** Nueva navegación estructurada en *General*, *Programación* y *Curso*.
+- **Tests E2E con Playwright:** 18 tests en 4 archivos (navegación, páginas, accesibilidad, responsive) ejecutados en 3 navegadores (Chromium, Firefox, WebKit) = 54 tests totales.
+- **Accesibilidad:** ARIA labels en componentes Header, navegación por teclado (tabIndex), validación de accesibilidad en tests E2E.
+- **Migraciones Alembic:** Normalización de campo `is_dual` de VARCHAR a Boolean con migración automática.
 
 ---
 
