@@ -2,12 +2,12 @@
 import { Calendar } from "lucide-react";
 import React from "react";
 import { useAppStore } from "@/store/useAppStore";
+import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { Card } from "@/components/ui/Card";
 
 export function PlanificacionMensualTab() {
   const { cursoData, moduleData } = useAppStore();
-
-  const df_sgmt = cursoData?.df_sgmt || [];
+  const { df_sgmt } = useDynamicPlanning();
   
   const df_sgmt_calculated = df_sgmt.map((row: any) => {
     let total_imp = 0;

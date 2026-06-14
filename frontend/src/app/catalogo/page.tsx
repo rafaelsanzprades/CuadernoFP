@@ -340,6 +340,16 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
                     </div>
                     <div className="p-6 text-sm text-foreground/80 whitespace-pre-wrap leading-relaxed">
                       {content}
+                      {artKey === 'article_5' && (selectedTituloObj as any).competencias_cpps && (
+                        <div className="mt-6 space-y-2">
+                          {(selectedTituloObj as any).competencias_cpps.map((cpp: any) => (
+                            <div key={cpp.id} className="flex items-start gap-3 p-3 rounded-lg border border-[var(--glass-border)] bg-foreground/5">
+                              <span className="font-mono font-bold text-[#14a085] shrink-0 mt-0.5">CPPS {cpp.id}.</span>
+                              <span className="text-sm text-foreground">{cpp.descripcion}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </Card>
                 );

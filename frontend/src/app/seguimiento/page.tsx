@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
+import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { AsistenciaTab } from "@/components/features/seguimiento/AsistenciaTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
@@ -88,9 +89,9 @@ export default function SeguimientoPage() {
     return <LoadingSpinner text="Cargando datos de seguimiento..." />;
   }
 
-  const df_sgmt = cursoData?.df_sgmt || [];
+  const { df_sgmt, planningLedger } = useDynamicPlanning();
   const daily_ledger = cursoData?.daily_ledger || {};
-  const planning_ledger = cursoData?.planning_ledger || {};
+  const planning_ledger = planningLedger;
   const info_fechas = cursoData?.info_fechas || {};
   const horario = cursoData?.horario || {};
   const calendar_notes = cursoData?.calendar_notes || {};

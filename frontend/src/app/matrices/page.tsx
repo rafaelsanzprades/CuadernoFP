@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Award, BookOpen, Calculator, Check, GraduationCap, Puzzle, Target, Settings } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -37,8 +37,7 @@ export default function MatricesPage() {
     { id: "ra", label: "RA y sus CE", icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "ud", label: "UD Unidades didácticas", icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "relacion", label: "Relación entre RA y UD", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "contribucion", label: "Contribución de RA en OG", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "cpps", label: "Competencias (CPPS)", icon: <><span className="inline-flex"><Award className="w-[1.2em] h-[1.2em] mr-1" /></span></> }
+    { id: "contribucion", label: "Contribución de RA en OG", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> }
   ];
 
   useEffect(() => {
@@ -66,8 +65,8 @@ export default function MatricesPage() {
             <MotionWrapper>
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4">
                 <Calculator className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-2xl font-bold mb-4">No hay módulo seleccionado</h2>
-                <p className="text-muted">Por favor, ve a la sección de Datos y selecciona un módulo PD.</p>
+                <h2 className="text-2xl font-bold mb-4">No hay mÁ³dulo seleccionado</h2>
+                <p className="text-muted">Por favor, ve a la sección de Datos y selecciona un mÁ³dulo PD.</p>
               </Card>
             </MotionWrapper>
           </main>
@@ -94,9 +93,9 @@ export default function MatricesPage() {
           <MotionWrapper className="space-y-8 pb-12">
             <div>
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
-              <span className="inline-flex"><Calculator className="w-[1.2em] h-[1.2em] mr-1" /></span> Matrices OG→ RA→ CE→ UD
+              <span className="inline-flex"><Calculator className="w-[1.2em] h-[1.2em] mr-1" /></span> Matrices OGâ†’ RAâ†’ CEâ†’ UD
             </h1>
-            <p className="text-muted mt-2 text-lg">Relación y ponderación entre los RA, CE y las diferentes UD del módulo.</p>
+            <p className="text-muted mt-2 text-lg">Relación y ponderación entre los RA, CE y las diferentes UD del mÁ³dulo.</p>
           </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab}>
@@ -229,7 +228,7 @@ export default function MatricesPage() {
                   setAllCeOpen(!allCeOpen);
                 }}
               >
-                <span>{allCeOpen ? '▲' : '▼'}</span>
+                <span>{allCeOpen ? 'â–²' : 'â–¼'}</span>
                 {allCeOpen ? 'Colapsar todas' : 'Expandir todas'}
               </Button>
             </div>
@@ -257,9 +256,9 @@ export default function MatricesPage() {
                       <div className="flex items-center gap-6 text-sm">
                         <span className="text-muted">{ceForRa.length} CE</span>
                         <span className={`px-2 py-1 rounded ${totalPeso === 100 ? 'bg-success/10 text-success' : 'bg-danger/10 text-danger'}`}>
-                          Σ {totalPeso.toFixed(0)}%
+                          Î£ {totalPeso.toFixed(0)}%
                         </span>
-                        <span className={`transition-transform duration-300 text-muted ${openCEs.has(ra.id_ra) ? 'rotate-180' : ''}`}>▼</span>
+                        <span className={`transition-transform duration-300 text-muted ${openCEs.has(ra.id_ra) ? 'rotate-180' : ''}`}>â–¼</span>
                       </div>
                     </div>
                     
@@ -366,7 +365,7 @@ export default function MatricesPage() {
                                           className="text-danger hover:text-danger font-bold"
                                           title="Eliminar CE"
                                         >
-                                          ×
+                                          Á—
                                         </button>
                                       </td>
                                     </tr>
@@ -545,7 +544,10 @@ export default function MatricesPage() {
                       selectedCells.forEach(cellId => {
                         const [udId, raId] = cellId.split('-');
                         const udToUpdate = newUd.find(u => u.id_ud === udId);
-                        if (udToUpdate) udToUpdate[raId] = val;
+                        if (udToUpdate) {
+                          if (!udToUpdate.ra_mappings) udToUpdate.ra_mappings = {};
+                          udToUpdate.ra_mappings[raId] = val;
+                        }
                       });
                       updateDataFrame("df_ud", newUd);
                       setSelectedCells(new Set());
@@ -560,7 +562,10 @@ export default function MatricesPage() {
                     selectedCells.forEach(cellId => {
                       const [udId, raId] = cellId.split('-');
                       const udToUpdate = newUd.find(u => u.id_ud === udId);
-                      if (udToUpdate) udToUpdate[raId] = val;
+                      if (udToUpdate) {
+                        if (!udToUpdate.ra_mappings) udToUpdate.ra_mappings = {};
+                        udToUpdate.ra_mappings[raId] = val;
+                      }
                     });
                     updateDataFrame("df_ud", newUd);
                     setSelectedCells(new Set());
@@ -579,7 +584,7 @@ export default function MatricesPage() {
             </div>
           )}
 
-          {/* ── RAs ↔ UDs ────────────────────────────────────── */}
+          {/* â”€â”€ RAs â†” UDs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
           {activeTab === "relacion" && (
             <div className="animate-in fade-in duration-500">
           <Card className="p-6 border-t-4 border-t-amber-500">
@@ -618,40 +623,14 @@ export default function MatricesPage() {
             </div>
           )}
 
-          {/* ── Contribución de RA en OG ────────────────────────────────────── */}
+          {/* â”€â”€ Contribución de RA en OG â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
           {activeTab === "contribucion" && (
             <div className="animate-in fade-in duration-500">
               <RaOgMatrix />
             </div>
           )}
 
-          {/* ── Competencias CPPS ──────────────────────────────────────────── */}
-          {activeTab === "cpps" && (
-            <div className="animate-in fade-in duration-500">
-              <Card className="p-6 border-t-4 border-t-[#14a085]">
-                <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-2">
-                  <span><span className="inline-flex"><Award className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Competencias profesionales, personales y sociales (CPPS)
-                </h2>
-                <p className="text-sm text-muted mb-6">
-                  Del Catálogo Nacional de Cualificaciones Profesionales. Artículo 5 de la ORDEN de 14 de julio de 2010 (BOA).
-                </p>
 
-                {(() => {
-                  const cpps = curriculos["ELE203"]?.competencias_cpps || [];
-                  return (
-                    <div className="space-y-2">
-                      {cpps.map((cpp: CompetenciaCPP) => (
-                        <div key={cpp.id} className="flex items-start gap-3 p-3 rounded-lg border border-[var(--glass-border)] bg-foreground/5">
-                          <span className="font-mono font-bold text-[#14a085] shrink-0 mt-0.5">CPPS {cpp.id}.</span>
-                          <span className="text-sm text-foreground">{cpp.descripcion}</span>
-                        </div>
-                      ))}
-                    </div>
-                  );
-                })()}
-              </Card>
-            </div>
-          )}
 
 
           </MotionWrapper>

@@ -1,17 +1,23 @@
 import React from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts";
 import { Card } from "@/components/ui/Card";
+import { useAppStore } from "@/store/useAppStore";
+import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 
 interface DashboardChartsProps {
-  cursoData: any;
+  cursoData?: any;
 }
 
 export function DashboardCharts({ cursoData }: DashboardChartsProps) {
-  const barData = (cursoData?.df_sgmt || []).map((ud: any) => ({
+  const { df_sgmt } = useDynamicPlanning();
+  const storeCursoData = useAppStore(state => state.cursoData);
+  const actualCursoData = cursoData || storeCursoData;
+
+  const barData = (df_sgmt || []).map((ud: any) => ({
     name: (ud.id_ud === 'FEOE' || ud.id_ud === 'FEOE (Sin docencia)' || ud.id_ud === 'FEOE (Con docencia)') 
-      ? `FEOE (${cursoData?.info_fechas?.docencia_dual === 'con_docencia' ? 'Con docencia' : 'Sin docencia'})` 
+      ? `FEOE (${actualCursoData?.info_fechas?.docencia_dual === 'con_docencia' ? 'Con docencia' : 'Sin docencia'})` 
       : ud.id_ud,
-    Planificadas: Number(ud.horas_ud || 0),
+    Planificadas: ud.horas_ud || 0,
     Impartidas: Number(ud.Total_Imp || 0),
   }));
 

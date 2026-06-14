@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map } from "lucide-react";
+import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map, MessageSquare, FileText } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/Button";
 import { TutoriaTab } from "@/components/features/alumnado/TutoriaTab";
 import { TutoriaMatrixTab } from "@/components/features/alumnado/TutoriaMatrixTab";
 import { PlanoClaseTab } from "@/components/features/alumnado/PlanoClaseTab";
+import { ActuacionesTab } from "@/components/features/alumnado/ActuacionesTab";
+import { BoletinesTab } from "@/components/features/alumnado/BoletinesTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -29,6 +31,8 @@ export default function AlumnadoPage() {
     { id: "plano", label: <span className="flex items-center gap-2"><LayoutGrid className="w-4 h-4 shrink-0" /> Plano de clase</span>, cleanLabel: "Plano de clase" },
     { id: "tutoria", label:  <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> Ficha de Tutoría</span>, cleanLabel: "Ficha de Tutoría" },
     { id: "matriz", label:  <span className="flex items-center gap-2"><BarChart className="w-4 h-4 shrink-0" /> Matriz de Tutoría</span>, cleanLabel: "Matriz de Tutoría" },
+    { id: "actuaciones", label:  <span className="flex items-center gap-2"><MessageSquare className="w-4 h-4 shrink-0" /> Reg. Tutorías</span>, cleanLabel: "Registro de Tutorías" },
+    { id: "boletines", label:  <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> Boletines</span>, cleanLabel: "Boletines" },
     { id: "feoe", label: <span className="flex items-center gap-2"><Building2 className="w-4 h-4 shrink-0" /> Prácticas FEOE</span>, cleanLabel: "Prácticas FEOE" },
     { id: "perfil", label: <span className="flex items-center gap-2"><Compass className="w-4 h-4 shrink-0" /> Perfil individual</span>, cleanLabel: "Perfil individual" },
     { id: "resumen", label: <span className="flex items-center gap-2"><ClipboardList className="w-4 h-4 shrink-0" /> Resumen</span>, cleanLabel: "Resumen" },
@@ -351,6 +355,8 @@ export default function AlumnadoPage() {
             <PlanoClaseTab />
           )}
 
+          {activeTab === "actuaciones" && <ActuacionesTab />}
+          {activeTab === "boletines" && <BoletinesTab />}
           {activeTab === "feoe" && <FeoeAssignTab />}
           {activeTab === "perfil" && <OrientacionTab />}
           {activeTab === "resumen" && <ResumenTab />}

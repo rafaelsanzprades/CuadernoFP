@@ -110,19 +110,24 @@ export default function LegalPage() {
 
             {activeTab === "licencia" && (
               <div className="space-y-12 animate-in fade-in duration-500">
-                <div className="space-y-4 pb-4">
-                  <p className="text-foreground/80 text-base">
-                    Filosofía abierta, gratuita y accesible para el profesorado de Formación Profesional.
-                  </p>
-                  <a 
-                    href="https://github.com/rafaelsanzprades/CuadernoFP/blob/main/LICENSE.md" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-info hover:underline text-sm font-medium"
-                  >
-                    Verificar licencia original en GitHub
-                    <ExternalLink className="ml-1 w-4 h-4" />
-                  </a>
+                <div className="bg-info/5 border border-info/20 rounded-xl p-4 flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 shrink-0 bg-info/10 rounded-full flex items-center justify-center text-info">
+                    <ShieldCheck className="w-6 h-6" />
+                  </div>
+                  <div className="flex flex-col items-start gap-1">
+                    <p className="text-foreground text-[0.95rem] font-medium">
+                      Filosofía abierta, gratuita y accesible para el profesorado de Formación Profesional.
+                    </p>
+                    <a 
+                      href="https://github.com/rafaelsanzprades/CuadernoFP/blob/main/LICENSE.md" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-3 py-1.5 bg-info/10 text-info border border-info/30 hover:bg-info/20 font-semibold rounded-lg transition-all text-sm mt-1"
+                    >
+                      Verificar licencia original en GitHub
+                      <ExternalLink className="ml-1.5 w-3.5 h-3.5" />
+                    </a>
+                  </div>
                 </div>
 
                 <div className="space-y-10">
@@ -196,12 +201,6 @@ export default function LegalPage() {
               </div>
             )}
 
-            {/* Back Link */}
-            <div className="text-center pt-8 border-t border-[var(--glass-border)] mt-12">
-              <Link href="/" className="text-sm text-info hover:text-info font-semibold underline">
-                Volver al Inicio
-              </Link>
-            </div>
             
           </div>
         </div>

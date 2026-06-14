@@ -4,8 +4,8 @@ from typing import Optional, Dict, Any, List
 class Sesion(BaseModel):
     ID: Optional[str] = None
     id_ud: Optional[str] = None
-    Num_Orden: int | str | None = None
-    Horas: int | str | None = None
+    Num_Orden: int | None = None
+    Horas: int | None = None
     Tipo_Actividad: Optional[str] = None
     RA_CE: Optional[str] = None
     Contenidos: Optional[str] = None
@@ -13,10 +13,10 @@ class Sesion(BaseModel):
     Recursos: Optional[str] = None
 
 class UnidadDidactica(BaseModel):
-    model_config = ConfigDict(extra='allow')
-    id_ud: Optional[str] = None
-    desc_ud: Optional[str] = None
-    horas_ud: int | str | float | None = None
+    model_config = ConfigDict(extra='forbid')
+    id_ud: str
+    desc_ud: str
+    horas_ud: int | None = None
     ra_mappings: Optional[Dict[str, Any]] = None
 
 class Tarea(BaseModel):
@@ -43,24 +43,24 @@ class Alumnado(BaseModel):
     Movil: Optional[str] = None
 
 class ResultadoAprendizaje(BaseModel):
-    id_ra: Optional[str] = None
+    id_ra: str
     desc_ra: Optional[str] = None
-    peso_ra: int | str | float | None = None
+    peso_ra: int | None = None
     is_dual: Optional[str] = None
 
 class CriterioEvaluacion(BaseModel):
-    model_config = ConfigDict(extra='allow')
-    id_ce: Optional[str] = None
-    id_ra: Optional[str] = None
+    model_config = ConfigDict(extra='forbid')
+    id_ce: str
+    id_ra: str
     id_ud: Optional[str] = None
     desc_ce: Optional[str] = None
-    peso_ce: int | str | float | None = None
+    peso_ce: int | None = None
 
 class SeguimientoUD(BaseModel):
     id_ud: Optional[str] = None
-    horas_ud: int | str | float | None = None
-    Total_Imp: int | str | float | None = None
-    model_config = ConfigDict(extra="allow")
+    horas_ud: int | None = None
+    Total_Imp: int | None = None
+    model_config = ConfigDict(extra="forbid")
 
 class CrmInteraccion(BaseModel):
     id: str
@@ -111,7 +111,7 @@ class ModuleUpdateBody(BaseModel):
     
     __version__: Optional[int] = None
 
-    model_config = ConfigDict(extra="allow")
+    model_config = ConfigDict(extra="forbid")
 
 class ChatMessage(BaseModel):
     role: str

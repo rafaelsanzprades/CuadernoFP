@@ -438,20 +438,7 @@ export default function CalendarioPage() {
   const handleUpdateNote = (key: string, val: string) =>
     updateCursoData("calendar_notes", { ...calendar_notes, [key]: val });
 
-  const handleAutoPlanificar = () => {
-    if (!moduleData || !cursoData) return;
-    const { newPlanningLedger, newDfSgmt, totalUdHours, totalScheduledHours } = generatePlanning(moduleData, cursoData);
-    updateCursoData("planning_ledger", newPlanningLedger);
-    updateCursoData("df_sgmt", newDfSgmt);
-    
-    if (totalScheduledHours < totalUdHours) {
-      setSaveMessage(`Aviso: Calendario lleno. Se han asignado ${totalScheduledHours}h de las ${totalUdHours}h requeridas. Faltan ${totalUdHours - totalScheduledHours}h.`);
-      setTimeout(() => setSaveMessage(""), 6000);
-    } else {
-      setSaveMessage("Planificación generada correctamente.");
-      setTimeout(() => setSaveMessage(""), 3000);
-    }
-  };
+
 
   const TABS = [
     { id: "fechas", label: <><span className="inline-flex"><Settings className="w-[1.2em] h-[1.2em] mr-1" /></span> Configuración de fechas</>, cleanLabel: "Configuración de fechas" },
@@ -501,13 +488,7 @@ export default function CalendarioPage() {
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-xl font-bold">Fechas generales</h2>
                   <div className="flex gap-2">
-                    <Button
-                      variant="ghost"
-                      onClick={handleAutoPlanificar}
-                      className="text-xs text-primary hover:text-primary/80 border border-primary/20"
-                    >
-                      <span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> Auto-Planificar UDs
-                    </Button>
+
                     <Button
                       variant="ghost"
                       onClick={() => {

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useRef, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -91,7 +91,7 @@ export const ChatbotWidget = () => {
       }
     } catch (error: any) {
       toast.error('Error al comunicarse con el asistente: ' + error.message);
-      setMessages([...newMessages, { role: 'model', parts: '❌ Lo siento, ha ocurrido un error al conectar con mis sistemas. Por favor, inténtalo de nuevo.' }]);
+      setMessages([...newMessages, { role: 'model', parts: 'âŒ Lo siento, ha ocurrido un error al conectar con mis sistemas. Por favor, inténtalo de nuevo.' }]);
     } finally {
       setIsLoading(false);
     }
@@ -139,7 +139,7 @@ export const ChatbotWidget = () => {
               {messages.length === 0 && (
                 <div className="flex flex-col items-center justify-center h-full text-center space-y-3 text-[var(--muted-foreground)] opacity-70">
                   <Bot size={40} />
-                  <p className="text-sm">¡Hola! Soy tu asistente virtual.<br/>Pregúntame sobre la aplicación o dudas de programación didáctica.</p>
+                  <p className="text-sm">Â¡Hola! Soy tu asistente virtual.<br/>Pregúntame sobre la aplicación o dudas de programación didáctica.</p>
                 </div>
               )}
 

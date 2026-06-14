@@ -1,0 +1,184 @@
+PUT Error on 0237-ictve-pd:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 15214, but client sent 15213.
+PUT Error on 0237-ictve-curso-2025-26:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 11358, but client sent 11357.
+PUT Error on 0237-ictve-pd:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 15221, but client sent 15220.
+PUT Error on 0237-ictve-curso-2025-26:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 11367, but client sent 11366.
+PUT Error on 0237-ictve-pd:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 15269, but client sent 15268.
+PUT Error on 0237-ictve-curso-2025-26:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 11414, but client sent 11413.
+PUT Error on 0237-ictve-pd:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 15270, but client sent 15269.
+PUT Error on 0237-ictve-curso-2025-26:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 11415, but client sent 11414.
+PUT Error on 0237-ictve-pd:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 15295, but client sent 15269.
+PUT Error on 0237-ictve-curso-2025-26:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 11440, but client sent 11414.
+PUT Error on 0237-ictve-pd:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 15298, but client sent 0.
+PUT Error on 0237-ictve-pd:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 15303, but client sent 0.
+PUT Error on 0237-ictve-pd:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 15319, but client sent 0.
+PUT Error on 0237-ictve-pd:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 15340, but client sent 0.
+PUT Error on 0237-ictve-pd:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 15343, but client sent 0.
+PUT Error on 0237-ictve-pd:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 15345, but client sent 0.
+PUT Error on 0237-ictve-curso-2025-26:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 11516, but client sent 11515.
+PUT Error on 0237-ictve-pd:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 15373, but client sent 15370.
+PUT Error on 0237-ictve-curso-2025-26:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 11518, but client sent 11515.
+PUT Error on 0237-ictve-pd:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 15376, but client sent 15370.
+PUT Error on 0237-ictve-curso-2025-26:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 11521, but client sent 11515.
+PUT Error on 0237-ictve-pd:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 15511, but client sent 0.
+PUT Error on 0237-ictve-pd:
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\modules.py", line 28, in update_module
+    update_module_data(module_id, body.model_dump(exclude_none=True), db)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\services\module_service.py", line 218, in update_module_data
+    raise HTTPException(status_code=409, detail=f"Conflict: Data is stale. Server version is {current_version}, but client sent {incoming_version}.")
+fastapi.exceptions.HTTPException: 409: Conflict: Data is stale. Server version is 15511, but client sent 0.

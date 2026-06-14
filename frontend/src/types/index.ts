@@ -16,9 +16,9 @@ export type Sesion = z.infer<typeof SesionSchema>;
 export const UnidadDidacticaSchema = z.object({
   id_ud: z.string(),
   desc_ud: z.string(),
-  horas_ud: z.union([z.number(), z.string()]),
+  horas_ud: z.number(),
   ra_mappings: z.record(z.string(), z.any()).optional().nullable(),
-}).passthrough();
+});
 export type UnidadDidactica = z.infer<typeof UnidadDidacticaSchema>;
 
 export const TareaSchema = z.object({
@@ -48,10 +48,26 @@ export const AlumnadoSchema = z.object({
 });
 export type Alumnado = z.infer<typeof AlumnadoSchema>;
 
+export const TutoriaActuacionSchema = z.object({
+  id: z.string(),
+  fecha: z.string(),
+  horaInicio: z.string(),
+  horaFin: z.string(),
+  alumnadoIds: z.array(z.string()),
+  ambito: z.string(),
+  canal: z.string(),
+  tipo: z.string(),
+  tema: z.string(),
+  participantes: z.string(),
+  desarrollo: z.string(),
+  acuerdos: z.string(),
+});
+export type TutoriaActuacion = z.infer<typeof TutoriaActuacionSchema>;
+
 export const ResultadoAprendizajeSchema = z.object({
   id_ra: z.string(),
   desc_ra: z.string().optional().nullable(),
-  peso_ra: z.union([z.string(), z.number()]).optional(),
+  peso_ra: z.number().optional(),
   is_dual: z.string().optional().nullable(),
 });
 export type ResultadoAprendizaje = z.infer<typeof ResultadoAprendizajeSchema>;
@@ -61,15 +77,15 @@ export const CriterioEvaluacionSchema = z.object({
   id_ra: z.string(),
   id_ud: z.string().optional(),
   desc_ce: z.string().optional().nullable(),
-  peso_ce: z.union([z.string(), z.number()]).optional(),
+  peso_ce: z.number().optional(),
 });
 export type CriterioEvaluacion = z.infer<typeof CriterioEvaluacionSchema>;
 
 export const SeguimientoUDSchema = z.record(z.string(), z.any()).and(
   z.object({
     id_ud: z.string(),
-    horas_ud: z.union([z.number(), z.string()]).optional(),
-    Total_Imp: z.union([z.number(), z.string()]).optional(),
+    horas_ud: z.number().optional(),
+    Total_Imp: z.number().optional(),
   })
 );
 export type SeguimientoUD = z.infer<typeof SeguimientoUDSchema>;
@@ -130,31 +146,48 @@ export const CursoDataSchema = z.object({
   daily_ledger: z.record(z.string(), z.any()).optional(),
   tutoria_ledger: z.record(z.string(), z.any()).optional(),
   profesional_ledger: z.record(z.string(), z.any()).optional(),
-  info_fechas: z.record(z.string(), z.any()).optional(),
   horario: z.record(z.string(), z.any()).optional(),
+  info_fechas: z.record(z.string(), z.any()).optional(),
   calendar_notes: z.record(z.string(), z.any()).optional(),
   planning_ledger: z.record(z.string(), z.any()).optional(),
-  info_modulo: z.record(z.string(), z.any()).optional(),
-  plano_clase: z.any().optional(),
-  competencias_cpps: z.array(z.string()).optional(),
+  plano_clase: z.record(z.string(), z.any()).optional(),
+  actuaciones_tutoria: z.array(z.any()).optional(),
   __version__: z.number().optional(),
-});
+}).passthrough();
 export type CursoData = z.infer<typeof CursoDataSchema>;
 
 export const GlobalDataSchema = z.object({
-  crm_empresas: z.array(CrmEmpresaSchema).optional(),
-});
+  ciclos: z.array(z.any()).optional(),
+  modulos: z.array(z.any()).optional(),
+  profesores: z.array(z.any()).optional(),
+  grupos: z.array(z.any()).optional(),
+  instrumentos: z.array(z.any()).optional(),
+  recursos: z.array(z.any()).optional(),
+  crm_empresas: z.array(z.any()).optional(),
+}).passthrough();
 export type GlobalData = z.infer<typeof GlobalDataSchema>;
 
-export interface ModuleAssignment {
+export interface Degree {
   id: number;
-  code: string;
   name: string;
-  hours: number;
-  isDual: boolean;
-  assignedTeacherId: number | null;
-  ras?: { raNumber: number; description: string }[];
+  code: string;
+  family: string;
+  modules: Module[];
 }
+
+export interface Module {
+  id: number;
+  name: string;
+  code: string;
+  hours: number;
+  assignedTeacherId?: number | null;
+  ras?: any[];
+  isDual?: boolean;
+  [key: string]: any;
+}
+
+// Alias para compatibilidad con código existente
+export type ModuleAssignment = Module;
 
 export interface CourseGroup {
   id: number;
@@ -162,6 +195,7 @@ export interface CourseGroup {
   degreeName: string;
   level: string;
   modules: ModuleAssignment[];
+  [key: string]: any;
 }
 
 export interface Degree {
@@ -171,6 +205,12 @@ export interface Degree {
 }
 
 export interface Family {
+  id: number;
+  name: string;
+  degrees: Degree[];
+}
+
+export interface Teacher {
   id: number;
   name: string;
   degrees: Degree[];
@@ -221,4 +261,7 @@ export interface AppState {
   setAutoSyncDrive: (sync: boolean) => void;
   googleClientId: string;
   setGoogleClientId: (id: string) => void;
+
+  isLoadingData: boolean;
+  setLoadingData: (loading: boolean) => void;
 }

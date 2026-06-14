@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { AlertTriangle, BarChart, BookOpen, Calculator, Calendar, CalendarDays, ChevronRight, Construction, CornerLeftUp, Download, DownloadCloud, File, FileEdit, FileSpreadsheet, FileText, Folder, FolderOpen, GraduationCap, MapPin, Play, Scale, Search, Settings, UploadCloud, User, Users, X } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -127,7 +127,7 @@ export default function DocumentosPage() {
       setPreviewFilename(displayFilename);
     } catch (err) {
       console.error(err);
-      toast.error("Error al cargar la previsualización del documento.");
+      toast.error("Error al cargar la previsualización del documento. Verifica la conexión con el backend.");
     } finally {
       setDownloadingStr(null);
     }
@@ -154,7 +154,7 @@ export default function DocumentosPage() {
       setPreviewFilename(filename);
     } catch (err) {
       console.error(err);
-      toast.error("Error al generar el PDF. Asegúrate de que el backend está configurado.");
+      toast.error("Error al generar el PDF. Asegúrate de que el backend está configurado correctamente.");
     } finally {
       setDownloadingStr(null);
     }
@@ -184,7 +184,7 @@ export default function DocumentosPage() {
   const relParts = relativePath.split("/").filter(Boolean);
 
   const breadcrumbs = [
-    { label: "Raíz", path: basePath },
+    { label: "RaÃ­z", path: basePath },
     ...relParts.map((part, idx) => ({
       label: part,
       path: basePath + "/" + relParts.slice(0, idx + 1).join("/")
@@ -209,9 +209,9 @@ export default function DocumentosPage() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
               <div>
                 <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                  <span className="text-3xl text-info"><FolderOpen className="w-8 h-8" strokeWidth={2.5} /></span> Documentación
+                  <span className="text-3xl text-info"><FolderOpen className="w-8 h-8" strokeWidth={2.5} /></span> DocumentaciÃ³n
                 </h1>
-                <p className="text-muted mt-2 text-lg">Explorador de archivos oficiales, legislación y otros documentos.</p>
+                <p className="text-muted mt-2 text-lg">Explorador de archivos oficiales, legislaciÃ³n y otros documentos.</p>
               </div>
             </div>
 
@@ -228,7 +228,7 @@ export default function DocumentosPage() {
                     />
                   </div>
                   <button 
-                    onClick={() => toast("Función de subida próximamente.", { icon: <><span className="inline-flex"><Construction className="w-[1.2em] h-[1.2em] mr-1" /></span></> })}
+                    onClick={() => toast("FunciÃ³n de subida prÃ³ximamente.", { icon: <><span className="inline-flex"><Construction className="w-[1.2em] h-[1.2em] mr-1" /></span></> })}
                     className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-foreground font-bold py-2 px-5 rounded-xl shadow-lg shadow-blue-500/30 flex items-center gap-2 transition-all hover:scale-105 active:scale-95"
                   >
                     <UploadCloud className="w-5 h-5" />
@@ -278,7 +278,7 @@ export default function DocumentosPage() {
                   ) : items.length === 0 ? (
                     <div className="p-16 text-center text-muted">
                       <div className="text-4xl mb-4"><span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></div>
-                      <p className="text-lg">El directorio está vacío.</p>
+                      <p className="text-lg">El directorio estÃ¡ vacÃ­o.</p>
                     </div>
                   ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-6">
@@ -336,7 +336,7 @@ export default function DocumentosPage() {
           </MotionWrapper>
         </div>
 
-        {/* Modal de Previsualización (Compartido para ambos) */}
+        {/* Modal de PrevisualizaciÃ³n (Compartido para ambos) */}
         {previewUrl && (
           <div className="fixed inset-0 z-50 flex flex-col bg-black/90 backdrop-blur-md">
             <div className="flex items-center justify-between p-4 bg-[var(--glass-bg)] border-b border-[var(--glass-border)]">

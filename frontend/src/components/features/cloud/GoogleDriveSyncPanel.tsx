@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
@@ -37,7 +37,7 @@ export function GoogleDriveSyncPanel() {
     setDriveConnected(false);
     setDriveUserEmail(null);
     setAutoSyncDrive(false);
-    toast("Desconectado de Google Drive", { icon: "👋" });
+    toast("Desconectado de Google Drive", { icon: "ðŸ‘‹" });
   };
 
   const toggleAutoSync = () => {

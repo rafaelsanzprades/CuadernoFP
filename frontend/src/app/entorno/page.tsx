@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { AlertTriangle, BookOpen, CheckCircle, Cloud, Database, Download, FileJson, FolderOpen, Save, Shield, ShieldAlert, Sparkles, Upload, Users, Zap } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -203,7 +203,7 @@ export default function EntornoTrabajoPage() {
             </Tabs>
 
             <div className="space-y-8 animate-in fade-in duration-300 pt-4">
-              {/* PESTAÑA: DATOS LOCALES */}
+              {/* PESTAÁ‘A: DATOS LOCALES */}
               {activeTab === "datos" && (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
@@ -220,7 +220,7 @@ export default function EntornoTrabajoPage() {
                       {moduleData && <Badge variant={isDemoLoaded ? 'warning' : 'info'}>Cargada</Badge>}
                     </div>
                     <p className="text-sm text-muted mt-1 relative z-10">
-                      Contiene tu currículo, unidades didácticas, instrumentos de evaluación y criterios.
+                      Contiene tu currÁ­culo, unidades didácticas, instrumentos de evaluación y criterios.
                     </p>
                   </div>
 
@@ -306,20 +306,22 @@ export default function EntornoTrabajoPage() {
 
 
 
-              {/* PESTAÑA: NUBE */}
+              {/* PESTAÁ‘A: NUBE */}
               {activeTab === "nube" && (
                 <GoogleDriveSyncPanel />
               )}
 
-              {/* Aviso de Seguridad y RGPD (Sólo en Datos Locales) */}
+              {/* Aviso de Seguridad y RGPD (SÁ³lo en Datos Locales) */}
               {activeTab === "datos" && (
-                <div className="flex flex-col items-center justify-center text-center space-y-3 pt-12 max-w-2xl mx-auto">
-                  <ShieldAlert className="w-8 h-8 text-info" />
-                  <h3 className="text-xl font-extrabold text-foreground">Seguridad y RGPD garantizados</h3>
-                  <div className="text-base text-muted space-y-2">
-                    <p>CuadernoFP procesa toda tu información confidencial exclusivamente en tu navegador.</p>
-                    <p>Ningún dato de tu alumnado se envía a la nube (salvo que uses la Sincronización autorizada). **Tú eres el dueño de tus archivos**.</p>
-                    <p className="font-semibold text-info">Asegúrate de pulsar "Guardar" al finalizar tu sesión de trabajo para no perder los últimos cambios.</p>
+                <div className="flex items-start gap-4 pt-12 max-w-2xl mx-auto">
+                  <span className="text-info mt-1 shrink-0"><ShieldAlert className="w-6 h-6" /></span>
+                  <div>
+                    <h3 className="text-lg font-bold text-foreground mb-2">Seguridad y RGPD garantizados</h3>
+                    <div className="text-sm text-foreground/80 space-y-2 leading-relaxed">
+                      <p>CuadernoFP procesa toda tu información confidencial exclusivamente en tu navegador.</p>
+                      <p>Ningún dato de tu alumnado se envÁ­a a la nube (salvo que uses la Sincronización autorizada). <strong>Tú eres el dueño de tus archivos</strong>.</p>
+                      <p className="font-semibold text-info mt-2">Asegúrate de pulsar "Guardar" al finalizar tu sesión de trabajo para no perder los últimos cambios.</p>
+                    </div>
                   </div>
                 </div>
               )}

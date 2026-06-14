@@ -1,4 +1,4 @@
-import { BarChart, BarChart3, CheckCircle, Clock, Users } from "lucide-react";
+﻿import { BarChart, BarChart3, CheckCircle, Clock, Users } from "lucide-react";
 import React, { useEffect } from "react";
 import { Card } from "@/components/ui/Card";
 import { motion, animate, useMotionValue, useTransform } from "framer-motion";
@@ -18,14 +18,17 @@ function AnimatedCounter({ value, suffix = "", decimals = 0 }: { value: number, 
   return <motion.span>{display}</motion.span>;
 }
 
+import { useAppStore } from "@/store/useAppStore";
+import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
+
 interface DashboardKPIsProps {
   cursoData: any;
   moduleData: any;
 }
 
 export function DashboardKPIs({ cursoData, moduleData }: DashboardKPIsProps) {
-  // Calculo de total impartido a partir del df_sgmt mensual (las horas se guardan en los meses _Imp)
-  const df_sgmt = cursoData?.df_sgmt || [];
+  const { df_sgmt } = useDynamicPlanning();
+  
   const total_impartido = df_sgmt.reduce((sum: number, row: any) => {
     let row_imp = 0;
     Object.keys(row).forEach(k => {
@@ -36,7 +39,7 @@ export function DashboardKPIs({ cursoData, moduleData }: DashboardKPIsProps) {
     return sum + row_imp;
   }, 0);
 
-  const total_previsto = moduleData?.df_ud?.reduce((sum: number, ud: any) => sum + (Number(ud.horas_ud) || 0), 0) || 0;
+  const total_previsto = moduleData?.df_ud?.reduce((sum: number, ud: any) => sum + (ud.horas_ud || 0), 0) || 0;
   const porcentaje_progreso = total_previsto > 0 ? (total_impartido / total_previsto) * 100 : 0;
 
   // Calculo de horas sin docencia desde el calendario (para h_real_total) y el daily_ledger
@@ -48,6 +51,12 @@ export function DashboardKPIs({ cursoData, moduleData }: DashboardKPIsProps) {
   const info_fechas = cursoData?.info_fechas || {};
   const horario = cursoData?.horario || {};
   const calendar_notes = cursoData?.calendar_notes || {};
+  const festivos: string[] = cursoData?.festivos || [];
+
+  const esFestivo = (dateStr: string): boolean => {
+    if (calendar_notes[`f_${dateStr}`]) return true;
+    return festivos.includes(dateStr);
+  };
 
   const processTrimestre = (ini_str: string, fin_str: string) => {
     if (!ini_str || !fin_str) return;
@@ -56,16 +65,20 @@ export function DashboardKPIs({ cursoData, moduleData }: DashboardKPIsProps) {
     let curr = new Date(ini);
 
     while (curr <= fin) {
-      if (curr.getDay() >= 1 && curr.getDay() <= 5) {
-        const diaSemana = dias_semana_list[curr.getDay() - 1];
-        const dateStr = curr.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
-
-        if (!calendar_notes[`f_${dateStr}`]) {
-          const h_dia = Number(horario[diaSemana]) || 0;
-          h_real_total += h_dia;
-          if (daily_ledger[dateStr]?.sin_docencia) {
-            h_sin_docencia += h_dia;
-          }
+      const diaSemana = dias_semana_list[curr.getDay() - 1];
+      const dateStr = curr.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+      
+      // Verificar si es día laborable (lunes a viernes) y no es festivo
+      const esDiaLaborable = curr.getDay() >= 1 && curr.getDay() <= 5;
+      const esFestivoDia = esFestivo(dateStr);
+      
+      if (esDiaLaborable && !esFestivoDia) {
+        const h_dia = Number(horario[diaSemana]) || 0;
+        h_real_total += h_dia;
+        
+        // Verificar si es día sin docencia (dual)
+        if (daily_ledger[dateStr]?.sin_docencia) {
+          h_sin_docencia += h_dia;
         }
       }
       curr.setDate(curr.getDate() + 1);

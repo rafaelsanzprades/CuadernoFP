@@ -1,0 +1,155 @@
+--- ERROR IN GENERATE_PDF! type=matrices ---
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\pdf.py", line 80, in generate_pdf
+    buffer = generar_pdf_matrices(info_modulo, df_ra, df_ud)
+  File "c:\GD-rsp\APP\backend\pdf_matrices.py", line 85, in generar_pdf_matrices
+    total_peso += peso
+TypeError: unsupported operand type(s) for +=: 'int' and 'str'
+--- ERROR IN GENERATE_PDF! type=programacion ---
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\pdf.py", line 98, in generate_pdf
+    import generador_pd
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 12, in <module>
+    from docx import Document
+ModuleNotFoundError: No module named 'docx'
+--- ERROR IN GENERATE_PDF! type=programacion ---
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\pdf.py", line 123, in generate_pdf
+    generador_pd.generate(data_pd, out_docx, out_pdf)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 532, in generate
+    setup_header_footer(doc, modulo_nombre, ciclo_nombre, curso_academico)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 144, in setup_header_footer
+    tbl = header.add_table(rows=2, cols=3)
+TypeError: BlockItemContainer.add_table() missing 1 required positional argument: 'width'
+--- ERROR IN GENERATE_PDF! type=programacion ---
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\pdf.py", line 123, in generate_pdf
+    generador_pd.generate(data_pd, out_docx, out_pdf)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 532, in generate
+    setup_header_footer(doc, modulo_nombre, ciclo_nombre, curso_academico)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 144, in setup_header_footer
+    tbl = header.add_table(rows=2, cols=3)
+TypeError: BlockItemContainer.add_table() missing 1 required positional argument: 'width'
+--- ERROR IN GENERATE_PDF! type=programacion ---
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\pdf.py", line 123, in generate_pdf
+    generador_pd.generate(data_pd, out_docx, out_pdf)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 532, in generate
+    setup_header_footer(doc, modulo_nombre, ciclo_nombre, curso_academico)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 144, in setup_header_footer
+    tbl = header.add_table(rows=2, cols=3, width=Cm(18))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: BlockItemContainer.add_table() missing 1 required positional argument: 'width'
+--- ERROR IN GENERATE_PDF! type=programacion ---
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\pdf.py", line 123, in generate_pdf
+    generador_pd.generate(data_pd, out_docx, out_pdf)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 532, in generate
+    setup_header_footer(doc, modulo_nombre, ciclo_nombre, curso_academico)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 144, in setup_header_footer
+    tbl = header.add_table(rows=2, cols=3, width=Cm(18))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: BlockItemContainer.add_table() missing 1 required positional argument: 'width'
+--- ERROR IN GENERATE_PDF! type=programacion ---
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\pdf.py", line 123, in generate_pdf
+    generador_pd.generate(data_pd, out_docx, out_pdf)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 532, in generate
+    setup_header_footer(doc, modulo_nombre, ciclo_nombre, curso_academico)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 144, in setup_header_footer
+    tbl = header.add_table(rows=2, cols=3, width=Cm(18))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: BlockItemContainer.add_table() missing 1 required positional argument: 'width'
+--- ERROR IN GENERATE_PDF! type=programacion ---
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\pdf.py", line 123, in generate_pdf
+    generador_pd.generate(data_pd, out_docx, out_pdf)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 532, in generate
+    setup_header_footer(doc, modulo_nombre, ciclo_nombre, curso_academico)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 144, in setup_header_footer
+    tbl = header.add_table(rows=2, cols=3, width=Cm(18))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: BlockItemContainer.add_table() missing 1 required positional argument: 'width'
+--- ERROR IN GENERATE_PDF! type=programacion ---
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\pdf.py", line 123, in generate_pdf
+    generador_pd.generate(data_pd, out_docx, out_pdf)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 532, in generate
+    setup_header_footer(doc, modulo_nombre, ciclo_nombre, curso_academico)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 144, in setup_header_footer
+    tbl = header.add_table(rows=2, cols=3, width=Cm(18))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: BlockItemContainer.add_table() missing 1 required positional argument: 'width'
+--- ERROR IN GENERATE_PDF! type=programacion ---
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\pdf.py", line 123, in generate_pdf
+    generador_pd.generate(data_pd, out_docx, out_pdf)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 532, in generate
+    normal.font.size = Pt(11)
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 144, in setup_header_footer
+    print("DEBUG: Antes de header.add_table", flush=True)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: BlockItemContainer.add_table() missing 1 required positional argument: 'width'
+--- ERROR IN GENERATE_PDF! type=programacion ---
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\pdf.py", line 127, in generate_pdf
+    generador_pd.generate(data_pd, out_docx, out_pdf)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 618, in generate
+    build_sections(doc, data)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 343, in build_sections
+    widths = [Cm(2), Cm(14), Cm(2)]
+              ^^
+UnboundLocalError: cannot access local variable 'Cm' where it is not associated with a value
+--- ERROR IN GENERATE_PDF! type=programacion ---
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\pdf.py", line 127, in generate_pdf
+    generador_pd.generate(data_pd, out_docx, out_pdf)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 618, in generate
+    build_sections(doc, data)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 343, in build_sections
+    widths = [Cm(2), Cm(14), Cm(2)]
+              ^^
+UnboundLocalError: cannot access local variable 'Cm' where it is not associated with a value
+--- ERROR IN GENERATE_PDF! type=programacion ---
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\pdf.py", line 127, in generate_pdf
+    generador_pd.generate(data_pd, out_docx, out_pdf)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 618, in generate
+    build_sections(doc, data)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 343, in build_sections
+    widths = [Cm(2), Cm(14), Cm(2)]
+              ^^
+UnboundLocalError: cannot access local variable 'Cm' where it is not associated with a value
+--- ERROR IN GENERATE_PDF! type=programacion ---
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP\backend\routers\pdf.py", line 127, in generate_pdf
+    generador_pd.generate(data_pd, out_docx, out_pdf)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 618, in generate
+    build_sections(doc, data)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "c:\GD-rsp\APP\backend\generador_pd.py", line 343, in build_sections
+    widths = [Cm(2), Cm(14), Cm(2)]
+              ^^
+UnboundLocalError: cannot access local variable 'Cm' where it is not associated with a value

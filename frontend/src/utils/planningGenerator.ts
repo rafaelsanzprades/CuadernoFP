@@ -57,6 +57,14 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
   const pad = (n: number) => String(n).padStart(2, "0");
   const monthKeys = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
 
+  let simulatedToday = new Date();
+  if (info_fechas.fin_curso) {
+    const finDate = parseDate(info_fechas.fin_curso);
+    if (finDate) {
+      simulatedToday = new Date(finDate.getFullYear(), 4, 2); // Month 4 is May (0-indexed)
+    }
+  }
+
   // Prepare a queue of UDs with remaining hours
   let totalUdHours = 0;
   const udQueue = df_ud.map((ud: any) => {
@@ -71,7 +79,7 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
 
   const newPlanningLedger: Record<string, string[]> = {};
   
-  // Track predicted hours per month per UD: { id_ud: { Sep_Prv: 0, ... } }
+  // Track predicted and imparted hours per month per UD: { id_ud: { Sep_Prv: 0, Sep_Imp: 0, ... } }
   const prvTracker: Record<string, Record<string, number>> = {};
   udQueue.forEach(ud => {
     prvTracker[ud.id_ud] = {};
@@ -90,10 +98,8 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
     const isFestivo = !!calendar_notes[`f_${lookupDateStr}`];
 
     const dayKeyMap = ["lunes", "martes", "miercoles", "jueves", "viernes", "Lun", "Mar", "Mié", "Jue", "Vie"];
-    // Note: scheduleSimulator uses dayKeyMap[dayIndex] or dayKeyMap[dayIndex+5]
     let horarioStr = horario[dayKeyMap[dayIndex]] || horario[dayKeyMap[dayIndex+5]] || "";
     
-    // In demo files, 'horario' uses "Lun", "Mar", "Mié", "Jue", "Vie" mapping directly to numbers, e.g. "Lun": "2"
     let hours = 0;
     if (horarioStr) {
       if (!isNaN(Number(horarioStr))) {
@@ -114,13 +120,19 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
 
     if (isFestivo || hours <= 0) return;
 
+    const isPastOrToday = d.getTime() <= simulatedToday.getTime();
+
     // Check FEOE logic
     const isFeoe = inRange(d, feoS, feoE);
     if (isFeoe && docencia_dual === 'sin_docencia') {
       newPlanningLedger[lookupDateStr] = ["FEOE"];
       const monthPrefix = monthKeys[d.getMonth()];
-      const key = `${monthPrefix}_Prv`;
-      prvTracker["FEOE"][key] = (prvTracker["FEOE"][key] || 0) + hours;
+      const prvKey = `${monthPrefix}_Prv`;
+      const impKey = `${monthPrefix}_Imp`;
+      prvTracker["FEOE"][prvKey] = (prvTracker["FEOE"][prvKey] || 0) + hours;
+      if (isPastOrToday) {
+        prvTracker["FEOE"][impKey] = (prvTracker["FEOE"][impKey] || 0) + hours;
+      }
       return; // Skip consuming UD hours
     }
 
@@ -131,22 +143,25 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
     while (hoursLeft > 0 && currentUdIndex < udQueue.length) {
       const currentUd = udQueue[currentUdIndex];
       const monthPrefix = monthKeys[d.getMonth()];
-      const key = `${monthPrefix}_Prv`;
+      const prvKey = `${monthPrefix}_Prv`;
+      const impKey = `${monthPrefix}_Imp`;
 
       if (!assignedUds.includes(currentUd.id_ud)) {
         assignedUds.push(currentUd.id_ud);
       }
 
-      if (currentUd.h_rem > hoursLeft) {
-        currentUd.h_rem -= hoursLeft;
-        prvTracker[currentUd.id_ud][key] = (prvTracker[currentUd.id_ud][key] || 0) + hoursLeft;
-        totalScheduledHours += hoursLeft;
-        hoursLeft = 0;
-      } else {
-        hoursLeft -= currentUd.h_rem;
-        prvTracker[currentUd.id_ud][key] = (prvTracker[currentUd.id_ud][key] || 0) + currentUd.h_rem;
-        totalScheduledHours += currentUd.h_rem;
-        currentUd.h_rem = 0;
+      const assignedNow = Math.min(hoursLeft, currentUd.h_rem);
+      
+      currentUd.h_rem -= assignedNow;
+      prvTracker[currentUd.id_ud][prvKey] = (prvTracker[currentUd.id_ud][prvKey] || 0) + assignedNow;
+      if (isPastOrToday) {
+        prvTracker[currentUd.id_ud][impKey] = (prvTracker[currentUd.id_ud][impKey] || 0) + assignedNow;
+      }
+      
+      totalScheduledHours += assignedNow;
+      hoursLeft -= assignedNow;
+
+      if (currentUd.h_rem <= 0) {
         currentUdIndex++; // Fully consumed, move to next UD
       }
     }
@@ -157,48 +172,37 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
   });
 
   // 4. Build new df_sgmt
-  // We want to preserve existing _Imp values.
-  const oldDfSgmt = cursoData.df_sgmt || [];
-  
   const newDfSgmt: any[] = [];
+  const months = ["Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "May", "Jun"];
 
   // Add UDs
   df_ud.forEach((ud: any) => {
     const id = ud.id_ud;
-    const oldRow = oldDfSgmt.find((r: any) => r.id_ud === id) || {};
-    
     const newRow: any = {
       id_ud: id,
-      horas_ud: ud.duracion || ud.horas_ud || 0,
-      ...oldRow // Keep old data including _Imp
+      horas_ud: ud.duracion || ud.horas_ud || 0
     };
 
-    // Overwrite _Prv fields
-    const months = ["Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "May", "Jun"];
     months.forEach(m => {
       newRow[`${m}_Prv`] = prvTracker[id]?.[`${m}_Prv`] || 0;
-      if (newRow[`${m}_Imp`] === undefined) newRow[`${m}_Imp`] = 0;
+      newRow[`${m}_Imp`] = prvTracker[id]?.[`${m}_Imp`] || 0;
     });
 
     newDfSgmt.push(newRow);
   });
 
-  // Add FEOE row if it has any hours or if it existed before
+  // Add FEOE row if it has any hours
   const hasFeoeHours = Object.keys(prvTracker["FEOE"]).length > 0;
-  const oldFeoeRow = oldDfSgmt.find((r: any) => String(r.id_ud).includes("FEOE")) || null;
-  
-  if (hasFeoeHours || oldFeoeRow) {
+  if (hasFeoeHours) {
     const feoeRow: any = {
-      id_ud: "FEOE (Sin docencia)",
-      horas_ud: "-", // or calculate sum of FEOE hours
-      ...(oldFeoeRow || {})
+      id_ud: `FEOE (${docencia_dual === 'con_docencia' ? 'Con docencia' : 'Sin docencia'})`,
     };
-    const months = ["Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "May", "Jun"];
     let sumPrv = 0;
     months.forEach(m => {
       const prv = prvTracker["FEOE"]?.[`${m}_Prv`] || 0;
+      const imp = prvTracker["FEOE"]?.[`${m}_Imp`] || 0;
       feoeRow[`${m}_Prv`] = prv;
-      if (feoeRow[`${m}_Imp`] === undefined) feoeRow[`${m}_Imp`] = 0;
+      feoeRow[`${m}_Imp`] = imp;
       sumPrv += prv;
     });
     feoeRow.horas_ud = sumPrv || "-";

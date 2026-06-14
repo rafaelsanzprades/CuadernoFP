@@ -11,6 +11,7 @@ import { Alumnado } from "@/types";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Skeleton } from "@/components/ui/Skeleton";
+import { curriculos } from "@/data/curriculos";
 
 type DocumentItem = {
   name: string;
@@ -148,7 +149,7 @@ export default function DocumentosPage() {
       setPreviewFilename(displayFilename);
     } catch (err) {
       console.error(err);
-      toast.error("Error al cargar la previsualización del documento.");
+      toast.error("Error al cargar la previsualización del documento. Verifica la conexión con el backend.");
     } finally {
       setDownloadingStr(null);
     }
@@ -161,6 +162,39 @@ export default function DocumentosPage() {
       let url = `${process.env.NEXT_PUBLIC_API_URL}/api/pdf?type=${type}`;
       if (al_id) url += `&al_id=${al_id}`;
 
+      // Find matching curriculum data for the active module
+      let activeCurriculoData: any = {};
+      if (type === 'programacion') {
+        const modId = moduleData?.info_modulo?.codigo_modulo; // this is the module code
+        let foundCurriculo = null;
+        let foundModulo = null;
+        
+        for (const [key, curr] of Object.entries(curriculos)) {
+          const mod = curr.modulos.find((m) => m.codigo === modId);
+          if (mod) {
+            foundCurriculo = curr;
+            foundModulo = mod;
+            break;
+          }
+        }
+        
+        if (foundCurriculo) {
+          const currAny = foundCurriculo as any;
+          activeCurriculoData = {
+            boa_articles: currAny.boa_articles || {},
+            competencias_cpps: currAny.competencias_cpps || [],
+            objetivos_generales_og: currAny.objetivos_generales_og || [],
+            unidades_formativas: foundModulo?.unidades_formativas || []
+          };
+        }
+      }
+
+      const { planning_ledger, df_sgmt, df_sesiones, ...restCursoData } = cursoData || {} as any;
+      const dynamicCursoData = {
+        ...restCursoData,
+        curriculo_data: activeCurriculoData
+      };
+
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -168,7 +202,7 @@ export default function DocumentosPage() {
         },
         body: JSON.stringify({
           module_data: moduleData || {},
-          curso_data: cursoData || {},
+          curso_data: dynamicCursoData,
           fecha_corte: fechaCorte || null
         })
       });
@@ -201,7 +235,7 @@ export default function DocumentosPage() {
       setPreviewFilename(filename);
     } catch (err) {
       console.error(err);
-      toast.error("Error al generar el PDF. Asegúrate de que el backend está configurado.");
+      toast.error("Error al generar el PDF. Asegúrate de que el backend está configurado correctamente.");
     } finally {
       setDownloadingStr(null);
     }

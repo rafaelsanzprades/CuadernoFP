@@ -80,7 +80,7 @@ export default function AgendaPage() {
             {/* Título */}
             <div>
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> Agenda de clase
+                <span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> Agenda
               </h1>
               <p className="text-muted mt-2 text-lg">Revisa lo que toca impartir hoy y el estado general de tu clase.</p>
             </div>

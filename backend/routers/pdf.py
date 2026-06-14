@@ -111,8 +111,12 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None):
                 "df_ud": module_data.get("df_ud") or [],
                 "df_act": module_data.get("df_act") or [],
                 "df_ce": module_data.get("df_ce") or [],
+                "df_sgmt": curso_data.get("df_sgmt") or [],
+                "df_sesiones": module_data.get("df_sesiones") or [],
+                "config_contexto": curso_data.get("config_contexto") or {},
                 "config_redondeo": curso_data.get("config_redondeo") or {"nota_aprobado": 5.0, "umbral_redondeo": 4.5},
-                "info_modulo": module_data.get("info_modulo") or {}
+                "info_modulo": module_data.get("info_modulo") or {},
+                "curriculo_data": curso_data.get("curriculo_data") or {}
             }
             
             with tempfile.TemporaryDirectory() as tmpdir:
