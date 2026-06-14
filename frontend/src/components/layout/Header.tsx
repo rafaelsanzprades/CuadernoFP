@@ -192,7 +192,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
           <button
             onClick={toggleSidebar}
             className="lg:hidden text-muted hover:text-foreground p-2 rounded-lg hover:bg-foreground/5 transition-colors shrink-0"
-            aria-label="Toggle sidebar" aria-expanded={isSidebarOpen} aria-controls="sidebar"
+            aria-label="Toggle sidebar" aria-expanded={isSidebarOpen} aria-controls="sidebar" tabIndex={0}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isSidebarOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
@@ -289,7 +289,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
               onClick={() => undo()}
               disabled={pastStates.length === 0}
               className={`p-2 rounded-md transition-colors ${pastStates.length > 0 ? 'text-foreground hover:bg-foreground/10 cursor-pointer' : 'text-muted opacity-50 cursor-not-allowed'}`}
-              title="Deshacer (Ctrl+Z)" aria-label="Deshacer"
+              title="Deshacer (Ctrl+Z)" aria-label="Deshacer" tabIndex={0}
             >
               <Undo2 size={16} />
             </button>
@@ -297,7 +297,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
               onClick={() => redo()}
               disabled={futureStates.length === 0}
               className={`p-2 rounded-md transition-colors ${futureStates.length > 0 ? 'text-foreground hover:bg-foreground/10 cursor-pointer' : 'text-muted opacity-50 cursor-not-allowed'}`}
-              title="Rehacer (Ctrl+Y)" aria-label="Rehacer"
+              title="Rehacer (Ctrl+Y)" aria-label="Rehacer" tabIndex={0}
             >
               <Redo2 size={16} />
             </button>
