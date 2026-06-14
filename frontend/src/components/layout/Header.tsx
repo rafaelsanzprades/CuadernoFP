@@ -238,15 +238,6 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
                 </span>
               </div>
             </Link>
-
-          {/* Busqueda global */}
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Buscar..." aria-label="Buscar en la aplicación" role="searchbox"
-              className="bg-foreground/5 border border-foreground/10 rounded-lg px-3 py-1.5 text-sm text-foreground placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent/50 w-40"
-            />
-          </div>
           </div>
 
           {/* Nombres del módulo y curso (Oculto en pantallas muy pequeñas, con ellipsis si es muy largo) */}
