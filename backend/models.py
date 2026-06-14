@@ -272,7 +272,7 @@ class LearningOutcomeItem(Base):
     id_ra = Column(String, index=True)
     desc_ra = Column(String)
     peso_ra = Column(String)
-    is_dual = Column(String)
+    is_dual = Column(Boolean, default=False)
     data = Column(JSON, default={})
 
 class EvaluationCriterionItem(Base):
