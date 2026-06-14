@@ -138,6 +138,21 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
         }
       } else if ((e.ctrlKey || e.metaKey) && e.key === 'y') {
         if (futureStates.length > 0) redo();
+      } else if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
+        e.preventDefault();
+        // Focus search input
+        const searchInput = document.querySelector('input[placeholder="Buscar..."]') as HTMLInputElement;
+        if (searchInput) {
+          searchInput.focus();
+        }
+      } else if ((e.ctrlKey || e.metaKey) && e.key === '/') {
+        e.preventDefault();
+        // Navigate to help
+        window.location.href = '/ayuda';
+      } else if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        // Toggle command palette (placeholder)
+        toast('Comando palette no implementado aún');
       }
     };
     window.addEventListener('keydown', handleKeyDown);
