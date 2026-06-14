@@ -85,11 +85,11 @@ export default function SeguimientoPage() {
     );
   }
 
+  const { df_sgmt, planningLedger } = useDynamicPlanning();
+
   if (loading || !moduleData || !cursoData) {
     return <LoadingSpinner text="Cargando datos de seguimiento..." />;
   }
-
-  const { df_sgmt, planningLedger } = useDynamicPlanning();
   const daily_ledger = cursoData?.daily_ledger || {};
   const planning_ledger = planningLedger;
   const info_fechas = cursoData?.info_fechas || {};
