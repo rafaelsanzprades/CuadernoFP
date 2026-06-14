@@ -257,21 +257,62 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
           </div>
         </div>
 
-        {/* Right Side: Guardar + Undo/Redo + Tema */}
-        <div className="flex justify-end items-center gap-3 shrink-0">
-          {dataSource !== 'demo' && (
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleSave}
-              disabled={isSaving}
-              className="glass-button bg-[var(--accent-color)]/10 text-[var(--accent-color)] border-[var(--accent-color)]/30 hover:bg-[var(--accent-color)]/20 font-semibold py-1.5 px-4 text-sm rounded-lg flex items-center gap-2 transition-all"
-            >
-              <span>{isSaving ? <><span className="inline-flex"><Hourglass className="w-[1.2em] h-[1.2em] mr-1" /></span></> : <><span className="inline-flex"><Save className="w-[1.2em] h-[1.2em] mr-1" /></span></>}</span>
-              {isSaving ? "Guardando..." : "Guardar"}
-            </motion.button>
-          )}
+          {/* Botón Guardar */}
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleSave}
+            disabled={isSaving}
+            className="glass-button bg-[var(--accent-color)]/10 text-[var(--accent-color)] border-[var(--accent-color)]/30 hover:bg-[var(--accent-color)]/20 font-semibold py-1.5 px-4 text-sm rounded-lg flex items-center gap-2 transition-all"
+          >
+            <span>{isSaving ? <><span className="inline-flex"><Hourglass className="w-[1.2em] h-[1.2em] mr-1" /></span></> : <><span className="inline-flex"><Save className="w-[1.2em] h-[1.2em] mr-1" /></span></>}</span>
+            {isSaving ? "Guardando..." : "Guardar"}
+          </motion.button>
 
+          {/* Búsqueda global - ocupa todo el espacio disponible */}
+          <div className="relative flex-1 min-w-0 mx-4">
+            <input
+              type="text"
+              placeholder="Buscar..."
+              aria-label="Buscar en la aplicación"
+              role="searchbox"
+              value={searchQuery}
+              onChange={(e) => {
+                const query = e.target.value;
+                setSearchQuery(query);
+                const results = searchGlobal(query);
+                setSearchResults(results);
+                setShowResults(results.length > 0);
+              }}
+              onFocus={() => setShowResults(searchResults.length > 0)}
+              onBlur={() => setTimeout(() => setShowResults(false), 200)}
+              className="bg-foreground/5 border border-[var(--glass-border)] rounded-lg px-3 py-1.5 text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-accent/50 w-full"
+            />
+            {showResults && searchResults.length > 0 && (
+              <div className="absolute top-full left-0 right-0 mt-1 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto">
+                {searchResults.map((result, index) => (
+                  <div
+                    key={index}
+                    className="px-3 py-2 hover:bg-foreground/10 cursor-pointer text-sm"
+                    onClick={() => {
+                      if (result.href) {
+                        router.push(result.href);
+                        setSearchQuery("");
+                        setShowResults(false);
+                      }
+                    }}
+                  >
+                    <div className="font-medium text-[var(--text-primary)]">{result.title}</div>
+                    {result.subtitle && (
+                      <div className="text-xs text-[var(--text-muted)]">{result.subtitle}</div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        {/* Right Side: Undo/Redo + Tema */}
+        <div className="flex justify-end items-center gap-3 shrink-0">
           {moduleData && dataSource !== 'demo' && (
             <div className="hidden md:flex items-center">
               {autosaveStatus === "saved" && <span className="text-success text-sm font-medium"><span className="inline-flex"><Cloud className="w-[1.2em] h-[1.2em] mr-1" /></span> Guardado</span>}
@@ -300,48 +341,6 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
             </button>
           </div>
 
-          {/* Busqueda global */}
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Buscar..."
-              aria-label="Buscar en la aplicación"
-              role="searchbox"
-              value={searchQuery}
-              onChange={(e) => {
-                const query = e.target.value;
-                setSearchQuery(query);
-                const results = searchGlobal(query);
-                setSearchResults(results);
-                setShowResults(results.length > 0);
-              }}
-              onFocus={() => setShowResults(searchResults.length > 0)}
-              onBlur={() => setTimeout(() => setShowResults(false), 200)}
-              className="bg-foreground/5 border border-[var(--glass-border)] rounded-lg px-3 py-1.5 text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-accent/50 w-40"
-            />
-            {showResults && searchResults.length > 0 && (
-              <div className="absolute top-full left-0 right-0 mt-1 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto">
-                {searchResults.map((result, index) => (
-                  <div
-                    key={index}
-                    className="px-3 py-2 hover:bg-foreground/10 cursor-pointer text-sm"
-                    onClick={() => {
-                      if (result.href) {
-                        router.push(result.href);
-                        setSearchQuery("");
-                        setShowResults(false);
-                      }
-                    }}
-                  >
-                    <div className="font-medium text-[var(--text-primary)]">{result.title}</div>
-                    {result.subtitle && (
-                      <div className="text-xs text-[var(--text-muted)]">{result.subtitle}</div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
 
           {mounted && (
             <motion.button
