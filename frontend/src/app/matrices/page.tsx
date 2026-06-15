@@ -66,7 +66,7 @@ export default function MatricesPage() {
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4">
                 <Calculator className="w-16 h-16 text-muted-foreground opacity-50" />
                 <h2 className="text-2xl font-bold mb-4">No hay módulo seleccionado</h2>
-                <p className="text-muted">Por favor, ve a la sección de Datos y selecciona un mÁ³dulo PD.</p>
+                <p className="text-muted">Por favor, ve a la sección de Datos y selecciona un módulo PD.</p>
               </Card>
             </MotionWrapper>
           </main>
@@ -95,7 +95,7 @@ export default function MatricesPage() {
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <span className="inline-flex"><Calculator className="w-[1.2em] h-[1.2em] mr-1" /></span> Matrices OG- RA- CE- UD
               </h1>
-              <p className="text-muted mt-2 text-lg">Relación y ponderación entre los RA, CE y las diferentes UD del mÁ³dulo.</p>
+              <p className="text-muted mt-2 text-lg">Relación y ponderación entre los RA, CE y las diferentes UD del módulo.</p>
             </div>
 
             <Tabs value={activeTab} onValueChange={setActiveTab}>
@@ -227,7 +227,7 @@ export default function MatricesPage() {
                         setAllCeOpen(!allCeOpen);
                       }}
                     >
-                      <span>{allCeOpen ? 'â–²' : 'â–¼'}</span>
+                      <span>{allCeOpen ? '▲' : '▼'}</span>
                       {allCeOpen ? 'Colapsar todas' : 'Expandir todas'}
                     </Button>
                   </div>
@@ -255,9 +255,9 @@ export default function MatricesPage() {
                             <div className="flex items-center gap-6 text-sm">
                               <span className="text-muted">{ceForRa.length} CE</span>
                               <span className={`px-2 py-1 rounded ${totalPeso === 100 ? 'bg-success/10 text-success' : 'bg-danger/10 text-danger'}`}>
-                                Î£ {totalPeso.toFixed(0)}%
+                                Σ {totalPeso.toFixed(0)}%
                               </span>
-                              <span className={`transition-transform duration-300 text-muted ${openCEs.has(ra.id_ra) ? 'rotate-180' : ''}`}>â–¼</span>
+                              <span className={`transition-transform duration-300 text-muted ${openCEs.has(ra.id_ra) ? 'rotate-180' : ''}`}>▼</span>
                             </div>
                           </div>
 
@@ -364,7 +364,7 @@ export default function MatricesPage() {
                                                 className="text-danger hover:text-danger font-bold"
                                                 title="Eliminar CE"
                                               >
-                                                Á—
+                                                ×
                                               </button>
                                             </td>
                                           </tr>
@@ -583,7 +583,7 @@ export default function MatricesPage() {
               </div>
             )}
 
-            {/* â”€â”€ RAs â†” UDs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+            {/* ── RAs ↔ UDs ────────────────────────────────────── */}
             {activeTab === "relacion" && (
               <div className="animate-in fade-in duration-500">
                 <Card className="p-6 border-t-4 border-t-amber-500">
@@ -622,7 +622,7 @@ export default function MatricesPage() {
               </div>
             )}
 
-            {/* â”€â”€ Contribución de RA en OG â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+            {/* ── Contribución de RA en OG ────────────────────────────────────── */}
             {activeTab === "contribucion" && (
               <div className="animate-in fade-in duration-500">
                 <RaOgMatrix />
