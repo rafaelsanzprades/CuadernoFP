@@ -10,11 +10,15 @@ import { Input } from "@/components/ui/Input";
 
 export function GoogleDriveSyncPanel() {
   const { 
-    isDriveConnected, driveUserEmail, autoSyncDrive, googleClientId,
+    isDriveConnected, driveUserEmail, autoSyncDrive, googleClientId, dataSource,
     setDriveConnected, setDriveUserEmail, setAutoSyncDrive, setGoogleClientId
   } = useAppStore();
 
   const handleConnect = async () => {
+    if (dataSource === 'demo') {
+      toast.error("No puedes sincronizar con Drive en modo DEMO.");
+      return;
+    }
     if (!googleClientId) {
       toast.error("Por favor, introduce tu Google Client ID primero.");
       return;
@@ -41,6 +45,10 @@ export function GoogleDriveSyncPanel() {
   };
 
   const toggleAutoSync = () => {
+    if (dataSource === 'demo') {
+      toast.error("El autoguardado no está disponible en modo DEMO.");
+      return;
+    }
     if (!isDriveConnected) {
       toast.error("Debes conectar tu cuenta de Google Drive primero.");
       return;
@@ -91,7 +99,11 @@ export function GoogleDriveSyncPanel() {
                 Desconectar
               </Button>
             ) : (
-              <Button onClick={handleConnect} className="bg-info/20 text-info hover:bg-info/30 border border-info/30">
+              <Button 
+                onClick={handleConnect} 
+                className={`border transition-all ${dataSource === 'demo' ? 'bg-muted/20 text-muted border-muted/30 cursor-not-allowed opacity-70' : 'bg-info/20 text-info hover:bg-info/30 border-info/30'}`}
+                title={dataSource === 'demo' ? "Acción no permitida en modo DEMO" : "Conectar cuenta"}
+              >
                 Conectar cuenta
               </Button>
             )}
@@ -111,7 +123,11 @@ export function GoogleDriveSyncPanel() {
           </div>
           <button
             onClick={toggleAutoSync}
-            className={`w-14 h-8 rounded-full p-1 transition-colors ${autoSyncDrive ? "bg-success" : "bg-muted/30"}`}
+            disabled={dataSource === 'demo'}
+            className={`w-14 h-8 rounded-full p-1 transition-colors ${
+              dataSource === 'demo' ? "bg-muted/20 cursor-not-allowed opacity-50" : autoSyncDrive ? "bg-success" : "bg-muted/30"
+            }`}
+            title={dataSource === 'demo' ? "Acción no permitida en modo DEMO" : ""}
           >
             <div className={`w-6 h-6 bg-white rounded-full shadow-md transform transition-transform ${autoSyncDrive ? "translate-x-6" : "translate-x-0"}`} />
           </button>

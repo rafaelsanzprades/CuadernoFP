@@ -257,19 +257,28 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
           </div>
         </div>
 
-          {/* Botón Guardar - solo en modo datos reales */}
-          {dataSource !== 'demo' && (
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleSave}
-              disabled={isSaving}
-              className="glass-button bg-[var(--accent-color)]/10 text-[var(--accent-color)] border-[var(--accent-color)]/30 hover:bg-[var(--accent-color)]/20 font-semibold py-1.5 px-4 text-sm rounded-lg flex items-center gap-2 transition-all"
-            >
-              <span>{isSaving ? <><span className="inline-flex"><Hourglass className="w-[1.2em] h-[1.2em] mr-1" /></span></> : <><span className="inline-flex"><Save className="w-[1.2em] h-[1.2em] mr-1" /></span></>}</span>
-              {isSaving ? "Guardando..." : "Guardar"}
-            </motion.button>
-          )}
+          {/* Botón Guardar - Deshabilitado en modo Demo */}
+          <motion.button
+            whileHover={dataSource !== 'demo' && !isSaving ? { scale: 1.05 } : {}}
+            whileTap={dataSource !== 'demo' && !isSaving ? { scale: 0.95 } : {}}
+            onClick={() => {
+              if (dataSource === 'demo') {
+                toast.error("No puedes guardar datos de Catálogo o Demo.");
+                return;
+              }
+              handleSave();
+            }}
+            disabled={isSaving}
+            className={`glass-button font-semibold py-1.5 px-4 text-sm rounded-lg flex items-center gap-2 transition-all ${
+              dataSource === 'demo' 
+                ? 'bg-muted/10 text-muted border-muted/20 cursor-not-allowed opacity-70' 
+                : 'bg-[var(--accent-color)]/10 text-[var(--accent-color)] border-[var(--accent-color)]/30 hover:bg-[var(--accent-color)]/20'
+            }`}
+            title={dataSource === 'demo' ? "Acción no permitida en modo DEMO" : "Guardar cambios en local"}
+          >
+            <span>{isSaving ? <><span className="inline-flex"><Hourglass className="w-[1.2em] h-[1.2em] mr-1" /></span></> : <><span className="inline-flex"><Save className="w-[1.2em] h-[1.2em] mr-1" /></span></>}</span>
+            {isSaving ? "Guardando..." : "Guardar"}
+          </motion.button>
 
           {/* Right Side: Búsqueda + Undo/Redo + Tema */}
         <div className="flex justify-end items-center gap-3 shrink-0">
@@ -315,12 +324,18 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
               </div>
             )}
           </div>
-          {moduleData && dataSource !== 'demo' && (
+          {moduleData && (
             <div className="hidden md:flex items-center">
-              {autosaveStatus === "saved" && <span className="text-success text-sm font-medium"><span className="inline-flex"><Cloud className="w-[1.2em] h-[1.2em] mr-1" /></span> Guardado</span>}
-              {autosaveStatus === "saving" && <span className="text-warning text-sm font-medium animate-pulse">⏳ Guardando...</span>}
-              {autosaveStatus === "error" && <span className="text-danger text-sm font-medium"><span className="inline-flex"><XCircle className="w-[1.2em] h-[1.2em] mr-1" /></span> Error al guardar</span>}
-              {autosaveStatus === "idle" && <span className="text-[var(--text-muted)] text-sm font-medium"><span className="inline-flex"><Cloud className="w-[1.2em] h-[1.2em] mr-1" /></span> Sincronizado</span>}
+              {dataSource === 'demo' ? (
+                <span className="text-[var(--text-muted)] text-sm font-medium" title="Modo Solo Lectura"><span className="inline-flex"><Cloud className="w-[1.2em] h-[1.2em] mr-1 opacity-50" /></span> Solo Lectura</span>
+              ) : (
+                <>
+                  {autosaveStatus === "saved" && <span className="text-success text-sm font-medium"><span className="inline-flex"><Cloud className="w-[1.2em] h-[1.2em] mr-1" /></span> Guardado</span>}
+                  {autosaveStatus === "saving" && <span className="text-warning text-sm font-medium animate-pulse">⏳ Guardando...</span>}
+                  {autosaveStatus === "error" && <span className="text-danger text-sm font-medium"><span className="inline-flex"><XCircle className="w-[1.2em] h-[1.2em] mr-1" /></span> Error al guardar</span>}
+                  {autosaveStatus === "idle" && <span className="text-[var(--text-muted)] text-sm font-medium"><span className="inline-flex"><Cloud className="w-[1.2em] h-[1.2em] mr-1" /></span> Sincronizado</span>}
+                </>
+              )}
             </div>
           )}
 
