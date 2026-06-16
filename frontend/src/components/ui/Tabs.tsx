@@ -93,3 +93,27 @@ export function TabsTrigger({
     </button>
   );
 }
+
+export function TabsContent({
+  value,
+  children,
+  className = "",
+}: {
+  value: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const context = useContext(TabsContext);
+  if (!context) throw new Error("TabsContent must be used within a Tabs component");
+
+  if (context.activeTab !== value) return null;
+
+  return (
+    <div
+      role="tabpanel"
+      className={`mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${className}`}
+    >
+      {children}
+    </div>
+  );
+}

@@ -7,7 +7,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import {
   type CurriculumTitulo,
@@ -550,7 +550,9 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
           >
             <option value="">-- Selecciona Título --</option>
             {degreesFromApi.map((d) => (
-              <option key={d.id} value={d.code ?? d.name}>{d.name}</option>
+              <option key={d.id} value={d.code ?? d.name}>
+                {formatDegreeName(d.code, d.name)}
+              </option>
             ))}
           </select>
         </div>
@@ -691,7 +693,9 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
           >
             <option value="">-- Selecciona Título --</option>
             {degreesFromApi.map((d) => (
-              <option key={d.id} value={d.code ?? d.name}>{d.name}</option>
+              <option key={d.id} value={d.code ?? d.name}>
+                {formatDegreeName(d.code, d.name)}
+              </option>
             ))}
           </select>
         </div>
@@ -748,46 +752,115 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
             </div>
           </div>
 
-          <div className="space-y-3">
-            {modulo.ra?.map((raItem: any) => {
-              const isExpanded = expandedRAs.has(raItem.id);
-              return (
-                <Card key={raItem.id} className="overflow-hidden">
-                  <button
-                    onClick={() => toggleRA(raItem.id)}
-                    className="w-full p-4 flex items-center justify-between gap-4 hover:bg-foreground/5 transition-colors text-left"
-                  >
-                    <div className="flex items-center gap-3 min-w-0 flex-1">
-                      <span className="text-xs font-medium text-accent bg-accent/10 border border-accent/20 px-2 py-0.5 rounded shrink-0">
-                        {raItem.id}
-                      </span>
-                      <p className="text-sm text-foreground leading-snug">{raItem.descripcion}</p>
-                    </div>
-                    <div className="flex items-center gap-3 shrink-0">
-                      <span className="text-xs text-muted">{raItem.ce?.length || 0} CE</span>
-                      {isExpanded ? (
-                        <ChevronUp className="w-4 h-4 text-muted" />
-                      ) : (
-                        <ChevronDown className="w-4 h-4 text-muted" />
-                      )}
-                    </div>
-                  </button>
-
-                  {isExpanded && (
-                    <div className="border-t border-[var(--glass-border)] p-4 space-y-2 animate-in slide-in-from-top-1 duration-200">
-                      <p className="text-xs font-semibold text-muted tracking-wider">Criterios de Evaluación</p>
-                      {raItem.ce?.map((ceItem: any) => (
-                        <div key={ceItem.id} className="flex items-start gap-2 text-sm bg-foreground/5 rounded-lg p-3 border border-[var(--glass-border)]">
-                          <span className="text-xs font-medium text-accent shrink-0 mt-0.5">{ceItem.id}</span>
-                          <span className="text-foreground/80">{ceItem.descripcion}</span>
+          <Tabs defaultValue="curriculo" className="w-full mt-4">
+            <TabsList className="mb-4">
+              <TabsTrigger value="curriculo">Resultados de Aprendizaje</TabsTrigger>
+              <TabsTrigger value="competencias">Competencias Acreditables</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="curriculo">
+              <div className="space-y-3">
+                {modulo.ra?.map((raItem: any) => {
+                  const isExpanded = expandedRAs.has(raItem.id);
+                  return (
+                    <Card key={raItem.id} className="overflow-hidden">
+                      <button
+                        onClick={() => toggleRA(raItem.id)}
+                        className="w-full p-4 flex items-center justify-between gap-4 hover:bg-foreground/5 transition-colors text-left"
+                      >
+                        <div className="flex items-center gap-3 min-w-0 flex-1">
+                          <span className="text-xs font-medium text-accent bg-accent/10 border border-accent/20 px-2 py-0.5 rounded shrink-0">
+                            {raItem.id}
+                          </span>
+                          <p className="text-sm text-foreground leading-snug">{raItem.descripcion}</p>
                         </div>
-                      ))}
-                    </div>
-                  )}
+                        <div className="flex items-center gap-3 shrink-0">
+                          <span className="text-xs text-muted">{raItem.ce?.length || 0} CE</span>
+                          {isExpanded ? (
+                            <ChevronUp className="w-4 h-4 text-muted" />
+                          ) : (
+                            <ChevronDown className="w-4 h-4 text-muted" />
+                          )}
+                        </div>
+                      </button>
+
+                      {isExpanded && (
+                        <div className="border-t border-[var(--glass-border)] p-4 space-y-2 animate-in slide-in-from-top-1 duration-200">
+                          <p className="text-xs font-semibold text-muted tracking-wider">Criterios de Evaluación</p>
+                          {raItem.ce?.map((ceItem: any) => (
+                            <div key={ceItem.id} className="flex items-start gap-2 text-sm bg-foreground/5 rounded-lg p-3 border border-[var(--glass-border)]">
+                              <span className="text-xs font-medium text-accent shrink-0 mt-0.5">{ceItem.id}</span>
+                              <span className="text-foreground/80">{ceItem.descripcion}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </Card>
+                  );
+                })}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="competencias">
+              {(!modulo.competencias || modulo.competencias.length === 0) ? (
+                <Card className="p-8 text-center text-muted border-dashed border-[var(--glass-border)]">
+                  <AlertTriangle className="w-8 h-8 mx-auto mb-3 opacity-50" />
+                  <p>Este módulo no tiene competencias directas asociadas para convalidación en el registro oficial.</p>
+                  <p className="text-xs mt-2 opacity-70">Es común en módulos transversales, proyecto, FCT o idiomas.</p>
                 </Card>
-              );
-            })}
-          </div>
+              ) : (
+                <div className="space-y-4">
+                  <div className="bg-blue-500/10 text-blue-500 border border-blue-500/20 rounded-lg p-3 text-sm flex items-start gap-2">
+                    <ListChecks className="w-4 h-4 mt-0.5 shrink-0" />
+                    <div>
+                      <p className="font-semibold">Opciones de Convalidación</p>
+                      <p>Para convalidar este módulo, debes cumplir con <strong>alguna</strong> de las siguientes opciones (no todas).</p>
+                    </div>
+                  </div>
+                  
+                  {modulo.competencias.map((grupo: any, i: number) => (
+                    <Card key={i} className="border border-[var(--glass-border)] overflow-hidden">
+                      <div className="bg-foreground/5 border-b border-[var(--glass-border)] p-3 px-4 flex items-center justify-between">
+                        <div>
+                          <h4 className="font-semibold text-sm">Opción {i + 1}</h4>
+                          <span className="text-xs text-muted">
+                            {grupo.es_conjunto ? "Debes acreditar TODAS estas competencias:" : "Debes acreditar esta competencia:"}
+                          </span>
+                        </div>
+                        {grupo.es_conjunto && <Badge variant="default" className="text-[10px]">Conjunto requerido</Badge>}
+                      </div>
+                      <div className="p-0">
+                        {grupo.competencias?.map((comp: any, j: number) => (
+                          <div key={j} className="p-3 px-4 border-b border-[var(--glass-border)] last:border-0 flex items-start gap-3 hover:bg-foreground/5 transition-colors">
+                            <span className="text-xs font-mono font-bold text-accent bg-accent/10 px-2 py-0.5 rounded mt-0.5 whitespace-nowrap">
+                              {comp.codigo}
+                            </span>
+                            <div>
+                              <p className="text-sm font-medium">{comp.nombre}</p>
+                              {comp.info_suprimida && (
+                                <p className="text-xs text-muted mt-1 italic border-l-2 border-warning/50 pl-2 py-0.5">
+                                  {comp.info_suprimida}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      
+                      {(grupo.otros_modulos_convalidables_codigos && grupo.otros_modulos_convalidables_codigos.length > 0) && (
+                        <div className="bg-success/10 p-3 px-4 text-xs text-success-foreground border-t border-[var(--glass-border)] flex items-start gap-2">
+                          <BookOpen className="w-3.5 h-3.5 mt-0.5 shrink-0" />
+                          <p>
+                            Con esta opción también convalidarías: <strong>{grupo.otros_modulos_convalidables_codigos.join(", ")}</strong>
+                          </p>
+                        </div>
+                      )}
+                    </Card>
+                  ))}
+                </div>
+              )}
+            </TabsContent>
+          </Tabs>
 
           <div className="flex justify-center pt-2">
             <Button

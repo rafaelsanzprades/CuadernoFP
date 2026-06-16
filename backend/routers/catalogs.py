@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
+import json
 from pydantic import BaseModel
 from database import get_db
 from models import (
@@ -134,7 +135,7 @@ def get_curriculum(degree_code: str, db: Session = Depends(get_db)):
                 ces = db.query(EvaluationCriterion).filter(EvaluationCriterion.learning_outcome_id == ra.id).all()
                 ce_data = [{"id": ce.ce_code, "descripcion": ce.description} for ce in ces]
                 ra_data.append({
-                    "id": ra.ra_number,
+                    "id": f"RA{ra.ra_number}.",
                     "descripcion": ra.description,
                     "ce": ce_data
                 })
@@ -147,12 +148,20 @@ def get_curriculum(degree_code: str, db: Session = Depends(get_db)):
                 elif "2" in str(m.curso):
                     curso_str = "2º"
                     
+            comp_data = []
+            if m.convalidation_competences:
+                try:
+                    comp_data = json.loads(m.convalidation_competences)
+                except:
+                    pass
+
             modulos_data.append({
                 "codigo": m.code,
                 "nombre": m.name,
                 "horas": m.hours,
                 "curso": curso_str, 
-                "ra": ra_data
+                "ra": ra_data,
+                "competencias": comp_data
             })
             
         return {
@@ -182,7 +191,7 @@ def get_module_curriculum(module_code: str, db: Session = Depends(get_db)):
             ces = db.query(EvaluationCriterion).filter(EvaluationCriterion.learning_outcome_id == ra.id).all()
             ce_data = [{"id": ce.ce_code, "descripcion": ce.description} for ce in ces]
             ra_data.append({
-                "id": ra.ra_number,
+                "id": f"RA{ra.ra_number}.",
                 "descripcion": ra.description,
                 "ce": ce_data
             })
@@ -194,6 +203,13 @@ def get_module_curriculum(module_code: str, db: Session = Depends(get_db)):
             elif "2" in str(module.curso):
                 curso_str = "2º"
                 
+        comp_data = []
+        if module.convalidation_competences:
+            try:
+                comp_data = json.loads(module.convalidation_competences)
+            except:
+                pass
+                
         return {
             "status": "success",
             "data": {
@@ -201,7 +217,8 @@ def get_module_curriculum(module_code: str, db: Session = Depends(get_db)):
                 "nombre": module.name,
                 "horas": module.hours,
                 "curso": curso_str,
-                "ra": ra_data
+                "ra": ra_data,
+                "competencias": comp_data
             }
         }
     except HTTPException:
