@@ -313,13 +313,15 @@ export default function EntornoTrabajoPage() {
 
               {/* Aviso de Seguridad y RGPD (Sólo en Datos Locales) */}
               {activeTab === "datos" && (
-                <div className="flex flex-col items-center justify-center text-center space-y-3 pt-12 max-w-2xl mx-auto">
-                  <ShieldAlert className="w-8 h-8 text-info" />
-                  <h3 className="text-xl font-extrabold text-foreground">Seguridad y RGPD garantizados</h3>
-                  <div className="text-base text-muted space-y-2">
-                    <p>CuadernoFP procesa toda tu información confidencial exclusivamente en tu navegador.</p>
-                    <p>Ningún dato de tu alumnado se envía a la nube (salvo que uses la Sincronización autorizada). <strong>Tú eres el dueño de tus archivos</strong>.</p>
-                    <p className="font-semibold text-info">Asegúrate de pulsar "Guardar" al finalizar tu sesión de trabajo para no perder los últimos cambios.</p>
+                <div className="flex items-start gap-4 pt-12 max-w-2xl mx-auto">
+                  <span className="text-info mt-1 shrink-0"><ShieldAlert className="w-6 h-6" /></span>
+                  <div>
+                    <h3 className="text-lg font-bold text-foreground mb-2">Seguridad y RGPD garantizados</h3>
+                    <div className="text-sm text-foreground/80 space-y-2 leading-relaxed">
+                      <p>CuadernoFP procesa toda tu información confidencial exclusivamente en tu navegador.</p>
+                      <p>Ningún dato de tu alumnado se envía a la nube (salvo que uses la Sincronización autorizada). <strong>Tú eres el dueño de tus archivos</strong>.</p>
+                      <p className="font-semibold text-info mt-2">Asegúrate de pulsar "Guardar" al finalizar tu sesión de trabajo para no perder los últimos cambios.</p>
+                    </div>
                   </div>
                 </div>
               )}

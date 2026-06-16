@@ -246,6 +246,47 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
             </Link>
           </div>
 
+          {/* Botón Guardar - Deshabilitado en modo Demo */}
+          {/* Botón Guardar / Solo Lectura */}
+          {!mounted ? (
+            <div className="w-[145px] h-[60px] bg-muted/10 rounded-lg animate-pulse shrink-0" />
+          ) : dataSource === 'demo' ? (
+            <div className="flex items-center justify-start text-left gap-2.5 px-3 py-1.5 bg-muted/10 text-muted rounded-lg border border-muted/20 shrink-0 cursor-not-allowed opacity-80 w-[145px] h-[60px]" title="Modo Solo Lectura">
+              <span className="flex items-center justify-center">
+                <Cloud className="w-5 h-5" strokeWidth={2} />
+              </span>
+              <div className="flex flex-col gap-1 items-start justify-center h-full">
+                <span className="text-base leading-none whitespace-nowrap font-extrabold">
+                  Solo
+                </span>
+                <span className="text-[0.75rem] font-bold tracking-wide leading-none uppercase">
+                  Lectura
+                </span>
+              </div>
+            </div>
+          ) : (
+            <motion.button
+              whileHover={!isSaving ? { scale: 1.05 } : {}}
+              whileTap={!isSaving ? { scale: 0.95 } : {}}
+              onClick={handleSave}
+              disabled={isSaving}
+              className="glass-button flex items-center justify-start text-left gap-2.5 px-3 py-1.5 bg-[var(--accent-color)]/10 text-[var(--accent-color)] border border-[var(--accent-color)]/30 rounded-lg shrink-0 transition-all hover:bg-[var(--accent-color)]/20 w-[145px] h-[60px]"
+              title="Guardar cambios en local"
+            >
+              <span className="flex items-center justify-center">
+                {isSaving ? <Hourglass className="w-5 h-5" strokeWidth={2} /> : <Save className="w-5 h-5" strokeWidth={2} />}
+              </span>
+              <div className="flex flex-col gap-1 items-start justify-center h-full">
+                <span className="text-base leading-none whitespace-nowrap font-extrabold">
+                  Guardar
+                </span>
+                <span className={`text-[0.70rem] font-bold tracking-wide leading-none uppercase ${isSaving ? 'opacity-100 animate-pulse text-[var(--accent-color)]' : 'opacity-0'}`}>
+                  Sincronizando
+                </span>
+              </div>
+            </motion.button>
+          )}
+
           {/* Nombres del módulo y curso (Oculto en pantallas muy pequeñas, con ellipsis si es muy largo) */}
           <div className="hidden sm:flex flex-col border-l border-foreground/10 pl-4 py-1 min-w-0">
             <span className="text-[0.95rem] font-bold text-foreground leading-tight tracking-wide truncate max-w-[200px] md:max-w-[300px] lg:max-w-[450px]" title={friendlyModuleName}>
@@ -257,33 +298,11 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
           </div>
         </div>
 
-          {/* Botón Guardar - Deshabilitado en modo Demo */}
-          <motion.button
-            whileHover={dataSource !== 'demo' && !isSaving ? { scale: 1.05 } : {}}
-            whileTap={dataSource !== 'demo' && !isSaving ? { scale: 0.95 } : {}}
-            onClick={() => {
-              if (dataSource === 'demo') {
-                toast.error("No puedes guardar datos de Catálogo o Demo.");
-                return;
-              }
-              handleSave();
-            }}
-            disabled={isSaving}
-            className={`glass-button font-semibold py-1.5 px-4 text-sm rounded-lg flex items-center gap-2 transition-all ${
-              dataSource === 'demo' 
-                ? 'bg-muted/10 text-muted border-muted/20 cursor-not-allowed opacity-70' 
-                : 'bg-[var(--accent-color)]/10 text-[var(--accent-color)] border-[var(--accent-color)]/30 hover:bg-[var(--accent-color)]/20'
-            }`}
-            title={dataSource === 'demo' ? "Acción no permitida en modo DEMO" : "Guardar cambios en local"}
-          >
-            <span>{isSaving ? <><span className="inline-flex"><Hourglass className="w-[1.2em] h-[1.2em] mr-1" /></span></> : <><span className="inline-flex"><Save className="w-[1.2em] h-[1.2em] mr-1" /></span></>}</span>
-            {isSaving ? "Guardando..." : "Guardar"}
-          </motion.button>
 
           {/* Right Side: Búsqueda + Undo/Redo + Tema */}
         <div className="flex justify-end items-center gap-3 shrink-0">
           {/* Búsqueda global */}
-          <div className="relative w-48">
+          <div className="relative w-64 md:w-80">
             <input
               type="text"
               placeholder="Buscar..."
@@ -324,18 +343,12 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
               </div>
             )}
           </div>
-          {moduleData && (
+          {mounted && moduleData && dataSource !== 'demo' && (
             <div className="hidden md:flex items-center">
-              {dataSource === 'demo' ? (
-                <span className="text-[var(--text-muted)] text-sm font-medium" title="Modo Solo Lectura"><span className="inline-flex"><Cloud className="w-[1.2em] h-[1.2em] mr-1 opacity-50" /></span> Solo Lectura</span>
-              ) : (
-                <>
-                  {autosaveStatus === "saved" && <span className="text-success text-sm font-medium"><span className="inline-flex"><Cloud className="w-[1.2em] h-[1.2em] mr-1" /></span> Guardado</span>}
-                  {autosaveStatus === "saving" && <span className="text-warning text-sm font-medium animate-pulse">⏳ Guardando...</span>}
-                  {autosaveStatus === "error" && <span className="text-danger text-sm font-medium"><span className="inline-flex"><XCircle className="w-[1.2em] h-[1.2em] mr-1" /></span> Error al guardar</span>}
-                  {autosaveStatus === "idle" && <span className="text-[var(--text-muted)] text-sm font-medium"><span className="inline-flex"><Cloud className="w-[1.2em] h-[1.2em] mr-1" /></span> Sincronizado</span>}
-                </>
-              )}
+              {autosaveStatus === "saved" && <span className="text-success text-sm font-medium"><span className="inline-flex"><Cloud className="w-[1.2em] h-[1.2em] mr-1" /></span> Guardado</span>}
+              {autosaveStatus === "saving" && <span className="text-warning text-sm font-medium animate-pulse">⏳ Guardando...</span>}
+              {autosaveStatus === "error" && <span className="text-danger text-sm font-medium"><span className="inline-flex"><XCircle className="w-[1.2em] h-[1.2em] mr-1" /></span> Error al guardar</span>}
+              {autosaveStatus === "idle" && <span className="text-[var(--text-muted)] text-sm font-medium"><span className="inline-flex"><Cloud className="w-[1.2em] h-[1.2em] mr-1" /></span> Sincronizado</span>}
             </div>
           )}
 

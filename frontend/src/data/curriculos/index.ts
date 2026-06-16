@@ -65,9 +65,11 @@ export interface CurriculumCE {
 }
 
 import { ELE203 } from "./ele203";
+import { ELE304 } from "./ele304";
 
 export const curriculos: Record<string, CurriculumTitulo> = {
   "ELE203": ELE203,
+  "ELE-23": ELE304,
 };
 
 export function getTitulo(codigo: string): CurriculumTitulo | undefined {
