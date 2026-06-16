@@ -40,7 +40,7 @@ def list_families(db: Session = Depends(get_db)):
         families = db.query(ProfessionalFamily).all()
         result = []
         for f in families:
-            degrees = db.query(Degree).filter(Degree.family_id == f.id).all()
+            degrees = db.query(Degree).filter(Degree.family_id == f.id, Degree.code.isnot(None)).all()
             result.append({
                 "id": f.id,
                 "code": f.code,

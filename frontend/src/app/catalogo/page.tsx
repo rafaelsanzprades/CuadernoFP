@@ -126,6 +126,11 @@ function CiclosContent() {
 type Degree = { id: number; name: string; code: string | null; level: string; boa_articles?: Record<string, string> | null };
 type Family = { id: number; code: string; name: string; icon_url: string; color_hex: string; degrees: Degree[] };
 
+const formatDegreeName = (code: string | null, name: string) => {
+  if (!code) return name;
+  return name.startsWith(code) ? name : `${code} - ${name}`;
+};
+
 function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string, tituloCodigo: string) => void }) {
   const [families, setFamilies] = useState<Family[]>([]);
   const [loading, setLoading] = useState(true);
@@ -205,7 +210,7 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
                         className="w-full text-left text-sm bg-foreground/5 rounded-lg p-2.5 border border-[var(--glass-border)] hover:bg-foreground/10 transition-all flex items-center justify-between gap-3 group cursor-pointer"
                       >
                         <div className="text-foreground/80 font-medium leading-tight flex-1 group-hover:text-foreground transition-colors">
-                          {degree.name}
+                          {formatDegreeName(degree.code, degree.name)}
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="text-[10px] font-bold text-foreground bg-foreground/20 border border-[var(--glass-border)] px-2 py-1 rounded shadow-inner tracking-wider">
@@ -299,7 +304,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
           >
             <option value="">-- Selecciona Título --</option>
             {degreesFromApi.map((d) => (
-              <option key={d.id} value={d.code ?? d.name}>{d.name}</option>
+              <option key={d.id} value={d.code ?? d.name}>{formatDegreeName(d.code, d.name)}</option>
             ))}
           </select>
         </div>
@@ -311,8 +316,8 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
           <div className="flex items-center justify-between bg-foreground/5 p-4 rounded-xl border border-[var(--glass-border)]">
              <div>
                <h2 className="text-xl font-bold text-foreground flex items-center gap-3">
-                 {selectedTituloObj.name}
-                 {selectedTituloObj.code && <Badge variant="default" className="font-mono">{selectedTituloObj.code}</Badge>}
+                 {formatDegreeName(selectedTituloObj.code, selectedTituloObj.name)}
+                 {selectedTituloObj.code && !selectedTituloObj.name.startsWith(selectedTituloObj.code) && <Badge variant="default" className="font-mono">{selectedTituloObj.code}</Badge>}
                </h2>
                <p className="text-sm text-muted mt-1">Detalles del currículo del BOA</p>
              </div>
