@@ -19,7 +19,24 @@ export const fileManager = {
   exportProgramacion() {
     const { activeModuleId, moduleData } = useAppStore.getState();
     if (!moduleData) return;
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(moduleData, null, 2));
+    
+    // Strip redundant texts from RAs and CEs to reduce .cddp file size
+    const exportData = JSON.parse(JSON.stringify(moduleData));
+    if (exportData.df_ra) {
+      exportData.df_ra.forEach((ra: any) => {
+        delete ra.desc_ra;
+        delete ra.Descripción;
+        delete ra.Horas; // Horas is always 0 and can be omitted
+      });
+    }
+    if (exportData.df_ce) {
+      exportData.df_ce.forEach((ce: any) => {
+        delete ce.desc_ce;
+        delete ce.Descripción;
+      });
+    }
+    
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportData, null, 2));
     const downloadAnchor = document.createElement('a');
     downloadAnchor.setAttribute("href", dataStr);
     downloadAnchor.setAttribute("download", `${activeModuleId || 'programacion'}.cddp`);
@@ -40,12 +57,83 @@ export const fileManager = {
     document.body.removeChild(downloadAnchor);
   },
 
-  importProgramacion(jsonStr: string, filename: string): boolean {
+  async importProgramacion(jsonStr: string, filename: string): Promise<boolean> {
     try {
       const parsed = JSON.parse(jsonStr);
       if (!parsed.df_ud) return false; 
       
       const id = filename.replace('.cddp', '').replace('.json', '') || "imported-pd";
+      
+      // Fetch curriculum to reconstruct descriptions
+      const moduleCode = parsed.info_modulo?.codigo || id.split('-')[0];
+      try {
+        const res = await fetch(`/api/catalog/module/${moduleCode}`);
+        if (res.ok) {
+          const catalogData = await res.json();
+          if (catalogData.status === 'success' && catalogData.data) {
+            const apiRas = catalogData.data.ra;
+            
+            // Reconstruct RAs
+            if (parsed.df_ra && Array.isArray(parsed.df_ra)) {
+              parsed.df_ra.forEach((ra: any) => {
+                const apiRa = apiRas.find((r: any) => r.id === ra.id_ra || r.id === ra.RA);
+                if (apiRa) {
+                  ra.desc_ra = apiRa.descripcion;
+                  ra.Descripción = apiRa.descripcion;
+                }
+              });
+            } else if (apiRas && apiRas.length > 0) {
+              parsed.df_ra = apiRas.map((r: any) => ({
+                id_ra: r.id, RA: r.id,
+                desc_ra: r.descripcion, Descripción: r.descripcion,
+                peso_ra: 0, "Peso (%)": 0,
+                is_dual: false
+              }));
+            }
+            
+            // Reconstruct CEs and calculate weight without decimals
+            if (parsed.df_ce && Array.isArray(parsed.df_ce)) {
+              parsed.df_ce.forEach((ce: any) => {
+                const apiRa = apiRas.find((r: any) => r.id === ce.id_ra || r.id === ce.RA);
+                if (apiRa && apiRa.ce) {
+                  const apiCe = apiRa.ce.find((c: any) => c.id === ce.id_ce || c.id === ce.CE);
+                  if (apiCe) {
+                    ce.desc_ce = apiCe.descripcion;
+                    ce.Descripción = apiCe.descripcion;
+                  }
+                  
+                  // Automatically assign equal weight without decimals if weight is 0 or undefined
+                  const peso = ce.peso_ce || ce["Peso (%)"];
+                  if (!peso) {
+                    const weight = Math.floor(100 / apiRa.ce.length);
+                    ce.peso_ce = weight;
+                    ce["Peso (%)"] = weight;
+                  }
+                }
+              });
+            } else if (apiRas && apiRas.length > 0) {
+               parsed.df_ce = [];
+               apiRas.forEach((r: any) => {
+                 if (r.ce && r.ce.length > 0) {
+                   const weight = Math.floor(100 / r.ce.length);
+                   r.ce.forEach((c: any) => {
+                     parsed.df_ce.push({
+                       id_ce: c.id, CE: c.id,
+                       id_ra: r.id, RA: r.id,
+                       desc_ce: c.descripcion, Descripción: c.descripcion,
+                       peso_ce: weight, "Peso (%)": weight,
+                       FEOE: false, UD: ""
+                     });
+                   });
+                 }
+               });
+            }
+          }
+        }
+      } catch (err) {
+        console.warn("Could not fetch curriculum for module", moduleCode);
+      }
+      
       useAppStore.getState().setActiveModuleId(id);
       useAppStore.getState().setModuleData(parsed);
       return true;
@@ -54,7 +142,7 @@ export const fileManager = {
     }
   },
 
-  importCurso(jsonStr: string, filename: string): boolean {
+  async importCurso(jsonStr: string, filename: string): Promise<boolean> {
     try {
       const parsed = JSON.parse(jsonStr);
       if (!parsed.df_al) return false;
@@ -136,8 +224,10 @@ export const fileManager = {
     setTimeout(() => this.exportCurso(), 500);
   },
 
-  importFromJson(jsonStr: string): boolean {
-    return this.importProgramacion(jsonStr, "imported-pd") || this.importCurso(jsonStr, "imported-curso");
+  async importFromJson(jsonStr: string): Promise<boolean> {
+    const successPd = await this.importProgramacion(jsonStr, "imported-pd");
+    if (successPd) return true;
+    return await this.importCurso(jsonStr, "imported-curso");
   },
 
   resetActiveDb() {

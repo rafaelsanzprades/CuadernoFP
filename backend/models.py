@@ -71,6 +71,7 @@ class Module(Base):
     code = Column(String) # ej: 0484
     name = Column(String, nullable=False) # ej: Bases de Datos
     hours = Column(Integer)
+    curso = Column(String, nullable=True) # ej: "1º", "2º", "Ambos"
     is_dual = Column(Boolean, default=True) # Sujeto a FEOE
     
     degree = relationship("Degree", back_populates="modules")
@@ -84,6 +85,16 @@ class LearningOutcome(Base):
     description = Column(String, nullable=False) # e.g., "Desarrolla..."
     
     module = relationship("Module", back_populates="learning_outcomes")
+    evaluation_criteria = relationship("EvaluationCriterion", back_populates="learning_outcome", cascade="all, delete-orphan")
+
+class EvaluationCriterion(Base):
+    __tablename__ = "evaluation_criteria"
+    id = Column(Integer, primary_key=True, index=True)
+    learning_outcome_id = Column(Integer, ForeignKey("learning_outcomes.id"))
+    ce_code = Column(String, nullable=False) # e.g., "CE1.1" or "a)"
+    description = Column(String, nullable=False)
+    
+    learning_outcome = relationship("LearningOutcome", back_populates="evaluation_criteria")
 
 # ==========================================
 # 3. CENTROS EDUCATIVOS

@@ -64,9 +64,9 @@ export default function EntornoTrabajoPage() {
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = (event) => {
+    reader.onload = async (event) => {
       const content = event.target?.result as string;
-      const success = fileManager.importProgramacion(content, file.name);
+      const success = await fileManager.importProgramacion(content, file.name);
       if (success) {
         if (dataSource === 'demo') setDataSource('local');
         toast.success(<>Programación importada correctamente <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></>);
@@ -83,9 +83,9 @@ export default function EntornoTrabajoPage() {
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = (event) => {
+    reader.onload = async (event) => {
       const content = event.target?.result as string;
-      const success = fileManager.importCurso(content, file.name);
+      const success = await fileManager.importCurso(content, file.name);
       if (success) {
         if (dataSource === 'demo') setDataSource('local');
         toast.success(<>Curso importado correctamente <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></>);

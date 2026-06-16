@@ -112,3 +112,99 @@ def list_learning_outcomes(db: Session = Depends(get_db)):
         return {"status": "success", "data": result}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+from models import EvaluationCriterion
+
+@router.get("/catalog/curriculum/{degree_code}")
+def get_curriculum(degree_code: str, db: Session = Depends(get_db)):
+    try:
+        degree = db.query(Degree).filter(Degree.code == degree_code).first()
+        if not degree:
+            raise HTTPException(status_code=404, detail="Degree not found")
+            
+        family = db.query(ProfessionalFamily).filter(ProfessionalFamily.id == degree.family_id).first()
+        
+        modules = db.query(Module).filter(Module.degree_id == degree.id).all()
+        
+        modulos_data = []
+        for m in modules:
+            ras = db.query(LearningOutcome).filter(LearningOutcome.module_id == m.id).order_by(LearningOutcome.ra_number).all()
+            ra_data = []
+            for ra in ras:
+                ces = db.query(EvaluationCriterion).filter(EvaluationCriterion.learning_outcome_id == ra.id).all()
+                ce_data = [{"id": ce.ce_code, "descripcion": ce.description} for ce in ces]
+                ra_data.append({
+                    "id": ra.ra_number,
+                    "descripcion": ra.description,
+                    "ce": ce_data
+                })
+            
+            # We now have 'curso' in the DB. Format as "1º", "2º", or "Ambos".
+            curso_str = "1º"
+            if m.curso:
+                if "1" in str(m.curso) and "2" in str(m.curso):
+                    curso_str = "Ambos"
+                elif "2" in str(m.curso):
+                    curso_str = "2º"
+                    
+            modulos_data.append({
+                "codigo": m.code,
+                "nombre": m.name,
+                "horas": m.hours,
+                "curso": curso_str, 
+                "ra": ra_data
+            })
+            
+        return {
+            "status": "success",
+            "data": {
+                "familia": family.name if family else "",
+                "modulos": modulos_data,
+                "boa_articles": degree.boa_articles
+            }
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/catalog/module/{module_code}")
+def get_module_curriculum(module_code: str, db: Session = Depends(get_db)):
+    try:
+        module = db.query(Module).filter(Module.code == module_code).first()
+        if not module:
+            raise HTTPException(status_code=404, detail="Module not found")
+            
+        ras = db.query(LearningOutcome).filter(LearningOutcome.module_id == module.id).order_by(LearningOutcome.ra_number).all()
+        ra_data = []
+        for ra in ras:
+            ces = db.query(EvaluationCriterion).filter(EvaluationCriterion.learning_outcome_id == ra.id).all()
+            ce_data = [{"id": ce.ce_code, "descripcion": ce.description} for ce in ces]
+            ra_data.append({
+                "id": ra.ra_number,
+                "descripcion": ra.description,
+                "ce": ce_data
+            })
+            
+        curso_str = "1º"
+        if module.curso:
+            if "1" in str(module.curso) and "2" in str(module.curso):
+                curso_str = "Ambos"
+            elif "2" in str(module.curso):
+                curso_str = "2º"
+                
+        return {
+            "status": "success",
+            "data": {
+                "codigo": module.code,
+                "nombre": module.name,
+                "horas": module.hours,
+                "curso": curso_str,
+                "ra": ra_data
+            }
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

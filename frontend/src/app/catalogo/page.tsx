@@ -10,7 +10,6 @@ import { Badge } from "@/components/ui/Badge";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import {
-  curriculos,
   type CurriculumTitulo,
   type CurriculumModulo,
   type CurriculumRA,
@@ -19,12 +18,7 @@ import {
 
 type Tab = "familias" | "titulo" | "cursos" | "modulos";
 
-const familias = Array.from(new Set(Object.values(curriculos).map((t) => t.familia))).sort();
-const titulosPorFamilia: Record<string, CurriculumTitulo[]> = {};
-for (const t of Object.values(curriculos)) {
-  if (!titulosPorFamilia[t.familia]) titulosPorFamilia[t.familia] = [];
-  titulosPorFamilia[t.familia].push(t);
-}
+
 
 export default function CiclosPage() {
   return (
@@ -397,17 +391,37 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
       .catch(() => setFamLoading(false));
   }, []);
 
+  
   const selectedFamilia = globalSelection.familia;
-  const selectedTitulo = globalSelection.tituloCodigo; // value for <select>, matches option value
-  const curriculoCodigo = selectedTitulo; // curriculum code for data lookup
+  const selectedTitulo = globalSelection.tituloCodigo;
+  const curriculoCodigo = selectedTitulo;
+
+  const [titulo, setTitulo] = useState<any>(null);
+  const [tituloLoading, setTituloLoading] = useState(false);
+
+  useEffect(() => {
+    if (selectedTitulo) {
+      setTituloLoading(true);
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/catalog/curriculum/${selectedTitulo}`)
+        .then(res => res.json())
+        .then(json => {
+          if (json.status === 'success') setTitulo(json.data);
+          else setTitulo(null);
+          setTituloLoading(false);
+        })
+        .catch(() => { setTitulo(null); setTituloLoading(false); });
+    } else {
+      setTitulo(null);
+    }
+  }, [selectedTitulo]);
 
   const familyNames = families.map((f) => f.name).sort();
   const selectedFamilyObj = families.find((f) => f.name === selectedFamilia);
   const degreesFromApi = selectedFamilyObj?.degrees ?? [];
-  const titulo = curriculoCodigo ? curriculos[curriculoCodigo] : undefined;
 
-  const modulosPrimero = titulo ? titulo.modulos.filter((m) => m.curso === "1º") : [];
-  const modulosSegundo = titulo ? titulo.modulos.filter((m) => m.curso === "2º") : [];
+  const modulosPrimero = titulo ? titulo.modulos.filter((m: any) => m.curso === "1º" || m.curso === "Ambos") : [];
+  const modulosSegundo = titulo ? titulo.modulos.filter((m: any) => m.curso === "2º" || m.curso === "Ambos") : [];
+
 
   const [cursosAbiertos, setCursosAbiertos] = useState<Set<string>>(new Set(["1º", "2º"]));
 
@@ -544,7 +558,13 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
         </Card>
       )}
 
-      {selectedTitulo && !titulo && (
+      
+      {tituloLoading && (
+        <div className="flex items-center justify-center p-12">
+          <div className="w-8 h-8 border-4 border-accent border-t-transparent rounded-full animate-spin" />
+        </div>
+      )}
+{selectedTitulo && !titulo && !tituloLoading && (
         <Card className="p-12 text-center text-muted flex flex-col items-center justify-center gap-4">
           <Layers className="w-12 h-12" />
           <p className="text-lg">Este título aún no tiene datos curriculares cargados.</p>
@@ -552,7 +572,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
         </Card>
       )}
 
-      {selectedTitulo && titulo && (
+      {selectedTitulo && titulo && !tituloLoading && (
         <div className="space-y-10">
           {renderCursoBlock(modulosPrimero, "1º")}
           {renderCursoBlock(modulosSegundo, "2º")}
@@ -585,18 +605,39 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
       .catch(() => setFamLoading(false));
   }, []);
 
+  
   const selectedFamilia = globalSelection.familia;
   const selectedTitulo = globalSelection.tituloCodigo;
   const curriculoCodigo = selectedTitulo;
   const selectedModuloCodigo = globalSelection.moduloCodigo;
 
+  const [titulo, setTitulo] = useState<any>(null);
+  const [tituloLoading, setTituloLoading] = useState(false);
+
+  useEffect(() => {
+    if (selectedTitulo) {
+      setTituloLoading(true);
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/catalog/curriculum/${selectedTitulo}`)
+        .then(res => res.json())
+        .then(json => {
+          if (json.status === 'success') setTitulo(json.data);
+          else setTitulo(null);
+          setTituloLoading(false);
+        })
+        .catch(() => { setTitulo(null); setTituloLoading(false); });
+    } else {
+      setTitulo(null);
+    }
+  }, [selectedTitulo]);
+
   const familyNames = families.map((f) => f.name).sort();
   const selectedFamilyObj = families.find((f) => f.name === selectedFamilia);
   const degreesFromApi = selectedFamilyObj?.degrees ?? [];
-  const titulo = curriculoCodigo ? curriculos[curriculoCodigo] : undefined;
+
   const modulo = titulo
-    ? titulo.modulos.find((m) => m.codigo === selectedModuloCodigo)
+    ? titulo.modulos.find((m: any) => m.codigo === selectedModuloCodigo)
     : undefined;
+
 
   const toggleRA = (id: string) => {
     setExpandedRAs((prev) => {
@@ -659,7 +700,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
             className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <option value="">-- Selecciona Módulo --</option>
-            {titulo?.modulos.map((m) => (
+            {titulo?.modulos.map((m: any) => (
               <option key={m.codigo} value={m.codigo}>
                 {m.codigo} — {m.nombre} ({m.curso})
               </option>
@@ -668,7 +709,13 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
         </div>
       </Card>
 
-      {selectedTitulo && !titulo && (
+      
+      {tituloLoading && (
+        <div className="flex items-center justify-center p-12">
+          <div className="w-8 h-8 border-4 border-accent border-t-transparent rounded-full animate-spin" />
+        </div>
+      )}
+{selectedTitulo && !titulo && !tituloLoading && (
         <Card className="p-12 text-center text-muted flex flex-col items-center justify-center gap-4">
           <Layers className="w-12 h-12" />
           <p className="text-lg">Este título aún no tiene datos curriculares cargados.</p>
@@ -697,22 +744,22 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
           </div>
 
           <div className="space-y-3">
-            {modulo.resultados_aprendizaje.map((ra) => {
-              const isExpanded = expandedRAs.has(ra.id);
+            {modulo.ra?.map((raItem: any) => {
+              const isExpanded = expandedRAs.has(raItem.id);
               return (
-                <Card key={ra.id} className="overflow-hidden">
+                <Card key={raItem.id} className="overflow-hidden">
                   <button
-                    onClick={() => toggleRA(ra.id)}
+                    onClick={() => toggleRA(raItem.id)}
                     className="w-full p-4 flex items-center justify-between gap-4 hover:bg-foreground/5 transition-colors text-left"
                   >
                     <div className="flex items-center gap-3 min-w-0 flex-1">
                       <span className="text-xs font-medium text-accent bg-accent/10 border border-accent/20 px-2 py-0.5 rounded shrink-0">
-                        {ra.id}
+                        {raItem.id}
                       </span>
-                      <p className="text-sm text-foreground leading-snug">{ra.descripcion}</p>
+                      <p className="text-sm text-foreground leading-snug">{raItem.descripcion}</p>
                     </div>
                     <div className="flex items-center gap-3 shrink-0">
-                      <span className="text-xs text-muted">{ra.criterios_evaluacion.length} CE</span>
+                      <span className="text-xs text-muted">{raItem.ce?.length || 0} CE</span>
                       {isExpanded ? (
                         <ChevronUp className="w-4 h-4 text-muted" />
                       ) : (
@@ -724,10 +771,10 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                   {isExpanded && (
                     <div className="border-t border-[var(--glass-border)] p-4 space-y-2 animate-in slide-in-from-top-1 duration-200">
                       <p className="text-xs font-semibold text-muted tracking-wider">Criterios de Evaluación</p>
-                      {ra.criterios_evaluacion.map((ce) => (
-                        <div key={ce.id} className="flex items-start gap-2 text-sm bg-foreground/5 rounded-lg p-3 border border-[var(--glass-border)]">
-                          <span className="text-xs font-medium text-accent shrink-0 mt-0.5">{ce.id}</span>
-                          <span className="text-foreground/80">{ce.descripcion}</span>
+                      {raItem.ce?.map((ceItem: any) => (
+                        <div key={ceItem.id} className="flex items-start gap-2 text-sm bg-foreground/5 rounded-lg p-3 border border-[var(--glass-border)]">
+                          <span className="text-xs font-medium text-accent shrink-0 mt-0.5">{ceItem.id}</span>
+                          <span className="text-foreground/80">{ceItem.descripcion}</span>
                         </div>
                       ))}
                     </div>
