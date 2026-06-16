@@ -2,15 +2,15 @@ import type { CurriculumTitulo } from "./index";
 
 export const ELE304: CurriculumTitulo = {
   codigo: "ELE-23",
-  familia: "Informática y Comunicaciones",
-  denominacion: "Sistemas Informáticos y Redes Locales",
+  familia: "Electricidad y Electrónica",
+  denominacion: "Sistemas de Telecomunicaciones e Informáticos",
   nivel: "Grado Superior",
   duracion: 2000,
   referente_europeo: "CINE-4",
 
   identificacion: {
-    familia_profesional: "Informática y Comunicaciones",
-    denominacion: "Sistemas Informáticos y Redes Locales",
+    familia_profesional: "Electricidad y Electrónica",
+    denominacion: "Sistemas de Telecomunicaciones e Informáticos",
     nivel: "Grado Superior",
     duracion: "2000 horas",
     referente_europeo: "CINE-4",
