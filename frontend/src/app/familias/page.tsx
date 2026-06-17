@@ -119,14 +119,23 @@ export default function FamiliasPage() {
                             };
                             const badge = badgeMap[degree.level] || degree.level;
 
+                            const levelColorMap: Record<string, string> = {
+                              "BASICA": "#ef4444",
+                              "MEDIO": "#22c55e",
+                              "SUPERIOR": "#3b82f6",
+                              "ESPECIALIZACION": "#a855f7"
+                            };
+                            const levelColor = levelColorMap[degree.level] || "#6b7280";
+
                             return (
                               <Link
                                 href={`/asignaciones?familyId=${family.id}&degreeId=${degree.id}`}
                                 key={degree.id}
-                                className="block text-sm bg-foreground/5 rounded-lg p-2.5 border border-[var(--glass-border)] hover:border-[var(--glass-border)] hover:bg-foreground/10 transition-all flex items-center justify-between gap-3 group cursor-pointer"
+                                className="block text-sm bg-foreground/5 rounded-lg p-2.5 hover:bg-foreground/10 transition-all flex items-center justify-between gap-3 group cursor-pointer"
+                                style={{ borderLeft: `4px solid ${levelColor}` }}
                               >
                                 <div className="text-foreground/80 font-medium leading-tight flex-1 group-hover:text-foreground transition-colors">{degree.name}</div>
-                                <div className="text-[10px] font-bold text-foreground bg-foreground/20 border border-[var(--glass-border)] px-2 py-1 rounded shadow-inner tracking-wider">
+                                <div className="text-[10px] font-bold text-white px-2 py-1 rounded shadow-inner tracking-wider" style={{ backgroundColor: levelColor }}>
                                   {badge}
                                 </div>
                               </Link>

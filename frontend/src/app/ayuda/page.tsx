@@ -517,11 +517,13 @@ export default function AyudaPage() {
   const emptyCount = allChecks.filter(c => c.status === "empty").length;
 
   const TABS = [
-    { id: "asistente", label: <><span className="inline-flex"><Sparkles className="w-[1.2em] h-[1.2em] mr-1" /></span> Asistente IA</> },
-    { id: "verificacion", label: <><span className="inline-flex"><ListChecks className="w-[1.2em] h-[1.2em] mr-1" /></span> Verificación de datos</> },
-    { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Guía paso a paso</> },
-    { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> Preguntas frecuentes (FAQ)</> },
+    { id: "asistente", label: <><span className="inline-flex"><Sparkles className="w-[1.2em] h-[1.2em] mr-1" /></span> Asistente IA</>, cleanLabel: "Asistente IA" },
+    { id: "verificacion", label: <><span className="inline-flex"><ListChecks className="w-[1.2em] h-[1.2em] mr-1" /></span> Verificación de datos</>, cleanLabel: "Verificación de datos" },
+    { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Guía paso a paso</>, cleanLabel: "Guía paso a paso" },
+    { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> Preguntas frecuentes (FAQ)</>, cleanLabel: "Preguntas frecuentes (FAQ)" },
   ];
+
+  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -535,7 +537,7 @@ export default function AyudaPage() {
         }}
       />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header />
+        <Header breadcrumbSuffix={activeTabCleanLabel} />
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-8 pb-12">
 

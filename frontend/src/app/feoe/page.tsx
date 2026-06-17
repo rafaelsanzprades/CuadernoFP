@@ -144,7 +144,7 @@ export default function FeoePage() {
     <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header breadcrumbSuffix="Empresas FEOE" />
+        <Header />
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-8 pb-12">

@@ -76,11 +76,20 @@ function CiclosContent() {
     router.replace(`/catalogo?tab=modulos`, { scroll: false });
   };
 
+  const TAB_LABELS: Record<Tab, string> = {
+    familias: 'Familias profesionales',
+    titulo: 'Título',
+    cursos: 'Cursos',
+    modulos: 'Módulos RA→CE',
+  };
+
+  const activeTabCleanLabel = TAB_LABELS[activeTab];
+
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar />
       <main className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header breadcrumbSuffix="Catálogo" />
+        <Header breadcrumbSuffix={activeTabCleanLabel} />
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <MotionWrapper className="w-full space-y-6 pb-12">

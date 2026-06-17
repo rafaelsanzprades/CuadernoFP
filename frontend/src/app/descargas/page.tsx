@@ -280,11 +280,18 @@ export default function DocumentosPage() {
   const activeAlumnado = df_al.filter((al: Alumnado) => al.Estado !== "Baja");
   activeAlumnado.sort((a: Alumnado, b: Alumnado) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
 
+  const TABS = [
+    { id: "programacion", label: "Programación", cleanLabel: "Programación" },
+    { id: "curso", label: "Curso", cleanLabel: "Curso" },
+  ];
+
+  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar />
       <main className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header />
+        <Header breadcrumbSuffix={activeTabCleanLabel} />
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <MotionWrapper className="w-full space-y-6 pb-12">

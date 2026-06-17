@@ -55,7 +55,7 @@ export default function ProgramacionPage() {
       <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
-          <Header />
+          <Header breadcrumbSuffix={activeTabCleanLabel} />
           <main className="flex-1 p-8 content-area">
             <MotionWrapper>
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4">
@@ -161,7 +161,7 @@ export default function ProgramacionPage() {
     <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header breadcrumbSuffix={activeTabCleanLabel} />
+        <Header />
         
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-8 pb-12">
