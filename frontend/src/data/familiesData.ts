@@ -327,7 +327,7 @@ export const familias_completas = [
       },
       {
         "id": 137,
-        "name": "ELE203 - Técnico en Instalaciones de Telecomunicaciones",
+        "name": "ELE203 - Instalaciones de Telecomunicaciones",
         "code": "ELE203",
         "level": "MEDIO"
       }

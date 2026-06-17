@@ -143,7 +143,15 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
           const order: Record<string, number> = { BASICA: 1, MEDIO: 2, SUPERIOR: 3, ESPECIALIZACION: 4 };
           const sorted = json.data.map((f: Family) => ({
             ...f,
-            degrees: [...f.degrees].sort((a, b) => (order[a.level] || 99) - (order[b.level] || 99)),
+            degrees: [...f.degrees].sort((a, b) => {
+              const levelDiff = (order[a.level] || 99) - (order[b.level] || 99);
+              if (levelDiff !== 0) return levelDiff;
+              const aIsFPB = a.code?.startsWith("FPB") || false;
+              const bIsFPB = b.code?.startsWith("FPB") || false;
+              if (aIsFPB && !bIsFPB) return -1;
+              if (!aIsFPB && bIsFPB) return 1;
+              return (a.code || "").localeCompare(b.code || "");
+            }),
           }));
           setFamilies(sorted);
         }

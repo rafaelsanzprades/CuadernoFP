@@ -38,18 +38,41 @@ class FamilyResponse(BaseModel):
 @router.get("/families")
 def list_families(db: Session = Depends(get_db)):
     try:
+        # Get all families with their degrees
         families = db.query(ProfessionalFamily).all()
         result = []
+        
+        # Define level order for sorting
+        level_order = {"BASICA": 1, "MEDIO": 2, "SUPERIOR": 3, "ESPECIALIZACION": 4}
+        
         for f in families:
-            degrees = db.query(Degree).filter(Degree.family_id == f.id, Degree.code.isnot(None)).order_by(Degree.code).all()
+            degrees = db.query(Degree).filter(Degree.family_id == f.id, Degree.code.isnot(None)).order_by(Degree.level, Degree.code).all()
+            
+            # Determine the lowest level for this family (for sorting)
+            lowest_level = 99
+            if degrees:
+                for d in degrees:
+                    level_str = d.level.value if hasattr(d.level, 'value') else d.level
+                    level_num = level_order.get(level_str, 99)
+                    lowest_level = min(lowest_level, level_num)
+            
             result.append({
                 "id": f.id,
                 "code": f.code,
                 "name": f.name,
                 "icon_url": f.icon_url,
                 "color_hex": f.color_hex,
-                "degrees": [{"id": d.id, "name": d.name, "code": d.code, "level": d.level.value if hasattr(d.level, 'value') else d.level, "boa_articles": d.boa_articles} for d in degrees]
+                "degrees": [{"id": d.id, "name": d.name, "code": d.code, "level": d.level.value if hasattr(d.level, 'value') else d.level, "boa_articles": d.boa_articles} for d in degrees],
+                "_sort_level": lowest_level  # Internal field for sorting
             })
+        
+        # Sort families by lowest level first, then by code
+        result.sort(key=lambda x: (x["_sort_level"], x["code"]))
+        
+        # Remove the internal sorting field
+        for f in result:
+            del f["_sort_level"]
+        
         return {"status": "success", "data": result}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
