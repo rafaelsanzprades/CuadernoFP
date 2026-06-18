@@ -29,10 +29,11 @@ jobs:
           echo "NEXTAUTH_SECRET=produccion-super-secreta-cdd-88990" >> .env.production
 
       - name: Build Next.js App
-        run: npm run build
+        run: npx next build
         env:
           NEXT_PUBLIC_API_URL: https://cdd-backend-215337606799.europe-west1.run.app
           NEXTAUTH_URL: https://cuadernofp.web.app
+          NEXTAUTH_SECRET: produccion-super-secreta-cdd-88990
         
       - name: Deploy to Firebase
         run: npx firebase-tools deploy --only hosting,functions --project cuadernofp
