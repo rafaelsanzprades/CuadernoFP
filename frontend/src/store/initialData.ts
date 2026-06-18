@@ -4,7 +4,7 @@ export const initialGroups: CourseGroup[] = [
   {
     id: 1,
     name: "1º Instalaciones de Telecomunicaciones",
-    degreeName: "Técnico en Instalaciones de Telecomunicaciones",
+    degreeName: "ELE203 - Instalaciones de Telecomunicaciones",
     level: "Grado Medio",
     modules: [
       { id: 101, code: "0237", name: "Infra. comunes de teleco en viviendas y edificios", hours: 167, isDual: false, assignedTeacherId: 2, ras: [
@@ -28,7 +28,7 @@ export const initialGroups: CourseGroup[] = [
   {
     id: 2,
     name: "2º Instalaciones de Telecomunicaciones",
-    degreeName: "Técnico en Instalaciones de Telecomunicaciones",
+    degreeName: "ELE203 - Instalaciones de Telecomunicaciones",
     level: "Grado Medio",
     modules: [
       { id: 201, code: "0238", name: "Instalaciones domóticas", hours: 133, isDual: true, assignedTeacherId: 2 },
@@ -45,7 +45,7 @@ export const initialGroups: CourseGroup[] = [
   {
     id: 3,
     name: "1º Sistemas de Telecomunicaciones e Informáticos",
-    degreeName: "Técnico Superior en Sistemas de Telecomunicaciones e Informáticos",
+    degreeName: "ELE304 - Sistemas de Telecomunicaciones e Informáticos",
     level: "Grado Superior",
     modules: [
       { id: 301, code: "0525", name: "Configuración de infraestructuras de sistemas de tele", hours: 133, isDual: false, assignedTeacherId: 9 },
@@ -62,7 +62,7 @@ export const initialGroups: CourseGroup[] = [
   {
     id: 4,
     name: "2º Sistemas de Telecomunicaciones e Informáticos",
-    degreeName: "Técnico Superior en Sistemas de Telecomunicaciones e Informáticos",
+    degreeName: "ELE304 - Sistemas de Telecomunicaciones e Informáticos",
     level: "Grado Superior",
     modules: [
       { id: 401, code: "0553", name: "Técnicas y procesos en infraestructuras de teleco", hours: 133, isDual: true, assignedTeacherId: 4 },
@@ -76,7 +76,7 @@ export const initialGroups: CourseGroup[] = [
   {
     id: 5,
     name: "1º Gestión Administrativa",
-    degreeName: "ADG201 - Técnico en Gestión Administrativa",
+    degreeName: "ADG201 - Gestión Administrativa",
     level: "Grado Medio",
     modules: [
       { id: 501, code: "0437", name: "Comunicación empresarial y atención al cliente", hours: 160, isDual: false, assignedTeacherId: null },
@@ -92,7 +92,7 @@ export const initialGroups: CourseGroup[] = [
   {
     id: 6,
     name: "2º Gestión Administrativa",
-    degreeName: "ADG201 - Técnico en Gestión Administrativa",
+    degreeName: "ADG201 - Gestión Administrativa",
     level: "Grado Medio",
     modules: [
       { id: 601, code: "0446", name: "Empresa en el aula", hours: 147, isDual: true, assignedTeacherId: null },
@@ -106,7 +106,7 @@ export const initialGroups: CourseGroup[] = [
   {
     id: 7,
     name: "1º Administración y Finanzas",
-    degreeName: "ADG301 - Técnico Superior en Administración y Finanzas",
+    degreeName: "ADG301 - Administración y Finanzas",
     level: "Grado Superior",
     modules: [
       { id: 701, code: "0647", name: "Gestión de la documentación jurídica y empresarial", hours: 96, isDual: false, assignedTeacherId: null },
@@ -122,7 +122,7 @@ export const initialGroups: CourseGroup[] = [
   {
     id: 8,
     name: "2º Administración y Finanzas",
-    degreeName: "ADG301 - Técnico Superior en Administración y Finanzas",
+    degreeName: "ADG301 - Administración y Finanzas",
     level: "Grado Superior",
     modules: [
       { id: 801, code: "0652", name: "Gestión de recursos humanos", hours: 84, isDual: true, assignedTeacherId: null },
