@@ -52,7 +52,11 @@ export function DatosTab() {
         if (fam) {
           setViewFamilyId(fam.id.toString());
           if (ciclo) {
-            const deg = fam.degrees.find(d => cleanStr(d.name) === cleanStr(ciclo) || cleanStr(d.name).includes(cleanStr(ciclo)));
+            const deg = fam.degrees.find(d => {
+              const dn = cleanStr(d.name);
+              const cn = cleanStr(ciclo);
+              return dn === cn || dn.includes(cn) || cn.includes(dn);
+            });
             if (deg) {
               setViewDegreeId(deg.id.toString());
             }
@@ -76,7 +80,7 @@ export function DatosTab() {
       .trim();
 
   const displayedGroups = viewDegree
-    ? groups.filter(g => clean(g.degreeName) === clean(viewDegree.name))
+    ? groups.filter(g => { const gn = clean(g.degreeName); const dn = clean(viewDegree.name); return gn === dn || gn.includes(dn) || dn.includes(gn); })
     : [];
 
   const handleSelectModule = (code: string) => {
