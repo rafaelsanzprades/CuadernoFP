@@ -284,7 +284,7 @@ export default function EntornoTrabajoPage() {
     <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col h-screen min-w-0">
-        <Header breadcrumbSuffix={breadcrumbSuffixMap[activeTab] || "Gestor de archivos"} />
+        <Header breadcrumbSuffix={breadcrumbSuffixMap[activeTab] ?? "Gestor de archivos"} />
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <MotionWrapper className="w-full space-y-8 pb-12">
@@ -295,7 +295,7 @@ export default function EntornoTrabajoPage() {
                   <FolderOpen className="w-6 h-6 text-accent" /> Entorno
                 </h1>
                 <p className="text-muted mt-2 text-lg">
-                  CuadernoFP funciona directamente en tu navegador sin requerir base de datos externa. Crea, abre y guarda tus archivos de Programación y Curso.
+                  Crea, abre y guarda tus archivos de Programación y Curso.
                 </p>
               </div>
 
@@ -305,8 +305,8 @@ export default function EntornoTrabajoPage() {
                   <button
                     onClick={switchToDemo}
                     className={`px-5 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${isDemoLoaded
-                        ? 'bg-warning/20 text-warning shadow-md'
-                        : 'text-muted hover:text-foreground hover:bg-foreground/5'
+                      ? 'bg-warning/20 text-warning shadow-md'
+                      : 'text-muted hover:text-foreground hover:bg-foreground/5'
                       }`}
                   >
                     <Sparkles className="w-4 h-4" /> Datos DEMO
@@ -314,8 +314,8 @@ export default function EntornoTrabajoPage() {
                   <button
                     onClick={switchToLocal}
                     className={`px-5 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${!isDemoLoaded
-                        ? 'bg-info/20 text-info shadow-md'
-                        : 'text-muted hover:text-foreground hover:bg-foreground/5'
+                      ? 'bg-info/20 text-info shadow-md'
+                      : 'text-muted hover:text-foreground hover:bg-foreground/5'
                       }`}
                   >
                     <HardDrive className="w-4 h-4" /> Datos Reales
@@ -342,7 +342,7 @@ export default function EntornoTrabajoPage() {
 
                   {/* ── Panel Programación ── */}
                   <Card
-                    className={`p-8 border rounded-2xl shadow-lg space-y-6 flex flex-col relative overflow-hidden group ${isDemoLoaded ? 'bg-foreground/5 border-warning/20' : 'bg-foreground/5 border-info/20'}`}
+                    className={`p-8 border rounded-2xl shadow-lg space-y-8 flex flex-col relative overflow-hidden group ${isDemoLoaded ? 'bg-foreground/5 border-warning/20' : 'bg-foreground/5 border-info/20'}`}
                     onDrop={(e) => handleDrop(e, 'pd')}
                     onDragOver={handleDragOver}
                   >
@@ -350,13 +350,13 @@ export default function EntornoTrabajoPage() {
                       <BookOpen className={`w-24 h-24 ${isDemoLoaded ? 'text-warning' : 'text-info'}`} />
                     </div>
                     <div>
-                      <div className="flex justify-between items-center mb-1">
+                      <div className="flex justify-between items-center mb-2">
                         <h3 className="text-xl font-bold text-foreground flex items-center gap-2 relative z-10">
                           <BookOpen className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : 'text-info'}`} /> Programación (.cddp)
                         </h3>
                         {hasPdFile && <Badge variant={isDemoLoaded ? 'warning' : 'info'}>Cargada</Badge>}
                       </div>
-                      <p className="text-sm text-muted mt-1 relative z-10">
+                      <p className="text-sm text-muted mt-2 relative z-10 leading-relaxed">
                         Contiene tu currículo, unidades didácticas, instrumentos de evaluación y criterios.
                       </p>
                     </div>
@@ -420,7 +420,7 @@ export default function EntornoTrabajoPage() {
 
                   {/* ── Panel Curso ── */}
                   <Card
-                    className={`p-8 border rounded-2xl shadow-lg space-y-6 flex flex-col relative overflow-hidden group ${isDemoLoaded ? 'bg-foreground/5 border-warning/20' : 'bg-foreground/5 border-success/20'}`}
+                    className={`p-8 border rounded-2xl shadow-lg space-y-8 flex flex-col relative overflow-hidden group ${isDemoLoaded ? 'bg-foreground/5 border-warning/20' : 'bg-foreground/5 border-success/20'}`}
                     onDrop={(e) => handleDrop(e, 'curso')}
                     onDragOver={handleDragOver}
                   >
@@ -428,14 +428,14 @@ export default function EntornoTrabajoPage() {
                       <Users className={`w-24 h-24 ${isDemoLoaded ? 'text-warning' : 'text-success'}`} />
                     </div>
                     <div>
-                      <div className="flex justify-between items-center mb-1">
+                      <div className="flex justify-between items-center mb-2">
                         <h3 className="text-xl font-bold text-foreground flex items-center gap-2 relative z-10">
                           <Users className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : 'text-success'}`} /> Curso (.cddc)
                         </h3>
                         {hasCursoFile && <Badge variant={isDemoLoaded ? 'warning' : 'success'}>Cargado</Badge>}
                       </div>
-                      <p className="text-sm text-muted mt-1 relative z-10">
-                        Contiene tu lista de alumnado, calificaciones, partes de asistencia y anotaciones diarias.
+                      <p className="text-sm text-muted mt-2 relative z-10 leading-relaxed">
+                        Contiene tu lista de alumnado, calificaciones, anotaciones diarias, etc.
                       </p>
                     </div>
 
@@ -504,21 +504,21 @@ export default function EntornoTrabajoPage() {
                 <GoogleDriveSyncPanel />
               )}
 
-              {/* Security notice */}
-              {activeTab === "datos" && (
-                <div className="flex items-start gap-4 pt-12 max-w-2xl mx-auto">
-                  <span className="text-info mt-1 shrink-0"><ShieldAlert className="w-6 h-6" /></span>
-                  <div>
-                    <h3 className="text-lg font-bold text-foreground mb-2">Seguridad y RGPD garantizados</h3>
-                    <div className="text-sm text-foreground/80 space-y-2 leading-relaxed">
-                      <p>CuadernoFP procesa toda tu información confidencial exclusivamente en tu navegador.</p>
-                      <p>Ningún dato de tu alumnado se envía a la nube (salvo que uses la Sincronización autorizada). <strong>Tú eres el dueño de tus archivos</strong>.</p>
-                      <p className="font-semibold text-info mt-2">Asegúrate de pulsar &quot;Guardar&quot; al finalizar tu sesión de trabajo para no perder los últimos cambios.</p>
-                    </div>
+            </div>
+
+            {/* Security notice — always visible, full-width */}
+            <div className="mt-8">
+              <Card className="flex items-start gap-4 p-6 bg-info/5 border border-info/20 rounded-2xl shadow-lg">
+                <span className="text-info mt-1 shrink-0"><ShieldAlert className="w-8 h-8" /></span>
+                <div>
+                  <h3 className="text-lg font-bold text-foreground mb-2">Seguridad y RGPD garantizados</h3>
+                  <div className="text-sm text-foreground/80 space-y-2 leading-relaxed">
+                    <p>CuadernoFP procesa toda tu información confidencial exclusivamente en tu navegador. <strong>Tú eres el dueño de tus archivos</strong>.</p>
+                    <p>Ningún dato de tu alumnado se envía a la nube, salvo que uses la Sincronización autorizada en tu cuenta.</p>
+                    <p className="font-semibold text-info mt-2">Asegúrate de pulsar &quot;Guardar&quot; al finalizar tu sesión de trabajo para no perder los últimos cambios.</p>
                   </div>
                 </div>
-              )}
-
+              </Card>
             </div>
           </MotionWrapper>
         </div>

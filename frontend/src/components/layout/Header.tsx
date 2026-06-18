@@ -49,6 +49,8 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
     currentItem = "Inicio";
   } else if (pathname === '/agenda') {
     currentItem = "Agenda de clase";
+  } else if (pathname === '/entorno') {
+    currentItem = "Entorno";
   } else {
     for (const group of navGroups) {
       const found = group.items.find(item => item.href === pathname);

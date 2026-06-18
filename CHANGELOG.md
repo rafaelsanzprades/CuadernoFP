@@ -1,5 +1,29 @@
 # 📋 Changelog — Cuaderno FP
 
+## [1.1.1] - 2026-06-18
+
+### 🔧 Mejoras
+
+#### Módulo (`/modulo`)
+- **Selector de módulo automático**: Al cargar un módulo desde la BD, el selector se auto-configura con familia, título y módulo correctos
+- **info_modulo desde catálogo**: Cuando `ModuleInfo` está vacío, se construye automáticamente desde las tablas `Module`, `Degree` y `ProfessionalFamily`
+- **Merge de datos**: El frontend ahora hace merge de datos API con datos existentes (no sobreescribe datos DEMO)
+
+#### Entorno (`/entorno`)
+- **Aviso RGPD full-width**: Eliminado `max-w-2xl mx-auto`, ahora ocupa todo el ancho disponible
+- **Aviso RGPD siempre visible**: Se muestra en todas las tabs (antes solo en "datos")
+- **Breadcrumb mejorado**: Muestra tab activa ("Gestor de archivos" / "Sincronización con Google Drive") en vez de "Datos DEMO/Reales"
+- **Espaciado mejorado**: Mayor separación entre elementos (`mb-2`, `mt-2`, `space-y-8`, `leading-relaxed`)
+
+#### Header
+- **Breadcrumb `/entorno`**: Añadida ruta al breadcrumb del Header
+
+### 📊 Build
+- ✅ Build Next.js: 24 rutas, sin errores TypeScript
+- ✅ Tests backend: 9/9 pasando
+
+---
+
 ## [1.1.0] - 2026-06-18
 
 ### ✨ Nuevas Funcionalidades

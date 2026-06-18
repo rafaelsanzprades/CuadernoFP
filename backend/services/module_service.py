@@ -4,7 +4,8 @@ from models import (
     ModuleDocument, DidacticUnit, SessionModel, CourseStudent, StudentEvaluation,
     LearningOutcomeItem, EvaluationCriterionItem, ActivityItem, InstrumentItem,
     TaskItem, AceItem, DuaItem, ContingencyItem, FeoeItem, SgmtItem, CalendarNoteItem,
-    ConfigDates, ScheduleItem, ModuleInfo, PlanningLedgerItem
+    ConfigDates, ScheduleItem, ModuleInfo, PlanningLedgerItem,
+    Module, Degree, ProfessionalFamily
 )
 
 def get_module_data(module_id: str, db: Session):
@@ -155,6 +156,61 @@ def get_module_data(module_id: str, db: Session):
     mod_info = db.query(ModuleInfo).filter_by(module_document_id=pd_id).first()
     if mod_info and mod_info.data:
         base_data["info_modulo"] = mod_info.data
+    
+    # If info_modulo is still empty, build it from catalog tables (Module, Degree, ProfessionalFamily)
+    if not base_data.get("info_modulo"):
+        # Extract module code from pd_id (e.g. "0237-ictve-pd" → "0237")
+        mod_code = pd_id.split("-")[0] if pd_id else None
+        if mod_code:
+            mod = db.query(Module).filter(Module.code == mod_code).first()
+            if mod:
+                degree = db.query(Degree).filter(Degree.id == mod.degree_id).first() if mod.degree_id else None
+                family = db.query(ProfessionalFamily).filter(ProfessionalFamily.id == degree.family_id).first() if degree else None
+                
+                # Determine curso (1º/2º) from module.curso or from module_id pattern
+                curso = mod.curso or ""
+                if not curso:
+                    # Try to infer from module_id pattern like "0237-ictve-pd"
+                    if "1" in pd_id.split("-")[1:2]:
+                        curso = "1º"
+                    elif "2" in pd_id.split("-")[1:2]:
+                        curso = "2º"
+                    else:
+                        curso = "1º"  # default
+                
+                # Level mapping
+                level_map = {"BASICA": "Grado Básico", "MEDIO": "Grado Medio", "SUPERIOR": "Grado Superior", "ESPECIALIZACION": "Especialización"}
+                level_raw = degree.level.value if hasattr(degree.level, 'value') else str(degree.level) if degree else ""
+                level_name = level_map.get(level_raw, level_raw) if level_raw else ""
+                
+                # Clean degree name: remove "ELE203 - " prefix
+                degree_name = degree.name if degree else ""
+                if degree_name and " - " in degree_name:
+                    degree_name = degree_name.split(" - ", 1)[1]
+                
+                info = {
+                    "codigo": mod.code,
+                    "nombre": mod.name,
+                    "horas": mod.hours or 0,
+                    "horas_totales": mod.hours or 0,
+                    "h_boa": mod.hours or 0,
+                    "h_sem": round((mod.hours or 0) / 30) if mod.hours else 0,
+                    "p_ev": 15,
+                    "ciclo": f"Técnico en {degree_name}" if degree_name else "",
+                    "nivel": level_name,
+                    "familia": family.name if family else "",
+                    "curso": curso,
+                    "centro": "",
+                    "profesorado": "",
+                    "pond_1t": 30,
+                    "pond_2t": 30,
+                    "pond_3t": 40,
+                    "criterio_conocimiento": 40,
+                    "criterio_procedimiento_practicas": 30,
+                    "criterio_procedimiento_ejercicios": 20,
+                    "criterio_tareas": 10,
+                }
+                base_data["info_modulo"] = info
 
     sched = db.query(ScheduleItem).filter_by(module_document_id=pd_id).all()
     if sched:

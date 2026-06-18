@@ -1,0 +1,64 @@
+======================================================================
+COMPARISON: BOE OG (Actividades Ecuestres) vs DB OG (Telecomunicaciones)
+======================================================================
+
+BOE OG count: 26 (Actividades Ecuestres - RD 652/2017)
+DB OG count: 20 (Telecomunicaciones - ELE203)
+
+CONCLUSION: These are DIFFERENT degrees with DIFFERENT OG!
+ELE203 in DB = Telecomunicaciones
+ELE203 in CSV = Actividades Ecuestres (same code, different title)
+
+======================================================================
+BOE OG (Actividades Ecuestres):
+======================================================================
+(a) Identificar y utilizar los productos y los medios, relacionándolos con cada etapa de su fase productiva, para alimentar al ganado equino
+(b) Describir y aplicar los protocolos de actuación, justificando las técnicas, para realizar actividades auxiliares sanitarias y de primeros auxilios al 
+(c) Comprobar el estado óptimo de las instalaciones y realizar los cuidados cotidianos imprescindibles, interpretando los protocolos establecidos para man
+(d) Aplicar técnicas y rutinas básicas, identificando el comportamiento animal para realizar el amansamiento del ganado equino durante su recría
+(e) Interpretar las instrucciones del personal especializado, aplicándolas en cada fase del proceso reproductivo para manejar los reproductores
+(f) Analizar y aplicar las técnicas estéticas de preparación y acondicionamiento para el ganado equino, relacionándolas con las características del animal
+(g) Interpretar planos de instalación y manuales de mantenimiento, analizando las especificaciones técnicas para montar y mantener instalaciones ganaderas
+(h) Identificar y utilizar los medios, materiales y herramientas, relacionándolos con su funcionalidad para realizar las operaciones básicas de herrado de
+(i) Dominar las técnicas básicas de equitación, aplicándolas para montar a caballo con soltura
+(j) Especificar las técnicas de manejo de los animales, ejecutándolas con los medios y materiales necesarios para realizar la doma básica de los potros
+(k) Analizar los trayectos de viaje, así como los animales, describiendo sus características para preparar su transporte, embarcarlos y desembarcarlos
+(l) Especificar las técnicas de marketing, justificando su aplicación para realizar la promoción y, en su caso, la venta de équidos
+(m) Caracterizar el terreno y el tipo de usuario, relacionando sus respectivos rasgos específicos con los aspectos lúdico-recreativos y medioambientales, 
+(n) Identificar y aplicar técnicas de animación, adecuándolas a las características de las personas y de los caballos para guiarlas, y dinamizarlas con se
+(ñ) Describir y aplicar los protocolos de actuación, relacionando los síntomas con las maniobras y técnicas para aplicar primeros auxilios de base
+(o) Analizar y utilizar los recursos existentes para el aprendizaje a lo largo de la vida y las tecnologías de la información y la comunicación para apren
+(p) Desarrollar trabajos en equipo y valorar su organización, participando con tolerancia y respeto, y tomar decisiones colectivas o individuales para act
+(q) Adoptar y valorar soluciones creativas ante problemas y contingencias que se presentan en el desarrollo de los procesos de trabajo, para resolver de f
+(r) Aplicar técnicas de comunicación, adaptándose a los contenidos que se van a transmitir, a su finalidad y a las características de los receptores, para
+(s) Analizar los riesgos ambientales y laborales asociados a la actividad profesional, relacionándolos con las causas que los producen, a fin de fundament
+(t) Analizar y aplicar las técnicas necesarias para dar respuesta a la accesibilidad universal y al «diseño para todas las personas», así como sobre trato
+(u) Aplicar y analizar las técnicas necesarias para mejorar los procedimientos de calidad del trabajo en el proceso de aprendizaje y del sector productivo
+(v) Utilizar procedimientos relacionados con la cultura emprendedora, empresarial y de iniciativa profesional, para realizar la gestión básica de una pequ
+(w) Reconocer sus derechos y deberes como agente activo en la sociedad, teniendo en cuenta el marco legal que regula las condiciones sociales y laborales 
+(a) Quedan desarrollados en el anexo I del presente real decreto, cumpliendo lo previsto en el artículo 10 del Real Decreto 1147/2011, de 29 de julio, por
+(b) Son los que a continuación se relacionan: 1319. Alimentación, manejo general y primeros auxilios
+
+======================================================================
+DB OG (Telecomunicaciones):
+======================================================================
+(a) Identificar los elementos de las infraestructuras, instalaciones y equipos, analizando planos y esquemas y reconociendo los materiales y procedimiento
+(b) Elaborar croquis y esquemas, empleando medios y técnicas de dibujo y representación simbólica normalizada, para configurar y calcular la instalación.
+(c) Obtener los parámetros típicos de las instalaciones y equipos, aplicando procedimientos de cálculo y atendiendo a las especificaciones y prescripcione
+(d) Valorar el coste de los materiales y mano de obra, consultando catálogos y unidades de obra, para elaborar el presupuesto del montaje o mantenimiento.
+(e) Seleccionar el utillaje, herramientas, equipos y medios de montaje y de seguridad, analizando las condiciones de obra y considerando las operaciones a
+(f) Identificar y marcar la posición de los elementos de la instalación o equipo y el trazado de los circuitos, relacionando los planos de la documentació
+(g) Identificar, ensamblar e interconectar periféricos y componentes, atendiendo a las especificaciones técnicas, para montar o ampliar equipos informátic
+(h) Reconocer y ejecutar los procedimientos de instalación y carga de programas, siguiendo las especificaciones del fabricante y aplicando criterios de ca
+(i) Aplicar técnicas de mecanizado, conexión, medición y montaje, manejando los equipos, herramientas e instrumentos, según procedimientos establecidos y 
+(j) Ubicar y fijar los equipos y elementos soporte y auxiliares, interpretando los planos y especificaciones de montaje, en condiciones de seguridad y cal
+(k) Conectar los equipos y elementos auxiliares mediante técnicas de conexión y empalme, de acuerdo con los esquemas de la documentación técnica, para mon
+(l) Cargar o volcar programas siguiendo las instrucciones del fabricante y aplicando criterios de calidad para instalar equipos.
+(m) Analizar y localizar los efectos y causas de disfunción o avería en las instalaciones y equipos, utilizando equipos de medida e interpretando los resu
+(n) Comprobar la configuración y el software de control de los equipos siguiendo las instrucciones del fabricante, para mantener y reparar instalaciones y
+(o) Sustituir los elementos defectuosos desmontando y montando los equipos y realizando los ajustes necesarios, analizando planes de mantenimiento y proto
+(p) Comprobar el conexionado, software, señales y parámetros característicos, utilizando la instrumentación y protocolos establecidos, en condiciones de c
+(q) Cumplimentar fichas de mantenimiento, informes de montaje y reparación y manuales de instrucciones, siguiendo los procedimientos y formatos establecid
+(r) Analizar y describir los procedimientos de calidad, prevención de riesgos laborales y medioambientales, señalando las acciones que es preciso realizar
+(s) Mantener comunicaciones efectivas con su grupo de trabajo, interpretando y generando instrucciones, proponiendo soluciones ante contingencias y coordi
+(t) Resolver problemas y tomar decisiones individuales siguiendo las normas y procedimientos establecidos, definidos dentro del ámbito de su competencia.

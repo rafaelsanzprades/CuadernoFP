@@ -23,7 +23,21 @@ export default function ModuloConfigPage() {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeModuleId}`)
       .then(res => res.json())
       .then(json => {
-        if (json.status === "success") setModuleData(json.data);
+        if (json.status === "success") {
+          // Merge API data with existing data (don't overwrite DEMO data)
+          const existing = useAppStore.getState().moduleData;
+          if (existing) {
+            const merged: Record<string, any> = { ...json.data };
+            for (const key of Object.keys(existing)) {
+              if (merged[key] === undefined || merged[key] === null) {
+                merged[key] = (existing as Record<string, any>)[key];
+              }
+            }
+            setModuleData(merged as any);
+          } else {
+            setModuleData(json.data);
+          }
+        }
         setLoading(false);
       })
       .catch(() => setLoading(false));
