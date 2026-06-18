@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { Alumnado, ResultadoAprendizaje } from '@/types';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Printer, FileText, Users, Award, Briefcase, GraduationCap, Target } from 'lucide-react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import { resolveDescRa, loadCatalogForModule } from '@/services/catalogCache';
 
 export const BoletinesTab = () => {
   const { cursoData, moduleData, groups, activeCursoId, activeModuleId } = useAppStore();
+
+  useEffect(() => { if (activeModuleId) loadCatalogForModule(activeModuleId); }, [activeModuleId]);
   
   const df_al = cursoData?.df_al || [];
   const activeStudents = df_al.filter((al: Alumnado) => al.Estado !== 'Baja').sort((a, b) => (a.Apellidos || '').localeCompare(b.Apellidos || ''));
@@ -34,7 +37,7 @@ export const BoletinesTab = () => {
     subject: `RA ${idx + 1}`,
     nota: currentStudent ? getMockGrade(currentStudent.ID || '', ra.id_ra) : 0,
     fullMark: 10,
-    desc: ra.desc_ra
+    desc: resolveDescRa(activeModuleId, ra)
   }));
 
   const notaMedia = radarData.length > 0 

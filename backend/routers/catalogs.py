@@ -233,6 +233,13 @@ def get_module_curriculum(module_code: str, db: Session = Depends(get_db)):
             except:
                 pass
                 
+        # Get degree code for OG/CPPS resolution
+        degree_code = None
+        if module.degree_id:
+            degree = db.query(Degree).filter(Degree.id == module.degree_id).first()
+            if degree:
+                degree_code = degree.code
+
         return {
             "status": "success",
             "data": {
@@ -241,7 +248,8 @@ def get_module_curriculum(module_code: str, db: Session = Depends(get_db)):
                 "horas": module.hours,
                 "curso": curso_str,
                 "ra": ra_data,
-                "competencias": comp_data
+                "competencias": comp_data,
+                "degree_code": degree_code
             }
         }
     except HTTPException:

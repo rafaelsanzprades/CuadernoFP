@@ -13,6 +13,7 @@ import { curriculos, CompetenciaCPP } from "@/data/curriculos";
 import toast from "react-hot-toast";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
+import { loadCatalogForModule, resolveDescRa, resolveDescCe } from "@/services/catalogCache";
 
 export default function MatricesPage() {
   const { activeModuleId, moduleData, setModuleData, updateDataFrame, updateModuleData, saveModuleData, cursoData, updateCursoData } = useAppStore();
@@ -39,6 +40,13 @@ export default function MatricesPage() {
     { id: "relacion", label: "Relación entre RA y UD", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "contribucion", label: "Contribución de RA en OG", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> }
   ];
+
+  // Load catalog descriptions when module changes (for fallback resolution)
+  useEffect(() => {
+    if (activeModuleId) {
+      loadCatalogForModule(activeModuleId);
+    }
+  }, [activeModuleId]);
 
   useEffect(() => {
     setLoading(false);
@@ -174,6 +182,7 @@ export default function MatricesPage() {
                               <input
                                 type="text"
                                 value={ra.desc_ra || ""}
+                                placeholder={resolveDescRa(activeModuleId, ra)}
                                 onChange={(e) => {
                                   const newRa = [...df_ra];
                                   newRa[idx].desc_ra = e.target.value;
@@ -250,7 +259,7 @@ export default function MatricesPage() {
                           >
                             <div className="flex items-center gap-4">
                               <span className="text-warning">{ra.id_ra}</span>
-                              <span className="text-sm text-muted font-normal truncate max-w-xl">{ra.desc_ra}</span>
+                              <span className="text-sm text-muted font-normal truncate max-w-xl">{resolveDescRa(activeModuleId, ra)}</span>
                             </div>
                             <div className="flex items-center gap-6 text-sm">
                               <span className="text-muted">{ceForRa.length} CE</span>
@@ -336,6 +345,7 @@ export default function MatricesPage() {
                                               <input
                                                 type="text"
                                                 value={ce.desc_ce || ""}
+                                                placeholder={resolveDescCe(activeModuleId, ce)}
                                                 onChange={(e) => {
                                                   const newCe = [...df_ce];
                                                   newCe[globalIdx].desc_ce = e.target.value;
@@ -598,7 +608,7 @@ export default function MatricesPage() {
                           <div key={idx} className="border-b border-[var(--glass-border)] pb-6 last:border-0 last:pb-0">
                             <div className="text-lg text-foreground mb-3">
                               <strong>{ra.id_ra} ({ra.peso_ra}%).</strong>{" "}
-                              <span className="text-muted text-sm">{ra.desc_ra}</span>
+                              <span className="text-muted text-sm">{resolveDescRa(activeModuleId, ra)}</span>
                             </div>
                             {uds.length > 0 ? (
                               <div className="ml-6 pl-4 border-l-2 border-[#d4af37] text-[#ffe599]">

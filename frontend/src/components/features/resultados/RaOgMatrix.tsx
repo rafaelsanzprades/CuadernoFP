@@ -1,12 +1,17 @@
 "use client";
+import React, { useEffect } from 'react';
 import { Check, Link as LinkIcon } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
+import { resolveDescRa, resolveOg, getOgList, loadCatalogForModule } from "@/services/catalogCache";
 import { Card } from "@/components/ui/Card";
 
 export function RaOgMatrix() {
-  const { moduleData, updateInfoModulo } = useAppStore();
+  const { moduleData, updateInfoModulo, activeModuleId } = useAppStore();
 
-  const ogs = moduleData?.info_modulo?.objetivos_generales || [];
+  useEffect(() => { if (activeModuleId) loadCatalogForModule(activeModuleId); }, [activeModuleId]);
+
+  const ogList = getOgList(activeModuleId || '');
+  const ogs = ogList.length > 0 ? ogList : (moduleData?.info_modulo?.objetivos_generales || []).map((desc: string, i: number) => ({ id: String.fromCharCode(97 + i), desc }));
   const ras = moduleData?.df_ra || [];
   const mapping = moduleData?.info_modulo?.ra_og_mapping || {};
 
@@ -52,7 +57,7 @@ export function RaOgMatrix() {
                 <th 
                   key={ra.id_ra} 
                   className="p-3 border-b border-[var(--glass-border)] text-center text-foreground font-bold whitespace-nowrap cursor-help"
-                  title={ra.desc_ra}
+                  title={resolveDescRa(activeModuleId, ra)}
                 >
                   <div className="bg-foreground/5 px-2 py-1 rounded border border-[var(--glass-border)]">
                     {ra.id_ra}
@@ -62,12 +67,12 @@ export function RaOgMatrix() {
             </tr>
           </thead>
           <tbody>
-            {ogs.map((og: string, idx: number) => (
+            {ogs.map((og: { id: string; desc: string }, idx: number) => (
               <tr key={idx} className="hover:bg-foreground/5 transition-colors border-b border-[var(--glass-border)]/50 group">
                 <td className="p-3 align-top">
                   <div className="flex gap-2">
-                    <span className="font-mono text-xs font-medium text-info mt-0.5">OG{String.fromCharCode(97 + idx)}.</span>
-                    <span className="text-foreground/90 leading-relaxed">{og}</span>
+                    <span className="font-mono text-xs font-medium text-info mt-0.5">OG{og.id}.</span>
+                    <span className="text-foreground/90 leading-relaxed">{og.desc}</span>
                   </div>
                 </td>
                 {ras.map((ra: any) => {

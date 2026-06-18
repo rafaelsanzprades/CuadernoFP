@@ -3,9 +3,12 @@ import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { useAppStore } from "@/store/useAppStore";
+import { resolveDescRa, loadCatalogForModule } from "@/services/catalogCache";
 
 export const AnalisisIndividualTab = () => {
-  const { moduleData, cursoData } = useAppStore();
+  const { moduleData, cursoData, activeModuleId } = useAppStore();
+
+  useEffect(() => { if (activeModuleId) loadCatalogForModule(activeModuleId); }, [activeModuleId]);
   const [selectedAlId, setSelectedAlId] = useState<string>("");
   const [simVals, setSimVals] = useState<Record<string, number>>({});
 
@@ -207,7 +210,7 @@ export const AnalisisIndividualTab = () => {
                 <div className="flex justify-between items-start mb-2">
                   <div>
                     <h3 className="font-bold text-success">{ra.id_ra}</h3>
-                    <p className="text-xs text-muted truncate max-w-xs">{ra.desc_ra}</p>
+                    <p className="text-xs text-muted truncate max-w-xs">{resolveDescRa(activeModuleId, ra)}</p>
                   </div>
                   <div className="font-mono font-bold">{n_ra.toFixed(2)} / 10</div>
                 </div>

@@ -289,7 +289,8 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
     article_5: "Artículo 5. Competencias profesionales, personales y sociales.",
     article_6: "Artículo 6. Relación de cualificaciones y unidades de competencia del Catálogo Nacional de Cualificaciones Profesionales incluidas en el título.",
     article_7: "Artículo 7. Entorno profesional en el que el profesional va a ejercer su actividad.",
-    article_8: "Artículo 8. Prospectiva del título en el sector o sectores."
+    article_8: "Artículo 8. Prospectiva del título en el sector o sectores.",
+    article_9: "Artículo 9. Objeto de las enseñanzas del título."
   };
 
   return (
@@ -346,7 +347,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
 
           {selectedTituloObj.boa_articles && Object.keys(selectedTituloObj.boa_articles).length > 0 ? (
             <div className="grid grid-cols-1 gap-6">
-              {['article_2', 'article_3', 'article_4', 'article_5', 'article_6', 'article_7', 'article_8'].map((artKey) => {
+              {['article_2', 'article_3', 'article_4', 'article_5', 'article_6', 'article_7', 'article_8', 'article_9'].map((artKey) => {
                 const content = selectedTituloObj.boa_articles?.[artKey];
                 if (!content) return null;
                 return (
@@ -355,13 +356,56 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
                       <h3 className="text-base font-bold text-foreground">{articleTitles[artKey] || artKey}</h3>
                     </div>
                     <div className="p-6 text-sm text-foreground/80 whitespace-pre-wrap leading-relaxed">
-                      {content}
-                      {artKey === 'article_5' && (selectedTituloObj as any).competencias_cpps && (
+                      {/* Hide raw text when structured data exists */}
+                      {artKey !== 'article_5' && artKey !== 'article_6' && artKey !== 'article_9' && content}
+                                            {/* CPPS rows (Article 5) */}
+                      {artKey === 'article_5' && Array.isArray(selectedTituloObj.boa_articles?.article_5_cpps) && (
                         <div className="mt-6 space-y-2">
-                          {(selectedTituloObj as any).competencias_cpps.map((cpp: any) => (
+                          {(selectedTituloObj.boa_articles as any).article_5_cpps.map((cpp: any) => (
                             <div key={cpp.id} className="flex items-start gap-3 p-3 rounded-lg border border-[var(--glass-border)] bg-foreground/5">
-                              <span className="font-mono font-bold text-[#14a085] shrink-0 mt-0.5">CPPS {cpp.id}.</span>
-                              <span className="text-sm text-foreground">{cpp.descripcion}</span>
+                              <span className="font-mono font-bold text-[#14a085] shrink-0 mt-0.5">CPPS{cpp.id}.</span>
+                              <span className="text-sm text-foreground">{cpp.desc}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      {/* CP rows (Article 6) */}
+                      {artKey === 'article_6' && Array.isArray((selectedTituloObj.boa_articles as any)?.article_6_cps) && (
+                        <div className="mt-6 space-y-4">
+                          {(selectedTituloObj.boa_articles as any).article_6_cps.map((cp: any) => (
+                            <div key={cp.id} className="rounded-lg border border-[var(--glass-border)] bg-foreground/5 overflow-hidden">
+                              <div className="flex items-start gap-3 p-3">
+                                <span className="font-mono font-bold text-[#e67e22] shrink-0 mt-0.5">CP{cp.id}.</span>
+                                <div className="flex-1">
+                                  <span className="font-mono font-semibold text-sm text-foreground">{cp.code}</span>
+                                  <span className="text-xs text-muted ml-2">({cp.ref})</span>
+                                  <p className="text-sm text-foreground mt-1">{cp.desc}</p>
+                                </div>
+                              </div>
+                              {Array.isArray((selectedTituloObj.boa_articles as any)?.article_6_ucs) && (
+                                <div className="border-t border-[var(--glass-border)] bg-foreground/3 px-4 py-2 space-y-1">
+                                  {(selectedTituloObj.boa_articles as any).article_6_ucs
+                                    .filter((uc: any) => uc.cp_id === cp.id)
+                                    .map((uc: any) => (
+                                      <div key={uc.id} className="flex items-start gap-2 py-1">
+                                        <span className="font-mono font-bold text-xs text-[#2980b9] shrink-0 mt-0.5">{uc.id}:</span>
+                                        <span className="text-xs text-foreground/80">{uc.desc}</span>
+                                      </div>
+                                    ))
+                                  }
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      {/* OG rows (Article 9) */}
+                      {artKey === 'article_9' && Array.isArray(selectedTituloObj.boa_articles?.article_9_og) && (
+                        <div className="mt-6 space-y-2">
+                          {(selectedTituloObj.boa_articles as any).article_9_og.map((og: any) => (
+                            <div key={og.id} className="flex items-start gap-3 p-3 rounded-lg border border-[var(--glass-border)] bg-foreground/5">
+                              <span className="font-mono font-bold text-info shrink-0 mt-0.5">OG{og.id}.</span>
+                              <span className="text-sm text-foreground">{og.desc}</span>
                             </div>
                           ))}
                         </div>

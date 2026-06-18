@@ -2489,31 +2489,6 @@ export const demoSeed = {
             "criterio_procedimiento_practicas": 30,
             "criterio_procedimiento_ejercicios": 20,
             "criterio_tareas": 10,
-            "objetivos_generales": [
-                "Identificar los elementos de las infraestructuras, instalaciones y equipos, analizando planos y esquemas y reconociendo los materiales y procedimientos previstos, para establecer la logística asociada al montaje y mantenimiento.",
-                "Elaborar croquis y esquemas, empleando medios y técnicas de dibujo y representación simbólica normalizada, para configurar y calcular la instalación.",
-                "Obtener los parámetros típicos de las instalaciones y equipos, aplicando procedimientos de cálculo y atendiendo a las especificaciones y prescripciones reglamentarias, para configurar y calcular la instalación.",
-                "Valorar el coste de los materiales y mano de obra, consultando catálogos y unidades de obra, para elaborar el presupuesto del montaje o mantenimiento.",
-                "Seleccionar el utillaje, herramientas, equipos y medios de montaje y de seguridad, analizando las condiciones de obra y considerando las operaciones a realizar, para acopiar los recursos y medios.",
-                "Identificar y marcar la posición de los elementos de la instalación o equipo y el trazado de los circuitos, relacionando los planos de la documentación técnica con su ubicación real, para replantear la instalación.",
-                "Identificar, ensamblar e interconectar periféricos y componentes, atendiendo a las especificaciones técnicas, para montar o ampliar equipos informáticos y periféricos.",
-                "Reconocer y ejecutar los procedimientos de instalación y carga de programas, siguiendo las especificaciones del fabricante y aplicando criterios de calidad, para instalar y configurar software base, sistemas operativos y aplicaciones.",
-                "Aplicar técnicas de mecanizado, conexión, medición y montaje, manejando los equipos, herramientas e instrumentos, según procedimientos establecidos y en condiciones de calidad y seguridad, para efectuar el montaje o mantenimiento de los elementos componentes de infraestructuras.",
-                "Ubicar y fijar los equipos y elementos soporte y auxiliares, interpretando los planos y especificaciones de montaje, en condiciones de seguridad y calidad, para montar equipos, instalaciones e infraestructuras.",
-                "Conectar los equipos y elementos auxiliares mediante técnicas de conexión y empalme, de acuerdo con los esquemas de la documentación técnica, para montar las infraestructuras y para instalar los equipos.",
-                "Cargar o volcar programas siguiendo las instrucciones del fabricante y aplicando criterios de calidad para instalar equipos.",
-                "Analizar y localizar los efectos y causas de disfunción o avería en las instalaciones y equipos, utilizando equipos de medida e interpretando los resultados, para mantener y reparar instalaciones y equipos.",
-                "Comprobar la configuración y el software de control de los equipos siguiendo las instrucciones del fabricante, para mantener y reparar instalaciones y equipos.",
-                "Sustituir los elementos defectuosos desmontando y montando los equipos y realizando los ajustes necesarios, analizando planes de mantenimiento y protocolos de calidad y seguridad, para mantener y reparar instalaciones y equipos.",
-                "Comprobar el conexionado, software, señales y parámetros característicos, utilizando la instrumentación y protocolos establecidos, en condiciones de calidad y seguridad, para verificar el funcionamiento de la instalación o equipo.",
-                "Cumplimentar fichas de mantenimiento, informes de montaje y reparación y manuales de instrucciones, siguiendo los procedimientos y formatos establecidos, para elaborar la documentación de la instalación o equipo.",
-                "Analizar y describir los procedimientos de calidad, prevención de riesgos laborales y medioambientales, señalando las acciones que es preciso realizar en los casos definidos para actuar de acuerdo con las normas estandarizadas.",
-                "Mantener comunicaciones efectivas con su grupo de trabajo, interpretando y generando instrucciones, proponiendo soluciones ante contingencias y coordinando las actividades de los miembros del grupo con actitud abierta y responsable, para integrarse en la organización de la empresa.",
-                "Valorar las actividades de trabajo en un proceso productivo, identificando su aportación al proceso global, para participar activamente en los grupos de trabajo y conseguir los objetivos de la producción.",
-                "Reconocer sus derechos y deberes como agente activo en la sociedad, analizando el marco legal que regula las condiciones sociales y laborales, para participar como ciudadano democrático.",
-                "Identificar y valorar las oportunidades de aprendizaje y su relación con el mundo laboral, analizando las ofertas y demandas del mercado para adaptarse a diferentes puestos de trabajo.",
-                "Reconocer las oportunidades de negocio, identificando y analizando demandas del mercado para crear y gestionar una pequeña empresa."
-            ],
             "ra_og_mapping": {
                 "0": [
                     "RA1"
@@ -2626,43 +2601,36 @@ export const demoSeed = {
         "df_ra": [
             {
                 "id_ra": "RA1",
-                "desc_ra": "Identifica los elementos de las instalaciones de telecomunicaciones en viviendas y edificios, reconociendo su funcionalidad y características técnicas.",
                 "peso_ra": 60,
                 "is_dual": "No"
             },
             {
                 "id_ra": "RA2",
-                "desc_ra": "Configura pequeñas instalaciones de infraestructuras comunes de telecomunicaciones, realizando los cálculos y ajustes necesarios.",
                 "peso_ra": 15,
                 "is_dual": "No"
             },
             {
                 "id_ra": "RA3",
-                "desc_ra": "Monta instalaciones de infraestructuras comunes de telecomunicaciones, interpretando planos y esquemas.",
                 "peso_ra": 5,
                 "is_dual": "Sí"
             },
             {
                 "id_ra": "RA4",
-                "desc_ra": "Verifica el funcionamiento de las instalaciones de telecomunicaciones, realizando las pruebas y mediciones reglamentarias.",
                 "peso_ra": 5,
                 "is_dual": "No"
             },
             {
                 "id_ra": "RA5",
-                "desc_ra": "Mantiene y repara instalaciones de telecomunicaciones, diagnosticando averías y aplicando técnicas de mantenimiento.",
                 "peso_ra": 5,
                 "is_dual": "Sí"
             },
             {
                 "id_ra": "RA6",
-                "desc_ra": "Cumple las normas de prevención de riesgos laborales y protección ambiental, evaluando los riesgos asociados.",
                 "peso_ra": 5,
                 "is_dual": "No"
             },
             {
                 "id_ra": "RA7",
-                "desc_ra": "Nueva competencia añadida en base a currículo.",
                 "peso_ra": 5,
                 "is_dual": "No"
             }
@@ -2672,371 +2640,318 @@ export const demoSeed = {
                 "id_ce": "CE1.a",
                 "id_ra": "RA1",
                 "id_ud": "UD01",
-                "desc_ce": "Se ha analizado la normativa sobre infraestructuras comunes de telecomunicaciones en edificios.",
                 "peso_ce": "13"
             },
             {
                 "id_ce": "CE1.b",
                 "id_ra": "RA1",
                 "id_ud": "UD01",
-                "desc_ce": "Se han identificado los elementos de las zonas comunes y privadas.",
                 "peso_ce": "13"
             },
             {
                 "id_ce": "CE1.c",
                 "id_ra": "RA1",
                 "id_ud": "UD01",
-                "desc_ce": "Se han descrito los tipos de instalaciones que componen una ICT (infraestructura común de telecomunicaciones).",
                 "peso_ce": "13"
             },
             {
                 "id_ce": "CE1.d",
                 "id_ra": "RA1",
                 "id_ud": "UD01",
-                "desc_ce": "Se han descrito los tipos y la función de recintos (superior, inferior) y registros (enlace, secundario, entre otros) de una ICT.",
                 "peso_ce": "13"
             },
             {
                 "id_ce": "CE1.e",
                 "id_ra": "RA1",
                 "id_ud": "UD01",
-                "desc_ce": "Se han identificado los tipos de canalizaciones (externa, de enlace, principal, entre otras).",
                 "peso_ce": "12"
             },
             {
                 "id_ce": "CE1.f",
                 "id_ra": "RA1",
                 "id_ud": "UD01",
-                "desc_ce": "Se han descrito los tipos de redes que componen la ICT (alimentación, distribución, dispersión e interior).",
                 "peso_ce": "12"
             },
             {
                 "id_ce": "CE1.g",
                 "id_ra": "RA1",
                 "id_ud": "UD01",
-                "desc_ce": "Se han identificado los elementos de conexión.",
                 "peso_ce": "12"
             },
             {
                 "id_ce": "CE1.h",
                 "id_ra": "RA1",
                 "id_ud": "UD01",
-                "desc_ce": "Se ha determinado la función y características de los elementos y equipos de cada sistema (televisión, telefonía, seguridad, entre otros).",
                 "peso_ce": "12"
             },
             {
                 "id_ce": "CE2.a",
                 "id_ra": "RA2",
                 "id_ud": "UD01",
-                "desc_ce": "Se han identificado las especificaciones técnicas de la instalación.",
                 "peso_ce": "13"
             },
             {
                 "id_ce": "CE2.b",
                 "id_ra": "RA2",
                 "id_ud": "UD01",
-                "desc_ce": "Se ha aplicado la normativa de ICT y el REBT en la configuración de la instalación.",
                 "peso_ce": "13"
             },
             {
                 "id_ce": "CE2.c",
                 "id_ra": "RA2",
                 "id_ud": "UD01",
-                "desc_ce": "Se han utilizado herramientas informáticas de aplicación.",
                 "peso_ce": "13"
             },
             {
                 "id_ce": "CE2.d",
                 "id_ra": "RA2",
                 "id_ud": "UD01",
-                "desc_ce": "Se han calculado los parámetros de los elementos y equipos de la instalación.",
                 "peso_ce": "13"
             },
             {
                 "id_ce": "CE2.e",
                 "id_ra": "RA2",
                 "id_ud": "UD01",
-                "desc_ce": "Se han realizado los croquis y esquemas de la instalación con la calidad requerida.",
                 "peso_ce": "12"
             },
             {
                 "id_ce": "CE2.f",
                 "id_ra": "RA2",
                 "id_ud": "UD01",
-                "desc_ce": "Se ha utilizado la simbología normalizada.",
                 "peso_ce": "12"
             },
             {
                 "id_ce": "CE2.g",
                 "id_ra": "RA2",
                 "id_ud": "UD01",
-                "desc_ce": "Se han seleccionado los equipos y materiales que cumplen las especificaciones funcionales, técnicas y normativas.",
                 "peso_ce": "12"
             },
             {
                 "id_ce": "CE2.h",
                 "id_ra": "RA2",
                 "id_ud": "UD01",
-                "desc_ce": "Se ha elaborado el presupuesto correspondiente a la solución adoptada.",
                 "peso_ce": "12"
             },
             {
                 "id_ce": "CE3.a",
                 "id_ra": "RA3",
                 "id_ud": "UD01",
-                "desc_ce": "Se ha interpretado la documentación técnica de la instalación (planos, esquemas, reglamentación, entre otros).",
                 "peso_ce": "13"
             },
             {
                 "id_ce": "CE3.b",
                 "id_ra": "RA3",
                 "id_ud": "UD01",
-                "desc_ce": "Se ha realizado el replanteo de la instalación.",
                 "peso_ce": "13"
             },
             {
                 "id_ce": "CE3.c",
                 "id_ra": "RA3",
                 "id_ud": "UD01",
-                "desc_ce": "Se han ubicado y fijado canalizaciones.",
                 "peso_ce": "13"
             },
             {
                 "id_ce": "CE3.d",
                 "id_ra": "RA3",
                 "id_ud": "UD01",
-                "desc_ce": "Se han realizado operaciones de montaje de mástiles y torretas, entre otros.",
                 "peso_ce": "13"
             },
             {
                 "id_ce": "CE3.e",
                 "id_ra": "RA3",
                 "id_ud": "UD01",
-                "desc_ce": "Se han ubicado y fijado los elementos de captación de señales y del equipo de cabecera.",
                 "peso_ce": "12"
             },
             {
                 "id_ce": "CE3.f",
                 "id_ra": "RA3",
                 "id_ud": "UD01",
-                "desc_ce": "Se ha tendido el cableado de los sistemas de la instalación (televisión, telefonía y comunicación interior, seguridad, entre otros).",
                 "peso_ce": "12"
             },
             {
                 "id_ce": "CE3.g",
                 "id_ra": "RA3",
                 "id_ud": "UD01",
-                "desc_ce": "Se han conexionado los equipos y elementos de la instalación.",
                 "peso_ce": "12"
             },
             {
                 "id_ce": "CE3.h",
                 "id_ra": "RA3",
                 "id_ud": "UD01",
-                "desc_ce": "Se han aplicado los criterios de calidad en las operaciones de montaje.",
                 "peso_ce": "12"
             },
             {
                 "id_ce": "CE4.a",
                 "id_ra": "RA4",
                 "id_ud": "UD01",
-                "desc_ce": "Se han descrito las unidades y los parámetros de los sistemas de la instalación (ganancia de la antena, de amplificadores, directividad, anchos de banda, atenuaciones, interferencias, entre otros).",
                 "peso_ce": "17"
             },
             {
                 "id_ce": "CE4.b",
                 "id_ra": "RA4",
                 "id_ud": "UD01",
-                "desc_ce": "Se han utilizado herramientas informáticas para la obtención de información: situación de repetidores, posicionamiento de satélites, entre otros.",
                 "peso_ce": "17"
             },
             {
                 "id_ce": "CE4.c",
                 "id_ra": "RA4",
                 "id_ud": "UD01",
-                "desc_ce": "Se han orientado los elementos de captación de señales.",
                 "peso_ce": "17"
             },
             {
                 "id_ce": "CE4.d",
                 "id_ra": "RA4",
                 "id_ud": "UD01",
-                "desc_ce": "Se han realizado las medidas de los parámetros significativos de las señales en los sistemas de la instalación.",
                 "peso_ce": "17"
             },
             {
                 "id_ce": "CE4.e",
                 "id_ra": "RA4",
                 "id_ud": "UD01",
-                "desc_ce": "Se han relacionado los parámetros medidos con los características de la instalación.",
                 "peso_ce": "16"
             },
             {
                 "id_ce": "CE4.f",
                 "id_ra": "RA4",
                 "id_ud": "UD01",
-                "desc_ce": "Se han realizado pruebas funcionales y ajustes.",
                 "peso_ce": "16"
             },
             {
                 "id_ce": "CE5.a",
                 "id_ra": "RA5",
                 "id_ud": "UD01",
-                "desc_ce": "Se han realizado las medidas de los parámetros de funcionamiento, utilizando los medios, equipos e instrumentos específicos.",
                 "peso_ce": "17"
             },
             {
                 "id_ce": "CE5.b",
                 "id_ra": "RA5",
                 "id_ud": "UD01",
-                "desc_ce": "Se ha operado con las herramientas e instrumentos adecuados para la diagnosis de averías.",
                 "peso_ce": "17"
             },
             {
                 "id_ce": "CE5.c",
                 "id_ra": "RA5",
                 "id_ud": "UD01",
-                "desc_ce": "Se han identificado los síntomas de averías o disfunciones.",
                 "peso_ce": "17"
             },
             {
                 "id_ce": "CE5.d",
                 "id_ra": "RA5",
                 "id_ud": "UD01",
-                "desc_ce": "Se han planteado hipótesis de las posibles causas de la avería y su repercusión en la instalación.",
                 "peso_ce": "17"
             },
             {
                 "id_ce": "CE5.e",
                 "id_ra": "RA5",
                 "id_ud": "UD01",
-                "desc_ce": "Se ha localizado el subsistema, equipo o elemento responsable de la disfunción.",
                 "peso_ce": "16"
             },
             {
                 "id_ce": "CE5.f",
                 "id_ra": "RA5",
                 "id_ud": "UD01",
-                "desc_ce": "Se ha operado con autonomía en las actividades propuestas.",
                 "peso_ce": "16"
             },
             {
                 "id_ce": "CE6.a",
                 "id_ra": "RA6",
                 "id_ud": "UD01",
-                "desc_ce": "Se ha elaborado la secuencia de intervención para la reparación de la avería.",
                 "peso_ce": "15"
             },
             {
                 "id_ce": "CE6.b",
                 "id_ra": "RA6",
                 "id_ud": "UD01",
-                "desc_ce": "Se han reparado o en su caso sustituido los componentes causantes de la avería.",
                 "peso_ce": "15"
             },
             {
                 "id_ce": "CE6.c",
                 "id_ra": "RA6",
                 "id_ud": "UD01",
-                "desc_ce": "Se ha verificado la compatibilidad del nuevo elemento instalado.",
                 "peso_ce": "14"
             },
             {
                 "id_ce": "CE6.d",
                 "id_ra": "RA6",
                 "id_ud": "UD01",
-                "desc_ce": "Se han restablecido las condiciones de normal funcionamiento del equipo o de la instalación.",
                 "peso_ce": "14"
             },
             {
                 "id_ce": "CE6.e",
                 "id_ra": "RA6",
                 "id_ud": "UD01",
-                "desc_ce": "Se han realizado las intervenciones de mantenimiento con la calidad requerida.",
                 "peso_ce": "14"
             },
             {
                 "id_ce": "CE6.f",
                 "id_ra": "RA6",
                 "id_ud": "UD01",
-                "desc_ce": "Se ha operado con autonomía en las actividades propuestas.",
                 "peso_ce": "14"
             },
             {
                 "id_ce": "CE6.g",
                 "id_ra": "RA6",
                 "id_ud": "UD01",
-                "desc_ce": "Se ha elaborado un informe-memoria de las actividades desarrolladas, los procedimientos utilizados y resultados obtenidos.",
                 "peso_ce": "14"
             },
             {
                 "id_ce": "CE7.a",
                 "id_ra": "RA7",
                 "id_ud": "UD01",
-                "desc_ce": "Se han identificado los riesgos y el nivel de peligrosidad que suponen la manipulación de los materiales, herramientas, útiles, máquinas y medios de transporte.",
                 "peso_ce": "12"
             },
             {
                 "id_ce": "CE7.b",
                 "id_ra": "RA7",
                 "id_ud": "UD01",
-                "desc_ce": "Se han operado las máquinas respetando las normas de seguridad.",
                 "peso_ce": "11"
             },
             {
                 "id_ce": "CE7.c",
                 "id_ra": "RA7",
                 "id_ud": "UD01",
-                "desc_ce": "Se han identificado las causas más frecuentes de accidentes en la manipulación de materiales, herramientas, máquinas de corte y conformado, entre otras.",
                 "peso_ce": "11"
             },
             {
                 "id_ce": "CE7.d",
                 "id_ra": "RA7",
                 "id_ud": "UD01",
-                "desc_ce": "Se han descrito los elementos de seguridad (protecciones, alarmas, pasos de emergencia, entre otros) de las máquinas y de los equipos de protección individual (calzado, protección ocular, indumentaria, entre otros) que se deben emplear.",
                 "peso_ce": "11"
             },
             {
                 "id_ce": "CE7.e",
                 "id_ra": "RA7",
                 "id_ud": "UD01",
-                "desc_ce": "Se ha relacionado la manipulación de materiales, herramientas y máquinas con las medidas de seguridad y protección personal requeridos.",
                 "peso_ce": "11"
             },
             {
                 "id_ce": "CE7.f",
                 "id_ra": "RA7",
                 "id_ud": "UD01",
-                "desc_ce": "Se han determinado las medidas de seguridad y de protección personal que se deben adoptar en la preparación y ejecución de las operaciones de montaje y mantenimiento.",
                 "peso_ce": "11"
             },
             {
                 "id_ce": "CE7.g",
                 "id_ra": "RA7",
                 "id_ud": "UD01",
-                "desc_ce": "Se han identificado las posibles fuentes de contaminación acústica, visual, entre otras del entorno ambiental.",
                 "peso_ce": "11"
             },
             {
                 "id_ce": "CE7.h",
                 "id_ra": "RA7",
                 "id_ud": "UD01",
-                "desc_ce": "Se han clasificado los residuos generados para su retirada selectiva.",
                 "peso_ce": "11"
             },
             {
                 "id_ce": "CE7.i",
                 "id_ra": "RA7",
                 "id_ud": "UD01",
-                "desc_ce": "Se ha valorado el orden y la limpieza de instalaciones y equipos como primer factor de prevención de riesgos.",
                 "peso_ce": "11"
             }
         ],
         "df_ud": [
             {
                 "id_ud": "UD01",
-                "desc_ud": "Infraestructuras comunes de telecomunicación",
                 "horas_ud": 25,
                 "ra_mappings": {
                     "RA1": "RA1"
@@ -3051,7 +2966,6 @@ export const demoSeed = {
             },
             {
                 "id_ud": "UD02",
-                "desc_ud": "Transmisión señales radio y televisión (RTV)",
                 "horas_ud": 30,
                 "ra_mappings": {
                     "RA1": "RA1"
@@ -3066,7 +2980,6 @@ export const demoSeed = {
             },
             {
                 "id_ud": "UD03",
-                "desc_ud": "Antenas y líneas para RTV",
                 "horas_ud": 15,
                 "ra_mappings": {
                     "RA1": "RA1"
@@ -3081,7 +2994,6 @@ export const demoSeed = {
             },
             {
                 "id_ud": "UD04",
-                "desc_ud": "Equipos de procesado y distribución RTV",
                 "horas_ud": 10,
                 "ra_mappings": {
                     "RA1": "RA1"
@@ -3096,7 +3008,6 @@ export const demoSeed = {
             },
             {
                 "id_ud": "UD05",
-                "desc_ud": "Config.inst. RTV (I): distribución captación",
                 "horas_ud": 15,
                 "ra_mappings": {
                     "RA2": "RA2"
@@ -3111,7 +3022,6 @@ export const demoSeed = {
             },
             {
                 "id_ud": "UD06",
-                "desc_ud": "Config.inst. RTV (II): cabeceras TV-SAT",
                 "horas_ud": 10,
                 "ra_mappings": {
                     "RA2": "RA2"
@@ -3126,7 +3036,6 @@ export const demoSeed = {
             },
             {
                 "id_ud": "UD07",
-                "desc_ud": "Montaje de sistemas de recepción RTV en ICT",
                 "horas_ud": 10,
                 "ra_mappings": {
                     "RA3": "RA3"
@@ -3141,7 +3050,6 @@ export const demoSeed = {
             },
             {
                 "id_ud": "UD08",
-                "desc_ud": "Verificación y ajustes en instalaciones en RTV",
                 "horas_ud": 10,
                 "ra_mappings": {
                     "RA4": "RA4"
@@ -3156,7 +3064,6 @@ export const demoSeed = {
             },
             {
                 "id_ud": "UD09",
-                "desc_ud": "Instalaciones de telefonía en ICT",
                 "horas_ud": 15,
                 "ra_mappings": {
                     "RA1": "RA1"
@@ -3171,7 +3078,6 @@ export const demoSeed = {
             },
             {
                 "id_ud": "UD10",
-                "desc_ud": "Instalaciones de interfonía y control de acceso",
                 "horas_ud": 10,
                 "ra_mappings": {
                     "RA1": "RA1"
@@ -3186,7 +3092,6 @@ export const demoSeed = {
             },
             {
                 "id_ud": "UD11",
-                "desc_ud": "Mantenimiento de instalaciones de ICT",
                 "horas_ud": 7,
                 "ra_mappings": {
                     "RA5": "RA5",

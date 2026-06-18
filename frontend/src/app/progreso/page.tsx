@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
+import { resolveDescRa, loadCatalogForModule } from "@/services/catalogCache";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -43,6 +44,7 @@ export default function ProgresoPage() {
           const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeModuleId}`);
           const data = await res.json();
           if (data.status === "success") setModuleData(data.data);
+          loadCatalogForModule(activeModuleId);
         }
         if (activeCursoId && !cursoData) {
           const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeCursoId}`);
@@ -281,7 +283,7 @@ export default function ProgresoPage() {
     const ra_id = String(ra.id_ra);
     ra_info[ra_id] = {
       pond: Number(ra.peso_ra) || 0.0,
-      desc: String(ra.desc_ra || "")
+      desc: resolveDescRa(activeModuleId, ra)
     };
 
     const tris_found = new Set<string>();
