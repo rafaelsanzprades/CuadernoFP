@@ -142,7 +142,7 @@ export const BoletinesTab = () => {
                   <div>
                     <h1 className="text-3xl font-black mb-2 tracking-tight">INFORME DE EVALUACIÓN</h1>
                     <p className="text-lg text-muted-foreground font-semibold flex items-center gap-2">
-                      <GraduationCap className="w-5 h-5" /> Módulo: {info_modulo.modulo || "Módulo Profesional"}
+                      <GraduationCap className="w-5 h-5" /> Módulo: {info_modulo.codigo && info_modulo.nombre ? `${info_modulo.codigo} - ${info_modulo.nombre}` : info_modulo.modulo || "Módulo Profesional"}
                     </p>
                     <p className="text-sm text-muted flex items-center gap-2 mt-1">
                       <Briefcase className="w-4 h-4" /> Ciclo: {info_modulo.ciclo || "Ciclo Formativo"}

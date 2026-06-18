@@ -97,7 +97,8 @@ export function DatosTab() {
     const h_sem = mod.hours ? Math.round(mod.hours / 30) : 0;
     const curso = is2nd ? "2º" : "1º";
 
-    updateInfoModulo("modulo", `${mod.code} - ${mod.name}`);
+    updateInfoModulo("codigo", mod.code);
+    updateInfoModulo("nombre", mod.name);
     updateInfoModulo("h_boa", mod.hours);
     updateInfoModulo("h_sem", h_sem);
     updateInfoModulo("p_ev", 15);
