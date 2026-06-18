@@ -23,10 +23,8 @@ export function WelcomeWizard({ onComplete, fetchModules, setActiveModuleId, set
     setStep("LOADING");
     const toastId = toast.loading("Inyectando entorno de demostración...");
     try {
-      fileManager.resetActiveDb();
+      fileManager.loadDemoData();
       await fetchModules();
-      setActiveModuleId("0237-ictve-pd");
-      setActiveCursoId("0237-ictve-curso-2025-26");
       toast.success("Entorno de demostración cargado!", { id: toastId });
       onComplete();
     } catch (error: unknown) {
@@ -85,87 +83,73 @@ export function WelcomeWizard({ onComplete, fetchModules, setActiveModuleId, set
               <span className="text-5xl"><span className="inline-flex"><Hand className="w-[1.2em] h-[1.2em] mr-1" /></span></span> ¡Bienvenido a Cuaderno FP!
             </h2>
             <p className="text-lg text-muted">
-              Parece que es tu primera vez aquÁ­. Vamos a preparar tu entorno de trabajo para que puedas empezar a volar.
+              Parece que es tu primera vez aquí. Vamos a preparar tu entorno de trabajo para que puedas empezar a volar.
             </p>
           </div>
 
           {step === "LOADING" && (
-            <div className="flex flex-col items-center justify-center py-12 space-y-6">
-              <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-accent"></div>
-              <p className="text-xl font-bold text-foreground animate-pulse">Preparando motores...</p>
+            <div className="flex flex-col items-center justify-center py-10">
+              <div className="animate-spin rounded-full h-12 w-12 border-4 border-accent border-t-transparent mb-4"></div>
+              <p className="text-muted">Preparando tu espacio...</p>
             </div>
           )}
 
           {step === "CHOICE" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-              <div 
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <button
                 onClick={handleLoadDemo}
-                className="group cursor-pointer border-2 border-[var(--glass-border)] hover:border-info rounded-2xl p-6 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 bg-background/50 hover:bg-info/10 flex flex-col items-center text-center gap-4"
+                className="group p-6 rounded-2xl border-2 border-[var(--glass-border)] hover:border-accent/50 bg-foreground/5 hover:bg-accent/5 transition-all text-left"
               >
-                <span className="text-6xl group-hover:scale-110 transition-transform"><span className="inline-flex"><Gift className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
-                <h3 className="text-[1.1rem] font-bold text-foreground">Cargar Demo</h3>
+                <div className="flex items-center gap-3 mb-3">
+                  <Gift className="w-8 h-8 text-accent group-hover:scale-110 transition-transform" />
+                  <h3 className="text-xl font-bold text-foreground">Probar con DEMO</h3>
+                </div>
                 <p className="text-sm text-muted">
-                  Inyecta un entorno ficticio completo con Resultados de Aprendizaje, Unidades y Alumnado para ver cómo funciona todo al instante.
+                  Carga un entorno de demostración con datos ficticios para explorar todas las funciones de la aplicación.
                 </p>
-                <Button className="w-full mt-auto bg-info hover:bg-info">
-                  Explorar Demo
-                </Button>
-              </div>
+              </button>
 
-              <div 
+              <button
                 onClick={() => setStep("CREATE_FORM")}
-                className="group cursor-pointer border-2 border-[var(--glass-border)] hover:border-accent rounded-2xl p-6 transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 bg-background/50 hover:bg-accent/5 flex flex-col items-center text-center gap-4"
+                className="group p-6 rounded-2xl border-2 border-[var(--glass-border)] hover:border-info/50 bg-foreground/5 hover:bg-info/5 transition-all text-left"
               >
-                <span className="text-6xl group-hover:scale-110 transition-transform"><span className="inline-flex"><Rocket className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
-                <h3 className="text-[1.1rem] font-bold text-foreground">Empezar de Cero</h3>
+                <div className="flex items-center gap-3 mb-3">
+                  <Rocket className="w-8 h-8 text-info group-hover:scale-110 transition-transform" />
+                  <h3 className="text-xl font-bold text-foreground">Crear mi entorno</h3>
+                </div>
                 <p className="text-sm text-muted">
-                  Crea tu propio Módulo vacÁ­o y empieza a introducir tus rúbricas y alumnado desde cero.
+                  Empieza desde cero creando tu propia programación y curso vacíos para trabajar con tus datos reales.
                 </p>
-                <Button className="w-full mt-auto bg-accent hover:bg-accent/80 text-background">
-                  Crear mi Módulo
-                </Button>
-              </div>
+              </button>
             </div>
           )}
 
           {step === "CREATE_FORM" && (
-            <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
-              <div className="space-y-2">
-                <label className="text-sm font-semibold text-foreground">Nombre de tu Módulo (La Programación)</label>
-                <div className="relative">
-                  <Input 
-                    value={newPdName}
-                    onChange={(e) => setNewPdName(e.target.value)}
-                    placeholder="Ej: sistemas-informaticos"
-                    className="text-lg py-6"
-                  />
-                  <span className="absolute right-4 top-4 text-muted font-mono">-pd</span>
-                </div>
-                <p className="text-xs text-muted">Este será el "Padre" donde definirás tus RAs y UDs.</p>
+            <div className="space-y-6">
+              <div>
+                <label className="block text-sm font-bold text-foreground mb-2">Nombre de la Programación</label>
+                <Input
+                  value={newPdName}
+                  onChange={(e) => setNewPdName(e.target.value)}
+                  placeholder="Ej: ELE203, 0237-ictve"
+                />
+                <p className="text-xs text-muted mt-1">Se creará un archivo vacío con este identificador.</p>
               </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-semibold text-foreground">Año de tu primer Curso (El Aula Real)</label>
-                <div className="relative">
-                  <span className="absolute left-4 top-4 text-muted font-mono z-10 opacity-50 pr-2 border-r border-[var(--glass-border)]">
-                    {newPdName || "modulo"}-curso-
-                  </span>
-                  <Input 
-                    value={newCursoName}
-                    onChange={(e) => setNewCursoName(e.target.value)}
-                    placeholder="Ej: 2026-27"
-                    className="text-lg py-6 pl-[180px]"
-                  />
-                </div>
-                <p className="text-xs text-muted">AquÁ­ matricularás a tus alumnado reales para este año.</p>
+              <div>
+                <label className="block text-sm font-bold text-foreground mb-2">Año del Curso</label>
+                <Input
+                  value={newCursoName}
+                  onChange={(e) => setNewCursoName(e.target.value)}
+                  placeholder="Ej: 2025-26"
+                />
+                <p className="text-xs text-muted mt-1">El curso se asociará a este año académico.</p>
               </div>
-
-              <div className="flex gap-4 pt-6">
-                <Button variant="secondary" onClick={() => setStep("CHOICE")} className="w-1/3">
+              <div className="flex gap-3 pt-2">
+                <Button onClick={() => setStep("CHOICE")} className="flex-1 bg-foreground/5 hover:bg-foreground/10 text-muted border border-[var(--glass-border)]">
                   Volver
                 </Button>
-                <Button onClick={handleCreateNew} disabled={!newPdName || !newCursoName} className="w-2/3 bg-accent hover:bg-accent/80 text-background text-lg py-6">
-                   Crear mi Entorno
+                <Button onClick={handleCreateNew} className="flex-1 bg-info/20 hover:bg-info/30 text-info border border-info/30">
+                  <Rocket className="w-4 h-4 mr-2" /> Crear Entorno
                 </Button>
               </div>
             </div>

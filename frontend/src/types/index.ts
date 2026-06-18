@@ -198,6 +198,13 @@ export interface CourseGroup {
   [key: string]: any;
 }
 
+export interface FileSource {
+  type: 'none' | 'new' | 'local' | 'drive';
+  fileHandle?: FileSystemFileHandle;
+  driveFileId?: string;
+  fileName?: string;
+}
+
 export interface Degree {
   id: number;
   name: string;
@@ -264,4 +271,9 @@ export interface AppState {
 
   isLoadingData: boolean;
   setLoadingData: (loading: boolean) => void;
+
+  pdFileSource: FileSource;
+  setPdFileSource: (source: FileSource) => void;
+  cursoFileSource: FileSource;
+  setCursoFileSource: (source: FileSource) => void;
 }

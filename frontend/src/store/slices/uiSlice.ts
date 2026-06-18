@@ -1,7 +1,9 @@
 import { StateCreator } from 'zustand';
-import { AppState } from '@/types';
+import { AppState, FileSource } from '@/types';
 
-type UiSlice = Pick<AppState, 'isSidebarOpen' | 'toggleSidebar' | 'isWizardOpen' | 'setWizardOpen' | 'dataSource' | 'setDataSource' | 'isDriveConnected' | 'setDriveConnected' | 'driveUserEmail' | 'setDriveUserEmail' | 'autoSyncDrive' | 'setAutoSyncDrive' | 'googleClientId' | 'setGoogleClientId' | 'isLoadingData' | 'setLoadingData'>;
+const defaultFileSource: FileSource = { type: 'none' };
+
+type UiSlice = Pick<AppState, 'isSidebarOpen' | 'toggleSidebar' | 'isWizardOpen' | 'setWizardOpen' | 'dataSource' | 'setDataSource' | 'isDriveConnected' | 'setDriveConnected' | 'driveUserEmail' | 'setDriveUserEmail' | 'autoSyncDrive' | 'setAutoSyncDrive' | 'googleClientId' | 'setGoogleClientId' | 'isLoadingData' | 'setLoadingData' | 'pdFileSource' | 'setPdFileSource' | 'cursoFileSource' | 'setCursoFileSource'>;
 
 export const createUiSlice: StateCreator<AppState, [], [], UiSlice> = (set) => ({
   isSidebarOpen: true,
@@ -20,4 +22,8 @@ export const createUiSlice: StateCreator<AppState, [], [], UiSlice> = (set) => (
   setGoogleClientId: (id: string) => set({ googleClientId: id }),
   isLoadingData: false,
   setLoadingData: (loading: boolean) => set({ isLoadingData: loading }),
+  pdFileSource: defaultFileSource,
+  setPdFileSource: (source: FileSource) => set({ pdFileSource: source }),
+  cursoFileSource: defaultFileSource,
+  setCursoFileSource: (source: FileSource) => set({ cursoFileSource: source }),
 });
