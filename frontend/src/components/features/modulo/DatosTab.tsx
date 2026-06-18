@@ -45,7 +45,7 @@ export function DatosTab() {
     if (families.length > 0 && moduleData?.info_modulo) {
       const { familia, ciclo, codigo } = moduleData.info_modulo;
       
-      const cleanStr = (s: string) => s ? s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim() : "";
+      const cleanStr = (s: string) => s ? s.toLowerCase().replace(/^[a-z0-9]+\s*-\s*/i, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim() : "";
 
       if (familia && !viewFamilyId) {
         const fam = families.find(f => cleanStr(f.name) === cleanStr(familia));
