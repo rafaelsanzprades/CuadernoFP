@@ -8,6 +8,7 @@
 - **Selector de módulo automático**: Al cargar un módulo desde la BD, el selector se auto-configura con familia, título y módulo correctos
 - **info_modulo desde catálogo**: Cuando `ModuleInfo` está vacío, se construye automáticamente desde las tablas `Module`, `Degree` y `ProfessionalFamily`
 - **Merge de datos**: El frontend ahora hace merge de datos API con datos existentes (no sobreescribe datos DEMO)
+- **Fix matching bidireccional**: El selector de módulo ahora compara nombres de título en ambas direcciones (`includes()` bidireccional) para resolver diferencias entre formato API (`ELE203 - Instalaciones...`) y DEMO (`Técnico en Instalaciones...`)
 
 #### Entorno (`/entorno`)
 - **Aviso RGPD full-width**: Eliminado `max-w-2xl mx-auto`, ahora ocupa todo el ancho disponible
