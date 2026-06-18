@@ -1,5 +1,39 @@
 # 📋 Changelog — Cuaderno FP
 
+## [1.1.0] - 2026-06-18
+
+### ✨ Nuevas Funcionalidades
+
+#### Objetivos Generales (OG) del BOE
+- **Scraping masivo de todofp.es**: 195 ciclos extraídos (67 GM + 94 GS + 34 GB)
+- **Extracción del BOE**: OG del Artículo 9 para 117 de 141 grados (83%)
+- **Scripts de automatización**:
+  - `scrape_all_og.py`: Script maestro de scraping (todofp.es + BOE)
+  - `insert_og_db.py`: Inserción masiva en la base de datos
+  - `seed_ele304_boa.py` / `seed_ele304_og.py`: Datos para ELE304
+- **Cobertura**: 117 grados con OG, 23 sin BOE (FPB), 1 no encontrado
+
+#### Visualización de OG
+- **Catálogo**: OG mostrados en detalle de cada ciclo formativo
+- **Matrices curriculares**: OG integrados en la vista de matrices
+- **Progreso académico**: OG incluidos en el seguimiento de alumnos
+- **Boletines**: OG añadidos a los informes de evaluación
+- **Análisis individual**: OG en el análisis de cada alumno
+
+### 🔧 Mejoras Técnicas
+- **Base de datos actualizada**: `boa_articles` con `article_9_og` para 117 grados
+- **Backend**: Endpoint `/api/catalogs/degrees` devuelve OG
+- **Frontend**: Componentes actualizados para mostrar OG
+- **Build Next.js**: ✅ 24 rutas, sin errores TypeScript
+
+### 📊 Estadísticas
+- **195 ciclos** extraídos de todofp.es
+- **180 ciclos** matcheados con la BD
+- **153 OG** insertados en la BD
+- **117/141 grados** (83%) con OG
+
+---
+
 ## [1.0.1] - 2026-06-15
 
 ### ✨ Nuevas Funcionalidades
