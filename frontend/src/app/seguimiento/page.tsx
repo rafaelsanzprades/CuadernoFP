@@ -1,11 +1,12 @@
 "use client";
-import { Calendar, FileEdit, MapPin, ClipboardCheck } from "lucide-react";
+import { Calendar, FileEdit, MapPin, ClipboardCheck, AlertTriangle } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { AsistenciaTab } from "@/components/features/seguimiento/AsistenciaTab";
+import { AlertaAbandonoTab } from "@/components/features/seguimiento/AlertaAbandonoTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -19,7 +20,8 @@ export default function SeguimientoPage() {
 
   const TABS = [
     { id: "diario", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Diario de aula</span>, cleanLabel: "Diario de aula" },
-    { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> Control de asistencia</span>, cleanLabel: "Control de asistencia" }
+    { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> Control de asistencia</span>, cleanLabel: "Control de asistencia" },
+    { id: "alerta_abandono", label: <span className="flex items-center gap-2"><AlertTriangle className="w-4 h-4 shrink-0" /> Alerta abandono</span>, cleanLabel: "Alerta abandono" }
   ];
 
   const [activeTab, setActiveTab] = useState("diario");
@@ -299,6 +301,10 @@ export default function SeguimientoPage() {
 
           {activeTab === "asistencia" && (
             <AsistenciaTab />
+          )}
+
+          {activeTab === "alerta_abandono" && (
+            <AlertaAbandonoTab />
           )}
 
           </MotionWrapper>

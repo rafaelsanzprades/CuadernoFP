@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map, MessageSquare, FileText } from "lucide-react";
+import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map, MessageSquare, FileText, Route } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -18,6 +18,7 @@ import { FeoeAssignTab } from "@/components/features/alumnado/FeoeAssignTab";
 import { OrientacionTab } from "@/components/features/profesional/OrientacionTab";
 import { ResumenTab } from "@/components/features/profesional/ResumenTab";
 import { TendenciasTab } from "@/components/features/profesional/TendenciasTab";
+import { ItinerarioTab } from "@/components/features/alumnado/ItinerarioTab";
 
 
 export default function AlumnadoPage() {
@@ -36,7 +37,8 @@ export default function AlumnadoPage() {
     { id: "feoe", label: <span className="flex items-center gap-2"><Building2 className="w-4 h-4 shrink-0" /> Prácticas FEOE</span>, cleanLabel: "Prácticas FEOE" },
     { id: "perfil", label: <span className="flex items-center gap-2"><Compass className="w-4 h-4 shrink-0" /> Perfil individual</span>, cleanLabel: "Perfil individual" },
     { id: "resumen", label: <span className="flex items-center gap-2"><ClipboardList className="w-4 h-4 shrink-0" /> Resumen</span>, cleanLabel: "Resumen" },
-    { id: "tendencias", label: <span className="flex items-center gap-2"><BarChart className="w-4 h-4 shrink-0" /> Tendencias</span>, cleanLabel: "Tendencias" }
+    { id: "tendencias", label: <span className="flex items-center gap-2"><BarChart className="w-4 h-4 shrink-0" /> Tendencias</span>, cleanLabel: "Tendencias" },
+    { id: "itinerario", label: <span className="flex items-center gap-2"><Route className="w-4 h-4 shrink-0" /> Itinerario</span>, cleanLabel: "Itinerario formativo" }
   ];
 
   const [activeTab, setActiveTab] = useState("alumnado");
@@ -361,6 +363,7 @@ export default function AlumnadoPage() {
           {activeTab === "perfil" && <OrientacionTab />}
           {activeTab === "resumen" && <ResumenTab />}
           {activeTab === "tendencias" && <TendenciasTab />}
+          {activeTab === "itinerario" && <ItinerarioTab />}
 
           </MotionWrapper>
         </main>

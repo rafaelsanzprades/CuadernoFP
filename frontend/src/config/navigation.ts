@@ -1,4 +1,4 @@
-import { Activity, BookOpen, Building2, Calendar, Compass, FileText, FolderOpen, GraduationCap, Grid, MapPin, Settings, TrendingUp, Users, Wrench, Sparkles } from "lucide-react";
+import { Activity, BookOpen, Building2, Calendar, Compass, FileText, FolderOpen, GraduationCap, Grid, MapPin, Settings, TrendingUp, Users, Wrench, Sparkles, BarChart3, Shield, Award, Globe, Lightbulb } from "lucide-react";
 
 export const navGroups = [
   {
@@ -29,6 +29,18 @@ export const navGroups = [
       { href: "/alumnado", label: "Alumnado y tutoría", icon: Users, description: "Gestión oficial de estudiantes, ficha individual de orientación, asignación FEOE y matriz de tutoría." },
       { href: "/seguimiento", label: "Seguimiento diario", icon: MapPin, description: "Registro detallado del desarrollo diario de las clases y contingencias." },
       { href: "/progreso", label: "Progreso académico", icon: TrendingUp, description: "Panel integrado de calificaciones numéricas, evaluación por resultados de aprendizaje (RA) y analíticas." }
+    ]
+  },
+  {
+    title: "Nuevo",
+    sectionDescription: "Funcionalidades nuevas alineadas con la Ley 3/2022 y el Sistema Estatal de Indicadores de Evaluación y Calidad de la FP.",
+    items: [
+      { href: "/indicadores", label: "Indicadores de calidad", icon: BarChart3, description: "Dashboard de los 34 indicadores del Sistema Estatal de Evaluación y Calidad de la FP." },
+      { href: "/insercion", label: "Inserción laboral", icon: TrendingUp, description: "Indicadores de inserción profesional de titulados de FP (SEPE/INE)." },
+      { href: "/calidad", label: "Calidad del centro", icon: Shield, description: "Autoevaluación y mejora continua según el Marco Común EQAVET." },
+      { href: "/acreditacion", label: "Acreditación competencias", icon: Award, description: "Procedimiento de acreditación y reconocimiento de competencias profesionales." },
+      { href: "/internacionalizacion", label: "Internacionalización", icon: Globe, description: "Programas de movilidad y cooperación internacional (Erasmus+)." },
+      { href: "/innovacion", label: "Innovación y emprendimiento", icon: Lightbulb, description: "Proyectos de innovación, emprendimiento y Hubs de FP." }
     ]
   }
 ];

@@ -1,5 +1,5 @@
 "use client";
-import { Building2, Check, ClipboardList, Edit, Mail, MapPin, Phone, Trash2, UserPlus, Users, AlertTriangle } from "lucide-react";
+import { Building2, Check, ClipboardList, Edit, Handshake, Mail, MapPin, Phone, Trash2, UserPlus, Users, AlertTriangle } from "lucide-react";
 import { useState, useEffect, useMemo } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -14,6 +14,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { fileManager } from "@/services/fileManager";
 import { demoSeed, CRM_SEED_VERSION } from "@/services/demo-ele203-0237ictve-curso202526";
 import type { CrmEmpresa, CrmInteraccion, CursoData } from "@/types";
+import { DualTab } from "@/components/features/feoe/DualTab";
 
 const TIPO_INTERACCION: Record<string, string> = { llamada: "Llamada", email: "Email", visita: "Visita", otro: "Otro" };
 
@@ -53,6 +54,7 @@ export default function FeoePage() {
   const [interForm, setInterForm] = useState<{ fecha: string; tipo: "llamada" | "email" | "visita" | "otro"; descripcion: string; contacto: string }>({ fecha: formatDate(new Date()), tipo: "llamada", descripcion: "", contacto: "" });
 
   const [asignEmpresa, setAsignEmpresa] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState("empresas");
 
   const empresas = (globalData?.crm_empresas || []) as CrmEmpresa[];
   const alumnado = (cursoData?.df_al || []).filter((a: any) => a.Estado !== "Baja");
@@ -155,7 +157,20 @@ export default function FeoePage() {
               <p className="text-muted mt-2 text-lg">Gestión de empresas colaboradoras, asignación de alumnado y seguimiento de prácticas duales y FCT.</p>
             </div>
 
+            <Tabs value={activeTab} onValueChange={setActiveTab}>
+              <TabsList className="mb-2 max-w-full">
+                <TabsTrigger value="empresas">
+                  <span className="flex items-center gap-2"><Building2 className="w-4 h-4 shrink-0" /> Empresas</span>
+                </TabsTrigger>
+                <TabsTrigger value="dual">
+                  <span className="flex items-center gap-2"><Handshake className="w-4 h-4 shrink-0" /> Dual</span>
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
 
+            {activeTab === "dual" && <DualTab />}
+
+            {activeTab === "empresas" && (<>
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <h2 className="text-2xl font-bold text-foreground">Catálogo de empresas colaboradoras</h2>
@@ -352,6 +367,9 @@ export default function FeoePage() {
                   })}
                 </div>
               </div>
+            </>
+            )}
+
           </MotionWrapper>
         </div>
       </div>
