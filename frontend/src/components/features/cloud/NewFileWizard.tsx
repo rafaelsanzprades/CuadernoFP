@@ -14,10 +14,10 @@ interface ModuleOption {
 // Flat list of all modules from initialGroups
 const ALL_MODULES: ModuleOption[] = [
   // 1º Instalaciones de Telecomunicaciones
-  { code: "0237", name: "Infra. comunes de teleco en viviendas y edificios", groupName: "1º Instalaciones de Telecomunicaciones" },
+  { code: "0237", name: "Infraestructuras comunes de telecomunicación en viviendas y edificios", groupName: "1º Instalaciones de Telecomunicaciones" },
   { code: "0359", name: "Electrónica aplicada", groupName: "1º Instalaciones de Telecomunicaciones" },
   { code: "0360", name: "Equipos microinformáticos", groupName: "1º Instalaciones de Telecomunicaciones" },
-  { code: "0361", name: "Infra. de redes de datos y sistemas de telefonía", groupName: "1º Instalaciones de Telecomunicaciones" },
+  { code: "0361", name: "Infraestructuras de redes de datos y sistemas de telefonía", groupName: "1º Instalaciones de Telecomunicaciones" },
   { code: "0362", name: "Instalaciones eléctricas básicas", groupName: "1º Instalaciones de Telecomunicaciones" },
   { code: "1664", name: "Digitalización aplicada a los sectores productivos (GM)", groupName: "1º Instalaciones de Telecomunicaciones" },
   { code: "A997", name: "Tutoría I", groupName: "1º Instalaciones de Telecomunicaciones" },

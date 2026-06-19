@@ -7,7 +7,7 @@ export const initialGroups: CourseGroup[] = [
     degreeName: "ELE203 - Instalaciones de Telecomunicaciones",
     level: "Grado Medio",
     modules: [
-      { id: 101, code: "0237", name: "Infra. comunes de teleco en viviendas y edificios", hours: 167, isDual: false, assignedTeacherId: 2, ras: [
+      { id: 101, code: "0237", name: "Infraestructuras comunes de telecomunicación en viviendas y edificios", hours: 167, isDual: false, assignedTeacherId: 2, ras: [
         { raNumber: 1, description: "Identifica los elementos de las infraestructuras..." },
         { raNumber: 2, description: "Configura pequeñas instalaciones de infraestructuras..." },
         { raNumber: 3, description: "Monta instalaciones de infraestructuras comunes..." }
@@ -17,7 +17,7 @@ export const initialGroups: CourseGroup[] = [
         { raNumber: 2, description: "Monta circuitos electrónicos básicos..." }
       ]},
       { id: 103, code: "0360", name: "Equipos microinformáticos", hours: 100, isDual: false, assignedTeacherId: 4 },
-      { id: 104, code: "0361", name: "Infra. de redes de datos y sistemas de telefonía", hours: 133, isDual: true, assignedTeacherId: 5 },
+      { id: 104, code: "0361", name: "Infraestructuras de redes de datos y sistemas de telefonía", hours: 133, isDual: true, assignedTeacherId: 5 },
       { id: 105, code: "0362", name: "Instalaciones eléctricas básicas", hours: 200, isDual: true, assignedTeacherId: 6 },
       { id: 106, code: "1664", name: "Digitalización aplicada a los sectores productivos (GM)", hours: 33, isDual: false, assignedTeacherId: 4 },
       { id: 107, code: "A997", name: "Tutoría I", hours: 33, isDual: false, assignedTeacherId: 2 },
