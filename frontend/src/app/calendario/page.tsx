@@ -401,14 +401,21 @@ export default function CalendarioPage() {
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
           <main className="flex-1 p-8 content-area">
-      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-        <div>
-          <p className="text-sm font-semibold text-foreground">Calendario Escolar — Resolución Anual Autonómica</p>
-          <p className="text-sm text-muted mt-1">Adaptación de la programación a los días lectivos y festivos oficiales.</p>
-        </div>
-      </div>
-
+            <MotionWrapper>
+          <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+            <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+            <div>
+              <p className="text-sm font-semibold text-foreground">Calendario Escolar — Resolución Anual Autonómica</p>
+              <p className="text-sm text-muted mt-1">Adaptación de la programación a los días lectivos y festivos oficiales.</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+            <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+            <div>
+              <p className="text-sm font-semibold text-foreground">Calendario Escolar — Resolución Anual Autonómica</p>
+              <p className="text-sm text-muted mt-1">Adaptación de la programación a los días lectivos y festivos oficiales.</p>
+            </div>
+          </div>
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4">
                 <Calendar className="w-12 h-12 text-muted" />
                 <h2 className="text-2xl font-bold">No hay Curso Activo seleccionado</h2>

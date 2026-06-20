@@ -1,4 +1,4 @@
-import { Award, CheckSquare, ChevronDown, ChevronUp, Compass, FileText, HelpCircle, Save, ShieldAlert, Square, Stethoscope, User, Users , Info } from "lucide-react";
+import { Award, CheckSquare, ChevronDown, ChevronUp, Compass, FileText, HelpCircle, Save, ShieldAlert, Square, Stethoscope, User, Users, Info } from "lucide-react";
 import React, { useState } from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { Card } from '@/components/ui/Card';
@@ -118,6 +118,14 @@ export const TutoriaTab = () => {
   }
 
   return (
+    <>
+      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+        <div>
+          <p className="text-sm font-semibold text-foreground">Tutoría — RD 659/2023 (Art. 100)</p>
+          <p className="text-sm text-muted mt-1">Acción tutorial y orientación personal y profesional.</p>
+        </div>
+      </div>
     <div className="flex gap-6 h-[calc(100vh-280px)] min-h-[500px]">
       {/* Student List Sidebar */}
       <div className="w-80 bg-foreground/5 border border-white/5 rounded-2xl flex flex-col overflow-hidden">
@@ -126,14 +134,7 @@ export const TutoriaTab = () => {
             Alumnado Activos ({activeStudents.length})
           </div>
         </div>
-      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-        <div>
-          <p className="text-sm font-semibold text-foreground">Tutoría — RD 659/2023 (Art. 100)</p>
-          <p className="text-sm text-muted mt-1">Acción tutorial y orientación personal y profesional.</p>
-        </div>
-      </div>
-
+        <div className="flex-1 overflow-y-auto p-2 space-y-1">
           {activeStudents.map((al) => {
             const isSelected = al.ID === selectedStudentId;
             return (
@@ -427,5 +428,6 @@ export const TutoriaTab = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
