@@ -191,7 +191,7 @@ export default function AlumnadoPage() {
 
           {/* Tab 1: Alumnado */}
           {activeTab === "alumnado" && (
-            <Card className="p-6 border-t-4 border-t-blue-500">
+            <>
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
                   <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
                   <div>
@@ -199,6 +199,7 @@ export default function AlumnadoPage() {
                     <p className="text-sm text-muted mt-1">Gestión académica y seguimiento del alumnado matriculado.</p>
                   </div>
                 </div>
+            <Card className="p-6 border-t-4 border-t-blue-500">
               <div className="flex justify-between items-end mb-6">
                 <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground">
                   <span>Lista oficial</span>
@@ -346,6 +347,7 @@ export default function AlumnadoPage() {
                 </div>
               </div>
             </Card>
+            </>
           )}
 
           {/* Tab 2: Ficha de Tutoría */}

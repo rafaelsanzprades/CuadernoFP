@@ -85,20 +85,7 @@ export default function ProgresoPage() {
           <Header />
           <main className="flex-1 p-8 content-area">
             <MotionWrapper>
-          <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-            <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-            <div>
-              <p className="text-sm font-semibold text-foreground">Progreso y Estadísticas — Ley 3/2022</p>
-              <p className="text-sm text-muted mt-1">Monitorización del rendimiento académico y logro de resultados.</p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-            <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-            <div>
-              <p className="text-sm font-semibold text-foreground">Progreso y Estadísticas — Ley 3/2022</p>
-              <p className="text-sm text-muted mt-1">Monitorización del rendimiento académico y logro de resultados.</p>
-            </div>
-          </div>
+
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4">
                 <TrendingUp className="w-16 h-16 text-muted-foreground opacity-50" />
                 <h2 className="text-2xl font-bold mb-4">No hay Curso o Módulo seleccionado</h2>
@@ -378,6 +365,14 @@ export default function ProgresoPage() {
               ))}
             </TabsList>
           </Tabs>
+
+          <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+            <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+            <div>
+              <p className="text-sm font-semibold text-foreground">Progreso y Estadísticas — Ley 3/2022</p>
+              <p className="text-sm text-muted mt-1">Monitorización del rendimiento académico y logro de resultados.</p>
+            </div>
+          </div>
 
           {/* TAB 1: RESUMEN (Dos bloques uno detrás de otro) */}
           {activeTab === "resumen" && (

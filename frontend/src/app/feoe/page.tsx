@@ -150,20 +150,7 @@ export default function FeoePage() {
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-8 pb-12">
-          <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-            <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-            <div>
-              <p className="text-sm font-semibold text-foreground">Fase en Empresa (FEOE) — Ley 3/2022</p>
-              <p className="text-sm text-muted mt-1">Seguimiento y evaluación del periodo de formación dual en el centro de trabajo.</p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-            <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-            <div>
-              <p className="text-sm font-semibold text-foreground">Fase en Empresa (FEOE) — Ley 3/2022</p>
-              <p className="text-sm text-muted mt-1">Seguimiento y evaluación del periodo de formación dual en el centro de trabajo.</p>
-            </div>
-          </div>
+
             <div>
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <Building2 className="w-6 h-6 text-accent" /> Prácticas FEOE
@@ -185,6 +172,13 @@ export default function FeoePage() {
             {activeTab === "dual" && <DualTab />}
 
             {activeTab === "empresas" && (<>
+          <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+            <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+            <div>
+              <p className="text-sm font-semibold text-foreground">Fase en Empresa (FEOE) — Ley 3/2022</p>
+              <p className="text-sm text-muted mt-1">Seguimiento y evaluación del periodo de formación dual en el centro de trabajo.</p>
+            </div>
+          </div>
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <h2 className="text-2xl font-bold text-foreground">Catálogo de empresas colaboradoras</h2>
