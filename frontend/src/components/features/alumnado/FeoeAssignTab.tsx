@@ -1,5 +1,5 @@
 "use client";
-import { Building2, Check, UserPlus } from "lucide-react";
+import { Building2, Check, UserPlus , Info } from "lucide-react";
 import { useState } from "react";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
@@ -26,6 +26,13 @@ export function FeoeAssignTab() {
 
   return (
     <div className="space-y-6">
+      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+        <div>
+          <p className="text-sm font-semibold text-foreground">Prácticas FEOE — Ley 3/2022</p>
+          <p className="text-sm text-muted mt-1">Seguimiento de la fase de formación en empresa u organismo equiparado.</p>
+        </div>
+      </div>
       <Card className="p-6 border-t-4 border-t-indigo-500">
         <h2 className="text-2xl font-bold text-foreground mb-4">Asignación de alumnado a empresas</h2>
         {empresas.length === 0 ? (

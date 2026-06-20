@@ -1,5 +1,5 @@
 "use client";
-import { BookOpen, ChevronDown, ChevronUp, Clock, FolderTree, GraduationCap, Layers, ListChecks, AlertTriangle } from "lucide-react";
+import { BookOpen, ChevronDown, ChevronUp, Clock, FolderTree, GraduationCap, Layers, ListChecks, AlertTriangle , Info } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -93,6 +93,13 @@ function CiclosContent() {
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <MotionWrapper className="w-full space-y-6 pb-12">
+      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+        <div>
+          <p className="text-sm font-semibold text-foreground">Catálogo Nacional — Ley 3/2022</p>
+          <p className="text-sm text-muted mt-1">Catálogo Nacional de Estándares de Competencias Profesionales.</p>
+        </div>
+      </div>
             <div>
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 Catálogo

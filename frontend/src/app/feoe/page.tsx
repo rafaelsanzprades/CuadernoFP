@@ -1,5 +1,5 @@
 "use client";
-import { Building2, Check, ClipboardList, Edit, Handshake, Mail, MapPin, Phone, Trash2, UserPlus, Users, AlertTriangle } from "lucide-react";
+import { Building2, Check, ClipboardList, Edit, Handshake, Mail, MapPin, Phone, Trash2, UserPlus, Users, AlertTriangle , Info } from "lucide-react";
 import { useState, useEffect, useMemo } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -149,7 +149,15 @@ export default function FeoePage() {
         <Header />
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-8 pb-12">
+          \1
+      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+        <div>
+          <p className="text-sm font-semibold text-foreground">Empresas FEOE — Ley 3/2022</p>
+          <p className="text-sm text-muted mt-1">Gestión de empresas colaboradoras para el carácter dual de la FP.</p>
+        </div>
+      </div>
+
             <div>
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <Building2 className="w-6 h-6 text-accent" /> Prácticas FEOE

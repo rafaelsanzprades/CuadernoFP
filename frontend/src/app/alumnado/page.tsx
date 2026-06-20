@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map, MessageSquare, FileText, Route } from "lucide-react";
+import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map, MessageSquare, FileText, Route , Info } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -192,6 +192,13 @@ export default function AlumnadoPage() {
           {/* Tab 1: Alumnado */}
           {activeTab === "alumnado" && (
             <Card className="p-6 border-t-4 border-t-blue-500">
+                <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+                  <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">Alumnado — RD 659/2023 (Cap. III)</p>
+                    <p className="text-sm text-muted mt-1">Gestión académica y seguimiento del alumnado matriculado.</p>
+                  </div>
+                </div>
               <div className="flex justify-between items-end mb-6">
                 <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground">
                   <span>Lista oficial</span>

@@ -1,5 +1,5 @@
 "use client";
-import { Calendar, FileEdit, MapPin, ClipboardCheck, AlertTriangle } from "lucide-react";
+import { Calendar, FileEdit, MapPin, ClipboardCheck, AlertTriangle , Info } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";

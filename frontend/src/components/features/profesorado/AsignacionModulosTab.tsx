@@ -1,5 +1,5 @@
 "use client";
-import { CheckCircle2, Save, ShieldAlert, UserCog } from "lucide-react";
+import { CheckCircle2, Save, ShieldAlert, UserCog , Info } from "lucide-react";
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useUsers, useAdminModules, useAssignments, saveAssignments } from "@/hooks/useApi";
@@ -76,6 +76,13 @@ export function AsignacionModulosTab() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
+      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+        <div>
+          <p className="text-sm font-semibold text-foreground">Asignación — RD 659/2023</p>
+          <p className="text-sm text-muted mt-1">Asignación de módulos y grupos al profesorado.</p>
+        </div>
+      </div>
       <div>
         <h2 className="text-[1.1rem] font-bold flex items-center gap-3 text-foreground">
           <UserCog className="w-8 h-8 text-accent" />

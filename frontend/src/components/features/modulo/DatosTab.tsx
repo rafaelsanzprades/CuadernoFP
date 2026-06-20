@@ -1,5 +1,5 @@
 "use client";
-import { Calendar, FileEdit, Receipt, Scale, School, UserCircle, Settings } from "lucide-react";
+import { Calendar, FileEdit, Receipt, Scale, School, UserCircle, Settings , Info } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
@@ -172,7 +172,15 @@ export function DatosTab() {
     (data.criterio_tareas || 0);
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
+    \1
+      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+        <div>
+          <p className="text-sm font-semibold text-foreground">Datos del módulo — RD 659/2023 (Art. 93)</p>
+          <p className="text-sm text-muted mt-1">La programación es el instrumento de planificación curricular específico.</p>
+        </div>
+      </div>
+
       
       {/* 1. Centro y docente */}
       <Card className="p-6">

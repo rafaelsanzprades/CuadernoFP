@@ -1,5 +1,7 @@
 "use client";
 import { Sparkles, Info, Lightbulb, Rocket, Users, Building2, FileText, Award } from "lucide-react";
+import Sidebar from "@/components/layout/Sidebar";
+import Header from "@/components/layout/Header";
 import { Card } from "@/components/ui/Card";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 
@@ -24,8 +26,10 @@ const INDICADORES = [
 
 export default function InnovacionPage() {
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex min-h-screen bg-background relative">
+      <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
+        <Header />
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-8 pb-12">
             <div>

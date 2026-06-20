@@ -1,5 +1,5 @@
 "use client";
-import { Award, BookOpen, Calculator, Check, GraduationCap, Puzzle, Target, Settings } from "lucide-react";
+import { Award, BookOpen, Calculator, Check, GraduationCap, Puzzle, Target, Settings , Info } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -120,6 +120,13 @@ export default function MatricesPage() {
             {/* Resultados de aprendizaje y CE */}
             {activeTab === "ra" && (
               <div className="space-y-8 animate-in fade-in duration-500">
+                <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+                  <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">Resultados de Aprendizaje — RD 659/2023 (Anexos I)</p>
+                    <p className="text-sm text-muted mt-1">Los RA y CE son prescriptivos y definen lo que el alumno debe saber y saber hacer.</p>
+                  </div>
+                </div>
                 <Card className="p-6 border-t-4 border-t-accent">
                   <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-4">
                     <span><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></span> RA. Resultados de aprendizaje
@@ -424,6 +431,13 @@ export default function MatricesPage() {
             {/* Unidades didácticas */}
             {activeTab === "ud" && (
               <div className="animate-in fade-in duration-500">
+                <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+                  <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">Unidades Didácticas — RD 659/2023</p>
+                    <p className="text-sm text-muted mt-1">Organización del currículo en unidades de aprendizaje significativas.</p>
+                  </div>
+                </div>
                 <Card className="p-6 border-t-4 border-t-purple-500">
                   <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-4">
                     <span><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></span> UD. Unidades didácticas
@@ -596,6 +610,13 @@ export default function MatricesPage() {
             {/* ── RAs ↔ UDs ────────────────────────────────────── */}
             {activeTab === "relacion" && (
               <div className="animate-in fade-in duration-500">
+                <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+                  <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">Relación RA ↔ UD — RD 659/2023</p>
+                    <p className="text-sm text-muted mt-1">Trazabilidad entre los resultados prescriptivos y las unidades impartidas.</p>
+                  </div>
+                </div>
                 <Card className="p-6 border-t-4 border-t-amber-500">
                   <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-4">
                     <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Relación entre Resultados de aprendizaje y Unidades didácticas
@@ -635,6 +656,13 @@ export default function MatricesPage() {
             {/* ── Contribución de RA en OG ────────────────────────────────────── */}
             {activeTab === "contribucion" && (
               <div className="animate-in fade-in duration-500">
+                <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+                  <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">Contribución a Objetivos Generales — RD 659/2023</p>
+                    <p className="text-sm text-muted mt-1">Alineación de los RA con los objetivos generales del ciclo formativo.</p>
+                  </div>
+                </div>
                 <RaOgMatrix />
               </div>
             )}

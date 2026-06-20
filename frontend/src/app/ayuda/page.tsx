@@ -540,6 +540,13 @@ export default function AyudaPage() {
         <Header breadcrumbSuffix={activeTabCleanLabel} />
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-8 pb-12">
+      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+        <div>
+          <p className="text-sm font-semibold text-foreground">Soporte y Ayuda</p>
+          <p className="text-sm text-muted mt-1">Aspectos genéricos de uso y asistencia técnica para la aplicación.</p>
+        </div>
+      </div>
 
             {/* Título de la página */}
             <div>

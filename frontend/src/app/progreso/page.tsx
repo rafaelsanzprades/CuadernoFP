@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Building2, ClipboardList, Save, Target, TrendingUp, User, Users, AlertTriangle } from "lucide-react";
+import { BarChart, Building2, ClipboardList, Save, Target, TrendingUp, User, Users, AlertTriangle , Info } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -84,7 +84,15 @@ export default function ProgresoPage() {
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
           <main className="flex-1 p-8 content-area">
-            <MotionWrapper>
+            \1
+      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+        <div>
+          <p className="text-sm font-semibold text-foreground">Progreso y Calificaciones — RD 659/2023 (Art. 137)</p>
+          <p className="text-sm text-muted mt-1">Evaluación final de resultados de aprendizaje y toma de decisiones.</p>
+        </div>
+      </div>
+
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4">
                 <TrendingUp className="w-16 h-16 text-muted-foreground opacity-50" />
                 <h2 className="text-2xl font-bold mb-4">No hay Curso o Módulo seleccionado</h2>

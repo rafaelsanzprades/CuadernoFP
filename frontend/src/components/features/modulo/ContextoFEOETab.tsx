@@ -1,5 +1,5 @@
 "use client";
-import { Map } from "lucide-react";
+import { Map , Info } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 
 export function ContextoFEOETab() {
@@ -11,7 +11,15 @@ export function ContextoFEOETab() {
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-500">
+    \1
+      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+        <div>
+          <p className="text-sm font-semibold text-foreground">Contexto y FEOE — Ley 3/2022</p>
+          <p className="text-sm text-muted mt-1">Integración del período en empresa en el currículo del módulo.</p>
+        </div>
+      </div>
+
       <div className="glass-card p-6 border-t-4 border-t-blue-500">
         <h2 className="text-[1.1rem] font-bold flex items-center gap-2 text-foreground mb-4">
           <span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> Contexto y FEOE

@@ -1,5 +1,5 @@
 "use client";
-import { BarChart2, ClipboardEdit, Settings, Users } from "lucide-react";
+import { BarChart2, ClipboardEdit, Settings, Users , Info } from "lucide-react";
 import { useState } from "react";
 import { useAppStore } from "@/store/useAppStore";
 import { AttendanceGrid } from "@/components/features/seguimiento/AttendanceGrid";
@@ -17,7 +17,15 @@ export function AsistenciaTab() {
   ];
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
+    \1
+      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+        <div>
+          <p className="text-sm font-semibold text-foreground">Asistencia — RD 659/2023 (Art. 136)</p>
+          <p className="text-sm text-muted mt-1">El control de asistencia es obligatorio para mantener la evaluación continua.</p>
+        </div>
+      </div>
+
       <div>
         <h2 className="text-[1.1rem] font-bold flex items-center gap-3 text-foreground">
           <Users className="w-8 h-8 text-accent" /> Control de asistencia

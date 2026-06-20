@@ -1,5 +1,5 @@
 "use client";
-import { CheckCircle2, Edit2, Filter, Search, Shield, Trash2, UserPlus, Users, X } from "lucide-react";
+import { CheckCircle2, Edit2, Filter, Search, Shield, Trash2, UserPlus, Users, X , Info } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { Card } from "@/components/ui/Card";
 import { motion, AnimatePresence } from "framer-motion";
@@ -94,6 +94,13 @@ export function GestionUsuariosTab() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
+      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+        <div>
+          <p className="text-sm font-semibold text-foreground">Gestión Docente — RD 659/2023 (Título V)</p>
+          <p className="text-sm text-muted mt-1">Requisitos y atribuciones del profesorado de FP.</p>
+        </div>
+      </div>
       
       {/* Cabecera */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
