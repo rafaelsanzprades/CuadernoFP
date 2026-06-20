@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Building2, ClipboardList, Save, Target, TrendingUp, User, Users, AlertTriangle , Info } from "lucide-react";
+import { BarChart, Building2, ClipboardList, Save, Target, TrendingUp, User, Users, AlertTriangle , Info, FolderOpen } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -15,6 +15,7 @@ import { AnalisisGrupalTab } from "@/components/features/analisis/AnalisisGrupal
 import { AnalisisIndividualTab } from "@/components/features/analisis/AnalisisIndividualTab";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
+import Link from "next/link";
 
 export default function ProgresoPage() {
   const { 
@@ -86,10 +87,15 @@ export default function ProgresoPage() {
           <main className="flex-1 p-8 content-area">
             <MotionWrapper>
 
-              <Card className="p-12 text-center flex flex-col items-center justify-center gap-4">
+              <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <TrendingUp className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-2xl font-bold mb-4">No hay Curso o Módulo seleccionado</h2>
-                <p className="text-muted">Por favor, ve a la sección de Datos y asegúrate de cargar ambos.</p>
+                <h2 className="text-2xl font-bold">No hay curso ni programación cargada</h2>
+                <p className="text-muted mb-4">Debes abrir o crear un archivo de programación y curso en tu Entorno de trabajo.</p>
+                <Link href="/entorno">
+                  <Button variant="default" className="gap-2">
+                    <FolderOpen className="w-4 h-4" /> Ir a mi Entorno
+                  </Button>
+                </Link>
               </Card>
             </MotionWrapper>
           </main>

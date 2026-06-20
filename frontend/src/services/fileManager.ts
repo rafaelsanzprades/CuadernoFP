@@ -65,7 +65,7 @@ export const fileManager = {
   // ── NEW (Wizard) ────────────────────────────────────────
 
   /** Create a new empty programación from catalog data */
-  async createNewProgramacion(moduleCode: string, moduleName: string): Promise<boolean> {
+  async createNewProgramacion(moduleCode: string, moduleName: string, extras?: Record<string, any>): Promise<boolean> {
     try {
       const store = useAppStore.getState();
       store.setDataSource("local");
@@ -128,6 +128,7 @@ export const fileManager = {
         info_modulo: {
           codigo: moduleCode,
           nombre: moduleName,
+          ...(extras || {})
         },
         config_contexto: {},
         config_aula: {},
@@ -167,6 +168,34 @@ export const fileManager = {
       actuaciones_tutoria: [],
       __version__: 1,
     };
+
+    const id = `${cursoName.toLowerCase().replace(/\s+/g, '-')}-${year}`;
+    store.setActiveCursoId(id);
+    store.setCursoData(newCursoData);
+    store.setCursoFileSource({ type: 'new', fileName: `${id}.cddc` });
+    return true;
+  },
+
+  /** Create a new curso with demo data (appends " Demo" to student last names) */
+  createNewCursoFromDemo(cursoName: string, year: string): boolean {
+    const store = useAppStore.getState();
+    store.setDataSource("local");
+
+    const demoCursoData = demoSeed["0237-ictve-curso-2025-26" as keyof typeof demoSeed];
+    const newCursoData: CursoData = JSON.parse(JSON.stringify(demoCursoData));
+    
+    if (newCursoData.df_al) {
+      newCursoData.df_al.forEach((al: any) => {
+        if (al.Apellidos) {
+          al.Apellidos = al.Apellidos + " Demo";
+        } else {
+          al.Apellidos = "Demo";
+        }
+      });
+    }
+    
+    // Convert to version 1 to start fresh
+    newCursoData.__version__ = 1;
 
     const id = `${cursoName.toLowerCase().replace(/\s+/g, '-')}-${year}`;
     store.setActiveCursoId(id);

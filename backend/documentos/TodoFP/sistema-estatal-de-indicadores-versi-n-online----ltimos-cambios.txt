@@ -1,0 +1,1849 @@
+ 
+ 
+SISTEMA ESTATAL de INDICADORES 
+de la EVALUACIÓN de la  
+FORMACIÓN PROFESIONAL 
+ 
+Primera edición. Junio 2025 
+ 
+  
+ 
+Secretaría General de Formación Profesional 
+Subdirección General de Evaluación y Calidad del Sistema 
+ 
+ 
+Sistema Estatal de indicadores de la evaluación de la 
+Formación Profesional 
+Primera edición, junio 2025 
+MINISTERIO DE EDUCACIÓN, FORMACIÓN PROFESIONAL Y DEPORTES 
+Secretaría General de Formación Profesional 
+Subdirección General de Evaluación y Calidad del Sistema 
+Madrid 2025 
+ 
+ 
+ 
+ 2
+Catálogo de publicaciones del MEFD: https://librería.educacion.gob.es 
+Catálogo de Publicaciones de la Administración General del Estado (CPAGE): https://cpage.mpr.gob.es/  
+Sistema Estatal de Indicadores de la Evaluación de la Formación Profesional 
+ 
+MINISTERIO DE EDUCACIÓN, FORMACIÓN PROFESIONAL 
+Y DEPORTES 
+Secretaría General de Formación Profesional 
+Subdirección General de Evaluación y Calidad del Sistema 
+Edita: 
+© SECRETARÍA GENERAL TÉCNICA 
+Subdirección General de Atención al Ciudadano, 
+Documentación y Publicaciones 
+Edición: 2025 
+NIPO : 164-25-122-9 
+ 
+ 
+ 3
+Un Sistema de Formación Profesional de calidad a lo largo de la vida, en 
+equidad, significativo personal y socialmente y para el tejido productivo, que 
+satisfaga tanto el desarrollo de la personalidad como las necesidades 
+individuales de cualificación, adaptación y reciclaje profesional, así como las de 
+los sectores productivos, y suponga la creación sostenida de valor para las 
+personas y las empresas. 
+Ley Orgánica 3/2022, de 31 de marzo,  
+de ordenación e integración de la Formación Profesional.
+ 
+ 
+ 4
+Índice 
+ 
+PRESENTACIÓN ......................................................................................................... 5 
+MARCO DE REFERENCIA .......................................................................................... 9 
+EJES E INDICADORES ............................................................................................. 11 
+1. Personas en formación ...................................................................................... 12 
+2. Oferta de enseñanzas ....................................................................................... 17 
+3. Empresas y organismos equiparados ................................................................ 21 
+4. Personal docente y formador ............................................................................. 25 
+5. Centros proveedores de formación .................................................................... 29 
+6. Inserción profesional ......................................................................................... 33 
+7. Digitalización, sostenibilidad, emprendimiento e innovación .............................. 37 
+8. Acreditación de competencias profesionales ..................................................... 41 
+9. Financiación ...................................................................................................... 45 
+10. Orientación profesional ...................................................................................... 48 
+11. Equidad y flexibilización del Sistema ................................................................. 51 
+12. Internacionalización ........................................................................................... 55 
+TABLA DE CATEGORÍAS ......................................................................................... 59 
+MAPA DEL SISTEMA ESTATAL DE INDICADORES ............................................... 66 
+ 
+  
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 5
+PRESENTACIÓN 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 6
+La Formación Profesional cuenta con una larga trayectoria en la cultura de la evaluación, 
+impulsada en gran medida por su tradicional vinculación a evidencias como la inserción 
+laboral de las personas que reciben formación. Mantiene, además, una vinculación estrecha 
+con el entorno productivo a través de las prácticas en empresas y pone el foco en dar 
+respuesta a las diferentes necesidades formativas que tienen las personas a lo largo de la vida. 
+La evaluación del Sistema de Formación Profesional constituye una estrategia fundamental 
+para garantizar su calidad, eficiencia y eficacia. Esta evaluación no solo permite verificar el 
+cumplimiento de los objetivos establecidos y el uso eficiente de los recursos asignados, sino 
+que, sobre todo, asegura una respuesta adecuada al compromiso que el sistema mantiene 
+con la ciudadanía. 
+La profunda transformación y modernización que ha experimentado el Sistema de Formación 
+Profesional en los últimos años fundamenta la necesidad de establecer un sistema propio de 
+evaluación. Este debe estar alineado con las características e idiosincrasia propias de la 
+Formación Profesional, tanto de la Formación Profesional del Sistema Educativo, como de la 
+Formación Profesional dirigida a personas trabajadoras, y permitir un seguimiento riguroso 
+de su evolución. Para ello se requiere la elaboración de un conjunto de indicadores que 
+posibilite monitorear y evaluar su calidad de manera continua, integral y contextualizada.  
+La evaluación de la calidad es un concepto complejo, que no puede reducirse a los resultados 
+como único indicador. La calidad, por tanto, implica la interacción de múltiples variables: la 
+satisfacción de las personas que se forman, la adecuación de la formación a las necesidades 
+del entorno laboral, la eficiencia en el uso de recursos, la equidad en el acceso y progresión, 
+la actualización científica y metodológica, y la capacidad de inserción laboral, entre otros 
+factores. Estas dimensiones no siempre son fáciles de medir ni se comportan de forma 
+homogénea; por eso, evaluar la calidad exige una mirada integral y una calificación constante 
+basada en evidencias.  
+Con este enfoque, presentamos, en este documento, la primera edición del Sistema estatal 
+de Indicadores de Evaluación de la Formación Profesional, con el objetivo de facilitar la 
+recogida de datos pertinentes que permitan comprender y evaluar su nivel de eficiencia y 
+efectividad. Asimismo, esta información obtenida orientará la toma de decisiones de todas 
+las instituciones y sectores involucrados en el ámbito educativo y profesional. 
+La mirada que se presenta en esta primera edición del Sistema estatal de Indicadores de 
+Evaluación de la Formación Profesional recoge muchos puntos de vista, matices y 
+valoraciones. Ha sido definida y propuesta en el seno del Comité Técnico de Calidad y 
+Evaluación de Formación Profesional, creado en octubre de 2024, como órgano de 
+cooperación territorial, en el que participan las administraciones con competencias en la 
+Formación Profesional del sistema educativo y en la Formación Profesional dirigida a personas 
+trabajadoras. En estrecha colaboración con el comité se encuentra la Subdirección General 
+de Estadística y Estudios, unidad del Ministerio que trabaja en la realización de estadísticas. 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 7
+Para la elaboración de este documento se trasladó un borrador del mismo a la Mesa de 
+Diálogo Social, órgano participativo clave que integra a los agentes sociales y económicos, con 
+el objetivo de recoger sus aportaciones y enriquecer así el proceso de construcción colectiva. 
+Además de los indicadores propuestos por las distintas organizaciones que forman parte del 
+Sistema de Formación Profesional, se incorporan aquellos que permiten dar respuesta a las 
+estadísticas internacionales en los que dicho Sistema participa activamente. De este modo, se 
+garantiza la alineación con estándares internacionales y se refuerza la comparabilidad y 
+visibilidad de la Formación Profesional en un contexto global. 
+El Sistema estatal de Indicadores que se presenta refleja lo que actualmente es posible medir 
+y analizar en un Sistema de Formación Profesional que acaba de iniciarse, con procesos aún 
+en fase de consolidación y con la necesidad de seguir perfeccionando las herramientas de 
+evaluación. Por ello, algunos indicadores no se recogen en esta primera edición, ya sea por la 
+falta de disponibilidad de datos o por su menor relevancia en esta etapa. No obstante, se 
+establece una base sólida que permitirá incorporar nuevas variables en futuras ediciones, 
+algunas de ellas ya identificadas, como es el caso de la modalidad de oferta modular, o un 
+mayor análisis del personal formador. 
+Este documento se articula en dos partes que fundamentan la creación del Sistema estatal de 
+Indicadores; en la primera se describen de forma pormenorizada los ejes e indicadores con 
+ejemplos de su posible concreción, poniendo el foco en las personas en formación, 
+enseñanzas, empresas, personal docente y formador, centros proveedores, inserción 
+profesional, emprendimiento, digitalización y sostenibilidad. Asimismo, se incluyen 
+indicadores sobre la acreditación de competencias profesionales, la financiación, orientación, 
+calidad del Sistema, equidad e internacionalización. Cada indicador se acompaña de posibles 
+concreciones, con el fin de ejemplificar los datos que nutrirán el análisis de la calidad del 
+Sistema y que ayudarán a elaborar el Informe del Sistema de Formación Profesional. 
+En la segunda parte se dibuja el mapa general de la primera edición del Sistema estatal de 
+Indicadores de la Evaluación que incluye 12 ejes y 34 indicadores. 
+La participación activa de las Administraciones en el diseño del sistema y en su desarrollo, así 
+como su implicación en la producción de estadística oficial, constituye un elemento esencial 
+para garantizar la obtención de datos veraces y fiables. A ello se suma la recopilación de 
+información adicional de interés para el proyecto, lo que contribuye significativamente a la 
+construcción de una herramienta rigurosa y útil para articular el desarrollo presente y futuro 
+de la Formación Profesional. 
+Cabe destacar que la colaboración de la Subdirección General de Estadística y Estudios del 
+Ministerio de Educación, Formación Profesional y Deportes (MEFD) será clave para fortalecer 
+los marcos de cooperación con las Administraciones autonómicas, responsables de la 
+elaboración de estadísticas educativas y formativas en el marco de este proyecto. Asimismo, 
+esta colaboración facilitará la coordinación con otros productores de estadísticas estatales y 
+con organismos internacionales en materia estadística. 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 8
+Por todo ello, el Sistema estatal de Indicadores se configura en una obra de consulta y 
+referencia indispensable para las administraciones, los órganos de participación institucional 
+y los agentes implicados en el proceso formativo (alumnado, personal docente y formador, 
+profesionales, empresas y entidades), además de constituirse como una herramienta valiosa 
+para el conjunto de la ciudadanía.  
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+ 9
+MARCO DE REFERENCIA 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+10
+Para la elaboración de este informe, además de los parámetros ya descritos, se toma como base 
+la Ley Orgánica 3/2022, de 31 de marzo, de ordenación e integración de la Formación Profesional. 
+Esta norma establece, en su artículo 110, que la Administración General del Estado establecerá y 
+coordinará un sistema de evaluación del Sistema de Formación Profesional, con el fin de asegurar 
+su mejora e innovación continua, en colaboración con las administraciones con competencias en la 
+materia. 
+Por su parte, el Real Decreto 659/2023, de 18 de julio, por el que se desarrolla la ordenación del 
+Sistema de Formación Profesional, dispone que los elementos del sistema serán objeto de 
+seguimiento, supervisión y control por parte de todas las administraciones competentes, con el 
+objetivo de garantizar su eficacia y adecuación a las necesidades formativas y laborales. 
+Los resultados de esta evaluación se plasmarán en el Informe del Estado del Sistema de Formación 
+Profesional, de periodicidad bienal.   
+La información y los datos utilizados para el diseño de los ejes e indicadores han sido recopilados a 
+partir de diversas fuentes especializadas en los ámbitos educativo y laboral. Entre las principales 
+destacan la Subdirección General de Estadística y Estudios, a través de las estadísticas educativas y 
+laborales de ámbito estatal, así como las administraciones autonómicas, tanto en lo relativo a la 
+Formación Profesional del Sistema Educativo como a la Formación Profesional dirigida a personas 
+trabajadoras. Asimismo, se han considerado otras fuentes relevantes, como el Instituto Nacional de 
+Estadística (INE), el Servicio Público de Empleo Estatal (SEPE) y organismos internacionales como 
+Eurostat y la OCDE. 
+El Sistema estatal de Indicadores de Evaluación de la Formación Profesional que se presenta, está 
+alineado con el marco de referencia europeo de garantía de la calidad para la Formación Profesional 
+EQAVET. 
+Cada eje representa un valor relevante en la evaluación de la calidad del Sistema de Formación 
+Profesional. Para el estudio de cada uno de ellos, se contemplan uno o varios indicadores, todos 
+ellos consensuados en el Comité Técnico de Calidad y Evaluación de Formación Profesional, que 
+coordina la Subdirección General de Evaluación y Calidad del Sistema, de la Secretaría General de 
+Formación Profesional, y en el que participan las administraciones educativas y laborales de las 
+comunidades autónomas, además de la Subdirección General de Estadística y Estudios.  
+Se recoge así, en este documento, el resultado final del trabajo desarrollado conforme a lo 
+establecido en el Marco Común de Garantía de Evaluación y Calidad definido en el seno de este 
+Comité.  
+El presente documento constituye un objetivo en sí mismo, al configurarse como una declaración 
+de intenciones en materia de evaluación de la calidad del Sistema de Formación Profesional. Su 
+desarrollo se sitúa en el marco del nuevo Sistema de Formación Profesional, actualmente en fase 
+de implantación. La coexistencia temporal con elementos del sistema anteriores a las disposiciones 
+introducidas por la Ley 3/2022, así como los plazos requeridos para la disponibilidad de datos 
+estadísticos, condicionarán su medición, que se llevará a cabo de forma progresiva. 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+11
+ 
+ 
+EJES E INDICADORES
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+12
+Personas en formación 
+ 
+ 
+1 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+13
+PERSONAS EN FORMACIÓN 
+Definición: 
+ 
+Contexto: 
+Uno de los objetivos prioritarios del Sistema de Formación Profesional en los últimos años ha 
+sido reducir la brecha existente entre el estado español y otros países europeos en relación 
+con el número de personas que acceden a estas enseñanzas. Para avanzar en esta dirección, 
+se han implementado medidas orientadas a mejorar la accesibilidad de la oferta formativa 
+para la ciudadanía, incluyendo un redimensionamiento estratégico de dicha oferta con el 
+propósito de dar respuesta a la creciente demanda de plazas en Formación Profesional. 
+Para la consecución de este objetivo, en los últimos años se han distribuido fondos a las 
+comunidades autónomas para la creación de 376.187 nuevas plazas de Formación Profesional 
+para grados D y E, de las cuales 111.510 han sido en modalidad bilingüe. 
+Con la reciente reforma de la Formación Profesional recogida en la Ley 3/2022, el Sistema de 
+Formación Profesional se enfoca en su apertura a toda la población, incluyendo la preparación 
+para el primer acceso al mundo laboral, la formación continua y la readaptación profesional, 
+con una amplia oferta de formaciones. 
+Del mismo modo, el Sistema de Formación Profesional orienta su actuación a garantizar el 
+acceso a la formación de las personas trabajadoras, incluyendo aquella dirigida a la 
+adaptación a los cambios operados en el entorno laboral. Estas acciones formativas se 
+estructuran de forma ordenada, son acumulables y acreditables, y están diseñadas para 
+favorecer tanto la empleabilidad de calidad como la progresión dentro del propio Sistema de 
+Formación Profesional. 
+En los últimos años la oferta destinada a personas trabajadoras se ha visto complementada 
+con convocatorias específicas de formación de carácter modular, dirigida a la cualificación y 
+recualificación de personas trabajadoras, empleadas o en situación de desempleo, y otras 
+Información sobre alumnado matriculado o que inicia acciones formativas y su rendimiento 
+académico-formativo, certificación y progresión en el Sistema, atendiendo tanto a elementos 
+relacionados con la oferta formativa como a criterios individuales de la población. 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+14
+específicamente dirigidas al aumento de capacitación en digitalización y sostenibilidad 
+aplicada a los diferentes sectores productivos. 
+Además del análisis de las tasas de matriculación, resulta fundamental disponer de 
+información relativa a las personas que finalizan su formación en el Sistema de Formación 
+Profesional. El impulso dado a este sistema en los últimos años ha propiciado una tendencia 
+ascendente en el número de estudiantes que concluyen sus estudios en las distintas 
+enseñanzas de Formación Profesional. 
+Estas cifras son tanto más elevadas cuanto mayor es el nivel de la formación, con el mayor 
+número de personas tituladas en Formación Profesional haciéndolo en ciclos superiores e, 
+igualmente, con un incremento mayor con el paso de los años.  
+Con la reciente reforma de la Formación Profesional recogida en la Ley Orgánica 3/2022, que 
+contempla un Sistema único dirigido tanto a jóvenes como a personas adultas trabajadoras, 
+será relevante extender el análisis del alumnado que finaliza la Formación Profesional a todos 
+los grados formativos y niveles ofertados. 
+Por último, el análisis de la continuidad del alumnado en su itinerario formativo cobra especial 
+relevancia en la evaluación de la calidad del Sistema de Formación Profesional a raíz de la Ley 
+Orgánica 3/2022, la cual establece una oferta formativa estructurada en una dimensión 
+vertical y escalonada, permitiendo un “continuo” ascendente en función de la amplitud de 
+cada oferta formativa. 
+Entre los cursos 2016 – 2017 y 2019-2020, se incrementó en un 4,6% el alumnado graduado 
+en FP Básica que cursó matrícula en FP de Grado Medio en alguno de los 3 años siguientes a 
+su graduación. Por su parte, el alumnado graduado en FP de Grado Medio que cursó matrícula 
+en FP de Grado Superior en alguno de los 3 años siguientes a su graduación, aumentó en un 
+12 % en el mismo periodo. 
+Estos datos reflejan un mayor atractivo de la Formación Profesional entre la población, 
+postulándose como una opción formativa que permite el desarrollo personal y profesional de 
+la persona y mejora continua de su cualificación profesional a lo largo de la vida. 
+Este análisis permitirá valorar en qué medida la población opta por mantener su vinculación 
+con el Sistema de Formación Profesional, completando su itinerario formativo mediante la 
+estructura modular establecida en la actual reforma. Dicha estructura abarca desde los grados 
+A hasta los grados E y contempla los tres niveles de cualificación profesional, facilitando así 
+una formación continua alineada con las demandas de un mercado laboral en constante 
+evolución. 
+En resumen, cobra relevancia en la evaluación de la calidad del Sistema de Formación 
+Profesional la recogida de información relativa a las personas en formación, desde su 
+matriculación inicial hasta la finalización de la acción formativa y su seguimiento posterior, 
+aspectos recogidos en la relación de indicadores que se especifica a continuación. 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+15
+Relación de indicadores 
+1.1. Personas matriculadas. 
+1.2. Tasa de matriculación en formación profesional del sistema educativo. 
+1.3. Personas que finalizan la formación. 
+1.4. Seguimiento educativo posterior de las personas graduadas en formación profesional. 
+1.5. Tasa de abandono en el Sistema de Formación Profesional. 
+1.6. Tasa de promoción en Grados D. 
+Posibles referencias y variables de estudio aplicables a 
+los indicadores 
+• 
+Sexo. 
+• 
+Edad. 
+• 
+Nacionalidad. 
+• 
+Familia profesional. 
+• 
+Nivel de competencia. 
+• 
+Titularidad de centro. 
+• 
+Modalidad de impartición. 
+• 
+Vía de obtención de la titulación. 
+• 
+Situación laboral. 
+Concreción de indicadores: 
+A continuación, se detallan ejemplos orientativos de cómo se podrían concretar los 
+indicadores a partir de las diferentes variables relevantes.  
+ 
+1.1. Personas matriculadas 
+− Alumnado matriculado en Grado X por nivel de competencia, titularidad de centro y 
+modalidad de impartición. 
+− Alumnado matriculado en Grado X por sexo, edad, familia profesional y situación 
+laboral. 
+1.2. Tasa de matriculación en formación profesional del sistema educativo 
+− 
+Tasa bruta de escolarización por sexo y nivel de competencia. 
+1.3. Personas que finalizan la formación 
+− 
+Alumnado que finaliza un Grado X por titularidad de centro, familia profesional y 
+modalidad de impartición. 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+16
+− 
+Alumnado que finaliza un Grado X por sexo, edad, familia profesional y situación 
+laboral. 
+1.4. Seguimiento educativo posterior de las personas graduadas en formación 
+profesional 
+− Porcentaje de alumnado matriculado en Grado X que posee alguna titulación de 
+Grado X-1 por nacionalidad, sexo, familia profesional y nivel de competencia. 
+− Porcentaje de personas graduadas en Grado D - Nivel X matriculadas en Grado D - 
+Nivel X+1 por años desde graduación. 
+− Porcentaje de alumnado graduado en Grado D de nivel 3 matriculado en Enseñanzas 
+Universitarias en alguno de los tres cursos siguientes por curso de graduación, sexo, 
+edad y familia profesional 
+1.5. Tasa de abandono en el Sistema de Formación Profesional 
+− Porcentaje de alumnado matriculado en Grado D que abandona la formación en los 
+dos meses posteriores al inicio por sexo, edad, nacionalidad y titularidad de centro. 
+1.6. Tasa de promoción en Grados D 
+− Porcentaje de personas matriculadas en el primer curso de un Grado D que 
+promocionan al curso siguiente por nivel de competencia, familia profesional, 
+titularidad de centro y modalidad de impartición. 
+− Porcentaje de módulos superados en relación con los evaluados en formaciones de 
+Grado X por sexo, familia profesional y nivel de competencia. 
+Fuentes: 
+− Ministerio de Educación, Formación Profesional y Deportes. 
+− Administraciones autonómicas (Formación Profesional del Sistema Educativo y 
+Formación Profesional de personas trabajadoras). 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+17
+Oferta de enseñanzas 
+ 
+ 
+2 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+18
+OFERTA DE ENSEÑANZAS 
+Definición: 
+Contexto: 
+La Ley Orgánica 3/2022, de 31 de marzo, de ordenación e integración de la Formación 
+Profesional, y el Real Decreto 69/2025, de 4 de febrero, por el que se desarrollan los 
+elementos integrantes y los instrumentos de gestión del Sistema Nacional de Formación 
+Profesional, y se modifica el Real Decreto 375/1999, de 5 de marzo, por el que se crea el 
+Instituto Nacional de las Cualificaciones, enmarcan y articulan, respectivamente, los catálogos 
+que configuran el Sistema de Formación Profesional, los cuales están disponibles para la 
+ciudadanía a través del portal web TodoFP. 
+− El Catálogo Nacional de Estándares de Competencias Profesionales. 
+− El Catálogo Modular de Formación Profesional. 
+− El Catálogo Nacional de Ofertas de Formación Profesional. 
+El Catálogo Nacional de Ofertas de Formación Profesional, toma como referencia el Catálogo 
+de Estándares de Competencias Profesionales, el cual proporciona la base para el diseño de 
+los módulos profesionales y la creación de ofertas de formación profesional, vertebrando un 
+catálogo formativo de dimensión vertical que permite una formación ascendente a lo largo 
+de la vida. 
+Para la elaboración del Catálogo de ofertas del Sistema de Formación Profesional, en los 
+últimos años se ha trabajado en el desarrollo de procedimientos más ágiles en el diseño y 
+actualización de la oferta formativa que permitan el ajuste permanente a las necesidades de 
+formación del marco laboral, acortando los plazos de respuesta a las necesidades formativas 
+de los sectores productivos. 
+Oferta formativa recogida en el Catálogo Nacional de Ofertas de Formación Profesional 
+atendiendo a las características propias de la formación. 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+19
+La observación continuada de la evaluación de la demanda y la oferta de profesiones, 
+ocupaciones y perfiles en el entorno laboral, resulta fundamental para la identificación de las 
+necesidades de cualificación. En este contexto, se han creado Hubs por la Formación 
+Profesional para la participación de empresas de los distintos sectores productivos en la 
+detección de necesidades formativas, diseño y actualización de la oferta formativa. 
+Con el trabajo desarrollado en los últimos años centrado en la actualización de formaciones 
+e incorporación de otras nuevas, el Catálogo Nacional de ofertas de Formación Profesional 
+recoge, con las últimas ofertas publicadas en junio de 2025, y en función del grado formativo: 
+• Grado A: 
+8.392 acreditaciones parciales de la competencia. 
+• Grado B: 
+2.877 certificados de competencia. 
+• Grado C: 
+969 certificados profesionales. 
+• Grado D: 
+184 ciclos formativos. 
+• Grado E: 
+29 cursos de especialización. 
+Este catálogo de ofertas constituye uno de los pilares fundamentales del Sistema, al traducir 
+el Catálogo Nacional de Ofertas de Formación Profesional en una oferta formativa concreta y 
+accesible para la ciudadanía. Para evaluar la calidad del Sistema, resulta esencial analizar no 
+solo el diseño del Catálogo de Ofertas, sino también la forma en que este se materializa en 
+propuestas formativas efectivamente disponibles para la población. 
+Este enfoque permite valorar en qué medida el Sistema responde a las necesidades 
+formativas de distintos perfiles y territorios, aportando información relevante sobre las 
+posibilidades reales de acceso a la Formación Profesional. 
+Asimismo, la perspectiva de análisis centrada en las características propias del Catálogo 
+Formativo proporciona datos significativos sobre la correspondencia entre las ofertas 
+formativas implementadas y las tendencias del sector productivo, así como sobre la evolución 
+de aquellos sectores con mayor demanda de formación. 
+En este contexto, adquiere especial relevancia el análisis del Catálogo Formativo, su 
+evolución, actualización y adecuación a las demandas del mercado laboral, así como el estudio 
+de indicadores clave como la ocupación de plazas disponibles para la ciudadanía o la ratio de 
+estudiantes por grupo, todos ellos elementos fundamentales para valorar la calidad de las 
+enseñanzas ofertadas. 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+20
+Relación de indicadores 
+2.1 Actualización del catálogo formativo. 
+2.2 Índice de ocupación de plazas ofertadas. 
+2.3 Alumnado por grupo. 
+Posibles referencias y variables de estudio aplicables a 
+los indicadores 
+• 
+Familia profesional. 
+• 
+Nivel de competencia. 
+• 
+Titularidad de centro. 
+• 
+Modalidad de impartición. 
+Concreción de indicadores 
+A continuación, se detallan ejemplos orientativos de cómo se podrían concretar los 
+indicadores a partir de las diferentes variables relevantes. 
+ 
+2.1. Actualización del catálogo formativo 
+− Número de programas formativos actualizados o creados en los dos últimos años para 
+alinear la oferta formativa con las demandas del mercado laboral. 
+2.2. Índice de ocupación de plazas ofertadas 
+− Número de plazas ocupadas en formación de Grado X sobre el número de plazas 
+ofertadas en función de familia profesional y titularidad del centro. 
+2.3. Alumnado por grupo 
+− Ratio de alumnado por grupo en Grado X por titularidad de centro y modalidad de 
+impartición. 
+Fuentes: 
+− Ministerio de Educación, Formación Profesional y Deportes. 
+− Administraciones autonómicas (Formación Profesional del Sistema Educativo y 
+Formación Profesional de personas trabajadoras). 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+21
+ 
+Empresas y organismos 
+equiparados 
+ 
+ 
+3 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+22
+Información sobre la participación de las empresas u organismos equiparados atendiendo a 
+características propias de las organizaciones, su contribución al Sistema de Formación 
+Profesional y la materialización en acciones formativas de Formación Profesional Dual. 
+EMPRESAS Y ORGANISMOS 
+EQUIPARADOS 
+Definición: 
+Contexto: 
+El actual Sistema de Formación Profesional considera imprescindible el circuito de 
+trasferencia de conocimiento formación-empresa, a través de la participación de las empresas 
+en el diseño, desarrollo, evaluación e innovación. 
+Este ajuste entre la oferta formativa y la demanda de cualificaciones prevé un beneficio 
+mutuo para empresas y personas en formación. Por un lado, las personas adquieren las 
+habilidades y destrezas requeridas por el mercado laboral, aumentando sus oportunidades 
+de empleabilidad de calidad; por otro, las empresas tienen acceso a una población mejor 
+preparada, reduciendo el tiempo y los recursos necesarios para su capacitación laboral. 
+La participación del tejido empresarial en el Sistema de Formación Profesional se manifiesta, 
+además de en el desempeño de un papel fundamental en el desarrollo de la formación dual, 
+en la actualización de la oferta formativa, la identificación de sectores estratégicos, su 
+implicación en los Proyectos Estratégicos para la Recuperación y Transformación Económica 
+(PERTE), la creación de Hubs por la Formación Profesional, así como en iniciativas como la 
+Alianza por la Formación Profesional o la plataforma FPConecta. 
+En consecuencia, la definición de indicadores que contemplen la participación de empresas u 
+organismos equiparados en el Sistema de Formación Profesional, y que permitan caracterizar 
+dicha participación, resulta imprescindible para un análisis riguroso de la calidad del Sistema. 
+No obstante, esta información no sería completa sin abordar el desarrollo real y aplicado de 
+dicha participación. La Ley Orgánica 3/2022 y el Real Decreto 659/2025 han establecido una 
+nueva ordenación de la Formación Profesional, estructurando la oferta formativa en cinco 
+grados: A, B, C, D y E.  
+Este marco normativo refuerza la colaboración entre el sistema educativo y el entorno 
+productivo, consolidando la formación en entornos reales de trabajo como un elemento 
+esencial para el aprendizaje y la inserción laboral del alumnado. 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+23
+Uno de los principales cambios introducidos es la implantación obligatoria del carácter dual 
+en los grados C y D, lo que implica que todo el alumnado de estos niveles debe realizar parte 
+de su formación en empresa u organismo equiparado, bajo una de las siguientes modalidades: 
+• Régimen General: La estancia en la empresa representa entre el 25 % y el 35 % de la 
+duración total de la formación, e incorpora entre un 10 % y un 20 % de los resultados de 
+aprendizaje establecidos en el currículo. En esta modalidad no existe vinculación contractual 
+entre el alumnado y la empresa, y la formación en el entorno laboral debe iniciarse, 
+preferentemente, en los tres primeros meses desde el comienzo del curso. 
+• Régimen Intensivo: La estancia en la empresa abarca entre el 35 % y el 50 % de la duración 
+total de la formación, e integra más de un 30 % de los resultados de aprendizaje vinculados a 
+estándares de competencia. En este caso, el alumnado mantiene una vinculación contractual 
+con la empresa mediante un contrato de formación, y la alternancia entre el centro educativo 
+y la empresa se organiza en intervalos diarios, semanales o mensuales. 
+Debe considerarse que, por defecto, las ofertas de Grados C y D de Nivel 1 se desarrollan en 
+régimen general, aunque las administraciones competentes pueden autorizar su desarrollo 
+en régimen intensivo. 
+Por su parte, en lo que respecta a ofertas de Grados A y B, estas no requieren formación en 
+empresa, aunque las administraciones competentes pueden determinar si algunos programas 
+la incorporan. En su lugar, pueden incluir actividades de acercamiento al entorno laboral, 
+como visitas a empresas, talleres o experiencias de aprendizaje en colaboración con el sector 
+productivo. En el caso de las ofertas de Grado E, la formación en empresa es opcional y 
+depende de la estructura de cada programa. 
+Garantizar una adecuada implementación de la Formación Profesional Dual y evaluar su 
+impacto en la formación y empleabilidad del alumnado requiere necesariamente considerar 
+el amplio abanico de posibilidades formativas que esta modalidad ofrece. La información que 
+puedan proporcionar los indicadores definidos en este ámbito será clave para avanzar en la 
+mejora continua del Sistema de Formación Profesional, constituyendo una base sólida para la 
+toma de decisiones informadas.  
+En resumen, los indicadores que se presentan a continuación, definidos en función de las 
+variables de estudio identificadas para cada uno de ellos, facilitarán el análisis de dos aspectos 
+clave para la calidad del Sistema de Formación Profesional: la participación empresarial y su 
+desarrollo a través de uno de los elementos centrales y distintivos de la nueva Ley Orgánica 
+3/2022, y la generalización del Sistema Dual de Formación Profesional. 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+24
+Relación de indicadores 
+3.1 Empresas participantes en Formación Profesional. 
+3.2 Personas participantes en Formación Profesional Dual. 
+Posibles referencias y variables de estudio aplicables a 
+los indicadores 
+• Régimen de Formación Profesional Dual. 
+• Familia profesional. 
+• Nivel de competencia. 
+• Titularidad de centro. 
+Concreción de indicadores 
+A continuación, se detallan ejemplos orientativos de cómo se podrían concretar los 
+indicadores a partir de las diferentes variables relevantes. 
+ 
+3.1 Empresas participantes en Formación Profesional 
+− Número de empresas u organismos equiparados que han acogido alumnado de 
+Formación Profesional durante un curso académico por régimen de FP Dual y familia 
+profesional. 
+3.2 Personas participantes en Formación Profesional Dual 
+− Porcentaje de alumnado que realiza acciones formativas de Grado X (A, B y E) con 
+formación en empresa por titularidad de centro, familia profesional y nivel de 
+competencia. 
+− Porcentaje de alumnado que realiza acciones formativas de Grado X (C y D) con 
+formación en empresa por régimen de FP Dual, titularidad de centro, familia profesional 
+y nivel de competencia. 
+Fuentes: 
+− Ministerio de Educación, Formación Profesional y Deportes. 
+− Administraciones autonómicas (Formación Profesional del Sistema Educativo y 
+Formación Profesional de personas trabajadoras). 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+25
+ 
+Personal docente y formador 
+ 
+ 
+4 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+26
+Tipología del personal docente y formador y actualización profesional mediante la 
+formación permanente según las características propias del centro en el que desarrolla su 
+actividad y del propio perfil del personal docente y formador. 
+PERSONAL DOCENTE Y FORMADOR 
+Definición: 
+Contexto: 
+La reciente reforma de la Formación Profesional reconoce la existencia de diversas figuras con 
+función formadora. A partir de la Ley Orgánica 3/2022, no se hace referencia únicamente al 
+profesorado, sino también a otros perfiles colaboradores incorporados, tales como personas 
+expertas de sectores productivos, personas trabajadoras expertas, sénior de empresa, 
+personas prospectoras de empresas u organismos equiparados, y personal de apoyo 
+especializado que asesora y facilita el acompañamiento en el itinerario formativo de personas 
+con discapacidad. 
+En este ámbito, destaca la reciente integración del profesorado perteneciente al cuerpo a 
+extinguir de profesores técnicos de Formación Profesional en el cuerpo de profesores de 
+educación secundaria. 
+Asimismo, la formación permanente del personal docente y formador del Sistema de 
+Formación Profesional constituye, para este colectivo, tanto un derecho como una obligación, 
+además de representar una responsabilidad compartida entre las administraciones 
+educativas y los propios centros que imparten enseñanzas de Formación Profesional. 
+En particular, la normativa vigente hace referencia a programas de formación permanente 
+orientados a la innovación e investigación aplicada, el emprendimiento, la digitalización y el 
+aprendizaje de lenguas extranjeras en distintos entornos. También se contemplan estancias 
+formativas en empresas u organismos equiparados, así como en el marco de acuerdos 
+promovidos por las administraciones con colegios profesionales, universidades y otras 
+instituciones. 
+Desde el año 2020, se han impartido cursos de formación dirigidos al profesorado y personal 
+formador de todas las familias profesionales en las que se estructura la Formación 
+Profesional, centrados en la orientación profesional y otras iniciativas formativas orientadas 
+a la mejora del Sistema. Ejemplos de estas iniciativas son el convenio entre la Secretaría 
+General de Formación Profesional y la Fundación Naturgy, aprobado mediante Resolución de 
+26 de agosto de 2024, que ha dado lugar a dos cursos denominados “Sostenibilidad aplicada 
+al sector productivo: Introducción y Profundización”; cabe mencionar, además, el  
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+27
+programa That’s English, creado por el Ministerio de Educación, Formación Profesional y 
+Deportes, como modelo adaptado a la modalidad de educación a distancia de las enseñanzas 
+de las Escuelas Oficiales de Idiomas, en el que se han formalizado 96.820 matrículas entre los 
+cursos 2020-2021 y 2024-2025. 
+La incorporación de nuevas figuras con función formadora en el Sistema de Formación 
+Profesional exige un análisis específico en el marco de la evaluación de la calidad del Sistema. 
+Por su parte, la actualización formativa de quienes desempeñan funciones de transmisión de 
+conocimientos y habilidades constituye un aspecto relevante para dicha evaluación. 
+En consecuencia, se hace necesario establecer indicadores que permitan, por un lado, 
+conocer el desarrollo en la creación de los nuevos perfiles docentes y formadores, y por otro, 
+analizar aspectos relacionados con la formación permanente de las personas encargadas de 
+impartir las distintas ofertas formativas del Sistema de Formación Profesional. 
+Relación de indicadores 
+4.1 Personal docente. 
+4.2 Otros perfiles docentes y formadores. 
+4.3 Índice de formación del personal docente. 
+Posibles referencias y variables de estudio aplicables a 
+los indicadores 
+ 
+• Sexo. 
+• Edad. 
+• Familia profesional. 
+• Titularidad del centro. 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+28
+Concreción de indicadores 
+A continuación, se detallan ejemplos orientativos de cómo se podrían concretar los 
+indicadores a partir de las diferentes variables relevantes. 
+4.1 Personal docente 
+− Número de personas docentes por sexo, edad, familia profesional y titularidad. 
+4.2 Otros perfiles docentes y formadores 
+− Número de personas no docentes de apoyo al Sistema de Formación Profesional por 
+sexo y edad. 
+4.3 Índice de formación del personal docente 
+− Porcentaje de personas docentes que realiza formación permanente por sexo, edad y 
+familia profesional. 
+Fuentes: 
+− Ministerio de Educación, Formación Profesional y Deportes. 
+− Administraciones autonómicas (Formación Profesional del Sistema Educativo). 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+29
+ 
+Centros proveedores de 
+formación 
+ 
+ 
+5 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+30
+Centros de Formación Profesional en función de las características propias de los centros 
+formativos y entidades colaboradoras del Sistema. 
+CENTROS PROVEEDORES DE 
+FORMACIÓN 
+Definición: 
+Contexto: 
+El nuevo Sistema de Formación Profesional requiere una red de centros orientada hacia un 
+modelo integral, capaz de incorporar el desarrollo de ofertas formativas dirigidas tanto a 
+personas jóvenes en formación inicial como a personas trabajadoras, ocupadas o en situación 
+de desempleo. Estos centros participan activamente en proyectos de innovación, 
+investigación aplicada y emprendimiento; cuentan, además, con una dimensión internacional 
+y forman parte de procesos de acreditación de competencias y orientación profesional. 
+Actualmente, existen diversas tipologías de centros que imparten enseñanzas de Formación 
+Profesional. No obstante, sin desestimar otras fórmulas, se promueve el modelo de centros 
+especializados en Formación Profesional, que ofrezcan formación en los cinco grados (A, B, C, 
+D y E), fomentando al mismo tiempo la coordinación entre centros del sistema educativo y 
+aquellos que imparten formación dirigida a personas trabajadoras, con el objetivo de impulsar 
+iniciativas conjuntas y evitar la coexistencia de redes paralelas. 
+Además de las redes de centros de excelencia dependientes de las administraciones 
+educativas, el Sistema de Formación Profesional cuenta con redes estatales de centros de 
+excelencia y de centros de referencia nacional. 
+Financiada por el Ministerio de Educación, Formación Profesional y Deportes, y distribuida 
+por todo el territorio nacional, la red de Centros de Excelencia —que actualmente cuenta con 
+66 centros— actúa como motor de innovación, genera entornos de investigación y 
+emprendimiento, y ejerce como elemento tractor del conjunto de centros que conforman el 
+Sistema. 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+31
+Por su parte, la red de Centros de Referencia Nacional está conformada por centros públicos 
+que desarrollan acciones de innovación y experimentación en materia de Formación 
+Profesional, especializados en distintos sectores productivos a través de áreas profesionales 
+específicas. Estos centros actúan como referentes en innovación para el conjunto del Sistema 
+de Formación Profesional en su ámbito de actuación, diseñando programas de formación e 
+investigación orientados a dar respuesta a las necesidades de los sectores emergentes e 
+innovadores. En la actualidad, esta red está integrada por 40 centros. 
+Junto a estas dos redes, el conjunto de centros autorizados para impartir ofertas formativas 
+de cualquier grado y modalidad abarca una amplia variedad de tipologías, recogidas en el 
+Registro General de Centros de Formación Profesional. Este registro unifica la información 
+relativa a los centros autorizados por cada comunidad autónoma, así como por la 
+Administración General del Estado en el caso de las ofertas formativas de su competencia. 
+Dicha información se encuentra actualmente disponible para la ciudadanía a través del 
+buscador alojado en la página web TodoFP. 
+Asimismo, el nuevo Sistema de Formación Profesional amplía el ámbito de actuación de los 
+centros tradicionales, incorporando la colaboración de entidades como centros de segunda 
+oportunidad y asimilados, empresas que imparten formación dirigida a sus personas 
+trabajadoras, entidades locales y organizaciones del tercer sector orientadas a la inserción 
+laboral. 
+Resulta fundamental para el Sistema de Formación Profesional articular y mantener una red 
+estable de centros, capaz de responder con agilidad a la programación de actuaciones 
+adaptadas a las características del territorio, especialmente en zonas rurales, áreas con 
+necesidades de desarrollo social y económico, o en contextos de reconversión sectorial del 
+mercado laboral. 
+En este contexto, y considerando la diversidad de tipologías existentes, esta primera edición 
+del Sistema estatal de Indicadores de Evaluación y Calidad define un conjunto de indicadores 
+orientados a recoger información relativa a los distintos tipos de centros que integran el 
+Sistema de Formación Profesional, tanto formativos como colaboradores, con el fin de 
+disponer de datos relevantes sobre este pilar estructural del Sistema. 
+Relación de indicadores 
+5.1 Centros del Sistema de Formación Profesional. 
+5.2 Entidades colaboradoras del Sistema. 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+32
+Posibles referencias y variables de estudio aplicables a los 
+indicadores 
+ 
+• Familia profesional. 
+• Titularidad del centro. 
+• Tipología de centro. 
+• Modalidad de impartición. 
+• Tipo de entidad colaboradora. 
+Concreción de indicadores 
+A continuación, se detallan ejemplos orientativos de cómo se podrían concretar los 
+indicadores a partir de las diferentes variables relevantes. 
+ 
+5.1 Centros del Sistema de Formación Profesional 
+− Número de centros del sistema de Formación Profesional por familia profesional, 
+titularidad, tipología de centro y modalidad de impartición. 
+5.2 Entidades colaboradoras del Sistema 
+− Número de entidades colaboradoras del sistema de Formación Profesional por tipo de 
+entidad colaboradora y familia profesional. 
+Fuentes: 
+− Ministerio de Educación, Formación Profesional y Deportes. 
+− Administraciones autonómicas (Formación Profesional del Sistema Educativo y 
+Formación Profesional de personas trabajadoras). 
+ 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+33
+ 
+Inserción profesional 
+ 
+6 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+34
+Medición de la inserción laboral de personas formadas en Formación Profesional, bien sea 
+por cuenta ajena o por cuenta propia, atendiendo a características relativas a su formación, 
+su incorporación al ámbito laboral y características personales. 
+INSERCIÓN PROFESIONAL 
+Definición: 
+Contexto 
+La Ley Orgánica 3/2022 tiene como finalidad establecer un régimen de formación y 
+acompañamiento profesional que contribuya al fortalecimiento, la competitividad y la 
+sostenibilidad de la economía española. Para ello, el Sistema de Formación Profesional debe 
+responder con flexibilidad a los intereses, expectativas y aspiraciones de cualificación de las 
+personas a lo largo de su vida, así como a las competencias requeridas por un mercado laboral 
+en constante transformación, caracterizado por nuevas demandas productivas y sectoriales. 
+En este contexto, el grado de inserción profesional de las personas formadas en el Sistema de 
+Formación Profesional se configura como un indicador clave para evaluar el impacto real de 
+las políticas de cualificación. El conocimiento de cuántas de estas personas acceden al 
+mercado laboral —ya sea por cuenta ajena o propia— y en qué condiciones lo hacen, permite 
+analizar la eficacia del Sistema en términos de empleabilidad y adecuación a las necesidades 
+del tejido productivo. 
+Además del estudio de la inserción laboral de las personas recientemente tituladas, es 
+fundamental considerar una medida complementaria: la presencia de personas ocupadas con 
+cualificaciones profesionales reconocidas por el Sistema de Formación Profesional en el 
+mercado laboral. Esta perspectiva permite observar no solo la transición directa desde la 
+formación al empleo, sino también la adecuación entre la formación recibida y el tipo de 
+ocupación desempeñada, aportando información valiosa sobre la calidad y pertinencia de la 
+oferta formativa en relación con las necesidades reales del mercado. 
+El análisis de la afiliación media, su distribución según características personales, formativas 
+y laborales, así como la ocupación de personas con titulación de Formación Profesional, 
+contribuye a ofrecer una visión completa y transversal del impacto del Sistema en el empleo. 
+Estos indicadores permiten orientar la planificación educativa, el diseño curricular y las 
+políticas activas de empleo, favoreciendo así la construcción de un Sistema de Formación 
+Profesional más eficiente, inclusivo y alineado con el desarrollo económico y social. 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+35
+Relación de indicadores 
+6.1 Tasa de afiliación media de personas graduadas en Formación Profesional. 
+6.2 Distribución de las personas afiliadas y graduadas en Formación Profesional. 
+6.3 Personas ocupadas con titulación de formación profesional. 
+Posibles referencias y variables de estudio aplicables a 
+los indicadores 
+ 
+• Sexo. 
+• Edad. 
+• Nacionalidad. 
+• Familia Profesional. 
+• Nivel de competencia. 
+• Régimen de afiliación. 
+• Rama de actividad. 
+• Tamaño de la empresa. 
+Concreción de indicadores 
+A continuación, se detallan ejemplos orientativos de cómo se podrían concretar los 
+indicadores a partir de las diferentes variables relevantes. 
+ 
+6.1 Tasa de afiliación media de personas graduadas en Formación Profesional 
+− Tasa de afiliación media de personas graduadas en Grado X por familia profesional, 
+nivel de competencia, sexo y periodo de análisis. 
+6.2 Distribución de las personas afiliadas y graduadas en Formación Profesional 
+− Distribución de las personas afiliadas y graduadas en Grado X según rama de actividad 
+por familia profesional, sexo y periodo de análisis. 
+6.3 Personas ocupadas con titulación de formación profesional 
+− Tasa de personas ocupadas con formación de Grado X sobre el total de la población 
+ocupada por edad. 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+36
+Fuentes: 
+− Tesorería General de la Seguridad Social (TGSS). 
+− Servicio Público de Empleo Estatal (SEPE). 
+− Instituto Nacional de Estadística (INE). 
+− Administraciones autonómicas (Formación Profesional del Sistema Educativo y 
+Formación Profesional de personas trabajadoras). 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+37
+ 
+Digitalización, sostenibilidad, 
+emprendimiento e innovación 
+7 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+38
+Información sobre actuaciones concretas impulsadas en el Sistema de Formación 
+Profesional que promueven la digitalización, la sostenibilidad, el emprendimiento y la 
+innovación. 
+DIGITALIZACIÓN, SOSTENIBIIDAD, 
+EMPRENDIMEINTO E INNOVACIÓN 
+Definición: 
+Contexto: 
+El nuevo Sistema de Formación Profesional ha integrado las transformaciones derivadas de la 
+digitalización, la transición ecológica y la sostenibilidad en todos los sectores económicos, 
+reconociendo estos vectores como elementos clave para la economía, el empleo y el 
+bienestar social. Así se recoge en uno de los objetivos generales establecidos en el Real 
+Decreto 659/2023, que contempla la necesidad de ofrecer una formación actualizada y 
+suficiente, que incorpore de manera proactiva y ágil tanto las competencias profesionales 
+emergentes como la innovación, la investigación aplicada, el emprendimiento, la 
+digitalización, la sostenibilidad y la emergencia climática, en tanto que factores estructurales 
+de éxito en el nuevo modelo económico. 
+En este sentido, en los últimos años, y específicamente en las ofertas de Grado D, se han 
+incorporado al currículo de los ciclos formativos de grado medio y superior los nuevos 
+módulos profesionales “Digitalización aplicada al sistema productivo” y “Sostenibilidad 
+aplicada al sistema productivo”, con una duración base de 30 horas e impartidos desde el 
+curso académico 2024-2025.  
+Paralelamente, se ha actualizado el catálogo de ofertas formativas, y en la cartera de Grado E 
+se han incorporado 21 nuevas ofertas (cursos de especialización) vinculadas a la digitalización. 
+Asimismo, se han desarrollado ofertas específicas de formación docente en digitalización y 
+sostenibilidad aplicadas a los sectores productivos, y se han destinado recursos a la 
+incorporación de la digitalización en el Sistema de Formación Profesional mediante iniciativas 
+como las Aulas ATECA, el desarrollo de simuladores y gemelos digitales, o las Aulas de 
+Capacitación Digital. 
+Además, la Ley Orgánica 3/2022, en su artículo 102, establece que la cultura de la innovación, 
+la investigación aplicada y el emprendimiento activo debe formar parte de los currículos 
+básicos de las ofertas del Sistema de Formación Profesional. Para ello, las ofertas formativas 
+deben incorporar actividades que fomenten estas competencias, vinculadas al sector 
+productivo correspondiente. 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+39
+Con este propósito, se han implementado estrategias innovadoras orientadas a fomentar la 
+cultura de la innovación y el emprendimiento, tales como la creación, en todos los centros, 
+de la figura responsable de la coordinación de innovación en Formación Profesional; la 
+incorporación, en los currículos de los ciclos formativos, de un proyecto final asociado a la 
+innovación y el emprendimiento; y la inclusión de proyectos de innovación en los planes de 
+trabajo de los centros proveedores de Formación Profesional. 
+En este ecosistema, los centros pertenecientes a la Red Estatal de Centros de Excelencia 
+adquieren un papel destacado como impulsores de entornos de investigación y 
+emprendimiento. Junto con los Centros de Referencia Nacional, especializados en distintos 
+sectores productivos, constituyen un referente en materia de innovación para el conjunto del 
+Sistema. 
+Por tanto, resulta necesario incluir en el Sistema estatal de Indicadores de Evaluación de la 
+Formación Profesional la monitorización del conjunto de actuaciones relacionadas con la 
+digitalización, la sostenibilidad, el emprendimiento y la innovación, como elementos 
+estructurales del nuevo modelo de formación. 
+Relación de indicadores 
+7.1 Actuaciones de digitalización, sostenibilidad, emprendimiento e innovación. 
+Posibles referencias y variables de estudio aplicables a 
+los indicadores 
+ 
+• Tipo de actuación. 
+• Ámbito de actuación. 
+Concreción de indicadores 
+A continuación, se detallan ejemplos orientativos de cómo se podrían concretar los 
+indicadores a partir de las diferentes variables relevantes. 
+ 
+7.1 Actuaciones de digitalización, sostenibilidad, emprendimiento e innovación 
+− Número de actuaciones de digitalización, sostenibilidad, emprendimiento e innovación 
+por tipo de actuación y ámbito de actuación. 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+40
+Fuentes: 
+− Ministerio de Educación, Formación Profesional y Deportes. 
+− Administraciones autonómicas (Formación Profesional del Sistema Educativo y 
+Formación Profesional de personas trabajadoras). 
+ 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+41
+ 
+Acreditación de competencias 
+profesionales 
+ 
+8 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+42
+Información sobre personas que participan en los procedimientos de acreditación de 
+competencias profesionales, desagregados según las distintas fases del proceso, el número 
+de estándares de competencia acreditados y variables sociodemográficas, para analizar el 
+alcance, la eficacia y la eficiencia del sistema de acreditación en el marco de la Formación 
+Profesional. 
+ACREDITACIÓN DE COMPETENCIAS 
+PROFESIONALES 
+Definición: 
+Contexto: 
+La acreditación de competencias profesionales constituye una de las acciones fundamentales 
+del Sistema de Formación Profesional. Este mecanismo permite el reconocimiento oficial de 
+las habilidades y conocimientos adquiridos por la ciudadanía a través de la experiencia laboral 
+o mediante vías no formales e informales de formación. Asimismo, contribuye a mejorar la 
+accesibilidad al Sistema y a potenciar su dinamismo, facilitando la continuidad de itinerarios 
+formativos orientados a una mayor cualificación, tal como establece el Real Decreto 
+659/2023. 
+Este procedimiento responde a lo dispuesto en la Ley Orgánica 3/2022, que consolida la 
+apertura permanente del sistema de acreditación con el objetivo de favorecer la mejora de la 
+cualificación de la población activa, impulsar su empleabilidad y promover la equidad y el 
+aprendizaje a lo largo de la vida. 
+El valor de estos procesos radica, por tanto, en ofrecer a la ciudadanía con experiencia laboral 
+no acreditada la posibilidad de obtener un certificado o título profesionalizante —total o 
+parcial— que valide sus competencias profesionales, permitiéndole continuar con itinerarios 
+formativos y acceder a nuevas oportunidades de promoción y desarrollo profesional. 
+Con el fin de reforzar la utilidad de este procedimiento, el nuevo marco normativo incorpora 
+la apertura permanente del proceso de acreditación, eliminando el formato de convocatorias. 
+Las reformas introducidas incluyen la reducción de plazos, la incorporación de centros a la red 
+de entidades participantes, y la propuesta de itinerarios formativos complementarios una vez 
+superado el procedimiento. Asimismo, se potencia el uso de modalidades no presenciales y 
+la formación modular. 
+El análisis del procedimiento de acreditación debe contemplar no solo el número de personas 
+acreditadas, sino también aspectos clave como sus características sociodemográficas, la 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+43
+participación en cada fase del proceso, el volumen e identificación de los estándares 
+acreditados, y la implicación de empresas y entidades mediante acuerdos de colaboración 
+que faciliten el acceso de las personas trabajadoras. 
+El Sistema cuenta, además, con una red de personas asesoras y evaluadoras —profesorado y 
+profesionales expertos— cuya habilitación también debe ser objeto de seguimiento. La 
+información obtenida permitirá valorar la eficacia del procedimiento y orientar su mejora 
+continua en términos de cobertura, agilidad y utilidad tanto para la ciudadanía como para el 
+mercado laboral. 
+Con el fin de realizar un seguimiento riguroso del despliegue, la eficacia y el alcance del 
+procedimiento de acreditación de competencias, se definen los siguientes indicadores. Su 
+análisis, en función de las distintas variables de estudio aplicables, permitirá obtener 
+conclusiones tanto sobre la participación y los resultados de las personas implicadas como 
+sobre la eficiencia del procedimiento y la intensidad de las acreditaciones realizadas. 
+Relación de indicadores 
+8.1 Tasa de personas acreditadas. 
+8.2 Personas inscritas en procedimientos de acreditación. 
+8.3 Personas admitidas que reciben asesoramiento durante procedimientos de acreditación. 
+8.4 Personas que finalizan satisfactoriamente procedimientos de acreditación. 
+8.5 Personas que registran la solicitud de reconocimiento de las competencias acreditadas. 
+8.6 Número de estándares de competencia acreditados. 
+8.7 Ratio de estándares acreditados por persona. 
+Posibles referencias y variables de estudio aplicables a 
+los indicadores 
+De 
+• Sexo. 
+• Edad. 
+• Familia profesional. 
+• Nivel de competencia. 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+44
+Concreción de indicadores 
+A continuación, se detallan ejemplos orientativos de cómo se podrían concretar los 
+indicadores a partir de las diferentes variables relevantes. 
+ 
+8.1 Tasa de personas acreditadas 
+− Porcentaje de personas acreditadas en relación con el total de personas inscritas en 
+procedimientos de acreditación de competencias profesionales y competencias básicas 
+por sexo, edad, familia profesional y nivel de competencia. 
+8.2 Personas inscritas en procedimientos de acreditación 
+− Número de personas que se inscriben en procesos de acreditación de competencias 
+profesionales y competencias básicas por sexo, edad, familia profesional y nivel de 
+competencia. 
+8.3 Personas admitidas que reciben asesoramiento durante procedimientos de acreditación 
+− Número de personas inscritas que reciben asesoramiento durante los procedimientos 
+de acreditación de competencias profesionales y competencias básicas por sexo, 
+edad, familia profesional y nivel de competencia. 
+8.4 Personas que finalizan satisfactoriamente procedimientos de acreditación 
+− Número de personas que superan satisfactoriamente procedimientos de acreditación 
+de competencias profesionales y competencias básicas por sexo, edad, familia 
+profesional y nivel de competencia. 
+8.5 Personas que registran la solicitud de reconocimiento de las competencias acreditadas 
+− Número de personas que, habiendo superado satisfactoriamente procedimientos de 
+acreditación de competencias profesionales y competencias básicas, registran la 
+solicitud de reconocimiento o las mismas por sexo, edad, familia profesional y nivel de 
+competencia. 
+8.6 Número de estándares de competencia acreditados 
+− Número de estándares de competencia acreditados mediante procedimientos de 
+acreditación de competencias profesionales por familia profesional y nivel de 
+competencia. 
+8.7 Ratio de estándares acreditados por persona 
+− Cociente del número de estándares acreditados totales y del número de personas que 
+han finalizado satisfactoriamente procesos de acreditación de competencias 
+profesionales por sexo, edad, familia profesional y nivel de competencia. 
+Fuentes: 
+− Ministerio de Educación, Formación Profesional y Deportes. 
+− Administraciones autonómicas (Formación Profesional del Sistema Educativo y 
+Formación Profesional de personas trabajadoras).
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+45
+ 
+Financiación 
+ 
+9 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+46
+Recursos económicos destinados a acciones del Sistema de Formación Profesional en 
+relación con la dimensión del propio Sistema. 
+FINANCIACIÓN 
+Definición: 
+Contexto: 
+La sostenibilidad y eficacia del Sistema de Formación Profesional dependen, en gran medida, 
+de una financiación adecuada, transparente y alineada con las prioridades estratégicas del 
+propio Sistema. El conocimiento del gasto por persona en formación constituye una medida 
+fundamental de eficiencia, al permitir valorar el esfuerzo económico realizado en relación con 
+el alcance y la calidad de las acciones financiadas. 
+En la financiación del Sistema de Formación Profesional desempeñan un papel relevante los 
+Presupuestos Generales del Estado y los presupuestos de las comunidades autónomas.  
+Asimismo, los Programas de Cooperación Territorial representan una herramienta estratégica 
+de cogobernanza entre el Ministerio de Educación, Formación Profesional y Deportes y las 
+comunidades autónomas. En este marco destacan también los fondos europeos, como el 
+Fondo Social Europeo, que permiten impulsar actuaciones prioritarias en todo el territorio. 
+En los últimos años, el Sistema de Formación Profesional ha recibido financiación específica a 
+través del Plan de Formación Profesional para el crecimiento económico y social y la 
+empleabilidad, así como del Plan de Modernización de la Formación Profesional. 
+El cálculo del gasto medio por estudiante permite establecer una relación directa entre la 
+inversión realizada y su impacto sobre la población atendida, favoreciendo la planificación, la 
+rendición de cuentas y la mejora continua del Sistema. Se trata de una medida estandarizada 
+que facilita la evaluación de los recursos utilizados y permite la comparabilidad con los países 
+de nuestro entorno. 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+47
+Relación de indicadores 
+9.1 Gasto por estudiante en Formación Profesional. 
+Concreción de indicadores 
+A continuación, se detallan ejemplos orientativos de cómo se podrían concretar los 
+indicadores a partir de las diferentes variables relevantes. 
+ 
+9.1 Gasto por estudiante en Formación Profesional 
+− Cociente entre los recursos económicos destinados a acciones del Sistema de 
+Formación Profesional y el número de personas destinatarias de los fondos. 
+Fuentes: 
+− Ministerio de Educación, Formación Profesional y Deportes. 
+− PGE. 
+− INE. 
+− Administraciones autonómicas (Formación Profesional del Sistema Educativo y 
+Formación Profesional de personas trabajadoras). 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+48
+ 
+Orientación profesional 
+ 
+10 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+49
+Información sobre los servicios de orientación profesional ofrecidos en el marco del Sistema 
+de Formación Profesional prestados por distintos agentes proveedores. 
+ORIENTACIÓN PROFESIONAL 
+Definición: 
+Contexto: 
+La Ley Orgánica 3/2022 reconoce en su Título VII el derecho de toda persona a recibir una 
+orientación profesional flexible, gratuita y adaptada a sus capacidades, aptitudes y 
+necesidades, a lo largo de toda la vida. Este derecho se configura como un componente 
+esencial del Sistema, destinado a facilitar tanto la toma de decisiones formativas y laborales 
+como el diseño de itinerarios personalizados que favorezcan la empleabilidad, la inclusión 
+social y la mejora de la cualificación profesional. 
+El RD 659/2023 recoge que la orientación se concibe como un servicio continuo y transversal 
+que debe estar presente antes, durante y después del proceso formativo o de acreditación y 
+que incluye tanto la información sobre la oferta formativa, las oportunidades de empleo y los 
+itinerarios profesionales, como el acompañamiento en la toma de decisiones, la gestión de la 
+carrera profesional y el emprendimiento. 
+El Sistema contempla una diversidad de agentes proveedores entre los que se incluyen los 
+propios centros del Sistema de Formación Profesional, administraciones locales, agentes 
+sociales, servicios públicos de empleo y otras entidades vinculadas al tejido social.  
+Las administraciones educativas deben garantizar la existencia de estructuras y protocolos 
+específicos de orientación, asegurando el acceso equitativo a este servicio en todo el 
+territorio. Estos protocolos deben incluir herramientas digitales con datos de inserción 
+laboral, información sobre itinerarios académicos y profesionales y mecanismos para el 
+acompañamiento personalizado. Asimismo, se prevé la atención específica a colectivos en 
+situación de vulnerabilidad, como personas con dificultades de inserción o en centros de 
+segunda oportunidad. 
+Como respuesta estratégica, el Ministerio de Educación, Formación Profesional y Deportes, 
+en colaboración con las administraciones autonómicas, está desarrollando una Estrategia 
+General de Orientación Profesional, en cuyo marco se ha constituido un comité técnico 
+específico. Esta estrategia establecerá principios rectores, instrumentos de intervención, 
+recursos digitales e indicadores de calidad para evaluar el servicio, promoviendo la 
+coordinación con el sistema de orientación laboral y otros dispositivos públicos y sociales. 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+50
+La evaluación de este servicio se basa en la recogida sistemática de datos por parte de las 
+administraciones competentes, como el número de personas atendidas, el uso de los servicios 
+digitales o la derivación a procedimientos de acreditación. Esta información permitirá 
+elaborar informes técnicos y propuestas de mejora, garantizando un sistema de orientación 
+basado en la eficacia, utilidad e impacto real. 
+De manera complementaria al trabajo desarrollado en el marco de la Estrategia de Inclusión, 
+el análisis del indicador propuesto, permitirá conocer mejor el grado de desarrollo e 
+implantación del modelo de orientación profesional dentro del Sistema de Formación 
+Profesional, así como su capacidad para responder a las necesidades de la población 
+destinataria y del propio Sistema. 
+Relación de indicadores 
+10.1 Servicios de Orientación. 
+Posibles referencias y variables de estudio aplicables a 
+los indicadores 
+• Tipos de agentes proveedores de orientación. 
+Concreción de indicadores 
+A continuación, se detallan ejemplos orientativos de cómo se podrían concretar los 
+indicadores a partir de las diferentes variables relevantes. 
+ 
+10.1 Servicios de Orientación 
+− Número de servicios de orientación por agentes proveedores. 
+Fuentes: 
+− Ministerio de Educación, Formación Profesional y Deportes. 
+− Administraciones autonómicas (Formación Profesional del Sistema Educativo y 
+Formación Profesional de personas trabajadoras).
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+51
+ 
+Equidad y flexibilización del 
+Sistema 
+ 
+11 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+52
+Alumnado con necesidades específicas derivadas de la discapacidad o de situaciones de 
+desventaja social en función de las características propias de la oferta formativa y 
+atendiendo a los distintos perfiles de las personas matriculadas. 
+EQUIDAD Y FLEXIBILIZACIÓN DEL 
+SISTEMA 
+Definición: 
+Contexto: 
+La Ley Orgánica 3/2022 establece como principio fundamental del Sistema de Formación 
+Profesional garantizar el acceso equitativo y en condiciones de igualdad a todas las personas, 
+promoviendo un modelo inclusivo y flexible que atienda a la diversidad del alumnado. 
+La misma norma recoge, entre sus objetivos, el de promover la igualdad de oportunidades 
+para las personas con discapacidad y, en general, para aquellas que pertenecen a colectivos 
+con dificultades de inserción sociolaboral, facilitando su acceso y permanencia en procesos 
+de formación profesional habilitantes y orientados a la inserción en el mercado laboral. 
+Este principio se concreta en el Real Decreto 659/2023, que incorpora estrategias para 
+fomentar la equidad, la no discriminación y la igualdad de oportunidades mediante medidas 
+específicas de accesibilidad, adaptación curricular, flexibilización temporal y metodologías 
+inclusivas. 
+En este marco, se introduce el enfoque del Diseño Universal para el Aprendizaje (DUA), que 
+reconoce la singularidad de cada persona y promueve la accesibilidad a los procesos 
+formativos mediante un currículo flexible, integrador y orientado al desarrollo de 
+competencias para la vida laboral y ciudadana. La aplicación del DUA se extiende a todos los 
+grados y niveles del Sistema, constituyendo un principio transversal en el diseño y desarrollo 
+de la oferta formativa. 
+El Sistema contempla una modalidad específica dirigida a personas con necesidades 
+educativas o formativas especiales, aplicable a los grados A, B, C y D. Esta modalidad tiene 
+como finalidad facilitar el aprendizaje profesional, favorecer la inserción laboral y contribuir 
+al mantenimiento de la empleabilidad. Está destinada a personas con discapacidad u otras 
+necesidades de apoyo que, por sus circunstancias, no puedan acceder con éxito a la 
+modalidad ordinaria. Las ofertas de esta modalidad incorporan elementos de flexibilidad en 
+estructuras, programas, duraciones, horarios, permanencia y agrupaciones, con el fin de 
+ajustarse al perfil del alumnado y potenciar su empleabilidad y desarrollo competencial. 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+53
+Asimismo, el Sistema incorpora una modalidad de oferta de grados A, B, C y D de carácter 
+básico, dirigida a personas con especiales dificultades formativas o de inserción laboral. Esta 
+modalidad está orientada a quienes han abandonado el sistema educativo, no han 
+desarrollado su trayectoria escolar en el sistema educativo español y presentan dificultades 
+de incorporación, o pertenecen a grupos desfavorecidos en el mercado de trabajo o en riesgo 
+de exclusión social. Entre las novedades de esta modalidad se incluyen la formación vinculada 
+a la autorización de residencia y la posibilidad de establecer dinámicas de colaboración entre 
+los centros que imparten estas ofertas y los centros públicos de Formación Profesional, 
+mediante actividades formativas combinadas o proyectos conjuntos. 
+Se flexibilizan, además, los requisitos de acceso a la formación modular para personas adultas 
+con especiales dificultades de inserción en el mercado laboral, de modo que dichos requisitos 
+se exijan en el momento de solicitar el certificado o titulación, una vez finalizada la formación. 
+En estos casos, se contempla también el acompañamiento en el procedimiento de 
+acreditación de competencias básicas para personas adultas. 
+El Sistema de Formación Profesional contempla, asimismo, acciones específicas orientadas a 
+superar la brecha urbano-rural, apoyando las oportunidades existentes o emergentes en 
+entornos rurales y zonas en declive demográfico. 
+El análisis de los indicadores vinculados a esta dimensión permitirá conocer en qué medida el 
+Sistema garantiza el acceso, la permanencia y el éxito formativo de personas en situación de 
+vulnerabilidad o con necesidades específicas, así como la implementación efectiva de las 
+medidas de flexibilización e inclusión previstas en la normativa vigente. 
+Relación de indicadores 
+11.1 Personas en formación con necesidades específicas. 
+11.2 Personal no docente de apoyo a personas con necesidades específicas. 
+ 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+54
+Posibles referencias y variables de estudio aplicables a 
+los indicadores 
+• Sexo. 
+• Edad. 
+• Familia profesional. 
+• Nivel de competencia. 
+• Titularidad de centro. 
+• Tipo de programa. 
+Concreción de indicadores 
+A continuación, se detallan ejemplos orientativos de cómo se podrían concretar los 
+indicadores a partir de las diferentes variables relevantes. 
+ 
+11.1 Personas en formación con necesidades específicas 
+− Número de personas con necesidades específicas de apoyo matriculadas en Grado X 
+por sexo, edad, familia profesional y nivel de competencia. 
+11.2 Personal no docente de apoyo a personas con necesidades específicas 
+− Número de personas no docentes de apoyo especializado a personas con necesidades 
+específicas en Grados D y E por sexo y edad. 
+Fuentes: 
+− Ministerio de Educación, Formación Profesional y Deportes. 
+− Administraciones autonómicas (Formación Profesional del Sistema Educativo y 
+Formación Profesional de personas trabajadoras). 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+55
+ 
+Internacionalización 
+ 
+12 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+56
+Participación de estudiantes, personal formador y centros docentes de Formación 
+Profesional en programas formativos de carácter internacional, en función de las 
+características de los programas, las personas implicadas y el tipo de centro. 
+INTERNACIONALIZACIÓN 
+Definición: 
+Contexto: 
+El Real Decreto 659/2023 refuerza la internacionalización como uno de los pilares 
+estratégicos del nuevo modelo de Formación Profesional, facilitando el reconocimiento de 
+competencias adquiridas en entornos internacionales y promoviendo itinerarios formativos 
+con validez en otros países. Asimismo, establece que la formación del profesorado debe 
+orientarse hacia un enfoque de mejora continua, incentivando la internacionalización como 
+vía para la actualización de conocimientos y metodologías. 
+Por su parte, la Ley Orgánica 3/2022 recoge la necesidad de participar en programas 
+europeos e internacionales, como Erasmus+, con el fin de reforzar la capacitación del 
+personal docente y contribuir a la excelencia del Sistema de Formación Profesional. Esta 
+normativa impulsa la integración del Sistema con el mercado laboral global, fomentando la 
+cooperación con empresas extranjeras y el desarrollo de centros de excelencia con enfoque 
+internacional. 
+Ambas normativas subrayan la importancia de fortalecer la dimensión internacional de la 
+Formación Profesional, promoviendo la colaboración con entidades extranjeras y facilitando 
+la movilidad de estudiantes, docentes y empresas. Los programas de movilidad, enmarcados 
+en iniciativas europeas e internacionales, ofrecen a las personas participantes la posibilidad 
+de realizar estancias en empresas o centros educativos en el extranjero, reforzando tanto sus 
+conocimientos técnicos como sus competencias transversales, tales como la adaptación a 
+entornos multiculturales, el aprendizaje de idiomas y la capacidad de trabajo en equipos 
+internacionales. 
+A través de estos programas, el personal docente y formador accede a experiencias 
+formativas en otros países, colaborando con instituciones educativas y empresas, adquiriendo 
+nuevas metodologías de enseñanza y fomentando la innovación en el aprendizaje.  
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+57
+Estos beneficios se traducen en una mejora directa en la calidad del aprendizaje del 
+alumnado, al incorporar metodologías innovadoras y buenas prácticas internacionales en el 
+aula. 
+Los centros de Formación Profesional desempeñan un papel clave en la implementación de 
+estos programas de movilidad, innovación y cooperación internacional, estableciendo 
+alianzas con instituciones y empresas extranjeras que contribuyen a la calidad de la enseñanza 
+y a la empleabilidad del estudiantado. 
+Además, la internacionalización del Sistema se articula también mediante la presencia 
+institucional de centros de Formación Profesional más allá de las fronteras nacionales. El Real 
+Decreto 659/2023 regula la posibilidad de que centros ubicados en el extranjero impartan 
+enseñanzas de Formación Profesional del sistema educativo español (grados D y E), con los 
+mismos currículos y títulos oficiales que en el territorio nacional. Esta medida refuerza la 
+proyección internacional del Sistema, garantiza la continuidad de itinerarios formativos y 
+profesionales para el alumnado residente fuera del estado español, y permite establecer 
+convenios de colaboración con entidades educativas o sociales de otros países. 
+En esta primera edición del Sistema estatal de Indicadores de Evaluación y Calidad, se definen 
+indicadores orientados a medir el grado de participación y avance en la internacionalización 
+del Sistema, facilitando el diseño de estrategias para ampliar y mejorar la movilidad y la 
+cooperación internacional 
+Relación de indicadores 
+12.1 Estudiantes en programas de internacionalización. 
+12.2 Personal formador en programas de internacionalización. 
+12.3 Centros docentes en programas de internacionalización. 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+58
+Posibles referencias y variables de estudio aplicables a 
+los indicadores 
+• 
+Sexo. 
+• 
+Edad. 
+• 
+Familia profesional. 
+• 
+País de destino. 
+• 
+Titularidad del centro. 
+• 
+Tipología del centro. 
+Concreción de indicadores 
+A continuación, se detallan ejemplos orientativos de cómo se podrían concretar los 
+indicadores a partir de las diferentes variables relevantes. 
+ 
+12.1 Estudiantes en programas de internacionalización 
+− Número de movilidades de estudiantes matriculados en Grado X por familia 
+profesional, sexo y edad. 
+12.2 Personal formador en programas de internacionalización 
+− Número de movilidades de personal por familia profesional y titularidad del centro. 
+12.3 Centros docentes en programas de internacionalización 
+− Número de centros nacionales que participan en programas de internacionalización 
+por titularidad de centro y tipología. 
+Fuentes: 
+− Ministerio de Educación, Formación Profesional y Deportes. 
+− Administraciones autonómicas (Formación Profesional del Sistema Educativo y 
+Formación Profesional de personas trabajadoras). 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+59
+ 
+ 
+TABLA DE CATEGORÍAS 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+60
+CATEGORIAS DE REFERENCIA PARA LAS VARIABLES DE ESTUDIO 
+Oferta formativa 
+Tipos de oferta 
+Grado A 
+Grado B 
+Grado C 
+Grado D 
+Grado E 
+Niveles de competencia 
+Nivel 1 (básico) 
+Nivel 2 (medio) 
+Nivel 3 (superior) 
+Familias profesionales 
+Actividades físicas y deportivas 
+Actividades y competencias trasversales 
+Administración y gestión 
+Agraria 
+Artes gráficas 
+Artes y artesanías 
+Comercio y marketing 
+Edificación y obra civil 
+Electricidad y electrónica 
+Energía y agua 
+Fabricación mecánica 
+Hostelería y turismo 
+Imagen personal 
+Imagen y sonido 
+Industrias alimentarias 
+Industrias extractivas 
+Informática y comunicaciones 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+61
+CATEGORIAS DE REFERENCIA PARA LAS VARIABLES DE ESTUDIO 
+Instalación y mantenimiento 
+Inteligencia artificial y Data 
+Madera, mueble y corcho 
+Marítimo-Pesquera 
+Química 
+Sanidad 
+Seguridad y Medio Ambiente 
+Servicios socioculturales y a la comunidad 
+Textil, confección y piel 
+Transporte y mantenimiento de vehículos 
+Vidrio y cerámica 
+Modalidades de impartición 
+Presencial 
+Semipresencial 
+Virtual 
+Régimen FP dual 
+GRADO C 
+y 
+GRADO D 
+Régimen general 
+Régimen intensivo 
+Tipos de programas formativos 
+para personas con necesidades 
+específicas 
+Ofertas dirigidas a personas con discapacidad 
+Ofertas dirigidas a personas con dificultades formativas o 
+de inserción laboral 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+62
+Población formada 
+Criterios individuales de la 
+población 
+Sexo 
+Edad 
+Nacionalidad 
+Situación laboral  
+Ocupado 
+Desempleado 
+Régimen de afiliación 
+Trabajo por cuenta propia 
+Trabajo por cuenta ajena 
+Vías de obtención de 
+titulación/certificación 
+Grado A 
+Por superación de la oferta formativa de Grado 
+A 
+Por el procedimiento de acreditación de 
+competencias profesionales 
+Grado B: 
+Por superación de la oferta formativa de Grado 
+B 
+Por acumulación de certificados parciales de 
+competencia de Grado A que completen la 
+oferta 
+Por la superación de la prueba libre del módulo 
+profesional, en caso de estar incluido en un 
+Grado D 
+Por la acreditación de competencias 
+profesionales que completen la oferta 
+Grado C 
+ 
+Por superación de la oferta formativa de 
+Grado C 
+Por acumulación de certificados de 
+competencia de Grado B que completen y 
+exención/realización de 80h 
+Por superación de las pruebas libres de los 
+módulos incluidos en grado D y 
+exención/formación de 80h 
+Por la acreditación de competencias 
+profesionales que completen la oferta 
+Por oferta modular 
+Tipo de actuación de 
+digitalización, sostenibilidad, 
+emprendimiento e innovación 
+Aulas ATECA 
+Aulas de Emprendimiento 
+Proyectos de innovación 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+63
+Ámbitos de actuación de 
+digitalización, sostenibilidad, 
+emprendimiento e innovación 
+ Digitalización 
+Sostenibilidad 
+Emprendimiento 
+Innovación 
+Periodo de análisis de afiliación 
+ Previo a la graduación 
+ Primer año 
+ Segundo año 
+ Tercer año 
+ Cuarto año 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+64
+Centros proveedores 
+Titularidad del centro 
+Centro público 
+Centro privado: centro privado con enseñanzas sostenidas con 
+fondos públicos 
+Tipología de centros 
+Centros del sistema educativo de oferta exclusiva del Sistema 
+de FP 
+Centros del sistema educativo de oferta del Sistema de FP 
+simultánea con otros niveles educativos. 
+Centros de oferta del Sistema de FP exclusiva de grados A, B 
+y/o C. 
+Entidades colaboradoras del 
+Sistema de Formación 
+Profesional 
+Entidades locales  
+Entidades sociales del tercer sector para inserción laboral  
+Centros de segunda oportunidad y asimilados 
+Empresas para formación dirigida a sus personas trabajadoras  
+Rama de actividad 
+Agricultura, ganadería, silvicultura y pesca 
+Industria manufacturera 
+Construcción 
+Comercio por mayor o menor reparación vehículos, motor.. 
+Transporte y almacenamiento 
+Hostelería 
+Información y comunicaciones 
+Actividades administrativas y servicios auxiliares 
+Administración pública y defensa 
+Educación 
+Actividades sanitarias y servicios sociales 
+Actividades artísticas, recreativas y entretenimiento 
+Otras 
+Tamaño de Empresa 
+Microempresa: inferior a 10 trabajadores 
+Pequeña empresa: entre 10-49 trabajadores 
+Mediana empresa: entre 50-249 trabajadores 
+Grandes empresas: superior a 250 trabajadores 
+ 
+ 
+Sistema estatal de Indicadores de la Evaluación de la Calidad de la Formación Profesional 
+ 
+ 
+65
+Orientación profesional 
+Tipos de Agentes proveedores 
+de orientación 
+Centros del Sistema de Formación Profesional 
+Administraciones locales 
+Agentes sociales 
+Entidades y organizaciones vinculadas al tejido social 
+Servicios de empleo 
+ 
+ 
+ 
+ 
+Sistema estatal de indicadores de la evaluación de la calidad de Formación Profesional 
+ 
+66
+MAPA 
+DEL SISTEMA ESTATAL DE 
+INDICADORES 
+ 
+ 
+ 
+Sistema estatal de indicadores de la evaluación de la calidad de Formación Profesional 
+ 
+67
+EJE 
+VARIABLES DE ESTUDIO  
+INDICADORES 
+1.  
+PERSONAS EN FORMACIÓN 
+• Sexo 
+• Edad 
+• Nacionalidad 
+• Familia profesional 
+• Nivel de competencia 
+• Titularidad de centro 
+• Modalidad de impartición 
+• Vía de obtención de la titulación 
+• Situación laboral 
+1.1 Personas matriculadas 
+1.2 Tasa de matriculación en Formación Profesional del sistema 
+educativo 
+1.3 Personas que finalizan la formación 
+1.4 Seguimiento educativo posterior de las personas graduadas en 
+Formación Profesional 
+1.5 Tasa de abandono en el Sistema de Formación Profesional 
+1.6 Tasa de promoción en Grados D 
+2.  
+OFERTA DE ENSEÑANZAS 
+• Familia profesional 
+• Nivel de competencia 
+• Titularidad de centro 
+• Modalidad de impartición 
+2.1 Actualización del catálogo formativo 
+2.2 Índice de ocupación de plazas ofertadas 
+2.3 Alumnado por grupo 
+3.  
+EMPRESAS U ORGANISMOS 
+EQUIPARADOS 
+• Régimen de Formación Profesional 
+Dual 
+• Familia profesional 
+• Nivel de competencia 
+• Titularidad de centro 
+3.1 Empresas participantes en Formación Profesional 
+3.2 Personas participantes en Formación Profesional Dual 
+ 
+ 
+ 
+Sistema estatal de indicadores de la evaluación de la calidad de Formación Profesional 
+ 
+68
+EJE 
+VARIABLES DE ESTUDIO 
+INDICADORES 
+4.  
+PERSONAL DOCENTE Y 
+FORMADOR 
+• Sexo 
+• Edad 
+• Familia profesional 
+• Titularidad del centro 
+4.1 Personal docente 
+4.2 Otros perfiles docentes y formadores 
+4.3 Índice de formación del personal docente 
+5.  
+CENTROS PROVEEDORES 
+• Familia profesional 
+• Titularidad del centro 
+• Tipología de centro 
+• Modalidad de impartición 
+• Tipo de entidad colaboradora 
+5.1 Centros del Sistema de Formación Profesional 
+5.2 Entidades colaboradoras del Sistema 
+6.  
+INSERCIÓN PROFESIONAL 
+• Sexo 
+• Edad 
+• Nacionalidad 
+• Familia Profesional 
+• Nivel de competencia 
+• Régimen de afiliación 
+• Rama de actividad 
+• Tamaño de la empresa 
+6.1 Tasa de afiliación media de personas graduadas en Formación 
+Profesional 
+6.2 Distribución de las personas afiliadas y graduadas en Formación 
+Profesional 
+6.3 Personas ocupadas con titulación de Formación Profesional 
+7.  
+DIGITALIZACIÓN, 
+SOSTENIBILIDAD, 
+EMPRENDIMIENTO E 
+INNOVACIÓN 
+• Tipo de actuación 
+• Ámbito de actuación 
+7.1 Actuaciones de digitalización, sostenibilidad, emprendimiento e 
+innovación 
+ 
+Sistema estatal de indicadores de la evaluación de la calidad de Formación Profesional 
+ 
+69
+ 
+ 
+ 
+EJE 
+VARIABLES DE ESTUDIO 
+INDICADORES 
+8.  
+ACREDITACIÓN DE 
+COMPETENCIAS ADQUIRIDAS 
+POR EXPERIENCIA LABORAL U 
+OTRAS VÍAS NO FORMALES E 
+INFORMALES 
+• Sexo 
+• Edad 
+• Familia profesional 
+• Nivel de competencia 
+8.1 Tasa de personas acreditadas 
+8.2 Personas inscritas en procedimientos de acreditación 
+8.3 Personas admitidas que reciben asesoramiento durante 
+procedimientos de acreditación 
+8.4 Personas que finalizan satisfactoriamente procedimientos de 
+acreditación 
+8.5 Personas que registran la solicitud de reconocimiento de las 
+competencias acreditadas 
+8.6 Número de estándares de competencia acreditados 
+8.7 Ratio de estándares acreditados por persona 
+9.  
+FINANCIACIÓN 
+ 
+9.1 Gasto por estudiante en Formación Profesional 
+10.  
+ORIENTACIÓN 
+• Tipos de agentes proveedores de 
+orientación 
+10.1 Servicios de Orientación 
+ 
+Sistema estatal de indicadores de la evaluación de la calidad de Formación Profesional 
+ 
+70
+EJE 
+VARIABLES DE ESTUDIO 
+INDICADORES 
+11.  
+EQUIDAD Y FLEXIBILIZACIÓN 
+DEL SISTEMA 
+• Sexo 
+• Edad 
+• Familia profesional 
+• Nivel de competencia 
+• Titularidad de centro 
+• Tipo de programa 
+11.1 Personas en formación con necesidades específicas 
+11.2 Personal no docente de apoyo a personas con necesidades 
+específicas 
+12.  
+INTERNACIONALIZACIÓN 
+• Sexo 
+• Edad 
+• Familia profesional 
+• País de destino 
+• Titularidad del centro 
+• Tipología del centro 
+12.1 Estudiantes en programas de internacionalización 
+12.2 Personal formador en programas de internacionalización 
+12.3 Centros docentes en programas de internacionalización 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+Secretaría General de Formación Profesional 
+Subdirección General de Evaluación y Calidad del Sistema 

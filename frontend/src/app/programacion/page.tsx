@@ -1,5 +1,5 @@
 "use client";
-import { BookOpen, ClipboardList, Target , Info } from "lucide-react";
+import { BookOpen, ClipboardList, Target , Info, FolderOpen } from "lucide-react";
 import React, { useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/Button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Skeleton } from "@/components/ui/Skeleton";
+import Link from "next/link";
 
 
 export default function ProgramacionPage() {
@@ -58,10 +59,15 @@ export default function ProgramacionPage() {
           <Header breadcrumbSuffix={activeTabCleanLabel} />
           <main className="flex-1 p-8 content-area">
             <MotionWrapper>
-              <Card className="p-12 text-center flex flex-col items-center justify-center gap-4">
+              <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <BookOpen className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-2xl font-bold mb-4">No hay módulo seleccionado</h2>
-                <p className="text-muted">Por favor, ve a la sección de Datos y selecciona un módulo PD.</p>
+                <h2 className="text-2xl font-bold">No hay programación cargada</h2>
+                <p className="text-muted mb-4">Debes abrir o crear un archivo de programación en tu Entorno de trabajo.</p>
+                <Link href="/entorno">
+                  <Button variant="default" className="gap-2">
+                    <FolderOpen className="w-4 h-4" /> Ir a mi Entorno
+                  </Button>
+                </Link>
               </Card>
             </MotionWrapper>
           </main>

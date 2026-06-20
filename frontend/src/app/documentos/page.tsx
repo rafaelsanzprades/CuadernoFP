@@ -20,7 +20,8 @@ type DocumentItem = {
 };
 
 export default function DocumentosPage() {
-  const [activeTab, setActiveTab] = useState<"inicio" | "seguimiento" | "evaluacion">("inicio");
+  const TABS = ["Plantillas", "Currículos", "Normativa", "TodoFP"];
+  const [activeTab, setActiveTab] = useState<string>("Plantillas");
 
   // State for Explorador
   const [currentPath, setCurrentPath] = useState<string>("");
@@ -61,7 +62,7 @@ export default function DocumentosPage() {
   };
 
   useEffect(() => {
-    fetchDocuments("");
+    fetchDocuments(activeTab);
   }, []);
 
   useEffect(() => {
@@ -177,17 +178,20 @@ export default function DocumentosPage() {
     return <File className="w-8 h-8 text-muted" />;
   };
 
-  const basePath = "";
-  const relativePath = currentPath.startsWith(basePath) && currentPath !== basePath
-    ? currentPath.slice(basePath.length + 1)
-    : "";
+  const basePath = activeTab;
+  let relativePath = currentPath;
+  if (basePath && currentPath.startsWith(basePath)) {
+    relativePath = currentPath.slice(basePath.length);
+    if (relativePath.startsWith('/')) relativePath = relativePath.slice(1);
+  }
+
   const relParts = relativePath.split("/").filter(Boolean);
 
   const breadcrumbs = [
     { label: "Raíz", path: basePath },
     ...relParts.map((part, idx) => ({
       label: part,
-      path: basePath + "/" + relParts.slice(0, idx + 1).join("/")
+      path: (basePath ? basePath + "/" : "") + relParts.slice(0, idx + 1).join("/")
     }))
   ];
 
@@ -223,16 +227,25 @@ export default function DocumentosPage() {
         </div>
       </div>
 
+            <Tabs value={activeTab} onValueChange={(val) => { setActiveTab(val); fetchDocuments(val); }} className="w-full mb-6">
+              <TabsList className="bg-foreground/5 border border-[var(--glass-border)] w-full justify-start h-auto p-1 rounded-xl flex-wrap">
+                {TABS.map(tab => (
+                  <TabsTrigger key={tab} value={tab} className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all">
+                    {tab}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
+
             <div className="space-y-6 animate-in fade-in duration-500">
               <div className="flex flex-col md:flex-row justify-between gap-4">
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
                   <input
                     type="text"
                     placeholder="Buscar archivo..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="bg-foreground/15 border border-[var(--glass-border)] text-foreground pl-10 pr-4 py-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-info transition-all w-full md:w-64 placeholder-gray-500"
+                    className="bg-foreground/15 border border-[var(--glass-border)] text-foreground pl-4 pr-4 py-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-info transition-all w-full md:w-64 placeholder-gray-500"
                   />
                 </div>
                 <button
@@ -244,32 +257,25 @@ export default function DocumentosPage() {
                 </button>
               </div>
 
-              <Card className="p-4 flex items-center gap-2 overflow-x-auto whitespace-nowrap bg-foreground/5 border border-[var(--glass-border)] rounded-xl shadow-lg">
-                {currentPath && (
-                  <button
-                    onClick={handleGoUp}
-                    className="flex items-center justify-center p-2 mr-2 text-muted hover:text-foreground hover:bg-foreground/10 rounded-lg transition-colors"
-                    title="Subir un nivel"
-                  >
-                    <CornerLeftUp className="w-5 h-5" />
-                  </button>
-                )}
-                {breadcrumbs.map((crumb, idx) => (
-                  <React.Fragment key={crumb.path}>
-                    <button
-                      onClick={() => handleNavigate(crumb.path)}
-                      className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${idx === breadcrumbs.length - 1
-                        ? 'bg-accent/20 text-accent border border-accent/30'
-                        : 'text-muted hover:text-foreground hover:bg-foreground/10'
-                        }`}
-                    >
-                      {crumb.label}
-                    </button>
-                    {idx < breadcrumbs.length - 1 && (
-                      <ChevronRight className="w-4 h-4 text-muted/80 flex-shrink-0" />
-                    )}
-                  </React.Fragment>
-                ))}
+              <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] rounded-xl shadow-lg">
+                <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap w-full">
+                  {breadcrumbs.map((crumb, idx) => (
+                    <React.Fragment key={crumb.path}>
+                      <button
+                        onClick={() => handleNavigate(crumb.path)}
+                        className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${idx === breadcrumbs.length - 1
+                          ? 'bg-accent/20 text-accent border border-accent/30'
+                          : 'text-muted hover:text-foreground hover:bg-foreground/10'
+                          }`}
+                      >
+                        {crumb.label}
+                      </button>
+                      {idx < breadcrumbs.length - 1 && (
+                        <ChevronRight className="w-4 h-4 text-muted/80 flex-shrink-0" />
+                      )}
+                    </React.Fragment>
+                  ))}
+                </div>
               </Card>
 
               <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md">

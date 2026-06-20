@@ -268,6 +268,13 @@ export interface AppState {
   setAutoSyncDrive: (sync: boolean) => void;
   googleClientId: string;
   setGoogleClientId: (id: string) => void;
+  
+  isOneDriveConnected: boolean;
+  setOneDriveConnected: (connected: boolean) => void;
+  oneDriveUserEmail: string | null;
+  setOneDriveUserEmail: (email: string | null) => void;
+  oneDriveClientId: string;
+  setOneDriveClientId: (id: string) => void;
 
   isLoadingData: boolean;
   setLoadingData: (loading: boolean) => void;

@@ -1,5 +1,5 @@
 "use client";
-import { Award, BookOpen, Calculator, Check, GraduationCap, Puzzle, Target, Settings , Info } from "lucide-react";
+import { Award, BookOpen, Calculator, Check, GraduationCap, Puzzle, Target, Settings , Info, FolderOpen } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -9,9 +9,10 @@ import { Button } from "@/components/ui/Button";
 import { motion, AnimatePresence } from "framer-motion";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { RaOgMatrix } from "@/components/features/resultados/RaOgMatrix";
-import { curriculos, CompetenciaCPP } from "@/data/curriculos";
+import { CompetenciaCPP } from "@/types/curriculum";
 import toast from "react-hot-toast";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
+import Link from "next/link";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { loadCatalogForModule, resolveDescRa, resolveDescCe } from "@/services/catalogCache";
 
@@ -71,10 +72,15 @@ export default function MatricesPage() {
           <Header />
           <main className="flex-1 p-8 content-area">
             <MotionWrapper>
-              <Card className="p-12 text-center flex flex-col items-center justify-center gap-4">
+              <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <Calculator className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-2xl font-bold mb-4">No hay módulo seleccionado</h2>
-                <p className="text-muted">Por favor, ve a la sección de Datos y selecciona un módulo PD.</p>
+                <h2 className="text-2xl font-bold">No hay programación cargada</h2>
+                <p className="text-muted mb-4">Debes abrir o crear un archivo de programación en tu Entorno de trabajo.</p>
+                <Link href="/entorno">
+                  <Button variant="default" className="gap-2">
+                    <FolderOpen className="w-4 h-4" /> Ir a mi Entorno
+                  </Button>
+                </Link>
               </Card>
             </MotionWrapper>
           </main>

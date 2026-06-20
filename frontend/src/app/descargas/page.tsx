@@ -11,7 +11,8 @@ import { Alumnado } from "@/types";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Skeleton } from "@/components/ui/Skeleton";
-import { curriculos } from "@/data/curriculos";
+
+import Link from "next/link";
 
 type DocumentItem = {
   name: string;
@@ -156,31 +157,10 @@ export default function DocumentosPage() {
       let url = `${process.env.NEXT_PUBLIC_API_URL}/api/pdf?type=${type}`;
       if (al_id) url += `&al_id=${al_id}`;
 
-      // Find matching curriculum data for the active module
       let activeCurriculoData: any = {};
       if (type === 'programacion') {
-        const modId = moduleData?.info_modulo?.codigo_modulo;
-        let foundCurriculo = null;
-        let foundModulo = null;
-        
-        for (const [key, curr] of Object.entries(curriculos)) {
-          const mod = curr.modulos.find((m) => m.codigo === modId);
-          if (mod) {
-            foundCurriculo = curr;
-            foundModulo = mod;
-            break;
-          }
-        }
-        
-        if (foundCurriculo) {
-          const currAny = foundCurriculo as any;
-          activeCurriculoData = {
-            boa_articles: currAny.boa_articles || {},
-            competencias_cpps: currAny.competencias_cpps || [],
-            objetivos_generales_og: currAny.objetivos_generales_og || [],
-            unidades_formativas: foundModulo?.unidades_formativas || []
-          };
-        }
+          // Curriculo data is now handled by the backend using the module ID
+          activeCurriculoData = {};
       }
 
       const { planning_ledger, df_sgmt, df_sesiones, ...restCursoData } = cursoData || {} as any;
@@ -327,10 +307,15 @@ export default function DocumentosPage() {
             {['programacion', 'curso'].includes(activeTab) && (
               <div className="space-y-8 animate-in fade-in duration-500">
                 {(!activeCursoId || !activeModuleId) ? (
-                  <Card className="p-12 text-center flex flex-col items-center justify-center gap-4">
+                  <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                     <FileText className="w-16 h-16 text-muted-foreground opacity-50" />
-                    <h2 className="text-2xl font-bold mb-4">No hay Curso o Módulo seleccionado</h2>
-                    <p className="text-muted">Por favor, ve a la sección de Datos y asegúrate de cargar ambos para generar PDFs.</p>
+                    <h2 className="text-2xl font-bold">No hay curso ni programación cargada</h2>
+                    <p className="text-muted mb-4">Debes abrir o crear un archivo de programación y curso en tu Entorno de trabajo.</p>
+                    <Link href="/entorno">
+                      <Button variant="default" className="gap-2">
+                        <FolderOpen className="w-4 h-4" /> Ir a mi Entorno
+                      </Button>
+                    </Link>
                   </Card>
                 ) : (loadingData || !cursoData || !moduleData) ? (
                   <Card className="p-12">

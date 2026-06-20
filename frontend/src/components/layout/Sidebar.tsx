@@ -7,6 +7,7 @@ import { navGroups } from '@/config/navigation';
 import { useEffect, useRef, useState } from 'react';
 import React from 'react';
 import { Tooltip } from '@/components/ui/Tooltip';
+import { InstallPwaButton } from '@/components/features/settings/InstallPwaButton';
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -123,8 +124,11 @@ export default function Sidebar() {
         {navGroups.map((group, idx) => (
           <div key={group.title} className="flex flex-col gap-0.5">
             {group.title && isSidebarOpen && (
-              <div className="text-base font-bold text-foreground tracking-wide px-3 mb-2 mt-2">
-                {group.title}
+              <div className="flex flex-col mb-2 mt-3">
+                <div className="text-[0.95rem] font-bold text-foreground/90 tracking-wide px-3 mb-1.5 uppercase">
+                  {group.title}
+                </div>
+                <div className="mx-3 h-px bg-[var(--glass-border)]" />
               </div>
             )}
             {!isSidebarOpen && idx > 0 && group.title && (
@@ -184,17 +188,22 @@ export default function Sidebar() {
       </nav>
 
       <div className={`px-4 py-3 border-t border-[var(--glass-border)] flex flex-col items-center gap-1.5`}>
-        {isSidebarOpen && (
-          <>
+        {isSidebarOpen ? (
+          <div className="w-full">
+            <InstallPwaButton isSidebarOpen={true} />
             <p className="text-center text-sm font-medium text-muted/90 mt-1 whitespace-nowrap">
               © {new Date().getFullYear()} Rafael Sanz Prades
             </p>
-            <div className="flex items-center justify-center w-full">
+            <div className="flex items-center justify-center w-full mt-1">
               <Link href="/legal" className="text-sm font-semibold text-info hover:text-info hover:underline" onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}>
                 Legal
               </Link>
             </div>
-          </>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center gap-2 w-full">
+            <InstallPwaButton isSidebarOpen={false} />
+          </div>
         )}
       </div>
     </>

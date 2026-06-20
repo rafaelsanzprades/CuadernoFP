@@ -158,6 +158,21 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
     }
   };
 
+  const handleCreateCursoDemo = async () => {
+    setIsCreating(true);
+    try {
+      const ok = fileManager.createNewCursoFromDemo("Curso DEMO", "2025-26");
+      if (ok) {
+        toast.success("Curso DEMO creado correctamente.");
+        onClose();
+      } else {
+        toast.error("Error al crear el curso DEMO.");
+      }
+    } finally {
+      setIsCreating(false);
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={onClose}>
       <div
@@ -232,13 +247,31 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
             </>
           ) : (
             <>
-              <p className="text-sm text-muted mb-4">
-                Se creará un archivo de curso vacío listo para importar alumnos.
+              <p className="text-sm text-muted mb-6">
+                Elige cómo quieres inicializar tu nuevo archivo de curso.
               </p>
-              <div className="bg-foreground/5 border border-[var(--glass-border)] rounded-xl p-6 text-center">
-                <GraduationCap className="w-12 h-12 text-success/40 mx-auto mb-3" />
-                <p className="text-foreground font-medium">Crear curso vacío</p>
-                <p className="text-sm text-muted mt-1">Podrás importar alumnos desde un archivo .cddc después.</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <button
+                  onClick={handleCreateCurso}
+                  disabled={isCreating}
+                  className="bg-foreground/5 border border-[var(--glass-border)] rounded-xl p-6 text-center hover:bg-success/10 hover:border-success/30 transition-all group"
+                >
+                  <GraduationCap className="w-12 h-12 text-success/40 mx-auto mb-3 group-hover:text-success transition-colors" />
+                  <p className="text-foreground font-medium group-hover:text-success transition-colors">Crear curso vacío</p>
+                  <p className="text-sm text-muted mt-2">Empieza de cero. Podrás importar alumnos desde un archivo .cddc después.</p>
+                </button>
+                <button
+                  onClick={handleCreateCursoDemo}
+                  disabled={isCreating}
+                  className="bg-warning/5 border border-warning/20 rounded-xl p-6 text-center hover:bg-warning/10 hover:border-warning/40 transition-all group relative overflow-hidden"
+                >
+                  <div className="absolute top-0 right-0 bg-warning text-warning-foreground text-[10px] font-bold px-2 py-1 rounded-bl-lg">
+                    RECOMENDADO
+                  </div>
+                  <BookOpen className="w-12 h-12 text-warning/60 mx-auto mb-3 group-hover:text-warning transition-colors" />
+                  <p className="text-foreground font-medium group-hover:text-warning transition-colors">Cargar datos DEMO</p>
+                  <p className="text-sm text-muted mt-2">Genera un curso pre-rellenado con datos de ejemplo para explorar todas las funciones.</p>
+                </button>
               </div>
             </>
           )}
@@ -249,7 +282,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
           <Button onClick={onClose} className="bg-foreground/5 hover:bg-foreground/10 text-muted border border-[var(--glass-border)]">
             Cancelar
           </Button>
-          {fileType === 'programacion' ? (
+          {fileType === 'programacion' && (
             <Button
               onClick={handleCreate}
               disabled={!selectedModule || isCreating}
@@ -257,15 +290,6 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
             >
               {isCreating ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <BookOpen className="w-4 h-4 mr-2" />}
               Crear programación
-            </Button>
-          ) : (
-            <Button
-              onClick={handleCreateCurso}
-              disabled={isCreating}
-              className="bg-success/20 hover:bg-success/30 text-success border border-success/30 disabled:opacity-40"
-            >
-              {isCreating ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <GraduationCap className="w-4 h-4 mr-2" />}
-              Crear curso
             </Button>
           )}
         </div>

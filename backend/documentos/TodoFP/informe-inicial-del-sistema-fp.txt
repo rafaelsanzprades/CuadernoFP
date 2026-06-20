@@ -1,0 +1,3203 @@
+ 
+                                                      
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+    
+Secretaría General de Formación Profesional 
+Subdirección General de Evaluación y Calidad del Sistema 
+ESTADO DEL SISTEMA DE 
+FORMACIÓN PROFESIONAL 
+ 
+ 
+ESTADO DEL SISTEMA DE 
+FORMACIÓN PROFESIONAL 
+Informe inicial, marzo 2025 
+MINISTERIO DE EDUCACIÓN, FORMACIÓN PROFESIONAL Y DEPORTES 
+Secretaría General de Formación Profesional 
+Subdirección General de Evaluación y Calidad del Sistema 
+Madrid 2025 
+Catálogo de publicaciones del MEFD: https://librería.educacion.gob.es 
+Catálogo de Publicaciones de la Administración General del Estado (CPAGE): https://cpage.mpr.gob.es/  
+ 
+ 
+Estado del Sistema de Formación Profesional 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+MINISTERIO DE EDUCACIÓN, FORMACIÓN 
+PROFESIONAL Y DEPORTES 
+Secretaría General de Formación Profesional 
+Subdirección General de Evaluación y Calidad del 
+Sistema 
+Edita: 
+©  SECRETARÍA GENERAL TÉCNICA 
+Subdirección General de Atención al Ciudadano, 
+Documentación y Publicaciones 
+Edición: 2025 
+NIPO (IBD): 164-25-067-5 
+D.L.: M-9443-2025 
+ 
+ 
+ÍNDICE 
+ 
+ 
+1. Presentación ...................................................................................... 76 
+2. Contexto de la Formación Profesional .................................................. 9 
+2.1. CONTEXTO FORMATIVO ....................................................................................... 10 
+2.2. CONTEXTO LABORAL ........................................................................................... 12 
+2.3. PRINCIPALES HITOS CONSEGUIDOS .................................................................... 14 
+3. Ámbitos estratégicos de la Formación Profesional ............................. 23 
+3.1. ORGANIZACIÓN, MODALIDADES Y PLANIFICACION DE LA FORMACIÓN 
+PROFESIONAL ............................................................................................................ 24 
+3.2. CATÁLOGO DE OFERTAS DE FORMACIÓN PROFESIONAL…….………………………….27 
+3.3. PROFESORADO, PERSONAL FORMADOR Y PERSONAL EXPERTO........................... 37 
+3.4. PERSONAS EN FORMACIÓN ................................................................................. 40 
+3.5. CENTROS PROVEEDORES DE FORMACIÓN PROFESIONAL .................................... 50 
+3.6. INNOVACIÓN Y EMPRENDIMIENTO ...................................................................... 54 
+3.7. DIGITALIZACIÓN Y SOSTENIBILIDAD ..................................................................... 58 
+3.8. EL SISTEMA DE FORMACIÓN PROFESIONAL VINCULADO AL SECTOR LABORAL .... .65 
+3.9. PROCEDIMIENTO DE ACREDITACIÓN DE COMPETENCIAS ADQUIRIDAS A TRAVÉS 
+DE LA EXPERIENCIA LABORAL U OTRAS VÍAS NO FORMALES E INFORMALES ............... 72 
+3.10. ORIENTACIÓN PROFESIONAL EN EL SISTEMA DE FORMACIÓN PROFESIONAL ..... 85 
+3.11. EVALUACIÓN Y CALIDAD DEL SISTEMA DE FORMACIÓN PROFESIONAL............. 879 
+ 
+ 
+5 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+1 
+1. Presentación 
+6 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+ 
+El Ministerio de Educación, Formación Profesional y 
+Deportes (MEFPD) ha desarrollado, en los últimos seis años, un ambicioso proceso 
+de transformación y modernización del sistema de Formación Profesional. Este 
+proceso ha tenido un doble propósito: por un lado, facilitar la cualificación y 
+recualificación permanente de las personas; por otro, ajustar la oferta formativa a las 
+necesidades del mercado laboral. La Formación Profesional se ha consolidado, así, 
+como un pilar fundamental para el desarrollo del talento y el crecimiento económico 
+del país. 
+En este contexto, el presente informe tiene como finalidad ofrecer una visión 
+detallada de la situación actual del nuevo Sistema de Formación Profesional, 
+configurado en la Ley Orgánica 3/2022, de 31 de marzo, de Ordenación e Integración 
+de la Formación Profesional. El documento recoge información descriptiva sobre la 
+evolución y modificaciones que han marcado esta transformación, así como las 
+iniciativas en curso y las acciones futuras previstas para seguir fortaleciendo el 
+sistema. Este informe pone en marcha el procedimiento documental de la evaluación 
+y calidad del Sistema de Formación Profesional. 
+El proceso modernizador comenzó en 2018 con la aprobación del I Plan Estratégico 
+de la Formación Profesional del Sistema Educativo, una iniciativa respaldada por la 
+participación de organizaciones empresariales y sindicales, así como por empresas y 
+entidades vinculadas a la Formación Profesional.  
+Posteriormente, el Plan de Modernización de la Formación Profesional, puesto en 
+marcha en 2020, en pleno contexto de pandemia, estableció las bases para un 
+sistema capaz de responder a la creciente demanda de formación continua y 
+profesionalización. En 2021, este plan se integró en el Plan de Recuperación, 
+Transformación y Resiliencia, reforzando sus objetivos a través del Componente 20: 
+Plan Estratégico de Impulso de la Formación Profesional, y del Componente 19: Plan 
+Nacional de Competencias Digitales (Digital Skills). 
+Las sinergias generadas entre estos planes están permitiendo el desarrollo de las 
+reformas recogidas en la Ley Orgánica 3/2022, cuyo desarrollo reglamentario busca 
+consolidar una Formación Profesional moderna y competitiva, al servicio del tejido 
+productivo y la ciudadanía. 
+Así, este informe no solo recoge las medidas ya incorporadas al sistema de 
+Formación Profesional, sino también aquellas que están en proceso de 
+implementación a corto plazo. 
+ 
+1. Presentación 
+7 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Con este informe, la Subdirección General de Evaluación y Calidad del Sistema 
+cumple con la función asignada en el artículo 112 del título X de la Ley Orgánica 
+3/2022, proporcionando un análisis del estado actual de la Formación Profesional en 
+el estado español. Se trata de una evaluación de partida que permitirá identificar 
+elementos clave de calidad, orientar futuras mejoras y fomentar la innovación 
+continua en el sistema formativo. 
+De manera paralela se trabaja en el desarrollo de un marco común para la evaluación 
+y garantía de la calidad del Sistema de Formación Profesional. El producto de este 
+trabajo será la próxima publicación del Sistema Nacional de indicadores de 
+evaluación y calidad. 
+Este informe se estructura en diversas secciones para ofrecer una visión integral del 
+sistema de Formación Profesional: 
+1. Introducción y justificación del informe. 
+2. Contextualización de la situación formativa y del mercado laboral en los últimos 
+años en España. 
+3. Estado actual del sistema de Formación Profesional, con un análisis de las áreas 
+clave establecidas en la normativa vigente:  
+o Organización, modalidades y planificación de la Formación Profesional, en las 
+que se trata toda la articulación del sistema. 
+o La vinculación entre el sistema educativo de Formación Profesional y el 
+sistema laboral en el momento presente. 
+o Catálogo de ofertas existente en el sistema de Formación Profesional, en la 
+que se abordan todas las enseñanzas englobadas en familias profesionales. 
+o Las personas en formación dentro del sistema, distribuidas por enseñanzas 
+formativas. 
+o El profesorado, personal formador y personal experto dentro del sistema 
+formativo. 
+o Los centros del sistema de Formación Profesional, donde se recogen la 
+tipología de centros, las aulas de emprendimiento, los centros de Excelencia, 
+los Centros de Referencia Nacional y el Registro General de Centros de 
+Formación Profesional. 
+o Propuestas de innovación y emprendimiento que han sido implementadas en 
+los centros y que se están llevando a cabo. 
+o El procedimiento y estado de la digitalización, sostenibilidad en las aulas y en 
+el sistema formativo.  
+o El procedimiento para la acreditación de competencias dentro del sistema. 
+o La orientación profesional y su dimensión. 
+o La calidad y evaluación del sistema de Formación Profesional. 
+1. Presentación 
+8 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Este análisis no solo permite comprender el punto de partida del nuevo sistema de 
+Formación Profesional, sino que también identifica los aspectos en proceso de 
+transformación y las líneas estratégicas que guiarán su evolución en los próximos 
+años, asegurando su adaptación a las necesidades de la sociedad y del mercado 
+laboral. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+2 
+2. Contexto de la Formación Profesional 
+10 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+2.1. 
+CONTEXTO FORMATIVO 
+ 
+ 
+2. Contexto de la Formación Profesional 
+11 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+Desde el curso 2018-2019 al curso 2023-2024, la matrícula 
+de estudiantes ha aumentado en todos los grados, y se ha reducido el abandono 
+educativo temprano, tal y como muestran las siguientes figuras: 
+Se registra, además, un incremento de centros y modalidades: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
++6,88% 
+centros docentes 
+De 3.763 en 2018/2019 a 
+4.022 en 2023/2024 
++102,68% 
+modalidad dual 
+De 26.340 estudiantes en 
+2018/2019 a 53.385 en 2023/2024 
++152,85% 
+modalidad distancia 
+Total de 221.037 estudiantes 
+matriculados en 2023/2024 
++130,25% Grado Medio 
++162,82% Grado Superior 
+Respecto a 2018/2019 
+-2,3% 
+abandono educativo 
+temprano
+Del 16% en 2018 al 
+13,7% en 2023 
++10,81% 
+De 73.810 a 81.790 
+estudiantes en Grado Básico 
++30% 
+De 350.220 a 455.469 
+estudiantes en Grado Medio 
++45,56% 
+De 413.169 a 601.414 
+estudiantes en Grado Superior 
++568,37% 
+De 1.078 a 6.127 estudiantes en 
+Cursos de Especialización 
+2. Contexto de la Formación Profesional 
+12 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+2.2. 
+CONTEXTO LABORAL 
+ 
+ 
+2. Contexto de la Formación Profesional 
+13 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+Desde el año 2020 se está produciendo una mejora en los 
+resultados de los indicadores que muestran los niveles de formación y capacitación 
+de la población activa, tal y como muestra el análisis la Encuesta de Población 
+Activa1. 
+Aumenta un 2,62% la tasa de actividad de personas con estudios profesionalizantes, 
+pasando de un 70,94% a un 73,56%, siendo además la tasa de actividad en 
+ciudadanos con enseñanza profesionalizante (73,56%) un 14,66% superior a la tasa 
+de actividad media, que se sitúa en un 58,9%. 
+Se ha producido un aumento de 6,76% de la población activa que realiza formación. 
+De 12,73 % en 2020 a 19,49% en 2024, lo que supone el aumento de cerca de 2,5 
+millones de participantes. 
+Si nos centramos en la población más joven, destaca un aumento del 1,81% de 
+personas jóvenes trabajadoras con estudios profesionalizantes, del 11,86% en 2020 
+al 13,67% en 2024, lo que supone un aumento de más de 800.000 jóvenes. Se retrata 
+además un descenso del desempleo del 9,15% en personas jóvenes con titulación en 
+Formación Profesional, de 27,15% en 2020 a 18% en 2024. Asimismo, se observa una 
+disminución en la tasa de jóvenes que no estudian ni trabajan del 5,78%. Esta tasa ha 
+pasado del 15,95% en 2020 a un 10,17% en 2024, que se traduce en una 
+aproximación de 200.000 jóvenes menos. 
+ 
+ 
+ 
+ 
+ 
+1 Datos INE-EPA 20242T 
++2,62 %   Tasa de actividad con estudios profesionalizantes. 
++6,76 %   Población activa que realiza formación. 
++1,81 %    Personas jóvenes trabajadoras con estudios profesionalizantes.
+-9,15 %   Personas jóvenes con titulación en Formación Profesional en 
+situación de desempleo.
+-5,78 %   Tasa de jóvenes que no estudian ni trabajan. 
+2. Contexto de la Formación Profesional 
+14 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+2.3. 
+PRINCIPALES HITOS CONSEGUIDOS 
+ 
+ 
+2. Contexto de la Formación Profesional 
+15 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+Oferta formativa 
+ 
+ 
+ Creación de ofertas 
+Carácter dual en toda 
+ 
+formativas de 
+la oferta de 
+ 
+Grados A y B 
+Grados C y D 
+ 
+ 
+Ejes transversales del sistema de FP 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Sistema de Formación Profesional 
+ 
+ 
+648 % 
+      Implantación del 
+  Inversión en FP desde 2018 
+nuevo modelo FP 
+ 
+ 
+Empresas en el Sistema de Formación Profesional 
+ 
+ 
+Participación activa de 
+Hubs 
+ 
+Empresas 
+por la Formación Profesional 
+ 
+ 
+ 
+2. Contexto de la Formación Profesional 
+16 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+Nuevos catálogos de Formación Profesional 
+ 
+ 
+ 
+2.618 
+8.297 
+ 
+Estándares de competencia 
+Grados A 
+ 
+ 
+2.859 
+962 
+ 
+Grados B 
+Grados C 
+ 
+ 
+ 
+184 
+29 
+ 
+Grados D 
+Grados E 
+ 
+ 
+ 
+ 
+ 
+ 
+Iniciativas formativas 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+1.785 
+Aulas de emprendimiento 
+259 
+Centros de capacitación digital 
+1.434 
+Aulas ATECA 
+1.480 
+Aulas Mentor 
+2. Contexto de la Formación Profesional 
+17 
+Informe Estado del Sistema de Formación Profesional. 2025 
+PLATAFORMA 
+FPCONECTA 
+ 
+ 
+La Formación profesional y el sector laboral 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Formación digital 
+ 
+ 
+ 
+ 
+ 
+ 
+49.901  
+docentes formados 
+Participación en 
+ 
+ 
+ 
+(Proyectos Estratégicos 
+para la Recuperación y Transformación Económica) 
+173 entidades 
+adheridas 
+2 entidades con sello de calidad 
+“proyecto de interés singular” 
+322.192  
+estudiantes dados de  
+alta en la Seguridad Social 
+PERTES 
+ALIANZA POR LA 
+FORMACIÓN PROFESIONAL 
+2. Contexto de la Formación Profesional 
+18 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+Personal del Sistema de Formación Profesional 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Oferta formativa 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Creación de 376.187 nuevas plazas de FP 
+111.510 en modalidad bilingüe 
+Desde 2018, incremento 
+del alumnado 
+matriculado  
+      + 10,81 %   FP Básica  
+     + 30,05 %   FP Medio 
+  + 45,56 %   FP Superior 
++ Creación de cursos de especialización desde 2020 con 6.127 
+personas matriculadas en el curso 2023 – 2024. 
+• Personas expertas de sectores productivos 
+• Personas trabajadoras expertas sénior de empresa 
+• Personas prospectoras de empresa u organismos equiparados 
+• Personal de apoyo especializado 
+Nuevos perfiles 
+2. Contexto de la Formación Profesional 
+19 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+Sistema de Formación Profesional 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Formación de personas trabajadoras 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Distribución de fondos a 
+CCAA con una estimación de 
+participación de 152.576 personas 
+111.940 unidades de competencia acreditadas por 
+55.970 personas 
+Publicación de 
+convocatorias estatales 
+Fondos distribuidos a 
+Comunidades Autónomas para 
+la formación de 843.460 personas 
+212.371 personas trabajadoras 
+formadas en upskilling y reskilling 
+522.374 personas formadas en upskilling y reskilling 
+2. Contexto de la Formación Profesional 
+20 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+Orientación profesional en el Sistema 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Convenios interdepartamentales 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Convenio con el Ministerio de Defensa  
+ 
+ 
+ 
+para formación y acreditación de personal militar profesional de tropa y marinería 
+Con participación de 5.537 personas desde 2021 
+Convenio con el Ministerio del Interior  
+ 
+ 
+ 
+para formación y acreditación de personas en situación de privación de libertad 
+Con participación de 2.023 personas desde 2021 
+Plataforma TodoFP 
+con un promedio de 10.000 consultas 
+2. Contexto de la Formación Profesional 
+21 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Red de centros proveedores 
+ 
+A la red de centros de Formación Profesional, se suma: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Nuevo módulo profesional 
+Itinerario Personal para la 
+Empleabilidad 
+Creación de 100 unidades de 
+orientación profesional 
+con 19.290 personas atendidas 
+* Otros módulos formativos incluidos en el nuevo currículum:  
+• Digitalización Aplicada a los Sectores Productivos 
+• Sostenibilidad Aplicada a los Sectores Productivos 
+Red de centros de referencia nacional 
+Compuesta por 40 centros  
+2. Contexto de la Formación Profesional 
+22 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+ 
+ 
+Evaluación y calidad en el Sistema 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Red estatal de centros de excelencia 
+Compuesta por 66 centros  
+• Informe inicial del Sistema de Formación Profesional 
+• Sistema Nacional de Indicadores de evaluación de calidad de 
+Formación Profesional (en proceso) 
+• Informe sobre inserción laboral de personas tituladas 
+• Acciones para potenciar la calidad de los centros de formación 
+profesional. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3 
+3. Ámbitos estratégicos de la Formación Profesional 
+24 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3.1. 
+ORGANIZACIÓN, MODALIDADES Y 
+PLANIFICACION DE LA FORMACIÓN 
+PROFESIONAL 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+25 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+El nuevo marco normativo de la Formación Profesional sitúa a la 
+persona en el centro del sistema y recoge, entre sus funciones, la importancia de dar una 
+respuesta flexible tanto a las necesidades de cualificación de la ciudadanía como a las 
+competencias demandadas por los distintos sectores para mejorar la generación de empleo. 
+Los tres ámbitos que conforman esta nueva ley de Formación Profesional y ayudan a dar 
+respuesta, tanto a las necesidades de la población, como a las demandas del sector laboral, 
+son: 
+ 
+• 
+Ofertas de formación profesional. 
+• 
+Orientación profesional. 
+• 
+Acreditación de competencias profesionales. 
+ 
+ 
+La formación profesional se integra, de este modo, y en su totalidad, en un sistema único, 
+organizando las ofertas formativas por grados, dirigido tanto a estudiantes como a personas 
+trabajadoras ocupadas o en situación de desempleo. La finalidad de esta integración es cubrir 
+las necesidades formativas de cada estudiante y profesional en cualquier etapa de su vida 
+laboral. 
+El nuevo sistema de Formación Profesional establece una organización de grados que va 
+desde las microformaciones a los títulos de especialización, estructurados cada uno de ellos 
+en tres niveles (1, 2 y 3). La descripción de los grados se tratará en el punto 3.2 de este 
+informe. 
+Toda la Formación Profesional se ha convertido en dual: se alterna formación teórica y práctica 
+tanto en el centro de formación como en la empresa, excepto para los grados A y, en algún 
+caso, grados B. Además, toda la formación se puede ofertar en modalidad presencial, 
+semipresencial y virtual. 
+La nueva ley contempla otras modalidades de impartición de enseñanzas para personas con 
+necesidades educativas y formativas especiales, personas con especiales dificultades 
+formativas y de inserción laboral, así como para colectivos específicos, como en el caso de 
+las modalidades destinadas al personal militar y a personas en situación de privación de 
+libertad. De acuerdo con la normativa vigente, cualquiera de los grados debe adaptarse a las 
+personas con necesidades específicas de apoyo educativo o formativo, para garantizar el 
+acceso, la permanencia y la progresión en el aprendizaje, facilitando el proceso de adquisición  
+3. Ámbitos estratégicos de la Formación Profesional 
+26 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+de las competencias definidas y que constituyen el perfil profesional completo o parcial 
+asociado al grado. 
+Se contempla, además, la incorporación a la oferta formativa, de manera proactiva y ágil, de 
+las competencias profesionales emergentes: la innovación, la investigación aplicada y el 
+emprendimiento, incluyendo el emprendimiento colectivo en economía social, la digitalización, 
+la sostenibilidad y la emergencia climática, factores estructurales de éxito en el nuevo modelo 
+económico. 
+La orientación profesional se articula como un proceso continuo de acompañamiento y 
+enfoque, para permitir a las personas, a lo largo de su vida, determinar sus capacidades, 
+competencias e intereses, con el propósito de tomar decisiones en materia de educación, 
+formación y empleo. Los servicios de orientación profesional se postulan como un 
+acompañamiento al estudiantado para que puedan gestionar el recorrido de su vida personal 
+en lo que respecta a la educación y la formación profesionalizante, y en otros marcos en los 
+que es posible adquirir o utilizar estas capacidades y competencias. 
+Por último, en relación con la Acreditación de competencias profesionales adquiridas por 
+experiencia laboral u otras vías no formales o informales de formación, el sistema de 
+Formación Profesional acerca a la ciudadanía estos trámites, mejorando el acceso y agilizando 
+el proceso. El servicio de orientación profesional que acompaña estos procesos va a tener un 
+papel fundamental en la información sobre itinerarios formativos posteriores conducentes a 
+una mayor cualificación, potenciando así las oportunidades de promoción y desarrollo 
+profesional. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+27 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3.2. 
+CATÁLOGO DE OFERTAS DE FORMACIÓN 
+PROFESIONAL 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+28 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+El eje fundamental para la elaboración del Catálogo de ofertas del 
+sistema de Formación Profesional, en los últimos años, ha sido el desarrollo de 
+procedimientos más ágiles en el diseño y actualización de la oferta formativa, que permitan 
+el ajuste permanente a las necesidades de formación del marco laboral, acortando los plazos 
+de respuesta a las necesidades formativas de los sectores productivos. 
+La observación y evaluación continuadas de la demanda y oferta de profesiones, ocupaciones 
+y perfiles en el entorno laboral, resulta fundamental para la identificación de las necesidades 
+de cualificación y competencia. En este contexto, se han creado Hubs por la Formación 
+Profesional para la participación de empresas de los distintos sectores productivos en la 
+detección de necesidades formativas, diseño y actualización de la oferta formativa.  
+Como resultado de esta y otras acciones que se detallarán más adelante en este informe, se 
+ha producido la publicación, desde el año 2019, de 44 reales decretos y 22 órdenes 
+ministeriales destinadas a la actualización de la oferta formativa.  
+ 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+29 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Configuración de la oferta formativa del 
+Sistema de Formación Profesional 
+ 
+ 
+El nuevo sistema de Formación Profesional se conjuga en tres elementos que 
+configuran su estructura y organizan su oferta: 
+• Catálogo Nacional de Estándares de Competencias Profesionales 
+• Catálogo Modular de Formación Profesional 
+• Catálogo Nacional de Ofertas de Formación Profesional 
+El Catálogo Nacional de Estándares de Competencias Profesionales, creado por modificación 
+del Catálogo Nacional de Cualificaciones Profesionales, supera los errores interpretativos que 
+el término cualificación ha venido arrastrando a lo largo del tiempo, a la vez que permite una 
+mayor flexibilización, centrándose en referentes menores, como son los estándares de 
+competencia, equivalentes a las unidades de competencia contenidas en las, hasta ahora, 
+cualificaciones profesionales, y permitiendo llegar a referencias vinculadas a las 
+microformaciones. 
+Este catálogo proporciona la base para el diseño de los módulos profesionales y la creación 
+de ofertas de formación profesional basadas en itinerarios, acumulables y acreditables a lo 
+largo de la vida, así como para la movilidad en un mercado de trabajo internacional sobre la 
+base de transparencia y, en su caso, equivalencia de marcos comunes entre los diferentes 
+sistemas nacionales de formación profesional de la Unión Europea. 
+Los diferentes planes de Formación Profesional, llevados a cabo desde 2018, que han ido 
+configurando el nuevo sistema, han obtenido como resultado la definición de 158 nuevas 
+cualificaciones y 659 actualizaciones o modificaciones. 
+Actualmente el Catálogo de Estándares de Competencias Profesionales cuenta con 2.618 
+estándares de competencias profesionales definidos, derivados de las 782 antiguas 
+cualificaciones profesionales del listado de familias que a continuación se detalla:  
+• Actividades físicas y deportivas 
+• Actividades y Competencias Transversales 
+• Administración y gestión 
+• Agraria 
+• Artes gráficas 
+• Artes y artesanías 
+• Comercio y marketing 
+• Edificación y obra civil 
+• Electricidad y electrónica 
+3. Ámbitos estratégicos de la Formación Profesional 
+30 
+Informe Estado del Sistema de Formación Profesional. 2025 
+• Energía y agua 
+• Fabricación mecánica 
+• Hostelería y turismo 
+• Imagen personal 
+• Imagen y sonido 
+• Industrial alimentarias 
+• Industrias extractivas 
+• Informática y comunicaciones 
+• Instalación y mantenimiento  
+• Inteligencia Artificial y Data  
+• Madera, mueble y corcho 
+• Marítimo-pesquera 
+• Química 
+• Sanidad 
+• Seguridad y medioambiente 
+• Servicios culturales y a la comunidad 
+• Textil, confección y piel 
+• Transporte y mantenimiento 
+• Vidrio y cerámica 
+ 
+El Catálogo Modular de Formación Profesional recoge aquellos módulos profesionales que 
+están vinculados a estándares de competencia, y sirve como referencia para el diseño de 
+itinerarios formativos del sistema de Formación Profesional. Actualmente está configurado por 
+3.040 módulos profesionales. 
+El Catálogo Modular es de referencia obligada para el diseño de las ofertas del Catálogo 
+Nacional de Ofertas de Formación Profesional.   
+El Catálogo Nacional de Ofertas de Formación Profesional recoge las ofertas de formación 
+reconocidas y acreditables en el marco del Sistema de Formación Profesional.  
+Se organizan en una estructura escalonada, ascendente en Grados, descriptiva de la amplitud 
+de cada oferta diseñada a partir del estándar de competencias profesionales de mayor nivel 
+del Catálogo Nacional de Estándares de Competencias Profesionales, como se indica en la 
+siguiente lista: 
+a) Grado A: conducente a una Acreditación parcial de competencia (niveles 1, 2 o 3).  
+b) Grado B: conducente a un Certificado de competencia (niveles 1, 2 o 3).  
+c) Grado C: conducente a un Certificado Profesional (niveles 1, 2 o 3).  
+d) Grado D: conducente a un Título de Técnico Básico, Técnico o Técnico Superior. 
+e) Grado E: conducente a un Título de Especialista o Máster en Formación Profesional. 
+ 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+31 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Con el trabajo desarrollado en los últimos años, centrado en la actualización de formaciones 
+e incorporación de otras nuevas, el Catálogo Nacional de ofertas de Formación Profesional 
+prevé recoger, en función del grado formativo, las siguientes enseñanzas y formaciones: 
+ 
+ 
+Oferta de grado A (acreditaciones parciales de competencia): 
+La oferta de grado A, junto con la de grado B, constituye una de las novedades del Sistema 
+de Formación Profesional. Las formaciones de grado A se establecen como microformaciones, 
+de carácter parcial y acumulable, que conducen a la obtención de una acreditación parcial de 
+competencia.  
+Las ofertas formativas de grado A pueden están vinculadas a uno o varios elementos de 
+competencia de un módulo profesional contemplado en el Catálogo Modular de Formación 
+Profesional, y vinculado al Catálogo Nacional de Estándares de Competencias Profesionales. 
+Esta oferta elemental del Sistema de Formación Profesional está destinada, preferentemente, 
+a personas trabajadoras con necesidad de actualización de sus competencias, estén ocupadas 
+o en situación de desempleo. 
+ 
+El grado A se configura como base de Sistema de Formación Profesional, puesto que no se 
+exigen requisitos académicos ni profesionales. Las ofertas de Grado A se organizan en uno o 
+varios bloques formativos menores que el módulo profesional. Las microacreditaciones 
+tendrán, con carácter general, carácter parcial y acumulable en el Sistema de Formación 
+Profesional, respecto de los grados B, C o D en los que sus bloques formativos se encuentren 
+contenidos en su totalidad o en parte. 
+ 
+Para acceder a la formación de grados A, no se requieren requisitos académicos, como se ha 
+mencionado anteriormente; no obstante, las personas candidatas deben poseer las 
+habilidades comunicativas en el idioma de la formación, además de las habilidades personales 
+y sociales básicas suficientes para cursar con aprovechamiento la formación. 
+ 
+Superada la formación se obtiene una Acreditación parcial de competencia de nivel 1, nivel 2 
+o nivel 3, dependiendo de la formación, permitiendo la acreditación de, como mínimo, un 
+elemento de competencia. Permite progresar en el sistema accediendo a una oferta formativa 
+de grado B para complementar la formación. 
+ 
+Hasta la fecha del presente informe, se ha creado un catálogo de ofertas de grado A con 
+8.297 acreditaciones parciales de competencia. 
+ 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+32 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Oferta de grado B (certificados de competencia): 
+Las formaciones de grado B poseen también un carácter parcial y acumulable, que conduce 
+a la obtención de una acreditación de competencia. Estas ofertas formativas están referidas 
+a un módulo profesional incluido en el Catálogo Nacional de Estándares de Competencias 
+Profesionales. 
+Las ofertas de grado B se corresponden con parte de la formación contenida en un grado C 
+y/o D, es decir, con un módulo profesional contemplado en un Certificado Profesional o Ciclo 
+Formativo. Esta oferta formativa está destinada, preferentemente, a personas trabajadoras 
+con necesidad de actualización de sus competencias, estén ocupadas o en situación de 
+desempleo.  
+ 
+Para acceder a la formación de este grado no se requieren requisitos académicos; no 
+obstante, las personas candidatas deben poseer las habilidades comunicativas en el idioma 
+de la formación, además de habilidades personales y sociales básicas suficientes para cursar 
+con aprovechamiento la formación.  
+ 
+El Grado B del Sistema de formación profesional podrá obtenerse bien por superación de 
+esta formación, bien por acumulación de todas las acreditaciones parciales de competencia 
+de Grado A incluidas en dicha formación. Una vez superada la formación, se otorga un 
+Certificado de Competencia de nivel 1, nivel 2 o nivel 3, según corresponda al tipo de 
+formación. Éste permite progresar en el sistema accediendo a una oferta formativa de grado 
+C para complementar la formación. 
+ 
+Hasta la fecha, se ha creado un catálogo de ofertas de grado B con 2.859 certificados de 
+competencia. 
+ 
+ 
+Oferta de grado C (certificados profesionales): 
+Las ofertas formativas de grado C son el último grado de los presentados que constituye la 
+oferta parcial y acumulable del Sistema de Formación Profesional. En este caso, integran 
+varios módulos profesionales del Catálogo Modular de Formación Profesional, por razón de 
+su significación en el mercado laboral, y conducen a la obtención de un Certificado Profesional. 
+Para realizar estas formaciones, deberán cumplirse los requisitos de acceso, salvo para el 
+nivel 1, en el que no se exigen requisitos académicos ni profesionales. Para el nivel 2 se 
+requiere el graduado en Educación Secundaria Obligatoria o equivalente a efectos de acceso. 
+Estos pueden ser un certificado profesional de nivel 2, un certificado de competencia 
+contenido en la formación a realizar, o un certificado profesional de nivel 1 de la misma familia  
+3. Ámbitos estratégicos de la Formación Profesional 
+33 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+profesional. Para el nivel 3 se necesita el título de Técnico o Técnico Superior, un certificado 
+de Bachillerato o el equivalente a efectos de acceso, un certificado profesional de nivel 3, un 
+certificado de competencia en la formación a realizar, o un certificado profesional de nivel 2 
+de la misma familia profesional. Permite progresar en el sistema accediendo a una oferta 
+formativa de grado D para complementar la formación 
+Esta oferta formativa se integra en el catálogo de Certificados de Formación Profesional. Por 
+el momento se cuenta con una previsión de 374 nuevas ofertas y con un total de 962 
+formaciones.  
+A fecha de creación de este informe, se encuentran en tramitación normativa los siguientes 
+grados C: 
+• Operaciones con maquinaria de arranque y carga de tierras en construcción. Familia 
+Profesional Edificación y Obra Civil. 
+• Operaciones con maquinaria de extendido y nivelado de tierras. Familia Profesional 
+Edificación y Obra Civil. 
+• Operaciones con maquinaria de transporte de tierras. Familia Profesional Edificación y 
+Obra Civil. 
+• Operaciones artesanales de bordado. Familia Profesional Textil, Confección y Piel. 
+• Cuidados higiénicos y estéticos de animales de compañía. Familia Profesional Agraria. 
+• Ecoturismo. Familia Profesional Hotelería y Turismo. 
+• Enoturismo. Familia Profesional Hotelería y Turismo. 
+• Instalación de suministro y evacuación de aguas en edificios. Familia Profesional 
+Instalación y Mantenimiento. 
+• Instalaciones de protección de incendios. Familia Profesional Instalación y Mantenimiento. 
+• Mecanizado de piezas de madera y derivados con centros de control numérico. Familias 
+Fabricación Mecánica y Madera, Mueble y Corcho. 
+• Dinamización de actividades de tiempo libre educativo. Se está fijando su currículo, 
+además de las ofertas de grados B y A incluidas en este certificado profesional. Familia 
+Profesional Servicios Socioculturales y a la Comunidad. 
+• Dirección y organización de proyectos de tiempo libre educativo infantil y juvenil; se están 
+fijando los aspectos básicos del currículo y las ofertas de grados B y A incluidas en este 
+certificado profesional. Familia Profesional Servicios Socioculturales y a la Comunidad. 
+• Operaciones de fabricación de pirotecnia. Se está fijando su currículo y las ofertas de 
+grados B y A incluidas en este certificado profesional. Familia Profesional Química. 
+• Construcción en piedra seca. En este momento se están fijando los aspectos básicos del 
+currículo y las ofertas de grados B y A incluidas en este certificado profesional. Familia 
+Profesional Industrias Extractivas. 
+• Fabricación eléctrica en la industria aeronáutica, se está fijando su currículo y los grados 
+B y A incluidas en este certificado profesional. Familia Profesional Fabricación Mecánica. 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+34 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+• Instalación y mantenimiento de sistemas de intercambio geotérmico en circuito cerrado; 
+se está fijando su currículo y las ofertas de grados B y A incluidas en este certificado 
+profesional. Familia Profesional Energía y Agua. 
+• Gestión de instalaciones de intercambio geotérmico en circuito cerrado. Actualmente se 
+está realizando su currículo y las ofertas de grados B y A incluidas en este certificado 
+profesional. Familia Profesional Energía y Agua. 
+• Micropigmentación. Su currículo se está fijando, además de las ofertas de grados B y A 
+incluidas en este certificado profesional. Familia Profesional Imagen Personal. 
+• Habilitación para la Docencia en Grados A, B y C del Sistema de Formación Profesional, 
+en proceso de fijación de su currículo y de las ofertas de grados B y A incluidas en este 
+certificado profesional. Familia Profesional Servicios socioculturales y a la Comunidad. 
+ 
+ 
+Oferta de grado D (ciclos formativos): 
+Las ofertas de grado D se corresponden con los ciclos de Formación Profesional que forman 
+parte del sistema educativo español en los términos establecidos en la Ley Orgánica 2/2006, 
+de 3 de mayo, debiendo contribuir, además de a los objetivos del Sistema de Formación 
+Profesional, a los previstos para este tipo de enseñanzas en dicha ley orgánica para cada uno 
+de los grados básico, medio y superior. 
+Los ciclos formativos tienen una organización modular, que integra los resultados de 
+aprendizaje adecuados a los diversos campos profesionales, e incluye: 
+a) Módulos profesionales asociados, cada uno de ellos, a un estándar de competencia 
+profesional o, excepcionalmente, a varios. 
+b) Módulos profesionales no asociados a estándares de competencia profesional, sino a la 
+orientación laboral, el emprendimiento, competencias transversales y competencias para 
+la madurez socioprofesional. 
+c) Módulos específicos, vinculados a la optatividad en grado medio y superior. 
+d) Proyecto intermodular. 
+La formación de grado D conduce a la obtención de un título de Técnico Básico, Técnico o 
+Técnico Superior, según sean de nivel 1, 2 o 3. 
+Para acceder a la formación de este grado, se requiere requisitos diferentes, según el nivel. 
+Los títulos de técnico o técnico superior dan acceso a una formación de grado E, de técnico 
+especialista o máster, según sea el nivel, 2 o 3. En caso de técnico superior, además, tendrá 
+acceso a las enseñanzas universitarias, con reconocimiento de créditos, dependiendo del 
+ámbito de conocimiento afín. 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+35 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+El Catálogo de ofertas de grado D contiene actualmente un total de 184 ciclos formativos, 
+de los que 28 son de Grado Básico, 64 de Grado Medio y 92 de Grado Superior.  
+A fecha de creación de este informe, se encuentran en tramitación normativa los siguientes 
+grados D: 
+• Técnico Superior en Diseño y construcción artesanal de instrumentos musicales de 
+cuerda. 
+• Técnico Superior en Mantenimiento y venta de ciclomotores, motocicletas, triciclos y 
+cuadriciclos. 
+ 
+ 
+Estos Grados D generarán también ofertas de grados C, B y A incluidos en cada uno de estos 
+títulos. 
+ 
+ 
+Gráfico 1 Distribución de la oferta formativa de Grado D por niveles formativos 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Oferta de grado E (cursos de especialización): 
+Estas se corresponden con los cursos de especialización, y tienen por objeto complementar 
+y profundizar en las competencias de quienes ya disponen de un título de formación 
+profesional o cumplan las condiciones de acceso que para cada uno de los cursos se 
+determinen. 
+ 
+28 ciclos FP 
+Básica
+64 ciclos FP 
+Medio
+92 ciclos FP 
+Superior
+184 ciclos 
+de FP 
+(Grado D)
+3. Ámbitos estratégicos de la Formación Profesional 
+36 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Esta oferta formativa tiene carácter modular, pueden formar parte de la educación secundaria 
+postobligatoria o de la educación superior, en función del nivel de las titulaciones previas 
+exigidas para el acceso. 
+Para acceder a esta formación se requiere uno de los títulos de grado medio o superior 
+relacionado al curso de especialización que se elija. 
+La formación de grado E conduce a la obtención de un título de Especialista o Máster en 
+Formación Profesional, según sean de nivel 2 o 3. Hasta el momento se han creado 29 
+cursos de especialización desde su lanzamiento en el curso 2020-2021. 
+A fecha de creación de este informe, se encuentran en tramitación normativa los siguientes 
+grados E: 
+• Insecticultura (Grado Medio). 
+• Corte y cata de jamón (Grado Medio). 
+• Turismo micológico (Grado Superior). 
+• Despliegue de productos software en contenedores (Grado Superior). 
+• Recursos y servicios en la nube (Grado Superior). 
+• Aprendizaje automático: gestión de datos y entrenamiento (Grado Superior). 
+• Aprendizaje automático: instalación despliegue y explotación de sistemas (Grado 
+Superior). 
+• Montaje integral y mantenimiento de bicicletas (Grado Medio). 
+ 
+ 
+Gráfico 2 Evolución del número de cursos de especialización ofertados 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+0
+5
+10
+15
+20
+25
+30
+35
+2018
+2019
+2020
+2021
+2022
+2023
+2024
+Cursos de 
+especialización
+3. Ámbitos estratégicos de la Formación Profesional 
+37 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3.3. 
+PROFESORADO, PERSONAL FORMADOR Y 
+PERSONAL EXPERTO 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+38 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+La reciente reforma de la Formación Profesional reconoce 
+diferentes figuras formadoras. Así, a partir de la Ley 3/2022, se incorporan a la figura del 
+profesorado otros perfiles colaboradores, como las personas expertas de sectores 
+productivos, personas trabajadoras expertas sénior de empresa, personas prospectoras de 
+empresas u organismos equiparados, y personal de apoyo especializado que asesore y facilite 
+el acompañamiento en el itinerario formativo de personas con discapacidad. 
+En este ámbito, se destaca la reciente integración del profesorado del cuerpo a extinguir de 
+profesores técnicos de Formación Profesional, en el cuerpo de profesores de Educación 
+Secundaria. 
+La formación permanente del profesorado y personal formador del Sistema de Formación 
+Profesional es para este colectivo un derecho y una obligación, además de una 
+responsabilidad para las administraciones y para los propios centros que imparten Formación 
+Profesional. 
+En particular, la reciente normativa referencia programas de formación permanente 
+relacionados con la innovación e investigación aplicada, emprendimiento, digitalización y 
+lenguas extranjeras en distintos entornos, así como las estancias de formación en empresas 
+u organismos equiparados, o en el marco de acuerdos impulsados por las administraciones 
+con colegios profesionales, universidades u otras instituciones. 
+En este sentido, desde el año 2020 se han impartido cursos de formación dirigidos al 
+profesorado y personal formador destinados a las 26 familias profesionales en las que se 
+estructura la Formación Profesional, relacionados con la orientación profesional y otras 
+iniciativas formativas que incidan en la mejora de la Formación Profesional. 
+Una de las iniciativas de formación, aprobadas en la Resolución del 26 de agosto de 2024, 
+fue el Convenio entre la Secretaría General de Formación Profesional y la Fundación Naturgy, 
+para el impulso de actuaciones en el Sistema de Formación Profesional. A través de dicho 
+convenio se convocaron plazas de cursos en línea para la formación del profesorado que 
+imparte enseñanzas de grado D y E. Esta oferta formativa dio respuesta a lo establecido en 
+el Real Decreto 659/2023, de 18 de julio, que establece que, para que se pueda lograr la 
+adecuada formación en sostenibilidad ambiental en el estudiantado de Formación Profesional, 
+será obligatorio cursar en todos los ciclos formativos de grado medio y superior el módulo 
+profesional «Sostenibilidad aplicada al sector productivo».  
+La oferta formativa de Naturgy, por tanto, se materializó en dos cursos, denominados 
+“Sostenibilidad aplicada al sector productivo”, Introducción y Profundización. En el primero se 
+ofertaron un total de 200 plazas, entre el curso de mañana y el de tarde, y para el segundo, 
+100 plazas. Dichos cursos están actualmente en proceso de certificación con el INTEF. 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+39 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Respecto a la enseñanza de idiomas para el personal formador, cabe destacar el programa 
+That’s English. Este curso de inglés, creado por el Ministerio de Educación, Formación 
+Profesional y Deportes, es la adaptación a la modalidad de educación a distancia de las 
+enseñanzas de las Escuelas Oficiales de Idiomas. El programa abarca desde el nivel A2 hasta 
+el C1, según el Marco Europeo de Referencia para las Lenguas, y permite la preparación de 
+todos estos niveles para los exámenes de las Escuelas de Idiomas. En el período desde el 
+curso 2020-21 hasta el 2024-25 se han formalizado un total de 96.820 matrículas en That’s 
+English.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+40 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3.4. 
+PERSONAS EN FORMACIÓN 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+41 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+El Sistema de Formación Profesional debe de dar respuesta a las 
+demandas de formación existentes y a las necesidades de nuestro mercado laboral, de modo 
+que ayude al crecimiento económico y social, a la mejora de la competitividad y a la 
+empleabilidad.  
+ 
+ 
+Redimensionamiento de plazas y personas en formación 
+ 
+Reducir la brecha existente entre España y el resto de los países europeos, en cuanto al 
+número de personas que cursan estas enseñanzas, ha sido el objetivo del Sistema de 
+Formación Profesional en los últimos años. Para lograrlo se ha hecho un esfuerzo por convertir 
+en más accesible la oferta de formación a la ciudadanía, realizando un redimensionamiento 
+de la oferta con el fin de atender a la creciente demanda de plazas en Formación Profesional. 
+Para la consecución de este objetivo, desde el año 2020 se ha contado con una distribución 
+de fondos a las comunidades autónomas para la creación de 376.187 nuevas plazas de 
+Formación Profesional para grados D y E, de las cuales 111.510 han sido en modalidad 
+bilingüe:  
+ 
+Gráfico 3 Plazas de Formación Profesional creadas por Comunidades Autónomas 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+0
+10.000
+20.000
+30.000
+40.000
+50.000
+60.000
+70.000
+Andalucía
+Cataluña
+Comunidad Valenciana
+Madrid
+Galicia
+Castilla y León
+Murcia
+País Vasco
+Canarias
+Castilla - La Mancha
+Islas Baleares
+Navarra
+Aragón
+Extremadura
+La Rioja
+Cantabria
+Asturias
+Ceuta
+Melilla
+3. Ámbitos estratégicos de la Formación Profesional 
+42 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Gráfico 4 Grupos bilingües por CCAA 
+ 
+ 
+Estas acciones han mostrado un aumento notable desde el año 2018, en cuanto al número 
+de personas formadas en distintos niveles formativos de Grado D, con un incremento del 
+10,81% en el número de personas matriculadas en ciclos formativos de Grado Básico, del 
+30,05% en ciclos formativos de Grado Medio, y del 45,56% en ciclos formativos de Grado 
+Superior: 
+ 
+Gráfico 5 Evolución del alumnado matriculado en enseñanzas de Formación Profesional (Grado D) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+636
+475 470
+361
+316
+202 187 171 145 145 144 132 130
+59
+57
+48
+15
+13
+11
+0
+100
+200
+300
+400
+500
+600
+700
+73.810
+76.440
+75.952
+75.276
+78.674
+81.790
+350.220
+368.359
+401.066
+420.227
+436.438
+455.469
+413.169
+446.706
+507.335
+531.864
+565.851
+601.414
+0
+100.000
+200.000
+300.000
+400.000
+500.000
+600.000
+700.000
+2018-2019
+2019-2020
+2020-2021
+2021-2022
+2022-2023
+2023-2024
+Alumnado
+FP Básica
+FP Medio
+FP Superior
+Lineal (FP Básica)
+Lineal (FP Medio)
+Lineal (FP Superior)
+3. Ámbitos estratégicos de la Formación Profesional 
+43 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Además de la medida de matriculación, es importante resaltar el número de personas que 
+egresan en el Sistema de Formación Profesional. En este sentido, los datos también arrojan 
+una tendencia ascendente que, de igual forma que en el caso del alumnado matriculado, 
+presenta unas cifras tanto más elevadas cuanto mayor es el nivel de la formación, con el 
+mayor número de personas tituladas en FP haciéndolo en ciclos superiores e, igualmente, 
+con un incremento mayor con el paso de los años.  
+El siguiente gráfico muestra la evolución en los últimos cursos académicos de personas que 
+han titulado en ciclos formativos de Formación Profesional, apreciándose un incremento en 
+la FP Básica del 4,96%; del 21,68% en la FP de Grado Medio; y del 24,63% en la FP de 
+Grado Superior: 
+ 
+Gráfico 6 Evolución del alumnado que finaliza estudios en enseñanzas de Formación Profesional (Grado D) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+La inclusión de cursos de especialización de FP (Grado E) ha supuesto igualmente nuevas 
+opciones formativas para la ciudadanía, con un rápido crecimiento desde su inclusión en el 
+catálogo formativo en el año 2020. En cuatro años se ha multiplicado el número de personas 
+formadas en una proporción superior a cuatro veces el número de alumnos/as inicial del curso 
+2020-2021.  
+ 
+ 
+19.021
+20.998
+22.960
+19964
+103.734
+106.604
+127.557
+126.224
+130.581
+126.817
+165.587
+162749
+0
+20.000
+40.000
+60.000
+80.000
+100.000
+120.000
+140.000
+160.000
+180.000
+2018-2019
+2019-2020
+2020-2021
+2021-2022
+Alumnado
+FP Básica
+FP Medio
+FP Superior
+Lineal (FP Básica)
+Lineal (FP Medio)
+Lineal (FP Superior)
+3. Ámbitos estratégicos de la Formación Profesional 
+44 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Gráfico 7 Evolución del alumnado matriculado en cursos de especialización de FP (Grado E) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+El CIDEAD (Centro para la Innovación y Desarrollo de la Educación a Distancia) proporciona 
+estudios de Formación Profesional en la modalidad virtual a personas residentes en todo el 
+territorio nacional y, en el exterior, a los ciudadanos españoles o extranjeros con estudios 
+reglados previos en el sistema educativo español. Se da prioridad a la población que 
+compagina sus estudios con la actividad laboral. Los grados ofertados son los siguientes:  
+ 
+Cursos Formativos de Grado Medio: 
+- Sistemas Microinformáticos y Redes, con un total de 788 matrículas entre el curso de 
+lanzamiento, el 2019-20 hasta el curso 2024-25. 
+- Instalaciones Eléctricas y Automáticas, con un total de 142 matrículas entre el curso de 
+lanzamiento, el 2021-22 hasta el curso 2024-25. 
+ 
+Curso de especialización de Grado Medio: 
+- Instalación y Mantenimiento de Sistemas Conectados a Internet, con un total de 52 
+matrículas entre el curso de lanzamiento, el 2022-23 hasta el curso 2024-25. 
+ 
+Cursos Formativos de Grado Superior: 
+- Desarrollo de Aplicaciones Multiplataforma, con 1101 matrículas desde el curso 2019-20 
+hasta el presente. 
+- Desarrollo de Aplicaciones Web, con 672 matrículas desde el curso 2020-21 al curso actual. 
+- Administración de Sistemas Informáticos cuenta con 707 matrículas desde el curso 2020-
+21 hasta hoy.  
+- Eficiencia Energética y Energía Solar Térmica cuenta con 248 matrículas desde su curso de 
+inicio, 2020-21, hasta el curso presente. 
+- Gestión del Agua, con 497 matrículas desde el 2020-21 hasta hoy. 
+- Sistemas Electrotécnicos y Automatizados cuenta con 160 personas matriculadas desde el 
+curso 2022-23 hasta el 2024-25.  
+ 
+ 
+ 
+1.078
+2.685
+4.296
+6.127
+0
+1.000
+2.000
+3.000
+4.000
+5.000
+6.000
+7.000
+2020-2021
+2021-2022
+2022-2023
+2023-2024
+Alumnado
+Cursos especialización GM y GS
+Lineal (Cursos especialización GM y GS)
+3. Ámbitos estratégicos de la Formación Profesional 
+45 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+- Automatización y Robótica Industrial se inició en el curso 2023-24 y cuenta, hasta el día de 
+hoy, con un total de 105 matrículas. 
+- Mantenimiento Electrónico, también iniciado en el pasado curso 2023-24, ha registrado 63 
+matrículas hasta este curso. 
+ 
+Curso de Especialización de Grado Superior:  
+- Ciberseguridad en entornos de las tecnologías de la información, iniciado en el curso 2022-
+23, cuenta con un total de 513 matrículas. 
+- Inteligencia Artificial y Big Data, iniciado en el curso 2022-23, ha registrado 458 plazas 
+hasta la fecha presente. 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+46 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Convocatorias de subvención para la formación de personas 
+trabajadoras 
+ 
+La formación de personas trabajadoras dentro del sistema de Formación Profesional 
+representa un eje clave para el desarrollo personal en el entorno laboral. Estas convocatorias 
+promueven la formación continua a lo largo de la vida, la cual permite a las personas 
+mantenerse actualizadas en un mundo en constante evolución, garantizando su 
+competitividad y capacidad de adaptación. De este modo, la formación profesional se 
+convierte en una herramienta estratégica para enfrentar los desafíos del mercado laboral, 
+facilitando el acceso a nuevas oportunidades y fomentando el crecimiento personal y 
+profesional.  
+Las convocatorias estatales dirigidas a entidades de formación para el desarrollo de acciones 
+formativas dentro del sistema de Formación Profesional, orientadas a personas trabajadoras 
+ocupadas o en situación de desempleo, se encuentran en distintas fases de ejecución. 
+Actualmente están en ejecución las convocatorias correspondientes a las resoluciones de 
+2022 y 2023. La convocatoria de 2022 cuenta con la participación de 72 entidades que 
+están desarrollando 2.780 acciones formativas dirigidas a 94.550 personas, mientras que 
+la de 2023 ha recibido 450 solicitudes por parte de 518 entidades, con el objetivo de llevar 
+a cabo 3.841 acciones formativas destinadas a 61.973 personas. 
+Por otro lado, la convocatoria en fase de concesión ha registrado un total de 442 solicitudes 
+presentadas por 432 entidades, lo que refleja un alto nivel de participación y un impacto 
+significativo en la oferta formativa con una previsión de formación de 71.706 personas 
+mediante 5.435 acciones formativas. 
+Paralelamente a las convocatorias generales, se han concedido subvenciones para la 
+formación de las personas trabajadoras vinculadas a cualificaciones profesionales en sectores 
+estratégicos recogidos en el Plan de Modernización y mejora de las capacidades para la 
+transición ecológica, que atiende a las necesidades formativas en competencias emergentes, 
+de rápida evolución y con prospectiva en la generación de empleo.  
+La Conferencia Sectorial del Sistema de Cualificaciones y Formación Profesional para el 
+Empleo, en su reunión de 7 de junio de 2023, aprobó el Acuerdo por el que se autoriza la 
+propuesta de distribución territorial y los criterios de reparto de los créditos gestionados por 
+comunidades autónomas, destinados al desarrollo de acciones de reskilling y upskilling de la 
+población activa, vinculada a cualificaciones profesionales en sectores estratégicos, cuidado 
+de las personas y zonas en riesgo de despoblación, en el ejercicio presupuestario 2023, en 
+el marco del componente 20 «Plan estratégico de impulso de la formación profesional», del 
+Plan de Recuperación, Transformación y Resiliencia (PRTR).  
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+47 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Dicha convocatoria estatal destinada a upskilling y reskilling realizada desde el Ministerio de 
+Educación, Formación Profesional y Deportes, está dirigida a empresas, asociaciones 
+empresariales y entidades sin ánimo de lucro. Se han recibido 677 solicitudes para 7.885 
+acciones formativas que llegan a 212.371 personas trabajadoras.  
+Además de las convocatorias estatales, se cuenta con oferta de formación para personal 
+trabajador gestionada por las Comunidades Autónomas, con competencias estatutariamente 
+asumidas en el ámbito de la Formación Profesional para personas trabajadoras, vinculada al 
+Catálogo Nacional de Cualificaciones Profesionales. Los fondos transferidos a las 
+comunidades desde el año 2021 han permitido la formación de 843.460 personas.  
+Existen, además, convocatorias gestionadas por las comunidades autónomas con 
+formaciones vinculadas a cualificaciones profesionales, también en sectores estratégicos, 
+cuidado de personas y zonas de riesgo de despoblación. Para el desarrollo de estas acciones 
+formativas, se han distribuido fondos a las comunidades autónomas para la oferta formativa 
+de 522.374 personas trabajadoras. 
+ 
+ 
+Gráfico 8 Formación Profesional para personas trabajadoras por CCAA 
+ 
+ 
+ 
+0,00 €
+200,00 €
+400,00 €
+600,00 €
+ANDALUCÍA
+CATALUÑA
+MADRID (Comunidad de)
+COMUNITAT VALENCIANA
+GALICIA
+CASTILLA Y LEÓN
+CANARIAS
+CASTILLA-LA MANCHA
+EXTREMADURA
+ARAGÓN
+ASTURIAS (Principado de)
+MURCIA (Región de)
+BALEARS (Illes)
+CANTABRIA
+NAVARRA (Comunidad Foral de)
+RIOJA (La)
+Millones de €
+2021
+2022
+2022 complementaria
+2023
+2024
+3. Ámbitos estratégicos de la Formación Profesional 
+48 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Gráfico 9 Acciones formativas de reskiling y upskiling 
+ 
+Finalmente, como estrategia de formación con carácter no formal, pero organizados por 
+itinerarios formativos que facilitan su posterior acreditación de estándares de competencia 
+profesional, el Ministerio ofrece el Programa de formación abierta “Aula Mentor”. Con una 
+implantación territorial que prioriza las zonas menos pobladas, el 60% de las nuevas Aulas 
+Mentor creadas están ubicadas en municipios de menos de 10.000 habitantes. A tal efecto, 
+se han suscrito más de 690 convenios con entidades locales territoriales y entidades públicas 
+dependientes de las mismas, para el desarrollo del programa de formación abierta Aula 
+Mentor.   
+Hoy en día se cuenta con una oferta formativa de 265 cursos distribuidos en 1.480 aulas 
+en el territorio nacional, que recogen un acumulado de 51.062 matrículas. En fase de diseño 
+está la creación de 2.250 nuevas Aulas Mentor. 
+En el ámbito de este programa, se han suscrito acuerdos con diferentes organismos y 
+entidades para potenciar las Aulas Mentor, entre los que destaca el acuerdo 
+interdepartamental con el Ministerio de Defensa para la creación de 705 Aulas Mentor 
+ubicadas en sus unidades. Otros organismos y entidades con los que se han suscrito acuerdos 
+para potenciar las Aulas Mentor son:  
+• Federación Española de Municipios y Provincias (FEMP).  
+• Alto Comisionado contra la Pobreza Infantil.  
+• Federación de Asociaciones de Mujeres Rurales (FADEMUR).  
+ 
+0
+10.000 20.000 30.000 40.000 50.000 60.000 70.000 80.000 90.000
+ANDALUCÍA
+CATALUÑA
+MADRID (Comunidad de)
+COMUNITAT VALENCIANA
+CASTILLA Y LEÓN
+CASTILLA-LA MANCHA
+CANARIAS
+GALICIA
+PAÍS VASCO
+ARAGÓN
+BALEARS (Illes)
+EXTREMADURA
+MURCIA (Región de)
+ASTURIAS (Principado de)
+NAVARRA (Comunidad Foral de)
+CANTABRIA
+RIOJA (La)
+Total de personas formadas
+2021
+2022
+2023
+3. Ámbitos estratégicos de la Formación Profesional 
+49 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+50 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3.5. 
+CENTROS PROVEEDORES DE FORMACIÓN 
+PROFESIONAL 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+51 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+El nuevo Sistema de Formación Profesional necesita una red de 
+centros que tienda hacia un modelo integral y que pueda incorporar el desarrollo de ofertas 
+de formación para personas jóvenes y trabajadoras, ocupadas o desempleadas; dichos 
+centros se implican en proyectos de innovación, investigación aplicada y emprendimiento; 
+cuentan, a la vez, con una dimensión internacional y participan en procesos de acreditación 
+de competencias y orientación profesional.  
+Se ha creado una red estatal de centros de excelencia, financiada por el Ministerio, repartida 
+por todo el territorio del Estado, que actúa como motor de innovación, crea entornos de 
+investigación y emprendimiento, y sirve como elemento propulsor del resto de centros del 
+sistema. 
+Actualmente la red cuenta con 66 centros que se articulan en base a los siguientes sectores 
+estratégicos: 
+Aeronáutico, 
+Agroalimentario, 
+Audiovisual, 
+Automóvil, Ciberseguridad, 
+Construcción y sostenibilidad energética, Economía Social y de los cuidados, Energías 
+renovables, Fabricación automatizada, Hostelería, Inteligencia artificial y Big Data, Marítimo-
+Pesquera, Mecatrónica, Química, Sanitario, Tecnologías de la información, Transporte y 
+logística y Turismo. 
+Hasta el momento del presente informe, se ha destinado a la red de centros de excelencia 
+un presupuesto que ha permitido el desarrollo de 129 cursos dirigidos a 3.975 docentes, 
+y se han llevado a cabo 309 proyectos de innovación.  
+ 
+Gráfico 10 Red de Centros de Excelencia 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+0
+1
+2
+3
+4
+5
+6
+7
+3. Ámbitos estratégicos de la Formación Profesional 
+52 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Por otro lado, la red de centros de referencia nacional la configuran los centros públicos que 
+realizan acciones de innovación y experimentación en materia de formación profesional, 
+especializados en los diferentes sectores productivos a través de las familias profesionales. 
+Estos centros sirven como referencia en innovación para el conjunto del sistema de la 
+Formación Profesional de su área y diseñan programas de formación e investigación dando 
+respuesta a las necesidades de los sectores emergentes e innovadores del área de referencia. 
+Actualmente la red cuenta con 40 centros de referencia nacional. 
+Las siguientes gráficas muestran la distribución de centros que realizan enseñanzas de 
+Formación Profesional, tanto públicos como privados, desde el curso 2019- 2020 hasta la 
+fecha de creación de este informe, en todo el Estado. 
+ 
+Gráfico 11 Centros con oferta de Formación Profesional de Grado Básico 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Gráfico 12 Centros con oferta de FP de Grado Medio 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+375
+386
+386
+391
+401
+411
+1.677
+1.695
+1.693
+1.714
+1.806
+1.842
+0
+200
+400
+600
+800
+1.000
+1.200
+1.400
+1.600
+1.800
+2.000
+2018-2019 2019-2020 2020-2021 2021-2022 2022-2023 2023-2024
+Número de centros
+Centros privados
+Centros públicos
+Lineal (Centros privados)
+Lineal (Centros públicos)
+895
+943
+985
+1.043
+1.095
+1.122
+2.120
+2.139
+2.170
+2.202
+2.270
+2.324
+0
+500
+1.000
+1.500
+2.000
+2.500
+2018-2019 2019-2020 2020-2021 2021-2022 2022-2023 2023-2024
+Número de centros
+Centros privados
+Centros públicos
+Lineal (Centros privados)
+Lineal (Centros públicos)
+3. Ámbitos estratégicos de la Formación Profesional 
+53 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Gráfico 13 Centros con oferta de Formación Profesional de Grado Superior 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Gráfico 14 Centros con oferta de cursos de especialización 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Entre los registros con los que actualmente cuenta el Sistema de Formación Profesional se 
+encuentra el Registro General de Centros de Formación Profesional, que recoge todos los 
+centros del Sistema, o, en otras palabras, los centros autorizados para impartir ofertas 
+formativas de cualquier grado y modalidad. 
+El Registro General de centros del Sistema de Formación Profesional aúna toda la información 
+referente a los centros autorizados por cada comunidad autónoma y la Administración central, 
+en el caso de ofertas formativas de su competencia. A través del buscador alojado en la 
+página web TodoFP, la ciudadanía cuenta con la posibilidad de poder buscar centros 
+autorizados a dar enseñanzas de Formación Profesional en todo el Estado.  
+940
+1.010
+1.061
+1.124
+1.197
+1.255
+1.858
+1.881
+1.937
+1.982
+2.055
+2.128
+0
+500
+1.000
+1.500
+2.000
+2.500
+2018-2019
+2019-2020
+2020-2021
+2021-2022
+2022-2023
+2023-2024
+Número de centros
+Centros privados
+Centros públicos
+Lineal (Centros privados)
+Lineal (Centros públicos)
+0
+0
+18
+28
+68
+196
+317
+382
+-50
+0
+50
+100
+150
+200
+250
+300
+350
+400
+450
+2020-2021
+2021-2022
+2022-2023
+2023-2024
+Número de centros
+Centros privados
+Centros públicos
+Lineal (Centros privados)
+Lineal (Centros públicos)
+3. Ámbitos estratégicos de la Formación Profesional 
+54 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3.6. 
+INNOVACIÓN Y EMPRENDIMIENTO 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+55 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+El artículo 102 de la LO 3/2022 dispone que la cultura de la 
+innovación, la investigación aplicada y el emprendimiento activo, deben formar parte de los 
+currículos básicos de las ofertas del Sistema de Formación Profesional.  
+Para ello, las ofertas formativas deben incorporar actividades de fomento de la innovación, 
+emprendimiento, sentido de la iniciativa y capacidad de iniciar nuevos proyectos empresariales 
+vinculados al sector productivo para el que se forman.  
+La finalidad es favorecer tanto la competencia emprendedora en el trabajo por cuenta ajena, 
+como la creación de empresas, garantizando el aporte del conocimiento de las nuevas 
+tecnologías y procesos, de manera continua, en cada sector productivo. 
+El nuevo Sistema de Formación Profesional incorpora novedosas estrategias para fomentar 
+la cultura de la innovación y el emprendimiento. Entre ellas se encuentran las siguientes: 
+• Creación en todos los centros de Formación Profesional de la figura responsable de la 
+coordinación de innovación de la Formación Profesional. Las principales funciones de la 
+misma son: vincular al centro con entidades investigadoras, coordinar al profesorado 
+dinamizador de proyectos, coordinar la formación del profesorado e impulsar 
+metodologías innovadoras. 
+• Incorporación al currículo de los ciclos formativos de un proyecto final asociado a la 
+innovación y al emprendimiento.  
+• En los planes de trabajo de los centros de Formación Profesional, incorporación de los 
+proyectos de innovación para impulsar la formación en innovación tecnológica, en 
+transformación digital, tecnología inmersiva y en metodologías avanzadas de aprendizaje, 
+generando así un contexto innovador. 
+ 
+Como recurso de innovación y emprendimiento, se ha apoyado la creación de aulas de 
+emprendimiento en los centros de Formación Profesional, para el fomento de creación de 
+proyectos empresariales y el contacto de los/as estudiantes con el sector productivo de 
+referencia. 
+En dichas aulas se realizan proyectos con implicación de entidades y organismos vinculados 
+al desarrollo del territorio, y promueven el acompañamiento de las personas en formación, o 
+recién formadas, en la creación de su propia empresa, facilitando la información y el, soporte 
+necesario además del uso de espacios y materiales del centro de formación. 
+Se ha establecido una financiación para la creación de 1.785 aulas de emprendimiento, 
+distribuidas por todas las comunidades autónomas, como se muestra en el siguiente gráfico: 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+56 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Gráfico 15 Aulas de emprendimiento creadas por Comunidades Autónomas desde 2020 
+ 
+ 
+Como apoyo a la creación de aulas de emprendimiento, por un lado, se ha elaborado y 
+difundido el manual “Creando aulas de emprendimiento en FP. Guía para empezar a 
+emprender”, y por otro, se ha llevado a cabo una formación directa desde el Ministerio a los 
+responsables de las diferentes comunidades autónomas y docentes de los centros. 
+El desarrollo de proyectos de innovación e investigación aplicada es una de las principales 
+medidas para incorporar la cultura de la innovación e investigación aplicada en el Sistema de 
+Formación Profesional. Estos proyectos impulsan la generación de un entorno especializado 
+de confluencia y colaboración efectiva entre los centros de formación profesional y las 
+empresas, especialmente en el ámbito de la pequeña y mediana empresa. 
+En los últimos años se han llevado a cabo varias convocatorias dirigidas a centros del sistema 
+de Formación Profesional para proyectos de innovación, desarrollados con entidades y 
+empresas, que den respuesta a la evolución experimentada por las familias, sectores y perfiles 
+profesionales. Se ha profundizado en formas de gestión y organización empresarial, 
+requerimientos de procesos técnicos emergentes, mejora de la competitividad nacional e 
+internacional de las empresas, necesidades de cambio metodológico para un mejor desarrollo 
+competencial y de transición al mercado laboral del alumnado del sistema de Formación 
+Profesional, así como en la atención de las necesidades de perfiles profesionales con 
+formación STEAM. 
+ 
+ 
+298
+230
+203
+137
+131
+116
+98
+95
+92
+66
+64
+64
+49
+46
+39
+22
+21
+7
+7
+0
+50
+100
+150
+200
+250
+300
+350
+ANDALUCÍA
+CATALUÑA
+COMUNIDAD…
+MADRID
+GALICIA
+CASTILLA Y LEÓN
+PAÍS VASCO
+CASTILLA-LA MANCHA
+CANARIAS
+EXTREMADURA
+ARAGÓN
+MURCIA
+ISLAS BALEARES
+ASTURIAS
+NAVARRA
+CANTABRIA
+LA RIOJA
+CEUTA
+MELILLA
+3. Ámbitos estratégicos de la Formación Profesional 
+57 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Comenzando por la convocatoria iniciada en el 2019, se realizaron 16 proyectos, en los que 
+se incluyeron 21 empresas y 46 centros. En 2021 la cifra aumentó a 141 proyectos, en 
+los que se involucraron 190 empresas y 439 centros. En 2023 la cifra ascendió a 257 
+proyectos, con 324 empresas y 659 centros involucrados. 
+La creación de la Red estatal de centros de excelencia ha supuesto un impulso como 
+creadores de entornos de investigación y emprendimiento. Estos centros, junto con los 
+Centros de referencia nacional, especializados en los diferentes sectores productivos, 
+constituyen la referencia en innovación para el conjunto del sistema. 
+Se ha creado la plataforma FPConecta, una herramienta que da a conocer las oportunidades 
+que ofrece la Formación Profesional en España y enlaza a todos los agentes implicados.  
+Asimismo, con el fin de impulsar la participación de empresas y entidades en el sistema de 
+Formación Profesional, se ha creado La Alianza por la Formación Profesional. Esta tiene como 
+objetivo principal promover iniciativas específicas que ayuden a construir una Formación 
+Profesional eficiente, flexible y de alta calidad; que apoye, además, dentro del marco del 
+Sistema Nacional de Cualificaciones Profesionales, tanto la formación inicial como la 
+actualización continua a lo largo de la vida de los estudiantes y la población activa, ya sea 
+empleada o en situación de desempleo. Los objetivos que promueve la Alianza por la 
+Formación Profesional son los siguientes: 
+• 
+Fortalecer un sistema de Formación Profesional de alta calidad, innovador y adaptado 
+a las demandas de la economía actual, que favorezca la doble transición ecológica y 
+digital, siendo un motor para el crecimiento económico y la cohesión social. 
+• 
+Fomentar la creación de conocimiento colectivo y experto que guíe las decisiones y 
+acciones orientadas a promover la Formación Profesional. 
+• 
+Dar visibilidad a las iniciativas y proyectos impulsados por entidades, empresas y 
+actores sociales, entre otros, con el fin de aumentar el interés de la ciudadanía por la 
+Formación Profesional. 
+• 
+Fomentar la colaboración con empresas, organizaciones y grupos clave de la sociedad 
+civil para impulsar la Formación Profesional en sus respectivos ámbitos de actuación. 
+• 
+Incrementar el número de jóvenes y adultos (tanto empleados como desempleados) 
+que optan por la Formación Profesional para desarrollar sus habilidades y mejorar sus 
+cualificaciones, con especial énfasis en las áreas relacionadas con sectores 
+emergentes. 
+ 
+Hasta el momento, el número de empresas y entidades adheridas es de 173. 
+ 
+ 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+58 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3.7. 
+DIGITALIZACIÓN Y SOSTENIBILIDAD 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+59 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+El nuevo Sistema de Formación Profesional incorpora e integra las 
+transformaciones que han sido fruto de la digitalización, la transición ecológica y la 
+sostenibilidad en todos los sectores económicos, como vectores clave de la economía, el 
+empleo y el bienestar social. 
+Se ha impulsado la digitalización en los programas de Formación Profesional, asegurando 
+que el alumnado adquiera competencias digitales aplicadas al sector profesional de referencia. 
+Además, se está fomentando el desarrollo de proyectos y formaciones relacionadas con la 
+sostenibilidad y las energías renovables, alineándose con las demandas de un mercado laboral 
+en constante evolución hacia una economía verde. 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+60 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Catálogo de ofertas 
+ 
+Se incorporan al currículo de los ciclos formativos de grado medio y superior dos nuevos 
+módulos profesionales: 
+• Digitalización aplicada al sistema productivo. 
+• Sostenibilidad aplicada al sistema productivo. 
+El módulo Digitalización aplicada al sistema productivo tiene como finalidad el desarrollo del 
+conocimiento y competencias básicas en digitalización y las condiciones en las que ésta 
+induce modificaciones en los procesos productivos del sector correspondiente. 
+El módulo de Sostenibilidad aplicada al sistema productivo tiene como objetivo el desarrollo 
+de conocimiento y competencias básicas en economía verde, sostenibilidad e impacto 
+ambiental de la actividad, así como las condiciones en las que las exigencias de la transición 
+ecológica modifican los procesos productivos del sector correspondiente. 
+Cada uno de los módulos profesionales contempla una duración del currículo básico de 30h 
+y han comenzado a impartirse en el curso académico 2024-2025. 
+En la actualización del catálogo de ofertas formativas, se han incorporado 29 nuevas ofertas 
+formativas de Grado E (cursos de especialización), 21 de ellas vinculadas a la digitalización: 
+1. Ciberseguridad en entornos de las tecnologías de la información. 
+2. Ciberseguridad en entornos de las tecnologías de operación. 
+3. Digitalización del mantenimiento industrial. 
+4. Fabricación inteligente. 
+5. Modelado de la información en la construcción (BIM). 
+6. Desarrollo de videojuegos y realidad virtual. 
+7. Fabricación aditiva. 
+8. Inteligencia artificial y Big Data. 
+9. Implementación de redes 5G. 
+10. Mantenimiento avanzado de sistemas de material rodante ferroviario. 
+11. Mantenimiento de vehículos híbridos y eléctricos. 
+12. Sistemas de señalización y telecomunicaciones ferroviarias. 
+13. Aeronaves pilotadas de forma remota – Drones. 
+14. Instalación y mantenimiento de sistemas conectados a IoT (Internet de las cosas). 
+15. Materiales compuestos en la industria aeroespacial. 
+16. Mantenimiento y seguridad en sistemas de vehículos híbridos y eléctricos. 
+17. Robótica colaborativa. 
+18. Posicionamiento en buscadores (SEO/SEM) y comunicación en redes sociales. 
+19. Redacción de contenidos digitales para marketing y ventas. 
+20. Desarrollo de aplicaciones en el lenguaje Python. 
+21. Comercio electrónico. 
+3. Ámbitos estratégicos de la Formación Profesional 
+61 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Formación 
+ 
+En esta transformación hacia la digitalización, es fundamental ofrecer formación para 
+aumentar la competencia digital del personal docente y formador de la Formación Profesional. 
+Para ello, se ha diseñado formación específica que solvente estas necesidades. 
+Dicha oferta formativa, articulada en torno a la digitalización aplicada a los sectores 
+productivos, ha permitido, hasta la fecha, la preparación de 49.901 docentes. 
+ 
+Gráfico 16 Personas formadas en digitalización 
+ 
+ 
+Por otra parte, se ha realizado desde el Ministerio una oferta directa de formación docente 
+en digitalización aplicada a los diferentes sectores productivos: se trata de formación 
+específica dirigida a personal docente y formador con el objetivo principal de ofrecer 
+conocimientos, habilidades y destrezas necesarias para comprender, analizar y aplicar los 
+conceptos y prácticas de digitalización en entornos productivos. 
+Esta acción formativa ha estado vinculada a ciclos formativos o cursos de especialización de 
+sectores productivos concretos: inteligencia artificial, ciberseguridad, fabricación inteligente y 
+digitalización del mantenimiento industrial, entre otras. 
+ 
+ 
+8392
+7603
+5626
+5425
+3196
+3081
+2677
+2499
+1744
+1725
+1508
+1376
+1365
+1237
+931
+910
+642
+114
+64
+0
+2000
+4000
+6000
+8000
+10000
+ANDALUCÍA
+CATALUÑA
+MADRID
+C. VALENCIANA
+GALICIA
+CASTILLA Y LEÓN
+CASTILLA LA MANCHA
+CANARIAS
+ARAGÓN
+MURCIA
+EXTREMADURA
+PAÍS VASCO
+BALEARES
+ASTURIAS
+CANTABRIA
+NAVARRA
+LA RIOJA
+CEUTA
+MELILLA
+3. Ámbitos estratégicos de la Formación Profesional 
+62 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Con relación a la sostenibilidad, desde el Ministerio se ha ofrecido formación directa para 
+personal docente que imparte este nuevo módulo profesional de sostenibilidad, que se ha 
+incorporado al currículo de las ofertas de Grado D, Sostenibilidad aplicada al sistema 
+productivo. Esta formación se ha dirigido a más de 300 docentes en su primera edición, datos 
+y formación ya mencionadas en el punto 3.3 de este informe. 
+Dirigida a personas trabajadoras ocupadas, se ha desarrollado el proyecto #Trabajamos en 
+Digital, realizado en colaboración con CEOE, CEPYME y UGT, en el que han participado 
+53.528 personas. 
+Como recurso complementario, se ha ofrecido un proceso de reconocimiento de la 
+acreditación de competencia profesional de dos unidades de competencia incluidas en la 
+cualificación profesional Digitalización aplicada al entorno profesional. 
+ 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+63 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Recursos 
+ 
+En lo que respecta a la dotación de recursos, una de las actuaciones de carácter estratégico 
+para la incorporación de la digitalización al Sistema de Formación Profesional ha sido la 
+creación de Aulas ATECA (Aulas de Tecnología Aplicada).  
+Dicha actuación conlleva la conversión de aulas de centros de Formación Profesional en 
+espacios de tecnología aplicada a los sectores productivos de referencia, diseñados para 
+incorporar las tecnologías 4.0, tales como Impresión 3D, Robótica, Realidad Virtual o Mixta o 
+el Desarrollo de la Conectividad entre equipos. 
+Su objetivo es dotar al alumnado de competencias digitales avanzadas, mejorando su 
+capacidad de innovación y adaptabilidad en entornos laborales cada vez más automatizados 
+y digitalizados. 
+Para ello se han distribuido fondos a las Comunidades Autónomas para la creación de 1.434 
+aulas de tecnología avanzada. 
+ 
+Gráfico 17 Aulas de Tecnología Aplicada por CCAA 
+ 
+Como apoyo complementario a esta medida, se ha elaborado el manual Aulas Tecnológicas. 
+Cambio de paradigma en Formación y Espacios de Aprendizaje y se ha ofrecido formación 
+directa desde el Ministerio al personal responsable en las diferentes comunidades autónomas 
+y docentes de los centros. 
+ 
+ 
+231
+219
+154
+135
+113
+92
+75
+71
+60
+51
+46
+42
+36
+33
+27
+21
+15
+7
+6
+0
+50
+100
+150
+200
+250
+CATALUÑA
+ANDALUCÍA
+COMUNIDAD VALENCIANA
+MADRID
+GALICIA
+CASTILLA Y LEÓN
+CASTILLA-LA MANCHA
+CANARIAS
+PAÍS VASCO
+EXTREMADURA
+MURCIA
+ARAGÓN
+ISLAS BALEARES
+ASTURIAS
+NAVARRA
+LA RIOJA
+CANTABRIA
+CEUTA
+MELILLA
+3. Ámbitos estratégicos de la Formación Profesional 
+64 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Diseñado como recurso para los centros de Formación profesional, está actualmente en 
+tramitación la incorporación simuladores y gemelos digitales. Estas herramientas permitirán a 
+los/as estudiantes adquirir experiencia práctica en un entorno seguro y controlado, 
+preparándolos de manera más efectiva para los desafíos del mercado laboral actual. 
+Para ello se diseña una plataforma gestora centralizada de licencias y simuladores, cuyo 
+volumen alcanza más de 50.000 licencias y 200.180 dispositivos. El proyecto se 
+encuentra actualmente en tramitación. 
+Se han creado, además, como recurso dirigido a la ciudadanía, Aulas de Capacitación Digital, 
+ubicadas en centros que, por su cercanía y facilidad de acceso, resultan una opción atractiva 
+para la obtención de habilidades digitales, con especial atención a los sectores de población 
+más vulnerables.  
+Hoy en día se cuenta con un total de 146 centros de capacitación digital, a lo que se suman 
+113 nuevos centros con la reciente convocatoria resuelta. 
+La Red de Centros de Capacitación Digital cuenta, además, con una financiación distribuida a 
+las comunidades autónomas para la creación de 1.050 centros/aulas de capacitación digital 
+y para la formación de 107.484 personas. 
+ 
+ 
+Gráfico 18 Centros de Capacitación digital en España 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+65 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3.8. 
+EL SISTEMA DE FORMACIÓN PROFESIONAL 
+VINCULADO AL SECTOR LABORAL 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+66 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+El 
+actual 
+Sistema 
+de 
+formación 
+profesional 
+considera 
+imprescindible el circuito de trasferencia de conocimiento formación-empresa, a través de la 
+participación de las empresas en el diseño, desarrollo, evaluación e innovación. Este ajuste 
+entre la oferta formativa y la demanda de cualificaciones prevé un beneficio mutuo para 
+empresas y personas en formación. Por un lado, las personas adquieren las habilidades y 
+destrezas requeridas por el mercado, aumentando sus oportunidades de empleabilidad; por 
+otro, las empresas tienen acceso a una población mejor preparada, reduciendo el tiempo y 
+los recursos necesarios para su capacitación laboral. 
+Una de las reformas más significativas en lo que a la participación de las empresas se refiere, 
+es el carácter dual generalizado en la totalidad de la oferta de Grados C y D establecido en 
+la Ley 3/2022, con un porcentaje de entre el 25% y el 50% de la formación en empresa, 
+otorgando en la actualidad un papel protagonista a las mismas. La formación dual se recoge 
+así, desde el curso 2023/2024, en dos modalidades: 
+• General: la estancia en la empresa tiene una duración de entre el 25% y el 35% de 
+la duración total de la formación y entre un 10% y un 20% de los resultados de 
+aprendizaje del currículo. Esta modalidad no tiene vinculación contractual. 
+• Intensiva: en este caso, la estancia en la empresa tiene una duración de entre el 35% 
+y el 50% de la duración total de la formación y de más de un 30% de los resultados 
+de aprendizaje del currículo. Esta modalidad tiene vinculación contractual. 
+En lo relativo a la participación del sector laboral en la actualización de la oferta formativa, las 
+aportaciones empresariales traducen de manera directa las necesidades del mercado laboral, 
+y han permitido el ajuste de las acciones formativas a las demandas del propio mercado en 
+las últimas actualizaciones del Catálogo de ofertas, a través de la detección de la evolución 
+de los perfiles profesionales. Por otro lado, estas aportaciones también contribuyen al diseño 
+de los estándares de competencia incluidos en las ofertas de formación. 
+Identificar sectores estratégicos que necesitan una detección de necesidades formativas 
+preferentes tiene una importancia excepcional para que el Sistema de Formación Profesional 
+ponga el foco en un plano puramente laboral. En colaboración con la Mesa de diálogo social 
+para la Formación Profesional, se ha hecho una selección de estos sectores considerados de 
+importancia excepcional por razones estratégicas. Dicha selección es la que sigue: 
+• Nueva tecnología avanzada de la información. 
+• Máquinas-herramienta automatizadas y robótica. 
+• Equipos aeronáuticos. 
+• Equipo de transporte ferroviario moderno. 
+• Vehículos basados en energía y equipos nuevos. 
+• Maquinaria agrícola. 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+67 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+• Nuevos materiales. 
+• Biofarmacia y productos médicos avanzados. 
+• Cadena de consumo: Fabricantes y distribuidores. 
+• Hostelería y turismo. 
+• Servicios de atención a personas. 
+En respuesta a una medida con alta demanda en los últimos años, desde el 1 de enero de 
+2024, se produce el alta en la cotización de la Seguridad Social del alumnado de Formación 
+Profesional, asimilada a personas trabajadoras por cuenta ajena, permitiendo que puedan 
+comenzar su carrera de cotización, generando derechos a futuro y aumentando la cobertura 
+en caso de accidente. Se prevé que, en 2025, esta medida alcance a la totalidad del alumnado 
+de Formación Profesional, que se contempla en más de un millón de personas. 
+Otro elemento destacable del Sistema de Formación profesional lo conforma su participación 
+en los Proyectos Estratégicos para la Recuperación y Transformación Económica (PERTES). 
+Creados en 2020 por el Gobierno, éstos sirven como instrumento de colaboración entre 
+entidades públicas y privadas.  
+La participación del Sistema en PERTES se centra en la búsqueda del ajuste entre la oferta y 
+demanda laborales. Se ha realizado la revisión y análisis del dimensionamiento de 
+profesionales, ajuste de formación y reconocimiento de competencias para los siguientes 
+sectores: 
+• 
+Aeroespacial. 
+• Economía social y de los cuidados. 
+• 
+Salud de vanguardia. 
+• Construcción y rehabilitación de viviendas.  
+• Audiovisual. 
+• Movilidad y vehículos eléctricos. 
+Además de estas iniciativas, se han creado Hubs por la Formación Profesional, mencionados 
+anteriormente en este informe, para la participación de empresas de cada sector productivo 
+en la detección de necesidades formativas, diseño y actualización de la oferta. En el ámbito 
+tecnológico, con la finalidad de promover una oferta de Formación Profesional capaz de 
+responder a los requerimientos de la economía actual, se ha establecido una colaboración 
+estratégica con las empresas Accenture, Experis - ManpowerGroup, IBM, Microsoft y SAP 
+España.  
+Los hubs tecnológicos son clave para la detección de los perfiles profesionales, la 
+actualización y diseño de las nuevas ofertas formativas y para la puesta en marcha de 
+proyectos de colaboración e intercambio. 
+La actualización de todas las ofertas de Grado D (ciclos formativos) de la familia profesional 
+Informática y Comunicaciones, en colaboración con la Asociación Digitales y Ametic, con sus  
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+68 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+empresas asociadas, es otro ejemplo de colaboración con los sectores laborales para lograr 
+el necesario ajuste de la formación a las necesidades reales. 
+En el marco de los acuerdos desarrollados en el HUB Tecnológico, se están desarrollando, a 
+tiempo presente, nuevas ofertas de FP correspondientes a los perfiles demandados: 
+• Curso de especialización de Formación Profesional de Grado Superior en Despliegue 
+de Productos software en contenedores. 
+• Curso de especialización de Formación Profesional de Grado Superior en Aprendizaje 
+automático: gestión de datos y entrenamiento.  
+• Curso de especialización de Formación Profesional de Grado Superior en Aprendizaje 
+automático: instalación, despliegue y explotación de sistemas.  
+• Curso de especialización de Formación Profesional de Grado Superior en Recursos y 
+servicios en la nube. 
+ 
+ En lo que concierne al HUB Aeroespacial, existe una previsión de nuevas ofertas de FP 
+correspondientes a los siguientes perfiles demandados: 
+• Grado C en Ilustración Técnica. 
+• Grado C en Mazos de cable. 
+• Grado C en Verificación de elementales. 
+• Grado C en Pintura aeroespacial. 
+• Actualización del Ciclo Formativo de Grado Medio de Montaje de Estructuras e 
+Instalación de Sistemas Aeronáuticos. 
+• Actualización de los cinco Ciclos Formativos de Grado Superior relacionados con el 
+mantenimiento de aviones y helicópteros para adaptarlos a la nueva normativa 
+europea: 
+o Técnico Superior en Mantenimiento de aviones con motor pistón. 
+o Técnico Superior en Mantenimiento de aviones con motor turbina. 
+o Técnico Superior en Mantenimiento de helicópteros con motor pistón. 
+o Técnico Superior en Mantenimiento de helicópteros con motor turbina. 
+o Técnico Superior en Mantenimiento de sistemas electrónicos y aviónicos en 
+aeronaves. 
+ 
+Las empresas que participan en el HUB Formativo del Aeroespacial son las siguientes: Aciturri 
+Aeronáutica, Aernova Aerospace, Airbus Operations, Airbus Defence and Space, Iberia, e 
+Industria de Turbo Propulsores. 
+ 
+En el HUB de Energía Verde se cuenta actualmente con la participación del Club Español de 
+la Energía, Endesa, Manpowergroup Global, Moeve, Naturgy Energy Group y Repsol. 
+ 
+Las empresas que integran el HUB Ferroviario son las que siguen:  Administrador de 
+Infraestructuras Ferroviarias (ADIF) y Adif-Alta Velocidad, Patentes Talgo, S.L.U., Renfe-
+Operadora E.P.E., y la Asociación Colegio de Huérfanos de Ferroviarios. 
+3. Ámbitos estratégicos de la Formación Profesional 
+69 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+En cuanto al HUB del Audiovisual, se cuenta con la participación de Atresmedia Corporación 
+de Medios de Comunicación, (“ATRESMEDIA”), El Ranchito Imagen Digital, Netflix Servicios 
+de Transmisión España, Telefónica Audiovisual Digital, La Asociación Estatal de Cine, AECINE, 
+La Asociación Productores Audiovisuales de  Televisión de España (PATE), La Asociación de 
+Productoras Españolas de Audiovisual Internacional, PROFILM, y La Federación PROA 
+(Federación de Productores Audiovisuales). 
+ 
+Cabe mencionar aquí la oferta de ciclos formativos de grado superior de Formación 
+Profesional de la familia Imagen y Sonido, relacionados con el sector audiovisual y de 
+espectáculo en vivo, que actualmente está formada por cuatro titulaciones: 
+1. Técnico Superior en Iluminación, Captación y Tratamiento de Imagen. 
+2. Técnico Superior en Producción de Audiovisuales y Espectáculos. 
+3. Técnico Superior en Realización de Proyectos Audiovisuales y Espectáculos. 
+4. Técnico Superior en Sonido para Audiovisuales y Espectáculos. 
+ 
+Cada uno de estos ciclos formativos está orientado a la formación de un perfil profesional: 
+iluminador, productor, realizador y sonidista, respectivamente, tanto de la dimensión 
+audiovisual como de la del espectáculo en vivo, e incluyen dos, tres o cuatro cualificaciones 
+completas. Este hecho, a juicio de los estudios realizado bajo el “Estatuto del Artista”, implica 
+que los perfiles audiovisual y espectáculo en vivo no tengan el nivel de especialización 
+necesario al compartir titulación. Todos los estándares de competencias profesionales que se 
+acreditan en los cuatro títulos han sido actualizados recientemente por el Instituto Nacional 
+de las Cualificaciones con la colaboración del sector productivo, y servirán de base para su 
+traslación a la actualización de las ofertas formativas. 
+Asimismo, se han elaborado dos nuevas cualificaciones que se encuentran ya publicadas a 
+instancia del sector productivo de la familia Imagen y Sonido:  
+• Gestión de elevación y suspensión de equipos y de movimiento de cargas (Rigging) 
+para eventos.  
+• Desarrollo de proyectos y control de sistemas de vídeo para espectáculos en vivo, 
+que podrán ser igualmente utilizadas para incluir, en la medida de las necesidades de 
+los profesionales, en una o varias de las titulaciones.  
+Con fecha 24 de junio de 2022, la Secretaria General de Formación Profesional, en el marco 
+de la IV reunión de la Comisión Interministerial para el desarrollo del Estatuto del Artista, se 
+comprometió a “la separación nítida de las formaciones que tuvieran que ver con medios 
+audiovisuales de las del espectáculo en vivo, atendiendo a una de las demandas históricas 
+del sector”, creando una titulación específica para producción, realización y regiduría de 
+espectáculos en vivo y otra de sonido e iluminación de espectáculos en vivo. 
+El pasado 16 de julio de 2024 tuvo lugar la reunión de coordinación entre la Secretaría 
+General de FP y los representantes del Estatuto del Artista para conformar los grupos de 
+trabajo. Durante el tercer trimestre del 2024, se está colaborando con los representantes 
+tanto del sector del espectáculo en vivo, como del audiovisual. 
+3. Ámbitos estratégicos de la Formación Profesional 
+70 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+Completa el paradigma de titulaciones afines el ciclo de la familia Artes y Artesanías, cuyos 
+estándares de competencias profesionales se encuentran también recientemente actualizadas 
+y se contempla igualmente una formación complementaria nueva Maquinaria escénica, 
+todavía por planificar, y la oferta Técnico Superior Artista Fallero y Construcción de 
+Escenografías. 
+Todas estas estrategias se suman a dos iniciativas del Ministerio que invitan a la incorporación 
+de las empresas al Sistema de Formación profesional: La Alianza por la Formación Profesional 
+y la Plataforma FP Conecta. 
+La Alianza por la Formación Profesional, en funcionamiento desde el año 2021, impulsa 
+iniciativas concretas como la formación de docentes y personal formador, la acreditación de 
+competencias, la identificación de nuevos perfiles profesionales, el diseño de oferta formativa, 
+la participación en proyectos de investigación aplicada, y el fomento de la dualidad o formación 
+para personas trabajadoras, entre otras. 
+Las entidades adheridas a la Alianza son representativas del ecosistema de Formación 
+Profesional. Se trata de grandes corporaciones empresariales, entidades del tercer sector, 
+pequeñas y medianas empresas, fundaciones y asociaciones empresariales y sociales. Hasta 
+el momento se cuenta con un total de 173 entidades adheridas. 
+En el marco de la Alianza por la Formación profesional, se ha creado el sello de calidad para 
+iniciativas de interés singular desarrolladas por las entidades adheridas. Actualmente son dos 
+entidades a las que se les ha otorgado este sello de calidad denominado “Proyecto de interés 
+singular”: la Fundación Empresa Familiar de Castilla y León y la Fundación Laboral de la 
+Construcción.  
+Además, la participación de empresas y entidades se hace efectiva en el entorno de la propia 
+empresa en distintos aspectos relacionados con el sistema, como son su participación en la 
+acreditación permanente de competencias profesionales de sus trabajadores y el análisis de 
+su mapa de talento para la identificación, el mantenimiento y la mejora de su competitividad. 
+También se refleja esta participación en la demanda de acciones de formación adaptadas a 
+las necesidades de la empresa en el marco del Catálogo Modular de Formación Profesional. 
+Por su parte, la Plataforma FP Conecta facilita el flujo de información entre empresas y 
+ciudadanía en relación con la Formación Profesional. Esta herramienta trata de impulsar una 
+gran red por la FP, facilitando la accesibilidad de la información relacionada con el sistema y 
+ofreciendo orientación profesional, recursos y conexión con potenciales empleadores y 
+fomentando la colaboración con instituciones educativas y de empleo. 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+71 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+La plataforma permite: 
+• Consultar ofertas de formación profesional. 
+• Publicar ofertas de empleo, prácticas, formación, proyectos, convocatorias, materiales 
+curriculares y otras iniciativas. 
+• Buscar ofertas de empleo, formaciones en empresa y 
+proyectos. 
+• Localizar los perfiles profesionales que más se 
+adecúan a un puesto laboral. 
+• Contactar con otros miembros de la comunidad. 
+• Ampliar la red de contactos profesionales. 
+ 
+En la actualidad la comunidad FPConecta cuenta con cerca de 7.000 registros de diversos 
+perfiles: estudiante, persona titulada, docente y personal formador, persona trabajadora, 
+administración pública, centros o empresas. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+72 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3.9. 
+PROCEDIMIENTO DE ACREDITACIÓN DE 
+COMPETENCIAS ADQUIRIDAS A TRAVÉS DE 
+LA EXPERIENCIA LABORAL U OTRAS VÍAS NO 
+FORMALES E INFORMALES 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+73 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+La acreditación de competencias representa una de las acciones 
+básicas del Sistema de Formación Profesional. Este mecanismo es fundamental para 
+reconocer oficialmente las habilidades y conocimientos adquiridos por la ciudadanía a través 
+de la experiencia laboral u otras vías no formales o informales de formación; permite, 
+asimismo, mejorar la accesibilidad del Sistema de Formación Profesional y potenciar su 
+dinamismo. 
+El valor de estos procesos radica en brindar a la ciudadanía la posibilidad de que cuente con 
+experiencia laboral sin acreditación, obtener certificado o título profesionalizante de todas o 
+parte de sus competencias profesionales, validarlas y, de este modo, poder continuar con 
+itinerarios formativos conducentes a una mayor cualificación, además de potenciar 
+oportunidades de promoción y desarrollo profesional. 
+Entre las reformas ligadas a este proceso se cuentan la apertura permanente del sistema de 
+acreditación de las competencias profesionales eliminando el formato de convocatorias, la 
+reducción de plazos en el proceso de acreditación,  la incorporación de los centros de FP a 
+la red de participantes en el proceso, la propuesta de itinerario formativo complementario una 
+vez realizado el proceso, y la creación de un espacio específico de orientación sobre el 
+proceso en la plataforma Todo FP de fácil acceso para la ciudadanía. 
+Para el desarrollo de los procesos de acreditación, el Ministerio de Educación, Formación 
+Profesional y Deportes cuenta con una red de colaboración con Comunidades Autónomas, 
+empresas, agentes sociales y entidades por la que se suscriben acuerdos para que las 
+personas trabajadoras puedan participar en procesos de acreditación. Entre otras, destacan: 
+• Cámara de Comercio de España. 
+• Interlocutores sociales. 
+• Confederación Empresarial Española de la Economía Social (CEPES). 
+• Instituto de la Juventud (INJUVE). 
+• Federación de Asociaciones de Mujeres Rurales (FADEMUR). 
+• Fundación Empresa Familiar de Castilla y León. 
+ 
+El Ministerio de Educación, Formación Profesional y Deportes desarrolla procesos estatales 
+para el reconocimiento de competencias profesionales, priorizando aquellas vinculadas a la 
+digitalización. Desde 2022, a través de una convocatoria permanentemente abierta, han 
+participado 55.970 personas, con una acreditación total de 111.940 unidades de 
+competencia. Actualmente se trabaja en la ampliación de este procedimiento para incluir otros 
+sectores profesionales. 
+3. Ámbitos estratégicos de la Formación Profesional 
+74 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+A nivel autonómico, las comunidades también gestionan procesos de acreditación que 
+permiten a personas con experiencia laboral o formación no formal e informal obtener una 
+certificación oficial. Desde 2020 hasta 2024 se han acreditado 717.846 unidades de 
+competencia, para lo cual se han distribuido fondos con el objetivo de facilitar el acceso a 
+estos procedimientos y ampliar su alcance. 
+En este contexto se encuentra en fase de tramitación una nueva distribución de fondos, con 
+la previsión de que 152.576 personas puedan beneficiarse de estos procesos, reforzando 
+el reconocimiento de competencias y mejorando la empleabilidad en distintos sectores 
+profesionales. 
+ 
+Gráfico 19 Unidades de competencia acreditadas 2024 
+ 
+ 
+En el marco del reconocimiento de competencias profesionales se han desarrollado diversas 
+iniciativas en colaboración con agentes sociales, instituciones penitenciarias y el Ministerio de 
+Defensa, con el objetivo de facilitar la certificación de competencias y mejorar la empleabilidad 
+de distintos colectivos. Tras los diferentes convenios iniciados en el 2021 al cierre del año 
+2024, se han registrado un total de 2.129 certificaciones y 959 acreditaciones parciales. 
+Desde 2021, el Ministerio de Educación, Formación Profesional y Deportes mantiene un 
+convenio con la Entidad Estatal de Derecho Público Trabajo Penitenciario y Formación para 
+el Empleo, con el fin de facilitar la acreditación de competencias a personas privadas de 
+libertad. Hasta la fecha, han participado 2.023 personas en estos procedimientos. 
+219.742
+109.068
+71.597
+70.589
+38.494
+30.641
+28.147
+26.823
+26.255
+22.543
+21.199
+13.962
+11.469
+9.811
+7.331
+5.889
+4.267
+19
+0
+50000
+100000
+150000
+200000
+250000
+ANDALUCÍA
+CATALUÑA
+COMUNITAT VALENCIANA
+MADRID (Comunidad de)
+ARAGÓN
+GALICIA
+BALEARS (Illes)
+CANARIAS
+PAÍS VASCO
+EXTREMADURA
+CASTILLA Y LEÓN
+CANTABRIA
+NAVARRA (Comunidad Foral de)
+CASTILLA-LA MANCHA
+RIOJA (La)
+MURCIA (Región de)
+ASTURIAS (Principado de)
+CEUTA
+MELILLA
+3. Ámbitos estratégicos de la Formación Profesional 
+75 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+A través de estos convenios anuales, se han realizado 1.379 certificaciones y 644 
+acreditaciones parciales entre los cursos 2021-2022. Existe un convenio del año 2023 que 
+actualmente está en ejecución. 
+El convenio interdepartamental entre el Ministerio de Educación, Formación Profesional y 
+Deportes y el Ministerio de Defensa permite la formación y acreditación de competencias del 
+personal militar profesional de tropa y marinería, así como de reservistas de especial 
+disponibilidad. 
+Desde 2021 hasta 2023 se han obtenido 4.279 certificaciones y 258 acreditaciones 
+parciales. En 2024, la ejecución del programa acaba de comenzar, con 1.235 estándares 
+de competencia ya demostrados. 
+Con estos avances, se sigue consolidando la certificación de competencias en diversos 
+sectores, promoviendo el reconocimiento profesional y facilitando la inserción laboral de 
+trabajadores en diferentes ámbitos. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+76 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3.10. 
+ORIENTACIÓN PROFESIONAL EN EL SISTEMA 
+DE FORMACIÓN PROFESIONAL 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+77 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+Crear una estrategia general de orientación profesional de las 
+personas resulta fundamental para que el sistema de Formación Profesional pueda dar 
+respuesta al desarrollo personal y profesional a lo largo de la vida, la mejora de la formación 
+y su relación con el mercado laboral.  
+La orientación profesional se considera un proceso continuo de acompañamiento e 
+información que permite a las personas, a lo largo de su vida, determinar sus capacidades, 
+sus competencias y sus intereses, tomar decisiones en materia de educación, formación y 
+empleo, y gestionar el recorrido de su vida personal en lo que respecta a la educación y la 
+formación, en el trabajo y en otros marcos en los que es posible adquirir o utilizar estas 
+capacidades y competencias. 
+El nuevo Sistema de Formación Profesional enfatiza en la orientación profesional como 
+elemento de acompañamiento para la acreditación de las competencias adquiridas por 
+experiencia laboral u otras vías no formales o informales, y asesoramiento sobre itinerarios 
+formativos conducentes a una mayor cualificación. 
+La orientación profesional brinda a la ciudadanía el asesoramiento adecuado y preciso, un 
+apoyo en la toma de decisiones acertadas en materia de educación y formación en cualquier 
+momento a lo largo de la vida. 
+Se ha incorporado al currículo de todos los ciclos formativos de Formación Profesional (oferta 
+D) de grado medio y superior, el ya mencionado módulo profesional Itinerario Personal para 
+la Empleabilidad, con el que se desarrollan habilidades y capacidades transversales de 
+orientación profesional para el emprendimiento. Supone una novedad también la 
+incorporación de estas enseñanzas a los ciclos de Grado Básico y, por lo tanto, la formación 
+sobre formación laboral, orientación profesional y empleabilidad. 
+La Plataforma Todo FP, mencionada anteriormente, de fácil acceso a la ciudadanía, contempla 
+un apartado sobre la orientación profesional que recoge diversas informaciones de interés 
+dirigidas tanto al alumnado como al profesorado desde los siguientes enfoques:  
+• El asesoramiento sobre itinerarios formativos. 
+• Consulta sobre la vinculación de ocupaciones y formación del sistema de referencia. 
+• Orientación para la inserción laboral. 
+• Recursos para estudiar o trabajar en el extranjero. 
+• Recursos de orientación académica y profesional. 
+• Herramienta de equivalencias del sistema educativo. 
+• Orientación sobre la acreditación de la experiencia laboral. 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+78 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+La plataforma ha contado con un promedio de 1.943.290 visitas en el año 2024. 
+ 
+ 
+TodoFP dispone, además, de un buzón de atención directa sobre temas relacionados con la 
+Formación Profesional. Destacan temas relacionados con la acreditación de competencias, 
+las convalidaciones, la función docente o temas de internacionalización. En dicho buzón se 
+atienden unas 10.000 consultas al año. 
+El Sistema de Formación Profesional ha creado, en una primera convocatoria, 100 unidades 
+de orientación profesional, con personal preparado que realiza asesoramiento sobre 
+itinerarios formativos, profesionales y acreditación de competencias profesionales adquiridas 
+por experiencia laboral y otras vías no formales de formación. Es un recurso que el Ministerio 
+pone en manos de las entidades locales y organizaciones sin ánimo de lucro para facilitar el 
+acceso al servicio de orientación profesional. Este servicio beneficia especialmente a personas 
+que viven en poblaciones de menos de 10.000 habitantes. 
+Después de la partida presupuestaria destinada, los resultados han sido: 
+• 19.290 personas atendidas. 
+• 850 actividades colectivas de orientación e información. 
+• 11.710 personas derivadas al procedimiento de acreditación de competencias 
+profesionales. 
+ 
+Para elaborar la Estrategia general de orientación profesional del sistema de Formación 
+Profesional, el Ministerio, en colaboración con las comunidades autónomas, ha creado el 
+Comité técnico de Orientación Profesional, poniendo el foco en definir los principios rectores 
+del modelo de orientación a desarrollar, y los instrumentos y recursos a generar en apoyo a 
+la acción orientadora, así como los indicadores de calidad para la evaluación de la orientación 
+profesional. 
+ 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+79 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3.11. 
+EVALUACIÓN Y CALIDAD DEL SISTEMA DE 
+FORMACIÓN PROFESIONAL 
+ 
+ 
+3. Ámbitos estratégicos de la Formación Profesional 
+80 
+Informe Estado del Sistema de Formación Profesional. 2025 
+ 
+ 
+ 
+En el título X de la Ley 3/2022 de Ordenación e Integración de 
+la Formación Profesional se establece la obligatoriedad de contar con un mecanismo de 
+evaluación y calidad del sistema, materializando los principios acordados en el ámbito 
+europeo. Se articulan, por vez primera, estos objetivos, incorporando la obligatoriedad de un 
+informe anual del estado de la Formación Profesional. 
+Las profundas transformaciones en el sistema de Formación Profesional que se han realizado 
+en los últimos años, hacen imprescindible la creación de un modelo integral de evaluación y 
+calidad que permita identificar, describir y analizar los elementos relevantes para la calidad de 
+la oferta y la ejecución de programas y acciones de formación profesional, así como la 
+acreditación de competencias y la orientación profesional. 
+Asimismo, el RD 659/2023 por el que se desarrolla la Ordenación del Sistema de Formación 
+Profesional, recoge la creación de un Comité Técnico como organismo de cooperación 
+territorial para la evaluación y calidad del sistema de Formación Profesional. 
+Dicho comité es el encargado de: 
+• Elaborar el marco común de garantía de evaluación de calidad; elaborar el sistema estatal 
+de indicadores de evaluación, que permita detectar fortalezas y debilidades; realizar una 
+toma de decisiones fundadas para mejorar el funcionamiento del sistema y los resultados 
+que de éste se obtienen. 
+• Determinar los instrumentos comunes de verificación de calidad.  
+• Realizar la recogida de evidencias y propuesta de realización de investigaciones y estudios 
+del sistema. 
+El desarrollo de un proyecto en el marco europeo sobre los sistemas de calidad en centros 
+de Formación Profesional va a permitir avanzar en la cultura de la evaluación. El proyecto 
+utiliza como referencia el programa de evaluación EQAVET, Marco de Referencia Europeo de 
+Garantía de la Calidad en la Formación Profesional. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Secretaría General de Formación Profesional 
+Subdirección General de Evaluación y Calidad del Sistema 
+ 

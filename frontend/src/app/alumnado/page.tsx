@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map, MessageSquare, FileText, Route , Info } from "lucide-react";
+import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map, MessageSquare, FileText, Route , Info, FolderOpen } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -19,6 +19,7 @@ import { OrientacionTab } from "@/components/features/profesional/OrientacionTab
 import { ResumenTab } from "@/components/features/profesional/ResumenTab";
 import { TendenciasTab } from "@/components/features/profesional/TendenciasTab";
 import { ItinerarioTab } from "@/components/features/alumnado/ItinerarioTab";
+import Link from "next/link";
 
 
 export default function AlumnadoPage() {
@@ -87,10 +88,15 @@ export default function AlumnadoPage() {
           <Header breadcrumbSuffix={activeTabCleanLabel} />
           <main className="flex-1 p-8 content-area">
             <MotionWrapper>
-              <Card className="p-12 text-center flex flex-col items-center justify-center gap-4">
+              <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <Users className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-2xl font-bold mb-4">No hay Curso seleccionado</h2>
-                <p className="text-muted">Por favor, ve a la sección de Datos y selecciona un Curso Activo.</p>
+                <h2 className="text-2xl font-bold">No hay curso cargado</h2>
+                <p className="text-muted mb-4">Debes abrir o crear un archivo de curso en tu Entorno de trabajo.</p>
+                <Link href="/entorno">
+                  <Button variant="default" className="gap-2">
+                    <FolderOpen className="w-4 h-4" /> Ir a mi Entorno
+                  </Button>
+                </Link>
               </Card>
             </MotionWrapper>
           </main>

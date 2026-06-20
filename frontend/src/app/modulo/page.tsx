@@ -1,5 +1,5 @@
 "use client";
-import { Building2, FileEdit, FileText, Settings, Map, Target, CheckCircle2, Layers, Award } from "lucide-react";
+import { Building2, FileEdit, FileText, Settings, Map, Target, CheckCircle2, Layers, Award, FolderOpen } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -14,6 +14,8 @@ import { OtrosElementosTab } from "@/components/features/modulo/OtrosElementosTa
 import { GradosTab } from "@/components/features/modulo/GradosTab";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
+import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 
 export default function ModuloConfigPage() {
   const { activeModuleId, moduleData, setModuleData } = useAppStore();
@@ -57,14 +59,44 @@ export default function ModuloConfigPage() {
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
+  if (!activeModuleId) {
+    return (
+      <div className="flex min-h-screen bg-background">
+        <Sidebar />
+        <div className="flex-1 flex flex-col relative z-10 min-w-0">
+          <Header breadcrumbSuffix={activeTabCleanLabel} />
+          <main className="flex-1 p-8 content-area">
+            <MotionWrapper>
+              <div className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
+                <Settings className="w-16 h-16 text-muted-foreground opacity-50" />
+                <h2 className="text-2xl font-bold">No hay programación cargada</h2>
+                <p className="text-muted mb-4">Debes abrir o crear un archivo de programación en tu Entorno de trabajo.</p>
+                <Link href="/entorno">
+                  <Button variant="default" className="gap-2">
+                    <FolderOpen className="w-4 h-4" /> Ir a mi Entorno
+                  </Button>
+                </Link>
+              </div>
+            </MotionWrapper>
+          </main>
+        </div>
+      </div>
+    );
+  }
+
   if (loading || !moduleData) {
     return (
       <div className="flex min-h-screen bg-background">
         <Sidebar />
-        <main className="flex-1 flex flex-col h-screen items-center justify-center text-foreground">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mb-4"></div>
-          <p>Conectando con el servidor local...</p>
-        </main>
+        <div className="flex-1 flex flex-col relative z-10 min-w-0">
+          <Header breadcrumbSuffix={activeTabCleanLabel} />
+          <main className="flex-1 p-8 content-area">
+            <div className="flex flex-col items-center justify-center h-full">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mb-4"></div>
+              <p>Cargando datos del módulo...</p>
+            </div>
+          </main>
+        </div>
       </div>
     );
   }

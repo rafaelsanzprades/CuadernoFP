@@ -14,7 +14,9 @@ import {
   type CurriculumModulo,
   type CurriculumRA,
   type CurriculumCE,
-} from "@/data/curriculos";
+} from "@/types/curriculum";
+import { fileManager } from "@/services/fileManager";
+import toast from "react-hot-toast";
 
 type Tab = "familias" | "titulo" | "cursos" | "modulos";
 
@@ -79,8 +81,8 @@ function CiclosContent() {
   const TAB_LABELS: Record<Tab, string> = {
     familias: 'Familias profesionales',
     titulo: 'Título',
-    cursos: 'Cursos',
-    modulos: 'Módulos RA→CE',
+    cursos: 'Módulos',
+    modulos: 'RA→CE',
   };
 
   const activeTabCleanLabel = TAB_LABELS[activeTab];
@@ -107,8 +109,8 @@ function CiclosContent() {
                   [
                     { id: "familias" as Tab, label: <span className="flex items-center gap-2"><FolderTree className="w-4 h-4" /> Familias profesionales</span> },
                     { id: "titulo" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Título</span> },
-                    { id: "cursos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> Cursos</span> },
-                    { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> Módulos RA→CE</span> },
+                    { id: "cursos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> Módulos</span> },
+                    { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> RA→CE</span> },
                   ]
                 ).map((t) => (
                   <TabsTrigger key={t.id} value={t.id}>
@@ -227,17 +229,39 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
                   {family.degrees.map((degree) => {
                     const badgeMap: Record<string, string> = { BASICA: "GB", MEDIO: "GM", SUPERIOR: "GS", ESPECIALIZACION: "CE" };
                     const badge = badgeMap[degree.level] || degree.level;
+
+                    let styleClass = "border-[var(--glass-border)] hover:bg-foreground/10";
+                    let badgeClass = "bg-foreground/20 border-[var(--glass-border)] text-foreground";
+                    
+                    const lvl = (degree.level || "").toUpperCase();
+                    
+                    if (lvl.includes("BÁSIC") || lvl.includes("BASIC")) {
+                      styleClass = "border-[var(--glass-border)] bg-[#f43f5e]/5 hover:bg-[#f43f5e]/10";
+                      badgeClass = "bg-[#f43f5e]/20 border-[#f43f5e]/30 text-[#f43f5e]";
+                    } else if (lvl.includes("MEDIO")) {
+                      styleClass = "border-[var(--glass-border)] bg-[#10b981]/5 hover:bg-[#10b981]/10";
+                      badgeClass = "bg-[#10b981]/20 border-[#10b981]/30 text-[#10b981]";
+                    } else if (lvl.includes("SUPERIOR")) {
+                      styleClass = "border-[var(--glass-border)] bg-[#3b82f6]/5 hover:bg-[#3b82f6]/10";
+                      badgeClass = "bg-[#3b82f6]/20 border-[#3b82f6]/30 text-[#3b82f6]";
+                    } else if (lvl.includes("ESPECIALIZACI")) {
+                      styleClass = "border-[var(--glass-border)] bg-[#f59e0b]/5 hover:bg-[#f59e0b]/10";
+                      badgeClass = "bg-[#f59e0b]/20 border-[#f59e0b]/30 text-[#f59e0b]";
+                    }
+
                     return (
                       <button
                         key={degree.id}
                         onClick={() => onSelectTitulo(family.name, degree.code ?? degree.name)}
-                        className="w-full text-left text-sm bg-foreground/5 rounded-lg p-2.5 border border-[var(--glass-border)] hover:bg-foreground/10 transition-all flex items-center justify-between gap-3 group cursor-pointer"
+                        className={`w-full text-left text-sm bg-foreground/5 rounded-lg p-2.5 border transition-all flex items-center justify-between gap-3 group cursor-pointer ${styleClass}`}
                       >
-                        <div className="text-foreground/80 font-medium leading-tight flex-1 group-hover:text-foreground transition-colors">
-                          {formatDegreeName(degree.code, degree.name)}
+                        <div className="flex items-center gap-2.5 flex-1 min-w-0">
+                          <div className="text-foreground/80 font-medium leading-tight flex-1 group-hover:text-foreground transition-colors">
+                            {formatDegreeName(degree.code, degree.name)}
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-[10px] font-bold text-foreground bg-foreground/20 border border-[var(--glass-border)] px-2 py-1 rounded shadow-inner tracking-wider">
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span className={`text-[10px] font-bold border px-2 py-1 rounded shadow-inner tracking-wider ${badgeClass}`}>
                             {badge}
                           </span>
                           <ChevronDown className="w-3 h-3 -rotate-90 text-muted group-hover:text-foreground transition-colors" />
@@ -451,6 +475,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
 // ─── TAB 3: Cursos ────────────────────────────────────────────────────────────
 
 function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: { globalSelection: { familia: string; tituloCodigo: string; moduloCodigo: string }; updateGlobalSelection: (updates: Partial<{ familia: string; tituloCodigo: string; moduloCodigo: string }>) => void; onSelectModulo: (familia: string, tituloCodigo: string, moduloCodigo: string) => void }) {
+  const router = useRouter();
   const [families, setFamilies] = useState<Family[]>([]);
   const [famLoading, setFamLoading] = useState(true);
 
@@ -507,6 +532,20 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
     });
   };
 
+  const handleCreateNewProgramacion = async (code: string, name: string, extras: Record<string, any>) => {
+    try {
+      const ok = await fileManager.createNewProgramacion(code, name, extras);
+      if (ok) {
+        toast.success(`Programación de ${name} creada correctamente.`);
+        router.push("/entorno");
+      } else {
+        toast.error("Error al crear la programación.");
+      }
+    } catch (err) {
+      toast.error("Error al crear la programación.");
+    }
+  };
+
   const renderCursoBlock = (mods: CurriculumModulo[], cursoLabel: string) => {
     if (mods.length === 0) return null;
     const abierto = cursosAbiertos.has(cursoLabel);
@@ -550,7 +589,34 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
                       </span>
                     </div>
                   </div>
-                  <ChevronDown className="w-4 h-4 -rotate-90 text-muted shrink-0" />
+                  <div className="flex items-center gap-3">
+                    <Button 
+                      variant="primary" 
+                      size="sm" 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const is2nd = mod.curso === "2º";
+                        const h_feoe = is2nd ? 360 : 140;
+                        const h_sem = mod.horas ? Math.round(mod.horas / 30) : 0;
+                        const tituloNombre = selectedFamilyObj?.degrees.find(d => (d.code ?? d.name) === curriculoCodigo)?.name || curriculoCodigo;
+                        
+                        const extras = {
+                          familia: selectedFamilia,
+                          ciclo: tituloNombre,
+                          curso: mod.curso,
+                          h_boa: mod.horas,
+                          h_sem: h_sem,
+                          p_ev: 15,
+                          h_feoe: h_feoe
+                        };
+                        handleCreateNewProgramacion(mod.codigo, mod.nombre, extras);
+                      }}
+                      className="shrink-0"
+                    >
+                      <BookOpen className="w-4 h-4 mr-2" /> Nueva Programación
+                    </Button>
+                    <ChevronDown className="w-4 h-4 -rotate-90 text-muted shrink-0" />
+                  </div>
                 </div>
 
                 {mod.unidades_formativas && mod.unidades_formativas.length > 0 && (

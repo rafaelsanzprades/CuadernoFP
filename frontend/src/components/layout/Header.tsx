@@ -12,10 +12,11 @@ import { showRichToast } from "@/utils/toast";
 import { motion } from "framer-motion";
 import { fileManager } from "@/services/fileManager";
 import { searchGlobal, type SearchResult } from "@/services/searchService";
+import { ThemeSelector } from "@/components/features/settings/ThemeSelector";
 
 
 export default function Header({ title, breadcrumbSuffix }: { title?: React.ReactNode; breadcrumbSuffix?: React.ReactNode }) {
-  const { activeModuleId, activeCursoId, moduleData, cursoData, saveModuleData, saveCursoData, isSidebarOpen, toggleSidebar, dataSource } = useAppStore();
+  const { activeModuleId, activeCursoId, moduleData, cursoData, pdFileSource, cursoFileSource, saveModuleData, saveCursoData, isSidebarOpen, toggleSidebar, dataSource } = useAppStore();
   const [isSaving, setIsSaving] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -166,7 +167,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [undo, redo, pastStates.length, futureStates.length, handleSave]);
 
-  let friendlyModuleName = "xxxx - Nombre módulo";
+  let friendlyModuleName = "Crea o abre una programación";
   if (activeModuleId) {
     const code = activeModuleId.split('-')[0];
     let foundName = "";
@@ -177,7 +178,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
     friendlyModuleName = foundName ? `${code} - ${foundName}` : activeModuleId;
   }
 
-  let friendlyCursoName = "xº Título";
+  let friendlyCursoName = "Crea o abre un curso";
   if (activeCursoId) {
     const parts = activeCursoId.split('-');
     const code = parts[0];
@@ -206,101 +207,88 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
             </svg>
           </button>
           
-          {/* Botón Datos Reales/Ficticios (Entorno de trabajo) */}
-          <div className="shrink-0 flex items-center gap-3">
-            <Link 
-              href="/entorno" 
-              className={`inline-flex items-center gap-2.5 px-3 py-1.5 rounded-lg transition-all duration-150 group shadow-sm border ${
-                dataSource === 'demo' 
-                  ? 'bg-warning/10 border-warning/40 text-foreground hover:bg-warning/20' 
-                  : cloudSynced 
-                    ? 'bg-success/10 border-success/40 text-foreground hover:bg-success/20'
-                    : 'bg-info/10 border-info/40 text-foreground hover:bg-info/20'
-              }`}
-              title="Haz clic para configurar tu Entorno de Trabajo"
-            >
-              <span className={`flex items-center justify-center transition-transform duration-150 ${
-                pathname === '/entorno' 
-                  ? (dataSource === 'demo' ? 'scale-110 text-warning' : cloudSynced ? 'scale-110 text-success' : 'scale-110 text-info') 
-                  : (dataSource === 'demo' ? 'text-warning group-hover:scale-110' : cloudSynced ? 'text-success group-hover:scale-110' : 'text-info group-hover:scale-110')
-              }`}>
-                <FolderOpen className="w-5 h-5" strokeWidth={2} />
-              </span>
-              <div className="flex flex-col gap-1 items-start">
-                <span className={`text-base leading-tight whitespace-nowrap font-extrabold ${
-                  pathname === '/entorno' 
-                    ? (dataSource === 'demo' ? 'text-warning' : cloudSynced ? 'text-success' : 'text-info') 
-                    : ''
-                }`}>
-                  Entorno
+          {/* Segmented Control: Modo de Datos / Guardado */}
+          {mounted && (
+            <div className="flex bg-foreground/5 p-1 rounded-xl border border-[var(--glass-border)] shadow-sm shrink-0">
+              {/* Botón DEMO */}
+              <button
+                onClick={async () => {
+                  if (dataSource === 'demo') return;
+                  if (moduleData || cursoData) {
+                    const wantToSave = window.confirm("Vas a cambiar a modo DEMO. ¿Quieres GUARDAR tus datos reales antes de cambiar?\n(Aceptar = Guardar, Cancelar = Descartar)");
+                    if (wantToSave) {
+                      await handleSave();
+                    }
+                  }
+                  useAppStore.getState().setDataSource('demo');
+                  fileManager.loadDemoData();
+                  toast.success("Modo DEMO activado");
+                }}
+                className={`flex flex-col items-center justify-center px-4 py-1.5 rounded-lg transition-all ${
+                  dataSource === 'demo'
+                    ? 'bg-warning/20 text-warning shadow-md'
+                    : 'text-muted hover:text-foreground hover:bg-foreground/5'
+                }`}
+                title="Cargar datos de demostración (Solo lectura)"
+              >
+                <span className="text-sm font-bold flex items-center gap-1">
+                  <Cloud className="w-4 h-4" /> Datos DEMO
                 </span>
-                <span className={`px-2.5 py-1 rounded text-sm border font-bold tracking-wide leading-none ${
-                  dataSource === 'demo' 
-                    ? 'text-warning bg-warning/10 border-warning/30' 
-                    : cloudSynced
-                      ? 'text-success bg-success/10 border-success/30'
-                      : 'text-info bg-info/10 border-info/30'
-                }`}>
-                  {dataSource === 'demo' ? 'Datos DEMO' : cloudSynced ? 'Datos en nube' : 'Datos Reales'}
+                <span className="text-[0.65rem] uppercase tracking-wider opacity-80 font-semibold">
+                  Solo lectura
                 </span>
-              </div>
-            </Link>
-          </div>
+              </button>
 
-          {/* Botón Guardar - Deshabilitado en modo Demo */}
-          {/* Botón Guardar / Solo Lectura */}
-          {!mounted ? (
-            <div className="w-[145px] h-[60px] bg-muted/10 rounded-lg animate-pulse shrink-0" />
-          ) : dataSource === 'demo' ? (
-            <div className="flex items-center justify-start text-left gap-2.5 px-3 py-1.5 bg-muted/10 text-muted rounded-lg border border-muted/20 shrink-0 cursor-not-allowed opacity-80 w-[145px] h-[60px]" title="Modo Solo Lectura">
-              <span className="flex items-center justify-center">
-                <Cloud className="w-5 h-5" strokeWidth={2} />
-              </span>
-              <div className="flex flex-col gap-1 items-start justify-center h-full">
-                <span className="text-base leading-none whitespace-nowrap font-extrabold">
-                  Solo
+              {/* Botón REALES / GUARDAR */}
+              <button
+                onClick={async () => {
+                  if (dataSource === 'demo') {
+                    // Switch to local mode
+                    useAppStore.getState().setModuleData(null);
+                    useAppStore.getState().setCursoData(null);
+                    useAppStore.getState().setActiveModuleId("");
+                    useAppStore.getState().setActiveCursoId("");
+                    useAppStore.getState().setPdFileSource({ type: 'none' });
+                    useAppStore.getState().setCursoFileSource({ type: 'none' });
+                    useAppStore.getState().setDataSource('local');
+                    toast.success("Modo Datos Reales activado");
+                  } else {
+                    // We are already in real mode, so this acts as the SAVE button
+                    await handleSave();
+                  }
+                }}
+                disabled={dataSource === 'local' && isSaving}
+                className={`flex flex-col items-center justify-center px-4 py-1.5 rounded-lg transition-all ${
+                  dataSource === 'local'
+                    ? cloudSynced 
+                        ? 'bg-success/20 text-success shadow-md'
+                        : 'bg-accent/20 text-accent shadow-md'
+                    : 'text-muted hover:text-foreground hover:bg-foreground/5'
+                }`}
+                title={dataSource === 'demo' ? "Cambiar a tus datos reales" : "Guardar cambios local/nube"}
+              >
+                <span className="text-sm font-bold flex items-center gap-1">
+                  {dataSource === 'local' && isSaving ? <Hourglass className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} 
+                  Datos Reales
                 </span>
-                <span className="text-[0.75rem] font-bold tracking-wide leading-none uppercase">
-                  Lectura
+                <span className={`text-[0.65rem] uppercase tracking-wider font-semibold ${dataSource === 'local' && isSaving ? 'animate-pulse' : 'opacity-80'}`}>
+                  {dataSource === 'demo' 
+                    ? 'Cambiar' 
+                    : isSaving 
+                      ? 'Guardando...' 
+                      : autosaveStatus === 'saving'
+                        ? 'Autoguardando...'
+                        : cloudSynced 
+                          ? 'Sincronizado' 
+                          : 'Guardar (Ctrl+S)'}
                 </span>
-              </div>
+              </button>
             </div>
-          ) : (
-            <motion.button
-              whileHover={!isSaving ? { scale: 1.05 } : {}}
-              whileTap={!isSaving ? { scale: 0.95 } : {}}
-              onClick={handleSave}
-              disabled={isSaving}
-              className="glass-button flex items-center justify-start text-left gap-2.5 px-3 py-1.5 bg-[var(--accent-color)]/10 text-[var(--accent-color)] border border-[var(--accent-color)]/30 rounded-lg shrink-0 transition-all hover:bg-[var(--accent-color)]/20 w-[145px] h-[60px]"
-              title="Guardar cambios en local"
-            >
-              <span className="flex items-center justify-center">
-                {isSaving ? <Hourglass className="w-5 h-5" strokeWidth={2} /> : <Save className="w-5 h-5" strokeWidth={2} />}
-              </span>
-              <div className="flex flex-col gap-1 items-start justify-center h-full">
-                <span className="text-base leading-none whitespace-nowrap font-extrabold">
-                  Guardar
-                </span>
-                <span className={`text-[0.70rem] font-bold tracking-wide leading-none uppercase ${isSaving ? 'opacity-100 animate-pulse text-[var(--accent-color)]' : 'opacity-0'}`}>
-                  Sincronizando
-                </span>
-              </div>
-            </motion.button>
           )}
 
-          {/* Nombres del módulo y curso (Oculto en pantallas muy pequeñas, con ellipsis si es muy largo) */}
-          <div className="hidden sm:flex flex-col border-l border-foreground/10 pl-4 py-1 min-w-0">
-            <span className="text-[0.95rem] font-bold text-foreground leading-tight tracking-wide truncate max-w-[200px] md:max-w-[300px] lg:max-w-[450px]" title={friendlyModuleName}>
-              {friendlyModuleName}
-            </span>
-            <span className="text-[0.85rem] text-muted font-medium leading-tight truncate max-w-[200px] md:max-w-[300px] lg:max-w-[450px]" title={friendlyCursoName}>
-              {friendlyCursoName}
-            </span>
-          </div>
         </div>
 
-
-          {/* Right Side: Undo/Redo + Tema */}
+        {/* Right Side: Undo/Redo + Tema */}
         <div className="flex justify-end items-center gap-3 shrink-0">
           {mounted && moduleData && dataSource !== 'demo' && (
             <div className="hidden md:flex items-center">
@@ -332,19 +320,24 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
 
 
           {mounted && (
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="glass-button text-gray-300 hover:text-warning p-2 rounded-lg flex items-center justify-center transition-colors"
-              title="Cambiar tema"
-            >
-              {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </motion.button>
+            <div className="flex items-center">
+              <ThemeSelector />
+            </div>
           )}
         </div>
       </nav>
 
+      {/* Fila 2: Información del Módulo y Curso */}
+      <div className="w-full px-6 py-2 bg-foreground/[0.015] border-t border-[var(--glass-border)] flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-3">
+        <span className={`text-[0.95rem] leading-tight tracking-wide truncate flex-1 transition-colors ${!activeModuleId ? `font-medium ${dataSource === 'demo' ? 'text-warning/70' : 'text-success/70'}` : `font-extrabold ${dataSource === 'demo' ? 'text-warning' : 'text-success'}`}`} title={friendlyModuleName}>
+          {activeModuleId ? `Programación: ${friendlyModuleName}` : friendlyModuleName}
+        </span>
+        <span className={`text-[0.95rem] leading-tight tracking-wide truncate flex-1 text-right transition-colors ${!activeCursoId ? `font-medium ${dataSource === 'demo' ? 'text-warning/70' : 'text-success/70'}` : `font-extrabold ${dataSource === 'demo' ? 'text-warning' : 'text-success'}`}`} title={friendlyCursoName}>
+          {activeCursoId ? `Curso: ${friendlyCursoName}` : friendlyCursoName}
+        </span>
+      </div>
+
+      {/* Fila 3: Breadcrumb y Buscar */}
       {currentItem && (
         <div className="w-full px-6 py-1.5 bg-white/[0.02] border-t border-[var(--glass-border)] flex items-center justify-between gap-1.5 text-sm text-muted tracking-wide">
           {/* Breadcrumb a la izquierda */}

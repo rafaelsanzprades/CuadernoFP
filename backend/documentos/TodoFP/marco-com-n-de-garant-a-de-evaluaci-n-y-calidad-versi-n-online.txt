@@ -1,0 +1,817 @@
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Marco Común de Garantía 
+de Evaluación y Calidad  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Comité Técnico de Calidad y Evaluación 
+de Formación Profesional 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Secretaría General de Formación Profesional 
+Subdirección General de Evaluación y Calidad del Sistema 
+ 
+ 
+ 
+ 
+Marco Común de Garantía 
+de Evaluación y Calidad  
+ Junio 2025 
+MINISTERIO DE EDUCACIÓN, FORMACIÓN PROFESIONAL Y DEPORTES 
+Secretaría General de Formación Profesional 
+Subdirección General de Evaluación y Calidad del Sistema 
+Madrid 2025 
+ 
+ 
+Catálogo de publicaciones del MEFD: https://librería.educacion.gob.es 
+Catálogo de Publicaciones de la Administración General del Estado (CPAGE): https://cpage.mpr.gob.es/  
+ 
+ 
+Marco Común de Garantía de Evaluación y Calidad 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+MINISTERIO DE EDUCACIÓN, FORMACIÓN PROFESIONAL Y 
+DEPORTES 
+Secretaría General de Formación Profesional 
+Subdirección General de Evaluación y Calidad del 
+Sistema 
+Edita: 
+©  SECRETARÍA GENERAL TÉCNICA 
+Subdirección General de Atención al Ciudadano, 
+Documentación y Publicaciones 
+Edición: 2025 
+NIPO (IBD): 164-25-118-X 
+ 
+ 
+ 
+ 
+Índice de contenido 
+ 
+ 
+1. 
+INTRODUCCIÓN ..................................................................................................... 1 
+ 
+2. 
+JUSTIFICACIÓN NORMATIVA Y REFERENCIAS EUROPEAS  .................................... 1 
+ 
+3.          EL MARCO DE GARANTÍA Y SUS ELEMENTOS ....................................................... 1 
+3.1.       Principios, finalidades, objetivos y ámbito de actuación ......................... 3 
+3.2.       Características ........................................................................................... 3 
+3.3.       Instrumentos comunes ............................................................................. 5 
+3.4.       Informe de estado del Sistema ................................................................. 7 
+ 
+4. 
+EL COMITÉ TÉCNICO DE CALIDAD Y EVALUACIÓN ................................................ 8 
+4.1. Justificación normativa .................................................................................. 8 
+4.2. Constitución y funcionamiento del Comité ................................................... 8 
+ 
+5. 
+ANEXO ................................................................................................................. 11 
+ 
+ 
+ 
+ 
+1 
+ 
+1. INTRODUCCIÓN 
+ 
+Los planes sistemáticos de evaluación se han incorporado como un elemento 
+imprescindible para asegurar la calidad en el diseño de las políticas públicas. La Ley Orgánica 
+3/2022 de Ordenación e Integración de la Formación Profesional supone un salto adelante en 
+la cultura de la evaluación al proponer un Marco Común de garantía de evaluación y calidad 
+específico para el Sistema de Formación Profesional.  
+El presente documento aporta una propuesta de criterios, estructura y elementos para la 
+elaboración del Marco y un calendario para las tareas encomendadas al Comité Técnico en 
+relación con la elaboración e implementación del Marco y del Sistema Estatal de Indicadores 
+de Evaluación. 
+ 
+ 
+     
+ 
+ 
+ 
+2 
+ 
+2. JUSTIFICACIÓN NORMATIVA Y REFERENCIAS EUROPEAS 
+ 
+2.1. Justificación normativa 
+La Ley 3/2022 establece un marco integral para la Formación Profesional en España, 
+dedicando su Título X a la promoción de un sistema de evaluación que vele por la mejora 
+continua de la calidad de la formación y su adecuación a las necesidades y demandas del 
+mercado laboral. Esta ley fija, entre sus objetivos, la creación de estructuras que permitan la 
+evaluación y control de la calidad de los programas formativos. 
+El Marco Común tiene como objetivo definir la estructura, funciones y procedimientos 
+internos que guiarán el funcionamiento del Comité, garantizando así, a partir de la 
+cooperación territorial, una evaluación continua y eficaz de la calidad del sistema de 
+formación profesional en el ámbito nacional, que sirva como punto de partida para la toma 
+de decisiones informadas por parte de las administraciones competentes. 
+ 
+ 
+ 
+2.2. Referencias europeas 
+La recomendación del Parlamento Europeo y del Consejo de 18 de junio de 2009 
+(2009/C 155/01) sobre el establecimiento de un Marco de Referencia Europeo de Garantía de 
+Calidad en la Educación y Formación Profesionales (EQAVET) constituye un hito en el proceso 
+de mejora de los sistemas de formación profesional en Europa y establece un ciclo de garantía 
+y mejora de la calidad basado en la planificación, la implementación, la evaluación y la revisión 
+de los sistemas. 
+En lo que a la formación dual se refiere, los trabajos de la Comisión Europea culminaron con 
+la recomendación del Consejo de 15 de marzo de 2018 (2018/C 153/01), relativa al Marco 
+Europeo para una Formación de Aprendices de Calidad y Eficaz. En ella se establecen 14 
+criterios de calidad, organizados entorno a dos aspectos: los relacionados con las condiciones 
+de aprendizaje y de trabajo y los relacionados con las condiciones marco, que pueden 
+utilizarse como referentes para el Marco Nacional Español. 
+La recomendación del Consejo Europeo de 24 de noviembre de 2020 (2020/C 417/01) sobre 
+la educación y formación profesionales para la competitividad sostenible, la equidad social y 
+la resiliencia, dedicó un apartado a la calidad de los sistemas de formación y estableció 
+EQAVET como el principal instrumento para su aplicación. 
+En noviembre de 2020 se aprobó la declaración de Osnabrück sobre la educación y formación 
+profesionales como facilitadoras de la recuperación y de transiciones justas hacia economías 
+ 
+3 
+ 
+digitales y ecológicas que marca un conjunto de objetivos y criterios para el desarrollo de la 
+formación profesional. 
+En marzo de 2022, España acogió la primera evaluación piloto por pares del Marco de 
+Referencia Europeo de Garantía de la Calidad en la Educación y Formación Profesionales 
+(EQAVET) en formato virtual. España presentó a otros seis miembros de la red EQAVET sus 
+planes para un modelo nacional de calidad de la FP basado en EQAVET para aplicar las 
+reformas de la FP en el país. Los evaluadores tuvieron la oportunidad de analizar el modelo 
+de calidad EQAVET para España (QEMS) y reflexionar sobre posibles mejoras y formas de 
+garantizar su eficacia. Los debates se centraron en el modelo de calidad, el sistema de 
+evaluación de la calidad y los indicadores para el seguimiento y la autoevaluación. 
+En mayo de 2022, España presentó a la Comisión Europea el Plan Nacional de Implementación 
+de la Recomendación del Consejo y de la declaración de Osnabrück en el que se señalan los 
+principales desafíos, objetivos y medidas que habrá que tener en cuenta en los procesos de 
+evaluación y de calidad del Sistema. 
+Así pues, el Marco Español de Calidad y Evaluación del Sistema de Formación Profesional 
+toma como referencia básica las recomendaciones europeas y las aportaciones realizadas en 
+el proceso de su aplicación en el marco de la red EQAVET, así como los compromisos 
+adquiridos por el gobierno español en su implementación en el marco de la legislación 
+vigente. 
+ 
+ 
+ 
+ 
+4 
+ 
+3. EL MARCO DE GARANTÍA Y SUS ELEMENTOS 
+ 
+3.1. Principios, finalidades, objetivos y ámbito de actuación 
+El Marco tendrá en cuenta, según el artículo 111.2 de la Ley Orgánica 3/2022, los principios 
+propios de toda evaluación pública: 
+• Pertinencia, 
+• Eficacia, 
+• Eficiencia, 
+• Impacto social, 
+• Sostenibilidad. 
+El Marco persigue la finalidad de realizar una Evaluación del Sistema de Formación 
+Profesional, adoptando como objetivos los establecidos en el artículo 111.1 de la Ley 
+Orgánica 3/2022: 
+a) La identificación, descripción y análisis de los elementos relevantes para la calidad de 
+la oferta y ejecución de los programas y acciones de formación profesional, la 
+acreditación de competencias y la orientación profesional. 
+b) La facilitación de evidencias que permitan la toma de decisiones fundadas para 
+mejorar el funcionamiento del sistema y los resultados que obtiene. 
+El ámbito de actuación del Marco es el referido al Sistema de Formación Profesional tal como 
+se define en la Ley Orgánica 3/2022 incluyendo los elementos que lo integran, así como sus 
+instrumentos de gestión y abarcando los modelos de formación profesional, acreditación de 
+competencias y de orientación profesional en las fases de planificación, implementación, 
+resultados y actualización. 
+Considerando, tal como expone el artículo 110, que la Administración General del Estado 
+establecerá y coordinará un sistema de evaluación del Sistema de Formación Profesional para 
+asegurar su mejora e innovación continuas, en colaboración con las administraciones con 
+competencias en la materia, y las organizaciones empresariales y sindicales más 
+representativas. Todas las administraciones públicas con competencia en la materia velarán 
+por la calidad de todas las acciones y los servicios del Sistema de Formación Profesional, en 
+especial la orientación profesional, la formación impartida en los dos regímenes, en todos sus 
+entornos de aprendizaje y en todas sus modalidades, y la acreditación de competencias 
+profesionales.  
+ 
+ 
+ 
+5 
+ 
+3.2. Características  
+Según lo establecido en la Ley Orgánica 3/2022, de 31 de marzo, de ordenación e integración 
+de la Formación Profesional en su artículo 111, las características del sistema de evaluación 
+del Sistema de Formación Profesional son: 
+a) El desarrollo de la evaluación con carácter interno y externo y de modo continuo 
+como parte de un ciclo de mejora permanente. 
+b) La recogida de información conforme a un sistema estatal de indicadores de calidad. 
+c) La utilización de diversas fuentes de verificación que garanticen la triangulación de 
+datos. 
+d) Los principios propios de toda evaluación pública: la pertinencia, eficacia, eficiencia, 
+impacto social y sostenibilidad. 
+ 
+Atendiendo a lo establecido en el Real Decreto 659/2023, de 18 de julio, por el que se 
+desarrolla la ordenación del Sistema de Formación Profesional, el Marco Común de Garantía 
+de Evaluación y Calidad del sistema de Formación Profesional abarcará, al menos, las fases 
+de: Planificación, Implementación, Resultados y Actualización, teniendo en cuenta los 
+indicadores establecidos en el Marco Europeo de Garantía de Calidad de la Formación 
+Profesional (EQAVET), así como los aspectos sobre: 
+a) Planificación y oferta 
+b) Actividad del profesorado 
+c) Personal formador y experto 
+d) Perfil de los centros del Sistema de Formación Profesional 
+e) Coordinación entre centros dentro y fuera del sistema 
+f) Servicio de orientación profesional 
+g) Acreditación de competencias profesionales 
+h) Participación en innovación e investigación aplicadas y emprendimiento 
+i) Interacción y ajuste a las necesidades del entorno 
+Además, se utilizarán diversas fuentes de verificación, entre las cuales será prescriptiva la 
+valoración de las personas en formación. 
+La recogida de datos permitirá monitorizar las acciones básicas constitutivas del Sistema de 
+Formación Profesional: 
+1. Formación 
+2. Orientación 
+3. Acreditación de competencias 
+ 
+ 
+6 
+ 
+Siendo necesarios la recopilación de, al menos, los siguientes valores: 
+a) Personas participantes. 
+b) Acreditaciones, certificados o títulos expedidos. 
+c) Presupuestos consumidos. 
+d) Grado de cobertura de las plazas ofertadas. 
+e) Grado de cobertura de ofertas de puestos de trabajo en los distintos sectores. 
+f) Grado de implantación de metodologías activas. 
+g) Niveles de inserción laboral. 
+h) Valoración, con carácter muestral estatal, tanto de los participantes en formación 
+como de empresas sobre el grado de aprovechamiento de las actuaciones formativas 
+en las que participan. 
+i) Resultados en términos continuidad educativa/formativa. 
+j) Participación del profesorado y personal formador en formación y actualización 
+permanente. Incorporación de los nuevos perfiles contemplados en este real decreto. 
+ 
+3.3. Instrumentos comunes  
+Para materializar estas características en procedimientos efectivos, el Marco se articulará a 
+través de los siguientes instrumentos comunes: 
+A. Criterios de calidad 
+B. Indicadores de evaluación interna 
+C. Evaluaciones externas  
+D. Estudios específicos  
+___________________________________________________________________________ 
+ 
+A. Criterios de calidad 
+Siguiendo la Recomendación del Consejo de 24 de noviembre de 2020 sobre la educación y 
+formación profesionales (EFP) para la competitividad sostenible, la equidad social y la 
+resiliencia (2020/C 417/01) en el marco de EQAVET, se propone evaluar los criterios 
+cualitativos, estructurados en función de las fases de Planificación-Implantación-Resultados-
+Actualización que se detallan en la citada Recomendación y que se pueden ver en el anexo de 
+este documento. 
+ 
+B. Indicadores de evaluación interna 
+El sistema de evaluación interna del Sistema estatal de Formación Profesional se organiza en 
+Ejes de evaluación, dentro de los cuales se definen indicadores específicos para medir las 
+distintas variables relevantes del sistema. 
+ 
+7 
+ 
+Estos indicadores constituyen el principal instrumento para la recopilación sistemática de 
+datos e información sobre la situación, funcionamiento y resultados del Sistema de Formación 
+Profesional. 
+Forman parte del mecanismo de información del Sistema y tienen como principal objetivo 
+recabar información verificable y comparable para fundamentar los procesos de evaluación y 
+toma de decisiones para la mejora del sistema. 
+La evaluación interna evaluará en su conjunto las acciones básicas constitutivas del Sistema 
+de Formación Profesional: Formación, Orientación y Acreditación, en sus fases de: 
+Planificación, Implementación, Resultados y Actualización. 
+Dentro del conjunto de indicadores usados para la evaluación interna estarán incluidos los 
+propuestos por la Recomendación del Consejo de 24 de noviembre de 2020 sobre la 
+educación y formación profesionales (EFP) para la competitividad sostenible, la equidad social 
+y la resiliencia (2020/C 417/01) en el marco de EQAVET. 
+ 
+ 
+C. Evaluaciones externas 
+Con el objetivo de diversificar las fuentes e información y obtener unos resultados de 
+evaluación contrastados, se propone complementar la evaluación interna con 
+procedimientos de evaluación externa realizados por parte de equipos profesionales y 
+entidades especializadas, siempre con la mirada puesta en el Sistema de Formación 
+Profesional en su totalidad y sin que esto suponga una evaluación individualizada por 
+administraciones.  
+ 
+ i tema
+e tatal de
+indicadore 
+       
+          
+Evaluación interna del
+ i tema de  ormación
+ ro e ional
+             
+     
+        
+           
+                 
+                
+                   
+ lan de evaluación
+                 
+                   
+               
+        
+          
+            
+        
+          
+          
+       
+          
+          
+                  
+              
+              
+E EME      E 
+    EM 
+                 
+               
+       
+      
+ 
+8 
+ 
+D. Estudios específicos 
+En función de los resultados presentados en el informe bienal del Estado del Sistema de 
+Formación Profesional y después de su valoración en el Comité Técnico de Calidad y 
+Evaluación de Formación Profesional, se acordará la realización de los estudios específicos 
+que se consideren oportunos para profundizar en la situación de aquellos elementos del 
+Sistema que se consideren críticos, tanto por los resultados obtenidos como por su potencial 
+de innovación y de desarrollo del Sistema.  
+Los resultados de dichos estudios se incorporarán al siguiente Informe del Estado del Sistema 
+de Formación Profesional. 
+ 
+3.4.  Informe de estado del Sistema 
+El Informe del Estado del Sistema de Formación Profesional es una herramienta clave para 
+monitorizar el funcionamiento de la Formación Profesional en España. Este informe ayudará 
+a conocer los puntos fuertes y las áreas que necesitan atención, permitiendo, de forma 
+coordinada, tomar decisiones informadas sobre reformas y mejoras en el sistema educativo 
+y de formación. 
+Los dos tipos de informe que se deben realizar y que indica la Ley Orgánica 3/2022, de 31 de 
+marzo, de ordenación e integración de la Formación Profesional, son: 
+ 
+➢ Un informe bienal, que elaborará la Administración General del Estado sobre el estado 
+del Sistema de Formación Profesional con: 
+a) La información, proporcionada por las comunidades autónomas, sobre 
+los resultados en sus respectivos territorios. 
+b) Los resultados obtenidos por comprobaciones y evaluaciones 
+aleatorias encomendadas a organismos independientes. 
+Este informe se presentará al Consejo General de la Formación Profesional y al Consejo 
+Escolar del Estado, en su ámbito competencial. 
+ 
+➢ Un informe cada cuatro años, sobre el estado del Sistema de Formación Profesional 
+que también tendrá que incluir: 
+✓ un estudio sobre la oferta de ciclos formativos, 
+✓ su adecuación a la demanda por parte de los estudiantes,  
+✓ el porcentaje de empleabilidad de los estudiantes de Formación Profesional,  
+✓ y las necesidades presentes y futuras de capital humano del sector público y el 
+sector privado. 
+ 
+ 
+9 
+ 
+4. COMITÉ TÉCNICO DE CALIDAD Y EVALUACIÓN DE 
+FORMACIÓN PROFESIONAL  
+ 
+4.1 Justificación normativa 
+El Comité Técnico de Calidad y Evaluación de Formación Profesional se constituye en 
+virtud de lo establecido en la Ley 3/2022, de 22 de marzo, de Formación Profesional, y el Real 
+Decreto 659/2023, de 29 de junio, por el que se regula el Sistema de Formación Profesional.  
+ 
+El Real Decreto 659/2023 regula aspectos concretos del Sistema de Formación 
+Profesional, especificando en su Título IX las funciones que debe llevar a cabo este Comité 
+Técnico. Se destaca la importancia de contar con un órgano que evalúe periódicamente los 
+programas y proponga mejoras basadas en las evidencias recabadas, alineándose con los 
+objetivos de la ley. 
+La constitución de este Comité se fundamenta, asimismo, en el programa Europeo de 
+Calidad en la Formación Profesional (EQAVET), que promueve un enfoque sistemático para la 
+mejora de la calidad en los sistemas de formación profesional en el ámbito europeo. La 
+inclusión de los principios del EQAVET en el funcionamiento interno del Comité garantiza un 
+sistema de buenas prácticas, promoviendo una cultura de calidad. 
+En resumen, la constitución de un Comité Técnico de Calidad y Evaluación de 
+Formación Profesional es esencial para asegurar la calidad, pertinencia y efectividad del 
+sistema educativo en este ámbito. La implementación de este Comité no solo responde a una 
+necesidad normativa y operativa, sino que también genera un impacto positivo en la 
+empleabilidad de los estudiantes, la competitividad económica del país y el desarrollo de una 
+educación alineada con las demandas globales y del mercado. 
+ 
+4.2 Constitución y funcionamiento del Comité 
+El Comité Técnico de Calidad y Evaluación de Formación Profesional es un órgano de 
+cooperación territorial, que estará coordinado por el Ministerio de Educación y Formación 
+Profesional y constituido por un representante de la Formación Profesional del sistema 
+educativo y un representante de la Formación Profesional para personas trabajadoras por 
+cada una de las comunidades autónomas, y ciudades autónomas de acuerdo con sus 
+competencias.  
+Además, se contempla la asistencia y participación de representantes de la 
+Subdirección General de Estadística y Estudios, del Ministerio de Educación, Formación 
+Profesional y Deportes. 
+Para la coordinación del trabajo, el Comité se reunirá, al menos, dos veces al año. 
+ 
+10 
+ 
+ La misión de este Comité consistirá en: 
+- 
+Elaboración de un Marco Común de garantía de evaluación y calidad 
+- 
+Elaboración del Sistema estatal de indicadores de evaluación de la Formación 
+Profesional 
+- 
+Determinación de los instrumentos comunes de verificación de calidad y la 
+recogida de evidencias para la evaluación a nivel estatal 
+- 
+Acuerdo para la propuesta de realización de investigaciones y estudios de 
+evaluación del Sistema de Formación Profesional. 
+ 
+Se adjunta el calendario de tareas propias del Comité Técnico de Calidad y Evaluación 
+de Formación Profesional. 
+ 
+Fase de constitución 
+Tarea \ Meses 
+2024 
+2025 
+Octubre 
+Noviembre 
+Diciembre 
+1 
+2 
+3 
+Constitución del Comité 
+ 
+Técnico  
+ 
+ 
+ 
+ 
+ 
+ 
+Envío del borrador del 
+Marco y documento de 
+trabajo para la elaboración 
+del Sistema Estatal de 
+Indicadores a las CC.AA  
+ 
+  
+ 
+ 
+ 
+Recepción de propuestas 
+al borrador del Marco y del 
+Sistema Estatal de 
+Indicadores de Evaluación 
+ 
+  
+ 
+ 
+ 
+Envío de los documentos 
+con las propuestas 
+aportadas por las CCAA y 
+recepción de 
+observaciones en el plazo 
+de 15 días 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+11 
+ 
+Fase de presentación del Marco y Sistema de Indicadores 
+Tarea \ Cuatrimestres 
+2025 
+2026 
+2027 
+2028 
+2029 
+1 
+2 
+3 
+1 
+2 
+3 
+1 
+2 
+3 
+1 
+2 
+3 
+1 
+2 
+3 
+Presentación en el 
+Comité del Marco y del 
+Sistema Estatal de 
+Indicadores de Evaluación 
+Fase de implementación 
+Tarea \ Cuatrimestres 
+2025 
+2026 
+2027 
+2028 
+2029 
+ 
+1 
+2 
+3 
+1 
+2 
+3 
+1 
+2 
+3 
+1 
+2 
+3 
+1 
+2 
+3 
+Recepción 
+de 
+datos 
+recabados por las CCAA 
+que den respuesta al 
+Sistema 
+estatal 
+de 
+indicadores aprobado 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Informes externos con 
+información que 
+complemente el Sistema 
+estatal de indicadores 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Elaboración del Informe 
+sobre el Estado del 
+Sistema 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Elaboración de estudios 
+específicos 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Presentación del 
+Informe al CGFP y al CEE 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Elaboración y 
+presentación del 
+informe cuatrienal del 
+Sistema de FP 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+12 
+ 
+5. ANEXO 
+ 
+Criterio de Calidad 
+ e criptor 
+L  
+             
+  fl               
+       g    
+      ti           
+                   
+   ti       
+  
+        
+    ti   , 
+         
+  
+            
+     í     
+-   h             ti                                             g  
+     ,   g           ti               
+-L                         ti          ti                           
+    ti                                          ti               
+-              q                                         
+     í       
+-   h                                                           
+                                                                   
+ -   h      ñ           íti                       g    ti        
+     g                                /  g                         , 
+               q                  /  g                                 
+-   h              á                                           ,    
+                      ti                                      
+-   h                               g    ti                       ñ , 
+             ,       ti                                          
+-L                                              ti            
+            fl                    á                            
+                                
+ 
+L                
+             
+   
+         
+   
+                 
+                   
+  
+         
+               í      
+-L                                                                  
+                       ,                                            
+                            ti                 ti               
+-L                                                                
+           q       ,                                                   
+                                  
+-   h                              á                             
+   ti               
+-L                                                    í         
+                                           
+L                                                             
+                                                           í          
+         g                              
+-   h                                 g    tí             q           
+                 á                                                  
+                                                                 
+       g         
+ 
+ 
+ 
+ 
+13 
+ 
+   
+    ú   
+    
+   á               
+    
+           
+  
+         
+    
+   
+      
+   
+           
+-                       gí                q                        
+                    
+-L     ti                                                    
+                                                                 
+-L      á                            /  g                            
+   g                               ti                              
+                         
+-L                                       ,                        
+                ,   gú            
+-                                         
+-                                        
+-                     g                               áti        
+                                á              q                      
+                             gí                         g       
+     ;            ,     ti                     /                       
+         
+-                        ,                                
+                   , q       ti                                    
+                                 
+-       ú                                                       
+                                L                          
+               
+-                       ú                                              
+              
+ 
+ 
+ 
+ 
+14 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Secretaría General de Formación Profesional 
+Subdirección General de Evaluación y Calidad del Sistema 

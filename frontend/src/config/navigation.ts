@@ -35,6 +35,7 @@ export const navGroups = [
     title: "Nuevo",
     sectionDescription: "Funcionalidades nuevas alineadas con la Ley 3/2022 y el Sistema Estatal de Indicadores de Evaluación y Calidad de la FP.",
     items: [
+      { href: "/mejora", label: "Mejora Docente", icon: TrendingUp, description: "Panel de autoevaluación y rúbricas de mejora del desempeño docente." },
       { href: "/indicadores", label: "Indicadores de calidad", icon: BarChart3, description: "Dashboard de los 34 indicadores del Sistema Estatal de Evaluación y Calidad de la FP." },
       { href: "/insercion", label: "Inserción laboral", icon: TrendingUp, description: "Indicadores de inserción profesional de titulados de FP (SEPE/INE)." },
       { href: "/calidad", label: "Calidad del centro", icon: Shield, description: "Autoevaluación y mejora continua según el Marco Común EQAVET." },

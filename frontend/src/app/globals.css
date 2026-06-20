@@ -3,7 +3,7 @@
 :root {
   --background: #f0f4f8;
   --foreground: #0f172a;
-  --primary-gradient: linear-gradient(135deg, #0d7377 0%, #14a085 100%);
+  --primary-gradient: linear-gradient(135deg, var(--accent-color) 0%, #14a085 100%);
   --secondary-gradient: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
   --glass-bg: rgba(255, 255, 255, 0.75);
   --glass-border: rgba(0, 0, 0, 0.12);
@@ -24,12 +24,12 @@
 .dark {
   --background: #0b1120;
   --foreground: #f1f5f9;
-  --primary-gradient: linear-gradient(135deg, #0d7377 0%, #14a085 100%);
+  --primary-gradient: linear-gradient(135deg, var(--accent-color) 0%, #14a085 100%);
   --secondary-gradient: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
   --glass-bg: rgba(255, 255, 255, 0.035);
   --glass-border: rgba(255, 255, 255, 0.1);
   --text-muted: #94a3b8;
-  --accent-color: #14a085;
+  --accent-color: #14a085; /* Default, can be overridden inline */
   --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
   --card-hover-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   --input-bg: rgba(255, 255, 255, 0.06);
@@ -40,6 +40,27 @@
   --warning: #fbbf24; /* amber-400 */
   --danger:  #f87171; /* red-400 */
   --info:    #60a5fa; /* blue-400 */
+}
+
+.oled {
+  --background: #000000;
+  --foreground: #e2e8f0;
+  --primary-gradient: linear-gradient(135deg, var(--accent-color) 0%, #14a085 100%);
+  --secondary-gradient: linear-gradient(135deg, #0f172a 0%, #000000 100%);
+  --glass-bg: rgba(20, 20, 20, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --text-muted: #64748b;
+  --accent-color: #14a085; /* Default, can be overridden inline */
+  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  --card-hover-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --input-bg: rgba(255, 255, 255, 0.03);
+  --table-stripe: rgba(255, 255, 255, 0.01);
+  --table-hover: rgba(255, 255, 255, 0.02);
+
+  --success: #10b981; 
+  --warning: #f59e0b; 
+  --danger:  #ef4444; 
+  --info:    #3b82f6; 
 }
 
 @theme inline {

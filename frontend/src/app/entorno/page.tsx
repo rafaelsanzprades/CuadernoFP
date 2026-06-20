@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
+import { useRouter } from "next/navigation";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
@@ -14,12 +15,14 @@ import { GoogleDriveSyncPanel } from "@/components/features/cloud/GoogleDriveSyn
 import { NewFileWizard } from "@/components/features/cloud/NewFileWizard";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { initialGroups } from "@/store/initialData";
+import { OneDriveSyncPanel } from "@/components/features/cloud/OneDriveSyncPanel";
 
 export default function EntornoTrabajoPage() {
   const {
     activeModuleId, activeCursoId, moduleData, cursoData, dataSource, setDataSource,
     pdFileSource, cursoFileSource,
   } = useAppStore();
+  const router = useRouter();
 
   const [activeTab, setActiveTab] = useState("datos");
   const [wizardOpen, setWizardOpen] = useState(false);
@@ -63,8 +66,7 @@ export default function EntornoTrabajoPage() {
   // ── NEW ─────────────────────────────────────────────────
 
   const handleNewPd = () => {
-    setWizardType('programacion');
-    setWizardOpen(true);
+    router.push("/catalogo?tab=cursos");
   };
 
   const handleNewCurso = () => {
@@ -270,12 +272,12 @@ export default function EntornoTrabajoPage() {
 
   const TABS = [
     { id: "datos", label: <span className="flex items-center gap-2"><Database className="w-4 h-4 shrink-0" /> Gestor de archivos</span> },
-    { id: "nube", label: <span className="flex items-center gap-2"><Cloud className="w-4 h-4 shrink-0" /> Sincronización con Google Drive</span> }
+    { id: "nube", label: <span className="flex items-center gap-2"><Cloud className="w-4 h-4 shrink-0" /> Sincronización en la Nube</span> }
   ];
 
   const breadcrumbSuffixMap: Record<string, string> = {
     "datos": "Gestor de archivos",
-    "nube": "Sincronización con Google Drive"
+    "nube": "Sincronización en la Nube"
   };
 
   // ── Render ──────────────────────────────────────────────
@@ -297,30 +299,6 @@ export default function EntornoTrabajoPage() {
                 </h1>
                 <p className="text-muted mt-2 text-lg">Gestión de archivos de Programación y Curso.</p>
               </div>
-
-              {/* Mode Switcher */}
-              {activeTab === "datos" && (
-                <div className="bg-foreground/5 p-1 rounded-xl flex border border-white/10 shadow-inner">
-                  <button
-                    onClick={switchToDemo}
-                    className={`px-5 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${isDemoLoaded
-                      ? 'bg-warning/20 text-warning shadow-md'
-                      : 'text-muted hover:text-foreground hover:bg-foreground/5'
-                      }`}
-                  >
-                    <Sparkles className="w-4 h-4" /> Datos DEMO
-                  </button>
-                  <button
-                    onClick={switchToLocal}
-                    className={`px-5 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${!isDemoLoaded
-                      ? 'bg-info/20 text-info shadow-md'
-                      : 'text-muted hover:text-foreground hover:bg-foreground/5'
-                      }`}
-                  >
-                    <HardDrive className="w-4 h-4" /> Datos Reales
-                  </button>
-                </div>
-              )}
             </div>
 
             {/* Navigation Tabs */}
@@ -505,9 +483,22 @@ export default function EntornoTrabajoPage() {
                 </div>
               )}
 
-              {/* TAB: GOOGLE DRIVE */}
+              {/* TAB: NUBE (GOOGLE DRIVE & ONEDRIVE) */}
               {activeTab === "nube" && (
-                <GoogleDriveSyncPanel />
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Columna Google Drive */}
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-bold text-foreground flex items-center gap-2">
+                      <Cloud className="w-5 h-5 text-[#4285F4]" /> Google Drive
+                    </h3>
+                    <GoogleDriveSyncPanel />
+                  </div>
+
+                  {/* Columna OneDrive */}
+                  <div className="space-y-4">
+                    <OneDriveSyncPanel />
+                  </div>
+                </div>
               )}
 
             </div>

@@ -1,5 +1,5 @@
 "use client";
-import { Calendar, Circle, ClipboardList, Search, Settings, Flag , Info } from "lucide-react";
+import { Calendar, Circle, ClipboardList, Search, Settings, Flag , Info, FolderOpen } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/Button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { generatePlanning } from "@/utils/planningGenerator";
+import Link from "next/link";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -403,10 +404,15 @@ export default function CalendarioPage() {
           <main className="flex-1 p-8 content-area">
             <MotionWrapper>
 
-              <Card className="p-12 text-center flex flex-col items-center justify-center gap-4">
-                <Calendar className="w-12 h-12 text-muted" />
-                <h2 className="text-2xl font-bold">No hay Curso Activo seleccionado</h2>
-                <p className="text-muted">Ve a Entorno y selecciona un Curso.</p>
+              <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
+                <Calendar className="w-16 h-16 text-muted-foreground opacity-50" />
+                <h2 className="text-2xl font-bold">No hay curso cargado</h2>
+                <p className="text-muted mb-4">Debes abrir o crear un archivo de curso en tu Entorno de trabajo.</p>
+                <Link href="/entorno">
+                  <Button variant="default" className="gap-2">
+                    <FolderOpen className="w-4 h-4" /> Ir a mi Entorno
+                  </Button>
+                </Link>
               </Card>
             </MotionWrapper>
           </main>

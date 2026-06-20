@@ -3,7 +3,7 @@ import { AppState, FileSource } from '@/types';
 
 const defaultFileSource: FileSource = { type: 'none' };
 
-type UiSlice = Pick<AppState, 'isSidebarOpen' | 'toggleSidebar' | 'isWizardOpen' | 'setWizardOpen' | 'dataSource' | 'setDataSource' | 'isDriveConnected' | 'setDriveConnected' | 'driveUserEmail' | 'setDriveUserEmail' | 'autoSyncDrive' | 'setAutoSyncDrive' | 'googleClientId' | 'setGoogleClientId' | 'isLoadingData' | 'setLoadingData' | 'pdFileSource' | 'setPdFileSource' | 'cursoFileSource' | 'setCursoFileSource'>;
+type UiSlice = Pick<AppState, 'isSidebarOpen' | 'toggleSidebar' | 'isWizardOpen' | 'setWizardOpen' | 'dataSource' | 'setDataSource' | 'isDriveConnected' | 'setDriveConnected' | 'driveUserEmail' | 'setDriveUserEmail' | 'autoSyncDrive' | 'setAutoSyncDrive' | 'googleClientId' | 'setGoogleClientId' | 'isOneDriveConnected' | 'setOneDriveConnected' | 'oneDriveUserEmail' | 'setOneDriveUserEmail' | 'oneDriveClientId' | 'setOneDriveClientId' | 'isLoadingData' | 'setLoadingData' | 'pdFileSource' | 'setPdFileSource' | 'cursoFileSource' | 'setCursoFileSource'>;
 
 export const createUiSlice: StateCreator<AppState, [], [], UiSlice> = (set) => ({
   isSidebarOpen: true,
@@ -20,6 +20,13 @@ export const createUiSlice: StateCreator<AppState, [], [], UiSlice> = (set) => (
   setAutoSyncDrive: (sync: boolean) => set({ autoSyncDrive: sync }),
   googleClientId: "",
   setGoogleClientId: (id: string) => set({ googleClientId: id }),
+  
+  isOneDriveConnected: false,
+  setOneDriveConnected: (connected: boolean) => set({ isOneDriveConnected: connected }),
+  oneDriveUserEmail: null,
+  setOneDriveUserEmail: (email: string | null) => set({ oneDriveUserEmail: email }),
+  oneDriveClientId: "",
+  setOneDriveClientId: (id: string) => set({ oneDriveClientId: id }),
   isLoadingData: false,
   setLoadingData: (loading: boolean) => set({ isLoadingData: loading }),
   pdFileSource: defaultFileSource,
