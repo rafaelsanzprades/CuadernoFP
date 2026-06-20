@@ -310,7 +310,7 @@ export default function InstrumentosPage() {
           </Tabs>
 
           {activeTab === "resumen" && (
-            <Card className="p-6 animate-in fade-in duration-500">
+            <>
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
                   <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
                   <div>
@@ -318,6 +318,7 @@ export default function InstrumentosPage() {
                     <p className="text-sm text-muted mt-1">Visión global de los instrumentos de evaluación utilizados.</p>
                   </div>
                 </div>
+            <Card className="p-6 animate-in fade-in duration-500">
               <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-5">
                 <span><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Resumen de instrumentos de evaluación por trimestres
               </h2>
@@ -384,6 +385,7 @@ export default function InstrumentosPage() {
                 </table>
               </div>
             </Card>
+            </>
           )}
 
           {activeTab === "tri1" && renderTrimestreTab("1T", "1er trimestre")}

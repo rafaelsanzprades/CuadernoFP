@@ -183,7 +183,7 @@ export default function ProgramacionPage() {
           </Tabs>
 
           {activeTab === "secuenciacion" && (
-            <Card className="p-6 border-t-4 border-t-accent">
+            <>
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
                   <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
                   <div>
@@ -191,6 +191,7 @@ export default function ProgramacionPage() {
                     <p className="text-sm text-muted mt-1">Distribución temporal de las unidades didácticas.</p>
                   </div>
                 </div>
+            <Card className="p-6 border-t-4 border-t-accent">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground">
 <span><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Secuenciación por Unidades didácticas
@@ -224,10 +225,11 @@ export default function ProgramacionPage() {
                 />
               )}
             </Card>
+            </>
           )}
 
           {activeTab === "tareas" && (
-            <Card className="p-6 border-t-4 border-t-blue-500">
+            <>
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
                   <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
                   <div>
@@ -235,6 +237,7 @@ export default function ProgramacionPage() {
                     <p className="text-sm text-muted mt-1">Actividades prácticas alineadas con los criterios de evaluación.</p>
                   </div>
                 </div>
+            <Card className="p-6 border-t-4 border-t-blue-500">
               <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-6">
 <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Diseño de tareas competenciales (TC)
 </h2>
@@ -245,6 +248,7 @@ export default function ProgramacionPage() {
                 handleDeleteTarea={handleDeleteTarea}
               />
             </Card>
+            </>
           )}
 
           </MotionWrapper>
