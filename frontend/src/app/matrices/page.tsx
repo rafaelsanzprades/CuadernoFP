@@ -103,7 +103,7 @@ export default function MatricesPage() {
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <span className="inline-flex"><Calculator className="w-[1.2em] h-[1.2em] mr-1" /></span> Matrices OG- RA- CE- UD
               </h1>
-              <p className="text-muted mt-2 text-lg">Relación y ponderación entre los RA, CE y las diferentes UD del módulo.</p>
+              <p className="text-muted mt-2 text-lg">Relación y ponderación: OG, RA, CE y UD.</p>
             </div>
 
             <Tabs value={activeTab} onValueChange={setActiveTab}>

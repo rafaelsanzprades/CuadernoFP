@@ -296,7 +296,7 @@ export default function InstrumentosPage() {
             <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
               <FileEdit className="w-6 h-6 text-accent" /> Instrumentos de evaluación
             </h1>
-            <p className="text-muted mt-2 text-lg">Definición y ponderación de las herramientas y métodos de evaluación.</p>
+            <p className="text-muted mt-2 text-lg">Definición y ponderación de CE, RA e instrumentos.</p>
           </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab}>

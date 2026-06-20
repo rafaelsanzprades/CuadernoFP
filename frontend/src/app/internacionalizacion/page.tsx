@@ -36,9 +36,7 @@ export default function InternacionalizacionPage() {
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <Globe className="w-6 h-6 text-accent" /> Internacionalización
               </h1>
-              <p className="text-muted mt-2 text-lg">
-                Programas de movilidad y cooperación internacional — Eje 12 del Sistema Estatal.
-              </p>
+              <p className="text-muted mt-2 text-lg">Programas de movilidad y cooperación (Eje 12).</p>
             </div>
 
             <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20">

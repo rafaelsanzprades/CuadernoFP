@@ -42,9 +42,7 @@ export default function CalidadPage() {
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <Shield className="w-6 h-6 text-accent" /> Calidad del Centro
               </h1>
-              <p className="text-muted mt-2 text-lg">
-                Autoevaluación y mejora continua según el Marco Común de Garantía de Calidad (EQAVET).
-              </p>
+              <p className="text-muted mt-2 text-lg">Autoevaluación y mejora continua (EQAVET).</p>
             </div>
 
             <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20">

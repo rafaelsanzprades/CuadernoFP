@@ -24,9 +24,7 @@ export default function LegalPage() {
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <Scale className="w-[1.2em] h-[1.2em] mr-1 text-accent" /> Legal
               </h1>
-              <p className="text-muted mt-2 text-lg">
-                Aviso legal, privacidad, licencia y términos de uso.
-              </p>
+              <p className="text-muted mt-2 text-lg">Aviso legal, privacidad y licencias.</p>
             </div>
 
             <Tabs value={activeTab} onValueChange={setActiveTab}>

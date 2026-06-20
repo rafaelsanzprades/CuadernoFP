@@ -158,7 +158,7 @@ export default function AlumnadoPage() {
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Alumnado y tutoría
               </h1>
-              <p className="text-muted mt-2 text-lg">Gestión oficial de estudiantes, tutoría, asignación FEOE y orientación profesional.</p>
+              <p className="text-muted mt-2 text-lg">Gestión de alumnado, tutoría, FEOE y orientación.</p>
             </div>
             
             {/* Save Button */}

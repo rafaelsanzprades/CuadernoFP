@@ -169,7 +169,7 @@ export default function ProgramacionPage() {
             <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
               <span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación de aula
             </h1>
-            <p className="text-muted mt-2 text-lg">Secuenciación temporal de las unidades didácticas y diseño de tareas competenciales.</p>
+            <p className="text-muted mt-2 text-lg">Secuenciación temporal de UD y tareas competenciales.</p>
           </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab}>

@@ -37,9 +37,7 @@ export default function IndicadoresPage() {
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <BarChart3 className="w-6 h-6 text-accent" /> Indicadores de Calidad
               </h1>
-              <p className="text-muted mt-2 text-lg">
-                Dashboard de los 34 indicadores del Sistema Estatal de Evaluación y Calidad de la FP.
-              </p>
+              <p className="text-muted mt-2 text-lg">Indicadores del Sist. Estatal de Evaluación y Calidad.</p>
             </div>
 
             <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20">

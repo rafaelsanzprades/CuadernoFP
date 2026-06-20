@@ -547,9 +547,7 @@ export default function AyudaPage() {
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <Activity className="w-6 h-6 text-accent" /> Ayuda
               </h1>
-              <p className="text-muted mt-2 text-base">
-                Verifica la coherencia de tus datos, consulta la guía de inicio o encuentra respuestas a dudas comunes.
-              </p>
+              <p className="text-muted mt-2 text-base">Guía de inicio, FAQ y validación de datos.</p>
             </div>
 
             {/* Pestañas de Navegación */}

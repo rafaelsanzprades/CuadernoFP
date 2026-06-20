@@ -36,9 +36,7 @@ export default function InnovacionPage() {
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <Sparkles className="w-6 h-6 text-accent" /> Innovación y Emprendimiento
               </h1>
-              <p className="text-muted mt-2 text-lg">
-                Proyectos de innovación y emprendimiento — Indicador 7.3 del Sistema Estatal.
-              </p>
+              <p className="text-muted mt-2 text-lg">Proyectos de innovación y emprendimiento (Ind. 7.3).</p>
             </div>
 
             <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20">

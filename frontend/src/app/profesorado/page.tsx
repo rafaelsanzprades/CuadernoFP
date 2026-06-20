@@ -36,7 +36,7 @@ export default function ProfesoradoPage() {
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 ‍<span className="inline-flex"><School className="w-[1.2em] h-[1.2em] mr-1" /></span> Profesorado
               </h1>
-              <p className="text-muted mt-2 text-lg">Administración del profesorado, perfiles y asignaciones docentes.</p>
+              <p className="text-muted mt-2 text-lg">Gestión de profesorado, accesos y asignaciones.</p>
             </div>
 
             <Tabs value={activeTab} onValueChange={setActiveTab}>

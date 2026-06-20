@@ -68,9 +68,7 @@ export default function InicioPage() {
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 Bienvenido al Cuaderno FP
               </h1>
-              <p className="text-muted mt-2 text-lg">
-                Accede rápidamente a todas las herramientas para la gestión de tus módulos, alumnado y evaluación.
-              </p>
+              <p className="text-muted mt-2 text-lg">Panel de acceso rápido a gestión, alumnado y evaluación.</p>
             </div>
 
             <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">

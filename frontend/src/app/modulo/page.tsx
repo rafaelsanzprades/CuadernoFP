@@ -83,7 +83,7 @@ export default function ModuloConfigPage() {
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <span className="inline-flex"><Settings className="w-[1.2em] h-[1.2em] mr-1" /></span> Módulo didáctico
               </h1>
-              <p className="text-muted mt-2 text-lg">Configuración básica del módulo didáctico.</p>
+              <p className="text-muted mt-2 text-lg">Configuración de FEOE, metodología, recursos y evaluación.</p>
             </div>
 
             <Tabs value={activeTab} onValueChange={setActiveTab}>

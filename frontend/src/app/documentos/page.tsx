@@ -212,7 +212,7 @@ export default function DocumentosPage() {
                 <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                   <span className="text-3xl text-info"><FolderOpen className="w-8 h-8" strokeWidth={2.5} /></span> Documentos
                 </h1>
-                <p className="text-muted mt-2 text-lg">Explorador de archivos oficiales, legislación y otros documentos.</p>
+                <p className="text-muted mt-2 text-lg">Explorador de legislación, normativas y docs oficiales.</p>
             </div>
             </div>
       <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6 mt-6">

@@ -179,7 +179,7 @@ export default function SeguimientoPage() {
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <MapPin className="w-6 h-6 text-accent" /> Seguimiento diario
               </h1>
-              <p className="text-muted mt-2 text-base">Registro detallado del desarrollo diario de las clases y contingencias.</p>
+              <p className="text-muted mt-2 text-base">Diario de aula, contingencias, control de asistencia y alertas.</p>
             </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab}>

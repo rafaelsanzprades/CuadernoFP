@@ -337,7 +337,7 @@ export default function ProgresoPage() {
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <span className="inline-flex"><TrendingUp className="w-[1.2em] h-[1.2em] mr-1" /></span> Progreso académico
               </h1>
-              <p className="text-muted mt-2 text-lg">Panel integrado de calificaciones numéricas, evaluación por resultados de aprendizaje (RA) y analíticas.</p>
+              <p className="text-muted mt-2 text-lg">Calificaciones, evaluación de RA y analíticas.</p>
             </div>
             {/* Save Button */}
             <div className="flex items-center gap-4">

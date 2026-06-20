@@ -295,9 +295,7 @@ export default function EntornoTrabajoPage() {
                 <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                   <FolderOpen className="w-6 h-6 text-accent" /> Entorno
                 </h1>
-                <p className="text-muted mt-2 text-lg">
-                  Crea, abre y guarda tus archivos de Programación y Curso.
-                </p>
+                <p className="text-muted mt-2 text-lg">Gestión de archivos de Programación y Curso.</p>
               </div>
 
               {/* Mode Switcher */}

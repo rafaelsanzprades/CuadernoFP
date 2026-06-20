@@ -155,7 +155,7 @@ export default function FeoePage() {
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <Building2 className="w-6 h-6 text-accent" /> Prácticas FEOE
               </h1>
-              <p className="text-muted mt-2 text-lg">Gestión de empresas colaboradoras, asignación de alumnado y seguimiento de prácticas duales y FCT.</p>
+              <p className="text-muted mt-2 text-lg">Gestión de FEOE, Dual y FCT.</p>
             </div>
 
             <Tabs value={activeTab} onValueChange={setActiveTab}>

@@ -67,7 +67,7 @@ export default function FamiliasPage() {
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                   <span className="text-3xl"><span className="inline-flex"><Library className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Familias profesionales
                 </h1>
-                <p className="text-muted mt-2 text-lg">Catálogo oficial de Ciclos Formativos. Grado Básico, Grado Medio y Grado Superior</p>
+                <p className="text-muted mt-2 text-lg">Catálogo oficial de CFGB, CFGM y CFGS.</p>
               </div>
             </div>
 

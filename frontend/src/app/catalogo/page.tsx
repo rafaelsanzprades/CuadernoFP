@@ -98,9 +98,7 @@ function CiclosContent() {
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 Catálogo
               </h1>
-              <p className="text-muted mt-2 text-lg">
-                Catálogo oficial de Familias profesionales, Títulos y desglose de módulos del BOE/BOA.
-              </p>
+              <p className="text-muted mt-2 text-lg">Catálogo oficial de familias, títulos y módulos.</p>
             </div>
 
             <Tabs value={activeTab} onValueChange={(val: any) => handleTabChange(val as Tab)}>

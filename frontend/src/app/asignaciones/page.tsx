@@ -150,7 +150,7 @@ function AsignacionesContent() {
                 <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3 mb-2">
                   <span className="text-3xl"><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Asignación de módulos
                 </h1>
-                <p className="text-muted mt-2 text-lg">Jefatura de Estudios: Asigna el profesorado a los módulos de cada ciclo formativo.</p>
+                <p className="text-muted mt-2 text-lg">Gestión de Jefatura: asignación de profesorado a módulos.</p>
               </div>
               <Button 
                 onClick={handleSave}

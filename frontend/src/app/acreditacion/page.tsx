@@ -41,9 +41,7 @@ export default function AcreditacionPage() {
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <Award className="w-6 h-6 text-accent" /> Acreditación de Competencias
               </h1>
-              <p className="text-muted mt-2 text-lg">
-                Procedimiento de acreditación y reconocimiento de competencias profesionales — Eje 8.
-              </p>
+              <p className="text-muted mt-2 text-lg">Procedimiento de acreditación y reconocimiento de CPPS (Eje 8).</p>
             </div>
 
             <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20">

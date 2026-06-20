@@ -302,7 +302,7 @@ export default function DocumentosPage() {
                 <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                   <span className="text-3xl text-info"><FileText className="w-8 h-8" strokeWidth={2.5} /></span> Descargas
                 </h1>
-                <p className="text-muted mt-2 text-lg">Generación de reportes y boletines en PDF.</p>
+                <p className="text-muted mt-2 text-lg">Generación de reportes y boletines (PDF).</p>
               </div>
             </div>
 
