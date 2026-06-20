@@ -149,7 +149,6 @@ export default function FeoePage() {
         <Header />
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
-          \1
       <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
         <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
         <div>
