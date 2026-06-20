@@ -205,13 +205,7 @@ export default function DocumentosPage() {
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <MotionWrapper className="w-full space-y-6 pb-12">
-      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-        <div>
-          <p className="text-sm font-semibold text-foreground">Herramienta operativa y de gestión — Documentos</p>
-          <p className="text-sm text-muted mt-1">Gestión centralizada de ficheros y recursos del docente.</p>
-        </div>
-      </div>
+
 
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
               <div>
@@ -219,8 +213,15 @@ export default function DocumentosPage() {
                   <span className="text-3xl text-info"><FolderOpen className="w-8 h-8" strokeWidth={2.5} /></span> Documentos
                 </h1>
                 <p className="text-muted mt-2 text-lg">Explorador de archivos oficiales, legislación y otros documentos.</p>
-              </div>
             </div>
+            </div>
+      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6 mt-6">
+        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+        <div>
+          <p className="text-sm font-semibold text-foreground">Herramienta operativa y de gestión — Documentos</p>
+          <p className="text-sm text-muted mt-1">Gestión centralizada de ficheros y recursos del docente.</p>
+        </div>
+      </div>
 
             <div className="space-y-6 animate-in fade-in duration-500">
               <div className="flex flex-col md:flex-row justify-between gap-4">

@@ -18,13 +18,7 @@ export default function LegalPage() {
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <div className="w-full space-y-8 pb-12">
             
-      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-        <div>
-          <p className="text-sm font-semibold text-foreground">Aspectos legales genéricos</p>
-          <p className="text-sm text-muted mt-1">Aviso legal, privacidad, cookies y licencias de la plataforma.</p>
-        </div>
-      </div>
+
             {/* Header Title */}
             <div>
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
@@ -41,6 +35,13 @@ export default function LegalPage() {
                 <TabsTrigger value="licencia">Licencia y términos</TabsTrigger>
               </TabsList>
             </Tabs>
+      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+        <div>
+          <p className="text-sm font-semibold text-foreground">Aspectos legales genéricos</p>
+          <p className="text-sm text-muted mt-1">Aviso legal, privacidad, cookies y licencias de la plataforma.</p>
+        </div>
+      </div>
 
             {activeTab === "aviso" && (
               <div className="space-y-12 animate-in fade-in duration-500">

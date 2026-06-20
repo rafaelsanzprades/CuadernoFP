@@ -295,13 +295,7 @@ export default function DocumentosPage() {
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <MotionWrapper className="w-full space-y-6 pb-12">
-      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-        <div>
-          <p className="text-sm font-semibold text-foreground">Herramienta operativa y de gestión — Descargas</p>
-          <p className="text-sm text-muted mt-1">Exportación y generación de documentos en formatos estándar.</p>
-        </div>
-      </div>
+
 
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
               <div>
@@ -322,6 +316,13 @@ export default function DocumentosPage() {
                 </TabsTrigger>
               </TabsList>
             </Tabs>
+      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+        <div>
+          <p className="text-sm font-semibold text-foreground">Herramienta operativa y de gestión — Descargas</p>
+          <p className="text-sm text-muted mt-1">Exportación y generación de documentos en formatos estándar.</p>
+        </div>
+      </div>
 
             {['programacion', 'curso'].includes(activeTab) && (
               <div className="space-y-8 animate-in fade-in duration-500">
