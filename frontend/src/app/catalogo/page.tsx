@@ -1022,7 +1022,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                 const is2nd = modulo.curso === "2º";
                 const h_feoe = is2nd ? 360 : 140;
                 const h_sem = modulo.horas ? Math.round(modulo.horas / 30) : 0;
-                const tituloNombre = selectedFamilyObj?.degrees.find(d => (d.code ?? d.name) === curriculoCodigo)?.name || curriculoCodigo;
+                const tituloNombre = selectedFamilyObj?.degrees.find((d: any) => (d.code ?? d.name) === curriculoCodigo)?.name || curriculoCodigo;
                 
                 const extras = {
                   familia: selectedFamilia,
