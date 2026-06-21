@@ -127,7 +127,7 @@ export function ProposalLoaderModal({ isOpen, onClose, activeModuleId, onApplyPr
         {selectedProposal && (
           <div className="p-6 border-t border-[var(--glass-border)] bg-foreground/5 rounded-b-3xl flex justify-end gap-3">
             <Button variant="ghost" onClick={() => setSelectedProposal(null)}>Cancelar</Button>
-            <Button variant="default" onClick={handleApply} className="bg-info hover:bg-info/90 text-white border-0">
+            <Button variant="primary" onClick={handleApply} className="bg-info hover:bg-info/90 text-white border-0">
               <CheckCircle2 className="w-4 h-4 mr-2" /> Aplicar Propuesta
             </Button>
           </div>

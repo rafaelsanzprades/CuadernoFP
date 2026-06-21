@@ -88,7 +88,7 @@ export default function InstrumentosPage() {
                 <h2 className="text-2xl font-bold">No hay programación cargada</h2>
                 <p className="text-muted mb-4">Debes abrir o crear un archivo de programación en tu Archivos.</p>
                 <Link href="/archivos">
-                  <Button variant="default" className="gap-2">
+                  <Button variant="primary" className="gap-2">
                     <FolderOpen className="w-4 h-4" /> Ir a mis Archivos
                   </Button>
                 </Link>
