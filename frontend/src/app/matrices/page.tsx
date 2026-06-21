@@ -15,15 +15,18 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import Link from "next/link";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { loadCatalogForModule, resolveDescRa, resolveDescCe } from "@/services/catalogCache";
+import { ProposalLoaderModal } from "@/components/features/matrices/ProposalLoaderModal";
+import { PublisherProposal } from "@/data/proposalsData";
 
 export default function MatricesPage() {
-  const { activeModuleId, moduleData, setModuleData, updateDataFrame, updateModuleData, saveModuleData, cursoData, updateCursoData } = useAppStore();
+  const { activeModuleId, moduleData, setModuleData, updateDataFrame, updateModuleData, saveModuleData, cursoData, updateCursoData, updateInfoModulo } = useAppStore();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
   const [allCeOpen, setAllCeOpen] = useState(false);
   const [openCEs, setOpenCEs] = useState<Set<string>>(new Set());
   const [activeTab, setActiveTab] = useState("ra");
+  const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
 
   const [isDragging, setIsDragging] = useState(false);
   const [selectedCells, setSelectedCells] = useState<Set<string>>(new Set());
@@ -62,6 +65,32 @@ export default function MatricesPage() {
       toast.error("Error al guardar los datos");
     }
     setSaving(false);
+  };
+
+  const handleApplyProposal = async (proposal: PublisherProposal) => {
+    // 1. Update UDs
+    const newUdList = proposal.df_ud.map((ud, index) => ({
+      id_ud: ud.id_ud,
+      desc_ud: ud.desc_ud,
+      horas_ud: ud.horas_ud,
+      ra_mappings: ud.ra_mappings
+    }));
+    
+    // 2. Update RA->OG mappings
+    const infoModulo = { ...(moduleData?.info_modulo || {}) };
+    infoModulo.ra_og_mapping = proposal.ra_og_mapping;
+
+    // Apply to store
+    updateDataFrame("df_ud", newUdList);
+    updateInfoModulo("ra_og_mapping", proposal.ra_og_mapping);
+
+    // Save
+    const ok = await saveModuleData();
+    if (ok) {
+      toast.success(`Propuesta de ${proposal.author} aplicada y guardada.`);
+    } else {
+      toast.error("Error al guardar tras aplicar la propuesta.");
+    }
   };
 
   if (!activeModuleId) {
@@ -112,16 +141,25 @@ export default function MatricesPage() {
               <p className="text-muted mt-2 text-lg">Relación y ponderación: OG, RA, CE y UD/T.</p>
             </div>
 
-            <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="mb-2 max-w-full">
-                {TABS.map(tab => (
-                  <TabsTrigger key={tab.id} value={tab.id}>
-                    <span className="mr-2">{tab.icon}</span>
-                    {tab.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+                <TabsList className="max-w-full">
+                  {TABS.map(tab => (
+                    <TabsTrigger key={tab.id} value={tab.id}>
+                      <span className="mr-2">{tab.icon}</span>
+                      {tab.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
+              <Button 
+                onClick={() => setIsProposalModalOpen(true)} 
+                variant="outline" 
+                className="border-info/50 text-info hover:bg-info/10 whitespace-nowrap shadow-sm"
+              >
+                💡 Cargar Propuesta Editorial
+              </Button>
+            </div>
 
             {/* Resultados de aprendizaje y CE */}
             {activeTab === "ra" && (
@@ -679,6 +717,13 @@ export default function MatricesPage() {
           </MotionWrapper>
         </main>
       </div>
+      
+      <ProposalLoaderModal 
+        isOpen={isProposalModalOpen}
+        onClose={() => setIsProposalModalOpen(false)}
+        activeModuleId={activeModuleId}
+        onApplyProposal={handleApplyProposal}
+      />
     </div>
   );
 }

@@ -19,7 +19,8 @@ export const navGroups = [
       { href: "/modulo", label: "Módulo didáctico", icon: Settings, description: "Configuración básica del módulo didáctico, contexto, metodología y recursos." },
       { href: "/matrices", label: "Matrices OG→RA→CE→UD/T", icon: Grid, description: "Relación y ponderación entre los RA, CE y las diferentes UD/T del módulo." },
       { href: "/instrumentos", label: "Instrumentos de evaluación", icon: Wrench, description: "Definición y ponderación de las herramientas y métodos de evaluación." },
-      { href: "/programacion", label: "Programación de aula", icon: BookOpen, description: "Secuenciación temporal de las unidades didácticas o de trabajo y diseño de tareas competenciales." }
+      { href: "/programacion", label: "Programación de aula", icon: BookOpen, description: "Secuenciación temporal de las unidades didácticas o de trabajo y diseño de tareas competenciales." },
+      { href: "/innovacion", label: "Innovación y emprendimiento", icon: Lightbulb, description: "Proyectos de innovación, emprendimiento y Hubs de FP." }
     ]
   },
   {
@@ -29,20 +30,19 @@ export const navGroups = [
       { href: "/calendario", label: "Calendario académico", icon: Calendar, description: "Fechas generales, trimestres, horario semanal, festivos y eventos relevantes del curso." },
       { href: "/alumnado", label: "Alumnado y tutoría", icon: Users, description: "Gestión oficial del alumnado, ficha individual de orientación, asignación FEOE y matriz de tutoría." },
       { href: "/seguimiento", label: "Seguimiento diario", icon: MapPin, description: "Registro detallado del desarrollo diario de las clases y contingencias." },
-      { href: "/progreso", label: "Progreso académico", icon: TrendingUp, description: "Panel integrado de calificaciones numéricas, evaluación por resultados de aprendizaje (RA) y analíticas." }
+      { href: "/progreso", label: "Progreso académico", icon: TrendingUp, description: "Panel integrado de calificaciones numéricas, evaluación por resultados de aprendizaje (RA) y analíticas." },
+      { href: "/mejora", label: "Mejora Docente", icon: TrendingUp, description: "Panel de autoevaluación y rúbricas de mejora del desempeño docente." }
     ]
   },
   {
-    title: "Nuevo",
-    sectionDescription: "Funcionalidades nuevas alineadas con la Ley 3/2022 y el Sistema Estatal de Indicadores de Evaluación y Calidad de la FP.",
+    title: "Centro",
+    sectionDescription: "Gestión general del centro, normativas de calidad, indicadores del sistema y empleabilidad.",
     items: [
-      { href: "/mejora", label: "Mejora Docente", icon: TrendingUp, description: "Panel de autoevaluación y rúbricas de mejora del desempeño docente." },
+      { href: "/acreditacion", label: "Acreditación competencias", icon: Award, description: "Procedimiento de acreditación y reconocimiento de competencias profesionales." },
       { href: "/indicadores", label: "Indicadores de calidad", icon: BarChart3, description: "Dashboard de los 34 indicadores del Sistema Estatal de Evaluación y Calidad de la FP." },
       { href: "/insercion", label: "Inserción laboral", icon: TrendingUp, description: "Indicadores de inserción profesional de titulados de FP (SEPE/INE)." },
       { href: "/calidad", label: "Calidad del centro", icon: Shield, description: "Autoevaluación y mejora continua según el Marco Común EQAVET." },
-      { href: "/acreditacion", label: "Acreditación competencias", icon: Award, description: "Procedimiento de acreditación y reconocimiento de competencias profesionales." },
-      { href: "/internacionalizacion", label: "Internacionalización", icon: Globe, description: "Programas de movilidad y cooperación internacional (Erasmus+)." },
-      { href: "/innovacion", label: "Innovación y emprendimiento", icon: Lightbulb, description: "Proyectos de innovación, emprendimiento y Hubs de FP." }
+      { href: "/internacionalizacion", label: "Internacionalización", icon: Globe, description: "Programas de movilidad y cooperación internacional (Erasmus+)." }
     ]
   }
 ];

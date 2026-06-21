@@ -20,7 +20,7 @@ type DocumentItem = {
 };
 
 export default function DocumentosPage() {
-  const TABS = ["Plantillas", "Currículos", "Normativa", "TodoFP"];
+  const TABS = ["Plantillas", "Currículos", "Normativa", "TodoFP", "Autores/Editoriales"];
   const [activeTab, setActiveTab] = useState<string>("Plantillas");
 
   // State for Explorador

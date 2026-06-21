@@ -149,6 +149,13 @@ export default function MejoraDocentePage() {
         
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <MotionWrapper className="w-full space-y-6 pb-12">
+            <div className="bg-warning/10 border-l-4 border-warning text-warning p-4 rounded-r-xl flex items-center gap-3 mb-6">
+              <span className="text-2xl">🚧</span>
+              <div>
+                <h3 className="font-bold">Sección en Construcción</h3>
+                <p className="text-sm">Estamos trabajando en esta funcionalidad para la próxima versión.</p>
+              </div>
+            </div>
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
               <div>
                 <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">

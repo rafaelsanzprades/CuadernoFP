@@ -17,8 +17,9 @@ import {
 } from "@/types/curriculum";
 import { fileManager } from "@/services/fileManager";
 import toast from "react-hot-toast";
+import { TabAutores } from "@/components/features/catalogo/TabAutores";
 
-type Tab = "familias" | "titulo" | "cursos" | "modulos";
+type Tab = "familias" | "titulo" | "cursos" | "modulos" | "autores";
 
 
 
@@ -42,7 +43,7 @@ function CiclosContent() {
 
   const tabParam = searchParams.get("tab") as Tab | null;
   const [activeTab, setActiveTab] = useState<Tab>(
-    tabParam && ["familias", "titulo", "cursos", "modulos"].includes(tabParam) ? tabParam : "familias"
+    tabParam && ["familias", "titulo", "cursos", "modulos", "autores"].includes(tabParam) ? tabParam : "familias"
   );
 
   const [globalSelection, setGlobalSelection] = useState({
@@ -83,6 +84,7 @@ function CiclosContent() {
     titulo: 'Título',
     cursos: 'Cursos → Módulos',
     modulos: 'Módulo → RA → CE',
+    autores: 'Autores/Editoriales'
   };
 
   const activeTabCleanLabel = TAB_LABELS[activeTab];
@@ -109,6 +111,7 @@ function CiclosContent() {
                     { id: "titulo" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Título</span> },
                     { id: "cursos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> Cursos → Módulos</span> },
                     { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> Módulo → RA → CE</span> },
+                    { id: "autores" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-info" /> Autores/Editoriales</span> },
                   ]
                 ).map((t) => (
                   <TabsTrigger key={t.id} value={t.id}>
@@ -130,6 +133,7 @@ function CiclosContent() {
             {activeTab === "titulo" && <TabTitulo onSelectTitulo={handleSelectTitulo} globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
             {activeTab === "cursos" && <TabCursos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} onSelectModulo={handleSelectModulo} />}
             {activeTab === "modulos" && <TabModulos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
+            {activeTab === "autores" && <TabAutores globalSelection={globalSelection} />}
           </MotionWrapper>
         </div>
       </main>

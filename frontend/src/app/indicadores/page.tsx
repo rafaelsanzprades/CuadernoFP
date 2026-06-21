@@ -33,6 +33,13 @@ export default function IndicadoresPage() {
         <Header />
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-8 pb-12">
+            <div className="bg-warning/10 border-l-4 border-warning text-warning p-4 rounded-r-xl flex items-center gap-3 mb-6">
+              <span className="text-2xl">🚧</span>
+              <div>
+                <h3 className="font-bold">Sección en Construcción</h3>
+                <p className="text-sm">Estamos trabajando en esta funcionalidad para la próxima versión.</p>
+              </div>
+            </div>
             <div>
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <BarChart3 className="w-6 h-6 text-accent" /> Indicadores de Calidad
