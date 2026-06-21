@@ -354,7 +354,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
             className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <option value="">-- Selecciona Título --</option>
-            {degreesFromApi.map((d) => (
+            {degreesFromApi.map((d: any) => (
               <option key={d.id} value={d.code ?? d.name}>{formatDegreeName(d.code, d.name)}</option>
             ))}
           </select>
@@ -686,7 +686,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
             className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <option value="">-- Selecciona Título --</option>
-            {degreesFromApi.map((d) => (
+            {degreesFromApi.map((d: any) => (
               <option key={d.id} value={d.code ?? d.name}>
                 {formatDegreeName(d.code, d.name)}
               </option>
@@ -844,7 +844,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
             className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <option value="">-- Selecciona Título --</option>
-            {degreesFromApi.map((d) => (
+            {degreesFromApi.map((d: any) => (
               <option key={d.id} value={d.code ?? d.name}>
                 {formatDegreeName(d.code, d.name)}
               </option>

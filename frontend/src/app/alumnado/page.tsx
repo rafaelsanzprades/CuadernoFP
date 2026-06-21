@@ -93,7 +93,7 @@ export default function AlumnadoPage() {
                 <h2 className="text-2xl font-bold">No hay curso cargado</h2>
                 <p className="text-muted mb-4">Debes abrir o crear un archivo de curso en tu Archivos.</p>
                 <Link href="/archivos">
-                  <Button variant="default" className="gap-2">
+                  <Button variant="primary" className="gap-2">
                     <FolderOpen className="w-4 h-4" /> Ir a mis Archivos
                   </Button>
                 </Link>
