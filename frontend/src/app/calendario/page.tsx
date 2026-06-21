@@ -1,6 +1,6 @@
 "use client";
 import { Calendar, Circle, ClipboardList, Search, Settings, Flag , Info, FolderOpen } from "lucide-react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
@@ -30,114 +30,194 @@ const MONTH_NAMES = [
 const DAY_NAMES_SHORT = ["Lu","Ma","Mi","Ju","Vi","Sa","Do"];
 
 // ── Notes Table Component ─────────────────────────────────────────────────────
-function NotesTable({ calendar_notes, onUpdateNote }: { calendar_notes: Record<string, string>; onUpdateNote: (key: string, val: string) => void }) {
+function NotesTable({ calendar_notes, onUpdateNotes }: { calendar_notes: Record<string, string>; onUpdateNotes: (notes: Record<string, string>) => void }) {
   const [newDate, setNewDate]     = useState("");
+  const [newEndDate, setNewEndDate] = useState("");
   const [newType, setNewType]     = useState<"f" | "r">("f");
   const [newText, setNewText]     = useState("");
 
   function addNote() {
     if (!newDate || !newText) return;
-    // Convert from YYYY-MM-DD to DD/MM/YYYY for the key
-    const [y, m, d] = newDate.split("-");
-    const key = `${newType}_${d}/${m}/${y}`;
-    onUpdateNote(key, newText);
-    setNewDate(""); setNewText("");
+    
+    const startD = new Date(newDate + "T12:00:00");
+    const endD = newEndDate ? new Date(newEndDate + "T12:00:00") : startD;
+    
+    if (endD < startD) return;
+
+    const newNotes = { ...calendar_notes };
+    
+    let curr = new Date(startD);
+    while (curr <= endD) {
+      const d = String(curr.getDate()).padStart(2, "0");
+      const m = String(curr.getMonth() + 1).padStart(2, "0");
+      const y = curr.getFullYear();
+      const key = `${newType}_${d}/${m}/${y}`;
+      newNotes[key] = newText;
+      curr.setDate(curr.getDate() + 1);
+    }
+    
+    onUpdateNotes(newNotes);
+    setNewDate(""); setNewEndDate(""); setNewText("");
   }
 
-  const entries = Object.entries(calendar_notes)
-    .filter(([, v]) => v)
-    .sort(([a], [b]) => {
-      // sort by date portion DD/MM/YYYY → convert to comparable
-      const toSortable = (k: string) => {
-        const parts = k.substring(2).split("/");
-        return `${parts[2]}-${parts[1]}-${parts[0]}`;
-      };
-      return toSortable(a).localeCompare(toSortable(b));
-    });
+  function deleteRange(keys: string[]) {
+    const newNotes = { ...calendar_notes };
+    keys.forEach(k => delete newNotes[k]);
+    onUpdateNotes(newNotes);
+  }
+
+  const entries = Object.entries(calendar_notes).filter(([, v]) => v).sort(([a], [b]) => {
+    const toSortable = (k: string) => { 
+      const str = k.substring(2);
+      if (str.includes("-")) return str; // already YYYY-MM-DD
+      const parts = str.split("/"); 
+      if (parts.length === 3) return `${parts[2]}-${parts[1]}-${parts[0]}`;
+      return str;
+    };
+    return toSortable(a).localeCompare(toSortable(b));
+  });
+
+  const ranges: { start: string, end: string, type: string, desc: string, keys: string[] }[] = [];
+  
+  entries.forEach(([k, v]) => {
+    const type = k.charAt(0);
+    const dateStr = k.substring(2);
+    
+    // Parse Date properly regardless of format
+    let d: Date;
+    if (dateStr.includes("-")) {
+      const [y, m, day] = dateStr.split("-");
+      d = new Date(Number(y), Number(m)-1, Number(day), 12);
+    } else {
+      const parts = dateStr.split("/");
+      d = new Date(Number(parts[2]||0), Number(parts[1]||1)-1, Number(parts[0]||1), 12);
+    }
+    
+    if (ranges.length > 0) {
+      const last = ranges[ranges.length - 1];
+      const lastDateStr = last.end.substring(2);
+      let lastD: Date;
+      if (lastDateStr.includes("-")) {
+        const [y, m, day] = lastDateStr.split("-");
+        lastD = new Date(Number(y), Number(m)-1, Number(day), 12);
+      } else {
+        const lastParts = lastDateStr.split("/");
+        lastD = new Date(Number(lastParts[2]||0), Number(lastParts[1]||1)-1, Number(lastParts[0]||1), 12);
+      }
+      
+      const diffDays = Math.round((d.getTime() - lastD.getTime()) / (1000 * 3600 * 24));
+      
+      // Merge if consecutive day, or if gap is weekend
+      if (last.type === type && last.desc === v && (diffDays === 1 || (diffDays === 3 && lastD.getDay() === 5) || (diffDays === 2 && lastD.getDay() === 6))) {
+        last.end = k;
+        last.keys.push(k);
+        return;
+      }
+    }
+    ranges.push({ start: k, end: k, type, desc: v, keys: [k] });
+  });
+
+  const MONTH_NAMES = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-left text-sm border-collapse">
         <thead>
           <tr className="border-b border-[var(--glass-border)] text-muted">
-            <th className="p-2 w-36">Fecha</th>
+            <th className="p-2 w-32">Fecha</th>
+            <th className="p-2 w-32">Hasta</th>
             <th className="p-2 w-24">Tipo</th>
             <th className="p-2">Descripción</th>
             <th className="p-2 w-10" />
           </tr>
         </thead>
         <tbody>
-          {entries.map(([k, v]) => {
-            const isF   = k.startsWith("f_");
-            const dateStr = k.substring(2);
+          {ranges.map((r, i) => {
+            const getMonthYear = (dateString: string) => {
+              if (dateString.includes("-")) {
+                const [y, m] = dateString.split("-");
+                return { m: Number(m), y: y.substring(2) };
+              }
+              const parts = dateString.split("/");
+              return { m: Number(parts[1]), y: (parts[2]||"").substring(2) };
+            };
+            
+            const startMY = getMonthYear(r.start.substring(2));
+            const monthName = MONTH_NAMES[startMY.m - 1] || "Mes";
+            const monthHeader = `${monthName} '${startMY.y}`;
+            
+            let showHeader = false;
+            if (i === 0) showHeader = true;
+            else {
+              const prevMY = getMonthYear(ranges[i-1].start.substring(2));
+              if (prevMY.m !== startMY.m || prevMY.y !== startMY.y) showHeader = true;
+            }
+
+            const isF = r.type === "f";
+            const fmt = (dateString: string) => {
+              if (dateString.includes("-")) {
+                const [y, m, d] = dateString.split("-");
+                return `${d} ${MONTH_NAMES[Number(m)-1]?.substring(0,3).toLowerCase()||""} ${y}`;
+              }
+              const p = dateString.split("/");
+              return `${p[0]} ${MONTH_NAMES[Number(p[1])-1]?.substring(0,3).toLowerCase()||""} ${p[2]}`;
+            };
+            
             return (
-              <tr key={k} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
-                <td className="p-2 font-mono text-foreground/80">{dateStr}</td>
-                <td className="p-2">
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-semibold ${
-                    isF ? "bg-danger/10 text-danger" : "bg-info/10 text-info"
-                  }`}>
-                    {isF ? <><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> Festivo</> : <><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> Evento</>}
-                  </span>
-                </td>
-                <td className="p-2 text-foreground/90">{typeof v === 'object' ? JSON.stringify(v) : String(v)}</td>
-                <td className="p-2 text-center">
-                  <button
-                    onClick={() => onUpdateNote(k, "")}
-                    className="text-muted/80 hover:text-danger font-bold text-lg leading-none transition-colors"
-                  >×</button>
-                </td>
-              </tr>
+              <React.Fragment key={r.start + r.desc}>
+                {showHeader && (
+                  <tr>
+                    <td colSpan={5} className="pt-6 pb-2 text-xs font-bold uppercase tracking-wider text-accent border-b border-[var(--glass-border)]/50">
+                      {monthHeader}
+                    </td>
+                  </tr>
+                )}
+                <tr className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
+                  <td className="p-2 font-mono text-foreground/80">{fmt(r.start.substring(2))}</td>
+                  <td className="p-2 font-mono text-foreground/60">{r.start === r.end ? "" : fmt(r.end.substring(2))}</td>
+                  <td className="p-2">
+                    <span className={`text-xs px-2 py-0.5 rounded-full font-semibold ${
+                      isF ? "bg-danger/10 text-danger" : "bg-info/10 text-info"
+                    }`}>
+                      {isF ? <><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> Festivo</> : <><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> Evento</>}
+                    </span>
+                  </td>
+                  <td className="p-2 text-foreground/90">{r.desc}</td>
+                  <td className="p-2 text-center">
+                    <button onClick={() => deleteRange(r.keys)} className="text-muted/80 hover:text-danger font-bold text-lg leading-none transition-colors">×</button>
+                  </td>
+                </tr>
+              </React.Fragment>
             );
           })}
 
-          {/* Add new row */}
           <tr className="border-t border-[var(--glass-border)] bg-white/3">
             <td className="p-2">
-              <DatePicker
-                value={newDate}
-                onChange={v => setNewDate(v)}
-                className="w-full"
-              />
+              <DatePicker value={newDate} onChange={v => setNewDate(v)} className="w-full" placeholder="Inicio..." />
             </td>
             <td className="p-2">
-              <select
-                value={newType}
-                onChange={e => setNewType(e.target.value as "f" | "r")}
-                className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-1 text-sm text-foreground focus:border-warning focus:outline-none"
-              >
+              <DatePicker value={newEndDate} onChange={v => setNewEndDate(v)} className="w-full" placeholder="Hasta (Opcional)" />
+            </td>
+            <td className="p-2">
+              <select value={newType} onChange={e => setNewType(e.target.value as "f" | "r")} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-sm text-foreground focus:border-warning focus:outline-none">
                 <option value="f">Festivo</option>
                 <option value="r">Evento</option>
               </select>
             </td>
             <td className="p-2">
-              <input
-                type="text"
-                value={newText}
-                onChange={e => setNewText(e.target.value)}
-                onKeyDown={e => e.key === "Enter" && addNote()}
-                placeholder="Descripción..."
-                className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-1 text-sm text-foreground focus:border-warning focus:outline-none"
-              />
+              <input type="text" value={newText} onChange={e => setNewText(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()} placeholder="Descripción..." className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-sm text-foreground focus:border-warning focus:outline-none" />
             </td>
-            <td className="p-2">
-              <button
-                onClick={addNote}
-                disabled={!newDate || !newText}
-                className="text-warning hover:text-warning font-bold text-lg leading-none disabled:text-gray-700 transition-colors"
-              >+</button>
+            <td className="p-2 text-center">
+              <button onClick={addNote} disabled={!newDate || !newText} className="text-warning hover:text-warning font-bold text-2xl leading-none disabled:text-gray-700 transition-colors">+</button>
             </td>
           </tr>
         </tbody>
       </table>
-      {entries.length === 0 && (
-        <p className="text-center text-muted/80 text-sm py-4">
-          Sin festivos ni eventos aún. Añade uno arriba o haz clic en el calendario.
-        </p>
-      )}
+      {ranges.length === 0 && <p className="text-center text-muted/80 text-sm py-4">Sin festivos ni eventos aún. Añade uno arriba.</p>}
     </div>
   );
 }
+
 
 // ── Interactive Calendar Component ────────────────────────────────────────────
 
@@ -439,11 +519,76 @@ export default function CalendarioPage() {
   const horario       = cursoData?.horario       || { Lun: 0, Mar: 0, "Mié": 0, Jue: 0, Vie: 0 };
   const calendar_notes = cursoData?.calendar_notes || {};
 
+  const h_boa = Number(moduleData?.info_modulo?.h_boa) || 0;
+  const h_sem = Number(moduleData?.info_modulo?.h_sem) || 0;
+
   const handleUpdateFechas = (field: string, value: string | number) =>
     updateCursoData("info_fechas", { ...info_fechas, [field]: value });
 
   const handleUpdateNote = (key: string, val: string) =>
     updateCursoData("calendar_notes", { ...calendar_notes, [key]: val });
+
+  const handleUpdateNotes = (notes: Record<string, string>) =>
+    updateCursoData("calendar_notes", notes);
+
+  const handleUpdateHorario = (day: string, val: number) =>
+    updateCursoData("horario", { ...horario, [day]: val });
+
+  const calculateRealHours = (startStr: string, endStr: string) => {
+    if (!startStr || !endStr) return 0;
+    try {
+      const [sy, sm, sd] = startStr.split("-").map(Number);
+      const [ey, em, ed] = endStr.split("-").map(Number);
+      if (!sy || !ey) return 0;
+      const start = new Date(sy, sm - 1, sd);
+      const end = new Date(ey, em - 1, ed);
+      const dayMap = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+      let total = 0, curr = new Date(start);
+      while (curr <= end) {
+        if (curr.getDay() !== 0 && curr.getDay() !== 6) {
+          const key = `f_${pad(curr.getDate())}/${pad(curr.getMonth() + 1)}/${curr.getFullYear()}`;
+          if (!calendar_notes[key]) total += Number(horario[dayMap[curr.getDay()]]) || 0;
+        }
+        curr.setDate(curr.getDate() + 1);
+      }
+      return total;
+    } catch { return 0; }
+  };
+
+  const calculateWorkingDays = (startStr: string, endStr: string) => {
+    const counts = { Lun: 0, Mar: 0, "Mié": 0, Jue: 0, Vie: 0 };
+    if (!startStr || !endStr) return counts;
+    try {
+      const [sy, sm, sd] = startStr.split("-").map(Number);
+      const [ey, em, ed] = endStr.split("-").map(Number);
+      if (!sy || !ey) return counts;
+      const start = new Date(sy, sm - 1, sd);
+      const end = new Date(ey, em - 1, ed);
+      const dayMap = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"] as const;
+      let curr = new Date(start);
+      while (curr <= end) {
+        const dIdx = curr.getDay();
+        if (dIdx !== 0 && dIdx !== 6) {
+          const key = `f_${pad(curr.getDate())}/${pad(curr.getMonth() + 1)}/${curr.getFullYear()}`;
+          if (!calendar_notes[key]) {
+            counts[dayMap[dIdx] as keyof typeof counts]++;
+          }
+        }
+        curr.setDate(curr.getDate() + 1);
+      }
+    } catch {}
+    return counts;
+  };
+
+  const h1 = calculateRealHours(info_fechas.ini_1t, info_fechas.fin_1t);
+  const h2 = calculateRealHours(info_fechas.ini_2t, info_fechas.fin_2t);
+  const h3 = calculateRealHours(info_fechas.ini_3t, info_fechas.fin_3t);
+  const h_real = h1 + h2 + h3;
+  const suma_horario = ["Lun", "Mar", "Mié", "Jue", "Vie"].reduce((acc, day) => acc + (Number(horario[day]) || 0), 0);
+
+  const wd1 = calculateWorkingDays(info_fechas.ini_1t, info_fechas.fin_1t);
+  const wd2 = calculateWorkingDays(info_fechas.ini_2t, info_fechas.fin_2t);
+  const wd3 = calculateWorkingDays(info_fechas.ini_3t, info_fechas.fin_3t);
 
 
 
@@ -499,7 +644,7 @@ export default function CalendarioPage() {
           {activeTab === "fechas" && (
             <div className="space-y-8">
               {/* Fechas generales */}
-              <Card className="p-6 border-t-4 border-t-blue-500">
+              <Card className="p-6 border-t-4 border-t-blue-500 overflow-visible z-30">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-xl font-bold">Fechas generales</h2>
                   <div className="flex gap-2">
@@ -540,8 +685,78 @@ export default function CalendarioPage() {
                 </div>
               </Card>
 
+              {/* Sesiones semanales */}
+              <Card className="p-6 border-t-4 border-t-purple-500">
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-xl font-bold flex items-center gap-2">Horario semanal</h2>
+                  <div className="bg-foreground/15 px-4 py-2 rounded-lg border border-[var(--glass-border)] text-sm">
+                    Desfase con BOA ({h_sem} h/sem):{" "}
+                    <span className={`font-bold ${suma_horario === h_sem ? "text-success" : "text-warning"}`}>
+                      {suma_horario - h_sem} h
+                    </span>
+                  </div>
+                </div>
+                <div className="grid grid-cols-5 gap-4">
+                  {["Lun", "Mar", "Mié", "Jue", "Vie"].map(day => (
+                    <div key={day}>
+                      <label className="text-sm text-muted mb-1 block text-center font-bold">{day}</label>
+                      <input 
+                        type="number" min="0" max="8"
+                        value={Number(horario[day]) || 0}
+                        onChange={e => handleUpdateHorario(day, Number(e.target.value))}
+                        className="w-full text-center text-xl font-mono bg-background border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground focus:border-purple-500 focus:outline-none"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </Card>
+
+              {/* Días hábiles */}
+              <Card className="p-6 border-t-4 border-t-yellow-500 overflow-hidden">
+                <h2 className="text-xl font-bold mb-4 flex items-center gap-2">Información sobre días hábiles</h2>
+                <div className="overflow-x-auto rounded-xl border border-[var(--glass-border)]">
+                  <table className="w-full text-center text-sm border-collapse">
+                    <thead>
+                      <tr className="bg-foreground/5 text-muted border-b border-[var(--glass-border)]">
+                        <th className="p-3 text-left font-semibold">Trimestre</th>
+                        {["Lun", "Mar", "Mié", "Jue", "Vie"].map(day => (
+                          <th key={day} className={`p-3 font-semibold ${!Number(horario[day]) ? 'opacity-40' : ''}`}>
+                            {day}
+                            {Number(horario[day]) > 0 && <span className="block text-xs text-info font-normal mt-0.5">{horario[day]}h/sem</span>}
+                          </th>
+                        ))}
+                        <th className="p-3 font-semibold border-l border-[var(--glass-border)]">Total Días</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {[
+                        { title: "1ª Ev.", wd: wd1, bg: "bg-purple-500/10" },
+                        { title: "2ª Ev.", wd: wd2, bg: "bg-red-500/10" },
+                        { title: "3ª Ev.", wd: wd3, bg: "bg-amber-500/10" },
+                      ].map((row, i) => {
+                        const daysArr = ["Lun", "Mar", "Mié", "Jue", "Vie"] as const;
+                        const totalDays = daysArr.reduce((acc, d) => acc + (row.wd[d] || 0), 0);
+                        return (
+                          <tr key={row.title} className={`${row.bg} border-b border-[var(--glass-border)] last:border-0`}>
+                            <td className="p-3 font-bold text-left">{row.title}</td>
+                            {daysArr.map(day => (
+                              <td key={day} className={`p-3 ${!Number(horario[day]) ? 'opacity-30' : 'font-mono text-base font-medium'}`}>
+                                {row.wd[day]}
+                              </td>
+                            ))}
+                            <td className="p-3 font-bold border-l border-[var(--glass-border)] text-base font-mono">
+                              {totalDays}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </Card>
+
               {/* Trimestres */}
-              <Card className="p-6 border-t-4 border-t-emerald-500">
+              <Card className="p-6 border-t-4 border-t-emerald-500 overflow-visible z-20">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-xl font-bold">Trimestres</h2>
                 </div>
@@ -568,8 +783,40 @@ export default function CalendarioPage() {
                 </div>
               </Card>
 
+              {/* Horas reales */}
+              <Card className="p-6 border-t-4 border-t-cyan-500">
+                <h2 className="text-xl font-bold mb-6">Horas lectivas reales</h2>
+                <div className="grid grid-cols-3 gap-6 mb-6">
+                  {[
+                    { label: "1er trimestre", value: h1 },
+                    { label: "2º trimestre", value: h2 },
+                    { label: "3er trimestre", value: h3 },
+                  ].map(t => (
+                    <div key={t.label}>
+                      <label className="block text-sm font-semibold text-muted mb-2 text-center">{t.label}</label>
+                      <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-4 text-center">
+                        <div className="text-[1.1rem] font-bold text-success font-mono">{t.value} h</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="grid grid-cols-2 gap-6">
+                  {[
+                    { label: "Horas Oficiales (BOA)", value: `${h_boa} h`, cls: "text-foreground" },
+                    { label: "Horas Reales de Clase", value: `${h_real} h`, cls: h_real < h_boa ? "text-warning" : "text-success" },
+                  ].map(s => (
+                    <div key={s.label}>
+                      <label className="block text-sm font-semibold text-muted mb-2 text-center">{s.label}</label>
+                      <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-4 text-center">
+                        <div className={`text-[1.1rem] font-bold ${s.cls}`}>{s.value}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+
               {/* FP Dual / FEOE - 5 columnas */}
-              <Card className="p-6 border-t-4 border-t-orange-500">
+              <Card className="p-6 border-t-4 border-t-orange-500 overflow-visible">
                 <h2 className="text-xl font-bold mb-6">FP Dual (FEOE)</h2>
                 <div className="grid grid-cols-5 gap-4 items-end">
                   {/* Col 1: Selector de tipo */}
@@ -636,13 +883,13 @@ export default function CalendarioPage() {
           )}
 
           {activeTab === "eventos" && (
-            <Card className="p-6 border-t-4 border-t-yellow-500">
+            <Card className="p-6 border-t-4 border-t-yellow-500 overflow-visible z-20">
               <h2 className="text-xl font-bold mb-2"> Festivos y eventos</h2>
               <p className="text-muted text-sm mb-4">
                 Introduce manualmente o haz clic en el calendario. Los festivos excluyen horas del cómputo real.
               </p>
               {/* Manual entry table */}
-              <NotesTable calendar_notes={calendar_notes} onUpdateNote={handleUpdateNote} />
+              <NotesTable calendar_notes={calendar_notes} onUpdateNotes={handleUpdateNotes} />
             </Card>
           )}
 

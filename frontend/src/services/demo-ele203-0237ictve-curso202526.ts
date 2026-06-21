@@ -1,4 +1,4 @@
-export const CRM_SEED_VERSION = 21;
+export const CRM_SEED_VERSION = 24;
 
 export const demoSeed = {
     "0237-ictve-curso-2025-26": {
@@ -7,30 +7,55 @@ export const demoSeed = {
             "ini_curso": "2025-09-01",
             "fin_curso": "2026-06-30",
             "ini_1t": "2025-09-12",
-            "fin_1t": "2025-12-18",
-            "ini_2t": "2025-12-19",
-            "fin_2t": "2026-03-25",
-            "ini_3t": "2026-03-26",
-            "fin_3t": "2026-06-20",
+            "fin_1t": "2025-12-19",
+            "ini_2t": "2026-01-08",
+            "fin_2t": "2026-03-20",
+            "ini_3t": "2026-04-06",
+            "fin_3t": "2026-06-19",
             "ini_feoe": "2026-02-01",
             "fin_feoe": "2026-03-05"
         },
         "horario": {
-            "Lun": 3,
-            "Mar": 0,
-            "Mié": 0,
-            "Jue": 0,
-            "Vie": 2
+            "Lun": 1,
+            "Mar": 1,
+            "Mié": 1,
+            "Jue": 1,
+            "Vie": 1
         },
         "calendar_notes": {
-            "f_2025-10-12": "Fiesta Nacional de España",
-            "f_2025-11-01": "Día de Todos los Santos",
-            "f_2025-12-06": "Día de la Constitución",
-            "f_2025-12-08": "Inmaculada Concepción",
-            "f_2026-05-01": "Día del Trabajo",
-            "r_2025-12-05": "Examen 1T",
-            "r_2026-03-06": "Examen 2T",
-            "r_2026-06-12": "Examen final"
+            "f_13/10/2025": "Festivo (Día del Pilar)",
+            "f_08/12/2025": "Inmaculada Concepción",
+            "f_22/12/2025": "Vacaciones de Navidad",
+            "f_23/12/2025": "Vacaciones de Navidad",
+            "f_24/12/2025": "Vacaciones de Navidad",
+            "f_25/12/2025": "Vacaciones de Navidad",
+            "f_26/12/2025": "Vacaciones de Navidad",
+            "f_29/12/2025": "Vacaciones de Navidad",
+            "f_30/12/2025": "Vacaciones de Navidad",
+            "f_31/12/2025": "Vacaciones de Navidad",
+            "f_01/01/2026": "Año Nuevo",
+            "f_02/01/2026": "Vacaciones de Navidad",
+            "f_05/01/2026": "Vacaciones de Navidad",
+            "f_06/01/2026": "Día de Reyes",
+            "f_29/01/2026": "San Valero",
+            "f_05/03/2026": "Cincomarzada",
+            "f_06/03/2026": "Día no lectivo",
+            "f_30/03/2026": "Vacaciones de Semana Santa",
+            "f_31/03/2026": "Vacaciones de Semana Santa",
+            "f_01/04/2026": "Vacaciones de Semana Santa",
+            "f_02/04/2026": "Jueves Santo",
+            "f_03/04/2026": "Viernes Santo",
+            "f_06/04/2026": "Lunes de Pascua",
+            "f_23/04/2026": "San Jorge (Día de Aragón)",
+            "f_24/04/2026": "Día no lectivo",
+            "f_01/05/2026": "Día del Trabajador",
+            "r_12/12/2025": "Práctica M2",
+            "r_19/12/2025": "1ª Evaluación",
+            "r_12/03/2026": "Práctica M4",
+            "r_20/03/2026": "2ª Evaluación",
+            "r_04/06/2026": "Práctica M6",
+            "r_19/06/2026": "Final Ord.",
+            "r_24/06/2026": "Final Ext."
         },
         "df_al": [
             {
@@ -2473,9 +2498,9 @@ export const demoSeed = {
             "nombre": "Infraestructuras comunes de telecomunicaciones en viviendas y edificios",
             "horas": 157,
             "horas_totales": 157,
-            "h_sem": 5,
-            "h_boa": 157,
             "p_ev": 15,
+            "h_boa": 167,
+            "h_sem": 5,
             "ciclo": "Técnico en Instalaciones de Telecomunicaciones",
             "nivel": "Grado Medio",
             "familia": "Electricidad y Electrónica",
@@ -2579,21 +2604,21 @@ export const demoSeed = {
             "Atención a la diversidad": "Ampliación de prácticas para alumnado de ritmo rápido. Refuerzo personalizado en horas de desdoble."
         },
         "horario": {
-            "Lun": 2,
+            "Lun": 1,
             "Mar": 1,
             "Mié": 1,
             "Jue": 1,
-            "Vie": 0
+            "Vie": 1
         },
         "info_fechas": {
             "ini_curso": "2025-09-01",
             "fin_curso": "2026-06-30",
             "ini_1t": "2025-09-12",
-            "fin_1t": "2025-12-18",
-            "ini_2t": "2025-12-19",
-            "fin_2t": "2026-03-25",
-            "ini_3t": "2026-03-26",
-            "fin_3t": "2026-06-20",
+            "fin_1t": "2025-12-19",
+            "ini_2t": "2026-01-08",
+            "fin_2t": "2026-03-20",
+            "ini_3t": "2026-04-06",
+            "fin_3t": "2026-06-19",
             "ini_feoe": "2026-02-01",
             "fin_feoe": "2026-03-05",
             "h_sem_feoe": 8
@@ -3548,18 +3573,18 @@ export const demoSeed = {
             }
         ],
         "calendar_notes": {
-            "f_2025-10-12": "Fiesta Nacional de España",
-            "f_2025-11-01": "Todos los Santos",
-            "f_2025-12-06": "Día de la Constitución",
-            "f_2025-12-08": "Inmaculada Concepción",
-            "f_2025-12-22": "Inicio vacaciones Navidad",
-            "f_2026-01-07": "Fin vacaciones Navidad",
-            "f_2026-03-30": "Inicio vacaciones Semana Santa",
-            "f_2026-04-06": "Fin vacaciones Semana Santa",
-            "f_2026-05-01": "Día del Trabajo",
-            "r_2025-12-17": "1ª Evaluación",
-            "r_2026-03-24": "2ª Evaluación",
-            "r_2026-06-17": "Evaluación Final"
+            "f_12/10/2025": "Fiesta Nacional de España",
+            "f_01/11/2025": "Todos los Santos",
+            "f_06/12/2025": "Día de la Constitución",
+            "f_08/12/2025": "Inmaculada Concepción",
+            "f_22/12/2025": "Inicio vacaciones Navidad",
+            "f_07/01/2026": "Fin vacaciones Navidad",
+            "f_30/03/2026": "Inicio vacaciones Semana Santa",
+            "f_06/04/2026": "Fin vacaciones Semana Santa",
+            "f_01/05/2026": "Día del Trabajo",
+            "r_17/12/2025": "1ª Evaluación",
+            "r_24/03/2026": "2ª Evaluación",
+            "r_17/06/2026": "Evaluación Final"
         },
         "planning_ledger": {
             "2025-09-15": [

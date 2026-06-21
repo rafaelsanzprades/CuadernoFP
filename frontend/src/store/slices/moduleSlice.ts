@@ -24,39 +24,51 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
   moduleData: null,
   setModuleData: (data: ModuleData | null) => set({ moduleData: data }),
 
-  updateInfoModulo: (key: string, value: unknown) => set((state) => ({
-    moduleData: state.moduleData ? {
-      ...state.moduleData,
-      info_modulo: {
-        ...state.moduleData.info_modulo,
-        [key]: value
+  updateInfoModulo: (key: string, value: unknown) => set((state) => {
+    const currentModule = state.moduleData || {} as ModuleData;
+    return {
+      moduleData: {
+        ...currentModule,
+        info_modulo: {
+          ...(currentModule.info_modulo || {}),
+          [key]: value
+        }
       }
-    } : null
-  })),
+    };
+  }),
 
-  updateDataFrame: (key: keyof ModuleData, data: unknown[]) => set((state) => ({
-    moduleData: state.moduleData ? {
-      ...state.moduleData,
-      [key]: data
-    } : null
-  })),
+  updateDataFrame: (key: keyof ModuleData, data: unknown[]) => set((state) => {
+    const currentModule = state.moduleData || {} as ModuleData;
+    return {
+      moduleData: {
+        ...currentModule,
+        [key]: data
+      }
+    };
+  }),
 
-  updateModuleData: (key: keyof ModuleData, data: unknown) => set((state) => ({
-    moduleData: state.moduleData ? {
-      ...state.moduleData,
-      [key]: data
-    } : null
-  })),
+  updateModuleData: (key: keyof ModuleData, data: unknown) => set((state) => {
+    const currentModule = state.moduleData || {} as ModuleData;
+    return {
+      moduleData: {
+        ...currentModule,
+        [key]: data
+      }
+    };
+  }),
 
   cursoData: null,
   setCursoData: (data: CursoData | null) => set({ cursoData: data }),
 
-  updateCursoData: (key: keyof CursoData, data: unknown) => set((state) => ({
-    cursoData: state.cursoData ? {
-      ...state.cursoData,
-      [key]: data
-    } : null
-  })),
+  updateCursoData: (key: keyof CursoData, data: unknown) => set((state) => {
+    const currentCurso = state.cursoData || {} as CursoData;
+    return {
+      cursoData: {
+        ...currentCurso,
+        [key]: data
+      }
+    };
+  }),
 
   saveModuleData: async () => {
     const { activeModuleId, moduleData, isDriveConnected, autoSyncDrive } = get();

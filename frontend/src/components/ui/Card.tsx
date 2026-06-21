@@ -27,7 +27,7 @@ export function Card({ children, className = '', accent = 'none', accentColor, g
 
   return (
     <div
-      className={`relative glass-card overflow-hidden ${accentClass} ${glow ? 'group' : ''} ${className}`}
+      className={`relative glass-card ${className.includes('overflow-') ? '' : 'overflow-hidden'} ${accentClass} ${glow ? 'group' : ''} ${className}`}
       style={Object.keys(customAccent).length ? customAccent : undefined}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
