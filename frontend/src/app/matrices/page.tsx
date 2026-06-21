@@ -154,7 +154,7 @@ export default function MatricesPage() {
               </Tabs>
               <Button 
                 onClick={() => setIsProposalModalOpen(true)} 
-                variant="outline" 
+                variant="secondary" 
                 className="border-info/50 text-info hover:bg-info/10 whitespace-nowrap shadow-sm"
               >
                 💡 Cargar Propuesta Editorial

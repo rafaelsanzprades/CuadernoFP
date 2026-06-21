@@ -69,7 +69,7 @@ export function ThemeSelector() {
               <h4 className="font-semibold text-sm mb-2 text-foreground">Modo de Visualización</h4>
               <div className="grid grid-cols-2 gap-2">
                 <Button
-                  variant="outline"
+                  variant="secondary"
                   size="sm"
                   onClick={() => setTheme("light")}
                   className={`flex gap-2 justify-start ${theme === "light" ? "border-accent text-accent bg-accent/10" : ""}`}
@@ -77,7 +77,7 @@ export function ThemeSelector() {
                   <Sun className="w-4 h-4" /> Claro
                 </Button>
                 <Button
-                  variant="outline"
+                  variant="secondary"
                   size="sm"
                   onClick={() => setTheme("dark")}
                   className={`flex gap-2 justify-start ${theme === "dark" ? "border-accent text-accent bg-accent/10" : ""}`}
@@ -85,7 +85,7 @@ export function ThemeSelector() {
                   <Moon className="w-4 h-4" /> Oscuro
                 </Button>
                 <Button
-                  variant="outline"
+                  variant="secondary"
                   size="sm"
                   onClick={() => setTheme("oled")}
                   className={`flex gap-2 justify-start ${theme === "oled" ? "border-accent text-accent bg-accent/10" : ""}`}
@@ -93,7 +93,7 @@ export function ThemeSelector() {
                   <Monitor className="w-4 h-4" /> OLED
                 </Button>
                 <Button
-                  variant="outline"
+                  variant="secondary"
                   size="sm"
                   onClick={() => setTheme("system")}
                   className={`flex gap-2 justify-start ${theme === "system" ? "border-accent text-accent bg-accent/10" : ""}`}

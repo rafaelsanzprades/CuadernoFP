@@ -9,8 +9,7 @@ const msalConfig: Configuration = {
     redirectUri: typeof window !== "undefined" ? window.location.origin : "",
   },
   cache: {
-    cacheLocation: "sessionStorage",
-    storeAuthStateInCookie: false,
+    cacheLocation: "sessionStorage"
   },
 };
 
@@ -108,7 +107,7 @@ export const uploadFileToOneDrive = async (accessToken: string, fileBlob: Blob, 
 export const downloadFileFromOneDrive = async (accessToken: string, fileId: string): Promise<string | null> => {
   const client = getGraphClient(accessToken);
   try {
-    const response = await client.api(`/me/drive/items/${fileId}/content`).responseType('text').get();
+    const response = await client.api(`/me/drive/items/${fileId}/content`).responseType('text' as any).get();
     return response as string;
   } catch (error) {
     console.error("Error downloading from OneDrive:", error);
