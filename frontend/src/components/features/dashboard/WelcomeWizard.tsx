@@ -21,11 +21,11 @@ export function WelcomeWizard({ onComplete, fetchModules, setActiveModuleId, set
 
   const handleLoadDemo = async () => {
     setStep("LOADING");
-    const toastId = toast.loading("Inyectando entorno de demostración...");
+    const toastId = toast.loading("Inyectando Archivos de demostración...");
     try {
       fileManager.loadDemoData();
       await fetchModules();
-      toast.success("Entorno de demostración cargado!", { id: toastId });
+      toast.success("Archivos de demostración cargado!", { id: toastId });
       onComplete();
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : "Error desconocido";
@@ -41,7 +41,7 @@ export function WelcomeWizard({ onComplete, fetchModules, setActiveModuleId, set
     }
 
     setStep("LOADING");
-    const toastId = toast.loading("Creando tu nuevo entorno...");
+    const toastId = toast.loading("Creando tu nuevo Archivos...");
     
     const pdId = `${newPdName}-pd`;
     const cursoId = `${newPdName}-curso-${newCursoName}`;
@@ -64,11 +64,11 @@ export function WelcomeWizard({ onComplete, fetchModules, setActiveModuleId, set
       await fetchModules();
       setActiveModuleId(pdId);
       setActiveCursoId(cursoId);
-      toast.success("¡Entorno creado con éxito!", { id: toastId });
+      toast.success("¡Archivos creado con éxito!", { id: toastId });
       onComplete();
 
     } catch (error: any) {
-      toast.error("Error al crear el entorno.", { id: toastId });
+      toast.error("Error al crear el Archivos.", { id: toastId });
       setStep("CREATE_FORM");
     }
   };
@@ -83,7 +83,7 @@ export function WelcomeWizard({ onComplete, fetchModules, setActiveModuleId, set
               <span className="text-5xl"><span className="inline-flex"><Hand className="w-[1.2em] h-[1.2em] mr-1" /></span></span> ¡Bienvenido a Cuaderno FP!
             </h2>
             <p className="text-lg text-muted">
-              Parece que es tu primera vez aquí. Vamos a preparar tu entorno de trabajo para que puedas empezar a volar.
+              Parece que es tu primera vez aquí. Vamos a preparar tu Archivos para que puedas empezar a volar.
             </p>
           </div>
 
@@ -105,7 +105,7 @@ export function WelcomeWizard({ onComplete, fetchModules, setActiveModuleId, set
                   <h3 className="text-xl font-bold text-foreground">Probar con DEMO</h3>
                 </div>
                 <p className="text-sm text-muted">
-                  Carga un entorno de demostración con datos ficticios para explorar todas las funciones de la aplicación.
+                  Carga un Archivos de demostración con datos ficticios para explorar todas las funciones de la aplicación.
                 </p>
               </button>
 
@@ -115,7 +115,7 @@ export function WelcomeWizard({ onComplete, fetchModules, setActiveModuleId, set
               >
                 <div className="flex items-center gap-3 mb-3">
                   <Rocket className="w-8 h-8 text-info group-hover:scale-110 transition-transform" />
-                  <h3 className="text-xl font-bold text-foreground">Crear mi entorno</h3>
+                  <h3 className="text-xl font-bold text-foreground">Crear mi Archivos</h3>
                 </div>
                 <p className="text-sm text-muted">
                   Empieza desde cero creando tu propia programación y curso vacíos para trabajar con tus datos reales.
@@ -149,7 +149,7 @@ export function WelcomeWizard({ onComplete, fetchModules, setActiveModuleId, set
                   Volver
                 </Button>
                 <Button onClick={handleCreateNew} className="flex-1 bg-info/20 hover:bg-info/30 text-info border border-info/30">
-                  <Rocket className="w-4 h-4 mr-2" /> Crear Entorno
+                  <Rocket className="w-4 h-4 mr-2" /> Crear Archivos
                 </Button>
               </div>
             </div>

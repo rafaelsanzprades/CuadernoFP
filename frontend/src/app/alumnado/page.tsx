@@ -33,13 +33,13 @@ export default function AlumnadoPage() {
     { id: "plano", label: <span className="flex items-center gap-2"><LayoutGrid className="w-4 h-4 shrink-0" /> Plano de clase</span>, cleanLabel: "Plano de clase" },
     { id: "tutoria", label:  <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> Ficha de Tutoría</span>, cleanLabel: "Ficha de Tutoría" },
     { id: "matriz", label:  <span className="flex items-center gap-2"><BarChart className="w-4 h-4 shrink-0" /> Matriz de Tutoría</span>, cleanLabel: "Matriz de Tutoría" },
-    { id: "actuaciones", label:  <span className="flex items-center gap-2"><MessageSquare className="w-4 h-4 shrink-0" /> Reg. Tutorías</span>, cleanLabel: "Registro de Tutorías" },
+    { id: "actuaciones", label:  <span className="flex items-center gap-2"><MessageSquare className="w-4 h-4 shrink-0" /> Registro de Tutorías</span>, cleanLabel: "Registro de Tutorías" },
     { id: "boletines", label:  <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> Boletines</span>, cleanLabel: "Boletines" },
     { id: "feoe", label: <span className="flex items-center gap-2"><Building2 className="w-4 h-4 shrink-0" /> Prácticas FEOE</span>, cleanLabel: "Prácticas FEOE" },
     { id: "perfil", label: <span className="flex items-center gap-2"><Compass className="w-4 h-4 shrink-0" /> Perfil individual</span>, cleanLabel: "Perfil individual" },
     { id: "resumen", label: <span className="flex items-center gap-2"><ClipboardList className="w-4 h-4 shrink-0" /> Resumen</span>, cleanLabel: "Resumen" },
     { id: "tendencias", label: <span className="flex items-center gap-2"><BarChart className="w-4 h-4 shrink-0" /> Tendencias</span>, cleanLabel: "Tendencias" },
-    { id: "itinerario", label: <span className="flex items-center gap-2"><Route className="w-4 h-4 shrink-0" /> Itinerario</span>, cleanLabel: "Itinerario formativo" }
+    { id: "itinerario", label: <span className="flex items-center gap-2"><Route className="w-4 h-4 shrink-0" /> Itinerario formativo</span>, cleanLabel: "Itinerario formativo" }
   ];
 
   const [activeTab, setActiveTab] = useState("alumnado");
@@ -91,10 +91,10 @@ export default function AlumnadoPage() {
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <Users className="w-16 h-16 text-muted-foreground opacity-50" />
                 <h2 className="text-2xl font-bold">No hay curso cargado</h2>
-                <p className="text-muted mb-4">Debes abrir o crear un archivo de curso en tu Entorno de trabajo.</p>
-                <Link href="/entorno">
+                <p className="text-muted mb-4">Debes abrir o crear un archivo de curso en tu Archivos.</p>
+                <Link href="/archivos">
                   <Button variant="default" className="gap-2">
-                    <FolderOpen className="w-4 h-4" /> Ir a mi Entorno
+                    <FolderOpen className="w-4 h-4" /> Ir a mis Archivos
                   </Button>
                 </Link>
               </Card>
@@ -220,7 +220,7 @@ export default function AlumnadoPage() {
                 <table className="w-full text-left text-sm whitespace-nowrap border-collapse">
                   <thead>
                     <tr className="border-b border-[var(--glass-border)] text-muted bg-background">
-                      <th className="p-2 sticky left-0 z-10 border-r border-[var(--glass-border)] bg-background w-16">Id</th>
+                      <th className="p-2 sticky left-0 z-10 border-r border-[var(--glass-border)] bg-background w-16">Nº</th>
                       <th className="p-2 sticky left-[60px] z-10 border-r border-[var(--glass-border)] bg-background w-12 text-center"></th>
                       <th className="p-2 w-32">Estado</th>
                       <th className="p-2 w-48">Apellidos</th>

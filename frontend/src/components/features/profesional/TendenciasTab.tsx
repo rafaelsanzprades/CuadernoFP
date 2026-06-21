@@ -58,7 +58,7 @@ export const TendenciasTab = () => {
   const intenciones = countField(profesionalLedger, "intencion_al_terminar");
   const aptitudes = countField(profesionalLedger, "aptitud_principal");
   const areaInteres = countField(profesionalLedger, "area_interes");
-  const entornos = countField(profesionalLedger, "entorno_laboral_preferido");
+  const Archivoss = countField(profesionalLedger, "Archivos_laboral_preferido");
   const geoPrefs = countField(profesionalLedger, "preferencia_geografica");
   const experiencias = countField(profesionalLedger, "experiencia_previa");
   const motivaciones = countField(profesionalLedger, "motivo_eleccion");
@@ -181,14 +181,14 @@ export const TendenciasTab = () => {
               </Card>
             )}
 
-            {/* Entorno laboral */}
-            {entornos.length > 0 && (
+            {/* Archivos laboral */}
+            {Archivoss.length > 0 && (
               <Card className="p-6 border border-white/5 bg-foreground/5 space-y-4">
                 <h3 className="text-base font-bold text-foreground flex items-center gap-2">
-                  <span className="inline-flex"><Building2 className="w-[1.2em] h-[1.2em] mr-1" /></span> Entorno laboral preferido
+                  <span className="inline-flex"><Building2 className="w-[1.2em] h-[1.2em] mr-1" /></span> Archivos laboral preferido
                 </h3>
                 <div className="space-y-3">
-                  {entornos.map(([label, count]) => (
+                  {Archivoss.map(([label, count]) => (
                     <DistributionBar key={label} label={label} count={count} total={withDataCount} color="bg-success" />
                   ))}
                 </div>

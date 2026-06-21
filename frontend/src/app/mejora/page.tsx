@@ -30,24 +30,24 @@ const dimensiones = {
       {
         title: "2.1 Planificación del Proceso de Enseñanza-Aprendizaje",
         items: [
-          "Dispone de programación de aula en la que se concretan las programaciones didácticas (PPDD) a cada grupo.",
-          "Realiza la programación y la enseñanza de las asignaturas que tiene encomendadas utilizando como referencia el proyecto educativo (PEC) y proyecto curricular del centro (PCC).",
-          "Las programaciones incluyen medidas para la respuesta a la diversidad utilizando como referente el plan de atención a la diversidad del centro.",
-          "Las programaciones incluyen el desarrollo de las competencias clave."
+          "Dispone de Programación de Aula (PA) en la que se concretan las Programaciones Didácticas (PD) a cada grupo.",
+          "Realiza la programación y la enseñanza de los módulos profesionales que tiene encomendados utilizando como referencia el Proyecto Educativo del Centro (PEC) y Proyecto Curricular del Centro (PCC).",
+          "Las programaciones incluyen medidas para la respuesta a la diversidad utilizando como referente el Plan de Atención a la Diversidad del Centro (PADC).",
+          "Las programaciones incluyen el desarrollo de las Competencias Clave."
         ]
       },
       {
         title: "2.2.1 Práctica Docente",
         items: [
-          "Realiza la evaluación inicial del grupo o grupos y asignaturas que se le han encomendado.",
+          "Realiza la evaluación inicial del grupo o grupos y módulos profesionales que se le han encomendado.",
           "Adapta las programaciones según los resultados de la evaluación inicial y características del grupo de alumnado.",
-          "Muestra dominio de las asignaturas que imparte.",
-          "Es claro y comprensible en sus explicaciones y en la presentación de las actividades.",
+          "Muestra dominio de los módulos profesionales que imparte.",
+          "Sus explicaciones y la presentación de las actividades son claras y comprensibles.",
           "Realiza actividades variadas, individuales y en grupo, coherentes con los objetivos planteados.",
           "La secuenciación y temporalización de las actividades observadas es correcta.",
-          "Elabora y aplica, cuando procede, las correspondientes actuaciones de intervención para el alumnado ACNEAE.",
+          "Elabora y aplica, cuando procede, las correspondientes actuaciones de intervención para el alumnado con Necesidades Específicas de Apoyo Educativo (ACNEAE).",
           "Utiliza en sus clases recursos didácticos adecuados.",
-          "Introduce las unidades didácticas que va a trabajar con el alumnado conectando con sus aprendizajes o experiencias previas para conseguir un aprendizaje significativo del alumnado.",
+          "Introduce las Unidades Didácticas (UD) o de Trabajo (UT) que va a trabajar con el alumnado conectando con sus aprendizajes o experiencias previas para conseguir un aprendizaje significativo del alumnado.",
           "Los contenidos están bien estructurados y secuenciados para facilitar el progreso del aprendizaje del alumnado."
         ]
       },
@@ -56,7 +56,7 @@ const dimensiones = {
         items: [
           "Contribuye a que las actividades del centro se desarrollen en un clima de respeto, de tolerancia, de participación y de libertad para fomentar en el alumnado los valores de la ciudadanía democrática.",
           "Favorece la autoestima y autorregulación del alumnado y gestiona las conductas disruptivas.",
-          "Establece normas claras para el trabajo en el aula contando con la participación del alumnado, consecuentemente con el reglamento de régimen interior, y el plan de convivencia del centro."
+          "Establece normas claras para el trabajo en el aula contando con la participación del alumnado, consecuentemente con el Reglamento de Régimen Interior (RRI) y el Plan de Convivencia del Centro."
         ]
       },
       {
@@ -72,15 +72,15 @@ const dimensiones = {
           "La contribución a la autonomía en los aprendizajes.",
           "La inclusión de las TIC.",
           "Trabajo por proyectos.",
-          "La metodología utilizada es adecuada y ajustada a los criterios establecidos en la programación didáctica, asignatura impartida y alumnado del grupo.",
+          "La metodología utilizada es adecuada y ajustada a los criterios establecidos en la Programación Didáctica (PD), módulo profesional impartido y alumnado del grupo.",
           "Considera los diferentes intereses y ritmos de aprendizaje del alumnado."
         ]
       },
       {
         title: "2.3 Evaluación del Proceso de Enseñanza-Aprendizaje",
         items: [
-          "Informa al alumnado de los criterios de evaluación y calificación de forma comprensible para ellos.",
-          "Los criterios de evaluación, estándares de aprendizaje y criterios de calificación son objetivos y claros.",
+          "Informa al alumnado de los criterios de evaluación y calificación de forma clara y comprensible.",
+          "Los criterios de evaluación, Resultados de Aprendizaje (RA) y criterios de calificación son objetivos y claros.",
           "Los procedimientos e instrumentos utilizados son variados y coherentes con los criterios de evaluación de la programación.",
           "Corrige con diligencia los ejercicios, trabajos, cuadernos, etc., facilitando su revisión al alumnado.",
           "Registra las observaciones realizadas en el proceso de evaluación (trabajos, pruebas, dificultades, logros actitudes...).",
@@ -101,13 +101,13 @@ const dimensiones = {
         items: [
           "Asiste con puntualidad y participa activamente realizando propuestas en las reuniones de los órganos de gobierno y de coordinación docente, en las sesiones de evaluación asumiendo las decisiones adoptadas.",
           "Participa activamente en las reuniones del equipo/departamento, comenta la marcha del curso y propone cambios en la programación para adaptarla a las necesidades observadas.",
-          "Asume las tareas fijadas por el equipo docente para la atención al alumnado ACNEAE."
+          "Asume las tareas fijadas por el equipo docente para la atención al alumnado con Necesidades Específicas de Apoyo Educativo (ACNEAE)."
         ]
       },
       {
         title: "3.2 Participación en las Actividades del Centro",
         items: [
-          "Propone, organiza y participa en las actividades complementarias (y en su caso, extraescolares), dentro o fuera del recinto educativo, programadas por el centro e incluidas en la programación general anual.",
+          "Propone, organiza y participa en las actividades complementarias (y en su caso, extraescolares), dentro o fuera del recinto educativo, programadas por el centro e incluidas en la Programación General Anual (PGA).",
           "Planifica y prepara las visitas con el alumnado y les informa sobre los objetivos, tareas de la actividad y recursos didácticos a emplear."
         ]
       },
@@ -115,21 +115,21 @@ const dimensiones = {
         title: "3.3 Orientación y Tutoría",
         items: [
           "Desarrolla la tutoría del alumnado, la dirección y la orientación de su aprendizaje y el apoyo en su proceso educativo, en colaboración con las familias.",
-          "Dispone de plan de orientación y acción tutorial adaptado a su grupo de alumnado (si es tutor o tutora).",
+          "Dispone del Plan de Acción Tutorial (PAT) adaptado a su grupo de alumnado (en caso de ejercer la tutoría).",
           "Atiende de forma individualizada al alumnado no solo respecto del desarrollo intelectual sino también del afectivo, psicomotriz, social y moral.",
           "Realiza un seguimiento del absentismo de su alumnado.",
           "Reacciona de forma adecuada ante situaciones inesperadas o conflictivas.",
           "Realiza con prontitud las gestiones para resolver las incidencias que se producen en relación con el alumnado.",
           "Informa periódicamente a las familias sobre el proceso de aprendizaje de sus hijos e hijas, así como la orientación para su cooperación en el mismo, a través de reuniones grupales y entrevistas individuales.",
           "Muestra una actitud dialogante, facilitando las relaciones entre las familias, el profesorado y el centro escolar.",
-          "Facilita información a las familias sobre los procedimientos e instrumentos de evaluación, los criterios de evaluación, estándares de aprendizaje evaluables, criterios de calificación para superar las asignaturas y criterios de promoción previstos y, en su caso, sobre las medidas de intervención educativa que se precisen."
+          "Facilita información a las familias sobre los procedimientos e instrumentos de evaluación, los criterios de evaluación, Resultados de Aprendizaje (RA), criterios de calificación para superar los módulos profesionales y criterios de promoción previstos y, en su caso, sobre las medidas de intervención educativa que se precisen."
         ]
       },
       {
         title: "3.4 Formación e Innovación",
         items: [
           "Mantiene actualizada su formación y cualificación.",
-          "Participa en el plan de formación del centro."
+          "Participa en el Plan de Formación de Centro (PFC)."
         ]
       }
     ]

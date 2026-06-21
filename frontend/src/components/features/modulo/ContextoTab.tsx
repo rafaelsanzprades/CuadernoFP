@@ -22,7 +22,7 @@ export function ContextoTab() {
         <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
         <div>
           <p className="text-sm font-semibold text-foreground">Contexto — RD 659/2023</p>
-          <p className="text-sm text-muted mt-1">Análisis del entorno, centro educativo y perfil del alumnado.</p>
+          <p className="text-sm text-muted mt-1">Análisis del Archivos, centro educativo y perfil del alumnado.</p>
         </div>
       </div>
 <div className="space-y-6 animate-in fade-in duration-500">
@@ -56,10 +56,10 @@ export function ContextoTab() {
             />
           </div>
           <div>
-            <label className="text-sm text-muted mb-1 block">Entorno socioeconómico</label>
+            <label className="text-sm text-muted mb-1 block">Archivos socioeconómico</label>
             <textarea
-              value={config_contexto.entorno_socioeconomico || ""}
-              onChange={e => handleContextoChange("entorno_socioeconomico", e.target.value)}
+              value={config_contexto.Archivos_socioeconomico || ""}
+              onChange={e => handleContextoChange("Archivos_socioeconomico", e.target.value)}
               className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>

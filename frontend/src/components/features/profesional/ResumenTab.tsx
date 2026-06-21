@@ -357,7 +357,7 @@ export const ResumenTab = () => {
                             <div className="space-y-3">
                               <div className="text-[10px] font-bold text-muted tracking-widest mb-2"><span className="inline-flex"><Compass className="w-[1.2em] h-[1.2em] mr-1" /></span> Aspiraciones</div>
                               {[
-                                ["Preferencia laboral", d.entorno_laboral_preferido],
+                                ["Preferencia laboral", d.Archivos_laboral_preferido],
                                 ["Movilidad geográfica", d.preferencia_geografica],
                                 ["Empresa objetivo", d.empresa_objetivo],
                                 ["Ciclo / grado de interés", d.ciclo_superior_interes],

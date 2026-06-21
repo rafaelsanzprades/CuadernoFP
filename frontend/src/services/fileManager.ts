@@ -197,7 +197,11 @@ export const fileManager = {
     // Convert to version 1 to start fresh
     newCursoData.__version__ = 1;
 
-    const id = `${cursoName.toLowerCase().replace(/\s+/g, '-')}-${year}`;
+    // We want the ID to start with 0237 so Header formats it correctly
+    const id = `0237-demo-${year}`;
+
+    // Update store with new curso
+    store.setDataSource("local");
     store.setActiveCursoId(id);
     store.setCursoData(newCursoData);
     store.setCursoFileSource({ type: 'new', fileName: `${id}.cddc` });

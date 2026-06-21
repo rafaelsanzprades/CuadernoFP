@@ -80,10 +80,10 @@ export default function SeguimientoPage() {
               <div className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <ClipboardCheck className="w-16 h-16 text-muted-foreground opacity-50" />
                 <h2 className="text-2xl font-bold">No hay curso ni programación cargada</h2>
-                <p className="text-muted mb-4">Debes abrir o crear un archivo de programación y curso en tu Entorno de trabajo.</p>
-                <Link href="/entorno">
+                <p className="text-muted mb-4">Debes abrir o crear un archivo de programación y curso en tu Archivos.</p>
+                <Link href="/archivos">
                   <Button variant="default" className="gap-2">
-                    <FolderOpen className="w-4 h-4" /> Ir a mi Entorno
+                    <FolderOpen className="w-4 h-4" /> Ir a mis Archivos
                   </Button>
                 </Link>
               </div>

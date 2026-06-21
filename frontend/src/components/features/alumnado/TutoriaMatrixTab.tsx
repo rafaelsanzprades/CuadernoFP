@@ -104,7 +104,7 @@ export const TutoriaMatrixTab = () => {
     orientacion: [
       { key: 'Erasmus+ y otros viajes', label: 'Erasmus+' },
       { key: 'English week 1º eso', label: 'English W.' },
-      { key: 'Entorno aragón', label: 'Aragón' },
+      { key: 'Archivos aragón', label: 'Aragón' },
       { key: '2º eso eslovaquia/francia', label: 'Eslovaquia/Fr.' },
       { key: '3º eso munich', label: 'Munich' },
       { key: 'Portugal aula abierta-do', label: 'Portugal' },

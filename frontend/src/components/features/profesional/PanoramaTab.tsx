@@ -61,7 +61,7 @@ const COMPARATIVAS: { id: string; titulo: string; emoji: string; comparativa: Co
         ],
         cons: [
           "Mayor esfuerzo físico (tirar cable, rozas, condiciones de obra)",
-          "Entornos a menudo sucios o a la intemperie",
+          "Archivoss a menudo sucios o a la intemperie",
           "Presión por fechas de entrega de la obra",
         ],
       },
@@ -71,7 +71,7 @@ const COMPARATIVAS: { id: string; titulo: string; emoji: string; comparativa: Co
         description: "Correctivo y preventivo. Diagnóstico de averías.",
         pros: [
           "Trabajo más intelectual (diagnóstico, polímetro, esquemas)",
-          "Se trabaja en entornos ya terminados y limpios",
+          "Se trabaja en Archivoss ya terminados y limpios",
           "Suele estar mejor pagado por la especialización",
           "Valora la veteranía: a más experiencia, más sueldo",
         ],
@@ -95,7 +95,7 @@ const COMPARATIVAS: { id: string; titulo: string; emoji: string; comparativa: Co
         description: "Cada día es una aventura. Tú y tu furgoneta.",
         pros: [
           "Cada día es distinto; no hay monotonía",
-          "Conoces a mucha gente y entornos muy diversos",
+          "Conoces a mucha gente y Archivoss muy diversos",
           "Mucha autonomía en tu jornada laboral",
           "El cliente suele valorar y agradecer tu trabajo",
         ],
@@ -108,9 +108,9 @@ const COMPARATIVAS: { id: string; titulo: string; emoji: string; comparativa: Co
       optionB: {
         label: "Sede / Taller",
         emoji: "",
-        description: "Entorno controlado. Cuadristas o reparación.",
+        description: "Archivos controlado. Cuadristas o reparación.",
         pros: [
-          "Entorno controlado y ordenado",
+          "Archivos controlado y ordenado",
           "Todas las herramientas a mano",
           "Compañeros cerca para consultar dudas",
           "Sin desplazamientos; llegas y te pones a trabajar",

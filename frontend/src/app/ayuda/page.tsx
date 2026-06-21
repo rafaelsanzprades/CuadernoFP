@@ -116,9 +116,9 @@ function AccordionItem({ question, answer }: { question: string, answer: React.R
 
 const STEPS = [
   {
-    title: "Paso 1: Configurar el Entorno",
-    desc: "Ve a la pantalla 'Entorno' y crea una nueva Programación Didáctica. Luego, crea un Curso y vincúlalo a esa programación para poder empezar a trabajar.",
-    links: [{ href: "/entorno", label: "Entorno" }]
+    title: "Paso 1: Configurar el Archivos",
+    desc: "Ve a la pantalla 'Archivos' y crea una nueva Programación Didáctica. Luego, crea un Curso y vincúlalo a esa programación para poder empezar a trabajar.",
+    links: [{ href: "/archivos", label: "Archivos" }]
   },
   {
     title: "Paso 2: Detalles del Módulo",
@@ -128,12 +128,12 @@ const STEPS = [
   {
     title: "Paso 3: Unidades y Resultados (Matrices)",
     desc: "En la sección 'Matrices', define tus Unidades Didácticas (UD) y Resultados de Aprendizaje (RA). No olvides configurar los porcentajes de cada RA para que sumen 100%.",
-    links: [{ href: "/matrices", label: "Matrices OG→RA→CE→UD" }]
+    links: [{ href: "/matrices", label: "Matrices OG→RA→CE→UD/T" }]
   },
   {
     title: "Paso 4: Criterios de Evaluación",
     desc: "También en 'Matrices', vincula cada Criterio de Evaluación (CE) a sus respectivos RA y UD.",
-    links: [{ href: "/matrices", label: "Matrices OG→RA→CE→UD" }]
+    links: [{ href: "/matrices", label: "Matrices OG→RA→CE→UD/T" }]
   },
   {
     title: "Paso 5: Instrumentos y Ponderaciones",
@@ -161,7 +161,7 @@ const FAQS = [
     items: [
       { q: "¿Qué es la arquitectura Híbrida (Local-First + Cloud)?", a: "Utilizamos una arquitectura moderna. Tus datos de trabajo (alumnos, notas) se procesan localmente en tu navegador garantizando privacidad, mientras que las operaciones pesadas (generación de informes PDF, Inteligencia Artificial y bases de datos centralizadas) se apoyan en un servidor seguro (Backend en Cloud Run)." },
       { q: "¿Dónde se guardan mis datos?", a: "Los datos de tu Programación y progreso se procesan en tu navegador (IndexedDB) para darte fluidez, pero se respaldan y conectan de forma segura con el servidor central para tareas como la exportación documental. Sigues teniendo control total sobre la exportación (BYOC)." },
-      { q: "¿Cómo hago una copia de seguridad (backup)?", a: "Puedes exportar todos tus datos desde la sección 'Entorno' o utilizar la API central para copias de seguridad en servidor." },
+      { q: "¿Cómo hago una copia de seguridad (backup)?", a: "Puedes exportar todos tus datos desde la sección 'Archivos' o utilizar la API central para copias de seguridad en servidor." },
       { q: "¿Qué pasa si borro los datos o caché de mi navegador?", a: "Si usas múltiples dispositivos, la arquitectura centralizada permite a Firebase Hosting y al servidor backend almacenar configuraciones, pero siempre te recomendamos exportar tu trabajo a un archivo .json periódicamente para evitar pérdidas de trabajo no sincronizado." },
       { q: "¿Puedo trabajar desde varios ordenadores?", a: "Sí. Para transferir el estado exacto del entorno entre navegadores que no comparten la sesión, puedes 'Exportar' tu progreso en el ordenador A y darle a 'Importar' en el ordenador B." }
     ]
@@ -193,7 +193,7 @@ const FAQS = [
     ]
   },
   {
-    group: "FCT, Dual y Entorno Profesional",
+    group: "FCT, Dual y Archivos Profesional",
     items: [
       { q: "¿Qué es la sección FEOE?", a: "FEOE (Formación en Empresa u Organismo Equiparado) te permite gestionar la relación con empresas, convenios, tutores laborales y la asignación de alumnos para sus prácticas o FP Dual." },
       { q: "¿Para qué sirve el módulo de Orientación Profesional?", a: "Te ayuda a hacer un seguimiento del perfil laboral de cada alumno, registrar sus preferencias, ayudarles en la elaboración del CV y registrar oportunidades laborales o contacto con empresas." }
@@ -202,7 +202,7 @@ const FAQS = [
   {
     group: "Solución de Problemas y Aspectos Técnicos",
     items: [
-      { q: "¿Qué pasa si las gráficas de la pantalla 'Hoy' no cargan?", a: "Comprueba en 'Entorno' que tienes seleccionada una Programación activa y un Curso activo. Las gráficas necesitan saber a qué módulo y a qué alumnos apuntan para poder dibujar la información." },
+      { q: "¿Qué pasa si las gráficas de la pantalla 'Hoy' no cargan?", a: "Comprueba en 'Archivos' que tienes seleccionada una Programación activa y un Curso activo. Las gráficas necesitan saber a qué módulo y a qué alumnos apuntan para poder dibujar la información." },
       { q: "¿Se puede usar Cuaderno FP en móviles o tablets?", a: "Sí, el diseño es 100% responsivo. Sin embargo, para tareas densas como rellenar las grandes tablas de Matrices o planificar la Programación, te recomendamos usar pantallas de ordenador." },
       { q: "La app va muy lenta o he detectado un error extraño", a: "Intenta recargar la página completamente (F5 o Ctrl+R). Si el error sigue apareciendo, exporta tus datos (.json) para ponerlos a salvo y ponte en contacto con el soporte o abre un 'Issue' en GitHub detallando tu problema." }
     ]
@@ -282,7 +282,7 @@ export default function AyudaPage() {
       icon: <Layers className="w-5 h-5" />,
       title: "Unidades didácticas (UD)",
       href: "/matrices",
-      hrefLabel: "Matrices OG→RA→CE→UD",
+      hrefLabel: "Matrices OG→RA→CE→UD/T",
       status: udCount === 0 ? "empty" : horasDiff > 2 ? "warning" : "ok",
       lines: udCount === 0
         ? ["No hay UD definidas"]
@@ -299,7 +299,7 @@ export default function AyudaPage() {
       icon: <GraduationCap className="w-5 h-5" />,
       title: "Resultados de aprendizaje (RA)",
       href: "/matrices",
-      hrefLabel: "Matrices OG→RA→CE→UD",
+      hrefLabel: "Matrices OG→RA→CE→UD/T",
       status: raCount === 0 ? "empty" : Math.abs(raPesoSum - 100) > 1 ? "warning" : "ok",
       lines: raCount === 0
         ? ["No hay RA definidos"]
@@ -315,7 +315,7 @@ export default function AyudaPage() {
       icon: <ClipboardList className="w-5 h-5" />,
       title: "Criterios de evaluación (CE)",
       href: "/matrices",
-      hrefLabel: "Matrices OG→RA→CE→UD",
+      hrefLabel: "Matrices OG→RA→CE→UD/T",
       status: ceCount === 0 ? "empty" : (ceHuerfanos > 0 || ceSinUD > 0) ? "warning" : "ok",
       lines: ceCount === 0
         ? ["No hay CE definidos"]

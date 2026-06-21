@@ -81,8 +81,8 @@ function CiclosContent() {
   const TAB_LABELS: Record<Tab, string> = {
     familias: 'Familias profesionales',
     titulo: 'Título',
-    cursos: 'Módulos',
-    modulos: 'RA→CE',
+    cursos: 'Cursos → Módulos',
+    modulos: 'Módulo → RA → CE',
   };
 
   const activeTabCleanLabel = TAB_LABELS[activeTab];
@@ -97,10 +97,8 @@ function CiclosContent() {
           <MotionWrapper className="w-full space-y-6 pb-12">
 
             <div>
-              <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                Catálogo
-              </h1>
-              <p className="text-muted mt-2 text-lg">Catálogo oficial de familias, títulos y módulos.</p>
+              <h1 className="text-2xl font-bold tracking-tight text-foreground">Catálogo</h1>
+              <p className="text-muted mt-2 text-lg">Catálogo oficial de familias profesionales, títulos, cursos → módulos. Módulo → RA → CE.</p>
             </div>
 
             <Tabs value={activeTab} onValueChange={(val: any) => handleTabChange(val as Tab)}>
@@ -109,8 +107,8 @@ function CiclosContent() {
                   [
                     { id: "familias" as Tab, label: <span className="flex items-center gap-2"><FolderTree className="w-4 h-4" /> Familias profesionales</span> },
                     { id: "titulo" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Título</span> },
-                    { id: "cursos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> Módulos</span> },
-                    { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> RA→CE</span> },
+                    { id: "cursos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> Cursos → Módulos</span> },
+                    { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> Módulo → RA → CE</span> },
                   ]
                 ).map((t) => (
                   <TabsTrigger key={t.id} value={t.id}>
@@ -537,7 +535,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
       const ok = await fileManager.createNewProgramacion(code, name, extras);
       if (ok) {
         toast.success(`Programación de ${name} creada correctamente.`);
-        router.push("/entorno");
+        router.push("/archivos");
       } else {
         toast.error("Error al crear la programación.");
       }
@@ -603,6 +601,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
                         const extras = {
                           familia: selectedFamilia,
                           ciclo: tituloNombre,
+                          titulo_codigo: curriculoCodigo,
                           curso: mod.curso,
                           h_boa: mod.horas,
                           h_sem: h_sem,
@@ -729,10 +728,11 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
   );
 }
 
-// ─── TAB 3: Módulos RA->CE ────────────────────────────────────────────────────
+// ─── TAB 3: Módulos Módulo → RA → CE ────────────────────────────────────────────────────
 
 function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelection: { familia: string; tituloCodigo: string; moduloCodigo: string }; updateGlobalSelection: (updates: Partial<{ familia: string; tituloCodigo: string; moduloCodigo: string }>) => void }) {
-  const [families, setFamilies] = useState<Family[]>([]);
+  const router = useRouter();
+  const [families, setFamilies] = useState<any[]>([]);
   const [famLoading, setFamLoading] = useState(true);
   const [expandedRAs, setExpandedRAs] = useState<Set<string>>(new Set());
 
@@ -751,6 +751,20 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
   const selectedTitulo = globalSelection.tituloCodigo;
   const curriculoCodigo = selectedTitulo;
   const selectedModuloCodigo = globalSelection.moduloCodigo;
+
+  const handleCreateNewProgramacion = async (code: string, name: string, extras: Record<string, any>) => {
+    try {
+      const ok = await fileManager.createNewProgramacion(code, name, extras);
+      if (ok) {
+        toast.success(`Programación de ${name} creada correctamente.`);
+        router.push("/archivos");
+      } else {
+        toast.error("Error al crear la programación.");
+      }
+    } catch (err) {
+      toast.error("Error al crear la programación.");
+    }
+  };
 
   const [titulo, setTitulo] = useState<any>(null);
   const [tituloLoading, setTituloLoading] = useState(false);
@@ -999,12 +1013,29 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
           <div className="flex justify-center pt-2">
             <Button
               variant="primary"
-              size="lg"
-              onClick={() => console.log("Cargar módulo en programación:", modulo.codigo, modulo.nombre)}
-              className="flex items-center gap-2"
+              size="sm"
+              onClick={() => {
+                const is2nd = modulo.curso === "2º";
+                const h_feoe = is2nd ? 360 : 140;
+                const h_sem = modulo.horas ? Math.round(modulo.horas / 30) : 0;
+                const tituloNombre = selectedFamilyObj?.degrees.find(d => (d.code ?? d.name) === curriculoCodigo)?.name || curriculoCodigo;
+                
+                const extras = {
+                  familia: selectedFamilia,
+                  ciclo: tituloNombre,
+                  titulo_codigo: curriculoCodigo,
+                  curso: modulo.curso || "1º",
+                  h_boa: modulo.horas || 0,
+                  h_sem: h_sem,
+                  p_ev: 15,
+                  h_feoe: h_feoe
+                };
+                handleCreateNewProgramacion(modulo.codigo, modulo.nombre, extras);
+              }}
+              className="flex items-center"
             >
-              Cargar en mi programación
-              <span className="flex items-center gap-1 bg-warning/20 text-warning px-2 py-0.5 rounded text-[10px] font-bold uppercase border border-warning/30"><AlertTriangle className="w-3 h-3" /> En obra</span>
+              <BookOpen className="w-4 h-4 mr-2" />
+              Nueva Programación
             </Button>
           </div>
         </>

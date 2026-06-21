@@ -50,8 +50,8 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
     currentItem = "Inicio";
   } else if (pathname === '/agenda') {
     currentItem = "Agenda de clase";
-  } else if (pathname === '/entorno') {
-    currentItem = "Entorno";
+  } else if (pathname === '/archivos') {
+    currentItem = "Archivos";
   } else {
     for (const group of navGroups) {
       const found = group.items.find(item => item.href === pathname);
@@ -167,32 +167,94 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [undo, redo, pastStates.length, futureStates.length, handleSave]);
 
-  let friendlyModuleName = "Crea o abre una programación";
+  let friendlyModuleName = "Crea o abre una Programación";
   if (activeModuleId) {
     const code = activeModuleId.split('-')[0];
-    let foundName = "";
-    for (const g of initialGroups) {
-      const m = g.modules.find(mod => mod.code === code);
-      if (m) { foundName = m.name; break; }
+    if (moduleData && moduleData.info_modulo) {
+      const { codigo, nombre, titulo_codigo, ciclo } = moduleData.info_modulo;
+      const actualCode = codigo || code;
+      
+      let degreeCode = actualCode;
+      if (titulo_codigo) {
+        degreeCode = titulo_codigo;
+      } else if (ciclo) {
+        const lowerCiclo = ciclo.toLowerCase();
+        const firstWord = ciclo.split(' ')[0];
+        if (/^[A-Z]{2,4}\d{2,3}$/i.test(firstWord) || /^[A-Z]+-\d+$/i.test(firstWord)) {
+          degreeCode = firstWord;
+        } else if (lowerCiclo.includes("superior")) {
+          degreeCode = "GS";
+        } else if (lowerCiclo.includes("básico") || lowerCiclo.includes("basico") || lowerCiclo.includes("profesional")) {
+          degreeCode = "GB";
+        } else if (lowerCiclo.includes("técnico") || lowerCiclo.includes("tecnico")) {
+          degreeCode = "GM";
+        } else {
+          degreeCode = firstWord;
+        }
+      }
+      
+      friendlyModuleName = `P - ${degreeCode} - ${actualCode} - ${nombre || 'Programación'}`;
+    } else {
+      let foundGroup: any = null;
+      let foundModule: any = null;
+      for (const g of initialGroups) {
+        const m = g.modules.find(mod => mod.code === code);
+        if (m) { foundGroup = g; foundModule = m; break; }
+      }
+      if (foundGroup && foundModule) {
+        const degreeCode = foundGroup.degreeName.split(' ')[0];
+        friendlyModuleName = `P - ${degreeCode} - ${code} - ${foundModule.name}`;
+      } else {
+        const namePart = activeModuleId.replace('-pd', '').toUpperCase();
+        friendlyModuleName = `P - ${namePart}`;
+      }
     }
-    friendlyModuleName = foundName ? `${code} - ${foundName}` : activeModuleId;
   }
 
-  let friendlyCursoName = "Crea o abre un curso";
+  let friendlyCursoName = "Crea o abre un Curso";
   if (activeCursoId) {
     const parts = activeCursoId.split('-');
     const code = parts[0];
-    const year = parts[parts.length - 1];
-    let foundName = "";
+    const rawYear = parts[parts.length - 1];
+    
+    // Normalize year
+    let year = rawYear;
+    if (year === '26' || year === '202526') year = '2025-26';
+
+    let foundGroup: any = null;
     for (const g of initialGroups) {
-      if (g.modules.some(m => m.code === code)) { foundName = g.name; break; }
+      if (g.modules.some(m => m.code === code)) { foundGroup = g; break; }
     }
-    friendlyCursoName = foundName ? `${foundName} (${year})` : activeCursoId;
+
+    if (foundGroup) {
+      const yearPrefix = foundGroup.name.charAt(0);
+      const levelAbr = foundGroup.level === 'Grado Medio' ? 'GM' : foundGroup.level === 'Grado Superior' ? 'GS' : 'GB';
+      const degreeCode = foundGroup.degreeName.split(' ')[0].replace(/([A-Z]+)(\d+)/, '$1-$2');
+      friendlyCursoName = `C - ${year} - ${yearPrefix}-${levelAbr} - ${degreeCode}`;
+    } else {
+      let nameParts = parts.slice(0, -1);
+      // If the second to last part is '2025' or '2026', remove it from name
+      if (nameParts.length > 0 && (nameParts[nameParts.length - 1] === '2025' || nameParts[nameParts.length - 1] === '2026')) {
+        nameParts = nameParts.slice(0, -1);
+      }
+      const namePart = nameParts.join(' ').toUpperCase();
+      friendlyCursoName = `C - ${year} - ${namePart}`;
+    }
   }
 
   return (
     <div className="w-full flex flex-col z-40 sticky top-0 bg-background/95 backdrop-blur-xl border-b border-[var(--glass-border)] pb-2 shadow-md">
-      {/* Menú superior */}
+      {/* Fila 1: Información del Módulo y Curso */}
+      <div className="w-full px-6 py-2 bg-foreground/[0.015] border-b border-[var(--glass-border)] flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-3">
+        <span className={`text-[0.95rem] leading-tight tracking-wide truncate flex-1 transition-colors font-extrabold ${dataSource === 'demo' ? 'text-warning' : 'text-success'}`} title={friendlyModuleName}>
+          Programación: {friendlyModuleName}
+        </span>
+        <span className={`text-[0.95rem] leading-tight tracking-wide truncate flex-1 text-right transition-colors font-extrabold ${dataSource === 'demo' ? 'text-warning' : 'text-success'}`} title={friendlyCursoName}>
+          Curso: {friendlyCursoName}
+        </span>
+      </div>
+
+      {/* Fila 2: Menú superior */}
       <nav className="w-full px-6 py-2 flex items-center justify-between">
         {/* Left Side: Mobile Hamburger + Datos Reales/Ficticios + Module Info */}
         <div className="flex justify-start items-center gap-4 min-w-0">
@@ -326,16 +388,6 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
           )}
         </div>
       </nav>
-
-      {/* Fila 2: Información del Módulo y Curso */}
-      <div className="w-full px-6 py-2 bg-foreground/[0.015] border-t border-[var(--glass-border)] flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-3">
-        <span className={`text-[0.95rem] leading-tight tracking-wide truncate flex-1 transition-colors ${!activeModuleId ? `font-medium ${dataSource === 'demo' ? 'text-warning/70' : 'text-success/70'}` : `font-extrabold ${dataSource === 'demo' ? 'text-warning' : 'text-success'}`}`} title={friendlyModuleName}>
-          {activeModuleId ? `Programación: ${friendlyModuleName}` : friendlyModuleName}
-        </span>
-        <span className={`text-[0.95rem] leading-tight tracking-wide truncate flex-1 text-right transition-colors ${!activeCursoId ? `font-medium ${dataSource === 'demo' ? 'text-warning/70' : 'text-success/70'}` : `font-extrabold ${dataSource === 'demo' ? 'text-warning' : 'text-success'}`}`} title={friendlyCursoName}>
-          {activeCursoId ? `Curso: ${friendlyCursoName}` : friendlyCursoName}
-        </span>
-      </div>
 
       {/* Fila 3: Breadcrumb y Buscar */}
       {currentItem && (

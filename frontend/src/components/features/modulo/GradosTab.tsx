@@ -1,5 +1,5 @@
 "use client";
-import { Award, Info } from "lucide-react";
+import { Award, Info, Layers } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { useAppStore } from "@/store/useAppStore";
 
@@ -75,34 +75,6 @@ export function GradosTab() {
         </div>
       </div>
 
-      {/* Tarjetas de grados */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {GRADOS.map((g) => (
-          <button
-            key={g.grado}
-            onClick={() => handleSelect(g.grado)}
-            className={`relative text-left p-5 rounded-xl border-2 transition-all duration-200 hover:shadow-md ${
-              gradoActual === g.grado
-                ? "border-accent shadow-lg ring-2 ring-accent/20"
-                : "border-[var(--glass-border)] hover:border-accent/50"
-            } ${g.color}`}
-          >
-            {gradoActual === g.grado && (
-              <span className="absolute top-3 right-3 w-3 h-3 rounded-full bg-accent animate-pulse" />
-            )}
-            <div className="flex items-center gap-3 mb-3">
-              <span className="text-2xl">{g.icon}</span>
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider opacity-70">Grado {g.grado}</span>
-                <h3 className="text-sm font-bold text-foreground leading-tight">{g.nombre}</h3>
-              </div>
-            </div>
-            <p className="text-xs text-muted leading-relaxed">{g.descripcion}</p>
-            <p className="text-[10px] text-muted/60 mt-2 font-mono">{g.normativa}</p>
-          </button>
-        ))}
-      </div>
-
       {/* Info del grado seleccionado */}
       <Card className="p-4">
         <div className="flex items-center gap-3">
@@ -116,6 +88,39 @@ export function GradosTab() {
               {gradoActual === "D" && " — Tu módulo actual pertenece a este grado."}
             </p>
           </div>
+        </div>
+      </Card>
+
+      {/* Tarjetas de grados */}
+      <Card className="p-6">
+        <h2 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
+          <Layers className="w-6 h-6 text-accent" /> Grados del A al E
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          {GRADOS.map((g) => (
+            <button
+              key={g.grado}
+              onClick={() => handleSelect(g.grado)}
+              className={`relative text-left p-5 rounded-xl border-2 transition-all duration-200 hover:shadow-md ${
+                gradoActual === g.grado
+                  ? "border-accent shadow-lg ring-2 ring-accent/20"
+                  : "border-[var(--glass-border)] hover:border-accent/50"
+              } ${g.color}`}
+            >
+              {gradoActual === g.grado && (
+                <span className="absolute top-3 right-3 w-3 h-3 rounded-full bg-accent animate-pulse" />
+              )}
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-2xl">{g.icon}</span>
+                <div>
+                  <span className="text-sm font-bold uppercase tracking-wider opacity-70">Grado {g.grado}</span>
+                  <h3 className="text-base font-bold text-foreground leading-tight">{g.nombre}</h3>
+                </div>
+              </div>
+              <p className="text-sm text-muted leading-relaxed">{g.descripcion}</p>
+              <p className="text-sm font-semibold text-muted/80 mt-3 font-mono">{g.normativa}</p>
+            </button>
+          ))}
         </div>
       </Card>
     </div>

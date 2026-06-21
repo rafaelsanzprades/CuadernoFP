@@ -57,8 +57,8 @@ export function AsistenciaTab() {
             </>
           }
           action={
-            <Link href="/entorno" className="glass-button bg-accent/10 text-accent hover:bg-accent/20 px-6 py-3 rounded-lg font-bold flex items-center gap-2">
-              Ir al Entorno de Trabajo <Settings className="w-5 h-5" />
+            <Link href="/archivos" className="glass-button bg-accent/10 text-accent hover:bg-accent/20 px-6 py-3 rounded-lg font-bold flex items-center gap-2">
+              Ir al Archivos <Settings className="w-5 h-5" />
             </Link>
           }
         />

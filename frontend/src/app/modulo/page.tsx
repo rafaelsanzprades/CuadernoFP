@@ -47,14 +47,14 @@ export default function ModuloConfigPage() {
   }, [activeModuleId, setModuleData]);
 
   const TABS = [
-    { id: "datos", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Datos</>, cleanLabel: "Datos del módulo" },
+    { id: "datos", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Datos del módulo</>, cleanLabel: "Datos del módulo" },
     { id: "contexto", label: <><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Contexto</>, cleanLabel: "Contexto" },
     { id: "planes", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Planes</>, cleanLabel: "Planes" },
     { id: "contexto_feoe", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> Contexto y FEOE</>, cleanLabel: "Contexto y FEOE" },
     { id: "metodologia", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Metodología</>, cleanLabel: "Metodología" },
     { id: "evaluacion", label: <><span className="inline-flex"><CheckCircle2 className="w-[1.2em] h-[1.2em] mr-1" /></span> Eval. y Recursos</>, cleanLabel: "Eval. y Recursos" },
     { id: "otros", label: <><span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1" /></span> Otros Elementos</>, cleanLabel: "Otros Elementos" },
-    { id: "grados", label: <><span className="inline-flex"><Award className="w-[1.2em] h-[1.2em] mr-1" /></span> Grados</>, cleanLabel: "Grados formativos" }
+    { id: "grados", label: <><span className="inline-flex"><Award className="w-[1.2em] h-[1.2em] mr-1" /></span> Grados formativos</>, cleanLabel: "Grados formativos" }
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -70,10 +70,10 @@ export default function ModuloConfigPage() {
               <div className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <Settings className="w-16 h-16 text-muted-foreground opacity-50" />
                 <h2 className="text-2xl font-bold">No hay programación cargada</h2>
-                <p className="text-muted mb-4">Debes abrir o crear un archivo de programación en tu Entorno de trabajo.</p>
-                <Link href="/entorno">
+                <p className="text-muted mb-4">Debes abrir o crear un archivo de programación en tu Archivos.</p>
+                <Link href="/archivos">
                   <Button variant="default" className="gap-2">
-                    <FolderOpen className="w-4 h-4" /> Ir a mi Entorno
+                    <FolderOpen className="w-4 h-4" /> Ir a mis Archivos
                   </Button>
                 </Link>
               </div>

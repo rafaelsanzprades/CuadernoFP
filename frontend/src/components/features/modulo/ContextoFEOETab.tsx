@@ -41,7 +41,7 @@ export function ContextoFEOETab() {
             <textarea
               value={config_contexto["A2_contextualizacion"] || ""}
               onChange={e => handleChange("A2_contextualizacion", e.target.value)}
-              placeholder="Perfil profesional del título, entorno socioeconómico y características generales del centro..."
+              placeholder="Perfil profesional del título, Archivos socioeconómico y características generales del centro..."
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>

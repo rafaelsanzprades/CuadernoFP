@@ -37,8 +37,8 @@ export default function MatricesPage() {
 
   const TABS = [
     { id: "ra", label: "RA y sus CE", icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "ud", label: "UD Unidades didácticas", icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "relacion", label: "Relación entre RA y UD", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "ud", label: "UD/T Unidades didácticas o de trabajo", icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "relacion", label: "Relación entre RA y UD/T", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "contribucion", label: "Contribución de RA en OG", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> }
   ];
 
@@ -75,10 +75,10 @@ export default function MatricesPage() {
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <Calculator className="w-16 h-16 text-muted-foreground opacity-50" />
                 <h2 className="text-2xl font-bold">No hay programación cargada</h2>
-                <p className="text-muted mb-4">Debes abrir o crear un archivo de programación en tu Entorno de trabajo.</p>
-                <Link href="/entorno">
+                <p className="text-muted mb-4">Debes abrir o crear un archivo de programación en tu Archivos.</p>
+                <Link href="/archivos">
                   <Button variant="default" className="gap-2">
-                    <FolderOpen className="w-4 h-4" /> Ir a mi Entorno
+                    <FolderOpen className="w-4 h-4" /> Ir a mis Archivos
                   </Button>
                 </Link>
               </Card>
@@ -107,9 +107,9 @@ export default function MatricesPage() {
           <MotionWrapper className="space-y-8 pb-12">
             <div>
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <span className="inline-flex"><Calculator className="w-[1.2em] h-[1.2em] mr-1" /></span> Matrices OG- RA- CE- UD
+                <span className="inline-flex"><Calculator className="w-[1.2em] h-[1.2em] mr-1" /></span> Matrices OG- RA- CE- UD/T
               </h1>
-              <p className="text-muted mt-2 text-lg">Relación y ponderación: OG, RA, CE y UD.</p>
+              <p className="text-muted mt-2 text-lg">Relación y ponderación: OG, RA, CE y UD/T.</p>
             </div>
 
             <Tabs value={activeTab} onValueChange={setActiveTab}>
@@ -141,7 +141,7 @@ export default function MatricesPage() {
                     <table className="w-full text-left text-sm">
                       <thead>
                         <tr className="text-muted border-b border-[var(--glass-border)]">
-                          <th className="pb-2 w-24">Ra</th>
+                          <th className="pb-2 w-24">RA</th>
                           <th className="pb-2 w-24">% RA</th>
                           <th className="pb-2 w-16 text-center">Feoe</th>
                           <th className="pb-2">Resultados de aprendizaje</th>
@@ -296,7 +296,7 @@ export default function MatricesPage() {
                                   <table className="w-full text-left text-sm">
                                     <thead>
                                       <tr className="text-muted border-b border-[var(--glass-border)]">
-                                        <th className="pb-2 w-24">Ce</th>
+                                        <th className="pb-2 w-24">CE</th>
                                         <th className="pb-2 w-24">% CE</th>
                                         <th className="pb-2">Criterio de Evaluación</th>
                                         <th className="pb-2 w-10"></th>
@@ -440,21 +440,21 @@ export default function MatricesPage() {
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
                   <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-sm font-semibold text-foreground">Unidades Didácticas — RD 659/2023</p>
+                    <p className="text-sm font-semibold text-foreground">Unidades Didácticas (UD) o de Trabajo (UT) — RD 659/2023</p>
                     <p className="text-sm text-muted mt-1">Organización del currículo en unidades de aprendizaje significativas.</p>
                   </div>
                 </div>
                 <Card className="p-6 border-t-4 border-t-purple-500">
                   <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-4">
-                    <span><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></span> UD. Unidades didácticas
+                    <span><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></span> UD/T. Unidades didácticas o de trabajo
                   </h2>
                   <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                       <thead>
                         <tr className="border-b border-[var(--glass-border)] text-sm text-muted">
-                          <th className="p-3 sticky left-0 bg-background z-10">Id-UD</th>
+                          <th className="p-3 sticky left-0 bg-background z-10">UD/T</th>
                           <th className="p-3 sticky left-[80px] bg-background z-10">Horas</th>
-                          <th className="p-3 sticky left-[160px] bg-background z-10 w-64">Unidad Didáctica</th>
+                          <th className="p-3 sticky left-[160px] bg-background z-10 w-64">Unidad Didáctica o de Trabajo</th>
                           {df_ra.map((ra: any, i: number) => (
                             <th key={i} className="p-3 text-center min-w-[80px]">
                               <div className="text-xs">{ra.id_ra}</div>
@@ -625,7 +625,7 @@ export default function MatricesPage() {
                 </div>
                 <Card className="p-6 border-t-4 border-t-amber-500">
                   <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-4">
-                    <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Relación entre Resultados de aprendizaje y Unidades didácticas
+                    <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Relación entre Resultados de aprendizaje y Unidades didácticas o de trabajo
                   </h2>
                   {df_ra && df_ra.length > 0 ? (
                     <div className="space-y-6">

@@ -15,8 +15,8 @@ export function TourGuide() {
     const tourCompleted = localStorage.getItem("cdd_tour_completed");
     if (tourCompleted === "true") return;
 
-    // Only start the tour on the main dashboard or entorno page
-    if (pathname === "/" || pathname === "/entorno") {
+    // Only start the tour on the main dashboard or Archivos page
+    if (pathname === "/" || pathname === "/archivos") {
       hasRunRef.current = true;
       
       const tourDriver = driver({
@@ -57,10 +57,10 @@ export function TourGuide() {
             }
           },
           {
-            element: "[href='/entorno']", // Entorno tab
+            element: "[href='/archivos']", // Archivos tab
             popover: {
-              title: "Pestaña de Entorno",
-              description: "Para empezar, ve a Entorno y selecciona 'Datos DEMO' para explorar sin miedo.",
+              title: "Pestaña de Archivos",
+              description: "Para empezar, ve a Archivos y selecciona 'Datos DEMO' para explorar sin miedo.",
               side: "right",
               align: "center"
             }

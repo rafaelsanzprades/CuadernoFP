@@ -217,7 +217,7 @@ export const OrientacionTab = () => {
                       { value: "Salida laboral", label: "Salida laboral clara" },
                       { value: "Reorientación", label: "Reorientación profesional" },
                       { value: "Por descarte", label: "Por descarte (no otra opción)" },
-                      { value: "Familia", label: "Influencia familiar o entorno" },
+                      { value: "Familia", label: "Influencia familiar o Archivos" },
                       { value: "Coste económico", label: "Coste económico vs universidad" },
                     ])}
                     {renderSelect("via_acceso", "Vía de acceso al ciclo", [
@@ -294,7 +294,7 @@ export const OrientacionTab = () => {
                         { value: "Industria / producción", label: "Industria / producción" },
                         { value: "Otro", label: "Otro / no definido aún" },
                       ])}
-                      {renderSelect("entorno_laboral_preferido", "Entorno laboral preferido", [
+                      {renderSelect("Archivos_laboral_preferido", "Archivos laboral preferido", [
                         { value: "Empresa grande", label: "Empresa grande / corporación" },
                         { value: "PYME", label: "PYME / empresa mediana" },
                         { value: "Startup", label: "Startup / empresa emergente" },

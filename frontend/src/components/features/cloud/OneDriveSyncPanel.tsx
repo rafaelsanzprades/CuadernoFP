@@ -29,7 +29,7 @@ export function OneDriveSyncPanel() {
       return;
     }
     
-    // Inyectar client ID en entorno por si se necesita (aunque Msal usa process.env.NEXT_PUBLIC... 
+    // Inyectar client ID en Archivos por si se necesita (aunque Msal usa process.env.NEXT_PUBLIC... 
     // idealmente se debería inicializar con la var provista aquí si queremos dinamicidad).
     // Para simplificar, asumiremos que si llegan aquí lo tienen configurado en su .env o modificaremos 
     // msalConfig dinámicamente si es necesario.

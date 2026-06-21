@@ -132,7 +132,7 @@ export default function AgendaPage() {
                 ) : (
                   <EmptyState
                     title="No hay datos de resumen"
-                    description="Selecciona o crea una Programación y Curso en Entorno para ver las analíticas."
+                    description="Selecciona o crea una Programación y Curso en Archivos para ver las analíticas."
                     icon={Calendar}
                   />
                 )}

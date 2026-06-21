@@ -389,7 +389,7 @@ export const TutoriaTab = () => {
                       <div className="col-span-2 md:col-span-3 text-xs font-medium text-muted tracking-wider">Actividades y Viajes Escolares</div>
                       {renderCheckbox('Erasmus+ y otros viajes', 'Erasmus+ / Viajes')}
                       {renderCheckbox('English week 1º eso', 'English Week 1º ESO')}
-                      {renderCheckbox('Entorno aragón', 'Entorno Aragón')}
+                      {renderCheckbox('Archivos aragón', 'Archivos Aragón')}
                       {renderCheckbox('2º eso eslovaquia/francia', '2º ESO Eslovaquia/Francia')}
                       {renderCheckbox('3º eso munich', '3º ESO Munich')}
                       {renderCheckbox('Portugal aula abierta-do', 'Portugal Aula Abierta')}

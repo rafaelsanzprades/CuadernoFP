@@ -17,7 +17,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { initialGroups } from "@/store/initialData";
 import { OneDriveSyncPanel } from "@/components/features/cloud/OneDriveSyncPanel";
 
-export default function EntornoTrabajoPage() {
+export default function ArchivosTrabajoPage() {
   const {
     activeModuleId, activeCursoId, moduleData, cursoData, dataSource, setDataSource,
     pdFileSource, cursoFileSource,
@@ -248,24 +248,76 @@ export default function EntornoTrabajoPage() {
 
   const getFriendlyPdName = (pdKey: string) => {
     if (pdKey === "imported-pd") return "Programación Importada";
+    
+    if (useAppStore.getState().activeModuleId === pdKey && moduleData?.info_modulo) {
+      const { codigo, nombre, titulo_codigo, ciclo } = moduleData.info_modulo;
+      const actualCode = codigo || pdKey.split('-')[0];
+      
+      let degreeCode = actualCode;
+      if (titulo_codigo) {
+        degreeCode = titulo_codigo;
+      } else if (ciclo) {
+        const lowerCiclo = ciclo.toLowerCase();
+        const firstWord = ciclo.split(' ')[0];
+        if (/^[A-Z]{2,4}\d{2,3}$/i.test(firstWord) || /^[A-Z]+-\d+$/i.test(firstWord)) {
+          degreeCode = firstWord;
+        } else if (lowerCiclo.includes("superior")) {
+          degreeCode = "GS";
+        } else if (lowerCiclo.includes("básico") || lowerCiclo.includes("basico") || lowerCiclo.includes("profesional")) {
+          degreeCode = "GB";
+        } else if (lowerCiclo.includes("técnico") || lowerCiclo.includes("tecnico")) {
+          degreeCode = "GM";
+        } else {
+          degreeCode = firstWord;
+        }
+      }
+      
+      return `P - ${degreeCode} - ${actualCode} - ${nombre || 'Programación'}`;
+    }
+
     const code = pdKey.split('-')[0];
+    let foundGroup: any = null;
+    let foundModule: any = null;
     for (const group of initialGroups) {
       const m = group.modules.find(mod => mod.code === code);
-      if (m) return `${m.name} (${code})`;
+      if (m) { foundGroup = group; foundModule = m; break; }
     }
-    return pdKey;
+    if (foundGroup && foundModule) {
+      const degreeCode = foundGroup.degreeName.split(' ')[0];
+      return `P - ${degreeCode} - ${code} - ${foundModule.name}`;
+    }
+    return `P - ${pdKey.replace('-pd', '').toUpperCase()}`;
   };
 
   const getFriendlyCursoName = (cursoKey: string) => {
     if (cursoKey === "imported-curso") return "Curso Importado";
     const parts = cursoKey.split('-');
     const code = parts[0];
-    const year = parts[parts.length - 1];
+    const rawYear = parts[parts.length - 1];
+    
+    // Normalize year
+    let year = rawYear;
+    if (year === '26' || year === '202526') year = '2025-26';
+
+    let foundGroup: any = null;
     for (const group of initialGroups) {
-      const hasModule = group.modules.some(m => m.code === code);
-      if (hasModule) return `${group.name} (${year})`;
+      if (group.modules.some(m => m.code === code)) { foundGroup = group; break; }
     }
-    return `Curso ${year} (${cursoKey})`;
+
+    if (foundGroup) {
+      const yearPrefix = foundGroup.name.charAt(0);
+      const levelAbr = foundGroup.level === 'Grado Medio' ? 'GM' : foundGroup.level === 'Grado Superior' ? 'GS' : 'GB';
+      const degreeCode = foundGroup.degreeName.split(' ')[0].replace(/([A-Z]+)(\d+)/, '$1-$2');
+      return `C - ${year} - ${yearPrefix}-${levelAbr} - ${degreeCode}`;
+    } else {
+      let nameParts = parts.slice(0, -1);
+      // If the second to last part is '2025' or '2026', remove it from name
+      if (nameParts.length > 0 && (nameParts[nameParts.length - 1] === '2025' || nameParts[nameParts.length - 1] === '2026')) {
+        nameParts = nameParts.slice(0, -1);
+      }
+      const namePart = nameParts.join(' ').toUpperCase();
+      return `C - ${year} - ${namePart}`;
+    }
   };
 
   // ── Tabs ────────────────────────────────────────────────
@@ -295,7 +347,7 @@ export default function EntornoTrabajoPage() {
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div>
                 <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                  <FolderOpen className="w-6 h-6 text-accent" /> Entorno
+                  <FolderOpen className="w-6 h-6 text-accent" /> Archivos
                 </h1>
                 <p className="text-muted mt-2 text-lg">Gestión de archivos de Programación y Curso.</p>
               </div>
@@ -314,7 +366,7 @@ export default function EntornoTrabajoPage() {
       <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6 mt-6">
         <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
         <div>
-          <p className="text-sm font-semibold text-foreground">Herramienta operativa y de gestión — Entorno de Trabajo</p>
+          <p className="text-sm font-semibold text-foreground">Herramienta operativa y de gestión — Archivos</p>
           <p className="text-sm text-muted mt-1">Sincronización en la nube y configuración del espacio de trabajo.</p>
         </div>
       </div>
@@ -322,7 +374,7 @@ export default function EntornoTrabajoPage() {
             <div className="space-y-8 animate-in fade-in duration-300 pt-4">
               {/* TAB: FILE MANAGER */}
               {activeTab === "datos" && (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-6">
 
                   {/* ── Panel Programación ── */}
                   <Card
@@ -334,6 +386,7 @@ export default function EntornoTrabajoPage() {
                       <BookOpen className={`w-24 h-24 ${isDemoLoaded ? 'text-warning' : 'text-info'}`} />
                     </div>
                     <div>
+                      {!isDemoLoaded && <h2 className="text-sm font-extrabold uppercase tracking-widest text-info/80 mb-2">Paso 1</h2>}
                       <div className="flex justify-between items-center mb-2">
                         <h3 className="text-xl font-bold text-foreground flex items-center gap-2 relative z-10">
                           <BookOpen className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : 'text-info'}`} /> Programación (.cddp)
@@ -412,9 +465,10 @@ export default function EntornoTrabajoPage() {
                       <Users className={`w-24 h-24 ${isDemoLoaded ? 'text-warning' : 'text-success'}`} />
                     </div>
                     <div>
+                      {!isDemoLoaded && <h2 className={`text-sm font-extrabold uppercase tracking-widest mb-2 ${hasPdFile ? 'text-success/80' : 'text-muted'}`}>Paso 2</h2>}
                       <div className="flex justify-between items-center mb-2">
-                        <h3 className="text-xl font-bold text-foreground flex items-center gap-2 relative z-10">
-                          <Users className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : 'text-success'}`} /> Curso (.cddc)
+                        <h3 className={`text-xl font-bold flex items-center gap-2 relative z-10 ${(!isDemoLoaded && !hasPdFile) ? 'text-muted' : 'text-foreground'}`}>
+                          <Users className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : (!isDemoLoaded && !hasPdFile) ? 'text-muted' : 'text-success'}`} /> Curso (.cddc)
                         </h3>
                         {hasCursoFile && <Badge variant={isDemoLoaded ? 'warning' : 'success'}>Cargado</Badge>}
                       </div>
@@ -435,10 +489,16 @@ export default function EntornoTrabajoPage() {
                         )}
                       </div>
                     ) : (
-                      <div className="bg-success/5 border border-dashed border-success/30 rounded-xl p-6 flex flex-col gap-2 items-center justify-center text-success/80 relative z-10 shadow-inner">
-                        <FolderOpen className="w-8 h-8 mb-1 opacity-40" />
-                        <span className="font-medium">Arrastra un archivo .cddc aquí</span>
-                        <span className="text-xs text-muted">o usa los botones de abajo</span>
+                      <div className={`border border-dashed rounded-xl p-6 flex flex-col gap-2 items-center justify-center relative z-10 shadow-inner ${(!isDemoLoaded && !hasPdFile) ? 'bg-foreground/5 border-[var(--glass-border)] text-muted' : 'bg-success/5 border-success/30 text-success/80'}`}>
+                        <FolderOpen className={`w-8 h-8 mb-1 ${(!isDemoLoaded && !hasPdFile) ? 'opacity-20' : 'opacity-40'}`} />
+                        {!isDemoLoaded && !hasPdFile ? (
+                          <span className="font-medium text-center">Para crear o vincular un Curso,<br/>primero debes cargar una Programación (Paso 1).</span>
+                        ) : (
+                          <>
+                            <span className="font-medium">Arrastra un archivo .cddc aquí</span>
+                            <span className="text-xs text-muted">o usa los botones de abajo</span>
+                          </>
+                        )}
                       </div>
                     )}
 
@@ -452,10 +512,10 @@ export default function EntornoTrabajoPage() {
                         <>
                           {/* Primary actions */}
                           <div className="flex gap-2">
-                            <Button onClick={handleNewCurso} className="flex-1 bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 transition-all">
+                            <Button disabled={!hasPdFile} onClick={handleNewCurso} className="flex-1 bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 transition-all disabled:opacity-30">
                               <Plus className="w-4 h-4 mr-2" /> Nuevo
                             </Button>
-                            <Button onClick={handleOpenCurso} className="flex-1 bg-success/10 hover:bg-success/20 text-success border border-success/30 transition-all">
+                            <Button disabled={!hasPdFile} onClick={handleOpenCurso} className="flex-1 bg-success/10 hover:bg-success/20 text-success border border-success/30 transition-all disabled:opacity-30">
                               <FolderOpen className="w-4 h-4 mr-2" /> Abrir
                             </Button>
                           </div>
