@@ -78,6 +78,9 @@ export default function Sidebar() {
               </h1>
             </Link>
             <span className="text-sm text-muted/80 font-mono mt-0.5 ml-0.5">{timeStr}</span>
+            <div className="mt-1.5 w-max bg-yellow-400 text-yellow-950 text-[0.7rem] uppercase tracking-wider font-bold px-2 py-0.5 rounded shadow-sm flex items-center gap-1.5 border border-yellow-500">
+              <span className="text-[0.8rem]">🚧</span> En obras
+            </div>
           </div>
         )}
         <button onClick={toggleSidebar} className="text-muted hover:text-foreground p-1 rounded-md hover:bg-foreground/10 transition-colors mb-4">
