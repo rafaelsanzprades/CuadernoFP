@@ -49,14 +49,21 @@ export const fileManager = {
 
   // ── DEMO ────────────────────────────────────────────────
 
-  loadDemoData() {
+  loadDemoData(groupId?: string) {
+    if (!groupId) groupId = '1a';
     const pdData = demoSeed["0237-ictve-pd" as keyof typeof demoSeed];
-    const cursoData = demoSeed["0237-ictve-curso-2025-26" as keyof typeof demoSeed];
+    let cursoDataId = "0237-ictve-curso-2025-26";
+    if (groupId === '1a') cursoDataId = "0237-ictve-curso-2025-26-1A";
+    if (groupId === '1b') cursoDataId = "0237-ictve-curso-2025-26-1B";
+    if (groupId === '1c') cursoDataId = "0237-ictve-curso-2025-26-1C";
+    
+    // Fallback if the specific group doesn't exist in seed
+    const cursoData = demoSeed[cursoDataId as keyof typeof demoSeed] || demoSeed["0237-ictve-curso-2025-26" as keyof typeof demoSeed];
 
     useAppStore.getState().setDataSource("demo");
     useAppStore.getState().setActiveModuleId("0237-ictve-pd");
     useAppStore.getState().setModuleData(pdData as any);
-    useAppStore.getState().setActiveCursoId("0237-ictve-curso-2025-26");
+    useAppStore.getState().setActiveCursoId(cursoDataId);
     useAppStore.getState().setCursoData(cursoData as any);
     useAppStore.getState().setPdFileSource({ type: 'none' });
     useAppStore.getState().setCursoFileSource({ type: 'none' });
@@ -264,6 +271,139 @@ export const fileManager = {
     } catch (e: any) {
       if (e?.name === 'AbortError') return false;
       console.error("Error opening curso file", e);
+      return false;
+    }
+  },
+
+  // ── WORKSPACE (Directory picking for groups) ────────────────────
+
+  async openWorkspaceDirectory(): Promise<FileSystemDirectoryHandle | null> {
+    try {
+      const dirHandle = await (window as any).showDirectoryPicker({
+        mode: 'readwrite'
+      });
+      useAppStore.getState().setWorkspaceHandle(dirHandle);
+      return dirHandle;
+    } catch (e: any) {
+      if (e?.name === 'AbortError') return null;
+      console.error("Error opening workspace directory", e);
+      return null;
+    }
+  },
+
+  async scanGroupsInWorkspace(dirHandle: FileSystemDirectoryHandle): Promise<string[]> {
+    const groups: string[] = [];
+    try {
+      for await (const entry of (dirHandle as any).values()) {
+        if (entry.kind === 'file' && entry.name.startsWith('G - ') && entry.name.endsWith('.json')) {
+          groups.push(entry.name);
+        }
+      }
+    } catch (e) {
+      console.error("Error scanning groups", e);
+    }
+    return groups.sort();
+  },
+
+  async scanWorkspaceFiles(dirHandle: FileSystemDirectoryHandle): Promise<{grupos: string[], programaciones: string[], cursos: string[]}> {
+    const grupos: string[] = [];
+    const programaciones: string[] = [];
+    const cursos: string[] = [];
+    try {
+      for await (const entry of (dirHandle as any).values()) {
+        if (entry.kind === 'file' && entry.name.endsWith('.json')) {
+          if (entry.name.startsWith('G - ')) grupos.push(entry.name);
+          else if (entry.name.startsWith('P - ')) programaciones.push(entry.name);
+          else if (entry.name.startsWith('C - ')) cursos.push(entry.name);
+        }
+      }
+    } catch (e) {
+      console.error("Error scanning workspace files", e);
+    }
+    return {
+      grupos: grupos.sort(),
+      programaciones: programaciones.sort(),
+      cursos: cursos.sort()
+    };
+  },
+
+  async loadGroupFromWorkspace(dirHandle: FileSystemDirectoryHandle, groupFileName: string): Promise<boolean> {
+    try {
+      const groupHandle = await dirHandle.getFileHandle(groupFileName);
+      const groupFile = await groupHandle.getFile();
+      const groupText = await groupFile.text();
+      const groupData = JSON.parse(groupText);
+
+      if (groupData.tipo !== 'grupo' || !groupData.programacion || !groupData.curso) {
+        throw new Error("Invalid group file format");
+      }
+
+      // Read Programacion
+      const pdFileName = groupData.programacion.endsWith('.json') ? groupData.programacion : `${groupData.programacion}.json`;
+      const pdHandle = await dirHandle.getFileHandle(pdFileName);
+      const pdFile = await pdHandle.getFile();
+      const pdText = await pdFile.text();
+      
+      // Read Curso
+      const cursoFileName = groupData.curso.endsWith('.json') ? groupData.curso : `${groupData.curso}.json`;
+      const cursoHandle = await dirHandle.getFileHandle(cursoFileName);
+      const cursoFile = await cursoHandle.getFile();
+      const cursoText = await cursoFile.text();
+
+      // Set Source explicitly to local to break away from demo
+      useAppStore.getState().setDataSource('local');
+
+      // Import them into state
+      const pdSuccess = await this.importProgramacion(pdText, pdFile.name);
+      const cursoSuccess = await this.importCurso(cursoText, cursoFile.name);
+
+      if (pdSuccess && cursoSuccess) {
+        // Also update file sources to use these handles for saving
+        const store = useAppStore.getState();
+        store.setPdFileSource({
+          type: 'local',
+          fileHandle: pdHandle,
+          fileName: pdFile.name,
+        });
+        store.setCursoFileSource({
+          type: 'local',
+          fileHandle: cursoHandle,
+          fileName: cursoFile.name,
+        });
+        return true;
+      }
+      return false;
+    } catch (e) {
+      console.error("Error loading group", e);
+      return false;
+    }
+  },
+
+  async loadProgramacionFromWorkspace(dirHandle: FileSystemDirectoryHandle, pdFileName: string): Promise<boolean> {
+    try {
+      const pdHandle = await dirHandle.getFileHandle(pdFileName);
+      const pdFile = await pdHandle.getFile();
+      const pdText = await pdFile.text();
+      
+      useAppStore.getState().setDataSource('local');
+      const pdSuccess = await this.importProgramacion(pdText, pdFile.name);
+      
+      if (pdSuccess) {
+        const store = useAppStore.getState();
+        store.setPdFileSource({
+          type: 'local',
+          fileHandle: pdHandle,
+          fileName: pdFile.name,
+        });
+        // Unload curso
+        store.setActiveCursoId("");
+        store.setCursoData(null);
+        store.setCursoFileSource({ type: 'none' });
+        return true;
+      }
+      return false;
+    } catch (e) {
+      console.error("Error loading programacion", e);
       return false;
     }
   },

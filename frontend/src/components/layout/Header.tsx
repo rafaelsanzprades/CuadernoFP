@@ -16,7 +16,9 @@ import { ThemeSelector } from "@/components/features/settings/ThemeSelector";
 
 
 export default function Header({ title, breadcrumbSuffix }: { title?: React.ReactNode; breadcrumbSuffix?: React.ReactNode }) {
-  const { activeModuleId, activeCursoId, moduleData, cursoData, pdFileSource, cursoFileSource, saveModuleData, saveCursoData, isSidebarOpen, toggleSidebar, dataSource } = useAppStore();
+  const { activeModuleId, activeCursoId, moduleData, cursoData, pdFileSource, cursoFileSource, saveModuleData, saveCursoData, isSidebarOpen, toggleSidebar, dataSource, workspaceHandle } = useAppStore();
+  const [localGroups, setLocalGroups] = useState<string[]>([]);
+  const [activeLocalGroup, setActiveLocalGroup] = useState<string>("");
   const [isSaving, setIsSaving] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -44,6 +46,12 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
     };
     updateStates();
   }, []);
+
+  useEffect(() => {
+    if (workspaceHandle && dataSource === 'local') {
+      fileManager.scanGroupsInWorkspace(workspaceHandle).then(groups => setLocalGroups(groups));
+    }
+  }, [workspaceHandle, dataSource]);
 
   let currentItem = "";
   if (pathname === '/inicio') {
@@ -226,7 +234,10 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
       if (g.modules.some(m => m.code === code)) { foundGroup = g; break; }
     }
 
-    if (foundGroup) {
+    if (activeCursoId.includes('-1A') || activeCursoId.includes('-1B') || activeCursoId.includes('-1C')) {
+      const groupSuffix = activeCursoId.split('-').pop(); // 1A, 1B, 1C
+      friendlyCursoName = `C - 2025-26 - ${groupSuffix}-GM - ELE-203`;
+    } else if (foundGroup) {
       const yearPrefix = foundGroup.name.charAt(0);
       const levelAbr = foundGroup.level === 'Grado Medio' ? 'GM' : foundGroup.level === 'Grado Superior' ? 'GS' : 'GB';
       const degreeCode = foundGroup.degreeName.split(' ')[0].replace(/([A-Z]+)(\d+)/, '$1-$2');
@@ -245,11 +256,67 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
   return (
     <div className="w-full flex flex-col z-40 sticky top-0 bg-background/95 backdrop-blur-xl border-b border-[var(--glass-border)] pb-2 shadow-md">
       {/* Fila 1: Información del Módulo y Curso */}
-      <div className="w-full px-6 py-2 bg-foreground/[0.015] border-b border-[var(--glass-border)] flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-3">
-        <span className={`text-[0.95rem] leading-tight tracking-wide truncate flex-1 transition-colors font-extrabold ${dataSource === 'demo' ? 'text-warning' : 'text-success'}`} title={friendlyModuleName}>
+      <div className="w-full px-6 py-2 bg-foreground/[0.015] border-b border-[var(--glass-border)] grid grid-cols-1 sm:grid-cols-3 items-center gap-2 sm:gap-3">
+        {/* Columna Izquierda: Grupo */}
+        <div className="flex justify-start items-center w-full gap-2">
+          <Link 
+            href="/archivos"
+            className="flex items-center justify-center p-1.5 rounded-lg bg-foreground/5 hover:bg-foreground/10 border border-[var(--glass-border)] transition-colors text-muted hover:text-foreground shrink-0"
+            title="Abrir Gestor de Archivos"
+          >
+            <FolderOpen className="w-4 h-4" />
+          </Link>
+          <select 
+            className={`w-full max-w-[240px] bg-foreground/5 border border-[var(--glass-border)] rounded-lg px-3 py-1.5 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-accent/50 cursor-pointer appearance-none text-left`}
+            style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
+            value={dataSource === 'demo' ? (activeCursoId?.endsWith('1A') ? '1a' : activeCursoId?.endsWith('1B') ? '1b' : activeCursoId?.endsWith('1C') ? '1c' : '1a') : activeLocalGroup}
+            onChange={async (e) => {
+              if (dataSource === 'demo') {
+                fileManager.loadDemoData(e.target.value);
+                toast.success(`Cambiado a Grupo ${e.target.value.toUpperCase()}`);
+              } else {
+                if (e.target.value === 'connect_workspace') {
+                  const handle = await fileManager.openWorkspaceDirectory();
+                  if (handle) toast.success("Carpeta local conectada.");
+                } else if (workspaceHandle && e.target.value) {
+                  setActiveLocalGroup(e.target.value);
+                  const ok = await fileManager.loadGroupFromWorkspace(workspaceHandle, e.target.value);
+                  if (ok) {
+                    toast.success("Grupo cargado correctamente");
+                  } else {
+                    toast.error("Error al cargar el grupo");
+                  }
+                }
+              }
+            }}
+          >
+            {dataSource === 'demo' ? (
+              <>
+                <option value="" disabled>Seleccionar Grupo...</option>
+                <option value="1a">G - 1A-GM - 0237 - 2025-26</option>
+                <option value="1b">G - 1B-GM - 0237 - 2025-26</option>
+                <option value="1c">G - 1C-GM - 0237 - 2025-26</option>
+              </>
+            ) : (
+              <>
+                {!workspaceHandle && <option value="connect_workspace">📂 Abrir Carpeta de Grupos...</option>}
+                {workspaceHandle && localGroups.length === 0 && <option value="" disabled>No hay grupos (.json) en la carpeta</option>}
+                {workspaceHandle && localGroups.length > 0 && <option value="" disabled>Seleccionar Grupo Local...</option>}
+                {workspaceHandle && localGroups.map(g => (
+                  <option key={g} value={g}>{g.replace('.json', '')}</option>
+                ))}
+              </>
+            )}
+          </select>
+        </div>
+
+        {/* Columna Central: Programación */}
+        <span className={`text-[0.95rem] leading-tight tracking-wide truncate text-center transition-colors font-extrabold ${dataSource === 'demo' ? 'text-warning' : 'text-success'}`} title={friendlyModuleName}>
           Programación: {friendlyModuleName}
         </span>
-        <span className={`text-[0.95rem] leading-tight tracking-wide truncate flex-1 text-right transition-colors font-extrabold ${dataSource === 'demo' ? 'text-warning' : 'text-success'}`} title={friendlyCursoName}>
+        
+        {/* Columna Derecha: Curso */}
+        <span className={`text-[0.95rem] leading-tight tracking-wide truncate text-right transition-colors font-extrabold ${dataSource === 'demo' ? 'text-warning' : 'text-success'}`} title={friendlyCursoName}>
           Curso: {friendlyCursoName}
         </span>
       </div>

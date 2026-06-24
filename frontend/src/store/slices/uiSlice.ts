@@ -3,7 +3,7 @@ import { AppState, FileSource } from '@/types';
 
 const defaultFileSource: FileSource = { type: 'none' };
 
-type UiSlice = Pick<AppState, 'isSidebarOpen' | 'toggleSidebar' | 'isWizardOpen' | 'setWizardOpen' | 'dataSource' | 'setDataSource' | 'isDriveConnected' | 'setDriveConnected' | 'driveUserEmail' | 'setDriveUserEmail' | 'autoSyncDrive' | 'setAutoSyncDrive' | 'googleClientId' | 'setGoogleClientId' | 'isOneDriveConnected' | 'setOneDriveConnected' | 'oneDriveUserEmail' | 'setOneDriveUserEmail' | 'oneDriveClientId' | 'setOneDriveClientId' | 'isLoadingData' | 'setLoadingData' | 'pdFileSource' | 'setPdFileSource' | 'cursoFileSource' | 'setCursoFileSource'>;
+type UiSlice = Pick<AppState, 'isSidebarOpen' | 'toggleSidebar' | 'isWizardOpen' | 'setWizardOpen' | 'dataSource' | 'setDataSource' | 'isDriveConnected' | 'setDriveConnected' | 'driveUserEmail' | 'setDriveUserEmail' | 'autoSyncDrive' | 'setAutoSyncDrive' | 'googleClientId' | 'setGoogleClientId' | 'isOneDriveConnected' | 'setOneDriveConnected' | 'oneDriveUserEmail' | 'setOneDriveUserEmail' | 'oneDriveClientId' | 'setOneDriveClientId' | 'isLoadingData' | 'setLoadingData' | 'pdFileSource' | 'setPdFileSource' | 'cursoFileSource' | 'setCursoFileSource' | 'workspaceHandle' | 'setWorkspaceHandle'>;
 
 export const createUiSlice: StateCreator<AppState, [], [], UiSlice> = (set) => ({
   isSidebarOpen: true,
@@ -33,4 +33,6 @@ export const createUiSlice: StateCreator<AppState, [], [], UiSlice> = (set) => (
   setPdFileSource: (source: FileSource) => set({ pdFileSource: source }),
   cursoFileSource: defaultFileSource,
   setCursoFileSource: (source: FileSource) => set({ cursoFileSource: source }),
+  workspaceHandle: null,
+  setWorkspaceHandle: (handle: FileSystemDirectoryHandle | null) => set({ workspaceHandle: handle }),
 });

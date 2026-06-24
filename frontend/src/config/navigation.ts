@@ -13,7 +13,7 @@ export const navGroups = [
     ]
   },
   {
-    title: "Programación",
+    title: "Programación [Código del módulo]",
     sectionDescription: "Área de diseño y configuración didáctica. Configura el módulo, enlaza las matrices de evaluación, define los instrumentos y secuencia las tareas de aula.",
     items: [
       { href: "/modulo", label: "Módulo didáctico", icon: Settings, description: "Configuración básica del módulo didáctico, contexto, metodología y recursos." },
@@ -24,7 +24,7 @@ export const navGroups = [
     ]
   },
   {
-    title: "Curso",
+    title: "Curso [2025-26]",
     sectionDescription: "Herramientas de seguimiento para el aula viva. Establece el calendario, administra el listado de alumnado, anota el progreso diario y evalúa.",
     items: [
       { href: "/calendario", label: "Calendario académico", icon: Calendar, description: "Fechas generales, trimestres, horario semanal, festivos y eventos relevantes del curso." },
@@ -33,7 +33,8 @@ export const navGroups = [
       { href: "/progreso", label: "Progreso académico", icon: TrendingUp, description: "Panel integrado de calificaciones numéricas, evaluación por resultados de aprendizaje (RA) y analíticas." },
       { href: "/mejora", label: "Mejora Docente", icon: TrendingUp, description: "Panel de autoevaluación y rúbricas de mejora del desempeño docente." }
     ]
-  },
+  }
+  /*,
   {
     title: "Centro",
     sectionDescription: "Gestión general del centro, normativas de calidad, indicadores del sistema y empleabilidad.",
@@ -45,4 +46,5 @@ export const navGroups = [
       { href: "/internacionalizacion", label: "Internacionalización", icon: Globe, description: "Programas de movilidad y cooperación internacional (Erasmus+)." }
     ]
   }
+  */
 ];

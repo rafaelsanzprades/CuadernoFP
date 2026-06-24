@@ -129,7 +129,7 @@ export default function Sidebar() {
             {group.title && isSidebarOpen && (
               <div className="flex flex-col mb-2 mt-3">
                 <div className="text-[0.95rem] font-bold text-foreground/90 tracking-wide px-3 mb-1.5 uppercase">
-                  {group.title}
+                  {group.title.replace("[Código del módulo]", `[${activeModuleId ? activeModuleId.split('-')[0] : 'CÓDIGO'}]`)}
                 </div>
                 <div className="mx-3 h-px bg-[var(--glass-border)]" />
               </div>
