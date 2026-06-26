@@ -8,6 +8,7 @@ const withPWA = withPWAInit({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "standalone",
   turbopack: {},
   async rewrites() {
     // URL de la API según el entorno.
