@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { BarChart3, Info, TrendingUp, Users, GraduationCap, Building2, Globe, Wrench } from "lucide-react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/Card";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 
 /**
- * Página /indicadores — Dashboard de Indicadores del Sistema Estatal
+ * Página /indicadores - Dashboard de Indicadores del Sistema Estatal
  * 12 ejes × 34 indicadores de Evaluación y Calidad de la FP
  */
 
@@ -50,7 +50,7 @@ export default function IndicadoresPage() {
             <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20">
               <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
               <div>
-                <p className="text-sm font-semibold text-foreground">Sistema Estatal de Indicadores — Junio 2025</p>
+                <p className="text-sm font-semibold text-foreground">Sistema Estatal de Indicadores - Junio 2025</p>
                 <p className="text-sm text-muted mt-1">
                   12 ejes temáticos, 34 indicadores. Los datos se mostrarán conforme se vayan integrando fuentes externas (SEPE, INE, BOE).
                 </p>
@@ -92,3 +92,4 @@ export default function IndicadoresPage() {
     </div>
   );
 }
+

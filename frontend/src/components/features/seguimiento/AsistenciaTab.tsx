@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { BarChart2, ClipboardEdit, Settings, Users , Info } from "lucide-react";
 import { useState } from "react";
 import { useAppStore } from "@/store/useAppStore";
@@ -21,7 +21,7 @@ export function AsistenciaTab() {
       <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
         <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
         <div>
-          <p className="text-sm font-semibold text-foreground">Asistencia y Participación — RD 659/2023</p>
+          <p className="text-sm font-semibold text-foreground">Asistencia y Participación - RD 659/2023</p>
           <p className="text-sm text-muted mt-1">Seguimiento de la asistencia obligatoria y evaluación continua.</p>
         </div>
       </div>
@@ -72,3 +72,4 @@ export function AsistenciaTab() {
     </>
   );
 }
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Route, Info, GraduationCap, ArrowRight, Award, Calendar, BookOpen } from "lucide-react";
 import { useState, useMemo } from "react";
 import { Card } from "@/components/ui/Card";
@@ -82,7 +82,7 @@ export function ItinerarioTab() {
       <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20">
         <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
         <div>
-          <p className="text-sm font-semibold text-foreground">Itinerario formativo vertical — Indicador 1.4</p>
+          <p className="text-sm font-semibold text-foreground">Itinerario formativo vertical - Indicador 1.4</p>
           <p className="text-sm text-muted mt-1">
             Registra las titulaciones previas del alumnado para calcular la tasa de promoción entre grados (A→B→C→D→E).
           </p>
@@ -118,7 +118,7 @@ export function ItinerarioTab() {
       <Card className="p-4">
         <label className="text-xs font-semibold text-muted mb-2 block">Seleccionar alumno</label>
         <Select value={selectedAlumno} onChange={(e) => setSelectedAlumno(e.target.value)}>
-          <option value="">— Selecciona un alumno —</option>
+          <option value="">- Selecciona un alumno -</option>
           {alumnos
             .filter((a: any) => a.Estado !== "Baja")
             .map((a: any) => (
@@ -171,10 +171,10 @@ export function ItinerarioTab() {
               <div>
                 <label className="text-xs font-semibold text-muted mb-1 block">Grado</label>
                 <Select value={form.grado} onChange={(e) => setForm({ ...form, grado: e.target.value })}>
-                  <option value="">— Grado —</option>
+                  <option value="">- Grado -</option>
                   {GRADOS.map((g) => (
                     <option key={g.id} value={g.id}>
-                      Grado {g.id} — {g.nombre}
+                      Grado {g.id} - {g.nombre}
                     </option>
                   ))}
                 </Select>
@@ -231,3 +231,4 @@ export function ItinerarioTab() {
     </div>
   );
 }
+

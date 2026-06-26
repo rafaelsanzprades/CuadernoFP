@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Globe, Info, Plane, Users, Building2, MapPin, ArrowRight } from "lucide-react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/Card";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 
 /**
- * Página /internacionalizacion — Internacionalización
+ * Página /internacionalizacion - Internacionalización
  * Eje 12 del Sistema Estatal: 3 indicadores
  * Programas Erasmus+, movilidades, centros asociados
  */
@@ -49,7 +49,7 @@ export default function InternacionalizacionPage() {
             <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20">
               <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
               <div>
-                <p className="text-sm font-semibold text-foreground">Ley 3/2022 — Internacionalización de la FP</p>
+                <p className="text-sm font-semibold text-foreground">Ley 3/2022 - Internacionalización de la FP</p>
                 <p className="text-sm text-muted mt-1">
                   La nueva ley promueve la internacionalización mediante programas de movilidad,
                   proyectos de cooperación y la creación de centros de FP en el extranjero.
@@ -109,7 +109,7 @@ export default function InternacionalizacionPage() {
                 <h3 className="text-sm font-bold text-foreground">Destinos de movilidad</h3>
               </div>
               <div className="h-48 rounded-xl bg-foreground/5 border border-dashed border-[var(--glass-border)] flex items-center justify-center">
-                <p className="text-sm text-muted">Mapa de destinos — Próximamente</p>
+                <p className="text-sm text-muted">Mapa de destinos - Próximamente</p>
               </div>
             </Card>
           </MotionWrapper>
@@ -118,3 +118,4 @@ export default function InternacionalizacionPage() {
     </div>
   );
 }
+

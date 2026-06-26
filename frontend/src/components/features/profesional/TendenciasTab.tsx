@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Brain, Briefcase, Building2, ClipboardList, Compass, Globe2, Map, Monitor, Rocket, Target, Users } from "lucide-react";
 import React from "react";
 import { useAppStore } from "@/store/useAppStore";
@@ -265,8 +265,8 @@ export const TendenciasTab = () => {
                           {al.Apellidos}, {al.Nombre}
                           <div className="text-[10px] text-muted font-mono">{al.ID}</div>
                         </td>
-                        <td className="p-3 text-foreground/70">{d.aptitud_principal || <span className="text-muted/50 italic text-xs">—</span>}</td>
-                        <td className="p-3 text-foreground/70 max-w-[160px] truncate">{d.area_interes || <span className="text-muted/50 italic text-xs">—</span>}</td>
+                        <td className="p-3 text-foreground/70">{d.aptitud_principal || <span className="text-muted/50 italic text-xs">-</span>}</td>
+                        <td className="p-3 text-foreground/70 max-w-[160px] truncate">{d.area_interes || <span className="text-muted/50 italic text-xs">-</span>}</td>
                         <td className="p-3">
                           {d.intencion_al_terminar ? (
                             <span className="text-xs font-semibold bg-accent/10 border border-accent/20 text-accent px-2 py-1 rounded-full">
@@ -274,7 +274,7 @@ export const TendenciasTab = () => {
                             </span>
                           ) : <span className="text-muted/50 italic text-xs">Sin datos</span>}
                         </td>
-                        <td className="p-3 text-foreground/70 text-xs">{d.estado_insercion || <span className="text-muted/50 italic">—</span>}</td>
+                        <td className="p-3 text-foreground/70 text-xs">{d.estado_insercion || <span className="text-muted/50 italic">-</span>}</td>
                       </tr>
                     );
                   })}
@@ -287,3 +287,4 @@ export const TendenciasTab = () => {
     </div>
   );
 };
+

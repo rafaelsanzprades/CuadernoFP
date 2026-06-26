@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Award, Info, Users, FileText, CheckCircle2, Search, ClipboardList } from "lucide-react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/Card";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 
 /**
- * Página /acreditacion — Acreditación de Competencias
+ * Página /acreditacion - Acreditación de Competencias
  * Eje 8 del Sistema Estatal: 7 indicadores
  * Fases: Solicitud → Asesoramiento → Evaluación → Acreditación → Reconocimiento
  */
@@ -124,3 +124,4 @@ export default function AcreditacionPage() {
     </div>
   );
 }
+

@@ -1,11 +1,12 @@
-"use client";
+﻿"use client";
 import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map, MessageSquare, FileText, Route , Info, FolderOpen } from "lucide-react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import toast from "react-hot-toast";
 import { TutoriaTab } from "@/components/features/alumnado/TutoriaTab";
 import { TutoriaMatrixTab } from "@/components/features/alumnado/TutoriaMatrixTab";
 import { PlanoClaseTab } from "@/components/features/alumnado/PlanoClaseTab";
@@ -27,6 +28,7 @@ export default function AlumnadoPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const TABS = [
     { id: "alumnado", label:  <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> Alumnado</span>, cleanLabel: "Alumnado" },
@@ -124,10 +126,99 @@ export default function AlumnadoPage() {
       Repite: "false",
       Matricula: "",
       Comentarios: "",
-      email: "",
+      Email: "",
       Movil: ""
     });
     updateCursoData("df_al", newAl);
+  };
+
+  const handleImportCSV = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const text = event.target?.result as string;
+        if (!text) return;
+
+        // Splitting by newline and handling both comma and semicolon separators
+        const lines = text.split(/\r?\n/).filter(line => line.trim());
+        if (lines.length < 2) {
+          toast.error("El archivo CSV no tiene datos válidos.");
+          return;
+        }
+
+        // Detect separator by looking at the first line
+        const headerLine = lines[0];
+        const separator = headerLine.includes(';') ? ';' : ',';
+
+        // Find relevant column indices (case insensitive, partial match)
+        const headers = headerLine.split(separator).map(h => h.trim().toLowerCase().replace(/"/g, ''));
+        const nameIdx = headers.findIndex(h => h.includes('nombre'));
+        const surnameIdx = headers.findIndex(h => h.includes('apellido'));
+        const emailIdx = headers.findIndex(h => h.includes('correo') || h.includes('email'));
+        
+        if (nameIdx === -1 && surnameIdx === -1) {
+          toast.error("No se han detectado columnas de Nombre/Apellidos en el CSV.");
+          return;
+        }
+
+        const newAl = [...df_al];
+        let importedCount = 0;
+
+        for (let i = 1; i < lines.length; i++) {
+          // split row considering potential quoted values but simple implementation
+          const cols = lines[i].split(separator).map(c => c.trim().replace(/"/g, ''));
+          if (cols.length <= Math.max(nameIdx, surnameIdx)) continue; // skip invalid rows
+
+          let name = nameIdx !== -1 ? cols[nameIdx] : "";
+          let surname = surnameIdx !== -1 ? cols[surnameIdx] : "";
+          let email = emailIdx !== -1 && emailIdx < cols.length ? cols[emailIdx] : "";
+
+          // Simple heuristic: if there's only a 'nombre' column, maybe it contains "Surname, Name"
+          if (surnameIdx === -1 && name.includes(',')) {
+            const parts = name.split(',');
+            surname = parts[0].trim();
+            name = parts.slice(1).join(',').trim();
+          }
+
+          if (!name && !surname) continue;
+
+          const newId = `AN${(newAl.length + 1).toString().padStart(2, '0')}`;
+          newAl.push({
+            ID: newId,
+            Estado: "Alta",
+            Apellidos: surname,
+            Nombre: name,
+            Edad: "",
+            Nacimiento: "",
+            Repite: "false",
+            Matricula: "",
+            Comentarios: "",
+            Email: email,
+            Movil: ""
+          });
+          importedCount++;
+        }
+
+        updateCursoData("df_al", newAl);
+        if (importedCount > 0) {
+          toast.success(`Se han importado ${importedCount} estudiantes.`);
+        } else {
+          toast.error("No se pudo importar ningún estudiante válido.");
+        }
+      } catch (err) {
+        console.error("Error parsing CSV:", err);
+        toast.error("Hubo un problema al leer el archivo CSV.");
+      }
+      
+      // Reset input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    };
+    reader.readAsText(file, "UTF-8"); // "UTF-8" default, can try ISO-8859-1 for spanish chars
   };
 
   const handleUpdateAlumnado = (idx: number, field: string, value: any) => {
@@ -201,16 +292,33 @@ export default function AlumnadoPage() {
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
                   <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-sm font-semibold text-foreground">Alumnado — RD 659/2023 (Cap. III)</p>
+                    <p className="text-sm font-semibold text-foreground">Alumnado - RD 659/2023 (Cap. III)</p>
                     <p className="text-sm text-muted mt-1">Gestión académica y seguimiento del alumnado matriculado.</p>
                   </div>
                 </div>
             <Card className="p-6 border-t-4 border-t-blue-500">
               <div className="flex justify-between items-end mb-6">
-                <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground">
-                  <span>Lista oficial</span>
-                  <span className="text-sm font-normal text-muted bg-foreground/5 px-3 py-1 rounded-full">{df_al.length} alumnado</span>
-                </h2>
+                <div className="flex items-center gap-4">
+                  <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground">
+                    <span>Lista oficial</span>
+                    <span className="text-sm font-normal text-muted bg-foreground/5 px-3 py-1 rounded-full">{df_al.length} alumnado</span>
+                  </h2>
+                  <Button 
+                    variant="ghost"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="text-accent hover:text-accent hover:bg-accent/10 font-semibold flex items-center gap-1 h-8 px-3 ml-2"
+                    title="Importar CSV (Nombre, Apellidos...)"
+                  >
+                    <FolderOpen className="w-4 h-4" /> Importar CSV
+                  </Button>
+                  <input 
+                    type="file" 
+                    accept=".csv" 
+                    ref={fileInputRef} 
+                    onChange={handleImportCSV} 
+                    className="hidden" 
+                  />
+                </div>
                 {n_menores > 0 && (
                   <span className="text-danger text-sm font-semibold"> {n_menores} alumnado(s) menor(es) de 18 años</span>
                 )}
@@ -342,7 +450,7 @@ export default function AlumnadoPage() {
                     })}
                   </tbody>
                 </table>
-                <div className="mt-4">
+                <div className="mt-4 flex items-center">
                   <Button 
                     variant="ghost"
                     onClick={handleAddAlumnado}
@@ -386,3 +494,4 @@ export default function AlumnadoPage() {
     </div>
   );
 }
+

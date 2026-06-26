@@ -1,4 +1,4 @@
-# 🧪 Tests E2E — Cuaderno FP
+﻿# 🧪 Tests E2E - Cuaderno FP
 
 ## Descripción
 
@@ -123,3 +123,4 @@ npx playwright test --project=chromium
 ---
 
 **Última actualización:** 14 junio 2026
+

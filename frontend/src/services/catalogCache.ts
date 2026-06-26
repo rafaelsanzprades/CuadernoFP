@@ -1,8 +1,8 @@
-/**
+﻿/**
  * Catalog Cache Service
  * 
  * Caches RA/CE descriptions from the catalog API to avoid redundant fetches.
- * Used as fallback when module data doesn't include descriptive text (e.g., .cddp files).
+ * Used as fallback when module data doesn't include descriptive text (e.g., .fpp files).
  */
 
 interface CachedCatalogData {
@@ -37,7 +37,7 @@ export async function loadCatalogForModule(moduleCode: string): Promise<void> {
     const ceMap = new Map<string, string>();
     
     for (const ra of (json.data.ra || [])) {
-      // API returns id like "RA1." — normalize to "RA1"
+      // API returns id like "RA1." - normalize to "RA1"
       const raId = ra.id.replace(/\.$/, '');
       raMap.set(raId, ra.descripcion);
       
@@ -142,3 +142,5 @@ export function resolveOg(moduleCode: string | null, ogIndex: number): string {
 export function getCppsList(moduleCode: string): Array<{ id: string; desc: string }> {
   return cache.get(moduleCode)?.cpps || [];
 }
+
+

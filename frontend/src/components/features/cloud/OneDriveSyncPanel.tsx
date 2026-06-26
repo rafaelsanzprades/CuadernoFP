@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
@@ -68,7 +68,7 @@ export function OneDriveSyncPanel() {
             <Cloud className="w-6 h-6 text-[#0078D4]" /> Microsoft OneDrive
           </h2>
           <p className="text-muted mt-2">
-            Guarda tus archivos .cddp y .cddc en tu cuenta de Microsoft OneDrive. (Requiere registro en portal de Azure).
+            Guarda tus archivos .fpp y .fpc en tu cuenta de Microsoft OneDrive. (Requiere registro en portal de Azure).
           </p>
         </div>
 
@@ -127,3 +127,4 @@ export function OneDriveSyncPanel() {
     </Card>
   );
 }
+

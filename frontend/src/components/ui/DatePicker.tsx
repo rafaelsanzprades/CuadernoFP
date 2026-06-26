@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
@@ -16,7 +16,7 @@ const MONTHS = [
 ];
 const DAYS_HEADER = ["L","M","X","J","V","S","D"];
 
-export default function DatePicker({ value, onChange, label, className, placeholder = "—" }: DatePickerProps) {
+export default function DatePicker({ value, onChange, label, className, placeholder = "-" }: DatePickerProps) {
   const today = new Date();
   const [open, setOpen] = useState(false);
   const [viewYear, setViewYear] = useState(today.getFullYear());
@@ -200,3 +200,4 @@ export default function DatePicker({ value, onChange, label, className, placehol
     </div>
   );
 }
+

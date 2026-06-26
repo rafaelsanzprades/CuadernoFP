@@ -1,4 +1,4 @@
-# Informe: Editoriales de Libros de Texto de FP en España
+﻿# Informe: Editoriales de Libros de Texto de FP en España
 
 > **Fecha**: 21 junio 2026  
 > **Metodología**: Investigación web de catálogos oficiales de editoriales + conocimiento del sistema FP LOMLOE  
@@ -107,91 +107,91 @@ UD01: [Título temático]
 
 **Módulos por familia y grado** (extraídos de catálogo web):
 
-#### Grado Medio — Gestión Administrativa (ADG)
+#### Grado Medio - Gestión Administrativa (ADG)
 | Módulo | Código |
 |--------|--------|
-| Operaciones Administrativas de Recursos Humanos | — |
-| Operaciones Auxiliares de Gestión de Tesorería | — |
-| Tratamiento de la Documentación Contable | — |
-| Operaciones Administrativas de Compra-Venta | — |
-| Empresa y Administración | — |
-| Comunicación Empresarial y Atención al Cliente | — |
-| Técnica Contable | — |
-| Aplicaciones Informáticas | — |
+| Operaciones Administrativas de Recursos Humanos | - |
+| Operaciones Auxiliares de Gestión de Tesorería | - |
+| Tratamiento de la Documentación Contable | - |
+| Operaciones Administrativas de Compra-Venta | - |
+| Empresa y Administración | - |
+| Comunicación Empresarial y Atención al Cliente | - |
+| Técnica Contable | - |
+| Aplicaciones Informáticas | - |
 
-#### Grado Medio — Sistemas Microinformáticos y Redes (SMR)
+#### Grado Medio - Sistemas Microinformáticos y Redes (SMR)
 | Módulo | Código |
 |--------|--------|
-| Aplicaciones Web | — |
-| Sistemas Operativos en Red | — |
-| Seguridad Informática | — |
-| Redes Locales | — |
-| Aplicaciones Ofimáticas | — |
-| Servicios en Red | — |
-| Montaje y Mantenimiento de Equipos | — |
-| Sistemas Operativos Monopuesto | — |
+| Aplicaciones Web | - |
+| Sistemas Operativos en Red | - |
+| Seguridad Informática | - |
+| Redes Locales | - |
+| Aplicaciones Ofimáticas | - |
+| Servicios en Red | - |
+| Montaje y Mantenimiento de Equipos | - |
+| Sistemas Operativos Monopuesto | - |
 
-#### Grado Medio — Cuidados Auxiliares de Enfermería (CAE)
+#### Grado Medio - Cuidados Auxiliares de Enfermería (CAE)
 | Módulo | Código |
 |--------|--------|
-| Técnicas de Ayuda Odontológica y Estomatológica | — |
-| Promoción de la Salud y Apoyo Psicológico al Paciente | — |
-| Técnicas Básicas de Enfermería | — |
-| Operaciones Administrativas y Documentación Sanitaria | — |
-| Higiene del Medio Hospitalario y Limpieza del Material | — |
+| Técnicas de Ayuda Odontológica y Estomatológica | - |
+| Promoción de la Salud y Apoyo Psicológico al Paciente | - |
+| Técnicas Básicas de Enfermería | - |
+| Operaciones Administrativas y Documentación Sanitaria | - |
+| Higiene del Medio Hospitalario y Limpieza del Material | - |
 
-#### Grado Medio — Farmacia y Parafarmacia
+#### Grado Medio - Farmacia y Parafarmacia
 | Módulo | Código |
 |--------|--------|
-| Anatomofisiología y Patología Básica | — |
-| Primeros Auxilios | — |
+| Anatomofisiología y Patología Básica | - |
+| Primeros Auxilios | - |
 
-#### Grado Medio — Electromecánica de Vehículos
+#### Grado Medio - Electromecánica de Vehículos
 | Módulo | Código |
 |--------|--------|
-| Sistemas de Transmisión y Frenado | — |
-| Sistemas Auxiliares del Motor | — |
-| Circuitos Eléctricos Auxiliares del Vehículo | — |
-| Mecanizado Básico | — |
-| Sistemas de Seguridad y Confortabilidad | — |
-| Sistemas de Carga y Arranque | — |
-| Motores | — |
-| Circuitos de Fluidos, Suspensión y Dirección | — |
+| Sistemas de Transmisión y Frenado | - |
+| Sistemas Auxiliares del Motor | - |
+| Circuitos Eléctricos Auxiliares del Vehículo | - |
+| Mecanizado Básico | - |
+| Sistemas de Seguridad y Confortabilidad | - |
+| Sistemas de Carga y Arranque | - |
+| Motores | - |
+| Circuitos de Fluidos, Suspensión y Dirección | - |
 
-#### Grado Superior — Administración y Finanzas (ADYF)
+#### Grado Superior - Administración y Finanzas (ADYF)
 | Módulo | Código |
 |--------|--------|
-| Gestión Financiera | — |
-| Contabilidad y Fiscalidad | — |
-| Gestión de Recursos Humanos | — |
-| Gestión Logística y Comercial | — |
-| Recursos Humanos y Responsabilidad Social Corporativa | — |
-| Comunicación y Atención al Cliente | — |
-| Gestión de la Documentación Jurídica y Empresarial | — |
-| Proceso Integral de la Actividad Comercial | — |
-| Aplicaciones Informáticas | — |
+| Gestión Financiera | - |
+| Contabilidad y Fiscalidad | - |
+| Gestión de Recursos Humanos | - |
+| Gestión Logística y Comercial | - |
+| Recursos Humanos y Responsabilidad Social Corporativa | - |
+| Comunicación y Atención al Cliente | - |
+| Gestión de la Documentación Jurídica y Empresarial | - |
+| Proceso Integral de la Actividad Comercial | - |
+| Aplicaciones Informáticas | - |
 
-#### Grado Superior — Asistencia a la Dirección (AAD)
+#### Grado Superior - Asistencia a la Dirección (AAD)
 | Módulo | Código |
 |--------|--------|
-| Comunicación y Atención al Cliente | — |
-| Recursos Humanos y Responsabilidad Social Corporativa | — |
-| Proceso Integral de la Actividad Comercial | — |
-| Gestión de la Documentación Jurídica y Empresarial | — |
-| Aplicaciones Informáticas | — |
+| Comunicación y Atención al Cliente | - |
+| Recursos Humanos y Responsabilidad Social Corporativa | - |
+| Proceso Integral de la Actividad Comercial | - |
+| Gestión de la Documentación Jurídica y Empresarial | - |
+| Aplicaciones Informáticas | - |
 
-#### Grado Superior — Educación Infantil (EI)
+#### Grado Superior - Educación Infantil (EI)
 | Módulo | Código |
 |--------|--------|
-| Desarrollo Cognitivo y Motor | — |
-| Autonomía Personal y Salud Infantil | — |
-| Didáctica de la Educación Infantil | — |
-| El Juego Infantil y su Metodología | — |
-| Intervención con Familias y Atención a Menores en Riesgo Social | — |
-| Desarrollo Socioafectivo | — |
-| Expresión y Comunicación | — |
-| Habilidades Sociales | — |
-| Primeros Auxilios | — |
+| Desarrollo Cognitivo y Motor | - |
+| Autonomía Personal y Salud Infantil | - |
+| Didáctica de la Educación Infantil | - |
+| El Juego Infantil y su Metodología | - |
+| Intervención con Familias y Atención a Menores en Riesgo Social | - |
+| Desarrollo Socioafectivo | - |
+| Expresión y Comunicación | - |
+| Habilidades Sociales | - |
+| Primeros Auxilios | - |
 
 **Características**:
 - Plataforma digital Advantage (recursos profesor)
@@ -358,7 +358,7 @@ La distribución de horas varía según:
 | UD03 | RA3 | 25h | 25% |
 | UD04 | RA4 | 20h | 20% |
 | UD05 | RA5 + Proyecto | 10h | 10% |
-| **TOTAL** | — | **100h** | **100%** |
+| **TOTAL** | - | **100h** | **100%** |
 
 ### 3.3. Relación RA / CE
 
@@ -459,3 +459,4 @@ Desde la LOMLOE, los libros de FP deben integrar transversalmente los **17 ODS d
 ---
 
 *Informe generado el 21 de junio de 2026*
+

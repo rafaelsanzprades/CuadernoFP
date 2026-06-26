@@ -1,5 +1,5 @@
-"use client";
-import { AlertTriangle, BookOpen, CheckCircle, Cloud, Database, Download, FileJson, FolderOpen, Save, Shield, ShieldAlert, Sparkles, Upload, Users, Zap, Plus, Copy, HardDrive , Info } from "lucide-react";
+﻿"use client";
+import { AlertTriangle, BookOpen, CheckCircle, Cloud, Database, Download, FileJson, FolderOpen, Save, Shield, ShieldAlert, Sparkles, Upload, Users, Zap, Plus, Copy, HardDrive, Info } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -24,7 +24,7 @@ export default function ArchivosTrabajoPage() {
   } = useAppStore();
   const router = useRouter();
 
-  const [workspaceFiles, setWorkspaceFiles] = useState<{grupos: string[], programaciones: string[], cursos: string[]}>({ grupos: [], programaciones: [], cursos: [] });
+  const [workspaceFiles, setWorkspaceFiles] = useState<{ grupos: string[], programaciones: string[], cursos: string[] }>({ grupos: [], programaciones: [], cursos: [] });
 
   useEffect(() => {
     if (workspaceHandle) {
@@ -37,6 +37,10 @@ export default function ArchivosTrabajoPage() {
   const [activeTab, setActiveTab] = useState("datos");
   const [wizardOpen, setWizardOpen] = useState(false);
   const [wizardType, setWizardType] = useState<'programacion' | 'curso'>('programacion');
+
+  const [validationModalOpen, setValidationModalOpen] = useState(false);
+  const [brokenLinks, setBrokenLinks] = useState<{ groupName: string; missingFile: string; type: 'programacion' | 'curso' }[]>([]);
+  const [fixingLink, setFixingLink] = useState<{ groupName: string; missingFile: string; type: 'programacion' | 'curso' } | null>(null);
 
   const pdInputRef = useRef<HTMLInputElement>(null);
   const cursoInputRef = useRef<HTMLInputElement>(null);
@@ -226,7 +230,7 @@ export default function ArchivosTrabajoPage() {
           useAppStore.getState().setPdFileSource({ type: 'local', fileName: file.name });
           toast.success(<>Programación cargada desde arrastrar <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] ml-1" /></span></>);
         } else {
-          toast.error("El archivo no tiene un formato válido de Programación (.cddp).");
+          toast.error("El archivo no tiene un formato válido de Programación (.fpp).");
         }
       } else {
         const success = await fileManager.importCurso(content, file.name);
@@ -234,7 +238,7 @@ export default function ArchivosTrabajoPage() {
           useAppStore.getState().setCursoFileSource({ type: 'local', fileName: file.name });
           toast.success(<>Curso cargado desde arrastrar <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] ml-1" /></span></>);
         } else {
-          toast.error("El archivo no tiene un formato válido de Curso (.cddc).");
+          toast.error("El archivo no tiene un formato válido de Curso (.fpc).");
         }
       }
     };
@@ -258,11 +262,11 @@ export default function ArchivosTrabajoPage() {
 
   const getFriendlyPdName = (pdKey: string) => {
     if (pdKey === "imported-pd") return "Programación Importada";
-    
+
     if (useAppStore.getState().activeModuleId === pdKey && moduleData?.info_modulo) {
       const { codigo, nombre, titulo_codigo, ciclo } = moduleData.info_modulo;
       const actualCode = codigo || pdKey.split('-')[0];
-      
+
       let degreeCode = actualCode;
       if (titulo_codigo) {
         degreeCode = titulo_codigo;
@@ -281,7 +285,7 @@ export default function ArchivosTrabajoPage() {
           degreeCode = firstWord;
         }
       }
-      
+
       return `P - ${degreeCode} - ${actualCode} - ${nombre || 'Programación'}`;
     }
 
@@ -304,7 +308,7 @@ export default function ArchivosTrabajoPage() {
     const parts = cursoKey.split('-');
     const code = parts[0];
     const rawYear = parts[parts.length - 1];
-    
+
     // Normalize year
     let year = rawYear;
     if (year === '26' || year === '202526') year = '2025-26';
@@ -365,21 +369,37 @@ export default function ArchivosTrabajoPage() {
 
             {/* Navigation Tabs */}
             <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="mb-2 max-w-full overflow-x-auto flex flex-nowrap scrollbar-hide border-b border-[var(--glass-border)] rounded-none bg-transparent">
-                {TABS.map(tab => (
-                  <TabsTrigger key={tab.id} value={tab.id} className="whitespace-nowrap shrink-0">
-                    {tab.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
+              <div className="flex justify-between items-center mb-2 border-b border-[var(--glass-border)]">
+                <TabsList className="max-w-full overflow-x-auto flex flex-nowrap scrollbar-hide rounded-none bg-transparent h-auto p-0">
+                  {TABS.map(tab => (
+                    <TabsTrigger key={tab.id} value={tab.id} className="whitespace-nowrap shrink-0 py-2">
+                      {tab.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+                {activeTab === "datos" && workspaceHandle && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="border border-warning/50 text-warning hover:bg-warning/10"
+                    onClick={async () => {
+                      const res = await fileManager.validateWorkspaceLinks(workspaceHandle);
+                      setBrokenLinks(res.brokenGroups);
+                      setValidationModalOpen(true);
+                    }}
+                  >
+                    <ShieldAlert className="w-4 h-4 mr-2" /> Validar Workspace
+                  </Button>
+                )}
+              </div>
             </Tabs>
-      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6 mt-6">
-        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-        <div>
-          <p className="text-sm font-semibold text-foreground">Herramienta operativa y de gestión — Archivos</p>
-          <p className="text-sm text-muted mt-1">Sincronización en la nube y configuración del espacio de trabajo.</p>
-        </div>
-      </div>
+            <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6 mt-6">
+              <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+              <div>
+                <p className="text-sm font-semibold text-foreground">Herramienta operativa y de gestión - Archivos</p>
+                <p className="text-sm text-muted mt-1">Sincronización en la nube y configuración del espacio de trabajo.</p>
+              </div>
+            </div>
 
             <div className="space-y-8 animate-in fade-in duration-300 pt-4">
               {/* TAB: FILE MANAGER */}
@@ -394,10 +414,10 @@ export default function ArchivosTrabajoPage() {
                     <div className="relative z-10 flex flex-col h-full">
                       <div className="mb-4">
                         <h3 className="text-xl font-bold text-foreground flex items-center gap-2">
-                          <FolderOpen className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : 'text-accent'}`} /> Grupos (Accesos directos)
+                          <FolderOpen className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : 'text-accent'}`} /> Grupos
                         </h3>
                         <p className="text-sm text-muted mt-2 leading-relaxed">
-                          Abre un grupo para cargar automáticamente su Programación y su Curso asociado.
+                          Abre un Grupo para cargar automáticamente su Programación y su Curso asociado.
                         </p>
                       </div>
 
@@ -616,7 +636,7 @@ export default function ArchivosTrabajoPage() {
 
             </div>
 
-            {/* Security notice — always visible, full-width */}
+            {/* Security notice - always visible, full-width */}
             <div className="mt-8">
               <Card className="flex items-start gap-4 p-6 bg-info/5 border border-info/20 rounded-2xl shadow-lg">
                 <span className="text-info mt-1 shrink-0"><ShieldAlert className="w-8 h-8" /></span>
@@ -640,6 +660,80 @@ export default function ArchivosTrabajoPage() {
         onClose={() => setWizardOpen(false)}
         fileType={wizardType}
       />
+
+      {/* VALIDATION MODAL */}
+      {validationModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
+          <Card className="w-full max-w-xl p-6 shadow-2xl border-[var(--glass-border)]">
+            <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+              <ShieldAlert className="w-5 h-5 text-warning" />
+              Validación de Enlaces del Workspace
+            </h2>
+
+            {brokenLinks.length === 0 ? (
+              <div className="text-center py-8">
+                <CheckCircle className="w-12 h-12 text-success mx-auto mb-4" />
+                <p className="text-foreground font-medium">¡Todo correcto!</p>
+                <p className="text-muted text-sm mt-2">No se han detectado enlaces rotos en los grupos de tu carpeta local.</p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <p className="text-muted text-sm">Se han detectado los siguientes enlaces rotos en los archivos Grupo. Esto sucede cuando renombras o eliminas una Programación o un Curso en Windows directamente.</p>
+                <ul className="space-y-3 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
+                  {brokenLinks.map((link, idx) => (
+                    <li key={idx} className="bg-foreground/5 p-3 rounded-lg border border-[var(--glass-border)] text-sm">
+                      <p className="font-semibold">{link.groupName}</p>
+                      <p className="text-danger flex items-center gap-2 mt-1">
+                        <AlertTriangle className="w-4 h-4" /> {link.type === 'programacion' ? 'Programación' : 'Curso'} no encontrada: <span className="font-mono">{link.missingFile}</span>
+                      </p>
+                      {fixingLink === link ? (
+                        <div className="mt-3 flex gap-2">
+                          <select
+                            className="flex-1 bg-background border border-[var(--glass-border)] rounded px-2 py-1"
+                            onChange={async (e) => {
+                              const newVal = e.target.value;
+                              if (newVal && workspaceHandle) {
+                                const ok = await fileManager.fixWorkspaceLink(workspaceHandle, link.groupName, link.type, newVal);
+                                if (ok) {
+                                  toast.success("Enlace reparado correctamente");
+                                  setBrokenLinks(prev => prev.filter(l => l !== link));
+                                  setFixingLink(null);
+                                  fileManager.scanWorkspaceFiles(workspaceHandle).then(setWorkspaceFiles);
+                                } else {
+                                  toast.error("Error al reparar enlace");
+                                }
+                              }
+                            }}
+                          >
+                            <option value="">Seleccionar archivo correcto...</option>
+                            {(link.type === 'programacion' ? workspaceFiles.programaciones : workspaceFiles.cursos).map(f => (
+                              <option key={f} value={f}>{f}</option>
+                            ))}
+                          </select>
+                          <Button size="sm" variant="ghost" onClick={() => setFixingLink(null)}>Cancelar</Button>
+                        </div>
+                      ) : (
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          className="mt-2 border border-foreground/20"
+                          onClick={() => setFixingLink(link)}
+                        >
+                          Reparar enlace
+                        </Button>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div className="mt-6 flex justify-end">
+              <Button onClick={() => setValidationModalOpen(false)}>Cerrar</Button>
+            </div>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }
@@ -648,3 +742,5 @@ function handleLoadDemo() {
   fileManager.loadDemoData();
   toast.success("Datos de demostración cargados correctamente.");
 }
+
+

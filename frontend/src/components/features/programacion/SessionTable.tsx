@@ -2,6 +2,8 @@ import { GripVertical } from "lucide-react";
 import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { UnidadDidactica, Sesion } from "@/types";
+import { MultiSelectDropdown } from "@/components/ui/MultiSelectDropdown";
+import { getAllAspectosClave, getAllRecursos } from "@/constants/taxonomies";
 
 interface SessionTableProps {
   df_ud: UnidadDidactica[];
@@ -136,19 +138,19 @@ export function SessionTable({
                                   />
                                 </td>
                                 <td className="py-2 pr-2">
-                                  <input 
-                                    type="text" 
-                                    value={ses.Aspectos_Clave || ""}
-                                    onChange={(e) => handleUpdateSesion(globalIdx, "Aspectos_Clave", e.target.value)}
-                                    className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-accent focus:outline-none" 
+                                  <MultiSelectDropdown
+                                    options={getAllAspectosClave()}
+                                    selectedIds={ses.Aspectos_Clave ? ses.Aspectos_Clave.split(',').map(s => s.trim()).filter(Boolean) : []}
+                                    onChange={(ids) => handleUpdateSesion(globalIdx, "Aspectos_Clave", ids.join(', '))}
+                                    placeholder="Aspectos Clave..."
                                   />
                                 </td>
                                 <td className="py-2 pr-2">
-                                  <input 
-                                    type="text" 
-                                    value={ses.Recursos || ""}
-                                    onChange={(e) => handleUpdateSesion(globalIdx, "Recursos", e.target.value)}
-                                    className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-accent focus:outline-none" 
+                                  <MultiSelectDropdown
+                                    options={getAllRecursos()}
+                                    selectedIds={ses.Recursos ? ses.Recursos.split(',').map(s => s.trim()).filter(Boolean) : []}
+                                    onChange={(ids) => handleUpdateSesion(globalIdx, "Recursos", ids.join(', '))}
+                                    placeholder="Recursos..."
                                   />
                                 </td>
                                 <td className="py-2 text-center">

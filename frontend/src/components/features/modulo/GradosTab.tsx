@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Award, Info, Layers } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { useAppStore } from "@/store/useAppStore";
@@ -67,7 +67,7 @@ export function GradosTab() {
       <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20">
         <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
         <div>
-          <p className="text-sm font-semibold text-foreground">5 Grados Formativos — Ley 3/2022</p>
+          <p className="text-sm font-semibold text-foreground">5 Grados Formativos - Ley 3/2022</p>
           <p className="text-sm text-muted mt-1">
             La Ley Orgánica 3/2022 estructura la Formación Profesional en 5 grados (A a E).
             Selecciona el grado que corresponde a tu módulo o programa formativo.
@@ -85,7 +85,7 @@ export function GradosTab() {
             </p>
             <p className="text-xs text-muted mt-1">
               {GRADOS.find((g) => g.grado === gradoActual)?.nombre}
-              {gradoActual === "D" && " — Tu módulo actual pertenece a este grado."}
+              {gradoActual === "D" && " - Tu módulo actual pertenece a este grado."}
             </p>
           </div>
         </div>
@@ -126,3 +126,4 @@ export function GradosTab() {
     </div>
   );
 }
+

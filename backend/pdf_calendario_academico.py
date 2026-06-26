@@ -1,4 +1,4 @@
-import io
+﻿import io
 import calendar
 from datetime import date
 from reportlab.lib import colors
@@ -56,7 +56,7 @@ def generar_pdf_calendario(info_modulo, info_fechas, planning_ledger, calendar_n
     ini_feoe = info_fechas.get("ini_feoe", date(2026, 3, 16))
     fin_feoe = info_fechas.get("fin_feoe", date(2026, 5, 29))
     
-    doc.cal_titulo = f"Calendario Académico {ini.year} – {fin.year}. {info_modulo.get('modulo', 'Módulo')}"
+    doc.cal_titulo = f"Calendario Académico {ini.year} - {fin.year}. {info_modulo.get('modulo', 'Módulo')}"
     doc.cal_pie    = f"{info_modulo.get('centro', 'IES Andalán')} ({info_modulo.get('profesorado', 'Rafael Sanz Prades')})"
 
     frame = Frame(margin, bottom_margin, W - 2*margin, H - top_margin - bottom_margin, id='main')
@@ -175,10 +175,10 @@ def generar_pdf_calendario(info_modulo, info_fechas, planning_ledger, calendar_n
 
         t_data = []
 
-        # Fila 0 – nombre del mes
+        # Fila 0 - nombre del mes
         t_data.append([f"{NOMBRE_MESES[month-1]}  {year}", "", "", "", "", "", "", ""])
 
-        # Fila 1 – cabecera días
+        # Fila 1 - cabecera días
         t_data.append(["Sem.", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sáb.", "Dom."])
 
         # Filas de datos
@@ -295,3 +295,4 @@ def generar_pdf_calendario(info_modulo, info_fechas, planning_ledger, calendar_n
     doc.build(elements)
     buffer.seek(0)
     return buffer
+

@@ -31,13 +31,13 @@ export function TabAutores({ globalSelection }: { globalSelection: any }) {
       .then((res) => res.json())
       .then((json) => {
         if (json.status === "success" && json.data) {
-          // Filtrar por extensión .cdda y que contenga el código del módulo
-          const cddaFiles = json.data.filter((f: DocumentItem) => 
+          // Filtrar por extensión .fpp y que contenga el código del módulo
+          const fppFiles = json.data.filter((f: DocumentItem) => 
             !f.is_dir && 
-            f.name.toLowerCase().endsWith(".cdda") &&
+            f.name.toLowerCase().endsWith(".fpp") &&
             (!moduloCodigo || f.name.includes(moduloCodigo))
           );
-          setProposals(cddaFiles);
+          setProposals(fppFiles);
         }
       })
       .catch((err) => console.error("Error fetching proposals:", err))
@@ -116,7 +116,7 @@ export function TabAutores({ globalSelection }: { globalSelection: any }) {
           <DownloadCloud className="w-5 h-5 text-info" /> Catálogo de Autores y Editoriales
         </h2>
         <p className="text-muted text-sm">
-          Explora plantillas completas (<code>.cdda</code>) propuestas por editoriales o autores para el módulo <strong>{moduloCodigo}</strong>. Estas propuestas pueden incluir unidades didácticas, instrumentos de evaluación y secuencias de aula.
+          Explora plantillas completas (<code>.fpp</code>) propuestas por editoriales o autores para el módulo <strong>{moduloCodigo}</strong>. Estas propuestas pueden incluir unidades didácticas, instrumentos de evaluación y secuencias de aula.
         </p>
       </Card>
 
@@ -128,7 +128,7 @@ export function TabAutores({ globalSelection }: { globalSelection: any }) {
             <p className="text-sm text-muted">Buscando propuestas...</p>
           ) : proposals.length === 0 ? (
             <div className="p-4 border border-dashed border-[var(--glass-border)] rounded-xl text-center">
-              <p className="text-sm text-muted">No se encontraron archivos <code>.cdda</code> para este módulo en tu carpeta Documentos/Autores.</p>
+              <p className="text-sm text-muted">No se encontraron archivos <code>.fpp</code> para este módulo en tu carpeta Documentos/Autores.</p>
             </div>
           ) : (
             <div className="space-y-2">
@@ -140,7 +140,7 @@ export function TabAutores({ globalSelection }: { globalSelection: any }) {
                 >
                   <div className="flex items-center gap-2">
                     <FileText className={`w-4 h-4 ${selectedFile?.path === file.path ? 'text-info' : 'text-muted'}`} />
-                    <span className="text-sm font-medium break-all">{file.name.replace('.cdda', '')}</span>
+                    <span className="text-sm font-medium break-all">{file.name.replace('.fpp', '')}</span>
                   </div>
                 </div>
               ))}
@@ -184,7 +184,9 @@ export function TabAutores({ globalSelection }: { globalSelection: any }) {
                   <p className="mb-2"><strong>{previewData.df_ud?.length || 0}</strong> Unidades Didácticas propuestas:</p>
                   <ul className="list-disc list-inside space-y-1 pl-2 max-h-60 overflow-y-auto">
                     {previewData.df_ud?.map((ud: any) => (
-                      <li key={ud.id_ud}>{ud.id_ud}: {ud.desc_ud} ({ud.horas_ud}h)</li>
+                      <li key={ud.id_ud}>
+                        <strong>{ud.id_ud}</strong> ({ud.horas_ud}h): {ud.desc_ud || '(Sin descripción)'}
+                      </li>
                     ))}
                   </ul>
                   <p className="mt-2 text-xs">Mapeo RA-OG: {previewData.ra_og_mapping ? 'Incluido' : 'No incluido'}</p>
@@ -220,7 +222,7 @@ export function TabAutores({ globalSelection }: { globalSelection: any }) {
             <div className="h-full min-h-[300px] border border-dashed border-[var(--glass-border)] rounded-2xl flex flex-col items-center justify-center text-center p-6">
               <BookOpen className="w-12 h-12 text-muted mb-4 opacity-20" />
               <h3 className="font-medium text-foreground">Ningún fichero seleccionado</h3>
-              <p className="text-sm text-muted max-w-sm mt-2">Selecciona un archivo `.cdda` de la lista de la izquierda para previsualizar todo su contenido antes de incorporarlo a tu programación.</p>
+              <p className="text-sm text-muted max-w-sm mt-2">Selecciona un archivo `.fpp` de la lista de la izquierda para previsualizar todo su contenido antes de incorporarlo a tu programación.</p>
             </div>
           )}
         </div>

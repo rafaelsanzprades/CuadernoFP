@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { BarChart, Building2, ClipboardList, Save, Target, TrendingUp, User, Users, AlertTriangle , Info, FolderOpen } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -375,7 +375,7 @@ export default function ProgresoPage() {
           <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
             <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
             <div>
-              <p className="text-sm font-semibold text-foreground">Progreso y Estadísticas — Ley 3/2022</p>
+              <p className="text-sm font-semibold text-foreground">Progreso y Estadísticas - Ley 3/2022</p>
               <p className="text-sm text-muted mt-1">Monitorización del rendimiento académico y logro de resultados.</p>
             </div>
           </div>
@@ -451,13 +451,13 @@ export default function ProgresoPage() {
                                 return (
                                   <React.Fragment key={t.key}>
                                     <td className="p-3 text-center border-l border-[var(--glass-border)]">
-                                      <span className={`text-${t.color}-400/70 font-mono`}>{s ? s.min.toFixed(1) : '—'}</span>
+                                      <span className={`text-${t.color}-400/70 font-mono`}>{s ? s.min.toFixed(1) : '-'}</span>
                                     </td>
                                     <td className="p-3 text-center">
-                                      <span className={`bg-${t.color}-500/15 text-${t.color}-400 font-bold px-2 py-0.5 rounded-md`}>{s ? s.avg.toFixed(1) : '—'}</span>
+                                      <span className={`bg-${t.color}-500/15 text-${t.color}-400 font-bold px-2 py-0.5 rounded-md`}>{s ? s.avg.toFixed(1) : '-'}</span>
                                     </td>
                                     <td className="p-3 text-center">
-                                      <span className={`text-${t.color}-400/70 font-mono`}>{s ? s.max.toFixed(1) : '—'}</span>
+                                      <span className={`text-${t.color}-400/70 font-mono`}>{s ? s.max.toFixed(1) : '-'}</span>
                                     </td>
                                   </React.Fragment>
                                 );
@@ -482,13 +482,13 @@ export default function ProgresoPage() {
                               return (
                                 <React.Fragment key={t.key}>
                                   <td className="p-4 text-center border-l border-[var(--glass-border)]">
-                                    <span className={`text-${t.color}-400/80 font-mono font-bold`}>{s ? s.min.toFixed(1) : '—'}</span>
+                                    <span className={`text-${t.color}-400/80 font-mono font-bold`}>{s ? s.min.toFixed(1) : '-'}</span>
                                   </td>
                                   <td className="p-4 text-center">
-                                    <span className={`bg-${t.color}-500/20 text-${t.color}-400 font-extrabold text-lg px-3 py-1 rounded-lg`}>{s ? s.avg.toFixed(1) : '—'}</span>
+                                    <span className={`bg-${t.color}-500/20 text-${t.color}-400 font-extrabold text-lg px-3 py-1 rounded-lg`}>{s ? s.avg.toFixed(1) : '-'}</span>
                                   </td>
                                   <td className="p-4 text-center">
-                                    <span className={`text-${t.color}-400/80 font-mono font-bold`}>{s ? s.max.toFixed(1) : '—'}</span>
+                                    <span className={`text-${t.color}-400/80 font-mono font-bold`}>{s ? s.max.toFixed(1) : '-'}</span>
                                   </td>
                                 </React.Fragment>
                               );
@@ -933,3 +933,4 @@ export default function ProgresoPage() {
     </div>
   );
 }
+

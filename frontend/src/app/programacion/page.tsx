@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { BookOpen, ClipboardList, Target , Info, FolderOpen } from "lucide-react";
 import React, { useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -193,7 +193,7 @@ export default function ProgramacionPage() {
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
                   <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-sm font-semibold text-foreground">Secuenciación — RD 659/2023</p>
+                    <p className="text-sm font-semibold text-foreground">Secuenciación - RD 659/2023</p>
                     <p className="text-sm text-muted mt-1">Distribución temporal de las unidades didácticas.</p>
                   </div>
                 </div>
@@ -239,7 +239,7 @@ export default function ProgramacionPage() {
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
                   <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-sm font-semibold text-foreground">Tareas Competenciales — RD 659/2023</p>
+                    <p className="text-sm font-semibold text-foreground">Tareas Competenciales - RD 659/2023</p>
                     <p className="text-sm text-muted mt-1">Actividades prácticas alineadas con los criterios de evaluación.</p>
                   </div>
                 </div>
@@ -263,3 +263,4 @@ export default function ProgramacionPage() {
     </div>
   );
 }
+

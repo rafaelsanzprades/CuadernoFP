@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 pdf_matrices.py
-PDF A4 apaisado — Matrices RA → UD (sin Criterios de Evaluación).
+PDF A4 apaisado - Matrices RA → UD (sin Criterios de Evaluación).
 """
 import io
 import pandas as pd
@@ -261,7 +261,7 @@ def generar_pdf_matrices(
                     has_uds = True
                     ud_id = ud_row.get("id_ud", "")
                     horas = int(ud_row.get("horas_ud", 0) or 0)
-                    elements.append(Paragraph(f"→ {ud_id} ({horas}h) — {int(val_float)}%", ud_item))
+                    elements.append(Paragraph(f"→ {ud_id} ({horas}h) - {int(val_float)}%", ud_item))
 
             if not has_uds:
                 elements.append(Paragraph("Sin UDs asignadas", ud_none))
@@ -271,3 +271,4 @@ def generar_pdf_matrices(
     doc.build(elements)
     buffer.seek(0)
     return buffer
+

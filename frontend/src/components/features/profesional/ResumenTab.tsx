@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { AlertTriangle, Building2, CheckCircle2, ClipboardList, Compass, Globe2, GraduationCap, Handshake, Rocket, Search, Target, XCircle } from "lucide-react";
 import React, { useState, useMemo } from "react";
 import { useAppStore } from "@/store/useAppStore";
@@ -263,18 +263,18 @@ export const ResumenTab = () => {
                       </td>
 
                       {/* Vía acceso */}
-                      <td className="p-4 text-foreground/70 text-xs">{d.via_acceso || <span className="text-muted/40">—</span>}</td>
+                      <td className="p-4 text-foreground/70 text-xs">{d.via_acceso || <span className="text-muted/40">-</span>}</td>
 
                       {/* Aptitud */}
                       <td className="p-4">
                         {d.aptitud_principal
                           ? <span className={`font-semibold ${APTITUD_COLOR[d.aptitud_principal] || "text-foreground/70"}`}>{d.aptitud_principal}</span>
-                          : <span className="text-muted/40">—</span>}
+                          : <span className="text-muted/40">-</span>}
                       </td>
 
                       {/* Área */}
                       <td className="p-4 text-foreground/70 text-xs max-w-[160px] truncate">
-                        {d.area_interes || <span className="text-muted/40">—</span>}
+                        {d.area_interes || <span className="text-muted/40">-</span>}
                       </td>
 
                       {/* Intención */}
@@ -283,12 +283,12 @@ export const ResumenTab = () => {
                           ? <span className={`text-xs font-semibold border px-2 py-1 rounded-full ${INTENCION_COLOR[d.intencion_al_terminar] || "bg-foreground/10 text-muted border-white/10"}`}>
                               {d.intencion_al_terminar}
                             </span>
-                          : <span className="text-muted/40 text-xs">—</span>}
+                          : <span className="text-muted/40 text-xs">-</span>}
                       </td>
 
                       {/* Inserción */}
                       <td className={`p-4 text-xs ${INSERCION_COLOR[d.estado_insercion] || "text-foreground/70"}`}>
-                        {d.estado_insercion || <span className="text-muted/40">—</span>}
+                        {d.estado_insercion || <span className="text-muted/40">-</span>}
                       </td>
 
                       {/* Erasmus */}
@@ -317,7 +317,7 @@ export const ResumenTab = () => {
                       <td className="p-4 text-center">
                         {d.reuniones_celebradas
                           ? <span className="text-xs font-medium text-foreground/80 bg-foreground/10 px-2 py-0.5 rounded-full">{d.reuniones_celebradas}</span>
-                          : <span className="text-muted/40 text-xs">—</span>}
+                          : <span className="text-muted/40 text-xs">-</span>}
                       </td>
                     </tr>
 
@@ -423,3 +423,4 @@ export const ResumenTab = () => {
     </div>
   );
 };
+

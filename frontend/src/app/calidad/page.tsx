@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Shield, Info, CheckCircle2, Target, BarChart3, FileText, RefreshCw } from "lucide-react";
 import { useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 
 /**
- * Página /calidad — Calidad del Centro (Marco EQAVET)
+ * Página /calidad - Calidad del Centro (Marco EQAVET)
  * Ciclo de mejora continua: Planificación → Implementación → Evaluación → Revisión
  * 5 dimensiones: Pertinencia, Eficacia, Eficiencia, Impacto social, Sostenibilidad
  */
@@ -55,7 +55,7 @@ export default function CalidadPage() {
             <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20">
               <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
               <div>
-                <p className="text-sm font-semibold text-foreground">Marco EQAVET — Ciclo de Mejora Continua</p>
+                <p className="text-sm font-semibold text-foreground">Marco EQAVET - Ciclo de Mejora Continua</p>
                 <p className="text-sm text-muted mt-1">
                   El Marco Común establece un ciclo de 4 fases y 5 dimensiones de calidad.
                   Cada dimensión se evalúa con rúbricas de 0 a 4 niveles de madurez.
@@ -132,3 +132,4 @@ export default function CalidadPage() {
     </div>
   );
 }
+

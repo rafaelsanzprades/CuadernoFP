@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { BarChart, Calendar , Info } from "lucide-react";
 import { useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -99,7 +99,7 @@ export default function AgendaPage() {
             <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
               <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
               <div>
-                <p className="text-sm font-semibold text-foreground">Herramienta operativa y de gestión — Agenda</p>
+                <p className="text-sm font-semibold text-foreground">Herramienta operativa y de gestión - Agenda</p>
                 <p className="text-sm text-muted mt-1">Organización personal del tiempo y eventos del docente.</p>
               </div>
             </div>
@@ -145,3 +145,4 @@ export default function AgendaPage() {
     </div>
   );
 }
+

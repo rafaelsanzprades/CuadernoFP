@@ -1,4 +1,4 @@
-import io
+﻿import io
 from datetime import datetime
 import pandas as pd
 from reportlab.lib.pagesizes import A4, portrait
@@ -9,7 +9,7 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER, TA_LEFT
 
 def _draw_page_decorations(canv, doc):
-    """Cabecera y pie — idéntico al Calendario académico."""
+    """Cabecera y pie - idéntico al Calendario académico."""
     canv.saveState()
     W, H = portrait(A4)
     canv.setFont("Helvetica-Bold", 10)
@@ -205,7 +205,7 @@ def generar_pdf_boletin_individual(
             d.add(Rect(0, 0, (prop/100.0)*bar_w, bar_h, fillColor=colors.HexColor(bar_color), strokeColor=None))
             d.add(String(bar_w/2, 3, f"{prop:.0f}%", fontSize=8, fillColor=colors.black if prop < 50 else colors.white, textAnchor='middle', fontName="Helvetica-Bold"))
             
-            desc_text = f"<b>{ra_id} ({info['pond']:.1f}%)</b> — <font size='7' color='#555555'>{info['desc']}</font>"
+            desc_text = f"<b>{ra_id} ({info['pond']:.1f}%)</b> - <font size='7' color='#555555'>{info['desc']}</font>"
             desc_p = Paragraph(desc_text, norm)
             
             tris_lbl = ", ".join(tris)
@@ -406,3 +406,4 @@ def generar_pdf_boletin_individual(
     doc.build(elements)
     buffer.seek(0)
     return buffer
+

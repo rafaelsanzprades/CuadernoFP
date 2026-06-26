@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { BarChart, BookOpen, Brain, Briefcase, Building2, CheckCircle2, ChevronDown, ChevronUp, ClipboardList, Coins, Diamond, Factory, Folder, Globe, Globe2, GraduationCap, Handshake, Heart, HelpCircle, Hospital, Lock, Map, MapPin, MessageSquare, Monitor, NotebookPen, Palette, RefreshCw, Rocket, Search, Server, Store, Target, TrendingUp, UserCog, Users, Wrench, XCircle, Zap } from "lucide-react";
 import React, { useState } from "react";
 import { useAppStore } from "@/store/useAppStore";
@@ -374,7 +374,7 @@ export const OrientacionTab = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {renderSelect("estado_insercion", "Estado de inserción laboral", [
                         { value: "En formación", label: "Todavía en formación / ciclo en curso" },
-                        { value: "En búsqueda", label: "Egresado — en búsqueda activa" },
+                        { value: "En búsqueda", label: "Egresado - en búsqueda activa" },
                         { value: "Empleado empresa", label: "Empleado en empresa" },
                         { value: "FEOE", label: "Realizando FEOE / prácticas" },
                         { value: "Autoempleo", label: "Autoempleo / autónomo" },
@@ -399,11 +399,11 @@ export const OrientacionTab = () => {
                         { value: "FEOE", label: "Contrato FEOE (FCT)" },
                       ])}
                       {renderSelect("valoracion_egresado", "Valoración global del egresado (1-5)", [
-                        { value: "1", label: " — Muy baja" },
-                        { value: "2", label: " — Baja" },
-                        { value: "3", label: " — Media" },
-                        { value: "4", label: " — Alta" },
-                        { value: "5", label: " — Excelente" },
+                        { value: "1", label: " - Muy baja" },
+                        { value: "2", label: " - Baja" },
+                        { value: "3", label: " - Media" },
+                        { value: "4", label: " - Alta" },
+                        { value: "5", label: " - Excelente" },
                       ])}
                     </div>
                     <div className="border-t border-white/5 pt-4">
@@ -446,3 +446,4 @@ export const OrientacionTab = () => {
     </div>
   );
 };
+

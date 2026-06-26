@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Library , Info } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -74,7 +74,7 @@ export default function FamiliasPage() {
           <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
             <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
             <div>
-              <p className="text-sm font-semibold text-foreground">Familias Profesionales — Ley 3/2022</p>
+              <p className="text-sm font-semibold text-foreground">Familias Profesionales - Ley 3/2022</p>
               <p className="text-sm text-muted mt-1">Clasificación oficial de cualificaciones y competencias sectoriales.</p>
             </div>
           </div>
@@ -167,3 +167,4 @@ export default function FamiliasPage() {
     </div>
   );
 }
+

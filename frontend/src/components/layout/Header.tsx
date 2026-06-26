@@ -1,5 +1,5 @@
 "use client";
-import { AlertTriangle, ChevronRight, Cloud, Hourglass, Moon, Redo2, Save, Shield, Sun, Undo2, XCircle, CalendarDays, FolderOpen } from "lucide-react";
+import { AlertTriangle, ChevronRight, ChevronDown, Cloud, Hourglass, Moon, Redo2, Save, Shield, Sun, Undo2, XCircle, CalendarDays, FolderOpen } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useAppStore, useTemporalStore } from "@/store/useAppStore";
 import Link from "next/link";
@@ -16,14 +16,12 @@ import { ThemeSelector } from "@/components/features/settings/ThemeSelector";
 
 
 export default function Header({ title, breadcrumbSuffix }: { title?: React.ReactNode; breadcrumbSuffix?: React.ReactNode }) {
-  const { activeModuleId, activeCursoId, moduleData, cursoData, pdFileSource, cursoFileSource, saveModuleData, saveCursoData, isSidebarOpen, toggleSidebar, dataSource, workspaceHandle } = useAppStore();
+  const { activeModuleId, activeCursoId, moduleData, cursoData, pdFileSource, cursoFileSource, saveModuleData, saveCursoData, isSidebarOpen, toggleSidebar, dataSource, workspaceHandle, syncStatus } = useAppStore();
   const [localGroups, setLocalGroups] = useState<string[]>([]);
   const [activeLocalGroup, setActiveLocalGroup] = useState<string>("");
   const [isSaving, setIsSaving] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-
-  const [autosaveStatus, setAutosaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const cursoSaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const initialLoadRef = useRef<boolean>(true);
@@ -83,17 +81,9 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
     if (saveTimeoutRef.current) {
       clearTimeout(saveTimeoutRef.current);
     }
-    setAutosaveStatus("idle");
 
     saveTimeoutRef.current = setTimeout(async () => {
-      setAutosaveStatus("saving");
-      const ok = await saveModuleData();
-      if (ok) {
-        setAutosaveStatus("saved");
-        setTimeout(() => setAutosaveStatus("idle"), 2000);
-      } else {
-        setAutosaveStatus("error");
-      }
+      await saveModuleData();
     }, 3000);
 
     return () => {
@@ -259,55 +249,68 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
       <div className="w-full px-6 py-2 bg-foreground/[0.015] border-b border-[var(--glass-border)] grid grid-cols-1 sm:grid-cols-3 items-center gap-2 sm:gap-3">
         {/* Columna Izquierda: Grupo */}
         <div className="flex justify-start items-center w-full gap-2">
-          <Link 
-            href="/archivos"
-            className="flex items-center justify-center p-1.5 rounded-lg bg-foreground/5 hover:bg-foreground/10 border border-[var(--glass-border)] transition-colors text-muted hover:text-foreground shrink-0"
-            title="Abrir Gestor de Archivos"
-          >
-            <FolderOpen className="w-4 h-4" />
-          </Link>
-          <select 
-            className={`w-full max-w-[240px] bg-foreground/5 border border-[var(--glass-border)] rounded-lg px-3 py-1.5 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-accent/50 cursor-pointer appearance-none text-left`}
-            style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
-            value={dataSource === 'demo' ? (activeCursoId?.endsWith('1A') ? '1a' : activeCursoId?.endsWith('1B') ? '1b' : activeCursoId?.endsWith('1C') ? '1c' : '1a') : activeLocalGroup}
-            onChange={async (e) => {
-              if (dataSource === 'demo') {
-                fileManager.loadDemoData(e.target.value);
-                toast.success(`Cambiado a Grupo ${e.target.value.toUpperCase()}`);
-              } else {
-                if (e.target.value === 'connect_workspace') {
-                  const handle = await fileManager.openWorkspaceDirectory();
-                  if (handle) toast.success("Carpeta local conectada.");
-                } else if (workspaceHandle && e.target.value) {
-                  setActiveLocalGroup(e.target.value);
-                  const ok = await fileManager.loadGroupFromWorkspace(workspaceHandle, e.target.value);
-                  if (ok) {
-                    toast.success("Grupo cargado correctamente");
+          {dataSource === 'local' && !workspaceHandle ? (
+            <button
+              onClick={() => router.push('/archivos')}
+              className={`w-full max-w-[240px] bg-foreground/5 border rounded-lg px-3 py-1.5 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-success/50 cursor-pointer text-left hover:bg-foreground/10 transition-colors`}
+              style={{ color: 'var(--success)', borderColor: 'var(--success)' }}
+            >
+              Archivos
+            </button>
+          ) : (
+            <div className="relative w-full max-w-[240px]">
+              <select 
+                className={`w-full bg-foreground/5 border rounded-lg pl-3 pr-8 py-1.5 text-sm font-semibold focus:outline-none focus:ring-2 cursor-pointer appearance-none text-left transition-colors`}
+                style={{ 
+                  color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)',
+                  borderColor: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)'
+                }}
+                value={dataSource === 'demo' ? (activeCursoId?.endsWith('1A') ? '1a' : activeCursoId?.endsWith('1B') ? '1b' : activeCursoId?.endsWith('1C') ? '1c' : '1a') : activeLocalGroup}
+                onChange={async (e) => {
+                  if (dataSource === 'demo') {
+                    fileManager.loadDemoData(e.target.value);
+                    toast.success(`Cambiado a Grupo ${e.target.value.toUpperCase()}`);
                   } else {
-                    toast.error("Error al cargar el grupo");
+                    if (e.target.value === 'goto_archivos') {
+                      router.push('/archivos');
+                    } else if (workspaceHandle && e.target.value) {
+                      setActiveLocalGroup(e.target.value);
+                      const ok = await fileManager.loadGroupFromWorkspace(workspaceHandle, e.target.value);
+                      if (ok) {
+                        toast.success("Grupo cargado correctamente");
+                      } else {
+                        toast.error("Error al cargar el grupo");
+                      }
+                    }
                   }
-                }
-              }
-            }}
-          >
-            {dataSource === 'demo' ? (
-              <>
-                <option value="" disabled>Seleccionar Grupo...</option>
-                <option value="1a">G - 1A-GM - 0237 - 2025-26</option>
-                <option value="1b">G - 1B-GM - 0237 - 2025-26</option>
-                <option value="1c">G - 1C-GM - 0237 - 2025-26</option>
-              </>
-            ) : (
-              <>
-                {!workspaceHandle && <option value="connect_workspace">📂 Abrir Carpeta de Grupos...</option>}
-                {workspaceHandle && localGroups.length === 0 && <option value="" disabled>No hay grupos (.json) en la carpeta</option>}
-                {workspaceHandle && localGroups.length > 0 && <option value="" disabled>Seleccionar Grupo Local...</option>}
-                {workspaceHandle && localGroups.map(g => (
-                  <option key={g} value={g}>{g.replace('.json', '')}</option>
-                ))}
-              </>
-            )}
-          </select>
+                }}
+              >
+                {dataSource === 'demo' ? (
+                  <>
+                    <option value="" disabled>Seleccionar Grupo...</option>
+                    <option value="1a">G - 1A-GM - 0237 - 2025-26</option>
+                    <option value="1b">G - 1B-GM - 0237 - 2025-26</option>
+                    <option value="1c">G - 1C-GM - 0237 - 2025-26</option>
+                  </>
+                ) : (
+                  <>
+                    <option value="goto_archivos">Archivos</option>
+                    {localGroups.length === 0 && <option value="" disabled>No hay grupos (.json) en la carpeta</option>}
+                    {localGroups.length > 0 && <option value="" disabled>Seleccionar Grupo Local...</option>}
+                    {localGroups.map(g => (
+                      <option key={g} value={g}>{g.replace('.json', '')}</option>
+                    ))}
+                  </>
+                )}
+              </select>
+              <div 
+                className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none" 
+                style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
+              >
+                <ChevronDown className="w-4 h-4" />
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Columna Central: Programación */}
@@ -405,7 +408,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
                     ? 'Cambiar' 
                     : isSaving 
                       ? 'Guardando...' 
-                      : autosaveStatus === 'saving'
+                      : syncStatus === 'saving'
                         ? 'Autoguardando...'
                         : cloudSynced 
                           ? 'Sincronizado' 
@@ -419,15 +422,6 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
 
         {/* Right Side: Undo/Redo + Tema */}
         <div className="flex justify-end items-center gap-3 shrink-0">
-          {mounted && moduleData && dataSource !== 'demo' && (
-            <div className="hidden md:flex items-center">
-              {autosaveStatus === "saved" && <span className="text-success text-sm font-medium"><span className="inline-flex"><Cloud className="w-[1.2em] h-[1.2em] mr-1" /></span> Guardado</span>}
-              {autosaveStatus === "saving" && <span className="text-warning text-sm font-medium animate-pulse">⏳ Guardando...</span>}
-              {autosaveStatus === "error" && <span className="text-danger text-sm font-medium"><span className="inline-flex"><XCircle className="w-[1.2em] h-[1.2em] mr-1" /></span> Error al guardar</span>}
-              {autosaveStatus === "idle" && <span className="text-[var(--text-muted)] text-sm font-medium"><span className="inline-flex"><Cloud className="w-[1.2em] h-[1.2em] mr-1" /></span> Sincronizado</span>}
-            </div>
-          )}
-
           <div className="flex items-center gap-1 bg-foreground/5 p-1 rounded-lg">
             <button
               onClick={() => undo()}
@@ -460,21 +454,26 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
       {currentItem && (
         <div className="w-full px-6 py-1.5 bg-white/[0.02] border-t border-[var(--glass-border)] flex items-center justify-between gap-1.5 text-sm text-muted tracking-wide">
           {/* Breadcrumb a la izquierda */}
-          <div className="flex items-center gap-1.5 min-w-0">
-            {pathname !== '/inicio' && (
-              <>
-                <Link href="/inicio" className="font-medium text-muted hover:text-foreground transition-colors">Inicio</Link>
-                <ChevronRight className="w-3 h-3 text-muted/80" />
-              </>
-            )}
-            <span className="text-foreground/90 font-semibold">{currentItem}</span>
+          <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 text-sm text-muted whitespace-nowrap overflow-hidden text-ellipsis">
+            <span className="font-medium text-foreground">{currentItem}</span>
             {breadcrumbSuffix && (
               <>
-                <ChevronRight className="w-3 h-3 text-muted/80" />
-                <span className="text-foreground/90 font-semibold">{breadcrumbSuffix}</span>
+                <ChevronRight className="w-4 h-4 shrink-0" />
+                <span className="truncate">{breadcrumbSuffix}</span>
               </>
             )}
+            {/* Sync Status Indicator */}
+            {dataSource === 'local' && (
+              <div className="ml-4 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-foreground/5 text-xs font-medium">
+                {syncStatus === 'saving' && <><Hourglass className="w-3 h-3 text-warning animate-spin" /><span className="text-warning">Guardando...</span></>}
+                {syncStatus === 'saved' && <><Save className="w-3 h-3 text-success" /><span className="text-success">Guardado local</span></>}
+                {syncStatus === 'error' && <><AlertTriangle className="w-3 h-3 text-danger" /><span className="text-danger">Error al guardar</span></>}
+                {syncStatus === 'idle' && <><Cloud className="w-3 h-3 text-muted/50" /><span className="text-muted/60">Sincronizado</span></>}
+              </div>
+            )}
           </div>
+        </div>
 
           {/* Búsqueda a la derecha */}
           <div className="relative w-48 md:w-64 shrink-0">

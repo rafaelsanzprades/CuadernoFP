@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 pdf_boletin_grupal.py
-PDF A4 vertical — resumen de calificaciones del grupo por trimestre.
+PDF A4 vertical - resumen de calificaciones del grupo por trimestre.
 Estilo unificado con el resto de informes (Calendario académico).
 Columnas: Apellidos | Nombre | Edad | Rep. | [bloques por tipo] | Nota Media
 """
@@ -19,7 +19,7 @@ from reportlab.lib.units import cm
 
 
 def _draw_page_decorations(canv, doc):
-    """Cabecera y pie — idéntico al Calendario académico."""
+    """Cabecera y pie - idéntico al Calendario académico."""
     canv.saveState()
     W, H = portrait(A4)
     canv.setFont("Helvetica-Bold", 10)
@@ -465,3 +465,4 @@ def generar_pdf_boletin_grupal_final(
     doc.build([tabla])
     buffer.seek(0)
     return buffer
+

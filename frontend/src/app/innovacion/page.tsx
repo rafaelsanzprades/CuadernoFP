@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Sparkles, Info, Lightbulb, Rocket, Users, Building2, FileText, Award } from "lucide-react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/Card";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 
 /**
- * Página /innovacion — Innovación y Emprendimiento
+ * Página /innovacion - Innovación y Emprendimiento
  * Indicador 7.3 del Sistema Estatal
  * Proyectos de innovación, emprendimiento, Hubs de FP
  */
@@ -49,7 +49,7 @@ export default function InnovacionPage() {
             <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20">
               <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
               <div>
-                <p className="text-sm font-semibold text-foreground">Ley 3/2022 — Emprendimiento obligatorio</p>
+                <p className="text-sm font-semibold text-foreground">Ley 3/2022 - Emprendimiento obligatorio</p>
                 <p className="text-sm text-muted mt-1">
                   La ley establece que todos los ciclos formativos deben incluir un módulo de
                   emprendimiento y que los proyectos finales deben tener componente emprendedor.
@@ -112,3 +112,4 @@ export default function InnovacionPage() {
     </div>
   );
 }
+

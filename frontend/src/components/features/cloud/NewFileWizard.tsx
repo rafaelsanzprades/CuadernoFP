@@ -3,6 +3,7 @@ import { useState } from "react";
 import { X, BookOpen, GraduationCap, ChevronRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { fileManager } from "@/services/fileManager";
+import { useAppStore } from "@/store/useAppStore";
 import toast from "react-hot-toast";
 
 interface ModuleOption {
@@ -130,7 +131,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
           toast.error("Error al crear la programación.");
         }
       } else {
-        const ok = fileManager.createNewCurso(selectedModule.groupName, "2025-26");
+        const ok = await fileManager.createNewCurso(selectedModule.groupName, "2025-26");
         if (ok) {
           toast.success(`Curso ${selectedModule.groupName} creado correctamente.`);
           onClose();
@@ -143,12 +144,22 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
     }
   };
 
+  const [cursoYear, setCursoYear] = useState("2025-26");
+  const [cursoName, setCursoName] = useState("1A-GM");
+
   const handleCreateCurso = async () => {
     setIsCreating(true);
     try {
-      const ok = fileManager.createNewCurso("Nuevo Curso", "2025-26");
+      // The user wants "C - 2025-26 - 1A-GM - ELE-203.json" roughly, but our fileManager takes cursoName and year.
+      // E.g. "1A-GM - ELE-203"
+      const pdFile = useAppStore.getState().pdFileSource.fileName || "";
+      const baseName = pdFile ? pdFile.replace('P - ', '').replace('.json', '') : "Módulo Desconocido";
+      
+      const fullCursoName = `${cursoName} - ${baseName}`;
+      
+      const ok = await fileManager.createNewCurso(fullCursoName, cursoYear);
       if (ok) {
-        toast.success("Curso vacío creado correctamente.");
+        toast.success(`Curso ${fullCursoName} y su Grupo creados correctamente.`);
         onClose();
       } else {
         toast.error("Error al crear el curso.");
@@ -251,15 +262,43 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
                 Elige cómo quieres inicializar tu nuevo archivo de curso.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <button
-                  onClick={handleCreateCurso}
-                  disabled={isCreating}
-                  className="bg-foreground/5 border border-[var(--glass-border)] rounded-xl p-6 text-center hover:bg-success/10 hover:border-success/30 transition-all group"
-                >
-                  <GraduationCap className="w-12 h-12 text-success/40 mx-auto mb-3 group-hover:text-success transition-colors" />
-                  <p className="text-foreground font-medium group-hover:text-success transition-colors">Crear curso vacío</p>
-                  <p className="text-sm text-muted mt-2">Empieza de cero. Podrás importar alumnos desde un archivo .cddc después.</p>
-                </button>
+                <div className="bg-foreground/5 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col gap-4 text-center group">
+                  <div className="flex flex-col items-center mb-2">
+                    <GraduationCap className="w-12 h-12 text-success/40 mb-3 group-hover:text-success transition-colors" />
+                    <p className="text-foreground font-medium group-hover:text-success transition-colors">Crear curso vacío</p>
+                  </div>
+                  
+                  <div className="flex gap-2 text-left">
+                    <div className="flex-1">
+                      <label className="text-xs text-muted font-medium mb-1 block">Año Académico</label>
+                      <input 
+                        type="text" 
+                        value={cursoYear} 
+                        onChange={e => setCursoYear(e.target.value)} 
+                        className="w-full bg-background border border-[var(--glass-border)] rounded-md px-3 py-1.5 text-sm" 
+                        placeholder="ej: 2025-26" 
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <label className="text-xs text-muted font-medium mb-1 block">Letra / Grupo</label>
+                      <input 
+                        type="text" 
+                        value={cursoName} 
+                        onChange={e => setCursoName(e.target.value)} 
+                        className="w-full bg-background border border-[var(--glass-border)] rounded-md px-3 py-1.5 text-sm" 
+                        placeholder="ej: 1A-GM" 
+                      />
+                    </div>
+                  </div>
+
+                  <Button 
+                    onClick={handleCreateCurso}
+                    disabled={isCreating || !cursoYear || !cursoName}
+                    className="w-full bg-success/10 hover:bg-success/20 text-success border border-success/30 transition-all mt-2"
+                  >
+                    Crear ahora
+                  </Button>
+                </div>
                 <button
                   onClick={handleCreateCursoDemo}
                   disabled={isCreating}

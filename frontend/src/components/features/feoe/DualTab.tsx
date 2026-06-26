@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Handshake, Info, Building2, Calendar, Users, BookOpen, FileText, AlertCircle } from "lucide-react";
 import { useState } from "react";
 import { Card } from "@/components/ui/Card";
@@ -85,7 +85,7 @@ export function DualTab() {
       <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20">
         <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
         <div>
-          <p className="text-sm font-semibold text-foreground">Formación Dual — Ley 3/2022</p>
+          <p className="text-sm font-semibold text-foreground">Formación Dual - Ley 3/2022</p>
           <p className="text-sm text-muted mt-1">
             La dual es <strong>obligatoria</strong> en grados C y D. Se distinguen dos modalidades:
             Régimen General (sin contrato) y Régimen Intensivo (con contrato de formación).
@@ -205,3 +205,4 @@ export function DualTab() {
     </div>
   );
 }
+

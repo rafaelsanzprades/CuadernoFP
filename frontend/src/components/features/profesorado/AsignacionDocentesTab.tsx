@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Search, Users , Info } from "lucide-react";
 import React, { useState } from "react";
 import { useAppStore, calculateTeacherHours, getTeacherAssignedModules } from "@/store/useAppStore";
@@ -33,7 +33,7 @@ export function AsignacionDocentesTab() {
       <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
         <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
         <div>
-          <p className="text-sm font-semibold text-foreground">Asignación — RD 659/2023</p>
+          <p className="text-sm font-semibold text-foreground">Asignación - RD 659/2023</p>
           <p className="text-sm text-muted mt-1">Asignación de módulos y grupos al profesorado.</p>
         </div>
       </div>
@@ -87,3 +87,4 @@ export function AsignacionDocentesTab() {
     </div>
   );
 }
+

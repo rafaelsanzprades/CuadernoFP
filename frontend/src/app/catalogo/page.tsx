@@ -1,5 +1,5 @@
-"use client";
-import { BookOpen, ChevronDown, ChevronUp, Clock, FolderTree, GraduationCap, Layers, ListChecks, AlertTriangle , Info } from "lucide-react";
+﻿"use client";
+import { BookOpen, ChevronDown, ChevronUp, Clock, FolderTree, GraduationCap, Layers, ListChecks, AlertTriangle, Info } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -84,7 +84,7 @@ function CiclosContent() {
     titulo: 'Título',
     cursos: 'Cursos → Módulos',
     modulos: 'Módulo → RA → CE',
-    autores: 'Autores/Editoriales'
+    autores: 'Autores - Editoriales'
   };
 
   const activeTabCleanLabel = TAB_LABELS[activeTab];
@@ -111,7 +111,7 @@ function CiclosContent() {
                     { id: "titulo" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Título</span> },
                     { id: "cursos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> Cursos → Módulos</span> },
                     { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> Módulo → RA → CE</span> },
-                    { id: "autores" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-info" /> Autores/Editoriales</span> },
+                    { id: "autores" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-info" /> Autores - Editoriales</span> },
                   ]
                 ).map((t) => (
                   <TabsTrigger key={t.id} value={t.id}>
@@ -121,13 +121,13 @@ function CiclosContent() {
               </TabsList>
             </Tabs>
 
-      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-        <div>
-          <p className="text-sm font-semibold text-foreground">Catálogo Nacional — Ley 3/2022</p>
-          <p className="text-sm text-muted mt-1">Catálogo Nacional de Estándares de Competencias Profesionales.</p>
-        </div>
-      </div>
+            <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+              <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+              <div>
+                <p className="text-sm font-semibold text-foreground">Catálogo Nacional - Ley 3/2022</p>
+                <p className="text-sm text-muted mt-1">Catálogo Nacional de Estándares de Competencias Profesionales.</p>
+              </div>
+            </div>
 
             {activeTab === "familias" && <TabFamilias onSelectTitulo={handleSelectFamiliaToTitulo} />}
             {activeTab === "titulo" && <TabTitulo onSelectTitulo={handleSelectTitulo} globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
@@ -234,9 +234,9 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
 
                     let styleClass = "border-[var(--glass-border)] hover:bg-foreground/10";
                     let badgeClass = "bg-foreground/20 border-[var(--glass-border)] text-foreground";
-                    
+
                     const lvl = (degree.level || "").toUpperCase();
-                    
+
                     if (lvl.includes("BÁSIC") || lvl.includes("BASIC")) {
                       styleClass = "border-[var(--glass-border)] bg-[#f43f5e]/5 hover:bg-[#f43f5e]/10";
                       badgeClass = "bg-[#f43f5e]/20 border-[#f43f5e]/30 text-[#f43f5e]";
@@ -365,17 +365,17 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
       {selectedTituloObj && (
         <div className="space-y-6 mt-6">
           <div className="flex items-center justify-between bg-foreground/5 p-4 rounded-xl border border-[var(--glass-border)]">
-             <div>
-               <h2 className="text-xl font-bold text-foreground flex items-center gap-3">
-                 {formatDegreeName(selectedTituloObj.code, selectedTituloObj.name)}
-                 {selectedTituloObj.code && !selectedTituloObj.name.startsWith(selectedTituloObj.code) && <Badge variant="default" className="font-mono">{selectedTituloObj.code}</Badge>}
-               </h2>
-               <p className="text-sm text-muted mt-1">Detalles del currículo del BOA</p>
-             </div>
-             <Button variant="primary" onClick={() => onSelectTitulo(selectedFamilia, selectedTituloObj.code ?? selectedTituloObj.name)}>
-               <BookOpen className="w-4 h-4 mr-2" />
-               Ver Módulos
-             </Button>
+            <div>
+              <h2 className="text-xl font-bold text-foreground flex items-center gap-3">
+                {formatDegreeName(selectedTituloObj.code, selectedTituloObj.name)}
+                {selectedTituloObj.code && !selectedTituloObj.name.startsWith(selectedTituloObj.code) && <Badge variant="default" className="font-mono">{selectedTituloObj.code}</Badge>}
+              </h2>
+              <p className="text-sm text-muted mt-1">Detalles del currículo del BOA</p>
+            </div>
+            <Button variant="primary" onClick={() => onSelectTitulo(selectedFamilia, selectedTituloObj.code ?? selectedTituloObj.name)}>
+              <BookOpen className="w-4 h-4 mr-2" />
+              Cursos → Módulos
+            </Button>
           </div>
 
           {selectedTituloObj.boa_articles && Object.keys(selectedTituloObj.boa_articles).length > 0 ? (
@@ -391,7 +391,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
                     <div className="p-6 text-sm text-foreground/80 whitespace-pre-wrap leading-relaxed">
                       {/* Hide raw text when structured data exists */}
                       {artKey !== 'article_5' && artKey !== 'article_6' && artKey !== 'article_9' && content}
-                                            {/* CPPS rows (Article 5) */}
+                      {/* CPPS rows (Article 5) */}
                       {artKey === 'article_5' && Array.isArray(selectedTituloObj.boa_articles?.article_5_cpps) && (
                         <div className="mt-6 space-y-2">
                           {(selectedTituloObj.boa_articles as any).article_5_cpps.map((cpp: any) => (
@@ -491,7 +491,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
       .catch(() => setFamLoading(false));
   }, []);
 
-  
+
   const selectedFamilia = globalSelection.familia;
   const selectedTitulo = globalSelection.tituloCodigo;
   const curriculoCodigo = selectedTitulo;
@@ -592,16 +592,16 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Button 
-                      variant="primary" 
-                      size="sm" 
+                    <Button
+                      variant="primary"
+                      size="sm"
                       onClick={(e) => {
                         e.stopPropagation();
                         const is2nd = mod.curso === "2º";
                         const h_feoe = is2nd ? 360 : 140;
                         const h_sem = mod.horas ? Math.round(mod.horas / 30) : 0;
                         const tituloNombre = selectedFamilyObj?.degrees.find(d => (d.code ?? d.name) === curriculoCodigo)?.name || curriculoCodigo;
-                        
+
                         const extras = {
                           familia: selectedFamilia,
                           ciclo: tituloNombre,
@@ -702,13 +702,13 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
         </Card>
       )}
 
-      
+
       {tituloLoading && (
         <div className="flex items-center justify-center p-12">
           <div className="w-8 h-8 border-4 border-accent border-t-transparent rounded-full animate-spin" />
         </div>
       )}
-{selectedTitulo && !titulo && !tituloLoading && (
+      {selectedTitulo && !titulo && !tituloLoading && (
         <Card className="p-12 text-center text-muted flex flex-col items-center justify-center gap-4">
           <Layers className="w-12 h-12" />
           <p className="text-lg">Este título aún no tiene datos curriculares cargados.</p>
@@ -750,7 +750,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
       .catch(() => setFamLoading(false));
   }, []);
 
-  
+
   const selectedFamilia = globalSelection.familia;
   const selectedTitulo = globalSelection.tituloCodigo;
   const curriculoCodigo = selectedTitulo;
@@ -863,20 +863,20 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
             <option value="">-- Selecciona Módulo --</option>
             {titulo?.modulos.map((m: any) => (
               <option key={m.codigo} value={m.codigo}>
-                {m.codigo} — {m.nombre} ({m.curso})
+                {m.codigo} - {m.nombre} ({m.curso})
               </option>
             ))}
           </select>
         </div>
       </Card>
 
-      
+
       {tituloLoading && (
         <div className="flex items-center justify-center p-12">
           <div className="w-8 h-8 border-4 border-accent border-t-transparent rounded-full animate-spin" />
         </div>
       )}
-{selectedTitulo && !titulo && !tituloLoading && (
+      {selectedTitulo && !titulo && !tituloLoading && (
         <Card className="p-12 text-center text-muted flex flex-col items-center justify-center gap-4">
           <Layers className="w-12 h-12" />
           <p className="text-lg">Este título aún no tiene datos curriculares cargados.</p>
@@ -894,13 +894,39 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
       {modulo && (
         <>
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 flex-wrap">
               <span className="font-mono text-xs font-medium text-accent bg-accent/10 border border-accent/20 px-2 py-1 rounded">
                 {modulo.codigo}
               </span>
               <h2 className="text-lg font-bold text-foreground">{modulo.nombre}</h2>
               <Badge variant="info">{modulo.horas}h</Badge>
               <Badge>{modulo.curso} Curso</Badge>
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => {
+                  const is2nd = modulo.curso === "2º";
+                  const h_feoe = is2nd ? 360 : 140;
+                  const h_sem = modulo.horas ? Math.round(modulo.horas / 30) : 0;
+                  const tituloNombre = selectedFamilyObj?.degrees.find((d: any) => (d.code ?? d.name) === curriculoCodigo)?.name || curriculoCodigo;
+
+                  const extras = {
+                    familia: selectedFamilia,
+                    ciclo: tituloNombre,
+                    titulo_codigo: curriculoCodigo,
+                    curso: modulo.curso || "1º",
+                    h_boa: modulo.horas || 0,
+                    h_sem: h_sem,
+                    p_ev: 15,
+                    h_feoe: h_feoe
+                  };
+                  handleCreateNewProgramacion(modulo.codigo, modulo.nombre, extras);
+                }}
+                className="flex items-center ml-2"
+              >
+                <BookOpen className="w-4 h-4 mr-2" />
+                Nueva Programación
+              </Button>
             </div>
           </div>
 
@@ -909,7 +935,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
               <TabsTrigger value="curriculo">Resultados de Aprendizaje</TabsTrigger>
               <TabsTrigger value="competencias">Competencias Acreditables</TabsTrigger>
             </TabsList>
-            
+
             <TabsContent value="curriculo">
               <div className="space-y-3">
                 {modulo.ra?.map((raItem: any) => {
@@ -952,7 +978,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                 })}
               </div>
             </TabsContent>
-            
+
             <TabsContent value="competencias">
               {(!modulo.competencias || modulo.competencias.length === 0) ? (
                 <Card className="p-8 text-center text-muted border-dashed border-[var(--glass-border)]">
@@ -969,7 +995,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                       <p>Para convalidar este módulo, debes cumplir con <strong>alguna</strong> de las siguientes opciones (no todas).</p>
                     </div>
                   </div>
-                  
+
                   {modulo.competencias.map((grupo: any, i: number) => (
                     <Card key={i} className="border border-[var(--glass-border)] overflow-hidden">
                       <div className="bg-foreground/5 border-b border-[var(--glass-border)] p-3 px-4 flex items-center justify-between">
@@ -998,7 +1024,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                           </div>
                         ))}
                       </div>
-                      
+
                       {(grupo.otros_modulos_convalidables_codigos && grupo.otros_modulos_convalidables_codigos.length > 0) && (
                         <div className="bg-success/10 p-3 px-4 text-xs text-success-foreground border-t border-[var(--glass-border)] flex items-start gap-2">
                           <BookOpen className="w-3.5 h-3.5 mt-0.5 shrink-0" />
@@ -1014,36 +1040,9 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
             </TabsContent>
           </Tabs>
 
-          <div className="flex justify-center pt-2">
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={() => {
-                const is2nd = modulo.curso === "2º";
-                const h_feoe = is2nd ? 360 : 140;
-                const h_sem = modulo.horas ? Math.round(modulo.horas / 30) : 0;
-                const tituloNombre = selectedFamilyObj?.degrees.find((d: any) => (d.code ?? d.name) === curriculoCodigo)?.name || curriculoCodigo;
-                
-                const extras = {
-                  familia: selectedFamilia,
-                  ciclo: tituloNombre,
-                  titulo_codigo: curriculoCodigo,
-                  curso: modulo.curso || "1º",
-                  h_boa: modulo.horas || 0,
-                  h_sem: h_sem,
-                  p_ev: 15,
-                  h_feoe: h_feoe
-                };
-                handleCreateNewProgramacion(modulo.codigo, modulo.nombre, extras);
-              }}
-              className="flex items-center"
-            >
-              <BookOpen className="w-4 h-4 mr-2" />
-              Nueva Programación
-            </Button>
-          </div>
         </>
       )}
     </div>
   );
 }
+

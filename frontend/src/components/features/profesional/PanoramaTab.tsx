@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { AlertTriangle, BarChart, Building2, CheckCircle2, Factory, Lightbulb, Scale } from "lucide-react";
 import React, { useState } from "react";
 import { Card } from "@/components/ui/Card";
@@ -169,7 +169,7 @@ const RESUMEN_TABLA = [
   { criterio: "Esfuerzo", a: "Instalación: Más físico", b: "Mantenimiento: Más mental" },
   { criterio: "Ubicación", a: "️ Campo: Aire libre, movilidad", b: "Taller: Comodidad, rutina" },
   { criterio: "Sueldo", a: "️ Público: Estable, medio", b: "Privado: Variable, potencial alto" },
-  { criterio: "Horario", a: "Obra: Fijo (7:00–15:00)", b: "Mantenimiento: Guardias y avisos" },
+  { criterio: "Horario", a: "Obra: Fijo (7:00-15:00)", b: "Mantenimiento: Guardias y avisos" },
 ];
 
 const SECTORES: Sector[] = [
@@ -239,7 +239,7 @@ const SECTORES: Sector[] = [
     id: "secundario",
     emoji: "️",
     nombre: "Sector Secundario",
-    subtitulo: "Industria y Energía — El motor del empleo técnico",
+    subtitulo: "Industria y Energía - El motor del empleo técnico",
     color: "text-info",
     colorBg: "bg-info/10",
     colorBorder: "border-info/30",
@@ -302,7 +302,7 @@ const SECTORES: Sector[] = [
     id: "terciario",
     emoji: "️",
     nombre: "Sector Terciario",
-    subtitulo: "Servicios — Conectar personas, mantener ciudades",
+    subtitulo: "Servicios - Conectar personas, mantener ciudades",
     color: "text-info",
     colorBg: "bg-info/10",
     colorBorder: "border-info/30",
@@ -567,7 +567,7 @@ export const PanoramaTab = () => {
                                   <div>
                                     <span className="text-xs font-semibold text-foreground">{emp.nombre}</span>
                                     {emp.nota && (
-                                      <span className="text-xs text-muted"> — {emp.nota}</span>
+                                      <span className="text-xs text-muted"> - {emp.nota}</span>
                                     )}
                                   </div>
                                 </li>
@@ -587,10 +587,11 @@ export const PanoramaTab = () => {
 
       {/* Footer note */}
       <div className="border border-white/5 bg-foreground/5 rounded-2xl p-6 text-center text-muted text-sm">
-        Información elaborada por el departamento de orientación. Actualizada a curso 2024–25.
+        Información elaborada por el departamento de orientación. Actualizada a curso 2024-25.
         Las empresas mencionadas son ejemplos representativos del tejido industrial de Aragón.
       </div>
 
     </div>
   );
 };
+

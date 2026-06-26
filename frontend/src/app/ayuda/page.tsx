@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Activity, AlertTriangle, ArrowRight, BarChart2, BookOpen, Briefcase, Building2, CalendarDays, Check, CheckCircle, ClipboardList, FileText, GraduationCap, HeartHandshake, Layers, Users, Wrench, XCircle, ChevronDown, ListChecks, Info } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import Sidebar from "@/components/layout/Sidebar";
@@ -271,8 +271,8 @@ export default function AyudaPage() {
         ? ["Sin datos de programación cargados"]
         : [
           `Módulo activo: ${activeModuleId}`,
-          `Horas semanales: ${m.info_modulo?.h_sem || "—"} h`,
-          `Horas BOA: ${m.info_modulo?.h_boa || "—"} h`,
+          `Horas semanales: ${m.info_modulo?.h_sem || "-"} h`,
+          `Horas BOA: ${m.info_modulo?.h_boa || "-"} h`,
         ],
       actionHref: !m ? "/modulo" : undefined,
       actionLabel: !m ? "Configurar módulo" : undefined,
@@ -288,7 +288,7 @@ export default function AyudaPage() {
         ? ["No hay UD definidas"]
         : [
           `${udCount} UD definidas`,
-          `Horas declaradas: ${udHoras} / ${moduloHoras || "—"} h del módulo`,
+          `Horas declaradas: ${udHoras} / ${moduloHoras || "-"} h del módulo`,
           horasDiff > 2 ? `Diferencia de ${horasDiff} h` : "Horas cuadran correctamente",
         ],
       actionHref: udCount === 0 ? "/matrices" : undefined,
@@ -626,10 +626,10 @@ export default function AyudaPage() {
               <div className="space-y-8 animate-in fade-in duration-500">
                 <div className="flex flex-wrap gap-2 text-sm text-muted">
                   <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1">
-                    Programación Activa: <span className="font-semibold text-foreground">{activeModuleId || "—"}</span>
+                    Programación Activa: <span className="font-semibold text-foreground">{activeModuleId || "-"}</span>
                   </span>
                   <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1">
-                    Curso Activo: <span className="font-semibold text-foreground">{activeCursoId || "—"}</span>
+                    Curso Activo: <span className="font-semibold text-foreground">{activeCursoId || "-"}</span>
                   </span>
                 </div>
 
@@ -734,3 +734,4 @@ export default function AyudaPage() {
     </div>
   );
 }
+

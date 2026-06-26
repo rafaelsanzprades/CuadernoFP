@@ -1,4 +1,4 @@
-import { Award, CheckSquare, ChevronDown, ChevronUp, Compass, FileText, HelpCircle, Save, ShieldAlert, Square, Stethoscope, User, Users, Info } from "lucide-react";
+﻿import { Award, CheckSquare, ChevronDown, ChevronUp, Compass, FileText, HelpCircle, Save, ShieldAlert, Square, Stethoscope, User, Users, Info } from "lucide-react";
 import React, { useState } from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { Card } from '@/components/ui/Card';
@@ -122,7 +122,7 @@ export const TutoriaTab = () => {
       <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
         <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
         <div>
-          <p className="text-sm font-semibold text-foreground">Tutoría — RD 659/2023 (Art. 100)</p>
+          <p className="text-sm font-semibold text-foreground">Tutoría - RD 659/2023 (Art. 100)</p>
           <p className="text-sm text-muted mt-1">Acción tutorial y orientación personal y profesional.</p>
         </div>
       </div>
@@ -431,3 +431,4 @@ export const TutoriaTab = () => {
     </>
   );
 };
+

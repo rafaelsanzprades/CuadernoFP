@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Award, BookOpen, Calculator, Check, GraduationCap, Puzzle, Target, Settings , Info, FolderOpen } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -167,7 +167,7 @@ export default function MatricesPage() {
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
                   <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-sm font-semibold text-foreground">Resultados de Aprendizaje — RD 659/2023 (Anexos I)</p>
+                    <p className="text-sm font-semibold text-foreground">Resultados de Aprendizaje - RD 659/2023 (Anexos I)</p>
                     <p className="text-sm text-muted mt-1">Los RA y CE son prescriptivos y definen lo que el alumno debe saber y saber hacer.</p>
                   </div>
                 </div>
@@ -478,7 +478,7 @@ export default function MatricesPage() {
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
                   <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-sm font-semibold text-foreground">Unidades Didácticas (UD) o de Trabajo (UT) — RD 659/2023</p>
+                    <p className="text-sm font-semibold text-foreground">Unidades Didácticas (UD) o de Trabajo (UT) - RD 659/2023</p>
                     <p className="text-sm text-muted mt-1">Organización del currículo en unidades de aprendizaje significativas.</p>
                   </div>
                 </div>
@@ -657,7 +657,7 @@ export default function MatricesPage() {
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
                   <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-sm font-semibold text-foreground">Relación RA ↔ UD — RD 659/2023</p>
+                    <p className="text-sm font-semibold text-foreground">Relación RA ↔ UD - RD 659/2023</p>
                     <p className="text-sm text-muted mt-1">Trazabilidad entre los resultados prescriptivos y las unidades impartidas.</p>
                   </div>
                 </div>
@@ -703,7 +703,7 @@ export default function MatricesPage() {
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
                   <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-sm font-semibold text-foreground">Contribución a Objetivos Generales — RD 659/2023</p>
+                    <p className="text-sm font-semibold text-foreground">Contribución a Objetivos Generales - RD 659/2023</p>
                     <p className="text-sm text-muted mt-1">Alineación de los RA con los objetivos generales del ciclo formativo.</p>
                   </div>
                 </div>
@@ -727,3 +727,4 @@ export default function MatricesPage() {
     </div>
   );
 }
+

@@ -285,4 +285,7 @@ export interface AppState {
   setCursoFileSource: (source: FileSource) => void;
   workspaceHandle: FileSystemDirectoryHandle | null;
   setWorkspaceHandle: (handle: FileSystemDirectoryHandle | null) => void;
+
+  syncStatus: 'idle' | 'unsaved' | 'saving' | 'saved' | 'error';
+  setSyncStatus: (status: 'idle' | 'unsaved' | 'saving' | 'saved' | 'error') => void;
 }

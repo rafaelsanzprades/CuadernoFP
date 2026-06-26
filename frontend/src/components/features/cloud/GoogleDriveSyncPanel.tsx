@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
@@ -74,7 +74,7 @@ export function GoogleDriveSyncPanel() {
             <Cloud className="w-6 h-6 text-info" /> Sincronización con Google Drive
           </h2>
           <p className="text-muted mt-2">
-            Guarda tus archivos .cddp y .cddc automáticamente en la nube de Google para acceder a ellos desde cualquier dispositivo sin necesidad de descargarlos manualmente.
+            Guarda tus archivos .fpp y .fpc automáticamente en la nube de Google para acceder a ellos desde cualquier dispositivo sin necesidad de descargarlos manualmente.
           </p>
         </div>
 
@@ -156,3 +156,4 @@ export function GoogleDriveSyncPanel() {
     </Card>
   );
 }
+

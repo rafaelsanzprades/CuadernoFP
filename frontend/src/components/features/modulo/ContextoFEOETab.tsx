@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Map , Info } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 
@@ -15,7 +15,7 @@ export function ContextoFEOETab() {
       <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
         <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
         <div>
-          <p className="text-sm font-semibold text-foreground">Contexto y FEOE — Ley 3/2022</p>
+          <p className="text-sm font-semibold text-foreground">Contexto y FEOE - Ley 3/2022</p>
           <p className="text-sm text-muted mt-1">Integración del período en empresa en el currículo del módulo.</p>
         </div>
       </div>
@@ -61,3 +61,4 @@ export function ContextoFEOETab() {
     </>
   );
 }
+

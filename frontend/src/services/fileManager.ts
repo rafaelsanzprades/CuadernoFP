@@ -6,9 +6,29 @@ export type DataSourceType = 'demo' | 'local';
 
 // ─── Helpers ────────────────────────────────────────────────
 
-/** Strip redundant texts from RAs and CEs to reduce .cddp file size */
-function stripCatalogDescriptions(data: ModuleData): ModuleData {
-  const exportData = JSON.parse(JSON.stringify(data));
+const ALLOWED_PROGRAMACION_KEYS = [
+  'df_ud', 'df_sesiones', 'df_ra', 'df_ce', 'df_tareas', 'df_act', 'df_instr', 
+  'df_pr', 'df_dua', 'df_contingencia', 'df_ace', 'info_modulo', 
+  'config_contexto', 'config_aula', 'config_redondeo', '__version__', 'ra_og_mapping'
+];
+
+const ALLOWED_CURSO_KEYS = [
+  'df_al', 'df_sgmt', 'df_feoe', 'df_eval', 'daily_ledger', 'tutoria_ledger', 
+  'profesional_ledger', 'horario', 'info_fechas', 'config_pesos_trim', 
+  'config_asistencia', 'df_empresas', 'calendar_notes', 'planning_ledger', 
+  'plano_clase', 'actuaciones_tutoria', '__version__'
+];
+
+/** Prepare Programación data for export: strict key filtering and stripping redundant texts */
+function prepareProgramacionForExport(data: any): any {
+  const exportData: any = {};
+  for (const key of ALLOWED_PROGRAMACION_KEYS) {
+    if (data[key] !== undefined) {
+      // Create a deep copy to avoid mutating the original state
+      exportData[key] = JSON.parse(JSON.stringify(data[key]));
+    }
+  }
+
   if (exportData.df_ra) {
     exportData.df_ra.forEach((ra: any) => {
       delete ra.desc_ra;
@@ -21,6 +41,17 @@ function stripCatalogDescriptions(data: ModuleData): ModuleData {
       delete ce.desc_ce;
       delete ce.Descripción;
     });
+  }
+  return exportData;
+}
+
+/** Prepare Curso data for export: strict key filtering */
+function prepareCursoForExport(data: any): any {
+  const exportData: any = {};
+  for (const key of ALLOWED_CURSO_KEYS) {
+    if (data[key] !== undefined) {
+      exportData[key] = JSON.parse(JSON.stringify(data[key]));
+    }
   }
   return exportData;
 }
@@ -144,9 +175,26 @@ export const fileManager = {
       };
 
       const id = `${moduleCode}-pd`;
+      const fileName = `P - ${moduleCode} - ${moduleName.replace(/[\\/:*?"<>|]/g, '')}.json`;
       store.setActiveModuleId(id);
       store.setModuleData(newModuleData);
-      store.setPdFileSource({ type: 'new', fileName: `${moduleCode}.cddp` });
+
+      const handle = store.workspaceHandle;
+      if (handle) {
+        try {
+          const fileHandle = await handle.getFileHandle(fileName, { create: true });
+          const writable = await (fileHandle as any).createWritable();
+          await writable.write(JSON.stringify(newModuleData, null, 2));
+          await writable.close();
+          store.setPdFileSource({ type: 'local', fileName, fileHandle });
+        } catch (e) {
+          console.error("Failed to write new PD to workspace", e);
+          store.setPdFileSource({ type: 'new', fileName });
+        }
+      } else {
+        store.setPdFileSource({ type: 'new', fileName });
+      }
+
       return true;
     } catch (e) {
       console.error("Error creating new programación", e);
@@ -155,7 +203,7 @@ export const fileManager = {
   },
 
   /** Create a new empty curso */
-  createNewCurso(cursoName: string, year: string): boolean {
+  async createNewCurso(cursoName: string, year: string): Promise<boolean> {
     const store = useAppStore.getState();
     store.setDataSource("local");
 
@@ -176,10 +224,53 @@ export const fileManager = {
       __version__: 1,
     };
 
-    const id = `${cursoName.toLowerCase().replace(/\s+/g, '-')}-${year}`;
+    const fileName = `C - ${year} - ${cursoName.replace(/[\\/:*?"<>|]/g, '')}.fpc`;
+    const id = fileName;
     store.setActiveCursoId(id);
     store.setCursoData(newCursoData);
-    store.setCursoFileSource({ type: 'new', fileName: `${id}.cddc` });
+
+    const handle = store.workspaceHandle;
+    const pdFileSource = store.pdFileSource;
+    if (handle) {
+      try {
+        const fileHandle = await handle.getFileHandle(fileName, { create: true });
+        const writable = await (fileHandle as any).createWritable();
+        await writable.write(JSON.stringify(newCursoData, null, 2));
+        await writable.close();
+        store.setCursoFileSource({ type: 'local', fileName, fileHandle });
+
+        // Also create the Group file
+        const groupFileName = `G - ${cursoName.replace(/[\\/:*?"<>|]/g, '')} - ${year}.fpg`;
+        const groupHandle = await handle.getFileHandle(groupFileName, { create: true });
+        const groupWritable = await (groupHandle as any).createWritable();
+        
+        let relatedPd = "";
+        if (pdFileSource.type === 'local' && pdFileSource.fileName) {
+          relatedPd = pdFileSource.fileName;
+        }
+
+        const groupData = {
+          tipo: "GRUPO",
+          id: groupFileName,
+          nombre: cursoName,
+          curso_academico: year,
+          archivos: {
+            programacion: relatedPd,
+            curso: fileName
+          }
+        };
+
+        await groupWritable.write(JSON.stringify(groupData, null, 2));
+        await groupWritable.close();
+
+      } catch (e) {
+        console.error("Failed to write new Curso to workspace", e);
+        store.setCursoFileSource({ type: 'new', fileName });
+      }
+    } else {
+      store.setCursoFileSource({ type: 'new', fileName });
+    }
+
     return true;
   },
 
@@ -211,7 +302,7 @@ export const fileManager = {
     store.setDataSource("local");
     store.setActiveCursoId(id);
     store.setCursoData(newCursoData);
-    store.setCursoFileSource({ type: 'new', fileName: `${id}.cddc` });
+    store.setCursoFileSource({ type: 'new', fileName: `${id}.fpc` });
     return true;
   },
 
@@ -223,7 +314,7 @@ export const fileManager = {
       const [handle] = await (window as any).showOpenFilePicker({
         types: [{
           description: 'Programación CuadernoFP',
-          accept: { 'application/json': ['.cddp', '.json'] },
+          accept: { 'application/json': ['.fpp', '.json'] },
         }],
         multiple: false,
       });
@@ -252,7 +343,7 @@ export const fileManager = {
       const [handle] = await (window as any).showOpenFilePicker({
         types: [{
           description: 'Curso CuadernoFP',
-          accept: { 'application/json': ['.cddc', '.json'] },
+          accept: { 'application/json': ['.fpc', '.json'] },
         }],
         multiple: false,
       });
@@ -295,7 +386,7 @@ export const fileManager = {
     const groups: string[] = [];
     try {
       for await (const entry of (dirHandle as any).values()) {
-        if (entry.kind === 'file' && entry.name.startsWith('G - ') && entry.name.endsWith('.json')) {
+        if (entry.kind === 'file' && entry.name.startsWith('G - ') && (entry.name.endsWith('.fpg') || entry.name.endsWith('.json'))) {
           groups.push(entry.name);
         }
       }
@@ -311,10 +402,10 @@ export const fileManager = {
     const cursos: string[] = [];
     try {
       for await (const entry of (dirHandle as any).values()) {
-        if (entry.kind === 'file' && entry.name.endsWith('.json')) {
-          if (entry.name.startsWith('G - ')) grupos.push(entry.name);
-          else if (entry.name.startsWith('P - ')) programaciones.push(entry.name);
-          else if (entry.name.startsWith('C - ')) cursos.push(entry.name);
+        if (entry.kind === 'file') {
+          if (entry.name.startsWith('G - ') && (entry.name.endsWith('.fpg') || entry.name.endsWith('.json'))) grupos.push(entry.name);
+          else if (entry.name.startsWith('P - ') && (entry.name.endsWith('.fpp') || entry.name.endsWith('.json'))) programaciones.push(entry.name);
+          else if (entry.name.startsWith('C - ') && (entry.name.endsWith('.fpc') || entry.name.endsWith('.json'))) cursos.push(entry.name);
         }
       }
     } catch (e) {
@@ -339,13 +430,13 @@ export const fileManager = {
       }
 
       // Read Programacion
-      const pdFileName = groupData.programacion.endsWith('.json') ? groupData.programacion : `${groupData.programacion}.json`;
+      const pdFileName = groupData.programacion.endsWith('.fpp') || groupData.programacion.endsWith('.json') ? groupData.programacion : `${groupData.programacion}.fpp`;
       const pdHandle = await dirHandle.getFileHandle(pdFileName);
       const pdFile = await pdHandle.getFile();
       const pdText = await pdFile.text();
       
       // Read Curso
-      const cursoFileName = groupData.curso.endsWith('.json') ? groupData.curso : `${groupData.curso}.json`;
+      const cursoFileName = groupData.curso.endsWith('.fpc') || groupData.curso.endsWith('.json') ? groupData.curso : `${groupData.curso}.fpc`;
       const cursoHandle = await dirHandle.getFileHandle(cursoFileName);
       const cursoFile = await cursoHandle.getFile();
       const cursoText = await cursoFile.text();
@@ -416,7 +507,7 @@ export const fileManager = {
     const { activeModuleId, moduleData, pdFileSource, isDriveConnected, autoSyncDrive } = store;
     if (!activeModuleId || !moduleData) return false;
 
-    const exportData = stripCatalogDescriptions(moduleData);
+    const exportData = prepareProgramacionForExport(moduleData);
     const jsonStr = serializeData(exportData);
 
     // 1. Overwrite original file via File System Access API
@@ -435,7 +526,7 @@ export const fileManager = {
     if (isDriveConnected && autoSyncDrive) {
       try {
         const { driveService } = await import('@/services/driveService');
-        await driveService.saveFile(`${activeModuleId}.cddp`, moduleData);
+        await driveService.saveFile(`${activeModuleId}.fpp`, exportData);
       } catch (e) {
         console.error("Error syncing to Drive", e);
       }
@@ -452,7 +543,8 @@ export const fileManager = {
     const { activeCursoId, cursoData, cursoFileSource, isDriveConnected, autoSyncDrive } = store;
     if (!activeCursoId || !cursoData) return false;
 
-    const jsonStr = serializeData(cursoData);
+    const exportData = prepareCursoForExport(cursoData);
+    const jsonStr = serializeData(exportData);
 
     // 1. Overwrite original file via File System Access API
     if (cursoFileSource.type === 'local' && cursoFileSource.fileHandle) {
@@ -470,7 +562,7 @@ export const fileManager = {
     if (isDriveConnected && autoSyncDrive) {
       try {
         const { driveService } = await import('@/services/driveService');
-        await driveService.saveFile(`${activeCursoId}.cddc`, cursoData);
+        await driveService.saveFile(`${activeCursoId}.fpc`, exportData);
       } catch (e) {
         console.error("Error syncing curso to Drive", e);
       }
@@ -491,13 +583,13 @@ export const fileManager = {
 
     try {
       const handle = await (window as any).showSaveFilePicker({
-        suggestedName: `${activeModuleId}.cddp`,
+        suggestedName: `${activeModuleId}.fpp`,
         types: [{
           description: 'Programación CuadernoFP',
-          accept: { 'application/json': ['.cddp'] },
+          accept: { 'application/json': ['.fpp'] },
         }],
       });
-      const exportData = stripCatalogDescriptions(moduleData);
+      const exportData = prepareProgramacionForExport(moduleData);
       const jsonStr = serializeData(exportData);
       const writable = await handle.createWritable();
       await writable.write(jsonStr);
@@ -524,13 +616,14 @@ export const fileManager = {
 
     try {
       const handle = await (window as any).showSaveFilePicker({
-        suggestedName: `${activeCursoId}.cddc`,
+        suggestedName: `${activeCursoId}.fpc`,
         types: [{
           description: 'Curso CuadernoFP',
-          accept: { 'application/json': ['.cddc'] },
+          accept: { 'application/json': ['.fpc'] },
         }],
       });
-      const jsonStr = serializeData(cursoData);
+      const exportData = prepareCursoForExport(cursoData);
+      const jsonStr = serializeData(exportData);
       const writable = await handle.createWritable();
       await writable.write(jsonStr);
       await writable.close();
@@ -554,15 +647,16 @@ export const fileManager = {
   downloadProgramacion() {
     const { activeModuleId, moduleData } = useAppStore.getState();
     if (!moduleData) return;
-    const exportData = stripCatalogDescriptions(moduleData);
-    downloadJson(serializeData(exportData), `${activeModuleId || 'programacion'}.cddp`);
+    const exportData = prepareProgramacionForExport(moduleData);
+    downloadJson(serializeData(exportData), `${activeModuleId || 'programacion'}.fpp`);
   },
 
   /** Download a copy of curso (legacy export) */
   downloadCurso() {
     const { activeCursoId, cursoData } = useAppStore.getState();
     if (!cursoData) return;
-    downloadJson(serializeData(cursoData), `${activeCursoId || 'curso'}.cddc`);
+    const exportData = prepareCursoForExport(cursoData);
+    downloadJson(serializeData(exportData), `${activeCursoId || 'curso'}.fpc`);
   },
 
   // ── IMPORT (from text, used by open + drag & drop) ──────
@@ -572,7 +666,7 @@ export const fileManager = {
       const parsed = JSON.parse(jsonStr);
       if (!parsed.df_ud) return false;
 
-      const id = filename.replace('.cddp', '').replace('.json', '') || "imported-pd";
+      const id = filename.replace('.fpp', '').replace('.cddp', '').replace('.json', '') || "imported-pd";
 
       // Fetch curriculum to reconstruct descriptions
       const moduleCode = parsed.info_modulo?.codigo || id.split('-')[0];
@@ -656,7 +750,7 @@ export const fileManager = {
     try {
       const parsed = JSON.parse(jsonStr);
       if (!parsed.df_al) return false;
-      const id = filename.replace('.cddc', '').replace('.json', '') || "imported-curso";
+      const id = filename.replace('.fpc', '').replace('.cddc', '').replace('.json', '') || "imported-curso";
       useAppStore.getState().setActiveCursoId(id);
       useAppStore.getState().setCursoData(parsed);
       return true;
@@ -702,5 +796,60 @@ export const fileManager = {
 
   isOneDriveConnected() { return false; },
   setOneDriveConnected() {},
-  getOneDriveUser() { return ""; }
+  getOneDriveUser() { return "";  },
+
+  async validateWorkspaceLinks(handle: FileSystemDirectoryHandle): Promise<{
+    brokenGroups: { groupName: string; missingFile: string; type: 'programacion' | 'curso' }[];
+  }> {
+    const brokenGroups: { groupName: string; missingFile: string; type: 'programacion' | 'curso' }[] = [];
+    const files = await this.scanWorkspaceFiles(handle);
+
+    for (const g of files.grupos) {
+      try {
+        const fileHandle = await handle.getFileHandle(g);
+        const file = await fileHandle.getFile();
+        const text = await file.text();
+        const data = JSON.parse(text);
+
+        if (data.tipo === "GRUPO" && data.archivos) {
+          if (data.archivos.programacion && !files.programaciones.includes(data.archivos.programacion)) {
+            brokenGroups.push({ groupName: g, missingFile: data.archivos.programacion, type: 'programacion' });
+          }
+          if (data.archivos.curso && !files.cursos.includes(data.archivos.curso)) {
+            brokenGroups.push({ groupName: g, missingFile: data.archivos.curso, type: 'curso' });
+          }
+        }
+      } catch (e) {
+        console.warn("Failed to validate group file", g, e);
+      }
+    }
+
+    return { brokenGroups };
+  },
+
+  async fixWorkspaceLink(
+    handle: FileSystemDirectoryHandle, 
+    groupName: string, 
+    type: 'programacion' | 'curso', 
+    newFileName: string
+  ): Promise<boolean> {
+    try {
+      const fileHandle = await handle.getFileHandle(groupName);
+      const file = await fileHandle.getFile();
+      const text = await file.text();
+      const data = JSON.parse(text);
+
+      if (data.tipo === "GRUPO" && data.archivos) {
+        data.archivos[type] = newFileName;
+        const writable = await (fileHandle as any).createWritable();
+        await writable.write(JSON.stringify(data, null, 2));
+        await writable.close();
+        return true;
+      }
+      return false;
+    } catch (e) {
+      console.error("Failed to fix group link", e);
+      return false;
+    }
+  }
 };

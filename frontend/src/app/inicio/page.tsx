@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Info } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -74,7 +74,7 @@ export default function InicioPage() {
             <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
               <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
               <div>
-                <p className="text-sm font-semibold text-foreground">Herramienta operativa y de gestión — Inicio</p>
+                <p className="text-sm font-semibold text-foreground">Herramienta operativa y de gestión - Inicio</p>
                 <p className="text-sm text-muted mt-1">Panel de control de acceso rápido a todas las herramientas de la plataforma.</p>
               </div>
             </div>
@@ -125,3 +125,4 @@ export default function InicioPage() {
     </div>
   );
 }
+

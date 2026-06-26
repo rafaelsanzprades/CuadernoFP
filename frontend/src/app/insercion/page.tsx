@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { TrendingUp, Info, Building2, Users, Briefcase, BarChart3, Globe } from "lucide-react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/Card";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 
 /**
- * Página /insercion — Inserción Laboral
+ * Página /insercion - Inserción Laboral
  * Indicadores Eje 6 del Sistema Estatal:
  * Tasa de afiliación, rama de actividad, tamaño empresa, régimen de afiliación
  */
@@ -118,3 +118,4 @@ export default function InsercionPage() {
     </div>
   );
 }
+

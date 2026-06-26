@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { CheckCircle2 , Info } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 
@@ -15,7 +15,7 @@ export function EvaluacionRecursosTab() {
       <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
         <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
         <div>
-          <p className="text-sm font-semibold text-foreground">Evaluación y Recursos — RD 659/2023</p>
+          <p className="text-sm font-semibold text-foreground">Evaluación y Recursos - RD 659/2023</p>
           <p className="text-sm text-muted mt-1">Mecanismos de evaluación, recuperación y recursos materiales.</p>
         </div>
       </div>
@@ -68,3 +68,4 @@ export function EvaluacionRecursosTab() {
     </>
   );
 }
+

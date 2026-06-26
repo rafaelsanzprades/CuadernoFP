@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { AlertTriangle, TrendingDown, Users, Calendar, Info, CheckCircle2, XCircle } from "lucide-react";
 import { useMemo } from "react";
 import { Card } from "@/components/ui/Card";
@@ -58,7 +58,7 @@ export function AlertaAbandonoTab() {
           motivo = `Solo ${pctAsistencia.toFixed(0)}% de asistencia (${faltas} faltas de ${totalSesiones})`;
         } else if (pctAsistencia < 85) {
           riesgo = "medio";
-          motivo = `${pctAsistencia.toFixed(0)}% de asistencia — requiere seguimiento`;
+          motivo = `${pctAsistencia.toFixed(0)}% de asistencia - requiere seguimiento`;
         } else if (!tieneAlgunaNotaPositiva && totalSesiones > 20) {
           riesgo = "medio";
           motivo = "Sin evaluación positiva en ningún RA";
@@ -91,7 +91,7 @@ export function AlertaAbandonoTab() {
       <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20">
         <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
         <div>
-          <p className="text-sm font-semibold text-foreground">Alerta temprana de abandono — Indicador 1.5</p>
+          <p className="text-sm font-semibold text-foreground">Alerta temprana de abandono - Indicador 1.5</p>
           <p className="text-sm text-muted mt-1">
             Detección de alumnos en riesgo de abandono según el Sistema Estatal de Indicadores.
             Criterio: &lt;3 asistencias en primeras 2 semanas, &gt;30% faltas, o sin evaluación positiva.
@@ -186,3 +186,4 @@ export function AlertaAbandonoTab() {
     </div>
   );
 }
+

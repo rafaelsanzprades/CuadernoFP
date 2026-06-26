@@ -1,4 +1,4 @@
-import { Grid, HelpCircle, PartyPopper, RefreshCw, School, Trash2, User, UserCircle, Users , Info } from "lucide-react";
+﻿import { Grid, HelpCircle, PartyPopper, RefreshCw, School, Trash2, User, UserCircle, Users , Info } from "lucide-react";
 import React, { useMemo } from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { Card } from '@/components/ui/Card';
@@ -141,7 +141,7 @@ export const PlanoClaseTab = () => {
       <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
         <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
         <div>
-          <p className="text-sm font-semibold text-foreground">Plano de Clase — RD 659/2023</p>
+          <p className="text-sm font-semibold text-foreground">Plano de Clase - RD 659/2023</p>
           <p className="text-sm text-muted mt-1">Distribución espacial para la gestión del aula.</p>
         </div>
       </div>
@@ -350,3 +350,4 @@ export const PlanoClaseTab = () => {
     </div>
   );
 };
+

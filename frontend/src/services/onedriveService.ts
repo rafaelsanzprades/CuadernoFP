@@ -1,4 +1,4 @@
-import { PublicClientApplication, Configuration, AuthenticationResult } from "@azure/msal-browser";
+﻿import { PublicClientApplication, Configuration, AuthenticationResult } from "@azure/msal-browser";
 import { Client } from "@microsoft/microsoft-graph-client";
 import { fileManager } from "./fileManager"; // to use existing save functions
 
@@ -81,7 +81,7 @@ export const listCuadernoFiles = async (accessToken: string): Promise<OneDriveFi
 
     const res = await client.api('/me/drive/root:/CuadernoFP:/children')
       .select('id,name,size,lastModifiedDateTime')
-      .filter("endswith(name,'.cddp') or endswith(name,'.cddc')")
+      .filter("endswith(name,'.fpp') or endswith(name,'.fpc')")
       .get();
       
     return res.value as OneDriveFile[];
@@ -114,3 +114,4 @@ export const downloadFileFromOneDrive = async (accessToken: string, fileId: stri
     return null;
   }
 };
+

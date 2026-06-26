@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 pdf_planificacion.py
-PDF A4 apaisado — Planificación. Horas previstas frente a impartidas.
+PDF A4 apaisado - Planificación. Horas previstas frente a impartidas.
 """
 import io
 import math
@@ -207,3 +207,4 @@ def generar_pdf_planificacion(
     doc.build(elements)
     buffer.seek(0)
     return buffer
+

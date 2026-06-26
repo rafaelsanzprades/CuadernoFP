@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Calendar, Circle, ClipboardList, Search, Settings, Flag , Info, FolderOpen } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -234,7 +234,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
   const dgenS = toDate(info_fechas.ini_dual_gen), dgenE = toDate(info_fechas.fin_dual_gen);
   const dintS = toDate(info_fechas.ini_dual_int), dintE = toDate(info_fechas.fin_dual_int);
 
-  // Months to show: from course start to course end (default Sep–Jun)
+  // Months to show: from course start to course end (default Sep-Jun)
   const refYear = cs ? cs.getFullYear() : new Date().getFullYear();
   const startMonth = cs ? new Date(cs.getFullYear(), cs.getMonth(), 1)
                         : new Date(refYear, 8, 1);
@@ -636,7 +636,7 @@ export default function CalendarioPage() {
           <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
             <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
             <div>
-              <p className="text-sm font-semibold text-foreground">Calendario Escolar — Resolución Anual Autonómica</p>
+              <p className="text-sm font-semibold text-foreground">Calendario Escolar - Resolución Anual Autonómica</p>
               <p className="text-sm text-muted mt-1">Adaptación de la programación a los días lectivos y festivos oficiales.</p>
             </div>
           </div>
@@ -910,3 +910,4 @@ export default function CalendarioPage() {
     </div>
   );
 }
+

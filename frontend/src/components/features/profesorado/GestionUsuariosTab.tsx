@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { CheckCircle2, Edit2, Filter, Search, Shield, Trash2, UserPlus, Users, X , Info } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { Card } from "@/components/ui/Card";
@@ -97,7 +97,7 @@ export function GestionUsuariosTab() {
       <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
         <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
         <div>
-          <p className="text-sm font-semibold text-foreground">Gestión Docente — RD 659/2023 (Título V)</p>
+          <p className="text-sm font-semibold text-foreground">Gestión Docente - RD 659/2023 (Título V)</p>
           <p className="text-sm text-muted mt-1">Requisitos y atribuciones del profesorado de FP.</p>
         </div>
       </div>
@@ -321,3 +321,4 @@ export function GestionUsuariosTab() {
     </div>
   );
 }
+

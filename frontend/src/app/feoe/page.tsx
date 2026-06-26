@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Building2, Check, ClipboardList, Edit, Handshake, Mail, MapPin, Phone, Trash2, UserPlus, Users, AlertTriangle , Info } from "lucide-react";
 import { useState, useEffect, useMemo } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -175,7 +175,7 @@ export default function FeoePage() {
           <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
             <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
             <div>
-              <p className="text-sm font-semibold text-foreground">Fase en Empresa (FEOE) — Ley 3/2022</p>
+              <p className="text-sm font-semibold text-foreground">Fase en Empresa (FEOE) - Ley 3/2022</p>
               <p className="text-sm text-muted mt-1">Seguimiento y evaluación del periodo de formación dual en el centro de trabajo.</p>
             </div>
           </div>
@@ -355,7 +355,7 @@ export default function FeoePage() {
                                         <div className="flex items-center gap-2">
                                           <span className="font-mono text-xs text-muted">{int.fecha}</span>
                                           <span className="text-xs font-medium text-foreground/80">{TIPO_INTERACCION[int.tipo]}</span>
-                                          <span className="text-xs text-muted">— {int.contacto}</span>
+                                          <span className="text-xs text-muted">- {int.contacto}</span>
                                         </div>
                                         <p className="text-foreground/80 mt-1">{int.descripcion}</p>
                                       </div>
@@ -384,3 +384,4 @@ export default function FeoePage() {
     </div>
   );
 }
+

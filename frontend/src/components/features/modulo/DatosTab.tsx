@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Calendar, FileEdit, Receipt, Scale, School, UserCircle, Settings , Info } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useAppStore } from "@/store/useAppStore";
@@ -139,7 +139,7 @@ export function DatosTab() {
       <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
         <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
         <div>
-          <p className="text-sm font-semibold text-foreground">Módulo Profesional — RD 659/2023</p>
+          <p className="text-sm font-semibold text-foreground">Módulo Profesional - RD 659/2023</p>
           <p className="text-sm text-muted mt-1">Estructura, duración y normativa aplicable al módulo formativo.</p>
         </div>
       </div>
@@ -359,3 +359,4 @@ export function DatosTab() {
     </>
   );
 }
+

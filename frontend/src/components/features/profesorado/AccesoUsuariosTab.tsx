@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { ArrowRight, BookOpen, Briefcase, Building2, Database, GraduationCap, School, Shield, UserCheck, Users , Info } from "lucide-react";
 import React, { useState } from "react";
 import { Card } from "@/components/ui/Card";
@@ -92,7 +92,7 @@ export function AccesoUsuariosTab() {
       <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
         <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
         <div>
-          <p className="text-sm font-semibold text-foreground">Acceso — RD 659/2023</p>
+          <p className="text-sm font-semibold text-foreground">Acceso - RD 659/2023</p>
           <p className="text-sm text-muted mt-1">Gestión de accesos y perfiles docentes.</p>
         </div>
       </div>
@@ -301,3 +301,4 @@ export function AccesoUsuariosTab() {
     </div>
   );
 }
+

@@ -1,4 +1,4 @@
-import { StateCreator } from 'zustand';
+﻿import { StateCreator } from 'zustand';
 import { AppState, ModuleData, CursoData } from '@/types';
 
 type ModuleSlice = Pick<AppState,
@@ -71,38 +71,85 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
   }),
 
   saveModuleData: async () => {
-    const { activeModuleId, moduleData, isDriveConnected, autoSyncDrive } = get();
+    const { activeModuleId, moduleData, isDriveConnected, autoSyncDrive, pdFileSource, setSyncStatus } = get();
     if (!activeModuleId || !moduleData) return false;
     
+    setSyncStatus('saving');
+
     // Increment version in memory
-    set({ moduleData: { ...moduleData, __version__: (moduleData.__version__ || 0) + 1 } });
+    const updatedData = { ...moduleData, __version__: (moduleData.__version__ || 0) + 1 };
+    set({ moduleData: updatedData });
     
+    let localSaved = false;
+
+    // Save to Local File System if connected
+    if (pdFileSource.type === 'local' && pdFileSource.fileHandle) {
+      try {
+        const writable = await (pdFileSource.fileHandle as any).createWritable();
+        await writable.write(JSON.stringify(updatedData, null, 2));
+        await writable.close();
+        localSaved = true;
+      } catch (e) {
+        console.error("Failed to write PD to local file system:", e);
+        setSyncStatus('error');
+        return false;
+      }
+    }
+
     // Save to Google Drive if connected
     if (isDriveConnected && autoSyncDrive) {
       import('@/services/driveService').then(({ driveService }) => {
-        driveService.saveFile(`${activeModuleId}.cddp`, moduleData);
+        driveService.saveFile(`${activeModuleId}.fpp`, updatedData);
       });
     }
     
-    // Always return true since we no longer depend on the backend API for saving user data
+    setSyncStatus('saved');
+    setTimeout(() => {
+      if (get().syncStatus === 'saved') setSyncStatus('idle');
+    }, 2000);
+
     return true;
   },
 
   saveCursoData: async () => {
-    const { activeCursoId, cursoData, isDriveConnected, autoSyncDrive } = get();
+    const { activeCursoId, cursoData, isDriveConnected, autoSyncDrive, cursoFileSource, setSyncStatus } = get();
     if (!activeCursoId || !cursoData) return false;
     
+    setSyncStatus('saving');
+
     // Increment version in memory
-    set({ cursoData: { ...cursoData, __version__: (cursoData.__version__ || 0) + 1 } });
+    const updatedData = { ...cursoData, __version__: (cursoData.__version__ || 0) + 1 };
+    set({ cursoData: updatedData });
     
+    let localSaved = false;
+
+    // Save to Local File System if connected
+    if (cursoFileSource.type === 'local' && cursoFileSource.fileHandle) {
+      try {
+        const writable = await (cursoFileSource.fileHandle as any).createWritable();
+        await writable.write(JSON.stringify(updatedData, null, 2));
+        await writable.close();
+        localSaved = true;
+      } catch (e) {
+        console.error("Failed to write Curso to local file system:", e);
+        setSyncStatus('error');
+        return false;
+      }
+    }
+
     // Save to Google Drive if connected
     if (isDriveConnected && autoSyncDrive) {
       import('@/services/driveService').then(({ driveService }) => {
-        driveService.saveFile(`${activeCursoId}.cddc`, cursoData);
+        driveService.saveFile(`${activeCursoId}.fpc`, updatedData);
       });
     }
     
-    // Always return true since we no longer depend on the backend API for saving user data
+    setSyncStatus('saved');
+    setTimeout(() => {
+      if (get().syncStatus === 'saved') setSyncStatus('idle');
+    }, 2000);
+
     return true;
   },
 });
+

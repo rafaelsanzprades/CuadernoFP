@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { Calendar, FileEdit, MapPin, ClipboardCheck, AlertTriangle , Info, FolderOpen } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -204,7 +204,7 @@ export default function SeguimientoPage() {
               <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
                 <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
                 <div>
-                  <p className="text-sm font-semibold text-foreground">Diario de Aula — RD 659/2023</p>
+                  <p className="text-sm font-semibold text-foreground">Diario de Aula - RD 659/2023</p>
                   <p className="text-sm text-muted mt-1">Registro de actividad docente y seguimiento diario.</p>
                 </div>
               </div>
@@ -327,3 +327,4 @@ export default function SeguimientoPage() {
     </div>
   );
 }
+
