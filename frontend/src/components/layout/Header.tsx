@@ -25,6 +25,8 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const cursoSaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const initialLoadRef = useRef<boolean>(true);
+  const lastSavedModuleDataRef = useRef<any>(null);
+  const lastSavedCursoDataRef = useRef<any>(null);
 
   const pastStatesLength = useTemporalStore((state) => state.pastStates.length);
   const futureStatesLength = useTemporalStore((state) => state.futureStates.length);
@@ -76,14 +78,20 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
   useEffect(() => {
     if (initialLoadRef.current) {
       initialLoadRef.current = false;
+      lastSavedModuleDataRef.current = moduleData;
       return;
     }
 
     if (!moduleData || !activeModuleId) return;
+    
+    // Skip save if the data reference hasn't changed (e.g. during Fast Refresh)
+    if (moduleData === lastSavedModuleDataRef.current) return;
 
     if (saveTimeoutRef.current) {
       clearTimeout(saveTimeoutRef.current);
     }
+
+    lastSavedModuleDataRef.current = moduleData;
 
     saveTimeoutRef.current = setTimeout(async () => {
       await saveModuleData();
@@ -96,11 +104,18 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
 
   // Autosave Effect for cursoData
   useEffect(() => {
-    if (!cursoData || !activeCursoId) return;
+    if (!cursoData || !activeCursoId) {
+      lastSavedCursoDataRef.current = cursoData;
+      return;
+    }
+
+    if (cursoData === lastSavedCursoDataRef.current) return;
 
     if (cursoSaveTimeoutRef.current) {
       clearTimeout(cursoSaveTimeoutRef.current);
     }
+
+    lastSavedCursoDataRef.current = cursoData;
 
     cursoSaveTimeoutRef.current = setTimeout(async () => {
       await saveCursoData();
