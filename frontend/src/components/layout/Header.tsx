@@ -26,7 +26,10 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
   const cursoSaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const initialLoadRef = useRef<boolean>(true);
 
-  const { undo, redo, pastStates, futureStates } = useTemporalStore((state) => state);
+  const pastStatesLength = useTemporalStore((state) => state.pastStates.length);
+  const futureStatesLength = useTemporalStore((state) => state.futureStates.length);
+  const undo = useTemporalStore((state) => state.undo);
+  const redo = useTemporalStore((state) => state.redo);
 
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -138,12 +141,12 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
         handleSave();
       } else if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
         if (e.shiftKey) {
-          if (futureStates.length > 0) redo();
+          if (futureStatesLength > 0) redo();
         } else {
-          if (pastStates.length > 0) undo();
+          if (pastStatesLength > 0) undo();
         }
       } else if ((e.ctrlKey || e.metaKey) && e.key === 'y') {
-        if (futureStates.length > 0) redo();
+        if (futureStatesLength > 0) redo();
       } else if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
         e.preventDefault();
         // Focus search input
@@ -163,7 +166,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [undo, redo, pastStates.length, futureStates.length, handleSave]);
+  }, [undo, redo, pastStatesLength, futureStatesLength, handleSave]);
 
   let friendlyModuleName = "Crea o abre una Programación";
   if (activeModuleId) {
@@ -246,19 +249,92 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
   return (
     <div className="w-full flex flex-col z-40 sticky top-0 bg-background/95 backdrop-blur-xl border-b border-[var(--glass-border)] pb-2 shadow-md">
       {/* Fila 1: Información del Módulo y Curso */}
-      <div className="w-full px-6 py-2 bg-foreground/[0.015] border-b border-[var(--glass-border)] grid grid-cols-1 sm:grid-cols-3 items-center gap-2 sm:gap-3">
-        {/* Columna Izquierda: Grupo */}
-        <div className="flex justify-start items-center w-full gap-2">
+      <div className="w-full px-6 py-2 bg-foreground/[0.015] border-b border-[var(--glass-border)] grid grid-cols-1 lg:grid-cols-3 items-center gap-2 sm:gap-3">
+        {/* Columna Izquierda: Hamburger + Modo + Grupo */}
+        <div className="flex justify-start items-center gap-3 min-w-0">
+          {/* Mobile hamburger */}
+          <button
+            onClick={toggleSidebar}
+            className="lg:hidden text-muted hover:text-foreground p-2 rounded-lg hover:bg-foreground/5 transition-colors shrink-0"
+            aria-label="Toggle sidebar" aria-expanded={isSidebarOpen} aria-controls="sidebar" tabIndex={0}
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isSidebarOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+            </svg>
+          </button>
+          
+          {mounted && (
+            <div className="hidden sm:flex bg-foreground/5 p-1 rounded-xl border border-[var(--glass-border)] shadow-sm shrink-0">
+              {/* Botón DEMO */}
+              <button
+                onClick={async () => {
+                  if (dataSource === 'demo') return;
+                  if (moduleData || cursoData) {
+                    const wantToSave = window.confirm("Vas a cambiar a modo DEMO. ¿Quieres GUARDAR tus datos reales antes de cambiar?\n(Aceptar = Guardar, Cancelar = Descartar)");
+                    if (wantToSave) {
+                      await handleSave();
+                    }
+                  }
+                  useAppStore.getState().setDataSource('demo');
+                  fileManager.loadDemoData();
+                  toast.success("Modo DEMO activado");
+                }}
+                className={`flex flex-col items-center justify-center px-3 py-0.5 rounded-lg transition-all ${
+                  dataSource === 'demo'
+                    ? 'bg-warning/20 text-warning shadow-md'
+                    : 'text-muted hover:text-foreground hover:bg-foreground/5'
+                }`}
+                title="Cargar datos de demostración (Solo lectura)"
+              >
+                <span className="text-xs font-bold flex items-center gap-1">
+                  <Cloud className="w-3 h-3" /> DEMO
+                </span>
+              </button>
+
+              {/* Botón REALES / GUARDAR */}
+              <button
+                onClick={async () => {
+                  if (dataSource === 'demo') {
+                    useAppStore.getState().setModuleData(null);
+                    useAppStore.getState().setCursoData(null);
+                    useAppStore.getState().setActiveModuleId("");
+                    useAppStore.getState().setActiveCursoId("");
+                    useAppStore.getState().setPdFileSource({ type: 'none' });
+                    useAppStore.getState().setCursoFileSource({ type: 'none' });
+                    useAppStore.getState().setDataSource('local');
+                    toast.success("Modo Datos Reales activado");
+                  } else {
+                    await handleSave();
+                  }
+                }}
+                disabled={dataSource === 'local' && isSaving}
+                className={`flex flex-col items-center justify-center px-3 py-0.5 rounded-lg transition-all ${
+                  dataSource === 'local'
+                    ? cloudSynced 
+                        ? 'bg-success/20 text-success shadow-md'
+                        : 'bg-accent/20 text-accent shadow-md'
+                    : 'text-muted hover:text-foreground hover:bg-foreground/5'
+                }`}
+                title={dataSource === 'demo' ? "Cambiar a tus datos reales" : "Guardar cambios local/nube"}
+              >
+                <span className="text-xs font-bold flex items-center gap-1">
+                  {dataSource === 'local' && isSaving ? <Hourglass className="w-3 h-3 animate-spin" /> : <Save className="w-3 h-3" />} 
+                  Reales
+                </span>
+              </button>
+            </div>
+          )}
+
           {dataSource === 'local' && !workspaceHandle ? (
             <button
               onClick={() => router.push('/archivos')}
-              className={`w-full max-w-[240px] bg-foreground/5 border rounded-lg px-3 py-1.5 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-success/50 cursor-pointer text-left hover:bg-foreground/10 transition-colors`}
+              className={`w-full max-w-[200px] bg-foreground/5 border rounded-lg px-3 py-1.5 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-success/50 cursor-pointer text-left hover:bg-foreground/10 transition-colors shrink-0`}
               style={{ color: 'var(--success)', borderColor: 'var(--success)' }}
             >
               Archivos
             </button>
           ) : (
-            <div className="relative w-full max-w-[240px]">
+            <div className="relative w-[180px] sm:w-[200px] shrink-0">
               <select 
                 className={`w-full bg-foreground/5 border rounded-lg pl-3 pr-8 py-1.5 text-sm font-semibold focus:outline-none focus:ring-2 cursor-pointer appearance-none text-left transition-colors`}
                 style={{ 
@@ -324,132 +400,6 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
         </span>
       </div>
 
-      {/* Fila 2: Menú superior */}
-      <nav className="w-full px-6 py-2 flex items-center justify-between">
-        {/* Left Side: Mobile Hamburger + Datos Reales/Ficticios + Module Info */}
-        <div className="flex justify-start items-center gap-4 min-w-0">
-          {/* Mobile hamburger */}
-          <button
-            onClick={toggleSidebar}
-            className="lg:hidden text-muted hover:text-foreground p-2 rounded-lg hover:bg-foreground/5 transition-colors shrink-0"
-            aria-label="Toggle sidebar" aria-expanded={isSidebarOpen} aria-controls="sidebar" tabIndex={0}
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isSidebarOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
-            </svg>
-          </button>
-          
-          {/* Segmented Control: Modo de Datos / Guardado */}
-          {mounted && (
-            <div className="flex bg-foreground/5 p-1 rounded-xl border border-[var(--glass-border)] shadow-sm shrink-0">
-              {/* Botón DEMO */}
-              <button
-                onClick={async () => {
-                  if (dataSource === 'demo') return;
-                  if (moduleData || cursoData) {
-                    const wantToSave = window.confirm("Vas a cambiar a modo DEMO. ¿Quieres GUARDAR tus datos reales antes de cambiar?\n(Aceptar = Guardar, Cancelar = Descartar)");
-                    if (wantToSave) {
-                      await handleSave();
-                    }
-                  }
-                  useAppStore.getState().setDataSource('demo');
-                  fileManager.loadDemoData();
-                  toast.success("Modo DEMO activado");
-                }}
-                className={`flex flex-col items-center justify-center px-4 py-1.5 rounded-lg transition-all ${
-                  dataSource === 'demo'
-                    ? 'bg-warning/20 text-warning shadow-md'
-                    : 'text-muted hover:text-foreground hover:bg-foreground/5'
-                }`}
-                title="Cargar datos de demostración (Solo lectura)"
-              >
-                <span className="text-sm font-bold flex items-center gap-1">
-                  <Cloud className="w-4 h-4" /> Datos DEMO
-                </span>
-                <span className="text-[0.65rem] uppercase tracking-wider opacity-80 font-semibold">
-                  Solo lectura
-                </span>
-              </button>
-
-              {/* Botón REALES / GUARDAR */}
-              <button
-                onClick={async () => {
-                  if (dataSource === 'demo') {
-                    // Switch to local mode
-                    useAppStore.getState().setModuleData(null);
-                    useAppStore.getState().setCursoData(null);
-                    useAppStore.getState().setActiveModuleId("");
-                    useAppStore.getState().setActiveCursoId("");
-                    useAppStore.getState().setPdFileSource({ type: 'none' });
-                    useAppStore.getState().setCursoFileSource({ type: 'none' });
-                    useAppStore.getState().setDataSource('local');
-                    toast.success("Modo Datos Reales activado");
-                  } else {
-                    // We are already in real mode, so this acts as the SAVE button
-                    await handleSave();
-                  }
-                }}
-                disabled={dataSource === 'local' && isSaving}
-                className={`flex flex-col items-center justify-center px-4 py-1.5 rounded-lg transition-all ${
-                  dataSource === 'local'
-                    ? cloudSynced 
-                        ? 'bg-success/20 text-success shadow-md'
-                        : 'bg-accent/20 text-accent shadow-md'
-                    : 'text-muted hover:text-foreground hover:bg-foreground/5'
-                }`}
-                title={dataSource === 'demo' ? "Cambiar a tus datos reales" : "Guardar cambios local/nube"}
-              >
-                <span className="text-sm font-bold flex items-center gap-1">
-                  {dataSource === 'local' && isSaving ? <Hourglass className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} 
-                  Datos Reales
-                </span>
-                <span className={`text-[0.65rem] uppercase tracking-wider font-semibold ${dataSource === 'local' && isSaving ? 'animate-pulse' : 'opacity-80'}`}>
-                  {dataSource === 'demo' 
-                    ? 'Cambiar' 
-                    : isSaving 
-                      ? 'Guardando...' 
-                      : syncStatus === 'saving'
-                        ? 'Autoguardando...'
-                        : cloudSynced 
-                          ? 'Sincronizado' 
-                          : 'Guardar (Ctrl+S)'}
-                </span>
-              </button>
-            </div>
-          )}
-
-        </div>
-
-        {/* Right Side: Undo/Redo + Tema */}
-        <div className="flex justify-end items-center gap-3 shrink-0">
-          <div className="flex items-center gap-1 bg-foreground/5 p-1 rounded-lg">
-            <button
-              onClick={() => undo()}
-              disabled={pastStates.length === 0}
-              className={`p-2 rounded-md transition-colors ${pastStates.length > 0 ? 'text-foreground hover:bg-foreground/10 cursor-pointer' : 'text-muted opacity-50 cursor-not-allowed'}`}
-              title="Deshacer (Ctrl+Z)" aria-label="Deshacer" tabIndex={0}
-            >
-              <Undo2 size={16} />
-            </button>
-            <button
-              onClick={() => redo()}
-              disabled={futureStates.length === 0}
-              className={`p-2 rounded-md transition-colors ${futureStates.length > 0 ? 'text-foreground hover:bg-foreground/10 cursor-pointer' : 'text-muted opacity-50 cursor-not-allowed'}`}
-              title="Rehacer (Ctrl+Y)" aria-label="Rehacer" tabIndex={0}
-            >
-              <Redo2 size={16} />
-            </button>
-          </div>
-
-
-          {mounted && (
-            <div className="flex items-center">
-              <ThemeSelector />
-            </div>
-          )}
-        </div>
-      </nav>
-
       {/* Fila 3: Breadcrumb y Buscar */}
       {currentItem && (
         <div className="w-full px-6 py-1.5 bg-white/[0.02] border-t border-[var(--glass-border)] flex items-center justify-between gap-1.5 text-sm text-muted tracking-wide">
@@ -476,46 +426,76 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
         </div>
 
           {/* Búsqueda a la derecha */}
-          <div className="relative w-48 md:w-64 shrink-0">
-            <input
-              type="text"
-              placeholder="Buscar..."
-              aria-label="Buscar en la aplicación"
-              role="searchbox"
-              value={searchQuery}
-              onChange={(e) => {
-                const query = e.target.value;
-                setSearchQuery(query);
-                const results = searchGlobal(query);
-                setSearchResults(results);
-                setShowResults(results.length > 0);
-              }}
-              onFocus={() => setShowResults(searchResults.length > 0)}
-              onBlur={() => setTimeout(() => setShowResults(false), 200)}
-              className="bg-foreground/5 border border-[var(--glass-border)] rounded-lg px-3 py-1 text-xs text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-accent/50 w-full"
-            />
-            {showResults && searchResults.length > 0 && (
-              <div className="absolute top-full right-0 mt-1 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto w-64">
-                {searchResults.map((result, index) => (
-                  <div
-                    key={index}
-                    className="px-3 py-2 hover:bg-foreground/10 cursor-pointer text-sm"
-                    onClick={() => {
-                      if (result.href) {
-                        router.push(result.href);
-                        setSearchQuery("");
-                        setShowResults(false);
-                      }
-                    }}
-                  >
-                    <div className="font-medium text-[var(--text-primary)]">{result.title}</div>
-                    {result.subtitle && (
-                      <div className="text-xs text-[var(--text-muted)]">{result.subtitle}</div>
-                    )}
-                  </div>
-                ))}
+          <div className="flex items-center gap-3 shrink-0">
+            <div className="relative w-48 md:w-64 shrink-0">
+              <input
+                type="text"
+                placeholder="Buscar..."
+                aria-label="Buscar en la aplicación"
+                role="searchbox"
+                value={searchQuery}
+                onChange={(e) => {
+                  const query = e.target.value;
+                  setSearchQuery(query);
+                  const results = searchGlobal(query);
+                  setSearchResults(results);
+                  setShowResults(results.length > 0);
+                }}
+                onFocus={() => setShowResults(searchResults.length > 0)}
+                onBlur={() => setTimeout(() => setShowResults(false), 200)}
+                className="bg-foreground/5 border border-[var(--glass-border)] rounded-lg px-3 py-1 text-xs text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-accent/50 w-full"
+              />
+              {showResults && searchResults.length > 0 && (
+                <div className="absolute top-full right-0 mt-1 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto w-64">
+                  {searchResults.map((result, index) => (
+                    <div
+                      key={index}
+                      className="px-3 py-2 hover:bg-foreground/10 cursor-pointer text-sm"
+                      onClick={() => {
+                        if (result.href) {
+                          router.push(result.href);
+                          setSearchQuery("");
+                          setShowResults(false);
+                        }
+                      }}
+                    >
+                      <div className="font-medium text-[var(--text-primary)]">{result.title}</div>
+                      {result.subtitle && (
+                        <div className="text-xs text-[var(--text-muted)]">{result.subtitle}</div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            
+            {/* Acciones movidas desde la antigua Fila 2 */}
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-0.5 bg-foreground/5 p-1 rounded-lg">
+                <button
+                  onClick={() => undo()}
+                  disabled={pastStatesLength === 0}
+                  className="p-1.5 rounded text-muted hover:text-foreground hover:bg-foreground/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                  title="Deshacer (Ctrl+Z)"
+                >
+                  <Undo2 className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => redo()}
+                  disabled={futureStatesLength === 0}
+                  className="p-1.5 rounded text-muted hover:text-foreground hover:bg-foreground/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                  title="Rehacer (Ctrl+Y)"
+                >
+                  <Redo2 className="w-4 h-4" />
+                </button>
               </div>
-            )}
+
+              {mounted && (
+                <div className="flex items-center bg-foreground/5 rounded-lg p-0.5">
+                  <ThemeSelector />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}

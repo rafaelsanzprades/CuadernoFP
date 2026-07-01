@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { Info } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -15,31 +15,8 @@ export default function InicioPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        if (activeModuleId && !moduleData) {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeModuleId}`);
-          const data = await res.json();
-          if (data.status === "success") setModuleData(data.data);
-        }
-        if (activeCursoId && !cursoData) {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeCursoId}`);
-          const data = await res.json();
-          if (data.status === "success") setCursoData(data.data);
-        }
-      } catch (err) {
-        console.error("Error fetching data:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    if ((activeModuleId && !moduleData) || (activeCursoId && !cursoData)) {
-      fetchData();
-    } else {
-      setLoading(false);
-    }
-  }, [activeModuleId, moduleData, activeCursoId, cursoData, setModuleData, setCursoData]);
+    setLoading(false);
+  }, []);
 
   if (loading) {
     return (

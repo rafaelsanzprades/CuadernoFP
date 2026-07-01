@@ -33,10 +33,12 @@ export default function Sidebar() {
 
   const [dateStr, setDateStr] = useState<string>("");
   const [timeStr, setTimeStr] = useState<string>("");
+  const [displayGroup, setDisplayGroup] = useState<string>("");
 
   useEffect(() => {
     const updateTime = () => {
-      const isDemo = useAppStore.getState().activeModuleId === '0237-ictve-pd';
+      const state = useAppStore.getState();
+      const isDemo = state.activeModuleId === '0237-ictve-pd';
       const realNow = new Date();
       const currentYear = realNow.getFullYear();
       
@@ -57,10 +59,28 @@ export default function Sidebar() {
       
       setDateStr(`${day} de ${monthStr} de ${year}`);
       setTimeStr(`${hours}:${minutes} h`);
+
+      let groupStr = "";
+      if (state.activeCursoId) {
+        if (state.activeCursoId.includes('-1A') || state.activeCursoId.endsWith('1a')) groupStr = "Curso 2025-26 - 1A-GM";
+        else if (state.activeCursoId.includes('-1B') || state.activeCursoId.endsWith('1b')) groupStr = "Curso 2025-26 - 1B-GM";
+        else if (state.activeCursoId.includes('-1C') || state.activeCursoId.endsWith('1c')) groupStr = "Curso 2025-26 - 1C-GM";
+        else groupStr = "Curso 2025-26";
+      }
+      setDisplayGroup(groupStr);
     };
     updateTime();
     const interval = setInterval(updateTime, 60000); // update every minute
-    return () => clearInterval(interval);
+    
+    // Subscribe to activeCursoId changes
+    const unsub = useAppStore.subscribe((state, prevState) => {
+      if (state.activeCursoId !== prevState.activeCursoId) updateTime();
+    });
+    
+    return () => {
+      clearInterval(interval);
+      unsub();
+    };
   }, [activeModuleId]);
 
   const handleScroll = (e: React.UIEvent<HTMLElement>) => {
@@ -78,7 +98,12 @@ export default function Sidebar() {
               </h1>
             </Link>
             <span className="text-sm text-muted/80 font-mono mt-0.5 ml-0.5">{timeStr}</span>
-            <div className="mt-1.5 w-max bg-yellow-400 text-yellow-950 text-[0.7rem] uppercase tracking-wider font-bold px-2 py-0.5 rounded shadow-sm flex items-center gap-1.5 border border-yellow-500">
+            {displayGroup && (
+              <span className="text-[0.7rem] text-accent font-bold mt-1.5 ml-0.5 tracking-wider uppercase bg-accent/10 px-2 py-0.5 rounded-md border border-accent/20 w-max shadow-sm">
+                {displayGroup}
+              </span>
+            )}
+            <div className="mt-2 w-max bg-yellow-400 text-yellow-950 text-[0.7rem] uppercase tracking-wider font-bold px-2 py-0.5 rounded shadow-sm flex items-center gap-1.5 border border-yellow-500">
               <span className="text-[0.8rem]">🚧</span> En obras
             </div>
           </div>
