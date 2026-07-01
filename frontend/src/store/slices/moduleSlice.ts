@@ -1,4 +1,4 @@
-﻿import { StateCreator } from 'zustand';
+import { StateCreator } from 'zustand';
 import { AppState, ModuleData, CursoData } from '@/types';
 
 type ModuleSlice = Pick<AppState,
@@ -75,10 +75,6 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
     if (!activeModuleId || !moduleData) return false;
     
     setSyncStatus('saving');
-
-    // Increment version in memory
-    const updatedData = { ...moduleData, __version__: (moduleData.__version__ || 0) + 1 };
-    set({ moduleData: updatedData });
     
     let localSaved = false;
 
@@ -86,7 +82,7 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
     if (pdFileSource.type === 'local' && pdFileSource.fileHandle) {
       try {
         const writable = await (pdFileSource.fileHandle as any).createWritable();
-        await writable.write(JSON.stringify(updatedData, null, 2));
+        await writable.write(JSON.stringify(moduleData, null, 2));
         await writable.close();
         localSaved = true;
       } catch (e) {
@@ -99,7 +95,7 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
     // Save to Google Drive if connected
     if (isDriveConnected && autoSyncDrive) {
       import('@/services/driveService').then(({ driveService }) => {
-        driveService.saveFile(`${activeModuleId}.fpp`, updatedData);
+        driveService.saveFile(`${activeModuleId}.fpp`, moduleData);
       });
     }
     
@@ -116,10 +112,6 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
     if (!activeCursoId || !cursoData) return false;
     
     setSyncStatus('saving');
-
-    // Increment version in memory
-    const updatedData = { ...cursoData, __version__: (cursoData.__version__ || 0) + 1 };
-    set({ cursoData: updatedData });
     
     let localSaved = false;
 
@@ -127,7 +119,7 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
     if (cursoFileSource.type === 'local' && cursoFileSource.fileHandle) {
       try {
         const writable = await (cursoFileSource.fileHandle as any).createWritable();
-        await writable.write(JSON.stringify(updatedData, null, 2));
+        await writable.write(JSON.stringify(cursoData, null, 2));
         await writable.close();
         localSaved = true;
       } catch (e) {
@@ -140,7 +132,7 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
     // Save to Google Drive if connected
     if (isDriveConnected && autoSyncDrive) {
       import('@/services/driveService').then(({ driveService }) => {
-        driveService.saveFile(`${activeCursoId}.fpc`, updatedData);
+        driveService.saveFile(`${activeCursoId}.fpc`, cursoData);
       });
     }
     
