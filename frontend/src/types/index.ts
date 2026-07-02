@@ -110,42 +110,14 @@ export const ModuleDataSchema = z.object({
 });
 export type ModuleData = z.infer<typeof ModuleDataSchema>;
 
-export const CrmInteraccionSchema = z.object({
-  id: z.string(),
-  fecha: z.string(),
-  tipo: z.enum(["llamada", "email", "visita", "otro"]),
-  descripcion: z.string(),
-  contacto: z.string(),
-});
-export type CrmInteraccion = z.infer<typeof CrmInteraccionSchema>;
 
-export const CrmEmpresaSchema = z.object({
-  id: z.string(),
-  nombre: z.string(),
-  contacto_nombre: z.string(),
-  contacto_cargo: z.string(),
-  telefono: z.string(),
-  email: z.string(),
-  direccion: z.string(),
-  ciudad: z.string(),
-  codigo_postal: z.string(),
-  provincia: z.string(),
-  sector: z.string(),
-  notas: z.string(),
-  estado: z.enum(["activo", "inactivo", "pendiente"]),
-  interacciones: z.array(CrmInteraccionSchema),
-  alumnado_asignados: z.array(z.string()),
-});
-export type CrmEmpresa = z.infer<typeof CrmEmpresaSchema>;
 
 export const CursoDataSchema = z.object({
   df_al: z.array(AlumnadoSchema).optional(),
   df_sgmt: z.array(SeguimientoUDSchema).optional(),
-  df_feoe: z.array(z.any()).optional(),
   df_eval: z.array(z.any()).optional(),
   daily_ledger: z.record(z.string(), z.any()).optional(),
   tutoria_ledger: z.record(z.string(), z.any()).optional(),
-  profesional_ledger: z.record(z.string(), z.any()).optional(),
   horario: z.record(z.string(), z.any()).optional(),
   info_fechas: z.record(z.string(), z.any()).optional(),
   calendar_notes: z.record(z.string(), z.any()).optional(),
@@ -179,6 +151,7 @@ export interface Module {
   id: number;
   name: string;
   code: string;
+  acronym?: string;
   hours: number;
   assignedTeacherId?: number | null;
   ras?: any[];

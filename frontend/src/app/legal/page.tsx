@@ -16,7 +16,7 @@ export default function LegalPage() {
         <Header />
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
-          <div className="w-full space-y-8 pb-12">
+          <div className="w-full space-y-4 pb-12">
             
 
             {/* Header Title */}
@@ -28,7 +28,7 @@ export default function LegalPage() {
             </div>
 
             <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="mb-6 max-w-full">
+              <TabsList className="mb-3 max-w-full">
                 <TabsTrigger value="aviso">Aviso legal</TabsTrigger>
                 <TabsTrigger value="licencia">Licencia y términos</TabsTrigger>
               </TabsList>
@@ -58,7 +58,7 @@ export default function LegalPage() {
                 </div>
 
                 {/* Política de Privacidad & RGPD */}
-                <div className="space-y-6">
+                <div className="space-y-3">
                   <h2 className="text-[1.1rem] font-bold text-foreground border-b border-[var(--glass-border)] pb-2">2. Política de Privacidad y RGPD</h2>
                   
                   <div className="flex items-start gap-3 mb-6">
@@ -69,7 +69,7 @@ export default function LegalPage() {
                     </div>
                   </div>
 
-                  <div className="space-y-6 text-sm text-foreground/80 leading-relaxed">
+                  <div className="space-y-3 text-sm text-foreground/80 leading-relaxed">
                     <div>
                       <h3 className="text-base font-bold text-foreground mb-1">Responsable del Tratamiento de Datos (RGPD)</h3>
                       <p>

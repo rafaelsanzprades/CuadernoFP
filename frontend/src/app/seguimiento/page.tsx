@@ -181,7 +181,7 @@ export default function SeguimientoPage() {
         <Header />
 
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-8">
+          <MotionWrapper className="space-y-4">
             <div>
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <MapPin className="w-6 h-6 text-accent" /> Seguimiento diario
@@ -201,13 +201,31 @@ export default function SeguimientoPage() {
 
           {activeTab === "diario" && (
             <section>
-              <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-                <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-                <div>
-                  <p className="text-sm font-semibold text-foreground">Diario de Aula - RD 659/2023</p>
-                  <p className="text-sm text-muted mt-1">Registro de actividad docente y seguimiento diario.</p>
-                </div>
-              </div>
+                            {(() => {
+                const infoMap: Record<string, {title: string, desc: string}> = {
+          'diario': {
+                    'title': 'Diario de Aula',
+                    'desc': 'Anotaciones diarias, incidencias y desarrollo de las sesiones.'
+          },
+          'asistencia': {
+                    'title': 'Asistencia',
+                    'desc': 'Registro y control de faltas y retrasos del alumnado.'
+          },
+          'alerta_abandono': {
+                    'title': 'Alerta de Abandono',
+                    'desc': 'Sistema de detección temprana y protocolo de abandono.'
+          }
+};
+                const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
+                return (
+                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
+                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
+                    <div>
+                      <p className="text-sm text-muted">{info.desc}</p>
+                    </div>
+                  </div>
+                );
+              })()}
               {/* Seguimiento diario */}
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-bold flex items-center gap-2 text-foreground">
@@ -243,7 +261,7 @@ export default function SeguimientoPage() {
                         </div>
                       </summary>
                       <div className="p-6 border-t border-[var(--glass-border)] bg-foreground/10">
-                        <div className="relative border-l-2 border-[var(--glass-border)] ml-4 space-y-8 pb-4">
+                        <div className="relative border-l-2 border-[var(--glass-border)] ml-4 space-y-4 pb-4">
                           {lectivos.map((d: Date, i: number) => {
                             const dateStr = d.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
                             const diaSemana = dias_semana_list[d.getDay() - 1];

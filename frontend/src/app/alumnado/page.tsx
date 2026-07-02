@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map, MessageSquare, FileText, Route , Info, FolderOpen } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -7,19 +7,12 @@ import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import toast from "react-hot-toast";
-import { TutoriaTab } from "@/components/features/alumnado/TutoriaTab";
-import { TutoriaMatrixTab } from "@/components/features/alumnado/TutoriaMatrixTab";
 import { PlanoClaseTab } from "@/components/features/alumnado/PlanoClaseTab";
-import { ActuacionesTab } from "@/components/features/alumnado/ActuacionesTab";
 import { BoletinesTab } from "@/components/features/alumnado/BoletinesTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
-import { FeoeAssignTab } from "@/components/features/alumnado/FeoeAssignTab";
-import { OrientacionTab } from "@/components/features/profesional/OrientacionTab";
-import { ResumenTab } from "@/components/features/profesional/ResumenTab";
-import { TendenciasTab } from "@/components/features/profesional/TendenciasTab";
-import { ItinerarioTab } from "@/components/features/alumnado/ItinerarioTab";
+
 import Link from "next/link";
 
 
@@ -33,15 +26,7 @@ export default function AlumnadoPage() {
   const TABS = [
     { id: "alumnado", label:  <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> Alumnado</span>, cleanLabel: "Alumnado" },
     { id: "plano", label: <span className="flex items-center gap-2"><LayoutGrid className="w-4 h-4 shrink-0" /> Plano de clase</span>, cleanLabel: "Plano de clase" },
-    { id: "tutoria", label:  <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> Ficha de Tutoría</span>, cleanLabel: "Ficha de Tutoría" },
-    { id: "matriz", label:  <span className="flex items-center gap-2"><BarChart className="w-4 h-4 shrink-0" /> Matriz de Tutoría</span>, cleanLabel: "Matriz de Tutoría" },
-    { id: "actuaciones", label:  <span className="flex items-center gap-2"><MessageSquare className="w-4 h-4 shrink-0" /> Registro de Tutorías</span>, cleanLabel: "Registro de Tutorías" },
-    { id: "boletines", label:  <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> Boletines</span>, cleanLabel: "Boletines" },
-    { id: "feoe", label: <span className="flex items-center gap-2"><Building2 className="w-4 h-4 shrink-0" /> Prácticas FEOE</span>, cleanLabel: "Prácticas FEOE" },
-    { id: "perfil", label: <span className="flex items-center gap-2"><Compass className="w-4 h-4 shrink-0" /> Perfil individual</span>, cleanLabel: "Perfil individual" },
-    { id: "resumen", label: <span className="flex items-center gap-2"><ClipboardList className="w-4 h-4 shrink-0" /> Resumen</span>, cleanLabel: "Resumen" },
-    { id: "tendencias", label: <span className="flex items-center gap-2"><BarChart className="w-4 h-4 shrink-0" /> Tendencias</span>, cleanLabel: "Tendencias" },
-    { id: "itinerario", label: <span className="flex items-center gap-2"><Route className="w-4 h-4 shrink-0" /> Itinerario formativo</span>, cleanLabel: "Itinerario formativo" }
+    { id: "boletines", label:  <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> Boletines</span>, cleanLabel: "Boletines" }
   ];
 
   const [activeTab, setActiveTab] = useState("alumnado");
@@ -249,7 +234,7 @@ export default function AlumnadoPage() {
         <Header breadcrumbSuffix={activeTabCleanLabel} />
         
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-8 pb-12">
+          <MotionWrapper className="space-y-4 pb-12">
             <div className="flex justify-between items-start">
             <div>
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
@@ -289,13 +274,31 @@ export default function AlumnadoPage() {
           {/* Tab 1: Alumnado */}
           {activeTab === "alumnado" && (
             <>
-                <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-                  <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">Alumnado - RD 659/2023 (Cap. III)</p>
-                    <p className="text-sm text-muted mt-1">Gestión académica y seguimiento del alumnado matriculado.</p>
+                              {(() => {
+                const infoMap: Record<string, {title: string, desc: string}> = {
+          'alumnado': {
+                    'title': 'Alumnado',
+                    'desc': 'Gestión del listado de alumnado y ficha individual.'
+          },
+          'plano': {
+                    'title': 'Plano de Clase',
+                    'desc': 'Distribución y plano visual del aula.'
+          },
+          'boletines': {
+                    'title': 'Boletines',
+                    'desc': 'Generación de boletines y calificaciones parciales.'
+          }
+};
+                const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
+                return (
+                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
+                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
+                    <div>
+                      <p className="text-sm text-muted">{info.desc}</p>
+                    </div>
                   </div>
-                </div>
+                );
+              })()}
             <Card className="p-6 border-t-4 border-t-blue-500">
               <div className="flex justify-between items-end mb-6">
                 <div className="flex items-center gap-4">
@@ -464,30 +467,13 @@ export default function AlumnadoPage() {
             </>
           )}
 
-          {/* Tab 2: Ficha de Tutoría */}
-          {activeTab === "tutoria" && (
-            <TutoriaTab />
-          )}
-
-          {/* Tab 3: Matriz de Tutoría */}
-          {activeTab === "matriz" && (
-            <TutoriaMatrixTab />
-          )}
-
-
           {/* Tab 5: Plano de clase */}
           {activeTab === "plano" && (
             <PlanoClaseTab />
           )}
 
-          {activeTab === "actuaciones" && <ActuacionesTab />}
           {activeTab === "boletines" && <BoletinesTab />}
-          {activeTab === "feoe" && <FeoeAssignTab />}
-          {activeTab === "perfil" && <OrientacionTab />}
-          {activeTab === "resumen" && <ResumenTab />}
-          {activeTab === "tendencias" && <TendenciasTab />}
-          {activeTab === "itinerario" && <ItinerarioTab />}
-
+          
           </MotionWrapper>
         </main>
       </div>

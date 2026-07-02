@@ -273,7 +273,7 @@ export default function DocumentosPage() {
         <Header breadcrumbSuffix={activeTabCleanLabel} />
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="w-full space-y-6 pb-12">
+          <MotionWrapper className="w-full space-y-3 pb-12">
 
 
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
@@ -286,7 +286,7 @@ export default function DocumentosPage() {
             </div>
 
             <Tabs value={activeTab} onValueChange={(val: any) => setActiveTab(val)}>
-              <TabsList className="mb-6 max-w-full flex-wrap h-auto">
+              <TabsList className="mb-3 max-w-full flex-wrap h-auto">
                 <TabsTrigger value="programacion">
                   <div className="flex items-center gap-2"><FileText className="w-4 h-4" /> Programación</div>
                 </TabsTrigger>
@@ -295,16 +295,30 @@ export default function DocumentosPage() {
                 </TabsTrigger>
               </TabsList>
             </Tabs>
-      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-        <div>
-          <p className="text-sm font-semibold text-foreground">Herramienta operativa y de gestión - Descargas</p>
-          <p className="text-sm text-muted mt-1">Exportación y generación de documentos en formatos estándar.</p>
-        </div>
-      </div>
+                    {(() => {
+                const infoMap: Record<string, {title: string, desc: string}> = {
+          'programacion': {
+                    'title': 'Descargas - Programación',
+                    'desc': 'Descarga de la programación didáctica completa en PDF.'
+          },
+          'curso': {
+                    'title': 'Descargas - Curso',
+                    'desc': 'Descarga de actas, seguimientos y memorias de curso.'
+          }
+};
+                const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
+                return (
+                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
+                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
+                    <div>
+                      <p className="text-sm text-muted">{info.desc}</p>
+                    </div>
+                  </div>
+                );
+              })()}
 
             {['programacion', 'curso'].includes(activeTab) && (
-              <div className="space-y-8 animate-in fade-in duration-500">
+              <div className="space-y-4 animate-in fade-in duration-500">
                 {(!activeCursoId || !activeModuleId) ? (
                   <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                     <FileText className="w-16 h-16 text-muted-foreground opacity-50" />
@@ -318,7 +332,7 @@ export default function DocumentosPage() {
                   </Card>
                 ) : (loadingData || !cursoData || !moduleData) ? (
                   <Card className="p-12">
-                    <div className="space-y-6">
+                    <div className="space-y-3">
                       <Skeleton className="h-8 w-1/4" />
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <Skeleton className="h-40 w-full" />
@@ -329,7 +343,7 @@ export default function DocumentosPage() {
                 ) : (
                   <>
                     {activeTab === 'programacion' && (
-                      <div className="space-y-8 animate-in fade-in duration-500">
+                      <div className="space-y-4 animate-in fade-in duration-500">
                         <Card className="p-6 border-t-4 border-t-purple-500">
                           <h2 className="text-2xl font-bold mb-1"><span className="inline-flex"><FileText className="w-4 h-4" /></span> Documentos Oficiales</h2>
                           <p className="text-sm text-muted mb-6">Documentos base de programación del módulo</p>
@@ -374,7 +388,7 @@ export default function DocumentosPage() {
                     )}
 
                     {activeTab === 'curso' && (
-                      <div className="space-y-8 animate-in fade-in duration-500">
+                      <div className="space-y-4 animate-in fade-in duration-500">
                         <Card className="p-6 border-t-4 border-t-emerald-500">
                           <h2 className="text-2xl font-bold mb-1"><span className="inline-flex"><Calendar className="w-4 h-4" /></span> Curso</h2>
                           <p className="text-sm text-muted mb-6">Gestión del curso académico</p>

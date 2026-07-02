@@ -133,7 +133,7 @@ export default function MatricesPage() {
         <Header />
 
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-8 pb-12">
+          <MotionWrapper className="space-y-4 pb-12">
             <div>
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <span className="inline-flex"><Calculator className="w-[1.2em] h-[1.2em] mr-1" /></span> Matrices OG- RA- CE- UD/T
@@ -163,14 +163,36 @@ export default function MatricesPage() {
 
             {/* Resultados de aprendizaje y CE */}
             {activeTab === "ra" && (
-              <div className="space-y-8 animate-in fade-in duration-500">
-                <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-                  <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">Resultados de Aprendizaje - RD 659/2023 (Anexos I)</p>
-                    <p className="text-sm text-muted mt-1">Los RA y CE son prescriptivos y definen lo que el alumno debe saber y saber hacer.</p>
+              <div className="space-y-4 animate-in fade-in duration-500">
+                              {(() => {
+                const infoMap: Record<string, {title: string, desc: string}> = {
+          'ra': {
+                    'title': 'Matriz RA - CE',
+                    'desc': 'Matriz de Resultados de Aprendizaje y Criterios de Evaluación.'
+          },
+          'ud': {
+                    'title': 'Unidades Didácticas (UD/T)',
+                    'desc': 'Definición de Unidades Didácticas o Unidades de Trabajo.'
+          },
+          'relacion': {
+                    'title': 'Relación RA - UD/T',
+                    'desc': 'Ponderación y relación entre Unidades y Resultados de Aprendizaje.'
+          },
+          'contribucion': {
+                    'title': 'Contribución a OG',
+                    'desc': 'Contribución de los RA a los Objetivos Generales.'
+          }
+};
+                const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
+                return (
+                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
+                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
+                    <div>
+                      <p className="text-sm text-muted">{info.desc}</p>
+                    </div>
                   </div>
-                </div>
+                );
+              })()}
                 <Card className="p-6 border-t-4 border-t-accent">
                   <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-4">
                     <span><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></span> RA. Resultados de aprendizaje
@@ -666,7 +688,7 @@ export default function MatricesPage() {
                     <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Relación entre Resultados de aprendizaje y Unidades didácticas o de trabajo
                   </h2>
                   {df_ra && df_ra.length > 0 ? (
-                    <div className="space-y-6">
+                    <div className="space-y-3">
                       {df_ra.map((ra: any, idx: number) => {
                         const uds = df_ud?.filter((ud: any) => ud[ra.id_ra] > 0) || [];
                         return (

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { AlertTriangle, BarChart, BookOpen, Calculator, Calendar, CalendarDays, ChevronRight, Construction, CornerLeftUp, Download, DownloadCloud, File, FileEdit, FileSpreadsheet, FileText, Folder, FolderOpen, GraduationCap, MapPin, Play, Scale, Search, Settings, UploadCloud, User, Users, X , Info } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -20,7 +20,13 @@ type DocumentItem = {
 };
 
 export default function DocumentosPage() {
-  const TABS = ["Plantillas", "Currículos", "Normativa", "TodoFP", "Autores/Editoriales"];
+  const TABS = [
+    { id: "Plantillas", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Plantillas</span>, cleanLabel: "Plantillas" },
+    { id: "Currículos", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> Currículos</span>, cleanLabel: "Currículos" },
+    { id: "Normativa", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> Normativa</span>, cleanLabel: "Normativa" },
+    { id: "TodoFP", label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4 shrink-0" /> TodoFP</span>, cleanLabel: "TodoFP" },
+    { id: "Autores/Editoriales", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> Autores/Editoriales</span>, cleanLabel: "Autores/Editoriales" }
+  ];
   const [activeTab, setActiveTab] = useState<string>("Plantillas");
 
   // State for Explorador
@@ -208,7 +214,7 @@ export default function DocumentosPage() {
         <Header />
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="w-full space-y-6 pb-12">
+          <MotionWrapper className="w-full space-y-3 pb-12">
 
 
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
@@ -219,25 +225,35 @@ export default function DocumentosPage() {
                 <p className="text-muted mt-2 text-lg">Explorador de legislación, normativas y docs oficiales.</p>
             </div>
             </div>
-      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6 mt-6">
-        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-        <div>
-          <p className="text-sm font-semibold text-foreground">Herramienta operativa y de gestión - Documentos</p>
-          <p className="text-sm text-muted mt-1">Gestión centralizada de ficheros y recursos del docente.</p>
-        </div>
-      </div>
 
-            <Tabs value={activeTab} onValueChange={(val) => { setActiveTab(val); fetchDocuments(val); }} className="w-full mb-6">
+            <Tabs value={activeTab} onValueChange={(val) => { setActiveTab(val); fetchDocuments(val); }} className="w-full mb-6 mt-6">
               <TabsList className="bg-foreground/5 border border-[var(--glass-border)] w-full justify-start h-auto p-1 rounded-xl flex-wrap">
                 {TABS.map(tab => (
-                  <TabsTrigger key={tab} value={tab} className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all">
-                    {tab}
+                  <TabsTrigger key={tab.id} value={tab.id} className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all">
+                    {tab.label}
                   </TabsTrigger>
                 ))}
               </TabsList>
             </Tabs>
 
-            <div className="space-y-6 animate-in fade-in duration-500">
+            <div className="space-y-3 animate-in fade-in duration-500">
+              {(() => {
+                const infoMap: Record<string, {desc: string}> = {
+                  'Plantillas': { desc: 'Plantillas base para programaciones y actas.' },
+                  'Currículos': { desc: 'Decretos de currículos oficiales.' },
+                  'Normativa': { desc: 'Legislación y normativa educativa.' },
+                  'TodoFP': { desc: 'Recursos y guías del portal TodoFP.' },
+                  'Autores/Editoriales': { desc: 'Bibliografía y material de editoriales.' }
+                };
+                const info = infoMap[activeTab] || { desc: 'Gestión de documentos' };
+                return (
+                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6 mt-3'>
+                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
+                    <p className='text-sm text-muted'>{info.desc}</p>
+                  </div>
+                );
+              })()}
+
               <div className="flex flex-col md:flex-row justify-between gap-4">
                 <div className="relative">
                   <input

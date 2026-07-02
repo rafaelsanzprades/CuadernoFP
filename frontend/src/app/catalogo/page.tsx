@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { BookOpen, ChevronDown, ChevronUp, Clock, FolderTree, GraduationCap, Layers, ListChecks, AlertTriangle, Info } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -146,9 +146,33 @@ function CiclosContent() {
 type Degree = { id: number; name: string; code: string | null; level: string; boa_articles?: Record<string, string> | null };
 type Family = { id: number; code: string; name: string; icon_url: string; color_hex: string; degrees: Degree[] };
 
+const getAcronym = (name: string) => {
+  const ignoreWords = ['y', 'e', 'de', 'del', 'la', 'las', 'el', 'los', 'en', 'para', 'por', 'con', 'a', 'al', 'o', 'u'];
+  let cleanName = name.replace(/\([^)]+\)/g, '').trim();
+  if (cleanName.includes('-')) {
+    cleanName = cleanName.split('-').slice(1).join('-').trim();
+  }
+  let acronym = cleanName.split(/\s+/)
+    .filter((w: string) => !ignoreWords.includes(w.toLowerCase()) && w.length > 0)
+    .map((w: string) => w[0].toUpperCase())
+    .join('');
+  return acronym;
+};
+
+const formatModuleName = (code: string | null, name: string, skipCode: boolean = false) => {
+  const acronym = getAcronym(name);
+  if (skipCode) {
+     return `${acronym} - ${name}`;
+  }
+  return `${code} - ${acronym} - ${name}`;
+};
+
 const formatDegreeName = (code: string | null, name: string) => {
-  if (!code) return name;
-  return name.startsWith(code) ? name : `${code} - ${name}`;
+  const acronym = getAcronym(name);
+  if (!code) return `${acronym} - ${name}`;
+  let cleanName = name.startsWith(`${code} - `) ? name.substring(code.length + 3) : name.startsWith(code) ? name.substring(code.length).trim() : name;
+  if (cleanName.startsWith('- ')) cleanName = cleanName.substring(2);
+  return `${code} - ${acronym} - ${cleanName}`;
 };
 
 function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string, tituloCodigo: string) => void }) {
@@ -573,10 +597,10 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
         {abierto && (
           <div className="border-t border-[var(--glass-border)] animate-in slide-in-from-top-1 duration-200">
             {mods.map((mod) => (
-              <button
+              <div
                 key={mod.codigo}
                 onClick={() => onSelectModulo(titulo!.familia, curriculoCodigo, mod.codigo)}
-                className="w-full p-5 border-b border-[var(--glass-border)] last:border-b-0 hover:bg-foreground/5 transition-colors text-left"
+                className="w-full p-5 border-b border-[var(--glass-border)] last:border-b-0 hover:bg-foreground/5 transition-colors text-left cursor-pointer"
               >
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3 min-w-0 flex-1">
@@ -641,7 +665,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
                     </div>
                   </div>
                 )}
-              </button>
+              </div>
             ))}
           </div>
         )}
@@ -862,9 +886,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
           >
             <option value="">-- Selecciona Módulo --</option>
             {titulo?.modulos.map((m: any) => (
-              <option key={m.codigo} value={m.codigo}>
-                {m.codigo} - {m.nombre} ({m.curso})
-              </option>
+              <option key={m.codigo} value={m.codigo}>{formatModuleName(m.codigo, m.nombre)} ({m.curso})</option>
             ))}
           </select>
         </div>
@@ -898,7 +920,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
               <span className="font-mono text-xs font-medium text-accent bg-accent/10 border border-accent/20 px-2 py-1 rounded">
                 {modulo.codigo}
               </span>
-              <h2 className="text-lg font-bold text-foreground">{modulo.nombre}</h2>
+              <h2 className="text-lg font-bold text-foreground">{formatModuleName(modulo.codigo, modulo.nombre, true)}</h2>
               <Badge variant="info">{modulo.horas}h</Badge>
               <Badge>{modulo.curso} Curso</Badge>
               <Button

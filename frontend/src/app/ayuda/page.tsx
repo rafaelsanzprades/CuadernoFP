@@ -539,7 +539,7 @@ export default function AyudaPage() {
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={activeTabCleanLabel} />
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-8 pb-12">
+          <MotionWrapper className="space-y-4 pb-12">
 
 
             {/* Título de la página */}
@@ -560,17 +560,39 @@ export default function AyudaPage() {
                 ))}
               </TabsList>
             </Tabs>
-      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-        <div>
-          <p className="text-sm font-semibold text-foreground">Soporte y Ayuda</p>
-          <p className="text-sm text-muted mt-1">Aspectos genéricos de uso y asistencia técnica para la aplicación.</p>
-        </div>
-      </div>
+                    {(() => {
+                const infoMap: Record<string, {title: string, desc: string}> = {
+          'asistente': {
+                    'title': 'Asistente IA',
+                    'desc': 'Asistente virtual potenciado con IA para resolver tus dudas.'
+          },
+          'verificacion': {
+                    'title': 'Verificación de Datos',
+                    'desc': 'Panel de salud y coherencia de los datos de tu cuaderno.'
+          },
+          'guia': {
+                    'title': 'Guía Paso a Paso',
+                    'desc': 'Manuales y guías paso a paso para configurar tu entorno.'
+          },
+          'faq': {
+                    'title': 'Preguntas Frecuentes',
+                    'desc': 'Respuestas a las preguntas más frecuentes de los docentes.'
+          }
+};
+                const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
+                return (
+                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
+                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
+                    <div>
+                      <p className="text-sm text-muted">{info.desc}</p>
+                    </div>
+                  </div>
+                );
+              })()}
 
             {/* ── CONTENIDO: ASISTENTE IA ──────────────────────────────── */}
             {activeTab === "asistente" && (
-              <div className="space-y-8 animate-in fade-in duration-500 w-full max-w-6xl mx-auto">
+              <div className="space-y-4 animate-in fade-in duration-500 w-full max-w-6xl mx-auto">
                 <div className="flex justify-center">
                   <Button
                     onClick={() => setAiModalOpen(true)}
@@ -623,7 +645,7 @@ export default function AyudaPage() {
 
             {/* ── CONTENIDO: VERIFICACIÓN ──────────────────────────────── */}
             {activeTab === "verificacion" && (
-              <div className="space-y-8 animate-in fade-in duration-500">
+              <div className="space-y-4 animate-in fade-in duration-500">
                 <div className="flex flex-wrap gap-2 text-sm text-muted">
                   <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1">
                     Programación Activa: <span className="font-semibold text-foreground">{activeModuleId || "-"}</span>
@@ -679,10 +701,10 @@ export default function AyudaPage() {
 
             {/* ── CONTENIDO: GUÍA PASO A PASO ───────────────────────────── */}
             {activeTab === "guia" && (
-              <div className="space-y-6 animate-in fade-in duration-500 w-full">
+              <div className="space-y-3 animate-in fade-in duration-500 w-full">
                 <Card glow className="p-6">
                   <h2 className="text-xl font-bold mb-6 text-accent">Cómo empezar a usar la aplicación desde cero</h2>
-                  <div className="relative border-l-2 border-[var(--glass-border)] ml-3 space-y-8 pl-8 py-2">
+                  <div className="relative border-l-2 border-[var(--glass-border)] ml-3 space-y-4 pl-8 py-2">
                     {STEPS.map((step, idx) => (
                       <div key={idx} className="relative">
                         <div className="absolute -left-[41px] top-0 w-8 h-8 rounded-full bg-accent/20 border-2 border-accent flex items-center justify-center text-sm font-bold text-accent">

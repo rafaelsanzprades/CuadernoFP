@@ -5,7 +5,6 @@ export const navGroups = [
     title: "",
     sectionDescription: "",
     items: [
-      { href: "/archivos", label: "Archivos", icon: FolderOpen, description: "Sincronización en la nube y configuración del espacio de trabajo." },
       { href: "/catalogo", label: "Catálogo", icon: GraduationCap, description: "Catálogo oficial de familias profesionales, títulos, cursos → módulos. RA → CE." },
       { href: "/documentos", label: "Documentos", icon: FolderOpen, description: "Explorador de archivos oficiales, legislación y otros documentos." },
       { href: "/descargas", label: "Descargas", icon: FileText, description: "Generación de reportes y boletines en PDF." },
@@ -23,7 +22,7 @@ export const navGroups = [
     ]
   },
   {
-    title: "Curso [2025-26]",
+    title: "Curso [Año]",
     sectionDescription: "Herramientas de seguimiento para el aula viva. Establece el calendario, administra el listado de alumnado, anota el progreso diario y evalúa.",
     items: [
       { href: "/calendario", label: "Calendario académico", icon: Calendar, description: "Fechas generales, trimestres, horario semanal, festivos y eventos relevantes del curso." },

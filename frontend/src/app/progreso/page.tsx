@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/Button";
 import { motion, AnimatePresence } from "framer-motion";
 import { LineChart, Line, ResponsiveContainer, YAxis } from "recharts";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
-import { CalificacionFEOETab } from "@/components/features/calificacion/CalificacionFEOETab";
 import { AnalisisGrupalTab } from "@/components/features/analisis/AnalisisGrupalTab";
 import { AnalisisIndividualTab } from "@/components/features/analisis/AnalisisIndividualTab";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
@@ -189,22 +188,6 @@ export default function ProgresoPage() {
         }
       }
     });
-
-    // FEOE integration
-    df_ra.forEach((ra: any) => {
-      if (ra.is_dual && df_feoe.length > 0) {
-        const fe_row = df_feoe.find((fe: any) => fe.ID === al_id);
-        if (fe_row && Number(fe_row[ra.id_ra]) >= 1) {
-          const val_feoe = Number(fe_row[ra.id_ra]);
-          const conv: any = { 1: 3.0, 2: 5.0, 3: 7.5, 4: 10.0 };
-          const nota_emp = conv[val_feoe] || 0;
-          if (notas_ra[ra.id_ra] !== undefined) {
-            notas_ra[ra.id_ra] = (notas_ra[ra.id_ra] + nota_emp) / 2.0;
-          }
-        }
-      }
-    });
-
     // Aplicar Reglas de Redondeo y Compensaciones por RA
     Object.keys(notas_ra).forEach(r_id => {
       let n_ra = notas_ra[r_id];
@@ -326,8 +309,7 @@ export default function ProgresoPage() {
     { id: "resumen", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Resumen</> },
     { id: "detalle", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Detalle por alumnado</> },
     { id: "grupal", label: <><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> Grupal</> },
-    { id: "individual", label: <><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> Individual</> },
-    { id: "feoe", label: <><span className="inline-flex"><Building2 className="w-[1.2em] h-[1.2em] mr-1" /></span> Calificación FEOE <span className="flex items-center gap-1 bg-warning/20 text-warning px-1.5 py-0.5 ml-2 rounded text-[10px] font-bold uppercase border border-warning/30"><AlertTriangle className="w-3 h-3" /> En obra</span></> }
+    { id: "individual", label: <><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> Individual</> }
   ];
 
   return (
@@ -337,7 +319,7 @@ export default function ProgresoPage() {
         <Header breadcrumbSuffix={TABS.find(t => t.id === activeTab)?.label} />
 
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-6 pb-12">
+          <MotionWrapper className="space-y-3 pb-12">
             <div className="flex justify-between items-start">
             <div>
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
@@ -372,17 +354,39 @@ export default function ProgresoPage() {
             </TabsList>
           </Tabs>
 
-          <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-            <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-            <div>
-              <p className="text-sm font-semibold text-foreground">Progreso y Estadísticas - Ley 3/2022</p>
-              <p className="text-sm text-muted mt-1">Monitorización del rendimiento académico y logro de resultados.</p>
-            </div>
-          </div>
+                        {(() => {
+                const infoMap: Record<string, {title: string, desc: string}> = {
+          'resumen': {
+                    'title': 'Resumen de Progreso',
+                    'desc': 'Panel global de rendimiento y calificaciones medias.'
+          },
+          'detalle': {
+                    'title': 'Detalle por Alumno',
+                    'desc': 'Progreso y trazabilidad detallada por alumno/a.'
+          },
+          'grupal': {
+                    'title': 'Progreso Grupal',
+                    'desc': 'Desempeño y estadísticas comparativas del grupo.'
+          },
+          'individual': {
+                    'title': 'Progreso Individual',
+                    'desc': 'Hoja de progreso individual para tutorías.'
+          }
+};
+                const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
+                return (
+                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
+                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
+                    <div>
+                      <p className="text-sm text-muted">{info.desc}</p>
+                    </div>
+                  </div>
+                );
+              })()}
 
           {/* TAB 1: RESUMEN (Dos bloques uno detrás de otro) */}
           {activeTab === "resumen" && (
-            <div className="space-y-8 animate-in fade-in duration-500">
+            <div className="space-y-4 animate-in fade-in duration-500">
               
               {/* Bloque 1: Resumen de calificaciones por trimestres */}
               <Card className="p-6 border-t-4 border-t-blue-500">
@@ -642,7 +646,7 @@ export default function ProgresoPage() {
 
           {/* TAB 2: DETALLE POR ALUMNADODO (Con ambos bloques desplegables uno detrás de otro) */}
           {activeTab === "detalle" && (
-            <div className="space-y-6 animate-in fade-in duration-500">
+            <div className="space-y-3 animate-in fade-in duration-500">
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
@@ -767,7 +771,7 @@ export default function ProgresoPage() {
                             transition={{ duration: 0.3, ease: "easeInOut" }}
                             className="overflow-hidden bg-foreground/10 border-t border-[var(--glass-border)]"
                           >
-                            <div className="p-6 space-y-8">
+                            <div className="p-6 space-y-4">
                               
                               {/* BLOQUE 1: Detalle de calificaciones por instrumento */}
                               <div className="flex flex-col lg:flex-row gap-8">
@@ -919,14 +923,6 @@ export default function ProgresoPage() {
               <AnalisisIndividualTab />
             </div>
           )}
-
-          {/* TAB 5: CALIFICACIÓN FEOE (Módulo Dual) */}
-          {activeTab === "feoe" && (
-            <div className="animate-in fade-in duration-500">
-              <CalificacionFEOETab />
-            </div>
-          )}
-
           </MotionWrapper>
         </main>
       </div>

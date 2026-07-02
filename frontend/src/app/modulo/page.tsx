@@ -108,7 +108,7 @@ export default function ModuloConfigPage() {
         <Header breadcrumbSuffix={activeTabCleanLabel} />
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-8 pb-12">
+          <MotionWrapper className="space-y-4 pb-12">
 
             {/* ── Título ─────────────────────────────────────────── */}
             <div>

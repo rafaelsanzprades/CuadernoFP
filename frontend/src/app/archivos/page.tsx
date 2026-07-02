@@ -355,7 +355,7 @@ export default function ArchivosTrabajoPage() {
         <Header breadcrumbSuffix={breadcrumbSuffixMap[activeTab] ?? "Gestor de archivos"} />
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="w-full space-y-8 pb-12">
+          <MotionWrapper className="w-full space-y-4 pb-12">
 
 
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -401,7 +401,7 @@ export default function ArchivosTrabajoPage() {
               </div>
             </div>
 
-            <div className="space-y-8 animate-in fade-in duration-300 pt-4">
+            <div className="space-y-4 animate-in fade-in duration-300 pt-4">
               {/* TAB: FILE MANAGER */}
               {activeTab === "datos" && (
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

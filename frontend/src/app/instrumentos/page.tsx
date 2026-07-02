@@ -154,14 +154,16 @@ export default function InstrumentosPage() {
     const sumaPeso = actTri.reduce((sum: number, act: any) => sum + (Number(act.peso_act) || 0), 0);
 
     return (
-      <div className="space-y-6 animate-in fade-in duration-500">
-                <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-                  <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">Instrumentos Trimestrales - RD 659/2023 (Art. 136)</p>
-                    <p className="text-sm text-muted mt-1">Instrumentos de evaluación continua para la toma de decisiones.</p>
-                  </div>
-                </div>
+      <div className="space-y-3 animate-in fade-in duration-500">
+                              <Tabs value={activeTab} onValueChange={setActiveTab}>
+            <TabsList className="mb-2 max-w-full">
+              {TABS.map(tab => (
+                <TabsTrigger key={tab.id} value={tab.id}>
+                  {tab.label}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
@@ -297,7 +299,7 @@ export default function InstrumentosPage() {
         <Header />
         
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-8 pb-12">
+          <MotionWrapper className="space-y-4 pb-12">
             <div>
             <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
               <FileEdit className="w-6 h-6 text-accent" /> Instrumentos de evaluación
@@ -305,15 +307,35 @@ export default function InstrumentosPage() {
             <p className="text-muted mt-2 text-lg">Definición y ponderación de CE, RA e instrumentos.</p>
           </div>
 
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="mb-2 max-w-full">
-              {TABS.map(tab => (
-                <TabsTrigger key={tab.id} value={tab.id}>
-                  {tab.label}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
+          {(() => {
+                const infoMap: Record<string, {title: string, desc: string}> = {
+          'resumen': {
+                    'title': 'Resumen de Instrumentos',
+                    'desc': 'Resumen global de los instrumentos de evaluación configurados.'
+          },
+          'tri1': {
+                    'title': 'Instrumentos - 1er Trimestre',
+                    'desc': 'Instrumentos de evaluación planificados para el 1er trimestre.'
+          },
+          'tri2': {
+                    'title': 'Instrumentos - 2º Trimestre',
+                    'desc': 'Instrumentos de evaluación planificados para el 2º trimestre.'
+          },
+          'tri3': {
+                    'title': 'Instrumentos - 3er Trimestre',
+                    'desc': 'Instrumentos de evaluación planificados para el 3er trimestre.'
+          }
+};
+                const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
+                return (
+                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
+                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
+                    <div>
+                      <p className="text-sm text-muted">{info.desc}</p>
+                    </div>
+                  </div>
+                );
+              })()}
 
           {activeTab === "resumen" && (
             <>

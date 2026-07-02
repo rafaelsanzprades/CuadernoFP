@@ -75,7 +75,7 @@ export default function AgendaPage() {
         <Header breadcrumbSuffix={activeTabCleanLabel} />
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
-          <div className="w-full space-y-8 pb-12">
+          <div className="w-full space-y-4 pb-12">
 
             {/* Título */}
             <div>
@@ -96,13 +96,27 @@ export default function AgendaPage() {
               </TabsList>
             </Tabs>
 
-            <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-              <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-              <div>
-                <p className="text-sm font-semibold text-foreground">Herramienta operativa y de gestión - Agenda</p>
-                <p className="text-sm text-muted mt-1">Organización personal del tiempo y eventos del docente.</p>
-              </div>
-            </div>
+                          {(() => {
+                const infoMap: Record<string, {title: string, desc: string}> = {
+          'actual': {
+                    'title': 'Agenda Actual',
+                    'desc': 'Vista de la agenda diaria y tareas pendientes.'
+          },
+          'resumen': {
+                    'title': 'Resumen de Agenda',
+                    'desc': 'Resumen semanal y mensual de la agenda y programación.'
+          }
+};
+                const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
+                return (
+                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
+                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
+                    <div>
+                      <p className="text-sm text-muted">{info.desc}</p>
+                    </div>
+                  </div>
+                );
+              })()}
 
             {/* Contenido Pestaña Actual */}
             {activeTab === "actual" && (
@@ -122,9 +136,9 @@ export default function AgendaPage() {
 
             {/* Contenido Pestaña Resumen */}
             {activeTab === "resumen" && (
-              <div className="space-y-6 animate-in fade-in duration-500">
+              <div className="space-y-3 animate-in fade-in duration-500">
                 {moduleData || cursoData ? (
-                  <MotionWrapper className="space-y-6">
+                  <MotionWrapper className="space-y-3">
 
                     <DashboardKPIs cursoData={cursoData} moduleData={moduleData} />
                     <DashboardCharts cursoData={cursoData} />

@@ -60,7 +60,7 @@ export default function InicioPage() {
             <div className="space-y-12">
               {navGroups.map((group, groupIdx) => (
                 <MotionWrapper key={group.title} delay={groupIdx * 0.1}>
-                  <div className="space-y-6">
+                  <div className="space-y-3">
                     <h2 className="text-xl font-bold text-foreground flex items-center gap-3">
                       {group.title}
                     </h2>

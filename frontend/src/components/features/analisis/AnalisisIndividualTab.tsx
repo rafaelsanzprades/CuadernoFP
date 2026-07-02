@@ -96,21 +96,6 @@ export const AnalisisIndividualTab = () => {
         }
       }
     });
-
-    df_ra.forEach((ra: any) => {
-      if (ra.is_dual && df_feoe.length > 0 && selectedAlId) {
-        const fe_row = df_feoe.find((fe: any) => fe.ID === selectedAlId);
-        if (fe_row && Number(fe_row[ra.id_ra]) >= 1) {
-          const val_feoe = Number(fe_row[ra.id_ra]);
-          const conv: any = { 1: 3.0, 2: 5.0, 3: 7.5, 4: 10.0 };
-          const nota_emp = conv[val_feoe] || 0;
-          if (notas_ra[ra.id_ra] !== undefined) {
-            notas_ra[ra.id_ra] = (notas_ra[ra.id_ra] + nota_emp) / 2.0;
-          }
-        }
-      }
-    });
-
     Object.keys(notas_ra).forEach(r_id => {
       let n_ra = notas_ra[r_id];
       if (n_ra >= config.umbral_redondeo && n_ra < config.nota_aprobado) {

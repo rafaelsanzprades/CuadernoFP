@@ -607,7 +607,7 @@ export default function CalendarioPage() {
         <Header breadcrumbSuffix={activeTabCleanLabel} />
 
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-8 pb-12">
+          <MotionWrapper className="space-y-4 pb-12">
             {/* Page heading */}
             <div>
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
@@ -633,16 +633,34 @@ export default function CalendarioPage() {
             </TabsList>
           </Tabs>
 
-          <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-            <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-            <div>
-              <p className="text-sm font-semibold text-foreground">Calendario Escolar - Resolución Anual Autonómica</p>
-              <p className="text-sm text-muted mt-1">Adaptación de la programación a los días lectivos y festivos oficiales.</p>
-            </div>
-          </div>
+                        {(() => {
+                const infoMap: Record<string, {title: string, desc: string}> = {
+          'fechas': {
+                    'title': 'Configuración de Fechas',
+                    'desc': 'Configuración de fechas de inicio, fin y trimestres.'
+          },
+          'eventos': {
+                    'title': 'Eventos y Festivos',
+                    'desc': 'Gestión de festivos locales, provinciales y eventos de centro.'
+          },
+          'visual': {
+                    'title': 'Calendario Visual',
+                    'desc': 'Calendario visual con el horario semanal y eventos asignados.'
+          }
+};
+                const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
+                return (
+                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
+                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
+                    <div>
+                      <p className="text-sm text-muted">{info.desc}</p>
+                    </div>
+                  </div>
+                );
+              })()}
 
           {activeTab === "fechas" && (
-            <div className="space-y-8">
+            <div className="space-y-4">
               {/* Fechas generales */}
               <Card className="p-6 border-t-4 border-t-blue-500 overflow-visible z-30">
                 <div className="flex items-center justify-between mb-4">

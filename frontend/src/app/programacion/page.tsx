@@ -85,7 +85,7 @@ export default function ProgramacionPage() {
           <main className="flex-1 p-8 content-area">
             <MotionWrapper>
               <Card className="p-12">
-                <div className="space-y-6">
+                <div className="space-y-3">
                   <Skeleton className="h-10 w-1/3 mx-auto" />
                   <Skeleton className="h-4 w-1/2 mx-auto" />
                   <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -170,7 +170,7 @@ export default function ProgramacionPage() {
         <Header />
         
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-8 pb-12">
+          <MotionWrapper className="space-y-4 pb-12">
             <div>
             <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
               <span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación de aula
@@ -190,13 +190,27 @@ export default function ProgramacionPage() {
 
           {activeTab === "secuenciacion" && (
             <>
-                <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-                  <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">Secuenciación - RD 659/2023</p>
-                    <p className="text-sm text-muted mt-1">Distribución temporal de las unidades didácticas.</p>
+                              {(() => {
+                const infoMap: Record<string, {title: string, desc: string}> = {
+          'secuenciacion': {
+                    'title': 'Secuenciación',
+                    'desc': 'Secuenciación temporal de las unidades y bloques de contenido.'
+          },
+          'tareas': {
+                    'title': 'Tareas Competenciales',
+                    'desc': 'Diseño y planificación de tareas y actividades competenciales.'
+          }
+};
+                const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
+                return (
+                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
+                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
+                    <div>
+                      <p className="text-sm text-muted">{info.desc}</p>
+                    </div>
                   </div>
-                </div>
+                );
+              })()}
             <Card className="p-6 border-t-4 border-t-accent">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground">
