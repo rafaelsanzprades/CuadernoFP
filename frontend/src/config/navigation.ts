@@ -28,8 +28,7 @@ export const navGroups = [
       { href: "/calendario", label: "Calendario académico", icon: Calendar, description: "Fechas generales, trimestres, horario semanal, festivos y eventos relevantes del curso." },
       { href: "/alumnado", label: "Alumnado y tutoría", icon: Users, description: "Gestión oficial del alumnado, ficha individual de orientación, asignación FEOE y matriz de tutoría." },
       { href: "/seguimiento", label: "Seguimiento diario", icon: MapPin, description: "Registro detallado del desarrollo diario de las clases y contingencias." },
-      { href: "/progreso", label: "Progreso académico", icon: TrendingUp, description: "Panel integrado de calificaciones numéricas, evaluación por resultados de aprendizaje (RA) y analíticas." },
-      { href: "/mejora", label: "Mejora Docente", icon: TrendingUp, description: "Panel de autoevaluación y rúbricas de mejora del desempeño docente." }
+      { href: "/progreso", label: "Progreso académico", icon: TrendingUp, description: "Panel integrado de calificaciones numéricas, evaluación por resultados de aprendizaje (RA) y analíticas." }
     ]
   }
 ];
