@@ -273,19 +273,18 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
   return (
     <div className="w-full flex flex-col z-40 sticky top-0 bg-background/95 backdrop-blur-xl border-b border-[var(--glass-border)] pb-2 shadow-md">
       {/* Fila 2: Buscar y Acciones */}
-      {currentItem && (
-        <div className="w-full px-4 md:px-6 py-1.5 bg-white/[0.02] border-t border-[var(--glass-border)] flex items-center justify-between gap-1.5 text-sm text-muted tracking-wide">
-          {/* Búsqueda a la izquierda y menú móvil */}
-          <div className="flex items-center gap-1.5 lg:gap-0">
-            <button
-              onClick={toggleSidebar}
-              className="lg:hidden p-1.5 -ml-1.5 rounded-md text-muted hover:text-foreground hover:bg-foreground/10 transition-colors"
-              aria-label="Menú principal"
-            >
-              <Menu className="w-5 h-5" />
-            </button>
-            <div className="relative w-36 sm:w-48 md:w-64 shrink-0">
-              <input
+      <div className="w-full px-4 md:px-6 py-2 bg-white/[0.02] border-t border-[var(--glass-border)] flex items-center justify-between gap-2 text-sm text-muted tracking-wide">
+        {/* Búsqueda a la izquierda y menú móvil */}
+        <div className="flex items-center gap-2 lg:gap-0">
+          <button
+            onClick={toggleSidebar}
+            className="block lg:hidden p-2 rounded-md text-foreground hover:bg-foreground/10 transition-colors"
+            aria-label="Menú principal"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+          <div className="relative w-36 sm:w-48 md:w-64 shrink-0">
+            <input
               type="text"
               placeholder="Buscar..."
               aria-label="Buscar en la aplicación"
@@ -300,7 +299,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
               }}
               onFocus={() => setShowResults(searchResults.length > 0)}
               onBlur={() => setTimeout(() => setShowResults(false), 200)}
-              className="bg-foreground/5 border border-[var(--glass-border)] rounded-lg px-3 py-1 text-xs text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-accent/50 w-full"
+              className="bg-foreground/5 border border-[var(--glass-border)] rounded-lg px-3 py-1.5 text-xs text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-accent/50 w-full"
             />
             {showResults && searchResults.length > 0 && (
               <div className="absolute top-full left-0 mt-1 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto w-64">
@@ -325,36 +324,36 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
               </div>
             )}
           </div>
-          
-          {/* Acciones a la derecha */}
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-0.5 bg-foreground/5 p-1 rounded-lg">
-              <button
-                onClick={() => undo()}
-                disabled={pastStatesLength === 0}
-                className="p-1.5 rounded text-muted hover:text-foreground hover:bg-foreground/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-                title="Deshacer (Ctrl+Z)"
-              >
-                <Undo2 className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => redo()}
-                disabled={futureStatesLength === 0}
-                className="p-1.5 rounded text-muted hover:text-foreground hover:bg-foreground/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-                title="Rehacer (Ctrl+Y)"
-              >
-                <Redo2 className="w-4 h-4" />
-              </button>
-            </div>
-
-            {mounted && (
-              <div className="flex items-center bg-foreground/5 rounded-lg p-0.5">
-                <ThemeSelector />
-              </div>
-            )}
-          </div>
         </div>
-      )}
+        
+        {/* Acciones a la derecha */}
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-0.5 bg-foreground/5 p-1 rounded-lg">
+            <button
+              onClick={() => undo()}
+              disabled={pastStatesLength === 0}
+              className="p-1.5 rounded text-muted hover:text-foreground hover:bg-foreground/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              title="Deshacer (Ctrl+Z)"
+            >
+              <Undo2 className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => redo()}
+              disabled={futureStatesLength === 0}
+              className="p-1.5 rounded text-muted hover:text-foreground hover:bg-foreground/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              title="Rehacer (Ctrl+Y)"
+            >
+              <Redo2 className="w-4 h-4" />
+            </button>
+          </div>
+
+          {mounted && (
+            <div className="flex items-center bg-foreground/5 rounded-lg p-0.5">
+              <ThemeSelector />
+            </div>
+          )}
+        </div>
+      </div>
 
       {title && (
         <header className="w-full flex items-center justify-center px-8 pt-4 pb-2">
