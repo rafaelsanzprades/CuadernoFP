@@ -1,5 +1,5 @@
 "use client";
-import { AlertTriangle, ChevronRight, ChevronDown, Cloud, Hourglass, Moon, Redo2, Save, Shield, Sun, Undo2, XCircle, CalendarDays, FolderOpen } from "lucide-react";
+import { AlertTriangle, ChevronRight, ChevronDown, Cloud, Hourglass, Moon, Redo2, Save, Shield, Sun, Undo2, XCircle, CalendarDays, FolderOpen, Menu } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useAppStore, useTemporalStore } from "@/store/useAppStore";
 import Link from "next/link";
@@ -274,10 +274,18 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
     <div className="w-full flex flex-col z-40 sticky top-0 bg-background/95 backdrop-blur-xl border-b border-[var(--glass-border)] pb-2 shadow-md">
       {/* Fila 2: Buscar y Acciones */}
       {currentItem && (
-        <div className="w-full px-6 py-1.5 bg-white/[0.02] border-t border-[var(--glass-border)] flex items-center justify-between gap-1.5 text-sm text-muted tracking-wide">
-          {/* Búsqueda a la izquierda */}
-          <div className="relative w-48 md:w-64 shrink-0">
-            <input
+        <div className="w-full px-4 md:px-6 py-1.5 bg-white/[0.02] border-t border-[var(--glass-border)] flex items-center justify-between gap-1.5 text-sm text-muted tracking-wide">
+          {/* Búsqueda a la izquierda y menú móvil */}
+          <div className="flex items-center gap-1.5 lg:gap-0">
+            <button
+              onClick={toggleSidebar}
+              className="lg:hidden p-1.5 -ml-1.5 rounded-md text-muted hover:text-foreground hover:bg-foreground/10 transition-colors"
+              aria-label="Menú principal"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+            <div className="relative w-36 sm:w-48 md:w-64 shrink-0">
+              <input
               type="text"
               placeholder="Buscar..."
               aria-label="Buscar en la aplicación"
