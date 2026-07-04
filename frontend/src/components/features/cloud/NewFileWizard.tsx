@@ -92,6 +92,13 @@ const ALL_MODULES: ModuleOption[] = [
   { code: "1718", name: "Itinerario personal para la empleabilidad VIII", groupName: "2º Desarrollo de Aplicaciones Web" },
 ];
 
+const getCurrentAcademicYear = () => {
+  const today = new Date();
+  const currentY = today.getMonth() < 6 ? today.getFullYear() - 1 : today.getFullYear();
+  const nextYStr = String(currentY + 1).slice(-2);
+  return `${currentY}-${nextYStr}`;
+};
+
 interface NewFileWizardProps {
   isOpen: boolean;
   onClose: () => void;
@@ -131,7 +138,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
           toast.error("Error al crear la programación.");
         }
       } else {
-        const ok = await fileManager.createNewCurso(selectedModule.groupName, "2025-26");
+        const ok = await fileManager.createNewCurso(selectedModule.groupName, getCurrentAcademicYear());
         if (ok) {
           toast.success(`Curso ${selectedModule.groupName} creado correctamente.`);
           onClose();
@@ -144,7 +151,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
     }
   };
 
-  const [cursoYear, setCursoYear] = useState("2025-26");
+  const [cursoYear, setCursoYear] = useState(getCurrentAcademicYear());
   const [cursoName, setCursoName] = useState("1A-GM");
 
   const handleCreateCurso = async () => {
@@ -172,7 +179,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
   const handleCreateCursoDemo = async () => {
     setIsCreating(true);
     try {
-      const ok = fileManager.createNewCursoFromDemo("Curso DEMO", "2025-26");
+      const ok = fileManager.createNewCursoFromDemo("Curso DEMO", getCurrentAcademicYear());
       if (ok) {
         toast.success("Curso DEMO creado correctamente.");
         onClose();

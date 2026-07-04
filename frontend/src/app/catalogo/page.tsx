@@ -46,14 +46,32 @@ function CiclosContent() {
     tabParam && ["familias", "titulo", "cursos", "modulos", "autores"].includes(tabParam) ? tabParam : "familias"
   );
 
-  const [globalSelection, setGlobalSelection] = useState({
-    familia: "Electricidad y Electrónica",
-    tituloCodigo: "ELE203",
-    moduloCodigo: "0237"
+  const [globalSelection, setGlobalSelection] = useState(() => {
+    if (typeof window !== "undefined") {
+      const saved = sessionStorage.getItem("catalogoSelection");
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch (e) {
+          console.error("Error parsing catalogoSelection", e);
+        }
+      }
+    }
+    return {
+      familia: "Electricidad y Electrónica",
+      tituloCodigo: "ELE203",
+      moduloCodigo: "0237"
+    };
   });
 
   const updateGlobalSelection = (updates: Partial<typeof globalSelection>) => {
-    setGlobalSelection((prev) => ({ ...prev, ...updates }));
+    setGlobalSelection((prev: any) => {
+      const next = { ...prev, ...updates };
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("catalogoSelection", JSON.stringify(next));
+      }
+      return next;
+    });
   };
 
   const handleTabChange = (tab: Tab) => {

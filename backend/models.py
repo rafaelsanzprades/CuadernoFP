@@ -15,6 +15,8 @@ class NivelFP(enum.Enum):
     SUPERIOR = "Grado Superior"
     ESPECIALIZACION = "Curso de Especialización"
 
+
+
 # ==========================================
 # 1. MAESTROS Y TERRITORIO
 # ==========================================

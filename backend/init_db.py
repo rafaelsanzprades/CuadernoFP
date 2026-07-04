@@ -1,6 +1,6 @@
 import logging
 from database import SessionLocal, engine, Base
-from models import ProfessionalFamily, Degree, User, ModuleDocument
+from models import ProfessionalFamily, Degree, ModuleDocument
 
 logger = logging.getLogger("cdd-pro.init")
 
@@ -13,8 +13,6 @@ def check_and_seed_db():
         degree_count = db.query(Degree).count()
 
         if family_count > 0 and degree_count > 5:
-            # BD ya poblada (incluida en la imagen Docker o seedeada previamente).
-            # Saltamos los seeds lentos para no bloquear el arranque.
             logger.info(
                 f"BD ya poblada ({family_count} familias, {degree_count} títulos). "
                 "Saltando seeds de datos base."
@@ -34,7 +32,6 @@ def check_and_seed_db():
                 ("seed_adg_ra", "seed"),
                 ("seed_ele203_ra", "seed"),
                 ("seed_ele304_ra", "seed"),
-                ("seed_users", None),
                 ("seed_tutoria", "seed"),
             ]
 
@@ -49,26 +46,8 @@ def check_and_seed_db():
                 except Exception as e:
                     logger.error(f"Error en {mod_name}: {e}")
 
-            # Seeds rápidos de profesores ficticios
-            try:
-                from seed_fictitious import seed_fake_teachers
-                seed_fake_teachers()
-                logger.info("seed_fictitious completado")
-            except Exception as e:
-                logger.error(f"Error en seed_fictitious: {e}")
-
     finally:
-        pass
-
-    # Módulo Demo SIEMPRE: tiene su propia validación interna de duplicados.
-    try:
-        from seed_fictitious_full import generate_demo_module
-        generate_demo_module(db)
-        logger.info("seed_fictitious_full completado. Módulo Demo creado con éxito.")
-    except Exception as e:
-        logger.error(f"Error en seed_fictitious_full: {e}")
-
-    db.close()
+        db.close()
 
 if __name__ == "__main__":
     check_and_seed_db()

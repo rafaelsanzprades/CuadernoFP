@@ -70,7 +70,7 @@
 ## Arquitectura Local-First
 
 **Importante**: La base de datos del servidor es de solo lectura. Los datos del usuario deben guardarse:
-1. Localmente en archivos `.cddp` / `.cddc`
+1. Localmente en archivos `.fpp` / `.fpc`
 2. En Google Drive (sincronización)
 3. En OneDrive (sincronización)
 

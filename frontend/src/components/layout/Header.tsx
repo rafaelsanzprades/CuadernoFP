@@ -242,18 +242,32 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
     const code = parts[0];
     const rawYear = parts[parts.length - 1];
     
-    // Normalize year
+    // Normalize year dynamically (e.g. 26 -> 2025-26, 27 -> 2026-27, 202526 -> 2025-26)
     let year = rawYear;
-    if (year === '26' || year === '202526') year = '2025-26';
+    if (year && year.length === 2) {
+      year = `20${parseInt(year) - 1}-${year}`;
+    } else if (year && year.length === 6 && !year.includes('-')) {
+      year = `${year.slice(0, 4)}-${year.slice(4)}`;
+    } else if (!year || !year.includes('-')) {
+      const today = new Date();
+      const currentY = today.getMonth() < 6 ? today.getFullYear() - 1 : today.getFullYear();
+      year = `${currentY}-${String(currentY + 1).slice(-2)}`;
+    }
 
     let foundGroup: any = null;
     for (const g of initialGroups) {
       if (g.modules.some(m => m.code === code)) { foundGroup = g; break; }
     }
 
-    if (activeCursoId.includes('-1A') || activeCursoId.includes('-1B') || activeCursoId.includes('-1C')) {
-      const groupSuffix = activeCursoId.split('-').pop(); // 1A, 1B, 1C
-      friendlyCursoName = `C - 2025-26 - ${groupSuffix}-GM - ELE-203`;
+    // Identify group suffix dynamically instead of hardcoding 1A/1B/1C
+    const matchGroup = activeCursoId.match(/-([1-9][A-Z])$/i);
+    const groupSuffix = matchGroup ? matchGroup[1].toUpperCase() : '';
+
+    if (groupSuffix) {
+      // It's a derived group from a module
+      const levelAbr = foundGroup ? (foundGroup.level === 'Grado Medio' ? 'GM' : foundGroup.level === 'Grado Superior' ? 'GS' : 'GB') : 'GM';
+      const family = foundGroup ? foundGroup.degreeName.split(' ')[0] : 'FP';
+      friendlyCursoName = `C - ${year} - ${groupSuffix}-${levelAbr} - ${family}`;
     } else if (foundGroup) {
       const yearPrefix = foundGroup.name.charAt(0);
       const levelAbr = foundGroup.level === 'Grado Medio' ? 'GM' : foundGroup.level === 'Grado Superior' ? 'GS' : 'GB';
@@ -261,8 +275,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
       friendlyCursoName = `C - ${year} - ${yearPrefix}-${levelAbr} - ${degreeCode}`;
     } else {
       let nameParts = parts.slice(0, -1);
-      // If the second to last part is '2025' or '2026', remove it from name
-      if (nameParts.length > 0 && (nameParts[nameParts.length - 1] === '2025' || nameParts[nameParts.length - 1] === '2026')) {
+      if (nameParts.length > 0 && nameParts[nameParts.length - 1].startsWith('202')) {
         nameParts = nameParts.slice(0, -1);
       }
       const namePart = nameParts.join(' ').toUpperCase();

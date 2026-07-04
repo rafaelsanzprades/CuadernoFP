@@ -666,7 +666,7 @@ export const fileManager = {
       const parsed = JSON.parse(jsonStr);
       if (!parsed.df_ud) return false;
 
-      const id = filename.replace('.fpp', '').replace('.cddp', '').replace('.json', '') || "imported-pd";
+      const id = filename.replace('.fpp', '').replace('.json', '') || "imported-pd";
 
       // Fetch curriculum to reconstruct descriptions
       const moduleCode = parsed.info_modulo?.codigo || id.split('-')[0];
@@ -750,7 +750,7 @@ export const fileManager = {
     try {
       const parsed = JSON.parse(jsonStr);
       if (!parsed.df_al) return false;
-      const id = filename.replace('.fpc', '').replace('.cddc', '').replace('.json', '') || "imported-curso";
+      const id = filename.replace('.fpc', '').replace('.json', '') || "imported-curso";
       useAppStore.getState().setActiveCursoId(id);
       useAppStore.getState().setCursoData(parsed);
       return true;
@@ -759,13 +759,6 @@ export const fileManager = {
     }
   },
 
-  // ── Legacy shims ────────────────────────────────────────
-
-  /** @deprecated Use downloadProgramacion() */
-  exportProgramacion() { this.downloadProgramacion(); },
-
-  /** @deprecated Use downloadCurso() */
-  exportCurso() { this.downloadCurso(); },
 
   getDb(): Record<string, any> {
     const state = useAppStore.getState();

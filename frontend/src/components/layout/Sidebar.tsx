@@ -77,10 +77,19 @@ export default function Sidebar() {
 
       let groupStr = "";
       if (state.activeCursoId) {
-        if (state.activeCursoId.includes('-1A') || state.activeCursoId.endsWith('1a')) groupStr = "Curso 2025-26 - 1A-GM";
-        else if (state.activeCursoId.includes('-1B') || state.activeCursoId.endsWith('1b')) groupStr = "Curso 2025-26 - 1B-GM";
-        else if (state.activeCursoId.includes('-1C') || state.activeCursoId.endsWith('1c')) groupStr = "Curso 2025-26 - 1C-GM";
-        else groupStr = "Curso 2025-26";
+        const idUpper = state.activeCursoId.toUpperCase();
+        const parts = state.activeCursoId.split('-');
+        let extractedYear = parts[parts.length - 1];
+        if (extractedYear && extractedYear.length === 2) {
+          extractedYear = `20${parseInt(extractedYear) - 1}-${extractedYear}`;
+        } else if (extractedYear && extractedYear.length === 6 && !extractedYear.includes('-')) {
+          extractedYear = `${extractedYear.slice(0, 4)}-${extractedYear.slice(4)}`;
+        } else if (!extractedYear || !extractedYear.includes('-')) {
+          extractedYear = `${currentYear}-${String(currentYear + 1).slice(-2)}`;
+        }
+        const matchGroup = idUpper.match(/-([1-9][A-Z])/i);
+        const suffix = matchGroup ? matchGroup[1].toUpperCase() : '';
+        groupStr = `Curso ${extractedYear}${suffix ? ` - ${suffix}-GM` : ''}`;
       }
       setDisplayGroup(groupStr);
     };
@@ -116,13 +125,20 @@ export default function Sidebar() {
   const cursoTitleSuffix = (() => {
     if (!activeCursoId) return 'AÑO';
     const idUpper = activeCursoId.toUpperCase();
-    let group = '';
-    if (idUpper.includes('-1A') || idUpper.endsWith('1A')) group = ' 1A-GM';
-    else if (idUpper.includes('-1B') || idUpper.endsWith('1B')) group = ' 1B-GM';
-    else if (idUpper.includes('-1C') || idUpper.endsWith('1C')) group = ' 1C-GM';
-    else if (idUpper.includes('-2A') || idUpper.endsWith('2A')) group = ' 2A-GM';
-    else if (idUpper.includes('-2B') || idUpper.endsWith('2B')) group = ' 2B-GM';
-    return '2025-26' + group;
+    const parts = activeCursoId.split('-');
+    let extractedYear = parts[parts.length - 1];
+    if (extractedYear && extractedYear.length === 2) {
+      extractedYear = `20${parseInt(extractedYear) - 1}-${extractedYear}`;
+    } else if (extractedYear && extractedYear.length === 6 && !extractedYear.includes('-')) {
+      extractedYear = `${extractedYear.slice(0, 4)}-${extractedYear.slice(4)}`;
+    } else if (!extractedYear || !extractedYear.includes('-')) {
+      const today = new Date();
+      const currentY = today.getMonth() < 6 ? today.getFullYear() - 1 : today.getFullYear();
+      extractedYear = `${currentY}-${String(currentY + 1).slice(-2)}`;
+    }
+    const matchGroup = idUpper.match(/-([1-9][A-Z])/i);
+    const suffix = matchGroup ? matchGroup[1].toUpperCase() : '';
+    return `${extractedYear}${suffix ? ` ${suffix}-GM` : ''}`;
   })();
 
   const sidebarContent = (
@@ -287,9 +303,9 @@ export default function Sidebar() {
                   value={demoGroupValue}
                   onChange={(e) => { fileManager.loadDemoData(e.target.value); toast.success(`Grupo ${e.target.value.toUpperCase()}`); }}
                 >
-                  <option value="1a">2025-26 1A-GM {moduleTitleSuffix !== 'CÓDIGO' ? moduleTitleSuffix : ''}</option>
-                  <option value="1b">2025-26 1B-GM {moduleTitleSuffix !== 'CÓDIGO' ? moduleTitleSuffix : ''}</option>
-                  <option value="1c">2025-26 1C-GM {moduleTitleSuffix !== 'CÓDIGO' ? moduleTitleSuffix : ''}</option>
+                  <option value="1a">DEMO 1A-GM {moduleTitleSuffix !== 'CÓDIGO' ? moduleTitleSuffix : ''}</option>
+                  <option value="1b">DEMO 1B-GM {moduleTitleSuffix !== 'CÓDIGO' ? moduleTitleSuffix : ''}</option>
+                  <option value="1c">DEMO 1C-GM {moduleTitleSuffix !== 'CÓDIGO' ? moduleTitleSuffix : ''}</option>
                 </select>
                 <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none" style={{ color: 'var(--warning)' }} />
               </div>
@@ -431,8 +447,8 @@ export default function Sidebar() {
       {/* Mobile overlay backdrop */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/60 z-40 lg:hidden"
-          onClick={toggleSidebar}
+          className="fixed inset-0 bg-black/60 z-[90] lg:hidden"
+          onClick={() => toggleSidebar()}
         />
       )}
 
@@ -442,7 +458,7 @@ export default function Sidebar() {
       </aside>
 
       {/* Mobile sidebar (overlay) */}
-      <aside className={`lg:hidden fixed inset-y-0 left-0 z-50 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} w-64 border-r border-[var(--glass-border)] bg-background flex flex-col transition-transform duration-300`}>
+      <aside className={`lg:hidden fixed inset-y-0 left-0 z-[100] ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} w-64 border-r border-[var(--glass-border)] bg-background flex flex-col transition-transform duration-300`}>
         {sidebarContent}
       </aside>
     </>

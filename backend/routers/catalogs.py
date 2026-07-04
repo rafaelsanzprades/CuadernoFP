@@ -5,9 +5,8 @@ from pydantic import BaseModel
 from database import get_db
 from models import (
     Module, ProfessionalFamily, Degree, Center, LearningOutcome,
-    User, TeachingAssignment, ModuleDocument
+    ModuleDocument
 )
-from auth.dependencies import get_optional_user
 
 router = APIRouter(prefix="/api", tags=["Catalogs"])
 
@@ -79,22 +78,10 @@ def list_families(db: Session = Depends(get_db)):
 
 
 @router.get("/modules")
-def list_modules(user_id: int = Query(None), current_user: User | None = Depends(get_optional_user), db: Session = Depends(get_db)):
+def list_modules(db: Session = Depends(get_db)):
     try:
-        allowed_codes = None
-        if user_id:
-            user = db.query(User).filter(User.id == user_id).first()
-            if user and not getattr(user, 'is_superadmin', False):
-                assignments = db.query(TeachingAssignment).filter(TeachingAssignment.user_id == user_id).all()
-                allowed_module_ids = [a.module_id for a in assignments]
-                modules = db.query(Module).filter(Module.id.in_(allowed_module_ids)).all()
-                allowed_codes = [m.code for m in modules if m.code]
-
         docs = db.query(ModuleDocument.id).all()
         ids = [doc.id for doc in docs]
-
-        if allowed_codes is not None:
-            ids = [i for i in ids if any(i.startswith(code) for code in allowed_codes) or i == "ciclos-fp" or i.endswith("-centro")]
 
         pd_modules = [i for i in ids if i.endswith("-pd") or ("curso" not in i and i != "ciclos-fp")]
         curso_modules = [i for i in ids if "curso" in i]
