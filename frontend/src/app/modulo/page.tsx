@@ -11,7 +11,6 @@ import { ContextoFEOETab } from "@/components/features/modulo/ContextoFEOETab";
 import { MetodologiaTab } from "@/components/features/modulo/MetodologiaTab";
 import { EvaluacionRecursosTab } from "@/components/features/modulo/EvaluacionRecursosTab";
 import { OtrosElementosTab } from "@/components/features/modulo/OtrosElementosTab";
-import { GradosTab } from "@/components/features/modulo/GradosTab";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import Link from "next/link";
@@ -53,8 +52,7 @@ export default function ModuloConfigPage() {
     { id: "contexto_feoe", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> Contexto y FEOE</>, cleanLabel: "Contexto y FEOE" },
     { id: "metodologia", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Metodología</>, cleanLabel: "Metodología" },
     { id: "evaluacion", label: <><span className="inline-flex"><CheckCircle2 className="w-[1.2em] h-[1.2em] mr-1" /></span> Eval. y Recursos</>, cleanLabel: "Eval. y Recursos" },
-    { id: "otros", label: <><span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1" /></span> Otros Elementos</>, cleanLabel: "Otros Elementos" },
-    { id: "grados", label: <><span className="inline-flex"><Award className="w-[1.2em] h-[1.2em] mr-1" /></span> Grados formativos</>, cleanLabel: "Grados formativos" }
+    { id: "otros", label: <><span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1" /></span> Otros Elementos</>, cleanLabel: "Otros Elementos" }
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -135,7 +133,6 @@ export default function ModuloConfigPage() {
             {activeTab === "metodologia" && <MetodologiaTab />}
             {activeTab === "evaluacion" && <EvaluacionRecursosTab />}
             {activeTab === "otros" && <OtrosElementosTab />}
-            {activeTab === "grados" && <GradosTab />}
 
           </MotionWrapper>
         </div>

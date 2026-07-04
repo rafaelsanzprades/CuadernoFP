@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { AlertTriangle, BookOpen, CheckCircle, Cloud, Database, Download, FileJson, FolderOpen, Save, Shield, ShieldAlert, Sparkles, Upload, Users, Zap, Plus, Copy, HardDrive, Info } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -411,7 +411,7 @@ export default function ArchivosTrabajoPage() {
                     <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
                       <FolderOpen className={`w-24 h-24 ${isDemoLoaded ? 'text-warning' : 'text-accent'}`} />
                     </div>
-                    <div className="relative z-10 flex flex-col h-full">
+                    <div className="relative z-10 flex flex-col h-full flex-1">
                       <div className="mb-4">
                         <h3 className="text-xl font-bold text-foreground flex items-center gap-2">
                           <FolderOpen className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : 'text-accent'}`} /> Grupos
@@ -421,17 +421,11 @@ export default function ArchivosTrabajoPage() {
                         </p>
                       </div>
 
-                      <div className="flex-1 flex flex-col gap-2 min-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+                      <div className="flex-1 flex flex-col gap-2 min-h-[250px] overflow-y-auto pr-2 custom-scrollbar">
                         {!workspaceHandle ? (
                           <div className="h-full flex flex-col items-center justify-center text-center p-4">
                             <Database className="w-8 h-8 text-muted/50 mb-2" />
-                            <p className="text-sm text-muted font-medium mb-4">Conecta una carpeta local para ver tus archivos.</p>
-                            <Button onClick={async () => {
-                              const handle = await fileManager.openWorkspaceDirectory();
-                              if (handle) toast.success("Carpeta local conectada.");
-                            }} className="bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 transition-all">
-                              <FolderOpen className="w-4 h-4 mr-2" /> Conectar Carpeta Local
-                            </Button>
+                            <p className="text-sm text-muted font-medium">Usa el botón inferior para enlazar tu carpeta de trabajo.</p>
                           </div>
                         ) : workspaceFiles.grupos.length === 0 ? (
                           <div className="h-full flex items-center justify-center text-center p-4">
@@ -456,6 +450,29 @@ export default function ArchivosTrabajoPage() {
                           ))
                         )}
                       </div>
+
+                      {/* Botonera Grupos */}
+                      <div className="flex flex-col gap-2 pt-4 mt-auto border-t border-[var(--glass-border)]">
+                        {isDemoLoaded ? (
+                          <Button onClick={() => { setDataSource('local'); toast.success("Modo REALES activado."); }} className="w-full bg-accent/20 hover:bg-accent/30 text-accent border border-accent/30 text-xs h-9">
+                            <HardDrive className="w-3 h-3 mr-1" /> Salir de DEMO
+                          </Button>
+                        ) : !workspaceHandle ? (
+                          <Button onClick={async () => {
+                            const handle = await fileManager.openWorkspaceDirectory();
+                            if (handle) toast.success("Carpeta local conectada.");
+                          }} className="w-full bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 transition-all text-xs h-9">
+                            <FolderOpen className="w-3 h-3 mr-1" /> Conectar Carpeta Local
+                          </Button>
+                        ) : (
+                          <Button onClick={async () => {
+                            const handle = await fileManager.openWorkspaceDirectory();
+                            if (handle) toast.success("Carpeta local cambiada.");
+                          }} className="w-full bg-foreground/5 hover:bg-foreground/10 text-foreground border border-[var(--glass-border)] transition-all text-xs h-9">
+                            <FolderOpen className="w-3 h-3 mr-1" /> Cambiar Carpeta Local
+                          </Button>
+                        )}
+                      </div>
                     </div>
                   </Card>
 
@@ -464,7 +481,7 @@ export default function ArchivosTrabajoPage() {
                     <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
                       <BookOpen className={`w-24 h-24 ${isDemoLoaded ? 'text-warning' : 'text-info'}`} />
                     </div>
-                    <div className="relative z-10 flex flex-col h-full">
+                    <div className="relative z-10 flex flex-col h-full flex-1">
                       <div className="mb-4">
                         <div className="flex justify-between items-center mb-1">
                           <h3 className="text-xl font-bold text-foreground flex items-center gap-2">
@@ -542,7 +559,7 @@ export default function ArchivosTrabajoPage() {
                     <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
                       <Users className={`w-24 h-24 ${isDemoLoaded ? 'text-warning' : 'text-success'}`} />
                     </div>
-                    <div className="relative z-10 flex flex-col h-full">
+                    <div className="relative z-10 flex flex-col h-full flex-1">
                       <div className="mb-4">
                         <div className="flex justify-between items-center mb-1">
                           <h3 className={`text-xl font-bold flex items-center gap-2 ${(!isDemoLoaded && !hasPdFile) ? 'text-muted' : 'text-foreground'}`}>

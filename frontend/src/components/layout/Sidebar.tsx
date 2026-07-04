@@ -209,9 +209,16 @@ export default function Sidebar() {
         onScroll={handleScroll}
         className={`sidebar-scroll-container flex-1 ${isSidebarOpen ? 'px-3' : 'px-2'} py-2 space-y-3 overflow-x-hidden overflow-y-auto scrollbar-hide`}
       >
-        {/* ① General: items del grupo sin título (Archivos, Catálogo, Docs, Descargas, Ayuda) */}
+        {/* ① General: items del primer grupo */}
         {navGroups[0] && (
           <div className="flex flex-col gap-0.5">
+            {isSidebarOpen && navGroups[0].title && (
+              <div className="flex flex-col mb-1.5 mt-1 gap-1.5">
+                <div className="text-[0.95rem] font-bold text-foreground/90 tracking-wide px-1">
+                  {navGroups[0].title}
+                </div>
+              </div>
+            )}
             {navGroups[0].items.map((item) => {
               const linkContent = (
                 <Link
@@ -260,7 +267,7 @@ export default function Sidebar() {
           <div className="flex flex-col gap-2 pt-1">
             <div className="flex flex-col">
               <div className="flex items-center justify-between px-1 mb-1.5">
-                <div className="text-[0.95rem] font-bold text-foreground/90 tracking-wide">Datos</div>
+                <div className="text-[0.95rem] font-bold text-foreground/90 tracking-wide">Grupo</div>
                 {/* Sync Status Indicator */}
                 {dataSource === 'local' && (
                   <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-foreground/5 text-xs font-medium">
@@ -273,6 +280,22 @@ export default function Sidebar() {
               </div>
               <div className="h-px bg-[var(--glass-border)]" />
             </div>
+            <Link
+              href="/archivos"
+              onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
+              className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all duration-150 group
+                ${pathname === '/archivos'
+                  ? (dataSource === 'demo' ? 'bg-warning/10 border border-warning/30 text-foreground shadow-sm shadow-warning/10' : 'bg-accent/10 border border-accent/30 text-foreground shadow-sm shadow-accent/10')
+                  : 'bg-foreground/5 hover:text-foreground hover:bg-foreground/10 border border-transparent'
+                }`}
+            >
+              <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === '/archivos' ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : 'text-muted group-hover:scale-110'}`}>
+                <FolderOpen className="w-5 h-5" strokeWidth={1.75} />
+              </span>
+              <span className={`text-sm leading-tight font-medium whitespace-nowrap ${pathname === '/archivos' ? 'text-foreground font-semibold' : 'text-foreground/80 group-hover:text-foreground'}`}>
+                Archivos
+              </span>
+            </Link>
             <div className="flex bg-foreground/5 rounded-lg p-0.5 w-full gap-0.5">
               <button
                 onClick={() => { setDataSource('demo'); fileManager.loadDemoData('1a'); toast.success('Modo DEMO'); }}
@@ -291,14 +314,10 @@ export default function Sidebar() {
                 <HardDrive className="w-3.5 h-3.5" /> REALES
               </button>
             </div>
-            <div className="flex flex-col">
-              <div className="text-[0.95rem] font-bold text-foreground/90 tracking-wide px-1 mb-1.5">Grupo</div>
-              <div className="h-px bg-[var(--glass-border)]" />
-            </div>
             {dataSource === 'demo' ? (
               <div className="relative w-full">
                 <select
-                  className="w-full bg-foreground/5 border rounded-lg pl-3 pr-7 py-2 text-sm font-semibold focus:outline-none cursor-pointer appearance-none transition-colors"
+                  className="w-full bg-foreground/5 border rounded-lg pl-3 pr-7 py-1.5 text-xs font-semibold tracking-wide focus:outline-none cursor-pointer appearance-none transition-colors"
                   style={{ color: 'var(--warning)', borderColor: 'var(--warning)' }}
                   value={demoGroupValue}
                   onChange={(e) => { fileManager.loadDemoData(e.target.value); toast.success(`Grupo ${e.target.value.toUpperCase()}`); }}
@@ -312,14 +331,14 @@ export default function Sidebar() {
             ) : !workspaceHandle ? (
               <button
                 onClick={() => router.push('/archivos')}
-                className="w-full bg-foreground/5 border border-success/30 rounded-lg py-2 text-sm font-semibold text-success hover:bg-success/10 transition-colors"
+                className="w-full bg-foreground/5 border border-success/30 rounded-lg py-1.5 text-xs font-semibold tracking-wide text-success hover:bg-success/10 transition-colors"
               >
                 No hay grupos
               </button>
             ) : (
               <div className="relative w-full">
                 <select
-                  className="w-full bg-foreground/5 border rounded-lg pl-3 pr-7 py-2 text-sm font-semibold focus:outline-none cursor-pointer appearance-none transition-colors"
+                  className="w-full bg-foreground/5 border rounded-lg pl-3 pr-7 py-1.5 text-xs font-semibold tracking-wide focus:outline-none cursor-pointer appearance-none transition-colors"
                   style={{ color: 'var(--success)', borderColor: 'var(--success)' }}
                   value={activeCursoId || ''}
                   onChange={(e) => useAppStore.getState().setActiveCursoId(e.target.value)}

@@ -2,11 +2,11 @@ import { Activity, BookOpen, Building2, Calendar, Compass, FileText, FolderOpen,
 
 export const navGroups = [
   {
-    title: "",
-    sectionDescription: "",
+    title: "General",
+    sectionDescription: "Opciones generales de la aplicación y recursos oficiales.",
     items: [
       { href: "/catalogo", label: "Catálogo", icon: GraduationCap, description: "Catálogo oficial de familias profesionales, títulos, cursos → módulos. RA → CE." },
-      { href: "/documentos", label: "Documentos", icon: FolderOpen, description: "Explorador de archivos oficiales, legislación y otros documentos." },
+      { href: "/documentos", label: "Documentos", icon: FileText, description: "Explorador de archivos oficiales, legislación y otros documentos." },
       { href: "/descargas", label: "Descargas", icon: FileText, description: "Generación de reportes y boletines en PDF." },
       { href: "/ayuda", label: "Ayuda", icon: Activity, description: "Panel de salud: verifica la coherencia y completitud de todos los datos del cuaderno." }
     ]

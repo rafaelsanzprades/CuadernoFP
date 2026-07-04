@@ -18,8 +18,9 @@ import {
 import { fileManager } from "@/services/fileManager";
 import toast from "react-hot-toast";
 import { TabAutores } from "@/components/features/catalogo/TabAutores";
+import { TabGrados } from "@/components/features/catalogo/TabGrados";
 
-type Tab = "familias" | "titulo" | "cursos" | "modulos" | "autores";
+type Tab = "grados" | "familias" | "titulo" | "cursos" | "modulos" | "autores";
 
 
 
@@ -43,7 +44,7 @@ function CiclosContent() {
 
   const tabParam = searchParams.get("tab") as Tab | null;
   const [activeTab, setActiveTab] = useState<Tab>(
-    tabParam && ["familias", "titulo", "cursos", "modulos", "autores"].includes(tabParam) ? tabParam : "familias"
+    tabParam && ["grados", "familias", "titulo", "cursos", "modulos", "autores"].includes(tabParam) ? tabParam : "grados"
   );
 
   const [globalSelection, setGlobalSelection] = useState(() => {
@@ -98,6 +99,7 @@ function CiclosContent() {
   };
 
   const TAB_LABELS: Record<Tab, string> = {
+    grados: 'Grados formativos',
     familias: 'Familias profesionales',
     titulo: 'Título',
     cursos: 'Cursos → Módulos',
@@ -125,6 +127,7 @@ function CiclosContent() {
               <TabsList className="mb-2 max-w-full">
                 {(
                   [
+                    { id: "grados" as Tab, label: <span className="flex items-center gap-2"><Award className="w-4 h-4" /> Grados Formativos</span> },
                     { id: "familias" as Tab, label: <span className="flex items-center gap-2"><FolderTree className="w-4 h-4" /> Familias profesionales</span> },
                     { id: "titulo" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Título</span> },
                     { id: "cursos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> Cursos → Módulos</span> },
@@ -147,6 +150,7 @@ function CiclosContent() {
               </div>
             </div>
 
+            {activeTab === "grados" && <TabGrados />}
             {activeTab === "familias" && <TabFamilias onSelectTitulo={handleSelectFamiliaToTitulo} />}
             {activeTab === "titulo" && <TabTitulo onSelectTitulo={handleSelectTitulo} globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
             {activeTab === "cursos" && <TabCursos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} onSelectModulo={handleSelectModulo} />}

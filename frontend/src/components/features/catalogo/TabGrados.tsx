@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { Award, Info, Layers } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { useAppStore } from "@/store/useAppStore";
@@ -53,7 +53,7 @@ const GRADOS = [
   },
 ];
 
-export function GradosTab() {
+export function TabGrados() {
   const { moduleData, setModuleData } = useAppStore();
   const gradoActual = (moduleData as any)?.grado_formativo || "D";
 
