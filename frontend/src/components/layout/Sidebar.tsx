@@ -160,142 +160,24 @@ export default function Sidebar() {
         </button>
       </div>
 
-      {/* ── Agenda fijada (fuera del scroll) ── */}
-      {isSidebarOpen && (
-        <div className="px-3 pb-2 shrink-0">
-          {(() => {
-            const linkContent = (
-              <Link
-                href="/agenda"
-                onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
-                className={`flex items-center gap-2.5 px-3 py-3 rounded-lg transition-all duration-150 group shadow-md bg-gradient-to-r ${dataSource === 'demo' ? 'from-warning/20 to-warning/5 border border-warning/40 text-foreground hover:bg-warning/20' : 'from-accent/20 to-accent/5 border border-accent/40 text-foreground hover:bg-accent/20'}`}
-              >
-                <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === '/agenda' ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : (dataSource === 'demo' ? 'text-warning group-hover:scale-110' : 'text-accent group-hover:scale-110')}`}>
-                  <CalendarDays className="w-5 h-5" strokeWidth={2} />
-                </span>
-                <div className="flex flex-col gap-1 items-start">
-                  <span className={`text-[0.95rem] leading-tight whitespace-nowrap font-bold ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
-                    Agenda
-                  </span>
-                  <span className={`px-2 py-0.5 rounded text-xs border font-semibold tracking-wider leading-none ${dataSource === 'demo' ? 'text-warning bg-warning/10 border-warning/30' : 'text-accent bg-accent/10 border-accent/30'}`}>
-                    {dateStr}
-                  </span>
-                </div>
-              </Link>
-            );
-            return linkContent;
-          })()}
-        </div>
-      )}
-      {!isSidebarOpen && (
-        <div className="px-2 pb-2 shrink-0">
-          <Tooltip content="Agenda" position="right" delay={0.1}>
-            <Link
-              href="/agenda"
-              onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
-              className={`flex justify-center px-0 py-3 rounded-lg transition-all duration-150 group shadow-md bg-gradient-to-r ${dataSource === 'demo' ? 'from-warning/20 to-warning/5 border border-warning/40 text-foreground' : 'from-accent/20 to-accent/5 border border-accent/40 text-foreground'}`}
-            >
-              <span className={`flex items-center justify-center ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : (dataSource === 'demo' ? 'text-warning' : 'text-accent')}`}>
-                <CalendarDays className="w-5 h-5" strokeWidth={2} />
-              </span>
-            </Link>
-          </Tooltip>
-        </div>
-      )}
-
       {/* ── Navegación principal ── */}
       <nav
         aria-label="Navegación principal"
         onScroll={handleScroll}
         className={`sidebar-scroll-container flex-1 ${isSidebarOpen ? 'px-3' : 'px-2'} py-2 space-y-3 overflow-x-hidden overflow-y-auto scrollbar-hide`}
       >
-        {/* ① General: items del primer grupo */}
-        {navGroups[0] && (
-          <div className="flex flex-col gap-0.5">
-            {isSidebarOpen && navGroups[0].title && (
-              <div className="flex flex-col mb-1.5 mt-1 gap-1.5">
-                <div className="text-[0.95rem] font-bold text-foreground/90 tracking-wide px-1">
-                  {navGroups[0].title}
-                </div>
+        {/* Context Selector Block (ahora dentro del scroll) */}
+        {isSidebarOpen && (
+          <div className="flex flex-col gap-2 pb-2 relative z-20 shrink-0">
+            {/* Sync Status Indicator */}
+            {dataSource === 'local' && (
+              <div className="flex items-center justify-center gap-1.5 px-2 py-1 rounded-full bg-foreground/5 text-xs font-medium w-full mb-1">
+                {syncStatus === 'saving' && <><Hourglass className="w-3 h-3 text-warning animate-spin" /><span className="text-warning">Guardando...</span></>}
+                {syncStatus === 'saved' && <><Save className="w-3 h-3 text-success" /><span className="text-success">Guardado</span></>}
+                {syncStatus === 'error' && <><AlertTriangle className="w-3 h-3 text-danger" /><span className="text-danger">Error</span></>}
+                {syncStatus === 'idle' && <><Cloud className="w-3 h-3 text-muted/50" /><span className="text-muted/60">Sincronizado</span></>}
               </div>
             )}
-            {navGroups[0].items.map((item) => {
-              const linkContent = (
-                <Link
-                  href={item.href}
-                  onClick={(e) => {
-                    if (item.href === "#wizard") {
-                      e.preventDefault();
-                      useAppStore.getState().setWizardOpen(true);
-                    }
-                    if (window.innerWidth < 1024) toggleSidebar();
-                  }}
-                  className={`flex items-center ${isSidebarOpen ? 'gap-2.5 px-3' : 'justify-center px-0'} py-2 rounded-lg transition-all duration-150 group
-                    ${pathname === item.href
-                      ? (dataSource === 'demo' ? 'bg-warning/10 border border-warning/30 text-foreground shadow-sm shadow-warning/10' : 'bg-accent/10 border border-accent/30 text-foreground shadow-sm shadow-accent/10')
-                      : 'text-muted hover:text-foreground hover:bg-foreground/5 border border-transparent'
-                    }`}
-                >
-                  <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === item.href ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : 'group-hover:scale-110'}`}>
-                    <item.icon className="w-5 h-5" strokeWidth={1.75} />
-                  </span>
-                  {isSidebarOpen && (
-                    <>
-                      <span className={`text-sm leading-tight font-medium whitespace-nowrap ${pathname === item.href ? 'text-foreground font-semibold' : ''}`}>
-                        {item.label}
-                      </span>
-                      {pathname === item.href && (
-                        <div className={`ml-auto w-1.5 h-1.5 rounded-full flex-shrink-0 ${dataSource === 'demo' ? 'bg-warning shadow-[0_0_6px_var(--warning-color)]' : 'bg-accent shadow-[0_0_6px_var(--accent-color)]'}`} />
-                      )}
-                    </>
-                  )}
-                </Link>
-              );
-              return !isSidebarOpen ? (
-                <Tooltip key={item.href} content={item.label} position="right" delay={0.1}>
-                  {linkContent}
-                </Tooltip>
-              ) : (
-                <React.Fragment key={item.href}>{linkContent}</React.Fragment>
-              );
-            })}
-          </div>
-        )}
-
-        {/* ② Bloque GRUPO: DEMO/REALES + selector */}
-        {isSidebarOpen && (
-          <div className="flex flex-col gap-2 pt-1">
-            <div className="flex flex-col">
-              <div className="flex items-center justify-between px-1 mb-1.5">
-                <div className="text-[0.95rem] font-bold text-foreground/90 tracking-wide">Grupo</div>
-                {/* Sync Status Indicator */}
-                {dataSource === 'local' && (
-                  <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-foreground/5 text-xs font-medium">
-                    {syncStatus === 'saving' && <><Hourglass className="w-3 h-3 text-warning animate-spin" /><span className="text-warning">Guardando...</span></>}
-                    {syncStatus === 'saved' && <><Save className="w-3 h-3 text-success" /><span className="text-success">Guardado</span></>}
-                    {syncStatus === 'error' && <><AlertTriangle className="w-3 h-3 text-danger" /><span className="text-danger">Error</span></>}
-                    {syncStatus === 'idle' && <><Cloud className="w-3 h-3 text-muted/50" /><span className="text-muted/60">Sincronizado</span></>}
-                  </div>
-                )}
-              </div>
-              <div className="h-px bg-[var(--glass-border)]" />
-            </div>
-            <Link
-              href="/archivos"
-              onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
-              className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all duration-150 group
-                ${pathname === '/archivos'
-                  ? (dataSource === 'demo' ? 'bg-warning/10 border border-warning/30 text-foreground shadow-sm shadow-warning/10' : 'bg-accent/10 border border-accent/30 text-foreground shadow-sm shadow-accent/10')
-                  : 'bg-foreground/5 hover:text-foreground hover:bg-foreground/10 border border-transparent'
-                }`}
-            >
-              <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === '/archivos' ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : 'text-muted group-hover:scale-110'}`}>
-                <FolderOpen className="w-5 h-5" strokeWidth={1.75} />
-              </span>
-              <span className={`text-sm leading-tight font-medium whitespace-nowrap ${pathname === '/archivos' ? 'text-foreground font-semibold' : 'text-foreground/80 group-hover:text-foreground'}`}>
-                Archivos
-              </span>
-            </Link>
             <div className="flex bg-foreground/5 rounded-lg p-0.5 w-full gap-0.5">
               <button
                 onClick={() => { setDataSource('demo'); fileManager.loadDemoData('1a'); toast.success('Modo DEMO'); }}
@@ -351,6 +233,106 @@ export default function Sidebar() {
                 <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none" style={{ color: 'var(--success)' }} />
               </div>
             )}
+          </div>
+        )}
+
+
+
+      {/* ── Agenda (dentro del scroll) ── */}
+      {isSidebarOpen && (
+        <div className="pb-2 shrink-0">
+          {(() => {
+            const linkContent = (
+              <Link
+                href="/agenda"
+                onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
+                className={`flex items-center gap-2.5 px-3 py-3 rounded-lg transition-all duration-150 group shadow-md bg-gradient-to-r ${dataSource === 'demo' ? 'from-warning/20 to-warning/5 border border-warning/40 text-foreground hover:bg-warning/20' : 'from-accent/20 to-accent/5 border border-accent/40 text-foreground hover:bg-accent/20'}`}
+              >
+                <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === '/agenda' ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : (dataSource === 'demo' ? 'text-warning group-hover:scale-110' : 'text-accent group-hover:scale-110')}`}>
+                  <CalendarDays className="w-5 h-5" strokeWidth={2} />
+                </span>
+                <div className="flex flex-col gap-1 items-start">
+                  <span className={`text-[0.95rem] leading-tight whitespace-nowrap font-bold ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
+                    Agenda
+                  </span>
+                  <span className={`px-2 py-0.5 rounded text-xs border font-semibold tracking-wider leading-none ${dataSource === 'demo' ? 'text-warning bg-warning/10 border-warning/30' : 'text-accent bg-accent/10 border-accent/30'}`}>
+                    {dateStr}
+                  </span>
+                </div>
+              </Link>
+            );
+            return linkContent;
+          })()}
+        </div>
+      )}
+      {!isSidebarOpen && (
+        <div className="pb-2 shrink-0">
+          <Tooltip content="Agenda" position="right" delay={0.1}>
+            <Link
+              href="/agenda"
+              onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
+              className={`flex justify-center px-0 py-3 rounded-lg transition-all duration-150 group shadow-md bg-gradient-to-r ${dataSource === 'demo' ? 'from-warning/20 to-warning/5 border border-warning/40 text-foreground' : 'from-accent/20 to-accent/5 border border-accent/40 text-foreground'}`}
+            >
+              <span className={`flex items-center justify-center ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : (dataSource === 'demo' ? 'text-warning' : 'text-accent')}`}>
+                <CalendarDays className="w-5 h-5" strokeWidth={2} />
+              </span>
+            </Link>
+          </Tooltip>
+        </div>
+      )}
+
+      
+
+        {/* ① General: items del primer grupo */}
+        {navGroups[0] && (
+          <div className="flex flex-col gap-0.5">
+            {isSidebarOpen && navGroups[0].title && (
+              <div className="flex flex-col mb-1.5 mt-1 gap-1.5">
+                <div className="text-[0.95rem] font-bold text-foreground/90 tracking-wide px-1">
+                  {navGroups[0].title}
+                </div>
+              </div>
+            )}
+            {navGroups[0].items.map((item) => {
+              const linkContent = (
+                <Link
+                  href={item.href}
+                  onClick={(e) => {
+                    if (item.href === "#wizard") {
+                      e.preventDefault();
+                      useAppStore.getState().setWizardOpen(true);
+                    }
+                    if (window.innerWidth < 1024) toggleSidebar();
+                  }}
+                  className={`flex items-center ${isSidebarOpen ? 'gap-2.5 px-3' : 'justify-center px-0'} py-2 rounded-lg transition-all duration-150 group
+                    ${pathname === item.href
+                      ? (dataSource === 'demo' ? 'bg-warning/10 border border-warning/30 text-foreground shadow-sm shadow-warning/10' : 'bg-accent/10 border border-accent/30 text-foreground shadow-sm shadow-accent/10')
+                      : 'text-muted hover:text-foreground hover:bg-foreground/5 border border-transparent'
+                    }`}
+                >
+                  <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === item.href ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : 'group-hover:scale-110'}`}>
+                    <item.icon className="w-5 h-5" strokeWidth={1.75} />
+                  </span>
+                  {isSidebarOpen && (
+                    <>
+                      <span className={`text-sm leading-tight font-medium whitespace-nowrap ${pathname === item.href ? 'text-foreground font-semibold' : ''}`}>
+                        {item.label}
+                      </span>
+                      {pathname === item.href && (
+                        <div className={`ml-auto w-1.5 h-1.5 rounded-full flex-shrink-0 ${dataSource === 'demo' ? 'bg-warning shadow-[0_0_6px_var(--warning-color)]' : 'bg-accent shadow-[0_0_6px_var(--accent-color)]'}`} />
+                      )}
+                    </>
+                  )}
+                </Link>
+              );
+              return !isSidebarOpen ? (
+                <Tooltip key={item.href} content={item.label} position="right" delay={0.1}>
+                  {linkContent}
+                </Tooltip>
+              ) : (
+                <React.Fragment key={item.href}>{linkContent}</React.Fragment>
+              );
+            })}
           </div>
         )}
 

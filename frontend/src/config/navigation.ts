@@ -6,6 +6,7 @@ export const navGroups = [
     sectionDescription: "Opciones generales de la aplicación y recursos oficiales.",
     items: [
       { href: "/catalogo", label: "Catálogo", icon: GraduationCap, description: "Catálogo oficial de familias profesionales, títulos, cursos → módulos. RA → CE." },
+      { href: "/archivos", label: "Archivos", icon: FolderOpen, description: "Gestión de los espacios de trabajo locales y en la nube." },
       { href: "/documentos", label: "Documentos", icon: FileText, description: "Explorador de archivos oficiales, legislación y otros documentos." },
       { href: "/descargas", label: "Descargas", icon: FileText, description: "Generación de reportes y boletines en PDF." },
       { href: "/ayuda", label: "Ayuda", icon: Activity, description: "Panel de salud: verifica la coherencia y completitud de todos los datos del cuaderno." }
