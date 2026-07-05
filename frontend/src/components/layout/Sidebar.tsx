@@ -53,7 +53,7 @@ export default function Sidebar() {
   useEffect(() => {
     const updateTime = () => {
       const state = useAppStore.getState();
-      const isDemo = state.activeModuleId === '0237-ictve-pd';
+      const isDemo = state.dataSource === 'demo';
       const realNow = new Date();
       const currentYear = realNow.getFullYear();
 
@@ -97,14 +97,14 @@ export default function Sidebar() {
     const interval = setInterval(updateTime, 60000);
 
     const unsub = useAppStore.subscribe((state, prevState) => {
-      if (state.activeCursoId !== prevState.activeCursoId) updateTime();
+      if (state.activeCursoId !== prevState.activeCursoId || state.dataSource !== prevState.dataSource) updateTime();
     });
 
     return () => {
       clearInterval(interval);
       unsub();
     };
-  }, [activeModuleId]);
+  }, [activeModuleId, dataSource]);
 
   const handleScroll = (e: React.UIEvent<HTMLElement>) => {
     sessionStorage.setItem('sidebar-scroll', e.currentTarget.scrollTop.toString());
@@ -306,7 +306,7 @@ export default function Sidebar() {
                   }}
                   className={`flex items-center ${isSidebarOpen ? 'gap-2.5 px-3' : 'justify-center px-0'} py-2 rounded-lg transition-all duration-150 group
                     ${pathname === item.href
-                      ? (dataSource === 'demo' ? 'bg-warning/10 border border-warning/30 text-foreground shadow-sm shadow-warning/10' : 'bg-accent/10 border border-accent/30 text-foreground shadow-sm shadow-accent/10')
+                      ? 'bg-foreground/10 text-foreground'
                       : 'text-muted hover:text-foreground hover:bg-foreground/5 border border-transparent'
                     }`}
                 >
@@ -314,14 +314,9 @@ export default function Sidebar() {
                     <item.icon className="w-5 h-5" strokeWidth={1.75} />
                   </span>
                   {isSidebarOpen && (
-                    <>
-                      <span className={`text-sm leading-tight font-medium whitespace-nowrap ${pathname === item.href ? 'text-foreground font-semibold' : ''}`}>
-                        {item.label}
-                      </span>
-                      {pathname === item.href && (
-                        <div className={`ml-auto w-1.5 h-1.5 rounded-full flex-shrink-0 ${dataSource === 'demo' ? 'bg-warning shadow-[0_0_6px_var(--warning-color)]' : 'bg-accent shadow-[0_0_6px_var(--accent-color)]'}`} />
-                      )}
-                    </>
+                    <span className={`text-sm leading-tight font-medium whitespace-nowrap ${pathname === item.href ? 'text-foreground font-semibold' : ''}`}>
+                      {item.label}
+                    </span>
                   )}
                 </Link>
               );
@@ -388,7 +383,7 @@ export default function Sidebar() {
                     }}
                     className={`flex items-center ${isSidebarOpen ? 'gap-2.5 px-3' : 'justify-center px-0'} py-2 rounded-lg transition-all duration-150 group
                       ${pathname === item.href
-                        ? (dataSource === 'demo' ? 'bg-warning/10 border border-warning/30 text-foreground shadow-sm shadow-warning/10' : 'bg-accent/10 border border-accent/30 text-foreground shadow-sm shadow-accent/10')
+                        ? 'bg-foreground/10 text-foreground'
                         : 'text-muted hover:text-foreground hover:bg-foreground/5 border border-transparent'
                       }`}
                   >
@@ -396,14 +391,9 @@ export default function Sidebar() {
                       <item.icon className="w-5 h-5" strokeWidth={1.75} />
                     </span>
                     {isSidebarOpen && (
-                      <>
-                        <span className={`text-sm leading-tight font-medium whitespace-nowrap ${pathname === item.href ? 'text-foreground font-semibold' : ''}`}>
-                          {item.label}
-                        </span>
-                        {pathname === item.href && (
-                          <div className={`ml-auto w-1.5 h-1.5 rounded-full flex-shrink-0 ${dataSource === 'demo' ? 'bg-warning shadow-[0_0_6px_var(--warning-color)]' : 'bg-accent shadow-[0_0_6px_var(--accent-color)]'}`} />
-                        )}
-                      </>
+                      <span className={`text-sm leading-tight font-medium whitespace-nowrap ${pathname === item.href ? 'text-foreground font-semibold' : ''}`}>
+                        {item.label}
+                      </span>
                     )}
                   </Link>
                 );

@@ -176,7 +176,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
       } else if ((e.ctrlKey || e.metaKey) && e.key === '/') {
         e.preventDefault();
         // Navigate to help
-        router.push('/ayuda');
+        router.push('/inicio');
       } else if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
         // Toggle command palette (placeholder)
