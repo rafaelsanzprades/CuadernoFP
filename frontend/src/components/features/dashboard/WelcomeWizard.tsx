@@ -54,7 +54,7 @@ export function WelcomeWizard({ onComplete, fetchModules, setActiveModuleId, set
         body: JSON.stringify({})
       });
 
-      // 2. Crear Curso
+      // 2. Crear curso
       await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${cursoId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -149,7 +149,7 @@ export function WelcomeWizard({ onComplete, fetchModules, setActiveModuleId, set
                   Volver
                 </Button>
                 <Button onClick={handleCreateNew} className="flex-1 bg-info/20 hover:bg-info/30 text-info border border-info/30">
-                  <Rocket className="w-4 h-4 mr-2" /> Crear Archivos
+                  <Rocket className="w-4 h-4 mr-2" /> Crear archivos
                 </Button>
               </div>
             </div>

@@ -48,7 +48,7 @@ export const driveService = {
               const userInfo = await userInfoRes.json();
               resolve({ success: true, email: userInfo.email });
             } catch {
-              resolve({ success: true, email: "Profesor Conectado" });
+              resolve({ success: true, email: "Profesorado conectado" });
             }
           } else {
             resolve({ success: false });

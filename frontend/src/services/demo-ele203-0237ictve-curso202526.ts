@@ -8739,7 +8739,7 @@ export const demoSeed = {
             "G3_bibliografia": "Para el correcto seguimiento del módulo, se emplearán apuntes propios del Departamento, libros de texto recomendados de editoriales del sector tecnológico, catálogos técnicos de fabricantes, manuales de equipos, recursos online actualizados y normativa legal aplicable.",
             "H1_complementarias": "Las actividades complementarias y extraescolares se desarrollarán de manera coordinada con el Departamento Didáctico, vinculadas a los Resultados de Aprendizaje del módulo y con incidencia directa en la motivación del alumnado. Se programarán, siempre que sea posible, visitas técnicas a empresas del sector, participación en ferias profesionales y jornadas de orientación laboral o emprendimiento (Aulas APE).",
             "I1_transversales": "En el desarrollo de los contenidos, se potenciará de forma transversal la Prevención de Riesgos Laborales aplicables a la profesión, el fomento de la igualdad efectiva, el respeto al medioambiente (tratamiento de residuos electrónicos) y el fomento del emprendimiento tecnológico, habilidades comunicativas y el trabajo colaborativo.",
-            "J3_contingencia": "Ante circunstancias excepcionales que afecten al desarrollo normal de la actividad docente o ausencias justificadas, se enviarán a través del correo electrónico institucional y/o la plataforma digital las tareas y materiales necesarios. El seguimiento de las Unidades Didácticas queda garantizado mediante el registro centralizado en CuadernoFP."
+            "J3_contingencia": "Ante circunstancias excepcionales que afecten al desarrollo normal de la actividad docente o ausencias justificadas, se enviarán a través del correo electrónico institucional y/o la plataforma digital las tareas y materiales necesarios. El seguimiento de las Unidades didácticas queda garantizado mediante el registro centralizado en CuadernoFP."
         },
         "config_aula": {
             "Metodología": "Trabajo cooperativo en pequeños grupos (2-3 personas). Uso de maquetas de simulación de viviendas.",
@@ -9726,7 +9726,7 @@ export const demoSeed = {
             "f_01/05/2026": "Día del Trabajo",
             "r_17/12/2025": "1ª Evaluación",
             "r_24/03/2026": "2ª Evaluación",
-            "r_17/06/2026": "Evaluación Final"
+            "r_17/06/2026": "Evaluación final"
         },
         "planning_ledger": {
             "2025-09-15": [

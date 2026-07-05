@@ -1,16 +1,15 @@
 "use client";
 import { Scale, Shield, ShieldCheck, ExternalLink, Info } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { TabSync } from "@/components/ui/TabSync";
+import { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 
-export default function LegalPage() {
-  const [activeTab, setActiveTab] = useState("aviso");
-
-  return (
+export default function LegalPage() {const [activeTab, setActiveTab] = useState("aviso");return (
     <div className="flex min-h-screen bg-background relative">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
@@ -65,7 +64,7 @@ export default function LegalPage() {
                     <span className="text-success mt-1"><Shield className="w-5 h-5" /></span>
                     <div>
                       <strong className="block mb-1 text-foreground">Modelo de Privacidad Local-First</strong>
-                      <span className="text-sm text-foreground/80">Esta aplicación ha sido diseñada bajo el principio de <strong>privacidad absoluta</strong>. Los datos personales de tus alumnado (nombres, calificaciones, tutorías) no se envían, transmiten ni almacenan en ningún servidor ajeno al control del docente.</span>
+                      <span className="text-sm text-foreground/80">Esta aplicación ha sido diseñada bajo el principio de <strong>privacidad absoluta</strong>. Los datos personales de tus alumnado (nombres, calificaciones, tutorías) no se envían, transmiten ni almacenan en ningún servidor ajeno al control del profesorado.</span>
                     </div>
                   </div>
 
@@ -88,14 +87,14 @@ export default function LegalPage() {
                       </p>
                       <ul className="list-disc list-inside ml-2 mt-2 space-y-1 text-muted">
                         <li>En el disco duro local, dispositivo USB externo o pendrive del usuario (en formato de archivo cifrado o texto plano).</li>
-                        <li>En la nube privada corporativa del docente (Google Drive o Microsoft OneDrive), bajo su cuenta institucional regulada por la Consejería de Educación o Centro Educativo correspondiente.</li>
+                        <li>En la nube privada corporativa del profesorado (Google Drive o Microsoft OneDrive), bajo su cuenta institucional regulada por la Consejería de Educación o Centro Educativo correspondiente.</li>
                       </ul>
                     </div>
 
                     <div>
                       <h3 className="text-base font-bold text-foreground mb-1">Seguridad</h3>
                       <p>
-                        Es responsabilidad del docente custodiar de manera segura el archivo de base de datos generado y el acceso a su cuenta personal de Google/Microsoft. Se recomienda proteger el ordenador y dispositivo de almacenamiento con contraseñas seguras y bloqueos automáticos.
+                        Es responsabilidad del profesorado custodiar de manera segura el archivo de base de datos generado y el acceso a su cuenta personal de Google/Microsoft. Se recomienda proteger el ordenador y dispositivo de almacenamiento con contraseñas seguras y bloqueos automáticos.
                       </p>
                     </div>
                   </div>
@@ -212,5 +211,5 @@ export default function LegalPage() {
         </div>
       </div>
     </div>
-  );
+      );
 }

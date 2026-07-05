@@ -30,7 +30,7 @@ export const AnalisisGrupalTab = () => {
     return (
       <Card className="p-8 text-center border-l-4 border-l-yellow-500 mt-6">
         <h2 className="text-xl font-bold text-warning mb-2">Faltan Datos</h2>
-        <p className="text-foreground/80">No hay datos de evaluación para alumnado activos. Ve a Evaluación Competencial primero.</p>
+        <p className="text-foreground/80">No hay datos de evaluación para alumnado activos. Ve a Evaluación competencial primero.</p>
       </Card>
     );
   }

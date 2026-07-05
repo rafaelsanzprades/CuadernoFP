@@ -296,7 +296,7 @@ export const PlanoClaseTab = () => {
           </div>
         </div>
 
-        {/* Teacher Desk & Board (Mesa del Profesor) */}
+        {/* Teacher Desk & Board (Mesa del Profesorado) */}
         <div className="flex flex-col items-center mt-6 border-t border-[var(--glass-border)] pt-6">
           {/* Blackboard Representation */}
           <div className="w-1/2 min-w-[300px] h-2 bg-slate-800 rounded border border-slate-700 shadow-lg mb-4 flex items-center justify-center">
@@ -305,7 +305,7 @@ export const PlanoClaseTab = () => {
           
           {/* Teacher Desk */}
           <div className="w-1/3 min-w-[200px] border border-accent/30 bg-accent/5 hover:bg-accent/10 transition-colors duration-300 rounded-xl p-3.5 text-center text-accent font-extrabold text-xs tracking-widest flex items-center justify-center gap-2 shadow-lg">
-            <span>‍<span className="inline-flex"><School className="w-[1.2em] h-[1.2em] mr-1" /></span> Mesa del Profesor / Pizarra</span>
+            <span>‍<span className="inline-flex"><School className="w-[1.2em] h-[1.2em] mr-1" /></span> Mesa del Profesorado / Pizarra</span>
           </div>
         </div>
       </Card>

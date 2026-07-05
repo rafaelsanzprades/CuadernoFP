@@ -157,7 +157,7 @@ export function SessionTable({
                                   <button
                                     onClick={() => handleDeleteSesion(globalIdx)}
                                     className="text-danger hover:text-danger font-bold"
-                                    title="Eliminar Sesión"
+                                    title="Eliminar sesión"
                                   >
                                     ×
                                   </button>
@@ -177,7 +177,7 @@ export function SessionTable({
                   onClick={() => handleAddSesion(ud.id_ud)}
                   className="text-sm text-accent hover:text-accent/80 font-semibold flex items-center gap-1"
                 >
-                  <span>+</span> Añadir Sesión a {ud.id_ud}
+                  <span>+</span> Añadir sesión a {ud.id_ud}
                 </button>
               </div>
             </div>

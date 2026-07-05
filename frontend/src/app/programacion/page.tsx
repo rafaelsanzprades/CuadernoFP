@@ -1,6 +1,7 @@
-﻿"use client";
+"use client";
+import { TabSync } from "@/components/ui/TabSync";
 import { BookOpen, ClipboardList, Target , Info, FolderOpen } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
@@ -23,10 +24,7 @@ export default function ProgramacionPage() {
   const TABS = [
     { id: "secuenciacion", label:  <span className="flex items-center gap-2"><ClipboardList className="w-4 h-4 shrink-0" /> Secuenciación de UD</span>, cleanLabel: "Secuenciación de UD" },
     { id: "tareas", label:  <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> Tareas competenciales</span>, cleanLabel: "Tareas competenciales" }
-  ];
-
-  const [activeTab, setActiveTab] = useState("secuenciacion");
-  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+  ];const [activeTab, setActiveTab] = useState("secuenciacion");const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
 
 
@@ -54,6 +52,7 @@ export default function ProgramacionPage() {
   if (!activeModuleId) {
     return (
       <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header breadcrumbSuffix={activeTabCleanLabel} />
@@ -197,13 +196,13 @@ export default function ProgramacionPage() {
                     'desc': 'Secuenciación temporal de las unidades y bloques de contenido.'
           },
           'tareas': {
-                    'title': 'Tareas Competenciales',
+                    'title': 'Tareas competenciales',
                     'desc': 'Diseño y planificación de tareas y actividades competenciales.'
           }
 };
                 const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
                 return (
-                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
+    <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
                     <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
                     <div>
                       <p className="text-sm text-muted">{info.desc}</p>
@@ -229,7 +228,7 @@ export default function ProgramacionPage() {
               {df_ud.length === 0 ? (
                 <div className="text-center py-12">
                   <ClipboardList className="w-16 h-16 text-muted-foreground opacity-50 mx-auto mb-4" />
-                  <h3 className="text-xl font-bold mb-2">No hay Unidades Didácticas</h3>
+                  <h3 className="text-xl font-bold mb-2">No hay Unidades didácticas</h3>
                   <p className="text-muted">Aún no has creado ninguna Unidad Didáctica (UD).</p>
                   <p className="text-muted mt-1">Para secuenciar sesiones, primero debes crear las UDs en la sección <strong>Matrices</strong>.</p>
                 </div>
@@ -253,7 +252,7 @@ export default function ProgramacionPage() {
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
                   <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-sm font-semibold text-foreground">Tareas Competenciales - RD 659/2023</p>
+                    <p className="text-sm font-semibold text-foreground">Tareas competenciales - RD 659/2023</p>
                     <p className="text-sm text-muted mt-1">Actividades prácticas alineadas con los criterios de evaluación.</p>
                   </div>
                 </div>
@@ -275,6 +274,6 @@ export default function ProgramacionPage() {
         </main>
       </div>
     </div>
-  );
+      );
 }
 

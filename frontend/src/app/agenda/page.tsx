@@ -1,5 +1,6 @@
-﻿"use client";
+"use client";
 import { BarChart, Calendar , Info } from "lucide-react";
+import { TabSync } from "@/components/ui/TabSync";
 import { useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -17,9 +18,7 @@ import { WeeklyClasses } from "@/components/features/dashboard/WeeklyClasses";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 
 export default function AgendaPage() {
-  const { moduleData, cursoData, setModuleData, setCursoData, isWizardOpen, setWizardOpen, activeModuleId, setActiveModuleId, activeCursoId, setActiveCursoId } = useAppStore();
-  const [activeTab, setActiveTab] = useState("actual");
-  const { data: modulesList, mutate: fetchModules } = useModulesList();
+  const { moduleData, cursoData, setModuleData, setCursoData, isWizardOpen, setWizardOpen, activeModuleId, setActiveModuleId, activeCursoId, setActiveCursoId } = useAppStore();const [activeTab, setActiveTab] = useState("actual");const { data: modulesList, mutate: fetchModules } = useModulesList();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,6 +61,7 @@ export default function AgendaPage() {
 
   return (
     <div className="flex min-h-screen bg-background relative">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       {isWizardOpen && (
         <WelcomeWizard
           onComplete={() => setWizardOpen(false)}
@@ -109,7 +109,7 @@ export default function AgendaPage() {
 };
                 const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
                 return (
-                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
+    <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
                     <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
                     <div>
                       <p className="text-sm text-muted">{info.desc}</p>
@@ -157,6 +157,6 @@ export default function AgendaPage() {
         </div>
       </div>
     </div>
-  );
+      );
 }
 

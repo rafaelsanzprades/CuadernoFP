@@ -1,5 +1,5 @@
 "use client";
-import { BookOpen, ChevronDown, ChevronUp, Clock, FolderTree, GraduationCap, Layers, ListChecks, AlertTriangle, Info } from "lucide-react";
+import { Award, BookOpen, ChevronDown, ChevronUp, Clock, FolderTree, GraduationCap, Layers, ListChecks, AlertTriangle, Info } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -662,7 +662,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
                       }}
                       className="shrink-0"
                     >
-                      <BookOpen className="w-4 h-4 mr-2" /> Nueva Programación
+                      <BookOpen className="w-4 h-4 mr-2" /> Nueva programación
                     </Button>
                     <ChevronDown className="w-4 h-4 -rotate-90 text-muted shrink-0" />
                   </div>
@@ -969,7 +969,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                 className="flex items-center ml-2"
               >
                 <BookOpen className="w-4 h-4 mr-2" />
-                Nueva Programación
+                Nueva programación
               </Button>
             </div>
           </div>

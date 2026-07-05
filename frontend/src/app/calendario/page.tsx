@@ -1,4 +1,5 @@
-﻿"use client";
+"use client";
+import { TabSync } from "@/components/ui/TabSync";
 import { Calendar, Circle, ClipboardList, Search, Settings, Flag , Info, FolderOpen } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -443,10 +444,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
 export default function CalendarioPage() {
   const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, activeModuleId, moduleData, setModuleData } = useAppStore();
   const [saving, setSaving] = useState(false);
-  const [saveMessage, setSaveMessage] = useState("");
-  const [activeTab, setActiveTab] = useState("fechas");
-
-  // Load data if not in store
+  const [saveMessage, setSaveMessage] = useState("");const [activeTab, setActiveTab] = useState("fechas");// Load data if not in store
   useEffect(() => {
     if (activeCursoId && !cursoData) {
       fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeCursoId}`)
@@ -478,6 +476,7 @@ export default function CalendarioPage() {
   if (!activeCursoId) {
     return (
       <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
@@ -755,7 +754,7 @@ export default function CalendarioPage() {
                         const daysArr = ["Lun", "Mar", "Mié", "Jue", "Vie"] as const;
                         const totalDays = daysArr.reduce((acc, d) => acc + (row.wd[d] || 0), 0);
                         return (
-                          <tr key={row.title} className={`${row.bg} border-b border-[var(--glass-border)] last:border-0`}>
+    <tr key={row.title} className={`${row.bg} border-b border-[var(--glass-border)] last:border-0`}>
                             <td className="p-3 font-bold text-left">{row.title}</td>
                             {daysArr.map(day => (
                               <td key={day} className={`p-3 ${!Number(horario[day]) ? 'opacity-30' : 'font-mono text-base font-medium'}`}>
@@ -926,6 +925,6 @@ export default function CalendarioPage() {
         </main>
       </div>
     </div>
-  );
+      );
 }
 

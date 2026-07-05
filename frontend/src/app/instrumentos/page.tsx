@@ -1,4 +1,5 @@
-﻿"use client";
+"use client";
+import { TabSync } from "@/components/ui/TabSync";
 import { BarChart, Check, FileEdit , Info, FolderOpen } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -22,10 +23,7 @@ export default function InstrumentosPage() {
     { id: "tri1", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> IE. 1er Tri.</span>, cleanLabel: "IE. 1er Tri." },
     { id: "tri2", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> IE. 2º Tri.</span>, cleanLabel: "IE. 2º Tri." },
     { id: "tri3", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> IE. 3er Tri.</span>, cleanLabel: "IE. 3er Tri." }
-  ];
-
-  const [activeTab, setActiveTab] = useState("resumen");
-  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+  ];const [activeTab, setActiveTab] = useState("resumen");const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   const [isRecoveryModalOpen, setIsRecoveryModalOpen] = useState(false);
   const [recoveryTri, setRecoveryTri] = useState<string>("");
@@ -78,6 +76,7 @@ export default function InstrumentosPage() {
   if (!activeModuleId) {
     return (
       <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header breadcrumbSuffix={activeTabCleanLabel} />
@@ -256,7 +255,7 @@ export default function InstrumentosPage() {
                             updateDataFrame("df_act", newAct);
                           }}
                           className="text-danger hover:text-danger font-bold px-2"
-                          title="Eliminar Actividad"
+                          title="Eliminar actividad"
                         >
                           ×
                         </button>
@@ -272,7 +271,7 @@ export default function InstrumentosPage() {
                 onClick={() => handleAddAct(triKey)}
                 className="text-info hover:text-info font-semibold flex items-center gap-1"
               >
-                <span>+</span> Añadir Instrumento/Actividad en {triNombre}
+                <span>+</span> Añadir instrumento/Actividad en {triNombre}
               </Button>
               <Button 
                 variant="ghost"
@@ -283,7 +282,7 @@ export default function InstrumentosPage() {
                 }}
                 className="text-danger hover:text-danger border border-danger/30 font-semibold flex items-center gap-1"
               >
-                ⛑️ Crear Instrumento de Recuperación
+                ⛑️ Crear instrumento de Recuperación
               </Button>
             </div>
           </div>
@@ -371,7 +370,7 @@ export default function InstrumentosPage() {
                       const nTar = actTri.filter((a: any) => a.Tipo === "Tareas").length;
                       const nRec = actTri.filter((a: any) => a.Tipo === "Recuperacion").length;
                       return (
-                        <tr key={tri.key} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
+    <tr key={tri.key} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
                           <td className="p-3 font-semibold text-foreground">{tri.nombre}</td>
                           <td className="p-3 text-center border-l border-[var(--glass-border)]">
                             <span className="bg-info/10 text-info font-bold text-lg px-3 py-1 rounded-lg inline-block min-w-[40px]">{nTeo}</span>
@@ -485,6 +484,6 @@ export default function InstrumentosPage() {
         </div>
       )}
     </div>
-  );
+      );
 }
 

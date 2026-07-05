@@ -155,7 +155,7 @@ export const BoletinesTab = () => {
                   </div>
                 </div>
 
-                {/* Datos del Alumno */}
+                {/* Datos del alumnado */}
                 <div className="bg-foreground/5 p-6 rounded-xl mb-8 flex items-center justify-between border border-white/5">
                   <div>
                     <p className="text-sm text-muted uppercase tracking-wider font-semibold mb-1">Alumno/a</p>
@@ -245,8 +245,8 @@ export const BoletinesTab = () => {
         ) : (
           <div className="flex-1 flex flex-col justify-center items-center text-center p-8 text-muted">
             <Users className="w-12 h-12 text-muted/50 mb-3" />
-            <p className="font-semibold text-lg">Selecciona un alumno/a</p>
-            <p className="text-sm opacity-80">Elige un alumno del panel izquierdo para visualizar su boletín.</p>
+            <p className="font-semibold text-lg">Selecciona alumnado</p>
+            <p className="text-sm opacity-80">Elige alumnado del panel izquierdo para visualizar su boletín.</p>
           </div>
         )}
       </div>

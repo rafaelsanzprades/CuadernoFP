@@ -93,7 +93,7 @@ export function AlertaAbandonoTab() {
         <div>
           <p className="text-sm font-semibold text-foreground">Alerta temprana de abandono - Indicador 1.5</p>
           <p className="text-sm text-muted mt-1">
-            Detección de alumnos en riesgo de abandono según el Sistema Estatal de Indicadores.
+            Detección de alumnado en riesgo de abandono según el Sistema Estatal de Indicadores.
             Criterio: &lt;3 asistencias en primeras 2 semanas, &gt;30% faltas, o sin evaluación positiva.
           </p>
         </div>
@@ -136,7 +136,7 @@ export function AlertaAbandonoTab() {
         <Card className="p-8 text-center">
           <CheckCircle2 className="w-12 h-12 text-green-500 mx-auto mb-3" />
           <p className="text-sm font-semibold text-foreground">Sin alertas de abandono</p>
-          <p className="text-xs text-muted mt-1">Todos los alumnos activos están dentro de los parámetros normales.</p>
+          <p className="text-xs text-muted mt-1">Todo el alumnado activo está dentro de los parámetros normales.</p>
         </Card>
       ) : (
         <div className="space-y-3">

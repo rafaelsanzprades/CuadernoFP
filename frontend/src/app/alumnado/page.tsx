@@ -1,4 +1,5 @@
 "use client";
+import { TabSync } from "@/components/ui/TabSync";
 import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map, MessageSquare, FileText, Route , Info, FolderOpen } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -27,10 +28,7 @@ export default function AlumnadoPage() {
     { id: "alumnado", label:  <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> Alumnado</span>, cleanLabel: "Alumnado" },
     { id: "plano", label: <span className="flex items-center gap-2"><LayoutGrid className="w-4 h-4 shrink-0" /> Plano de clase</span>, cleanLabel: "Plano de clase" },
     { id: "boletines", label:  <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> Boletines</span>, cleanLabel: "Boletines" }
-  ];
-
-  const [activeTab, setActiveTab] = useState("alumnado");
-  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+  ];const [activeTab, setActiveTab] = useState("alumnado");const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,6 +68,7 @@ export default function AlumnadoPage() {
   if (!activeCursoId) {
     return (
       <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header breadcrumbSuffix={activeTabCleanLabel} />
@@ -255,7 +254,7 @@ export default function AlumnadoPage() {
                 disabled={saving}
                 className="bg-accent text-background hover:bg-accent/80 font-bold px-6 py-2 rounded-xl flex items-center gap-2"
               >
-                {saving ? "Guardando..." : <>Guardar Cambios <span className="inline-flex"><Save className="w-[1.2em] h-[1.2em] mr-1" /></span></>}
+                {saving ? "Guardando..." : <>Guardar cambios <span className="inline-flex"><Save className="w-[1.2em] h-[1.2em] mr-1" /></span></>}
               </Button>
             </div>
           </div>
@@ -360,7 +359,7 @@ export default function AlumnadoPage() {
                       const inputClass = "w-full bg-transparent border border-transparent hover:border-[var(--glass-border)] focus:bg-foreground/5 rounded px-2 py-1 text-foreground focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none transition-all placeholder:text-muted/40";
                       
                       return (
-                        <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5 transition-colors group">
+    <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5 transition-colors group">
                           <td className="p-2 font-mono text-xs sticky left-0 z-10 border-r border-[var(--glass-border)] bg-background group-hover:bg-[#111827] transition-colors">
                             {al.ID}
                           </td>
@@ -443,7 +442,7 @@ export default function AlumnadoPage() {
                             <button
                               onClick={() => handleRemoveAlumnado(idx)}
                               className="text-danger/50 hover:text-danger font-bold text-lg opacity-0 group-hover:opacity-100 transition-all hover:scale-110"
-                              title="Eliminar Alumnado"
+                              title="Eliminar alumnado"
                             >
                               &times;
                             </button>
@@ -459,7 +458,7 @@ export default function AlumnadoPage() {
                     onClick={handleAddAlumnado}
                     className="text-info hover:text-info font-semibold flex items-center gap-1"
                   >
-                    <span>+</span> Añadir Alumnado
+                    <span>+</span> Añadir alumnado
                   </Button>
                 </div>
               </div>
@@ -478,6 +477,6 @@ export default function AlumnadoPage() {
         </main>
       </div>
     </div>
-  );
+      );
 }
 

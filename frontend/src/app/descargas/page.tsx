@@ -1,4 +1,5 @@
 "use client";
+import { TabSync } from "@/components/ui/TabSync";
 import { AlertTriangle, BarChart, BookOpen, Calculator, Calendar, CalendarDays, ChevronRight, Construction, CornerLeftUp, Download, DownloadCloud, File, FileEdit, FileSpreadsheet, FileText, Folder, FolderOpen, GraduationCap, MapPin, Play, Scale, Search, Settings, UploadCloud, User, Users, X , Info } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -21,10 +22,7 @@ type DocumentItem = {
   path: string;
 };
 
-export default function DocumentosPage() {
-  const [activeTab, setActiveTab] = useState<"programacion" | "curso">("programacion");
-
-  // State for Explorador
+export default function DocumentosPage() {const [activeTab, setActiveTab] = useState("programacion");// State for Explorador
   const [currentPath, setCurrentPath] = useState<string>("");
   const [items, setItems] = useState<DocumentItem[]>([]);
   const [loadingDocs, setLoadingDocs] = useState<boolean>(true);
@@ -268,6 +266,7 @@ export default function DocumentosPage() {
 
   return (
     <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
       <main className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={activeTabCleanLabel} />
@@ -308,7 +307,7 @@ export default function DocumentosPage() {
 };
                 const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
                 return (
-                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
+    <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
                     <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
                     <div>
                       <p className="text-sm text-muted">{info.desc}</p>
@@ -350,7 +349,7 @@ export default function DocumentosPage() {
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-info">
                               <div>
-                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación Didáctica</h3>
+                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica</h3>
                                 <p className="text-sm text-muted mb-6">Documento oficial completo con secuenciación, metodologías y criterios.</p>
                               </div>
                               <Button onClick={() => handleDownloadPdf('programacion')} disabled={downloadingStr === 'programacion'} className="w-full bg-info hover:bg-info/90 text-white">
@@ -515,7 +514,7 @@ export default function DocumentosPage() {
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
                               <div>
-                                <h3 className="text-lg font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Evaluación Final Ordinaria</h3>
+                                <h3 className="text-lg font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Evaluación final ordinaria</h3>
                                 <div className="text-xs text-muted mb-2">
                                   Inicio: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.ini_final)}</span><br/>
                                   Fin: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.fin_final)}</span>
@@ -589,6 +588,6 @@ export default function DocumentosPage() {
         </div>
       </main>
     </div>
-  );
+      );
 }
 

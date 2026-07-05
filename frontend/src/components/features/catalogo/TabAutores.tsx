@@ -76,7 +76,7 @@ export function TabAutores({ globalSelection }: { globalSelection: any }) {
     }
 
     const confirm = window.confirm(
-      "⚠️ ATENCIÓN: Esta acción sobreescribirá tus Unidades Didácticas, Instrumentos, Sesiones, Tareas y configuración del contexto para el módulo actual.\n\n¿Estás completamente seguro de continuar?"
+      "⚠️ ATENCIÓN: Esta acción sobreescribirá tus Unidades didácticas, Instrumentos, Sesiones, Tareas y configuración del contexto para el módulo actual.\n\n¿Estás completamente seguro de continuar?"
     );
     if (!confirm) return;
 
@@ -123,7 +123,7 @@ export function TabAutores({ globalSelection }: { globalSelection: any }) {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Selector de Ficheros */}
         <div className="col-span-1 space-y-4">
-          <h3 className="font-bold text-foreground">Archivos Disponibles</h3>
+          <h3 className="font-bold text-foreground">Archivos disponibles</h3>
           {loading && !selectedFile ? (
             <p className="text-sm text-muted">Buscando propuestas...</p>
           ) : proposals.length === 0 ? (
@@ -181,7 +181,7 @@ export function TabAutores({ globalSelection }: { globalSelection: any }) {
               <Card className="p-5 border-l-4 border-l-purple-500">
                 <h4 className="font-bold flex items-center gap-2 mb-3"><Target className="w-4 h-4 text-purple-500"/> Matrices OG → RA → CE → UD/T</h4>
                 <div className="text-sm text-muted">
-                  <p className="mb-2"><strong>{previewData.df_ud?.length || 0}</strong> Unidades Didácticas propuestas:</p>
+                  <p className="mb-2"><strong>{previewData.df_ud?.length || 0}</strong> Unidades didácticas propuestas:</p>
                   <ul className="list-disc list-inside space-y-1 pl-2 max-h-60 overflow-y-auto">
                     {previewData.df_ud?.map((ud: any) => (
                       <li key={ud.id_ud}>

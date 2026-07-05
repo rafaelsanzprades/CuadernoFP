@@ -1,4 +1,5 @@
 "use client";
+import { TabSync } from "@/components/ui/TabSync";
 import { AlertTriangle, BarChart, BookOpen, Calculator, Calendar, CalendarDays, ChevronRight, Construction, CornerLeftUp, Download, DownloadCloud, File, FileEdit, FileSpreadsheet, FileText, Folder, FolderOpen, GraduationCap, MapPin, Play, Scale, Search, Settings, UploadCloud, User, Users, X , Info } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -26,10 +27,7 @@ export default function DocumentosPage() {
     { id: "Normativa", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> Normativa</span>, cleanLabel: "Normativa" },
     { id: "TodoFP", label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4 shrink-0" /> TodoFP</span>, cleanLabel: "TodoFP" },
     { id: "Autores/Editoriales", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> Autores/Editoriales</span>, cleanLabel: "Autores/Editoriales" }
-  ];
-  const [activeTab, setActiveTab] = useState<string>("Plantillas");
-
-  // State for Explorador
+  ];const [activeTab, setActiveTab] = useState("Plantillas");// State for Explorador
   const [currentPath, setCurrentPath] = useState<string>("");
   const [items, setItems] = useState<DocumentItem[]>([]);
   const [loadingDocs, setLoadingDocs] = useState<boolean>(true);
@@ -209,6 +207,7 @@ export default function DocumentosPage() {
 
   return (
     <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
       <main className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
@@ -247,7 +246,7 @@ export default function DocumentosPage() {
                 };
                 const info = infoMap[activeTab] || { desc: 'Gestión de documentos' };
                 return (
-                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6 mt-3'>
+    <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6 mt-3'>
                     <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
                     <p className='text-sm text-muted'>{info.desc}</p>
                   </div>
@@ -404,6 +403,6 @@ export default function DocumentosPage() {
 
       </main>
     </div>
-  );
+      );
 }
 

@@ -336,7 +336,7 @@ export function DatosTab() {
                   onChange={(e) => updateModuleData("config_redondeo", { ...config, umbral_redondeo: parseFloat(e.target.value) })}
                   className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
                 />
-                <p className="text-xs text-muted">Si un alumno obtiene esta nota o superior (ej. 4.8), se redondeará automáticamente a la nota de aprobado.</p>
+                <p className="text-xs text-muted">Si el alumnado obtiene esta nota o superior (ej. 4.8), se redondeará automáticamente a la nota de aprobado.</p>
               </div>
 
               <div className="space-y-2">

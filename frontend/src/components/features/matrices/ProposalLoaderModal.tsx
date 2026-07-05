@@ -112,7 +112,7 @@ export function ProposalLoaderModal({ isOpen, onClose, activeModuleId, onApplyPr
                     <div className="text-sm text-warning/90">
                       <p className="font-bold mb-1">Atención: Esta acción sobrescribirá datos actuales</p>
                       <p>
-                        Se reemplazarán tus Unidades Didácticas (UD/T), la relación entre RA y UD/T, y la matriz de contribución RA-OG. 
+                        Se reemplazarán tus Unidades didácticas (UD/T), la relación entre RA y UD/T, y la matriz de contribución RA-OG. 
                         Asegúrate de que estás de acuerdo antes de aplicar.
                       </p>
                     </div>
@@ -128,7 +128,7 @@ export function ProposalLoaderModal({ isOpen, onClose, activeModuleId, onApplyPr
           <div className="p-6 border-t border-[var(--glass-border)] bg-foreground/5 rounded-b-3xl flex justify-end gap-3">
             <Button variant="ghost" onClick={() => setSelectedProposal(null)}>Cancelar</Button>
             <Button variant="primary" onClick={handleApply} className="bg-info hover:bg-info/90 text-white border-0">
-              <CheckCircle2 className="w-4 h-4 mr-2" /> Aplicar Propuesta
+              <CheckCircle2 className="w-4 h-4 mr-2" /> Aplicar propuesta
             </Button>
           </div>
         )}

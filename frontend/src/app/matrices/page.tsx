@@ -1,4 +1,5 @@
-﻿"use client";
+"use client";
+import { TabSync } from "@/components/ui/TabSync";
 import { Award, BookOpen, Calculator, Check, GraduationCap, Puzzle, Target, Settings , Info, FolderOpen } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -24,9 +25,7 @@ export default function MatricesPage() {
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
   const [allCeOpen, setAllCeOpen] = useState(false);
-  const [openCEs, setOpenCEs] = useState<Set<string>>(new Set());
-  const [activeTab, setActiveTab] = useState("ra");
-  const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
+  const [openCEs, setOpenCEs] = useState<Set<string>>(new Set());const [activeTab, setActiveTab] = useState("ra");const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
 
   const [isDragging, setIsDragging] = useState(false);
   const [selectedCells, setSelectedCells] = useState<Set<string>>(new Set());
@@ -96,6 +95,7 @@ export default function MatricesPage() {
   if (!activeModuleId) {
     return (
       <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
@@ -171,8 +171,8 @@ export default function MatricesPage() {
                     'desc': 'Matriz de Resultados de Aprendizaje y Criterios de Evaluación.'
           },
           'ud': {
-                    'title': 'Unidades Didácticas (UD/T)',
-                    'desc': 'Definición de Unidades Didácticas o Unidades de Trabajo.'
+                    'title': 'Unidades didácticas (UD/T)',
+                    'desc': 'Definición de Unidades didácticas o Unidades de Trabajo.'
           },
           'relacion': {
                     'title': 'Relación RA - UD/T',
@@ -500,7 +500,7 @@ export default function MatricesPage() {
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
                   <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-sm font-semibold text-foreground">Unidades Didácticas (UD) o de Trabajo (UT) - RD 659/2023</p>
+                    <p className="text-sm font-semibold text-foreground">Unidades didácticas (UD) o de Trabajo (UT) - RD 659/2023</p>
                     <p className="text-sm text-muted mt-1">Organización del currículo en unidades de aprendizaje significativas.</p>
                   </div>
                 </div>
@@ -692,7 +692,7 @@ export default function MatricesPage() {
                       {df_ra.map((ra: any, idx: number) => {
                         const uds = df_ud?.filter((ud: any) => ud[ra.id_ra] > 0) || [];
                         return (
-                          <div key={idx} className="border-b border-[var(--glass-border)] pb-6 last:border-0 last:pb-0">
+    <div key={idx} className="border-b border-[var(--glass-border)] pb-6 last:border-0 last:pb-0">
                             <div className="text-lg text-foreground mb-3">
                               <strong>{ra.id_ra} ({ra.peso_ra}%).</strong>{" "}
                               <span className="text-muted text-sm">{resolveDescRa(activeModuleId, ra)}</span>
@@ -747,6 +747,6 @@ export default function MatricesPage() {
         onApplyProposal={handleApplyProposal}
       />
     </div>
-  );
+      );
 }
 

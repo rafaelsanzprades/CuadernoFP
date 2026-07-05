@@ -29,7 +29,7 @@ export function AISettingsPanel() {
       <div className="flex items-center gap-3 mb-2">
         <Sparkles className="w-6 h-6 text-accent" />
         <div>
-          <h3 className="text-xl font-bold text-foreground">Asistente Mágico (IA)</h3>
+          <h3 className="text-xl font-bold text-foreground">Asistente mágico (IA)</h3>
           <p className="text-sm text-muted">Importa programaciones desde PDF automáticamente</p>
         </div>
       </div>
@@ -44,7 +44,7 @@ export function AISettingsPanel() {
             onChange={(e) => setProvider(e.target.value)}
             className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-base text-foreground font-medium focus:outline-none focus:ring-2 focus:ring-accent transition-all"
           >
-            <option value="gemini">Google Gemini (Recomendado - Gratis para desarrolladores)</option>
+            <option value="gemini">Google Gemini (Recomendado - gratis para desarrolladores)</option>
             <option value="openai">OpenAI ChatGPT (Requiere saldo en la cuenta)</option>
           </select>
         </div>
@@ -71,7 +71,7 @@ export function AISettingsPanel() {
           className="w-full py-3 px-6 rounded-xl font-bold flex items-center justify-center gap-2 bg-accent/20 text-accent hover:bg-accent/30 border border-accent/30 transition-all shadow-md"
         >
           {saved ? <CheckCircle2 className="w-5 h-5" /> : <Save className="w-5 h-5" />}
-          {saved ? "Guardado" : "Guardar Configuración"}
+          {saved ? "Guardado" : "Guardar configuración"}
         </Button>
       </div>
     </Card>

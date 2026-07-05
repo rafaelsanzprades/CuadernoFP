@@ -1,4 +1,5 @@
-﻿"use client";
+"use client";
+import { TabSync } from "@/components/ui/TabSync";
 import { Calendar, FileEdit, MapPin, ClipboardCheck, AlertTriangle , Info, FolderOpen } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -24,10 +25,7 @@ export default function SeguimientoPage() {
     { id: "diario", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Diario de aula</span>, cleanLabel: "Diario de aula" },
     { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> Control de asistencia</span>, cleanLabel: "Control de asistencia" },
     { id: "alerta_abandono", label: <span className="flex items-center gap-2"><AlertTriangle className="w-4 h-4 shrink-0" /> Alerta abandono</span>, cleanLabel: "Alerta abandono" }
-  ];
-
-  const [activeTab, setActiveTab] = useState("diario");
-  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+  ];const [activeTab, setActiveTab] = useState("diario");const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,6 +70,7 @@ export default function SeguimientoPage() {
   if (!activeModuleId || !activeCursoId) {
     return (
       <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header breadcrumbSuffix={activeTabCleanLabel} />
@@ -271,7 +270,7 @@ export default function SeguimientoPage() {
                             const nodeColor = ledgerEntry.sin_docencia ? 'bg-warning' : (ledgerEntry.seguimiento ? 'bg-info' : 'bg-gray-600');
 
                             return (
-                              <div key={i} className="relative pl-8 group">
+    <div key={i} className="relative pl-8 group">
                                 {/* Timeline Node */}
                                 <div className={`absolute -left-[9px] top-4 w-4 h-4 rounded-full border-4 border-black ${nodeColor} shadow-[0_0_10px_rgba(0,0,0,0.5)] transition-colors duration-300 group-hover:scale-125 z-10`} />
                                 
@@ -343,6 +342,6 @@ export default function SeguimientoPage() {
         </main>
       </div>
     </div>
-  );
+      );
 }
 

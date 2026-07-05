@@ -1,4 +1,5 @@
-﻿"use client";
+"use client";
+import { TabSync } from "@/components/ui/TabSync";
 import { BarChart, Building2, ClipboardList, Save, Target, TrendingUp, User, Users, AlertTriangle , Info, FolderOpen } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -30,9 +31,7 @@ export default function ProgresoPage() {
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [saveMessage, setSaveMessage] = useState("");
-  const [activeTab, setActiveTab] = useState("resumen");
-  const [activeTabByStudent, setActiveTabByStudent] = useState<Record<string, string>>({});
+  const [saveMessage, setSaveMessage] = useState("");const [activeTab, setActiveTab] = useState("resumen");const [activeTabByStudent, setActiveTabByStudent] = useState<Record<string, string>>({});
   const [allStudentsOpen, setAllStudentsOpen] = useState(false);
   const [openStudents, setOpenStudents] = useState<Set<string>>(new Set());
 
@@ -80,6 +79,7 @@ export default function ProgresoPage() {
   if (!activeModuleId || !activeCursoId) {
     return (
       <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
@@ -188,7 +188,7 @@ export default function ProgresoPage() {
         }
       }
     });
-    // Aplicar Reglas de Redondeo y Compensaciones por RA
+    // Aplicar reglas de Redondeo y Compensaciones por RA
     Object.keys(notas_ra).forEach(r_id => {
       let n_ra = notas_ra[r_id];
       if (n_ra >= config.umbral_redondeo && n_ra < config.nota_aprobado) {
@@ -339,7 +339,7 @@ export default function ProgresoPage() {
                 disabled={saving}
                 className="bg-accent text-background hover:bg-accent/80 font-bold px-6 py-2 rounded-xl flex items-center gap-2"
               >
-                {saving ? "Guardando..." : <>Guardar Cambios <span className="inline-flex"><Save className="w-[1.2em] h-[1.2em] mr-1" /></span></>}
+                {saving ? "Guardando..." : <>Guardar cambios <span className="inline-flex"><Save className="w-[1.2em] h-[1.2em] mr-1" /></span></>}
               </Button>
             </div>
           </div>
@@ -361,8 +361,8 @@ export default function ProgresoPage() {
                     'desc': 'Panel global de rendimiento y calificaciones medias.'
           },
           'detalle': {
-                    'title': 'Detalle por Alumno',
-                    'desc': 'Progreso y trazabilidad detallada por alumno/a.'
+                    'title': 'Detalle por alumnado',
+                    'desc': 'Progreso y trazabilidad detallada por alumnado.'
           },
           'grupal': {
                     'title': 'Progreso Grupal',
@@ -861,7 +861,7 @@ export default function ProgresoPage() {
                                     else if (r.prop >= 50) bar_color = "#ffc107"; // Amarillo
 
                                     return (
-                                      <div key={idx} className="flex flex-col md:flex-row gap-4 items-start bg-background/30 p-4 rounded-xl border border-white/5">
+    <div key={idx} className="flex flex-col md:flex-row gap-4 items-start bg-background/30 p-4 rounded-xl border border-white/5">
                                         <div className="flex-1 w-full">
                                           <div className="mb-1.5 flex items-center gap-2">
                                             <span className="font-extrabold text-foreground">{r.id}</span>
@@ -927,6 +927,6 @@ export default function ProgresoPage() {
         </main>
       </div>
     </div>
-  );
+      );
 }
 

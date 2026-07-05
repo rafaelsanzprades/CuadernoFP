@@ -48,7 +48,7 @@ export function FileManagementPanel({
 <span><span className="inline-flex"><Settings className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Programación
 </h2>
             <p className="text-sm text-muted">
-              Activa la Programación Didáctica maestra (RAs, UDs, Tareas, etc.) que servirá de plantilla.
+              Activa la Programación didáctica maestra (RAs, UDs, Tareas, etc.) que servirá de plantilla.
             </p>
           </div>
 
@@ -81,7 +81,7 @@ export function FileManagementPanel({
           <div className="space-y-4">
             <div className="relative">
               <Input
-                label="Clonar/Crear nueva Programación"
+                label="Clonar/Crear nueva programación"
                 value={newPdName}
                 onChange={(e) => setNewPdName(e.target.value)}
                 placeholder="Ej: nuevo-modulo"
@@ -94,7 +94,7 @@ export function FileManagementPanel({
               variant="secondary"
               className="w-full"
             >
-              <span></span> Crear nueva Programación
+              <span></span> Crear nueva programación
             </Button>
           </div>
         </Card>

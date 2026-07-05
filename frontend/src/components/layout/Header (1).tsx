@@ -326,7 +326,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
                     useAppStore.getState().setPdFileSource({ type: 'none' });
                     useAppStore.getState().setCursoFileSource({ type: 'none' });
                     useAppStore.getState().setDataSource('local');
-                    toast.success("Modo Datos Reales activado");
+                    toast.success("Modo Datos reales activado");
                   } else {
                     await handleSave();
                   }

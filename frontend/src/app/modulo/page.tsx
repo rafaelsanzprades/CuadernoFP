@@ -1,4 +1,5 @@
 "use client";
+import { TabSync } from "@/components/ui/TabSync";
 import { Building2, FileEdit, FileText, Settings, Map, Target, CheckCircle2, Layers, Award, FolderOpen } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -18,10 +19,7 @@ import { Button } from "@/components/ui/Button";
 
 export default function ModuloConfigPage() {
   const { activeModuleId, moduleData, setModuleData } = useAppStore();
-  const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("datos");
-
-  useEffect(() => {
+  const [loading, setLoading] = useState(true);const [activeTab, setActiveTab] = useState("datos");useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeModuleId}`)
       .then(res => res.json())
       .then(json => {
@@ -60,6 +58,7 @@ export default function ModuloConfigPage() {
   if (!activeModuleId) {
     return (
       <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header breadcrumbSuffix={activeTabCleanLabel} />
@@ -138,5 +137,5 @@ export default function ModuloConfigPage() {
         </div>
       </div>
     </div>
-  );
+      );
 }

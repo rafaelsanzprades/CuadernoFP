@@ -1,4 +1,5 @@
 "use client";
+import { TabSync } from "@/components/ui/TabSync";
 import { AlertTriangle, BookOpen, CheckCircle, Cloud, Database, Download, FileJson, FolderOpen, Save, Shield, ShieldAlert, Sparkles, Upload, Users, Zap, Plus, Copy, HardDrive, Info } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -32,10 +33,7 @@ export default function ArchivosTrabajoPage() {
     } else {
       setWorkspaceFiles({ grupos: [], programaciones: [], cursos: [] });
     }
-  }, [workspaceHandle]);
-
-  const [activeTab, setActiveTab] = useState("datos");
-  const [wizardOpen, setWizardOpen] = useState(false);
+  }, [workspaceHandle]);const [activeTab, setActiveTab] = useState("datos");const [wizardOpen, setWizardOpen] = useState(false);
   const [wizardType, setWizardType] = useState<'programacion' | 'curso'>('programacion');
 
   const [validationModalOpen, setValidationModalOpen] = useState(false);
@@ -74,7 +72,7 @@ export default function ArchivosTrabajoPage() {
       useAppStore.getState().setCursoFileSource({ type: 'none' });
     }
     setDataSource("local");
-    toast.success("Cambiado a Datos Reales en local. Puedes crear o abrir archivos.");
+    toast.success("Cambiado a Datos reales en local. Puedes crear o abrir archivos.");
   };
 
   // ── NEW ─────────────────────────────────────────────────
@@ -261,7 +259,7 @@ export default function ArchivosTrabajoPage() {
   };
 
   const getFriendlyPdName = (pdKey: string) => {
-    if (pdKey === "imported-pd") return "Programación Importada";
+    if (pdKey === "imported-pd") return "Programación importada";
 
     if (useAppStore.getState().activeModuleId === pdKey && moduleData?.info_modulo) {
       const { codigo, nombre, titulo_codigo, ciclo } = moduleData.info_modulo;
@@ -350,6 +348,7 @@ export default function ArchivosTrabajoPage() {
 
   return (
     <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
       <div className="flex-1 flex flex-col h-screen min-w-0">
         <Header breadcrumbSuffix={breadcrumbSuffixMap[activeTab] ?? "Gestor de archivos"} />
@@ -388,7 +387,7 @@ export default function ArchivosTrabajoPage() {
                       setValidationModalOpen(true);
                     }}
                   >
-                    <ShieldAlert className="w-4 h-4 mr-2" /> Validar Workspace
+                    <ShieldAlert className="w-4 h-4 mr-2" /> Validar workspace
                   </Button>
                 )}
               </div>
@@ -577,7 +576,7 @@ export default function ArchivosTrabajoPage() {
                           workspaceFiles.cursos.map(c => {
                             const isActive = cursoFileSource.type === 'local' && cursoFileSource.fileName === c;
                             return (
-                              <button
+    <button
                                 key={c}
                                 onDoubleClick={() => {
                                   toast.error("Para abrir un curso de forma segura, haz doble clic en su Grupo asociado en la primera columna.");
@@ -757,7 +756,7 @@ export default function ArchivosTrabajoPage() {
 
 function handleLoadDemo() {
   fileManager.loadDemoData();
-  toast.success("Datos de demostración cargados correctamente.");
+  toast.success("Datos de demostración cargados correctamente."    );
 }
 
 

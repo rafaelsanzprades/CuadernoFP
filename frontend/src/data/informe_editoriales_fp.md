@@ -78,7 +78,7 @@
 - Actividades prácticas y casos reales
 - Recursos digitales complementarios
 - Adaptación a normativa LOMLOE
-- Materiales complementarios para el profesor
+- Materiales complementarios para el profesorado
 
 **Ejemplo de estructura de libro** (según documentación pública):
 ```
@@ -194,7 +194,7 @@ UD01: [Título temático]
 | Primeros Auxilios | - |
 
 **Características**:
-- Plataforma digital Advantage (recursos profesor)
+- Plataforma digital Advantage (recursos para el profesorado)
 - Versión impresa + digital (Blink Learning)
 - Módulos transversales disponibles
 - ISBN por familia profesional

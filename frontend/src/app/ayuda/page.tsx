@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { Activity, AlertTriangle, ArrowRight, BarChart2, BookOpen, Briefcase, Building2, CalendarDays, Check, CheckCircle, ClipboardList, FileText, GraduationCap, HeartHandshake, Layers, Users, Wrench, XCircle, ChevronDown, ListChecks, Info } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import Sidebar from "@/components/layout/Sidebar";
@@ -7,7 +7,11 @@ import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import Link from "next/link";
-import { useState } from "react";
+import { TabSync } from "@/components/ui/TabSync";
+import { useState, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { AIWizardModal } from "@/components/features/ai/AIWizardModal";
 import { AISettingsPanel } from "@/components/features/ai/AISettingsPanel";
@@ -56,42 +60,44 @@ function StatusIcon({ status }: { status: CheckStatus }) {
 
 function CheckCard({ item }: { item: CheckItem }) {
   return (
-    <Card className="p-5 border border-white/5 rounded-2xl bg-foreground/5 shadow space-y-3">
-      {/* Header */}
-      <div className="flex items-start gap-3">
-        <div className="mt-0.5 text-muted">{item.icon}</div>
-        <div className="flex-1 min-w-0">
-          <div className="flex flex-wrap items-center gap-2 mb-1">
-            <h3 className="font-bold text-foreground text-sm leading-tight">{item.title}</h3>
-            <StatusBadge status={item.status} />
+    <Card className="p-5 border border-white/5 rounded-2xl bg-foreground/5 shadow h-full">
+      <div className="flex flex-col h-full">
+        {/* Header */}
+        <div className="flex items-start gap-3 flex-1 mb-3">
+          <div className="mt-0.5 text-muted">{item.icon}</div>
+          <div className="flex-1 min-w-0">
+            <div className="flex flex-wrap items-center gap-2 mb-1">
+              <h3 className="font-bold text-foreground text-sm leading-tight">{item.title}</h3>
+              <StatusBadge status={item.status} />
+            </div>
+            {/* Detail lines */}
+            <ul className="space-y-0.5">
+              {item.lines.map((line, i) => (
+                <li key={i} className="text-sm text-muted flex items-start gap-1.5">
+                  <span className="text-foreground/40 font-bold px-1 mt-0.5">•</span>
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-          {/* Detail lines */}
-          <ul className="space-y-0.5">
-            {item.lines.map((line, i) => (
-              <li key={i} className="text-sm text-muted flex items-start gap-1.5">
-                <span className="text-foreground/40 font-bold px-1 mt-0.5">•</span>
-                <span>{line}</span>
-              </li>
-            ))}
-          </ul>
         </div>
-      </div>
-      {/* Action buttons */}
-      <div className="flex flex-wrap gap-2 pt-1 border-t border-white/5">
-        <Link
-          href={item.href}
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline"
-        >
-          Ir a {item.hrefLabel} <ArrowRight className="w-3.5 h-3.5" />
-        </Link>
-        {item.actionHref && item.actionLabel && (
+        {/* Action buttons */}
+        <div className="flex flex-wrap justify-end gap-2 pt-3 mt-auto border-t border-white/5">
           <Link
-            href={item.actionHref}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-lg border border-accent/30 bg-accent/10 text-accent hover:bg-accent/20 transition-all"
+            href={item.href}
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline"
           >
-            {item.actionLabel} <ArrowRight className="w-3.5 h-3.5" />
+            Ir a {item.hrefLabel} <ArrowRight className="w-3.5 h-3.5" />
           </Link>
-        )}
+          {item.actionHref && item.actionLabel && (
+            <Link
+              href={item.actionHref}
+              className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-lg border border-accent/30 bg-accent/10 text-accent hover:bg-accent/20 transition-all"
+            >
+              {item.actionLabel} <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          )}
+        </div>
       </div>
     </Card>
   );
@@ -114,106 +120,85 @@ function AccordionItem({ question, answer }: { question: string, answer: React.R
   );
 }
 
-const STEPS = [
-  {
-    title: "Paso 1: Configurar el Archivos",
-    desc: "Ve a la pantalla 'Archivos' y crea una nueva Programación Didáctica. Luego, crea un Curso y vincúlalo a esa programación para poder empezar a trabajar.",
-    links: [{ href: "/archivos", label: "Archivos" }]
-  },
-  {
-    title: "Paso 2: Detalles del Módulo",
-    desc: "Entra en 'Módulo' y rellena los datos básicos: nombre, código, horas totales y contexto del aula. Asegúrate de guardar los cambios.",
-    links: [{ href: "/modulo", label: "Módulo didáctico" }]
-  },
-  {
-    title: "Paso 3: Unidades y Resultados (Matrices)",
-    desc: "En la sección 'Matrices', define tus Unidades Didácticas (UD) y Resultados de Aprendizaje (RA). No olvides configurar los porcentajes de cada RA para que sumen 100%.",
-    links: [{ href: "/matrices", label: "Matrices OG→RA→CE→UD/T" }]
-  },
-  {
-    title: "Paso 4: Criterios de Evaluación",
-    desc: "También en 'Matrices', vincula cada Criterio de Evaluación (CE) a sus respectivos RA y UD.",
-    links: [{ href: "/matrices", label: "Matrices OG→RA→CE→UD/T" }]
-  },
-  {
-    title: "Paso 5: Instrumentos y Ponderaciones",
-    desc: "En 'Instrumentos', configura qué herramientas usarás para evaluar (ej. Exámenes, Trabajos, Observación) y asígnales el peso que tendrán dentro de cada RA.",
-    links: [{ href: "/instrumentos", label: "Instrumentos de evaluación" }]
-  },
-  {
-    title: "Paso 6: Añadir Alumnado",
-    desc: "Ve a 'Alumnado' y añade tu lista de estudiantes usando la tabla interactiva.",
-    links: [{ href: "/alumnado", label: "Alumnado y tutoría" }]
-  },
-  {
-    title: "Paso 7: Tareas y Seguimiento",
-    desc: "Por último, utiliza 'Programación' para planificar y 'Seguimiento' para llevar el día a día de tu aula. ¡Ya estás listo para arrancar el curso!",
-    links: [
-      { href: "/programacion", label: "Programación de aula" },
-      { href: "/seguimiento", label: "Seguimiento diario" }
-    ]
-  },
-];
-
 const FAQS = [
   {
-    group: "Seguridad y Gestión de Datos",
+    group: "1. Conceptos previos y seguridad",
     items: [
-      { q: "¿Qué es la arquitectura Híbrida (Local-First + Cloud)?", a: "Utilizamos una arquitectura moderna. Tus datos de trabajo (alumnos, notas) se procesan localmente en tu navegador garantizando privacidad, mientras que las operaciones pesadas (generación de informes PDF, Inteligencia Artificial y bases de datos centralizadas) se apoyan en un servidor seguro (Backend en Cloud Run)." },
-      { q: "¿Dónde se guardan mis datos?", a: "Los datos de tu Programación y progreso se procesan en tu navegador (IndexedDB) para darte fluidez, pero se respaldan y conectan de forma segura con el servidor central para tareas como la exportación documental. Sigues teniendo control total sobre la exportación (BYOC)." },
-      { q: "¿Cómo hago una copia de seguridad (backup)?", a: "Puedes exportar todos tus datos desde la sección 'Archivos' o utilizar la API central para copias de seguridad en servidor." },
-      { q: "¿Qué pasa si borro los datos o caché de mi navegador?", a: "Si usas múltiples dispositivos, la arquitectura centralizada permite a Firebase Hosting y al servidor backend almacenar configuraciones, pero siempre te recomendamos exportar tu trabajo a un archivo .json periódicamente para evitar pérdidas de trabajo no sincronizado." },
-      { q: "¿Puedo trabajar desde varios ordenadores?", a: "Sí. Para transferir el estado exacto del entorno entre navegadores que no comparten la sesión, puedes 'Exportar' tu progreso en el ordenador A y darle a 'Importar' en el ordenador B." }
+      { q: "¿Qué es la arquitectura Híbrida (Local-First + Cloud)?", a: "Utilizamos una arquitectura moderna. Tus datos de trabajo (alumnos, notas) se procesan localmente en tu navegador garantizando total privacidad y velocidad. Las operaciones pesadas (generación de informes PDF o conexión con Inteligencia Artificial) se apoyan de forma segura en un servidor central." },
+      { q: "¿Dónde se guardan mis datos?", a: "Los datos de tu Programación y tus Cursos residen en tu propio navegador (IndexedDB). Tú tienes el control absoluto sobre ellos. Por seguridad, te recomendamos usar frecuentemente la exportación de archivos (BYOC) desde la pestaña Archivos." },
+      { q: "¿Qué diferencia hay entre 'Programación' y 'Curso'?", a: "Es un concepto vital: La 'Programación' es tu molde teórico; contiene la ley pura (Resultados de Aprendizaje, Criterios de Evaluación) y tus Unidades didácticas (reutilizable año tras año). El 'Curso' es la instancia real; representa a un grupo concreto de alumnado de carne y hueso en un año escolar específico, con sus notas y ausencias." },
+      { q: "¿Qué pasa si borro los datos o la caché de mi navegador?", a: "Si borras la caché profunda del navegador sin haber exportado tus datos previamente, perderás tu trabajo. Por eso es vital usar el botón de 'Exportar' tu progreso a un archivo .json periódicamente para mantener copias de seguridad locales." },
+      { q: "¿Puedo trabajar desde varios ordenadores?", a: "Sí. Para transferir tu entorno entre el ordenador del instituto y tu portátil personal, solo tienes que 'Exportar' tu progreso en el ordenador A y darle a 'Importar' en el ordenador B." }
     ]
   },
   {
-    group: "Inicio de Curso y Configuración Básica",
+    group: "2. Paso 1: La programación didáctica",
     items: [
-      { q: "¿Qué diferencia hay entre 'Programación' y 'Curso'?", a: "La 'Programación' contiene las reglas del juego estáticas (Resultados de Aprendizaje, Criterios de Evaluación, Unidades Didácticas e Instrumentos) y se puede reusar en diferentes años. El 'Curso' representa a un grupo concreto de alumnos reales en un año escolar específico." },
-      { q: "¿Puedo importar alumnos desde Seneca, Rayuela o Excel?", a: "En la sección de 'Alumnado' puedes utilizar el formato CSV estándar para importar. Si no está disponible temporalmente, la tabla inteligente te permite copiar y pegar datos directamente como si fuera una hoja de cálculo." },
-      { q: "¿Tengo que meter a mano todos los RA y CE de mi módulo?", a: "Actualmente sí, debes introducirlos según la normativa vigente de tu ciclo (BOE/BOCAA). Estamos trabajando en una base de datos centralizada de Ciclos Formativos para poder autocompletar esto en el futuro." },
-      { q: "¿Qué significa que los RA no suman 100% en las verificaciones?", a: "Cada Resultado de Aprendizaje (RA) debe tener un 'peso' o importancia relativa en la nota final. La suma de todos los pesos de los RA de un módulo debe sumar exactamente 100%. Revisa esto en la pestaña 'Matrices'." }
+      { q: "¿Tengo que meter a mano todos los RA y CE del BOE?", a: "¡No! El sistema cuenta con un Catálogo oficial que importa automáticamente la normativa legal (Resultados de Aprendizaje y Criterios) de tu módulo. Solo tienes que elegir tu Grado y tu Ciclo Formativo en la sección inicial de Catálogo y el sistema lo hace por ti." },
+      { q: "¿Qué significa que los RA no suman 100% en las verificaciones?", a: "Para que la evaluación continua matemática funcione, cada Resultado de Aprendizaje (RA) debe tener un 'peso' o importancia. La suma total de los pesos de todos los RA de un módulo debe ser exactamente 100%. Debes ajustar esto en la pestaña 'Matrices'." }
     ]
   },
   {
-    group: "Desarrollo de las Clases y Seguimiento",
+    group: "3. Paso 3: Creación del curso y alumnado",
     items: [
-      { q: "¿Qué es el 'Diario de seguimiento'?", a: "Es tu cuaderno de bitácora en la pestaña 'Seguimiento'. Te permite anotar lo que ocurre en cada sesión real de clase: qué contenido se ha impartido, si ha habido incidencias generales y añadir notas privadas para el profesor." },
-      { q: "¿Cómo registro las horas sin docencia (claustros, huelgas, excursiones)?", a: "En el Diario de Seguimiento puedes marcar una sesión con el botón/flag de 'Sin docencia'. Automáticamente se descontarán estas horas en las gráficas de progreso real del módulo." },
-      { q: "¿Cómo paso lista o registro faltas de asistencia?", a: "Dentro de 'Seguimiento' encontrarás la pestaña 'Asistencia'. Allí verás la lista de alumnos y podrás marcar rápidamente con un clic si un alumno ha faltado, tiene un retraso o falta justificada para la sesión actual." }
+      { q: "¿Puedo importar alumnado desde plataformas como Seneca, Rayuela o un Excel?", a: "Sí. En la sección de 'Alumnado' puedes importar un archivo CSV (Excel) con tu lista de clase. Alternativamente, la tabla inteligente te permite copiar y pegar celdas masivamente, igual que si fuera una hoja de cálculo." },
+      { q: "¿Cómo distribuyo físicamente al alumnado en el aula?", a: "Dentro de 'Alumnado' encontrarás una pestaña de 'Plano de clase'. Es una pizarra visual e interactiva donde puedes arrastrar y soltar a los estudiantes a sus respectivos pupitres para tener el diseño exacto de tu clase." },
+      { q: "¿Cómo uso el sistema de Alertas de Abandono?", a: "El panel de prevención temprana te permite registrar llamadas a las familias, partes disciplinarios o derivaciones al departamento de orientación para alumnado con riesgo de abandono escolar." }
     ]
   },
   {
-    group: "Evaluación y Calificaciones",
+    group: "4. Paso 5: El día a día y la evaluación",
     items: [
-      { q: "¿Cómo evalúo una tarea o examen concreto?", a: "Ve a la sección 'Progreso' para introducir notas numéricas de las distintas tareas evaluables. También puedes hacerlo desde dentro de 'Alumnado', entrando en la Ficha Individual del estudiante." },
-      { q: "¿Cómo se calcula exactamente la nota final?", a: "El sistema cruza las calificaciones obtenidas en las tareas con el 'peso' de los Instrumentos de Evaluación que estés usando y el 'peso' global de cada Resultado de Aprendizaje (RA). Es un sistema de evaluación continua totalmente automatizado." },
-      { q: "¿Puedo generar informes o boletines para los alumnos?", a: "Sí. En 'Progreso' y en la Ficha Individual del Alumnado puedes visualizar y generar informes completos en PDF que justifican matemáticamente la nota final en base a los Criterios de Evaluación y los RA." },
-      { q: "¿Qué es la evaluación por Rúbricas?", a: "Dentro de 'Instrumentos' puedes configurar rúbricas detalladas para calificar tareas complejas (ej. Proyectos). Al usarlas, la nota se calculará sola según el nivel de logro seleccionado en la rúbrica." }
+      { q: "¿Qué es el 'Diario de seguimiento'?", a: "Es tu cuaderno de bitácora diario. Te permite anotar lo que ocurre en cada sesión real de clase: qué UD has impartido, si ha habido incidencias o marcar días 'Sin docencia' (como huelgas o claustros) para que no cuenten en tu progreso." },
+      { q: "¿Cómo paso lista o registro faltas de asistencia?", a: "En la sección de Seguimiento Diario tienes un 'Control de Asistencia'. Verás a todo tu alumnado y con un solo clic en su cuadrícula puedes alternar entre Falta, Retraso o Falta Justificada." },
+      { q: "¿Cómo evalúo una tarea o examen concreto?", a: "Ve a la sección 'Progreso' para introducir notas numéricas rápidas cruzando tareas con alumnado. También puedes hacerlo de forma más minuciosa entrando en la Ficha Individual de el alumnado dentro de 'Alumnado'." },
+      { q: "¿Cómo se calcula exactamente la nota final del trimestre?", a: "El sistema cruza las calificaciones que pones con el 'peso' que le diste a los Instrumentos de Evaluación (ej. 70% Examen, 30% Tareas) y el 'peso' global de cada Resultado de Aprendizaje (RA). Todo el cálculo se hace en tiempo real." }
     ]
   },
   {
-    group: "FCT, Dual y Archivos Profesional",
+    group: "5. Descargas y documentos oficiales",
     items: [
-      { q: "¿Qué es la sección FEOE?", a: "FEOE (Formación en Empresa u Organismo Equiparado) te permite gestionar la relación con empresas, convenios, tutores laborales y la asignación de alumnos para sus prácticas o FP Dual." },
-      { q: "¿Para qué sirve el módulo de Orientación Profesional?", a: "Te ayuda a hacer un seguimiento del perfil laboral de cada alumno, registrar sus preferencias, ayudarles en la elaboración del CV y registrar oportunidades laborales o contacto con empresas." }
+      { q: "¿Puedo generar boletines automáticos para los alumnos?", a: "Sí. Desde la sección de 'Descargas' puedes generar boletines en PDF masivos para toda la clase o resúmenes individuales hiperdetallados que justifican la nota en base a cada Criterio de Evaluación conseguido." }
     ]
   },
   {
-    group: "Solución de Problemas y Aspectos Técnicos",
+    group: "6. Módulos especiales (FCT y dual)",
     items: [
-      { q: "¿Qué pasa si las gráficas de la pantalla 'Hoy' no cargan?", a: "Comprueba en 'Archivos' que tienes seleccionada una Programación activa y un Curso activo. Las gráficas necesitan saber a qué módulo y a qué alumnos apuntan para poder dibujar la información." },
-      { q: "¿Se puede usar Cuaderno FP en móviles o tablets?", a: "Sí, el diseño es 100% responsivo. Sin embargo, para tareas densas como rellenar las grandes tablas de Matrices o planificar la Programación, te recomendamos usar pantallas de ordenador." },
-      { q: "La app va muy lenta o he detectado un error extraño", a: "Intenta recargar la página completamente (F5 o Ctrl+R). Si el error sigue apareciendo, exporta tus datos (.json) para ponerlos a salvo y ponte en contacto con el soporte o abre un 'Issue' en GitHub detallando tu problema." }
+      { q: "¿Qué es la sección Prácticas FEOE?", a: "FEOE (Formación en Empresa u Organismo Equiparado) es tu CRM para gestionar la relación con empresas, firmar convenios, asignar tutores laborales y ubicar a los alumnos en su fase de FP Dual o Prácticas." },
+      { q: "¿Para qué sirve el módulo de Orientación Profesional?", a: "Es una herramienta de tutoría que te ayuda a registrar el perfil laboral del alumnado, revisar sus CVs y hacer un seguimiento de sus preferencias o posibles ofertas de empleo tras titular." }
+    ]
+  },
+  {
+    group: "7. Soporte técnico",
+    items: [
+      { q: "¿Qué pasa si las gráficas de mi panel de control no cargan?", a: "Comprueba en la barra lateral que has activado el 'Modo Reales' y tienes seleccionado tu Grupo. Las gráficas necesitan saber a qué alumnado y a qué programación apuntan para poder analizar los datos." },
+      { q: "¿Se puede usar Cuaderno FP en el móvil?", a: "El diseño es responsivo y se adapta, pero por la densidad de información (tablas masivas de evaluación y matrices curriculares), te recomendamos encarecidamente utilizarlo en pantallas de ordenador o tabletas grandes." },
+      { q: "La app va muy lenta o he detectado un error extraño", a: "Intenta recargar la página completamente (F5 o Ctrl+R). Si el error sigue apareciendo, exporta tus datos (.json) inmediatamente para ponerlos a salvo y ponte en contacto con el soporte detallando los pasos para reproducir tu problema." }
     ]
   }
 ];
 
 // ── Página Principal ──────────────────────────────────────────────────────
 export default function AyudaPage() {
-  const { moduleData, cursoData, globalData, activeModuleId, activeCursoId } = useAppStore();
-  const [activeTab, setActiveTab] = useState("asistente");
+  const { moduleData, cursoData, globalData, activeModuleId, activeCursoId } = useAppStore();const [activeTab, setActiveTab] = useState("asistente");
   const [aiModalOpen, setAiModalOpen] = useState(false);
+  const [guiaContent, setGuiaContent] = useState<string>("");
+  const [isLoadingGuia, setIsLoadingGuia] = useState(false);useEffect(() => {
+    if (activeTab === "guia" && !guiaContent && !isLoadingGuia) {
+      setIsLoadingGuia(true);
+      fetch('/api/docs/guia')
+        .then(res => res.text())
+        .then(text => {
+          setGuiaContent(text);
+          setIsLoadingGuia(false);
+        })
+        .catch(err => {
+          console.error(err);
+          setGuiaContent("Error cargando la guía.");
+          setIsLoadingGuia(false);
+        });
+    }
+  }, [activeTab, guiaContent, isLoadingGuia]);
 
   // ── Comprobaciones Programación didáctica ────────────────────────────
   const m = moduleData;
@@ -305,7 +290,7 @@ export default function AyudaPage() {
         ? ["No hay RA definidos"]
         : [
           `${raCount} RA definidos`,
-          `Suma de pesos: ${raPesoSum.toFixed(1)}% ${Math.abs(raPesoSum - 100) > 1 ? <><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> no suman 100%</> : <><span className="inline-flex"><Check className="w-[1.2em] h-[1.2em] mr-1" /></span></>}`,
+          `Suma de pesos: ${raPesoSum.toFixed(1)}% ${Math.abs(raPesoSum - 100) > 1 ? "(⚠️ no suman 100%)" : "(✅)"}`,
         ],
       actionHref: raCount === 0 ? "/matrices" : undefined,
       actionLabel: raCount === 0 ? "Añadir primer RA" : undefined,
@@ -376,20 +361,6 @@ export default function AyudaPage() {
       actionLabel: sesionesCount === 0 ? "Planificar sesiones" : undefined,
     },
     {
-      id: "calendario",
-      icon: <CalendarDays className="w-5 h-5" />,
-      title: "Calendario académico",
-      href: "/calendario",
-      hrefLabel: "Calendario académico",
-      status: !tieneHorario && !tieneFechas ? "empty" : (!tieneHorario || !tieneFechas) ? "warning" : "ok",
-      lines: [
-        tieneHorario ? "Horario semanal definido" : "Sin horario semanal",
-        tieneFechas ? "Fechas de evaluación configuradas" : "Sin fechas de evaluación",
-      ],
-      actionHref: !tieneHorario ? "/calendario" : undefined,
-      actionLabel: !tieneHorario ? "Configurar calendario" : undefined,
-    },
-    {
       id: "contexto",
       icon: <BookOpen className="w-5 h-5" />,
       title: "Contexto del módulo",
@@ -415,11 +386,26 @@ export default function AyudaPage() {
   const alumnosAsignados = (globalData?.crm_empresas ?? []).reduce((a: number, e: any) => a + (e.alumnado_asignados?.length ?? 0), 0);
   const tieneProfesional = !!(c?.profesional_ledger && Object.keys(c.profesional_ledger).length > 0);
   const tutoriaEntradas = Object.keys(c?.tutoria_ledger ?? {}).length;
+  const planoCount = Object.keys(c?.plano_clase ?? {}).length;
 
   const evalCount = c?.df_eval?.length ?? 0;
   const evalTotal = alumnosCount;
 
   const courseChecks: CheckItem[] = [
+    {
+      id: "calendario",
+      icon: <CalendarDays className="w-5 h-5" />,
+      title: "Calendario académico",
+      href: "/calendario",
+      hrefLabel: "Calendario académico",
+      status: !tieneHorario && !tieneFechas ? "empty" : (!tieneHorario || !tieneFechas) ? "warning" : "ok",
+      lines: [
+        tieneHorario ? "Horario semanal definido" : "Sin horario semanal",
+        tieneFechas ? "Fechas de evaluación configuradas" : "Sin fechas de evaluación",
+      ],
+      actionHref: !tieneHorario ? "/calendario" : undefined,
+      actionLabel: !tieneHorario ? "Configurar calendario" : undefined,
+    },
     {
       id: "alumnado",
       icon: <Users className="w-5 h-5" />,
@@ -499,15 +485,28 @@ export default function AyudaPage() {
     {
       id: "tutoria",
       icon: <HeartHandshake className="w-5 h-5" />,
-      title: "Tutoría",
+      title: "Tutoría y alertas",
       href: "/alumnado",
       hrefLabel: "Alumnado y tutoría",
       status: tutoriaEntradas === 0 ? "empty" : "ok",
       lines: tutoriaEntradas === 0
-        ? ["Sin entradas de tutoría registradas"]
+        ? ["Sin entradas de tutoría o alertas registradas"]
         : [`${tutoriaEntradas} entradas de tutoría registradas`],
       actionHref: tutoriaEntradas === 0 ? "/alumnado" : undefined,
       actionLabel: tutoriaEntradas === 0 ? "Registrar tutoría" : undefined,
+    },
+    {
+      id: "plano",
+      icon: <Users className="w-5 h-5" />,
+      title: "Plano de clase",
+      href: "/alumnado",
+      hrefLabel: "Plano de clase",
+      status: planoCount === 0 ? "empty" : "ok",
+      lines: planoCount === 0
+        ? ["No hay alumnos ubicados en el plano"]
+        : [`${planoCount} alumnos ubicados en el aula visual`],
+      actionHref: planoCount === 0 ? "/alumnado" : undefined,
+      actionLabel: planoCount === 0 ? "Diseñar aula" : undefined,
     },
   ];
 
@@ -527,6 +526,7 @@ export default function AyudaPage() {
 
   return (
     <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
       <AIWizardModal
         isOpen={aiModalOpen}
@@ -576,12 +576,12 @@ export default function AyudaPage() {
           },
           'faq': {
                     'title': 'Preguntas Frecuentes',
-                    'desc': 'Respuestas a las preguntas más frecuentes de los docentes.'
+                    'desc': 'Respuestas a las preguntas más frecuentes de el profesorado.'
           }
 };
                 const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
                 return (
-                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
+    <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
                     <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
                     <div>
                       <p className="text-sm text-muted">{info.desc}</p>
@@ -599,7 +599,7 @@ export default function AyudaPage() {
                     className="text-base font-semibold flex items-center justify-center gap-3 bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 px-8 py-6 h-auto rounded-xl transition-all relative overflow-hidden w-full max-w-lg"
                   >
                     <Sparkles className="w-6 h-6 text-accent shrink-0" />
-                    <span className="flex-1 text-left">Crear Nueva Programación con IA (PDF)</span>
+                    <span className="flex-1 text-left">Crear nueva programación con IA (PDF)</span>
                     <span className="flex items-center gap-1 bg-warning/20 text-warning px-2 py-1 rounded text-[10px] font-bold uppercase border border-warning/30 shrink-0"><AlertTriangle className="w-3 h-3" /> Beta</span>
                   </Button>
                 </div>
@@ -646,14 +646,7 @@ export default function AyudaPage() {
             {/* ── CONTENIDO: VERIFICACIÓN ──────────────────────────────── */}
             {activeTab === "verificacion" && (
               <div className="space-y-4 animate-in fade-in duration-500">
-                <div className="flex flex-wrap gap-2 text-sm text-muted">
-                  <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1">
-                    Programación Activa: <span className="font-semibold text-foreground">{activeModuleId || "-"}</span>
-                  </span>
-                  <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1">
-                    Curso Activo: <span className="font-semibold text-foreground">{activeCursoId || "-"}</span>
-                  </span>
-                </div>
+
 
                 <div className="grid grid-cols-3 gap-4">
                   <Card className="p-4 border border-success/30 bg-success/10 rounded-2xl text-center">
@@ -674,10 +667,15 @@ export default function AyudaPage() {
                 </div>
 
                 <div className="space-y-4">
-                  <h2 className="text-base font-bold text-foreground flex items-center gap-2 border-b border-white/5 pb-2">
-                    <BookOpen className="w-4 h-4 text-accent" />
-                    Programación didáctica
-                  </h2>
+                  <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
+                    <h2 className="text-base font-bold text-foreground flex items-center gap-2">
+                      <BookOpen className="w-4 h-4 text-accent" />
+                      Programación didáctica
+                    </h2>
+                    <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-xs text-muted">
+                      Programación activa: <span className="font-semibold text-foreground">{activeModuleId || "-"}</span>
+                    </span>
+                  </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                     {moduleChecks.map(item => (
                       <CheckCard key={item.id} item={item} />
@@ -686,10 +684,15 @@ export default function AyudaPage() {
                 </div>
 
                 <div className="space-y-4">
-                  <h2 className="text-base font-bold text-foreground flex items-center gap-2 border-b border-white/5 pb-2">
-                    <Users className="w-4 h-4 text-accent" />
-                    Curso activo
-                  </h2>
+                  <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
+                    <h2 className="text-base font-bold text-foreground flex items-center gap-2">
+                      <Users className="w-4 h-4 text-accent" />
+                      Curso activo
+                    </h2>
+                    <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-xs text-muted">
+                      Curso Activo: <span className="font-semibold text-foreground">{activeCursoId || "-"}</span>
+                    </span>
+                  </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                     {courseChecks.map(item => (
                       <CheckCard key={item.id} item={item} />
@@ -702,32 +705,33 @@ export default function AyudaPage() {
             {/* ── CONTENIDO: GUÍA PASO A PASO ───────────────────────────── */}
             {activeTab === "guia" && (
               <div className="space-y-3 animate-in fade-in duration-500 w-full">
-                <Card glow className="p-6">
-                  <h2 className="text-xl font-bold mb-6 text-accent">Cómo empezar a usar la aplicación desde cero</h2>
-                  <div className="relative border-l-2 border-[var(--glass-border)] ml-3 space-y-4 pl-8 py-2">
-                    {STEPS.map((step, idx) => (
-                      <div key={idx} className="relative">
-                        <div className="absolute -left-[41px] top-0 w-8 h-8 rounded-full bg-accent/20 border-2 border-accent flex items-center justify-center text-sm font-bold text-accent">
-                          {idx + 1}
-                        </div>
-                        <h3 className="text-lg font-bold text-foreground mb-2">{step.title}</h3>
-                        <p className="text-muted leading-relaxed mb-3">{step.desc}</p>
-                        {step.links && step.links.length > 0 && (
-                          <div className="flex flex-wrap gap-3">
-                            {step.links.map((link, i) => (
-                              <Link
-                                key={i}
-                                href={link.href}
-                                className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border border-accent/30 bg-accent/10 text-accent hover:bg-accent/20 transition-all"
-                              >
-                                {link.label} <ArrowRight className="w-3.5 h-3.5" />
-                              </Link>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
+                <Card glow className="p-8">
+                  {isLoadingGuia && !guiaContent ? (
+                    <div className="flex justify-center p-8 text-muted">Cargando guía...</div>
+                  ) : (
+                    <div className="markdown-body">
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        rehypePlugins={[rehypeRaw]}
+                        components={{
+                          h1: ({node, ...props}) => <h1 className="text-2xl font-extrabold text-foreground mb-6 pb-2 border-b border-white/10" {...props} />,
+                          h2: ({node, ...props}) => <h2 className="text-xl font-bold text-accent mt-8 mb-4 flex items-center gap-2" {...props} />,
+                          h3: ({node, ...props}) => <h3 className="text-lg font-bold text-foreground mt-6 mb-3" {...props} />,
+                          p: ({node, ...props}) => <p className="text-muted leading-relaxed mb-4" {...props} />,
+                          ul: ({node, className, ...props}) => <ul className={`list-none space-y-3 mb-6 ml-4 ${className || ''}`} {...props} />,
+                          ol: ({node, className, ...props}: any) => <ol className={`list-decimal space-y-3 mb-6 ml-6 ${className || ''}`} {...props} />,
+                          li: ({node, ...props}) => <li className="text-sm text-muted leading-relaxed" {...props} />,
+                          strong: ({node, ...props}) => <strong className="font-bold text-foreground" {...props} />,
+                          a: ({node, ...props}) => <a className="text-accent hover:underline font-semibold" target="_blank" rel="noopener noreferrer" {...props} />,
+                          code: ({node, ...props}: any) => <code className="bg-foreground/10 text-foreground px-1.5 py-0.5 rounded text-sm font-mono" {...props} />,
+                          pre: ({node, ...props}: any) => <pre className="block bg-foreground/5 p-4 rounded-xl text-sm font-mono overflow-x-auto mb-4 border border-white/5 text-muted" {...props} />,
+                          hr: ({node, ...props}) => <hr className="border-white/10 my-8" {...props} />,
+                        }}
+                      >
+                        {guiaContent}
+                      </ReactMarkdown>
+                    </div>
+                  )}
                 </Card>
               </div>
             )}
@@ -754,6 +758,6 @@ export default function AyudaPage() {
         </div>
       </div>
     </div>
-  );
+      );
 }
 

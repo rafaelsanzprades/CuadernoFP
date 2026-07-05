@@ -85,7 +85,7 @@ export function PlanesTab() {
           </table>
         </div>
         <button onClick={() => addRow(df_dua, "df_dua", "DUA", { Alumnado_Aula: "", Barrera: "", Medida_Metodologica: "", Medida_Acceso: "", Medida_Evaluacion: "" })} className="text-sm text-success hover:text-success font-semibold flex items-center gap-1">
-          <span>+</span> Añadir Medida de Diversidad
+          <span>+</span> Añadir medida de Diversidad
         </button>
       </section>
 
@@ -136,7 +136,7 @@ export function PlanesTab() {
           </table>
         </div>
         <button onClick={() => addRow(df_contingencia, "df_contingencia", "PC", { Escenario: "Otros", Organizacion: "", Actividades: "", Seguimiento: "" })} className="text-sm text-warning hover:text-warning font-semibold flex items-center gap-1">
-          <span>+</span> Añadir Medida de Contingencia
+          <span>+</span> Añadir medida de Contingencia
         </button>
       </section>
 
@@ -200,7 +200,7 @@ export function PlanesTab() {
           </table>
         </div>
         <button onClick={() => addRow(df_ace, "df_ace", "ACE", { Tipo: "Complementaria", RA_Vinculados: "", Actividad: "", Trimestre: "1T", Entidad: "", Evaluacion: "" })} className="text-sm text-[#14a085] hover:text-[#1abc9c] font-semibold flex items-center gap-1">
-          <span>+</span> Añadir Actividad Complementaria
+          <span>+</span> Añadir actividad complementaria
         </button>
       </section>
     </div>

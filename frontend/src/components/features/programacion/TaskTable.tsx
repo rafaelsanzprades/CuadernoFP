@@ -57,7 +57,7 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
                   <button
                     onClick={() => handleDeleteTarea(globalIdx)}
                     className="text-danger hover:text-danger font-bold"
-                    title="Eliminar Tarea"
+                    title="Eliminar tarea"
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -72,7 +72,7 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
           onClick={handleAddTarea}
           className="text-sm text-info hover:text-info font-semibold flex items-center gap-1"
         >
-          <Plus className="w-4 h-4" /> Añadir Nueva Tarea Competencial
+          <Plus className="w-4 h-4" /> Añadir nueva tarea competencial
         </button>
       </div>
     </div>

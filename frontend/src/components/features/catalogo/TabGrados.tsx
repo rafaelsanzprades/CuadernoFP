@@ -6,7 +6,7 @@ import { useAppStore } from "@/store/useAppStore";
 /**
  * TAB "Grados" en /modulo
  * Muestra los 5 grados formativos (A-E) según la Ley 3/2022
- * y permite al docente seleccionar el grado de su módulo.
+ * y permite al profesorado seleccionar el grado de su módulo.
  */
 
 const GRADOS = [
@@ -75,21 +75,7 @@ export function TabGrados() {
         </div>
       </div>
 
-      {/* Info del grado seleccionado */}
-      <Card className="p-4">
-        <div className="flex items-center gap-3">
-          <Award className="w-5 h-5 text-accent" />
-          <div>
-            <p className="text-sm font-semibold text-foreground">
-              Grado seleccionado: <span className="text-accent">Grado {gradoActual}</span>
-            </p>
-            <p className="text-xs text-muted mt-1">
-              {GRADOS.find((g) => g.grado === gradoActual)?.nombre}
-              {gradoActual === "D" && " - Tu módulo actual pertenece a este grado."}
-            </p>
-          </div>
-        </div>
-      </Card>
+
 
       {/* Tarjetas de grados */}
       <Card className="p-6">

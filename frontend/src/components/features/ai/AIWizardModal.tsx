@@ -82,7 +82,7 @@ export function AIWizardModal({ isOpen, onClose, onSuccess }: AIWizardModalProps
               <Sparkles className="w-5 h-5 text-accent" />
             </div>
             <div>
-              <h2 className="text-xl font-extrabold text-foreground tracking-tight">Asistente Mágico IA</h2>
+              <h2 className="text-xl font-extrabold text-foreground tracking-tight">Asistente mágico IA</h2>
               <p className="text-sm text-muted">Sube tu currículo en PDF para extraer la programación</p>
             </div>
           </div>
@@ -117,7 +117,7 @@ export function AIWizardModal({ isOpen, onClose, onSuccess }: AIWizardModalProps
                 {isDragActive ? "Suelta el PDF aquí" : "Arrastra tu currículo (BOE/BOA) en PDF"}
               </h3>
               <p className="text-sm text-muted max-w-md mx-auto">
-                O haz clic para seleccionar el archivo. La Inteligencia Artificial lo leerá y extraerá automáticamente todos los RAs, Criterios de Evaluación y Unidades Didácticas.
+                O haz clic para seleccionar el archivo. La Inteligencia Artificial lo leerá y extraerá automáticamente todos los RAs, Criterios de Evaluación y Unidades didácticas.
               </p>
             </div>
           ) : (

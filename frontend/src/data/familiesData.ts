@@ -759,7 +759,7 @@ export const familias_completas = [
     "degrees": [
       {
         "id": 43,
-        "name": "Técnico Superior en Animaciones 3D, Juegos y Archivoss Interactivos",
+        "name": "Técnico Superior en Animaciones 3D, Juegos y Archivos interactivos",
         "code": "IMS-43",
         "level": "SUPERIOR"
       },
