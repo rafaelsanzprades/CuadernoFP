@@ -182,7 +182,7 @@ export default function SeguimientoPage() {
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-4">
             <div>
-              <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
+              <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <MapPin className="w-6 h-6 text-accent" /> Seguimiento diario
               </h1>
               <p className="text-muted mt-2 text-base">Diario de aula, contingencias, control de asistencia y alertas.</p>

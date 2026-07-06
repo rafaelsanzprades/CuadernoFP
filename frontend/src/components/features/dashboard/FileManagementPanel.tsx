@@ -44,7 +44,7 @@ export function FileManagementPanel({
         {/* Tarjeta de Programación */}
         <Card className="h-full p-6 border-t-4 border-t-accent flex flex-col gap-6 transform transition-all duration-300 hover:shadow-2xl hover:shadow-accent/10">
           <div>
-            <h2 className="text-[1.1rem] font-bold flex items-center gap-2 text-foreground mb-2">
+            <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-2">
 <span><span className="inline-flex"><Settings className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Programación
 </h2>
             <p className="text-sm text-muted">
@@ -102,7 +102,7 @@ export function FileManagementPanel({
         {/* Tarjeta de Curso */}
         <Card className="h-full p-6 border-t-4 border-t-blue-500 flex flex-col gap-6 transform transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10">
           <div>
-            <h2 className="text-[1.1rem] font-bold flex items-center gap-2 text-foreground mb-2">
+            <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-2">
 <span><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Curso
 </h2>
             <p className="text-sm text-muted">

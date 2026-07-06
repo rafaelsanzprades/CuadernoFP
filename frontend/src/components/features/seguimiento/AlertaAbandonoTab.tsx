@@ -88,17 +88,6 @@ export function AlertaAbandonoTab() {
   return (
     <div className="space-y-6">
       {/* Info */}
-      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20">
-        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-        <div>
-          <p className="text-sm font-semibold text-foreground">Alerta temprana de abandono - Indicador 1.5</p>
-          <p className="text-sm text-muted mt-1">
-            Detección de alumnado en riesgo de abandono según el Sistema Estatal de Indicadores.
-            Criterio: &lt;3 asistencias en primeras 2 semanas, &gt;30% faltas, o sin evaluación positiva.
-          </p>
-        </div>
-      </div>
-
       {/* Estadísticas */}
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
         <Card className="p-4 flex items-center gap-3">
@@ -169,7 +158,7 @@ export function AlertaAbandonoTab() {
                     <TrendingDown className="w-3 h-3" /> {alumno.pctAsistencia.toFixed(0)}% asistencia
                   </span>
                   <span
-                    className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                    className={`px-2 py-0.5 rounded-full text-[0.625rem] font-bold ${
                       alumno.riesgo === "alto"
                         ? "bg-red-500/20 text-red-500"
                         : "bg-amber-500/20 text-amber-500"

@@ -42,7 +42,7 @@ export function RaOgMatrix() {
 
   return (
     <Card className="p-6 border-l-4 border-l-blue-500 overflow-hidden animate-in fade-in duration-500">
-      <h2 className="text-[1.1rem] font-bold flex items-center gap-2 text-foreground mb-6">
+      <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-6">
         <LinkIcon className="w-5 h-5 text-info" /> Contribución de los RA a los OG del Título
       </h2>
       

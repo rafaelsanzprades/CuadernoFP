@@ -311,7 +311,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
                   disabled={isCreating}
                   className="bg-warning/5 border border-warning/20 rounded-xl p-6 text-center hover:bg-warning/10 hover:border-warning/40 transition-all group relative overflow-hidden"
                 >
-                  <div className="absolute top-0 right-0 bg-warning text-warning-foreground text-[10px] font-bold px-2 py-1 rounded-bl-lg">
+                  <div className="absolute top-0 right-0 bg-warning text-warning-foreground text-[0.625rem] font-bold px-2 py-1 rounded-bl-lg">
                     RECOMENDADO
                   </div>
                   <BookOpen className="w-12 h-12 text-warning/60 mx-auto mb-3 group-hover:text-warning transition-colors" />

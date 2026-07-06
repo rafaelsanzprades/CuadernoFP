@@ -31,17 +31,10 @@ export function PlanesTab() {
 
   return (
     <>
-      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-        <div>
-          <p className="text-sm font-semibold text-foreground">Planes y Proyectos - RD 659/2023</p>
-          <p className="text-sm text-muted mt-1">Integración de planes institucionales en la programación didáctica.</p>
-        </div>
-      </div>
-<div className="space-y-8 animate-in fade-in duration-500">
+      <div className="space-y-8 animate-in fade-in duration-500">
       {/* DUA */}
       <section className="glass-card p-6 border-t-4 border-t-emerald-500">
-        <h2 className="text-[1.1rem] font-bold flex items-center gap-2 text-foreground mb-4">
+        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
           <span className="inline-flex"><Puzzle className="w-[1.2em] h-[1.2em] mr-1" /></span> Plan de Atención a la diversidad
         </h2>
         <div className="overflow-x-auto mb-4">
@@ -91,7 +84,7 @@ export function PlanesTab() {
 
       {/* Contingencia */}
       <section className="glass-card p-6 border-t-4 border-t-orange-500">
-        <h2 className="text-[1.1rem] font-bold flex items-center gap-2 text-foreground mb-4">
+        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
           <span className="inline-flex"><Shield className="w-[1.2em] h-[1.2em] mr-1" /></span> Plan de Contingencia
         </h2>
         <div className="overflow-x-auto mb-4">
@@ -142,7 +135,7 @@ export function PlanesTab() {
 
       {/* ace */}
       <section className="glass-card p-6 border-t-4 border-t-[#14a085]">
-        <h2 className="text-[1.1rem] font-bold flex items-center gap-2 text-foreground mb-4">
+        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
           <span className="inline-flex"><Bus className="w-[1.2em] h-[1.2em] mr-1" /></span> Plan de Actividades complementarias
         </h2>
         <div className="overflow-x-auto mb-4">

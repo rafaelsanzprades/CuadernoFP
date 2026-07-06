@@ -20,7 +20,7 @@ export default function LegalPage() {const [activeTab, setActiveTab] = useState(
 
             {/* Header Title */}
             <div>
-              <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
+              <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <Scale className="w-[1.2em] h-[1.2em] mr-1 text-accent" /> Legal
               </h1>
               <p className="text-muted mt-2 text-lg">Aviso legal, privacidad y licencias.</p>
@@ -32,19 +32,28 @@ export default function LegalPage() {const [activeTab, setActiveTab] = useState(
                 <TabsTrigger value="licencia">Licencia y términos</TabsTrigger>
               </TabsList>
             </Tabs>
-      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-        <div>
-          <p className="text-sm font-semibold text-foreground">Aspectos legales genéricos</p>
-          <p className="text-sm text-muted mt-1">Aviso legal, privacidad, cookies y licencias de la plataforma.</p>
-        </div>
-      </div>
+
+            {(() => {
+              const infoMap: Record<string, {desc: string}> = {
+                'aviso': { desc: 'Condiciones de uso, propiedad intelectual (LPI) y LSSI-CE.' },
+                'licencia': { desc: 'Términos de licencia, restricciones y condiciones de distribución.' }
+              };
+              const info = infoMap[activeTab] || { desc: 'Información legal.' };
+              return (
+                <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
+                  <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
+                  <div>
+                    <p className="text-sm text-muted">{info.desc}</p>
+                  </div>
+                </div>
+              );
+            })()}
 
             {activeTab === "aviso" && (
               <div className="space-y-12 animate-in fade-in duration-500">
                 {/* Aviso Legal - Edge to edge, no cards/borders */}
                 <div className="space-y-4">
-                  <h2 className="text-[1.1rem] font-bold text-foreground border-b border-[var(--glass-border)] pb-2">1. Aviso Legal</h2>
+                  <h2 className="text-lg font-bold text-foreground border-b border-[var(--glass-border)] pb-2">1. Aviso Legal</h2>
                   <p className="text-sm text-foreground/80 leading-relaxed">
                     En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y Comercio Electrónico (LSSI-CE), se exponen los siguientes datos identificativos del titular:
                   </p>
@@ -58,7 +67,7 @@ export default function LegalPage() {const [activeTab, setActiveTab] = useState(
 
                 {/* Política de Privacidad & RGPD */}
                 <div className="space-y-3">
-                  <h2 className="text-[1.1rem] font-bold text-foreground border-b border-[var(--glass-border)] pb-2">2. Política de Privacidad y RGPD</h2>
+                  <h2 className="text-lg font-bold text-foreground border-b border-[var(--glass-border)] pb-2">2. Política de Privacidad y RGPD</h2>
                   
                   <div className="flex items-start gap-3 mb-6">
                     <span className="text-success mt-1"><Shield className="w-5 h-5" /></span>
@@ -102,7 +111,7 @@ export default function LegalPage() {const [activeTab, setActiveTab] = useState(
 
                 {/* Política de Cookies */}
                 <div className="space-y-4">
-                  <h2 className="text-[1.1rem] font-bold text-foreground border-b border-[var(--glass-border)] pb-2">3. Política de Cookies y Almacenamiento Local</h2>
+                  <h2 className="text-lg font-bold text-foreground border-b border-[var(--glass-border)] pb-2">3. Política de Cookies y Almacenamiento Local</h2>
                   <p className="text-sm text-foreground/80 leading-relaxed">
                     Esta aplicación web no utiliza cookies de rastreo, publicidad ni analíticas de terceros.
                   </p>
@@ -120,7 +129,7 @@ export default function LegalPage() {const [activeTab, setActiveTab] = useState(
                     <ShieldCheck className="w-6 h-6" />
                   </div>
                   <div className="flex flex-col items-start gap-1">
-                    <p className="text-foreground text-[0.95rem] font-medium">
+                    <p className="text-foreground text-base font-medium">
                       Filosofía abierta, gratuita y accesible para el profesorado de Formación Profesional.
                     </p>
                     <a 
@@ -137,7 +146,7 @@ export default function LegalPage() {const [activeTab, setActiveTab] = useState(
 
                 <div className="space-y-10">
                   <section className="space-y-4">
-                    <h2 className="text-[1.1rem] font-bold text-foreground border-b border-[var(--glass-border)] pb-2">1. Código Fuente (Software)</h2>
+                    <h2 className="text-lg font-bold text-foreground border-b border-[var(--glass-border)] pb-2">1. Código Fuente (Software)</h2>
                     <p className="text-sm text-foreground/80 leading-relaxed">
                       El código fuente de esta aplicación web es de código abierto. Se distribuye bajo los términos de la <strong>Licencia Pública General de GNU versión 3 (GNU GPLv3)</strong>.
                     </p>
@@ -161,7 +170,7 @@ export default function LegalPage() {const [activeTab, setActiveTab] = useState(
                   </section>
 
                   <section className="space-y-4">
-                    <h2 className="text-[1.1rem] font-bold text-foreground border-b border-[var(--glass-border)] pb-2">2. Contenido, Interfaz y Materiales Didácticos</h2>
+                    <h2 className="text-lg font-bold text-foreground border-b border-[var(--glass-border)] pb-2">2. Contenido, Interfaz y Materiales Didácticos</h2>
                     <p className="text-sm text-foreground/80 leading-relaxed">
                       Todos los textos, guías explicativas, estructura visual de la interfaz, logotipos y materiales de ayuda incluidos en esta web están protegidos bajo una licencia <strong>Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</strong>.
                     </p>
@@ -176,7 +185,7 @@ export default function LegalPage() {const [activeTab, setActiveTab] = useState(
                   </section>
 
                   <section className="space-y-4">
-                    <h2 className="text-[1.1rem] font-bold text-foreground border-b border-[var(--glass-border)] pb-2">3. Resumen Práctico para el Profesorado</h2>
+                    <h2 className="text-lg font-bold text-foreground border-b border-[var(--glass-border)] pb-2">3. Resumen Práctico para el Profesorado</h2>
                     <div className="mt-4">
                       <table className="w-full text-sm text-left border-collapse">
                         <thead className="text-foreground/90 border-b border-[var(--glass-border)]">

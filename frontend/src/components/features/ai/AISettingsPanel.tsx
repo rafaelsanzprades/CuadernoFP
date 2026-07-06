@@ -60,7 +60,7 @@ export function AISettingsPanel() {
             onChange={(e) => setApiKey(e.target.value)}
             className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-base text-foreground font-mono focus:outline-none focus:ring-2 focus:ring-accent transition-all"
           />
-          <p className="text-[0.75rem] text-muted ml-1">
+          <p className="text-xs text-muted ml-1">
             Tu clave se guarda de forma segura en tu navegador y nunca se comparte con terceros.
           </p>
         </div>

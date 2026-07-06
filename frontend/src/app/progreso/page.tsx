@@ -322,7 +322,7 @@ export default function ProgresoPage() {
           <MotionWrapper className="space-y-3 pb-12">
             <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
+              <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <span className="inline-flex"><TrendingUp className="w-[1.2em] h-[1.2em] mr-1" /></span> Progreso académico
               </h1>
               <p className="text-muted mt-2 text-lg">Calificaciones, evaluación de RA y analíticas.</p>
@@ -871,7 +871,7 @@ export default function ProgresoPage() {
 
                                           <div className="w-full bg-background/50 rounded-full h-4.5 border border-white/5 overflow-hidden">
                                             <div
-                                              className="h-full rounded-full transition-all duration-500 flex items-center justify-end pr-2 text-[10px] font-black text-foreground shadow-[inset_0_2px_4px_rgba(255,255,255,0.2)]"
+                                              className="h-full rounded-full transition-all duration-500 flex items-center justify-end pr-2 text-[0.625rem] font-black text-foreground shadow-[inset_0_2px_4px_rgba(255,255,255,0.2)]"
                                               style={{ width: `${Math.max(r.prop, 5)}%`, backgroundColor: bar_color }}
                                             >
                                               {r.prop > 15 ? `${r.prop.toFixed(0)}%` : ''}
@@ -879,7 +879,7 @@ export default function ProgresoPage() {
                                           </div>
                                         </div>
 
-                                        <div className="w-full md:w-60 bg-foreground/5 border border-white/5 rounded-lg p-2.5 text-[10px] text-foreground/80 space-y-1 self-stretch flex flex-col justify-center">
+                                        <div className="w-full md:w-60 bg-foreground/5 border border-white/5 rounded-lg p-2.5 text-[0.625rem] text-foreground/80 space-y-1 self-stretch flex flex-col justify-center">
                                           <div className="flex justify-between">
                                             <span className="text-info font-semibold">Evaluado en:</span>
                                             <span>{r.tris.join(", ") || "-"}</span>

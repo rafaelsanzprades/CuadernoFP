@@ -147,11 +147,11 @@ export default function Sidebar() {
       <div className={`px-4 pt-4 pb-2 flex ${isSidebarOpen ? 'justify-between' : 'justify-center'} items-start`}>
         {isSidebarOpen && (
           <div className="flex flex-col mb-3">
-            <Link href="/inicio" onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}>
-              <h1 className="text-[1.3rem] font-extrabold leading-tight text-foreground hover:text-info transition-colors tracking-tight whitespace-nowrap cursor-pointer">
-                Cuaderno FP
-              </h1>
-            </Link>
+              <Link href="/inicio" onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}>
+                <h1 className={`text-xl font-extrabold leading-tight transition-colors tracking-tight whitespace-nowrap cursor-pointer ${dataSource === 'demo' ? 'text-warning hover:text-white' : 'text-success hover:text-white'}`}>
+                  Cuaderno FP
+                </h1>
+              </Link>
             <span className="text-sm text-muted/80 font-mono mt-0.5 ml-0.5">{timeStr}</span>
           </div>
         )}
@@ -169,15 +169,7 @@ export default function Sidebar() {
         {/* Context Selector Block (ahora dentro del scroll) */}
         {isSidebarOpen && (
           <div className="flex flex-col gap-2 pb-2 relative z-20 shrink-0">
-            {/* Sync Status Indicator */}
-            {dataSource === 'local' && (
-              <div className="flex items-center justify-center gap-1.5 px-2 py-1 rounded-full bg-foreground/5 text-xs font-medium w-full mb-1">
-                {syncStatus === 'saving' && <><Hourglass className="w-3 h-3 text-warning animate-spin" /><span className="text-warning">Guardando...</span></>}
-                {syncStatus === 'saved' && <><Save className="w-3 h-3 text-success" /><span className="text-success">Guardado</span></>}
-                {syncStatus === 'error' && <><AlertTriangle className="w-3 h-3 text-danger" /><span className="text-danger">Error</span></>}
-                {syncStatus === 'idle' && <><Cloud className="w-3 h-3 text-muted/50" /><span className="text-muted/60">Sincronizado</span></>}
-              </div>
-            )}
+            
             <div className="flex bg-foreground/5 rounded-lg p-0.5 w-full gap-0.5">
               <button
                 onClick={() => { setDataSource('demo'); fileManager.loadDemoData('1a'); toast.success('Modo DEMO'); }}
@@ -252,7 +244,7 @@ export default function Sidebar() {
                   <CalendarDays className="w-5 h-5" strokeWidth={2} />
                 </span>
                 <div className="flex flex-col gap-1 items-start">
-                  <span className={`text-[0.95rem] leading-tight whitespace-nowrap font-bold ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
+                  <span className={`text-base leading-tight whitespace-nowrap font-bold ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
                     Agenda
                   </span>
                   <span className={`px-2 py-0.5 rounded text-xs border font-semibold tracking-wider leading-none ${dataSource === 'demo' ? 'text-warning bg-warning/10 border-warning/30' : 'text-accent bg-accent/10 border-accent/30'}`}>
@@ -288,7 +280,7 @@ export default function Sidebar() {
           <div className="flex flex-col gap-0.5">
             {isSidebarOpen && navGroups[0].title && (
               <div className="flex flex-col mb-1.5 mt-1 gap-1.5">
-                <div className="text-[0.95rem] font-bold text-foreground/90 tracking-wide px-1">
+                <div className="text-base font-bold text-foreground/90 tracking-wide px-1">
                   {navGroups[0].title}
                 </div>
               </div>
@@ -346,7 +338,7 @@ export default function Sidebar() {
             <div key={group.title} className="flex flex-col gap-0.5">
               {isSidebarOpen && (
                 <div className="flex flex-col mb-2 mt-1 gap-1.5">
-                  <div className="text-[0.95rem] font-bold text-foreground/90 tracking-wide px-1">
+                  <div className="text-base font-bold text-foreground/90 tracking-wide px-1">
                     {baseTitle}
                   </div>
                   {infoValue && infoValue !== 'CÓDIGO' && infoValue !== 'AÑO' && (

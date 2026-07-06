@@ -138,13 +138,6 @@ export const PlanoClaseTab = () => {
 
   return (
     <div className="space-y-8">
-      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-        <div>
-          <p className="text-sm font-semibold text-foreground">Plano de Clase - RD 659/2023</p>
-          <p className="text-sm text-muted mt-1">Distribución espacial para la gestión del aula.</p>
-        </div>
-      </div>
       {/* Configuration & Actions Toolbar */}
       <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6 bg-foreground/5 p-5 border border-white/5 rounded-2xl">
         <div className="flex flex-wrap items-center gap-6">
@@ -225,10 +218,10 @@ export const PlanoClaseTab = () => {
       {/* Classroom layout representation */}
       <Card className="border border-white/5 rounded-2xl p-6 bg-foreground/5 shadow-2xl relative overflow-hidden">
         {/* Direction Indicator */}
-        <div className="absolute top-2 left-6 text-[10px] text-muted tracking-wider font-semibold">
+        <div className="absolute top-2 left-6 text-[0.625rem] text-muted tracking-wider font-semibold">
           Fondo de Clase ⬆️
         </div>
-        <div className="absolute bottom-2 left-6 text-[10px] text-muted tracking-wider font-semibold">
+        <div className="absolute bottom-2 left-6 text-[0.625rem] text-muted tracking-wider font-semibold">
           Frente de Clase / Pizarra ⬇️
         </div>
 
@@ -258,7 +251,7 @@ export const PlanoClaseTab = () => {
                   >
                     {/* Header */}
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-[10px] font-mono text-muted ">
+                      <span className="text-[0.625rem] font-mono text-muted ">
                         F{r + 1} - C{c + 1}
                       </span>
                       {student ? (
@@ -266,7 +259,7 @@ export const PlanoClaseTab = () => {
                           Ocupado
                         </Badge>
                       ) : (
-                        <span className="text-[10px] text-muted/50 italic">Libre</span>
+                        <span className="text-[0.625rem] text-muted/50 italic">Libre</span>
                       )}
                     </div>
 
@@ -317,7 +310,7 @@ export const PlanoClaseTab = () => {
             <Users className="w-5 h-5 text-accent" /> Alumnado sin asignar en el plano ({unassignedStudents.length})
           </h3>
           {unassignedStudents.length > 0 && (
-            <span className="text-[10px] text-muted italic">
+            <span className="text-[0.625rem] text-muted italic">
               Aparecerán automáticamente en los desplegables de las mesas.
             </span>
           )}
@@ -339,7 +332,7 @@ export const PlanoClaseTab = () => {
                 <span>
                   {al.Apellidos}, {al.Nombre}
                 </span>
-                <span className="text-[10px] text-muted font-mono bg-background/30 px-1.5 py-0.5 rounded">
+                <span className="text-[0.625rem] text-muted font-mono bg-background/30 px-1.5 py-0.5 rounded">
                   {al.ID}
                 </span>
               </div>

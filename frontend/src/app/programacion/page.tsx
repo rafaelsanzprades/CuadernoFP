@@ -23,7 +23,7 @@ export default function ProgramacionPage() {
 
   const TABS = [
     { id: "secuenciacion", label:  <span className="flex items-center gap-2"><ClipboardList className="w-4 h-4 shrink-0" /> Secuenciación de UD</span>, cleanLabel: "Secuenciación de UD" },
-    { id: "tareas", label:  <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> Tareas competenciales</span>, cleanLabel: "Tareas competenciales" }
+    { id: "tareas", label:  <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> Tareas competenciales (TC)</span>, cleanLabel: "Tareas competenciales (TC)" }
   ];const [activeTab, setActiveTab] = useState("secuenciacion");const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
 
@@ -171,7 +171,7 @@ export default function ProgramacionPage() {
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-4 pb-12">
             <div>
-            <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
+            <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
               <span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación de aula
             </h1>
             <p className="text-muted mt-2 text-lg">Secuenciación temporal de UD y tareas competenciales.</p>
@@ -213,7 +213,7 @@ export default function ProgramacionPage() {
             <Card className="p-6 border-t-4 border-t-accent">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground">
-<span><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Secuenciación por Unidades didácticas
+<span><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Secuenciación de UD
 </h2>
                 <Button
                   variant="ghost"
@@ -249,16 +249,9 @@ export default function ProgramacionPage() {
 
           {activeTab === "tareas" && (
             <>
-                <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-                  <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">Tareas competenciales - RD 659/2023</p>
-                    <p className="text-sm text-muted mt-1">Actividades prácticas alineadas con los criterios de evaluación.</p>
-                  </div>
-                </div>
-            <Card className="p-6 border-t-4 border-t-blue-500">
+                <Card className="p-6 border-t-4 border-t-blue-500">
               <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-6">
-<span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Diseño de tareas competenciales (TC)
+<span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Tareas competenciales (TC)
 </h2>
               <TaskTable 
                 df_tareas={df_tareas}

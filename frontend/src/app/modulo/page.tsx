@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { Building2, FileEdit, FileText, Settings, Map, Target, CheckCircle2, Layers, Award, FolderOpen } from "lucide-react";
+import { Building2, FileEdit, FileText, Settings, Map, Target, CheckCircle2, Layers, Award, FolderOpen, Info } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -44,13 +44,13 @@ export default function ModuloConfigPage() {
   }, [activeModuleId, setModuleData]);
 
   const TABS = [
-    { id: "datos", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Datos del módulo</>, cleanLabel: "Datos del módulo" },
+    { id: "datos", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Datos</>, cleanLabel: "Datos" },
     { id: "contexto", label: <><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Contexto</>, cleanLabel: "Contexto" },
     { id: "planes", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Planes</>, cleanLabel: "Planes" },
-    { id: "contexto_feoe", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> Contexto y FEOE</>, cleanLabel: "Contexto y FEOE" },
+    { id: "contexto_feoe", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> FEOE</>, cleanLabel: "FEOE" },
     { id: "metodologia", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Metodología</>, cleanLabel: "Metodología" },
-    { id: "evaluacion", label: <><span className="inline-flex"><CheckCircle2 className="w-[1.2em] h-[1.2em] mr-1" /></span> Eval. y Recursos</>, cleanLabel: "Eval. y Recursos" },
-    { id: "otros", label: <><span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1" /></span> Otros Elementos</>, cleanLabel: "Otros Elementos" }
+    { id: "evaluacion", label: <><span className="inline-flex"><CheckCircle2 className="w-[1.2em] h-[1.2em] mr-1" /></span> Recursos</>, cleanLabel: "Recursos" },
+    { id: "otros", label: <><span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1" /></span> Transversales</>, cleanLabel: "Transversales" }
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -109,10 +109,10 @@ export default function ModuloConfigPage() {
 
             {/* ── Título ─────────────────────────────────────────── */}
             <div>
-              <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
+              <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <span className="inline-flex"><Settings className="w-[1.2em] h-[1.2em] mr-1" /></span> Módulo didáctico
               </h1>
-              <p className="text-muted mt-2 text-lg">Configuración de FEOE, metodología, recursos y evaluación.</p>
+              <p className="text-muted mt-2 text-lg">Configuración de datos, contexto, planes, FEOE, metodología, recursos y elementos transversales.</p>
             </div>
 
             <Tabs value={activeTab} onValueChange={setActiveTab}>
@@ -124,6 +124,25 @@ export default function ModuloConfigPage() {
                 ))}
               </TabsList>
             </Tabs>
+              
+              {(() => {
+                const infoMap: Record<string, {desc: string}> = {
+                  'datos': { desc: 'Configuración inicial y datos generales del módulo profesional.' },
+                  'contexto': { desc: 'Análisis del entorno socioeconómico, centro educativo y perfil del alumnado.' },
+                  'planes': { desc: 'Vinculación con los planes estratégicos y proyectos institucionales del centro.' },
+                  'contexto_feoe': { desc: 'Análisis específico del sector productivo y oportunidades de empleo.' },
+                  'metodologia': { desc: 'Estrategias pedagógicas, agrupamientos y principios de intervención.' },
+                  'evaluacion': { desc: 'Criterios de calificación, instrumentos y recursos didácticos necesarios.' },
+                  'otros': { desc: 'Temas transversales, atención a la diversidad y actividades complementarias.' }
+                };
+                const info = infoMap[activeTab] || { desc: 'Configuración del módulo.' };
+                return (
+                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
+                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
+                    <p className='text-sm text-muted'>{info.desc}</p>
+                  </div>
+                );
+              })()}
 
             {activeTab === "datos" && <DatosTab />}
             {activeTab === "contexto" && <ContextoTab />}

@@ -146,7 +146,7 @@ export const AnalisisGrupalTab = () => {
 
       <section className="grid grid-cols-2 gap-6">
         <Card className="p-6">
-          <h2 className="text-[1.1rem] font-bold flex items-center gap-2 text-foreground mb-6">
+          <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-6">
             <span className="inline-flex"><TrendingDown className="w-[1.2em] h-[1.2em] mr-1" /></span> Distribución de Calificaciones
           </h2>
           <div className="h-72 w-full">
@@ -167,7 +167,7 @@ export const AnalisisGrupalTab = () => {
         </Card>
 
         <Card className="p-6">
-          <h2 className="text-[1.1rem] font-bold flex items-center gap-2 text-foreground mb-6">
+          <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-6">
             <span className="inline-flex"><TrendingUp className="w-[1.2em] h-[1.2em] mr-1" /></span> Evolución por Trimestres
           </h2>
           <div className="h-72 w-full">
@@ -192,7 +192,7 @@ export const AnalisisGrupalTab = () => {
 
       {raData.length > 0 && (
         <Card className="p-6">
-          <h2 className="text-[1.1rem] font-bold flex items-center gap-2 text-foreground mb-6">
+          <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-6">
             <span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Rendimiento por RA
           </h2>
           <div className="space-y-4">
@@ -231,7 +231,7 @@ export const AnalisisGrupalTab = () => {
                       }}
                     >
                       {pct > 12 && (
-                        <span className="text-[11px] font-bold text-foreground drop-shadow-md">{val.toFixed(1)}</span>
+                        <span className="text-[0.6875rem] font-bold text-foreground drop-shadow-md">{val.toFixed(1)}</span>
                       )}
                     </div>
                     {/* 5.0 threshold */}
@@ -255,7 +255,7 @@ export const AnalisisGrupalTab = () => {
       )}
 
       <Card className="p-6">
-        <h2 className="text-[1.1rem] font-bold mb-6"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguimiento de Riesgo Académico</h2>
+        <h2 className="text-lg font-bold mb-6"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguimiento de Riesgo Académico</h2>
         {risks.length > 0 ? (
           <>
             <div className="bg-danger/10 border border-danger/30 text-danger px-4 py-3 rounded-lg mb-4 text-sm font-semibold flex items-center gap-2">

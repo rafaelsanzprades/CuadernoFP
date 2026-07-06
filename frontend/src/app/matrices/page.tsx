@@ -135,7 +135,7 @@ export default function MatricesPage() {
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-4 pb-12">
             <div>
-              <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
+              <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <span className="inline-flex"><Calculator className="w-[1.2em] h-[1.2em] mr-1" /></span> Matrices OG- RA- CE- UD/T
               </h1>
               <p className="text-muted mt-2 text-lg">Relación y ponderación: OG, RA, CE y UD/T.</p>
@@ -497,13 +497,6 @@ export default function MatricesPage() {
             {/* Unidades didácticas */}
             {activeTab === "ud" && (
               <div className="animate-in fade-in duration-500">
-                <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-                  <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">Unidades didácticas (UD) o de Trabajo (UT) - RD 659/2023</p>
-                    <p className="text-sm text-muted mt-1">Organización del currículo en unidades de aprendizaje significativas.</p>
-                  </div>
-                </div>
                 <Card className="p-6 border-t-4 border-t-purple-500">
                   <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-4">
                     <span><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></span> UD/T. Unidades didácticas o de trabajo
@@ -518,7 +511,7 @@ export default function MatricesPage() {
                           {df_ra.map((ra: any, i: number) => (
                             <th key={i} className="p-3 text-center min-w-[80px]">
                               <div className="text-xs">{ra.id_ra}</div>
-                              <div className="text-[10px] text-info">({ra.peso_ra || 0}%)</div>
+                              <div className="text-[0.625rem] text-info">({ra.peso_ra || 0}%)</div>
                             </th>
                           ))}
                         </tr>
@@ -676,13 +669,6 @@ export default function MatricesPage() {
             {/* ── RAs ↔ UDs ────────────────────────────────────── */}
             {activeTab === "relacion" && (
               <div className="animate-in fade-in duration-500">
-                <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-                  <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">Relación RA ↔ UD - RD 659/2023</p>
-                    <p className="text-sm text-muted mt-1">Trazabilidad entre los resultados prescriptivos y las unidades impartidas.</p>
-                  </div>
-                </div>
                 <Card className="p-6 border-t-4 border-t-amber-500">
                   <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-4">
                     <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Relación entre Resultados de aprendizaje y Unidades didácticas o de trabajo
@@ -722,13 +708,6 @@ export default function MatricesPage() {
             {/* ── Contribución de RA en OG ────────────────────────────────────── */}
             {activeTab === "contribucion" && (
               <div className="animate-in fade-in duration-500">
-                <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-                  <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">Contribución a Objetivos Generales - RD 659/2023</p>
-                    <p className="text-sm text-muted mt-1">Alineación de los RA con los objetivos generales del ciclo formativo.</p>
-                  </div>
-                </div>
                 <RaOgMatrix />
               </div>
             )}

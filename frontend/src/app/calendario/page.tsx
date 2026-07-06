@@ -327,7 +327,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
               </h3>
               <div className="grid grid-cols-7 gap-0.5">
                 {DAY_NAMES_SHORT.map(d => (
-                  <div key={d} className="text-center text-[10px] text-muted/80 font-bold pb-1">{d}</div>
+                  <div key={d} className="text-center text-[0.625rem] text-muted/80 font-bold pb-1">{d}</div>
                 ))}
                 {cells.map((day, i) => {
                   if (!day) return <div key={`e-${i}`} />;
@@ -337,7 +337,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
                     <button
                       key={day}
                       onClick={(e) => openPopup(e, date)}
-                      className={`text-center text-[11px] rounded py-1 transition-all ${getDayStyle(date)} ${isToday ? "ring-1 ring-warning ring-offset-1 ring-offset-black/50" : ""}`}
+                      className={`text-center text-[0.6875rem] rounded py-1 transition-all ${getDayStyle(date)} ${isToday ? "ring-1 ring-warning ring-offset-1 ring-offset-black/50" : ""}`}
                       title={`${pad(day)}/${pad(m + 1)}/${y}`}
                     >
                       {day}
@@ -609,7 +609,7 @@ export default function CalendarioPage() {
           <MotionWrapper className="space-y-4 pb-12">
             {/* Page heading */}
             <div>
-              <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
+              <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <Calendar className="w-6 h-6 text-accent" /> Calendario académico
               </h1>
               <p className="text-muted mt-2 text-base">Horarios, trimestres, festivos y eventos del curso.</p>
@@ -812,7 +812,7 @@ export default function CalendarioPage() {
                     <div key={t.label}>
                       <label className="block text-sm font-semibold text-muted mb-2 text-center">{t.label}</label>
                       <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-4 text-center">
-                        <div className="text-[1.1rem] font-bold text-success font-mono">{t.value} h</div>
+                        <div className="text-lg font-bold text-success font-mono">{t.value} h</div>
                       </div>
                     </div>
                   ))}
@@ -825,7 +825,7 @@ export default function CalendarioPage() {
                     <div key={s.label}>
                       <label className="block text-sm font-semibold text-muted mb-2 text-center">{s.label}</label>
                       <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-4 text-center">
-                        <div className={`text-[1.1rem] font-bold ${s.cls}`}>{s.value}</div>
+                        <div className={`text-lg font-bold ${s.cls}`}>{s.value}</div>
                       </div>
                     </div>
                   ))}

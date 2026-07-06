@@ -18,16 +18,9 @@ export function AsistenciaTab() {
 
   return (
     <>
-      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-        <div>
-          <p className="text-sm font-semibold text-foreground">Asistencia y Participación - RD 659/2023</p>
-          <p className="text-sm text-muted mt-1">Seguimiento de la asistencia obligatoria y evaluación continua.</p>
-        </div>
-      </div>
-<div className="space-y-8 animate-in fade-in duration-500">
+      <div className="space-y-8 animate-in fade-in duration-500">
       <div>
-        <h2 className="text-[1.1rem] font-bold flex items-center gap-3 text-foreground">
+        <h2 className="text-lg font-bold flex items-center gap-3 text-foreground">
           <Users className="w-8 h-8 text-accent" /> Control de asistencia
         </h2>
         <p className="text-muted mt-2">

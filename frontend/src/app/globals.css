@@ -259,3 +259,35 @@ tr:hover td {
 .content-area {
   padding-bottom: 4rem !important;
 }
+
+
+/* =========================================================================
+   ACCESSIBILITY OVERRIDES
+   ========================================================================= */
+
+/* High Contrast Mode */
+.high-contrast {
+  --background: #000000 !important;
+  --foreground: #ffffff !important;
+  --accent-color: #ffff00 !important;
+  --text-muted: #e2e8f0 !important;
+  --glass-bg: #111111 !important;
+  --glass-border: #ffffff !important;
+  --card-shadow: none !important;
+  --card-hover-shadow: none !important;
+  --input-bg: #000000 !important;
+  --table-stripe: #111111 !important;
+  --table-hover: #222222 !important;
+  
+  --success: #00ff00 !important; 
+  --warning: #ffff00 !important; 
+  --danger:  #ff0000 !important; 
+  --info:    #00ffff !important; 
+}
+
+/* Reduce Motion Mode */
+.reduce-motion * {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}

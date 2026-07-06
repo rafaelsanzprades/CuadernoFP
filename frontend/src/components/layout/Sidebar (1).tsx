@@ -107,7 +107,7 @@ export default function Sidebar() {
         {isSidebarOpen && (
           <div className="flex flex-col mb-3">
             <Link href="/inicio" onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}>
-              <h1 className="text-[1.3rem] font-extrabold leading-tight text-foreground hover:text-info transition-colors tracking-tight whitespace-nowrap cursor-pointer">
+              <h1 className="text-xl font-extrabold leading-tight text-foreground hover:text-info transition-colors tracking-tight whitespace-nowrap cursor-pointer">
                 Cuaderno FP
               </h1>
             </Link>
@@ -145,7 +145,7 @@ export default function Sidebar() {
                 </span>
                 {isSidebarOpen && (
                   <div className="flex flex-col gap-1 items-start">
-                    <span className={`text-[0.95rem] leading-tight whitespace-nowrap font-bold ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
+                    <span className={`text-base leading-tight whitespace-nowrap font-bold ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
                       Agenda
                     </span>
                     <span className={`px-2 py-0.5 rounded text-xs border font-semibold tracking-wider leading-none ${dataSource === 'demo' ? 'text-warning bg-warning/10 border-warning/30' : 'text-accent bg-accent/10 border-accent/30'}`}>
@@ -167,7 +167,7 @@ export default function Sidebar() {
           <div key={group.title} className="flex flex-col gap-0.5">
             {group.title && isSidebarOpen && (
               <div className="flex flex-col mb-2 mt-3">
-                <div className="text-[0.95rem] font-bold text-foreground/90 tracking-wide px-3 mb-1.5">
+                <div className="text-base font-bold text-foreground/90 tracking-wide px-3 mb-1.5">
                   {group.title
                     .replace("[Código del módulo]", `[${moduleTitleSuffix}]`)
                     .replace("[Año]", `[${activeCursoId ? activeCursoId.substring(0, 7) : 'AÑO'}]`)

@@ -359,7 +359,7 @@ export default function ArchivosTrabajoPage() {
 
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div>
-                <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
+                <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
                   <FolderOpen className="w-6 h-6 text-accent" /> Archivos
                 </h1>
                 <p className="text-muted mt-2 text-lg">Gestión de archivos de Programación y Curso.</p>
@@ -392,15 +392,22 @@ export default function ArchivosTrabajoPage() {
                 )}
               </div>
             </Tabs>
-            <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6 mt-6">
-              <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-              <div>
-                <p className="text-sm font-semibold text-foreground">Herramienta operativa y de gestión - Archivos</p>
-                <p className="text-sm text-muted mt-1">Sincronización en la nube y configuración del espacio de trabajo.</p>
-              </div>
-            </div>
-
             <div className="space-y-4 animate-in fade-in duration-300 pt-4">
+              {(() => {
+                const infoMap: Record<string, {desc: string}> = {
+                  'datos': { desc: 'Gestión de los archivos de estructura y programación didáctica del docente.' },
+                  'nube': { desc: 'Sincronización bidireccional segura con Google Drive y Microsoft OneDrive.' }
+                };
+                const info = infoMap[activeTab] || { desc: 'Gestión de archivos.' };
+                return (
+                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
+                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
+                    <div>
+                      <p className="text-sm text-muted">{info.desc}</p>
+                    </div>
+                  </div>
+                );
+              })()}
               {/* TAB: FILE MANAGER */}
               {activeTab === "datos" && (
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

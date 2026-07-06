@@ -154,15 +154,7 @@ export default function InstrumentosPage() {
 
     return (
       <div className="space-y-3 animate-in fade-in duration-500">
-                              <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="mb-2 max-w-full">
-              {TABS.map(tab => (
-                <TabsTrigger key={tab.id} value={tab.id}>
-                  {tab.label}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
+                              
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
@@ -306,11 +298,22 @@ export default function InstrumentosPage() {
             <p className="text-muted mt-2 text-lg">Definición y ponderación de CE, RA e instrumentos.</p>
           </div>
 
+          <Tabs value={activeTab} onValueChange={setActiveTab}>
+            <TabsList className="mb-2 max-w-full">
+              {TABS.map(tab => (
+                <TabsTrigger key={tab.id} value={tab.id}>
+                  {tab.label}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
+
+
           {(() => {
                 const infoMap: Record<string, {title: string, desc: string}> = {
           'resumen': {
                     'title': 'Resumen de Instrumentos',
-                    'desc': 'Resumen global de los instrumentos de evaluación configurados.'
+                    'desc': 'Visión global de los instrumentos de evaluación utilizados. RD 659/2023 (Art. 136)'
           },
           'tri1': {
                     'title': 'Instrumentos - 1er Trimestre',
@@ -338,13 +341,7 @@ export default function InstrumentosPage() {
 
           {activeTab === "resumen" && (
             <>
-                <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-                  <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">Resumen de Instrumentos - RD 659/2023 (Art. 136)</p>
-                    <p className="text-sm text-muted mt-1">Visión global de los instrumentos de evaluación utilizados.</p>
-                  </div>
-                </div>
+                
             <Card className="p-6 animate-in fade-in duration-500">
               <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-5">
                 <span><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Resumen de instrumentos de evaluación por trimestres

@@ -66,14 +66,14 @@ export function MultiSelectDropdown({
                 <span 
                   key={id} 
                   title={fullTitle}
-                  className="bg-accent/20 text-accent text-[10px] px-1.5 py-0.5 rounded flex items-center gap-1"
+                  className="border border-accent/50 text-foreground text-sm px-2 py-0.5 rounded flex items-center gap-1.5 bg-background/50"
                 >
                   {label}
                   <button 
                     onClick={(e) => removeOption(e, id)}
-                    className="hover:text-foreground p-0.5 rounded-full hover:bg-accent/40"
+                    className="text-muted hover:text-foreground p-0.5 rounded-full hover:bg-accent/20 transition-colors"
                   >
-                    <X className="w-2.5 h-2.5" />
+                    <X className="w-3 h-3" />
                   </button>
                 </span>
               );

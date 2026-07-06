@@ -236,7 +236,7 @@ export default function AlumnadoPage() {
           <MotionWrapper className="space-y-4 pb-12">
             <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
+              <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Alumnado y tutoría
               </h1>
               <p className="text-muted mt-2 text-lg">Gestión de alumnado, tutoría, FEOE y orientación.</p>

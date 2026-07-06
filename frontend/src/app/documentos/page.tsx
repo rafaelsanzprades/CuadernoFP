@@ -218,7 +218,7 @@ export default function DocumentosPage() {
 
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
               <div>
-                <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
+                <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
                   <span className="text-3xl text-info"><FolderOpen className="w-8 h-8" strokeWidth={2.5} /></span> Documentos
                 </h1>
                 <p className="text-muted mt-2 text-lg">Explorador de legislación, normativas y docs oficiales.</p>
@@ -238,17 +238,19 @@ export default function DocumentosPage() {
             <div className="space-y-3 animate-in fade-in duration-500">
               {(() => {
                 const infoMap: Record<string, {desc: string}> = {
-                  'Plantillas': { desc: 'Plantillas base para programaciones y actas.' },
-                  'Currículos': { desc: 'Decretos de currículos oficiales.' },
-                  'Normativa': { desc: 'Legislación y normativa educativa.' },
-                  'TodoFP': { desc: 'Recursos y guías del portal TodoFP.' },
-                  'Autores/Editoriales': { desc: 'Bibliografía y material de editoriales.' }
+                  'Plantillas': { desc: 'Formatos base recomendados por la administración educativa para programaciones.' },
+                  'Currículos': { desc: 'Disposiciones normativas que fijan las enseñanzas mínimas de cada título.' },
+                  'Normativa': { desc: 'Leyes orgánicas, reales decretos y órdenes ministeriales vigentes.' },
+                  'TodoFP': { desc: 'Recursos, guías y materiales del portal oficial de la Formación Profesional.' },
+                  'Autores/Editoriales': { desc: 'Material de apoyo y recursos bibliográficos desarrollados por editoriales.' }
                 };
-                const info = infoMap[activeTab] || { desc: 'Gestión de documentos' };
+                const info = infoMap[activeTab] || { desc: 'Gestión documental y normativa.' };
                 return (
-    <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6 mt-3'>
+                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
                     <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
-                    <p className='text-sm text-muted'>{info.desc}</p>
+                    <div>
+                      <p className="text-sm text-muted">{info.desc}</p>
+                    </div>
                   </div>
                 );
               })()}

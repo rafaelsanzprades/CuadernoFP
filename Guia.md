@@ -69,7 +69,7 @@ Una vez creada la programación base (que verás activa en la pantalla de [Archi
 
 - **Apartado:** Programación [Código]
   - **Página:** Módulo didáctico [🔗](https://cuadernofp.web.app/modulo)
-    - **Pestaña:** Datos del módulo
+    - **Pestaña:** Datos
       - **Bloque:** Centro y docente
         - **Texto:** Centro educativo. Teclea el nombre de tu instituto.
         - **Texto:** Profesorado. Teclea tu nombre completo.
@@ -90,16 +90,16 @@ Una vez creada la programación base (que verás activa en la pantalla de [Archi
     - **Pestaña:** Planes
       - **Bloque:** Planes y Programas
         - **Texto:** Descripción. Describe cómo se integra tu módulo en los planes del centro, ej. Plan de Lectura o Bilingüismo.
-    - **Pestaña:** Contexto y FEOE
+    - **Pestaña:** FEOE
       - **Bloque:** Entorno Profesional y Dual
         - **Texto:** Descripción. Describe la conexión con las empresas locales y la organización de la fase en empresa.
     - **Pestaña:** Metodología
       - **Bloque:** Estrategias metodológicas
         - **Texto:** Descripción. Redacta las metodologías activas y métodos pedagógicos aplicados en el aula.
-    - **Pestaña:** Eval. y Recursos
+    - **Pestaña:** Recursos
       - **Bloque:** Criterios de calificación y Materiales
         - **Texto:** Descripción. Especifica los procedimientos de evaluación y los recursos didácticos necesarios.
-    - **Pestaña:** Otros Elementos
+    - **Pestaña:** Transversales
       - **Bloque:** Elementos transversales y complementarios
         - **Texto:** Descripción. Añade actividades extraescolares o temas transversales como la educación ambiental.
 

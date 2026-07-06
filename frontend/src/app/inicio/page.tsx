@@ -1,5 +1,5 @@
 "use client";
-import { Activity, AlertTriangle, ArrowRight, BarChart2, BookOpen, Briefcase, Building2, CalendarDays, Check, CheckCircle, ClipboardList, FileText, GraduationCap, HeartHandshake, Layers, Users, Wrench, XCircle, ChevronDown, ListChecks, Info } from "lucide-react";
+import { Activity, AlertTriangle, ArrowRight, BarChart2, BookOpen, Briefcase, Building2, CalendarDays, Check, CheckCircle, ClipboardList, FileText, GraduationCap, HeartHandshake, Layers, Users, Wrench, XCircle, ChevronDown, Mail, Send, ListChecks, Info } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -181,7 +181,7 @@ const FAQS = [
 
 // ── Página Principal ──────────────────────────────────────────────────────
 export default function InicioPage() {
-  const { moduleData, cursoData, globalData, activeModuleId, activeCursoId } = useAppStore();const [activeTab, setActiveTab] = useState("bienvenida");
+  const { moduleData, cursoData, globalData, activeModuleId, activeCursoId } = useAppStore();const [activeTab, setActiveTab] = useState<string>("bienvenida");
   const [aiModalOpen, setAiModalOpen] = useState(false);
   const [guiaContent, setGuiaContent] = useState<string>("");
   const [isLoadingGuia, setIsLoadingGuia] = useState(false);useEffect(() => {
@@ -519,9 +519,10 @@ export default function InicioPage() {
   const TABS = [
     { id: "bienvenida", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> Bienvenida</>, cleanLabel: "Bienvenida" },
     { id: "asistente", label: <><span className="inline-flex"><Sparkles className="w-[1.2em] h-[1.2em] mr-1" /></span> Asistente IA</>, cleanLabel: "Asistente IA" },
-    { id: "verificacion", label: <><span className="inline-flex"><ListChecks className="w-[1.2em] h-[1.2em] mr-1" /></span> Verificación de datos</>, cleanLabel: "Verificación de datos" },
-    { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Guía paso a paso</>, cleanLabel: "Guía paso a paso" },
-    { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> Preguntas frecuentes (FAQ)</>, cleanLabel: "Preguntas frecuentes (FAQ)" },
+    { id: "verificacion", label: <><span className="inline-flex"><ListChecks className="w-[1.2em] h-[1.2em] mr-1" /></span> Verificación</>, cleanLabel: "Verificación" },
+    { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Guía</>, cleanLabel: "Guía" },
+    { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> FAQ</>, cleanLabel: "FAQ" },
+    { id: "contacto", label: <><span className="inline-flex"><Mail className="w-[1.2em] h-[1.2em] mr-1" /></span> Contacto</>, cleanLabel: "Contacto" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -573,16 +574,20 @@ export default function InicioPage() {
                     'desc': 'Asistente virtual potenciado con IA para resolver tus dudas.'
           },
           'verificacion': {
-                    'title': 'Verificación de Datos',
+                    'title': 'Verificación',
                     'desc': 'Panel de salud y coherencia de los datos de tu cuaderno.'
           },
           'guia': {
-                    'title': 'Guía Paso a Paso',
+                    'title': 'Guía',
                     'desc': 'Manuales y guías paso a paso para configurar tu entorno.'
           },
           'faq': {
-                    'title': 'Preguntas Frecuentes',
+                    'title': 'FAQ',
                     'desc': 'Respuestas a las preguntas más frecuentes de el profesorado.'
+          },
+          'contacto': {
+                    'title': 'Contacto',
+                    'desc': 'Ponte en contacto para sugerencias o soporte.'
           }
 };
                 const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
@@ -827,7 +832,60 @@ export default function InicioPage() {
               </div>
             )}
 
-          </MotionWrapper>
+                      {/* ── CONTENIDO: CONTACTO ────────────────────────────────────────── */}
+            {activeTab === "contacto" && (
+              <div className="space-y-6 animate-in fade-in duration-500 w-full">
+                <Card className="p-8 border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-xl relative overflow-hidden">
+                  <div className="absolute top-0 right-0 p-8 opacity-5">
+                    <Mail className="w-32 h-32" />
+                  </div>
+                  <h2 className="text-3xl font-extrabold mb-4 text-foreground">¡Hola! Soy Rafael Sanz Prades</h2>
+                  <p className="text-muted text-base mb-6 leading-relaxed">
+                    Espero que <strong>CuadernoFP</strong> te esté resultando de gran utilidad para simplificar tu trabajo docente. 
+                    He desarrollado esta herramienta con mucho cariño para aportar valor a nuestra comunidad educativa de Formación Profesional.
+                  </p>
+                  
+                  
+
+                  <h3 className="text-xl font-bold mb-4 text-foreground flex items-center gap-2">
+                    <Send className="w-5 h-5 text-accent" /> Envíame un mensaje rápido
+                  </h3>
+                  
+                  <div className="space-y-4 relative z-10">
+                    <div>
+                      <label className="block text-sm font-medium text-foreground mb-1">Asunto</label>
+                      <input 
+                        id="contacto-asunto"
+                        type="text" 
+                        placeholder="Ej: Sugerencia para la agenda..." 
+                        className="w-full bg-foreground/5 border border-[var(--glass-border)] rounded-lg px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-foreground mb-1">Mensaje</label>
+                      <textarea 
+                        id="contacto-mensaje"
+                        rows={4} 
+                        placeholder="Escribe aquí tu mensaje..." 
+                        className="w-full bg-foreground/5 border border-[var(--glass-border)] rounded-lg px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 resize-none"
+                      ></textarea>
+                    </div>
+                    <button 
+                      onClick={() => {
+                        const asunto = (document.getElementById('contacto-asunto') as HTMLInputElement)?.value || '';
+                        const mensaje = (document.getElementById('contacto-mensaje') as HTMLTextAreaElement)?.value || '';
+                        window.location.href = `mailto:rafaelsanzprades@gmail.com?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(mensaje)}`;
+                      }}
+                      className="flex items-center justify-center gap-2 px-6 py-2.5 bg-accent text-white rounded-lg font-semibold hover:bg-accent/90 transition-colors shadow-lg hover:shadow-accent/20"
+                    >
+                      <Send className="w-4 h-4" /> Enviar mensaje
+                    </button>
+                  </div>
+                </Card>
+              </div>
+            )}
+
+            </MotionWrapper>
         </div>
       </div>
     </div>

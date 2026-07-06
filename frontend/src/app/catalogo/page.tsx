@@ -142,13 +142,25 @@ function CiclosContent() {
               </TabsList>
             </Tabs>
 
-            <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-              <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-              <div>
-                <p className="text-sm font-semibold text-foreground">Catálogo Nacional - Ley 3/2022</p>
-                <p className="text-sm text-muted mt-1">Catálogo Nacional de Estándares de Competencias Profesionales.</p>
-              </div>
-            </div>
+            {(() => {
+              const infoMap: Record<string, {desc: string}> = {
+                'grados': { desc: 'La Ley Orgánica 3/2022 estructura la Formación Profesional en 5 grados (A a E).' },
+                'familias': { desc: 'El RD 1128/2003 establece el Catálogo Nacional de Cualificaciones Profesionales.' },
+                'titulo': { desc: 'Normativa estatal básica y currículo autonómico para ciclos formativos.' },
+                'cursos': { desc: 'Bloques de especialización y contenidos asociados a cada curso académico.' },
+                'modulos': { desc: 'Competencias específicas estructuradas en RA y CE (Art. 136, RD 659/2023).' },
+                'autores': { desc: 'Integración de recursos editoriales externos en formato abierto (.fpp).' }
+              };
+              const info = infoMap[activeTab] || { desc: 'Catálogo Nacional Oficial.' };
+              return (
+                <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+                  <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+                  <div>
+                    <p className="text-sm text-muted">{info.desc}</p>
+                  </div>
+                </div>
+              );
+            })()}
 
             {activeTab === "grados" && <TabGrados />}
             {activeTab === "familias" && <TabFamilias onSelectTitulo={handleSelectFamiliaToTitulo} />}
@@ -309,7 +321,7 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
                           </div>
                         </div>
                         <div className="flex items-center gap-2 shrink-0">
-                          <span className={`text-[10px] font-bold border px-2 py-1 rounded shadow-inner tracking-wider ${badgeClass}`}>
+                          <span className={`text-[0.625rem] font-bold border px-2 py-1 rounded shadow-inner tracking-wider ${badgeClass}`}>
                             {badge}
                           </span>
                           <ChevronDown className="w-3 h-3 -rotate-90 text-muted group-hover:text-foreground transition-colors" />
@@ -1049,7 +1061,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                             {grupo.es_conjunto ? "Debes acreditar TODAS estas competencias:" : "Debes acreditar esta competencia:"}
                           </span>
                         </div>
-                        {grupo.es_conjunto && <Badge variant="default" className="text-[10px]">Conjunto requerido</Badge>}
+                        {grupo.es_conjunto && <Badge variant="default" className="text-[0.625rem]">Conjunto requerido</Badge>}
                       </div>
                       <div className="p-0">
                         {grupo.competencias?.map((comp: any, j: number) => (

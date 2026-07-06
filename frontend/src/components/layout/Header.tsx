@@ -1,5 +1,5 @@
 "use client";
-import { AlertTriangle, ChevronRight, ChevronDown, Cloud, Hourglass, Moon, Redo2, Save, Shield, Sun, Undo2, XCircle, CalendarDays, FolderOpen, Menu } from "lucide-react";
+import { Search, AlertTriangle, ChevronRight, ChevronDown, Cloud, Hourglass, Moon, Redo2, Save, Shield, Sun, Undo2, XCircle, CalendarDays, FolderOpen, Menu } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useAppStore, useTemporalStore } from "@/store/useAppStore";
 import Link from "next/link";
@@ -13,6 +13,7 @@ import { motion } from "framer-motion";
 import { fileManager } from "@/services/fileManager";
 import { searchGlobal, type SearchResult } from "@/services/searchService";
 import { ThemeSelector } from "@/components/features/settings/ThemeSelector";
+import { AccessibilitySelector } from "@/components/features/settings/AccessibilitySelector";
 
 
 export default function Header({ title, breadcrumbSuffix }: { title?: React.ReactNode; breadcrumbSuffix?: React.ReactNode }) {
@@ -286,8 +287,19 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
   return (
     <div className="w-full flex flex-col z-40 sticky top-0 bg-background/95 backdrop-blur-xl border-b border-[var(--glass-border)] pb-2 shadow-md">
       {/* Fila 2: Buscar y Acciones */}
-      <div className="w-full px-4 md:px-6 py-2 bg-white/[0.02] border-t border-[var(--glass-border)] flex items-center justify-between gap-2 text-sm text-muted tracking-wide">
-        {/* Búsqueda a la izquierda y menú móvil */}
+      <div className="w-full px-4 md:px-6 py-2 bg-white/[0.02] border-t border-[var(--glass-border)] flex items-center justify-between gap-2 text-sm text-muted tracking-wide relative">
+        
+          {/* Sync Status - Centrado absoluto */}
+          {dataSource === 'local' && (
+            <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 px-3 py-1.5 rounded-full bg-foreground/5 text-xs font-medium text-muted/80 whitespace-nowrap border border-[var(--glass-border)] shadow-sm pointer-events-none">
+              {syncStatus === 'saving' && <><Hourglass className="w-3.5 h-3.5 text-warning animate-spin" /><span className="text-warning">Guardando...</span></>}
+              {syncStatus === 'saved' && <><Save className="w-3.5 h-3.5 text-success" /><span className="text-success">Guardado</span></>}
+              {syncStatus === 'error' && <><AlertTriangle className="w-3.5 h-3.5 text-danger" /><span className="text-danger">Error</span></>}
+              {syncStatus === 'idle' && <><Cloud className="w-3.5 h-3.5 text-muted/50" /><span>Sincronizado</span></>}
+            </div>
+          )}
+          
+          {/* Búsqueda a la izquierda y menú móvil */}
         <div className="flex items-center gap-2 lg:gap-0">
           <button
             onClick={toggleSidebar}
@@ -363,6 +375,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
           {mounted && (
             <div className="flex items-center bg-foreground/5 rounded-lg p-0.5">
               <ThemeSelector />
+              <AccessibilitySelector />
             </div>
           )}
         </div>

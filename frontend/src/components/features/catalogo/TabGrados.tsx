@@ -64,19 +64,6 @@ export function TabGrados() {
   return (
     <div className="space-y-6">
       {/* Cabecera */}
-      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20">
-        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-        <div>
-          <p className="text-sm font-semibold text-foreground">5 Grados Formativos - Ley 3/2022</p>
-          <p className="text-sm text-muted mt-1">
-            La Ley Orgánica 3/2022 estructura la Formación Profesional en 5 grados (A a E).
-            Selecciona el grado que corresponde a tu módulo o programa formativo.
-          </p>
-        </div>
-      </div>
-
-
-
       {/* Tarjetas de grados */}
       <Card className="p-6">
         <h2 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">

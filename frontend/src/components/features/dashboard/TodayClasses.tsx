@@ -29,7 +29,7 @@ export const TodayClasses = () => {
 
     return (
       <MotionWrapper className="glass-panel p-6 border-l-4 border-l-gray-400">
-        <h2 className="text-[1.1rem] font-bold flex items-center gap-2 text-foreground mb-2">
+        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-2">
           <Calendar className="w-6 h-6" /> Tus Clases de Hoy ({formattedToday})
         </h2>
         <p className="text-muted">{reason}</p>
@@ -46,7 +46,7 @@ export const TodayClasses = () => {
         <BookOpen className="w-48 h-48" />
       </div>
       
-      <h2 className="text-[1.1rem] font-bold flex items-center gap-2 text-foreground mb-4 relative z-10">
+      <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4 relative z-10">
         <Calendar className="w-6 h-6 text-accent" /> Tus Clases de Hoy ({formattedToday})
       </h2>
       

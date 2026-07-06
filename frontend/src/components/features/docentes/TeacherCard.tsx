@@ -83,11 +83,11 @@ export function TeacherCard({ teacher, hours, assignedModules, isExpanded, toggl
                 {assignedModules.map((m, idx) => (
                   <div key={idx} className="bg-foreground/5 rounded px-3 py-2 border border-white/5">
                     <div className="flex justify-between items-start mb-1">
-                      <span className="text-accent font-mono text-[10px] font-bold">{m.code}</span>
+                      <span className="text-accent font-mono text-[0.625rem] font-bold">{m.code}</span>
                       <span className="text-xs font-semibold text-foreground/80">{m.hours}h</span>
                     </div>
                     <p className="text-sm text-foreground font-medium leading-tight mb-1">{m.moduleName}</p>
-                    <p className="text-[10px] text-muted tracking-wide">{m.groupName}</p>
+                    <p className="text-[0.625rem] text-muted tracking-wide">{m.groupName}</p>
                   </div>
                 ))}
               </div>

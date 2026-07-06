@@ -12,17 +12,10 @@ export function OtrosElementosTab() {
 
   return (
     <>
-      <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-        <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-        <div>
-          <p className="text-sm font-semibold text-foreground">Otros Elementos - RD 659/2023</p>
-          <p className="text-sm text-muted mt-1">Elementos transversales y competencias personales/sociales.</p>
-        </div>
-      </div>
-<div className="space-y-6 animate-in fade-in duration-500">
+      <div className="space-y-6 animate-in fade-in duration-500">
       <div className="glass-card p-6 border-t-4 border-t-cyan-500">
-        <h2 className="text-[1.1rem] font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1" /></span> Otros Elementos
+        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
+          <span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1" /></span> Transversales
         </h2>
         <div className="space-y-4">
           <div>
