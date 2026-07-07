@@ -22,12 +22,12 @@ function TabSyncInner({ activeTab, setActiveTab }: { activeTab?: string, setActi
   // Write to URL when activeTab changes
   useEffect(() => {
     if (mounted.current && activeTab && activeTab !== tabParam) {
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(window.location.search);
       params.set('tab', activeTab);
-      // Use replace so we don't pollute the history stack with tab changes
-      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+      // Use window.history.replaceState to avoid Next.js router triggering a page remount or state reset
+      window.history.replaceState(null, '', `${pathname}?${params.toString()}`);
     }
-  }, [activeTab, pathname, router, searchParams]); // intentionally not including tabParam
+  }, [activeTab, pathname, tabParam]);
   
   return null;
 }
