@@ -1,5 +1,5 @@
 "use client";
-import { Activity, AlertTriangle, ArrowRight, BarChart2, BookOpen, Briefcase, Building2, CalendarDays, Check, CheckCircle, ClipboardList, FileText, GraduationCap, HeartHandshake, Layers, Users, Wrench, XCircle, ChevronDown, Mail, Send, ListChecks, Info } from "lucide-react";
+import { Activity, AlertTriangle, ArrowRight, BarChart2, BookOpen, Briefcase, Building2, CalendarDays, Check, CheckCircle, ClipboardList, FileText, GraduationCap, HeartHandshake, Layers, Users, Wrench, XCircle, ChevronDown, Mail, Send, ListChecks, Info, Shield, Lock } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -143,6 +143,8 @@ const FAQS = [
     group: "3. Paso 3: Creación del curso y alumnado",
     items: [
       { q: "¿Puedo importar alumnado desde plataformas como Seneca, Rayuela o un Excel?", a: "Sí. En la sección de 'Alumnado' puedes importar un archivo CSV (Excel) con tu lista de clase. Alternativamente, la tabla inteligente te permite copiar y pegar celdas masivamente, igual que si fuera una hoja de cálculo." },
+      { q: "¿Qué nivel de seguridad tienen mis datos de los alumnos?", a: "Tus archivos locales no salen nunca hacia nuestro servidor si no quieres (usando 'Guardar en Local'). Si eliges guardarlos en Google Drive o OneDrive, el archivo es transmitido directamente entre tu navegador y los servidores de Microsoft/Google. Puedes activar el cifrado local para que el archivo sea absolutamente ilegible sin tu clave maestra." },
+      { q: "¿Está la aplicación protegida contra hackeos o caídas?", a: "Sí. El frontend incluye una Política de Seguridad de Contenido (CSP) que bloquea ataques de inyección de código (XSS) para proteger tus datos locales. Además, nuestro servidor cuenta con 'Rate Limiting' (limitación de peticiones) que previene ataques de denegación de servicio (DDoS) para garantizar que los catálogos oficiales siempre estén disponibles cuando los necesites." },
       { q: "¿Cómo distribuyo físicamente al alumnado en el aula?", a: "Dentro de 'Alumnado' encontrarás una pestaña de 'Plano de clase'. Es una pizarra visual e interactiva donde puedes arrastrar y soltar a los estudiantes a sus respectivos pupitres para tener el diseño exacto de tu clase." },
       { q: "¿Cómo uso el sistema de Alertas de Abandono?", a: "El panel de prevención temprana te permite registrar llamadas a las familias, partes disciplinarios o derivaciones al departamento de orientación para alumnado con riesgo de abandono escolar." }
     ]
@@ -518,6 +520,7 @@ export default function InicioPage() {
 
   const TABS = [
     { id: "bienvenida", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> Bienvenida</>, cleanLabel: "Bienvenida" },
+    { id: "seguridad", label: <><span className="inline-flex"><Shield className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguridad</>, cleanLabel: "Seguridad" },
     { id: "asistente", label: <><span className="inline-flex"><Sparkles className="w-[1.2em] h-[1.2em] mr-1" /></span> Asistente IA</>, cleanLabel: "Asistente IA" },
     { id: "verificacion", label: <><span className="inline-flex"><ListChecks className="w-[1.2em] h-[1.2em] mr-1" /></span> Verificación</>, cleanLabel: "Verificación" },
     { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Guía</>, cleanLabel: "Guía" },
@@ -568,6 +571,10 @@ export default function InicioPage() {
           'bienvenida': {
                     'title': 'Bienvenida',
                     'desc': 'Panel de control de acceso rápido a todas las herramientas.'
+          },
+          'seguridad': {
+                    'title': 'Seguridad y privacidad',
+                    'desc': 'Infórmate de cómo protegemos celosamente tus datos.'
           },
           'asistente': {
                     'title': 'Asistente IA',
@@ -669,6 +676,59 @@ export default function InicioPage() {
             )}
 
             {/* ── CONTENIDO: ASISTENTE IA ──────────────────────────────── */}
+            {/* ── CONTENIDO: SEGURIDAD ──────────────────────────────── */}
+            {activeTab === "seguridad" && (
+              <MotionWrapper delay={0.1} className="space-y-8 animate-fade-in">
+                <Card className="p-8 bg-surface border-border hover:border-accent/30 transition-all">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
+                      <Shield className="w-8 h-8" />
+                    </div>
+                    <div>
+                      <h2 className="text-2xl font-bold text-foreground">Tu privacidad por diseño</h2>
+                      <p className="text-muted mt-1 text-lg">Cómo garantizamos que tus datos reales son 100% tuyos.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-6">
+                    <div className="p-5 bg-background rounded-xl border border-border/50">
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Building2 className="w-5 h-5 text-accent"/> 1. El servidor es ciego</h3>
+                      <p className="text-muted leading-relaxed">Nuestra base de datos en la nube <strong>jamás</strong> almacena datos de tus alumnos, tus programaciones, ni nada que crees. El servidor web solo existe para enviarte los Catálogos Oficiales (BOE/BOCAA). Eres invisible para nuestro backend.</p>
+                    </div>
+
+                    <div className="p-5 bg-background rounded-xl border border-border/50">
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Lock className="w-5 h-5 text-accent"/> 2. Cifrado local avanzado AES-256</h3>
+                      <p className="text-muted leading-relaxed mb-4">Puedes activar la encriptación local. Antes de que cualquier archivo (`.fpp` o `.fpc`) se guarde en tu disco duro o se envíe a Google Drive/OneDrive, se cifra usando tu clave maestra dentro de tu propio navegador. Sin esa clave, el archivo es matemáticamente indescifrable.</p>
+                      
+                      <div className="bg-surface border border-border p-4 rounded-lg">
+                        <label className="block text-sm font-medium text-foreground mb-2">Establecer clave de seguridad (no se guarda en ningún sitio)</label>
+                        <div className="flex gap-2">
+                          <input 
+                            type="password" 
+                            className="flex-1 bg-background border border-border rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent" 
+                            placeholder="Introduce tu clave maestra..."
+                            value={useAppStore.getState().encryptionKey || ""}
+                            onChange={(e) => useAppStore.getState().setEncryptionKey(e.target.value || null)}
+                          />
+                        </div>
+                        <p className="text-xs text-muted mt-2"><AlertTriangle className="w-3 h-3 inline mr-1 text-warning"/> Si olvidas esta clave y guardas un archivo, no podremos ayudarte a recuperarlo.</p>
+                      </div>
+                    </div>
+
+                    <div className="p-5 bg-background rounded-xl border border-border/50">
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><CheckCircle className="w-5 h-5 text-accent"/> 3. Defensa contra ataques en el navegador</h3>
+                      <p className="text-muted leading-relaxed">Hemos implementado una política estricta de seguridad de contenido (CSP). Esto bloquea cualquier script malicioso de terceros que intentara inyectarse en la página para robar tus notas temporales almacenadas en la memoria del navegador. Toda la comunicación está limitada y verificada.</p>
+                    </div>
+
+                    <div className="p-5 bg-background rounded-xl border border-border/50">
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Activity className="w-5 h-5 text-accent"/> 4. Servidor blindado y siempre disponible</h3>
+                      <p className="text-muted leading-relaxed">Nuestro servidor backend incorpora un sistema de <strong>Rate Limiting</strong> (limitador de velocidad). Esto significa que si recibe un aluvión de miles de peticiones repentinas (un ataque DDoS o un fallo externo), bloquea temporalmente al atacante, garantizando que el servidor nunca se sature ni se caiga. Así, siempre tendrás acceso al catálogo oficial de módulos cuando lo necesites.</p>
+                    </div>
+                  </div>
+                </Card>
+              </MotionWrapper>
+            )}
+
             {activeTab === "asistente" && (
               <div className="space-y-4 animate-in fade-in duration-500 w-full max-w-6xl mx-auto">
                 <div className="flex justify-center">

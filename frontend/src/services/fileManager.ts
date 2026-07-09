@@ -1,6 +1,7 @@
 import { demoSeed, CRM_SEED_VERSION } from "./demo-ele203-0237ictve-curso202526";
 import { useAppStore } from "@/store/useAppStore";
 import { ModuleData, CursoData, FileSource } from "@/types";
+import CryptoJS from "crypto-js";
 
 export type DataSourceType = 'demo' | 'local';
 
@@ -69,9 +70,14 @@ function downloadJson(dataStr: string, filename: string) {
   URL.revokeObjectURL(url);
 }
 
-/** Serialize data to JSON string for export */
+/** Serialize data to JSON string for export, encrypt if key is present */
 function serializeData(data: any): string {
-  return JSON.stringify(data, null, 2);
+  const jsonStr = JSON.stringify(data, null, 2);
+  const key = useAppStore.getState().encryptionKey;
+  if (key) {
+    return CryptoJS.AES.encrypt(jsonStr, key).toString();
+  }
+  return jsonStr;
 }
 
 // ─── File Manager ───────────────────────────────────────────
@@ -663,8 +669,29 @@ export const fileManager = {
 
   async importProgramacion(jsonStr: string, filename: string): Promise<boolean> {
     try {
-      const parsed = JSON.parse(jsonStr);
-      if (!parsed.df_ud) return false;
+      let parsed;
+      const key = useAppStore.getState().encryptionKey;
+      try {
+        parsed = JSON.parse(jsonStr);
+      } catch (e) {
+        // Might be encrypted
+        if (key) {
+          try {
+            const bytes = CryptoJS.AES.decrypt(jsonStr, key);
+            const decryptedStr = bytes.toString(CryptoJS.enc.Utf8);
+            if (!decryptedStr) throw new Error("Clave incorrecta");
+            parsed = JSON.parse(decryptedStr);
+          } catch (decErr) {
+            console.error("Decryption failed", decErr);
+            throw new Error("Clave incorrecta o archivo dañado.");
+          }
+        } else {
+          console.error("Looks encrypted but no key provided");
+          throw new Error("Archivo cifrado. Debes introducir la clave de seguridad.");
+        }
+      }
+
+      if (!parsed || !parsed.df_ud) return false;
 
       const id = filename.replace('.fpp', '').replace('.json', '') || "imported-pd";
 
@@ -748,8 +775,29 @@ export const fileManager = {
 
   async importCurso(jsonStr: string, filename: string): Promise<boolean> {
     try {
-      const parsed = JSON.parse(jsonStr);
-      if (!parsed.df_al) return false;
+      let parsed;
+      const key = useAppStore.getState().encryptionKey;
+      try {
+        parsed = JSON.parse(jsonStr);
+      } catch (e) {
+        // Might be encrypted
+        if (key) {
+          try {
+            const bytes = CryptoJS.AES.decrypt(jsonStr, key);
+            const decryptedStr = bytes.toString(CryptoJS.enc.Utf8);
+            if (!decryptedStr) throw new Error("Clave incorrecta");
+            parsed = JSON.parse(decryptedStr);
+          } catch (decErr) {
+            console.error("Decryption failed", decErr);
+            throw new Error("Clave incorrecta o archivo dañado.");
+          }
+        } else {
+          console.error("Looks encrypted but no key provided");
+          throw new Error("Archivo cifrado. Debes introducir la clave de seguridad.");
+        }
+      }
+
+      if (!parsed || !parsed.df_al) return false;
       const id = filename.replace('.fpc', '').replace('.json', '') || "imported-curso";
       useAppStore.getState().setActiveCursoId(id);
       useAppStore.getState().setCursoData(parsed);

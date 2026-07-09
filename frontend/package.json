@@ -17,6 +17,8 @@
     "@hello-pangea/dnd": "^18.0.1",
     "@microsoft/microsoft-graph-client": "^3.0.7",
     "@tanstack/react-virtual": "^3.14.2",
+    "@types/crypto-js": "^4.2.2",
+    "crypto-js": "^4.2.0",
     "date-fns": "^4.4.0",
     "driver.js": "^1.4.0",
     "framer-motion": "^12.40.0",

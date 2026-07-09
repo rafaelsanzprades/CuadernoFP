@@ -261,4 +261,7 @@ export interface AppState {
 
   syncStatus: 'idle' | 'unsaved' | 'saving' | 'saved' | 'error';
   setSyncStatus: (status: 'idle' | 'unsaved' | 'saving' | 'saved' | 'error') => void;
+
+  encryptionKey: string | null;
+  setEncryptionKey: (key: string | null) => void;
 }
