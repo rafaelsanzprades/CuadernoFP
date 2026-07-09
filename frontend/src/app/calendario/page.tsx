@@ -592,9 +592,9 @@ export default function CalendarioPage() {
 
 
   const TABS = [
-    { id: "fechas", label: <><span className="inline-flex"><Settings className="w-[1.2em] h-[1.2em] mr-1" /></span> Configuración de fechas</>, cleanLabel: "Configuración de fechas" },
-    { id: "eventos", label: <span className="flex items-center gap-2"><Flag className="w-[1.2em] h-[1.2em] mr-1 shrink-0" /> Eventos y festivos</span>, cleanLabel: "Eventos y festivos" },
-    { id: "visual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> Calendario visual</>, cleanLabel: "Calendario visual" }
+    { id: "fechas", label: <><span className="inline-flex"><Settings className="w-[1.2em] h-[1.2em] mr-1" /></span> Fechas</>, cleanLabel: "Fechas" },
+    { id: "eventos", label: <span className="flex items-center gap-2"><Flag className="w-[1.2em] h-[1.2em] mr-1 shrink-0" /> Eventos</span>, cleanLabel: "Eventos" },
+    { id: "visual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> Visual</>, cleanLabel: "Visual" }
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;

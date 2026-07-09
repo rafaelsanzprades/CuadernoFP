@@ -26,7 +26,7 @@ export default function DocumentosPage() {
     { id: "Currículos", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> Currículos</span>, cleanLabel: "Currículos" },
     { id: "Normativa", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> Normativa</span>, cleanLabel: "Normativa" },
     { id: "TodoFP", label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4 shrink-0" /> TodoFP</span>, cleanLabel: "TodoFP" },
-    { id: "Autores/Editoriales", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> Autores/Editoriales</span>, cleanLabel: "Autores/Editoriales" }
+    { id: "Autores/Editoriales", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> Autores</span>, cleanLabel: "Autores" }
   ];const [activeTab, setActiveTab] = useState("Plantillas");// State for Explorador
   const [currentPath, setCurrentPath] = useState<string>("");
   const [items, setItems] = useState<DocumentItem[]>([]);

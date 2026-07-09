@@ -22,8 +22,8 @@ export default function ProgramacionPage() {
   const [allUdsOpen, setAllUdsOpen] = useState(false);
 
   const TABS = [
-    { id: "secuenciacion", label:  <span className="flex items-center gap-2"><ClipboardList className="w-4 h-4 shrink-0" /> Secuenciación de UD</span>, cleanLabel: "Secuenciación de UD" },
-    { id: "tareas", label:  <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> Tareas competenciales (TC)</span>, cleanLabel: "Tareas competenciales (TC)" }
+    { id: "secuenciacion", label:  <span className="flex items-center gap-2"><ClipboardList className="w-4 h-4 shrink-0" /> Secuenciación</span>, cleanLabel: "Secuenciación" },
+    { id: "tareas", label:  <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> Tareas (TC)</span>, cleanLabel: "Tareas (TC)" }
   ];const [activeTab, setActiveTab] = useState("secuenciacion");const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
 

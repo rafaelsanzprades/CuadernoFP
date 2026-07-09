@@ -306,10 +306,10 @@ export default function ProgresoPage() {
   });
 
   const TABS = [
-    { id: "resumen", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Resumen</> },
-    { id: "detalle", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Detalle por alumnado</> },
-    { id: "grupal", label: <><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> Grupal</> },
-    { id: "individual", label: <><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> Individual</> }
+    { id: "resumen", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Resumen</>, cleanLabel: "Resumen" },
+    { id: "detalle", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Por alumnado</>, cleanLabel: "Por alumnado" },
+    { id: "grupal", label: <><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> Grupal</>, cleanLabel: "Grupal" },
+    { id: "individual", label: <><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> Individual</>, cleanLabel: "Individual" }
   ];
 
   return (

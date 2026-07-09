@@ -38,10 +38,10 @@ export default function MatricesPage() {
   }, []);
 
   const TABS = [
-    { id: "ra", label: "RA y sus CE", icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "ud", label: "UD/T Unidades didácticas o de trabajo", icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "relacion", label: "Relación entre RA y UD/T", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "contribucion", label: "Contribución de RA en OG", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> }
+    { id: "ra", label: "RA y CE", cleanLabel: "RA y CE", icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "ud", label: "Unidades", cleanLabel: "Unidades", icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "relacion", label: "Relación RA-UD", cleanLabel: "Relación RA-UD", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "contribucion", label: "Contribución OG", cleanLabel: "Contribución OG", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> }
   ];
 
   // Load catalog descriptions when module changes (for fallback resolution)

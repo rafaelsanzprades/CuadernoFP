@@ -335,8 +335,8 @@ export default function ArchivosTrabajoPage() {
   // ── Tabs ────────────────────────────────────────────────
 
   const TABS = [
-    { id: "datos", label: <span className="flex items-center gap-2"><Database className="w-4 h-4 shrink-0" /> Gestor de archivos</span> },
-    { id: "nube", label: <span className="flex items-center gap-2"><Cloud className="w-4 h-4 shrink-0" /> Sincronización en la Nube</span> }
+    { id: "datos", label: <span className="flex items-center gap-2"><Database className="w-4 h-4 shrink-0" /> Archivos locales</span>, cleanLabel: "Archivos locales" },
+    { id: "nube", label: <span className="flex items-center gap-2"><Cloud className="w-4 h-4 shrink-0" /> Nube</span>, cleanLabel: "Nube" }
   ];
 
   const breadcrumbSuffixMap: Record<string, string> = {

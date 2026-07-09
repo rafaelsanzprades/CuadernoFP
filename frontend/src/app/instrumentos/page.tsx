@@ -20,9 +20,9 @@ export default function InstrumentosPage() {
 
   const TABS = [
     { id: "resumen", label:  <span className="flex items-center gap-2"><BarChart className="w-4 h-4 shrink-0" /> Resumen</span>, cleanLabel: "Resumen" },
-    { id: "tri1", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> IE. 1er Tri.</span>, cleanLabel: "IE. 1er Tri." },
-    { id: "tri2", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> IE. 2º Tri.</span>, cleanLabel: "IE. 2º Tri." },
-    { id: "tri3", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> IE. 3er Tri.</span>, cleanLabel: "IE. 3er Tri." }
+    { id: "tri1", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> 1º Trimestre</span>, cleanLabel: "1º Trimestre" },
+    { id: "tri2", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> 2º Trimestre</span>, cleanLabel: "2º Trimestre" },
+    { id: "tri3", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> 3º Trimestre</span>, cleanLabel: "3º Trimestre" }
   ];const [activeTab, setActiveTab] = useState("resumen");const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   const [isRecoveryModalOpen, setIsRecoveryModalOpen] = useState(false);

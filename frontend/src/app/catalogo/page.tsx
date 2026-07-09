@@ -99,12 +99,12 @@ function CiclosContent() {
   };
 
   const TAB_LABELS: Record<Tab, string> = {
-    grados: 'Grados formativos',
-    familias: 'Familias profesionales',
-    titulo: 'Título',
-    cursos: 'Cursos → Módulos',
-    modulos: 'Módulo → RA → CE',
-    autores: 'Autores - Editoriales'
+    grados: 'Grados',
+    familias: 'Familias',
+    titulo: 'Títulos',
+    cursos: 'Módulos',
+    modulos: 'RA → CE',
+    autores: 'Autores'
   };
 
   const activeTabCleanLabel = TAB_LABELS[activeTab];
@@ -127,12 +127,12 @@ function CiclosContent() {
               <TabsList className="mb-2 max-w-full">
                 {(
                   [
-                    { id: "grados" as Tab, label: <span className="flex items-center gap-2"><Award className="w-4 h-4" /> Grados Formativos</span> },
-                    { id: "familias" as Tab, label: <span className="flex items-center gap-2"><FolderTree className="w-4 h-4" /> Familias profesionales</span> },
-                    { id: "titulo" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Título</span> },
-                    { id: "cursos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> Cursos → Módulos</span> },
-                    { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> Módulo → RA → CE</span> },
-                    { id: "autores" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-info" /> Autores - Editoriales</span> },
+                    { id: "grados" as Tab, label: <span className="flex items-center gap-2"><Award className="w-4 h-4" /> Grados</span> },
+                    { id: "familias" as Tab, label: <span className="flex items-center gap-2"><FolderTree className="w-4 h-4" /> Familias</span> },
+                    { id: "titulo" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Títulos</span> },
+                    { id: "cursos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> Módulos</span> },
+                    { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> RA → CE</span> },
+                    { id: "autores" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-info" /> Autores</span> },
                   ]
                 ).map((t) => (
                   <TabsTrigger key={t.id} value={t.id}>

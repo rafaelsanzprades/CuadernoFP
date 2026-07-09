@@ -22,9 +22,9 @@ export default function SeguimientoPage() {
   const [allDiarioOpen, setAllDiarioOpen] = useState(false);
 
   const TABS = [
-    { id: "diario", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Diario de aula</span>, cleanLabel: "Diario de aula" },
-    { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> Control de asistencia</span>, cleanLabel: "Control de asistencia" },
-    { id: "alerta_abandono", label: <span className="flex items-center gap-2"><AlertTriangle className="w-4 h-4 shrink-0" /> Alerta abandono</span>, cleanLabel: "Alerta abandono" }
+    { id: "diario", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Diario</span>, cleanLabel: "Diario" },
+    { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> Asistencia</span>, cleanLabel: "Asistencia" },
+    { id: "alerta_abandono", label: <span className="flex items-center gap-2"><AlertTriangle className="w-4 h-4 shrink-0" /> Abandono</span>, cleanLabel: "Abandono" }
   ];const [activeTab, setActiveTab] = useState("diario");const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   useEffect(() => {

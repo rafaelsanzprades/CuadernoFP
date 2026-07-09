@@ -25,8 +25,8 @@ export default function AlumnadoPage() {
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const TABS = [
-    { id: "alumnado", label:  <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> Alumnado</span>, cleanLabel: "Alumnado" },
-    { id: "plano", label: <span className="flex items-center gap-2"><LayoutGrid className="w-4 h-4 shrink-0" /> Plano de clase</span>, cleanLabel: "Plano de clase" },
+    { id: "alumnado", label:  <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> Listado</span>, cleanLabel: "Listado" },
+    { id: "plano", label: <span className="flex items-center gap-2"><LayoutGrid className="w-4 h-4 shrink-0" /> Plano</span>, cleanLabel: "Plano" },
     { id: "boletines", label:  <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> Boletines</span>, cleanLabel: "Boletines" }
   ];const [activeTab, setActiveTab] = useState("alumnado");const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
