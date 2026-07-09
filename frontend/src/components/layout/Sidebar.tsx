@@ -199,7 +199,7 @@ export default function Sidebar() {
             {dataSource === 'demo' ? (
               <div className="relative w-full">
                 <select
-                  className="w-full bg-foreground/5 border rounded-lg pl-3 pr-7 py-1.5 text-xs font-semibold tracking-wide focus:outline-none cursor-pointer appearance-none transition-colors"
+                  className="w-full h-[34px] bg-foreground/5 border rounded-lg pl-3 pr-7 py-1.5 text-sm font-semibold tracking-wide uppercase focus:outline-none cursor-pointer appearance-none transition-colors"
                   style={{ color: 'var(--warning)', borderColor: 'var(--warning)' }}
                   value={demoGroupValue}
                   onChange={(e) => { fileManager.loadDemoData(e.target.value); toast.success(`Grupo ${e.target.value.toUpperCase()}`); }}
@@ -213,14 +213,14 @@ export default function Sidebar() {
             ) : !workspaceHandle ? (
               <button
                 onClick={() => router.push('/archivos')}
-                className="w-full bg-foreground/5 border border-success/30 rounded-lg py-1.5 text-xs font-semibold tracking-wide text-success hover:bg-success/10 transition-colors"
+                className="w-full h-[34px] bg-foreground/5 border border-success/30 rounded-lg py-1.5 text-sm font-semibold tracking-wide uppercase text-success hover:bg-success/10 transition-colors flex items-center justify-center"
               >
                 No hay grupos
               </button>
             ) : (
               <div className="relative w-full">
                 <select
-                  className="w-full bg-foreground/5 border rounded-lg pl-3 pr-7 py-1.5 text-xs font-semibold tracking-wide focus:outline-none cursor-pointer appearance-none transition-colors"
+                  className="w-full h-[34px] bg-foreground/5 border rounded-lg pl-3 pr-7 py-1.5 text-sm font-semibold tracking-wide uppercase focus:outline-none cursor-pointer appearance-none transition-colors"
                   style={{ color: 'var(--success)', borderColor: 'var(--success)' }}
                   value={activeCursoId || ''}
                   onChange={(e) => useAppStore.getState().setActiveCursoId(e.target.value)}
