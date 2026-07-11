@@ -336,10 +336,11 @@ export default function Sidebar() {
           // Extraer el texto base (sin corchetes) y el contenido entre corchetes
           const bracketMatch = group.title.match(/^(.*?)\s*\[.*\]$/);
           const baseTitle = bracketMatch ? bracketMatch[1].trim() : group.title;
+          const isEmptyLocal = dataSource === 'local' && (!workspaceHandle || localGroups.length === 0);
           const infoValue = group.title.includes('[Código del módulo]')
-            ? moduleTitleSuffix
+            ? (isEmptyLocal ? "Abrir Grupo" : moduleTitleSuffix)
             : group.title.includes('[Año]')
-              ? cursoTitleSuffix
+              ? (isEmptyLocal ? "Abrir Grupo" : cursoTitleSuffix)
               : null;
 
           return (
