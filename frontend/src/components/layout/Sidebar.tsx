@@ -210,12 +210,13 @@ export default function Sidebar() {
                 </select>
                 <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none" style={{ color: 'var(--warning)' }} />
               </div>
-            ) : !workspaceHandle ? (
+            ) : (!workspaceHandle || localGroups.length === 0) ? (
               <button
                 onClick={() => router.push('/archivos')}
                 className="w-full h-[34px] bg-foreground/5 border border-success/30 rounded-lg py-1.5 text-sm font-semibold tracking-wide uppercase text-success hover:bg-success/10 transition-colors flex items-center justify-center"
               >
-                No hay grupos
+                <FolderOpen className="w-4 h-4 mr-2" />
+                Abrir Grupo
               </button>
             ) : (
               <div className="relative w-full">
@@ -225,10 +226,7 @@ export default function Sidebar() {
                   value={activeCursoId || ''}
                   onChange={(e) => useAppStore.getState().setActiveCursoId(e.target.value)}
                 >
-                  {localGroups.length === 0
-                    ? <option value="" disabled>No hay grupos</option>
-                    : localGroups.map(g => <option key={g} value={g}>{g}</option>)
-                  }
+                  {localGroups.map(g => <option key={g} value={g}>{g}</option>)}
                 </select>
                 <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none" style={{ color: 'var(--success)' }} />
               </div>

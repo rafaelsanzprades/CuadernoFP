@@ -152,9 +152,9 @@ const FAQS = [
   {
     group: "4. Paso 5: El día a día y la evaluación",
     items: [
-      { q: "¿Qué es el 'Diario de seguimiento'?", a: "Es tu cuaderno de bitácora diario. Te permite anotar lo que ocurre en cada sesión real de clase: qué UD has impartido, si ha habido incidencias o marcar días 'Sin docencia' (como huelgas o claustros) para que no cuenten en tu progreso." },
-      { q: "¿Cómo paso lista o registro faltas de asistencia?", a: "En la sección de Seguimiento Diario tienes un 'Control de Asistencia'. Verás a todo tu alumnado y con un solo clic en su cuadrícula puedes alternar entre Falta, Retraso o Falta Justificada." },
-      { q: "¿Cómo evalúo una tarea o examen concreto?", a: "Ve a la sección 'Progreso' para introducir notas numéricas rápidas cruzando tareas con alumnado. También puedes hacerlo de forma más minuciosa entrando en la Ficha Individual de el alumnado dentro de 'Alumnado'." },
+      { q: "¿Qué es el 'Diario de aula'?", a: "Es tu cuaderno de bitácora diario. Te permite anotar lo que ocurre en cada sesión real de clase: qué UD has impartido, si ha habido incidencias o marcar días 'Sin docencia' (como huelgas o claustros) para que no cuenten en tu progreso." },
+      { q: "¿Cómo paso lista o registro faltas de asistencia?", a: "En la sección de Diario tienes un 'Control de Asistencia'. Verás a todo tu alumnado y con un solo clic en su cuadrícula puedes alternar entre Falta, Retraso o Falta Justificada." },
+      { q: "¿Cómo evalúo una tarea o examen concreto?", a: "Ve a la sección 'Evaluación' para introducir notas numéricas rápidas cruzando tareas con alumnado. También puedes hacerlo de forma más minuciosa entrando en la Ficha Individual de el alumnado dentro de 'Alumnado'." },
       { q: "¿Cómo se calcula exactamente la nota final del trimestre?", a: "El sistema cruza las calificaciones que pones con el 'peso' que le diste a los Instrumentos de Evaluación (ej. 70% Examen, 30% Tareas) y el 'peso' global de cada Resultado de Aprendizaje (RA). Todo el cálculo se hace en tiempo real." }
     ]
   },
@@ -164,13 +164,7 @@ const FAQS = [
       { q: "¿Puedo generar boletines automáticos para los alumnos?", a: "Sí. Desde la sección de 'Descargas' puedes generar boletines en PDF masivos para toda la clase o resúmenes individuales hiperdetallados que justifican la nota en base a cada Criterio de Evaluación conseguido." }
     ]
   },
-  {
-    group: "6. Módulos especiales (FCT y dual)",
-    items: [
-      { q: "¿Qué es la sección Prácticas FEOE?", a: "FEOE (Formación en Empresa u Organismo Equiparado) es tu CRM para gestionar la relación con empresas, firmar convenios, asignar tutores laborales y ubicar a los alumnos en su fase de FP Dual o Prácticas." },
-      { q: "¿Para qué sirve el módulo de Orientación Profesional?", a: "Es una herramienta de tutoría que te ayuda a registrar el perfil laboral del alumnado, revisar sus CVs y hacer un seguimiento de sus preferencias o posibles ofertas de empleo tras titular." }
-    ]
-  },
+
   {
     group: "7. Soporte técnico",
     items: [
@@ -428,12 +422,12 @@ export default function InicioPage() {
     {
       id: "seguimiento",
       icon: <ClipboardList className="w-5 h-5" />,
-      title: "Seguimiento diario",
+      title: "Diario de aula",
       href: "/seguimiento",
-      hrefLabel: "Seguimiento diario",
+      hrefLabel: "Diario de aula",
       status: sgmtCount === 0 ? "empty" : "ok",
       lines: sgmtCount === 0
-        ? ["Sin entradas de seguimiento diario"]
+        ? ["Sin entradas en el diario de aula"]
         : [`${sgmtCount} sesiones registradas en el diario`],
       actionHref: sgmtCount === 0 ? "/seguimiento" : undefined,
       actionLabel: sgmtCount === 0 ? "Registrar primera sesión" : undefined,
@@ -441,9 +435,9 @@ export default function InicioPage() {
     {
       id: "evaluaciones",
       icon: <BarChart2 className="w-5 h-5" />,
-      title: "Progreso académico",
+      title: "Evaluación (Progreso)",
       href: "/progreso",
-      hrefLabel: "Progreso académico",
+      hrefLabel: "Evaluación",
       status: evalCount === 0 ? "empty" : evalTotal > 0 && evalCount < evalTotal ? "warning" : "ok",
       lines: evalCount === 0
         ? ["Sin calificaciones introducidas"]
@@ -456,35 +450,7 @@ export default function InicioPage() {
       actionHref: evalCount === 0 ? "/progreso" : undefined,
       actionLabel: evalCount === 0 ? "Ir a calificaciones" : undefined,
     },
-    {
-      id: "feoe",
-      icon: <Building2 className="w-5 h-5" />,
-      title: "Prácticas FEOE",
-      href: "/feoe",
-      hrefLabel: "Prácticas FEOE",
-      status: !tieneFeoe ? "empty" : "ok",
-      lines: !tieneFeoe
-        ? ["Sin empresas colaboradoras registradas"]
-        : [
-          `${empresasCount} empresas colaboradoras`,
-          `${alumnosAsignados} alumnos asignados a empresa`,
-        ],
-      actionHref: !tieneFeoe ? "/feoe" : undefined,
-      actionLabel: !tieneFeoe ? "Añadir empresa" : undefined,
-    },
-    {
-      id: "profesional",
-      icon: <Briefcase className="w-5 h-5" />,
-      title: "Orientación profesional",
-      href: "/profesional",
-      hrefLabel: "Orientación profesional",
-      status: tieneProfesional ? "ok" : "empty",
-      lines: tieneProfesional
-        ? ["Plan de orientación profesional configurado"]
-        : ["Sin plan de orientación profesional"],
-      actionHref: !tieneProfesional ? "/profesional" : undefined,
-      actionLabel: !tieneProfesional ? "Crear plan de orientación" : undefined,
-    },
+
     {
       id: "tutoria",
       icon: <HeartHandshake className="w-5 h-5" />,

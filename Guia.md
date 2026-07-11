@@ -29,8 +29,9 @@ Cuando generes identificadores o guardes datos, usa estos estándares (salvo que
 - **Archivos exportados:** `[Curso]_[Acrónimo-Módulo]_[Documento].pdf` (ej. `2025-26_DAW_Programacion.pdf`).
 
 - **Glosario clave que debes comprender:**
-  - **Programación didáctica:** Es el "molde" teórico. Contiene la normativa (resultados de aprendizaje y criterios de evaluación) y las unidades didácticas. Se diseña una vez y se puede reutilizar en cursos posteriores.
-  - **Curso (o grupo):** Es la "instancia" real. Representa a el alumnado físicos, sus calificaciones, faltas de asistencia y calendario en un año académico específico (ej. 2025-26).
+  - **Programación didáctica:** Es el "molde" teórico (.fpp). Contiene la normativa (resultados de aprendizaje y criterios de evaluación) y las unidades didácticas. Se diseña una vez y se puede reutilizar en cursos posteriores.
+  - **Curso:** Es la "instancia" real (.fpc). Representa a el alumnado físico, sus calificaciones, faltas de asistencia y calendario en un año académico específico (ej. 2025-26).
+  - **Grupo:** Es la agrupación virtual en el Área de Trabajo que abre la Programación y el Curso a la vez.
 
 Una vez tengas el contexto necesario, comienza a guiar al usuario o ejecuta las acciones detalladas desde el **Paso 1** en adelante.
 
@@ -45,29 +46,29 @@ Vamos a pedirle al sistema que nos cree el archivo base de la programación carg
 
 - **Apartado:** General (barra lateral superior)
   - **Página:** Catálogo [🔗](https://cuadernofp.web.app/catalogo)
-    - **Pestaña:** Grados formativos
+    - **Pestaña:** Grados
       - **Bloque:** Grados del A al E
         - **Botón:** Grado D. Haz clic sobre el Grado correspondiente, D corresponde a Ciclos formativos.
-    - **Pestaña:** Familias profesionales
+    - **Pestaña:** Familias
       - **Bloque:** Navegación oficial
         - **Texto:** Familia profesional. Haz clic en la tarjeta de tu familia, ej. Informática.
-    - **Pestaña:** Título
+    - **Pestaña:** Títulos
       - **Bloque:** Selección de título
         - **Selector:** Título. Selecciona tu ciclo formativo en el desplegable.
-    - **Pestaña:** Cursos → Módulos
+    - **Pestaña:** Módulos
       - **Bloque:** Lista de Módulos
         - **Botón:** "Nueva Programación". Haz clic en el botón azul junto a tu módulo para crearlo.
-    - **Pestaña:** Módulo → RA → CE
+    - **Pestaña:** RA → CE
       - **Bloque:** Estructura del módulo
         - **Texto:** Visualización. Comprueba el árbol de resultados de aprendizaje y criterios de evaluación.
-    - **Pestaña:** Autores - Editoriales
+    - **Pestaña:** Autores
       - **Bloque:** Propuestas didácticas
         - **Botón:** Importar. Permite cargar una propuesta de editorial pre-empaquetada en formato .fpp.
 
 ### 1.2. Configurar el módulo didáctico
 Una vez creada la programación base (que verás activa en la pantalla de [Archivos](/archivos)), vamos a darle tu toque personal: tu instituto, tu metodología y cómo ponderas los exámenes frente a las prácticas.
 
-- **Apartado:** Programación [Código]
+- **Apartado:** Programación [Código del módulo]
   - **Página:** Módulo didáctico [🔗](https://cuadernofp.web.app/modulo)
     - **Pestaña:** Datos
       - **Bloque:** Centro y docente
@@ -106,32 +107,32 @@ Una vez creada la programación base (que verás activa en la pantalla de [Archi
 ### 1.3. Definir las matrices y unidades didácticas
 Aquí vamos a definir qué temas o Unidades de Trabajo (UD) vas a dar a lo largo del año, y cruzarlos con los resultados de aprendizaje de la ley para decirle al sistema qué peso tiene cada tema.
 
-- **Apartado:** Programación [Código]
+- **Apartado:** Programación [Código del módulo]
   - **Página:** Matrices OG→RA→CE→UD/T [🔗](https://cuadernofp.web.app/matrices)
-    - **Pestaña:** RA y sus CE
+    - **Pestaña:** RA y CE
       - **Bloque:** RA. Resultados de aprendizaje
         - **Número:**. Asignar la ponderación % de cada RA, la suma es 100% e indicar cuales se desarrollan, aunque sea parcialmente en la FEOE.
       - **Bloque:** CE. Criterios de evaluación
         - **Número:**. Verificar la ponderación % media para cada CE dentro de cada RA, la suma para cada RA es 100%.
-    - **Pestaña:** UD/T Unidades didácticas o de trabajo
+    - **Pestaña:** Unidades
       - **Bloque:** Lista de Unidades
         - **Botón:** "Añadir nueva UD". Haz clic para crear un nuevo tema.
         - **Número:**. Teclea la duración estimada del tema.
         - **Texto:** Unidad Didáctica o de Trabajo. Teclea el nombre del tema.
         - **Tabla:**  de RA. Haz clic en la intersección de la UD con el RA al que contribuye y teclea su porcentaje.
-    - **Pestaña:** Relación entre RA y UD/T
+    - **Pestaña:** Relación RA-UD
       - **Bloque:** Resumen de relaciones
         - **Tabla:**. Verifica que la distribución de temas y pesos asignados a cada RA cuadra correctamente.
-    - **Pestaña:** Contribución de RA en OG
+    - **Pestaña:** Contribución OG
       - **Bloque:** Matriz de Objetivos Generales
         - **Tabla:**  de OG. Haz clic en la intersección para asignar en qué contribuye cada Resultado de Aprendizaje (RA) del módulo a los Objetivos Generales (OG) del Título.
 
 ### 1.4. Instrumentos de evaluación
 En este paso configuramos las "herramientas" que vas a usar para poner notas reales en cada trimestre (exámenes, libretas, proyectos...) y a qué Criterio de Evaluación ataca cada una.
 
-- **Apartado:** Programación [Código]
+- **Apartado:** Programación [Código del módulo]
   - **Página:** Instrumentos de evaluación [🔗](https://cuadernofp.web.app/instrumentos)
-    - **Pestaña:** IE. 1er Tri. Deberás repetir el proceso en el 2º y 3er trimestre.
+    - **Pestaña:** 1º Trimestre. Deberás repetir el proceso en el 2º y 3º Trimestre, y consultar el Resumen.
       - **Bloque:** Lista de Instrumentos
         - **Botón:** "Añadir Instrumento/Actividad". Haz clic para crear un examen o tarea.
         - **Selector:** Tipo. Selecciona entre Teoria, Practica, Informes, Tareas o Recuperacion.
@@ -139,16 +140,16 @@ En este paso configuramos las "herramientas" que vas a usar para poner notas rea
         - **Número:** % Pond. Teclea cuánto pesa esta actividad.
         - **Casilla:** Casillas de CE. Marca con un tick los criterios de evaluación que se evalúan en esta prueba específica.
 
-### 1.5. Secuenciar la programación de aula (temario y tareas)
+### 1.5. Secuenciación (Programación de aula)
 Por último, vamos a planificar el día a día bajando a la tierra. ¿Qué vas a dar en la sesión 1? ¿Y en la sesión 2?
 
-- **Apartado:** Programación [Código]
-  - **Página:** Programación de aula [🔗](https://cuadernofp.web.app/programacion)
-    - **Pestaña:** Secuenciación de UD
+- **Apartado:** Programación [Código del módulo]
+  - **Página:** Secuenciación [🔗](https://cuadernofp.web.app/programacion)
+    - **Pestaña:** Secuenciación
       - **Bloque:** Tabla de Sesiones
         - **Botón:** "+". Haz clic para añadir clases/sesiones dentro de una UD específica.
         - **Texto:** Contenidos y Recursos. Describe brevemente qué vas a explicar o usar ese día específico.
-    - **Pestaña:** Tareas competenciales [🔗](https://cuadernofp.web.app/programacion?tab=tareas)
+    - **Pestaña:** Tareas (TC) [🔗](https://cuadernofp.web.app/programacion?tab=tareas)
       - **Bloque:** Diseño de tareas
         - **Botón:** "Añadir Tarea Competencial". Opcional: Crea un reto o proyecto integrador de evaluación para tu alumnado.
 
@@ -186,7 +187,7 @@ Ahora vamos a instanciar la Programación que acabas de crear en un año académ
 ### 3.1. Iniciar un nuevo curso y grupo
 Vamos a decirle a CuadernoFP en qué año estamos y cómo se llama la clase.
 
-- **Apartado:** Grupo (barra lateral)
+- **Apartado:** Barra lateral (arriba)
   - **Modo:** REALES. Verifica que el botón REALES esté seleccionado.
   - **Botón:** Archivos
     - **Tarjeta:** Cursos (Verde)
@@ -198,9 +199,9 @@ Vamos a decirle a CuadernoFP en qué año estamos y cómo se llama la clase.
 ### 3.2. Configurar el calendario académico
 Marca los trimestres, las evaluaciones y los días que no hay clase para que la agenda funcione perfectamente.
 
-- **Apartado:** Curso [año]
+- **Apartado:** Curso [Año]
   - **Página:** Calendario académico [🔗](https://cuadernofp.web.app/calendario)
-    - **Pestaña:** Configuración de fechas [🔗](https://cuadernofp.web.app/calendario?tab=fechas)
+    - **Pestaña:** Fechas [🔗](https://cuadernofp.web.app/calendario?tab=fechas)
       - **Bloque:** Fechas generales
         - **Botón:** Autodetectar. Haz clic para intentar autocompletar.
         - **Fecha:** Inicio de curso, Inicio clases (1T), Fin clases (3T), Fin de curso. Despliega los calendarios y marca las fechas correspondientes.
@@ -208,29 +209,29 @@ Marca los trimestres, las evaluaciones y los días que no hay clase para que la 
         - **Número:** Lun, Mar, Mié, Jue, Vie. Teclea cuántas horas de clase tienes cada día.
       - **Bloque:** Trimestres
         - **Fecha:** Inicio y Fin. Marca las fechas exactas para el 1er, 2º y 3er trimestre.
-      - **Bloque:** FP dual (FEOE)
+      - **Bloque:** FP Dual (FEOE)
         - **Selector:** Tipo de Dual y Docencia. Selecciona en los desplegables el régimen aplicable.
         - **Fecha:** Inicio FEOE, Fin FEOE, Horas/día FEOE. Completa las fechas y carga horaria si aplica.
-    - **Pestaña:** Eventos y festivos [🔗](https://cuadernofp.web.app/calendario?tab=eventos)
+    - **Pestaña:** Eventos [🔗](https://cuadernofp.web.app/calendario?tab=eventos)
       - **Bloque:** Notas registradas y nuevo evento
         - **Fecha:** Selector de fechas. Marca el Inicio y Hasta.
         - **Selector:** Selector de Tipo. Elige entre Festivo o Evento.
         - **Texto:** Descripción. Escribe qué se celebra y dale al botón "+".
-    - **Pestaña:** Calendario visual [🔗](https://cuadernofp.web.app/calendario?tab=visual)
+    - **Pestaña:** Visual [🔗](https://cuadernofp.web.app/calendario?tab=visual)
       - **Bloque:** Meses
         - **Fecha:** Día del mes. Haz clic directamente sobre cualquier número del calendario interactivo para marcarlo rápido como festivo.
 
 ### 3.3. Gestionar el alumnado y tutoría
 ¡Necesitamos alumnado a los que poner nota!
 
-- **Apartado:** Curso [año]
+- **Apartado:** Curso [Año]
   - **Página:** Alumnado y tutoría [🔗](https://cuadernofp.web.app/alumnado)
-    - **Pestaña:** Alumnado [🔗](https://cuadernofp.web.app/alumnado?tab=alumnado)
+    - **Pestaña:** Listado [🔗](https://cuadernofp.web.app/alumnado?tab=alumnado)
       - **Bloque:** Lista oficial
         - **Botón:** Importar CSV. Haz clic para subir un Excel con la lista de clase.
         - **Botón:** Añadir Alumnado. Haz clic para meter alumnado a mano.
         - **Tabla:** Celdas de tabla. Teclea directamente Estado, Apellidos, Nombre, Edad, Nacimiento, Repite, Email y Móvil sobre la tabla.
-    - **Pestaña:** Plano de clase [🔗](https://cuadernofp.web.app/alumnado?tab=plano)
+    - **Pestaña:** Plano [🔗](https://cuadernofp.web.app/alumnado?tab=plano)
       - **Bloque:** Pizarra y pupitres
         - **Acción:** Arrastrar. Haz clic y arrastra a el alumnado a sus mesas para diseñar tu aula visualmente.
     - **Pestaña:** Boletines [🔗](https://cuadernofp.web.app/alumnado?tab=boletines)
@@ -260,34 +261,34 @@ Este es el proceso rutinario que harás cada día cuando llegues a tu aula, enci
 ### 5.1. Abrir tu clase al llegar al centro
 Cargar todo de golpe es tan fácil como hacer un doble clic.
 
-- **Apartado:** Grupo (barra lateral)
+- **Apartado:** Barra lateral (arriba)
   - **Modo:** REALES. Asegúrate de estar trabajando en tu entorno real.
   - **Botón:** Archivos
     - **Tarjeta:** Grupos
       - **Acción:** Nombre de tu clase. Haz DOBLE CLIC sobre tu grupo en la lista para cargar alumnado, calendario y temario a la vez.
 
-### 5.2. Pasar lista, anotar el diario y alertas
+### 5.2. Pasar lista y anotar el Diario de aula
 Anota quién falta y qué has dado en clase hoy.
 
-- **Apartado:** Curso [año]
-  - **Página:** Seguimiento diario [🔗](https://cuadernofp.web.app/seguimiento)
-    - **Pestaña:** Diario de aula [🔗](https://cuadernofp.web.app/seguimiento?tab=diario)
+- **Apartado:** Curso [Año]
+  - **Página:** Diario [🔗](https://cuadernofp.web.app/seguimiento)
+    - **Pestaña:** Diario [🔗](https://cuadernofp.web.app/seguimiento?tab=diario)
       - **Bloque:** Diario de clases y contingencias (por meses)
         - **Casilla:** Checkbox Sin Docencia o Público. Marca si hoy no ha habido clase o es público.
         - **Texto:** Área de texto de seguimiento. Teclea aquí el resumen de lo que has explicado hoy.
-    - **Pestaña:** Control de asistencia [🔗](https://cuadernofp.web.app/seguimiento?tab=asistencia)
+    - **Pestaña:** Asistencia [🔗](https://cuadernofp.web.app/seguimiento?tab=asistencia)
       - **Bloque:** Tabla de asistencia
         - **Botón:** de estado. Haz clic en el cuadro del alumnado y fecha para alternar entre Falta, Retraso o Justificado.
-    - **Pestaña:** Alerta abandono [🔗](https://cuadernofp.web.app/seguimiento?tab=alerta_abandono)
+    - **Pestaña:** Abandono [🔗](https://cuadernofp.web.app/seguimiento?tab=alerta_abandono)
       - **Bloque:** Panel de prevención
         - **Tabla:** Celdas de acciones. Registra si has llamado a las familias o derivado a orientación.
 
-### 5.3. Calificar tareas y exámenes
+### 5.3. Evaluación y Progreso académico
 Pon las notas y deja que el sistema haga la matemática pesada de calcular la superación de los RA.
 
-- **Apartado:** Curso [año]
-  - **Página:** Progreso académico [🔗](https://cuadernofp.web.app/progreso)
-    - **Pestaña:** Panel integrado [🔗](https://cuadernofp.web.app/progreso?tab=resumen)
+- **Apartado:** Curso [Año]
+  - **Página:** Evaluación [🔗](https://cuadernofp.web.app/progreso)
+    - **Pestaña:** Resumen [🔗](https://cuadernofp.web.app/progreso?tab=resumen) (y puedes revisar Por alumnado, Grupal o Individual)
       - **Bloque:** Tabla de calificaciones
         - **Tabla:** Celda de nota. Haz clic en la intersección de alumnado y una tarea, teclea su calificación y haz clic Intro para actualizar su porcentaje de RA al vuelo.
 

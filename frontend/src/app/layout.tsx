@@ -29,6 +29,7 @@ import { TourGuide } from "@/components/features/onboarding/TourGuide";
 import { GlobalErrorBoundary } from "@/components/GlobalErrorBoundary";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { ChatbotWidget } from "@/components/features/chatbot/ChatbotWidget";
+import { DataSourceTheme } from "@/components/layout/DataSourceTheme";
 
 export default function RootLayout({
   children,
@@ -37,12 +38,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${outfit.variable} font-sans`} suppressHydrationWarning>
-      <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-      </head>
       <body className="antialiased bg-[var(--background)] text-[var(--foreground)] min-h-screen flex flex-col transition-colors duration-300">
         <AuthProvider>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
+            <DataSourceTheme />
             <GlobalErrorBoundary>
               <PageTransition>
                 {children}

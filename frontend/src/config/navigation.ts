@@ -6,7 +6,7 @@ export const navGroups = [
     sectionDescription: "Opciones generales de la aplicación y recursos oficiales.",
     items: [
       { href: "/catalogo", label: "Catálogo", icon: GraduationCap, description: "Familias, Títulos, Módulos y currículos (RA y CE)." },
-      { href: "/archivos", label: "Archivos", icon: FolderOpen, description: "Sincronización y copias de seguridad." },
+      { href: "/archivos", label: "Archivos", icon: FolderOpen, description: "Gestión de archivos de Programación y Curso." },
       { href: "/documentos", label: "Documentos", icon: FileText, description: "Legislación, plantillas y normativas." },
       { href: "/descargas", label: "Descargas", icon: FileText, description: "Generación de actas, informes y boletines." }
     ]
@@ -18,7 +18,7 @@ export const navGroups = [
       { href: "/modulo", label: "Módulo", icon: Settings, description: "Contexto, metodología y recursos básicos." },
       { href: "/matrices", label: "Matrices", icon: Grid, description: "Ponderación y cruce de RA, CE y Unidades Didácticas." },
       { href: "/instrumentos", label: "Instrumentos", icon: Wrench, description: "Definición y pesos de las herramientas de evaluación." },
-      { href: "/programacion", label: "Secuenciación", icon: BookOpen, description: "Diseño y temporalización de Unidades y Tareas." }
+      { href: "/programacion", label: "Secuenciación", icon: BookOpen, description: "Programación de aula: Diseño y temporalización de Unidades y Tareas." }
     ]
   },
   {
@@ -27,8 +27,8 @@ export const navGroups = [
     items: [
       { href: "/calendario", label: "Calendario", icon: Calendar, description: "Horario semanal, trimestres, festivos y eventos." },
       { href: "/alumnado", label: "Alumnado", icon: Users, description: "Fichas, tutorías, prevención de abandono y plano de clase." },
-      { href: "/seguimiento", label: "Diario", icon: MapPin, description: "Diario de aula, asistencia e incidencias." },
-      { href: "/progreso", label: "Evaluación", icon: TrendingUp, description: "Cuaderno de notas, rúbricas y analíticas por RA." }
+      { href: "/seguimiento", label: "Diario", icon: MapPin, description: "Diario de aula, control de asistencia e incidencias." },
+      { href: "/progreso", label: "Evaluación", icon: TrendingUp, description: "Progreso académico: Cuaderno de notas, rúbricas y analíticas por RA." }
     ]
   }
 ];

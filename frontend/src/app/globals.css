@@ -1,3 +1,4 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
 @import "tailwindcss";
 
 :root {
@@ -290,4 +291,17 @@ tr:hover td {
   animation: none !important;
   transition: none !important;
   scroll-behavior: auto !important;
+}
+
+/* =========================================================================
+   DATA-SOURCE THEME OVERRIDES
+   ========================================================================= */
+html[data-source="demo"], body[data-source="demo"] {
+  --accent-color: var(--warning) !important;
+  --color-accent: var(--warning) !important;
+}
+
+html[data-source="local"], body[data-source="local"] {
+  --accent-color: var(--success) !important;
+  --color-accent: var(--success) !important;
 }

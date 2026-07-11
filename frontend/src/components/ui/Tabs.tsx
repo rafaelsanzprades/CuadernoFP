@@ -77,14 +77,14 @@ export function TabsTrigger({
         if (onClick) onClick();
       }}
       className={`relative px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-200 whitespace-nowrap outline-none
-        ${isActive ? "text-white" : "text-muted hover:text-foreground hover:bg-foreground/5"}
+        ${isActive ? "text-accent drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]" : "text-muted hover:text-accent hover:bg-accent/10"}
         ${className}
       `}
     >
       {isActive && (
         <motion.div
           layoutId="activeTabIndicator"
-          className="absolute inset-0 bg-accent rounded-lg shadow-md -z-10"
+          className="absolute inset-0 bg-accent/10 border border-accent rounded-lg shadow-[0_0_15px_rgba(var(--color-accent),0.15)] -z-10"
           initial={false}
           transition={{ type: "spring", stiffness: 400, damping: 30 }}
         />
