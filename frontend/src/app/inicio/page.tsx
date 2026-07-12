@@ -186,7 +186,7 @@ export default function InicioPage() {
   const [isLoadingGuia, setIsLoadingGuia] = useState(false);useEffect(() => {
     if (activeTab === "guia" && !guiaContent && !isLoadingGuia) {
       setIsLoadingGuia(true);
-      fetch('/api/docs/guia')
+      fetch('/Guia.md')
         .then(res => res.text())
         .then(text => {
           setGuiaContent(text);
