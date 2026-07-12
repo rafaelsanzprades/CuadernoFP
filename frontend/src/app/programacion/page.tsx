@@ -14,16 +14,18 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Skeleton } from "@/components/ui/Skeleton";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 
 export default function ProgramacionPage() {
   const { activeModuleId, moduleData, updateDataFrame } = useAppStore();
   const { isLoading } = useModule(activeModuleId);
+  const { t } = useTranslation();
   const [allUdsOpen, setAllUdsOpen] = useState(false);
 
   const TABS = [
-    { id: "secuenciacion", label:  <span className="flex items-center gap-2"><ClipboardList className="w-4 h-4 shrink-0" /> Secuenciación</span>, cleanLabel: "Secuenciación" },
-    { id: "tareas", label:  <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> Tareas (TC)</span>, cleanLabel: "Tareas (TC)" }
+    { id: "secuenciacion", label:  <span className="flex items-center gap-2"><ClipboardList className="w-4 h-4 shrink-0" /> {t('tabs.secuenciacion')}</span>, cleanLabel: t('tabs.secuenciacion') },
+    { id: "tareas", label:  <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.tareas')}</span>, cleanLabel: t('tabs.tareas') }
   ];const [activeTab, setActiveTab] = useState("secuenciacion");const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
 
@@ -172,9 +174,9 @@ export default function ProgramacionPage() {
           <MotionWrapper className="space-y-4 pb-12">
             <div>
             <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-              <span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación de aula
+              <span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.programacion_title')}
             </h1>
-            <p className="text-muted mt-2 text-lg">Secuenciación temporal de UD y tareas competenciales.</p>
+            <p className="text-muted mt-2 text-lg">{t('pages.programacion_desc')}</p>
           </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab}>

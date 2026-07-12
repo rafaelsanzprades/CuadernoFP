@@ -1,8 +1,9 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { AlertTriangle, BarChart, BookOpen, Calculator, Calendar, CalendarDays, ChevronRight, Construction, CornerLeftUp, Download, DownloadCloud, File, FileEdit, FileSpreadsheet, FileText, Folder, FolderOpen, GraduationCap, MapPin, Play, Scale, Search, Settings, UploadCloud, User, Users, X , Info } from "lucide-react";
+import { AlertTriangle, BarChart, BookOpen, Calculator, Calendar, CalendarDays, ChevronRight, Construction, CornerLeftUp, Download, DownloadCloud, File, FileEdit, FileSpreadsheet, FileText, Folder, FolderOpen, GraduationCap, MapPin, Play, Scale, Search, Settings, UploadCloud, User, Users, X, Info, ExternalLink } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
+import { useTranslation } from "react-i18next";
 import Header from "@/components/layout/Header";
 import toast from "react-hot-toast";
 import { Card } from "@/components/ui/Card";
@@ -21,13 +22,15 @@ type DocumentItem = {
 };
 
 export default function DocumentosPage() {
+  const { t } = useTranslation();
   const TABS = [
-    { id: "Plantillas", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Plantillas</span>, cleanLabel: "Plantillas" },
-    { id: "Currículos", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> Currículos</span>, cleanLabel: "Currículos" },
-    { id: "Normativa", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> Normativa</span>, cleanLabel: "Normativa" },
-    { id: "TodoFP", label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4 shrink-0" /> TodoFP</span>, cleanLabel: "TodoFP" },
-    { id: "Autores/Editoriales", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> Autores</span>, cleanLabel: "Autores" }
-  ];const [activeTab, setActiveTab] = useState("Plantillas");// State for Explorador
+    { id: "plantillas", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.plantillas', {defaultValue: 'Plantillas'})}</span>, cleanLabel: t('tabs.plantillas', {defaultValue: 'Plantillas'}) },
+    { id: "curriculos", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> {t('tabs.curriculos', {defaultValue: 'Currículos'})}</span>, cleanLabel: t('tabs.curriculos', {defaultValue: 'Currículos'}) },
+    { id: "normativa", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.normativa', {defaultValue: 'Normativa'})}</span>, cleanLabel: t('tabs.normativa', {defaultValue: 'Normativa'}) },
+    { id: "todofp", label: <span className="flex items-center gap-2"><ExternalLink className="w-4 h-4 shrink-0" /> {t('tabs.todofp', {defaultValue: 'TodoFP'})}</span>, cleanLabel: t('tabs.todofp', {defaultValue: 'TodoFP'}) },
+    { id: "autores", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> {t('tabs.autores', {defaultValue: 'Autores'})}</span>, cleanLabel: t('tabs.autores', {defaultValue: 'Autores'}) }
+  ];
+  const [activeTab, setActiveTab] = useState("plantillas");
   const [currentPath, setCurrentPath] = useState<string>("");
   const [items, setItems] = useState<DocumentItem[]>([]);
   const [loadingDocs, setLoadingDocs] = useState<boolean>(true);
@@ -38,7 +41,6 @@ export default function DocumentosPage() {
   const [previewFilename, setPreviewFilename] = useState<string | null>(null);
   const [downloadingStr, setDownloadingStr] = useState<string | null>(null);
 
-  // State for Descargas
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData } = useAppStore();
   const [loadingData, setLoadingData] = useState(true);
 
@@ -96,7 +98,6 @@ export default function DocumentosPage() {
     }
   }, [activeModuleId, moduleData, activeCursoId, cursoData, setModuleData, setCursoData]);
 
-  // Explorador Handlers
   const handleNavigate = (newPath: string) => {
     fetchDocuments(newPath);
   };
@@ -138,7 +139,6 @@ export default function DocumentosPage() {
     }
   };
 
-  // Descargas Handlers
   const handleDownloadPdf = async (type: string, al_id?: string) => {
     try {
       setDownloadingStr(type);
@@ -201,10 +201,6 @@ export default function DocumentosPage() {
 
   const filteredItems = items.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
-  const df_al = cursoData?.df_al || [];
-  const activeAlumnado = df_al.filter((al: Alumnado) => al.Estado !== "Baja");
-  activeAlumnado.sort((a: Alumnado, b: Alumnado) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
-
   return (
     <div className="flex min-h-screen bg-background">
       <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -219,10 +215,10 @@ export default function DocumentosPage() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
               <div>
                 <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                  <span className="text-3xl text-info"><FolderOpen className="w-8 h-8" strokeWidth={2.5} /></span> Documentos
+                  <span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.documentos_title', {defaultValue: 'Documentos Oficiales'})}
                 </h1>
-                <p className="text-muted mt-2 text-lg">Explorador de legislación, normativas y docs oficiales.</p>
-            </div>
+                <p className="text-muted mt-2 text-lg">{t('pages.documentos_desc', {defaultValue: 'Explorador de legislación, normativas y docs oficiales.'})}</p>
+              </div>
             </div>
 
             <Tabs value={activeTab} onValueChange={(val) => { setActiveTab(val); fetchDocuments(val); }} className="w-full mb-6 mt-6">

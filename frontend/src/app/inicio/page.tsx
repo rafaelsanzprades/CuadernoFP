@@ -19,6 +19,7 @@ import { AISettingsPanel } from "@/components/features/ai/AISettingsPanel";
 import { Button } from "@/components/ui/Button";
 import { Sparkles } from "lucide-react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 // ── Tipos ─────────────────────────────────────────────────────────────────
 type CheckStatus = "ok" | "warning" | "empty";
@@ -177,7 +178,9 @@ const FAQS = [
 
 // ── Página Principal ──────────────────────────────────────────────────────
 export default function InicioPage() {
-  const { moduleData, cursoData, globalData, activeModuleId, activeCursoId } = useAppStore();const [activeTab, setActiveTab] = useState<string>("bienvenida");
+  const { moduleData, cursoData, globalData, activeModuleId, activeCursoId } = useAppStore();
+  const [activeTab, setActiveTab] = useState<string>("bienvenida");
+  const { t } = useTranslation();
   const [aiModalOpen, setAiModalOpen] = useState(false);
   const [guiaContent, setGuiaContent] = useState<string>("");
   const [isLoadingGuia, setIsLoadingGuia] = useState(false);useEffect(() => {
@@ -485,13 +488,13 @@ export default function InicioPage() {
   const emptyCount = allChecks.filter(c => c.status === "empty").length;
 
   const TABS = [
-    { id: "bienvenida", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> Bienvenida</>, cleanLabel: "Bienvenida" },
-    { id: "seguridad", label: <><span className="inline-flex"><Shield className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguridad</>, cleanLabel: "Seguridad" },
-    { id: "asistente", label: <><span className="inline-flex"><Sparkles className="w-[1.2em] h-[1.2em] mr-1" /></span> Asistente IA</>, cleanLabel: "Asistente IA" },
-    { id: "verificacion", label: <><span className="inline-flex"><ListChecks className="w-[1.2em] h-[1.2em] mr-1" /></span> Verificación</>, cleanLabel: "Verificación" },
-    { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Guía</>, cleanLabel: "Guía" },
-    { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> FAQ</>, cleanLabel: "FAQ" },
-    { id: "contacto", label: <><span className="inline-flex"><Mail className="w-[1.2em] h-[1.2em] mr-1" /></span> Contacto</>, cleanLabel: "Contacto" },
+    { id: "bienvenida", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.bienvenida')}</>, cleanLabel: t('tabs.bienvenida') },
+    { id: "seguridad", label: <><span className="inline-flex"><Shield className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.seguridad')}</>, cleanLabel: t('tabs.seguridad') },
+    { id: "asistente", label: <><span className="inline-flex"><Sparkles className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.asistente')}</>, cleanLabel: t('tabs.asistente') },
+    { id: "verificacion", label: <><span className="inline-flex"><ListChecks className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.verificacion')}</>, cleanLabel: t('tabs.verificacion') },
+    { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.guia')}</>, cleanLabel: t('tabs.guia') },
+    { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.faq')}</>, cleanLabel: t('tabs.faq') },
+    { id: "contacto", label: <><span className="inline-flex"><Mail className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.contacto')}</>, cleanLabel: t('tabs.contacto') },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -517,9 +520,9 @@ export default function InicioPage() {
             {/* Título de la página */}
             <div>
               <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <Activity className="w-6 h-6 text-accent" /> Inicio
+                <Activity className="w-6 h-6 text-accent" /> {t('inicio.title')}
               </h1>
-              <p className="text-muted mt-2 text-base">Panel principal, guía de inicio, FAQ y validación de datos.</p>
+              <p className="text-muted mt-2 text-base">{t('inicio.subtitle')}</p>
             </div>
 
             {/* Pestañas de Navegación */}
@@ -581,34 +584,25 @@ export default function InicioPage() {
                 
           <div className="w-full space-y-12 pb-12">
 
-            <div>
-              <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                Bienvenido al Cuaderno FP
-              </h1>
-              <p className="text-muted mt-2 text-lg">Panel de acceso rápido a gestión, alumnado y evaluación.</p>
-            </div>
-
-            <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-              <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-              <div>
-                <p className="text-sm font-semibold text-foreground">Herramienta operativa y de gestión - Inicio</p>
-                <p className="text-sm text-muted mt-1">Panel de control de acceso rápido a todas las herramientas de la plataforma.</p>
-              </div>
-            </div>
 
             {/* Menus Grid */}
             <div className="space-y-12">
               {navGroups.map((group, groupIdx) => (
                 <MotionWrapper key={group.title} delay={groupIdx * 0.1}>
                   <div className="space-y-3">
-                    <h2 className="text-xl font-bold text-foreground flex items-center gap-3">
-                      {group.title}
-                    </h2>
-                    {group.sectionDescription && (
-                      <p className="text-muted text-base max-w-4xl pb-4 border-b border-[var(--glass-border)]">
-                        {group.sectionDescription}
-                      </p>
+                    {group.title !== 'General' && (
+                      <>
+                        <h2 className="text-xl font-bold text-foreground flex items-center gap-3">
+                          {group.title}
+                        </h2>
+                        {group.sectionDescription && (
+                          <p className="text-muted text-base max-w-4xl pb-4 border-b border-[var(--glass-border)]">
+                            {group.sectionDescription}
+                          </p>
+                        )}
+                      </>
                     )}
+
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {group.items.map((item, itemIdx) => (

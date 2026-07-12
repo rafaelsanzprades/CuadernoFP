@@ -16,6 +16,7 @@ import { GoogleDriveSyncPanel } from "@/components/features/cloud/GoogleDriveSyn
 import { NewFileWizard } from "@/components/features/cloud/NewFileWizard";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { initialGroups } from "@/store/initialData";
+import { useTranslation } from "react-i18next";
 import { OneDriveSyncPanel } from "@/components/features/cloud/OneDriveSyncPanel";
 
 export default function ArchivosTrabajoPage() {
@@ -24,6 +25,7 @@ export default function ArchivosTrabajoPage() {
     pdFileSource, cursoFileSource, workspaceHandle
   } = useAppStore();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const [workspaceFiles, setWorkspaceFiles] = useState<{ grupos: string[], programaciones: string[], cursos: string[] }>({ grupos: [], programaciones: [], cursos: [] });
 
@@ -359,11 +361,11 @@ export default function ArchivosTrabajoPage() {
 
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div>
-                <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                  <FolderOpen className="w-6 h-6 text-accent" /> Archivos
-                </h1>
-                <p className="text-muted mt-2 text-lg">Gestión de archivos de Programación y Curso.</p>
-              </div>
+              <h1 className="text-3xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
+                <FolderOpen className="w-8 h-8 text-accent" /> {t('pages.archivos_title')}
+              </h1>
+              <p className="text-muted mt-2 text-lg">{t('pages.archivos_desc')}</p>
+            </div>
             </div>
 
             {/* Navigation Tabs */}

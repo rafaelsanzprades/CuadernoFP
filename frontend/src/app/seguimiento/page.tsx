@@ -1,5 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
+import { useTranslation } from "react-i18next";
 import { Calendar, FileEdit, MapPin, ClipboardCheck, AlertTriangle , Info, FolderOpen } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -16,16 +17,19 @@ import { Button } from "@/components/ui/Button";
 
 export default function SeguimientoPage() {
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData } = useAppStore();
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
   const [allDiarioOpen, setAllDiarioOpen] = useState(false);
 
   const TABS = [
-    { id: "diario", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Diario</span>, cleanLabel: "Diario" },
-    { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> Asistencia</span>, cleanLabel: "Asistencia" },
-    { id: "alerta_abandono", label: <span className="flex items-center gap-2"><AlertTriangle className="w-4 h-4 shrink-0" /> Abandono</span>, cleanLabel: "Abandono" }
-  ];const [activeTab, setActiveTab] = useState("diario");const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+    { id: "diario", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.diario')}</span>, cleanLabel: t('tabs.diario') },
+    { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> {t('tabs.asistencia')}</span>, cleanLabel: t('tabs.asistencia') },
+    { id: "alerta_abandono", label: <span className="flex items-center gap-2"><AlertTriangle className="w-4 h-4 shrink-0" /> {t('tabs.abandono')}</span>, cleanLabel: t('tabs.abandono') }
+  ];
+  const [activeTab, setActiveTab] = useState("diario");
+  const activeTabCleanLabel = TABS.find(t_tab => t_tab.id === activeTab)?.cleanLabel;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -183,9 +187,9 @@ export default function SeguimientoPage() {
           <MotionWrapper className="space-y-4">
             <div>
               <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <MapPin className="w-6 h-6 text-accent" /> Seguimiento diario
+                <span className="inline-flex"><MapPin className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.seguimiento_title')}
               </h1>
-              <p className="text-muted mt-2 text-base">Diario de aula, contingencias, control de asistencia y alertas.</p>
+              <p className="text-muted mt-2 text-base">{t('pages.seguimiento_desc')}</p>
             </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab}>

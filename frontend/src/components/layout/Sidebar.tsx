@@ -11,10 +11,12 @@ import { Tooltip } from '@/components/ui/Tooltip';
 import { InstallPwaButton } from '@/components/features/settings/InstallPwaButton';
 import toast from 'react-hot-toast';
 import { fileManager } from '@/services/fileManager';
+import { useTranslation } from "react-i18next";
 
 export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
+  const { t } = useTranslation();
   const { activeModuleId, activeCursoId, isSidebarOpen, toggleSidebar, dataSource, setDataSource, workspaceHandle, syncStatus } = useAppStore();
   const [localGroups, setLocalGroups] = useState<string[]>([]);
 
@@ -170,7 +172,7 @@ export default function Sidebar() {
         {isSidebarOpen && (
           <div className="flex items-center justify-center gap-2 px-3 py-2.5 bg-orange-500/10 border border-orange-500/30 rounded-lg text-orange-500 shrink-0 shadow-sm">
             <AlertTriangle className="w-5 h-5 shrink-0" strokeWidth={2.5} />
-            <span className="text-sm font-bold uppercase tracking-widest">En Obras</span>
+            <span className="text-sm font-bold uppercase tracking-widest">{t('sidebar.en_obras')}</span>
           </div>
         )}
 
@@ -185,7 +187,7 @@ export default function Sidebar() {
                   ? 'bg-warning/20 text-warning shadow-sm ring-1 ring-warning/30'
                   : 'text-muted hover:bg-foreground/10 hover:text-foreground'}`}
               >
-                <Cloud className="w-3.5 h-3.5" /> DEMO
+                <Cloud className="w-3.5 h-3.5" /> {t('sidebar.demo')}
               </button>
               <button
                 onClick={() => { setDataSource('local'); toast.success('Modo REALES'); }}
@@ -193,7 +195,7 @@ export default function Sidebar() {
                   ? 'bg-success/20 text-success shadow-sm ring-1 ring-success/30'
                   : 'text-muted hover:bg-foreground/10 hover:text-foreground'}`}
               >
-                <HardDrive className="w-3.5 h-3.5" /> REALES
+                <HardDrive className="w-3.5 h-3.5" /> {t('sidebar.reales')}
               </button>
             </div>
             {dataSource === 'demo' ? (
@@ -216,7 +218,7 @@ export default function Sidebar() {
                 className="w-full h-[34px] bg-foreground/5 border border-success/30 rounded-lg py-1.5 text-sm font-semibold tracking-wide uppercase text-success hover:bg-success/10 transition-colors flex items-center justify-center"
               >
                 <FolderOpen className="w-4 h-4 mr-2" />
-                Abrir Grupo
+                {t('sidebar.abrir_grupo')}
               </button>
             ) : (
               <div className="relative w-full">
@@ -251,7 +253,7 @@ export default function Sidebar() {
                 </span>
                 <div className="flex flex-col gap-1 items-start">
                   <span className={`text-base leading-tight whitespace-nowrap font-bold ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
-                    Agenda
+                    {t('sidebar.agenda')}
                   </span>
                   <span className={`px-2 py-0.5 rounded text-xs border font-semibold tracking-wider leading-none ${dataSource === 'demo' ? 'text-warning bg-warning/10 border-warning/30' : 'text-accent bg-accent/10 border-accent/30'}`}>
                     {dateStr}
@@ -265,7 +267,7 @@ export default function Sidebar() {
       )}
       {!isSidebarOpen && (
         <div className="pb-2 shrink-0">
-          <Tooltip content="Agenda" position="right" delay={0.1}>
+          <Tooltip content={t('sidebar.agenda')} position="right" delay={0.1}>
             <Link
               href="/agenda"
               onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
@@ -287,7 +289,7 @@ export default function Sidebar() {
             {isSidebarOpen && navGroups[0].title && (
               <div className="flex flex-col mb-1.5 mt-1 gap-1.5">
                 <div className="text-base font-bold text-foreground/90 tracking-wide px-1">
-                  {navGroups[0].title}
+                  {t('navGroups.general')}
                 </div>
               </div>
             )}
@@ -313,13 +315,13 @@ export default function Sidebar() {
                   </span>
                   {isSidebarOpen && (
                     <span className={`text-sm leading-tight font-medium whitespace-nowrap ${pathname === item.href ? 'text-foreground font-semibold' : ''}`}>
-                      {item.label}
+                      {t('nav.' + item.href.replace('/', ''))}
                     </span>
                   )}
                 </Link>
               );
               return !isSidebarOpen ? (
-                <Tooltip key={item.href} content={item.label} position="right" delay={0.1}>
+                <Tooltip key={item.href} content={t('nav.' + item.href.replace('/', ''))} position="right" delay={0.1}>
                   {linkContent}
                 </Tooltip>
               ) : (
@@ -333,12 +335,13 @@ export default function Sidebar() {
         {navGroups.slice(1).map((group) => {
           // Extraer el texto base (sin corchetes) y el contenido entre corchetes
           const bracketMatch = group.title.match(/^(.*?)\s*\[.*\]$/);
-          const baseTitle = bracketMatch ? bracketMatch[1].trim() : group.title;
+          let baseTitle = bracketMatch ? bracketMatch[1].trim() : group.title;
+          const translatedBaseTitle = baseTitle === "Programación" ? t('navGroups.programacion') : baseTitle === "Curso" ? t('navGroups.curso') : baseTitle;
           const isEmptyLocal = dataSource === 'local' && (!workspaceHandle || localGroups.length === 0);
           const infoValue = group.title.includes('[Código del módulo]')
-            ? (isEmptyLocal ? "Abrir Grupo" : moduleTitleSuffix)
+            ? (isEmptyLocal ? t('sidebar.abrir_grupo') : moduleTitleSuffix)
             : group.title.includes('[Año]')
-              ? (isEmptyLocal ? "Abrir Grupo" : cursoTitleSuffix)
+              ? (isEmptyLocal ? t('sidebar.abrir_grupo') : cursoTitleSuffix)
               : null;
 
           return (
@@ -346,7 +349,7 @@ export default function Sidebar() {
               {isSidebarOpen && (
                 <div className="flex flex-col mb-2 mt-1 gap-1.5">
                   <div className="text-base font-bold text-foreground/90 tracking-wide px-1">
-                    {baseTitle}
+                    {translatedBaseTitle}
                   </div>
                   {infoValue && infoValue !== 'CÓDIGO' && infoValue !== 'AÑO' && (
                     <Link
@@ -391,13 +394,13 @@ export default function Sidebar() {
                     </span>
                     {isSidebarOpen && (
                       <span className={`text-sm leading-tight font-medium whitespace-nowrap ${pathname === item.href ? 'text-foreground font-semibold' : ''}`}>
-                        {item.label}
+                        {t('nav.' + item.href.replace('/', ''))}
                       </span>
                     )}
                   </Link>
                 );
                 return !isSidebarOpen ? (
-                  <Tooltip key={item.href} content={item.label} position="right" delay={0.1}>
+                  <Tooltip key={item.href} content={t('nav.' + item.href.replace('/', ''))} position="right" delay={0.1}>
                     {linkContent}
                   </Tooltip>
                 ) : (
@@ -419,7 +422,7 @@ export default function Sidebar() {
             </p>
             <div className="flex items-center justify-center w-full mt-1">
               <Link href="/legal" className="text-sm font-semibold text-info hover:text-info hover:underline" onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}>
-                Legal
+                {t('sidebar.legal')}
               </Link>
             </div>
           </div>

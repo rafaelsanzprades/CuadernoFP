@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/Button";
 import { motion, AnimatePresence } from "framer-motion";
 import { LineChart, Line, ResponsiveContainer, YAxis } from "recharts";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
+import { useTranslation } from "react-i18next";
 import { AnalisisGrupalTab } from "@/components/features/analisis/AnalisisGrupalTab";
 import { AnalisisIndividualTab } from "@/components/features/analisis/AnalisisIndividualTab";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
@@ -31,7 +32,10 @@ export default function ProgresoPage() {
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [saveMessage, setSaveMessage] = useState("");const [activeTab, setActiveTab] = useState("resumen");const [activeTabByStudent, setActiveTabByStudent] = useState<Record<string, string>>({});
+  const [saveMessage, setSaveMessage] = useState("");
+  const { t } = useTranslation();
+  const [activeTab, setActiveTab] = useState("resumen");
+  const [activeTabByStudent, setActiveTabByStudent] = useState<Record<string, string>>({});
   const [allStudentsOpen, setAllStudentsOpen] = useState(false);
   const [openStudents, setOpenStudents] = useState<Set<string>>(new Set());
 
@@ -306,10 +310,10 @@ export default function ProgresoPage() {
   });
 
   const TABS = [
-    { id: "resumen", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Resumen</>, cleanLabel: "Resumen" },
-    { id: "detalle", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Por alumnado</>, cleanLabel: "Por alumnado" },
-    { id: "grupal", label: <><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> Grupal</>, cleanLabel: "Grupal" },
-    { id: "individual", label: <><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> Individual</>, cleanLabel: "Individual" }
+    { id: "resumen", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.resumen')}</>, cleanLabel: t('tabs.resumen') },
+    { id: "detalle", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.detalle')}</>, cleanLabel: t('tabs.detalle') },
+    { id: "grupal", label: <><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.grupal')}</>, cleanLabel: t('tabs.grupal') },
+    { id: "individual", label: <><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.individual')}</>, cleanLabel: t('tabs.individual') }
   ];
 
   return (
@@ -323,9 +327,9 @@ export default function ProgresoPage() {
             <div className="flex justify-between items-start">
             <div>
               <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <span className="inline-flex"><TrendingUp className="w-[1.2em] h-[1.2em] mr-1" /></span> Progreso académico
+                <span className="inline-flex"><TrendingUp className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.progreso_title')}
               </h1>
-              <p className="text-muted mt-2 text-lg">Calificaciones, evaluación de RA y analíticas.</p>
+              <p className="text-muted mt-2 text-lg">{t('pages.progreso_desc')}</p>
             </div>
             {/* Save Button */}
             <div className="flex items-center gap-4">

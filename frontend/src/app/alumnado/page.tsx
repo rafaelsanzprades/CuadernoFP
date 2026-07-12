@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
+import { fileManager } from "@/services/fileManager";
+import { useTranslation } from "react-i18next";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import toast from "react-hot-toast";
@@ -19,16 +21,21 @@ import Link from "next/link";
 
 export default function AlumnadoPage() {
   const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData } = useAppStore();
+  const [activeTab, setActiveTab] = useState("listado");
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const TABS = [
-    { id: "alumnado", label:  <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> Listado</span>, cleanLabel: "Listado" },
-    { id: "plano", label: <span className="flex items-center gap-2"><LayoutGrid className="w-4 h-4 shrink-0" /> Plano</span>, cleanLabel: "Plano" },
-    { id: "boletines", label:  <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> Boletines</span>, cleanLabel: "Boletines" }
-  ];const [activeTab, setActiveTab] = useState("alumnado");const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+    { id: "listado", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.listado')}</>, cleanLabel: t('tabs.listado') },
+    { id: "tutoria", label: <><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.tutoria')}</>, cleanLabel: t('tabs.tutoria') },
+    { id: "plano", label: <><span className="inline-flex"><LayoutGrid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.plano')}</>, cleanLabel: t('tabs.plano') },
+    { id: "feoe", label: <><span className="inline-flex"><MessageSquare className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.feoe')}</>, cleanLabel: t('tabs.feoe') }
+  ];
+
+  const activeTabCleanLabel = TABS.find(t_tab => t_tab.id === activeTab)?.cleanLabel;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -237,9 +244,9 @@ export default function AlumnadoPage() {
             <div className="flex justify-between items-start">
             <div>
               <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Alumnado y tutoría
+                <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.alumnado_title')}
               </h1>
-              <p className="text-muted mt-2 text-lg">Gestión de alumnado, tutoría, FEOE y orientación.</p>
+              <p className="text-muted mt-2 text-lg">{t('pages.alumnado_desc')}</p>
             </div>
             
             {/* Save Button */}

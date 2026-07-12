@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { Award, BookOpen, Calculator, Check, GraduationCap, Puzzle, Target, Settings , Info, FolderOpen } from "lucide-react";
+import { Award, BookOpen, Calculator, Check, GraduationCap, Puzzle, Target, Settings , Info, FolderOpen, Grid } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -16,11 +16,14 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import Link from "next/link";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { loadCatalogForModule, resolveDescRa, resolveDescCe } from "@/services/catalogCache";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import { useTranslation } from "react-i18next";
 import { ProposalLoaderModal } from "@/components/features/matrices/ProposalLoaderModal";
 import { PublisherProposal } from "@/data/proposalsData";
 
 export default function MatricesPage() {
   const { activeModuleId, moduleData, setModuleData, updateDataFrame, updateModuleData, saveModuleData, cursoData, updateCursoData, updateInfoModulo } = useAppStore();
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
@@ -38,10 +41,10 @@ export default function MatricesPage() {
   }, []);
 
   const TABS = [
-    { id: "ra", label: "RA y CE", cleanLabel: "RA y CE", icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "ud", label: "Unidades", cleanLabel: "Unidades", icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "relacion", label: "Relación RA-UD", cleanLabel: "Relación RA-UD", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "contribucion", label: "Contribución OG", cleanLabel: "Contribución OG", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> }
+    { id: "ra", label: t('tabs.ra'), cleanLabel: t('tabs.ra'), icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "ud", label: t('tabs.ud'), cleanLabel: t('tabs.ud'), icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "relacion", label: t('tabs.relacion'), cleanLabel: t('tabs.relacion'), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "contribucion", label: t('tabs.contribucion'), cleanLabel: t('tabs.contribucion'), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> }
   ];
 
   // Load catalog descriptions when module changes (for fallback resolution)
@@ -136,9 +139,9 @@ export default function MatricesPage() {
           <MotionWrapper className="space-y-4 pb-12">
             <div>
               <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <span className="inline-flex"><Calculator className="w-[1.2em] h-[1.2em] mr-1" /></span> Matrices OG- RA- CE- UD/T
+                <span className="inline-flex"><Grid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.matrices_title')}
               </h1>
-              <p className="text-muted mt-2 text-lg">Relación y ponderación: OG, RA, CE y UD/T.</p>
+              <p className="text-muted mt-2 text-lg">{t('pages.matrices_desc')}</p>
             </div>
 
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">

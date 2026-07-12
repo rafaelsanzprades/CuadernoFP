@@ -1,10 +1,11 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BarChart, Check, FileEdit , Info, FolderOpen } from "lucide-react";
+import { BarChart, Check, FileEdit, Info, FolderOpen, Wrench } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
+import { useTranslation } from "react-i18next";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
@@ -14,15 +15,16 @@ import Link from "next/link";
 
 export default function InstrumentosPage() {
   const { activeModuleId, moduleData, setModuleData, updateDataFrame, saveModuleData } = useAppStore();
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
 
   const TABS = [
-    { id: "resumen", label:  <span className="flex items-center gap-2"><BarChart className="w-4 h-4 shrink-0" /> Resumen</span>, cleanLabel: "Resumen" },
-    { id: "tri1", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> 1º Trimestre</span>, cleanLabel: "1º Trimestre" },
-    { id: "tri2", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> 2º Trimestre</span>, cleanLabel: "2º Trimestre" },
-    { id: "tri3", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> 3º Trimestre</span>, cleanLabel: "3º Trimestre" }
+    { id: "resumen", label:  <span className="flex items-center gap-2"><BarChart className="w-4 h-4 shrink-0" /> {t('tabs.resumen')}</span>, cleanLabel: t('tabs.resumen') },
+    { id: "tri1", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri1')}</span>, cleanLabel: t('tabs.tri1') },
+    { id: "tri2", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri2')}</span>, cleanLabel: t('tabs.tri2') },
+    { id: "tri3", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri3')}</span>, cleanLabel: t('tabs.tri3') }
   ];const [activeTab, setActiveTab] = useState("resumen");const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   const [isRecoveryModalOpen, setIsRecoveryModalOpen] = useState(false);
@@ -176,7 +178,7 @@ export default function InstrumentosPage() {
                   <th className="p-2 sticky left-0 z-10 border-r border-[var(--glass-border)] bg-background">Cód.</th>
                   <th className="p-2 sticky left-[60px] z-10 border-r border-[var(--glass-border)] bg-background">Tipo</th>
                   <th className="p-2 sticky left-[160px] z-10 border-r border-[var(--glass-border)] bg-background w-64">Instrumento / Actividad</th>
-                  <th className="p-2 sticky left-[416px] z-10 border-r border-[var(--glass-border)] bg-background">% Pond.</th>
+                  <th className="p-2 sticky left-[416px] z-10 border-r border-[var(--glass-border)] bg-background w-24">% Pond.</th>
                   <th className="p-2 sticky left-[486px] z-10 border-r border-[var(--glass-border)] bg-background"><span className="inline-flex"><Check className="w-[1.2em] h-[1.2em] mr-1" /></span></th>
                   {lista_ce_ids.map((ce: string) => (
                     <th key={ce} className="p-2 text-center text-xs font-mono border-r border-[var(--glass-border)] text-info">
@@ -292,11 +294,11 @@ export default function InstrumentosPage() {
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-4 pb-12">
             <div>
-            <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
-              <FileEdit className="w-6 h-6 text-accent" /> Instrumentos de evaluación
-            </h1>
-            <p className="text-muted mt-2 text-lg">Definición y ponderación de CE, RA e instrumentos.</p>
-          </div>
+              <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
+                <Wrench className="w-6 h-6 text-accent" /> {t('pages.instrumentos_title')}
+              </h1>
+              <p className="text-muted mt-2 text-lg">{t('pages.instrumentos_desc')}</p>
+            </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList className="mb-2 max-w-full">

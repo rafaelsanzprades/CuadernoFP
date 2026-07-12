@@ -12,8 +12,8 @@ import { showRichToast } from "@/utils/toast";
 import { motion } from "framer-motion";
 import { fileManager } from "@/services/fileManager";
 import { searchGlobal, type SearchResult } from "@/services/searchService";
-import { ThemeSelector } from "@/components/features/settings/ThemeSelector";
-import { AccessibilitySelector } from "@/components/features/settings/AccessibilitySelector";
+import { HeaderSettings } from "@/components/layout/HeaderSettings";
+import { useTranslation } from "react-i18next";
 
 
 export default function Header({ title, breadcrumbSuffix }: { title?: React.ReactNode; breadcrumbSuffix?: React.ReactNode }) {
@@ -23,6 +23,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
   const [isSaving, setIsSaving] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+  const { t } = useTranslation();
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const cursoSaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const initialLoadRef = useRef<boolean>(true);
@@ -68,7 +69,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
     for (const group of navGroups) {
       const found = group.items.find(item => item.href === pathname);
       if (found) {
-        currentItem = found.label;
+        currentItem = t('nav.' + found.href.replace('/', ''), { defaultValue: found.label }) as string;
         break;
       }
     }
@@ -292,10 +293,10 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
           {/* Sync Status - Centrado absoluto */}
           {dataSource === 'local' && (
             <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 px-3 py-1.5 rounded-full bg-foreground/5 text-xs font-medium text-muted/80 whitespace-nowrap border border-[var(--glass-border)] shadow-sm pointer-events-none">
-              {syncStatus === 'saving' && <><Hourglass className="w-3.5 h-3.5 text-warning animate-spin" /><span className="text-warning">Guardando...</span></>}
-              {syncStatus === 'saved' && <><Save className="w-3.5 h-3.5 text-success" /><span className="text-success">Guardado</span></>}
-              {syncStatus === 'error' && <><AlertTriangle className="w-3.5 h-3.5 text-danger" /><span className="text-danger">Error</span></>}
-              {syncStatus === 'idle' && <><Cloud className="w-3.5 h-3.5 text-muted/50" /><span>Sincronizado</span></>}
+              {syncStatus === 'saving' && <><Hourglass className="w-3.5 h-3.5 text-warning animate-spin" /><span className="text-warning">{t('header.guardando', { defaultValue: 'Guardando...' })}</span></>}
+              {syncStatus === 'saved' && <><Save className="w-3.5 h-3.5 text-success" /><span className="text-success">{t('header.guardado', { defaultValue: 'Guardado' })}</span></>}
+              {syncStatus === 'error' && <><AlertTriangle className="w-3.5 h-3.5 text-danger" /><span className="text-danger">{t('header.error', { defaultValue: 'Error' })}</span></>}
+              {syncStatus === 'idle' && <><Cloud className="w-3.5 h-3.5 text-muted/50" /><span>{t('header.sincronizado', { defaultValue: 'Sincronizado' })}</span></>}
             </div>
           )}
           
@@ -311,8 +312,8 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
           <div className="relative w-36 sm:w-48 md:w-64 shrink-0">
             <input
               type="text"
-              placeholder="Buscar..."
-              aria-label="Buscar en la aplicación"
+              placeholder={t('header.buscar', { defaultValue: 'Buscar...' }) as string}
+              aria-label={t('header.buscar', { defaultValue: 'Buscar...' }) as string}
               role="searchbox"
               value={searchQuery}
               onChange={(e) => {
@@ -358,7 +359,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
               onClick={() => undo()}
               disabled={pastStatesLength === 0}
               className="p-1.5 rounded text-muted hover:text-foreground hover:bg-foreground/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-              title="Deshacer (Ctrl+Z)"
+              title={`${t('header.deshacer', { defaultValue: 'Deshacer' })} (Ctrl+Z)`}
             >
               <Undo2 className="w-4 h-4" />
             </button>
@@ -366,7 +367,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
               onClick={() => redo()}
               disabled={futureStatesLength === 0}
               className="p-1.5 rounded text-muted hover:text-foreground hover:bg-foreground/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-              title="Rehacer (Ctrl+Y)"
+              title={`${t('header.rehacer', { defaultValue: 'Rehacer' })} (Ctrl+Y)`}
             >
               <Redo2 className="w-4 h-4" />
             </button>
@@ -374,8 +375,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
 
           {mounted && (
             <div className="flex items-center bg-foreground/5 rounded-lg p-0.5">
-              <ThemeSelector />
-              <AccessibilitySelector />
+              <HeaderSettings />
             </div>
           )}
         </div>

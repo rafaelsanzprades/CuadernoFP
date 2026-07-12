@@ -9,6 +9,8 @@ import DatePicker from "@/components/ui/DatePicker";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
+import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { generatePlanning } from "@/utils/planningGenerator";
 import Link from "next/link";
@@ -32,6 +34,7 @@ const DAY_NAMES_SHORT = ["Lu","Ma","Mi","Ju","Vi","Sa","Do"];
 
 // ── Notes Table Component ─────────────────────────────────────────────────────
 function NotesTable({ calendar_notes, onUpdateNotes }: { calendar_notes: Record<string, string>; onUpdateNotes: (notes: Record<string, string>) => void }) {
+  const { t } = useTranslation();
   const [newDate, setNewDate]     = useState("");
   const [newEndDate, setNewEndDate] = useState("");
   const [newType, setNewType]     = useState<"f" | "r">("f");
@@ -118,17 +121,15 @@ function NotesTable({ calendar_notes, onUpdateNotes }: { calendar_notes: Record<
     ranges.push({ start: k, end: k, type, desc: v, keys: [k] });
   });
 
-  const MONTH_NAMES = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
-
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-left text-sm border-collapse">
         <thead>
           <tr className="border-b border-[var(--glass-border)] text-muted">
-            <th className="p-2 w-32">Fecha</th>
-            <th className="p-2 w-32">Hasta</th>
-            <th className="p-2 w-24">Tipo</th>
-            <th className="p-2">Descripción</th>
+            <th className="p-2 w-32">{t('table.fecha', {defaultValue: 'Fecha'})}</th>
+            <th className="p-2 w-32">{t('table.hasta', {defaultValue: 'Hasta'})}</th>
+            <th className="p-2 w-24">{t('table.tipo', {defaultValue: 'Tipo'})}</th>
+            <th className="p-2">{t('table.descripcion', {defaultValue: 'Descripción'})}</th>
             <th className="p-2 w-10" />
           </tr>
         </thead>
@@ -180,7 +181,7 @@ function NotesTable({ calendar_notes, onUpdateNotes }: { calendar_notes: Record<
                     <span className={`text-xs px-2 py-0.5 rounded-full font-semibold ${
                       isF ? "bg-danger/10 text-danger" : "bg-info/10 text-info"
                     }`}>
-                      {isF ? <><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> Festivo</> : <><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> Evento</>}
+                      {isF ? <><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('festivo', {defaultValue: 'Festivo'})}</> : <><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('evento', {defaultValue: 'Evento'})}</>}
                     </span>
                   </td>
                   <td className="p-2 text-foreground/90">{r.desc}</td>
@@ -194,19 +195,19 @@ function NotesTable({ calendar_notes, onUpdateNotes }: { calendar_notes: Record<
 
           <tr className="border-t border-[var(--glass-border)] bg-white/3">
             <td className="p-2">
-              <DatePicker value={newDate} onChange={v => setNewDate(v)} className="w-full" placeholder="Inicio..." />
+              <DatePicker value={newDate} onChange={v => setNewDate(v)} className="w-full" placeholder={t('inicio', {defaultValue: 'Inicio...'})} />
             </td>
             <td className="p-2">
-              <DatePicker value={newEndDate} onChange={v => setNewEndDate(v)} className="w-full" placeholder="Hasta (Opcional)" />
+              <DatePicker value={newEndDate} onChange={v => setNewEndDate(v)} className="w-full" placeholder={t('hasta_opc', {defaultValue: 'Hasta (Opcional)'})} />
             </td>
             <td className="p-2">
               <select value={newType} onChange={e => setNewType(e.target.value as "f" | "r")} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-sm text-foreground focus:border-warning focus:outline-none">
-                <option value="f">Festivo</option>
-                <option value="r">Evento</option>
+                <option value="f">{t('festivo', {defaultValue: 'Festivo'})}</option>
+                <option value="r">{t('evento', {defaultValue: 'Evento'})}</option>
               </select>
             </td>
             <td className="p-2">
-              <input type="text" value={newText} onChange={e => setNewText(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()} placeholder="Descripción..." className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-sm text-foreground focus:border-warning focus:outline-none" />
+              <input type="text" value={newText} onChange={e => setNewText(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()} placeholder={t('descripcion', {defaultValue: 'Descripción...'})} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-sm text-foreground focus:border-warning focus:outline-none" />
             </td>
             <td className="p-2 text-center">
               <button onClick={addNote} disabled={!newDate || !newText} className="text-warning hover:text-warning font-bold text-2xl leading-none disabled:text-gray-700 transition-colors">+</button>
@@ -214,7 +215,7 @@ function NotesTable({ calendar_notes, onUpdateNotes }: { calendar_notes: Record<
           </tr>
         </tbody>
       </table>
-      {ranges.length === 0 && <p className="text-center text-muted/80 text-sm py-4">Sin festivos ni eventos aún. Añade uno arriba.</p>}
+      {ranges.length === 0 && <p className="text-center text-muted/80 text-sm py-4">{t('sin_eventos', {defaultValue: 'Sin festivos ni eventos aún. Añade uno arriba.'})}</p>}
     </div>
   );
 }
@@ -223,6 +224,7 @@ function NotesTable({ calendar_notes, onUpdateNotes }: { calendar_notes: Record<
 // ── Interactive Calendar Component ────────────────────────────────────────────
 
 function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNote }: { info_fechas: Record<string, string>; horario: Record<string, any>; calendar_notes: Record<string, string>; onUpdateNote: (key: string, val: string) => void }) {
+  const { t } = useTranslation();
   const [popup, setPopup] = useState<{ key: string; x: number; y: number } | null>(null);
   const [noteType, setNoteType] = useState<"f" | "r">("f");
   const [noteText, setNoteText] = useState("");
@@ -283,7 +285,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
 
   function saveNote() {
     if (!popup) return;
-    onUpdateNote(`${noteType}_${popup.key}`, noteText || (noteType === "f" ? "Festivo" : "Evento"));
+    onUpdateNote(`${noteType}_${popup.key}`, noteText || (noteType === "f" ? t('festivo') : t('evento')));
     setPopup(null);
   }
 
@@ -294,13 +296,13 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
       {/* Legend */}
       <div className="flex flex-wrap gap-4 mb-6 text-xs">
         {[
-          { cls: "bg-info/10 border-info/30",      label: "1er trimestre" },
-          { cls: "bg-success/10 border-success/30", label: "2º trimestre" },
-          { cls: "bg-info/10 border-info/30",  label: "3er trimestre" },
-          { cls: "bg-yellow-500/20 border-yellow-500/30 text-yellow-600",  label: "FP Dual General" },
-          { cls: "bg-orange-500/20 border-orange-500/30 text-orange-600",  label: "FP Dual Intensiva" },
-          { cls: "bg-danger/10 border-danger/30",        label: "Festivo" },
-          { cls: "bg-info/10 border-info/30",      label: "Evento" },
+          { cls: "bg-info/10 border-info/30",      label: t('t1', {defaultValue: "1er trimestre"}) },
+          { cls: "bg-success/10 border-success/30", label: t('t2', {defaultValue: "2º trimestre"}) },
+          { cls: "bg-info/10 border-info/30",  label: t('t3', {defaultValue: "3er trimestre"}) },
+          { cls: "bg-yellow-500/20 border-yellow-500/30 text-yellow-600",  label: t('dual_gen', {defaultValue: "FP Dual General"}) },
+          { cls: "bg-orange-500/20 border-orange-500/30 text-orange-600",  label: t('dual_int', {defaultValue: "FP Dual Intensiva"}) },
+          { cls: "bg-danger/10 border-danger/30",        label: t('festivo', {defaultValue: "Festivo"}) },
+          { cls: "bg-info/10 border-info/30",      label: t('evento', {defaultValue: "Evento"}) },
         ].map(l => (
           <span key={l.label} className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full border ${l.cls}`}>
             <span className="text-foreground/80">{l.label}</span>
@@ -353,7 +355,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
       {/* Notes list */}
       {noteEntries.length > 0 && (
         <div className="mt-6">
-          <h3 className="text-sm font-semibold text-muted mb-3"><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> Notas registradas ({noteEntries.length})</h3>
+          <h3 className="text-sm font-semibold text-muted mb-3"><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('notas_reg', {defaultValue: 'Notas registradas'})} ({noteEntries.length})</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
             {noteEntries
               .sort(([a], [b]) => a.localeCompare(b))
@@ -402,7 +404,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
                     ? "bg-danger/10 text-danger border border-danger/30"
                     : "bg-foreground/5 text-muted border border-[var(--glass-border)] hover:bg-foreground/10"
                 }`}
-              ><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> Festivo</button>
+              ><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('festivo')}</button>
               <button
                 onClick={() => setNoteType("r")}
                 className={`flex-1 text-xs py-1.5 rounded transition-all ${
@@ -410,12 +412,12 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
                     ? "bg-info/10 text-info border border-info/30"
                     : "bg-foreground/5 text-muted border border-[var(--glass-border)] hover:bg-foreground/10"
                 }`}
-              ><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> Evento</button>
+              ><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('evento')}</button>
             </div>
             <input
               autoFocus
               className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded p-2 text-sm text-foreground mb-3 focus:border-info focus:outline-none"
-              placeholder={noteType === "f" ? "Nombre del festivo..." : "Descripción del evento..."}
+              placeholder={noteType === "f" ? t('nombre_festivo', {defaultValue: 'Nombre del festivo...'}) : t('desc_evento', {defaultValue: 'Descripción del evento...'})}
               value={noteText}
               onChange={e => setNoteText(e.target.value)}
               onKeyDown={e => {
@@ -427,11 +429,11 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
               <button
                 onClick={saveNote}
                 className="flex-1 bg-info/10 hover:bg-info/10 text-info text-xs py-1.5 rounded border border-info/30 transition-all"
-              >Añadir</button>
+              >{t('anadir', {defaultValue: 'Añadir'})}</button>
               <button
                 onClick={() => setPopup(null)}
                 className="text-muted text-xs py-1.5 px-3 rounded hover:text-foreground/80 transition-all"
-              >Cancelar</button>
+              >{t('cancelar', {defaultValue: 'Cancelar'})}</button>
             </div>
           </div>
         </>
@@ -444,7 +446,10 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
 export default function CalendarioPage() {
   const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, activeModuleId, moduleData, setModuleData } = useAppStore();
   const [saving, setSaving] = useState(false);
-  const [saveMessage, setSaveMessage] = useState("");const [activeTab, setActiveTab] = useState("fechas");// Load data if not in store
+  const { t } = useTranslation();
+  const [saveMessage, setSaveMessage] = useState("");
+  const [activeTab, setActiveTab] = useState("fechas");
+
   useEffect(() => {
     if (activeCursoId && !cursoData) {
       fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeCursoId}`)
@@ -592,9 +597,9 @@ export default function CalendarioPage() {
 
 
   const TABS = [
-    { id: "fechas", label: <><span className="inline-flex"><Settings className="w-[1.2em] h-[1.2em] mr-1" /></span> Fechas</>, cleanLabel: "Fechas" },
-    { id: "eventos", label: <span className="flex items-center gap-2"><Flag className="w-[1.2em] h-[1.2em] mr-1 shrink-0" /> Eventos</span>, cleanLabel: "Eventos" },
-    { id: "visual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> Visual</>, cleanLabel: "Visual" }
+    { id: "fechas", label: <><span className="inline-flex"><Settings className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.fechas', {defaultValue: 'Fechas'})}</>, cleanLabel: t('tabs.fechas', {defaultValue: 'Fechas'}) },
+    { id: "eventos", label: <span className="flex items-center gap-2"><Flag className="w-[1.2em] h-[1.2em] mr-1 shrink-0" /> {t('tabs.eventos', {defaultValue: 'Eventos'})}</span>, cleanLabel: t('tabs.eventos', {defaultValue: 'Eventos'}) },
+    { id: "visual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.visual', {defaultValue: 'Visual'})}</>, cleanLabel: t('tabs.visual', {defaultValue: 'Visual'}) }
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -610,9 +615,9 @@ export default function CalendarioPage() {
             {/* Page heading */}
             <div>
               <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <Calendar className="w-6 h-6 text-accent" /> Calendario académico
+                <Calendar className="w-6 h-6 text-accent" /> {t('pages.calendario_title', {defaultValue: 'Calendario académico'})}
               </h1>
-              <p className="text-muted mt-2 text-base">Horarios, trimestres, festivos y eventos del curso.</p>
+              <p className="text-muted mt-2 text-base">{t('pages.calendario_desc', {defaultValue: 'Horarios, trimestres, festivos y eventos del curso.'})}</p>
             </div>
 
           {/* Save message */}

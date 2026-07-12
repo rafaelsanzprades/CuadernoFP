@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
+import { useTranslation } from "react-i18next";
 import { DatosTab } from "@/components/features/modulo/DatosTab";
 import { ContextoTab } from "@/components/features/modulo/ContextoTab";
 import { PlanesTab } from "@/components/features/modulo/PlanesTab";
@@ -19,7 +20,11 @@ import { Button } from "@/components/ui/Button";
 
 export default function ModuloConfigPage() {
   const { activeModuleId, moduleData, setModuleData } = useAppStore();
-  const [loading, setLoading] = useState(true);const [activeTab, setActiveTab] = useState("datos");useEffect(() => {
+  const { t } = useTranslation();
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("datos");
+
+  useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeModuleId}`)
       .then(res => res.json())
       .then(json => {
@@ -44,13 +49,13 @@ export default function ModuloConfigPage() {
   }, [activeModuleId, setModuleData]);
 
   const TABS = [
-    { id: "datos", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Datos</>, cleanLabel: "Datos" },
-    { id: "contexto", label: <><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Contexto</>, cleanLabel: "Contexto" },
-    { id: "planes", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Planes</>, cleanLabel: "Planes" },
-    { id: "contexto_feoe", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> FEOE</>, cleanLabel: "FEOE" },
-    { id: "metodologia", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Metodología</>, cleanLabel: "Metodología" },
-    { id: "evaluacion", label: <><span className="inline-flex"><CheckCircle2 className="w-[1.2em] h-[1.2em] mr-1" /></span> Recursos</>, cleanLabel: "Recursos" },
-    { id: "otros", label: <><span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1" /></span> Transversales</>, cleanLabel: "Transversales" }
+    { id: "datos", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.datos')}</>, cleanLabel: t('tabs.datos') },
+    { id: "contexto", label: <><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.contexto')}</>, cleanLabel: t('tabs.contexto') },
+    { id: "planes", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.planes')}</>, cleanLabel: t('tabs.planes') },
+    { id: "contexto_feoe", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.contexto_feoe')}</>, cleanLabel: t('tabs.contexto_feoe') },
+    { id: "metodologia", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.metodologia')}</>, cleanLabel: t('tabs.metodologia') },
+    { id: "evaluacion", label: <><span className="inline-flex"><CheckCircle2 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.evaluacion')}</>, cleanLabel: t('tabs.evaluacion') },
+    { id: "otros", label: <><span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.otros')}</>, cleanLabel: t('tabs.otros') }
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -100,49 +105,52 @@ export default function ModuloConfigPage() {
 
   return (
     <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={activeTabCleanLabel} />
-
-        <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-4 pb-12">
-
-            {/* ── Título ─────────────────────────────────────────── */}
-            <div>
-              <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <span className="inline-flex"><Settings className="w-[1.2em] h-[1.2em] mr-1" /></span> Módulo didáctico
-              </h1>
-              <p className="text-muted mt-2 text-lg">Configuración de datos, contexto, planes, FEOE, metodología, recursos y elementos transversales.</p>
+        <main className="flex-1 p-8 content-area">
+          <MotionWrapper>
+            <div className="mb-8 flex items-center justify-between">
+              <div>
+                <h1 className="text-3xl font-bold tracking-tight mb-2 flex items-center gap-3">
+                  <Building2 className="w-8 h-8 text-accent" />
+                  {t('modulo.title', { defaultValue: 'Diseño Curricular y Contexto' })}
+                </h1>
+                <p className="text-muted">
+                  {t('modulo.subtitle', { defaultValue: 'Configura todos los aspectos del diseño y metodología para el módulo' })} <strong className="text-foreground">{activeModuleId}</strong>.
+                </p>
+              </div>
             </div>
 
-            <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="mb-2 max-w-full">
-                {TABS.map(tab => (
-                  <TabsTrigger key={tab.id} value={tab.id}>
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
+              <TabsList className="bg-foreground/5 border border-foreground/10 p-1 flex-wrap h-auto gap-1">
+                {TABS.map((tab) => (
+                  <TabsTrigger key={tab.id} value={tab.id} className="text-sm flex-1 whitespace-nowrap min-w-[100px]">
                     {tab.label}
                   </TabsTrigger>
                 ))}
               </TabsList>
             </Tabs>
               
-              {(() => {
-                const infoMap: Record<string, {desc: string}> = {
-                  'datos': { desc: 'Configuración inicial y datos generales del módulo profesional.' },
-                  'contexto': { desc: 'Análisis del entorno socioeconómico, centro educativo y perfil del alumnado.' },
-                  'planes': { desc: 'Vinculación con los planes estratégicos y proyectos institucionales del centro.' },
-                  'contexto_feoe': { desc: 'Análisis específico del sector productivo y oportunidades de empleo.' },
-                  'metodologia': { desc: 'Estrategias pedagógicas, agrupamientos y principios de intervención.' },
-                  'evaluacion': { desc: 'Criterios de calificación, instrumentos y recursos didácticos necesarios.' },
-                  'otros': { desc: 'Temas transversales, atención a la diversidad y actividades complementarias.' }
-                };
-                const info = infoMap[activeTab] || { desc: 'Configuración del módulo.' };
-                return (
-                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
-                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
-                    <p className='text-sm text-muted'>{info.desc}</p>
-                  </div>
-                );
-              })()}
+            {(() => {
+              const infoMap: Record<string, {desc: string}> = {
+                'datos': { desc: 'Configuración inicial y datos generales del módulo profesional.' },
+                'contexto': { desc: 'Análisis del entorno socioeconómico, centro educativo y perfil del alumnado.' },
+                'planes': { desc: 'Vinculación con los planes estratégicos y proyectos institucionales del centro.' },
+                'contexto_feoe': { desc: 'Análisis específico del sector productivo y oportunidades de empleo.' },
+                'metodologia': { desc: 'Estrategias pedagógicas, agrupamientos y principios de intervención.' },
+                'evaluacion': { desc: 'Criterios de calificación, instrumentos y recursos didácticos necesarios.' },
+                'otros': { desc: 'Temas transversales, atención a la diversidad y actividades complementarias.' }
+              };
+              const info = infoMap[activeTab] || { desc: 'Configuración del módulo.' };
+              return (
+                <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
+                  <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
+                  <p className='text-sm text-muted'>{info.desc}</p>
+                </div>
+              );
+            })()}
 
             {activeTab === "datos" && <DatosTab />}
             {activeTab === "contexto" && <ContextoTab />}
@@ -153,8 +161,8 @@ export default function ModuloConfigPage() {
             {activeTab === "otros" && <OtrosElementosTab />}
 
           </MotionWrapper>
-        </div>
+        </main>
       </div>
     </div>
-      );
+  );
 }

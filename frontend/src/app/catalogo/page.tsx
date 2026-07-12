@@ -1,5 +1,5 @@
 "use client";
-import { Award, BookOpen, ChevronDown, ChevronUp, Clock, FolderTree, GraduationCap, Layers, ListChecks, AlertTriangle, Info } from "lucide-react";
+import { Award, BookOpen, ChevronDown, ChevronUp, Clock, FolderTree, GraduationCap, Layers, ListChecks, AlertTriangle, Info, MapPin } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -19,8 +19,10 @@ import { fileManager } from "@/services/fileManager";
 import toast from "react-hot-toast";
 import { TabAutores } from "@/components/features/catalogo/TabAutores";
 import { TabGrados } from "@/components/features/catalogo/TabGrados";
+import { TabComunidades } from "@/components/features/catalogo/TabComunidades";
+import { useTranslation } from "react-i18next";
 
-type Tab = "grados" | "familias" | "titulo" | "cursos" | "modulos" | "autores";
+type Tab = "grados" | "familias" | "titulo" | "cursos" | "modulos" | "autores" | "comunidades";
 
 
 
@@ -41,10 +43,11 @@ export default function CiclosPage() {
 function CiclosContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const tabParam = searchParams.get("tab") as Tab | null;
   const [activeTab, setActiveTab] = useState<Tab>(
-    tabParam && ["grados", "familias", "titulo", "cursos", "modulos", "autores"].includes(tabParam) ? tabParam : "grados"
+    tabParam && ["comunidades", "grados", "familias", "titulo", "cursos", "modulos", "autores"].includes(tabParam) ? tabParam : "comunidades"
   );
 
   const [globalSelection, setGlobalSelection] = useState(() => {
@@ -99,12 +102,13 @@ function CiclosContent() {
   };
 
   const TAB_LABELS: Record<Tab, string> = {
-    grados: 'Grados',
-    familias: 'Familias',
-    titulo: 'Títulos',
-    cursos: 'Módulos',
+    grados: t('tabs.grados', {defaultValue: 'Grados'}),
+    familias: t('tabs.familias', {defaultValue: 'Familias'}),
+    titulo: t('tabs.titulos', {defaultValue: 'Títulos'}),
+    cursos: t('tabs.modulos', {defaultValue: 'Módulos'}),
     modulos: 'RA → CE',
-    autores: 'Autores'
+    autores: t('tabs.autores', {defaultValue: 'Autores'}),
+    comunidades: t('tabs.comunidades', {defaultValue: 'Comunidades'})
   };
 
   const activeTabCleanLabel = TAB_LABELS[activeTab];
@@ -119,20 +123,21 @@ function CiclosContent() {
           <MotionWrapper className="w-full space-y-6 pb-12">
 
             <div>
-              <h1 className="text-2xl font-bold tracking-tight text-foreground">Catálogo</h1>
-              <p className="text-muted mt-2 text-lg">Catálogo oficial de familias profesionales, títulos, cursos → módulos. Módulo → RA → CE.</p>
+              <h1 className="text-2xl font-bold tracking-tight text-foreground">{t('pages.catalogo_title', {defaultValue: 'Catálogo'})}</h1>
+              <p className="text-muted mt-2 text-lg">{t('pages.catalogo_desc', {defaultValue: 'Catálogo oficial de familias profesionales, títulos, cursos → módulos.'})}</p>
             </div>
 
             <Tabs value={activeTab} onValueChange={(val: any) => handleTabChange(val as Tab)}>
               <TabsList className="mb-2 max-w-full">
                 {(
                   [
-                    { id: "grados" as Tab, label: <span className="flex items-center gap-2"><Award className="w-4 h-4" /> Grados</span> },
-                    { id: "familias" as Tab, label: <span className="flex items-center gap-2"><FolderTree className="w-4 h-4" /> Familias</span> },
-                    { id: "titulo" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Títulos</span> },
-                    { id: "cursos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> Módulos</span> },
+                    { id: "comunidades" as Tab, label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-success" /> {t('tabs.comunidades', {defaultValue: 'Comunidades'})}</span> },
+                    { id: "grados" as Tab, label: <span className="flex items-center gap-2"><Award className="w-4 h-4" /> {t('tabs.grados', {defaultValue: 'Grados'})}</span> },
+                    { id: "familias" as Tab, label: <span className="flex items-center gap-2"><FolderTree className="w-4 h-4" /> {t('tabs.familias', {defaultValue: 'Familias'})}</span> },
+                    { id: "titulo" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> {t('tabs.titulos', {defaultValue: 'Títulos'})}</span> },
+                    { id: "cursos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> {t('tabs.modulos', {defaultValue: 'Módulos'})}</span> },
                     { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> RA → CE</span> },
-                    { id: "autores" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-info" /> Autores</span> },
+                    { id: "autores" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-info" /> {t('tabs.autores', {defaultValue: 'Autores'})}</span> },
                   ]
                 ).map((t) => (
                   <TabsTrigger key={t.id} value={t.id}>
@@ -149,7 +154,8 @@ function CiclosContent() {
                 'titulo': { desc: 'Normativa estatal básica y currículo autonómico para ciclos formativos.' },
                 'cursos': { desc: 'Bloques de especialización y contenidos asociados a cada curso académico.' },
                 'modulos': { desc: 'Competencias específicas estructuradas en RA y CE (Art. 136, RD 659/2023).' },
-                'autores': { desc: 'Integración de recursos editoriales externos en formato abierto (.fpp).' }
+                'autores': { desc: 'Integración de recursos editoriales externos en formato abierto (.fpp).' },
+                'comunidades': { desc: 'Currículos autonómicos de FP: 17 CCAA + Ceuta y Melilla. DEMO usa BOA (Aragón).' }
               };
               const info = infoMap[activeTab] || { desc: 'Catálogo Nacional Oficial.' };
               return (
@@ -168,6 +174,7 @@ function CiclosContent() {
             {activeTab === "cursos" && <TabCursos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} onSelectModulo={handleSelectModulo} />}
             {activeTab === "modulos" && <TabModulos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
             {activeTab === "autores" && <TabAutores globalSelection={globalSelection} />}
+            {activeTab === "comunidades" && <TabComunidades />}
           </MotionWrapper>
         </div>
       </main>

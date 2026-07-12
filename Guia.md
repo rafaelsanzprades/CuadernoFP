@@ -46,6 +46,8 @@ Vamos a pedirle al sistema que nos cree el archivo base de la programación carg
 
 - **Apartado:** General (barra lateral superior)
   - **Página:** Catálogo [🔗](https://cuadernofp.web.app/catalogo)
+    - **Pestaña:** Comunidades (NUEVO)
+      - **Acción:** Selecciona tu Comunidad Autónoma en el mapa interactivo (o en la tabla) para cargar la normativa autonómica específica, o elige Ceuta/Melilla para cargar el currículo estatal (BOE).
     - **Pestaña:** Grados
       - **Bloque:** Grados del A al E
         - **Botón:** Grado D. Haz clic sobre el Grado correspondiente, D corresponde a Ciclos formativos.
