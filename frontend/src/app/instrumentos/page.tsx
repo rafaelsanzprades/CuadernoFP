@@ -12,6 +12,8 @@ import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import Link from "next/link";
+import { Settings2 } from "lucide-react";
+import { InstrumentoConfigModal } from "@/components/features/instrumentos/InstrumentoConfigModal";
 
 export default function InstrumentosPage() {
   const { activeModuleId, moduleData, setModuleData, updateDataFrame, saveModuleData } = useAppStore();
@@ -31,6 +33,9 @@ export default function InstrumentosPage() {
   const [recoveryTri, setRecoveryTri] = useState<string>("");
   const [recoverySourceId, setRecoverySourceId] = useState<string>("");
   const [recoveryMethod, setRecoveryMethod] = useState<string>("Sobrescribir");
+
+  const [configModalOpen, setConfigModalOpen] = useState(false);
+  const [activeConfigActIdx, setActiveConfigActIdx] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -185,6 +190,7 @@ export default function InstrumentosPage() {
                       {ce}
                     </th>
                   ))}
+                  <th className="p-2 text-center border-r border-[var(--glass-border)]">Config</th>
                   <th className="p-2 text-center"></th>
                 </tr>
               </thead>
@@ -241,6 +247,18 @@ export default function InstrumentosPage() {
                           />
                         </td>
                       ))}
+                      <td className="p-2 text-center border-r border-[var(--glass-border)] bg-foreground/5">
+                        <button
+                          onClick={() => {
+                            setActiveConfigActIdx(globalIdx);
+                            setConfigModalOpen(true);
+                          }}
+                          className="p-1.5 rounded text-muted hover:text-indigo-400 hover:bg-white/10 transition-colors"
+                          title="Configuración Avanzada"
+                        >
+                          <Settings2 className="w-4 h-4" />
+                        </button>
+                      </td>
                       <td className="p-2 text-center">
                         <button
                           onClick={() => {
@@ -417,7 +435,21 @@ export default function InstrumentosPage() {
           {activeTab === "tri1" && renderTrimestreTab("1T", "1er trimestre")}
           {activeTab === "tri2" && renderTrimestreTab("2T", "2º trimestre")}
           {activeTab === "tri3" && renderTrimestreTab("3T", "3er trimestre")}
-
+        
+        {activeConfigActIdx !== null && df_act[activeConfigActIdx] && (
+          <InstrumentoConfigModal 
+            isOpen={configModalOpen}
+            onClose={() => { setConfigModalOpen(false); setActiveConfigActIdx(null); }}
+            instrumentoId={df_act[activeConfigActIdx].id_act}
+            instrumentoDesc={df_act[activeConfigActIdx].desc_act}
+            config={{
+              escala: df_act[activeConfigActIdx].escala,
+              agente: df_act[activeConfigActIdx].agente,
+              recuperacion: df_act[activeConfigActIdx].recuperacion
+            }}
+            onChange={(field, value) => handleUpdateAct(activeConfigActIdx, field, value)}
+          />
+        )}
           </MotionWrapper>
         </main>
       </div>

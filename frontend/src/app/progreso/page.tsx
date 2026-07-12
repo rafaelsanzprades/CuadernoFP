@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BarChart, Building2, ClipboardList, Save, Target, TrendingUp, User, Users, AlertTriangle , Info, FolderOpen } from "lucide-react";
+import { BarChart, Building2, ClipboardList, Save, Target, TrendingUp, User, Users, AlertTriangle , Info, FolderOpen, Table } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -14,6 +14,7 @@ import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { useTranslation } from "react-i18next";
 import { AnalisisGrupalTab } from "@/components/features/analisis/AnalisisGrupalTab";
 import { AnalisisIndividualTab } from "@/components/features/analisis/AnalisisIndividualTab";
+import { MatrizCalificacionesTab } from "@/components/features/progreso/MatrizCalificacionesTab";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import Link from "next/link";
@@ -311,6 +312,7 @@ export default function ProgresoPage() {
 
   const TABS = [
     { id: "resumen", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.resumen')}</>, cleanLabel: t('tabs.resumen') },
+    { id: "matriz", label: <><span className="inline-flex"><Table className="w-[1.2em] h-[1.2em] mr-1" /></span> Matriz (Excel)</>, cleanLabel: "Matriz (Excel)" },
     { id: "detalle", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.detalle')}</>, cleanLabel: t('tabs.detalle') },
     { id: "grupal", label: <><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.grupal')}</>, cleanLabel: t('tabs.grupal') },
     { id: "individual", label: <><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.individual')}</>, cleanLabel: t('tabs.individual') }
@@ -363,6 +365,10 @@ export default function ProgresoPage() {
           'resumen': {
                     'title': 'Resumen de Progreso',
                     'desc': 'Panel global de rendimiento y calificaciones medias.'
+          },
+          'matriz': {
+                    'title': 'Matriz de Calificaciones',
+                    'desc': 'Cuaderno del profesor. Vista tipo Excel para registro ágil de notas.'
           },
           'detalle': {
                     'title': 'Detalle por alumnado',
@@ -647,6 +653,9 @@ export default function ProgresoPage() {
 
             </div>
           )}
+
+          {/* TAB: MATRIZ EXCEL */}
+          {activeTab === "matriz" && <MatrizCalificacionesTab />}
 
           {/* TAB 2: DETALLE POR ALUMNADODO (Con ambos bloques desplegables uno detrás de otro) */}
           {activeTab === "detalle" && (

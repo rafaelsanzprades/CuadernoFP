@@ -15,8 +15,8 @@ class PdfRequest(BaseModel):
 router = APIRouter(prefix="/api/pdf", tags=["PDF Generation"])
 
 @router.post("")
-def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None):
-    print(f"--- GENERATE_PDF CALLED! type={type} al_id={al_id} ---")
+def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, item_id: Optional[str] = None):
+    print(f"--- GENERATE_PDF CALLED! type={type} al_id={al_id} item_id={item_id} ---")
     try:
         # Import PDF modules
         from pdf_calendario_academico import generar_pdf_calendario
@@ -125,6 +125,51 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None):
                 out_pdf = os.path.join(tmpdir, fname + ".pdf")
                 
                 generador_pd.generate(data_pd, out_docx, out_pdf)
+                
+                if os.path.exists(out_pdf):
+                    zip_buffer = BytesIO()
+                    with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zf:
+                        zf.write(out_docx, os.path.basename(out_docx))
+                        zf.write(out_pdf, os.path.basename(out_pdf))
+                    zip_buffer.seek(0)
+                    return Response(content=zip_buffer.getvalue(), media_type="application/zip")
+                else:
+                    with open(out_docx, "rb") as f:
+                        docx_bytes = f.read()
+                    return Response(
+                        content=docx_bytes,
+                        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    )
+        elif type in ["ud", "tarea"]:
+            import generador_ud_tarea
+            import tempfile
+            import os
+            import zipfile
+            from io import BytesIO
+            
+            if not item_id:
+                raise HTTPException(status_code=400, detail="item_id is required for ud or tarea PDF")
+                
+            info_modulo = module_data.get("info_modulo") or {}
+            with tempfile.TemporaryDirectory() as tmpdir:
+                if type == "ud":
+                    df_ud = module_data.get("df_ud") or []
+                    target = next((u for u in df_ud if u.get("id_ud") == item_id), None)
+                    if not target:
+                        raise HTTPException(status_code=404, detail="UD not found")
+                    fname = f"UD_{item_id}"
+                    out_docx = os.path.join(tmpdir, fname + ".docx")
+                    out_pdf = os.path.join(tmpdir, fname + ".pdf")
+                    generador_ud_tarea.generate_ud(target, info_modulo, out_docx, out_pdf)
+                else:
+                    df_act = module_data.get("df_act") or []
+                    target = next((t for t in df_act if t.get("ID") == item_id or t.get("id_act") == item_id), None)
+                    if not target:
+                        raise HTTPException(status_code=404, detail="Tarea not found")
+                    fname = f"Tarea_{item_id}"
+                    out_docx = os.path.join(tmpdir, fname + ".docx")
+                    out_pdf = os.path.join(tmpdir, fname + ".pdf")
+                    generador_ud_tarea.generate_tarea(target, info_modulo, out_docx, out_pdf)
                 
                 if os.path.exists(out_pdf):
                     zip_buffer = BytesIO()

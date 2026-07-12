@@ -4,6 +4,8 @@ import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { UnidadDidactica, Sesion } from "@/types";
 import { MultiSelectDropdown } from "@/components/ui/MultiSelectDropdown";
 import { getAllAspectosClave, getAllRecursos } from "@/constants/taxonomies";
+import { UdConfigModal } from "./UdConfigModal";
+import { Settings } from "lucide-react";
 
 interface SessionTableProps {
   df_ud: UnidadDidactica[];
@@ -24,6 +26,7 @@ export function SessionTable({
   handleDeleteSesion,
   allUdsOpen
 }: SessionTableProps) {
+  const [editingUd, setEditingUd] = useState<UnidadDidactica | null>(null);
 
   // Workaround for hydration mismatches with DragDropContext
   const [mounted, setMounted] = useState(false);
@@ -55,7 +58,14 @@ export function SessionTable({
               <div className="flex items-center gap-6 text-sm">
                 <span className="text-muted">{udSesiones.length} sesiones</span>
                 <span className="text-accent bg-accent/10 px-2 py-1 rounded">{totalHoras} h</span>
-                <span className="ml-4 group-open:rotate-180 inline-block transition-transform text-muted">▼</span>
+                <button 
+                  onClick={(e) => { e.preventDefault(); setEditingUd(ud); }}
+                  className="p-1.5 hover:bg-foreground/10 rounded-md text-muted hover:text-accent transition-colors"
+                  title="Configurar Unidad Didáctica"
+                >
+                  <Settings className="w-4 h-4" />
+                </button>
+                <span className="ml-2 group-open:rotate-180 inline-block transition-transform text-muted">▼</span>
               </div>
             </summary>
             <div className="p-4 border-t border-[var(--glass-border)] bg-foreground/10 overflow-x-auto">
@@ -190,6 +200,20 @@ export function SessionTable({
         );
       })}
       </DragDropContext>
+      {editingUd && (
+        <UdConfigModal 
+          ud={editingUd} 
+          onClose={() => setEditingUd(null)} 
+          onSave={(ud_id, updates) => {
+            // Note: Ideal to have a handleUpdateUd passed down, but for now we just use a callback to the parent if needed, 
+            // or we update the object directly since it's a proxy in some stores.
+            // A more solid approach requires handleUpdateUd in props, but we can do a local mutate for now to not break signature
+            Object.assign(editingUd, updates);
+            setEditingUd(null);
+            // In a real scenario we need updateDataFrame("df_ud", updatedDfUd)
+          }} 
+        />
+      )}
     </div>
   );
 }

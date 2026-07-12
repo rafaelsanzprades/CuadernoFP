@@ -15,4 +15,4 @@ docx2pdf; sys_platform == 'win32'
 pywin32; sys_platform == 'win32'
 google-generativeai==0.8.3
 PyMuPDF==1.25.3
-slowapi==0.1.9
+slowapi==0.1.9python-docx==1.1.2

@@ -116,6 +116,7 @@ export const CursoDataSchema = z.object({
   df_al: z.array(AlumnadoSchema).optional(),
   df_sgmt: z.array(SeguimientoUDSchema).optional(),
   df_eval: z.array(z.any()).optional(),
+  df_feoe: z.array(z.any()).optional(),
   daily_ledger: z.record(z.string(), z.any()).optional(),
   tutoria_ledger: z.record(z.string(), z.any()).optional(),
   horario: z.record(z.string(), z.any()).optional(),

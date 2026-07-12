@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { School, Settings, User , Info } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 
@@ -25,34 +25,47 @@ export function ContextoTab() {
         </h2>
         <div className="space-y-4">
           <div>
-            <label className="text-sm text-muted mb-1 block">Instalaciones</label>
+            <label className="text-sm text-muted mb-1 block">Entorno geográfico y sociocultural</label>
             <textarea
-              value={config_contexto.instalaciones || ""}
-              onChange={e => handleContextoChange("instalaciones", e.target.value)}
+              value={config_contexto.entorno_geografico || ""}
+              onChange={e => handleContextoChange("entorno_geografico", e.target.value)}
+              placeholder="Ej: El IES Andalán se sitúa en el barrio X de Zaragoza..."
               className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
-            <label className="text-sm text-muted mb-1 block">Horario lectivo</label>
+            <label className="text-sm text-muted mb-1 block">Entorno socioeconómico y productivo</label>
             <textarea
-              value={config_contexto.horario_lectivo || ""}
-              onChange={e => handleContextoChange("horario_lectivo", e.target.value)}
+              value={config_contexto.entorno_socioeconomico || ""}
+              onChange={e => handleContextoChange("entorno_socioeconomico", e.target.value)}
+              placeholder="Ej: El tejido empresarial de la zona destaca por..."
               className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
-            <label className="text-sm text-muted mb-1 block">Equipo docente</label>
+            <label className="text-sm text-muted mb-1 block">Contexto escolar</label>
             <textarea
-              value={config_contexto.equipo_docente || ""}
-              onChange={e => handleContextoChange("equipo_docente", e.target.value)}
+              value={config_contexto.contexto_escolar || ""}
+              onChange={e => handleContextoChange("contexto_escolar", e.target.value)}
+              placeholder="Ej: Centro de referencia en Formación Profesional..."
               className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
-            <label className="text-sm text-muted mb-1 block">Archivos socioeconómico</label>
+            <label className="text-sm text-muted mb-1 block">Características del alumnado</label>
             <textarea
-              value={config_contexto.Archivos_socioeconomico || ""}
-              onChange={e => handleContextoChange("Archivos_socioeconomico", e.target.value)}
+              value={config_contexto.caracteristicas_alumnado || ""}
+              onChange={e => handleContextoChange("caracteristicas_alumnado", e.target.value)}
+              placeholder="Ej: Grupo diverso en edades y perfiles de ingreso..."
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-sm text-muted mb-1 block">Infraestructura y recursos educativos</label>
+            <textarea
+              value={config_contexto.infraestructura || ""}
+              onChange={e => handleContextoChange("infraestructura", e.target.value)}
+              placeholder="Ej: Aula-taller informatizada con 30 puestos..."
               className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>

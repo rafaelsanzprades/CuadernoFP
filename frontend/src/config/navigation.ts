@@ -28,7 +28,8 @@ export const navGroups = [
       { href: "/calendario", label: "Calendario", icon: Calendar, description: "Horario semanal, trimestres, festivos y eventos." },
       { href: "/alumnado", label: "Alumnado", icon: Users, description: "Fichas, tutorías, prevención de abandono y plano de clase." },
       { href: "/seguimiento", label: "Diario", icon: MapPin, description: "Diario de aula, control de asistencia e incidencias." },
-      { href: "/progreso", label: "Evaluación", icon: TrendingUp, description: "Progreso académico: Cuaderno de notas, rúbricas y analíticas por RA." }
+      { href: "/progreso", label: "Calificaciones", icon: TrendingUp, description: "Cuaderno de notas, rúbricas y matriz de progreso por RA." },
+      { href: "/estadisticas", label: "Estadísticas", icon: BarChart3, description: "Dashboards analíticos del rendimiento del alumnado." }
     ]
   }
 ];

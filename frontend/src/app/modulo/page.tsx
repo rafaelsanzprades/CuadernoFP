@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { Building2, FileEdit, FileText, Settings, Map, Target, CheckCircle2, Layers, Award, FolderOpen, Info } from "lucide-react";
+import { Building2, FileEdit, FileText, Settings, Map, Target, CheckCircle2, Layers, Award, FolderOpen, Info, HeartHandshake } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -13,6 +13,7 @@ import { ContextoFEOETab } from "@/components/features/modulo/ContextoFEOETab";
 import { MetodologiaTab } from "@/components/features/modulo/MetodologiaTab";
 import { EvaluacionRecursosTab } from "@/components/features/modulo/EvaluacionRecursosTab";
 import { OtrosElementosTab } from "@/components/features/modulo/OtrosElementosTab";
+import { DiversidadTab } from "@/components/features/modulo/DiversidadTab";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import Link from "next/link";
@@ -55,6 +56,7 @@ export default function ModuloConfigPage() {
     { id: "contexto_feoe", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.contexto_feoe')}</>, cleanLabel: t('tabs.contexto_feoe') },
     { id: "metodologia", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.metodologia')}</>, cleanLabel: t('tabs.metodologia') },
     { id: "evaluacion", label: <><span className="inline-flex"><CheckCircle2 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.evaluacion')}</>, cleanLabel: t('tabs.evaluacion') },
+    { id: "diversidad", label: <><span className="inline-flex"><HeartHandshake className="w-[1.2em] h-[1.2em] mr-1" /></span> Diversidad</>, cleanLabel: "Diversidad" },
     { id: "otros", label: <><span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.otros')}</>, cleanLabel: t('tabs.otros') }
   ];
 
@@ -141,7 +143,8 @@ export default function ModuloConfigPage() {
                 'contexto_feoe': { desc: 'Análisis específico del sector productivo y oportunidades de empleo.' },
                 'metodologia': { desc: 'Estrategias pedagógicas, agrupamientos y principios de intervención.' },
                 'evaluacion': { desc: 'Criterios de calificación, instrumentos y recursos didácticos necesarios.' },
-                'otros': { desc: 'Temas transversales, atención a la diversidad y actividades complementarias.' }
+                'diversidad': { desc: 'Atención a la diversidad, adaptaciones curriculares y panel de alumnado ACNEAE.' },
+                'otros': { desc: 'Temas transversales, innovación y proyectos intermodulares.' }
               };
               const info = infoMap[activeTab] || { desc: 'Configuración del módulo.' };
               return (
@@ -158,6 +161,7 @@ export default function ModuloConfigPage() {
             {activeTab === "contexto_feoe" && <ContextoFEOETab />}
             {activeTab === "metodologia" && <MetodologiaTab />}
             {activeTab === "evaluacion" && <EvaluacionRecursosTab />}
+            {activeTab === "diversidad" && <DiversidadTab />}
             {activeTab === "otros" && <OtrosElementosTab />}
 
           </MotionWrapper>

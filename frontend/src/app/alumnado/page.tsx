@@ -12,6 +12,8 @@ import { Button } from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import { PlanoClaseTab } from "@/components/features/alumnado/PlanoClaseTab";
 import { BoletinesTab } from "@/components/features/alumnado/BoletinesTab";
+import { FeoeTab } from "@/components/features/alumnado/FeoeTab";
+import { TutoriaTab } from "@/components/features/alumnado/TutoriaTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -477,6 +479,9 @@ export default function AlumnadoPage() {
           {activeTab === "plano" && (
             <PlanoClaseTab />
           )}
+
+          {activeTab === "feoe" && <FeoeTab />}
+          {activeTab === "tutoria" && <TutoriaTab />}
 
           {activeTab === "boletines" && <BoletinesTab />}
           

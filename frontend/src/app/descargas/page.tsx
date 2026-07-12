@@ -12,6 +12,9 @@ import { Alumnado } from "@/types";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Skeleton } from "@/components/ui/Skeleton";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
 import Link from "next/link";
 
@@ -43,6 +46,16 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
   const [fechaFinal, setFechaFinal] = useState("");
 
   const [evaluacionTab, setEvaluacionTab] = useState('grupales'); // grupales, individuales
+  const [guiaPdContent, setGuiaPdContent] = useState("");
+
+  useEffect(() => {
+    if (activeTab === "guia_pd" && !guiaPdContent) {
+      fetch("/Guia_PD.md")
+        .then(res => res.text())
+        .then(text => setGuiaPdContent(text))
+        .catch(err => console.error("Error cargando Guia_PD.md", err));
+    }
+  }, [activeTab, guiaPdContent]);
 
   const fetchDocuments = (path: string) => {
     setLoadingDocs(true);
@@ -182,7 +195,8 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
       const urlBlob = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = urlBlob;
-      a.download = `${type}_${Date.now()}.pdf`;
+      const ext = type === "programacion" ? "zip" : "pdf";
+      a.download = `${type}_${Date.now()}.${ext}`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -260,6 +274,7 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
   const TABS = [
     { id: "programacion", label: "Programación", cleanLabel: "Programación" },
     { id: "curso", label: "Curso", cleanLabel: "Curso" },
+    { id: "guia_pd", label: "Guía PD", cleanLabel: "Guía PD" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -292,6 +307,9 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
                 <TabsTrigger value="curso">
                   <div className="flex items-center gap-2"><Calendar className="w-4 h-4" /> Curso</div>
                 </TabsTrigger>
+                <TabsTrigger value="guia_pd">
+                  <div className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Guía PD</div>
+                </TabsTrigger>
               </TabsList>
             </Tabs>
                     {(() => {
@@ -303,6 +321,10 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
           'curso': {
                     'title': 'Descargas - Curso',
                     'desc': 'Descarga de actas, seguimientos y memorias de curso.'
+          },
+          'guia_pd': {
+                    'title': 'Guía PD (Referencia Cruzada)',
+                    'desc': 'Mapa de correspondencias entre la plantilla oficial de TodoFP y los campos en CuadernoFP.'
           }
 };
                 const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
@@ -349,11 +371,11 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-info">
                               <div>
-                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica</h3>
-                                <p className="text-sm text-muted mb-6">Documento oficial completo con secuenciación, metodologías y criterios.</p>
+                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica TodoFP</h3>
+                                <p className="text-sm text-muted mb-6">Documento oficial completo con secuenciación, metodologías y criterios adaptado al modelo de TodoFP.</p>
                               </div>
                               <Button onClick={() => handleDownloadPdf('programacion')} disabled={downloadingStr === 'programacion'} className="w-full bg-info hover:bg-info/90 text-white">
-                                {downloadingStr === 'programacion' ? '⏳ Generando...' : 'Descargar DOCX / PDF'}
+                                {downloadingStr === 'programacion' ? '⏳ Generando...' : 'Descargar Programación TodoFP (en fichero .docx y .pdf)'}
                               </Button>
                             </div>
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
@@ -576,6 +598,24 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
                           ) : (
                             <p className="text-muted italic">No hay estudiantes activos en el curso.</p>
                           )}
+                        </Card>
+                      </div>
+                    )}
+                    
+                    {activeTab === 'guia_pd' && (
+                      <div className="space-y-4 animate-in fade-in duration-500">
+                        <Card className="p-8 border-t-4 border-t-indigo-500">
+                          <div className="prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-th:bg-foreground/5 prose-table:border-collapse prose-table:w-full">
+                            {guiaPdContent ? (
+                              <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+                                {guiaPdContent}
+                              </ReactMarkdown>
+                            ) : (
+                              <div className="flex justify-center p-8">
+                                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-info"></div>
+                              </div>
+                            )}
+                          </div>
                         </Card>
                       </div>
                     )}

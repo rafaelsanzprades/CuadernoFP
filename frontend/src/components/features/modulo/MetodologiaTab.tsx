@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { Target , Info } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 
@@ -19,23 +19,43 @@ export function MetodologiaTab() {
         </h2>
         <div className="space-y-4">
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">D2. Actividades de enseñanza-aprendizaje</label>
-            <p className="text-xs text-muted mb-2">Estrategias metodológicas a emplear en el aula y taller.</p>
+            <label className="text-sm font-semibold text-foreground mb-1 block">Principios Metodológicos</label>
+            <p className="text-xs text-muted mb-2">Principios pedagógicos generales que guiarán el módulo.</p>
             <textarea
-              value={config_contexto["D2_actividades_ea"] || ""}
-              onChange={e => handleChange("D2_actividades_ea", e.target.value)}
-              placeholder="Relación de metodologías tipo como teoría, taller, prácticas simuladas, ABP..."
-              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+              value={config_contexto["principios_metodologicos"] || ""}
+              onChange={e => handleChange("principios_metodologicos", e.target.value)}
+              placeholder="Ej: Aprendizaje significativo, funcionalidad de los aprendizajes..."
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">D3. Agrupamientos y Plan de Desdobles</label>
-            <p className="text-xs text-muted mb-2">Criterios para la organización espacial y agrupamiento del alumnado.</p>
+            <label className="text-sm font-semibold text-foreground mb-1 block">Estrategias Metodológicas</label>
+            <p className="text-xs text-muted mb-2">Estrategias y actividades de enseñanza-aprendizaje a emplear en el aula y taller.</p>
             <textarea
-              value={config_contexto["D3_agrupamientos"] || ""}
-              onChange={e => handleChange("D3_agrupamientos", e.target.value)}
+              value={config_contexto["estrategias_metodologicas"] || config_contexto["D2_actividades_ea"] || ""}
+              onChange={e => handleChange("estrategias_metodologicas", e.target.value)}
+              placeholder="Relación de metodologías tipo como teoría, taller, prácticas simuladas..."
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-sm font-semibold text-foreground mb-1 block">Plan de Aplicación de los Desdobles</label>
+            <p className="text-xs text-muted mb-2">Justificación y organización si el módulo tiene desdobles.</p>
+            <textarea
+              value={config_contexto["plan_desdobles"] || config_contexto["D3_agrupamientos"] || ""}
+              onChange={e => handleChange("plan_desdobles", e.target.value)}
               placeholder="Organización del grupo, desdobles por prevención de riesgos o ratios..."
-              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-sm font-semibold text-foreground mb-1 block">Aprendizaje colaborativo basado en proyectos y/o retos (ABP/ABR)</label>
+            <p className="text-xs text-muted mb-2">Descripción de la aplicación de metodologías activas.</p>
+            <textarea
+              value={config_contexto["aprendizaje_colaborativo"] || ""}
+              onChange={e => handleChange("aprendizaje_colaborativo", e.target.value)}
+              placeholder="Se aplicará la metodología basada en retos para..."
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>

@@ -1,0 +1,169 @@
+"use client";
+import { Users, Plus, Trash2, ShieldAlert } from "lucide-react";
+import { useAppStore } from "@/store/useAppStore";
+import { Button } from "@/components/ui/Button";
+
+export function DiversidadTab() {
+  const { moduleData, updateModuleData } = useAppStore();
+  const config_contexto = moduleData?.config_contexto || {};
+  
+  // Default structure if not exists
+  const acneae = config_contexto.acneae || [];
+
+  const handleChange = (field: string, value: any) => {
+    updateModuleData("config_contexto", { ...config_contexto, [field]: value });
+  };
+
+  const addAcneae = () => {
+    const newStudent = { id: Date.now().toString(), nombre: "", tipoNecesidad: "", adaptaciones: [] };
+    handleChange("acneae", [...acneae, newStudent]);
+  };
+
+  const updateAcneae = (id: string, field: string, value: any) => {
+    const updated = acneae.map((s: any) => s.id === id ? { ...s, [field]: value } : s);
+    handleChange("acneae", updated);
+  };
+
+  const removeAcneae = (id: string) => {
+    handleChange("acneae", acneae.filter((s: any) => s.id !== id));
+  };
+
+  const toggleAdaptacion = (studentId: string, adaptacion: string) => {
+    const student = acneae.find((s: any) => s.id === studentId);
+    if (!student) return;
+    const current = student.adaptaciones || [];
+    const updated = current.includes(adaptacion) 
+      ? current.filter((a: string) => a !== adaptacion)
+      : [...current, adaptacion];
+    updateAcneae(studentId, "adaptaciones", updated);
+  };
+
+  const adaptacionesList = [
+    "Tiempo extra en pruebas",
+    "Sistemas de comunicación alternativos",
+    "Medios apropiados/apoyos técnicos",
+    "Adaptación de formato de examen",
+    "Ubicación preferente en el aula"
+  ];
+
+  return (
+    <div className="space-y-6 animate-in fade-in duration-500">
+      
+      {/* Marco de Inclusión */}
+      <div className="glass-card p-6 border-t-4 border-t-purple-500">
+        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
+          <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-purple-400" /></span> Marco de Inclusión (D 91/2024 Art. 29)
+        </h2>
+        
+        <div className="space-y-4">
+          <label className="flex items-start gap-3 p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition-colors cursor-pointer">
+            <input 
+              type="checkbox" 
+              className="mt-1"
+              checked={config_contexto.adaptaciones_no_significativas || false}
+              onChange={(e) => handleChange("adaptaciones_no_significativas", e.target.checked)}
+            />
+            <div>
+              <p className="font-semibold text-sm">Adaptaciones curriculares no significativas</p>
+              <p className="text-xs text-muted">Ajustes metodológicos, organizativos o de acceso que no alteran los RA ni CE esenciales.</p>
+            </div>
+          </label>
+
+          <label className="flex items-start gap-3 p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition-colors cursor-pointer">
+            <input 
+              type="checkbox" 
+              className="mt-1"
+              checked={config_contexto.medidas_flexibilizacion || false}
+              onChange={(e) => handleChange("medidas_flexibilizacion", e.target.checked)}
+            />
+            <div>
+              <p className="font-semibold text-sm">Medidas de flexibilización</p>
+              <p className="text-xs text-muted">Alternativas metodológicas en enseñanza y evaluación que no minorarán las calificaciones.</p>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      {/* Panel ACNEAE */}
+      <div className="glass-card p-6 border-t-4 border-t-pink-500">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-lg font-bold flex items-center gap-2 text-foreground">
+            <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1 text-pink-400" /></span> Panel de ACNEAE
+          </h2>
+          <Button size="sm" variant="secondary" onClick={addAcneae} className="gap-2">
+            <Plus className="w-4 h-4" /> Añadir Alumno
+          </Button>
+        </div>
+        <p className="text-xs text-muted mb-4">
+          Registro de Alumnado con Necesidad Específica de Apoyo Educativo y sus adaptaciones asociadas.
+        </p>
+
+        {acneae.length === 0 ? (
+          <div className="text-center py-8 bg-white/5 rounded-lg border border-white/10">
+            <p className="text-muted text-sm">No hay alumnos ACNEAE registrados en este módulo.</p>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {acneae.map((student: any, index: number) => (
+              <div key={student.id} className="p-4 bg-white/5 border border-white/10 rounded-lg relative group">
+                <button 
+                  onClick={() => removeAcneae(student.id)}
+                  className="absolute top-4 right-4 text-muted hover:text-danger opacity-0 group-hover:opacity-100 transition-opacity"
+                  title="Eliminar registro"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 pr-8">
+                  <div>
+                    <label className="text-xs font-semibold text-muted block mb-1">Nombre / Identificador</label>
+                    <input 
+                      type="text" 
+                      value={student.nombre}
+                      onChange={(e) => updateAcneae(student.id, "nombre", e.target.value)}
+                      placeholder="Ej. Alumno A"
+                      className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-2 text-sm text-foreground focus:border-info focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-muted block mb-1">Tipo de Necesidad</label>
+                    <input 
+                      type="text" 
+                      value={student.tipoNecesidad}
+                      onChange={(e) => updateAcneae(student.id, "tipoNecesidad", e.target.value)}
+                      placeholder="Ej. Dislexia, TEA, Altas capacidades..."
+                      className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-2 text-sm text-foreground focus:border-info focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-xs font-semibold text-muted block mb-2">Adaptaciones de Evaluación y Acceso</label>
+                  <div className="flex flex-wrap gap-2">
+                    {adaptacionesList.map(adapt => {
+                      const isSelected = (student.adaptaciones || []).includes(adapt);
+                      return (
+                        <button
+                          key={adapt}
+                          onClick={() => toggleAdaptacion(student.id, adapt)}
+                          className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
+                            isSelected 
+                              ? 'bg-pink-500/20 border-pink-500/50 text-pink-200' 
+                              : 'bg-white/5 border-white/10 text-muted hover:bg-white/10'
+                          }`}
+                        >
+                          {adapt}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+    </div>
+  );
+}

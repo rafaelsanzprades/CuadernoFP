@@ -1,7 +1,9 @@
-import { Plus, X } from "lucide-react";
-import React from "react";
+import { Plus, X, Settings } from "lucide-react";
+import React, { useState } from "react";
+import { TaskConfigModal } from "./TaskConfigModal";
 
 export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handleDeleteTarea }: any) {
+  const [editingTask, setEditingTask] = useState<any>(null);
   return (
     <div className="overflow-x-auto">
       <div className="w-full text-sm">
@@ -35,13 +37,20 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
                       className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-info focus:outline-none"
                     />
                   </div>
-                  <div className="w-10 flex justify-center">
+                  <div className="w-20 flex justify-end gap-2">
+                    <button 
+                      onClick={() => setEditingTask(tc)}
+                      className="p-1.5 hover:bg-foreground/10 rounded-md text-muted hover:text-accent transition-colors"
+                      title="Configurar Tarea Competencial"
+                    >
+                      <Settings className="w-4 h-4" />
+                    </button>
                     <button
                       onClick={() => handleDeleteTarea(globalIdx)}
-                      className="text-danger hover:text-danger font-bold"
+                      className="p-1.5 text-danger/70 hover:bg-danger/10 hover:text-danger rounded-md font-bold transition-colors"
                       title="Eliminar tarea"
                     >
-                      <X className="w-5 h-5" />
+                      <X className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
@@ -80,6 +89,23 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
           <Plus className="w-4 h-4" /> Añadir nueva tarea competencial
         </button>
       </div>
+      {editingTask && (
+        <TaskConfigModal
+          task={editingTask}
+          onClose={() => setEditingTask(null)}
+          onSave={(task_id, updates) => {
+            const idx = df_tareas.findIndex((t: any) => t.ID === task_id || t.id_act === task_id);
+            if (idx !== -1) {
+              Object.keys(updates).forEach((key) => {
+                handleUpdateTarea(idx, key, updates[key]);
+              });
+            } else {
+              Object.assign(editingTask, updates);
+            }
+            setEditingTask(null);
+          }}
+        />
+      )}
     </div>
   );
 }
