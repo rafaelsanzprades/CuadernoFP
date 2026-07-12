@@ -94,8 +94,11 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 info_fechas=info_fechas, planning_ledger=planning_ledger,
                 df_ud=df_ud, df_pr=df_pr
             )
-        elif type == "programacion":
-            import generador_pd
+        elif type in ["programacion_boa", "programacion_aragon"]:
+            if type == "programacion_boa":
+                import generador_pd_boa as generador_pd
+            else:
+                import generador_pd
             import tempfile
             import os
             import zipfile

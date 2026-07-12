@@ -15,6 +15,7 @@ import { useTranslation } from "react-i18next";
 import { AnalisisGrupalTab } from "@/components/features/analisis/AnalisisGrupalTab";
 import { AnalisisIndividualTab } from "@/components/features/analisis/AnalisisIndividualTab";
 import { MatrizCalificacionesTab } from "@/components/features/progreso/MatrizCalificacionesTab";
+import EstadisticasTab from "@/components/features/evaluacion/EstadisticasTab";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import Link from "next/link";
@@ -312,6 +313,7 @@ export default function ProgresoPage() {
 
   const TABS = [
     { id: "resumen", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.resumen')}</>, cleanLabel: t('tabs.resumen') },
+    { id: "estadisticas", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Estadísticas</>, cleanLabel: "Estadísticas" },
     { id: "matriz", label: <><span className="inline-flex"><Table className="w-[1.2em] h-[1.2em] mr-1" /></span> Matriz (Excel)</>, cleanLabel: "Matriz (Excel)" },
     { id: "detalle", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.detalle')}</>, cleanLabel: t('tabs.detalle') },
     { id: "grupal", label: <><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.grupal')}</>, cleanLabel: t('tabs.grupal') },
@@ -651,6 +653,13 @@ export default function ProgresoPage() {
                 </div>
               </Card>
 
+            </div>
+          )}
+
+          {/* TAB ESTADISTICAS */}
+          {activeTab === "estadisticas" && (
+            <div className="space-y-4 animate-in fade-in duration-500">
+              <EstadisticasTab />
             </div>
           )}
 

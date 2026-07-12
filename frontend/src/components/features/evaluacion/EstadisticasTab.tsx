@@ -1,33 +1,22 @@
 "use client";
 import React, { useState } from "react";
-import Sidebar from "@/components/layout/Sidebar";
-import Header from "@/components/layout/Header";
+
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { BarChart3, PieChart, TrendingUp, AlertTriangle } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart as RePieChart, Pie, Cell, Legend } from "recharts";
 
-export default function EstadisticasPage() {
+export default function EstadisticasTab() {
   const { cursoData, moduleData, activeCursoId } = useAppStore();
   const [evalPeriod, setEvalPeriod] = useState<"1T" | "2T" | "3T" | "FINAL">("FINAL");
 
   // Si no hay datos, mostrar aviso
   if (!activeCursoId) {
     return (
-      <div className="flex min-h-screen bg-background">
-        <Sidebar />
-        <div className="flex-1 flex flex-col relative z-10 min-w-0">
-          <Header />
-          <main className="flex-1 p-8">
-            <MotionWrapper>
-              <div className="p-12 text-center bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
-                <AlertTriangle className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-50" />
-                <h2 className="text-2xl font-bold">No hay curso activo</h2>
-                <p className="text-muted">Abre un archivo de curso para ver sus estadísticas.</p>
-              </div>
-            </MotionWrapper>
-          </main>
-        </div>
+      <div className="p-12 text-center bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
+        <AlertTriangle className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-50" />
+        <h2 className="text-2xl font-bold">No hay curso activo</h2>
+        <p className="text-muted">Abre un archivo de curso para ver sus estadísticas.</p>
       </div>
     );
   }
@@ -96,18 +85,6 @@ export default function EstadisticasPage() {
   const raStats = getRaStats();
 
   return (
-    <div className="flex min-h-screen bg-background">
-      <Sidebar />
-      <div className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header />
-        <main className="flex-1 p-8 content-area">
-          <MotionWrapper>
-            <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div>
-                <h1 className="text-3xl font-bold tracking-tight mb-2 flex items-center gap-3">
-                  <BarChart3 className="w-8 h-8 text-primary" />
-                  Dashboard de Estadísticas
-                </h1>
                 <p className="text-muted">
                   Analítica visual del rendimiento académico del grupo.
                 </p>
@@ -201,9 +178,7 @@ export default function EstadisticasPage() {
               </div>
             </div>
 
-          </MotionWrapper>
-        </main>
-      </div>
+      </MotionWrapper>
     </div>
   );
 }

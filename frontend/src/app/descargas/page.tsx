@@ -371,12 +371,17 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-info">
                               <div>
-                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica TodoFP</h3>
-                                <p className="text-sm text-muted mb-6">Documento oficial completo con secuenciación, metodologías y criterios adaptado al modelo de TodoFP.</p>
+                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica</h3>
+                                <p className="text-sm text-muted mb-6">Genera el documento base de programación del módulo. Puedes elegir entre la estructura básica (BOA) o la completa (Aragón).</p>
                               </div>
-                              <Button onClick={() => handleDownloadPdf('programacion')} disabled={downloadingStr === 'programacion'} className="w-full bg-info hover:bg-info/90 text-white">
-                                {downloadingStr === 'programacion' ? '⏳ Generando...' : 'Descargar Programación TodoFP (en fichero .docx y .pdf)'}
-                              </Button>
+                              <div className="flex flex-col gap-2 mt-auto">
+                                <Button onClick={() => handleDownloadPdf('programacion_boa')} disabled={downloadingStr === 'programacion_boa'} className="w-full bg-slate-600 hover:bg-slate-700 text-white">
+                                  {downloadingStr === 'programacion_boa' ? '⏳ Generando...' : 'Descargar PD BOA'}
+                                </Button>
+                                <Button onClick={() => handleDownloadPdf('programacion_aragon')} disabled={downloadingStr === 'programacion_aragon'} className="w-full bg-info hover:bg-info/90 text-white">
+                                  {downloadingStr === 'programacion_aragon' ? '⏳ Generando...' : 'Descargar PD Aragón'}
+                                </Button>
+                              </div>
                             </div>
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                               <div>
