@@ -15,8 +15,8 @@ class PdfRequest(BaseModel):
 router = APIRouter(prefix="/api/pdf", tags=["PDF Generation"])
 
 @router.post("")
-def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, item_id: Optional[str] = None):
-    print(f"--- GENERATE_PDF CALLED! type={type} al_id={al_id} item_id={item_id} ---")
+def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, item_id: Optional[str] = None, file_format: Optional[str] = "pdf"):
+    print(f"--- GENERATE_PDF CALLED! type={type} al_id={al_id} item_id={item_id} format={file_format} ---")
     try:
         # Import PDF modules
         from pdf_calendario_academico import generar_pdf_calendario
@@ -94,11 +94,24 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 info_fechas=info_fechas, planning_ledger=planning_ledger,
                 df_ud=df_ud, df_pr=df_pr
             )
-        elif type in ["programacion_boa", "programacion_aragon"]:
-            if type == "programacion_boa":
-                import generador_pd_boa as generador_pd
+        elif type == "plantilla_jeg":
+            import os
+            template_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'modelo_pd_fp.docx')
+            if not os.path.exists(template_path):
+                raise HTTPException(status_code=404, detail="Plantilla no encontrada. Debes colocar 'modelo_pd_fp.docx' en la carpeta templates.")
+            with open(template_path, "rb") as f:
+                docx_bytes = f.read()
+            return Response(
+                content=docx_bytes,
+                media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            )
+        elif type in ["programacion_minima", "programacion_suficiente", "programacion_detallada"]:
+            if type == "programacion_minima":
+                import generador_pd_minima as generador_pd
+            elif type == "programacion_suficiente":
+                import generador_pd_suficiente as generador_pd
             else:
-                import generador_pd
+                import generador_pd_detallada as generador_pd
             import tempfile
             import os
             import zipfile
@@ -119,7 +132,20 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 "config_contexto": curso_data.get("config_contexto") or {},
                 "config_redondeo": curso_data.get("config_redondeo") or {"nota_aprobado": 5.0, "umbral_redondeo": 4.5},
                 "info_modulo": module_data.get("info_modulo") or {},
-                "curriculo_data": curso_data.get("curriculo_data") or {}
+                "curriculo_data": curso_data.get("curriculo_data") or {},
+                "is_dual": module_data.get("is_dual", False),
+                "metodologias_seleccionadas": module_data.get("metodologias_seleccionadas", []),
+                "instrumentos_seleccionados": module_data.get("instrumentos_seleccionados", []),
+                "medidas_inclusion": module_data.get("medidas_inclusion", []),
+                "medidas_contingencia": module_data.get("medidas_contingencia", []),
+                "recursos_espacios": module_data.get("recursos_espacios", []),
+                "actividades_complementarias": module_data.get("actividades_complementarias", []),
+                "elementos_transversales": module_data.get("elementos_transversales", []),
+                "texto_contextualizacion_libre": module_data.get("texto_contextualizacion_libre", ""),
+                "texto_metodologia_libre": module_data.get("texto_metodologia_libre", ""),
+                "texto_inclusion_libre": module_data.get("texto_inclusion_libre", ""),
+                "texto_contingencia_libre": module_data.get("texto_contingencia_libre", ""),
+                "info_fechas": curso_data.get("info_fechas") or {}
             }
             
             with tempfile.TemporaryDirectory() as tmpdir:
@@ -129,20 +155,25 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 
                 generador_pd.generate(data_pd, out_docx, out_pdf)
                 
-                if os.path.exists(out_pdf):
-                    zip_buffer = BytesIO()
-                    with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zf:
-                        zf.write(out_docx, os.path.basename(out_docx))
-                        zf.write(out_pdf, os.path.basename(out_pdf))
-                    zip_buffer.seek(0)
-                    return Response(content=zip_buffer.getvalue(), media_type="application/zip")
-                else:
+                if file_format == "docx":
                     with open(out_docx, "rb") as f:
                         docx_bytes = f.read()
                     return Response(
                         content=docx_bytes,
                         media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                     )
+                else:
+                    if os.path.exists(out_pdf):
+                        with open(out_pdf, "rb") as f:
+                            pdf_bytes = f.read()
+                        return Response(content=pdf_bytes, media_type="application/pdf")
+                    else:
+                        with open(out_docx, "rb") as f:
+                            docx_bytes = f.read()
+                        return Response(
+                            content=docx_bytes,
+                            media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                        )
         elif type in ["ud", "tarea"]:
             import generador_ud_tarea
             import tempfile
@@ -174,20 +205,25 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                     out_pdf = os.path.join(tmpdir, fname + ".pdf")
                     generador_ud_tarea.generate_tarea(target, info_modulo, out_docx, out_pdf)
                 
-                if os.path.exists(out_pdf):
-                    zip_buffer = BytesIO()
-                    with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zf:
-                        zf.write(out_docx, os.path.basename(out_docx))
-                        zf.write(out_pdf, os.path.basename(out_pdf))
-                    zip_buffer.seek(0)
-                    return Response(content=zip_buffer.getvalue(), media_type="application/zip")
-                else:
+                if file_format == "docx":
                     with open(out_docx, "rb") as f:
                         docx_bytes = f.read()
                     return Response(
                         content=docx_bytes,
                         media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                     )
+                else:
+                    if os.path.exists(out_pdf):
+                        with open(out_pdf, "rb") as f:
+                            pdf_bytes = f.read()
+                        return Response(content=pdf_bytes, media_type="application/pdf")
+                    else:
+                        with open(out_docx, "rb") as f:
+                            docx_bytes = f.read()
+                        return Response(
+                            content=docx_bytes,
+                            media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                        )
         else:
             raise HTTPException(status_code=400, detail=f"Unknown PDF type: {type}")
             
@@ -203,3 +239,5 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             traceback.print_exc(file=f)
         print(f"--- ERROR IN GENERATE_PDF! {str(e)} ---")
         raise HTTPException(status_code=500, detail=str(e))
+
+# Force reload

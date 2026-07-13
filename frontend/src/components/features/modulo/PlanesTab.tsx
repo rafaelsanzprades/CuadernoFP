@@ -1,9 +1,22 @@
-﻿"use client";
+"use client";
 import { Bus, Puzzle, Shield , Info } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 
 export function PlanesTab() {
-  const { moduleData, updateDataFrame } = useAppStore();
+  const { moduleData, updateDataFrame, updateModuleData } = useAppStore();
+
+  const CONTINGENCIA = [
+    { id: "CONT-ASINC", label: "Docencia telemática asíncrona" },
+    { id: "CONT-SINC", label: "Docencia telemática síncrona" },
+    { id: "CONT-AUT", label: "Dosier de tareas autoguiadas" }
+  ];
+
+  const medidas_contingencia = moduleData?.medidas_contingencia || [];
+
+  const toggleContingencia = (id: string) => {
+    const updated = medidas_contingencia.includes(id) ? medidas_contingencia.filter((i: string) => i !== id) : [...medidas_contingencia, id];
+    updateModuleData("medidas_contingencia", updated);
+  };
 
   const df_dua = moduleData?.df_dua || [];
   const df_contingencia = moduleData?.df_contingencia || [];
@@ -85,9 +98,42 @@ export function PlanesTab() {
       {/* Contingencia */}
       <section className="glass-card p-6 border-t-4 border-t-orange-500">
         <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Shield className="w-[1.2em] h-[1.2em] mr-1" /></span> Plan de Contingencia
+          <span className="inline-flex"><Shield className="w-[1.2em] h-[1.2em] mr-1 text-orange-400" /></span> Plan de Contingencia
         </h2>
-        <div className="overflow-x-auto mb-4">
+        <div className="space-y-6">
+
+          <div>
+            <label className="text-sm font-semibold text-foreground mb-2 block">Medidas de Contingencia (Selección Múltiple)</label>
+            <p className="text-xs text-muted mb-3">Estrategias generales de actuación ante la imposibilidad de impartir docencia presencial normal.</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+              {CONTINGENCIA.map((cont) => {
+                const isSelected = medidas_contingencia.includes(cont.id);
+                return (
+                  <label key={cont.id} className={`flex items-center gap-2 p-2 rounded border cursor-pointer transition-colors ${isSelected ? 'bg-orange-500/10 border-orange-500/30' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
+                    <input 
+                      type="checkbox" 
+                      checked={isSelected}
+                      onChange={() => toggleContingencia(cont.id)}
+                      className="rounded border-white/20 bg-transparent text-orange-500 focus:ring-orange-500"
+                    />
+                    <span className="text-xs"><strong>{cont.id}</strong> - {cont.label}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+
+          <div>
+            <label className="text-sm font-semibold text-foreground mb-2 block">Anotaciones libres de Contingencia</label>
+            <textarea
+              value={moduleData?.texto_contingencia_libre || ""}
+              onChange={e => updateModuleData("texto_contingencia_libre", e.target.value)}
+              placeholder="Añade aquí protocolos específicos o aclaraciones sobre el uso de recursos para docencia a distancia..."
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-sm text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+
+          <div className="overflow-x-auto mb-4">
           <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
             <thead>
               <tr className="border-b border-[var(--glass-border)] text-muted">
@@ -131,6 +177,7 @@ export function PlanesTab() {
         <button onClick={() => addRow(df_contingencia, "df_contingencia", "PC", { Escenario: "Otros", Organizacion: "", Actividades: "", Seguimiento: "" })} className="text-sm text-warning hover:text-warning font-semibold flex items-center gap-1">
           <span>+</span> Añadir medida de Contingencia
         </button>
+        </div>
       </section>
 
       {/* ace */}

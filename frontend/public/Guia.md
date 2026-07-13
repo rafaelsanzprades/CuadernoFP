@@ -86,22 +86,25 @@ Una vez creada la programación base (que verás activa en la pantalla de [Archi
     - **Pestaña:** Contexto
       - **Bloque:** Contexto escolar
         - **Texto:** Instalaciones, Horario lectivo, Equipo docente y Contexto socioeconómico. Describe los detalles de tu centro.
-      - **Bloque:** Alumnado (ACNEAE)
-        - **Texto:** Inclusión, Elenco y Circunstancias. Redacta las necesidades de diversidad.
-      - **Bloque:** Configuración del aula
-        - **Texto:** Metodología y Atención a la diversidad. Redacta tus estrategias generales.
+      - **Bloque:** Alumnado (ACNEAE) e Inclusión
+        - **Selector:** Medidas de Inclusión. Selecciona las medidas estándar (Multinivel, ACNS, Ampliación, etc.) que se aplican.
+        - **Texto:** Elenco y Circunstancias. Redacta detalles específicos si lo deseas.
     - **Pestaña:** Planes
       - **Bloque:** Planes y Programas
         - **Texto:** Descripción. Describe cómo se integra tu módulo en los planes del centro, ej. Plan de Lectura o Bilingüismo.
+      - **Bloque:** Plan de Contingencia
+        - **Selector:** Contingencia. Marca las medidas previstas (Asíncrona, Videoconferencias, etc.).
     - **Pestaña:** FEOE
       - **Bloque:** Entorno Profesional y Dual
-        - **Texto:** Descripción. Describe la conexión con las empresas locales y la organización de la fase en empresa.
+        - **Casilla:** Módulo Dualizado. Activa esta casilla si el módulo participa en FP Dual.
+        - **Texto:** Descripción. Describe la conexión con las empresas locales.
     - **Pestaña:** Metodología
       - **Bloque:** Estrategias metodológicas
-        - **Texto:** Descripción. Redacta las metodologías activas y métodos pedagógicos aplicados en el aula.
+        - **Selector:** Metodologías Activas. Selecciona de la lista oficial (ABP, Retos, Flipped Classroom, etc.).
+        - **Texto:** Detalles adicionales. Espacio libre para redactar más si se requiere.
     - **Pestaña:** Recursos
       - **Bloque:** Criterios de calificación y Materiales
-        - **Texto:** Descripción. Especifica los procedimientos de evaluación y los recursos didácticos necesarios.
+        - **Texto:** Descripción. Especifica los recursos didácticos necesarios.
     - **Pestaña:** Transversales
       - **Bloque:** Elementos transversales y complementarios
         - **Texto:** Descripción. Añade actividades extraescolares o temas transversales como la educación ambiental.
@@ -137,7 +140,7 @@ En este paso configuramos las "herramientas" que vas a usar para poner notas rea
     - **Pestaña:** 1º Trimestre. Deberás repetir el proceso en el 2º y 3º Trimestre, y consultar el Resumen.
       - **Bloque:** Lista de Instrumentos
         - **Botón:** "Añadir Instrumento/Actividad". Haz clic para crear un examen o tarea.
-        - **Selector:** Tipo. Selecciona entre Teoria, Practica, Informes, Tareas o Recuperacion.
+        - **Selector:** Tipo e Instrumento Codificado. Selecciona si es Teoría/Práctica y el instrumento oficial (Prueba objetiva, Rúbrica, Diario de aula, etc.).
         - **Texto:** Instrumento / Actividad. Ponle nombre, ej. "Examen parcial de redes".
         - **Número:** % Pond. Teclea cuánto pesa esta actividad.
         - **Casilla:** Casillas de CE. Marca con un tick los criterios de evaluación que se evalúan en esta prueba específica.
@@ -168,7 +171,11 @@ Aquí puedes obtener tanto el documento extenso y detallado como un cuadro resum
   - **Página:** Descargas [🔗](https://cuadernofp.web.app/descargas)
     - **Pestaña:** Programación [🔗](https://cuadernofp.web.app/descargas?tab=programacion)
       - **Bloque:** Documentos Oficiales
-        - **Botón:** Descargar DOCX / PDF. Obtén tu programación didáctica oficial completísima.
+        - **Botones PD:** Dispones de tres niveles de Programación Didáctica:
+          1. **PD Mínima (Alumnado):** Resumen de 1-2 folios con RA, UD y Criterios de Aprobación.
+          2. **PD Suficiente (BOA/Aragón):** Formato intermedio (~10-15 páginas) con los 17 apartados oficiales A-Q.
+          3. **PD Detallada:** Formato extendido (>60 páginas) con toda la carga narrativa completa, contexto y metodologías expandidas.
+        - **Botón:** Descargar DOCX / PDF en la tarjeta del modelo deseado.
         - **Botón:** PDF Matrices. Descarga el cuadro resumen de RA y UD.
 
 ### 2.2. Documentos de gestión del profesoradoado
@@ -308,3 +315,87 @@ Tras finalizar el trabajo de evaluación en el aula, exporta las notas para jefa
         - **Botones:** PDF Boletín y Excel/CSV. Para el 1T, 2T, 3T y Evaluación final.
       - **Bloque:** Boletines individuales
         - **Selector:** Selector de alumnado y Botón PDF. Elige a alumnado y saca su informe detallado.
+
+---
+
+## ❓ FAQ - Preguntas Frecuentes
+
+### ¿Qué diferencia hay entre los 3 niveles de Programación Didáctica (PD-, PD=, PD+)?
+CuadernoFP genera el mismo contenido base en 3 "sabores" diferentes para que uses el más adecuado en cada momento:
+- **PD Mínima (PD-):** Un resumen visual de 1 o 2 hojas pensado para entregar a tu alumnado el primer día de clase. Contiene solo lo que les importa: el temario, cómo vas a evaluarles y la nota para aprobar.
+- **PD Suficiente (PD=):** Sigue la estructura normativa estricta (por ejemplo, el modelo BOA de Aragón con 17 apartados de la A a la Q). Ideal para entregar a jefatura de estudios y salir del paso de forma impecable con unas 15 páginas.
+- **PD Detallada (PD+):** La "joya de la corona". Una programación completa tipo TFM/Oposiciones de más de 60 páginas, donde los selectores de metodología e inclusión despliegan textos enriquecidos y detallados.
+
+### ¿Qué es eso de los campos "codificados" (Metodologías, Inclusión...)?
+En lugar de escribir páginas y páginas de texto genérico (como "Voy a utilizar Flipped Classroom..."), en CuadernoFP simplemente seleccionas las metodologías o instrumentos de una **lista predefinida de opciones (Multiselect)**. El sistema, a la hora de generar tu Programación en Word o PDF, redactará automáticamente párrafos enteros, coherentes y normativos basándose en tus selecciones. Por supuesto, siempre te dejamos una cajita de texto libre por si quieres añadir algo muy específico.
+
+### ¿Cómo sabe el sistema el nombre de mi Centro Educativo?
+Solo tienes que teclearlo una vez en la pestaña **Datos** de tu módulo didáctico. El sistema guardará el nombre y sustituirá la variable mágica en todas las páginas de tu programación didáctica (portada, pie de página, contexto, etc.).
+
+### ¿Cómo indico si mi módulo es Dual / FEOE?
+En la configuración del módulo tienes un interruptor/casilla llamado **Módulo Dualizado**. Si lo activas, el sistema habilitará automáticamente los apartados de Formación en Empresa. Además, en la matriz de Resultados de Aprendizaje, podrás marcar qué RA específicos se desarrollan en FEOE para que crucen en los informes oficiales.
+
+---
+
+## 📚 Anexo: Catálogo de Elementos a Codificar
+
+Estos elementos pasarán de ser "texto libre" a opciones seleccionables (multiselect) en la base de datos, lo que permitirá generar tablas e informes de forma estandarizada.
+
+### A.1 Metodologías Activas
+- **[ABP]** Aprendizaje Basado en Proyectos
+- **[ABR]** Aprendizaje Basado en Retos
+- **[FLIP]** Flipped Classroom (Aula Invertida)
+- **[COLAB]** Aprendizaje Cooperativo / Colaborativo
+- **[SIM]** Simulación de Entornos Profesionales (Role-playing)
+- **[CASOS]** Método del Caso
+- **[GAMIF]** Gamificación / Aprendizaje Basado en Juegos
+- **[ApS]** Aprendizaje-Servicio
+- **[DEMO]** Demostración Práctica
+- **[MAGIS]** Exposición Didáctica Interactiva apoyada en TIC
+
+### A.2 Procedimientos e Instrumentos de Evaluación
+- **[PRU-OBJ]** Prueba objetiva escrita (Test, preguntas cortas)
+- **[PRU-EJEC]** Prueba de ejecución / Desempeño práctico
+- **[RUBR]** Rúbrica de evaluación
+- **[COTEJO]** Lista de control / Cotejo
+- **[ESCALA]** Escala de valoración (Likert)
+- **[PORTF]** Portfolio / Cuaderno del alumno
+- **[DIARIO]** Diario de aprendizaje
+- **[DEF-ORAL]** Exposición y defensa oral
+- **[AUTOEVAL]** Autoevaluación del alumnado
+- **[COEVAL]** Coevaluación entre pares
+
+### A.3 Medidas de Respuesta Educativa para la Inclusión
+- **[NIVEL]** Actividades multinivel
+- **[AGRUP]** Agrupamientos flexibles y tutoría entre iguales
+- **[TIEMPO]** Flexibilización en tiempos de ejecución
+- **[MATERIAL]** Adaptación de materiales
+- **[ACNS]** Adaptaciones Curriculares No Significativas
+- **[AMPLIA]** Actividades de ampliación para Altas Capacidades
+
+### A.4 Plan de Contingencia
+- **[CONT-ASINC]** Docencia telemática asíncrona (Aula Virtual)
+- **[CONT-SINC]** Docencia telemática síncrona (Videoconferencia)
+- **[CONT-AUT]** Dosier de tareas autoguiadas
+
+### A.5 Recursos y Espacios
+- **[REC-AULA]** Aula polivalente / Aula técnica
+- **[REC-TALLER]** Taller específico / Laboratorio
+- **[REC-INFO]** Aula de informática
+- **[REC-SOFT]** Software y simuladores específicos
+- **[REC-EVA]** Entorno Virtual de Aprendizaje (Aules, Moodle)
+- **[REC-BIBLIO]** Manuales y documentación técnica
+- **[REC-EPI]** Equipos de Protección Individual (EPIs)
+
+### A.6 Actividades Complementarias y Extraescolares
+- **[EXT-VISITA]** Visitas técnicas a empresas del sector
+- **[EXT-CHARLA]** Charlas / Masterclass con expertos profesionales
+- **[EXT-FERIA]** Asistencia a ferias tecnológicas o sectoriales
+- **[EXT-SKILLS]** Participación en competiciones de FP (Skills)
+
+### A.7 Elementos Transversales
+- **[TRANS-ODS]** Objetivos de Desarrollo Sostenible (Agenda 2030)
+- **[TRANS-IGUALDAD]** Igualdad de género y corresponsabilidad
+- **[TRANS-PRL]** Cultura de Prevención de Riesgos Laborales
+- **[TRANS-TIC]** Fomento de la competencia digital y buen uso de internet
+- **[TRANS-EMP]** Emprendimiento e iniciativa emprendedora

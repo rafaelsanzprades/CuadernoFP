@@ -10,14 +10,58 @@ export function MetodologiaTab() {
     updateModuleData("config_contexto", { ...config_contexto, [field]: value });
   };
 
+  const METODOLOGIAS = [
+    { id: "ABP", label: "Aprendizaje Basado en Proyectos" },
+    { id: "ABR", label: "Aprendizaje Basado en Retos" },
+    { id: "FLIP", label: "Flipped Classroom (Aula Invertida)" },
+    { id: "COLAB", label: "Aprendizaje Cooperativo / Colaborativo" },
+    { id: "SIM", label: "Simulación de Entornos Profesionales" },
+    { id: "CASOS", label: "Método del Caso" },
+    { id: "GAMIF", label: "Gamificación / Aprendizaje Basado en Juegos" },
+    { id: "ApS", label: "Aprendizaje-Servicio" },
+    { id: "DEMO", label: "Demostración Práctica" },
+    { id: "MAGIS", label: "Exposición Didáctica Interactiva apoyada en TIC" }
+  ];
+
+  const metodologias_seleccionadas = moduleData?.metodologias_seleccionadas || [];
+  
+  const toggleMetodologia = (id: string) => {
+    const updated = metodologias_seleccionadas.includes(id)
+      ? metodologias_seleccionadas.filter((m: string) => m !== id)
+      : [...metodologias_seleccionadas, id];
+    updateModuleData("metodologias_seleccionadas", updated);
+  };
+
   return (
     <>
       <div className="space-y-6 animate-in fade-in duration-500">
       <div className="glass-card p-6 border-t-4 border-t-green-500">
         <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Metodología
+          <span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1 text-green-400" /></span> Metodología
         </h2>
-        <div className="space-y-4">
+        <div className="space-y-6">
+          
+          <div>
+            <label className="text-sm font-semibold text-foreground mb-2 block">Metodologías Activas (Selección Múltiple)</label>
+            <p className="text-xs text-muted mb-3">Elige las metodologías que sustentan el desarrollo del módulo. Se redactarán automáticamente en tu Programación Didáctica.</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              {METODOLOGIAS.map((met) => {
+                const isSelected = metodologias_seleccionadas.includes(met.id);
+                return (
+                  <label key={met.id} className={`flex items-center gap-3 p-2 rounded border cursor-pointer transition-colors ${isSelected ? 'bg-green-500/10 border-green-500/30' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
+                    <input 
+                      type="checkbox" 
+                      checked={isSelected}
+                      onChange={() => toggleMetodologia(met.id)}
+                      className="rounded border-white/20 bg-transparent text-green-500 focus:ring-green-500"
+                    />
+                    <span className="text-sm"><strong>{met.id}</strong> - {met.label}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+
           <div>
             <label className="text-sm font-semibold text-foreground mb-1 block">Principios Metodológicos</label>
             <p className="text-xs text-muted mb-2">Principios pedagógicos generales que guiarán el módulo.</p>
@@ -35,9 +79,21 @@ export function MetodologiaTab() {
               value={config_contexto["estrategias_metodologicas"] || config_contexto["D2_actividades_ea"] || ""}
               onChange={e => handleChange("estrategias_metodologicas", e.target.value)}
               placeholder="Relación de metodologías tipo como teoría, taller, prácticas simuladas..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-sm text-foreground focus:border-info focus:outline-none"
             />
           </div>
+          
+          <div>
+            <label className="text-sm font-semibold text-foreground mb-1 block">Anotaciones libres de Metodología</label>
+            <p className="text-xs text-muted mb-2">Párrafo personalizado que se añadirá al final del apartado de metodologías generadas automáticamente.</p>
+            <textarea
+              value={moduleData?.texto_metodologia_libre || ""}
+              onChange={e => updateModuleData("texto_metodologia_libre", e.target.value)}
+              placeholder="Escribe aquí cualquier especificidad sobre tu forma de impartir clases que no esté cubierta en la selección anterior..."
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-sm text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+
           <div>
             <label className="text-sm font-semibold text-foreground mb-1 block">Plan de Aplicación de los Desdobles</label>
             <p className="text-xs text-muted mb-2">Justificación y organización si el módulo tiene desdobles.</p>

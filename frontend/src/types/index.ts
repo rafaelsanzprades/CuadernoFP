@@ -106,6 +106,16 @@ export const ModuleDataSchema = z.object({
   config_contexto: z.record(z.string(), z.any()).optional(),
   config_aula: z.record(z.string(), z.any()).optional(),
   config_redondeo: z.record(z.string(), z.any()).optional(),
+  medidas_inclusion: z.array(z.string()).optional(),
+  texto_inclusion_libre: z.string().optional(),
+  instrumentos_seleccionados: z.array(z.string()).optional(),
+  recursos_espacios: z.array(z.string()).optional(),
+  metodologias_seleccionadas: z.array(z.string()).optional(),
+  texto_metodologia_libre: z.string().optional(),
+  elementos_transversales: z.array(z.string()).optional(),
+  actividades_complementarias: z.array(z.string()).optional(),
+  medidas_contingencia: z.array(z.string()).optional(),
+  texto_contingencia_libre: z.string().optional(),
   __version__: z.number().optional(),
 });
 export type ModuleData = z.infer<typeof ModuleDataSchema>;

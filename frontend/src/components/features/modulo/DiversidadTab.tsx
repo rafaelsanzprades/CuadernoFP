@@ -14,6 +14,22 @@ export function DiversidadTab() {
     updateModuleData("config_contexto", { ...config_contexto, [field]: value });
   };
 
+  const INCLUSION = [
+    { id: "NIVEL", label: "Actividades multinivel" },
+    { id: "AGRUP", label: "Agrupamientos flexibles / tutoría" },
+    { id: "TIEMPO", label: "Flexibilización en tiempos" },
+    { id: "MATERIAL", label: "Adaptación de materiales" },
+    { id: "ACNS", label: "ACNS (No Significativas)" },
+    { id: "AMPLIA", label: "Ampliación (Altas Capacidades)" }
+  ];
+
+  const medidas_inclusion = moduleData?.medidas_inclusion || [];
+
+  const toggleInclusion = (id: string) => {
+    const updated = medidas_inclusion.includes(id) ? medidas_inclusion.filter((i: string) => i !== id) : [...medidas_inclusion, id];
+    updateModuleData("medidas_inclusion", updated);
+  };
+
   const addAcneae = () => {
     const newStudent = { id: Date.now().toString(), nombre: "", tipoNecesidad: "", adaptaciones: [] };
     handleChange("acneae", [...acneae, newStudent]);
@@ -54,10 +70,42 @@ export function DiversidadTab() {
         <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
           <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-purple-400" /></span> Marco de Inclusión (D 91/2024 Art. 29)
         </h2>
-        
-        <div className="space-y-4">
-          <label className="flex items-start gap-3 p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition-colors cursor-pointer">
-            <input 
+        <div className="space-y-6">
+
+          <div>
+            <label className="text-sm font-semibold text-foreground mb-2 block">Medidas de Inclusión (Selección Múltiple)</label>
+            <p className="text-xs text-muted mb-3">Selecciona las medidas de respuesta educativa que aplicarás de forma general en este módulo.</p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+              {INCLUSION.map((inc) => {
+                const isSelected = medidas_inclusion.includes(inc.id);
+                return (
+                  <label key={inc.id} className={`flex items-center gap-2 p-2 rounded border cursor-pointer transition-colors ${isSelected ? 'bg-purple-500/10 border-purple-500/30' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
+                    <input 
+                      type="checkbox" 
+                      checked={isSelected}
+                      onChange={() => toggleInclusion(inc.id)}
+                      className="rounded border-white/20 bg-transparent text-purple-500 focus:ring-purple-500"
+                    />
+                    <span className="text-xs"><strong>{inc.id}</strong> - {inc.label}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+
+          <div>
+            <label className="text-sm font-semibold text-foreground mb-2 block">Anotaciones libres sobre Inclusión</label>
+            <textarea
+              value={moduleData?.texto_inclusion_libre || ""}
+              onChange={e => updateModuleData("texto_inclusion_libre", e.target.value)}
+              placeholder="Añade aquí medidas específicas, adaptaciones de acceso al aula o justificaciones normativas extra..."
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-sm text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+
+          <div className="space-y-4">
+            <label className="flex items-start gap-3 p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition-colors cursor-pointer">
+              <input 
               type="checkbox" 
               className="mt-1"
               checked={config_contexto.adaptaciones_no_significativas || false}
@@ -162,6 +210,7 @@ export function DiversidadTab() {
             ))}
           </div>
         )}
+        </div>
       </div>
 
     </div>

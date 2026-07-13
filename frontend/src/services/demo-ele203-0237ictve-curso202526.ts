@@ -8635,6 +8635,15 @@ export const demoSeed = {
 },
     "0237-ictve-pd": {
         "tipo": "pd",
+        "is_dual": true,
+        "metodologias_seleccionadas": ["ABP", "FLIP", "SIM", "COLAB"],
+        "instrumentos_seleccionados": ["PRU-OBJ", "PRU-EJEC", "RUBR", "COTEJO"],
+        "medidas_inclusion": ["NIVEL", "AGRUP", "TIEMPO", "MATERIAL"],
+        "medidas_contingencia": ["CONT-ASINC", "CONT-AUT"],
+        "texto_contextualizacion_libre": "El Centro educativo en el que se va a impartir el módulo es el Instituto de Enseñanza Secundaria Ramón J. Sender, ubicado en Fraga (Huesca) donde se imparten enseñanzas de ESO, Bachillerato y Formación Profesional. El entorno socioeconómico de la comarca del Bajo Cinca se caracteriza por una importante actividad agrícola, ganadera e industrial, lo que ofrece diversas oportunidades de empleo para los futuros técnicos.",
+        "texto_metodologia_libre": "La metodología didáctica se basará en el aprendizaje significativo, partiendo de los conocimientos previos del alumnado y promoviendo su participación activa. Se emplearán recursos digitales, herramientas colaborativas y simuladores para acercar el aprendizaje al entorno profesional real.",
+        "texto_inclusion_libre": "Se prestará especial atención a las necesidades individuales, adaptando los recursos y los tiempos a los ACNEAE identificados en el grupo. Las actividades estarán diseñadas con múltiples niveles de dificultad para permitir el éxito de todo el alumnado.",
+        "texto_contingencia_libre": "En caso de suspensión de las clases presenciales, la docencia continuará de forma telemática a través del entorno virtual de aprendizaje, con sesiones de resolución de dudas mediante videoconferencia y entrega de tareas asíncronas.",
         "info_modulo": {
             "codigo": "0237",
             "nombre": "Infraestructuras comunes de telecomunicaciones en viviendas y edificios",

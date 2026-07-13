@@ -85,10 +85,17 @@ export default function EstadisticasTab() {
   const raStats = getRaStats();
 
   return (
-                <p className="text-muted">
-                  Analítica visual del rendimiento académico del grupo.
-                </p>
-              </div>
+    <MotionWrapper>
+      <div className="space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight mb-2 flex items-center gap-3">
+             <BarChart3 className="w-8 h-8 text-accent" /> Estadísticas
+          </h1>
+          <p className="text-muted">
+            Analítica visual del rendimiento académico del grupo.
+          </p>
+        </div>
               
               <div className="flex bg-foreground/5 p-1 rounded-lg border border-foreground/10">
                 {["1T", "2T", "3T", "FINAL"].map(t => (
@@ -178,7 +185,7 @@ export default function EstadisticasTab() {
               </div>
             </div>
 
-      </MotionWrapper>
-    </div>
+      </div>
+    </MotionWrapper>
   );
 }

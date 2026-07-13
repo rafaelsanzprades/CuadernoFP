@@ -162,10 +162,14 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
   };
 
   // Descargas Handlers
-  const handleDownloadPdf = async (type: string, al_id?: string, fechaCorte?: string) => {
+  const handleDownloadPdf = async (type: string, al_id?: string, fechaCorte?: string, fileFormat: string = "pdf") => {
     try {
-      setDownloadingStr(type);
-      let url = `${process.env.NEXT_PUBLIC_API_URL}/api/pdf?type=${type}`;
+      if (type.startsWith('programacion')) {
+        setDownloadingStr(`${type}_${fileFormat}`);
+      } else {
+        setDownloadingStr(type);
+      }
+      let url = `${process.env.NEXT_PUBLIC_API_URL}/api/pdf?type=${type}&file_format=${fileFormat}`;
       if (al_id) url += `&al_id=${al_id}`;
 
       let activeCurriculoData: any = {};
@@ -191,16 +195,49 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
 
       if (!response.ok) throw new Error("Error generando PDF");
 
+      const contentType = response.headers.get("Content-Type");
       const blob = await response.blob();
       const urlBlob = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = urlBlob;
-      const ext = type === "programacion" ? "zip" : "pdf";
-      a.download = `${type}_${Date.now()}.${ext}`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(urlBlob);
+      
+      let finalExt = fileFormat;
+      if (contentType && contentType.includes("wordprocessingml.document")) {
+        finalExt = "docx";
+      }
+
+      const now = new Date();
+      const yyyy = String(now.getFullYear());
+      const mm = String(now.getMonth() + 1).padStart(2, '0');
+      const dd = String(now.getDate()).padStart(2, '0');
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mmin = String(now.getMinutes()).padStart(2, '0');
+      const timestampStr = `${yyyy}${mm}${dd}-${hh}${mmin}`;
+
+      let downloadName = `${type}_${Date.now()}.${finalExt}`;
+      if (type === 'programacion_minima') {
+        downloadName = `${timestampStr} PD Resumen.${finalExt}`;
+      } else if (type === 'programacion_suficiente') {
+        downloadName = `${timestampStr} PD BOA Aragón.${finalExt}`;
+      } else if (type === 'programacion_detallada') {
+        downloadName = `${timestampStr} PD JEG cumplimentada.${finalExt}`;
+      } else if (type === 'plantilla_jeg') {
+        downloadName = `PD+ FP v1 - Modelo.${finalExt}`;
+      }
+
+      if (finalExt === "pdf") {
+        setPreviewUrl(urlBlob);
+        setPreviewFilename(downloadName);
+      } else {
+        if (fileFormat === "pdf") {
+          toast("No se pudo generar el PDF. Descargando DOCX como alternativa.", { icon: '⚠️', duration: 5000 });
+        }
+        const a = document.createElement('a');
+        a.href = urlBlob;
+        a.download = downloadName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(urlBlob);
+      }
     } catch (err) {
       console.error(err);
       toast.error("Error al generar el PDF. Verifica la conexión con el backend.");
@@ -286,8 +323,39 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
       <main className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={activeTabCleanLabel} />
 
-        <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="w-full space-y-3 pb-12">
+        <div className="flex-1 overflow-y-auto scrollbar-hide relative">
+          {previewUrl ? (
+            <div className="absolute inset-0 z-50 bg-background flex flex-col">
+              <div className="flex items-center justify-between p-4 border-b border-[var(--glass-border)] bg-[var(--glass-bg)]">
+                <h3 className="font-bold flex items-center gap-2">
+                  <FileText className="w-5 h-5 text-danger" /> {previewFilename}
+                </h3>
+                <div className="flex items-center gap-3">
+                  <Button variant="primary" onClick={() => {
+                    const a = document.createElement('a');
+                    a.href = previewUrl;
+                    a.download = previewFilename || "documento.pdf";
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                  }} className="gap-2">
+                    <Download className="w-4 h-4" /> Descargar PDF
+                  </Button>
+                  <Button variant="ghost" onClick={() => {
+                    setPreviewUrl(null);
+                    setPreviewFilename(null);
+                  }} className="text-muted hover:text-foreground">
+                    <X className="w-5 h-5" /> Cerrar visor
+                  </Button>
+                </div>
+              </div>
+              <div className="flex-1 w-full p-4">
+                <iframe src={previewUrl} className="w-full h-full rounded-xl border border-[var(--glass-border)] shadow-xl bg-white" title="PDF Preview" />
+              </div>
+            </div>
+          ) : (
+            <div className="p-8">
+              <MotionWrapper className="w-full space-y-3 pb-12">
 
 
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
@@ -369,26 +437,52 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
                           <h2 className="text-2xl font-bold mb-1"><span className="inline-flex"><FileText className="w-4 h-4" /></span> Documentos Oficiales</h2>
                           <p className="text-sm text-muted mb-6">Documentos base de programación del módulo</p>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-info">
+                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-slate-400">
                               <div>
-                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica</h3>
-                                <p className="text-sm text-muted mb-6">Genera el documento base de programación del módulo. Puedes elegir entre la estructura básica (BOA) o la completa (Aragón).</p>
+                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Resumen de la Programación didáctica para el alumnado</h3>
+                                <p className="text-sm text-muted mb-6">Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.</p>
                               </div>
-                              <div className="flex flex-col gap-2 mt-auto">
-                                <Button onClick={() => handleDownloadPdf('programacion_boa')} disabled={downloadingStr === 'programacion_boa'} className="w-full bg-slate-600 hover:bg-slate-700 text-white">
-                                  {downloadingStr === 'programacion_boa' ? '⏳ Generando...' : 'Descargar PD BOA'}
-                                </Button>
-                                <Button onClick={() => handleDownloadPdf('programacion_aragon')} disabled={downloadingStr === 'programacion_aragon'} className="w-full bg-info hover:bg-info/90 text-white">
-                                  {downloadingStr === 'programacion_aragon' ? '⏳ Generando...' : 'Descargar PD Aragón'}
+                              <div className="flex gap-2 mt-auto">
+                                <Button onClick={() => handleDownloadPdf('programacion_minima', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_minima_docx'} className="flex-1 bg-slate-600 hover:bg-slate-700 text-white">
+                                  {downloadingStr === 'programacion_minima_docx' ? '⏳ Generando DOCX...' : 'Descargar PD Resumen.docx'}
                                 </Button>
                               </div>
                             </div>
+
+                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-blue-400">
+                              <div>
+                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica Aragón (BOA nº: 181 de 18 de septiembre de 2025)</h3>
+                                <p className="text-sm text-muted mb-6">Versión BOA con los puntos de la Ley muy específica y concreta (no detalla secuenciación de aula ni extensa teoría).</p>
+                              </div>
+                              <div className="flex gap-2 mt-auto">
+                                <Button onClick={() => handleDownloadPdf('programacion_suficiente', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_suficiente_docx'} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
+                                  {downloadingStr === 'programacion_suficiente_docx' ? '⏳ Generando DOCX...' : 'Descargar PD BOA Aragón.docx'}
+                                </Button>
+                              </div>
+                            </div>
+
+                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-info">
+                              <div>
+                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica ARAGÓN (Modelo JEG)</h3>
+
+                                <p className="text-sm text-muted mb-6">Se cumplimenta el modelo de <strong>Autor</strong>: Javier Edo Gual, <strong>Coordinación</strong>: Raúl Melero Rubio y Lucía Quílez Salvador; y <strong>Revisión técnica</strong>: Óscar Sánchez Estella.</p>
+                              </div>
+                              <div className="flex flex-col gap-2 mt-auto">
+                                <Button variant="secondary" onClick={() => handleDownloadPdf('plantilla_jeg', undefined, undefined, 'docx')} disabled={downloadingStr === 'plantilla_jeg_docx'} className="w-full">
+                                  {downloadingStr === 'plantilla_jeg_docx' ? '⏳ Descargando...' : 'Modelo PD JEG original'}
+                                </Button>
+                                <Button onClick={() => handleDownloadPdf('programacion_detallada', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_detallada_docx'} className="w-full bg-info hover:bg-info/90 text-white">
+                                  {downloadingStr === 'programacion_detallada_docx' ? '⏳ Generando DOCX...' : 'Descargar PD JEG cumplimentada.docx'}
+                                </Button>
+                              </div>
+                            </div>
+
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                               <div>
                                 <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><Calculator className="w-[1.2em] h-[1.2em] mr-1" /></span> Matrices RA → UD</h3>
                                 <p className="text-sm text-muted mb-6">Relación y ponderación entre RA y UD del módulo.</p>
                               </div>
-                              <Button onClick={() => handleDownloadPdf('matrices')} disabled={downloadingStr === 'matrices'} className="w-full">
+                              <Button onClick={() => handleDownloadPdf('matrices')} disabled={downloadingStr === 'matrices'} className="w-full mt-auto">
                                 {downloadingStr === 'matrices' ? '⏳ Generando PDF...' : 'PDF Matrices'}
                               </Button>
                             </div>
@@ -629,7 +723,9 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
               </div>
             )}
 
-          </MotionWrapper>
+              </MotionWrapper>
+            </div>
+          )}
         </div>
       </main>
     </div>
