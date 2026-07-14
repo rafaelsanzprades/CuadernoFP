@@ -8,11 +8,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 
 const LANGUAGES = [
-  { code: "es", label: "Español", flag: "🇪🇸" },
-  { code: "ca", label: "Català", flag: "🟡" },
-  { code: "gl", label: "Galego", flag: "🔵" },
-  { code: "eu", label: "Euskara", flag: "🟢" },
-  { code: "en", label: "English", flag: "🇬🇧" }
+  { code: "ba", label: "Balear" },
+  { code: "ca", label: "Català" },
+  { code: "es", label: "Español" },
+  { code: "eu", label: "Euskara" },
+  { code: "gl", label: "Galego" },
+  { code: "va", label: "Valencià" },
+  { code: "en", label: "English" }
 ];
 
 export function HeaderSettings() {
@@ -196,9 +198,9 @@ export function HeaderSettings() {
                       variant="secondary"
                       size="sm"
                       onClick={() => changeLanguage(lang.code)}
-                      className={`flex justify-start gap-2 ${currentLang.code === lang.code ? 'bg-accent/20 border-accent text-accent' : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'}`}
+                      className={`flex justify-center gap-2 ${currentLang.code === lang.code ? 'bg-accent/20 border-accent text-accent' : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'}`}
                     >
-                      <span>{lang.flag}</span> <span>{lang.label}</span>
+                      <span>{lang.label}</span>
                     </Button>
                   ))}
                 </div>

@@ -8777,36 +8777,43 @@ export const demoSeed = {
         "df_ra": [
             {
                 "id_ra": "RA1",
+                "desc_ra": "Integra el controlador lógico programable (plc) en un sistema sencillo a automatizar, conexionándolo, adaptando y/o elaborando programas de control",
                 "peso_ra": 60,
                 "is_dual": "No"
             },
             {
                 "id_ra": "RA2",
+                "desc_ra": "Identifica los sistemas de supervisión en el sistema a automatizar, describiendo su conexión y elaborando o modificando los programas de control",
                 "peso_ra": 15,
                 "is_dual": "No"
             },
             {
                 "id_ra": "RA3",
+                "desc_ra": "Utiliza variadores de velocidad (convertidor de frecuencia) para motores, realizando su conexionado dentro de los sistemas sencillos y elaborando o modificando los programas de control",
                 "peso_ra": 5,
                 "is_dual": "Sí"
             },
             {
                 "id_ra": "RA4",
+                "desc_ra": "Mantiene y repara averías comunes en instalaciones automatizadas, interpretando los fallos y corrigiendo las disfunciones",
                 "peso_ra": 5,
                 "is_dual": "No"
             },
             {
                 "id_ra": "RA5",
+                "desc_ra": "Programa sistemas de automatización industrial, configurando dispositivos y verificando su funcionamiento",
                 "peso_ra": 5,
                 "is_dual": "Sí"
             },
             {
                 "id_ra": "RA6",
+                "desc_ra": "Realiza el mantenimiento preventivo de sistemas automatizados, aplicando protocolos y documentando las intervenciones",
                 "peso_ra": 5,
                 "is_dual": "No"
             },
             {
                 "id_ra": "RA7",
+                "desc_ra": "Instala y configura redes de comunicación industrial, verificando su correcto funcionamiento",
                 "peso_ra": 5,
                 "is_dual": "No"
             }

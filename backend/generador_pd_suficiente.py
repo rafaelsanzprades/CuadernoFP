@@ -222,16 +222,3 @@ def generate(data, out_docx, out_pdf):
 
     # Save DOCX
     doc.save(out_docx)
-    
-    # Convert to PDF
-    try:
-        abs_docx = os.path.abspath(out_docx)
-        abs_pdf = os.path.abspath(out_pdf)
-        if convert:
-            convert(abs_docx, abs_pdf)
-        else:
-            print("docx2pdf not available, skipping PDF conversion.")
-    except Exception as e:
-        print(f"Error converting to PDF: {e}")
-        if os.path.exists(out_pdf):
-            os.remove(out_pdf)

@@ -40,7 +40,7 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
         })
       });
 
-      if (!response.ok) throw new Error("Error generando PDF");
+      if (!response.ok) throw new Error("Error generando documento");
 
       const blob = await response.blob();
       const urlBlob = window.URL.createObjectURL(blob);

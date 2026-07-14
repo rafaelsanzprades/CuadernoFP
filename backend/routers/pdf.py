@@ -96,20 +96,24 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             )
         elif type == "plantilla_jeg":
             import os
-            template_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'modelo_pd_fp.docx')
+            template_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'modelo_pd_fp+.docx')
             if not os.path.exists(template_path):
-                raise HTTPException(status_code=404, detail="Plantilla no encontrada. Debes colocar 'modelo_pd_fp.docx' en la carpeta templates.")
+                raise HTTPException(status_code=404, detail="Plantilla no encontrada. Debes colocar 'modelo_pd_fp+.docx' en la carpeta templates.")
             with open(template_path, "rb") as f:
                 docx_bytes = f.read()
             return Response(
                 content=docx_bytes,
                 media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
             )
-        elif type in ["programacion_minima", "programacion_suficiente", "programacion_detallada"]:
+        elif type in ["programacion_minima", "programacion_suficiente", "programacion_detallada", "programacion_suficiente_tpl", "programacion_minima_tpl"]:
             if type == "programacion_minima":
                 import generador_pd_minima as generador_pd
+            elif type == "programacion_minima_tpl":
+                import generador_pd_minima_tpl as generador_pd
             elif type == "programacion_suficiente":
                 import generador_pd_suficiente as generador_pd
+            elif type == "programacion_suficiente_tpl":
+                import generador_pd_suficiente_tpl as generador_pd
             else:
                 import generador_pd_detallada as generador_pd
             import tempfile
@@ -117,21 +121,57 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             import zipfile
             from io import BytesIO
             
+            info_mod = module_data.get("info_modulo") or {}
+            info_cur = curso_data.get("info_curso") or {}
+            # Derivar campos que los generadores necesitan y que pueden no estar
+            # explícitos en info_modulo (el DEMO usa nombres distintos)
+            departamento = info_mod.get("departamento") or info_mod.get("familia", "Departamento")
+            horas_semanales = info_mod.get("horas_semanales") or info_mod.get("h_sem", 5)
+            regimen = info_mod.get("regimen", "diurno")
+            grado = info_mod.get("grado", "GM")
+            nivel = info_mod.get("nivel", "Grado Medio")
+            curso_ciclo = info_mod.get("curso_ciclo") or info_mod.get("curso", "1º")
+            # Nombre del módulo: puede venir como "modulo" o "nombre"
+            modulo_nombre = info_mod.get("modulo") or info_mod.get("nombre", "Módulo Profesional")
+            # Curso académico: de info_curso o derivado de info_fechas
+            curso_academico = info_cur.get("curso_academico", "")
+            if not curso_academico:
+                fechas = curso_data.get("info_fechas") or {}
+                ini = fechas.get("ini_curso", "")
+                if ini and len(ini) >= 4:
+                    y1 = ini[:4]
+                    y2 = str(int(y1) + 1)
+                    curso_academico = f"{y1}/{y2}"
+                else:
+                    curso_academico = "2025/2026"
+            
             data_pd = {
-                "departamento": (module_data.get("info_modulo") or {}).get("departamento", "Departamento"),
-                "ciclo": (module_data.get("info_modulo") or {}).get("ciclo", "Ciclo Formativo"),
-                "modulo": (module_data.get("info_modulo") or {}).get("modulo", "Módulo Profesional"),
-                "curso_academico": (curso_data.get("info_curso") or {}).get("curso_academico", "2024/2025"),
-                "horas_totales": (module_data.get("info_modulo") or {}).get("horas", 0),
+                "departamento": departamento,
+                "ciclo": info_mod.get("ciclo", "Ciclo Formativo"),
+                "modulo": modulo_nombre,
+                "curso_academico": curso_academico,
+                "horas_totales": info_mod.get("horas") or info_mod.get("horas_totales", 0),
+                "horas_semanales": horas_semanales,
+                "regimen": regimen,
+                "grado": grado,
+                "nivel": nivel,
+                "curso_ciclo": curso_ciclo,
+                "centro": info_mod.get("centro", ""),
+                "profesorado": info_mod.get("profesorado", ""),
+                "familia": info_mod.get("familia", ""),
                 "df_ra": module_data.get("df_ra") or [],
                 "df_ud": module_data.get("df_ud") or [],
                 "df_act": module_data.get("df_act") or [],
                 "df_ce": module_data.get("df_ce") or [],
                 "df_sgmt": curso_data.get("df_sgmt") or [],
                 "df_sesiones": module_data.get("df_sesiones") or [],
+                "df_dua": module_data.get("df_dua") or [],
+                "df_contingencia": module_data.get("df_contingencia") or [],
+                "df_ace": module_data.get("df_ace") or module_data.get("actividades_complementarias") or [],
                 "config_contexto": curso_data.get("config_contexto") or {},
+                "config_aula": module_data.get("config_aula") or curso_data.get("config_aula") or {},
                 "config_redondeo": curso_data.get("config_redondeo") or {"nota_aprobado": 5.0, "umbral_redondeo": 4.5},
-                "info_modulo": module_data.get("info_modulo") or {},
+                "info_modulo": info_mod,
                 "curriculo_data": curso_data.get("curriculo_data") or {},
                 "is_dual": module_data.get("is_dual", False),
                 "metodologias_seleccionadas": module_data.get("metodologias_seleccionadas", []),
@@ -139,13 +179,16 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 "medidas_inclusion": module_data.get("medidas_inclusion", []),
                 "medidas_contingencia": module_data.get("medidas_contingencia", []),
                 "recursos_espacios": module_data.get("recursos_espacios", []),
-                "actividades_complementarias": module_data.get("actividades_complementarias", []),
+                "actividades_complementarias": module_data.get("actividades_complementarias") or module_data.get("df_ace") or [],
                 "elementos_transversales": module_data.get("elementos_transversales", []),
                 "texto_contextualizacion_libre": module_data.get("texto_contextualizacion_libre", ""),
                 "texto_metodologia_libre": module_data.get("texto_metodologia_libre", ""),
                 "texto_inclusion_libre": module_data.get("texto_inclusion_libre", ""),
                 "texto_contingencia_libre": module_data.get("texto_contingencia_libre", ""),
-                "info_fechas": curso_data.get("info_fechas") or {}
+                "info_fechas": curso_data.get("info_fechas") or {},
+                "horario": module_data.get("horario") or curso_data.get("horario") or {},
+                "calendar_notes": curso_data.get("calendar_notes") or {},
+                "planning_ledger": curso_data.get("planning_ledger") or {},
             }
             
             with tempfile.TemporaryDirectory() as tmpdir:
@@ -153,27 +196,16 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 out_docx = os.path.join(tmpdir, fname + ".docx")
                 out_pdf = os.path.join(tmpdir, fname + ".pdf")
                 
+                # Generate DOCX
                 generador_pd.generate(data_pd, out_docx, out_pdf)
+                # Siempre devolvemos DOCX para programación, independientemente del formato solicitado
+                with open(out_docx, "rb") as f:
+                    docx_bytes = f.read()
                 
-                if file_format == "docx":
-                    with open(out_docx, "rb") as f:
-                        docx_bytes = f.read()
-                    return Response(
-                        content=docx_bytes,
-                        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                    )
-                else:
-                    if os.path.exists(out_pdf):
-                        with open(out_pdf, "rb") as f:
-                            pdf_bytes = f.read()
-                        return Response(content=pdf_bytes, media_type="application/pdf")
-                    else:
-                        with open(out_docx, "rb") as f:
-                            docx_bytes = f.read()
-                        return Response(
-                            content=docx_bytes,
-                            media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                        )
+                return Response(
+                    content=docx_bytes,
+                    media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                )
         elif type in ["ud", "tarea"]:
             import generador_ud_tarea
             import tempfile
@@ -205,25 +237,14 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                     out_pdf = os.path.join(tmpdir, fname + ".pdf")
                     generador_ud_tarea.generate_tarea(target, info_modulo, out_docx, out_pdf)
                 
-                if file_format == "docx":
-                    with open(out_docx, "rb") as f:
-                        docx_bytes = f.read()
-                    return Response(
-                        content=docx_bytes,
-                        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                    )
-                else:
-                    if os.path.exists(out_pdf):
-                        with open(out_pdf, "rb") as f:
-                            pdf_bytes = f.read()
-                        return Response(content=pdf_bytes, media_type="application/pdf")
-                    else:
-                        with open(out_docx, "rb") as f:
-                            docx_bytes = f.read()
-                        return Response(
-                            content=docx_bytes,
-                            media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                        )
+                # Siempre devolvemos DOCX para ud y tarea, independientemente del formato solicitado
+                with open(out_docx, "rb") as f:
+                    docx_bytes = f.read()
+                
+                return Response(
+                    content=docx_bytes,
+                    media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                )
         else:
             raise HTTPException(status_code=400, detail=f"Unknown PDF type: {type}")
             

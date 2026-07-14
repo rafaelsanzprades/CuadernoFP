@@ -29,12 +29,6 @@ def generate_ud(ud_data, info_modulo, out_docx, out_pdf):
     doc.add_paragraph(ud_data.get('Transversalidad', 'No especificada'))
 
     doc.save(out_docx)
-    try:
-        convert(os.path.abspath(out_docx), os.path.abspath(out_pdf))
-    except Exception as e:
-        print(f"Error converting to PDF: {e}")
-        if os.path.exists(out_pdf):
-            os.remove(out_pdf)
 
 def generate_tarea(tarea_data, info_modulo, out_docx, out_pdf):
     doc = Document()

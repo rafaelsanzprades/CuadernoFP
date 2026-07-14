@@ -6,11 +6,13 @@ import { Globe } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const LANGUAGES = [
-  { code: "es", label: "Español", flag: "🇪🇸" },
-  { code: "ca", label: "Català", flag: "🟡" },
-  { code: "gl", label: "Galego", flag: "🔵" },
-  { code: "eu", label: "Euskara", flag: "🟢" },
-  { code: "en", label: "English", flag: "🇬🇧" }
+  { code: "ba", label: "Balear" },
+  { code: "ca", label: "Català" },
+  { code: "es", label: "Español" },
+  { code: "eu", label: "Euskara" },
+  { code: "gl", label: "Galego" },
+  { code: "va", label: "Valencià" },
+  { code: "en", label: "English" }
 ];
 
 export function LanguageSelector() {
@@ -61,11 +63,10 @@ export function LanguageSelector() {
                 <button
                   key={lang.code}
                   onClick={() => changeLanguage(lang.code)}
-                  className={`w-full text-left px-3 py-2 text-xs flex items-center gap-2 hover:bg-foreground/10 transition-colors ${
+                  className={`w-full text-center px-3 py-2 text-xs flex items-center justify-center gap-2 hover:bg-foreground/10 transition-colors ${
                     i18n.language === lang.code ? "bg-accent/10 text-accent font-semibold" : "text-[var(--text-primary)]"
                   }`}
                 >
-                  <span className="text-sm">{lang.flag}</span>
                   {lang.label}
                 </button>
               ))}

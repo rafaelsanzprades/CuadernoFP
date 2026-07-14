@@ -1,0 +1,705 @@
+Tipo de Centro Educativo
+Nombre del Centro
+Programación didáctica
+202_/202_
+[[ Módulo profesional | Proyecto ]]
+xxxx Título del módulo profesional o proyecto
+Familia Profesional de
+Denominación de la Familia Profesional
+Tipo de enseñanza
+xxxx Denominación del Grado D o E
+Grado [[ D | E ]] – Nivel [[ 1 | 2 | 3 ]]
+[[ 1.º | 2.º | 3.º ]] curso
+Modalidad [[ presencial | semipresencial | virtual ]]
+Autor
+Javier Edo Gual
+Coordinación
+Raúl Melero Rubio
+Lucía Quílez Salvador
+Revisión técnica
+Óscar Sánchez Estella
+Licencia
+Programaciones didácticas de Formación Profesional: modelo para los Grados D y E © 2025 por Javier Edo Gual está licenciada bajo CC BY-NC-SA 4.0. Para
+Versión
+1.0 (septiembre 2025)
+Curso de formación del profesorado
+Este documento se ha elaborado como material del curso de formación del profesorado organizado por el Centro de Innovación para la FP de Aragón (CIFPA
+Otras consideraciones
+Durante el desarrollo de este documento se ha recurrido, de forma complementaria, al uso de herramientas de inteligencia artificial generativa con fin
+Instrucciones de uso del modelo
+Este documento es una plantilla para agilizar la creación de su programación. Contiene dos tipos de contenido:
+Texto base: Párrafos completos que son válidos para cualquier módulo o proyecto. Puede utilizarlos directamente o adaptarlos a sus necesidades.
+Campos editables: Secciones delimitadas por corchetes [[ ... ]] que debe personalizar.
+Cómo editar los campos:
+Elección entre opciones:
+Encuentre alternativas separadas por una barra |. Elija una o la que corresponda.
+Ejemplo: [[ módulo profesional | proyecto ]]
+Redactar contenido:
+Encuentre puntos suspensivos ... como marcador de posición para sustituir por su texto.
+Ejemplo: [[ ... ]]
+Listas o bloques flexibles:
+Algunos campos incluyen una lista de opciones o un párrafo de ejemplo entre [[ y ]]. Puede seleccionar las opciones válidas, modificarlas, añadir nuev
+Ejemplo:
+[[ …
+Opción 1
+Opción 2
+… ]]
+Si algún bloque o párrafo completo no es aplicable a su contexto, puede eliminarlo por completo.
+Introducción
+Identificación
+Marco normativo
+Esta programación didáctica se fundamenta en la siguiente normativa:
+Normativa estatal:
+LEY ORGÁNICA 2/2006, de 3 de mayo, de Educación (BOE núm. 106, de 4 de mayo de 2006), modificada por la LEY ORGÁNICA 3/2020, de 29 de diciembre, por l
+LEY ORGÁNICA 3/2022, de 31 de marzo, de ordenación e integración de la Formación Profesional (BOE núm. 78, de 01 de abril de 2022).
+REAL DECRETO 659/2023, de 18 de julio, por el que se desarrolla la ordenación del Sistema de Formación Profesional (BOE núm. 174, de 22 de julio de 20
+REAL DECRETO 69/2025, de 4 de febrero, por el que se desarrollan los elementos integrantes y los instrumentos de gestión del Sistema Nacional de Forma
+REAL DECRETO por el que se establece el título del grado D o E correspondiente.
+Normativa autonómica:
+DECRETO 91/2024, de 5 de junio, del Gobierno de Aragón por el que se establece la Ordenación de la Formación Profesional del Grado D y del Grado E en 
+ORDEN ECD/841/2024, de 25 de julio, por la que se regulan aspectos organizativos del currículo y se establecen los currículos de determinados Ciclos F
+ORDEN ECD/842/2024, de 25 de julio, por la que se regulan aspectos organizativos del currículo y se establecen los currículos de determinados Ciclos F
+ORDEN ECD/843/2024, de 25 de julio, por la que se regulan aspectos organizativos del currículo y se establecen los currículos de determinados Ciclos F
+RESOLUCIÓN de 6 de junio de 2025, del Director General de Planificación, Centros y Formación Profesional, por la que se autorizan los módulos optativo
+RESOLUCIÓN de 10 de julio de 2025, del Director General de Planificación, Centros y Formación Profesional, por la que se establece el currículo de los
+RESOLUCIÓN de 11 de junio de 2025, del Director General de Planificación, Centros y Formación Profesional, por la que se determinan en los centros doc
+RESOLUCIÓN de 1 de julio de 2025, del Director General de Planificación, Centros y Formación Profesional, por la que se regula la organización y la di
+ORDEN ECD/1005/2018, de 7 de junio, por la que se regulan las actuaciones de intervención educativa inclusiva (BOA núm. 106, de 18 de junio de 2018), 
+ORDEN por la que se aprueban las Instrucciones del tipo de centro en relación con el curso actual.
+Contextualización
+Entorno geográfico y sociocultural
+El [[ módulo | proyecto ]] se imparte en el contexto geográfico y sociocultural de [[ municipio | comarca | provincia ]], caracterizado por [[ tamaño 
+El entorno cultural incluye [[ tradiciones | patrimonio cultural | idioma o lenguas cooficiales | festividades relevantes ]], configurando un marco de
+En cuanto a la accesibilidad y comunicaciones, se dispone de [[ transporte público | infraestructuras viarias | conectividad digital | condiciones de 
+Del análisis del contexto se derivan las siguientes implicaciones para la programación:
+Entorno socioeconómico y productivo
+El [[ módulo profesional | proyecto ]] se imparte en un entorno socioeconómico y productivo caracterizado por la presencia de [[ sectores productivos 
+El mercado laboral de la zona presenta [[ perfiles profesionales demandados | evolución del empleo | nichos emergentes ]] que influyen en la orientaci
+En cuanto a las conexiones con el tejido empresarial, existe la posibilidad de [[ realizar la fase de formación en empresa u organismo equiparado | de
+También se dispone de recursos como [[ asociaciones sectoriales | viveros de empresas | parques tecnológicos | centros de innovación ]] que pueden ser
+Del análisis del contexto se derivan las siguientes implicaciones para la programación:
+Contexto escolar
+El [[ módulo profesional | proyecto ]] se imparte en el centro educativo [[ nombre del centro ]], de titularidad [[ público | concertado | privado ]],
+La oferta formativa del centro incluye [[ ESO | Bachillerato | ciclos formativos | cursos de especialización | programas de atención a la diversidad |
+El centro participa en [[ programas de innovación | planes de mejora | proyectos Erasmus+ | iniciativas de sostenibilidad | planes de digitalización |
+Del análisis del contexto escolar se derivan las siguientes implicaciones para la programación:
+Características del alumnado
+El grupo presenta como procedencia geográfica principal [[ lugar de residencia habitual | procedencia de diferentes localidades | concentración en el 
+La franja de edad predominante es de [[ franja de edad ]] con un nivel de madurez [[ homogéneo | disperso | variado ]] y vías de acceso mayoritarias d
+El nivel competencial inicial se caracteriza por [[ conocimientos previos | destrezas | habilidades relacionadas con el módulo profesional o proyecto 
+El grupo muestra [[ alto | medio | bajo ]] grado de implicación y expectativas relacionadas con [[ inserción laboral | continuidad de estudios | desar
+Asimismo, cabe destacar [[ grado de autonomía | hábitos de estudio | capacidad de trabajo en equipo | estilos y ritmos de aprendizaje | clima y dinámi
+Del análisis de estas características se derivan las siguientes implicaciones para la programación:
+Infraestructura y recursos educativos
+El [[ módulo profesional | proyecto ]] dispone de las siguientes infraestructuras y recursos:
+Espacios:
+Equipamiento técnico y específico:
+Recursos tecnológicos:
+Software, herramientas digitales y plataformas virtuales:
+Material didáctico y documental:
+Espacios complementarios:
+Del análisis de esta infraestructura y recursos se derivan las siguientes implicaciones para la programación:
+Desarrollo curricular
+Duración, ubicación y distribución horaria
+El [[ módulo profesional | proyecto ]] tiene una duración curricular de [[ horas ]]  horas y se imparte en el [[ 1.º | 2.º | 3.º ]] curso del [[ ciclo
+En el curso  la carga lectiva semanal se distribuye de la siguiente manera:
+Teniendo en cuenta el calendario escolar y la distribución semanal de la carga lectiva, la duración prevista para el curso [[ curso escolar ]] es de [
+Estándares de competencias profesionales (ECP)
+La superación de este módulo profesional permite la acreditación de los siguientes estándares de competencias profesionales del Catálogo Nacional de E
+[[ Este módulo profesional no está asociado a ningún estándar de competencia profesional. ]]
+Competencias profesionales y para la empleabilidad (CPE)
+Este módulo profesional contribuye al desarrollo de las siguientes competencias profesionales y para la empleabilidad (CPE):
+CPE a)	Título de la competencia a.
+CPE b)	Título de la competencia b).
+CPE c)	Título de la competencia c).
+CPE d)	...
+Objetivos generales (OG)
+De los objetivos generales (OG) establecidos en el currículo, la formación de este [[ módulo profesional | proyecto ]] contribuye a alcanzar los sigui
+OG a)	Objetivo general a).
+OG b)	Objetivo general b).
+OG c)	Objetivo general c).
+OG d)	…
+[[ El título o el currículo del grado correspondiente al que pertenece este [[ módulo profesional | proyecto ]] no establece objetivos generales. ]]
+Resultados de aprendizaje (RA) y criterios de evaluación (CE)
+En este [[ módulo profesional | proyecto ]] se establecen los siguientes resultados de aprendizaje (RA) y criterios de evaluación (CE):
+RA 1.	Título del RA 1.
+Criterios de evaluación:
+1.a)	Criterio de evaluación a).
+1.b)	Criterio de evaluación b).
+1.c)	Criterio de evaluación c).
+1.d)	Criterio de evaluación d).
+...
+RA 2.	Título del RA 2.
+Criterios de evaluación:
+2.a)	Criterio de evaluación a).
+2.b)	Criterio de evaluación b).
+2.c)	Criterio de evaluación c).
+2.d)	Criterio de evaluación d).
+...
+Contenidos (C)
+Este [[ módulo profesional | proyecto ]] tiene los siguientes bloques de contenidos (BC) y contenidos orientativos (C):
+BC 1.	Título del bloque de contenido 1:
+1.a)	Contenido a) del bloque de contenido 1.
+1.b)	Contenido b) del bloque de contenido 1.
+1.c)	Contenido c) del bloque de contenido 1.
+1.d)	Contenido d) del bloque de contenido 1.
+1.e)	Contenido e) del bloque de contenido 1.
+….
+BC 2.	Título del bloque de contenido 2:
+2.a)	Contenido a) del bloque de contenido 2.
+2.b)	Contenido b) del bloque de contenido 2.
+2.c)	Contenido c) del bloque de contenido 2.
+2.d)	Contenido d) del bloque de contenido 2.
+2.e)	Contenido e) del bloque de contenido 2.
+….
+Relación entre los elementos curriculares
+A continuación se muestra la relación entre los distintos elementos curriculares del [[ módulo profesional | proyecto ]]:
+Organización y distribución temporal: unidades didácticas y otros tiempos
+El [[ módulo profesional | proyecto ]] tiene una duración curricular de [[ horas ]] horas. Para el curso académico [[ curso académico ]], la duración 
+Asimismo, considerando lo establecido en la propuesta de organización temporal para la fase de formación en empresa (apartado 2.9.2), de la duración t
+Las unidades didácticas se impartirán siguiendo una organización [[ secuencial | paralela | mixta ]].
+[[ Las unidades didácticas [[ números de las UD ]] se desarrollan en paralelo, porque [[ … ]]. ]]
+[[ La unidad didáctica [[ número de UD ]] se desarrolla de manera transversal al resto de unidades didácticas, dado que [[ … ]]. ]]
+[[ La unidad didáctica [[número de UD ]] se desarrolla de manera transversal a las unidades didácticas [[ números de UD ]], porque [[ … ]]. ]]
+A continuación, se detalla la organización y distribución temporal de las unidades didácticas:
+Se reservarán además tiempos específicos para actividades no vinculadas a unidades didácticas, tales como:
+Formación en empresa u organismo equiparado (FEOE)
+[[  Este texto es explicativo y debe eliminarse.
+Dos opciones:
+Opción A: módulos profesionales que desarrollan algún RA en la empresa u organismo equiparado.
+Subapartados:
+Modalidad de la FEOE.
+Organización temporal de la FEOE.
+Resultados de aprendizaje desarrollados en la FEOE.
+Organización para el alumnado que no realice la FEOE.
+Seguimiento de la FEOE.
+Opción B: módulos profesionales que no desarrollan ningún RA en la empresa u organismo equiparado.
+Subapartados:
+Modalidad de la FEOE.
+Organización temporal de la FEOE.
+Resultados de aprendizaje desarrollados en la FEOE.
+Actividades de seguimiento y evaluación.
+Seguimiento de la FEOE.
+Se deberá eliminar la opción que no proceda.
+]]
+[[ OPCIÓN A: MÓDULOS PROFESIONALES QUE DESARROLLAN ALGÚN RA EN LA EMPRESA U ORGANISMO EQUIPARADO. ]]
+Modalidad de la FEOE
+La fase de formación en empresa u organismo equiparado se desarrollará en el régimen [[ general | intensivo ]].
+Organización temporal de la FEOE
+La fase de formación en empresa u organismo equiparado se desarrollará desde el [[ fecha de inicio ]] hasta el [[ fecha de fin ]], ambos inclusive, co
+Esta planificación podrá ajustarse en función de la organización del centro, las características y circunstancias del alumnado, así como de las necesi
+Resultados de aprendizaje desarrollados en la FEOE
+A continuación, se indican los resultados de aprendizaje (RA) que se prevé desarrollar, total o parcialmente, en la fase de formación en empresa u org
+Por tanto, [[ n.º RA en FEOE ]] de los [[ n.º total de RA ]] resultados de aprendizaje del módulo profesional se desarrollan en la FEOE.
+Esta previsión tiene carácter general y será concretada en los planes individuales de formación del alumnado, en coordinación con las empresas u organ
+Organización para el alumnado que no realice la FEOE
+El alumnado que, por cualquiera de los motivos contemplados en la normativa, no realice la FEOE [[ descripción de la organización ]].
+Seguimiento de la FEOE
+Se celebrarán reuniones de seguimiento quincenales en el centro educativo. Estas sesiones tendrán un doble propósito:
+Seguimiento de la formación en empresa, coordinado por la persona tutora dual del grupo. Entre otras cuestiones, se comprobará el Cuaderno de Seguimie
+Seguimiento de las actividades de aquellos módulos profesionales que no dualizan resultados de aprendizaje, la cual será llevada a cabo por el profeso
+Asimismo, se efectuarán visitas a la empresa u organismo equiparado con la periodicidad establecida en el plan de formación y tantas veces como sea ne
+[[ OPCIÓN B: MÓDULOS PROFESIONALES QUE NO DESARROLLAN NINGÚN RA EN LA EMPRESA U ORGANISMO EQUIPARADO. ]]
+Modalidad de la FEOE
+La fase de formación en empresa u organismo equiparado se desarrollará en el régimen [[ general | intensivo ]].
+Organización temporal de la FEOE
+La fase de formación en empresa u organismo equiparado se desarrollará desde el [[ fecha de inicio ]] hasta el [[ fecha de fin ]], ambos inclusive, co
+Esta planificación podrá ajustarse en función de la organización del centro, las características y circunstancias del alumnado, así como de las necesi
+Resultados de aprendizaje desarrollados en la FEOE
+Este módulo profesional no desarrollará resultados de aprendizaje en la FEOE.
+Actividades de seguimiento y evaluación
+Durante la FEOE el alumnado deberá realizar las siguientes actividades, que serán guiadas y tutorizadas por el profesorado del módulo profesional:
+–	[[ …
+–	Proyecto.
+–	Dosier de ejercicios.
+–	Dosier de prácticas.
+–	… ]]
+Seguimiento de la FEOE
+Se celebrarán reuniones de seguimiento quincenales en el centro educativo. Estas sesiones tendrán un doble propósito:
+Seguimiento de la formación en empresa, coordinado por la persona tutora dual del grupo. Entre otras cuestiones, se comprobará el Cuaderno de Seguimie
+Seguimiento de las actividades de aquellos módulos profesionales que no dualizan resultados de aprendizaje, la cual será llevada a cabo por el profeso
+Asimismo, se efectuarán visitas a la empresa u organismo equiparado con la periodicidad establecida en el plan de formación y tantas veces como sea ne
+Metodología didáctica
+Principios metodológicos
+Los principios metodológicos en los que se fundamenta esta programación didáctica son:
+[[ …
+Aprendizaje centrado en el alumnado.
+Enfoque globalizador e interdisciplinar.
+Atención a la diversidad del alumnado.
+Flexibilidad metodológica.
+Bienestar emocional como base para el aprendizaje.
+Participación activa, fomentando la motivación a través de propuestas conectadas con los intereses del alumnado.
+Aprendizaje significativo.
+Aprendizaje autónomo y autorregulado.
+Evaluación formativa, continua y auténtica.
+Reflexión crítica y metacognición.
+… ]]
+Estrategias metodológicas
+A continuación, se enumeran las estrategias metodológicas que se utilizarán en este [[ módulo profesional | proyecto ]]:
+[[ …
+Estrategias expositivas.
+Realización de ejercicios.
+Realización de prácticas.
+Aula invertida (Flipped Classroom).
+Aprendizaje cooperativo.
+Tutoría entre iguales.
+Aprendizaje basado en la indagación (ABI).
+Aprendizaje basado en problemas (ABP).
+Método del caso.
+Aprendizaje basado en proyectos (ABPj).
+Aprendizaje basado en retos (ABR).
+Design Thinking.
+Aprendizaje-Servicio (ApS).
+Gamificación.
+… ]]
+Materiales y recursos didácticos
+En el desarrollo del [[ módulo profesional | proyecto ]] se utilizarán los siguientes recursos:
+[[ …
+Recursos personales:
+Profesorado titular.
+Profesorado de desdoble.
+Profesorado de apoyo.
+Otros.
+Espacios:
+Aula [[ específica | polivalente | informática ]] equipada con [[ … ]].
+Taller de [[ … ]] equipado con [[ … ]].
+Laboratorio de [[ … ]].
+Biblioteca.
+Recursos materiales:
+Equipos informáticos [[ de sobremesa | portátiles ]].
+Mobiliario adaptado a la actividad (mesas, sillas, armarios…).
+Herramientas y maquinaria específicas: [[ … ]].
+Equipos de protección individual (EPI) según la normativa de PRL.
+Material fungible: [[ … ]].
+Recursos digitales:
+Plataformas educativas:
+[[ Aeducar ]]
+[[ Otros ]].
+Sistemas operativos:
+[[ nombre, versión ]].
+Software específico:
+[[ nombre, versión ]].
+Simuladores:
+[[ nombre, versión ]].
+Recursos multimedia: [[ vídeos formativos, tutoriales… ]].
+Recursos documentales:
+Bibliografía:
+Libros:
+Apellido, N. (Año). Título del libro en cursiva. Editorial. https://doi.org/xxxxx
+Revistas:
+Revista completa (en curso): Nombre de la revista. (Año–presente). Editorial o entidad responsable. URL
+Número concreto de una revista: Nombre de la revista, volumen(número). (Año). Editorial o entidad responsable. URL
+Artículo concreto de una revista: Apellido, N., & Apellido, N. (Año). Título del artículo. Nombre de la revista, volumen(número), páginas. URL
+Normativa aplicable (formato legal estándar):
+[Tipo de norma] [número/año], de [día] de [mes], [denominación]. Boletín Oficial del Estado, nº [número], [fecha]. https://www.boe.es/...
+Manuales técnicos:
+Apellido, N. (Año). Título del manual. Editorial. ISBN.
+Documentación elaborada por el profesorado.
+… ]]
+Agrupamientos
+Se utilizarán los siguientes tipos de agrupamiento:
+Individual:
+El alumnado realiza las actividades de manera individual.
+Este tipo de agrupamiento se utilizará con las siguientes estrategias metodológicas:
+Gran grupo o grupo clase:
+Todo el alumnado participa como un solo grupo, compartiendo los mismos objetivos, contenidos y actividades de enseñanza-aprendizaje.
+Se utilizará este tipo de agrupamiento con las siguientes estrategias metodológicas:
+Parejas:
+El alumnado se organiza en grupos de 2 personas.
+Se utilizará este tipo de agrupamiento con las siguientes estrategias metodológicas:
+Equipo:
+El alumnado se agrupará en equipos de [[ número ]] personas.
+Se utilizará este tipo de agrupamiento con las siguientes estrategias metodológicas:
+Plan de aplicación de los desdobles
+En la siguiente tabla se detalla el plan de aplicación de los desdobles previstos para el [[ módulo profesional | proyecto ]]:
+[[ Este [[ módulo profesional | proyecto ]] no contempla la aplicación de desdobles. ]]
+Aprendizaje colaborativo basado en proyectos y/o retos
+El [[ módulo profesional | proyecto ]], en un contexto de aprendizaje colaborativo, participa en el siguiente [[ proyecto | reto | proyecto/reto ]]:
+Procedimiento de evaluación y de calificación
+Actividades, técnicas e instrumentos
+A lo largo del desarrollo del [[ módulo profesional | proyecto ]] se utilizarán los siguientes tipos de actividades de evaluación:
+Para evaluar se utilizarán las siguientes técnicas de evaluación:
+[[ …
+Observación directa.
+Análisis de productos.
+Interacción y comunicación.
+… ]]
+Para evaluar y, en su caso, calificar el proceso de enseñanza-aprendizaje se emplearán los siguientes instrumentos:
+[[ …
+Listas de control.
+Escalas de valoración.
+Rúbricas.
+Claves de respuesta.
+… ]]
+Evaluaciones
+Evaluación inicial
+4.2.1 Evaluación inicial
+La evaluación inicial se realizará durante las primeras semanas del curso para conocer el punto de partida del alumnado y ajustar la planificación did
+A continuación, se presentan las dimensiones a evaluar, junto con los aspectos que las componen y los criterios que se utilizarán para valorarlas:
+En esta evaluación inicial se utilizarán las siguientes actividades:
+[[ …
+Cuestionarios iniciales.
+Entrevistas individuales o en grupo.
+Ejercicios prácticos relacionados con contenidos básicos del módulo profesional.
+Pruebas de nivel en competencias instrumentales (digital, lingüística, matemática).
+Dinámicas de grupo para observar la interacción y la convivencia.
+… ]]
+Para el análisis de dichas evidencias se emplearán las siguientes técnicas de evaluación:
+[[ …
+Observación directa.
+Análisis de productos.
+Interacción y comunicación.
+… ]]
+La recogida y valoración de la información se llevará a cabo mediante los siguientes instrumentos de evaluación:
+[[ …
+Listas de control.
+Escalas de valoración.
+Rúbricas.
+Claves de respuesta.
+… ]]
+En función de los resultados obtenidos en la evaluación inicial, se aplicarán las siguientes medidas:
+[[ …
+Programar tareas de refuerzo en competencias instrumentales (digital, matemática, lingüística).
+Adaptar recursos didácticos al nivel competencial del grupo.
+Reorganizar la temporización de las unidades didácticas.
+Modificar la secuencia de aprendizaje según necesidades detectadas.
+Adaptar actividades, técnicas e instrumentos de evaluación para garantizar la accesibilidad.
+Coordinar con el Departamento de Orientación o, en su caso, Servicio de Orientación, medidas específicas.
+Aplicar estrategias de motivación.
+Diseñar actuaciones para mejorar la convivencia.
+Planificar entrevistas con familias o tutores legales.
+Establecer planes de seguimiento personalizado.
+… ]]
+Evaluaciones parciales
+Durante el curso se realizarán, con carácter general, [[ tres evaluaciones parciales, una al finalizar cada trimestre | dos evaluaciones parciales, un
+Estas sesiones forman parte del proceso de evaluación continua y tendrán un carácter formativo e integrador, orientado a valorar el progreso del alumn
+En cada evaluación parcial se valorará el progreso del alumnado en la consecución de los resultados de aprendizaje. También se analizará la evolución 
+A cada estudiante se le informará del resultado de la evaluación mediante una calificación numérica entre 1 y 10. La información proporcionada tendrá 
+En estas evaluaciones parciales se informará únicamente sobre los resultados de aprendizaje respecto a los cuales se haya recogido evidencia suficient
+Primera evaluación final
+Durante el mes de junio, se realizará la primera evaluación final, que tendrá carácter calificativo. Su finalidad será valorar el grado de logro de lo
+Alumnado que no haya perdido el derecho a la evaluación continua
+El alumnado que haya mantenido el derecho a la evaluación continua será calificado en esta primera evaluación final tomando como base las evidencias d
+La calificación final del [[ módulo profesional | proyecto ]] se obtendrá aplicando los criterios de calificación, establecidos en el apartado 4.7.1, 
+Alumnado que haya perdido el derecho a la evaluación continua
+El alumnado que pierda el derecho a la evaluación continua será evaluado en esta convocatoria mediante actividades específicas que generen nuevas evid
+La calificación final del [[ módulo profesional | proyecto ]] se obtendrá aplicando los criterios de calificación establecidos en el apartado 4.7.1 y 
+A continuación, se indican las actividades de evaluación previstas para este alumnado, que podrán modificarse durante el curso en función de la evoluc
+[[ Prueba objetiva. ]]
+[[ Proyecto integrador de todos los resultados de aprendizaje. ]]
+[[ Portfolio. ]]
+[[ Simulación de situaciones profesionales. ]]
+Segunda evaluación final
+El alumnado que no haya superado el [[ módulo profesional | proyecto ]] en la primera evaluación final podrá presentarse a la segunda evaluación final
+Para ello, se realizarán actividades específicas que generen nuevas evidencias de aprendizaje y permitan valorar el grado de logro alcanzado en relaci
+La calificación final del [[ módulo profesional | proyecto ]] se determinará aplicando los siguientes criterios de calificación:
+A continuación, se indican las actividades de evaluación previstas para esta segunda convocatoria final:
+[[ …
+Prueba objetiva.
+Prueba abierta.
+Simulación de situaciones profesionales.
+Dosier de ejercicios y prácticas aplicadas.
+… ]]
+Información al alumnado o, en su caso, a las familias del procedimiento de evaluación y calificación
+El profesorado informará al alumnado —y, si es menor de edad, a sus familias— sobre el procedimiento de evaluación y calificación del [[ módulo profes
+La información se ofrecerá de forma continua y orientadora, priorizando la evaluación formativa como elemento clave para mejorar tanto la intervención
+Aunque la comunicación será constante, se establecen momentos clave en los que se proporcionará información estructurada y sistemática:
+[[ …
+Inicio del curso:
+Resultados de aprendizaje y criterios de evaluación.
+Ponderación de los resultados de aprendizaje y de los criterios de evaluación.
+Criterios de calificación aplicados al [[ módulo profesional | proyecto ]] y forma de cálculo de la calificación final.
+Causas y consecuencias de la pérdida del derecho a la evaluación continua.
+Procedimiento de recuperación durante el curso.
+Procedimiento de evaluación y calificación en la segunda evaluación final.
+Inicio de cada unidad didáctica:
+Explicación de los elementos curriculares implicados, con especial atención a los resultados de aprendizaje y criterios de evaluación.
+Criterios de calificación y ponderación para el cálculo de la calificación de los resultados de aprendizaje.
+Actividades, técnicas e instrumentos de evaluación y, en su caso, de calificación.
+Durante el desarrollo de la unidad didáctica:
+Retroalimentación continua mediante orientaciones, correcciones y seguimiento individualizado.
+Al finalizar cada resultado de aprendizaje:
+Información individual al alumnado sobre el nivel de logro alcanzado.
+Retroalimentación específica y, en su caso, propuesta de actividades de mejora o recuperación.
+En cada evaluación parcial:
+Síntesis del progreso del alumnado respecto a los resultados de aprendizaje evaluados.
+Comunicación del nivel alcanzado mediante calificación numérica acompañada de una observación cualitativa.
+Al finalizar la primera evaluación final:
+Comunicación individual de la calificación final del [[ módulo profesional | proyecto ]].
+Información sobre las actividades de recuperación previstas para la segunda evaluación final, si procede.
+… ]]
+Pérdida del derecho a la evaluación continua
+La evaluación del [[ módulo profesional | proyecto ]] tendrá carácter continuo, formativo e integrador a lo largo de todo el proceso de enseñanza-apre
+El alumnado perderá el derecho a la evaluación continua cuando el número de faltas de asistencia supere el 15 % de la duración total del [[ módulo pro
+De acuerdo con lo establecido en el apartado 2.8. Organización y distribución temporal: unidades didácticas y otros tiempos y el apartado 2.9.2. Organ
+Podrán quedar excluidas de este cómputo aquellas situaciones debidamente acreditadas, como la necesidad de conciliación con la actividad laboral o la 
+El alumnado que pierda el derecho a la evaluación continua será evaluado y calificado de acuerdo con lo establecido en el apartado 4.2.3.2 de esta pro
+La pérdida del derecho a evaluación continua afecta exclusivamente a la primera evaluación final. El alumnado podrá presentarse a la segunda evaluació
+Procedimiento de recuperación
+El alumnado que, sin haber perdido el derecho a la evaluación continua, no supere uno o varios resultados de aprendizaje, podrá recuperarlos mediante 
+Las actividades de recuperación se realizarán en los siguientes momentos:
+[[ …
+Al finalizar cada resultado de aprendizaje no superado.
+Al finalizar cada evaluación parcial.
+Antes de la evaluación final.
+… ]]
+Se emplearán actividades que permitan valorar el logro de los resultados de aprendizaje no superados:
+[[ …
+Proyecto.
+Prácticas.
+Prueba objetiva.
+Prueba abierta.
+Dosier de ejercicios.
+… ]]
+El profesorado informará al alumnado —y, en su caso, a las familias si el alumnado es menor de edad—, de forma individual, sobre:
+[[ …
+Los resultados de aprendizaje no superados.
+Las actividades de recuperación que deberá realizar.
+El procedimiento de evaluación y calificación aplicable.
+… ]
+Evaluación de la fase de formación en empresa u organismo equiparado (FEOE)
+La calificación final de los resultados de aprendizaje (RA) trabajados en la FEOE es responsabilidad última del profesorado del módulo profesional. Pa
+El procedimiento de evaluación de la FEOE será el siguiente:
+Concreción de actividades:
+Para cada estudiante, y en colaboración con la empresa, se concretarán en su Plan de Formación las actividades que permitirán desarrollar y evaluar ca
+Seguimiento y valoración en la empresa u organismo equiparado:
+El tutor o tutora dual de empresa valorará cada actividad vinculada a un RA con una puntuación entre 1 y 4. Un resultado de aprendizaje se considerará
+Asimismo, el tutor o tutora dual de empresa realizará una valoración cualitativa de la estancia formativa y de las competencias profesionales y para l
+El tutor o tutora dual de empresa u organismo equiparado podrá participar e informar de su valoración en la sesión de evaluación de la persona en form
+Seguimiento por el centro educativo:
+Con carácter quincenal, el alumnado deberá asistir a una reunión presencial en el centro, donde se llevará a cabo el seguimiento de la FEOE. Durante e
+Asimismo, se efectuarán visitas a la empresa u organismo equiparado con la periodicidad establecida en el plan de formación y tantas veces como sea ne
+Calificación final:
+El profesorado del módulo asignará la calificación final integrando la valoración numérica y cualitativa del tutor de empresa.
+Técnicas de evaluación:
+Para la recogida de evidencias, se utilizarán, entre otras, las siguientes técnicas:
+[[ …
+Observación directa.
+Análisis de productos.
+Interacción y comunicación.
+… ]]
+Instrumentos de evaluación:
+Los instrumentos principales para registrar la valoración serán:
+[[ …
+Listas de control.
+Escalas de valoración.
+Rúbricas.
+… ]]
+Criterios de calificación y ponderación
+Criterios de calificación
+La calificación del [[ módulo profesional | proyecto ]] se calculará a partir de los siguientes criterios de calificación:
+El [[ módulo profesional | proyecto ]] se considerará superado cuando se obtenga una calificación igual o superior a 5 puntos sobre 10.
+La calificación final se obtendrá mediante un proceso jerárquico:
+Criterios de evaluación (CE): cada CE se calificará a partir de [[ ... ]]
+Resultados de aprendizaje (RA): la calificación de cada RA se calculará como la media ponderada de las calificaciones de sus criterios de evaluación, 
+Calificación final del [[ módulo profesional | proyecto ]]: se obtendrá como la media ponderada de las calificaciones de los RA, según las ponderacion
+Un RA se considerará superado cuando alcance una calificación igual o superior a 5 puntos sobre 10.
+[[ Para poder aplicar la compensación entre RA, el alumnado deberá alcanzar en cada uno de ellos una calificación mínima de [[ calificación ]] puntos 
+[[ Para poder aplicar la compensación entre RA, el alumnado deberá alcanzar las siguientes calificaciones mínimas sobre 10 puntos:
+RA 1, [[ calificación ]] puntos.
+RA 2, [[ calificación ]] puntos.
+RA 3, [[ calificación ]] puntos.
+…
+… ]]
+La calificación final del [[ módulo profesional | proyecto ]] se expresará en valores enteros del 1 al 10, sin decimales, aplicando las siguientes reg
+[[ …
+Si la calificación es igual o superior a 5, se redondeará al número entero más próximo.
+Si es inferior a 5, se truncará al número entero inferior más próximo.
+Si el resultado es inferior a 1, se asignará una calificación de 1.
+… ]]
+Ponderación de los resultados de aprendizaje y de los criterios de evaluación
+La calificación del [[ módulo profesional | proyecto ]] se calculará considerando la siguiente ponderación de resultados de aprendizaje y criterios de
+Plan de recuperación de módulos profesionales pendientes
+Este plan establece las actuaciones para que el alumnado que haya promocionado con el módulo profesional pendiente lo recupere durante el presente cur
+El plan de recuperación se estructura en los siguientes apartados:
+Organización temporal:
+El plan se desarrollará desde [[ el inicio de las actividades lectivas | fecha de inicio | … ]] hasta [[ la primera evaluación final | fecha de finali
+[[ ...
+Evaluación inicial diagnóstica.
+Planificación.
+Desarrollo de las actividades.
+Seguimiento intermedio.
+Evaluación final.
+... ]]
+Evaluación inicial del alumnado:
+Se realizará una evaluación diagnóstica para identificar el punto de partida del alumnado, detectar los resultados de aprendizaje en los que presenta 
+Se realizarán las siguientes actividades de evaluación inicial:
+[[ ...
+Prueba objetiva.
+Prueba abierta.
+Entrevista individual.
+... ]]
+Actividades:
+Se realizarán las siguientes actividades:
+[[ ...
+Dosier de ejercicios y prácticas.
+Proyecto.
+Pruebas objetivas.
+Pruebas abiertas.
+Portafolio.
+Simulación de práctica profesional.
+… ]]
+Desarrollo:
+El plan de recuperación se desarrollará atendiendo a las siguientes cuestiones:
+[... ]
+Materiales y recursos:
+En el desarrollo del plan se utilizarán los siguientes recursos:
+[[ ...
+Recursos personales:
+Espacios:
+Recursos materiales:
+Recursos documentales:
+Recursos digitales:
+...] ]
+Procedimiento de evaluación y calificación:
+[[ La evaluación y calificación del alumnado se ajustará a lo indicado en el apartado 4.7 de esta programación didáctica. ]]
+Seguimiento:
+El seguimiento del plan se centrará en:
+[[ …
+Entrega y corrección de las actividades:
+Las actividades se entregarán a través de [[ correo electrónico | la plataforma educativa Aeducar |  ... ]].
+La evaluación formativa y, en su caso, sumativa, se realizará mediante [[ correo electrónico | la plataforma educativa Aeducar | presencialmente | ...
+Resolución de dudas:
+La resolución de dudas se realizará, preferentemente, a través de [[ Correo electrónico |  la plataforma educativa Aeducar, en foros y por mensajería 
+Asimismo, el alumnado podrá solicitar una sesión presencial con el profesorado.
+Estado de desarrollo del plan:
+En relación con el estado de desarrollo del plan y en concreto con la información sobre el procedimiento de evaluación y calificación que recibirá el 
+Comunicación e información al alumnado y familias:
+Comunicación inicial:
+El plan se presentará al alumnado y, en caso de ser menor de edad, a sus familias [[ en una reunión presencial | mediante una comunicación escrita | .
+Comunicación durante el desarrollo:
+Se informará de la evolución y aspectos relevantes preferentemente [[ por correo electrónico | mediante la plataforma Aeducar | … ]], realizando si fu
+Comunicación final:
+Al finalizar el plan, se comunicará al alumnado y, en caso de ser menor de edad, a sus familias el resultado final y las calificaciones obtenidas, tan
+Medidas de respuesta educativa para la inclusión
+A partir de la información obtenida en la evaluación inicial, y atendiendo de manera esencial a las características del alumnado, se adoptarán las sig
+[[ …
+Ajustes metodológicos:
+Uso de instrucciones más breves y claras.
+Mayor acompañamiento docente en la realización de tareas.
+Descomposición de tareas complejas en pasos sencillos y observables.
+Utilización de andamiajes, ejemplos guiados y modelado.
+Ajustes organizativos:
+Incremento del tiempo disponible para completar tareas.
+Flexibilidad en la entrega de actividades.
+Posibilidad de fragmentar sesiones prácticas extensas.
+Ajustes en el acceso:
+Uso de materiales adaptados, como textos con pictogramas, esquemas visuales o vídeos explicativos.
+Reducción de la carga visual o cognitiva en documentos.
+Utilización de lectores de pantalla u otras herramientas digitales de apoyo.
+Ajustes en la evaluación:
+Cambios en el formato de presentación (oral, visual o escrito).
+Utilización de rúbricas simplificadas.
+Adaptación de los instrumentos para facilitar la recogida de evidencias del aprendizaje.
+… ]]
+Actividades complementarias y extraescolares
+A continuación, se detallan las actividades complementarias y extraescolares programadas para el [[ módulo profesional | proyecto ]]:
+Título de la actividad 1:
+Tipo: [[ complementaria | extraescolar ]].
+Resultados de aprendizaje (RA):
+[[ … ]].
+Temporización: [[ 1.ª evaluación | 2.ª evaluación | 3.ª evaluación | … ]].
+Entidad colaboradora: [[ … ]].
+Descripción:
+[[ Descripción de la actividad]].
+Actividad de evaluación y/o calificación:
+[[ Descripción de la actividad de evaluación y/o calificación, si procede ]].
+Título de la actividad 2:
+Tipo: [[ complementaria | extraescolar ]].
+Resultados de aprendizaje (RA):
+[[ … ]].
+Temporización: [[ 1.ª evaluación | 2.ª evaluación | 3.ª evaluación | … ]].
+Entidad colaboradora: [[ … ]].
+Descripción:
+[[ Descripción de la actividad]].
+Actividad de evaluación y/o calificación:
+[[ Descripción de la actividad de evaluación y/o calificación, si procede ]].
+Plan de contingencia
+El plan de contingencia establece las actuaciones previstas para garantizar la continuidad del proceso de enseñanza-aprendizaje del [[ módulo profesio
+Ausencia prolongada del profesorado titular
+En caso de ausencia prolongada del profesorado titular del [[ módulo profesional | proyecto ]], se aplicará el siguiente plan de contingencia:
+Actividades:
+El alumnado realizará las siguientes actividades:
+[[ ...
+Dosier de ejercicios y prácticas.
+Proyecto.
+... ]]
+Organización de las actividades:
+Las tareas estarán estructuradas por [[ unidades didácticas | resultados de aprendizaje | ... ]].
+Disponibilidad y acceso:
+Las actividades y los recursos adicionales necesarios estarán disponibles en [[ un repositorio del departamento | curso correspondiente de la platafor
+Materiales y recursos didácticos:
+Se utilizarán los siguientes materiales y recursos:
+[[ ...
+Recursos personales: [[ ... ]]
+Espacios: [[ ... ]]
+Recursos materiales: [[ ... ]]
+Recursos documentales: [[ ... ]]
+Recursos digitales: [[ ... ]]
+...]]
+Seguimiento:
+El seguimiento del plan de contingencia se realizará mediante [[ la coordinación del departamento didáctico correspondiente | supervisión de la person
+Ajuste en la programación:
+A la reincorporación del profesorado titular o sustituto, se [[ evaluará la situación del grupo | adaptará la temporización, si fuera necesario | ... 
+Ausencia prolongada del alumnado por causas justificadas
+En caso de ausencia prolongada del alumnado por causas justificadas, se aplicará el siguiente plan de contingencia:
+Actividades:
+El alumnado realizará las siguientes actividades:
+[[ ...
+Dosier de ejercicios y prácticas.
+Proyecto.
+... ]]
+Organización de las actividades:
+Las tareas estarán estructuradas por [[ unidades didácticas | resultados de aprendizaje | ... ]].
+Disponibilidad y acceso:
+Las actividades y los recursos adicionales necesarios estarán disponibles en [[ el curso correspondiente de la plataforma Aeducar | ... ]].
+Materiales y recursos didácticos:
+Se utilizarán los siguientes materiales y recursos:
+[[ ...
+Recursos personales: [[ ... ]]
+Espacios: [[ ... ]]
+Recursos materiales: [[ ... ]]
+Recursos documentales: [[ ... ]]
+Recursos digitales: [[ ... ]]
+...]]
+Seguimiento:
+El seguimiento del plan de contingencia será realizado por [[ el profesorado responsable del módulo profesional o proyecto ... ]], empleando [[ el cor
+Ajuste en la programación:
+A la reincorporación del alumnado, se [[ evaluará su situación académica | desarrollarán actividades de refuerzo en los aspectos en los que se hayan d
+Interrupción generalizada del [[ módulo profesional | proyecto ]] o del centro
+Actividades:
+El alumnado realizará las siguientes actividades:
+[[ ...
+Dosier de ejercicios y prácticas.
+Proyecto.
+... ]]
+Organización de las actividades:
+Las tareas estarán estructuradas por [[ unidades didácticas | resultados de aprendizaje | ... ]].
+Disponibilidad y acceso:
+Las actividades y los recursos adicionales necesarios estarán disponibles en [[ el curso correspondiente de la plataforma Aeducar | ... ]].
+Materiales y recursos didácticos:
+Se utilizarán los siguientes materiales y recursos:
+[[ ...
+Recursos personales: [[ ... ]]
+Espacios: [[ ... ]]
+Recursos materiales: [[ ... ]]
+Recursos documentales: [[ ... ]]
+Recursos digitales: [[ ... ]]
+...]]
+Seguimiento:
+El seguimiento del plan de contingencia será realizado por [[ el profesorado responsable del módulo profesional o proyecto ... ]], empleando [[ el cor
+Ajuste en la programación:
+Al reiniciarse la actividad del [[ módulo profesional | proyecto ]] o del centro educativo, se [[ evaluará el grado de avance del grupo | reorganizará
+Publicidad de la programación didáctica.
+Durante la primera sesión del curso, el profesorado titular del [[ módulo profesional | proyecto ]] explicará al alumnado los aspectos más relevantes 
+Esta información incluirá:
+[[ ...
+Las competencias profesionales y para la empleabilidad.
+Los objetivos generales.
+Los resultados de aprendizaje y los criterios de evaluación.
+Los contenidos orientativos.
+La organización de las unidades didácticas.
+La metodología didáctica.
+Los procedimientos de evaluación y de calificación.
+.. ]]
+La programación didáctica estará disponible para su consulta durante todo el curso escolar a través de la web del centro así como en [[ el curso corre

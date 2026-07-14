@@ -47,6 +47,7 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
 
   const [evaluacionTab, setEvaluacionTab] = useState('grupales'); // grupales, individuales
   const [guiaPdContent, setGuiaPdContent] = useState("");
+  const [comparativaPdContent, setComparativaPdContent] = useState("");
 
   useEffect(() => {
     if (activeTab === "guia_pd" && !guiaPdContent) {
@@ -55,7 +56,13 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
         .then(text => setGuiaPdContent(text))
         .catch(err => console.error("Error cargando Guia_PD.md", err));
     }
-  }, [activeTab, guiaPdContent]);
+    if (activeTab === "comparativa_pd" && !comparativaPdContent) {
+      fetch("/Comparativa_PD.md")
+        .then(res => res.text())
+        .then(text => setComparativaPdContent(text))
+        .catch(err => console.error("Error cargando Comparativa_PD.md", err));
+    }
+  }, [activeTab, guiaPdContent, comparativaPdContent]);
 
   const fetchDocuments = (path: string) => {
     setLoadingDocs(true);
@@ -193,7 +200,7 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
         })
       });
 
-      if (!response.ok) throw new Error("Error generando PDF");
+      if (!response.ok) throw new Error("Error generando documento");
 
       const contentType = response.headers.get("Content-Type");
       const blob = await response.blob();
@@ -213,9 +220,9 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
       const timestampStr = `${yyyy}${mm}${dd}-${hh}${mmin}`;
 
       let downloadName = `${type}_${Date.now()}.${finalExt}`;
-      if (type === 'programacion_minima') {
+      if (type === 'programacion_minima' || type === 'programacion_minima_tpl') {
         downloadName = `${timestampStr} PD Resumen.${finalExt}`;
-      } else if (type === 'programacion_suficiente') {
+      } else if (type === 'programacion_suficiente' || type === 'programacion_suficiente_tpl') {
         downloadName = `${timestampStr} PD BOA Aragón.${finalExt}`;
       } else if (type === 'programacion_detallada') {
         downloadName = `${timestampStr} PD JEG cumplimentada.${finalExt}`;
@@ -240,7 +247,7 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
       }
     } catch (err) {
       console.error(err);
-      toast.error("Error al generar el PDF. Verifica la conexión con el backend.");
+      toast.error("Error al generar el documento. Verifica la conexión con el backend.");
     } finally {
       setDownloadingStr(null);
     }
@@ -312,6 +319,7 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
     { id: "programacion", label: "Programación", cleanLabel: "Programación" },
     { id: "curso", label: "Curso", cleanLabel: "Curso" },
     { id: "guia_pd", label: "Guía PD", cleanLabel: "Guía PD" },
+    { id: "comparativa_pd", label: "Comparativa PD", cleanLabel: "Comparativa PD" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -378,6 +386,9 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
                 <TabsTrigger value="guia_pd">
                   <div className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Guía PD</div>
                 </TabsTrigger>
+                <TabsTrigger value="comparativa_pd">
+                  <div className="flex items-center gap-2"><Scale className="w-4 h-4" /> Comparativa PD</div>
+                </TabsTrigger>
               </TabsList>
             </Tabs>
                     {(() => {
@@ -393,6 +404,10 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
           'guia_pd': {
                     'title': 'Guía PD (Referencia Cruzada)',
                     'desc': 'Mapa de correspondencias entre la plantilla oficial de TodoFP y los campos en CuadernoFP.'
+          },
+          'comparativa_pd': {
+                    'title': 'Comparativa PD (3 Modelos)',
+                    'desc': 'Comparación campo a campo de los 3 niveles de programación didáctica: PD-, PD= y PD+.'
           }
 };
                 const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
@@ -443,8 +458,8 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
                                 <p className="text-sm text-muted mb-6">Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.</p>
                               </div>
                               <div className="flex gap-2 mt-auto">
-                                <Button onClick={() => handleDownloadPdf('programacion_minima', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_minima_docx'} className="flex-1 bg-slate-600 hover:bg-slate-700 text-white">
-                                  {downloadingStr === 'programacion_minima_docx' ? '⏳ Generando DOCX...' : 'Descargar PD Resumen.docx'}
+                                <Button onClick={() => handleDownloadPdf('programacion_minima_tpl', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_minima_tpl_docx'} className="flex-1 bg-slate-600 hover:bg-slate-700 text-white">
+                                  {downloadingStr === 'programacion_minima_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD Resumen.docx'}
                                 </Button>
                               </div>
                             </div>
@@ -455,8 +470,8 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
                                 <p className="text-sm text-muted mb-6">Versión BOA con los puntos de la Ley muy específica y concreta (no detalla secuenciación de aula ni extensa teoría).</p>
                               </div>
                               <div className="flex gap-2 mt-auto">
-                                <Button onClick={() => handleDownloadPdf('programacion_suficiente', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_suficiente_docx'} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
-                                  {downloadingStr === 'programacion_suficiente_docx' ? '⏳ Generando DOCX...' : 'Descargar PD BOA Aragón.docx'}
+                                <Button onClick={() => handleDownloadPdf('programacion_suficiente_tpl', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_suficiente_tpl_docx'} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
+                                  {downloadingStr === 'programacion_suficiente_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD BOA Aragón.docx'}
                                 </Button>
                               </div>
                             </div>
@@ -708,6 +723,24 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
                             {guiaPdContent ? (
                               <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
                                 {guiaPdContent}
+                              </ReactMarkdown>
+                            ) : (
+                              <div className="flex justify-center p-8">
+                                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-info"></div>
+                              </div>
+                            )}
+                          </div>
+                        </Card>
+                      </div>
+                    )}
+
+                    {activeTab === 'comparativa_pd' && (
+                      <div className="space-y-4 animate-in fade-in duration-500">
+                        <Card className="p-8 border-t-4 border-t-amber-500">
+                          <div className="prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-th:bg-foreground/5 prose-table:border-collapse prose-table:w-full">
+                            {comparativaPdContent ? (
+                              <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+                                {comparativaPdContent}
                               </ReactMarkdown>
                             ) : (
                               <div className="flex justify-center p-8">

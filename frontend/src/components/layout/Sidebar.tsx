@@ -50,6 +50,7 @@ export default function Sidebar() {
 
   const [dateStr, setDateStr] = useState<string>("");
   const [timeStr, setTimeStr] = useState<string>("");
+  const [dateCompactStr, setDateCompactStr] = useState<string>("");
   const [displayGroup, setDisplayGroup] = useState<string>("");
 
   useEffect(() => {
@@ -76,6 +77,10 @@ export default function Sidebar() {
 
       setDateStr(`${day} de ${monthStr} de ${year}`);
       setTimeStr(`${hours}:${minutes} h`);
+      
+      const mm = String(isDemo ? 5 : realNow.getMonth() + 1).padStart(2, '0');
+      const dd = String(isDemo ? 2 : realNow.getDate()).padStart(2, '0');
+      setDateCompactStr(`${year}${mm}${dd}`);
 
       let groupStr = "";
       if (state.activeCursoId) {
@@ -148,13 +153,18 @@ export default function Sidebar() {
       {/* ── Header: título + reloj + botón colapsar ── */}
       <div className={`px-4 pt-4 pb-2 flex ${isSidebarOpen ? 'justify-between' : 'justify-center'} items-start`}>
         {isSidebarOpen && (
-          <div className="flex flex-col mb-3">
+          <div className="flex flex-col mb-3 w-full pr-2 min-w-0">
               <Link href="/inicio" onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}>
                 <h1 className={`text-xl font-extrabold leading-tight transition-colors tracking-tight whitespace-nowrap cursor-pointer ${dataSource === 'demo' ? 'text-warning hover:text-white' : 'text-success hover:text-white'}`}>
                   Cuaderno FP
                 </h1>
               </Link>
-            <span className="text-sm text-muted/80 font-mono mt-0.5 ml-0.5">{timeStr}</span>
+              <div className="flex items-center justify-between mt-1">
+                <span className="text-sm text-muted/80 font-mono ml-0.5">{timeStr}</span>
+                <div className="border border-[var(--glass-border)] bg-background/50 px-1.5 py-0.5 rounded text-xs text-muted/80 font-mono whitespace-nowrap ml-2 shadow-sm">
+                  Actualizado: {dateCompactStr}
+                </div>
+              </div>
           </div>
         )}
         <button onClick={toggleSidebar} className="text-muted hover:text-foreground p-1 rounded-md hover:bg-foreground/10 transition-colors mb-4">
