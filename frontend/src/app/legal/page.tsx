@@ -513,7 +513,7 @@ export default function LegalPage() {
                   <div className="flex items-start gap-3 mb-4">
                     <span className="text-info mt-1"><Accessibility className="w-5 h-5" /></span>
                     <p className="text-sm text-foreground/80 leading-relaxed">
-                      <strong>Rafael Sanz Prades</strong> se compromete a hacer accesible este sitio web conforme al <strong>Real Decreto 1112/2018, de 7 de septiembre</strong>, sobre accesibilidad de los sitios web y aplicaciones para dispositivos móviles del sector público, así como con la <strong>Directiva (UE) 2016/2102 del Parlamento Europeo y del Consejo</strong>.
+                      <strong>El equipo de Cuaderno FP</strong> se compromete a hacer accesible este sitio web conforme al <strong>Real Decreto 1112/2018, de 7 de septiembre</strong>, sobre accesibilidad de los sitios web y aplicaciones para dispositivos móviles del sector público, así como con la <strong>Directiva (UE) 2016/2102 del Parlamento Europeo y del Consejo</strong>.
                     </p>
                   </div>
                   <p className="text-sm text-foreground/80 leading-relaxed">

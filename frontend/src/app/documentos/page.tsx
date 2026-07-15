@@ -41,10 +41,15 @@ export default function DocumentosPage() {
   const [previewFilename, setPreviewFilename] = useState<string | null>(null);
   const [downloadingStr, setDownloadingStr] = useState<string | null>(null);
 
-  const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData } = useAppStore();
+  const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData, dataSource } = useAppStore();
   const [loadingData, setLoadingData] = useState(true);
 
   const fetchDocuments = (path: string) => {
+    if (dataSource === 'demo' || dataSource === 'local') {
+      setItems([]);
+      setLoadingDocs(false);
+      return;
+    }
     setLoadingDocs(true);
     setError(null);
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/list?path=${encodeURIComponent(path)}`)
@@ -61,7 +66,7 @@ export default function DocumentosPage() {
         }
       })
       .catch((err) => {
-        console.error("Error fetching documents:", err);
+        // console.error("Error fetching documents:", err); // Suppressed to avoid red logs when backend is down
         setError(err.message);
       })
       .finally(() => setLoadingDocs(false));
@@ -69,11 +74,15 @@ export default function DocumentosPage() {
 
   useEffect(() => {
     fetchDocuments(activeTab);
-  }, []);
+  }, [activeTab, dataSource]);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoadingData(true);
+      if (dataSource === 'demo' || dataSource === 'local') {
+        setLoadingData(false);
+        return;
+      }
       try {
         if (activeModuleId && !moduleData) {
           const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeModuleId}`);
@@ -96,7 +105,7 @@ export default function DocumentosPage() {
     } else {
       setLoadingData(false);
     }
-  }, [activeModuleId, moduleData, activeCursoId, cursoData, setModuleData, setCursoData]);
+  }, [activeModuleId, moduleData, activeCursoId, cursoData, setModuleData, setCursoData, dataSource]);
 
   const handleNavigate = (newPath: string) => {
     fetchDocuments(newPath);
@@ -205,7 +214,7 @@ export default function DocumentosPage() {
     <div className="flex min-h-screen bg-background">
       <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
-      <main className="flex-1 flex flex-col relative z-10 min-w-0">
+      <main id="main-content" tabIndex={-1} className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
@@ -365,9 +374,14 @@ export default function DocumentosPage() {
 
         {/* Modal de Previsualización (Compartido para ambos) */}
         {previewUrl && (
-          <div className="fixed inset-0 z-50 flex flex-col bg-black/90 backdrop-blur-md">
+          <div 
+            className="fixed inset-0 z-50 flex flex-col bg-black/90 backdrop-blur-md"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="preview-modal-title"
+          >
             <div className="flex items-center justify-between p-4 bg-[var(--glass-bg)] border-b border-[var(--glass-border)]">
-              <h2 className="text-2xl font-bold flex items-center gap-3 text-foreground">
+              <h2 id="preview-modal-title" className="text-2xl font-bold flex items-center gap-3 text-foreground">
                 <FileText className="w-6 h-6 text-info" /> {previewFilename}
               </h2>
               <div className="flex gap-4">

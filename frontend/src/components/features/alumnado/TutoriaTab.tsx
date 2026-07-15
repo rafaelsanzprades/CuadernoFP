@@ -14,7 +14,8 @@ export function TutoriaTab() {
   const [selectedAlId, setSelectedAlId] = useState<string>(df_evaluable.length > 0 ? (df_evaluable[0].ID || "") : "");
 
   const getTutorias = (al_id: string) => {
-    return tutoria_ledger[al_id] || [];
+    const list = tutoria_ledger[al_id];
+    return Array.isArray(list) ? list : [];
   };
 
   const handleAddTutoria = () => {
@@ -65,9 +66,9 @@ export function TutoriaTab() {
               <button
                 key={al.ID}
                 onClick={() => setSelectedAlId(al.ID)}
-                className={`w-full text-left px-3 py-2 rounded transition-all text-sm flex justify-between items-center ${
+                className={`w-full text-left px-3 py-2 rounded transition-all text-sm flex justify-between items-center border border-transparent ${
                   selectedAlId === al.ID 
-                    ? 'bg-accent text-accent-foreground font-semibold shadow-md' 
+                    ? 'border-accent text-foreground font-semibold bg-accent/5 shadow-sm' 
                     : 'hover:bg-foreground/10 text-muted'
                 }`}
               >
@@ -89,7 +90,7 @@ export function TutoriaTab() {
           <>
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-foreground">
-                Registro de Tutoría: <span className="text-accent">{df_al.find((a:any) => a.ID === selectedAlId)?.Nombre} {df_al.find((a:any) => a.ID === selectedAlId)?.Apellidos}</span>
+                Registro de Tutoría: <span>{df_al.find((a:any) => a.ID === selectedAlId)?.Nombre} {df_al.find((a:any) => a.ID === selectedAlId)?.Apellidos}</span>
               </h2>
               <Button onClick={handleAddTutoria} variant="primary" className="gap-2">
                 <Plus className="w-4 h-4" /> Añadir Registro

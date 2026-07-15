@@ -87,7 +87,7 @@ export default function InstrumentosPage() {
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header breadcrumbSuffix={activeTabCleanLabel} />
-          <main className="flex-1 p-8 content-area">
+          <main id="main-content" tabIndex={-1} className="flex-1 p-8 content-area">
             <MotionWrapper>
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <FileEdit className="w-16 h-16 text-muted-foreground opacity-50" />
@@ -455,9 +455,14 @@ export default function InstrumentosPage() {
       </div>
 
       {isRecoveryModalOpen && (
-        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+        <div 
+          className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="recovery-modal-title"
+        >
           <Card className="max-w-md w-full p-6 animate-in zoom-in-95 duration-200">
-            <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <h3 id="recovery-modal-title" className="text-xl font-bold mb-4 flex items-center gap-2">
               ⛑️ Crear Recuperación ({recoveryTri})
             </h3>
             <div className="space-y-4">

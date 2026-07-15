@@ -159,10 +159,10 @@ export default function Sidebar() {
                   Cuaderno FP
                 </h1>
               </Link>
-              <div className="flex items-center justify-between mt-1">
+              <div className="flex flex-col items-start mt-1 w-full gap-1">
                 <span className="text-sm text-muted/80 font-mono ml-0.5">{timeStr}</span>
-                <div className="border border-[var(--glass-border)] bg-background/50 px-1.5 py-0.5 rounded text-xs text-muted/80 font-mono whitespace-nowrap ml-2 shadow-sm">
-                  Actualizado: {dateCompactStr}
+                <div className="border border-[var(--glass-border)] bg-background/50 px-2 py-0.5 rounded text-sm text-muted/80 font-mono whitespace-nowrap shadow-sm ml-0.5">
+                  Versión: {dateCompactStr}
                 </div>
               </div>
           </div>

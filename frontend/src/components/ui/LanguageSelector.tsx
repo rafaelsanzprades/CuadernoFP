@@ -20,7 +20,7 @@ export function LanguageSelector() {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const currentLang = LANGUAGES.find((l) => l.code === i18n.language) || LANGUAGES[0];
+  const currentLang = LANGUAGES.find((l) => l.code === i18n.language) || LANGUAGES.find((l) => l.code === "es")!;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

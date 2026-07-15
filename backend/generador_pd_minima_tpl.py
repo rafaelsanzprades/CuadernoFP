@@ -57,54 +57,55 @@ def _build_context(data: dict) -> dict:
         )
     context["texto_competencia_general"] = texto_comp
 
-    # ── H1 3: Resultados de Aprendizaje (lista) ────────────────────────
-    for i in range(1, 11):
-        if i <= len(df_ra):
-            ra = df_ra[i-1]
-            id_str = str(ra.get('id_ra', ''))
-            prefix = "" if id_str.upper().startswith("RA") else "RA"
-            desc = resolve_ra_desc(ra, ra_desc_map)
-            context[f"ra{i}_texto"] = f"{prefix}{id_str}. {desc}"
-        else:
-            context[f"ra{i}_texto"] = ""
+    # --- H1 3: Resultados de Aprendizaje (lista) ────────────────────────
+    list_ras = []
+    for ra in df_ra:
+        id_str = str(ra.get('id_ra', ''))
+        prefix = "" if id_str.upper().startswith("RA") else "RA"
+        desc = resolve_ra_desc(ra, ra_desc_map)
+        list_ras.append(f"{prefix}{id_str}. {desc}")
+    context["list_ras"] = list_ras
 
-    # ── H1 4: Contenidos / UDs (lista) ─────────────────────────────────
-    for i in range(1, 11):
-        if i <= len(df_ud):
-            ud = df_ud[i-1]
-            id_str = str(ud.get('id_ud', ''))
-            prefix = "" if id_str.upper().startswith("UD") else "UD"
-            desc = resolve_ud_desc(ud, ud_desc_map)
-            context[f"ud{i}_texto"] = f"{prefix}{id_str}. {desc}"
-        else:
-            context[f"ud{i}_texto"] = ""
+    # --- H1 4: Contenidos / UDs (lista) ─────────────────────────────────
+    list_uds = []
+    for ud in df_ud:
+        id_str = str(ud.get('id_ud', ''))
+        prefix = "" if id_str.upper().startswith("UD") else "UD"
+        desc = resolve_ud_desc(ud, ud_desc_map)
+        list_uds.append(f"{prefix}{id_str}. {desc}")
+    context["list_uds"] = list_uds
 
-    # ── H1 5: Criterios de calificación ────────────────────────────────
-    # Intentar obtener bloques de calificación del config
-    calif = config.get("minima_calificacion", {})
-    if isinstance(calif, dict) and calif:
-        for b in range(1, 5):
-            bloque = calif.get(f"bloque{b}", {})
-            context[f"calif_bloque{b}_pct"] = bloque.get("pct", "")
-            context[f"calif_bloque{b}_titulo"] = bloque.get("titulo", "")
-            context[f"calif_bloque{b}_desc"] = bloque.get("desc", "")
-    else:
-        # Valores por defecto (ejemplo del generador original)
-        defaults = [
-            {"pct": "55%", "titulo": "Desarrollo de las prácticas en el Aula Taller.",
-             "desc": "Rúbrica específica. Autoevaluación previa hasta tres intentos para mejorar la nota."},
-            {"pct": "10%", "titulo": "Corrección del Cuaderno del Taller.",
-             "desc": "Apuntes de clase, resumen de cada Unidad didáctica, informes de las prácticas y anotaciones."},
-            {"pct": "5%", "titulo": "Preparación del examen teórico. Debate en grupo.",
-             "desc": "Ronda de preguntas verbales, nivel de participación, resolución de dudas."},
-            {"pct": "30%", "titulo": "Examen teórico escrito (con una calificación mínima de 5 para media).",
-             "desc": "Se pregunta sobre cuestiones de aplicación sobre el contenido teórico.\n+ 1 punto adicional por actitud y comportamiento positivo."},
+    # --- H1 5: Criterios de calificación ---
+    df_act = data.get("df_act", [])
+    list_instrumentos = []
+    if df_act:
+        for act in df_act:
+            if act.get("is_active", True) == False:
+                continue
+            pct = str(act.get("peso_act", "0"))
+            if not pct.endswith("%"): pct += "%"
+            titulo = act.get("Tipo", "")
+            tri = act.get("tri_act", "")
+            if tri:
+                titulo += f" ({tri})"
+            desc = act.get("desc_act", "")
+            if not titulo and not desc:
+                continue
+            list_instrumentos.append({
+                "pct": pct,
+                "titulo": titulo,
+                "desc": desc
+            })
+    
+    if not list_instrumentos:
+        # Fallback if no acts
+        list_instrumentos = [
+            {"pct": "55%", "titulo": "Desarrollo de las prácticas en el Aula Taller.", "desc": "Rúbrica específica."},
+            {"pct": "10%", "titulo": "Corrección del Cuaderno del Taller.", "desc": "Apuntes de clase, resumen de cada Unidad didáctica, informes de las prácticas y anotaciones."},
+            {"pct": "5%", "titulo": "Preparación del examen teórico. Debate en grupo.", "desc": "Ronda de preguntas verbales, nivel de participación, resolución de dudas."},
+            {"pct": "30%", "titulo": "Examen teórico escrito.", "desc": "Se pregunta sobre cuestiones de aplicación sobre el contenido teórico."},
         ]
-        for b in range(1, 5):
-            d = defaults[b-1]
-            context[f"calif_bloque{b}_pct"] = d["pct"]
-            context[f"calif_bloque{b}_titulo"] = d["titulo"]
-            context[f"calif_bloque{b}_desc"] = d["desc"]
+    context["list_instrumentos"] = list_instrumentos
 
     # ── H1 6: Recordad ─────────────────────────────────────────────────
     texto_recordatorio = config.get("minima_recordatorio", "")
@@ -130,7 +131,55 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
             f"Ejecuta 'python scripts/preparar_plantilla_pd_minima.py' para generarla."
         )
 
-    doc = DocxTemplate(TEMPLATE_PATH)
+    tpl = DocxTemplate(TEMPLATE_PATH)
     context = _build_context(data)
-    doc.render(context)
-    doc.save(out_docx)
+    tpl.render(context)
+    
+    # ── Insertar Tabla de Instrumentos ──────────────────────────────
+    doc = tpl.docx
+    from docx.shared import Cm, Pt, RGBColor
+    
+    for p in doc.paragraphs:
+        if "[[TABLA_INSTRUMENTOS]]" in p.text:
+            p.text = p.text.replace("[[TABLA_INSTRUMENTOS]]", "")
+            
+            # Crear la tabla dinámicamente
+            list_inst = context.get("list_instrumentos", [])
+            table = doc.add_table(rows=1 + len(list_inst), cols=3)
+            table.style = 'Table Grid'
+            
+            table.columns[0].width = Cm(1.5)
+            table.columns[1].width = Cm(3.5)
+            table.columns[2].width = Cm(11.0)
+            
+            hdr_cells = table.rows[0].cells
+            hdr_cells[0].text = "%"
+            hdr_cells[1].text = "Tipo"
+            hdr_cells[2].text = "Instrumento / Descripción"
+            
+            for cell in hdr_cells:
+                for hp in cell.paragraphs:
+                    for r in hp.runs:
+                        r.bold = True
+                        r.font.name = 'Arial'
+                        r.font.size = Pt(9)
+                        r.font.color.rgb = RGBColor(0, 0, 0)
+                        
+            for i, instr in enumerate(list_inst):
+                row_cells = table.rows[i + 1].cells
+                row_cells[0].text = instr.get("pct", "")
+                row_cells[1].text = instr.get("titulo", "")
+                row_cells[2].text = instr.get("desc", "")
+                
+                for cell in row_cells:
+                    for cp in cell.paragraphs:
+                        for r in cp.runs:
+                            r.font.name = 'Arial'
+                            r.font.size = Pt(9)
+                            r.font.color.rgb = RGBColor(0, 0, 0)
+                            
+            # Mover la tabla para que quede después de este párrafo
+            p._p.addnext(table._tbl)
+
+    # ── Guardar DOCX (y PDF) ─────────────────────────────────────────
+    tpl.save(out_docx)

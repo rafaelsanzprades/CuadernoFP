@@ -20,9 +20,10 @@ import toast from "react-hot-toast";
 import { TabAutores } from "@/components/features/catalogo/TabAutores";
 import { TabGrados } from "@/components/features/catalogo/TabGrados";
 import { TabComunidades } from "@/components/features/catalogo/TabComunidades";
+import { TabNormativa } from "@/components/features/catalogo/TabNormativa";
 import { useTranslation } from "react-i18next";
 
-type Tab = "grados" | "familias" | "titulo" | "cursos" | "modulos" | "autores" | "comunidades";
+type Tab = "grados" | "familias" | "titulo" | "cursos" | "modulos" | "autores" | "comunidades" | "normativa";
 
 
 
@@ -47,7 +48,7 @@ function CiclosContent() {
 
   const tabParam = searchParams.get("tab") as Tab | null;
   const [activeTab, setActiveTab] = useState<Tab>(
-    tabParam && ["comunidades", "grados", "familias", "titulo", "cursos", "modulos", "autores"].includes(tabParam) ? tabParam : "comunidades"
+    tabParam && ["comunidades", "grados", "familias", "titulo", "cursos", "modulos", "autores", "normativa"].includes(tabParam) ? tabParam : "comunidades"
   );
 
   const [globalSelection, setGlobalSelection] = useState(() => {
@@ -108,7 +109,8 @@ function CiclosContent() {
     cursos: t('tabs.modulos', {defaultValue: 'Módulos'}),
     modulos: 'RA → CE',
     autores: t('tabs.autores', {defaultValue: 'Autores'}),
-    comunidades: t('tabs.comunidades', {defaultValue: 'Comunidades'})
+    comunidades: t('tabs.comunidades', {defaultValue: 'Comunidades'}),
+    normativa: "Normativa"
   };
 
   const activeTabCleanLabel = TAB_LABELS[activeTab];
@@ -116,7 +118,7 @@ function CiclosContent() {
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar />
-      <main className="flex-1 flex flex-col relative z-10 min-w-0">
+      <main id="main-content" tabIndex={-1} className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={activeTabCleanLabel} />
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
@@ -138,6 +140,7 @@ function CiclosContent() {
                     { id: "cursos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> {t('tabs.modulos', {defaultValue: 'Módulos'})}</span> },
                     { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> RA → CE</span> },
                     { id: "autores" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-info" /> {t('tabs.autores', {defaultValue: 'Autores'})}</span> },
+                    { id: "normativa" as Tab, label: <span className="flex items-center gap-2"><ListChecks className="w-4 h-4 text-warning" /> Normativa</span> },
                   ]
                 ).map((t) => (
                   <TabsTrigger key={t.id} value={t.id}>
@@ -175,6 +178,7 @@ function CiclosContent() {
             {activeTab === "modulos" && <TabModulos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
             {activeTab === "autores" && <TabAutores globalSelection={globalSelection} />}
             {activeTab === "comunidades" && <TabComunidades />}
+            {activeTab === "normativa" && <TabNormativa />}
           </MotionWrapper>
         </div>
       </main>
@@ -395,8 +399,9 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
     <div className="space-y-6 animate-in fade-in duration-300">
       <Card className="p-5 flex flex-col md:flex-row gap-4">
         <div className="flex flex-col gap-1.5 flex-1">
-          <label className="text-xs font-semibold text-muted tracking-wider">Familia Profesional</label>
+          <label htmlFor="select-familia-0" className="text-xs font-semibold text-muted tracking-wider">Familia Profesional</label>
           <select
+            id="select-familia-0"
             value={selectedFamilia}
             onChange={(e) => {
               updateGlobalSelection({ familia: e.target.value, tituloCodigo: "" });
@@ -411,8 +416,9 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
         </div>
 
         <div className="flex flex-col gap-1.5 flex-1">
-          <label className="text-xs font-semibold text-muted tracking-wider">Título</label>
+          <label htmlFor="select-titulo-0" className="text-xs font-semibold text-muted tracking-wider">Título</label>
           <select
+            id="select-titulo-0"
             value={selectedTituloCodigo}
             disabled={!selectedFamilia}
             onChange={(e) => updateGlobalSelection({ tituloCodigo: e.target.value })}
@@ -726,8 +732,9 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
     <div className="space-y-6 animate-in fade-in duration-300">
       <Card className="p-5 flex flex-col md:flex-row gap-4">
         <div className="flex flex-col gap-1.5 flex-1">
-          <label className="text-xs font-semibold text-muted tracking-wider">Familia Profesional</label>
+          <label htmlFor="select-familia-1" className="text-xs font-semibold text-muted tracking-wider">Familia Profesional</label>
           <select
+            id="select-familia-1"
             value={selectedFamilia}
             onChange={(e) => { updateGlobalSelection({ familia: e.target.value, tituloCodigo: "", moduloCodigo: "" }); }}
             className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer"
@@ -740,8 +747,9 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
         </div>
 
         <div className="flex flex-col gap-1.5 flex-1">
-          <label className="text-xs font-semibold text-muted tracking-wider">Título</label>
+          <label htmlFor="select-titulo-1" className="text-xs font-semibold text-muted tracking-wider">Título</label>
           <select
+            id="select-titulo-1"
             value={selectedTitulo}
             disabled={!selectedFamilia}
             onChange={(e) => {
@@ -884,8 +892,9 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
     <div className="space-y-6 animate-in fade-in duration-300">
       <Card className="p-5 flex flex-col md:flex-row gap-4">
         <div className="flex flex-col gap-1.5 flex-1">
-          <label className="text-xs font-semibold text-muted tracking-wider">Familia Profesional</label>
+          <label htmlFor="select-familia-2" className="text-xs font-semibold text-muted tracking-wider">Familia Profesional</label>
           <select
+            id="select-familia-2"
             value={selectedFamilia}
             onChange={(e) => { updateGlobalSelection({ familia: e.target.value, tituloCodigo: "", moduloCodigo: "" }); }}
             className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer"
@@ -898,8 +907,9 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
         </div>
 
         <div className="flex flex-col gap-1.5 flex-1">
-          <label className="text-xs font-semibold text-muted tracking-wider">Título</label>
+          <label htmlFor="select-titulo-2" className="text-xs font-semibold text-muted tracking-wider">Título</label>
           <select
+            id="select-titulo-2"
             value={selectedTitulo}
             disabled={!selectedFamilia}
             onChange={(e) => {
@@ -918,8 +928,9 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
         </div>
 
         <div className="flex flex-col gap-1.5 flex-1">
-          <label className="text-xs font-semibold text-muted tracking-wider">Módulo</label>
+          <label htmlFor="select-modulo-2" className="text-xs font-semibold text-muted tracking-wider">Módulo</label>
           <select
+            id="select-modulo-2"
             value={selectedModuloCodigo}
             disabled={!selectedTitulo || !titulo}
             onChange={(e) => updateGlobalSelection({ moduloCodigo: e.target.value })}

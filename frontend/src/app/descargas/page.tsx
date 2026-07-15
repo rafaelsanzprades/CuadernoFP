@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { AlertTriangle, BarChart, BookOpen, Calculator, Calendar, CalendarDays, ChevronRight, Construction, CornerLeftUp, Download, DownloadCloud, File, FileEdit, FileSpreadsheet, FileText, Folder, FolderOpen, GraduationCap, MapPin, Play, Scale, Search, Settings, UploadCloud, User, Users, X , Info } from "lucide-react";
+import { AlertTriangle, BarChart, BookOpen, Calculator, Calendar, CalendarDays, ChevronRight, ChevronDown, Construction, CornerLeftUp, Download, DownloadCloud, File, FileEdit, FileSpreadsheet, FileText, Folder, FolderOpen, GraduationCap, MapPin, Play, Scale, Search, Settings, UploadCloud, User, Users, X , Info } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -328,7 +328,7 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
     <div className="flex min-h-screen bg-background">
       <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
-      <main className="flex-1 flex flex-col relative z-10 min-w-0">
+      <main id="main-content" tabIndex={-1} className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={activeTabCleanLabel} />
 
         <div className="flex-1 overflow-y-auto scrollbar-hide relative">
@@ -448,61 +448,66 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
                   <>
                     {activeTab === 'programacion' && (
                       <div className="space-y-4 animate-in fade-in duration-500">
-                        <Card className="p-6 border-t-4 border-t-purple-500">
-                          <h2 className="text-2xl font-bold mb-1"><span className="inline-flex"><FileText className="w-4 h-4" /></span> Documentos Oficiales</h2>
-                          <p className="text-sm text-muted mb-6">Documentos base de programación del módulo</p>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-slate-400">
-                              <div>
-                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Resumen de la Programación didáctica para el alumnado</h3>
-                                <p className="text-sm text-muted mb-6">Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.</p>
-                              </div>
-                              <div className="flex gap-2 mt-auto">
-                                <Button onClick={() => handleDownloadPdf('programacion_minima_tpl', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_minima_tpl_docx'} className="flex-1 bg-slate-600 hover:bg-slate-700 text-white">
-                                  {downloadingStr === 'programacion_minima_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD Resumen.docx'}
-                                </Button>
-                              </div>
-                            </div>
+                        {["Andalucía","Aragón","Asturias","Baleares","Canarias","Cantabria","Castilla-La Mancha","Castilla y León","Cataluña","Comunidad Valenciana","Extremadura","Galicia","Madrid","Murcia","Navarra","País Vasco","La Rioja","Ceuta","Melilla"].map((comunidad) => {
+                          const isAragon = comunidad === "Aragón";
+                          return (
+                            <details key={comunidad} open={isAragon} className="group border border-[var(--glass-border)] rounded-xl bg-background/50 mb-4 shadow-sm overflow-hidden">
+                              <summary className="p-4 font-bold cursor-pointer text-xl flex items-center justify-between hover:bg-foreground/5 transition-colors list-none border-b border-transparent group-open:border-[var(--glass-border)] group-open:bg-foreground/5">
+                                <span className="flex items-center gap-2"><MapPin className={`w-5 h-5 ${isAragon ? 'text-purple-500' : 'text-muted-foreground'}`} /> {comunidad}</span>
+                                <ChevronDown className="w-5 h-5 transition-transform group-open:rotate-180 text-muted" />
+                              </summary>
+                              {isAragon ? (
+                                <div className="p-6">
+                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-slate-400">
+                                      <div>
+                                        <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Resumen de la Programación didáctica para el alumnado</h3>
+                                        <p className="text-sm text-muted mb-6">Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.</p>
+                                      </div>
+                                      <div className="flex gap-2 mt-auto">
+                                        <Button onClick={() => handleDownloadPdf('programacion_minima_tpl', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_minima_tpl_docx'} className="flex-1 bg-slate-600 hover:bg-slate-700 text-white">
+                                          {downloadingStr === 'programacion_minima_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD Resumen.docx'}
+                                        </Button>
+                                      </div>
+                                    </div>
 
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-blue-400">
-                              <div>
-                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica Aragón (BOA nº: 181 de 18 de septiembre de 2025)</h3>
-                                <p className="text-sm text-muted mb-6">Versión BOA con los puntos de la Ley muy específica y concreta (no detalla secuenciación de aula ni extensa teoría).</p>
-                              </div>
-                              <div className="flex gap-2 mt-auto">
-                                <Button onClick={() => handleDownloadPdf('programacion_suficiente_tpl', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_suficiente_tpl_docx'} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
-                                  {downloadingStr === 'programacion_suficiente_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD BOA Aragón.docx'}
-                                </Button>
-                              </div>
-                            </div>
+                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-blue-400">
+                                      <div>
+                                        <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica Aragón (BOA nº: 181 de 18 de septiembre de 2025)</h3>
+                                        <p className="text-sm text-muted mb-6">Versión BOA con los puntos de la Ley muy específica y concreta (no detalla secuenciación de aula ni extensa teoría).</p>
+                                      </div>
+                                      <div className="flex gap-2 mt-auto">
+                                        <Button onClick={() => handleDownloadPdf('programacion_suficiente_tpl', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_suficiente_tpl_docx'} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
+                                          {downloadingStr === 'programacion_suficiente_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD BOA Aragón.docx'}
+                                        </Button>
+                                      </div>
+                                    </div>
 
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-info">
-                              <div>
-                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica ARAGÓN (Modelo JEG)</h3>
-
-                                <p className="text-sm text-muted mb-6">Se cumplimenta el modelo de <strong>Autor</strong>: Javier Edo Gual, <strong>Coordinación</strong>: Raúl Melero Rubio y Lucía Quílez Salvador; y <strong>Revisión técnica</strong>: Óscar Sánchez Estella.</p>
-                              </div>
-                              <div className="flex flex-col gap-2 mt-auto">
-                                <Button variant="secondary" onClick={() => handleDownloadPdf('plantilla_jeg', undefined, undefined, 'docx')} disabled={downloadingStr === 'plantilla_jeg_docx'} className="w-full">
-                                  {downloadingStr === 'plantilla_jeg_docx' ? '⏳ Descargando...' : 'Modelo PD JEG original'}
-                                </Button>
-                                <Button onClick={() => handleDownloadPdf('programacion_detallada', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_detallada_docx'} className="w-full bg-info hover:bg-info/90 text-white">
-                                  {downloadingStr === 'programacion_detallada_docx' ? '⏳ Generando DOCX...' : 'Descargar PD JEG cumplimentada.docx'}
-                                </Button>
-                              </div>
-                            </div>
-
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                              <div>
-                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><Calculator className="w-[1.2em] h-[1.2em] mr-1" /></span> Matrices RA → UD</h3>
-                                <p className="text-sm text-muted mb-6">Relación y ponderación entre RA y UD del módulo.</p>
-                              </div>
-                              <Button onClick={() => handleDownloadPdf('matrices')} disabled={downloadingStr === 'matrices'} className="w-full mt-auto">
-                                {downloadingStr === 'matrices' ? '⏳ Generando PDF...' : 'PDF Matrices'}
-                              </Button>
-                            </div>
-                          </div>
-                        </Card>
+                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-info">
+                                      <div>
+                                        <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica ARAGÓN (Modelo JEG)</h3>
+                                        <p className="text-sm text-muted mb-6">Se cumplimenta el modelo de <strong>Autor</strong>: Javier Edo Gual, <strong>Coordinación</strong>: Raúl Melero Rubio y Lucía Quílez Salvador; y <strong>Revisión técnica</strong>: Óscar Sánchez Estella.</p>
+                                      </div>
+                                      <div className="flex flex-col gap-2 mt-auto">
+                                        <Button variant="secondary" onClick={() => handleDownloadPdf('plantilla_jeg', undefined, undefined, 'docx')} disabled={downloadingStr === 'plantilla_jeg_docx'} className="w-full">
+                                          {downloadingStr === 'plantilla_jeg_docx' ? '⏳ Descargando...' : 'Modelo PD JEG original'}
+                                        </Button>
+                                        <Button onClick={() => handleDownloadPdf('programacion_detallada', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_detallada_docx'} className="w-full bg-info hover:bg-info/90 text-white">
+                                          {downloadingStr === 'programacion_detallada_docx' ? '⏳ Generando DOCX...' : 'Descargar PD JEG cumplimentada.docx'}
+                                        </Button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ) : (
+                                <div className="p-12 text-center text-muted-foreground">
+                                  <Construction className="w-12 h-12 mx-auto mb-4 opacity-20" />
+                                  <p>Programaciones específicas para {comunidad} próximamente.</p>
+                                </div>
+                              )}
+                            </details>
+                          );
+                        })}
 
                         <Card className="p-6 border-t-4 border-t-blue-500">
                           <h2 className="text-2xl font-bold mb-1"><span className="inline-flex"><CalendarDays className="w-4 h-4" /></span> Secuenciación</h2>
@@ -588,8 +593,8 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
                                 </div>
                               </div>
                               <div className="text-left mt-auto">
-                                <label className="block text-xs text-muted mb-1 font-bold">Fecha de corte / acta:</label>
-                                <input type="date" value={fecha1T} onChange={(e) => setFecha1T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-sm focus:border-info focus:outline-none" />
+                                <label htmlFor="fecha-corte-1t" className="block text-xs text-muted mb-1 font-bold">Fecha de corte / acta:</label>
+                                <input id="fecha-corte-1t" type="date" value={fecha1T} onChange={(e) => setFecha1T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-sm focus:border-info focus:outline-none" />
                               </div>
                               <div className="flex flex-col gap-2 mt-2">
                                 <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_1t', undefined, fecha1T)} disabled={downloadingStr === 'grupal_1t'} className="w-full text-xs">
@@ -610,8 +615,8 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
                                 </div>
                               </div>
                               <div className="text-left mt-auto">
-                                <label className="block text-xs text-muted mb-1 font-bold">Fecha de corte / acta:</label>
-                                <input type="date" value={fecha2T} onChange={(e) => setFecha2T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-sm focus:border-info focus:outline-none" />
+                                <label htmlFor="fecha-corte-2t" className="block text-xs text-muted mb-1 font-bold">Fecha de corte / acta:</label>
+                                <input id="fecha-corte-2t" type="date" value={fecha2T} onChange={(e) => setFecha2T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-sm focus:border-info focus:outline-none" />
                               </div>
                               <div className="flex flex-col gap-2 mt-2">
                                 <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_2t', undefined, fecha2T)} disabled={downloadingStr === 'grupal_2t'} className="w-full text-xs">
@@ -632,8 +637,8 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
                                 </div>
                               </div>
                               <div className="text-left mt-auto">
-                                <label className="block text-xs text-muted mb-1 font-bold">Fecha de corte / acta:</label>
-                                <input type="date" value={fecha3T} onChange={(e) => setFecha3T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-sm focus:border-info focus:outline-none" />
+                                <label htmlFor="fecha-corte-3t" className="block text-xs text-muted mb-1 font-bold">Fecha de corte / acta:</label>
+                                <input id="fecha-corte-3t" type="date" value={fecha3T} onChange={(e) => setFecha3T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-sm focus:border-info focus:outline-none" />
                               </div>
                               <div className="flex flex-col gap-2 mt-2">
                                 <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_3t', undefined, fecha3T)} disabled={downloadingStr === 'grupal_3t'} className="w-full text-xs">
@@ -715,44 +720,44 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
                         </Card>
                       </div>
                     )}
-                    
-                    {activeTab === 'guia_pd' && (
-                      <div className="space-y-4 animate-in fade-in duration-500">
-                        <Card className="p-8 border-t-4 border-t-indigo-500">
-                          <div className="prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-th:bg-foreground/5 prose-table:border-collapse prose-table:w-full">
-                            {guiaPdContent ? (
-                              <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-                                {guiaPdContent}
-                              </ReactMarkdown>
-                            ) : (
-                              <div className="flex justify-center p-8">
-                                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-info"></div>
-                              </div>
-                            )}
-                          </div>
-                        </Card>
-                      </div>
-                    )}
-
-                    {activeTab === 'comparativa_pd' && (
-                      <div className="space-y-4 animate-in fade-in duration-500">
-                        <Card className="p-8 border-t-4 border-t-amber-500">
-                          <div className="prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-th:bg-foreground/5 prose-table:border-collapse prose-table:w-full">
-                            {comparativaPdContent ? (
-                              <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-                                {comparativaPdContent}
-                              </ReactMarkdown>
-                            ) : (
-                              <div className="flex justify-center p-8">
-                                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-info"></div>
-                              </div>
-                            )}
-                          </div>
-                        </Card>
-                      </div>
-                    )}
                   </>
                 )}
+              </div>
+            )}
+            
+            {activeTab === 'guia_pd' && (
+              <div className="space-y-4 animate-in fade-in duration-500">
+                <Card className="p-8 border-t-4 border-t-indigo-500">
+                  <div className="prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-th:bg-foreground/5 prose-table:border-collapse prose-table:w-full">
+                    {guiaPdContent ? (
+                      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+                        {guiaPdContent}
+                      </ReactMarkdown>
+                    ) : (
+                      <div className="flex justify-center p-8">
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-info"></div>
+                      </div>
+                    )}
+                  </div>
+                </Card>
+              </div>
+            )}
+
+            {activeTab === 'comparativa_pd' && (
+              <div className="space-y-4 animate-in fade-in duration-500">
+                <Card className="p-8 border-t-4 border-t-amber-500">
+                  <div className="prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-th:bg-foreground/5 prose-table:border-collapse prose-table:w-full">
+                    {comparativaPdContent ? (
+                      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+                        {comparativaPdContent}
+                      </ReactMarkdown>
+                    ) : (
+                      <div className="flex justify-center p-8">
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-info"></div>
+                      </div>
+                    )}
+                  </div>
+                </Card>
               </div>
             )}
 

@@ -859,9 +859,9 @@ export default function InicioPage() {
                   <div className="absolute top-0 right-0 p-8 opacity-5">
                     <Mail className="w-32 h-32" />
                   </div>
-                  <h2 className="text-3xl font-extrabold mb-4 text-foreground">¡Hola! Soy Rafael Sanz Prades</h2>
+                  <h2 className="text-3xl font-extrabold mb-4 text-foreground">¡Hola!</h2>
                   <p className="text-muted text-base mb-6 leading-relaxed">
-                    Espero que <strong>CuadernoFP</strong> te esté resultando de gran utilidad para simplificar tu trabajo docente. 
+                    Espero que <strong>Cuaderno FP</strong> te esté resultando de gran utilidad para simplificar tu trabajo docente. 
                     He desarrollado esta herramienta con mucho cariño para aportar valor a nuestra comunidad educativa de Formación Profesional.
                   </p>
                   
@@ -896,7 +896,7 @@ export default function InicioPage() {
                         const mensaje = (document.getElementById('contacto-mensaje') as HTMLTextAreaElement)?.value || '';
                         window.location.href = `mailto:rafaelsanzprades@gmail.com?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(mensaje)}`;
                       }}
-                      className="flex items-center justify-center gap-2 px-6 py-2.5 bg-accent text-white rounded-lg font-semibold hover:bg-accent/90 transition-colors shadow-lg hover:shadow-accent/20"
+                      className="flex items-center justify-center gap-2 px-6 py-2.5 bg-[#0d7377] text-white rounded-lg font-semibold hover:bg-[#0a5c5f] transition-colors shadow-lg hover:shadow-[#0d7377]/20"
                     >
                       <Send className="w-4 h-4" /> Enviar mensaje
                     </button>

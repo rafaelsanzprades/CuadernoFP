@@ -89,7 +89,7 @@ export default function ProgresoPage() {
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
-          <main className="flex-1 p-8 content-area">
+          <main id="main-content" tabIndex={-1} className="flex-1 p-8 content-area">
             <MotionWrapper>
 
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">

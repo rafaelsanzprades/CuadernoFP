@@ -1,0 +1,1 @@
+﻿from docxtpl import DocxTemplate; tpl = DocxTemplate(" templates/modelo_pd_fp-.docx\); tpl.render({\list_instrumentos\: [{\pct\: \40%\, \titulo\: \Teoria\, \desc\: \Examen\}]}); print(\Render SUCCESS\)

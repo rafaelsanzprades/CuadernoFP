@@ -1,0 +1,58 @@
+--- ERROR IN GENERATE_PDF! type=programacion_minima_tpl ---
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP-CuadernoFP\backend\routers\pdf.py", line 200, in generate_pdf
+    generador_pd.generate(data_pd, out_docx, out_pdf)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP-CuadernoFP\backend\generador_pd_minima_tpl.py", line 136, in generate
+    doc.render(context)
+    ~~~~~~~~~~^^^^^^^^^
+  File "c:\GD-rsp\APP-CuadernoFP\backend\.venv313\Lib\site-packages\docxtpl\template.py", line 489, in render
+    xml_src = self.build_xml(context, jinja_env)
+  File "c:\GD-rsp\APP-CuadernoFP\backend\.venv313\Lib\site-packages\docxtpl\template.py", line 436, in build_xml
+    xml = self.render_xml_part(xml, self.docx._part, context, jinja_env)
+  File "c:\GD-rsp\APP-CuadernoFP\backend\.venv313\Lib\site-packages\docxtpl\template.py", line 322, in render_xml_part
+    raise exc
+  File "c:\GD-rsp\APP-CuadernoFP\backend\.venv313\Lib\site-packages\docxtpl\template.py", line 312, in render_xml_part
+    template = Template(src_xml)
+  File "c:\GD-rsp\APP-CuadernoFP\backend\.venv313\Lib\site-packages\jinja2\environment.py", line 1214, in __new__
+    return env.from_string(source, template_class=cls)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP-CuadernoFP\backend\.venv313\Lib\site-packages\jinja2\environment.py", line 1111, in from_string
+    return cls.from_code(self, self.compile(source), gs, None)
+                               ~~~~~~~~~~~~^^^^^^^^
+  File "c:\GD-rsp\APP-CuadernoFP\backend\.venv313\Lib\site-packages\jinja2\environment.py", line 771, in compile
+    self.handle_exception(source=source_hint)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP-CuadernoFP\backend\.venv313\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "<unknown>", line 16, in template
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endfor'.
+--- ERROR IN GENERATE_PDF! type=programacion_minima_tpl ---
+Traceback (most recent call last):
+  File "c:\GD-rsp\APP-CuadernoFP\backend\routers\pdf.py", line 200, in generate_pdf
+    generador_pd.generate(data_pd, out_docx, out_pdf)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP-CuadernoFP\backend\generador_pd_minima_tpl.py", line 136, in generate
+    doc.render(context)
+    ~~~~~~~~~~^^^^^^^^^
+  File "c:\GD-rsp\APP-CuadernoFP\backend\.venv313\Lib\site-packages\docxtpl\template.py", line 489, in render
+    xml_src = self.build_xml(context, jinja_env)
+  File "c:\GD-rsp\APP-CuadernoFP\backend\.venv313\Lib\site-packages\docxtpl\template.py", line 436, in build_xml
+    xml = self.render_xml_part(xml, self.docx._part, context, jinja_env)
+  File "c:\GD-rsp\APP-CuadernoFP\backend\.venv313\Lib\site-packages\docxtpl\template.py", line 322, in render_xml_part
+    raise exc
+  File "c:\GD-rsp\APP-CuadernoFP\backend\.venv313\Lib\site-packages\docxtpl\template.py", line 312, in render_xml_part
+    template = Template(src_xml)
+  File "c:\GD-rsp\APP-CuadernoFP\backend\.venv313\Lib\site-packages\jinja2\environment.py", line 1214, in __new__
+    return env.from_string(source, template_class=cls)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP-CuadernoFP\backend\.venv313\Lib\site-packages\jinja2\environment.py", line 1111, in from_string
+    return cls.from_code(self, self.compile(source), gs, None)
+                               ~~~~~~~~~~~~^^^^^^^^
+  File "c:\GD-rsp\APP-CuadernoFP\backend\.venv313\Lib\site-packages\jinja2\environment.py", line 771, in compile
+    self.handle_exception(source=source_hint)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "c:\GD-rsp\APP-CuadernoFP\backend\.venv313\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "<unknown>", line 16, in template
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endfor'.

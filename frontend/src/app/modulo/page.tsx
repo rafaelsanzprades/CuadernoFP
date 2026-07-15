@@ -69,7 +69,7 @@ export default function ModuloConfigPage() {
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header breadcrumbSuffix={activeTabCleanLabel} />
-          <main className="flex-1 p-8 content-area">
+          <main id="main-content" tabIndex={-1} className="flex-1 p-8 content-area">
             <MotionWrapper>
               <div className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <Settings className="w-16 h-16 text-muted-foreground opacity-50" />
@@ -94,7 +94,7 @@ export default function ModuloConfigPage() {
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header breadcrumbSuffix={activeTabCleanLabel} />
-          <main className="flex-1 p-8 content-area">
+          <main id="main-content" tabIndex={-1} className="flex-1 p-8 content-area">
             <div className="flex flex-col items-center justify-center h-full">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mb-4"></div>
               <p>Cargando datos del módulo...</p>
@@ -111,7 +111,7 @@ export default function ModuloConfigPage() {
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={activeTabCleanLabel} />
-        <main className="flex-1 p-8 content-area">
+        <main id="main-content" tabIndex={-1} className="flex-1 p-8 content-area">
           <MotionWrapper>
             <div className="mb-8 flex items-center justify-between">
               <div>

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
@@ -8,6 +8,7 @@ interface DatePickerProps {
   label?: string;
   className?: string;
   placeholder?: string;
+  id?: string;
 }
 
 const MONTHS = [
@@ -16,7 +17,7 @@ const MONTHS = [
 ];
 const DAYS_HEADER = ["L","M","X","J","V","S","D"];
 
-export default function DatePicker({ value, onChange, label, className, placeholder = "-" }: DatePickerProps) {
+export default function DatePicker({ value, onChange, label, className, placeholder = "-", id }: DatePickerProps) {
   const today = new Date();
   const [open, setOpen] = useState(false);
   const [viewYear, setViewYear] = useState(today.getFullYear());
@@ -89,9 +90,10 @@ export default function DatePicker({ value, onChange, label, className, placehol
   return (
     <div className={`relative ${className || ""}`} ref={ref}>
       {label && (
-        <label className="block text-sm font-semibold text-muted mb-1">{label}</label>
+        <label htmlFor={id} className="block text-sm font-semibold text-muted mb-1">{label}</label>
       )}
       <button
+        id={id}
         type="button"
         onClick={() => setOpen(o => !o)}
         className={`w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground text-sm flex items-center hover:border-[#14a085] focus:outline-none focus:border-[#14a085] transition-colors group ${className?.includes('text-center') ? 'justify-center gap-2' : 'justify-between text-left'}`}

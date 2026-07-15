@@ -688,9 +688,14 @@ export default function ArchivosTrabajoPage() {
 
       {/* VALIDATION MODAL */}
       {validationModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="validation-modal-title"
+        >
           <Card className="w-full max-w-xl p-6 shadow-2xl border-[var(--glass-border)]">
-            <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <h2 id="validation-modal-title" className="text-xl font-bold mb-4 flex items-center gap-2">
               <ShieldAlert className="w-5 h-5 text-warning" />
               Validación de Enlaces del Workspace
             </h2>
