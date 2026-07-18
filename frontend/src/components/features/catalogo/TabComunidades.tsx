@@ -21,6 +21,7 @@ interface CCAA {
   siglas: string;
   bo: string;
   boNombre: string;
+  portalNombre?: string;
   webCurriculo: string;
   nota?: string;
   color: string;
