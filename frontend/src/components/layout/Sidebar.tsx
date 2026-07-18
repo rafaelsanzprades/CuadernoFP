@@ -7,6 +7,7 @@ import { navGroups } from '@/config/navigation';
 import { initialGroups } from '@/store/initialData';
 import { useEffect, useRef, useState } from 'react';
 import React from 'react';
+import { useMounted } from '@/hooks/useMounted';
 import { Tooltip } from '@/components/ui/Tooltip';
 import { InstallPwaButton } from '@/components/features/settings/InstallPwaButton';
 import toast from 'react-hot-toast';
@@ -14,6 +15,7 @@ import { fileManager } from '@/services/fileManager';
 import { useTranslation } from "react-i18next";
 
 export default function Sidebar() {
+  const isMounted = useMounted();
   const pathname = usePathname();
   const router = useRouter();
   const { t } = useTranslation();
@@ -122,7 +124,7 @@ export default function Sidebar() {
   };
 
   let moduleTitleSuffix = activeModuleId ? activeModuleId.split('-')[0] : 'CÓDIGO';
-  if (activeModuleId) {
+  if (isMounted && activeModuleId) {
     const code = activeModuleId.split('-')[0];
     for (const g of initialGroups) {
       const m = g.modules.find(mod => mod.code === code);
@@ -134,7 +136,7 @@ export default function Sidebar() {
   }
 
   const cursoTitleSuffix = (() => {
-    if (!activeCursoId) return 'AÑO';
+    if (!isMounted || !activeCursoId) return 'AÑO';
     const idUpper = activeCursoId.toUpperCase();
     const parts = activeCursoId.split('-');
     let extractedYear = parts[parts.length - 1];
