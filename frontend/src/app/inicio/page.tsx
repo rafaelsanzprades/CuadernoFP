@@ -1,5 +1,5 @@
 "use client";
-import { Activity, AlertTriangle, ArrowRight, BarChart2, BookOpen, Briefcase, Building2, CalendarDays, Check, CheckCircle, ClipboardList, FileText, GraduationCap, HeartHandshake, Layers, Users, Wrench, XCircle, ChevronDown, Mail, Send, ListChecks, Info, Shield, Lock } from "lucide-react";
+import { Activity, AlertTriangle, ArrowRight, BarChart2, BookOpen, Briefcase, Building2, CalendarDays, Check, CheckCircle, ClipboardList, FileText, GraduationCap, HeartHandshake, Layers, Users, Wrench, XCircle, ChevronDown, Mail, Send, ListChecks, Info, Shield, Lock, Lightbulb } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -183,7 +183,11 @@ export default function InicioPage() {
   const { t } = useTranslation();
   const [aiModalOpen, setAiModalOpen] = useState(false);
   const [guiaContent, setGuiaContent] = useState<string>("");
-  const [isLoadingGuia, setIsLoadingGuia] = useState(false);useEffect(() => {
+  const [isLoadingGuia, setIsLoadingGuia] = useState(false);
+  const [ideasContent, setIdeasContent] = useState<string>("");
+  const [isLoadingIdeas, setIsLoadingIdeas] = useState(false);
+
+  useEffect(() => {
     if (activeTab === "guia" && !guiaContent && !isLoadingGuia) {
       setIsLoadingGuia(true);
       fetch('/Guia.md')
@@ -199,6 +203,23 @@ export default function InicioPage() {
         });
     }
   }, [activeTab, guiaContent, isLoadingGuia]);
+
+  useEffect(() => {
+    if (activeTab === "ideas" && !ideasContent && !isLoadingIdeas) {
+      setIsLoadingIdeas(true);
+      fetch('/Ideas.md')
+        .then(res => res.text())
+        .then(text => {
+          setIdeasContent(text);
+          setIsLoadingIdeas(false);
+        })
+        .catch(err => {
+          console.error(err);
+          setIdeasContent("Error cargando las ideas.");
+          setIsLoadingIdeas(false);
+        });
+    }
+  }, [activeTab, ideasContent, isLoadingIdeas]);
 
   // ── Comprobaciones Programación didáctica ────────────────────────────
   const m = moduleData;
@@ -495,6 +516,7 @@ export default function InicioPage() {
     { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.guia')}</>, cleanLabel: t('tabs.guia') },
     { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.faq')}</>, cleanLabel: t('tabs.faq') },
     { id: "contacto", label: <><span className="inline-flex"><Mail className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.contacto')}</>, cleanLabel: t('tabs.contacto') },
+    { id: "ideas", label: <><span className="inline-flex"><Lightbulb className="w-[1.2em] h-[1.2em] mr-1" /></span> Ideas</>, cleanLabel: "Ideas" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -564,6 +586,10 @@ export default function InicioPage() {
           'contacto': {
                     'title': 'Contacto',
                     'desc': 'Ponte en contacto para sugerencias o soporte.'
+          },
+          'ideas': {
+                    'title': 'Ideas',
+                    'desc': 'Planteamiento de ideas y evolución.'
           }
 };
                 const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
@@ -901,6 +927,40 @@ export default function InicioPage() {
                       <Send className="w-4 h-4" /> Enviar mensaje
                     </button>
                   </div>
+                </Card>
+              </div>
+            )}
+
+            {/* ── CONTENIDO: IDEAS ──────────────────────────────────────── */}
+            {activeTab === "ideas" && (
+              <div className="space-y-3 animate-in fade-in duration-500 w-full">
+                <Card glow className="p-8">
+                  {isLoadingIdeas && !ideasContent ? (
+                    <div className="flex justify-center p-8 text-muted">Cargando ideas...</div>
+                  ) : (
+                    <div className="markdown-body">
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        rehypePlugins={[rehypeRaw]}
+                        components={{
+                          h1: ({node, ...props}) => <h1 className="text-2xl font-extrabold text-foreground mb-6 pb-2 border-b border-white/10" {...props} />,
+                          h2: ({node, ...props}) => <h2 className="text-xl font-bold text-accent mt-8 mb-4 flex items-center gap-2" {...props} />,
+                          h3: ({node, ...props}) => <h3 className="text-lg font-bold text-foreground mt-6 mb-3" {...props} />,
+                          p: ({node, ...props}) => <p className="text-muted leading-relaxed mb-4" {...props} />,
+                          ul: ({node, className, ...props}) => <ul className={`list-none space-y-3 mb-6 ml-4 ${className || ''}`} {...props} />,
+                          ol: ({node, className, ...props}: any) => <ol className={`list-decimal space-y-3 mb-6 ml-6 ${className || ''}`} {...props} />,
+                          li: ({node, ...props}) => <li className="text-sm text-muted leading-relaxed" {...props} />,
+                          strong: ({node, ...props}) => <strong className="font-bold text-foreground" {...props} />,
+                          a: ({node, ...props}) => <a className="text-accent hover:underline font-semibold" target="_blank" rel="noopener noreferrer" {...props} />,
+                          code: ({node, ...props}: any) => <code className="bg-foreground/10 text-foreground px-1.5 py-0.5 rounded text-sm font-mono" {...props} />,
+                          pre: ({node, ...props}: any) => <pre className="block bg-foreground/5 p-4 rounded-xl text-sm font-mono overflow-x-auto mb-4 border border-white/5 text-muted" {...props} />,
+                          hr: ({node, ...props}) => <hr className="border-white/10 my-8" {...props} />,
+                        }}
+                      >
+                        {ideasContent}
+                      </ReactMarkdown>
+                    </div>
+                  )}
                 </Card>
               </div>
             )}
