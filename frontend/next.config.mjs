@@ -1,4 +1,5 @@
 import withPWAInit from "@ducanh2912/next-pwa";
+import { execSync } from "child_process";
 
 const withPWA = withPWAInit({
   dest: "public",
@@ -6,8 +7,18 @@ const withPWA = withPWAInit({
   register: true,
 });
 
+let commitDate = "";
+try {
+  commitDate = execSync('git log -1 --format=%cd --date=format:"%Y%m%d"').toString().trim();
+} catch (e) {
+  commitDate = "unknown";
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  env: {
+    NEXT_PUBLIC_APP_VERSION: commitDate,
+  },
   output: "standalone",
   turbopack: {},
   async rewrites() {

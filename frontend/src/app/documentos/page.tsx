@@ -1,5 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
+import { NormativaAccordion } from "@/components/features/documentos/NormativaAccordion";
 import { AlertTriangle, BarChart, BookOpen, Calculator, Calendar, CalendarDays, ChevronRight, Construction, CornerLeftUp, Download, DownloadCloud, File, FileEdit, FileSpreadsheet, FileText, Folder, FolderOpen, GraduationCap, MapPin, Play, Scale, Search, Settings, UploadCloud, User, Users, X, Info, ExternalLink } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -311,6 +312,13 @@ export default function DocumentosPage() {
                     <div className="text-danger mb-2"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> Error</div>
                     <p className="text-foreground/80">{error}</p>
                   </div>
+                ) : activeTab === 'normativa' && currentPath === 'normativa' ? (
+                  <NormativaAccordion 
+                    communities={filteredItems} 
+                    onDownloadDoc={handleDownloadDoc} 
+                    formatSize={formatSize} 
+                    getFileIcon={getFileIcon} 
+                  />
                 ) : items.length === 0 ? (
                   <div className="p-16 text-center text-muted">
                     <div className="text-4xl mb-4"><span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></div>

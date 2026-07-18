@@ -78,9 +78,13 @@ export default function Sidebar() {
       setDateStr(`${day} de ${monthStr} de ${year}`);
       setTimeStr(`${hours}:${minutes} h`);
       
-      const mm = String(isDemo ? 5 : realNow.getMonth() + 1).padStart(2, '0');
-      const dd = String(isDemo ? 2 : realNow.getDate()).padStart(2, '0');
-      setDateCompactStr(`${year}${mm}${dd}`);
+      let versionValue = process.env.NEXT_PUBLIC_APP_VERSION;
+      if (!versionValue || versionValue === 'unknown') {
+        const mm = String(isDemo ? 5 : realNow.getMonth() + 1).padStart(2, '0');
+        const dd = String(isDemo ? 2 : realNow.getDate()).padStart(2, '0');
+        versionValue = `${year}${mm}${dd}`;
+      }
+      setDateCompactStr(versionValue);
 
       let groupStr = "";
       if (state.activeCursoId) {

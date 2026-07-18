@@ -33,7 +33,8 @@ const COMUNIDADES: CCAA[] = [
     siglas: "AN",
     bo: "BOJA",
     boNombre: "Boletín Oficial de la Junta de Andalucía",
-    webCurriculo: "https://todofp.es/que-estudiar/familias-profesionales/servicios-socioculturales-comunidad/integracion-social/curriculos-ccaa.html",
+    portalNombre: "Portal de FP Andaluza",
+    webCurriculo: "https://www.juntadeandalucia.es/educacion/portals/web/formacion-profesional-andaluza",
     color: "#10b981",
   },
   {
@@ -42,7 +43,8 @@ const COMUNIDADES: CCAA[] = [
     siglas: "AR",
     bo: "BOA",
     boNombre: "Boletín Oficial de Aragón",
-    webCurriculo: "https://todofp.es/que-estudiar/familias-profesionales/servicios-socioculturales-comunidad/integracion-social/curriculos-ccaa.html",
+    portalNombre: "Educaragón - FP",
+    webCurriculo: "https://educa.aragon.es/formaci%C3%B3n-profesional",
     nota: "Currículo de referencia del entorno DEMO de esta aplicación.",
     color: "#3b82f6",
   },
@@ -52,7 +54,8 @@ const COMUNIDADES: CCAA[] = [
     siglas: "AS",
     bo: "BOPA",
     boNombre: "Boletín Oficial del Principado de Asturias",
-    webCurriculo: "https://todofp.es/que-estudiar/familias-profesionales/servicios-socioculturales-comunidad/integracion-social/curriculos-ccaa.html",
+    portalNombre: "Educastur - FP",
+    webCurriculo: "https://www.educastur.es/estudiantes/formacion-profesional",
     color: "#8b5cf6",
   },
   {
@@ -61,7 +64,8 @@ const COMUNIDADES: CCAA[] = [
     siglas: "IB",
     bo: "BOIB",
     boNombre: "Butlletí Oficial de les Illes Balears",
-    webCurriculo: "https://www.caib.es/eboibfront/",
+    portalNombre: "Portal FP CAIB",
+    webCurriculo: "https://www.caib.es/sites/fp/ca/inici/?campa=yes",
     nota: "Currículo propio para enseñanzas generales. En FP, aplica normativa estatal según ciclo.",
     color: "#f59e0b",
   },
@@ -71,7 +75,8 @@ const COMUNIDADES: CCAA[] = [
     siglas: "CN",
     bo: "BOC",
     boNombre: "Boletín Oficial de Canarias",
-    webCurriculo: "https://todofp.es/que-estudiar/familias-profesionales/servicios-socioculturales-comunidad/integracion-social/curriculos-ccaa.html",
+    portalNombre: "Portal FP Canarias",
+    webCurriculo: "https://www.gobiernodecanarias.org/educacion/web/formacion_profesional",
     color: "#ef4444",
   },
   {
@@ -80,7 +85,8 @@ const COMUNIDADES: CCAA[] = [
     siglas: "CB",
     bo: "BOC",
     boNombre: "Boletín Oficial de Cantabria",
-    webCurriculo: "https://todofp.es/que-estudiar/familias-profesionales/servicios-socioculturales-comunidad/integracion-social/curriculos-ccaa.html",
+    portalNombre: "Educantabria - FP",
+    webCurriculo: "https://www.educantabria.es/fp",
     color: "#ec4899",
   },
   {
@@ -89,7 +95,8 @@ const COMUNIDADES: CCAA[] = [
     siglas: "CM",
     bo: "DOCM",
     boNombre: "Diario Oficial de Castilla-La Mancha",
-    webCurriculo: "https://todofp.es/que-estudiar/familias-profesionales/servicios-socioculturales-comunidad/integracion-social/curriculos-ccaa.html",
+    portalNombre: "Portal de Educación JCCM - FP",
+    webCurriculo: "https://www.educa.jccm.es/educa-jccm/cm/educa_jccm/tkContent?pgseed=1214900765392&idContent=28704&locale=es_ES&textOnly=false",
     color: "#14b8a6",
   },
   {
@@ -98,7 +105,8 @@ const COMUNIDADES: CCAA[] = [
     siglas: "CL",
     bo: "BOCYL",
     boNombre: "Boletín Oficial de Castilla y León",
-    webCurriculo: "https://todofp.es/que-estudiar/familias-profesionales/servicios-socioculturales-comunidad/integracion-social/curriculos-ccaa.html",
+    portalNombre: "Portal de FP JCyL",
+    webCurriculo: "https://www.educa.jcyl.es/fp/es",
     color: "#6366f1",
   },
   {
@@ -107,7 +115,8 @@ const COMUNIDADES: CCAA[] = [
     siglas: "CT",
     bo: "DOGC",
     boNombre: "Diari Oficial de la Generalitat de Catalunya",
-    webCurriculo: "https://todofp.es/que-estudiar/familias-profesionales/servicios-socioculturales-comunidad/integracion-social/curriculos-ccaa.html",
+    portalNombre: "Tria Educativa - FP",
+    webCurriculo: "https://triaeducativa.gencat.cat/ca/fp/index.html",
     nota: "Currículo disponible en castellano y catalán.",
     color: "#f97316",
   },
@@ -117,7 +126,8 @@ const COMUNIDADES: CCAA[] = [
     siglas: "EX",
     bo: "DOE",
     boNombre: "Diario Oficial de Extremadura",
-    webCurriculo: "https://todofp.es/que-estudiar/familias-profesionales/servicios-socioculturales-comunidad/integracion-social/curriculos-ccaa.html",
+    portalNombre: "Educarex - FP",
+    webCurriculo: "https://www.educarex.es/fp/inicio.html",
     color: "#84cc16",
   },
   {
@@ -126,7 +136,8 @@ const COMUNIDADES: CCAA[] = [
     siglas: "GA",
     bo: "DOG",
     boNombre: "Diario Oficial de Galicia",
-    webCurriculo: "https://todofp.es/que-estudiar/familias-profesionales/servicios-socioculturales-comunidad/integracion-social/curriculos-ccaa.html",
+    portalNombre: "Portal FP Xunta",
+    webCurriculo: "http://www.edu.xunta.gal/fp/",
     nota: "Currículo disponible en castellano y gallego.",
     color: "#06b6d4",
   },
@@ -136,7 +147,8 @@ const COMUNIDADES: CCAA[] = [
     siglas: "RI",
     bo: "BOR",
     boNombre: "Boletín Oficial de La Rioja",
-    webCurriculo: "https://todofp.es/que-estudiar/familias-profesionales/servicios-socioculturales-comunidad/integracion-social/curriculos-ccaa.html",
+    portalNombre: "Portal FP La Rioja",
+    webCurriculo: "https://fp.larioja.org/",
     color: "#a855f7",
   },
   {
@@ -145,7 +157,8 @@ const COMUNIDADES: CCAA[] = [
     siglas: "MA",
     bo: "BOCM",
     boNombre: "Boletín Oficial de la Comunidad de Madrid",
-    webCurriculo: "https://todofp.es/que-estudiar/familias-profesionales/servicios-socioculturales-comunidad/integracion-social/curriculos-ccaa.html",
+    portalNombre: "Comunidad de Madrid - FP",
+    webCurriculo: "https://www.comunidad.madrid/servicios/educacion/formacion-profesional",
     color: "#e11d48",
   },
   {
@@ -154,7 +167,8 @@ const COMUNIDADES: CCAA[] = [
     siglas: "MU",
     bo: "BORM",
     boNombre: "Boletín Oficial de la Región de Murcia",
-    webCurriculo: "https://todofp.es/que-estudiar/familias-profesionales/servicios-socioculturales-comunidad/integracion-social/curriculos-ccaa.html",
+    portalNombre: "Llegarás Alto - FP Región de Murcia",
+    webCurriculo: "https://www.llegarasalto.com/",
     color: "#ea580c",
   },
   {
@@ -163,7 +177,8 @@ const COMUNIDADES: CCAA[] = [
     siglas: "NA",
     bo: "BON",
     boNombre: "Boletín Oficial de Navarra",
-    webCurriculo: "https://todofp.es/que-estudiar/familias-profesionales/servicios-socioculturales-comunidad/integracion-social/curriculos-ccaa.html",
+    portalNombre: "Educación Navarra - FP",
+    webCurriculo: "https://www.educacion.navarra.es/web/dpto/formacion-profesional",
     color: "#dc2626",
   },
   {
@@ -172,7 +187,8 @@ const COMUNIDADES: CCAA[] = [
     siglas: "PV",
     bo: "BOPV",
     boNombre: "Boletín Oficial del País Vasco",
-    webCurriculo: "https://todofp.es/que-estudiar/familias-profesionales/servicios-socioculturales-comunidad/integracion-social/curriculos-ccaa.html",
+    portalNombre: "Euskadi.eus - FP",
+    webCurriculo: "https://www.euskadi.eus/gobierno-vasco/fp-educacion/",
     nota: "Currículo disponible en castellano y euskera.",
     color: "#22c55e",
   },
@@ -182,7 +198,8 @@ const COMUNIDADES: CCAA[] = [
     siglas: "VC",
     bo: "DOGV",
     boNombre: "Diari Oficial de la Generalitat Valenciana",
-    webCurriculo: "https://todofp.es/que-estudiar/familias-profesionales/servicios-socioculturales-comunidad/integracion-social/curriculos-ccaa.html",
+    portalNombre: "CEICE - FP Comunitat Valenciana",
+    webCurriculo: "https://ceice.gva.es/es/web/formacion-profesional",
     nota: "Currículo disponible en castellano y valenciano.",
     color: "#0ea5e9",
   },
@@ -192,7 +209,8 @@ const COMUNIDADES: CCAA[] = [
     siglas: "CE",
     bo: "BOE",
     boNombre: "Boletín Oficial del Estado",
-    webCurriculo: "https://www.boe.es/",
+    portalNombre: "Portal Educativo Ceuta",
+    webCurriculo: "https://www.educacionyfp.gob.es/contenidos/ba/ceuta-melilla/ceuta/portada.html",
     nota: "Ciudad Autónoma. Aplica directamente el currículo del Ministerio (BOE). Sin path en el mapa SVG.",
     color: "#78716c",
   },
@@ -202,7 +220,8 @@ const COMUNIDADES: CCAA[] = [
     siglas: "ML",
     bo: "BOE",
     boNombre: "Boletín Oficial del Estado",
-    webCurriculo: "https://www.boe.es/",
+    portalNombre: "Portal Educativo Melilla",
+    webCurriculo: "https://www.educacionyfp.gob.es/contenidos/ba/ceuta-melilla/melilla/portada.html",
     nota: "Ciudad Autónoma. Aplica directamente el currículo del Ministerio (BOE). Sin path en el mapa SVG.",
     color: "#78716c",
   },
@@ -319,7 +338,7 @@ export function TabComunidades() {
                 <th className="text-left py-2 px-3 font-medium text-muted">#</th>
                 <th className="text-left py-2 px-3 font-medium text-muted">Comunidad Autónoma</th>
                 <th className="text-left py-2 px-3 font-medium text-muted">Siglas</th>
-                <th className="text-left py-2 px-3 font-medium text-muted">Boletín Oficial</th>
+                <th className="text-left py-2 px-3 font-medium text-muted">Portal Oficial</th>
                 <th className="text-left py-2 px-3 font-medium text-muted">Tipo</th>
                 <th className="text-left py-2 px-3 font-medium text-muted">Nota</th>
               </tr>
@@ -350,7 +369,7 @@ export function TabComunidades() {
                       className="underline text-primary hover:text-primary/80"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      {ccaa.bo}
+                      {ccaa.portalNombre}
                     </a>
                   </td>
                   <td className="py-2 px-3">
@@ -462,7 +481,7 @@ function DetalleCCAA({ ccaa }: { ccaa: CCAA }) {
         className="inline-flex items-center gap-2 text-sm text-primary underline hover:text-primary/80 transition-colors"
       >
         <ExternalLink className="w-4 h-4" />
-        Ver currículo oficial
+        {ccaa.portalNombre}
       </a>
     </div>
   );
