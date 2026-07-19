@@ -164,9 +164,11 @@ export default function Sidebar() {
                 </h1>
               </Link>
               <div className="flex flex-col items-start mt-1 w-full gap-1">
-                <span className="text-sm text-muted/80 font-mono ml-0.5">{timeStr}</span>
-                <div className="border border-[var(--glass-border)] bg-background/50 px-2 py-0.5 rounded text-sm text-muted/80 font-mono whitespace-nowrap shadow-sm ml-0.5">
-                  Versión: {dateCompactStr}
+                <span suppressHydrationWarning className="text-sm text-muted/80 font-mono ml-0.5">
+                  {isMounted ? timeStr : '\u00A0'}
+                </span>
+                <div suppressHydrationWarning className="border border-[var(--glass-border)] bg-background/50 px-2 py-0.5 rounded text-sm text-muted/80 font-mono whitespace-nowrap shadow-sm ml-0.5">
+                  Versión: {isMounted ? dateCompactStr : '...'}
                 </div>
               </div>
           </div>
@@ -269,8 +271,8 @@ export default function Sidebar() {
                   <span className={`text-base leading-tight whitespace-nowrap font-bold ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
                     {t('sidebar.agenda')}
                   </span>
-                  <span className={`px-2 py-0.5 rounded text-xs border font-semibold tracking-wider leading-none ${dataSource === 'demo' ? 'text-warning bg-warning/10 border-warning/30' : 'text-accent bg-accent/10 border-accent/30'}`}>
-                    {dateStr}
+                  <span suppressHydrationWarning className={`px-2 py-0.5 rounded text-xs border font-semibold tracking-wider leading-none ${dataSource === 'demo' ? 'text-warning bg-warning/10 border-warning/30' : 'text-accent bg-accent/10 border-accent/30'}`}>
+                    {isMounted ? dateStr : '\u00A0'}
                   </span>
                 </div>
               </Link>
