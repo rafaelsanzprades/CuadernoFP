@@ -48,7 +48,7 @@ function CiclosContent() {
 
   const tabParam = searchParams.get("tab") as Tab | null;
   const [activeTab, setActiveTab] = useState<Tab>(
-    tabParam && ["comunidades", "grados", "familias", "titulo", "cursos", "modulos", "autores", "normativa"].includes(tabParam) ? tabParam : "comunidades"
+    tabParam && ["comunidades", "grados", "familias", "titulo", "cursos", "modulos", "autores", "normativa"].includes(tabParam) ? tabParam : "normativa"
   );
 
   const [globalSelection, setGlobalSelection] = useState(() => {
@@ -133,6 +133,7 @@ function CiclosContent() {
               <TabsList className="mb-2 max-w-full">
                 {(
                   [
+                    { id: "normativa" as Tab, label: <span className="flex items-center gap-2"><ListChecks className="w-4 h-4 text-warning" /> Normativa</span> },
                     { id: "comunidades" as Tab, label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-success" /> {t('tabs.comunidades', {defaultValue: 'Comunidades'})}</span> },
                     { id: "grados" as Tab, label: <span className="flex items-center gap-2"><Award className="w-4 h-4" /> {t('tabs.grados', {defaultValue: 'Grados'})}</span> },
                     { id: "familias" as Tab, label: <span className="flex items-center gap-2"><FolderTree className="w-4 h-4" /> {t('tabs.familias', {defaultValue: 'Familias'})}</span> },
@@ -140,7 +141,6 @@ function CiclosContent() {
                     { id: "cursos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> {t('tabs.modulos', {defaultValue: 'Módulos'})}</span> },
                     { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> RA → CE</span> },
                     { id: "autores" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-info" /> {t('tabs.autores', {defaultValue: 'Autores'})}</span> },
-                    { id: "normativa" as Tab, label: <span className="flex items-center gap-2"><ListChecks className="w-4 h-4 text-warning" /> Normativa</span> },
                   ]
                 ).map((t) => (
                   <TabsTrigger key={t.id} value={t.id}>

@@ -25,13 +25,13 @@ type DocumentItem = {
 export default function DocumentosPage() {
   const { t } = useTranslation();
   const TABS = [
+    { id: "Normativa", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.normativa', {defaultValue: 'Normativa'})}</span>, cleanLabel: t('tabs.normativa', {defaultValue: 'Normativa'}) },
     { id: "Plantillas", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.plantillas', {defaultValue: 'Plantillas'})}</span>, cleanLabel: t('tabs.plantillas', {defaultValue: 'Plantillas'}) },
     { id: "Currículos", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> {t('tabs.curriculos', {defaultValue: 'Currículos'})}</span>, cleanLabel: t('tabs.curriculos', {defaultValue: 'Currículos'}) },
-    { id: "Normativa", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.normativa', {defaultValue: 'Normativa'})}</span>, cleanLabel: t('tabs.normativa', {defaultValue: 'Normativa'}) },
     { id: "TodoFP", label: <span className="flex items-center gap-2"><ExternalLink className="w-4 h-4 shrink-0" /> {t('tabs.todofp', {defaultValue: 'TodoFP'})}</span>, cleanLabel: t('tabs.todofp', {defaultValue: 'TodoFP'}) },
     { id: "Autores", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> {t('tabs.autores', {defaultValue: 'Autores'})}</span>, cleanLabel: t('tabs.autores', {defaultValue: 'Autores'}) }
   ];
-  const [activeTab, setActiveTab] = useState("Plantillas");
+  const [activeTab, setActiveTab] = useState("Normativa");
   const [currentPath, setCurrentPath] = useState<string>("");
   const [items, setItems] = useState<DocumentItem[]>([]);
   const [loadingDocs, setLoadingDocs] = useState<boolean>(true);
