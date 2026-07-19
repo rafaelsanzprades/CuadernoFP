@@ -147,9 +147,9 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
                       <p className="text-sm text-muted mt-1">{ecp.description}</p>
                     </div>
                     {ecp.pdf_url && (
-                      <Button variant="outline" size="sm" className="shrink-0" asChild>
-                        <a href={ecp.pdf_url} target="_blank" rel="noreferrer"><ExternalLink className="w-4 h-4 mr-2" /> PDF</a>
-                      </Button>
+                      <a href={ecp.pdf_url} target="_blank" rel="noreferrer" className="flex items-center text-xs font-semibold px-3 py-1.5 rounded-xl border border-info/30 bg-info/10 text-info hover:bg-info/20 transition-all shrink-0">
+                        <ExternalLink className="w-4 h-4 mr-2" /> PDF
+                      </a>
                     )}
                   </div>
                 </div>
@@ -178,9 +178,9 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
                       <p className="text-sm text-muted mt-1">{ecp.description}</p>
                     </div>
                     {ecp.pdf_url && (
-                      <Button variant="outline" size="sm" className="shrink-0" asChild>
-                        <a href={ecp.pdf_url} target="_blank" rel="noreferrer"><ExternalLink className="w-4 h-4 mr-2" /> PDF</a>
-                      </Button>
+                      <a href={ecp.pdf_url} target="_blank" rel="noreferrer" className="flex items-center text-xs font-semibold px-3 py-1.5 rounded-xl border border-info/30 bg-info/10 text-info hover:bg-info/20 transition-all shrink-0">
+                        <ExternalLink className="w-4 h-4 mr-2" /> PDF
+                      </a>
                     )}
                   </div>
                 </div>
@@ -209,9 +209,9 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
                       <p className="text-sm text-muted mt-1">{ecp.description}</p>
                     </div>
                     {ecp.pdf_url && (
-                      <Button variant="outline" size="sm" className="shrink-0" asChild>
-                        <a href={ecp.pdf_url} target="_blank" rel="noreferrer"><ExternalLink className="w-4 h-4 mr-2" /> PDF</a>
-                      </Button>
+                      <a href={ecp.pdf_url} target="_blank" rel="noreferrer" className="flex items-center text-xs font-semibold px-3 py-1.5 rounded-xl border border-info/30 bg-info/10 text-info hover:bg-info/20 transition-all shrink-0">
+                        <ExternalLink className="w-4 h-4 mr-2" /> PDF
+                      </a>
                     )}
                   </div>
                 </div>

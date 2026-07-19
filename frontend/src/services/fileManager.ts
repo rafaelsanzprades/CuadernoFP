@@ -177,6 +177,8 @@ export const fileManager = {
         config_contexto: {},
         config_aula: {},
         config_redondeo: {},
+        dual_regimen: "ninguno",
+        eqavet_evaluacion: {},
         __version__: 1,
       };
 
