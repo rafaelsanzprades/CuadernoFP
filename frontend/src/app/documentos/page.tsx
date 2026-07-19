@@ -46,11 +46,6 @@ export default function DocumentosPage() {
   const [loadingData, setLoadingData] = useState(true);
 
   const fetchDocuments = (path: string) => {
-    if (dataSource === 'demo' || dataSource === 'local') {
-      setItems([]);
-      setLoadingDocs(false);
-      return;
-    }
     setLoadingDocs(true);
     setError(null);
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/list?path=${encodeURIComponent(path)}`)
