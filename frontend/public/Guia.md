@@ -95,9 +95,18 @@ Una vez creada la programación base (que verás activa en la pantalla de [Archi
       - **Bloque:** Plan de Contingencia
         - **Selector:** Contingencia. Marca las medidas previstas (Asíncrona, Videoconferencias, etc.).
     - **Pestaña:** FEOE
-      - **Bloque:** Entorno Profesional y Dual
-        - **Casilla:** Módulo Dualizado. Activa esta casilla si el módulo participa en FP Dual.
-        - **Texto:** Descripción. Describe la conexión con las empresas locales.
+      - **Bloque:** Entorno Profesional
+        - **Texto:** Descripción. Describe la conexión con las empresas locales y la empleabilidad.
+    - **Pestaña:** Dual
+      - **Bloque:** Régimen Dual LO 3/2022
+        - **Selector:** Régimen. Selecciona si es Dual General (25-35%) o Dual Intensivo (35-50%).
+      - **Bloque:** Distribución Centro - Empresa
+        - **Deslizador (Slider):** Ajusta para cada Resultado de Aprendizaje el porcentaje que se imparte en la empresa. El sistema te avisará si no cumples los mínimos legales de horas.
+    - **Pestaña:** EQAVET
+      - **Bloque:** Indicadores de Calidad
+        - **Botones:** Autoevalúa la planificación, desarrollo y resultados de tu módulo.
+      - **Bloque:** Propuestas de Mejora (PDCA)
+        - **Texto:** Documenta los puntos fuertes y las áreas de mejora para el curso que viene.
     - **Pestaña:** Metodología
       - **Bloque:** Estrategias metodológicas
         - **Selector:** Metodologías Activas. Selecciona de la lista oficial (ABP, Retos, Flipped Classroom, etc.).

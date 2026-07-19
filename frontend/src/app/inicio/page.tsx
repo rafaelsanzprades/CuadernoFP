@@ -137,7 +137,9 @@ const FAQS = [
     group: "2. Paso 1: La programación didáctica",
     items: [
       { q: "¿Tengo que meter a mano todos los RA y CE del BOE?", a: "¡No! El sistema cuenta con un Catálogo oficial que importa automáticamente la normativa legal (Resultados de Aprendizaje y Criterios) de tu módulo. Solo tienes que elegir tu Grado y tu Ciclo Formativo en la sección inicial de Catálogo y el sistema lo hace por ti." },
-      { q: "¿Qué significa que los RA no suman 100% en las verificaciones?", a: "Para que la evaluación continua matemática funcione, cada Resultado de Aprendizaje (RA) debe tener un 'peso' o importancia. La suma total de los pesos de todos los RA de un módulo debe ser exactamente 100%. Debes ajustar esto en la pestaña 'Matrices'." }
+      { q: "¿Qué significa que los RA no suman 100% en las verificaciones?", a: "Para que la evaluación continua matemática funcione, cada Resultado de Aprendizaje (RA) debe tener un 'peso' o importancia. La suma total de los pesos de todos los RA de un módulo debe ser exactamente 100%. Debes ajustar esto en la pestaña 'Matrices'." },
+      { q: "¿Cómo configuro las horas que el alumnado pasa en la empresa (FP Dual)?", a: "En la pestaña 'Dual' del módulo, debes elegir si tu régimen es General (25-35%) o Intensivo (35-50%). A continuación, usa los deslizadores para repartir el porcentaje de cada Resultado de Aprendizaje entre el Centro Educativo y la Empresa. El sistema calculará las horas totales y te avisará si no cumples el mínimo legal." },
+      { q: "¿Para qué sirve la pestaña EQAVET?", a: "Sirve para integrar el ciclo de mejora continua europeo en tu programación. A final de curso, autoevalúas los indicadores de calidad y anotas tus propuestas de mejora para el próximo año." }
     ]
   },
   {
