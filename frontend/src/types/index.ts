@@ -153,6 +153,29 @@ export const ModuleDataSchema = z.object({
   actividades_complementarias: z.array(z.string()).optional(),
   medidas_contingencia: z.array(z.string()).optional(),
   texto_contingencia_libre: z.string().optional(),
+  
+  // Fase 5: Textos Narrativos para Generación de PD (Modelo JEG)
+  textos_pd_contexto_geografico: z.string().optional(),
+  textos_pd_contexto_socioeconomico: z.string().optional(),
+  textos_pd_contexto_escolar: z.string().optional(),
+  textos_pd_caracteristicas_alumnado: z.string().optional(),
+  
+  textos_pd_feoe_organizacion: z.string().optional(),
+  textos_pd_feoe_seguimiento: z.string().optional(),
+  
+  textos_pd_eval_informacion: z.string().optional(),
+  textos_pd_eval_perdida_continua: z.string().optional(),
+  textos_pd_eval_recuperacion: z.string().optional(),
+  textos_pd_eval_pendientes: z.string().optional(),
+  
+  textos_pd_metodologia_labor_coordinada: z.string().optional(),
+  textos_pd_inclusion: z.string().optional(),
+  textos_pd_contingencia_profesor: z.string().optional(),
+  textos_pd_contingencia_alumnado: z.string().optional(),
+  
+  textos_pd_bibliografia: z.string().optional(),
+  textos_pd_publicidad: z.string().optional(),
+
   __version__: z.number().optional(),
 });
 export type ModuleData = z.infer<typeof ModuleDataSchema>;

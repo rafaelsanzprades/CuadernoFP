@@ -224,8 +224,8 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
         downloadName = `${timestampStr} PD Resumen.${finalExt}`;
       } else if (type === 'programacion_suficiente' || type === 'programacion_suficiente_tpl') {
         downloadName = `${timestampStr} PD BOA Aragón.${finalExt}`;
-      } else if (type === 'programacion_detallada') {
-        downloadName = `${timestampStr} PD JEG cumplimentada.${finalExt}`;
+      } else if (type === 'programacion_detallada' || type === 'programacion_jeg') {
+        downloadName = `${timestampStr} PD JEG.${finalExt}`;
       } else if (type === 'plantilla_jeg') {
         downloadName = `PD+ FP v1 - Modelo.${finalExt}`;
       }
@@ -492,8 +492,8 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
                                         <Button variant="secondary" onClick={() => handleDownloadPdf('plantilla_jeg', undefined, undefined, 'docx')} disabled={downloadingStr === 'plantilla_jeg_docx'} className="w-full">
                                           {downloadingStr === 'plantilla_jeg_docx' ? '⏳ Descargando...' : 'Modelo PD JEG original'}
                                         </Button>
-                                        <Button onClick={() => handleDownloadPdf('programacion_detallada', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_detallada_docx'} className="w-full bg-info hover:bg-info/90 text-white">
-                                          {downloadingStr === 'programacion_detallada_docx' ? '⏳ Generando DOCX...' : 'Descargar PD JEG cumplimentada.docx'}
+                                        <Button onClick={() => handleDownloadPdf('programacion_jeg', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_jeg_docx'} className="w-full bg-info hover:bg-info/90 text-white">
+                                          {downloadingStr === 'programacion_jeg_docx' ? '⏳ Generando DOCX...' : 'Descargar PD JEG cumplimentada.docx'}
                                         </Button>
                                       </div>
                                     </div>

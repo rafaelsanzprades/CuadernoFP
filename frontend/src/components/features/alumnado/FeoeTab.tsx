@@ -3,6 +3,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { Building2, Save, Printer, FileCheck2, Download } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { NarrativeField } from "@/components/ui/NarrativeField";
 
 export function FeoeTab() {
   const { cursoData, updateCursoData } = useAppStore();
@@ -61,7 +62,21 @@ export function FeoeTab() {
   };
 
   return (
-    <div className="space-y-4 animate-in fade-in duration-500">
+    <div className="space-y-6 animate-in fade-in duration-500">
+      
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        <NarrativeField 
+          id="textos_pd_feoe_organizacion"
+          title="Organización y Modalidad de FEOE"
+          description="Detalla cómo se organiza el alumnado (FEOE general, intensivo) y qué alternativas hay para el alumnado sin FEOE."
+        />
+        <NarrativeField 
+          id="textos_pd_feoe_seguimiento"
+          title="Seguimiento de FEOE"
+          description="Procedimiento para el seguimiento en la empresa y comunicación con tutores duales."
+        />
+      </div>
+
       <Card className="p-6 border-t-4 border-t-indigo-500">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
           <div>

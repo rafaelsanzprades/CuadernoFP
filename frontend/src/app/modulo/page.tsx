@@ -14,6 +14,7 @@ import { MetodologiaTab } from "@/components/features/modulo/MetodologiaTab";
 import { EvaluacionRecursosTab } from "@/components/features/modulo/EvaluacionRecursosTab";
 import { OtrosElementosTab } from "@/components/features/modulo/OtrosElementosTab";
 import { DiversidadTab } from "@/components/features/modulo/DiversidadTab";
+import { BurocraciaTab } from "@/components/features/modulo/BurocraciaTab";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import Link from "next/link";
@@ -57,6 +58,7 @@ export default function ModuloConfigPage() {
     { id: "metodologia", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.metodologia')}</>, cleanLabel: t('tabs.metodologia') },
     { id: "evaluacion", label: <><span className="inline-flex"><CheckCircle2 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.evaluacion')}</>, cleanLabel: t('tabs.evaluacion') },
     { id: "diversidad", label: <><span className="inline-flex"><HeartHandshake className="w-[1.2em] h-[1.2em] mr-1" /></span> Diversidad</>, cleanLabel: "Diversidad" },
+    { id: "burocracia", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Burocracia</>, cleanLabel: "Burocracia" },
     { id: "otros", label: <><span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.otros')}</>, cleanLabel: t('tabs.otros') }
   ];
 
@@ -144,6 +146,7 @@ export default function ModuloConfigPage() {
                 'metodologia': { desc: 'Estrategias pedagógicas, agrupamientos y principios de intervención.' },
                 'evaluacion': { desc: 'Criterios de calificación, instrumentos y recursos didácticos necesarios.' },
                 'diversidad': { desc: 'Atención a la diversidad, adaptaciones curriculares y panel de alumnado ACNEAE.' },
+                'burocracia': { desc: 'Datos de autoría, publicidad de la programación y bibliografía.' },
                 'otros': { desc: 'Temas transversales, innovación y proyectos intermodulares.' }
               };
               const info = infoMap[activeTab] || { desc: 'Configuración del módulo.' };
@@ -162,6 +165,7 @@ export default function ModuloConfigPage() {
             {activeTab === "metodologia" && <MetodologiaTab />}
             {activeTab === "evaluacion" && <EvaluacionRecursosTab />}
             {activeTab === "diversidad" && <DiversidadTab />}
+            {activeTab === "burocracia" && <BurocraciaTab />}
             {activeTab === "otros" && <OtrosElementosTab />}
 
           </MotionWrapper>

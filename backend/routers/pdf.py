@@ -105,7 +105,7 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 content=docx_bytes,
                 media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
             )
-        elif type in ["programacion_minima", "programacion_suficiente", "programacion_detallada", "programacion_suficiente_tpl", "programacion_minima_tpl"]:
+        elif type in ["programacion_minima", "programacion_suficiente", "programacion_detallada", "programacion_suficiente_tpl", "programacion_minima_tpl", "programacion_jeg"]:
             if type == "programacion_minima":
                 import generador_pd_minima as generador_pd
             elif type == "programacion_minima_tpl":
@@ -114,6 +114,8 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 import generador_pd_suficiente as generador_pd
             elif type == "programacion_suficiente_tpl":
                 import generador_pd_suficiente_tpl as generador_pd
+            elif type == "programacion_jeg":
+                import generador_pd_jeg as generador_pd
             else:
                 import generador_pd_detallada as generador_pd
             import tempfile
@@ -192,7 +194,13 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             }
             
             with tempfile.TemporaryDirectory() as tmpdir:
-                fname = f"PD_{data_pd['modulo'][:30].replace(' ', '_').replace('/', '-')}"
+                if type == "programacion_jeg":
+                    import datetime
+                    now_str = datetime.datetime.now().strftime("%Y%m%d-%H%M")
+                    fname = f"{now_str} PD JEG"
+                else:
+                    fname = f"PD_{data_pd['modulo'][:30].replace(' ', '_').replace('/', '-')}"
+                
                 out_docx = os.path.join(tmpdir, fname + ".docx")
                 out_pdf = os.path.join(tmpdir, fname + ".pdf")
                 
@@ -204,7 +212,8 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 
                 return Response(
                     content=docx_bytes,
-                    media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    headers={"Content-Disposition": f"attachment; filename=\"{fname}.docx\""}
                 )
         elif type in ["ud", "tarea"]:
             import generador_ud_tarea

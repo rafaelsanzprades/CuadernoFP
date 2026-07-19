@@ -14,6 +14,7 @@ import { PlanoClaseTab } from "@/components/features/alumnado/PlanoClaseTab";
 import { BoletinesTab } from "@/components/features/alumnado/BoletinesTab";
 import { FeoeTab } from "@/components/features/alumnado/FeoeTab";
 import { TutoriaTab } from "@/components/features/alumnado/TutoriaTab";
+import { ContextoGrupoTab } from "@/components/features/alumnado/ContextoGrupoTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -34,6 +35,7 @@ export default function AlumnadoPage() {
     { id: "listado", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.listado')}</>, cleanLabel: t('tabs.listado') },
     { id: "tutoria", label: <><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.tutoria')}</>, cleanLabel: t('tabs.tutoria') },
     { id: "plano", label: <><span className="inline-flex"><LayoutGrid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.plano')}</>, cleanLabel: t('tabs.plano') },
+    { id: "contexto", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Contexto</>, cleanLabel: 'Contexto del Grupo' },
     { id: "feoe", label: <><span className="inline-flex"><MessageSquare className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.feoe')}</>, cleanLabel: t('tabs.feoe') }
   ];
 
@@ -475,11 +477,8 @@ export default function AlumnadoPage() {
             </>
           )}
 
-          {/* Tab 5: Plano de clase */}
-          {activeTab === "plano" && (
-            <PlanoClaseTab />
-          )}
-
+          {activeTab === "plano" && <PlanoClaseTab />}
+          {activeTab === "contexto" && <ContextoGrupoTab />}
           {activeTab === "feoe" && <FeoeTab />}
           {activeTab === "tutoria" && <TutoriaTab />}
 
