@@ -399,6 +399,32 @@ export default function InicioPage() {
       actionHref: !tieneContexto ? "/modulo" : undefined,
       actionLabel: !tieneContexto ? "Añadir contexto" : undefined,
     },
+    {
+      id: "dual",
+      icon: <Building2 className="w-5 h-5" />,
+      title: "FP Dual",
+      href: "/modulo?tab=dual",
+      hrefLabel: "Módulo didáctico",
+      status: (m?.dual_regimen && m.dual_regimen !== "ninguno") ? "ok" : "empty",
+      lines: (m?.dual_regimen && m.dual_regimen !== "ninguno")
+        ? [`Régimen: Dual ${m.dual_regimen === 'general' ? 'General' : 'Intensivo'}`]
+        : ["Régimen tradicional (sin FP Dual configurada)"],
+      actionHref: "/modulo?tab=dual",
+      actionLabel: "Configurar FP Dual",
+    },
+    {
+      id: "eqavet",
+      icon: <Shield className="w-5 h-5" />,
+      title: "Calidad EQAVET",
+      href: "/modulo?tab=eqavet",
+      hrefLabel: "Módulo didáctico",
+      status: (m?.eqavet_evaluacion && Object.keys(m.eqavet_evaluacion).length > 0) ? "ok" : "empty",
+      lines: (m?.eqavet_evaluacion && Object.keys(m.eqavet_evaluacion).length > 0)
+        ? [`${Object.keys(m.eqavet_evaluacion).length} indicadores EQAVET valorados`]
+        : ["Sin indicadores EQAVET valorados"],
+      actionHref: "/modulo?tab=eqavet",
+      actionLabel: "Valorar calidad",
+    }
   ];
 
   // ── Comprobaciones Curso activo ──────────────────────────────────────
