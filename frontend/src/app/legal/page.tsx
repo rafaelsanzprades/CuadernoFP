@@ -678,9 +678,15 @@ export default function LegalPage() {
                             <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Catálogo FP
                           </a>
                           <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                            <a href="/catalogo?tab=normativa" className="hover:text-accent transition-colors block py-0.5">— Normativa LO 3/2022</a>
                             <a href="/catalogo?tab=comunidades" className="hover:text-accent transition-colors block py-0.5">— Territorios (CCAA)</a>
                             <a href="/catalogo?tab=grados" className="hover:text-accent transition-colors block py-0.5">— Grados Formativos</a>
-                            <a href="/catalogo?tab=normativa" className="hover:text-accent transition-colors block py-0.5">— Normativa LO 3/2022</a>
+                            <a href="/catalogo?tab=familias" className="hover:text-accent transition-colors block py-0.5">— Familias</a>
+                            <a href="/catalogo?tab=titulo" className="hover:text-accent transition-colors block py-0.5">— Títulos</a>
+                            <a href="/catalogo?tab=cursos" className="hover:text-accent transition-colors block py-0.5">— Módulos</a>
+                            <a href="/catalogo?tab=modulos" className="hover:text-accent transition-colors block py-0.5">— RA → CE</a>
+                            <a href="/catalogo?tab=incual" className="hover:text-accent transition-colors block py-0.5">— ECP INCUAL (NUEVO)</a>
+                            <a href="/catalogo?tab=autores" className="hover:text-accent transition-colors block py-0.5">— Autores</a>
                           </div>
                         </li>
                         <li>
@@ -740,9 +746,12 @@ export default function LegalPage() {
                             <a href="/modulo?tab=contexto" className="hover:text-accent transition-colors block py-0.5">— Contexto</a>
                             <a href="/modulo?tab=planes" className="hover:text-accent transition-colors block py-0.5">— Planes</a>
                             <a href="/modulo?tab=contexto_feoe" className="hover:text-accent transition-colors block py-0.5">— Contexto FEOE</a>
+                            <a href="/modulo?tab=dual" className="hover:text-accent transition-colors block py-0.5">— FP Dual (NUEVO)</a>
                             <a href="/modulo?tab=metodologia" className="hover:text-accent transition-colors block py-0.5">— Metodología</a>
                             <a href="/modulo?tab=evaluacion" className="hover:text-accent transition-colors block py-0.5">— Evaluación</a>
+                            <a href="/modulo?tab=eqavet" className="hover:text-accent transition-colors block py-0.5">— Calidad EQAVET (NUEVO)</a>
                             <a href="/modulo?tab=diversidad" className="hover:text-accent transition-colors block py-0.5">— Diversidad</a>
+                            <a href="/modulo?tab=burocracia" className="hover:text-accent transition-colors block py-0.5">— Burocracia</a>
                             <a href="/modulo?tab=otros" className="hover:text-accent transition-colors block py-0.5">— Transversales</a>
                           </div>
                         </li>
