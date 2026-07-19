@@ -193,15 +193,15 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
   if (activeModuleId) {
     const code = activeModuleId.split('-')[0];
     if (moduleData && moduleData.info_modulo) {
-      const { codigo, nombre, titulo_codigo, ciclo } = moduleData.info_modulo;
+      const { codigo, nombre, titulo_codigo, titulo_fp } = moduleData.info_modulo;
       const actualCode = codigo || code;
       
       let degreeCode = actualCode;
       if (titulo_codigo) {
         degreeCode = titulo_codigo;
-      } else if (ciclo) {
-        const lowerCiclo = ciclo.toLowerCase();
-        const firstWord = ciclo.split(' ')[0];
+      } else if (titulo_fp) {
+        const lowerCiclo = titulo_fp.toLowerCase();
+        const firstWord = titulo_fp.split(' ')[0];
         if (/^[A-Z]{2,4}\d{2,3}$/i.test(firstWord) || /^[A-Z]+-\d+$/i.test(firstWord)) {
           degreeCode = firstWord;
         } else if (lowerCiclo.includes("superior")) {

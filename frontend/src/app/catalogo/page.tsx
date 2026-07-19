@@ -675,7 +675,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
 
                         const extras = {
                           familia: selectedFamilia,
-                          ciclo: tituloNombre,
+                          titulo_fp: tituloNombre,
                           titulo_codigo: curriculoCodigo,
                           curso: mod.curso,
                           h_boa: mod.horas,
@@ -986,7 +986,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
 
                   const extras = {
                     familia: selectedFamilia,
-                    ciclo: tituloNombre,
+                    titulo_fp: tituloNombre,
                     titulo_codigo: curriculoCodigo,
                     curso: modulo.curso || "1º",
                     h_boa: modulo.horas || 0,
@@ -1058,7 +1058,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                 <Card className="p-8 text-center text-muted border-dashed border-[var(--glass-border)]">
                   <AlertTriangle className="w-8 h-8 mx-auto mb-3 opacity-50" />
                   <p>Este módulo no tiene competencias directas asociadas para convalidación en el registro oficial.</p>
-                  <p className="text-xs mt-2 opacity-70">Es común en módulos transversales, proyecto, FCT o idiomas.</p>
+                  <p className="text-xs mt-2 opacity-70">Es común en módulos transversales, proyecto, FEOE o idiomas.</p>
                 </Card>
               ) : (
                 <div className="space-y-4">

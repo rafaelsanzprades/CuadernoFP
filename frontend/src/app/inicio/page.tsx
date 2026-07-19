@@ -447,20 +447,20 @@ export default function InicioPage() {
       id: "seguimiento",
       icon: <ClipboardList className="w-5 h-5" />,
       title: "Diario de aula",
-      href: "/seguimiento",
+      href: "/diario",
       hrefLabel: "Diario de aula",
       status: sgmtCount === 0 ? "empty" : "ok",
       lines: sgmtCount === 0
         ? ["Sin entradas en el diario de aula"]
         : [`${sgmtCount} sesiones registradas en el diario`],
-      actionHref: sgmtCount === 0 ? "/seguimiento" : undefined,
+      actionHref: sgmtCount === 0 ? "/diario" : undefined,
       actionLabel: sgmtCount === 0 ? "Registrar primera sesión" : undefined,
     },
     {
       id: "evaluaciones",
       icon: <BarChart2 className="w-5 h-5" />,
       title: "Evaluación (Progreso)",
-      href: "/progreso",
+      href: "/evaluacion",
       hrefLabel: "Evaluación",
       status: evalCount === 0 ? "empty" : evalTotal > 0 && evalCount < evalTotal ? "warning" : "ok",
       lines: evalCount === 0
@@ -471,7 +471,7 @@ export default function InicioPage() {
             ? `Faltan ${evalTotal - evalCount} alumnos por evaluar`
             : "Todos los alumnos tienen registros de calificación",
         ],
-      actionHref: evalCount === 0 ? "/progreso" : undefined,
+      actionHref: evalCount === 0 ? "/evaluacion" : undefined,
       actionLabel: evalCount === 0 ? "Ir a calificaciones" : undefined,
     },
 

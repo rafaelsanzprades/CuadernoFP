@@ -66,7 +66,7 @@
     "programacion": "Secuenciación",
     "calendario": "Calendario",
     "alumnado": "Alumnado",
-    "seguimiento": "Diario",
+    "diario": "Diario",
     "progreso": "Avaliación"
   },
   "navGroups": {
@@ -96,10 +96,10 @@
     "agenda_desc": "Resumo diario: estado de clase e UD a impartir.",
     "alumnado_title": "Alumnado e titoría",
     "alumnado_desc": "Xestión de alumnado, titoría, FEOE e orientación.",
-    "seguimiento_title": "Seguimento Diario",
-    "seguimiento_desc": "Diario de aula, continxencias, control de asistencia e alertas.",
-    "progreso_title": "Avaliación e progreso",
-    "progreso_desc": "Cualificacións, avaliación de RA e analíticas.",
+    "diario_title": "Seguimento Diario",
+    "diario_desc": "Diario de aula, continxencias, control de asistencia e alertas.",
+    "evaluacion_title": "Avaliación e progreso",
+    "evaluacion_desc": "Cualificacións, avaliación de RA e analíticas.",
     "calendario_title": "Calendario e trimestres",
     "calendario_desc": "Configura festivos, avaliacións e o teu horario semanal.",
     "modulo_title": "Configuración do Módulo",

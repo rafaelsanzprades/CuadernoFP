@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/Card";
 import { useAppStore } from "@/store/useAppStore";
 
 /**
- * TAB "Alerta abandono" en /seguimiento
+ * TAB "Alerta abandono" en /diario
  * Detecta alumnos en riesgo de abandono según Indicador 1.5 del Sistema Estatal:
  * "Porcentaje de alumnado matriculado que abandona en los dos meses posteriores al inicio"
  *

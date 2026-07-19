@@ -8652,7 +8652,7 @@ export const demoSeed = {
             "p_ev": 15,
             "h_boa": 167,
             "h_sem": 5,
-            "ciclo": "Técnico en Instalaciones de Telecomunicaciones",
+            "titulo_fp": "Técnico en Instalaciones de Telecomunicaciones",
             "nivel": "Grado Medio",
             "familia": "Electricidad y Electrónica",
             "curso": "1º",

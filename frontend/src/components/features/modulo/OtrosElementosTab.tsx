@@ -208,7 +208,7 @@ export function OtrosElementosTab() {
             <textarea
               value={config_contexto["og"] || ""}
               onChange={e => handleChange("og", e.target.value)}
-              placeholder="Objetivos generales del ciclo aplicables al módulo..."
+              placeholder="Objetivos generales del título aplicables al módulo..."
               className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-sm text-foreground focus:border-info focus:outline-none"
             />
           </div>

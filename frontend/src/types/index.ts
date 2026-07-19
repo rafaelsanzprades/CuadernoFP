@@ -140,7 +140,7 @@ export const CursoDataSchema = z.object({
 export type CursoData = z.infer<typeof CursoDataSchema>;
 
 export const GlobalDataSchema = z.object({
-  ciclos: z.array(z.any()).optional(),
+  titulos: z.array(z.any()).optional(),
   modulos: z.array(z.any()).optional(),
   profesores: z.array(z.any()).optional(),
   grupos: z.array(z.any()).optional(),

@@ -208,6 +208,8 @@ export default function MatricesPage() {
                           <th className="pb-2 w-24">% RA</th>
                           <th className="pb-2 w-16 text-center">Feoe</th>
                           <th className="pb-2">Resultados de aprendizaje</th>
+                          <th className="pb-2 w-32">Comp. Clave</th>
+                          <th className="pb-2 w-32">CPE</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -267,6 +269,32 @@ export default function MatricesPage() {
                                 className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-3 py-1 text-foreground text-sm focus:border-[#14a085] focus:outline-none"
                               />
                             </td>
+                            <td className="py-2 pr-2">
+                              <input
+                                type="text"
+                                value={ra.comp_clave || ""}
+                                placeholder="CL, CD..."
+                                onChange={(e) => {
+                                  const newRa = [...df_ra];
+                                  newRa[idx].comp_clave = e.target.value;
+                                  updateDataFrame("df_ra", newRa);
+                                }}
+                                className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-sm focus:border-[#14a085] focus:outline-none"
+                              />
+                            </td>
+                            <td className="py-2 pr-2">
+                              <input
+                                type="text"
+                                value={ra.cpe || ""}
+                                placeholder="CPE1..."
+                                onChange={(e) => {
+                                  const newRa = [...df_ra];
+                                  newRa[idx].cpe = e.target.value;
+                                  updateDataFrame("df_ra", newRa);
+                                }}
+                                className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-sm focus:border-[#14a085] focus:outline-none"
+                              />
+                            </td>
                           </tr>
                         ))}
                       </tbody>
@@ -278,7 +306,7 @@ export default function MatricesPage() {
                       onClick={() => {
                         const newRa = [...df_ra];
                         const newId = `RA${(newRa.length + 1).toString().padStart(2, '0')}`;
-                        newRa.push({ id_ra: newId, peso_ra: 0, is_dual: "false", desc_ra: "" });
+                        newRa.push({ id_ra: newId, peso_ra: 0, is_dual: "false", desc_ra: "", comp_clave: "", cpe: "" });
                         updateDataFrame("df_ra", newRa);
                       }}
                       className="text-accent hover:text-[#1abc9c]"

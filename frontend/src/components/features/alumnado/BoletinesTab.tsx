@@ -145,7 +145,7 @@ export const BoletinesTab = () => {
                       <GraduationCap className="w-5 h-5" /> Módulo: {info_modulo.codigo && info_modulo.nombre ? `${info_modulo.codigo} - ${info_modulo.nombre}` : info_modulo.modulo || "Módulo Profesional"}
                     </p>
                     <p className="text-sm text-muted flex items-center gap-2 mt-1">
-                      <Briefcase className="w-4 h-4" /> Ciclo: {info_modulo.ciclo || "Ciclo Formativo"}
+                      <Briefcase className="w-4 h-4" /> Título: {info_modulo.titulo_fp || "Título de FP"}
                     </p>
                   </div>
                   <div className="text-right">

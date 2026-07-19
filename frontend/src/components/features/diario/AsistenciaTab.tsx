@@ -2,8 +2,8 @@
 import { BarChart2, ClipboardEdit, Settings, Users , Info } from "lucide-react";
 import { useState } from "react";
 import { useAppStore } from "@/store/useAppStore";
-import { AttendanceGrid } from "@/components/features/seguimiento/AttendanceGrid";
-import { AttendanceAccumulated } from "@/components/features/seguimiento/AttendanceAccumulated";
+import { AttendanceGrid } from "@/components/features/diario/AttendanceGrid";
+import { AttendanceAccumulated } from "@/components/features/diario/AttendanceAccumulated";
 import { EmptyState } from "@/components/ui/EmptyState";
 import Link from "next/link";
 

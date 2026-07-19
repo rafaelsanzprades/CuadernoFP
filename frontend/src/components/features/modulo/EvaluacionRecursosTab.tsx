@@ -112,7 +112,7 @@ export function EvaluacionRecursosTab() {
             <textarea
               value={config_contexto["G1_infraestructuras"] || ""}
               onChange={e => handleChange("G1_infraestructuras", e.target.value)}
-              placeholder="Taller, aula, laboratorio, equipamiento específico del ciclo..."
+              placeholder="Taller, aula, laboratorio, equipamiento específico del título..."
               className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>

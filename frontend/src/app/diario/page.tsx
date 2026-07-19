@@ -7,8 +7,8 @@ import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
-import { AsistenciaTab } from "@/components/features/seguimiento/AsistenciaTab";
-import { AlertaAbandonoTab } from "@/components/features/seguimiento/AlertaAbandonoTab";
+import { AsistenciaTab } from "@/components/features/diario/AsistenciaTab";
+import { AlertaAbandonoTab } from "@/components/features/diario/AlertaAbandonoTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -187,9 +187,9 @@ export default function SeguimientoPage() {
           <MotionWrapper className="space-y-4">
             <div>
               <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <span className="inline-flex"><MapPin className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.seguimiento_title')}
+                <span className="inline-flex"><MapPin className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.diario_title')}
               </h1>
-              <p className="text-muted mt-2 text-base">{t('pages.seguimiento_desc')}</p>
+              <p className="text-muted mt-2 text-base">{t('pages.diario_desc')}</p>
             </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab}>

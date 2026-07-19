@@ -14,7 +14,7 @@ import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { useTranslation } from "react-i18next";
 import { AnalisisGrupalTab } from "@/components/features/analisis/AnalisisGrupalTab";
 import { AnalisisIndividualTab } from "@/components/features/analisis/AnalisisIndividualTab";
-import { MatrizCalificacionesTab } from "@/components/features/progreso/MatrizCalificacionesTab";
+import { MatrizCalificacionesTab } from "@/components/features/evaluacion/MatrizCalificacionesTab";
 import EstadisticasTab from "@/components/features/evaluacion/EstadisticasTab";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -331,9 +331,9 @@ export default function ProgresoPage() {
             <div className="flex justify-between items-start">
             <div>
               <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <span className="inline-flex"><TrendingUp className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.progreso_title')}
+                <span className="inline-flex"><TrendingUp className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.evaluacion_title')}
               </h1>
-              <p className="text-muted mt-2 text-lg">{t('pages.progreso_desc')}</p>
+              <p className="text-muted mt-2 text-lg">{t('pages.evaluacion_desc')}</p>
             </div>
             {/* Save Button */}
             <div className="flex items-center gap-4">

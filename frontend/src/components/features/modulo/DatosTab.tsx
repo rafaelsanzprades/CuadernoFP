@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { Calendar, FileEdit, Receipt, Scale, School, UserCircle, Settings , Info } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useAppStore } from "@/store/useAppStore";
@@ -41,7 +41,7 @@ export function DatosTab() {
 
   useEffect(() => {
     if (families.length > 0 && moduleData?.info_modulo) {
-      const { familia, ciclo, codigo } = moduleData.info_modulo;
+      const { familia, titulo_fp, codigo } = moduleData.info_modulo;
       
       const cleanStr = (s: string) => s ? s.toLowerCase().replace(/^[a-z0-9]+\s*-\s*/i, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim() : "";
 
@@ -49,10 +49,10 @@ export function DatosTab() {
         const fam = families.find(f => cleanStr(f.name) === cleanStr(familia));
         if (fam) {
           setViewFamilyId(fam.id.toString());
-          if (ciclo) {
+          if (titulo_fp) {
             const deg = fam.degrees.find(d => {
               const dn = cleanStr(d.name);
-              const cn = cleanStr(ciclo);
+              const cn = cleanStr(titulo_fp);
               return dn === cn || dn.includes(cn) || cn.includes(dn);
             });
             if (deg) {
@@ -143,7 +143,7 @@ export function DatosTab() {
         <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-5">
 <span>‍<span className="inline-flex"><School className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Centro y docente
 </h2>
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Input 
             label="Centro educativo"
             type="text"
@@ -156,6 +156,32 @@ export function DatosTab() {
             value={data.profesorado || data.profesor || ""}
             onChange={e => updateInfoModulo('profesorado', e.target.value)}
           />
+          <Select
+            label="Comunidad / Territorio"
+            value={data.ccaa || ""}
+            onChange={e => updateInfoModulo('ccaa', e.target.value)}
+          >
+            <option value="">-- Selecciona --</option>
+            <option value="andalucia">Andalucía</option>
+            <option value="aragon">Aragón</option>
+            <option value="asturias">Principado de Asturias</option>
+            <option value="baleares">Islas Baleares</option>
+            <option value="canarias">Canarias</option>
+            <option value="cantabria">Cantabria</option>
+            <option value="castilla-mancha">Castilla-La Mancha</option>
+            <option value="castilla-leon">Castilla y León</option>
+            <option value="cataluna">Cataluña</option>
+            <option value="extremadura">Extremadura</option>
+            <option value="galicia">Galicia</option>
+            <option value="la-rioja">La Rioja</option>
+            <option value="madrid">Comunidad de Madrid</option>
+            <option value="murcia">Región de Murcia</option>
+            <option value="navarra">Comunidad Foral de Navarra</option>
+            <option value="pais-vasco">País Vasco</option>
+            <option value="valencia">Comunidad Valenciana</option>
+            <option value="ceuta">Ceuta (Ministerio)</option>
+            <option value="melilla">Melilla (Ministerio)</option>
+          </Select>
         </div>
       </Card>
 
@@ -177,7 +203,7 @@ export function DatosTab() {
             ))}
           </Select>
           <Select
-            label="Título"
+            label="Título de FP (Grado D)"
             value={viewDegreeId}
             onChange={e => { setViewDegreeId(e.target.value); setSelectedModuleCode(""); }}
             disabled={!viewFamilyId}
