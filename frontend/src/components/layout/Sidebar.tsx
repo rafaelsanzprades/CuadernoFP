@@ -433,7 +433,7 @@ export default function Sidebar() {
         {isSidebarOpen ? (
           <div className="w-full">
             <InstallPwaButton isSidebarOpen={true} />
-            <p className="text-center text-sm font-medium text-muted/90 mt-1 whitespace-nowrap">
+            <p className="text-center text-sm font-medium text-muted/90 mt-1 whitespace-nowrap" suppressHydrationWarning>
               © {new Date().getFullYear()} Rafael Sanz Prades
             </p>
             <div className="flex items-center justify-center w-full mt-1">

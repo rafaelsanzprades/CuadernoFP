@@ -45,6 +45,9 @@ export const useAppStore = create<AppState>()(
         name: 'cdd-store-cache-v3',
         storage: createJSONStorage(() => idbStorage),
         version: 3, // Bump version to force cache clearing of old corrupted state
+        migrate: (persistedState: any, version: number) => {
+          return persistedState as AppState;
+        },
         partialize: (state) => {
           const { workspaceHandle, ...rest } = state;
           return rest;
