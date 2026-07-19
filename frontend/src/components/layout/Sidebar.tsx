@@ -53,6 +53,7 @@ export default function Sidebar() {
   const [dateStr, setDateStr] = useState<string>("");
   const [timeStr, setTimeStr] = useState<string>("");
   const [dateCompactStr, setDateCompactStr] = useState<string>("");
+  const [currentYear, setCurrentYear] = useState<number | string>("");
   const [displayGroup, setDisplayGroup] = useState<string>("");
 
   useEffect(() => {
@@ -60,18 +61,21 @@ export default function Sidebar() {
       const state = useAppStore.getState();
       const isDemo = state.dataSource === 'demo';
       const realNow = new Date();
-      const currentYear = realNow.getFullYear();
+      
+      setCurrentYear(realNow.getFullYear());
+
+      const currentYearVal = realNow.getFullYear();
 
       let day: number, monthStr: string, year: number;
       if (isDemo) {
         day = 2;
         monthStr = "mayo";
-        year = currentYear;
+        year = currentYearVal;
       } else {
         day = realNow.getDate();
         const months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
         monthStr = months[realNow.getMonth()];
-        year = currentYear;
+        year = currentYearVal;
       }
 
       const hours = String(realNow.getHours()).padStart(2, '0');
@@ -433,8 +437,8 @@ export default function Sidebar() {
         {isSidebarOpen ? (
           <div className="w-full">
             <InstallPwaButton isSidebarOpen={true} />
-            <p className="text-center text-sm font-medium text-muted/90 mt-1 whitespace-nowrap" suppressHydrationWarning>
-              © {new Date().getFullYear()} Rafael Sanz Prades
+            <p className="text-center text-sm font-medium text-muted/90 mt-1 whitespace-nowrap">
+              © {currentYear} Rafael Sanz Prades
             </p>
             <div className="flex items-center justify-center w-full mt-1">
               <Link href="/legal" className="text-sm font-semibold text-info hover:text-info hover:underline" onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}>
