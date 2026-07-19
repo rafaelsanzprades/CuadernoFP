@@ -69,6 +69,8 @@ export const ResultadoAprendizajeSchema = z.object({
   desc_ra: z.string().optional().nullable(),
   peso_ra: z.number().optional(),
   is_dual: z.string().optional().nullable(),
+  comp_clave: z.string().optional().nullable(),
+  cpe: z.string().optional().nullable(),
 });
 export type ResultadoAprendizaje = z.infer<typeof ResultadoAprendizajeSchema>;
 
@@ -80,6 +82,40 @@ export const CriterioEvaluacionSchema = z.object({
   peso_ce: z.number().optional(),
 });
 export type CriterioEvaluacion = z.infer<typeof CriterioEvaluacionSchema>;
+
+export const IndicadorSchema = z.object({
+  id_indicador: z.string(),
+  id_ce: z.string(),
+  descripcion: z.string(),
+  peso: z.number().optional().default(1),
+  is_basico: z.boolean().optional().default(false),
+});
+export type Indicador = z.infer<typeof IndicadorSchema>;
+
+export const InstrumentoSchema = z.object({
+  id_instrumento: z.string(),
+  titulo: z.string(),
+  tipo: z.enum(["rubrica", "lista_control", "escala_valoracion", "prueba_objetiva", "registro_observacion", "diario", "otro"]),
+  escala: z.enum(["discreta_4", "discreta_letras", "continua_10"]),
+  evaluacion: z.enum(["Ev1", "Ev2", "Ev3", "EvFO", "EvFE"]),
+  agente: z.enum(["heteroevaluacion", "coevaluacion", "autoevaluacion"]).optional().default("heteroevaluacion"),
+  peso_global: z.number().optional().default(1),
+  indicadores_vinculados: z.array(z.string()).optional().default([]),
+});
+export type Instrumento = z.infer<typeof InstrumentoSchema>;
+
+export const CalificacionSchema = z.object({
+  id_calificacion: z.string(),
+  id_alumno: z.string(),
+  id_instrumento: z.string(),
+  id_indicador: z.string(),
+  valor: z.number().nullable(), // Null means not evaluated yet
+  nota_calculada: z.number().optional().nullable(), // The continuous equivalent 0-10 based on scale
+  justificacion: z.string().optional(),
+  timestamp: z.number().optional(),
+});
+export type Calificacion = z.infer<typeof CalificacionSchema>;
+
 
 export const SeguimientoUDSchema = z.record(z.string(), z.any()).and(
   z.object({
@@ -97,7 +133,8 @@ export const ModuleDataSchema = z.object({
   df_ce: z.array(CriterioEvaluacionSchema).optional(),
   df_tareas: z.array(TareaSchema).optional(),
   df_act: z.array(z.any()).optional(),
-  df_instr: z.array(z.any()).optional(),
+  df_instr: z.array(InstrumentoSchema).optional(),
+  df_indicadores: z.array(IndicadorSchema).optional(),
   df_pr: z.array(z.any()).optional(),
   df_dua: z.array(z.any()).optional(),
   df_contingencia: z.array(z.any()).optional(),
@@ -126,6 +163,7 @@ export const CursoDataSchema = z.object({
   df_al: z.array(AlumnadoSchema).optional(),
   df_sgmt: z.array(SeguimientoUDSchema).optional(),
   df_eval: z.array(z.any()).optional(),
+  df_calificaciones: z.array(CalificacionSchema).optional(),
   df_feoe: z.array(z.any()).optional(),
   daily_ledger: z.record(z.string(), z.any()).optional(),
   tutoria_ledger: z.record(z.string(), z.any()).optional(),

@@ -132,29 +132,30 @@ Aquí vamos a definir qué temas o Unidades de Trabajo (UD) vas a dar a lo largo
       - **Bloque:** Matriz de Objetivos Generales
         - **Tabla:**  de OG. Haz clic en la intersección para asignar en qué contribuye cada Resultado de Aprendizaje (RA) del módulo a los Objetivos Generales (OG) del Título.
 
-### 1.4. Instrumentos de evaluación
-En este paso configuramos las "herramientas" que vas a usar para poner notas reales en cada trimestre (exámenes, libretas, proyectos...) y a qué Criterio de Evaluación ataca cada una.
+### 1.4. Instrumentos e Indicadores de Evaluación
+En este paso configuramos las "herramientas" que vas a usar para poner notas reales (exámenes, libretas, proyectos...) y cómo se vinculan a los Criterios de Evaluación.
 
 - **Apartado:** Programación [Código del módulo]
   - **Página:** Instrumentos de evaluación [🔗](https://cuadernofp.web.app/instrumentos)
-    - **Pestaña:** 1º Trimestre. Deberás repetir el proceso en el 2º y 3º Trimestre, y consultar el Resumen.
+    - **Pestaña:** Catálogo de Instrumentos
       - **Bloque:** Lista de Instrumentos
-        - **Botón:** "Añadir Instrumento/Actividad". Haz clic para crear un examen o tarea.
-        - **Selector:** Tipo e Instrumento Codificado. Selecciona si es Teoría/Práctica y el instrumento oficial (Prueba objetiva, Rúbrica, Diario de aula, etc.).
-        - **Texto:** Instrumento / Actividad. Ponle nombre, ej. "Examen parcial de redes".
-        - **Número:** % Pond. Teclea cuánto pesa esta actividad.
-        - **Casilla:** Casillas de CE. Marca con un tick los criterios de evaluación que se evalúan en esta prueba específica.
+        - **Botón:** "Añadir Instrumento". Haz clic para crear un examen, práctica o tarea.
+        - **Texto:** Instrumento. Ponle un nombre corto, ej. "Examen 1T".
+        - **Texto:** Escala. Selecciona si se evalúa de 1 a 10 o con otra rúbrica.
+    - **Pestaña:** Indicadores (Rúbricas)
+      - **Bloque:** Lista de Indicadores por CE
+        - **Botón:** "Añadir Indicador". Desglosa cada Criterio de Evaluación en aspectos observables y medibles que luego evaluarás con los instrumentos.
 
 ### 1.5. Secuenciación (Programación de aula)
 Por último, vamos a planificar el día a día bajando a la tierra. ¿Qué vas a dar en la sesión 1? ¿Y en la sesión 2?
 
 - **Apartado:** Programación [Código del módulo]
-  - **Página:** Secuenciación [🔗](https://cuadernofp.web.app/programacion)
+  - **Página:** Secuenciación [🔗](https://cuadernofp.web.app/secuenciacion)
     - **Pestaña:** Secuenciación
       - **Bloque:** Tabla de Sesiones
         - **Botón:** "+". Haz clic para añadir clases/sesiones dentro de una UD específica.
         - **Texto:** Contenidos y Recursos. Describe brevemente qué vas a explicar o usar ese día específico.
-    - **Pestaña:** Tareas (TC) [🔗](https://cuadernofp.web.app/programacion?tab=tareas)
+    - **Pestaña:** Tareas (TC) [🔗](https://cuadernofp.web.app/secuenciacion?tab=tareas)
       - **Bloque:** Diseño de tareas
         - **Botón:** "Añadir Tarea Competencial". Opcional: Crea un reto o proyecto integrador de evaluación para tu alumnado.
 

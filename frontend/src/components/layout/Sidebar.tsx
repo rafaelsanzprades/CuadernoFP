@@ -100,7 +100,7 @@ export default function Sidebar() {
         } else if (extractedYear && extractedYear.length === 6 && !extractedYear.includes('-')) {
           extractedYear = `${extractedYear.slice(0, 4)}-${extractedYear.slice(4)}`;
         } else if (!extractedYear || !extractedYear.includes('-')) {
-          extractedYear = `${currentYear}-${String(currentYear + 1).slice(-2)}`;
+          extractedYear = `${currentYearVal}-${String(currentYearVal + 1).slice(-2)}`;
         }
         const matchGroup = idUpper.match(/-([1-9][A-Z])/i);
         const suffix = matchGroup ? matchGroup[1].toUpperCase() : '';

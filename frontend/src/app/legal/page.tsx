@@ -762,19 +762,17 @@ export default function LegalPage() {
                             <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Instrumentos
                           </a>
                           <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/instrumentos?tab=resumen" className="hover:text-accent transition-colors block py-0.5">— Resumen Global</a>
-                            <a href="/instrumentos?tab=tri1" className="hover:text-accent transition-colors block py-0.5">— 1º Trimestre</a>
-                            <a href="/instrumentos?tab=tri2" className="hover:text-accent transition-colors block py-0.5">— 2º Trimestre</a>
-                            <a href="/instrumentos?tab=tri3" className="hover:text-accent transition-colors block py-0.5">— 3º Trimestre</a>
+                            <a href="/instrumentos?tab=instrumentos" className="hover:text-accent transition-colors block py-0.5">— Catálogo de Instrumentos</a>
+                            <a href="/instrumentos?tab=indicadores" className="hover:text-accent transition-colors block py-0.5">— Indicadores (CE)</a>
                           </div>
                         </li>
                         <li>
-                          <a href="/programacion" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                          <a href="/secuenciacion" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Secuenciación
                           </a>
                           <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/programacion?tab=secuenciacion" className="hover:text-accent transition-colors block py-0.5">— Temporalización</a>
-                            <a href="/programacion?tab=tareas" className="hover:text-accent transition-colors block py-0.5">— Tareas Clave (TC)</a>
+                            <a href="/secuenciacion?tab=secuenciacion" className="hover:text-accent transition-colors block py-0.5">— Temporalización</a>
+                            <a href="/secuenciacion?tab=tareas" className="hover:text-accent transition-colors block py-0.5">— Tareas Clave (TC)</a>
                           </div>
                         </li>
                       </ul>

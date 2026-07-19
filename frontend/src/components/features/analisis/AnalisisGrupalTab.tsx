@@ -60,9 +60,9 @@ export const AnalisisGrupalTab = () => {
   }));
 
   // Trend Data (Trimestres)
-  const avg1T = df_eval_activos.reduce((acc: number, e: any) => acc + (Number(e['1T_Nota']) || 0), 0) / (total || 1);
-  const avg2T = df_eval_activos.reduce((acc: number, e: any) => acc + (Number(e['2T_Nota']) || 0), 0) / (total || 1);
-  const avg3T = df_eval_activos.reduce((acc: number, e: any) => acc + (Number(e['3T_Nota']) || 0), 0) / (total || 1);
+  const avg1T = df_eval_activos.reduce((acc: number, e: any) => acc + (Number(e['Nota_1T']) || 0), 0) / (total || 1);
+  const avg2T = df_eval_activos.reduce((acc: number, e: any) => acc + (Number(e['Nota_2T']) || 0), 0) / (total || 1);
+  const avg3T = df_eval_activos.reduce((acc: number, e: any) => acc + (Number(e['Nota_3T']) || 0), 0) / (total || 1);
 
   const trendData = [
     { name: "1º Trim", Media: Number(avg1T.toFixed(2)) },

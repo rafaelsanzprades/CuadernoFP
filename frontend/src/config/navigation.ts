@@ -18,7 +18,7 @@ export const navGroups = [
       { href: "/modulo", label: "Módulo", icon: Settings, description: "Contexto, metodología y recursos básicos." },
       { href: "/matrices", label: "Matrices", icon: Grid, description: "Ponderación y cruce de RA, CE y Unidades Didácticas." },
       { href: "/instrumentos", label: "Instrumentos", icon: Wrench, description: "Definición y pesos de las herramientas de evaluación." },
-      { href: "/programacion", label: "Secuenciación", icon: BookOpen, description: "Programación de aula: Diseño y temporalización de Unidades y Tareas." }
+      { href: "/secuenciacion", label: "Secuenciación", icon: BookOpen, description: "Programación de aula: Diseño y temporalización de Unidades y Tareas." }
     ]
   },
   {

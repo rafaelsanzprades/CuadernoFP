@@ -1,155 +1,180 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useAppStore } from "@/store/useAppStore";
-import { AlertTriangle, Table } from "lucide-react";
+import { AlertTriangle, Table, Calculator, Save } from "lucide-react";
+import { Calificacion, Indicador, Instrumento } from "@/types";
+import { Button } from "@/components/ui/Button";
 
 export function MatrizCalificacionesTab() {
   const { moduleData, cursoData, updateCursoData } = useAppStore();
   const [corte, setCorte] = useState("Ev1");
 
   const df_al = cursoData?.df_al || [];
-  const df_eval = cursoData?.df_eval || [];
-  const df_act = moduleData?.df_act || [];
+  const df_calificaciones = cursoData?.df_calificaciones || [];
+  const df_instr = moduleData?.df_instr || [];
+  const df_indicadores = moduleData?.df_indicadores || [];
 
   const df_evaluable = df_al.filter((al: any) => al.Estado !== "Baja");
 
-  // Filter activities based on the selected cut
-  // We assume: Ev1 -> 1T, Ev2 -> 2T, Ev3 -> 3T, Ordinaria -> all, Extraordinaria -> only 'Rec'
-  const acts_to_show = df_act.filter((act: any) => {
-    if (corte === "Ev1") return act.tri_act === "1T" || act.tri_act === "Ev1";
-    if (corte === "Ev2") return act.tri_act === "2T" || act.tri_act === "Ev2";
-    if (corte === "Ev3") return act.tri_act === "3T" || act.tri_act === "Ev3";
-    if (corte === "Ordinaria") return act.recuperacion === "No" || !act.recuperacion;
-    if (corte === "Extraordinaria") return act.recuperacion && act.recuperacion !== "No";
-    return true;
-  });
+  // Filtramos instrumentos según el corte
+  const instrumentos_corte = useMemo(() => {
+    return df_instr.filter(inst => {
+      if (corte === "EvFO") return inst.evaluacion === "EvFO" || inst.evaluacion.startsWith("Ev");
+      if (corte === "EvFE") return inst.evaluacion === "EvFE";
+      return inst.evaluacion === corte;
+    });
+  }, [df_instr, corte]);
 
-  const handleUpdateNota = (al_id: string, act_id: string, val: string) => {
-    const numVal = parseFloat(val);
-    const newEval = [...df_eval];
-    let evRowIdx = newEval.findIndex((e: any) => e.ID === al_id);
-    
-    if (evRowIdx === -1) {
-      newEval.push({ ID: al_id, Nota_Final: 0 });
-      evRowIdx = newEval.length - 1;
-    }
-    
-    newEval[evRowIdx][act_id] = isNaN(numVal) ? "" : numVal;
-    updateCursoData("df_eval", newEval);
+  // Expandimos instrumentos en columnas por cada indicador vinculado
+  const columnas = useMemo(() => {
+    const cols: { inst: Instrumento; ind: Indicador }[] = [];
+    instrumentos_corte.forEach(inst => {
+      if (inst.indicadores_vinculados && inst.indicadores_vinculados.length > 0) {
+        inst.indicadores_vinculados.forEach(indId => {
+          const indObj = df_indicadores.find(i => i.id_indicador === indId);
+          if (indObj) {
+            cols.push({ inst, ind: indObj });
+          }
+        });
+      } else {
+        // Instrumento sin indicadores desglosados, evaluado globalmente
+        cols.push({ inst, ind: { id_indicador: 'GLOBAL', id_ce: '', descripcion: 'Nota Global del Instrumento', peso: 1, is_basico: false } });
+      }
+    });
+    return cols;
+  }, [instrumentos_corte, df_indicadores]);
+
+  // Mapa rápido de calificaciones
+  const getNota = (id_alumno: string, id_instrumento: string, id_indicador: string) => {
+    return df_calificaciones.find(
+      (c: Calificacion) => c.id_alumno === id_alumno && c.id_instrumento === id_instrumento && c.id_indicador === id_indicador
+    )?.valor ?? "";
   };
 
-  const handleModificacionManual = (al_id: string, val: string, justificacion: string) => {
-    const numVal = parseFloat(val);
-    const newEval = [...df_eval];
-    let evRowIdx = newEval.findIndex((e: any) => e.ID === al_id);
-    if (evRowIdx === -1) {
-      newEval.push({ ID: al_id, Nota_Final: 0 });
-      evRowIdx = newEval.length - 1;
+  const handleUpdateNota = (id_alumno: string, id_instrumento: string, id_indicador: string, val: string) => {
+    const numVal = val === "" ? null : parseFloat(val);
+    const updated = [...df_calificaciones];
+    const idx = updated.findIndex(c => c.id_alumno === id_alumno && c.id_instrumento === id_instrumento && c.id_indicador === id_indicador);
+    
+    if (idx >= 0) {
+      if (numVal === null) {
+        updated.splice(idx, 1);
+      } else {
+        updated[idx].valor = numVal;
+        updated[idx].timestamp = Date.now();
+      }
+    } else if (numVal !== null) {
+      updated.push({
+        id_calificacion: `${id_alumno}_${id_instrumento}_${id_indicador}`,
+        id_alumno,
+        id_instrumento,
+        id_indicador,
+        valor: numVal,
+        timestamp: Date.now()
+      });
     }
-    newEval[evRowIdx]["Nota_Final_Manual"] = isNaN(numVal) ? "" : numVal;
-    newEval[evRowIdx]["Justificacion_Manual"] = justificacion;
-    updateCursoData("df_eval", newEval);
+
+    updateCursoData("df_calificaciones", updated);
+  };
+
+  const calcularMediaAlumno = (id_alumno: string) => {
+    let sum = 0;
+    let count = 0;
+    columnas.forEach(col => {
+      const val = getNota(id_alumno, col.inst.id_instrumento, col.ind.id_indicador);
+      if (val !== "") {
+        sum += Number(val);
+        count++;
+      }
+    });
+    return count > 0 ? Math.round(sum / count).toString() : "0";
   };
 
   return (
     <div className="space-y-4 animate-in fade-in duration-500">
       
       {/* Controles superiores */}
-      <div className="flex justify-between items-center glass-card p-4 border-t-4 border-t-emerald-500">
+      <div className="flex justify-between items-center bg-[var(--glass-bg)] p-4 border-t-4 border-t-accent border-x border-b border-[var(--glass-border)] rounded-b-lg">
         <div className="flex items-center gap-4">
           <label className="font-semibold text-sm text-foreground">Corte de Evaluación:</label>
           <select 
             value={corte} 
             onChange={(e) => setCorte(e.target.value)}
-            className="bg-black/30 border border-white/10 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-emerald-500"
+            className="bg-foreground/10 border border-[var(--glass-border)] rounded-lg px-3 py-1.5 text-sm text-foreground focus:outline-none focus:border-accent"
           >
             <option value="Ev1">1ª Evaluación (Ev1)</option>
             <option value="Ev2">2ª Evaluación (Ev2)</option>
             <option value="Ev3">3ª Evaluación (Ev3)</option>
-            <option value="Ordinaria">Evaluación Final Ordinaria</option>
-            <option value="Extraordinaria">Evaluación Final Extraordinaria</option>
+            <option value="EvFO">Final Ordinaria (FO)</option>
+            <option value="EvFE">Final Extraordinaria (FE)</option>
           </select>
+        </div>
+        <div className="flex items-center gap-2">
+           <Button variant="secondary" size="sm" className="gap-2">
+             <Calculator className="w-4 h-4" /> Recalcular Todo
+           </Button>
         </div>
       </div>
 
       {/* Matriz Excel-like */}
-      <div className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] overflow-x-auto">
+      <div className="bg-[var(--glass-bg)] rounded-lg border border-[var(--glass-border)] overflow-x-auto">
         <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
           <thead>
-            <tr className="bg-background text-muted border-b border-[var(--glass-border)]">
-              <th className="p-3 sticky left-0 z-20 bg-background border-r border-[var(--glass-border)] min-w-[250px]">
+            <tr className="bg-foreground/5 text-muted border-b border-[var(--glass-border)]">
+              <th className="p-3 sticky left-0 z-20 bg-[var(--glass-bg)] border-r border-[var(--glass-border)] min-w-[250px] shadow-[2px_0_5px_rgba(0,0,0,0.1)]">
                 <div className="flex items-center gap-2">
                   <Table className="w-4 h-4" /> Alumnado
                 </div>
               </th>
-              {acts_to_show.map((act: any) => (
-                <th key={act.id_act} className="p-3 text-center border-r border-[var(--glass-border)] min-w-[100px]" title={act.desc_act}>
-                  <div className="font-mono text-emerald-400 mb-1">{act.id_act}</div>
-                  <div className="text-xs font-normal truncate max-w-[120px]">{act.desc_act}</div>
-                  {act.recuperacion && act.recuperacion !== "No" && (
-                    <span className="bg-rose-500/20 text-rose-300 text-[10px] px-1.5 rounded">{act.recuperacion}</span>
-                  )}
+              {columnas.map((col, idx) => (
+                <th key={`${col.inst.id_instrumento}_${col.ind.id_indicador}_${idx}`} className="p-2 text-center border-r border-[var(--glass-border)] min-w-[120px]" title={col.ind.descripcion}>
+                  <div className="text-xs font-bold text-accent truncate max-w-[120px] mx-auto">{col.inst.titulo}</div>
+                  <div className="font-mono text-xs text-info mt-1">{col.ind.id_indicador !== 'GLOBAL' ? col.ind.id_indicador : 'Nota Global'}</div>
+                  <div className="text-[10px] bg-foreground/10 inline-block px-1.5 rounded mt-1">{col.inst.escala}</div>
                 </th>
               ))}
-              <th className="p-3 text-center border-r border-[var(--glass-border)] min-w-[120px] bg-emerald-500/10">
-                Nota Calculada
-              </th>
-              <th className="p-3 text-center min-w-[200px] bg-amber-500/10">
-                Mod. Manual / Justificación
+              {columnas.length === 0 && (
+                <th className="p-4 text-center italic text-muted">No hay instrumentos para este corte</th>
+              )}
+              <th className="p-3 text-center border-l-2 border-[var(--glass-border)] min-w-[120px] bg-accent/5">
+                Media Ponderada
               </th>
             </tr>
           </thead>
           <tbody>
             {df_evaluable.map((al: any) => {
-              const evRow = df_eval.find((e: any) => e.ID === al.ID) || {};
               const faltas = Number(al.Faltas || 0);
-              const pdevc = faltas > 15; // Placeholder threshold
+              const pdevc = faltas > 15; // Placeholder
               
               return (
-                <tr key={al.ID} className="border-b border-white/5 hover:bg-foreground/10 transition-colors">
-                  <td className="p-3 sticky left-0 z-10 bg-background group-hover:bg-[#1e293b] border-r border-[var(--glass-border)] flex items-center justify-between">
-                    <span className="font-semibold">{al.Apellidos}, {al.Nombre}</span>
+                <tr key={al.ID} className="border-b border-[var(--glass-border)] hover:bg-foreground/5 transition-colors">
+                  <td className="p-3 sticky left-0 z-10 bg-[var(--glass-bg)] group-hover:bg-[#1e293b] border-r border-[var(--glass-border)] flex items-center justify-between shadow-[2px_0_5px_rgba(0,0,0,0.1)]">
+                    <span className="font-semibold text-foreground">{al.Apellidos}, {al.Nombre}</span>
                     {pdevc && (
                       <span title="Alerta Abandono (PDEvC): >15% faltas">
-                        <AlertTriangle className="w-4 h-4 text-rose-500" />
+                        <AlertTriangle className="w-4 h-4 text-error" />
                       </span>
                     )}
                   </td>
                   
-                  {acts_to_show.map((act: any) => (
-                    <td key={act.id_act} className="p-1 border-r border-[var(--glass-border)] text-center">
+                  {columnas.map((col, idx) => (
+                    <td key={`${col.inst.id_instrumento}_${col.ind.id_indicador}_${idx}`} className="p-1 border-r border-[var(--glass-border)] text-center bg-background focus-within:bg-accent/5">
                       <input 
-                        type="number"
-                        step="0.1"
-                        min="0"
+                        type={col.inst.escala.includes('letras') ? "text" : "number"}
+                        step="1"
+                        min="1"
                         max="10"
-                        value={evRow[act.id_act] !== undefined ? evRow[act.id_act] : ""}
-                        onChange={(e) => handleUpdateNota(al.ID, act.id_act, e.target.value)}
-                        className="w-full text-center bg-transparent border-none focus:ring-1 focus:ring-emerald-500 rounded p-2 outline-none font-mono"
+                        value={getNota(al.ID, col.inst.id_instrumento, col.ind.id_indicador)}
+                        onChange={(e) => handleUpdateNota(al.ID, col.inst.id_instrumento, col.ind.id_indicador, e.target.value)}
+                        className="w-full text-center bg-transparent border border-transparent focus:border-accent focus:ring-1 focus:ring-accent rounded p-1.5 outline-none font-mono text-foreground"
                       />
                     </td>
                   ))}
+
+                  {columnas.length === 0 && <td className="bg-background"></td>}
                   
-                  <td className="p-3 text-center font-bold font-mono text-lg border-r border-[var(--glass-border)] bg-emerald-500/5">
-                    {Number(evRow.Nota_Final || 0).toFixed(2)}
-                  </td>
-                  
-                  <td className="p-1 bg-amber-500/5 flex items-center gap-1">
-                    <input 
-                      type="number"
-                      step="0.1"
-                      placeholder="Nota"
-                      value={evRow.Nota_Final_Manual !== undefined ? evRow.Nota_Final_Manual : ""}
-                      onChange={(e) => handleModificacionManual(al.ID, e.target.value, evRow.Justificacion_Manual || "")}
-                      className="w-20 text-center bg-black/20 border border-white/10 focus:border-amber-500 rounded p-1.5 outline-none font-mono text-sm"
-                    />
-                    <input 
-                      type="text"
-                      placeholder="Justificación..."
-                      value={evRow.Justificacion_Manual || ""}
-                      onChange={(e) => handleModificacionManual(al.ID, evRow.Nota_Final_Manual || "", e.target.value)}
-                      className="flex-1 min-w-[100px] bg-black/20 border border-white/10 focus:border-amber-500 rounded p-1.5 outline-none text-xs"
-                    />
+                  <td className="p-3 text-center font-bold font-mono text-lg border-l-2 border-[var(--glass-border)] bg-accent/5 text-foreground">
+                    {calcularMediaAlumno(al.ID)}
                   </td>
                 </tr>
               );

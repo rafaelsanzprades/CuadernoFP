@@ -155,8 +155,8 @@ const FAQS = [
     items: [
       { q: "¿Qué es el 'Diario de aula'?", a: "Es tu cuaderno de bitácora diario. Te permite anotar lo que ocurre en cada sesión real de clase: qué UD has impartido, si ha habido incidencias o marcar días 'Sin docencia' (como huelgas o claustros) para que no cuenten en tu progreso." },
       { q: "¿Cómo paso lista o registro faltas de asistencia?", a: "En la sección de Diario tienes un 'Control de Asistencia'. Verás a todo tu alumnado y con un solo clic en su cuadrícula puedes alternar entre Falta, Retraso o Falta Justificada." },
-      { q: "¿Cómo evalúo una tarea o examen concreto?", a: "Ve a la sección 'Evaluación' para introducir notas numéricas rápidas cruzando tareas con alumnado. También puedes hacerlo de forma más minuciosa entrando en la Ficha Individual de el alumnado dentro de 'Alumnado'." },
-      { q: "¿Cómo se calcula exactamente la nota final del trimestre?", a: "El sistema cruza las calificaciones que pones con el 'peso' que le diste a los Instrumentos de Evaluación (ej. 70% Examen, 30% Tareas) y el 'peso' global de cada Resultado de Aprendizaje (RA). Todo el cálculo se hace en tiempo real." }
+      { q: "¿Cómo evalúo una tarea o examen concreto?", a: "Ve a la sección 'Calificaciones' para introducir notas enteras (1 al 10, sin decimales) en la Matriz de Notas cruzando Indicadores/Instrumentos con el alumnado." },
+      { q: "¿Cómo se calcula exactamente la nota final del trimestre?", a: "El sistema cruza las calificaciones que pones en los Instrumentos con el peso del Indicador, que a su vez alimenta el peso del Criterio de Evaluación (CE) y finalmente el Resultado de Aprendizaje (RA). Todo en tiempo real." }
     ]
   },
   {
@@ -243,9 +243,12 @@ export default function InicioPage() {
     return !(m?.df_ud ?? []).some((ud: any) => ud.id_ud === ce.id_ud);
   }).length;
 
-  const actCount = m?.df_act?.length ?? 0;
-  const actsSinCE = (m?.df_act ?? []).filter((act: any) => {
-    return !ceList.some((ce: any) => act[ce.id_ce] === true);
+  const actCount = m?.df_instr?.length ?? 0;
+  
+  const indsList = m?.df_indicadores ?? [];
+  const indCount = indsList.length;
+  const indSinCE = indsList.filter((ind: any) => {
+    return !ceList.some((ce: any) => ind.id_ce === ce.id_ce);
   }).length;
 
   const tareasCount = m?.df_tareas?.length ?? 0;
@@ -336,24 +339,24 @@ export default function InicioPage() {
     {
       id: "instr",
       icon: <Wrench className="w-5 h-5" />,
-      title: "Instrumentos de evaluación",
+      title: "Instrumentos e Indicadores",
       href: "/instrumentos",
-      hrefLabel: "Instrumentos de evaluación",
-      status: actCount === 0 ? "empty" : actsSinCE > 0 ? "warning" : "ok",
-      lines: actCount === 0
-        ? ["No hay instrumentos definidos"]
+      hrefLabel: "Instrumentos",
+      status: (actCount === 0 || indCount === 0) ? "empty" : indSinCE > 0 ? "warning" : "ok",
+      lines: (actCount === 0 || indCount === 0)
+        ? ["No hay instrumentos o indicadores"]
         : [
-          `${actCount} instrumentos/actividades definidos`,
-          actsSinCE > 0 ? `${actsSinCE} instrumentos sin CE asociado` : "Todos los instrumentos evalúan algún CE",
+          `${actCount} instrumentos y ${indCount} indicadores`,
+          indSinCE > 0 ? `${indSinCE} indicadores sin CE asociado` : "Todos los indicadores evalúan algún CE",
         ],
-      actionHref: actCount === 0 ? "/instrumentos" : undefined,
-      actionLabel: actCount === 0 ? "Añadir instrumento" : undefined,
+      actionHref: (actCount === 0 || indCount === 0) ? "/instrumentos" : undefined,
+      actionLabel: (actCount === 0 || indCount === 0) ? "Añadir instrumento" : undefined,
     },
     {
       id: "tareas",
       icon: <FileText className="w-5 h-5" />,
       title: "Tareas y actividades",
-      href: "/programacion",
+      href: "/secuenciacion",
       hrefLabel: "Programación de aula",
       status: tareasCount === 0 ? "empty" : tareasSinRA > 0 ? "warning" : "ok",
       lines: tareasCount === 0
@@ -362,14 +365,14 @@ export default function InicioPage() {
           `${tareasCount} tareas definidas`,
           tareasSinRA > 0 ? `${tareasSinRA} tareas sin RA asociado` : "Todas las tareas tienen RA",
         ],
-      actionHref: tareasCount === 0 ? "/programacion" : undefined,
+      actionHref: tareasCount === 0 ? "/secuenciacion" : undefined,
       actionLabel: tareasCount === 0 ? "Crear primera tarea" : undefined,
     },
     {
       id: "sesiones",
       icon: <CalendarDays className="w-5 h-5" />,
       title: "Sesiones de clase",
-      href: "/programacion",
+      href: "/secuenciacion",
       hrefLabel: "Programación de aula",
       status: sesionesCount === 0 ? "empty" : sesionesSinUD > 0 ? "warning" : "ok",
       lines: sesionesCount === 0
@@ -378,7 +381,7 @@ export default function InicioPage() {
           `${sesionesCount} sesiones planificadas`,
           sesionesSinUD > 0 ? `${sesionesSinUD} sesiones sin UD asignada` : "Todas las sesiones tienen UD",
         ],
-      actionHref: sesionesCount === 0 ? "/programacion" : undefined,
+      actionHref: sesionesCount === 0 ? "/secuenciacion" : undefined,
       actionLabel: sesionesCount === 0 ? "Planificar sesiones" : undefined,
     },
     {
