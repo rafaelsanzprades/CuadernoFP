@@ -82,9 +82,7 @@ export default function Sidebar() {
       
       let versionValue = process.env.NEXT_PUBLIC_APP_VERSION;
       if (!versionValue || versionValue === 'unknown') {
-        const mm = String(isDemo ? 5 : realNow.getMonth() + 1).padStart(2, '0');
-        const dd = String(isDemo ? 2 : realNow.getDate()).padStart(2, '0');
-        versionValue = `${year}${mm}${dd}`;
+        versionValue = "Desconocida";
       }
       setDateCompactStr(versionValue);
 
