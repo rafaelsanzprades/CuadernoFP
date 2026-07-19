@@ -25,13 +25,13 @@ type DocumentItem = {
 export default function DocumentosPage() {
   const { t } = useTranslation();
   const TABS = [
-    { id: "plantillas", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.plantillas', {defaultValue: 'Plantillas'})}</span>, cleanLabel: t('tabs.plantillas', {defaultValue: 'Plantillas'}) },
-    { id: "curriculos", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> {t('tabs.curriculos', {defaultValue: 'Currículos'})}</span>, cleanLabel: t('tabs.curriculos', {defaultValue: 'Currículos'}) },
-    { id: "normativa", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.normativa', {defaultValue: 'Normativa'})}</span>, cleanLabel: t('tabs.normativa', {defaultValue: 'Normativa'}) },
-    { id: "todofp", label: <span className="flex items-center gap-2"><ExternalLink className="w-4 h-4 shrink-0" /> {t('tabs.todofp', {defaultValue: 'TodoFP'})}</span>, cleanLabel: t('tabs.todofp', {defaultValue: 'TodoFP'}) },
-    { id: "autores", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> {t('tabs.autores', {defaultValue: 'Autores'})}</span>, cleanLabel: t('tabs.autores', {defaultValue: 'Autores'}) }
+    { id: "Plantillas", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.plantillas', {defaultValue: 'Plantillas'})}</span>, cleanLabel: t('tabs.plantillas', {defaultValue: 'Plantillas'}) },
+    { id: "Currículos", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> {t('tabs.curriculos', {defaultValue: 'Currículos'})}</span>, cleanLabel: t('tabs.curriculos', {defaultValue: 'Currículos'}) },
+    { id: "Normativa", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.normativa', {defaultValue: 'Normativa'})}</span>, cleanLabel: t('tabs.normativa', {defaultValue: 'Normativa'}) },
+    { id: "TodoFP", label: <span className="flex items-center gap-2"><ExternalLink className="w-4 h-4 shrink-0" /> {t('tabs.todofp', {defaultValue: 'TodoFP'})}</span>, cleanLabel: t('tabs.todofp', {defaultValue: 'TodoFP'}) },
+    { id: "Autores", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> {t('tabs.autores', {defaultValue: 'Autores'})}</span>, cleanLabel: t('tabs.autores', {defaultValue: 'Autores'}) }
   ];
-  const [activeTab, setActiveTab] = useState("plantillas");
+  const [activeTab, setActiveTab] = useState("Plantillas");
   const [currentPath, setCurrentPath] = useState<string>("");
   const [items, setItems] = useState<DocumentItem[]>([]);
   const [loadingDocs, setLoadingDocs] = useState<boolean>(true);
@@ -74,6 +74,17 @@ export default function DocumentosPage() {
   };
 
   useEffect(() => {
+    const folderMap: Record<string, string> = {
+      "plantillas": "Plantillas",
+      "curriculos": "Currículos",
+      "normativa": "Normativa",
+      "todofp": "TodoFP",
+      "autores": "Autores"
+    };
+    if (folderMap[activeTab]) {
+      setActiveTab(folderMap[activeTab]);
+      return;
+    }
     fetchDocuments(activeTab);
   }, [activeTab, dataSource]);
 
@@ -248,7 +259,7 @@ export default function DocumentosPage() {
                   'Currículos': { desc: 'Disposiciones normativas que fijan las enseñanzas mínimas de cada título.' },
                   'Normativa': { desc: 'Leyes orgánicas, reales decretos y órdenes ministeriales vigentes.' },
                   'TodoFP': { desc: 'Recursos, guías y materiales del portal oficial de la Formación Profesional.' },
-                  'Autores/Editoriales': { desc: 'Material de apoyo y recursos bibliográficos desarrollados por editoriales.' }
+                  'Autores': { desc: 'Material de apoyo y recursos bibliográficos desarrollados por editoriales.' }
                 };
                 const info = infoMap[activeTab] || { desc: 'Gestión documental y normativa.' };
                 return (
@@ -312,7 +323,7 @@ export default function DocumentosPage() {
                     <div className="text-danger mb-2"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> Error</div>
                     <p className="text-foreground/80">{error}</p>
                   </div>
-                ) : activeTab === 'normativa' && currentPath === 'normativa' ? (
+                ) : activeTab === 'Normativa' && currentPath === 'Normativa' ? (
                   <NormativaAccordion 
                     communities={filteredItems} 
                     onDownloadDoc={handleDownloadDoc} 
