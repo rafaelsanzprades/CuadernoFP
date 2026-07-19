@@ -15,6 +15,8 @@ import { EvaluacionRecursosTab } from "@/components/features/modulo/EvaluacionRe
 import { OtrosElementosTab } from "@/components/features/modulo/OtrosElementosTab";
 import { DiversidadTab } from "@/components/features/modulo/DiversidadTab";
 import { BurocraciaTab } from "@/components/features/modulo/BurocraciaTab";
+import { DualTab } from "@/components/features/modulo/DualTab";
+import { EqavetTab } from "@/components/features/modulo/EqavetTab";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import Link from "next/link";
@@ -55,8 +57,10 @@ export default function ModuloConfigPage() {
     { id: "contexto", label: <><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.contexto')}</>, cleanLabel: t('tabs.contexto') },
     { id: "planes", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.planes')}</>, cleanLabel: t('tabs.planes') },
     { id: "contexto_feoe", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.contexto_feoe')}</>, cleanLabel: t('tabs.contexto_feoe') },
+    { id: "dual", label: <><span className="inline-flex"><Building2 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.dual', {defaultValue: 'FP Dual'})}</>, cleanLabel: t('tabs.dual', {defaultValue: 'FP Dual'}) },
     { id: "metodologia", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.metodologia')}</>, cleanLabel: t('tabs.metodologia') },
     { id: "evaluacion", label: <><span className="inline-flex"><CheckCircle2 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.evaluacion')}</>, cleanLabel: t('tabs.evaluacion') },
+    { id: "eqavet", label: <><span className="inline-flex"><Award className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.eqavet', {defaultValue: 'EQAVET'})}</>, cleanLabel: t('tabs.eqavet', {defaultValue: 'EQAVET'}) },
     { id: "diversidad", label: <><span className="inline-flex"><HeartHandshake className="w-[1.2em] h-[1.2em] mr-1" /></span> Diversidad</>, cleanLabel: "Diversidad" },
     { id: "burocracia", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Burocracia</>, cleanLabel: "Burocracia" },
     { id: "otros", label: <><span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.otros')}</>, cleanLabel: t('tabs.otros') }
@@ -143,8 +147,10 @@ export default function ModuloConfigPage() {
                 'contexto': { desc: 'Análisis del entorno socioeconómico, centro educativo y perfil del alumnado.' },
                 'planes': { desc: 'Vinculación con los planes estratégicos y proyectos institucionales del centro.' },
                 'contexto_feoe': { desc: 'Análisis específico del sector productivo y oportunidades de empleo.' },
+                'dual': { desc: 'Distribución de horas y competencias entre el Centro Educativo y la Empresa.' },
                 'metodologia': { desc: 'Estrategias pedagógicas, agrupamientos y principios de intervención.' },
                 'evaluacion': { desc: 'Criterios de calificación, instrumentos y recursos didácticos necesarios.' },
+                'eqavet': { desc: 'Autoevaluación de la calidad de los procesos e indicadores de mejora continua.' },
                 'diversidad': { desc: 'Atención a la diversidad, adaptaciones curriculares y panel de alumnado ACNEAE.' },
                 'burocracia': { desc: 'Datos de autoría, publicidad de la programación y bibliografía.' },
                 'otros': { desc: 'Temas transversales, innovación y proyectos intermodulares.' }
@@ -162,8 +168,10 @@ export default function ModuloConfigPage() {
             {activeTab === "contexto" && <ContextoTab />}
             {activeTab === "planes" && <PlanesTab />}
             {activeTab === "contexto_feoe" && <ContextoFEOETab />}
+            {activeTab === "dual" && <DualTab />}
             {activeTab === "metodologia" && <MetodologiaTab />}
             {activeTab === "evaluacion" && <EvaluacionRecursosTab />}
+            {activeTab === "eqavet" && <EqavetTab />}
             {activeTab === "diversidad" && <DiversidadTab />}
             {activeTab === "burocracia" && <BurocraciaTab />}
             {activeTab === "otros" && <OtrosElementosTab />}

@@ -231,9 +231,30 @@ const COMUNIDADES: CCAA[] = [
 const CCAA_MAP: Record<string, CCAA> = {};
 COMUNIDADES.forEach(c => { CCAA_MAP[c.id] = c; });
 
+import { useAppStore } from "@/store/useAppStore";
+
 export function TabComunidades() {
-  const [selected, setSelected] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
+  const globalData = useAppStore((state) => state.globalData);
+  const updateGlobalData = useAppStore((state) => state.updateGlobalData);
+  
+  // Mapping local string id to DB region_id (mock)
+  const regionIdMap: Record<string, number> = {
+    "aragon": 1,
+    "cataluna": 2, // fake for testing
+  };
+  
+  const reverseRegionMap: Record<number, string> = {
+    1: "aragon",
+    2: "cataluna",
+  };
+  
+  const selected = globalData?.regionId ? reverseRegionMap[globalData.regionId] || "aragon" : "aragon";
+  
+  const setSelected = (id: string | null) => {
+    const rId = id ? regionIdMap[id] || 1 : 1;
+    updateGlobalData('regionId', rId);
+  };
 
   const activeId = hovered || selected;
   const activeCCAA = activeId ? CCAA_MAP[activeId] : null;

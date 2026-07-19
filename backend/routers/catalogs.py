@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from database import get_db
 from models import (
     Module, ProfessionalFamily, Degree, Center, LearningOutcome,
-    ModuleDocument
+    ModuleDocument, IncualFamilyData
 )
 
 router = APIRouter(prefix="/api", tags=["Catalogs"])
@@ -35,7 +35,7 @@ class FamilyResponse(BaseModel):
 
 
 @router.get("/families")
-def list_families(db: Session = Depends(get_db)):
+def list_families(region_id: int = Query(1), db: Session = Depends(get_db)):
     try:
         # Get all families with their degrees
         families = db.query(ProfessionalFamily).all()
@@ -45,7 +45,11 @@ def list_families(db: Session = Depends(get_db)):
         level_order = {"BASICA": 1, "MEDIO": 2, "SUPERIOR": 3, "ESPECIALIZACION": 4}
         
         for f in families:
-            degrees = db.query(Degree).filter(Degree.family_id == f.id, Degree.code.isnot(None)).order_by(Degree.level, Degree.code).all()
+            degrees = db.query(Degree).filter(
+                Degree.family_id == f.id, 
+                Degree.code.isnot(None),
+                Degree.region_id == region_id
+            ).order_by(Degree.level, Degree.code).all()
             
             # Determine the lowest level for this family (for sorting)
             lowest_level = 99
@@ -73,6 +77,32 @@ def list_families(db: Session = Depends(get_db)):
             del f["_sort_level"]
         
         return {"status": "success", "data": result}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/families/{family_id}/incual")
+def get_incual_data(family_id: int, db: Session = Depends(get_db)):
+    try:
+        incual_data = db.query(IncualFamilyData).filter(IncualFamilyData.family_id == family_id).first()
+        if not incual_data:
+            return {"status": "success", "data": None}
+            
+        return {
+            "status": "success", 
+            "data": {
+                "id": incual_data.id,
+                "incual_slug": incual_data.incual_slug,
+                "description": incual_data.description,
+                "oferta_grado_c": incual_data.oferta_grado_c,
+                "oferta_grado_d": incual_data.oferta_grado_d,
+                "oferta_grado_e": incual_data.oferta_grado_e,
+                "crn_centers": incual_data.crn_centers,
+                "ecp_nivel_1": incual_data.ecp_nivel_1,
+                "ecp_nivel_2": incual_data.ecp_nivel_2,
+                "ecp_nivel_3": incual_data.ecp_nivel_3,
+                "last_scraped": incual_data.last_scraped.isoformat() if incual_data.last_scraped else None
+            }
+        }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -127,9 +157,12 @@ def list_learning_outcomes(db: Session = Depends(get_db)):
 from models import EvaluationCriterion
 
 @router.get("/catalog/curriculum/{degree_code}")
-def get_curriculum(degree_code: str, db: Session = Depends(get_db)):
+def get_curriculum(degree_code: str, region_id: int = Query(1), db: Session = Depends(get_db)):
     try:
-        degree = db.query(Degree).filter(Degree.code == degree_code).first()
+        degree = db.query(Degree).filter(Degree.code == degree_code, Degree.region_id == region_id).first()
+        if not degree:
+            # Fallback for old requests without region_id that might match only one
+            degree = db.query(Degree).filter(Degree.code == degree_code).first()
         if not degree:
             raise HTTPException(status_code=404, detail="Degree not found")
             

@@ -49,7 +49,9 @@
     "boletines": "Boletines",
     "familias": "Familias",
     "titulos": "Títulos",
-    "modulos": "Módulos"
+    "modulos": "Módulos",
+    "dual": "FP Dual",
+    "eqavet": "EQAVET"
   },
   "inicio": {
     "title": "Inicio",

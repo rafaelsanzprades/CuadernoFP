@@ -10,10 +10,13 @@ class Titularidad(enum.Enum):
     PRIVADA = "Privada"
 
 class NivelFP(enum.Enum):
-    BASICA = "Grado Básico"
-    MEDIO = "Grado Medio"
-    SUPERIOR = "Grado Superior"
-    ESPECIALIZACION = "Curso de Especialización"
+    GRADO_A = "Grado A (Microacreditación)"
+    GRADO_B = "Grado B (Certificado de Competencia)"
+    GRADO_C = "Grado C (Certificado Profesional)"
+    BASICA = "Grado Básico" # Grado D
+    MEDIO = "Grado Medio" # Grado D
+    SUPERIOR = "Grado Superior" # Grado D
+    ESPECIALIZACION = "Curso de Especialización" # Grado E
 
 
 
@@ -25,6 +28,7 @@ class Region(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, nullable=False) # ej: Aragón
     provinces = relationship("Province", back_populates="region")
+    degrees = relationship("Degree", back_populates="region")
 
 class Province(Base):
     __tablename__ = "provinces"
@@ -52,11 +56,31 @@ class ProfessionalFamily(Base):
     icon_url = Column(String) # Icono de eligetuprofesion.aragon.es
     color_hex = Column(String)
     degrees = relationship("Degree", back_populates="family")
+    incual_data = relationship("IncualFamilyData", back_populates="family", uselist=False)
+
+class IncualFamilyData(Base):
+    """Datos ECP del INCUAL por familia profesional"""
+    __tablename__ = "incual_family_data"
+    id = Column(Integer, primary_key=True, index=True)
+    family_id = Column(Integer, ForeignKey("professional_families.id"), unique=True)
+    incual_slug = Column(String, unique=True)
+    description = Column(String, nullable=True)
+    oferta_grado_c = Column(JSON, default=[])
+    oferta_grado_d = Column(JSON, default=[])
+    oferta_grado_e = Column(JSON, default=[])
+    crn_centers = Column(JSON, default=[])
+    ecp_nivel_1 = Column(JSON, default=[])
+    ecp_nivel_2 = Column(JSON, default=[])
+    ecp_nivel_3 = Column(JSON, default=[])
+    last_scraped = Column(DateTime, nullable=True)
+    scrape_status = Column(String, default="pending")
+    family = relationship("ProfessionalFamily", back_populates="incual_data")
 
 class Degree(Base):
     __tablename__ = "degrees"
     id = Column(Integer, primary_key=True, index=True)
     family_id = Column(Integer, ForeignKey("professional_families.id"))
+    region_id = Column(Integer, ForeignKey("regions.id"), nullable=True) # None = Estatal (BOE)
     level = Column(Enum(NivelFP), nullable=False)
     name = Column(String, nullable=False)
     hours = Column(Integer)
@@ -64,6 +88,7 @@ class Degree(Base):
     boa_articles = Column(JSON, default={})
     
     family = relationship("ProfessionalFamily", back_populates="degrees")
+    region = relationship("Region", back_populates="degrees")
     modules = relationship("Module", back_populates="degree")
 
 class Module(Base):
@@ -86,6 +111,7 @@ class LearningOutcome(Base):
     module_id = Column(Integer, ForeignKey("modules.id"))
     ra_number = Column(Integer) # e.g., 9 for "RA9"
     description = Column(String, nullable=False) # e.g., "Desarrolla..."
+    ecp_code = Column(String, nullable=True) # e.g., "UC1077_2" vinculado al INCUAL
     
     module = relationship("Module", back_populates="learning_outcomes")
     evaluation_criteria = relationship("EvaluationCriterion", back_populates="learning_outcome", cascade="all, delete-orphan")

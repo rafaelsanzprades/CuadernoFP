@@ -139,6 +139,11 @@ export const ModuleDataSchema = z.object({
   df_dua: z.array(z.any()).optional(),
   df_contingencia: z.array(z.any()).optional(),
   df_ace: z.array(z.any()).optional(),
+  
+  // FP Dual y EQAVET (Fase 4 / Sprint C)
+  dual_regimen: z.enum(["ninguno", "general", "intensivo"]).optional().default("ninguno"),
+  eqavet_evaluacion: z.record(z.string(), z.any()).optional(),
+
   info_modulo: z.record(z.string(), z.any()).optional(),
   config_contexto: z.record(z.string(), z.any()).optional(),
   config_aula: z.record(z.string(), z.any()).optional(),
@@ -208,6 +213,7 @@ export const GlobalDataSchema = z.object({
   instrumentos: z.array(z.any()).optional(),
   recursos: z.array(z.any()).optional(),
   crm_empresas: z.array(z.any()).optional(),
+  regionId: z.number().optional().default(1),
 }).passthrough();
 export type GlobalData = z.infer<typeof GlobalDataSchema>;
 

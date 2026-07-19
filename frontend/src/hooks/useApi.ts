@@ -78,8 +78,8 @@ export const saveAssignments = async (userId: string, moduleIds: number[]) => {
   return json;
 };
 
-export function useFamilies() {
-  return useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/families`, fetcher);
+export function useFamilies(regionId: number = 1) {
+  return useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/families?region_id=${regionId}`, fetcher);
 }
 
 export function useLearningOutcomes() {

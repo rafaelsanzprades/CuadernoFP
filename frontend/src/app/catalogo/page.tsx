@@ -21,10 +21,11 @@ import { TabAutores } from "@/components/features/catalogo/TabAutores";
 import { TabGrados } from "@/components/features/catalogo/TabGrados";
 import { TabComunidades } from "@/components/features/catalogo/TabComunidades";
 import { TabNormativa } from "@/components/features/catalogo/TabNormativa";
+import { TabIncual } from "@/components/features/catalogo/TabIncual";
 import { useTranslation } from "react-i18next";
+import { useAppStore } from "@/store/useAppStore";
 
-type Tab = "grados" | "familias" | "titulo" | "cursos" | "modulos" | "autores" | "comunidades" | "normativa";
-
+type Tab = "grados" | "familias" | "titulo" | "cursos" | "modulos" | "autores" | "comunidades" | "normativa" | "incual";
 
 
 export default function CiclosPage() {
@@ -48,7 +49,7 @@ function CiclosContent() {
 
   const tabParam = searchParams.get("tab") as Tab | null;
   const [activeTab, setActiveTab] = useState<Tab>(
-    tabParam && ["comunidades", "grados", "familias", "titulo", "cursos", "modulos", "autores", "normativa"].includes(tabParam) ? tabParam : "normativa"
+    tabParam && ["comunidades", "grados", "familias", "titulo", "cursos", "modulos", "autores", "normativa", "incual"].includes(tabParam) ? tabParam : "normativa"
   );
 
   const [globalSelection, setGlobalSelection] = useState(() => {
@@ -110,7 +111,8 @@ function CiclosContent() {
     modulos: 'RA → CE',
     autores: t('tabs.autores', {defaultValue: 'Autores'}),
     comunidades: t('tabs.comunidades', {defaultValue: 'Comunidades'}),
-    normativa: "Normativa"
+    normativa: "Normativa",
+    incual: "ECP INCUAL"
   };
 
   const activeTabCleanLabel = TAB_LABELS[activeTab];
@@ -140,6 +142,7 @@ function CiclosContent() {
                     { id: "titulo" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> {t('tabs.titulos', {defaultValue: 'Títulos'})}</span> },
                     { id: "cursos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> {t('tabs.modulos', {defaultValue: 'Módulos'})}</span> },
                     { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> RA → CE</span> },
+                    { id: "incual" as Tab, label: <span className="flex items-center gap-2"><Award className="w-4 h-4 text-purple-500" /> ECP INCUAL</span> },
                     { id: "autores" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-info" /> {t('tabs.autores', {defaultValue: 'Autores'})}</span> },
                   ]
                 ).map((t) => (
@@ -157,6 +160,7 @@ function CiclosContent() {
                 'titulo': { desc: 'Normativa estatal básica y currículo autonómico para ciclos formativos.' },
                 'cursos': { desc: 'Bloques de especialización y contenidos asociados a cada curso académico.' },
                 'modulos': { desc: 'Competencias específicas estructuradas en RA y CE (Art. 136, RD 659/2023).' },
+                'incual': { desc: 'Estándares de Competencia Profesional (ECP) del Catálogo Nacional (INCUAL).' },
                 'autores': { desc: 'Integración de recursos editoriales externos en formato abierto (.fpp).' },
                 'comunidades': { desc: 'Currículos autonómicos de FP: 17 CCAA + Ceuta y Melilla. DEMO usa BOA (Aragón).' }
               };
@@ -177,6 +181,7 @@ function CiclosContent() {
             {activeTab === "cursos" && <TabCursos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} onSelectModulo={handleSelectModulo} />}
             {activeTab === "modulos" && <TabModulos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
             {activeTab === "autores" && <TabAutores globalSelection={globalSelection} />}
+            {activeTab === "incual" && <TabIncual globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
             {activeTab === "comunidades" && <TabComunidades />}
             {activeTab === "normativa" && <TabNormativa />}
           </MotionWrapper>
@@ -223,9 +228,11 @@ const formatDegreeName = (code: string | null, name: string) => {
 function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string, tituloCodigo: string) => void }) {
   const [families, setFamilies] = useState<Family[]>([]);
   const [loading, setLoading] = useState(true);
+  const globalData = useAppStore((state) => state.globalData);
+  const regionId = globalData?.regionId || 1;
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/families`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/families?region_id=${regionId}`)
       .then((res) => res.json())
       .then((json) => {
         if (json.status === "success") {

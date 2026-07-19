@@ -14,7 +14,11 @@ import {
 } from "recharts";
 import { useAppStore } from "@/store/useAppStore";
 
-export const AnalisisGrupalTab = () => {
+interface AnalisisGrupalTabProps {
+  setActiveTab?: (tab: string) => void;
+}
+
+export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {}) => {
   const { moduleData, cursoData } = useAppStore();
 
   const df_al = cursoData?.df_al || [];
