@@ -290,15 +290,15 @@ Cargar todo de golpe es tan fácil como hacer un doble clic.
 Anota quién falta y qué has dado en clase hoy.
 
 - **Apartado:** Curso [Año]
-  - **Página:** Diario [🔗](https://cuadernofp.web.app/seguimiento)
-    - **Pestaña:** Diario [🔗](https://cuadernofp.web.app/seguimiento?tab=diario)
+  - **Página:** Diario [🔗](https://cuadernofp.web.app/diario)
+    - **Pestaña:** Diario [🔗](https://cuadernofp.web.app/diario?tab=diario)
       - **Bloque:** Diario de clases y contingencias (por meses)
         - **Casilla:** Checkbox Sin Docencia o Público. Marca si hoy no ha habido clase o es público.
         - **Texto:** Área de texto de seguimiento. Teclea aquí el resumen de lo que has explicado hoy.
-    - **Pestaña:** Asistencia [🔗](https://cuadernofp.web.app/seguimiento?tab=asistencia)
+    - **Pestaña:** Asistencia [🔗](https://cuadernofp.web.app/diario?tab=asistencia)
       - **Bloque:** Tabla de asistencia
         - **Botón:** de estado. Haz clic en el cuadro del alumnado y fecha para alternar entre Falta, Retraso o Justificado.
-    - **Pestaña:** Abandono [🔗](https://cuadernofp.web.app/seguimiento?tab=alerta_abandono)
+    - **Pestaña:** Abandono [🔗](https://cuadernofp.web.app/diario?tab=alerta_abandono)
       - **Bloque:** Panel de prevención
         - **Tabla:** Celdas de acciones. Registra si has llamado a las familias o derivado a orientación.
 
@@ -306,8 +306,8 @@ Anota quién falta y qué has dado en clase hoy.
 Pon las notas y deja que el sistema haga la matemática pesada de calcular la superación de los RA.
 
 - **Apartado:** Curso [Año]
-  - **Página:** Evaluación [🔗](https://cuadernofp.web.app/progreso)
-    - **Pestaña:** Resumen [🔗](https://cuadernofp.web.app/progreso?tab=resumen) (y puedes revisar Por alumnado, Grupal o Individual)
+  - **Página:** Evaluación [🔗](https://cuadernofp.web.app/evaluacion)
+    - **Pestaña:** Resumen [🔗](https://cuadernofp.web.app/evaluacion?tab=resumen) (y puedes revisar Por alumnado, Grupal o Individual)
       - **Bloque:** Tabla de calificaciones
         - **Tabla:** Celda de nota. Haz clic en la intersección de alumnado y una tarea, teclea su calificación y haz clic Intro para actualizar su porcentaje de RA al vuelo.
 
@@ -343,7 +343,7 @@ En lugar de escribir páginas y páginas de texto genérico (como "Voy a utiliza
 Solo tienes que teclearlo una vez en la pestaña **Datos** de tu módulo didáctico. El sistema guardará el nombre y sustituirá la variable mágica en todas las páginas de tu programación didáctica (portada, pie de página, contexto, etc.).
 
 ### ¿Cómo indico si mi módulo es Dual / FEOE?
-En la configuración del módulo tienes un interruptor/casilla llamado **Módulo Dualizado**. Si lo activas, el sistema habilitará automáticamente los apartados de Formación en Empresa. Además, en la matriz de Resultados de Aprendizaje, podrás marcar qué RA específicos se desarrollan en FEOE para que crucen en los informes oficiales.
+En el apartado del Módulo tienes pestañas específicas para **Dual**, **EQAVET** y **FEOE**. En la pestaña Dual podrás elegir tu régimen (General o Intensivo) y ajustar el porcentaje de cada Resultado de Aprendizaje que asume la empresa, con alertas si no cumples los mínimos legales.
 
 ---
 
