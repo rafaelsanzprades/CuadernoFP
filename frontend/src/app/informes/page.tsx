@@ -347,8 +347,8 @@ export default function InformesPage() {
 
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
               <div>
-                <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                  <span className="text-3xl text-info"><FileText className="w-8 h-8" strokeWidth={2.5} /></span> Informes
+                <h1 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-3">
+                  <span className="text-2xl text-info"><FileText className="w-8 h-8" strokeWidth={2.5} /></span> Informes
                 </h1>
                 <p className="text-muted mt-2 text-lg">Generación de reportes y boletines (PDF).</p>
               </div>

@@ -99,35 +99,35 @@ export function DashboardKPIs({ cursoData, moduleData }: DashboardKPIsProps) {
       <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
         <Card glow accent="top" className="p-6 flex flex-col items-center justify-center border-t-blue-500 hover:scale-[1.02] transition-transform">
           <span className="text-sm text-muted mb-1 text-center">Horas Previstas</span>
-          <span className="text-3xl font-bold text-foreground">
+          <span className="text-2xl font-bold text-foreground">
             <AnimatedCounter value={total_previsto} /> h
           </span>
         </Card>
         
         <Card glow accent="top" className="p-6 flex flex-col items-center justify-center border-t-[#14a085] hover:scale-[1.02] transition-transform">
           <span className="text-sm text-muted mb-1 text-center">Horas Impartidas</span>
-          <span className="text-3xl font-bold text-foreground">
+          <span className="text-2xl font-bold text-foreground">
             <AnimatedCounter value={total_impartido} /> h
           </span>
         </Card>
         
         <Card glow accent="top" className="p-6 flex flex-col items-center justify-center border-t-purple-500 hover:scale-[1.02] transition-transform">
           <span className="text-sm text-muted mb-1 text-center">% Progreso</span>
-          <span className="text-3xl font-bold text-foreground">
+          <span className="text-2xl font-bold text-foreground">
             <AnimatedCounter value={porcentaje_progreso} suffix="%" decimals={1} />
           </span>
         </Card>
         
         <Card glow accent="top" className="p-6 flex flex-col items-center justify-center border-t-orange-500 hover:scale-[1.02] transition-transform">
           <span className="text-sm text-muted mb-1 text-center">Horas sin docencia</span>
-          <span className="text-3xl font-bold text-foreground">
+          <span className="text-2xl font-bold text-foreground">
             <AnimatedCounter value={h_sin_docencia} /> h
           </span>
         </Card>
         
         <Card glow accent="top" className="p-6 flex flex-col items-center justify-center border-t-yellow-500 hover:scale-[1.02] transition-transform">
           <span className="text-sm text-muted mb-1 text-center">% Sin docencia</span>
-          <span className="text-3xl font-bold text-foreground">
+          <span className="text-2xl font-bold text-foreground">
             <AnimatedCounter value={perc_sin_docencia} suffix="%" decimals={1} />
           </span>
         </Card>

@@ -182,10 +182,10 @@ export default function SeguimientoPage() {
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-4">
             <div>
-              <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
+              <h1 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <span className="inline-flex"><MapPin className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.diario_title')}
               </h1>
-              <p className="text-muted mt-2 text-base">{t('pages.diario_desc')}</p>
+              <p className="text-muted mt-2 text-sm">{t('pages.diario_desc')}</p>
             </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab}>
@@ -219,7 +219,7 @@ export default function SeguimientoPage() {
               })()}
               {/* Seguimiento diario */}
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold flex items-center gap-2 text-foreground">
+                <h2 className="text-lg font-bold flex items-center gap-2 text-foreground">
                   <FileEdit className="w-5 h-5 text-accent" /> Diario de clases y contingencias
                 </h2>
                 <button
@@ -295,7 +295,7 @@ export default function SeguimientoPage() {
                                     </div>
                                   </div>
                                   <div className="flex items-start gap-3">
-                                    <span className="text-xl mt-2 opacity-50 select-none"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
+                                    <span className="text-lg mt-2 opacity-50 select-none"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
                                     <textarea
                                       value={ledgerEntry.seguimiento}
                                       onChange={(e) => handleLedgerChange(dateStr, 'seguimiento', e.target.value)}

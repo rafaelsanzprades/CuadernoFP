@@ -137,7 +137,7 @@ export default function EstadisticasTab() {
       <div className="space-y-6 animate-in fade-in duration-500">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight mb-2 flex items-center gap-3">
+            <h1 className="text-2xl font-bold tracking-tight mb-2 flex items-center gap-3">
               <BarChart3 className="w-8 h-8 text-accent" /> Dashboard de Analítica
             </h1>
             <p className="text-muted">
@@ -166,23 +166,23 @@ export default function EstadisticasTab() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="bg-foreground/5 border border-[var(--glass-border)] p-6 rounded-xl text-center">
             <p className="text-muted text-sm mb-2">Alumnos Matriculados</p>
-            <p className="text-4xl font-bold text-foreground">{alumnosIds.length}</p>
+            <p className="text-2xl font-bold text-foreground">{alumnosIds.length}</p>
           </div>
           <div className="bg-foreground/5 border border-[var(--glass-border)] p-6 rounded-xl text-center">
             <p className="text-muted text-sm mb-2">Tasa de Aprobados ({evalPeriod})</p>
-            <p className="text-4xl font-bold text-emerald-500">
+            <p className="text-2xl font-bold text-emerald-500">
               {alumnosIds.length > 0 ? Math.round((aprobados / (aprobados+suspensos || 1)) * 100) : 0}%
             </p>
           </div>
           <div className="bg-foreground/5 border border-[var(--glass-border)] p-6 rounded-xl text-center">
             <p className="text-muted text-sm mb-2">Tasa de Repetidores</p>
-            <p className="text-4xl font-bold text-amber-500">
+            <p className="text-2xl font-bold text-amber-500">
               {alumnosIds.length > 0 ? Math.round((totalRepeaters / alumnosIds.length) * 100) : 0}%
             </p>
           </div>
           <div className="bg-foreground/5 border border-[var(--glass-border)] p-6 rounded-xl text-center">
             <p className="text-muted text-sm mb-2">Edad Media</p>
-            <p className="text-4xl font-bold text-blue-500">
+            <p className="text-2xl font-bold text-blue-500">
               {(() => {
                 const ages = activeAlumnos.map(a => parseInt(a.Edad || "")).filter(n => !isNaN(n));
                 if (ages.length === 0) return "-";

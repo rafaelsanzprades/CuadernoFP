@@ -361,7 +361,7 @@ export default function ArchivosTrabajoPage() {
 
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div>
-              <h1 className="text-3xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
+              <h1 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <FolderOpen className="w-8 h-8 text-accent" /> {t('pages.archivos_title')}
               </h1>
               <p className="text-muted mt-2 text-lg">{t('pages.archivos_desc')}</p>
@@ -421,7 +421,7 @@ export default function ArchivosTrabajoPage() {
                     </div>
                     <div className="relative z-10 flex flex-col h-full flex-1">
                       <div className="mb-4">
-                        <h3 className="text-xl font-bold text-foreground flex items-center gap-2">
+                        <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
                           <FolderOpen className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : 'text-accent'}`} /> Grupos
                         </h3>
                         <p className="text-sm text-muted mt-2 leading-relaxed">
@@ -492,7 +492,7 @@ export default function ArchivosTrabajoPage() {
                     <div className="relative z-10 flex flex-col h-full flex-1">
                       <div className="mb-4">
                         <div className="flex justify-between items-center mb-1">
-                          <h3 className="text-xl font-bold text-foreground flex items-center gap-2">
+                          <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
                             <BookOpen className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : 'text-info'}`} /> Programaciones
                           </h3>
                           {hasPdFile && <Badge variant={isDemoLoaded ? 'warning' : 'info'}>Activa</Badge>}
@@ -570,7 +570,7 @@ export default function ArchivosTrabajoPage() {
                     <div className="relative z-10 flex flex-col h-full flex-1">
                       <div className="mb-4">
                         <div className="flex justify-between items-center mb-1">
-                          <h3 className={`text-xl font-bold flex items-center gap-2 ${(!isDemoLoaded && !hasPdFile) ? 'text-muted' : 'text-foreground'}`}>
+                          <h3 className={`text-lg font-bold flex items-center gap-2 ${(!isDemoLoaded && !hasPdFile) ? 'text-muted' : 'text-foreground'}`}>
                             <Users className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : (!isDemoLoaded && !hasPdFile) ? 'text-muted' : 'text-success'}`} /> Cursos
                           </h3>
                           {hasCursoFile && <Badge variant={isDemoLoaded ? 'warning' : 'success'}>Activo</Badge>}
@@ -646,7 +646,7 @@ export default function ArchivosTrabajoPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   {/* Columna Google Drive */}
                   <div className="space-y-4">
-                    <h3 className="text-xl font-bold text-foreground flex items-center gap-2">
+                    <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
                       <Cloud className="w-5 h-5 text-[#4285F4]" /> Google Drive
                     </h3>
                     <GoogleDriveSyncPanel />
@@ -695,7 +695,7 @@ export default function ArchivosTrabajoPage() {
           aria-labelledby="validation-modal-title"
         >
           <Card className="w-full max-w-xl p-6 shadow-2xl border-[var(--glass-border)]">
-            <h2 id="validation-modal-title" className="text-xl font-bold mb-4 flex items-center gap-2">
+            <h2 id="validation-modal-title" className="text-lg font-bold mb-4 flex items-center gap-2">
               <ShieldAlert className="w-5 h-5 text-warning" />
               Validación de Enlaces del Workspace
             </h2>

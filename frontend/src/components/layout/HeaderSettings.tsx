@@ -138,7 +138,7 @@ export function HeaderSettings() {
                   <div className="grid grid-cols-3 gap-2">
                     <Button variant="secondary" size="sm" onClick={() => changeFontSize(100)} className={`text-xs ${fontSizeScale === 100 ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>Normal</Button>
                     <Button variant="secondary" size="sm" onClick={() => changeFontSize(115)} className={`text-sm ${fontSizeScale === 115 ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>Grande</Button>
-                    <Button variant="secondary" size="sm" onClick={() => changeFontSize(130)} className={`text-base font-bold ${fontSizeScale === 130 ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>Extra</Button>
+                    <Button variant="secondary" size="sm" onClick={() => changeFontSize(130)} className={`text-sm font-bold ${fontSizeScale === 130 ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>Extra</Button>
                   </div>
                   
                   <Button variant="secondary" size="sm" onClick={toggleHighContrast} className={`w-full flex justify-between ${highContrast ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>

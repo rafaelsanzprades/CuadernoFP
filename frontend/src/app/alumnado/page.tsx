@@ -237,7 +237,7 @@ export default function AlumnadoPage() {
           <MotionWrapper className="space-y-4 pb-12">
             <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
+              <h1 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.alumnado_title')}
               </h1>
               <p className="text-muted mt-2 text-lg">{t('pages.alumnado_desc')}</p>

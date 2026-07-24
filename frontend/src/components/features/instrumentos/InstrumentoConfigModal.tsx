@@ -30,7 +30,7 @@ export function InstrumentoConfigModal({ isOpen, onClose, instrumentoId, instrum
           <X className="w-5 h-5" />
         </button>
         
-        <h3 className="text-xl font-bold mb-1 flex items-center gap-2">
+        <h3 className="text-lg font-bold mb-1 flex items-center gap-2">
           <Settings2 className="w-5 h-5 text-indigo-400" /> Configuración Avanzada
         </h3>
         <p className="text-sm text-muted mb-6">Instrumento: {instrumentoId} - {instrumentoDesc}</p>

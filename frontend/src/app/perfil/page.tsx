@@ -51,7 +51,7 @@ export default function PerfilPage() {
               <h1 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> Perfil y configuración
               </h1>
-              <p className="text-muted mt-2 text-base">
+              <p className="text-muted mt-2 text-sm">
                 Personaliza la apariencia, el idioma y las opciones de accesibilidad de la aplicación.
               </p>
             </div>

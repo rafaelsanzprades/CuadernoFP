@@ -369,8 +369,8 @@ export default function MagiaPage() {
 
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
               <div>
-                <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                  <span className="text-3xl text-info"><Sparkles className="w-8 h-8" strokeWidth={2.5} /></span> Magia
+                <h1 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-3">
+                  <span className="text-2xl text-info"><Sparkles className="w-8 h-8" strokeWidth={2.5} /></span> Magia
                 </h1>
                 <p className="text-muted mt-2 text-lg">Generación de la programación didáctica y reportes.</p>
               </div>
@@ -446,7 +446,7 @@ export default function MagiaPage() {
                           const isAragon = comunidad === "Aragón";
                           return (
                             <details key={comunidad} open={isAragon} className="group border border-[var(--glass-border)] rounded-xl bg-background/50 mb-4 shadow-sm overflow-hidden">
-                              <summary className="p-4 font-bold cursor-pointer text-xl flex items-center justify-between hover:bg-foreground/5 transition-colors list-none border-b border-transparent group-open:border-[var(--glass-border)] group-open:bg-foreground/5">
+                              <summary className="p-4 font-bold cursor-pointer text-lg flex items-center justify-between hover:bg-foreground/5 transition-colors list-none border-b border-transparent group-open:border-[var(--glass-border)] group-open:bg-foreground/5">
                                 <span className="flex items-center gap-2"><MapPin className={`w-5 h-5 ${isAragon ? 'text-purple-500' : 'text-muted-foreground'}`} /> {comunidad}</span>
                                 <ChevronDown className="w-5 h-5 transition-transform group-open:rotate-180 text-muted" />
                               </summary>

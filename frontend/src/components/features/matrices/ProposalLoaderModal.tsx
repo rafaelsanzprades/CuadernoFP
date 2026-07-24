@@ -38,7 +38,7 @@ export function ProposalLoaderModal({ isOpen, onClose, activeModuleId, onApplyPr
               <DownloadCloud className="w-5 h-5 text-info" />
             </div>
             <div>
-              <h2 className="text-xl font-extrabold text-foreground tracking-tight">Propuestas editoriales / autores</h2>
+              <h2 className="text-lg font-extrabold text-foreground tracking-tight">Propuestas editoriales / autores</h2>
               <p className="text-sm text-muted">Selecciona una propuesta predefinida para este módulo ({moduleCode})</p>
             </div>
           </div>

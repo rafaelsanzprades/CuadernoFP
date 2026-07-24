@@ -15,7 +15,7 @@ export function MetodologiaContextoTab() {
               <Map className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-[var(--text-primary)]">Contexto y entorno</h2>
+              <h2 className="text-lg font-bold text-[var(--text-primary)]">Contexto y entorno</h2>
               <p className="text-sm text-muted-foreground">Define los entornos geográfico, socioeconómico y escolar del módulo.</p>
             </div>
           </div>
@@ -46,7 +46,7 @@ export function MetodologiaContextoTab() {
               <BookOpen className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-[var(--text-primary)]">Metodología y orientaciones</h2>
+              <h2 className="text-lg font-bold text-[var(--text-primary)]">Metodología y orientaciones</h2>
               <p className="text-sm text-muted-foreground">Estrategias metodológicas y medidas de inclusión para el alumnado.</p>
             </div>
           </div>
@@ -72,7 +72,7 @@ export function MetodologiaContextoTab() {
               <Settings className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-[var(--text-primary)]">Medidas de contingencia</h2>
+              <h2 className="text-lg font-bold text-[var(--text-primary)]">Medidas de contingencia</h2>
               <p className="text-sm text-muted-foreground">Planes de actuación ante ausencias prolongadas.</p>
             </div>
           </div>

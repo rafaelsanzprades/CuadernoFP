@@ -89,7 +89,7 @@ export default function LegalPage() {
 
             {/* Título */}
             <div>
-              <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
+              <h1 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <Scale className="w-[1.2em] h-[1.2em] mr-1 text-accent" /> Legal
               </h1>
               <p className="text-muted mt-2 text-lg">Aviso legal, privacidad, cookies, licencias y accesibilidad.</p>
@@ -198,7 +198,7 @@ export default function LegalPage() {
 
                   {/* 4a. Software */}
                   <div className="space-y-3">
-                    <h3 className="text-base font-bold text-foreground">4a. Código Fuente — GNU GPLv3</h3>
+                    <h3 className="text-sm font-bold text-foreground">4a. Código Fuente — GNU GPLv3</h3>
                     <p className="text-sm text-foreground/80 leading-relaxed">
                       El código fuente de esta aplicación es de código abierto y se distribuye bajo los términos de la <strong>Licencia Pública General de GNU versión 3 (GNU GPLv3)</strong>.
                     </p>
@@ -232,7 +232,7 @@ export default function LegalPage() {
 
                   {/* 4b. Contenido */}
                   <div className="space-y-3 mt-6">
-                    <h3 className="text-base font-bold text-foreground">4b. Contenido y Materiales — CC BY-NC-SA 4.0</h3>
+                    <h3 className="text-sm font-bold text-foreground">4b. Contenido y Materiales — CC BY-NC-SA 4.0</h3>
                     <p className="text-sm text-foreground/80 leading-relaxed">
                       Los textos, guías, estructura visual de la interfaz, logotipos y materiales de ayuda están protegidos bajo <strong>Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</strong>.
                     </p>
@@ -646,7 +646,7 @@ export default function LegalPage() {
             {activeTab === "mapa" && (
               <div className="space-y-12 animate-in fade-in duration-500">
                 <section className="space-y-3">
-                  <h2 className="text-xl font-bold text-foreground border-b border-[var(--glass-border)] pb-2">
+                  <h2 className="text-lg font-bold text-foreground border-b border-[var(--glass-border)] pb-2">
                     Mapa de la Aplicación (Sitemap)
                   </h2>
                   <p className="text-sm text-foreground/80 leading-relaxed">

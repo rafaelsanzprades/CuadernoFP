@@ -43,7 +43,7 @@ export function EmptyState({
         transition={{ delay: 0.3, duration: 0.5 }}
         className="space-y-3 relative z-10"
       >
-        <h2 className="text-3xl font-extrabold text-foreground tracking-tight">{title}</h2>
+        <h2 className="text-2xl font-extrabold text-foreground tracking-tight">{title}</h2>
         <div className="text-muted max-w-lg mx-auto text-lg leading-relaxed">
           {description}
         </div>

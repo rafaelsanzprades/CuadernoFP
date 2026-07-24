@@ -109,7 +109,7 @@ export const AttendanceGrid = () => {
           <ChevronLeft className="w-4 h-4" /> Día anterior
         </button>
         <div className="flex items-center gap-4">
-          <h2 className="text-xl font-bold">
+          <h2 className="text-lg font-bold">
             Asistencia: {format(currentDate, "EEEE d 'de' MMMM", { locale: es })}
           </h2>
           {menores > 0 && (

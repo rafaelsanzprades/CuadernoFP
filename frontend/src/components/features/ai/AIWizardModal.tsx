@@ -82,7 +82,7 @@ export function AIWizardModal({ isOpen, onClose, onSuccess }: AIWizardModalProps
               <Sparkles className="w-5 h-5 text-accent" />
             </div>
             <div>
-              <h2 className="text-xl font-extrabold text-foreground tracking-tight">Asistente mágico IA</h2>
+              <h2 className="text-lg font-extrabold text-foreground tracking-tight">Asistente mágico IA</h2>
               <p className="text-sm text-muted">Sube tu currículo en PDF para extraer la programación</p>
             </div>
           </div>
@@ -127,7 +127,7 @@ export function AIWizardModal({ isOpen, onClose, onSuccess }: AIWizardModalProps
                 <Bot className="w-6 h-6 text-foreground absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
               </div>
               <div className="text-center space-y-2">
-                <h3 className="text-xl font-bold text-foreground animate-pulse">Analizando documento...</h3>
+                <h3 className="text-lg font-bold text-foreground animate-pulse">Analizando documento...</h3>
                 <p className="text-sm text-muted max-w-xs mx-auto">
                   La IA está leyendo y estructurando la información. Esto puede tardar unos 20-30 segundos. Por favor, no cierres la ventana.
                 </p>

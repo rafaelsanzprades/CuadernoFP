@@ -79,8 +79,8 @@ export function WelcomeWizard({ onComplete, fetchModules, setActiveModuleId, set
         <Card className="p-10 shadow-2xl border-t-4 border-t-accent bg-card/95 backdrop-blur-lg">
           
           <div className="text-center mb-10">
-            <h2 className="text-4xl font-extrabold text-foreground mb-4 flex items-center justify-center gap-3">
-              <span className="text-5xl"><span className="inline-flex"><Hand className="w-[1.2em] h-[1.2em] mr-1" /></span></span> ¡Bienvenido a Cuaderno FP!
+            <h2 className="text-2xl font-extrabold text-foreground mb-4 flex items-center justify-center gap-3">
+              <span className="text-2xl"><span className="inline-flex"><Hand className="w-[1.2em] h-[1.2em] mr-1" /></span></span> ¡Bienvenido a Cuaderno FP!
             </h2>
             <p className="text-lg text-muted">
               Parece que es tu primera vez aquí. Vamos a preparar tu Archivos para que puedas empezar a volar.
@@ -102,7 +102,7 @@ export function WelcomeWizard({ onComplete, fetchModules, setActiveModuleId, set
               >
                 <div className="flex items-center gap-3 mb-3">
                   <Gift className="w-8 h-8 text-accent group-hover:scale-110 transition-transform" />
-                  <h3 className="text-xl font-bold text-foreground">Probar con DEMO</h3>
+                  <h3 className="text-lg font-bold text-foreground">Probar con DEMO</h3>
                 </div>
                 <p className="text-sm text-muted">
                   Carga un Archivos de demostración con datos ficticios para explorar todas las funciones de la aplicación.
@@ -115,7 +115,7 @@ export function WelcomeWizard({ onComplete, fetchModules, setActiveModuleId, set
               >
                 <div className="flex items-center gap-3 mb-3">
                   <Rocket className="w-8 h-8 text-info group-hover:scale-110 transition-transform" />
-                  <h3 className="text-xl font-bold text-foreground">Crear mi Archivos</h3>
+                  <h3 className="text-lg font-bold text-foreground">Crear mi Archivos</h3>
                 </div>
                 <p className="text-sm text-muted">
                   Empieza desde cero creando tu propia programación y curso vacíos para trabajar con tus datos reales.

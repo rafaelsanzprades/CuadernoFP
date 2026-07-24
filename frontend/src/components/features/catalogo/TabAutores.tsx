@@ -112,7 +112,7 @@ export function TabAutores({ globalSelection }: { globalSelection: any }) {
   return (
     <div className="space-y-6 animate-in fade-in duration-300">
       <Card className="p-6 border-info/20 bg-foreground/5">
-        <h2 className="text-xl font-bold flex items-center gap-2 mb-2">
+        <h2 className="text-lg font-bold flex items-center gap-2 mb-2">
           <DownloadCloud className="w-5 h-5 text-info" /> Catálogo de Autores y Editoriales
         </h2>
         <p className="text-muted text-sm">

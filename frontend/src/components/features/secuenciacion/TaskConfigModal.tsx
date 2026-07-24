@@ -70,7 +70,7 @@ export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps)
       <Card className="w-full max-w-4xl bg-[var(--glass-bg)] border border-[var(--glass-border)] shadow-2xl flex flex-col max-h-[90vh]">
         <div className="p-6 border-b border-[var(--glass-border)] flex justify-between items-center bg-foreground/5 shrink-0 rounded-t-xl">
           <div>
-            <h2 id="modal-title" className="text-xl font-bold flex items-center gap-2 text-foreground">
+            <h2 id="modal-title" className="text-lg font-bold flex items-center gap-2 text-foreground">
               <FileText className="w-5 h-5 text-accent" />
               Diseño de la Tarea Competencial
             </h2>

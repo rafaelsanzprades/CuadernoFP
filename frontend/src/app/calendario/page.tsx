@@ -375,7 +375,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
                     </span>
                     <button
                       onClick={() => onUpdateNote(k, "")}
-                      className="text-muted/80 hover:text-danger font-bold text-base leading-none"
+                      className="text-muted/80 hover:text-danger font-bold text-sm leading-none"
                     >×</button>
                   </div>
                 );
@@ -512,7 +512,7 @@ export default function CalendarioPage() {
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
           <main id="main-content" tabIndex={-1} className="flex-1 flex items-center justify-center content-area">
-            <div className="text-xl text-info animate-pulse">Cargando calendario...</div>
+            <div className="text-lg text-info animate-pulse">Cargando calendario...</div>
           </main>
         </div>
       </div>
@@ -614,10 +614,10 @@ export default function CalendarioPage() {
           <MotionWrapper className="space-y-4 pb-12">
             {/* Page heading */}
             <div>
-              <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
+              <h1 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <Calendar className="w-6 h-6 text-accent" /> {t('pages.calendario_title', {defaultValue: 'Calendario académico'})}
               </h1>
-              <p className="text-muted mt-2 text-base">{t('pages.calendario_desc', {defaultValue: 'Horarios, trimestres, festivos y eventos del curso.'})}</p>
+              <p className="text-muted mt-2 text-sm">{t('pages.calendario_desc', {defaultValue: 'Horarios, trimestres, festivos y eventos del curso.'})}</p>
             </div>
 
           {/* Save message */}
@@ -668,7 +668,7 @@ export default function CalendarioPage() {
               {/* Fechas generales */}
               <Card className="p-6 border-t-4 border-t-blue-500 overflow-visible z-30">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-bold">Fechas generales</h2>
+                  <h2 className="text-lg font-bold">Fechas generales</h2>
                   <div className="flex gap-2">
 
                     <Button
@@ -710,7 +710,7 @@ export default function CalendarioPage() {
               {/* Sesiones semanales */}
               <Card className="p-6 border-t-4 border-t-purple-500">
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl font-bold flex items-center gap-2">Horario semanal</h2>
+                  <h2 className="text-lg font-bold flex items-center gap-2">Horario semanal</h2>
                   <div className="bg-foreground/15 px-4 py-2 rounded-lg border border-[var(--glass-border)] text-sm">
                     Desfase con BOA ({h_sem} h/sem):{" "}
                     <span className={`font-bold ${suma_horario === h_sem ? "text-success" : "text-warning"}`}>
@@ -726,7 +726,7 @@ export default function CalendarioPage() {
                         type="number" min="0" max="8"
                         value={Number(horario[day]) || 0}
                         onChange={e => handleUpdateHorario(day, Number(e.target.value))}
-                        className="w-full text-center text-xl font-mono bg-background border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground focus:border-purple-500 focus:outline-none"
+                        className="w-full text-center text-lg font-mono bg-background border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground focus:border-purple-500 focus:outline-none"
                       />
                     </div>
                   ))}
@@ -735,7 +735,7 @@ export default function CalendarioPage() {
 
               {/* Días hábiles */}
               <Card className="p-6 border-t-4 border-t-yellow-500 overflow-hidden">
-                <h2 className="text-xl font-bold mb-4 flex items-center gap-2">Información sobre días hábiles</h2>
+                <h2 className="text-lg font-bold mb-4 flex items-center gap-2">Información sobre días hábiles</h2>
                 <div className="overflow-x-auto rounded-xl border border-[var(--glass-border)]">
                   <table className="w-full text-center text-sm border-collapse">
                     <thead>
@@ -762,11 +762,11 @@ export default function CalendarioPage() {
     <tr key={row.title} className={`${row.bg} border-b border-[var(--glass-border)] last:border-0`}>
                             <td className="p-3 font-bold text-left">{row.title}</td>
                             {daysArr.map(day => (
-                              <td key={day} className={`p-3 ${!Number(horario[day]) ? 'opacity-30' : 'font-mono text-base font-medium'}`}>
+                              <td key={day} className={`p-3 ${!Number(horario[day]) ? 'opacity-30' : 'font-mono text-sm font-medium'}`}>
                                 {row.wd[day]}
                               </td>
                             ))}
-                            <td className="p-3 font-bold border-l border-[var(--glass-border)] text-base font-mono">
+                            <td className="p-3 font-bold border-l border-[var(--glass-border)] text-sm font-mono">
                               {totalDays}
                             </td>
                           </tr>
@@ -780,7 +780,7 @@ export default function CalendarioPage() {
               {/* Trimestres */}
               <Card className="p-6 border-t-4 border-t-emerald-500 overflow-visible z-20">
                 <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-xl font-bold">Trimestres</h2>
+                  <h2 className="text-lg font-bold">Trimestres</h2>
                 </div>
                 <div className="grid grid-cols-3 gap-6">
                   {[
@@ -807,7 +807,7 @@ export default function CalendarioPage() {
 
               {/* Horas reales */}
               <Card className="p-6 border-t-4 border-t-cyan-500">
-                <h2 className="text-xl font-bold mb-6">Horas lectivas reales</h2>
+                <h2 className="text-lg font-bold mb-6">Horas lectivas reales</h2>
                 <div className="grid grid-cols-3 gap-6 mb-6">
                   {[
                     { label: "1er trimestre", value: h1 },
@@ -839,7 +839,7 @@ export default function CalendarioPage() {
 
               {/* FP Dual / FEOE - 5 columnas */}
               <Card className="p-6 border-t-4 border-t-orange-500 overflow-visible">
-                <h2 className="text-xl font-bold mb-6">FP Dual (FEOE)</h2>
+                <h2 className="text-lg font-bold mb-6">FP Dual (FEOE)</h2>
                 <div className="grid grid-cols-5 gap-4 items-end">
                   {/* Col 1: Selector de tipo */}
                   <div>
@@ -906,7 +906,7 @@ export default function CalendarioPage() {
 
           {activeTab === "eventos" && (
             <Card className="p-6 border-t-4 border-t-yellow-500 overflow-visible z-20">
-              <h2 className="text-xl font-bold mb-2"> Festivos y eventos</h2>
+              <h2 className="text-lg font-bold mb-2"> Festivos y eventos</h2>
               <p className="text-muted text-sm mb-4">
                 Introduce manualmente o haz clic en el calendario. Los festivos excluyen horas del cómputo real.
               </p>

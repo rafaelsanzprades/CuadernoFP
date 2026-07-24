@@ -288,7 +288,7 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
                 style={{ backgroundColor: `${family.color_hex}20`, border: `1px solid ${family.color_hex}40` }}
               >
                 {(family.icon_url.includes("fa-") || family.icon_url.startsWith("fas")) ? (
-                  <i className={`${family.icon_url} text-4xl`} style={{ color: family.color_hex }} />
+                  <i className={`${family.icon_url} text-2xl`} style={{ color: family.color_hex }} />
                 ) : (
                   <img src={family.icon_url} alt={family.code} className="w-full h-full object-contain filter drop-shadow-md" />
                 )}
@@ -449,7 +449,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
         <div className="space-y-6 mt-6">
           <div className="flex items-center justify-between bg-foreground/5 p-4 rounded-xl border border-[var(--glass-border)]">
             <div>
-              <h2 className="text-xl font-bold text-foreground flex items-center gap-3">
+              <h2 className="text-lg font-bold text-foreground flex items-center gap-3">
                 {formatDegreeName(selectedTituloObj.code, selectedTituloObj.name)}
                 {selectedTituloObj.code && !selectedTituloObj.name.startsWith(selectedTituloObj.code) && <Badge variant="default" className="font-mono">{selectedTituloObj.code}</Badge>}
               </h2>
@@ -469,7 +469,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
                 return (
                   <Card key={artKey} className="overflow-hidden">
                     <div className="bg-foreground/5 px-6 py-4 border-b border-[var(--glass-border)]">
-                      <h3 className="text-base font-bold text-foreground">{articleTitles[artKey] || artKey}</h3>
+                      <h3 className="text-sm font-bold text-foreground">{articleTitles[artKey] || artKey}</h3>
                     </div>
                     <div className="p-6 text-sm text-foreground/80 whitespace-pre-wrap leading-relaxed">
                       {/* Hide raw text when structured data exists */}

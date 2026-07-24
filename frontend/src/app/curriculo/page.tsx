@@ -138,7 +138,7 @@ export default function MatricesPage() {
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-4 pb-12">
             <div>
-              <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
+              <h1 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <span className="inline-flex"><Grid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.matrices_title')}
               </h1>
               <p className="text-muted mt-2 text-lg">{t('pages.matrices_desc')}</p>

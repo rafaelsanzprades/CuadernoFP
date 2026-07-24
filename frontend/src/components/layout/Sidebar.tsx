@@ -163,7 +163,7 @@ export default function Sidebar() {
         {isSidebarOpen && (
           <div className="flex flex-col mb-3 w-full pr-2 min-w-0">
               <Link href="/inicio" onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}>
-                <h1 className={`text-xl font-extrabold leading-tight transition-colors tracking-tight whitespace-nowrap cursor-pointer ${dataSource === 'demo' ? 'text-warning hover:text-white' : 'text-success hover:text-white'}`}>
+                <h1 className={`text-lg font-extrabold leading-tight transition-colors tracking-tight whitespace-nowrap cursor-pointer ${dataSource === 'demo' ? 'text-warning hover:text-white' : 'text-success hover:text-white'}`}>
                   Cuaderno FP
                 </h1>
               </Link>
@@ -272,7 +272,7 @@ export default function Sidebar() {
                   <CalendarDays className="w-5 h-5" strokeWidth={2} />
                 </span>
                 <div className="flex flex-col gap-1 items-start">
-                  <span className={`text-base leading-tight whitespace-nowrap font-bold ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
+                  <span className={`text-sm leading-tight whitespace-nowrap font-bold ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
                     {t('sidebar.agenda')}
                   </span>
                   <span suppressHydrationWarning className={`px-2 py-0.5 rounded text-xs border font-semibold tracking-wider leading-none ${dataSource === 'demo' ? 'text-warning bg-warning/10 border-warning/30' : 'text-accent bg-accent/10 border-accent/30'}`}>
@@ -308,7 +308,7 @@ export default function Sidebar() {
           <div className="flex flex-col gap-0.5">
             {isSidebarOpen && navGroups[0].title && (
               <div className="flex flex-col mb-1.5 mt-1 gap-1.5">
-                <div className="text-base font-bold text-foreground/90 tracking-wide px-1">
+                <div className="text-sm font-bold text-foreground/90 tracking-wide px-1">
                   {t('navGroups.general')}
                 </div>
               </div>
@@ -368,7 +368,7 @@ export default function Sidebar() {
             <div key={group.title} className="flex flex-col gap-0.5">
               {isSidebarOpen && (
                 <div className="flex flex-col mb-2 mt-1 gap-1.5">
-                  <div className="text-base font-bold text-foreground/90 tracking-wide px-1">
+                  <div className="text-sm font-bold text-foreground/90 tracking-wide px-1">
                     {translatedBaseTitle}
                   </div>
                   {infoValue && infoValue !== 'CÓDIGO' && infoValue !== 'AÑO' && (

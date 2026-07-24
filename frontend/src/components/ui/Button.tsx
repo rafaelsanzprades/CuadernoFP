@@ -11,7 +11,7 @@ export function Button({ children, className = '', variant = 'primary', size = '
   const sizes = {
     sm: "text-xs py-1.5 px-3",
     md: "text-sm py-2 px-5",
-    lg: "text-base py-2.5 px-6",
+    lg: "text-sm py-2.5 px-6",
   };
 
   let variantStyle = "";

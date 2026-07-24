@@ -9,7 +9,7 @@ export const showRichToast = {
           <div className="flex items-start">
             <div className="flex-shrink-0 pt-0.5">
               <div className="h-10 w-10 rounded-full bg-success/10 flex items-center justify-center">
-                <span className="text-success text-xl font-bold"><span className="inline-flex"><Check className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
+                <span className="text-success text-lg font-bold"><span className="inline-flex"><Check className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
               </div>
             </div>
             <div className="ml-3 flex-1">
@@ -37,7 +37,7 @@ export const showRichToast = {
           <div className="flex items-start">
             <div className="flex-shrink-0 pt-0.5">
               <div className="h-10 w-10 rounded-full bg-danger/10 flex items-center justify-center">
-                <span className="text-danger text-xl font-bold"><span className="inline-flex"><X className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
+                <span className="text-danger text-lg font-bold"><span className="inline-flex"><X className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
               </div>
             </div>
             <div className="ml-3 flex-1">
@@ -65,7 +65,7 @@ export const showRichToast = {
           <div className="flex items-start">
             <div className="flex-shrink-0 pt-0.5">
               <div className="h-10 w-10 rounded-full bg-info/10 flex items-center justify-center">
-                <span className="text-info text-xl font-bold">ℹ️</span>
+                <span className="text-info text-lg font-bold">ℹ️</span>
               </div>
             </div>
             <div className="ml-3 flex-1">

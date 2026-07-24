@@ -109,7 +109,7 @@ export default function MetodologiaConfigPage() {
           <MotionWrapper>
             <div className="mb-8 flex items-center justify-between">
               <div>
-                <h1 className="text-3xl font-bold tracking-tight mb-2 flex items-center gap-3">
+                <h1 className="text-2xl font-bold tracking-tight mb-2 flex items-center gap-3">
                   <Lightbulb className="w-8 h-8 text-accent" />
                   Metodología
                 </h1>

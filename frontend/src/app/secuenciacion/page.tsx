@@ -175,7 +175,7 @@ export default function ProgramacionPage() {
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-4 pb-12">
             <div>
-            <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
+            <h1 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-3">
               <span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.programacion_title')}
             </h1>
             <p className="text-muted mt-2 text-lg">{t('pages.programacion_desc')}</p>
@@ -232,7 +232,7 @@ export default function ProgramacionPage() {
               {df_ud.length === 0 ? (
                 <div className="text-center py-12">
                   <ClipboardList className="w-16 h-16 text-muted-foreground opacity-50 mx-auto mb-4" />
-                  <h3 className="text-xl font-bold mb-2">No hay unidades didácticas</h3>
+                  <h3 className="text-lg font-bold mb-2">No hay unidades didácticas</h3>
                   <p className="text-muted">Aún no has creado ninguna Unidad Didáctica (UD).</p>
                   <p className="text-muted mt-1">Para secuenciar sesiones, primero debes crear las UDs en la sección <strong>Matrices</strong>.</p>
                 </div>

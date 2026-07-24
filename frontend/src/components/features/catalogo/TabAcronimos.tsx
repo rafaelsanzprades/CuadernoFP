@@ -212,7 +212,7 @@ export function TabAcronimos() {
       <Card className="p-6 overflow-hidden">
         <div className="flex items-center gap-3 mb-6">
           <BookOpen className="w-6 h-6 text-accent" />
-          <h2 className="text-xl font-bold text-foreground">Acrónimos y glosario</h2>
+          <h2 className="text-lg font-bold text-foreground">Acrónimos y glosario</h2>
         </div>
         <div className="prose prose-sm dark:prose-invert max-w-none 
           prose-headings:text-foreground prose-headings:font-bold 

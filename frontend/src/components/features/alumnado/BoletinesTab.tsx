@@ -51,7 +51,7 @@ export const BoletinesTab = () => {
   if (activeStudents.length === 0) {
     return (
       <Card className="p-8 text-center border-l-4 border-l-yellow-500 mt-6">
-        <h2 className="text-xl font-bold text-warning mb-2">Falta alumnado</h2>
+        <h2 className="text-lg font-bold text-warning mb-2">Falta alumnado</h2>
         <p className="text-foreground/80">
           Primero debes registrar alumnado en la pestaña principal.
         </p>
@@ -124,7 +124,7 @@ export const BoletinesTab = () => {
           <>
             <div className="p-6 border-b border-white/5 bg-foreground/10 flex justify-between items-center shrink-0 no-print">
               <div>
-                <h3 className="text-xl font-black text-foreground flex items-center gap-2">
+                <h3 className="text-lg font-black text-foreground flex items-center gap-2">
                   <FileText className="w-5 h-5 text-accent" /> Boletín Individual de Calificaciones
                 </h3>
               </div>
@@ -140,7 +140,7 @@ export const BoletinesTab = () => {
                 {/* Cabecera Oficial */}
                 <div className="border-b-2 border-accent pb-6 mb-8 flex justify-between items-start">
                   <div>
-                    <h1 className="text-3xl font-black mb-2 tracking-tight">INFORME DE EVALUACIÓN</h1>
+                    <h1 className="text-2xl font-black mb-2 tracking-tight">INFORME DE EVALUACIÓN</h1>
                     <p className="text-lg text-muted-foreground font-semibold flex items-center gap-2">
                       <GraduationCap className="w-5 h-5" /> Módulo: {info_modulo.codigo && info_modulo.nombre ? `${info_modulo.codigo} - ${info_modulo.nombre}` : info_modulo.modulo || "Módulo Profesional"}
                     </p>
@@ -167,7 +167,7 @@ export const BoletinesTab = () => {
                   </div>
                   <div className="text-right bg-background p-4 rounded-xl shadow-sm border border-white/5">
                     <p className="text-xs text-muted uppercase tracking-wider font-semibold mb-1">Nota Media Estimada</p>
-                    <div className="text-4xl font-black text-accent">{notaMedia}</div>
+                    <div className="text-2xl font-black text-accent">{notaMedia}</div>
                   </div>
                 </div>
 
@@ -209,7 +209,7 @@ export const BoletinesTab = () => {
                 </div>
 
                 {/* Desglose de Resultados */}
-                <h3 className="text-xl font-bold mb-4 mt-8 flex items-center gap-2 border-b border-white/10 pb-2">
+                <h3 className="text-lg font-bold mb-4 mt-8 flex items-center gap-2 border-b border-white/10 pb-2">
                   <Award className="w-5 h-5 text-warning" /> Desglose por Resultados de Aprendizaje
                 </h3>
                 <div className="space-y-4">
@@ -221,7 +221,7 @@ export const BoletinesTab = () => {
                           {ra.nota.toFixed(1)}
                         </div>
                         <div className="flex-1">
-                          <div className="font-bold text-base mb-1">{ra.subject}</div>
+                          <div className="font-bold text-sm mb-1">{ra.subject}</div>
                           <div className="text-xs text-muted leading-tight">{ra.desc || "Descripción no disponible en este momento."}</div>
                         </div>
                         <div className="w-24 text-right">

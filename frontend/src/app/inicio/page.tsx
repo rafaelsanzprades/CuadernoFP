@@ -575,7 +575,7 @@ export default function InicioPage() {
               <h1 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <Activity className="w-6 h-6 text-accent" /> {t('inicio.title')}
               </h1>
-              <p className="text-muted mt-2 text-base">{t('inicio.subtitle')}</p>
+              <p className="text-muted mt-2 text-sm">{t('inicio.subtitle')}</p>
             </div>
 
             {/* Pestañas de Navegación */}
@@ -649,11 +649,11 @@ export default function InicioPage() {
                   <div className="space-y-3">
                     {group.title !== 'General' && (
                       <>
-                        <h2 className="text-xl font-bold text-foreground flex items-center gap-3">
+                        <h2 className="text-lg font-bold text-foreground flex items-center gap-3">
                           {group.title}
                         </h2>
                         {group.sectionDescription && (
-                          <p className="text-muted text-base max-w-4xl pb-4 border-b border-[var(--glass-border)]">
+                          <p className="text-muted text-sm max-w-4xl pb-4 border-b border-[var(--glass-border)]">
                             {group.sectionDescription}
                           </p>
                         )}
@@ -666,10 +666,10 @@ export default function InicioPage() {
                         <Link key={item.href} href={item.href} className="block group">
                           <Card className="h-full p-5 flex flex-col gap-3 border border-[var(--glass-border)] bg-[var(--glass-bg)] hover:bg-accent/5 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/10 cursor-pointer">
                             <div className="flex items-center gap-3">
-                              <div className="text-3xl group-hover:scale-110 transition-transform duration-300">
+                              <div className="text-2xl group-hover:scale-110 transition-transform duration-300">
                                 <item.icon className="w-8 h-8" strokeWidth={1.5} />
                               </div>
-                              <h3 className="font-bold text-base text-foreground group-hover:text-accent transition-colors leading-tight">
+                              <h3 className="font-bold text-sm text-foreground group-hover:text-accent transition-colors leading-tight">
                                 {item.label}
                               </h3>
                             </div>
@@ -751,7 +751,7 @@ export default function InicioPage() {
                 <div className="flex justify-center">
                   <Button
                     onClick={() => setAiModalOpen(true)}
-                    className="text-base font-semibold flex items-center justify-center gap-3 bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 px-8 py-6 h-auto rounded-xl transition-all relative overflow-hidden w-full max-w-lg"
+                    className="text-sm font-semibold flex items-center justify-center gap-3 bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 px-8 py-6 h-auto rounded-xl transition-all relative overflow-hidden w-full max-w-lg"
                   >
                     <Sparkles className="w-6 h-6 text-accent shrink-0" />
                     <span className="flex-1 text-left">Crear nueva programación con IA (PDF)</span>
@@ -765,7 +765,7 @@ export default function InicioPage() {
                   </div>
 
                   <div className="flex flex-col gap-4 p-6 rounded-2xl bg-info/5 border border-info/20 text-foreground">
-                    <h3 className="text-xl font-bold flex items-center gap-2">
+                    <h3 className="text-lg font-bold flex items-center gap-2">
                       <Sparkles className="w-5 h-5 text-info" /> ¿Cómo obtengo mi API Key?
                     </h3>
                     <p className="text-muted text-sm">
@@ -823,7 +823,7 @@ export default function InicioPage() {
 
                 <div className="space-y-4">
                   <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
-                    <h2 className="text-base font-bold text-foreground flex items-center gap-2">
+                    <h2 className="text-sm font-bold text-foreground flex items-center gap-2">
                       <BookOpen className="w-4 h-4 text-accent" />
                       Programación didáctica
                     </h2>
@@ -840,7 +840,7 @@ export default function InicioPage() {
 
                 <div className="space-y-4">
                   <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
-                    <h2 className="text-base font-bold text-foreground flex items-center gap-2">
+                    <h2 className="text-sm font-bold text-foreground flex items-center gap-2">
                       <Users className="w-4 h-4 text-accent" />
                       Curso activo
                     </h2>
@@ -870,7 +870,7 @@ export default function InicioPage() {
                         rehypePlugins={[rehypeRaw]}
                         components={{
                           h1: ({node, ...props}) => <h1 className="text-2xl font-extrabold text-foreground mb-6 pb-2 border-b border-white/10" {...props} />,
-                          h2: ({node, ...props}) => <h2 className="text-xl font-bold text-accent mt-8 mb-4 flex items-center gap-2" {...props} />,
+                          h2: ({node, ...props}) => <h2 className="text-lg font-bold text-accent mt-8 mb-4 flex items-center gap-2" {...props} />,
                           h3: ({node, ...props}) => <h3 className="text-lg font-bold text-foreground mt-6 mb-3" {...props} />,
                           p: ({node, ...props}) => <p className="text-muted leading-relaxed mb-4" {...props} />,
                           ul: ({node, className, ...props}) => <ul className={`list-none space-y-3 mb-6 ml-4 ${className || ''}`} {...props} />,
@@ -896,7 +896,7 @@ export default function InicioPage() {
               <div className="space-y-10 animate-in fade-in duration-500 w-full">
                 {FAQS.map((faqGroup, idx) => (
                   <div key={idx}>
-                    <h2 className="text-xl font-bold mb-4 text-accent border-b border-white/5 pb-2">
+                    <h2 className="text-lg font-bold mb-4 text-accent border-b border-white/5 pb-2">
                       {faqGroup.group}
                     </h2>
                     <div className="space-y-1">
@@ -916,15 +916,15 @@ export default function InicioPage() {
                   <div className="absolute top-0 right-0 p-8 opacity-5">
                     <Mail className="w-32 h-32" />
                   </div>
-                  <h2 className="text-3xl font-extrabold mb-4 text-foreground">¡Hola!</h2>
-                  <p className="text-muted text-base mb-6 leading-relaxed">
+                  <h2 className="text-2xl font-extrabold mb-4 text-foreground">¡Hola!</h2>
+                  <p className="text-muted text-sm mb-6 leading-relaxed">
                     Espero que <strong>Cuaderno FP</strong> te esté resultando de gran utilidad para simplificar tu trabajo docente. 
                     He desarrollado esta herramienta con mucho cariño para aportar valor a nuestra comunidad educativa de Formación Profesional.
                   </p>
                   
                   
 
-                  <h3 className="text-xl font-bold mb-4 text-foreground flex items-center gap-2">
+                  <h3 className="text-lg font-bold mb-4 text-foreground flex items-center gap-2">
                     <Send className="w-5 h-5 text-accent" /> Envíame un mensaje rápido
                   </h3>
                   
@@ -975,7 +975,7 @@ export default function InicioPage() {
                         rehypePlugins={[rehypeRaw]}
                         components={{
                           h1: ({node, ...props}) => <h1 className="text-2xl font-extrabold text-foreground mb-6 pb-2 border-b border-white/10" {...props} />,
-                          h2: ({node, ...props}) => <h2 className="text-xl font-bold text-accent mt-8 mb-4 flex items-center gap-2" {...props} />,
+                          h2: ({node, ...props}) => <h2 className="text-lg font-bold text-accent mt-8 mb-4 flex items-center gap-2" {...props} />,
                           h3: ({node, ...props}) => <h3 className="text-lg font-bold text-foreground mt-6 mb-3" {...props} />,
                           p: ({node, ...props}) => <p className="text-muted leading-relaxed mb-4" {...props} />,
                           ul: ({node, className, ...props}) => <ul className={`list-none space-y-3 mb-6 ml-4 ${className || ''}`} {...props} />,

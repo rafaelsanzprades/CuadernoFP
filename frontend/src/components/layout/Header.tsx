@@ -384,7 +384,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
       {title && (
         <header className="w-full flex items-center justify-center px-8 pt-4 pb-2">
           <div className="border-2 border-[#14a085] rounded-xl px-8 py-3 shadow-[0_4px_15px_rgba(20,160,133,0.1)] bg-background/50 backdrop-blur-sm">
-            <h2 className="text-3xl whitespace-nowrap font-extrabold tracking-tight primary-gradient-text m-0 leading-none">
+            <h2 className="text-2xl whitespace-nowrap font-extrabold tracking-tight primary-gradient-text m-0 leading-none">
               {title}
             </h2>
           </div>

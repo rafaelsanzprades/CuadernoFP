@@ -112,14 +112,14 @@ export const AttendanceAccumulated = () => {
         <Card className="p-6 border-l-4 border-l-accent flex items-center justify-between">
           <div>
             <p className="text-sm font-semibold text-muted ">Horas totales del módulo</p>
-            <p className="text-3xl font-extrabold text-foreground">{totalHours} h</p>
+            <p className="text-2xl font-extrabold text-foreground">{totalHours} h</p>
           </div>
           <Clock className="w-10 h-10 text-accent/80" />
         </Card>
         <Card className="p-6 border-l-4 border-l-yellow-500 flex items-center justify-between">
           <div>
             <p className="text-sm font-semibold text-muted ">Límite PdEvC ({p_ev_pct}%)</p>
-            <p className="text-3xl font-extrabold text-foreground">{Math.round(totalHours * (p_ev_pct / 100))} faltas</p>
+            <p className="text-2xl font-extrabold text-foreground">{Math.round(totalHours * (p_ev_pct / 100))} faltas</p>
           </div>
           <OctagonAlert className="w-10 h-10 text-warning" />
         </Card>

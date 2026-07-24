@@ -32,7 +32,7 @@ export const AnalisisIndividualTab = () => {
   if (activeAlumnado.length === 0) {
     return (
       <Card className="p-8 text-center border-l-4 border-l-yellow-500 mt-6">
-        <h2 className="text-xl font-bold text-warning mb-2">Faltan datos</h2>
+        <h2 className="text-lg font-bold text-warning mb-2">Faltan datos</h2>
         <p className="text-foreground/80">No hay alumnado activos para analizar.</p>
       </Card>
     );
@@ -166,17 +166,17 @@ export const AnalisisIndividualTab = () => {
         <Card className="p-6 border-l-4 border-l-teal-500 flex flex-col justify-center items-center relative overflow-hidden">
           <div className="absolute top-0 right-0 p-4 opacity-10 text-6xl"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span></div>
           <span className="text-muted text-sm font-semibold tracking-wider mb-2">Nota Media Actual</span>
-          <span className="text-5xl font-black text-success">{realCalc.nota_final.toFixed(2)}</span>
+          <span className="text-2xl font-black text-success">{realCalc.nota_final.toFixed(2)}</span>
         </Card>
         <Card className="p-6 border-l-4 border-l-blue-500 flex flex-col justify-center items-center relative overflow-hidden">
           <div className="absolute top-0 right-0 p-4 opacity-10 text-6xl"><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></div>
           <span className="text-muted text-sm font-semibold tracking-wider mb-2">Estado</span>
-          <span className="text-4xl font-black text-info">{realCalc.nota_final >= 5 ? 'Apto' : 'En Proceso'}</span>
+          <span className="text-2xl font-black text-info">{realCalc.nota_final >= 5 ? 'Apto' : 'En Proceso'}</span>
         </Card>
         <Card className="p-6 border-l-4" style={{ borderLeftColor: realSigad.col }}>
           <div className="flex flex-col items-center justify-center h-full">
             <span className="text-muted text-sm font-semibold tracking-wider mb-2">Calificación Oficial</span>
-            <div className="text-4xl font-black" style={{ color: realSigad.col }}>{realSigad.n} · {realSigad.cod}</div>
+            <div className="text-2xl font-black" style={{ color: realSigad.col }}>{realSigad.n} · {realSigad.cod}</div>
             <div className="text-sm mt-1 text-foreground/80 font-semibold">{realSigad.txt}</div>
           </div>
         </Card>

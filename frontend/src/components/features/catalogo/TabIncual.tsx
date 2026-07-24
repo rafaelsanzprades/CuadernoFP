@@ -78,7 +78,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
       <Card className="p-6 bg-gradient-to-br from-card to-accent/5">
         <div className="flex items-start justify-between">
           <div>
-            <h2 className="text-xl font-bold text-foreground flex items-center gap-2">
+            <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
               <Award className="w-6 h-6 text-purple-500" />
               {globalSelection.familia}
             </h2>
