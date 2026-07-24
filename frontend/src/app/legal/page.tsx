@@ -885,7 +885,7 @@ export default function LegalPage() {
                         </div>
                         <ul className="text-sm text-muted space-y-1.5 pl-2">
                           {comunidad === "Aragón" ? (
-                            <li className="flex items-center gap-2 text-foreground"><Users className="w-4 h-4 text-accent" /> José Javier García</li>
+                            <li className="flex items-center gap-2 text-foreground"><Users className="w-4 h-4 text-accent" /> Jose Javier García</li>
                           ) : (
                             <li className="flex items-center gap-2 italic opacity-60"><Users className="w-4 h-4 text-muted-foreground" /> ¡Anímate a contribuir!</li>
                           )}
