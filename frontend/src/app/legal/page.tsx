@@ -10,6 +10,9 @@ import {
   FileText,
   Eye,
   Map,
+  Users,
+  MessageCircle,
+  Send,
 } from "lucide-react";
 import { useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -825,6 +828,56 @@ export default function LegalPage() {
                           </a>
                         </li>
                       </ul>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            )}
+
+            {activeTab === "comunidad" && (
+              <div className="space-y-12 animate-in fade-in duration-500">
+                <section className="space-y-6">
+                  <div className="flex flex-col items-center justify-center text-center p-8 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm mb-8">
+                    <div className="w-16 h-16 rounded-full bg-[#229ED9]/10 flex items-center justify-center mb-4">
+                      <MessageCircle className="w-8 h-8 text-[#229ED9]" />
+                    </div>
+                    <h3 className="text-xl font-bold text-foreground mb-2">Grupo Oficial de Telegram</h3>
+                    <p className="text-muted max-w-lg mb-6">
+                      Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad Autónoma.
+                    </p>
+                    <a
+                      href="https://t.me/cuadernofp"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-6 py-2.5 rounded-lg bg-[#229ED9] text-white font-medium hover:bg-[#229ED9]/90 transition-colors flex items-center gap-2"
+                    >
+                      <Send className="w-5 h-5" />
+                      Unirme al grupo en Telegram
+                    </a>
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-foreground border-b border-[var(--glass-border)] pb-2">Contribuidores por Comunidad Autónoma</h3>
+                  <p className="text-muted mb-4">
+                    Mención especial a los y las docentes que están ayudando a integrar los catálogos y currículos de las distintas Comunidades Autónomas para que Cuaderno FP sea útil en toda España.
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Aragón */}
+                    <div className="p-4 rounded-xl border border-[var(--glass-border)] bg-background/50 flex flex-col gap-2">
+                      <div className="flex items-center gap-2 border-b border-[var(--glass-border)] pb-2 mb-1">
+                        <Map className="w-5 h-5 text-accent" />
+                        <span className="font-bold text-foreground">Aragón</span>
+                      </div>
+                      <ul className="text-sm text-muted space-y-1.5 pl-2">
+                        <li className="flex items-center gap-2"><Users className="w-4 h-4 text-muted-foreground" /> Rafael Sanz Prades (Catálogo general)</li>
+                      </ul>
+                    </div>
+
+                    {/* Espacio para nuevas comunidades */}
+                    <div className="p-4 rounded-xl border border-dashed border-[var(--glass-border)] bg-background/30 flex flex-col gap-2 items-center justify-center text-center opacity-70">
+                      <Users className="w-6 h-6 text-muted-foreground mb-1" />
+                      <span className="font-medium text-foreground">¿Falta tu Comunidad?</span>
+                      <span className="text-xs text-muted">¡Únete al grupo de Telegram y ayúdanos a añadirla!</span>
                     </div>
                   </div>
                 </section>
