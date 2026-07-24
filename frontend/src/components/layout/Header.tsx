@@ -1,5 +1,5 @@
 "use client";
-import { Search, AlertTriangle, ChevronRight, ChevronDown, Cloud, Hourglass, Moon, Redo2, Save, Shield, Sun, Undo2, XCircle, CalendarDays, FolderOpen, Menu } from "lucide-react";
+import { Search, AlertTriangle, ChevronRight, ChevronDown, Cloud, Hourglass, Moon, Redo2, Save, Shield, Sun, Undo2, XCircle, CalendarDays, FolderOpen, Menu, Send } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useAppStore, useTemporalStore } from "@/store/useAppStore";
 import Link from "next/link";
@@ -301,7 +301,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
           )}
           
           {/* Búsqueda a la izquierda y menú móvil */}
-        <div className="flex items-center gap-2 lg:gap-0">
+        <div className="flex items-center gap-2">
           <button
             onClick={toggleSidebar}
             className="block lg:hidden p-2 rounded-md text-foreground hover:bg-foreground/10 transition-colors"
@@ -309,6 +309,15 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
           >
             <Menu className="w-6 h-6" />
           </button>
+          <a
+            href="https://t.me/cuadernofp"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-1.5 md:p-2 rounded-md text-[#229ED9] hover:bg-[#229ED9]/10 transition-colors hidden sm:block"
+            title="Únete a nuestro grupo de Telegram"
+          >
+            <Send className="w-4 h-4 md:w-5 md:h-5" />
+          </a>
           <div className="relative w-36 sm:w-48 md:w-64 shrink-0">
             <input
               type="text"
