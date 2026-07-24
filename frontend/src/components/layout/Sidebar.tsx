@@ -163,7 +163,7 @@ export default function Sidebar() {
         {isSidebarOpen && (
           <div className="flex flex-col mb-3 w-full pr-2 min-w-0">
               <Link href="/inicio" onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}>
-                <h1 className={`text-lg font-extrabold leading-tight transition-colors tracking-tight whitespace-nowrap cursor-pointer ${dataSource === 'demo' ? 'text-warning hover:text-white' : 'text-success hover:text-white'}`}>
+                <h1 className={`text-2xl font-extrabold leading-tight transition-colors tracking-tight whitespace-nowrap cursor-pointer ${dataSource === 'demo' ? 'text-warning hover:text-white' : 'text-success hover:text-white'}`}>
                   Cuaderno FP
                 </h1>
               </Link>

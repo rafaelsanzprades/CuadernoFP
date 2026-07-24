@@ -215,6 +215,47 @@ export default function PerfilPage() {
                         </Button>
                       </div>
                     </div>
+
+                    {/* Typography Scale info */}
+                    <div className="pt-6 border-t border-[var(--glass-border)] mt-8 max-w-2xl">
+                      <label className="text-xs font-semibold text-muted uppercase tracking-wider block mb-4">
+                        Sistema Tipográfico Unificado
+                      </label>
+                      <div className="overflow-x-auto rounded-xl border border-[var(--glass-border)] bg-background/30">
+                        <table className="w-full text-left text-sm">
+                          <thead className="bg-[var(--glass-bg)] border-b border-[var(--glass-border)] text-muted">
+                            <tr>
+                              <th className="p-3 font-semibold">Clase</th>
+                              <th className="p-3 font-semibold">Tamaño</th>
+                              <th className="p-3 font-semibold">Uso Estandarizado</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-[var(--glass-border)]">
+                            <tr className="hover:bg-white/5">
+                              <td className="p-3"><code className="px-1.5 py-0.5 rounded bg-foreground/10 text-xs">text-xs</code></td>
+                              <td className="p-3">12px</td>
+                              <td className="p-3 text-muted">Badges, etiquetas, metadatos y notas al pie.</td>
+                            </tr>
+                            <tr className="hover:bg-white/5">
+                              <td className="p-3"><code className="px-1.5 py-0.5 rounded bg-foreground/10 text-sm">text-sm</code></td>
+                              <td className="p-3">14px</td>
+                              <td className="p-3 text-muted">Texto principal, tablas, botones y menús.</td>
+                            </tr>
+                            <tr className="hover:bg-white/5">
+                              <td className="p-3"><code className="px-1.5 py-0.5 rounded bg-foreground/10 text-lg">text-lg</code></td>
+                              <td className="p-3">18px</td>
+                              <td className="p-3 text-muted">Subtítulos, tarjetas y cabeceras de sección.</td>
+                            </tr>
+                            <tr className="hover:bg-white/5">
+                              <td className="p-3"><code className="px-1.5 py-0.5 rounded bg-foreground/10 text-2xl">text-2xl</code></td>
+                              <td className="p-3">24px</td>
+                              <td className="p-3 text-muted">Títulos principales (H1) y números de dashboard.</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
                   </div>
                 </section>
               )}
