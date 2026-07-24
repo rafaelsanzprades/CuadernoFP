@@ -432,21 +432,13 @@ export default function Sidebar() {
         })}
       </nav>
 
-      {/* ── Footer ── */}
-      <div className={`px-4 py-3 border-t border-[var(--glass-border)] flex flex-col items-center gap-1.5`}>
-        {isSidebarOpen ? (
-          <div className="w-full">
-            <InstallPwaButton isSidebarOpen={true} />
-            <p className="text-center text-sm font-medium text-muted/90 mt-1 whitespace-nowrap">
-              © {currentYear} Rafael Sanz Prades
-            </p>
-            <div className="flex items-center justify-center w-full mt-1">
-              <Link href="/legal" className="text-sm font-semibold text-info hover:text-info hover:underline" onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}>
-                {t('sidebar.legal')}
-              </Link>
+        {/* 🔻 Footer 🔻 */}
+        <div className={`px-4 py-3 border-t border-[var(--glass-border)] flex flex-col items-center gap-1.5`}>
+          {isSidebarOpen ? (
+            <div className="w-full">
+              <InstallPwaButton isSidebarOpen={true} />
             </div>
-          </div>
-        ) : (
+          ) : (
           <div className="flex flex-col items-center gap-2 w-full">
             <InstallPwaButton isSidebarOpen={false} />
           </div>

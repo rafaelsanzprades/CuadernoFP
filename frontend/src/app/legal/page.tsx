@@ -150,7 +150,7 @@ export default function LegalPage() {
                     En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y Comercio Electrónico (LSSI-CE), se exponen los siguientes datos identificativos:
                   </p>
                   <div className="text-sm text-muted space-y-1 mt-2">
-                    <p><strong>Titular:</strong> [Tu Nombre o Razón Social]</p>
+                    <p><strong>Titular:</strong> Rafael Sanz Prades</p>
                     <p><strong>Contacto:</strong> <a href="mailto:hola@cuadernofp.web.app" className="text-info hover:underline">hola@cuadernofp.web.app</a></p>
                     <p><strong>Sitio Web:</strong> <a href="https://cuadernofp.web.app/" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">https://cuadernofp.web.app/</a></p>
                     <p><strong>Actividad:</strong> Herramienta de productividad docente para ciclos formativos de Formación Profesional.</p>
