@@ -6,11 +6,11 @@ import { useTheme } from "next-themes";
 
 export const LANGUAGES = [
   { code: "ba", label: "Balear" },
-  { code: "ca", label: "Catal‡" },
-  { code: "es", label: "EspaÒol" },
+  { code: "ca", label: "Catal√†" },
+  { code: "es", label: "Espa√±ol" },
   { code: "eu", label: "Euskara" },
   { code: "gl", label: "Galego" },
-  { code: "va", label: "Valenci‡" },
+  { code: "va", label: "Valenci√†" },
   { code: "en", label: "English" }
 ];
 

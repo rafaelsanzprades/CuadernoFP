@@ -36,10 +36,10 @@ export default function PerfilPage() {
             {/* Header */}
             <div>
               <h1 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <User className="w-7 h-7 text-accent" /> Perfil y configuración
+                <User className="w-7 h-7 text-accent" /> Perfil y configuraciÃ³n
               </h1>
               <p className="text-muted mt-1">
-                Personaliza la apariencia, el idioma y las opciones de accesibilidad de la aplicación.
+                Personaliza la apariencia, el idioma y las opciones de accesibilidad de la aplicaciÃ³n.
               </p>
             </div>
 
@@ -114,10 +114,10 @@ export default function PerfilPage() {
                 </h2>
                 
                 <div className="space-y-4 max-w-xl">
-                  {/* Tamaño de letra */}
+                  {/* TamaÃ±o de letra */}
                   <div>
                     <label className="text-xs font-semibold text-muted uppercase tracking-wider block mb-2">
-                      Tamaño del texto
+                      TamaÃ±o del texto
                     </label>
                     <div className="grid grid-cols-3 gap-3">
                       <Button
