@@ -31,7 +31,7 @@ export default function PerfilPage() {
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-4 pb-12 max-w-4xl mx-auto">
+          <MotionWrapper className="space-y-4 pb-12">
             
             {/* Header */}
             <div>
@@ -44,68 +44,53 @@ export default function PerfilPage() {
             </div>
 
             {/* Main Settings Card */}
-            <Card className="p-6 border border-white/5 rounded-2xl bg-foreground/5 shadow mt-6 space-y-8">
+            <Card className="p-8 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl mt-6 space-y-8">
               
               {/* Aspecto */}
               <section className="space-y-4">
                 <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
                   <Sun className="w-5 h-5 text-accent" /> Aspecto
                 </h2>
-                <div className="grid grid-cols-2 gap-4 max-w-md">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                   <Button
-                    variant="secondary"
+                    variant={theme === "light" ? "primary" : "ghost"}
                     size="lg"
                     onClick={() => setTheme("light")}
-                    className={`flex items-center justify-center gap-2 py-3 rounded-xl border transition-all ${
-                      theme === "light"
-                        ? "bg-accent/20 border-accent text-accent font-bold"
-                        : "bg-white/5 border-white/10 text-muted hover:text-foreground hover:bg-white/10"
-                    }`}
                   >
                     <Sun className="w-5 h-5" /> Claro
                   </Button>
                   <Button
-                    variant="secondary"
+                    variant={theme === "dark" ? "primary" : "ghost"}
                     size="lg"
                     onClick={() => setTheme("dark")}
-                    className={`flex items-center justify-center gap-2 py-3 rounded-xl border transition-all ${
-                      theme === "dark"
-                        ? "bg-accent/20 border-accent text-accent font-bold"
-                        : "bg-white/5 border-white/10 text-muted hover:text-foreground hover:bg-white/10"
-                    }`}
                   >
                     <Moon className="w-5 h-5" /> Oscuro
                   </Button>
                 </div>
               </section>
 
-              <hr className="border-white/5" />
+              <hr className="border-[var(--glass-border)]" />
 
               {/* Idioma */}
               <section className="space-y-4">
                 <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
                   <Globe className="w-5 h-5 text-accent" /> Idioma
                 </h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {LANGUAGES.map((lang) => (
                     <Button
                       key={lang.code}
-                      variant="secondary"
-                      size="lg"
+                      variant={currentLang.code === lang.code ? "primary" : "ghost"}
+                      size="md"
                       onClick={() => changeLanguage(lang.code)}
-                      className={`flex items-center justify-center py-2.5 rounded-xl border transition-all ${
-                        currentLang.code === lang.code
-                          ? "bg-accent/20 border-accent text-accent font-bold"
-                          : "bg-white/5 border-white/10 text-muted hover:text-foreground hover:bg-white/10"
-                      }`}
                     >
-                      <span>{lang.label}</span>
+                      {lang.label}
                     </Button>
                   ))}
                 </div>
               </section>
 
-              <hr className="border-white/5" />
+              <hr className="border-[var(--glass-border)]" />
 
               {/* Accesibilidad */}
               <section className="space-y-4">
@@ -121,38 +106,23 @@ export default function PerfilPage() {
                     </label>
                     <div className="grid grid-cols-3 gap-3">
                       <Button
-                        variant="secondary"
-                        size="lg"
+                        variant={fontSizeScale === 100 ? "primary" : "ghost"}
+                        size="md"
                         onClick={() => changeFontSize(100)}
-                        className={`rounded-xl border ${
-                          fontSizeScale === 100
-                            ? "bg-accent/20 border-accent text-accent font-bold"
-                            : "bg-white/5 border-white/10 text-muted hover:text-foreground hover:bg-white/10"
-                        }`}
                       >
                         Normal
                       </Button>
                       <Button
-                        variant="secondary"
-                        size="lg"
+                        variant={fontSizeScale === 115 ? "primary" : "ghost"}
+                        size="md"
                         onClick={() => changeFontSize(115)}
-                        className={`rounded-xl border ${
-                          fontSizeScale === 115
-                            ? "bg-accent/20 border-accent text-accent font-bold"
-                            : "bg-white/5 border-white/10 text-muted hover:text-foreground hover:bg-white/10"
-                        }`}
                       >
                         Grande
                       </Button>
                       <Button
-                        variant="secondary"
-                        size="lg"
+                        variant={fontSizeScale === 130 ? "primary" : "ghost"}
+                        size="md"
                         onClick={() => changeFontSize(130)}
-                        className={`rounded-xl border font-bold ${
-                          fontSizeScale === 130
-                            ? "bg-accent/20 border-accent text-accent"
-                            : "bg-white/5 border-white/10 text-muted hover:text-foreground hover:bg-white/10"
-                        }`}
                       >
                         Extra
                       </Button>
@@ -162,14 +132,10 @@ export default function PerfilPage() {
                   {/* Opciones adicionales */}
                   <div className="space-y-3 pt-2">
                     <Button
-                      variant="secondary"
+                      variant={highContrast ? "primary" : "ghost"}
                       size="lg"
                       onClick={toggleHighContrast}
-                      className={`w-full flex items-center justify-between py-4 px-5 rounded-xl border transition-all ${
-                        highContrast
-                          ? "bg-accent/20 border-accent text-accent font-bold"
-                          : "bg-white/5 border-white/10 text-muted hover:text-foreground hover:bg-white/10"
-                      }`}
+                      className="w-full justify-between"
                     >
                       <span className="flex items-center gap-3">
                         <Contrast className="w-5 h-5 text-accent" /> Alto contraste
@@ -178,14 +144,10 @@ export default function PerfilPage() {
                     </Button>
 
                     <Button
-                      variant="secondary"
+                      variant={reduceMotion ? "primary" : "ghost"}
                       size="lg"
                       onClick={toggleReduceMotion}
-                      className={`w-full flex items-center justify-between py-4 px-5 rounded-xl border transition-all ${
-                        reduceMotion
-                          ? "bg-accent/20 border-accent text-accent font-bold"
-                          : "bg-white/5 border-white/10 text-muted hover:text-foreground hover:bg-white/10"
-                      }`}
+                      className="w-full justify-between"
                     >
                       <span className="flex items-center gap-3">
                         <ZapOff className="w-5 h-5 text-accent" /> Reducir animaciones
@@ -194,14 +156,10 @@ export default function PerfilPage() {
                     </Button>
 
                     <Button
-                      variant="secondary"
+                      variant={ttsEnabled ? "primary" : "ghost"}
                       size="lg"
                       onClick={toggleTts}
-                      className={`w-full flex items-center justify-between py-4 px-5 rounded-xl border transition-all ${
-                        ttsEnabled
-                          ? "bg-accent/20 border-accent text-accent font-bold"
-                          : "bg-white/5 border-white/10 text-muted hover:text-foreground hover:bg-white/10"
-                      }`}
+                      className="w-full justify-between"
                     >
                       <span className="flex items-center gap-3">
                         <Volume2 className="w-5 h-5 text-accent" /> Lector en voz alta
