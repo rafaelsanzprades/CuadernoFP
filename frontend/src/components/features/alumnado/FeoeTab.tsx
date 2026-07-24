@@ -43,7 +43,7 @@ export function FeoeTab() {
         <body>
           <h1>${docName}</h1>
           <p><strong>Alumno/a:</strong> ${alName}</p>
-          <p><strong>Centro Educativo:</strong> CIFPA Cuaderno FP</p>
+          <p><strong>Centro educativo:</strong> CIFPA Cuaderno FP</p>
           <div class="content">
             <p>Este documento se autogenera a partir de los datos registrados en el módulo de Formación en Empresa u Organismo Equiparado (FEOE) / FP Dual.</p>
             <p>De acuerdo con la normativa vigente (RD 659/2023), este documento constituye el registro fehaciente del acuerdo o evaluación.</p>

@@ -158,8 +158,8 @@ export default function LegalPage() {
                     <p><strong>Titular:</strong> Rafael Sanz Prades</p>
                     <p><strong>Contacto:</strong> <a href="mailto:hola@cuadernofp.web.app" className="text-info hover:underline">hola@cuadernofp.web.app</a></p>
                     <p><strong>Comunidad:</strong> <a href="https://t.me/cuadernofp" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">https://t.me/cuadernofp</a></p>
-                    <p><strong>Código Fuente:</strong> <a href="https://github.com/rafaelsanzprades/CuadernoFP" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">https://github.com/rafaelsanzprades/CuadernoFP</a></p>
-                    <p><strong>Sitio Web:</strong> <a href="https://cuadernofp.web.app/" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">https://cuadernofp.web.app/</a></p>
+                    <p><strong>Código fuente:</strong> <a href="https://github.com/rafaelsanzprades/CuadernoFP" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">https://github.com/rafaelsanzprades/CuadernoFP</a></p>
+                    <p><strong>Sitio web:</strong> <a href="https://cuadernofp.web.app/" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">https://cuadernofp.web.app/</a></p>
                     <p><strong>Actividad:</strong> Herramienta de productividad docente para ciclos formativos de Formación Profesional.</p>
                   </div>
                 </section>
