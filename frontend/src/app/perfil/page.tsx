@@ -1,10 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
+import { TabSync } from "@/components/ui/TabSync";
 import { Sun, Moon, Globe, Type, Contrast, ZapOff, Volume2, Check, User } from "lucide-react";
 import { useAccessibility } from "@/hooks/useAccessibility";
 
@@ -25,11 +28,21 @@ export default function PerfilPage() {
     LANGUAGES
   } = useAccessibility();
 
+  const TABS = [
+    { id: "aspecto", label: <span className="flex items-center gap-2"><Sun className="w-4 h-4 shrink-0" /> Aspecto</span>, cleanLabel: "Aspecto" },
+    { id: "idioma", label: <span className="flex items-center gap-2"><Globe className="w-4 h-4 shrink-0" /> Idioma</span>, cleanLabel: "Idioma" },
+    { id: "accesibilidad", label: <span className="flex items-center gap-2"><Type className="w-4 h-4 shrink-0" /> Accesibilidad</span>, cleanLabel: "Accesibilidad" },
+  ];
+
+  const [activeTab, setActiveTab] = useState("aspecto");
+  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+
   return (
     <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header />
+        <Header breadcrumbSuffix={activeTabCleanLabel} />
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-4 pb-12">
             
@@ -43,132 +56,149 @@ export default function PerfilPage() {
               </p>
             </div>
 
+            <Tabs value={activeTab} onValueChange={setActiveTab}>
+              <TabsList className="mb-6 max-w-full">
+                {TABS.map(tab => (
+                  <TabsTrigger key={tab.id} value={tab.id}>
+                    {tab.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
+
             {/* Main Settings Card */}
-            <Card className="p-8 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl mt-6 space-y-8">
+            <Card className="p-8 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl space-y-8">
               
               {/* Aspecto */}
-              <section className="space-y-4">
-                <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-                  <Sun className="w-5 h-5 text-accent" /> Aspecto
-                </h2>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  <Button
-                    variant={theme === "light" ? "primary" : "ghost"}
-                    size="lg"
-                    onClick={() => setTheme("light")}
-                  >
-                    <Sun className="w-5 h-5" /> Claro
-                  </Button>
-                  <Button
-                    variant={theme === "dark" ? "primary" : "ghost"}
-                    size="lg"
-                    onClick={() => setTheme("dark")}
-                  >
-                    <Moon className="w-5 h-5" /> Oscuro
-                  </Button>
-                </div>
-              </section>
-
-              <hr className="border-[var(--glass-border)]" />
+              {activeTab === "aspecto" && (
+                <section className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                  <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
+                    <Sun className="w-5 h-5 text-accent" /> Configuración de aspecto
+                  </h2>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <Button
+                      variant={theme === "light" ? "primary" : "ghost"}
+                      size="lg"
+                      onClick={() => setTheme("light")}
+                    >
+                      <Sun className="w-5 h-5" /> Claro
+                    </Button>
+                    <Button
+                      variant={theme === "dark" ? "primary" : "ghost"}
+                      size="lg"
+                      onClick={() => setTheme("dark")}
+                    >
+                      <Moon className="w-5 h-5" /> Oscuro
+                    </Button>
+                  </div>
+                </section>
+              )}
 
               {/* Idioma */}
-              <section className="space-y-4">
-                <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-                  <Globe className="w-5 h-5 text-accent" /> Idioma
-                </h2>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  {LANGUAGES.map((lang) => (
-                    <Button
-                      key={lang.code}
-                      variant={currentLang.code === lang.code ? "primary" : "ghost"}
-                      size="md"
-                      onClick={() => changeLanguage(lang.code)}
-                    >
-                      {lang.label}
-                    </Button>
-                  ))}
-                </div>
-              </section>
-
-              <hr className="border-[var(--glass-border)]" />
+              {activeTab === "idioma" && (
+                <section className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                  <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
+                    <Globe className="w-5 h-5 text-accent" /> Selección de idioma
+                  </h2>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {LANGUAGES.map((lang) => (
+                      <Button
+                        key={lang.code}
+                        variant={currentLang.code === lang.code ? "primary" : "ghost"}
+                        size="md"
+                        onClick={() => changeLanguage(lang.code)}
+                      >
+                        {lang.label}
+                      </Button>
+                    ))}
+                  </div>
+                </section>
+              )}
 
               {/* Accesibilidad */}
-              <section className="space-y-4">
-                <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-                  <Type className="w-5 h-5 text-accent" /> Accesibilidad
-                </h2>
-                
-                <div className="space-y-4 max-w-xl">
-                  {/* Tamaño de letra */}
-                  <div>
-                    <label className="text-xs font-semibold text-muted uppercase tracking-wider block mb-2">
-                      Tamaño del texto
-                    </label>
-                    <div className="grid grid-cols-3 gap-3">
-                      <Button
-                        variant={fontSizeScale === 100 ? "primary" : "ghost"}
-                        size="md"
-                        onClick={() => changeFontSize(100)}
-                      >
-                        Normal
-                      </Button>
-                      <Button
-                        variant={fontSizeScale === 115 ? "primary" : "ghost"}
-                        size="md"
-                        onClick={() => changeFontSize(115)}
-                      >
-                        Grande
-                      </Button>
-                      <Button
-                        variant={fontSizeScale === 130 ? "primary" : "ghost"}
-                        size="md"
-                        onClick={() => changeFontSize(130)}
-                      >
-                        Extra
-                      </Button>
+              {activeTab === "accesibilidad" && (
+                <section className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                  <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
+                    <Type className="w-5 h-5 text-accent" /> Opciones de accesibilidad
+                  </h2>
+                  
+                  <div className="space-y-6 max-w-xl">
+                    {/* Tamaño de letra */}
+                    <div>
+                      <label className="text-xs font-semibold text-muted uppercase tracking-wider block mb-2">
+                        Tamaño del texto
+                      </label>
+                      <div className="grid grid-cols-3 gap-3">
+                        <Button
+                          variant={fontSizeScale === 100 ? "primary" : "ghost"}
+                          size="md"
+                          onClick={() => changeFontSize(100)}
+                        >
+                          Normal
+                        </Button>
+                        <Button
+                          variant={fontSizeScale === 115 ? "primary" : "ghost"}
+                          size="md"
+                          onClick={() => changeFontSize(115)}
+                        >
+                          Grande
+                        </Button>
+                        <Button
+                          variant={fontSizeScale === 130 ? "primary" : "ghost"}
+                          size="md"
+                          onClick={() => changeFontSize(130)}
+                        >
+                          Extra
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Opciones adicionales */}
+                    <div>
+                      <label className="text-xs font-semibold text-muted uppercase tracking-wider block mb-2">
+                        Controles visuales y cognitivos
+                      </label>
+                      <div className="space-y-3">
+                        <Button
+                          variant={highContrast ? "primary" : "ghost"}
+                          size="lg"
+                          onClick={toggleHighContrast}
+                          className="w-full justify-between"
+                        >
+                          <span className="flex items-center gap-3">
+                            <Contrast className="w-5 h-5 text-accent" /> Alto contraste
+                          </span>
+                          {highContrast && <Check className="w-5 h-5 text-accent" />}
+                        </Button>
+
+                        <Button
+                          variant={reduceMotion ? "primary" : "ghost"}
+                          size="lg"
+                          onClick={toggleReduceMotion}
+                          className="w-full justify-between"
+                        >
+                          <span className="flex items-center gap-3">
+                            <ZapOff className="w-5 h-5 text-accent" /> Reducir animaciones
+                          </span>
+                          {reduceMotion && <Check className="w-5 h-5 text-accent" />}
+                        </Button>
+
+                        <Button
+                          variant={ttsEnabled ? "primary" : "ghost"}
+                          size="lg"
+                          onClick={toggleTts}
+                          className="w-full justify-between"
+                        >
+                          <span className="flex items-center gap-3">
+                            <Volume2 className="w-5 h-5 text-accent" /> Lector en voz alta
+                          </span>
+                          {ttsEnabled && <Check className="w-5 h-5 text-accent" />}
+                        </Button>
+                      </div>
                     </div>
                   </div>
-
-                  {/* Opciones adicionales */}
-                  <div className="space-y-3 pt-2">
-                    <Button
-                      variant={highContrast ? "primary" : "ghost"}
-                      size="lg"
-                      onClick={toggleHighContrast}
-                      className="w-full justify-between"
-                    >
-                      <span className="flex items-center gap-3">
-                        <Contrast className="w-5 h-5 text-accent" /> Alto contraste
-                      </span>
-                      {highContrast && <Check className="w-5 h-5 text-accent" />}
-                    </Button>
-
-                    <Button
-                      variant={reduceMotion ? "primary" : "ghost"}
-                      size="lg"
-                      onClick={toggleReduceMotion}
-                      className="w-full justify-between"
-                    >
-                      <span className="flex items-center gap-3">
-                        <ZapOff className="w-5 h-5 text-accent" /> Reducir animaciones
-                      </span>
-                      {reduceMotion && <Check className="w-5 h-5 text-accent" />}
-                    </Button>
-
-                    <Button
-                      variant={ttsEnabled ? "primary" : "ghost"}
-                      size="lg"
-                      onClick={toggleTts}
-                      className="w-full justify-between"
-                    >
-                      <span className="flex items-center gap-3">
-                        <Volume2 className="w-5 h-5 text-accent" /> Lector en voz alta
-                      </span>
-                      {ttsEnabled && <Check className="w-5 h-5 text-accent" />}
-                    </Button>
-                  </div>
-                </div>
-              </section>
+                </section>
+              )}
 
             </Card>
           </MotionWrapper>
