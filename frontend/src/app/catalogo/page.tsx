@@ -1019,7 +1019,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
           <Tabs defaultValue="curriculo" className="w-full mt-4">
             <TabsList className="mb-4">
               <TabsTrigger value="curriculo">Resultados de aprendizaje</TabsTrigger>
-              <TabsTrigger value="competencias">Competencias Acreditables</TabsTrigger>
+              <TabsTrigger value="competencias">Competencias acreditables</TabsTrigger>
             </TabsList>
 
             <TabsContent value="curriculo">

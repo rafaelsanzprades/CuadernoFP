@@ -115,7 +115,7 @@ export function WelcomeWizard({ onComplete, fetchModules, setActiveModuleId, set
               >
                 <div className="flex items-center gap-3 mb-3">
                   <Rocket className="w-8 h-8 text-info group-hover:scale-110 transition-transform" />
-                  <h3 className="text-lg font-bold text-foreground">Crear mi Archivos</h3>
+                  <h3 className="text-lg font-bold text-foreground">Crear mis archivos</h3>
                 </div>
                 <p className="text-sm text-muted">
                   Empieza desde cero creando tu propia programación y curso vacíos para trabajar con tus datos reales.
