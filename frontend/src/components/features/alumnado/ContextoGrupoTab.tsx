@@ -19,7 +19,7 @@ export function ContextoGrupoTab() {
 
         <NarrativeField 
           id="textos_pd_caracteristicas_alumnado"
-          title="Características del Alumnado"
+          title="Características del alumnado"
           description="Procedencia geográfica principal, franja de edad, nivel competencial inicial, expectativas e implicación, etc."
         />
         

@@ -67,7 +67,7 @@ export function FeoeTab() {
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         <NarrativeField 
           id="textos_pd_feoe_organizacion"
-          title="Organización y Modalidad de FEOE"
+          title="Organización y modalidad de FEOE"
           description="Detalla cómo se organiza el alumnado (FEOE general, intensivo) y qué alternativas hay para el alumnado sin FEOE."
         />
         <NarrativeField 

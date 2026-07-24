@@ -212,7 +212,7 @@ export const ChatbotWidget = () => {
                 <button 
                   onClick={() => fileInputRef.current?.click()}
                   className="p-3 rounded-xl bg-[var(--background)] border border-[var(--glass-border)] text-[var(--muted-foreground)] hover:text-emerald-400 transition-colors h-[44px] flex items-center justify-center"
-                  title="Adjuntar PDF o Imagen"
+                  title="Adjuntar PDF o imagen"
                 >
                   <Paperclip size={18} />
                 </button>

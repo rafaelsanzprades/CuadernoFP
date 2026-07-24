@@ -134,7 +134,7 @@ export function TutoriaTab() {
                         >
                           <option value="Alumno/a">Alumno/a</option>
                           <option value="Familia">Familia</option>
-                          <option value="Equipo Docente">Equipo Docente</option>
+                          <option value="Equipo Docente">Equipo docente</option>
                           <option value="Orientación">Departamento Orientación</option>
                         </select>
                       </div>
@@ -145,10 +145,10 @@ export function TutoriaTab() {
                           onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "canal", e.target.value)}
                           className="w-full bg-foreground/10 border border-[var(--glass-border)] rounded px-3 py-1.5 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none"
                         >
-                          <option value="Presencial">Reunión Presencial</option>
+                          <option value="Presencial">Reunión presencial</option>
                           <option value="Videollamada">Videollamada</option>
-                          <option value="Teléfono">Llamada Telefónica</option>
-                          <option value="Email">Correo Electrónico</option>
+                          <option value="Teléfono">Llamada telefónica</option>
+                          <option value="Email">Correo electrónico</option>
                           <option value="Pasillo">Informal / Pasillo</option>
                         </select>
                       </div>

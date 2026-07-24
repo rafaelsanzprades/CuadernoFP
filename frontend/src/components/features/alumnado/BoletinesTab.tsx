@@ -125,11 +125,11 @@ export const BoletinesTab = () => {
             <div className="p-6 border-b border-white/5 bg-foreground/10 flex justify-between items-center shrink-0 no-print">
               <div>
                 <h3 className="text-lg font-black text-foreground flex items-center gap-2">
-                  <FileText className="w-5 h-5 text-accent" /> Boletín Individual de Calificaciones
+                  <FileText className="w-5 h-5 text-accent" /> Boletín individual de calificaciones
                 </h3>
               </div>
               <Button onClick={handlePrint} className="bg-accent text-background hover:bg-accent/80 font-bold px-4 py-2 rounded-xl flex items-center gap-2">
-                <Printer className="w-4 h-4" /> Imprimir Boletín
+                <Printer className="w-4 h-4" /> Imprimir boletín
               </Button>
             </div>
 
@@ -142,7 +142,7 @@ export const BoletinesTab = () => {
                   <div>
                     <h1 className="text-2xl font-black mb-2 tracking-tight">INFORME DE EVALUACIÓN</h1>
                     <p className="text-lg text-muted-foreground font-semibold flex items-center gap-2">
-                      <GraduationCap className="w-5 h-5" /> Módulo: {info_modulo.codigo && info_modulo.nombre ? `${info_modulo.codigo} - ${info_modulo.nombre}` : info_modulo.modulo || "Módulo Profesional"}
+                      <GraduationCap className="w-5 h-5" /> Módulo: {info_modulo.codigo && info_modulo.nombre ? `${info_modulo.codigo} - ${info_modulo.nombre}` : info_modulo.modulo || "Módulo profesional"}
                     </p>
                     <p className="text-sm text-muted flex items-center gap-2 mt-1">
                       <Briefcase className="w-4 h-4" /> Título: {info_modulo.titulo_fp || "Título de FP"}
