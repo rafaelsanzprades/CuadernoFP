@@ -151,7 +151,7 @@ export function MatrizCalificacionesTab() {
                   <td className="p-3 sticky left-0 z-10 bg-[var(--glass-bg)] group-hover:bg-[#1e293b] border-r border-[var(--glass-border)] flex items-center justify-between shadow-[2px_0_5px_rgba(0,0,0,0.1)]">
                     <span className="font-semibold text-foreground">{al.Apellidos}, {al.Nombre}</span>
                     {pdevc && (
-                      <span title="Alerta Abandono (PDEvC): >15% faltas">
+                      <span title="Alerta abandono (PDEvC): >15% faltas">
                         <AlertTriangle className="w-4 h-4 text-error" />
                       </span>
                     )}

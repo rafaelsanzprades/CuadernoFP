@@ -41,7 +41,7 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
                     <button 
                       onClick={() => setEditingTask(tc)}
                       className="p-1.5 hover:bg-foreground/10 rounded-md text-muted hover:text-accent transition-colors"
-                      title="Configurar Tarea Competencial"
+                      title="Configurar tarea competencial"
                     >
                       <Settings className="w-4 h-4" />
                     </button>

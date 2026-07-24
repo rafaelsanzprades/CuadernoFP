@@ -195,10 +195,10 @@ export function FeoeTab() {
                         {/* Overlay contextual para imprimir */}
                         {isHovered && (
                           <div className="absolute right-full mr-2 top-1/2 -translate-y-1/2 flex gap-1 bg-background border border-[var(--glass-border)] shadow-xl p-1 rounded-lg z-50 animate-in slide-in-from-right-2">
-                            <button onClick={() => handlePrint("Anexo de Convenio", `${al.Nombre} ${al.Apellidos}`)} className="p-1.5 hover:bg-foreground/10 rounded group relative" title="Anexo Convenio">
+                            <button onClick={() => handlePrint("Anexo de Convenio", `${al.Nombre} ${al.Apellidos}`)} className="p-1.5 hover:bg-foreground/10 rounded group relative" title="Anexo convenio">
                               <FileCheck2 className="w-4 h-4 text-info" />
                             </button>
-                            <button onClick={() => handlePrint("Plan de Formación Individualizado", `${al.Nombre} ${al.Apellidos}`)} className="p-1.5 hover:bg-foreground/10 rounded" title="Plan de Formación">
+                            <button onClick={() => handlePrint("Plan de Formación Individualizado", `${al.Nombre} ${al.Apellidos}`)} className="p-1.5 hover:bg-foreground/10 rounded" title="Plan de formación">
                               <Printer className="w-4 h-4 text-accent" />
                             </button>
                           </div>

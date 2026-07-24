@@ -20,22 +20,22 @@ export function ProcedimientosTab() {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
           <NarrativeField 
             id="textos_pd_eval_informacion"
-            title="Información al Alumnado y Familias"
+            title="Información al alumnado y familias"
             description="Cómo se dan a conocer los criterios de evaluación y calificación."
           />
           <NarrativeField 
             id="textos_pd_eval_perdida_continua"
-            title="Pérdida de Evaluación Continua"
+            title="Pérdida de evaluación continua"
             description="Criterios de asistencia y procedimiento cuando se pierde el derecho."
           />
           <NarrativeField 
             id="textos_pd_eval_recuperacion"
-            title="Procedimiento de Recuperación"
+            title="Procedimiento de recuperación"
             description="Cómo se recuperan las partes no superadas y formato de las pruebas extraordinarias."
           />
           <NarrativeField 
             id="textos_pd_eval_pendientes"
-            title="Plan de Recuperación de Módulos Pendientes"
+            title="Plan de recuperación de módulos pendientes"
             description="Organización para alumnado de 2º curso con este módulo pendiente."
           />
         </div>

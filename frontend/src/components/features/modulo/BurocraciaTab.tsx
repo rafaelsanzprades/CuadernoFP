@@ -17,7 +17,7 @@ export function BurocraciaTab() {
         />
         <NarrativeField 
           id="textos_pd_publicidad"
-          title="Publicidad de la Programación"
+          title="Publicidad de la programación"
           description="Cómo y dónde se publicará o podrá consultar la programación."
         />
       </div>

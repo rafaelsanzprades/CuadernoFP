@@ -422,7 +422,7 @@ export default function DocumentosPage() {
               </div>
             </div>
             <div className="flex-1 w-full h-full p-4 bg-[#525659]">
-              <iframe src={`${previewUrl}#toolbar=0`} className="w-full h-full rounded-lg shadow-2xl" title="PDF Preview" />
+              <iframe src={`${previewUrl}#toolbar=0`} className="w-full h-full rounded-lg shadow-2xl" title="Vista previa PDF" />
             </div>
           </div>
         )}

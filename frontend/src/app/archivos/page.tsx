@@ -304,7 +304,7 @@ export default function ArchivosTrabajoPage() {
   };
 
   const getFriendlyCursoName = (cursoKey: string) => {
-    if (cursoKey === "imported-curso") return "Curso Importado";
+    if (cursoKey === "imported-curso") return "Curso importado";
     const parts = cursoKey.split('-');
     const code = parts[0];
     const rawYear = parts[parts.length - 1];
@@ -615,7 +615,7 @@ export default function ArchivosTrabajoPage() {
                         ) : (
                           <>
                             <div className="flex gap-2">
-                              <Button disabled={!hasPdFile} onClick={handleNewCurso} className="flex-1 bg-success/10 hover:bg-success/20 text-success border border-success/30 transition-all disabled:opacity-30 text-xs h-9" title="Crea un curso y su archivo Grupo asociado">
+                              <Button disabled={!hasPdFile} onClick={handleNewCurso} className="flex-1 bg-success/10 hover:bg-success/20 text-success border border-success/30 transition-all disabled:opacity-30 text-xs h-9" title="Crea un curso y su archivo grupo asociado">
                                 <Plus className="w-3 h-3 mr-1" /> Iniciar Curso (+ Grupo)
                               </Button>
                               <Button disabled={!hasPdFile} onClick={handleOpenCurso} className="bg-foreground/5 hover:bg-foreground/10 text-foreground border border-[var(--glass-border)] transition-all px-3 h-9" title="Importar curso huérfano">

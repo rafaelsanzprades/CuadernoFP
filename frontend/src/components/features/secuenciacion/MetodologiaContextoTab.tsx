@@ -23,17 +23,17 @@ export function MetodologiaContextoTab() {
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
             <NarrativeField 
               id="textos_pd_contexto_geografico"
-              title="Contexto Geográfico"
+              title="Contexto geográfico"
               description="Ubicación y características geográficas relevantes."
             />
             <NarrativeField 
               id="textos_pd_contexto_socioeconomico"
-              title="Contexto Socioeconómico"
+              title="Contexto socioeconómico"
               description="Entorno productivo, sectores profesionales y demanda."
             />
             <NarrativeField 
               id="textos_pd_contexto_escolar"
-              title="Contexto Escolar"
+              title="Contexto escolar"
               description="Características del centro educativo y su oferta formativa."
             />
           </div>
@@ -54,12 +54,12 @@ export function MetodologiaContextoTab() {
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
             <NarrativeField 
               id="textos_pd_metodologia_labor_coordinada"
-              title="Labor Coordinada"
+              title="Labor coordinada"
               description="Coordinación del equipo docente para el desarrollo del módulo."
             />
             <NarrativeField 
               id="textos_pd_inclusion"
-              title="Medidas de Inclusión"
+              title="Medidas de inclusión"
               description="Adaptaciones no significativas y atención a ACNEAE/ACNEE."
             />
           </div>

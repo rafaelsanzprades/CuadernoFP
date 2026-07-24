@@ -61,7 +61,7 @@ export function SessionTable({
                 <button 
                   onClick={(e) => { e.preventDefault(); setEditingUd(ud); }}
                   className="p-1.5 hover:bg-foreground/10 rounded-md text-muted hover:text-accent transition-colors"
-                  title="Configurar Unidad didáctica"
+                  title="Configurar unidad didáctica"
                 >
                   <Settings className="w-4 h-4" />
                 </button>
