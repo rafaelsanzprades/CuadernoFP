@@ -19,7 +19,10 @@ export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const { t } = useTranslation();
-  const { activeModuleId, activeCursoId, isSidebarOpen, toggleSidebar, dataSource, setDataSource, workspaceHandle, syncStatus } = useAppStore();
+  const storeState = useAppStore();
+  const { activeModuleId, activeCursoId, toggleSidebar, setDataSource, workspaceHandle, syncStatus } = storeState;
+  const isSidebarOpen = isMounted ? storeState.isSidebarOpen : true;
+  const dataSource = isMounted ? storeState.dataSource : 'demo';
   const [localGroups, setLocalGroups] = useState<string[]>([]);
 
   useEffect(() => {
