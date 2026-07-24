@@ -1,4 +1,4 @@
-﻿import { Grid, HelpCircle, PartyPopper, RefreshCw, School, Trash2, User, UserCircle, Users , Info } from "lucide-react";
+import { Grid, HelpCircle, PartyPopper, RefreshCw, School, Trash2, User, UserCircle, Users , Info } from "lucide-react";
 import React, { useMemo } from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { Card } from '@/components/ui/Card';
@@ -143,7 +143,7 @@ export const PlanoClaseTab = () => {
         <div className="flex flex-wrap items-center gap-6">
           <div className="flex items-center gap-2">
             <Grid className="w-5 h-5 text-accent" />
-            <span className="text-sm font-semibold text-foreground/90">Dimensiones del Aula:</span>
+            <span className="text-sm font-semibold text-foreground/90">Dimensiones del aula:</span>
           </div>
 
           <div className="flex items-center gap-4">
@@ -219,10 +219,10 @@ export const PlanoClaseTab = () => {
       <Card className="border border-white/5 rounded-2xl p-6 bg-foreground/5 shadow-2xl relative overflow-hidden">
         {/* Direction Indicator */}
         <div className="absolute top-2 left-6 text-xs text-muted tracking-wider font-semibold">
-          Fondo de Clase ⬆️
+          Fondo de clase ⬆️
         </div>
         <div className="absolute bottom-2 left-6 text-xs text-muted tracking-wider font-semibold">
-          Frente de Clase / Pizarra ⬇️
+          Frente de clase / Pizarra ⬇️
         </div>
 
         {/* Interactive Classroom Grid */}
