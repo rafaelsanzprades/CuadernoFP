@@ -630,7 +630,7 @@ export default function ProgresoPage() {
 
                                           <div className="w-full bg-background/50 rounded-full h-4.5 border border-white/5 overflow-hidden">
                                             <div
-                                              className="h-full rounded-full transition-all duration-500 flex items-center justify-end pr-2 text-[0.625rem] font-black text-foreground shadow-[inset_0_2px_4px_rgba(255,255,255,0.2)]"
+                                              className="h-full rounded-full transition-all duration-500 flex items-center justify-end pr-2 text-xs font-black text-foreground shadow-[inset_0_2px_4px_rgba(255,255,255,0.2)]"
                                               style={{ width: `${Math.max(r.prop, 5)}%`, backgroundColor: bar_color }}
                                             >
                                               {r.prop > 15 ? `${r.prop.toFixed(0)}%` : ''}
@@ -638,7 +638,7 @@ export default function ProgresoPage() {
                                           </div>
                                         </div>
 
-                                        <div className="w-full md:w-60 bg-foreground/5 border border-white/5 rounded-lg p-2.5 text-[0.625rem] text-foreground/80 space-y-1 self-stretch flex flex-col justify-center">
+                                        <div className="w-full md:w-60 bg-foreground/5 border border-white/5 rounded-lg p-2.5 text-xs text-foreground/80 space-y-1 self-stretch flex flex-col justify-center">
                                           <div className="flex justify-between">
                                             <span className="text-info font-semibold">Evaluado en:</span>
                                             <span>{r.tris.join(", ") || "-"}</span>

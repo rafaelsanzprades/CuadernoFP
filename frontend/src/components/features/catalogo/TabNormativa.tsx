@@ -194,7 +194,7 @@ export function TabNormativa() {
                       {comunidad}
                     </span>
                     {hasData && (
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-success/20 text-success border border-success/30 uppercase tracking-widest">
+                      <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-success/20 text-success border border-success/30 uppercase tracking-widest">
                         Disponible
                       </span>
                     )}

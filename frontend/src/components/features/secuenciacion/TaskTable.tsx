@@ -58,7 +58,7 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
                 {/* Segunda Línea: Identada y con Contexto e Instrumento */}
                 <div className="flex items-center gap-4 pl-16">
                   <div className="flex-1 flex flex-col">
-                    <span className="text-[0.65rem] text-muted-foreground uppercase tracking-wider mb-1 font-semibold">Contexto</span>
+                    <span className="text-xs text-muted-foreground uppercase tracking-wider mb-1 font-semibold">Contexto</span>
                     <input 
                       type="text"
                       value={tc.Reto || ""}
@@ -67,7 +67,7 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
                     />
                   </div>
                   <div className="flex-1 flex flex-col pr-10">
-                    <span className="text-[0.65rem] text-muted-foreground uppercase tracking-wider mb-1 font-semibold">Instrumento</span>
+                    <span className="text-xs text-muted-foreground uppercase tracking-wider mb-1 font-semibold">Instrumento</span>
                     <input 
                       type="text"
                       value={tc.Instrumento || tc.desc_act || ""}

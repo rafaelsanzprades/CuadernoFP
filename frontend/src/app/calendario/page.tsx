@@ -329,7 +329,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
               </h3>
               <div className="grid grid-cols-7 gap-0.5">
                 {DAY_NAMES_SHORT.map(d => (
-                  <div key={d} className="text-center text-[0.625rem] text-muted/80 font-bold pb-1">{d}</div>
+                  <div key={d} className="text-center text-xs text-muted/80 font-bold pb-1">{d}</div>
                 ))}
                 {cells.map((day, i) => {
                   if (!day) return <div key={`e-${i}`} />;
@@ -339,7 +339,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
                     <button
                       key={day}
                       onClick={(e) => openPopup(e, date)}
-                      className={`text-center text-[0.6875rem] rounded py-1 transition-all ${getDayStyle(date)} ${isToday ? "ring-1 ring-warning ring-offset-1 ring-offset-black/50" : ""}`}
+                      className={`text-center text-xs rounded py-1 transition-all ${getDayStyle(date)} ${isToday ? "ring-1 ring-warning ring-offset-1 ring-offset-black/50" : ""}`}
                       title={`${pad(day)}/${pad(m + 1)}/${y}`}
                     >
                       {day}

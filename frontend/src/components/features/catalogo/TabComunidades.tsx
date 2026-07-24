@@ -325,7 +325,7 @@ export function TabComunidades() {
               <p className="text-xs text-muted">
                 {activeCCAA.siglas} — {activeCCAA.bo}
                 {activeCCAA.id === "aragon" && (
-                  <Badge variant="info" className="ml-2 text-[10px]">DEMO</Badge>
+                  <Badge variant="info" className="ml-2 text-xs">DEMO</Badge>
                 )}
               </p>
             </div>
@@ -379,7 +379,7 @@ export function TabComunidades() {
                     <span className="inline-block w-3 h-3 rounded-full mr-2" style={{ backgroundColor: ccaa.color }} />
                     {ccaa.nombre}
                     {ccaa.id === "aragon" && (
-                      <Badge variant="info" className="ml-2 text-[10px]">DEMO</Badge>
+                      <Badge variant="info" className="ml-2 text-xs">DEMO</Badge>
                     )}
                   </td>
                   <td className="py-2 px-3">{ccaa.siglas}</td>
@@ -396,9 +396,9 @@ export function TabComunidades() {
                   </td>
                   <td className="py-2 px-3">
                     {ccaa.bo === "BOE" ? (
-                      <Badge variant="info" className="text-[10px]">Ciudad Autónoma</Badge>
+                      <Badge variant="info" className="text-xs">Ciudad Autónoma</Badge>
                     ) : (
-                      <Badge variant="info" className="text-[10px]">CCAA</Badge>
+                      <Badge variant="info" className="text-xs">CCAA</Badge>
                     )}
                   </td>
                   <td className="py-2 px-3 text-xs text-muted max-w-[200px]">

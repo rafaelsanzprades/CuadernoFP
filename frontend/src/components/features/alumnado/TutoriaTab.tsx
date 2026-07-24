@@ -74,7 +74,7 @@ export function TutoriaTab() {
               >
                 <span className="truncate">{al.Apellidos}, {al.Nombre}</span>
                 {hasNotes && (
-                  <span className={`text-[10px] px-2 rounded-full ${selectedAlId === al.ID ? 'bg-black/20' : 'bg-accent/20 text-accent'}`}>
+                  <span className={`text-xs px-2 rounded-full ${selectedAlId === al.ID ? 'bg-black/20' : 'bg-accent/20 text-accent'}`}>
                     {getTutorias(al.ID).length}
                   </span>
                 )}

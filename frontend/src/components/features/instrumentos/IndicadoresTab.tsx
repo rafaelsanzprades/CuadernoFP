@@ -96,7 +96,7 @@ export function IndicadoresTab() {
                       </div>
                       <div className="w-20 shrink-0 space-y-2">
                         <div>
-                          <label className="text-[10px] text-muted block">Peso Rel.</label>
+                          <label className="text-xs text-muted block">Peso Rel.</label>
                           <input
                             type="number"
                             className="w-full bg-foreground/10 border border-[var(--glass-border)] rounded p-1 text-xs text-center"
@@ -104,7 +104,7 @@ export function IndicadoresTab() {
                             onChange={(e) => handleUpdate(ind.id_indicador, 'peso', Number(e.target.value))}
                           />
                         </div>
-                        <label className="flex items-center gap-1 text-[10px] text-muted cursor-pointer">
+                        <label className="flex items-center gap-1 text-xs text-muted cursor-pointer">
                           <input
                             type="checkbox"
                             checked={ind.is_basico}

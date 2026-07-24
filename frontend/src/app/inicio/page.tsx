@@ -572,7 +572,7 @@ export default function InicioPage() {
 
             {/* Título de la página */}
             <div>
-              <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
+              <h1 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <Activity className="w-6 h-6 text-accent" /> {t('inicio.title')}
               </h1>
               <p className="text-muted mt-2 text-base">{t('inicio.subtitle')}</p>
@@ -755,7 +755,7 @@ export default function InicioPage() {
                   >
                     <Sparkles className="w-6 h-6 text-accent shrink-0" />
                     <span className="flex-1 text-left">Crear nueva programación con IA (PDF)</span>
-                    <span className="flex items-center gap-1 bg-warning/20 text-warning px-2 py-1 rounded text-[10px] font-bold uppercase border border-warning/30 shrink-0"><AlertTriangle className="w-3 h-3" /> Beta</span>
+                    <span className="flex items-center gap-1 bg-warning/20 text-warning px-2 py-1 rounded text-xs font-bold uppercase border border-warning/30 shrink-0"><AlertTriangle className="w-3 h-3" /> Beta</span>
                   </Button>
                 </div>
 

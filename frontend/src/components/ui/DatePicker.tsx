@@ -145,7 +145,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
           {/* Cabecera días */}
           <div className="grid grid-cols-7 mb-1">
             {DAYS_HEADER.map(d => (
-              <div key={d} className="text-center text-[0.6rem] text-muted font-bold py-1">
+              <div key={d} className="text-center text-xs text-muted font-bold py-1">
                 {d}
               </div>
             ))}

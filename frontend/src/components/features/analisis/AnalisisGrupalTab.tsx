@@ -235,7 +235,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
                       }}
                     >
                       {pct > 12 && (
-                        <span className="text-[0.6875rem] font-bold text-foreground drop-shadow-md">{val.toFixed(1)}</span>
+                        <span className="text-xs font-bold text-foreground drop-shadow-md">{val.toFixed(1)}</span>
                       )}
                     </div>
                     {/* 5.0 threshold */}

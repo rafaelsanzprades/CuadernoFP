@@ -74,7 +74,7 @@ export const WeeklyClasses = () => {
           if (isToday) {
             cardStyle = "bg-accent/10 border-accent/40 ring-1 ring-accent/30 shadow-[0_0_15px_rgba(20,160,133,0.15)]";
             badge = (
-              <span className="bg-accent text-background text-[0.625rem] font-extrabold px-1.5 py-0.5 rounded tracking-wider ">
+              <span className="bg-accent text-background text-xs font-extrabold px-1.5 py-0.5 rounded tracking-wider ">
                 Hoy
               </span>
             );
@@ -105,7 +105,7 @@ export const WeeklyClasses = () => {
                 {schedule.isFestivo ? (
                   <div className="bg-danger/10 border border-danger/30 p-2.5 rounded-lg text-center my-auto">
                     <span className="text-danger font-medium text-xs block mb-1"><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> Festivo</span>
-                    <span className="text-danger text-[0.6875rem] font-medium line-clamp-2">
+                    <span className="text-danger text-xs font-medium line-clamp-2">
                       {schedule.festivoName || "Día festivo"}
                     </span>
                   </div>
@@ -133,7 +133,7 @@ export const WeeklyClasses = () => {
                       {schedule.sessions.map((ses) => (
                         <div
                           key={ses.ID}
-                          className="bg-background/30 p-2 rounded-lg border border-white/5 text-[0.6875rem] text-muted hover:text-foreground hover:bg-background/40 transition-colors"
+                          className="bg-background/30 p-2 rounded-lg border border-white/5 text-xs text-muted hover:text-foreground hover:bg-background/40 transition-colors"
                         >
                           <div className="font-bold flex justify-between gap-1 mb-0.5">
                             <span className="truncate">S{ses.Num_Orden}: {ses.Tipo_Actividad}</span>
@@ -153,7 +153,7 @@ export const WeeklyClasses = () => {
 
               {/* Day Footer Info */}
               {!schedule.isFestivo && schedule.hours > 0 && (
-                <div className="mt-3 pt-2 border-t border-white/5 flex justify-between items-center text-[0.625rem] text-muted/80">
+                <div className="mt-3 pt-2 border-t border-white/5 flex justify-between items-center text-xs text-muted/80">
                   <span className="font-semibold">{schedule.hours} horas lectivas</span>
                   {schedule.isEvent && (
                     <span

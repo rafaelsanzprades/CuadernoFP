@@ -344,7 +344,7 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
                           </div>
                         </div>
                         <div className="flex items-center gap-2 shrink-0">
-                          <span className={`text-[0.625rem] font-bold border px-2 py-1 rounded shadow-inner tracking-wider ${badgeClass}`}>
+                          <span className={`text-xs font-bold border px-2 py-1 rounded shadow-inner tracking-wider ${badgeClass}`}>
                             {badge}
                           </span>
                           <ChevronDown className="w-3 h-3 -rotate-90 text-muted group-hover:text-foreground transition-colors" />
@@ -1091,7 +1091,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                             {grupo.es_conjunto ? "Debes acreditar TODAS estas competencias:" : "Debes acreditar esta competencia:"}
                           </span>
                         </div>
-                        {grupo.es_conjunto && <Badge variant="default" className="text-[0.625rem]">Conjunto requerido</Badge>}
+                        {grupo.es_conjunto && <Badge variant="default" className="text-xs">Conjunto requerido</Badge>}
                       </div>
                       <div className="p-0">
                         {grupo.competencias?.map((comp: any, j: number) => (

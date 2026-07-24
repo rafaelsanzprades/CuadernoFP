@@ -542,7 +542,7 @@ export default function MatricesPage() {
                           {df_ra.map((ra: any, i: number) => (
                             <th key={i} className="p-3 text-center min-w-[80px]">
                               <div className="text-xs">{ra.id_ra}</div>
-                              <div className="text-[0.625rem] text-info">({ra.peso_ra || 0}%)</div>
+                              <div className="text-xs text-info">({ra.peso_ra || 0}%)</div>
                             </th>
                           ))}
                         </tr>

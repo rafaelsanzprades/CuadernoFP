@@ -98,7 +98,7 @@ export default function InstrumentosPage() {
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-4 pb-12">
             <div>
-              <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
+              <h1 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <Wrench className="w-6 h-6 text-accent" /> Configuración de instrumentos e indicadores
               </h1>
               <p className="text-muted mt-2 text-lg">Define los instrumentos de calificación, rúbricas y los indicadores de evaluación vinculados a los resultados de aprendizaje.</p>

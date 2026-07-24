@@ -130,7 +130,7 @@ export function MatrizCalificacionesTab() {
                 <th key={`${col.inst.id_instrumento}_${col.ind.id_indicador}_${idx}`} className="p-2 text-center border-r border-[var(--glass-border)] min-w-[120px]" title={col.ind.descripcion}>
                   <div className="text-xs font-bold text-accent truncate max-w-[120px] mx-auto">{col.inst.titulo}</div>
                   <div className="font-mono text-xs text-info mt-1">{col.ind.id_indicador !== 'GLOBAL' ? col.ind.id_indicador : 'Nota Global'}</div>
-                  <div className="text-[10px] bg-foreground/10 inline-block px-1.5 rounded mt-1">{col.inst.escala}</div>
+                  <div className="text-xs bg-foreground/10 inline-block px-1.5 rounded mt-1">{col.inst.escala}</div>
                 </th>
               ))}
               {columnas.length === 0 && (

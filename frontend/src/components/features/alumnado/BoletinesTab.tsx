@@ -108,7 +108,7 @@ export const BoletinesTab = () => {
                   <div className="text-sm truncate">
                     {al.Apellidos}, {al.Nombre}
                   </div>
-                  <div className={`text-[0.625rem] font-mono ${isSelected ? 'text-background/80' : 'text-muted'}`}>
+                  <div className={`text-xs font-mono ${isSelected ? 'text-background/80' : 'text-muted'}`}>
                     {al.ID}
                   </div>
                 </div>

@@ -158,7 +158,7 @@ export function AlertaAbandonoTab() {
                     <TrendingDown className="w-3 h-3" /> {alumno.pctAsistencia.toFixed(0)}% asistencia
                   </span>
                   <span
-                    className={`px-2 py-0.5 rounded-full text-[0.625rem] font-bold ${
+                    className={`px-2 py-0.5 rounded-full text-xs font-bold ${
                       alumno.riesgo === "alto"
                         ? "bg-red-500/20 text-red-500"
                         : "bg-amber-500/20 text-amber-500"
