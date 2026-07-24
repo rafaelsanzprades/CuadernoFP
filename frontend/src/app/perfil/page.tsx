@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { TabSync } from "@/components/ui/TabSync";
-import { Sun, Moon, Globe, Type, Contrast, ZapOff, Volume2, Check, User } from "lucide-react";
+import { Sun, Moon, Globe, Type, Contrast, ZapOff, Volume2, Check, User, Info } from "lucide-react";
 import { useAccessibility } from "@/hooks/useAccessibility";
 
 export default function PerfilPage() {
@@ -65,6 +65,25 @@ export default function PerfilPage() {
                 ))}
               </TabsList>
             </Tabs>
+
+            {(() => {
+              const infoMap: Record<string, { desc: string }> = {
+                'aspecto': { desc: 'Configuración visual, modo claro u oscuro.' },
+                'idioma': { desc: 'Selección del idioma preferido para toda la interfaz.' },
+                'accesibilidad': { desc: 'Ajustes avanzados de tamaño, contraste y asistencias cognitivas para facilitar el uso.' },
+              };
+              const info = infoMap[activeTab];
+              if (!info) return null;
+              
+              return (
+                <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
+                  <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+                  <div>
+                    <p className="text-sm text-muted">{info.desc}</p>
+                  </div>
+                </div>
+              );
+            })()}
 
             {/* Main Settings Card */}
             <Card className="p-8 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl space-y-8">
