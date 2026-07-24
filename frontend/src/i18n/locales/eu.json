@@ -56,18 +56,24 @@
     "subtitle": "Panel nagusia, hasierako gida, FAQ eta datuen balioztatzea."
   },
   "nav": {
-    "catalogo": "Katalogoa",
+    "inicio": "Hasiera",
+    "perfil": "Profila",
     "archivos": "Fitxategiak",
+    "catalogo": "Katalogoa",
     "documentos": "Dokumentuak",
-    "descargas": "Deskargak",
-    "modulo": "Modulua",
-    "matrices": "Matrizeak",
-    "instrumentos": "Tresnak",
-    "programacion": "Sekuentziazioa",
+    "legal": "Legezkoa",
+    "contexto": "Testuingurua",
+    "curriculo": "Curriculuma",
+    "metodologia": "Metodologia",
+    "evaluacion": "Ebaluazioa",
+    "secuenciacion": "Sekuentziazioa",
+    "magia": "Magia",
     "calendario": "Egutegia",
     "alumnado": "Ikasleak",
-    "seguimiento": "Egunerokoa",
-    "progreso": "Ebaluazioa"
+    "diario": "Egunerokoa",
+    "seguimiento": "Segimendua",
+    "calificaciones": "Kalifikazioak",
+    "informes": "Txostenak"
   },
   "navGroups": {
     "general": "Orokorra",

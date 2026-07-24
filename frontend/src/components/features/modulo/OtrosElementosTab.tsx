@@ -128,7 +128,7 @@ export function OtrosElementosTab() {
         </h2>
         <div className="space-y-6">
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">Registro de Innovación</label>
+            <label className="text-sm font-semibold text-foreground mb-1 block">Registro de innovación</label>
             <p className="text-xs text-muted mb-2">Proyectos de emprendimiento, metodologías activas y proyectos de equidad/DUA.</p>
             <textarea
               value={config_contexto["registro_innovacion"] || ""}
@@ -139,7 +139,7 @@ export function OtrosElementosTab() {
           </div>
 
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">IPE y Proyecto Intermodular Continuo</label>
+            <label className="text-sm font-semibold text-foreground mb-1 block">IPE y proyecto intermodular continuo</label>
             <p className="text-xs text-muted mb-2">Vinculación con el Itinerario Personal para la Empleabilidad o participación en el Proyecto Intermodular (D 91/2024).</p>
             <textarea
               value={config_contexto["ipe_intermodular"] || ""}
@@ -150,7 +150,7 @@ export function OtrosElementosTab() {
           </div>
           
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">H1. Propuestas del departamento / Actividades extraescolares</label>
+            <label className="text-sm font-semibold text-foreground mb-1 block">H1. Propuestas del departamento / actividades extraescolares</label>
             <p className="text-xs text-muted mb-2">Selecciona actividades tipo y aporta más detalle abajo.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">
               {EXTRAESCOLARES.map((ext) => {
@@ -185,7 +185,7 @@ export function OtrosElementosTab() {
         </h2>
         <div className="space-y-4">
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">Estándares de Competencia Profesional (ECP)</label>
+            <label className="text-sm font-semibold text-foreground mb-1 block">Estándares de competencia profesional (ECP)</label>
             <p className="text-xs text-muted mb-2">Asociados al módulo profesional según el Real Decreto del título.</p>
             <textarea
               value={config_contexto["ecp"] || ""}
@@ -195,7 +195,7 @@ export function OtrosElementosTab() {
             />
           </div>
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">Competencias Profesionales y para la Empleabilidad (CPE)</label>
+            <label className="text-sm font-semibold text-foreground mb-1 block">Competencias profesionales y para la empleabilidad (CPE)</label>
             <textarea
               value={config_contexto["cpe"] || ""}
               onChange={e => handleChange("cpe", e.target.value)}
@@ -204,7 +204,7 @@ export function OtrosElementosTab() {
             />
           </div>
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">Objetivos Generales (OG)</label>
+            <label className="text-sm font-semibold text-foreground mb-1 block">Objetivos generales (OG)</label>
             <textarea
               value={config_contexto["og"] || ""}
               onChange={e => handleChange("og", e.target.value)}

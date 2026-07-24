@@ -43,7 +43,7 @@ export function InstrumentosListTab() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-            <span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Catálogo de Instrumentos
+            <span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Catálogo de instrumentos
           </h2>
           <p className="text-muted mt-1">Define los instrumentos de evaluación (rúbricas, exámenes) y sus escalas de calificación.</p>
         </div>

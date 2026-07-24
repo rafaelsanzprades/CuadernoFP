@@ -155,7 +155,7 @@ export function TabNormativa() {
             <Landmark className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-xl font-bold">Normativa Estatal</h2>
+            <h2 className="text-xl font-bold">Normativa estatal</h2>
             <p className="text-sm text-muted-foreground">Legislación de ámbito nacional aplicable a la Formación Profesional.</p>
           </div>
         </div>
@@ -168,7 +168,7 @@ export function TabNormativa() {
             <Map className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-xl font-bold">Normativa Autonómica</h2>
+            <h2 className="text-xl font-bold">Normativa autonómica</h2>
             <p className="text-sm text-muted-foreground">Despliegue del currículo base en cada Comunidad Autónoma.</p>
           </div>
         </div>

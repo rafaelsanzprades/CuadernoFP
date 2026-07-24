@@ -648,7 +648,7 @@ export default function CalendarioPage() {
                     'desc': 'Gestión de festivos locales, provinciales y eventos de centro.'
           },
           'visual': {
-                    'title': 'Calendario Visual',
+                    'title': 'Calendario visual',
                     'desc': 'Calendario visual con el horario semanal y eventos asignados.'
           }
 };
@@ -843,7 +843,7 @@ export default function CalendarioPage() {
                 <div className="grid grid-cols-5 gap-4 items-end">
                   {/* Col 1: Selector de tipo */}
                   <div>
-                    <label className="text-sm text-muted mb-2 block font-semibold">Tipo de Dual</label>
+                    <label className="text-sm text-muted mb-2 block font-semibold">Tipo de dual</label>
                     <select
                       value={info_fechas.tipo_dual || "general"}
                       onChange={e => {

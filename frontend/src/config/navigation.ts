@@ -5,30 +5,36 @@ export const navGroups = [
     title: "General",
     sectionDescription: "Opciones generales de la aplicación y recursos oficiales.",
     items: [
-      { href: "/catalogo", label: "Catálogo", icon: GraduationCap, description: "Familias, Títulos, Módulos y currículos (RA y CE)." },
+      { href: "/inicio", label: "Inicio", icon: Activity, description: "Dashboard y resumen de bienvenida." },
+      { href: "/perfil", label: "Perfil", icon: Settings, description: "Configuración del usuario y preferencias." },
       { href: "/archivos", label: "Archivos", icon: FolderOpen, description: "Gestión de archivos de Programación y Curso." },
+      { href: "/catalogo?tab=normativa", label: "Catálogo", icon: GraduationCap, description: "Familias, Títulos, Módulos y currículos (RA y CE)." },
       { href: "/documentos", label: "Documentos", icon: FileText, description: "Legislación, plantillas y normativas." },
-      { href: "/descargas", label: "Descargas", icon: FileText, description: "Generación de actas, informes y boletines." }
+      { href: "/legal", label: "Legal", icon: Shield, description: "Legislación y normativas." }
     ]
   },
   {
     title: "Programación [Código del módulo]",
     sectionDescription: "Área de diseño y configuración didáctica. Configura el módulo, enlaza las matrices de evaluación, define los instrumentos y secuencia las tareas de aula.",
     items: [
-      { href: "/modulo", label: "Módulo", icon: Settings, description: "Contexto, metodología y recursos básicos." },
-      { href: "/matrices", label: "Matrices", icon: Grid, description: "Ponderación y cruce de RA, CE y Unidades Didácticas." },
-      { href: "/instrumentos", label: "Instrumentos", icon: Wrench, description: "Definición y pesos de las herramientas de evaluación." },
-      { href: "/secuenciacion", label: "Secuenciación", icon: BookOpen, description: "Programación de aula: Diseño y temporalización de Unidades y Tareas." }
+      { href: "/contexto", label: "Contexto", icon: Compass, description: "Información general y características del entorno." },
+      { href: "/curriculo", label: "Currículo", icon: Grid, description: "Cruce de Resultados de Aprendizaje y Criterios." },
+      { href: "/metodologia", label: "Metodología", icon: Lightbulb, description: "Estrategias metodológicas y recursos." },
+      { href: "/evaluacion", label: "Evaluación", icon: Wrench, description: "Definición de herramientas y rúbricas." },
+      { href: "/secuenciacion", label: "Secuenciación", icon: BookOpen, description: "Unidades didácticas y temporalización." },
+      { href: "/magia", label: "Magia", icon: Sparkles, description: "Generación del PDF y comparativas." }
     ]
   },
   {
     title: "Curso [Año]",
     sectionDescription: "Herramientas de seguimiento para el aula viva. Establece el calendario, administra el listado de alumnado, anota el progreso diario y evalúa.",
     items: [
-      { href: "/calendario", label: "Calendario", icon: Calendar, description: "Horario semanal, trimestres, festivos y eventos." },
-      { href: "/alumnado", label: "Alumnado", icon: Users, description: "Fichas, tutorías, prevención de abandono y plano de clase." },
-      { href: "/diario", label: "Diario", icon: MapPin, description: "Diario de aula, control de asistencia e incidencias." },
-      { href: "/evaluacion", label: "Calificaciones", icon: TrendingUp, description: "Cuaderno de notas, rúbricas y matriz de progreso por RA." }
+      { href: "/calendario", label: "Calendario", icon: Calendar, description: "Horario, trimestres, festivos y eventos." },
+      { href: "/alumnado", label: "Alumnado", icon: Users, description: "Fichas personales y perfiles." },
+      { href: "/diario", label: "Diario", icon: MapPin, description: "Programación de aula del día a día." },
+      { href: "/seguimiento", label: "Seguimiento", icon: TrendingUp, description: "Control de faltas e incidencias." },
+      { href: "/calificaciones", label: "Calificaciones", icon: Award, description: "Cuaderno de notas y rúbricas aplicadas." },
+      { href: "/informes", label: "Informes", icon: BarChart3, description: "Boletines trimestrales y actas de evaluación." }
     ]
   }
 ];

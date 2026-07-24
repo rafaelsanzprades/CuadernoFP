@@ -94,7 +94,7 @@ export function EqavetTab() {
           </h3>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Puntos Fuertes (Lo que ha funcionado bien)</label>
+              <label className="block text-sm font-medium mb-1">Puntos fuertes (lo que ha funcionado bien)</label>
               <textarea
                 value={eqavet.puntos_fuertes || ""}
                 onChange={(e) => handleTextChange("puntos_fuertes", e.target.value)}
@@ -103,7 +103,7 @@ export function EqavetTab() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Áreas de Mejora y Acciones para el próximo curso</label>
+              <label className="block text-sm font-medium mb-1">Áreas de mejora y acciones para el próximo curso</label>
               <textarea
                 value={eqavet.areas_mejora || ""}
                 onChange={(e) => handleTextChange("areas_mejora", e.target.value)}

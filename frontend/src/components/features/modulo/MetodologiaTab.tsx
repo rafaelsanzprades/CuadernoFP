@@ -42,7 +42,7 @@ export function MetodologiaTab() {
         <div className="space-y-6">
           
           <div>
-            <label className="text-sm font-semibold text-foreground mb-2 block">Metodologías Activas (Selección Múltiple)</label>
+            <label className="text-sm font-semibold text-foreground mb-2 block">Metodologías activas (selección múltiple)</label>
             <p className="text-xs text-muted mb-3">Elige las metodologías que sustentan el desarrollo del módulo. Se redactarán automáticamente en tu Programación Didáctica.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               {METODOLOGIAS.map((met) => {
@@ -63,7 +63,7 @@ export function MetodologiaTab() {
           </div>
 
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">Principios Metodológicos</label>
+            <label className="text-sm font-semibold text-foreground mb-1 block">Principios metodológicos</label>
             <p className="text-xs text-muted mb-2">Principios pedagógicos generales que guiarán el módulo.</p>
             <textarea
               value={config_contexto["principios_metodologicos"] || ""}
@@ -73,7 +73,7 @@ export function MetodologiaTab() {
             />
           </div>
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">Estrategias Metodológicas</label>
+            <label className="text-sm font-semibold text-foreground mb-1 block">Estrategias metodológicas</label>
             <p className="text-xs text-muted mb-2">Estrategias y actividades de enseñanza-aprendizaje a emplear en el aula y taller.</p>
             <textarea
               value={config_contexto["estrategias_metodologicas"] || config_contexto["D2_actividades_ea"] || ""}
@@ -84,7 +84,7 @@ export function MetodologiaTab() {
           </div>
           
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">Anotaciones libres de Metodología</label>
+            <label className="text-sm font-semibold text-foreground mb-1 block">Anotaciones libres de metodología</label>
             <p className="text-xs text-muted mb-2">Párrafo personalizado que se añadirá al final del apartado de metodologías generadas automáticamente.</p>
             <textarea
               value={moduleData?.texto_metodologia_libre || ""}
@@ -95,7 +95,7 @@ export function MetodologiaTab() {
           </div>
 
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">Plan de Aplicación de los Desdobles</label>
+            <label className="text-sm font-semibold text-foreground mb-1 block">Plan de aplicación de los desdobles</label>
             <p className="text-xs text-muted mb-2">Justificación y organización si el módulo tiene desdobles.</p>
             <textarea
               value={config_contexto["plan_desdobles"] || config_contexto["D3_agrupamientos"] || ""}

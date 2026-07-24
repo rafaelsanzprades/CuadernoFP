@@ -42,7 +42,7 @@ export function IndicadoresTab() {
     return (
       <Card className="p-12 text-center border border-dashed border-[var(--glass-border)] bg-foreground/5">
         <ListChecks className="w-12 h-12 text-muted mx-auto mb-4 opacity-50" />
-        <h3 className="text-xl font-bold text-foreground mb-2">Faltan Criterios de Evaluación</h3>
+        <h3 className="text-xl font-bold text-foreground mb-2">Faltan criterios de evaluación</h3>
         <p className="text-muted mb-6">Añade Criterios de Evaluación (CE) en la pestaña Matrices antes de crear Indicadores.</p>
       </Card>
     );

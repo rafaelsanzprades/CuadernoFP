@@ -127,7 +127,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
       )}
 
       {/* Listado de ECPs */}
-      <h3 className="text-lg font-bold mt-8 mb-4">Estándares de Competencia Profesional (ECP)</h3>
+      <h3 className="text-lg font-bold mt-8 mb-4">Estándares de competencia profesional (ECP)</h3>
       
       <div className="space-y-4">
         {/* Nivel 1 */}

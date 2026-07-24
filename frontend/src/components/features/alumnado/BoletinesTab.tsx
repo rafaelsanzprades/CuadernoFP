@@ -51,7 +51,7 @@ export const BoletinesTab = () => {
   if (activeStudents.length === 0) {
     return (
       <Card className="p-8 text-center border-l-4 border-l-yellow-500 mt-6">
-        <h2 className="text-xl font-bold text-warning mb-2">Falta Alumnado</h2>
+        <h2 className="text-xl font-bold text-warning mb-2">Falta alumnado</h2>
         <p className="text-foreground/80">
           Primero debes registrar alumnado en la pestaña principal.
         </p>

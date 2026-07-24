@@ -14,7 +14,8 @@ export function DatosTab() {
     setModuleData,
     updateInfoModulo,
     updateModuleData,
-    groups
+    groups,
+    activeModuleId
   } = useAppStore();
 
   useEffect(() => {
@@ -32,6 +33,12 @@ export function DatosTab() {
   const [viewFamilyId, setViewFamilyId] = useState("");
   const [viewDegreeId, setViewDegreeId] = useState("");
   const [selectedModuleCode, setSelectedModuleCode] = useState("");
+
+  useEffect(() => {
+    setViewFamilyId("");
+    setViewDegreeId("");
+    setSelectedModuleCode("");
+  }, [activeModuleId]);
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/families`)
@@ -193,7 +200,7 @@ export function DatosTab() {
 
         <div className="grid grid-cols-2 gap-4 mb-4">
           <Select
-            label="Familia Profesional"
+            label="Familia profesional"
             value={viewFamilyId}
             onChange={e => { setViewFamilyId(e.target.value); setViewDegreeId(""); setSelectedModuleCode(""); }}
           >
@@ -203,7 +210,7 @@ export function DatosTab() {
             ))}
           </Select>
           <Select
-            label="Título de FP (Grado D)"
+            label="Título de FP (grado D)"
             value={viewDegreeId}
             onChange={e => { setViewDegreeId(e.target.value); setSelectedModuleCode(""); }}
             disabled={!viewFamilyId}
@@ -260,7 +267,7 @@ export function DatosTab() {
             onChange={e => updateInfoModulo('h_boa', Number(e.target.value))}
           />
           <Input 
-            label="% P.Ev.Continua"
+            label="% P.Ev. continua"
             type="number"
             value={data.p_ev || 15}
             onChange={e => updateInfoModulo('p_ev', Number(e.target.value))}

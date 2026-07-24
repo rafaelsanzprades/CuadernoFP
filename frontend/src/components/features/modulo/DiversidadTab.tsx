@@ -73,7 +73,7 @@ export function DiversidadTab() {
         <div className="space-y-6">
 
           <div>
-            <label className="text-sm font-semibold text-foreground mb-2 block">Medidas de Inclusión (Selección Múltiple)</label>
+            <label className="text-sm font-semibold text-foreground mb-2 block">Medidas de inclusión (selección múltiple)</label>
             <p className="text-xs text-muted mb-3">Selecciona las medidas de respuesta educativa que aplicarás de forma general en este módulo.</p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {INCLUSION.map((inc) => {
@@ -94,7 +94,7 @@ export function DiversidadTab() {
           </div>
 
           <div>
-            <label className="text-sm font-semibold text-foreground mb-2 block">Anotaciones libres sobre Inclusión</label>
+            <label className="text-sm font-semibold text-foreground mb-2 block">Anotaciones libres sobre inclusión</label>
             <textarea
               value={moduleData?.texto_inclusion_libre || ""}
               onChange={e => updateModuleData("texto_inclusion_libre", e.target.value)}
@@ -186,7 +186,7 @@ export function DiversidadTab() {
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold text-muted block mb-2">Adaptaciones de Evaluación y Acceso</label>
+                  <label className="text-xs font-semibold text-muted block mb-2">Adaptaciones de evaluación y acceso</label>
                   <div className="flex flex-wrap gap-2">
                     {adaptacionesList.map(adapt => {
                       const isSelected = (student.adaptaciones || []).includes(adapt);

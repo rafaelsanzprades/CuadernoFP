@@ -7,8 +7,6 @@ import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
-import { AsistenciaTab } from "@/components/features/diario/AsistenciaTab";
-import { AlertaAbandonoTab } from "@/components/features/diario/AlertaAbandonoTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -24,9 +22,7 @@ export default function SeguimientoPage() {
   const [allDiarioOpen, setAllDiarioOpen] = useState(false);
 
   const TABS = [
-    { id: "diario", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.diario')}</span>, cleanLabel: t('tabs.diario') },
-    { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> {t('tabs.asistencia')}</span>, cleanLabel: t('tabs.asistencia') },
-    { id: "alerta_abandono", label: <span className="flex items-center gap-2"><AlertTriangle className="w-4 h-4 shrink-0" /> {t('tabs.abandono')}</span>, cleanLabel: t('tabs.abandono') }
+    { id: "diario", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.diario')}</span>, cleanLabel: t('tabs.diario') }
   ];
   const [activeTab, setActiveTab] = useState("diario");
   const activeTabCleanLabel = TABS.find(t_tab => t_tab.id === activeTab)?.cleanLabel;
@@ -209,14 +205,6 @@ export default function SeguimientoPage() {
           'diario': {
                     'title': 'Diario de Aula',
                     'desc': 'Anotaciones diarias, incidencias y desarrollo de las sesiones.'
-          },
-          'asistencia': {
-                    'title': 'Asistencia',
-                    'desc': 'Registro y control de faltas y retrasos del alumnado.'
-          },
-          'alerta_abandono': {
-                    'title': 'Alerta de Abandono',
-                    'desc': 'Sistema de detección temprana y protocolo de abandono.'
           }
 };
                 const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
@@ -332,14 +320,6 @@ export default function SeguimientoPage() {
                 })}
               </div>
             </section>
-          )}
-
-          {activeTab === "asistencia" && (
-            <AsistenciaTab />
-          )}
-
-          {activeTab === "alerta_abandono" && (
-            <AlertaAbandonoTab />
           )}
 
           </MotionWrapper>

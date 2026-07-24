@@ -11,9 +11,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import { PlanoClaseTab } from "@/components/features/alumnado/PlanoClaseTab";
-import { BoletinesTab } from "@/components/features/alumnado/BoletinesTab";
-import { FeoeTab } from "@/components/features/alumnado/FeoeTab";
-import { TutoriaTab } from "@/components/features/alumnado/TutoriaTab";
+
 import { ContextoGrupoTab } from "@/components/features/alumnado/ContextoGrupoTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
@@ -33,10 +31,8 @@ export default function AlumnadoPage() {
 
   const TABS = [
     { id: "listado", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.listado')}</>, cleanLabel: t('tabs.listado') },
-    { id: "tutoria", label: <><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.tutoria')}</>, cleanLabel: t('tabs.tutoria') },
     { id: "plano", label: <><span className="inline-flex"><LayoutGrid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.plano')}</>, cleanLabel: t('tabs.plano') },
-    { id: "contexto", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Contexto</>, cleanLabel: 'Contexto del Grupo' },
-    { id: "feoe", label: <><span className="inline-flex"><MessageSquare className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.feoe')}</>, cleanLabel: t('tabs.feoe') }
+    { id: "contexto", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Contexto</>, cleanLabel: 'Contexto del grupo' }
   ];
 
   const activeTabCleanLabel = TABS.find(t_tab => t_tab.id === activeTab)?.cleanLabel;
@@ -224,13 +220,7 @@ export default function AlumnadoPage() {
 
   const handleRemoveAlumnado = (idx: number) => {
     const newAl = [...df_al];
-    // Also clean up their tutoring data from the ledger if it exists
-    const studentId = newAl[idx].ID;
-    if (studentId && cursoData.tutoria_ledger && cursoData.tutoria_ledger[studentId]) {
-      const newLedger = { ...cursoData.tutoria_ledger };
-      delete newLedger[studentId];
-      updateCursoData("tutoria_ledger", newLedger);
-    }
+    // updateCursoData("df_al", newAl);
     newAl.splice(idx, 1);
     updateCursoData("df_al", newAl);
   };
@@ -293,10 +283,6 @@ export default function AlumnadoPage() {
           'plano': {
                     'title': 'Plano de Clase',
                     'desc': 'Distribución y plano visual del aula.'
-          },
-          'boletines': {
-                    'title': 'Boletines',
-                    'desc': 'Generación de boletines y calificaciones parciales.'
           }
 };
                 const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
@@ -479,10 +465,6 @@ export default function AlumnadoPage() {
 
           {activeTab === "plano" && <PlanoClaseTab />}
           {activeTab === "contexto" && <ContextoGrupoTab />}
-          {activeTab === "feoe" && <FeoeTab />}
-          {activeTab === "tutoria" && <TutoriaTab />}
-
-          {activeTab === "boletines" && <BoletinesTab />}
           
           </MotionWrapper>
         </main>

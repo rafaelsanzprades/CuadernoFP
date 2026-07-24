@@ -103,7 +103,7 @@ export function PlanesTab() {
         <div className="space-y-6">
 
           <div>
-            <label className="text-sm font-semibold text-foreground mb-2 block">Medidas de Contingencia (Selección Múltiple)</label>
+            <label className="text-sm font-semibold text-foreground mb-2 block">Medidas de contingencia (selección múltiple)</label>
             <p className="text-xs text-muted mb-3">Estrategias generales de actuación ante la imposibilidad de impartir docencia presencial normal.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
               {CONTINGENCIA.map((cont) => {
@@ -124,7 +124,7 @@ export function PlanesTab() {
           </div>
 
           <div>
-            <label className="text-sm font-semibold text-foreground mb-2 block">Anotaciones libres de Contingencia</label>
+            <label className="text-sm font-semibold text-foreground mb-2 block">Anotaciones libres de contingencia</label>
             <textarea
               value={moduleData?.texto_contingencia_libre || ""}
               onChange={e => updateModuleData("texto_contingencia_libre", e.target.value)}

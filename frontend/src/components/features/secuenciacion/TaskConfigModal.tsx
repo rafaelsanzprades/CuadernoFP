@@ -94,7 +94,7 @@ export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps)
             <div className="space-y-6">
               <div className="space-y-2">
                 <label className="block text-sm font-bold text-foreground">
-                  Scenario / Briefing (Contexto Profesional)
+                  Scenario / briefing (contexto profesional)
                 </label>
                 <p className="text-xs text-muted">Situación laboral creíble, encargo específico (ej. un correo de un cliente, una incidencia técnica).</p>
                 <textarea 
@@ -107,7 +107,7 @@ export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps)
 
               <div className="space-y-2">
                 <label className="block text-sm font-bold text-foreground">
-                  Formato de Entrega y Plazos
+                  Formato de entrega y plazos
                 </label>
                 <p className="text-xs text-muted">Cómo, cuándo y dónde debe entregarse la tarea.</p>
                 <textarea 
@@ -123,7 +123,7 @@ export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps)
             <div className="space-y-6">
               <div className="space-y-2">
                 <label className="block text-sm font-bold text-foreground">
-                  Desarrollo de la Tarea (Pasos)
+                  Desarrollo de la tarea (pasos)
                 </label>
                 <p className="text-xs text-muted">Instrucciones secuenciadas que el alumnado debe seguir.</p>
                 <textarea 
@@ -136,7 +136,7 @@ export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps)
 
               <div className="space-y-2">
                 <label className="block text-sm font-bold text-foreground">
-                  Evidencias a Generar
+                  Evidencias a generar
                 </label>
                 <p className="text-xs text-muted">Qué productos tangibles o demostraciones se van a evaluar.</p>
                 <textarea 

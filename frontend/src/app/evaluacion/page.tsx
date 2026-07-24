@@ -1,46 +1,32 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BarChart, Building2, ClipboardList, Save, Target, TrendingUp, User, Users, AlertTriangle , Info, FolderOpen, Table } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { FileEdit, FolderOpen, Wrench, Crosshair } from "lucide-react";
+import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
-import { resolveDescRa, loadCatalogForModule } from "@/services/catalogCache";
+import { useTranslation } from "react-i18next";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { motion, AnimatePresence } from "framer-motion";
-import { LineChart, Line, ResponsiveContainer, YAxis } from "recharts";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
-import { useTranslation } from "react-i18next";
-import { AnalisisGrupalTab } from "@/components/features/analisis/AnalisisGrupalTab";
-import { AnalisisIndividualTab } from "@/components/features/analisis/AnalisisIndividualTab";
-import { MatrizCalificacionesTab } from "@/components/features/evaluacion/MatrizCalificacionesTab";
-import EstadisticasTab from "@/components/features/evaluacion/EstadisticasTab";
-import { ProcedimientosTab } from "@/components/features/evaluacion/ProcedimientosTab";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import Link from "next/link";
+import { InstrumentosListTab } from "@/components/features/instrumentos/InstrumentosListTab";
+import { IndicadoresTab } from "@/components/features/instrumentos/IndicadoresTab";
 
-export default function ProgresoPage() {
-  const { 
-    activeModuleId, 
-    moduleData, 
-    setModuleData, 
-    activeCursoId, 
-    cursoData, 
-    setCursoData, 
-    updateCursoData,
-    saveCursoData 
-  } = useAppStore();
-
-  const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
-  const [saveMessage, setSaveMessage] = useState("");
+export default function InstrumentosPage() {
+  const { activeModuleId, moduleData, setModuleData } = useAppStore();
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState("resumen");
-  const [activeTabByStudent, setActiveTabByStudent] = useState<Record<string, string>>({});
-  const [allStudentsOpen, setAllStudentsOpen] = useState(false);
-  const [openStudents, setOpenStudents] = useState<Set<string>>(new Set());
+  const [loading, setLoading] = useState(true);
+
+  const TABS = [
+    { id: "instrumentos", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Instrumentos</span>, cleanLabel: "Instrumentos" },
+    { id: "indicadores", label: <span className="flex items-center gap-2"><Crosshair className="w-4 h-4 shrink-0" /> Indicadores</span>, cleanLabel: "Indicadores" },
+  ];
+
+  const [activeTab, setActiveTab] = useState("instrumentos");
+  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,12 +36,14 @@ export default function ProgresoPage() {
           const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeModuleId}`);
           const data = await res.json();
           if (data.status === "success") setModuleData(data.data);
-          loadCatalogForModule(activeModuleId);
-        }
-        if (activeCursoId && !cursoData) {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeCursoId}`);
-          const data = await res.json();
-          if (data.status === "success") setCursoData(data.data);
+        } else if (moduleData && !moduleData.df_instr) {
+          // Force demo seed if completely empty
+          import('@/services/fileManager').then(({ fileManager }) => {
+            const db = fileManager.getDb();
+            if (db['0237-ictve-pd']) {
+              setModuleData(db['0237-ictve-pd']);
+            }
+          });
         }
       } catch (err) {
         console.error("Error fetching data:", err);
@@ -63,40 +51,26 @@ export default function ProgresoPage() {
       setLoading(false);
     };
 
-    if (activeModuleId || activeCursoId) {
+    if (activeModuleId) {
       fetchData();
     } else {
       setLoading(false);
     }
-  }, [activeModuleId, moduleData, activeCursoId, cursoData, setModuleData, setCursoData]);
+  }, [activeModuleId, moduleData, setModuleData]);
 
-  const handleSave = async () => {
-    setSaving(true);
-    setSaveMessage("");
-    const ok = await saveCursoData();
-    if (ok) {
-      setSaveMessage("Guardado correctamente");
-      setTimeout(() => setSaveMessage(""), 3000);
-    } else {
-      setSaveMessage("Error al guardar");
-    }
-    setSaving(false);
-  };
-
-  if (!activeModuleId || !activeCursoId) {
+  if (!activeModuleId) {
     return (
       <div className="flex min-h-screen bg-background">
-      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
+        <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
-          <Header />
-          <main id="main-content" tabIndex={-1} className="flex-1 p-8 content-area">
+          <Header breadcrumbSuffix={activeTabCleanLabel} />
+          <main className="flex-1 p-8 content-area">
             <MotionWrapper>
-
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
-                <TrendingUp className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-2xl font-bold">No hay curso ni programación cargada</h2>
-                <p className="text-muted mb-4">Debes abrir o crear un archivo de programación y curso en tu Archivos.</p>
+                <FileEdit className="w-16 h-16 text-muted-foreground opacity-50" />
+                <h2 className="text-2xl font-bold">No hay programación cargada</h2>
+                <p className="text-muted mb-4">Debes abrir o crear un archivo de programación en tu Archivos.</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
                     <FolderOpen className="w-4 h-4" /> Ir a mis Archivos
@@ -110,582 +84,42 @@ export default function ProgresoPage() {
     );
   }
 
-  if (loading || !cursoData || !moduleData) {
-    return <LoadingSpinner text="Cargando datos de progreso académico..." />;
+  if (loading || !moduleData) {
+    return <LoadingSpinner text="Cargando..." />;
   }
-
-  const df_al = cursoData?.df_al || [];
-  const df_eval = cursoData?.df_eval || [];
-  const df_act = moduleData?.df_act || [];
-  const df_ce = moduleData?.df_ce || [];
-  const df_ra = moduleData?.df_ra || [];
-  const df_feoe = cursoData?.df_feoe || [];
-  const df_ud = moduleData?.df_ud || [];
-  const df_pr = moduleData?.df_pr || [];
-  const info_fechas = cursoData?.info_fechas || {};
-  const planning_ledger = cursoData?.planning_ledger || {};
-
-  const df_evaluable = df_al.filter((al: any) => al.Estado !== "Baja");
-  df_evaluable.sort((a: any, b: any) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
-
-  const acts_by_tri: Record<string, any[]> = { "1T": [], "2T": [], "3T": [] };
-  df_act.forEach((act: any) => {
-    if (act.id_act && String(act.id_act).trim() !== "") {
-      const tri = act.tri_act || "1T";
-      if (acts_by_tri[tri]) acts_by_tri[tri].push(act);
-    }
-  });
-
-  const getSigadInfo = (nota: number) => {
-    let n = nota < 5 ? Math.floor(nota) : Math.floor(nota + 0.5);
-    n = Math.max(1, Math.min(10, n));
-    if (nota < 5) return { n, cod: "IN", txt: "Insuficiente", col: "#e74c3c" };
-    if (nota < 6) return { n, cod: "SU", txt: "Suficiente", col: "#e67e22" };
-    if (nota < 7) return { n, cod: "BI", txt: "Bien", col: "#3498db" };
-    if (nota < 9) return { n, cod: "NT", txt: "Notable", col: "#2ecc71" };
-    return { n, cod: "SB", txt: "Sobresaliente", col: "#1abc9c" };
-  };
-
-  const calcularNotas = (al_id: string, evRow: any) => {
-    const peso_ra: Record<string, number> = {};
-    df_ra.forEach((ra: any) => {
-      if (ra.id_ra) peso_ra[ra.id_ra] = Number(ra.peso_ra) || 0;
-    });
-
-    const peso_ce: Record<string, number> = {};
-    const ra_of_ce: Record<string, string> = {};
-    df_ce.forEach((ce: any) => {
-      if (ce.id_ce && ce.id_ra) {
-        peso_ce[ce.id_ce] = Number(ce.peso_ce) || 0;
-        ra_of_ce[ce.id_ce] = ce.id_ra;
-      }
-    });
-
-    const config = moduleData?.config_redondeo || {
-      nota_aprobado: 5.0,
-      umbral_redondeo: 5.0,
-      max_compensables: 0
-    };
-
-    const notas_ce: Record<string, number> = {};
-    Object.keys(peso_ce).forEach(ce_id => {
-      const act_vals: number[] = [];
-      df_act.forEach((act: any) => {
-        if (act[ce_id] === true || act[ce_id] === "true") {
-          const act_id = act.id_act;
-          const val = Number(evRow[act_id]);
-          if (!isNaN(val)) act_vals.push(val);
-        }
-      });
-      notas_ce[ce_id] = act_vals.length > 0 ? act_vals.reduce((a, b) => a + b, 0) / act_vals.length : 0;
-    });
-
-    const notas_ra: Record<string, number> = {};
-    const failed_ces_by_ra: Record<string, number> = {};
-    Object.entries(notas_ce).forEach(([ce_id, n_ce]) => {
-      const r_id = ra_of_ce[ce_id];
-      if (r_id) {
-        if (!notas_ra[r_id]) notas_ra[r_id] = 0;
-        notas_ra[r_id] += n_ce * (peso_ce[ce_id] / 100);
-
-        if (!failed_ces_by_ra[r_id]) failed_ces_by_ra[r_id] = 0;
-        // Sólo consideramos suspenso el CE si ha sido evaluado (n_ce > 0) y no llega a la nota
-        if (n_ce > 0 && n_ce < config.nota_aprobado) {
-          failed_ces_by_ra[r_id]++;
-        }
-      }
-    });
-    // Aplicar reglas de Redondeo y Compensaciones por RA
-    Object.keys(notas_ra).forEach(r_id => {
-      let n_ra = notas_ra[r_id];
-      if (n_ra >= config.umbral_redondeo && n_ra < config.nota_aprobado) {
-        n_ra = config.nota_aprobado; // Redondeo al alza
-      }
-      if (failed_ces_by_ra[r_id] > config.max_compensables && n_ra >= config.nota_aprobado) {
-        n_ra = config.nota_aprobado - 0.1; // Capped por exceder compensables
-      }
-      notas_ra[r_id] = n_ra;
-    });
-
-    let nota_final = 0;
-    Object.entries(notas_ra).forEach(([r_id, n_ra]) => {
-      nota_final += n_ra * ((peso_ra[r_id] || 0) / 100);
-    });
-
-    // Aplicar umbral de redondeo a la nota final
-    if (nota_final >= config.umbral_redondeo && nota_final < config.nota_aprobado) {
-      nota_final = config.nota_aprobado;
-    }
-
-    return { notas_ra, nota_final, notas_ce };
-  };
-
-  const handleUpdateActNota = (al_id: string, act_id: string, val: number) => {
-    const newEval = [...df_eval];
-    let evRowIdx = newEval.findIndex(e => e.ID === al_id);
-
-    if (evRowIdx === -1) {
-      newEval.push({ ID: al_id, Nota_Final: 0 });
-      evRowIdx = newEval.length - 1;
-    }
-
-    newEval[evRowIdx][act_id] = val;
-
-    // Recalculate Note Final
-    const { nota_final } = calcularNotas(al_id, newEval[evRowIdx]);
-    newEval[evRowIdx]["Nota_Final"] = Number(nota_final.toFixed(2));
-
-    updateCursoData("df_eval", newEval);
-  };
-
-  const handleOverrideNotaFinal = (al_id: string, val: number) => {
-    const newEval = [...df_eval];
-    let evRowIdx = newEval.findIndex(e => e.ID === al_id);
-    if (evRowIdx === -1) {
-      newEval.push({ ID: al_id, Nota_Final: 0 });
-      evRowIdx = newEval.length - 1;
-    }
-    newEval[evRowIdx]["Nota_Final"] = val;
-    updateCursoData("df_eval", newEval);
-  };
-
-  // LÓGICA DE PROYECCIÓN DE TRIMESTRES PARA CADA RA
-  const uds_por_tri: Record<string, Set<string>> = { "1T": new Set(), "2T": new Set(), "3T": new Set() };
-
-  const mapTrimestre = (ini_key: string, fin_key: string, t_key: string) => {
-    const ini_str = info_fechas[ini_key];
-    const fin_str = info_fechas[fin_key];
-    if (!ini_str || !fin_str) return;
-
-    const ini = new Date(ini_str);
-    const fin = new Date(fin_str);
-    let curr = new Date(ini);
-
-    while (curr <= fin) {
-      const dateStr = curr.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
-      const uds = planning_ledger[dateStr] || [];
-      uds.forEach((ud: string) => uds_por_tri[t_key].add(ud));
-      curr.setDate(curr.getDate() + 1);
-    }
-  };
-
-  mapTrimestre("ini_1t", "fin_1t", "1T");
-  mapTrimestre("ini_2t", "fin_2t", "2T");
-  mapTrimestre("ini_3t", "fin_3t", "3T");
-
-  const ra_to_tri: Record<string, any> = {};
-  const ra_info: Record<string, any> = {};
-
-  df_ra.forEach((ra: any) => {
-    const ra_id = String(ra.id_ra);
-    ra_info[ra_id] = {
-      pond: Number(ra.peso_ra) || 0.0,
-      desc: resolveDescRa(activeModuleId, ra)
-    };
-
-    const tris_found = new Set<string>();
-    const uds_found: string[] = [];
-    const prs_found: string[] = [];
-
-    // Buscar en UDs
-    df_ud.forEach((ud: any) => {
-      if (Number(ud[ra_id]) > 0) {
-        const uid = String(ud.id_ud);
-        uds_found.push(uid);
-        ["1T", "2T", "3T"].forEach(t => {
-          if (uds_por_tri[t].has(uid)) tris_found.add(t);
-        });
-      }
-    });
-
-    // Buscar en Prácticas
-    df_pr.forEach((pr: any) => {
-      if (Number(pr[ra_id]) > 0) {
-        prs_found.push(String(pr.ID));
-      }
-    });
-
-    ra_to_tri[ra_id] = {
-      tris: tris_found.size > 0 ? Array.from(tris_found) : ["1T", "2T", "3T"],
-      uds: uds_found,
-      prs: prs_found
-    };
-  });
-
-  const TABS = [
-    { id: "resumen", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.resumen_grupal')}</>, cleanLabel: t('tabs.resumen_grupal') },
-    { id: "matriz", label: <><span className="inline-flex"><Table className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.matriz')}</>, cleanLabel: t('tabs.matriz') },
-    { id: "estadisticas", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Estadísticas</>, cleanLabel: 'Estadísticas' },
-    { id: "procedimientos", label: <><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> Procedimientos</>, cleanLabel: 'Procedimientos Normativos' },
-    { id: "detalle", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.detalle')}</>, cleanLabel: t('tabs.detalle') },
-    { id: "grupal", label: <><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.grupal')}</>, cleanLabel: t('tabs.grupal') },
-    { id: "individual", label: <><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.individual')}</>, cleanLabel: t('tabs.individual') }
-  ];
 
   return (
     <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header breadcrumbSuffix={TABS.find(t => t.id === activeTab)?.label} />
-
+        <Header breadcrumbSuffix={activeTabCleanLabel} />
+        
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-3 pb-12">
-            <div className="flex justify-between items-start">
+          <MotionWrapper className="space-y-4 pb-12">
             <div>
-              <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <span className="inline-flex"><TrendingUp className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.evaluacion_title')}
+              <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
+                <Wrench className="w-6 h-6 text-accent" /> Configuración de instrumentos e indicadores
               </h1>
-              <p className="text-muted mt-2 text-lg">{t('pages.evaluacion_desc')}</p>
+              <p className="text-muted mt-2 text-lg">Define los instrumentos de calificación, rúbricas y los indicadores de evaluación vinculados a los resultados de aprendizaje.</p>
             </div>
-            {/* Save Button */}
-            <div className="flex items-center gap-4">
-              {saveMessage && (
-                <span className={`text-sm font-semibold ${saveMessage.includes("Error") ? "text-danger" : "text-success"}`}>
-                  {saveMessage}
-                </span>
-              )}
-              <Button 
-                onClick={handleSave} 
-                disabled={saving}
-                className="bg-accent text-background hover:bg-accent/80 font-bold px-6 py-2 rounded-xl flex items-center gap-2"
-              >
-                {saving ? "Guardando..." : <>Guardar cambios <span className="inline-flex"><Save className="w-[1.2em] h-[1.2em] mr-1" /></span></>}
-              </Button>
-            </div>
-          </div>
 
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="mb-2 max-w-full">
-              {TABS.map(tab => (
-                <TabsTrigger key={tab.id} value={tab.id}>
-                  {tab.label}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
+            <Tabs value={activeTab} onValueChange={setActiveTab}>
+              <TabsList className="mb-6 max-w-full">
+                {TABS.map(tab => (
+                  <TabsTrigger key={tab.id} value={tab.id}>
+                    {tab.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
 
-                        {(() => {
-                const infoMap: Record<string, {title: string, desc: string}> = {
-          'resumen': {
-                    'title': 'Resumen de Progreso',
-                    'desc': 'Panel global de rendimiento y calificaciones medias.'
-          },
-          'matriz': {
-                    'title': 'Matriz de Calificaciones',
-                    'desc': 'Cuaderno del profesor. Vista tipo Excel para registro ágil de notas.'
-          },
-          'detalle': {
-                    'title': 'Detalle por alumnado',
-                    'desc': 'Progreso y trazabilidad detallada por alumnado.'
-          },
-          'grupal': {
-                    'title': 'Progreso Grupal',
-                    'desc': 'Desempeño y estadísticas comparativas del grupo.'
-          },
-          'individual': {
-                    'title': 'Progreso Individual',
-                    'desc': 'Hoja de progreso individual para tutorías.'
-          }
-};
-                const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
-                return (
-                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
-                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
-                    <div>
-                      <p className="text-sm text-muted">{info.desc}</p>
-                    </div>
-                  </div>
-                );
-              })()}
-
-                  {activeTab === "resumen" && <AnalisisGrupalTab setActiveTab={setActiveTab} />}
-                  {activeTab === "matriz" && <MatrizCalificacionesTab />}
-                  {activeTab === "estadisticas" && <EstadisticasTab />}
-                  {activeTab === "procedimientos" && <ProcedimientosTab />}
-
-          {/* TAB 2: DETALLE POR ALUMNADODO (Con ambos bloques desplegables uno detrás de otro) */}
-          {activeTab === "detalle" && (
-            <div className="space-y-3 animate-in fade-in duration-500">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                    <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Detalle por alumnado
-                  </h2>
-                  <p className="text-muted mt-1">Notas individuales por alumnado, instrumento de evaluación y nivel de adquisición de RA.</p>
-                </div>
-                <Button
-                  variant="secondary"
-                  onClick={() => {
-                    if (allStudentsOpen) {
-                      setOpenStudents(new Set());
-                    } else {
-                      setOpenStudents(new Set(df_evaluable.map((a: any) => a.ID)));
-                    }
-                    setAllStudentsOpen(!allStudentsOpen);
-                  }}
-                >
-                  <span>{allStudentsOpen ? '▲' : '▼'}</span>
-                  {allStudentsOpen ? 'Colapsar todos' : 'Expandir todos'}
-                </Button>
-              </div>
-
-              <div className="space-y-4">
-                {df_evaluable.map((al: any) => {
-                  const al_id = al.ID;
-                  const evRow = df_eval.find((e: any) => e.ID === al_id) || { ID: al_id, Nota_Final: 0 };
-
-                  const nota_prev = Number(evRow.Nota_Final) || 0;
-                  const sigad = getSigadInfo(nota_prev);
-                  const activeStudentTab = activeTabByStudent[al_id] || "1T";
-
-                  // Calcular RAs para el alumnado individual
-                  const notas_student: Record<string, number> = {
-                    "1T": Number(evRow["1T_Nota"]) || 0.0,
-                    "2T": Number(evRow["2T_Nota"]) || 0.0,
-                    "3T": Number(evRow["3T_Nota"]) || 0.0,
-                  };
-                  const nota_final = Number(evRow["Nota_Final"]) || 0.0;
-
-                  let pct_global_cumplido = 0.0;
-                  let suma_pond_ra = 0.0;
-                  const resultados_ra: any[] = [];
-
-                  Object.keys(ra_info).forEach(ra_id => {
-                    const info = ra_info[ra_id];
-                    const r_data = ra_to_tri[ra_id];
-                    const tris = r_data.tris;
-
-                    let avg_nota_ra = 0.0;
-                    if (tris.length > 0) {
-                      avg_nota_ra = tris.reduce((sum: number, t: string) => sum + notas_student[t], 0) / tris.length;
-                    } else {
-                      avg_nota_ra = nota_final;
-                    }
-
-                    let prop = avg_nota_ra >= 5.0 ? (avg_nota_ra / 5.0) * 100.0 : (avg_nota_ra / 5.0) * 100.0;
-                    prop = Math.min(100.0, Math.max(0.0, prop));
-
-                    const obtenido_peso = info.pond * (prop / 100.0);
-                    pct_global_cumplido += obtenido_peso;
-                    suma_pond_ra += info.pond;
-
-                    resultados_ra.push({
-                      id: ra_id, desc: info.desc, pond: info.pond, prop, nota: avg_nota_ra,
-                      tris: r_data.tris, uds: r_data.uds, prs: r_data.prs
-                    });
-                  });
-
-                  return (
-                    <div key={al_id} className="group bg-foreground/5 rounded-lg border border-[var(--glass-border)] overflow-hidden transition-colors">
-                      <div
-                        onClick={() => {
-                          const newSet = new Set(openStudents);
-                          if (newSet.has(al_id)) newSet.delete(al_id);
-                          else newSet.add(al_id);
-                          setOpenStudents(newSet);
-                        }}
-                        className="p-4 cursor-pointer flex items-center justify-between font-semibold text-lg select-none hover:bg-foreground/10 transition-colors"
-                      >
-                        <div className="flex items-center gap-4 w-1/3">
-                          <span className="text-2xl"><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
-                          <span>{al.Apellidos}, {al.Nombre}</span>
-                        </div>
-
-                        {/* Sparkline (Tendencia) */}
-                        <div className="flex-1 h-10 flex items-center px-4 opacity-70 group-hover:opacity-100 transition-opacity pointer-events-none">
-                          {(() => {
-                            const allVals: number[] = [];
-                            df_act.forEach((act: any) => {
-                              const v = Number(evRow[act.id_act]);
-                              if (!isNaN(v) && v > 0) allVals.push(v);
-                            });
-                            const data = allVals.map((v, i) => ({ name: i, value: v }));
-                            if (data.length < 2) return <span className="text-xs text-muted italic">Sin datos suficientes para tendencia</span>;
-
-                            return (
-                              <ResponsiveContainer width="100%" height="100%">
-                                <LineChart data={data}>
-                                  <YAxis domain={[0, 10]} hide />
-                                  <Line type="monotone" dataKey="value" stroke={sigad.col} strokeWidth={2} dot={false} isAnimationActive={false} />
-                                </LineChart>
-                              </ResponsiveContainer>
-                            );
-                          })()}
-                        </div>
-
-                        <div className="flex items-center gap-6 text-sm w-1/4 justify-end">
-                          <span className="font-bold text-lg" style={{ color: sigad.col }}>
-                            {sigad.n} · {sigad.cod} <span className="text-sm font-normal text-muted">({sigad.txt})</span>
-                          </span>
-                          <span className={`ml-4 inline-block transition-transform duration-300 text-muted ${openStudents.has(al_id) ? 'rotate-180' : ''}`}>▼</span>
-                        </div>
-                      </div>
-
-                      <AnimatePresence initial={false}>
-                        {openStudents.has(al_id) && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3, ease: "easeInOut" }}
-                            className="overflow-hidden bg-foreground/10 border-t border-[var(--glass-border)]"
-                          >
-                            <div className="p-6 space-y-4">
-                              
-                              {/* BLOQUE 1: Detalle de calificaciones por instrumento */}
-                              <div className="flex flex-col lg:flex-row gap-8">
-                                {/* Left: Instrument Inputs */}
-                                <div className="flex-1">
-                                  <h3 className="font-bold text-foreground mb-4 flex items-center gap-2">
-                                    <span><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Detalle de Calificaciones por Instrumento
-                                  </h3>
-                                  <div onClick={(e) => e.stopPropagation()}>
-                                    <Tabs value={activeStudentTab} onValueChange={(val) => setActiveTabByStudent(prev => ({ ...prev, [al_id]: val }))}>
-                                      <TabsList className="mb-4 max-w-full">
-                                        {["1T", "2T", "3T"].map(t => (
-                                          <TabsTrigger key={t} value={t}>
-                                            {t === "1T" ? "1º Trimestre" : t === "2T" ? "2º Trimestre" : "3º Trimestre"}
-                                          </TabsTrigger>
-                                        ))}
-                                      </TabsList>
-                                    </Tabs>
-                                  </div>
-                                  <div className="space-y-4">
-                                    {acts_by_tri[activeStudentTab].length === 0 ? (
-                                      <div className="text-muted text-sm italic">No hay actividades evaluables definidas para este trimestre.</div>
-                                    ) : (
-                                      acts_by_tri[activeStudentTab].map(act => {
-                                        const act_id = act.id_act;
-                                        const val = Number(evRow[act_id]) || 0;
-                                        return (
-                                          <div key={act_id} className="flex items-center justify-between gap-4">
-                                            <label className="text-sm text-foreground/85 flex-1 truncate" title={act.desc_act}>
-                                              <span className="text-muted font-medium text-xs tracking-wider bg-foreground/5 border border-white/5 px-2 py-0.5 rounded-md mr-2">
-                                                {act.Tipo || "Act"}
-                                              </span>
-                                              {act.desc_act || act_id}
-                                            </label>
-                                            <input
-                                              type="number"
-                                              min="0"
-                                              max="10"
-                                              step="0.1"
-                                              value={val || ""}
-                                              onChange={(e) => handleUpdateActNota(al_id, act_id, Number(e.target.value) || 0)}
-                                              onClick={(e) => e.stopPropagation()}
-                                              className="w-20 bg-background/50 border border-[var(--glass-border)] rounded px-3 py-1.5 text-foreground focus:border-info focus:outline-none font-mono text-center text-sm font-semibold"
-                                            />
-                                          </div>
-                                        );
-                                      })
-                                    )}
-                                  </div>
-                                </div>
-
-                                {/* Right: Overrides & Official Badge */}
-                                <div className="w-full lg:w-72 flex flex-col justify-between">
-                                  <div>
-                                    <h4 className="font-bold text-foreground mb-4">Calificación de Acta</h4>
-                                    <div className="mb-4">
-                                      <label className="text-xs text-muted tracking-wider mb-1.5 block font-bold">Nota Final (Manual / Calc)</label>
-                                      <input
-                                        type="number"
-                                        min="1" max="10" step="0.1"
-                                        value={nota_prev || ""}
-                                        onChange={(e) => handleOverrideNotaFinal(al_id, Number(e.target.value) || 0)}
-                                        onClick={(e) => e.stopPropagation()}
-                                        className="w-full bg-background/50 border border-[var(--glass-border)] rounded px-3 py-2 text-xl font-bold text-foreground focus:border-info focus:outline-none"
-                                      />
-                                    </div>
-                                  </div>
-
-                                  <div className="rounded-xl flex flex-col items-center justify-center p-5 border-2 text-center" style={{ borderColor: sigad.col, backgroundColor: `${sigad.col}11` }}>
-                                    <div className="text-5xl font-black mb-2" style={{ color: sigad.col, lineHeight: 1 }}>{sigad.n}</div>
-                                    <div className="text-lg font-bold" style={{ color: sigad.col }}>{sigad.cod}</div>
-                                    <div className="text-xs text-muted mt-1 tracking-wider font-semibold">{sigad.txt}</div>
-                                  </div>
-                                </div>
-                              </div>
-
-                              {/* BLOQUE 2: Grado de consecución de los RA por alumnado */}
-                              <div className="pt-6 border-t border-[var(--glass-border)] space-y-4">
-                                <h3 className="font-bold text-foreground flex items-center gap-2">
-                                  <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Consecución de Resultados de Aprendizaje (RA)
-                                </h3>
-                                <div className="space-y-5">
-                                  {resultados_ra.map((r, idx) => {
-                                    let bar_color = "#dc3545"; // Rojo
-                                    if (r.prop >= 100) bar_color = "#198754"; // Verde
-                                    else if (r.prop >= 80) bar_color = "#0d6efd"; // Azul
-                                    else if (r.prop >= 50) bar_color = "#ffc107"; // Amarillo
-
-                                    return (
-    <div key={idx} className="flex flex-col md:flex-row gap-4 items-start bg-background/30 p-4 rounded-xl border border-white/5">
-                                        <div className="flex-1 w-full">
-                                          <div className="mb-1.5 flex items-center gap-2">
-                                            <span className="font-extrabold text-foreground">{r.id}</span>
-                                            <span className="text-xs text-muted font-semibold">({r.pond.toFixed(1)}%)</span>
-                                          </div>
-                                          <div className="text-xs text-muted mb-3 line-clamp-1">{r.desc}</div>
-
-                                          <div className="w-full bg-background/50 rounded-full h-4.5 border border-white/5 overflow-hidden">
-                                            <div
-                                              className="h-full rounded-full transition-all duration-500 flex items-center justify-end pr-2 text-[0.625rem] font-black text-foreground shadow-[inset_0_2px_4px_rgba(255,255,255,0.2)]"
-                                              style={{ width: `${Math.max(r.prop, 5)}%`, backgroundColor: bar_color }}
-                                            >
-                                              {r.prop > 15 ? `${r.prop.toFixed(0)}%` : ''}
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                        <div className="w-full md:w-60 bg-foreground/5 border border-white/5 rounded-lg p-2.5 text-[0.625rem] text-foreground/80 space-y-1 self-stretch flex flex-col justify-center">
-                                          <div className="flex justify-between">
-                                            <span className="text-info font-semibold">Evaluado en:</span>
-                                            <span>{r.tris.join(", ") || "-"}</span>
-                                          </div>
-                                          <div className="flex justify-between">
-                                            <span className="text-warning font-semibold">UDs:</span>
-                                            <span className="truncate max-w-[120px]" title={r.uds.join(", ")}>{r.uds.join(", ") || "-"}</span>
-                                          </div>
-                                          <div className="flex justify-between">
-                                            <span className="text-warning font-semibold">Prácticas:</span>
-                                            <span className="truncate max-w-[120px]" title={r.prs.join(", ")}>{r.prs.join(", ") || "-"}</span>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    );
-                                  })}
-                                </div>
-                              </div>
-
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* TAB 3: GRUPAL (Componente del análisis) */}
-          {activeTab === "grupal" && (
-            <div className="animate-in fade-in duration-500">
-              <AnalisisGrupalTab />
-            </div>
-          )}
-
-          {/* TAB 4: INDIVIDUAL (Componente del análisis con simulador) */}
-          {activeTab === "individual" && (
-            <div className="animate-in fade-in duration-500">
-              <AnalisisIndividualTab />
-            </div>
-          )}
+            {activeTab === 'instrumentos' && <InstrumentosListTab />}
+            {activeTab === 'indicadores' && <IndicadoresTab />}
+            
           </MotionWrapper>
         </main>
       </div>
     </div>
-      );
+  );
 }
-

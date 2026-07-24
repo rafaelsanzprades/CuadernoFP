@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { Map , Info } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 
@@ -39,7 +39,7 @@ export function ContextoFEOETab() {
             />
           </div>
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">B3. Vinculación con la Empresa Colaboradora</label>
+            <label className="text-sm font-semibold text-foreground mb-1 block">B3. Vinculación con la empresa colaboradora</label>
             <p className="text-xs text-muted mb-2">Relación entre el módulo y la formación en la empresa.</p>
             <textarea
               value={config_contexto["B3_vinculacion_empresa"] || ""}

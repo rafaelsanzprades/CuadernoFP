@@ -156,7 +156,7 @@ export function TabAutores({ globalSelection }: { globalSelection: any }) {
             <div className="space-y-6">
               <div className="flex items-start justify-between bg-info/10 border border-info/30 p-4 rounded-2xl">
                 <div>
-                  <h3 className="text-lg font-bold text-info">Previsualización de la Propuesta</h3>
+                  <h3 className="text-lg font-bold text-info">Previsualización de la propuesta</h3>
                   <p className="text-sm text-muted mt-1">Revisa el contenido antes de incorporarlo. Podrás editarlo a tu gusto una vez importado en tu programación.</p>
                 </div>
                 <Button 

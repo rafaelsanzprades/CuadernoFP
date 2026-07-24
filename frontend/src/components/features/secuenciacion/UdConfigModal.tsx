@@ -90,7 +90,7 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
           {/* Intención Educativa */}
           <div className="space-y-2">
             <label className="block text-sm font-bold text-foreground">
-              Intención Educativa / Contextualización
+              Intención educativa / contextualización
             </label>
             <p className="text-xs text-muted">Justificación pedagógica de esta unidad, vinculación al perfil profesional y conocimientos previos necesarios.</p>
             <textarea 
@@ -105,7 +105,7 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
             {/* Temporización */}
             <div className="space-y-2">
               <label className="block text-sm font-bold text-foreground">
-                Temporización Detallada
+                Temporización detallada
               </label>
               <p className="text-xs text-muted">Periodo del curso, fechas estimadas y relación con otras UDs.</p>
               <textarea 
@@ -119,7 +119,7 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
             {/* Agrupamientos */}
             <div className="space-y-2">
               <label className="block text-sm font-bold text-foreground">
-                Agrupamientos y Metodología
+                Agrupamientos y metodología
               </label>
               <p className="text-xs text-muted">Organización del aula (Gran grupo, pequeño grupo, trabajo individual).</p>
               <textarea 
@@ -134,7 +134,7 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
           {/* Transversalidad */}
           <div className="space-y-2">
             <label className="block text-sm font-bold text-foreground">
-              Transversalidad e Innovación
+              Transversalidad e innovación
             </label>
             <p className="text-xs text-muted">Cómo se trabajan la digitalización, sostenibilidad, equidad o DUA en esta unidad.</p>
             <textarea 

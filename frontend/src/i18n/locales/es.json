@@ -58,18 +58,24 @@
     "subtitle": "Panel principal, guía de inicio, FAQ y validación de datos."
   },
   "nav": {
-    "catalogo": "Catálogo",
+    "inicio": "Inicio",
+    "perfil": "Perfil",
     "archivos": "Archivos",
+    "catalogo": "Catálogo",
     "documentos": "Documentos",
-    "descargas": "Descargas",
-    "modulo": "Módulo",
-    "matrices": "Matrices",
-    "instrumentos": "Instrumentos",
+    "legal": "Legal",
+    "contexto": "Contexto",
+    "curriculo": "Currículo",
+    "metodologia": "Metodología",
+    "evaluacion": "Evaluación",
     "secuenciacion": "Secuenciación",
+    "magia": "Magia",
     "calendario": "Calendario",
     "alumnado": "Alumnado",
     "diario": "Diario",
-    "evaluacion": "Evaluación"
+    "seguimiento": "Seguimiento",
+    "calificaciones": "Calificaciones",
+    "informes": "Informes"
   },
   "navGroups": {
     "general": "General",

@@ -12,9 +12,6 @@ import { Alumnado } from "@/types";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Skeleton } from "@/components/ui/Skeleton";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
 
 import Link from "next/link";
 
@@ -25,7 +22,9 @@ type DocumentItem = {
   path: string;
 };
 
-export default function DocumentosPage() {const [activeTab, setActiveTab] = useState("programacion");// State for Explorador
+export default function InformesPage() {
+  const [activeTab, setActiveTab] = useState("curso");
+  // State for Explorador
   const [currentPath, setCurrentPath] = useState<string>("");
   const [items, setItems] = useState<DocumentItem[]>([]);
   const [loadingDocs, setLoadingDocs] = useState<boolean>(true);
@@ -46,23 +45,6 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
   const [fechaFinal, setFechaFinal] = useState("");
 
   const [evaluacionTab, setEvaluacionTab] = useState('grupales'); // grupales, individuales
-  const [guiaPdContent, setGuiaPdContent] = useState("");
-  const [comparativaPdContent, setComparativaPdContent] = useState("");
-
-  useEffect(() => {
-    if (activeTab === "guia_pd" && !guiaPdContent) {
-      fetch("/Guia_PD.md")
-        .then(res => res.text())
-        .then(text => setGuiaPdContent(text))
-        .catch(err => console.error("Error cargando Guia_PD.md", err));
-    }
-    if (activeTab === "comparativa_pd" && !comparativaPdContent) {
-      fetch("/Comparativa_PD.md")
-        .then(res => res.text())
-        .then(text => setComparativaPdContent(text))
-        .catch(err => console.error("Error cargando Comparativa_PD.md", err));
-    }
-  }, [activeTab, guiaPdContent, comparativaPdContent]);
 
   const fetchDocuments = (path: string) => {
     setLoadingDocs(true);
@@ -316,10 +298,7 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
   activeAlumnado.sort((a: Alumnado, b: Alumnado) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
 
   const TABS = [
-    { id: "programacion", label: "Programación", cleanLabel: "Programación" },
     { id: "curso", label: "Curso", cleanLabel: "Curso" },
-    { id: "guia_pd", label: "Guía PD", cleanLabel: "Guía PD" },
-    { id: "comparativa_pd", label: "Comparativa PD", cleanLabel: "Comparativa PD" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -369,7 +348,7 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
               <div>
                 <h1 className="text-xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                  <span className="text-3xl text-info"><FileText className="w-8 h-8" strokeWidth={2.5} /></span> Descargas
+                  <span className="text-3xl text-info"><FileText className="w-8 h-8" strokeWidth={2.5} /></span> Informes
                 </h1>
                 <p className="text-muted mt-2 text-lg">Generación de reportes y boletines (PDF).</p>
               </div>
@@ -377,37 +356,16 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
 
             <Tabs value={activeTab} onValueChange={(val: any) => setActiveTab(val)}>
               <TabsList className="mb-3 max-w-full flex-wrap h-auto">
-                <TabsTrigger value="programacion">
-                  <div className="flex items-center gap-2"><FileText className="w-4 h-4" /> Programación</div>
-                </TabsTrigger>
                 <TabsTrigger value="curso">
                   <div className="flex items-center gap-2"><Calendar className="w-4 h-4" /> Curso</div>
-                </TabsTrigger>
-                <TabsTrigger value="guia_pd">
-                  <div className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Guía PD</div>
-                </TabsTrigger>
-                <TabsTrigger value="comparativa_pd">
-                  <div className="flex items-center gap-2"><Scale className="w-4 h-4" /> Comparativa PD</div>
                 </TabsTrigger>
               </TabsList>
             </Tabs>
                     {(() => {
                 const infoMap: Record<string, {title: string, desc: string}> = {
-          'programacion': {
-                    'title': 'Descargas - Programación',
-                    'desc': 'Descarga de la programación didáctica completa en PDF.'
-          },
           'curso': {
-                    'title': 'Descargas - Curso',
+                    'title': 'Informes - Curso',
                     'desc': 'Descarga de actas, seguimientos y memorias de curso.'
-          },
-          'guia_pd': {
-                    'title': 'Guía PD (Referencia Cruzada)',
-                    'desc': 'Mapa de correspondencias entre la plantilla oficial de TodoFP y los campos en CuadernoFP.'
-          },
-          'comparativa_pd': {
-                    'title': 'Comparativa PD (3 Modelos)',
-                    'desc': 'Comparación campo a campo de los 3 niveles de programación didáctica: PD-, PD= y PD+.'
           }
 };
                 const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
@@ -421,7 +379,7 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
                 );
               })()}
 
-            {['programacion', 'curso'].includes(activeTab) && (
+            {['curso'].includes(activeTab) && (
               <div className="space-y-4 animate-in fade-in duration-500">
                 {(!activeCursoId || !activeModuleId) ? (
                   <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
@@ -446,87 +404,6 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
                   </Card>
                 ) : (
                   <>
-                    {activeTab === 'programacion' && (
-                      <div className="space-y-4 animate-in fade-in duration-500">
-                        {["Andalucía","Aragón","Asturias","Baleares","Canarias","Cantabria","Castilla-La Mancha","Castilla y León","Cataluña","Comunidad Valenciana","Extremadura","Galicia","Madrid","Murcia","Navarra","País Vasco","La Rioja","Ceuta","Melilla"].map((comunidad) => {
-                          const isAragon = comunidad === "Aragón";
-                          return (
-                            <details key={comunidad} open={isAragon} className="group border border-[var(--glass-border)] rounded-xl bg-background/50 mb-4 shadow-sm overflow-hidden">
-                              <summary className="p-4 font-bold cursor-pointer text-xl flex items-center justify-between hover:bg-foreground/5 transition-colors list-none border-b border-transparent group-open:border-[var(--glass-border)] group-open:bg-foreground/5">
-                                <span className="flex items-center gap-2"><MapPin className={`w-5 h-5 ${isAragon ? 'text-purple-500' : 'text-muted-foreground'}`} /> {comunidad}</span>
-                                <ChevronDown className="w-5 h-5 transition-transform group-open:rotate-180 text-muted" />
-                              </summary>
-                              {isAragon ? (
-                                <div className="p-6">
-                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-slate-400">
-                                      <div>
-                                        <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Resumen de la Programación didáctica para el alumnado</h3>
-                                        <p className="text-sm text-muted mb-6">Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.</p>
-                                      </div>
-                                      <div className="flex gap-2 mt-auto">
-                                        <Button onClick={() => handleDownloadPdf('programacion_minima_tpl', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_minima_tpl_docx'} className="flex-1 bg-slate-600 hover:bg-slate-700 text-white">
-                                          {downloadingStr === 'programacion_minima_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD Resumen.docx'}
-                                        </Button>
-                                      </div>
-                                    </div>
-
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-blue-400">
-                                      <div>
-                                        <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica Aragón (BOA nº: 181 de 18 de septiembre de 2025)</h3>
-                                        <p className="text-sm text-muted mb-6">Versión BOA con los puntos de la Ley muy específica y concreta (no detalla secuenciación de aula ni extensa teoría).</p>
-                                      </div>
-                                      <div className="flex gap-2 mt-auto">
-                                        <Button onClick={() => handleDownloadPdf('programacion_suficiente_tpl', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_suficiente_tpl_docx'} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
-                                          {downloadingStr === 'programacion_suficiente_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD BOA Aragón.docx'}
-                                        </Button>
-                                      </div>
-                                    </div>
-
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-info">
-                                      <div>
-                                        <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica ARAGÓN (Modelo JEG)</h3>
-                                        <p className="text-sm text-muted mb-6">Se cumplimenta el modelo de <strong>Autor</strong>: Javier Edo Gual, <strong>Coordinación</strong>: Raúl Melero Rubio y Lucía Quílez Salvador; y <strong>Revisión técnica</strong>: Óscar Sánchez Estella.</p>
-                                      </div>
-                                      <div className="flex flex-col gap-2 mt-auto">
-                                        <Button variant="secondary" onClick={() => handleDownloadPdf('plantilla_jeg', undefined, undefined, 'docx')} disabled={downloadingStr === 'plantilla_jeg_docx'} className="w-full">
-                                          {downloadingStr === 'plantilla_jeg_docx' ? '⏳ Descargando...' : 'Modelo PD JEG original'}
-                                        </Button>
-                                        <Button onClick={() => handleDownloadPdf('programacion_jeg', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_jeg_docx'} className="w-full bg-info hover:bg-info/90 text-white">
-                                          {downloadingStr === 'programacion_jeg_docx' ? '⏳ Generando DOCX...' : 'Descargar PD JEG cumplimentada.docx'}
-                                        </Button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              ) : (
-                                <div className="p-12 text-center text-muted-foreground">
-                                  <Construction className="w-12 h-12 mx-auto mb-4 opacity-20" />
-                                  <p>Programaciones específicas para {comunidad} próximamente.</p>
-                                </div>
-                              )}
-                            </details>
-                          );
-                        })}
-
-                        <Card className="p-6 border-t-4 border-t-blue-500">
-                          <h2 className="text-2xl font-bold mb-1"><span className="inline-flex"><CalendarDays className="w-4 h-4" /></span> Secuenciación</h2>
-                          <p className="text-sm text-muted mb-6">Planificación temporal del módulo</p>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                              <div>
-                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Planificación mensual</h3>
-                                <p className="text-sm text-muted mb-6">Horas previstas frente a impartidas por UD y mes.</p>
-                              </div>
-                              <Button onClick={() => handleDownloadPdf('planificacion')} disabled={downloadingStr === 'planificacion'} className="w-full">
-                                {downloadingStr === 'planificacion' ? '⏳ Generando PDF...' : 'PDF Planificación'}
-                              </Button>
-                            </div>
-                          </div>
-                        </Card>
-                      </div>
-                    )}
-
                     {activeTab === 'curso' && (
                       <div className="space-y-4 animate-in fade-in duration-500">
                         <Card className="p-6 border-t-4 border-t-emerald-500">
@@ -724,44 +601,7 @@ export default function DocumentosPage() {const [activeTab, setActiveTab] = useS
                 )}
               </div>
             )}
-            
-            {activeTab === 'guia_pd' && (
-              <div className="space-y-4 animate-in fade-in duration-500">
-                <Card className="p-8 border-t-4 border-t-indigo-500">
-                  <div className="prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-th:bg-foreground/5 prose-table:border-collapse prose-table:w-full">
-                    {guiaPdContent ? (
-                      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-                        {guiaPdContent}
-                      </ReactMarkdown>
-                    ) : (
-                      <div className="flex justify-center p-8">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-info"></div>
-                      </div>
-                    )}
-                  </div>
-                </Card>
-              </div>
-            )}
-
-            {activeTab === 'comparativa_pd' && (
-              <div className="space-y-4 animate-in fade-in duration-500">
-                <Card className="p-8 border-t-4 border-t-amber-500">
-                  <div className="prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-th:bg-foreground/5 prose-table:border-collapse prose-table:w-full">
-                    {comparativaPdContent ? (
-                      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-                        {comparativaPdContent}
-                      </ReactMarkdown>
-                    ) : (
-                      <div className="flex justify-center p-8">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-info"></div>
-                      </div>
-                    )}
-                  </div>
-                </Card>
-              </div>
-            )}
-
-              </MotionWrapper>
+          </MotionWrapper>
             </div>
           )}
         </div>

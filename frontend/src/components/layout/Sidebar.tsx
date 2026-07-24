@@ -335,13 +335,13 @@ export default function Sidebar() {
                   </span>
                   {isSidebarOpen && (
                     <span className={`text-sm leading-tight font-medium whitespace-nowrap ${pathname === item.href ? 'text-foreground font-semibold' : ''}`}>
-                      {t('nav.' + item.href.replace('/', ''))}
+                      {t('nav.' + item.href.split('?')[0].replace('/', ''))}
                     </span>
                   )}
                 </Link>
               );
               return !isSidebarOpen ? (
-                <Tooltip key={item.href} content={t('nav.' + item.href.replace('/', ''))} position="right" delay={0.1}>
+                <Tooltip key={item.href} content={t('nav.' + item.href.split('?')[0].replace('/', ''))} position="right" delay={0.1}>
                   {linkContent}
                 </Tooltip>
               ) : (
@@ -414,13 +414,13 @@ export default function Sidebar() {
                     </span>
                     {isSidebarOpen && (
                       <span className={`text-sm leading-tight font-medium whitespace-nowrap ${pathname === item.href ? 'text-foreground font-semibold' : ''}`}>
-                        {t('nav.' + item.href.replace('/', ''))}
+                        {t('nav.' + item.href.split('?')[0].replace('/', ''))}
                       </span>
                     )}
                   </Link>
                 );
                 return !isSidebarOpen ? (
-                  <Tooltip key={item.href} content={t('nav.' + item.href.replace('/', ''))} position="right" delay={0.1}>
+                  <Tooltip key={item.href} content={t('nav.' + item.href.split('?')[0].replace('/', ''))} position="right" delay={0.1}>
                     {linkContent}
                   </Tooltip>
                 ) : (

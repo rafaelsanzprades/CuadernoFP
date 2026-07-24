@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { Building2, FileEdit, FileText, Settings, Map, Target, CheckCircle2, Layers, Award, FolderOpen, Info, HeartHandshake } from "lucide-react";
+import { FileEdit, FileText, Settings, Map, HeartHandshake, FolderOpen, Info } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -10,19 +10,14 @@ import { DatosTab } from "@/components/features/modulo/DatosTab";
 import { ContextoTab } from "@/components/features/modulo/ContextoTab";
 import { PlanesTab } from "@/components/features/modulo/PlanesTab";
 import { ContextoFEOETab } from "@/components/features/modulo/ContextoFEOETab";
-import { MetodologiaTab } from "@/components/features/modulo/MetodologiaTab";
-import { EvaluacionRecursosTab } from "@/components/features/modulo/EvaluacionRecursosTab";
-import { OtrosElementosTab } from "@/components/features/modulo/OtrosElementosTab";
 import { DiversidadTab } from "@/components/features/modulo/DiversidadTab";
 import { BurocraciaTab } from "@/components/features/modulo/BurocraciaTab";
-import { DualTab } from "@/components/features/modulo/DualTab";
-import { EqavetTab } from "@/components/features/modulo/EqavetTab";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 
-export default function ModuloConfigPage() {
+export default function ContextoConfigPage() {
   const { activeModuleId, moduleData, setModuleData } = useAppStore();
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
@@ -57,13 +52,8 @@ export default function ModuloConfigPage() {
     { id: "contexto", label: <><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.contexto')}</>, cleanLabel: t('tabs.contexto') },
     { id: "planes", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.planes')}</>, cleanLabel: t('tabs.planes') },
     { id: "contexto_feoe", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.contexto_feoe')}</>, cleanLabel: t('tabs.contexto_feoe') },
-    { id: "dual", label: <><span className="inline-flex"><Building2 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.dual', {defaultValue: 'FP Dual'})}</>, cleanLabel: t('tabs.dual', {defaultValue: 'FP Dual'}) },
-    { id: "metodologia", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.metodologia')}</>, cleanLabel: t('tabs.metodologia') },
-    { id: "evaluacion", label: <><span className="inline-flex"><CheckCircle2 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.evaluacion')}</>, cleanLabel: t('tabs.evaluacion') },
-    { id: "eqavet", label: <><span className="inline-flex"><Award className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.eqavet', {defaultValue: 'EQAVET'})}</>, cleanLabel: t('tabs.eqavet', {defaultValue: 'EQAVET'}) },
     { id: "diversidad", label: <><span className="inline-flex"><HeartHandshake className="w-[1.2em] h-[1.2em] mr-1" /></span> Diversidad</>, cleanLabel: "Diversidad" },
-    { id: "burocracia", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Burocracia</>, cleanLabel: "Burocracia" },
-    { id: "otros", label: <><span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.otros')}</>, cleanLabel: t('tabs.otros') }
+    { id: "burocracia", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Burocracia</>, cleanLabel: "Burocracia" }
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -103,7 +93,7 @@ export default function ModuloConfigPage() {
           <main id="main-content" tabIndex={-1} className="flex-1 p-8 content-area">
             <div className="flex flex-col items-center justify-center h-full">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mb-4"></div>
-              <p>Cargando datos del módulo...</p>
+              <p>Cargando datos del contexto...</p>
             </div>
           </main>
         </div>
@@ -122,11 +112,11 @@ export default function ModuloConfigPage() {
             <div className="mb-8 flex items-center justify-between">
               <div>
                 <h1 className="text-3xl font-bold tracking-tight mb-2 flex items-center gap-3">
-                  <Building2 className="w-8 h-8 text-accent" />
-                  {t('modulo.title', { defaultValue: 'Diseño Curricular y Contexto' })}
+                  <FileEdit className="w-8 h-8 text-accent" />
+                  Contexto y entorno
                 </h1>
                 <p className="text-muted">
-                  {t('modulo.subtitle', { defaultValue: 'Configura todos los aspectos del diseño y metodología para el módulo' })} <strong className="text-foreground">{activeModuleId}</strong>.
+                  Información general, características del entorno, alumnado y módulo <strong className="text-foreground">{activeModuleId}</strong>.
                 </p>
               </div>
             </div>
@@ -147,15 +137,10 @@ export default function ModuloConfigPage() {
                 'contexto': { desc: 'Análisis del entorno socioeconómico, centro educativo y perfil del alumnado.' },
                 'planes': { desc: 'Vinculación con los planes estratégicos y proyectos institucionales del centro.' },
                 'contexto_feoe': { desc: 'Análisis específico del sector productivo y oportunidades de empleo.' },
-                'dual': { desc: 'Distribución de horas y competencias entre el Centro Educativo y la Empresa.' },
-                'metodologia': { desc: 'Estrategias pedagógicas, agrupamientos y principios de intervención.' },
-                'evaluacion': { desc: 'Criterios de calificación, instrumentos y recursos didácticos necesarios.' },
-                'eqavet': { desc: 'Autoevaluación de la calidad de los procesos e indicadores de mejora continua.' },
                 'diversidad': { desc: 'Atención a la diversidad, adaptaciones curriculares y panel de alumnado ACNEAE.' },
-                'burocracia': { desc: 'Datos de autoría, publicidad de la programación y bibliografía.' },
-                'otros': { desc: 'Temas transversales, innovación y proyectos intermodulares.' }
+                'burocracia': { desc: 'Datos de autoría, publicidad de la programación y bibliografía.' }
               };
-              const info = infoMap[activeTab] || { desc: 'Configuración del módulo.' };
+              const info = infoMap[activeTab] || { desc: 'Configuración del contexto.' };
               return (
                 <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
                   <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
@@ -168,13 +153,8 @@ export default function ModuloConfigPage() {
             {activeTab === "contexto" && <ContextoTab />}
             {activeTab === "planes" && <PlanesTab />}
             {activeTab === "contexto_feoe" && <ContextoFEOETab />}
-            {activeTab === "dual" && <DualTab />}
-            {activeTab === "metodologia" && <MetodologiaTab />}
-            {activeTab === "evaluacion" && <EvaluacionRecursosTab />}
-            {activeTab === "eqavet" && <EqavetTab />}
             {activeTab === "diversidad" && <DiversidadTab />}
             {activeTab === "burocracia" && <BurocraciaTab />}
-            {activeTab === "otros" && <OtrosElementosTab />}
 
           </MotionWrapper>
         </main>
@@ -182,3 +162,4 @@ export default function ModuloConfigPage() {
     </div>
   );
 }
+

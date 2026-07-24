@@ -351,7 +351,7 @@ export function TabComunidades() {
       <Card className="p-4">
         <div className="flex items-center gap-2 mb-4">
           <FileText className="w-5 h-5 text-primary" />
-          <h3 className="font-semibold">Tabla de Comunidades Autónomas</h3>
+          <h3 className="font-semibold">Tabla de comunidades autónomas</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">

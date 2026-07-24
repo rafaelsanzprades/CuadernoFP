@@ -58,18 +58,24 @@
     "subtitle": "Panell principal, guia d'inici, FAQ i validació de dades."
   },
   "nav": {
-    "catalogo": "Catàleg",
+    "inicio": "Inici",
+    "perfil": "Perfil",
     "archivos": "Arxius",
+    "catalogo": "Catàleg",
     "documentos": "Documents",
-    "descargas": "Descàrregues",
-    "modulo": "Mòdul",
-    "matrices": "Matrius",
-    "instrumentos": "Instruments",
+    "legal": "Legal",
+    "contexto": "Context",
+    "curriculo": "Currículum",
+    "metodologia": "Metodologia",
+    "evaluacion": "Avaluació",
     "secuenciacion": "Seqüenciació",
+    "magia": "Màgia",
     "calendario": "Calendari",
     "alumnado": "Alumnat",
     "diario": "Diari",
-    "evaluacion": "Avaluació"
+    "seguimiento": "Seguiment",
+    "calificaciones": "Qualificacions",
+    "informes": "Informes"
   },
   "navGroups": {
     "general": "General",

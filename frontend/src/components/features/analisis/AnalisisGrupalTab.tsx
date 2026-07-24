@@ -33,7 +33,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
   if (df_eval_activos.length === 0) {
     return (
       <Card className="p-8 text-center border-l-4 border-l-yellow-500 mt-6">
-        <h2 className="text-xl font-bold text-warning mb-2">Faltan Datos</h2>
+        <h2 className="text-xl font-bold text-warning mb-2">Faltan datos</h2>
         <p className="text-foreground/80">No hay datos de evaluación para alumnado activos. Ve a Evaluación competencial primero.</p>
       </Card>
     );
@@ -259,7 +259,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
       )}
 
       <Card className="p-6">
-        <h2 className="text-lg font-bold mb-6"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguimiento de Riesgo Académico</h2>
+        <h2 className="text-lg font-bold mb-6"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguimiento de riesgo académico</h2>
         {risks.length > 0 ? (
           <>
             <div className="bg-danger/10 border border-danger/30 text-danger px-4 py-3 rounded-lg mb-4 text-sm font-semibold flex items-center gap-2">

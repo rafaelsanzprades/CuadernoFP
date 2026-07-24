@@ -56,18 +56,24 @@
     "subtitle": "Main dashboard, starter guide, FAQ and data validation."
   },
   "nav": {
-    "catalogo": "Catalog",
+    "inicio": "Home",
+    "perfil": "Profile",
     "archivos": "Files",
+    "catalogo": "Catalog",
     "documentos": "Documents",
-    "descargas": "Downloads",
-    "modulo": "Module",
-    "matrices": "Matrices",
-    "instrumentos": "Instruments",
-    "programacion": "Sequencing",
+    "legal": "Legal",
+    "contexto": "Context",
+    "curriculo": "Curriculum",
+    "metodologia": "Methodology",
+    "evaluacion": "Evaluation",
+    "secuenciacion": "Sequencing",
+    "magia": "Magic",
     "calendario": "Calendar",
     "alumnado": "Students",
-    "seguimiento": "Journal",
-    "progreso": "Evaluation"
+    "diario": "Journal",
+    "seguimiento": "Tracking",
+    "calificaciones": "Grades",
+    "informes": "Reports"
   },
   "navGroups": {
     "general": "General",

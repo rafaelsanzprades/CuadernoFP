@@ -69,7 +69,7 @@ export function DualTab() {
         <div className="flex items-start gap-4">
           <Briefcase className="w-6 h-6 text-accent mt-1" />
           <div className="flex-1">
-            <h3 className="text-lg font-semibold">Régimen Dual LO 3/2022</h3>
+            <h3 className="text-lg font-semibold">Régimen dual LO 3/2022</h3>
             <p className="text-muted text-sm mt-1">
               Selecciona el régimen de Formación Profesional Dual en el que se imparte este módulo.
             </p>
@@ -92,7 +92,7 @@ export function DualTab() {
       {dualRegimen !== "ninguno" && (
         <MotionWrapper className="space-y-6">
           <Card className="p-6">
-            <h3 className="text-lg font-semibold mb-4">Distribución Centro - Empresa</h3>
+            <h3 className="text-lg font-semibold mb-4">Distribución centro - empresa</h3>
             
             <div className="mb-6 flex flex-col md:flex-row items-center gap-6 p-4 rounded-lg bg-background border">
               <div className="flex-1 w-full">

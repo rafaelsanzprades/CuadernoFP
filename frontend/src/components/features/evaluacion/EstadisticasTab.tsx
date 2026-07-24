@@ -226,7 +226,7 @@ export default function EstadisticasTab() {
             </h3>
             <div className="flex-1 grid grid-cols-2 gap-4 min-h-[300px]">
               <div className="flex flex-col items-center justify-center">
-                 <h4 className="text-sm font-semibold text-muted mb-2 text-center">Matrícula Ordinaria</h4>
+                 <h4 className="text-sm font-semibold text-muted mb-2 text-center">Matrícula ordinaria</h4>
                   <ResponsiveContainer width="100%" height="100%">
                     <RePieChart>
                       <Pie
@@ -245,7 +245,7 @@ export default function EstadisticasTab() {
                   </ResponsiveContainer>
               </div>
               <div className="flex flex-col items-center justify-center">
-                 <h4 className="text-sm font-semibold text-muted mb-2 text-center">Distribución de Edad</h4>
+                 <h4 className="text-sm font-semibold text-muted mb-2 text-center">Distribución de edad</h4>
                  <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={ageStats} layout="vertical">
                       <CartesianGrid strokeDasharray="3 3" stroke="#ffffff20" horizontal={false} />

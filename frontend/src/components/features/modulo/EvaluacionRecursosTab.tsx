@@ -56,7 +56,7 @@ export function EvaluacionRecursosTab() {
         <div className="space-y-6">
 
           <div>
-            <label className="text-sm font-semibold text-foreground mb-2 block">Instrumentos de Evaluación</label>
+            <label className="text-sm font-semibold text-foreground mb-2 block">Instrumentos de evaluación</label>
             <p className="text-xs text-muted mb-3">Procedimientos e instrumentos normativos que se emplearán en el módulo.</p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {INSTRUMENTOS.map((inst) => {
@@ -77,7 +77,7 @@ export function EvaluacionRecursosTab() {
           </div>
 
           <div>
-            <label className="text-sm font-semibold text-foreground mb-2 block">Recursos y Espacios</label>
+            <label className="text-sm font-semibold text-foreground mb-2 block">Recursos y espacios</label>
             <p className="text-xs text-muted mb-3">Infraestructuras y materiales técnicos necesarios para el desarrollo curricular.</p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {RECURSOS.map((rec) => {
@@ -98,7 +98,7 @@ export function EvaluacionRecursosTab() {
           </div>
 
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">E5. Actividades de Recuperación y Refuerzo</label>
+            <label className="text-sm font-semibold text-foreground mb-1 block">E5. Actividades de recuperación y refuerzo</label>
             <p className="text-xs text-muted mb-2">Criterios y procedimientos para el alumnado que no supera la evaluación.</p>
             <textarea
               value={config_contexto["E5_recuperacion"] || ""}
@@ -108,7 +108,7 @@ export function EvaluacionRecursosTab() {
             />
           </div>
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">G1. Infraestructuras y Equipamientos</label>
+            <label className="text-sm font-semibold text-foreground mb-1 block">G1. Infraestructuras y equipamientos</label>
             <textarea
               value={config_contexto["G1_infraestructuras"] || ""}
               onChange={e => handleChange("G1_infraestructuras", e.target.value)}
