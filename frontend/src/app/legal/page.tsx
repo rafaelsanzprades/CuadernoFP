@@ -147,7 +147,7 @@ export default function LegalPage() {
                 {/* 1. Datos del titular */}
                 <section className="space-y-3">
                   <SectionHeading id="aviso-titular" number={1}>
-                    Datos del Titular
+                    Datos del titular
                   </SectionHeading>
                   <p className="text-sm text-foreground/80 leading-relaxed">
                     En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y Comercio Electrónico (LSSI-CE), se exponen los siguientes datos identificativos:
@@ -155,6 +155,8 @@ export default function LegalPage() {
                   <div className="text-sm text-muted space-y-1 mt-2">
                     <p><strong>Titular:</strong> Rafael Sanz Prades</p>
                     <p><strong>Contacto:</strong> <a href="mailto:hola@cuadernofp.web.app" className="text-info hover:underline">hola@cuadernofp.web.app</a></p>
+                    <p><strong>Comunidad:</strong> <a href="https://t.me/cuadernofp" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">https://t.me/cuadernofp</a></p>
+                    <p><strong>Código Fuente:</strong> <a href="https://github.com/rafaelsanzprades/CuadernoFP" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">https://github.com/rafaelsanzprades/CuadernoFP</a></p>
                     <p><strong>Sitio Web:</strong> <a href="https://cuadernofp.web.app/" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">https://cuadernofp.web.app/</a></p>
                     <p><strong>Actividad:</strong> Herramienta de productividad docente para ciclos formativos de Formación Profesional.</p>
                   </div>
@@ -163,7 +165,7 @@ export default function LegalPage() {
                 {/* 2. Condiciones de uso */}
                 <section className="space-y-3">
                   <SectionHeading id="aviso-condiciones" number={2}>
-                    Condiciones de Uso
+                    Condiciones de uso
                   </SectionHeading>
                   <div className="text-sm text-foreground/80 leading-relaxed space-y-2">
                     <p>
@@ -183,7 +185,7 @@ export default function LegalPage() {
                 {/* 3. Propiedad intelectual */}
                 <section className="space-y-3">
                   <SectionHeading id="aviso-propiedad" number={3}>
-                    Propiedad Intelectual (LPI)
+                    Propiedad intelectual (LPI)
                   </SectionHeading>
                   <p className="text-sm text-foreground/80 leading-relaxed">
                     Todos los contenidos del sitio web —incluyendo textos, imágenes, diseño gráfico, código fuente, logotipos, marcas y cualquier otro elemento susceptible de protección— están sujetos a los derechos de propiedad intelectual e industrial de sus titulares, conforme al Real Decreto Legislativo 1/1996, de 12 de abril (LPI).
