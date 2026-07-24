@@ -90,7 +90,7 @@ export function TutoriaTab() {
           <>
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-foreground">
-                Registro de Tutoría: <span>{df_al.find((a:any) => a.ID === selectedAlId)?.Nombre} {df_al.find((a:any) => a.ID === selectedAlId)?.Apellidos}</span>
+                Registro de tutoría: <span>{df_al.find((a:any) => a.ID === selectedAlId)?.Nombre} {df_al.find((a:any) => a.ID === selectedAlId)?.Apellidos}</span>
               </h2>
               <Button onClick={handleAddTutoria} variant="primary" className="gap-2">
                 <Plus className="w-4 h-4" /> Añadir Registro

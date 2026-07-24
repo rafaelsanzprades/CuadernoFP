@@ -806,7 +806,7 @@ export default function LegalPage() {
                             <a href="/seguimiento?tab=tutoria" className="hover:text-accent transition-colors block py-0.5">— Tutoría</a>
                             <a href="/seguimiento?tab=asistencia" className="hover:text-accent transition-colors block py-0.5">— Asistencia</a>
                             <a href="/seguimiento?tab=alerta_abandono" className="hover:text-accent transition-colors block py-0.5">— Alerta abandono</a>
-                            <a href="/seguimiento?tab=feoe" className="hover:text-accent transition-colors block py-0.5">— FEOE / anecdotario</a>
+                            <a href="/seguimiento?tab=feoe" className="hover:text-accent transition-colors block py-0.5">— FEOE</a>
                           </div>
                         </li>
                         <li>
