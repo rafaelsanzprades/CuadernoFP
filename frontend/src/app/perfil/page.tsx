@@ -26,25 +26,25 @@ export default function PerfilPage() {
   } = useAccessibility();
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
+    <div className="flex min-h-screen bg-background">
       <Sidebar />
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+      <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
-        <main className="flex-1 overflow-y-auto p-6 md:p-8">
-          <MotionWrapper className="max-w-4xl mx-auto space-y-6">
+        <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
+          <MotionWrapper className="space-y-4 pb-12 max-w-4xl mx-auto">
             
             {/* Header */}
             <div>
-              <h1 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <User className="w-7 h-7 text-accent" /> Perfil y configuración
+              <h1 className="text-[1.3rem] font-extrabold text-foreground tracking-tight flex items-center gap-3">
+                <span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> Perfil y configuración
               </h1>
-              <p className="text-muted mt-1">
+              <p className="text-muted mt-2 text-lg">
                 Personaliza la apariencia, el idioma y las opciones de accesibilidad de la aplicación.
               </p>
             </div>
 
             {/* Main Settings Card */}
-            <Card className="p-6 md:p-8 space-y-8 bg-card border border-border/40 shadow-xl rounded-2xl">
+            <Card className="p-6 border border-white/5 rounded-2xl bg-foreground/5 shadow mt-6 space-y-8">
               
               {/* Aspecto */}
               <section className="space-y-4">
@@ -79,7 +79,7 @@ export default function PerfilPage() {
                 </div>
               </section>
 
-              <hr className="border-border/30" />
+              <hr className="border-white/5" />
 
               {/* Idioma */}
               <section className="space-y-4">
@@ -91,7 +91,7 @@ export default function PerfilPage() {
                     <Button
                       key={lang.code}
                       variant="secondary"
-                      size="md"
+                      size="lg"
                       onClick={() => changeLanguage(lang.code)}
                       className={`flex items-center justify-center py-2.5 rounded-xl border transition-all ${
                         currentLang.code === lang.code
@@ -105,7 +105,7 @@ export default function PerfilPage() {
                 </div>
               </section>
 
-              <hr className="border-border/30" />
+              <hr className="border-white/5" />
 
               {/* Accesibilidad */}
               <section className="space-y-4">
@@ -122,36 +122,36 @@ export default function PerfilPage() {
                     <div className="grid grid-cols-3 gap-3">
                       <Button
                         variant="secondary"
-                        size="md"
+                        size="lg"
                         onClick={() => changeFontSize(100)}
                         className={`rounded-xl border ${
                           fontSizeScale === 100
                             ? "bg-accent/20 border-accent text-accent font-bold"
-                            : "bg-white/5 border-white/10 text-muted hover:text-foreground"
+                            : "bg-white/5 border-white/10 text-muted hover:text-foreground hover:bg-white/10"
                         }`}
                       >
                         Normal
                       </Button>
                       <Button
                         variant="secondary"
-                        size="md"
+                        size="lg"
                         onClick={() => changeFontSize(115)}
                         className={`rounded-xl border ${
                           fontSizeScale === 115
                             ? "bg-accent/20 border-accent text-accent font-bold"
-                            : "bg-white/5 border-white/10 text-muted hover:text-foreground"
+                            : "bg-white/5 border-white/10 text-muted hover:text-foreground hover:bg-white/10"
                         }`}
                       >
                         Grande
                       </Button>
                       <Button
                         variant="secondary"
-                        size="md"
+                        size="lg"
                         onClick={() => changeFontSize(130)}
                         className={`rounded-xl border font-bold ${
                           fontSizeScale === 130
                             ? "bg-accent/20 border-accent text-accent"
-                            : "bg-white/5 border-white/10 text-muted hover:text-foreground"
+                            : "bg-white/5 border-white/10 text-muted hover:text-foreground hover:bg-white/10"
                         }`}
                       >
                         Extra
@@ -160,15 +160,15 @@ export default function PerfilPage() {
                   </div>
 
                   {/* Opciones adicionales */}
-                  <div className="space-y-2 pt-2">
+                  <div className="space-y-3 pt-2">
                     <Button
                       variant="secondary"
-                      size="md"
+                      size="lg"
                       onClick={toggleHighContrast}
-                      className={`w-full flex items-center justify-between py-3 px-4 rounded-xl border ${
+                      className={`w-full flex items-center justify-between py-4 px-5 rounded-xl border transition-all ${
                         highContrast
                           ? "bg-accent/20 border-accent text-accent font-bold"
-                          : "bg-white/5 border-white/10 text-muted hover:text-foreground"
+                          : "bg-white/5 border-white/10 text-muted hover:text-foreground hover:bg-white/10"
                       }`}
                     >
                       <span className="flex items-center gap-3">
@@ -179,12 +179,12 @@ export default function PerfilPage() {
 
                     <Button
                       variant="secondary"
-                      size="md"
+                      size="lg"
                       onClick={toggleReduceMotion}
-                      className={`w-full flex items-center justify-between py-3 px-4 rounded-xl border ${
+                      className={`w-full flex items-center justify-between py-4 px-5 rounded-xl border transition-all ${
                         reduceMotion
                           ? "bg-accent/20 border-accent text-accent font-bold"
-                          : "bg-white/5 border-white/10 text-muted hover:text-foreground"
+                          : "bg-white/5 border-white/10 text-muted hover:text-foreground hover:bg-white/10"
                       }`}
                     >
                       <span className="flex items-center gap-3">
@@ -195,12 +195,12 @@ export default function PerfilPage() {
 
                     <Button
                       variant="secondary"
-                      size="md"
+                      size="lg"
                       onClick={toggleTts}
-                      className={`w-full flex items-center justify-between py-3 px-4 rounded-xl border ${
+                      className={`w-full flex items-center justify-between py-4 px-5 rounded-xl border transition-all ${
                         ttsEnabled
                           ? "bg-accent/20 border-accent text-accent font-bold"
-                          : "bg-white/5 border-white/10 text-muted hover:text-foreground"
+                          : "bg-white/5 border-white/10 text-muted hover:text-foreground hover:bg-white/10"
                       }`}
                     >
                       <span className="flex items-center gap-3">
