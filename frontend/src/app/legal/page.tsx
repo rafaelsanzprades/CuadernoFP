@@ -76,6 +76,7 @@ export default function LegalPage() {
     { id: "cookies", label: <><Cookie className="w-[1.2em] h-[1.2em] mr-1" /> Cookies</>, cleanLabel: "Cookies" },
     { id: "accesibilidad", label: <><Accessibility className="w-[1.2em] h-[1.2em] mr-1" /> Accesibilidad</>, cleanLabel: "Accesibilidad" },
     { id: "mapa", label: <><Map className="w-[1.2em] h-[1.2em] mr-1" /> Mapa</>, cleanLabel: "Mapa Web" },
+    { id: "contribuciones", label: <><Users className="w-[1.2em] h-[1.2em] mr-1" /> Contribuciones</>, cleanLabel: "Contribuciones" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -117,6 +118,7 @@ export default function LegalPage() {
                 'cookies': { desc: 'Uso de localStorage e IndexedDB. Sin cookies de rastreo ni analíticas de terceros.' },
                 'accesibilidad': { desc: 'Declaración de accesibilidad digital según RD 1112/2018 y compromiso WCAG 2.1 AA.' },
                 'mapa': { desc: 'Mapa de la web con el esquema jerárquico de secciones y utilidades de la aplicación.' },
+                'contribuciones': { desc: 'Comunidad de Telegram y listado de personas que contribuyen activamente al proyecto.' },
               };
               const info = infoMap[activeTab] || { desc: 'Información legal.' };
               return (
@@ -718,6 +720,7 @@ export default function LegalPage() {
                             <a href="/legal?tab=cookies" className="hover:text-accent transition-colors block py-0.5">— Cookies</a>
                             <a href="/legal?tab=accesibilidad" className="hover:text-accent transition-colors block py-0.5">— Accesibilidad</a>
                             <span className="text-accent font-bold block py-0.5">— Mapa web (actual)</span>
+                            <a href="/legal?tab=contribuciones" className="hover:text-accent transition-colors block py-0.5">— Contribuciones</a>
                           </div>
                         </li>
                       </ul>
@@ -836,51 +839,59 @@ export default function LegalPage() {
               </div>
             )}
 
-            {activeTab === "comunidad" && (
+            {/* ═══════════════════════════════════════════════════
+                TAB — CONTRIBUCIONES
+                ═══════════════════════════════════════════════════ */}
+            {activeTab === "contribuciones" && (
               <div className="space-y-12 animate-in fade-in duration-500">
                 <section className="space-y-6">
-                  <div className="flex flex-col items-center justify-center text-center p-8 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm mb-8">
-                    <div className="w-16 h-16 rounded-full bg-[#229ED9]/10 flex items-center justify-center mb-4">
-                      <MessageCircle className="w-8 h-8 text-[#229ED9]" />
+                  <div className="flex flex-col md:flex-row items-center gap-5 p-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm mb-8">
+                    <div className="w-12 h-12 shrink-0 rounded-full bg-[#229ED9]/10 flex items-center justify-center">
+                      <MessageCircle className="w-6 h-6 text-[#229ED9]" />
                     </div>
-                    <h3 className="text-xl font-bold text-foreground mb-2">Grupo Oficial de Telegram</h3>
-                    <p className="text-muted max-w-lg mb-6">
-                      Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad Autónoma.
-                    </p>
+                    <div className="flex-1 text-center md:text-left">
+                      <h3 className="text-base font-bold text-foreground">Grupo Oficial de Telegram</h3>
+                      <p className="text-sm text-muted leading-tight mt-1">
+                        Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad Autónoma.
+                      </p>
+                    </div>
                     <a
                       href="https://t.me/cuadernofp"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-6 py-2.5 rounded-lg bg-[#229ED9] text-white font-medium hover:bg-[#229ED9]/90 transition-colors flex items-center gap-2"
+                      className="shrink-0 px-5 py-2.5 rounded-lg bg-[#229ED9] text-white font-medium hover:bg-[#229ED9]/90 transition-colors flex items-center gap-2 text-sm"
                     >
-                      <Send className="w-5 h-5" />
+                      <Send className="w-4 h-4" />
                       Unirme al grupo en Telegram
                     </a>
                   </div>
 
                   <h3 className="text-2xl font-bold text-foreground border-b border-[var(--glass-border)] pb-2">Contribuidores por Comunidad Autónoma</h3>
                   <p className="text-muted mb-4">
-                    Mención especial a los y las docentes que están ayudando a integrar los catálogos y currículos de las distintas Comunidades Autónomas para que Cuaderno FP sea útil en toda España.
+                    Mención especial al profesorado que está ayudando a mejorar y a integrar los currículos de las Comunidades Autónomas
                   </p>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {/* Aragón */}
-                    <div className="p-4 rounded-xl border border-[var(--glass-border)] bg-background/50 flex flex-col gap-2">
-                      <div className="flex items-center gap-2 border-b border-[var(--glass-border)] pb-2 mb-1">
-                        <Map className="w-5 h-5 text-accent" />
-                        <span className="font-bold text-foreground">Aragón</span>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {[
+                      "Andalucía", "Aragón", "Asturias", "Baleares", "Canarias",
+                      "Cantabria", "Castilla y León", "Castilla-La Mancha", "Cataluña", "Ceuta",
+                      "Comunidad Valenciana", "Extremadura", "Galicia", "La Rioja", "Madrid",
+                      "Melilla", "Murcia", "Navarra", "País Vasco"
+                    ].map((comunidad) => (
+                      <div key={comunidad} className="p-4 rounded-xl border border-[var(--glass-border)] bg-background/50 flex flex-col gap-2 transition-all hover:bg-background/80">
+                        <div className="flex items-center gap-2 border-b border-[var(--glass-border)] pb-2 mb-1">
+                          <Map className="w-5 h-5 text-accent" />
+                          <span className="font-bold text-foreground">{comunidad}</span>
+                        </div>
+                        <ul className="text-sm text-muted space-y-1.5 pl-2">
+                          {comunidad === "Aragón" ? (
+                            <li className="flex items-center gap-2 text-foreground"><Users className="w-4 h-4 text-accent" /> José Javier García</li>
+                          ) : (
+                            <li className="flex items-center gap-2 italic opacity-60"><Users className="w-4 h-4 text-muted-foreground" /> ¡Anímate a contribuir!</li>
+                          )}
+                        </ul>
                       </div>
-                      <ul className="text-sm text-muted space-y-1.5 pl-2">
-                        <li className="flex items-center gap-2"><Users className="w-4 h-4 text-muted-foreground" /> Rafael Sanz Prades (Catálogo general)</li>
-                      </ul>
-                    </div>
-
-                    {/* Espacio para nuevas comunidades */}
-                    <div className="p-4 rounded-xl border border-dashed border-[var(--glass-border)] bg-background/30 flex flex-col gap-2 items-center justify-center text-center opacity-70">
-                      <Users className="w-6 h-6 text-muted-foreground mb-1" />
-                      <span className="font-medium text-foreground">¿Falta tu Comunidad?</span>
-                      <span className="text-xs text-muted">¡Únete al grupo de Telegram y ayúdanos a añadirla!</span>
-                    </div>
+                    ))}
                   </div>
                 </section>
               </div>
