@@ -205,7 +205,7 @@ export default function LegalPage() {
 
                   {/* 4a. Software */}
                   <div className="space-y-3">
-                    <h3 className="text-sm font-bold text-foreground">4a. Código Fuente — GNU GPLv3</h3>
+                    <h3 className="text-sm font-bold text-foreground">4a. Código fuente — GNU GPLv3</h3>
                     <p className="text-sm text-foreground/80 leading-relaxed">
                       El código fuente de esta aplicación es de código abierto y se distribuye bajo los términos de la <strong>Licencia Pública General de GNU versión 3 (GNU GPLv3)</strong>.
                     </p>
@@ -220,7 +220,7 @@ export default function LegalPage() {
                     <div className="flex gap-3 text-sm mt-3">
                       <span className="text-info mt-1"><ShieldCheck className="w-5 h-5" /></span>
                       <div>
-                        <strong className="block text-foreground mb-1">Copyleft: Compartir Igual</strong>
+                        <strong className="block text-foreground mb-1">Copyleft: Compartir igual</strong>
                         <p className="text-foreground/80">
                           Si modificas este código y publicas o distribuyes una nueva versión, <strong>estás obligado/a a publicarla bajo la misma licencia GNU GPLv3</strong> y facilitar su código fuente.
                         </p>
@@ -239,7 +239,7 @@ export default function LegalPage() {
 
                   {/* 4b. Contenido */}
                   <div className="space-y-3 mt-6">
-                    <h3 className="text-sm font-bold text-foreground">4b. Contenido y Materiales — CC BY-NC-SA 4.0</h3>
+                    <h3 className="text-sm font-bold text-foreground">4b. Contenido y materiales — CC BY-NC-SA 4.0</h3>
                     <p className="text-sm text-foreground/80 leading-relaxed">
                       Los textos, guías, estructura visual de la interfaz, logotipos y materiales de ayuda están protegidos bajo <strong>Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)</strong>.
                     </p>
@@ -254,7 +254,7 @@ export default function LegalPage() {
                 {/* 5. Resumen práctico */}
                 <section className="space-y-4">
                   <SectionHeading id="aviso-resumen" number={5}>
-                    Resumen Práctico para el Profesorado
+                    Resumen práctico para el profesorado
                   </SectionHeading>
                   <table className="w-full text-sm text-left border-collapse">
                     <thead className="text-foreground/90 border-b border-[var(--glass-border)]">
@@ -301,7 +301,7 @@ export default function LegalPage() {
                 {/* 1. Modelo local-first */}
                 <section className="space-y-3">
                   <SectionHeading id="priv-modelo" number={1}>
-                    Modelo de Privacidad Local-First
+                    Modelo de privacidad local-first
                   </SectionHeading>
                   <div className="flex items-start gap-3 mb-4">
                     <span className="text-success mt-1"><Shield className="w-5 h-5" /></span>
@@ -320,7 +320,7 @@ export default function LegalPage() {
                 {/* 2. Responsable RGPD */}
                 <section className="space-y-3">
                   <SectionHeading id="priv-responsable" number={2}>
-                    Responsable del Tratamiento (RGPD)
+                    Responsable del tratamiento (RGPD)
                   </SectionHeading>
                   <p className="text-sm text-foreground/80 leading-relaxed">
                     Dado que la aplicación es estática y el procesamiento se realiza localmente en el navegador:
@@ -337,7 +337,7 @@ export default function LegalPage() {
                 {/* 3. ¿Dónde se guardan los datos? */}
                 <section className="space-y-3">
                   <SectionHeading id="priv-datos" number={3}>
-                    ¿Dónde se Guardan los Datos?
+                    ¿Dónde se guardan los datos?
                   </SectionHeading>
                   <p className="text-sm text-foreground/80 leading-relaxed">
                     Los datos se almacenan exclusivamente en las ubicaciones que el docente determine:
@@ -352,7 +352,7 @@ export default function LegalPage() {
                 {/* 4. Derechos ARCO */}
                 <section className="space-y-3">
                   <SectionHeading id="priv-derechos" number={4}>
-                    Derechos del Alumnado (ARCO)
+                    Derechos del alumnado (ARCO)
                   </SectionHeading>
                   <p className="text-sm text-foreground/80 leading-relaxed">
                     El alumnado (o sus tutores legales, en caso de menores) pueden ejercer sus derechos de <strong>Acceso, Rectificación, Cancelación y Oposición (ARCO)</strong> ante el Responsable del Tratamiento, que es el docente o centro educativo.
@@ -380,7 +380,7 @@ export default function LegalPage() {
                 {/* 6. Base legal */}
                 <section className="space-y-3">
                   <SectionHeading id="priv-base-legal" number={6}>
-                    Base Legal y Normativa Aplicable
+                    Base legal y normativa aplicable
                   </SectionHeading>
                   <ul className="list-disc list-inside ml-2 space-y-1 text-sm text-muted">
                     <li><strong>RGPD:</strong> Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo.</li>
@@ -408,7 +408,7 @@ export default function LegalPage() {
                 {/* 1. Política */}
                 <section className="space-y-3">
                   <SectionHeading id="cookies-politica" number={1}>
-                    Política de Cookies
+                    Política de cookies
                   </SectionHeading>
                   <div className="flex items-start gap-3 mb-4">
                     <span className="text-success mt-1"><Eye className="w-5 h-5" /></span>
@@ -421,7 +421,7 @@ export default function LegalPage() {
                 {/* 2. Tecnologías */}
                 <section className="space-y-3">
                   <SectionHeading id="cookies-tecnologias" number={2}>
-                    Tecnologías de Almacenamiento Utilizadas
+                    Tecnologías de almacenamiento utilizadas
                   </SectionHeading>
                   <p className="text-sm text-foreground/80 leading-relaxed">
                     Únicamente se utiliza el almacenamiento local del navegador para garantizar una experiencia óptima:
@@ -445,7 +445,7 @@ export default function LegalPage() {
                 {/* 3. Tabla detalle */}
                 <section className="space-y-3">
                   <SectionHeading id="cookies-tabla" number={3}>
-                    Detalle de Almacenamiento Local
+                    Detalle de almacenamiento local
                   </SectionHeading>
                   <table className="w-full text-sm text-left border-collapse">
                     <thead className="text-foreground/90 border-b border-[var(--glass-border)]">
@@ -482,7 +482,7 @@ export default function LegalPage() {
                 {/* 4. Gestión */}
                 <section className="space-y-3">
                   <SectionHeading id="cookies-gestion" number={4}>
-                    Cómo Gestionar el Almacenamiento Local
+                    Cómo gestionar el almacenamiento local
                   </SectionHeading>
                   <p className="text-sm text-foreground/80 leading-relaxed">
                     Puedes eliminar los datos almacenados en cualquier momento desde la configuración de tu navegador:
@@ -518,7 +518,7 @@ export default function LegalPage() {
                 {/* 1. Declaración */}
                 <section className="space-y-3">
                   <SectionHeading id="acc-declaracion" number={1}>
-                    Declaración de Accesibilidad
+                    Declaración de accesibilidad
                   </SectionHeading>
                   <div className="flex items-start gap-3 mb-4">
                     <span className="text-info mt-1"><Accessibility className="w-5 h-5" /></span>
@@ -537,7 +537,7 @@ export default function LegalPage() {
                 {/* 2. Normativa */}
                 <section className="space-y-3">
                   <SectionHeading id="acc-normativa" number={2}>
-                    Normativa Aplicable
+                    Normativa aplicable
                   </SectionHeading>
                   <ul className="list-disc list-inside ml-2 space-y-2 text-sm text-muted">
                     <li><strong>Real Decreto 1112/2018</strong>, de 7 de septiembre, sobre accesibilidad de los sitios web y aplicaciones para dispositivos móviles del sector público.</li>
@@ -550,7 +550,7 @@ export default function LegalPage() {
                 {/* 3. Estado de conformidad */}
                 <section className="space-y-3">
                   <SectionHeading id="acc-estado" number={3}>
-                    Estado de Conformidad
+                    Estado de conformidad
                   </SectionHeading>
                   <div className="p-4 rounded-lg bg-accent/5 border border-accent/20">
                     <p className="text-sm text-foreground/80 leading-relaxed">
@@ -565,7 +565,7 @@ export default function LegalPage() {
                 {/* 4. Medidas adoptadas */}
                 <section className="space-y-3">
                   <SectionHeading id="acc-medidas" number={4}>
-                    Medidas de Accesibilidad Adoptadas
+                    Medidas de accesibilidad adoptadas
                   </SectionHeading>
                   <p className="text-sm text-foreground/80 leading-relaxed mb-3">
                     En esta aplicación se han adoptado las siguientes medidas para facilitar la accesibilidad:
@@ -604,7 +604,7 @@ export default function LegalPage() {
                 {/* 5. Excepciones */}
                 <section className="space-y-3">
                   <SectionHeading id="acc-excepciones" number={5}>
-                    Excepciones y Contenido No Conforme
+                    Excepciones y contenido no conforme
                   </SectionHeading>
                   <p className="text-sm text-foreground/80 leading-relaxed">
                     A continuación se detallan las excepciones al cumplimiento del RD 1112/2018:
@@ -622,7 +622,7 @@ export default function LegalPage() {
                 {/* 6. Contacto y quejas */}
                 <section className="space-y-3">
                   <SectionHeading id="acc-contacto" number={6}>
-                    Contacto y Solicitud de Información Accesible
+                    Contacto y solicitud de información accesible
                   </SectionHeading>
                   <p className="text-sm text-foreground/80 leading-relaxed">
                     Si encuentras alguna barrera de accesibilidad o necesitas solicitar información en un formato alternativo, puedes contactar a través de:
@@ -654,7 +654,7 @@ export default function LegalPage() {
               <div className="space-y-12 animate-in fade-in duration-500">
                 <section className="space-y-3">
                   <h2 className="text-lg font-bold text-foreground border-b border-[var(--glass-border)] pb-2">
-                    Mapa de la Aplicación (Sitemap)
+                    Mapa de la aplicación (sitemap)
                   </h2>
                   <p className="text-sm text-foreground/80 leading-relaxed">
                     Estructura organizativa de Cuaderno FP. Puedes usar los enlaces para navegar rápidamente a cualquier sección.
