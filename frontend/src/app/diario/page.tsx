@@ -203,7 +203,7 @@ export default function SeguimientoPage() {
                             {(() => {
                 const infoMap: Record<string, {title: string, desc: string}> = {
           'diario': {
-                    'title': 'Diario de Aula',
+                    'title': 'Diario de aula',
                     'desc': 'Anotaciones diarias, incidencias y desarrollo de las sesiones.'
           }
 };

@@ -53,7 +53,7 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
       window.URL.revokeObjectURL(urlBlob);
     } catch (err) {
       console.error(err);
-      toast.error("Error al exportar la Unidad Didáctica.");
+      toast.error("Error al exportar la Unidad didáctica.");
     } finally {
       setIsExporting(false);
     }

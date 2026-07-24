@@ -117,7 +117,7 @@ export function AIWizardModal({ isOpen, onClose, onSuccess }: AIWizardModalProps
                 {isDragActive ? "Suelta el PDF aquí" : "Arrastra tu currículo (BOE/BOA) en PDF"}
               </h3>
               <p className="text-sm text-muted max-w-md mx-auto">
-                O haz clic para seleccionar el archivo. La Inteligencia Artificial lo leerá y extraerá automáticamente todos los RAs, Criterios de Evaluación y Unidades didácticas.
+                O haz clic para seleccionar el archivo. La Inteligencia Artificial lo leerá y extraerá automáticamente todos los RAs, Criterios de evaluación y Unidades didácticas.
               </p>
             </div>
           ) : (

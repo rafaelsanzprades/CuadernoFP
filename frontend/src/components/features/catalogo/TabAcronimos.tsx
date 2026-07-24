@@ -30,7 +30,7 @@ const acronimosMarkdown = `
 | CC: Criterios de Calificación | Estándares y pautas para evaluar y asignar calificaciones | \`cc-criterios-de-calificacion\` |
 | CDD: Competencia Digital Docente | Certificación de competencia digital del profesorado (6 áreas, 6 niveles) | \`cdd-competencia-digital-docente\` |
 | CDI: Competencia Digital Individual | Capacidad para usar eficazmente las TIC en diferentes contextos | \`cdi-competencia-digital-individual\` |
-| CE: Criterios de Evaluación | Estándares para medir el progreso del alumnado en un área | \`ce-criterios-de-evaluacion\` |
+| CE: Criterios de evaluación | Estándares para medir el progreso del alumnado en un área | \`ce-criterios-de-evaluacion\` |
 | CEC: Consejo Escolar del Centro | Órgano colegiado de gestión con representación de toda la comunidad | \`cec-consejo-escolar-del-centro\` |
 | CEFP: Centro Específico de Formación Profesional | Centro especializado en formación técnica y práctica | \`cefp-centro-especifico-de-formacion-profesional\` |
 | CF: Ciclo Formativo | Programa educativo de formación profesional por grados | \`cf-ciclo-formativo\` |
@@ -106,7 +106,7 @@ const acronimosMarkdown = `
 | IED: Innovación Educativa | Introducción de nuevos métodos, herramientas y tecnologías educativas | \`ied-innovacion-educativa\` |
 | IEM: Inteligencia Emocional | Habilidad para reconocer, comprender y gestionar emociones | \`iem-inteligencia-emocional\` |
 | IES: Instituto de Educación Secundaria | Centro público de ESO, Bachillerato y FP | \`ies-instituto-de-educacion-secundaria\` |
-| IEV: Instrumentos de Evaluación | Herramientas para medir el aprendizaje y progreso del alumnado | \`iev-instrumentos-de-evaluacion\` |
+| IEV: Instrumentos de evaluación | Herramientas para medir el aprendizaje y progreso del alumnado | \`iev-instrumentos-de-evaluacion\` |
 | | | |
 | Gamificación | Aplicación de mecánicas de juego en contextos educativos | \`gamificacion\` |
 | Género | Perspectiva de igualdad y coeducación en el aula | \`genero\` |
@@ -175,7 +175,7 @@ const acronimosMarkdown = `
 
 | Nombre | Descripción corta | Slug |
 |--------|-------------------|------|
-| RA: Resultados de Aprendizaje | Descripción de lo que el alumnado será capaz de hacer al finalizar | \`ra-resultados-de-aprendizaje\` |
+| RA: Resultados de aprendizaje | Descripción de lo que el alumnado será capaz de hacer al finalizar | \`ra-resultados-de-aprendizaje\` |
 | RD: Real Decreto | Norma con rango de ley emitida por el poder ejecutivo | \`rd-real-decreto\` |
 | REBT: Reglamento Electrotécnico de Baja Tensión | Normativa técnica para instalaciones eléctricas ≤1000V CA | \`rebt-reglamento-electrotecnico-de-baja-tension\` |
 | RRI: Reglamento de Régimen Interno | Documento legal del funcionamiento interno de un centro educativo | \`rri-reglamento-de-regimen-interno\` |
@@ -198,8 +198,8 @@ const acronimosMarkdown = `
 
 | Nombre | Descripción corta | Slug |
 |--------|-------------------|------|
-| UD: Unidad Didáctica | Estructura pedagógica para organizar contenidos de forma secuencial | \`ud-unidad-didactica\` |
-| UT: Unidad de Trabajo | Conjunto de actividades para desarrollar competencias en FP | \`ut-unidad-de-trabajo\` |
+| UD: Unidad didáctica | Estructura pedagógica para organizar contenidos de forma secuencial | \`ud-unidad-didactica\` |
+| UT: Unidad de trabajo | Conjunto de actividades para desarrollar competencias en FP | \`ut-unidad-de-trabajo\` |
 | | | |
 | Valores | Principios éticos y morales que guían la conducta personal y social | \`valores\` |
 | Violencia | Comportamientos agresivos con impacto en el entorno educativo | \`violencia\` |

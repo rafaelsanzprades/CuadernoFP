@@ -210,7 +210,7 @@ export const BoletinesTab = () => {
 
                 {/* Desglose de Resultados */}
                 <h3 className="text-lg font-bold mb-4 mt-8 flex items-center gap-2 border-b border-white/10 pb-2">
-                  <Award className="w-5 h-5 text-warning" /> Desglose por Resultados de Aprendizaje
+                  <Award className="w-5 h-5 text-warning" /> Desglose por Resultados de aprendizaje
                 </h3>
                 <div className="space-y-4">
                   {radarData.map((ra: any, i: number) => {

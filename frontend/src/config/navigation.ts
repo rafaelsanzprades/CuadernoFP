@@ -18,7 +18,7 @@ export const navGroups = [
     sectionDescription: "Área de diseño y configuración didáctica. Configura el módulo, enlaza las matrices de evaluación, define los instrumentos y secuencia las tareas de aula.",
     items: [
       { href: "/contexto", label: "Contexto", icon: Compass, description: "Información general y características del entorno." },
-      { href: "/curriculo", label: "Currículo", icon: Grid, description: "Cruce de Resultados de Aprendizaje y Criterios." },
+      { href: "/curriculo", label: "Currículo", icon: Grid, description: "Cruce de Resultados de aprendizaje y Criterios." },
       { href: "/metodologia", label: "Metodología", icon: Lightbulb, description: "Estrategias metodológicas y recursos." },
       { href: "/evaluacion", label: "Evaluación", icon: Wrench, description: "Definición de herramientas y rúbricas." },
       { href: "/secuenciacion", label: "Secuenciación", icon: BookOpen, description: "Unidades didácticas y temporalización." },

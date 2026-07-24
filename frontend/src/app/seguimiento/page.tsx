@@ -183,7 +183,7 @@ export default function SeguimientoPage() {
   const infoMap: Record<string, {title: string, desc: string}> = {
     'tutoria': { title: 'Tutoría', desc: 'Gestión de tutorías con el alumnado.' },
     'asistencia': { title: 'Asistencia', desc: 'Registro y control de faltas y retrasos del alumnado.' },
-    'alerta_abandono': { title: 'Alerta de Abandono', desc: 'Sistema de detección temprana y protocolo de abandono.' },
+    'alerta_abandono': { title: 'Alerta de abandono', desc: 'Sistema de detección temprana y protocolo de abandono.' },
     'feoe': { title: 'FEOE', desc: 'Ficha de Evaluación Orientadora y Evolutiva.' }
   };
   const currentInfo = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };

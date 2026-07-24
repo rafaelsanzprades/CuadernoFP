@@ -43,7 +43,7 @@ export function IndicadoresTab() {
       <Card className="p-12 text-center border border-dashed border-[var(--glass-border)] bg-foreground/5">
         <ListChecks className="w-12 h-12 text-muted mx-auto mb-4 opacity-50" />
         <h3 className="text-lg font-bold text-foreground mb-2">Faltan criterios de evaluación</h3>
-        <p className="text-muted mb-6">Añade Criterios de Evaluación (CE) en la pestaña Matrices antes de crear Indicadores.</p>
+        <p className="text-muted mb-6">Añade Criterios de evaluación (CE) en la pestaña Matrices antes de crear Indicadores.</p>
       </Card>
     );
   }
@@ -55,7 +55,7 @@ export function IndicadoresTab() {
           <h2 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
             <span className="inline-flex"><Crosshair className="w-[1.2em] h-[1.2em] mr-1" /></span> Indicadores de Evaluación
           </h2>
-          <p className="text-muted mt-1">Desglosa los Criterios de Evaluación (CE) en indicadores medibles y observables.</p>
+          <p className="text-muted mt-1">Desglosa los Criterios de evaluación (CE) en indicadores medibles y observables.</p>
         </div>
       </div>
 

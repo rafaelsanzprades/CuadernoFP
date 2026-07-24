@@ -1018,7 +1018,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
 
           <Tabs defaultValue="curriculo" className="w-full mt-4">
             <TabsList className="mb-4">
-              <TabsTrigger value="curriculo">Resultados de Aprendizaje</TabsTrigger>
+              <TabsTrigger value="curriculo">Resultados de aprendizaje</TabsTrigger>
               <TabsTrigger value="competencias">Competencias Acreditables</TabsTrigger>
             </TabsList>
 
@@ -1050,7 +1050,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
 
                       {isExpanded && (
                         <div className="border-t border-[var(--glass-border)] p-4 space-y-2 animate-in slide-in-from-top-1 duration-200">
-                          <p className="text-xs font-semibold text-muted tracking-wider">Criterios de Evaluación</p>
+                          <p className="text-xs font-semibold text-muted tracking-wider">Criterios de evaluación</p>
                           {raItem.ce?.map((ceItem: any) => (
                             <div key={ceItem.id} className="flex items-start gap-2 text-sm bg-foreground/5 rounded-lg p-3 border border-[var(--glass-border)]">
                               <span className="text-xs font-medium text-accent shrink-0 mt-0.5">{ceItem.id}</span>

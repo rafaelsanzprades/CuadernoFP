@@ -233,7 +233,7 @@ export default function ProgramacionPage() {
                 <div className="text-center py-12">
                   <ClipboardList className="w-16 h-16 text-muted-foreground opacity-50 mx-auto mb-4" />
                   <h3 className="text-lg font-bold mb-2">No hay unidades didácticas</h3>
-                  <p className="text-muted">Aún no has creado ninguna Unidad Didáctica (UD).</p>
+                  <p className="text-muted">Aún no has creado ninguna Unidad didáctica (UD).</p>
                   <p className="text-muted mt-1">Para secuenciar sesiones, primero debes crear las UDs en la sección <strong>Matrices</strong>.</p>
                 </div>
               ) : (

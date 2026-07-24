@@ -281,7 +281,7 @@ export default function AlumnadoPage() {
                     'desc': 'Gestión del listado de alumnado y ficha individual.'
           },
           'plano': {
-                    'title': 'Plano de Clase',
+                    'title': 'Plano de clase',
                     'desc': 'Distribución y plano visual del aula.'
           }
 };

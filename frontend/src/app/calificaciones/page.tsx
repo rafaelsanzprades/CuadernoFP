@@ -371,7 +371,7 @@ export default function ProgresoPage() {
                     'desc': 'Panel global de rendimiento y calificaciones medias.'
           },
           'matriz': {
-                    'title': 'Matriz de Calificaciones',
+                    'title': 'Matriz de calificaciones',
                     'desc': 'Cuaderno del profesor. Vista tipo Excel para registro ágil de notas.'
           },
           'detalle': {
@@ -610,7 +610,7 @@ export default function ProgresoPage() {
                               {/* BLOQUE 2: Grado de consecución de los RA por alumnado */}
                               <div className="pt-6 border-t border-[var(--glass-border)] space-y-4">
                                 <h3 className="font-bold text-foreground flex items-center gap-2">
-                                  <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Consecución de Resultados de Aprendizaje (RA)
+                                  <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Consecución de Resultados de aprendizaje (RA)
                                 </h3>
                                 <div className="space-y-5">
                                   {resultados_ra.map((r, idx) => {

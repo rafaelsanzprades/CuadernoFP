@@ -55,7 +55,7 @@ export const TodayClasses = () => {
         <div className="bg-background/40 p-5 rounded-xl border border-[var(--glass-border)] flex flex-col justify-between">
           <div>
             <div className="text-xs text-accent font-bold tracking-wider mb-2 flex items-center gap-1.5">
-              <Layers className="w-3.5 h-3.5" /> Unidad Didáctica
+              <Layers className="w-3.5 h-3.5" /> Unidad didáctica
             </div>
             <div className="font-bold text-lg text-foreground">{udDesc || udId}</div>
           </div>

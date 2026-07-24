@@ -171,15 +171,15 @@ export default function MatricesPage() {
                 const infoMap: Record<string, {title: string, desc: string}> = {
           'ra': {
                     'title': 'Matriz RA - CE',
-                    'desc': 'Matriz de Resultados de Aprendizaje y Criterios de Evaluación.'
+                    'desc': 'Matriz de Resultados de aprendizaje y Criterios de evaluación.'
           },
           'ud': {
                     'title': 'Unidades didácticas (UD/T)',
-                    'desc': 'Definición de Unidades didácticas o Unidades de Trabajo.'
+                    'desc': 'Definición de Unidades didácticas o Unidades de trabajo.'
           },
           'relacion': {
                     'title': 'Relación RA - UD/T',
-                    'desc': 'Ponderación y relación entre Unidades y Resultados de Aprendizaje.'
+                    'desc': 'Ponderación y relación entre Unidades y Resultados de aprendizaje.'
           },
           'contribucion': {
                     'title': 'Contribución a OG',
@@ -538,7 +538,7 @@ export default function MatricesPage() {
                         <tr className="border-b border-[var(--glass-border)] text-sm text-muted">
                           <th className="p-3 sticky left-0 bg-background z-10">UD/T</th>
                           <th className="p-3 sticky left-[80px] bg-background z-10">Horas</th>
-                          <th className="p-3 sticky left-[160px] bg-background z-10 w-64">Unidad Didáctica o de Trabajo</th>
+                          <th className="p-3 sticky left-[160px] bg-background z-10 w-64">Unidad didáctica o de Trabajo</th>
                           {df_ra.map((ra: any, i: number) => (
                             <th key={i} className="p-3 text-center min-w-[80px]">
                               <div className="text-xs">{ra.id_ra}</div>
