@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/Badge";
 import Link from "next/link";
 import { TabSync } from "@/components/ui/TabSync";
 import { useState, useEffect } from "react";
+import { useMounted } from "@/hooks/useMounted";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -181,6 +182,7 @@ const FAQS = [
 // ── Página Principal ──────────────────────────────────────────────────────
 export default function InicioPage() {
   const { moduleData, cursoData, globalData, activeModuleId, activeCursoId } = useAppStore();
+  const isMounted = useMounted();
   const [activeTab, setActiveTab] = useState<string>("bienvenida");
   const { t } = useTranslation();
   const [aiModalOpen, setAiModalOpen] = useState(false);
@@ -650,7 +652,21 @@ export default function InicioPage() {
                     {group.title !== 'General' && (
                       <>
                         <h2 className="text-lg font-bold text-foreground flex items-center gap-3">
-                          {group.title}
+                          {group.title.includes('[Código del módulo]') ? (
+                            isMounted && activeModuleId ? (
+                              <>Programación <span className="text-accent">{activeModuleId.split('-')[0]} {moduleData?.info_modulo?.acronym || ''}</span></>
+                            ) : (
+                              group.title
+                            )
+                          ) : group.title.includes('[Año]') ? (
+                            isMounted && activeCursoId ? (
+                              <>Curso <span className="text-accent">{activeCursoId}</span></>
+                            ) : (
+                              group.title
+                            )
+                          ) : (
+                            group.title
+                          )}
                         </h2>
                         {group.sectionDescription && (
                           <p className="text-muted text-sm max-w-4xl pb-4 border-b border-[var(--glass-border)]">
