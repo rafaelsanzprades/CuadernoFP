@@ -61,7 +61,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
   let currentItem = "";
   if (pathname === '/inicio') {
     currentItem = "Inicio";
-  } else if (pathname === '/agenda') {
+  } else if (pathname === '/diario') {
     currentItem = "Agenda de clase";
   } else if (pathname === '/archivos') {
     currentItem = "Archivos";
