@@ -132,19 +132,22 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
       <div className="space-y-4">
         {/* Nivel 1 */}
         <Card className="overflow-hidden">
-          <Button variant="ghost" className="w-full flex items-center justify-between p-4 h-auto rounded-none" onClick={() => toggleLevel('1')}>
-            <span className="font-semibold text-lg">Nivel 1 ({incualData.ecp_nivel_1?.length || 0})</span>
+          <button 
+            className="w-full flex items-center justify-between p-4 bg-background hover:bg-muted/10 transition-colors focus:outline-none" 
+            onClick={() => toggleLevel('1')}
+          >
+            <span className="font-semibold text-lg text-foreground">Nivel 1 ({incualData.ecp_nivel_1?.length || 0})</span>
             {expandedLevel === '1' ? <ChevronUp className="w-5 h-5 text-muted" /> : <ChevronDown className="w-5 h-5 text-muted" />}
-          </Button>
+          </button>
           {expandedLevel === '1' && (
             <div className="p-4 pt-0 border-t bg-muted/10 space-y-3">
               {incualData.ecp_nivel_1?.map((ecp: any, idx: number) => (
-                <div key={idx} className="p-3 bg-card border rounded-md shadow-sm">
+                <div key={idx} className="p-3 bg-card border rounded-md shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex justify-between items-start gap-4">
-                    <div>
-                      <span className="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs font-mono rounded mb-2">{ecp.code}</span>
-                      <h4 className="font-medium">{ecp.title}</h4>
-                      <p className="text-sm text-muted mt-1">{ecp.description}</p>
+                    <div className="text-sm leading-relaxed">
+                      <span className="inline-block px-2 py-0.5 bg-blue-100 text-blue-800 text-xs font-mono rounded mr-3 align-middle">{ecp.code}</span>
+                      <span className="font-medium text-foreground align-middle">{ecp.title}</span>
+                      {ecp.description && <span className="text-muted ml-2 align-middle">- {ecp.description}</span>}
                     </div>
                     {ecp.pdf_url && (
                       <a href={ecp.pdf_url} target="_blank" rel="noreferrer" className="flex items-center text-xs font-semibold px-3 py-1.5 rounded-xl border border-info/30 bg-info/10 text-info hover:bg-info/20 transition-all shrink-0">
@@ -163,19 +166,22 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
 
         {/* Nivel 2 */}
         <Card className="overflow-hidden">
-          <Button variant="ghost" className="w-full flex items-center justify-between p-4 h-auto rounded-none" onClick={() => toggleLevel('2')}>
-            <span className="font-semibold text-lg">Nivel 2 ({incualData.ecp_nivel_2?.length || 0})</span>
+          <button 
+            className="w-full flex items-center justify-between p-4 bg-background hover:bg-muted/10 transition-colors focus:outline-none" 
+            onClick={() => toggleLevel('2')}
+          >
+            <span className="font-semibold text-lg text-foreground">Nivel 2 ({incualData.ecp_nivel_2?.length || 0})</span>
             {expandedLevel === '2' ? <ChevronUp className="w-5 h-5 text-muted" /> : <ChevronDown className="w-5 h-5 text-muted" />}
-          </Button>
+          </button>
           {expandedLevel === '2' && (
             <div className="p-4 pt-0 border-t bg-muted/10 space-y-3">
               {incualData.ecp_nivel_2?.map((ecp: any, idx: number) => (
-                <div key={idx} className="p-3 bg-card border rounded-md shadow-sm">
+                <div key={idx} className="p-3 bg-card border rounded-md shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex justify-between items-start gap-4">
-                    <div>
-                      <span className="inline-block px-2 py-1 bg-green-100 text-green-800 text-xs font-mono rounded mb-2">{ecp.code}</span>
-                      <h4 className="font-medium">{ecp.title}</h4>
-                      <p className="text-sm text-muted mt-1">{ecp.description}</p>
+                    <div className="text-sm leading-relaxed">
+                      <span className="inline-block px-2 py-0.5 bg-green-100 text-green-800 text-xs font-mono rounded mr-3 align-middle">{ecp.code}</span>
+                      <span className="font-medium text-foreground align-middle">{ecp.title}</span>
+                      {ecp.description && <span className="text-muted ml-2 align-middle">- {ecp.description}</span>}
                     </div>
                     {ecp.pdf_url && (
                       <a href={ecp.pdf_url} target="_blank" rel="noreferrer" className="flex items-center text-xs font-semibold px-3 py-1.5 rounded-xl border border-info/30 bg-info/10 text-info hover:bg-info/20 transition-all shrink-0">
@@ -194,19 +200,22 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
 
         {/* Nivel 3 */}
         <Card className="overflow-hidden">
-          <Button variant="ghost" className="w-full flex items-center justify-between p-4 h-auto rounded-none" onClick={() => toggleLevel('3')}>
-            <span className="font-semibold text-lg">Nivel 3 ({incualData.ecp_nivel_3?.length || 0})</span>
+          <button 
+            className="w-full flex items-center justify-between p-4 bg-background hover:bg-muted/10 transition-colors focus:outline-none" 
+            onClick={() => toggleLevel('3')}
+          >
+            <span className="font-semibold text-lg text-foreground">Nivel 3 ({incualData.ecp_nivel_3?.length || 0})</span>
             {expandedLevel === '3' ? <ChevronUp className="w-5 h-5 text-muted" /> : <ChevronDown className="w-5 h-5 text-muted" />}
-          </Button>
+          </button>
           {expandedLevel === '3' && (
             <div className="p-4 pt-0 border-t bg-muted/10 space-y-3">
               {incualData.ecp_nivel_3?.map((ecp: any, idx: number) => (
-                <div key={idx} className="p-3 bg-card border rounded-md shadow-sm">
+                <div key={idx} className="p-3 bg-card border rounded-md shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex justify-between items-start gap-4">
-                    <div>
-                      <span className="inline-block px-2 py-1 bg-purple-100 text-purple-800 text-xs font-mono rounded mb-2">{ecp.code}</span>
-                      <h4 className="font-medium">{ecp.title}</h4>
-                      <p className="text-sm text-muted mt-1">{ecp.description}</p>
+                    <div className="text-sm leading-relaxed">
+                      <span className="inline-block px-2 py-0.5 bg-purple-100 text-purple-800 text-xs font-mono rounded mr-3 align-middle">{ecp.code}</span>
+                      <span className="font-medium text-foreground align-middle">{ecp.title}</span>
+                      {ecp.description && <span className="text-muted ml-2 align-middle">- {ecp.description}</span>}
                     </div>
                     {ecp.pdf_url && (
                       <a href={ecp.pdf_url} target="_blank" rel="noreferrer" className="flex items-center text-xs font-semibold px-3 py-1.5 rounded-xl border border-info/30 bg-info/10 text-info hover:bg-info/20 transition-all shrink-0">
