@@ -219,7 +219,9 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
       .then((json) => {
         if (json.status === "success") {
           const order: Record<string, number> = { BASICA: 1, MEDIO: 2, SUPERIOR: 3, ESPECIALIZACION: 4 };
-          const sorted = json.data.map((f: Family) => ({
+          const sorted = json.data
+            .filter((f: Family) => f.code !== "AAT")
+            .map((f: Family) => ({
             ...f,
             degrees: [...f.degrees].sort((a, b) => {
               const levelDiff = (order[a.level] || 99) - (order[b.level] || 99);
