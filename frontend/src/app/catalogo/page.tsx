@@ -264,7 +264,7 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
                 className="w-20 h-20 rounded-2xl flex items-center justify-center mb-4 shadow-lg p-3"
                 style={{ backgroundColor: `${family.color_hex}20`, border: `1px solid ${family.color_hex}40` }}
               >
-                {(family.icon_url.includes("fa-") || family.icon_url.startsWith("fas")) ? (
+                {(family.icon_url && (family.icon_url.includes("fa-") || family.icon_url.startsWith("fas"))) ? (
                   <i className={`${family.icon_url} text-2xl`} style={{ color: family.color_hex }} />
                 ) : (
                   <img src={family.icon_url} alt={family.code} className="w-full h-full object-contain filter drop-shadow-md" />
