@@ -96,6 +96,13 @@ export const demoSeed0223 = {
             "localidad": "Zaragoza",
             "comunidad": "Aragón"
         },
+        "config_contexto": {
+            "entorno_geografico": "El centro educativo es de titularidad pública situado en el barrio de La Almozara, en Zaragoza.",
+            "entorno_socioeconomico": "El módulo mantiene una relación directa con el tejido empresarial y tecnológico de nuestro entorno. Las orientaciones metodológicas y las tareas competenciales diseñadas persiguen acercar al alumnado a la realidad del sector productivo.",
+            "contexto_escolar": "La oferta académica del instituto es amplia y diversa. Un rasgo distintivo de la identidad del centro es su compromiso con la inclusión, siendo un centro preferente para la escolarización de alumnado con necesidades especiales.",
+            "caracteristicas_alumnado": "Se identifican y respetan las características y necesidades del alumnado, adaptando las metodologías, los recursos y las evaluaciones a sus capacidades. Se planifican actividades que promuevan la participación activa.",
+            "infraestructura": "El proceso de enseñanza-aprendizaje se desarrollará principalmente en las aulas-taller del centro, dotadas con equipos informáticos, cañón proyector y conexión a internet. Se dispondrá del equipamiento específico del ciclo."
+        },
         "df_curriculo": [
             {
                 "codigo": "RA1",
