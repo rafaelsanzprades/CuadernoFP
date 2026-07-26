@@ -17,14 +17,13 @@ import {
 } from "@/types/curriculum";
 import { fileManager } from "@/services/fileManager";
 import toast from "react-hot-toast";
-import { TabGrados } from "@/components/features/catalogo/TabGrados";
 import { TabComunidades } from "@/components/features/catalogo/TabComunidades";
 import { TabNormativa } from "@/components/features/catalogo/TabNormativa";
 import { TabIncual } from "@/components/features/catalogo/TabIncual";
 import { useTranslation } from "react-i18next";
 import { useAppStore } from "@/store/useAppStore";
 
-type Tab = "grados" | "familias" | "titulo" | "cursos" | "modulos" | "comunidades" | "incual";
+type Tab = "familias" | "titulo" | "cursos" | "modulos" | "comunidades" | "incual";
 
 
 export default function CiclosPage() {
@@ -48,7 +47,7 @@ function CiclosContent() {
 
   const tabParam = searchParams.get("tab") as Tab | null;
   const [activeTab, setActiveTab] = useState<Tab>(
-    tabParam && ["comunidades", "grados", "familias", "titulo", "cursos", "modulos", "incual"].includes(tabParam) ? tabParam : "comunidades"
+    tabParam && ["comunidades", "familias", "titulo", "cursos", "modulos", "incual"].includes(tabParam) ? tabParam : "comunidades"
   );
 
   const [globalSelection, setGlobalSelection] = useState(() => {
@@ -103,7 +102,6 @@ function CiclosContent() {
   };
 
   const TAB_LABELS: Record<Tab, string> = {
-    grados: t('tabs.grados', {defaultValue: 'Grados'}),
     familias: t('tabs.familias', {defaultValue: 'Familias'}),
     titulo: t('tabs.titulos', {defaultValue: 'Títulos'}),
     cursos: t('tabs.modulos', {defaultValue: 'Módulos'}),
@@ -133,7 +131,6 @@ function CiclosContent() {
                 {(
                   [
                     { id: "comunidades" as Tab, label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-success" /> {t('tabs.comunidades', {defaultValue: 'Comunidades'})}</span> },
-                    { id: "grados" as Tab, label: <span className="flex items-center gap-2"><Award className="w-4 h-4" /> {t('tabs.grados', {defaultValue: 'Grados'})}</span> },
                     { id: "familias" as Tab, label: <span className="flex items-center gap-2"><FolderTree className="w-4 h-4" /> {t('tabs.familias', {defaultValue: 'Familias'})}</span> },
                     { id: "titulo" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> {t('tabs.titulos', {defaultValue: 'Títulos'})}</span> },
                     { id: "cursos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> {t('tabs.modulos', {defaultValue: 'Módulos'})}</span> },
@@ -150,7 +147,6 @@ function CiclosContent() {
 
             {(() => {
               const infoMap: Record<string, {desc: string}> = {
-                'grados': { desc: 'La Ley Orgánica 3/2022 estructura la Formación Profesional en 5 grados (A a E).' },
                 'familias': { desc: 'El RD 1128/2003 establece el Catálogo Nacional de Cualificaciones Profesionales.' },
                 'titulo': { desc: 'Normativa estatal básica y currículo autonómico para ciclos formativos.' },
                 'cursos': { desc: 'Bloques de especialización y contenidos asociados a cada curso académico.' },
@@ -169,7 +165,6 @@ function CiclosContent() {
               );
             })()}
 
-            {activeTab === "grados" && <TabGrados />}
             {activeTab === "familias" && <TabFamilias onSelectTitulo={handleSelectFamiliaToTitulo} />}
             {activeTab === "titulo" && <TabTitulo onSelectTitulo={handleSelectTitulo} globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
             {activeTab === "cursos" && <TabCursos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} onSelectModulo={handleSelectModulo} />}

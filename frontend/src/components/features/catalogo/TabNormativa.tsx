@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card } from "@/components/ui/Card";
 import { Landmark, Map, FileText, ChevronDown, ChevronUp, Info } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { TabGrados } from "@/components/features/catalogo/TabGrados";
 
 interface NormativaItem {
   id: string;
@@ -113,7 +114,8 @@ const COMUNIDADES = [
 ].sort();
 
 export function TabNormativa() {
-  const [expandedCommunity, setExpandedCommunity] = useState<string | null>("Aragón");
+  const [expandedEstatal, setExpandedEstatal] = useState<boolean>(false);
+  const [expandedCommunity, setExpandedCommunity] = useState<string | null>(null);
 
   const toggleCommunity = (comunidad: string) => {
     setExpandedCommunity(prev => prev === comunidad ? null : comunidad);
@@ -149,17 +151,29 @@ export function TabNormativa() {
 
   return (
     <div className="space-y-8 animate-fade-in">
-      <Card className="p-6 border-border/50 bg-[var(--glass-bg)]">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-primary/10 rounded-lg text-primary">
-            <Landmark className="w-5 h-5" />
+      <TabGrados />
+
+      <Card className="border-border/50 bg-[var(--glass-bg)] overflow-hidden transition-all">
+        <button
+          onClick={() => setExpandedEstatal(!expandedEstatal)}
+          className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none hover:bg-foreground/5 transition-colors"
+        >
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-primary/10 rounded-lg text-primary shrink-0">
+              <Landmark className="w-5 h-5" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold">Normativa estatal</h2>
+              <p className="text-sm text-muted-foreground">Legislación de ámbito nacional aplicable a la Formación Profesional.</p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-lg font-bold">Normativa estatal</h2>
-            <p className="text-sm text-muted-foreground">Legislación de ámbito nacional aplicable a la Formación Profesional.</p>
+          {expandedEstatal ? <ChevronUp className="w-5 h-5 text-muted shrink-0" /> : <ChevronDown className="w-5 h-5 text-muted shrink-0" />}
+        </button>
+        {expandedEstatal && (
+          <div className="px-6 pb-6 pt-4 border-t border-border/50 bg-background/30">
+            {renderTable(NORMATIVA_ESTATAL)}
           </div>
-        </div>
-        {renderTable(NORMATIVA_ESTATAL)}
+        )}
       </Card>
 
       <Card className="p-6 border-border/50 bg-[var(--glass-bg)]">
