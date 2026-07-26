@@ -134,11 +134,20 @@ export default function Sidebar() {
   if (isMounted && activeModuleId) {
     const code = activeModuleId.split('-')[0];
     moduleTitleSuffix = code;
+    let foundAcronym = '';
     for (const g of initialGroups) {
       const m = g.modules.find(mod => mod.code === code);
       if (m && m.acronym) {
-        moduleTitleSuffix = `${code} ${m.acronym}`;
+        foundAcronym = m.acronym;
         break;
+      }
+    }
+    if (foundAcronym) {
+      moduleTitleSuffix = `${code} ${foundAcronym}`;
+    } else if (dataSource === 'demo') {
+      const parts = activeModuleId.split('-');
+      if (parts.length >= 2 && parts[1] !== 'pd' && parts[1] !== 'curso') {
+        moduleTitleSuffix = `${code} ${parts[1].toUpperCase()}`;
       }
     }
   }
