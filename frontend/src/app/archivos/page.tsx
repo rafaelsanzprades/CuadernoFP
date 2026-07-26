@@ -18,6 +18,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { initialGroups } from "@/store/initialData";
 import { useTranslation } from "react-i18next";
 import { OneDriveSyncPanel } from "@/components/features/cloud/OneDriveSyncPanel";
+import { TabAutores } from "@/components/features/catalogo/TabAutores";
 
 export default function ArchivosTrabajoPage() {
   const {
@@ -338,12 +339,14 @@ export default function ArchivosTrabajoPage() {
 
   const TABS = [
     { id: "datos", label: <span className="flex items-center gap-2"><Database className="w-4 h-4 shrink-0" /> Archivos locales</span>, cleanLabel: "Archivos locales" },
-    { id: "nube", label: <span className="flex items-center gap-2"><Cloud className="w-4 h-4 shrink-0" /> Nube</span>, cleanLabel: "Nube" }
+    { id: "nube", label: <span className="flex items-center gap-2"><Cloud className="w-4 h-4 shrink-0" /> Nube</span>, cleanLabel: "Nube" },
+    { id: "autores", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> Autores</span>, cleanLabel: "Autores" }
   ];
 
   const breadcrumbSuffixMap: Record<string, string> = {
     "datos": "Gestor de archivos",
-    "nube": "Sincronización en la Nube"
+    "nube": "Sincronización en la Nube",
+    "autores": "Catálogo de Autores"
   };
 
   // ── Render ──────────────────────────────────────────────
@@ -398,7 +401,8 @@ export default function ArchivosTrabajoPage() {
               {(() => {
                 const infoMap: Record<string, {desc: string}> = {
                   'datos': { desc: 'Gestión de los archivos de estructura y programación didáctica del docente.' },
-                  'nube': { desc: 'Sincronización bidireccional segura con Google Drive y Microsoft OneDrive.' }
+                  'nube': { desc: 'Sincronización bidireccional segura con Google Drive y Microsoft OneDrive.' },
+                  'autores': { desc: 'Integración de recursos editoriales externos en formato abierto (.fpp).' }
                 };
                 const info = infoMap[activeTab] || { desc: 'Gestión de archivos.' };
                 return (
@@ -656,6 +660,13 @@ export default function ArchivosTrabajoPage() {
                   <div className="space-y-4">
                     <OneDriveSyncPanel />
                   </div>
+                </div>
+              )}
+
+              {/* TAB: AUTORES */}
+              {activeTab === "autores" && (
+                <div className="animate-in fade-in duration-500 w-full">
+                  <TabAutores globalSelection={{ moduloCodigo: activeModuleId ? activeModuleId.split('-')[0] : null }} />
                 </div>
               )}
 

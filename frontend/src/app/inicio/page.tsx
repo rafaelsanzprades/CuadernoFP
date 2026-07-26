@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/Button";
 import { Sparkles } from "lucide-react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import { TabAcronimos } from "@/components/features/catalogo/TabAcronimos";
 
 // ── Tipos ─────────────────────────────────────────────────────────────────
 type CheckStatus = "ok" | "warning" | "empty";
@@ -231,6 +232,7 @@ export default function InicioPage() {
     { id: "bienvenida", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.bienvenida')}</>, cleanLabel: t('tabs.bienvenida') },
     { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.guia')}</>, cleanLabel: t('tabs.guia') },
     { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.faq')}</>, cleanLabel: t('tabs.faq') },
+    { id: "acronimos", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Acrónimos</>, cleanLabel: "Acrónimos" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -284,6 +286,10 @@ export default function InicioPage() {
           'faq': {
                     'title': 'FAQ',
                     'desc': 'Respuestas a las preguntas más frecuentes de el profesorado.'
+          },
+          'acronimos': {
+                    'title': 'Acrónimos',
+                    'desc': 'Glosario de siglas, acrónimos y conceptos de Formación Profesional.'
           }
 };
                 const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
@@ -519,6 +525,13 @@ export default function InicioPage() {
                     </div>
                   </div>
                 ))}
+              </div>
+            )}
+
+            {/* ── CONTENIDO: ACRONIMOS ──────────────────────────────────────── */}
+            {activeTab === "acronimos" && (
+              <div className="animate-in fade-in duration-500 w-full">
+                <TabAcronimos />
               </div>
             )}
 

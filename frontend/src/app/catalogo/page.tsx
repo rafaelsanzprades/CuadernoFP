@@ -17,16 +17,14 @@ import {
 } from "@/types/curriculum";
 import { fileManager } from "@/services/fileManager";
 import toast from "react-hot-toast";
-import { TabAutores } from "@/components/features/catalogo/TabAutores";
 import { TabGrados } from "@/components/features/catalogo/TabGrados";
 import { TabComunidades } from "@/components/features/catalogo/TabComunidades";
 import { TabNormativa } from "@/components/features/catalogo/TabNormativa";
 import { TabIncual } from "@/components/features/catalogo/TabIncual";
-import { TabAcronimos } from "@/components/features/catalogo/TabAcronimos";
 import { useTranslation } from "react-i18next";
 import { useAppStore } from "@/store/useAppStore";
 
-type Tab = "grados" | "familias" | "titulo" | "cursos" | "modulos" | "autores" | "comunidades" | "incual" | "acronimos";
+type Tab = "grados" | "familias" | "titulo" | "cursos" | "modulos" | "comunidades" | "incual";
 
 
 export default function CiclosPage() {
@@ -50,7 +48,7 @@ function CiclosContent() {
 
   const tabParam = searchParams.get("tab") as Tab | null;
   const [activeTab, setActiveTab] = useState<Tab>(
-    tabParam && ["comunidades", "grados", "familias", "titulo", "cursos", "modulos", "autores", "incual", "acronimos"].includes(tabParam) ? tabParam : "comunidades"
+    tabParam && ["comunidades", "grados", "familias", "titulo", "cursos", "modulos", "incual"].includes(tabParam) ? tabParam : "comunidades"
   );
 
   const [globalSelection, setGlobalSelection] = useState(() => {
@@ -110,10 +108,8 @@ function CiclosContent() {
     titulo: t('tabs.titulos', {defaultValue: 'Títulos'}),
     cursos: t('tabs.modulos', {defaultValue: 'Módulos'}),
     modulos: 'RA → CE',
-    autores: t('tabs.autores', {defaultValue: 'Autores'}),
     comunidades: t('tabs.comunidades', {defaultValue: 'Comunidades'}),
-    incual: "ECP INCUAL",
-    acronimos: "Acrónimos"
+    incual: "ECP INCUAL"
   };
 
   const activeTabCleanLabel = TAB_LABELS[activeTab];
@@ -143,8 +139,6 @@ function CiclosContent() {
                     { id: "cursos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> {t('tabs.modulos', {defaultValue: 'Módulos'})}</span> },
                     { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> RA → CE</span> },
                     { id: "incual" as Tab, label: <span className="flex items-center gap-2"><Award className="w-4 h-4 text-purple-500" /> ECP INCUAL</span> },
-                    { id: "acronimos" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-emerald-500" /> Acrónimos</span> },
-                    { id: "autores" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-info" /> {t('tabs.autores', {defaultValue: 'Autores'})}</span> },
                   ]
                 ).map((t) => (
                   <TabsTrigger key={t.id} value={t.id}>
@@ -162,9 +156,7 @@ function CiclosContent() {
                 'cursos': { desc: 'Bloques de especialización y contenidos asociados a cada curso académico.' },
                 'modulos': { desc: 'Competencias específicas estructuradas en RA y CE (Art. 136, RD 659/2023).' },
                 'incual': { desc: 'Estándares de Competencia Profesional (ECP) del Catálogo Nacional (INCUAL).' },
-                'autores': { desc: 'Integración de recursos editoriales externos en formato abierto (.fpp).' },
-                'comunidades': { desc: 'Currículos autonómicos de FP: 17 CCAA + Ceuta y Melilla. DEMO usa BOA (Aragón).' },
-                'acronimos': { desc: 'Glosario de siglas, acrónimos y conceptos de Formación Profesional.' }
+                'comunidades': { desc: 'Currículos autonómicos de FP: 17 CCAA + Ceuta y Melilla. DEMO usa BOA (Aragón).' }
               };
               const info = infoMap[activeTab] || { desc: 'Catálogo Nacional Oficial.' };
               return (
@@ -182,10 +174,8 @@ function CiclosContent() {
             {activeTab === "titulo" && <TabTitulo onSelectTitulo={handleSelectTitulo} globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
             {activeTab === "cursos" && <TabCursos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} onSelectModulo={handleSelectModulo} />}
             {activeTab === "modulos" && <TabModulos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
-            {activeTab === "autores" && <TabAutores globalSelection={globalSelection} />}
             {activeTab === "incual" && <TabIncual globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
             {activeTab === "comunidades" && <TabComunidades />}
-            {activeTab === "acronimos" && <TabAcronimos />}
           </MotionWrapper>
         </div>
       </main>
