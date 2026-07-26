@@ -32,7 +32,8 @@ export default function Sidebar() {
   }, [workspaceHandle, dataSource]);
 
   const demoGroupValue = (isMounted && activeCursoId) ? 
-    (activeCursoId.toUpperCase().includes('1B') ? '1b'
+    (activeCursoId.includes('0223') ? '0223'
+    : activeCursoId.toUpperCase().includes('1B') ? '1b'
     : activeCursoId.toUpperCase().includes('1C') ? '1c' : '1a') : '1a';
 
   useEffect(() => {
@@ -145,18 +146,16 @@ export default function Sidebar() {
   const cursoTitleSuffix = (() => {
     if (!isMounted || !activeCursoId) return 'AÑO';
     const idUpper = activeCursoId.toUpperCase();
-    const parts = activeCursoId.split('-');
-    let extractedYear = parts[parts.length - 1];
-    if (extractedYear && extractedYear.length === 2) {
-      extractedYear = `20${parseInt(extractedYear) - 1}-${extractedYear}`;
-    } else if (extractedYear && extractedYear.length === 6 && !extractedYear.includes('-')) {
-      extractedYear = `${extractedYear.slice(0, 4)}-${extractedYear.slice(4)}`;
-    } else if (!extractedYear || !extractedYear.includes('-')) {
+    let yearMatch = idUpper.match(/20\d{2}-?\d{2}/);
+    let extractedYear = '';
+    if (yearMatch) {
+      extractedYear = yearMatch[0].replace('-', '');
+    } else {
       const today = new Date();
       const currentY = today.getMonth() < 6 ? today.getFullYear() - 1 : today.getFullYear();
-      extractedYear = `${currentY}-${String(currentY + 1).slice(-2)}`;
+      extractedYear = `${currentY}${String(currentY + 1).slice(-2)}`;
     }
-    const matchGroup = idUpper.match(/-([1-9][A-Z])/i);
+    const matchGroup = idUpper.match(/([1-9][A-Z])/i);
     const suffix = matchGroup ? matchGroup[1].toUpperCase() : '';
     return `${extractedYear}${suffix ? ` ${suffix}-GM` : ''}`;
   })();
@@ -207,7 +206,7 @@ export default function Sidebar() {
             
             <div className="flex bg-foreground/5 rounded-lg p-0.5 w-full gap-0.5">
               <button
-                onClick={() => { setDataSource('demo'); fileManager.loadDemoData('0237'); toast.success('Modo DEMO'); }}
+                onClick={() => { setDataSource('demo'); fileManager.loadDemoData('1a'); toast.success('Modo DEMO'); }}
                 className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-md text-sm font-bold transition-all ${dataSource === 'demo'
                   ? 'bg-warning/20 text-warning shadow-sm ring-1 ring-warning/30'
                   : 'text-muted hover:bg-foreground/10 hover:text-foreground'}`}
@@ -231,8 +230,10 @@ export default function Sidebar() {
                   value={demoGroupValue}
                   onChange={(e) => { fileManager.loadDemoData(e.target.value); toast.success(`Grupo ${e.target.value.toUpperCase()}`); }}
                 >
-                  <option value="0237">202526 1A-GM (0237 ICTVE)</option>
-                  <option value="0223">202526 1A-GM (0223 AO)</option>
+                  <option value="1a">202526 1A-GM 0237 ICTVE</option>
+                  <option value="1b">202526 1B-GM 0237 ICTVE</option>
+                  <option value="1c">202526 1C-GM 0237 ICTVE</option>
+                  <option value="0223">202526 1A-GM 0223 AO</option>
                 </select>
                 <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none" style={{ color: 'var(--warning)' }} />
               </div>
