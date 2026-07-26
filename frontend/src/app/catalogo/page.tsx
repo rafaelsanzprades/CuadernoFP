@@ -17,13 +17,12 @@ import {
 } from "@/types/curriculum";
 import { fileManager } from "@/services/fileManager";
 import toast from "react-hot-toast";
-import { TabComunidades } from "@/components/features/catalogo/TabComunidades";
 import { TabNormativa } from "@/components/features/catalogo/TabNormativa";
 import { TabIncual } from "@/components/features/catalogo/TabIncual";
 import { useTranslation } from "react-i18next";
 import { useAppStore } from "@/store/useAppStore";
 
-type Tab = "familias" | "titulo" | "cursos" | "modulos" | "comunidades" | "incual";
+type Tab = "familias" | "titulo" | "cursos" | "modulos" | "incual";
 
 
 export default function CiclosPage() {
@@ -47,7 +46,7 @@ function CiclosContent() {
 
   const tabParam = searchParams.get("tab") as Tab | null;
   const [activeTab, setActiveTab] = useState<Tab>(
-    tabParam && ["comunidades", "familias", "titulo", "cursos", "modulos", "incual"].includes(tabParam) ? tabParam : "comunidades"
+    tabParam && ["familias", "titulo", "cursos", "modulos", "incual"].includes(tabParam) ? tabParam : "familias"
   );
 
   const [globalSelection, setGlobalSelection] = useState(() => {
@@ -106,7 +105,6 @@ function CiclosContent() {
     titulo: t('tabs.titulos', {defaultValue: 'Títulos'}),
     cursos: t('tabs.modulos', {defaultValue: 'Módulos'}),
     modulos: 'RA → CE',
-    comunidades: t('tabs.comunidades', {defaultValue: 'Comunidades'}),
     incual: "ECP INCUAL"
   };
 
@@ -130,7 +128,6 @@ function CiclosContent() {
               <TabsList className="mb-2 max-w-full">
                 {(
                   [
-                    { id: "comunidades" as Tab, label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-success" /> {t('tabs.comunidades', {defaultValue: 'Comunidades'})}</span> },
                     { id: "familias" as Tab, label: <span className="flex items-center gap-2"><FolderTree className="w-4 h-4" /> {t('tabs.familias', {defaultValue: 'Familias'})}</span> },
                     { id: "titulo" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> {t('tabs.titulos', {defaultValue: 'Títulos'})}</span> },
                     { id: "cursos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> {t('tabs.modulos', {defaultValue: 'Módulos'})}</span> },
@@ -151,8 +148,7 @@ function CiclosContent() {
                 'titulo': { desc: 'Normativa estatal básica y currículo autonómico para ciclos formativos.' },
                 'cursos': { desc: 'Bloques de especialización y contenidos asociados a cada curso académico.' },
                 'modulos': { desc: 'Competencias específicas estructuradas en RA y CE (Art. 136, RD 659/2023).' },
-                'incual': { desc: 'Estándares de Competencia Profesional (ECP) del Catálogo Nacional (INCUAL).' },
-                'comunidades': { desc: 'Currículos autonómicos de FP: 17 CCAA + Ceuta y Melilla. DEMO usa BOA (Aragón).' }
+                'incual': { desc: 'Estándares de Competencia Profesional (ECP) del Catálogo Nacional (INCUAL).' }
               };
               const info = infoMap[activeTab] || { desc: 'Catálogo Nacional Oficial.' };
               return (
@@ -170,7 +166,6 @@ function CiclosContent() {
             {activeTab === "cursos" && <TabCursos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} onSelectModulo={handleSelectModulo} />}
             {activeTab === "modulos" && <TabModulos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
             {activeTab === "incual" && <TabIncual globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
-            {activeTab === "comunidades" && <TabComunidades />}
           </MotionWrapper>
         </div>
       </main>

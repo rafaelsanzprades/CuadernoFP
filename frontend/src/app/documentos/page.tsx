@@ -26,13 +26,13 @@ type DocumentItem = {
 export default function DocumentosPage() {
   const { t } = useTranslation();
   const TABS = [
-    { id: "Bibliografía", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> Bibliografía</span>, cleanLabel: 'Bibliografía' },
+    { id: "Bibliografia", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> Bibliografia</span>, cleanLabel: 'Bibliografia' },
     { id: "Normativa", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.normativa', {defaultValue: 'Normativa'})}</span>, cleanLabel: t('tabs.normativa', {defaultValue: 'Normativa'}) },
     { id: "Plantillas", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.plantillas', {defaultValue: 'Plantillas'})}</span>, cleanLabel: t('tabs.plantillas', {defaultValue: 'Plantillas'}) },
     { id: "Currículos", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> {t('tabs.curriculos', {defaultValue: 'Currículos'})}</span>, cleanLabel: t('tabs.curriculos', {defaultValue: 'Currículos'}) },
     { id: "Autores", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> {t('tabs.autores', {defaultValue: 'Autores'})}</span>, cleanLabel: t('tabs.autores', {defaultValue: 'Autores'}) }
   ];
-  const [activeTab, setActiveTab] = useState("Bibliografía");
+  const [activeTab, setActiveTab] = useState("Bibliografia");
   const [currentPath, setCurrentPath] = useState<string>("");
   const [items, setItems] = useState<DocumentItem[]>([]);
   const [loadingDocs, setLoadingDocs] = useState<boolean>(true);
@@ -71,7 +71,7 @@ export default function DocumentosPage() {
 
   useEffect(() => {
     const folderMap: Record<string, string> = {
-      "bibliografia": "Bibliografía",
+      "bibliografia": "Bibliografia",
       "plantillas": "Plantillas",
       "curriculos": "Currículos",
       "normativa": "Normativa",
@@ -81,7 +81,7 @@ export default function DocumentosPage() {
       setActiveTab(folderMap[activeTab]);
       return;
     }
-    if (activeTab === "Bibliografía") {
+    if (activeTab === "Bibliografia") {
       setItems([]);
       setLoadingDocs(false);
       setError(null);
@@ -257,7 +257,7 @@ export default function DocumentosPage() {
             <div className="space-y-3 animate-in fade-in duration-500">
               {(() => {
                 const infoMap: Record<string, {desc: string}> = {
-                  'Bibliografía': { desc: 'Legislación base y referencias normativas del catálogo.' },
+                  'Bibliografia': { desc: 'Legislación base y referencias normativas del catálogo.' },
                   'Plantillas': { desc: 'Formatos base recomendados por la administración educativa para programaciones.' },
                   'Currículos': { desc: 'Disposiciones normativas que fijan las enseñanzas mínimas de cada título.' },
                   'Normativa': { desc: 'Leyes orgánicas, reales decretos y órdenes ministeriales vigentes.' },
@@ -314,7 +314,7 @@ export default function DocumentosPage() {
                 </div>
               </Card>
 
-              {activeTab === 'Bibliografía' ? (
+              {activeTab === 'Bibliografia' ? (
                 <div className="w-full">
                   <TabNormativa />
                 </div>

@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/Card";
 import { Landmark, Map, FileText, ChevronDown, ChevronUp, Info } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { TabGrados } from "@/components/features/catalogo/TabGrados";
+import { TabComunidades } from "@/components/features/catalogo/TabComunidades";
 
 interface NormativaItem {
   id: string;
@@ -152,6 +153,7 @@ export function TabNormativa() {
   return (
     <div className="space-y-8 animate-fade-in">
       <TabGrados />
+      <TabComunidades />
 
       <Card className="border-border/50 bg-[var(--glass-bg)] overflow-hidden transition-all">
         <button
