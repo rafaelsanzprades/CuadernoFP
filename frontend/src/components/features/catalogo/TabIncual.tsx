@@ -74,33 +74,33 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
 
   return (
     <div className="space-y-6">
-      {/* Cabecera Familia */}
-      <Card className="p-6 bg-gradient-to-br from-card to-accent/5">
-        <div className="flex items-start justify-between">
-          <div>
-            <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-              <Award className="w-6 h-6 text-purple-500" />
-              {globalSelection.familia}
-            </h2>
-            <p className="mt-2 text-sm text-muted line-clamp-3">
-              {incualData.description || 'Sin descripción disponible.'}
-            </p>
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+        {/* Cabecera Familia */}
+        <Card className="p-6 bg-gradient-to-br from-card to-accent/5 lg:col-span-2 flex flex-col justify-center">
+          <div className="flex items-start justify-between">
+            <div>
+              <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
+                <Award className="w-6 h-6 text-purple-500 shrink-0" />
+                <span className="line-clamp-1">{globalSelection.familia}</span>
+              </h2>
+              <p className="mt-2 text-sm text-muted line-clamp-2">
+                {incualData.description || 'Sin descripción disponible.'}
+              </p>
+            </div>
           </div>
-        </div>
-      </Card>
+        </Card>
 
-      {/* Oferta Formativa */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card className="p-4 border-l-4 border-l-blue-500">
-          <h3 className="font-semibold flex items-center gap-2"><BookOpen className="w-4 h-4 text-blue-500" /> Grado C (Certificados)</h3>
+        {/* Oferta Formativa */}
+        <Card className="p-4 border-l-4 border-l-blue-500 lg:col-span-1 flex flex-col justify-center">
+          <h3 className="font-semibold flex items-center gap-2 text-sm"><BookOpen className="w-4 h-4 text-blue-500 shrink-0" /> Grado C (Certificados)</h3>
           <p className="text-2xl font-bold mt-2">{incualData.oferta_grado_c?.length || 0}</p>
         </Card>
-        <Card className="p-4 border-l-4 border-l-green-500">
-          <h3 className="font-semibold flex items-center gap-2"><BookOpen className="w-4 h-4 text-green-500" /> Grado D (Ciclos)</h3>
+        <Card className="p-4 border-l-4 border-l-green-500 lg:col-span-1 flex flex-col justify-center">
+          <h3 className="font-semibold flex items-center gap-2 text-sm"><BookOpen className="w-4 h-4 text-green-500 shrink-0" /> Grado D (Ciclos)</h3>
           <p className="text-2xl font-bold mt-2">{incualData.oferta_grado_d?.length || 0}</p>
         </Card>
-        <Card className="p-4 border-l-4 border-l-purple-500">
-          <h3 className="font-semibold flex items-center gap-2"><BookOpen className="w-4 h-4 text-purple-500" /> Grado E (Especialización)</h3>
+        <Card className="p-4 border-l-4 border-l-purple-500 lg:col-span-1 flex flex-col justify-center">
+          <h3 className="font-semibold flex items-center gap-2 text-sm"><BookOpen className="w-4 h-4 text-purple-500 shrink-0" /> Grado E (Especialización)</h3>
           <p className="text-2xl font-bold mt-2">{incualData.oferta_grado_e?.length || 0}</p>
         </Card>
       </div>
