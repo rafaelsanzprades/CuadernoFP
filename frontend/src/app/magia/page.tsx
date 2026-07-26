@@ -1,6 +1,6 @@
 "use client";
-import { TabSync } from "@/components/ui/TabSync";
-import { AlertTriangle, BarChart, BookOpen, Calculator, Calendar, CalendarDays, ChevronRight, ChevronDown, Construction, CornerLeftUp, Download, DownloadCloud, File, FileEdit, FileSpreadsheet, FileText, Folder, FolderOpen, GraduationCap, MapPin, Play, Scale, Search, Settings, Sparkles, UploadCloud, User, Users, X, Info } from "lucide-react";
+import { AccordionBlock } from "@/components/ui/AccordionBlock";
+import { AlertTriangle, BarChart, BookOpen, Calculator, Calendar, CalendarDays, ChevronRight, ChevronDown, Construction, CornerLeftUp, Download, DownloadCloud, File, FileEdit, FileSpreadsheet, FileText, Folder, FolderOpen, GraduationCap, MapPin, Play, Scale, Search, Settings, Sparkles, UploadCloud, User, Users, X, Info, PenTool } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -15,7 +15,7 @@ import { Skeleton } from "@/components/ui/Skeleton";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-
+import { BurocraciaTab } from "@/components/features/modulo/BurocraciaTab";
 import Link from "next/link";
 
 type DocumentItem = {
@@ -26,7 +26,6 @@ type DocumentItem = {
 };
 
 export default function MagiaPage() {
-  const [activeTab, setActiveTab] = useState("programacion");
   // State for Explorador
   const [currentPath, setCurrentPath] = useState<string>("");
   const [items, setItems] = useState<DocumentItem[]>([]);
@@ -52,19 +51,19 @@ export default function MagiaPage() {
   const [comparativaPdContent, setComparativaPdContent] = useState("");
 
   useEffect(() => {
-    if (activeTab === "guia_pd" && !guiaPdContent) {
+    if (!guiaPdContent) {
       fetch("/Guia_PD.md")
         .then(res => res.text())
         .then(text => setGuiaPdContent(text))
         .catch(err => console.error("Error cargando Guia_PD.md", err));
     }
-    if (activeTab === "comparativa_pd" && !comparativaPdContent) {
+    if (!comparativaPdContent) {
       fetch("/Comparativa_PD.md")
         .then(res => res.text())
         .then(text => setComparativaPdContent(text))
         .catch(err => console.error("Error cargando Comparativa_PD.md", err));
     }
-  }, [activeTab, guiaPdContent, comparativaPdContent]);
+  }, [guiaPdContent, comparativaPdContent]);
 
   const fetchDocuments = (path: string) => {
     setLoadingDocs(true);
@@ -317,20 +316,11 @@ export default function MagiaPage() {
   const activeAlumnado = df_al.filter((al: Alumnado) => al.Estado !== "Baja");
   activeAlumnado.sort((a: Alumnado, b: Alumnado) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
 
-  const TABS = [
-    { id: "programacion", label: "Programación", cleanLabel: "Programación" },
-    { id: "guia_pd", label: "Guía PD", cleanLabel: "Guía PD" },
-    { id: "comparativa_pd", label: "Comparativa PD", cleanLabel: "Comparativa PD" },
-  ];
-
-  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
-
   return (
     <div className="flex min-h-screen bg-background">
-      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
       <main id="main-content" tabIndex={-1} className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header breadcrumbSuffix={activeTabCleanLabel} />
+        <Header />
 
         <div className="flex-1 overflow-y-auto scrollbar-hide relative">
           {previewUrl ? (
@@ -376,47 +366,19 @@ export default function MagiaPage() {
               </div>
             </div>
 
-            <Tabs value={activeTab} onValueChange={(val: any) => setActiveTab(val)}>
-              <TabsList className="mb-3 max-w-full flex-wrap h-auto">
-                <TabsTrigger value="programacion">
-                  <div className="flex items-center gap-2"><FileText className="w-4 h-4" /> Programación</div>
-                </TabsTrigger>
-                <TabsTrigger value="guia_pd">
-                  <div className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Guía PD</div>
-                </TabsTrigger>
-                <TabsTrigger value="comparativa_pd">
-                  <div className="flex items-center gap-2"><Scale className="w-4 h-4" /> Comparativa PD</div>
-                </TabsTrigger>
-              </TabsList>
-            </Tabs>
-                    {(() => {
-                const infoMap: Record<string, {title: string, desc: string}> = {
-          'programacion': {
-                    'title': 'Magia - Programación',
-                    'desc': 'Generación de la programación didáctica completa en PDF y comparativas.'
-          },
-          'guia_pd': {
-                    'title': 'Guía PD (Referencia Cruzada)',
-                    'desc': 'Mapa de correspondencias entre la plantilla oficial y los campos en CuadernoFP.'
-          },
-          'comparativa_pd': {
-                    'title': 'Comparativa PD (3 Modelos)',
-                    'desc': 'Comparación campo a campo de los 3 niveles de programación didáctica: PD-, PD= y PD+.'
-          }
-};
-                const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
-                return (
-    <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
-                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
-                    <div>
-                      <p className="text-sm text-muted">{info.desc}</p>
-                    </div>
-                  </div>
-                );
-              })()}
+            <div className="space-y-4">
+              <AccordionBlock
+                title="Burocracia"
+                icon={<PenTool className="w-5 h-5" />}
+                defaultOpen={true}
+              >
+                <BurocraciaTab />
+              </AccordionBlock>
 
-            {['programacion'].includes(activeTab) && (
-              <div className="space-y-4 animate-in fade-in duration-500">
+              <AccordionBlock
+                title="Programación"
+                icon={<FileText className="w-5 h-5" />}
+              >
                 {(!activeCursoId || !activeModuleId) ? (
                   <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                     <FileText className="w-16 h-16 text-muted-foreground opacity-50" />
@@ -439,95 +401,92 @@ export default function MagiaPage() {
                     </div>
                   </Card>
                 ) : (
-                  <>
-                    {activeTab === 'programacion' && (
-                      <div className="space-y-4 animate-in fade-in duration-500">
-                        {["Andalucía","Aragón","Asturias","Baleares","Canarias","Cantabria","Castilla-La Mancha","Castilla y León","Cataluña","Comunidad Valenciana","Extremadura","Galicia","Madrid","Murcia","Navarra","País Vasco","La Rioja","Ceuta","Melilla"].map((comunidad) => {
-                          const isAragon = comunidad === "Aragón";
-                          return (
-                            <details key={comunidad} open={isAragon} className="group border border-[var(--glass-border)] rounded-xl bg-background/50 mb-4 shadow-sm overflow-hidden">
-                              <summary className="p-4 font-bold cursor-pointer text-lg flex items-center justify-between hover:bg-foreground/5 transition-colors list-none border-b border-transparent group-open:border-[var(--glass-border)] group-open:bg-foreground/5">
-                                <span className="flex items-center gap-2"><MapPin className={`w-5 h-5 ${isAragon ? 'text-purple-500' : 'text-muted-foreground'}`} /> {comunidad}</span>
-                                <ChevronDown className="w-5 h-5 transition-transform group-open:rotate-180 text-muted" />
-                              </summary>
-                              {isAragon ? (
-                                <div className="p-6">
-                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-slate-400">
-                                      <div>
-                                        <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Resumen de la Programación didáctica para el alumnado</h3>
-                                        <p className="text-sm text-muted mb-6">Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.</p>
-                                      </div>
-                                      <div className="flex gap-2 mt-auto">
-                                        <Button onClick={() => handleDownloadPdf('programacion_minima_tpl', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_minima_tpl_docx'} className="flex-1 bg-slate-600 hover:bg-slate-700 text-white">
-                                          {downloadingStr === 'programacion_minima_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD Resumen.docx'}
-                                        </Button>
-                                      </div>
-                                    </div>
-
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-blue-400">
-                                      <div>
-                                        <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica Aragón (BOA nº: 181 de 18 de septiembre de 2025)</h3>
-                                        <p className="text-sm text-muted mb-6">Versión BOA con los puntos de la Ley muy específica y concreta (no detalla secuenciación de aula ni extensa teoría).</p>
-                                      </div>
-                                      <div className="flex gap-2 mt-auto">
-                                        <Button onClick={() => handleDownloadPdf('programacion_suficiente_tpl', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_suficiente_tpl_docx'} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
-                                          {downloadingStr === 'programacion_suficiente_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD BOA Aragón.docx'}
-                                        </Button>
-                                      </div>
-                                    </div>
-
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-info">
-                                      <div>
-                                        <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica ARAGÓN (Modelo Oficial)</h3>
-                                        <p className="text-sm text-muted mb-6">Se cumplimenta el modelo oficial de programación completo.</p>
-                                      </div>
-                                      <div className="flex flex-col gap-2 mt-auto">
-                                        <Button variant="secondary" onClick={() => handleDownloadPdf('plantilla_jeg', undefined, undefined, 'docx')} disabled={downloadingStr === 'plantilla_jeg_docx'} className="w-full">
-                                          {downloadingStr === 'plantilla_jeg_docx' ? '⏳ Descargando...' : 'Modelo PD JEG original'}
-                                        </Button>
-                                        <Button onClick={() => handleDownloadPdf('programacion_jeg', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_jeg_docx'} className="w-full bg-info hover:bg-info/90 text-white">
-                                          {downloadingStr === 'programacion_jeg_docx' ? '⏳ Generando DOCX...' : 'Descargar PD JEG cumplimentada.docx'}
-                                        </Button>
-                                      </div>
-                                    </div>
+                  <div className="space-y-4 animate-in fade-in duration-500 mt-4">
+                    {["Andalucía","Aragón","Asturias","Baleares","Canarias","Cantabria","Castilla-La Mancha","Castilla y León","Cataluña","Comunidad Valenciana","Extremadura","Galicia","Madrid","Murcia","Navarra","País Vasco","La Rioja","Ceuta","Melilla"].map((comunidad) => {
+                      const isAragon = comunidad === "Aragón";
+                      return (
+                        <details key={comunidad} open={isAragon} className="group border border-[var(--glass-border)] rounded-xl bg-background/50 mb-4 shadow-sm overflow-hidden">
+                          <summary className="p-4 font-bold cursor-pointer text-lg flex items-center justify-between hover:bg-foreground/5 transition-colors list-none border-b border-transparent group-open:border-[var(--glass-border)] group-open:bg-foreground/5">
+                            <span className="flex items-center gap-2"><MapPin className={`w-5 h-5 ${isAragon ? 'text-purple-500' : 'text-muted-foreground'}`} /> {comunidad}</span>
+                            <ChevronDown className="w-5 h-5 transition-transform group-open:rotate-180 text-muted" />
+                          </summary>
+                          {isAragon ? (
+                            <div className="p-6">
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-slate-400">
+                                  <div>
+                                    <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Resumen de la Programación didáctica para el alumnado</h3>
+                                    <p className="text-sm text-muted mb-6">Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.</p>
+                                  </div>
+                                  <div className="flex gap-2 mt-auto">
+                                    <Button onClick={() => handleDownloadPdf('programacion_minima_tpl', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_minima_tpl_docx'} className="flex-1 bg-slate-600 hover:bg-slate-700 text-white">
+                                      {downloadingStr === 'programacion_minima_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD Resumen.docx'}
+                                    </Button>
                                   </div>
                                 </div>
-                              ) : (
-                                <div className="p-12 text-center text-muted-foreground">
-                                  <Construction className="w-12 h-12 mx-auto mb-4 opacity-20" />
-                                  <p>Programaciones específicas para {comunidad} próximamente.</p>
-                                </div>
-                              )}
-                            </details>
-                          );
-                        })}
 
-                        <Card className="p-6 border-t-4 border-t-blue-500">
-                          <h2 className="text-2xl font-bold mb-1"><span className="inline-flex"><CalendarDays className="w-4 h-4" /></span> Secuenciación</h2>
-                          <p className="text-sm text-muted mb-6">Planificación temporal del módulo</p>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                              <div>
-                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Planificación mensual</h3>
-                                <p className="text-sm text-muted mb-6">Horas previstas frente a impartidas por UD y mes.</p>
+                                <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-blue-400">
+                                  <div>
+                                    <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica Aragón (BOA nº: 181 de 18 de septiembre de 2025)</h3>
+                                    <p className="text-sm text-muted mb-6">Versión BOA con los puntos de la Ley muy específica y concreta (no detalla secuenciación de aula ni extensa teoría).</p>
+                                  </div>
+                                  <div className="flex gap-2 mt-auto">
+                                    <Button onClick={() => handleDownloadPdf('programacion_suficiente_tpl', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_suficiente_tpl_docx'} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
+                                      {downloadingStr === 'programacion_suficiente_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD BOA Aragón.docx'}
+                                    </Button>
+                                  </div>
+                                </div>
+
+                                <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-info">
+                                  <div>
+                                    <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica ARAGÓN (Modelo Oficial)</h3>
+                                    <p className="text-sm text-muted mb-6">Se cumplimenta el modelo oficial de programación completo.</p>
+                                  </div>
+                                  <div className="flex flex-col gap-2 mt-auto">
+                                    <Button variant="secondary" onClick={() => handleDownloadPdf('plantilla_jeg', undefined, undefined, 'docx')} disabled={downloadingStr === 'plantilla_jeg_docx'} className="w-full">
+                                      {downloadingStr === 'plantilla_jeg_docx' ? '⏳ Descargando...' : 'Modelo PD JEG original'}
+                                    </Button>
+                                    <Button onClick={() => handleDownloadPdf('programacion_jeg', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_jeg_docx'} className="w-full bg-info hover:bg-info/90 text-white">
+                                      {downloadingStr === 'programacion_jeg_docx' ? '⏳ Generando DOCX...' : 'Descargar PD JEG cumplimentada.docx'}
+                                    </Button>
+                                  </div>
+                                </div>
                               </div>
-                              <Button onClick={() => handleDownloadPdf('planificacion')} disabled={downloadingStr === 'planificacion'} className="w-full">
-                                {downloadingStr === 'planificacion' ? '⏳ Generando PDF...' : 'PDF Planificación'}
-                              </Button>
                             </div>
+                          ) : (
+                            <div className="p-12 text-center text-muted-foreground">
+                              <Construction className="w-12 h-12 mx-auto mb-4 opacity-20" />
+                              <p>Programaciones específicas para {comunidad} próximamente.</p>
+                            </div>
+                          )}
+                        </details>
+                      );
+                    })}
+
+                    <Card className="p-6 border-t-4 border-t-blue-500">
+                      <h2 className="text-2xl font-bold mb-1"><span className="inline-flex"><CalendarDays className="w-4 h-4" /></span> Secuenciación</h2>
+                      <p className="text-sm text-muted mb-6">Planificación temporal del módulo</p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                          <div>
+                            <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Planificación mensual</h3>
+                            <p className="text-sm text-muted mb-6">Horas previstas frente a impartidas por UD y mes.</p>
                           </div>
-                        </Card>
+                          <Button onClick={() => handleDownloadPdf('planificacion')} disabled={downloadingStr === 'planificacion'} className="w-full">
+                            {downloadingStr === 'planificacion' ? '⏳ Generando PDF...' : 'PDF Planificación'}
+                          </Button>
+                        </div>
                       </div>
-                    )}
-                  </>
+                    </Card>
+                  </div>
                 )}
-              </div>
-            )}
-            
-            {activeTab === 'guia_pd' && (
-              <div className="space-y-4 animate-in fade-in duration-500">
-                <Card className="p-8 border-t-4 border-t-indigo-500">
+              </AccordionBlock>
+
+              <AccordionBlock
+                title="Guía PD (Referencia Cruzada)"
+                icon={<BookOpen className="w-5 h-5" />}
+              >
+                <Card className="p-8 border-t-4 border-t-indigo-500 mt-4">
                   <div className="prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-th:bg-foreground/5 prose-table:border-collapse prose-table:w-full">
                     {guiaPdContent ? (
                       <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
@@ -540,12 +499,13 @@ export default function MagiaPage() {
                     )}
                   </div>
                 </Card>
-              </div>
-            )}
+              </AccordionBlock>
 
-            {activeTab === 'comparativa_pd' && (
-              <div className="space-y-4 animate-in fade-in duration-500">
-                <Card className="p-8 border-t-4 border-t-amber-500">
+              <AccordionBlock
+                title="Comparativa PD (3 Modelos)"
+                icon={<Scale className="w-5 h-5" />}
+              >
+                <Card className="p-8 border-t-4 border-t-amber-500 mt-4">
                   <div className="prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-th:bg-foreground/5 prose-table:border-collapse prose-table:w-full">
                     {comparativaPdContent ? (
                       <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
@@ -558,8 +518,8 @@ export default function MagiaPage() {
                     )}
                   </div>
                 </Card>
-              </div>
-            )}
+              </AccordionBlock>
+            </div>
 
               </MotionWrapper>
             </div>

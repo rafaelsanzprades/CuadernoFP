@@ -1,5 +1,5 @@
 "use client";
-import { TabSync } from "@/components/ui/TabSync";
+import { AccordionBlock } from "@/components/ui/AccordionBlock";
 import { useTranslation } from "react-i18next";
 import { Calendar, FileEdit, MapPin, ClipboardCheck, AlertTriangle , Info, FolderOpen } from "lucide-react";
 import React, { useEffect, useState } from "react";
@@ -9,10 +9,8 @@ import { useAppStore } from "@/store/useAppStore";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { AsistenciaTab } from "@/components/features/diario/AsistenciaTab";
 import { AlertaAbandonoTab } from "@/components/features/diario/AlertaAbandonoTab";
-import { FeoeTab } from "@/components/features/alumnado/FeoeTab";
 import { TutoriaTab } from "@/components/features/alumnado/TutoriaTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
@@ -23,16 +21,7 @@ export default function SeguimientoPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
-  const [allDiarioOpen, setAllDiarioOpen] = useState(false);
 
-  const TABS = [
-    { id: "tutoria", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> {t('tabs.tutoria')}</span>, cleanLabel: t('tabs.tutoria') },
-    { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> {t('tabs.asistencia')}</span>, cleanLabel: t('tabs.asistencia') },
-    { id: "alerta_abandono", label: <span className="flex items-center gap-2"><AlertTriangle className="w-4 h-4 shrink-0" /> {t('tabs.abandono')}</span>, cleanLabel: t('tabs.abandono') },
-    { id: "feoe", label: <span className="flex items-center gap-2"><AlertTriangle className="w-4 h-4 shrink-0" /> {t('tabs.feoe')}</span>, cleanLabel: t('tabs.feoe') }
-  ];
-  const [activeTab, setActiveTab] = useState("tutoria");
-  const activeTabCleanLabel = TABS.find(t_tab => t_tab.id === activeTab)?.cleanLabel;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,10 +66,9 @@ export default function SeguimientoPage() {
   if (!activeModuleId || !activeCursoId) {
     return (
       <div className="flex min-h-screen bg-background">
-      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
-          <Header breadcrumbSuffix={activeTabCleanLabel} />
+          <Header />
           <main id="main-content" tabIndex={-1} className="flex-1 p-8 content-area">
             <MotionWrapper>
               <div className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
@@ -180,14 +168,6 @@ export default function SeguimientoPage() {
     updateCursoData("daily_ledger", newLedger);
   };
 
-  const infoMap: Record<string, {title: string, desc: string}> = {
-    'tutoria': { title: 'Tutoría', desc: 'Gestión de tutorías con el alumnado.' },
-    'asistencia': { title: 'Asistencia', desc: 'Registro y control de faltas y retrasos del alumnado.' },
-    'alerta_abandono': { title: 'Alerta de abandono', desc: 'Sistema de detección temprana y protocolo de abandono.' },
-    'feoe': { title: 'FEOE', desc: 'Ficha de Evaluación Orientadora y Evolutiva.' }
-  };
-  const currentInfo = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
-
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar />
@@ -200,38 +180,32 @@ export default function SeguimientoPage() {
               <h1 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-3">
                 <span className="inline-flex"><MapPin className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguimiento
               </h1>
-              <p className="text-muted mt-2 text-sm">Tutoría, asistencia, abandonos y FEOE.</p>
+              <p className="text-muted mt-2 text-sm">Tutoría, asistencia y abandonos.</p>
             </div>
 
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="mb-2 max-w-full">
-              {TABS.map(tab => (
-                <TabsTrigger key={tab.id} value={tab.id}>
-                  {tab.label}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
+            <div className="space-y-4">
+              <AccordionBlock
+                title="Tutoría"
+                icon={<ClipboardCheck className="w-5 h-5" />}
+                defaultOpen={true}
+              >
+                <div className="mt-4"><TutoriaTab /></div>
+              </AccordionBlock>
 
+              <AccordionBlock
+                title="Asistencia"
+                icon={<ClipboardCheck className="w-5 h-5" />}
+              >
+                <div className="mt-4"><AsistenciaTab /></div>
+              </AccordionBlock>
 
-                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
-                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
-                    <div>
-                      <p className="text-sm text-muted">{currentInfo.desc}</p>
-                    </div>
-                  </div>
-          {activeTab === "tutoria" && <TutoriaTab />}
-
-          {activeTab === "asistencia" && (
-            <AsistenciaTab />
-          )}
-
-          {activeTab === "alerta_abandono" && (
-            <AlertaAbandonoTab />
-          )}
-
-          {activeTab === "feoe" && <FeoeTab />}
-
+              <AccordionBlock
+                title="Alerta de abandono"
+                icon={<AlertTriangle className="w-5 h-5" />}
+              >
+                <div className="mt-4"><AlertaAbandonoTab /></div>
+              </AccordionBlock>
+            </div>
           </MotionWrapper>
         </main>
       </div>

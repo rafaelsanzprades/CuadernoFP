@@ -138,9 +138,9 @@ const FAQS = [
     group: "2. Paso 1: La programación didáctica",
     items: [
       { q: "¿Tengo que meter a mano todos los RA y CE del BOE?", a: "¡No! El sistema cuenta con un Catálogo oficial que importa automáticamente la normativa legal (Resultados de aprendizaje y Criterios) de tu módulo. Solo tienes que elegir tu Grado y tu Ciclo Formativo en la sección inicial de Catálogo y el sistema lo hace por ti." },
-      { q: "¿Qué significa que los RA no suman 100% en las verificaciones?", a: "Para que la evaluación continua matemática funcione, cada Resultado de Aprendizaje (RA) debe tener un 'peso' o importancia. La suma total de los pesos de todos los RA de un módulo debe ser exactamente 100%. Debes ajustar esto en la pestaña 'Matrices'." },
-      { q: "¿Cómo configuro las horas que el alumnado pasa en la empresa (FP Dual)?", a: "En la pestaña 'Dual' del módulo, debes elegir si tu régimen es General (25-35%) o Intensivo (35-50%). A continuación, usa los deslizadores para repartir el porcentaje de cada Resultado de Aprendizaje entre el Centro Educativo y la Empresa. El sistema calculará las horas totales y te avisará si no cumples el mínimo legal." },
-      { q: "¿Para qué sirve la pestaña EQAVET?", a: "Sirve para integrar el ciclo de mejora continua europeo en tu programación. A final de curso, autoevalúas los indicadores de calidad y anotas tus propuestas de mejora para el próximo año." }
+      { q: "¿Qué significa que los RA no suman 100% en las verificaciones?", a: "Para que la evaluación continua matemática funcione, cada Resultado de Aprendizaje (RA) debe tener un 'peso' o importancia. La suma total de los pesos de todos los RA de un módulo debe ser exactamente 100%. Debes ajustar esto en Programación > Currículo > pestaña 'RA y CE'." },
+      { q: "¿Cómo configuro las horas que el alumnado pasa en la empresa (FP Dual)?", a: "En Programación > Metodología > bloque 'FP Dual', debes elegir si tu régimen es General o Intensivo. A continuación, usa los deslizadores para repartir el porcentaje de cada Resultado de Aprendizaje entre el Centro Educativo y la Empresa." },
+      { q: "¿Para qué sirve el apartado EQAVET?", a: "Sirve para integrar el ciclo de mejora continua europeo en tu programación. Lo encontrarás como un bloque dentro de Metodología. A final de curso, autoevalúas los indicadores de calidad y anotas tus propuestas de mejora para el próximo año." }
     ]
   },
   {
@@ -157,9 +157,9 @@ const FAQS = [
     group: "4. Paso 5: El día a día y la evaluación",
     items: [
       { q: "¿Qué es el 'Diario de aula'?", a: "Es tu cuaderno de bitácora diario. Te permite anotar lo que ocurre en cada sesión real de clase: qué UD has impartido, si ha habido incidencias o marcar días 'Sin docencia' (como huelgas o claustros) para que no cuenten en tu progreso." },
-      { q: "¿Cómo paso lista o registro faltas de asistencia?", a: "En la sección de Diario tienes un 'Control de Asistencia'. Verás a todo tu alumnado y con un solo clic en su cuadrícula puedes alternar entre Falta, Retraso o Falta Justificada." },
-      { q: "¿Cómo evalúo una tarea o examen concreto?", a: "Ve a la sección 'Calificaciones' para introducir notas enteras (1 al 10, sin decimales) en la Matriz de Notas cruzando Indicadores/Instrumentos con el alumnado." },
-      { q: "¿Cómo se calcula exactamente la nota final del trimestre?", a: "El sistema cruza las calificaciones que pones en los Instrumentos con el peso del Indicador, que a su vez alimenta el peso del Criterio de Evaluación (CE) y finalmente el Resultado de Aprendizaje (RA). Todo en tiempo real." }
+      { q: "¿Cómo paso lista o registro faltas de asistencia?", a: "En la sección de Seguimiento tienes la pestaña 'Asistencia'. Verás a todo tu alumnado y con un solo clic en su cuadrícula puedes alternar entre Falta, Retraso o Falta Justificada." },
+      { q: "¿Cómo evalúo una tarea o examen concreto?", a: "Ve a la sección 'Calificaciones' > pestaña 'Matriz' para introducir notas enteras (1 al 10, sin decimales) cruzando Indicadores/Instrumentos con el alumnado." },
+      { q: "¿Cómo se calcula exactamente la nota final del trimestre?", a: "El sistema cruza las calificaciones que pones en los Instrumentos con el peso del Indicador (Evaluación > bloque Indicadores), que a su vez alimenta el peso del Criterio de Evaluación (CE) y finalmente el Resultado de Aprendizaje (RA). Todo en tiempo real." }
     ]
   },
   {
@@ -225,331 +225,12 @@ export default function InicioPage() {
     }
   }, [activeTab, ideasContent, isLoadingIdeas]);
 
-  // ── Comprobaciones Programación didáctica ────────────────────────────
-  const m = moduleData;
 
-  const udCount = m?.df_ud?.length ?? 0;
-  const udHoras = (m?.df_ud ?? []).reduce((a: number, u: any) => a + (parseFloat(String(u.horas_ud ?? 0)) || 0), 0);
-  const moduloHoras = parseFloat(String(m?.info_modulo?.horas_totales ?? 0)) || 0;
-  const horasDiff = Math.abs(udHoras - moduloHoras);
-
-  const raCount = m?.df_ra?.length ?? 0;
-  const raPesoSum = sumPesos(m?.df_ra ?? [], "peso_ra");
-
-  const ceList = m?.df_ce ?? [];
-  const ceCount = ceList.length;
-  const ceHuerfanos = ceList.filter((ce: any) => {
-    if (!ce.id_ra) return true;
-    return !(m?.df_ra ?? []).some((ra: any) => ra.id_ra === ce.id_ra);
-  }).length;
-  const ceSinUD = ceList.filter((ce: any) => {
-    if (!ce.id_ud) return true;
-    return !(m?.df_ud ?? []).some((ud: any) => ud.id_ud === ce.id_ud);
-  }).length;
-
-  const actCount = m?.df_instr?.length ?? 0;
-  
-  const indsList = m?.df_indicadores ?? [];
-  const indCount = indsList.length;
-  const indSinCE = indsList.filter((ind: any) => {
-    return !ceList.some((ce: any) => ind.id_ce === ce.id_ce);
-  }).length;
-
-  const tareasCount = m?.df_tareas?.length ?? 0;
-  const tareasSinRA = (m?.df_tareas ?? []).filter((t: any) => {
-    if (!t.RA_Asociados) return true;
-    if ((m?.df_ra ?? []).length === 0) return true;
-    return false;
-  }).length;
-
-  const sesionesCount = m?.df_sesiones?.length ?? 0;
-  const sesionesSinUD = (m?.df_sesiones ?? []).filter((s: any) => {
-    if (!s.id_ud) return true;
-    return !(m?.df_ud ?? []).some((ud: any) => ud.id_ud === s.id_ud);
-  }).length;
-
-  const tieneHorario = !!(cursoData?.horario && Object.keys(cursoData.horario).length > 0);
-  const tieneFechas = !!(cursoData?.info_fechas && Object.keys(cursoData.info_fechas).length > 0);
-  const tieneContexto = !!(m?.config_contexto && Object.keys(m.config_contexto).length > 0);
-
-  const moduleChecks: CheckItem[] = [
-    {
-      id: "modulo",
-      icon: <BookOpen className="w-5 h-5" />,
-      title: "Módulo didáctico",
-      href: "/modulo",
-      hrefLabel: "Módulo didáctico",
-      status: !m ? "empty" : "ok",
-      lines: !m
-        ? ["Sin datos de programación cargados"]
-        : [
-          `Módulo activo: ${activeModuleId}`,
-          `Horas semanales: ${m.info_modulo?.h_sem || "-"} h`,
-          `Horas BOA: ${m.info_modulo?.h_boa || "-"} h`,
-        ],
-      actionHref: !m ? "/modulo" : undefined,
-      actionLabel: !m ? "Configurar módulo" : undefined,
-    },
-    {
-      id: "ud",
-      icon: <Layers className="w-5 h-5" />,
-      title: "Unidades didácticas (UD)",
-      href: "/matrices",
-      hrefLabel: "Matrices OG→RA→CE→UD/T",
-      status: udCount === 0 ? "empty" : horasDiff > 2 ? "warning" : "ok",
-      lines: udCount === 0
-        ? ["No hay UD definidas"]
-        : [
-          `${udCount} UD definidas`,
-          `Horas declaradas: ${udHoras} / ${moduloHoras || "-"} h del módulo`,
-          horasDiff > 2 ? `Diferencia de ${horasDiff} h` : "Horas cuadran correctamente",
-        ],
-      actionHref: udCount === 0 ? "/matrices" : undefined,
-      actionLabel: udCount === 0 ? "Añadir primera UD" : undefined,
-    },
-    {
-      id: "ra",
-      icon: <GraduationCap className="w-5 h-5" />,
-      title: "Resultados de aprendizaje (RA)",
-      href: "/matrices",
-      hrefLabel: "Matrices OG→RA→CE→UD/T",
-      status: raCount === 0 ? "empty" : Math.abs(raPesoSum - 100) > 1 ? "warning" : "ok",
-      lines: raCount === 0
-        ? ["No hay RA definidos"]
-        : [
-          `${raCount} RA definidos`,
-          `Suma de pesos: ${raPesoSum.toFixed(1)}% ${Math.abs(raPesoSum - 100) > 1 ? "(⚠️ no suman 100%)" : "(✅)"}`,
-        ],
-      actionHref: raCount === 0 ? "/matrices" : undefined,
-      actionLabel: raCount === 0 ? "Añadir primer RA" : undefined,
-    },
-    {
-      id: "ce",
-      icon: <ClipboardList className="w-5 h-5" />,
-      title: "Criterios de evaluación (CE)",
-      href: "/matrices",
-      hrefLabel: "Matrices OG→RA→CE→UD/T",
-      status: ceCount === 0 ? "empty" : (ceHuerfanos > 0 || ceSinUD > 0) ? "warning" : "ok",
-      lines: ceCount === 0
-        ? ["No hay CE definidos"]
-        : [
-          `${ceCount} CE definidos`,
-          ceHuerfanos > 0 ? `${ceHuerfanos} CE sin RA asignado` : "Todos los CE tienen RA",
-          ceSinUD > 0 ? `${ceSinUD} CE sin UD asignada` : "Todos los CE tienen UD",
-        ],
-      actionHref: (ceHuerfanos > 0 || ceSinUD > 0) ? "/matrices" : undefined,
-      actionLabel: (ceHuerfanos > 0 || ceSinUD > 0) ? "Revisar asignaciones" : undefined,
-    },
-    {
-      id: "instr",
-      icon: <Wrench className="w-5 h-5" />,
-      title: "Instrumentos e Indicadores",
-      href: "/instrumentos",
-      hrefLabel: "Instrumentos",
-      status: (actCount === 0 || indCount === 0) ? "empty" : indSinCE > 0 ? "warning" : "ok",
-      lines: (actCount === 0 || indCount === 0)
-        ? ["No hay instrumentos o indicadores"]
-        : [
-          `${actCount} instrumentos y ${indCount} indicadores`,
-          indSinCE > 0 ? `${indSinCE} indicadores sin CE asociado` : "Todos los indicadores evalúan algún CE",
-        ],
-      actionHref: (actCount === 0 || indCount === 0) ? "/instrumentos" : undefined,
-      actionLabel: (actCount === 0 || indCount === 0) ? "Añadir instrumento" : undefined,
-    },
-    {
-      id: "tareas",
-      icon: <FileText className="w-5 h-5" />,
-      title: "Tareas y actividades",
-      href: "/secuenciacion",
-      hrefLabel: "Programación de aula",
-      status: tareasCount === 0 ? "empty" : tareasSinRA > 0 ? "warning" : "ok",
-      lines: tareasCount === 0
-        ? ["No hay tareas definidas"]
-        : [
-          `${tareasCount} tareas definidas`,
-          tareasSinRA > 0 ? `${tareasSinRA} tareas sin RA asociado` : "Todas las tareas tienen RA",
-        ],
-      actionHref: tareasCount === 0 ? "/secuenciacion" : undefined,
-      actionLabel: tareasCount === 0 ? "Crear primera tarea" : undefined,
-    },
-    {
-      id: "sesiones",
-      icon: <CalendarDays className="w-5 h-5" />,
-      title: "Sesiones de clase",
-      href: "/secuenciacion",
-      hrefLabel: "Programación de aula",
-      status: sesionesCount === 0 ? "empty" : sesionesSinUD > 0 ? "warning" : "ok",
-      lines: sesionesCount === 0
-        ? ["No hay sesiones planificadas"]
-        : [
-          `${sesionesCount} sesiones planificadas`,
-          sesionesSinUD > 0 ? `${sesionesSinUD} sesiones sin UD asignada` : "Todas las sesiones tienen UD",
-        ],
-      actionHref: sesionesCount === 0 ? "/secuenciacion" : undefined,
-      actionLabel: sesionesCount === 0 ? "Planificar sesiones" : undefined,
-    },
-    {
-      id: "contexto",
-      icon: <BookOpen className="w-5 h-5" />,
-      title: "Contexto del módulo",
-      href: "/modulo",
-      hrefLabel: "Módulo didáctico",
-      status: tieneContexto ? "ok" : "empty",
-      lines: tieneContexto
-        ? ["Contexto del aula configurado"]
-        : ["Sin descripción de contexto ni configuración de aula"],
-      actionHref: !tieneContexto ? "/modulo" : undefined,
-      actionLabel: !tieneContexto ? "Añadir contexto" : undefined,
-    },
-    {
-      id: "dual",
-      icon: <Building2 className="w-5 h-5" />,
-      title: "FP Dual",
-      href: "/modulo?tab=dual",
-      hrefLabel: "Módulo didáctico",
-      status: (m?.dual_regimen && m.dual_regimen !== "ninguno") ? "ok" : "empty",
-      lines: (m?.dual_regimen && m.dual_regimen !== "ninguno")
-        ? [`Régimen: Dual ${m.dual_regimen === 'general' ? 'General' : 'Intensivo'}`]
-        : ["Régimen tradicional (sin FP Dual configurada)"],
-      actionHref: "/modulo?tab=dual",
-      actionLabel: "Configurar FP Dual",
-    },
-    {
-      id: "eqavet",
-      icon: <Shield className="w-5 h-5" />,
-      title: "Calidad EQAVET",
-      href: "/modulo?tab=eqavet",
-      hrefLabel: "Módulo didáctico",
-      status: (m?.eqavet_evaluacion && Object.keys(m.eqavet_evaluacion).length > 0) ? "ok" : "empty",
-      lines: (m?.eqavet_evaluacion && Object.keys(m.eqavet_evaluacion).length > 0)
-        ? [`${Object.keys(m.eqavet_evaluacion).length} indicadores EQAVET valorados`]
-        : ["Sin indicadores EQAVET valorados"],
-      actionHref: "/modulo?tab=eqavet",
-      actionLabel: "Valorar calidad",
-    }
-  ];
-
-  // ── Comprobaciones Curso activo ──────────────────────────────────────
-  const c = cursoData;
-
-  const alumnosCount = c?.df_al?.length ?? 0;
-  const alumnosIncompletos = (c?.df_al ?? []).filter((a: any) => !a.Nombre || !a.Apellidos).length;
-  const sgmtCount = Object.keys(c?.daily_ledger ?? {}).length;
-  const tieneFeoe = (globalData?.crm_empresas?.length ?? 0) > 0;
-  const empresasCount = globalData?.crm_empresas?.length ?? 0;
-  const alumnosAsignados = (globalData?.crm_empresas ?? []).reduce((a: number, e: any) => a + (e.alumnado_asignados?.length ?? 0), 0);
-  const tieneProfesional = !!(c?.profesional_ledger && Object.keys(c.profesional_ledger).length > 0);
-  const tutoriaEntradas = Object.keys(c?.tutoria_ledger ?? {}).length;
-  const planoCount = Object.keys(c?.plano_clase ?? {}).length;
-
-  const evalCount = c?.df_eval?.length ?? 0;
-  const evalTotal = alumnosCount;
-
-  const courseChecks: CheckItem[] = [
-    {
-      id: "calendario",
-      icon: <CalendarDays className="w-5 h-5" />,
-      title: "Calendario académico",
-      href: "/calendario",
-      hrefLabel: "Calendario académico",
-      status: !tieneHorario && !tieneFechas ? "empty" : (!tieneHorario || !tieneFechas) ? "warning" : "ok",
-      lines: [
-        tieneHorario ? "Horario semanal definido" : "Sin horario semanal",
-        tieneFechas ? "Fechas de evaluación configuradas" : "Sin fechas de evaluación",
-      ],
-      actionHref: !tieneHorario ? "/calendario" : undefined,
-      actionLabel: !tieneHorario ? "Configurar calendario" : undefined,
-    },
-    {
-      id: "alumnado",
-      icon: <Users className="w-5 h-5" />,
-      title: "Alumnado y tutoría",
-      href: "/alumnado",
-      hrefLabel: "Alumnado y tutoría",
-      status: alumnosCount === 0 ? "empty" : alumnosIncompletos > 0 ? "warning" : "ok",
-      lines: alumnosCount === 0
-        ? ["No hay alumnado registrado"]
-        : [
-          `${alumnosCount} alumnos registrados`,
-          alumnosIncompletos > 0 ? `${alumnosIncompletos} registros incompletos (sin nombre/apellidos)` : "Todos los registros completos",
-        ],
-      actionHref: alumnosCount === 0 ? "/alumnado" : undefined,
-      actionLabel: alumnosCount === 0 ? "Añadir alumnado" : undefined,
-    },
-    {
-      id: "seguimiento",
-      icon: <ClipboardList className="w-5 h-5" />,
-      title: "Diario de aula",
-      href: "/diario",
-      hrefLabel: "Diario de aula",
-      status: sgmtCount === 0 ? "empty" : "ok",
-      lines: sgmtCount === 0
-        ? ["Sin entradas en el diario de aula"]
-        : [`${sgmtCount} sesiones registradas en el diario`],
-      actionHref: sgmtCount === 0 ? "/diario" : undefined,
-      actionLabel: sgmtCount === 0 ? "Registrar primera sesión" : undefined,
-    },
-    {
-      id: "evaluaciones",
-      icon: <BarChart2 className="w-5 h-5" />,
-      title: "Evaluación (Progreso)",
-      href: "/evaluacion",
-      hrefLabel: "Evaluación",
-      status: evalCount === 0 ? "empty" : evalTotal > 0 && evalCount < evalTotal ? "warning" : "ok",
-      lines: evalCount === 0
-        ? ["Sin calificaciones introducidas"]
-        : [
-          `${evalCount} alumnos con registro de ${evalTotal > 0 ? evalTotal : "?"} posibles (${pct(evalCount, evalTotal)})`,
-          evalTotal > 0 && evalCount < evalTotal
-            ? `Faltan ${evalTotal - evalCount} alumnos por evaluar`
-            : "Todos los alumnos tienen registros de calificación",
-        ],
-      actionHref: evalCount === 0 ? "/evaluacion" : undefined,
-      actionLabel: evalCount === 0 ? "Ir a calificaciones" : undefined,
-    },
-
-    {
-      id: "tutoria",
-      icon: <HeartHandshake className="w-5 h-5" />,
-      title: "Tutoría y alertas",
-      href: "/alumnado",
-      hrefLabel: "Alumnado y tutoría",
-      status: tutoriaEntradas === 0 ? "empty" : "ok",
-      lines: tutoriaEntradas === 0
-        ? ["Sin entradas de tutoría o alertas registradas"]
-        : [`${tutoriaEntradas} entradas de tutoría registradas`],
-      actionHref: tutoriaEntradas === 0 ? "/alumnado" : undefined,
-      actionLabel: tutoriaEntradas === 0 ? "Registrar tutoría" : undefined,
-    },
-    {
-      id: "plano",
-      icon: <Users className="w-5 h-5" />,
-      title: "Plano de clase",
-      href: "/alumnado",
-      hrefLabel: "Plano de clase",
-      status: planoCount === 0 ? "empty" : "ok",
-      lines: planoCount === 0
-        ? ["No hay alumnos ubicados en el plano"]
-        : [`${planoCount} alumnos ubicados en el aula visual`],
-      actionHref: planoCount === 0 ? "/alumnado" : undefined,
-      actionLabel: planoCount === 0 ? "Diseñar aula" : undefined,
-    },
-  ];
-
-  const allChecks = [...moduleChecks, ...courseChecks];
-  const okCount = allChecks.filter(c => c.status === "ok").length;
-  const warnCount = allChecks.filter(c => c.status === "warning").length;
-  const emptyCount = allChecks.filter(c => c.status === "empty").length;
 
   const TABS = [
     { id: "bienvenida", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.bienvenida')}</>, cleanLabel: t('tabs.bienvenida') },
-    { id: "seguridad", label: <><span className="inline-flex"><Shield className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.seguridad')}</>, cleanLabel: t('tabs.seguridad') },
-    { id: "asistente", label: <><span className="inline-flex"><Sparkles className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.asistente')}</>, cleanLabel: t('tabs.asistente') },
-    { id: "verificacion", label: <><span className="inline-flex"><ListChecks className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.verificacion')}</>, cleanLabel: t('tabs.verificacion') },
     { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.guia')}</>, cleanLabel: t('tabs.guia') },
     { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.faq')}</>, cleanLabel: t('tabs.faq') },
-    { id: "contacto", label: <><span className="inline-flex"><Mail className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.contacto')}</>, cleanLabel: t('tabs.contacto') },
-    { id: "ideas", label: <><span className="inline-flex"><Lightbulb className="w-[1.2em] h-[1.2em] mr-1" /></span> Ideas</>, cleanLabel: "Ideas" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -596,18 +277,6 @@ export default function InicioPage() {
                     'title': 'Bienvenida',
                     'desc': 'Panel de control de acceso rápido a todas las herramientas.'
           },
-          'seguridad': {
-                    'title': 'Seguridad y privacidad',
-                    'desc': 'Infórmate de cómo protegemos celosamente tus datos.'
-          },
-          'asistente': {
-                    'title': 'Asistente IA',
-                    'desc': 'Asistente virtual potenciado con IA para resolver tus dudas.'
-          },
-          'verificacion': {
-                    'title': 'Verificación',
-                    'desc': 'Panel de salud y coherencia de los datos de tu cuaderno.'
-          },
           'guia': {
                     'title': 'Guía',
                     'desc': 'Manuales y guías paso a paso para configurar tu entorno.'
@@ -615,14 +284,6 @@ export default function InicioPage() {
           'faq': {
                     'title': 'FAQ',
                     'desc': 'Respuestas a las preguntas más frecuentes de el profesorado.'
-          },
-          'contacto': {
-                    'title': 'Contacto',
-                    'desc': 'Ponte en contacto para sugerencias o soporte.'
-          },
-          'ideas': {
-                    'title': 'Ideas',
-                    'desc': 'Planteamiento de ideas y evolución.'
           }
 };
                 const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
@@ -642,6 +303,105 @@ export default function InicioPage() {
               <div className="animate-in fade-in duration-500 w-full">
                 
           <div className="w-full space-y-12 pb-12">
+
+            {/* Secuencia Lógica Propuesta */}
+            <div className="space-y-4">
+              <h2 className="text-xl font-bold text-foreground flex items-center gap-3">
+                <Layers className="w-6 h-6 text-accent" /> Secuencia Lógica de Programación
+              </h2>
+              <p className="text-muted text-sm pb-4 border-b border-[var(--glass-border)]">
+                Flujo de trabajo estructurado basado en la Programación Didáctica oficial. Avanza de izquierda a derecha para completar el diseño del módulo.
+              </p>
+              
+              {/* Contenedor del Diagrama */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 mt-6">
+                
+                {/* Paso 1 */}
+                <Card className="p-4 bg-accent/5 border border-accent/20 shadow-sm relative group overflow-hidden">
+                  <div className="absolute top-0 left-0 w-full h-1 bg-accent/50 group-hover:bg-accent transition-colors"></div>
+                  <h3 className="font-bold text-accent mb-3 text-sm flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center text-xs">1</span> Contexto
+                  </h3>
+                  <ul className="text-xs text-muted/80 space-y-2 font-medium">
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-accent/70 shrink-0"/>Identificación</li>
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-accent/70 shrink-0"/>Contexto del Aula</li>
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-accent/70 shrink-0"/>Planes y Contingencia</li>
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-accent/70 shrink-0"/>Inclusión y Diversidad</li>
+                  </ul>
+                </Card>
+
+                {/* Paso 2 */}
+                <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
+                  <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
+                  <h3 className="font-bold text-foreground mb-3 text-sm flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-xs">2</span> Currículo
+                  </h3>
+                  <ul className="text-xs text-muted/80 space-y-2 font-medium">
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>RA y CE</li>
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Definición UDs</li>
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Relación RA-UD</li>
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Contribuciones (OG)</li>
+                  </ul>
+                </Card>
+
+                {/* Paso 3 */}
+                <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
+                  <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
+                  <h3 className="font-bold text-foreground mb-3 text-sm flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-xs">3</span> Metodología
+                  </h3>
+                  <ul className="text-xs text-muted/80 space-y-2 font-medium">
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Principios/Estrategias</li>
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Materiales/Recursos</li>
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Empresa / FEOE</li>
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Calidad EQAVET</li>
+                  </ul>
+                </Card>
+
+                {/* Paso 4 */}
+                <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
+                  <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
+                  <h3 className="font-bold text-foreground mb-3 text-sm flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-xs">4</span> Evaluación
+                  </h3>
+                  <ul className="text-xs text-muted/80 space-y-2 font-medium">
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Instrumentos</li>
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Indicadores/Rúbricas</li>
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Normativa</li>
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Ponderación</li>
+                  </ul>
+                </Card>
+
+                {/* Paso 5 */}
+                <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
+                  <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
+                  <h3 className="font-bold text-foreground mb-3 text-sm flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-xs">5</span> Aula
+                  </h3>
+                  <ul className="text-xs text-muted/80 space-y-2 font-medium">
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Temporalización (Gantt)</li>
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Desarrollo de UDs</li>
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Tareas</li>
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Calendario</li>
+                  </ul>
+                </Card>
+
+                {/* Paso 6 */}
+                <Card className="p-4 bg-success/5 border border-success/20 shadow-sm relative group overflow-hidden">
+                  <div className="absolute top-0 left-0 w-full h-1 bg-success/50 group-hover:bg-success transition-colors"></div>
+                  <h3 className="font-bold text-success mb-3 text-sm flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-full bg-success/20 flex items-center justify-center text-xs">6</span> Magia
+                  </h3>
+                  <ul className="text-xs text-muted/80 space-y-2 font-medium">
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-success/70 shrink-0"/>Generación PDF</li>
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-success/70 shrink-0"/>Guía para Defensa</li>
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-success/70 shrink-0"/>Comparativa</li>
+                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-success/70 shrink-0"/>Publicidad (Burocracia)</li>
+                  </ul>
+                </Card>
+
+              </div>
+            </div>
 
 
             {/* Menus Grid */}
@@ -708,170 +468,7 @@ export default function InicioPage() {
               </div>
             )}
 
-            {/* ── CONTENIDO: ASISTENTE IA ──────────────────────────────── */}
-            {/* ── CONTENIDO: SEGURIDAD ──────────────────────────────── */}
-            {activeTab === "seguridad" && (
-              <MotionWrapper delay={0.1} className="space-y-8 animate-fade-in">
-                <Card className="p-8 bg-surface border-border hover:border-accent/30 transition-all">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
-                      <Shield className="w-8 h-8" />
-                    </div>
-                    <div>
-                      <h2 className="text-2xl font-bold text-foreground">Tu privacidad por diseño</h2>
-                      <p className="text-muted mt-1 text-lg">Cómo garantizamos que tus datos reales son 100% tuyos.</p>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-6">
-                    <div className="p-5 bg-background rounded-xl border border-border/50">
-                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Building2 className="w-5 h-5 text-accent"/> 1. El servidor es ciego</h3>
-                      <p className="text-muted leading-relaxed">Nuestra base de datos en la nube <strong>jamás</strong> almacena datos de tus alumnos, tus programaciones, ni nada que crees. El servidor web solo existe para enviarte los Catálogos Oficiales (BOE/BOCAA). Eres invisible para nuestro backend.</p>
-                    </div>
 
-                    <div className="p-5 bg-background rounded-xl border border-border/50">
-                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Lock className="w-5 h-5 text-accent"/> 2. Cifrado local avanzado AES-256</h3>
-                      <p className="text-muted leading-relaxed mb-4">Puedes activar la encriptación local. Antes de que cualquier archivo (`.fpp` o `.fpc`) se guarde en tu disco duro o se envíe a Google Drive/OneDrive, se cifra usando tu clave maestra dentro de tu propio navegador. Sin esa clave, el archivo es matemáticamente indescifrable.</p>
-                      
-                      <div className="bg-surface border border-border p-4 rounded-lg">
-                        <label className="block text-sm font-medium text-foreground mb-2">Establecer clave de seguridad (no se guarda en ningún sitio)</label>
-                        <div className="flex gap-2">
-                          <input 
-                            type="password" 
-                            className="flex-1 bg-background border border-border rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent" 
-                            placeholder="Introduce tu clave maestra..."
-                            value={useAppStore.getState().encryptionKey || ""}
-                            onChange={(e) => useAppStore.getState().setEncryptionKey(e.target.value || null)}
-                          />
-                        </div>
-                        <p className="text-xs text-muted mt-2"><AlertTriangle className="w-3 h-3 inline mr-1 text-warning"/> Si olvidas esta clave y guardas un archivo, no podremos ayudarte a recuperarlo.</p>
-                      </div>
-                    </div>
-
-                    <div className="p-5 bg-background rounded-xl border border-border/50">
-                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><CheckCircle className="w-5 h-5 text-accent"/> 3. Defensa contra ataques en el navegador</h3>
-                      <p className="text-muted leading-relaxed">Hemos implementado una política estricta de seguridad de contenido (CSP). Esto bloquea cualquier script malicioso de terceros que intentara inyectarse en la página para robar tus notas temporales almacenadas en la memoria del navegador. Toda la comunicación está limitada y verificada.</p>
-                    </div>
-
-                    <div className="p-5 bg-background rounded-xl border border-border/50">
-                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Activity className="w-5 h-5 text-accent"/> 4. Servidor blindado y siempre disponible</h3>
-                      <p className="text-muted leading-relaxed">Nuestro servidor backend incorpora un sistema de <strong>Rate Limiting</strong> (limitador de velocidad). Esto significa que si recibe un aluvión de miles de peticiones repentinas (un ataque DDoS o un fallo externo), bloquea temporalmente al atacante, garantizando que el servidor nunca se sature ni se caiga. Así, siempre tendrás acceso al catálogo oficial de módulos cuando lo necesites.</p>
-                    </div>
-                  </div>
-                </Card>
-              </MotionWrapper>
-            )}
-
-            {activeTab === "asistente" && (
-              <div className="space-y-4 animate-in fade-in duration-500 w-full max-w-6xl mx-auto">
-                <div className="flex justify-center">
-                  <Button
-                    onClick={() => setAiModalOpen(true)}
-                    className="text-sm font-semibold flex items-center justify-center gap-3 bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 px-8 py-6 h-auto rounded-xl transition-all relative overflow-hidden w-full max-w-lg"
-                  >
-                    <Sparkles className="w-6 h-6 text-accent shrink-0" />
-                    <span className="flex-1 text-left">Crear nueva programación con IA (PDF)</span>
-                    <span className="flex items-center gap-1 bg-warning/20 text-warning px-2 py-1 rounded text-xs font-bold uppercase border border-warning/30 shrink-0"><AlertTriangle className="w-3 h-3" /> Beta</span>
-                  </Button>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div>
-                    <AISettingsPanel />
-                  </div>
-
-                  <div className="flex flex-col gap-4 p-6 rounded-2xl bg-info/5 border border-info/20 text-foreground">
-                    <h3 className="text-lg font-bold flex items-center gap-2">
-                      <Sparkles className="w-5 h-5 text-info" /> ¿Cómo obtengo mi API Key?
-                    </h3>
-                    <p className="text-muted text-sm">
-                      CuadernoFP utiliza un modelo "Bring Your Own Key" (Trae tu propia clave) para garantizar que tus datos no pasan por servidores intermedios y mantener la herramienta 100% gratuita.
-                    </p>
-
-                    <ol className="list-decimal pl-5 space-y-3 text-sm text-foreground/90 font-medium">
-                      <li>
-                        Entra en <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Google AI Studio</a>.
-                      </li>
-                      <li>
-                        Inicia sesión con tu cuenta de Google habitual.
-                      </li>
-                      <li>
-                        Pulsa el botón azul <strong>"Create API key"</strong>.
-                      </li>
-                      <li>
-                        Copia la larga cadena de texto (tu clave secreta) y pégala en la caja de la izquierda.
-                      </li>
-                    </ol>
-
-                    <div className="mt-auto pt-4 flex items-start gap-3 text-sm text-warning/80 bg-warning/5 p-4 rounded-xl border border-warning/10">
-                      <AlertTriangle className="w-5 h-5 shrink-0" />
-                      <p>
-                        <strong>Importante:</strong> Esta clave es personal e intransferible. Da acceso al motor de IA usando tu cupo gratuito de desarrollador de Google.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* ── CONTENIDO: VERIFICACIÓN ──────────────────────────────── */}
-            {activeTab === "verificacion" && (
-              <div className="space-y-4 animate-in fade-in duration-500">
-
-
-                <div className="grid grid-cols-3 gap-4">
-                  <Card className="p-4 border border-success/30 bg-success/10 rounded-2xl text-center">
-                    <CheckCircle className="w-7 h-7 text-success mx-auto mb-1" />
-                    <div className="text-2xl font-extrabold text-success">{okCount}</div>
-                    <div className="text-xs text-muted mt-0.5">Correctos</div>
-                  </Card>
-                  <Card className="p-4 border border-warning/30 bg-warning/10 rounded-2xl text-center">
-                    <AlertTriangle className="w-7 h-7 text-warning mx-auto mb-1" />
-                    <div className="text-2xl font-extrabold text-warning">{warnCount}</div>
-                    <div className="text-xs text-muted mt-0.5">Advertencias</div>
-                  </Card>
-                  <Card className="p-4 border border-danger/30 bg-danger/10 rounded-2xl text-center">
-                    <XCircle className="w-7 h-7 text-danger mx-auto mb-1" />
-                    <div className="text-2xl font-extrabold text-danger">{emptyCount}</div>
-                    <div className="text-xs text-muted mt-0.5">Sin datos</div>
-                  </Card>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
-                    <h2 className="text-sm font-bold text-foreground flex items-center gap-2">
-                      <BookOpen className="w-4 h-4 text-accent" />
-                      Programación didáctica
-                    </h2>
-                    <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-xs text-muted">
-                      Programación activa: <span className="font-semibold text-foreground">{activeModuleId || "-"}</span>
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                    {moduleChecks.map(item => (
-                      <CheckCard key={item.id} item={item} />
-                    ))}
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
-                    <h2 className="text-sm font-bold text-foreground flex items-center gap-2">
-                      <Users className="w-4 h-4 text-accent" />
-                      Curso activo
-                    </h2>
-                    <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-xs text-muted">
-                      Curso Activo: <span className="font-semibold text-foreground">{activeCursoId || "-"}</span>
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                    {courseChecks.map(item => (
-                      <CheckCard key={item.id} item={item} />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
 
             {/* ── CONTENIDO: GUÍA PASO A PASO ───────────────────────────── */}
             {activeTab === "guia" && (
@@ -922,93 +519,6 @@ export default function InicioPage() {
                     </div>
                   </div>
                 ))}
-              </div>
-            )}
-
-                      {/* ── CONTENIDO: CONTACTO ────────────────────────────────────────── */}
-            {activeTab === "contacto" && (
-              <div className="space-y-6 animate-in fade-in duration-500 w-full">
-                <Card className="p-8 border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-xl relative overflow-hidden">
-                  <div className="absolute top-0 right-0 p-8 opacity-5">
-                    <Mail className="w-32 h-32" />
-                  </div>
-                  <h2 className="text-2xl font-extrabold mb-4 text-foreground">¡Hola!</h2>
-                  <p className="text-muted text-sm mb-6 leading-relaxed">
-                    Espero que <strong>Cuaderno FP</strong> te esté resultando de gran utilidad para simplificar tu trabajo docente. 
-                    He desarrollado esta herramienta con mucho cariño para aportar valor a nuestra comunidad educativa de Formación Profesional.
-                  </p>
-                  
-                  
-
-                  <h3 className="text-lg font-bold mb-4 text-foreground flex items-center gap-2">
-                    <Send className="w-5 h-5 text-accent" /> Envíame un mensaje rápido
-                  </h3>
-                  
-                  <div className="space-y-4 relative z-10">
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-1">Asunto</label>
-                      <input 
-                        id="contacto-asunto"
-                        type="text" 
-                        placeholder="Ej: Sugerencia para la agenda..." 
-                        className="w-full bg-foreground/5 border border-[var(--glass-border)] rounded-lg px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-1">Mensaje</label>
-                      <textarea 
-                        id="contacto-mensaje"
-                        rows={4} 
-                        placeholder="Escribe aquí tu mensaje..." 
-                        className="w-full bg-foreground/5 border border-[var(--glass-border)] rounded-lg px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 resize-none"
-                      ></textarea>
-                    </div>
-                    <button 
-                      onClick={() => {
-                        const asunto = (document.getElementById('contacto-asunto') as HTMLInputElement)?.value || '';
-                        const mensaje = (document.getElementById('contacto-mensaje') as HTMLTextAreaElement)?.value || '';
-                        window.location.href = `mailto:rafaelsanzprades@gmail.com?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(mensaje)}`;
-                      }}
-                      className="flex items-center justify-center gap-2 px-6 py-2.5 bg-[#0d7377] text-white rounded-lg font-semibold hover:bg-[#0a5c5f] transition-colors shadow-lg hover:shadow-[#0d7377]/20"
-                    >
-                      <Send className="w-4 h-4" /> Enviar mensaje
-                    </button>
-                  </div>
-                </Card>
-              </div>
-            )}
-
-            {/* ── CONTENIDO: IDEAS ──────────────────────────────────────── */}
-            {activeTab === "ideas" && (
-              <div className="space-y-3 animate-in fade-in duration-500 w-full">
-                <Card glow className="p-8">
-                  {isLoadingIdeas && !ideasContent ? (
-                    <div className="flex justify-center p-8 text-muted">Cargando ideas...</div>
-                  ) : (
-                    <div className="markdown-body">
-                      <ReactMarkdown
-                        remarkPlugins={[remarkGfm]}
-                        rehypePlugins={[rehypeRaw]}
-                        components={{
-                          h1: ({node, ...props}) => <h1 className="text-2xl font-extrabold text-foreground mb-6 pb-2 border-b border-white/10" {...props} />,
-                          h2: ({node, ...props}) => <h2 className="text-lg font-bold text-accent mt-8 mb-4 flex items-center gap-2" {...props} />,
-                          h3: ({node, ...props}) => <h3 className="text-lg font-bold text-foreground mt-6 mb-3" {...props} />,
-                          p: ({node, ...props}) => <p className="text-muted leading-relaxed mb-4" {...props} />,
-                          ul: ({node, className, ...props}) => <ul className={`list-none space-y-3 mb-6 ml-4 ${className || ''}`} {...props} />,
-                          ol: ({node, className, ...props}: any) => <ol className={`list-decimal space-y-3 mb-6 ml-6 ${className || ''}`} {...props} />,
-                          li: ({node, ...props}) => <li className="text-sm text-muted leading-relaxed" {...props} />,
-                          strong: ({node, ...props}) => <strong className="font-bold text-foreground" {...props} />,
-                          a: ({node, ...props}) => <a className="text-accent hover:underline font-semibold" target="_blank" rel="noopener noreferrer" {...props} />,
-                          code: ({node, ...props}: any) => <code className="bg-foreground/10 text-foreground px-1.5 py-0.5 rounded text-sm font-mono" {...props} />,
-                          pre: ({node, ...props}: any) => <pre className="block bg-foreground/5 p-4 rounded-xl text-sm font-mono overflow-x-auto mb-4 border border-white/5 text-muted" {...props} />,
-                          hr: ({node, ...props}) => <hr className="border-white/10 my-8" {...props} />,
-                        }}
-                      >
-                        {ideasContent}
-                      </ReactMarkdown>
-                    </div>
-                  )}
-                </Card>
               </div>
             )}
 

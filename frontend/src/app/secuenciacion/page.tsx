@@ -8,7 +8,6 @@ import { useAppStore } from "@/store/useAppStore";
 import { useModule } from "@/hooks/useApi";
 import { SessionTable } from "@/components/features/secuenciacion/SessionTable";
 import { TaskTable } from "@/components/features/secuenciacion/TaskTable";
-import { MetodologiaContextoTab } from "@/components/features/secuenciacion/MetodologiaContextoTab";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
@@ -26,9 +25,10 @@ export default function ProgramacionPage() {
 
   const TABS = [
     { id: "secuenciacion", label:  <span className="flex items-center gap-2"><ClipboardList className="w-4 h-4 shrink-0" /> {t('tabs.secuenciacion')}</span>, cleanLabel: t('tabs.secuenciacion') },
-    { id: "tareas", label:  <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.tareas')}</span>, cleanLabel: t('tabs.tareas') },
-    { id: "metodologia", label:  <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> Metodología y Contexto</span>, cleanLabel: 'Metodología y Contexto' }
-  ];const [activeTab, setActiveTab] = useState("secuenciacion");const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+    { id: "tareas", label:  <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.tareas')}</span>, cleanLabel: t('tabs.tareas') }
+  ];
+  const [activeTab, setActiveTab] = useState("secuenciacion");
+  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
 
 
@@ -265,9 +265,6 @@ export default function ProgramacionPage() {
               />
             </Card>
             </>
-          )}
-          {activeTab === "metodologia" && (
-            <MetodologiaContextoTab />
           )}
 
           </MotionWrapper>

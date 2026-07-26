@@ -15,10 +15,11 @@ module.exports = {
       name: "cuadernofp-frontend",
       cwd: "./frontend",
       script: "node_modules\\next\\dist\\bin\\next",
-      args: "dev",
+      args: "dev --turbo",
       watch: false,
       env: {
         NODE_ENV: "development",
+        NODE_OPTIONS: "--max-old-space-size=4096"
       }
     }
   ]

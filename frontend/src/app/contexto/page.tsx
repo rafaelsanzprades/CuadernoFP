@@ -9,9 +9,7 @@ import { useTranslation } from "react-i18next";
 import { DatosTab } from "@/components/features/modulo/DatosTab";
 import { ContextoTab } from "@/components/features/modulo/ContextoTab";
 import { PlanesTab } from "@/components/features/modulo/PlanesTab";
-import { ContextoFEOETab } from "@/components/features/modulo/ContextoFEOETab";
 import { DiversidadTab } from "@/components/features/modulo/DiversidadTab";
-import { BurocraciaTab } from "@/components/features/modulo/BurocraciaTab";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import Link from "next/link";
@@ -51,9 +49,7 @@ export default function ContextoConfigPage() {
     { id: "datos", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.datos')}</>, cleanLabel: t('tabs.datos') },
     { id: "contexto", label: <><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.contexto')}</>, cleanLabel: t('tabs.contexto') },
     { id: "planes", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.planes')}</>, cleanLabel: t('tabs.planes') },
-    { id: "contexto_feoe", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.contexto_feoe')}</>, cleanLabel: t('tabs.contexto_feoe') },
     { id: "diversidad", label: <><span className="inline-flex"><HeartHandshake className="w-[1.2em] h-[1.2em] mr-1" /></span> Diversidad</>, cleanLabel: "Diversidad" },
-    { id: "burocracia", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Burocracia</>, cleanLabel: "Burocracia" }
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -136,9 +132,7 @@ export default function ContextoConfigPage() {
                 'datos': { desc: 'Configuración inicial y datos generales del módulo profesional.' },
                 'contexto': { desc: 'Análisis del entorno socioeconómico, centro educativo y perfil del alumnado.' },
                 'planes': { desc: 'Vinculación con los planes estratégicos y proyectos institucionales del centro.' },
-                'contexto_feoe': { desc: 'Análisis específico del sector productivo y oportunidades de empleo.' },
                 'diversidad': { desc: 'Atención a la diversidad, adaptaciones curriculares y panel de alumnado ACNEAE.' },
-                'burocracia': { desc: 'Datos de autoría, publicidad de la programación y bibliografía.' }
               };
               const info = infoMap[activeTab] || { desc: 'Configuración del contexto.' };
               return (
@@ -152,9 +146,7 @@ export default function ContextoConfigPage() {
             {activeTab === "datos" && <DatosTab />}
             {activeTab === "contexto" && <ContextoTab />}
             {activeTab === "planes" && <PlanesTab />}
-            {activeTab === "contexto_feoe" && <ContextoFEOETab />}
             {activeTab === "diversidad" && <DiversidadTab />}
-            {activeTab === "burocracia" && <BurocraciaTab />}
 
           </MotionWrapper>
         </main>

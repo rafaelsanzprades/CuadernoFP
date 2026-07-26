@@ -1,6 +1,6 @@
 "use client";
-import { TabSync } from "@/components/ui/TabSync";
-import { FileEdit, FolderOpen, Wrench, Crosshair } from "lucide-react";
+import { AccordionBlock } from "@/components/ui/AccordionBlock";
+import { FileEdit, FolderOpen, Wrench, Crosshair, Settings, List, FileText } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -14,19 +14,13 @@ import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import Link from "next/link";
 import { InstrumentosListTab } from "@/components/features/instrumentos/InstrumentosListTab";
 import { IndicadoresTab } from "@/components/features/instrumentos/IndicadoresTab";
+import { ProcedimientosTab } from "@/components/features/evaluacion/ProcedimientosTab";
+import { FeoeTab } from "@/components/features/alumnado/FeoeTab";
 
 export default function InstrumentosPage() {
   const { activeModuleId, moduleData, setModuleData } = useAppStore();
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
-
-  const TABS = [
-    { id: "instrumentos", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Instrumentos</span>, cleanLabel: "Instrumentos" },
-    { id: "indicadores", label: <span className="flex items-center gap-2"><Crosshair className="w-4 h-4 shrink-0" /> Indicadores</span>, cleanLabel: "Indicadores" },
-  ];
-
-  const [activeTab, setActiveTab] = useState("instrumentos");
-  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,10 +55,9 @@ export default function InstrumentosPage() {
   if (!activeModuleId) {
     return (
       <div className="flex min-h-screen bg-background">
-        <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
-          <Header breadcrumbSuffix={activeTabCleanLabel} />
+          <Header />
           <main className="flex-1 p-8 content-area">
             <MotionWrapper>
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
@@ -90,10 +83,9 @@ export default function InstrumentosPage() {
 
   return (
     <div className="flex min-h-screen bg-background">
-      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header breadcrumbSuffix={activeTabCleanLabel} />
+        <Header />
         
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-4 pb-12">
@@ -104,18 +96,36 @@ export default function InstrumentosPage() {
               <p className="text-muted mt-2 text-lg">Define los instrumentos de calificación, rúbricas y los indicadores de evaluación vinculados a los resultados de aprendizaje.</p>
             </div>
 
-            <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="mb-6 max-w-full">
-                {TABS.map(tab => (
-                  <TabsTrigger key={tab.id} value={tab.id}>
-                    {tab.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
+            <div className="space-y-4">
+              <AccordionBlock
+                title="Instrumentos de calificación"
+                icon={<FileEdit className="w-5 h-5" />}
+                defaultOpen={true}
+              >
+                <InstrumentosListTab />
+              </AccordionBlock>
 
-            {activeTab === 'instrumentos' && <InstrumentosListTab />}
-            {activeTab === 'indicadores' && <IndicadoresTab />}
+              <AccordionBlock
+                title="Indicadores de evaluación"
+                icon={<Crosshair className="w-5 h-5" />}
+              >
+                <IndicadoresTab />
+              </AccordionBlock>
+
+              <AccordionBlock
+                title="Procedimientos de evaluación"
+                icon={<Settings className="w-5 h-5" />}
+              >
+                <ProcedimientosTab />
+              </AccordionBlock>
+
+              <AccordionBlock
+                title="FEOE (Ficha de Evaluación Orientadora y Evolutiva)"
+                icon={<FileText className="w-5 h-5" />}
+              >
+                <FeoeTab />
+              </AccordionBlock>
+            </div>
             
           </MotionWrapper>
         </main>

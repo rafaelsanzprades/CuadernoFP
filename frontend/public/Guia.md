@@ -67,12 +67,12 @@ Vamos a pedirle al sistema que nos cree el archivo base de la programación carg
     - **Pestaña:** Datos
       - **Bloque:** Centro y docente
         - **Texto:** Centro educativo y Profesorado.
-    - **Pestaña:** Entorno
+    - **Pestaña:** Contexto
       - **Bloque:** Contexto escolar y social.
-    - **Pestaña:** Inclusión
+    - **Pestaña:** Planes
+      - **Bloque:** Planes de centro e Infraestructura.
+    - **Pestaña:** Diversidad
       - **Selector:** Medidas de Inclusión.
-    - **Pestaña:** FEOE y Dual
-      - **Selector:** Régimen General o Intensivo y Entorno Profesional.
 
 ### 1.3. Definir el currículo y las unidades didácticas
 - **Apartado:** Programación
@@ -88,20 +88,28 @@ Vamos a pedirle al sistema que nos cree el archivo base de la programación carg
 ### 1.4. Metodología
 - **Apartado:** Programación
   - **Página:** Metodología
-    - **Pestaña:** Estrategias
+    - **Bloque Expandible (Accordion):** Metodología
       - **Selector:** Metodologías Activas (ABP, Retos, etc.).
-    - **Pestaña:** Recursos
+    - **Bloque Expandible (Accordion):** FP Dual
+      - **Selector:** Régimen General o Intensivo y Entorno Profesional.
+    - **Bloque Expandible (Accordion):** Recursos
       - **Texto:** Descripción de espacios y materiales.
-    - **Pestaña:** Planes
-      - **Texto:** Planes de centro y Plan de contingencia.
+    - **Bloque Expandible (Accordion):** Transversales
+      - **Texto:** Proyectos de innovación e interdisciplinariedad.
+    - **Bloque Expandible (Accordion):** Contingencia
+      - **Texto:** Plan de contingencia.
 
 ### 1.5. Instrumentos de Evaluación
 - **Apartado:** Programación
   - **Página:** Evaluación
-    - **Pestaña:** Criterios y Ponderación
+    - **Bloque Expandible (Accordion):** Indicadores
       - **Número:** Configura redondeo y compensaciones.
-    - **Pestaña:** Instrumentos
+    - **Bloque Expandible (Accordion):** Instrumentos
       - **Botón:** "Añadir Instrumento". Exámenes, prácticas, etc.
+    - **Bloque Expandible (Accordion):** Procedimientos
+      - **Texto:** Información al alumnado y recuperación.
+    - **Bloque Expandible (Accordion):** FEOE
+      - **Selector:** Configuración y seguimiento FEOE.
 
 ### 1.6. Secuenciación (Programación de aula)
 - **Apartado:** Programación
@@ -119,13 +127,14 @@ Una vez configurada la programación base, genera los PDFs oficiales.
 
 - **Apartado:** Programación
   - **Página:** Magia
-    - **Pestaña:** Programación
-      - **Bloque:** Documentos Oficiales
-        - **Botones PD:** Dispones de tres niveles:
-          1. **PD Mínima (Alumnado):** Resumen de 1-2 folios.
-          2. **PD Suficiente (Oficial):** Formato intermedio (~10-15 páginas).
-          3. **PD Detallada:** Formato extendido (>60 páginas) con toda la carga narrativa.
-        - **Botón:** Descargar DOCX / PDF en la tarjeta del modelo deseado.
+    - **Bloque Expandible (Accordion):** Programación
+      - **Botones PD:** Dispones de tres niveles:
+        1. **PD Mínima (Alumnado):** Resumen de 1-2 folios.
+        2. **PD Suficiente (Oficial):** Formato intermedio (~10-15 páginas).
+        3. **PD Detallada:** Formato extendido (>60 páginas) con toda la carga narrativa.
+      - **Botón:** Descargar DOCX / PDF en la tarjeta del modelo deseado.
+    - **Bloque Expandible (Accordion):** Burocracia
+      - **Texto:** Configurar cómo y dónde se publica la programación.
 
 ---
 
@@ -152,6 +161,8 @@ Ahora instanciamos la Programación en un año académico y clase real.
       - **Fecha:** Festivos o celebraciones.
     - **Pestaña:** Visual
       - **Acción:** Marca en el calendario rápido los festivos.
+    - **Pestaña:** Complementarias
+      - **Acción:** Registra actividades complementarias y extraescolares.
 
 ### 3.3. Gestionar el alumnado
 - **Apartado:** Curso
@@ -192,10 +203,14 @@ Ahora instanciamos la Programación en un año académico y clase real.
 ### 4.4. Evaluación
 - **Apartado:** Curso
   - **Página:** Calificaciones
+    - **Pestaña:** Resumen grupal
+      - **Gráficos:** Estadísticas globales del aula.
     - **Pestaña:** Matriz
       - **Tabla:** Teclea las notas y calcula al vuelo.
-    - **Pestaña:** Detalle
+    - **Pestaña:** Por alumnado
       - **Acción:** Expande cada alumnado para ver la consecución de sus RAs.
+    - **Pestaña:** Grupal e Individual
+      - **Acción:** Generación de informes (boletines y actas).
 
 ---
 
@@ -232,7 +247,7 @@ En lugar de escribir texto genérico, seleccionas opciones de una lista. El sist
 Lo tecleas en **Programación > Contexto > Datos**. El sistema lo usará en todo el documento.
 
 ### ¿Cómo indico si mi módulo es Dual?
-En **Programación > Contexto > FEOE y Dual**. Podrás ajustar los porcentajes que asume la empresa y el régimen.
+En **Programación > Metodología > Bloque FP Dual**. Podrás ajustar los porcentajes que asume la empresa y el régimen.
 
 ---
 

@@ -1,7 +1,11 @@
 import { demoSeed, CRM_SEED_VERSION } from "./demo-ele203-0237ictve-curso202526";
+import { demoSeed0223 } from "./demo-smr201-0223ao-curso202526";
 import { useAppStore } from "@/store/useAppStore";
 import { ModuleData, CursoData, FileSource } from "@/types";
 import CryptoJS from "crypto-js";
+
+// Merge both demo seeds
+const fullDemoSeed = { ...demoSeed, ...demoSeed0223 };
 
 export type DataSourceType = 'demo' | 'local';
 
@@ -87,18 +91,27 @@ export const fileManager = {
   // ── DEMO ────────────────────────────────────────────────
 
   loadDemoData(groupId?: string) {
-    if (!groupId) groupId = '1a';
-    const pdData = demoSeed["0237-ictve-pd" as keyof typeof demoSeed];
-    let cursoDataId = "0237-ictve-curso-2025-26";
-    if (groupId === '1a') cursoDataId = "0237-ictve-curso-2025-26-1A";
-    if (groupId === '1b') cursoDataId = "0237-ictve-curso-2025-26-1B";
-    if (groupId === '1c') cursoDataId = "0237-ictve-curso-2025-26-1C";
+    if (!groupId) groupId = '0237';
     
-    // Fallback if the specific group doesn't exist in seed
-    const cursoData = demoSeed[cursoDataId as keyof typeof demoSeed] || demoSeed["0237-ictve-curso-2025-26" as keyof typeof demoSeed];
+    // Choose demo module based on groupId prefix or some logic. 
+    // For now we'll allow loading 0223 if groupId is '0223', else default to 0237.
+    let pdDataId = "0237-ictve-pd";
+    let cursoDataId = "0237-ictve-curso-2025-26";
+    
+    if (groupId.startsWith('0223')) {
+      pdDataId = "0223-ao-pd";
+      cursoDataId = "0223-ao-curso-202526-1a-gm";
+    } else {
+      if (groupId === '1a') cursoDataId = "0237-ictve-curso-202526-1a-gm"; // updated naming
+      if (groupId === '1b') cursoDataId = "0237-ictve-curso-202526-1b-gm";
+      if (groupId === '1c') cursoDataId = "0237-ictve-curso-202526-1c-gm";
+    }
+    
+    const pdData = fullDemoSeed[pdDataId as keyof typeof fullDemoSeed];
+    const cursoData = fullDemoSeed[cursoDataId as keyof typeof fullDemoSeed] || fullDemoSeed["0237-ictve-curso-202526-1a-gm" as keyof typeof fullDemoSeed] || fullDemoSeed["0237-ictve-curso-2025-26" as keyof typeof fullDemoSeed];
 
     useAppStore.getState().setDataSource("demo");
-    useAppStore.getState().setActiveModuleId("0237-ictve-pd");
+    useAppStore.getState().setActiveModuleId(pdDataId);
     useAppStore.getState().setModuleData(pdData as any);
     useAppStore.getState().setActiveCursoId(cursoDataId);
     useAppStore.getState().setCursoData(cursoData as any);
@@ -285,9 +298,11 @@ export const fileManager = {
   /** Create a new curso with demo data (appends " Demo" to student last names) */
   createNewCursoFromDemo(cursoName: string, year: string): boolean {
     const store = useAppStore.getState();
-    store.setDataSource("local");
+    const activeModuleId = store.activeModuleId;
+    if (!activeModuleId) return false;
 
-    const demoCursoData = demoSeed["0237-ictve-curso-2025-26" as keyof typeof demoSeed];
+    // Use fullDemoSeed
+    const demoCursoData = fullDemoSeed["0237-ictve-curso-2025-26" as keyof typeof fullDemoSeed] || fullDemoSeed["0237-ictve-curso-202526-1a-gm" as keyof typeof fullDemoSeed];
     const newCursoData: CursoData = JSON.parse(JSON.stringify(demoCursoData));
     
     if (newCursoData.df_al) {

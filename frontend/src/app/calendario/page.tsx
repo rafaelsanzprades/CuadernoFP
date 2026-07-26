@@ -1,6 +1,6 @@
 "use client";
-import { TabSync } from "@/components/ui/TabSync";
-import { Calendar, Circle, ClipboardList, Search, Settings, Flag , Info, FolderOpen } from "lucide-react";
+import { AccordionBlock } from "@/components/ui/AccordionBlock";
+import { Calendar, Circle, ClipboardList, Search, Settings, Flag , Info, FolderOpen, Bus } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -8,7 +8,6 @@ import { useAppStore } from "@/store/useAppStore";
 import DatePicker from "@/components/ui/DatePicker";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -444,11 +443,32 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
 
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function CalendarioPage() {
-  const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, activeModuleId, moduleData, setModuleData } = useAppStore();
+  const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, activeModuleId, moduleData, setModuleData, updateDataFrame } = useAppStore();
   const [saving, setSaving] = useState(false);
   const { t } = useTranslation();
   const [saveMessage, setSaveMessage] = useState("");
-  const [activeTab, setActiveTab] = useState("fechas");
+
+  const df_ace = moduleData?.df_ace || [];
+  const df_ra = moduleData?.df_ra || [];
+
+  const addRowAce = () => {
+    const newDf = [...df_ace];
+    const newId = `ACE${(newDf.length + 1).toString().padStart(2, '0')}`;
+    newDf.push({ ID: newId, Tipo: "Complementaria", RA_Vinculados: "", Actividad: "", Trimestre: "1T", Entidad: "", Evaluacion: "" });
+    updateDataFrame("df_ace", newDf);
+  };
+
+  const updateRowAce = (idx: number, field: string, value: any) => {
+    const newDf = [...df_ace];
+    newDf[idx][field] = value;
+    updateDataFrame("df_ace", newDf);
+  };
+
+  const removeRowAce = (idx: number) => {
+    const newDf = [...df_ace];
+    newDf.splice(idx, 1);
+    updateDataFrame("df_ace", newDf);
+  };
 
   useEffect(() => {
     if (activeCursoId && !cursoData) {
@@ -481,7 +501,6 @@ export default function CalendarioPage() {
   if (!activeCursoId) {
     return (
       <div className="flex min-h-screen bg-background">
-      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
@@ -596,19 +615,11 @@ export default function CalendarioPage() {
 
 
 
-  const TABS = [
-    { id: "fechas", label: <><span className="inline-flex"><Settings className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.fechas', {defaultValue: 'Fechas'})}</>, cleanLabel: t('tabs.fechas', {defaultValue: 'Fechas'}) },
-    { id: "eventos", label: <span className="flex items-center gap-2"><Flag className="w-[1.2em] h-[1.2em] mr-1 shrink-0" /> {t('tabs.eventos', {defaultValue: 'Eventos'})}</span>, cleanLabel: t('tabs.eventos', {defaultValue: 'Eventos'}) },
-    { id: "visual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.visual', {defaultValue: 'Visual'})}</>, cleanLabel: t('tabs.visual', {defaultValue: 'Visual'}) }
-  ];
-
-  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
-
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header breadcrumbSuffix={activeTabCleanLabel} />
+        <Header />
 
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-4 pb-12">
@@ -627,44 +638,13 @@ export default function CalendarioPage() {
             </p>
           )}
 
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="mb-2 max-w-full">
-              {TABS.map(tab => (
-                <TabsTrigger key={tab.id} value={tab.id}>
-                  {tab.label}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
-
-                        {(() => {
-                const infoMap: Record<string, {title: string, desc: string}> = {
-          'fechas': {
-                    'title': 'Configuración de Fechas',
-                    'desc': 'Configuración de fechas de inicio, fin y trimestres.'
-          },
-          'eventos': {
-                    'title': 'Eventos y Festivos',
-                    'desc': 'Gestión de festivos locales, provinciales y eventos de centro.'
-          },
-          'visual': {
-                    'title': 'Calendario visual',
-                    'desc': 'Calendario visual con el horario semanal y eventos asignados.'
-          }
-};
-                const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
-                return (
-                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
-                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
-                    <div>
-                      <p className="text-sm text-muted">{info.desc}</p>
-                    </div>
-                  </div>
-                );
-              })()}
-
-          {activeTab === "fechas" && (
             <div className="space-y-4">
+              <AccordionBlock
+                title="Fechas y Horarios"
+                icon={<Settings className="w-5 h-5" />}
+                defaultOpen={true}
+              >
+                <div className="space-y-4 mt-4">
               {/* Fechas generales */}
               <Card className="p-6 border-t-4 border-t-blue-500 overflow-visible z-30">
                 <div className="flex items-center justify-between mb-4">
@@ -901,31 +881,101 @@ export default function CalendarioPage() {
                   </div>
                 </div>
               </Card>
+                </div>
+              </AccordionBlock>
+
+              <AccordionBlock
+                title="Eventos y Festivos"
+                icon={<Flag className="w-5 h-5" />}
+              >
+                <Card className="p-6 border-t-4 border-t-yellow-500 overflow-visible z-20 mt-4">
+                  <h2 className="text-lg font-bold mb-2"> Festivos y eventos</h2>
+                  <p className="text-muted text-sm mb-4">
+                    Introduce manualmente o haz clic en el calendario. Los festivos excluyen horas del cómputo real.
+                  </p>
+                  <NotesTable calendar_notes={calendar_notes} onUpdateNotes={handleUpdateNotes} />
+                </Card>
+              </AccordionBlock>
+
+              <AccordionBlock
+                title="Actividades complementarias"
+                icon={<Bus className="w-5 h-5" />}
+              >
+                <Card className="p-6 border-t-4 border-t-[#14a085] mt-4">
+                  <div className="overflow-x-auto mb-4">
+                    <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
+                      <thead>
+                        <tr className="border-b border-[var(--glass-border)] text-muted">
+                          <th className="p-2 w-16">Id</th>
+                          <th className="p-2 w-32">Tipo</th>
+                          <th className="p-2 w-32">RA vinculados</th>
+                          <th className="p-2 min-w-[200px]">Descripción</th>
+                          <th className="p-2 w-24">Trimestre</th>
+                          <th className="p-2 w-48">Entidad</th>
+                          <th className="p-2 w-48">Evaluación</th>
+                          <th className="p-2 w-10"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {df_ace.map((row: any, idx: number) => (
+                          <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5">
+                            <td className="p-2 font-mono text-xs">{row.ID}</td>
+                            <td className="p-2 pr-2">
+                              <select value={row.Tipo || "Complementaria"} onChange={e => updateRowAce(idx, "Tipo", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-[#14a085] focus:outline-none">
+                                <option value="Complementaria">Complementaria</option>
+                                <option value="Extraescolar">Extraescolar</option>
+                              </select>
+                            </td>
+                            <td className="p-2 pr-2">
+                              <select value={row.RA_Vinculados || ""} onChange={e => updateRowAce(idx, "RA_Vinculados", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-[#14a085] focus:outline-none">
+                                <option value="">-</option>
+                                {df_ra.map((ra: any) => ra.id_ra && <option key={ra.id_ra} value={ra.id_ra}>{ra.id_ra}</option>)}
+                              </select>
+                            </td>
+                            <td className="p-2 pr-2">
+                              <input type="text" value={row.Actividad || ""} onChange={e => updateRowAce(idx, "Actividad", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-[#14a085] focus:outline-none" />
+                            </td>
+                            <td className="p-2 pr-2">
+                              <select value={row.Trimestre || "1T"} onChange={e => updateRowAce(idx, "Trimestre", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-[#14a085] focus:outline-none">
+                                <option value="1T">1t</option>
+                                <option value="2T">2t</option>
+                                <option value="3T">3t</option>
+                              </select>
+                            </td>
+                            <td className="p-2 pr-2">
+                              <input type="text" value={row.Entidad || ""} onChange={e => updateRowAce(idx, "Entidad", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-[#14a085] focus:outline-none" />
+                            </td>
+                            <td className="p-2 pr-2">
+                              <input type="text" value={row.Evaluacion || ""} onChange={e => updateRowAce(idx, "Evaluacion", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-[#14a085] focus:outline-none" />
+                            </td>
+                            <td className="p-2 text-center">
+                              <button onClick={() => removeRowAce(idx)} className="text-danger hover:text-danger font-bold">×</button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <button onClick={addRowAce} className="text-sm text-[#14a085] hover:text-[#1abc9c] font-semibold flex items-center gap-1">
+                    <span>+</span> Añadir actividad complementaria
+                  </button>
+                </Card>
+              </AccordionBlock>
+
+              <AccordionBlock
+                title="Calendario visual"
+                icon={<Calendar className="w-5 h-5" />}
+              >
+                <Card className="p-6 border-t-4 border-t-purple-500 mt-4">
+                  <InteractiveCalendar
+                    info_fechas={info_fechas}
+                    horario={horario}
+                    calendar_notes={calendar_notes}
+                    onUpdateNote={handleUpdateNote}
+                  />
+                </Card>
+              </AccordionBlock>
             </div>
-          )}
-
-          {activeTab === "eventos" && (
-            <Card className="p-6 border-t-4 border-t-yellow-500 overflow-visible z-20">
-              <h2 className="text-lg font-bold mb-2"> Festivos y eventos</h2>
-              <p className="text-muted text-sm mb-4">
-                Introduce manualmente o haz clic en el calendario. Los festivos excluyen horas del cómputo real.
-              </p>
-              {/* Manual entry table */}
-              <NotesTable calendar_notes={calendar_notes} onUpdateNotes={handleUpdateNotes} />
-            </Card>
-          )}
-
-          {activeTab === "visual" && (
-            <Card className="p-6 border-t-4 border-t-purple-500">
-              <h3 className="text-lg font-bold mb-4 text-foreground/80"><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> Calendario visual</h3>
-              <InteractiveCalendar
-                info_fechas={info_fechas}
-                horario={horario}
-                calendar_notes={calendar_notes}
-                onUpdateNote={handleUpdateNote}
-              />
-            </Card>
-          )}
           </MotionWrapper>
         </main>
       </div>

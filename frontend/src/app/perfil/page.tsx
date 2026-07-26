@@ -8,7 +8,8 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { TabSync } from "@/components/ui/TabSync";
-import { Sun, Moon, Globe, Type, Contrast, ZapOff, Volume2, Check, User, Info } from "lucide-react";
+import { Sun, Moon, Globe, Type, Contrast, ZapOff, Volume2, Check, User, Info, Shield, Building2, Lock, CheckCircle, Activity, AlertTriangle } from "lucide-react";
+import { useAppStore } from "@/store/useAppStore";
 import { useAccessibility } from "@/hooks/useAccessibility";
 
 export default function PerfilPage() {
@@ -32,6 +33,7 @@ export default function PerfilPage() {
     { id: "aspecto", label: <span className="flex items-center gap-2"><Sun className="w-4 h-4 shrink-0" /> Aspecto</span>, cleanLabel: "Aspecto" },
     { id: "idioma", label: <span className="flex items-center gap-2"><Globe className="w-4 h-4 shrink-0" /> Idioma</span>, cleanLabel: "Idioma" },
     { id: "accesibilidad", label: <span className="flex items-center gap-2"><Type className="w-4 h-4 shrink-0" /> Accesibilidad</span>, cleanLabel: "Accesibilidad" },
+    { id: "seguridad", label: <span className="flex items-center gap-2"><Shield className="w-4 h-4 shrink-0" /> Seguridad</span>, cleanLabel: "Seguridad" },
   ];
 
   const [activeTab, setActiveTab] = useState("aspecto");
@@ -71,6 +73,7 @@ export default function PerfilPage() {
                 'aspecto': { desc: 'Configuración visual, modo claro u oscuro.' },
                 'idioma': { desc: 'Selección del idioma preferido para toda la interfaz.' },
                 'accesibilidad': { desc: 'Ajustes avanzados de tamaño, contraste y asistencias cognitivas para facilitar el uso.' },
+                'seguridad': { desc: 'Opciones de privacidad, encriptación y control de datos.' },
               };
               const info = infoMap[activeTab];
               if (!info) return null;
@@ -256,6 +259,57 @@ export default function PerfilPage() {
                       </div>
                     </div>
 
+                  </div>
+                </section>
+              )}
+
+              {/* Seguridad */}
+              {activeTab === "seguridad" && (
+                <section className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                  <div className="flex items-center gap-4 mb-2">
+                    <div className="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
+                      <Shield className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-bold text-foreground">Tu privacidad por diseño</h2>
+                      <p className="text-muted mt-1 text-sm">Cómo garantizamos que tus datos reales son 100% tuyos.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div className="p-5 bg-background rounded-xl border border-border/50">
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Building2 className="w-5 h-5 text-accent"/> 1. El servidor es ciego</h3>
+                      <p className="text-muted leading-relaxed text-sm">Nuestra base de datos en la nube <strong>jamás</strong> almacena datos de tus alumnos, tus programaciones, ni nada que crees. El servidor web solo existe para enviarte los Catálogos Oficiales (BOE/BOCAA). Eres invisible para nuestro backend.</p>
+                    </div>
+
+                    <div className="p-5 bg-background rounded-xl border border-border/50">
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Lock className="w-5 h-5 text-accent"/> 2. Cifrado local avanzado AES-256</h3>
+                      <p className="text-muted leading-relaxed mb-4 text-sm">Puedes activar la encriptación local. Antes de que cualquier archivo se guarde en tu disco duro o nube, se cifra usando tu clave maestra dentro de tu navegador.</p>
+                      
+                      <div className="bg-surface border border-border p-4 rounded-lg">
+                        <label className="block text-sm font-medium text-foreground mb-2">Establecer clave de seguridad (no se guarda en ningún sitio)</label>
+                        <div className="flex gap-2">
+                          <input 
+                            type="password" 
+                            className="flex-1 bg-background border border-border rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent text-sm" 
+                            placeholder="Introduce tu clave maestra..."
+                            value={useAppStore.getState().encryptionKey || ""}
+                            onChange={(e) => useAppStore.getState().setEncryptionKey(e.target.value || null)}
+                          />
+                        </div>
+                        <p className="text-xs text-muted mt-2"><AlertTriangle className="w-3 h-3 inline mr-1 text-warning"/> Si olvidas esta clave y guardas un archivo, no podremos ayudarte a recuperarlo.</p>
+                      </div>
+                    </div>
+
+                    <div className="p-5 bg-background rounded-xl border border-border/50">
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><CheckCircle className="w-5 h-5 text-accent"/> 3. Defensa contra ataques en el navegador</h3>
+                      <p className="text-muted leading-relaxed text-sm">Hemos implementado una política estricta de seguridad de contenido (CSP) para bloquear scripts maliciosos de terceros.</p>
+                    </div>
+
+                    <div className="p-5 bg-background rounded-xl border border-border/50">
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Activity className="w-5 h-5 text-accent"/> 4. Servidor blindado y siempre disponible</h3>
+                      <p className="text-muted leading-relaxed text-sm">Nuestro servidor backend incorpora <strong>Rate Limiting</strong>, garantizando que siempre tendrás acceso al catálogo oficial de módulos.</p>
+                    </div>
                   </div>
                 </section>
               )}

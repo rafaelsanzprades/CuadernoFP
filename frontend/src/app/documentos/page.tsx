@@ -28,7 +28,6 @@ export default function DocumentosPage() {
     { id: "Normativa", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.normativa', {defaultValue: 'Normativa'})}</span>, cleanLabel: t('tabs.normativa', {defaultValue: 'Normativa'}) },
     { id: "Plantillas", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.plantillas', {defaultValue: 'Plantillas'})}</span>, cleanLabel: t('tabs.plantillas', {defaultValue: 'Plantillas'}) },
     { id: "Currículos", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> {t('tabs.curriculos', {defaultValue: 'Currículos'})}</span>, cleanLabel: t('tabs.curriculos', {defaultValue: 'Currículos'}) },
-    { id: "TodoFP", label: <span className="flex items-center gap-2"><ExternalLink className="w-4 h-4 shrink-0" /> {t('tabs.todofp', {defaultValue: 'TodoFP'})}</span>, cleanLabel: t('tabs.todofp', {defaultValue: 'TodoFP'}) },
     { id: "Autores", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> {t('tabs.autores', {defaultValue: 'Autores'})}</span>, cleanLabel: t('tabs.autores', {defaultValue: 'Autores'}) }
   ];
   const [activeTab, setActiveTab] = useState("Normativa");
@@ -73,7 +72,6 @@ export default function DocumentosPage() {
       "plantillas": "Plantillas",
       "curriculos": "Currículos",
       "normativa": "Normativa",
-      "todofp": "TodoFP",
       "autores": "Autores"
     };
     if (folderMap[activeTab]) {
@@ -253,7 +251,6 @@ export default function DocumentosPage() {
                   'Plantillas': { desc: 'Formatos base recomendados por la administración educativa para programaciones.' },
                   'Currículos': { desc: 'Disposiciones normativas que fijan las enseñanzas mínimas de cada título.' },
                   'Normativa': { desc: 'Leyes orgánicas, reales decretos y órdenes ministeriales vigentes.' },
-                  'TodoFP': { desc: 'Recursos, guías y materiales del portal oficial de la Formación Profesional.' },
                   'Autores': { desc: 'Material de apoyo y recursos bibliográficos desarrollados por editoriales.' }
                 };
                 const info = infoMap[activeTab] || { desc: 'Gestión documental y normativa.' };

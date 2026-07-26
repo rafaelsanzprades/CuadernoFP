@@ -1,5 +1,5 @@
 "use client";
-import { TabSync } from "@/components/ui/TabSync";
+import { AccordionBlock } from "@/components/ui/AccordionBlock";
 import { BarChart, Building2, ClipboardList, Save, Target, TrendingUp, User, Users, AlertTriangle , Info, FolderOpen, Table } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -14,10 +14,9 @@ import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { useTranslation } from "react-i18next";
 import { AnalisisGrupalTab } from "@/components/features/analisis/AnalisisGrupalTab";
 import { AnalisisIndividualTab } from "@/components/features/analisis/AnalisisIndividualTab";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/Tabs";
 import { MatrizCalificacionesTab } from "@/components/features/evaluacion/MatrizCalificacionesTab";
 import EstadisticasTab from "@/components/features/evaluacion/EstadisticasTab";
-import { ProcedimientosTab } from "@/components/features/evaluacion/ProcedimientosTab";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import Link from "next/link";
 
@@ -37,7 +36,6 @@ export default function ProgresoPage() {
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState("resumen");
   const [activeTabByStudent, setActiveTabByStudent] = useState<Record<string, string>>({});
   const [allStudentsOpen, setAllStudentsOpen] = useState(false);
   const [openStudents, setOpenStudents] = useState<Set<string>>(new Set());
@@ -86,7 +84,6 @@ export default function ProgresoPage() {
   if (!activeModuleId || !activeCursoId) {
     return (
       <div className="flex min-h-screen bg-background">
-      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
@@ -312,21 +309,11 @@ export default function ProgresoPage() {
     };
   });
 
-  const TABS = [
-    { id: "resumen", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.resumen_grupal')}</>, cleanLabel: t('tabs.resumen_grupal') },
-    { id: "matriz", label: <><span className="inline-flex"><Table className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.matriz')}</>, cleanLabel: t('tabs.matriz') },
-    { id: "estadisticas", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Estadísticas</>, cleanLabel: 'Estadísticas' },
-    { id: "procedimientos", label: <><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> Procedimientos</>, cleanLabel: 'Procedimientos normativos' },
-    { id: "detalle", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.detalle')}</>, cleanLabel: t('tabs.detalle') },
-    { id: "grupal", label: <><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.grupal')}</>, cleanLabel: t('tabs.grupal') },
-    { id: "individual", label: <><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.individual')}</>, cleanLabel: t('tabs.individual') }
-  ];
-
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header breadcrumbSuffix={TABS.find(t => t.id === activeTab)?.label} />
+        <Header />
 
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-3 pb-12">
@@ -354,65 +341,37 @@ export default function ProgresoPage() {
             </div>
           </div>
 
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="mb-2 max-w-full">
-              {TABS.map(tab => (
-                <TabsTrigger key={tab.id} value={tab.id}>
-                  {tab.label}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
-
-                        {(() => {
-                const infoMap: Record<string, {title: string, desc: string}> = {
-          'resumen': {
-                    'title': 'Resumen de Progreso',
-                    'desc': 'Panel global de rendimiento y calificaciones medias.'
-          },
-          'matriz': {
-                    'title': 'Matriz de calificaciones',
-                    'desc': 'Cuaderno del profesor. Vista tipo Excel para registro ágil de notas.'
-          },
-          'detalle': {
-                    'title': 'Detalle por alumnado',
-                    'desc': 'Progreso y trazabilidad detallada por alumnado.'
-          },
-          'grupal': {
-                    'title': 'Progreso Grupal',
-                    'desc': 'Desempeño y estadísticas comparativas del grupo.'
-          },
-          'individual': {
-                    'title': 'Progreso Individual',
-                    'desc': 'Hoja de progreso individual para tutorías.'
-          }
-};
-                const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
-                return (
-                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
-                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
-                    <div>
-                      <p className="text-sm text-muted">{info.desc}</p>
-                    </div>
-                  </div>
-                );
-              })()}
-
-                  {activeTab === "resumen" && <AnalisisGrupalTab setActiveTab={setActiveTab} />}
-                  {activeTab === "matriz" && <MatrizCalificacionesTab />}
-                  {activeTab === "estadisticas" && <EstadisticasTab />}
-                  {activeTab === "procedimientos" && <ProcedimientosTab />}
-
-          {/* TAB 2: DETALLE POR ALUMNADODO (Con ambos bloques desplegables uno detrás de otro) */}
-          {activeTab === "detalle" && (
-            <div className="space-y-3 animate-in fade-in duration-500">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                    <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Detalle por alumnado
-                  </h2>
-                  <p className="text-muted mt-1">Notas individuales por alumnado, instrumento de evaluación y nivel de adquisición de RA.</p>
+          <div className="space-y-4">
+            <AccordionBlock
+              title="Resumen y Estadísticas"
+              icon={<Target className="w-5 h-5" />}
+              defaultOpen={true}
+            >
+              <div className="mt-4 space-y-6">
+                <AnalisisGrupalTab setActiveTab={() => {}} />
+                <div className="border-t border-[var(--glass-border)] pt-6">
+                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2"><BarChart className="w-6 h-6" /> Estadísticas Generales</h3>
+                  <EstadisticasTab />
                 </div>
+              </div>
+            </AccordionBlock>
+
+            <AccordionBlock
+              title="Matriz de calificaciones"
+              icon={<Table className="w-5 h-5" />}
+            >
+              <div className="mt-4"><MatrizCalificacionesTab /></div>
+            </AccordionBlock>
+
+            <AccordionBlock
+              title="Detalle por alumnado"
+              icon={<Users className="w-5 h-5" />}
+            >
+              <div className="space-y-3 mt-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-muted mt-1">Notas individuales por alumnado, instrumento de evaluación y nivel de adquisición de RA.</p>
+                  </div>
                 <Button
                   variant="secondary"
                   onClick={() => {
@@ -666,25 +625,19 @@ export default function ProgresoPage() {
                   );
                 })}
               </div>
-            </div>
-          )}
+              </div>
+            </AccordionBlock>
 
-          {/* TAB 3: GRUPAL (Componente del análisis) */}
-          {activeTab === "grupal" && (
-            <div className="animate-in fade-in duration-500">
-              <AnalisisGrupalTab />
-            </div>
-          )}
-
-          {/* TAB 4: INDIVIDUAL (Componente del análisis con simulador) */}
-          {activeTab === "individual" && (
-            <div className="animate-in fade-in duration-500">
-              <AnalisisIndividualTab />
-            </div>
-          )}
-          </MotionWrapper>
-        </main>
-      </div>
+            <AccordionBlock
+              title="Progreso Individual"
+              icon={<User className="w-5 h-5" />}
+            >
+              <div className="mt-4"><AnalisisIndividualTab /></div>
+            </AccordionBlock>
+          </div>
+        </MotionWrapper>
+      </main>
+    </div>
     </div>
       );
 }

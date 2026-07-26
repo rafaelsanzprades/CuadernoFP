@@ -669,17 +669,29 @@ export default function LegalPage() {
                           <a href="/inicio" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Inicio
                           </a>
+                        </li>
+                        <li>
+                          <a href="/ayuda" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Ayuda
+                          </a>
                           <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/inicio?tab=guia" className="hover:text-accent transition-colors block py-0.5">— Guía de uso</a>
-                            <a href="/inicio?tab=faq" className="hover:text-accent transition-colors block py-0.5">— FAQ</a>
-                            <a href="/inicio?tab=contacto" className="hover:text-accent transition-colors block py-0.5">— Contacto</a>
-                            <a href="/inicio?tab=ideas" className="hover:text-accent transition-colors block py-0.5">— Roadmap</a>
+                            <a href="/ayuda?tab=asistente-ia" className="hover:text-accent transition-colors block py-0.5">— Asistente IA</a>
+                            <a href="/ayuda?tab=verificacion" className="hover:text-accent transition-colors block py-0.5">— Verificación</a>
+                            <a href="/ayuda?tab=ideas" className="hover:text-accent transition-colors block py-0.5">— Ideas (Roadmap)</a>
+                            <a href="/ayuda?tab=contacto" className="hover:text-accent transition-colors block py-0.5">— Contacto</a>
+                            <a href="/ayuda?tab=autores" className="hover:text-accent transition-colors block py-0.5">— Autores</a>
                           </div>
                         </li>
                         <li>
                           <a href="/perfil" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Perfil
                           </a>
+                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                            <a href="/perfil?tab=aspecto" className="hover:text-accent transition-colors block py-0.5">— Aspecto</a>
+                            <a href="/perfil?tab=idioma" className="hover:text-accent transition-colors block py-0.5">— Idioma</a>
+                            <a href="/perfil?tab=accesibilidad" className="hover:text-accent transition-colors block py-0.5">— Accesibilidad</a>
+                            <a href="/perfil?tab=seguridad" className="hover:text-accent transition-colors block py-0.5">— Seguridad</a>
+                          </div>
                         </li>
                         <li>
                           <a href="/archivos" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
@@ -702,13 +714,17 @@ export default function LegalPage() {
                             <a href="/catalogo?tab=cursos" className="hover:text-accent transition-colors block py-0.5">— Módulos</a>
                             <a href="/catalogo?tab=modulos" className="hover:text-accent transition-colors block py-0.5">— RA → CE</a>
                             <a href="/catalogo?tab=incual" className="hover:text-accent transition-colors block py-0.5">— ECP INCUAL</a>
-                            <a href="/catalogo?tab=autores" className="hover:text-accent transition-colors block py-0.5">— Autores</a>
                           </div>
                         </li>
                         <li>
                           <a href="/documentos" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Documentos
                           </a>
+                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                            <a href="/documentos?tab=normativa" className="hover:text-accent transition-colors block py-0.5">— Normativa</a>
+                            <a href="/documentos?tab=curriculos" className="hover:text-accent transition-colors block py-0.5">— Currículos</a>
+                            <a href="/documentos?tab=plantillas" className="hover:text-accent transition-colors block py-0.5">— Plantillas</a>
+                          </div>
                         </li>
                         <li>
                           <a href="/legal" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
@@ -736,9 +752,9 @@ export default function LegalPage() {
                           </a>
                           <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
                             <a href="/contexto?tab=datos" className="hover:text-accent transition-colors block py-0.5">— Datos</a>
-                            <a href="/contexto?tab=entorno" className="hover:text-accent transition-colors block py-0.5">— Entorno</a>
-                            <a href="/contexto?tab=inclusion" className="hover:text-accent transition-colors block py-0.5">— Inclusión</a>
-                            <a href="/contexto?tab=feoe" className="hover:text-accent transition-colors block py-0.5">— FEOE y dual</a>
+                            <a href="/contexto?tab=contexto" className="hover:text-accent transition-colors block py-0.5">— Contexto</a>
+                            <a href="/contexto?tab=planes" className="hover:text-accent transition-colors block py-0.5">— Planes</a>
+                            <a href="/contexto?tab=diversidad" className="hover:text-accent transition-colors block py-0.5">— Diversidad</a>
                           </div>
                         </li>
                         <li>
@@ -749,26 +765,18 @@ export default function LegalPage() {
                             <a href="/curriculo?tab=ra" className="hover:text-accent transition-colors block py-0.5">— RA y CE</a>
                             <a href="/curriculo?tab=ud" className="hover:text-accent transition-colors block py-0.5">— Unidades (UD)</a>
                             <a href="/curriculo?tab=relacion" className="hover:text-accent transition-colors block py-0.5">— Relación RA-UD</a>
+                            <a href="/curriculo?tab=contribucion" className="hover:text-accent transition-colors block py-0.5">— Contribución OG</a>
                           </div>
                         </li>
                         <li>
                           <a href="/metodologia" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Metodología
                           </a>
-                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/metodologia?tab=estrategias" className="hover:text-accent transition-colors block py-0.5">— Estrategias</a>
-                            <a href="/metodologia?tab=recursos" className="hover:text-accent transition-colors block py-0.5">— Recursos</a>
-                            <a href="/metodologia?tab=planes" className="hover:text-accent transition-colors block py-0.5">— Planes y contingencia</a>
-                          </div>
                         </li>
                         <li>
                           <a href="/evaluacion" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Evaluación
                           </a>
-                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/evaluacion?tab=criterios" className="hover:text-accent transition-colors block py-0.5">— Criterios de calificación</a>
-                            <a href="/evaluacion?tab=instrumentos" className="hover:text-accent transition-colors block py-0.5">— Instrumentos</a>
-                          </div>
                         </li>
                         <li>
                           <a href="/secuenciacion" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
@@ -792,13 +800,24 @@ export default function LegalPage() {
                       <h3 className="font-extrabold text-lg border-b-2 border-accent pb-2 text-foreground">Curso</h3>
                       <ul className="space-y-4 text-sm">
                         <li>
+                          <a href="/calendario" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Calendario
+                          </a>
+                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                            <a href="/calendario?tab=fechas" className="hover:text-accent transition-colors block py-0.5">— Fechas clave</a>
+                            <a href="/calendario?tab=eventos" className="hover:text-accent transition-colors block py-0.5">— Eventos</a>
+                            <a href="/calendario?tab=visual" className="hover:text-accent transition-colors block py-0.5">— Visual</a>
+                            <a href="/calendario?tab=complementarias" className="hover:text-accent transition-colors block py-0.5">— Complementarias</a>
+                          </div>
+                        </li>
+                        <li>
                           <a href="/alumnado" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Alumnado
                           </a>
                           <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
                             <a href="/alumnado?tab=listado" className="hover:text-accent transition-colors block py-0.5">— Listado</a>
                             <a href="/alumnado?tab=plano" className="hover:text-accent transition-colors block py-0.5">— Plano del aula</a>
-                            <a href="/alumnado?tab=contexto" className="hover:text-accent transition-colors block py-0.5">— Contexto</a>
+                            <a href="/alumnado?tab=contexto" className="hover:text-accent transition-colors block py-0.5">— Contexto del grupo</a>
                           </div>
                         </li>
                         <li>
@@ -813,8 +832,7 @@ export default function LegalPage() {
                           <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
                             <a href="/seguimiento?tab=tutoria" className="hover:text-accent transition-colors block py-0.5">— Tutoría</a>
                             <a href="/seguimiento?tab=asistencia" className="hover:text-accent transition-colors block py-0.5">— Asistencia</a>
-                            <a href="/seguimiento?tab=alerta_abandono" className="hover:text-accent transition-colors block py-0.5">— Alerta abandono</a>
-                            <a href="/seguimiento?tab=feoe" className="hover:text-accent transition-colors block py-0.5">— FEOE</a>
+                            <a href="/seguimiento?tab=abandono" className="hover:text-accent transition-colors block py-0.5">— Alerta abandono</a>
                           </div>
                         </li>
                         <li>
@@ -822,9 +840,11 @@ export default function LegalPage() {
                             <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Calificaciones
                           </a>
                           <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/calificaciones?tab=resumen" className="hover:text-accent transition-colors block py-0.5">— Estadísticas (resumen)</a>
+                            <a href="/calificaciones?tab=resumen" className="hover:text-accent transition-colors block py-0.5">— Resumen grupal</a>
                             <a href="/calificaciones?tab=matriz" className="hover:text-accent transition-colors block py-0.5">— Matriz de notas</a>
                             <a href="/calificaciones?tab=detalle" className="hover:text-accent transition-colors block py-0.5">— Por alumnado</a>
+                            <a href="/calificaciones?tab=grupal" className="hover:text-accent transition-colors block py-0.5">— Informe Grupal</a>
+                            <a href="/calificaciones?tab=individual" className="hover:text-accent transition-colors block py-0.5">— Informe Individual</a>
                           </div>
                         </li>
                         <li>

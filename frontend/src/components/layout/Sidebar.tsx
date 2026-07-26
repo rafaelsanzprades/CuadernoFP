@@ -1,5 +1,5 @@
 "use client";
-import { ChevronLeft, ChevronRight, CalendarDays, ChevronDown, Cloud, HardDrive, FolderOpen, Hourglass, Save, AlertTriangle } from "lucide-react";
+import { ChevronLeft, ChevronRight, CalendarDays, ChevronDown, Cloud, HardDrive, FolderOpen, Hourglass, Save, AlertTriangle, HelpCircle } from "lucide-react";
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAppStore } from '@/store/useAppStore';
@@ -207,7 +207,7 @@ export default function Sidebar() {
             
             <div className="flex bg-foreground/5 rounded-lg p-0.5 w-full gap-0.5">
               <button
-                onClick={() => { setDataSource('demo'); fileManager.loadDemoData('1a'); toast.success('Modo DEMO'); }}
+                onClick={() => { setDataSource('demo'); fileManager.loadDemoData('0237'); toast.success('Modo DEMO'); }}
                 className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-md text-sm font-bold transition-all ${dataSource === 'demo'
                   ? 'bg-warning/20 text-warning shadow-sm ring-1 ring-warning/30'
                   : 'text-muted hover:bg-foreground/10 hover:text-foreground'}`}
@@ -231,9 +231,8 @@ export default function Sidebar() {
                   value={demoGroupValue}
                   onChange={(e) => { fileManager.loadDemoData(e.target.value); toast.success(`Grupo ${e.target.value.toUpperCase()}`); }}
                 >
-                  <option value="1a">DEMO 1A-GM {moduleTitleSuffix !== 'CÓDIGO' ? moduleTitleSuffix : ''}</option>
-                  <option value="1b">DEMO 1B-GM {moduleTitleSuffix !== 'CÓDIGO' ? moduleTitleSuffix : ''}</option>
-                  <option value="1c">DEMO 1C-GM {moduleTitleSuffix !== 'CÓDIGO' ? moduleTitleSuffix : ''}</option>
+                  <option value="0237">202526 1A-GM (0237 ICTVE)</option>
+                  <option value="0223">202526 1A-GM (0223 AO)</option>
                 </select>
                 <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none" style={{ color: 'var(--warning)' }} />
               </div>
@@ -440,12 +439,20 @@ export default function Sidebar() {
         {/* 🔻 Footer 🔻 */}
         <div className={`px-4 py-3 border-t border-[var(--glass-border)] flex flex-col items-center gap-1.5`}>
           {isSidebarOpen ? (
-            <div className="w-full">
-              <InstallPwaButton isSidebarOpen={true} />
+            <div className="flex w-full items-center justify-between gap-2">
+              <div className="flex-1">
+                <InstallPwaButton isSidebarOpen={true} />
+              </div>
+              <Link href="/ayuda" className="flex items-center justify-center w-10 h-10 rounded-lg bg-[var(--glass-bg)] hover:bg-[var(--glass-border)] text-muted hover:text-accent transition-colors">
+                <HelpCircle className="w-5 h-5" />
+              </Link>
             </div>
           ) : (
           <div className="flex flex-col items-center gap-2 w-full">
             <InstallPwaButton isSidebarOpen={false} />
+            <Link href="/ayuda" className="flex items-center justify-center w-10 h-10 rounded-lg bg-[var(--glass-bg)] hover:bg-[var(--glass-border)] text-muted hover:text-accent transition-colors">
+              <HelpCircle className="w-5 h-5" />
+            </Link>
           </div>
         )}
       </div>
