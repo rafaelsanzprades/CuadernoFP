@@ -82,7 +82,14 @@ export const demoSeed0223 = {
             "familia": "Informática y Comunicaciones",
             "ciclo": "Sistemas microinformáticos y redes (SMR)",
             "grado": "D",
-            "nivel": "2"
+            "nivel": "2",
+            "pond_1t": 30,
+            "pond_2t": 30,
+            "pond_3t": 40,
+            "criterio_conocimiento": 40,
+            "criterio_procedimiento_practicas": 30,
+            "criterio_procedimiento_ejercicios": 20,
+            "criterio_tareas": 10
         },
         "df_contexto": {
             "centro": "CIFPA",
