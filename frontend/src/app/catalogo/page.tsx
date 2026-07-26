@@ -26,7 +26,7 @@ import { TabAcronimos } from "@/components/features/catalogo/TabAcronimos";
 import { useTranslation } from "react-i18next";
 import { useAppStore } from "@/store/useAppStore";
 
-type Tab = "grados" | "familias" | "titulo" | "cursos" | "modulos" | "autores" | "comunidades" | "normativa" | "incual" | "acronimos";
+type Tab = "grados" | "familias" | "titulo" | "cursos" | "modulos" | "autores" | "comunidades" | "incual" | "acronimos";
 
 
 export default function CiclosPage() {
@@ -50,7 +50,7 @@ function CiclosContent() {
 
   const tabParam = searchParams.get("tab") as Tab | null;
   const [activeTab, setActiveTab] = useState<Tab>(
-    tabParam && ["comunidades", "grados", "familias", "titulo", "cursos", "modulos", "autores", "normativa", "incual", "acronimos"].includes(tabParam) ? tabParam : "normativa"
+    tabParam && ["comunidades", "grados", "familias", "titulo", "cursos", "modulos", "autores", "incual", "acronimos"].includes(tabParam) ? tabParam : "comunidades"
   );
 
   const [globalSelection, setGlobalSelection] = useState(() => {
@@ -112,7 +112,6 @@ function CiclosContent() {
     modulos: 'RA → CE',
     autores: t('tabs.autores', {defaultValue: 'Autores'}),
     comunidades: t('tabs.comunidades', {defaultValue: 'Comunidades'}),
-    normativa: "Normativa",
     incual: "ECP INCUAL",
     acronimos: "Acrónimos"
   };
@@ -137,7 +136,6 @@ function CiclosContent() {
               <TabsList className="mb-2 max-w-full">
                 {(
                   [
-                    { id: "normativa" as Tab, label: <span className="flex items-center gap-2"><ListChecks className="w-4 h-4 text-warning" /> Normativa</span> },
                     { id: "comunidades" as Tab, label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-success" /> {t('tabs.comunidades', {defaultValue: 'Comunidades'})}</span> },
                     { id: "grados" as Tab, label: <span className="flex items-center gap-2"><Award className="w-4 h-4" /> {t('tabs.grados', {defaultValue: 'Grados'})}</span> },
                     { id: "familias" as Tab, label: <span className="flex items-center gap-2"><FolderTree className="w-4 h-4" /> {t('tabs.familias', {defaultValue: 'Familias'})}</span> },
@@ -187,7 +185,6 @@ function CiclosContent() {
             {activeTab === "autores" && <TabAutores globalSelection={globalSelection} />}
             {activeTab === "incual" && <TabIncual globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
             {activeTab === "comunidades" && <TabComunidades />}
-            {activeTab === "normativa" && <TabNormativa />}
             {activeTab === "acronimos" && <TabAcronimos />}
           </MotionWrapper>
         </div>
