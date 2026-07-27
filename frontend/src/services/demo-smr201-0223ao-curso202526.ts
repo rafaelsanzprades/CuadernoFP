@@ -38,33 +38,18 @@ export const demoSeed0223 = {
             "Vie": 1
         },
         "calendar_notes": {
-            "f_13/10/2025": "Festivo",
-            "f_08/12/2025": "Festivo",
-            "f_22/12/2025": "Vacaciones de Navidad"
+            "febrero": "Semana blanca: del 16 al 20 de febrero.",
+            "mayo": "Fiestas patronales: primer fin de semana largo."
         },
-        "df_al": [
-            { "ID": "AN01", "Nombre": "Laura", "Apellidos": "Martínez Demo", "NIA": "10001", "email": "laura.martinez@demo.es" },
-            { "ID": "AN02", "Nombre": "Carlos", "Apellidos": "López Demo", "NIA": "10002", "email": "carlos.lopez@demo.es" },
-            { "ID": "AN03", "Nombre": "Ana", "Apellidos": "García Demo", "NIA": "10003", "email": "ana.garcia@demo.es" },
-            { "ID": "AN04", "Nombre": "David", "Apellidos": "Pérez Demo", "NIA": "10004", "email": "david.perez@demo.es" },
-            { "ID": "AN05", "Nombre": "Elena", "Apellidos": "Sánchez Demo", "NIA": "10005", "email": "elena.sanchez@demo.es" },
-            { "ID": "AN06", "Nombre": "Miguel", "Apellidos": "Romero Demo", "NIA": "10006", "email": "miguel.romero@demo.es" },
-            { "ID": "AN07", "Nombre": "Lucía", "Apellidos": "Alonso Demo", "NIA": "10007", "email": "lucia.alonso@demo.es" },
-            { "ID": "AN08", "Nombre": "Javier", "Apellidos": "Gómez Demo", "NIA": "10008", "email": "javier.gomez@demo.es" },
-            { "ID": "AN09", "Nombre": "Sofía", "Apellidos": "Navarro Demo", "NIA": "10009", "email": "sofia.navarro@demo.es" },
-            { "ID": "AN10", "Nombre": "Daniel", "Apellidos": "Ruiz Demo", "NIA": "10010", "email": "daniel.ruiz@demo.es" },
-            { "ID": "AN11", "Nombre": "Carmen", "Apellidos": "Díaz Demo", "NIA": "10011", "email": "carmen.diaz@demo.es" },
-            { "ID": "AN12", "Nombre": "Alejandro", "Apellidos": "Vázquez Demo", "NIA": "10012", "email": "alejandro.vazquez@demo.es" },
-            { "ID": "AN13", "Nombre": "Marta", "Apellidos": "Serrano Demo", "NIA": "10013", "email": "marta.serrano@demo.es" },
-            { "ID": "AN14", "Nombre": "Pablo", "Apellidos": "Muñoz Demo", "NIA": "10014", "email": "pablo.munoz@demo.es" },
-            { "ID": "AN15", "Nombre": "Paula", "Apellidos": "Gutiérrez Demo", "NIA": "10015", "email": "paula.gutierrez@demo.es" },
-            { "ID": "AN16", "Nombre": "Hugo", "Apellidos": "Rojas Demo", "NIA": "10016", "email": "hugo.rojas@demo.es" },
-            { "ID": "AN17", "Nombre": "Irene", "Apellidos": "Molina Demo", "NIA": "10017", "email": "irene.molina@demo.es" }
-        ],
-        "df_calificaciones": [],
+        "config_pesos_trim": {
+            "peso_1t": 30,
+            "peso_2t": 30,
+            "peso_3t": 40
+        },
         "df_eval": [],
-        "df_feoe": [],
+        "df_al": [],
         "df_sgmt": [],
+        "df_feoe": [],
         "daily_ledger": {},
         "tutoria_ledger": {},
         "planning_ledger": {},
@@ -103,58 +88,111 @@ export const demoSeed0223 = {
             "caracteristicas_alumnado": "Se identifican y respetan las características y necesidades del alumnado, adaptando las metodologías, los recursos y las evaluaciones a sus capacidades. Se planifican actividades que promuevan la participación activa.",
             "infraestructura": "El proceso de enseñanza-aprendizaje se desarrollará principalmente en las aulas-taller del centro, dotadas con equipos informáticos, cañón proyector y conexión a internet. Se dispondrá del equipamiento específico del ciclo."
         },
-        "df_curriculo": [
-            {
-                "codigo": "RA1",
-                "descripcion": "Reconoce las características de la ofimática.",
-                "peso": 5,
-                "ces": [
-                    { "codigo": "CE1.a", "descripcion": "Identificados los elementos ofimáticos", "peso": 50 },
-                    { "codigo": "CE1.b", "descripcion": "Identificadas utilidades", "peso": 50 }
-                ]
-            },
-            {
-                "codigo": "RA3",
-                "descripcion": "Elabora documentos con hojas de cálculo.",
-                "peso": 30,
-                "ces": [
-                    { "codigo": "CE3.c", "descripcion": "Aplicadas fórmulas y funciones.", "peso": 50 },
-                    { "codigo": "CE3.d", "descripcion": "Generados gráficos.", "peso": 50 }
-                ]
-            },
-            {
-                "codigo": "RA4",
-                "descripcion": "Elabora documentos con bases de datos ofimáticas.",
-                "peso": 20,
-                "ces": [
-                    { "codigo": "CE4.b", "descripcion": "Creadas bases de datos.", "peso": 50 },
-                    { "codigo": "CE4.g", "descripcion": "Búsqueda y filtrado.", "peso": 50 }
-                ]
-            },
-            {
-                "codigo": "RA9",
-                "descripcion": "Asesora sobre herramientas ofimáticas y resuelve incidencias.",
-                "peso": 10,
-                "ces": [
-                    { "codigo": "CE9.b", "descripcion": "Identificados problemas.", "peso": 50 },
-                    { "codigo": "CE9.d", "descripcion": "Aplicadas técnicas de asesoramiento.", "peso": 50 }
-                ]
-            }
+        "df_ra": [
+            { "id_ra": "RA1", "peso_ra": 10, "is_dual": "false", "comp_clave": "", "cpe": "" },
+            { "id_ra": "RA2", "peso_ra": 20, "is_dual": "false", "comp_clave": "", "cpe": "" },
+            { "id_ra": "RA3", "peso_ra": 15, "is_dual": "false", "comp_clave": "", "cpe": "" },
+            { "id_ra": "RA4", "peso_ra": 10, "is_dual": "false", "comp_clave": "", "cpe": "" },
+            { "id_ra": "RA5", "peso_ra": 15, "is_dual": "false", "comp_clave": "", "cpe": "" },
+            { "id_ra": "RA6", "peso_ra": 10, "is_dual": "false", "comp_clave": "", "cpe": "" },
+            { "id_ra": "RA7", "peso_ra": 10, "is_dual": "false", "comp_clave": "", "cpe": "" },
+            { "id_ra": "RA8", "peso_ra": 5, "is_dual": "false", "comp_clave": "", "cpe": "" },
+            { "id_ra": "RA9", "peso_ra": 5, "is_dual": "false", "comp_clave": "", "cpe": "" }
+        ],
+        "df_ce": [
+            { "id_ce": "CE1.a", "id_ra": "RA1", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE1.b", "id_ra": "RA1", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE1.c", "id_ra": "RA1", "peso_ce": 15, "FEOE": false, "UD": "" },
+            { "id_ce": "CE1.d", "id_ra": "RA1", "peso_ce": 15, "FEOE": false, "UD": "" },
+            { "id_ce": "CE1.e", "id_ra": "RA1", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE1.f", "id_ra": "RA1", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE1.g", "id_ra": "RA1", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE1.h", "id_ra": "RA1", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE1.i", "id_ra": "RA1", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE2.a", "id_ra": "RA2", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE2.b", "id_ra": "RA2", "peso_ce": 20, "FEOE": false, "UD": "" },
+            { "id_ce": "CE2.c", "id_ra": "RA2", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE2.d", "id_ra": "RA2", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE2.e", "id_ra": "RA2", "peso_ce": 30, "FEOE": false, "UD": "" },
+            { "id_ce": "CE2.f", "id_ra": "RA2", "peso_ce": 20, "FEOE": false, "UD": "" },
+            { "id_ce": "CE3.a", "id_ra": "RA3", "peso_ce": 5, "FEOE": false, "UD": "" },
+            { "id_ce": "CE3.b", "id_ra": "RA3", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE3.c", "id_ra": "RA3", "peso_ce": 25, "FEOE": false, "UD": "" },
+            { "id_ce": "CE3.d", "id_ra": "RA3", "peso_ce": 15, "FEOE": false, "UD": "" },
+            { "id_ce": "CE3.e", "id_ra": "RA3", "peso_ce": 15, "FEOE": false, "UD": "" },
+            { "id_ce": "CE3.f", "id_ra": "RA3", "peso_ce": 15, "FEOE": false, "UD": "" },
+            { "id_ce": "CE3.g", "id_ra": "RA3", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE3.h", "id_ra": "RA3", "peso_ce": 5, "FEOE": false, "UD": "" },
+            { "id_ce": "CE4.a", "id_ra": "RA4", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE4.b", "id_ra": "RA4", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE4.c", "id_ra": "RA4", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE4.d", "id_ra": "RA4", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE4.e", "id_ra": "RA4", "peso_ce": 15, "FEOE": false, "UD": "" },
+            { "id_ce": "CE4.f", "id_ra": "RA4", "peso_ce": 15, "FEOE": false, "UD": "" },
+            { "id_ce": "CE4.g", "id_ra": "RA4", "peso_ce": 15, "FEOE": false, "UD": "" },
+            { "id_ce": "CE4.h", "id_ra": "RA4", "peso_ce": 15, "FEOE": false, "UD": "" },
+            { "id_ce": "CE5.a", "id_ra": "RA5", "peso_ce": 15, "FEOE": false, "UD": "" },
+            { "id_ce": "CE5.b", "id_ra": "RA5", "peso_ce": 15, "FEOE": false, "UD": "" },
+            { "id_ce": "CE5.c", "id_ra": "RA5", "peso_ce": 15, "FEOE": false, "UD": "" },
+            { "id_ce": "CE5.d", "id_ra": "RA5", "peso_ce": 40, "FEOE": false, "UD": "" },
+            { "id_ce": "CE5.e", "id_ra": "RA5", "peso_ce": 15, "FEOE": false, "UD": "" },
+            { "id_ce": "CE6.a", "id_ra": "RA6", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE6.b", "id_ra": "RA6", "peso_ce": 20, "FEOE": false, "UD": "" },
+            { "id_ce": "CE6.c", "id_ra": "RA6", "peso_ce": 5, "FEOE": false, "UD": "" },
+            { "id_ce": "CE6.d", "id_ra": "RA6", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE6.e", "id_ra": "RA6", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE7.a", "id_ra": "RA7", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE7.b", "id_ra": "RA7", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE7.c", "id_ra": "RA7", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE7.d", "id_ra": "RA7", "peso_ce": 30, "FEOE": false, "UD": "" },
+            { "id_ce": "CE7.e", "id_ra": "RA7", "peso_ce": 30, "FEOE": false, "UD": "" },
+            { "id_ce": "CE7.f", "id_ra": "RA7", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE8.a", "id_ra": "RA8", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE8.b", "id_ra": "RA8", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE8.c", "id_ra": "RA8", "peso_ce": 5, "FEOE": false, "UD": "" },
+            { "id_ce": "CE8.d", "id_ra": "RA8", "peso_ce": 25, "FEOE": false, "UD": "" },
+            { "id_ce": "CE8.e", "id_ra": "RA8", "peso_ce": 25, "FEOE": false, "UD": "" },
+            { "id_ce": "CE8.f", "id_ra": "RA8", "peso_ce": 15, "FEOE": false, "UD": "" },
+            { "id_ce": "CE8.g", "id_ra": "RA8", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE9.a", "id_ra": "RA9", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE9.b", "id_ra": "RA9", "peso_ce": 10, "FEOE": false, "UD": "" },
+            { "id_ce": "CE9.c", "id_ra": "RA9", "peso_ce": 5, "FEOE": false, "UD": "" },
+            { "id_ce": "CE9.d", "id_ra": "RA9", "peso_ce": 20, "FEOE": false, "UD": "" }
         ],
         "df_ud": [
-            { "id": "UD1", "titulo": "Fundamentos de ofimática", "duracion": 20 },
-            { "id": "UD2", "titulo": "Hojas de cálculo", "duracion": 40 },
-            { "id": "UD3", "titulo": "Bases de datos", "duracion": 40 },
-            { "id": "UD4", "titulo": "Soporte ofimático", "duracion": 20 }
+            { "id": "UD1", "titulo": "Fundamentos de la ofimática", "duracion": 10, "ra": "RA1", "temporizacion": "1.er trimestre" },
+            { "id": "UD2", "titulo": "Comunicación digital: correo y agenda", "duracion": 10, "ra": "RA8", "temporizacion": "1.er trimestre" },
+            { "id": "UD3", "titulo": "Procesadores de texto", "duracion": 30, "ra": "RA2", "temporizacion": "1.er trimestre" },
+            { "id": "UD4", "titulo": "Hojas de cálculo", "duracion": 41, "ra": "RA3", "temporizacion": "1.er / 2.º trimestre" },
+            { "id": "UD5", "titulo": "Soporte técnico ofimático", "duracion": 10, "ra": "RA9", "temporizacion": "2.º trimestre" },
+            { "id": "UD6", "titulo": "Presentaciones multimedia", "duracion": 17, "ra": "RA7", "temporizacion": "2.º trimestre" },
+            { "id": "UD7", "titulo": "Bases de datos", "duracion": 24, "ra": "RA4", "temporizacion": "2.º trimestre" },
+            { "id": "UD8", "titulo": "Imagen y vídeo digital", "duracion": 33, "ra": "RA5, RA6", "temporizacion": "3.er trimestre" }
         ],
         "df_metodologia": {},
-        "medidas_inclusion": ["[NIVEL] Actividades multinivel", "[MATERIAL] Adaptación de materiales", "[AGRUP] Agrupamientos flexibles y tutoría entre iguales"],
-        "instrumentos_seleccionados": ["[PRU-OBJ] Prueba objetiva", "[PRU-EJEC] Prueba de ejecución", "[RUBR] Rúbrica"],
+        "medidas_inclusion": [
+            "[NIVEL-DUA] Medidas DUA a nivel de grupo — Representación: diagramas de flujo, infografías, esquemas, vídeos tutoriales. Calendarios visuales de la UD.",
+            "[ACCION-DUA] Medidas DUA a nivel de grupo — Acción y expresión: Flexibilidad en demostración de competencias. Plantillas y andamiajes.",
+            "[IMPLIC-DUA] Medidas DUA a nivel de grupo — Implicación: Conexión con intereses reales. Rutinas predecibles y clima seguro.",
+            "[TEA-REP] TEA — Representación: Instrucciones claras y explícitas en pasos numerados. Apoyos visuales.",
+            "[TEA-ACCION] TEA — Acción y expresión: Ampliación de tiempos. Sistemas alternativos de comunicación.",
+            "[TEA-IMPLIC] TEA — Implicación: Intereses específicos del alumno como punto de entrada. Rutinas claras.",
+            "[TDAH-REP] TDAH — Representación: Instrucciones cortas y segmentadas. Códigos de color.",
+            "[TDAH-ACCION] TDAH — Acción y expresión: Fragmentación de tareas. Micro-pausas activas.",
+            "[TDAH-IMPLIC] TDAH — Implicación: Feedback inmediato. Gamificación parcial.",
+            "[DESF-REP] Desfase curricular — Representación: Recursos audiovisuales y manipulativos. Textos adaptados.",
+            "[DESF-ACCION] Desfase curricular — Acción y expresión: Respuestas orales, visuales o prácticas. Plantillas con frases modelo.",
+            "[DESF-IMPLIC] Desfase curricular — Implicación: Metas realistas a corto plazo. Actividades funcionales.",
+            "[AUD-REP] Discapacidad auditiva — Representación: Ubicación preferente. Subtítulos en vídeos.",
+            "[AUD-ACCION] Discapacidad auditiva — Acción y expresión: Respuestas escritas o visuales.",
+            "[AUD-IMPLIC] Discapacidad auditiva — Implicación: Evitar tareas exclusivamente auditivas."
+        ],
+        "instrumentos_seleccionados": ["[PRU-OBJ] Prueba objetiva", "[PRU-EJEC] Prueba de ejecución", "[RUBR] Rúbrica", "[LIST-CTRL] Lista de control"],
         "recursos_espacios": ["[REC-AULA] Aula polivalente", "Salón de Actos"],
-        "metodologias_seleccionadas": ["[ABP] Aprendizaje Basado en Proyectos", "[COLAB] Aprendizaje Cooperativo / Colaborativo"],
-        "elementos_transversales": ["[TRANS-TIC] Fomento de la competencia digital y buen uso de internet"],
-        "actividades_complementarias": ["[EXT-CHARLA] Charlas / Masterclass con expertos profesionales"],
-        "medidas_contingencia": ["[CONT-ASINC] Docencia telemática asíncrona (Aula Virtual)", "[CONT-AUT] Dosier de tareas autoguiadas"],
+        "metodologias_seleccionadas": ["[ABP] Aprendizaje Basado en Proyectos", "[COLAB] Aprendizaje Cooperativo"],
+        "elementos_transversales": ["[TRANS-TIC] Competencia digital y buen uso de internet"],
+        "actividades_complementarias": ["[EXT-CHARLA] Charlas / Masterclass con expertos"],
+        "medidas_contingencia": ["[CONT-ASINC] Docencia telemática asíncrona", "[CONT-AUT] Dosier de tareas autoguiadas"],
         "__version__": 1
     }
 };

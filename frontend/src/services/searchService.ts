@@ -1,5 +1,5 @@
 import { navGroups } from "@/config/navigation";
-import { demoSeed } from "@/services/demo-ele203-0237ictve-curso202526";
+import { useAppStore } from "@/store/useAppStore";
 
 export interface SearchResult {
   type: 'page' | 'alumno' | 'modulo' | 'curso';
@@ -36,11 +36,11 @@ export function searchGlobal(query: string): SearchResult[] {
     });
   });
 
-  // 2. Buscar en datos DEMO (alumnos)
-  const cursoId = "0237-ictve-curso-2025-26";
-  const curso = demoSeed[cursoId];
-  if (curso?.df_al) {
-    curso.df_al.forEach((alumno: any) => {
+  // 2. Buscar en datos del store (alumnos)
+  const store = useAppStore.getState();
+  const cursoData = store.cursoData;
+  if (cursoData?.df_al) {
+    cursoData.df_al.forEach((alumno: any) => {
       const nombreCompleto = `${alumno.Apellidos} ${alumno.Nombre}`.toLowerCase();
       const nombreSolo = alumno.Nombre.toLowerCase();
       const apellidos = alumno.Apellidos.toLowerCase();
@@ -62,8 +62,8 @@ export function searchGlobal(query: string): SearchResult[] {
   }
 
   // 3. Buscar en módulos del curso (solo si existe la propiedad)
-  if (curso && 'modulo' in curso && curso.modulo) {
-    const modulo = curso.modulo as any;
+  if (cursoData && 'modulo' in cursoData && cursoData.modulo) {
+    const modulo = cursoData.modulo as any;
     const moduloSearch = [
       { title: modulo.nombre || 'Módulo', subtitle: 'Configuración del módulo', href: '/modulo' },
       { title: modulo.objetivos || 'Objetivos', subtitle: 'Objetivos del módulo', href: '/modulo' },

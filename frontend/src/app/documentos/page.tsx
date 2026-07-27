@@ -28,9 +28,7 @@ export default function DocumentosPage() {
   const TABS = [
     { id: "Bibliografia", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> Bibliografia</span>, cleanLabel: 'Bibliografia' },
     { id: "Normativa", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.normativa', {defaultValue: 'Normativa'})}</span>, cleanLabel: t('tabs.normativa', {defaultValue: 'Normativa'}) },
-    { id: "Plantillas", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.plantillas', {defaultValue: 'Plantillas'})}</span>, cleanLabel: t('tabs.plantillas', {defaultValue: 'Plantillas'}) },
-    { id: "Currículos", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> {t('tabs.curriculos', {defaultValue: 'Currículos'})}</span>, cleanLabel: t('tabs.curriculos', {defaultValue: 'Currículos'}) },
-    { id: "Autores", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> {t('tabs.autores', {defaultValue: 'Autores'})}</span>, cleanLabel: t('tabs.autores', {defaultValue: 'Autores'}) }
+    { id: "Currículos", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> {t('tabs.curriculos', {defaultValue: 'Currículos'})}</span>, cleanLabel: t('tabs.curriculos', {defaultValue: 'Currículos'}) }
   ];
   const [activeTab, setActiveTab] = useState("Bibliografia");
   const [currentPath, setCurrentPath] = useState<string>("");
@@ -72,10 +70,8 @@ export default function DocumentosPage() {
   useEffect(() => {
     const folderMap: Record<string, string> = {
       "bibliografia": "Bibliografia",
-      "plantillas": "Plantillas",
       "curriculos": "Currículos",
-      "normativa": "Normativa",
-      "autores": "Autores"
+      "normativa": "Normativa"
     };
     if (folderMap[activeTab]) {
       setActiveTab(folderMap[activeTab]);
