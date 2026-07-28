@@ -12,16 +12,50 @@ export type DataSourceType = 'demo' | 'local';
 // ─── Helpers ────────────────────────────────────────────────
 
 const ALLOWED_PROGRAMACION_KEYS = [
-  'df_ud', 'df_sesiones', 'df_ra', 'df_ce', 'df_tareas', 'df_act', 'df_instr', 
-  'df_pr', 'df_dua', 'df_contingencia', 'df_ace', 'info_modulo', 
-  'config_contexto', 'config_aula', 'config_redondeo', '__version__', 'ra_og_mapping'
+  // Core curriculares
+  'df_ud', 'df_sesiones', 'df_ra', 'df_ce',
+  // Metodología y rúbricas (solo 0237, opcionales)
+  'df_tareas', 'df_act', 'df_instr', 'df_pr', 'df_dua', 'df_contingencia', 'df_ace',
+  // Configuración
+  'info_modulo', 'config_contexto', 'config_aula', 'config_redondeo', 'ra_og_mapping',
+  // Fechas, horario y calendario
+  'info_fechas', 'horario', 'calendar_notes', 'config_pesos_trim',
+  // Planificación y empresas
+  'planning_ledger', 'df_empresas',
+  // Medidas e inclusión
+  'medidas_inclusion', 'texto_inclusion_libre',
+  'instrumentos_seleccionados', 'recursos_espacios', 'metodologias_seleccionadas',
+  'texto_metodologia_libre', 'elementos_transversales', 'actividades_complementarias',
+  'medidas_contingencia', 'texto_contingencia_libre',
+  'texto_contextualizacion_libre',
+  // Textos narrativos PD (16 campos — ESENCIALES)
+  'textos_pd_contexto_geografico', 'textos_pd_contexto_socioeconomico',
+  'textos_pd_contexto_escolar', 'textos_pd_caracteristicas_alumnado',
+  'textos_pd_feoe_organizacion', 'textos_pd_feoe_seguimiento',
+  'textos_pd_eval_informacion', 'textos_pd_eval_perdida_continua',
+  'textos_pd_eval_recuperacion', 'textos_pd_eval_pendientes',
+  'textos_pd_metodologia_labor_coordinada', 'textos_pd_inclusion',
+  'textos_pd_contingencia_profesor', 'textos_pd_contingencia_alumnado',
+  'textos_pd_bibliografia', 'textos_pd_publicidad',
+  // Metadatos
+  '__version__', 'tipo', 'id'
 ];
 
 const ALLOWED_CURSO_KEYS = [
-  'df_al', 'df_sgmt', 'df_feoe', 'df_eval', 'daily_ledger', 'tutoria_ledger', 
-  'profesional_ledger', 'horario', 'info_fechas', 'config_pesos_trim', 
-  'config_asistencia', 'df_empresas', 'calendar_notes', 'planning_ledger', 
-  'plano_clase', 'actuaciones_tutoria', '__version__'
+  // Alumnado y evaluación
+  'df_al', 'df_sgmt', 'df_feoe', 'df_eval',
+  // Seguimiento diario y tutoría
+  'daily_ledger', 'tutoria_ledger', 'profesional_ledger',
+  // Horario y fechas (van en .fpc como datos del curso)
+  'horario', 'info_fechas', 'calendar_notes',
+  // Configuración
+  'config_pesos_trim', 'config_asistencia',
+  // Empresas y planificación
+  'df_empresas', 'planning_ledger', 'plano_clase',
+  // Tutoría
+  'actuaciones_tutoria',
+  // Metadatos
+  '__version__', 'tipo', 'id', 'grupo'
 ];
 
 /** Prepare Programación data for export: strict key filtering and stripping redundant texts */
@@ -90,11 +124,55 @@ export const fileManager = {
 
   // ── DEMO ────────────────────────────────────────────────
 
-  loadDemoData(groupId?: string) {
+  /** Load demo data from static JSON files in /demo/ with normalization */
+  async loadDemoData(groupId?: string): Promise<void> {
     if (!groupId) groupId = '0237';
-    
-    // Choose demo module based on groupId prefix or some logic. 
-    // For now we'll allow loading 0223 if groupId is '0223', else default to 0237.
+
+    const moduleCode = groupId.startsWith('0223') ? '0223' : '0237';
+    const store = useAppStore.getState();
+
+    try {
+      // Fetch .fpp (programación)
+      const fppRes = await fetch(`/demo/${moduleCode}.fpp.json`);
+      if (!fppRes.ok) throw new Error(`Failed to fetch /demo/${moduleCode}.fpp.json`);
+      const pdData = await fppRes.json();
+
+      // Fetch .fpc (curso) — always an array
+      const fpcRes = await fetch(`/demo/${moduleCode}.fpc.json`);
+      if (!fpcRes.ok) throw new Error(`Failed to fetch /demo/${moduleCode}.fpc.json`);
+      const cursoDataArray = await fpcRes.json();
+
+      // Pick the right curso doc (first one by default, or match group)
+      let cursoData = Array.isArray(cursoDataArray) ? cursoDataArray[0] : cursoDataArray;
+
+      // For 0237, try to match specific group
+      if (Array.isArray(cursoDataArray) && cursoDataArray.length > 1) {
+        const groupMatch = cursoDataArray.find((d: any) =>
+          d.grupo?.toLowerCase() === groupId.toLowerCase() ||
+          d.id?.toLowerCase().includes(groupId.toLowerCase())
+        );
+        if (groupMatch) cursoData = groupMatch;
+      }
+
+      const pdId = `${moduleCode}-pd`;
+      const cursoId = cursoData.id || `${moduleCode}-curso`;
+
+      store.setDataSource("demo");
+      store.setActiveModuleId(pdId);
+      store.setModuleData(pdData as any);
+      store.setActiveCursoId(cursoId);
+      store.setCursoData(cursoData as any);
+      store.setPdFileSource({ type: 'none' });
+      store.setCursoFileSource({ type: 'none' });
+    } catch (e) {
+      console.error("Error loading demo data:", e);
+      // Fallback: try embedded seeds (legacy)
+      this._loadDemoDataFallback(groupId);
+    }
+  },
+
+  /** Fallback: load from embedded TS seeds (legacy, no normalization) */
+  _loadDemoDataFallback(groupId: string) {
     let pdDataId = "0237-ictve-pd";
     let cursoDataId = "0237-ictve-curso-2025-26";
     
@@ -102,7 +180,7 @@ export const fileManager = {
       pdDataId = "0223-ao-pd";
       cursoDataId = "0223-ao-curso-202526-1a-gm";
     } else {
-      if (groupId === '1a') cursoDataId = "0237-ictve-curso-202526-1a-gm"; // updated naming
+      if (groupId === '1a') cursoDataId = "0237-ictve-curso-202526-1a-gm";
       if (groupId === '1b') cursoDataId = "0237-ictve-curso-202526-1b-gm";
       if (groupId === '1c') cursoDataId = "0237-ictve-curso-202526-1c-gm";
     }
@@ -110,13 +188,14 @@ export const fileManager = {
     const pdData = fullDemoSeed[pdDataId as keyof typeof fullDemoSeed];
     const cursoData = fullDemoSeed[cursoDataId as keyof typeof fullDemoSeed] || fullDemoSeed["0237-ictve-curso-202526-1a-gm" as keyof typeof fullDemoSeed] || fullDemoSeed["0237-ictve-curso-2025-26" as keyof typeof fullDemoSeed];
 
-    useAppStore.getState().setDataSource("demo");
-    useAppStore.getState().setActiveModuleId(pdDataId);
-    useAppStore.getState().setModuleData(pdData as any);
-    useAppStore.getState().setActiveCursoId(cursoDataId);
-    useAppStore.getState().setCursoData(cursoData as any);
-    useAppStore.getState().setPdFileSource({ type: 'none' });
-    useAppStore.getState().setCursoFileSource({ type: 'none' });
+    const store = useAppStore.getState();
+    store.setDataSource("demo");
+    store.setActiveModuleId(pdDataId);
+    store.setModuleData(pdData as any);
+    store.setActiveCursoId(cursoDataId);
+    store.setCursoData(cursoData as any);
+    store.setPdFileSource({ type: 'none' });
+    store.setCursoFileSource({ type: 'none' });
   },
 
   // ── NEW (Wizard) ────────────────────────────────────────
@@ -296,13 +375,25 @@ export const fileManager = {
   },
 
   /** Create a new curso with demo data (appends " Demo" to student last names) */
-  createNewCursoFromDemo(cursoName: string, year: string): boolean {
+  async createNewCursoFromDemo(cursoName: string, year: string): Promise<boolean> {
     const store = useAppStore.getState();
     const activeModuleId = store.activeModuleId;
     if (!activeModuleId) return false;
 
-    // Use fullDemoSeed
-    const demoCursoData = fullDemoSeed["0237-ictve-curso-2025-26" as keyof typeof fullDemoSeed] || fullDemoSeed["0237-ictve-curso-202526-1a-gm" as keyof typeof fullDemoSeed];
+    // Fetch demo curso data from static JSON
+    let demoCursoData: any;
+    try {
+      const res = await fetch('/demo/0237.fpc.json');
+      if (!res.ok) throw new Error('Failed to fetch demo curso');
+      const cursoArray = await res.json();
+      demoCursoData = Array.isArray(cursoArray) ? cursoArray[0] : cursoArray;
+    } catch (e) {
+      console.error("Error fetching demo curso for new curso:", e);
+      // Fallback: use embedded seed
+      demoCursoData = fullDemoSeed["0237-ictve-curso-2025-26" as keyof typeof fullDemoSeed] || fullDemoSeed["0237-ictve-curso-202526-1a-gm" as keyof typeof fullDemoSeed];
+      if (!demoCursoData) return false;
+    }
+
     const newCursoData: CursoData = JSON.parse(JSON.stringify(demoCursoData));
     
     if (newCursoData.df_al) {

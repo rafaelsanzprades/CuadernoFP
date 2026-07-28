@@ -1,5 +1,5 @@
 "use client";
-import { Activity, AlertTriangle, ArrowRight, BarChart2, BookOpen, Briefcase, Building2, CalendarDays, Check, CheckCircle, ClipboardList, FileText, GraduationCap, HeartHandshake, Layers, Users, Wrench, XCircle, ChevronDown, Mail, Send, ListChecks, Info, Shield, Lock, Lightbulb } from "lucide-react";
+import { Activity, AlertTriangle, ArrowRight, BarChart2, BookOpen, Briefcase, Building2, CalendarDays, Check, CheckCircle, ClipboardList, FileText, GraduationCap, HeartHandshake, Layers, Users, Wrench, XCircle, ChevronDown, Mail, Send, ListChecks, Info, Shield, Lock, Lightbulb, Map, ExternalLink, MessageCircle } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -233,6 +233,8 @@ export default function InicioPage() {
     { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.guia')}</>, cleanLabel: t('tabs.guia') },
     { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.faq')}</>, cleanLabel: t('tabs.faq') },
     { id: "acronimos", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Acrónimos</>, cleanLabel: "Acrónimos" },
+    { id: "mapa", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> Mapa Web</>, cleanLabel: "Mapa Web" },
+    { id: "contribuciones", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Contribuciones</>, cleanLabel: "Contribuciones" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -310,105 +312,6 @@ export default function InicioPage() {
                 
           <div className="w-full space-y-12 pb-12">
 
-            {/* Secuencia Lógica Propuesta */}
-            <div className="space-y-4">
-              <h2 className="text-xl font-bold text-foreground flex items-center gap-3">
-                <Layers className="w-6 h-6 text-accent" /> Secuencia Lógica de Programación
-              </h2>
-              <p className="text-muted text-sm pb-4 border-b border-[var(--glass-border)]">
-                Flujo de trabajo estructurado basado en la Programación Didáctica oficial. Avanza de izquierda a derecha para completar el diseño del módulo.
-              </p>
-              
-              {/* Contenedor del Diagrama */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 mt-6">
-                
-                {/* Paso 1 */}
-                <Card className="p-4 bg-accent/5 border border-accent/20 shadow-sm relative group overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-accent/50 group-hover:bg-accent transition-colors"></div>
-                  <h3 className="font-bold text-accent mb-3 text-sm flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center text-xs">1</span> Contexto
-                  </h3>
-                  <ul className="text-xs text-muted/80 space-y-2 font-medium">
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-accent/70 shrink-0"/>Identificación</li>
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-accent/70 shrink-0"/>Contexto del Aula</li>
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-accent/70 shrink-0"/>Planes y Contingencia</li>
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-accent/70 shrink-0"/>Inclusión y Diversidad</li>
-                  </ul>
-                </Card>
-
-                {/* Paso 2 */}
-                <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
-                  <h3 className="font-bold text-foreground mb-3 text-sm flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-xs">2</span> Currículo
-                  </h3>
-                  <ul className="text-xs text-muted/80 space-y-2 font-medium">
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>RA y CE</li>
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Definición UDs</li>
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Relación RA-UD</li>
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Contribuciones (OG)</li>
-                  </ul>
-                </Card>
-
-                {/* Paso 3 */}
-                <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
-                  <h3 className="font-bold text-foreground mb-3 text-sm flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-xs">3</span> Metodología
-                  </h3>
-                  <ul className="text-xs text-muted/80 space-y-2 font-medium">
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Principios/Estrategias</li>
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Materiales/Recursos</li>
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Empresa / FEOE</li>
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Calidad EQAVET</li>
-                  </ul>
-                </Card>
-
-                {/* Paso 4 */}
-                <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
-                  <h3 className="font-bold text-foreground mb-3 text-sm flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-xs">4</span> Evaluación
-                  </h3>
-                  <ul className="text-xs text-muted/80 space-y-2 font-medium">
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Instrumentos</li>
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Indicadores/Rúbricas</li>
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Normativa</li>
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Ponderación</li>
-                  </ul>
-                </Card>
-
-                {/* Paso 5 */}
-                <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
-                  <h3 className="font-bold text-foreground mb-3 text-sm flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-xs">5</span> Aula
-                  </h3>
-                  <ul className="text-xs text-muted/80 space-y-2 font-medium">
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Temporalización (Gantt)</li>
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Desarrollo de UDs</li>
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Tareas</li>
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Calendario</li>
-                  </ul>
-                </Card>
-
-                {/* Paso 6 */}
-                <Card className="p-4 bg-success/5 border border-success/20 shadow-sm relative group overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-success/50 group-hover:bg-success transition-colors"></div>
-                  <h3 className="font-bold text-success mb-3 text-sm flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-full bg-success/20 flex items-center justify-center text-xs">6</span> Magia
-                  </h3>
-                  <ul className="text-xs text-muted/80 space-y-2 font-medium">
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-success/70 shrink-0"/>Generación PDF</li>
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-success/70 shrink-0"/>Guía para Defensa</li>
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-success/70 shrink-0"/>Comparativa</li>
-                    <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-success/70 shrink-0"/>Publicidad (Burocracia)</li>
-                  </ul>
-                </Card>
-
-              </div>
-            </div>
-
 
             {/* Menus Grid */}
             <div className="space-y-12">
@@ -478,7 +381,109 @@ export default function InicioPage() {
 
             {/* ── CONTENIDO: GUÍA PASO A PASO ───────────────────────────── */}
             {activeTab === "guia" && (
-              <div className="space-y-3 animate-in fade-in duration-500 w-full">
+              <div className="space-y-6 animate-in fade-in duration-500 w-full">
+                
+                {/* Secuencia Lógica Propuesta */}
+                <Card glow className="p-8 mb-6">
+                  <div className="space-y-4">
+                  <h2 className="text-xl font-bold text-foreground flex items-center gap-3">
+                    <Layers className="w-6 h-6 text-accent" /> Secuencia lógica de programación
+                  </h2>
+                  <p className="text-muted text-sm pb-4 border-b border-[var(--glass-border)]">
+                    Flujo de trabajo estructurado basado en la Programación Didáctica oficial. Avanza de izquierda a derecha para completar el diseño del módulo.
+                  </p>
+                  
+                  {/* Contenedor del Diagrama */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 mt-6">
+                    
+                    {/* Paso 1 */}
+                    <Card className="p-4 bg-accent/5 border border-accent/20 shadow-sm relative group overflow-hidden">
+                      <div className="absolute top-0 left-0 w-full h-1 bg-accent/50 group-hover:bg-accent transition-colors"></div>
+                      <h3 className="font-bold text-accent mb-3 text-sm flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center text-xs">1</span> Contexto
+                      </h3>
+                      <ul className="text-xs text-muted/80 space-y-2 font-medium">
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-accent/70 shrink-0"/>Identificación</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-accent/70 shrink-0"/>Contexto del Aula</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-accent/70 shrink-0"/>Planes y Contingencia</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-accent/70 shrink-0"/>Inclusión y Diversidad</li>
+                      </ul>
+                    </Card>
+
+                    {/* Paso 2 */}
+                    <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
+                      <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
+                      <h3 className="font-bold text-foreground mb-3 text-sm flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-xs">2</span> Currículo
+                      </h3>
+                      <ul className="text-xs text-muted/80 space-y-2 font-medium">
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>RA y CE</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Definición UDs</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Relación RA-UD</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Contribuciones (OG)</li>
+                      </ul>
+                    </Card>
+
+                    {/* Paso 3 */}
+                    <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
+                      <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
+                      <h3 className="font-bold text-foreground mb-3 text-sm flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-xs">3</span> Metodología
+                      </h3>
+                      <ul className="text-xs text-muted/80 space-y-2 font-medium">
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Principios/Estrategias</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Materiales/Recursos</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Empresa / FEOE</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Calidad EQAVET</li>
+                      </ul>
+                    </Card>
+
+                    {/* Paso 4 */}
+                    <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
+                      <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
+                      <h3 className="font-bold text-foreground mb-3 text-sm flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-xs">4</span> Evaluación
+                      </h3>
+                      <ul className="text-xs text-muted/80 space-y-2 font-medium">
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Instrumentos</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Indicadores/Rúbricas</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Normativa</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Ponderación</li>
+                      </ul>
+                    </Card>
+
+                    {/* Paso 5 */}
+                    <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
+                      <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
+                      <h3 className="font-bold text-foreground mb-3 text-sm flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-xs">5</span> Aula
+                      </h3>
+                      <ul className="text-xs text-muted/80 space-y-2 font-medium">
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Temporalización (Gantt)</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Desarrollo de UDs</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Tareas</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Calendario</li>
+                      </ul>
+                    </Card>
+
+                    {/* Paso 6 */}
+                    <Card className="p-4 bg-success/5 border border-success/20 shadow-sm relative group overflow-hidden">
+                      <div className="absolute top-0 left-0 w-full h-1 bg-success/50 group-hover:bg-success transition-colors"></div>
+                      <h3 className="font-bold text-success mb-3 text-sm flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-success/20 flex items-center justify-center text-xs">6</span> Magia
+                      </h3>
+                      <ul className="text-xs text-muted/80 space-y-2 font-medium">
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-success/70 shrink-0"/>Generación PDF</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-success/70 shrink-0"/>Guía para Defensa</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-success/70 shrink-0"/>Comparativa</li>
+                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-success/70 shrink-0"/>Publicidad (Burocracia)</li>
+                      </ul>
+                    </Card>
+
+                  </div>
+                </div>
+              </Card>
+
                 <Card glow className="p-8">
                   {isLoadingGuia && !guiaContent ? (
                     <div className="flex justify-center p-8 text-muted">Cargando guía...</div>
@@ -532,6 +537,272 @@ export default function InicioPage() {
             {activeTab === "acronimos" && (
               <div className="animate-in fade-in duration-500 w-full">
                 <TabAcronimos />
+              </div>
+            )}
+
+            {/* ── CONTENIDO: MAPA WEB ──────────────────────────────────────── */}
+            {activeTab === "mapa" && (
+              <div className="space-y-12 animate-in fade-in duration-500">
+                <section className="space-y-3">
+                  <h2 className="text-lg font-bold text-foreground border-b border-[var(--glass-border)] pb-2">
+                    Mapa de la aplicación (sitemap)
+                  </h2>
+                  <p className="text-sm text-foreground/80 leading-relaxed">
+                    Estructura organizativa de Cuaderno FP. Puedes usar los enlaces para navegar rápidamente a cualquier sección.
+                  </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {/* COLUMNA 1: GENERAL */}
+                    <div className="space-y-6">
+                      <h3 className="font-extrabold text-lg border-b-2 border-accent pb-2 text-foreground">General</h3>
+                      <ul className="space-y-4 text-sm">
+                        <li>
+                          <a href="/inicio" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Inicio
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/ayuda" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Ayuda
+                          </a>
+                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                            <a href="/ayuda?tab=asistente-ia" className="hover:text-accent transition-colors block py-0.5">— Asistente IA</a>
+                            <a href="/ayuda?tab=verificacion" className="hover:text-accent transition-colors block py-0.5">— Verificación</a>
+                            <a href="/ayuda?tab=ideas" className="hover:text-accent transition-colors block py-0.5">— Ideas (Roadmap)</a>
+                            <a href="/ayuda?tab=contacto" className="hover:text-accent transition-colors block py-0.5">— Contacto</a>
+                            <a href="/ayuda?tab=autores" className="hover:text-accent transition-colors block py-0.5">— Autores</a>
+                          </div>
+                        </li>
+                        <li>
+                          <a href="/perfil" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Perfil
+                          </a>
+                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                            <a href="/perfil?tab=aspecto" className="hover:text-accent transition-colors block py-0.5">— Aspecto</a>
+                            <a href="/perfil?tab=idioma" className="hover:text-accent transition-colors block py-0.5">— Idioma</a>
+                            <a href="/perfil?tab=accesibilidad" className="hover:text-accent transition-colors block py-0.5">— Accesibilidad</a>
+                            <a href="/perfil?tab=seguridad" className="hover:text-accent transition-colors block py-0.5">— Seguridad</a>
+                          </div>
+                        </li>
+                        <li>
+                          <a href="/archivos" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Archivos
+                          </a>
+                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                            <a href="/archivos?tab=datos" className="hover:text-accent transition-colors block py-0.5">— Archivos locales</a>
+                            <a href="/archivos?tab=nube" className="hover:text-accent transition-colors block py-0.5">— Nube</a>
+                          </div>
+                        </li>
+                        <li>
+                          <a href="/catalogo" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Catálogo
+                          </a>
+                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                            <a href="/catalogo?tab=comunidades" className="hover:text-accent transition-colors block py-0.5">— Territorios (CCAA)</a>
+                            <a href="/catalogo?tab=grados" className="hover:text-accent transition-colors block py-0.5">— Grados</a>
+                            <a href="/catalogo?tab=familias" className="hover:text-accent transition-colors block py-0.5">— Familias</a>
+                            <a href="/catalogo?tab=titulo" className="hover:text-accent transition-colors block py-0.5">— Títulos</a>
+                            <a href="/catalogo?tab=cursos" className="hover:text-accent transition-colors block py-0.5">— Módulos</a>
+                            <a href="/catalogo?tab=modulos" className="hover:text-accent transition-colors block py-0.5">— RA → CE</a>
+                            <a href="/catalogo?tab=incual" className="hover:text-accent transition-colors block py-0.5">— ECP INCUAL</a>
+                          </div>
+                        </li>
+                        <li>
+                          <a href="/documentos" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Documentos
+                          </a>
+                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                            <a href="/documentos?tab=normativa" className="hover:text-accent transition-colors block py-0.5">— Normativa</a>
+                            <a href="/documentos?tab=curriculos" className="hover:text-accent transition-colors block py-0.5">— Currículos</a>
+                            <a href="/documentos?tab=plantillas" className="hover:text-accent transition-colors block py-0.5">— Plantillas</a>
+                          </div>
+                        </li>
+                        <li>
+                          <a href="/legal" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Legal
+                          </a>
+                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                            <a href="/legal?tab=aviso" className="hover:text-accent transition-colors block py-0.5">— Aviso legal</a>
+                            <a href="/legal?tab=privacidad" className="hover:text-accent transition-colors block py-0.5">— Privacidad</a>
+                            <a href="/legal?tab=cookies" className="hover:text-accent transition-colors block py-0.5">— Cookies</a>
+                            <a href="/legal?tab=accesibilidad" className="hover:text-accent transition-colors block py-0.5">— Accesibilidad</a>
+                            <span className="text-accent font-bold block py-0.5">— Mapa web (actual)</span>
+                            <a href="/legal?tab=contribuciones" className="hover:text-accent transition-colors block py-0.5">— Contribuciones</a>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* COLUMNA 2: PROGRAMACIÓN */}
+                    <div className="space-y-6">
+                      <h3 className="font-extrabold text-lg border-b-2 border-accent pb-2 text-foreground">Programación</h3>
+                      <ul className="space-y-4 text-sm">
+                        <li>
+                          <a href="/contexto" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Contexto
+                          </a>
+                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                            <a href="/contexto?tab=datos" className="hover:text-accent transition-colors block py-0.5">— Datos</a>
+                            <a href="/contexto?tab=contexto" className="hover:text-accent transition-colors block py-0.5">— Contexto</a>
+                            <a href="/contexto?tab=planes" className="hover:text-accent transition-colors block py-0.5">— Planes</a>
+                            <a href="/contexto?tab=diversidad" className="hover:text-accent transition-colors block py-0.5">— Diversidad</a>
+                          </div>
+                        </li>
+                        <li>
+                          <a href="/curriculo" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Currículo
+                          </a>
+                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                            <a href="/curriculo?tab=ra" className="hover:text-accent transition-colors block py-0.5">— RA y CE</a>
+                            <a href="/curriculo?tab=ud" className="hover:text-accent transition-colors block py-0.5">— Unidades (UD)</a>
+                            <a href="/curriculo?tab=relacion" className="hover:text-accent transition-colors block py-0.5">— Relación RA-UD</a>
+                            <a href="/curriculo?tab=contribucion" className="hover:text-accent transition-colors block py-0.5">— Contribución OG</a>
+                          </div>
+                        </li>
+                        <li>
+                          <a href="/metodologia" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Metodología
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/evaluacion" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Evaluación
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/secuenciacion" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Secuenciación
+                          </a>
+                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                            <a href="/secuenciacion?tab=sesiones" className="hover:text-accent transition-colors block py-0.5">— Sesiones</a>
+                            <a href="/secuenciacion?tab=tareas" className="hover:text-accent transition-colors block py-0.5">— Tareas competenciales</a>
+                          </div>
+                        </li>
+                        <li>
+                          <a href="/magia" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Magia
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* COLUMNA 3: CURSO */}
+                    <div className="space-y-6">
+                      <h3 className="font-extrabold text-lg border-b-2 border-accent pb-2 text-foreground">Curso</h3>
+                      <ul className="space-y-4 text-sm">
+                        <li>
+                          <a href="/calendario" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Calendario
+                          </a>
+                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                            <a href="/calendario?tab=fechas" className="hover:text-accent transition-colors block py-0.5">— Fechas clave</a>
+                            <a href="/calendario?tab=eventos" className="hover:text-accent transition-colors block py-0.5">— Eventos</a>
+                            <a href="/calendario?tab=visual" className="hover:text-accent transition-colors block py-0.5">— Visual</a>
+                            <a href="/calendario?tab=complementarias" className="hover:text-accent transition-colors block py-0.5">— Complementarias</a>
+                          </div>
+                        </li>
+                        <li>
+                          <a href="/alumnado" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Alumnado
+                          </a>
+                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                            <a href="/alumnado?tab=listado" className="hover:text-accent transition-colors block py-0.5">— Listado</a>
+                            <a href="/alumnado?tab=plano" className="hover:text-accent transition-colors block py-0.5">— Plano del aula</a>
+                            <a href="/alumnado?tab=contexto" className="hover:text-accent transition-colors block py-0.5">— Contexto del grupo</a>
+                          </div>
+                        </li>
+                        <li>
+                          <a href="/diario" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Diario
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/seguimiento" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Seguimiento
+                          </a>
+                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                            <a href="/seguimiento?tab=tutoria" className="hover:text-accent transition-colors block py-0.5">— Tutoría</a>
+                            <a href="/seguimiento?tab=asistencia" className="hover:text-accent transition-colors block py-0.5">— Asistencia</a>
+                            <a href="/seguimiento?tab=abandono" className="hover:text-accent transition-colors block py-0.5">— Alerta abandono</a>
+                          </div>
+                        </li>
+                        <li>
+                          <a href="/calificaciones" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Calificaciones
+                          </a>
+                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                            <a href="/calificaciones?tab=resumen" className="hover:text-accent transition-colors block py-0.5">— Resumen grupal</a>
+                            <a href="/calificaciones?tab=matriz" className="hover:text-accent transition-colors block py-0.5">— Matriz de notas</a>
+                            <a href="/calificaciones?tab=detalle" className="hover:text-accent transition-colors block py-0.5">— Por alumnado</a>
+                            <a href="/calificaciones?tab=grupal" className="hover:text-accent transition-colors block py-0.5">— Informe Grupal</a>
+                            <a href="/calificaciones?tab=individual" className="hover:text-accent transition-colors block py-0.5">— Informe Individual</a>
+                          </div>
+                        </li>
+                        <li>
+                          <a href="/informes" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Informes
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            )}
+
+            {/* ── CONTENIDO: CONTRIBUCIONES ──────────────────────────────────────── */}
+            {activeTab === "contribuciones" && (
+              <div className="space-y-12 animate-in fade-in duration-500">
+                <section className="space-y-6">
+                  <div className="flex flex-col md:flex-row items-center gap-5 p-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm mb-8">
+                    <div className="w-12 h-12 shrink-0 rounded-full bg-[#229ED9]/10 flex items-center justify-center">
+                      <MessageCircle className="w-6 h-6 text-[#229ED9]" />
+                    </div>
+                    <div className="flex-1 text-center md:text-left">
+                      <h3 className="text-base font-bold text-foreground">Grupo Oficial de Telegram</h3>
+                      <p className="text-sm text-muted leading-tight mt-1">
+                        Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad Autónoma.
+                      </p>
+                    </div>
+                    <a
+                      href="https://t.me/cuadernofp"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="shrink-0 px-5 py-2.5 rounded-lg bg-[#229ED9] text-white font-medium hover:bg-[#229ED9]/90 transition-colors flex items-center gap-2 text-sm"
+                    >
+                      <Send className="w-4 h-4" />
+                      Unirme al grupo en Telegram
+                    </a>
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-foreground border-b border-[var(--glass-border)] pb-2">Contribuidores por Comunidad Autónoma</h3>
+                  <p className="text-muted mb-4">
+                    Mención especial al profesorado que está ayudando a mejorar y a integrar los currículos de las Comunidades Autónomas
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {[
+                      "Andalucía", "Aragón", "Asturias", "Baleares", "Canarias",
+                      "Cantabria", "Castilla y León", "Castilla-La Mancha", "Cataluña", "Ceuta",
+                      "Comunidad Valenciana", "Extremadura", "Galicia", "La Rioja", "Madrid",
+                      "Melilla", "Murcia", "Navarra", "País Vasco"
+                    ].map((comunidad) => (
+                      <div key={comunidad} className="p-4 rounded-xl border border-[var(--glass-border)] bg-background/50 flex flex-col gap-2 transition-all hover:bg-background/80">
+                        <div className="flex items-center gap-2 border-b border-[var(--glass-border)] pb-2 mb-1">
+                          <Map className="w-5 h-5 text-accent" />
+                          <span className="font-bold text-foreground">{comunidad}</span>
+                        </div>
+                        <ul className="text-sm text-muted space-y-1.5 pl-2">
+                          {comunidad === "Aragón" ? (
+                            <li className="flex items-center gap-2 text-foreground"><Users className="w-4 h-4 text-accent" /> Jose Javier García</li>
+                          ) : (
+                            <li className="flex items-center gap-2 italic opacity-60"><Users className="w-4 h-4 text-muted-foreground" /> ¡Anímate a contribuir!</li>
+                          )}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </section>
               </div>
             )}
 

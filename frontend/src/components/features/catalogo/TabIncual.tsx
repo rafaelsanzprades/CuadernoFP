@@ -15,25 +15,31 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
   const [expandedLevel, setExpandedLevel] = useState<string | null>(null);
 
   useEffect(() => {
-    // 1. Fetch families to map globalSelection.familia to ID
     fetch('/api/families')
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {
           setFamilies(data.data);
-          const fam = data.data.find((f: any) => f.name === globalSelection.familia);
-          if (fam) {
-            fetchIncualData(fam.id);
-          } else {
-            setLoading(false);
-          }
         }
       })
-      .catch(err => {
-        console.error(err);
+      .catch(err => console.error(err));
+  }, []);
+
+  useEffect(() => {
+    if (families.length === 0) return;
+    if (globalSelection.familia) {
+      const fam = families.find((f: any) => f.name === globalSelection.familia);
+      if (fam) {
+        fetchIncualData(fam.id);
+      } else {
+        setIncualData(null);
         setLoading(false);
-      });
-  }, [globalSelection.familia]);
+      }
+    } else {
+      setIncualData(null);
+      setLoading(false);
+    }
+  }, [globalSelection.familia, families]);
 
   const fetchIncualData = (id: number) => {
     setLoading(true);
@@ -42,11 +48,14 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
       .then(data => {
         if (data.status === 'success') {
           setIncualData(data.data);
+        } else {
+          setIncualData(null);
         }
         setLoading(false);
       })
       .catch(err => {
         console.error(err);
+        setIncualData(null);
         setLoading(false);
       });
   };

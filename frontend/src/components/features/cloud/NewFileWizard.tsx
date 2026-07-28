@@ -179,7 +179,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
   const handleCreateCursoDemo = async () => {
     setIsCreating(true);
     try {
-      const ok = fileManager.createNewCursoFromDemo("Curso DEMO", getCurrentAcademicYear());
+      const ok = await fileManager.createNewCursoFromDemo("Curso DEMO", getCurrentAcademicYear());
       if (ok) {
         toast.success("Curso DEMO creado correctamente.");
         onClose();

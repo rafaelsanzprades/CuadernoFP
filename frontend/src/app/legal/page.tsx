@@ -75,8 +75,6 @@ export default function LegalPage() {
     { id: "privacidad", label: <><Shield className="w-[1.2em] h-[1.2em] mr-1" /> Privacidad</>, cleanLabel: "Privacidad" },
     { id: "cookies", label: <><Cookie className="w-[1.2em] h-[1.2em] mr-1" /> Cookies</>, cleanLabel: "Cookies" },
     { id: "accesibilidad", label: <><Accessibility className="w-[1.2em] h-[1.2em] mr-1" /> Accesibilidad</>, cleanLabel: "Accesibilidad" },
-    { id: "mapa", label: <><Map className="w-[1.2em] h-[1.2em] mr-1" /> Mapa</>, cleanLabel: "Mapa Web" },
-    { id: "contribuciones", label: <><Users className="w-[1.2em] h-[1.2em] mr-1" /> Contribuciones</>, cleanLabel: "Contribuciones" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -344,7 +342,7 @@ export default function LegalPage() {
                   </p>
                   <ul className="list-disc list-inside ml-2 mt-2 space-y-2 text-sm text-muted">
                     <li><strong>Disco local:</strong> En el navegador del usuario (IndexedDB y localStorage) para preferencias y datos de sesión.</li>
-                    <li><strong>Archivos exportados:</strong> Formatos <code>.cddp</code> (Programación) y <code>.cddc</code> (Curso) que el docente guarda en su disco duro, USB o nube privada.</li>
+                    <li><strong>Archivos exportados:</strong> Formatos <code>.fpp</code> (Programación), <code>.fpc</code> (Curso) y <code>.fpg</code> (Grupo) que el docente guarda en su disco duro, USB o nube privada.</li>
                     <li><strong>Google Drive (opcional):</strong> Bajo la cuenta institucional del profesorado, regulada por la Consejería de Educación o Centro Educativo.</li>
                   </ul>
                 </section>
@@ -372,7 +370,7 @@ export default function LegalPage() {
                   </p>
                   <ul className="list-disc list-inside ml-2 mt-2 space-y-1 text-sm text-muted">
                     <li>Proteger el ordenador y dispositivos de almacenamiento con contraseñas seguras y bloqueos automáticos.</li>
-                    <li>No compartir archivos <code>.cddp</code> / <code>.cddc</code> por canales inseguros (email sin cifrar, mensajería pública).</li>
+                    <li>No compartir archivos <code>.fpp</code> / <code>.fpc</code> / <code>.fpg</code> por canales inseguros (email sin cifrar, mensajería pública).</li>
                     <li>Revisar periódicamente los permisos de acceso en Google Drive si se usa sincronización.</li>
                   </ul>
                 </section>
@@ -493,7 +491,7 @@ export default function LegalPage() {
                     <li><strong>Edge:</strong> Configuración → Privacidad → Borrar datos de navegación → Archivos y datos almacenados en caché.</li>
                   </ul>
                   <div className="mt-3 p-3 rounded-lg bg-warning/5 border border-warning/20 text-sm text-foreground/80">
-                    <strong>Nota:</strong> Borrar el almacenamiento local eliminará tus preferencias visuales y la caché de catálogos. Los archivos <code>.cddp</code> / <code>.cddc</code> guardados en disco no se verán afectados.
+                    <strong>Nota:</strong> Borrar el almacenamiento local eliminará tus preferencias visuales y la caché de catálogos. Los archivos <code>.fpp</code> / <code>.fpc</code> / <code>.fpg</code> guardados en disco no se verán afectados.
                   </div>
                 </section>
               </div>
