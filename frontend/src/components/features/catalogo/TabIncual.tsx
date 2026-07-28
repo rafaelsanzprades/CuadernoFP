@@ -64,30 +64,36 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
     );
   }
 
-  if (!incualData) {
-    return (
-      <div className="text-center py-20 border border-dashed rounded-xl border-accent/20">
-        <h3 className="text-lg font-medium text-muted">No se encontraron datos INCUAL para la familia {globalSelection.familia}</h3>
-      </div>
-    );
-  }
-
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-in fade-in duration-300">
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-        {/* Cabecera Familia */}
-        <Card className="p-6 bg-gradient-to-br from-card to-accent/5 lg:col-span-2 flex flex-col justify-center">
-          <div className="flex items-start justify-between">
-            <div>
-              <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-                <Award className="w-6 h-6 text-purple-500 shrink-0" />
-                <span className="line-clamp-1">{globalSelection.familia}</span>
-              </h2>
-              <p className="mt-2 text-sm text-muted line-clamp-2">
-                {incualData.description || 'Sin descripción disponible.'}
-              </p>
-            </div>
+        {/* Selector Familia */}
+        <Card className="p-6 bg-gradient-to-br from-card to-accent/5 lg:col-span-2 flex flex-col justify-center gap-2">
+          <label htmlFor="select-familia-incual" className="text-xs font-semibold text-muted tracking-wider">
+            Familia Profesional
+          </label>
+          <div className="relative">
+            <Award className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-purple-500 pointer-events-none" />
+            <select
+              id="select-familia-incual"
+              value={globalSelection.familia}
+              onChange={(e) => {
+                updateGlobalSelection({ familia: e.target.value, tituloCodigo: "", moduloCodigo: "" });
+              }}
+              className="w-full bg-background/50 border border-[var(--glass-border)] rounded-xl pl-10 pr-4 py-3 text-sm text-foreground font-semibold focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all cursor-pointer appearance-none"
+            >
+              <option value="">-- Selecciona Familia --</option>
+              {families.map((f) => (
+                <option key={f.id} value={f.name}>{f.name}</option>
+              ))}
+            </select>
+            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted pointer-events-none" />
           </div>
+          {incualData?.description && (
+            <p className="mt-2 text-sm text-muted line-clamp-2">
+              {incualData.description}
+            </p>
+          )}
         </Card>
 
         {/* Oferta Formativa */}
@@ -96,23 +102,38 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
             <BookOpen className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" /> 
             <span>Grado C<br/><span className="font-normal text-muted-foreground">(Certificados)</span></span>
           </h3>
-          <p className="text-2xl font-bold mt-2">{incualData.oferta_grado_c?.length || 0}</p>
+          <p className="text-3xl font-bold mt-2 text-right">{incualData?.oferta_grado_c?.length || 0}</p>
         </Card>
         <Card className="p-4 border-l-4 border-l-green-500 lg:col-span-1 flex flex-col justify-center">
           <h3 className="font-semibold flex items-start gap-2 text-sm leading-snug">
             <BookOpen className="w-4 h-4 text-green-500 shrink-0 mt-0.5" /> 
             <span>Grado D<br/><span className="font-normal text-muted-foreground">(Ciclos)</span></span>
           </h3>
-          <p className="text-2xl font-bold mt-2">{incualData.oferta_grado_d?.length || 0}</p>
+          <p className="text-3xl font-bold mt-2 text-right">{incualData?.oferta_grado_d?.length || 0}</p>
         </Card>
         <Card className="p-4 border-l-4 border-l-purple-500 lg:col-span-1 flex flex-col justify-center">
           <h3 className="font-semibold flex items-start gap-2 text-sm leading-snug">
             <BookOpen className="w-4 h-4 text-purple-500 shrink-0 mt-0.5" /> 
             <span>Grado E<br/><span className="font-normal text-muted-foreground">(Especialización)</span></span>
           </h3>
-          <p className="text-2xl font-bold mt-2">{incualData.oferta_grado_e?.length || 0}</p>
+          <p className="text-3xl font-bold mt-2 text-right">{incualData?.oferta_grado_e?.length || 0}</p>
         </Card>
       </div>
+
+      {!incualData && globalSelection.familia && (
+        <div className="text-center py-20 border border-dashed rounded-xl border-accent/20">
+          <h3 className="text-lg font-medium text-muted">No se encontraron datos INCUAL para la familia {globalSelection.familia}</h3>
+        </div>
+      )}
+
+      {!globalSelection.familia && (
+        <div className="text-center py-20 border border-dashed rounded-xl border-accent/20">
+          <h3 className="text-lg font-medium text-muted">Selecciona una familia profesional para ver sus estándares de competencia</h3>
+        </div>
+      )}
+
+      {incualData && (
+        <>
 
       {/* Centros de Referencia Nacional (CRN) */}
       {incualData.crn_centers && incualData.crn_centers.length > 0 && (
@@ -241,6 +262,8 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
           )}
         </Card>
       </div>
+        </>
+      )}
     </div>
   );
 }

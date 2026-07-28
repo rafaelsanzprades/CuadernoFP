@@ -5,12 +5,9 @@ export const navGroups = [
     title: "General",
     sectionDescription: "Opciones generales de la aplicación y recursos oficiales.",
     items: [
-      { href: "/inicio", label: "Inicio", icon: Activity, description: "Dashboard y resumen de bienvenida." },
-      { href: "/perfil", label: "Perfil", icon: Settings, description: "Configuración del usuario y preferencias." },
       { href: "/archivos", label: "Archivos", icon: FolderOpen, description: "Gestión de archivos de Programación y Curso." },
       { href: "/catalogo?tab=normativa", label: "Catálogo", icon: GraduationCap, description: "Familias, Títulos, Módulos y currículos (RA y CE)." },
-      { href: "/documentos", label: "Documentos", icon: FileText, description: "Legislación, plantillas y normativas." },
-      { href: "/legal", label: "Legal", icon: Shield, description: "Legislación y normativas." }
+      { href: "/normativa", label: "Normativa", icon: FileText, description: "Legislación, plantillas y normativas." }
     ]
   },
   {

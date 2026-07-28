@@ -1,5 +1,5 @@
 "use client";
-import { ChevronLeft, ChevronRight, CalendarDays, ChevronDown, Cloud, HardDrive, FolderOpen, Hourglass, Save, AlertTriangle, HelpCircle } from "lucide-react";
+import { ChevronLeft, ChevronRight, CalendarDays, ChevronDown, Cloud, HardDrive, FolderOpen, Hourglass, Save, AlertTriangle, HelpCircle, Shield } from "lucide-react";
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAppStore } from '@/store/useAppStore';
@@ -175,7 +175,7 @@ export default function Sidebar() {
       <div className={`px-4 pt-4 pb-2 flex ${isSidebarOpen ? 'justify-between' : 'justify-center'} items-start`}>
         {isSidebarOpen && (
           <div className="flex flex-col mb-3 w-full pr-2 min-w-0">
-              <Link href="/inicio" onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}>
+              <Link href="/inicio?tab=bienvenida" onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}>
                 <h1 className={`text-2xl font-extrabold leading-tight transition-colors tracking-tight whitespace-nowrap cursor-pointer ${dataSource === 'demo' ? 'text-warning hover:text-white' : 'text-success hover:text-white'}`}>
                   Cuaderno FP
                 </h1>
@@ -230,6 +230,12 @@ export default function Sidebar() {
               >
                 <HardDrive className="w-3.5 h-3.5" /> {t('sidebar.reales')}
               </button>
+            </div>
+            
+            <div className="flex flex-col mb-1.5 mt-2 gap-1.5">
+              <div className="text-sm font-bold text-foreground/90 tracking-wide px-1">
+                Grupo
+              </div>
             </div>
             {dataSource === 'demo' ? (
               <div className="relative w-full">
@@ -315,7 +321,7 @@ export default function Sidebar() {
         </div>
       )}
 
-      
+
 
         {/* ① General: items del primer grupo */}
         {navGroups[0] && (
@@ -453,15 +459,18 @@ export default function Sidebar() {
               <div className="flex-1">
                 <InstallPwaButton isSidebarOpen={true} />
               </div>
-              <Link href="/ayuda" className="flex items-center justify-center w-10 h-10 rounded-lg bg-[var(--glass-bg)] hover:bg-[var(--glass-border)] text-muted hover:text-accent transition-colors">
-                <HelpCircle className="w-5 h-5" />
-              </Link>
+              <div className="flex items-center gap-2">
+                <Link href="/legal?tab=aviso" className="flex items-center gap-1.5 px-3 h-10 rounded-lg bg-[var(--glass-bg)] hover:bg-[var(--glass-border)] text-muted hover:text-accent transition-colors">
+                  <Shield className="w-4 h-4" />
+                  <span className="text-sm font-medium">Legal</span>
+                </Link>
+              </div>
             </div>
           ) : (
           <div className="flex flex-col items-center gap-2 w-full">
             <InstallPwaButton isSidebarOpen={false} />
-            <Link href="/ayuda" className="flex items-center justify-center w-10 h-10 rounded-lg bg-[var(--glass-bg)] hover:bg-[var(--glass-border)] text-muted hover:text-accent transition-colors">
-              <HelpCircle className="w-5 h-5" />
+            <Link href="/legal?tab=aviso" title="Legal" className="flex items-center justify-center w-10 h-10 rounded-lg bg-[var(--glass-bg)] hover:bg-[var(--glass-border)] text-muted hover:text-accent transition-colors">
+              <Shield className="w-5 h-5" />
             </Link>
           </div>
         )}

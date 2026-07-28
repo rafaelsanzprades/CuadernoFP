@@ -1,9 +1,10 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { AlertTriangle, BookOpen, CheckCircle, Cloud, Database, Download, FileJson, FolderOpen, Save, Shield, ShieldAlert, Sparkles, Upload, Users, Zap, Plus, Copy, HardDrive, Info } from "lucide-react";
+import { AlertTriangle, BookOpen, CheckCircle, Cloud, Database, Download, FileJson, FolderOpen, Save, Shield, ShieldAlert, Sparkles, Upload, Users, Zap, Plus, Copy, HardDrive, Info, Building2, Lock, Activity } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
+import { AISettingsPanel } from "@/components/features/ai/AISettingsPanel";
 import { useAppStore } from "@/store/useAppStore";
 import { useRouter } from "next/navigation";
 import { Card } from "@/components/ui/Card";
@@ -338,15 +339,21 @@ export default function ArchivosTrabajoPage() {
   // ── Tabs ────────────────────────────────────────────────
 
   const TABS = [
-    { id: "datos", label: <span className="flex items-center gap-2"><Database className="w-4 h-4 shrink-0" /> Archivos locales</span>, cleanLabel: "Archivos locales" },
+    { id: "datos", label: <span className="flex items-center gap-2"><Database className="w-4 h-4 shrink-0" /> Locales</span>, cleanLabel: "Locales" },
     { id: "nube", label: <span className="flex items-center gap-2"><Cloud className="w-4 h-4 shrink-0" /> Nube</span>, cleanLabel: "Nube" },
-    { id: "autores", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> Autores</span>, cleanLabel: "Autores" }
+    { id: "autores", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> Autores</span>, cleanLabel: "Autores" },
+    { id: "seguridad", label: <span className="flex items-center gap-2"><Shield className="w-4 h-4 shrink-0" /> Seguridad</span>, cleanLabel: "Seguridad" },
+    { id: "asistente-ia", label: <span className="flex items-center gap-2"><Sparkles className="w-4 h-4 shrink-0" /> Asistente IA</span>, cleanLabel: "Asistente IA" },
+    { id: "verificacion", label: <span className="flex items-center gap-2"><Activity className="w-4 h-4 shrink-0" /> Verificación</span>, cleanLabel: "Verificación" }
   ];
 
   const breadcrumbSuffixMap: Record<string, string> = {
-    "datos": "Gestor de archivos",
+    "datos": "Archivos",
     "nube": "Sincronización en la Nube",
-    "autores": "Catálogo de Autores"
+    "autores": "Catálogo de Autores",
+    "seguridad": "Seguridad y Privacidad",
+    "asistente-ia": "Asistente IA",
+    "verificacion": "Verificación"
   };
 
   // ── Render ──────────────────────────────────────────────
@@ -356,7 +363,7 @@ export default function ArchivosTrabajoPage() {
       <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
       <div className="flex-1 flex flex-col h-screen min-w-0">
-        <Header breadcrumbSuffix={breadcrumbSuffixMap[activeTab] ?? "Gestor de archivos"} />
+        <Header breadcrumbSuffix={breadcrumbSuffixMap[activeTab] ?? "Archivos"} />
 
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <MotionWrapper className="w-full space-y-4 pb-12">
@@ -365,7 +372,7 @@ export default function ArchivosTrabajoPage() {
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div>
               <h1 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <FolderOpen className="w-8 h-8 text-accent" /> {t('pages.archivos_title')}
+                <FolderOpen className="w-8 h-8 text-accent" /> Archivos
               </h1>
               <p className="text-muted mt-2 text-lg">{t('pages.archivos_desc')}</p>
             </div>
@@ -402,7 +409,10 @@ export default function ArchivosTrabajoPage() {
                 const infoMap: Record<string, {desc: string}> = {
                   'datos': { desc: 'Gestión de los archivos de estructura y programación didáctica del docente.' },
                   'nube': { desc: 'Sincronización bidireccional segura con Google Drive y Microsoft OneDrive.' },
-                  'autores': { desc: 'Integración de recursos editoriales externos en formato abierto (.fpp).' }
+                  'autores': { desc: 'Integración de recursos editoriales externos en formato abierto (.fpp).' },
+                  'seguridad': { desc: 'Opciones de privacidad, encriptación y control de datos.' },
+                  'asistente-ia': { desc: 'Configuración de inteligencia artificial.' },
+                  'verificacion': { desc: 'Verificaciones de la programación.' }
                 };
                 const info = infoMap[activeTab] || { desc: 'Gestión de archivos.' };
                 return (
@@ -671,6 +681,77 @@ export default function ArchivosTrabajoPage() {
               )}
 
             </div>
+
+              {/* TAB: SEGURIDAD */}
+              {activeTab === "seguridad" && (
+                <section className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl p-8">
+                  <div className="flex items-center gap-4 mb-2">
+                    <div className="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
+                      <Shield className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-bold text-foreground">Tu privacidad por diseño</h2>
+                      <p className="text-muted mt-1 text-sm">Cómo garantizamos que tus datos reales son 100% tuyos.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div className="p-5 bg-background rounded-xl border border-border/50">
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Building2 className="w-5 h-5 text-accent"/> 1. El servidor es ciego</h3>
+                      <p className="text-muted leading-relaxed text-sm">Nuestra base de datos en la nube <strong>jamás</strong> almacena datos de tus alumnos, tus programaciones, ni nada que crees. El servidor web solo existe para enviarte los Catálogos Oficiales (BOE/BOCAA). Eres invisible para nuestro backend.</p>
+                    </div>
+
+                    <div className="p-5 bg-background rounded-xl border border-border/50">
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Lock className="w-5 h-5 text-accent"/> 2. Cifrado local avanzado AES-256</h3>
+                      <p className="text-muted leading-relaxed mb-4 text-sm">Puedes activar la encriptación local. Antes de que cualquier archivo se guarde en tu disco duro o nube, se cifra usando tu clave maestra dentro de tu navegador.</p>
+                      
+                      <div className="bg-surface border border-border p-4 rounded-lg">
+                        <label className="block text-sm font-medium text-foreground mb-2">Establecer clave de seguridad (no se guarda en ningún sitio)</label>
+                        <div className="flex gap-2">
+                          <input 
+                            type="password" 
+                            className="flex-1 bg-background border border-border rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent text-sm" 
+                            placeholder="Introduce tu clave maestra..."
+                            value={useAppStore.getState().encryptionKey || ""}
+                            onChange={(e) => useAppStore.getState().setEncryptionKey(e.target.value || null)}
+                          />
+                        </div>
+                        <p className="text-xs text-muted mt-2"><AlertTriangle className="w-3 h-3 inline mr-1 text-warning"/> Si olvidas esta clave y guardas un archivo, no podremos ayudarte a recuperarlo.</p>
+                      </div>
+                    </div>
+
+                    <div className="p-5 bg-background rounded-xl border border-border/50">
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><CheckCircle className="w-5 h-5 text-accent"/> 3. Defensa contra ataques en el navegador</h3>
+                      <p className="text-muted leading-relaxed text-sm">Hemos implementado una política estricta de seguridad de contenido (CSP) para bloquear scripts maliciosos de terceros.</p>
+                    </div>
+
+                    <div className="p-5 bg-background rounded-xl border border-border/50">
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Activity className="w-5 h-5 text-accent"/> 4. Servidor blindado y siempre disponible</h3>
+                      <p className="text-muted leading-relaxed text-sm">Nuestro servidor backend incorpora <strong>Rate Limiting</strong>, garantizando que siempre tendrás acceso al catálogo oficial de módulos.</p>
+                    </div>
+                  </div>
+                </section>
+              )}
+
+              {/* TAB: ASISTENTE IA */}
+              {activeTab === "asistente-ia" && (
+                <section className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                  <Card className="p-6">
+                    <h2 className="text-lg font-bold mb-4 flex items-center gap-2"><Sparkles className="w-5 h-5 text-accent"/> Configuración del Asistente IA</h2>
+                    <AISettingsPanel />
+                  </Card>
+                </section>
+              )}
+
+              {/* TAB: VERIFICACIÓN */}
+              {activeTab === "verificacion" && (
+                <section className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                  <Card className="p-6">
+                    <h2 className="text-lg font-bold mb-4 flex items-center gap-2"><Activity className="w-5 h-5 text-accent"/> Verificación de la Programación</h2>
+                    <p className="text-muted">Panel de comprobación en construcción. Aquí se mostrarán alertas si faltan campos obligatorios en tu programación.</p>
+                  </Card>
+                </section>
+              )}
 
             {/* Security notice - always visible, full-width */}
             <div className="mt-8">

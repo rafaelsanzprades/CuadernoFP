@@ -73,7 +73,8 @@
     "diario": "Journal",
     "seguimiento": "Tracking",
     "calificaciones": "Grades",
-    "informes": "Reports"
+    "informes": "Reports",
+    "normativa": "Documents"
   },
   "navGroups": {
     "general": "General",

@@ -46,10 +46,10 @@ export default function ContextoConfigPage() {
   }, [activeModuleId, setModuleData]);
 
   const TABS = [
-    { id: "datos", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.datos')}</>, cleanLabel: t('tabs.datos') },
-    { id: "contexto", label: <><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.contexto')}</>, cleanLabel: t('tabs.contexto') },
-    { id: "planes", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.planes')}</>, cleanLabel: t('tabs.planes') },
-    { id: "diversidad", label: <><span className="inline-flex"><HeartHandshake className="w-[1.2em] h-[1.2em] mr-1" /></span> Diversidad</>, cleanLabel: "Diversidad" },
+    { id: "datos", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.datos')}</span>, cleanLabel: t('tabs.datos') },
+    { id: "contexto", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.contexto')}</span>, cleanLabel: t('tabs.contexto') },
+    { id: "planes", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.planes')}</span>, cleanLabel: t('tabs.planes') },
+    { id: "diversidad", label: <span className="flex items-center gap-2"><HeartHandshake className="w-4 h-4 shrink-0" /> Diversidad</span>, cleanLabel: "Diversidad" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -112,15 +112,15 @@ export default function ContextoConfigPage() {
                   Contexto y entorno
                 </h1>
                 <p className="text-muted">
-                  Información general, características del entorno, alumnado y módulo <strong className="text-foreground">{activeModuleId}</strong>.
+                  Información general, características del entorno, alumnado y módulo.
                 </p>
               </div>
             </div>
 
             <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
-              <TabsList className="bg-foreground/5 border border-foreground/10 p-1 flex-wrap h-auto gap-1">
+              <TabsList className="bg-foreground/5 border border-[var(--glass-border)] w-full justify-start h-auto p-1 rounded-xl flex-wrap">
                 {TABS.map((tab) => (
-                  <TabsTrigger key={tab.id} value={tab.id} className="text-sm flex-1 whitespace-nowrap min-w-[100px]">
+                  <TabsTrigger key={tab.id} value={tab.id} className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all">
                     {tab.label}
                   </TabsTrigger>
                 ))}

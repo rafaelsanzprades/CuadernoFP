@@ -717,13 +717,13 @@ export default function LegalPage() {
                           </div>
                         </li>
                         <li>
-                          <a href="/documentos" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                          <a href="/normativa" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Documentos
                           </a>
                           <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/documentos?tab=normativa" className="hover:text-accent transition-colors block py-0.5">— Normativa</a>
-                            <a href="/documentos?tab=curriculos" className="hover:text-accent transition-colors block py-0.5">— Currículos</a>
-                            <a href="/documentos?tab=plantillas" className="hover:text-accent transition-colors block py-0.5">— Plantillas</a>
+                            <a href="/normativa?tab=legislacion" className="hover:text-accent transition-colors block py-0.5">— Normativa</a>
+                            <a href="/normativa?tab=curriculos" className="hover:text-accent transition-colors block py-0.5">— Currículos</a>
+                            <a href="/normativa?tab=plantillas" className="hover:text-accent transition-colors block py-0.5">— Plantillas</a>
                           </div>
                         </li>
                         <li>

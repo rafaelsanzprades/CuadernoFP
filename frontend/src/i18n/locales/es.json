@@ -62,7 +62,7 @@
     "perfil": "Perfil",
     "archivos": "Archivos",
     "catalogo": "Catálogo",
-    "documentos": "Documentos",
+    "documentos": "Normativa",
     "legal": "Legal",
     "contexto": "Contexto",
     "curriculo": "Currículo",
@@ -75,7 +75,8 @@
     "diario": "Diario",
     "seguimiento": "Seguimiento",
     "calificaciones": "Calificaciones",
-    "informes": "Informes"
+    "informes": "Informes",
+    "normativa": "Normativa"
   },
   "navGroups": {
     "general": "General",
@@ -122,7 +123,7 @@
     "catalogo_desc": "Familias, títulos, módulos, resultados de aprendizaje y criterios de evaluación.",
     "archivos_title": "Gestor de archivos",
     "archivos_desc": "Gestión de archivos de programación y curso.",
-    "documentos_title": "Documentos oficiales",
+    "documentos_title": "Normativa",
     "documentos_desc": "Legislación, normativa y plantillas descargables.",
     "descargas_title": "Descargas",
     "descargas_desc": "Generación de actas, informes y boletines en PDF/Excel.",
@@ -139,9 +140,10 @@
     "instrumentos": "Instrumentos",
     "catalogo": "Catálogo",
     "archivos": "Archivos",
-    "documentos": "Documentos",
+    "documentos": "Normativa",
     "descargas": "Descargas",
-    "legal": "Legal"
+    "legal": "Legal",
+    "normativa": "Normativa"
   },
   "catalogo": {
     "familia": "Familia profesional",
@@ -249,12 +251,10 @@
     "observaciones": "Observaciones",
     "comentarios": "Comentarios",
     "notas": "Notas",
-    "guardar": "Guardar",
     "guardando": "Guardando...",
     "guardado": "Guardado",
     "error_guardar": "Error al guardar",
     "cargar": "Cargar",
-    "cargando": "Cargando...",
     "cargado": "Cargado",
     "error_cargar": "Error al cargar",
     "eliminar_confirm": "¿Estás seguro de eliminar este elemento?",
