@@ -40,6 +40,7 @@ export default function MagiaPage() {
   // State for Descargas
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData } = useAppStore();
   const [loadingData, setLoadingData] = useState(true);
+  const [activeTab, setActiveTab] = useState("burocracia");
 
   const [fecha1T, setFecha1T] = useState("");
   const [fecha2T, setFecha2T] = useState("");
@@ -316,6 +317,33 @@ export default function MagiaPage() {
   const activeAlumnado = df_al.filter((al: Alumnado) => al.Estado !== "Baja");
   activeAlumnado.sort((a: Alumnado, b: Alumnado) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
 
+  const handleDownloadPlanificacion = async () => {
+    try {
+      setDownloadingStr('planificacion');
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/pdf?type=planificacion&file_format=pdf`;
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ curso_data: useAppStore.getState().cursoData, module_data: moduleData })
+      });
+      if (!response.ok) throw new Error("Error generando documento");
+      
+      const blob = await response.blob();
+      const urlBlob = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = urlBlob;
+      a.download = `Planificacion_${Date.now()}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(urlBlob);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setDownloadingStr(null);
+    }
+  };
+
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar />
@@ -359,26 +387,43 @@ export default function MagiaPage() {
 
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
               <div>
-                <h1 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                  <span className="text-2xl text-info"><Sparkles className="w-8 h-8" strokeWidth={2.5} /></span> Magia
+                <h1 className="text-2xl font-bold tracking-tight mb-2 flex items-center gap-3">
+                  <Sparkles className="w-8 h-8 text-accent" />
+                  Magia
                 </h1>
-                <p className="text-muted mt-2 text-lg">Generación de la programación didáctica y reportes.</p>
+                <p className="text-muted">Generación de la programación didáctica y reportes.</p>
               </div>
             </div>
 
-            <div className="space-y-4">
-              <AccordionBlock
-                title="Burocracia"
-                icon={<PenTool className="w-5 h-5" />}
-                defaultOpen={true}
-              >
-                <BurocraciaTab />
-              </AccordionBlock>
+            
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-6">
+              <TabsList className="bg-foreground/5 border border-[var(--glass-border)] w-full justify-start h-auto p-1 rounded-xl flex-wrap">
+                <TabsTrigger value="burocracia" className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all flex items-center gap-2">
+                  <PenTool className="w-4 h-4" /> Burocracia
+                </TabsTrigger>
+                <TabsTrigger value="programacion" className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all flex items-center gap-2">
+                  <FileText className="w-4 h-4" /> Programación
+                </TabsTrigger>
+                <TabsTrigger value="guia" className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all flex items-center gap-2">
+                  <BookOpen className="w-4 h-4" /> Guía PD
+                </TabsTrigger>
+                <TabsTrigger value="comparativa" className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all flex items-center gap-2">
+                  <Scale className="w-4 h-4" /> Comparativa
+                </TabsTrigger>
+                <TabsTrigger value="utilidades" className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all flex items-center gap-2">
+                  <Calculator className="w-4 h-4" /> Utilidades
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
 
-              <AccordionBlock
-                title="Programación"
-                icon={<FileText className="w-5 h-5" />}
-              >
+            <div className="space-y-4 animate-in fade-in duration-500">
+              {activeTab === "burocracia" && (
+                <div className="pt-2">
+                <BurocraciaTab />
+                              </div>
+              )}
+              {activeTab === "programacion" && (
+                <div className="pt-2">
                 {(!activeCursoId || !activeModuleId) ? (
                   <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                     <FileText className="w-16 h-16 text-muted-foreground opacity-50" />
@@ -463,29 +508,13 @@ export default function MagiaPage() {
                       );
                     })}
 
-                    <Card className="p-6 border-t-4 border-t-blue-500">
-                      <h2 className="text-2xl font-bold mb-1"><span className="inline-flex"><CalendarDays className="w-4 h-4" /></span> Secuenciación</h2>
-                      <p className="text-sm text-muted mb-6">Planificación temporal del módulo</p>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                          <div>
-                            <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Planificación mensual</h3>
-                            <p className="text-sm text-muted mb-6">Horas previstas frente a impartidas por UD y mes.</p>
-                          </div>
-                          <Button onClick={() => handleDownloadPdf('planificacion')} disabled={downloadingStr === 'planificacion'} className="w-full">
-                            {downloadingStr === 'planificacion' ? '⏳ Generando PDF...' : 'PDF Planificación'}
-                          </Button>
-                        </div>
-                      </div>
-                    </Card>
+                    
                   </div>
                 )}
-              </AccordionBlock>
-
-              <AccordionBlock
-                title="Guía PD (Referencia Cruzada)"
-                icon={<BookOpen className="w-5 h-5" />}
-              >
+                              </div>
+              )}
+              {activeTab === "guia" && (
+                <div className="pt-2">
                 <Card className="p-8 border-t-4 border-t-indigo-500 mt-4">
                   <div className="prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-th:bg-foreground/5 prose-table:border-collapse prose-table:w-full">
                     {guiaPdContent ? (
@@ -499,12 +528,10 @@ export default function MagiaPage() {
                     )}
                   </div>
                 </Card>
-              </AccordionBlock>
-
-              <AccordionBlock
-                title="Comparativa PD (3 Modelos)"
-                icon={<Scale className="w-5 h-5" />}
-              >
+                              </div>
+              )}
+              {activeTab === "comparativa" && (
+                <div className="pt-2">
                 <Card className="p-8 border-t-4 border-t-amber-500 mt-4">
                   <div className="prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-th:bg-foreground/5 prose-table:border-collapse prose-table:w-full">
                     {comparativaPdContent ? (
@@ -518,7 +545,25 @@ export default function MagiaPage() {
                     )}
                   </div>
                 </Card>
-              </AccordionBlock>
+                              </div>
+              )}
+              {activeTab === "utilidades" && (
+                <div className="pt-2">
+                  <Card className="p-8 border-t-4 border-t-purple-500 mt-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                        <div>
+                          <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Exportar Planificación</h3>
+                          <p className="text-sm text-muted mb-6">Genera un documento PDF con la distribución temporal mensual por Unidades Didácticas.</p>
+                        </div>
+                        <Button onClick={handleDownloadPlanificacion} disabled={downloadingStr === 'planificacion'} className="w-full bg-purple-600 hover:bg-purple-700 text-white">
+                          {downloadingStr === 'planificacion' ? '⏳ Generando PDF...' : 'PDF Planificación'}
+                        </Button>
+                      </div>
+                    </div>
+                  </Card>
+                </div>
+              )}
             </div>
 
               </MotionWrapper>

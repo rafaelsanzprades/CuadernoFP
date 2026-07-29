@@ -28,7 +28,10 @@ export default function MatricesPage() {
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
   const [allCeOpen, setAllCeOpen] = useState(false);
-  const [openCEs, setOpenCEs] = useState<Set<string>>(new Set());const [activeTab, setActiveTab] = useState("ra");const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
+  const [openCEs, setOpenCEs] = useState<Set<string>>(new Set());
+  const [activeTab, setActiveTab] = useState("ra");
+  const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
+  const [catalogLoaded, setCatalogLoaded] = useState(0);
 
   const [isDragging, setIsDragging] = useState(false);
   const [selectedCells, setSelectedCells] = useState<Set<string>>(new Set());
@@ -50,7 +53,7 @@ export default function MatricesPage() {
   // Load catalog descriptions when module changes (for fallback resolution)
   useEffect(() => {
     if (activeModuleId) {
-      loadCatalogForModule(activeModuleId);
+      loadCatalogForModule(activeModuleId).then(() => setCatalogLoaded(Date.now()));
     }
   }, [activeModuleId]);
 
@@ -138,10 +141,11 @@ export default function MatricesPage() {
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-4 pb-12">
             <div>
-              <h1 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <span className="inline-flex"><Grid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.matrices_title')}
+              <h1 className="text-2xl font-bold tracking-tight mb-2 flex items-center gap-3">
+                <Grid className="w-8 h-8 text-accent" />
+                Currículo
               </h1>
-              <p className="text-muted mt-2 text-lg">{t('pages.matrices_desc')}</p>
+              <p className="text-muted">{t('pages.matrices_desc')}</p>
             </div>
 
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">

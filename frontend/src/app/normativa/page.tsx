@@ -347,10 +347,11 @@ export default function DocumentosPage() {
 
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
               <div>
-                <h1 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                  <span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.documentos_title', {defaultValue: 'Normativa'})}
+                <h1 className="text-2xl font-bold tracking-tight mb-2 flex items-center gap-3">
+                  <FileText className="w-8 h-8 text-accent" />
+                  {t('pages.documentos_title', {defaultValue: 'Normativa'})}
                 </h1>
-                <p className="text-muted mt-2 text-lg">{t('pages.documentos_desc', {defaultValue: 'Explorador de legislación, normativas y docs oficiales.'})}</p>
+                <p className="text-muted">{t('pages.documentos_desc', {defaultValue: 'Explorador de legislación, normativas y docs oficiales.'})}</p>
               </div>
             </div>
 

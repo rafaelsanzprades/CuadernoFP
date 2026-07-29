@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Catalog Cache Service
  * 
  * Caches RA/CE descriptions from the catalog API to avoid redundant fetches.
@@ -23,7 +23,8 @@ const cache = new Map<string, CachedCatalogData>();
  * Returns CE descriptions as a Map keyed by "CE1.a", "CE1.b", etc.
  * Also loads OG and CPPS from the curriculum endpoint (boa_articles).
  */
-export async function loadCatalogForModule(moduleCode: string): Promise<void> {
+export async function loadCatalogForModule(moduleId: string): Promise<void> {
+  const moduleCode = moduleId.split('-')[0];
   const existing = cache.get(moduleCode);
   if (existing && (Date.now() - existing.loaded) < CACHE_TTL_MS) return;
   
@@ -78,14 +79,35 @@ export async function loadCatalogForModule(moduleCode: string): Promise<void> {
  * Get RA description from cache. Returns undefined if not cached.
  */
 export function getDescRa(moduleCode: string, raId: string): string | undefined {
-  return cache.get(moduleCode)?.ra.get(raId);
+  const code = moduleCode.split('-')[0];
+  return cache.get(code)?.ra.get(raId);
 }
 
 /**
  * Get CE description from cache. Returns undefined if not cached.
  */
 export function getDescCe(moduleCode: string, ceId: string): string | undefined {
-  return cache.get(moduleCode)?.ce.get(ceId);
+  const code = moduleCode.split('-')[0];
+  const ceMap = cache.get(code)?.ce;
+  if (!ceMap) return undefined;
+  
+  if (ceMap.has(ceId)) return ceMap.get(ceId);
+  
+  const parts = ceId.split('.');
+  if (parts.length === 2) {
+    const suffix = parts[1];
+    if (/[a-z]/i.test(suffix)) {
+      const num = suffix.toLowerCase().charCodeAt(0) - 96;
+      const numCeId = `${parts[0]}.${num}`;
+      if (ceMap.has(numCeId)) return ceMap.get(numCeId);
+    } else if (/[0-9]+/.test(suffix)) {
+      const char = String.fromCharCode(96 + parseInt(suffix));
+      const charCeId = `${parts[0]}.${char}`;
+      if (ceMap.has(charCeId)) return ceMap.get(charCeId);
+    }
+  }
+  
+  return undefined;
 }
 
 /**
@@ -120,17 +142,19 @@ export function resolveDescCe(moduleCode: string | null, ce: { id_ce: string; de
  * Get OG list from the catalog cache.
  * Returns array of { id: "a", desc: "..." } from article_9_og.
  */
-export function getOgList(moduleCode: string): Array<{ id: string; desc: string }> {
-  return cache.get(moduleCode)?.og || [];
+export function getOgList(moduleId: string): Array<{ id: string; desc: string }> {
+  const code = moduleId.split('-')[0];
+  return cache.get(code)?.og || [];
 }
 
 /**
  * Get a single OG description by index (0-based).
  * Returns the description string or empty.
  */
-export function resolveOg(moduleCode: string | null, ogIndex: number): string {
-  if (!moduleCode) return '';
-  const list = cache.get(moduleCode)?.og;
+export function resolveOg(moduleId: string | null, ogIndex: number): string {
+  if (!moduleId) return '';
+  const code = moduleId.split('-')[0];
+  const list = cache.get(code)?.og;
   if (!list || ogIndex >= list.length) return '';
   return list[ogIndex].desc;
 }
@@ -139,8 +163,9 @@ export function resolveOg(moduleCode: string | null, ogIndex: number): string {
  * Get CPPS list from the catalog cache.
  * Returns array of { id: "a", desc: "..." } from article_5_cpps.
  */
-export function getCppsList(moduleCode: string): Array<{ id: string; desc: string }> {
-  return cache.get(moduleCode)?.cpps || [];
+export function getCppsList(moduleId: string): Array<{ id: string; desc: string }> {
+  const code = moduleId.split('-')[0];
+  return cache.get(code)?.cpps || [];
 }
 
 

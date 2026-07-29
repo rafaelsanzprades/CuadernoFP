@@ -16,12 +16,17 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 
 export default function ContextoConfigPage() {
-  const { activeModuleId, moduleData, setModuleData } = useAppStore();
+  const { activeModuleId, moduleData, setModuleData, dataSource } = useAppStore();
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("datos");
 
   useEffect(() => {
+    if (dataSource === 'demo') {
+      setLoading(false);
+      return;
+    }
+
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeModuleId}`)
       .then(res => res.json())
       .then(json => {
@@ -43,7 +48,7 @@ export default function ContextoConfigPage() {
         setLoading(false);
       })
       .catch(() => setLoading(false));
-  }, [activeModuleId, setModuleData]);
+  }, [activeModuleId, setModuleData, dataSource]);
 
   const TABS = [
     { id: "datos", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.datos')}</span>, cleanLabel: t('tabs.datos') },
@@ -109,7 +114,7 @@ export default function ContextoConfigPage() {
               <div>
                 <h1 className="text-2xl font-bold tracking-tight mb-2 flex items-center gap-3">
                   <FileEdit className="w-8 h-8 text-accent" />
-                  Contexto y entorno
+                  Contexto
                 </h1>
                 <p className="text-muted">
                   Información general, características del entorno, alumnado y módulo.

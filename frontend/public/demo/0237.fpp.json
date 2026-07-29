@@ -14,7 +14,8 @@
       "RA4": 0,
       "RA5": 0,
       "RA6": 0,
-      "RA7": 0
+      "RA7": 0,
+      "desc_ud": "Introducción a las ICT y normativa"
     },
     {
       "id_ud": "UD02",
@@ -28,7 +29,8 @@
       "RA4": 0,
       "RA5": 0,
       "RA6": 0,
-      "RA7": 0
+      "RA7": 0,
+      "desc_ud": "Elementos de captación de señales de radiodifusión"
     },
     {
       "id_ud": "UD03",
@@ -42,7 +44,8 @@
       "RA4": 0,
       "RA5": 0,
       "RA6": 0,
-      "RA7": 0
+      "RA7": 0,
+      "desc_ud": "Sistemas y equipos de cabecera"
     },
     {
       "id_ud": "UD04",
@@ -56,7 +59,8 @@
       "RA4": 0,
       "RA5": 0,
       "RA6": 0,
-      "RA7": 0
+      "RA7": 0,
+      "desc_ud": "Redes de distribución y dispersión"
     },
     {
       "id_ud": "UD05",
@@ -70,7 +74,8 @@
       "RA4": 0,
       "RA5": 0,
       "RA6": 0,
-      "RA7": 0
+      "RA7": 0,
+      "desc_ud": "Sistemas de telefonía básica en edificios"
     },
     {
       "id_ud": "UD06",
@@ -84,7 +89,8 @@
       "RA4": 0,
       "RA5": 0,
       "RA6": 0,
-      "RA7": 0
+      "RA7": 0,
+      "desc_ud": "Redes de banda ancha y cable coaxial"
     },
     {
       "id_ud": "UD07",
@@ -98,7 +104,8 @@
       "RA4": 0,
       "RA5": 0,
       "RA6": 0,
-      "RA7": 0
+      "RA7": 0,
+      "desc_ud": "Sistemas de control de accesos y videoporteros"
     },
     {
       "id_ud": "UD08",
@@ -112,7 +119,8 @@
       "RA4": 5,
       "RA5": 0,
       "RA6": 0,
-      "RA7": 0
+      "RA7": 0,
+      "desc_ud": "Instalación y configuración de infraestructuras"
     },
     {
       "id_ud": "UD09",
@@ -126,7 +134,8 @@
       "RA4": 0,
       "RA5": 0,
       "RA6": 0,
-      "RA7": 0
+      "RA7": 0,
+      "desc_ud": "Mantenimiento y resolución de averías en ICT"
     },
     {
       "id_ud": "UD10",
@@ -140,7 +149,8 @@
       "RA4": 0,
       "RA5": 0,
       "RA6": 0,
-      "RA7": 0
+      "RA7": 0,
+      "desc_ud": "Prevención de riesgos laborales en telecomunicaciones"
     },
     {
       "id_ud": "UD11",
@@ -156,7 +166,8 @@
       "RA4": 0,
       "RA5": 5,
       "RA6": 5,
-      "RA7": 5
+      "RA7": 5,
+      "desc_ud": "Proyecto de ICT y documentación técnica"
     }
   ],
   "df_sesiones": [

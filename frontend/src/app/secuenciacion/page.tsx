@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BookOpen, ClipboardList, Target , Info, FolderOpen } from "lucide-react";
+import { BookOpen, ClipboardList, Target , Info, FolderOpen, CalendarDays, BarChart } from "lucide-react";
 import React, { useState , useEffect} from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -8,6 +8,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { useModule } from "@/hooks/useApi";
 import { SessionTable } from "@/components/features/secuenciacion/SessionTable";
 import { TaskTable } from "@/components/features/secuenciacion/TaskTable";
+import { PlanificacionMensualTab } from "@/components/features/dashboard/PlanificacionMensualTab";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
@@ -25,9 +26,11 @@ export default function ProgramacionPage() {
 
   const TABS = [
     { id: "secuenciacion", label:  <span className="flex items-center gap-2"><ClipboardList className="w-4 h-4 shrink-0" /> {t('tabs.secuenciacion')}</span>, cleanLabel: t('tabs.secuenciacion') },
-    { id: "tareas", label:  <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.tareas')}</span>, cleanLabel: t('tabs.tareas') }
+    { id: "tareas", label:  <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.tareas')}</span>, cleanLabel: t('tabs.tareas') },
+    { id: "distribucion", label:  <span className="flex items-center gap-2"><CalendarDays className="w-4 h-4 shrink-0" /> Distribución mensual</span>, cleanLabel: "Distribución mensual" }
   ];
   const [activeTab, setActiveTab] = useState("secuenciacion");
+  const [downloadingStr, setDownloadingStr] = useState<string | null>(null);
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
 
@@ -166,6 +169,8 @@ export default function ProgramacionPage() {
     updateDataFrame("df_tareas", newTareas);
   };
 
+
+
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar />
@@ -176,9 +181,9 @@ export default function ProgramacionPage() {
           <MotionWrapper className="space-y-4 pb-12">
             <div>
             <h1 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-3">
-              <span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.programacion_title')}
+              <span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.secuenciacion_title')}
             </h1>
-            <p className="text-muted mt-2 text-lg">{t('pages.programacion_desc')}</p>
+            <p className="text-muted mt-2 text-lg">{t('pages.secuenciacion_desc')}</p>
           </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab}>
@@ -252,19 +257,32 @@ export default function ProgramacionPage() {
           )}
 
           {activeTab === "tareas" && (
-            <>
-                <Card className="p-6 border-t-4 border-t-blue-500">
+            <Card className="p-6 border-t-4 border-t-blue-500">
               <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-6">
-<span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Tareas competenciales (TC)
-</h2>
+                <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Tareas competenciales (TC)
+              </h2>
               <TaskTable 
+                df_ud={df_ud}
                 df_tareas={df_tareas}
                 handleUpdateTarea={handleUpdateTarea}
                 handleAddTarea={handleAddTarea}
                 handleDeleteTarea={handleDeleteTarea}
               />
             </Card>
-            </>
+          )}
+
+          {activeTab === "distribucion" && (
+            <Card className="p-6 border-t-4 border-t-blue-500 animate-in fade-in duration-500">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground">
+                  <span><span className="inline-flex"><CalendarDays className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Distribución mensual
+                </h2>
+              </div>
+              <p className="text-sm text-muted mb-6">Planificación temporal del módulo.</p>
+
+              
+              <PlanificacionMensualTab />
+            </Card>
           )}
 
           </MotionWrapper>

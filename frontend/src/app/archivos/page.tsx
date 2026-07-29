@@ -339,7 +339,7 @@ export default function ArchivosTrabajoPage() {
   // ── Tabs ────────────────────────────────────────────────
 
   const TABS = [
-    { id: "datos", label: <span className="flex items-center gap-2"><Database className="w-4 h-4 shrink-0" /> Locales</span>, cleanLabel: "Locales" },
+    { id: "datos", label: <span className="flex items-center gap-2"><Database className="w-4 h-4 shrink-0" /> Datos</span>, cleanLabel: "Datos" },
     { id: "nube", label: <span className="flex items-center gap-2"><Cloud className="w-4 h-4 shrink-0" /> Nube</span>, cleanLabel: "Nube" },
     { id: "autores", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> Autores</span>, cleanLabel: "Autores" },
     { id: "seguridad", label: <span className="flex items-center gap-2"><Shield className="w-4 h-4 shrink-0" /> Seguridad</span>, cleanLabel: "Seguridad" },

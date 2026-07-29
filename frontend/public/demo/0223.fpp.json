@@ -7,56 +7,64 @@
       "titulo": "Fundamentos de la ofimática",
       "duracion": 10,
       "ra": "RA1",
-      "temporizacion": "1.er trimestre"
+      "temporizacion": "1.er trimestre",
+      "desc_ud": "Introducción al entorno del sistema operativo"
     },
     {
       "id": "UD2",
       "titulo": "Comunicación digital: correo y agenda",
       "duracion": 10,
       "ra": "RA8",
-      "temporizacion": "1.er trimestre"
+      "temporizacion": "1.er trimestre",
+      "desc_ud": "Procesadores de texto: operaciones básicas"
     },
     {
       "id": "UD3",
       "titulo": "Procesadores de texto",
       "duracion": 30,
       "ra": "RA2",
-      "temporizacion": "1.er trimestre"
+      "temporizacion": "1.er trimestre",
+      "desc_ud": "Procesadores de texto: formato y herramientas avanzadas"
     },
     {
       "id": "UD4",
       "titulo": "Hojas de cálculo",
       "duracion": 41,
       "ra": "RA3",
-      "temporizacion": "1.er / 2.º trimestre"
+      "temporizacion": "1.er / 2.º trimestre",
+      "desc_ud": "Hojas de cálculo: entorno y conceptos básicos"
     },
     {
       "id": "UD5",
       "titulo": "Soporte técnico ofimático",
       "duracion": 10,
       "ra": "RA9",
-      "temporizacion": "2.º trimestre"
+      "temporizacion": "2.º trimestre",
+      "desc_ud": "Hojas de cálculo: fórmulas, funciones y gráficos"
     },
     {
       "id": "UD6",
       "titulo": "Presentaciones multimedia",
       "duracion": 17,
       "ra": "RA7",
-      "temporizacion": "2.º trimestre"
+      "temporizacion": "2.º trimestre",
+      "desc_ud": "Gestión de bases de datos relacionales"
     },
     {
       "id": "UD7",
       "titulo": "Bases de datos",
       "duracion": 24,
       "ra": "RA4",
-      "temporizacion": "2.º trimestre"
+      "temporizacion": "2.º trimestre",
+      "desc_ud": "Elaboración de presentaciones gráficas"
     },
     {
       "id": "UD8",
       "titulo": "Imagen y vídeo digital",
       "duracion": 33,
       "ra": "RA5, RA6",
-      "temporizacion": "3.er trimestre"
+      "temporizacion": "3.er trimestre",
+      "desc_ud": "Herramientas de correo electrónico y agenda"
     }
   ],
   "df_ra": [

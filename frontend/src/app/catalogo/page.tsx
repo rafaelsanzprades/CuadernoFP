@@ -120,8 +120,11 @@ function CiclosContent() {
           <MotionWrapper className="w-full space-y-6 pb-12">
 
             <div>
-              <h1 className="text-2xl font-bold tracking-tight text-foreground">{t('pages.catalogo_title', {defaultValue: 'Catálogo'})}</h1>
-              <p className="text-muted mt-2 text-lg">{t('pages.catalogo_desc', {defaultValue: 'Catálogo oficial de familias profesionales, títulos, cursos → módulos.'})}</p>
+              <h1 className="text-2xl font-bold tracking-tight mb-2 flex items-center gap-3">
+                <GraduationCap className="w-8 h-8 text-accent" />
+                {t('pages.catalogo_title', {defaultValue: 'Catálogo'})}
+              </h1>
+              <p className="text-muted">{t('pages.catalogo_desc', {defaultValue: 'Catálogo oficial de familias profesionales, títulos, cursos → módulos.'})}</p>
             </div>
 
             <Tabs value={activeTab} onValueChange={(val: any) => handleTabChange(val as Tab)}>
