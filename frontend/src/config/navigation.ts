@@ -31,7 +31,9 @@ export const navGroups = [
       { href: "/diario", label: "Diario", icon: MapPin, description: "Programación de aula del día a día." },
       { href: "/seguimiento", label: "Seguimiento", icon: TrendingUp, description: "Control de faltas e incidencias." },
       { href: "/calificaciones", label: "Calificaciones", icon: Award, description: "Cuaderno de notas y rúbricas aplicadas." },
-      { href: "/informes", label: "Informes", icon: BarChart3, description: "Boletines trimestrales y actas de evaluación." }
+      { href: "/informes", label: "Informes", icon: BarChart3, description: "Boletines trimestrales y actas de evaluación." },
+      { href: "/memoria", label: "Memoria", icon: FileText, description: "Memoria final del curso." },
+      { href: "/calidad?tab=eqavet", label: "Calidad", icon: Shield, description: "Gestión de la calidad y marco EQAVET." }
     ]
   }
 ];

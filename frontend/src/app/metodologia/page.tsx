@@ -10,7 +10,6 @@ import { useTranslation } from "react-i18next";
 import { MetodologiaTab } from "@/components/features/modulo/MetodologiaTab";
 import { EvaluacionRecursosTab } from "@/components/features/modulo/EvaluacionRecursosTab";
 import { OtrosElementosTab } from "@/components/features/modulo/OtrosElementosTab";
-import { EqavetTab } from "@/components/features/modulo/EqavetTab";
 import { ContingenciaTab } from "@/components/features/modulo/ContingenciaTab";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import Link from "next/link";
@@ -49,7 +48,6 @@ export default function MetodologiaConfigPage() {
   const TABS = [
     { id: "metodologia", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.metodologia')}</span>, cleanLabel: t('tabs.metodologia') },
     { id: "evaluacion", label: <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 shrink-0" /> {t('tabs.evaluacion')}</span>, cleanLabel: t('tabs.evaluacion') },
-    { id: "eqavet", label: <span className="flex items-center gap-2"><Award className="w-4 h-4 shrink-0" /> {t('tabs.eqavet', {defaultValue: 'EQAVET'})}</span>, cleanLabel: t('tabs.eqavet', {defaultValue: 'EQAVET'}) },
     { id: "contingencia", label: <span className="flex items-center gap-2"><Shield className="w-4 h-4 shrink-0" /> {t('tabs.contingencia', {defaultValue: 'Contingencia'})}</span>, cleanLabel: t('tabs.contingencia', {defaultValue: 'Contingencia'}) },
     { id: "otros", label: <span className="flex items-center gap-2"><Layers className="w-4 h-4 shrink-0" /> {t('tabs.otros')}</span>, cleanLabel: t('tabs.otros') },
   ];
@@ -133,7 +131,6 @@ export default function MetodologiaConfigPage() {
               const infoMap: Record<string, {desc: string}> = {
                 'metodologia': { desc: 'Definición de las estrategias metodológicas y actividades formativas.' },
                 'evaluacion': { desc: 'Recursos para la evaluación y criterios de calificación metodológica.' },
-                'eqavet': { desc: 'Indicadores de calidad y cumplimiento del marco EQAVET.' },
                 'contingencia': { desc: 'Planes de contingencia y adaptación ante situaciones excepcionales.' },
                 'otros': { desc: 'Elementos transversales y otros recursos adicionales del módulo.' },
               };
@@ -149,7 +146,6 @@ export default function MetodologiaConfigPage() {
             <div className="space-y-4">
               {activeTab === 'metodologia' && <MetodologiaTab />}
               {activeTab === 'evaluacion' && <EvaluacionRecursosTab />}
-              {activeTab === 'eqavet' && <EqavetTab />}
               {activeTab === 'contingencia' && <ContingenciaTab />}
               {activeTab === 'otros' && <OtrosElementosTab />}
             </div>
