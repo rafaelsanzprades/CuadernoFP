@@ -29,7 +29,7 @@ export default function MatricesPage() {
   const [saveMessage, setSaveMessage] = useState("");
   const [allCeOpen, setAllCeOpen] = useState(false);
   const [openCEs, setOpenCEs] = useState<Set<string>>(new Set());
-  const [activeTab, setActiveTab] = useState("ra");
+  const [activeTab, setActiveTab] = useState("ponderacion-ra-ce");
   const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
   const [catalogLoaded, setCatalogLoaded] = useState(0);
 
@@ -44,10 +44,10 @@ export default function MatricesPage() {
   }, []);
 
   const TABS = [
-    { id: "ra", label: t('tabs.ra'), cleanLabel: t('tabs.ra'), icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "ud", label: t('tabs.ud'), cleanLabel: t('tabs.ud'), icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "relacion", label: t('tabs.relacion'), cleanLabel: t('tabs.relacion'), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "contribucion", label: t('tabs.contribucion'), cleanLabel: t('tabs.contribucion'), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> }
+    { id: "ponderacion-ra-ce", label: "Ponderación RA-CE", cleanLabel: "Ponderación RA-CE", icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "unidades", label: t('tabs.ud'), cleanLabel: t('tabs.ud'), icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "relacion-ra-ud", label: t('tabs.relacion'), cleanLabel: t('tabs.relacion'), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "contribucion-og", label: t('tabs.contribucion'), cleanLabel: t('tabs.contribucion'), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> }
   ];
 
   // Load catalog descriptions when module changes (for fallback resolution)
@@ -169,23 +169,23 @@ export default function MatricesPage() {
             </div>
 
             {/* Resultados de aprendizaje y CE */}
-            {activeTab === "ra" && (
+            {activeTab === "ponderacion-ra-ce" && (
               <div className="space-y-4 animate-in fade-in duration-500">
                               {(() => {
                 const infoMap: Record<string, {title: string, desc: string}> = {
-          'ra': {
+          'ponderacion-ra-ce': {
                     'title': 'Matriz RA - CE',
                     'desc': 'Matriz de Resultados de aprendizaje y Criterios de evaluación.'
           },
-          'ud': {
+          'unidades': {
                     'title': 'Unidades didácticas (UD/T)',
                     'desc': 'Definición de Unidades didácticas o Unidades de trabajo.'
           },
-          'relacion': {
+          'relacion-ra-ud': {
                     'title': 'Relación RA - UD/T',
                     'desc': 'Ponderación y relación entre Unidades y Resultados de aprendizaje.'
           },
-          'contribucion': {
+          'contribucion-og': {
                     'title': 'Contribución a OG',
                     'desc': 'Contribución de los RA a los Objetivos Generales.'
           }
@@ -530,7 +530,7 @@ export default function MatricesPage() {
             )}
 
             {/* Unidades didácticas */}
-            {activeTab === "ud" && (
+            {activeTab === "unidades" && (
               <div className="animate-in fade-in duration-500">
                 <Card className="p-6 border-t-4 border-t-purple-500">
                   <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-4">
@@ -702,7 +702,7 @@ export default function MatricesPage() {
             )}
 
             {/* ── RAs ↔ UDs ────────────────────────────────────── */}
-            {activeTab === "relacion" && (
+            {activeTab === "relacion-ra-ud" && (
               <div className="animate-in fade-in duration-500">
                 <Card className="p-6 border-t-4 border-t-amber-500">
                   <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-4">
@@ -741,7 +741,7 @@ export default function MatricesPage() {
             )}
 
             {/* ── Contribución de RA en OG ────────────────────────────────────── */}
-            {activeTab === "contribucion" && (
+            {activeTab === "contribucion-og" && (
               <div className="animate-in fade-in duration-500">
                 <RaOgMatrix />
               </div>
