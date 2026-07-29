@@ -117,48 +117,6 @@ interface Props {
 }
 
 export function TabNormativa({ searchQuery = "" }: Props) {
-  const [expandedEstatal, setExpandedEstatal] = useState<boolean>(true);
-  const [expandedCommunity, setExpandedCommunity] = useState<string | null>(null);
-
-  const toggleCommunity = (comunidad: string) => {
-    setExpandedCommunity(prev => prev === comunidad ? null : comunidad);
-  };
-
-  const renderTable = (items: NormativaItem[]) => (
-    <div className="overflow-x-auto border border-border/50 rounded-lg">
-      <table className="w-full text-left text-sm">
-        <tbody className="divide-y divide-border/50">
-          {items.map((item) => (
-            <tr key={item.id} className="hover:bg-muted/20 transition-colors">
-              <td className="px-4 py-4">
-                <p className="font-medium text-foreground mb-1 leading-relaxed">
-                  {item.texto}
-                </p>
-                <p className="text-muted-foreground text-xs italic">
-                  {item.descripcion}
-                </p>
-              </td>
-              <td className="px-4 py-4 text-center align-middle w-24">
-                <a href={item.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center">
-                  <Button variant="ghost" size="sm" className="h-10 w-10 text-accent hover:text-accent/80 hover:bg-accent/10">
-                    <FileText className="w-6 h-6" />
-                  </Button>
-                </a>
-              </td>
-            </tr>
-          ))}
-          {items.length === 0 && (
-            <tr>
-              <td colSpan={2} className="px-4 py-8 text-center text-muted-foreground">
-                No se encontraron resultados.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
-  );
-
   const filteredEstatal = NORMATIVA_ESTATAL.filter(item => 
     item.texto.toLowerCase().includes(searchQuery.toLowerCase()) || 
     item.descripcion.toLowerCase().includes(searchQuery.toLowerCase())
@@ -168,97 +126,111 @@ export function TabNormativa({ searchQuery = "" }: Props) {
     item.texto.toLowerCase().includes(searchQuery.toLowerCase()) || 
     item.descripcion.toLowerCase().includes(searchQuery.toLowerCase())
   );
-  
-  const filteredComunidades = COMUNIDADES.filter(com => 
-    com.toLowerCase().includes(searchQuery.toLowerCase())
-  );
 
   return (
     <div className="space-y-8 animate-fade-in">
-
-      <Card className="border-border/50 bg-[var(--glass-bg)] overflow-hidden transition-all">
-        <button
-          onClick={() => setExpandedEstatal(!expandedEstatal)}
-          className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none hover:bg-foreground/5 transition-colors"
-        >
+      <Card className="border-border/50 bg-[var(--glass-bg)] overflow-hidden transition-all shadow-md">
+        <div className="px-6 py-5 flex items-center justify-between text-left border-b border-border/50">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-primary/10 rounded-lg text-primary shrink-0">
               <Landmark className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-lg font-bold">Normativa estatal</h2>
-              <p className="text-sm text-muted-foreground">Legislación de ámbito nacional aplicable a la Formación Profesional.</p>
+              <h2 className="text-lg font-bold">Legislación y Normativa</h2>
+              <p className="text-sm text-muted-foreground">Normativa estatal y despliegue autonómico aplicable a la Formación Profesional.</p>
             </div>
           </div>
-          {expandedEstatal ? <ChevronUp className="w-5 h-5 text-muted shrink-0" /> : <ChevronDown className="w-5 h-5 text-muted shrink-0" />}
-        </button>
-        {expandedEstatal && (
-          <div className="px-6 pb-6 pt-4 border-t border-border/50 bg-background/30">
-            {renderTable(filteredEstatal)}
-          </div>
-        )}
-      </Card>
-
-      <Card className="p-6 border-border/50 bg-[var(--glass-bg)]">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-success/10 rounded-lg text-success">
-            <Map className="w-5 h-5" />
-          </div>
-          <div>
-            <h2 className="text-lg font-bold">Normativa autonómica</h2>
-            <p className="text-sm text-muted-foreground">Despliegue del currículo base en cada Comunidad Autónoma.</p>
-          </div>
         </div>
-        
-        <div className="space-y-3">
-          {filteredComunidades.map((comunidad) => {
-            const isExpanded = expandedCommunity === comunidad;
-            const hasData = comunidad === "Aragón";
-
-            return (
-              <div 
-                key={comunidad} 
-                className={`border rounded-lg overflow-hidden transition-all duration-300 ${isExpanded ? 'border-success/50 shadow-md bg-foreground/5' : 'border-border/50 bg-background/30 hover:bg-foreground/5'}`}
-              >
-                <button
-                  onClick={() => toggleCommunity(comunidad)}
-                  aria-expanded={isExpanded}
-                  aria-controls={`panel-${comunidad.replace(/\s+/g, '-')}`}
-                  className="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className={`font-semibold text-sm transition-colors ${isExpanded ? 'text-success' : 'text-foreground'}`}>
-                      {comunidad}
-                    </span>
-                    {hasData && (
-                      <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-success/20 text-success border border-success/30 uppercase tracking-widest">
-                        Disponible
-                      </span>
-                    )}
-                  </div>
-                  {isExpanded ? (
-                    <ChevronUp className="w-5 h-5 text-success" />
-                  ) : (
-                    <ChevronDown className="w-5 h-5 text-muted" />
-                  )}
-                </button>
-                
-                {isExpanded && (
-                  <div id={`panel-${comunidad.replace(/\s+/g, '-')}`} className="border-t border-border/50 p-5 bg-background">
-                    {hasData ? (
-                      renderTable(NORMATIVA_AUTONOMICA_ARAGON)
-                    ) : (
-                      <div className="flex flex-col items-center justify-center py-10 px-4 text-center bg-foreground/5 rounded-lg border border-dashed border-border/50">
-                        <Info className="w-10 h-10 text-muted mb-4 opacity-50" />
-                        <p className="text-foreground font-medium text-lg">Normativa en preparación</p>
-                        <p className="text-sm text-muted-foreground mt-2 max-w-md">Próximamente se añadirá el despliegue curricular y normativo específico para esta comunidad.</p>
-                      </div>
-                    )}
-                  </div>
+        <div className="p-0 bg-background/30">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-sm">
+              <tbody className="divide-y divide-border/50">
+                {/* ── ESTATAL ── */}
+                {filteredEstatal.length > 0 && (
+                  <tr className="bg-primary/5">
+                    <td colSpan={2} className="px-4 py-3 font-bold text-primary flex items-center gap-2">
+                      <Landmark className="w-4 h-4" /> Normativa Estatal
+                    </td>
+                  </tr>
                 )}
-              </div>
-            );
-          })}
+                {filteredEstatal.map((item) => (
+                  <tr key={item.id} className="hover:bg-muted/20 transition-colors">
+                    <td className="px-4 py-4 pl-8">
+                      <p className="font-medium text-foreground mb-1 leading-relaxed">
+                        {item.texto}
+                      </p>
+                      <p className="text-muted-foreground text-xs italic">
+                        {item.descripcion}
+                      </p>
+                    </td>
+                    <td className="px-4 py-4 text-center align-middle w-24">
+                      <a href={item.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center">
+                        <Button variant="ghost" size="sm" className="h-10 w-10 text-accent hover:text-accent/80 hover:bg-accent/10">
+                          <FileText className="w-6 h-6" />
+                        </Button>
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+
+                {/* ── AUTONÓMICAS ── */}
+                {COMUNIDADES.map(comunidad => {
+                  const items = comunidad === 'Aragón' ? filteredAragon : [];
+                  const matchComunidad = comunidad.toLowerCase().includes(searchQuery.toLowerCase());
+                  
+                  // Hide if we are searching and neither the community name nor its items match
+                  if (searchQuery !== "" && items.length === 0 && !matchComunidad) return null;
+
+                  return (
+                    <React.Fragment key={comunidad}>
+                      <tr className="bg-success/5 border-t-2 border-border/50">
+                        <td colSpan={2} className="px-4 py-2 font-bold text-success">
+                          <div className="flex items-center justify-between w-full">
+                            <div className="flex items-center gap-2">
+                              <Map className="w-4 h-4" /> Normativa Autonómica ({comunidad})
+                            </div>
+                            {items.length === 0 && (
+                              <span className="text-[10px] uppercase tracking-widest bg-success/10 text-success/70 px-2 py-0.5 rounded border border-success/20">
+                                En preparación
+                              </span>
+                            )}
+                          </div>
+                        </td>
+                      </tr>
+                      {items.map((item) => (
+                        <tr key={item.id} className="hover:bg-muted/20 transition-colors border-t border-border/10">
+                          <td className="px-4 py-4 pl-8">
+                            <p className="font-medium text-foreground mb-1 leading-relaxed">
+                              {item.texto}
+                            </p>
+                            <p className="text-muted-foreground text-xs italic">
+                              {item.descripcion}
+                            </p>
+                          </td>
+                          <td className="px-4 py-4 text-center align-middle w-24">
+                            <a href={item.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center">
+                              <Button variant="ghost" size="sm" className="h-10 w-10 text-accent hover:text-accent/80 hover:bg-accent/10">
+                                <FileText className="w-6 h-6" />
+                              </Button>
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
+                    </React.Fragment>
+                  );
+                })}
+
+                {/* NO RESULTS */}
+                {filteredEstatal.length === 0 && filteredAragon.length === 0 && !COMUNIDADES.some(c => c.toLowerCase().includes(searchQuery.toLowerCase())) && (
+                  <tr>
+                    <td colSpan={2} className="px-4 py-12 text-center text-muted-foreground">
+                      No se encontraron resultados para "{searchQuery}".
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </Card>
     </div>

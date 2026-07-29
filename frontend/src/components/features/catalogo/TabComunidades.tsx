@@ -286,37 +286,56 @@ export function TabComunidades({ searchQuery = "" }: Props) {
 
           <div className="flex justify-center">
             <svg
-              viewBox={SPAIN_VIEWBOX}
               className="w-full max-w-lg h-auto"
               xmlns="http://www.w3.org/2000/svg"
+              // Ajustamos el viewBox para recortar el espacio vacío del sur y escalar el mapa
+              viewBox="20 0 593 410"
             >
               {SPAIN_PATHS.map((item) => {
                 const ccaa = CCAA_MAP[item.ccaaId];
                 if (!ccaa) return null;
                 const isActive = activeId === item.ccaaId;
                 const isDemo = item.ccaaId === "aragon";
+                
+                // Si es Canarias, lo movemos a la izquierda de la península
+                const isCanarias = item.ccaaId === "canarias";
+                const transform = isCanarias ? "translate(20, -220)" : undefined;
 
                 return (
-                  <path
-                    key={item.svgId}
-                    d={item.path}
-                    fill={
-                      isActive
-                        ? ccaa.color
-                        : isDemo
-                        ? "#dbeafe"
-                        : "#e5e7eb"
-                    }
-                    stroke={isActive ? ccaa.color : "#9ca3af"}
-                    strokeWidth={isActive ? 2.5 : 0.8}
-                    opacity={isActive ? 0.85 : 0.7}
-                    className="cursor-pointer transition-all duration-200"
-                    onMouseEnter={() => setHovered(item.ccaaId)}
-                    onMouseLeave={() => setHovered(null)}
-                    onClick={() => setSelected(selected === item.ccaaId ? null : item.ccaaId)}
-                  >
-                    <title>{ccaa.nombre} ({ccaa.siglas}) — {ccaa.bo}</title>
-                  </path>
+                  <g key={item.svgId} transform={transform}>
+                    {isCanarias && (
+                      <rect 
+                        x="0" 
+                        y="440" 
+                        width="145" 
+                        height="110" 
+                        fill="none" 
+                        stroke="#9ca3af" 
+                        strokeWidth="1" 
+                        strokeDasharray="4 4" 
+                        rx="4"
+                      />
+                    )}
+                    <path
+                      d={item.path}
+                      fill={
+                        isActive
+                          ? ccaa.color
+                          : isDemo
+                          ? "#dbeafe"
+                          : "#e5e7eb"
+                      }
+                      stroke={isActive ? ccaa.color : "#9ca3af"}
+                      strokeWidth={isActive ? 2.5 : 0.8}
+                      opacity={isActive ? 0.85 : 0.7}
+                      className="cursor-pointer transition-all duration-200"
+                      onMouseEnter={() => setHovered(item.ccaaId)}
+                      onMouseLeave={() => setHovered(null)}
+                      onClick={() => setSelected(selected === item.ccaaId ? null : item.ccaaId)}
+                    >
+                      <title>{ccaa.nombre} ({ccaa.siglas}) — {ccaa.bo}</title>
+                    </path>
+                  </g>
                 );
               })}
             </svg>
