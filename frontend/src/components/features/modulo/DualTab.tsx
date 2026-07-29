@@ -65,31 +65,16 @@ export function DualTab() {
 
   return (
     <div className="space-y-6">
-      <Card className="p-6 bg-accent/5 border-accent/20">
-        <div className="flex items-start gap-4">
-          <Briefcase className="w-6 h-6 text-accent mt-1" />
-          <div className="flex-1">
-            <h3 className="text-lg font-semibold">Régimen dual LO 3/2022</h3>
-            <p className="text-muted text-sm mt-1">
-              Selecciona el régimen de Formación Profesional Dual en el que se imparte este módulo.
-            </p>
-            
-            <div className="mt-4 max-w-sm">
-              <label className="block text-sm font-medium mb-1">Régimen</label>
-              <Select
-                value={dualRegimen}
-                onChange={(e) => handleRegimenChange(e.target.value)}
-              >
-                <option value="ninguno">Ninguno / Tradicional</option>
-                <option value="general">Dual General (25% - 35% empresa)</option>
-                <option value="intensivo">Dual Intensivo (35% - 50% empresa)</option>
-              </Select>
-            </div>
-          </div>
-        </div>
-      </Card>
-
-      {dualRegimen !== "ninguno" && (
+      {dualRegimen === "ninguno" ? (
+        <Card className="p-6 bg-[var(--glass-bg)] border border-[var(--glass-border)] text-center flex flex-col items-center justify-center gap-3">
+          <Info className="w-8 h-8 text-accent opacity-70" />
+          <h3 className="text-lg font-semibold">Módulo en Régimen Tradicional</h3>
+          <p className="text-muted">
+            Este módulo no está configurado como FP Dual. Si deseas activar la FP Dual, 
+            puedes cambiar el régimen en la sección <strong className="text-foreground">Contexto &gt; Presentación</strong>.
+          </p>
+        </Card>
+      ) : (
         <MotionWrapper className="space-y-6">
           <Card className="p-6">
             <h3 className="text-lg font-semibold mb-4">Distribución centro - empresa</h3>

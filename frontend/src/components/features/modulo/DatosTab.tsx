@@ -222,8 +222,8 @@ export function DatosTab() {
           </Select>
         </div>
 
-        <div className="grid grid-cols-5 gap-4 mb-5">
-          <div className="col-span-4">
+        <div className="grid grid-cols-6 gap-4 mb-5">
+          <div className="col-span-3">
             <Select
               label="Módulo didáctico"
               value={selectedModuleCode}
@@ -238,12 +238,25 @@ export function DatosTab() {
               ))}
             </Select>
           </div>
-          <Input 
-            label="Curso"
-            type="text"
-            value={data.curso || ""}
-            onChange={e => updateInfoModulo('curso', e.target.value)}
-          />
+          <div className="col-span-2">
+            <Select
+              label="Régimen dual LO 3/2022"
+              value={moduleData?.dual_regimen || "ninguno"}
+              onChange={e => updateModuleData('dual_regimen', e.target.value)}
+            >
+              <option value="ninguno">Ninguno / Tradicional</option>
+              <option value="general">Dual General (25% - 35%)</option>
+              <option value="intensivo">Dual Intensivo (35% - 50%)</option>
+            </Select>
+          </div>
+          <div className="col-span-1">
+            <Input 
+              label="Curso"
+              type="text"
+              value={data.curso || ""}
+              onChange={e => updateInfoModulo('curso', e.target.value)}
+            />
+          </div>
         </div>
 
         <div className="grid grid-cols-5 gap-4">
