@@ -19,7 +19,7 @@ export default function ContextoConfigPage() {
   const { activeModuleId, moduleData, setModuleData, dataSource } = useAppStore();
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("datos");
+  const [activeTab, setActiveTab] = useState("presentacion");
 
   useEffect(() => {
     if (dataSource === 'demo') {
@@ -51,8 +51,8 @@ export default function ContextoConfigPage() {
   }, [activeModuleId, setModuleData, dataSource]);
 
   const TABS = [
-    { id: "datos", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.datos')}</span>, cleanLabel: t('tabs.datos') },
-    { id: "contexto", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.contexto')}</span>, cleanLabel: t('tabs.contexto') },
+    { id: "presentacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> Presentación</span>, cleanLabel: "Presentación" },
+    { id: "entorno", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Entorno</span>, cleanLabel: "Entorno" },
     { id: "planes", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.planes')}</span>, cleanLabel: t('tabs.planes') },
     { id: "diversidad", label: <span className="flex items-center gap-2"><HeartHandshake className="w-4 h-4 shrink-0" /> Diversidad</span>, cleanLabel: "Diversidad" },
   ];
@@ -134,8 +134,8 @@ export default function ContextoConfigPage() {
               
             {(() => {
               const infoMap: Record<string, {desc: string}> = {
-                'datos': { desc: 'Configuración inicial y datos generales del módulo profesional.' },
-                'contexto': { desc: 'Análisis del entorno socioeconómico, centro educativo y perfil del alumnado.' },
+                'presentacion': { desc: 'Configuración inicial y datos generales del módulo profesional.' },
+                'entorno': { desc: 'Análisis del entorno socioeconómico, centro educativo y perfil del alumnado.' },
                 'planes': { desc: 'Vinculación con los planes estratégicos y proyectos institucionales del centro.' },
                 'diversidad': { desc: 'Atención a la diversidad, adaptaciones curriculares y panel de alumnado ACNEAE.' },
               };
@@ -148,8 +148,8 @@ export default function ContextoConfigPage() {
               );
             })()}
 
-            {activeTab === "datos" && <DatosTab />}
-            {activeTab === "contexto" && <ContextoTab />}
+            {activeTab === "presentacion" && <DatosTab />}
+            {activeTab === "entorno" && <ContextoTab />}
             {activeTab === "planes" && <PlanesTab />}
             {activeTab === "diversidad" && <DiversidadTab />}
 
