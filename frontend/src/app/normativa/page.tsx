@@ -227,7 +227,7 @@ export default function DocumentosPage() {
     if (activeTab === 'bibliografia') {
       return (
         <div className="w-full">
-          <TabNormativa />
+          <TabNormativa searchQuery={searchQuery} />
         </div>
       );
     }
@@ -354,15 +354,28 @@ export default function DocumentosPage() {
               </div>
             </div>
 
-            <Tabs value={activeTab} onValueChange={(val) => { setActiveTab(val); fetchDocuments(val); }} className="w-full mb-6 mt-6">
-              <TabsList className="bg-foreground/5 border border-[var(--glass-border)] w-full justify-start h-auto p-1 rounded-xl flex-wrap">
-                {TABS.map(tab => (
-                  <TabsTrigger key={tab.id} value={tab.id} className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all">
-                    {tab.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-6 mt-6 gap-4">
+              <Tabs value={activeTab} onValueChange={(val) => { setActiveTab(val); fetchDocuments(val); }} className="w-full lg:w-auto overflow-x-auto scrollbar-hide">
+                <TabsList className="bg-foreground/5 border border-[var(--glass-border)] w-full lg:w-auto justify-start h-auto p-1 rounded-xl flex-nowrap min-w-max">
+                  {TABS.map(tab => (
+                    <TabsTrigger key={tab.id} value={tab.id} className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all">
+                      {tab.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
+              
+              <div className="relative w-full lg:w-80 shrink-0">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
+                <input
+                  type="text"
+                  placeholder="Buscar..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full h-[46px] bg-foreground/5 border border-[var(--glass-border)] rounded-xl pl-10 pr-4 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all placeholder:text-muted/60"
+                />
+              </div>
+            </div>
 
             <div className="space-y-3 animate-in fade-in duration-500">
               {(() => {
@@ -386,7 +399,7 @@ export default function DocumentosPage() {
 
 
 
-              {activeTab === 'ccaa' && <div className="mb-6"><TabComunidades /></div>}
+              {activeTab === 'ccaa' && <div className="mb-6"><TabComunidades searchQuery={searchQuery} /></div>}
 
               {renderContent()}
             </div>

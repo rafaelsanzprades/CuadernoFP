@@ -112,8 +112,12 @@ const COMUNIDADES = [
   "Galicia", "Madrid", "Murcia", "Navarra", "País Vasco", "La Rioja", "Ceuta", "Melilla"
 ].sort();
 
-export function TabNormativa() {
-  const [expandedEstatal, setExpandedEstatal] = useState<boolean>(false);
+interface Props {
+  searchQuery?: string;
+}
+
+export function TabNormativa({ searchQuery = "" }: Props) {
+  const [expandedEstatal, setExpandedEstatal] = useState<boolean>(true);
   const [expandedCommunity, setExpandedCommunity] = useState<string | null>(null);
 
   const toggleCommunity = (comunidad: string) => {
@@ -143,9 +147,30 @@ export function TabNormativa() {
               </td>
             </tr>
           ))}
+          {items.length === 0 && (
+            <tr>
+              <td colSpan={2} className="px-4 py-8 text-center text-muted-foreground">
+                No se encontraron resultados.
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
+  );
+
+  const filteredEstatal = NORMATIVA_ESTATAL.filter(item => 
+    item.texto.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    item.descripcion.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  
+  const filteredAragon = NORMATIVA_AUTONOMICA_ARAGON.filter(item => 
+    item.texto.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    item.descripcion.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  
+  const filteredComunidades = COMUNIDADES.filter(com => 
+    com.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -169,7 +194,7 @@ export function TabNormativa() {
         </button>
         {expandedEstatal && (
           <div className="px-6 pb-6 pt-4 border-t border-border/50 bg-background/30">
-            {renderTable(NORMATIVA_ESTATAL)}
+            {renderTable(filteredEstatal)}
           </div>
         )}
       </Card>
@@ -186,7 +211,7 @@ export function TabNormativa() {
         </div>
         
         <div className="space-y-3">
-          {COMUNIDADES.map((comunidad) => {
+          {filteredComunidades.map((comunidad) => {
             const isExpanded = expandedCommunity === comunidad;
             const hasData = comunidad === "Aragón";
 

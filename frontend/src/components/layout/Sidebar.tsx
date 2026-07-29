@@ -201,13 +201,6 @@ export default function Sidebar() {
         onScroll={handleScroll}
         className={`sidebar-scroll-container flex-1 ${isSidebarOpen ? 'px-3' : 'px-2'} py-2 space-y-3 overflow-x-hidden overflow-y-auto scrollbar-hide`}
       >
-        {/* Banner En Obras */}
-        {isSidebarOpen && (
-          <div className="flex items-center justify-center gap-2 px-3 py-2.5 bg-orange-500/10 border border-orange-500/30 rounded-lg text-orange-500 shrink-0 shadow-sm">
-            <AlertTriangle className="w-5 h-5 shrink-0" strokeWidth={2.5} />
-            <span className="text-sm font-bold uppercase tracking-widest">{t('sidebar.en_obras')}</span>
-          </div>
-        )}
 
         {/* Context Selector Block (ahora dentro del scroll) */}
         {isSidebarOpen && (

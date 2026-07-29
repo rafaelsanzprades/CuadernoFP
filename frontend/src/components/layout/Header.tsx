@@ -290,12 +290,21 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
       {/* Fila 2: Buscar y Acciones */}
       <div className="w-full px-4 md:px-6 py-2 bg-white/[0.02] border-t border-[var(--glass-border)] flex items-center justify-between gap-2 text-sm text-muted tracking-wide relative">
         
-          {mounted && dataSource === 'local' && (
-            <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 px-3 py-1.5 rounded-full bg-foreground/5 text-xs font-medium text-muted/80 whitespace-nowrap border border-[var(--glass-border)] shadow-sm pointer-events-none">
-              {syncStatus === 'saving' && <><Hourglass className="w-3.5 h-3.5 text-warning animate-spin" /><span className="text-warning">{t('header.guardando', { defaultValue: 'Guardando...' })}</span></>}
-              {syncStatus === 'saved' && <><Save className="w-3.5 h-3.5 text-success" /><span className="text-success">{t('header.guardado', { defaultValue: 'Guardado' })}</span></>}
-              {syncStatus === 'error' && <><AlertTriangle className="w-3.5 h-3.5 text-danger" /><span className="text-danger">{t('header.error', { defaultValue: 'Error' })}</span></>}
-              {syncStatus === 'idle' && <><Cloud className="w-3.5 h-3.5 text-muted/50" /><span>{t('header.sincronizado', { defaultValue: 'Sincronizado' })}</span></>}
+          {mounted && (
+            <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-3">
+              <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-orange-500/10 border border-orange-500/30 rounded-lg text-orange-500 shrink-0 shadow-sm pointer-events-none">
+                <AlertTriangle className="w-4 h-4 shrink-0" strokeWidth={2.5} />
+                <span className="text-xs font-bold uppercase tracking-widest">{t('sidebar.en_obras')}</span>
+              </div>
+              
+              {dataSource === 'local' && (
+                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-foreground/5 text-xs font-medium text-muted/80 whitespace-nowrap border border-[var(--glass-border)] shadow-sm pointer-events-none">
+                  {syncStatus === 'saving' && <><Hourglass className="w-3.5 h-3.5 text-warning animate-spin" /><span className="text-warning">{t('header.guardando', { defaultValue: 'Guardando...' })}</span></>}
+                  {syncStatus === 'saved' && <><Save className="w-3.5 h-3.5 text-success" /><span className="text-success">{t('header.guardado', { defaultValue: 'Guardado' })}</span></>}
+                  {syncStatus === 'error' && <><AlertTriangle className="w-3.5 h-3.5 text-danger" /><span className="text-danger">{t('header.error', { defaultValue: 'Error' })}</span></>}
+                  {syncStatus === 'idle' && <><Cloud className="w-3.5 h-3.5 text-muted/50" /><span>{t('header.sincronizado', { defaultValue: 'Sincronizado' })}</span></>}
+                </div>
+              )}
             </div>
           )}
           

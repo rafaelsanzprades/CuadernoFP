@@ -233,7 +233,11 @@ COMUNIDADES.forEach(c => { CCAA_MAP[c.id] = c; });
 
 import { useAppStore } from "@/store/useAppStore";
 
-export function TabComunidades() {
+interface Props {
+  searchQuery?: string;
+}
+
+export function TabComunidades({ searchQuery = "" }: Props) {
   const [hovered, setHovered] = useState<string | null>(null);
   const globalData = useAppStore((state) => state.globalData);
   const updateGlobalData = useAppStore((state) => state.updateGlobalData);
@@ -366,7 +370,14 @@ export function TabComunidades() {
               </tr>
             </thead>
             <tbody>
-              {COMUNIDADES.map((ccaa, i) => (
+              {COMUNIDADES
+                .filter(ccaa => 
+                  !searchQuery || 
+                  ccaa.nombre.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                  ccaa.siglas.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                  ccaa.bo.toLowerCase().includes(searchQuery.toLowerCase())
+                )
+                .map((ccaa, i) => (
                 <tr
                   key={ccaa.id}
                   className={`border-b cursor-pointer hover:bg-accent/10 transition-colors ${
