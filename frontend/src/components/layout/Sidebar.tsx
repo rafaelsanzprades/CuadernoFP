@@ -345,16 +345,16 @@ export default function Sidebar() {
                     if (window.innerWidth < 1024) toggleSidebar();
                   }}
                   className={`flex items-center ${isSidebarOpen ? 'gap-2.5 px-3' : 'justify-center px-0'} py-2 rounded-lg transition-all duration-150 group
-                    ${pathname === item.href
+                    ${pathname === item.href.split('?')[0]
                       ? 'bg-foreground/10 text-foreground'
                       : 'text-muted hover:text-foreground hover:bg-foreground/5 border border-transparent'
                     }`}
                 >
-                  <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === item.href ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : 'group-hover:scale-110'}`}>
+                  <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === item.href.split('?')[0] ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : 'group-hover:scale-110'}`}>
                     <item.icon className="w-5 h-5" strokeWidth={1.75} />
                   </span>
                   {isSidebarOpen && (
-                    <span className={`text-sm leading-tight font-medium whitespace-nowrap ${pathname === item.href ? 'text-foreground font-semibold' : ''}`}>
+                    <span className={`text-sm leading-tight font-medium whitespace-nowrap ${pathname === item.href.split('?')[0] ? 'text-foreground font-semibold' : ''}`}>
                       {t('nav.' + item.href.split('?')[0].replace('/', ''))}
                     </span>
                   )}
@@ -424,16 +424,16 @@ export default function Sidebar() {
                       if (window.innerWidth < 1024) toggleSidebar();
                     }}
                     className={`flex items-center ${isSidebarOpen ? 'gap-2.5 px-3' : 'justify-center px-0'} py-2 rounded-lg transition-all duration-150 group
-                      ${pathname === item.href
+                      ${pathname === item.href.split('?')[0]
                         ? 'bg-foreground/10 text-foreground'
                         : 'text-muted hover:text-foreground hover:bg-foreground/5 border border-transparent'
                       }`}
                   >
-                    <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === item.href ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : 'group-hover:scale-110'}`}>
+                    <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === item.href.split('?')[0] ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : 'group-hover:scale-110'}`}>
                       <item.icon className="w-5 h-5" strokeWidth={1.75} />
                     </span>
                     {isSidebarOpen && (
-                      <span className={`text-sm leading-tight font-medium whitespace-nowrap ${pathname === item.href ? 'text-foreground font-semibold' : ''}`}>
+                      <span className={`text-sm leading-tight font-medium whitespace-nowrap ${pathname === item.href.split('?')[0] ? 'text-foreground font-semibold' : ''}`}>
                         {t('nav.' + item.href.split('?')[0].replace('/', ''))}
                       </span>
                     )}
