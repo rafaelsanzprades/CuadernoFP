@@ -50,7 +50,7 @@ export default function DocumentosPage() {
   const fetchDocuments = (path: string) => {
     setLoadingDocs(true);
     setError(null);
-    const backendPath = path === 'legislacion' ? 'Normativa' : path === 'bibliografia' ? 'Bibliografia' : path === 'ccaa' ? 'CCAA' : path;
+    const backendPath = path === 'legislacion' ? 'Normativa' : path === 'bibliografia' ? 'Bibliografia' : path === 'ccaa' ? 'CCAA' : path === 'curriculos' ? 'Currículos' : path;
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/list?path=${encodeURIComponent(backendPath)}`)
       .then((res) => {
         if (!res.ok) throw new Error("Error al acceder a los documentos");
@@ -74,7 +74,6 @@ export default function DocumentosPage() {
   useEffect(() => {
     const folderMap: Record<string, string> = {
       "plantillas": "Plantillas",
-      "curriculos": "Currículos",
       "legislacion": "legislacion"
     };
     if (folderMap[activeTab] && folderMap[activeTab] !== activeTab) {
