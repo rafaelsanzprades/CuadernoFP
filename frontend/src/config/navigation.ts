@@ -6,7 +6,7 @@ export const navGroups = [
     sectionDescription: "Opciones generales de la aplicación y recursos oficiales.",
     items: [
       { href: "/archivos", label: "Archivos", icon: FolderOpen, description: "Gestión de archivos de Programación y Curso." },
-      { href: "/catalogo?tab=normativa", label: "Catálogo", icon: GraduationCap, description: "Familias, Títulos, Módulos y currículos (RA y CE)." },
+      { href: "/catalogo?tab=familias", label: "Catálogo", icon: GraduationCap, description: "Familias, Títulos, Módulos y currículos (RA y CE)." },
       { href: "/normativa", label: "Normativa", icon: FileText, description: "Legislación, plantillas y normativas." }
     ]
   },

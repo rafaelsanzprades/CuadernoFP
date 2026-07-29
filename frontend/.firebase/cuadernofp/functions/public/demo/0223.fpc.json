@@ -1,0 +1,43 @@
+[
+  {
+    "tipo": "curso",
+    "info_fechas": {
+      "ini_curso": "2025-09-01",
+      "fin_curso": "2026-06-30",
+      "ini_1t": "2025-09-15",
+      "fin_1t": "2025-12-19",
+      "ini_2t": "2026-01-08",
+      "fin_2t": "2026-03-20",
+      "ini_3t": "2026-04-06",
+      "fin_3t": "2026-06-19",
+      "ini_feoe": "2026-02-04",
+      "fin_feoe": "2026-03-04"
+    },
+    "horario": {
+      "Lun": 2,
+      "Mar": 1,
+      "Mié": 1,
+      "Jue": 1,
+      "Vie": 1
+    },
+    "calendar_notes": {
+      "febrero": "Semana blanca: del 16 al 20 de febrero.",
+      "mayo": "Fiestas patronales: primer fin de semana largo."
+    },
+    "config_pesos_trim": {
+      "peso_1t": 30,
+      "peso_2t": 30,
+      "peso_3t": 40
+    },
+    "df_eval": [],
+    "df_al": [],
+    "df_sgmt": [],
+    "df_feoe": [],
+    "daily_ledger": {},
+    "tutoria_ledger": {},
+    "planning_ledger": {},
+    "actuaciones_tutoria": [],
+    "id": "0223-ao-curso-202526-1a-gm",
+    "grupo": "1A"
+  }
+]

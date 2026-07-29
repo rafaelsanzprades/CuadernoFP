@@ -31,7 +31,7 @@ export default function DocumentosPage() {
     { id: "ccaa", label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4 shrink-0" /> CCAA</span>, cleanLabel: 'CCAA' },
     { id: "bibliografia", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> Bibliografía</span>, cleanLabel: 'Bibliografía' },
     { id: "legislacion", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.legislacion', {defaultValue: 'Legislación'})}</span>, cleanLabel: t('tabs.legislacion', {defaultValue: 'Legislación'}) },
-    { id: "Currículos", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> {t('tabs.curriculos', {defaultValue: 'Currículos'})}</span>, cleanLabel: t('tabs.curriculos', {defaultValue: 'Currículos'}) }
+    { id: "curriculos", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> {t('tabs.curriculos', {defaultValue: 'Currículos'})}</span>, cleanLabel: t('tabs.curriculos', {defaultValue: 'Currículos'}) }
   ];
   const [activeTab, setActiveTab] = useState("ccaa");
   const [currentPath, setCurrentPath] = useState<string>("");

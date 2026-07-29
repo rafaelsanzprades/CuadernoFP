@@ -1,0 +1,689 @@
+{
+  "tipo": "pd",
+  "__version__": 24,
+  "df_ud": [
+    {
+      "id": "UD1",
+      "titulo": "Fundamentos de la ofimática",
+      "duracion": 10,
+      "ra": "RA1",
+      "temporizacion": "1.er trimestre",
+      "desc_ud": "Introducción al entorno del sistema operativo"
+    },
+    {
+      "id": "UD2",
+      "titulo": "Comunicación digital: correo y agenda",
+      "duracion": 10,
+      "ra": "RA8",
+      "temporizacion": "1.er trimestre",
+      "desc_ud": "Procesadores de texto: operaciones básicas"
+    },
+    {
+      "id": "UD3",
+      "titulo": "Procesadores de texto",
+      "duracion": 30,
+      "ra": "RA2",
+      "temporizacion": "1.er trimestre",
+      "desc_ud": "Procesadores de texto: formato y herramientas avanzadas"
+    },
+    {
+      "id": "UD4",
+      "titulo": "Hojas de cálculo",
+      "duracion": 41,
+      "ra": "RA3",
+      "temporizacion": "1.er / 2.º trimestre",
+      "desc_ud": "Hojas de cálculo: entorno y conceptos básicos"
+    },
+    {
+      "id": "UD5",
+      "titulo": "Soporte técnico ofimático",
+      "duracion": 10,
+      "ra": "RA9",
+      "temporizacion": "2.º trimestre",
+      "desc_ud": "Hojas de cálculo: fórmulas, funciones y gráficos"
+    },
+    {
+      "id": "UD6",
+      "titulo": "Presentaciones multimedia",
+      "duracion": 17,
+      "ra": "RA7",
+      "temporizacion": "2.º trimestre",
+      "desc_ud": "Gestión de bases de datos relacionales"
+    },
+    {
+      "id": "UD7",
+      "titulo": "Bases de datos",
+      "duracion": 24,
+      "ra": "RA4",
+      "temporizacion": "2.º trimestre",
+      "desc_ud": "Elaboración de presentaciones gráficas"
+    },
+    {
+      "id": "UD8",
+      "titulo": "Imagen y vídeo digital",
+      "duracion": 33,
+      "ra": "RA5, RA6",
+      "temporizacion": "3.er trimestre",
+      "desc_ud": "Herramientas de correo electrónico y agenda"
+    }
+  ],
+  "df_ra": [
+    {
+      "id_ra": "RA1",
+      "peso_ra": 10,
+      "is_dual": false,
+      "comp_clave": "",
+      "cpe": ""
+    },
+    {
+      "id_ra": "RA2",
+      "peso_ra": 20,
+      "is_dual": false,
+      "comp_clave": "",
+      "cpe": ""
+    },
+    {
+      "id_ra": "RA3",
+      "peso_ra": 15,
+      "is_dual": false,
+      "comp_clave": "",
+      "cpe": ""
+    },
+    {
+      "id_ra": "RA4",
+      "peso_ra": 10,
+      "is_dual": false,
+      "comp_clave": "",
+      "cpe": ""
+    },
+    {
+      "id_ra": "RA5",
+      "peso_ra": 15,
+      "is_dual": false,
+      "comp_clave": "",
+      "cpe": ""
+    },
+    {
+      "id_ra": "RA6",
+      "peso_ra": 10,
+      "is_dual": false,
+      "comp_clave": "",
+      "cpe": ""
+    },
+    {
+      "id_ra": "RA7",
+      "peso_ra": 10,
+      "is_dual": false,
+      "comp_clave": "",
+      "cpe": ""
+    },
+    {
+      "id_ra": "RA8",
+      "peso_ra": 5,
+      "is_dual": false,
+      "comp_clave": "",
+      "cpe": ""
+    },
+    {
+      "id_ra": "RA9",
+      "peso_ra": 5,
+      "is_dual": false,
+      "comp_clave": "",
+      "cpe": ""
+    }
+  ],
+  "df_ce": [
+    {
+      "id_ce": "CE1.a",
+      "id_ra": "RA1",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE1.b",
+      "id_ra": "RA1",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE1.c",
+      "id_ra": "RA1",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE1.d",
+      "id_ra": "RA1",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE1.e",
+      "id_ra": "RA1",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE1.f",
+      "id_ra": "RA1",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE1.g",
+      "id_ra": "RA1",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE1.h",
+      "id_ra": "RA1",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE1.i",
+      "id_ra": "RA1",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE2.a",
+      "id_ra": "RA2",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE2.b",
+      "id_ra": "RA2",
+      "peso_ce": 20,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE2.c",
+      "id_ra": "RA2",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE2.d",
+      "id_ra": "RA2",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE2.e",
+      "id_ra": "RA2",
+      "peso_ce": 30,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE2.f",
+      "id_ra": "RA2",
+      "peso_ce": 20,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE3.a",
+      "id_ra": "RA3",
+      "peso_ce": 5,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE3.b",
+      "id_ra": "RA3",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE3.c",
+      "id_ra": "RA3",
+      "peso_ce": 25,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE3.d",
+      "id_ra": "RA3",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE3.e",
+      "id_ra": "RA3",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE3.f",
+      "id_ra": "RA3",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE3.g",
+      "id_ra": "RA3",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE3.h",
+      "id_ra": "RA3",
+      "peso_ce": 5,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE4.a",
+      "id_ra": "RA4",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE4.b",
+      "id_ra": "RA4",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE4.c",
+      "id_ra": "RA4",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE4.d",
+      "id_ra": "RA4",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE4.e",
+      "id_ra": "RA4",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE4.f",
+      "id_ra": "RA4",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE4.g",
+      "id_ra": "RA4",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE4.h",
+      "id_ra": "RA4",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE5.a",
+      "id_ra": "RA5",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE5.b",
+      "id_ra": "RA5",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE5.c",
+      "id_ra": "RA5",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE5.d",
+      "id_ra": "RA5",
+      "peso_ce": 40,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE5.e",
+      "id_ra": "RA5",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE6.a",
+      "id_ra": "RA6",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE6.b",
+      "id_ra": "RA6",
+      "peso_ce": 20,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE6.c",
+      "id_ra": "RA6",
+      "peso_ce": 5,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE6.d",
+      "id_ra": "RA6",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE6.e",
+      "id_ra": "RA6",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE7.a",
+      "id_ra": "RA7",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE7.b",
+      "id_ra": "RA7",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE7.c",
+      "id_ra": "RA7",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE7.d",
+      "id_ra": "RA7",
+      "peso_ce": 30,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE7.e",
+      "id_ra": "RA7",
+      "peso_ce": 30,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE7.f",
+      "id_ra": "RA7",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE8.a",
+      "id_ra": "RA8",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE8.b",
+      "id_ra": "RA8",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE8.c",
+      "id_ra": "RA8",
+      "peso_ce": 5,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE8.d",
+      "id_ra": "RA8",
+      "peso_ce": 25,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE8.e",
+      "id_ra": "RA8",
+      "peso_ce": 25,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE8.f",
+      "id_ra": "RA8",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE8.g",
+      "id_ra": "RA8",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE9.a",
+      "id_ra": "RA9",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE9.b",
+      "id_ra": "RA9",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE9.c",
+      "id_ra": "RA9",
+      "peso_ce": 5,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    },
+    {
+      "id_ce": "CE9.d",
+      "id_ra": "RA9",
+      "peso_ce": 20,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": ""
+    }
+  ],
+  "info_modulo": {
+    "nombre": "Aplicaciones Ofimáticas",
+    "codigo": "0223",
+    "acronimo": "AO",
+    "horas": 200,
+    "horasSemanales": 6,
+    "curso": "1",
+    "familia": "Informática y Comunicaciones",
+    "ciclo": "Sistemas microinformáticos y redes (SMR)",
+    "grado": "D",
+    "nivel": "2",
+    "pond_1t": 30,
+    "pond_2t": 30,
+    "pond_3t": 40,
+    "criterio_conocimiento": 40,
+    "criterio_procedimiento_practicas": 30,
+    "criterio_procedimiento_ejercicios": 20,
+    "criterio_tareas": 10
+  },
+  "config_contexto": {
+    "entorno_geografico": "El centro educativo es de titularidad pública situado en el barrio de La Almozara, en Zaragoza.",
+    "entorno_socioeconomico": "El módulo mantiene una relación directa con el tejido empresarial y tecnológico de nuestro entorno. Las orientaciones metodológicas y las tareas competenciales diseñadas persiguen acercar al alumnado a la realidad del sector productivo.",
+    "contexto_escolar": "La oferta académica del instituto es amplia y diversa. Un rasgo distintivo de la identidad del centro es su compromiso con la inclusión, siendo un centro preferente para la escolarización de alumnado con necesidades especiales.",
+    "caracteristicas_alumnado": "Se identifican y respetan las características y necesidades del alumnado, adaptando las metodologías, los recursos y las evaluaciones a sus capacidades. Se planifican actividades que promuevan la participación activa.",
+    "infraestructura": "El proceso de enseñanza-aprendizaje se desarrollará principalmente en las aulas-taller del centro, dotadas con equipos informáticos, cañón proyector y conexión a internet. Se dispondrá del equipamiento específico del ciclo."
+  },
+  "medidas_inclusion": [
+    "[NIVEL-DUA] Medidas DUA a nivel de grupo — Representación: diagramas de flujo, infografías, esquemas, vídeos tutoriales. Calendarios visuales de la UD.",
+    "[ACCION-DUA] Medidas DUA a nivel de grupo — Acción y expresión: Flexibilidad en demostración de competencias. Plantillas y andamiajes.",
+    "[IMPLIC-DUA] Medidas DUA a nivel de grupo — Implicación: Conexión con intereses reales. Rutinas predecibles y clima seguro.",
+    "[TEA-REP] TEA — Representación: Instrucciones claras y explícitas en pasos numerados. Apoyos visuales.",
+    "[TEA-ACCION] TEA — Acción y expresión: Ampliación de tiempos. Sistemas alternativos de comunicación.",
+    "[TEA-IMPLIC] TEA — Implicación: Intereses específicos del alumno como punto de entrada. Rutinas claras.",
+    "[TDAH-REP] TDAH — Representación: Instrucciones cortas y segmentadas. Códigos de color.",
+    "[TDAH-ACCION] TDAH — Acción y expresión: Fragmentación de tareas. Micro-pausas activas.",
+    "[TDAH-IMPLIC] TDAH — Implicación: Feedback inmediato. Gamificación parcial.",
+    "[DESF-REP] Desfase curricular — Representación: Recursos audiovisuales y manipulativos. Textos adaptados.",
+    "[DESF-ACCION] Desfase curricular — Acción y expresión: Respuestas orales, visuales o prácticas. Plantillas con frases modelo.",
+    "[DESF-IMPLIC] Desfase curricular — Implicación: Metas realistas a corto plazo. Actividades funcionales.",
+    "[AUD-REP] Discapacidad auditiva — Representación: Ubicación preferente. Subtítulos en vídeos.",
+    "[AUD-ACCION] Discapacidad auditiva — Acción y expresión: Respuestas escritas o visuales.",
+    "[AUD-IMPLIC] Discapacidad auditiva — Implicación: Evitar tareas exclusivamente auditivas."
+  ],
+  "instrumentos_seleccionados": [
+    "[PRU-OBJ] Prueba objetiva",
+    "[PRU-EJEC] Prueba de ejecución",
+    "[RUBR] Rúbrica",
+    "[LIST-CTRL] Lista de control"
+  ],
+  "recursos_espacios": [
+    "[REC-AULA] Aula polivalente",
+    "Salón de Actos"
+  ],
+  "metodologias_seleccionadas": [
+    "[ABP] Aprendizaje Basado en Proyectos",
+    "[COLAB] Aprendizaje Cooperativo"
+  ],
+  "elementos_transversales": [
+    "[TRANS-TIC] Competencia digital y buen uso de internet"
+  ],
+  "actividades_complementarias": [
+    "[EXT-CHARLA] Charlas / Masterclass con expertos"
+  ],
+  "medidas_contingencia": [
+    "[CONT-ASINC] Docencia telemática asíncrona",
+    "[CONT-AUT] Dosier de tareas autoguiadas"
+  ],
+  "df_contexto": {
+    "centro": "CIFPA",
+    "localidad": "Zaragoza",
+    "comunidad": "Aragón"
+  },
+  "textos_pd_contexto_geografico": "El módulo profesional se imparte en la ciudad de Zaragoza, capital de la comunidad autónoma de Aragón. Con una población de más de 660.000 habitantes, se caracteriza por una densidad poblacional media-alta y una tendencia demográfica estable. Excelente infraestructura viaria y conectividad digital (fibra óptica y 5G).",
+  "textos_pd_contexto_socioeconomico": "Entorno caracterizado por un sector terciario muy consolidado (comercio, administración, logística) e industria diversificada, que demanda perfiles técnicos en TIC, especialmente en soporte y administración de sistemas.",
+  "textos_pd_contexto_escolar": "El centro CIFPA es de titularidad pública con aproximadamente 800 alumnos. Es un centro de referencia en la familia profesional de Informática y Comunicaciones en Aragón.",
+  "textos_pd_caracteristicas_alumnado": "Procedencia geográfica mayoritariamente urbana (Zaragoza metropolitana). Franja de edad de 16-18 años, con minoría de mayor edad. Grupo de 23 estudiantes, 2 repetidores. Presencia de alumnado con TEA y TDAH.",
+  "textos_pd_feoe_organizacion": "El alumnado que no realice la FEOE permanecerá en el centro educativo y realizará tareas de refuerzo, ampliación y desarrollo de competencias orientadas a su futura incorporación a la formación en empresa.",
+  "textos_pd_feoe_seguimiento": "Se celebrarán reuniones de seguimiento quincenales en el centro educativo, coordinadas por la persona tutora dual del grupo.",
+  "textos_pd_eval_informacion": "Se informará al alumnado y a sus familias al inicio del curso sobre los resultados de aprendizaje, criterios de evaluación, e instrumentos de calificación.",
+  "textos_pd_eval_perdida_continua": "La pérdida del derecho a evaluación continua se determinará de acuerdo con la normativa vigente sobre asistencia obligatoria.",
+  "textos_pd_eval_recuperacion": "Los procedimientos de recuperación se basarán en pruebas teórico-prácticas para superar los resultados de aprendizaje no alcanzados.",
+  "textos_pd_eval_pendientes": "Para el alumnado con el módulo pendiente, se establecerá un plan de seguimiento individualizado.",
+  "textos_pd_metodologia_labor_coordinada": "El equipo docente mantendrá reuniones periódicas de coordinación para asegurar un enfoque globalizador e interdisciplinar.",
+  "textos_pd_inclusion": "Se aplicarán medidas multinivel, adaptación de materiales, agrupamientos flexibles y actividades de refuerzo de comprensión lectora.",
+  "textos_pd_contingencia_profesor": "El centro garantizará la continuidad pedagógica en caso de contingencia mediante el uso de Aeducar y el aula virtual.",
+  "textos_pd_contingencia_alumnado": "El alumnado contará con seguimiento en Aeducar en caso de ausencia justificada prolongada.",
+  "textos_pd_bibliografia": "LibreOffice Guide, Microsoft Support & Learning, GIMP Tutorials, Pixabay, Wikimedia Commons.",
+  "textos_pd_publicidad": "La programación estará a disposición en la secretaría del centro y en la plataforma web del instituto."
+}

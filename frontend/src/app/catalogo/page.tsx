@@ -22,7 +22,7 @@ import { TabIncual } from "@/components/features/catalogo/TabIncual";
 import { useTranslation } from "react-i18next";
 import { useAppStore } from "@/store/useAppStore";
 
-type Tab = "familias" | "titulo" | "cursos" | "modulos" | "incual";
+type Tab = "familias" | "titulos" | "modulos" | "ra-ce" | "ecp-incual";
 
 
 export default function CiclosPage() {
@@ -46,7 +46,7 @@ function CiclosContent() {
 
   const tabParam = searchParams.get("tab") as Tab | null;
   const [activeTab, setActiveTab] = useState<Tab>(
-    tabParam && ["familias", "titulo", "cursos", "modulos", "incual"].includes(tabParam) ? tabParam : "familias"
+    tabParam && ["familias", "titulos", "modulos", "ra-ce", "ecp-incual"].includes(tabParam) ? tabParam : "familias"
   );
 
   const [globalSelection, setGlobalSelection] = useState(() => {
@@ -84,28 +84,28 @@ function CiclosContent() {
 
   const handleSelectTitulo = (familiaName: string, tituloCodigo: string) => {
     updateGlobalSelection({ familia: familiaName, tituloCodigo });
-    setActiveTab("cursos");
-    router.replace(`/catalogo?tab=cursos`, { scroll: false });
+    setActiveTab("ra-ce");
+    router.replace(`/catalogo?tab=ra-ce`, { scroll: false });
   };
 
   const handleSelectFamiliaToTitulo = (familiaName: string, tituloCodigo: string) => {
     updateGlobalSelection({ familia: familiaName, tituloCodigo });
-    setActiveTab("titulo");
-    router.replace(`/catalogo?tab=titulo`, { scroll: false });
+    setActiveTab("titulos");
+    router.replace(`/catalogo?tab=titulos`, { scroll: false });
   };
 
   const handleSelectModulo = (familia: string, tituloCodigo: string, moduloCodigo: string) => {
     updateGlobalSelection({ familia, tituloCodigo, moduloCodigo });
-    setActiveTab("modulos");
-    router.replace(`/catalogo?tab=modulos`, { scroll: false });
+    setActiveTab("ra-ce");
+    router.replace(`/catalogo?tab=ra-ce`, { scroll: false });
   };
 
   const TAB_LABELS: Record<Tab, string> = {
     familias: t('tabs.familias', {defaultValue: 'Familias'}),
-    titulo: t('tabs.titulos', {defaultValue: 'Títulos'}),
-    cursos: t('tabs.modulos', {defaultValue: 'Módulos'}),
-    modulos: 'RA → CE',
-    incual: "ECP INCUAL"
+    titulos: t('tabs.titulos', {defaultValue: 'Títulos'}),
+    modulos: t('tabs.modulos', {defaultValue: 'Módulos'}),
+    'ra-ce': 'RA → CE',
+    'ecp-incual': "ECP INCUAL"
   };
 
   const activeTabCleanLabel = TAB_LABELS[activeTab];
@@ -132,10 +132,10 @@ function CiclosContent() {
                 {(
                   [
                     { id: "familias" as Tab, label: <span className="flex items-center gap-2"><FolderTree className="w-4 h-4" /> {t('tabs.familias', {defaultValue: 'Familias'})}</span> },
-                    { id: "titulo" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> {t('tabs.titulos', {defaultValue: 'Títulos'})}</span> },
-                    { id: "cursos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> {t('tabs.modulos', {defaultValue: 'Módulos'})}</span> },
-                    { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> RA → CE</span> },
-                    { id: "incual" as Tab, label: <span className="flex items-center gap-2"><Award className="w-4 h-4 text-purple-500" /> ECP INCUAL</span> },
+                    { id: "titulos" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> {t('tabs.titulos', {defaultValue: 'Títulos'})}</span> },
+                    { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> {t('tabs.modulos', {defaultValue: 'Módulos'})}</span> },
+                    { id: "ra-ce" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> RA → CE</span> },
+                    { id: "ecp-incual" as Tab, label: <span className="flex items-center gap-2"><Award className="w-4 h-4 text-purple-500" /> ECP INCUAL</span> },
                   ]
                 ).map((t) => (
                   <TabsTrigger key={t.id} value={t.id}>
@@ -148,10 +148,10 @@ function CiclosContent() {
             {(() => {
               const infoMap: Record<string, {desc: string}> = {
                 'familias': { desc: 'El RD 1128/2003 establece el Catálogo Nacional de Cualificaciones Profesionales.' },
-                'titulo': { desc: 'Normativa estatal básica y currículo autonómico para ciclos formativos.' },
-                'cursos': { desc: 'Bloques de especialización y contenidos asociados a cada curso académico.' },
-                'modulos': { desc: 'Competencias específicas estructuradas en RA y CE (Art. 136, RD 659/2023).' },
-                'incual': { desc: 'Estándares de Competencia Profesional (ECP) del Catálogo Nacional (INCUAL).' }
+                'titulos': { desc: 'Normativa estatal básica y currículo autonómico para ciclos formativos.' },
+                'modulos': { desc: 'Bloques de especialización y contenidos asociados a cada curso académico.' },
+                'ra-ce': { desc: 'Competencias específicas estructuradas en RA y CE (Art. 136, RD 659/2023).' },
+                'ecp-incual': { desc: 'Estándares de Competencia Profesional (ECP) del Catálogo Nacional (INCUAL).' }
               };
               const info = infoMap[activeTab] || { desc: 'Catálogo Nacional Oficial.' };
               return (
@@ -165,10 +165,10 @@ function CiclosContent() {
             })()}
 
             {activeTab === "familias" && <TabFamilias onSelectTitulo={handleSelectFamiliaToTitulo} />}
-            {activeTab === "titulo" && <TabTitulo onSelectTitulo={handleSelectTitulo} globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
-            {activeTab === "cursos" && <TabCursos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} onSelectModulo={handleSelectModulo} />}
-            {activeTab === "modulos" && <TabModulos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
-            {activeTab === "incual" && <TabIncual globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
+            {activeTab === "titulos" && <TabTitulo onSelectTitulo={handleSelectTitulo} globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
+            {activeTab === "modulos" && <TabCursos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} onSelectModulo={handleSelectModulo} />}
+            {activeTab === "ra-ce" && <TabModulos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
+            {activeTab === "ecp-incual" && <TabIncual globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
           </MotionWrapper>
         </div>
       </main>
