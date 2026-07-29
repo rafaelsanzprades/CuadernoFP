@@ -1,12 +1,6 @@
-import { demoSeed, CRM_SEED_VERSION } from "./demo-ele203-0237ictve-curso202526";
-import { demoSeed0223 } from "./demo-smr201-0223ao-curso202526";
 import { useAppStore } from "@/store/useAppStore";
 import { ModuleData, CursoData, FileSource } from "@/types";
 import CryptoJS from "crypto-js";
-
-// Merge both demo seeds
-const fullDemoSeed = { ...demoSeed, ...demoSeed0223 };
-
 export type DataSourceType = 'demo' | 'local';
 
 // ─── Helpers ────────────────────────────────────────────────
@@ -124,78 +118,56 @@ export const fileManager = {
 
   // ── DEMO ────────────────────────────────────────────────
 
-  /** Load demo data from static JSON files in /demo/ with normalization */
+  /** Load demo data from static .fpg files in /demo/ */
   async loadDemoData(groupId?: string): Promise<void> {
+    // If no group is passed, default to 0237
     if (!groupId) groupId = '0237';
 
+    // Normalize input to module code (for the static file name)
     const moduleCode = groupId.startsWith('0223') ? '0223' : '0237';
     const store = useAppStore.getState();
 
     try {
-      // Fetch .fpp (programación)
-      const fppRes = await fetch(`/demo/${moduleCode}.fpp.json`);
-      if (!fppRes.ok) throw new Error(`Failed to fetch /demo/${moduleCode}.fpp.json`);
-      const pdData = await fppRes.json();
+      // 1. Fetch .fpg (Group project file)
+      const fpgRes = await fetch(`/demo/${moduleCode}.fpg.json`);
+      if (!fpgRes.ok) throw new Error(`Failed to fetch /demo/${moduleCode}.fpg.json`);
+      const groupData = await fpgRes.json();
 
-      // Fetch .fpc (curso) — always an array
-      const fpcRes = await fetch(`/demo/${moduleCode}.fpc.json`);
-      if (!fpcRes.ok) throw new Error(`Failed to fetch /demo/${moduleCode}.fpc.json`);
-      const cursoDataArray = await fpcRes.json();
-
-      // Pick the right curso doc (first one by default, or match group)
-      let cursoData = Array.isArray(cursoDataArray) ? cursoDataArray[0] : cursoDataArray;
-
-      // For 0237, try to match specific group
-      if (Array.isArray(cursoDataArray) && cursoDataArray.length > 1) {
-        const groupMatch = cursoDataArray.find((d: any) =>
-          d.grupo?.toLowerCase() === groupId.toLowerCase() ||
-          d.id?.toLowerCase().includes(groupId.toLowerCase())
-        );
-        if (groupMatch) cursoData = groupMatch;
+      if (groupData.tipo !== "GRUPO" || !groupData.archivos) {
+        throw new Error("Invalid .fpg format");
       }
 
-      const pdId = `${moduleCode}-pd`;
+      // 2. Fetch linked .fpp (programación)
+      const fppRes = await fetch(`/demo/${groupData.archivos.programacion}`);
+      if (!fppRes.ok) throw new Error(`Failed to fetch /demo/${groupData.archivos.programacion}`);
+      const pdData = await fppRes.json();
+
+      // 3. Fetch linked .fpc (curso)
+      const fpcRes = await fetch(`/demo/${groupData.archivos.curso}`);
+      if (!fpcRes.ok) throw new Error(`Failed to fetch /demo/${groupData.archivos.curso}`);
+      let cursoDataArray = await fpcRes.json();
+      
+      // If legacy array format, pick the first
+      let cursoData = Array.isArray(cursoDataArray) ? cursoDataArray[0] : cursoDataArray;
+
+      // Extract IDs
+      const pdId = pdData.id || `${moduleCode}-pd`;
       const cursoId = cursoData.id || `${moduleCode}-curso`;
 
+      // Set state
       store.setDataSource("demo");
       store.setActiveModuleId(pdId);
       store.setModuleData(pdData as any);
       store.setActiveCursoId(cursoId);
       store.setCursoData(cursoData as any);
+      
+      // Demo files have no local file handle
       store.setPdFileSource({ type: 'none' });
       store.setCursoFileSource({ type: 'none' });
+
     } catch (e) {
-      console.error("Error loading demo data:", e);
-      // Fallback: try embedded seeds (legacy)
-      this._loadDemoDataFallback(groupId);
+      console.error("Error loading demo data from fpg:", e);
     }
-  },
-
-  /** Fallback: load from embedded TS seeds (legacy, no normalization) */
-  _loadDemoDataFallback(groupId: string) {
-    let pdDataId = "0237-ictve-pd";
-    let cursoDataId = "0237-ictve-curso-2025-26";
-    
-    if (groupId.startsWith('0223')) {
-      pdDataId = "0223-ao-pd";
-      cursoDataId = "0223-ao-curso-202526-1a-gm";
-    } else {
-      if (groupId === '1a') cursoDataId = "0237-ictve-curso-202526-1a-gm";
-      if (groupId === '1b') cursoDataId = "0237-ictve-curso-202526-1b-gm";
-      if (groupId === '1c') cursoDataId = "0237-ictve-curso-202526-1c-gm";
-    }
-    
-    const pdData = fullDemoSeed[pdDataId as keyof typeof fullDemoSeed];
-    const cursoData = fullDemoSeed[cursoDataId as keyof typeof fullDemoSeed] || fullDemoSeed["0237-ictve-curso-202526-1a-gm" as keyof typeof fullDemoSeed] || fullDemoSeed["0237-ictve-curso-2025-26" as keyof typeof fullDemoSeed];
-
-    const store = useAppStore.getState();
-    store.setDataSource("demo");
-    store.setActiveModuleId(pdDataId);
-    store.setModuleData(pdData as any);
-    store.setActiveCursoId(cursoDataId);
-    store.setCursoData(cursoData as any);
-    store.setPdFileSource({ type: 'none' });
-    store.setCursoFileSource({ type: 'none' });
   },
 
   // ── NEW (Wizard) ────────────────────────────────────────
@@ -389,9 +361,7 @@ export const fileManager = {
       demoCursoData = Array.isArray(cursoArray) ? cursoArray[0] : cursoArray;
     } catch (e) {
       console.error("Error fetching demo curso for new curso:", e);
-      // Fallback: use embedded seed
-      demoCursoData = fullDemoSeed["0237-ictve-curso-2025-26" as keyof typeof fullDemoSeed] || fullDemoSeed["0237-ictve-curso-202526-1a-gm" as keyof typeof fullDemoSeed];
-      if (!demoCursoData) return false;
+      return false;
     }
 
     const newCursoData: CursoData = JSON.parse(JSON.stringify(demoCursoData));

@@ -158,6 +158,10 @@ export default function ArchivosTrabajoPage() {
       toast.error("No hay ninguna Programación cargada para guardar.");
       return;
     }
+    if (dataSource === 'demo') {
+      toast("Estás en modo demo. Guardando como nuevo archivo...", { icon: 'ℹ️' });
+      return handleSaveAsPd();
+    }
     const ok = await fileManager.saveProgramacion();
     if (ok) toast.success("Programación guardada correctamente.");
     else toast.error("Error al guardar la programación.");
@@ -167,6 +171,10 @@ export default function ArchivosTrabajoPage() {
     if (!cursoData) {
       toast.error("No hay ningún Curso cargado para guardar.");
       return;
+    }
+    if (dataSource === 'demo') {
+      toast("Estás en modo demo. Guardando como nuevo archivo...", { icon: 'ℹ️' });
+      return handleSaveAsCurso();
     }
     const ok = await fileManager.saveCurso();
     if (ok) toast.success("Curso guardado correctamente.");

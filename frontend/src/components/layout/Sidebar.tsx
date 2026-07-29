@@ -32,9 +32,7 @@ export default function Sidebar() {
   }, [workspaceHandle, dataSource]);
 
   const demoGroupValue = (isMounted && activeCursoId) ? 
-    (activeCursoId.includes('0223') ? '0223'
-    : activeCursoId.toUpperCase().includes('1B') ? '1b'
-    : activeCursoId.toUpperCase().includes('1C') ? '1c' : '1a') : '1a';
+    (activeCursoId.includes('0223') ? '0223' : '0237') : '0237';
 
   useEffect(() => {
     const savedScroll = sessionStorage.getItem('sidebar-scroll');
@@ -215,7 +213,7 @@ export default function Sidebar() {
             
             <div className="flex bg-foreground/5 rounded-lg p-0.5 w-full gap-0.5">
               <button
-                onClick={() => { setDataSource('demo'); fileManager.loadDemoData('1a'); toast.success('Modo DEMO'); }}
+                onClick={() => { setDataSource('demo'); fileManager.loadDemoData('0237'); toast.success('Modo DEMO'); }}
                 className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-md text-sm font-bold transition-all ${dataSource === 'demo'
                   ? 'bg-warning/20 text-warning shadow-sm ring-1 ring-warning/30'
                   : 'text-muted hover:bg-foreground/10 hover:text-foreground'}`}
@@ -245,10 +243,8 @@ export default function Sidebar() {
                   value={demoGroupValue}
                   onChange={(e) => { fileManager.loadDemoData(e.target.value); toast.success(`Grupo ${e.target.value.toUpperCase()}`); }}
                 >
-                  <option value="1a">202526 1A-GM 0237 ICTVE</option>
-                  <option value="1b">202526 1B-GM 0237 ICTVE</option>
-                  <option value="1c">202526 1C-GM 0237 ICTVE</option>
-                  <option value="0223">202526 1A-GM 0223 AO</option>
+                  <option value="0237">2026 1A-GM 0237 ICTVE</option>
+                  <option value="0223">2026 2A-GM 0223 OA</option>
                 </select>
                 <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none" style={{ color: 'var(--warning)' }} />
               </div>
