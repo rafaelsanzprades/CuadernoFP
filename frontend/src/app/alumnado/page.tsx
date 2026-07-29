@@ -229,6 +229,7 @@ export default function AlumnadoPage() {
 
   return (
     <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={activeTabCleanLabel} />
@@ -272,11 +273,11 @@ export default function AlumnadoPage() {
           </Tabs>
 
           {/* Tab 1: Alumnado */}
-          {activeTab === "alumnado" && (
+          {activeTab === "listado" && (
             <>
                               {(() => {
                 const infoMap: Record<string, {title: string, desc: string}> = {
-          'alumnado': {
+          'listado': {
                     'title': 'Alumnado',
                     'desc': 'Gestión del listado de alumnado y ficha individual.'
           },
