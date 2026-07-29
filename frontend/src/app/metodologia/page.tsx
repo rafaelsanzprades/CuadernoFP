@@ -1,6 +1,7 @@
 "use client";
-import { AccordionBlock } from "@/components/ui/AccordionBlock";
-import { Building2, Target, CheckCircle2, Layers, Award, FolderOpen, Lightbulb, Settings, Shield } from "lucide-react";
+import { TabSync } from "@/components/ui/TabSync";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
+import { Building2, Target, CheckCircle2, Layers, Award, FolderOpen, Lightbulb, Settings, Shield, Info } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -20,6 +21,7 @@ export default function MetodologiaConfigPage() {
   const { activeModuleId, moduleData, setModuleData } = useAppStore();
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("metodologia");
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeModuleId}`)
@@ -45,12 +47,24 @@ export default function MetodologiaConfigPage() {
       .catch(() => setLoading(false));
   }, [activeModuleId, setModuleData]);
 
+  const TABS = [
+    { id: "metodologia", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.metodologia')}</span>, cleanLabel: t('tabs.metodologia') },
+    { id: "dual", label: <span className="flex items-center gap-2"><Building2 className="w-4 h-4 shrink-0" /> {t('tabs.dual', {defaultValue: 'FP Dual'})}</span>, cleanLabel: t('tabs.dual', {defaultValue: 'FP Dual'}) },
+    { id: "evaluacion", label: <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 shrink-0" /> {t('tabs.evaluacion')}</span>, cleanLabel: t('tabs.evaluacion') },
+    { id: "eqavet", label: <span className="flex items-center gap-2"><Award className="w-4 h-4 shrink-0" /> {t('tabs.eqavet', {defaultValue: 'EQAVET'})}</span>, cleanLabel: t('tabs.eqavet', {defaultValue: 'EQAVET'}) },
+    { id: "contingencia", label: <span className="flex items-center gap-2"><Shield className="w-4 h-4 shrink-0" /> {t('tabs.contingencia', {defaultValue: 'Contingencia'})}</span>, cleanLabel: t('tabs.contingencia', {defaultValue: 'Contingencia'}) },
+    { id: "otros", label: <span className="flex items-center gap-2"><Layers className="w-4 h-4 shrink-0" /> {t('tabs.otros')}</span>, cleanLabel: t('tabs.otros') },
+  ];
+
+  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+
   if (!activeModuleId) {
     return (
       <div className="flex min-h-screen bg-background">
+        <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
-          <Header />
+          <Header breadcrumbSuffix={activeTabCleanLabel} />
           <main id="main-content" tabIndex={-1} className="flex-1 p-8 content-area">
             <MotionWrapper>
               <div className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
@@ -75,7 +89,7 @@ export default function MetodologiaConfigPage() {
       <div className="flex min-h-screen bg-background">
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
-          <Header />
+          <Header breadcrumbSuffix={activeTabCleanLabel} />
           <main id="main-content" tabIndex={-1} className="flex-1 p-8 content-area">
             <div className="flex flex-col items-center justify-center h-full">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mb-4"></div>
@@ -89,9 +103,10 @@ export default function MetodologiaConfigPage() {
 
   return (
     <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header />
+        <Header breadcrumbSuffix={activeTabCleanLabel} />
         <main id="main-content" tabIndex={-1} className="flex-1 p-8 content-area">
           <MotionWrapper>
             <div className="mb-8 flex items-center justify-between">
@@ -106,49 +121,41 @@ export default function MetodologiaConfigPage() {
               </div>
             </div>
 
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
+              <TabsList className="bg-foreground/5 border border-[var(--glass-border)] w-full justify-start h-auto p-1 rounded-xl flex-wrap">
+                {TABS.map((tab) => (
+                  <TabsTrigger key={tab.id} value={tab.id} className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all">
+                    {tab.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
+
+            {(() => {
+              const infoMap: Record<string, {desc: string}> = {
+                'metodologia': { desc: 'Definición de las estrategias metodológicas y actividades formativas.' },
+                'dual': { desc: 'Configuración y seguimiento de la formación profesional dual en empresas.' },
+                'evaluacion': { desc: 'Recursos para la evaluación y criterios de calificación metodológica.' },
+                'eqavet': { desc: 'Indicadores de calidad y cumplimiento del marco EQAVET.' },
+                'contingencia': { desc: 'Planes de contingencia y adaptación ante situaciones excepcionales.' },
+                'otros': { desc: 'Elementos transversales y otros recursos adicionales del módulo.' },
+              };
+              const info = infoMap[activeTab] || { desc: 'Configuración de la metodología.' };
+              return (
+                <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
+                  <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
+                  <p className='text-sm text-muted'>{info.desc}</p>
+                </div>
+              );
+            })()}
+
             <div className="space-y-4">
-              <AccordionBlock
-                title={t('tabs.metodologia')}
-                icon={<Target className="w-5 h-5" />}
-                defaultOpen={true}
-              >
-                <MetodologiaTab />
-              </AccordionBlock>
-
-              <AccordionBlock
-                title={t('tabs.dual', {defaultValue: 'FP Dual'})}
-                icon={<Building2 className="w-5 h-5" />}
-              >
-                <DualTab />
-              </AccordionBlock>
-
-              <AccordionBlock
-                title={t('tabs.evaluacion')}
-                icon={<CheckCircle2 className="w-5 h-5" />}
-              >
-                <EvaluacionRecursosTab />
-              </AccordionBlock>
-
-              <AccordionBlock
-                title={t('tabs.eqavet', {defaultValue: 'EQAVET'})}
-                icon={<Award className="w-5 h-5" />}
-              >
-                <EqavetTab />
-              </AccordionBlock>
-
-              <AccordionBlock
-                title={t('tabs.contingencia', {defaultValue: 'Contingencia'})}
-                icon={<Shield className="w-5 h-5" />}
-              >
-                <ContingenciaTab />
-              </AccordionBlock>
-
-              <AccordionBlock
-                title={t('tabs.otros')}
-                icon={<Layers className="w-5 h-5" />}
-              >
-                <OtrosElementosTab />
-              </AccordionBlock>
+              {activeTab === 'metodologia' && <MetodologiaTab />}
+              {activeTab === 'dual' && <DualTab />}
+              {activeTab === 'evaluacion' && <EvaluacionRecursosTab />}
+              {activeTab === 'eqavet' && <EqavetTab />}
+              {activeTab === 'contingencia' && <ContingenciaTab />}
+              {activeTab === 'otros' && <OtrosElementosTab />}
             </div>
 
           </MotionWrapper>
