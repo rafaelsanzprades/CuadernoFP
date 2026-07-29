@@ -1,5 +1,6 @@
 "use client";
-import { AccordionBlock } from "@/components/ui/AccordionBlock";
+import { TabSync } from "@/components/ui/TabSync";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { Calendar, Circle, ClipboardList, Search, Settings, Flag , Info, FolderOpen, Bus } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -447,6 +448,16 @@ export default function CalendarioPage() {
   const [saving, setSaving] = useState(false);
   const { t } = useTranslation();
   const [saveMessage, setSaveMessage] = useState("");
+  const [activeTab, setActiveTab] = useState("fechas");
+
+  const TABS = [
+    { id: "fechas", label: <span className="flex items-center gap-2"><Settings className="w-4 h-4 shrink-0" /> Fechas y Horarios</span>, cleanLabel: "Fechas y Horarios" },
+    { id: "eventos", label: <span className="flex items-center gap-2"><Flag className="w-4 h-4 shrink-0" /> Eventos y Festivos</span>, cleanLabel: "Eventos y Festivos" },
+    { id: "actividades", label: <span className="flex items-center gap-2"><Bus className="w-4 h-4 shrink-0" /> Actividades comp.</span>, cleanLabel: "Actividades comp." },
+    { id: "visual", label: <span className="flex items-center gap-2"><Calendar className="w-4 h-4 shrink-0" /> Calendario visual</span>, cleanLabel: "Calendario visual" },
+  ];
+
+  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   const df_ace = moduleData?.df_ace || [];
   const df_ra = moduleData?.df_ra || [];
@@ -617,11 +628,12 @@ export default function CalendarioPage() {
 
   return (
     <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header />
+        <Header breadcrumbSuffix={activeTabCleanLabel} />
 
-        <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
+        <main id="main-content" tabIndex={-1} className="flex-1 p-8 content-area">
           <MotionWrapper className="space-y-4 pb-12">
             {/* Page heading */}
             <div>
@@ -638,12 +650,18 @@ export default function CalendarioPage() {
             </p>
           )}
 
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
+              <TabsList className="bg-foreground/5 border border-[var(--glass-border)] w-full justify-start h-auto p-1 rounded-xl flex-wrap">
+                {TABS.map((tab) => (
+                  <TabsTrigger key={tab.id} value={tab.id} className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all">
+                    {tab.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
+
             <div className="space-y-4">
-              <AccordionBlock
-                title="Fechas y Horarios"
-                icon={<Settings className="w-5 h-5" />}
-                defaultOpen={true}
-              >
+              {activeTab === 'fechas' && (
                 <div className="space-y-4 mt-4">
               {/* Fechas generales */}
               <Card className="p-6 border-t-4 border-t-blue-500 overflow-visible z-30">
@@ -882,12 +900,9 @@ export default function CalendarioPage() {
                 </div>
               </Card>
                 </div>
-              </AccordionBlock>
+              )}
 
-              <AccordionBlock
-                title="Eventos y Festivos"
-                icon={<Flag className="w-5 h-5" />}
-              >
+              {activeTab === 'eventos' && (
                 <Card className="p-6 border-t-4 border-t-yellow-500 overflow-visible z-20 mt-4">
                   <h2 className="text-lg font-bold mb-2"> Festivos y eventos</h2>
                   <p className="text-muted text-sm mb-4">
@@ -895,12 +910,9 @@ export default function CalendarioPage() {
                   </p>
                   <NotesTable calendar_notes={calendar_notes} onUpdateNotes={handleUpdateNotes} />
                 </Card>
-              </AccordionBlock>
+              )}
 
-              <AccordionBlock
-                title="Actividades complementarias"
-                icon={<Bus className="w-5 h-5" />}
-              >
+              {activeTab === 'actividades' && (
                 <Card className="p-6 border-t-4 border-t-[#14a085] mt-4">
                   <div className="overflow-x-auto mb-4">
                     <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
@@ -960,12 +972,9 @@ export default function CalendarioPage() {
                     <span>+</span> Añadir actividad complementaria
                   </button>
                 </Card>
-              </AccordionBlock>
+              )}
 
-              <AccordionBlock
-                title="Calendario visual"
-                icon={<Calendar className="w-5 h-5" />}
-              >
+              {activeTab === 'visual' && (
                 <Card className="p-6 border-t-4 border-t-purple-500 mt-4">
                   <InteractiveCalendar
                     info_fechas={info_fechas}
@@ -974,7 +983,7 @@ export default function CalendarioPage() {
                     onUpdateNote={handleUpdateNote}
                   />
                 </Card>
-              </AccordionBlock>
+              )}
             </div>
           </MotionWrapper>
         </main>
