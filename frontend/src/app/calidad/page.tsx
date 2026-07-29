@@ -1,7 +1,7 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import { Shield, FolderOpen, Info, Settings, Award } from "lucide-react";
+import { Shield, FolderOpen, Info, Settings, Award, Lightbulb } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -11,6 +11,7 @@ import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { EqavetTab } from "@/components/features/modulo/EqavetTab";
+import { PropuestasTab } from "@/components/features/modulo/PropuestasTab";
 
 export default function CalidadPage() {
   const { activeModuleId, moduleData } = useAppStore();
@@ -19,6 +20,7 @@ export default function CalidadPage() {
 
   const TABS = [
     { id: "eqavet", label: <span className="flex items-center gap-2"><Award className="w-4 h-4 shrink-0" /> {t('tabs.eqavet', {defaultValue: 'EQAVET'})}</span>, cleanLabel: t('tabs.eqavet', {defaultValue: 'EQAVET'}) },
+    { id: "propuestas", label: <span className="flex items-center gap-2"><Lightbulb className="w-4 h-4 shrink-0" /> Propuestas</span>, cleanLabel: "Propuestas" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -82,6 +84,7 @@ export default function CalidadPage() {
             {(() => {
               const infoMap: Record<string, {desc: string}> = {
                 'eqavet': { desc: 'Indicadores de calidad y cumplimiento del marco EQAVET.' },
+                'propuestas': { desc: 'Propuestas de mejora para el próximo curso.' },
               };
               const info = infoMap[activeTab] || { desc: 'Gestión de la calidad.' };
               return (
@@ -94,6 +97,7 @@ export default function CalidadPage() {
 
             <div className="space-y-4">
               {activeTab === 'eqavet' && <EqavetTab />}
+              {activeTab === 'propuestas' && <PropuestasTab />}
             </div>
 
           </MotionWrapper>

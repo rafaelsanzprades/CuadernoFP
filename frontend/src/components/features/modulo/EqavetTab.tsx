@@ -86,33 +86,6 @@ export function EqavetTab() {
             ))}
           </div>
         </Card>
-        
-        <Card className="p-6">
-          <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-            <CheckCircle2 className="w-5 h-5 text-success" />
-            Propuestas de Mejora (PDCA)
-          </h3>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-1">Puntos fuertes (lo que ha funcionado bien)</label>
-              <textarea
-                value={eqavet.puntos_fuertes || ""}
-                onChange={(e) => handleTextChange("puntos_fuertes", e.target.value)}
-                className="w-full h-24 rounded-lg bg-[var(--glass-bg)] border border-white/10 p-3 text-sm focus:outline-none focus:border-accent resize-none"
-                placeholder="Ej. La implicación del alumnado en los proyectos..."
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Áreas de mejora y acciones para el próximo curso</label>
-              <textarea
-                value={eqavet.areas_mejora || ""}
-                onChange={(e) => handleTextChange("areas_mejora", e.target.value)}
-                className="w-full h-24 rounded-lg bg-[var(--glass-bg)] border border-white/10 p-3 text-sm focus:outline-none focus:border-accent resize-none"
-                placeholder="Ej. Incluir más prácticas con material real, actualizar documentación..."
-              />
-            </div>
-          </div>
-        </Card>
       </MotionWrapper>
     </div>
   );
