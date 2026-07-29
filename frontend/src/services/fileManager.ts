@@ -120,17 +120,18 @@ export const fileManager = {
 
   /** Load demo data from static .fpg files in /demo/ */
   async loadDemoData(groupId?: string): Promise<void> {
-    // If no group is passed, default to 0237
-    if (!groupId) groupId = '0237';
+    // If no group is passed, default to 0237-1a
+    if (!groupId || groupId === '0237') groupId = '0237-1a';
 
     // Normalize input to module code (for the static file name)
+    const fpgName = groupId.toLowerCase();
     const moduleCode = groupId.startsWith('0223') ? '0223' : '0237';
     const store = useAppStore.getState();
 
     try {
       // 1. Fetch .fpg (Group project file)
-      const fpgRes = await fetch(`/demo/${moduleCode}.fpg.json`);
-      if (!fpgRes.ok) throw new Error(`Failed to fetch /demo/${moduleCode}.fpg.json`);
+      const fpgRes = await fetch(`/demo/${fpgName}.fpg.json`);
+      if (!fpgRes.ok) throw new Error(`Failed to fetch /demo/${fpgName}.fpg.json`);
       const groupData = await fpgRes.json();
 
       if (groupData.tipo !== "GRUPO" || !groupData.archivos) {
