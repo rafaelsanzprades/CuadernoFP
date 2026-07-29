@@ -369,7 +369,7 @@ export default function DocumentosPage() {
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
                 <input
                   type="text"
-                  placeholder="Buscar..."
+                  placeholder=""
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full h-[46px] bg-foreground/5 border border-[var(--glass-border)] rounded-xl pl-10 pr-4 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all placeholder:text-muted/60"

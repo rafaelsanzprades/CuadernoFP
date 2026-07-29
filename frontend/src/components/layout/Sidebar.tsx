@@ -202,10 +202,57 @@ export default function Sidebar() {
         className={`sidebar-scroll-container flex-1 ${isSidebarOpen ? 'px-3' : 'px-2'} py-2 space-y-3 overflow-x-hidden overflow-y-auto scrollbar-hide`}
       >
 
+        {/* ── Agenda (dentro del scroll) ── */}
+        {isSidebarOpen && (
+          <div className="pb-2 mt-2 shrink-0">
+            {(() => {
+              const linkContent = (
+                <Link
+                  href="/diario"
+                  onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
+                  className={`flex items-center gap-2.5 px-3 py-3 rounded-lg transition-all duration-150 group shadow-md bg-gradient-to-r ${dataSource === 'demo' ? 'from-warning/20 to-warning/5 border border-warning/40 text-foreground hover:bg-warning/20' : 'from-accent/20 to-accent/5 border border-accent/40 text-foreground hover:bg-accent/20'}`}
+                >
+                  <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === '/diario' ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : (dataSource === 'demo' ? 'text-warning group-hover:scale-110' : 'text-accent group-hover:scale-110')}`}>
+                    <CalendarDays className="w-5 h-5" strokeWidth={2} />
+                  </span>
+                  <div className="flex flex-col gap-1 items-start">
+                    <span className={`text-sm leading-tight whitespace-nowrap font-bold ${pathname === '/diario' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
+                      {t('sidebar.agenda')}
+                    </span>
+                    <span suppressHydrationWarning className={`px-2 py-0.5 rounded text-xs border font-semibold tracking-wider leading-none ${dataSource === 'demo' ? 'text-warning bg-warning/10 border-warning/30' : 'text-accent bg-accent/10 border-accent/30'}`}>
+                      {isMounted ? dateStr : '\u00A0'}
+                    </span>
+                  </div>
+                </Link>
+              );
+              return linkContent;
+            })()}
+          </div>
+        )}
+        {!isSidebarOpen && (
+          <div className="pb-2 mt-2 shrink-0">
+            <Tooltip content={t('sidebar.agenda')} position="right" delay={0.1}>
+              <Link
+                href="/diario"
+                onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
+                className={`flex justify-center px-0 py-3 rounded-lg transition-all duration-150 group shadow-md bg-gradient-to-r ${dataSource === 'demo' ? 'from-warning/20 to-warning/5 border border-warning/40 text-foreground' : 'from-accent/20 to-accent/5 border border-accent/40 text-foreground'}`}
+              >
+                <span className={`flex items-center justify-center ${pathname === '/diario' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : (dataSource === 'demo' ? 'text-warning' : 'text-accent')}`}>
+                  <CalendarDays className="w-5 h-5" strokeWidth={2} />
+                </span>
+              </Link>
+            </Tooltip>
+          </div>
+        )}
+
         {/* Context Selector Block (ahora dentro del scroll) */}
         {isSidebarOpen && (
-          <div className="flex flex-col gap-2 pb-2 relative z-20 shrink-0">
-            
+          <div className="flex flex-col gap-2 pb-2 mt-2 relative z-20 shrink-0">
+            <div className="flex flex-col mb-1 gap-1.5">
+              <div className="text-sm font-bold text-foreground/90 tracking-wide px-1">
+                Grupo
+              </div>
+            </div>
             <div className="flex bg-foreground/5 rounded-lg p-0.5 w-full gap-0.5">
               <button
                 onClick={() => { setDataSource('demo'); fileManager.loadDemoData('0237-1a'); toast.success('Modo DEMO'); }}
@@ -225,11 +272,6 @@ export default function Sidebar() {
               </button>
             </div>
             
-            <div className="flex flex-col mb-1.5 mt-2 gap-1.5">
-              <div className="text-sm font-bold text-foreground/90 tracking-wide px-1">
-                Grupo
-              </div>
-            </div>
             {dataSource === 'demo' ? (
               <div className="relative w-full">
                 <select
@@ -269,63 +311,9 @@ export default function Sidebar() {
           </div>
         )}
 
-
-
-      {/* ── Agenda (dentro del scroll) ── */}
-      {isSidebarOpen && (
-        <div className="pb-2 shrink-0">
-          {(() => {
-            const linkContent = (
-              <Link
-                href="/diario"
-                onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
-                className={`flex items-center gap-2.5 px-3 py-3 rounded-lg transition-all duration-150 group shadow-md bg-gradient-to-r ${dataSource === 'demo' ? 'from-warning/20 to-warning/5 border border-warning/40 text-foreground hover:bg-warning/20' : 'from-accent/20 to-accent/5 border border-accent/40 text-foreground hover:bg-accent/20'}`}
-              >
-                <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === '/diario' ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : (dataSource === 'demo' ? 'text-warning group-hover:scale-110' : 'text-accent group-hover:scale-110')}`}>
-                  <CalendarDays className="w-5 h-5" strokeWidth={2} />
-                </span>
-                <div className="flex flex-col gap-1 items-start">
-                  <span className={`text-sm leading-tight whitespace-nowrap font-bold ${pathname === '/diario' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
-                    {t('sidebar.agenda')}
-                  </span>
-                  <span suppressHydrationWarning className={`px-2 py-0.5 rounded text-xs border font-semibold tracking-wider leading-none ${dataSource === 'demo' ? 'text-warning bg-warning/10 border-warning/30' : 'text-accent bg-accent/10 border-accent/30'}`}>
-                    {isMounted ? dateStr : '\u00A0'}
-                  </span>
-                </div>
-              </Link>
-            );
-            return linkContent;
-          })()}
-        </div>
-      )}
-      {!isSidebarOpen && (
-        <div className="pb-2 shrink-0">
-          <Tooltip content={t('sidebar.agenda')} position="right" delay={0.1}>
-            <Link
-              href="/diario"
-              onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
-              className={`flex justify-center px-0 py-3 rounded-lg transition-all duration-150 group shadow-md bg-gradient-to-r ${dataSource === 'demo' ? 'from-warning/20 to-warning/5 border border-warning/40 text-foreground' : 'from-accent/20 to-accent/5 border border-accent/40 text-foreground'}`}
-            >
-              <span className={`flex items-center justify-center ${pathname === '/diario' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : (dataSource === 'demo' ? 'text-warning' : 'text-accent')}`}>
-                <CalendarDays className="w-5 h-5" strokeWidth={2} />
-              </span>
-            </Link>
-          </Tooltip>
-        </div>
-      )}
-
-
-
         {/* ① General: items del primer grupo */}
         {navGroups[0] && (
-          <div className="flex flex-col gap-0.5">
-            {isSidebarOpen && navGroups[0].title && (
-              <div className="flex flex-col mb-1.5 mt-1 gap-1.5">
-                <div className="text-sm font-bold text-foreground/90 tracking-wide px-1">
-                  {t('navGroups.general')}
-                </div>
-              </div>
-            )}
+          <div className="flex flex-col gap-0.5 mt-2">
             {navGroups[0].items.map((item) => {
               const linkContent = (
                 <Link
