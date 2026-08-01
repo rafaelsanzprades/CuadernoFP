@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card } from "@/components/ui/Card";
 import { Landmark, Map, FileText, ChevronDown, ChevronUp, Info } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { AccordionBlock } from "@/components/ui/AccordionBlock";
 
 interface NormativaItem {
   id: string;
@@ -128,34 +129,27 @@ export function TabNormativa({ searchQuery = "" }: Props) {
   );
 
   return (
-    <div className="space-y-8 animate-fade-in">
-      <Card className="border-border/50 bg-[var(--glass-bg)] overflow-hidden transition-all shadow-md">
-        <div className="px-6 py-5 flex items-center justify-between text-left border-b border-border/50">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-primary/10 rounded-lg text-primary shrink-0">
-              <Landmark className="w-5 h-5" />
-            </div>
-            <div>
-              <h2 className="text-lg font-bold">Legislación y Normativa</h2>
-              <p className="text-sm text-muted-foreground">Normativa estatal y despliegue autonómico aplicable a la Formación Profesional.</p>
-            </div>
-          </div>
-        </div>
-        <div className="p-0 bg-background/30">
+    <div className="space-y-4 animate-fade-in pb-8">
+      <div className="px-2 mb-6">
+        <h2 className="text-lg font-bold flex items-center gap-3">
+          <span className="p-2 bg-primary/10 rounded-lg text-primary shrink-0"><Landmark className="w-5 h-5" /></span>
+          Legislación y Normativa
+        </h2>
+        <p className="text-sm text-muted-foreground mt-2 ml-12">Normativa estatal y despliegue autonómico aplicable a la Formación Profesional.</p>
+      </div>
+
+      {filteredEstatal.length > 0 && (
+        <AccordionBlock
+          title="Normativa Estatal"
+          icon={<Landmark className="w-5 h-5" />}
+          defaultOpen={true}
+        >
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <tbody className="divide-y divide-border/50">
-                {/* ── ESTATAL ── */}
-                {filteredEstatal.length > 0 && (
-                  <tr className="bg-primary/5">
-                    <td colSpan={2} className="px-4 py-3 font-bold text-primary flex items-center gap-2">
-                      <Landmark className="w-4 h-4" /> Normativa Estatal
-                    </td>
-                  </tr>
-                )}
                 {filteredEstatal.map((item) => (
                   <tr key={item.id} className="hover:bg-muted/20 transition-colors">
-                    <td className="px-4 py-4 pl-8">
+                    <td className="py-4 pr-4">
                       <p className="font-medium text-foreground mb-1 leading-relaxed">
                         {item.texto}
                       </p>
@@ -163,7 +157,7 @@ export function TabNormativa({ searchQuery = "" }: Props) {
                         {item.descripcion}
                       </p>
                     </td>
-                    <td className="px-4 py-4 text-center align-middle w-24">
+                    <td className="py-4 text-right align-middle w-16">
                       <a href={item.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center">
                         <Button variant="ghost" size="sm" className="h-10 w-10 text-accent hover:text-accent/80 hover:bg-accent/10">
                           <FileText className="w-6 h-6" />
@@ -172,67 +166,69 @@ export function TabNormativa({ searchQuery = "" }: Props) {
                     </td>
                   </tr>
                 ))}
-
-                {/* ── AUTONÓMICAS ── */}
-                {COMUNIDADES.map(comunidad => {
-                  const items = comunidad === 'Aragón' ? filteredAragon : [];
-                  const matchComunidad = comunidad.toLowerCase().includes(searchQuery.toLowerCase());
-                  
-                  // Hide if we are searching and neither the community name nor its items match
-                  if (searchQuery !== "" && items.length === 0 && !matchComunidad) return null;
-
-                  return (
-                    <React.Fragment key={comunidad}>
-                      <tr className="bg-success/5 border-t-2 border-border/50">
-                        <td colSpan={2} className="px-4 py-2 font-bold text-success">
-                          <div className="flex items-center justify-between w-full">
-                            <div className="flex items-center gap-2">
-                              <Map className="w-4 h-4" /> Normativa Autonómica ({comunidad})
-                            </div>
-                            {items.length === 0 && (
-                              <span className="text-[10px] uppercase tracking-widest bg-success/10 text-success/70 px-2 py-0.5 rounded border border-success/20">
-                                En preparación
-                              </span>
-                            )}
-                          </div>
-                        </td>
-                      </tr>
-                      {items.map((item) => (
-                        <tr key={item.id} className="hover:bg-muted/20 transition-colors border-t border-border/10">
-                          <td className="px-4 py-4 pl-8">
-                            <p className="font-medium text-foreground mb-1 leading-relaxed">
-                              {item.texto}
-                            </p>
-                            <p className="text-muted-foreground text-xs italic">
-                              {item.descripcion}
-                            </p>
-                          </td>
-                          <td className="px-4 py-4 text-center align-middle w-24">
-                            <a href={item.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center">
-                              <Button variant="ghost" size="sm" className="h-10 w-10 text-accent hover:text-accent/80 hover:bg-accent/10">
-                                <FileText className="w-6 h-6" />
-                              </Button>
-                            </a>
-                          </td>
-                        </tr>
-                      ))}
-                    </React.Fragment>
-                  );
-                })}
-
-                {/* NO RESULTS */}
-                {filteredEstatal.length === 0 && filteredAragon.length === 0 && !COMUNIDADES.some(c => c.toLowerCase().includes(searchQuery.toLowerCase())) && (
-                  <tr>
-                    <td colSpan={2} className="px-4 py-12 text-center text-muted-foreground">
-                      No se encontraron resultados para "{searchQuery}".
-                    </td>
-                  </tr>
-                )}
               </tbody>
             </table>
           </div>
+        </AccordionBlock>
+      )}
+
+      {COMUNIDADES.map(comunidad => {
+        const items = comunidad === 'Aragón' ? filteredAragon : [];
+        const matchComunidad = comunidad.toLowerCase().includes(searchQuery.toLowerCase());
+        
+        // Hide if we are searching and neither the community name nor its items match
+        if (searchQuery !== "" && items.length === 0 && !matchComunidad) return null;
+
+        return (
+          <AccordionBlock
+            key={comunidad}
+            title={`Normativa Autonómica (${comunidad})`}
+            icon={<Map className="w-5 h-5" />}
+            defaultOpen={items.length > 0 && searchQuery !== ""}
+          >
+            {items.length === 0 ? (
+              <div className="py-8 text-center text-muted-foreground flex flex-col items-center gap-2">
+                 <span className="text-xs tracking-widest bg-success/10 text-success/70 px-3 py-1 rounded border border-success/20">
+                   En preparación
+                 </span>
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-sm">
+                  <tbody className="divide-y divide-border/50">
+                    {items.map(item => (
+                      <tr key={item.id} className="hover:bg-muted/20 transition-colors">
+                        <td className="py-4 pr-4">
+                          <p className="font-medium text-foreground mb-1 leading-relaxed">
+                            {item.texto}
+                          </p>
+                          <p className="text-muted-foreground text-xs italic">
+                            {item.descripcion}
+                          </p>
+                        </td>
+                        <td className="py-4 text-right align-middle w-16">
+                          <a href={item.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center">
+                            <Button variant="ghost" size="sm" className="h-10 w-10 text-accent hover:text-accent/80 hover:bg-accent/10">
+                              <FileText className="w-6 h-6" />
+                            </Button>
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </AccordionBlock>
+        );
+      })}
+
+      {/* NO RESULTS */}
+      {filteredEstatal.length === 0 && filteredAragon.length === 0 && !COMUNIDADES.some(c => c.toLowerCase().includes(searchQuery.toLowerCase())) && (
+        <div className="py-12 text-center text-muted-foreground border border-border/50 rounded-xl bg-surface/50">
+          No se encontraron resultados para "{searchQuery}".
         </div>
-      </Card>
+      )}
     </div>
   );
 }

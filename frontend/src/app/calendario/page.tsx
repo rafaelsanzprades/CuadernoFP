@@ -1,7 +1,7 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import { Calendar, Circle, ClipboardList, Search, Settings, Flag , Info, FolderOpen, Bus } from "lucide-react";
+import { Calendar, Circle, ClipboardList, Search, Settings, Flag, FolderOpen, Bus } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -12,6 +12,8 @@ import { Button } from "@/components/ui/Button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { generatePlanning } from "@/utils/planningGenerator";
 import Link from "next/link";
 
@@ -169,7 +171,7 @@ function NotesTable({ calendar_notes, onUpdateNotes }: { calendar_notes: Record<
               <React.Fragment key={r.start + r.desc}>
                 {showHeader && (
                   <tr>
-                    <td colSpan={5} className="pt-6 pb-2 text-xs font-bold uppercase tracking-wider text-accent border-b border-[var(--glass-border)]/50">
+                    <td colSpan={5} className="pt-6 pb-2 text-xs font-bold tracking-wider text-accent border-b border-[var(--glass-border)]/50">
                       {monthHeader}
                     </td>
                   </tr>
@@ -451,11 +453,18 @@ export default function CalendarioPage() {
   const [activeTab, setActiveTab] = useState("fechas");
 
   const TABS = [
-    { id: "fechas", label: <span className="flex items-center gap-2"><Settings className="w-4 h-4 shrink-0" /> Fechas y Horarios</span>, cleanLabel: "Fechas y Horarios" },
-    { id: "eventos", label: <span className="flex items-center gap-2"><Flag className="w-4 h-4 shrink-0" /> Eventos y Festivos</span>, cleanLabel: "Eventos y Festivos" },
+    { id: "fechas", label: <span className="flex items-center gap-2"><Settings className="w-4 h-4 shrink-0" /> Fechas y horarios</span>, cleanLabel: "Fechas y horarios" },
+    { id: "eventos", label: <span className="flex items-center gap-2"><Flag className="w-4 h-4 shrink-0" /> Eventos y festivos</span>, cleanLabel: "Eventos y festivos" },
     { id: "actividades", label: <span className="flex items-center gap-2"><Bus className="w-4 h-4 shrink-0" /> Actividades comp.</span>, cleanLabel: "Actividades comp." },
     { id: "visual", label: <span className="flex items-center gap-2"><Calendar className="w-4 h-4 shrink-0" /> Calendario visual</span>, cleanLabel: "Calendario visual" },
   ];
+
+  const TAB_DESCRIPTIONS: Record<string, string> = {
+    fechas: 'Configura los trimestres, el horario semanal y los días festivos del curso.',
+    eventos: 'Registro de eventos y festivos que afectan a la docencia.',
+    actividades: 'Planificación de actividades complementarias y extraescolares.',
+    visual: 'Vista mensual del calendario académico completo.',
+  };
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
@@ -635,13 +644,11 @@ export default function CalendarioPage() {
 
         <main id="main-content" tabIndex={-1} className="flex-1 p-8 content-area">
           <MotionWrapper className="space-y-4 pb-12">
-            {/* Page heading */}
-            <div>
-              <h1 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <Calendar className="w-6 h-6 text-accent" /> {t('pages.calendario_title', {defaultValue: 'Calendario académico'})}
-              </h1>
-              <p className="text-muted mt-2 text-sm">{t('pages.calendario_desc', {defaultValue: 'Horarios, trimestres, festivos y eventos del curso.'})}</p>
-            </div>
+            <PageHeader
+              icon={Calendar}
+              title={t('pages.calendario_title', {defaultValue: 'Calendario académico'})}
+              description={t('pages.calendario_desc', {defaultValue: 'Horarios, trimestres, festivos y eventos del curso.'})}
+            />
 
           {/* Save message */}
           {saveMessage && (
@@ -650,15 +657,19 @@ export default function CalendarioPage() {
             </p>
           )}
 
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
-              <TabsList className="bg-foreground/5 border border-[var(--glass-border)] w-full justify-start h-auto p-1 rounded-xl flex-wrap">
-                {TABS.map((tab) => (
-                  <TabsTrigger key={tab.id} value={tab.id} className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all">
-                    {tab.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+                <TabsList className="max-w-full">
+                  {TABS.map((tab) => (
+                    <TabsTrigger key={tab.id} value={tab.id}>
+                      {tab.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
+            </div>
+
+            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión del calendario académico.'} />
 
             <div className="space-y-4">
               {activeTab === 'fechas' && (
@@ -745,7 +756,7 @@ export default function CalendarioPage() {
                             {Number(horario[day]) > 0 && <span className="block text-xs text-info font-normal mt-0.5">{horario[day]}h/sem</span>}
                           </th>
                         ))}
-                        <th className="p-3 font-semibold border-l border-[var(--glass-border)]">Total Días</th>
+                        <th className="p-3 font-semibold border-l border-[var(--glass-border)]">Total días</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -822,8 +833,8 @@ export default function CalendarioPage() {
                 </div>
                 <div className="grid grid-cols-2 gap-6">
                   {[
-                    { label: "Horas Oficiales (BOA)", value: `${h_boa} h`, cls: "text-foreground" },
-                    { label: "Horas Reales de Clase", value: `${h_real} h`, cls: h_real < h_boa ? "text-warning" : "text-success" },
+                    { label: "Horas oficiales (BOA)", value: `${h_boa} h`, cls: "text-foreground" },
+                    { label: "Horas reales de clase", value: `${h_real} h`, cls: h_real < h_boa ? "text-warning" : "text-success" },
                   ].map(s => (
                     <div key={s.label}>
                       <label className="block text-sm font-semibold text-muted mb-2 text-center">{s.label}</label>

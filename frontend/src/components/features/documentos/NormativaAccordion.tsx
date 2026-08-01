@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, ChevronUp, MapPin, Download } from 'lucide-react';
+import { ChevronDown, ChevronUp, MapPin, Download, Landmark } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
 type DocumentItem = {
@@ -16,6 +16,12 @@ interface NormativaAccordionProps {
   getFileIcon: (filename: string) => React.ReactNode;
 }
 
+const TODAS_COMUNIDADES = [
+  "Andalucía", "Aragón", "Asturias", "Baleares", "Canarias", "Cantabria", 
+  "Castilla-La Mancha", "Castilla y León", "Cataluña", "Comunidad Valenciana", "Extremadura", 
+  "Galicia", "Madrid", "Murcia", "Navarra", "País Vasco", "La Rioja", "Ceuta", "Melilla"
+].sort();
+
 export function NormativaAccordion({ communities, onDownloadDoc, formatSize, getFileIcon }: NormativaAccordionProps) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
@@ -23,43 +29,92 @@ export function NormativaAccordion({ communities, onDownloadDoc, formatSize, get
     setExpandedId(prev => prev === id ? null : id);
   };
 
-  const dirCommunities = communities.filter(c => c.is_dir);
-
-  if (dirCommunities.length === 0) {
-    return (
-      <div className="p-12 text-center text-muted">
-        <MapPin className="w-12 h-12 mx-auto mb-4 opacity-50" />
-        <p>No se encontraron comunidades.</p>
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-3 p-6">
-      {dirCommunities.map((comunidad) => {
-        const isExpanded = expandedId === comunidad.path;
+      {/* Estatal */}
+      {(() => {
+        const backendDir = communities.find(c => c.is_dir && c.name === "Estatal");
+        const path = backendDir ? backendDir.path : `Normativa/Estatal`;
+        const hasFiles = !!backendDir;
+        const isExpanded = expandedId === path;
 
         return (
           <div 
-            key={comunidad.path}
+            key={path}
+            className={`border rounded-lg overflow-hidden transition-all duration-300 ${isExpanded ? 'border-primary/50 shadow-md bg-foreground/5' : 'border-border/50 bg-background/30 hover:bg-foreground/5'}`}
+          >
+            <button
+              onClick={() => toggleExpand(path)}
+              className="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none"
+            >
+              <div className="flex items-center gap-3">
+                <Landmark className={`w-5 h-5 ${isExpanded ? 'text-primary' : 'text-muted'}`} />
+                <div className="flex items-center gap-2">
+                  <span className={`font-semibold text-sm transition-colors ${isExpanded ? 'text-primary' : 'text-foreground'}`}>
+                    Normativa Estatal
+                  </span>
+                  {!hasFiles && (
+                    <span className="text-xs tracking-widest bg-primary/10 text-primary/70 px-2 py-0.5 rounded border border-primary/20 ml-2 hidden sm:inline-block">
+                      En preparación
+                    </span>
+                  )}
+                </div>
+              </div>
+              {isExpanded ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-muted" />}
+            </button>
+            
+            {isExpanded && (
+              <div className="border-t border-border/50 p-5 bg-background">
+                {!hasFiles ? (
+                  <div className="p-4 text-center text-muted">No hay documentos normativos estatales por el momento.</div>
+                ) : (
+                  <CommunityFiles path={path} onDownloadDoc={onDownloadDoc} formatSize={formatSize} getFileIcon={getFileIcon} />
+                )}
+              </div>
+            )}
+          </div>
+        );
+      })()}
+
+      {/* Autonómicas */}
+      {TODAS_COMUNIDADES.map((comunidadName) => {
+        const backendDir = communities.find(c => c.is_dir && c.name === comunidadName);
+        const path = backendDir ? backendDir.path : `Normativa/${comunidadName}`;
+        const hasFiles = !!backendDir;
+        const isExpanded = expandedId === path;
+
+        return (
+          <div 
+            key={path}
             className={`border rounded-lg overflow-hidden transition-all duration-300 ${isExpanded ? 'border-success/50 shadow-md bg-foreground/5' : 'border-border/50 bg-background/30 hover:bg-foreground/5'}`}
           >
             <button
-              onClick={() => toggleExpand(comunidad.path)}
+              onClick={() => toggleExpand(path)}
               className="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none"
             >
               <div className="flex items-center gap-3">
                 <MapPin className={`w-5 h-5 ${isExpanded ? 'text-success' : 'text-muted'}`} />
-                <span className={`font-semibold text-sm transition-colors ${isExpanded ? 'text-success' : 'text-foreground'}`}>
-                  {comunidad.name}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className={`font-semibold text-sm transition-colors ${isExpanded ? 'text-success' : 'text-foreground'}`}>
+                    {comunidadName}
+                  </span>
+                  {!hasFiles && (
+                    <span className="text-xs tracking-widest bg-success/10 text-success/70 px-2 py-0.5 rounded border border-success/20 ml-2 hidden sm:inline-block">
+                      En preparación
+                    </span>
+                  )}
+                </div>
               </div>
               {isExpanded ? <ChevronUp className="w-5 h-5 text-success" /> : <ChevronDown className="w-5 h-5 text-muted" />}
             </button>
             
             {isExpanded && (
               <div className="border-t border-border/50 p-5 bg-background">
-                <CommunityFiles path={comunidad.path} onDownloadDoc={onDownloadDoc} formatSize={formatSize} getFileIcon={getFileIcon} />
+                {!hasFiles ? (
+                  <div className="p-4 text-center text-muted">No hay documentos normativos en esta comunidad por el momento.</div>
+                ) : (
+                  <CommunityFiles path={path} onDownloadDoc={onDownloadDoc} formatSize={formatSize} getFileIcon={getFileIcon} />
+                )}
               </div>
             )}
           </div>

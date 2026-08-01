@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { Award, BookOpen, Calculator, Check, GraduationCap, Puzzle, Target, Settings , Info, FolderOpen, Grid } from "lucide-react";
+import { Award, BookOpen, Calculator, Check, ClipboardList, GraduationCap, Puzzle, Target, Settings , Info, FolderOpen, Grid } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -10,9 +10,13 @@ import { Button } from "@/components/ui/Button";
 import { motion, AnimatePresence } from "framer-motion";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { RaOgMatrix } from "@/components/features/resultados/RaOgMatrix";
+import { SessionTable } from "@/components/features/secuenciacion/SessionTable";
+import { TaskTable } from "@/components/features/secuenciacion/TaskTable";
 import { CompetenciaCPP } from "@/types/curriculum";
 import toast from "react-hot-toast";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { loadCatalogForModule, resolveDescRa, resolveDescCe } from "@/services/catalogCache";
@@ -28,6 +32,7 @@ export default function MatricesPage() {
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
   const [allCeOpen, setAllCeOpen] = useState(false);
+  const [allUdsOpen, setAllUdsOpen] = useState(false);
   const [openCEs, setOpenCEs] = useState<Set<string>>(new Set());
   const [activeTab, setActiveTab] = useState("ponderacion-ra-ce");
   const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
@@ -45,10 +50,19 @@ export default function MatricesPage() {
 
   const TABS = [
     { id: "ponderacion-ra-ce", label: "Ponderación RA-CE", cleanLabel: "Ponderación RA-CE", icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "tareas", label: t('tabs.tareas'), cleanLabel: t('tabs.tareas'), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "unidades", label: t('tabs.ud'), cleanLabel: t('tabs.ud'), icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "relacion-ra-ud", label: t('tabs.relacion'), cleanLabel: t('tabs.relacion'), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "contribucion-og", label: t('tabs.contribucion'), cleanLabel: t('tabs.contribucion'), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> }
   ];
+
+  const TAB_DESCRIPTIONS: Record<string, string> = {
+    'ponderacion-ra-ce': 'Matriz de resultados de aprendizaje y criterios de evaluación.',
+    'tareas': 'Diseño y planificación de tareas y actividades competenciales.',
+    'unidades': 'Definición de unidades didácticas o unidades de trabajo.',
+    'relacion-ra-ud': 'Ponderación y relación entre unidades y resultados de aprendizaje.',
+    'contribucion-og': 'Contribución de los RA a los objetivos generales.',
+  };
 
   // Load catalog descriptions when module changes (for fallback resolution)
   useEffect(() => {
@@ -131,6 +145,86 @@ export default function MatricesPage() {
   const df_ra = moduleData?.df_ra || [];
   const df_ud = moduleData?.df_ud || [];
   const df_ce = moduleData?.df_ce || [];
+  const df_sesiones = moduleData?.df_sesiones || [];
+  const df_tareas = moduleData?.df_tareas || [];
+
+  const handleAddTarea = () => {
+    const newTareas = [...df_tareas];
+    const newId = `TC${(newTareas.length + 1).toString().padStart(2, '0')}`;
+    newTareas.push({
+      ID: newId,
+      Nombre_Tarea: "",
+      Reto: "",
+      RA_Asociados: "",
+      Instrumento: ""
+    });
+    updateDataFrame("df_tareas", newTareas);
+  };
+
+  const handleUpdateTarea = (globalIdx: number, field: string, value: any) => {
+    const newTareas = [...df_tareas];
+    (newTareas[globalIdx] as any)[field] = value;
+    updateDataFrame("df_tareas", newTareas);
+  };
+
+  const handleDeleteTarea = (globalIdx: number) => {
+    const newTareas = [...df_tareas];
+    newTareas.splice(globalIdx, 1);
+    updateDataFrame("df_tareas", newTareas);
+  };
+
+  const onDragEndSesion = (result: any) => {
+    if (!result.destination) return;
+
+    const { source, destination } = result;
+    if (source.droppableId !== destination.droppableId) return;
+
+    const udId = source.droppableId;
+    const newSesiones = [...df_sesiones];
+
+    const udSesiones = newSesiones.filter(s => s.id_ud === udId).sort((a, b) => (Number(a.Num_Orden) || 0) - (Number(b.Num_Orden) || 0));
+
+    const [moved] = udSesiones.splice(source.index, 1);
+    udSesiones.splice(destination.index, 0, moved);
+
+    udSesiones.forEach((ses, idx) => {
+      ses.Num_Orden = idx + 1;
+    });
+
+    updateDataFrame("df_sesiones", newSesiones);
+  };
+
+  const handleAddSesion = (ud_id: string) => {
+    const newSesiones = [...df_sesiones];
+    const newId = `SES${(newSesiones.length + 1).toString().padStart(3, '0')}`;
+    const udSesiones = newSesiones.filter(s => s.id_ud === ud_id);
+    const numOrden = udSesiones.length > 0 ? Math.max(...udSesiones.map(s => Number(s.Num_Orden) || 0)) + 1 : 1;
+
+    newSesiones.push({
+      ID: newId,
+      id_ud: ud_id,
+      Num_Orden: numOrden,
+      Horas: 1,
+      Tipo_Actividad: "Tª (Teoria)",
+      RA_CE: "",
+      Contenidos: "",
+      Aspectos_Clave: "",
+      Recursos: ""
+    });
+    updateDataFrame("df_sesiones", newSesiones);
+  };
+
+  const handleUpdateSesion = (globalIdx: number, field: string, value: any) => {
+    const newSesiones = [...df_sesiones];
+    (newSesiones[globalIdx] as any)[field] = value;
+    updateDataFrame("df_sesiones", newSesiones);
+  };
+
+  const handleDeleteSesion = (globalIdx: number) => {
+    const newSesiones = [...df_sesiones];
+    newSesiones.splice(globalIdx, 1);
+    updateDataFrame("df_sesiones", newSesiones);
+  };
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -141,13 +235,7 @@ export default function MatricesPage() {
 
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-4 pb-12">
-            <div>
-              <h1 className="text-2xl font-bold tracking-tight mb-2 flex items-center gap-3">
-                <Grid className="w-8 h-8 text-accent" />
-                Currículo
-              </h1>
-              <p className="text-muted">{t('pages.matrices_desc')}</p>
-            </div>
+            <PageHeader icon={Grid} title="Currículo" description={t('pages.matrices_desc')} />
 
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
@@ -160,47 +248,20 @@ export default function MatricesPage() {
                   ))}
                 </TabsList>
               </Tabs>
-              <Button 
-                onClick={() => setIsProposalModalOpen(true)} 
-                variant="secondary" 
+              <Button
+                onClick={() => setIsProposalModalOpen(true)}
+                variant="secondary"
                 className="border-info/50 text-info hover:bg-info/10 whitespace-nowrap shadow-sm"
               >
                 💡 Cargar Propuesta Editorial
               </Button>
             </div>
 
+            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
+
             {/* Resultados de aprendizaje y CE */}
             {activeTab === "ponderacion-ra-ce" && (
               <div className="space-y-4 animate-in fade-in duration-500">
-                              {(() => {
-                const infoMap: Record<string, {title: string, desc: string}> = {
-          'ponderacion-ra-ce': {
-                    'title': 'Matriz RA - CE',
-                    'desc': 'Matriz de Resultados de aprendizaje y Criterios de evaluación.'
-          },
-          'unidades': {
-                    'title': 'Unidades didácticas (UD/T)',
-                    'desc': 'Definición de Unidades didácticas o Unidades de trabajo.'
-          },
-          'relacion-ra-ud': {
-                    'title': 'Relación RA - UD/T',
-                    'desc': 'Ponderación y relación entre Unidades y Resultados de aprendizaje.'
-          },
-          'contribucion-og': {
-                    'title': 'Contribución a OG',
-                    'desc': 'Contribución de los RA a los Objetivos Generales.'
-          }
-};
-                const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
-                return (
-                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
-                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
-                    <div>
-                      <p className="text-sm text-muted">{info.desc}</p>
-                    </div>
-                  </div>
-                );
-              })()}
                 <Card className="p-6 border-t-4 border-t-accent">
                   <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-4">
                     <span><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></span> RA. Resultados de aprendizaje
@@ -530,6 +591,24 @@ export default function MatricesPage() {
               </div>
             )}
 
+            {/* Tareas competenciales */}
+            {activeTab === "tareas" && (
+              <div className="animate-in fade-in duration-500">
+                <Card className="p-6 border-t-4 border-t-blue-500">
+                  <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-6">
+                    <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Tareas competenciales (TC)
+                  </h2>
+                  <TaskTable
+                    df_ud={df_ud}
+                    df_tareas={df_tareas}
+                    handleUpdateTarea={handleUpdateTarea}
+                    handleAddTarea={handleAddTarea}
+                    handleDeleteTarea={handleDeleteTarea}
+                  />
+                </Card>
+              </div>
+            )}
+
             {/* Unidades didácticas */}
             {activeTab === "unidades" && (
               <div className="animate-in fade-in duration-500">
@@ -697,6 +776,41 @@ export default function MatricesPage() {
                         Cancelar
                       </Button>
                     </div>
+                  )}
+                </Card>
+
+                <Card className="p-6 border-t-4 border-t-accent">
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground">
+                      <span><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Secuenciación de UD
+                    </h2>
+                    <Button
+                      variant="ghost"
+                      onClick={() => setAllUdsOpen(prev => !prev)}
+                      className="text-sm border border-[var(--glass-border)]"
+                    >
+                      <span>{allUdsOpen ? '▲' : '▼'}</span>
+                      {allUdsOpen ? 'Colapsar todas' : 'Expandir todas'}
+                    </Button>
+                  </div>
+
+                  {df_ud.length === 0 ? (
+                    <div className="text-center py-12">
+                      <ClipboardList className="w-16 h-16 text-muted-foreground opacity-50 mx-auto mb-4" />
+                      <h3 className="text-lg font-bold mb-2">No hay unidades didácticas</h3>
+                      <p className="text-muted">Aún no has creado ninguna Unidad didáctica (UD).</p>
+                      <p className="text-muted mt-1">Para secuenciar sesiones, primero debes crear las UDs más arriba.</p>
+                    </div>
+                  ) : (
+                    <SessionTable
+                      df_ud={df_ud}
+                      df_sesiones={df_sesiones}
+                      onDragEnd={onDragEndSesion}
+                      handleUpdateSesion={handleUpdateSesion}
+                      handleAddSesion={handleAddSesion}
+                      handleDeleteSesion={handleDeleteSesion}
+                      allUdsOpen={allUdsOpen}
+                    />
                   )}
                 </Card>
               </div>

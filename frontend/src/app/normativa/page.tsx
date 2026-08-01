@@ -4,7 +4,7 @@ import { NormativaAccordion } from "@/components/features/documentos/NormativaAc
 import { TabNormativa } from "@/components/features/catalogo/TabNormativa";
 import { TabGrados } from "@/components/features/catalogo/TabGrados";
 import { TabComunidades } from "@/components/features/catalogo/TabComunidades";
-import { AlertTriangle, BarChart, BookOpen, Calculator, Calendar, CalendarDays, ChevronRight, Construction, CornerLeftUp, Download, DownloadCloud, File, FileEdit, FileSpreadsheet, FileText, Folder, FolderOpen, GraduationCap, MapPin, Play, Scale, Search, Settings, UploadCloud, User, Users, X, Info, ExternalLink } from "lucide-react";
+import { AlertTriangle, BookOpen, Download, DownloadCloud, File, FileSpreadsheet, FileText, Folder, FolderOpen, MapPin, Scale, Search, X } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import { useTranslation } from "react-i18next";
@@ -17,6 +17,8 @@ import { Alumnado } from "@/types";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Skeleton } from "@/components/ui/Skeleton";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { TabInfoBox } from "@/components/ui/TabInfoBox";
 
 type DocumentItem = {
   name: string;
@@ -33,6 +35,13 @@ export default function DocumentosPage() {
     { id: "legislacion", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.legislacion', {defaultValue: 'Legislación'})}</span>, cleanLabel: t('tabs.legislacion', {defaultValue: 'Legislación'}) },
     { id: "curriculos", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> {t('tabs.curriculos', {defaultValue: 'Currículos'})}</span>, cleanLabel: t('tabs.curriculos', {defaultValue: 'Currículos'}) }
   ];
+  const TAB_DESCRIPTIONS: Record<string, string> = {
+    ccaa: 'Legislación autonómica y normativa específica.',
+    bibliografia: 'Referencias normativas y bibliografía del catálogo.',
+    Plantillas: 'Formatos base recomendados por la administración educativa para programaciones.',
+    Currículos: 'Disposiciones normativas que fijan las enseñanzas mínimas de cada título.',
+    legislacion: 'Leyes orgánicas, reales decretos y órdenes ministeriales vigentes.',
+  };
   const [activeTab, setActiveTab] = useState("ccaa");
   const [currentPath, setCurrentPath] = useState<string>("");
   const [items, setItems] = useState<DocumentItem[]>([]);
@@ -344,28 +353,24 @@ export default function DocumentosPage() {
           <MotionWrapper className="w-full space-y-3 pb-12">
 
 
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-              <div>
-                <h1 className="text-2xl font-bold tracking-tight mb-2 flex items-center gap-3">
-                  <FileText className="w-8 h-8 text-accent" />
-                  {t('pages.documentos_title', {defaultValue: 'Normativa'})}
-                </h1>
-                <p className="text-muted">{t('pages.documentos_desc', {defaultValue: 'Explorador de legislación, normativas y docs oficiales.'})}</p>
-              </div>
-            </div>
+            <PageHeader
+              icon={FileText}
+              title={t('pages.documentos_title', {defaultValue: 'Normativa'})}
+              description={t('pages.documentos_desc', {defaultValue: 'Explorador de legislación, normativas y docs oficiales.'})}
+            />
 
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-6 mt-6 gap-4">
-              <Tabs value={activeTab} onValueChange={(val) => { setActiveTab(val); fetchDocuments(val); }} className="w-full lg:w-auto overflow-x-auto scrollbar-hide">
-                <TabsList className="bg-foreground/5 border border-[var(--glass-border)] w-full lg:w-auto justify-start h-auto p-1 rounded-xl flex-nowrap min-w-max">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+              <Tabs value={activeTab} onValueChange={(val) => { setActiveTab(val); fetchDocuments(val); }} className="flex-1">
+                <TabsList className="max-w-full">
                   {TABS.map(tab => (
-                    <TabsTrigger key={tab.id} value={tab.id} className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all">
+                    <TabsTrigger key={tab.id} value={tab.id}>
                       {tab.label}
                     </TabsTrigger>
                   ))}
                 </TabsList>
               </Tabs>
-              
-              <div className="relative w-full lg:w-80 shrink-0">
+
+              <div className="relative w-full sm:w-80 shrink-0">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
                 <input
                   type="text"
@@ -377,28 +382,9 @@ export default function DocumentosPage() {
               </div>
             </div>
 
+            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión documental y normativa.'} />
+
             <div className="space-y-3 animate-in fade-in duration-500">
-              {(() => {
-                const infoMap: Record<string, {desc: string}> = {
-                  'ccaa': { desc: 'Legislación autonómica y normativa específica.' },
-                  'bibliografia': { desc: 'Referencias normativas y bibliografía del catálogo.' },
-                  'Plantillas': { desc: 'Formatos base recomendados por la administración educativa para programaciones.' },
-                  'Currículos': { desc: 'Disposiciones normativas que fijan las enseñanzas mínimas de cada título.' },
-                  'legislacion': { desc: 'Leyes orgánicas, reales decretos y órdenes ministeriales vigentes.' }
-                };
-                const info = infoMap[activeTab] || { desc: 'Gestión documental y normativa.' };
-                return (
-                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
-                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
-                    <div>
-                      <p className="text-sm text-muted">{info.desc}</p>
-                    </div>
-                  </div>
-                );
-              })()}
-
-
-
               {activeTab === 'ccaa' && <div className="mb-6"><TabComunidades searchQuery={searchQuery} /></div>}
 
               {renderContent()}

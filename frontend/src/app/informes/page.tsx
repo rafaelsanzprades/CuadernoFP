@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { AlertTriangle, BarChart, BookOpen, Calculator, Calendar, CalendarDays, ChevronRight, ChevronDown, Construction, CornerLeftUp, Download, DownloadCloud, File, FileEdit, FileSpreadsheet, FileText, Folder, FolderOpen, GraduationCap, MapPin, Play, Scale, Search, Settings, UploadCloud, User, Users, X , Info } from "lucide-react";
+import { AlertTriangle, BarChart, BookOpen, Calculator, Calendar, CalendarDays, ChevronRight, ChevronDown, Construction, CornerLeftUp, Download, DownloadCloud, File, FileEdit, FileSpreadsheet, FileText, Folder, FolderOpen, GraduationCap, MapPin, Play, Scale, Search, Settings, UploadCloud, User, Users, X } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -12,6 +12,8 @@ import { Alumnado } from "@/types";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Skeleton } from "@/components/ui/Skeleton";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { TabInfoBox } from "@/components/ui/TabInfoBox";
 
 import Link from "next/link";
 
@@ -303,6 +305,10 @@ export default function InformesPage() {
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
+  const TAB_DESCRIPTIONS: Record<string, string> = {
+    curso: 'Descarga de actas, seguimientos y memorias de curso.',
+  };
+
   return (
     <div className="flex min-h-screen bg-background">
       <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -345,39 +351,23 @@ export default function InformesPage() {
               <MotionWrapper className="w-full space-y-3 pb-12">
 
 
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-              <div>
-                <h1 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                  <span className="text-2xl text-info"><FileText className="w-8 h-8" strokeWidth={2.5} /></span> Informes
-                </h1>
-                <p className="text-muted mt-2 text-lg">Generación de reportes y boletines (PDF).</p>
-              </div>
+            <PageHeader
+              icon={FileText}
+              title="Informes"
+              description="Generación de reportes y boletines (PDF)."
+            />
+
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+              <Tabs value={activeTab} onValueChange={(val: any) => setActiveTab(val)} className="flex-1">
+                <TabsList className="max-w-full">
+                  <TabsTrigger value="curso">
+                    <div className="flex items-center gap-2"><Calendar className="w-4 h-4" /> Curso</div>
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
             </div>
 
-            <Tabs value={activeTab} onValueChange={(val: any) => setActiveTab(val)}>
-              <TabsList className="mb-3 max-w-full flex-wrap h-auto">
-                <TabsTrigger value="curso">
-                  <div className="flex items-center gap-2"><Calendar className="w-4 h-4" /> Curso</div>
-                </TabsTrigger>
-              </TabsList>
-            </Tabs>
-                    {(() => {
-                const infoMap: Record<string, {title: string, desc: string}> = {
-          'curso': {
-                    'title': 'Informes - Curso',
-                    'desc': 'Descarga de actas, seguimientos y memorias de curso.'
-          }
-};
-                const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
-                return (
-    <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
-                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
-                    <div>
-                      <p className="text-sm text-muted">{info.desc}</p>
-                    </div>
-                  </div>
-                );
-              })()}
+            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
 
             {['curso'].includes(activeTab) && (
               <div className="space-y-4 animate-in fade-in duration-500">

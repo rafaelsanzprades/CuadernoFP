@@ -1,5 +1,5 @@
 "use client";
-import { Award, BookOpen, ChevronDown, ChevronUp, Clock, FolderTree, GraduationCap, Layers, ListChecks, AlertTriangle, Info, MapPin } from "lucide-react";
+import { Award, BookOpen, ChevronDown, ChevronUp, Clock, FolderTree, GraduationCap, Layers, ListChecks, AlertTriangle, MapPin } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -9,6 +9,8 @@ import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import {
   type CurriculumTitulo,
   type CurriculumModulo,
@@ -110,6 +112,14 @@ function CiclosContent() {
 
   const activeTabCleanLabel = TAB_LABELS[activeTab];
 
+  const TAB_DESCRIPTIONS: Record<string, string> = {
+    familias: 'El RD 1128/2003 establece el Catálogo Nacional de Cualificaciones Profesionales.',
+    titulos: 'Normativa estatal básica y currículo autonómico para ciclos formativos.',
+    modulos: 'Bloques de especialización y contenidos asociados a cada curso académico.',
+    'ra-ce': 'Competencias específicas estructuradas en RA y CE (Art. 136, RD 659/2023).',
+    'ecp-incual': 'Estándares de Competencia Profesional (ECP) del Catálogo Nacional (INCUAL).',
+  };
+
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar />
@@ -119,50 +129,33 @@ function CiclosContent() {
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <MotionWrapper className="w-full space-y-6 pb-12">
 
-            <div>
-              <h1 className="text-2xl font-bold tracking-tight mb-2 flex items-center gap-3">
-                <GraduationCap className="w-8 h-8 text-accent" />
-                {t('pages.catalogo_title', {defaultValue: 'Catálogo'})}
-              </h1>
-              <p className="text-muted">{t('pages.catalogo_desc', {defaultValue: 'Catálogo oficial de familias profesionales, títulos, cursos → módulos.'})}</p>
+            <PageHeader
+              icon={GraduationCap}
+              title={t('pages.catalogo_title', {defaultValue: 'Catálogo'})}
+              description={t('pages.catalogo_desc', {defaultValue: 'Catálogo oficial de familias profesionales, títulos, cursos → módulos.'})}
+            />
+
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+              <Tabs value={activeTab} onValueChange={(val: any) => handleTabChange(val as Tab)} className="flex-1">
+                <TabsList className="max-w-full">
+                  {(
+                    [
+                      { id: "familias" as Tab, label: <span className="flex items-center gap-2"><FolderTree className="w-4 h-4" /> {t('tabs.familias', {defaultValue: 'Familias'})}</span> },
+                      { id: "titulos" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> {t('tabs.titulos', {defaultValue: 'Títulos'})}</span> },
+                      { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> {t('tabs.modulos', {defaultValue: 'Módulos'})}</span> },
+                      { id: "ra-ce" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> RA → CE</span> },
+                      { id: "ecp-incual" as Tab, label: <span className="flex items-center gap-2"><Award className="w-4 h-4 text-purple-500" /> ECP INCUAL</span> },
+                    ]
+                  ).map((t) => (
+                    <TabsTrigger key={t.id} value={t.id}>
+                      {t.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
             </div>
 
-            <Tabs value={activeTab} onValueChange={(val: any) => handleTabChange(val as Tab)}>
-              <TabsList className="mb-2 max-w-full">
-                {(
-                  [
-                    { id: "familias" as Tab, label: <span className="flex items-center gap-2"><FolderTree className="w-4 h-4" /> {t('tabs.familias', {defaultValue: 'Familias'})}</span> },
-                    { id: "titulos" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> {t('tabs.titulos', {defaultValue: 'Títulos'})}</span> },
-                    { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> {t('tabs.modulos', {defaultValue: 'Módulos'})}</span> },
-                    { id: "ra-ce" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> RA → CE</span> },
-                    { id: "ecp-incual" as Tab, label: <span className="flex items-center gap-2"><Award className="w-4 h-4 text-purple-500" /> ECP INCUAL</span> },
-                  ]
-                ).map((t) => (
-                  <TabsTrigger key={t.id} value={t.id}>
-                    {t.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
-
-            {(() => {
-              const infoMap: Record<string, {desc: string}> = {
-                'familias': { desc: 'El RD 1128/2003 establece el Catálogo Nacional de Cualificaciones Profesionales.' },
-                'titulos': { desc: 'Normativa estatal básica y currículo autonómico para ciclos formativos.' },
-                'modulos': { desc: 'Bloques de especialización y contenidos asociados a cada curso académico.' },
-                'ra-ce': { desc: 'Competencias específicas estructuradas en RA y CE (Art. 136, RD 659/2023).' },
-                'ecp-incual': { desc: 'Estándares de Competencia Profesional (ECP) del Catálogo Nacional (INCUAL).' }
-              };
-              const info = infoMap[activeTab] || { desc: 'Catálogo Nacional Oficial.' };
-              return (
-                <div className="flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6">
-                  <Info className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-                  <div>
-                    <p className="text-sm text-muted">{info.desc}</p>
-                  </div>
-                </div>
-              );
-            })()}
+            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Catálogo Nacional Oficial.'} />
 
             {activeTab === "familias" && <TabFamilias onSelectTitulo={handleSelectFamiliaToTitulo} />}
             {activeTab === "titulos" && <TabTitulo onSelectTitulo={handleSelectTitulo} globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
@@ -287,7 +280,7 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
 
             <div className="p-5 bg-foreground/10">
               <h3 className="text-xs font-semibold text-muted tracking-wider mb-3">
-                Ciclos Formativos ({family.degrees.length})
+                Ciclos formativos ({family.degrees.length})
               </h3>
               {family.degrees.length > 0 ? (
                 <div className="space-y-2">
@@ -393,7 +386,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
     <div className="space-y-6 animate-in fade-in duration-300">
       <Card className="p-5 flex flex-col md:flex-row gap-4">
         <div className="flex flex-col gap-1.5 flex-1">
-          <label htmlFor="select-familia-0" className="text-xs font-semibold text-muted tracking-wider">Familia Profesional</label>
+          <label htmlFor="select-familia-0" className="text-xs font-semibold text-muted tracking-wider">Familia profesional</label>
           <select
             id="select-familia-0"
             value={selectedFamilia}
@@ -402,7 +395,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
             }}
             className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer"
           >
-            <option value="">-- Selecciona Familia --</option>
+            <option value="">-- Selecciona familia --</option>
             {familyNames.map((f) => (
               <option key={f} value={f}>{f}</option>
             ))}
@@ -418,7 +411,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
             onChange={(e) => updateGlobalSelection({ tituloCodigo: e.target.value })}
             className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            <option value="">-- Selecciona Título --</option>
+            <option value="">-- Selecciona título --</option>
             {degreesFromApi.map((d: any) => (
               <option key={d.id} value={d.code ?? d.name}>{formatDegreeName(d.code, d.name)}</option>
             ))}
@@ -439,7 +432,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
             </div>
             <Button variant="primary" onClick={() => onSelectTitulo(selectedFamilia, selectedTituloObj.code ?? selectedTituloObj.name)}>
               <BookOpen className="w-4 h-4 mr-2" />
-              Cursos → Módulos
+              Cursos → módulos
             </Button>
           </div>
 
@@ -626,7 +619,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
         >
           <div className="flex items-center gap-3">
             <GraduationCap className="w-5 h-5 text-accent" />
-            <h2 className="text-lg font-bold text-foreground">{cursoLabel} Curso</h2>
+            <h2 className="text-lg font-bold text-foreground">{cursoLabel} curso</h2>
             <Badge variant="info">{mods.length} módulos</Badge>
             <span className="text-xs text-muted flex items-center gap-1">
               <Clock className="w-3 h-3" />{totalHoras}h
@@ -726,14 +719,14 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
     <div className="space-y-6 animate-in fade-in duration-300">
       <Card className="p-5 flex flex-col md:flex-row gap-4">
         <div className="flex flex-col gap-1.5 flex-1">
-          <label htmlFor="select-familia-1" className="text-xs font-semibold text-muted tracking-wider">Familia Profesional</label>
+          <label htmlFor="select-familia-1" className="text-xs font-semibold text-muted tracking-wider">Familia profesional</label>
           <select
             id="select-familia-1"
             value={selectedFamilia}
             onChange={(e) => { updateGlobalSelection({ familia: e.target.value, tituloCodigo: "", moduloCodigo: "" }); }}
             className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer"
           >
-            <option value="">-- Selecciona Familia --</option>
+            <option value="">-- Selecciona familia --</option>
             {familyNames.map((f) => (
               <option key={f} value={f}>{f}</option>
             ))}
@@ -752,7 +745,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
             }}
             className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            <option value="">-- Selecciona Título --</option>
+            <option value="">-- Selecciona título --</option>
             {degreesFromApi.map((d: any) => (
               <option key={d.id} value={d.code ?? d.name}>
                 {formatDegreeName(d.code, d.name)}
@@ -886,14 +879,14 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
     <div className="space-y-6 animate-in fade-in duration-300">
       <Card className="p-5 flex flex-col md:flex-row gap-4">
         <div className="flex flex-col gap-1.5 flex-1">
-          <label htmlFor="select-familia-2" className="text-xs font-semibold text-muted tracking-wider">Familia Profesional</label>
+          <label htmlFor="select-familia-2" className="text-xs font-semibold text-muted tracking-wider">Familia profesional</label>
           <select
             id="select-familia-2"
             value={selectedFamilia}
             onChange={(e) => { updateGlobalSelection({ familia: e.target.value, tituloCodigo: "", moduloCodigo: "" }); }}
             className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer"
           >
-            <option value="">-- Selecciona Familia --</option>
+            <option value="">-- Selecciona familia --</option>
             {familyNames.map((f) => (
               <option key={f} value={f}>{f}</option>
             ))}
@@ -912,7 +905,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
             }}
             className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            <option value="">-- Selecciona Título --</option>
+            <option value="">-- Selecciona título --</option>
             {degreesFromApi.map((d: any) => (
               <option key={d.id} value={d.code ?? d.name}>
                 {formatDegreeName(d.code, d.name)}
@@ -930,7 +923,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
             onChange={(e) => updateGlobalSelection({ moduloCodigo: e.target.value })}
             className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            <option value="">-- Selecciona Módulo --</option>
+            <option value="">-- Selecciona módulo --</option>
             {titulo?.modulos.map((m: any) => (
               <option key={m.codigo} value={m.codigo}>{formatModuleName(m.codigo, m.nombre)} ({m.curso})</option>
             ))}
@@ -968,7 +961,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
               </span>
               <h2 className="text-lg font-bold text-foreground">{formatModuleName(modulo.codigo, modulo.nombre, true)}</h2>
               <Badge variant="info">{modulo.horas}h</Badge>
-              <Badge>{modulo.curso} Curso</Badge>
+              <Badge>{modulo.curso} curso</Badge>
               <Button
                 variant="primary"
                 size="sm"
@@ -1059,7 +1052,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                   <div className="bg-blue-500/10 text-blue-500 border border-blue-500/20 rounded-lg p-3 text-sm flex items-start gap-2">
                     <ListChecks className="w-4 h-4 mt-0.5 shrink-0" />
                     <div>
-                      <p className="font-semibold">Opciones de Convalidación</p>
+                      <p className="font-semibold">Opciones de convalidación</p>
                       <p>Para convalidar este módulo, debes cumplir con <strong>alguna</strong> de las siguientes opciones (no todas).</p>
                     </div>
                   </div>

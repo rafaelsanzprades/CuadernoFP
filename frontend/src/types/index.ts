@@ -334,6 +334,8 @@ export interface AppState {
   setPdFileSource: (source: FileSource) => void;
   cursoFileSource: FileSource;
   setCursoFileSource: (source: FileSource) => void;
+  groupFileSource: FileSource;
+  setGroupFileSource: (source: FileSource) => void;
   workspaceHandle: FileSystemDirectoryHandle | null;
   setWorkspaceHandle: (handle: FileSystemDirectoryHandle | null) => void;
 

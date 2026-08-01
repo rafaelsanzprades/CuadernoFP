@@ -59,7 +59,7 @@ export function EqavetTab() {
           <div className="space-y-6">
             {["Planificación", "Desarrollo", "Resultados"].map(category => (
               <div key={category}>
-                <h4 className="font-medium text-sm text-accent uppercase tracking-wider mb-3">{category}</h4>
+                <h4 className="font-medium text-sm text-accent tracking-wider mb-3">{category}</h4>
                 <div className="space-y-3">
                   {EQAVET_INDICATORS.filter(ind => ind.category === category).map((ind) => (
                     <div key={ind.id} className="p-4 rounded-xl border bg-[var(--glass-bg)] flex flex-col md:flex-row justify-between items-start md:items-center gap-4">

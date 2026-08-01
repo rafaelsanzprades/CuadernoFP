@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { FileEdit, FileText, Settings, Map, HeartHandshake, FolderOpen, Info } from "lucide-react";
+import { FileEdit, FileText, Settings, Map, FolderOpen, Scale, Building2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -9,9 +9,12 @@ import { useTranslation } from "react-i18next";
 import { DatosTab } from "@/components/features/modulo/DatosTab";
 import { ContextoTab } from "@/components/features/modulo/ContextoTab";
 import { PlanesTab } from "@/components/features/modulo/PlanesTab";
-import { DiversidadTab } from "@/components/features/modulo/DiversidadTab";
+import { ProcedimientosTab } from "@/components/features/evaluacion/ProcedimientosTab";
+import { FeoeTab } from "@/components/features/modulo/FeoeTab";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 
@@ -54,10 +57,19 @@ export default function ContextoConfigPage() {
     { id: "presentacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> Presentación</span>, cleanLabel: "Presentación" },
     { id: "entorno", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Entorno</span>, cleanLabel: "Entorno" },
     { id: "planes", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.planes')}</span>, cleanLabel: t('tabs.planes') },
-    { id: "diversidad", label: <span className="flex items-center gap-2"><HeartHandshake className="w-4 h-4 shrink-0" /> Diversidad</span>, cleanLabel: "Diversidad" },
+    { id: "procedimientos", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> Procedimientos</span>, cleanLabel: "Procedimientos" },
+    { id: "feoe", label: <span className="flex items-center gap-2"><Building2 className="w-4 h-4 shrink-0" /> FEOE</span>, cleanLabel: "FEOE" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+
+  const TAB_DESCRIPTIONS: Record<string, string> = {
+    presentacion: 'Configuración inicial y datos generales del módulo profesional.',
+    entorno: 'Análisis del entorno socioeconómico, centro educativo y perfil del alumnado.',
+    planes: 'Vinculación con los planes estratégicos y proyectos institucionales del centro.',
+    procedimientos: 'Aspectos normativos y burocráticos de la evaluación para la programación didáctica.',
+    feoe: 'Organización, modalidad y seguimiento de la formación en empresa u organismo equiparado (FEOE) / FP dual.',
+  };
 
   if (!activeModuleId) {
     return (
@@ -110,48 +122,31 @@ export default function ContextoConfigPage() {
         <Header breadcrumbSuffix={activeTabCleanLabel} />
         <main id="main-content" tabIndex={-1} className="flex-1 p-8 content-area">
           <MotionWrapper>
-            <div className="mb-8 flex items-center justify-between">
-              <div>
-                <h1 className="text-2xl font-bold tracking-tight mb-2 flex items-center gap-3">
-                  <FileEdit className="w-8 h-8 text-accent" />
-                  Contexto
-                </h1>
-                <p className="text-muted">
-                  Información general, características del entorno, alumnado y módulo.
-                </p>
-              </div>
+            <PageHeader
+              icon={FileEdit}
+              title="Contexto"
+              description="Información general, características del entorno, alumnado y módulo."
+            />
+
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+                <TabsList className="max-w-full">
+                  {TABS.map((tab) => (
+                    <TabsTrigger key={tab.id} value={tab.id}>
+                      {tab.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
             </div>
 
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
-              <TabsList className="bg-foreground/5 border border-[var(--glass-border)] w-full justify-start h-auto p-1 rounded-xl flex-wrap">
-                {TABS.map((tab) => (
-                  <TabsTrigger key={tab.id} value={tab.id} className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all">
-                    {tab.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
-              
-            {(() => {
-              const infoMap: Record<string, {desc: string}> = {
-                'presentacion': { desc: 'Configuración inicial y datos generales del módulo profesional.' },
-                'entorno': { desc: 'Análisis del entorno socioeconómico, centro educativo y perfil del alumnado.' },
-                'planes': { desc: 'Vinculación con los planes estratégicos y proyectos institucionales del centro.' },
-                'diversidad': { desc: 'Atención a la diversidad, adaptaciones curriculares y panel de alumnado ACNEAE.' },
-              };
-              const info = infoMap[activeTab] || { desc: 'Configuración del contexto.' };
-              return (
-                <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
-                  <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
-                  <p className='text-sm text-muted'>{info.desc}</p>
-                </div>
-              );
-            })()}
+            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Configuración del contexto.'} />
 
             {activeTab === "presentacion" && <DatosTab />}
             {activeTab === "entorno" && <ContextoTab />}
             {activeTab === "planes" && <PlanesTab />}
-            {activeTab === "diversidad" && <DiversidadTab />}
+            {activeTab === "procedimientos" && <ProcedimientosTab />}
+            {activeTab === "feoe" && <FeoeTab />}
 
           </MotionWrapper>
         </main>

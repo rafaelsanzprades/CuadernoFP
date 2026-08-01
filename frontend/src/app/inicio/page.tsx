@@ -10,11 +10,12 @@ import { Badge } from "@/components/ui/Badge";
 import Link from "next/link";
 import { TabSync } from "@/components/ui/TabSync";
 import { useState, useEffect } from "react";
-import { useMounted } from "@/hooks/useMounted";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { AIWizardModal } from "@/components/features/ai/AIWizardModal";
 import { AISettingsPanel } from "@/components/features/ai/AISettingsPanel";
 import { Button } from "@/components/ui/Button";
@@ -183,7 +184,6 @@ const FAQS = [
 // ── Página Principal ──────────────────────────────────────────────────────
 export default function InicioPage() {
   const { moduleData, cursoData, globalData, activeModuleId, activeCursoId } = useAppStore();
-  const isMounted = useMounted();
   const [activeTab, setActiveTab] = useState<string>("bienvenida");
   const { t } = useTranslation();
   const [aiModalOpen, setAiModalOpen] = useState(false);
@@ -226,18 +226,332 @@ export default function InicioPage() {
     }
   }, [activeTab, ideasContent, isLoadingIdeas]);
 
+  // ── Comprobaciones Programación didáctica ────────────────────────────
+  const m = moduleData;
 
+  const udCount = m?.df_ud?.length ?? 0;
+  const udHoras = (m?.df_ud ?? []).reduce((a: number, u: any) => a + (parseFloat(String(u.horas_ud ?? 0)) || 0), 0);
+  const moduloHoras = parseFloat(String(m?.info_modulo?.h_boa ?? 0)) || 0;
+  const horasDiff = Math.abs(udHoras - moduloHoras);
+
+  const raCount = m?.df_ra?.length ?? 0;
+  const raPesoSum = sumPesos(m?.df_ra ?? [], "peso_ra");
+
+  const ceList = m?.df_ce ?? [];
+  const ceCount = ceList.length;
+  const ceHuerfanos = ceList.filter((ce: any) => {
+    if (!ce.id_ra) return true;
+    return !(m?.df_ra ?? []).some((ra: any) => ra.id_ra === ce.id_ra);
+  }).length;
+
+  const instrCount = m?.df_instr?.length ?? 0;
+  const indsList = m?.df_indicadores ?? [];
+  const indCount = indsList.length;
+  const indSinCE = indsList.filter((ind: any) => {
+    return !ceList.some((ce: any) => ind.id_ce === ce.id_ce);
+  }).length;
+
+  const tareasCount = m?.df_tareas?.length ?? 0;
+  const tareasSinRA = (m?.df_tareas ?? []).filter((t: any) => {
+    if (!t.RA_Asociados) return true;
+    if ((m?.df_ra ?? []).length === 0) return true;
+    return false;
+  }).length;
+
+  const sesionesCount = m?.df_sesiones?.length ?? 0;
+  const sesionesSinUD = (m?.df_sesiones ?? []).filter((s: any) => {
+    if (!s.id_ud) return true;
+    return !(m?.df_ud ?? []).some((ud: any) => ud.id_ud === s.id_ud);
+  }).length;
+
+  const tieneHorario = !!(cursoData?.horario && Object.keys(cursoData.horario).length > 0);
+  const tieneFechas = !!(cursoData?.info_fechas && Object.keys(cursoData.info_fechas).length > 0);
+  const tieneContexto = !!(m?.config_contexto && Object.keys(m.config_contexto).length > 0);
+
+  const moduleChecks: CheckItem[] = [
+    {
+      id: "modulo",
+      icon: <BookOpen className="w-5 h-5" />,
+      title: "Módulo didáctico",
+      href: "/contexto?tab=presentacion",
+      hrefLabel: "Contexto",
+      status: !m ? "empty" : "ok",
+      lines: !m
+        ? ["Sin datos de programación cargados"]
+        : [
+          `Módulo activo: ${activeModuleId}`,
+          `Horas semanales: ${m.info_modulo?.h_sem || "-"} h`,
+          `Horas BOA: ${m.info_modulo?.h_boa || "-"} h`,
+        ],
+      actionHref: !m ? "/contexto?tab=presentacion" : undefined,
+      actionLabel: !m ? "Configurar módulo" : undefined,
+    },
+    {
+      id: "ud",
+      icon: <Layers className="w-5 h-5" />,
+      title: "Unidades didácticas (UD)",
+      href: "/curriculo?tab=unidades",
+      hrefLabel: "Currículo",
+      status: udCount === 0 ? "empty" : horasDiff > 2 ? "warning" : "ok",
+      lines: udCount === 0
+        ? ["No hay UD definidas"]
+        : [
+          `${udCount} UD definidas`,
+          `Horas declaradas: ${udHoras} / ${moduloHoras || "-"} h del módulo`,
+          horasDiff > 2 ? `Diferencia de ${horasDiff} h` : "Horas cuadran correctamente",
+        ],
+      actionHref: udCount === 0 ? "/curriculo?tab=unidades" : undefined,
+      actionLabel: udCount === 0 ? "Añadir primera UD" : undefined,
+    },
+    {
+      id: "ra",
+      icon: <GraduationCap className="w-5 h-5" />,
+      title: "Resultados de aprendizaje (RA)",
+      href: "/curriculo?tab=ponderacion-ra-ce",
+      hrefLabel: "Currículo",
+      status: raCount === 0 ? "empty" : Math.abs(raPesoSum - 100) > 1 ? "warning" : "ok",
+      lines: raCount === 0
+        ? ["No hay RA definidos"]
+        : [
+          `${raCount} RA definidos`,
+          `Suma de pesos: ${raPesoSum.toFixed(1)}% ${Math.abs(raPesoSum - 100) > 1 ? "(⚠️ no suman 100%)" : "(✅)"}`,
+        ],
+      actionHref: raCount === 0 ? "/curriculo?tab=ponderacion-ra-ce" : undefined,
+      actionLabel: raCount === 0 ? "Añadir primer RA" : undefined,
+    },
+    {
+      id: "ce",
+      icon: <ClipboardList className="w-5 h-5" />,
+      title: "Criterios de evaluación (CE)",
+      href: "/curriculo?tab=ponderacion-ra-ce",
+      hrefLabel: "Currículo",
+      status: ceCount === 0 ? "empty" : ceHuerfanos > 0 ? "warning" : "ok",
+      lines: ceCount === 0
+        ? ["No hay CE definidos"]
+        : [
+          `${ceCount} CE definidos`,
+          ceHuerfanos > 0 ? `${ceHuerfanos} CE sin RA asignado` : "Todos los CE tienen RA",
+        ],
+      actionHref: ceHuerfanos > 0 ? "/curriculo?tab=ponderacion-ra-ce" : undefined,
+      actionLabel: ceHuerfanos > 0 ? "Revisar asignaciones" : undefined,
+    },
+    {
+      id: "instr",
+      icon: <Wrench className="w-5 h-5" />,
+      title: "Instrumentos e Indicadores",
+      href: "/calificaciones?tab=matriz",
+      hrefLabel: "Calificaciones",
+      status: (instrCount === 0 || indCount === 0) ? "empty" : indSinCE > 0 ? "warning" : "ok",
+      lines: (instrCount === 0 || indCount === 0)
+        ? ["No hay instrumentos o indicadores"]
+        : [
+          `${instrCount} instrumentos y ${indCount} indicadores`,
+          indSinCE > 0 ? `${indSinCE} indicadores sin CE asociado` : "Todos los indicadores evalúan algún CE",
+        ],
+      actionHref: (instrCount === 0 || indCount === 0) ? "/archivos?tab=autores" : undefined,
+      actionLabel: (instrCount === 0 || indCount === 0) ? "Importar de un editorial" : undefined,
+    },
+    {
+      id: "tareas",
+      icon: <FileText className="w-5 h-5" />,
+      title: "Tareas competenciales",
+      href: "/curriculo?tab=tareas",
+      hrefLabel: "Currículo",
+      status: tareasCount === 0 ? "empty" : tareasSinRA > 0 ? "warning" : "ok",
+      lines: tareasCount === 0
+        ? ["No hay tareas definidas"]
+        : [
+          `${tareasCount} tareas definidas`,
+          tareasSinRA > 0 ? `${tareasSinRA} tareas sin RA asociado` : "Todas las tareas tienen RA",
+        ],
+      actionHref: tareasCount === 0 ? "/curriculo?tab=tareas" : undefined,
+      actionLabel: tareasCount === 0 ? "Crear primera tarea" : undefined,
+    },
+    {
+      id: "sesiones",
+      icon: <CalendarDays className="w-5 h-5" />,
+      title: "Sesiones de clase",
+      href: "/curriculo?tab=unidades",
+      hrefLabel: "Currículo",
+      status: sesionesCount === 0 ? "empty" : sesionesSinUD > 0 ? "warning" : "ok",
+      lines: sesionesCount === 0
+        ? ["No hay sesiones planificadas"]
+        : [
+          `${sesionesCount} sesiones planificadas`,
+          sesionesSinUD > 0 ? `${sesionesSinUD} sesiones sin UD asignada` : "Todas las sesiones tienen UD",
+        ],
+      actionHref: sesionesCount === 0 ? "/curriculo?tab=unidades" : undefined,
+      actionLabel: sesionesCount === 0 ? "Planificar sesiones" : undefined,
+    },
+    {
+      id: "contexto",
+      icon: <BookOpen className="w-5 h-5" />,
+      title: "Contexto del módulo",
+      href: "/contexto?tab=entorno",
+      hrefLabel: "Contexto",
+      status: tieneContexto ? "ok" : "empty",
+      lines: tieneContexto
+        ? ["Contexto del aula configurado"]
+        : ["Sin descripción de contexto ni configuración de aula"],
+      actionHref: !tieneContexto ? "/contexto?tab=entorno" : undefined,
+      actionLabel: !tieneContexto ? "Añadir contexto" : undefined,
+    },
+    {
+      id: "dual",
+      icon: <Building2 className="w-5 h-5" />,
+      title: "FP Dual",
+      href: "/contexto?tab=presentacion",
+      hrefLabel: "Contexto",
+      status: (m?.dual_regimen && m.dual_regimen !== "ninguno") ? "ok" : "empty",
+      lines: (m?.dual_regimen && m.dual_regimen !== "ninguno")
+        ? [`Régimen: Dual ${m.dual_regimen === 'general' ? 'General' : 'Intensivo'}`]
+        : ["Régimen tradicional (sin FP Dual configurada)"],
+      actionHref: "/contexto?tab=presentacion",
+      actionLabel: "Configurar FP Dual",
+    },
+    {
+      id: "eqavet",
+      icon: <Shield className="w-5 h-5" />,
+      title: "Calidad EQAVET",
+      href: "/mejora?tab=eqavet",
+      hrefLabel: "Mejora",
+      status: (m?.eqavet_evaluacion && Object.keys(m.eqavet_evaluacion).length > 0) ? "ok" : "empty",
+      lines: (m?.eqavet_evaluacion && Object.keys(m.eqavet_evaluacion).length > 0)
+        ? [`${Object.keys(m.eqavet_evaluacion).length} indicadores EQAVET valorados`]
+        : ["Sin indicadores EQAVET valorados"],
+      actionHref: "/mejora?tab=eqavet",
+      actionLabel: "Valorar calidad",
+    }
+  ];
+
+  // ── Comprobaciones Curso activo ──────────────────────────────────────
+  const c = cursoData;
+
+  const alumnosCount = c?.df_al?.length ?? 0;
+  const alumnosIncompletos = (c?.df_al ?? []).filter((a: any) => !a.Nombre || !a.Apellidos).length;
+  const sgmtCount = Object.keys(c?.daily_ledger ?? {}).length;
+  const tutoriaEntradas = Object.keys(c?.tutoria_ledger ?? {}).length;
+  const planoCount = Object.keys(c?.plano_clase ?? {}).length;
+
+  const evalCount = c?.df_eval?.length ?? 0;
+  const evalTotal = alumnosCount;
+
+  const courseChecks: CheckItem[] = [
+    {
+      id: "calendario",
+      icon: <CalendarDays className="w-5 h-5" />,
+      title: "Calendario académico",
+      href: "/calendario",
+      hrefLabel: "Calendario",
+      status: !tieneHorario && !tieneFechas ? "empty" : (!tieneHorario || !tieneFechas) ? "warning" : "ok",
+      lines: [
+        tieneHorario ? "Horario semanal definido" : "Sin horario semanal",
+        tieneFechas ? "Fechas de evaluación configuradas" : "Sin fechas de evaluación",
+      ],
+      actionHref: !tieneHorario ? "/calendario" : undefined,
+      actionLabel: !tieneHorario ? "Configurar calendario" : undefined,
+    },
+    {
+      id: "alumnado",
+      icon: <Users className="w-5 h-5" />,
+      title: "Alumnado",
+      href: "/alumnado",
+      hrefLabel: "Alumnado",
+      status: alumnosCount === 0 ? "empty" : alumnosIncompletos > 0 ? "warning" : "ok",
+      lines: alumnosCount === 0
+        ? ["No hay alumnado registrado"]
+        : [
+          `${alumnosCount} alumnos registrados`,
+          alumnosIncompletos > 0 ? `${alumnosIncompletos} registros incompletos (sin nombre/apellidos)` : "Todos los registros completos",
+        ],
+      actionHref: alumnosCount === 0 ? "/alumnado" : undefined,
+      actionLabel: alumnosCount === 0 ? "Añadir alumnado" : undefined,
+    },
+    {
+      id: "seguimiento",
+      icon: <ClipboardList className="w-5 h-5" />,
+      title: "Diario de aula",
+      href: "/seguimiento?tab=clases",
+      hrefLabel: "Seguimiento",
+      status: sgmtCount === 0 ? "empty" : "ok",
+      lines: sgmtCount === 0
+        ? ["Sin entradas en el diario de aula"]
+        : [`${sgmtCount} sesiones registradas en el diario`],
+      actionHref: sgmtCount === 0 ? "/seguimiento?tab=clases" : undefined,
+      actionLabel: sgmtCount === 0 ? "Registrar primera sesión" : undefined,
+    },
+    {
+      id: "evaluaciones",
+      icon: <BarChart2 className="w-5 h-5" />,
+      title: "Calificaciones",
+      href: "/calificaciones",
+      hrefLabel: "Calificaciones",
+      status: evalCount === 0 ? "empty" : evalTotal > 0 && evalCount < evalTotal ? "warning" : "ok",
+      lines: evalCount === 0
+        ? ["Sin calificaciones introducidas"]
+        : [
+          `${evalCount} alumnos con registro de ${evalTotal > 0 ? evalTotal : "?"} posibles (${pct(evalCount, evalTotal)})`,
+          evalTotal > 0 && evalCount < evalTotal
+            ? `Faltan ${evalTotal - evalCount} alumnos por evaluar`
+            : "Todos los alumnos tienen registros de calificación",
+        ],
+      actionHref: evalCount === 0 ? "/calificaciones" : undefined,
+      actionLabel: evalCount === 0 ? "Ir a calificaciones" : undefined,
+    },
+    {
+      id: "tutoria",
+      icon: <HeartHandshake className="w-5 h-5" />,
+      title: "Tutoría y alertas",
+      href: "/seguimiento?tab=tutoria",
+      hrefLabel: "Seguimiento",
+      status: tutoriaEntradas === 0 ? "empty" : "ok",
+      lines: tutoriaEntradas === 0
+        ? ["Sin entradas de tutoría o alertas registradas"]
+        : [`${tutoriaEntradas} entradas de tutoría registradas`],
+      actionHref: tutoriaEntradas === 0 ? "/seguimiento?tab=tutoria" : undefined,
+      actionLabel: tutoriaEntradas === 0 ? "Registrar tutoría" : undefined,
+    },
+    {
+      id: "plano",
+      icon: <Users className="w-5 h-5" />,
+      title: "Plano de clase",
+      href: "/alumnado?tab=plano",
+      hrefLabel: "Alumnado",
+      status: planoCount === 0 ? "empty" : "ok",
+      lines: planoCount === 0
+        ? ["No hay alumnos ubicados en el plano"]
+        : [`${planoCount} alumnos ubicados en el aula visual`],
+      actionHref: planoCount === 0 ? "/alumnado?tab=plano" : undefined,
+      actionLabel: planoCount === 0 ? "Diseñar aula" : undefined,
+    },
+  ];
+
+  const allChecks = [...moduleChecks, ...courseChecks];
+  const okCount = allChecks.filter(chk => chk.status === "ok").length;
+  const warnCount = allChecks.filter(chk => chk.status === "warning").length;
+  const emptyCount = allChecks.filter(chk => chk.status === "empty").length;
 
   const TABS = [
     { id: "bienvenida", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.bienvenida')}</>, cleanLabel: t('tabs.bienvenida') },
+    { id: "verificacion", label: <><span className="inline-flex"><ListChecks className="w-[1.2em] h-[1.2em] mr-1" /></span> Verificación</>, cleanLabel: "Verificación" },
     { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.guia')}</>, cleanLabel: t('tabs.guia') },
     { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.faq')}</>, cleanLabel: t('tabs.faq') },
     { id: "acronimos", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Acrónimos</>, cleanLabel: "Acrónimos" },
-    { id: "mapa", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> Mapa Web</>, cleanLabel: "Mapa Web" },
+    { id: "mapa", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> Mapa web</>, cleanLabel: "Mapa web" },
     { id: "contribuciones", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Contribuciones</>, cleanLabel: "Contribuciones" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+
+  const TAB_DESCRIPTIONS: Record<string, string> = {
+    bienvenida: 'Panel de control de acceso rápido a todas las herramientas.',
+    verificacion: 'Panel de salud y coherencia de los datos de tu cuaderno.',
+    guia: 'Manuales y guías paso a paso para configurar tu entorno.',
+    faq: 'Respuestas a las preguntas más frecuentes del profesorado.',
+    acronimos: 'Glosario de siglas, acrónimos y conceptos de Formación Profesional.',
+    mapa: 'Esquema jerárquico de todas las secciones y utilidades de la aplicación.',
+    contribuciones: 'Comunidad de Telegram y listado de personas que contribuyen activamente al proyecto.',
+  };
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -257,53 +571,22 @@ export default function InicioPage() {
           <MotionWrapper className="space-y-4 pb-12">
 
 
-            {/* Título de la página */}
-            <div>
-              <h1 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <Activity className="w-6 h-6 text-accent" /> {t('inicio.title')}
-              </h1>
-              <p className="text-muted mt-2 text-sm">{t('inicio.subtitle')}</p>
-            </div>
+            <PageHeader icon={Activity} title={t('inicio.title')} description={t('inicio.subtitle')} />
 
             {/* Pestañas de Navegación */}
-            <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="mb-2 max-w-full">
-                {TABS.map(tab => (
-                  <TabsTrigger key={tab.id} value={tab.id}>
-                    {tab.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
-                    {(() => {
-                const infoMap: Record<string, {title: string, desc: string}> = {
-          'bienvenida': {
-                    'title': 'Bienvenida',
-                    'desc': 'Panel de control de acceso rápido a todas las herramientas.'
-          },
-          'guia': {
-                    'title': 'Guía',
-                    'desc': 'Manuales y guías paso a paso para configurar tu entorno.'
-          },
-          'faq': {
-                    'title': 'FAQ',
-                    'desc': 'Respuestas a las preguntas más frecuentes de el profesorado.'
-          },
-          'acronimos': {
-                    'title': 'Acrónimos',
-                    'desc': 'Glosario de siglas, acrónimos y conceptos de Formación Profesional.'
-          }
-};
-                const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
-                return (
-    <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
-                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
-                    <div>
-                      <p className="text-sm text-muted">{info.desc}</p>
-                    </div>
-                  </div>
-                );
-              })()}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+                <TabsList className="max-w-full">
+                  {TABS.map(tab => (
+                    <TabsTrigger key={tab.id} value={tab.id}>
+                      {tab.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
+            </div>
+
+            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
 
             
             {/* ── CONTENIDO: BIENVENIDA ──────────────────────────────── */}
@@ -318,31 +601,13 @@ export default function InicioPage() {
               {navGroups.map((group, groupIdx) => (
                 <MotionWrapper key={group.title} delay={groupIdx * 0.1}>
                   <div className="space-y-3">
-                    {group.title !== 'General' && (
-                      <>
-                        <h2 className="text-lg font-bold text-foreground flex items-center gap-3">
-                          {group.title.includes('[Código del módulo]') ? (
-                            isMounted && activeModuleId ? (
-                              <>Programación <span className="text-accent">{activeModuleId.split('-')[0]} {moduleData?.info_modulo?.acronym || ''}</span></>
-                            ) : (
-                              group.title
-                            )
-                          ) : group.title.includes('[Año]') ? (
-                            isMounted && activeCursoId ? (
-                              <>Curso <span className="text-accent">{activeCursoId}</span></>
-                            ) : (
-                              group.title
-                            )
-                          ) : (
-                            group.title
-                          )}
-                        </h2>
-                        {group.sectionDescription && (
-                          <p className="text-muted text-sm max-w-4xl pb-4 border-b border-[var(--glass-border)]">
-                            {group.sectionDescription}
-                          </p>
-                        )}
-                      </>
+                    <h2 className="text-lg font-bold text-foreground flex items-center gap-3">
+                      {group.title.replace(/\s*\[.*\]$/, '')}
+                    </h2>
+                    {group.sectionDescription && (
+                      <p className="text-muted text-sm max-w-4xl pb-4 border-b border-[var(--glass-border)]">
+                        {group.sectionDescription}
+                      </p>
                     )}
 
 
@@ -377,7 +642,63 @@ export default function InicioPage() {
               </div>
             )}
 
+            {/* ── CONTENIDO: VERIFICACIÓN ──────────────────────────────── */}
+            {activeTab === "verificacion" && (
+              <div className="space-y-4 animate-in fade-in duration-500 w-full">
 
+                <div className="grid grid-cols-3 gap-4">
+                  <Card className="p-4 border border-success/30 bg-success/10 rounded-2xl text-center">
+                    <CheckCircle className="w-7 h-7 text-success mx-auto mb-1" />
+                    <div className="text-2xl font-extrabold text-success">{okCount}</div>
+                    <div className="text-xs text-muted mt-0.5">Correctos</div>
+                  </Card>
+                  <Card className="p-4 border border-warning/30 bg-warning/10 rounded-2xl text-center">
+                    <AlertTriangle className="w-7 h-7 text-warning mx-auto mb-1" />
+                    <div className="text-2xl font-extrabold text-warning">{warnCount}</div>
+                    <div className="text-xs text-muted mt-0.5">Advertencias</div>
+                  </Card>
+                  <Card className="p-4 border border-danger/30 bg-danger/10 rounded-2xl text-center">
+                    <XCircle className="w-7 h-7 text-danger mx-auto mb-1" />
+                    <div className="text-2xl font-extrabold text-danger">{emptyCount}</div>
+                    <div className="text-xs text-muted mt-0.5">Sin datos</div>
+                  </Card>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
+                    <h2 className="text-sm font-bold text-foreground flex items-center gap-2">
+                      <BookOpen className="w-4 h-4 text-accent" />
+                      Programación didáctica
+                    </h2>
+                    <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-xs text-muted">
+                      Programación activa: <span className="font-semibold text-foreground">{activeModuleId || "-"}</span>
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                    {moduleChecks.map(item => (
+                      <CheckCard key={item.id} item={item} />
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
+                    <h2 className="text-sm font-bold text-foreground flex items-center gap-2">
+                      <Users className="w-4 h-4 text-accent" />
+                      Curso activo
+                    </h2>
+                    <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-xs text-muted">
+                      Curso Activo: <span className="font-semibold text-foreground">{activeCursoId || "-"}</span>
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                    {courseChecks.map(item => (
+                      <CheckCard key={item.id} item={item} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* ── CONTENIDO: GUÍA PASO A PASO ───────────────────────────── */}
             {activeTab === "guia" && (
@@ -386,7 +707,7 @@ export default function InicioPage() {
                 {/* Secuencia Lógica Propuesta */}
                 <Card glow className="p-8 mb-6">
                   <div className="space-y-4">
-                  <h2 className="text-xl font-bold text-foreground flex items-center gap-3">
+                  <h2 className="text-lg font-bold text-foreground flex items-center gap-3">
                     <Layers className="w-6 h-6 text-accent" /> Secuencia lógica de programación
                   </h2>
                   <p className="text-muted text-sm pb-4 border-b border-[var(--glass-border)]">
@@ -665,20 +986,6 @@ export default function InicioPage() {
                           </a>
                         </li>
                         <li>
-                          <a href="/evaluacion" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Evaluación
-                          </a>
-                        </li>
-                        <li>
-                          <a href="/secuenciacion" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Secuenciación
-                          </a>
-                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/secuenciacion?tab=sesiones" className="hover:text-accent transition-colors block py-0.5">— Sesiones</a>
-                            <a href="/secuenciacion?tab=tareas" className="hover:text-accent transition-colors block py-0.5">— Tareas competenciales</a>
-                          </div>
-                        </li>
-                        <li>
                           <a href="/magia" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Magia
                           </a>
@@ -712,15 +1019,11 @@ export default function InicioPage() {
                           </div>
                         </li>
                         <li>
-                          <a href="/diario" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Diario
-                          </a>
-                        </li>
-                        <li>
                           <a href="/seguimiento" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Seguimiento
                           </a>
                           <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                            <a href="/seguimiento?tab=clases" className="hover:text-accent transition-colors block py-0.5">— Clases</a>
                             <a href="/seguimiento?tab=tutoria" className="hover:text-accent transition-colors block py-0.5">— Tutoría</a>
                             <a href="/seguimiento?tab=asistencia" className="hover:text-accent transition-colors block py-0.5">— Asistencia</a>
                             <a href="/seguimiento?tab=abandono" className="hover:text-accent transition-colors block py-0.5">— Alerta abandono</a>
@@ -759,7 +1062,7 @@ export default function InicioPage() {
                       <MessageCircle className="w-6 h-6 text-[#229ED9]" />
                     </div>
                     <div className="flex-1 text-center md:text-left">
-                      <h3 className="text-base font-bold text-foreground">Grupo Oficial de Telegram</h3>
+                      <h3 className="text-sm font-bold text-foreground">Grupo oficial de Telegram</h3>
                       <p className="text-sm text-muted leading-tight mt-1">
                         Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad Autónoma.
                       </p>

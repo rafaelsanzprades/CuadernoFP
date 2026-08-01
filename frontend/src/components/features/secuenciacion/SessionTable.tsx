@@ -159,7 +159,7 @@ export function SessionTable({
                                 {/* Segunda Línea: Identada y con MultiSelects */}
                                 <div className="flex items-center gap-4 pl-[7.5rem]">
                                   <div className="flex-1 flex flex-col">
-                                    <span className="text-xs text-muted-foreground uppercase tracking-wider mb-1 font-semibold">Aspectos Clave</span>
+                                    <span className="text-xs text-muted-foreground tracking-wider mb-1 font-semibold">Aspectos Clave</span>
                                     <MultiSelectDropdown
                                       options={getAllAspectosClave()}
                                       selectedIds={ses.Aspectos_Clave ? ses.Aspectos_Clave.split(',').map(s => s.trim()).filter(Boolean) : []}
@@ -168,7 +168,7 @@ export function SessionTable({
                                     />
                                   </div>
                                   <div className="flex-1 flex flex-col pr-10">
-                                    <span className="text-xs text-muted-foreground uppercase tracking-wider mb-1 font-semibold">Recursos</span>
+                                    <span className="text-xs text-muted-foreground tracking-wider mb-1 font-semibold">Recursos</span>
                                     <MultiSelectDropdown
                                       options={getAllRecursos()}
                                       selectedIds={ses.Recursos ? ses.Recursos.split(',').map(s => s.trim()).filter(Boolean) : []}

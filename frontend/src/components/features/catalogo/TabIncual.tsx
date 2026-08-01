@@ -111,21 +111,21 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
             <BookOpen className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" /> 
             <span>Grado C<br/><span className="font-normal text-muted-foreground">(Certificados)</span></span>
           </h3>
-          <p className="text-3xl font-bold mt-2 text-right">{incualData?.oferta_grado_c?.length || 0}</p>
+          <p className="text-2xl font-bold mt-2 text-right">{incualData?.oferta_grado_c?.length || 0}</p>
         </Card>
         <Card className="p-4 border-l-4 border-l-green-500 lg:col-span-1 flex flex-col justify-center">
           <h3 className="font-semibold flex items-start gap-2 text-sm leading-snug">
             <BookOpen className="w-4 h-4 text-green-500 shrink-0 mt-0.5" /> 
             <span>Grado D<br/><span className="font-normal text-muted-foreground">(Ciclos)</span></span>
           </h3>
-          <p className="text-3xl font-bold mt-2 text-right">{incualData?.oferta_grado_d?.length || 0}</p>
+          <p className="text-2xl font-bold mt-2 text-right">{incualData?.oferta_grado_d?.length || 0}</p>
         </Card>
         <Card className="p-4 border-l-4 border-l-purple-500 lg:col-span-1 flex flex-col justify-center">
           <h3 className="font-semibold flex items-start gap-2 text-sm leading-snug">
             <BookOpen className="w-4 h-4 text-purple-500 shrink-0 mt-0.5" /> 
             <span>Grado E<br/><span className="font-normal text-muted-foreground">(Especialización)</span></span>
           </h3>
-          <p className="text-3xl font-bold mt-2 text-right">{incualData?.oferta_grado_e?.length || 0}</p>
+          <p className="text-2xl font-bold mt-2 text-right">{incualData?.oferta_grado_e?.length || 0}</p>
         </Card>
       </div>
 

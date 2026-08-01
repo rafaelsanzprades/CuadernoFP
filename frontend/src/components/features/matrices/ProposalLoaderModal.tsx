@@ -73,7 +73,7 @@ export function ProposalLoaderModal({ isOpen, onClose, activeModuleId, onApplyPr
                     >
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="text-xs font-bold text-info uppercase tracking-wider">{prop.author}</span>
+                          <span className="text-xs font-bold text-info tracking-wider">{prop.author}</span>
                           <span className="text-xs text-muted">• {prop.totalHours} Horas • {prop.df_ud.length} UDs</span>
                         </div>
                         <h4 className="text-lg font-bold text-foreground group-hover:text-info transition-colors">{prop.title}</h4>

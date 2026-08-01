@@ -1,19 +1,21 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import { Shield, FolderOpen, Info, Settings, Award, Lightbulb } from "lucide-react";
+import { Shield, FolderOpen, Settings, Award, Lightbulb } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
 import { useTranslation } from "react-i18next";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { EqavetTab } from "@/components/features/modulo/EqavetTab";
 import { PropuestasTab } from "@/components/features/modulo/PropuestasTab";
 
-export default function CalidadPage() {
+export default function MejoraPage() {
   const { activeModuleId, moduleData } = useAppStore();
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("eqavet");
@@ -24,6 +26,11 @@ export default function CalidadPage() {
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+
+  const TAB_DESCRIPTIONS: Record<string, string> = {
+    eqavet: 'Indicadores de calidad y cumplimiento del marco EQAVET.',
+    propuestas: 'Propuestas de mejora para el próximo curso.',
+  };
 
   if (!activeModuleId) {
     return (
@@ -59,41 +66,25 @@ export default function CalidadPage() {
         <Header breadcrumbSuffix={activeTabCleanLabel} />
         <main id="main-content" tabIndex={-1} className="flex-1 p-8 content-area">
           <MotionWrapper>
-            <div className="mb-8 flex items-center justify-between">
-              <div>
-                <h1 className="text-2xl font-bold tracking-tight mb-2 flex items-center gap-3">
-                  <Shield className="w-8 h-8 text-accent" />
-                  Calidad y Mejora Continua
-                </h1>
-                <p className="text-muted">
-                  Gestión de la calidad, evaluación del proceso e indicadores para el módulo <strong className="text-foreground">{activeModuleId}</strong>.
-                </p>
-              </div>
+            <PageHeader
+              icon={Shield}
+              title="Mejora continua"
+              description={`Gestión de la calidad, evaluación del proceso e indicadores para el módulo ${activeModuleId}.`}
+            />
+
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+                <TabsList className="max-w-full">
+                  {TABS.map((tab) => (
+                    <TabsTrigger key={tab.id} value={tab.id}>
+                      {tab.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
             </div>
 
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
-              <TabsList className="bg-foreground/5 border border-[var(--glass-border)] w-full justify-start h-auto p-1 rounded-xl flex-wrap">
-                {TABS.map((tab) => (
-                  <TabsTrigger key={tab.id} value={tab.id} className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all">
-                    {tab.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
-
-            {(() => {
-              const infoMap: Record<string, {desc: string}> = {
-                'eqavet': { desc: 'Indicadores de calidad y cumplimiento del marco EQAVET.' },
-                'propuestas': { desc: 'Propuestas de mejora para el próximo curso.' },
-              };
-              const info = infoMap[activeTab] || { desc: 'Gestión de la calidad.' };
-              return (
-                <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
-                  <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
-                  <p className='text-sm text-muted'>{info.desc}</p>
-                </div>
-              );
-            })()}
+            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de la calidad.'} />
 
             <div className="space-y-4">
               {activeTab === 'eqavet' && <EqavetTab />}

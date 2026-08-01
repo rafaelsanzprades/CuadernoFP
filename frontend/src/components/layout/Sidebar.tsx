@@ -1,7 +1,7 @@
 "use client";
-import { ChevronLeft, ChevronRight, CalendarDays, ChevronDown, Cloud, HardDrive, FolderOpen, Hourglass, Save, AlertTriangle, HelpCircle, Shield } from "lucide-react";
+import { ChevronLeft, ChevronRight, CalendarDays, FolderOpen, Hourglass, Save, AlertTriangle, HelpCircle, Shield } from "lucide-react";
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useAppStore } from '@/store/useAppStore';
 import { navGroups } from '@/config/navigation';
 import { initialGroups } from '@/store/initialData';
@@ -10,17 +10,15 @@ import React from 'react';
 import { useMounted } from '@/hooks/useMounted';
 import { Tooltip } from '@/components/ui/Tooltip';
 import { InstallPwaButton } from '@/components/features/settings/InstallPwaButton';
-import toast from 'react-hot-toast';
 import { fileManager } from '@/services/fileManager';
 import { useTranslation } from "react-i18next";
 
 export default function Sidebar() {
   const isMounted = useMounted();
   const pathname = usePathname();
-  const router = useRouter();
   const { t } = useTranslation();
   const storeState = useAppStore();
-  const { activeModuleId, activeCursoId, toggleSidebar, setDataSource, workspaceHandle, syncStatus } = storeState;
+  const { activeModuleId, activeCursoId, toggleSidebar, workspaceHandle, syncStatus, groupFileSource } = storeState;
   const isSidebarOpen = isMounted ? storeState.isSidebarOpen : true;
   const dataSource = isMounted ? storeState.dataSource : 'demo';
   const [localGroups, setLocalGroups] = useState<string[]>([]);
@@ -31,10 +29,15 @@ export default function Sidebar() {
     }
   }, [workspaceHandle, dataSource]);
 
-  const demoGroupValue = (isMounted && activeCursoId) ? 
-    (activeCursoId.includes('0223') ? '0223'
-    : activeCursoId.toUpperCase().includes('1B') ? '0237-1b'
-    : activeCursoId.toUpperCase().includes('1C') ? '0237-1c' : '0237-1a') : '0237-1a';
+  // REALES sin nada cargado todavía: crea una Programación/Curso/Grupo en blanco
+  // para que cualquier página muestre su formato normal en lugar de la tarjeta vacía.
+  useEffect(() => {
+    if (isMounted && dataSource === 'local' && !storeState.moduleData && !storeState.cursoData) {
+      fileManager.createBlankLocalData();
+    }
+  }, [isMounted, dataSource, storeState.moduleData, storeState.cursoData]);
+
+  // Active demo group is managed via local state now
 
   useEffect(() => {
     const savedScroll = sessionStorage.getItem('sidebar-scroll');
@@ -131,7 +134,9 @@ export default function Sidebar() {
   };
 
   let moduleTitleSuffix = 'CÓDIGO';
-  if (isMounted && activeModuleId) {
+  if (storeState.pdFileSource?.fileName) {
+    moduleTitleSuffix = storeState.pdFileSource.fileName.replace(/\.fpp$/, '').replace(/\.json$/, '');
+  } else if (isMounted && activeModuleId) {
     const code = activeModuleId.split('-')[0];
     moduleTitleSuffix = code;
     let foundAcronym = '';
@@ -153,6 +158,9 @@ export default function Sidebar() {
   }
 
   const cursoTitleSuffix = (() => {
+    if (storeState.cursoFileSource?.fileName) {
+      return storeState.cursoFileSource.fileName.replace(/\.fpc$/, '').replace(/\.json$/, '');
+    }
     if (!isMounted || !activeCursoId) return 'AÑO';
     const idUpper = activeCursoId.toUpperCase();
     let yearMatch = idUpper.match(/20\d{2}-?\d{2}/);
@@ -208,15 +216,15 @@ export default function Sidebar() {
             {(() => {
               const linkContent = (
                 <Link
-                  href="/diario"
+                  href="/agenda"
                   onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
                   className={`flex items-center gap-2.5 px-3 py-3 rounded-lg transition-all duration-150 group shadow-md bg-gradient-to-r ${dataSource === 'demo' ? 'from-warning/20 to-warning/5 border border-warning/40 text-foreground hover:bg-warning/20' : 'from-accent/20 to-accent/5 border border-accent/40 text-foreground hover:bg-accent/20'}`}
                 >
-                  <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === '/diario' ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : (dataSource === 'demo' ? 'text-warning group-hover:scale-110' : 'text-accent group-hover:scale-110')}`}>
+                  <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === '/agenda' ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : (dataSource === 'demo' ? 'text-warning group-hover:scale-110' : 'text-accent group-hover:scale-110')}`}>
                     <CalendarDays className="w-5 h-5" strokeWidth={2} />
                   </span>
                   <div className="flex flex-col gap-1 items-start">
-                    <span className={`text-sm leading-tight whitespace-nowrap font-bold ${pathname === '/diario' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
+                    <span className={`text-sm leading-tight whitespace-nowrap font-bold ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
                       {t('sidebar.agenda')}
                     </span>
                     <span suppressHydrationWarning className={`px-2 py-0.5 rounded text-xs border font-semibold tracking-wider leading-none ${dataSource === 'demo' ? 'text-warning bg-warning/10 border-warning/30' : 'text-accent bg-accent/10 border-accent/30'}`}>
@@ -233,11 +241,11 @@ export default function Sidebar() {
           <div className="pb-2 mt-2 shrink-0">
             <Tooltip content={t('sidebar.agenda')} position="right" delay={0.1}>
               <Link
-                href="/diario"
+                href="/agenda"
                 onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
                 className={`flex justify-center px-0 py-3 rounded-lg transition-all duration-150 group shadow-md bg-gradient-to-r ${dataSource === 'demo' ? 'from-warning/20 to-warning/5 border border-warning/40 text-foreground' : 'from-accent/20 to-accent/5 border border-accent/40 text-foreground'}`}
               >
-                <span className={`flex items-center justify-center ${pathname === '/diario' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : (dataSource === 'demo' ? 'text-warning' : 'text-accent')}`}>
+                <span className={`flex items-center justify-center ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : (dataSource === 'demo' ? 'text-warning' : 'text-accent')}`}>
                   <CalendarDays className="w-5 h-5" strokeWidth={2} />
                 </span>
               </Link>
@@ -253,61 +261,16 @@ export default function Sidebar() {
                 Grupo
               </div>
             </div>
-            <div className="flex bg-foreground/5 rounded-lg p-0.5 w-full gap-0.5">
-              <button
-                onClick={() => { setDataSource('demo'); fileManager.loadDemoData('0237-1a'); toast.success('Modo DEMO'); }}
-                className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-md text-sm font-bold transition-all ${dataSource === 'demo'
-                  ? 'bg-warning/20 text-warning shadow-sm ring-1 ring-warning/30'
-                  : 'text-muted hover:bg-foreground/10 hover:text-foreground'}`}
-              >
-                <Cloud className="w-3.5 h-3.5" /> {t('sidebar.demo')}
-              </button>
-              <button
-                onClick={() => { setDataSource('local'); toast.success('Modo REALES'); }}
-                className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-md text-sm font-bold transition-all ${dataSource === 'local'
-                  ? 'bg-success/20 text-success shadow-sm ring-1 ring-success/30'
-                  : 'text-muted hover:bg-foreground/10 hover:text-foreground'}`}
-              >
-                <HardDrive className="w-3.5 h-3.5" /> {t('sidebar.reales')}
-              </button>
-            </div>
-            
-            {dataSource === 'demo' ? (
-              <div className="relative w-full">
-                <select
-                  className="w-full h-[34px] bg-foreground/5 border rounded-lg pl-3 pr-7 py-1.5 text-sm font-semibold tracking-wide uppercase focus:outline-none cursor-pointer appearance-none transition-colors"
-                  style={{ color: 'var(--warning)', borderColor: 'var(--warning)' }}
-                  value={demoGroupValue}
-                  onChange={(e) => { fileManager.loadDemoData(e.target.value); toast.success(`Grupo ${e.target.value.toUpperCase()}`); }}
-                >
-                  <option value="0237-1a">2026 1A-GM 0237 ICTVE</option>
-                  <option value="0237-1b">2026 1B-GM 0237 ICTVE</option>
-                  <option value="0237-1c">2026 1C-GM 0237 ICTVE</option>
-                  <option value="0223">2026 2A-GM 0223 OA</option>
-                </select>
-                <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none" style={{ color: 'var(--warning)' }} />
-              </div>
-            ) : (!workspaceHandle || localGroups.length === 0) ? (
-              <button
-                onClick={() => router.push('/archivos')}
-                className="w-full h-[34px] bg-foreground/5 border border-success/30 rounded-lg py-1.5 text-sm font-semibold tracking-wide uppercase text-success hover:bg-success/10 transition-colors flex items-center justify-center"
-              >
-                <FolderOpen className="w-4 h-4 mr-2" />
-                {t('sidebar.abrir_grupo')}
-              </button>
-            ) : (
-              <div className="relative w-full">
-                <select
-                  className="w-full h-[34px] bg-foreground/5 border rounded-lg pl-3 pr-7 py-1.5 text-sm font-semibold tracking-wide uppercase focus:outline-none cursor-pointer appearance-none transition-colors"
-                  style={{ color: 'var(--success)', borderColor: 'var(--success)' }}
-                  value={(isMounted ? activeCursoId : '') || ''}
-                  onChange={(e) => useAppStore.getState().setActiveCursoId(e.target.value)}
-                >
-                  {localGroups.map(g => <option key={g} value={g}>{g}</option>)}
-                </select>
-                <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none" style={{ color: 'var(--success)' }} />
-              </div>
-            )}
+
+            <Link
+              href="/archivos"
+              onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
+              className="px-1 text-sm font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
+              style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
+            >
+              <FolderOpen className="w-3.5 h-3.5 shrink-0" />
+              <span className="truncate">{groupFileSource.fileName ? groupFileSource.fileName.replace(/\.fpg$/, '') : t('sidebar.abrir_grupo')}</span>
+            </Link>
           </div>
         )}
 
@@ -358,7 +321,9 @@ export default function Sidebar() {
           const bracketMatch = group.title.match(/^(.*?)\s*\[.*\]$/);
           let baseTitle = bracketMatch ? bracketMatch[1].trim() : group.title;
           const translatedBaseTitle = baseTitle === "Programación" ? t('navGroups.programacion') : baseTitle === "Curso" ? t('navGroups.curso') : baseTitle;
-          const isEmptyLocal = dataSource === 'local' && (!workspaceHandle || localGroups.length === 0);
+          const isEmptyLocal = dataSource === 'local' && (
+            group.title.includes('[Código del módulo]') ? !storeState.moduleData : !storeState.cursoData
+          );
           const infoValue = group.title.includes('[Código del módulo]')
             ? (isEmptyLocal ? t('sidebar.abrir_grupo') : moduleTitleSuffix)
             : group.title.includes('[Año]')
@@ -376,11 +341,9 @@ export default function Sidebar() {
                     <Link
                       href="/archivos"
                       onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
-                      className="mx-1 px-3 py-1.5 rounded-lg border text-xs font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
+                      className="mx-1 text-xs font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
                       style={{
                         color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)',
-                        borderColor: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)',
-                        background: dataSource === 'demo' ? 'color-mix(in srgb, var(--warning) 8%, transparent)' : 'color-mix(in srgb, var(--success) 8%, transparent)',
                       }}
                     >
                       <FolderOpen className="w-3.5 h-3.5" />

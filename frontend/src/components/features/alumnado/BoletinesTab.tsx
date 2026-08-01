@@ -158,7 +158,7 @@ export const BoletinesTab = () => {
                 {/* Datos del alumnado */}
                 <div className="bg-foreground/5 p-6 rounded-xl mb-8 flex items-center justify-between border border-white/5">
                   <div>
-                    <p className="text-sm text-muted uppercase tracking-wider font-semibold mb-1">Alumno/a</p>
+                    <p className="text-sm text-muted tracking-wider font-semibold mb-1">Alumno/a</p>
                     <h2 className="text-2xl font-bold">{currentStudent.Apellidos}, {currentStudent.Nombre}</h2>
                     <div className="flex gap-4 mt-2 text-sm text-muted">
                       <span>ID: <span className="font-mono text-foreground">{currentStudent.ID}</span></span>
@@ -166,7 +166,7 @@ export const BoletinesTab = () => {
                     </div>
                   </div>
                   <div className="text-right bg-background p-4 rounded-xl shadow-sm border border-white/5">
-                    <p className="text-xs text-muted uppercase tracking-wider font-semibold mb-1">Nota Media Estimada</p>
+                    <p className="text-xs text-muted tracking-wider font-semibold mb-1">Nota Media Estimada</p>
                     <div className="text-2xl font-black text-accent">{notaMedia}</div>
                   </div>
                 </div>

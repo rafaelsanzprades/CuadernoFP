@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map, MessageSquare, FileText, Route , Info, FolderOpen } from "lucide-react";
+import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map, MessageSquare, FileText, Route, FolderOpen } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -16,6 +16,8 @@ import { ContextoGrupoTab } from "@/components/features/alumnado/ContextoGrupoTa
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { TabInfoBox } from "@/components/ui/TabInfoBox";
 
 import Link from "next/link";
 
@@ -36,6 +38,11 @@ export default function AlumnadoPage() {
   ];
 
   const activeTabCleanLabel = TABS.find(t_tab => t_tab.id === activeTab)?.cleanLabel;
+
+  const TAB_DESCRIPTIONS: Record<string, string> = {
+    listado: 'Gestión del listado de alumnado y ficha individual.',
+    plano: 'Distribución y plano visual del aula.',
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -236,23 +243,29 @@ export default function AlumnadoPage() {
         
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-4 pb-12">
-            <div className="flex justify-between items-start">
-            <div>
-              <h1 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.alumnado_title')}
-              </h1>
-              <p className="text-muted mt-2 text-lg">{t('pages.alumnado_desc')}</p>
-            </div>
-            
+            <PageHeader icon={Users} title={t('pages.alumnado_title')} description={t('pages.alumnado_desc')} />
+
+          {/* Navigation Tabs */}
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+              <TabsList className="max-w-full">
+                {TABS.map(tab => (
+                  <TabsTrigger key={tab.id} value={tab.id}>
+                    {tab.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
+
             {/* Save Button */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 shrink-0">
               {saveMessage && (
                 <span className={`text-sm font-semibold ${saveMessage.includes("Error") ? "text-danger" : "text-success"}`}>
                   {saveMessage}
                 </span>
               )}
-              <Button 
-                onClick={handleSave} 
+              <Button
+                onClick={handleSave}
                 disabled={saving}
                 className="bg-accent text-background hover:bg-accent/80 font-bold px-6 py-2 rounded-xl flex items-center gap-2"
               >
@@ -261,41 +274,11 @@ export default function AlumnadoPage() {
             </div>
           </div>
 
-          {/* Navigation Tabs */}
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="mb-2 max-w-full overflow-x-auto flex flex-nowrap scrollbar-hide border-b border-[var(--glass-border)] rounded-none bg-transparent">
-              {TABS.map(tab => (
-                <TabsTrigger key={tab.id} value={tab.id} className="whitespace-nowrap shrink-0">
-                  {tab.label}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
+          <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
 
           {/* Tab 1: Alumnado */}
           {activeTab === "listado" && (
             <>
-                              {(() => {
-                const infoMap: Record<string, {title: string, desc: string}> = {
-          'listado': {
-                    'title': 'Alumnado',
-                    'desc': 'Gestión del listado de alumnado y ficha individual.'
-          },
-          'plano': {
-                    'title': 'Plano de clase',
-                    'desc': 'Distribución y plano visual del aula.'
-          }
-};
-                const info = infoMap[activeTab] || { title: 'Herramienta operativa', desc: 'Gestión de ' + activeTab };
-                return (
-                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
-                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
-                    <div>
-                      <p className="text-sm text-muted">{info.desc}</p>
-                    </div>
-                  </div>
-                );
-              })()}
             <Card className="p-6 border-t-4 border-t-blue-500">
               <div className="flex justify-between items-end mb-6">
                 <div className="flex items-center gap-4">

@@ -50,7 +50,7 @@ export function TabAcronimos() {
 
             return (
               <div key={category} className="animate-in fade-in duration-300">
-                <h3 className="text-md font-semibold text-accent mb-3 border-b border-[var(--glass-border)] pb-2">
+                <h3 className="text-sm font-semibold text-accent mb-3 border-b border-[var(--glass-border)] pb-2">
                   {CATEGORY_LABELS[category]}
                 </h3>
                 

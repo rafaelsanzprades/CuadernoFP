@@ -86,7 +86,7 @@ export function TabGrados() {
               <div className="flex items-center gap-3 mb-3">
                 <span className="text-2xl">{g.icon}</span>
                 <div>
-                  <span className="text-sm font-bold uppercase tracking-wider opacity-70">Grado {g.grado}</span>
+                  <span className="text-sm font-bold tracking-wider opacity-70">Grado {g.grado}</span>
                   <h3 className="text-sm font-bold text-foreground leading-tight">{g.nombre}</h3>
                 </div>
               </div>

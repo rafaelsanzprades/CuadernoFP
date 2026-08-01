@@ -1,6 +1,6 @@
 "use client";
-import { AccordionBlock } from "@/components/ui/AccordionBlock";
-import { BarChart, Building2, ClipboardList, Save, Target, TrendingUp, User, Users, AlertTriangle , Info, FolderOpen, Table } from "lucide-react";
+import { TabSync } from "@/components/ui/TabSync";
+import { BarChart, Building2, ClipboardList, Save, Target, TrendingUp, User, Users, AlertTriangle, FolderOpen, Table } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -14,10 +14,12 @@ import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { useTranslation } from "react-i18next";
 import { AnalisisGrupalTab } from "@/components/features/analisis/AnalisisGrupalTab";
 import { AnalisisIndividualTab } from "@/components/features/analisis/AnalisisIndividualTab";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/Tabs";
 import { MatrizCalificacionesTab } from "@/components/features/evaluacion/MatrizCalificacionesTab";
 import EstadisticasTab from "@/components/features/evaluacion/EstadisticasTab";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 
 export default function ProgresoPage() {
@@ -36,6 +38,7 @@ export default function ProgresoPage() {
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
   const { t } = useTranslation();
+  const [activeTab, setActiveTab] = useState("resumen");
   const [activeTabByStudent, setActiveTabByStudent] = useState<Record<string, string>>({});
   const [allStudentsOpen, setAllStudentsOpen] = useState(false);
   const [openStudents, setOpenStudents] = useState<Set<string>>(new Set());
@@ -84,6 +87,7 @@ export default function ProgresoPage() {
   if (!activeModuleId || !activeCursoId) {
     return (
       <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
         <Sidebar />
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
@@ -186,20 +190,18 @@ export default function ProgresoPage() {
         notas_ra[r_id] += n_ce * (peso_ce[ce_id] / 100);
 
         if (!failed_ces_by_ra[r_id]) failed_ces_by_ra[r_id] = 0;
-        // Sólo consideramos suspenso el CE si ha sido evaluado (n_ce > 0) y no llega a la nota
         if (n_ce > 0 && n_ce < config.nota_aprobado) {
           failed_ces_by_ra[r_id]++;
         }
       }
     });
-    // Aplicar reglas de Redondeo y Compensaciones por RA
     Object.keys(notas_ra).forEach(r_id => {
       let n_ra = notas_ra[r_id];
       if (n_ra >= config.umbral_redondeo && n_ra < config.nota_aprobado) {
-        n_ra = config.nota_aprobado; // Redondeo al alza
+        n_ra = config.nota_aprobado;
       }
       if (failed_ces_by_ra[r_id] > config.max_compensables && n_ra >= config.nota_aprobado) {
-        n_ra = config.nota_aprobado - 0.1; // Capped por exceder compensables
+        n_ra = config.nota_aprobado - 0.1;
       }
       notas_ra[r_id] = n_ra;
     });
@@ -209,7 +211,6 @@ export default function ProgresoPage() {
       nota_final += n_ra * ((peso_ra[r_id] || 0) / 100);
     });
 
-    // Aplicar umbral de redondeo a la nota final
     if (nota_final >= config.umbral_redondeo && nota_final < config.nota_aprobado) {
       nota_final = config.nota_aprobado;
     }
@@ -228,7 +229,6 @@ export default function ProgresoPage() {
 
     newEval[evRowIdx][act_id] = val;
 
-    // Recalculate Note Final
     const { nota_final } = calcularNotas(al_id, newEval[evRowIdx]);
     newEval[evRowIdx]["Nota_Final"] = Number(nota_final.toFixed(2));
 
@@ -284,7 +284,6 @@ export default function ProgresoPage() {
     const uds_found: string[] = [];
     const prs_found: string[] = [];
 
-    // Buscar en UDs
     df_ud.forEach((ud: any) => {
       if (Number(ud[ra_id]) > 0) {
         const uid = String(ud.id_ud);
@@ -295,7 +294,6 @@ export default function ProgresoPage() {
       }
     });
 
-    // Buscar en Prácticas
     df_pr.forEach((pr: any) => {
       if (Number(pr[ra_id]) > 0) {
         prs_found.push(String(pr.ID));
@@ -309,69 +307,344 @@ export default function ProgresoPage() {
     };
   });
 
+  const TABS = [
+    { id: "resumen", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.resumen')}</>, cleanLabel: t('tabs.resumen') },
+    { id: "estadisticas", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Estadísticas</>, cleanLabel: "Estadísticas" },
+    { id: "matriz", label: <><span className="inline-flex"><Table className="w-[1.2em] h-[1.2em] mr-1" /></span> Matriz (Excel)</>, cleanLabel: "Matriz (Excel)" },
+    { id: "detalle", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.detalle')}</>, cleanLabel: t('tabs.detalle') },
+    { id: "grupal", label: <><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.grupal')}</>, cleanLabel: t('tabs.grupal') },
+    { id: "individual", label: <><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.individual')}</>, cleanLabel: t('tabs.individual') }
+  ];
+
+  const TAB_DESCRIPTIONS: Record<string, string> = {
+    resumen: 'Panel global de rendimiento y calificaciones medias.',
+    estadisticas: 'Estadísticas descriptivas y visualizaciones del rendimiento del grupo.',
+    matriz: 'Cuaderno del profesor. Vista tipo Excel para registro ágil de notas.',
+    detalle: 'Progreso y trazabilidad detallada por alumnado.',
+    grupal: 'Desempeño y estadísticas comparativas del grupo.',
+    individual: 'Hoja de progreso individual para tutorías.',
+  };
+
   return (
     <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header />
+        <Header breadcrumbSuffix={TABS.find(t => t.id === activeTab)?.label} />
 
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-3 pb-12">
-            <div className="flex justify-between items-start">
-            <div>
-              <h1 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <span className="inline-flex"><TrendingUp className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('pages.evaluacion_title')}
-              </h1>
-              <p className="text-muted mt-2 text-lg">{t('pages.evaluacion_desc')}</p>
-            </div>
-            {/* Save Button */}
-            <div className="flex items-center gap-4">
-              {saveMessage && (
-                <span className={`text-sm font-semibold ${saveMessage.includes("Error") ? "text-danger" : "text-success"}`}>
-                  {saveMessage}
-                </span>
-              )}
-              <Button 
-                onClick={handleSave} 
-                disabled={saving}
-                className="bg-accent text-background hover:bg-accent/80 font-bold px-6 py-2 rounded-xl flex items-center gap-2"
-              >
-                {saving ? "Guardando..." : <>Guardar cambios <span className="inline-flex"><Save className="w-[1.2em] h-[1.2em] mr-1" /></span></>}
-              </Button>
-            </div>
-          </div>
+            <PageHeader icon={TrendingUp} title={t('pages.evaluacion_title')} description={t('pages.evaluacion_desc')} />
 
-          <div className="space-y-4">
-            <AccordionBlock
-              title="Resumen y Estadísticas"
-              icon={<Target className="w-5 h-5" />}
-              defaultOpen={true}
-            >
-              <div className="mt-4 space-y-6">
-                <AnalisisGrupalTab setActiveTab={() => {}} />
-                <div className="border-t border-[var(--glass-border)] pt-6">
-                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2"><BarChart className="w-6 h-6" /> Estadísticas Generales</h3>
-                  <EstadisticasTab />
-                </div>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+                <TabsList className="max-w-full">
+                  {TABS.map(tab => (
+                    <TabsTrigger key={tab.id} value={tab.id}>
+                      {tab.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
+
+              {/* Save Button */}
+              <div className="flex items-center gap-4 shrink-0">
+                {saveMessage && (
+                  <span className={`text-sm font-semibold ${saveMessage.includes("Error") ? "text-danger" : "text-success"}`}>
+                    {saveMessage}
+                  </span>
+                )}
+                <Button
+                  onClick={handleSave}
+                  disabled={saving}
+                  className="bg-accent text-background hover:bg-accent/80 font-bold px-6 py-2 rounded-xl flex items-center gap-2"
+                >
+                  {saving ? "Guardando..." : <>Guardar cambios <span className="inline-flex"><Save className="w-[1.2em] h-[1.2em] mr-1" /></span></>}
+                </Button>
               </div>
-            </AccordionBlock>
+            </div>
 
-            <AccordionBlock
-              title="Matriz de calificaciones"
-              icon={<Table className="w-5 h-5" />}
-            >
-              <div className="mt-4"><MatrizCalificacionesTab /></div>
-            </AccordionBlock>
+          <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
 
-            <AccordionBlock
-              title="Detalle por alumnado"
-              icon={<Users className="w-5 h-5" />}
-            >
-              <div className="space-y-3 mt-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-muted mt-1">Notas individuales por alumnado, instrumento de evaluación y nivel de adquisición de RA.</p>
-                  </div>
+          {/* TAB 1: RESUMEN */}
+          {activeTab === "resumen" && (
+            <div className="space-y-4 animate-in fade-in duration-500">
+              
+              {/* Bloque 1: Resumen de calificaciones por trimestres */}
+              <Card className="p-6 border-t-4 border-t-blue-500">
+                <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-5">
+                  <span><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Resumen de calificaciones por trimestres
+                </h2>
+                <div className="overflow-x-auto">
+                  {(() => {
+                    const tipos = [
+                      { key: "Teoria", label: "Exámenes teóricos", color: "blue" },
+                      { key: "Practica", label: "Exámenes prácticos", color: "emerald" },
+                      { key: "Informes", label: "Informes de ejercicios", color: "orange" },
+                      { key: "Tareas", label: "Cuaderno de tareas", color: "purple" },
+                    ];
+                    const tris = [
+                      { key: "1T", label: "1er trimestre" },
+                      { key: "2T", label: "2º trimestre" },
+                      { key: "3T", label: "3er trimestre" },
+                    ];
+
+                    const getStats = (triKey: string, tipoKey: string) => {
+                      const acts = (acts_by_tri[triKey] || []).filter((a: any) => a.Tipo === tipoKey);
+                      if (acts.length === 0) return null;
+                      const allGrades: number[] = [];
+                      df_evaluable.forEach((al: any) => {
+                        const evRow = df_eval.find((e: any) => e.ID === al.ID);
+                        if (!evRow) return;
+                        acts.forEach((act: any) => {
+                          const v = Number(evRow[act.id_act]);
+                          if (!isNaN(v) && v > 0) allGrades.push(v);
+                        });
+                      });
+                      if (allGrades.length === 0) return { min: 0, avg: 0, max: 0 };
+                      return {
+                        min: Math.min(...allGrades),
+                        avg: allGrades.reduce((a, b) => a + b, 0) / allGrades.length,
+                        max: Math.max(...allGrades),
+                      };
+                    };
+
+                    return (
+                      <table className="w-full text-sm border-collapse">
+                        <thead>
+                          <tr className="border-b border-[var(--glass-border)]">
+                            <th className="p-3 text-left text-muted font-semibold" rowSpan={2}>Trimestre</th>
+                            {tipos.map(t => (
+                              <th key={t.key} colSpan={3} className={`p-2 text-center text-${t.color}-400 font-semibold border-l border-[var(--glass-border)]`}>{t.label}</th>
+                            ))}
+                          </tr>
+                          <tr className="border-b border-[var(--glass-border)] text-xs text-muted">
+                            {tipos.map(t => (
+                              <React.Fragment key={t.key}>
+                                <th className="p-2 text-center border-l border-[var(--glass-border)]">Mín</th>
+                                <th className="p-2 text-center">Media</th>
+                                <th className="p-2 text-center">Máx</th>
+                              </React.Fragment>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {tris.map(tri => (
+                            <tr key={tri.key} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
+                              <td className="p-3 font-semibold text-foreground">{tri.label}</td>
+                              {tipos.map(t => {
+                                const s = getStats(tri.key, t.key);
+                                return (
+                                  <React.Fragment key={t.key}>
+                                    <td className="p-3 text-center border-l border-[var(--glass-border)]">
+                                      <span className={`text-${t.color}-400/70 font-mono`}>{s ? s.min.toFixed(1) : '-'}</span>
+                                    </td>
+                                    <td className="p-3 text-center">
+                                      <span className={`bg-${t.color}-500/15 text-${t.color}-400 font-bold px-2 py-0.5 rounded-md`}>{s ? s.avg.toFixed(1) : '-'}</span>
+                                    </td>
+                                    <td className="p-3 text-center">
+                                      <span className={`text-${t.color}-400/70 font-mono`}>{s ? s.max.toFixed(1) : '-'}</span>
+                                    </td>
+                                  </React.Fragment>
+                                );
+                              })}
+                            </tr>
+                          ))}
+                          <tr className="border-t-2 border-[var(--glass-border)] bg-foreground/5">
+                            <td className="p-4 font-extrabold text-foreground text-lg">Total</td>
+                            {tipos.map(t => {
+                              const allGrades: number[] = [];
+                              df_evaluable.forEach((al: any) => {
+                                const evRow = df_eval.find((e: any) => e.ID === al.ID);
+                                if (!evRow) return;
+                                df_act.filter((a: any) => a.Tipo === t.key).forEach((act: any) => {
+                                  const v = Number(evRow[act.id_act]);
+                                  if (!isNaN(v) && v > 0) allGrades.push(v);
+                                });
+                              });
+                              const s = allGrades.length > 0
+                                ? { min: Math.min(...allGrades), avg: allGrades.reduce((a, b) => a + b, 0) / allGrades.length, max: Math.max(...allGrades) }
+                                : null;
+                              return (
+                                <React.Fragment key={t.key}>
+                                  <td className="p-4 text-center border-l border-[var(--glass-border)]">
+                                    <span className={`text-${t.color}-400/80 font-mono font-bold`}>{s ? s.min.toFixed(1) : '-'}</span>
+                                  </td>
+                                  <td className="p-4 text-center">
+                                    <span className={`bg-${t.color}-500/20 text-${t.color}-400 font-extrabold text-lg px-3 py-1 rounded-lg`}>{s ? s.avg.toFixed(1) : '-'}</span>
+                                  </td>
+                                  <td className="p-4 text-center">
+                                    <span className={`text-${t.color}-400/80 font-mono font-bold`}>{s ? s.max.toFixed(1) : '-'}</span>
+                                  </td>
+                                </React.Fragment>
+                              );
+                            })}
+                          </tr>
+                        </tbody>
+                      </table>
+                    );
+                  })()}
+                </div>
+              </Card>
+
+              {/* Bloque 2: Resumen de Resultados de aprendizaje por trimestres */}
+              <Card className="p-6 border-t-4 border-t-emerald-500">
+                <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-5">
+                  <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Resumen de resultados de aprendizaje por trimestres
+                </h2>
+                <div className="space-y-5">
+                  {Object.keys(ra_info).map(ra_id => {
+                    const info = ra_info[ra_id];
+                    const r_data = ra_to_tri[ra_id];
+                    const tris = r_data.tris;
+
+                    const notasAlumnado: number[] = [];
+                    df_evaluable.forEach((al: any) => {
+                      const evalData = df_eval.find((e: any) => e.ID === al.ID);
+                      if (!evalData) return;
+                      const notas_student: Record<string, number> = {
+                        "1T": Number(evalData["1T_Nota"]) || 0,
+                        "2T": Number(evalData["2T_Nota"]) || 0,
+                        "3T": Number(evalData["3T_Nota"]) || 0,
+                      };
+                      let avg = 0;
+                      if (tris.length > 0) {
+                        avg = tris.reduce((sum: number, t: string) => sum + notas_student[t], 0) / tris.length;
+                      } else {
+                        avg = Number(evalData["Nota_Final"]) || 0;
+                      }
+                      notasAlumnado.push(avg);
+                    });
+
+                    const minN = notasAlumnado.length > 0 ? Math.min(...notasAlumnado) : 0;
+                    const maxN = notasAlumnado.length > 0 ? Math.max(...notasAlumnado) : 0;
+                    const avgN = notasAlumnado.length > 0 ? notasAlumnado.reduce((a, b) => a + b, 0) / notasAlumnado.length : 0;
+
+                    const getColor = (v: number) => v >= 9 ? '#1abc9c' : v >= 7 ? '#2ecc71' : v >= 5 ? '#f39c12' : '#e74c3c';
+
+                    return (
+                      <div key={ra_id} className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] p-4">
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center gap-3">
+                            <span className="font-bold text-foreground">{ra_id}</span>
+                            <span className="text-xs text-muted">({info.pond.toFixed(1)}%)</span>
+                            <span className="text-sm text-muted truncate max-w-md">{info.desc}</span>
+                          </div>
+                          <div className="flex items-center gap-4 text-xs">
+                            <span className="text-muted">Trimestres: {tris.join(', ')}</span>
+                          </div>
+                        </div>
+
+                        {/* Bar visualization 0-10 */}
+                        <div className="relative h-8 bg-foreground/20 rounded-full border border-[var(--glass-border)] overflow-hidden">
+                          {(() => {
+                            const interpolateColor = (val: number) => {
+                              const pct = Math.max(0, Math.min(1, val / 10));
+                              const stops = [
+                                { p: 0, r: 231, g: 76, b: 60 },
+                                { p: 0.25, r: 230, g: 126, b: 34 },
+                                { p: 0.5, r: 241, g: 196, b: 15 },
+                                { p: 0.75, r: 127, g: 190, b: 58 },
+                                { p: 1, r: 39, g: 174, b: 96 },
+                              ];
+                              let i = 0;
+                              for (i = 0; i < stops.length - 1; i++) { if (pct <= stops[i + 1].p) break; }
+                              const s1 = stops[i], s2 = stops[Math.min(i + 1, stops.length - 1)];
+                              const t = s2.p > s1.p ? (pct - s1.p) / (s2.p - s1.p) : 0;
+                              const r = Math.round(s1.r + (s2.r - s1.r) * t);
+                              const g = Math.round(s1.g + (s2.g - s1.g) * t);
+                              const b = Math.round(s1.b + (s2.b - s1.b) * t);
+                              return `rgb(${r},${g},${b})`;
+                            };
+                            return (
+                              <div
+                                className="absolute top-1 bottom-1 rounded-full"
+                                style={{
+                                  left: `${(minN / 10) * 100}%`,
+                                  width: `${Math.max(((maxN - minN) / 10) * 100, 0.5)}%`,
+                                  background: `linear-gradient(to right, ${interpolateColor(minN)}, ${interpolateColor((minN + maxN) / 2)}, ${interpolateColor(maxN)})`,
+                                  opacity: 0.85,
+                                }}
+                              />
+                            );
+                          })()}
+                          <div className="absolute top-0 bottom-0 w-px bg-warning/10" style={{ left: '50%' }} />
+
+                          {/* Min marker */}
+                          <div
+                            className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-danger bg-danger/10"
+                            style={{ left: `calc(${(minN / 10) * 100}% - 6px)` }}
+                            title={`Mín: ${minN.toFixed(1)}`}
+                          />
+                          {/* Mean marker */}
+                          <div
+                            className="absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 shadow-lg"
+                            style={{
+                              left: `calc(${(avgN / 10) * 100}% - 10px)`,
+                              borderColor: getColor(avgN),
+                              backgroundColor: getColor(avgN),
+                            }}
+                            title={`Media: ${avgN.toFixed(1)}`}
+                          />
+                          {/* Max marker */}
+                          <div
+                            className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-success bg-success/10"
+                            style={{ left: `calc(${(maxN / 10) * 100}% - 6px)` }}
+                            title={`Máx: ${maxN.toFixed(1)}`}
+                          />
+                        </div>
+
+                        {/* Legend */}
+                        <div className="flex items-center justify-between mt-2 text-xs">
+                          <span className="text-muted/80">0</span>
+                          <div className="flex items-center gap-6">
+                            <span className="flex items-center gap-1">
+                              <span className="w-2.5 h-2.5 rounded-full bg-danger/10 border border-danger inline-block" />
+                              <span className="text-danger font-mono">{minN.toFixed(1)}</span>
+                              <span className="text-muted">Mín</span>
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <span className="w-3.5 h-3.5 rounded-full inline-block" style={{ backgroundColor: getColor(avgN) }} />
+                              <span className="font-bold font-mono" style={{ color: getColor(avgN) }}>{avgN.toFixed(1)}</span>
+                              <span className="text-muted">Media</span>
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <span className="w-2.5 h-2.5 rounded-full bg-success/10 border border-success inline-block" />
+                              <span className="text-success font-mono">{maxN.toFixed(1)}</span>
+                              <span className="text-muted">Máx</span>
+                            </span>
+                          </div>
+                          <span className="text-muted/80">10</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </Card>
+
+            </div>
+          )}
+
+          {/* TAB ESTADISTICAS */}
+          {activeTab === "estadisticas" && (
+            <div className="space-y-4 animate-in fade-in duration-500">
+              <EstadisticasTab />
+            </div>
+          )}
+
+          {/* TAB: MATRIZ EXCEL */}
+          {activeTab === "matriz" && <MatrizCalificacionesTab />}
+
+          {/* TAB 2: DETALLE POR ALUMNADO */}
+          {activeTab === "detalle" && (
+            <div className="space-y-3 animate-in fade-in duration-500">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
+                    <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Detalle por alumnado
+                  </h2>
+                  <p className="text-muted mt-1">Notas individuales por alumnado, instrumento de evaluación y nivel de adquisición de RA.</p>
+                </div>
                 <Button
                   variant="secondary"
                   onClick={() => {
@@ -397,7 +670,6 @@ export default function ProgresoPage() {
                   const sigad = getSigadInfo(nota_prev);
                   const activeStudentTab = activeTabByStudent[al_id] || "1T";
 
-                  // Calcular RAs para el alumnado individual
                   const notas_student: Record<string, number> = {
                     "1T": Number(evRow["1T_Nota"]) || 0.0,
                     "2T": Number(evRow["2T_Nota"]) || 0.0,
@@ -493,17 +765,16 @@ export default function ProgresoPage() {
                               
                               {/* BLOQUE 1: Detalle de calificaciones por instrumento */}
                               <div className="flex flex-col lg:flex-row gap-8">
-                                {/* Left: Instrument Inputs */}
                                 <div className="flex-1">
                                   <h3 className="font-bold text-foreground mb-4 flex items-center gap-2">
-                                    <span><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Detalle de Calificaciones por Instrumento
+                                    <span><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Detalle de calificaciones por instrumento
                                   </h3>
                                   <div onClick={(e) => e.stopPropagation()}>
                                     <Tabs value={activeStudentTab} onValueChange={(val) => setActiveTabByStudent(prev => ({ ...prev, [al_id]: val }))}>
                                       <TabsList className="mb-4 max-w-full">
                                         {["1T", "2T", "3T"].map(t => (
                                           <TabsTrigger key={t} value={t}>
-                                            {t === "1T" ? "1º Trimestre" : t === "2T" ? "2º Trimestre" : "3º Trimestre"}
+                                            {t === "1T" ? "1º trimestre" : t === "2T" ? "2º trimestre" : "3º trimestre"}
                                           </TabsTrigger>
                                         ))}
                                       </TabsList>
@@ -546,7 +817,7 @@ export default function ProgresoPage() {
                                   <div>
                                     <h4 className="font-bold text-foreground mb-4">Calificación de acta</h4>
                                     <div className="mb-4">
-                                      <label className="text-xs text-muted tracking-wider mb-1.5 block font-bold">Nota Final (Manual / Calc)</label>
+                                      <label className="text-xs text-muted tracking-wider mb-1.5 block font-bold">Nota final (manual / calc)</label>
                                       <input
                                         type="number"
                                         min="1" max="10" step="0.1"
@@ -569,14 +840,14 @@ export default function ProgresoPage() {
                               {/* BLOQUE 2: Grado de consecución de los RA por alumnado */}
                               <div className="pt-6 border-t border-[var(--glass-border)] space-y-4">
                                 <h3 className="font-bold text-foreground flex items-center gap-2">
-                                  <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Consecución de Resultados de aprendizaje (RA)
+                                  <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Consecución de resultados de aprendizaje (RA)
                                 </h3>
                                 <div className="space-y-5">
                                   {resultados_ra.map((r, idx) => {
-                                    let bar_color = "#dc3545"; // Rojo
-                                    if (r.prop >= 100) bar_color = "#198754"; // Verde
-                                    else if (r.prop >= 80) bar_color = "#0d6efd"; // Azul
-                                    else if (r.prop >= 50) bar_color = "#ffc107"; // Amarillo
+                                    let bar_color = "#dc3545";
+                                    if (r.prop >= 100) bar_color = "#198754";
+                                    else if (r.prop >= 80) bar_color = "#0d6efd";
+                                    else if (r.prop >= 50) bar_color = "#ffc107";
 
                                     return (
     <div key={idx} className="flex flex-col md:flex-row gap-4 items-start bg-background/30 p-4 rounded-xl border border-white/5">
@@ -625,20 +896,25 @@ export default function ProgresoPage() {
                   );
                 })}
               </div>
-              </div>
-            </AccordionBlock>
+            </div>
+          )}
 
-            <AccordionBlock
-              title="Progreso Individual"
-              icon={<User className="w-5 h-5" />}
-            >
-              <div className="mt-4"><AnalisisIndividualTab /></div>
-            </AccordionBlock>
-          </div>
-        </MotionWrapper>
-      </main>
-    </div>
+          {/* TAB 3: GRUPAL */}
+          {activeTab === "grupal" && (
+            <div className="animate-in fade-in duration-500">
+              <AnalisisGrupalTab />
+            </div>
+          )}
+
+          {/* TAB 4: INDIVIDUAL */}
+          {activeTab === "individual" && (
+            <div className="animate-in fade-in duration-500">
+              <AnalisisIndividualTab />
+            </div>
+          )}
+          </MotionWrapper>
+        </main>
+      </div>
     </div>
       );
 }
-

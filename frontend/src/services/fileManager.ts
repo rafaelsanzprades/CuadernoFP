@@ -118,35 +118,36 @@ export const fileManager = {
 
   // ── DEMO ────────────────────────────────────────────────
 
-  /** Load demo data from static .fpg files in /demo/ */
   async loadDemoData(groupId?: string): Promise<void> {
-    // If no group is passed, default to 0237-1a
-    if (!groupId || groupId === '0237') groupId = '0237-1a';
+    // If no group is passed, default to a sensible demo group
+    if (!groupId || groupId === '0237' || groupId === '0237-1a') groupId = '202526 G 1A-GM 0237-ICTVE.fpg';
 
-    // Normalize input to module code (for the static file name)
-    const fpgName = groupId.toLowerCase();
-    const moduleCode = groupId.startsWith('0223') ? '0223' : '0237';
+    const fpgName = groupId;
+    const moduleCode = groupId.includes('0223') ? '0223' : '0237';
     const store = useAppStore.getState();
 
     try {
       // 1. Fetch .fpg (Group project file)
-      const fpgRes = await fetch(`/demo/${fpgName}.fpg.json`);
-      if (!fpgRes.ok) throw new Error(`Failed to fetch /demo/${fpgName}.fpg.json`);
-      const groupData = await fpgRes.json();
+      const fpgRes = await fetch(`/demo/${encodeURIComponent(fpgName)}`);
+      if (!fpgRes.ok) throw new Error(`Failed to fetch /demo/${fpgName}`);
+      const fpgText = await fpgRes.text();
+      const groupData = JSON.parse(fpgText);
 
       if (groupData.tipo !== "GRUPO" || !groupData.archivos) {
         throw new Error("Invalid .fpg format");
       }
 
       // 2. Fetch linked .fpp (programación)
-      const fppRes = await fetch(`/demo/${groupData.archivos.programacion}`);
+      const fppRes = await fetch(`/demo/${encodeURIComponent(groupData.archivos.programacion)}`);
       if (!fppRes.ok) throw new Error(`Failed to fetch /demo/${groupData.archivos.programacion}`);
-      const pdData = await fppRes.json();
+      const pdText = await fppRes.text();
+      const pdData = JSON.parse(pdText);
 
       // 3. Fetch linked .fpc (curso)
-      const fpcRes = await fetch(`/demo/${groupData.archivos.curso}`);
+      const fpcRes = await fetch(`/demo/${encodeURIComponent(groupData.archivos.curso)}`);
       if (!fpcRes.ok) throw new Error(`Failed to fetch /demo/${groupData.archivos.curso}`);
-      let cursoDataArray = await fpcRes.json();
+      const fpcText = await fpcRes.text();
+      let cursoDataArray = JSON.parse(fpcText);
       
       // If legacy array format, pick the first
       let cursoData = Array.isArray(cursoDataArray) ? cursoDataArray[0] : cursoDataArray;
@@ -162,13 +163,37 @@ export const fileManager = {
       store.setActiveCursoId(cursoId);
       store.setCursoData(cursoData as any);
       
-      // Demo files have no local file handle
-      store.setPdFileSource({ type: 'none' });
-      store.setCursoFileSource({ type: 'none' });
+      // Demo files have no local file handle, but we store the filename for UI
+      store.setPdFileSource({ type: 'none', fileName: groupData.archivos.programacion });
+      store.setCursoFileSource({ type: 'none', fileName: groupData.archivos.curso });
+      store.setGroupFileSource({ type: 'none', fileName: fpgName });
 
     } catch (e) {
       console.error("Error loading demo data from fpg:", e);
     }
+  },
+
+  /** Create a blank Programación + Curso ("sin nombre") so REALES pages render normally with no data loaded yet */
+  createBlankLocalData(): void {
+    const store = useAppStore.getState();
+
+    store.setActiveModuleId('sin-nombre-pd');
+    store.setModuleData({
+      info_modulo: { nombre: 'Programación sin nombre' },
+      df_ud: [], df_sesiones: [], df_ra: [], df_ce: [], df_tareas: [], df_act: [],
+      df_instr: [], df_indicadores: [],
+      dual_regimen: 'ninguno', eqavet_evaluacion: {}, config_contexto: {},
+    } as any);
+    store.setPdFileSource({ type: 'new', fileName: 'Programación sin nombre' });
+
+    store.setActiveCursoId('sin-nombre-curso');
+    store.setCursoData({
+      df_al: [], df_eval: [], daily_ledger: {}, tutoria_ledger: {},
+      horario: {}, info_fechas: {}, plano_clase: {},
+    } as any);
+    store.setCursoFileSource({ type: 'new', fileName: 'Curso sin nombre' });
+
+    store.setGroupFileSource({ type: 'new', fileName: 'Grupo sin nombre' });
   },
 
   // ── NEW (Wizard) ────────────────────────────────────────
@@ -545,6 +570,11 @@ export const fileManager = {
           type: 'local',
           fileHandle: cursoHandle,
           fileName: cursoFile.name,
+        });
+        store.setGroupFileSource({
+          type: 'local',
+          fileHandle: groupHandle,
+          fileName: groupFileName,
         });
         return true;
       }

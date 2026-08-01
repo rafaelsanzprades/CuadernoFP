@@ -117,7 +117,7 @@ export function TutoriaTab() {
                     
                     <div className="flex flex-wrap gap-4 mb-4 pr-8">
                       <div className="flex-1 min-w-[150px]">
-                        <label className="block text-xs uppercase text-muted-foreground font-bold mb-1">Fecha</label>
+                        <label className="block text-xs text-muted-foreground font-bold mb-1">Fecha</label>
                         <input 
                           type="date" 
                           value={tut.fecha || ""} 
@@ -126,7 +126,7 @@ export function TutoriaTab() {
                         />
                       </div>
                       <div className="flex-1 min-w-[150px]">
-                        <label className="block text-xs uppercase text-muted-foreground font-bold mb-1">Ámbito</label>
+                        <label className="block text-xs text-muted-foreground font-bold mb-1">Ámbito</label>
                         <select 
                           value={tut.ambito || "Alumno/a"} 
                           onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "ambito", e.target.value)}
@@ -139,7 +139,7 @@ export function TutoriaTab() {
                         </select>
                       </div>
                       <div className="flex-1 min-w-[150px]">
-                        <label className="block text-xs uppercase text-muted-foreground font-bold mb-1">Canal</label>
+                        <label className="block text-xs text-muted-foreground font-bold mb-1">Canal</label>
                         <select 
                           value={tut.canal || "Presencial"} 
                           onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "canal", e.target.value)}
@@ -156,7 +156,7 @@ export function TutoriaTab() {
 
                     <div className="space-y-3">
                       <div>
-                        <label className="block text-xs uppercase text-muted-foreground font-bold mb-1">Tema tratado / Desarrollo</label>
+                        <label className="block text-xs text-muted-foreground font-bold mb-1">Tema tratado / Desarrollo</label>
                         <textarea 
                           value={tut.tema || ""}
                           onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "tema", e.target.value)}
@@ -165,7 +165,7 @@ export function TutoriaTab() {
                         />
                       </div>
                       <div>
-                        <label className="block text-xs uppercase text-success font-bold mb-1">Acuerdos / Compromisos</label>
+                        <label className="block text-xs text-success font-bold mb-1">Acuerdos / Compromisos</label>
                         <textarea 
                           value={tut.acuerdos || ""}
                           onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "acuerdos", e.target.value)}

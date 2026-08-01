@@ -234,7 +234,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
               <div className="space-y-4">
                 {Object.entries(grouped).map(([groupName, modules]) => (
                   <div key={groupName}>
-                    <h4 className="text-xs font-bold text-muted uppercase tracking-wider mb-2 px-1">{groupName}</h4>
+                    <h4 className="text-xs font-bold text-muted tracking-wider mb-2 px-1">{groupName}</h4>
                     <div className="space-y-1">
                       {modules.map(m => (
                         <button

@@ -1,7 +1,8 @@
 "use client";
-import { AccordionBlock } from "@/components/ui/AccordionBlock";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/Tabs";
+import { TabSync } from "@/components/ui/TabSync";
 import { useTranslation } from "react-i18next";
-import { Calendar, FileEdit, MapPin, ClipboardCheck, AlertTriangle , Info, FolderOpen } from "lucide-react";
+import { Calendar, FileEdit, MapPin, ClipboardCheck, AlertTriangle, FolderOpen } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -12,8 +13,17 @@ import { AlertaAbandonoTab } from "@/components/features/diario/AlertaAbandonoTa
 import { TutoriaTab } from "@/components/features/alumnado/TutoriaTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+
+const TAB_DESCRIPTIONS: Record<string, string> = {
+  clases: 'Diario de clases, sesiones lectivas y registro de contingencias.',
+  tutoria: 'Seguimiento tutorial del alumnado.',
+  asistencia: 'Control de asistencia del alumnado.',
+  abandono: 'Alertas y seguimiento del riesgo de abandono escolar.',
+};
 
 export default function SeguimientoPage() {
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData } = useAppStore();
@@ -21,6 +31,8 @@ export default function SeguimientoPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
+  const [activeTab, setActiveTab] = useState("clases");
+  const [allDiarioOpen, setAllDiarioOpen] = useState(false);
 
 
   useEffect(() => {
@@ -173,39 +185,152 @@ export default function SeguimientoPage() {
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
+        <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
 
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-4">
-            <div>
-              <h1 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <span className="inline-flex"><MapPin className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguimiento
-              </h1>
-              <p className="text-muted mt-2 text-sm">Tutoría, asistencia y abandonos.</p>
-            </div>
+            <PageHeader
+              icon={MapPin}
+              title="Seguimiento"
+              description="Tutoría, asistencia y abandonos."
+            />
 
-            <div className="space-y-4">
-              <AccordionBlock
-                title="Tutoría"
-                icon={<ClipboardCheck className="w-5 h-5" />}
-                defaultOpen={true}
-              >
-                <div className="mt-4"><TutoriaTab /></div>
-              </AccordionBlock>
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+                <TabsList className="max-w-full">
+                  <TabsTrigger value="clases">
+                    <FileEdit className="w-4 h-4 shrink-0" /> Clases
+                  </TabsTrigger>
+                  <TabsTrigger value="tutoria">
+                    <ClipboardCheck className="w-4 h-4 shrink-0" /> Tutoría
+                  </TabsTrigger>
+                  <TabsTrigger value="asistencia">
+                    <ClipboardCheck className="w-4 h-4 shrink-0" /> Asistencia
+                  </TabsTrigger>
+                  <TabsTrigger value="abandono">
+                    <AlertTriangle className="w-4 h-4 shrink-0" /> Alerta de abandono
+                  </TabsTrigger>
+                </TabsList>
+              </div>
 
-              <AccordionBlock
-                title="Asistencia"
-                icon={<ClipboardCheck className="w-5 h-5" />}
-              >
-                <div className="mt-4"><AsistenciaTab /></div>
-              </AccordionBlock>
+              <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Seguimiento del alumnado.'} />
 
-              <AccordionBlock
-                title="Alerta de abandono"
-                icon={<AlertTriangle className="w-5 h-5" />}
-              >
-                <div className="mt-4"><AlertaAbandonoTab /></div>
-              </AccordionBlock>
-            </div>
+              <TabsContent value="clases" className="mt-4">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-lg font-bold flex items-center gap-2 text-foreground">
+                    <FileEdit className="w-5 h-5 text-accent" /> Diario de clases y contingencias
+                  </h2>
+                  <button
+                    onClick={() => {
+                      setAllDiarioOpen(prev => !prev);
+                      document.querySelectorAll('.diario-details').forEach((el) => {
+                        (el as HTMLDetailsElement).open = !allDiarioOpen ? true : false;
+                      });
+                    }}
+                    className="text-sm font-semibold px-4 py-2 rounded-lg border border-[var(--glass-border)] bg-foreground/15 text-foreground/80 hover:bg-foreground/10 hover:text-foreground transition-colors flex items-center gap-2"
+                  >
+                    <span>{allDiarioOpen ? '▲' : '▼'}</span>
+                    {allDiarioOpen ? 'Colapsar todos' : 'Expandir todos'}
+                  </button>
+                </div>
+                <div className="space-y-4">
+                  {meses_display.map((m_short) => {
+                    const lectivos = getLectivosMes(meses_num[m_short]);
+                    if (lectivos.length === 0) return null;
+
+                    return (
+                      <details key={m_short} open className="diario-details group bg-foreground/5 rounded-lg border border-[var(--glass-border)] overflow-hidden open:bg-foreground/10 transition-colors">
+                        <summary className="p-4 cursor-pointer flex items-center justify-between font-semibold text-lg select-none hover:bg-foreground/5">
+                          <div className="flex items-center gap-3">
+                            <span className="text-info"><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
+                            <span>{meses_nombres[m_short as keyof typeof meses_nombres]} {lectivos[0].getFullYear()}</span>
+                          </div>
+                          <div className="text-sm text-muted">
+                            {lectivos.length} días lectivos <span className="ml-4 group-open:rotate-180 inline-block transition-transform">▼</span>
+                          </div>
+                        </summary>
+                        <div className="p-6 border-t border-[var(--glass-border)] bg-foreground/10">
+                          <div className="relative border-l-2 border-[var(--glass-border)] ml-4 space-y-4 pb-4">
+                            {lectivos.map((d: Date, i: number) => {
+                              const dateStr = d.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+                              const diaSemana = dias_semana_list[d.getDay() - 1];
+                              const udPrev = planning_ledger[dateStr] ? planning_ledger[dateStr].join(', ') : '';
+                              const ledgerEntry = daily_ledger[dateStr] || { sin_docencia: false, seguimiento: "", publico: false };
+
+                              const nodeColor = ledgerEntry.sin_docencia ? 'bg-warning' : (ledgerEntry.seguimiento ? 'bg-info' : 'bg-gray-600');
+
+                              return (
+    <div key={i} className="relative pl-8 group">
+                                  {/* Timeline Node */}
+                                  <div className={`absolute -left-[9px] top-4 w-4 h-4 rounded-full border-4 border-black ${nodeColor} shadow-[0_0_10px_rgba(0,0,0,0.5)] transition-colors duration-300 group-hover:scale-125 z-10`} />
+
+                                  <div className="bg-foreground/5 border border-[var(--glass-border)] rounded-xl p-4 hover:bg-foreground/10 transition-all duration-300 shadow-sm">
+                                    <div className="flex items-center justify-between mb-4">
+                                      <div className="flex items-center gap-3">
+                                        <span className="font-mono text-lg font-bold text-foreground tracking-widest">{dateStr.substring(0,5)}</span>
+                                        <span className="text-xs font-medium text-muted tracking-wider bg-foreground/5 px-2 py-1 rounded">{diaSemana}</span>
+                                        {udPrev && <span className="bg-info/10 text-info border border-info/30 px-2 py-0.5 rounded text-xs font-medium shadow-sm">UD: {udPrev}</span>}
+                                      </div>
+                                      <div className="flex items-center gap-5">
+                                        <label className="flex items-center gap-2 text-xs font-medium text-muted cursor-pointer hover:text-warning transition-colors tracking-wider">
+                                          <input
+                                            type="checkbox"
+                                            checked={ledgerEntry.sin_docencia}
+                                            onChange={(e) => handleLedgerChange(dateStr, 'sin_docencia', e.target.checked)}
+                                            className="w-4 h-4 accent-orange-500 rounded bg-foreground/25 border-[var(--glass-border)] cursor-pointer"
+                                          />
+                                          Sin docencia
+                                        </label>
+                                        <label className="flex items-center gap-2 text-xs font-medium text-muted cursor-pointer hover:text-success transition-colors tracking-wider">
+                                          <input
+                                            type="checkbox"
+                                            checked={ledgerEntry.publico}
+                                            onChange={(e) => handleLedgerChange(dateStr, 'publico', e.target.checked)}
+                                            className="w-4 h-4 accent-green-500 rounded bg-foreground/25 border-[var(--glass-border)] cursor-pointer"
+                                          />
+                                          Público
+                                        </label>
+                                      </div>
+                                    </div>
+                                    <div className="flex items-start gap-3">
+                                      <span className="text-lg mt-2 opacity-50 select-none"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
+                                      <textarea
+                                        value={ledgerEntry.seguimiento}
+                                        onChange={(e) => handleLedgerChange(dateStr, 'seguimiento', e.target.value)}
+                                        placeholder="Escribe aquí el seguimiento de la clase, incidencias o progreso real..."
+                                        className="w-full bg-foreground/20 border border-white/5 hover:border-[var(--glass-border)] rounded-lg px-4 py-3 text-foreground focus:border-info focus:bg-black/60 focus:outline-none transition-all resize-none overflow-hidden min-h-[60px] text-sm"
+                                        rows={1}
+                                        onInput={(e) => {
+                                          const target = e.target as HTMLTextAreaElement;
+                                          target.style.height = 'auto';
+                                          target.style.height = target.scrollHeight + 'px';
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </details>
+                    );
+                  })}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="tutoria" className="mt-4">
+                <TutoriaTab />
+              </TabsContent>
+
+              <TabsContent value="asistencia" className="mt-4">
+                <AsistenciaTab />
+              </TabsContent>
+
+              <TabsContent value="abandono" className="mt-4">
+                <AlertaAbandonoTab />
+              </TabsContent>
+            </Tabs>
           </MotionWrapper>
         </main>
       </div>

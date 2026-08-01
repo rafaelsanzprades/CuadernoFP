@@ -68,6 +68,7 @@
     "curriculo": "Currículo",
     "metodologia": "Metodología",
     "evaluacion": "Evaluación",
+    "instrumentos": "Instrumentos",
     "secuenciacion": "Secuenciación",
     "magia": "Magia",
     "calendario": "Calendario",
@@ -77,7 +78,8 @@
     "calificaciones": "Calificaciones",
     "informes": "Informes",
     "normativa": "Normativa",
-    "calidad": "Calidad"
+    "calidad": "Calidad",
+    "mejora": "Mejora"
   },
   "navGroups": {
     "general": "General",

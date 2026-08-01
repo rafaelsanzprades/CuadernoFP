@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { AlertTriangle, BookOpen, CheckCircle, Cloud, Database, Download, FileJson, FolderOpen, Save, Shield, ShieldAlert, Sparkles, Upload, Users, Zap, Plus, Copy, HardDrive, Info, Building2, Lock, Activity } from "lucide-react";
+import { AlertTriangle, BookOpen, CheckCircle, Cloud, Database, Download, FileJson, FolderOpen, Save, Shield, ShieldAlert, Sparkles, Upload, Users, Zap, Plus, Copy, HardDrive, Building2, Lock, Activity } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -16,6 +16,8 @@ import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { GoogleDriveSyncPanel } from "@/components/features/cloud/GoogleDriveSyncPanel";
 import { NewFileWizard } from "@/components/features/cloud/NewFileWizard";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { initialGroups } from "@/store/initialData";
 import { useTranslation } from "react-i18next";
 import { OneDriveSyncPanel } from "@/components/features/cloud/OneDriveSyncPanel";
@@ -24,12 +26,13 @@ import { TabAutores } from "@/components/features/catalogo/TabAutores";
 export default function ArchivosTrabajoPage() {
   const {
     activeModuleId, activeCursoId, moduleData, cursoData, dataSource, setDataSource,
-    pdFileSource, cursoFileSource, workspaceHandle
+    pdFileSource, cursoFileSource, groupFileSource, workspaceHandle
   } = useAppStore();
   const router = useRouter();
   const { t } = useTranslation();
 
   const [workspaceFiles, setWorkspaceFiles] = useState<{ grupos: string[], programaciones: string[], cursos: string[] }>({ grupos: [], programaciones: [], cursos: [] });
+  const [demoFiles, setDemoFiles] = useState<{ name: string, ext: string, size: number }[]>([]);
 
   useEffect(() => {
     if (workspaceHandle) {
@@ -37,7 +40,20 @@ export default function ArchivosTrabajoPage() {
     } else {
       setWorkspaceFiles({ grupos: [], programaciones: [], cursos: [] });
     }
-  }, [workspaceHandle]);const [activeTab, setActiveTab] = useState("datos");const [wizardOpen, setWizardOpen] = useState(false);
+  }, [workspaceHandle]);
+
+  useEffect(() => {
+    fetch('/api/demo')
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success') {
+          setDemoFiles(data.files || []);
+        }
+      })
+      .catch(err => console.error("Error fetching demo files:", err));
+  }, []);
+
+  const [activeTab, setActiveTab] = useState("datos");const [wizardOpen, setWizardOpen] = useState(false);
   const [wizardType, setWizardType] = useState<'programacion' | 'curso'>('programacion');
 
   const [validationModalOpen, setValidationModalOpen] = useState(false);
@@ -50,6 +66,40 @@ export default function ArchivosTrabajoPage() {
   const isDemoLoaded = dataSource === 'demo';
   const hasPdFile = !!moduleData;
   const hasCursoFile = !!cursoData;
+
+  const demoGroupFiles = demoFiles.filter(f => f.ext === 'fpg');
+  const demoProgFiles = demoFiles.filter(f => f.ext === 'fpp');
+  const demoCursoFiles = demoFiles.filter(f => f.ext === 'fpc');
+
+  const loadDemoProgramacion = async (name: string) => {
+    try {
+      const text = await fetch(`/demo/${encodeURIComponent(name)}`).then(r => r.text());
+      const ok = await fileManager.importProgramacion(text, name);
+      if (ok) {
+        useAppStore.getState().setPdFileSource({ type: 'none', fileName: name });
+        toast.success(`Programación ${name} cargada`);
+      } else {
+        toast.error("Error al cargar la programación DEMO");
+      }
+    } catch {
+      toast.error("Error al cargar la programación DEMO");
+    }
+  };
+
+  const loadDemoCurso = async (name: string) => {
+    try {
+      const text = await fetch(`/demo/${encodeURIComponent(name)}`).then(r => r.text());
+      const ok = await fileManager.importCurso(text, name);
+      if (ok) {
+        useAppStore.getState().setCursoFileSource({ type: 'none', fileName: name });
+        toast.success(`Curso ${name} cargado`);
+      } else {
+        toast.error("Error al cargar el curso DEMO");
+      }
+    } catch {
+      toast.error("Error al cargar el curso DEMO");
+    }
+  };
 
   // Auto-load demo data on first visit
   useEffect(() => {
@@ -74,6 +124,7 @@ export default function ArchivosTrabajoPage() {
       useAppStore.getState().setActiveCursoId("");
       useAppStore.getState().setPdFileSource({ type: 'none' });
       useAppStore.getState().setCursoFileSource({ type: 'none' });
+      useAppStore.getState().setGroupFileSource({ type: 'none' });
     }
     setDataSource("local");
     toast.success("Cambiado a Datos reales en local. Puedes crear o abrir archivos.");
@@ -351,8 +402,7 @@ export default function ArchivosTrabajoPage() {
     { id: "nube", label: <span className="flex items-center gap-2"><Cloud className="w-4 h-4 shrink-0" /> Nube</span>, cleanLabel: "Nube" },
     { id: "autores", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> Autores</span>, cleanLabel: "Autores" },
     { id: "seguridad", label: <span className="flex items-center gap-2"><Shield className="w-4 h-4 shrink-0" /> Seguridad</span>, cleanLabel: "Seguridad" },
-    { id: "asistente-ia", label: <span className="flex items-center gap-2"><Sparkles className="w-4 h-4 shrink-0" /> Asistente IA</span>, cleanLabel: "Asistente IA" },
-    { id: "verificacion", label: <span className="flex items-center gap-2"><Activity className="w-4 h-4 shrink-0" /> Verificación</span>, cleanLabel: "Verificación" }
+    { id: "asistente-ia", label: <span className="flex items-center gap-2"><Sparkles className="w-4 h-4 shrink-0" /> Asistente IA</span>, cleanLabel: "Asistente IA" }
   ];
 
   const breadcrumbSuffixMap: Record<string, string> = {
@@ -360,8 +410,15 @@ export default function ArchivosTrabajoPage() {
     "nube": "Sincronización en la Nube",
     "autores": "Catálogo de Autores",
     "seguridad": "Seguridad y Privacidad",
-    "asistente-ia": "Asistente IA",
-    "verificacion": "Verificación"
+    "asistente-ia": "Asistente IA"
+  };
+
+  const TAB_DESCRIPTIONS: Record<string, string> = {
+    'datos': 'Gestión de los archivos de estructura y programación didáctica del docente.',
+    'nube': 'Sincronización bidireccional segura con Google Drive y Microsoft OneDrive.',
+    'autores': 'Integración de recursos editoriales externos en formato abierto (.fpp).',
+    'seguridad': 'Opciones de privacidad, encriptación y control de datos.',
+    'asistente-ia': 'Configuración de inteligencia artificial.'
   };
 
   // ── Render ──────────────────────────────────────────────
@@ -377,63 +434,66 @@ export default function ArchivosTrabajoPage() {
           <MotionWrapper className="w-full space-y-4 pb-12">
 
 
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-              <div>
-              <h1 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <FolderOpen className="w-8 h-8 text-accent" /> Archivos
-              </h1>
-              <p className="text-muted mt-2 text-lg">{t('pages.archivos_desc')}</p>
-            </div>
-            </div>
+            <PageHeader
+              icon={FolderOpen}
+              title="Archivos"
+              description={t('pages.archivos_desc')}
+            />
 
             {/* Navigation Tabs */}
-            <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <div className="flex justify-between items-center mb-2 border-b border-[var(--glass-border)]">
-                <TabsList className="max-w-full overflow-x-auto flex flex-nowrap scrollbar-hide rounded-none bg-transparent h-auto p-0">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+                <TabsList className="max-w-full">
                   {TABS.map(tab => (
-                    <TabsTrigger key={tab.id} value={tab.id} className="whitespace-nowrap shrink-0 py-2">
+                    <TabsTrigger key={tab.id} value={tab.id}>
                       {tab.label}
                     </TabsTrigger>
                   ))}
                 </TabsList>
-                {activeTab === "datos" && workspaceHandle && (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="border border-warning/50 text-warning hover:bg-warning/10"
-                    onClick={async () => {
-                      const res = await fileManager.validateWorkspaceLinks(workspaceHandle);
-                      setBrokenLinks(res.brokenGroups);
-                      setValidationModalOpen(true);
-                    }}
-                  >
-                    <ShieldAlert className="w-4 h-4 mr-2" /> Validar workspace
-                  </Button>
-                )}
-              </div>
-            </Tabs>
+              </Tabs>
+              {activeTab === "datos" && workspaceHandle && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="border border-warning/50 text-warning hover:bg-warning/10"
+                  onClick={async () => {
+                    const res = await fileManager.validateWorkspaceLinks(workspaceHandle);
+                    setBrokenLinks(res.brokenGroups);
+                    setValidationModalOpen(true);
+                  }}
+                >
+                  <ShieldAlert className="w-4 h-4 mr-2" /> Validar workspace
+                </Button>
+              )}
+            </div>
             <div className="space-y-4 animate-in fade-in duration-300 pt-4">
-              {(() => {
-                const infoMap: Record<string, {desc: string}> = {
-                  'datos': { desc: 'Gestión de los archivos de estructura y programación didáctica del docente.' },
-                  'nube': { desc: 'Sincronización bidireccional segura con Google Drive y Microsoft OneDrive.' },
-                  'autores': { desc: 'Integración de recursos editoriales externos en formato abierto (.fpp).' },
-                  'seguridad': { desc: 'Opciones de privacidad, encriptación y control de datos.' },
-                  'asistente-ia': { desc: 'Configuración de inteligencia artificial.' },
-                  'verificacion': { desc: 'Verificaciones de la programación.' }
-                };
-                const info = infoMap[activeTab] || { desc: 'Gestión de archivos.' };
-                return (
-                  <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
-                    <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
-                    <div>
-                      <p className="text-sm text-muted">{info.desc}</p>
-                    </div>
-                  </div>
-                );
-              })()}
+              <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de archivos.'} />
               {/* TAB: FILE MANAGER */}
               {activeTab === "datos" && (
+                <div className="space-y-4">
+
+                <div className="flex items-center gap-3">
+                  <span className="text-sm font-bold text-foreground/80">Modo de datos:</span>
+                  <div className="flex bg-foreground/5 rounded-lg p-0.5 gap-0.5">
+                    <button
+                      onClick={switchToDemo}
+                      className={`flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md text-sm font-bold transition-all ${dataSource === 'demo'
+                        ? 'bg-warning/20 text-warning shadow-sm ring-1 ring-warning/30'
+                        : 'text-muted hover:bg-foreground/10 hover:text-foreground'}`}
+                    >
+                      <Cloud className="w-3.5 h-3.5" /> {t('sidebar.demo')}
+                    </button>
+                    <button
+                      onClick={switchToLocal}
+                      className={`flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md text-sm font-bold transition-all ${dataSource === 'local'
+                        ? 'bg-success/20 text-success shadow-sm ring-1 ring-success/30'
+                        : 'text-muted hover:bg-foreground/10 hover:text-foreground'}`}
+                    >
+                      <HardDrive className="w-3.5 h-3.5" /> {t('sidebar.reales')}
+                    </button>
+                  </div>
+                </div>
+
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
                   {/* ── Columna GRUPO ── */}
@@ -447,12 +507,39 @@ export default function ArchivosTrabajoPage() {
                           <FolderOpen className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : 'text-accent'}`} /> Grupos
                         </h3>
                         <p className="text-sm text-muted mt-2 leading-relaxed">
-                          Abre un Grupo para cargar automáticamente su Programación y su Curso asociado.
+                          {isDemoLoaded
+                            ? "Directorio de datos DEMO. Haz doble clic en un Grupo (.fpg) para cargarlo."
+                            : "Abre un Grupo para cargar automáticamente su Programación y su Curso asociado."}
                         </p>
                       </div>
 
                       <div className="flex-1 flex flex-col gap-2 min-h-[250px] overflow-y-auto pr-2 custom-scrollbar">
-                        {!workspaceHandle ? (
+                        {isDemoLoaded ? (
+                          demoGroupFiles.length === 0 ? (
+                            <div className="h-full flex items-center justify-center text-center p-4">
+                              <p className="text-sm text-muted">No se han encontrado grupos DEMO.</p>
+                            </div>
+                          ) : (
+                            demoGroupFiles.map(f => {
+                              const isActive = groupFileSource.fileName === f.name;
+                              return (
+                                <button
+                                  key={f.name}
+                                  onDoubleClick={async () => {
+                                    await fileManager.loadDemoData(f.name);
+                                    toast.success(`Grupo ${f.name} cargado`);
+                                  }}
+                                  className={`w-full text-left p-3 rounded-lg border transition-colors group/item ${isActive ? 'bg-warning/10 border-warning/40 shadow-sm' : 'border-[var(--glass-border)] bg-foreground/[0.02] hover:bg-foreground/5'}`}
+                                >
+                                  <div className="flex items-center gap-2">
+                                    <FolderOpen className={`w-4 h-4 shrink-0 transition-colors ${isActive ? 'text-warning' : 'text-warning/70 group-hover/item:text-warning'}`} />
+                                    <span className={`text-sm font-medium truncate ${isActive ? 'text-warning font-bold' : ''}`} title={f.name}>{f.name.replace('.fpg', '')}</span>
+                                  </div>
+                                </button>
+                              );
+                            })
+                          )
+                        ) : !workspaceHandle ? (
                           <div className="h-full flex flex-col items-center justify-center text-center p-4">
                             <Database className="w-8 h-8 text-muted/50 mb-2" />
                             <p className="text-sm text-muted font-medium">Usa el botón inferior para enlazar tu carpeta de trabajo.</p>
@@ -482,27 +569,25 @@ export default function ArchivosTrabajoPage() {
                       </div>
 
                       {/* Botonera Grupos */}
-                      <div className="flex flex-col gap-2 pt-4 mt-auto border-t border-[var(--glass-border)]">
-                        {isDemoLoaded ? (
-                          <Button onClick={() => { setDataSource('local'); toast.success("Modo REALES activado."); }} className="w-full bg-accent/20 hover:bg-accent/30 text-accent border border-accent/30 text-xs h-9">
-                            <HardDrive className="w-3 h-3 mr-1" /> Salir de DEMO
-                          </Button>
-                        ) : !workspaceHandle ? (
-                          <Button onClick={async () => {
-                            const handle = await fileManager.openWorkspaceDirectory();
-                            if (handle) toast.success("Carpeta local conectada.");
-                          }} className="w-full bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 transition-all text-xs h-9">
-                            <FolderOpen className="w-3 h-3 mr-1" /> Conectar Carpeta Local
-                          </Button>
-                        ) : (
-                          <Button onClick={async () => {
-                            const handle = await fileManager.openWorkspaceDirectory();
-                            if (handle) toast.success("Carpeta local cambiada.");
-                          }} className="w-full bg-foreground/5 hover:bg-foreground/10 text-foreground border border-[var(--glass-border)] transition-all text-xs h-9">
-                            <FolderOpen className="w-3 h-3 mr-1" /> Cambiar Carpeta Local
-                          </Button>
-                        )}
-                      </div>
+                      {!isDemoLoaded && (
+                        <div className="flex flex-col gap-2 pt-4 mt-auto border-t border-[var(--glass-border)]">
+                          {!workspaceHandle ? (
+                            <Button onClick={async () => {
+                              const handle = await fileManager.openWorkspaceDirectory();
+                              if (handle) toast.success("Carpeta local conectada.");
+                            }} className="w-full bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 transition-all text-xs h-9">
+                              <FolderOpen className="w-3 h-3 mr-1" /> Conectar Carpeta Local
+                            </Button>
+                          ) : (
+                            <Button onClick={async () => {
+                              const handle = await fileManager.openWorkspaceDirectory();
+                              if (handle) toast.success("Carpeta local cambiada.");
+                            }} className="w-full bg-foreground/5 hover:bg-foreground/10 text-foreground border border-[var(--glass-border)] transition-all text-xs h-9">
+                              <FolderOpen className="w-3 h-3 mr-1" /> Cambiar Carpeta Local
+                            </Button>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </Card>
 
@@ -525,7 +610,29 @@ export default function ArchivosTrabajoPage() {
                       </div>
 
                       <div className="flex-1 flex flex-col gap-2 min-h-[250px] overflow-y-auto pr-2 custom-scrollbar">
-                        {workspaceHandle && workspaceFiles.programaciones.length > 0 ? (
+                        {isDemoLoaded ? (
+                          demoProgFiles.length === 0 ? (
+                            <div className="h-full flex items-center justify-center text-center p-4">
+                              <p className="text-sm text-muted">No se han encontrado programaciones DEMO.</p>
+                            </div>
+                          ) : (
+                            demoProgFiles.map(f => {
+                              const isActive = pdFileSource.fileName === f.name;
+                              return (
+                                <button
+                                  key={f.name}
+                                  onDoubleClick={() => loadDemoProgramacion(f.name)}
+                                  className={`w-full text-left p-3 rounded-lg border transition-colors group/item ${isActive ? 'bg-info/10 border-info/40 shadow-sm' : 'border-[var(--glass-border)] bg-foreground/[0.02] hover:bg-foreground/5'}`}
+                                >
+                                  <div className="flex items-center gap-2">
+                                    <BookOpen className={`w-4 h-4 shrink-0 transition-colors ${isActive ? 'text-info' : 'text-info/70 group-hover/item:text-info'}`} />
+                                    <span className={`text-sm font-medium truncate ${isActive ? 'text-info font-bold' : ''}`} title={f.name}>{f.name.replace('.fpp', '')}</span>
+                                  </div>
+                                </button>
+                              );
+                            })
+                          )
+                        ) : workspaceHandle && workspaceFiles.programaciones.length > 0 ? (
                           workspaceFiles.programaciones.map(p => {
                             const isActive = pdFileSource.type === 'local' && pdFileSource.fileName === p;
                             return (
@@ -603,7 +710,29 @@ export default function ArchivosTrabajoPage() {
                       </div>
 
                       <div className="flex-1 flex flex-col gap-2 min-h-[250px] overflow-y-auto pr-2 custom-scrollbar">
-                        {workspaceHandle && workspaceFiles.cursos.length > 0 ? (
+                        {isDemoLoaded ? (
+                          demoCursoFiles.length === 0 ? (
+                            <div className="h-full flex items-center justify-center text-center p-4">
+                              <p className="text-sm text-muted">No se han encontrado cursos DEMO.</p>
+                            </div>
+                          ) : (
+                            demoCursoFiles.map(f => {
+                              const isActive = cursoFileSource.fileName === f.name;
+                              return (
+                                <button
+                                  key={f.name}
+                                  onDoubleClick={() => loadDemoCurso(f.name)}
+                                  className={`w-full text-left p-3 rounded-lg border transition-colors group/item ${isActive ? 'bg-success/10 border-success/40 shadow-sm' : 'border-[var(--glass-border)] bg-foreground/[0.02] hover:bg-foreground/5'}`}
+                                >
+                                  <div className="flex items-center gap-2">
+                                    <Users className={`w-4 h-4 shrink-0 transition-colors ${isActive ? 'text-success' : 'text-success/70 group-hover/item:text-success'}`} />
+                                    <span className={`text-sm font-medium truncate ${isActive ? 'text-success font-bold' : ''}`} title={f.name}>{f.name.replace('.fpc', '')}</span>
+                                  </div>
+                                </button>
+                              );
+                            })
+                          )
+                        ) : workspaceHandle && workspaceFiles.cursos.length > 0 ? (
                           workspaceFiles.cursos.map(c => {
                             const isActive = cursoFileSource.type === 'local' && cursoFileSource.fileName === c;
                             return (
@@ -661,6 +790,7 @@ export default function ArchivosTrabajoPage() {
                   </Card>
 
                 </div>
+                </div>
               )}
 
               {/* TAB: NUBE (GOOGLE DRIVE & ONEDRIVE) */}
@@ -698,7 +828,7 @@ export default function ArchivosTrabajoPage() {
                       <Shield className="w-6 h-6" />
                     </div>
                     <div>
-                      <h2 className="text-xl font-bold text-foreground">Tu privacidad por diseño</h2>
+                      <h2 className="text-lg font-bold text-foreground">Tu privacidad por diseño</h2>
                       <p className="text-muted mt-1 text-sm">Cómo garantizamos que tus datos reales son 100% tuyos.</p>
                     </div>
                   </div>
@@ -747,16 +877,6 @@ export default function ArchivosTrabajoPage() {
                   <Card className="p-6">
                     <h2 className="text-lg font-bold mb-4 flex items-center gap-2"><Sparkles className="w-5 h-5 text-accent"/> Configuración del Asistente IA</h2>
                     <AISettingsPanel />
-                  </Card>
-                </section>
-              )}
-
-              {/* TAB: VERIFICACIÓN */}
-              {activeTab === "verificacion" && (
-                <section className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
-                  <Card className="p-6">
-                    <h2 className="text-lg font-bold mb-4 flex items-center gap-2"><Activity className="w-5 h-5 text-accent"/> Verificación de la Programación</h2>
-                    <p className="text-muted">Panel de comprobación en construcción. Aquí se mostrarán alertas si faltan campos obligatorios en tu programación.</p>
                   </Card>
                 </section>
               )}

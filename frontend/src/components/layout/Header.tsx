@@ -61,8 +61,6 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
   let currentItem = "";
   if (pathname === '/inicio') {
     currentItem = "Inicio";
-  } else if (pathname === '/diario') {
-    currentItem = "Agenda de clase";
   } else if (pathname === '/archivos') {
     currentItem = "Archivos";
   } else {
@@ -294,7 +292,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
             <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-3">
               <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-orange-500/10 border border-orange-500/30 rounded-lg text-orange-500 shrink-0 shadow-sm pointer-events-none">
                 <AlertTriangle className="w-4 h-4 shrink-0" strokeWidth={2.5} />
-                <span className="text-xs font-bold uppercase tracking-widest">{t('sidebar.en_obras')}</span>
+                <span className="text-xs font-bold tracking-widest">{t('sidebar.en_obras')}</span>
               </div>
               
               {dataSource === 'local' && (

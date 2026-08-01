@@ -64,7 +64,7 @@ export function DiversidadTab() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
-      
+
       {/* Marco de Inclusión */}
       <div className="glass-card p-6 border-t-4 border-t-purple-500">
         <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
@@ -129,6 +129,22 @@ export function DiversidadTab() {
               <p className="text-xs text-muted">Alternativas metodológicas en enseñanza y evaluación que no minorarán las calificaciones.</p>
             </div>
           </label>
+        </div>
+      </div>
+
+      {/* F1. Atención a la diversidad */}
+      <div className="glass-card p-6 border-t-4 border-t-violet-500">
+        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
+          <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-violet-400" /></span> F1. Atención a la diversidad
+        </h2>
+        <div className="space-y-2">
+          <p className="text-xs text-muted mb-2">Estrategias para adaptar la enseñanza a las características del alumnado.</p>
+          <textarea
+            value={config_contexto["F1_diversidad"] || ""}
+            onChange={e => handleChange("F1_diversidad", e.target.value)}
+            placeholder="Medidas de inclusión y atención a las diferencias individuales..."
+            className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+          />
         </div>
       </div>
 

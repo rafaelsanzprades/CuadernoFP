@@ -114,16 +114,6 @@ export function MetodologiaTab() {
               className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
-          <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">F1. Atención a la diversidad</label>
-            <p className="text-xs text-muted mb-2">Estrategias para adaptar la enseñanza a las características del alumnado.</p>
-            <textarea
-              value={config_contexto["F1_diversidad"] || ""}
-              onChange={e => handleChange("F1_diversidad", e.target.value)}
-              placeholder="Medidas de inclusión y atención a las diferencias individuales..."
-              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
-            />
-          </div>
         </div>
       </div>
     </div>

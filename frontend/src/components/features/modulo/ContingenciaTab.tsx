@@ -1,11 +1,16 @@
 "use client";
-import { Shield } from "lucide-react";
+import { Shield, ShieldAlert } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { useTranslation } from "react-i18next";
 
 export function ContingenciaTab() {
   const { moduleData, updateDataFrame, updateModuleData } = useAppStore();
   const { t } = useTranslation();
+  const config_contexto = moduleData?.config_contexto || {};
+
+  const handleChange = (field: string, value: any) => {
+    updateModuleData("config_contexto", { ...config_contexto, [field]: value });
+  };
 
   const CONTINGENCIA = [
     { id: "CONT-ASINC", label: "Docencia telemática asíncrona" },
@@ -43,6 +48,8 @@ export function ContingenciaTab() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
+
+      {/* Medidas de contingencia (checkboxes) */}
       <div>
         <label className="text-sm font-semibold text-foreground mb-2 block">Medidas de contingencia (selección múltiple)</label>
         <p className="text-xs text-muted mb-3">Estrategias generales de actuación ante la imposibilidad de impartir docencia presencial normal.</p>
@@ -118,6 +125,41 @@ export function ContingenciaTab() {
       <button onClick={() => addRow(df_contingencia, "df_contingencia", "PC", { Escenario: "Otros", Organizacion: "", Actividades: "", Seguimiento: "" })} className="text-sm text-warning hover:text-warning font-semibold flex items-center gap-1">
         <span>+</span> Añadir medida de Contingencia
       </button>
+
+      {/* Plan de Contingencia (textos) */}
+      <div className="glass-card p-6 border-t-4 border-t-rose-500">
+        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
+          <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-rose-400" /></span> Plan de Contingencia
+        </h2>
+        <div className="space-y-4">
+          <div>
+            <label className="text-sm font-semibold text-foreground mb-1 block">Ausencia prolongada del profesorado titular</label>
+            <textarea
+              value={config_contexto["contingencia_profesor"] || ""}
+              onChange={e => handleChange("contingencia_profesor", e.target.value)}
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-sm text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-sm font-semibold text-foreground mb-1 block">Ausencia prolongada del alumnado por causas justificadas</label>
+            <textarea
+              value={config_contexto["contingencia_alumnado"] || ""}
+              onChange={e => handleChange("contingencia_alumnado", e.target.value)}
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-sm text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-sm font-semibold text-foreground mb-1 block">Interrupción generalizada de las clases</label>
+            <textarea
+              value={config_contexto["contingencia_general"] || config_contexto["J3_contingencia"] || ""}
+              onChange={e => handleChange("contingencia_general", e.target.value)}
+              placeholder="Plataformas online, recursos a distancia..."
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-sm text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 }

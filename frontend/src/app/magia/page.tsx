@@ -12,6 +12,9 @@ import { Alumnado } from "@/types";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Skeleton } from "@/components/ui/Skeleton";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { TabInfoBox } from "@/components/ui/TabInfoBox";
+import { TabSync } from "@/components/ui/TabSync";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -344,8 +347,18 @@ export default function MagiaPage() {
     }
   };
 
+  const TAB_DESCRIPTIONS: Record<string, string> = {
+    burocracia: 'Aspectos normativos y burocráticos previos a la elaboración de la programación didáctica.',
+    programacion: 'Generación de la programación didáctica oficial según el modelo de tu Comunidad Autónoma.',
+    guia: 'Guía de ayuda para la elaboración de la programación didáctica.',
+    comparativa: 'Comparativa entre distintos modelos y enfoques de programación didáctica.',
+    utilidades: 'Utilidades y exportaciones adicionales de apoyo a la programación.',
+    curso: 'Calendario, boletines e informes de seguimiento del curso.',
+  };
+
   return (
     <div className="flex min-h-screen bg-background">
+      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
       <main id="main-content" tabIndex={-1} className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
@@ -385,36 +398,39 @@ export default function MagiaPage() {
               <MotionWrapper className="w-full space-y-3 pb-12">
 
 
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-              <div>
-                <h1 className="text-2xl font-bold tracking-tight mb-2 flex items-center gap-3">
-                  <Sparkles className="w-8 h-8 text-accent" />
-                  Magia
-                </h1>
-                <p className="text-muted">Generación de la programación didáctica y reportes.</p>
-              </div>
+            <PageHeader
+              icon={Sparkles}
+              title="Magia"
+              description="Generación de la programación didáctica y reportes."
+            />
+
+
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+                <TabsList className="max-w-full">
+                  <TabsTrigger value="burocracia">
+                    <PenTool className="w-4 h-4" /> Burocracia
+                  </TabsTrigger>
+                  <TabsTrigger value="programacion">
+                    <FileText className="w-4 h-4" /> Programación
+                  </TabsTrigger>
+                  <TabsTrigger value="guia">
+                    <BookOpen className="w-4 h-4" /> Guía PD
+                  </TabsTrigger>
+                  <TabsTrigger value="comparativa">
+                    <Scale className="w-4 h-4" /> Comparativa
+                  </TabsTrigger>
+                  <TabsTrigger value="utilidades">
+                    <Calculator className="w-4 h-4" /> Utilidades
+                  </TabsTrigger>
+                  <TabsTrigger value="curso">
+                    <Calendar className="w-4 h-4" /> Curso
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
             </div>
 
-            
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-6">
-              <TabsList className="bg-foreground/5 border border-[var(--glass-border)] w-full justify-start h-auto p-1 rounded-xl flex-wrap">
-                <TabsTrigger value="burocracia" className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all flex items-center gap-2">
-                  <PenTool className="w-4 h-4" /> Burocracia
-                </TabsTrigger>
-                <TabsTrigger value="programacion" className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all flex items-center gap-2">
-                  <FileText className="w-4 h-4" /> Programación
-                </TabsTrigger>
-                <TabsTrigger value="guia" className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all flex items-center gap-2">
-                  <BookOpen className="w-4 h-4" /> Guía PD
-                </TabsTrigger>
-                <TabsTrigger value="comparativa" className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all flex items-center gap-2">
-                  <Scale className="w-4 h-4" /> Comparativa
-                </TabsTrigger>
-                <TabsTrigger value="utilidades" className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all flex items-center gap-2">
-                  <Calculator className="w-4 h-4" /> Utilidades
-                </TabsTrigger>
-              </TabsList>
-            </Tabs>
+            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
 
             <div className="space-y-4 animate-in fade-in duration-500">
               {activeTab === "burocracia" && (
@@ -566,6 +582,199 @@ export default function MagiaPage() {
               )}
             </div>
 
+                {activeTab === 'curso' && (
+                      <div className="space-y-4 animate-in fade-in duration-500">
+                        <Card className="p-6 border-t-4 border-t-emerald-500">
+                          <h2 className="text-2xl font-bold mb-1"><span className="inline-flex"><Calendar className="w-4 h-4" /></span> Grupo</h2>
+                          <p className="text-sm text-muted mb-6">Gestión del grupo</p>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                              <div>
+                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><CalendarDays className="w-[1.2em] h-[1.2em] mr-1" /></span> Calendario académico</h3>
+                                <p className="text-sm text-muted mb-6">Vista global del curso con fechas, sesiones y eventos.</p>
+                              </div>
+                              <Button onClick={() => handleDownloadPdf('calendario')} disabled={downloadingStr === 'calendario'} className="w-full">
+                                {downloadingStr === 'calendario' ? '⏳ Generando PDF...' : 'PDF Calendario'}
+                              </Button>
+                            </div>
+                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                              <div>
+                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Alumnado. Ubicación en el aula</h3>
+                                <p className="text-sm text-muted mb-6">Distribución y ubicación del alumnado en el aula.</p>
+                              </div>
+                              <Button onClick={() => handleDownloadPdf('alumnado_ubicacion')} disabled={downloadingStr === 'alumnado_ubicacion'} className="w-full">
+                                {downloadingStr === 'alumnado_ubicacion' ? '⏳ Generando PDF...' : 'PDF Alumnado Ubicación'}
+                              </Button>
+                            </div>
+                          </div>
+                        </Card>
+
+                        <Card className="p-6 border-t-4 border-t-emerald-500">
+                          <h2 className="text-2xl font-bold mb-1"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Clases mensual - por UD</h2>
+                          <p className="text-sm text-muted mb-6">Registro detallado de clases impartidas y secuenciación por unidad didáctica.</p>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                              <div>
+                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguimiento diario</h3>
+                                <p className="text-sm text-muted mb-6">Registro detallado de la planificación del día a día.</p>
+                              </div>
+                              <Button onClick={() => handleDownloadPdf('seguimiento')} disabled={downloadingStr === 'seguimiento'} className="w-full">
+                                {downloadingStr === 'seguimiento' ? '⏳ Generando PDF...' : 'PDF Seguimiento'}
+                              </Button>
+                            </div>
+                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                              <div>
+                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Clases por UD</h3>
+                                <p className="text-sm text-muted mb-6">Secuenciación de sesiones de cada Unidad didáctica.</p>
+                              </div>
+                              <Button onClick={() => handleDownloadPdf('clases_ud')} disabled={downloadingStr === 'clases_ud'} className="w-full">
+                                {downloadingStr === 'clases_ud' ? '⏳ Generando PDF...' : 'PDF Clases por UD'}
+                              </Button>
+                            </div>
+                          </div>
+                        </Card>
+
+                        <Card className="p-6 border-t-4 border-t-blue-500">
+                          <h2 className="text-2xl font-bold mb-6"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletines grupales trimestrales</h2>
+                          
+                          {/* Primera fila: 3 Trimestres */}
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
+                              <div>
+                                <h3 className="text-lg font-bold mb-1"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> 1er trimestre</h3>
+                                <div className="text-xs text-muted mb-2">
+                                  Inicio: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.ini_1t)}</span><br/>
+                                  Fin: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.fin_1t)}</span>
+                                </div>
+                              </div>
+                              <div className="text-left mt-auto">
+                                <label htmlFor="fecha-corte-1t" className="block text-xs text-muted mb-1 font-bold">Fecha de corte / acta:</label>
+                                <input id="fecha-corte-1t" type="date" value={fecha1T} onChange={(e) => setFecha1T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-sm focus:border-info focus:outline-none" />
+                              </div>
+                              <div className="flex flex-col gap-2 mt-2">
+                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_1t', undefined, fecha1T)} disabled={downloadingStr === 'grupal_1t'} className="w-full text-xs">
+                                  {downloadingStr === 'grupal_1t' ? '⏳' : 'PDF Boletín'}
+                                </Button>
+                                <Button variant="ghost" onClick={() => handleExportCSV('1T', fecha1T)} className="w-full border border-success/30 text-success hover:bg-success/10 text-xs flex items-center justify-center gap-2">
+                                  <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
+                                </Button>
+                              </div>
+                            </div>
+                            
+                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
+                              <div>
+                                <h3 className="text-lg font-bold mb-1"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> 2º trimestre</h3>
+                                <div className="text-xs text-muted mb-2">
+                                  Inicio: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.ini_2t)}</span><br/>
+                                  Fin: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.fin_2t)}</span>
+                                </div>
+                              </div>
+                              <div className="text-left mt-auto">
+                                <label htmlFor="fecha-corte-2t" className="block text-xs text-muted mb-1 font-bold">Fecha de corte / acta:</label>
+                                <input id="fecha-corte-2t" type="date" value={fecha2T} onChange={(e) => setFecha2T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-sm focus:border-info focus:outline-none" />
+                              </div>
+                              <div className="flex flex-col gap-2 mt-2">
+                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_2t', undefined, fecha2T)} disabled={downloadingStr === 'grupal_2t'} className="w-full text-xs">
+                                  {downloadingStr === 'grupal_2t' ? '⏳' : 'PDF Boletín'}
+                                </Button>
+                                <Button variant="ghost" onClick={() => handleExportCSV('2T', fecha2T)} className="w-full border border-success/30 text-success hover:bg-success/10 text-xs flex items-center justify-center gap-2">
+                                  <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
+                                </Button>
+                              </div>
+                            </div>
+                            
+                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
+                              <div>
+                                <h3 className="text-lg font-bold mb-1"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> 3er trimestre</h3>
+                                <div className="text-xs text-muted mb-2">
+                                  Inicio: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.ini_3t)}</span><br/>
+                                  Fin: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.fin_3t)}</span>
+                                </div>
+                              </div>
+                              <div className="text-left mt-auto">
+                                <label htmlFor="fecha-corte-3t" className="block text-xs text-muted mb-1 font-bold">Fecha de corte / acta:</label>
+                                <input id="fecha-corte-3t" type="date" value={fecha3T} onChange={(e) => setFecha3T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-sm focus:border-info focus:outline-none" />
+                              </div>
+                              <div className="flex flex-col gap-2 mt-2">
+                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_3t', undefined, fecha3T)} disabled={downloadingStr === 'grupal_3t'} className="w-full text-xs">
+                                  {downloadingStr === 'grupal_3t' ? '⏳' : 'PDF Boletín'}
+                                </Button>
+                                <Button variant="ghost" onClick={() => handleExportCSV('3T', fecha3T)} className="w-full border border-success/30 text-success hover:bg-success/10 text-xs flex items-center justify-center gap-2">
+                                  <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
+                                </Button>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Segunda fila: Final y Extraordinaria */}
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
+                              <div>
+                                <h3 className="text-lg font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Evaluación final ordinaria</h3>
+                                <div className="text-xs text-muted mb-2">
+                                  Inicio: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.ini_final)}</span><br/>
+                                  Fin: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.fin_final)}</span>
+                                </div>
+                              </div>
+                              <div className="flex flex-col gap-2 mt-auto">
+                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_final', undefined, fechaFinal)} disabled={downloadingStr === 'grupal_final'} className="w-full text-xs">
+                                  {downloadingStr === 'grupal_final' ? '⏳' : 'PDF Boletín'}
+                                </Button>
+                                <Button variant="ghost" onClick={() => handleExportCSV('Final', fechaFinal)} className="w-full border border-success/30 text-success hover:bg-success/10 text-xs flex items-center justify-center gap-2">
+                                  <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
+                                </Button>
+                              </div>
+                            </div>
+                            
+                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
+                              <div>
+                                <h3 className="text-lg font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Eval. Final Extraordinaria</h3>
+                                <div className="text-xs text-muted mb-2">
+                                  Inicio: <span className="font-mono text-foreground">---</span><br/>
+                                  Fin: <span className="font-mono text-foreground">---</span>
+                                </div>
+                                <p className="text-xs text-muted italic mt-2">Próximamente disponible</p>
+                              </div>
+                              <div className="flex flex-col gap-2 mt-auto">
+                                <Button variant="secondary" disabled className="w-full text-xs">
+                                  PDF Boletín Extraordinaria
+                                </Button>
+                                <Button variant="ghost" disabled className="w-full border border-success/30 text-success hover:bg-success/10 text-xs flex items-center justify-center gap-2">
+                                  <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
+                                </Button>
+                              </div>
+                            </div>
+                          </div>
+                        </Card>
+
+                        <Card className="p-6 border-t-4 border-t-blue-500">
+                          <h2 className="text-2xl font-bold mb-6"><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletines individuales</h2>
+                          {activeAlumnado.length > 0 ? (
+                            <div className="flex flex-col md:flex-row md:items-end gap-6 bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6">
+                              <div className="flex-1">
+                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletín de alumnado</h3>
+                                <p className="text-sm text-muted mb-4">Genera un boletín detallado de un alumnado específico.</p>
+                                <select id="alumnado_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold">
+                                  {activeAlumnado.map((al: Alumnado) => (
+                                    <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre} ({al.ID})</option>
+                                  ))}
+                                </select>
+                              </div>
+                              <Button variant="secondary" onClick={() => {
+                                  const sel = document.getElementById('alumnado_select') as HTMLSelectElement;
+                                  if (sel && sel.value) handleDownloadPdf('individual', sel.value);
+                                }}
+                                disabled={downloadingStr === 'individual'} className="px-8 py-3 h-[50px] w-full md:w-auto"
+                              >
+                                {downloadingStr === 'individual' ? '⏳ Generando boletín...' : 'PDF Boletín individual'}
+                              </Button>
+                            </div>
+                          ) : (
+                            <p className="text-muted italic">No hay estudiantes activos en el curso.</p>
+                          )}
+                        </Card>
+                      </div>
+                    )}
               </MotionWrapper>
             </div>
           )}

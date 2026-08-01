@@ -29,7 +29,7 @@ export function AccordionBlock({
       <summary className="flex cursor-pointer items-center justify-between p-4 md:p-5 font-bold text-foreground hover:bg-foreground/5 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/30 select-none">
         <div className="flex items-center gap-3">
           {icon && <span className="text-accent">{icon}</span>}
-          <span className="text-[15px]">{title}</span>
+          <span className="text-xs">{title}</span>
           {badge && <span className="ml-2">{badge}</span>}
         </div>
         <span className="transition-transform duration-300 group-open:-rotate-180 text-muted">

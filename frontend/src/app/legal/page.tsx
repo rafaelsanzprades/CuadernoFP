@@ -4,7 +4,6 @@ import {
   Shield,
   ShieldCheck,
   ExternalLink,
-  Info,
   Cookie,
   Accessibility,
   FileText,
@@ -19,6 +18,8 @@ import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { TabSync } from "@/components/ui/TabSync";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { TabInfoBox } from "@/components/ui/TabInfoBox";
 
 /* ──────────────────────────────────────────────────────────────
    Mini-índice con anclas internas
@@ -79,6 +80,15 @@ export default function LegalPage() {
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
+  const TAB_DESCRIPTIONS: Record<string, string> = {
+    'aviso': 'Datos del titular, condiciones de uso, propiedad intelectual (LPI) y LSSI-CE.',
+    'privacidad': 'Política de privacidad, RGPD, responsable del tratamiento y modelo local-first.',
+    'cookies': 'Uso de localStorage e IndexedDB. Sin cookies de rastreo ni analíticas de terceros.',
+    'accesibilidad': 'Declaración de accesibilidad digital según RD 1112/2018 y compromiso WCAG 2.1 AA.',
+    'mapa': 'Mapa de la web con el esquema jerárquico de secciones y utilidades de la aplicación.',
+    'contribuciones': 'Comunidad de Telegram y listado de personas que contribuyen activamente al proyecto.',
+  };
+
   return (
     <div className="flex min-h-screen bg-background relative">
       <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -89,45 +99,26 @@ export default function LegalPage() {
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <div className="w-full space-y-4 pb-12">
 
-            {/* Título */}
-            <div>
-              <h1 className="text-lg font-extrabold text-foreground tracking-tight flex items-center gap-3">
-                <Scale className="w-[1.2em] h-[1.2em] mr-1 text-accent" /> Legal
-              </h1>
-              <p className="text-muted mt-2 text-lg">Aviso legal, privacidad, cookies, licencias y accesibilidad.</p>
-            </div>
+            <PageHeader
+              icon={Scale}
+              title="Legal"
+              description="Aviso legal, privacidad, cookies, licencias y accesibilidad."
+            />
 
             {/* Pestañas */}
-            <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="mb-2 max-w-full">
-                {TABS.map(tab => (
-                  <TabsTrigger key={tab.id} value={tab.id}>
-                    {tab.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+                <TabsList className="max-w-full">
+                  {TABS.map(tab => (
+                    <TabsTrigger key={tab.id} value={tab.id}>
+                      {tab.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
+            </div>
 
-            {/* Info contextual */}
-            {(() => {
-              const infoMap: Record<string, { desc: string }> = {
-                'aviso': { desc: 'Datos del titular, condiciones de uso, propiedad intelectual (LPI) y LSSI-CE.' },
-                'privacidad': { desc: 'Política de privacidad, RGPD, responsable del tratamiento y modelo local-first.' },
-                'cookies': { desc: 'Uso de localStorage e IndexedDB. Sin cookies de rastreo ni analíticas de terceros.' },
-                'accesibilidad': { desc: 'Declaración de accesibilidad digital según RD 1112/2018 y compromiso WCAG 2.1 AA.' },
-                'mapa': { desc: 'Mapa de la web con el esquema jerárquico de secciones y utilidades de la aplicación.' },
-                'contribuciones': { desc: 'Comunidad de Telegram y listado de personas que contribuyen activamente al proyecto.' },
-              };
-              const info = infoMap[activeTab] || { desc: 'Información legal.' };
-              return (
-                <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
-                  <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
-                  <div>
-                    <p className="text-sm text-muted">{info.desc}</p>
-                  </div>
-                </div>
-              );
-            })()}
+            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Información legal.'} />
 
             {/* ═══════════════════════════════════════════════════
                 TAB — AVISO LEGAL
@@ -772,20 +763,6 @@ export default function LegalPage() {
                           </a>
                         </li>
                         <li>
-                          <a href="/evaluacion" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Evaluación
-                          </a>
-                        </li>
-                        <li>
-                          <a href="/secuenciacion" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Secuenciación
-                          </a>
-                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/secuenciacion?tab=sesiones" className="hover:text-accent transition-colors block py-0.5">— Sesiones</a>
-                            <a href="/secuenciacion?tab=tareas" className="hover:text-accent transition-colors block py-0.5">— Tareas competenciales</a>
-                          </div>
-                        </li>
-                        <li>
                           <a href="/magia" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Magia
                           </a>
@@ -819,15 +796,11 @@ export default function LegalPage() {
                           </div>
                         </li>
                         <li>
-                          <a href="/diario" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Diario
-                          </a>
-                        </li>
-                        <li>
                           <a href="/seguimiento" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Seguimiento
                           </a>
                           <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                            <a href="/seguimiento?tab=clases" className="hover:text-accent transition-colors block py-0.5">— Clases</a>
                             <a href="/seguimiento?tab=tutoria" className="hover:text-accent transition-colors block py-0.5">— Tutoría</a>
                             <a href="/seguimiento?tab=asistencia" className="hover:text-accent transition-colors block py-0.5">— Asistencia</a>
                             <a href="/seguimiento?tab=abandono" className="hover:text-accent transition-colors block py-0.5">— Alerta abandono</a>
@@ -868,7 +841,7 @@ export default function LegalPage() {
                       <MessageCircle className="w-6 h-6 text-[#229ED9]" />
                     </div>
                     <div className="flex-1 text-center md:text-left">
-                      <h3 className="text-base font-bold text-foreground">Grupo Oficial de Telegram</h3>
+                      <h3 className="text-sm font-bold text-foreground">Grupo Oficial de Telegram</h3>
                       <p className="text-sm text-muted leading-tight mt-1">
                         Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad Autónoma.
                       </p>

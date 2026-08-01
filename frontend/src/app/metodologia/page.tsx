@@ -1,7 +1,7 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import { Building2, Target, CheckCircle2, Layers, Award, FolderOpen, Lightbulb, Settings, Shield, Info } from "lucide-react";
+import { Target, CheckCircle2, Layers, FolderOpen, Lightbulb, Settings, Shield, HeartHandshake } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -11,7 +11,10 @@ import { MetodologiaTab } from "@/components/features/modulo/MetodologiaTab";
 import { EvaluacionRecursosTab } from "@/components/features/modulo/EvaluacionRecursosTab";
 import { OtrosElementosTab } from "@/components/features/modulo/OtrosElementosTab";
 import { ContingenciaTab } from "@/components/features/modulo/ContingenciaTab";
+import { DiversidadTab } from "@/components/features/modulo/DiversidadTab";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 
@@ -48,11 +51,20 @@ export default function MetodologiaConfigPage() {
   const TABS = [
     { id: "metodologia", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.metodologia')}</span>, cleanLabel: t('tabs.metodologia') },
     { id: "evaluacion", label: <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 shrink-0" /> {t('tabs.evaluacion')}</span>, cleanLabel: t('tabs.evaluacion') },
+    { id: "diversidad", label: <span className="flex items-center gap-2"><HeartHandshake className="w-4 h-4 shrink-0" /> Diversidad</span>, cleanLabel: "Diversidad" },
     { id: "contingencia", label: <span className="flex items-center gap-2"><Shield className="w-4 h-4 shrink-0" /> {t('tabs.contingencia', {defaultValue: 'Contingencia'})}</span>, cleanLabel: t('tabs.contingencia', {defaultValue: 'Contingencia'}) },
-    { id: "otros", label: <span className="flex items-center gap-2"><Layers className="w-4 h-4 shrink-0" /> {t('tabs.otros')}</span>, cleanLabel: t('tabs.otros') },
+    { id: "transversales", label: <span className="flex items-center gap-2"><Layers className="w-4 h-4 shrink-0" /> {t('tabs.otros')}</span>, cleanLabel: "Transversales" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+
+  const TAB_DESCRIPTIONS: Record<string, string> = {
+    metodologia: 'Definición de las estrategias metodológicas y actividades formativas.',
+    evaluacion: 'Recursos para la evaluación y criterios de calificación metodológica.',
+    diversidad: 'Atención a la diversidad, adaptaciones curriculares y panel de alumnado ACNEAE.',
+    contingencia: 'Planes de contingencia y adaptación ante situaciones excepcionales.',
+    transversales: 'Elementos transversales, competencias clave y estándares curriculares del módulo.',
+  };
 
   if (!activeModuleId) {
     return (
@@ -105,49 +117,32 @@ export default function MetodologiaConfigPage() {
         <Header breadcrumbSuffix={activeTabCleanLabel} />
         <main id="main-content" tabIndex={-1} className="flex-1 p-8 content-area">
           <MotionWrapper>
-            <div className="mb-8 flex items-center justify-between">
-              <div>
-                <h1 className="text-2xl font-bold tracking-tight mb-2 flex items-center gap-3">
-                  <Lightbulb className="w-8 h-8 text-accent" />
-                  Metodología y Recursos
-                </h1>
-                <p className="text-muted">
-                  Estrategias metodológicas, recursos, espacios y atención a la diversidad para el módulo <strong className="text-foreground">{activeModuleId}</strong>.
-                </p>
-              </div>
+            <PageHeader
+              icon={Lightbulb}
+              title="Metodología y recursos"
+              description="Estrategias metodológicas, recursos, espacios y atención a la diversidad."
+            />
+
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+                <TabsList className="max-w-full">
+                  {TABS.map((tab) => (
+                    <TabsTrigger key={tab.id} value={tab.id}>
+                      {tab.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
             </div>
 
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
-              <TabsList className="bg-foreground/5 border border-[var(--glass-border)] w-full justify-start h-auto p-1 rounded-xl flex-wrap">
-                {TABS.map((tab) => (
-                  <TabsTrigger key={tab.id} value={tab.id} className="rounded-lg px-6 py-2.5 data-[state=active]:bg-info data-[state=active]:text-foreground text-muted font-medium transition-all">
-                    {tab.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
-
-            {(() => {
-              const infoMap: Record<string, {desc: string}> = {
-                'metodologia': { desc: 'Definición de las estrategias metodológicas y actividades formativas.' },
-                'evaluacion': { desc: 'Recursos para la evaluación y criterios de calificación metodológica.' },
-                'contingencia': { desc: 'Planes de contingencia y adaptación ante situaciones excepcionales.' },
-                'otros': { desc: 'Elementos transversales y otros recursos adicionales del módulo.' },
-              };
-              const info = infoMap[activeTab] || { desc: 'Configuración de la metodología.' };
-              return (
-                <div className='flex items-start gap-3 p-4 rounded-xl bg-accent/5 border border-accent/20 mb-6'>
-                  <Info className='w-5 h-5 text-accent mt-0.5 shrink-0' />
-                  <p className='text-sm text-muted'>{info.desc}</p>
-                </div>
-              );
-            })()}
+            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Configuración de la metodología.'} />
 
             <div className="space-y-4">
               {activeTab === 'metodologia' && <MetodologiaTab />}
               {activeTab === 'evaluacion' && <EvaluacionRecursosTab />}
+              {activeTab === 'diversidad' && <DiversidadTab />}
               {activeTab === 'contingencia' && <ContingenciaTab />}
-              {activeTab === 'otros' && <OtrosElementosTab />}
+              {activeTab === 'transversales' && <OtrosElementosTab />}
             </div>
 
           </MotionWrapper>
