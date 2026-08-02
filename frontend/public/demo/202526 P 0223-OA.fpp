@@ -730,7 +730,9 @@
     "infraestructura": "El proceso de enseñanza-aprendizaje se desarrollará principalmente en las aulas-taller del centro, dotadas con equipos informáticos, cañón proyector y conexión a internet. Se dispondrá del equipamiento específico del ciclo.",
     "tipo_ensenanza": "Ciclo Formativo de Grado Medio",
     "familia_profesional": "Informática y Comunicaciones",
-    "tipo_centro": "publico"
+    "tipo_centro": "publico",
+    "contingencia_profesor": "El centro garantizará la continuidad pedagógica en caso de contingencia mediante el uso de Aeducar y el aula virtual.",
+    "contingencia_alumnado": "El alumnado contará con seguimiento en Aeducar en caso de ausencia justificada prolongada."
   },
   "medidas_inclusion": [
     "[NIVEL-DUA] Medidas DUA a nivel de grupo — Representación: diagramas de flujo, infografías, esquemas, vídeos tutoriales. Calendarios visuales de la UD.",

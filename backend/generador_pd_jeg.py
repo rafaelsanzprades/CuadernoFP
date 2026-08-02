@@ -152,16 +152,21 @@ def _build_context(data: dict) -> dict:
         "texto_ecp": config.get("texto_ecp", "Este modulo profesional no esta asociado a ningun estandar de competencia profesional."),
         "texto_cpe": config.get("texto_cpe", ""),
         "texto_og": config.get("texto_og", ""),
-        "textos_pd_contexto_geografico": data.get("textos_pd_contexto_geografico", ""),
-        "textos_pd_contexto_socioeconomico": data.get("textos_pd_contexto_socioeconomico", ""),
-        # La plantilla titula esta sección "Contexto escolar" -> mapea al campo real textos_pd_contexto_escolar
-        "textos_pd_contexto_academico": data.get("textos_pd_contexto_escolar", ""),
+        # Estos 3 leen de config_contexto (ContextoTab, /contexto?tab=entorno) y no del "textos_pd_*"
+        # homónimo: ese vive en un componente que nunca se monta en ninguna página (MetodologiaContextoTab,
+        # eliminado), así que en la app real esos campos nunca se rellenan. config_contexto sí es
+        # alcanzable y ya tiene UI funcionando con contenido real.
+        "textos_pd_contexto_geografico": config.get("entorno_geografico", ""),
+        "textos_pd_contexto_socioeconomico": config.get("entorno_socioeconomico", ""),
+        # La plantilla titula esta sección "Contexto escolar" -> config_contexto.contexto_escolar
+        "textos_pd_contexto_academico": config.get("contexto_escolar", ""),
         # Sin campo de origen real (no hay ninguna pestaña que recoja "marco normativo"); queda vacío a propósito.
         "textos_pd_procedimientos_normativos": data.get("textos_pd_procedimientos_normativos", ""),
-        # La plantilla solo tiene un placeholder para todo "Plan de contingencia" -> combina profesorado + alumnado
+        # La plantilla solo tiene un placeholder para todo "Plan de contingencia" -> combina profesorado +
+        # alumnado desde config_contexto (ContingenciaTab, /metodologia?tab=contingencia), mismo motivo que arriba.
         "textos_pd_plan_contingencia": "\n\n".join(filter(None, [
-            data.get("textos_pd_contingencia_profesor", ""),
-            data.get("textos_pd_contingencia_alumnado", ""),
+            config.get("contingencia_profesor", ""),
+            config.get("contingencia_alumnado", ""),
         ])),
         "textos_pd_bibliografia": data.get("textos_pd_bibliografia", ""),
         "textos_pd_publicidad": data.get("textos_pd_publicidad", ""),

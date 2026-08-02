@@ -181,6 +181,94 @@ const FAQS = [
   }
 ];
 
+// Sub-pestañas reales de cada página, por ruta base — usado por el Mapa web.
+// Mantener sincronizado con el array TABS de cada page.tsx (no hay una fuente única
+// de verdad todavía; si se añade/renombra una pestaña, actualizar aquí también).
+const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
+  "/contexto": [
+    { id: "presentacion", label: "Presentación" },
+    { id: "entorno", label: "Entorno" },
+    { id: "planes", label: "Planes" },
+    { id: "procedimientos", label: "Procedimientos" },
+  ],
+  "/curriculo": [
+    { id: "ponderacion-ra-ce", label: "Ponderación RA-CE" },
+    { id: "tareas", label: "Tareas" },
+    { id: "unidades", label: "Unidades (UD)" },
+    { id: "relacion-ra-ud", label: "Relación RA-UD" },
+    { id: "contribucion-og", label: "Contribución OG" },
+  ],
+  "/metodologia": [
+    { id: "metodologia", label: "Metodología" },
+    { id: "evaluacion", label: "Evaluación" },
+    { id: "diversidad", label: "Diversidad" },
+    { id: "contingencia", label: "Contingencia" },
+    { id: "transversales", label: "Transversales" },
+  ],
+  "/instrumentos": [
+    { id: "resumen", label: "Resumen" },
+    { id: "tri1", label: "1º trimestre" },
+    { id: "tri2", label: "2º trimestre" },
+    { id: "tri3", label: "3º trimestre" },
+  ],
+  "/calendario": [
+    { id: "fechas", label: "Fechas y horarios" },
+    { id: "eventos", label: "Eventos y festivos" },
+    { id: "actividades", label: "Actividades complementarias" },
+    { id: "visual", label: "Calendario visual" },
+  ],
+  "/alumnado": [
+    { id: "listado", label: "Listado" },
+    { id: "plano", label: "Plano del aula" },
+    { id: "contexto", label: "Contexto del grupo" },
+  ],
+  "/seguimiento": [
+    { id: "clases", label: "Clases" },
+    { id: "tutoria", label: "Tutoría" },
+    { id: "asistencia", label: "Asistencia" },
+    { id: "abandono", label: "Alerta abandono" },
+  ],
+  "/calificaciones": [
+    { id: "resumen", label: "Resumen" },
+    { id: "estadisticas", label: "Estadísticas" },
+    { id: "matriz", label: "Matriz (Excel)" },
+    { id: "detalle", label: "Por alumnado" },
+    { id: "grupal", label: "Informe grupal" },
+    { id: "individual", label: "Informe individual" },
+  ],
+  "/normativa": [
+    { id: "ccaa", label: "CCAA" },
+    { id: "bibliografia", label: "Bibliografía" },
+    { id: "legislacion", label: "Legislación" },
+    { id: "curriculos", label: "Currículos" },
+  ],
+  "/mejora": [
+    { id: "eqavet", label: "EQAVET" },
+    { id: "propuestas", label: "Propuestas" },
+  ],
+  "/archivos": [
+    { id: "datos", label: "Datos" },
+    { id: "nube", label: "Nube" },
+    { id: "autores", label: "Autores" },
+    { id: "seguridad", label: "Seguridad" },
+    { id: "asistente-ia", label: "Asistente IA" },
+  ],
+  "/catalogo": [
+    { id: "familias", label: "Familias" },
+    { id: "titulos", label: "Títulos" },
+    { id: "modulos", label: "Módulos" },
+    { id: "ra-ce", label: "RA → CE" },
+    { id: "ecp-incual", label: "ECP INCUAL" },
+  ],
+  "/magia": [
+    { id: "programacion", label: "Generar programación" },
+    { id: "guia", label: "Guía PD" },
+    { id: "comparativa", label: "Comparativa" },
+    { id: "utilidades", label: "Utilidades" },
+    { id: "curso", label: "Curso" },
+  ],
+};
+
 // ── Página Principal ──────────────────────────────────────────────────────
 export default function InicioPage() {
   const { moduleData, cursoData, globalData, activeModuleId, activeCursoId } = useAppStore();
@@ -267,6 +355,24 @@ export default function InicioPage() {
   const tieneHorario = !!(cursoData?.horario && Object.keys(cursoData.horario).length > 0);
   const tieneFechas = !!(cursoData?.info_fechas && Object.keys(cursoData.info_fechas).length > 0);
   const tieneContexto = !!(m?.config_contexto && Object.keys(m.config_contexto).length > 0);
+
+  // ── Comprobaciones de campos que usan los generadores PD+ (JEG) / pd= / pd- ──
+  const infoMod: Record<string, any> = m?.info_modulo || {};
+  const cc: Record<string, any> = m?.config_contexto || {};
+  const identificacionFaltan = ["centro", "profesorado", "familia"].filter(k => !infoMod[k]);
+
+  const modData: Record<string, any> = m || {};
+  const NARRATIVOS_PDPLUS: { key: string; label: string; source: Record<string, any> }[] = [
+    { key: "entorno_geografico", label: "Entorno geográfico", source: cc },
+    { key: "entorno_socioeconomico", label: "Entorno socioeconómico", source: cc },
+    { key: "contexto_escolar", label: "Contexto escolar", source: cc },
+    { key: "contingencia_profesor", label: "Contingencia (profesorado)", source: cc },
+    { key: "contingencia_alumnado", label: "Contingencia (alumnado)", source: cc },
+    { key: "textos_pd_bibliografia", label: "Bibliografía", source: modData },
+    { key: "textos_pd_publicidad", label: "Publicidad", source: modData },
+  ];
+  const narrativosRellenos = NARRATIVOS_PDPLUS.filter(f => !!f.source[f.key]).length;
+  const narrativosFaltan = NARRATIVOS_PDPLUS.filter(f => !f.source[f.key]).map(f => f.label);
 
   const moduleChecks: CheckItem[] = [
     {
@@ -421,6 +527,37 @@ export default function InicioPage() {
         : ["Sin indicadores EQAVET valorados"],
       actionHref: "/mejora?tab=eqavet",
       actionLabel: "Valorar calidad",
+    },
+    {
+      id: "identificacion-pd",
+      icon: <FileText className="w-5 h-5" />,
+      title: "Identificación (para PD+/pd=/pd-)",
+      href: "/contexto?tab=presentacion",
+      hrefLabel: "Contexto",
+      status: !m ? "empty" : identificacionFaltan.length === 0 ? "ok" : identificacionFaltan.length < 3 ? "warning" : "empty",
+      lines: !m
+        ? ["Sin datos de programación cargados"]
+        : identificacionFaltan.length === 0
+          ? ["Centro, profesorado y familia profesional configurados"]
+          : [`Faltan: ${identificacionFaltan.join(", ")}`, "Estos campos rellenan la portada de los 3 modelos de PD"],
+      actionHref: identificacionFaltan.length > 0 ? "/contexto?tab=presentacion" : undefined,
+      actionLabel: identificacionFaltan.length > 0 ? "Completar identificación" : undefined,
+    },
+    {
+      id: "narrativos-pd",
+      icon: <FileText className="w-5 h-5" />,
+      title: "Textos narrativos (PD+/JEG)",
+      href: "/contexto?tab=entorno",
+      hrefLabel: "Contexto",
+      status: !m ? "empty" : narrativosRellenos === NARRATIVOS_PDPLUS.length ? "ok" : narrativosRellenos > 0 ? "warning" : "empty",
+      lines: !m
+        ? ["Sin datos de programación cargados"]
+        : [
+          `${narrativosRellenos} / ${NARRATIVOS_PDPLUS.length} textos redactados`,
+          narrativosFaltan.length > 0 ? `Faltan: ${narrativosFaltan.join(", ")}` : "Todos los textos narrativos están redactados",
+        ],
+      actionHref: narrativosFaltan.length > 0 ? "/contexto?tab=entorno" : undefined,
+      actionLabel: narrativosFaltan.length > 0 ? "Redactar textos" : undefined,
     }
   ];
 
@@ -592,9 +729,25 @@ export default function InicioPage() {
             {/* ── CONTENIDO: BIENVENIDA ──────────────────────────────── */}
             {activeTab === "bienvenida" && (
               <div className="animate-in fade-in duration-500 w-full">
-                
+
           <div className="w-full space-y-12 pb-12">
 
+            {/* Accesos a las demás pestañas de Inicio */}
+            <Card className="p-6 border border-[var(--glass-border)] bg-[var(--glass-bg)]">
+              <h2 className="text-subheading font-bold text-foreground mb-4">Ayuda y recursos de Inicio</h2>
+              <div className="flex flex-col divide-y divide-[var(--glass-border)]">
+                {TABS.filter(tab => tab.id !== "bienvenida").map(tab => (
+                  <Link
+                    key={tab.id}
+                    href={`/inicio?tab=${tab.id}`}
+                    className="flex items-center justify-between py-3 text-body font-semibold text-foreground hover:text-accent transition-colors group"
+                  >
+                    <span className="flex items-center gap-2">{tab.label}</span>
+                    <ArrowRight className="w-4 h-4 text-muted group-hover:text-accent group-hover:translate-x-1 transition-all" />
+                  </Link>
+                ))}
+              </div>
+            </Card>
 
             {/* Menus Grid */}
             <div className="space-y-12">
@@ -708,95 +861,133 @@ export default function InicioPage() {
                 <Card glow className="p-8 mb-6">
                   <div className="space-y-4">
                   <h2 className="text-subheading font-bold text-foreground flex items-center gap-3">
-                    <Layers className="w-6 h-6 text-accent" /> Secuencia lógica de programación
+                    <Layers className="w-6 h-6 text-accent" /> Secuencia natural de la programación (PD+ / JEG)
                   </h2>
                   <p className="text-muted text-body pb-4 border-b border-[var(--glass-border)]">
-                    Flujo de trabajo estructurado basado en la Programación Didáctica oficial. Avanza de izquierda a derecha para completar el diseño del módulo.
+                    Los 9 pasos siguen el propio índice del documento oficial que genera Magia (modelo PD+/JEG,
+                    CIFPA — el más completo de los tres). El modelo pd= (BOA Aragón) y pd- (mínima) usan un
+                    subconjunto de estos mismos datos, así que rellenarlos en este orden también los deja listos.
+                    Cada apartado enlaza directamente a la pestaña donde se rellena.
                   </p>
-                  
+
                   {/* Contenedor del Diagrama */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 mt-6">
-                    
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+
                     {/* Paso 1 */}
                     <Card className="p-4 bg-accent/5 border border-accent/20 shadow-sm relative group overflow-hidden">
                       <div className="absolute top-0 left-0 w-full h-1 bg-accent/50 group-hover:bg-accent transition-colors"></div>
-                      <h3 className="font-bold text-accent mb-3 text-body flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center text-caption">1</span> Contexto
+                      <h3 className="font-bold text-accent mb-1 text-body flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center text-caption">1</span> Identificación y contexto
                       </h3>
+                      <p className="text-caption text-muted/60 mb-3">Cap. 1 del PD+: identificación, marco normativo y contextualización.</p>
                       <ul className="text-caption text-muted/80 space-y-2 font-medium">
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-accent/70 shrink-0"/>Identificación</li>
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-accent/70 shrink-0"/>Contexto del Aula</li>
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-accent/70 shrink-0"/>Planes y Contingencia</li>
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-accent/70 shrink-0"/>Inclusión y Diversidad</li>
+                        <li><Link href="/contexto?tab=presentacion" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-accent/70 shrink-0"/>Identificación del módulo</Link></li>
+                        <li><Link href="/contexto?tab=entorno" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-accent/70 shrink-0"/>Contextualización (geo/socio/escolar)</Link></li>
+                        <li><Link href="/alumnado?tab=contexto" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-accent/70 shrink-0"/>Características del alumnado</Link></li>
                       </ul>
                     </Card>
 
                     {/* Paso 2 */}
                     <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
                       <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
-                      <h3 className="font-bold text-foreground mb-3 text-body flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">2</span> Currículo
+                      <h3 className="font-bold text-foreground mb-1 text-body flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">2</span> Desarrollo curricular
                       </h3>
+                      <p className="text-caption text-muted/60 mb-3">Cap. 2: RA, CE, contenidos y unidades didácticas.</p>
                       <ul className="text-caption text-muted/80 space-y-2 font-medium">
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>RA y CE</li>
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Definición UDs</li>
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Relación RA-UD</li>
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Contribuciones (OG)</li>
+                        <li><Link href="/curriculo?tab=ponderacion-ra-ce" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>RA y CE (ponderación)</Link></li>
+                        <li><Link href="/curriculo?tab=unidades" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Unidades didácticas (UD)</Link></li>
+                        <li><Link href="/curriculo?tab=relacion-ra-ud" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Relación RA-UD</Link></li>
+                        <li><Link href="/curriculo?tab=contribucion-og" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Contribución a los OG</Link></li>
                       </ul>
                     </Card>
 
                     {/* Paso 3 */}
                     <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
                       <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
-                      <h3 className="font-bold text-foreground mb-3 text-body flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">3</span> Metodología
+                      <h3 className="font-bold text-foreground mb-1 text-body flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">3</span> FEOE / FP Dual
                       </h3>
+                      <p className="text-caption text-muted/60 mb-3">Cap. 2.9: formación en empresa u organismo equiparado.</p>
                       <ul className="text-caption text-muted/80 space-y-2 font-medium">
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Principios/Estrategias</li>
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Materiales/Recursos</li>
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Empresa / FEOE</li>
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Calidad EQAVET</li>
+                        <li><Link href="/contexto?tab=planes" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Organización y seguimiento FEOE</Link></li>
+                        <li><Link href="/curriculo?tab=ponderacion-ra-ce" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>RA marcados como dualizables</Link></li>
                       </ul>
                     </Card>
 
                     {/* Paso 4 */}
                     <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
                       <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
-                      <h3 className="font-bold text-foreground mb-3 text-body flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">4</span> Evaluación
+                      <h3 className="font-bold text-foreground mb-1 text-body flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">4</span> Metodología didáctica
                       </h3>
+                      <p className="text-caption text-muted/60 mb-3">Cap. 3: principios, estrategias, recursos y agrupamientos.</p>
                       <ul className="text-caption text-muted/80 space-y-2 font-medium">
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Instrumentos</li>
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Indicadores/Rúbricas</li>
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Normativa</li>
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Ponderación</li>
+                        <li><Link href="/metodologia?tab=metodologia" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Principios, estrategias y ABP/ABR</Link></li>
                       </ul>
                     </Card>
 
                     {/* Paso 5 */}
                     <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
                       <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
-                      <h3 className="font-bold text-foreground mb-3 text-body flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">5</span> Aula
+                      <h3 className="font-bold text-foreground mb-1 text-body flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">5</span> Evaluación y calificación
                       </h3>
+                      <p className="text-caption text-muted/60 mb-3">Cap. 4: instrumentos, criterios de calificación y ponderación.</p>
                       <ul className="text-caption text-muted/80 space-y-2 font-medium">
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Temporalización (Gantt)</li>
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Desarrollo de UDs</li>
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Tareas</li>
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Calendario</li>
+                        <li><Link href="/contexto?tab=procedimientos" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Procedimiento de evaluación</Link></li>
+                        <li><Link href="/instrumentos?tab=resumen" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Instrumentos e indicadores</Link></li>
+                        <li><Link href="/calificaciones?tab=matriz" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Matriz de calificaciones</Link></li>
                       </ul>
                     </Card>
 
                     {/* Paso 6 */}
+                    <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
+                      <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
+                      <h3 className="font-bold text-foreground mb-1 text-body flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">6</span> Inclusión
+                      </h3>
+                      <p className="text-caption text-muted/60 mb-3">Cap. 5: medidas de respuesta educativa para la inclusión.</p>
+                      <ul className="text-caption text-muted/80 space-y-2 font-medium">
+                        <li><Link href="/metodologia?tab=diversidad" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Medidas de inclusión y ACNEAE</Link></li>
+                      </ul>
+                    </Card>
+
+                    {/* Paso 7 */}
+                    <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
+                      <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
+                      <h3 className="font-bold text-foreground mb-1 text-body flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">7</span> Actividades complementarias
+                      </h3>
+                      <p className="text-caption text-muted/60 mb-3">Cap. 6: actividades complementarias y extraescolares.</p>
+                      <ul className="text-caption text-muted/80 space-y-2 font-medium">
+                        <li><Link href="/calendario?tab=actividades" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Actividades complementarias</Link></li>
+                      </ul>
+                    </Card>
+
+                    {/* Paso 8 */}
+                    <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
+                      <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
+                      <h3 className="font-bold text-foreground mb-1 text-body flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">8</span> Contingencia y publicidad
+                      </h3>
+                      <p className="text-caption text-muted/60 mb-3">Cap. 7-8: plan de contingencia y publicidad de la programación.</p>
+                      <ul className="text-caption text-muted/80 space-y-2 font-medium">
+                        <li><Link href="/metodologia?tab=contingencia" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Plan de contingencia</Link></li>
+                        <li><Link href="/contexto?tab=entorno" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Bibliografía y publicidad</Link></li>
+                      </ul>
+                    </Card>
+
+                    {/* Paso 9 */}
                     <Card className="p-4 bg-success/5 border border-success/20 shadow-sm relative group overflow-hidden">
                       <div className="absolute top-0 left-0 w-full h-1 bg-success/50 group-hover:bg-success transition-colors"></div>
-                      <h3 className="font-bold text-success mb-3 text-body flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-success/20 flex items-center justify-center text-caption">6</span> Magia
+                      <h3 className="font-bold text-success mb-1 text-body flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-success/20 flex items-center justify-center text-caption">9</span> Magia: generar el documento
                       </h3>
+                      <p className="text-caption text-muted/60 mb-3">Comprueba antes en Inicio → Verificación que todo esté listo.</p>
                       <ul className="text-caption text-muted/80 space-y-2 font-medium">
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-success/70 shrink-0"/>Generación PDF</li>
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-success/70 shrink-0"/>Guía para Defensa</li>
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-success/70 shrink-0"/>Comparativa</li>
+                        <li><Link href="/magia?tab=programacion" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-success/70 shrink-0"/>Generar PD+ (JEG), pd= (BOA) o pd-</Link></li>
+                        <li><Link href="/inicio?tab=verificacion" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-success/70 shrink-0"/>Verificar antes de generar</Link></li>
                       </ul>
                     </Card>
 
@@ -868,185 +1059,75 @@ export default function InicioPage() {
                     Mapa de la aplicación (sitemap)
                   </h2>
                   <p className="text-body text-foreground/80 leading-relaxed">
-                    Estructura organizativa de Cuaderno FP. Puedes usar los enlaces para navegar rápidamente a cualquier sección.
+                    Estructura organizativa de Cuaderno FP. Se genera a partir de la configuración real de
+                    navegación (<code className="text-caption bg-foreground/10 px-1 rounded">config/navigation.ts</code>),
+                    así que no puede quedarse desactualizado como su versión anterior.
                   </p>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {/* COLUMNA 1: GENERAL */}
+                  <div className="bg-info/5 border border-info/20 rounded-xl p-4 text-body text-muted leading-relaxed">
+                    <strong className="text-foreground">¿Es adecuado el agrupamiento actual?</strong> En general
+                    sí: separa con claridad lo reutilizable (<em>Programación</em>: Contexto/Currículo/
+                    Metodología/Instrumentos), lo específico del año (<em>Curso</em>: Calendario/Alumnado/
+                    Seguimiento/Calificaciones) y lo transversal (<em>Grupo</em>: Archivos/Catálogo/Magia — Magia
+                    genera documentos a partir de ambos, por eso no encaja solo en uno de los dos anteriores).
+                    La única costura visible es <em>Normativa</em> dentro de <em>Anexos</em>: es una tabla de
+                    consulta como Catálogo, no un "anexo" de la programación — encajaría igual de bien en
+                    <em> Grupo</em>. <em>Mejora</em> (EQAVET) sí es un anexo genuino: es la reflexión de cierre de
+                    curso, no algo que se rellene mientras se programa.
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">
+                    {/* GENERAL: páginas fuera de navGroups */}
                     <div className="space-y-6">
                       <h3 className="font-extrabold text-subheading border-b-2 border-accent pb-2 text-foreground">General</h3>
                       <ul className="space-y-4 text-body">
-                        <li>
-                          <a href="/inicio" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Inicio
-                          </a>
-                        </li>
-                        <li>
-                          <a href="/ayuda" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Ayuda
-                          </a>
-                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/ayuda?tab=asistente-ia" className="hover:text-accent transition-colors block py-0.5">— Asistente IA</a>
-                            <a href="/ayuda?tab=verificacion" className="hover:text-accent transition-colors block py-0.5">— Verificación</a>
-                            <a href="/ayuda?tab=ideas" className="hover:text-accent transition-colors block py-0.5">— Ideas (Roadmap)</a>
-                            <a href="/ayuda?tab=contacto" className="hover:text-accent transition-colors block py-0.5">— Contacto</a>
-                            <a href="/ayuda?tab=autores" className="hover:text-accent transition-colors block py-0.5">— Autores</a>
-                          </div>
-                        </li>
-                        <li>
-                          <a href="/perfil" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Perfil
-                          </a>
-                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/perfil?tab=aspecto" className="hover:text-accent transition-colors block py-0.5">— Aspecto</a>
-                            <a href="/perfil?tab=idioma" className="hover:text-accent transition-colors block py-0.5">— Idioma</a>
-                            <a href="/perfil?tab=accesibilidad" className="hover:text-accent transition-colors block py-0.5">— Accesibilidad</a>
-                            <a href="/perfil?tab=seguridad" className="hover:text-accent transition-colors block py-0.5">— Seguridad</a>
-                          </div>
-                        </li>
-                        <li>
-                          <a href="/archivos" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Archivos
-                          </a>
-                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/archivos?tab=datos" className="hover:text-accent transition-colors block py-0.5">— Archivos locales</a>
-                            <a href="/archivos?tab=nube" className="hover:text-accent transition-colors block py-0.5">— Nube</a>
-                          </div>
-                        </li>
-                        <li>
-                          <a href="/catalogo" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Catálogo
-                          </a>
-                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/catalogo?tab=comunidades" className="hover:text-accent transition-colors block py-0.5">— Territorios (CCAA)</a>
-                            <a href="/catalogo?tab=grados" className="hover:text-accent transition-colors block py-0.5">— Grados</a>
-                            <a href="/catalogo?tab=familias" className="hover:text-accent transition-colors block py-0.5">— Familias</a>
-                            <a href="/catalogo?tab=titulo" className="hover:text-accent transition-colors block py-0.5">— Títulos</a>
-                            <a href="/catalogo?tab=cursos" className="hover:text-accent transition-colors block py-0.5">— Módulos</a>
-                            <a href="/catalogo?tab=modulos" className="hover:text-accent transition-colors block py-0.5">— RA → CE</a>
-                            <a href="/catalogo?tab=incual" className="hover:text-accent transition-colors block py-0.5">— ECP INCUAL</a>
-                          </div>
-                        </li>
-                        <li>
-                          <a href="/documentos" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Documentos
-                          </a>
-                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/documentos?tab=normativa" className="hover:text-accent transition-colors block py-0.5">— Normativa</a>
-                            <a href="/documentos?tab=curriculos" className="hover:text-accent transition-colors block py-0.5">— Currículos</a>
-                            <a href="/documentos?tab=plantillas" className="hover:text-accent transition-colors block py-0.5">— Plantillas</a>
-                          </div>
-                        </li>
-                        <li>
-                          <a href="/legal" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Legal
-                          </a>
-                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/legal?tab=aviso" className="hover:text-accent transition-colors block py-0.5">— Aviso legal</a>
-                            <a href="/legal?tab=privacidad" className="hover:text-accent transition-colors block py-0.5">— Privacidad</a>
-                            <a href="/legal?tab=cookies" className="hover:text-accent transition-colors block py-0.5">— Cookies</a>
-                            <a href="/legal?tab=accesibilidad" className="hover:text-accent transition-colors block py-0.5">— Accesibilidad</a>
-                            <span className="text-accent font-bold block py-0.5">— Mapa web (actual)</span>
-                            <a href="/legal?tab=contribuciones" className="hover:text-accent transition-colors block py-0.5">— Contribuciones</a>
-                          </div>
-                        </li>
+                        {[
+                          { href: "/inicio", label: "Inicio", tabs: TABS.map(t => ({ id: t.id, label: t.cleanLabel })) },
+                          { href: "/agenda", label: "Agenda", tabs: [{ id: "actual", label: "Actual" }, { id: "planificacion", label: "Planificación" }] },
+                          { href: "/informes", label: "Informes", tabs: [{ id: "curso", label: "Curso" }] },
+                          { href: "/legal", label: "Legal", tabs: [{ id: "aviso", label: "Aviso legal" }, { id: "privacidad", label: "Privacidad" }, { id: "cookies", label: "Cookies" }, { id: "accesibilidad", label: "Accesibilidad" }] },
+                        ].map(page => (
+                          <li key={page.href}>
+                            <Link href={page.href} className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                              <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> {page.label}
+                            </Link>
+                            <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                              {page.tabs.map(tab => (
+                                <Link key={tab.id} href={`${page.href}?tab=${tab.id}`} className="hover:text-accent transition-colors block py-0.5">— {tab.label}</Link>
+                              ))}
+                            </div>
+                          </li>
+                        ))}
                       </ul>
                     </div>
 
-                    {/* COLUMNA 2: PROGRAMACIÓN */}
-                    <div className="space-y-6">
-                      <h3 className="font-extrabold text-subheading border-b-2 border-accent pb-2 text-foreground">Programación</h3>
-                      <ul className="space-y-4 text-body">
-                        <li>
-                          <a href="/contexto" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Contexto
-                          </a>
-                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/contexto?tab=datos" className="hover:text-accent transition-colors block py-0.5">— Datos</a>
-                            <a href="/contexto?tab=contexto" className="hover:text-accent transition-colors block py-0.5">— Contexto</a>
-                            <a href="/contexto?tab=planes" className="hover:text-accent transition-colors block py-0.5">— Planes</a>
-                            <a href="/contexto?tab=diversidad" className="hover:text-accent transition-colors block py-0.5">— Diversidad</a>
-                          </div>
-                        </li>
-                        <li>
-                          <a href="/curriculo" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Currículo
-                          </a>
-                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/curriculo?tab=ra" className="hover:text-accent transition-colors block py-0.5">— RA y CE</a>
-                            <a href="/curriculo?tab=ud" className="hover:text-accent transition-colors block py-0.5">— Unidades (UD)</a>
-                            <a href="/curriculo?tab=relacion" className="hover:text-accent transition-colors block py-0.5">— Relación RA-UD</a>
-                            <a href="/curriculo?tab=contribucion" className="hover:text-accent transition-colors block py-0.5">— Contribución OG</a>
-                          </div>
-                        </li>
-                        <li>
-                          <a href="/metodologia" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Metodología
-                          </a>
-                        </li>
-                        <li>
-                          <a href="/magia" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Magia
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-
-                    {/* COLUMNA 3: CURSO */}
-                    <div className="space-y-6">
-                      <h3 className="font-extrabold text-subheading border-b-2 border-accent pb-2 text-foreground">Curso</h3>
-                      <ul className="space-y-4 text-body">
-                        <li>
-                          <a href="/calendario" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Calendario
-                          </a>
-                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/calendario?tab=fechas" className="hover:text-accent transition-colors block py-0.5">— Fechas clave</a>
-                            <a href="/calendario?tab=eventos" className="hover:text-accent transition-colors block py-0.5">— Eventos</a>
-                            <a href="/calendario?tab=visual" className="hover:text-accent transition-colors block py-0.5">— Visual</a>
-                            <a href="/calendario?tab=complementarias" className="hover:text-accent transition-colors block py-0.5">— Complementarias</a>
-                          </div>
-                        </li>
-                        <li>
-                          <a href="/alumnado" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Alumnado
-                          </a>
-                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/alumnado?tab=listado" className="hover:text-accent transition-colors block py-0.5">— Listado</a>
-                            <a href="/alumnado?tab=plano" className="hover:text-accent transition-colors block py-0.5">— Plano del aula</a>
-                            <a href="/alumnado?tab=contexto" className="hover:text-accent transition-colors block py-0.5">— Contexto del grupo</a>
-                          </div>
-                        </li>
-                        <li>
-                          <a href="/seguimiento" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Seguimiento
-                          </a>
-                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/seguimiento?tab=clases" className="hover:text-accent transition-colors block py-0.5">— Clases</a>
-                            <a href="/seguimiento?tab=tutoria" className="hover:text-accent transition-colors block py-0.5">— Tutoría</a>
-                            <a href="/seguimiento?tab=asistencia" className="hover:text-accent transition-colors block py-0.5">— Asistencia</a>
-                            <a href="/seguimiento?tab=abandono" className="hover:text-accent transition-colors block py-0.5">— Alerta abandono</a>
-                          </div>
-                        </li>
-                        <li>
-                          <a href="/calificaciones" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Calificaciones
-                          </a>
-                          <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                            <a href="/calificaciones?tab=resumen" className="hover:text-accent transition-colors block py-0.5">— Resumen grupal</a>
-                            <a href="/calificaciones?tab=matriz" className="hover:text-accent transition-colors block py-0.5">— Matriz de notas</a>
-                            <a href="/calificaciones?tab=detalle" className="hover:text-accent transition-colors block py-0.5">— Por alumnado</a>
-                            <a href="/calificaciones?tab=grupal" className="hover:text-accent transition-colors block py-0.5">— Informe Grupal</a>
-                            <a href="/calificaciones?tab=individual" className="hover:text-accent transition-colors block py-0.5">— Informe Individual</a>
-                          </div>
-                        </li>
-                        <li>
-                          <a href="/informes" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Informes
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
+                    {/* Columnas dinámicas: una por cada grupo real de navigation.ts */}
+                    {navGroups.map(group => (
+                      <div key={group.title} className="space-y-6">
+                        <h3 className="font-extrabold text-subheading border-b-2 border-accent pb-2 text-foreground">
+                          {group.title.replace(/\s*\[.*\]$/, '')}
+                        </h3>
+                        <ul className="space-y-4 text-body">
+                          {group.items.map(item => {
+                            const basePath = item.href.split('?')[0];
+                            const tabs = PAGE_TABS[basePath] || [];
+                            return (
+                              <li key={item.href}>
+                                <Link href={basePath} className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> {item.label}
+                                </Link>
+                                {tabs.length > 0 && (
+                                  <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                                    {tabs.map(tab => (
+                                      <Link key={tab.id} href={`${basePath}?tab=${tab.id}`} className="hover:text-accent transition-colors block py-0.5">— {tab.label}</Link>
+                                    ))}
+                                  </div>
+                                )}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    ))}
                   </div>
                 </section>
               </div>
