@@ -109,7 +109,7 @@ anywhere (the app has no external users yet, so there's no legacy data to stay c
 don't reintroduce a "handle both formats" helper for these; fix the schema/data at the source instead,
 the way `backend/alembic/versions/a1f3c7b9e2d4_*.py` and `b7e2d5f1a9c3_*.py` did).
 
-### PD (programación didáctica) generation — 3 tiers, one has an unfinished template
+### PD (programación didáctica) generation — 3 tiers
 Three docx-template generators, internally called **pd-** (`generador_pd_minima_tpl.py`, template
 `modelo_pd_fp-.docx`), **pd=** (`generador_pd_suficiente_tpl.py`, `modelo_pd_fp=.docx`, the official
 BOA Aragón format), and **pd+** (`generador_pd_jeg.py`, `modelo_pd_jeg_tpl_final.docx`, CIFPA/JEG
@@ -120,19 +120,30 @@ grep for the generator name won't find the call site). All three use `docxtpl` (
 a new `moduleData`/`cursoData` field that a generator needs, it must be added to that dict, not just to
 the generator's own `_build_context()`, or it'll always read as empty.
 
-**`modelo_pd_jeg_tpl_final.docx` is only partially Jinja-templated.** It's produced by
-`backend/scripts/preparar_plantilla_jeg_final.py`, which reuses the text-replacement mapping from
-`preparar_plantilla_pd_detallada.py` (`process_xml()`, ~80 literal-text→`{{ var }}` replacements) — but
-that mapping was written against `modelo_pd_fp+.docx`'s exact wording, not the JEG template's, so most
-replacements silently find no match and leave static placeholder text (e.g. the whole "Identificación"
-header table — tipo/nombre de centro, código y denominación del módulo, profesorado — never got
-converted to `{{ }}` tags at all; confirmed by grepping the unzipped `.docx` XML for those variable
-names — they don't exist anywhere in the document). Don't assume setting the corresponding `data_pd`
-key will make these show up — the docx itself needs a proper prep script (or manual Word editing)
-first. See `docs/sesion-2026-08-02.md` §14.3 for the full list of what's confirmed working vs. not.
-`generador_pd_suficiente_tpl.py` similarly has 4 fields (`texto_introduccion`, `texto_uds_modulo`,
-`texto_feoe`, `texto_criterios_calificacion`) with no frontend input anywhere — they only ever get
-their auto-generated defaults from `config_contexto.get(key, default)`.
+**`modelo_pd_jeg_tpl_final.docx` is built in two passes**, both in `backend/scripts/`:
+`preparar_plantilla_jeg_final.py` (reuses the ~80-entry text-replacement mapping from
+`preparar_plantilla_pd_detallada.py`, written against a *different* source document so a lot of it
+silently no-ops on this one) followed by `preparar_plantilla_jeg_pass2.py` (a JEG-specific mapping
+that fixes what pass 1 misses — the "Identificación" header table uses plain unbracketed placeholder
+text, not `[[ ... ]]`, so it needed exact-text matches instead; a couple of fields also needed
+positional/occurrence-indexed replacement because the exact same text appears twice in the document —
+once as the cell label, once as the value placeholder — and a blind global replace would wipe the
+label too). If you regenerate the template, run **both** scripts in order. Two known fields
+(`Titulación`, the qualification's short code like "IFC201") still have no template mapping at all —
+there's no app field to source them from yet. To audit any docxtpl template: unzip it (`.docx` is a
+zip), read `word/document.xml`, **strip XML tags before regexing for `{{ }}`** — Word splits text
+across multiple `<w:t>` runs on formatting/autocorrect boundaries, so searching the raw tag-laden XML
+gives false negatives. Better still, render it with real data and grep the *output* for leftover
+single-line `[[ ... ]]`/`{{ ... }}` — multi-line `[[ ... ]]` blocks are intentionally left for the
+teacher to hand-edit (documented in the template's own "Instrucciones de uso" section), only
+single-line ones with a real corresponding data field are bugs. Full trace in
+`docs/sesion-2026-08-02.md` §14–15.
+
+`generador_pd_suficiente_tpl.py` (pd=) already ships as a complete, correctly-tagged docxtpl template
+(no prep script needed) — confirmed by rendering it with real data and finding zero unrendered tags.
+Its 4 free-text fields (`texto_introduccion`, `texto_uds_modulo`, `texto_feoe`,
+`texto_criterios_calificacion`, all under `moduleData.config_contexto`) now have UI inputs in
+`ContextoTab.tsx`; leaving them blank still falls back to the auto-generated defaults.
 
 To inspect what a `.docx` template actually expects: unzip it (`.docx` is a zip), read
 `word/document.xml`, **strip XML tags before regexing for `{{ }}`** — Word splits text across multiple

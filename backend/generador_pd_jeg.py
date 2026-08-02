@@ -80,6 +80,9 @@ def _build_context(data: dict) -> dict:
         "nivel": nivel,
         "curso_numero": curso_numero,
         "modalidad": config.get("modalidad", "presencial"),
+        "codigo_grado": config.get("codigo_grado", ""),
+        "modulo_codigo": data.get("info_modulo", {}).get("codigo", ""),
+        "profesorado": data.get("profesorado", ""),
 
         # Datos comunes
         "ciclo": ciclo,

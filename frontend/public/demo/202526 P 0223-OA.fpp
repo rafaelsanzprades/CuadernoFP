@@ -704,7 +704,6 @@
     "codigo": "0223",
     "acronimo": "AO",
     "horas": 200,
-    "horasSemanales": 6,
     "curso": "1",
     "familia": "Informática y Comunicaciones",
     "ciclo": "Sistemas microinformáticos y redes (SMR)",
@@ -716,14 +715,22 @@
     "criterio_conocimiento": 40,
     "criterio_procedimiento_practicas": 30,
     "criterio_procedimiento_ejercicios": 20,
-    "criterio_tareas": 10
+    "criterio_tareas": 10,
+    "h_sem": 6,
+    "centro": "CPIFP CIFPA",
+    "profesorado": "Javier Edo Gual",
+    "titulo_fp": "IFC201 - Sistemas microinformáticos y redes",
+    "ccaa": "aragon"
   },
   "config_contexto": {
     "entorno_geografico": "El centro educativo es de titularidad pública situado en el barrio de La Almozara, en Zaragoza.",
     "entorno_socioeconomico": "El módulo mantiene una relación directa con el tejido empresarial y tecnológico de nuestro entorno. Las orientaciones metodológicas y las tareas competenciales diseñadas persiguen acercar al alumnado a la realidad del sector productivo.",
     "contexto_escolar": "La oferta académica del instituto es amplia y diversa. Un rasgo distintivo de la identidad del centro es su compromiso con la inclusión, siendo un centro preferente para la escolarización de alumnado con necesidades especiales.",
     "caracteristicas_alumnado": "Se identifican y respetan las características y necesidades del alumnado, adaptando las metodologías, los recursos y las evaluaciones a sus capacidades. Se planifican actividades que promuevan la participación activa.",
-    "infraestructura": "El proceso de enseñanza-aprendizaje se desarrollará principalmente en las aulas-taller del centro, dotadas con equipos informáticos, cañón proyector y conexión a internet. Se dispondrá del equipamiento específico del ciclo."
+    "infraestructura": "El proceso de enseñanza-aprendizaje se desarrollará principalmente en las aulas-taller del centro, dotadas con equipos informáticos, cañón proyector y conexión a internet. Se dispondrá del equipamiento específico del ciclo.",
+    "tipo_ensenanza": "Ciclo Formativo de Grado Medio",
+    "familia_profesional": "Informática y Comunicaciones",
+    "tipo_centro": "publico"
   },
   "medidas_inclusion": [
     "[NIVEL-DUA] Medidas DUA a nivel de grupo — Representación: diagramas de flujo, infografías, esquemas, vídeos tutoriales. Calendarios visuales de la UD.",

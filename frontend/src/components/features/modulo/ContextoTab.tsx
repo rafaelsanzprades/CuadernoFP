@@ -1,5 +1,5 @@
 "use client";
-import { School, Settings, User, Info, FileText } from "lucide-react";
+import { School, Settings, User, Info, FileText, BookOpen } from "lucide-react";
 import { NarrativeField } from "@/components/ui/NarrativeField";
 import { useAppStore } from "@/store/useAppStore";
 
@@ -132,6 +132,54 @@ export function ContextoTab() {
               value={config_aula["Atención a la diversidad"] || ""}
               onChange={e => handleAulaChange("Atención a la diversidad", e.target.value)}
               className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-danger focus:outline-none"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="glass-card p-6 border-t-4 border-t-teal-500">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
+          <span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Textos del modelo BOA Aragón (pd=)
+        </h2>
+        <p className="text-caption text-muted mb-4">
+          Estos 4 campos son específicos del documento &quot;Programación suficiente&quot; (modelo oficial BOA Aragón).
+          Si se dejan vacíos, se autogenera un texto por defecto razonable a partir del resto de datos del módulo.
+        </p>
+        <div className="space-y-4">
+          <div>
+            <label className="text-body text-muted mb-1 block">Introducción</label>
+            <textarea
+              value={config_contexto.texto_introduccion || ""}
+              onChange={e => handleContextoChange("texto_introduccion", e.target.value)}
+              placeholder="Párrafo introductorio del documento. Si se deja vacío, se genera uno automáticamente con el nombre del módulo, ciclo, régimen y duración."
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-body text-muted mb-1 block">Unidades didácticas del módulo</label>
+            <textarea
+              value={config_contexto.texto_uds_modulo || ""}
+              onChange={e => handleContextoChange("texto_uds_modulo", e.target.value)}
+              placeholder="Descripción de cómo se organizan las unidades didácticas. Si se deja vacío, se genera automáticamente a partir de df_ud."
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-body text-muted mb-1 block">FEOE</label>
+            <textarea
+              value={config_contexto.texto_feoe || ""}
+              onChange={e => handleContextoChange("texto_feoe", e.target.value)}
+              placeholder="Texto sobre la formación en empresa. Si se deja vacío, se genera automáticamente a partir de los RA marcados como dualizables (is_dual)."
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-body text-muted mb-1 block">Criterios de calificación</label>
+            <textarea
+              value={config_contexto.texto_criterios_calificacion || ""}
+              onChange={e => handleContextoChange("texto_criterios_calificacion", e.target.value)}
+              placeholder="Criterios de calificación y redondeo del módulo."
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
         </div>
