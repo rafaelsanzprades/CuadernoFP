@@ -12,6 +12,10 @@ const ALLOWED_PROGRAMACION_KEYS = [
   'df_tareas', 'df_act', 'df_instr', 'df_pr', 'df_dua', 'df_contingencia', 'df_ace',
   // Configuración
   'info_modulo', 'config_contexto', 'config_aula', 'config_redondeo', 'ra_og_mapping',
+  // FP Dual y EQAVET
+  'dual_regimen', 'eqavet_evaluacion',
+  // Indicadores del sistema de calificación por indicador
+  'df_indicadores',
   // Fechas, horario y calendario
   'info_fechas', 'horario', 'calendar_notes', 'config_pesos_trim',
   // Planificación y empresas
@@ -37,7 +41,7 @@ const ALLOWED_PROGRAMACION_KEYS = [
 
 const ALLOWED_CURSO_KEYS = [
   // Alumnado y evaluación
-  'df_al', 'df_sgmt', 'df_feoe', 'df_eval',
+  'df_al', 'df_sgmt', 'df_feoe', 'df_eval', 'df_calificaciones',
   // Seguimiento diario y tutoría
   'daily_ledger', 'tutoria_ledger', 'profesional_ledger',
   // Horario y fechas (van en .fpc como datos del curso)
@@ -800,6 +804,7 @@ export const fileManager = {
         }
       }
 
+      parsed = Array.isArray(parsed) ? parsed[0] : parsed;
       if (!parsed || !parsed.df_ud) return false;
 
       const id = filename.replace('.fpp', '').replace('.json', '') || "imported-pd";
@@ -906,6 +911,7 @@ export const fileManager = {
         }
       }
 
+      parsed = Array.isArray(parsed) ? parsed[0] : parsed;
       if (!parsed || !parsed.df_al) return false;
       const id = filename.replace('.fpc', '').replace('.json', '') || "imported-curso";
       useAppStore.getState().setActiveCursoId(id);

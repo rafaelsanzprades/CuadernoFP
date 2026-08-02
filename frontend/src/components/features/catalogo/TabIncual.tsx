@@ -78,7 +78,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
         {/* Selector Familia */}
         <Card className="p-6 bg-gradient-to-br from-card to-accent/5 lg:col-span-2 flex flex-col justify-center gap-2">
-          <label htmlFor="select-familia-incual" className="text-xs font-semibold text-muted tracking-wider">
+          <label htmlFor="select-familia-incual" className="text-caption font-semibold text-muted tracking-wider">
             Familia Profesional
           </label>
           <div className="relative">
@@ -89,7 +89,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
               onChange={(e) => {
                 updateGlobalSelection({ familia: e.target.value, tituloCodigo: "", moduloCodigo: "" });
               }}
-              className="w-full bg-background/50 border border-[var(--glass-border)] rounded-xl pl-10 pr-4 py-3 text-sm text-foreground font-semibold focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all cursor-pointer appearance-none"
+              className="w-full bg-background/50 border border-[var(--glass-border)] rounded-xl pl-10 pr-4 py-3 text-body text-foreground font-semibold focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all cursor-pointer appearance-none"
             >
               <option value="">-- Selecciona Familia --</option>
               {families.map((f) => (
@@ -99,7 +99,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
             <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted pointer-events-none" />
           </div>
           {incualData?.description && (
-            <p className="mt-2 text-sm text-muted line-clamp-2">
+            <p className="mt-2 text-body text-muted line-clamp-2">
               {incualData.description}
             </p>
           )}
@@ -107,37 +107,37 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
 
         {/* Oferta Formativa */}
         <Card className="p-4 border-l-4 border-l-blue-500 lg:col-span-1 flex flex-col justify-center">
-          <h3 className="font-semibold flex items-start gap-2 text-sm leading-snug">
+          <h3 className="font-semibold flex items-start gap-2 text-body leading-snug">
             <BookOpen className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" /> 
             <span>Grado C<br/><span className="font-normal text-muted-foreground">(Certificados)</span></span>
           </h3>
-          <p className="text-2xl font-bold mt-2 text-right">{incualData?.oferta_grado_c?.length || 0}</p>
+          <p className="text-heading font-bold mt-2 text-right">{incualData?.oferta_grado_c?.length || 0}</p>
         </Card>
         <Card className="p-4 border-l-4 border-l-green-500 lg:col-span-1 flex flex-col justify-center">
-          <h3 className="font-semibold flex items-start gap-2 text-sm leading-snug">
+          <h3 className="font-semibold flex items-start gap-2 text-body leading-snug">
             <BookOpen className="w-4 h-4 text-green-500 shrink-0 mt-0.5" /> 
             <span>Grado D<br/><span className="font-normal text-muted-foreground">(Ciclos)</span></span>
           </h3>
-          <p className="text-2xl font-bold mt-2 text-right">{incualData?.oferta_grado_d?.length || 0}</p>
+          <p className="text-heading font-bold mt-2 text-right">{incualData?.oferta_grado_d?.length || 0}</p>
         </Card>
         <Card className="p-4 border-l-4 border-l-purple-500 lg:col-span-1 flex flex-col justify-center">
-          <h3 className="font-semibold flex items-start gap-2 text-sm leading-snug">
+          <h3 className="font-semibold flex items-start gap-2 text-body leading-snug">
             <BookOpen className="w-4 h-4 text-purple-500 shrink-0 mt-0.5" /> 
             <span>Grado E<br/><span className="font-normal text-muted-foreground">(Especialización)</span></span>
           </h3>
-          <p className="text-2xl font-bold mt-2 text-right">{incualData?.oferta_grado_e?.length || 0}</p>
+          <p className="text-heading font-bold mt-2 text-right">{incualData?.oferta_grado_e?.length || 0}</p>
         </Card>
       </div>
 
       {!incualData && globalSelection.familia && (
         <div className="text-center py-20 border border-dashed rounded-xl border-accent/20">
-          <h3 className="text-lg font-medium text-muted">No se encontraron datos INCUAL para la familia {globalSelection.familia}</h3>
+          <h3 className="text-subheading font-medium text-muted">No se encontraron datos INCUAL para la familia {globalSelection.familia}</h3>
         </div>
       )}
 
       {!globalSelection.familia && (
         <div className="text-center py-20 border border-dashed rounded-xl border-accent/20">
-          <h3 className="text-lg font-medium text-muted">Selecciona una familia profesional para ver sus estándares de competencia</h3>
+          <h3 className="text-subheading font-medium text-muted">Selecciona una familia profesional para ver sus estándares de competencia</h3>
         </div>
       )}
 
@@ -147,7 +147,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
       {/* Centros de Referencia Nacional (CRN) */}
       {incualData.crn_centers && incualData.crn_centers.length > 0 && (
         <Card className="p-6">
-          <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+          <h3 className="text-subheading font-bold mb-4 flex items-center gap-2">
             <MapPin className="w-5 h-5 text-accent" />
             Centros de Referencia Nacional (CRN)
           </h3>
@@ -157,8 +157,8 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
                 <a href={crn.url} target="_blank" rel="noreferrer" className="font-medium text-accent hover:underline flex items-center gap-1">
                   {crn.name} <ExternalLink className="w-3 h-3" />
                 </a>
-                <p className="text-sm mt-2"><span className="text-muted">Áreas:</span> {crn.areas}</p>
-                <p className="text-sm"><span className="text-muted">Titular:</span> {crn.titular}</p>
+                <p className="text-body mt-2"><span className="text-muted">Áreas:</span> {crn.areas}</p>
+                <p className="text-body"><span className="text-muted">Titular:</span> {crn.titular}</p>
               </div>
             ))}
           </div>
@@ -166,7 +166,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
       )}
 
       {/* Listado de ECPs */}
-      <h3 className="text-lg font-bold mt-8 mb-4">Estándares de competencia profesional (ECP)</h3>
+      <h3 className="text-subheading font-bold mt-8 mb-4">Estándares de competencia profesional (ECP)</h3>
       
       <div className="space-y-4">
         {/* Nivel 1 */}
@@ -175,7 +175,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
             className="w-full flex items-center justify-between p-4 bg-background hover:bg-muted/10 transition-colors focus:outline-none" 
             onClick={() => toggleLevel('1')}
           >
-            <span className="font-semibold text-lg text-foreground">Nivel 1 ({incualData.ecp_nivel_1?.length || 0})</span>
+            <span className="font-semibold text-subheading text-foreground">Nivel 1 ({incualData.ecp_nivel_1?.length || 0})</span>
             {expandedLevel === '1' ? <ChevronUp className="w-5 h-5 text-muted" /> : <ChevronDown className="w-5 h-5 text-muted" />}
           </button>
           {expandedLevel === '1' && (
@@ -183,13 +183,13 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
               {incualData.ecp_nivel_1?.map((ecp: any, idx: number) => (
                 <div key={idx} className="p-3 bg-card border rounded-md shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex justify-between items-start gap-4">
-                    <div className="text-sm leading-relaxed">
-                      <span className="inline-block px-2 py-0.5 bg-blue-100 text-blue-800 text-xs font-mono rounded mr-3 align-middle">{ecp.code}</span>
+                    <div className="text-body leading-relaxed">
+                      <span className="inline-block px-2 py-0.5 bg-blue-100 text-blue-800 text-caption font-mono rounded mr-3 align-middle">{ecp.code}</span>
                       <span className="font-medium text-foreground align-middle">{ecp.title}</span>
                       {ecp.description && <span className="text-muted ml-2 align-middle">- {ecp.description}</span>}
                     </div>
                     {ecp.pdf_url && (
-                      <a href={ecp.pdf_url} target="_blank" rel="noreferrer" className="flex items-center text-xs font-semibold px-3 py-1.5 rounded-xl border border-info/30 bg-info/10 text-info hover:bg-info/20 transition-all shrink-0">
+                      <a href={ecp.pdf_url} target="_blank" rel="noreferrer" className="flex items-center text-caption font-semibold px-3 py-1.5 rounded-xl border border-info/30 bg-info/10 text-info hover:bg-info/20 transition-all shrink-0">
                         <ExternalLink className="w-4 h-4 mr-2" /> PDF
                       </a>
                     )}
@@ -197,7 +197,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
                 </div>
               ))}
               {(!incualData.ecp_nivel_1 || incualData.ecp_nivel_1.length === 0) && (
-                <p className="text-sm text-muted">No hay estándares de Nivel 1 para esta familia.</p>
+                <p className="text-body text-muted">No hay estándares de Nivel 1 para esta familia.</p>
               )}
             </div>
           )}
@@ -209,7 +209,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
             className="w-full flex items-center justify-between p-4 bg-background hover:bg-muted/10 transition-colors focus:outline-none" 
             onClick={() => toggleLevel('2')}
           >
-            <span className="font-semibold text-lg text-foreground">Nivel 2 ({incualData.ecp_nivel_2?.length || 0})</span>
+            <span className="font-semibold text-subheading text-foreground">Nivel 2 ({incualData.ecp_nivel_2?.length || 0})</span>
             {expandedLevel === '2' ? <ChevronUp className="w-5 h-5 text-muted" /> : <ChevronDown className="w-5 h-5 text-muted" />}
           </button>
           {expandedLevel === '2' && (
@@ -217,13 +217,13 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
               {incualData.ecp_nivel_2?.map((ecp: any, idx: number) => (
                 <div key={idx} className="p-3 bg-card border rounded-md shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex justify-between items-start gap-4">
-                    <div className="text-sm leading-relaxed">
-                      <span className="inline-block px-2 py-0.5 bg-green-100 text-green-800 text-xs font-mono rounded mr-3 align-middle">{ecp.code}</span>
+                    <div className="text-body leading-relaxed">
+                      <span className="inline-block px-2 py-0.5 bg-green-100 text-green-800 text-caption font-mono rounded mr-3 align-middle">{ecp.code}</span>
                       <span className="font-medium text-foreground align-middle">{ecp.title}</span>
                       {ecp.description && <span className="text-muted ml-2 align-middle">- {ecp.description}</span>}
                     </div>
                     {ecp.pdf_url && (
-                      <a href={ecp.pdf_url} target="_blank" rel="noreferrer" className="flex items-center text-xs font-semibold px-3 py-1.5 rounded-xl border border-info/30 bg-info/10 text-info hover:bg-info/20 transition-all shrink-0">
+                      <a href={ecp.pdf_url} target="_blank" rel="noreferrer" className="flex items-center text-caption font-semibold px-3 py-1.5 rounded-xl border border-info/30 bg-info/10 text-info hover:bg-info/20 transition-all shrink-0">
                         <ExternalLink className="w-4 h-4 mr-2" /> PDF
                       </a>
                     )}
@@ -231,7 +231,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
                 </div>
               ))}
               {(!incualData.ecp_nivel_2 || incualData.ecp_nivel_2.length === 0) && (
-                <p className="text-sm text-muted">No hay estándares de Nivel 2 para esta familia.</p>
+                <p className="text-body text-muted">No hay estándares de Nivel 2 para esta familia.</p>
               )}
             </div>
           )}
@@ -243,7 +243,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
             className="w-full flex items-center justify-between p-4 bg-background hover:bg-muted/10 transition-colors focus:outline-none" 
             onClick={() => toggleLevel('3')}
           >
-            <span className="font-semibold text-lg text-foreground">Nivel 3 ({incualData.ecp_nivel_3?.length || 0})</span>
+            <span className="font-semibold text-subheading text-foreground">Nivel 3 ({incualData.ecp_nivel_3?.length || 0})</span>
             {expandedLevel === '3' ? <ChevronUp className="w-5 h-5 text-muted" /> : <ChevronDown className="w-5 h-5 text-muted" />}
           </button>
           {expandedLevel === '3' && (
@@ -251,13 +251,13 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
               {incualData.ecp_nivel_3?.map((ecp: any, idx: number) => (
                 <div key={idx} className="p-3 bg-card border rounded-md shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex justify-between items-start gap-4">
-                    <div className="text-sm leading-relaxed">
-                      <span className="inline-block px-2 py-0.5 bg-purple-100 text-purple-800 text-xs font-mono rounded mr-3 align-middle">{ecp.code}</span>
+                    <div className="text-body leading-relaxed">
+                      <span className="inline-block px-2 py-0.5 bg-purple-100 text-purple-800 text-caption font-mono rounded mr-3 align-middle">{ecp.code}</span>
                       <span className="font-medium text-foreground align-middle">{ecp.title}</span>
                       {ecp.description && <span className="text-muted ml-2 align-middle">- {ecp.description}</span>}
                     </div>
                     {ecp.pdf_url && (
-                      <a href={ecp.pdf_url} target="_blank" rel="noreferrer" className="flex items-center text-xs font-semibold px-3 py-1.5 rounded-xl border border-info/30 bg-info/10 text-info hover:bg-info/20 transition-all shrink-0">
+                      <a href={ecp.pdf_url} target="_blank" rel="noreferrer" className="flex items-center text-caption font-semibold px-3 py-1.5 rounded-xl border border-info/30 bg-info/10 text-info hover:bg-info/20 transition-all shrink-0">
                         <ExternalLink className="w-4 h-4 mr-2" /> PDF
                       </a>
                     )}
@@ -265,7 +265,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
                 </div>
               ))}
               {(!incualData.ecp_nivel_3 || incualData.ecp_nivel_3.length === 0) && (
-                <p className="text-sm text-muted">No hay estándares de Nivel 3 para esta familia.</p>
+                <p className="text-body text-muted">No hay estándares de Nivel 3 para esta familia.</p>
               )}
             </div>
           )}

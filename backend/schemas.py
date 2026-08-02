@@ -34,19 +34,19 @@ class Alumnado(BaseModel):
     Nombre: Optional[str] = None
     Apellidos: Optional[str] = None
     Estado: Optional[str] = None
-    Edad: Optional[str] = None
+    Edad: Optional[int] = None
     Nacimiento: Optional[str] = None
-    Repite: Optional[str] = None
+    Repite: Optional[bool] = None
     Matricula: Optional[str] = None
     Comentarios: Optional[str] = None
-    Email: Optional[str] = None
+    email: Optional[str] = None
     Movil: Optional[str] = None
 
 class ResultadoAprendizaje(BaseModel):
     id_ra: str
     desc_ra: Optional[str] = None
     peso_ra: int | None = None
-    is_dual: Optional[str] = None
+    is_dual: Optional[bool] = None
 
 class CriterioEvaluacion(BaseModel):
     model_config = ConfigDict(extra='forbid')

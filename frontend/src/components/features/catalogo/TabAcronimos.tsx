@@ -28,7 +28,7 @@ export function TabAcronimos() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-3">
             <BookOpen className="w-6 h-6 text-accent" />
-            <h2 className="text-lg font-bold text-foreground">Acrónimos y glosario</h2>
+            <h2 className="text-subheading font-bold text-foreground">Acrónimos y glosario</h2>
           </div>
           <div className="w-full md:w-72 relative">
             <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted z-10 pointer-events-none">
@@ -50,7 +50,7 @@ export function TabAcronimos() {
 
             return (
               <div key={category} className="animate-in fade-in duration-300">
-                <h3 className="text-sm font-semibold text-accent mb-3 border-b border-[var(--glass-border)] pb-2">
+                <h3 className="text-body font-semibold text-accent mb-3 border-b border-[var(--glass-border)] pb-2">
                   {CATEGORY_LABELS[category]}
                 </h3>
                 

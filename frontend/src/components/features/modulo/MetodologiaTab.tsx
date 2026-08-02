@@ -36,14 +36,14 @@ export function MetodologiaTab() {
     <>
       <div className="space-y-6 animate-in fade-in duration-500">
       <div className="glass-card p-6 border-t-4 border-t-green-500">
-        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
           <span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1 text-green-400" /></span> Metodología
         </h2>
         <div className="space-y-6">
           
           <div>
-            <label className="text-sm font-semibold text-foreground mb-2 block">Metodologías activas (selección múltiple)</label>
-            <p className="text-xs text-muted mb-3">Elige las metodologías que sustentan el desarrollo del módulo. Se redactarán automáticamente en tu Programación Didáctica.</p>
+            <label className="text-body font-semibold text-foreground mb-2 block">Metodologías activas (selección múltiple)</label>
+            <p className="text-caption text-muted mb-3">Elige las metodologías que sustentan el desarrollo del módulo. Se redactarán automáticamente en tu Programación Didáctica.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               {METODOLOGIAS.map((met) => {
                 const isSelected = metodologias_seleccionadas.includes(met.id);
@@ -55,7 +55,7 @@ export function MetodologiaTab() {
                       onChange={() => toggleMetodologia(met.id)}
                       className="rounded border-white/20 bg-transparent text-green-500 focus:ring-green-500"
                     />
-                    <span className="text-sm"><strong>{met.id}</strong> - {met.label}</span>
+                    <span className="text-body"><strong>{met.id}</strong> - {met.label}</span>
                   </label>
                 );
               })}
@@ -63,8 +63,8 @@ export function MetodologiaTab() {
           </div>
 
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">Principios metodológicos</label>
-            <p className="text-xs text-muted mb-2">Principios pedagógicos generales que guiarán el módulo.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">Principios metodológicos</label>
+            <p className="text-caption text-muted mb-2">Principios pedagógicos generales que guiarán el módulo.</p>
             <textarea
               value={config_contexto["principios_metodologicos"] || ""}
               onChange={e => handleChange("principios_metodologicos", e.target.value)}
@@ -73,30 +73,30 @@ export function MetodologiaTab() {
             />
           </div>
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">Estrategias metodológicas</label>
-            <p className="text-xs text-muted mb-2">Estrategias y actividades de enseñanza-aprendizaje a emplear en el aula y taller.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">Estrategias metodológicas</label>
+            <p className="text-caption text-muted mb-2">Estrategias y actividades de enseñanza-aprendizaje a emplear en el aula y taller.</p>
             <textarea
               value={config_contexto["estrategias_metodologicas"] || config_contexto["D2_actividades_ea"] || ""}
               onChange={e => handleChange("estrategias_metodologicas", e.target.value)}
               placeholder="Relación de metodologías tipo como teoría, taller, prácticas simuladas..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-sm text-foreground focus:border-info focus:outline-none"
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
           
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">Anotaciones libres de metodología</label>
-            <p className="text-xs text-muted mb-2">Párrafo personalizado que se añadirá al final del apartado de metodologías generadas automáticamente.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">Anotaciones libres de metodología</label>
+            <p className="text-caption text-muted mb-2">Párrafo personalizado que se añadirá al final del apartado de metodologías generadas automáticamente.</p>
             <textarea
               value={moduleData?.texto_metodologia_libre || ""}
               onChange={e => updateModuleData("texto_metodologia_libre", e.target.value)}
               placeholder="Escribe aquí cualquier especificidad sobre tu forma de impartir clases que no esté cubierta en la selección anterior..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-sm text-foreground focus:border-info focus:outline-none"
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
 
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">Plan de aplicación de los desdobles</label>
-            <p className="text-xs text-muted mb-2">Justificación y organización si el módulo tiene desdobles.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">Plan de aplicación de los desdobles</label>
+            <p className="text-caption text-muted mb-2">Justificación y organización si el módulo tiene desdobles.</p>
             <textarea
               value={config_contexto["plan_desdobles"] || config_contexto["D3_agrupamientos"] || ""}
               onChange={e => handleChange("plan_desdobles", e.target.value)}
@@ -105,8 +105,8 @@ export function MetodologiaTab() {
             />
           </div>
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">Aprendizaje colaborativo basado en proyectos y/o retos (ABP/ABR)</label>
-            <p className="text-xs text-muted mb-2">Descripción de la aplicación de metodologías activas.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">Aprendizaje colaborativo basado en proyectos y/o retos (ABP/ABR)</label>
+            <p className="text-caption text-muted mb-2">Descripción de la aplicación de metodologías activas.</p>
             <textarea
               value={config_contexto["aprendizaje_colaborativo"] || ""}
               onChange={e => handleChange("aprendizaje_colaborativo", e.target.value)}

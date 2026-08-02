@@ -51,7 +51,7 @@ export const BoletinesTab = () => {
   if (activeStudents.length === 0) {
     return (
       <Card className="p-8 text-center border-l-4 border-l-yellow-500 mt-6">
-        <h2 className="text-lg font-bold text-warning mb-2">Falta alumnado</h2>
+        <h2 className="text-subheading font-bold text-warning mb-2">Falta alumnado</h2>
         <p className="text-foreground/80">
           Primero debes registrar alumnado en la pestaña principal.
         </p>
@@ -87,7 +87,7 @@ export const BoletinesTab = () => {
       {/* Sidebar List (Hidden on Print) */}
       <div className="w-80 bg-foreground/5 border border-white/5 rounded-2xl flex flex-col overflow-hidden shrink-0 no-print">
         <div className="p-4 border-b border-white/5 bg-foreground/10">
-          <div className="text-xs font-medium text-muted tracking-wider">
+          <div className="text-caption font-medium text-muted tracking-wider">
             Alumnado Activo ({activeStudents.length})
           </div>
         </div>
@@ -105,10 +105,10 @@ export const BoletinesTab = () => {
                 }`}
               >
                 <div className="truncate pr-2">
-                  <div className="text-sm truncate">
+                  <div className="text-body truncate">
                     {al.Apellidos}, {al.Nombre}
                   </div>
-                  <div className={`text-xs font-mono ${isSelected ? 'text-background/80' : 'text-muted'}`}>
+                  <div className={`text-caption font-mono ${isSelected ? 'text-background/80' : 'text-muted'}`}>
                     {al.ID}
                   </div>
                 </div>
@@ -124,7 +124,7 @@ export const BoletinesTab = () => {
           <>
             <div className="p-6 border-b border-white/5 bg-foreground/10 flex justify-between items-center shrink-0 no-print">
               <div>
-                <h3 className="text-lg font-black text-foreground flex items-center gap-2">
+                <h3 className="text-subheading font-black text-foreground flex items-center gap-2">
                   <FileText className="w-5 h-5 text-accent" /> Boletín individual de calificaciones
                 </h3>
               </div>
@@ -140,41 +140,41 @@ export const BoletinesTab = () => {
                 {/* Cabecera Oficial */}
                 <div className="border-b-2 border-accent pb-6 mb-8 flex justify-between items-start">
                   <div>
-                    <h1 className="text-2xl font-black mb-2 tracking-tight">INFORME DE EVALUACIÓN</h1>
-                    <p className="text-lg text-muted-foreground font-semibold flex items-center gap-2">
+                    <h1 className="text-heading font-black mb-2 tracking-tight">INFORME DE EVALUACIÓN</h1>
+                    <p className="text-subheading text-muted-foreground font-semibold flex items-center gap-2">
                       <GraduationCap className="w-5 h-5" /> Módulo: {info_modulo.codigo && info_modulo.nombre ? `${info_modulo.codigo} - ${info_modulo.nombre}` : info_modulo.modulo || "Módulo profesional"}
                     </p>
-                    <p className="text-sm text-muted flex items-center gap-2 mt-1">
+                    <p className="text-body text-muted flex items-center gap-2 mt-1">
                       <Briefcase className="w-4 h-4" /> Título: {info_modulo.titulo_fp || "Título de FP"}
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-semibold text-muted-foreground">Curso Académico</p>
-                    <p className="text-lg font-bold">{info_modulo.curso_academico || "2025/2026"}</p>
-                    <p className="text-xs text-muted mt-2">Fecha: {new Date().toLocaleDateString('es-ES')}</p>
+                    <p className="text-body font-semibold text-muted-foreground">Curso Académico</p>
+                    <p className="text-subheading font-bold">{info_modulo.curso_academico || "2025/2026"}</p>
+                    <p className="text-caption text-muted mt-2">Fecha: {new Date().toLocaleDateString('es-ES')}</p>
                   </div>
                 </div>
 
                 {/* Datos del alumnado */}
                 <div className="bg-foreground/5 p-6 rounded-xl mb-8 flex items-center justify-between border border-white/5">
                   <div>
-                    <p className="text-sm text-muted tracking-wider font-semibold mb-1">Alumno/a</p>
-                    <h2 className="text-2xl font-bold">{currentStudent.Apellidos}, {currentStudent.Nombre}</h2>
-                    <div className="flex gap-4 mt-2 text-sm text-muted">
+                    <p className="text-body text-muted tracking-wider font-semibold mb-1">Alumno/a</p>
+                    <h2 className="text-heading font-bold">{currentStudent.Apellidos}, {currentStudent.Nombre}</h2>
+                    <div className="flex gap-4 mt-2 text-body text-muted">
                       <span>ID: <span className="font-mono text-foreground">{currentStudent.ID}</span></span>
                       {currentStudent.Matricula && <span>Matrícula: <span className="font-mono text-foreground">{currentStudent.Matricula}</span></span>}
                     </div>
                   </div>
                   <div className="text-right bg-background p-4 rounded-xl shadow-sm border border-white/5">
-                    <p className="text-xs text-muted tracking-wider font-semibold mb-1">Nota Media Estimada</p>
-                    <div className="text-2xl font-black text-accent">{notaMedia}</div>
+                    <p className="text-caption text-muted tracking-wider font-semibold mb-1">Nota Media Estimada</p>
+                    <div className="text-heading font-black text-accent">{notaMedia}</div>
                   </div>
                 </div>
 
                 {/* Gráficos */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                   <div className="bg-foreground/5 p-6 rounded-xl border border-white/5 flex flex-col items-center">
-                    <h3 className="text-lg font-bold mb-4 flex items-center gap-2 w-full">
+                    <h3 className="text-subheading font-bold mb-4 flex items-center gap-2 w-full">
                       <Target className="w-5 h-5 text-info" /> Perfil Competencial (Radar)
                     </h3>
                     <div className="w-full h-[250px]">
@@ -191,7 +191,7 @@ export const BoletinesTab = () => {
                   </div>
 
                   <div className="bg-foreground/5 p-6 rounded-xl border border-white/5 flex flex-col items-center">
-                    <h3 className="text-lg font-bold mb-4 flex items-center gap-2 w-full">
+                    <h3 className="text-subheading font-bold mb-4 flex items-center gap-2 w-full">
                       <BarChart className="w-5 h-5 text-success" /> Nivel de Logro por RA
                     </h3>
                     <div className="w-full h-[250px]">
@@ -209,7 +209,7 @@ export const BoletinesTab = () => {
                 </div>
 
                 {/* Desglose de Resultados */}
-                <h3 className="text-lg font-bold mb-4 mt-8 flex items-center gap-2 border-b border-white/10 pb-2">
+                <h3 className="text-subheading font-bold mb-4 mt-8 flex items-center gap-2 border-b border-white/10 pb-2">
                   <Award className="w-5 h-5 text-warning" /> Desglose por Resultados de aprendizaje
                 </h3>
                 <div className="space-y-4">
@@ -217,15 +217,15 @@ export const BoletinesTab = () => {
                     const isAprobado = ra.nota >= 5;
                     return (
                       <div key={i} className="flex items-center gap-4 bg-foreground/5 p-4 rounded-lg border border-white/5">
-                        <div className={`text-2xl font-black w-16 text-center ${isAprobado ? 'text-success' : 'text-danger'}`}>
+                        <div className={`text-heading font-black w-16 text-center ${isAprobado ? 'text-success' : 'text-danger'}`}>
                           {ra.nota.toFixed(1)}
                         </div>
                         <div className="flex-1">
-                          <div className="font-bold text-sm mb-1">{ra.subject}</div>
-                          <div className="text-xs text-muted leading-tight">{ra.desc || "Descripción no disponible en este momento."}</div>
+                          <div className="font-bold text-body mb-1">{ra.subject}</div>
+                          <div className="text-caption text-muted leading-tight">{ra.desc || "Descripción no disponible en este momento."}</div>
                         </div>
                         <div className="w-24 text-right">
-                          <span className={`text-xs font-bold px-2 py-1 rounded-full border ${isAprobado ? 'bg-success/10 text-success border-success/20' : 'bg-danger/10 text-danger border-danger/20'}`}>
+                          <span className={`text-caption font-bold px-2 py-1 rounded-full border ${isAprobado ? 'bg-success/10 text-success border-success/20' : 'bg-danger/10 text-danger border-danger/20'}`}>
                             {isAprobado ? "SUPERADO" : "NO SUPER."}
                           </span>
                         </div>
@@ -234,7 +234,7 @@ export const BoletinesTab = () => {
                   })}
                 </div>
 
-                <div className="mt-12 pt-8 border-t border-white/10 text-center text-xs text-muted">
+                <div className="mt-12 pt-8 border-t border-white/10 text-center text-caption text-muted">
                   <p>Este informe ha sido generado automáticamente por el sistema de evaluación por competencias.</p>
                   <p className="mt-1">Las calificaciones mostradas corresponden a las evaluaciones registradas hasta la fecha de emisión.</p>
                 </div>
@@ -245,8 +245,8 @@ export const BoletinesTab = () => {
         ) : (
           <div className="flex-1 flex flex-col justify-center items-center text-center p-8 text-muted">
             <Users className="w-12 h-12 text-muted/50 mb-3" />
-            <p className="font-semibold text-lg">Selecciona alumnado</p>
-            <p className="text-sm opacity-80">Elige alumnado del panel izquierdo para visualizar su boletín.</p>
+            <p className="font-semibold text-subheading">Selecciona alumnado</p>
+            <p className="text-body opacity-80">Elige alumnado del panel izquierdo para visualizar su boletín.</p>
           </div>
         )}
       </div>

@@ -18,7 +18,7 @@ export const AttendanceAccumulated = () => {
   const [loading, setLoading] = useState(false);
 
   const alumnado = cursoData?.df_al || [];
-  const menores = alumnado.filter((a: any) => parseInt(a.Edad || '18') < 18).length;
+  const menores = alumnado.filter((a: any) => (a.Edad ?? 18) < 18).length;
   const info_fechas = cursoData?.info_fechas || {};
   const info_modulo = moduleData?.info_modulo || {};
 
@@ -103,7 +103,7 @@ export const AttendanceAccumulated = () => {
     <div className="space-y-6">
       {menores > 0 && (
         <div className="flex justify-end">
-          <span className="text-danger font-semibold text-sm flex items-center gap-1.5 bg-danger/10 px-3 py-1 rounded-full border border-danger/30">
+          <span className="text-danger font-semibold text-body flex items-center gap-1.5 bg-danger/10 px-3 py-1 rounded-full border border-danger/30">
             <AlertCircle className="w-4 h-4" /> {menores} alumnado(s) menor(es) de 18 años
           </span>
         </div>
@@ -111,15 +111,15 @@ export const AttendanceAccumulated = () => {
       <div className="grid grid-cols-3 gap-6 animate-in slide-in-from-left-4 duration-500">
         <Card className="p-6 border-l-4 border-l-accent flex items-center justify-between">
           <div>
-            <p className="text-sm font-semibold text-muted ">Horas totales del módulo</p>
-            <p className="text-2xl font-extrabold text-foreground">{totalHours} h</p>
+            <p className="text-body font-semibold text-muted ">Horas totales del módulo</p>
+            <p className="text-heading font-extrabold text-foreground">{totalHours} h</p>
           </div>
           <Clock className="w-10 h-10 text-accent/80" />
         </Card>
         <Card className="p-6 border-l-4 border-l-yellow-500 flex items-center justify-between">
           <div>
-            <p className="text-sm font-semibold text-muted ">Límite PdEvC ({p_ev_pct}%)</p>
-            <p className="text-2xl font-extrabold text-foreground">{Math.round(totalHours * (p_ev_pct / 100))} faltas</p>
+            <p className="text-body font-semibold text-muted ">Límite PdEvC ({p_ev_pct}%)</p>
+            <p className="text-heading font-extrabold text-foreground">{Math.round(totalHours * (p_ev_pct / 100))} faltas</p>
           </div>
           <OctagonAlert className="w-10 h-10 text-warning" />
         </Card>
@@ -159,7 +159,7 @@ export const AttendanceAccumulated = () => {
                 return (
                   <tr key={studentId} className="border-b border-[var(--glass-border)]/50 hover:bg-foreground/5 transition-colors">
                     <td className="p-4 text-center text-muted font-mono">{index + 1}</td>
-                    <td className="p-4 text-center text-sm">{parseInt(alumnado.Edad || '18') < 18 ? <AlertCircle className="w-4 h-4 text-danger mx-auto" /> : ''}</td>
+                    <td className="p-4 text-center text-body">{(alumnado.Edad ?? 18) < 18 ? <AlertCircle className="w-4 h-4 text-danger mx-auto" /> : ''}</td>
                     <td className="p-4 font-medium">
                       {alumnado.Apellidos}, {alumnado.Nombre}
                     </td>
@@ -168,7 +168,7 @@ export const AttendanceAccumulated = () => {
                     <td className="p-4 text-center font-mono text-muted">{faltas3T > 0 ? faltas3T : '-'}</td>
                     <td className="p-4 text-center font-bold text-foreground">{faltasTotal}</td>
                     <td className="p-4 text-center">
-                      <span className={`px-3 py-1 rounded-md text-sm font-semibold block ${status.color}`}>
+                      <span className={`px-3 py-1 rounded-md text-body font-semibold block ${status.color}`}>
                         {status.text}
                       </span>
                     </td>
@@ -179,7 +179,7 @@ export const AttendanceAccumulated = () => {
                           style={{ width: `${progressPct}%` }}
                         ></div>
                       </div>
-                      <div className="text-right text-xs text-muted mt-1">{status.pct.toFixed(1)}%</div>
+                      <div className="text-right text-caption text-muted mt-1">{status.pct.toFixed(1)}%</div>
                     </td>
                   </tr>
                 );

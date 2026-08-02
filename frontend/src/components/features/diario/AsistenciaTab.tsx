@@ -20,7 +20,7 @@ export function AsistenciaTab() {
     <>
       <div className="space-y-8 animate-in fade-in duration-500">
       <div>
-        <h2 className="text-lg font-bold flex items-center gap-3 text-foreground">
+        <h2 className="text-subheading font-bold flex items-center gap-3 text-foreground">
           <Users className="w-8 h-8 text-accent" /> Control de asistencia
         </h2>
         <p className="text-muted mt-2">
@@ -33,7 +33,7 @@ export function AsistenciaTab() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-6 py-4 font-semibold text-sm border-b-2 transition-colors whitespace-nowrap ${activeTab === tab.id ? 'border-accent text-accent' : 'border-transparent text-muted hover:text-foreground'}`}
+            className={`px-6 py-4 font-semibold text-body border-b-2 transition-colors whitespace-nowrap ${activeTab === tab.id ? 'border-accent text-accent' : 'border-transparent text-muted hover:text-foreground'}`}
           >
             {tab.label}
           </button>

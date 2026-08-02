@@ -6,7 +6,7 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
   const [editingTask, setEditingTask] = useState<any>(null);
   return (
     <div className="overflow-x-auto">
-      <div className="w-full text-sm">
+      <div className="w-full text-body">
         <div className="flex text-muted border-b border-[var(--glass-border)] pb-2 mb-2 items-center">
           <div className="w-16">Id</div>
           <div className="w-48 pr-2">RA/CE</div>
@@ -58,7 +58,7 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
                 {/* Segunda Línea: Identada y con Contexto e Instrumento */}
                 <div className="flex items-center gap-4 pl-16">
                   <div className="flex-1 flex flex-col">
-                    <span className="text-xs text-muted-foreground tracking-wider mb-1 font-semibold">Contexto</span>
+                    <span className="text-caption text-muted-foreground tracking-wider mb-1 font-semibold">Contexto</span>
                     <input 
                       type="text"
                       value={tc.Reto || ""}
@@ -67,7 +67,7 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
                     />
                   </div>
                   <div className="flex-1 flex flex-col pr-10">
-                    <span className="text-xs text-muted-foreground tracking-wider mb-1 font-semibold">Instrumento</span>
+                    <span className="text-caption text-muted-foreground tracking-wider mb-1 font-semibold">Instrumento</span>
                     <input 
                       type="text"
                       value={tc.Instrumento || tc.desc_act || ""}
@@ -84,7 +84,7 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
       <div className="mt-4">
         <button 
           onClick={handleAddTarea}
-          className="text-sm text-info hover:text-info font-semibold flex items-center gap-1"
+          className="text-body text-info hover:text-info font-semibold flex items-center gap-1"
         >
           <Plus className="w-4 h-4" /> Añadir nueva tarea competencial
         </button>

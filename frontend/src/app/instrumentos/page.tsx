@@ -100,7 +100,7 @@ export default function InstrumentosPage() {
             <MotionWrapper>
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <FileEdit className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-2xl font-bold">No hay programación cargada</h2>
+                <h2 className="text-heading font-bold">No hay programación cargada</h2>
                 <p className="text-muted mb-4">Debes abrir o crear un archivo de programación en tu Archivos.</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
@@ -159,7 +159,7 @@ export default function InstrumentosPage() {
     if (lista_ce_ids.length === 0) {
       return (
         <Card className="p-6 border-l-4 border-l-yellow-500">
-          <h3 className="text-lg font-bold text-warning mb-2">Faltan criterios de evaluación</h3>
+          <h3 className="text-subheading font-bold text-warning mb-2">Faltan criterios de evaluación</h3>
           <p className="text-foreground/80">Primero añade Criterios de evaluación en la pestaña 'Matrices'.</p>
         </Card>
       );
@@ -173,20 +173,20 @@ export default function InstrumentosPage() {
                               
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
+            <h2 className="text-heading font-extrabold text-foreground tracking-tight flex items-center gap-3">
               <span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Instrumentos de Evaluación - {triNombre}
             </h2>
             <p className="text-muted mt-1">Detalle de los instrumentos de evaluación organizados para este trimestre.</p>
           </div>
-          <div className="flex items-center gap-6 text-sm">
+          <div className="flex items-center gap-6 text-body">
             <span className="text-muted">{actTri.length} actividades</span>
-            <span className="text-info font-mono bg-info/10 px-4 py-2 rounded-lg text-lg">Σ {sumaPeso.toFixed(0)}%</span>
+            <span className="text-info font-mono bg-info/10 px-4 py-2 rounded-lg text-subheading">Σ {sumaPeso.toFixed(0)}%</span>
           </div>
         </div>
 
         <div className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] overflow-hidden">
           <div className="p-4 bg-foreground/10 overflow-x-auto">
-            <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
+            <table className="w-full text-left text-body border-collapse whitespace-nowrap">
               <thead>
                 <tr className="text-muted border-b border-[var(--glass-border)] bg-background">
                   <th className="p-2 sticky left-0 z-10 border-r border-[var(--glass-border)] bg-background">Cód.</th>
@@ -195,7 +195,7 @@ export default function InstrumentosPage() {
                   <th className="p-2 sticky left-[416px] z-10 border-r border-[var(--glass-border)] bg-background w-24">% Pond.</th>
                   <th className="p-2 sticky left-[486px] z-10 border-r border-[var(--glass-border)] bg-background"><span className="inline-flex"><Check className="w-[1.2em] h-[1.2em] mr-1" /></span></th>
                   {lista_ce_ids.map((ce: string) => (
-                    <th key={ce} className="p-2 text-center text-xs font-mono border-r border-[var(--glass-border)] text-info">
+                    <th key={ce} className="p-2 text-center text-caption font-mono border-r border-[var(--glass-border)] text-info">
                       {ce}
                     </th>
                   ))}
@@ -345,11 +345,11 @@ export default function InstrumentosPage() {
             <>
                 
             <Card className="p-6 animate-in fade-in duration-500">
-              <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-5">
+              <h2 className="text-heading font-bold flex items-center gap-2 text-foreground mb-5">
                 <span><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Resumen de instrumentos de evaluación por trimestres
               </h2>
               <div className="overflow-x-auto">
-                <table className="w-full text-sm border-collapse">
+                <table className="w-full text-body border-collapse">
                   <thead>
                     <tr className="border-b border-[var(--glass-border)]">
                       <th className="p-3 text-left text-muted font-semibold">Trimestre</th>
@@ -372,39 +372,39 @@ export default function InstrumentosPage() {
     <tr key={tri.key} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
                           <td className="p-3 font-semibold text-foreground">{tri.nombre}</td>
                           <td className="p-3 text-center border-l border-[var(--glass-border)]">
-                            <span className="bg-info/10 text-info font-bold text-lg px-3 py-1 rounded-lg inline-block min-w-[40px]">{nTeo}</span>
+                            <span className="bg-info/10 text-info font-bold text-subheading px-3 py-1 rounded-lg inline-block min-w-[40px]">{nTeo}</span>
                           </td>
                           <td className="p-3 text-center border-l border-[var(--glass-border)]">
-                            <span className="bg-success/10 text-success font-bold text-lg px-3 py-1 rounded-lg inline-block min-w-[40px]">{nPra}</span>
+                            <span className="bg-success/10 text-success font-bold text-subheading px-3 py-1 rounded-lg inline-block min-w-[40px]">{nPra}</span>
                           </td>
                           <td className="p-3 text-center border-l border-[var(--glass-border)]">
-                            <span className="bg-warning/10 text-warning font-bold text-lg px-3 py-1 rounded-lg inline-block min-w-[40px]">{nInf}</span>
+                            <span className="bg-warning/10 text-warning font-bold text-subheading px-3 py-1 rounded-lg inline-block min-w-[40px]">{nInf}</span>
                           </td>
                           <td className="p-3 text-center border-l border-[var(--glass-border)]">
-                            <span className="bg-info/10 text-info font-bold text-lg px-3 py-1 rounded-lg inline-block min-w-[40px]">{nTar}</span>
+                            <span className="bg-info/10 text-info font-bold text-subheading px-3 py-1 rounded-lg inline-block min-w-[40px]">{nTar}</span>
                           </td>
                           <td className="p-3 text-center border-l border-[var(--glass-border)]">
-                            <span className="bg-danger/10 text-danger font-bold text-lg px-3 py-1 rounded-lg inline-block min-w-[40px]">{nRec}</span>
+                            <span className="bg-danger/10 text-danger font-bold text-subheading px-3 py-1 rounded-lg inline-block min-w-[40px]">{nRec}</span>
                           </td>
                         </tr>
                       );
                     })}
                     <tr className="border-t-2 border-[var(--glass-border)] bg-foreground/5">
-                      <td className="p-4 font-extrabold text-foreground text-lg">Total</td>
+                      <td className="p-4 font-extrabold text-foreground text-subheading">Total</td>
                       <td className="p-4 text-center border-l border-[var(--glass-border)]">
-                        <span className="bg-info/10 text-info font-extrabold text-2xl px-4 py-1.5 rounded-lg inline-block min-w-[50px]">{df_act.filter((a: any) => a.Tipo === "Teoria").length}</span>
+                        <span className="bg-info/10 text-info font-extrabold text-heading px-4 py-1.5 rounded-lg inline-block min-w-[50px]">{df_act.filter((a: any) => a.Tipo === "Teoria").length}</span>
                       </td>
                       <td className="p-4 text-center border-l border-[var(--glass-border)]">
-                        <span className="bg-success/10 text-success font-extrabold text-2xl px-4 py-1.5 rounded-lg inline-block min-w-[50px]">{df_act.filter((a: any) => a.Tipo === "Practica").length}</span>
+                        <span className="bg-success/10 text-success font-extrabold text-heading px-4 py-1.5 rounded-lg inline-block min-w-[50px]">{df_act.filter((a: any) => a.Tipo === "Practica").length}</span>
                       </td>
                       <td className="p-4 text-center border-l border-[var(--glass-border)]">
-                        <span className="bg-warning/10 text-warning font-extrabold text-2xl px-4 py-1.5 rounded-lg inline-block min-w-[50px]">{df_act.filter((a: any) => a.Tipo === "Informes").length}</span>
+                        <span className="bg-warning/10 text-warning font-extrabold text-heading px-4 py-1.5 rounded-lg inline-block min-w-[50px]">{df_act.filter((a: any) => a.Tipo === "Informes").length}</span>
                       </td>
                       <td className="p-4 text-center border-l border-[var(--glass-border)]">
-                        <span className="bg-info/10 text-info font-extrabold text-2xl px-4 py-1.5 rounded-lg inline-block min-w-[50px]">{df_act.filter((a: any) => a.Tipo === "Tareas").length}</span>
+                        <span className="bg-info/10 text-info font-extrabold text-heading px-4 py-1.5 rounded-lg inline-block min-w-[50px]">{df_act.filter((a: any) => a.Tipo === "Tareas").length}</span>
                       </td>
                       <td className="p-4 text-center border-l border-[var(--glass-border)]">
-                        <span className="bg-danger/10 text-danger font-extrabold text-2xl px-4 py-1.5 rounded-lg inline-block min-w-[50px]">{df_act.filter((a: any) => a.Tipo === "Recuperacion").length}</span>
+                        <span className="bg-danger/10 text-danger font-extrabold text-heading px-4 py-1.5 rounded-lg inline-block min-w-[50px]">{df_act.filter((a: any) => a.Tipo === "Recuperacion").length}</span>
                       </td>
                     </tr>
                   </tbody>
@@ -444,12 +444,12 @@ export default function InstrumentosPage() {
           aria-labelledby="recovery-modal-title"
         >
           <Card className="max-w-md w-full p-6 animate-in zoom-in-95 duration-200">
-            <h3 id="recovery-modal-title" className="text-lg font-bold mb-4 flex items-center gap-2">
+            <h3 id="recovery-modal-title" className="text-subheading font-bold mb-4 flex items-center gap-2">
               ⛑️ Crear Recuperación ({recoveryTri})
             </h3>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-semibold mb-1">Actividad original a recuperar</label>
+                <label className="block text-body font-semibold mb-1">Actividad original a recuperar</label>
                 <select 
                   className="w-full bg-foreground/10 border border-[var(--glass-border)] rounded-lg p-2"
                   value={recoverySourceId}
@@ -462,7 +462,7 @@ export default function InstrumentosPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-semibold mb-1">Método de cálculo</label>
+                <label className="block text-body font-semibold mb-1">Método de cálculo</label>
                 <select 
                   className="w-full bg-foreground/10 border border-[var(--glass-border)] rounded-lg p-2"
                   value={recoveryMethod}

@@ -33,7 +33,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
   if (df_eval_activos.length === 0) {
     return (
       <Card className="p-8 text-center border-l-4 border-l-yellow-500 mt-6">
-        <h2 className="text-lg font-bold text-warning mb-2">Faltan datos</h2>
+        <h2 className="text-subheading font-bold text-warning mb-2">Faltan datos</h2>
         <p className="text-foreground/80">No hay datos de evaluación para alumnado activos. Ve a Evaluación competencial primero.</p>
       </Card>
     );
@@ -113,7 +113,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
         <div className="bg-[#1e293b] border border-[var(--glass-border)] p-3 rounded-lg shadow-xl">
           <p className="text-foreground font-bold mb-1">{label}</p>
           {payload.map((entry: any, index: number) => (
-            <p key={index} style={{ color: entry.color || entry.fill }} className="text-sm font-semibold drop-shadow-md">
+            <p key={index} style={{ color: entry.color || entry.fill }} className="text-body font-semibold drop-shadow-md">
               {entry.name}: {entry.value}
             </p>
           ))}
@@ -125,32 +125,32 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
 
   return (
     <div className="space-y-8 animate-in slide-in-from-left-4 duration-500">
-      <h2 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
+      <h2 className="text-heading font-extrabold text-foreground tracking-tight flex items-center gap-3">
         <span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> Resumen datos grupales
       </h2>
 
       <section className="grid grid-cols-4 gap-6">
         <Card className="p-6 border-l-4 border-l-blue-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
-          <span className="text-muted text-sm font-semibold tracking-wider mb-2">Media Grupal</span>
-          <span className="text-2xl font-black text-info">{media_grupal.toFixed(2)}</span>
+          <span className="text-muted text-body font-semibold tracking-wider mb-2">Media Grupal</span>
+          <span className="text-heading font-black text-info">{media_grupal.toFixed(2)}</span>
         </Card>
         <Card className="p-6 border-l-4 border-l-emerald-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
-          <span className="text-muted text-sm font-semibold tracking-wider mb-2">% Aprobados</span>
-          <span className="text-2xl font-black text-success">{tasa_aprobado.toFixed(1)}%</span>
+          <span className="text-muted text-body font-semibold tracking-wider mb-2">% Aprobados</span>
+          <span className="text-heading font-black text-success">{tasa_aprobado.toFixed(1)}%</span>
         </Card>
         <Card className="p-6 border-l-4 border-l-purple-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
-          <span className="text-muted text-sm font-semibold tracking-wider mb-2">Nº Alumnado</span>
-          <span className="text-2xl font-black text-info">{total}</span>
+          <span className="text-muted text-body font-semibold tracking-wider mb-2">Nº Alumnado</span>
+          <span className="text-heading font-black text-info">{total}</span>
         </Card>
         <Card className="p-6 border-l-4 border-l-pink-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
-          <span className="text-muted text-sm font-semibold tracking-wider mb-2">Cohesión (Desv.)</span>
-          <span className="text-2xl font-black text-danger">{desv_tipica.toFixed(2)}</span>
+          <span className="text-muted text-body font-semibold tracking-wider mb-2">Cohesión (Desv.)</span>
+          <span className="text-heading font-black text-danger">{desv_tipica.toFixed(2)}</span>
         </Card>
       </section>
 
       <section className="grid grid-cols-2 gap-6">
         <Card className="p-6">
-          <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-6">
+          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-6">
             <span className="inline-flex"><TrendingDown className="w-[1.2em] h-[1.2em] mr-1" /></span> Distribución de Calificaciones
           </h2>
           <div className="h-72 w-full">
@@ -171,7 +171,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
         </Card>
 
         <Card className="p-6">
-          <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-6">
+          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-6">
             <span className="inline-flex"><TrendingUp className="w-[1.2em] h-[1.2em] mr-1" /></span> Evolución por Trimestres
           </h2>
           <div className="h-72 w-full">
@@ -196,7 +196,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
 
       {raData.length > 0 && (
         <Card className="p-6">
-          <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-6">
+          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-6">
             <span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Rendimiento por RA
           </h2>
           <div className="space-y-4">
@@ -225,7 +225,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
 
               return (
                 <div key={ra.subject} className="flex items-center gap-4">
-                  <span className="w-16 text-sm font-semibold text-foreground shrink-0">{ra.subject}</span>
+                  <span className="w-16 text-body font-semibold text-foreground shrink-0">{ra.subject}</span>
                   <div className="flex-1 relative h-7 bg-foreground/20 rounded-full border border-[var(--glass-border)] overflow-hidden">
                     <div
                       className="absolute top-0.5 bottom-0.5 left-0 rounded-full transition-all duration-700 flex items-center justify-end pr-3"
@@ -235,20 +235,20 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
                       }}
                     >
                       {pct > 12 && (
-                        <span className="text-xs font-bold text-foreground drop-shadow-md">{val.toFixed(1)}</span>
+                        <span className="text-caption font-bold text-foreground drop-shadow-md">{val.toFixed(1)}</span>
                       )}
                     </div>
                     {/* 5.0 threshold */}
                     <div className="absolute top-0 bottom-0 w-px bg-warning/10" style={{ left: '50%' }} />
                   </div>
                   {pct <= 12 && (
-                    <span className="text-sm font-semibold text-foreground/80 w-10">{val.toFixed(1)}</span>
+                    <span className="text-body font-semibold text-foreground/80 w-10">{val.toFixed(1)}</span>
                   )}
                 </div>
               );
             })}
           </div>
-          <div className="flex justify-between text-xs text-muted/80 mt-2 px-20">
+          <div className="flex justify-between text-caption text-muted/80 mt-2 px-20">
             <span>0</span>
             <span>2.5</span>
             <span>5.0</span>
@@ -259,14 +259,14 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
       )}
 
       <Card className="p-6">
-        <h2 className="text-lg font-bold mb-6"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguimiento de riesgo académico</h2>
+        <h2 className="text-subheading font-bold mb-6"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguimiento de riesgo académico</h2>
         {risks.length > 0 ? (
           <>
-            <div className="bg-danger/10 border border-danger/30 text-danger px-4 py-3 rounded-lg mb-4 text-sm font-semibold flex items-center gap-2">
-              <span className="text-lg"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
+            <div className="bg-danger/10 border border-danger/30 text-danger px-4 py-3 rounded-lg mb-4 text-body font-semibold flex items-center gap-2">
+              <span className="text-subheading"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
               Se han detectado {risks.length} alumnado(s) con rendimiento insuficiente.
             </div>
-            <table className="w-full text-left text-sm whitespace-nowrap">
+            <table className="w-full text-left text-body whitespace-nowrap">
               <thead>
                 <tr className="text-muted border-b border-[var(--glass-border)]">
                   <th className="pb-2">Alumnado</th>
@@ -289,9 +289,9 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
           </>
         ) : (
           <div className="bg-success/10 border border-success/30 text-success px-4 py-8 rounded-lg flex flex-col items-center justify-center gap-3 text-center">
-            <span className="text-2xl"><span className="inline-flex"><PartyPopper className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
-            <span className="font-bold text-lg">¡Excelente rendimiento!</span>
-            <span className="text-sm opacity-80">No hay alumnado en riesgo según la proyección actual.</span>
+            <span className="text-heading"><span className="inline-flex"><PartyPopper className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
+            <span className="font-bold text-subheading">¡Excelente rendimiento!</span>
+            <span className="text-body opacity-80">No hay alumnado en riesgo según la proyección actual.</span>
           </div>
         )}
       </Card>

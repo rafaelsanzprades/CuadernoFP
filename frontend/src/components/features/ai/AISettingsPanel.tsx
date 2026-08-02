@@ -29,20 +29,20 @@ export function AISettingsPanel() {
       <div className="flex items-center gap-3 mb-2">
         <Sparkles className="w-6 h-6 text-accent" />
         <div>
-          <h3 className="text-lg font-bold text-foreground">Asistente mágico (IA)</h3>
-          <p className="text-sm text-muted">Importa programaciones desde PDF automáticamente</p>
+          <h3 className="text-subheading font-bold text-foreground">Asistente mágico (IA)</h3>
+          <p className="text-body text-muted">Importa programaciones desde PDF automáticamente</p>
         </div>
       </div>
 
       <div className="space-y-4">
         <div className="flex flex-col gap-2">
-          <label className="text-sm font-semibold text-foreground flex items-center gap-2">
+          <label className="text-body font-semibold text-foreground flex items-center gap-2">
             <Bot className="w-4 h-4 text-info" /> Motor de Inteligencia Artificial
           </label>
           <select
             value={provider}
             onChange={(e) => setProvider(e.target.value)}
-            className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground font-medium focus:outline-none focus:ring-2 focus:ring-accent transition-all"
+            className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-body text-foreground font-medium focus:outline-none focus:ring-2 focus:ring-accent transition-all"
           >
             <option value="gemini">Google Gemini (Recomendado - gratis para desarrolladores)</option>
             <option value="openai">OpenAI ChatGPT (Requiere saldo en la cuenta)</option>
@@ -50,7 +50,7 @@ export function AISettingsPanel() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-sm font-semibold text-foreground flex items-center gap-2">
+          <label className="text-body font-semibold text-foreground flex items-center gap-2">
             <Key className="w-4 h-4 text-info" /> Tu API Key (BYOK)
           </label>
           <input
@@ -58,9 +58,9 @@ export function AISettingsPanel() {
             placeholder={`Pega aquí tu clave secreta de ${provider === 'gemini' ? 'Google AI Studio' : 'OpenAI'}...`}
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
-            className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground font-mono focus:outline-none focus:ring-2 focus:ring-accent transition-all"
+            className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-body text-foreground font-mono focus:outline-none focus:ring-2 focus:ring-accent transition-all"
           />
-          <p className="text-xs text-muted ml-1">
+          <p className="text-caption text-muted ml-1">
             Tu clave se guarda de forma segura en tu navegador y nunca se comparte con terceros.
           </p>
         </div>

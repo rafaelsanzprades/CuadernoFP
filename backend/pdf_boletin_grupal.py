@@ -170,7 +170,7 @@ def generar_pdf_boletin_grupal(
         nombre = str(al.get("Nombre", ""))
         _edad  = al.get("Edad", "")
         edad   = str(int(_edad)) if pd.notna(_edad) and str(_edad) not in ("", "nan") else ""
-        repite = "Sí" if al.get("Repite", False) else "No"
+        repite = "Sí" if al.get("Repite") else "No"
 
         if df_eval.empty:
             continue
@@ -413,7 +413,7 @@ def generar_pdf_boletin_grupal_final(
 
         _edad  = al.get("Edad", "")
         edad   = str(int(_edad)) if pd.notna(_edad) and str(_edad) not in ("", "nan") else ""
-        repite = "Sí" if al.get("Repite", False) else "No"
+        repite = "Sí" if al.get("Repite") else "No"
         
         # Calculate final ordinal
         nota_final_ord = (

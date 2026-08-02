@@ -329,9 +329,9 @@ def update_module_data(module_id: str, body: dict, db: Session):
                 estado=str(al.get("Estado", "")),
                 apellidos=str(al.get("Apellidos", "")),
                 nombre=str(al.get("Nombre", "")),
-                edad=str(al.get("Edad", "")),
+                edad=al.get("Edad"),
                 nacimiento=str(al.get("Nacimiento", "")),
-                repite=str(al.get("Repite", "")),
+                repite=bool(al.get("Repite", False)),
                 matricula=str(al.get("Matricula", "")),
                 comentarios=str(al.get("Comentarios", "")),
                 email=str(al.get("email", "")),
@@ -360,13 +360,13 @@ def update_module_data(module_id: str, body: dict, db: Session):
     if isinstance(df_ra, list):
         for row in df_ra:
             d = {k: v for k, v in row.items() if k not in ["id_ra", "desc_ra", "peso_ra", "is_dual"]}
-            db.add(LearningOutcomeItem(module_document_id=pd_id, id_ra=safe_str(row.get("id_ra")), desc_ra=safe_str(row.get("desc_ra")), peso_ra=safe_str(row.get("peso_ra")), is_dual=safe_str(row.get("is_dual")), data=d))
+            db.add(LearningOutcomeItem(module_document_id=pd_id, id_ra=safe_str(row.get("id_ra")), desc_ra=safe_str(row.get("desc_ra")), peso_ra=row.get("peso_ra"), is_dual=bool(row.get("is_dual", False)), data=d))
 
     db.query(EvaluationCriterionItem).filter_by(module_document_id=pd_id).delete()
     if isinstance(df_ce, list):
         for row in df_ce:
             d = {k: v for k, v in row.items() if k not in ["id_ce", "id_ra", "id_ud", "desc_ce", "peso_ce"]}
-            db.add(EvaluationCriterionItem(module_document_id=pd_id, id_ce=safe_str(row.get("id_ce")), id_ra=safe_str(row.get("id_ra")), id_ud=safe_str(row.get("id_ud")), desc_ce=safe_str(row.get("desc_ce")), peso_ce=safe_str(row.get("peso_ce")), data=d))
+            db.add(EvaluationCriterionItem(module_document_id=pd_id, id_ce=safe_str(row.get("id_ce")), id_ra=safe_str(row.get("id_ra")), id_ud=safe_str(row.get("id_ud")), desc_ce=safe_str(row.get("desc_ce")), peso_ce=row.get("peso_ce"), data=d))
 
     db.query(ActivityItem).filter_by(module_document_id=pd_id).delete()
     if isinstance(df_act, list):

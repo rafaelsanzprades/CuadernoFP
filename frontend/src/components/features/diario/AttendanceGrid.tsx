@@ -18,7 +18,7 @@ export const AttendanceGrid = () => {
   const parentRef = useRef<HTMLDivElement>(null);
 
   const alumnado = cursoData?.df_al || [];
-  const menores = alumnado.filter(a => parseInt(a.Edad || '18') < 18).length;
+  const menores = alumnado.filter(a => (a.Edad ?? 18) < 18).length;
 
   const dateStr = format(currentDate, 'yyyy-MM-dd');
 
@@ -109,11 +109,11 @@ export const AttendanceGrid = () => {
           <ChevronLeft className="w-4 h-4" /> Día anterior
         </button>
         <div className="flex items-center gap-4">
-          <h2 className="text-lg font-bold">
+          <h2 className="text-subheading font-bold">
             Asistencia: {format(currentDate, "EEEE d 'de' MMMM", { locale: es })}
           </h2>
           {menores > 0 && (
-            <span className="text-danger font-semibold text-sm flex items-center gap-1.5 bg-danger/10 px-3 py-1 rounded-full border border-danger/30">
+            <span className="text-danger font-semibold text-body flex items-center gap-1.5 bg-danger/10 px-3 py-1 rounded-full border border-danger/30">
               <AlertCircle className="w-4 h-4" /> {menores} alumnado(s) menor(es) de 18 años
             </span>
           )}
@@ -162,7 +162,7 @@ export const AttendanceGrid = () => {
                     }}
                   >
                     <td className="p-4 text-center text-muted font-mono w-16 flex items-center justify-center shrink-0">{index + 1}</td>
-                    <td className="p-4 text-center text-sm w-12 flex items-center justify-center shrink-0">{parseInt(al.Edad || '18') < 18 ? <AlertCircle className="w-4 h-4 text-danger" /> : ''}</td>
+                    <td className="p-4 text-center text-body w-12 flex items-center justify-center shrink-0">{(al.Edad ?? 18) < 18 ? <AlertCircle className="w-4 h-4 text-danger" /> : ''}</td>
                     <td className="p-4 font-medium flex-1 flex items-center">
                       {al.Apellidos}, {al.Nombre}
                     </td>

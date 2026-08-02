@@ -263,23 +263,23 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
                 style={{ backgroundColor: `${family.color_hex}20`, border: `1px solid ${family.color_hex}40` }}
               >
                 {(family.icon_url && (family.icon_url.includes("fa-") || family.icon_url.startsWith("fas"))) ? (
-                  <i className={`${family.icon_url} text-2xl`} style={{ color: family.color_hex }} />
+                  <i className={`${family.icon_url} text-heading`} style={{ color: family.color_hex }} />
                 ) : (
                   <img src={family.icon_url} alt={family.code} className="w-full h-full object-contain filter drop-shadow-md" />
                 )}
               </div>
 
               <div
-                className="text-xs font-medium px-2 py-1 rounded-md mb-2"
+                className="text-caption font-medium px-2 py-1 rounded-md mb-2"
                 style={{ backgroundColor: `${family.color_hex}30`, color: family.color_hex }}
               >
                 {family.code}
               </div>
-              <h2 className="text-lg font-bold text-foreground leading-tight">{family.name}</h2>
+              <h2 className="text-subheading font-bold text-foreground leading-tight">{family.name}</h2>
             </div>
 
             <div className="p-5 bg-foreground/10">
-              <h3 className="text-xs font-semibold text-muted tracking-wider mb-3">
+              <h3 className="text-caption font-semibold text-muted tracking-wider mb-3">
                 Ciclos formativos ({family.degrees.length})
               </h3>
               {family.degrees.length > 0 ? (
@@ -311,7 +311,7 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
                       <button
                         key={degree.id}
                         onClick={() => onSelectTitulo(family.name, degree.code ?? degree.name)}
-                        className={`w-full text-left text-sm bg-foreground/5 rounded-lg p-2.5 border transition-all flex items-center justify-between gap-3 group cursor-pointer ${styleClass}`}
+                        className={`w-full text-left text-body bg-foreground/5 rounded-lg p-2.5 border transition-all flex items-center justify-between gap-3 group cursor-pointer ${styleClass}`}
                       >
                         <div className="flex items-center gap-2.5 flex-1 min-w-0">
                           <div className="text-foreground/80 font-medium leading-tight flex-1 group-hover:text-foreground transition-colors">
@@ -319,7 +319,7 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
                           </div>
                         </div>
                         <div className="flex items-center gap-2 shrink-0">
-                          <span className={`text-xs font-bold border px-2 py-1 rounded shadow-inner tracking-wider ${badgeClass}`}>
+                          <span className={`text-caption font-bold border px-2 py-1 rounded shadow-inner tracking-wider ${badgeClass}`}>
                             {badge}
                           </span>
                           <ChevronDown className="w-3 h-3 -rotate-90 text-muted group-hover:text-foreground transition-colors" />
@@ -329,7 +329,7 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
                   })}
                 </div>
               ) : (
-                <div className="text-sm text-muted italic text-center py-4">No hay ciclos formativos registrados.</div>
+                <div className="text-body text-muted italic text-center py-4">No hay ciclos formativos registrados.</div>
               )}
             </div>
           </div>
@@ -386,14 +386,14 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
     <div className="space-y-6 animate-in fade-in duration-300">
       <Card className="p-5 flex flex-col md:flex-row gap-4">
         <div className="flex flex-col gap-1.5 flex-1">
-          <label htmlFor="select-familia-0" className="text-xs font-semibold text-muted tracking-wider">Familia profesional</label>
+          <label htmlFor="select-familia-0" className="text-caption font-semibold text-muted tracking-wider">Familia profesional</label>
           <select
             id="select-familia-0"
             value={selectedFamilia}
             onChange={(e) => {
               updateGlobalSelection({ familia: e.target.value, tituloCodigo: "" });
             }}
-            className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer"
+            className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-body text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer"
           >
             <option value="">-- Selecciona familia --</option>
             {familyNames.map((f) => (
@@ -403,13 +403,13 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
         </div>
 
         <div className="flex flex-col gap-1.5 flex-1">
-          <label htmlFor="select-titulo-0" className="text-xs font-semibold text-muted tracking-wider">Título</label>
+          <label htmlFor="select-titulo-0" className="text-caption font-semibold text-muted tracking-wider">Título</label>
           <select
             id="select-titulo-0"
             value={selectedTituloCodigo}
             disabled={!selectedFamilia}
             onChange={(e) => updateGlobalSelection({ tituloCodigo: e.target.value })}
-            className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+            className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-body text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <option value="">-- Selecciona título --</option>
             {degreesFromApi.map((d: any) => (
@@ -424,11 +424,11 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
         <div className="space-y-6 mt-6">
           <div className="flex items-center justify-between bg-foreground/5 p-4 rounded-xl border border-[var(--glass-border)]">
             <div>
-              <h2 className="text-lg font-bold text-foreground flex items-center gap-3">
+              <h2 className="text-subheading font-bold text-foreground flex items-center gap-3">
                 {formatDegreeName(selectedTituloObj.code, selectedTituloObj.name)}
                 {selectedTituloObj.code && !selectedTituloObj.name.startsWith(selectedTituloObj.code) && <Badge variant="default" className="font-mono">{selectedTituloObj.code}</Badge>}
               </h2>
-              <p className="text-sm text-muted mt-1">Detalles del currículo del BOA</p>
+              <p className="text-body text-muted mt-1">Detalles del currículo del BOA</p>
             </div>
             <Button variant="primary" onClick={() => onSelectTitulo(selectedFamilia, selectedTituloObj.code ?? selectedTituloObj.name)}>
               <BookOpen className="w-4 h-4 mr-2" />
@@ -444,9 +444,9 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
                 return (
                   <Card key={artKey} className="overflow-hidden">
                     <div className="bg-foreground/5 px-6 py-4 border-b border-[var(--glass-border)]">
-                      <h3 className="text-sm font-bold text-foreground">{articleTitles[artKey] || artKey}</h3>
+                      <h3 className="text-body font-bold text-foreground">{articleTitles[artKey] || artKey}</h3>
                     </div>
-                    <div className="p-6 text-sm text-foreground/80 whitespace-pre-wrap leading-relaxed">
+                    <div className="p-6 text-body text-foreground/80 whitespace-pre-wrap leading-relaxed">
                       {/* Hide raw text when structured data exists */}
                       {artKey !== 'article_5' && artKey !== 'article_6' && artKey !== 'article_9' && content}
                       {/* CPPS rows (Article 5) */}
@@ -455,7 +455,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
                           {(selectedTituloObj.boa_articles as any).article_5_cpps.map((cpp: any) => (
                             <div key={cpp.id} className="flex items-start gap-3 p-3 rounded-lg border border-[var(--glass-border)] bg-foreground/5">
                               <span className="font-mono font-bold text-[#14a085] shrink-0 mt-0.5">CPPS{cpp.id}.</span>
-                              <span className="text-sm text-foreground">{cpp.desc}</span>
+                              <span className="text-body text-foreground">{cpp.desc}</span>
                             </div>
                           ))}
                         </div>
@@ -468,9 +468,9 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
                               <div className="flex items-start gap-3 p-3">
                                 <span className="font-mono font-bold text-[#e67e22] shrink-0 mt-0.5">CP{cp.id}.</span>
                                 <div className="flex-1">
-                                  <span className="font-mono font-semibold text-sm text-foreground">{cp.code}</span>
-                                  <span className="text-xs text-muted ml-2">({cp.ref})</span>
-                                  <p className="text-sm text-foreground mt-1">{cp.desc}</p>
+                                  <span className="font-mono font-semibold text-body text-foreground">{cp.code}</span>
+                                  <span className="text-caption text-muted ml-2">({cp.ref})</span>
+                                  <p className="text-body text-foreground mt-1">{cp.desc}</p>
                                 </div>
                               </div>
                               {Array.isArray((selectedTituloObj.boa_articles as any)?.article_6_ucs) && (
@@ -479,8 +479,8 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
                                     .filter((uc: any) => uc.cp_id === cp.id)
                                     .map((uc: any) => (
                                       <div key={uc.id} className="flex items-start gap-2 py-1">
-                                        <span className="font-mono font-bold text-xs text-[#2980b9] shrink-0 mt-0.5">{uc.id}:</span>
-                                        <span className="text-xs text-foreground/80">{uc.desc}</span>
+                                        <span className="font-mono font-bold text-caption text-[#2980b9] shrink-0 mt-0.5">{uc.id}:</span>
+                                        <span className="text-caption text-foreground/80">{uc.desc}</span>
                                       </div>
                                     ))
                                   }
@@ -496,7 +496,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
                           {(selectedTituloObj.boa_articles as any).article_9_og.map((og: any) => (
                             <div key={og.id} className="flex items-start gap-3 p-3 rounded-lg border border-[var(--glass-border)] bg-foreground/5">
                               <span className="font-mono font-bold text-info shrink-0 mt-0.5">OG{og.id}.</span>
-                              <span className="text-sm text-foreground">{og.desc}</span>
+                              <span className="text-body text-foreground">{og.desc}</span>
                             </div>
                           ))}
                         </div>
@@ -509,7 +509,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
           ) : (
             <Card className="p-12 text-center text-muted flex flex-col items-center justify-center gap-4">
               <Layers className="w-12 h-12" />
-              <p className="text-lg">Este título aún no tiene los artículos del currículo cargados en la base de datos.</p>
+              <p className="text-subheading">Este título aún no tiene los artículos del currículo cargados en la base de datos.</p>
             </Card>
           )}
         </div>
@@ -518,14 +518,14 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
       {selectedFamilia && selectedFamilyObj?.degrees.length === 0 && (
         <Card className="p-12 text-center text-muted flex flex-col items-center justify-center gap-4 mt-6">
           <Layers className="w-12 h-12" />
-          <p className="text-lg">No hay títulos registrados para esta familia.</p>
+          <p className="text-subheading">No hay títulos registrados para esta familia.</p>
         </Card>
       )}
 
       {!selectedFamilia && (
         <Card className="p-12 text-center text-muted flex flex-col items-center justify-center gap-4 mt-6">
           <GraduationCap className="w-12 h-12" />
-          <p className="text-lg">Selecciona una familia profesional para ver sus títulos.</p>
+          <p className="text-subheading">Selecciona una familia profesional para ver sus títulos.</p>
         </Card>
       )}
     </div>
@@ -619,9 +619,9 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
         >
           <div className="flex items-center gap-3">
             <GraduationCap className="w-5 h-5 text-accent" />
-            <h2 className="text-lg font-bold text-foreground">{cursoLabel} curso</h2>
+            <h2 className="text-subheading font-bold text-foreground">{cursoLabel} curso</h2>
             <Badge variant="info">{mods.length} módulos</Badge>
-            <span className="text-xs text-muted flex items-center gap-1">
+            <span className="text-caption text-muted flex items-center gap-1">
               <Clock className="w-3 h-3" />{totalHoras}h
             </span>
           </div>
@@ -638,12 +638,12 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
               >
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3 min-w-0 flex-1">
-                    <span className="font-mono text-xs font-medium text-accent bg-accent/10 border border-accent/20 px-2 py-1 rounded shrink-0">
+                    <span className="font-mono text-caption font-medium text-accent bg-accent/10 border border-accent/20 px-2 py-1 rounded shrink-0">
                       {mod.codigo}
                     </span>
                     <div className="min-w-0">
-                      <h3 className="text-sm font-semibold text-foreground">{mod.nombre}</h3>
-                      <span className="flex items-center gap-1 text-xs text-muted mt-1">
+                      <h3 className="text-body font-semibold text-foreground">{mod.nombre}</h3>
+                      <span className="flex items-center gap-1 text-caption text-muted mt-1">
                         <Clock className="w-3 h-3" />
                         {mod.horas}h
                       </span>
@@ -682,7 +682,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
 
                 {mod.unidades_formativas && mod.unidades_formativas.length > 0 && (
                   <div className="mt-4 pt-4 border-t border-[var(--glass-border)]">
-                    <p className="text-xs font-semibold text-muted tracking-wider mb-3 flex items-center gap-1">
+                    <p className="text-caption font-semibold text-muted tracking-wider mb-3 flex items-center gap-1">
                       <FolderTree className="w-3 h-3" />
                       Unidades Formativas ({mod.unidades_formativas.length})
                     </p>
@@ -690,10 +690,10 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
                       {mod.unidades_formativas.map((uf, i) => (
                         <div key={i} className="bg-foreground/5 rounded-lg p-3 border border-[var(--glass-border)]">
                           <div className="flex items-center justify-between gap-2">
-                            <span className="text-xs font-mono text-accent">{uf.codigo}</span>
-                            <span className="text-xs font-semibold text-foreground/70">{uf.horas}h</span>
+                            <span className="text-caption font-mono text-accent">{uf.codigo}</span>
+                            <span className="text-caption font-semibold text-foreground/70">{uf.horas}h</span>
                           </div>
-                          <p className="text-xs text-foreground/70 mt-1">{uf.nombre}</p>
+                          <p className="text-caption text-foreground/70 mt-1">{uf.nombre}</p>
                         </div>
                       ))}
                     </div>
@@ -719,12 +719,12 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
     <div className="space-y-6 animate-in fade-in duration-300">
       <Card className="p-5 flex flex-col md:flex-row gap-4">
         <div className="flex flex-col gap-1.5 flex-1">
-          <label htmlFor="select-familia-1" className="text-xs font-semibold text-muted tracking-wider">Familia profesional</label>
+          <label htmlFor="select-familia-1" className="text-caption font-semibold text-muted tracking-wider">Familia profesional</label>
           <select
             id="select-familia-1"
             value={selectedFamilia}
             onChange={(e) => { updateGlobalSelection({ familia: e.target.value, tituloCodigo: "", moduloCodigo: "" }); }}
-            className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer"
+            className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-body text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer"
           >
             <option value="">-- Selecciona familia --</option>
             {familyNames.map((f) => (
@@ -734,7 +734,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
         </div>
 
         <div className="flex flex-col gap-1.5 flex-1">
-          <label htmlFor="select-titulo-1" className="text-xs font-semibold text-muted tracking-wider">Título</label>
+          <label htmlFor="select-titulo-1" className="text-caption font-semibold text-muted tracking-wider">Título</label>
           <select
             id="select-titulo-1"
             value={selectedTitulo}
@@ -743,7 +743,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
               const val = e.target.value;
               updateGlobalSelection({ tituloCodigo: val, moduloCodigo: "" });
             }}
-            className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+            className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-body text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <option value="">-- Selecciona título --</option>
             {degreesFromApi.map((d: any) => (
@@ -758,7 +758,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
       {!selectedTitulo && (
         <Card className="p-12 text-center text-muted flex flex-col items-center justify-center gap-4">
           <BookOpen className="w-12 h-12" />
-          <p className="text-lg">Selecciona una Familia y un Título para ver los módulos organizados por curso.</p>
+          <p className="text-subheading">Selecciona una Familia y un Título para ver los módulos organizados por curso.</p>
         </Card>
       )}
 
@@ -771,8 +771,8 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
       {selectedTitulo && !titulo && !tituloLoading && (
         <Card className="p-12 text-center text-muted flex flex-col items-center justify-center gap-4">
           <Layers className="w-12 h-12" />
-          <p className="text-lg">Este título aún no tiene datos curriculares cargados.</p>
-          <p className="text-sm">Los módulos se mostrarán cuando esté disponible el currículo oficial.</p>
+          <p className="text-subheading">Este título aún no tiene datos curriculares cargados.</p>
+          <p className="text-body">Los módulos se mostrarán cuando esté disponible el currículo oficial.</p>
         </Card>
       )}
 
@@ -783,7 +783,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
           {modulosPrimero.length === 0 && modulosSegundo.length === 0 && (
             <Card className="p-12 text-center text-muted flex flex-col items-center justify-center gap-4">
               <Layers className="w-12 h-12" />
-              <p className="text-lg">No hay módulos para este título.</p>
+              <p className="text-subheading">No hay módulos para este título.</p>
             </Card>
           )}
         </div>
@@ -879,12 +879,12 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
     <div className="space-y-6 animate-in fade-in duration-300">
       <Card className="p-5 flex flex-col md:flex-row gap-4">
         <div className="flex flex-col gap-1.5 flex-1">
-          <label htmlFor="select-familia-2" className="text-xs font-semibold text-muted tracking-wider">Familia profesional</label>
+          <label htmlFor="select-familia-2" className="text-caption font-semibold text-muted tracking-wider">Familia profesional</label>
           <select
             id="select-familia-2"
             value={selectedFamilia}
             onChange={(e) => { updateGlobalSelection({ familia: e.target.value, tituloCodigo: "", moduloCodigo: "" }); }}
-            className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer"
+            className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-body text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer"
           >
             <option value="">-- Selecciona familia --</option>
             {familyNames.map((f) => (
@@ -894,7 +894,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
         </div>
 
         <div className="flex flex-col gap-1.5 flex-1">
-          <label htmlFor="select-titulo-2" className="text-xs font-semibold text-muted tracking-wider">Título</label>
+          <label htmlFor="select-titulo-2" className="text-caption font-semibold text-muted tracking-wider">Título</label>
           <select
             id="select-titulo-2"
             value={selectedTitulo}
@@ -903,7 +903,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
               const val = e.target.value;
               updateGlobalSelection({ tituloCodigo: val, moduloCodigo: "" });
             }}
-            className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+            className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-body text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <option value="">-- Selecciona título --</option>
             {degreesFromApi.map((d: any) => (
@@ -915,13 +915,13 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
         </div>
 
         <div className="flex flex-col gap-1.5 flex-1">
-          <label htmlFor="select-modulo-2" className="text-xs font-semibold text-muted tracking-wider">Módulo</label>
+          <label htmlFor="select-modulo-2" className="text-caption font-semibold text-muted tracking-wider">Módulo</label>
           <select
             id="select-modulo-2"
             value={selectedModuloCodigo}
             disabled={!selectedTitulo || !titulo}
             onChange={(e) => updateGlobalSelection({ moduloCodigo: e.target.value })}
-            className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+            className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-body text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <option value="">-- Selecciona módulo --</option>
             {titulo?.modulos.map((m: any) => (
@@ -940,15 +940,15 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
       {selectedTitulo && !titulo && !tituloLoading && (
         <Card className="p-12 text-center text-muted flex flex-col items-center justify-center gap-4">
           <Layers className="w-12 h-12" />
-          <p className="text-lg">Este título aún no tiene datos curriculares cargados.</p>
-          <p className="text-sm">Los módulos se mostrarán cuando esté disponible el currículo oficial.</p>
+          <p className="text-subheading">Este título aún no tiene datos curriculares cargados.</p>
+          <p className="text-body">Los módulos se mostrarán cuando esté disponible el currículo oficial.</p>
         </Card>
       )}
 
       {!selectedModuloCodigo && titulo && (
         <Card className="p-12 text-center text-muted flex flex-col items-center justify-center gap-4">
           <ListChecks className="w-12 h-12" />
-          <p className="text-lg">Selecciona un módulo para ver los resultados de aprendizaje.</p>
+          <p className="text-subheading">Selecciona un módulo para ver los resultados de aprendizaje.</p>
         </Card>
       )}
 
@@ -956,10 +956,10 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
         <>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3 flex-wrap">
-              <span className="font-mono text-xs font-medium text-accent bg-accent/10 border border-accent/20 px-2 py-1 rounded">
+              <span className="font-mono text-caption font-medium text-accent bg-accent/10 border border-accent/20 px-2 py-1 rounded">
                 {modulo.codigo}
               </span>
-              <h2 className="text-lg font-bold text-foreground">{formatModuleName(modulo.codigo, modulo.nombre, true)}</h2>
+              <h2 className="text-subheading font-bold text-foreground">{formatModuleName(modulo.codigo, modulo.nombre, true)}</h2>
               <Badge variant="info">{modulo.horas}h</Badge>
               <Badge>{modulo.curso} curso</Badge>
               <Button
@@ -1008,13 +1008,13 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                         className="w-full p-4 flex items-center justify-between gap-4 hover:bg-foreground/5 transition-colors text-left"
                       >
                         <div className="flex items-center gap-3 min-w-0 flex-1">
-                          <span className="text-xs font-medium text-accent bg-accent/10 border border-accent/20 px-2 py-0.5 rounded shrink-0">
+                          <span className="text-caption font-medium text-accent bg-accent/10 border border-accent/20 px-2 py-0.5 rounded shrink-0">
                             {raItem.id}
                           </span>
-                          <p className="text-sm text-foreground leading-snug">{raItem.descripcion}</p>
+                          <p className="text-body text-foreground leading-snug">{raItem.descripcion}</p>
                         </div>
                         <div className="flex items-center gap-3 shrink-0">
-                          <span className="text-xs text-muted">{raItem.ce?.length || 0} CE</span>
+                          <span className="text-caption text-muted">{raItem.ce?.length || 0} CE</span>
                           {isExpanded ? (
                             <ChevronUp className="w-4 h-4 text-muted" />
                           ) : (
@@ -1025,10 +1025,10 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
 
                       {isExpanded && (
                         <div className="border-t border-[var(--glass-border)] p-4 space-y-2 animate-in slide-in-from-top-1 duration-200">
-                          <p className="text-xs font-semibold text-muted tracking-wider">Criterios de evaluación</p>
+                          <p className="text-caption font-semibold text-muted tracking-wider">Criterios de evaluación</p>
                           {raItem.ce?.map((ceItem: any) => (
-                            <div key={ceItem.id} className="flex items-start gap-2 text-sm bg-foreground/5 rounded-lg p-3 border border-[var(--glass-border)]">
-                              <span className="text-xs font-medium text-accent shrink-0 mt-0.5">{ceItem.id}</span>
+                            <div key={ceItem.id} className="flex items-start gap-2 text-body bg-foreground/5 rounded-lg p-3 border border-[var(--glass-border)]">
+                              <span className="text-caption font-medium text-accent shrink-0 mt-0.5">{ceItem.id}</span>
                               <span className="text-foreground/80">{ceItem.descripcion}</span>
                             </div>
                           ))}
@@ -1045,11 +1045,11 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                 <Card className="p-8 text-center text-muted border-dashed border-[var(--glass-border)]">
                   <AlertTriangle className="w-8 h-8 mx-auto mb-3 opacity-50" />
                   <p>Este módulo no tiene competencias directas asociadas para convalidación en el registro oficial.</p>
-                  <p className="text-xs mt-2 opacity-70">Es común en módulos transversales, proyecto, FEOE o idiomas.</p>
+                  <p className="text-caption mt-2 opacity-70">Es común en módulos transversales, proyecto, FEOE o idiomas.</p>
                 </Card>
               ) : (
                 <div className="space-y-4">
-                  <div className="bg-blue-500/10 text-blue-500 border border-blue-500/20 rounded-lg p-3 text-sm flex items-start gap-2">
+                  <div className="bg-blue-500/10 text-blue-500 border border-blue-500/20 rounded-lg p-3 text-body flex items-start gap-2">
                     <ListChecks className="w-4 h-4 mt-0.5 shrink-0" />
                     <div>
                       <p className="font-semibold">Opciones de convalidación</p>
@@ -1061,23 +1061,23 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                     <Card key={i} className="border border-[var(--glass-border)] overflow-hidden">
                       <div className="bg-foreground/5 border-b border-[var(--glass-border)] p-3 px-4 flex items-center justify-between">
                         <div>
-                          <h4 className="font-semibold text-sm">Opción {i + 1}</h4>
-                          <span className="text-xs text-muted">
+                          <h4 className="font-semibold text-body">Opción {i + 1}</h4>
+                          <span className="text-caption text-muted">
                             {grupo.es_conjunto ? "Debes acreditar TODAS estas competencias:" : "Debes acreditar esta competencia:"}
                           </span>
                         </div>
-                        {grupo.es_conjunto && <Badge variant="default" className="text-xs">Conjunto requerido</Badge>}
+                        {grupo.es_conjunto && <Badge variant="default" className="text-caption">Conjunto requerido</Badge>}
                       </div>
                       <div className="p-0">
                         {grupo.competencias?.map((comp: any, j: number) => (
                           <div key={j} className="p-3 px-4 border-b border-[var(--glass-border)] last:border-0 flex items-start gap-3 hover:bg-foreground/5 transition-colors">
-                            <span className="text-xs font-mono font-bold text-accent bg-accent/10 px-2 py-0.5 rounded mt-0.5 whitespace-nowrap">
+                            <span className="text-caption font-mono font-bold text-accent bg-accent/10 px-2 py-0.5 rounded mt-0.5 whitespace-nowrap">
                               {comp.codigo}
                             </span>
                             <div>
-                              <p className="text-sm font-medium">{comp.nombre}</p>
+                              <p className="text-body font-medium">{comp.nombre}</p>
                               {comp.info_suprimida && (
-                                <p className="text-xs text-muted mt-1 italic border-l-2 border-warning/50 pl-2 py-0.5">
+                                <p className="text-caption text-muted mt-1 italic border-l-2 border-warning/50 pl-2 py-0.5">
                                   {comp.info_suprimida}
                                 </p>
                               )}
@@ -1087,7 +1087,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                       </div>
 
                       {(grupo.otros_modulos_convalidables_codigos && grupo.otros_modulos_convalidables_codigos.length > 0) && (
-                        <div className="bg-success/10 p-3 px-4 text-xs text-success-foreground border-t border-[var(--glass-border)] flex items-start gap-2">
+                        <div className="bg-success/10 p-3 px-4 text-caption text-success-foreground border-t border-[var(--glass-border)] flex items-start gap-2">
                           <BookOpen className="w-3.5 h-3.5 mt-0.5 shrink-0" />
                           <p>
                             Con esta opción también convalidarías: <strong>{grupo.otros_modulos_convalidables_codigos.join(", ")}</strong>

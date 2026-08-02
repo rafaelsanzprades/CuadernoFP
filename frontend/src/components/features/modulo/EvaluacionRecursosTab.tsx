@@ -50,14 +50,14 @@ export function EvaluacionRecursosTab() {
     <>
       <div className="space-y-6 animate-in fade-in duration-500">
       <div className="glass-card p-6 border-t-4 border-t-amber-500">
-        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
           <span className="inline-flex"><CheckCircle2 className="w-[1.2em] h-[1.2em] mr-1 text-amber-400" /></span> Evaluación y Recursos
         </h2>
         <div className="space-y-6">
 
           <div>
-            <label className="text-sm font-semibold text-foreground mb-2 block">Instrumentos de evaluación</label>
-            <p className="text-xs text-muted mb-3">Procedimientos e instrumentos normativos que se emplearán en el módulo.</p>
+            <label className="text-body font-semibold text-foreground mb-2 block">Instrumentos de evaluación</label>
+            <p className="text-caption text-muted mb-3">Procedimientos e instrumentos normativos que se emplearán en el módulo.</p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {INSTRUMENTOS.map((inst) => {
                 const isSelected = inst_seleccionados.includes(inst.id);
@@ -69,7 +69,7 @@ export function EvaluacionRecursosTab() {
                       onChange={() => toggleInst(inst.id)}
                       className="rounded border-white/20 bg-transparent text-amber-500 focus:ring-amber-500"
                     />
-                    <span className="text-xs"><strong>{inst.id}</strong> - {inst.label}</span>
+                    <span className="text-caption"><strong>{inst.id}</strong> - {inst.label}</span>
                   </label>
                 );
               })}
@@ -77,8 +77,8 @@ export function EvaluacionRecursosTab() {
           </div>
 
           <div>
-            <label className="text-sm font-semibold text-foreground mb-2 block">Recursos y espacios</label>
-            <p className="text-xs text-muted mb-3">Infraestructuras y materiales técnicos necesarios para el desarrollo curricular.</p>
+            <label className="text-body font-semibold text-foreground mb-2 block">Recursos y espacios</label>
+            <p className="text-caption text-muted mb-3">Infraestructuras y materiales técnicos necesarios para el desarrollo curricular.</p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {RECURSOS.map((rec) => {
                 const isSelected = rec_seleccionados.includes(rec.id);
@@ -90,7 +90,7 @@ export function EvaluacionRecursosTab() {
                       onChange={() => toggleRec(rec.id)}
                       className="rounded border-white/20 bg-transparent text-amber-500 focus:ring-amber-500"
                     />
-                    <span className="text-xs"><strong>{rec.id}</strong> - {rec.label}</span>
+                    <span className="text-caption"><strong>{rec.id}</strong> - {rec.label}</span>
                   </label>
                 );
               })}
@@ -98,8 +98,8 @@ export function EvaluacionRecursosTab() {
           </div>
 
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">E5. Actividades de recuperación y refuerzo</label>
-            <p className="text-xs text-muted mb-2">Criterios y procedimientos para el alumnado que no supera la evaluación.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">E5. Actividades de recuperación y refuerzo</label>
+            <p className="text-caption text-muted mb-2">Criterios y procedimientos para el alumnado que no supera la evaluación.</p>
             <textarea
               value={config_contexto["E5_recuperacion"] || ""}
               onChange={e => handleChange("E5_recuperacion", e.target.value)}
@@ -108,7 +108,7 @@ export function EvaluacionRecursosTab() {
             />
           </div>
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">G1. Infraestructuras y equipamientos</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">G1. Infraestructuras y equipamientos</label>
             <textarea
               value={config_contexto["G1_infraestructuras"] || ""}
               onChange={e => handleChange("G1_infraestructuras", e.target.value)}
@@ -117,7 +117,7 @@ export function EvaluacionRecursosTab() {
             />
           </div>
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">G2. Herramientas TIC y plataformas</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">G2. Herramientas TIC y plataformas</label>
             <textarea
               value={config_contexto["G2_herramientas_tic"] || ""}
               onChange={e => handleChange("G2_herramientas_tic", e.target.value)}
@@ -126,7 +126,7 @@ export function EvaluacionRecursosTab() {
             />
           </div>
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">G3. Bibliografía y recursos para el alumnado</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">G3. Bibliografía y recursos para el alumnado</label>
             <textarea
               value={config_contexto["G3_bibliografia"] || ""}
               onChange={e => handleChange("G3_bibliografia", e.target.value)}

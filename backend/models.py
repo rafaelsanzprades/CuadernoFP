@@ -191,9 +191,9 @@ class CourseStudent(Base):
     estado = Column(String)
     apellidos = Column(String)
     nombre = Column(String)
-    edad = Column(String) # string since it might be empty or invalid in json
+    edad = Column(Integer, nullable=True)
     nacimiento = Column(String)
-    repite = Column(String)
+    repite = Column(Boolean, default=False)
     matricula = Column(String)
     comentarios = Column(String)
     email = Column(String)
@@ -215,7 +215,7 @@ class LearningOutcomeItem(Base):
     module_document_id = Column(String, ForeignKey("module_documents.id", ondelete="CASCADE"), index=True)
     id_ra = Column(String, index=True)
     desc_ra = Column(String)
-    peso_ra = Column(String)
+    peso_ra = Column(Integer, nullable=True)
     is_dual = Column(Boolean, default=False)
     data = Column(JSON, default={})
 
@@ -227,7 +227,7 @@ class EvaluationCriterionItem(Base):
     id_ra = Column(String, index=True)
     id_ud = Column(String)
     desc_ce = Column(String)
-    peso_ce = Column(String)
+    peso_ce = Column(Integer, nullable=True)
     data = Column(JSON, default={})
 
 class ActivityItem(Base):

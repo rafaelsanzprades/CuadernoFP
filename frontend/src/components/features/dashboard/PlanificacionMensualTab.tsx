@@ -31,12 +31,12 @@ export function PlanificacionMensualTab() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
-      <h2 className="text-lg font-bold flex items-center gap-2 text-foreground">
+      <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
         <span><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Planificación y seguimiento mensual
       </h2>
 
       <section className="glass-card p-6 overflow-x-auto">
-        <table className="w-full text-left border-collapse text-sm whitespace-nowrap">
+        <table className="w-full text-left border-collapse text-body whitespace-nowrap">
           <thead>
             <tr className="border-b border-[var(--glass-border)] text-muted bg-foreground/5">
               <th className="p-3 sticky left-0 bg-[#111827] z-10 border-r border-[var(--glass-border)]"></th>
@@ -46,7 +46,7 @@ export function PlanificacionMensualTab() {
                 <th key={m} colSpan={2} className="p-2 text-center border-r border-[var(--glass-border)]">{m}</th>
               ))}
             </tr>
-            <tr className="border-b border-[var(--glass-border)] text-xs text-muted bg-foreground/5">
+            <tr className="border-b border-[var(--glass-border)] text-caption text-muted bg-foreground/5">
               <th className="p-2 sticky left-0 bg-[#111827] z-10 border-r border-[var(--glass-border)] text-center font-bold text-foreground">UD</th>
               <th className="p-2 sticky left-[60px] bg-[#111827] z-10 text-center text-info">Prv</th>
               <th className="p-2 sticky left-[130px] bg-[#111827] z-10 text-center text-[#14a085]/70 border-r border-[var(--glass-border)]">Imp</th>

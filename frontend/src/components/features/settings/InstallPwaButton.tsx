@@ -60,7 +60,7 @@ export function InstallPwaButton({ isSidebarOpen }: { isSidebarOpen: boolean }) 
   return (
     <Button
       onClick={handleInstallClick}
-      className="w-full flex items-center justify-center gap-2 bg-info/10 hover:bg-info/20 text-info border border-info/30 transition-all text-sm py-2 mb-2"
+      className="w-full flex items-center justify-center gap-2 bg-info/10 hover:bg-info/20 text-info border border-info/30 transition-all text-body py-2 mb-2"
     >
       <Download className="w-4 h-4" />
       <span>Instalar App</span>

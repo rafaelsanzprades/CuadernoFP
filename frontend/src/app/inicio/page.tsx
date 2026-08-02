@@ -72,13 +72,13 @@ function CheckCard({ item }: { item: CheckItem }) {
           <div className="mt-0.5 text-muted">{item.icon}</div>
           <div className="flex-1 min-w-0">
             <div className="flex flex-wrap items-center gap-2 mb-1">
-              <h3 className="font-bold text-foreground text-sm leading-tight">{item.title}</h3>
+              <h3 className="font-bold text-foreground text-body leading-tight">{item.title}</h3>
               <StatusBadge status={item.status} />
             </div>
             {/* Detail lines */}
             <ul className="space-y-0.5">
               {item.lines.map((line, i) => (
-                <li key={i} className="text-sm text-muted flex items-start gap-1.5">
+                <li key={i} className="text-body text-muted flex items-start gap-1.5">
                   <span className="text-foreground/40 font-bold px-1 mt-0.5">•</span>
                   <span>{line}</span>
                 </li>
@@ -90,14 +90,14 @@ function CheckCard({ item }: { item: CheckItem }) {
         <div className="flex flex-wrap justify-end gap-2 pt-3 mt-auto border-t border-white/5">
           <Link
             href={item.href}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline"
+            className="inline-flex items-center gap-1.5 text-caption font-semibold text-accent hover:underline"
           >
             Ir a {item.hrefLabel} <ArrowRight className="w-3.5 h-3.5" />
           </Link>
           {item.actionHref && item.actionLabel && (
             <Link
               href={item.actionHref}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-lg border border-accent/30 bg-accent/10 text-accent hover:bg-accent/20 transition-all"
+              className="inline-flex items-center gap-1.5 text-caption font-semibold px-3 py-1 rounded-lg border border-accent/30 bg-accent/10 text-accent hover:bg-accent/20 transition-all"
             >
               {item.actionLabel} <ArrowRight className="w-3.5 h-3.5" />
             </Link>
@@ -601,11 +601,11 @@ export default function InicioPage() {
               {navGroups.map((group, groupIdx) => (
                 <MotionWrapper key={group.title} delay={groupIdx * 0.1}>
                   <div className="space-y-3">
-                    <h2 className="text-lg font-bold text-foreground flex items-center gap-3">
+                    <h2 className="text-subheading font-bold text-foreground flex items-center gap-3">
                       {group.title.replace(/\s*\[.*\]$/, '')}
                     </h2>
                     {group.sectionDescription && (
-                      <p className="text-muted text-sm max-w-4xl pb-4 border-b border-[var(--glass-border)]">
+                      <p className="text-muted text-body max-w-4xl pb-4 border-b border-[var(--glass-border)]">
                         {group.sectionDescription}
                       </p>
                     )}
@@ -616,15 +616,15 @@ export default function InicioPage() {
                         <Link key={item.href} href={item.href} className="block group">
                           <Card className="h-full p-5 flex flex-col gap-3 border border-[var(--glass-border)] bg-[var(--glass-bg)] hover:bg-accent/5 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/10 cursor-pointer">
                             <div className="flex items-center gap-3">
-                              <div className="text-2xl group-hover:scale-110 transition-transform duration-300">
+                              <div className="text-heading group-hover:scale-110 transition-transform duration-300">
                                 <item.icon className="w-8 h-8" strokeWidth={1.5} />
                               </div>
-                              <h3 className="font-bold text-sm text-foreground group-hover:text-accent transition-colors leading-tight">
+                              <h3 className="font-bold text-body text-foreground group-hover:text-accent transition-colors leading-tight">
                                 {item.label}
                               </h3>
                             </div>
                             {item.description && (
-                              <p className="text-sm text-muted mt-auto">
+                              <p className="text-body text-muted mt-auto">
                                 {item.description}
                               </p>
                             )}
@@ -649,28 +649,28 @@ export default function InicioPage() {
                 <div className="grid grid-cols-3 gap-4">
                   <Card className="p-4 border border-success/30 bg-success/10 rounded-2xl text-center">
                     <CheckCircle className="w-7 h-7 text-success mx-auto mb-1" />
-                    <div className="text-2xl font-extrabold text-success">{okCount}</div>
-                    <div className="text-xs text-muted mt-0.5">Correctos</div>
+                    <div className="text-heading font-extrabold text-success">{okCount}</div>
+                    <div className="text-caption text-muted mt-0.5">Correctos</div>
                   </Card>
                   <Card className="p-4 border border-warning/30 bg-warning/10 rounded-2xl text-center">
                     <AlertTriangle className="w-7 h-7 text-warning mx-auto mb-1" />
-                    <div className="text-2xl font-extrabold text-warning">{warnCount}</div>
-                    <div className="text-xs text-muted mt-0.5">Advertencias</div>
+                    <div className="text-heading font-extrabold text-warning">{warnCount}</div>
+                    <div className="text-caption text-muted mt-0.5">Advertencias</div>
                   </Card>
                   <Card className="p-4 border border-danger/30 bg-danger/10 rounded-2xl text-center">
                     <XCircle className="w-7 h-7 text-danger mx-auto mb-1" />
-                    <div className="text-2xl font-extrabold text-danger">{emptyCount}</div>
-                    <div className="text-xs text-muted mt-0.5">Sin datos</div>
+                    <div className="text-heading font-extrabold text-danger">{emptyCount}</div>
+                    <div className="text-caption text-muted mt-0.5">Sin datos</div>
                   </Card>
                 </div>
 
                 <div className="space-y-4">
                   <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
-                    <h2 className="text-sm font-bold text-foreground flex items-center gap-2">
+                    <h2 className="text-body font-bold text-foreground flex items-center gap-2">
                       <BookOpen className="w-4 h-4 text-accent" />
                       Programación didáctica
                     </h2>
-                    <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-xs text-muted">
+                    <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-caption text-muted">
                       Programación activa: <span className="font-semibold text-foreground">{activeModuleId || "-"}</span>
                     </span>
                   </div>
@@ -683,11 +683,11 @@ export default function InicioPage() {
 
                 <div className="space-y-4">
                   <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
-                    <h2 className="text-sm font-bold text-foreground flex items-center gap-2">
+                    <h2 className="text-body font-bold text-foreground flex items-center gap-2">
                       <Users className="w-4 h-4 text-accent" />
                       Curso activo
                     </h2>
-                    <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-xs text-muted">
+                    <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-caption text-muted">
                       Curso Activo: <span className="font-semibold text-foreground">{activeCursoId || "-"}</span>
                     </span>
                   </div>
@@ -707,10 +707,10 @@ export default function InicioPage() {
                 {/* Secuencia Lógica Propuesta */}
                 <Card glow className="p-8 mb-6">
                   <div className="space-y-4">
-                  <h2 className="text-lg font-bold text-foreground flex items-center gap-3">
+                  <h2 className="text-subheading font-bold text-foreground flex items-center gap-3">
                     <Layers className="w-6 h-6 text-accent" /> Secuencia lógica de programación
                   </h2>
-                  <p className="text-muted text-sm pb-4 border-b border-[var(--glass-border)]">
+                  <p className="text-muted text-body pb-4 border-b border-[var(--glass-border)]">
                     Flujo de trabajo estructurado basado en la Programación Didáctica oficial. Avanza de izquierda a derecha para completar el diseño del módulo.
                   </p>
                   
@@ -720,10 +720,10 @@ export default function InicioPage() {
                     {/* Paso 1 */}
                     <Card className="p-4 bg-accent/5 border border-accent/20 shadow-sm relative group overflow-hidden">
                       <div className="absolute top-0 left-0 w-full h-1 bg-accent/50 group-hover:bg-accent transition-colors"></div>
-                      <h3 className="font-bold text-accent mb-3 text-sm flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center text-xs">1</span> Contexto
+                      <h3 className="font-bold text-accent mb-3 text-body flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center text-caption">1</span> Contexto
                       </h3>
-                      <ul className="text-xs text-muted/80 space-y-2 font-medium">
+                      <ul className="text-caption text-muted/80 space-y-2 font-medium">
                         <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-accent/70 shrink-0"/>Identificación</li>
                         <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-accent/70 shrink-0"/>Contexto del Aula</li>
                         <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-accent/70 shrink-0"/>Planes y Contingencia</li>
@@ -734,10 +734,10 @@ export default function InicioPage() {
                     {/* Paso 2 */}
                     <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
                       <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
-                      <h3 className="font-bold text-foreground mb-3 text-sm flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-xs">2</span> Currículo
+                      <h3 className="font-bold text-foreground mb-3 text-body flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">2</span> Currículo
                       </h3>
-                      <ul className="text-xs text-muted/80 space-y-2 font-medium">
+                      <ul className="text-caption text-muted/80 space-y-2 font-medium">
                         <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>RA y CE</li>
                         <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Definición UDs</li>
                         <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Relación RA-UD</li>
@@ -748,10 +748,10 @@ export default function InicioPage() {
                     {/* Paso 3 */}
                     <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
                       <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
-                      <h3 className="font-bold text-foreground mb-3 text-sm flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-xs">3</span> Metodología
+                      <h3 className="font-bold text-foreground mb-3 text-body flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">3</span> Metodología
                       </h3>
-                      <ul className="text-xs text-muted/80 space-y-2 font-medium">
+                      <ul className="text-caption text-muted/80 space-y-2 font-medium">
                         <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Principios/Estrategias</li>
                         <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Materiales/Recursos</li>
                         <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Empresa / FEOE</li>
@@ -762,10 +762,10 @@ export default function InicioPage() {
                     {/* Paso 4 */}
                     <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
                       <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
-                      <h3 className="font-bold text-foreground mb-3 text-sm flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-xs">4</span> Evaluación
+                      <h3 className="font-bold text-foreground mb-3 text-body flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">4</span> Evaluación
                       </h3>
-                      <ul className="text-xs text-muted/80 space-y-2 font-medium">
+                      <ul className="text-caption text-muted/80 space-y-2 font-medium">
                         <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Instrumentos</li>
                         <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Indicadores/Rúbricas</li>
                         <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Normativa</li>
@@ -776,10 +776,10 @@ export default function InicioPage() {
                     {/* Paso 5 */}
                     <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
                       <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
-                      <h3 className="font-bold text-foreground mb-3 text-sm flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-xs">5</span> Aula
+                      <h3 className="font-bold text-foreground mb-3 text-body flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">5</span> Aula
                       </h3>
-                      <ul className="text-xs text-muted/80 space-y-2 font-medium">
+                      <ul className="text-caption text-muted/80 space-y-2 font-medium">
                         <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Temporalización (Gantt)</li>
                         <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Desarrollo de UDs</li>
                         <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0"/>Tareas</li>
@@ -790,14 +790,13 @@ export default function InicioPage() {
                     {/* Paso 6 */}
                     <Card className="p-4 bg-success/5 border border-success/20 shadow-sm relative group overflow-hidden">
                       <div className="absolute top-0 left-0 w-full h-1 bg-success/50 group-hover:bg-success transition-colors"></div>
-                      <h3 className="font-bold text-success mb-3 text-sm flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-success/20 flex items-center justify-center text-xs">6</span> Magia
+                      <h3 className="font-bold text-success mb-3 text-body flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-success/20 flex items-center justify-center text-caption">6</span> Magia
                       </h3>
-                      <ul className="text-xs text-muted/80 space-y-2 font-medium">
+                      <ul className="text-caption text-muted/80 space-y-2 font-medium">
                         <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-success/70 shrink-0"/>Generación PDF</li>
                         <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-success/70 shrink-0"/>Guía para Defensa</li>
                         <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-success/70 shrink-0"/>Comparativa</li>
-                        <li className="flex items-start gap-1.5"><Check className="w-3.5 h-3.5 mt-0.5 text-success/70 shrink-0"/>Publicidad (Burocracia)</li>
                       </ul>
                     </Card>
 
@@ -814,17 +813,17 @@ export default function InicioPage() {
                         remarkPlugins={[remarkGfm]}
                         rehypePlugins={[rehypeRaw]}
                         components={{
-                          h1: ({node, ...props}) => <h1 className="text-2xl font-extrabold text-foreground mb-6 pb-2 border-b border-white/10" {...props} />,
-                          h2: ({node, ...props}) => <h2 className="text-lg font-bold text-accent mt-8 mb-4 flex items-center gap-2" {...props} />,
-                          h3: ({node, ...props}) => <h3 className="text-lg font-bold text-foreground mt-6 mb-3" {...props} />,
+                          h1: ({node, ...props}) => <h1 className="text-heading font-extrabold text-foreground mb-6 pb-2 border-b border-white/10" {...props} />,
+                          h2: ({node, ...props}) => <h2 className="text-subheading font-bold text-accent mt-8 mb-4 flex items-center gap-2" {...props} />,
+                          h3: ({node, ...props}) => <h3 className="text-subheading font-bold text-foreground mt-6 mb-3" {...props} />,
                           p: ({node, ...props}) => <p className="text-muted leading-relaxed mb-4" {...props} />,
                           ul: ({node, className, ...props}) => <ul className={`list-none space-y-3 mb-6 ml-4 ${className || ''}`} {...props} />,
                           ol: ({node, className, ...props}: any) => <ol className={`list-decimal space-y-3 mb-6 ml-6 ${className || ''}`} {...props} />,
-                          li: ({node, ...props}) => <li className="text-sm text-muted leading-relaxed" {...props} />,
+                          li: ({node, ...props}) => <li className="text-body text-muted leading-relaxed" {...props} />,
                           strong: ({node, ...props}) => <strong className="font-bold text-foreground" {...props} />,
                           a: ({node, ...props}) => <a className="text-accent hover:underline font-semibold" target="_blank" rel="noopener noreferrer" {...props} />,
-                          code: ({node, ...props}: any) => <code className="bg-foreground/10 text-foreground px-1.5 py-0.5 rounded text-sm font-mono" {...props} />,
-                          pre: ({node, ...props}: any) => <pre className="block bg-foreground/5 p-4 rounded-xl text-sm font-mono overflow-x-auto mb-4 border border-white/5 text-muted" {...props} />,
+                          code: ({node, ...props}: any) => <code className="bg-foreground/10 text-foreground px-1.5 py-0.5 rounded text-body font-mono" {...props} />,
+                          pre: ({node, ...props}: any) => <pre className="block bg-foreground/5 p-4 rounded-xl text-body font-mono overflow-x-auto mb-4 border border-white/5 text-muted" {...props} />,
                           hr: ({node, ...props}) => <hr className="border-white/10 my-8" {...props} />,
                         }}
                       >
@@ -841,7 +840,7 @@ export default function InicioPage() {
               <div className="space-y-10 animate-in fade-in duration-500 w-full">
                 {FAQS.map((faqGroup, idx) => (
                   <div key={idx}>
-                    <h2 className="text-lg font-bold mb-4 text-accent border-b border-white/5 pb-2">
+                    <h2 className="text-subheading font-bold mb-4 text-accent border-b border-white/5 pb-2">
                       {faqGroup.group}
                     </h2>
                     <div className="space-y-1">
@@ -865,18 +864,18 @@ export default function InicioPage() {
             {activeTab === "mapa" && (
               <div className="space-y-12 animate-in fade-in duration-500">
                 <section className="space-y-3">
-                  <h2 className="text-lg font-bold text-foreground border-b border-[var(--glass-border)] pb-2">
+                  <h2 className="text-subheading font-bold text-foreground border-b border-[var(--glass-border)] pb-2">
                     Mapa de la aplicación (sitemap)
                   </h2>
-                  <p className="text-sm text-foreground/80 leading-relaxed">
+                  <p className="text-body text-foreground/80 leading-relaxed">
                     Estructura organizativa de Cuaderno FP. Puedes usar los enlaces para navegar rápidamente a cualquier sección.
                   </p>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {/* COLUMNA 1: GENERAL */}
                     <div className="space-y-6">
-                      <h3 className="font-extrabold text-lg border-b-2 border-accent pb-2 text-foreground">General</h3>
-                      <ul className="space-y-4 text-sm">
+                      <h3 className="font-extrabold text-subheading border-b-2 border-accent pb-2 text-foreground">General</h3>
+                      <ul className="space-y-4 text-body">
                         <li>
                           <a href="/inicio" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Inicio
@@ -956,8 +955,8 @@ export default function InicioPage() {
 
                     {/* COLUMNA 2: PROGRAMACIÓN */}
                     <div className="space-y-6">
-                      <h3 className="font-extrabold text-lg border-b-2 border-accent pb-2 text-foreground">Programación</h3>
-                      <ul className="space-y-4 text-sm">
+                      <h3 className="font-extrabold text-subheading border-b-2 border-accent pb-2 text-foreground">Programación</h3>
+                      <ul className="space-y-4 text-body">
                         <li>
                           <a href="/contexto" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Contexto
@@ -995,8 +994,8 @@ export default function InicioPage() {
 
                     {/* COLUMNA 3: CURSO */}
                     <div className="space-y-6">
-                      <h3 className="font-extrabold text-lg border-b-2 border-accent pb-2 text-foreground">Curso</h3>
-                      <ul className="space-y-4 text-sm">
+                      <h3 className="font-extrabold text-subheading border-b-2 border-accent pb-2 text-foreground">Curso</h3>
+                      <ul className="space-y-4 text-body">
                         <li>
                           <a href="/calendario" className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> Calendario
@@ -1062,8 +1061,8 @@ export default function InicioPage() {
                       <MessageCircle className="w-6 h-6 text-[#229ED9]" />
                     </div>
                     <div className="flex-1 text-center md:text-left">
-                      <h3 className="text-sm font-bold text-foreground">Grupo oficial de Telegram</h3>
-                      <p className="text-sm text-muted leading-tight mt-1">
+                      <h3 className="text-body font-bold text-foreground">Grupo oficial de Telegram</h3>
+                      <p className="text-body text-muted leading-tight mt-1">
                         Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad Autónoma.
                       </p>
                     </div>
@@ -1071,14 +1070,14 @@ export default function InicioPage() {
                       href="https://t.me/cuadernofp"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="shrink-0 px-5 py-2.5 rounded-lg bg-[#229ED9] text-white font-medium hover:bg-[#229ED9]/90 transition-colors flex items-center gap-2 text-sm"
+                      className="shrink-0 px-5 py-2.5 rounded-lg bg-[#229ED9] text-white font-medium hover:bg-[#229ED9]/90 transition-colors flex items-center gap-2 text-body"
                     >
                       <Send className="w-4 h-4" />
                       Unirme al grupo en Telegram
                     </a>
                   </div>
 
-                  <h3 className="text-2xl font-bold text-foreground border-b border-[var(--glass-border)] pb-2">Contribuidores por Comunidad Autónoma</h3>
+                  <h3 className="text-heading font-bold text-foreground border-b border-[var(--glass-border)] pb-2">Contribuidores por Comunidad Autónoma</h3>
                   <p className="text-muted mb-4">
                     Mención especial al profesorado que está ayudando a mejorar y a integrar los currículos de las Comunidades Autónomas
                   </p>
@@ -1095,7 +1094,7 @@ export default function InicioPage() {
                           <Map className="w-5 h-5 text-accent" />
                           <span className="font-bold text-foreground">{comunidad}</span>
                         </div>
-                        <ul className="text-sm text-muted space-y-1.5 pl-2">
+                        <ul className="text-body text-muted space-y-1.5 pl-2">
                           {comunidad === "Aragón" ? (
                             <li className="flex items-center gap-2 text-foreground"><Users className="w-4 h-4 text-accent" /> Jose Javier García</li>
                           ) : (

@@ -38,8 +38,8 @@ export function ProposalLoaderModal({ isOpen, onClose, activeModuleId, onApplyPr
               <DownloadCloud className="w-5 h-5 text-info" />
             </div>
             <div>
-              <h2 className="text-lg font-extrabold text-foreground tracking-tight">Propuestas editoriales / autores</h2>
-              <p className="text-sm text-muted">Selecciona una propuesta predefinida para este módulo ({moduleCode})</p>
+              <h2 className="text-subheading font-extrabold text-foreground tracking-tight">Propuestas editoriales / autores</h2>
+              <p className="text-body text-muted">Selecciona una propuesta predefinida para este módulo ({moduleCode})</p>
             </div>
           </div>
           <button 
@@ -55,7 +55,7 @@ export function ProposalLoaderModal({ isOpen, onClose, activeModuleId, onApplyPr
           {availableProposals.length === 0 ? (
             <div className="text-center py-12 flex flex-col items-center">
               <FileText className="w-12 h-12 text-muted mb-4 opacity-50" />
-              <h3 className="text-lg font-bold text-foreground">No hay propuestas disponibles</h3>
+              <h3 className="text-subheading font-bold text-foreground">No hay propuestas disponibles</h3>
               <p className="text-muted mt-2 max-w-md mx-auto">
                 Actualmente no existen secuenciaciones predefinidas de autores o editoriales para el módulo {moduleCode}.
               </p>
@@ -73,11 +73,11 @@ export function ProposalLoaderModal({ isOpen, onClose, activeModuleId, onApplyPr
                     >
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="text-xs font-bold text-info tracking-wider">{prop.author}</span>
-                          <span className="text-xs text-muted">• {prop.totalHours} Horas • {prop.df_ud.length} UDs</span>
+                          <span className="text-caption font-bold text-info tracking-wider">{prop.author}</span>
+                          <span className="text-caption text-muted">• {prop.totalHours} Horas • {prop.df_ud.length} UDs</span>
                         </div>
-                        <h4 className="text-lg font-bold text-foreground group-hover:text-info transition-colors">{prop.title}</h4>
-                        <p className="text-sm text-muted mt-1">{prop.description}</p>
+                        <h4 className="text-subheading font-bold text-foreground group-hover:text-info transition-colors">{prop.title}</h4>
+                        <p className="text-body text-muted mt-1">{prop.description}</p>
                       </div>
                       <ChevronRight className="w-5 h-5 text-muted group-hover:text-info transition-colors hidden sm:block" />
                     </div>
@@ -88,16 +88,16 @@ export function ProposalLoaderModal({ isOpen, onClose, activeModuleId, onApplyPr
                 <div className="space-y-6 animate-in slide-in-from-right-4 duration-300">
                   <button 
                     onClick={() => setSelectedProposal(null)}
-                    className="text-sm text-info hover:underline mb-2 inline-block"
+                    className="text-body text-info hover:underline mb-2 inline-block"
                   >
                     &larr; Volver a la lista
                   </button>
 
                   <div className="bg-info/10 border border-info/30 rounded-2xl p-5">
-                    <h3 className="text-lg font-bold text-foreground mb-1">{selectedProposal.title}</h3>
-                    <p className="text-sm text-muted">{selectedProposal.author} • {selectedProposal.totalHours} horas totales</p>
+                    <h3 className="text-subheading font-bold text-foreground mb-1">{selectedProposal.title}</h3>
+                    <p className="text-body text-muted">{selectedProposal.author} • {selectedProposal.totalHours} horas totales</p>
                     
-                    <div className="mt-4 p-3 bg-background/50 rounded-xl max-h-40 overflow-y-auto text-sm space-y-2 border border-[var(--glass-border)]">
+                    <div className="mt-4 p-3 bg-background/50 rounded-xl max-h-40 overflow-y-auto text-body space-y-2 border border-[var(--glass-border)]">
                       {selectedProposal.df_ud.map(ud => (
                         <div key={ud.id_ud} className="flex justify-between border-b border-white/5 pb-2 last:border-0 last:pb-0">
                           <span className="font-medium">{ud.id_ud}: <span className="text-muted font-normal">{ud.desc_ud}</span></span>
@@ -109,7 +109,7 @@ export function ProposalLoaderModal({ isOpen, onClose, activeModuleId, onApplyPr
 
                   <div className="p-4 bg-warning/10 border border-warning/20 rounded-xl flex items-start gap-3">
                     <AlertTriangle className="w-5 h-5 text-warning shrink-0 mt-0.5" />
-                    <div className="text-sm text-warning/90">
+                    <div className="text-body text-warning/90">
                       <p className="font-bold mb-1">Atención: Esta acción sobrescribirá datos actuales</p>
                       <p>
                         Se reemplazarán tus Unidades didácticas (UD/T), la relación entre RA y UD/T, y la matriz de contribución RA-OG. 

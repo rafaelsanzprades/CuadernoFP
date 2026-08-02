@@ -74,6 +74,16 @@
   --color-info: var(--info);
 }
 
+/* =========================================================================
+   TYPOGRAPHY SCALE — single source of truth, 4 tiers only.
+   Pure aliases of the underlying Tailwind size utilities: changing the
+   scale later means editing these four lines instead of hunting the repo.
+   ========================================================================= */
+.text-heading    { @apply text-2xl; }
+.text-subheading { @apply text-lg; }
+.text-body       { @apply text-sm; }
+.text-caption    { @apply text-xs; }
+
 body {
   background: var(--background);
   color: var(--foreground);

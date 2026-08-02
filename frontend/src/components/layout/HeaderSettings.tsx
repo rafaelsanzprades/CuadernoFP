@@ -82,7 +82,7 @@ export function HeaderSettings() {
               
               {/* Theme */}
               <div>
-                <h4 className="font-semibold text-sm mb-3 flex items-center gap-2">
+                <h4 className="font-semibold text-body mb-3 flex items-center gap-2">
                   <Sun className="w-4 h-4 text-accent" /> Aspecto
                 </h4>
                 <div className="grid grid-cols-2 gap-2">
@@ -109,7 +109,7 @@ export function HeaderSettings() {
 
               {/* Language */}
               <div>
-                <h4 className="font-semibold text-sm mb-3 flex items-center gap-2">
+                <h4 className="font-semibold text-body mb-3 flex items-center gap-2">
                   <Globe className="w-4 h-4 text-accent" /> Idioma
                 </h4>
                 <div className="grid grid-cols-2 gap-2">
@@ -131,14 +131,14 @@ export function HeaderSettings() {
 
               {/* Accessibility */}
               <div>
-                <h4 className="font-semibold text-sm mb-3 flex items-center gap-2">
+                <h4 className="font-semibold text-body mb-3 flex items-center gap-2">
                   <Type className="w-4 h-4 text-accent" /> Accesibilidad
                 </h4>
                 <div className="space-y-3">
                   <div className="grid grid-cols-3 gap-2">
-                    <Button variant="secondary" size="sm" onClick={() => changeFontSize(100)} className={`text-xs ${fontSizeScale === 100 ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>Normal</Button>
-                    <Button variant="secondary" size="sm" onClick={() => changeFontSize(115)} className={`text-sm ${fontSizeScale === 115 ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>Grande</Button>
-                    <Button variant="secondary" size="sm" onClick={() => changeFontSize(130)} className={`text-sm font-bold ${fontSizeScale === 130 ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>Extra</Button>
+                    <Button variant="secondary" size="sm" onClick={() => changeFontSize(100)} className={`text-caption ${fontSizeScale === 100 ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>Normal</Button>
+                    <Button variant="secondary" size="sm" onClick={() => changeFontSize(115)} className={`text-body ${fontSizeScale === 115 ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>Grande</Button>
+                    <Button variant="secondary" size="sm" onClick={() => changeFontSize(130)} className={`text-body font-bold ${fontSizeScale === 130 ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>Extra</Button>
                   </div>
                   
                   <Button variant="secondary" size="sm" onClick={toggleHighContrast} className={`w-full flex justify-between ${highContrast ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>

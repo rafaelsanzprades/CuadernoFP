@@ -122,8 +122,8 @@ export const ChatbotWidget = () => {
                   <Bot size={20} className="text-emerald-400" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-[var(--foreground)] text-sm">Asistente Cuaderno FP</h3>
-                  <p className="text-xs text-[var(--muted-foreground)]">Respuestas generadas por IA</p>
+                  <h3 className="font-semibold text-[var(--foreground)] text-body">Asistente Cuaderno FP</h3>
+                  <p className="text-caption text-[var(--muted-foreground)]">Respuestas generadas por IA</p>
                 </div>
               </div>
               <button 
@@ -139,7 +139,7 @@ export const ChatbotWidget = () => {
               {messages.length === 0 && (
                 <div className="flex flex-col items-center justify-center h-full text-center space-y-3 text-[var(--muted-foreground)] opacity-70">
                   <Bot size={40} />
-                  <p className="text-sm">¡Hola! Soy tu asistente virtual.<br/>Pregúntame sobre la aplicación o dudas de programación didáctica.</p>
+                  <p className="text-body">¡Hola! Soy tu asistente virtual.<br/>Pregúntame sobre la aplicación o dudas de programación didáctica.</p>
                 </div>
               )}
 
@@ -153,13 +153,13 @@ export const ChatbotWidget = () => {
                   <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${msg.role === 'user' ? 'bg-blue-500/20 text-blue-400' : 'bg-emerald-500/20 text-emerald-400'}`}>
                     {msg.role === 'user' ? <User size={16} /> : <Bot size={16} />}
                   </div>
-                  <div className={`px-4 py-2 rounded-2xl max-w-[80%] text-sm whitespace-pre-wrap shadow-sm ${msg.role === 'user' ? 'bg-blue-500/10 border border-blue-500/20 text-blue-100' : 'bg-[var(--glass-bg)] border border-[var(--glass-border)] text-[var(--foreground)]'}`}>
+                  <div className={`px-4 py-2 rounded-2xl max-w-[80%] text-body whitespace-pre-wrap shadow-sm ${msg.role === 'user' ? 'bg-blue-500/10 border border-blue-500/20 text-blue-100' : 'bg-[var(--glass-bg)] border border-[var(--glass-border)] text-[var(--foreground)]'}`}>
                     {Array.isArray(msg.parts) ? (
                       <div className="flex flex-col gap-2">
                         {msg.parts.map((p: any, i: number) => {
                           if (typeof p === 'string') return <span key={i}>{p}</span>;
                           if (p.inline_data) return (
-                            <div key={i} className="flex items-center gap-2 bg-black/20 p-2 rounded-lg text-xs" title="Archivo adjunto enviado a la IA">
+                            <div key={i} className="flex items-center gap-2 bg-black/20 p-2 rounded-lg text-caption" title="Archivo adjunto enviado a la IA">
                               <FileText size={14} className="text-blue-400"/>
                               <span>Adjunto enviado</span>
                             </div>
@@ -181,7 +181,7 @@ export const ChatbotWidget = () => {
                   </div>
                   <div className="px-4 py-3 rounded-2xl bg-[var(--glass-bg)] border border-[var(--glass-border)] flex items-center gap-2">
                     <Loader2 size={16} className="animate-spin text-emerald-400" />
-                    <span className="text-sm text-[var(--muted-foreground)]">Escribiendo...</span>
+                    <span className="text-body text-[var(--muted-foreground)]">Escribiendo...</span>
                   </div>
                 </div>
               )}
@@ -192,7 +192,7 @@ export const ChatbotWidget = () => {
             <div className="p-3 border-t border-[var(--glass-border)] bg-black/20">
               {attachedFile && (
                 <div className="mb-2 flex items-center justify-between bg-[var(--background)] p-2 rounded-lg border border-[var(--glass-border)]">
-                  <div className="flex items-center gap-2 text-xs text-[var(--foreground)] overflow-hidden">
+                  <div className="flex items-center gap-2 text-caption text-[var(--foreground)] overflow-hidden">
                     <FileText size={14} className="text-emerald-400 flex-shrink-0" />
                     <span className="truncate">{attachedFile.name}</span>
                   </div>
@@ -222,7 +222,7 @@ export const ChatbotWidget = () => {
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
                     placeholder="Escribe tu mensaje..."
-                    className="w-full bg-[var(--background)] border border-[var(--glass-border)] rounded-xl py-3 pl-4 pr-12 text-sm text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] focus:outline-none focus:ring-1 focus:ring-emerald-500/50 resize-none max-h-32"
+                    className="w-full bg-[var(--background)] border border-[var(--glass-border)] rounded-xl py-3 pl-4 pr-12 text-body text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] focus:outline-none focus:ring-1 focus:ring-emerald-500/50 resize-none max-h-32"
                     rows={1}
                     style={{ minHeight: '44px' }}
                   />

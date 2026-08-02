@@ -96,11 +96,11 @@ export function MatrizCalificacionesTab() {
       {/* Controles superiores */}
       <div className="flex justify-between items-center bg-[var(--glass-bg)] p-4 border-t-4 border-t-accent border-x border-b border-[var(--glass-border)] rounded-b-lg">
         <div className="flex items-center gap-4">
-          <label className="font-semibold text-sm text-foreground">Corte de Evaluación:</label>
+          <label className="font-semibold text-body text-foreground">Corte de Evaluación:</label>
           <select 
             value={corte} 
             onChange={(e) => setCorte(e.target.value)}
-            className="bg-foreground/10 border border-[var(--glass-border)] rounded-lg px-3 py-1.5 text-sm text-foreground focus:outline-none focus:border-accent"
+            className="bg-foreground/10 border border-[var(--glass-border)] rounded-lg px-3 py-1.5 text-body text-foreground focus:outline-none focus:border-accent"
           >
             <option value="Ev1">1ª Evaluación (Ev1)</option>
             <option value="Ev2">2ª Evaluación (Ev2)</option>
@@ -118,7 +118,7 @@ export function MatrizCalificacionesTab() {
 
       {/* Matriz Excel-like */}
       <div className="bg-[var(--glass-bg)] rounded-lg border border-[var(--glass-border)] overflow-x-auto">
-        <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
+        <table className="w-full text-left text-body border-collapse whitespace-nowrap">
           <thead>
             <tr className="bg-foreground/5 text-muted border-b border-[var(--glass-border)]">
               <th className="p-3 sticky left-0 z-20 bg-[var(--glass-bg)] border-r border-[var(--glass-border)] min-w-[250px] shadow-[2px_0_5px_rgba(0,0,0,0.1)]">
@@ -128,9 +128,9 @@ export function MatrizCalificacionesTab() {
               </th>
               {columnas.map((col, idx) => (
                 <th key={`${col.inst.id_instrumento}_${col.ind.id_indicador}_${idx}`} className="p-2 text-center border-r border-[var(--glass-border)] min-w-[120px]" title={col.ind.descripcion}>
-                  <div className="text-xs font-bold text-accent truncate max-w-[120px] mx-auto">{col.inst.titulo}</div>
-                  <div className="font-mono text-xs text-info mt-1">{col.ind.id_indicador !== 'GLOBAL' ? col.ind.id_indicador : 'Nota Global'}</div>
-                  <div className="text-xs bg-foreground/10 inline-block px-1.5 rounded mt-1">{col.inst.escala}</div>
+                  <div className="text-caption font-bold text-accent truncate max-w-[120px] mx-auto">{col.inst.titulo}</div>
+                  <div className="font-mono text-caption text-info mt-1">{col.ind.id_indicador !== 'GLOBAL' ? col.ind.id_indicador : 'Nota Global'}</div>
+                  <div className="text-caption bg-foreground/10 inline-block px-1.5 rounded mt-1">{col.inst.escala}</div>
                 </th>
               ))}
               {columnas.length === 0 && (
@@ -173,7 +173,7 @@ export function MatrizCalificacionesTab() {
 
                   {columnas.length === 0 && <td className="bg-background"></td>}
                   
-                  <td className="p-3 text-center font-bold font-mono text-lg border-l-2 border-[var(--glass-border)] bg-accent/5 text-foreground">
+                  <td className="p-3 text-center font-bold font-mono text-subheading border-l-2 border-[var(--glass-border)] bg-accent/5 text-foreground">
                     {calcularMediaAlumno(al.ID)}
                   </td>
                 </tr>

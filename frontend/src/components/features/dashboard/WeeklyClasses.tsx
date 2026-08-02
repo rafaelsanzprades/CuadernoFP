@@ -74,7 +74,7 @@ export const WeeklyClasses = () => {
           if (isToday) {
             cardStyle = "bg-accent/10 border-accent/40 ring-1 ring-accent/30 shadow-[0_0_15px_rgba(20,160,133,0.15)]";
             badge = (
-              <span className="bg-accent text-background text-xs font-extrabold px-1.5 py-0.5 rounded tracking-wider ">
+              <span className="bg-accent text-background text-caption font-extrabold px-1.5 py-0.5 rounded tracking-wider ">
                 Hoy
               </span>
             );
@@ -92,36 +92,36 @@ export const WeeklyClasses = () => {
               {/* Day Header */}
               <div className="border-b border-[var(--glass-border)] pb-3 mb-3">
                 <div className="flex justify-between items-center mb-1">
-                  <span className={`font-semibold text-sm ${isToday ? "text-accent" : "text-foreground/90"}`}>
+                  <span className={`font-semibold text-body ${isToday ? "text-accent" : "text-foreground/90"}`}>
                     {formattedDayName}
                   </span>
                   {badge}
                 </div>
-                <div className="text-xs text-muted font-medium">{formattedDateNum}</div>
+                <div className="text-caption text-muted font-medium">{formattedDateNum}</div>
               </div>
 
               {/* Class Info */}
               <div className="flex-1 flex flex-col justify-start">
                 {schedule.isFestivo ? (
                   <div className="bg-danger/10 border border-danger/30 p-2.5 rounded-lg text-center my-auto">
-                    <span className="text-danger font-medium text-xs block mb-1"><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> Festivo</span>
-                    <span className="text-danger text-xs font-medium line-clamp-2">
+                    <span className="text-danger font-medium text-caption block mb-1"><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> Festivo</span>
+                    <span className="text-danger text-caption font-medium line-clamp-2">
                       {schedule.festivoName || "Día festivo"}
                     </span>
                   </div>
                 ) : schedule.hours === 0 ? (
-                  <div className="text-center text-muted/60 text-xs py-4 my-auto italic">
+                  <div className="text-center text-muted/60 text-caption py-4 my-auto italic">
                     Sin horario lectivo
                   </div>
                 ) : !schedule.udId || schedule.sessions.length === 0 ? (
-                  <div className="text-center text-muted/60 text-xs py-4 my-auto italic flex flex-col items-center gap-1">
+                  <div className="text-center text-muted/60 text-caption py-4 my-auto italic flex flex-col items-center gap-1">
                     <AlertCircle className="w-4 h-4 text-muted/50" />
                     Sin clases planificadas
                   </div>
                 ) : (
                   <div className="space-y-2.5">
                     {/* UD Indicator */}
-                    <div className="flex items-center gap-1.5 text-xs text-accent font-bold">
+                    <div className="flex items-center gap-1.5 text-caption text-accent font-bold">
                       <Layers className="w-3.5 h-3.5 flex-shrink-0" />
                       <span className="truncate" title={schedule.udDesc}>
                         {schedule.udId}: {schedule.udDesc}
@@ -133,7 +133,7 @@ export const WeeklyClasses = () => {
                       {schedule.sessions.map((ses) => (
                         <div
                           key={ses.ID}
-                          className="bg-background/30 p-2 rounded-lg border border-white/5 text-xs text-muted hover:text-foreground hover:bg-background/40 transition-colors"
+                          className="bg-background/30 p-2 rounded-lg border border-white/5 text-caption text-muted hover:text-foreground hover:bg-background/40 transition-colors"
                         >
                           <div className="font-bold flex justify-between gap-1 mb-0.5">
                             <span className="truncate">S{ses.Num_Orden}: {ses.Tipo_Actividad}</span>
@@ -153,7 +153,7 @@ export const WeeklyClasses = () => {
 
               {/* Day Footer Info */}
               {!schedule.isFestivo && schedule.hours > 0 && (
-                <div className="mt-3 pt-2 border-t border-white/5 flex justify-between items-center text-xs text-muted/80">
+                <div className="mt-3 pt-2 border-t border-white/5 flex justify-between items-center text-caption text-muted/80">
                   <span className="font-semibold">{schedule.hours} horas lectivas</span>
                   {schedule.isEvent && (
                     <span
@@ -176,10 +176,10 @@ export const WeeklyClasses = () => {
     <MotionWrapper className="glass-panel p-6 border-l-4 border-l-blue-400">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
         <div>
-          <h2 className="text-lg font-bold flex items-center gap-2 text-foreground">
+          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
             <CalendarDays className="w-6 h-6 text-info" /> Previsión Semanal
           </h2>
-          <p className="text-sm text-muted mt-1">
+          <p className="text-body text-muted mt-1">
             Distribución temporal de los módulos y las sesiones planificadas en el aula.
           </p>
         </div>
@@ -189,7 +189,7 @@ export const WeeklyClasses = () => {
           <div className="flex bg-background/50 p-1 rounded-xl border border-[var(--glass-border)] self-start md:self-auto">
             <button
               onClick={() => setActiveWeekTab('current')}
-              className={`px-4 py-2 rounded-lg text-xs font-medium transition-all ${
+              className={`px-4 py-2 rounded-lg text-caption font-medium transition-all ${
                 activeWeekTab === 'current'
                   ? 'bg-info text-white shadow-sm'
                   : 'text-muted hover:text-foreground'
@@ -199,7 +199,7 @@ export const WeeklyClasses = () => {
             </button>
             <button
               onClick={() => setActiveWeekTab('next')}
-              className={`px-4 py-2 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 ${
+              className={`px-4 py-2 rounded-lg text-caption font-medium transition-all flex items-center gap-1.5 ${
                 activeWeekTab === 'next'
                   ? 'bg-info text-white shadow-sm'
                   : 'text-muted hover:text-foreground'
@@ -210,7 +210,7 @@ export const WeeklyClasses = () => {
             </button>
           </div>
         ) : (
-          <div className="bg-info/10 border border-info/30 text-info text-xs px-3 py-1.5 rounded-lg font-bold">
+          <div className="bg-info/10 border border-info/30 text-info text-caption px-3 py-1.5 rounded-lg font-bold">
             Semana Actual
           </div>
         )}
@@ -219,14 +219,14 @@ export const WeeklyClasses = () => {
       {/* Week Contents */}
       {activeWeekTab === 'current' ? (
         <div className="animate-in fade-in duration-300">
-          <div className="text-xs font-medium text-muted tracking-wider mb-3">
+          <div className="text-caption font-medium text-muted tracking-wider mb-3">
             Semana del {format(currentWeekDays[0], "d 'de' MMMM", { locale: es })} al {format(currentWeekDays[4], "d 'de' MMMM", { locale: es })}
           </div>
           {renderWeekDays(currentWeekDays)}
         </div>
       ) : (
         <div className="animate-in fade-in duration-300">
-          <div className="text-xs font-medium text-muted tracking-wider mb-3">
+          <div className="text-caption font-medium text-muted tracking-wider mb-3">
             Semana del {format(nextWeekDays[0], "d 'de' MMMM", { locale: es })} al {format(nextWeekDays[4], "d 'de' MMMM", { locale: es })}
           </div>
           {renderWeekDays(nextWeekDays)}

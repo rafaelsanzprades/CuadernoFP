@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map, MessageSquare, FileText, Route, FolderOpen } from "lucide-react";
+import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map, MessageSquare, FileText, Route, FolderOpen, Mail, Phone, Calendar, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -90,7 +90,7 @@ export default function AlumnadoPage() {
             <MotionWrapper>
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <Users className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-2xl font-bold">No hay curso cargado</h2>
+                <h2 className="text-heading font-bold">No hay curso cargado</h2>
                 <p className="text-muted mb-4">Debes abrir o crear un archivo de curso en tu Archivos.</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
@@ -119,12 +119,12 @@ export default function AlumnadoPage() {
       Estado: "Alta",
       Apellidos: "",
       Nombre: "",
-      Edad: "",
+      Edad: null,
       Nacimiento: "",
-      Repite: "false",
+      Repite: false,
       Matricula: "",
       Comentarios: "",
-      Email: "",
+      email: "",
       Movil: ""
     });
     updateCursoData("df_al", newAl);
@@ -189,12 +189,12 @@ export default function AlumnadoPage() {
             Estado: "Alta",
             Apellidos: surname,
             Nombre: name,
-            Edad: "",
+            Edad: null,
             Nacimiento: "",
-            Repite: "false",
+            Repite: false,
             Matricula: "",
             Comentarios: "",
-            Email: email,
+            email: email,
             Movil: ""
           });
           importedCount++;
@@ -232,7 +232,7 @@ export default function AlumnadoPage() {
     updateCursoData("df_al", newAl);
   };
 
-  const n_menores = df_al.filter((al: any) => Number(al.Edad) > 0 && Number(al.Edad) < 18).length;
+  const n_menores = df_al.filter((al: any) => al.Edad > 0 && al.Edad < 18).length;
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -260,7 +260,7 @@ export default function AlumnadoPage() {
             {/* Save Button */}
             <div className="flex items-center gap-4 shrink-0">
               {saveMessage && (
-                <span className={`text-sm font-semibold ${saveMessage.includes("Error") ? "text-danger" : "text-success"}`}>
+                <span className={`text-body font-semibold ${saveMessage.includes("Error") ? "text-danger" : "text-success"}`}>
                   {saveMessage}
                 </span>
               )}
@@ -282,9 +282,9 @@ export default function AlumnadoPage() {
             <Card className="p-6 border-t-4 border-t-blue-500">
               <div className="flex justify-between items-end mb-6">
                 <div className="flex items-center gap-4">
-                  <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground">
+                  <h2 className="text-heading font-bold flex items-center gap-2 text-foreground">
                     <span>Lista oficial</span>
-                    <span className="text-sm font-normal text-muted bg-foreground/5 px-3 py-1 rounded-full">{df_al.length} alumnado</span>
+                    <span className="text-body font-normal text-muted bg-foreground/5 px-3 py-1 rounded-full">{df_al.length} alumnado</span>
                   </h2>
                   <Button 
                     variant="ghost"
@@ -303,145 +303,135 @@ export default function AlumnadoPage() {
                   />
                 </div>
                 {n_menores > 0 && (
-                  <span className="text-danger text-sm font-semibold"> {n_menores} alumnado(s) menor(es) de 18 años</span>
+                  <span className="text-danger text-body font-semibold"> {n_menores} alumnado(s) menor(es) de 18 años</span>
                 )}
               </div>
               
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-sm whitespace-nowrap border-collapse">
-                  <thead>
-                    <tr className="border-b border-[var(--glass-border)] text-muted bg-background">
-                      <th className="p-2 sticky left-0 z-10 border-r border-[var(--glass-border)] bg-background w-16">Nº</th>
-                      <th className="p-2 sticky left-[60px] z-10 border-r border-[var(--glass-border)] bg-background w-12 text-center"></th>
-                      <th className="p-2 w-32">Estado</th>
-                      <th className="p-2 w-48">Apellidos</th>
-                      <th className="p-2 w-48">Nombre</th>
-                      <th className="p-2 w-20">Edad</th>
-                      <th className="p-2 w-32">Nacimiento</th>
-                      <th className="p-2 w-16 text-center">Repite</th>
-                      <th className="p-2 w-64">Email</th>
-                      <th className="p-2 w-32">Móvil</th>
-                      <th className="p-2 w-10"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {df_al.length === 0 && (
-                      <tr>
-                        <td colSpan={10} className="p-0">
-                          <div className="flex flex-col items-center justify-center py-12 text-muted">
-                            <Users className="w-12 h-12 mb-3 opacity-20" />
-                            <p>No hay alumnado registrado aún.</p>
-                          </div>
-                        </td>
-                      </tr>
-                    )}
-                    {df_al.map((al: any, idx: number) => {
-                      const isMenor = Number(al.Edad) > 0 && Number(al.Edad) < 18;
-                      const inputClass = "w-full bg-transparent border border-transparent hover:border-[var(--glass-border)] focus:bg-foreground/5 rounded px-2 py-1 text-foreground focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none transition-all placeholder:text-muted/40";
-                      
-                      return (
-    <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5 transition-colors group">
-                          <td className="p-2 font-mono text-xs sticky left-0 z-10 border-r border-[var(--glass-border)] bg-background group-hover:bg-[#111827] transition-colors">
-                            {al.ID}
-                          </td>
-                          <td className="p-2 text-center sticky left-[60px] z-10 border-r border-[var(--glass-border)] bg-background group-hover:bg-[#111827] transition-colors">
-                            {isMenor ? <span className="text-danger font-bold text-lg" title="Menor de edad">!</span> : ""}
-                          </td>
-                          <td className="p-2 pr-2">
-                            <select 
-                              value={al.Estado || "Alta"}
-                              onChange={(e) => handleUpdateAlumnado(idx, "Estado", e.target.value)}
-                              className={`w-full bg-transparent border border-transparent hover:border-[var(--glass-border)] focus:bg-foreground/5 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-accent transition-all appearance-none font-semibold cursor-pointer ${al.Estado === 'Baja' ? 'text-danger' : 'text-success'}`}
-                            >
-                              <option value="Alta" className="text-success">Alta</option>
-                              <option value="Baja" className="text-danger">Baja</option>
-                            </select>
-                          </td>
-                          <td className="p-2 pr-2">
-                            <input 
-                              type="text"
-                              value={al.Apellidos || ""}
-                              onChange={(e) => handleUpdateAlumnado(idx, "Apellidos", e.target.value)}
-                              className={inputClass}
-                              placeholder="Apellidos..."
-                            />
-                          </td>
-                          <td className="p-2 pr-2">
-                            <input 
-                              type="text"
-                              value={al.Nombre || ""}
-                              onChange={(e) => handleUpdateAlumnado(idx, "Nombre", e.target.value)}
-                              className={inputClass}
-                              placeholder="Nombre..."
-                            />
-                          </td>
-                          <td className="p-2 pr-2">
-                            <input 
-                              type="number"
-                              value={al.Edad || ""}
-                              onChange={(e) => handleUpdateAlumnado(idx, "Edad", e.target.value)}
-                              className={inputClass}
-                              placeholder="Edad"
-                            />
-                          </td>
-                          <td className="p-2 pr-2">
-                            <input 
-                              type="text"
-                              value={al.Nacimiento || ""}
-                              onChange={(e) => handleUpdateAlumnado(idx, "Nacimiento", e.target.value)}
-                              placeholder="DD/MM/YYYY"
-                              className={`${inputClass} text-sm`}
-                            />
-                          </td>
-                          <td className="p-2 text-center">
-                            <input 
-                              type="checkbox"
-                              checked={al.Repite === true || al.Repite === "true"}
-                              onChange={(e) => handleUpdateAlumnado(idx, "Repite", e.target.checked)}
-                              className="w-4 h-4 accent-accent rounded cursor-pointer opacity-70 group-hover:opacity-100 transition-opacity"
-                            />
-                          </td>
-                          <td className="p-2 pr-2">
-                            <input 
-                              type="email"
-                              value={al.email || ""}
-                              onChange={(e) => handleUpdateAlumnado(idx, "email", e.target.value)}
-                              className={inputClass}
-                              placeholder="correo@ejemplo.com"
-                            />
-                          </td>
-                          <td className="p-2 pr-2">
-                            <input 
-                              type="text"
-                              value={al.Movil || ""}
-                              onChange={(e) => handleUpdateAlumnado(idx, "Movil", e.target.value)}
-                              className={inputClass}
-                              placeholder="Teléfono"
-                            />
-                          </td>
-                          <td className="p-2 text-center">
-                            <button
-                              onClick={() => handleRemoveAlumnado(idx)}
-                              className="text-danger/50 hover:text-danger font-bold text-lg opacity-0 group-hover:opacity-100 transition-all hover:scale-110"
-                              title="Eliminar alumnado"
-                            >
-                              &times;
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-                <div className="mt-4 flex items-center">
-                  <Button 
-                    variant="ghost"
-                    onClick={handleAddAlumnado}
-                    className="text-info hover:text-info font-semibold flex items-center gap-1"
-                  >
-                    <span>+</span> Añadir alumnado
-                  </Button>
+              {df_al.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-12 text-muted">
+                  <Users className="w-12 h-12 mb-3 opacity-20" />
+                  <p>No hay alumnado registrado aún.</p>
                 </div>
+              ) : (
+                <div className="space-y-3">
+                  {df_al.map((al: any, idx: number) => {
+                    const isMenor = al.Edad > 0 && al.Edad < 18;
+                    const fieldClass = "bg-transparent border-b border-transparent hover:border-[var(--glass-border)] focus:border-accent focus:outline-none transition-colors placeholder:text-muted/40";
+
+                    return (
+                      <div
+                        key={idx}
+                        className={`group relative rounded-xl border p-4 transition-colors bg-[var(--glass-bg)] hover:bg-foreground/5 ${isMenor ? "border-danger/30" : "border-[var(--glass-border)]"}`}
+                      >
+                        <button
+                          onClick={() => handleRemoveAlumnado(idx)}
+                          className="absolute top-3 right-3 text-danger/50 hover:text-danger opacity-0 group-hover:opacity-100 transition-all hover:scale-110"
+                          title="Eliminar alumnado"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+
+                        <div className="flex items-start gap-3 pr-8">
+                          <span className={`shrink-0 pt-1.5 w-11 text-caption font-mono font-semibold ${isMenor ? "text-danger" : "text-muted"}`}>
+                            {al.ID}
+                          </span>
+
+                          <div className="flex-1 min-w-0 space-y-2">
+                            <div className="flex items-center gap-2">
+                              <input
+                                type="text"
+                                value={al.Apellidos || ""}
+                                onChange={(e) => handleUpdateAlumnado(idx, "Apellidos", e.target.value)}
+                                className={`${fieldClass} flex-1 min-w-0 rounded px-1 py-0.5 font-semibold text-foreground`}
+                                placeholder="Apellidos..."
+                              />
+                              <input
+                                type="text"
+                                value={al.Nombre || ""}
+                                onChange={(e) => handleUpdateAlumnado(idx, "Nombre", e.target.value)}
+                                className={`${fieldClass} flex-1 min-w-0 rounded px-1 py-0.5 text-foreground`}
+                                placeholder="Nombre..."
+                              />
+                              <select
+                                value={al.Estado || "Alta"}
+                                onChange={(e) => handleUpdateAlumnado(idx, "Estado", e.target.value)}
+                                className={`shrink-0 bg-transparent border border-transparent hover:border-[var(--glass-border)] rounded px-2 py-0.5 text-caption font-semibold focus:outline-none focus:ring-1 focus:ring-accent appearance-none cursor-pointer ${al.Estado === "Baja" ? "text-danger" : "text-success"}`}
+                              >
+                                <option value="Alta" className="text-success">Alta</option>
+                                <option value="Baja" className="text-danger">Baja</option>
+                              </select>
+                              {isMenor && (
+                                <span className="shrink-0 text-caption font-semibold text-danger bg-danger/10 px-2 py-0.5 rounded-full">Menor de edad</span>
+                              )}
+                            </div>
+
+                            <div className="flex items-center gap-x-5 gap-y-1.5 text-body text-muted">
+                              <span className="shrink-0 inline-flex items-center gap-1.5">
+                                <Calendar className="w-3.5 h-3.5 opacity-60 shrink-0" />
+                                <input
+                                  type="number"
+                                  value={al.Edad ?? ""}
+                                  onChange={(e) => handleUpdateAlumnado(idx, "Edad", e.target.value === "" ? null : Number(e.target.value))}
+                                  className={`${fieldClass} w-14`}
+                                  placeholder="edad"
+                                />
+                                <span>años ·</span>
+                                <input
+                                  type="text"
+                                  value={al.Nacimiento || ""}
+                                  onChange={(e) => handleUpdateAlumnado(idx, "Nacimiento", e.target.value)}
+                                  className={`${fieldClass} w-28`}
+                                  placeholder="DD/MM/YYYY"
+                                />
+                              </span>
+
+                              <label className="shrink-0 inline-flex items-center gap-1.5 cursor-pointer">
+                                <input
+                                  type="checkbox"
+                                  checked={al.Repite === true}
+                                  onChange={(e) => handleUpdateAlumnado(idx, "Repite", e.target.checked)}
+                                  className="w-3.5 h-3.5 accent-accent rounded cursor-pointer"
+                                />
+                                Repite
+                              </label>
+
+                              <span className="flex-1 min-w-[10rem] inline-flex items-center gap-1.5">
+                                <Mail className="w-3.5 h-3.5 opacity-60 shrink-0" />
+                                <input
+                                  type="email"
+                                  value={al.email || ""}
+                                  onChange={(e) => handleUpdateAlumnado(idx, "email", e.target.value)}
+                                  className={`${fieldClass} flex-1 min-w-0`}
+                                  placeholder="correo@ejemplo.com"
+                                />
+                              </span>
+
+                              <span className="shrink-0 w-36 inline-flex items-center gap-1.5">
+                                <Phone className="w-3.5 h-3.5 opacity-60 shrink-0" />
+                                <input
+                                  type="text"
+                                  value={al.Movil || ""}
+                                  onChange={(e) => handleUpdateAlumnado(idx, "Movil", e.target.value)}
+                                  className={`${fieldClass} flex-1 min-w-0`}
+                                  placeholder="Teléfono"
+                                />
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+              <div className="mt-4 flex items-center">
+                <Button
+                  variant="ghost"
+                  onClick={handleAddAlumnado}
+                  className="text-info hover:text-info font-semibold flex items-center gap-1"
+                >
+                  <span>+</span> Añadir alumnado
+                </Button>
               </div>
             </Card>
             </>

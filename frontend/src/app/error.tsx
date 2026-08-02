@@ -30,12 +30,12 @@ export default function ErrorBoundary({
           </div>
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-foreground mb-2">¡Ups! Algo ha fallado</h2>
-          <p className="text-muted text-sm leading-relaxed">
+          <h2 className="text-heading font-bold text-foreground mb-2">¡Ups! Algo ha fallado</h2>
+          <p className="text-muted text-body leading-relaxed">
             Hemos encontrado un dato inesperado que ha bloqueado la interfaz. No te preocupes, tus datos en local están a salvo.
           </p>
         </div>
-        <div className="bg-foreground/15 p-3 rounded text-left overflow-x-auto text-xs text-danger font-mono">
+        <div className="bg-foreground/15 p-3 rounded text-left overflow-x-auto text-caption text-danger font-mono">
           {error.message || "Error desconocido"}
         </div>
         

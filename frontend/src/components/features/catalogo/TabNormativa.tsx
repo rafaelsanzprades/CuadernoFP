@@ -131,11 +131,11 @@ export function TabNormativa({ searchQuery = "" }: Props) {
   return (
     <div className="space-y-4 animate-fade-in pb-8">
       <div className="px-2 mb-6">
-        <h2 className="text-lg font-bold flex items-center gap-3">
+        <h2 className="text-subheading font-bold flex items-center gap-3">
           <span className="p-2 bg-primary/10 rounded-lg text-primary shrink-0"><Landmark className="w-5 h-5" /></span>
           Legislación y Normativa
         </h2>
-        <p className="text-sm text-muted-foreground mt-2 ml-12">Normativa estatal y despliegue autonómico aplicable a la Formación Profesional.</p>
+        <p className="text-body text-muted-foreground mt-2 ml-12">Normativa estatal y despliegue autonómico aplicable a la Formación Profesional.</p>
       </div>
 
       {filteredEstatal.length > 0 && (
@@ -145,7 +145,7 @@ export function TabNormativa({ searchQuery = "" }: Props) {
           defaultOpen={true}
         >
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
+            <table className="w-full text-left text-body">
               <tbody className="divide-y divide-border/50">
                 {filteredEstatal.map((item) => (
                   <tr key={item.id} className="hover:bg-muted/20 transition-colors">
@@ -153,7 +153,7 @@ export function TabNormativa({ searchQuery = "" }: Props) {
                       <p className="font-medium text-foreground mb-1 leading-relaxed">
                         {item.texto}
                       </p>
-                      <p className="text-muted-foreground text-xs italic">
+                      <p className="text-muted-foreground text-caption italic">
                         {item.descripcion}
                       </p>
                     </td>
@@ -188,13 +188,13 @@ export function TabNormativa({ searchQuery = "" }: Props) {
           >
             {items.length === 0 ? (
               <div className="py-8 text-center text-muted-foreground flex flex-col items-center gap-2">
-                 <span className="text-xs tracking-widest bg-success/10 text-success/70 px-3 py-1 rounded border border-success/20">
+                 <span className="text-caption tracking-widest bg-success/10 text-success/70 px-3 py-1 rounded border border-success/20">
                    En preparación
                  </span>
               </div>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-sm">
+                <table className="w-full text-left text-body">
                   <tbody className="divide-y divide-border/50">
                     {items.map(item => (
                       <tr key={item.id} className="hover:bg-muted/20 transition-colors">
@@ -202,7 +202,7 @@ export function TabNormativa({ searchQuery = "" }: Props) {
                           <p className="font-medium text-foreground mb-1 leading-relaxed">
                             {item.texto}
                           </p>
-                          <p className="text-muted-foreground text-xs italic">
+                          <p className="text-muted-foreground text-caption italic">
                             {item.descripcion}
                           </p>
                         </td>

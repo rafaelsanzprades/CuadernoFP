@@ -64,7 +64,7 @@ export function OneDriveSyncPanel() {
 
       <div className="relative z-10 flex flex-col gap-6 h-full">
         <div>
-          <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
+          <h2 className="text-heading font-bold text-foreground flex items-center gap-2">
             <Cloud className="w-6 h-6 text-[#0078D4]" /> Microsoft OneDrive
           </h2>
           <p className="text-muted mt-2">
@@ -82,7 +82,7 @@ export function OneDriveSyncPanel() {
               <p className="font-bold text-foreground">
                 {isOneDriveConnected ? "Conectado" : "No conectado"}
               </p>
-              <p className="text-sm text-muted">
+              <p className="text-body text-muted">
                 {isOneDriveConnected ? `Sincronizando con cuenta Microsoft` : "Inicia sesión con Microsoft"}
               </p>
             </div>
@@ -110,7 +110,7 @@ export function OneDriveSyncPanel() {
             <h3 className="font-bold text-foreground flex items-center gap-2">
               <Key className="w-5 h-5 text-info" /> Azure Client ID
             </h3>
-            <p className="text-sm text-muted">
+            <p className="text-body text-muted">
               Client ID de tu App registrada en Entra ID (Azure).
             </p>
             <Input
@@ -118,7 +118,7 @@ export function OneDriveSyncPanel() {
               placeholder="Ej: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
               value={oneDriveClientId || ""}
               onChange={(e) => setOneDriveClientId?.(e.target.value)}
-              className="font-mono text-sm"
+              className="font-mono text-body"
             />
           </div>
         )}

@@ -287,8 +287,8 @@ export default function DocumentosPage() {
       return (
         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md">
             <div className="p-16 text-center text-muted">
-              <div className="text-2xl mb-4"><span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></div>
-              <p className="text-lg">El directorio está vacío.</p>
+              <div className="text-heading mb-4"><span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></div>
+              <p className="text-subheading">El directorio está vacío.</p>
             </div>
           </div>
       );
@@ -317,11 +317,11 @@ export default function DocumentosPage() {
                   getFileIcon(item.name)
                 )}
               </div>
-              <h3 className="text-sm font-semibold text-foreground/90 group-hover:text-foreground text-center line-clamp-2 w-full break-words">
+              <h3 className="text-body font-semibold text-foreground/90 group-hover:text-foreground text-center line-clamp-2 w-full break-words">
                 {item.name}
               </h3>
               {!item.is_dir && (
-                <p className="text-xs text-muted mt-2 font-mono">
+                <p className="text-caption text-muted mt-2 font-mono">
                   {formatSize(item.size)}
                 </p>
               )}
@@ -377,7 +377,7 @@ export default function DocumentosPage() {
                   placeholder=""
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full h-[46px] bg-foreground/5 border border-[var(--glass-border)] rounded-xl pl-10 pr-4 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all placeholder:text-muted/60"
+                  className="w-full h-[46px] bg-foreground/5 border border-[var(--glass-border)] rounded-xl pl-10 pr-4 text-body text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all placeholder:text-muted/60"
                 />
               </div>
             </div>
@@ -405,7 +405,7 @@ export default function DocumentosPage() {
             aria-labelledby="preview-modal-title"
           >
             <div className="flex items-center justify-between p-4 bg-[var(--glass-bg)] border-b border-[var(--glass-border)]">
-              <h2 id="preview-modal-title" className="text-2xl font-bold flex items-center gap-3 text-foreground">
+              <h2 id="preview-modal-title" className="text-heading font-bold flex items-center gap-3 text-foreground">
                 <FileText className="w-6 h-6 text-info" /> {previewFilename}
               </h2>
               <div className="flex gap-4">

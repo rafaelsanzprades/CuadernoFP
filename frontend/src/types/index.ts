@@ -38,12 +38,12 @@ export const AlumnadoSchema = z.object({
   Nombre: z.string().optional(),
   Apellidos: z.string().optional(),
   Estado: z.string().optional(),
-  Edad: z.string().optional(),
+  Edad: z.number().optional().nullable(),
   Nacimiento: z.string().optional(),
-  Repite: z.string().optional(),
+  Repite: z.boolean().optional(),
   Matricula: z.string().optional(),
   Comentarios: z.string().optional().nullable(),
-  Email: z.string().optional().nullable(),
+  email: z.string().optional().nullable(),
   Movil: z.string().optional().nullable(),
 });
 export type Alumnado = z.infer<typeof AlumnadoSchema>;
@@ -68,7 +68,7 @@ export const ResultadoAprendizajeSchema = z.object({
   id_ra: z.string(),
   desc_ra: z.string().optional().nullable(),
   peso_ra: z.number().optional(),
-  is_dual: z.string().optional().nullable(),
+  is_dual: z.boolean().optional().nullable(),
   comp_clave: z.string().optional().nullable(),
   cpe: z.string().optional().nullable(),
 });

@@ -30,19 +30,19 @@ export function InstrumentoConfigModal({ isOpen, onClose, instrumentoId, instrum
           <X className="w-5 h-5" />
         </button>
         
-        <h3 className="text-lg font-bold mb-1 flex items-center gap-2">
+        <h3 className="text-subheading font-bold mb-1 flex items-center gap-2">
           <Settings2 className="w-5 h-5 text-indigo-400" /> Configuración Avanzada
         </h3>
-        <p className="text-sm text-muted mb-6">Instrumento: {instrumentoId} - {instrumentoDesc}</p>
+        <p className="text-body text-muted mb-6">Instrumento: {instrumentoId} - {instrumentoDesc}</p>
 
         <div className="space-y-4">
           <div>
-            <label className="text-sm font-semibold mb-1 block">Tipo de dato y Escala</label>
-            <p className="text-xs text-muted mb-2">Selecciona la escala de calificación para este instrumento.</p>
+            <label className="text-body font-semibold mb-1 block">Tipo de dato y Escala</label>
+            <p className="text-caption text-muted mb-2">Selecciona la escala de calificación para este instrumento.</p>
             <select 
               value={config.escala || '0-10'} 
               onChange={(e) => onChange('escala', e.target.value)}
-              className="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+              className="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-body text-white focus:outline-none focus:border-indigo-500"
             >
               <option value="0-10">Continua (0-10)</option>
               <option value="1-4">Discreta (1-4)</option>
@@ -52,11 +52,11 @@ export function InstrumentoConfigModal({ isOpen, onClose, instrumentoId, instrum
           </div>
 
           <div>
-            <label className="text-sm font-semibold mb-1 block">Agente de Evaluación</label>
+            <label className="text-body font-semibold mb-1 block">Agente de Evaluación</label>
             <select 
               value={config.agente || 'Heteroevaluacion'} 
               onChange={(e) => onChange('agente', e.target.value)}
-              className="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+              className="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-body text-white focus:outline-none focus:border-indigo-500"
             >
               <option value="Heteroevaluacion">Heteroevaluación (Profesor)</option>
               <option value="Coevaluacion">Coevaluación (Entre alumnos)</option>
@@ -65,12 +65,12 @@ export function InstrumentoConfigModal({ isOpen, onClose, instrumentoId, instrum
           </div>
 
           <div>
-            <label className="text-sm font-semibold mb-1 block">¿Sirve para recuperación?</label>
-            <p className="text-xs text-muted mb-2">Indica si este instrumento califica en un periodo de recuperación (R1, R2, Final).</p>
+            <label className="text-body font-semibold mb-1 block">¿Sirve para recuperación?</label>
+            <p className="text-caption text-muted mb-2">Indica si este instrumento califica en un periodo de recuperación (R1, R2, Final).</p>
             <select 
               value={config.recuperacion || 'No'} 
               onChange={(e) => onChange('recuperacion', e.target.value)}
-              className="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+              className="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-body text-white focus:outline-none focus:border-indigo-500"
             >
               <option value="No">No (Ordinaria)</option>
               <option value="R1">Recuperación 1 (R1)</option>

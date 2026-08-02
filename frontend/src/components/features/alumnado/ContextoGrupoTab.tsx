@@ -12,8 +12,8 @@ export function ContextoGrupoTab() {
             <Users className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-[var(--text-primary)]">Contexto del grupo</h2>
-            <p className="text-sm text-muted-foreground">Define las características psico-pedagógicas y sociológicas del alumnado (necesarias para la PD).</p>
+            <h2 className="text-subheading font-bold text-[var(--text-primary)]">Contexto del grupo</h2>
+            <p className="text-body text-muted-foreground">Define las características psico-pedagógicas y sociológicas del alumnado (necesarias para la PD).</p>
           </div>
         </div>
 

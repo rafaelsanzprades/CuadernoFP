@@ -70,7 +70,7 @@ export function GoogleDriveSyncPanel() {
 
       <div className="relative z-10 flex flex-col gap-6">
         <div>
-          <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
+          <h2 className="text-heading font-bold text-foreground flex items-center gap-2">
             <Cloud className="w-6 h-6 text-info" /> Sincronización con Google Drive
           </h2>
           <p className="text-muted mt-2">
@@ -88,7 +88,7 @@ export function GoogleDriveSyncPanel() {
               <p className="font-bold text-foreground">
                 {isDriveConnected ? "Conectado" : "No conectado"}
               </p>
-              <p className="text-sm text-muted">
+              <p className="text-body text-muted">
                 {isDriveConnected ? `Sincronizando con ${driveUserEmail}` : "Inicia sesión con tu cuenta de Google"}
               </p>
             </div>
@@ -117,7 +117,7 @@ export function GoogleDriveSyncPanel() {
               <RefreshCw className={`w-4 h-4 ${autoSyncDrive ? "text-success animate-spin-slow" : "text-muted"}`} />
               Autoguardado Automático
             </h3>
-            <p className="text-sm text-muted">
+            <p className="text-body text-muted">
               Sube automáticamente a Drive cada vez que pulses "Guardar" en la app.
             </p>
           </div>
@@ -139,7 +139,7 @@ export function GoogleDriveSyncPanel() {
             <h3 className="font-bold text-foreground flex items-center gap-2">
               <Key className="w-5 h-5 text-info" /> Credenciales OAuth
             </h3>
-            <p className="text-sm text-muted">
+            <p className="text-body text-muted">
               Introduce el <strong>Client ID</strong> de tu proyecto de Google Cloud para autorizar la aplicación. Este dato se guarda en tu navegador de forma segura.
             </p>
             <Input
@@ -147,7 +147,7 @@ export function GoogleDriveSyncPanel() {
               placeholder="Ej: 123456789-abcde.apps.googleusercontent.com"
               value={googleClientId}
               onChange={(e) => setGoogleClientId(e.target.value)}
-              className="font-mono text-sm"
+              className="font-mono text-body"
             />
           </div>
         )}

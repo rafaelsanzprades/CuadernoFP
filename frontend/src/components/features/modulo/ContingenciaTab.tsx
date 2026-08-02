@@ -51,8 +51,8 @@ export function ContingenciaTab() {
 
       {/* Medidas de contingencia (checkboxes) */}
       <div>
-        <label className="text-sm font-semibold text-foreground mb-2 block">Medidas de contingencia (selección múltiple)</label>
-        <p className="text-xs text-muted mb-3">Estrategias generales de actuación ante la imposibilidad de impartir docencia presencial normal.</p>
+        <label className="text-body font-semibold text-foreground mb-2 block">Medidas de contingencia (selección múltiple)</label>
+        <p className="text-caption text-muted mb-3">Estrategias generales de actuación ante la imposibilidad de impartir docencia presencial normal.</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
           {CONTINGENCIA.map((cont) => {
             const isSelected = medidas_contingencia.includes(cont.id);
@@ -64,7 +64,7 @@ export function ContingenciaTab() {
                   onChange={() => toggleContingencia(cont.id)}
                   className="rounded border-white/20 bg-transparent text-orange-500 focus:ring-orange-500"
                 />
-                <span className="text-xs"><strong>{cont.id}</strong> - {cont.label}</span>
+                <span className="text-caption"><strong>{cont.id}</strong> - {cont.label}</span>
               </label>
             );
           })}
@@ -72,17 +72,17 @@ export function ContingenciaTab() {
       </div>
 
       <div>
-        <label className="text-sm font-semibold text-foreground mb-2 block">Anotaciones libres de contingencia</label>
+        <label className="text-body font-semibold text-foreground mb-2 block">Anotaciones libres de contingencia</label>
         <textarea
           value={moduleData?.texto_contingencia_libre || ""}
           onChange={e => updateModuleData("texto_contingencia_libre", e.target.value)}
           placeholder="Añade aquí protocolos específicos o aclaraciones sobre el uso de recursos para docencia a distancia..."
-          className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-sm text-foreground focus:border-info focus:outline-none"
+          className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
         />
       </div>
 
       <div className="overflow-x-auto mb-4">
-        <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
+        <table className="w-full text-left text-body border-collapse whitespace-nowrap">
           <thead>
             <tr className="border-b border-[var(--glass-border)] text-muted">
               <th className="p-2 w-16">Id</th>
@@ -96,7 +96,7 @@ export function ContingenciaTab() {
           <tbody>
             {df_contingencia.map((row: any, idx: number) => (
               <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5">
-                <td className="p-2 font-mono text-xs">{row.ID}</td>
+                <td className="p-2 font-mono text-caption">{row.ID}</td>
                 <td className="p-2 pr-2">
                   <select value={row.Escenario || "Otros"} onChange={e => updateRow(df_contingencia, "df_contingencia", idx, "Escenario", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-warning focus:outline-none">
                     <option value="Ausencia de Profesorado">Ausencia de profesorado</option>
@@ -122,39 +122,39 @@ export function ContingenciaTab() {
           </tbody>
         </table>
       </div>
-      <button onClick={() => addRow(df_contingencia, "df_contingencia", "PC", { Escenario: "Otros", Organizacion: "", Actividades: "", Seguimiento: "" })} className="text-sm text-warning hover:text-warning font-semibold flex items-center gap-1">
+      <button onClick={() => addRow(df_contingencia, "df_contingencia", "PC", { Escenario: "Otros", Organizacion: "", Actividades: "", Seguimiento: "" })} className="text-body text-warning hover:text-warning font-semibold flex items-center gap-1">
         <span>+</span> Añadir medida de Contingencia
       </button>
 
       {/* Plan de Contingencia (textos) */}
       <div className="glass-card p-6 border-t-4 border-t-rose-500">
-        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
           <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-rose-400" /></span> Plan de Contingencia
         </h2>
         <div className="space-y-4">
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">Ausencia prolongada del profesorado titular</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">Ausencia prolongada del profesorado titular</label>
             <textarea
               value={config_contexto["contingencia_profesor"] || ""}
               onChange={e => handleChange("contingencia_profesor", e.target.value)}
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-sm text-foreground focus:border-info focus:outline-none"
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">Ausencia prolongada del alumnado por causas justificadas</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">Ausencia prolongada del alumnado por causas justificadas</label>
             <textarea
               value={config_contexto["contingencia_alumnado"] || ""}
               onChange={e => handleChange("contingencia_alumnado", e.target.value)}
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-sm text-foreground focus:border-info focus:outline-none"
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
-            <label className="text-sm font-semibold text-foreground mb-1 block">Interrupción generalizada de las clases</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">Interrupción generalizada de las clases</label>
             <textarea
               value={config_contexto["contingencia_general"] || config_contexto["J3_contingencia"] || ""}
               onChange={e => handleChange("contingencia_general", e.target.value)}
               placeholder="Plataformas online, recursos a distancia..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-sm text-foreground focus:border-info focus:outline-none"
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
         </div>

@@ -50,12 +50,12 @@ export function SessionTable({
             open={allUdsOpen} 
             className="ud-details group bg-foreground/5 rounded-lg border border-[var(--glass-border)] overflow-hidden open:bg-foreground/10 transition-colors"
           >
-            <summary className="p-4 cursor-pointer flex items-center justify-between font-semibold text-lg select-none hover:bg-foreground/5">
+            <summary className="p-4 cursor-pointer flex items-center justify-between font-semibold text-subheading select-none hover:bg-foreground/5">
               <div className="flex items-center gap-4">
                 <span className="text-accent">{ud.id_ud}</span>
-                <span className="text-sm text-muted truncate max-w-xl">{ud.desc_ud}</span>
+                <span className="text-body text-muted truncate max-w-xl">{ud.desc_ud}</span>
               </div>
-              <div className="flex items-center gap-6 text-sm">
+              <div className="flex items-center gap-6 text-body">
                 <span className="text-muted">{udSesiones.length} sesiones</span>
                 <span className="text-accent bg-accent/10 px-2 py-1 rounded">{totalHoras} h</span>
                 <button 
@@ -69,7 +69,7 @@ export function SessionTable({
               </div>
             </summary>
             <div className="p-4 border-t border-[var(--glass-border)] bg-foreground/10 overflow-x-auto">
-              <div className="w-full text-sm">
+              <div className="w-full text-body">
                 <div className="flex text-muted border-b border-[var(--glass-border)] pb-2 mb-2 items-center">
                   <div className="w-10"></div>
                   <div className="w-16">Nº</div>
@@ -148,7 +148,7 @@ export function SessionTable({
                                   <div className="w-10 flex justify-center">
                                     <button
                                       onClick={() => handleDeleteSesion(globalIdx)}
-                                      className="text-danger hover:text-danger font-bold text-lg"
+                                      className="text-danger hover:text-danger font-bold text-subheading"
                                       title="Eliminar sesión"
                                     >
                                       ×
@@ -159,7 +159,7 @@ export function SessionTable({
                                 {/* Segunda Línea: Identada y con MultiSelects */}
                                 <div className="flex items-center gap-4 pl-[7.5rem]">
                                   <div className="flex-1 flex flex-col">
-                                    <span className="text-xs text-muted-foreground tracking-wider mb-1 font-semibold">Aspectos Clave</span>
+                                    <span className="text-caption text-muted-foreground tracking-wider mb-1 font-semibold">Aspectos Clave</span>
                                     <MultiSelectDropdown
                                       options={getAllAspectosClave()}
                                       selectedIds={ses.Aspectos_Clave ? ses.Aspectos_Clave.split(',').map(s => s.trim()).filter(Boolean) : []}
@@ -168,7 +168,7 @@ export function SessionTable({
                                     />
                                   </div>
                                   <div className="flex-1 flex flex-col pr-10">
-                                    <span className="text-xs text-muted-foreground tracking-wider mb-1 font-semibold">Recursos</span>
+                                    <span className="text-caption text-muted-foreground tracking-wider mb-1 font-semibold">Recursos</span>
                                     <MultiSelectDropdown
                                       options={getAllRecursos()}
                                       selectedIds={ses.Recursos ? ses.Recursos.split(',').map(s => s.trim()).filter(Boolean) : []}
@@ -190,7 +190,7 @@ export function SessionTable({
               <div className="mt-4">
                 <button 
                   onClick={() => handleAddSesion(ud.id_ud)}
-                  className="text-sm text-accent hover:text-accent/80 font-semibold flex items-center gap-1"
+                  className="text-body text-accent hover:text-accent/80 font-semibold flex items-center gap-1"
                 >
                   <span>+</span> Añadir sesión a {ud.id_ud}
                 </button>

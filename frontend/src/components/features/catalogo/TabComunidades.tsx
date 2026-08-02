@@ -280,7 +280,7 @@ export function TabComunidades({ searchQuery = "" }: Props) {
             <MapPin className="w-5 h-5 text-primary" />
             <h3 className="font-semibold">Mapa de CCAA con currículo FP</h3>
           </div>
-          <p className="text-xs text-muted mb-4">
+          <p className="text-caption text-muted mb-4">
             Haz clic en una comunidad para ver su detalle. Fuente: <a href="https://todofp.es" target="_blank" rel="noopener" className="underline text-primary">todofp.es</a>
           </p>
 
@@ -344,11 +344,11 @@ export function TabComunidades({ searchQuery = "" }: Props) {
           {/* Tooltip flotante */}
           {activeCCAA && (
             <div className="mt-3 p-3 rounded-lg border bg-accent/5 text-center">
-              <p className="font-semibold text-sm">{activeCCAA.nombre}</p>
-              <p className="text-xs text-muted">
+              <p className="font-semibold text-body">{activeCCAA.nombre}</p>
+              <p className="text-caption text-muted">
                 {activeCCAA.siglas} — {activeCCAA.bo}
                 {activeCCAA.id === "aragon" && (
-                  <Badge variant="info" className="ml-2 text-xs">DEMO</Badge>
+                  <Badge variant="info" className="ml-2 text-caption">DEMO</Badge>
                 )}
               </p>
             </div>
@@ -362,7 +362,7 @@ export function TabComunidades({ searchQuery = "" }: Props) {
           ) : (
             <div className="flex flex-col items-center justify-center h-full text-center py-12">
               <MapPin className="w-10 h-10 text-muted mb-3" />
-              <p className="text-sm text-muted">
+              <p className="text-body text-muted">
                 Selecciona una comunidad autónoma en el mapa para ver su información detallada.
               </p>
             </div>
@@ -377,7 +377,7 @@ export function TabComunidades({ searchQuery = "" }: Props) {
           <h3 className="font-semibold">Tabla de comunidades autónomas</h3>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+          <table className="w-full text-body">
             <thead>
               <tr className="border-b">
                 <th className="text-left py-2 px-3 font-medium text-muted">#</th>
@@ -409,7 +409,7 @@ export function TabComunidades({ searchQuery = "" }: Props) {
                     <span className="inline-block w-3 h-3 rounded-full mr-2" style={{ backgroundColor: ccaa.color }} />
                     {ccaa.nombre}
                     {ccaa.id === "aragon" && (
-                      <Badge variant="info" className="ml-2 text-xs">DEMO</Badge>
+                      <Badge variant="info" className="ml-2 text-caption">DEMO</Badge>
                     )}
                   </td>
                   <td className="py-2 px-3">{ccaa.siglas}</td>
@@ -426,12 +426,12 @@ export function TabComunidades({ searchQuery = "" }: Props) {
                   </td>
                   <td className="py-2 px-3">
                     {ccaa.bo === "BOE" ? (
-                      <Badge variant="info" className="text-xs">Ciudad Autónoma</Badge>
+                      <Badge variant="info" className="text-caption">Ciudad Autónoma</Badge>
                     ) : (
-                      <Badge variant="info" className="text-xs">CCAA</Badge>
+                      <Badge variant="info" className="text-caption">CCAA</Badge>
                     )}
                   </td>
-                  <td className="py-2 px-3 text-xs text-muted max-w-[200px]">
+                  <td className="py-2 px-3 text-caption text-muted max-w-[200px]">
                     {ccaa.nota || "—"}
                   </td>
                 </tr>
@@ -445,7 +445,7 @@ export function TabComunidades({ searchQuery = "" }: Props) {
       <Card className="p-4">
         <div className="flex items-start gap-3">
           <Info className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-          <div className="space-y-2 text-sm text-muted">
+          <div className="space-y-2 text-body text-muted">
             <p>
               <strong>Fuente principal:</strong>{" "}
               <a href="https://todofp.es" target="_blank" rel="noopener" className="underline text-primary">
@@ -462,7 +462,7 @@ export function TabComunidades({ searchQuery = "" }: Props) {
               <strong>Ceuta y Melilla</strong> aplican directamente el currículo del Ministerio (BOE),
               al no tener competencias transferadas en materia de educación.
             </p>
-            <p className="text-xs">
+            <p className="text-caption">
               Mapa SVG:{" "}
               <a href="https://github.com/VictorCazanave/svg-maps/tree/master/packages/spain" target="_blank" rel="noopener" className="underline">
                 @svg-maps/spain
@@ -481,18 +481,18 @@ function DetalleCCAA({ ccaa }: { ccaa: CCAA }) {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm" style={{ backgroundColor: ccaa.color }}>
+        <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-body" style={{ backgroundColor: ccaa.color }}>
           {ccaa.siglas}
         </div>
         <div>
           <h4 className="font-semibold">{ccaa.nombre}</h4>
-          <p className="text-xs text-muted">{ccaa.siglas}</p>
+          <p className="text-caption text-muted">{ccaa.siglas}</p>
         </div>
       </div>
 
       {ccaa.id === "aragon" && (
         <div className="p-3 rounded-lg bg-blue-50 border border-blue-200 dark:bg-blue-950/30 dark:border-blue-800">
-          <p className="text-xs text-blue-800 dark:text-blue-300">
+          <p className="text-caption text-blue-800 dark:text-blue-300">
             <strong>🌍 Entorno DEMO:</strong> Los datos de ejemplo de esta aplicación usan el currículo de Aragón (BOA) como referencia.
           </p>
         </div>
@@ -502,16 +502,16 @@ function DetalleCCAA({ ccaa }: { ccaa: CCAA }) {
         <div className="flex items-start gap-2">
           <BookOpen className="w-4 h-4 text-muted mt-0.5 shrink-0" />
           <div>
-            <p className="text-xs font-medium text-muted">Boletín Oficial</p>
-            <p className="text-sm">{ccaa.boNombre}</p>
+            <p className="text-caption font-medium text-muted">Boletín Oficial</p>
+            <p className="text-body">{ccaa.boNombre}</p>
           </div>
         </div>
 
         <div className="flex items-start gap-2">
           <Globe className="w-4 h-4 text-muted mt-0.5 shrink-0" />
           <div>
-            <p className="text-xs font-medium text-muted">Tipo</p>
-            <p className="text-sm">{ccaa.bo === "BOE" ? "Ciudad Autónoma" : "Comunidad Autónoma"}</p>
+            <p className="text-caption font-medium text-muted">Tipo</p>
+            <p className="text-body">{ccaa.bo === "BOE" ? "Ciudad Autónoma" : "Comunidad Autónoma"}</p>
           </div>
         </div>
 
@@ -519,8 +519,8 @@ function DetalleCCAA({ ccaa }: { ccaa: CCAA }) {
           <div className="flex items-start gap-2">
             <Info className="w-4 h-4 text-muted mt-0.5 shrink-0" />
             <div>
-              <p className="text-xs font-medium text-muted">Nota</p>
-              <p className="text-sm">{ccaa.nota}</p>
+              <p className="text-caption font-medium text-muted">Nota</p>
+              <p className="text-body">{ccaa.nota}</p>
             </div>
           </div>
         )}
@@ -530,7 +530,7 @@ function DetalleCCAA({ ccaa }: { ccaa: CCAA }) {
         href={ccaa.webCurriculo}
         target="_blank"
         rel="noopener"
-        className="inline-flex items-center gap-2 text-sm text-primary underline hover:text-primary/80 transition-colors"
+        className="inline-flex items-center gap-2 text-body text-primary underline hover:text-primary/80 transition-colors"
       >
         <ExternalLink className="w-4 h-4" />
         {ccaa.portalNombre}

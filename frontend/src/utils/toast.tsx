@@ -9,19 +9,19 @@ export const showRichToast = {
           <div className="flex items-start">
             <div className="flex-shrink-0 pt-0.5">
               <div className="h-10 w-10 rounded-full bg-success/10 flex items-center justify-center">
-                <span className="text-success text-lg font-bold"><span className="inline-flex"><Check className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
+                <span className="text-success text-subheading font-bold"><span className="inline-flex"><Check className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
               </div>
             </div>
             <div className="ml-3 flex-1">
-              <p className="text-sm font-semibold text-foreground">{message}</p>
-              {description && <p className="mt-1 text-xs text-muted">{description}</p>}
+              <p className="text-body font-semibold text-foreground">{message}</p>
+              {description && <p className="mt-1 text-caption text-muted">{description}</p>}
             </div>
           </div>
         </div>
         <div className="flex border-l border-[var(--glass-border)]">
           <button
             onClick={() => toast.dismiss(t.id)}
-            className="w-full h-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-muted hover:text-foreground hover:bg-foreground/5 focus:outline-none transition-colors"
+            className="w-full h-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-body font-medium text-muted hover:text-foreground hover:bg-foreground/5 focus:outline-none transition-colors"
           >
             Cerrar
           </button>
@@ -37,19 +37,19 @@ export const showRichToast = {
           <div className="flex items-start">
             <div className="flex-shrink-0 pt-0.5">
               <div className="h-10 w-10 rounded-full bg-danger/10 flex items-center justify-center">
-                <span className="text-danger text-lg font-bold"><span className="inline-flex"><X className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
+                <span className="text-danger text-subheading font-bold"><span className="inline-flex"><X className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
               </div>
             </div>
             <div className="ml-3 flex-1">
-              <p className="text-sm font-semibold text-foreground">{message}</p>
-              {description && <p className="mt-1 text-xs text-muted">{description}</p>}
+              <p className="text-body font-semibold text-foreground">{message}</p>
+              {description && <p className="mt-1 text-caption text-muted">{description}</p>}
             </div>
           </div>
         </div>
         <div className="flex border-l border-[var(--glass-border)]">
           <button
             onClick={() => toast.dismiss(t.id)}
-            className="w-full h-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-muted hover:text-foreground hover:bg-foreground/5 focus:outline-none transition-colors"
+            className="w-full h-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-body font-medium text-muted hover:text-foreground hover:bg-foreground/5 focus:outline-none transition-colors"
           >
             Cerrar
           </button>
@@ -65,12 +65,12 @@ export const showRichToast = {
           <div className="flex items-start">
             <div className="flex-shrink-0 pt-0.5">
               <div className="h-10 w-10 rounded-full bg-info/10 flex items-center justify-center">
-                <span className="text-info text-lg font-bold">ℹ️</span>
+                <span className="text-info text-subheading font-bold">ℹ️</span>
               </div>
             </div>
             <div className="ml-3 flex-1">
-              <p className="text-sm font-semibold text-foreground">{message}</p>
-              {description && <p className="mt-1 text-xs text-muted">{description}</p>}
+              <p className="text-body font-semibold text-foreground">{message}</p>
+              {description && <p className="mt-1 text-caption text-muted">{description}</p>}
             </div>
           </div>
         </div>
@@ -80,13 +80,13 @@ export const showRichToast = {
               onUndo();
               toast.dismiss(t.id);
             }}
-            className="w-full flex-1 border-b border-[var(--glass-border)] p-2 flex items-center justify-center text-sm font-semibold text-info hover:text-info hover:bg-info/10 transition-colors"
+            className="w-full flex-1 border-b border-[var(--glass-border)] p-2 flex items-center justify-center text-body font-semibold text-info hover:text-info hover:bg-info/10 transition-colors"
           >
             Deshacer
           </button>
           <button
             onClick={() => toast.dismiss(t.id)}
-            className="w-full flex-1 p-2 flex items-center justify-center text-xs font-medium text-muted hover:text-foreground hover:bg-foreground/5 transition-colors"
+            className="w-full flex-1 p-2 flex items-center justify-center text-caption font-medium text-muted hover:text-foreground hover:bg-foreground/5 transition-colors"
           >
             Ignorar
           </button>

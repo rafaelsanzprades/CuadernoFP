@@ -50,11 +50,11 @@ export function NormativaAccordion({ communities, onDownloadDoc, formatSize, get
               <div className="flex items-center gap-3">
                 <Landmark className={`w-5 h-5 ${isExpanded ? 'text-primary' : 'text-muted'}`} />
                 <div className="flex items-center gap-2">
-                  <span className={`font-semibold text-sm transition-colors ${isExpanded ? 'text-primary' : 'text-foreground'}`}>
+                  <span className={`font-semibold text-body transition-colors ${isExpanded ? 'text-primary' : 'text-foreground'}`}>
                     Normativa Estatal
                   </span>
                   {!hasFiles && (
-                    <span className="text-xs tracking-widest bg-primary/10 text-primary/70 px-2 py-0.5 rounded border border-primary/20 ml-2 hidden sm:inline-block">
+                    <span className="text-caption tracking-widest bg-primary/10 text-primary/70 px-2 py-0.5 rounded border border-primary/20 ml-2 hidden sm:inline-block">
                       En preparación
                     </span>
                   )}
@@ -95,11 +95,11 @@ export function NormativaAccordion({ communities, onDownloadDoc, formatSize, get
               <div className="flex items-center gap-3">
                 <MapPin className={`w-5 h-5 ${isExpanded ? 'text-success' : 'text-muted'}`} />
                 <div className="flex items-center gap-2">
-                  <span className={`font-semibold text-sm transition-colors ${isExpanded ? 'text-success' : 'text-foreground'}`}>
+                  <span className={`font-semibold text-body transition-colors ${isExpanded ? 'text-success' : 'text-foreground'}`}>
                     {comunidadName}
                   </span>
                   {!hasFiles && (
-                    <span className="text-xs tracking-widest bg-success/10 text-success/70 px-2 py-0.5 rounded border border-success/20 ml-2 hidden sm:inline-block">
+                    <span className="text-caption tracking-widest bg-success/10 text-success/70 px-2 py-0.5 rounded border border-success/20 ml-2 hidden sm:inline-block">
                       En preparación
                     </span>
                   )}
@@ -146,7 +146,7 @@ function CommunityFiles({ path, onDownloadDoc, formatSize, getFileIcon }: { path
     return (
       <div className="p-4 text-center text-muted flex flex-col items-center">
         <div className="w-6 h-6 border-2 border-success border-t-transparent rounded-full animate-spin mb-2"></div>
-        <p className="text-sm">Cargando normativa...</p>
+        <p className="text-body">Cargando normativa...</p>
       </div>
     );
   }
@@ -157,7 +157,7 @@ function CommunityFiles({ path, onDownloadDoc, formatSize, getFileIcon }: { path
 
   return (
     <div className="overflow-x-auto border border-border/50 rounded-lg">
-      <table className="w-full text-left text-sm">
+      <table className="w-full text-left text-body">
         <tbody className="divide-y divide-border/50">
           {files.map(file => (
             <tr key={file.path} className="hover:bg-muted/20 transition-colors cursor-pointer" onClick={() => onDownloadDoc(file.path, file.name)}>
@@ -166,7 +166,7 @@ function CommunityFiles({ path, onDownloadDoc, formatSize, getFileIcon }: { path
               </td>
               <td className="px-4 py-4">
                 <p className="font-medium text-foreground leading-relaxed">{file.name}</p>
-                <p className="text-muted-foreground text-xs mt-1 font-mono">{formatSize(file.size)}</p>
+                <p className="text-muted-foreground text-caption mt-1 font-mono">{formatSize(file.size)}</p>
               </td>
               <td className="px-4 py-4 text-center align-middle w-24">
                 <Button 

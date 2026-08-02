@@ -55,7 +55,7 @@ export function MultiSelectDropdown({
       >
         <div className="flex flex-wrap gap-1 flex-1 overflow-hidden">
           {selectedIds.length === 0 ? (
-            <span className="text-foreground/50 text-xs py-0.5">{placeholder}</span>
+            <span className="text-foreground/50 text-caption py-0.5">{placeholder}</span>
           ) : (
             selectedIds.map(id => {
               const opt = options.find(o => o.id === id);
@@ -66,7 +66,7 @@ export function MultiSelectDropdown({
                 <span 
                   key={id} 
                   title={fullTitle}
-                  className="border border-accent/50 text-foreground text-sm px-2 py-0.5 rounded flex items-center gap-1.5 bg-background/50"
+                  className="border border-accent/50 text-foreground text-body px-2 py-0.5 rounded flex items-center gap-1.5 bg-background/50"
                 >
                   {label}
                   <button 
@@ -90,7 +90,7 @@ export function MultiSelectDropdown({
               <div 
                 key={option.id}
                 onClick={() => toggleOption(option.id)}
-                className="flex items-start gap-2 px-2 py-1.5 hover:bg-foreground/10 rounded cursor-pointer text-xs"
+                className="flex items-start gap-2 px-2 py-1.5 hover:bg-foreground/10 rounded cursor-pointer text-caption"
               >
                 <div className="mt-0.5 w-4 h-4 rounded border border-muted/50 flex items-center justify-center flex-shrink-0 bg-background">
                   {selectedIds.includes(option.id) && <Check className="w-3 h-3 text-accent" />}

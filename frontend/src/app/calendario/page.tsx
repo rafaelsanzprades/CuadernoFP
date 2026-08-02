@@ -125,7 +125,7 @@ function NotesTable({ calendar_notes, onUpdateNotes }: { calendar_notes: Record<
 
   return (
     <div className="overflow-x-auto">
-      <table className="w-full text-left text-sm border-collapse">
+      <table className="w-full text-left text-body border-collapse">
         <thead>
           <tr className="border-b border-[var(--glass-border)] text-muted">
             <th className="p-2 w-32">{t('table.fecha', {defaultValue: 'Fecha'})}</th>
@@ -171,7 +171,7 @@ function NotesTable({ calendar_notes, onUpdateNotes }: { calendar_notes: Record<
               <React.Fragment key={r.start + r.desc}>
                 {showHeader && (
                   <tr>
-                    <td colSpan={5} className="pt-6 pb-2 text-xs font-bold tracking-wider text-accent border-b border-[var(--glass-border)]/50">
+                    <td colSpan={5} className="pt-6 pb-2 text-caption font-bold tracking-wider text-accent border-b border-[var(--glass-border)]/50">
                       {monthHeader}
                     </td>
                   </tr>
@@ -180,7 +180,7 @@ function NotesTable({ calendar_notes, onUpdateNotes }: { calendar_notes: Record<
                   <td className="p-2 font-mono text-foreground/80">{fmt(r.start.substring(2))}</td>
                   <td className="p-2 font-mono text-foreground/60">{r.start === r.end ? "" : fmt(r.end.substring(2))}</td>
                   <td className="p-2">
-                    <span className={`text-xs px-2 py-0.5 rounded-full font-semibold ${
+                    <span className={`text-caption px-2 py-0.5 rounded-full font-semibold ${
                       isF ? "bg-danger/10 text-danger" : "bg-info/10 text-info"
                     }`}>
                       {isF ? <><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('festivo', {defaultValue: 'Festivo'})}</> : <><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('evento', {defaultValue: 'Evento'})}</>}
@@ -188,7 +188,7 @@ function NotesTable({ calendar_notes, onUpdateNotes }: { calendar_notes: Record<
                   </td>
                   <td className="p-2 text-foreground/90">{r.desc}</td>
                   <td className="p-2 text-center">
-                    <button onClick={() => deleteRange(r.keys)} className="text-muted/80 hover:text-danger font-bold text-lg leading-none transition-colors">×</button>
+                    <button onClick={() => deleteRange(r.keys)} className="text-muted/80 hover:text-danger font-bold text-subheading leading-none transition-colors">×</button>
                   </td>
                 </tr>
               </React.Fragment>
@@ -203,21 +203,21 @@ function NotesTable({ calendar_notes, onUpdateNotes }: { calendar_notes: Record<
               <DatePicker value={newEndDate} onChange={v => setNewEndDate(v)} className="w-full" placeholder={t('hasta_opc', {defaultValue: 'Hasta (Opcional)'})} />
             </td>
             <td className="p-2">
-              <select value={newType} onChange={e => setNewType(e.target.value as "f" | "r")} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-sm text-foreground focus:border-warning focus:outline-none">
+              <select value={newType} onChange={e => setNewType(e.target.value as "f" | "r")} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-body text-foreground focus:border-warning focus:outline-none">
                 <option value="f">{t('festivo', {defaultValue: 'Festivo'})}</option>
                 <option value="r">{t('evento', {defaultValue: 'Evento'})}</option>
               </select>
             </td>
             <td className="p-2">
-              <input type="text" value={newText} onChange={e => setNewText(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()} placeholder={t('descripcion', {defaultValue: 'Descripción...'})} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-sm text-foreground focus:border-warning focus:outline-none" />
+              <input type="text" value={newText} onChange={e => setNewText(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()} placeholder={t('descripcion', {defaultValue: 'Descripción...'})} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-body text-foreground focus:border-warning focus:outline-none" />
             </td>
             <td className="p-2 text-center">
-              <button onClick={addNote} disabled={!newDate || !newText} className="text-warning hover:text-warning font-bold text-2xl leading-none disabled:text-gray-700 transition-colors">+</button>
+              <button onClick={addNote} disabled={!newDate || !newText} className="text-warning hover:text-warning font-bold text-heading leading-none disabled:text-gray-700 transition-colors">+</button>
             </td>
           </tr>
         </tbody>
       </table>
-      {ranges.length === 0 && <p className="text-center text-muted/80 text-sm py-4">{t('sin_eventos', {defaultValue: 'Sin festivos ni eventos aún. Añade uno arriba.'})}</p>}
+      {ranges.length === 0 && <p className="text-center text-muted/80 text-body py-4">{t('sin_eventos', {defaultValue: 'Sin festivos ni eventos aún. Añade uno arriba.'})}</p>}
     </div>
   );
 }
@@ -296,7 +296,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
   return (
     <div>
       {/* Legend */}
-      <div className="flex flex-wrap gap-4 mb-6 text-xs">
+      <div className="flex flex-wrap gap-4 mb-6 text-caption">
         {[
           { cls: "bg-info/10 border-info/30",      label: t('t1', {defaultValue: "1er trimestre"}) },
           { cls: "bg-success/10 border-success/30", label: t('t2', {defaultValue: "2º trimestre"}) },
@@ -326,12 +326,12 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
 
           return (
             <div key={`${y}-${m}`} className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-4">
-              <h3 className="text-center font-semibold text-sm mb-3 text-foreground/90">
+              <h3 className="text-center font-semibold text-body mb-3 text-foreground/90">
                 {MONTH_NAMES[m]} {y}
               </h3>
               <div className="grid grid-cols-7 gap-0.5">
                 {DAY_NAMES_SHORT.map(d => (
-                  <div key={d} className="text-center text-xs text-muted/80 font-bold pb-1">{d}</div>
+                  <div key={d} className="text-center text-caption text-muted/80 font-bold pb-1">{d}</div>
                 ))}
                 {cells.map((day, i) => {
                   if (!day) return <div key={`e-${i}`} />;
@@ -341,7 +341,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
                     <button
                       key={day}
                       onClick={(e) => openPopup(e, date)}
-                      className={`text-center text-xs rounded py-1 transition-all ${getDayStyle(date)} ${isToday ? "ring-1 ring-warning ring-offset-1 ring-offset-black/50" : ""}`}
+                      className={`text-center text-caption rounded py-1 transition-all ${getDayStyle(date)} ${isToday ? "ring-1 ring-warning ring-offset-1 ring-offset-black/50" : ""}`}
                       title={`${pad(day)}/${pad(m + 1)}/${y}`}
                     >
                       {day}
@@ -357,7 +357,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
       {/* Notes list */}
       {noteEntries.length > 0 && (
         <div className="mt-6">
-          <h3 className="text-sm font-semibold text-muted mb-3"><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('notas_reg', {defaultValue: 'Notas registradas'})} ({noteEntries.length})</h3>
+          <h3 className="text-body font-semibold text-muted mb-3"><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('notas_reg', {defaultValue: 'Notas registradas'})} ({noteEntries.length})</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
             {noteEntries
               .sort(([a], [b]) => a.localeCompare(b))
@@ -366,7 +366,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
                 return (
                   <div
                     key={k}
-                    className={`flex items-center gap-2 text-xs rounded-lg px-3 py-2 border ${
+                    className={`flex items-center gap-2 text-caption rounded-lg px-3 py-2 border ${
                       isF ? "bg-danger/10 border-danger/30 text-danger"
                           : "bg-info/10 border-info/30 text-info"
                     }`}
@@ -377,7 +377,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
                     </span>
                     <button
                       onClick={() => onUpdateNote(k, "")}
-                      className="text-muted/80 hover:text-danger font-bold text-sm leading-none"
+                      className="text-muted/80 hover:text-danger font-bold text-body leading-none"
                     >×</button>
                   </div>
                 );
@@ -397,11 +397,11 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
               top:  Math.min(popup.y + 8, (typeof window !== "undefined" ? window.innerHeight : 600) - 170),
             }}
           >
-            <p className="text-sm font-semibold mb-3 text-foreground/90"> {popup.key}</p>
+            <p className="text-body font-semibold mb-3 text-foreground/90"> {popup.key}</p>
             <div className="flex gap-2 mb-3">
               <button
                 onClick={() => setNoteType("f")}
-                className={`flex-1 text-xs py-1.5 rounded transition-all ${
+                className={`flex-1 text-caption py-1.5 rounded transition-all ${
                   noteType === "f"
                     ? "bg-danger/10 text-danger border border-danger/30"
                     : "bg-foreground/5 text-muted border border-[var(--glass-border)] hover:bg-foreground/10"
@@ -409,7 +409,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
               ><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('festivo')}</button>
               <button
                 onClick={() => setNoteType("r")}
-                className={`flex-1 text-xs py-1.5 rounded transition-all ${
+                className={`flex-1 text-caption py-1.5 rounded transition-all ${
                   noteType === "r"
                     ? "bg-info/10 text-info border border-info/30"
                     : "bg-foreground/5 text-muted border border-[var(--glass-border)] hover:bg-foreground/10"
@@ -418,7 +418,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
             </div>
             <input
               autoFocus
-              className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded p-2 text-sm text-foreground mb-3 focus:border-info focus:outline-none"
+              className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded p-2 text-body text-foreground mb-3 focus:border-info focus:outline-none"
               placeholder={noteType === "f" ? t('nombre_festivo', {defaultValue: 'Nombre del festivo...'}) : t('desc_evento', {defaultValue: 'Descripción del evento...'})}
               value={noteText}
               onChange={e => setNoteText(e.target.value)}
@@ -430,11 +430,11 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
             <div className="flex gap-2">
               <button
                 onClick={saveNote}
-                className="flex-1 bg-info/10 hover:bg-info/10 text-info text-xs py-1.5 rounded border border-info/30 transition-all"
+                className="flex-1 bg-info/10 hover:bg-info/10 text-info text-caption py-1.5 rounded border border-info/30 transition-all"
               >{t('anadir', {defaultValue: 'Añadir'})}</button>
               <button
                 onClick={() => setPopup(null)}
-                className="text-muted text-xs py-1.5 px-3 rounded hover:text-foreground/80 transition-all"
+                className="text-muted text-caption py-1.5 px-3 rounded hover:text-foreground/80 transition-all"
               >{t('cancelar', {defaultValue: 'Cancelar'})}</button>
             </div>
           </div>
@@ -529,7 +529,7 @@ export default function CalendarioPage() {
 
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <Calendar className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-2xl font-bold">No hay curso cargado</h2>
+                <h2 className="text-heading font-bold">No hay curso cargado</h2>
                 <p className="text-muted mb-4">Debes abrir o crear un archivo de curso en tu Archivos.</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
@@ -551,7 +551,7 @@ export default function CalendarioPage() {
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
           <main id="main-content" tabIndex={-1} className="flex-1 flex items-center justify-center content-area">
-            <div className="text-lg text-info animate-pulse">Cargando calendario...</div>
+            <div className="text-subheading text-info animate-pulse">Cargando calendario...</div>
           </main>
         </div>
       </div>
@@ -652,7 +652,7 @@ export default function CalendarioPage() {
 
           {/* Save message */}
           {saveMessage && (
-            <p className={`text-sm font-semibold ${saveMessage.includes("Error") ? "text-danger" : "text-success"}`}>
+            <p className={`text-body font-semibold ${saveMessage.includes("Error") ? "text-danger" : "text-success"}`}>
               {saveMessage}
             </p>
           )}
@@ -677,7 +677,7 @@ export default function CalendarioPage() {
               {/* Fechas generales */}
               <Card className="p-6 border-t-4 border-t-blue-500 overflow-visible z-30">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-lg font-bold">Fechas generales</h2>
+                  <h2 className="text-subheading font-bold">Fechas generales</h2>
                   <div className="flex gap-2">
 
                     <Button
@@ -692,7 +692,7 @@ export default function CalendarioPage() {
                           handleUpdateFechas("fin_curso", dates[dates.length - 1]);
                         }
                       }}
-                      className="text-xs text-info hover:text-info border border-[var(--glass-border)]"
+                      className="text-caption text-info hover:text-info border border-[var(--glass-border)]"
                     >
                       <span className="inline-flex"><Search className="w-[1.2em] h-[1.2em] mr-1" /></span> Autodetectar
                     </Button>
@@ -706,7 +706,7 @@ export default function CalendarioPage() {
                     { label: "Fin de curso",       field: "fin_curso" },
                   ].map(({ label, field }) => (
                     <div key={field}>
-                      <label className="text-sm text-muted mb-1 block">{label}</label>
+                      <label className="text-body text-muted mb-1 block">{label}</label>
                       <DatePicker
                         value={typeof info_fechas[field] === 'string' ? info_fechas[field] : ""}
                         onChange={v => handleUpdateFechas(field, v)}
@@ -719,8 +719,8 @@ export default function CalendarioPage() {
               {/* Sesiones semanales */}
               <Card className="p-6 border-t-4 border-t-purple-500">
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-lg font-bold flex items-center gap-2">Horario semanal</h2>
-                  <div className="bg-foreground/15 px-4 py-2 rounded-lg border border-[var(--glass-border)] text-sm">
+                  <h2 className="text-subheading font-bold flex items-center gap-2">Horario semanal</h2>
+                  <div className="bg-foreground/15 px-4 py-2 rounded-lg border border-[var(--glass-border)] text-body">
                     Desfase con BOA ({h_sem} h/sem):{" "}
                     <span className={`font-bold ${suma_horario === h_sem ? "text-success" : "text-warning"}`}>
                       {suma_horario - h_sem} h
@@ -730,12 +730,12 @@ export default function CalendarioPage() {
                 <div className="grid grid-cols-5 gap-4">
                   {["Lun", "Mar", "Mié", "Jue", "Vie"].map(day => (
                     <div key={day}>
-                      <label className="text-sm text-muted mb-1 block text-center font-bold">{day}</label>
+                      <label className="text-body text-muted mb-1 block text-center font-bold">{day}</label>
                       <input 
                         type="number" min="0" max="8"
                         value={Number(horario[day]) || 0}
                         onChange={e => handleUpdateHorario(day, Number(e.target.value))}
-                        className="w-full text-center text-lg font-mono bg-background border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground focus:border-purple-500 focus:outline-none"
+                        className="w-full text-center text-subheading font-mono bg-background border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground focus:border-purple-500 focus:outline-none"
                       />
                     </div>
                   ))}
@@ -744,16 +744,16 @@ export default function CalendarioPage() {
 
               {/* Días hábiles */}
               <Card className="p-6 border-t-4 border-t-yellow-500 overflow-hidden">
-                <h2 className="text-lg font-bold mb-4 flex items-center gap-2">Información sobre días hábiles</h2>
+                <h2 className="text-subheading font-bold mb-4 flex items-center gap-2">Información sobre días hábiles</h2>
                 <div className="overflow-x-auto rounded-xl border border-[var(--glass-border)]">
-                  <table className="w-full text-center text-sm border-collapse">
+                  <table className="w-full text-center text-body border-collapse">
                     <thead>
                       <tr className="bg-foreground/5 text-muted border-b border-[var(--glass-border)]">
                         <th className="p-3 text-left font-semibold">Trimestre</th>
                         {["Lun", "Mar", "Mié", "Jue", "Vie"].map(day => (
                           <th key={day} className={`p-3 font-semibold ${!Number(horario[day]) ? 'opacity-40' : ''}`}>
                             {day}
-                            {Number(horario[day]) > 0 && <span className="block text-xs text-info font-normal mt-0.5">{horario[day]}h/sem</span>}
+                            {Number(horario[day]) > 0 && <span className="block text-caption text-info font-normal mt-0.5">{horario[day]}h/sem</span>}
                           </th>
                         ))}
                         <th className="p-3 font-semibold border-l border-[var(--glass-border)]">Total días</th>
@@ -771,11 +771,11 @@ export default function CalendarioPage() {
     <tr key={row.title} className={`${row.bg} border-b border-[var(--glass-border)] last:border-0`}>
                             <td className="p-3 font-bold text-left">{row.title}</td>
                             {daysArr.map(day => (
-                              <td key={day} className={`p-3 ${!Number(horario[day]) ? 'opacity-30' : 'font-mono text-sm font-medium'}`}>
+                              <td key={day} className={`p-3 ${!Number(horario[day]) ? 'opacity-30' : 'font-mono text-body font-medium'}`}>
                                 {row.wd[day]}
                               </td>
                             ))}
-                            <td className="p-3 font-bold border-l border-[var(--glass-border)] text-sm font-mono">
+                            <td className="p-3 font-bold border-l border-[var(--glass-border)] text-body font-mono">
                               {totalDays}
                             </td>
                           </tr>
@@ -789,7 +789,7 @@ export default function CalendarioPage() {
               {/* Trimestres */}
               <Card className="p-6 border-t-4 border-t-emerald-500 overflow-visible z-20">
                 <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-lg font-bold">Trimestres</h2>
+                  <h2 className="text-subheading font-bold">Trimestres</h2>
                 </div>
                 <div className="grid grid-cols-3 gap-6">
                   {[
@@ -801,11 +801,11 @@ export default function CalendarioPage() {
                       <h3 className="text-center font-bold mb-4">{t.title}</h3>
                       <div className="space-y-3">
                         <div>
-                          <label className="text-xs text-muted">Inicio</label>
+                          <label className="text-caption text-muted">Inicio</label>
                           <DatePicker value={typeof info_fechas[t.ini] === 'string' ? info_fechas[t.ini] : ""} onChange={v => handleUpdateFechas(t.ini, v)} />
                         </div>
                         <div>
-                          <label className="text-xs text-muted">Fin</label>
+                          <label className="text-caption text-muted">Fin</label>
                           <DatePicker value={typeof info_fechas[t.fin] === 'string' ? info_fechas[t.fin] : ""} onChange={v => handleUpdateFechas(t.fin, v)} />
                         </div>
                       </div>
@@ -816,7 +816,7 @@ export default function CalendarioPage() {
 
               {/* Horas reales */}
               <Card className="p-6 border-t-4 border-t-cyan-500">
-                <h2 className="text-lg font-bold mb-6">Horas lectivas reales</h2>
+                <h2 className="text-subheading font-bold mb-6">Horas lectivas reales</h2>
                 <div className="grid grid-cols-3 gap-6 mb-6">
                   {[
                     { label: "1er trimestre", value: h1 },
@@ -824,9 +824,9 @@ export default function CalendarioPage() {
                     { label: "3er trimestre", value: h3 },
                   ].map(t => (
                     <div key={t.label}>
-                      <label className="block text-sm font-semibold text-muted mb-2 text-center">{t.label}</label>
+                      <label className="block text-body font-semibold text-muted mb-2 text-center">{t.label}</label>
                       <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-4 text-center">
-                        <div className="text-lg font-bold text-success font-mono">{t.value} h</div>
+                        <div className="text-subheading font-bold text-success font-mono">{t.value} h</div>
                       </div>
                     </div>
                   ))}
@@ -837,9 +837,9 @@ export default function CalendarioPage() {
                     { label: "Horas reales de clase", value: `${h_real} h`, cls: h_real < h_boa ? "text-warning" : "text-success" },
                   ].map(s => (
                     <div key={s.label}>
-                      <label className="block text-sm font-semibold text-muted mb-2 text-center">{s.label}</label>
+                      <label className="block text-body font-semibold text-muted mb-2 text-center">{s.label}</label>
                       <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-4 text-center">
-                        <div className={`text-lg font-bold ${s.cls}`}>{s.value}</div>
+                        <div className={`text-subheading font-bold ${s.cls}`}>{s.value}</div>
                       </div>
                     </div>
                   ))}
@@ -848,11 +848,11 @@ export default function CalendarioPage() {
 
               {/* FP Dual / FEOE - 5 columnas */}
               <Card className="p-6 border-t-4 border-t-orange-500 overflow-visible">
-                <h2 className="text-lg font-bold mb-6">FP Dual (FEOE)</h2>
+                <h2 className="text-subheading font-bold mb-6">FP Dual (FEOE)</h2>
                 <div className="grid grid-cols-5 gap-4 items-end">
                   {/* Col 1: Selector de tipo */}
                   <div>
-                    <label className="text-sm text-muted mb-2 block font-semibold">Tipo de dual</label>
+                    <label className="text-body text-muted mb-2 block font-semibold">Tipo de dual</label>
                     <select
                       value={info_fechas.tipo_dual || "general"}
                       onChange={e => {
@@ -872,7 +872,7 @@ export default function CalendarioPage() {
                   </div>
                   {/* Col 1.5: Selector de docencia */}
                   <div>
-                    <label className="text-sm text-muted mb-2 block font-semibold">Docencia</label>
+                    <label className="text-body text-muted mb-2 block font-semibold">Docencia</label>
                     <select
                       value={info_fechas.docencia_dual || (info_fechas.tipo_dual === "intensiva" ? "con_docencia" : "sin_docencia")}
                       onChange={e => handleUpdateFechas("docencia_dual", e.target.value)}
@@ -884,7 +884,7 @@ export default function CalendarioPage() {
                   </div>
                   {/* Col 2: Inicio */}
                   <div>
-                    <label className="text-sm text-muted mb-2 block font-semibold">Inicio FEOE</label>
+                    <label className="text-body text-muted mb-2 block font-semibold">Inicio FEOE</label>
                     <DatePicker
                       value={typeof info_fechas.ini_feoe === 'string' ? info_fechas.ini_feoe : ""}
                       onChange={v => handleUpdateFechas("ini_feoe", v)}
@@ -892,7 +892,7 @@ export default function CalendarioPage() {
                   </div>
                   {/* Col 3: Fin */}
                   <div>
-                    <label className="text-sm text-muted mb-2 block font-semibold">Fin FEOE</label>
+                    <label className="text-body text-muted mb-2 block font-semibold">Fin FEOE</label>
                     <DatePicker
                       value={typeof info_fechas.fin_feoe === 'string' ? info_fechas.fin_feoe : ""}
                       onChange={v => handleUpdateFechas("fin_feoe", v)}
@@ -900,7 +900,7 @@ export default function CalendarioPage() {
                   </div>
                   {/* Col 4: Horas/día */}
                   <div>
-                    <label className="text-sm text-muted mb-2 block font-semibold">Horas/día FEOE</label>
+                    <label className="text-body text-muted mb-2 block font-semibold">Horas/día FEOE</label>
                     <input
                       type="number"
                       value={Number(info_fechas.h_sem_feoe) || 8}
@@ -915,8 +915,8 @@ export default function CalendarioPage() {
 
               {activeTab === 'eventos' && (
                 <Card className="p-6 border-t-4 border-t-yellow-500 overflow-visible z-20 mt-4">
-                  <h2 className="text-lg font-bold mb-2"> Festivos y eventos</h2>
-                  <p className="text-muted text-sm mb-4">
+                  <h2 className="text-subheading font-bold mb-2"> Festivos y eventos</h2>
+                  <p className="text-muted text-body mb-4">
                     Introduce manualmente o haz clic en el calendario. Los festivos excluyen horas del cómputo real.
                   </p>
                   <NotesTable calendar_notes={calendar_notes} onUpdateNotes={handleUpdateNotes} />
@@ -926,7 +926,7 @@ export default function CalendarioPage() {
               {activeTab === 'actividades' && (
                 <Card className="p-6 border-t-4 border-t-[#14a085] mt-4">
                   <div className="overflow-x-auto mb-4">
-                    <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
+                    <table className="w-full text-left text-body border-collapse whitespace-nowrap">
                       <thead>
                         <tr className="border-b border-[var(--glass-border)] text-muted">
                           <th className="p-2 w-16">Id</th>
@@ -942,7 +942,7 @@ export default function CalendarioPage() {
                       <tbody>
                         {df_ace.map((row: any, idx: number) => (
                           <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5">
-                            <td className="p-2 font-mono text-xs">{row.ID}</td>
+                            <td className="p-2 font-mono text-caption">{row.ID}</td>
                             <td className="p-2 pr-2">
                               <select value={row.Tipo || "Complementaria"} onChange={e => updateRowAce(idx, "Tipo", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-[#14a085] focus:outline-none">
                                 <option value="Complementaria">Complementaria</option>
@@ -979,7 +979,7 @@ export default function CalendarioPage() {
                       </tbody>
                     </table>
                   </div>
-                  <button onClick={addRowAce} className="text-sm text-[#14a085] hover:text-[#1abc9c] font-semibold flex items-center gap-1">
+                  <button onClick={addRowAce} className="text-body text-[#14a085] hover:text-[#1abc9c] font-semibold flex items-center gap-1">
                     <span>+</span> Añadir actividad complementaria
                   </button>
                 </Card>

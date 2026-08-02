@@ -286,17 +286,17 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
   return (
     <div className="w-full flex flex-col z-40 sticky top-0 bg-background/95 backdrop-blur-xl border-b border-[var(--glass-border)] pb-2 shadow-md">
       {/* Fila 2: Buscar y Acciones */}
-      <div className="w-full px-4 md:px-6 py-2 bg-white/[0.02] border-t border-[var(--glass-border)] flex items-center justify-between gap-2 text-sm text-muted tracking-wide relative">
+      <div className="w-full px-4 md:px-6 py-2 bg-white/[0.02] border-t border-[var(--glass-border)] flex items-center justify-between gap-2 text-body text-muted tracking-wide relative">
         
           {mounted && (
             <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-3">
               <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-orange-500/10 border border-orange-500/30 rounded-lg text-orange-500 shrink-0 shadow-sm pointer-events-none">
                 <AlertTriangle className="w-4 h-4 shrink-0" strokeWidth={2.5} />
-                <span className="text-xs font-bold tracking-widest">{t('sidebar.en_obras')}</span>
+                <span className="text-caption font-bold tracking-widest">{t('sidebar.en_obras')}</span>
               </div>
               
               {dataSource === 'local' && (
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-foreground/5 text-xs font-medium text-muted/80 whitespace-nowrap border border-[var(--glass-border)] shadow-sm pointer-events-none">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-foreground/5 text-caption font-medium text-muted/80 whitespace-nowrap border border-[var(--glass-border)] shadow-sm pointer-events-none">
                   {syncStatus === 'saving' && <><Hourglass className="w-3.5 h-3.5 text-warning animate-spin" /><span className="text-warning">{t('header.guardando', { defaultValue: 'Guardando...' })}</span></>}
                   {syncStatus === 'saved' && <><Save className="w-3.5 h-3.5 text-success" /><span className="text-success">{t('header.guardado', { defaultValue: 'Guardado' })}</span></>}
                   {syncStatus === 'error' && <><AlertTriangle className="w-3.5 h-3.5 text-danger" /><span className="text-danger">{t('header.error', { defaultValue: 'Error' })}</span></>}
@@ -340,14 +340,14 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
               }}
               onFocus={() => setShowResults(searchResults.length > 0)}
               onBlur={() => setTimeout(() => setShowResults(false), 200)}
-              className="bg-foreground/5 border border-[var(--glass-border)] rounded-lg px-3 py-1.5 text-xs text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-accent/50 w-full"
+              className="bg-foreground/5 border border-[var(--glass-border)] rounded-lg px-3 py-1.5 text-caption text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-accent/50 w-full"
             />
             {showResults && searchResults.length > 0 && (
               <div className="absolute top-full left-0 mt-1 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto w-64">
                 {searchResults.map((result, index) => (
                   <div
                     key={index}
-                    className="px-3 py-2 hover:bg-foreground/10 cursor-pointer text-sm"
+                    className="px-3 py-2 hover:bg-foreground/10 cursor-pointer text-body"
                     onClick={() => {
                       if (result.href) {
                         router.push(result.href);
@@ -358,7 +358,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
                   >
                     <div className="font-medium text-[var(--text-primary)]">{result.title}</div>
                     {result.subtitle && (
-                      <div className="text-xs text-[var(--text-muted)]">{result.subtitle}</div>
+                      <div className="text-caption text-[var(--text-muted)]">{result.subtitle}</div>
                     )}
                   </div>
                 ))}
@@ -399,7 +399,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
       {title && (
         <header className="w-full flex items-center justify-center px-8 pt-4 pb-2">
           <div className="border-2 border-[#14a085] rounded-xl px-8 py-3 shadow-[0_4px_15px_rgba(20,160,133,0.1)] bg-background/50 backdrop-blur-sm">
-            <h2 className="text-2xl whitespace-nowrap font-extrabold tracking-tight primary-gradient-text m-0 leading-none">
+            <h2 className="text-heading whitespace-nowrap font-extrabold tracking-tight primary-gradient-text m-0 leading-none">
               {title}
             </h2>
           </div>

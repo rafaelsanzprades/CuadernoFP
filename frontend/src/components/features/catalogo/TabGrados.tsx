@@ -66,7 +66,7 @@ export function TabGrados() {
       {/* Cabecera */}
       {/* Tarjetas de grados */}
       <Card className="p-6">
-        <h2 className="text-lg font-bold text-foreground mb-6 flex items-center gap-2">
+        <h2 className="text-subheading font-bold text-foreground mb-6 flex items-center gap-2">
           <Layers className="w-6 h-6 text-accent" /> Grados del A al E
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
@@ -84,14 +84,14 @@ export function TabGrados() {
                 <span className="absolute top-3 right-3 w-3 h-3 rounded-full bg-accent animate-pulse" />
               )}
               <div className="flex items-center gap-3 mb-3">
-                <span className="text-2xl">{g.icon}</span>
+                <span className="text-heading">{g.icon}</span>
                 <div>
-                  <span className="text-sm font-bold tracking-wider opacity-70">Grado {g.grado}</span>
-                  <h3 className="text-sm font-bold text-foreground leading-tight">{g.nombre}</h3>
+                  <span className="text-body font-bold tracking-wider opacity-70">Grado {g.grado}</span>
+                  <h3 className="text-body font-bold text-foreground leading-tight">{g.nombre}</h3>
                 </div>
               </div>
-              <p className="text-sm text-muted leading-relaxed">{g.descripcion}</p>
-              <p className="text-sm font-semibold text-muted/80 mt-3 font-mono">{g.normativa}</p>
+              <p className="text-body text-muted leading-relaxed">{g.descripcion}</p>
+              <p className="text-body font-semibold text-muted/80 mt-3 font-mono">{g.normativa}</p>
             </button>
           ))}
         </div>

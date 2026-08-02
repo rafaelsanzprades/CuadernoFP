@@ -13,7 +13,7 @@ export default function EstadisticasTab() {
     return (
       <div className="p-12 text-center bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
         <AlertTriangle className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-50" />
-        <h2 className="text-2xl font-bold">No hay curso activo</h2>
+        <h2 className="text-heading font-bold">No hay curso activo</h2>
         <p className="text-muted">Abre un archivo de curso para ver sus estadísticas.</p>
       </div>
     );
@@ -32,13 +32,13 @@ export default function EstadisticasTab() {
   let ageDist = { "<18": 0, "18-21": 0, "22-25": 0, ">25": 0 };
   
   activeAlumnos.forEach(al => {
-    if (al.Repite === "Sí" || al.Repite === "Si" || al.Repite === "true") {
+    if (al.Repite) {
       totalRepeaters++;
     } else {
       totalNew++;
     }
-    const age = parseInt(al.Edad || "");
-    if (!isNaN(age)) {
+    const age = al.Edad;
+    if (age != null) {
       if (age < 18) ageDist["<18"]++;
       else if (age <= 21) ageDist["18-21"]++;
       else if (age <= 25) ageDist["22-25"]++;
@@ -137,7 +137,7 @@ export default function EstadisticasTab() {
       <div className="space-y-6 animate-in fade-in duration-500">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight mb-2 flex items-center gap-3">
+            <h1 className="text-heading font-bold tracking-tight mb-2 flex items-center gap-3">
               <BarChart3 className="w-8 h-8 text-accent" /> Dashboard de Analítica
             </h1>
             <p className="text-muted">
@@ -150,7 +150,7 @@ export default function EstadisticasTab() {
               <button
                 key={t}
                 onClick={() => setEvalPeriod(t as any)}
-                className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${
+                className={`px-4 py-1.5 text-body font-medium rounded-md transition-all ${
                   evalPeriod === t 
                     ? "bg-primary text-primary-foreground shadow-sm" 
                     : "text-muted hover:text-foreground hover:bg-foreground/5"
@@ -165,26 +165,26 @@ export default function EstadisticasTab() {
         {/* Fila de Tarjetas Resumen */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="bg-foreground/5 border border-[var(--glass-border)] p-6 rounded-xl text-center">
-            <p className="text-muted text-sm mb-2">Alumnos Matriculados</p>
-            <p className="text-2xl font-bold text-foreground">{alumnosIds.length}</p>
+            <p className="text-muted text-body mb-2">Alumnos Matriculados</p>
+            <p className="text-heading font-bold text-foreground">{alumnosIds.length}</p>
           </div>
           <div className="bg-foreground/5 border border-[var(--glass-border)] p-6 rounded-xl text-center">
-            <p className="text-muted text-sm mb-2">Tasa de Aprobados ({evalPeriod})</p>
-            <p className="text-2xl font-bold text-emerald-500">
+            <p className="text-muted text-body mb-2">Tasa de Aprobados ({evalPeriod})</p>
+            <p className="text-heading font-bold text-emerald-500">
               {alumnosIds.length > 0 ? Math.round((aprobados / (aprobados+suspensos || 1)) * 100) : 0}%
             </p>
           </div>
           <div className="bg-foreground/5 border border-[var(--glass-border)] p-6 rounded-xl text-center">
-            <p className="text-muted text-sm mb-2">Tasa de Repetidores</p>
-            <p className="text-2xl font-bold text-amber-500">
+            <p className="text-muted text-body mb-2">Tasa de Repetidores</p>
+            <p className="text-heading font-bold text-amber-500">
               {alumnosIds.length > 0 ? Math.round((totalRepeaters / alumnosIds.length) * 100) : 0}%
             </p>
           </div>
           <div className="bg-foreground/5 border border-[var(--glass-border)] p-6 rounded-xl text-center">
-            <p className="text-muted text-sm mb-2">Edad Media</p>
-            <p className="text-2xl font-bold text-blue-500">
+            <p className="text-muted text-body mb-2">Edad Media</p>
+            <p className="text-heading font-bold text-blue-500">
               {(() => {
-                const ages = activeAlumnos.map(a => parseInt(a.Edad || "")).filter(n => !isNaN(n));
+                const ages = activeAlumnos.map(a => a.Edad).filter((n): n is number => n != null);
                 if (ages.length === 0) return "-";
                 return Math.round(ages.reduce((a,b)=>a+b,0) / ages.length);
               })()}
@@ -196,7 +196,7 @@ export default function EstadisticasTab() {
           
           {/* Distribución de Calificaciones */}
           <div className="glass-card p-6 border-t-4 border-t-purple-500 flex flex-col">
-            <h3 className="text-lg font-bold flex items-center gap-2 mb-4">
+            <h3 className="text-subheading font-bold flex items-center gap-2 mb-4">
               <TrendingUp className="w-5 h-5 text-purple-500" /> Histograma de Calificaciones ({evalPeriod})
             </h3>
             <div className="flex-1 min-h-[300px]">
@@ -221,12 +221,12 @@ export default function EstadisticasTab() {
 
           {/* Demografía: Repetidores y Edad */}
           <div className="glass-card p-6 border-t-4 border-t-amber-500 flex flex-col">
-            <h3 className="text-lg font-bold flex items-center gap-2 mb-4">
+            <h3 className="text-subheading font-bold flex items-center gap-2 mb-4">
               <Users className="w-5 h-5 text-amber-500" /> Composición del Aula
             </h3>
             <div className="flex-1 grid grid-cols-2 gap-4 min-h-[300px]">
               <div className="flex flex-col items-center justify-center">
-                 <h4 className="text-sm font-semibold text-muted mb-2 text-center">Matrícula ordinaria</h4>
+                 <h4 className="text-body font-semibold text-muted mb-2 text-center">Matrícula ordinaria</h4>
                   <ResponsiveContainer width="100%" height="100%">
                     <RePieChart>
                       <Pie
@@ -245,7 +245,7 @@ export default function EstadisticasTab() {
                   </ResponsiveContainer>
               </div>
               <div className="flex flex-col items-center justify-center">
-                 <h4 className="text-sm font-semibold text-muted mb-2 text-center">Distribución de edad</h4>
+                 <h4 className="text-body font-semibold text-muted mb-2 text-center">Distribución de edad</h4>
                  <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={ageStats} layout="vertical">
                       <CartesianGrid strokeDasharray="3 3" stroke="#ffffff20" horizontal={false} />
@@ -262,10 +262,10 @@ export default function EstadisticasTab() {
 
         {/* Barras de RAs */}
         <div className="glass-card p-6 border-t-4 border-t-blue-500 flex flex-col">
-          <h3 className="text-lg font-bold flex items-center gap-2 mb-4">
+          <h3 className="text-subheading font-bold flex items-center gap-2 mb-4">
             <TrendingUp className="w-5 h-5 text-blue-500" /> Rendimiento Medio por Resultado de Aprendizaje
           </h3>
-          <p className="text-sm text-muted mb-4">
+          <p className="text-body text-muted mb-4">
             Muestra la asimilación global de cada bloque competencial (RA) en el grupo. Permite detectar "cuellos de botella" en el aprendizaje.
           </p>
           <div className="flex-1 min-h-[300px]">

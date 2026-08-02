@@ -29,7 +29,7 @@ export const TodayClasses = () => {
 
     return (
       <MotionWrapper className="glass-panel p-6 border-l-4 border-l-gray-400">
-        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-2">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-2">
           <Calendar className="w-6 h-6" /> Tus Clases de Hoy ({formattedToday})
         </h2>
         <p className="text-muted">{reason}</p>
@@ -46,7 +46,7 @@ export const TodayClasses = () => {
         <BookOpen className="w-48 h-48" />
       </div>
       
-      <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4 relative z-10">
+      <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4 relative z-10">
         <Calendar className="w-6 h-6 text-accent" /> Tus Clases de Hoy ({formattedToday})
       </h2>
       
@@ -54,19 +54,19 @@ export const TodayClasses = () => {
         {/* UD Info Card */}
         <div className="bg-background/40 p-5 rounded-xl border border-[var(--glass-border)] flex flex-col justify-between">
           <div>
-            <div className="text-xs text-accent font-bold tracking-wider mb-2 flex items-center gap-1.5">
+            <div className="text-caption text-accent font-bold tracking-wider mb-2 flex items-center gap-1.5">
               <Layers className="w-3.5 h-3.5" /> Unidad didáctica
             </div>
-            <div className="font-bold text-lg text-foreground">{udDesc || udId}</div>
+            <div className="font-bold text-subheading text-foreground">{udDesc || udId}</div>
           </div>
-          <div className="text-sm text-muted mt-4 pt-3 border-t border-[var(--glass-border)]">
+          <div className="text-body text-muted mt-4 pt-3 border-t border-[var(--glass-border)]">
             Horas totales UD: <span className="font-semibold text-foreground">{udHoy?.horas_ud || 0}h</span>
           </div>
         </div>
 
         {/* Sessions list */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="text-xs text-accent font-bold tracking-wider">
+          <div className="text-caption text-accent font-bold tracking-wider">
             Sesiones Planificadas ({sessions.length})
           </div>
           {sessions.map((ses, idx) => (
@@ -75,19 +75,19 @@ export const TodayClasses = () => {
                 <div className="font-bold text-foreground">
                   Sesión {ses.Num_Orden}: {ses.Tipo_Actividad}
                 </div>
-                <div className="flex items-center gap-1.5 text-xs font-semibold bg-accent/15 text-accent px-2 py-0.5 rounded-full border border-accent/25">
+                <div className="flex items-center gap-1.5 text-caption font-semibold bg-accent/15 text-accent px-2 py-0.5 rounded-full border border-accent/25">
                   <Clock className="w-3.5 h-3.5" /> {ses.Horas}h
                 </div>
               </div>
               
               {ses.Contenidos && (
-                <div className="text-sm text-muted">
+                <div className="text-body text-muted">
                   <span className="font-semibold text-foreground/80">Contenidos:</span> {ses.Contenidos}
                 </div>
               )}
               
               {ses.Recursos && (
-                <div className="text-xs text-muted/80 bg-foreground/5 p-2 rounded border border-[var(--glass-border)] italic">
+                <div className="text-caption text-muted/80 bg-foreground/5 p-2 rounded border border-[var(--glass-border)] italic">
                   <span className="font-semibold text-foreground/70 not-italic">Recursos:</span> {ses.Recursos}
                 </div>
               )}

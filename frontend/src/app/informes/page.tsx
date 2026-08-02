@@ -374,7 +374,7 @@ export default function InformesPage() {
                 {(!activeCursoId || !activeModuleId) ? (
                   <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                     <FileText className="w-16 h-16 text-muted-foreground opacity-50" />
-                    <h2 className="text-2xl font-bold">No hay curso ni programación cargada</h2>
+                    <h2 className="text-heading font-bold">No hay curso ni programación cargada</h2>
                     <p className="text-muted mb-4">Debes abrir o crear un archivo de programación y curso en tu Archivos.</p>
                     <Link href="/archivos">
                       <Button variant="primary" className="gap-2">
@@ -397,13 +397,13 @@ export default function InformesPage() {
                     {activeTab === 'curso' && (
                       <div className="space-y-4 animate-in fade-in duration-500">
                         <Card className="p-6 border-t-4 border-t-emerald-500">
-                          <h2 className="text-2xl font-bold mb-1"><span className="inline-flex"><Calendar className="w-4 h-4" /></span> Grupo</h2>
-                          <p className="text-sm text-muted mb-6">Gestión del grupo</p>
+                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Calendar className="w-4 h-4" /></span> Grupo</h2>
+                          <p className="text-body text-muted mb-6">Gestión del grupo</p>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                               <div>
-                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><CalendarDays className="w-[1.2em] h-[1.2em] mr-1" /></span> Calendario académico</h3>
-                                <p className="text-sm text-muted mb-6">Vista global del curso con fechas, sesiones y eventos.</p>
+                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><CalendarDays className="w-[1.2em] h-[1.2em] mr-1" /></span> Calendario académico</h3>
+                                <p className="text-body text-muted mb-6">Vista global del curso con fechas, sesiones y eventos.</p>
                               </div>
                               <Button onClick={() => handleDownloadPdf('calendario')} disabled={downloadingStr === 'calendario'} className="w-full">
                                 {downloadingStr === 'calendario' ? '⏳ Generando PDF...' : 'PDF Calendario'}
@@ -411,8 +411,8 @@ export default function InformesPage() {
                             </div>
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                               <div>
-                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Alumnado. Ubicación en el aula</h3>
-                                <p className="text-sm text-muted mb-6">Distribución y ubicación del alumnado en el aula.</p>
+                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Alumnado. Ubicación en el aula</h3>
+                                <p className="text-body text-muted mb-6">Distribución y ubicación del alumnado en el aula.</p>
                               </div>
                               <Button onClick={() => handleDownloadPdf('alumnado_ubicacion')} disabled={downloadingStr === 'alumnado_ubicacion'} className="w-full">
                                 {downloadingStr === 'alumnado_ubicacion' ? '⏳ Generando PDF...' : 'PDF Alumnado Ubicación'}
@@ -422,13 +422,13 @@ export default function InformesPage() {
                         </Card>
 
                         <Card className="p-6 border-t-4 border-t-emerald-500">
-                          <h2 className="text-2xl font-bold mb-1"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Clases mensual - por UD</h2>
-                          <p className="text-sm text-muted mb-6">Registro detallado de clases impartidas y secuenciación por unidad didáctica.</p>
+                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Clases mensual - por UD</h2>
+                          <p className="text-body text-muted mb-6">Registro detallado de clases impartidas y secuenciación por unidad didáctica.</p>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                               <div>
-                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguimiento diario</h3>
-                                <p className="text-sm text-muted mb-6">Registro detallado de la planificación del día a día.</p>
+                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguimiento diario</h3>
+                                <p className="text-body text-muted mb-6">Registro detallado de la planificación del día a día.</p>
                               </div>
                               <Button onClick={() => handleDownloadPdf('seguimiento')} disabled={downloadingStr === 'seguimiento'} className="w-full">
                                 {downloadingStr === 'seguimiento' ? '⏳ Generando PDF...' : 'PDF Seguimiento'}
@@ -436,8 +436,8 @@ export default function InformesPage() {
                             </div>
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                               <div>
-                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Clases por UD</h3>
-                                <p className="text-sm text-muted mb-6">Secuenciación de sesiones de cada Unidad didáctica.</p>
+                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Clases por UD</h3>
+                                <p className="text-body text-muted mb-6">Secuenciación de sesiones de cada Unidad didáctica.</p>
                               </div>
                               <Button onClick={() => handleDownloadPdf('clases_ud')} disabled={downloadingStr === 'clases_ud'} className="w-full">
                                 {downloadingStr === 'clases_ud' ? '⏳ Generando PDF...' : 'PDF Clases por UD'}
@@ -447,27 +447,27 @@ export default function InformesPage() {
                         </Card>
 
                         <Card className="p-6 border-t-4 border-t-blue-500">
-                          <h2 className="text-2xl font-bold mb-6"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletines grupales trimestrales</h2>
+                          <h2 className="text-heading font-bold mb-6"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletines grupales trimestrales</h2>
                           
                           {/* Primera fila: 3 Trimestres */}
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
                               <div>
-                                <h3 className="text-lg font-bold mb-1"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> 1er trimestre</h3>
-                                <div className="text-xs text-muted mb-2">
+                                <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> 1er trimestre</h3>
+                                <div className="text-caption text-muted mb-2">
                                   Inicio: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.ini_1t)}</span><br/>
                                   Fin: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.fin_1t)}</span>
                                 </div>
                               </div>
                               <div className="text-left mt-auto">
-                                <label htmlFor="fecha-corte-1t" className="block text-xs text-muted mb-1 font-bold">Fecha de corte / acta:</label>
-                                <input id="fecha-corte-1t" type="date" value={fecha1T} onChange={(e) => setFecha1T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-sm focus:border-info focus:outline-none" />
+                                <label htmlFor="fecha-corte-1t" className="block text-caption text-muted mb-1 font-bold">Fecha de corte / acta:</label>
+                                <input id="fecha-corte-1t" type="date" value={fecha1T} onChange={(e) => setFecha1T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-body focus:border-info focus:outline-none" />
                               </div>
                               <div className="flex flex-col gap-2 mt-2">
-                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_1t', undefined, fecha1T)} disabled={downloadingStr === 'grupal_1t'} className="w-full text-xs">
+                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_1t', undefined, fecha1T)} disabled={downloadingStr === 'grupal_1t'} className="w-full text-caption">
                                   {downloadingStr === 'grupal_1t' ? '⏳' : 'PDF Boletín'}
                                 </Button>
-                                <Button variant="ghost" onClick={() => handleExportCSV('1T', fecha1T)} className="w-full border border-success/30 text-success hover:bg-success/10 text-xs flex items-center justify-center gap-2">
+                                <Button variant="ghost" onClick={() => handleExportCSV('1T', fecha1T)} className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
                                   <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
                                 </Button>
                               </div>
@@ -475,21 +475,21 @@ export default function InformesPage() {
                             
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
                               <div>
-                                <h3 className="text-lg font-bold mb-1"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> 2º trimestre</h3>
-                                <div className="text-xs text-muted mb-2">
+                                <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> 2º trimestre</h3>
+                                <div className="text-caption text-muted mb-2">
                                   Inicio: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.ini_2t)}</span><br/>
                                   Fin: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.fin_2t)}</span>
                                 </div>
                               </div>
                               <div className="text-left mt-auto">
-                                <label htmlFor="fecha-corte-2t" className="block text-xs text-muted mb-1 font-bold">Fecha de corte / acta:</label>
-                                <input id="fecha-corte-2t" type="date" value={fecha2T} onChange={(e) => setFecha2T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-sm focus:border-info focus:outline-none" />
+                                <label htmlFor="fecha-corte-2t" className="block text-caption text-muted mb-1 font-bold">Fecha de corte / acta:</label>
+                                <input id="fecha-corte-2t" type="date" value={fecha2T} onChange={(e) => setFecha2T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-body focus:border-info focus:outline-none" />
                               </div>
                               <div className="flex flex-col gap-2 mt-2">
-                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_2t', undefined, fecha2T)} disabled={downloadingStr === 'grupal_2t'} className="w-full text-xs">
+                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_2t', undefined, fecha2T)} disabled={downloadingStr === 'grupal_2t'} className="w-full text-caption">
                                   {downloadingStr === 'grupal_2t' ? '⏳' : 'PDF Boletín'}
                                 </Button>
-                                <Button variant="ghost" onClick={() => handleExportCSV('2T', fecha2T)} className="w-full border border-success/30 text-success hover:bg-success/10 text-xs flex items-center justify-center gap-2">
+                                <Button variant="ghost" onClick={() => handleExportCSV('2T', fecha2T)} className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
                                   <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
                                 </Button>
                               </div>
@@ -497,21 +497,21 @@ export default function InformesPage() {
                             
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
                               <div>
-                                <h3 className="text-lg font-bold mb-1"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> 3er trimestre</h3>
-                                <div className="text-xs text-muted mb-2">
+                                <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> 3er trimestre</h3>
+                                <div className="text-caption text-muted mb-2">
                                   Inicio: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.ini_3t)}</span><br/>
                                   Fin: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.fin_3t)}</span>
                                 </div>
                               </div>
                               <div className="text-left mt-auto">
-                                <label htmlFor="fecha-corte-3t" className="block text-xs text-muted mb-1 font-bold">Fecha de corte / acta:</label>
-                                <input id="fecha-corte-3t" type="date" value={fecha3T} onChange={(e) => setFecha3T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-sm focus:border-info focus:outline-none" />
+                                <label htmlFor="fecha-corte-3t" className="block text-caption text-muted mb-1 font-bold">Fecha de corte / acta:</label>
+                                <input id="fecha-corte-3t" type="date" value={fecha3T} onChange={(e) => setFecha3T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-body focus:border-info focus:outline-none" />
                               </div>
                               <div className="flex flex-col gap-2 mt-2">
-                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_3t', undefined, fecha3T)} disabled={downloadingStr === 'grupal_3t'} className="w-full text-xs">
+                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_3t', undefined, fecha3T)} disabled={downloadingStr === 'grupal_3t'} className="w-full text-caption">
                                   {downloadingStr === 'grupal_3t' ? '⏳' : 'PDF Boletín'}
                                 </Button>
-                                <Button variant="ghost" onClick={() => handleExportCSV('3T', fecha3T)} className="w-full border border-success/30 text-success hover:bg-success/10 text-xs flex items-center justify-center gap-2">
+                                <Button variant="ghost" onClick={() => handleExportCSV('3T', fecha3T)} className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
                                   <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
                                 </Button>
                               </div>
@@ -522,17 +522,17 @@ export default function InformesPage() {
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
                               <div>
-                                <h3 className="text-lg font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Evaluación final ordinaria</h3>
-                                <div className="text-xs text-muted mb-2">
+                                <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Evaluación final ordinaria</h3>
+                                <div className="text-caption text-muted mb-2">
                                   Inicio: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.ini_final)}</span><br/>
                                   Fin: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.fin_final)}</span>
                                 </div>
                               </div>
                               <div className="flex flex-col gap-2 mt-auto">
-                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_final', undefined, fechaFinal)} disabled={downloadingStr === 'grupal_final'} className="w-full text-xs">
+                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_final', undefined, fechaFinal)} disabled={downloadingStr === 'grupal_final'} className="w-full text-caption">
                                   {downloadingStr === 'grupal_final' ? '⏳' : 'PDF Boletín'}
                                 </Button>
-                                <Button variant="ghost" onClick={() => handleExportCSV('Final', fechaFinal)} className="w-full border border-success/30 text-success hover:bg-success/10 text-xs flex items-center justify-center gap-2">
+                                <Button variant="ghost" onClick={() => handleExportCSV('Final', fechaFinal)} className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
                                   <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
                                 </Button>
                               </div>
@@ -540,18 +540,18 @@ export default function InformesPage() {
                             
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
                               <div>
-                                <h3 className="text-lg font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Eval. Final Extraordinaria</h3>
-                                <div className="text-xs text-muted mb-2">
+                                <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Eval. Final Extraordinaria</h3>
+                                <div className="text-caption text-muted mb-2">
                                   Inicio: <span className="font-mono text-foreground">---</span><br/>
                                   Fin: <span className="font-mono text-foreground">---</span>
                                 </div>
-                                <p className="text-xs text-muted italic mt-2">Próximamente disponible</p>
+                                <p className="text-caption text-muted italic mt-2">Próximamente disponible</p>
                               </div>
                               <div className="flex flex-col gap-2 mt-auto">
-                                <Button variant="secondary" disabled className="w-full text-xs">
+                                <Button variant="secondary" disabled className="w-full text-caption">
                                   PDF Boletín Extraordinaria
                                 </Button>
-                                <Button variant="ghost" disabled className="w-full border border-success/30 text-success hover:bg-success/10 text-xs flex items-center justify-center gap-2">
+                                <Button variant="ghost" disabled className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
                                   <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
                                 </Button>
                               </div>
@@ -560,12 +560,12 @@ export default function InformesPage() {
                         </Card>
 
                         <Card className="p-6 border-t-4 border-t-blue-500">
-                          <h2 className="text-2xl font-bold mb-6"><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletines individuales</h2>
+                          <h2 className="text-heading font-bold mb-6"><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletines individuales</h2>
                           {activeAlumnado.length > 0 ? (
                             <div className="flex flex-col md:flex-row md:items-end gap-6 bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6">
                               <div className="flex-1">
-                                <h3 className="text-lg font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletín de alumnado</h3>
-                                <p className="text-sm text-muted mb-4">Genera un boletín detallado de un alumnado específico.</p>
+                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletín de alumnado</h3>
+                                <p className="text-body text-muted mb-4">Genera un boletín detallado de un alumnado específico.</p>
                                 <select id="alumnado_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold">
                                   {activeAlumnado.map((al: Alumnado) => (
                                     <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre} ({al.ID})</option>

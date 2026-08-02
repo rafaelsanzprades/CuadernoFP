@@ -66,7 +66,7 @@ export function TutoriaTab() {
               <button
                 key={al.ID}
                 onClick={() => setSelectedAlId(al.ID)}
-                className={`w-full text-left px-3 py-2 rounded transition-all text-sm flex justify-between items-center border border-transparent ${
+                className={`w-full text-left px-3 py-2 rounded transition-all text-body flex justify-between items-center border border-transparent ${
                   selectedAlId === al.ID 
                     ? 'border-accent text-foreground font-semibold bg-accent/5 shadow-sm' 
                     : 'hover:bg-foreground/10 text-muted'
@@ -74,7 +74,7 @@ export function TutoriaTab() {
               >
                 <span className="truncate">{al.Apellidos}, {al.Nombre}</span>
                 {hasNotes && (
-                  <span className={`text-xs px-2 rounded-full ${selectedAlId === al.ID ? 'bg-black/20' : 'bg-accent/20 text-accent'}`}>
+                  <span className={`text-caption px-2 rounded-full ${selectedAlId === al.ID ? 'bg-black/20' : 'bg-accent/20 text-accent'}`}>
                     {getTutorias(al.ID).length}
                   </span>
                 )}
@@ -89,7 +89,7 @@ export function TutoriaTab() {
         {selectedAlId ? (
           <>
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-foreground">
+              <h2 className="text-heading font-bold text-foreground">
                 Registro de tutoría: <span>{df_al.find((a:any) => a.ID === selectedAlId)?.Nombre} {df_al.find((a:any) => a.ID === selectedAlId)?.Apellidos}</span>
               </h2>
               <Button onClick={handleAddTutoria} variant="primary" className="gap-2">
@@ -102,7 +102,7 @@ export function TutoriaTab() {
                 <div className="text-center py-12 text-muted flex flex-col items-center justify-center h-full">
                   <ClipboardList className="w-16 h-16 opacity-20 mb-4" />
                   <p>No hay registros de tutoría para este estudiante.</p>
-                  <p className="text-sm mt-2 opacity-70">Pulsa "Añadir Registro" para comenzar.</p>
+                  <p className="text-body mt-2 opacity-70">Pulsa "Añadir Registro" para comenzar.</p>
                 </div>
               ) : (
                 getTutorias(selectedAlId).map((tut: any, idx: number) => (
@@ -117,7 +117,7 @@ export function TutoriaTab() {
                     
                     <div className="flex flex-wrap gap-4 mb-4 pr-8">
                       <div className="flex-1 min-w-[150px]">
-                        <label className="block text-xs text-muted-foreground font-bold mb-1">Fecha</label>
+                        <label className="block text-caption text-muted-foreground font-bold mb-1">Fecha</label>
                         <input 
                           type="date" 
                           value={tut.fecha || ""} 
@@ -126,7 +126,7 @@ export function TutoriaTab() {
                         />
                       </div>
                       <div className="flex-1 min-w-[150px]">
-                        <label className="block text-xs text-muted-foreground font-bold mb-1">Ámbito</label>
+                        <label className="block text-caption text-muted-foreground font-bold mb-1">Ámbito</label>
                         <select 
                           value={tut.ambito || "Alumno/a"} 
                           onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "ambito", e.target.value)}
@@ -139,7 +139,7 @@ export function TutoriaTab() {
                         </select>
                       </div>
                       <div className="flex-1 min-w-[150px]">
-                        <label className="block text-xs text-muted-foreground font-bold mb-1">Canal</label>
+                        <label className="block text-caption text-muted-foreground font-bold mb-1">Canal</label>
                         <select 
                           value={tut.canal || "Presencial"} 
                           onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "canal", e.target.value)}
@@ -156,7 +156,7 @@ export function TutoriaTab() {
 
                     <div className="space-y-3">
                       <div>
-                        <label className="block text-xs text-muted-foreground font-bold mb-1">Tema tratado / Desarrollo</label>
+                        <label className="block text-caption text-muted-foreground font-bold mb-1">Tema tratado / Desarrollo</label>
                         <textarea 
                           value={tut.tema || ""}
                           onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "tema", e.target.value)}
@@ -165,7 +165,7 @@ export function TutoriaTab() {
                         />
                       </div>
                       <div>
-                        <label className="block text-xs text-success font-bold mb-1">Acuerdos / Compromisos</label>
+                        <label className="block text-caption text-success font-bold mb-1">Acuerdos / Compromisos</label>
                         <textarea 
                           value={tut.acuerdos || ""}
                           onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "acuerdos", e.target.value)}

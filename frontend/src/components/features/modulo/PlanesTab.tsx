@@ -1,6 +1,7 @@
 "use client";
-import { Bus, Puzzle, Shield , Info } from "lucide-react";
+import { Bus, Puzzle, Shield, Info, Building2 } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
+import { NarrativeField } from "@/components/ui/NarrativeField";
 
 export function PlanesTab() {
   const { moduleData, updateDataFrame, updateModuleData } = useAppStore();
@@ -47,11 +48,11 @@ export function PlanesTab() {
       <div className="space-y-8 animate-in fade-in duration-500">
       {/* DUA */}
       <section className="glass-card p-6 border-t-4 border-t-emerald-500">
-        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
           <span className="inline-flex"><Puzzle className="w-[1.2em] h-[1.2em] mr-1" /></span> Plan de Atención a la diversidad
         </h2>
         <div className="overflow-x-auto mb-4">
-          <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
+          <table className="w-full text-left text-body border-collapse whitespace-nowrap">
             <thead>
               <tr className="border-b border-[var(--glass-border)] text-muted">
                 <th className="p-2 w-16">Id</th>
@@ -66,7 +67,7 @@ export function PlanesTab() {
             <tbody>
               {df_dua.map((row: any, idx: number) => (
                 <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5">
-                  <td className="p-2 font-mono text-xs">{row.ID}</td>
+                  <td className="p-2 font-mono text-caption">{row.ID}</td>
                   <td className="p-2 pr-2">
                     <input type="text" value={row.Alumnado_Aula || ""} onChange={e => updateRow(df_dua, "df_dua", idx, "Alumnado_Aula", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-success focus:outline-none" />
                   </td>
@@ -90,12 +91,29 @@ export function PlanesTab() {
             </tbody>
           </table>
         </div>
-        <button onClick={() => addRow(df_dua, "df_dua", "DUA", { Alumnado_Aula: "", Barrera: "", Medida_Metodologica: "", Medida_Acceso: "", Medida_Evaluacion: "" })} className="text-sm text-success hover:text-success font-semibold flex items-center gap-1">
+        <button onClick={() => addRow(df_dua, "df_dua", "DUA", { Alumnado_Aula: "", Barrera: "", Medida_Metodologica: "", Medida_Acceso: "", Medida_Evaluacion: "" })} className="text-body text-success hover:text-success font-semibold flex items-center gap-1">
           <span>+</span> Añadir medida de Diversidad
         </button>
       </section>
 
-
+      {/* FEOE */}
+      <section className="glass-card p-6 border-t-4 border-t-blue-500">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
+          <span className="inline-flex"><Building2 className="w-[1.2em] h-[1.2em] mr-1" /></span> FEOE. Formación en Empresa u Organismo Equiparado
+        </h2>
+        <div className="space-y-6">
+          <NarrativeField
+            id="textos_pd_feoe_organizacion"
+            title="Organización y modalidad de FEOE"
+            description="Detalla cómo se organiza el alumnado (FEOE general, intensivo) y qué alternativas hay para el alumnado sin FEOE."
+          />
+          <NarrativeField
+            id="textos_pd_feoe_seguimiento"
+            title="Seguimiento de FEOE"
+            description="Procedimiento para el seguimiento en la empresa y comunicación con tutores duales."
+          />
+        </div>
+      </section>
 
     </div>
     </>

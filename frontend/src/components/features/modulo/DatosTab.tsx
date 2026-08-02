@@ -147,7 +147,7 @@ export function DatosTab() {
       
       {/* 1. Centro y docente */}
       <Card className="p-6">
-        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-5">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-5">
 <span>‍<span className="inline-flex"><School className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Centro y docente
 </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -194,7 +194,7 @@ export function DatosTab() {
 
       {/* 2. Módulo didáctico */}
       <Card className="p-6">
-        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-5">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-5">
 <span><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Módulo didáctico
 </h2>
 
@@ -299,9 +299,9 @@ export function DatosTab() {
 
       {/* 5. Evaluación */}
       <Card className="p-6 border-l-4 border-l-accent">
-        <h4 className="text-lg font-bold text-foreground mb-6 flex items-center justify-between">
+        <h4 className="text-subheading font-bold text-foreground mb-6 flex items-center justify-between">
           <span className="flex items-center gap-2"><span><span className="inline-flex"><Scale className="w-[1.2em] h-[1.2em] mr-1" /></span></span> % Ponderación por trimestres</span>
-          <span className={`text-sm font-semibold px-3 py-1 rounded-full ${sumaTrimestres === 100 ? 'bg-success/10 text-success border border-success/30' : 'bg-danger/10 text-danger border border-danger/30'}`}>
+          <span className={`text-body font-semibold px-3 py-1 rounded-full ${sumaTrimestres === 100 ? 'bg-success/10 text-success border border-success/30' : 'bg-danger/10 text-danger border border-danger/30'}`}>
             {sumaTrimestres}% {sumaTrimestres !== 100 && "(Debe sumar 100%)"}
           </span>
         </h4>
@@ -318,9 +318,9 @@ export function DatosTab() {
       </Card>
 
       <Card className="p-6 border-l-4 border-l-purple-500">
-        <h4 className="text-lg font-bold text-foreground mb-6 flex items-center justify-between">
+        <h4 className="text-subheading font-bold text-foreground mb-6 flex items-center justify-between">
           <span className="flex items-center gap-2"><span><span className="inline-flex"><Receipt className="w-[1.2em] h-[1.2em] mr-1" /></span></span> % Instrumentos de evaluación</span>
-          <span className={`text-sm font-semibold px-3 py-1 rounded-full ${sumaCriterios === 100 ? 'bg-success/10 text-success border border-success/30' : 'bg-danger/10 text-danger border border-danger/30'}`}>
+          <span className={`text-body font-semibold px-3 py-1 rounded-full ${sumaCriterios === 100 ? 'bg-success/10 text-success border border-success/30' : 'bg-danger/10 text-danger border border-danger/30'}`}>
             {sumaCriterios}% {sumaCriterios !== 100 && "(Debe sumar 100%)"}
           </span>
         </h4>
@@ -343,7 +343,7 @@ export function DatosTab() {
 
       {/* 6. Reglas de redondeo y compensación */}
       <Card className="p-6 border-l-4 border-l-orange-500">
-        <h4 className="text-lg font-bold text-foreground mb-6 flex items-center justify-between">
+        <h4 className="text-subheading font-bold text-foreground mb-6 flex items-center justify-between">
           <span className="flex items-center gap-2"><span><span className="inline-flex"><Settings className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Reglas de redondeo y compensación</span>
         </h4>
         {(() => {
@@ -355,7 +355,7 @@ export function DatosTab() {
           return (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-foreground">Nota mínima para aprobar</label>
+                <label className="text-body font-semibold text-foreground">Nota mínima para aprobar</label>
                 <input 
                   type="number" 
                   step="0.1"
@@ -363,11 +363,11 @@ export function DatosTab() {
                   onChange={(e) => updateModuleData("config_redondeo", { ...config, nota_aprobado: parseFloat(e.target.value) })}
                   className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
                 />
-                <p className="text-xs text-muted">Nota a partir de la cual un RA o Módulo se considera superado (típicamente 5.0).</p>
+                <p className="text-caption text-muted">Nota a partir de la cual un RA o Módulo se considera superado (típicamente 5.0).</p>
               </div>
               
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-foreground">Umbral de redondeo al alza</label>
+                <label className="text-body font-semibold text-foreground">Umbral de redondeo al alza</label>
                 <input 
                   type="number" 
                   step="0.1"
@@ -375,11 +375,11 @@ export function DatosTab() {
                   onChange={(e) => updateModuleData("config_redondeo", { ...config, umbral_redondeo: parseFloat(e.target.value) })}
                   className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
                 />
-                <p className="text-xs text-muted">Si el alumnado obtiene esta nota o superior (ej. 4.8), se redondeará automáticamente a la nota de aprobado.</p>
+                <p className="text-caption text-muted">Si el alumnado obtiene esta nota o superior (ej. 4.8), se redondeará automáticamente a la nota de aprobado.</p>
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-foreground">Criterios compensables por RA</label>
+                <label className="text-body font-semibold text-foreground">Criterios compensables por RA</label>
                 <input 
                   type="number" 
                   step="1"
@@ -387,7 +387,7 @@ export function DatosTab() {
                   onChange={(e) => updateModuleData("config_redondeo", { ...config, max_compensables: parseInt(e.target.value) })}
                   className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
                 />
-                <p className="text-xs text-muted">Número máximo de Criterios suspensos que se permiten para aprobar un RA.</p>
+                <p className="text-caption text-muted">Número máximo de Criterios suspensos que se permiten para aprobar un RA.</p>
               </div>
             </div>
           );

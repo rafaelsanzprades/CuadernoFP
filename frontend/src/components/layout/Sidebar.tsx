@@ -184,15 +184,15 @@ export default function Sidebar() {
         {isSidebarOpen && (
           <div className="flex flex-col mb-3 w-full pr-2 min-w-0">
               <Link href="/inicio?tab=bienvenida" onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}>
-                <h1 className={`text-2xl font-extrabold leading-tight transition-colors tracking-tight whitespace-nowrap cursor-pointer ${dataSource === 'demo' ? 'text-warning hover:text-white' : 'text-success hover:text-white'}`}>
+                <h1 className={`text-heading font-extrabold leading-tight transition-colors tracking-tight whitespace-nowrap cursor-pointer ${dataSource === 'demo' ? 'text-warning hover:text-white' : 'text-success hover:text-white'}`}>
                   Cuaderno FP
                 </h1>
               </Link>
               <div className="flex flex-col items-start mt-1 w-full gap-1">
-                <span suppressHydrationWarning className="text-sm text-muted/80 font-mono ml-0.5">
+                <span suppressHydrationWarning className="text-body text-muted/80 font-mono ml-0.5">
                   {isMounted ? timeStr : '\u00A0'}
                 </span>
-                <div suppressHydrationWarning className="border border-[var(--glass-border)] bg-background/50 px-2 py-0.5 rounded text-sm text-muted/80 font-mono whitespace-nowrap shadow-sm ml-0.5">
+                <div suppressHydrationWarning className="border border-[var(--glass-border)] bg-background/50 px-2 py-0.5 rounded text-body text-muted/80 font-mono whitespace-nowrap shadow-sm ml-0.5">
                   Versión: {isMounted ? dateCompactStr : '...'}
                 </div>
               </div>
@@ -224,10 +224,10 @@ export default function Sidebar() {
                     <CalendarDays className="w-5 h-5" strokeWidth={2} />
                   </span>
                   <div className="flex flex-col gap-1 items-start">
-                    <span className={`text-sm leading-tight whitespace-nowrap font-bold ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
+                    <span className={`text-body leading-tight whitespace-nowrap font-bold ${pathname === '/agenda' ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
                       {t('sidebar.agenda')}
                     </span>
-                    <span suppressHydrationWarning className={`px-2 py-0.5 rounded text-xs border font-semibold tracking-wider leading-none ${dataSource === 'demo' ? 'text-warning bg-warning/10 border-warning/30' : 'text-accent bg-accent/10 border-accent/30'}`}>
+                    <span suppressHydrationWarning className={`px-2 py-0.5 rounded text-caption border font-semibold tracking-wider leading-none ${dataSource === 'demo' ? 'text-warning bg-warning/10 border-warning/30' : 'text-accent bg-accent/10 border-accent/30'}`}>
                       {isMounted ? dateStr : '\u00A0'}
                     </span>
                   </div>
@@ -253,30 +253,27 @@ export default function Sidebar() {
           </div>
         )}
 
-        {/* Context Selector Block (ahora dentro del scroll) */}
-        {isSidebarOpen && (
-          <div className="flex flex-col gap-2 pb-2 mt-2 relative z-20 shrink-0">
-            <div className="flex flex-col mb-1 gap-1.5">
-              <div className="text-sm font-bold text-foreground/90 tracking-wide px-1">
-                Grupo
-              </div>
-            </div>
-
-            <Link
-              href="/archivos"
-              onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
-              className="px-1 text-sm font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
-              style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
-            >
-              <FolderOpen className="w-3.5 h-3.5 shrink-0" />
-              <span className="truncate">{groupFileSource.fileName ? groupFileSource.fileName.replace(/\.fpg$/, '') : t('sidebar.abrir_grupo')}</span>
-            </Link>
-          </div>
-        )}
-
-        {/* ① General: items del primer grupo */}
+        {/* Grupo (header + link) y ① General: items del primer grupo, mismo hueco que Programación/Curso */}
         {navGroups[0] && (
-          <div className="flex flex-col gap-0.5 mt-2">
+          <div className="flex flex-col gap-0.5 mt-2 relative z-20 shrink-0">
+            {isSidebarOpen && (
+              <div className="flex flex-col mb-2 mt-1 gap-1.5">
+                <div className="text-body font-bold text-foreground/90 tracking-wide px-1">
+                  Grupo
+                </div>
+
+                <Link
+                  href="/archivos"
+                  onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
+                  className="mx-1 text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
+                  style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
+                >
+                  <FolderOpen className="w-3.5 h-3.5 shrink-0" />
+                  <span className="truncate">{groupFileSource.fileName ? groupFileSource.fileName.replace(/\.fpg$/, '') : t('sidebar.abrir_grupo')}</span>
+                </Link>
+                <div className="h-px bg-[var(--glass-border)]" />
+              </div>
+            )}
             {navGroups[0].items.map((item) => {
               const linkContent = (
                 <Link
@@ -298,7 +295,7 @@ export default function Sidebar() {
                     <item.icon className="w-5 h-5" strokeWidth={1.75} />
                   </span>
                   {isSidebarOpen && (
-                    <span className={`text-sm leading-tight font-medium whitespace-nowrap ${pathname === item.href.split('?')[0] ? 'text-foreground font-semibold' : ''}`}>
+                    <span className={`text-body leading-tight font-medium whitespace-nowrap ${pathname === item.href.split('?')[0] ? 'text-foreground font-semibold' : ''}`}>
                       {t('nav.' + item.href.split('?')[0].replace('/', ''))}
                     </span>
                   )}
@@ -334,14 +331,14 @@ export default function Sidebar() {
             <div key={group.title} className="flex flex-col gap-0.5">
               {isSidebarOpen && (
                 <div className="flex flex-col mb-2 mt-1 gap-1.5">
-                  <div className="text-sm font-bold text-foreground/90 tracking-wide px-1">
+                  <div className="text-body font-bold text-foreground/90 tracking-wide px-1">
                     {translatedBaseTitle}
                   </div>
                   {infoValue && infoValue !== 'CÓDIGO' && infoValue !== 'AÑO' && (
                     <Link
                       href="/archivos"
                       onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
-                      className="mx-1 text-xs font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
+                      className="mx-1 text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
                       style={{
                         color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)',
                       }}
@@ -377,7 +374,7 @@ export default function Sidebar() {
                       <item.icon className="w-5 h-5" strokeWidth={1.75} />
                     </span>
                     {isSidebarOpen && (
-                      <span className={`text-sm leading-tight font-medium whitespace-nowrap ${pathname === item.href.split('?')[0] ? 'text-foreground font-semibold' : ''}`}>
+                      <span className={`text-body leading-tight font-medium whitespace-nowrap ${pathname === item.href.split('?')[0] ? 'text-foreground font-semibold' : ''}`}>
                         {t('nav.' + item.href.split('?')[0].replace('/', ''))}
                       </span>
                     )}
@@ -406,7 +403,7 @@ export default function Sidebar() {
               <div className="flex items-center gap-2">
                 <Link href="/legal?tab=aviso" className="flex items-center gap-1.5 px-3 h-10 rounded-lg bg-[var(--glass-bg)] hover:bg-[var(--glass-border)] text-muted hover:text-accent transition-colors">
                   <Shield className="w-4 h-4" />
-                  <span className="text-sm font-medium">Legal</span>
+                  <span className="text-body font-medium">Legal</span>
                 </Link>
               </div>
             </div>

@@ -139,11 +139,11 @@ export const PlanoClaseTab = () => {
   return (
     <div className="space-y-8">
       {/* Configuration & Actions Toolbar */}
-      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6 bg-foreground/5 p-5 border border-white/5 rounded-2xl">
+      <div className="flex flex-wrap items-center justify-between gap-4 bg-foreground/5 p-5 border border-white/5 rounded-2xl">
         <div className="flex flex-wrap items-center gap-6">
           <div className="flex items-center gap-2">
             <Grid className="w-5 h-5 text-accent" />
-            <span className="text-sm font-semibold text-foreground/90">Dimensiones del aula:</span>
+            <span className="text-body font-semibold text-foreground/90">Dimensiones del aula:</span>
           </div>
 
           <div className="flex items-center gap-4">
@@ -152,7 +152,7 @@ export const PlanoClaseTab = () => {
                 value={rows}
                 onChange={(e) => handleSizeChange('rows', parseInt(e.target.value, 10))}
                 label="Filas"
-                className="py-1 text-xs"
+                className="py-1 text-caption"
               >
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
                   <option key={num} value={num} className="bg-background text-foreground">
@@ -167,7 +167,7 @@ export const PlanoClaseTab = () => {
                 value={cols}
                 onChange={(e) => handleSizeChange('cols', parseInt(e.target.value, 10))}
                 label="Columnas"
-                className="py-1 text-xs"
+                className="py-1 text-caption"
               >
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
                   <option key={num} value={num} className="bg-background text-foreground">
@@ -180,18 +180,27 @@ export const PlanoClaseTab = () => {
         </div>
 
         {/* Stats and helper info */}
-        <div className="flex items-center gap-4 text-xs text-muted">
-          <div className="flex items-center gap-1">
-            <Users className="w-4 h-4 text-info" />
-            <span>Alumnado activos: <strong>{activeStudents.length}</strong></span>
+        <div className="flex items-center gap-4">
+          <div className="w-28">
+            <label className="block text-body font-medium text-foreground/80 mb-1.5">Activos</label>
+            <div className="w-full bg-[var(--input-bg)] border border-[var(--glass-border)] rounded-lg px-3 py-1.5 flex items-center gap-1.5">
+              <Users className="w-4 h-4 text-info shrink-0" />
+              <span className="text-body font-bold text-foreground">{activeStudents.length}</span>
+            </div>
           </div>
-          <div className="flex items-center gap-1">
-            <User className="w-4 h-4 text-success" />
-            <span>Sentados: <strong>{assignedStudentIds.size}</strong></span>
+          <div className="w-28">
+            <label className="block text-body font-medium text-foreground/80 mb-1.5">Sentados</label>
+            <div className="w-full bg-[var(--input-bg)] border border-[var(--glass-border)] rounded-lg px-3 py-1.5 flex items-center gap-1.5">
+              <User className="w-4 h-4 text-success shrink-0" />
+              <span className="text-body font-bold text-foreground">{assignedStudentIds.size}</span>
+            </div>
           </div>
-          <div className="flex items-center gap-1">
-            <HelpCircle className="w-4 h-4 text-warning" />
-            <span>Sin asignar: <strong>{unassignedStudents.length}</strong></span>
+          <div className="w-28">
+            <label className="block text-body font-medium text-foreground/80 mb-1.5">Sin asignar</label>
+            <div className="w-full bg-[var(--input-bg)] border border-[var(--glass-border)] rounded-lg px-3 py-1.5 flex items-center gap-1.5">
+              <HelpCircle className="w-4 h-4 text-warning shrink-0" />
+              <span className="text-body font-bold text-foreground">{unassignedStudents.length}</span>
+            </div>
           </div>
         </div>
 
@@ -200,7 +209,7 @@ export const PlanoClaseTab = () => {
           <Button
             variant="ghost"
             onClick={handleAutoFill}
-            className="text-xs font-medium flex items-center gap-1.5 bg-info/10 text-info hover:bg-info/10 border border-info/30 px-4 py-2 rounded-xl"
+            className="text-caption font-medium flex items-center gap-1.5 bg-info/10 text-info hover:bg-info/10 border border-info/30 px-4 py-2 rounded-xl"
           >
             <RefreshCw className="w-4 h-4" /> Distribución Alfabética
           </Button>
@@ -208,7 +217,7 @@ export const PlanoClaseTab = () => {
           <Button
             variant="ghost"
             onClick={handleResetLayout}
-            className="text-xs font-medium flex items-center gap-1.5 bg-danger/10 text-danger hover:bg-danger/10 border border-danger/30 px-4 py-2 rounded-xl"
+            className="text-caption font-medium flex items-center gap-1.5 bg-danger/10 text-danger hover:bg-danger/10 border border-danger/30 px-4 py-2 rounded-xl"
           >
             <Trash2 className="w-4 h-4" /> Vaciar Plano
           </Button>
@@ -218,10 +227,10 @@ export const PlanoClaseTab = () => {
       {/* Classroom layout representation */}
       <Card className="border border-white/5 rounded-2xl p-6 bg-foreground/5 shadow-2xl relative overflow-hidden">
         {/* Direction Indicator */}
-        <div className="absolute top-2 left-6 text-xs text-muted tracking-wider font-semibold">
+        <div className="absolute top-2 left-6 text-caption text-muted tracking-wider font-semibold">
           Fondo de clase ⬆️
         </div>
-        <div className="absolute bottom-2 left-6 text-xs text-muted tracking-wider font-semibold">
+        <div className="absolute bottom-2 left-6 text-caption text-muted tracking-wider font-semibold">
           Frente de clase / Pizarra ⬇️
         </div>
 
@@ -251,7 +260,7 @@ export const PlanoClaseTab = () => {
                   >
                     {/* Header */}
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-xs font-mono text-muted ">
+                      <span className="text-caption font-mono text-muted ">
                         F{r + 1} - C{c + 1}
                       </span>
                       {student ? (
@@ -259,7 +268,7 @@ export const PlanoClaseTab = () => {
                           Ocupado
                         </Badge>
                       ) : (
-                        <span className="text-xs text-muted/50 italic">Libre</span>
+                        <span className="text-caption text-muted/50 italic">Libre</span>
                       )}
                     </div>
 
@@ -267,7 +276,7 @@ export const PlanoClaseTab = () => {
                     <select
                       value={seatedId}
                       onChange={(e) => handleAssignSeat(r, c, e.target.value)}
-                      className="w-full bg-foreground/15 border border-[var(--glass-border)] text-foreground text-xs rounded-lg px-2 py-1.5 focus:outline-none focus:border-accent transition-colors font-medium cursor-pointer"
+                      className="w-full bg-foreground/15 border border-[var(--glass-border)] text-foreground text-caption rounded-lg px-2 py-1.5 focus:outline-none focus:border-accent transition-colors font-medium cursor-pointer"
                     >
                       <option value="" className="bg-background text-foreground">-- Sin Asignar --</option>
                       {activeStudents.map((al) => {
@@ -297,7 +306,7 @@ export const PlanoClaseTab = () => {
           </div>
           
           {/* Teacher Desk */}
-          <div className="w-1/3 min-w-[200px] border border-accent/30 bg-accent/5 hover:bg-accent/10 transition-colors duration-300 rounded-xl p-3.5 text-center text-accent font-extrabold text-xs tracking-widest flex items-center justify-center gap-2 shadow-lg">
+          <div className="w-1/3 min-w-[200px] border border-accent/30 bg-accent/5 hover:bg-accent/10 transition-colors duration-300 rounded-xl p-3.5 text-center text-accent font-extrabold text-caption tracking-widest flex items-center justify-center gap-2 shadow-lg">
             <span>‍<span className="inline-flex"><School className="w-[1.2em] h-[1.2em] mr-1" /></span> Mesa del Profesorado / Pizarra</span>
           </div>
         </div>
@@ -306,18 +315,18 @@ export const PlanoClaseTab = () => {
       {/* Unassigned Students Section */}
       <Card className="border border-white/5 rounded-2xl p-6 bg-foreground/5 shadow-lg">
         <div className="flex items-center justify-between mb-4 border-b border-[var(--glass-border)] pb-3">
-          <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
+          <h3 className="text-body font-semibold text-foreground flex items-center gap-2">
             <Users className="w-5 h-5 text-accent" /> Alumnado sin asignar en el plano ({unassignedStudents.length})
           </h3>
           {unassignedStudents.length > 0 && (
-            <span className="text-xs text-muted italic">
+            <span className="text-caption text-muted italic">
               Aparecerán automáticamente en los desplegables de las mesas.
             </span>
           )}
         </div>
 
         {unassignedStudents.length === 0 ? (
-          <div className="text-center py-6 text-sm text-success font-semibold">
+          <div className="text-center py-6 text-body text-success font-semibold">
             <span className="inline-flex"><PartyPopper className="w-[1.2em] h-[1.2em] mr-1" /></span> ¡Todos los alumnado activos han sido colocados en el plano!
           </div>
         ) : (
@@ -325,14 +334,14 @@ export const PlanoClaseTab = () => {
             {unassignedStudents.map((al) => (
               <div
                 key={al.ID}
-                className="bg-foreground/10 text-foreground/80 border border-[var(--glass-border)] hover:border-accent/40 hover:text-foreground px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 transition-all duration-300"
+                className="bg-foreground/10 text-foreground/80 border border-[var(--glass-border)] hover:border-accent/40 hover:text-foreground px-3 py-1.5 rounded-full text-caption font-semibold flex items-center gap-1.5 transition-all duration-300"
                 title={`ID: ${al.ID}`}
               >
                 <div className="w-1.5 h-1.5 rounded-full bg-warning"></div>
                 <span>
                   {al.Apellidos}, {al.Nombre}
                 </span>
-                <span className="text-xs text-muted font-mono bg-background/30 px-1.5 py-0.5 rounded">
+                <span className="text-caption text-muted font-mono bg-background/30 px-1.5 py-0.5 rounded">
                   {al.ID}
                 </span>
               </div>

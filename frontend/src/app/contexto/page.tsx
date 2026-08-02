@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { FileEdit, FileText, Settings, Map, FolderOpen, Scale, Building2 } from "lucide-react";
+import { FileEdit, FileText, Settings, Map, FolderOpen, Scale } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -10,7 +10,6 @@ import { DatosTab } from "@/components/features/modulo/DatosTab";
 import { ContextoTab } from "@/components/features/modulo/ContextoTab";
 import { PlanesTab } from "@/components/features/modulo/PlanesTab";
 import { ProcedimientosTab } from "@/components/features/evaluacion/ProcedimientosTab";
-import { FeoeTab } from "@/components/features/modulo/FeoeTab";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -58,7 +57,6 @@ export default function ContextoConfigPage() {
     { id: "entorno", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Entorno</span>, cleanLabel: "Entorno" },
     { id: "planes", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.planes')}</span>, cleanLabel: t('tabs.planes') },
     { id: "procedimientos", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> Procedimientos</span>, cleanLabel: "Procedimientos" },
-    { id: "feoe", label: <span className="flex items-center gap-2"><Building2 className="w-4 h-4 shrink-0" /> FEOE</span>, cleanLabel: "FEOE" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -68,7 +66,6 @@ export default function ContextoConfigPage() {
     entorno: 'Análisis del entorno socioeconómico, centro educativo y perfil del alumnado.',
     planes: 'Vinculación con los planes estratégicos y proyectos institucionales del centro.',
     procedimientos: 'Aspectos normativos y burocráticos de la evaluación para la programación didáctica.',
-    feoe: 'Organización, modalidad y seguimiento de la formación en empresa u organismo equiparado (FEOE) / FP dual.',
   };
 
   if (!activeModuleId) {
@@ -82,7 +79,7 @@ export default function ContextoConfigPage() {
             <MotionWrapper>
               <div className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <Settings className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-2xl font-bold">No hay programación cargada</h2>
+                <h2 className="text-heading font-bold">No hay programación cargada</h2>
                 <p className="text-muted mb-4">Debes abrir o crear un archivo de programación en tu Archivos.</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
@@ -146,7 +143,6 @@ export default function ContextoConfigPage() {
             {activeTab === "entorno" && <ContextoTab />}
             {activeTab === "planes" && <PlanesTab />}
             {activeTab === "procedimientos" && <ProcedimientosTab />}
-            {activeTab === "feoe" && <FeoeTab />}
 
           </MotionWrapper>
         </main>

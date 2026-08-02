@@ -82,8 +82,8 @@ export function AIWizardModal({ isOpen, onClose, onSuccess }: AIWizardModalProps
               <Sparkles className="w-5 h-5 text-accent" />
             </div>
             <div>
-              <h2 className="text-lg font-extrabold text-foreground tracking-tight">Asistente mágico IA</h2>
-              <p className="text-sm text-muted">Sube tu currículo en PDF para extraer la programación</p>
+              <h2 className="text-subheading font-extrabold text-foreground tracking-tight">Asistente mágico IA</h2>
+              <p className="text-body text-muted">Sube tu currículo en PDF para extraer la programación</p>
             </div>
           </div>
           <button 
@@ -100,7 +100,7 @@ export function AIWizardModal({ isOpen, onClose, onSuccess }: AIWizardModalProps
           {errorMsg && (
             <div className="p-4 bg-danger/10 border border-danger/20 rounded-xl flex items-start gap-3 text-danger">
               <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
-              <p className="text-sm font-medium">{errorMsg}</p>
+              <p className="text-body font-medium">{errorMsg}</p>
             </div>
           )}
 
@@ -113,10 +113,10 @@ export function AIWizardModal({ isOpen, onClose, onSuccess }: AIWizardModalProps
             >
               <input {...getInputProps()} />
               <UploadCloud className={`w-12 h-12 mb-4 transition-colors ${isDragActive ? "text-accent" : "text-muted"}`} />
-              <h3 className="text-lg font-bold text-foreground mb-2">
+              <h3 className="text-subheading font-bold text-foreground mb-2">
                 {isDragActive ? "Suelta el PDF aquí" : "Arrastra tu currículo (BOE/BOA) en PDF"}
               </h3>
-              <p className="text-sm text-muted max-w-md mx-auto">
+              <p className="text-body text-muted max-w-md mx-auto">
                 O haz clic para seleccionar el archivo. La Inteligencia Artificial lo leerá y extraerá automáticamente todos los RAs, Criterios de evaluación y Unidades didácticas.
               </p>
             </div>
@@ -127,8 +127,8 @@ export function AIWizardModal({ isOpen, onClose, onSuccess }: AIWizardModalProps
                 <Bot className="w-6 h-6 text-foreground absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
               </div>
               <div className="text-center space-y-2">
-                <h3 className="text-lg font-bold text-foreground animate-pulse">Analizando documento...</h3>
-                <p className="text-sm text-muted max-w-xs mx-auto">
+                <h3 className="text-subheading font-bold text-foreground animate-pulse">Analizando documento...</h3>
+                <p className="text-body text-muted max-w-xs mx-auto">
                   La IA está leyendo y estructurando la información. Esto puede tardar unos 20-30 segundos. Por favor, no cierres la ventana.
                 </p>
               </div>

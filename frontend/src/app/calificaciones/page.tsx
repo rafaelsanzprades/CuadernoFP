@@ -96,7 +96,7 @@ export default function ProgresoPage() {
 
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <TrendingUp className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-2xl font-bold">No hay curso ni programación cargada</h2>
+                <h2 className="text-heading font-bold">No hay curso ni programación cargada</h2>
                 <p className="text-muted mb-4">Debes abrir o crear un archivo de programación y curso en tu Archivos.</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
@@ -150,14 +150,14 @@ export default function ProgresoPage() {
   const calcularNotas = (al_id: string, evRow: any) => {
     const peso_ra: Record<string, number> = {};
     df_ra.forEach((ra: any) => {
-      if (ra.id_ra) peso_ra[ra.id_ra] = Number(ra.peso_ra) || 0;
+      if (ra.id_ra) peso_ra[ra.id_ra] = ra.peso_ra || 0;
     });
 
     const peso_ce: Record<string, number> = {};
     const ra_of_ce: Record<string, string> = {};
     df_ce.forEach((ce: any) => {
       if (ce.id_ce && ce.id_ra) {
-        peso_ce[ce.id_ce] = Number(ce.peso_ce) || 0;
+        peso_ce[ce.id_ce] = ce.peso_ce || 0;
         ra_of_ce[ce.id_ce] = ce.id_ra;
       }
     });
@@ -276,7 +276,7 @@ export default function ProgresoPage() {
   df_ra.forEach((ra: any) => {
     const ra_id = String(ra.id_ra);
     ra_info[ra_id] = {
-      pond: Number(ra.peso_ra) || 0.0,
+      pond: ra.peso_ra || 0,
       desc: resolveDescRa(activeModuleId, ra)
     };
 
@@ -350,7 +350,7 @@ export default function ProgresoPage() {
               {/* Save Button */}
               <div className="flex items-center gap-4 shrink-0">
                 {saveMessage && (
-                  <span className={`text-sm font-semibold ${saveMessage.includes("Error") ? "text-danger" : "text-success"}`}>
+                  <span className={`text-body font-semibold ${saveMessage.includes("Error") ? "text-danger" : "text-success"}`}>
                     {saveMessage}
                   </span>
                 )}
@@ -372,7 +372,7 @@ export default function ProgresoPage() {
               
               {/* Bloque 1: Resumen de calificaciones por trimestres */}
               <Card className="p-6 border-t-4 border-t-blue-500">
-                <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-5">
+                <h2 className="text-heading font-bold flex items-center gap-2 text-foreground mb-5">
                   <span><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Resumen de calificaciones por trimestres
                 </h2>
                 <div className="overflow-x-auto">
@@ -410,7 +410,7 @@ export default function ProgresoPage() {
                     };
 
                     return (
-                      <table className="w-full text-sm border-collapse">
+                      <table className="w-full text-body border-collapse">
                         <thead>
                           <tr className="border-b border-[var(--glass-border)]">
                             <th className="p-3 text-left text-muted font-semibold" rowSpan={2}>Trimestre</th>
@@ -418,7 +418,7 @@ export default function ProgresoPage() {
                               <th key={t.key} colSpan={3} className={`p-2 text-center text-${t.color}-400 font-semibold border-l border-[var(--glass-border)]`}>{t.label}</th>
                             ))}
                           </tr>
-                          <tr className="border-b border-[var(--glass-border)] text-xs text-muted">
+                          <tr className="border-b border-[var(--glass-border)] text-caption text-muted">
                             {tipos.map(t => (
                               <React.Fragment key={t.key}>
                                 <th className="p-2 text-center border-l border-[var(--glass-border)]">Mín</th>
@@ -451,7 +451,7 @@ export default function ProgresoPage() {
                             </tr>
                           ))}
                           <tr className="border-t-2 border-[var(--glass-border)] bg-foreground/5">
-                            <td className="p-4 font-extrabold text-foreground text-lg">Total</td>
+                            <td className="p-4 font-extrabold text-foreground text-subheading">Total</td>
                             {tipos.map(t => {
                               const allGrades: number[] = [];
                               df_evaluable.forEach((al: any) => {
@@ -471,7 +471,7 @@ export default function ProgresoPage() {
                                     <span className={`text-${t.color}-400/80 font-mono font-bold`}>{s ? s.min.toFixed(1) : '-'}</span>
                                   </td>
                                   <td className="p-4 text-center">
-                                    <span className={`bg-${t.color}-500/20 text-${t.color}-400 font-extrabold text-lg px-3 py-1 rounded-lg`}>{s ? s.avg.toFixed(1) : '-'}</span>
+                                    <span className={`bg-${t.color}-500/20 text-${t.color}-400 font-extrabold text-subheading px-3 py-1 rounded-lg`}>{s ? s.avg.toFixed(1) : '-'}</span>
                                   </td>
                                   <td className="p-4 text-center">
                                     <span className={`text-${t.color}-400/80 font-mono font-bold`}>{s ? s.max.toFixed(1) : '-'}</span>
@@ -489,7 +489,7 @@ export default function ProgresoPage() {
 
               {/* Bloque 2: Resumen de Resultados de aprendizaje por trimestres */}
               <Card className="p-6 border-t-4 border-t-emerald-500">
-                <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground mb-5">
+                <h2 className="text-heading font-bold flex items-center gap-2 text-foreground mb-5">
                   <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Resumen de resultados de aprendizaje por trimestres
                 </h2>
                 <div className="space-y-5">
@@ -527,10 +527,10 @@ export default function ProgresoPage() {
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-3">
                             <span className="font-bold text-foreground">{ra_id}</span>
-                            <span className="text-xs text-muted">({info.pond.toFixed(1)}%)</span>
-                            <span className="text-sm text-muted truncate max-w-md">{info.desc}</span>
+                            <span className="text-caption text-muted">({info.pond.toFixed(1)}%)</span>
+                            <span className="text-body text-muted truncate max-w-md">{info.desc}</span>
                           </div>
-                          <div className="flex items-center gap-4 text-xs">
+                          <div className="flex items-center gap-4 text-caption">
                             <span className="text-muted">Trimestres: {tris.join(', ')}</span>
                           </div>
                         </div>
@@ -595,7 +595,7 @@ export default function ProgresoPage() {
                         </div>
 
                         {/* Legend */}
-                        <div className="flex items-center justify-between mt-2 text-xs">
+                        <div className="flex items-center justify-between mt-2 text-caption">
                           <span className="text-muted/80">0</span>
                           <div className="flex items-center gap-6">
                             <span className="flex items-center gap-1">
@@ -640,7 +640,7 @@ export default function ProgresoPage() {
             <div className="space-y-3 animate-in fade-in duration-500">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
+                  <h2 className="text-heading font-extrabold text-foreground tracking-tight flex items-center gap-3">
                     <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Detalle por alumnado
                   </h2>
                   <p className="text-muted mt-1">Notas individuales por alumnado, instrumento de evaluación y nivel de adquisición de RA.</p>
@@ -715,10 +715,10 @@ export default function ProgresoPage() {
                           else newSet.add(al_id);
                           setOpenStudents(newSet);
                         }}
-                        className="p-4 cursor-pointer flex items-center justify-between font-semibold text-lg select-none hover:bg-foreground/10 transition-colors"
+                        className="p-4 cursor-pointer flex items-center justify-between font-semibold text-subheading select-none hover:bg-foreground/10 transition-colors"
                       >
                         <div className="flex items-center gap-4 w-1/3">
-                          <span className="text-2xl"><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
+                          <span className="text-heading"><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
                           <span>{al.Apellidos}, {al.Nombre}</span>
                         </div>
 
@@ -731,7 +731,7 @@ export default function ProgresoPage() {
                               if (!isNaN(v) && v > 0) allVals.push(v);
                             });
                             const data = allVals.map((v, i) => ({ name: i, value: v }));
-                            if (data.length < 2) return <span className="text-xs text-muted italic">Sin datos suficientes para tendencia</span>;
+                            if (data.length < 2) return <span className="text-caption text-muted italic">Sin datos suficientes para tendencia</span>;
 
                             return (
                               <ResponsiveContainer width="100%" height="100%">
@@ -744,9 +744,9 @@ export default function ProgresoPage() {
                           })()}
                         </div>
 
-                        <div className="flex items-center gap-6 text-sm w-1/4 justify-end">
-                          <span className="font-bold text-lg" style={{ color: sigad.col }}>
-                            {sigad.n} · {sigad.cod} <span className="text-sm font-normal text-muted">({sigad.txt})</span>
+                        <div className="flex items-center gap-6 text-body w-1/4 justify-end">
+                          <span className="font-bold text-subheading" style={{ color: sigad.col }}>
+                            {sigad.n} · {sigad.cod} <span className="text-body font-normal text-muted">({sigad.txt})</span>
                           </span>
                           <span className={`ml-4 inline-block transition-transform duration-300 text-muted ${openStudents.has(al_id) ? 'rotate-180' : ''}`}>▼</span>
                         </div>
@@ -782,15 +782,15 @@ export default function ProgresoPage() {
                                   </div>
                                   <div className="space-y-4">
                                     {acts_by_tri[activeStudentTab].length === 0 ? (
-                                      <div className="text-muted text-sm italic">No hay actividades evaluables definidas para este trimestre.</div>
+                                      <div className="text-muted text-body italic">No hay actividades evaluables definidas para este trimestre.</div>
                                     ) : (
                                       acts_by_tri[activeStudentTab].map(act => {
                                         const act_id = act.id_act;
                                         const val = Number(evRow[act_id]) || 0;
                                         return (
                                           <div key={act_id} className="flex items-center justify-between gap-4">
-                                            <label className="text-sm text-foreground/85 flex-1 truncate" title={act.desc_act}>
-                                              <span className="text-muted font-medium text-xs tracking-wider bg-foreground/5 border border-white/5 px-2 py-0.5 rounded-md mr-2">
+                                            <label className="text-body text-foreground/85 flex-1 truncate" title={act.desc_act}>
+                                              <span className="text-muted font-medium text-caption tracking-wider bg-foreground/5 border border-white/5 px-2 py-0.5 rounded-md mr-2">
                                                 {act.Tipo || "Act"}
                                               </span>
                                               {act.desc_act || act_id}
@@ -803,7 +803,7 @@ export default function ProgresoPage() {
                                               value={val || ""}
                                               onChange={(e) => handleUpdateActNota(al_id, act_id, Number(e.target.value) || 0)}
                                               onClick={(e) => e.stopPropagation()}
-                                              className="w-20 bg-background/50 border border-[var(--glass-border)] rounded px-3 py-1.5 text-foreground focus:border-info focus:outline-none font-mono text-center text-sm font-semibold"
+                                              className="w-20 bg-background/50 border border-[var(--glass-border)] rounded px-3 py-1.5 text-foreground focus:border-info focus:outline-none font-mono text-center text-body font-semibold"
                                             />
                                           </div>
                                         );
@@ -817,22 +817,22 @@ export default function ProgresoPage() {
                                   <div>
                                     <h4 className="font-bold text-foreground mb-4">Calificación de acta</h4>
                                     <div className="mb-4">
-                                      <label className="text-xs text-muted tracking-wider mb-1.5 block font-bold">Nota final (manual / calc)</label>
+                                      <label className="text-caption text-muted tracking-wider mb-1.5 block font-bold">Nota final (manual / calc)</label>
                                       <input
                                         type="number"
                                         min="1" max="10" step="0.1"
                                         value={nota_prev || ""}
                                         onChange={(e) => handleOverrideNotaFinal(al_id, Number(e.target.value) || 0)}
                                         onClick={(e) => e.stopPropagation()}
-                                        className="w-full bg-background/50 border border-[var(--glass-border)] rounded px-3 py-2 text-lg font-bold text-foreground focus:border-info focus:outline-none"
+                                        className="w-full bg-background/50 border border-[var(--glass-border)] rounded px-3 py-2 text-subheading font-bold text-foreground focus:border-info focus:outline-none"
                                       />
                                     </div>
                                   </div>
 
                                   <div className="rounded-xl flex flex-col items-center justify-center p-5 border-2 text-center" style={{ borderColor: sigad.col, backgroundColor: `${sigad.col}11` }}>
-                                    <div className="text-2xl font-black mb-2" style={{ color: sigad.col, lineHeight: 1 }}>{sigad.n}</div>
-                                    <div className="text-lg font-bold" style={{ color: sigad.col }}>{sigad.cod}</div>
-                                    <div className="text-xs text-muted mt-1 tracking-wider font-semibold">{sigad.txt}</div>
+                                    <div className="text-heading font-black mb-2" style={{ color: sigad.col, lineHeight: 1 }}>{sigad.n}</div>
+                                    <div className="text-subheading font-bold" style={{ color: sigad.col }}>{sigad.cod}</div>
+                                    <div className="text-caption text-muted mt-1 tracking-wider font-semibold">{sigad.txt}</div>
                                   </div>
                                 </div>
                               </div>
@@ -854,13 +854,13 @@ export default function ProgresoPage() {
                                         <div className="flex-1 w-full">
                                           <div className="mb-1.5 flex items-center gap-2">
                                             <span className="font-extrabold text-foreground">{r.id}</span>
-                                            <span className="text-xs text-muted font-semibold">({r.pond.toFixed(1)}%)</span>
+                                            <span className="text-caption text-muted font-semibold">({r.pond.toFixed(1)}%)</span>
                                           </div>
-                                          <div className="text-xs text-muted mb-3 line-clamp-1">{r.desc}</div>
+                                          <div className="text-caption text-muted mb-3 line-clamp-1">{r.desc}</div>
 
                                           <div className="w-full bg-background/50 rounded-full h-4.5 border border-white/5 overflow-hidden">
                                             <div
-                                              className="h-full rounded-full transition-all duration-500 flex items-center justify-end pr-2 text-xs font-black text-foreground shadow-[inset_0_2px_4px_rgba(255,255,255,0.2)]"
+                                              className="h-full rounded-full transition-all duration-500 flex items-center justify-end pr-2 text-caption font-black text-foreground shadow-[inset_0_2px_4px_rgba(255,255,255,0.2)]"
                                               style={{ width: `${Math.max(r.prop, 5)}%`, backgroundColor: bar_color }}
                                             >
                                               {r.prop > 15 ? `${r.prop.toFixed(0)}%` : ''}
@@ -868,7 +868,7 @@ export default function ProgresoPage() {
                                           </div>
                                         </div>
 
-                                        <div className="w-full md:w-60 bg-foreground/5 border border-white/5 rounded-lg p-2.5 text-xs text-foreground/80 space-y-1 self-stretch flex flex-col justify-center">
+                                        <div className="w-full md:w-60 bg-foreground/5 border border-white/5 rounded-lg p-2.5 text-caption text-foreground/80 space-y-1 self-stretch flex flex-col justify-center">
                                           <div className="flex justify-between">
                                             <span className="text-info font-semibold">Evaluado en:</span>
                                             <span>{r.tris.join(", ") || "-"}</span>

@@ -1,5 +1,6 @@
 "use client";
-import { School, Settings, User , Info } from "lucide-react";
+import { School, Settings, User, Info, FileText } from "lucide-react";
+import { NarrativeField } from "@/components/ui/NarrativeField";
 import { useAppStore } from "@/store/useAppStore";
 
 export function ContextoTab() {
@@ -20,12 +21,12 @@ export function ContextoTab() {
     <>
       <div className="space-y-6 animate-in fade-in duration-500">
       <div className="glass-card p-6 border-t-4 border-t-indigo-500">
-        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
           <span className="inline-flex"><School className="w-[1.2em] h-[1.2em] mr-1" /></span> Contexto escolar
         </h2>
         <div className="space-y-4">
           <div>
-            <label className="text-sm text-muted mb-1 block">Entorno geográfico y sociocultural</label>
+            <label className="text-body text-muted mb-1 block">Entorno geográfico y sociocultural</label>
             <textarea
               value={config_contexto.entorno_geografico || ""}
               onChange={e => handleContextoChange("entorno_geografico", e.target.value)}
@@ -34,7 +35,7 @@ export function ContextoTab() {
             />
           </div>
           <div>
-            <label className="text-sm text-muted mb-1 block">Entorno socioeconómico y productivo</label>
+            <label className="text-body text-muted mb-1 block">Entorno socioeconómico y productivo</label>
             <textarea
               value={config_contexto.entorno_socioeconomico || ""}
               onChange={e => handleContextoChange("entorno_socioeconomico", e.target.value)}
@@ -43,7 +44,7 @@ export function ContextoTab() {
             />
           </div>
           <div>
-            <label className="text-sm text-muted mb-1 block">Contexto escolar</label>
+            <label className="text-body text-muted mb-1 block">Contexto escolar</label>
             <textarea
               value={config_contexto.contexto_escolar || ""}
               onChange={e => handleContextoChange("contexto_escolar", e.target.value)}
@@ -52,7 +53,7 @@ export function ContextoTab() {
             />
           </div>
           <div>
-            <label className="text-sm text-muted mb-1 block">Características del alumnado</label>
+            <label className="text-body text-muted mb-1 block">Características del alumnado</label>
             <textarea
               value={config_contexto.caracteristicas_alumnado || ""}
               onChange={e => handleContextoChange("caracteristicas_alumnado", e.target.value)}
@@ -61,7 +62,7 @@ export function ContextoTab() {
             />
           </div>
           <div>
-            <label className="text-sm text-muted mb-1 block">Infraestructura y recursos educativos</label>
+            <label className="text-body text-muted mb-1 block">Infraestructura y recursos educativos</label>
             <textarea
               value={config_contexto.infraestructura || ""}
               onChange={e => handleContextoChange("infraestructura", e.target.value)}
@@ -73,12 +74,12 @@ export function ContextoTab() {
       </div>
 
       <div className="glass-card p-6 border-t-4 border-t-purple-500">
-        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
           <span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> Alumnado (ACNEAE)
         </h2>
         <div className="space-y-4">
           <div>
-            <label className="text-sm text-muted mb-1 block">Inclusión</label>
+            <label className="text-body text-muted mb-1 block">Inclusión</label>
             <textarea
               value={config_contexto.inclusion || ""}
               onChange={e => handleContextoChange("inclusion", e.target.value)}
@@ -86,7 +87,7 @@ export function ContextoTab() {
             />
           </div>
           <div>
-            <label className="text-sm text-muted mb-1 block">Elenco de situaciones</label>
+            <label className="text-body text-muted mb-1 block">Elenco de situaciones</label>
             <textarea
               value={config_contexto.elenco_situaciones || ""}
               onChange={e => handleContextoChange("elenco_situaciones", e.target.value)}
@@ -94,7 +95,7 @@ export function ContextoTab() {
             />
           </div>
           <div>
-            <label className="text-sm text-muted mb-1 block">Circunstancias ocultas</label>
+            <label className="text-body text-muted mb-1 block">Circunstancias ocultas</label>
             <textarea
               value={config_contexto.circunstancias_ocultas || ""}
               onChange={e => handleContextoChange("circunstancias_ocultas", e.target.value)}
@@ -105,12 +106,12 @@ export function ContextoTab() {
       </div>
 
       <div className="glass-card p-6 border-t-4 border-t-pink-500">
-        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
           <span className="inline-flex"><Settings className="w-[1.2em] h-[1.2em] mr-1" /></span> Configuración del aula
         </h2>
         <div className="space-y-4">
           <div>
-            <label className="text-sm text-muted mb-1 block">Estrategias metodológicas. Espacios</label>
+            <label className="text-body text-muted mb-1 block">Estrategias metodológicas. Espacios</label>
             <textarea
               value={config_contexto.metodologia || ""}
               onChange={e => handleContextoChange("metodologia", e.target.value)}
@@ -118,7 +119,7 @@ export function ContextoTab() {
             />
           </div>
           <div>
-            <label className="text-sm text-muted mb-1 block">Metodología general (ej. ABR / ABP)</label>
+            <label className="text-body text-muted mb-1 block">Metodología general (ej. ABR / ABP)</label>
             <textarea
               value={config_aula.Metodología || ""}
               onChange={e => handleAulaChange("Metodología", e.target.value)}
@@ -126,13 +127,31 @@ export function ContextoTab() {
             />
           </div>
           <div>
-            <label className="text-sm text-muted mb-1 block">Atención a la diversidad (A. no significativas)</label>
+            <label className="text-body text-muted mb-1 block">Atención a la diversidad (A. no significativas)</label>
             <textarea
               value={config_aula["Atención a la diversidad"] || ""}
               onChange={e => handleAulaChange("Atención a la diversidad", e.target.value)}
               className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-danger focus:outline-none"
             />
           </div>
+        </div>
+      </div>
+
+      <div className="glass-card p-6 border-t-4 border-t-amber-500">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
+          <span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Datos de autoría y publicidad
+        </h2>
+        <div className="flex flex-col gap-6">
+          <NarrativeField
+            id="textos_pd_bibliografia"
+            title="Bibliografía y Recursos"
+            description="Bibliografía principal para el profesorado y alumnado."
+          />
+          <NarrativeField
+            id="textos_pd_publicidad"
+            title="Publicidad de la programación"
+            description="Cómo y dónde se publicará o podrá consultar la programación."
+          />
         </div>
       </div>
     </div>

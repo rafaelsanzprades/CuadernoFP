@@ -466,18 +466,19 @@ export default function ArchivosTrabajoPage() {
                 </Button>
               )}
             </div>
-            <div className="space-y-4 animate-in fade-in duration-300 pt-4">
-              <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de archivos.'} />
+            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de archivos.'} />
+
+            <div className="space-y-4 animate-in fade-in duration-300">
               {/* TAB: FILE MANAGER */}
               {activeTab === "datos" && (
                 <div className="space-y-4">
 
                 <div className="flex items-center gap-3">
-                  <span className="text-sm font-bold text-foreground/80">Modo de datos:</span>
+                  <span className="text-body font-bold text-foreground/80">Modo de datos:</span>
                   <div className="flex bg-foreground/5 rounded-lg p-0.5 gap-0.5">
                     <button
                       onClick={switchToDemo}
-                      className={`flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md text-sm font-bold transition-all ${dataSource === 'demo'
+                      className={`flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md text-body font-bold transition-all ${dataSource === 'demo'
                         ? 'bg-warning/20 text-warning shadow-sm ring-1 ring-warning/30'
                         : 'text-muted hover:bg-foreground/10 hover:text-foreground'}`}
                     >
@@ -485,7 +486,7 @@ export default function ArchivosTrabajoPage() {
                     </button>
                     <button
                       onClick={switchToLocal}
-                      className={`flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md text-sm font-bold transition-all ${dataSource === 'local'
+                      className={`flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md text-body font-bold transition-all ${dataSource === 'local'
                         ? 'bg-success/20 text-success shadow-sm ring-1 ring-success/30'
                         : 'text-muted hover:bg-foreground/10 hover:text-foreground'}`}
                     >
@@ -503,10 +504,10 @@ export default function ArchivosTrabajoPage() {
                     </div>
                     <div className="relative z-10 flex flex-col h-full flex-1">
                       <div className="mb-4">
-                        <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
+                        <h3 className="text-subheading font-bold text-foreground flex items-center gap-2">
                           <FolderOpen className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : 'text-accent'}`} /> Grupos
                         </h3>
-                        <p className="text-sm text-muted mt-2 leading-relaxed">
+                        <p className="text-body text-muted mt-2 leading-relaxed">
                           {isDemoLoaded
                             ? "Directorio de datos DEMO. Haz doble clic en un Grupo (.fpg) para cargarlo."
                             : "Abre un Grupo para cargar automáticamente su Programación y su Curso asociado."}
@@ -517,7 +518,7 @@ export default function ArchivosTrabajoPage() {
                         {isDemoLoaded ? (
                           demoGroupFiles.length === 0 ? (
                             <div className="h-full flex items-center justify-center text-center p-4">
-                              <p className="text-sm text-muted">No se han encontrado grupos DEMO.</p>
+                              <p className="text-body text-muted">No se han encontrado grupos DEMO.</p>
                             </div>
                           ) : (
                             demoGroupFiles.map(f => {
@@ -533,7 +534,7 @@ export default function ArchivosTrabajoPage() {
                                 >
                                   <div className="flex items-center gap-2">
                                     <FolderOpen className={`w-4 h-4 shrink-0 transition-colors ${isActive ? 'text-warning' : 'text-warning/70 group-hover/item:text-warning'}`} />
-                                    <span className={`text-sm font-medium truncate ${isActive ? 'text-warning font-bold' : ''}`} title={f.name}>{f.name.replace('.fpg', '')}</span>
+                                    <span className={`text-body font-medium truncate ${isActive ? 'text-warning font-bold' : ''}`} title={f.name}>{f.name.replace('.fpg', '')}</span>
                                   </div>
                                 </button>
                               );
@@ -542,11 +543,11 @@ export default function ArchivosTrabajoPage() {
                         ) : !workspaceHandle ? (
                           <div className="h-full flex flex-col items-center justify-center text-center p-4">
                             <Database className="w-8 h-8 text-muted/50 mb-2" />
-                            <p className="text-sm text-muted font-medium">Usa el botón inferior para enlazar tu carpeta de trabajo.</p>
+                            <p className="text-body text-muted font-medium">Usa el botón inferior para enlazar tu carpeta de trabajo.</p>
                           </div>
                         ) : workspaceFiles.grupos.length === 0 ? (
                           <div className="h-full flex items-center justify-center text-center p-4">
-                            <p className="text-sm text-muted">No se han encontrado grupos.</p>
+                            <p className="text-body text-muted">No se han encontrado grupos.</p>
                           </div>
                         ) : (
                           workspaceFiles.grupos.map(g => (
@@ -561,7 +562,7 @@ export default function ArchivosTrabajoPage() {
                             >
                               <div className="flex items-center gap-2">
                                 <FolderOpen className="w-4 h-4 text-accent/70 group-hover/item:text-accent transition-colors shrink-0" />
-                                <span className="text-sm font-medium truncate" title={g}>{g.replace('.json', '')}</span>
+                                <span className="text-body font-medium truncate" title={g}>{g.replace('.json', '')}</span>
                               </div>
                             </button>
                           ))
@@ -575,14 +576,14 @@ export default function ArchivosTrabajoPage() {
                             <Button onClick={async () => {
                               const handle = await fileManager.openWorkspaceDirectory();
                               if (handle) toast.success("Carpeta local conectada.");
-                            }} className="w-full bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 transition-all text-xs h-9">
+                            }} className="w-full bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 transition-all text-caption h-9">
                               <FolderOpen className="w-3 h-3 mr-1" /> Conectar Carpeta Local
                             </Button>
                           ) : (
                             <Button onClick={async () => {
                               const handle = await fileManager.openWorkspaceDirectory();
                               if (handle) toast.success("Carpeta local cambiada.");
-                            }} className="w-full bg-foreground/5 hover:bg-foreground/10 text-foreground border border-[var(--glass-border)] transition-all text-xs h-9">
+                            }} className="w-full bg-foreground/5 hover:bg-foreground/10 text-foreground border border-[var(--glass-border)] transition-all text-caption h-9">
                               <FolderOpen className="w-3 h-3 mr-1" /> Cambiar Carpeta Local
                             </Button>
                           )}
@@ -599,12 +600,12 @@ export default function ArchivosTrabajoPage() {
                     <div className="relative z-10 flex flex-col h-full flex-1">
                       <div className="mb-4">
                         <div className="flex justify-between items-center mb-1">
-                          <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
+                          <h3 className="text-subheading font-bold text-foreground flex items-center gap-2">
                             <BookOpen className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : 'text-info'}`} /> Programaciones
                           </h3>
                           {hasPdFile && <Badge variant={isDemoLoaded ? 'warning' : 'info'}>Activa</Badge>}
                         </div>
-                        <p className="text-sm text-muted mt-2 leading-relaxed">
+                        <p className="text-body text-muted mt-2 leading-relaxed">
                           Plantillas curriculares. Doble clic para cargar una programación independiente.
                         </p>
                       </div>
@@ -613,7 +614,7 @@ export default function ArchivosTrabajoPage() {
                         {isDemoLoaded ? (
                           demoProgFiles.length === 0 ? (
                             <div className="h-full flex items-center justify-center text-center p-4">
-                              <p className="text-sm text-muted">No se han encontrado programaciones DEMO.</p>
+                              <p className="text-body text-muted">No se han encontrado programaciones DEMO.</p>
                             </div>
                           ) : (
                             demoProgFiles.map(f => {
@@ -626,7 +627,7 @@ export default function ArchivosTrabajoPage() {
                                 >
                                   <div className="flex items-center gap-2">
                                     <BookOpen className={`w-4 h-4 shrink-0 transition-colors ${isActive ? 'text-info' : 'text-info/70 group-hover/item:text-info'}`} />
-                                    <span className={`text-sm font-medium truncate ${isActive ? 'text-info font-bold' : ''}`} title={f.name}>{f.name.replace('.fpp', '')}</span>
+                                    <span className={`text-body font-medium truncate ${isActive ? 'text-info font-bold' : ''}`} title={f.name}>{f.name.replace('.fpp', '')}</span>
                                   </div>
                                 </button>
                               );
@@ -647,14 +648,14 @@ export default function ArchivosTrabajoPage() {
                               >
                                 <div className="flex items-center gap-2">
                                   <BookOpen className={`w-4 h-4 shrink-0 transition-colors ${isActive ? 'text-info' : 'text-info/70 group-hover/item:text-info'}`} />
-                                  <span className={`text-sm font-medium truncate ${isActive ? 'text-info font-bold' : ''}`} title={p}>{p.replace('.json', '')}</span>
+                                  <span className={`text-body font-medium truncate ${isActive ? 'text-info font-bold' : ''}`} title={p}>{p.replace('.json', '')}</span>
                                 </div>
                               </button>
                             );
                           })
                         ) : workspaceHandle ? (
                           <div className="h-full flex items-center justify-center text-center p-4">
-                            <p className="text-sm text-muted">No se han encontrado programaciones.</p>
+                            <p className="text-body text-muted">No se han encontrado programaciones.</p>
                           </div>
                         ) : null}
                       </div>
@@ -668,16 +669,16 @@ export default function ArchivosTrabajoPage() {
                         ) : (
                           <>
                             <div className="flex gap-2">
-                              <Button onClick={handleNewPd} className="flex-1 bg-info/10 hover:bg-info/20 text-info border border-info/30 transition-all text-xs h-9">
+                              <Button onClick={handleNewPd} className="flex-1 bg-info/10 hover:bg-info/20 text-info border border-info/30 transition-all text-caption h-9">
                                 <Plus className="w-3 h-3 mr-1" /> Nueva (Catálogo)
                               </Button>
-                              <Button onClick={handleOpenPd} className="flex-1 bg-foreground/5 hover:bg-foreground/10 text-foreground border border-[var(--glass-border)] transition-all text-xs h-9">
+                              <Button onClick={handleOpenPd} className="flex-1 bg-foreground/5 hover:bg-foreground/10 text-foreground border border-[var(--glass-border)] transition-all text-caption h-9">
                                 <FolderOpen className="w-3 h-3 mr-1" /> Importar
                               </Button>
                             </div>
                             {hasPdFile && (
                               <div className="flex gap-2">
-                                <Button onClick={handleSavePd} className="flex-1 bg-info/10 hover:bg-info/20 text-info border border-info/30 transition-all text-xs h-9">
+                                <Button onClick={handleSavePd} className="flex-1 bg-info/10 hover:bg-info/20 text-info border border-info/30 transition-all text-caption h-9">
                                   <Save className="w-3 h-3 mr-1" /> Guardar
                                 </Button>
                                 <Button onClick={handleSaveAsPd} className="bg-foreground/5 hover:bg-foreground/10 text-muted border border-[var(--glass-border)] transition-all px-3 h-9" title="Guardar como...">
@@ -699,12 +700,12 @@ export default function ArchivosTrabajoPage() {
                     <div className="relative z-10 flex flex-col h-full flex-1">
                       <div className="mb-4">
                         <div className="flex justify-between items-center mb-1">
-                          <h3 className={`text-lg font-bold flex items-center gap-2 ${(!isDemoLoaded && !hasPdFile) ? 'text-muted' : 'text-foreground'}`}>
+                          <h3 className={`text-subheading font-bold flex items-center gap-2 ${(!isDemoLoaded && !hasPdFile) ? 'text-muted' : 'text-foreground'}`}>
                             <Users className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : (!isDemoLoaded && !hasPdFile) ? 'text-muted' : 'text-success'}`} /> Cursos
                           </h3>
                           {hasCursoFile && <Badge variant={isDemoLoaded ? 'warning' : 'success'}>Activo</Badge>}
                         </div>
-                        <p className="text-sm text-muted mt-2 leading-relaxed">
+                        <p className="text-body text-muted mt-2 leading-relaxed">
                           Cuadernos de clase e instancias temporales de una programación.
                         </p>
                       </div>
@@ -713,7 +714,7 @@ export default function ArchivosTrabajoPage() {
                         {isDemoLoaded ? (
                           demoCursoFiles.length === 0 ? (
                             <div className="h-full flex items-center justify-center text-center p-4">
-                              <p className="text-sm text-muted">No se han encontrado cursos DEMO.</p>
+                              <p className="text-body text-muted">No se han encontrado cursos DEMO.</p>
                             </div>
                           ) : (
                             demoCursoFiles.map(f => {
@@ -726,7 +727,7 @@ export default function ArchivosTrabajoPage() {
                                 >
                                   <div className="flex items-center gap-2">
                                     <Users className={`w-4 h-4 shrink-0 transition-colors ${isActive ? 'text-success' : 'text-success/70 group-hover/item:text-success'}`} />
-                                    <span className={`text-sm font-medium truncate ${isActive ? 'text-success font-bold' : ''}`} title={f.name}>{f.name.replace('.fpc', '')}</span>
+                                    <span className={`text-body font-medium truncate ${isActive ? 'text-success font-bold' : ''}`} title={f.name}>{f.name.replace('.fpc', '')}</span>
                                   </div>
                                 </button>
                               );
@@ -745,14 +746,14 @@ export default function ArchivosTrabajoPage() {
                               >
                                 <div className="flex items-center gap-2">
                                   <Users className={`w-4 h-4 shrink-0 transition-colors ${isActive ? 'text-success' : 'text-success/70 group-hover/item:text-success'}`} />
-                                  <span className={`text-sm font-medium truncate ${isActive ? 'text-success font-bold' : ''}`} title={c}>{c.replace('.json', '')}</span>
+                                  <span className={`text-body font-medium truncate ${isActive ? 'text-success font-bold' : ''}`} title={c}>{c.replace('.json', '')}</span>
                                 </div>
                               </button>
                             );
                           })
                         ) : workspaceHandle ? (
                           <div className="h-full flex items-center justify-center text-center p-4">
-                            <p className="text-sm text-muted">No se han encontrado cursos.</p>
+                            <p className="text-body text-muted">No se han encontrado cursos.</p>
                           </div>
                         ) : null}
                       </div>
@@ -766,7 +767,7 @@ export default function ArchivosTrabajoPage() {
                         ) : (
                           <>
                             <div className="flex gap-2">
-                              <Button disabled={!hasPdFile} onClick={handleNewCurso} className="flex-1 bg-success/10 hover:bg-success/20 text-success border border-success/30 transition-all disabled:opacity-30 text-xs h-9" title="Crea un curso y su archivo grupo asociado">
+                              <Button disabled={!hasPdFile} onClick={handleNewCurso} className="flex-1 bg-success/10 hover:bg-success/20 text-success border border-success/30 transition-all disabled:opacity-30 text-caption h-9" title="Crea un curso y su archivo grupo asociado">
                                 <Plus className="w-3 h-3 mr-1" /> Iniciar Curso (+ Grupo)
                               </Button>
                               <Button disabled={!hasPdFile} onClick={handleOpenCurso} className="bg-foreground/5 hover:bg-foreground/10 text-foreground border border-[var(--glass-border)] transition-all px-3 h-9" title="Importar curso huérfano">
@@ -775,7 +776,7 @@ export default function ArchivosTrabajoPage() {
                             </div>
                             {hasCursoFile && (
                               <div className="flex gap-2">
-                                <Button onClick={handleSaveCurso} className="flex-1 bg-success/10 hover:bg-success/20 text-success border border-success/30 transition-all text-xs h-9">
+                                <Button onClick={handleSaveCurso} className="flex-1 bg-success/10 hover:bg-success/20 text-success border border-success/30 transition-all text-caption h-9">
                                   <Save className="w-3 h-3 mr-1" /> Guardar
                                 </Button>
                                 <Button onClick={handleSaveAsCurso} className="bg-foreground/5 hover:bg-foreground/10 text-muted border border-[var(--glass-border)] transition-all px-3 h-9" title="Guardar como...">
@@ -798,7 +799,7 @@ export default function ArchivosTrabajoPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   {/* Columna Google Drive */}
                   <div className="space-y-4">
-                    <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
+                    <h3 className="text-subheading font-bold text-foreground flex items-center gap-2">
                       <Cloud className="w-5 h-5 text-[#4285F4]" /> Google Drive
                     </h3>
                     <GoogleDriveSyncPanel />
@@ -828,44 +829,44 @@ export default function ArchivosTrabajoPage() {
                       <Shield className="w-6 h-6" />
                     </div>
                     <div>
-                      <h2 className="text-lg font-bold text-foreground">Tu privacidad por diseño</h2>
-                      <p className="text-muted mt-1 text-sm">Cómo garantizamos que tus datos reales son 100% tuyos.</p>
+                      <h2 className="text-subheading font-bold text-foreground">Tu privacidad por diseño</h2>
+                      <p className="text-muted mt-1 text-body">Cómo garantizamos que tus datos reales son 100% tuyos.</p>
                     </div>
                   </div>
                   
                   <div className="space-y-4">
                     <div className="p-5 bg-background rounded-xl border border-border/50">
                       <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Building2 className="w-5 h-5 text-accent"/> 1. El servidor es ciego</h3>
-                      <p className="text-muted leading-relaxed text-sm">Nuestra base de datos en la nube <strong>jamás</strong> almacena datos de tus alumnos, tus programaciones, ni nada que crees. El servidor web solo existe para enviarte los Catálogos Oficiales (BOE/BOCAA). Eres invisible para nuestro backend.</p>
+                      <p className="text-muted leading-relaxed text-body">Nuestra base de datos en la nube <strong>jamás</strong> almacena datos de tus alumnos, tus programaciones, ni nada que crees. El servidor web solo existe para enviarte los Catálogos Oficiales (BOE/BOCAA). Eres invisible para nuestro backend.</p>
                     </div>
 
                     <div className="p-5 bg-background rounded-xl border border-border/50">
                       <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Lock className="w-5 h-5 text-accent"/> 2. Cifrado local avanzado AES-256</h3>
-                      <p className="text-muted leading-relaxed mb-4 text-sm">Puedes activar la encriptación local. Antes de que cualquier archivo se guarde en tu disco duro o nube, se cifra usando tu clave maestra dentro de tu navegador.</p>
+                      <p className="text-muted leading-relaxed mb-4 text-body">Puedes activar la encriptación local. Antes de que cualquier archivo se guarde en tu disco duro o nube, se cifra usando tu clave maestra dentro de tu navegador.</p>
                       
                       <div className="bg-surface border border-border p-4 rounded-lg">
-                        <label className="block text-sm font-medium text-foreground mb-2">Establecer clave de seguridad (no se guarda en ningún sitio)</label>
+                        <label className="block text-body font-medium text-foreground mb-2">Establecer clave de seguridad (no se guarda en ningún sitio)</label>
                         <div className="flex gap-2">
                           <input 
                             type="password" 
-                            className="flex-1 bg-background border border-border rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent text-sm" 
+                            className="flex-1 bg-background border border-border rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent text-body" 
                             placeholder="Introduce tu clave maestra..."
                             value={useAppStore.getState().encryptionKey || ""}
                             onChange={(e) => useAppStore.getState().setEncryptionKey(e.target.value || null)}
                           />
                         </div>
-                        <p className="text-xs text-muted mt-2"><AlertTriangle className="w-3 h-3 inline mr-1 text-warning"/> Si olvidas esta clave y guardas un archivo, no podremos ayudarte a recuperarlo.</p>
+                        <p className="text-caption text-muted mt-2"><AlertTriangle className="w-3 h-3 inline mr-1 text-warning"/> Si olvidas esta clave y guardas un archivo, no podremos ayudarte a recuperarlo.</p>
                       </div>
                     </div>
 
                     <div className="p-5 bg-background rounded-xl border border-border/50">
                       <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><CheckCircle className="w-5 h-5 text-accent"/> 3. Defensa contra ataques en el navegador</h3>
-                      <p className="text-muted leading-relaxed text-sm">Hemos implementado una política estricta de seguridad de contenido (CSP) para bloquear scripts maliciosos de terceros.</p>
+                      <p className="text-muted leading-relaxed text-body">Hemos implementado una política estricta de seguridad de contenido (CSP) para bloquear scripts maliciosos de terceros.</p>
                     </div>
 
                     <div className="p-5 bg-background rounded-xl border border-border/50">
                       <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Activity className="w-5 h-5 text-accent"/> 4. Servidor blindado y siempre disponible</h3>
-                      <p className="text-muted leading-relaxed text-sm">Nuestro servidor backend incorpora <strong>Rate Limiting</strong>, garantizando que siempre tendrás acceso al catálogo oficial de módulos.</p>
+                      <p className="text-muted leading-relaxed text-body">Nuestro servidor backend incorpora <strong>Rate Limiting</strong>, garantizando que siempre tendrás acceso al catálogo oficial de módulos.</p>
                     </div>
                   </div>
                 </section>
@@ -875,7 +876,7 @@ export default function ArchivosTrabajoPage() {
               {activeTab === "asistente-ia" && (
                 <section className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
                   <Card className="p-6">
-                    <h2 className="text-lg font-bold mb-4 flex items-center gap-2"><Sparkles className="w-5 h-5 text-accent"/> Configuración del Asistente IA</h2>
+                    <h2 className="text-subheading font-bold mb-4 flex items-center gap-2"><Sparkles className="w-5 h-5 text-accent"/> Configuración del Asistente IA</h2>
                     <AISettingsPanel />
                   </Card>
                 </section>
@@ -886,8 +887,8 @@ export default function ArchivosTrabajoPage() {
               <Card className="flex items-start gap-4 p-6 bg-info/5 border border-info/20 rounded-2xl shadow-lg">
                 <span className="text-info mt-1 shrink-0"><ShieldAlert className="w-8 h-8" /></span>
                 <div>
-                  <h3 className="text-lg font-bold text-foreground mb-2">Seguridad y RGPD garantizados</h3>
-                  <div className="text-sm text-foreground/80 space-y-2 leading-relaxed">
+                  <h3 className="text-subheading font-bold text-foreground mb-2">Seguridad y RGPD garantizados</h3>
+                  <div className="text-body text-foreground/80 space-y-2 leading-relaxed">
                     <p>CuadernoFP procesa toda tu información confidencial exclusivamente en tu navegador. <strong>Tú eres el dueño de tus archivos</strong>.</p>
                     <p>Ningún dato de tu alumnado se envía a la nube, salvo que uses la Sincronización autorizada en tu cuenta.</p>
                     <p className="font-semibold text-info mt-2">Asegúrate de pulsar &quot;Guardar&quot; al finalizar tu sesión de trabajo para no perder los últimos cambios.</p>
@@ -915,7 +916,7 @@ export default function ArchivosTrabajoPage() {
           aria-labelledby="validation-modal-title"
         >
           <Card className="w-full max-w-xl p-6 shadow-2xl border-[var(--glass-border)]">
-            <h2 id="validation-modal-title" className="text-lg font-bold mb-4 flex items-center gap-2">
+            <h2 id="validation-modal-title" className="text-subheading font-bold mb-4 flex items-center gap-2">
               <ShieldAlert className="w-5 h-5 text-warning" />
               Validación de Enlaces del Workspace
             </h2>
@@ -924,14 +925,14 @@ export default function ArchivosTrabajoPage() {
               <div className="text-center py-8">
                 <CheckCircle className="w-12 h-12 text-success mx-auto mb-4" />
                 <p className="text-foreground font-medium">¡Todo correcto!</p>
-                <p className="text-muted text-sm mt-2">No se han detectado enlaces rotos en los grupos de tu carpeta local.</p>
+                <p className="text-muted text-body mt-2">No se han detectado enlaces rotos en los grupos de tu carpeta local.</p>
               </div>
             ) : (
               <div className="space-y-4">
-                <p className="text-muted text-sm">Se han detectado los siguientes enlaces rotos en los archivos Grupo. Esto sucede cuando renombras o eliminas una Programación o un Curso en Windows directamente.</p>
+                <p className="text-muted text-body">Se han detectado los siguientes enlaces rotos en los archivos Grupo. Esto sucede cuando renombras o eliminas una Programación o un Curso en Windows directamente.</p>
                 <ul className="space-y-3 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
                   {brokenLinks.map((link, idx) => (
-                    <li key={idx} className="bg-foreground/5 p-3 rounded-lg border border-[var(--glass-border)] text-sm">
+                    <li key={idx} className="bg-foreground/5 p-3 rounded-lg border border-[var(--glass-border)] text-body">
                       <p className="font-semibold">{link.groupName}</p>
                       <p className="text-danger flex items-center gap-2 mt-1">
                         <AlertTriangle className="w-4 h-4" /> {link.type === 'programacion' ? 'Programación' : 'Curso'} no encontrada: <span className="font-mono">{link.missingFile}</span>

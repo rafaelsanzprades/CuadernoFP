@@ -90,13 +90,13 @@ export default function DatePicker({ value, onChange, label, className, placehol
   return (
     <div className={`relative ${className || ""}`} ref={ref}>
       {label && (
-        <label htmlFor={id} className="block text-sm font-semibold text-muted mb-1">{label}</label>
+        <label htmlFor={id} className="block text-body font-semibold text-muted mb-1">{label}</label>
       )}
       <button
         id={id}
         type="button"
         onClick={() => setOpen(o => !o)}
-        className={`w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground text-sm flex items-center hover:border-[#14a085] focus:outline-none focus:border-[#14a085] transition-colors group ${className?.includes('text-center') ? 'justify-center gap-2' : 'justify-between text-left'}`}
+        className={`w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground text-body flex items-center hover:border-[#14a085] focus:outline-none focus:border-[#14a085] transition-colors group ${className?.includes('text-center') ? 'justify-center gap-2' : 'justify-between text-left'}`}
       >
         <span className={selectedDate ? "text-foreground" : "text-muted"}>{displayValue}</span>
         <span className="text-muted group-hover:text-[#14a085] transition-colors"><Calendar className="w-4 h-4" /></span>
@@ -109,7 +109,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
             <button
               type="button"
               onClick={prevMonth}
-              className="text-muted hover:text-foreground w-7 h-7 flex items-center justify-center rounded-lg hover:bg-foreground/10 transition-colors text-lg font-bold"
+              className="text-muted hover:text-foreground w-7 h-7 flex items-center justify-center rounded-lg hover:bg-foreground/10 transition-colors text-subheading font-bold"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -117,7 +117,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
               <select
                 value={viewMonth}
                 onChange={e => setViewMonth(Number(e.target.value))}
-                className="bg-foreground/10 border border-[var(--glass-border)] rounded px-1 py-0.5 text-foreground text-xs focus:outline-none cursor-pointer"
+                className="bg-foreground/10 border border-[var(--glass-border)] rounded px-1 py-0.5 text-foreground text-caption focus:outline-none cursor-pointer"
               >
                 {MONTHS.map((m, i) => (
                   <option key={i} value={i} className="bg-[#0d1726]">{m}</option>
@@ -126,7 +126,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
               <select
                 value={viewYear}
                 onChange={e => setViewYear(Number(e.target.value))}
-                className="bg-foreground/10 border border-[var(--glass-border)] rounded px-1 py-0.5 text-foreground text-xs focus:outline-none cursor-pointer"
+                className="bg-foreground/10 border border-[var(--glass-border)] rounded px-1 py-0.5 text-foreground text-caption focus:outline-none cursor-pointer"
               >
                 {years.map(y => (
                   <option key={y} value={y} className="bg-[#0d1726]">{y}</option>
@@ -136,7 +136,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
             <button
               type="button"
               onClick={nextMonth}
-              className="text-muted hover:text-foreground w-7 h-7 flex items-center justify-center rounded-lg hover:bg-foreground/10 transition-colors text-lg font-bold"
+              className="text-muted hover:text-foreground w-7 h-7 flex items-center justify-center rounded-lg hover:bg-foreground/10 transition-colors text-subheading font-bold"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -145,7 +145,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
           {/* Cabecera días */}
           <div className="grid grid-cols-7 mb-1">
             {DAYS_HEADER.map(d => (
-              <div key={d} className="text-center text-xs text-muted font-bold py-1">
+              <div key={d} className="text-center text-caption text-muted font-bold py-1">
                 {d}
               </div>
             ))}
@@ -160,7 +160,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
                 disabled={!day}
                 onClick={() => day && handleDayClick(day)}
                 className={[
-                  "aspect-square rounded-lg text-xs font-medium transition-all duration-100 flex items-center justify-center",
+                  "aspect-square rounded-lg text-caption font-medium transition-all duration-100 flex items-center justify-center",
                   !day ? "invisible pointer-events-none" : "",
                   isSelected(day)
                     ? "bg-[#14a085] text-foreground font-bold shadow-lg shadow-[#14a085]/40"
@@ -183,7 +183,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
                 setViewMonth(today.getMonth());
                 handleDayClick(today.getDate());
               }}
-              className="text-xs text-[#14a085] hover:text-[#1abc9c] font-semibold transition-colors"
+              className="text-caption text-[#14a085] hover:text-[#1abc9c] font-semibold transition-colors"
             >
               Hoy
             </button>
@@ -191,7 +191,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
               <button
                 type="button"
                 onClick={() => { onChange(""); setOpen(false); }}
-                className="text-xs text-muted hover:text-danger transition-colors"
+                className="text-caption text-muted hover:text-danger transition-colors"
               >
                 Borrar
               </button>

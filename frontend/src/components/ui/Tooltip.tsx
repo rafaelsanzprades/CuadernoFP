@@ -57,7 +57,7 @@ export function Tooltip({ children, content, position = "right", delay = 0.3 }: 
             animate={animatedVariants[position]}
             exit={variants[position]}
             transition={{ duration: 0.15 }}
-            className={`absolute z-50 px-2 py-1 text-xs font-semibold text-background bg-foreground rounded-md shadow-lg whitespace-nowrap pointer-events-none ${positions[position]}`}
+            className={`absolute z-50 px-2 py-1 text-caption font-semibold text-background bg-foreground rounded-md shadow-lg whitespace-nowrap pointer-events-none ${positions[position]}`}
           >
             {content}
           </motion.div>

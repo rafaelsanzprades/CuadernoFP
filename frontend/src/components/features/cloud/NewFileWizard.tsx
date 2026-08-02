@@ -205,7 +205,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
             ) : (
               <GraduationCap className="w-5 h-5 text-success" />
             )}
-            <h2 className="text-lg font-bold text-foreground">
+            <h2 className="text-subheading font-bold text-foreground">
               Nuevo archivo de {fileType === 'programacion' ? 'Programación' : 'Curso'}
             </h2>
           </div>
@@ -218,7 +218,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
         <div className="flex-1 overflow-y-auto p-6">
           {fileType === 'programacion' ? (
             <>
-              <p className="text-sm text-muted mb-4">
+              <p className="text-body text-muted mb-4">
                 Selecciona el módulo para generar una programación vacía con la estructura correcta (RA/CE desde catálogo oficial).
               </p>
               {/* Search */}
@@ -234,7 +234,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
               <div className="space-y-4">
                 {Object.entries(grouped).map(([groupName, modules]) => (
                   <div key={groupName}>
-                    <h4 className="text-xs font-bold text-muted tracking-wider mb-2 px-1">{groupName}</h4>
+                    <h4 className="text-caption font-bold text-muted tracking-wider mb-2 px-1">{groupName}</h4>
                     <div className="space-y-1">
                       {modules.map(m => (
                         <button
@@ -247,8 +247,8 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
                           }`}
                         >
                           <div className="flex items-center gap-3 min-w-0">
-                            <span className="text-xs font-mono font-bold opacity-60 shrink-0">{m.code}</span>
-                            <span className="text-sm truncate">{m.name}</span>
+                            <span className="text-caption font-mono font-bold opacity-60 shrink-0">{m.code}</span>
+                            <span className="text-body truncate">{m.name}</span>
                           </div>
                           {selectedModule?.code === m.code && (
                             <ChevronRight className="w-4 h-4 shrink-0" />
@@ -265,7 +265,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
             </>
           ) : (
             <>
-              <p className="text-sm text-muted mb-6">
+              <p className="text-body text-muted mb-6">
                 Elige cómo quieres inicializar tu nuevo archivo de curso.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -277,22 +277,22 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
                   
                   <div className="flex gap-2 text-left">
                     <div className="flex-1">
-                      <label className="text-xs text-muted font-medium mb-1 block">Año Académico</label>
+                      <label className="text-caption text-muted font-medium mb-1 block">Año Académico</label>
                       <input 
                         type="text" 
                         value={cursoYear} 
                         onChange={e => setCursoYear(e.target.value)} 
-                        className="w-full bg-background border border-[var(--glass-border)] rounded-md px-3 py-1.5 text-sm" 
+                        className="w-full bg-background border border-[var(--glass-border)] rounded-md px-3 py-1.5 text-body" 
                         placeholder="ej: 2025-26" 
                       />
                     </div>
                     <div className="flex-1">
-                      <label className="text-xs text-muted font-medium mb-1 block">Letra / Grupo</label>
+                      <label className="text-caption text-muted font-medium mb-1 block">Letra / Grupo</label>
                       <input 
                         type="text" 
                         value={cursoName} 
                         onChange={e => setCursoName(e.target.value)} 
-                        className="w-full bg-background border border-[var(--glass-border)] rounded-md px-3 py-1.5 text-sm" 
+                        className="w-full bg-background border border-[var(--glass-border)] rounded-md px-3 py-1.5 text-body" 
                         placeholder="ej: 1A-GM" 
                       />
                     </div>
@@ -311,12 +311,12 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
                   disabled={isCreating}
                   className="bg-warning/5 border border-warning/20 rounded-xl p-6 text-center hover:bg-warning/10 hover:border-warning/40 transition-all group relative overflow-hidden"
                 >
-                  <div className="absolute top-0 right-0 bg-warning text-warning-foreground text-xs font-bold px-2 py-1 rounded-bl-lg">
+                  <div className="absolute top-0 right-0 bg-warning text-warning-foreground text-caption font-bold px-2 py-1 rounded-bl-lg">
                     RECOMENDADO
                   </div>
                   <BookOpen className="w-12 h-12 text-warning/60 mx-auto mb-3 group-hover:text-warning transition-colors" />
                   <p className="text-foreground font-medium group-hover:text-warning transition-colors">Cargar datos DEMO</p>
-                  <p className="text-sm text-muted mt-2">Genera un curso pre-rellenado con datos de ejemplo para explorar todas las funciones.</p>
+                  <p className="text-body text-muted mt-2">Genera un curso pre-rellenado con datos de ejemplo para explorar todas las funciones.</p>
                 </button>
               </div>
             </>

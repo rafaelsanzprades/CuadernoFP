@@ -82,7 +82,7 @@ def generar_pdf_boletin_individual(
     nombre = str(al.get("Nombre", ""))
     _edad = al.get("Edad", "")
     edad = str(int(_edad)) if pd.notna(_edad) and str(_edad) not in ("", "nan") else "-"
-    repite = "Sí" if al.get("Repite", False) else "No"
+    repite = "Sí" if al.get("Repite") else "No"
     
     email = str(al.get("Email", "-")) if pd.notna(al.get("Email")) else "-"
     telefono = str(al.get("Teléfono", "-")) if pd.notna(al.get("Teléfono")) else "-"

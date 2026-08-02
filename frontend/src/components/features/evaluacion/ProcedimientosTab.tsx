@@ -12,8 +12,8 @@ export function ProcedimientosTab() {
             <Scale className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-[var(--text-primary)]">Procedimientos normativos</h2>
-            <p className="text-sm text-muted-foreground">Configura los aspectos normativos y burocráticos de la evaluación para la Programación Didáctica.</p>
+            <h2 className="text-subheading font-bold text-[var(--text-primary)]">Procedimientos normativos</h2>
+            <p className="text-body text-muted-foreground">Configura los aspectos normativos y burocráticos de la evaluación para la Programación Didáctica.</p>
           </div>
         </div>
 

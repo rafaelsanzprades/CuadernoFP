@@ -85,7 +85,7 @@ export default function SeguimientoPage() {
             <MotionWrapper>
               <div className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <ClipboardCheck className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-2xl font-bold">No hay curso ni programación cargada</h2>
+                <h2 className="text-heading font-bold">No hay curso ni programación cargada</h2>
                 <p className="text-muted mb-4">Debes abrir o crear un archivo de programación y curso en tu Archivos.</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
@@ -217,7 +217,7 @@ export default function SeguimientoPage() {
 
               <TabsContent value="clases" className="mt-4">
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-lg font-bold flex items-center gap-2 text-foreground">
+                  <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
                     <FileEdit className="w-5 h-5 text-accent" /> Diario de clases y contingencias
                   </h2>
                   <button
@@ -227,7 +227,7 @@ export default function SeguimientoPage() {
                         (el as HTMLDetailsElement).open = !allDiarioOpen ? true : false;
                       });
                     }}
-                    className="text-sm font-semibold px-4 py-2 rounded-lg border border-[var(--glass-border)] bg-foreground/15 text-foreground/80 hover:bg-foreground/10 hover:text-foreground transition-colors flex items-center gap-2"
+                    className="text-body font-semibold px-4 py-2 rounded-lg border border-[var(--glass-border)] bg-foreground/15 text-foreground/80 hover:bg-foreground/10 hover:text-foreground transition-colors flex items-center gap-2"
                   >
                     <span>{allDiarioOpen ? '▲' : '▼'}</span>
                     {allDiarioOpen ? 'Colapsar todos' : 'Expandir todos'}
@@ -240,12 +240,12 @@ export default function SeguimientoPage() {
 
                     return (
                       <details key={m_short} open className="diario-details group bg-foreground/5 rounded-lg border border-[var(--glass-border)] overflow-hidden open:bg-foreground/10 transition-colors">
-                        <summary className="p-4 cursor-pointer flex items-center justify-between font-semibold text-lg select-none hover:bg-foreground/5">
+                        <summary className="p-4 cursor-pointer flex items-center justify-between font-semibold text-subheading select-none hover:bg-foreground/5">
                           <div className="flex items-center gap-3">
                             <span className="text-info"><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
                             <span>{meses_nombres[m_short as keyof typeof meses_nombres]} {lectivos[0].getFullYear()}</span>
                           </div>
-                          <div className="text-sm text-muted">
+                          <div className="text-body text-muted">
                             {lectivos.length} días lectivos <span className="ml-4 group-open:rotate-180 inline-block transition-transform">▼</span>
                           </div>
                         </summary>
@@ -267,12 +267,12 @@ export default function SeguimientoPage() {
                                   <div className="bg-foreground/5 border border-[var(--glass-border)] rounded-xl p-4 hover:bg-foreground/10 transition-all duration-300 shadow-sm">
                                     <div className="flex items-center justify-between mb-4">
                                       <div className="flex items-center gap-3">
-                                        <span className="font-mono text-lg font-bold text-foreground tracking-widest">{dateStr.substring(0,5)}</span>
-                                        <span className="text-xs font-medium text-muted tracking-wider bg-foreground/5 px-2 py-1 rounded">{diaSemana}</span>
-                                        {udPrev && <span className="bg-info/10 text-info border border-info/30 px-2 py-0.5 rounded text-xs font-medium shadow-sm">UD: {udPrev}</span>}
+                                        <span className="font-mono text-subheading font-bold text-foreground tracking-widest">{dateStr.substring(0,5)}</span>
+                                        <span className="text-caption font-medium text-muted tracking-wider bg-foreground/5 px-2 py-1 rounded">{diaSemana}</span>
+                                        {udPrev && <span className="bg-info/10 text-info border border-info/30 px-2 py-0.5 rounded text-caption font-medium shadow-sm">UD: {udPrev}</span>}
                                       </div>
                                       <div className="flex items-center gap-5">
-                                        <label className="flex items-center gap-2 text-xs font-medium text-muted cursor-pointer hover:text-warning transition-colors tracking-wider">
+                                        <label className="flex items-center gap-2 text-caption font-medium text-muted cursor-pointer hover:text-warning transition-colors tracking-wider">
                                           <input
                                             type="checkbox"
                                             checked={ledgerEntry.sin_docencia}
@@ -281,7 +281,7 @@ export default function SeguimientoPage() {
                                           />
                                           Sin docencia
                                         </label>
-                                        <label className="flex items-center gap-2 text-xs font-medium text-muted cursor-pointer hover:text-success transition-colors tracking-wider">
+                                        <label className="flex items-center gap-2 text-caption font-medium text-muted cursor-pointer hover:text-success transition-colors tracking-wider">
                                           <input
                                             type="checkbox"
                                             checked={ledgerEntry.publico}
@@ -293,12 +293,12 @@ export default function SeguimientoPage() {
                                       </div>
                                     </div>
                                     <div className="flex items-start gap-3">
-                                      <span className="text-lg mt-2 opacity-50 select-none"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
+                                      <span className="text-subheading mt-2 opacity-50 select-none"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
                                       <textarea
                                         value={ledgerEntry.seguimiento}
                                         onChange={(e) => handleLedgerChange(dateStr, 'seguimiento', e.target.value)}
                                         placeholder="Escribe aquí el seguimiento de la clase, incidencias o progreso real..."
-                                        className="w-full bg-foreground/20 border border-white/5 hover:border-[var(--glass-border)] rounded-lg px-4 py-3 text-foreground focus:border-info focus:bg-black/60 focus:outline-none transition-all resize-none overflow-hidden min-h-[60px] text-sm"
+                                        className="w-full bg-foreground/20 border border-white/5 hover:border-[var(--glass-border)] rounded-lg px-4 py-3 text-foreground focus:border-info focus:bg-black/60 focus:outline-none transition-all resize-none overflow-hidden min-h-[60px] text-body"
                                         rows={1}
                                         onInput={(e) => {
                                           const target = e.target as HTMLTextAreaElement;

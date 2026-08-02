@@ -67,14 +67,14 @@ export function DiversidadTab() {
 
       {/* Marco de Inclusión */}
       <div className="glass-card p-6 border-t-4 border-t-purple-500">
-        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
           <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-purple-400" /></span> Marco de Inclusión (D 91/2024 Art. 29)
         </h2>
         <div className="space-y-6">
 
           <div>
-            <label className="text-sm font-semibold text-foreground mb-2 block">Medidas de inclusión (selección múltiple)</label>
-            <p className="text-xs text-muted mb-3">Selecciona las medidas de respuesta educativa que aplicarás de forma general en este módulo.</p>
+            <label className="text-body font-semibold text-foreground mb-2 block">Medidas de inclusión (selección múltiple)</label>
+            <p className="text-caption text-muted mb-3">Selecciona las medidas de respuesta educativa que aplicarás de forma general en este módulo.</p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {INCLUSION.map((inc) => {
                 const isSelected = medidas_inclusion.includes(inc.id);
@@ -86,7 +86,7 @@ export function DiversidadTab() {
                       onChange={() => toggleInclusion(inc.id)}
                       className="rounded border-white/20 bg-transparent text-purple-500 focus:ring-purple-500"
                     />
-                    <span className="text-xs"><strong>{inc.id}</strong> - {inc.label}</span>
+                    <span className="text-caption"><strong>{inc.id}</strong> - {inc.label}</span>
                   </label>
                 );
               })}
@@ -94,12 +94,12 @@ export function DiversidadTab() {
           </div>
 
           <div>
-            <label className="text-sm font-semibold text-foreground mb-2 block">Anotaciones libres sobre inclusión</label>
+            <label className="text-body font-semibold text-foreground mb-2 block">Anotaciones libres sobre inclusión</label>
             <textarea
               value={moduleData?.texto_inclusion_libre || ""}
               onChange={e => updateModuleData("texto_inclusion_libre", e.target.value)}
               placeholder="Añade aquí medidas específicas, adaptaciones de acceso al aula o justificaciones normativas extra..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-sm text-foreground focus:border-info focus:outline-none"
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
 
@@ -112,8 +112,8 @@ export function DiversidadTab() {
               onChange={(e) => handleChange("adaptaciones_no_significativas", e.target.checked)}
             />
             <div>
-              <p className="font-semibold text-sm">Adaptaciones curriculares no significativas</p>
-              <p className="text-xs text-muted">Ajustes metodológicos, organizativos o de acceso que no alteran los RA ni CE esenciales.</p>
+              <p className="font-semibold text-body">Adaptaciones curriculares no significativas</p>
+              <p className="text-caption text-muted">Ajustes metodológicos, organizativos o de acceso que no alteran los RA ni CE esenciales.</p>
             </div>
           </label>
 
@@ -125,8 +125,8 @@ export function DiversidadTab() {
               onChange={(e) => handleChange("medidas_flexibilizacion", e.target.checked)}
             />
             <div>
-              <p className="font-semibold text-sm">Medidas de flexibilización</p>
-              <p className="text-xs text-muted">Alternativas metodológicas en enseñanza y evaluación que no minorarán las calificaciones.</p>
+              <p className="font-semibold text-body">Medidas de flexibilización</p>
+              <p className="text-caption text-muted">Alternativas metodológicas en enseñanza y evaluación que no minorarán las calificaciones.</p>
             </div>
           </label>
         </div>
@@ -134,11 +134,11 @@ export function DiversidadTab() {
 
       {/* F1. Atención a la diversidad */}
       <div className="glass-card p-6 border-t-4 border-t-violet-500">
-        <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-4">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
           <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-violet-400" /></span> F1. Atención a la diversidad
         </h2>
         <div className="space-y-2">
-          <p className="text-xs text-muted mb-2">Estrategias para adaptar la enseñanza a las características del alumnado.</p>
+          <p className="text-caption text-muted mb-2">Estrategias para adaptar la enseñanza a las características del alumnado.</p>
           <textarea
             value={config_contexto["F1_diversidad"] || ""}
             onChange={e => handleChange("F1_diversidad", e.target.value)}
@@ -151,20 +151,20 @@ export function DiversidadTab() {
       {/* Panel ACNEAE */}
       <div className="glass-card p-6 border-t-4 border-t-pink-500">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-bold flex items-center gap-2 text-foreground">
+          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
             <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1 text-pink-400" /></span> Panel de ACNEAE
           </h2>
           <Button size="sm" variant="secondary" onClick={addAcneae} className="gap-2">
             <Plus className="w-4 h-4" /> Añadir Alumno
           </Button>
         </div>
-        <p className="text-xs text-muted mb-4">
+        <p className="text-caption text-muted mb-4">
           Registro de Alumnado con Necesidad Específica de Apoyo Educativo y sus adaptaciones asociadas.
         </p>
 
         {acneae.length === 0 ? (
           <div className="text-center py-8 bg-white/5 rounded-lg border border-white/10">
-            <p className="text-muted text-sm">No hay alumnos ACNEAE registrados en este módulo.</p>
+            <p className="text-muted text-body">No hay alumnos ACNEAE registrados en este módulo.</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -180,29 +180,29 @@ export function DiversidadTab() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 pr-8">
                   <div>
-                    <label className="text-xs font-semibold text-muted block mb-1">Nombre / Identificador</label>
+                    <label className="text-caption font-semibold text-muted block mb-1">Nombre / Identificador</label>
                     <input 
                       type="text" 
                       value={student.nombre}
                       onChange={(e) => updateAcneae(student.id, "nombre", e.target.value)}
                       placeholder="Ej. Alumno A"
-                      className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-2 text-sm text-foreground focus:border-info focus:outline-none"
+                      className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-2 text-body text-foreground focus:border-info focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-semibold text-muted block mb-1">Tipo de Necesidad</label>
+                    <label className="text-caption font-semibold text-muted block mb-1">Tipo de Necesidad</label>
                     <input 
                       type="text" 
                       value={student.tipoNecesidad}
                       onChange={(e) => updateAcneae(student.id, "tipoNecesidad", e.target.value)}
                       placeholder="Ej. Dislexia, TEA, Altas capacidades..."
-                      className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-2 text-sm text-foreground focus:border-info focus:outline-none"
+                      className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-2 text-body text-foreground focus:border-info focus:outline-none"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold text-muted block mb-2">Adaptaciones de evaluación y acceso</label>
+                  <label className="text-caption font-semibold text-muted block mb-2">Adaptaciones de evaluación y acceso</label>
                   <div className="flex flex-wrap gap-2">
                     {adaptacionesList.map(adapt => {
                       const isSelected = (student.adaptaciones || []).includes(adapt);
@@ -210,7 +210,7 @@ export function DiversidadTab() {
                         <button
                           key={adapt}
                           onClick={() => toggleAdaptacion(student.id, adapt)}
-                          className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
+                          className={`text-caption px-3 py-1.5 rounded-full border transition-colors ${
                             isSelected 
                               ? 'bg-pink-500/20 border-pink-500/50 text-pink-200' 
                               : 'bg-white/5 border-white/10 text-muted hover:bg-white/10'

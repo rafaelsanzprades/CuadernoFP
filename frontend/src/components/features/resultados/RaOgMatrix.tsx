@@ -42,12 +42,12 @@ export function RaOgMatrix() {
 
   return (
     <Card className="p-6 border-l-4 border-l-blue-500 overflow-hidden animate-in fade-in duration-500">
-      <h2 className="text-lg font-bold flex items-center gap-2 text-foreground mb-6">
+      <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-6">
         <LinkIcon className="w-5 h-5 text-info" /> Contribución de los RA a los OG del Título
       </h2>
       
       <div className="overflow-x-auto pb-4 scrollbar-hide">
-        <table className="w-full text-left border-collapse text-sm">
+        <table className="w-full text-left border-collapse text-body">
           <thead>
             <tr>
               <th className="p-3 border-b border-[var(--glass-border)] text-muted font-bold min-w-[300px]">
@@ -71,7 +71,7 @@ export function RaOgMatrix() {
               <tr key={idx} className="hover:bg-foreground/5 transition-colors border-b border-[var(--glass-border)]/50 group">
                 <td className="p-3 align-top">
                   <div className="flex gap-2">
-                    <span className="font-mono text-xs font-medium text-info mt-0.5">OG{og.id}.</span>
+                    <span className="font-mono text-caption font-medium text-info mt-0.5">OG{og.id}.</span>
                     <span className="text-foreground/90 leading-relaxed">{og.desc}</span>
                   </div>
                 </td>

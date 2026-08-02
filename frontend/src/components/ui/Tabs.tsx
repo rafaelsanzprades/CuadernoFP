@@ -76,7 +76,7 @@ export function TabsTrigger({
         context.setActiveTab(value);
         if (onClick) onClick();
       }}
-      className={`relative px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-200 whitespace-nowrap outline-none
+      className={`relative px-4 py-2 rounded-lg text-body font-semibold transition-colors duration-200 whitespace-nowrap outline-none
         ${isActive ? "text-accent drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]" : "text-muted hover:text-accent hover:bg-accent/10"}
         ${className}
       `}

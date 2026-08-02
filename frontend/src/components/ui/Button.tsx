@@ -9,9 +9,9 @@ export function Button({ children, className = '', variant = 'primary', size = '
   const baseStyle = "font-semibold rounded-xl flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 hover:scale-[1.02]";
 
   const sizes = {
-    sm: "text-xs py-1.5 px-3",
-    md: "text-sm py-2 px-5",
-    lg: "text-sm py-2.5 px-6",
+    sm: "text-caption py-1.5 px-3",
+    md: "text-body py-2 px-5",
+    lg: "text-body py-2.5 px-6",
   };
 
   let variantStyle = "";

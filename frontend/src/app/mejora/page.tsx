@@ -43,7 +43,7 @@ export default function MejoraPage() {
             <MotionWrapper>
               <div className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <Settings className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-2xl font-bold">No hay programación cargada</h2>
+                <h2 className="text-heading font-bold">No hay programación cargada</h2>
                 <p className="text-muted mb-4">Debes abrir o crear un archivo de programación en tu Archivos.</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
