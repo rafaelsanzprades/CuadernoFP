@@ -380,8 +380,8 @@ export default function MatricesPage() {
 
                     <Card className="px-4 py-2 inline-flex items-center gap-2 border-l-4 border-l-blue-500">
                       <span className="text-muted">Total suma % RA:</span>
-                      <span className={`font-bold ${df_ra.reduce((sum: number, ra: any) => sum + (ra.peso_ra || 0), 0) === 100 ? 'text-success' : 'text-danger'}`}>
-                        {df_ra.reduce((sum: number, ra: any) => sum + (ra.peso_ra || 0), 0).toFixed(0)}%
+                      <span className={`font-bold ${df_ra.reduce((sum: number, ra: any) => sum + (Number(ra.peso_ra) || 0), 0) === 100 ? 'text-success' : 'text-danger'}`}>
+                        {df_ra.reduce((sum: number, ra: any) => sum + (Number(ra.peso_ra) || 0), 0).toFixed(0)}%
                       </span>
                     </Card>
                   </div>
@@ -412,7 +412,7 @@ export default function MatricesPage() {
                   <div className="space-y-4">
                     {df_ra.map((ra: any) => {
                       const ceForRa = df_ce.filter((ce: any) => ce.id_ra === ra.id_ra);
-                      const totalPeso = ceForRa.reduce((sum: number, ce: any) => sum + (ce.peso_ce || 0), 0);
+                      const totalPeso = ceForRa.reduce((sum: number, ce: any) => sum + (Number(ce.peso_ce) || 0), 0);
 
                       return (
                         <div key={ra.id_ra} className="group bg-foreground/5 rounded-lg border border-[var(--glass-border)] overflow-hidden transition-colors">
