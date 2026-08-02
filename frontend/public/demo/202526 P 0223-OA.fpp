@@ -3,68 +3,124 @@
   "__version__": 24,
   "df_ud": [
     {
-      "id": "UD1",
+      "id_ud": "UD1",
+      "desc_ud": "Instalación, actualización y configuración de suites ofimáticas y gestión de licencias.",
+      "horas_ud": 10,
       "titulo": "Fundamentos de la ofimática",
-      "duracion": 10,
       "ra": "RA1",
       "temporizacion": "1.er trimestre",
-      "desc_ud": "Introducción al entorno del sistema operativo"
+      "pct_ra1": 100,
+      "pct_ra2": 0,
+      "pct_ra3": 0,
+      "pct_ra4": 0,
+      "pct_ra5": 0,
+      "pct_ra6": 0,
+      "pct_ra7": 0
     },
     {
-      "id": "UD2",
+      "id_ud": "UD2",
+      "desc_ud": "Gestión de correo electrónico y agenda electrónica: configuración de cuentas, contactos y sincronización.",
+      "horas_ud": 10,
       "titulo": "Comunicación digital: correo y agenda",
-      "duracion": 10,
       "ra": "RA8",
       "temporizacion": "1.er trimestre",
-      "desc_ud": "Procesadores de texto: operaciones básicas"
+      "pct_ra1": 0,
+      "pct_ra2": 0,
+      "pct_ra3": 0,
+      "pct_ra4": 0,
+      "pct_ra5": 0,
+      "pct_ra6": 0,
+      "pct_ra7": 0
     },
     {
-      "id": "UD3",
+      "id_ud": "UD3",
+      "desc_ud": "Elaboración de documentos y plantillas con opciones avanzadas del procesador de textos.",
+      "horas_ud": 30,
       "titulo": "Procesadores de texto",
-      "duracion": 30,
       "ra": "RA2",
       "temporizacion": "1.er trimestre",
-      "desc_ud": "Procesadores de texto: formato y herramientas avanzadas"
+      "pct_ra1": 0,
+      "pct_ra2": 100,
+      "pct_ra3": 0,
+      "pct_ra4": 0,
+      "pct_ra5": 0,
+      "pct_ra6": 0,
+      "pct_ra7": 0
     },
     {
-      "id": "UD4",
+      "id_ud": "UD4",
+      "desc_ud": "Elaboración de documentos y plantillas de cálculo con fórmulas, funciones y gráficos.",
+      "horas_ud": 41,
       "titulo": "Hojas de cálculo",
-      "duracion": 41,
       "ra": "RA3",
       "temporizacion": "1.er / 2.º trimestre",
-      "desc_ud": "Hojas de cálculo: entorno y conceptos básicos"
+      "pct_ra1": 0,
+      "pct_ra2": 0,
+      "pct_ra3": 100,
+      "pct_ra4": 0,
+      "pct_ra5": 0,
+      "pct_ra6": 0,
+      "pct_ra7": 0
     },
     {
-      "id": "UD5",
+      "id_ud": "UD5",
+      "desc_ud": "Técnicas de soporte, resolución de incidencias y elaboración de guías de uso de aplicaciones.",
+      "horas_ud": 10,
       "titulo": "Soporte técnico ofimático",
-      "duracion": 10,
       "ra": "RA9",
       "temporizacion": "2.º trimestre",
-      "desc_ud": "Hojas de cálculo: fórmulas, funciones y gráficos"
+      "pct_ra1": 0,
+      "pct_ra2": 0,
+      "pct_ra3": 0,
+      "pct_ra4": 0,
+      "pct_ra5": 0,
+      "pct_ra6": 0,
+      "pct_ra7": 0
     },
     {
-      "id": "UD6",
+      "id_ud": "UD6",
+      "desc_ud": "Diseño y elaboración de presentaciones multimedia aplicando normas de composición.",
+      "horas_ud": 17,
       "titulo": "Presentaciones multimedia",
-      "duracion": 17,
       "ra": "RA7",
       "temporizacion": "2.º trimestre",
-      "desc_ud": "Gestión de bases de datos relacionales"
+      "pct_ra1": 0,
+      "pct_ra2": 0,
+      "pct_ra3": 0,
+      "pct_ra4": 0,
+      "pct_ra5": 0,
+      "pct_ra6": 0,
+      "pct_ra7": 100
     },
     {
-      "id": "UD7",
+      "id_ud": "UD7",
+      "desc_ud": "Elaboración de documentos con bases de datos ofimáticas: tablas, consultas, formularios e informes.",
+      "horas_ud": 24,
       "titulo": "Bases de datos",
-      "duracion": 24,
       "ra": "RA4",
       "temporizacion": "2.º trimestre",
-      "desc_ud": "Elaboración de presentaciones gráficas"
+      "pct_ra1": 0,
+      "pct_ra2": 0,
+      "pct_ra3": 0,
+      "pct_ra4": 100,
+      "pct_ra5": 0,
+      "pct_ra6": 0,
+      "pct_ra7": 0
     },
     {
-      "id": "UD8",
+      "id_ud": "UD8",
+      "desc_ud": "Captura y edición básica de imágenes digitales y secuencias de vídeo.",
+      "horas_ud": 33,
       "titulo": "Imagen y vídeo digital",
-      "duracion": 33,
       "ra": "RA5, RA6",
       "temporizacion": "3.er trimestre",
-      "desc_ud": "Herramientas de correo electrónico y agenda"
+      "pct_ra1": 0,
+      "pct_ra2": 0,
+      "pct_ra3": 0,
+      "pct_ra4": 0,
+      "pct_ra5": 50,
+      "pct_ra6": 50,
+      "pct_ra7": 0
     }
   ],
   "df_ra": [
@@ -73,63 +129,72 @@
       "peso_ra": 10,
       "is_dual": false,
       "comp_clave": "",
-      "cpe": ""
+      "cpe": "",
+      "desc_ra": "Instala y actualiza aplicaciones ofimáticas, interpretando especificaciones y describiendo los pasos a seguir en el proceso."
     },
     {
       "id_ra": "RA2",
       "peso_ra": 20,
       "is_dual": false,
       "comp_clave": "",
-      "cpe": ""
+      "cpe": "",
+      "desc_ra": "Elabora documentos y plantillas, describiendo y aplicando las opciones avanzadas de procesadores de textos."
     },
     {
       "id_ra": "RA3",
       "peso_ra": 15,
       "is_dual": false,
       "comp_clave": "",
-      "cpe": ""
+      "cpe": "",
+      "desc_ra": "Elabora documentos y plantillas de cálculo, describiendo y aplicando opciones avanzadas de hojas de cálculo."
     },
     {
       "id_ra": "RA4",
       "peso_ra": 10,
       "is_dual": false,
       "comp_clave": "",
-      "cpe": ""
+      "cpe": "",
+      "desc_ra": "Elabora documentos con bases de datos ofimáticas describiendo y aplicando operaciones de manipulación de datos."
     },
     {
       "id_ra": "RA5",
       "peso_ra": 15,
       "is_dual": false,
       "comp_clave": "",
-      "cpe": ""
+      "cpe": "",
+      "desc_ra": "Manipula imágenes digitales analizando las posibilidades de distintos programas y aplicando técnicas de captura y edición básicas."
     },
     {
       "id_ra": "RA6",
       "peso_ra": 10,
       "is_dual": false,
       "comp_clave": "",
-      "cpe": ""
+      "cpe": "",
+      "desc_ra": "Manipula secuencias de vídeo analizando las posibilidades de distintos programas y aplicando técnicas de captura y edición básicas."
     },
     {
       "id_ra": "RA7",
       "peso_ra": 10,
       "is_dual": false,
       "comp_clave": "",
-      "cpe": ""
+      "cpe": "",
+      "desc_ra": "Elabora presentaciones multimedia describiendo y aplicando normas básicas de composición y diseño."
     },
     {
       "id_ra": "RA8",
       "peso_ra": 5,
       "is_dual": false,
       "comp_clave": "",
-      "cpe": ""
+      "cpe": "",
+      "desc_ra": "Realiza operaciones de gestión del correo y la agenda electrónica, relacionando necesidades de uso con su configuración."
     },
     {
       "id_ra": "RA9",
       "peso_ra": 5,
       "is_dual": false,
       "comp_clave": "",
-      "cpe": ""
+      "cpe": "",
+      "desc_ra": "Aplica técnicas de soporte en el uso de aplicaciones, identificando y resolviendo incidencias."
     }
   ],
   "df_ce": [
@@ -139,7 +204,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD1"
     },
     {
       "id_ce": "CE1.b",
@@ -147,7 +212,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD1"
     },
     {
       "id_ce": "CE1.c",
@@ -155,7 +220,7 @@
       "peso_ce": 15,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD1"
     },
     {
       "id_ce": "CE1.d",
@@ -163,7 +228,7 @@
       "peso_ce": 15,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD1"
     },
     {
       "id_ce": "CE1.e",
@@ -171,7 +236,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD1"
     },
     {
       "id_ce": "CE1.f",
@@ -179,7 +244,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD1"
     },
     {
       "id_ce": "CE1.g",
@@ -187,7 +252,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD1"
     },
     {
       "id_ce": "CE1.h",
@@ -195,7 +260,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD1"
     },
     {
       "id_ce": "CE1.i",
@@ -203,7 +268,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD1"
     },
     {
       "id_ce": "CE2.a",
@@ -211,7 +276,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD3"
     },
     {
       "id_ce": "CE2.b",
@@ -219,7 +284,7 @@
       "peso_ce": 20,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD3"
     },
     {
       "id_ce": "CE2.c",
@@ -227,7 +292,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD3"
     },
     {
       "id_ce": "CE2.d",
@@ -235,7 +300,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD3"
     },
     {
       "id_ce": "CE2.e",
@@ -243,7 +308,7 @@
       "peso_ce": 30,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD3"
     },
     {
       "id_ce": "CE2.f",
@@ -251,7 +316,7 @@
       "peso_ce": 20,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD3"
     },
     {
       "id_ce": "CE3.a",
@@ -259,7 +324,7 @@
       "peso_ce": 5,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD4"
     },
     {
       "id_ce": "CE3.b",
@@ -267,7 +332,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD4"
     },
     {
       "id_ce": "CE3.c",
@@ -275,7 +340,7 @@
       "peso_ce": 25,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD4"
     },
     {
       "id_ce": "CE3.d",
@@ -283,7 +348,7 @@
       "peso_ce": 15,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD4"
     },
     {
       "id_ce": "CE3.e",
@@ -291,7 +356,7 @@
       "peso_ce": 15,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD4"
     },
     {
       "id_ce": "CE3.f",
@@ -299,7 +364,7 @@
       "peso_ce": 15,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD4"
     },
     {
       "id_ce": "CE3.g",
@@ -307,7 +372,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD4"
     },
     {
       "id_ce": "CE3.h",
@@ -315,7 +380,7 @@
       "peso_ce": 5,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD4"
     },
     {
       "id_ce": "CE4.a",
@@ -323,7 +388,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD7"
     },
     {
       "id_ce": "CE4.b",
@@ -331,7 +396,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD7"
     },
     {
       "id_ce": "CE4.c",
@@ -339,7 +404,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD7"
     },
     {
       "id_ce": "CE4.d",
@@ -347,7 +412,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD7"
     },
     {
       "id_ce": "CE4.e",
@@ -355,7 +420,7 @@
       "peso_ce": 15,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD7"
     },
     {
       "id_ce": "CE4.f",
@@ -363,7 +428,7 @@
       "peso_ce": 15,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD7"
     },
     {
       "id_ce": "CE4.g",
@@ -371,7 +436,7 @@
       "peso_ce": 15,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD7"
     },
     {
       "id_ce": "CE4.h",
@@ -379,7 +444,7 @@
       "peso_ce": 15,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD7"
     },
     {
       "id_ce": "CE5.a",
@@ -387,7 +452,7 @@
       "peso_ce": 15,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD8"
     },
     {
       "id_ce": "CE5.b",
@@ -395,7 +460,7 @@
       "peso_ce": 15,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD8"
     },
     {
       "id_ce": "CE5.c",
@@ -403,7 +468,7 @@
       "peso_ce": 15,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD8"
     },
     {
       "id_ce": "CE5.d",
@@ -411,7 +476,7 @@
       "peso_ce": 40,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD8"
     },
     {
       "id_ce": "CE5.e",
@@ -419,7 +484,7 @@
       "peso_ce": 15,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD8"
     },
     {
       "id_ce": "CE6.a",
@@ -427,7 +492,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD8"
     },
     {
       "id_ce": "CE6.b",
@@ -435,7 +500,7 @@
       "peso_ce": 20,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD8"
     },
     {
       "id_ce": "CE6.c",
@@ -443,7 +508,7 @@
       "peso_ce": 5,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD8"
     },
     {
       "id_ce": "CE6.d",
@@ -451,7 +516,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD8"
     },
     {
       "id_ce": "CE6.e",
@@ -459,7 +524,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD8"
     },
     {
       "id_ce": "CE7.a",
@@ -467,7 +532,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD6"
     },
     {
       "id_ce": "CE7.b",
@@ -475,7 +540,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD6"
     },
     {
       "id_ce": "CE7.c",
@@ -483,7 +548,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD6"
     },
     {
       "id_ce": "CE7.d",
@@ -491,7 +556,7 @@
       "peso_ce": 30,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD6"
     },
     {
       "id_ce": "CE7.e",
@@ -499,7 +564,7 @@
       "peso_ce": 30,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD6"
     },
     {
       "id_ce": "CE7.f",
@@ -507,7 +572,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD6"
     },
     {
       "id_ce": "CE8.a",
@@ -515,7 +580,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD2"
     },
     {
       "id_ce": "CE8.b",
@@ -523,7 +588,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD2"
     },
     {
       "id_ce": "CE8.c",
@@ -531,7 +596,7 @@
       "peso_ce": 5,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD2"
     },
     {
       "id_ce": "CE8.d",
@@ -539,7 +604,7 @@
       "peso_ce": 25,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD2"
     },
     {
       "id_ce": "CE8.e",
@@ -547,7 +612,7 @@
       "peso_ce": 25,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD2"
     },
     {
       "id_ce": "CE8.f",
@@ -555,7 +620,7 @@
       "peso_ce": 15,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD2"
     },
     {
       "id_ce": "CE8.g",
@@ -563,7 +628,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD2"
     },
     {
       "id_ce": "CE9.a",
@@ -571,7 +636,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD5"
     },
     {
       "id_ce": "CE9.b",
@@ -579,7 +644,7 @@
       "peso_ce": 10,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD5"
     },
     {
       "id_ce": "CE9.c",
@@ -587,7 +652,7 @@
       "peso_ce": 5,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD5"
     },
     {
       "id_ce": "CE9.d",
@@ -595,7 +660,43 @@
       "peso_ce": 20,
       "FEOE": false,
       "UD": "",
-      "id_ud": ""
+      "id_ud": "UD5"
+    },
+    {
+      "id_ce": "CE9.e",
+      "id_ra": "RA9",
+      "peso_ce": 0,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD5",
+      "desc_ce": "Se han realizado informes de incidencias."
+    },
+    {
+      "id_ce": "CE9.f",
+      "id_ra": "RA9",
+      "peso_ce": 0,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD5",
+      "desc_ce": "Se han aplicado los procedimientos necesarios para salvaguardar la información y su recuperación."
+    },
+    {
+      "id_ce": "CE9.g",
+      "id_ra": "RA9",
+      "peso_ce": 0,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD5",
+      "desc_ce": "Se han utilizado los recursos disponibles (documentación técnica, ayudas en línea, soporte técnico, entre otros) para solventar incidencias."
+    },
+    {
+      "id_ce": "CE9.h",
+      "id_ra": "RA9",
+      "peso_ce": 0,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD5",
+      "desc_ce": "Se han solventando las incidencias en el tiempo adecuado y con el nivel de calidad esperado."
     }
   ],
   "info_modulo": {

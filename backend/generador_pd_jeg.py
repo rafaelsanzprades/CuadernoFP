@@ -151,11 +151,15 @@ def _build_context(data: dict) -> dict:
         "texto_og": config.get("texto_og", ""),
         "textos_pd_contexto_geografico": data.get("textos_pd_contexto_geografico", ""),
         "textos_pd_contexto_socioeconomico": data.get("textos_pd_contexto_socioeconomico", ""),
-        "textos_pd_contexto_academico": data.get("textos_pd_contexto_academico", ""),
+        # La plantilla titula esta sección "Contexto escolar" -> mapea al campo real textos_pd_contexto_escolar
+        "textos_pd_contexto_academico": data.get("textos_pd_contexto_escolar", ""),
+        # Sin campo de origen real (no hay ninguna pestaña que recoja "marco normativo"); queda vacío a propósito.
         "textos_pd_procedimientos_normativos": data.get("textos_pd_procedimientos_normativos", ""),
-        "textos_pd_metodologia_didactica": data.get("textos_pd_metodologia_didactica", ""),
-        "textos_pd_inclusion_diversidad": data.get("textos_pd_inclusion_diversidad", ""),
-        "textos_pd_plan_contingencia": data.get("textos_pd_plan_contingencia", ""),
+        # La plantilla solo tiene un placeholder para todo "Plan de contingencia" -> combina profesorado + alumnado
+        "textos_pd_plan_contingencia": "\n\n".join(filter(None, [
+            data.get("textos_pd_contingencia_profesor", ""),
+            data.get("textos_pd_contingencia_alumnado", ""),
+        ])),
         "textos_pd_bibliografia": data.get("textos_pd_bibliografia", ""),
         "textos_pd_publicidad": data.get("textos_pd_publicidad", ""),
     })
@@ -377,30 +381,6 @@ def _build_context(data: dict) -> dict:
         context["elementos_transversales"] = ". ".join(et_list)
     else:
         context["elementos_transversales"] = str(et_list)
-
-    # --- Variables de texto libre que la plantilla necesita ---
-    # (Secciones del JEG que requieren redacción del docente)
-    context["texto_identificacion"] = config.get("texto_identificacion",
-        f"El presente documento corresponde a la programación didáctica del {tipo_elemento} "
-        f"«{modulo}», perteneciente al ciclo formativo «{ciclo}» "
-        f"de la familia profesional «{data.get('familia', '')}».")
-    context["implicaciones_contexto_geografico"] = config.get("implicaciones_contexto_geografico", "")
-    context["implicaciones_contexto_productivo"] = config.get("implicaciones_contexto_productivo", "")
-    context["implicaciones_centro"] = config.get("implicaciones_centro", "")
-    context["implicaciones_alumnado"] = config.get("implicaciones_alumnado", "")
-    context["implicaciones_infraestructura"] = config.get("implicaciones_infraestructura", "")
-    context["texto_contenidos"] = config.get("texto_contenidos", "")
-    context["texto_seguimiento_feoe"] = config.get("texto_seguimiento_feoe", "")
-    context["texto_evaluacion_continua"] = config.get("texto_evaluacion_continua", "")
-    context["texto_perdida_evaluacion_continua"] = config.get("texto_perdida_evaluacion_continua", "")
-    context["texto_plan_recuperacion_pendientes"] = config.get("texto_plan_recuperacion_pendientes", "")
-    context["texto_publicidad"] = config.get("texto_publicidad", "")
-    context["texto_atencion_diversidad"] = config.get("texto_atencion_diversidad", "")
-    context["texto_coordinacion_docente"] = config.get("texto_coordinacion_docente", "")
-    context["texto_tutoria"] = config.get("texto_tutoria", "")
-    context["texto_fp_dual"] = config.get("texto_fp_dual", "")
-    context["texto_coeducacion"] = config.get("texto_coeducacion", "")
-    context["texto_sostenibilidad"] = config.get("texto_sostenibilidad", "")
 
     return context
 

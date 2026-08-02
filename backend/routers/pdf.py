@@ -191,6 +191,23 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 "horario": module_data.get("horario") or curso_data.get("horario") or {},
                 "calendar_notes": curso_data.get("calendar_notes") or {},
                 "planning_ledger": curso_data.get("planning_ledger") or {},
+                # Textos narrativos PD (16 campos, ver ALLOWED_PROGRAMACION_KEYS en fileManager.ts)
+                "textos_pd_contexto_geografico": module_data.get("textos_pd_contexto_geografico", ""),
+                "textos_pd_contexto_socioeconomico": module_data.get("textos_pd_contexto_socioeconomico", ""),
+                "textos_pd_contexto_escolar": module_data.get("textos_pd_contexto_escolar", ""),
+                "textos_pd_caracteristicas_alumnado": module_data.get("textos_pd_caracteristicas_alumnado", ""),
+                "textos_pd_feoe_organizacion": module_data.get("textos_pd_feoe_organizacion", ""),
+                "textos_pd_feoe_seguimiento": module_data.get("textos_pd_feoe_seguimiento", ""),
+                "textos_pd_eval_informacion": module_data.get("textos_pd_eval_informacion", ""),
+                "textos_pd_eval_perdida_continua": module_data.get("textos_pd_eval_perdida_continua", ""),
+                "textos_pd_eval_recuperacion": module_data.get("textos_pd_eval_recuperacion", ""),
+                "textos_pd_eval_pendientes": module_data.get("textos_pd_eval_pendientes", ""),
+                "textos_pd_metodologia_labor_coordinada": module_data.get("textos_pd_metodologia_labor_coordinada", ""),
+                "textos_pd_inclusion": module_data.get("textos_pd_inclusion", ""),
+                "textos_pd_contingencia_profesor": module_data.get("textos_pd_contingencia_profesor", ""),
+                "textos_pd_contingencia_alumnado": module_data.get("textos_pd_contingencia_alumnado", ""),
+                "textos_pd_bibliografia": module_data.get("textos_pd_bibliografia", ""),
+                "textos_pd_publicidad": module_data.get("textos_pd_publicidad", ""),
             }
             
             with tempfile.TemporaryDirectory() as tmpdir:

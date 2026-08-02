@@ -60,7 +60,7 @@ def _build_context(data: dict) -> dict:
     # --- H1 3: Resultados de Aprendizaje (lista) ────────────────────────
     list_ras = []
     for ra in df_ra:
-        id_str = str(ra.get('id_ra', ''))
+        id_str = str(ra.get('id_ra', '')).strip().rstrip('.')
         prefix = "" if id_str.upper().startswith("RA") else "RA"
         desc = resolve_ra_desc(ra, ra_desc_map)
         list_ras.append(f"{prefix}{id_str}. {desc}")
@@ -69,7 +69,7 @@ def _build_context(data: dict) -> dict:
     # --- H1 4: Contenidos / UDs (lista) ─────────────────────────────────
     list_uds = []
     for ud in df_ud:
-        id_str = str(ud.get('id_ud', ''))
+        id_str = str(ud.get('id_ud', '')).strip().rstrip('.')
         prefix = "" if id_str.upper().startswith("UD") else "UD"
         desc = resolve_ud_desc(ud, ud_desc_map)
         list_uds.append(f"{prefix}{id_str}. {desc}")
