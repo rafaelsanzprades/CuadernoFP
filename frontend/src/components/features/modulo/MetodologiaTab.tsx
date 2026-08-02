@@ -69,7 +69,7 @@ export function MetodologiaTab() {
               value={config_contexto["principios_metodologicos"] || ""}
               onChange={e => handleChange("principios_metodologicos", e.target.value)}
               placeholder="Ej: Aprendizaje significativo, funcionalidad de los aprendizajes..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
@@ -79,7 +79,7 @@ export function MetodologiaTab() {
               value={config_contexto["estrategias_metodologicas"] || config_contexto["D2_actividades_ea"] || ""}
               onChange={e => handleChange("estrategias_metodologicas", e.target.value)}
               placeholder="Relación de metodologías tipo como teoría, taller, prácticas simuladas..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
           
@@ -90,7 +90,7 @@ export function MetodologiaTab() {
               value={moduleData?.texto_metodologia_libre || ""}
               onChange={e => updateModuleData("texto_metodologia_libre", e.target.value)}
               placeholder="Escribe aquí cualquier especificidad sobre tu forma de impartir clases que no esté cubierta en la selección anterior..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
 
@@ -101,7 +101,7 @@ export function MetodologiaTab() {
               value={config_contexto["plan_desdobles"] || config_contexto["D3_agrupamientos"] || ""}
               onChange={e => handleChange("plan_desdobles", e.target.value)}
               placeholder="Organización del grupo, desdobles por prevención de riesgos o ratios..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
@@ -111,7 +111,7 @@ export function MetodologiaTab() {
               value={config_contexto["aprendizaje_colaborativo"] || ""}
               onChange={e => handleChange("aprendizaje_colaborativo", e.target.value)}
               placeholder="Se aplicará la metodología basada en retos para..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
         </div>

@@ -455,7 +455,7 @@ export default function CalendarioPage() {
   const TABS = [
     { id: "fechas", label: <span className="flex items-center gap-2"><Settings className="w-4 h-4 shrink-0" /> Fechas y horarios</span>, cleanLabel: "Fechas y horarios" },
     { id: "eventos", label: <span className="flex items-center gap-2"><Flag className="w-4 h-4 shrink-0" /> Eventos y festivos</span>, cleanLabel: "Eventos y festivos" },
-    { id: "actividades", label: <span className="flex items-center gap-2"><Bus className="w-4 h-4 shrink-0" /> Actividades comp.</span>, cleanLabel: "Actividades comp." },
+    { id: "actividades", label: <span className="flex items-center gap-2"><Bus className="w-4 h-4 shrink-0" /> Actividades extraescolares</span>, cleanLabel: "Actividades extraescolares" },
     { id: "visual", label: <span className="flex items-center gap-2"><Calendar className="w-4 h-4 shrink-0" /> Calendario visual</span>, cleanLabel: "Calendario visual" },
   ];
 

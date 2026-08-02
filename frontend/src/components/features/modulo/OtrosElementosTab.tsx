@@ -101,7 +101,7 @@ export function OtrosElementosTab() {
               value={config_contexto["I1_transversales"] || ""}
               onChange={e => handleChange("I1_transversales", e.target.value)}
               placeholder="Detalla cómo se integrarán los elementos transversales obligatorios..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
         </div>
@@ -120,7 +120,7 @@ export function OtrosElementosTab() {
               value={config_contexto["ecp"] || ""}
               onChange={e => handleChange("ecp", e.target.value)}
               placeholder="Ej: UC0001_3: Gestionar..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
@@ -129,7 +129,7 @@ export function OtrosElementosTab() {
               value={config_contexto["cpe"] || ""}
               onChange={e => handleChange("cpe", e.target.value)}
               placeholder="Competencias específicas y transversales..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
@@ -138,7 +138,7 @@ export function OtrosElementosTab() {
               value={config_contexto["og"] || ""}
               onChange={e => handleChange("og", e.target.value)}
               placeholder="Objetivos generales del título aplicables al módulo..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
         </div>

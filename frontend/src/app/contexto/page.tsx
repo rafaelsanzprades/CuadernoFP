@@ -24,7 +24,7 @@ export default function ContextoConfigPage() {
   const [activeTab, setActiveTab] = useState("presentacion");
 
   useEffect(() => {
-    if (dataSource === 'demo') {
+    if (dataSource === 'demo' && moduleData) {
       setLoading(false);
       return;
     }
@@ -53,19 +53,19 @@ export default function ContextoConfigPage() {
   }, [activeModuleId, setModuleData, dataSource]);
 
   const TABS = [
-    { id: "presentacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> Presentación</span>, cleanLabel: "Presentación" },
-    { id: "entorno", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Entorno</span>, cleanLabel: "Entorno" },
-    { id: "planes", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.planes')}</span>, cleanLabel: t('tabs.planes') },
-    { id: "procedimientos", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> Procedimientos</span>, cleanLabel: "Procedimientos" },
+    { id: "presentacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> Identificación</span>, cleanLabel: "Identificación" },
+    { id: "entorno", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Contextualización</span>, cleanLabel: "Contextualización" },
+    { id: "planes", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> FEOE y diversidad</span>, cleanLabel: "FEOE y diversidad" },
+    { id: "procedimientos", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> Evaluación y calificación</span>, cleanLabel: "Evaluación y calificación" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    presentacion: 'Configuración inicial y datos generales del módulo profesional.',
-    entorno: 'Análisis del entorno socioeconómico, centro educativo y perfil del alumnado.',
-    planes: 'Vinculación con los planes estratégicos y proyectos institucionales del centro.',
-    procedimientos: 'Aspectos normativos y burocráticos de la evaluación para la programación didáctica.',
+    presentacion: 'Identificación del módulo: código, denominación, centro, curso académico y profesorado. Cap. 1.1 del PD+.',
+    entorno: 'Entorno geográfico, socioeconómico y escolar del módulo. Cap. 1.3 del PD+.',
+    planes: 'Plan de atención a la diversidad (DUA) y formación en empresa u organismo equiparado (FEOE). Cap. 2.9 y 5 del PD+.',
+    procedimientos: 'Procedimiento de evaluación y de calificación: información al alumnado, pérdida de evaluación continua, recuperación. Cap. 4 del PD+.',
   };
 
   if (!activeModuleId) {

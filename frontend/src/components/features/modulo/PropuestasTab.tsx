@@ -41,7 +41,7 @@ export function PropuestasTab() {
               <textarea
                 value={eqavet.puntos_fuertes || ""}
                 onChange={(e) => handleTextChange("puntos_fuertes", e.target.value)}
-                className="w-full h-24 rounded-lg bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 text-body focus:outline-none focus:border-success resize-none transition-colors"
+                className="w-full h-32 rounded-lg bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 text-body focus:outline-none focus:border-success resize-none transition-colors"
                 placeholder="Ej. La implicación del alumnado en los proyectos..."
               />
             </div>
@@ -50,7 +50,7 @@ export function PropuestasTab() {
               <textarea
                 value={eqavet.areas_mejora || ""}
                 onChange={(e) => handleTextChange("areas_mejora", e.target.value)}
-                className="w-full h-24 rounded-lg bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 text-body focus:outline-none focus:border-success resize-none transition-colors"
+                className="w-full h-32 rounded-lg bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 text-body focus:outline-none focus:border-success resize-none transition-colors"
                 placeholder="Ej. Incluir más prácticas con material real, actualizar documentación..."
               />
             </div>

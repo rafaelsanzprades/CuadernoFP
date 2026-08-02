@@ -1,4 +1,4 @@
-import { Activity, Building2, Calendar, Compass, FileText, FolderOpen, GraduationCap, Grid, Settings, TrendingUp, Users, Wrench, Sparkles, BarChart3, Shield, Award, Globe, Lightbulb } from "lucide-react";
+import { Activity, Building2, Calendar, Compass, FileText, FolderOpen, GraduationCap, Grid, Settings, TrendingUp, Users, Wrench, Sparkles, BarChart3, Shield, Award, Globe, Lightbulb, Info, Scale } from "lucide-react";
 
 export const navGroups = [
   {
@@ -33,9 +33,11 @@ export const navGroups = [
   },
   {
     title: "Anexos",
-    sectionDescription: "Evaluación del proceso y herramientas de mejora continua.",
+    sectionDescription: "Evaluación del proceso, documentación de apoyo y aspectos legales — nada que se rellene mientras se programa.",
     items: [
-      { href: "/mejora?tab=eqavet", label: "Mejora", icon: Shield, description: "Gestión de la calidad y marco EQAVET." }
+      { href: "/mejora?tab=eqavet", label: "Mejora", icon: Shield, description: "Gestión de la calidad y marco EQAVET." },
+      { href: "/ayuda?tab=guia", label: "Ayuda", icon: Info, description: "Guía paso a paso, FAQ, acrónimos y mapa de la aplicación." },
+      { href: "/legal?tab=aviso", label: "Legal", icon: Scale, description: "Aviso legal, privacidad, cookies y accesibilidad." }
     ]
   }
 ];

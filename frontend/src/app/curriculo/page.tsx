@@ -49,19 +49,19 @@ export default function MatricesPage() {
   }, []);
 
   const TABS = [
-    { id: "ponderacion-ra-ce", label: "Ponderación RA-CE", cleanLabel: "Ponderación RA-CE", icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "ponderacion-ra-ce", label: "RA y criterios", cleanLabel: "RA y criterios", icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "relacion-ra-ud", label: "Relación curricular", cleanLabel: "Relación curricular", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "unidades", label: "Unidades didácticas", cleanLabel: "Unidades didácticas", icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "contribucion-og", label: "Objetivos generales", cleanLabel: "Objetivos generales", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "tareas", label: t('tabs.tareas'), cleanLabel: t('tabs.tareas'), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "unidades", label: t('tabs.ud'), cleanLabel: t('tabs.ud'), icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "relacion-ra-ud", label: t('tabs.relacion'), cleanLabel: t('tabs.relacion'), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "contribucion-og", label: t('tabs.contribucion'), cleanLabel: t('tabs.contribucion'), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> }
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    'ponderacion-ra-ce': 'Matriz de resultados de aprendizaje y criterios de evaluación.',
-    'tareas': 'Diseño y planificación de tareas y actividades competenciales.',
+    'ponderacion-ra-ce': 'Matriz de resultados de aprendizaje y criterios de evaluación, y su ponderación.',
+    'relacion-ra-ud': 'Ponderación y relación entre unidades didácticas y resultados de aprendizaje.',
     'unidades': 'Definición de unidades didácticas o unidades de trabajo.',
-    'relacion-ra-ud': 'Ponderación y relación entre unidades y resultados de aprendizaje.',
-    'contribucion-og': 'Contribución de los RA a los objetivos generales.',
+    'contribucion-og': 'Contribución de los RA a los objetivos generales del título.',
+    'tareas': 'Diseño y planificación de tareas y actividades competenciales.',
   };
 
   // Load catalog descriptions when module changes (for fallback resolution)

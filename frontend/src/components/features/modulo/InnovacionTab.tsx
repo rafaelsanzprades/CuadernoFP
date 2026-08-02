@@ -43,7 +43,7 @@ export function InnovacionTab() {
               value={config_contexto["registro_innovacion"] || ""}
               onChange={e => handleChange("registro_innovacion", e.target.value)}
               placeholder="Describe los proyectos de innovación del módulo..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
 
@@ -54,7 +54,7 @@ export function InnovacionTab() {
               value={config_contexto["ipe_intermodular"] || ""}
               onChange={e => handleChange("ipe_intermodular", e.target.value)}
               placeholder="Detalla la participación en proyectos intermodulares..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
 
@@ -81,7 +81,7 @@ export function InnovacionTab() {
               value={config_contexto["H1_complementarias"] || ""}
               onChange={e => handleChange("H1_complementarias", e.target.value)}
               placeholder="Anota lugares a visitar, nombres de empresas, fechas aproximadas o temáticas concretas..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
         </div>

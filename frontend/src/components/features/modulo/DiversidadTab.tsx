@@ -99,7 +99,7 @@ export function DiversidadTab() {
               value={moduleData?.texto_inclusion_libre || ""}
               onChange={e => updateModuleData("texto_inclusion_libre", e.target.value)}
               placeholder="Añade aquí medidas específicas, adaptaciones de acceso al aula o justificaciones normativas extra..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
 

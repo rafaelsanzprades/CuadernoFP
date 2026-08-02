@@ -31,7 +31,7 @@ export function ContextoTab() {
               value={config_contexto.entorno_geografico || ""}
               onChange={e => handleContextoChange("entorno_geografico", e.target.value)}
               placeholder="Ej: El IES Andalán se sitúa en el barrio X de Zaragoza..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+              className="w-full h-64 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
@@ -40,7 +40,7 @@ export function ContextoTab() {
               value={config_contexto.entorno_socioeconomico || ""}
               onChange={e => handleContextoChange("entorno_socioeconomico", e.target.value)}
               placeholder="Ej: El tejido empresarial de la zona destaca por..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+              className="w-full h-64 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
@@ -49,7 +49,7 @@ export function ContextoTab() {
               value={config_contexto.contexto_escolar || ""}
               onChange={e => handleContextoChange("contexto_escolar", e.target.value)}
               placeholder="Ej: Centro de referencia en Formación Profesional..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+              className="w-full h-64 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
@@ -58,7 +58,7 @@ export function ContextoTab() {
               value={config_contexto.caracteristicas_alumnado || ""}
               onChange={e => handleContextoChange("caracteristicas_alumnado", e.target.value)}
               placeholder="Ej: Grupo diverso en edades y perfiles de ingreso..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+              className="w-full h-96 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
@@ -67,7 +67,7 @@ export function ContextoTab() {
               value={config_contexto.infraestructura || ""}
               onChange={e => handleContextoChange("infraestructura", e.target.value)}
               placeholder="Ej: Aula-taller informatizada con 30 puestos..."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+              className="w-full h-64 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
         </div>
@@ -83,7 +83,7 @@ export function ContextoTab() {
             <textarea
               value={config_contexto.inclusion || ""}
               onChange={e => handleContextoChange("inclusion", e.target.value)}
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
@@ -91,7 +91,7 @@ export function ContextoTab() {
             <textarea
               value={config_contexto.elenco_situaciones || ""}
               onChange={e => handleContextoChange("elenco_situaciones", e.target.value)}
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
@@ -99,7 +99,7 @@ export function ContextoTab() {
             <textarea
               value={config_contexto.circunstancias_ocultas || ""}
               onChange={e => handleContextoChange("circunstancias_ocultas", e.target.value)}
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
         </div>
@@ -115,7 +115,7 @@ export function ContextoTab() {
             <textarea
               value={config_contexto.metodologia || ""}
               onChange={e => handleContextoChange("metodologia", e.target.value)}
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-danger focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-danger focus:outline-none"
             />
           </div>
           <div>
@@ -123,7 +123,7 @@ export function ContextoTab() {
             <textarea
               value={config_aula.Metodología || ""}
               onChange={e => handleAulaChange("Metodología", e.target.value)}
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-danger focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-danger focus:outline-none"
             />
           </div>
           <div>
@@ -131,7 +131,7 @@ export function ContextoTab() {
             <textarea
               value={config_aula["Atención a la diversidad"] || ""}
               onChange={e => handleAulaChange("Atención a la diversidad", e.target.value)}
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-danger focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-danger focus:outline-none"
             />
           </div>
         </div>
@@ -152,7 +152,7 @@ export function ContextoTab() {
               value={config_contexto.texto_introduccion || ""}
               onChange={e => handleContextoChange("texto_introduccion", e.target.value)}
               placeholder="Párrafo introductorio del documento. Si se deja vacío, se genera uno automáticamente con el nombre del módulo, ciclo, régimen y duración."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
@@ -161,7 +161,7 @@ export function ContextoTab() {
               value={config_contexto.texto_uds_modulo || ""}
               onChange={e => handleContextoChange("texto_uds_modulo", e.target.value)}
               placeholder="Descripción de cómo se organizan las unidades didácticas. Si se deja vacío, se genera automáticamente a partir de df_ud."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
@@ -170,7 +170,7 @@ export function ContextoTab() {
               value={config_contexto.texto_feoe || ""}
               onChange={e => handleContextoChange("texto_feoe", e.target.value)}
               placeholder="Texto sobre la formación en empresa. Si se deja vacío, se genera automáticamente a partir de los RA marcados como dualizables (is_dual)."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
@@ -179,7 +179,7 @@ export function ContextoTab() {
               value={config_contexto.texto_criterios_calificacion || ""}
               onChange={e => handleContextoChange("texto_criterios_calificacion", e.target.value)}
               placeholder="Criterios de calificación y redondeo del módulo."
-              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
         </div>
