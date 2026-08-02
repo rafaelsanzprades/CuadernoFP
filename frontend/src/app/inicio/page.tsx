@@ -1064,15 +1064,15 @@ export default function InicioPage() {
                     así que no puede quedarse desactualizado como su versión anterior.
                   </p>
                   <div className="bg-info/5 border border-info/20 rounded-xl p-4 text-body text-muted leading-relaxed">
-                    <strong className="text-foreground">¿Es adecuado el agrupamiento actual?</strong> En general
-                    sí: separa con claridad lo reutilizable (<em>Programación</em>: Contexto/Currículo/
-                    Metodología/Instrumentos), lo específico del año (<em>Curso</em>: Calendario/Alumnado/
-                    Seguimiento/Calificaciones) y lo transversal (<em>Grupo</em>: Archivos/Catálogo/Magia — Magia
-                    genera documentos a partir de ambos, por eso no encaja solo en uno de los dos anteriores).
-                    La única costura visible es <em>Normativa</em> dentro de <em>Anexos</em>: es una tabla de
-                    consulta como Catálogo, no un "anexo" de la programación — encajaría igual de bien en
-                    <em> Grupo</em>. <em>Mejora</em> (EQAVET) sí es un anexo genuino: es la reflexión de cierre de
-                    curso, no algo que se rellene mientras se programa.
+                    <strong className="text-foreground">¿Es adecuado el agrupamiento actual?</strong> Sí: separa
+                    con claridad lo reutilizable (<em>Programación</em>: Contexto/Currículo/Metodología/
+                    Instrumentos), lo específico del año (<em>Curso</em>: Calendario/Alumnado/Seguimiento/
+                    Calificaciones) y lo transversal (<em>Grupo</em>: Archivos/Catálogo/Normativa/Magia — datos
+                    de consulta y generación de documentos, que no pertenecen en exclusiva a la Programación ni
+                    al Curso). <em>Normativa</em> se movió aquí desde Anexos: es una tabla de consulta como
+                    Catálogo, no un "anexo" de la programación. <em>Mejora</em> (EQAVET) sí es un anexo genuino,
+                    es la reflexión de cierre de curso, no algo que se rellene mientras se programa — se queda
+                    sola en Anexos.
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">

@@ -7,6 +7,7 @@ export const navGroups = [
     items: [
       { href: "/archivos?tab=datos", label: "Archivos", icon: FolderOpen, description: "Gestión de archivos de Programación y Curso." },
       { href: "/catalogo?tab=familias", label: "Catálogo", icon: GraduationCap, description: "Familias, títulos, módulos y currículos (RA y CE)." },
+      { href: "/normativa?tab=ccaa", label: "Normativa", icon: FileText, description: "Legislación, plantillas y normativas." },
       { href: "/magia?tab=programacion", label: "Magia", icon: Sparkles, description: "Generación del PDF y comparativas." }
     ]
   },
@@ -34,7 +35,6 @@ export const navGroups = [
     title: "Anexos",
     sectionDescription: "Evaluación del proceso y herramientas de mejora continua.",
     items: [
-      { href: "/normativa?tab=ccaa", label: "Normativa", icon: FileText, description: "Legislación, plantillas y normativas." },
       { href: "/mejora?tab=eqavet", label: "Mejora", icon: Shield, description: "Gestión de la calidad y marco EQAVET." }
     ]
   }
