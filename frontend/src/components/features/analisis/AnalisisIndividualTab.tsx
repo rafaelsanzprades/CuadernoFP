@@ -51,14 +51,14 @@ export const AnalisisIndividualTab = () => {
   const calcularNotas = (evRow: any, overrides: Record<string, number> = {}) => {
     const peso_ra: Record<string, number> = {};
     df_ra.forEach((ra: any) => {
-      if (ra.id_ra) peso_ra[ra.id_ra] = ra.peso_ra || 0;
+      if (ra.id_ra) peso_ra[ra.id_ra] = Number(ra.peso_ra) || 0;
     });
 
     const peso_ce: Record<string, number> = {};
     const ra_of_ce: Record<string, string> = {};
     df_ce.forEach((ce: any) => {
       if (ce.id_ce && ce.id_ra) {
-        peso_ce[ce.id_ce] = ce.peso_ce || 0;
+        peso_ce[ce.id_ce] = Number(ce.peso_ce) || 0;
         ra_of_ce[ce.id_ce] = ce.id_ra;
       }
     });

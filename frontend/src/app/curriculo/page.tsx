@@ -489,7 +489,7 @@ export default function MatricesPage() {
                                                   if (currentLocalIdx < raCeIndexes.length - 1) {
                                                     let sumSoFar = 0;
                                                     for (let i = 0; i <= currentLocalIdx; i++) {
-                                                      sumSoFar += newCe[raCeIndexes[i]].peso_ce || 0;
+                                                      sumSoFar += Number(newCe[raCeIndexes[i]].peso_ce) || 0;
                                                     }
 
                                                     const targetTotal = 100;

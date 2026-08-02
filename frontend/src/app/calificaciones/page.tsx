@@ -150,14 +150,14 @@ export default function ProgresoPage() {
   const calcularNotas = (al_id: string, evRow: any) => {
     const peso_ra: Record<string, number> = {};
     df_ra.forEach((ra: any) => {
-      if (ra.id_ra) peso_ra[ra.id_ra] = ra.peso_ra || 0;
+      if (ra.id_ra) peso_ra[ra.id_ra] = Number(ra.peso_ra) || 0;
     });
 
     const peso_ce: Record<string, number> = {};
     const ra_of_ce: Record<string, string> = {};
     df_ce.forEach((ce: any) => {
       if (ce.id_ce && ce.id_ra) {
-        peso_ce[ce.id_ce] = ce.peso_ce || 0;
+        peso_ce[ce.id_ce] = Number(ce.peso_ce) || 0;
         ra_of_ce[ce.id_ce] = ce.id_ra;
       }
     });
@@ -276,7 +276,7 @@ export default function ProgresoPage() {
   df_ra.forEach((ra: any) => {
     const ra_id = String(ra.id_ra);
     ra_info[ra_id] = {
-      pond: ra.peso_ra || 0,
+      pond: Number(ra.peso_ra) || 0,
       desc: resolveDescRa(activeModuleId, ra)
     };
 
