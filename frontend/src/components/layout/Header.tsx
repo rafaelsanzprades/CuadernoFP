@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import toast from "react-hot-toast";
 import { navGroups } from "@/config/navigation";
-import { initialGroups } from "@/store/initialData";
+import { getAcronym } from "@/utils/catalogFormat";
 import { showRichToast } from "@/utils/toast";
 import { motion } from "framer-motion";
 import { fileManager } from "@/services/fileManager";
@@ -213,33 +213,17 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
         }
       }
       
-      let acronym = nombre;
-      for (const g of initialGroups) {
-        const m = g.modules.find(mod => mod.code === actualCode);
-        if (m && m.acronym) { acronym = m.acronym; break; }
-      }
+      const acronym = (nombre && getAcronym(nombre)) || nombre;
       friendlyModuleName = `P - ${degreeCode} - ${actualCode} - ${acronym || 'Programación'}`;
     } else {
-      let foundGroup: any = null;
-      let foundModule: any = null;
-      for (const g of initialGroups) {
-        const m = g.modules.find(mod => mod.code === code);
-        if (m) { foundGroup = g; foundModule = m; break; }
-      }
-      if (foundGroup && foundModule) {
-        const degreeCode = foundGroup.degreeName.split(' ')[0];
-        friendlyModuleName = `P - ${degreeCode} - ${code} - ${foundModule.acronym || foundModule.name}`;
-      } else {
-        const namePart = activeModuleId.replace('-pd', '').toUpperCase();
-        friendlyModuleName = `P - ${namePart}`;
-      }
+      const namePart = activeModuleId.replace('-pd', '').toUpperCase();
+      friendlyModuleName = `P - ${namePart}`;
     }
   }
 
   let friendlyCursoName = "Crea o abre un Curso";
   if (activeCursoId) {
     const parts = activeCursoId.split('-');
-    const code = parts[0];
     const rawYear = parts[parts.length - 1];
     
     // Normalize year dynamically (e.g. 26 -> 2025-26, 27 -> 2026-27, 202526 -> 2025-26)
@@ -254,25 +238,13 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
       year = `${currentY}-${String(currentY + 1).slice(-2)}`;
     }
 
-    let foundGroup: any = null;
-    for (const g of initialGroups) {
-      if (g.modules.some(m => m.code === code)) { foundGroup = g; break; }
-    }
-
     // Identify group suffix dynamically instead of hardcoding 1A/1B/1C
     const matchGroup = activeCursoId.match(/-([1-9][A-Z])$/i);
     const groupSuffix = matchGroup ? matchGroup[1].toUpperCase() : '';
 
     if (groupSuffix) {
       // It's a derived group from a module
-      const levelAbr = foundGroup ? (foundGroup.level === 'Grado Medio' ? 'GM' : foundGroup.level === 'Grado Superior' ? 'GS' : 'GB') : 'GM';
-      const family = foundGroup ? foundGroup.degreeName.split(' ')[0] : 'FP';
-      friendlyCursoName = `C - ${year} - ${groupSuffix}-${levelAbr} - ${family}`;
-    } else if (foundGroup) {
-      const yearPrefix = foundGroup.name.charAt(0);
-      const levelAbr = foundGroup.level === 'Grado Medio' ? 'GM' : foundGroup.level === 'Grado Superior' ? 'GS' : 'GB';
-      const degreeCode = foundGroup.degreeName.split(' ')[0].replace(/([A-Z]+)(\d+)/, '$1-$2');
-      friendlyCursoName = `C - ${year} - ${yearPrefix}-${levelAbr} - ${degreeCode}`;
+      friendlyCursoName = `C - ${year} - ${groupSuffix}-GM - FP`;
     } else {
       let nameParts = parts.slice(0, -1);
       if (nameParts.length > 0 && nameParts[nameParts.length - 1].startsWith('202')) {

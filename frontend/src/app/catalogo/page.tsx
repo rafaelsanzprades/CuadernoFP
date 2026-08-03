@@ -23,6 +23,7 @@ import { TabNormativa } from "@/components/features/catalogo/TabNormativa";
 import { TabIncual } from "@/components/features/catalogo/TabIncual";
 import { useTranslation } from "react-i18next";
 import { useAppStore } from "@/store/useAppStore";
+import { getAcronym } from "@/utils/catalogFormat";
 
 type Tab = "familias" | "titulos" | "modulos" | "ra-ce" | "ecp-incual";
 
@@ -174,18 +175,6 @@ function CiclosContent() {
 type Degree = { id: number; name: string; code: string | null; level: string; boa_articles?: Record<string, string> | null };
 type Family = { id: number; code: string; name: string; icon_url: string; color_hex: string; degrees: Degree[] };
 
-const getAcronym = (name: string) => {
-  const ignoreWords = ['y', 'e', 'de', 'del', 'la', 'las', 'el', 'los', 'en', 'para', 'por', 'con', 'a', 'al', 'o', 'u'];
-  let cleanName = name.replace(/\([^)]+\)/g, '').trim();
-  if (cleanName.includes('-')) {
-    cleanName = cleanName.split('-').slice(1).join('-').trim();
-  }
-  let acronym = cleanName.split(/\s+/)
-    .filter((w: string) => !ignoreWords.includes(w.toLowerCase()) && w.length > 0)
-    .map((w: string) => w[0].toUpperCase())
-    .join('');
-  return acronym;
-};
 
 const formatModuleName = (code: string | null, name: string, skipCode: boolean = false) => {
   const acronym = getAcronym(name);

@@ -18,7 +18,6 @@ import { NewFileWizard } from "@/components/features/cloud/NewFileWizard";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
-import { initialGroups } from "@/store/initialData";
 import { useTranslation } from "react-i18next";
 import { OneDriveSyncPanel } from "@/components/features/cloud/OneDriveSyncPanel";
 import { TabAutores } from "@/components/features/catalogo/TabAutores";
@@ -350,49 +349,25 @@ export default function ArchivosTrabajoPage() {
       return `P - ${degreeCode} - ${actualCode} - ${nombre || 'Programación'}`;
     }
 
-    const code = pdKey.split('-')[0];
-    let foundGroup: any = null;
-    let foundModule: any = null;
-    for (const group of initialGroups) {
-      const m = group.modules.find(mod => mod.code === code);
-      if (m) { foundGroup = group; foundModule = m; break; }
-    }
-    if (foundGroup && foundModule) {
-      const degreeCode = foundGroup.degreeName.split(' ')[0];
-      return `P - ${degreeCode} - ${code} - ${foundModule.name}`;
-    }
     return `P - ${pdKey.replace('-pd', '').toUpperCase()}`;
   };
 
   const getFriendlyCursoName = (cursoKey: string) => {
     if (cursoKey === "imported-curso") return "Curso importado";
     const parts = cursoKey.split('-');
-    const code = parts[0];
     const rawYear = parts[parts.length - 1];
 
     // Normalize year
     let year = rawYear;
     if (year === '26' || year === '202526') year = '2025-26';
 
-    let foundGroup: any = null;
-    for (const group of initialGroups) {
-      if (group.modules.some(m => m.code === code)) { foundGroup = group; break; }
+    let nameParts = parts.slice(0, -1);
+    // If the second to last part is '2025' or '2026', remove it from name
+    if (nameParts.length > 0 && (nameParts[nameParts.length - 1] === '2025' || nameParts[nameParts.length - 1] === '2026')) {
+      nameParts = nameParts.slice(0, -1);
     }
-
-    if (foundGroup) {
-      const yearPrefix = foundGroup.name.charAt(0);
-      const levelAbr = foundGroup.level === 'Grado Medio' ? 'GM' : foundGroup.level === 'Grado Superior' ? 'GS' : 'GB';
-      const degreeCode = foundGroup.degreeName.split(' ')[0].replace(/([A-Z]+)(\d+)/, '$1-$2');
-      return `C - ${year} - ${yearPrefix}-${levelAbr} - ${degreeCode}`;
-    } else {
-      let nameParts = parts.slice(0, -1);
-      // If the second to last part is '2025' or '2026', remove it from name
-      if (nameParts.length > 0 && (nameParts[nameParts.length - 1] === '2025' || nameParts[nameParts.length - 1] === '2026')) {
-        nameParts = nameParts.slice(0, -1);
-      }
-      const namePart = nameParts.join(' ').toUpperCase();
-      return `C - ${year} - ${namePart}`;
-    }
+    const namePart = nameParts.join(' ').toUpperCase();
+    return `C - ${year} - ${namePart}`;
   };
 
   // ── Tabs ────────────────────────────────────────────────

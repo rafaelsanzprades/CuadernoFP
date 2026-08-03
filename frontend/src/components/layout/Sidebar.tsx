@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAppStore } from '@/store/useAppStore';
 import { navGroups } from '@/config/navigation';
-import { initialGroups } from '@/store/initialData';
+import { getAcronym } from '@/utils/catalogFormat';
 import { useEffect, useRef, useState } from 'react';
 import React from 'react';
 import { useMounted } from '@/hooks/useMounted';
@@ -139,14 +139,8 @@ export default function Sidebar() {
   } else if (isMounted && activeModuleId) {
     const code = activeModuleId.split('-')[0];
     moduleTitleSuffix = code;
-    let foundAcronym = '';
-    for (const g of initialGroups) {
-      const m = g.modules.find(mod => mod.code === code);
-      if (m && m.acronym) {
-        foundAcronym = m.acronym;
-        break;
-      }
-    }
+    const nombre = storeState.moduleData?.info_modulo?.nombre;
+    const foundAcronym = nombre ? getAcronym(nombre) : '';
     if (foundAcronym) {
       moduleTitleSuffix = `${code} ${foundAcronym}`;
     } else if (dataSource === 'demo') {

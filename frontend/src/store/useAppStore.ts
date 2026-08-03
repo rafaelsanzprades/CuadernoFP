@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { persist, StateStorage, createJSONStorage } from 'zustand/middleware';
 import { temporal } from 'zundo';
 import { get, set, del } from 'idb-keyval';
-import { AppState, CourseGroup } from '@/types';
+import { AppState } from '@/types';
 
 function debounce<T extends (...args: any[]) => void>(func: T, wait: number) {
   let timeout: ReturnType<typeof setTimeout> | null = null;
@@ -15,7 +15,6 @@ function debounce<T extends (...args: any[]) => void>(func: T, wait: number) {
 import { createAuthSlice } from './slices/authSlice';
 import { createUiSlice } from './slices/uiSlice';
 import { createModuleSlice } from './slices/moduleSlice';
-import { createGroupsSlice } from './slices/groupsSlice';
 import { createGlobalSlice } from './slices/globalSlice';
 
 // IndexedDB storage engine
@@ -38,7 +37,6 @@ export const useAppStore = create<AppState>()(
         ...createAuthSlice(set, get, api),
         ...createUiSlice(set, get, api),
         ...createModuleSlice(set, get, api),
-        ...createGroupsSlice(set, get, api),
         ...createGlobalSlice(set, get, api),
       }),
       {
@@ -72,30 +70,3 @@ export const useTemporalStore = <T,>(
   selector: (state: import('zundo').TemporalState<Pick<AppState, 'moduleData' | 'cursoData'>>) => T,
 ) => useStore(useAppStore.temporal, selector);
 
-// Selectores compartidos
-export const calculateTeacherHours = (groups: CourseGroup[], teacherId: number) => {
-  let total = 0;
-  groups.forEach(g => {
-    g.modules.forEach(m => {
-      if (m.assignedTeacherId === teacherId) total += m.hours;
-    });
-  });
-  return total;
-};
-
-export const getTeacherAssignedModules = (groups: CourseGroup[], teacherId: number) => {
-  const assigned: { groupName: string; moduleName: string; hours: number; code: string }[] = [];
-  groups.forEach(g => {
-    g.modules.forEach(m => {
-      if (m.assignedTeacherId === teacherId) {
-        assigned.push({
-          groupName: g.name,
-          moduleName: m.name,
-          hours: m.hours,
-          code: m.code
-        });
-      }
-    });
-  });
-  return assigned;
-};

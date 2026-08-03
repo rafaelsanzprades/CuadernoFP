@@ -221,32 +221,7 @@ export interface Degree {
   id: number;
   name: string;
   code: string;
-  family: string;
-  modules: Module[];
-}
-
-export interface Module {
-  id: number;
-  name: string;
-  code: string;
-  acronym?: string;
-  hours: number;
-  assignedTeacherId?: number | null;
-  ras?: any[];
-  isDual?: boolean;
-  [key: string]: any;
-}
-
-// Alias para compatibilidad con código existente
-export type ModuleAssignment = Module;
-
-export interface CourseGroup {
-  id: number;
-  name: string;
-  degreeName: string;
   level: string;
-  modules: ModuleAssignment[];
-  [key: string]: any;
 }
 
 export interface FileSource {
@@ -256,19 +231,7 @@ export interface FileSource {
   fileName?: string;
 }
 
-export interface Degree {
-  id: number;
-  name: string;
-  level: string;
-}
-
 export interface Family {
-  id: number;
-  name: string;
-  degrees: Degree[];
-}
-
-export interface Teacher {
   id: number;
   name: string;
   degrees: Degree[];
@@ -304,9 +267,6 @@ export interface AppState {
   isLoggedIn: boolean;
   login: () => void;
   logout: () => void;
-  
-  groups: CourseGroup[];
-  setGroups: (groups: CourseGroup[] | ((prev: CourseGroup[]) => CourseGroup[])) => void;
   
   dataSource: 'demo' | 'local';
   setDataSource: (source: 'demo' | 'local') => void;

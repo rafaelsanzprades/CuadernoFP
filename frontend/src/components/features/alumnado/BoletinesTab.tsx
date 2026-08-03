@@ -8,7 +8,7 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Responsi
 import { resolveDescRa, loadCatalogForModule } from '@/services/catalogCache';
 
 export const BoletinesTab = () => {
-  const { cursoData, moduleData, groups, activeCursoId, activeModuleId } = useAppStore();
+  const { cursoData, moduleData, activeCursoId, activeModuleId } = useAppStore();
 
   useEffect(() => { if (activeModuleId) loadCatalogForModule(activeModuleId); }, [activeModuleId]);
   

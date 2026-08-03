@@ -13,7 +13,6 @@ export function DatosTab() {
     setModuleData,
     updateInfoModulo,
     updateModuleData,
-    groups,
     activeModuleId
   } = useAppStore();
 
@@ -22,6 +21,7 @@ export function DatosTab() {
   const [viewFamilyId, setViewFamilyId] = useState("");
   const [viewDegreeId, setViewDegreeId] = useState("");
   const [selectedModuleCode, setSelectedModuleCode] = useState("");
+  const [degreeModules, setDegreeModules] = useState<any[]>([]);
 
   useEffect(() => {
     setViewFamilyId("");
@@ -67,51 +67,57 @@ export function DatosTab() {
   const viewFamily = families.find(f => f.id.toString() === viewFamilyId);
   const viewDegree = viewFamily?.degrees.find(d => d.id.toString() === viewDegreeId);
 
-  const clean = (str: string) =>
-    str.toLowerCase()
-      .replace(/^[a-z0-9]+\s*-\s*/i, "")
-      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-      .trim();
-
-  const displayedGroups = viewDegree
-    ? groups.filter(g => { const gn = clean(g.degreeName); const dn = clean(viewDegree.name); return gn === dn || gn.includes(dn) || dn.includes(gn); })
-    : [];
+  // Real módulos (con RA/CE) del título seleccionado, desde el catálogo oficial --
+  // reemplaza el antiguo fixture hardcodeado initialGroups (solo cubría 2 títulos).
+  useEffect(() => {
+    if (!viewDegree?.code) {
+      setDegreeModules([]);
+      return;
+    }
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/catalog/curriculum/${viewDegree.code}`)
+      .then(r => r.json())
+      .then(json => { setDegreeModules(json.status === "success" ? json.data.modulos : []); })
+      .catch(() => setDegreeModules([]));
+  }, [viewDegree?.code]);
 
   const handleSelectModule = (code: string) => {
     setSelectedModuleCode(code);
     if (!code) return;
 
-    const mod = displayedGroups.flatMap(g => g.modules).find(m => m.code === code);
+    const mod = degreeModules.find(m => m.codigo === code);
     if (!mod) return;
 
-    const group = displayedGroups.find(g => g.modules.some(m => m.code === code));
-    const is2nd = group?.name.startsWith("2");
-    const h_feoe = is2nd ? 360 : 140;
+    const h_feoe = mod.curso === "2º" ? 360 : 140;
+    const h_sem = mod.horas ? Math.round(mod.horas / 30) : 0;
 
-    const h_sem = mod.hours ? Math.round(mod.hours / 30) : 0;
-    const curso = is2nd ? "2º" : "1º";
-
-    updateInfoModulo("codigo", mod.code);
-    updateInfoModulo("nombre", mod.name);
-    updateInfoModulo("h_boa", mod.hours);
+    updateInfoModulo("codigo", mod.codigo);
+    updateInfoModulo("nombre", mod.nombre);
+    updateInfoModulo("h_boa", mod.horas);
     updateInfoModulo("h_sem", h_sem);
     updateInfoModulo("p_ev", 15);
     updateInfoModulo("h_feoe", h_feoe);
-    updateInfoModulo("curso", curso);
+    updateInfoModulo("curso", mod.curso);
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/learning_outcomes`)
-      .then(r => r.json())
-      .then(json => {
-        if (json.status === "success" && json.data[code]) {
-          const ras = json.data[code].map((ra: any) => ({
-            id_ra: `RA${ra.raNumber}`,
-            desc_ra: ra.description,
-            peso_ra: Math.round(100 / json.data[code].length)
-          }));
-          updateModuleData("df_ra", ras);
-        }
-      })
-      .catch(() => { });
+    if (Array.isArray(mod.ra) && mod.ra.length > 0) {
+      const pesoRa = Math.round(100 / mod.ra.length);
+      const df_ra = mod.ra.map((ra: any) => ({
+        id_ra: String(ra.id).replace(/\.$/, ''),
+        desc_ra: ra.descripcion,
+        peso_ra: pesoRa,
+      }));
+      const df_ce = mod.ra.flatMap((ra: any) => {
+        const ces = Array.isArray(ra.ce) ? ra.ce : [];
+        const pesoCe = ces.length > 0 ? Math.round(100 / ces.length) : 0;
+        return ces.map((ce: any) => ({
+          id_ra: String(ra.id).replace(/\.$/, ''),
+          id_ce: ce.id,
+          desc_ce: ce.descripcion,
+          peso_ce: pesoCe,
+        }));
+      });
+      updateModuleData("df_ra", df_ra);
+      updateModuleData("df_ce", df_ce);
+    }
   };
 
   // --- Data Extraction ---
@@ -220,9 +226,9 @@ export function DatosTab() {
               disabled={!viewDegreeId}
             >
               <option value="">-- Selecciona Módulo --</option>
-              {displayedGroups.flatMap(g => g.modules).map(mod => (
-                <option key={mod.id} value={mod.code}>
-                  {mod.code} · {mod.name}
+              {degreeModules.map(mod => (
+                <option key={mod.codigo} value={mod.codigo}>
+                  {mod.codigo} · {mod.nombre}
                 </option>
               ))}
             </Select>

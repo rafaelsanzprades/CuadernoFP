@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X, BookOpen, GraduationCap, ChevronRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { fileManager } from "@/services/fileManager";
@@ -12,85 +12,11 @@ interface ModuleOption {
   groupName: string;
 }
 
-// Flat list of all modules from initialGroups
-const ALL_MODULES: ModuleOption[] = [
-  // 1º Instalaciones de Telecomunicaciones
-  { code: "0237", name: "Infraestructuras comunes de telecomunicación en viviendas y edificios", groupName: "1º Instalaciones de Telecomunicaciones" },
-  { code: "0359", name: "Electrónica aplicada", groupName: "1º Instalaciones de Telecomunicaciones" },
-  { code: "0360", name: "Equipos microinformáticos", groupName: "1º Instalaciones de Telecomunicaciones" },
-  { code: "0361", name: "Infraestructuras de redes de datos y sistemas de telefonía", groupName: "1º Instalaciones de Telecomunicaciones" },
-  { code: "0362", name: "Instalaciones eléctricas básicas", groupName: "1º Instalaciones de Telecomunicaciones" },
-  { code: "1664", name: "Digitalización aplicada a los sectores productivos (GM)", groupName: "1º Instalaciones de Telecomunicaciones" },
-  { code: "A997", name: "Tutoría I", groupName: "1º Instalaciones de Telecomunicaciones" },
-  { code: "0156", name: "Inglés Profesional (GM)", groupName: "1º Instalaciones de Telecomunicaciones" },
-  { code: "1709", name: "Itinerario personal para la empleabilidad I", groupName: "1º Instalaciones de Telecomunicaciones" },
-  // 2º Instalaciones de Telecomunicaciones
-  { code: "0238", name: "Instalaciones domóticas", groupName: "2º Instalaciones de Telecomunicaciones" },
-  { code: "0363", name: "Instalaciones de megafonía y sonorización", groupName: "2º Instalaciones de Telecomunicaciones" },
-  { code: "0364", name: "Circuito cerrado de televisión y seguridad electrónica", groupName: "2º Instalaciones de Telecomunicaciones" },
-  { code: "0365", name: "Instalaciones de radiocomunicaciones", groupName: "2º Instalaciones de Telecomunicaciones" },
-  { code: "1708", name: "Sostenibilidad aplicada al sistema productivo", groupName: "2º Instalaciones de Telecomunicaciones" },
-  { code: "A172", name: "Ofimática avanzada", groupName: "2º Instalaciones de Telecomunicaciones" },
-  { code: "1713", name: "Proyecto intermodular", groupName: "2º Instalaciones de Telecomunicaciones" },
-  { code: "A996", name: "Tutoría II", groupName: "2º Instalaciones de Telecomunicaciones" },
-  { code: "1710", name: "Itinerario personal para la empleabilidad II", groupName: "2º Instalaciones de Telecomunicaciones" },
-  // 1º Sistemas de Telecomunicaciones e Informáticos
-  { code: "0525", name: "Configuración de infraestructuras de sistemas de tele", groupName: "1º Sistemas de Telecomunicaciones e Informáticos" },
-  { code: "0551", name: "Elementos de sistemas de telecomunicaciones", groupName: "1º Sistemas de Telecomunicaciones e Informáticos" },
-  { code: "0552", name: "Sistemas informáticos y redes locales", groupName: "1º Sistemas de Telecomunicaciones e Informáticos" },
-  { code: "0553", name: "Aplicaciones web", groupName: "1º Sistemas de Telecomunicaciones e Informáticos" },
-  { code: "0554", name: "Programación", groupName: "1º Sistemas de Telecomunicaciones e Informáticos" },
-  { code: "0555", name: "Bases de datos", groupName: "1º Sistemas de Telecomunicaciones e Informáticos" },
-  { code: "1665", name: "Digitalización aplicada a los sectores productivos (GS)", groupName: "1º Sistemas de Telecomunicaciones e Informáticos" },
-  { code: "A998", name: "Tutoría III", groupName: "1º Sistemas de Telecomunicaciones e Informáticos" },
-  { code: "0157", name: "Inglés Profesional (GS)", groupName: "1º Sistemas de Telecomunicaciones e Informáticos" },
-  { code: "1711", name: "Itinerario personal para la empleabilidad III", groupName: "1º Sistemas de Telecomunicaciones e Informáticos" },
-  // 2º Sistemas de Telecomunicaciones e Informáticos
-  { code: "0556", name: "Administración de sistemas operativos", groupName: "2º Sistemas de Telecomunicaciones e Informáticos" },
-  { code: "0557", name: "Desarrollo web en Archivos cliente", groupName: "2º Sistemas de Telecomunicaciones e Informáticos" },
-  { code: "0558", name: "Desarrollo web en Archivos servidor", groupName: "2º Sistemas de Telecomunicaciones e Informáticos" },
-  { code: "0559", name: "Implantación de aplicaciones web", groupName: "2º Sistemas de Telecomunicaciones e Informáticos" },
-  { code: "0560", name: "Empresa y emprendimiento", groupName: "2º Sistemas de Telecomunicaciones e Informáticos" },
-  { code: "1714", name: "Proyecto intermodular de SMIX", groupName: "2º Sistemas de Telecomunicaciones e Informáticos" },
-  { code: "A999", name: "Tutoría IV", groupName: "2º Sistemas de Telecomunicaciones e Informáticos" },
-  { code: "1712", name: "Itinerario personal para la empleabilidad IV", groupName: "2º Sistemas de Telecomunicaciones e Informáticos" },
-  // 1º Desarrollo de Aplicaciones Multiplataforma
-  { code: "0561", name: "Sistemas informáticos", groupName: "1º Desarrollo de Aplicaciones Multiplataforma" },
-  { code: "0562", name: "Bases de datos", groupName: "1º Desarrollo de Aplicaciones Multiplataforma" },
-  { code: "0563", name: "Programación", groupName: "1º Desarrollo de Aplicaciones Multiplataforma" },
-  { code: "0564", name: "Desarrollo de interfaces", groupName: "1º Desarrollo de Aplicaciones Multiplataforma" },
-  { code: "0565", name: "Acceso a datos", groupName: "1º Desarrollo de Aplicaciones Multiplataforma" },
-  { code: "1666", name: "Digitalización aplicada a los sectores productivos (DAM)", groupName: "1º Desarrollo de Aplicaciones Multiplataforma" },
-  { code: "A1000", name: "Tutoría V", groupName: "1º Desarrollo de Aplicaciones Multiplataforma" },
-  { code: "0158", name: "Inglés Profesional (DAM)", groupName: "1º Desarrollo de Aplicaciones Multiplataforma" },
-  { code: "1715", name: "Itinerario personal para la empleabilidad V", groupName: "1º Desarrollo de Aplicaciones Multiplataforma" },
-  // 2º Desarrollo de Aplicaciones Multiplataforma
-  { code: "0566", name: "Desarrollo de aplicaciones con tecnología Java", groupName: "2º Desarrollo de Aplicaciones Multiplataforma" },
-  { code: "0567", name: "Desarrollo de aplicaciones con Archivos web", groupName: "2º Desarrollo de Aplicaciones Multiplataforma" },
-  { code: "0568", name: "Desarrollo de aplicaciones con Archivos móvil", groupName: "2º Desarrollo de Aplicaciones Multiplataforma" },
-  { code: "0569", name: "Empresa y emprendimiento", groupName: "2º Desarrollo de Aplicaciones Multiplataforma" },
-  { code: "1716", name: "Proyecto intermodular de DAM", groupName: "2º Desarrollo de Aplicaciones Multiplataforma" },
-  { code: "A1001", name: "Tutoría VI", groupName: "2º Desarrollo de Aplicaciones Multiplataforma" },
-  { code: "1716", name: "Itinerario personal para la empleabilidad VI", groupName: "2º Desarrollo de Aplicaciones Multiplataforma" },
-  // 1º Desarrollo de Aplicaciones Web
-  { code: "0570", name: "Sistemas informáticos", groupName: "1º Desarrollo de Aplicaciones Web" },
-  { code: "0571", name: "Bases de datos", groupName: "1º Desarrollo de Aplicaciones Web" },
-  { code: "0572", name: "Programación", groupName: "1º Desarrollo de Aplicaciones Web" },
-  { code: "0573", name: "Desarrollo web en Archivos cliente", groupName: "1º Desarrollo de Aplicaciones Web" },
-  { code: "0574", name: "Desarrollo web en Archivos servidor", groupName: "1º Desarrollo de Aplicaciones Web" },
-  { code: "1667", name: "Digitalización aplicada a los sectores productivos (DAW)", groupName: "1º Desarrollo de Aplicaciones Web" },
-  { code: "A1002", name: "Tutoría VII", groupName: "1º Desarrollo de Aplicaciones Web" },
-  { code: "0159", name: "Inglés Profesional (DAW)", groupName: "1º Desarrollo de Aplicaciones Web" },
-  { code: "1717", name: "Itinerario personal para la empleabilidad VII", groupName: "1º Desarrollo de Aplicaciones Web" },
-  // 2º Desarrollo de Aplicaciones Web
-  { code: "0575", name: "Desarrollo web en Archivos cliente", groupName: "2º Desarrollo de Aplicaciones Web" },
-  { code: "0576", name: "Desarrollo web en Archivos servidor", groupName: "2º Desarrollo de Aplicaciones Web" },
-  { code: "0577", name: "Implantación de aplicaciones web", groupName: "2º Desarrollo de Aplicaciones Web" },
-  { code: "0578", name: "Empresa y emprendimiento", groupName: "2º Desarrollo de Aplicaciones Web" },
-  { code: "1718", name: "Proyecto intermodular de DAW", groupName: "2º Desarrollo de Aplicaciones Web" },
-  { code: "A1003", name: "Tutoría VIII", groupName: "2º Desarrollo de Aplicaciones Web" },
-  { code: "1718", name: "Itinerario personal para la empleabilidad VIII", groupName: "2º Desarrollo de Aplicaciones Web" },
-];
+interface CatalogFamily {
+  id: number;
+  name: string;
+  degrees: { id: number; name: string; code: string }[];
+}
 
 const getCurrentAcademicYear = () => {
   const today = new Date();
@@ -109,16 +35,55 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
   const [search, setSearch] = useState("");
   const [selectedModule, setSelectedModule] = useState<ModuleOption | null>(null);
   const [isCreating, setIsCreating] = useState(false);
+  const [cursoYear, setCursoYear] = useState(getCurrentAcademicYear());
+  const [cursoName, setCursoName] = useState("1A-GM");
+
+  // Familia -> Título -> Módulos, desde el catálogo oficial (BBDD) en vez del
+  // fixture hardcodeado que solo cubría ~78 módulos ficticios de Telecomunicaciones.
+  const [families, setFamilies] = useState<CatalogFamily[]>([]);
+  const [viewFamilyId, setViewFamilyId] = useState("");
+  const [viewDegreeId, setViewDegreeId] = useState("");
+  const [degreeModules, setDegreeModules] = useState<ModuleOption[]>([]);
+  const [modulesLoading, setModulesLoading] = useState(false);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/families`)
+      .then(r => r.json())
+      .then(json => { if (json.status === "success") setFamilies(json.data); });
+  }, [isOpen]);
+
+  const viewFamily = families.find(f => f.id.toString() === viewFamilyId);
+  const viewDegree = viewFamily?.degrees.find(d => d.id.toString() === viewDegreeId);
+
+  useEffect(() => {
+    if (!viewDegree?.code) {
+      setDegreeModules([]);
+      return;
+    }
+    setModulesLoading(true);
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/catalog/curriculum/${viewDegree.code}`)
+      .then(r => r.json())
+      .then(json => {
+        const modulos = json.status === "success" ? json.data.modulos : [];
+        setDegreeModules(modulos.map((m: any) => ({
+          code: m.codigo,
+          name: m.nombre,
+          groupName: `${m.curso} ${viewDegree.name}`,
+        })));
+      })
+      .catch(() => setDegreeModules([]))
+      .finally(() => setModulesLoading(false));
+  }, [viewDegree?.code, viewDegree?.name]);
 
   if (!isOpen) return null;
 
-  const filteredModules = ALL_MODULES.filter(m =>
+  const filteredModules = degreeModules.filter(m =>
     m.code.toLowerCase().includes(search.toLowerCase()) ||
-    m.name.toLowerCase().includes(search.toLowerCase()) ||
-    m.groupName.toLowerCase().includes(search.toLowerCase())
+    m.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  // Group by groupName
+  // Group by groupName (curso 1º/2º dentro del título seleccionado)
   const grouped = filteredModules.reduce<Record<string, ModuleOption[]>>((acc, m) => {
     if (!acc[m.groupName]) acc[m.groupName] = [];
     acc[m.groupName].push(m);
@@ -150,9 +115,6 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
       setIsCreating(false);
     }
   };
-
-  const [cursoYear, setCursoYear] = useState(getCurrentAcademicYear());
-  const [cursoName, setCursoName] = useState("1A-GM");
 
   const handleCreateCurso = async () => {
     setIsCreating(true);
@@ -221,17 +183,45 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
               <p className="text-body text-muted mb-4">
                 Selecciona el módulo para generar una programación vacía con la estructura correcta (RA/CE desde catálogo oficial).
               </p>
+              {/* Familia / Título */}
+              <div className="grid grid-cols-2 gap-3 mb-4">
+                <select
+                  value={viewFamilyId}
+                  onChange={e => { setViewFamilyId(e.target.value); setViewDegreeId(""); setSelectedModule(null); }}
+                  className="w-full px-4 py-2.5 rounded-xl bg-foreground/5 border border-[var(--glass-border)] text-foreground focus:outline-none focus:ring-2 focus:ring-info/50"
+                >
+                  <option value="">-- Familia profesional --</option>
+                  {families.map(f => <option key={f.id} value={f.id}>{f.name}</option>)}
+                </select>
+                <select
+                  value={viewDegreeId}
+                  onChange={e => { setViewDegreeId(e.target.value); setSelectedModule(null); }}
+                  disabled={!viewFamilyId}
+                  className="w-full px-4 py-2.5 rounded-xl bg-foreground/5 border border-[var(--glass-border)] text-foreground focus:outline-none focus:ring-2 focus:ring-info/50 disabled:opacity-40"
+                >
+                  <option value="">-- Título --</option>
+                  {viewFamily?.degrees.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
+                </select>
+              </div>
               {/* Search */}
               <input
                 type="text"
                 placeholder="Buscar por código o nombre del módulo..."
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl bg-foreground/5 border border-[var(--glass-border)] text-foreground placeholder:text-muted/60 focus:outline-none focus:ring-2 focus:ring-info/50 mb-4"
-                autoFocus
+                disabled={!viewDegreeId}
+                className="w-full px-4 py-2.5 rounded-xl bg-foreground/5 border border-[var(--glass-border)] text-foreground placeholder:text-muted/60 focus:outline-none focus:ring-2 focus:ring-info/50 mb-4 disabled:opacity-40"
               />
               {/* Module list */}
               <div className="space-y-4">
+                {!viewDegreeId && (
+                  <p className="text-center text-muted py-8">Selecciona una familia y un título para ver sus módulos.</p>
+                )}
+                {viewDegreeId && modulesLoading && (
+                  <p className="text-center text-muted py-8 flex items-center justify-center gap-2">
+                    <Loader2 className="w-4 h-4 animate-spin" /> Cargando módulos del catálogo...
+                  </p>
+                )}
                 {Object.entries(grouped).map(([groupName, modules]) => (
                   <div key={groupName}>
                     <h4 className="text-caption font-bold text-muted tracking-wider mb-2 px-1">{groupName}</h4>
@@ -258,7 +248,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
                     </div>
                   </div>
                 ))}
-                {Object.keys(grouped).length === 0 && (
+                {viewDegreeId && !modulesLoading && Object.keys(grouped).length === 0 && (
                   <p className="text-center text-muted py-8">No se encontraron módulos con ese criterio.</p>
                 )}
               </div>
