@@ -10,9 +10,9 @@ import { useVirtualizer } from '@tanstack/react-virtual';
 type AttendanceStatus = 'presente' | 'falta' | 'retraso' | null;
 
 export const AttendanceGrid = () => {
-  const { cursoData, activeModuleId } = useAppStore();
-  const isDemo = activeModuleId === '0237-ictve-pd';
-  const [currentDate, setCurrentDate] = useState(isDemo ? new Date('2026-05-02T10:00:00') : new Date());
+  const { cursoData, activeModuleId, dataSource } = useAppStore();
+  const isDemo = dataSource === 'demo';
+  const [currentDate, setCurrentDate] = useState(isDemo ? new Date(new Date().getFullYear(), 4, 2, 10, 0, 0) : new Date());
   const [attendanceData, setAttendanceData] = useState<Record<string, AttendanceStatus>>({});
   const [loading, setLoading] = useState(false);
   const parentRef = useRef<HTMLDivElement>(null);

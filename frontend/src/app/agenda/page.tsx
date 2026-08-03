@@ -16,7 +16,10 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 
 export default function AgendaPage() {
-  const { isWizardOpen, setWizardOpen, activeModuleId, setActiveModuleId, setActiveCursoId } = useAppStore();
+  const {
+    isWizardOpen, setWizardOpen, activeModuleId, setActiveModuleId, setActiveCursoId,
+    moduleData, setModuleData, activeCursoId, cursoData, setCursoData,
+  } = useAppStore();
   const [activeTab, setActiveTab] = useState("actual");
   const { data: modulesList, mutate: fetchModules } = useModulesList();
 
@@ -29,6 +32,21 @@ export default function AgendaPage() {
       }
     }
   }, [modulesList, activeModuleId, setWizardOpen]);
+
+  useEffect(() => {
+    if (activeModuleId && !moduleData) {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeModuleId}`)
+        .then(res => res.json())
+        .then(json => { if (json.status === "success") setModuleData(json.data); })
+        .catch(() => {});
+    }
+    if (activeCursoId && !cursoData) {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeCursoId}`)
+        .then(res => res.json())
+        .then(json => { if (json.status === "success") setCursoData(json.data); })
+        .catch(() => {});
+    }
+  }, [activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData]);
 
   const TABS = [
     { id: "actual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> Actual</>, cleanLabel: "Actual" },

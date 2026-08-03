@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/Card";
 export function PlanificacionMensualTab() {
   const { cursoData, moduleData } = useAppStore();
   const { df_sgmt } = useDynamicPlanning();
-  
+
   const df_sgmt_calculated = df_sgmt.map((row: any) => {
     let total_imp = 0;
     Object.keys(row).forEach(k => {
@@ -16,8 +16,24 @@ export function PlanificacionMensualTab() {
         total_imp += (Number(row[k]) || 0);
       }
     });
-    return { ...row, Total_Imp: total_imp };
+    const horas_ud = Number(row.horas_ud) || 0;
+    const pct_imp_prev = horas_ud > 0 ? Math.round((total_imp / horas_ud) * 100) : (total_imp > 0 ? 100 : 0);
+    return { ...row, Total_Imp: total_imp, pct_imp_prev };
   });
+
+  const ud_desc_map: Record<string, string> = {};
+  (moduleData?.df_ud || []).forEach((ud: any) => {
+    if (ud.id_ud) ud_desc_map[String(ud.id_ud)] = ud.desc_ud || '';
+  });
+
+  const getUdLabel = (row: any) => {
+    if (row.id_ud === 'FEOE' || row.id_ud === 'FEOE (Sin docencia)' || row.id_ud === 'FEOE (Con docencia)') {
+      return `FEOE (${cursoData?.info_fechas?.docencia_dual === 'con_docencia' ? 'Con docencia' : 'Sin docencia'})`;
+    }
+    if (row.id_ud === 'Sin docencia') return 'Sin docencia';
+    const desc = ud_desc_map[row.id_ud];
+    return desc ? `${row.id_ud}. ${desc}` : row.id_ud;
+  };
 
   const meses_display = ["Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "May", "Jun"];
 
@@ -39,17 +55,19 @@ export function PlanificacionMensualTab() {
         <table className="w-full text-left border-collapse text-body whitespace-nowrap">
           <thead>
             <tr className="border-b border-[var(--glass-border)] text-muted bg-foreground/5">
-              <th className="p-3 sticky left-0 bg-[#111827] z-10 border-r border-[var(--glass-border)]"></th>
-              <th className="p-3 sticky left-[60px] bg-[#111827] z-10 text-center"></th>
-              <th className="p-3 sticky left-[130px] bg-[#111827] z-10 text-center border-r border-[var(--glass-border)]"></th>
+              <th className="p-3 w-[220px] max-w-[220px] sticky left-0 bg-[#111827] z-10 border-r border-[var(--glass-border)]"></th>
+              <th className="p-3 w-[64px] max-w-[64px] sticky left-[220px] bg-[#111827] z-10 text-center"></th>
+              <th className="p-3 w-[64px] max-w-[64px] sticky left-[284px] bg-[#111827] z-10 text-center"></th>
+              <th className="p-3 w-[90px] max-w-[90px] sticky left-[348px] bg-[#111827] z-10 text-center border-r border-[var(--glass-border)]"></th>
               {meses_display.map((m) => (
                 <th key={m} colSpan={2} className="p-2 text-center border-r border-[var(--glass-border)]">{m}</th>
               ))}
             </tr>
             <tr className="border-b border-[var(--glass-border)] text-caption text-muted bg-foreground/5">
-              <th className="p-2 sticky left-0 bg-[#111827] z-10 border-r border-[var(--glass-border)] text-center font-bold text-foreground">UD</th>
-              <th className="p-2 sticky left-[60px] bg-[#111827] z-10 text-center text-info">Prv</th>
-              <th className="p-2 sticky left-[130px] bg-[#111827] z-10 text-center text-[#14a085]/70 border-r border-[var(--glass-border)]">Imp</th>
+              <th className="p-2 w-[220px] max-w-[220px] sticky left-0 bg-[#111827] z-10 border-r border-[var(--glass-border)] text-left font-bold text-foreground">UD</th>
+              <th className="p-2 w-[64px] max-w-[64px] sticky left-[220px] bg-[#111827] z-10 text-center text-info">Prv</th>
+              <th className="p-2 w-[64px] max-w-[64px] sticky left-[284px] bg-[#111827] z-10 text-center text-[#14a085]/70">Imp</th>
+              <th className="p-2 w-[90px] max-w-[90px] truncate overflow-hidden sticky left-[348px] bg-[#111827] z-10 text-center text-warning border-r border-[var(--glass-border)]" title="% Impartido / Previsto">%Imp/Prv</th>
               {meses_display.map((m) => (
                 <React.Fragment key={m}>
                   <th className="p-2 text-center text-info">Prv</th>
@@ -61,15 +79,17 @@ export function PlanificacionMensualTab() {
           <tbody>
             {df_sgmt_calculated.map((row: any, idx: number) => (
               <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
-                <td className="p-3 font-mono sticky left-0 bg-background group-hover:bg-[#111827] border-r border-[var(--glass-border)] font-bold">
-                  {row.id_ud === 'FEOE' || row.id_ud === 'FEOE (Sin docencia)' || row.id_ud === 'FEOE (Con docencia)'
-                    ? `FEOE (${cursoData?.info_fechas?.docencia_dual === 'con_docencia' ? 'Con docencia' : 'Sin docencia'})`
-                    : row.id_ud === 'Sin docencia' 
-                      ? `Sin docencia` 
-                      : row.id_ud}
+                <td
+                  title={getUdLabel(row)}
+                  className="p-3 w-[220px] max-w-[220px] truncate font-mono sticky left-0 bg-background group-hover:bg-[#111827] border-r border-[var(--glass-border)] font-bold"
+                >
+                  {getUdLabel(row)}
                 </td>
-                <td className="p-3 text-center sticky left-[60px] bg-background group-hover:bg-[#111827] text-info">{row.horas_ud || ''}</td>
-                <td className="p-3 text-center sticky left-[130px] bg-background group-hover:bg-[#111827] border-r border-[var(--glass-border)] text-[#14a085] font-bold">{row.Total_Imp || ''}</td>
+                <td className="p-3 w-[64px] max-w-[64px] text-center sticky left-[220px] bg-background group-hover:bg-[#111827] text-info">{row.horas_ud || ''}</td>
+                <td className="p-3 w-[64px] max-w-[64px] text-center sticky left-[284px] bg-background group-hover:bg-[#111827] text-[#14a085] font-bold">{row.Total_Imp || ''}</td>
+                <td className={`p-3 w-[90px] max-w-[90px] text-center sticky left-[348px] bg-background group-hover:bg-[#111827] border-r border-[var(--glass-border)] font-bold ${row.pct_imp_prev >= 100 ? 'text-success' : row.pct_imp_prev > 0 ? 'text-warning' : 'text-muted'}`}>
+                  {row.pct_imp_prev}%
+                </td>
                 {meses_display.map((m) => (
                   <React.Fragment key={m}>
                     <td className="p-3 text-center text-foreground/60">{Number(row[`${m}_Prv`]) || ''}</td>
