@@ -15,10 +15,14 @@ type ModuleSlice = Pick<AppState,
 // User data persistence is handled via local file downloads or Google Drive sync.
 
 export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (set, get) => ({
-  activeModuleId: '0237-ictve-pd',
+  // No demo/module id hardcoded here: a fresh session should start with nothing
+  // loaded (falsy id + null data) so the WelcomeWizard's "no modules yet" check
+  // actually triggers, and fileManager.loadDemoData() is the only source of demo
+  // content (real .fpg/.fpp/.fpc files under public/demo/).
+  activeModuleId: '',
   setActiveModuleId: (id: string) => set({ activeModuleId: id }),
 
-  activeCursoId: '0237-ictve-curso-2025-26',
+  activeCursoId: '',
   setActiveCursoId: (id: string) => set({ activeCursoId: id }),
 
   moduleData: null,

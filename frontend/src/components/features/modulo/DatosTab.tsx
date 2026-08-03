@@ -6,7 +6,6 @@ import { Card } from "@/components/ui/Card";
 import { Select } from "@/components/ui/Select";
 import { Input } from "@/components/ui/Input";
 import { Family } from "@/types";
-import { fileManager } from "@/services/fileManager";
 
 export function DatosTab() {
   const {
@@ -17,16 +16,6 @@ export function DatosTab() {
     groups,
     activeModuleId
   } = useAppStore();
-
-  useEffect(() => {
-    // Force reload of new demo values if they are missing
-    if (moduleData?.info_modulo?.centro !== "IES Andalán" || (moduleData?.df_act && moduleData.df_act.length < 21)) {
-      const db = fileManager.getDb();
-      if (db['0237-ictve-pd']) {
-        setModuleData(db['0237-ictve-pd']);
-      }
-    }
-  }, [moduleData?.info_modulo?.centro, moduleData?.df_act?.length, setModuleData]);
 
   // --- States for Módulo didáctico ---
   const [families, setFamilies] = useState<Family[]>([]);

@@ -177,27 +177,35 @@ export const fileManager = {
     }
   },
 
-  /** Create a blank Programación + Curso ("sin nombre") so REALES pages render normally with no data loaded yet */
-  createBlankLocalData(): void {
+  /** Create a blank Programación + Curso (local-first, no backend write) so REALES
+   * pages render normally with no data loaded yet. Defaults to "sin nombre"; pass
+   * pdName/cursoName to seed a named Archivos instead (used by the welcome wizard's
+   * "Crear mis archivos" flow). */
+  createBlankLocalData(pdName?: string, cursoName?: string): void {
     const store = useAppStore.getState();
 
-    store.setActiveModuleId('sin-nombre-pd');
+    const pdId = pdName ? `${pdName}-pd` : 'sin-nombre-pd';
+    const pdLabel = pdName ? `Programación ${pdName}` : 'Programación sin nombre';
+    const cursoId = pdName ? `${pdName}-curso-${cursoName || ''}` : 'sin-nombre-curso';
+    const cursoLabel = cursoName ? `Curso ${cursoName}` : 'Curso sin nombre';
+
+    store.setActiveModuleId(pdId);
     store.setModuleData({
-      info_modulo: { nombre: 'Programación sin nombre' },
+      info_modulo: { nombre: pdLabel },
       df_ud: [], df_sesiones: [], df_ra: [], df_ce: [], df_tareas: [], df_act: [],
       df_instr: [], df_indicadores: [],
       dual_regimen: 'ninguno', eqavet_evaluacion: {}, config_contexto: {},
     } as any);
-    store.setPdFileSource({ type: 'new', fileName: 'Programación sin nombre' });
+    store.setPdFileSource({ type: 'new', fileName: pdLabel });
 
-    store.setActiveCursoId('sin-nombre-curso');
+    store.setActiveCursoId(cursoId);
     store.setCursoData({
       df_al: [], df_eval: [], daily_ledger: {}, tutoria_ledger: {},
       horario: {}, info_fechas: {}, plano_clase: {},
     } as any);
-    store.setCursoFileSource({ type: 'new', fileName: 'Curso sin nombre' });
+    store.setCursoFileSource({ type: 'new', fileName: cursoLabel });
 
-    store.setGroupFileSource({ type: 'new', fileName: 'Grupo sin nombre' });
+    store.setGroupFileSource({ type: 'new', fileName: pdName ? `Grupo ${pdName}` : 'Grupo sin nombre' });
   },
 
   // ── NEW (Wizard) ────────────────────────────────────────
@@ -382,10 +390,13 @@ export const fileManager = {
     const activeModuleId = store.activeModuleId;
     if (!activeModuleId) return false;
 
-    // Fetch demo curso data from static JSON
+    // Fetch demo curso data from the real .fpc demo file matching the active module
+    const demoFileName = activeModuleId.includes('0223')
+      ? '202526 C 2-GM 0223-OA.fpc'
+      : '202526 C 1A-GM 0237-ICTVE.fpc';
     let demoCursoData: any;
     try {
-      const res = await fetch('/demo/0237.fpc.json');
+      const res = await fetch(`/demo/${encodeURIComponent(demoFileName)}`);
       if (!res.ok) throw new Error('Failed to fetch demo curso');
       const cursoArray = await res.json();
       demoCursoData = Array.isArray(cursoArray) ? cursoArray[0] : cursoArray;
@@ -922,18 +933,6 @@ export const fileManager = {
     }
   },
 
-
-  getDb(): Record<string, any> {
-    const state = useAppStore.getState();
-    const db: Record<string, any> = {};
-    if (state.activeModuleId && state.moduleData) {
-      db[state.activeModuleId] = state.moduleData;
-    }
-    if (state.activeCursoId && state.cursoData) {
-      db[state.activeCursoId] = state.cursoData;
-    }
-    return db;
-  },
 
   getDataSourceType(): DataSourceType {
     return useAppStore.getState().dataSource;

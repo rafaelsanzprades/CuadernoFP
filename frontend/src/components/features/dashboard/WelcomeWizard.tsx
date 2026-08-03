@@ -10,11 +10,9 @@ import toast from "react-hot-toast";
 interface WelcomeWizardProps {
   onComplete: () => void;
   fetchModules: () => void;
-  setActiveModuleId: (id: string) => void;
-  setActiveCursoId: (id: string) => void;
 }
 
-export function WelcomeWizard({ onComplete, fetchModules, setActiveModuleId, setActiveCursoId }: WelcomeWizardProps) {
+export function WelcomeWizard({ onComplete, fetchModules }: WelcomeWizardProps) {
   const [step, setStep] = useState<"CHOICE" | "CREATE_FORM" | "LOADING">("CHOICE");
   const [newPdName, setNewPdName] = useState("");
   const [newCursoName, setNewCursoName] = useState("");
@@ -34,43 +32,20 @@ export function WelcomeWizard({ onComplete, fetchModules, setActiveModuleId, set
     }
   };
 
-  const handleCreateNew = async () => {
+  const handleCreateNew = () => {
     if (!newPdName || !newCursoName) {
       toast.error("Por favor, rellena ambos campos.");
       return;
     }
 
     setStep("LOADING");
-    const toastId = toast.loading("Creando tu nuevo Archivos...");
-    
-    const pdId = `${newPdName}-pd`;
-    const cursoId = `${newPdName}-curso-${newCursoName}`;
-
-    try {
-      // 1. Crear PD
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${pdId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({})
-      });
-
-      // 2. Crear curso
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${cursoId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({})
-      });
-
-      await fetchModules();
-      setActiveModuleId(pdId);
-      setActiveCursoId(cursoId);
-      toast.success("¡Archivos creado con éxito!", { id: toastId });
-      onComplete();
-
-    } catch (error: any) {
-      toast.error("Error al crear el Archivos.", { id: toastId });
-      setStep("CREATE_FORM");
-    }
+    // Local-first: create the blank Programación/Curso directly in the store, the
+    // same way createBlankLocalData() already does for the plain "sin nombre" case.
+    // No backend write -- the app is local-first, the backend isn't the source of
+    // truth for a session's working data (see CLAUDE.md).
+    fileManager.createBlankLocalData(newPdName, newCursoName);
+    toast.success("¡Archivos creado con éxito!");
+    onComplete();
   };
 
   return (

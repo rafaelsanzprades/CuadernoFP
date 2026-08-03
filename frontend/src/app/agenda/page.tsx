@@ -17,7 +17,7 @@ import { TabInfoBox } from "@/components/ui/TabInfoBox";
 
 export default function AgendaPage() {
   const {
-    isWizardOpen, setWizardOpen, activeModuleId, setActiveModuleId, setActiveCursoId,
+    isWizardOpen, setWizardOpen, activeModuleId,
     moduleData, setModuleData, activeCursoId, cursoData, setCursoData,
   } = useAppStore();
   const [activeTab, setActiveTab] = useState("actual");
@@ -67,8 +67,6 @@ export default function AgendaPage() {
         <WelcomeWizard
           onComplete={() => setWizardOpen(false)}
           fetchModules={fetchModules}
-          setActiveModuleId={setActiveModuleId}
-          setActiveCursoId={setActiveCursoId}
         />
       )}
       <Sidebar />

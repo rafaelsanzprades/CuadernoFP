@@ -54,14 +54,6 @@ export default function InstrumentosPage() {
           const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeModuleId}`);
           const data = await res.json();
           if (data.status === "success") setModuleData(data.data);
-        } else if (moduleData && (!moduleData.df_act || moduleData.df_act.length < 21)) {
-          // Force demo seed injection for hot reload updates
-          import('@/services/fileManager').then(({ fileManager }) => {
-            const db = fileManager.getDb();
-            if (db['0237-ictve-pd']) {
-              setModuleData(db['0237-ictve-pd']);
-            }
-          });
         }
       } catch (err) {
         console.error("Error fetching data:", err);
