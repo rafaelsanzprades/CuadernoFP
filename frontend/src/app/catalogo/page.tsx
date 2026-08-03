@@ -679,26 +679,6 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
                     <ChevronDown className="w-4 h-4 -rotate-90 text-muted shrink-0" />
                   </div>
                 </div>
-
-                {mod.unidades_formativas && mod.unidades_formativas.length > 0 && (
-                  <div className="mt-4 pt-4 border-t border-[var(--glass-border)]">
-                    <p className="text-caption font-semibold text-muted tracking-wider mb-3 flex items-center gap-1">
-                      <FolderTree className="w-3 h-3" />
-                      Unidades Formativas ({mod.unidades_formativas.length})
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                      {mod.unidades_formativas.map((uf, i) => (
-                        <div key={i} className="bg-foreground/5 rounded-lg p-3 border border-[var(--glass-border)]">
-                          <div className="flex items-center justify-between gap-2">
-                            <span className="text-caption font-mono text-accent">{uf.codigo}</span>
-                            <span className="text-caption font-semibold text-foreground/70">{uf.horas}h</span>
-                          </div>
-                          <p className="text-caption text-foreground/70 mt-1">{uf.nombre}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </div>
             ))}
           </div>

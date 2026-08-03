@@ -72,10 +72,10 @@ INCUAL_URL_SLUGS = {
     "servicios-socioculturales-y-a-la-comunidad": "servicios",
     "textil-confeccion-y-piel": "textil",
     "transporte-y-mantenimiento-de-vehiculos": "transporte",
-    "actividades-y-competencias-transversales": "actividades-transversales",
-    "inteligencia-artificial-y-data": "inteligencia-artificial",
-    "maritimo-pesquera": "maritimo-pesquera",
-    "vidrio-y-ceramica": "vidrio-y-ceramica",
+    "actividades-y-competencias-transversales": "transversales",
+    "inteligencia-artificial-y-data": "inteligencia",
+    "maritimo-pesquera": "maritimo",
+    "vidrio-y-ceramica": "vidrio",
 }
 
 BASE_URL = "https://incual.educacion.gob.es"
@@ -153,6 +153,23 @@ def parse_ecp_items(soup, nivel):
     
     return items
 
+def fetch_description(url_slug):
+    """Fetch the family description text from the '_descripcion' sub-page.
+    The page renders several divs sharing the 'journal-content-article' class
+    (empty placeholders plus a "related content" widget); the real
+    description is whichever one actually has the most paragraph text."""
+    soup = get_soup(f"{BASE_URL}/{url_slug}_descripcion")
+    if not soup:
+        return ""
+    containers = soup.find_all("div", class_="journal-content-article")
+    best_paragraphs = []
+    for container in containers:
+        paragraphs = [p.get_text(strip=True) for p in container.find_all("p")]
+        paragraphs = [p for p in paragraphs if p]
+        if sum(len(p) for p in paragraphs) > sum(len(p) for p in best_paragraphs):
+            best_paragraphs = paragraphs
+    return "\n\n".join(best_paragraphs)
+
 def parse_crn(soup):
     """Extrae Centros de Referencia Nacional"""
     centers = []
@@ -226,49 +243,55 @@ def scrape_family(family_slug, url_slug):
         "ecp_nivel_2": [],
         "ecp_nivel_3": [],
     }
-    
-    # 1. ECP Nivel 1
+
+    # 1. Descripcion
+    print(f"  [1/6] Descripcion: {BASE_URL}/{url_slug}_descripcion")
+    data["description"] = fetch_description(url_slug)
+    print(f"    -> {len(data['description'])} caracteres")
+    time.sleep(0.5)
+
+    # 2. ECP Nivel 1
     url = f"{BASE_URL}/{url_slug}_ecp-nivel-1"
-    print(f"  [1/5] ECP Nivel 1: {url}")
+    print(f"  [2/6] ECP Nivel 1: {url}")
     soup = get_soup(url)
     data["ecp_nivel_1"] = parse_ecp_items(soup, 1)
     print(f"    -> {len(data['ecp_nivel_1'])} estándares encontrados")
     time.sleep(0.5)
-    
-    # 2. ECP Nivel 2
+
+    # 3. ECP Nivel 2
     url = f"{BASE_URL}/{url_slug}_ecp-nivel-2"
-    print(f"  [2/5] ECP Nivel 2: {url}")
+    print(f"  [3/6] ECP Nivel 2: {url}")
     soup = get_soup(url)
     data["ecp_nivel_2"] = parse_ecp_items(soup, 2)
     print(f"    -> {len(data['ecp_nivel_2'])} estándares encontrados")
     time.sleep(0.5)
-    
-    # 3. ECP Nivel 3
+
+    # 4. ECP Nivel 3
     url = f"{BASE_URL}/{url_slug}_ecp-nivel-3"
-    print(f"  [3/5] ECP Nivel 3: {url}")
+    print(f"  [4/6] ECP Nivel 3: {url}")
     soup = get_soup(url)
     data["ecp_nivel_3"] = parse_ecp_items(soup, 3)
     print(f"    -> {len(data['ecp_nivel_3'])} estándares encontrados")
     time.sleep(0.5)
-    
-    # 4. CRN
+
+    # 5. CRN
     url = f"{BASE_URL}/{url_slug}_crn"
-    print(f"  [4/5] CRN: {url}")
+    print(f"  [5/6] CRN: {url}")
     soup = get_soup(url)
     data["crn_centers"] = parse_crn(soup)
     print(f"    -> {len(data['crn_centers'])} centros encontrados")
     time.sleep(0.5)
-    
-    # 5. Oferta Formativa
+
+    # 6. Oferta Formativa
     url = f"{BASE_URL}/{url_slug}_ofertaformativa"
-    print(f"  [5/5] Oferta Formativa: {url}")
+    print(f"  [6/6] Oferta Formativa: {url}")
     soup = get_soup(url)
     oferta = parse_oferta(soup)
     data["oferta_grado_c"] = oferta["grado_c"]
     data["oferta_grado_d"] = oferta["grado_d"]
     data["oferta_grado_e"] = oferta["grado_e"]
     print(f"    -> C:{len(oferta['grado_c'])} D:{len(oferta['grado_d'])} E:{len(oferta['grado_e'])}")
-    
+
     return data
 
 def main():

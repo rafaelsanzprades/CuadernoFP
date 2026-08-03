@@ -49,7 +49,6 @@ export interface CurriculumModulo {
   nombre: string;
   horas: number;
   curso: string;
-  unidades_formativas?: { codigo: string; nombre: string; horas: number }[];
   resultados_aprendizaje: CurriculumRA[];
 }
 
