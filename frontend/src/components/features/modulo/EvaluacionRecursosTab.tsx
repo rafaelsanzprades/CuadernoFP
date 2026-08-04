@@ -1,22 +1,12 @@
 "use client";
 import { CheckCircle2 } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
+import { INSTRUMENTOS_EVALUACION } from "@/data/instrumentosEvaluacion";
 
 export function EvaluacionRecursosTab() {
   const { moduleData, updateModuleData } = useAppStore();
 
-  const INSTRUMENTOS = [
-    { id: "PRU-OBJ", label: "Prueba objetiva escrita" },
-    { id: "PRU-EJEC", label: "Prueba de ejecución práctica" },
-    { id: "RUBR", label: "Rúbrica de evaluación" },
-    { id: "COTEJO", label: "Lista de control / Cotejo" },
-    { id: "ESCALA", label: "Escala de valoración" },
-    { id: "PORTF", label: "Portfolio / Cuaderno" },
-    { id: "DIARIO", label: "Diario de aprendizaje" },
-    { id: "DEF-ORAL", label: "Exposición oral" },
-    { id: "AUTOEVAL", label: "Autoevaluación" },
-    { id: "COEVAL", label: "Coevaluación" }
-  ];
+  const INSTRUMENTOS = INSTRUMENTOS_EVALUACION;
 
   const RECURSOS = [
     { id: "REC-AULA", label: "Aula técnica / polivalente" },

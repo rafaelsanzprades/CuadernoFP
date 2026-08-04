@@ -17,7 +17,7 @@ export function ProcedimientosTab() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6">
           <NarrativeField 
             id="textos_pd_eval_informacion"
             title="Información al alumnado y familias"

@@ -1,5 +1,5 @@
 "use client";
-import { ChevronLeft, ChevronRight, CalendarDays, FolderOpen, Hourglass, Save, AlertTriangle, HelpCircle, Shield } from "lucide-react";
+import { ChevronLeft, ChevronRight, CalendarDays, FolderOpen, Hourglass, Save, AlertTriangle, HelpCircle } from "lucide-react";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAppStore } from '@/store/useAppStore';
@@ -390,23 +390,12 @@ export default function Sidebar() {
         {/* 🔻 Footer 🔻 */}
         <div className={`px-4 py-3 border-t border-[var(--glass-border)] flex flex-col items-center gap-1.5`}>
           {isSidebarOpen ? (
-            <div className="flex w-full items-center justify-between gap-2">
-              <div className="flex-1">
-                <InstallPwaButton isSidebarOpen={true} />
-              </div>
-              <div className="flex items-center gap-2">
-                <Link href="/legal?tab=aviso" className="flex items-center gap-1.5 px-3 h-10 rounded-lg bg-[var(--glass-bg)] hover:bg-[var(--glass-border)] text-muted hover:text-accent transition-colors">
-                  <Shield className="w-4 h-4" />
-                  <span className="text-body font-medium">Legal</span>
-                </Link>
-              </div>
+            <div className="flex w-full items-center gap-2">
+              <InstallPwaButton isSidebarOpen={true} />
             </div>
           ) : (
           <div className="flex flex-col items-center gap-2 w-full">
             <InstallPwaButton isSidebarOpen={false} />
-            <Link href="/legal?tab=aviso" title="Legal" className="flex items-center justify-center w-10 h-10 rounded-lg bg-[var(--glass-bg)] hover:bg-[var(--glass-border)] text-muted hover:text-accent transition-colors">
-              <Shield className="w-5 h-5" />
-            </Link>
           </div>
         )}
       </div>

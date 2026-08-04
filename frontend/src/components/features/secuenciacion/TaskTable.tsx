@@ -1,6 +1,7 @@
 import { Plus, X, Settings } from "lucide-react";
 import React, { useState } from "react";
 import { TaskConfigModal } from "./TaskConfigModal";
+import { INSTRUMENTOS_EVALUACION } from "@/data/instrumentosEvaluacion";
 
 export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handleDeleteTarea }: any) {
   const [editingTask, setEditingTask] = useState<any>(null);
@@ -68,12 +69,16 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
                   </div>
                   <div className="flex-1 flex flex-col pr-10">
                     <span className="text-caption text-muted-foreground tracking-wider mb-1 font-semibold">Instrumento</span>
-                    <input 
-                      type="text"
-                      value={tc.Instrumento || tc.desc_act || ""}
+                    <select
+                      value={tc.Instrumento || ""}
                       onChange={(e) => handleUpdateTarea(globalIdx, "Instrumento", e.target.value)}
                       className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-info focus:outline-none"
-                    />
+                    >
+                      <option value="">-- Selecciona --</option>
+                      {INSTRUMENTOS_EVALUACION.map((inst) => (
+                        <option key={inst.id} value={inst.id}>{inst.id} - {inst.label}</option>
+                      ))}
+                    </select>
                   </div>
                 </div>
               </div>
