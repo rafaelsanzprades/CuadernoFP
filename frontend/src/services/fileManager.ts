@@ -16,6 +16,8 @@ const ALLOWED_PROGRAMACION_KEYS = [
   'dual_regimen', 'eqavet_evaluacion',
   // Escalas de evaluación cualitativas
   'escalas_evaluacion',
+  // % instrumentos de evaluación por trimestre (tabla de criterios de calificación de PD-)
+  'instrumentos_pct_trimestre',
   // Indicadores del sistema de calificación por indicador
   'df_indicadores',
   // Fechas, horario y calendario

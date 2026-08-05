@@ -152,6 +152,17 @@ export const ModuleDataSchema = z.object({
     coeficiente: z.number(),
   })).optional(),
 
+  // % de cada tipo de instrumento de evaluación, por trimestre (sustituye a
+  // la tabla de "criterios de calificación" de la PD-). Lista abierta, no
+  // limitada a los 4 tipos fijos que usan los boletines/actas.
+  instrumentos_pct_trimestre: z.array(z.object({
+    id: z.string(),
+    nombre: z.string(),
+    pct_1t: z.number(),
+    pct_2t: z.number(),
+    pct_3t: z.number(),
+  })).optional(),
+
   info_modulo: z.record(z.string(), z.any()).optional(),
   config_contexto: z.record(z.string(), z.any()).optional(),
   config_aula: z.record(z.string(), z.any()).optional(),

@@ -7,6 +7,16 @@ import { Select } from "@/components/ui/Select";
 import { Input } from "@/components/ui/Input";
 import { Family } from "@/types";
 
+// Semilla por defecto de "% Instrumentos de evaluación" por trimestre — se
+// usa solo mientras el módulo no tenga ninguna fila guardada todavía.
+const DEFAULT_INSTRUMENTOS_PCT = [
+  { id: "instr_teoricos", nombre: "Exámenes teóricos", pct_1t: 30, pct_2t: 20, pct_3t: 10 },
+  { id: "instr_practicos", nombre: "Exámenes prácticos", pct_1t: 20, pct_2t: 20, pct_3t: 10 },
+  { id: "instr_exposicion", nombre: "Exposición y defensa proyecto", pct_1t: 10, pct_2t: 20, pct_3t: 30 },
+  { id: "instr_informes", nombre: "Informes de ejercicios", pct_1t: 20, pct_2t: 30, pct_3t: 40 },
+  { id: "instr_cuaderno", nombre: "Cuaderno de tareas", pct_1t: 20, pct_2t: 10, pct_3t: 10 },
+];
+
 export function DatosTab() {
   const {
     moduleData,
@@ -130,11 +140,29 @@ export function DatosTab() {
 
   // --- Evaluación ---
   const sumaTrimestres = (data.pond_1t || 0) + (data.pond_2t || 0) + (data.pond_3t || 0);
-  const sumaCriterios =
-    (data.criterio_conocimiento || 0) +
-    (data.criterio_procedimiento_practicas || 0) +
-    (data.criterio_procedimiento_ejercicios || 0) +
-    (data.criterio_tareas || 0);
+
+  const instrumentosPct = (moduleData?.instrumentos_pct_trimestre && moduleData.instrumentos_pct_trimestre.length > 0)
+    ? moduleData.instrumentos_pct_trimestre
+    : DEFAULT_INSTRUMENTOS_PCT;
+  const sum1t = instrumentosPct.reduce((a, r) => a + (Number(r.pct_1t) || 0), 0);
+  const sum2t = instrumentosPct.reduce((a, r) => a + (Number(r.pct_2t) || 0), 0);
+  const sum3t = instrumentosPct.reduce((a, r) => a + (Number(r.pct_3t) || 0), 0);
+
+  const updateInstrumentoPctField = (id: string, field: "nombre" | "pct_1t" | "pct_2t" | "pct_3t", value: string) => {
+    const next = instrumentosPct.map(r => r.id === id
+      ? { ...r, [field]: field === "nombre" ? value : (Number(value) || 0) }
+      : r);
+    updateModuleData("instrumentos_pct_trimestre", next);
+  };
+  const addInstrumentoPct = () => {
+    updateModuleData("instrumentos_pct_trimestre", [
+      ...instrumentosPct,
+      { id: `instr_${Date.now()}`, nombre: "", pct_1t: 0, pct_2t: 0, pct_3t: 0 },
+    ]);
+  };
+  const removeInstrumentoPct = (id: string) => {
+    updateModuleData("instrumentos_pct_trimestre", instrumentosPct.filter(r => r.id !== id));
+  };
 
   return (
     <>
@@ -313,26 +341,65 @@ export function DatosTab() {
       </Card>
 
       <Card className="p-6 border-l-4 border-l-purple-500">
-        <h4 className="text-subheading font-bold text-foreground mb-6 flex items-center justify-between">
-          <span className="flex items-center gap-2"><span><span className="inline-flex"><Receipt className="w-[1.2em] h-[1.2em] mr-1" /></span></span> % Instrumentos de evaluación</span>
-          <span className={`text-body font-semibold px-3 py-1 rounded-full ${sumaCriterios === 100 ? 'bg-success/10 text-success border border-success/30' : 'bg-danger/10 text-danger border border-danger/30'}`}>
-            {sumaCriterios}% {sumaCriterios !== 100 && "(Debe sumar 100%)"}
-          </span>
-        </h4>
-        <div className="grid grid-cols-4 gap-6">
-          {[
-            ['criterio_conocimiento', 'Exámenes teóricos'],
-            ['criterio_procedimiento_practicas', 'Exámenes prácticos'],
-            ['criterio_procedimiento_ejercicios', 'Informes de ejercicios'],
-            ['criterio_tareas', 'Cuaderno de tareas'],
-          ].map(([k, label]) => (
-            <Input 
-              key={k}
-              label={label}
-              type="number" value={data[k] || 0} onChange={e => updateInfoModulo(k, Number(e.target.value))}
-              className="text-center" 
-            />
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
+          <h4 className="text-subheading font-bold text-foreground flex items-center gap-2">
+            <Receipt className="w-[1.2em] h-[1.2em]" /> % Instrumentos de evaluación
+          </h4>
+          <div className="flex gap-2">
+            {[["1er Trim.", sum1t], ["2º Trim.", sum2t], ["3er Trim.", sum3t]].map(([label, sum]) => (
+              <span key={label as string} className={`text-caption font-semibold px-2.5 py-1 rounded-full whitespace-nowrap ${sum === 100 ? 'bg-success/10 text-success border border-success/30' : 'bg-danger/10 text-danger border border-danger/30'}`}>
+                {label}: {sum}%
+              </span>
+            ))}
+          </div>
+        </div>
+        <p className="text-caption text-muted mb-4">
+          Esta tabla es la que se imprime en la PD- ("¿Cómo aprobaré el módulo?"). Cada columna de
+          trimestre debe sumar 100%.
+        </p>
+        <div className="space-y-2">
+          <div className="grid grid-cols-[2fr_1fr_1fr_1fr_2rem] gap-3 text-caption font-bold text-muted px-1">
+            <span>Instrumento</span>
+            <span className="text-center">1er Trimestre</span>
+            <span className="text-center">2º Trimestre</span>
+            <span className="text-center">3er Trimestre</span>
+            <span></span>
+          </div>
+          {instrumentosPct.map((row) => (
+            <div key={row.id} className="grid grid-cols-[2fr_1fr_1fr_1fr_2rem] gap-3 items-center">
+              <input
+                type="text"
+                value={row.nombre}
+                onChange={(e) => updateInstrumentoPctField(row.id, "nombre", e.target.value)}
+                placeholder="Nombre del instrumento"
+                className="bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground"
+              />
+              {(["pct_1t", "pct_2t", "pct_3t"] as const).map((field) => (
+                <input
+                  key={field}
+                  type="number"
+                  value={row[field]}
+                  onChange={(e) => updateInstrumentoPctField(row.id, field, e.target.value)}
+                  className="bg-background border border-[var(--glass-border)] rounded px-2 py-2 text-foreground text-center"
+                />
+              ))}
+              <button
+                type="button"
+                onClick={() => removeInstrumentoPct(row.id)}
+                className="p-2 text-danger hover:bg-danger/10 rounded-lg transition-colors justify-self-center"
+                aria-label="Eliminar instrumento"
+              >
+                <Trash2 className="w-4 h-4" />
+              </button>
+            </div>
           ))}
+          <button
+            type="button"
+            onClick={addInstrumentoPct}
+            className="flex items-center gap-2 text-body font-semibold text-accent hover:underline mt-2"
+          >
+            <Plus className="w-4 h-4" /> Añadir Tipo de instrumento de evaluación
+          </button>
         </div>
       </Card>
 

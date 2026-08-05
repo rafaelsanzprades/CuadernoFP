@@ -57,54 +57,74 @@ def _build_context(data: dict) -> dict:
         )
     context["texto_competencia_general"] = texto_comp
 
-    # --- H1 3: Resultados de Aprendizaje (lista) ────────────────────────
+    # --- H1 3: Resultados de Aprendizaje (lista), con % y las UD que lo cubren ──
     list_ras = []
     for ra in df_ra:
         id_str = str(ra.get('id_ra', '')).strip().rstrip('.')
         prefix = "" if id_str.upper().startswith("RA") else "RA"
+        ra_id_full = f"{prefix}{id_str}"
         desc = resolve_ra_desc(ra, ra_desc_map)
-        list_ras.append(f"{prefix}{id_str}. {desc}")
+        try:
+            peso = int(float(ra.get('peso_ra', 0) or 0))
+        except (ValueError, TypeError):
+            peso = 0
+
+        # UDs relacionadas con este RA (misma info que la Matriz RA↔UD)
+        uds_rel = []
+        for ud in df_ud:
+            try:
+                val = float(ud.get(ra_id_full, 0) or 0)
+            except (ValueError, TypeError):
+                val = 0
+            if val > 0:
+                ud_id = str(ud.get('id_ud', '')).strip()
+                horas = int(float(ud.get('horas_ud', 0) or 0))
+                uds_rel.append(f"{ud_id} ({horas}h) - {int(val)}%")
+
+        linea_ra = f"{ra_id_full}. ({peso}%) {desc}"
+        if uds_rel:
+            linea_ra += "\n" + ", ".join(uds_rel)
+        list_ras.append(linea_ra)
     context["list_ras"] = list_ras
 
-    # --- H1 4: Contenidos / UDs (lista) ─────────────────────────────────
+    # --- H1 4: Contenidos / UDs (lista), con horas ──────────────────────
     list_uds = []
     for ud in df_ud:
         id_str = str(ud.get('id_ud', '')).strip().rstrip('.')
         prefix = "" if id_str.upper().startswith("UD") else "UD"
         desc = resolve_ud_desc(ud, ud_desc_map)
-        list_uds.append(f"{prefix}{id_str}. {desc}")
+        horas = int(float(ud.get('horas_ud', 0) or 0))
+        list_uds.append(f"{prefix}{id_str}. ({horas}h) {desc}")
     context["list_uds"] = list_uds
 
-    # --- H1 5: Criterios de calificación ---
-    df_act = data.get("df_act", [])
-    list_instrumentos = []
-    if df_act:
-        for act in df_act:
-            if act.get("is_active", True) == False:
-                continue
-            pct = str(act.get("peso_act", "0"))
-            if not pct.endswith("%"): pct += "%"
-            titulo = act.get("Tipo", "")
-            tri = act.get("tri_act", "")
-            if tri:
-                titulo += f" ({tri})"
-            desc = act.get("desc_act", "")
-            if not titulo and not desc:
-                continue
-            list_instrumentos.append({
-                "pct": pct,
-                "titulo": titulo,
-                "desc": desc
-            })
-    
-    if not list_instrumentos:
-        # Fallback if no acts
-        list_instrumentos = [
-            {"pct": "55%", "titulo": "Desarrollo de las prácticas en el Aula Taller.", "desc": "Rúbrica específica."},
-            {"pct": "10%", "titulo": "Corrección del Cuaderno del Taller.", "desc": "Apuntes de clase, resumen de cada Unidad didáctica, informes de las prácticas y anotaciones."},
-            {"pct": "5%", "titulo": "Preparación del examen teórico. Debate en grupo.", "desc": "Ronda de preguntas verbales, nivel de participación, resolución de dudas."},
-            {"pct": "30%", "titulo": "Examen teórico escrito.", "desc": "Se pregunta sobre cuestiones de aplicación sobre el contenido teórico."},
+    # --- % Ponderación por trimestres (para la nota final) ──────────────
+    info_mod_pond = data.get("info_modulo") or {}
+    context["pond_1t"] = info_mod_pond.get("pond_1t", 30)
+    context["pond_2t"] = info_mod_pond.get("pond_2t", 30)
+    context["pond_3t"] = info_mod_pond.get("pond_3t", 40)
+
+    # --- H1 5: Criterios de calificación (% instrumentos por trimestre) ---
+    instrumentos_pct = data.get("instrumentos_pct_trimestre") or []
+    if not instrumentos_pct:
+        # Misma semilla por defecto que el bloque "% Instrumentos de evaluación"
+        # de Programación › Contexto › Identificación, para que PD- y la app
+        # muestren siempre lo mismo mientras el profesor no lo edite.
+        instrumentos_pct = [
+            {"nombre": "Exámenes teóricos", "pct_1t": 30, "pct_2t": 20, "pct_3t": 10},
+            {"nombre": "Exámenes prácticos", "pct_1t": 20, "pct_2t": 20, "pct_3t": 10},
+            {"nombre": "Exposición y defensa proyecto", "pct_1t": 10, "pct_2t": 20, "pct_3t": 30},
+            {"nombre": "Informes de ejercicios", "pct_1t": 20, "pct_2t": 30, "pct_3t": 40},
+            {"nombre": "Cuaderno de tareas", "pct_1t": 20, "pct_2t": 10, "pct_3t": 10},
         ]
+    list_instrumentos = [
+        {
+            "nombre": row.get("nombre", ""),
+            "pct_1t": f"{row.get('pct_1t', 0)}%",
+            "pct_2t": f"{row.get('pct_2t', 0)}%",
+            "pct_3t": f"{row.get('pct_3t', 0)}%",
+        }
+        for row in instrumentos_pct
+    ]
     context["list_instrumentos"] = list_instrumentos
 
     # ── H1 6: Recordad ─────────────────────────────────────────────────
@@ -145,18 +165,20 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
             
             # Crear la tabla dinámicamente
             list_inst = context.get("list_instrumentos", [])
-            table = doc.add_table(rows=1 + len(list_inst), cols=3)
+            table = doc.add_table(rows=1 + len(list_inst), cols=4)
             table.style = 'Table Grid'
-            
-            table.columns[0].width = Cm(1.5)
-            table.columns[1].width = Cm(3.5)
-            table.columns[2].width = Cm(11.0)
-            
+
+            table.columns[0].width = Cm(8.0)
+            table.columns[1].width = Cm(2.67)
+            table.columns[2].width = Cm(2.67)
+            table.columns[3].width = Cm(2.66)
+
             hdr_cells = table.rows[0].cells
-            hdr_cells[0].text = "%"
-            hdr_cells[1].text = "Tipo"
-            hdr_cells[2].text = "Instrumento / Descripción"
-            
+            hdr_cells[0].text = "Instrumento"
+            hdr_cells[1].text = "1er Trimestre"
+            hdr_cells[2].text = "2º Trimestre"
+            hdr_cells[3].text = "3er Trimestre"
+
             for cell in hdr_cells:
                 for hp in cell.paragraphs:
                     for r in hp.runs:
@@ -164,13 +186,14 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
                         r.font.name = 'Arial'
                         r.font.size = Pt(9)
                         r.font.color.rgb = RGBColor(0, 0, 0)
-                        
+
             for i, instr in enumerate(list_inst):
                 row_cells = table.rows[i + 1].cells
-                row_cells[0].text = instr.get("pct", "")
-                row_cells[1].text = instr.get("titulo", "")
-                row_cells[2].text = instr.get("desc", "")
-                
+                row_cells[0].text = instr.get("nombre", "")
+                row_cells[1].text = instr.get("pct_1t", "")
+                row_cells[2].text = instr.get("pct_2t", "")
+                row_cells[3].text = instr.get("pct_3t", "")
+
                 for cell in row_cells:
                     for cp in cell.paragraphs:
                         for r in cp.runs:
@@ -180,6 +203,19 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
                             
             # Mover la tabla para que quede después de este párrafo
             p._p.addnext(table._tbl)
+
+            # Ponderación de cada trimestre en la nota final, justo debajo
+            pond_para = doc.add_paragraph()
+            pond_run = pond_para.add_run(
+                f"Ponderación de cada trimestre en la nota final: "
+                f"1er trimestre {context['pond_1t']}% · 2º trimestre {context['pond_2t']}% · "
+                f"3er trimestre {context['pond_3t']}%"
+            )
+            pond_run.bold = True
+            pond_run.font.name = 'Arial'
+            pond_run.font.size = Pt(9)
+            pond_run.font.color.rgb = RGBColor(0, 0, 0)
+            table._tbl.addnext(pond_para._p)
 
     # ── Guardar DOCX (y PDF) ─────────────────────────────────────────
     tpl.save(out_docx)

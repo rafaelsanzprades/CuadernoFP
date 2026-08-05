@@ -311,6 +311,7 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 "textos_pd_contingencia_alumnado": module_data.get("textos_pd_contingencia_alumnado", ""),
                 "textos_pd_bibliografia": module_data.get("textos_pd_bibliografia", ""),
                 "textos_pd_publicidad": module_data.get("textos_pd_publicidad", ""),
+                "instrumentos_pct_trimestre": module_data.get("instrumentos_pct_trimestre") or [],
             }
 
             with tempfile.TemporaryDirectory() as tmpdir:
