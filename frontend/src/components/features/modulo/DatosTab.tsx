@@ -25,6 +25,18 @@ const DEFAULT_INSTRUMENTOS_PCT = [
   { id: "instr_cuaderno", nombre: "Cuaderno de tareas", pct_1t: 20, pct_2t: 10, pct_3t: 10 },
 ];
 
+// Semilla por defecto de "Escalas de evaluación cualitativas" — la escala
+// oficial española de siempre (Insuficiente/Suficiente/Bien/Notable/
+// Sobresaliente, IN/SU/BI/NT/SB), con el valor numérico central de cada
+// tramo como coeficiente de conversión a la nota 0-10.
+const DEFAULT_ESCALAS_EVALUACION = [
+  { id: "eev_in", nombre: "Insuficiente (IN)", coeficiente: 3 },
+  { id: "eev_su", nombre: "Suficiente (SU)", coeficiente: 5 },
+  { id: "eev_bi", nombre: "Bien (BI)", coeficiente: 6 },
+  { id: "eev_nt", nombre: "Notable (NT)", coeficiente: 7.5 },
+  { id: "eev_sb", nombre: "Sobresaliente (SB)", coeficiente: 9.5 },
+];
+
 export function DatosTab() {
   const {
     moduleData,
@@ -470,11 +482,14 @@ export function DatosTab() {
           <ListChecks className="w-[1.2em] h-[1.2em]" /> Escalas de evaluación cualitativas
         </h4>
         <p className="text-caption text-muted mb-4">
-          Niveles nombrados (ej. Insuficiente/Suficiente/Bueno/Excelente) con un coeficiente de
-          conversión a la nota 0-10, independientes de la nota numérica directa.
+          Niveles nombrados con un coeficiente de conversión a la nota 0-10, independientes de la
+          nota numérica directa. Precargada con la escala oficial española (Insuficiente/Suficiente/
+          Bien/Notable/Sobresaliente) — edítala o bórrala si usas otra.
         </p>
         {(() => {
-          const escalas = moduleData?.escalas_evaluacion || [];
+          const escalas = (moduleData?.escalas_evaluacion && moduleData.escalas_evaluacion.length > 0)
+            ? moduleData.escalas_evaluacion
+            : DEFAULT_ESCALAS_EVALUACION;
           const updateEscala = (id: string, field: "nombre" | "coeficiente", value: string) => {
             const next = escalas.map(e => e.id === id
               ? { ...e, [field]: field === "coeficiente" ? parseFloat(value) || 0 : value }
