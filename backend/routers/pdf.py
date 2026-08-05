@@ -252,7 +252,7 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
 
             data_pd = {
                 "departamento": departamento,
-                "ciclo": info_mod.get("ciclo", "Ciclo Formativo"),
+                "ciclo": info_mod.get("titulo_fp") or info_mod.get("ciclo", "Ciclo Formativo"),
                 "modulo": modulo_nombre,
                 "curso_academico": curso_academico,
                 "horas_totales": info_mod.get("horas") or info_mod.get("horas_totales", 0),

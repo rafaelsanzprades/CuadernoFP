@@ -22,7 +22,12 @@ def _build_context(data: dict) -> dict:
     """
     modulo = data.get("modulo", "el módulo profesional")
     ciclo = data.get("ciclo", "el ciclo formativo")
+    curso_ciclo = data.get("curso_ciclo", "")
+    nivel = data.get("nivel", "")
+    codificado = " ".join(p for p in [curso_ciclo, nivel] if p)
     curso = data.get("curso_academico", "")
+    if codificado:
+        curso = f"{curso} [{codificado}]" if curso else f"[{codificado}]"
     df_ra = data.get("df_ra", [])
     df_ud = data.get("df_ud", [])
     config = data.get("config_contexto", {})
