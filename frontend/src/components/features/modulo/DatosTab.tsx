@@ -1,6 +1,6 @@
 "use client";
 import { Calendar, FileEdit, Receipt, Scale, School, UserCircle, Settings, Info, ListChecks, Plus, Trash2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { Select } from "@/components/ui/Select";
@@ -9,6 +9,14 @@ import { Family } from "@/types";
 
 // Semilla por defecto de "% Instrumentos de evaluación" por trimestre — se
 // usa solo mientras el módulo no tenga ninguna fila guardada todavía.
+// Estilo en línea (no clase Tailwind) para el grid de instrumentos — evita
+// depender de que grid-cols-12 se genere correctamente en el build.
+const INSTR_GRID_STYLE: CSSProperties = {
+  display: "grid",
+  gridTemplateColumns: "2fr 1fr 1fr 1fr 2.5rem",
+  gap: "0.75rem",
+};
+
 const DEFAULT_INSTRUMENTOS_PCT = [
   { id: "instr_teoricos", nombre: "Exámenes teóricos", pct_1t: 30, pct_2t: 20, pct_3t: 10 },
   { id: "instr_practicos", nombre: "Exámenes prácticos", pct_1t: 20, pct_2t: 20, pct_3t: 10 },
@@ -358,21 +366,21 @@ export function DatosTab() {
           trimestre debe sumar 100%.
         </p>
         <div className="space-y-2">
-          <div className="grid grid-cols-12 gap-3 text-caption font-bold text-muted px-1">
-            <span className="col-span-5">Instrumento</span>
-            <span className="col-span-2 text-center">1er Trimestre</span>
-            <span className="col-span-2 text-center">2º Trimestre</span>
-            <span className="col-span-2 text-center">3er Trimestre</span>
-            <span className="col-span-1"></span>
+          <div style={INSTR_GRID_STYLE} className="text-caption font-bold text-muted px-1">
+            <span>Instrumento</span>
+            <span className="text-center">1er Trimestre</span>
+            <span className="text-center">2º Trimestre</span>
+            <span className="text-center">3er Trimestre</span>
+            <span></span>
           </div>
           {instrumentosPct.map((row) => (
-            <div key={row.id} className="grid grid-cols-12 gap-3 items-center">
+            <div key={row.id} style={INSTR_GRID_STYLE} className="items-center">
               <input
                 type="text"
                 value={row.nombre}
                 onChange={(e) => updateInstrumentoPctField(row.id, "nombre", e.target.value)}
                 placeholder="Nombre del instrumento"
-                className="col-span-5 bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground"
+                className="bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground w-full"
               />
               {(["pct_1t", "pct_2t", "pct_3t"] as const).map((field) => (
                 <input
@@ -380,13 +388,13 @@ export function DatosTab() {
                   type="number"
                   value={row[field]}
                   onChange={(e) => updateInstrumentoPctField(row.id, field, e.target.value)}
-                  className="col-span-2 bg-background border border-[var(--glass-border)] rounded px-2 py-2 text-foreground text-center"
+                  className="bg-background border border-[var(--glass-border)] rounded px-2 py-2 text-foreground text-center w-full"
                 />
               ))}
               <button
                 type="button"
                 onClick={() => removeInstrumentoPct(row.id)}
-                className="col-span-1 p-2 text-danger hover:bg-danger/10 rounded-lg transition-colors justify-self-center"
+                className="p-2 text-danger hover:bg-danger/10 rounded-lg transition-colors justify-self-center"
                 aria-label="Eliminar instrumento"
               >
                 <Trash2 className="w-4 h-4" />
