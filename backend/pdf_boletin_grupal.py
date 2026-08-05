@@ -30,6 +30,107 @@ def _draw_page_decorations(canv, doc):
     canv.restoreState()
 
 
+def _compute_grupal_rows(trimestre: str, info_modulo: dict, df_al: pd.DataFrame,
+                          df_eval: pd.DataFrame, df_act: pd.DataFrame):
+    """Lógica pura (sin ReportLab) compartida por el PDF y el DOCX: pesos de
+    instrumentos, actividades del trimestre y nota media ponderada por
+    alumno. Devuelve (TIPO_MAP, TIPOS_ORDEN, filas) donde cada fila es
+    {idx, alumnado, edad, repite, notas_por_tipo: [...], nota_media}."""
+    p_teoria = info_modulo.get("criterio_conocimiento", 30)
+    p_practica = info_modulo.get("criterio_procedimiento_practicas", 20)
+    p_informes = info_modulo.get("criterio_procedimiento_ejercicios", 20)
+    p_cuaderno = info_modulo.get("criterio_tareas", 30)
+
+    TIPO_MAP = {
+        "Teoria": ("Ex. Teoría", p_teoria),
+        "Practica": ("Ex. Práctica", p_practica),
+        "Informes": ("Informes", p_informes),
+        "Tareas": ("Cuaderno", p_cuaderno),
+    }
+    TIPOS_ORDEN = ["Teoria", "Practica", "Informes", "Tareas"]
+
+    acts_tri = pd.DataFrame()
+    if not df_act.empty:
+        tri_col = ("tri_act" if "tri_act" in df_act.columns else
+                   "Trimestre" if "Trimestre" in df_act.columns else None)
+        tipo_col = ("Tipo" if "Tipo" in df_act.columns else
+                    "tipo" if "tipo" in df_act.columns else None)
+        if tri_col and tipo_col:
+            mask = (
+                (df_act[tri_col] == trimestre) &
+                df_act["id_act"].notna() &
+                (df_act["id_act"].astype(str).str.strip() != "")
+            )
+            acts_tri = df_act[mask].copy().sort_values([tipo_col, "id_act"])
+            if tipo_col != "Tipo":
+                acts_tri = acts_tri.rename(columns={tipo_col: "Tipo"})
+
+    actividades_por_tipo = {t: [] for t in TIPOS_ORDEN}
+    if not acts_tri.empty:
+        for t in TIPOS_ORDEN:
+            actividades_por_tipo[t] = acts_tri[acts_tri["Tipo"] == t]["id_act"].tolist()
+
+    cuaderno_col = f"{trimestre}_Cuaderno"
+    if not df_eval.empty and cuaderno_col in df_eval.columns:
+        if cuaderno_col not in actividades_por_tipo["Tareas"]:
+            actividades_por_tipo["Tareas"].append(cuaderno_col)
+
+    if not df_al.empty:
+        df_al_act = df_al[df_al["Estado"] != "Baja"].copy() if "Estado" in df_al.columns else df_al.copy()
+        df_al_sorted = df_al_act.sort_values("Apellidos").reset_index(drop=True)
+    else:
+        df_al_sorted = pd.DataFrame()
+
+    filas = []
+    for idx_lista, (_, al) in enumerate(df_al_sorted.iterrows(), start=1):
+        al_id = al["ID"]
+        if df_eval.empty:
+            continue
+        mask_ev = df_eval["ID"] == al_id
+        if not mask_ev.any():
+            continue
+        idx_ev = df_eval[mask_ev].index[0]
+
+        notas_por_tipo = []
+        nota_media = 0.0
+        suma_pesos_usados = 0
+        for tipo in TIPOS_ORDEN:
+            _, peso = TIPO_MAP[tipo]
+            vals = []
+            for act_id in actividades_por_tipo[tipo]:
+                if act_id in df_eval.columns:
+                    raw = df_eval.at[idx_ev, act_id]
+                    if pd.notna(raw):
+                        try:
+                            vals.append(float(raw))
+                        except (ValueError, TypeError):
+                            pass
+            avg = 0.0
+            if vals:
+                avg = sum(vals) / len(vals)
+                nota_media += avg * (peso / 100.0)
+                suma_pesos_usados += peso
+            notas_por_tipo.append(avg)
+
+        if suma_pesos_usados > 0:
+            nota_media = nota_media * (100.0 / suma_pesos_usados)
+
+        _edad = al.get("Edad", "")
+        edad = str(int(_edad)) if pd.notna(_edad) and str(_edad) not in ("", "nan") else ""
+        apells = str(al.get("Apellidos", ""))
+        nombre = str(al.get("Nombre", ""))
+        filas.append({
+            "idx": idx_lista,
+            "alumnado": f"{apells}, {nombre}" if nombre else apells,
+            "edad": edad,
+            "repite": "Sí" if al.get("Repite") else "No",
+            "notas_por_tipo": notas_por_tipo,
+            "nota_media": nota_media,
+        })
+
+    return TIPO_MAP, TIPOS_ORDEN, filas
+
+
 def generar_pdf_boletin_grupal(
     trimestre: str,
     info_modulo: dict,
@@ -81,59 +182,7 @@ def generar_pdf_boletin_grupal(
     smlB_left = ParagraphStyle("SmBL", parent=styles["Normal"], fontSize=8, leading=10,
                                fontName="Helvetica-Bold", alignment=TA_LEFT)
 
-    # ── Pesos de instrumentos ─────────────────────────────────────────────────
-    p_teoria   = info_modulo.get("criterio_conocimiento",             30)
-    p_practica = info_modulo.get("criterio_procedimiento_practicas",  20)
-    p_informes = info_modulo.get("criterio_procedimiento_ejercicios", 20)
-    p_cuaderno = info_modulo.get("criterio_tareas",                   30)
-
-    TIPO_MAP = {
-        "Teoria":   ("Ex. Teoría",   p_teoria),
-        "Practica": ("Ex. Práctica", p_practica),
-        "Informes": ("Informes",     p_informes),
-        "Tareas":   ("Cuaderno",     p_cuaderno),
-    }
-    TIPOS_ORDEN = ["Teoria", "Practica", "Informes", "Tareas"]
-
-    # ── Actividades del trimestre ─────────────────────────────────────────────
-    acts_tri = pd.DataFrame()
-    if not df_act.empty:
-        tri_col  = ("tri_act"   if "tri_act"   in df_act.columns else
-                    "Trimestre" if "Trimestre" in df_act.columns else None)
-        tipo_col = ("Tipo"      if "Tipo"      in df_act.columns else
-                    "tipo"      if "tipo"      in df_act.columns else None)
-        if tri_col and tipo_col:
-            mask = (
-                (df_act[tri_col] == trimestre) &
-                df_act["id_act"].notna() &
-                (df_act["id_act"].astype(str).str.strip() != "")
-            )
-            acts_tri = df_act[mask].copy().sort_values([tipo_col, "id_act"])
-            if tipo_col != "Tipo":
-                acts_tri = acts_tri.rename(columns={tipo_col: "Tipo"})
-
-    # Mapear qué actividades pertenecen a qué tipo
-    actividades_por_tipo = {t: [] for t in TIPOS_ORDEN}
-    if not acts_tri.empty:
-        for t in TIPOS_ORDEN:
-            acts_tipo = acts_tri[acts_tri["Tipo"] == t]
-            actividades_por_tipo[t] = acts_tipo["id_act"].tolist()
-            
-    # Añadir siempre la columna global de Cuaderno del trimestre si existe
-    cuaderno_col = f"{trimestre}_Cuaderno"
-    if not df_eval.empty and cuaderno_col in df_eval.columns:
-        if cuaderno_col not in actividades_por_tipo["Tareas"]:
-            actividades_por_tipo["Tareas"].append(cuaderno_col)
-
-    # ── Alumnado ──────────────────────────────────────────────────────────────
-    if not df_al.empty:
-        if "Estado" in df_al.columns:
-            df_al_act = df_al[df_al["Estado"] != "Baja"].copy()
-        else:
-            df_al_act = df_al.copy()
-        df_al_sorted = df_al_act.sort_values("Apellidos").reset_index(drop=True)
-    else:
-        df_al_sorted = pd.DataFrame()
+    TIPO_MAP, TIPOS_ORDEN, filas = _compute_grupal_rows(trimestre, info_modulo, df_al, df_eval, df_act)
 
     # ── Anchuras: tabla con anchos forzados a 18cm total ─────────────────────
     W_NUM    = 1.0 * cm               # Número de lista
@@ -164,58 +213,14 @@ def generar_pdf_boletin_grupal(
     table_data = [row_header]
 
     # ── Filas de alumnado ──────────────────────────────────────────────────────
-    for idx_lista, (_, al) in enumerate(df_al_sorted.iterrows(), start=1):
-        al_id  = al["ID"]
-        apells = str(al.get("Apellidos", ""))
-        nombre = str(al.get("Nombre", ""))
-        _edad  = al.get("Edad", "")
-        edad   = str(int(_edad)) if pd.notna(_edad) and str(_edad) not in ("", "nan") else ""
-        repite = "Sí" if al.get("Repite") else "No"
-
-        if df_eval.empty:
-            continue
-        mask_ev = df_eval["ID"] == al_id
-        if not mask_ev.any():
-            continue
-        idx_ev = df_eval[mask_ev].index[0]
-
-        row_acts   = []
-        nota_media = 0.0
-        suma_pesos_usados = 0
-        
-        for tipo in TIPOS_ORDEN:
-            _, peso = TIPO_MAP[tipo]
-            ids = actividades_por_tipo[tipo]
-            
-            vals = []
-            for act_id in ids:
-                if act_id in df_eval.columns:
-                    raw = df_eval.at[idx_ev, act_id]
-                    if pd.notna(raw):
-                        try:
-                            vals.append(float(raw))
-                        except (ValueError, TypeError):
-                            pass
-            
-            avg = 0.0
-            if vals:
-                avg = sum(vals) / len(vals)
-                nota_media += avg * (peso / 100.0)
-                suma_pesos_usados += peso
-                
-            row_acts.append(Paragraph(f"{avg:.1f}", sml))
-
-        # Nota media ponderada sobre el porcentaje real usado
-        if suma_pesos_usados > 0:
-            nota_media = nota_media * (100.0 / suma_pesos_usados)
-
-        alumnado = f"{apells}, {nombre}" if nombre else apells
+    for f in filas:
+        row_acts = [Paragraph(f"{v:.1f}", sml) for v in f["notas_por_tipo"]]
         row = (
-            [Paragraph(str(idx_lista), sml),
-             Paragraph(alumnado, norm),
-             Paragraph(edad, sml), Paragraph(repite, sml)]
+            [Paragraph(str(f["idx"]), sml),
+             Paragraph(f["alumnado"], norm),
+             Paragraph(f["edad"], sml), Paragraph(f["repite"], sml)]
             + row_acts
-            + [Paragraph(f"<b>{nota_media:.1f}</b>", normB)]
+            + [Paragraph(f"<b>{f['nota_media']:.1f}</b>", normB)]
         )
         table_data.append(row)
 
@@ -252,6 +257,113 @@ def generar_pdf_boletin_grupal(
     doc.build([tabla])
     buffer.seek(0)
     return buffer
+
+def _compute_grupal_final_rows(info_modulo: dict, df_al: pd.DataFrame,
+                                df_eval: pd.DataFrame, df_act: pd.DataFrame):
+    """Lógica pura compartida por el PDF y el DOCX del boletín final: nota
+    media ponderada de cada trimestre + nota final ordinaria por alumno.
+    Devuelve (pond_1t, pond_2t, pond_3t, filas), fila =
+    {idx, alumnado, edad, repite, notas_tri: {1T,2T,3T}, nota_final_ord}."""
+    p_teoria = info_modulo.get("criterio_conocimiento", 30)
+    p_practica = info_modulo.get("criterio_procedimiento_practicas", 20)
+    p_informes = info_modulo.get("criterio_procedimiento_ejercicios", 20)
+    p_cuaderno = info_modulo.get("criterio_tareas", 30)
+    TIPO_MAP = {
+        "Teoria": ("Ex. Teoría", p_teoria),
+        "Practica": ("Ex. Práctica", p_practica),
+        "Informes": ("Informes", p_informes),
+        "Tareas": ("Cuaderno", p_cuaderno),
+    }
+    TIPOS_ORDEN = ["Teoria", "Practica", "Informes", "Tareas"]
+
+    pond_1t = info_modulo.get("pond_1t", 30)
+    pond_2t = info_modulo.get("pond_2t", 30)
+    pond_3t = info_modulo.get("pond_3t", 40)
+    total_pond = pond_1t + pond_2t + pond_3t
+    if total_pond == 0:
+        pond_1t, pond_2t, pond_3t = 33.33, 33.33, 33.34
+        total_pond = 100.0
+
+    acts_por_tri = {"1T": {}, "2T": {}, "3T": {}}
+    for tri in ["1T", "2T", "3T"]:
+        acts_tri = pd.DataFrame()
+        if not df_act.empty:
+            tri_col = ("tri_act" if "tri_act" in df_act.columns else "Trimestre" if "Trimestre" in df_act.columns else None)
+            tipo_col = ("Tipo" if "Tipo" in df_act.columns else "tipo" if "tipo" in df_act.columns else None)
+            if tri_col and tipo_col:
+                mask = ((df_act[tri_col] == tri) & df_act["id_act"].notna() & (df_act["id_act"].astype(str).str.strip() != ""))
+                acts_tri = df_act[mask].copy()
+                if tipo_col != "Tipo":
+                    acts_tri = acts_tri.rename(columns={tipo_col: "Tipo"})
+        acts_por_tipo = {t: [] for t in TIPOS_ORDEN}
+        if not acts_tri.empty:
+            for t in TIPOS_ORDEN:
+                acts_por_tipo[t] = acts_tri[acts_tri["Tipo"] == t]["id_act"].tolist()
+        cuaderno_col = f"{tri}_Cuaderno"
+        if not df_eval.empty and cuaderno_col in df_eval.columns:
+            if cuaderno_col not in acts_por_tipo["Tareas"]:
+                acts_por_tipo["Tareas"].append(cuaderno_col)
+        acts_por_tri[tri] = acts_por_tipo
+
+    if not df_al.empty:
+        df_al_act = df_al[df_al["Estado"] != "Baja"].copy() if "Estado" in df_al.columns else df_al.copy()
+        df_al_sorted = df_al_act.sort_values("Apellidos").reset_index(drop=True)
+    else:
+        df_al_sorted = pd.DataFrame()
+
+    filas = []
+    for idx_lista, (_, al) in enumerate(df_al_sorted.iterrows(), start=1):
+        al_id = al["ID"]
+        if df_eval.empty:
+            continue
+        mask_ev = df_eval["ID"] == al_id
+        if not mask_ev.any():
+            continue
+        idx_ev = df_eval[mask_ev].index[0]
+
+        notas_tri = {}
+        for tri in ["1T", "2T", "3T"]:
+            nota_tri = 0.0
+            suma_pesos_tri = 0
+            for tipo in TIPOS_ORDEN:
+                _, peso = TIPO_MAP[tipo]
+                vals = []
+                for act_id in acts_por_tri[tri][tipo]:
+                    if act_id in df_eval.columns:
+                        raw = df_eval.at[idx_ev, act_id]
+                        if pd.notna(raw):
+                            try:
+                                vals.append(float(raw))
+                            except (ValueError, TypeError):
+                                pass
+                if vals:
+                    avg = sum(vals) / len(vals)
+                    nota_tri += avg * (peso / 100.0)
+                    suma_pesos_tri += peso
+            if suma_pesos_tri > 0:
+                nota_tri = nota_tri * (100.0 / suma_pesos_tri)
+            notas_tri[tri] = nota_tri
+
+        _edad = al.get("Edad", "")
+        edad = str(int(_edad)) if pd.notna(_edad) and str(_edad) not in ("", "nan") else ""
+        apells = str(al.get("Apellidos", ""))
+        nombre = str(al.get("Nombre", ""))
+        nota_final_ord = (
+            notas_tri["1T"] * (pond_1t / total_pond) +
+            notas_tri["2T"] * (pond_2t / total_pond) +
+            notas_tri["3T"] * (pond_3t / total_pond)
+        )
+        filas.append({
+            "idx": idx_lista,
+            "alumnado": f"{apells}, {nombre}" if nombre else apells,
+            "edad": edad,
+            "repite": "Sí" if al.get("Repite") else "No",
+            "notas_tri": notas_tri,
+            "nota_final_ord": nota_final_ord,
+        })
+
+    return pond_1t, pond_2t, pond_3t, filas
+
 
 def generar_pdf_boletin_grupal_final(
     info_modulo: dict,
@@ -293,63 +405,7 @@ def generar_pdf_boletin_grupal_final(
     smlB  = ParagraphStyle("SmB",  parent=styles["Normal"], fontSize=8, leading=10, fontName="Helvetica-Bold", alignment=TA_CENTER)
     smlB_left = ParagraphStyle("SmBL", parent=styles["Normal"], fontSize=8, leading=10, fontName="Helvetica-Bold", alignment=TA_LEFT)
 
-    # ── Pesos de instrumentos (para calcular notas de cada trimestre)
-    p_teoria   = info_modulo.get("criterio_conocimiento",             30)
-    p_practica = info_modulo.get("criterio_procedimiento_practicas",  20)
-    p_informes = info_modulo.get("criterio_procedimiento_ejercicios", 20)
-    p_cuaderno = info_modulo.get("criterio_tareas",                   30)
-
-    TIPO_MAP = {
-        "Teoria":   ("Ex. Teoría",   p_teoria),
-        "Practica": ("Ex. Práctica", p_practica),
-        "Informes": ("Informes",     p_informes),
-        "Tareas":   ("Cuaderno",     p_cuaderno),
-    }
-    TIPOS_ORDEN = ["Teoria", "Practica", "Informes", "Tareas"]
-    
-    # ── Ponderación Trimestral
-    pond_1t = info_modulo.get("pond_1t", 30)
-    pond_2t = info_modulo.get("pond_2t", 30)
-    pond_3t = info_modulo.get("pond_3t", 40)
-
-    # Validar que sumen 100
-    total_pond = pond_1t + pond_2t + pond_3t
-    if total_pond == 0:
-        pond_1t, pond_2t, pond_3t = 33.33, 33.33, 33.34
-        total_pond = 100.0
-
-    # ── Actividades de TODOS los trimestres
-    acts_por_tri = {"1T": {}, "2T": {}, "3T": {}}
-    for tri in ["1T", "2T", "3T"]:
-        acts_tri = pd.DataFrame()
-        if not df_act.empty:
-            tri_col  = ("tri_act"   if "tri_act"   in df_act.columns else "Trimestre" if "Trimestre" in df_act.columns else None)
-            tipo_col = ("Tipo"      if "Tipo"      in df_act.columns else "tipo"      if "tipo"      in df_act.columns else None)
-            if tri_col and tipo_col:
-                mask = ((df_act[tri_col] == tri) & df_act["id_act"].notna() & (df_act["id_act"].astype(str).str.strip() != ""))
-                acts_tri = df_act[mask].copy()
-                if tipo_col != "Tipo":
-                    acts_tri = acts_tri.rename(columns={tipo_col: "Tipo"})
-        
-        acts_por_tipo = {t: [] for t in TIPOS_ORDEN}
-        if not acts_tri.empty:
-            for t in TIPOS_ORDEN:
-                acts_por_tipo[t] = acts_tri[acts_tri["Tipo"] == t]["id_act"].tolist()
-        
-        # Cuaderno
-        cuaderno_col = f"{tri}_Cuaderno"
-        if not df_eval.empty and cuaderno_col in df_eval.columns:
-            if cuaderno_col not in acts_por_tipo["Tareas"]:
-                acts_por_tipo["Tareas"].append(cuaderno_col)
-                
-        acts_por_tri[tri] = acts_por_tipo
-
-    # ── Alumnado
-    if not df_al.empty:
-        df_al_act = df_al[df_al["Estado"] != "Baja"].copy() if "Estado" in df_al.columns else df_al.copy()
-        df_al_sorted = df_al_act.sort_values("Apellidos").reset_index(drop=True)
-    else:
-        df_al_sorted = pd.DataFrame()
+    pond_1t, pond_2t, pond_3t, filas = _compute_grupal_final_rows(info_modulo, df_al, df_eval, df_act)
 
     # ── Anchuras: tabla con anchos forzados a 18cm total ─────────────────────
     W_NUM    = 1.0 * cm               
@@ -377,61 +433,17 @@ def generar_pdf_boletin_grupal_final(
     table_data = [row_header]
 
     # ── Filas de alumnado
-    for idx_lista, (_, al) in enumerate(df_al_sorted.iterrows(), start=1):
-        al_id  = al["ID"]
-        apells = str(al.get("Apellidos", ""))
-        nombre = str(al.get("Nombre", ""))
-
-        if df_eval.empty:
-            continue
-        mask_ev = df_eval["ID"] == al_id
-        if not mask_ev.any():
-            continue
-        idx_ev = df_eval[mask_ev].index[0]
-
-        notas_medias_tri = {}
-        for tri in ["1T", "2T", "3T"]:
-            nota_tri = 0.0
-            suma_pesos_tri = 0
-            for tipo in TIPOS_ORDEN:
-                _, peso = TIPO_MAP[tipo]
-                ids = acts_por_tri[tri][tipo]
-                vals = []
-                for act_id in ids:
-                    if act_id in df_eval.columns:
-                        raw = df_eval.at[idx_ev, act_id]
-                        if pd.notna(raw):
-                            try: vals.append(float(raw))
-                            except: pass
-                if vals:
-                    avg = sum(vals) / len(vals)
-                    nota_tri += avg * (peso / 100.0)
-                    suma_pesos_tri += peso
-            if suma_pesos_tri > 0:
-                nota_tri = nota_tri * (100.0 / suma_pesos_tri)
-            notas_medias_tri[tri] = nota_tri
-
-        _edad  = al.get("Edad", "")
-        edad   = str(int(_edad)) if pd.notna(_edad) and str(_edad) not in ("", "nan") else ""
-        repite = "Sí" if al.get("Repite") else "No"
-        
-        # Calculate final ordinal
-        nota_final_ord = (
-            notas_medias_tri["1T"] * (pond_1t / total_pond) +
-            notas_medias_tri["2T"] * (pond_2t / total_pond) +
-            notas_medias_tri["3T"] * (pond_3t / total_pond)
-        )
-
-        alumnado = f"{apells}, {nombre}" if nombre else apells
+    for f in filas:
+        nt = f["notas_tri"]
         row = [
-            Paragraph(str(idx_lista), sml),
-            Paragraph(alumnado, norm),
-            Paragraph(edad, sml),
-            Paragraph(repite, sml),
-            Paragraph(f"{notas_medias_tri['1T']:.1f}", sml),
-            Paragraph(f"{notas_medias_tri['2T']:.1f}", sml),
-            Paragraph(f"{notas_medias_tri['3T']:.1f}", sml),
-            Paragraph(f"<b>{nota_final_ord:.1f}</b>", normB),
+            Paragraph(str(f["idx"]), sml),
+            Paragraph(f["alumnado"], norm),
+            Paragraph(f["edad"], sml),
+            Paragraph(f["repite"], sml),
+            Paragraph(f"{nt['1T']:.1f}", sml),
+            Paragraph(f"{nt['2T']:.1f}", sml),
+            Paragraph(f"{nt['3T']:.1f}", sml),
+            Paragraph(f"<b>{f['nota_final_ord']:.1f}</b>", normB),
             Paragraph("", sml)  # ExtraOrd initially empty
         ]
         table_data.append(row)
@@ -465,4 +477,57 @@ def generar_pdf_boletin_grupal_final(
     doc.build([tabla])
     buffer.seek(0)
     return buffer
+
+
+def generar_docx_boletin_grupal(trimestre, info_modulo, df_al, df_eval, df_act, fecha_corte=None):
+    from docx_helpers import new_document, add_title, add_meta_line, add_table, doc_to_bytes
+
+    TIPO_MAP, TIPOS_ORDEN, filas = _compute_grupal_rows(trimestre, info_modulo, df_al, df_eval, df_act)
+
+    doc = new_document(landscape=False)
+    add_title(doc, f"Boletín grupal {trimestre}", info_modulo.get("modulo", "Módulo"))
+    meta = f"{info_modulo.get('centro', '')} ({info_modulo.get('profesorado', '')})"
+    if fecha_corte:
+        meta = f"Fecha de acta: {fecha_corte} | {meta}"
+    add_meta_line(doc, meta)
+
+    headers = ["Nº", "Apellidos, Nombre", "Edad", "Rep."] + \
+        [f"{TIPO_MAP[t][0]} ({TIPO_MAP[t][1]}%)" for t in TIPOS_ORDEN] + [f"Nota media {trimestre}"]
+    rows = []
+    for f in filas:
+        rows.append([f["idx"], f["alumnado"], f["edad"], f["repite"]] +
+                     [f"{v:.1f}" for v in f["notas_por_tipo"]] + [f"{f['nota_media']:.1f}"])
+    if not rows:
+        rows.append(["Sin datos para este trimestre."] + [""] * (len(headers) - 1))
+    add_table(doc, headers, rows, col_widths_cm=[1, 5] + [1.5] * (len(headers) - 2))
+
+    return doc_to_bytes(doc)
+
+
+def generar_docx_boletin_grupal_final(info_modulo, df_al, df_eval, df_act, fecha_corte=None):
+    from docx_helpers import new_document, add_title, add_meta_line, add_table, doc_to_bytes
+
+    pond_1t, pond_2t, pond_3t, filas = _compute_grupal_final_rows(info_modulo, df_al, df_eval, df_act)
+
+    doc = new_document(landscape=False)
+    add_title(doc, "Boletín grupal Final", info_modulo.get("modulo", "Módulo"))
+    meta = f"{info_modulo.get('centro', '')} ({info_modulo.get('profesorado', '')})"
+    if fecha_corte:
+        meta = f"Fecha de acta: {fecha_corte} | {meta}"
+    add_meta_line(doc, meta)
+
+    headers = ["Nº", "Apellidos, Nombre", "Edad", "Rep.",
+               f"Media 1T ({pond_1t}%)", f"Media 2T ({pond_2t}%)", f"Media 3T ({pond_3t}%)",
+               "Final Ord.", "Final ExtraOrd."]
+    rows = []
+    for f in filas:
+        nt = f["notas_tri"]
+        rows.append([f["idx"], f["alumnado"], f["edad"], f["repite"],
+                     f"{nt['1T']:.1f}", f"{nt['2T']:.1f}", f"{nt['3T']:.1f}",
+                     f"{f['nota_final_ord']:.1f}", ""])
+    if not rows:
+        rows.append(["Sin datos para el boletín final."] + [""] * (len(headers) - 1))
+    add_table(doc, headers, rows, col_widths_cm=[1, 5] + [1.6] * (len(headers) - 2))
+
+    return doc_to_bytes(doc)
 

@@ -5,7 +5,7 @@ Plantilla: backend/templates/modelo_pd_fp+_tpl.docx
 Estructura: 21 secciones (modelo JEG/CIFPA, grado D/E)
 
 Uso:
-    from generador_pd_detallada import generate
+    from generador_pd_jeg import generate
     generate(data, out_docx, out_pdf)
 """
 

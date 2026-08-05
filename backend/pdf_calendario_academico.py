@@ -296,3 +296,54 @@ def generar_pdf_calendario(info_modulo, info_fechas, planning_ledger, calendar_n
     buffer.seek(0)
     return buffer
 
+
+DIAS_SEMANA = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+
+
+def generar_docx_calendario(info_modulo, info_fechas, planning_ledger, calendar_notes):
+    """Versión .docx editable: una tabla por mes, un día lectivo por fila
+    (los fines de semana se omiten para no alargar el documento)."""
+    from datetime import timedelta
+    from docx_helpers import new_document, add_title, add_meta_line, add_section_heading, add_table, doc_to_bytes
+
+    ini = info_fechas.get("ini_1t", date(2025, 9, 1))
+    fin = info_fechas.get("fin_3t", date(2026, 6, 30))
+    ini_feoe = info_fechas.get("ini_feoe", date(2026, 3, 16))
+    fin_feoe = info_fechas.get("fin_feoe", date(2026, 5, 29))
+
+    doc = new_document(landscape=False)
+    add_title(doc, f"Calendario Académico {ini.year} - {fin.year}", info_modulo.get("modulo", "Módulo"))
+    add_meta_line(doc, f"{info_modulo.get('centro', '')} ({info_modulo.get('profesorado', '')})")
+
+    curr = ini.replace(day=1)
+    while curr <= fin:
+        year, month = curr.year, curr.month
+        add_section_heading(doc, f"{NOMBRE_MESES[month - 1]} {year}")
+
+        _, last_day = calendar.monthrange(year, month)
+        rows = []
+        d = date(year, month, 1)
+        while d.month == month:
+            if ini <= d <= fin and d.weekday() < 5:
+                d_str = f"{d.day:02d}/{d.month:02d}/{d.year}"
+                festivo = calendar_notes.get(f"f_{d_str}", "").strip()
+                relevante = calendar_notes.get(f"r_{d_str}", "").strip()
+                uds = ", ".join(planning_ledger.get(d_str, []))
+                feoe = "FEOE" if (ini_feoe <= d <= fin_feoe) else ""
+                estado = f"Festivo: {festivo}" if festivo else ""
+                rows.append([d_str, DIAS_SEMANA[d.weekday()], uds, feoe, estado, relevante])
+            d += timedelta(days=1)
+
+        if rows:
+            add_table(doc, ["Fecha", "Día", "UD", "FEOE", "Festivo", "Relevante"], rows,
+                       col_widths_cm=[2.3, 2.3, 3.5, 1.8, 4, 4])
+        else:
+            doc.add_paragraph("Sin días lectivos configurados este mes.")
+
+        if curr.month == 12:
+            curr = curr.replace(year=curr.year + 1, month=1, day=1)
+        else:
+            curr = curr.replace(month=curr.month + 1, day=1)
+
+    return doc_to_bytes(doc)
+

@@ -161,3 +161,47 @@ def generar_pdf_clases_ud(info_modulo, df_ud, df_sesiones):
     doc.build(elements)
     buffer.seek(0)
     return buffer
+
+
+def generar_docx_clases_ud(info_modulo, df_ud, df_sesiones):
+    """Versión .docx editable: una tabla por UD con sus sesiones."""
+    from docx_helpers import new_document, add_title, add_meta_line, add_section_heading, add_table, doc_to_bytes
+
+    doc = new_document(landscape=False)
+    add_title(doc, "Clases por UD", info_modulo.get("modulo", "Módulo"))
+    add_meta_line(doc, f"{info_modulo.get('centro', '')} ({info_modulo.get('profesorado', '')})")
+
+    if df_ud is None or df_ud.empty:
+        doc.add_paragraph("No hay unidades didácticas definidas.")
+        return doc_to_bytes(doc)
+
+    df_ud_sorted = df_ud.sort_values("id_ud") if "id_ud" in df_ud.columns else df_ud
+    for _, row in df_ud_sorted.iterrows():
+        ud_id = str(row.get("id_ud", ""))
+        ud_desc = str(row.get("desc_ud", ""))
+        add_section_heading(doc, f"{ud_id} - {ud_desc}")
+
+        ud_sesiones = pd.DataFrame()
+        if df_sesiones is not None and not df_sesiones.empty:
+            ud_sesiones = df_sesiones[df_sesiones["id_ud"] == ud_id]
+            if "Num_Orden" in ud_sesiones.columns:
+                ud_sesiones = ud_sesiones.sort_values("Num_Orden")
+
+        if ud_sesiones.empty:
+            doc.add_paragraph("No hay sesiones definidas para esta unidad didáctica.")
+            continue
+
+        rows = []
+        for _, s in ud_sesiones.iterrows():
+            contenidos = str(s.get("Contenidos", "") or "-")
+            recursos = str(s.get("Recursos", "") or "")
+            if recursos:
+                contenidos = f"{contenidos}\nRecursos: {recursos}"
+            rows.append([
+                s.get("Num_Orden", ""), s.get("Horas", ""), s.get("Tipo_Actividad", ""),
+                s.get("RA_CE", ""), contenidos, s.get("Aspectos_Clave", ""),
+            ])
+        add_table(doc, ["Nº", "H.", "Tipo", "RA/CE", "Programación (contenidos / recursos)", "Aspectos clave"],
+                   rows, col_widths_cm=[1, 1, 2, 1.5, 8, 4])
+
+    return doc_to_bytes(doc)

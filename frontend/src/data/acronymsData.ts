@@ -524,12 +524,6 @@ export const acronymsData: AcronymItem[] = [
     "category": "inclusion"
   },
   {
-    "id": 78,
-    "name": "EE. Electricidad y Electrónica",
-    "description": "Familia profesional de instalaciones y sistemas eléctricos",
-    "category": "inclusion"
-  },
-  {
     "id": 79,
     "name": "EF. Evaluación Formativa",
     "description": "Evaluación continua centrada en retroalimentación y mejora",
@@ -1188,5 +1182,35 @@ export const acronymsData: AcronymItem[] = [
     "name": "Violencia",
     "description": "Comportamientos agresivos con impacto en el entorno educativo",
     "category": "otros"
+  },
+  {
+    "id": 194,
+    "name": "FEOE. Formación en Empresa u Organismo Equiparado",
+    "description": "Periodo formativo del alumnado en una empresa o entidad equiparada (FP Dual)",
+    "category": "estructura_fp"
+  },
+  {
+    "id": 195,
+    "name": "CIFPA. Centro de Innovación para la FP de Aragón",
+    "description": "Organismo aragonés de referencia en formación e innovación del profesorado de FP",
+    "category": "estructura_fp"
+  },
+  {
+    "id": 196,
+    "name": "EQAVET. European Quality Assurance in Vocational Education and Training",
+    "description": "Marco europeo de garantía de la calidad para la Formación Profesional",
+    "category": "normativa"
+  },
+  {
+    "id": 197,
+    "name": "CCAA. Comunidad(es) Autónoma(s)",
+    "description": "División territorial de España con competencias educativas propias",
+    "category": "otros"
+  },
+  {
+    "id": 198,
+    "name": "PdEvC. Pérdida del derecho a Evaluación Continua",
+    "description": "Situación por exceso de faltas de asistencia que exige una prueba de evaluación alternativa",
+    "category": "normativa"
   }
 ];

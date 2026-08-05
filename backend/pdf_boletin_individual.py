@@ -407,3 +407,178 @@ def generar_pdf_boletin_individual(
     buffer.seek(0)
     return buffer
 
+
+def generar_docx_boletin_individual(info_modulo, al_id, df_al, df_eval, df_act, df_ce, df_ra, df_feoe,
+                                     info_fechas=None, planning_ledger=None, df_ud=None, df_pr=None):
+    """Versión .docx editable, misma fórmula de ponderación que el PDF, sin
+    la barra gráfica (se sustituye por el % en texto)."""
+    from datetime import timedelta
+    from docx_helpers import new_document, add_title, add_meta_line, add_section_heading, add_table, doc_to_bytes
+
+    if info_fechas is None: info_fechas = {}
+    if planning_ledger is None: planning_ledger = {}
+    if df_ud is None: df_ud = pd.DataFrame()
+    if df_pr is None: df_pr = pd.DataFrame()
+
+    doc = new_document(landscape=False)
+    add_title(doc, "Informe Individual de Evaluación", info_modulo.get("modulo", "Módulo"))
+    add_meta_line(doc, f"{info_modulo.get('centro', '')} ({info_modulo.get('profesorado', '')})")
+
+    al = df_al[df_al["ID"] == al_id].iloc[0] if not df_al.empty and al_id in df_al["ID"].values else None
+    if al is None:
+        doc.add_paragraph("Estudiante no encontrado.")
+        return doc_to_bytes(doc)
+
+    apellidos = str(al.get("Apellidos", ""))
+    nombre = str(al.get("Nombre", ""))
+    _edad = al.get("Edad", "")
+    edad = str(int(_edad)) if pd.notna(_edad) and str(_edad) not in ("", "nan") else "-"
+    repite = "Sí" if al.get("Repite") else "No"
+
+    add_section_heading(doc, "Alumnado")
+    add_table(doc, ["Apellidos y Nombre", "NIF/NIE", "Edad", "Repite"],
+               [[f"{apellidos}, {nombre}", al_id, edad, repite]], col_widths_cm=[6, 4, 2, 2])
+
+    idx_ev = None
+    if not df_eval.empty:
+        mask_ev = df_eval["ID"] == al_id
+        if mask_ev.any():
+            idx_ev = df_eval[mask_ev].index[0]
+
+    add_section_heading(doc, "1. Evaluación continua por Resultados de Aprendizaje")
+    if not df_ra.empty and not df_eval.empty and idx_ev is not None:
+        uds_por_tri = {"1T": set(), "2T": set(), "3T": set()}
+        for tri, m_key in [("1t", "1T"), ("2t", "2T"), ("3t", "3T")]:
+            ini_t = info_fechas.get(f"ini_{tri}")
+            fin_t = info_fechas.get(f"fin_{tri}")
+            if ini_t and fin_t:
+                curr = ini_t
+                while curr <= fin_t:
+                    d_str = curr.strftime("%d/%m/%Y")
+                    for ud in planning_ledger.get(d_str, []):
+                        uds_por_tri[m_key].add(ud)
+                    curr += timedelta(days=1)
+
+        n1 = float(df_eval.at[idx_ev, "1T_Nota"]) if not pd.isna(df_eval.at[idx_ev, "1T_Nota"]) else 0.0
+        n2 = float(df_eval.at[idx_ev, "2T_Nota"]) if not pd.isna(df_eval.at[idx_ev, "2T_Nota"]) else 0.0
+        n3 = float(df_eval.at[idx_ev, "3T_Nota"]) if not pd.isna(df_eval.at[idx_ev, "3T_Nota"]) else 0.0
+        notas_student = {"1T": n1, "2T": n2, "3T": n3}
+        nota_final = float(df_eval.at[idx_ev, "Nota_Final"]) if not pd.isna(df_eval.at[idx_ev, "Nota_Final"]) else 0.0
+
+        ra_rows = []
+        for _, ra_row in df_ra.sort_values("id_ra").iterrows() if "id_ra" in df_ra.columns else df_ra.iterrows():
+            ra_id = str(ra_row["id_ra"])
+            pond = float(pd.to_numeric(ra_row["peso_ra"], errors="coerce")) if not pd.isna(ra_row["peso_ra"]) else 0.0
+            desc = str(ra_row.get("desc_ra", ra_row.get("Descripción", "")))
+
+            tris_found, uds_found = [], []
+            if ra_id in df_ud.columns:
+                for _, ud_row in df_ud.iterrows():
+                    if ud_row.get(ra_id, False):
+                        uid = str(ud_row["id_ud"])
+                        uds_found.append(uid)
+                        for t_key in ["1T", "2T", "3T"]:
+                            if uid in uds_por_tri[t_key] and t_key not in tris_found:
+                                tris_found.append(t_key)
+            if not tris_found:
+                tris_found = ["1T", "2T", "3T"]
+
+            avg_nota_ra = sum(notas_student[t] for t in tris_found) / len(tris_found) if tris_found else nota_final
+            prop = min(100.0, max(0.0, (avg_nota_ra / 5.0) * 100.0))
+            ra_rows.append([ra_id, f"{pond:.1f}%", desc, f"{prop:.0f}%", ", ".join(tris_found), ", ".join(uds_found) or "-"])
+
+        if ra_rows:
+            add_table(doc, ["RA", "Ponderación", "Descripción", "Grado adquisición", "Evaluado en", "UDs"], ra_rows,
+                       col_widths_cm=[1.5, 2, 6, 2.5, 2.5, 3])
+        else:
+            doc.add_paragraph("No hay información de RA evaluada todavía.")
+    else:
+        doc.add_paragraph("Datos insuficientes para evaluación competencial.")
+
+    add_section_heading(doc, "2. Resumen de Actividades y su ponderación")
+    p_teoria = info_modulo.get("criterio_conocimiento", 30)
+    p_practica = info_modulo.get("criterio_procedimiento_practicas", 20)
+    p_informes = info_modulo.get("criterio_procedimiento_ejercicios", 20)
+    p_cuaderno = info_modulo.get("criterio_tareas", 30)
+    TIPO_MAP = {
+        "Teoria": ("Exámenes teóricos", p_teoria),
+        "Practica": ("Exámenes prácticos", p_practica),
+        "Informes": ("Informes de ejercicios", p_informes),
+        "Tareas": ("Cuaderno de tareas", p_cuaderno),
+    }
+    TIPOS_ORDEN = ["Teoria", "Practica", "Informes", "Tareas"]
+    pond_1t = info_modulo.get("pond_1t", 30)
+    pond_2t = info_modulo.get("pond_2t", 30)
+    pond_3t = info_modulo.get("pond_3t", 40)
+    pond_map = {"1T": pond_1t, "2T": pond_2t, "3T": pond_3t}
+
+    if idx_ev is None:
+        doc.add_paragraph("Sin notas en la plataforma todavía.")
+        return doc_to_bytes(doc)
+
+    acts_by_tri = {"1T": pd.DataFrame(), "2T": pd.DataFrame(), "3T": pd.DataFrame()}
+    for tri in ["1T", "2T", "3T"]:
+        tri_col = ("tri_act" if "tri_act" in df_act.columns else "Trimestre" if "Trimestre" in df_act.columns else None)
+        tipo_col = ("Tipo" if "Tipo" in df_act.columns else "tipo" if "tipo" in df_act.columns else None)
+        if tri_col and tipo_col and not df_act.empty:
+            mask = ((df_act[tri_col] == tri) & df_act["id_act"].notna() & (df_act["id_act"].astype(str).str.strip() != ""))
+            tmp = df_act[mask].copy()
+            if tipo_col != "Tipo":
+                tmp = tmp.rename(columns={tipo_col: "Tipo"})
+            acts_by_tri[tri] = tmp
+
+    rows = []
+    nota_media_tri = {"1T": 0.0, "2T": 0.0, "3T": 0.0}
+    suma_pesos_usados = {"1T": 0, "2T": 0, "3T": 0}
+    for tipo in TIPOS_ORDEN:
+        desc_tipo, peso_tipo = TIPO_MAP[tipo]
+        tipo_cat_avgs = {"1T": "", "2T": "", "3T": ""}
+        has_tipo_data = False
+        for tri in ["1T", "2T", "3T"]:
+            ids_act = acts_by_tri[tri][acts_by_tri[tri]["Tipo"] == tipo]["id_act"].tolist() if not acts_by_tri[tri].empty else []
+            if tipo == "Tareas":
+                cuaderno_col = f"{tri}_Cuaderno"
+                if not df_eval.empty and cuaderno_col in df_eval.columns and cuaderno_col not in ids_act:
+                    ids_act.append(cuaderno_col)
+            cat_vals = []
+            for act_id in ids_act:
+                if act_id in df_eval.columns:
+                    raw = df_eval.at[idx_ev, act_id]
+                    if pd.notna(raw):
+                        try:
+                            cat_vals.append(float(raw))
+                            has_tipo_data = True
+                        except (ValueError, TypeError):
+                            pass
+            if cat_vals:
+                cat_avg = sum(cat_vals) / len(cat_vals)
+                tipo_cat_avgs[tri] = f"{cat_avg:.1f}"
+                nota_media_tri[tri] += cat_avg * (peso_tipo / 100.0)
+                suma_pesos_usados[tri] += peso_tipo
+        if has_tipo_data:
+            fin_cat_sum = fin_pond_sum = 0.0
+            for _tri in ["1T", "2T", "3T"]:
+                if tipo_cat_avgs[_tri]:
+                    fin_cat_sum += float(tipo_cat_avgs[_tri]) * pond_map[_tri]
+                    fin_pond_sum += pond_map[_tri]
+            cat_final_str = f"{(fin_cat_sum / fin_pond_sum):.1f}" if fin_pond_sum > 0 else ""
+            rows.append([desc_tipo, f"{peso_tipo}%", tipo_cat_avgs["1T"], tipo_cat_avgs["2T"], tipo_cat_avgs["3T"], cat_final_str])
+
+    fin_avg_sum = fin_avg_pond_sum = 0.0
+    media_row = ["Medias trimestrales y final", ""]
+    for tri in ["1T", "2T", "3T"]:
+        avg = nota_media_tri[tri] * (100.0 / suma_pesos_usados[tri]) if suma_pesos_usados[tri] > 0 else 0.0
+        if suma_pesos_usados[tri] > 0:
+            media_row.append(f"{avg:.2f}")
+            fin_avg_sum += avg * pond_map[tri]
+            fin_avg_pond_sum += pond_map[tri]
+        else:
+            media_row.append("")
+    media_row.append(f"{(fin_avg_sum / fin_avg_pond_sum):.2f}" if fin_avg_pond_sum > 0 else "")
+    rows.append(media_row)
+
+    add_table(doc, ["Instrumentos de evaluación", "%", f"1T ({pond_1t}%)", f"2T ({pond_2t}%)", f"3T ({pond_3t}%)", "Final (100%)"],
+               rows, col_widths_cm=[5, 1.5, 2.5, 2.5, 2.5, 2.5], total_row_bg="E8E8E8")
+
+    return doc_to_bytes(doc)
+

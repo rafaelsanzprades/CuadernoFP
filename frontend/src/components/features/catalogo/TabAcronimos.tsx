@@ -4,6 +4,18 @@ import { BookOpen, Search } from "lucide-react";
 import { Input } from "@/components/ui/Input";
 import { acronymsData, CATEGORY_LABELS, AcronymCategory } from "@/data/acronymsData";
 
+// El campo `name` de acronymsData sigue la convención "SIGLA. Término
+// completo" cuando existe una sigla real (p.ej. "ABP. Aprendizaje Basado en
+// Proyectos"). Cuando no hay sigla (p.ej. "Bullying"), `name` es solo el
+// término y no se inventa ninguna sigla.
+function parseAcronym(name: string): { acronym: string; term: string } {
+  const match = name.match(/^([^\s.][^.]{0,19}?)\.\s+(.+)$/);
+  if (match) {
+    return { acronym: match[1], term: match[2] };
+  }
+  return { acronym: "", term: name };
+}
+
 export function TabAcronimos() {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -17,10 +29,10 @@ export function TabAcronimos() {
     'otros'
   ];
 
-  const filteredData = acronymsData.filter(item => 
-    item.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    item.description.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredData = acronymsData.filter(item => {
+    const q = searchTerm.toLowerCase();
+    return item.name.toLowerCase().includes(q) || item.description.toLowerCase().includes(q);
+  });
 
   return (
     <div className="space-y-6 animate-in fade-in duration-300">
@@ -62,17 +74,22 @@ export function TabAcronimos() {
                   <table>
                     <thead>
                       <tr>
+                        <th className="w-24">Acrónimo</th>
                         <th className="w-1/3">Nombre</th>
                         <th>Descripción corta</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {items.map(item => (
-                        <tr key={item.id} className="hover:bg-foreground/[0.02] transition-colors">
-                          <td className="font-medium text-foreground">{item.name}</td>
-                          <td>{item.description}</td>
-                        </tr>
-                      ))}
+                      {items.map(item => {
+                        const { acronym, term } = parseAcronym(item.name);
+                        return (
+                          <tr key={item.id} className="hover:bg-foreground/[0.02] transition-colors">
+                            <td className="font-bold text-accent whitespace-nowrap">{acronym}</td>
+                            <td className="font-medium text-foreground">{term}</td>
+                            <td>{item.description}</td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>

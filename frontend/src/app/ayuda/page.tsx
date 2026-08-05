@@ -1,5 +1,5 @@
 "use client";
-import { BookOpen, Info, Map, Layers, Check, ChevronDown } from "lucide-react";
+import { BookOpen, Info, Map, ChevronDown } from "lucide-react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -7,10 +7,7 @@ import { navGroups } from "@/config/navigation";
 import { Card } from "@/components/ui/Card";
 import Link from "next/link";
 import { TabSync } from "@/components/ui/TabSync";
-import { useState, useEffect } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
+import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
@@ -19,55 +16,55 @@ import { TabAcronimos } from "@/components/features/catalogo/TabAcronimos";
 // ── Mapa de pestañas por página real (misma fuente que usaba /inicio) ──────
 const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   "/contexto": [
-    { id: "presentacion", label: "Presentación" },
-    { id: "entorno", label: "Entorno" },
-    { id: "planes", label: "Planes" },
-    { id: "procedimientos", label: "Procedimientos" },
+    { id: "presentacion", label: "Identificación" },
+    { id: "entorno", label: "Contextualización" },
+    { id: "planes", label: "FEOE y diversidad" },
+    { id: "procedimientos", label: "Evaluación y calificación" },
   ],
   "/curriculo": [
-    { id: "ponderacion-ra-ce", label: "Ponderación RA-CE" },
-    { id: "tareas", label: "Tareas" },
-    { id: "unidades", label: "Unidades (UD)" },
-    { id: "relacion-ra-ud", label: "Relación RA-UD" },
-    { id: "contribucion-og", label: "Contribución OG" },
+    { id: "ponderacion-ra-ce", label: "Ponderación RA y CE" },
+    { id: "unidades", label: "Unidades didácticas" },
+    { id: "relacion-ra-ud", label: "Relación RA con UD" },
+    { id: "contribucion-og", label: "Contribución RA en OG" },
+    { id: "tareas", label: "Tareas competenciales" },
   ],
   "/metodologia": [
     { id: "metodologia", label: "Metodología" },
-    { id: "evaluacion", label: "Evaluación" },
-    { id: "diversidad", label: "Diversidad" },
-    { id: "contingencia", label: "Contingencia" },
+    { id: "diversidad", label: "Medidas de inclusión" },
+    { id: "evaluacion", label: "Instrumentos y recursos" },
+    { id: "contingencia", label: "Plan de contingencia" },
     { id: "transversales", label: "Transversales" },
   ],
   "/instrumentos": [
     { id: "resumen", label: "Resumen" },
-    { id: "tri1", label: "1º trimestre" },
-    { id: "tri2", label: "2º trimestre" },
-    { id: "tri3", label: "3º trimestre" },
+    { id: "tri1", label: "1º Trimestre" },
+    { id: "tri2", label: "2º Trimestre" },
+    { id: "tri3", label: "3º Trimestre" },
   ],
   "/calendario": [
     { id: "fechas", label: "Fechas y horarios" },
     { id: "eventos", label: "Eventos y festivos" },
-    { id: "actividades", label: "Actividades complementarias" },
+    { id: "actividades", label: "Actividades extraescolares" },
     { id: "visual", label: "Calendario visual" },
   ],
   "/alumnado": [
     { id: "listado", label: "Listado" },
-    { id: "plano", label: "Plano del aula" },
+    { id: "plano", label: "Plano de clase" },
     { id: "contexto", label: "Contexto del grupo" },
   ],
   "/seguimiento": [
     { id: "clases", label: "Clases" },
     { id: "tutoria", label: "Tutoría" },
     { id: "asistencia", label: "Asistencia" },
-    { id: "abandono", label: "Alerta abandono" },
+    { id: "abandono", label: "Alerta de abandono" },
   ],
   "/calificaciones": [
     { id: "resumen", label: "Resumen" },
     { id: "estadisticas", label: "Estadísticas" },
     { id: "matriz", label: "Matriz (Excel)" },
     { id: "detalle", label: "Por alumnado" },
-    { id: "grupal", label: "Informe grupal" },
-    { id: "individual", label: "Informe individual" },
+    { id: "grupal", label: "Grupal" },
+    { id: "individual", label: "Individual" },
   ],
   "/normativa": [
     { id: "ccaa", label: "CCAA" },
@@ -94,14 +91,17 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "ecp-incual", label: "ECP INCUAL" },
   ],
   "/magia": [
-    { id: "programacion", label: "Generar programación" },
-    { id: "guia", label: "Guía PD" },
-    { id: "comparativa", label: "Comparativa" },
-    { id: "utilidades", label: "Utilidades" },
+    { id: "programacion", label: "Programación" },
     { id: "curso", label: "Curso" },
+    { id: "anexos", label: "Anexos" },
+  ],
+  "/correlacion": [
+    { id: "pd-", label: "PD- ← APP" },
+    { id: "pd=", label: "PD= ← APP" },
+    { id: "pd+", label: "PD+ ← APP" },
+    { id: "datos", label: "APP ← Datos" },
   ],
   "/ayuda": [
-    { id: "guia", label: "Guía" },
     { id: "faq", label: "FAQ" },
     { id: "acronimos", label: "Acrónimos" },
     { id: "mapa", label: "Mapa web" },
@@ -186,29 +186,9 @@ const FAQS = [
 ];
 
 export default function AyudaPage() {
-  const [activeTab, setActiveTab] = useState<string>("guia");
-  const [guiaContent, setGuiaContent] = useState<string>("");
-  const [isLoadingGuia, setIsLoadingGuia] = useState(false);
-
-  useEffect(() => {
-    if (activeTab === "guia" && !guiaContent && !isLoadingGuia) {
-      setIsLoadingGuia(true);
-      fetch('/Guia.md')
-        .then(res => res.text())
-        .then(text => {
-          setGuiaContent(text);
-          setIsLoadingGuia(false);
-        })
-        .catch(err => {
-          console.error(err);
-          setGuiaContent("Error cargando la guía.");
-          setIsLoadingGuia(false);
-        });
-    }
-  }, [activeTab, guiaContent, isLoadingGuia]);
+  const [activeTab, setActiveTab] = useState<string>("faq");
 
   const TABS = [
-    { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Guía</>, cleanLabel: "Guía" },
     { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> FAQ</>, cleanLabel: "FAQ" },
     { id: "acronimos", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Acrónimos</>, cleanLabel: "Acrónimos" },
     { id: "mapa", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> Mapa web</>, cleanLabel: "Mapa web" },
@@ -217,7 +197,6 @@ export default function AyudaPage() {
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    guia: 'Manuales y guías paso a paso para configurar tu entorno.',
     faq: 'Respuestas a las preguntas más frecuentes del profesorado.',
     acronimos: 'Glosario de siglas, acrónimos y conceptos de Formación Profesional.',
     mapa: 'Esquema jerárquico de todas las secciones y utilidades de la aplicación.',
@@ -247,179 +226,6 @@ export default function AyudaPage() {
             </div>
 
             <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
-
-            {/* ── CONTENIDO: GUÍA PASO A PASO ───────────────────────────── */}
-            {activeTab === "guia" && (
-              <div className="space-y-6 animate-in fade-in duration-500 w-full">
-
-                {/* Secuencia Lógica Propuesta */}
-                <Card glow className="p-8 mb-6">
-                  <div className="space-y-4">
-                  <h2 className="text-subheading font-bold text-foreground flex items-center gap-3">
-                    <Layers className="w-6 h-6 text-accent" /> Secuencia natural de la programación (PD+ / JEG)
-                  </h2>
-                  <p className="text-muted text-body pb-4 border-b border-[var(--glass-border)]">
-                    Los 9 pasos siguen el propio índice del documento oficial que genera Magia (modelo PD+/JEG,
-                    CIFPA — el más completo de los tres). El modelo pd= (BOA Aragón) y pd- (mínima) usan un
-                    subconjunto de estos mismos datos, así que rellenarlos en este orden también los deja listos.
-                    Cada apartado enlaza directamente a la pestaña donde se rellena.
-                  </p>
-
-                  {/* Contenedor del Diagrama */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-
-                    {/* Paso 1 */}
-                    <Card className="p-4 bg-accent/5 border border-accent/20 shadow-sm relative group overflow-hidden">
-                      <div className="absolute top-0 left-0 w-full h-1 bg-accent/50 group-hover:bg-accent transition-colors"></div>
-                      <h3 className="font-bold text-accent mb-1 text-body flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center text-caption">1</span> Identificación y contexto
-                      </h3>
-                      <p className="text-caption text-muted/60 mb-3">Cap. 1 del PD+: identificación, marco normativo y contextualización.</p>
-                      <ul className="text-caption text-muted/80 space-y-2 font-medium">
-                        <li><Link href="/contexto?tab=presentacion" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-accent/70 shrink-0"/>Identificación del módulo</Link></li>
-                        <li><Link href="/contexto?tab=entorno" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-accent/70 shrink-0"/>Contextualización (geo/socio/escolar)</Link></li>
-                        <li><Link href="/alumnado?tab=contexto" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-accent/70 shrink-0"/>Características del alumnado</Link></li>
-                      </ul>
-                    </Card>
-
-                    {/* Paso 2 */}
-                    <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
-                      <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
-                      <h3 className="font-bold text-foreground mb-1 text-body flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">2</span> Desarrollo curricular
-                      </h3>
-                      <p className="text-caption text-muted/60 mb-3">Cap. 2: RA, CE, contenidos y unidades didácticas.</p>
-                      <ul className="text-caption text-muted/80 space-y-2 font-medium">
-                        <li><Link href="/curriculo?tab=ponderacion-ra-ce" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>RA y CE (ponderación)</Link></li>
-                        <li><Link href="/curriculo?tab=unidades" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Unidades didácticas (UD)</Link></li>
-                        <li><Link href="/curriculo?tab=relacion-ra-ud" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Relación RA-UD</Link></li>
-                        <li><Link href="/curriculo?tab=contribucion-og" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Contribución a los OG</Link></li>
-                      </ul>
-                    </Card>
-
-                    {/* Paso 3 */}
-                    <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
-                      <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
-                      <h3 className="font-bold text-foreground mb-1 text-body flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">3</span> FEOE / FP Dual
-                      </h3>
-                      <p className="text-caption text-muted/60 mb-3">Cap. 2.9: formación en empresa u organismo equiparado.</p>
-                      <ul className="text-caption text-muted/80 space-y-2 font-medium">
-                        <li><Link href="/contexto?tab=planes" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Organización y seguimiento FEOE</Link></li>
-                        <li><Link href="/curriculo?tab=ponderacion-ra-ce" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>RA marcados como dualizables</Link></li>
-                      </ul>
-                    </Card>
-
-                    {/* Paso 4 */}
-                    <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
-                      <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
-                      <h3 className="font-bold text-foreground mb-1 text-body flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">4</span> Metodología didáctica
-                      </h3>
-                      <p className="text-caption text-muted/60 mb-3">Cap. 3: principios, estrategias, recursos y agrupamientos.</p>
-                      <ul className="text-caption text-muted/80 space-y-2 font-medium">
-                        <li><Link href="/metodologia?tab=metodologia" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Principios, estrategias y ABP/ABR</Link></li>
-                      </ul>
-                    </Card>
-
-                    {/* Paso 5 */}
-                    <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
-                      <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
-                      <h3 className="font-bold text-foreground mb-1 text-body flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">5</span> Evaluación y calificación
-                      </h3>
-                      <p className="text-caption text-muted/60 mb-3">Cap. 4: instrumentos, criterios de calificación y ponderación.</p>
-                      <ul className="text-caption text-muted/80 space-y-2 font-medium">
-                        <li><Link href="/contexto?tab=procedimientos" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Procedimiento de evaluación</Link></li>
-                        <li><Link href="/instrumentos?tab=resumen" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Instrumentos e indicadores</Link></li>
-                        <li><Link href="/calificaciones?tab=matriz" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Matriz de calificaciones</Link></li>
-                      </ul>
-                    </Card>
-
-                    {/* Paso 6 */}
-                    <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
-                      <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
-                      <h3 className="font-bold text-foreground mb-1 text-body flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">6</span> Inclusión
-                      </h3>
-                      <p className="text-caption text-muted/60 mb-3">Cap. 5: medidas de respuesta educativa para la inclusión.</p>
-                      <ul className="text-caption text-muted/80 space-y-2 font-medium">
-                        <li><Link href="/metodologia?tab=diversidad" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Medidas de inclusión y ACNEAE</Link></li>
-                      </ul>
-                    </Card>
-
-                    {/* Paso 7 */}
-                    <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
-                      <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
-                      <h3 className="font-bold text-foreground mb-1 text-body flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">7</span> Actividades complementarias
-                      </h3>
-                      <p className="text-caption text-muted/60 mb-3">Cap. 6: actividades complementarias y extraescolares.</p>
-                      <ul className="text-caption text-muted/80 space-y-2 font-medium">
-                        <li><Link href="/calendario?tab=actividades" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Actividades complementarias</Link></li>
-                      </ul>
-                    </Card>
-
-                    {/* Paso 8 */}
-                    <Card className="p-4 bg-foreground/5 border border-[var(--glass-border)] shadow-sm relative group overflow-hidden">
-                      <div className="absolute top-0 left-0 w-full h-1 bg-foreground/20 group-hover:bg-foreground/50 transition-colors"></div>
-                      <h3 className="font-bold text-foreground mb-1 text-body flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center text-caption">8</span> Contingencia y publicidad
-                      </h3>
-                      <p className="text-caption text-muted/60 mb-3">Cap. 7-8: plan de contingencia y publicidad de la programación.</p>
-                      <ul className="text-caption text-muted/80 space-y-2 font-medium">
-                        <li><Link href="/metodologia?tab=contingencia" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Plan de contingencia</Link></li>
-                        <li><Link href="/contexto?tab=entorno" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-foreground/40 shrink-0"/>Bibliografía y publicidad</Link></li>
-                      </ul>
-                    </Card>
-
-                    {/* Paso 9 */}
-                    <Card className="p-4 bg-success/5 border border-success/20 shadow-sm relative group overflow-hidden">
-                      <div className="absolute top-0 left-0 w-full h-1 bg-success/50 group-hover:bg-success transition-colors"></div>
-                      <h3 className="font-bold text-success mb-1 text-body flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-success/20 flex items-center justify-center text-caption">9</span> Magia: generar el documento
-                      </h3>
-                      <p className="text-caption text-muted/60 mb-3">Comprueba antes en Inicio → Verificación que todo esté listo.</p>
-                      <ul className="text-caption text-muted/80 space-y-2 font-medium">
-                        <li><Link href="/magia?tab=programacion" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-success/70 shrink-0"/>Generar PD+ (JEG), pd= (BOA) o pd-</Link></li>
-                        <li><Link href="/inicio?tab=verificacion" className="flex items-center gap-1.5 hover:text-accent transition-colors"><Check className="w-3.5 h-3.5 text-success/70 shrink-0"/>Verificar antes de generar</Link></li>
-                      </ul>
-                    </Card>
-
-                  </div>
-                </div>
-              </Card>
-
-                <Card glow className="p-8">
-                  {isLoadingGuia && !guiaContent ? (
-                    <div className="flex justify-center p-8 text-muted">Cargando guía...</div>
-                  ) : (
-                    <div className="markdown-body">
-                      <ReactMarkdown
-                        remarkPlugins={[remarkGfm]}
-                        rehypePlugins={[rehypeRaw]}
-                        components={{
-                          h1: ({node, ...props}) => <h1 className="text-heading font-extrabold text-foreground mb-6 pb-2 border-b border-white/10" {...props} />,
-                          h2: ({node, ...props}) => <h2 className="text-subheading font-bold text-accent mt-8 mb-4 flex items-center gap-2" {...props} />,
-                          h3: ({node, ...props}) => <h3 className="text-subheading font-bold text-foreground mt-6 mb-3" {...props} />,
-                          p: ({node, ...props}) => <p className="text-muted leading-relaxed mb-4" {...props} />,
-                          ul: ({node, className, ...props}) => <ul className={`list-none space-y-3 mb-6 ml-4 ${className || ''}`} {...props} />,
-                          ol: ({node, className, ...props}: any) => <ol className={`list-decimal space-y-3 mb-6 ml-6 ${className || ''}`} {...props} />,
-                          li: ({node, ...props}) => <li className="text-body text-muted leading-relaxed" {...props} />,
-                          strong: ({node, ...props}) => <strong className="font-bold text-foreground" {...props} />,
-                          a: ({node, ...props}) => <a className="text-accent hover:underline font-semibold" target="_blank" rel="noopener noreferrer" {...props} />,
-                          code: ({node, ...props}: any) => <code className="bg-foreground/10 text-foreground px-1.5 py-0.5 rounded text-body font-mono" {...props} />,
-                          pre: ({node, ...props}: any) => <pre className="block bg-foreground/5 p-4 rounded-xl text-body font-mono overflow-x-auto mb-4 border border-white/5 text-muted" {...props} />,
-                          hr: ({node, ...props}) => <hr className="border-white/10 my-8" {...props} />,
-                        }}
-                      >
-                        {guiaContent}
-                      </ReactMarkdown>
-                    </div>
-                  )}
-                </Card>
-              </div>
-            )}
 
             {/* ── CONTENIDO: FAQ ────────────────────────────────────────── */}
             {activeTab === "faq" && (

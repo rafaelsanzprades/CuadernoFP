@@ -260,3 +260,50 @@ def generar_pdf_seguimiento(info_modulo, info_fechas, horario, planning_ledger, 
     doc.build(elements)
     buffer.seek(0)
     return buffer
+
+
+def generar_docx_seguimiento(info_modulo, info_fechas, horario, planning_ledger, calendar_notes, df_sesiones=None):
+    """Versión .docx editable: un día lectivo por fila, con una columna en
+    blanco para que el profesorado anote a mano el seguimiento/incidencias."""
+    from docx_helpers import new_document, add_title, add_meta_line, add_section_heading, add_table, doc_to_bytes
+
+    dias_semana_list = ["Lun", "Mar", "Mié", "Jue", "Vie"]
+    dias_validos = []
+    for tri in ["1t", "2t", "3t"]:
+        ini_t = info_fechas.get(f"ini_{tri}")
+        fin_t = info_fechas.get(f"fin_{tri}")
+        if ini_t and fin_t:
+            curr = ini_t
+            while curr <= fin_t:
+                if curr.weekday() < 5:
+                    h_dia = horario.get(dias_semana_list[curr.weekday()], 0)
+                    if h_dia > 0:
+                        dias_validos.append(curr)
+                curr += timedelta(days=1)
+    dias_validos = sorted(set(dias_validos))
+
+    doc = new_document(landscape=False)
+    add_title(doc, "Seguimiento diario", info_modulo.get("modulo", "Módulo"))
+    add_meta_line(doc, f"{info_modulo.get('centro', '')} ({info_modulo.get('profesorado', '')})")
+
+    meses_agrupados = {}
+    for d in dias_validos:
+        meses_agrupados.setdefault((d.year, d.month), []).append(d)
+
+    for (year, month), dias in meses_agrupados.items():
+        add_section_heading(doc, f"{NOMBRE_MESES[month - 1]} {year}")
+        rows = []
+        for d in dias:
+            d_str = f"{d.day:02d}/{d.month:02d}/{d.year}"
+            festivo = calendar_notes.get(f"f_{d_str}", "").strip()
+            relevante = calendar_notes.get(f"r_{d_str}", "").strip()
+            uds = ", ".join(planning_ledger.get(d_str, []))
+            h_dia = horario.get(dias_semana_list[d.weekday()], 0)
+            if festivo:
+                rows.append([d_str, dias_semana_list[d.weekday()], "-", f"Festivo: {festivo}", "", ""])
+            else:
+                rows.append([d_str, dias_semana_list[d.weekday()], str(h_dia), uds, "", relevante])
+        add_table(doc, ["Fecha", "Día", "H.", "UD / FEOE", "Programación y seguimiento", "Relevantes"], rows,
+                   col_widths_cm=[2, 1.3, 1, 3, 7, 3.5])
+
+    return doc_to_bytes(doc)

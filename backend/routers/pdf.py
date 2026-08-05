@@ -2,20 +2,53 @@ from fastapi import APIRouter, Depends, HTTPException, Response
 from sqlalchemy.orm import Session
 import pandas as pd
 from database import get_db
-from models import ModuleDocument
+from models import ModuleDocument, AttendanceRecord
 
 from pydantic import BaseModel
 from typing import Dict, Any, Optional
+
+DOCX_MIME = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+
 
 class PdfRequest(BaseModel):
     module_data: Dict[str, Any]
     curso_data: Dict[str, Any]
     fecha_corte: Optional[str] = None
+    # Campo libre para parámetros específicos de un tipo de documento
+    # (periodo del acta, fecha/motivo del parte de incidencias, etc.) sin
+    # tener que ampliar este modelo cada vez que se añade un generador.
+    extra: Optional[Dict[str, Any]] = None
+
 
 router = APIRouter(prefix="/api/pdf", tags=["PDF Generation"])
 
+
+def _compute_attendance_summary(db: Session, module_document_id: Optional[str], al_id: str):
+    """Resumen best-effort de asistencia para la Ficha individual. Devuelve
+    None si no se aporta module_document_id o no hay registros: la
+    asistencia vive en la tabla attendance_records, no en module_data/
+    curso_data, así que solo está disponible si el frontend la indica."""
+    if not module_document_id:
+        return None
+    try:
+        records = db.query(AttendanceRecord).filter(
+            AttendanceRecord.module_document_id == module_document_id,
+            AttendanceRecord.student_id == al_id,
+        ).all()
+    except Exception:
+        return None
+    if not records:
+        return None
+    faltas = sum(1 for r in records if r.status == "falta")
+    retrasos = sum(1 for r in records if r.status == "retraso")
+    total = len(records)
+    pct_faltas = (faltas / total * 100) if total else 0.0
+    return {"faltas": faltas, "retrasos": retrasos, "pct_faltas": pct_faltas}
+
+
 @router.post("")
-def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, item_id: Optional[str] = None, file_format: Optional[str] = "pdf"):
+def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, item_id: Optional[str] = None,
+                  file_format: Optional[str] = "pdf", db: Session = Depends(get_db)):
     print(f"--- GENERATE_PDF CALLED! type={type} al_id={al_id} item_id={item_id} format={file_format} ---")
     try:
         # Import PDF modules
@@ -26,16 +59,22 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
         from pdf_boletin_grupal import generar_pdf_boletin_grupal, generar_pdf_boletin_grupal_final
         from pdf_boletin_individual import generar_pdf_boletin_individual
         from pdf_clases_ud import generar_pdf_clases_ud
-        
+        from pdf_alumnado_ubicacion import generar_pdf_alumnado_ubicacion
+        from pdf_acta_evaluacion import generar_pdf_acta_evaluacion
+        from pdf_informe_eqavet import generar_pdf_informe_eqavet
+        from pdf_ficha_alumnado import generar_pdf_ficha_alumnado
+        from pdf_parte_incidencias import generar_pdf_parte_incidencia
+
         module_data = request.module_data
         curso_data = request.curso_data
         fecha_corte = request.fecha_corte
-        
+        extra = request.extra or {}
+
         # Helper to get df
         def get_df(data_dict, key):
             d = data_dict.get(key, [])
             return pd.DataFrame(d) if isinstance(d, list) else pd.DataFrame()
-            
+
         info_modulo = module_data.get("info_modulo") or {}
         from datetime import datetime
         info_fechas_raw = curso_data.get("info_fechas") or {}
@@ -54,7 +93,7 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
         planning_ledger = curso_data.get("planning_ledger") or {}
         calendar_notes = curso_data.get("calendar_notes") or {}
         df_sesiones = get_df(module_data, "df_sesiones")
-        
+
         df_al = get_df(curso_data, "df_al")
         df_eval = get_df(curso_data, "df_eval")
         df_act = get_df(module_data, "df_act")
@@ -63,9 +102,74 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
         df_feoe = get_df(curso_data, "df_feoe")
         df_ud = get_df(module_data, "df_ud")
         df_pr = get_df(module_data, "df_pr")
-        
+        plano_clase = curso_data.get("plano_clase") or {}
+
+        # ── Alternativa .docx para los generadores que hoy son solo PDF ────
+        # (docx nativo con python-docx, no conversión docx2pdf: falla en
+        # Linux/Cloud Run y ya se descartó como estrategia)
+        if file_format == "docx":
+            docx_bytes = None
+            if type == "calendario":
+                from pdf_calendario_academico import generar_docx_calendario
+                docx_bytes = generar_docx_calendario(info_modulo, info_fechas, planning_ledger, calendar_notes)
+            elif type == "seguimiento":
+                from pdf_seguimiento_diario import generar_docx_seguimiento
+                docx_bytes = generar_docx_seguimiento(info_modulo, info_fechas, horario, planning_ledger, calendar_notes, df_sesiones)
+            elif type == "clases_ud":
+                from pdf_clases_ud import generar_docx_clases_ud
+                docx_bytes = generar_docx_clases_ud(info_modulo, df_ud, df_sesiones)
+            elif type == "planificacion":
+                from pdf_planificacion import generar_docx_planificacion
+                df_sgmt = get_df(curso_data, "df_sgmt")
+                daily_ledger = curso_data.get("daily_ledger", {})
+                docx_bytes = generar_docx_planificacion(info_modulo, df_ud, df_sgmt, daily_ledger, horario, info_fechas, calendar_notes)
+            elif type == "matrices":
+                from pdf_matrices import generar_docx_matrices
+                docx_bytes = generar_docx_matrices(info_modulo, df_ra, df_ud)
+            elif type in ("grupal_1t", "grupal_2t", "grupal_3t"):
+                from pdf_boletin_grupal import generar_docx_boletin_grupal
+                tri = type.split("_")[1].upper()
+                docx_bytes = generar_docx_boletin_grupal(tri, info_modulo, df_al, df_eval, df_act, fecha_corte)
+            elif type == "grupal_final":
+                from pdf_boletin_grupal import generar_docx_boletin_grupal_final
+                docx_bytes = generar_docx_boletin_grupal_final(info_modulo, df_al, df_eval, df_act, fecha_corte)
+            elif type == "individual":
+                if not al_id: raise HTTPException(status_code=400, detail="al_id is required for individual document")
+                from pdf_boletin_individual import generar_docx_boletin_individual
+                docx_bytes = generar_docx_boletin_individual(info_modulo, al_id, df_al, df_eval, df_act, df_ce, df_ra,
+                                                               df_feoe, info_fechas, planning_ledger, df_ud, df_pr)
+            elif type == "alumnado_ubicacion":
+                from pdf_alumnado_ubicacion import generar_docx_alumnado_ubicacion
+                docx_bytes = generar_docx_alumnado_ubicacion(info_modulo, plano_clase, df_al)
+            elif type == "acta_evaluacion":
+                from pdf_acta_evaluacion import generar_docx_acta_evaluacion
+                periodo = extra.get("periodo") or "Final"
+                docx_bytes = generar_docx_acta_evaluacion(periodo, info_modulo, df_al, df_eval, df_act, fecha_corte)
+            elif type == "informe_eqavet":
+                from pdf_informe_eqavet import generar_docx_informe_eqavet
+                docx_bytes = generar_docx_informe_eqavet(info_modulo, module_data.get("eqavet_evaluacion") or {})
+            elif type == "ficha_alumnado":
+                if not al_id: raise HTTPException(status_code=400, detail="al_id is required for ficha_alumnado")
+                from pdf_ficha_alumnado import generar_docx_ficha_alumnado
+                tutoria_entry = (curso_data.get("tutoria_ledger") or {}).get(al_id)
+                attendance_summary = _compute_attendance_summary(db, extra.get("module_document_id"), al_id)
+                docx_bytes = generar_docx_ficha_alumnado(info_modulo, al_id, df_al, tutoria_entry, attendance_summary)
+            elif type == "parte_incidencia":
+                if not al_id: raise HTTPException(status_code=400, detail="al_id is required for parte_incidencia")
+                from pdf_parte_incidencias import generar_docx_parte_incidencia
+                docx_bytes = generar_docx_parte_incidencia(info_modulo, al_id, df_al,
+                                                             extra.get("fecha_incidencia"), extra.get("motivo_incidencia"))
+
+            if docx_bytes is not None:
+                return Response(
+                    content=docx_bytes, media_type=DOCX_MIME,
+                    headers={"Content-Disposition": f'attachment; filename="{type}.docx"'},
+                )
+            # Si el tipo no tiene alternativa .docx (p.ej. "programacion_jeg", que
+            # ya es .docx por defecto), seguimos hacia el despacho normal de abajo.
+
         buffer = None
-        
+
         if type == "calendario":
             buffer = generar_pdf_calendario(info_modulo, info_fechas, planning_ledger, calendar_notes)
         elif type == "seguimiento":
@@ -94,35 +198,34 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 info_fechas=info_fechas, planning_ledger=planning_ledger,
                 df_ud=df_ud, df_pr=df_pr
             )
-        elif type == "plantilla_jeg":
-            import os
-            template_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'modelo_pd_fp+.docx')
-            if not os.path.exists(template_path):
-                raise HTTPException(status_code=404, detail="Plantilla no encontrada. Debes colocar 'modelo_pd_fp+.docx' en la carpeta templates.")
-            with open(template_path, "rb") as f:
-                docx_bytes = f.read()
-            return Response(
-                content=docx_bytes,
-                media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-            )
-        elif type in ["programacion_minima", "programacion_suficiente", "programacion_detallada", "programacion_suficiente_tpl", "programacion_minima_tpl", "programacion_jeg"]:
-            if type == "programacion_minima":
-                import generador_pd_minima as generador_pd
-            elif type == "programacion_minima_tpl":
+        elif type == "alumnado_ubicacion":
+            buffer = generar_pdf_alumnado_ubicacion(info_modulo, plano_clase, df_al)
+        elif type == "acta_evaluacion":
+            periodo = extra.get("periodo") or "Final"
+            buffer = generar_pdf_acta_evaluacion(periodo, info_modulo, df_al, df_eval, df_act, fecha_corte)
+        elif type == "informe_eqavet":
+            buffer = generar_pdf_informe_eqavet(info_modulo, module_data.get("eqavet_evaluacion") or {})
+        elif type == "ficha_alumnado":
+            if not al_id: raise HTTPException(status_code=400, detail="al_id is required for ficha_alumnado")
+            tutoria_entry = (curso_data.get("tutoria_ledger") or {}).get(al_id)
+            attendance_summary = _compute_attendance_summary(db, extra.get("module_document_id"), al_id)
+            buffer = generar_pdf_ficha_alumnado(info_modulo, al_id, df_al, tutoria_entry, attendance_summary)
+        elif type == "parte_incidencia":
+            if not al_id: raise HTTPException(status_code=400, detail="al_id is required for parte_incidencia")
+            buffer = generar_pdf_parte_incidencia(info_modulo, al_id, df_al,
+                                                   extra.get("fecha_incidencia"), extra.get("motivo_incidencia"))
+        elif type in ["programacion_suficiente_tpl", "programacion_minima_tpl", "programacion_jeg"]:
+            if type == "programacion_minima_tpl":
                 import generador_pd_minima_tpl as generador_pd
-            elif type == "programacion_suficiente":
-                import generador_pd_suficiente as generador_pd
             elif type == "programacion_suficiente_tpl":
                 import generador_pd_suficiente_tpl as generador_pd
-            elif type == "programacion_jeg":
-                import generador_pd_jeg as generador_pd
             else:
-                import generador_pd_detallada as generador_pd
+                import generador_pd_jeg as generador_pd
             import tempfile
             import os
             import zipfile
             from io import BytesIO
-            
+
             info_mod = module_data.get("info_modulo") or {}
             info_cur = curso_data.get("info_curso") or {}
             # Derivar campos que los generadores necesitan y que pueden no estar
@@ -146,7 +249,7 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                     curso_academico = f"{y1}/{y2}"
                 else:
                     curso_academico = "2025/2026"
-            
+
             data_pd = {
                 "departamento": departamento,
                 "ciclo": info_mod.get("ciclo", "Ciclo Formativo"),
@@ -209,7 +312,7 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 "textos_pd_bibliografia": module_data.get("textos_pd_bibliografia", ""),
                 "textos_pd_publicidad": module_data.get("textos_pd_publicidad", ""),
             }
-            
+
             with tempfile.TemporaryDirectory() as tmpdir:
                 if type == "programacion_jeg":
                     import datetime
@@ -217,19 +320,19 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                     fname = f"{now_str} PD JEG"
                 else:
                     fname = f"PD_{data_pd['modulo'][:30].replace(' ', '_').replace('/', '-')}"
-                
+
                 out_docx = os.path.join(tmpdir, fname + ".docx")
                 out_pdf = os.path.join(tmpdir, fname + ".pdf")
-                
+
                 # Generate DOCX
                 generador_pd.generate(data_pd, out_docx, out_pdf)
                 # Siempre devolvemos DOCX para programación, independientemente del formato solicitado
                 with open(out_docx, "rb") as f:
                     docx_bytes = f.read()
-                
+
                 return Response(
                     content=docx_bytes,
-                    media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    media_type=DOCX_MIME,
                     headers={"Content-Disposition": f"attachment; filename=\"{fname}.docx\""}
                 )
         elif type in ["ud", "tarea"]:
@@ -238,15 +341,15 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             import os
             import zipfile
             from io import BytesIO
-            
+
             if not item_id:
                 raise HTTPException(status_code=400, detail="item_id is required for ud or tarea PDF")
-                
+
             info_modulo = module_data.get("info_modulo") or {}
             with tempfile.TemporaryDirectory() as tmpdir:
                 if type == "ud":
-                    df_ud = module_data.get("df_ud") or []
-                    target = next((u for u in df_ud if u.get("id_ud") == item_id), None)
+                    df_ud_list = module_data.get("df_ud") or []
+                    target = next((u for u in df_ud_list if u.get("id_ud") == item_id), None)
                     if not target:
                         raise HTTPException(status_code=404, detail="UD not found")
                     fname = f"UD_{item_id}"
@@ -254,31 +357,33 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                     out_pdf = os.path.join(tmpdir, fname + ".pdf")
                     generador_ud_tarea.generate_ud(target, info_modulo, out_docx, out_pdf)
                 else:
-                    df_act = module_data.get("df_act") or []
-                    target = next((t for t in df_act if t.get("ID") == item_id or t.get("id_act") == item_id), None)
+                    df_act_list = module_data.get("df_act") or []
+                    target = next((t for t in df_act_list if t.get("ID") == item_id or t.get("id_act") == item_id), None)
                     if not target:
                         raise HTTPException(status_code=404, detail="Tarea not found")
                     fname = f"Tarea_{item_id}"
                     out_docx = os.path.join(tmpdir, fname + ".docx")
                     out_pdf = os.path.join(tmpdir, fname + ".pdf")
                     generador_ud_tarea.generate_tarea(target, info_modulo, out_docx, out_pdf)
-                
+
                 # Siempre devolvemos DOCX para ud y tarea, independientemente del formato solicitado
                 with open(out_docx, "rb") as f:
                     docx_bytes = f.read()
-                
+
                 return Response(
                     content=docx_bytes,
-                    media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    media_type=DOCX_MIME
                 )
         else:
             raise HTTPException(status_code=400, detail=f"Unknown PDF type: {type}")
-            
+
         if not buffer:
             raise HTTPException(status_code=500, detail="Failed to generate PDF buffer")
-            
+
         return Response(content=buffer.getvalue(), media_type="application/pdf")
-        
+
+    except HTTPException:
+        raise
     except Exception as e:
         import traceback
         with open("pdf_debug.log", "a", encoding="utf-8") as f:
@@ -286,5 +391,3 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             traceback.print_exc(file=f)
         print(f"--- ERROR IN GENERATE_PDF! {str(e)} ---")
         raise HTTPException(status_code=500, detail=str(e))
-
-# Force reload

@@ -208,3 +208,42 @@ def generar_pdf_planificacion(
     buffer.seek(0)
     return buffer
 
+
+def generar_docx_planificacion(info_modulo, df_ud, df_sgmt, daily_ledger, horario, info_fechas, calendar_notes):
+    """Versión .docx editable: una fila por UD, con horas previstas/impartidas
+    totales y el desglose "Prv / Imp" por mes en una sola celda."""
+    from docx_helpers import new_document, add_title, add_meta_line, add_table, doc_to_bytes
+
+    doc = new_document(landscape=True)
+    add_title(doc, "Planificación: horas previstas frente a impartidas", info_modulo.get("modulo", "Módulo"))
+    add_meta_line(doc, f"{info_modulo.get('centro', '')} ({info_modulo.get('profesorado', '')})")
+
+    if not df_sgmt.empty:
+        imp_cols = [c for c in df_sgmt.columns if c.endswith("_Imp") and c != "Total_Imp"]
+        df_sgmt = df_sgmt.copy()
+        df_sgmt["Total_Imp"] = df_sgmt[imp_cols].sum(axis=1)
+
+    total_previsto = df_ud["horas_ud"].sum() if not df_ud.empty and "horas_ud" in df_ud.columns else 0
+    total_impartido = df_sgmt["Total_Imp"].sum() if not df_sgmt.empty and "Total_Imp" in df_sgmt.columns else 0
+    porcentaje = (total_impartido / total_previsto * 100) if total_previsto > 0 else 0
+    doc.add_paragraph(
+        f"Horas previstas: {total_previsto} h    |    Horas impartidas: {int(total_impartido)} h    |    Progreso: {porcentaje:.1f}%"
+    )
+
+    meses_display = ["Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "May", "Jun"]
+    rows = []
+    if not df_sgmt.empty:
+        for _, row in df_sgmt.iterrows():
+            fila = [row.get("id_ud", ""), row.get("horas_ud", 0), int(row.get("Total_Imp", 0) or 0)]
+            for m in meses_display:
+                p = int(row.get(f"{m}_Prv", 0) or 0)
+                i = int(row.get(f"{m}_Imp", 0) or 0)
+                fila.append(f"{p}/{i}" if (p or i) else "")
+            rows.append(fila)
+
+    add_table(doc, ["Cod. UD", "H. Prv.", "H. Imp."] + meses_display, rows,
+               col_widths_cm=[2, 1.5, 1.5] + [1.5] * len(meses_display))
+    doc.add_paragraph("Formato de celda mensual: Previstas / Impartidas.")
+
+    return doc_to_bytes(doc)
+

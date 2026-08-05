@@ -1,6 +1,5 @@
 "use client";
-import { AccordionBlock } from "@/components/ui/AccordionBlock";
-import { AlertTriangle, BarChart, BookOpen, Calculator, Calendar, CalendarDays, ChevronRight, ChevronDown, Construction, CornerLeftUp, Download, DownloadCloud, File, FileEdit, FileSpreadsheet, FileText, Folder, FolderOpen, GraduationCap, MapPin, Play, Scale, Search, Settings, Sparkles, UploadCloud, User, Users, X, Info } from "lucide-react";
+import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Construction, Download, FileEdit, FileSpreadsheet, FileText, FolderOpen, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, BookOpen, Target, Award, ShieldCheck, Contact, FileWarning } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -20,26 +19,42 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import Link from "next/link";
 
-type DocumentItem = {
-  name: string;
-  is_dir: boolean;
-  size: number | null;
-  path: string;
+type DownloadOpts = {
+  al_id?: string;
+  item_id?: string;
+  fechaCorte?: string;
+  extra?: Record<string, any>;
 };
 
-export default function MagiaPage() {
-  // State for Explorador
-  const [currentPath, setCurrentPath] = useState<string>("");
-  const [items, setItems] = useState<DocumentItem[]>([]);
-  const [loadingDocs, setLoadingDocs] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState("");
+/** Par de botones "Vista previa .pdf" / "Descarga editable .docx" para los
+ * generadores que soportan ambos formatos. */
+function DualDownloadButtons({
+  type, opts, downloadingStr, onDownload, pdfLabel = "Vista previa .pdf", docxLabel = "Descarga editable .docx",
+}: {
+  type: string;
+  opts?: DownloadOpts;
+  downloadingStr: string | null;
+  onDownload: (type: string, fileFormat: string, opts?: DownloadOpts) => void;
+  pdfLabel?: string;
+  docxLabel?: string;
+}) {
+  return (
+    <div className="flex gap-2 mt-auto">
+      <Button onClick={() => onDownload(type, "pdf", opts)} disabled={downloadingStr === `${type}_pdf`} className="flex-1">
+        {downloadingStr === `${type}_pdf` ? "⏳..." : pdfLabel}
+      </Button>
+      <Button variant="secondary" onClick={() => onDownload(type, "docx", opts)} disabled={downloadingStr === `${type}_docx`} className="flex-1">
+        {downloadingStr === `${type}_docx` ? "⏳..." : docxLabel}
+      </Button>
+    </div>
+  );
+}
 
+export default function MagiaPage() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [previewFilename, setPreviewFilename] = useState<string | null>(null);
   const [downloadingStr, setDownloadingStr] = useState<string | null>(null);
 
-  // State for Descargas
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData } = useAppStore();
   const [loadingData, setLoadingData] = useState(true);
   const [activeTab, setActiveTab] = useState("programacion");
@@ -49,47 +64,19 @@ export default function MagiaPage() {
   const [fecha3T, setFecha3T] = useState("");
   const [fechaFinal, setFechaFinal] = useState("");
 
-  const [evaluacionTab, setEvaluacionTab] = useState('grupales'); // grupales, individuales
-  const [guiaPdContent, setGuiaPdContent] = useState("");
   const [comparativaPdContent, setComparativaPdContent] = useState("");
 
+  const [incidenciaFecha, setIncidenciaFecha] = useState("");
+  const [incidenciaMotivo, setIncidenciaMotivo] = useState("");
+
   useEffect(() => {
-    if (!guiaPdContent) {
-      fetch("/Guia_PD.md")
-        .then(res => res.text())
-        .then(text => setGuiaPdContent(text))
-        .catch(err => console.error("Error cargando Guia_PD.md", err));
-    }
     if (!comparativaPdContent) {
       fetch("/Comparativa_PD.md")
         .then(res => res.text())
         .then(text => setComparativaPdContent(text))
         .catch(err => console.error("Error cargando Comparativa_PD.md", err));
     }
-  }, [guiaPdContent, comparativaPdContent]);
-
-  const fetchDocuments = (path: string) => {
-    setLoadingDocs(true);
-    setError(null);
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/list?path=${encodeURIComponent(path)}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Error al acceder a los documentos");
-        return res.json();
-      })
-      .then((json) => {
-        if (json.status === "success") {
-          setItems(json.data);
-          setCurrentPath(path);
-        } else {
-          setError(json.detail || "Error desconocido");
-        }
-      })
-      .catch((err) => {
-        console.error("Error fetching documents:", err);
-        setError(err.message);
-      })
-      .finally(() => setLoadingDocs(false));
-  };
+  }, [comparativaPdContent]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -130,77 +117,23 @@ export default function MagiaPage() {
     return dStr;
   };
 
-  // Explorador Handlers
-  const handleNavigate = (newPath: string) => {
-    fetchDocuments(newPath);
-  };
-
-  const handleGoUp = () => {
-    if (!currentPath) return;
-    const parts = currentPath.split("/").filter(Boolean);
-    parts.pop();
-    const parentPath = parts.join("/");
-    fetchDocuments(parentPath);
-  };
-
-  const handleDownloadDoc = async (filePath: string, filename: string) => {
-    const ext = filename.split('.').pop()?.toLowerCase() || '';
-    const previewable = ['pdf', 'txt', 'png', 'jpg', 'jpeg', 'docx'].includes(ext);
-
-    if (!previewable) {
-      window.open(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/download?file_path=${encodeURIComponent(filePath)}`, "_blank");
-      return;
-    }
-
+  // Descarga genérica: PDF (visor integrado) o DOCX (descarga directa)
+  const handleDownloadPdf = async (type: string, fileFormat: string = "pdf", opts?: DownloadOpts) => {
+    const { al_id, item_id, fechaCorte, extra } = opts || {};
     try {
-      setDownloadingStr(filePath);
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/documents/preview?file_path=${encodeURIComponent(filePath)}`;
-      const response = await fetch(url);
-      if (!response.ok) throw new Error("Error fetching document");
-
-      const blob = await response.blob();
-      const objectUrl = window.URL.createObjectURL(blob);
-
-      setPreviewUrl(objectUrl);
-      const displayFilename = ext === 'docx' ? filename.replace(/\.docx$/i, '.pdf') : filename;
-      setPreviewFilename(displayFilename);
-    } catch (err) {
-      console.error(err);
-      toast.error("Error al cargar la previsualización del documento. Verifica la conexión con el backend.");
-    } finally {
-      setDownloadingStr(null);
-    }
-  };
-
-  // Descargas Handlers
-  const handleDownloadPdf = async (type: string, al_id?: string, fechaCorte?: string, fileFormat: string = "pdf") => {
-    try {
-      if (type.startsWith('programacion')) {
-        setDownloadingStr(`${type}_${fileFormat}`);
-      } else {
-        setDownloadingStr(type);
-      }
+      setDownloadingStr(`${type}_${fileFormat}`);
       let url = `${process.env.NEXT_PUBLIC_API_URL}/api/pdf?type=${type}&file_format=${fileFormat}`;
       if (al_id) url += `&al_id=${al_id}`;
-
-      let activeCurriculoData: any = {};
-      if (type === 'programacion') {
-          // Curriculo data is now handled by the backend using the module ID
-          activeCurriculoData = {};
-      }
-
-      const dynamicCursoData = {
-        ...(cursoData || {}),
-        curriculo_data: activeCurriculoData
-      };
+      if (item_id) url += `&item_id=${item_id}`;
 
       const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          curso_data: dynamicCursoData,
-          module_data: moduleData,
-          fecha_corte: fechaCorte
+          curso_data: cursoData || {},
+          module_data: moduleData || {},
+          fecha_corte: fechaCorte,
+          extra: extra || null,
         })
       });
 
@@ -209,7 +142,7 @@ export default function MagiaPage() {
       const contentType = response.headers.get("Content-Type");
       const blob = await response.blob();
       const urlBlob = window.URL.createObjectURL(blob);
-      
+
       let finalExt = fileFormat;
       if (contentType && contentType.includes("wordprocessingml.document")) {
         finalExt = "docx";
@@ -224,14 +157,12 @@ export default function MagiaPage() {
       const timestampStr = `${yyyy}${mm}${dd}-${hh}${mmin}`;
 
       let downloadName = `${type}_${Date.now()}.${finalExt}`;
-      if (type === 'programacion_minima' || type === 'programacion_minima_tpl') {
-        downloadName = `${timestampStr} PD Resumen.${finalExt}`;
-      } else if (type === 'programacion_suficiente' || type === 'programacion_suficiente_tpl') {
-        downloadName = `${timestampStr} PD BOA Aragón.${finalExt}`;
-      } else if (type === 'programacion_detallada' || type === 'programacion_jeg') {
-        downloadName = `${timestampStr} PD JEG.${finalExt}`;
-      } else if (type === 'plantilla_jeg') {
-        downloadName = `PD+ FP v1 - Modelo.${finalExt}`;
+      if (type === 'programacion_minima_tpl') {
+        downloadName = `${timestampStr} PD ARAGÓN Resumen.${finalExt}`;
+      } else if (type === 'programacion_suficiente_tpl') {
+        downloadName = `${timestampStr} PD ARAGÓN BOA.${finalExt}`;
+      } else if (type === 'programacion_jeg') {
+        downloadName = `${timestampStr} PD ARAGÓN JEG.${finalExt}`;
       }
 
       if (finalExt === "pdf") {
@@ -265,9 +196,9 @@ export default function MagiaPage() {
     let csvContent = `Boletin de Calificaciones - ${triKey}\n`;
     csvContent += `Modulo: ${moduleData?.info_modulo?.modulo || ""}\n`;
     csvContent += `Fecha de corte (Acta): ${fechaCorte}\n\n`;
-    
+
     csvContent += `ID,Apellidos,Nombre,Nota Media ${triKey}\n`;
-    
+
     activeAl.forEach((al: any) => {
       const evRow = df_eval.find((e: any) => e.ID === al.ID);
       let notaMedia = "";
@@ -277,7 +208,7 @@ export default function MagiaPage() {
       }
       csvContent += `${al.ID},"${al.Apellidos || ""}","${al.Nombre || ""}",${notaMedia}\n`;
     });
-    
+
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
@@ -287,71 +218,17 @@ export default function MagiaPage() {
     document.body.removeChild(link);
   };
 
-  const formatSize = (bytes: number | null) => {
-    if (bytes === null) return "";
-    if (bytes === 0) return "0 B";
-    const k = 1024;
-    const sizes = ["B", "KB", "MB", "GB", "TB"];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
-  };
-
-  const getFileIcon = (filename: string) => {
-    const ext = filename.split('.').pop()?.toLowerCase();
-    if (ext === 'pdf') return <FileText className="w-8 h-8 text-danger" />;
-    if (ext === 'xlsx' || ext === 'xls' || ext === 'csv') return <FileSpreadsheet className="w-8 h-8 text-success" />;
-    if (ext === 'doc' || ext === 'docx') return <FileText className="w-8 h-8 text-info" />;
-    return <File className="w-8 h-8 text-muted" />;
-  };
-
-  const pathParts = currentPath.split("/").filter(Boolean);
-  const breadcrumbs = [
-    { label: "Raíz", path: "" },
-    ...pathParts.map((part, idx) => ({
-      label: part,
-      path: pathParts.slice(0, idx + 1).join("/")
-    }))
-  ];
-
-  const filteredItems = items.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()));
-
   const df_al = cursoData?.df_al || [];
   const activeAlumnado = df_al.filter((al: Alumnado) => al.Estado !== "Baja");
   activeAlumnado.sort((a: Alumnado, b: Alumnado) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
 
-  const handleDownloadPlanificacion = async () => {
-    try {
-      setDownloadingStr('planificacion');
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/pdf?type=planificacion&file_format=pdf`;
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ curso_data: useAppStore.getState().cursoData, module_data: moduleData })
-      });
-      if (!response.ok) throw new Error("Error generando documento");
-      
-      const blob = await response.blob();
-      const urlBlob = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = urlBlob;
-      a.download = `Planificacion_${Date.now()}.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(urlBlob);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setDownloadingStr(null);
-    }
-  };
+  const df_ud = moduleData?.df_ud || [];
+  const df_act = moduleData?.df_act || [];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    programacion: 'Generación de la programación didáctica oficial según el modelo de tu Comunidad Autónoma.',
-    guia: 'Guía de ayuda para la elaboración de la programación didáctica.',
-    comparativa: 'Comparativa entre distintos modelos y enfoques de programación didáctica.',
-    utilidades: 'Utilidades y exportaciones adicionales de apoyo a la programación.',
-    curso: 'Calendario, boletines e informes de seguimiento del curso.',
+    programacion: 'Generación de la programación didáctica oficial, matrices de currículo y documentos de UD/Tareas.',
+    curso: 'Calendario, seguimiento, plano de aula, boletines y actas de evaluación del curso.',
+    anexos: 'Comparativa de modelos y el informe EQAVET para la memoria final.',
   };
 
   return (
@@ -395,13 +272,11 @@ export default function MagiaPage() {
             <div className="p-8">
               <MotionWrapper className="w-full space-y-3 pb-12">
 
-
             <PageHeader
               icon={Sparkles}
               title="Magia"
               description="Generación de la programación didáctica y reportes."
             />
-
 
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
@@ -409,17 +284,11 @@ export default function MagiaPage() {
                   <TabsTrigger value="programacion">
                     <FileText className="w-4 h-4" /> Programación
                   </TabsTrigger>
-                  <TabsTrigger value="guia">
-                    <BookOpen className="w-4 h-4" /> Guía PD
-                  </TabsTrigger>
-                  <TabsTrigger value="comparativa">
-                    <Scale className="w-4 h-4" /> Comparativa
-                  </TabsTrigger>
-                  <TabsTrigger value="utilidades">
-                    <Calculator className="w-4 h-4" /> Utilidades
-                  </TabsTrigger>
                   <TabsTrigger value="curso">
                     <Calendar className="w-4 h-4" /> Curso
+                  </TabsTrigger>
+                  <TabsTrigger value="anexos">
+                    <Scale className="w-4 h-4" /> Anexos
                   </TabsTrigger>
                 </TabsList>
               </Tabs>
@@ -427,9 +296,9 @@ export default function MagiaPage() {
 
             <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
 
-            <div className="space-y-4 animate-in fade-in duration-500">
-              {activeTab === "programacion" && (
-                <div className="pt-2">
+            {/* ══════════════════════════ PROGRAMACIÓN ══════════════════════════ */}
+            {activeTab === "programacion" && (
+              <div className="pt-2 space-y-6">
                 {(!activeCursoId || !activeModuleId) ? (
                   <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                     <FileText className="w-16 h-16 text-muted-foreground opacity-50" />
@@ -452,93 +321,351 @@ export default function MagiaPage() {
                     </div>
                   </Card>
                 ) : (
-                  <div className="space-y-4 animate-in fade-in duration-500 mt-4">
-                    {["Andalucía","Aragón","Asturias","Baleares","Canarias","Cantabria","Castilla-La Mancha","Castilla y León","Cataluña","Comunidad Valenciana","Extremadura","Galicia","Madrid","Murcia","Navarra","País Vasco","La Rioja","Ceuta","Melilla"].map((comunidad) => {
-                      const isAragon = comunidad === "Aragón";
-                      return (
-                        <details key={comunidad} open={isAragon} className="group border border-[var(--glass-border)] rounded-xl bg-background/50 mb-4 shadow-sm overflow-hidden">
-                          <summary className="p-4 font-bold cursor-pointer text-subheading flex items-center justify-between hover:bg-foreground/5 transition-colors list-none border-b border-transparent group-open:border-[var(--glass-border)] group-open:bg-foreground/5">
-                            <span className="flex items-center gap-2"><MapPin className={`w-5 h-5 ${isAragon ? 'text-purple-500' : 'text-muted-foreground'}`} /> {comunidad}</span>
-                            <ChevronDown className="w-5 h-5 transition-transform group-open:rotate-180 text-muted" />
-                          </summary>
-                          {isAragon ? (
-                            <div className="p-6">
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-slate-400">
-                                  <div>
-                                    <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Resumen de la Programación didáctica para el alumnado</h3>
-                                    <p className="text-body text-muted mb-6">Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.</p>
+                  <>
+                    <div className="space-y-4 animate-in fade-in duration-500">
+                      {["Andalucía","Aragón","Asturias","Baleares","Canarias","Cantabria","Castilla-La Mancha","Castilla y León","Cataluña","Comunidad Valenciana","Extremadura","Galicia","Madrid","Murcia","Navarra","País Vasco","La Rioja","Ceuta","Melilla"].map((comunidad) => {
+                        const isAragon = comunidad === "Aragón";
+                        return (
+                          <details key={comunidad} open={isAragon} className="group border border-[var(--glass-border)] rounded-xl bg-background/50 mb-4 shadow-sm overflow-hidden">
+                            <summary className="p-4 font-bold cursor-pointer text-subheading flex items-center justify-between hover:bg-foreground/5 transition-colors list-none border-b border-transparent group-open:border-[var(--glass-border)] group-open:bg-foreground/5">
+                              <span className="flex items-center gap-2"><MapPin className={`w-5 h-5 ${isAragon ? 'text-purple-500' : 'text-muted-foreground'}`} /> {comunidad}</span>
+                              <ChevronDown className="w-5 h-5 transition-transform group-open:rotate-180 text-muted" />
+                            </summary>
+                            {isAragon ? (
+                              <div className="p-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                  <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-slate-400">
+                                    <div>
+                                      <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Resumen de la Programación didáctica para el alumnado</h3>
+                                      <p className="text-body text-muted mb-6">Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.</p>
+                                    </div>
+                                    <div className="flex gap-2 mt-auto">
+                                      <Button onClick={() => handleDownloadPdf('programacion_minima_tpl', 'docx')} disabled={downloadingStr === 'programacion_minima_tpl_docx'} className="flex-1 bg-slate-600 hover:bg-slate-700 text-white">
+                                        {downloadingStr === 'programacion_minima_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD ARAGÓN Resumen.docx'}
+                                      </Button>
+                                    </div>
                                   </div>
-                                  <div className="flex gap-2 mt-auto">
-                                    <Button onClick={() => handleDownloadPdf('programacion_minima_tpl', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_minima_tpl_docx'} className="flex-1 bg-slate-600 hover:bg-slate-700 text-white">
-                                      {downloadingStr === 'programacion_minima_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD Resumen.docx'}
-                                    </Button>
-                                  </div>
-                                </div>
 
-                                <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-blue-400">
-                                  <div>
-                                    <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica Aragón (BOA nº: 181 de 18 de septiembre de 2025)</h3>
-                                    <p className="text-body text-muted mb-6">Versión BOA con los puntos de la Ley muy específica y concreta (no detalla secuenciación de aula ni extensa teoría).</p>
+                                  <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-blue-400">
+                                    <div>
+                                      <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica Aragón (BOA nº: 181 de 18 de septiembre de 2025)</h3>
+                                      <p className="text-body text-muted mb-6">Versión BOA con los puntos de la Ley muy específica y concreta (no detalla secuenciación de aula ni extensa teoría).</p>
+                                    </div>
+                                    <div className="flex gap-2 mt-auto">
+                                      <Button onClick={() => handleDownloadPdf('programacion_suficiente_tpl', 'docx')} disabled={downloadingStr === 'programacion_suficiente_tpl_docx'} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
+                                        {downloadingStr === 'programacion_suficiente_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD ARAGÓN BOA.docx'}
+                                      </Button>
+                                    </div>
                                   </div>
-                                  <div className="flex gap-2 mt-auto">
-                                    <Button onClick={() => handleDownloadPdf('programacion_suficiente_tpl', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_suficiente_tpl_docx'} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
-                                      {downloadingStr === 'programacion_suficiente_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD BOA Aragón.docx'}
-                                    </Button>
-                                  </div>
-                                </div>
 
-                                <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-info">
-                                  <div>
-                                    <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica ARAGÓN (Modelo Oficial)</h3>
-                                    <p className="text-body text-muted mb-6">Se cumplimenta el modelo oficial de programación completo.</p>
-                                  </div>
-                                  <div className="flex flex-col gap-2 mt-auto">
-                                    <Button variant="secondary" onClick={() => handleDownloadPdf('plantilla_jeg', undefined, undefined, 'docx')} disabled={downloadingStr === 'plantilla_jeg_docx'} className="w-full">
-                                      {downloadingStr === 'plantilla_jeg_docx' ? '⏳ Descargando...' : 'Modelo PD JEG original'}
-                                    </Button>
-                                    <Button onClick={() => handleDownloadPdf('programacion_jeg', undefined, undefined, 'docx')} disabled={downloadingStr === 'programacion_jeg_docx'} className="w-full bg-info hover:bg-info/90 text-white">
-                                      {downloadingStr === 'programacion_jeg_docx' ? '⏳ Generando DOCX...' : 'Descargar PD JEG cumplimentada.docx'}
-                                    </Button>
+                                  <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-info">
+                                    <div>
+                                      <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica ARAGÓN (Modelo Oficial)</h3>
+                                      <p className="text-body text-muted mb-6">Se cumplimenta el modelo oficial de programación completo.</p>
+                                    </div>
+                                    <div className="flex flex-col gap-2 mt-auto">
+                                      <Button onClick={() => handleDownloadPdf('programacion_jeg', 'docx')} disabled={downloadingStr === 'programacion_jeg_docx'} className="w-full bg-info hover:bg-info/90 text-white">
+                                        {downloadingStr === 'programacion_jeg_docx' ? '⏳ Generando DOCX...' : 'Descargar PD ARAGÓN JEG.docx'}
+                                      </Button>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          ) : (
-                            <div className="p-12 text-center text-muted-foreground">
-                              <Construction className="w-12 h-12 mx-auto mb-4 opacity-20" />
-                              <p>Programaciones específicas para {comunidad} próximamente.</p>
-                            </div>
-                          )}
-                        </details>
-                      );
-                    })}
-
-                    
-                  </div>
-                )}
+                            ) : (
+                              <div className="p-12 text-center text-muted-foreground">
+                                <Construction className="w-12 h-12 mx-auto mb-4 opacity-20" />
+                                <p>Programaciones específicas para {comunidad} próximamente.</p>
                               </div>
-              )}
-              {activeTab === "guia" && (
-                <div className="pt-2">
-                <Card className="p-8 border-t-4 border-t-indigo-500 mt-4">
-                  <div className="prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-th:bg-foreground/5 prose-table:border-collapse prose-table:w-full">
-                    {guiaPdContent ? (
-                      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-                        {guiaPdContent}
-                      </ReactMarkdown>
-                    ) : (
-                      <div className="flex justify-center p-8">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-info"></div>
+                            )}
+                          </details>
+                        );
+                      })}
+                    </div>
+
+                    <Card className="p-6 border-t-4 border-t-teal-500">
+                      <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Grid className="w-[1.2em] h-[1.2em] mr-1" /></span> Documentos de apoyo al currículo</h2>
+                      <p className="text-body text-muted mb-6">Matriz de relación entre Resultados de Aprendizaje y Unidades Didácticas.</p>
+                      <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between max-w-md">
+                        <div>
+                          <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Grid className="w-[1.2em] h-[1.2em] mr-1" /></span> Matriz RA ↔ UD</h3>
+                          <p className="text-body text-muted mb-6">Tabla cruzada de RA y su relación con las Unidades Didácticas.</p>
+                        </div>
+                        <DualDownloadButtons type="matrices" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
                       </div>
-                    )}
+                    </Card>
+
+                    <Card className="p-6 border-t-4 border-t-teal-500">
+                      <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Unidades didácticas y tareas competenciales</h2>
+                      <p className="text-body text-muted mb-6">Documento individual (.docx) de una UD o una tarea concreta.</p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                          <div>
+                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Unidad didáctica</h3>
+                            {df_ud.length > 0 ? (
+                              <select id="ud_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold mb-4">
+                                {df_ud.map((u: any) => (
+                                  <option key={u.id_ud} value={u.id_ud}>{u.id_ud} - {u.desc_ud}</option>
+                                ))}
+                              </select>
+                            ) : (
+                              <p className="text-muted italic mb-4">No hay Unidades Didácticas definidas.</p>
+                            )}
+                          </div>
+                          <Button
+                            onClick={() => {
+                              const sel = document.getElementById('ud_select') as HTMLSelectElement;
+                              if (sel && sel.value) handleDownloadPdf('ud', 'docx', { item_id: sel.value });
+                            }}
+                            disabled={df_ud.length === 0 || downloadingStr === 'ud_docx'} className="w-full"
+                          >
+                            {downloadingStr === 'ud_docx' ? '⏳ Generando DOCX...' : 'Descargar UD.docx'}
+                          </Button>
+                        </div>
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                          <div>
+                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Tarea competencial</h3>
+                            {df_act.length > 0 ? (
+                              <select id="tarea_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold mb-4">
+                                {df_act.map((t: any) => (
+                                  <option key={t.ID || t.id_act} value={t.ID || t.id_act}>{t.ID || t.id_act} - {t.Nombre_Tarea || ''}</option>
+                                ))}
+                              </select>
+                            ) : (
+                              <p className="text-muted italic mb-4">No hay Tareas competenciales definidas.</p>
+                            )}
+                          </div>
+                          <Button
+                            onClick={() => {
+                              const sel = document.getElementById('tarea_select') as HTMLSelectElement;
+                              if (sel && sel.value) handleDownloadPdf('tarea', 'docx', { item_id: sel.value });
+                            }}
+                            disabled={df_act.length === 0 || downloadingStr === 'tarea_docx'} className="w-full"
+                          >
+                            {downloadingStr === 'tarea_docx' ? '⏳ Generando DOCX...' : 'Descargar Tarea.docx'}
+                          </Button>
+                        </div>
+                      </div>
+                    </Card>
+                  </>
+                )}
+              </div>
+            )}
+
+            {/* ══════════════════════════ CURSO ══════════════════════════ */}
+            {activeTab === 'curso' && (
+              <div className="space-y-4 animate-in fade-in duration-500">
+                <Card className="p-6 border-t-4 border-t-emerald-500">
+                  <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Calendar className="w-4 h-4" /></span> Grupo</h2>
+                  <p className="text-body text-muted mb-6">Gestión del grupo</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                      <div>
+                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><CalendarDays className="w-[1.2em] h-[1.2em] mr-1" /></span> Calendario académico</h3>
+                        <p className="text-body text-muted mb-6">Vista global del curso con fechas, sesiones y eventos.</p>
+                      </div>
+                      <DualDownloadButtons type="calendario" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
+                    </div>
+                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                      <div>
+                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Alumnado. Ubicación en el aula</h3>
+                        <p className="text-body text-muted mb-6">Distribución y ubicación del alumnado en el aula.</p>
+                      </div>
+                      <DualDownloadButtons type="alumnado_ubicacion" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
+                    </div>
                   </div>
                 </Card>
-                              </div>
-              )}
-              {activeTab === "comparativa" && (
-                <div className="pt-2">
-                <Card className="p-8 border-t-4 border-t-amber-500 mt-4">
+
+                <Card className="p-6 border-t-4 border-t-emerald-500">
+                  <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Clases mensual - por UD</h2>
+                  <p className="text-body text-muted mb-6">Registro detallado de clases impartidas y secuenciación por unidad didáctica.</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                      <div>
+                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguimiento diario</h3>
+                        <p className="text-body text-muted mb-6">Registro detallado de la planificación del día a día.</p>
+                      </div>
+                      <DualDownloadButtons type="seguimiento" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
+                    </div>
+                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                      <div>
+                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Clases por UD</h3>
+                        <p className="text-body text-muted mb-6">Secuenciación de sesiones de cada Unidad didáctica.</p>
+                      </div>
+                      <DualDownloadButtons type="clases_ud" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
+                    </div>
+                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                      <div>
+                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Planificación</h3>
+                        <p className="text-body text-muted mb-6">Distribución temporal mensual (previsto/impartido) por UD.</p>
+                      </div>
+                      <DualDownloadButtons type="planificacion" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
+                    </div>
+                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                      <div>
+                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileWarning className="w-[1.2em] h-[1.2em] mr-1" /></span> Parte de incidencias</h3>
+                        <p className="text-body text-muted mb-4">Justificante de una falta o incidencia concreta.</p>
+                        {activeAlumnado.length > 0 ? (
+                          <div className="space-y-2 mb-4">
+                            <select id="incidencia_al_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-2 text-[var(--foreground)] focus:border-info focus:outline-none font-bold text-caption">
+                              {activeAlumnado.map((al: Alumnado) => (
+                                <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre}</option>
+                              ))}
+                            </select>
+                            <input type="date" value={incidenciaFecha} onChange={(e) => setIncidenciaFecha(e.target.value)}
+                              className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-caption focus:border-info focus:outline-none" />
+                            <input type="text" placeholder="Motivo (opcional)" value={incidenciaMotivo} onChange={(e) => setIncidenciaMotivo(e.target.value)}
+                              className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-caption focus:border-info focus:outline-none" />
+                          </div>
+                        ) : (
+                          <p className="text-muted italic mb-4">No hay estudiantes activos.</p>
+                        )}
+                      </div>
+                      <DualDownloadButtons
+                        type="parte_incidencia"
+                        downloadingStr={downloadingStr}
+                        onDownload={(type, fmt) => {
+                          const sel = document.getElementById('incidencia_al_select') as HTMLSelectElement;
+                          if (sel && sel.value) handleDownloadPdf(type, fmt, { al_id: sel.value, extra: { fecha_incidencia: incidenciaFecha, motivo_incidencia: incidenciaMotivo } });
+                        }}
+                      />
+                    </div>
+                  </div>
+                </Card>
+
+                <Card className="p-6 border-t-4 border-t-blue-500">
+                  <h2 className="text-heading font-bold mb-6"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletines y actas de evaluación</h2>
+
+                  {/* Primera fila: 3 Trimestres */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {[
+                      { key: "1T", tipo: "grupal_1t", fecha: fecha1T, setFecha: setFecha1T, label: "1er trimestre", ini: cursoData?.info_fechas?.ini_1t, fin: cursoData?.info_fechas?.fin_1t },
+                      { key: "2T", tipo: "grupal_2t", fecha: fecha2T, setFecha: setFecha2T, label: "2º trimestre", ini: cursoData?.info_fechas?.ini_2t, fin: cursoData?.info_fechas?.fin_2t },
+                      { key: "3T", tipo: "grupal_3t", fecha: fecha3T, setFecha: setFecha3T, label: "3er trimestre", ini: cursoData?.info_fechas?.ini_3t, fin: cursoData?.info_fechas?.fin_3t },
+                    ].map(tri => (
+                      <div key={tri.key} className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
+                        <div>
+                          <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {tri.label}</h3>
+                          <div className="text-caption text-muted mb-2">
+                            Inicio: <span className="font-mono text-foreground">{formatD(tri.ini)}</span><br/>
+                            Fin: <span className="font-mono text-foreground">{formatD(tri.fin)}</span>
+                          </div>
+                        </div>
+                        <div className="text-left mt-auto">
+                          <label className="block text-caption text-muted mb-1 font-bold">Fecha de corte / acta:</label>
+                          <input type="date" value={tri.fecha} onChange={(e) => tri.setFecha(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-body focus:border-info focus:outline-none" />
+                        </div>
+                        <div className="flex flex-col gap-2 mt-2">
+                          <DualDownloadButtons type={tri.tipo} opts={{ fechaCorte: tri.fecha }} downloadingStr={downloadingStr} onDownload={handleDownloadPdf}
+                            pdfLabel="PDF" docxLabel="DOCX" />
+                          <DualDownloadButtons type={`acta_${tri.key}`} opts={{ fechaCorte: tri.fecha, extra: { periodo: tri.key } }} downloadingStr={downloadingStr}
+                            onDownload={(_type, fmt, opts) => handleDownloadPdf('acta_evaluacion', fmt, opts)}
+                            pdfLabel="Acta .pdf" docxLabel="Acta .docx" />
+                          <Button variant="ghost" onClick={() => handleExportCSV(tri.key, tri.fecha)} className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
+                            <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Segunda fila: Final y Extraordinaria */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
+                      <div>
+                        <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Evaluación final ordinaria</h3>
+                        <div className="text-caption text-muted mb-2">
+                          Inicio: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.ini_final)}</span><br/>
+                          Fin: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.fin_final)}</span>
+                        </div>
+                      </div>
+                      <div className="flex flex-col gap-2 mt-auto">
+                        <DualDownloadButtons type="grupal_final" opts={{ fechaCorte: fechaFinal }} downloadingStr={downloadingStr} onDownload={handleDownloadPdf}
+                          pdfLabel="PDF" docxLabel="DOCX" />
+                        <DualDownloadButtons type="acta_final" opts={{ fechaCorte: fechaFinal, extra: { periodo: "Final" } }} downloadingStr={downloadingStr}
+                          onDownload={(_type, fmt, opts) => handleDownloadPdf('acta_evaluacion', fmt, opts)}
+                          pdfLabel="Acta .pdf" docxLabel="Acta .docx" />
+                        <Button variant="ghost" onClick={() => handleExportCSV('Final', fechaFinal)} className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
+                          <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
+                      <div>
+                        <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Eval. Final Extraordinaria</h3>
+                        <div className="text-caption text-muted mb-2">
+                          Inicio: <span className="font-mono text-foreground">---</span><br/>
+                          Fin: <span className="font-mono text-foreground">---</span>
+                        </div>
+                        <p className="text-caption text-muted italic mt-2">Próximamente disponible</p>
+                      </div>
+                      <div className="flex flex-col gap-2 mt-auto">
+                        <Button variant="secondary" disabled className="w-full text-caption">
+                          PDF Boletín Extraordinaria
+                        </Button>
+                        <Button variant="ghost" disabled className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
+                          <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card className="p-6 border-t-4 border-t-blue-500">
+                  <h2 className="text-heading font-bold mb-6"><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> Alumnado individual</h2>
+                  {activeAlumnado.length > 0 ? (
+                    <div className="space-y-6">
+                      <div className="flex flex-col md:flex-row md:items-end gap-6 bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6">
+                        <div className="flex-1">
+                          <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletín de alumnado</h3>
+                          <p className="text-body text-muted mb-4">Genera un boletín detallado de un alumnado específico.</p>
+                          <select id="alumnado_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold">
+                            {activeAlumnado.map((al: Alumnado) => (
+                              <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre} ({al.ID})</option>
+                            ))}
+                          </select>
+                        </div>
+                        <DualDownloadButtons
+                          type="individual"
+                          downloadingStr={downloadingStr}
+                          onDownload={(type, fmt) => {
+                            const sel = document.getElementById('alumnado_select') as HTMLSelectElement;
+                            if (sel && sel.value) handleDownloadPdf(type, fmt, { al_id: sel.value });
+                          }}
+                        />
+                      </div>
+
+                      <div className="flex flex-col md:flex-row md:items-end gap-6 bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6">
+                        <div className="flex-1">
+                          <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Contact className="w-[1.2em] h-[1.2em] mr-1" /></span> Ficha individual</h3>
+                          <p className="text-body text-muted mb-4">Ficha de matrícula + tutoría de un alumno/a, para llevar a una reunión de orientación.</p>
+                          <select id="ficha_al_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold">
+                            {activeAlumnado.map((al: Alumnado) => (
+                              <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre} ({al.ID})</option>
+                            ))}
+                          </select>
+                        </div>
+                        <DualDownloadButtons
+                          type="ficha_alumnado"
+                          downloadingStr={downloadingStr}
+                          onDownload={(type, fmt) => {
+                            const sel = document.getElementById('ficha_al_select') as HTMLSelectElement;
+                            if (sel && sel.value) handleDownloadPdf(type, fmt, { al_id: sel.value, extra: { module_document_id: activeCursoId } });
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <p className="text-muted italic">No hay estudiantes activos en el curso.</p>
+                  )}
+                </Card>
+              </div>
+            )}
+
+            {/* ══════════════════════════ ANEXOS ══════════════════════════ */}
+            {activeTab === "anexos" && (
+              <div className="pt-2 space-y-6">
+                <Card className="p-8 border-t-4 border-t-amber-500">
                   <div className="prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-th:bg-foreground/5 prose-table:border-collapse prose-table:w-full">
                     {comparativaPdContent ? (
                       <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
@@ -551,226 +678,26 @@ export default function MagiaPage() {
                     )}
                   </div>
                 </Card>
-                              </div>
-              )}
-              {activeTab === "utilidades" && (
-                <div className="pt-2">
-                  <Card className="p-8 border-t-4 border-t-purple-500 mt-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                        <div>
-                          <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Exportar Planificación</h3>
-                          <p className="text-body text-muted mb-6">Genera un documento PDF con la distribución temporal mensual por Unidades Didácticas.</p>
-                        </div>
-                        <Button onClick={handleDownloadPlanificacion} disabled={downloadingStr === 'planificacion'} className="w-full bg-purple-600 hover:bg-purple-700 text-white">
-                          {downloadingStr === 'planificacion' ? '⏳ Generando PDF...' : 'PDF Planificación'}
-                        </Button>
-                      </div>
+
+                <Card className="p-6 border-t-4 border-t-green-500">
+                  <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><ShieldCheck className="w-[1.2em] h-[1.2em] mr-1" /></span> Calidad EQAVET</h2>
+                  <p className="text-body text-muted mb-6">Informe de autoevaluación EQAVET y propuestas de mejora (PDCA), para la memoria final.</p>
+                  <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between max-w-md">
+                    <div>
+                      <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Award className="w-[1.2em] h-[1.2em] mr-1" /></span> Informe EQAVET</h3>
+                      <p className="text-body text-muted mb-6">Indicadores de calidad + puntos fuertes y áreas de mejora.</p>
                     </div>
-                  </Card>
-                </div>
-              )}
-            </div>
+                    <DualDownloadButtons type="informe_eqavet" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
+                  </div>
+                </Card>
+              </div>
+            )}
 
-                {activeTab === 'curso' && (
-                      <div className="space-y-4 animate-in fade-in duration-500">
-                        <Card className="p-6 border-t-4 border-t-emerald-500">
-                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Calendar className="w-4 h-4" /></span> Grupo</h2>
-                          <p className="text-body text-muted mb-6">Gestión del grupo</p>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                              <div>
-                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><CalendarDays className="w-[1.2em] h-[1.2em] mr-1" /></span> Calendario académico</h3>
-                                <p className="text-body text-muted mb-6">Vista global del curso con fechas, sesiones y eventos.</p>
-                              </div>
-                              <Button onClick={() => handleDownloadPdf('calendario')} disabled={downloadingStr === 'calendario'} className="w-full">
-                                {downloadingStr === 'calendario' ? '⏳ Generando PDF...' : 'PDF Calendario'}
-                              </Button>
-                            </div>
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                              <div>
-                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Alumnado. Ubicación en el aula</h3>
-                                <p className="text-body text-muted mb-6">Distribución y ubicación del alumnado en el aula.</p>
-                              </div>
-                              <Button onClick={() => handleDownloadPdf('alumnado_ubicacion')} disabled={downloadingStr === 'alumnado_ubicacion'} className="w-full">
-                                {downloadingStr === 'alumnado_ubicacion' ? '⏳ Generando PDF...' : 'PDF Alumnado Ubicación'}
-                              </Button>
-                            </div>
-                          </div>
-                        </Card>
-
-                        <Card className="p-6 border-t-4 border-t-emerald-500">
-                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Clases mensual - por UD</h2>
-                          <p className="text-body text-muted mb-6">Registro detallado de clases impartidas y secuenciación por unidad didáctica.</p>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                              <div>
-                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguimiento diario</h3>
-                                <p className="text-body text-muted mb-6">Registro detallado de la planificación del día a día.</p>
-                              </div>
-                              <Button onClick={() => handleDownloadPdf('seguimiento')} disabled={downloadingStr === 'seguimiento'} className="w-full">
-                                {downloadingStr === 'seguimiento' ? '⏳ Generando PDF...' : 'PDF Seguimiento'}
-                              </Button>
-                            </div>
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                              <div>
-                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Clases por UD</h3>
-                                <p className="text-body text-muted mb-6">Secuenciación de sesiones de cada Unidad didáctica.</p>
-                              </div>
-                              <Button onClick={() => handleDownloadPdf('clases_ud')} disabled={downloadingStr === 'clases_ud'} className="w-full">
-                                {downloadingStr === 'clases_ud' ? '⏳ Generando PDF...' : 'PDF Clases por UD'}
-                              </Button>
-                            </div>
-                          </div>
-                        </Card>
-
-                        <Card className="p-6 border-t-4 border-t-blue-500">
-                          <h2 className="text-heading font-bold mb-6"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletines grupales trimestrales</h2>
-                          
-                          {/* Primera fila: 3 Trimestres */}
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
-                              <div>
-                                <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> 1er trimestre</h3>
-                                <div className="text-caption text-muted mb-2">
-                                  Inicio: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.ini_1t)}</span><br/>
-                                  Fin: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.fin_1t)}</span>
-                                </div>
-                              </div>
-                              <div className="text-left mt-auto">
-                                <label htmlFor="fecha-corte-1t" className="block text-caption text-muted mb-1 font-bold">Fecha de corte / acta:</label>
-                                <input id="fecha-corte-1t" type="date" value={fecha1T} onChange={(e) => setFecha1T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-body focus:border-info focus:outline-none" />
-                              </div>
-                              <div className="flex flex-col gap-2 mt-2">
-                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_1t', undefined, fecha1T)} disabled={downloadingStr === 'grupal_1t'} className="w-full text-caption">
-                                  {downloadingStr === 'grupal_1t' ? '⏳' : 'PDF Boletín'}
-                                </Button>
-                                <Button variant="ghost" onClick={() => handleExportCSV('1T', fecha1T)} className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
-                                  <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
-                                </Button>
-                              </div>
-                            </div>
-                            
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
-                              <div>
-                                <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> 2º trimestre</h3>
-                                <div className="text-caption text-muted mb-2">
-                                  Inicio: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.ini_2t)}</span><br/>
-                                  Fin: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.fin_2t)}</span>
-                                </div>
-                              </div>
-                              <div className="text-left mt-auto">
-                                <label htmlFor="fecha-corte-2t" className="block text-caption text-muted mb-1 font-bold">Fecha de corte / acta:</label>
-                                <input id="fecha-corte-2t" type="date" value={fecha2T} onChange={(e) => setFecha2T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-body focus:border-info focus:outline-none" />
-                              </div>
-                              <div className="flex flex-col gap-2 mt-2">
-                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_2t', undefined, fecha2T)} disabled={downloadingStr === 'grupal_2t'} className="w-full text-caption">
-                                  {downloadingStr === 'grupal_2t' ? '⏳' : 'PDF Boletín'}
-                                </Button>
-                                <Button variant="ghost" onClick={() => handleExportCSV('2T', fecha2T)} className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
-                                  <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
-                                </Button>
-                              </div>
-                            </div>
-                            
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
-                              <div>
-                                <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> 3er trimestre</h3>
-                                <div className="text-caption text-muted mb-2">
-                                  Inicio: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.ini_3t)}</span><br/>
-                                  Fin: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.fin_3t)}</span>
-                                </div>
-                              </div>
-                              <div className="text-left mt-auto">
-                                <label htmlFor="fecha-corte-3t" className="block text-caption text-muted mb-1 font-bold">Fecha de corte / acta:</label>
-                                <input id="fecha-corte-3t" type="date" value={fecha3T} onChange={(e) => setFecha3T(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-body focus:border-info focus:outline-none" />
-                              </div>
-                              <div className="flex flex-col gap-2 mt-2">
-                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_3t', undefined, fecha3T)} disabled={downloadingStr === 'grupal_3t'} className="w-full text-caption">
-                                  {downloadingStr === 'grupal_3t' ? '⏳' : 'PDF Boletín'}
-                                </Button>
-                                <Button variant="ghost" onClick={() => handleExportCSV('3T', fecha3T)} className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
-                                  <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
-                                </Button>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Segunda fila: Final y Extraordinaria */}
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
-                              <div>
-                                <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Evaluación final ordinaria</h3>
-                                <div className="text-caption text-muted mb-2">
-                                  Inicio: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.ini_final)}</span><br/>
-                                  Fin: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.fin_final)}</span>
-                                </div>
-                              </div>
-                              <div className="flex flex-col gap-2 mt-auto">
-                                <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_final', undefined, fechaFinal)} disabled={downloadingStr === 'grupal_final'} className="w-full text-caption">
-                                  {downloadingStr === 'grupal_final' ? '⏳' : 'PDF Boletín'}
-                                </Button>
-                                <Button variant="ghost" onClick={() => handleExportCSV('Final', fechaFinal)} className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
-                                  <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
-                                </Button>
-                              </div>
-                            </div>
-                            
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
-                              <div>
-                                <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Eval. Final Extraordinaria</h3>
-                                <div className="text-caption text-muted mb-2">
-                                  Inicio: <span className="font-mono text-foreground">---</span><br/>
-                                  Fin: <span className="font-mono text-foreground">---</span>
-                                </div>
-                                <p className="text-caption text-muted italic mt-2">Próximamente disponible</p>
-                              </div>
-                              <div className="flex flex-col gap-2 mt-auto">
-                                <Button variant="secondary" disabled className="w-full text-caption">
-                                  PDF Boletín Extraordinaria
-                                </Button>
-                                <Button variant="ghost" disabled className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
-                                  <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
-                                </Button>
-                              </div>
-                            </div>
-                          </div>
-                        </Card>
-
-                        <Card className="p-6 border-t-4 border-t-blue-500">
-                          <h2 className="text-heading font-bold mb-6"><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletines individuales</h2>
-                          {activeAlumnado.length > 0 ? (
-                            <div className="flex flex-col md:flex-row md:items-end gap-6 bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6">
-                              <div className="flex-1">
-                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletín de alumnado</h3>
-                                <p className="text-body text-muted mb-4">Genera un boletín detallado de un alumnado específico.</p>
-                                <select id="alumnado_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold">
-                                  {activeAlumnado.map((al: Alumnado) => (
-                                    <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre} ({al.ID})</option>
-                                  ))}
-                                </select>
-                              </div>
-                              <Button variant="secondary" onClick={() => {
-                                  const sel = document.getElementById('alumnado_select') as HTMLSelectElement;
-                                  if (sel && sel.value) handleDownloadPdf('individual', sel.value);
-                                }}
-                                disabled={downloadingStr === 'individual'} className="px-8 py-3 h-[50px] w-full md:w-auto"
-                              >
-                                {downloadingStr === 'individual' ? '⏳ Generando boletín...' : 'PDF Boletín individual'}
-                              </Button>
-                            </div>
-                          ) : (
-                            <p className="text-muted italic">No hay estudiantes activos en el curso.</p>
-                          )}
-                        </Card>
-                      </div>
-                    )}
               </MotionWrapper>
             </div>
           )}
         </div>
       </main>
     </div>
-      );
+  );
 }
-

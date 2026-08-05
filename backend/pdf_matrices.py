@@ -272,3 +272,56 @@ def generar_pdf_matrices(
     buffer.seek(0)
     return buffer
 
+
+def generar_docx_matrices(info_modulo, df_ra, df_ud):
+    """Versión .docx editable: tabla de RA + tabla cruzada RA x UD."""
+    from docx_helpers import new_document, add_title, add_meta_line, add_section_heading, add_table, doc_to_bytes
+
+    doc = new_document(landscape=True)
+    add_title(doc, "Matrices RA → UD", info_modulo.get("modulo", "Módulo"))
+    add_meta_line(doc, f"{info_modulo.get('centro', '')} ({info_modulo.get('profesorado', '')})")
+
+    add_section_heading(doc, "Resultados de aprendizaje (RA)")
+    if not df_ra.empty:
+        rows = []
+        total_peso = 0
+        for _, row in df_ra.iterrows():
+            try:
+                peso = float(row.get("peso_ra", 0) or 0)
+            except ValueError:
+                peso = 0
+            total_peso += peso
+            rows.append([row.get("id_ra", ""), f"{peso}%", "✓" if row.get("is_dual", False) else "",
+                         row.get("desc_ra", "")])
+        rows.append(["TOTAL", f"{total_peso}%", "", ""])
+        add_table(doc, ["ID-RA", "% RA", "FEOE", "Descripción"], rows,
+                   col_widths_cm=[2, 2, 2, 12], total_row_bg="E8E8E8")
+    else:
+        doc.add_paragraph("No hay Resultados de Aprendizaje definidos.")
+
+    add_section_heading(doc, "Unidades didácticas (UD) × Resultados de aprendizaje (RA)")
+    if not df_ud.empty and not df_ra.empty:
+        ra_ids = df_ra["id_ra"].tolist() if "id_ra" in df_ra.columns else []
+        rows = []
+        for _, row in df_ud.iterrows():
+            fila = [row.get("id_ud", ""), int(row.get("horas_ud", 0) or 0), row.get("desc_ud", "")]
+            for ra_id in ra_ids:
+                try:
+                    val = float(row.get(ra_id, 0) or 0)
+                except ValueError:
+                    val = 0
+                fila.append(f"{int(val)}%" if val > 0 else "")
+            rows.append(fila)
+        total_horas = int(df_ud["horas_ud"].sum()) if "horas_ud" in df_ud.columns else 0
+        total_row = ["TOTAL", total_horas, ""]
+        for ra_id in ra_ids:
+            col_sum = sum(float(r.get(ra_id, 0) or 0) for _, r in df_ud.iterrows())
+            total_row.append(f"{int(col_sum)}%")
+        rows.append(total_row)
+        add_table(doc, ["ID-UD", "Horas", "Unidad didáctica"] + ra_ids, rows,
+                   col_widths_cm=[1.8, 1.5, 6] + [1.5] * len(ra_ids), total_row_bg="E8E8E8")
+    else:
+        doc.add_paragraph("No hay datos de Unidades Didácticas o RA definidos.")
+
+    return doc_to_bytes(doc)
+
