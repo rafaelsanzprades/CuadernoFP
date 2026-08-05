@@ -176,7 +176,7 @@ export default function InicioPage() {
       id: "modulo",
       icon: <BookOpen className="w-5 h-5" />,
       title: "Módulo didáctico",
-      href: "/contexto?tab=presentacion",
+      href: "/contexto?tab=identificacion",
       hrefLabel: "Contexto",
       status: !m ? "empty" : "ok",
       lines: !m
@@ -186,7 +186,7 @@ export default function InicioPage() {
           `Horas semanales: ${m.info_modulo?.h_sem || "-"} h`,
           `Horas BOA: ${m.info_modulo?.h_boa || "-"} h`,
         ],
-      actionHref: !m ? "/contexto?tab=presentacion" : undefined,
+      actionHref: !m ? "/contexto?tab=identificacion" : undefined,
       actionLabel: !m ? "Configurar módulo" : undefined,
     },
     {
@@ -303,13 +303,13 @@ export default function InicioPage() {
       id: "dual",
       icon: <Building2 className="w-5 h-5" />,
       title: "FP Dual",
-      href: "/contexto?tab=presentacion",
+      href: "/contexto?tab=identificacion",
       hrefLabel: "Contexto",
       status: (m?.dual_regimen && m.dual_regimen !== "ninguno") ? "ok" : "empty",
       lines: (m?.dual_regimen && m.dual_regimen !== "ninguno")
         ? [`Régimen: Dual ${m.dual_regimen === 'general' ? 'General' : 'Intensivo'}`]
         : ["Régimen tradicional (sin FP Dual configurada)"],
-      actionHref: "/contexto?tab=presentacion",
+      actionHref: "/contexto?tab=identificacion",
       actionLabel: "Configurar FP Dual",
     },
     {
@@ -329,7 +329,7 @@ export default function InicioPage() {
       id: "identificacion-pd",
       icon: <FileText className="w-5 h-5" />,
       title: "Identificación (para PD+/pd=/pd-)",
-      href: "/contexto?tab=presentacion",
+      href: "/contexto?tab=identificacion",
       hrefLabel: "Contexto",
       status: !m ? "empty" : identificacionFaltan.length === 0 ? "ok" : identificacionFaltan.length < 3 ? "warning" : "empty",
       lines: !m
@@ -337,7 +337,7 @@ export default function InicioPage() {
         : identificacionFaltan.length === 0
           ? ["Centro, profesorado y familia profesional configurados"]
           : [`Faltan: ${identificacionFaltan.join(", ")}`, "Estos campos rellenan la portada de los 3 modelos de PD"],
-      actionHref: identificacionFaltan.length > 0 ? "/contexto?tab=presentacion" : undefined,
+      actionHref: identificacionFaltan.length > 0 ? "/contexto?tab=identificacion" : undefined,
       actionLabel: identificacionFaltan.length > 0 ? "Completar identificación" : undefined,
     },
     {

@@ -16,7 +16,7 @@ import { TabAcronimos } from "@/components/features/catalogo/TabAcronimos";
 // ── Mapa de pestañas por página real (misma fuente que usaba /inicio) ──────
 const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   "/contexto": [
-    { id: "presentacion", label: "Identificación" },
+    { id: "identificacion", label: "Identificación" },
     { id: "entorno", label: "Contextualización" },
     { id: "planes", label: "FEOE y diversidad" },
     { id: "procedimientos", label: "Evaluación y calificación" },

@@ -358,21 +358,21 @@ export function DatosTab() {
           trimestre debe sumar 100%.
         </p>
         <div className="space-y-2">
-          <div className="grid grid-cols-[2fr_1fr_1fr_1fr_2rem] gap-3 text-caption font-bold text-muted px-1">
-            <span>Instrumento</span>
-            <span className="text-center">1er Trimestre</span>
-            <span className="text-center">2º Trimestre</span>
-            <span className="text-center">3er Trimestre</span>
-            <span></span>
+          <div className="grid grid-cols-12 gap-3 text-caption font-bold text-muted px-1">
+            <span className="col-span-5">Instrumento</span>
+            <span className="col-span-2 text-center">1er Trimestre</span>
+            <span className="col-span-2 text-center">2º Trimestre</span>
+            <span className="col-span-2 text-center">3er Trimestre</span>
+            <span className="col-span-1"></span>
           </div>
           {instrumentosPct.map((row) => (
-            <div key={row.id} className="grid grid-cols-[2fr_1fr_1fr_1fr_2rem] gap-3 items-center">
+            <div key={row.id} className="grid grid-cols-12 gap-3 items-center">
               <input
                 type="text"
                 value={row.nombre}
                 onChange={(e) => updateInstrumentoPctField(row.id, "nombre", e.target.value)}
                 placeholder="Nombre del instrumento"
-                className="bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground"
+                className="col-span-5 bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground"
               />
               {(["pct_1t", "pct_2t", "pct_3t"] as const).map((field) => (
                 <input
@@ -380,13 +380,13 @@ export function DatosTab() {
                   type="number"
                   value={row[field]}
                   onChange={(e) => updateInstrumentoPctField(row.id, field, e.target.value)}
-                  className="bg-background border border-[var(--glass-border)] rounded px-2 py-2 text-foreground text-center"
+                  className="col-span-2 bg-background border border-[var(--glass-border)] rounded px-2 py-2 text-foreground text-center"
                 />
               ))}
               <button
                 type="button"
                 onClick={() => removeInstrumentoPct(row.id)}
-                className="p-2 text-danger hover:bg-danger/10 rounded-lg transition-colors justify-self-center"
+                className="col-span-1 p-2 text-danger hover:bg-danger/10 rounded-lg transition-colors justify-self-center"
                 aria-label="Eliminar instrumento"
               >
                 <Trash2 className="w-4 h-4" />

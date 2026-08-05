@@ -3,8 +3,9 @@
 pdf_informe_eqavet.py
 PDF A4 vertical - Informe de autoevaluación EQAVET y propuestas de mejora
 (PDCA), para la memoria final del módulo. Fuente de datos:
-module_data.eqavet_evaluacion, tal y como lo escriben EqavetTab.tsx y
-PropuestasTab.tsx (ind1..ind6 + puntos_fuertes + areas_mejora).
+module_data.eqavet_evaluacion, tal y como lo escriben EqavetTab.tsx (ind1..ind8)
+y PropuestasTab.tsx (puntos_fuertes_<cat> / areas_mejora_<cat> por cada
+categoría: planificacion, desarrollo, resultados).
 """
 import io
 from reportlab.lib import colors
@@ -19,11 +20,15 @@ EQAVET_INDICATORS = [
     {"id": "ind2", "category": "Planificación", "label": "¿Se han planificado adecuadamente las actividades de FP Dual?"},
     {"id": "ind3", "category": "Desarrollo", "label": "¿La metodología empleada ha fomentado el aprendizaje activo?"},
     {"id": "ind4", "category": "Desarrollo", "label": "¿Los recursos y espacios han sido suficientes y adecuados?"},
+    {"id": "ind7", "category": "Desarrollo", "label": "¿Ha habido diferencia relevante entre lo planificado y lo realmente impartido?"},
+    {"id": "ind8", "category": "Desarrollo", "label": "¿La programación ha facilitado la coordinación con el resto del equipo docente?"},
     {"id": "ind5", "category": "Resultados", "label": "¿El nivel de éxito escolar (aprobados) es satisfactorio?"},
     {"id": "ind6", "category": "Resultados", "label": "¿El alumnado ha mostrado satisfacción con el módulo?"},
 ]
 SCORE_LABELS = {"1": "Mejorable", "2": "Suficiente", "3": "Bueno", "4": "Excelente"}
 CATEGORIAS = ["Planificación", "Desarrollo", "Resultados"]
+# Clave usada por PropuestasTab.tsx para cada categoría (puntos_fuertes_<clave> / areas_mejora_<clave>)
+CATEGORIA_KEYS = {"Planificación": "planificacion", "Desarrollo": "desarrollo", "Resultados": "resultados"}
 
 
 def _draw_page_decorations(canv, doc):
@@ -77,11 +82,14 @@ def generar_pdf_informe_eqavet(info_modulo: dict, eqavet_evaluacion: dict):
         elements.append(Spacer(1, 10))
 
     elements.append(Paragraph("Propuestas de mejora (PDCA)", h2))
-    elements.append(Paragraph("Puntos fuertes (lo que ha funcionado bien)", h3))
-    elements.append(Paragraph(eqavet_evaluacion.get("puntos_fuertes") or "<i>Sin cumplimentar.</i>", norm))
-    elements.append(Spacer(1, 10))
-    elements.append(Paragraph("Áreas de mejora y acciones para el próximo curso", h3))
-    elements.append(Paragraph(eqavet_evaluacion.get("areas_mejora") or "<i>Sin cumplimentar.</i>", norm))
+    for cat in CATEGORIAS:
+        key = CATEGORIA_KEYS[cat]
+        elements.append(Paragraph(cat, h3))
+        elements.append(Paragraph(
+            f"<b>Puntos fuertes:</b> {eqavet_evaluacion.get(f'puntos_fuertes_{key}') or '<i>Sin cumplimentar.</i>'}", norm))
+        elements.append(Paragraph(
+            f"<b>Áreas de mejora:</b> {eqavet_evaluacion.get(f'areas_mejora_{key}') or '<i>Sin cumplimentar.</i>'}", norm))
+        elements.append(Spacer(1, 8))
 
     doc.build(elements)
     buffer.seek(0)
@@ -106,9 +114,10 @@ def generar_docx_informe_eqavet(info_modulo: dict, eqavet_evaluacion: dict):
         add_table(doc, ["Indicador", "Valoración"], rows, col_widths_cm=[15, 4])
 
     add_section_heading(doc, "Propuestas de mejora (PDCA)")
-    doc.add_heading("Puntos fuertes (lo que ha funcionado bien)", level=2)
-    doc.add_paragraph(eqavet_evaluacion.get("puntos_fuertes") or "Sin cumplimentar.")
-    doc.add_heading("Áreas de mejora y acciones para el próximo curso", level=2)
-    doc.add_paragraph(eqavet_evaluacion.get("areas_mejora") or "Sin cumplimentar.")
+    for cat in CATEGORIAS:
+        key = CATEGORIA_KEYS[cat]
+        doc.add_heading(cat, level=2)
+        doc.add_paragraph(f"Puntos fuertes: {eqavet_evaluacion.get(f'puntos_fuertes_{key}') or 'Sin cumplimentar.'}")
+        doc.add_paragraph(f"Áreas de mejora: {eqavet_evaluacion.get(f'areas_mejora_{key}') or 'Sin cumplimentar.'}")
 
     return doc_to_bytes(doc)
