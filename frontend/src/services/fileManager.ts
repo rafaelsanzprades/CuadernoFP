@@ -14,6 +14,8 @@ const ALLOWED_PROGRAMACION_KEYS = [
   'info_modulo', 'config_contexto', 'config_aula', 'config_redondeo', 'ra_og_mapping',
   // FP Dual y EQAVET
   'dual_regimen', 'eqavet_evaluacion',
+  // Escalas de evaluación cualitativas
+  'escalas_evaluacion',
   // Indicadores del sistema de calificación por indicador
   'df_indicadores',
   // Fechas, horario y calendario

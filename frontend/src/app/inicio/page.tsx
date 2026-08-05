@@ -521,6 +521,37 @@ export default function InicioPage() {
 
           <div className="w-full space-y-12 pb-12">
 
+            {/* Posicionamiento: metodología experta detrás de la app */}
+            <Card className="p-6 border border-accent/20 bg-accent/5">
+              <div className="flex items-start gap-3 mb-4">
+                <GraduationCap className="w-6 h-6 text-accent mt-0.5 shrink-0" />
+                <div>
+                  <h2 className="text-subheading font-bold text-foreground">Una app construida sobre metodología experta, no sobre suposiciones</h2>
+                  <p className="text-body text-muted mt-1">
+                    Cuaderno FP está diseñado siguiendo lo que coinciden en señalar la Inspección educativa,
+                    los principales autores de referencia y las guías oficiales de las administraciones
+                    educativas: <strong className="text-foreground">los Resultados de Aprendizaje (RA) son el eje causal</strong> del
+                    que debe derivar todo lo demás en una programación didáctica — no los instrumentos de
+                    evaluación, no el calendario, no los contenidos por sí solos.
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-3 text-caption font-semibold text-muted border-t border-[var(--glass-border)] pt-4">
+                {[
+                  "Identificación", "Introducción, justificación y normativa", "Contextualización",
+                  "Objetivos y competencias", "Carácter intermodular y dual", "Contenidos centrados en RA",
+                  "Situaciones de aprendizaje", "Metodología e inclusión",
+                  "Evaluación (aprendizaje / prácticas / excepciones)", "Actividades complementarias",
+                  "Atención a la diversidad y recursos",
+                ].map((step, i, arr) => (
+                  <span key={step} className="flex items-center gap-2">
+                    <span className="px-2.5 py-1 rounded-full bg-foreground/5 border border-[var(--glass-border)] text-foreground/80">{step}</span>
+                    {i < arr.length - 1 && <ArrowRight className="w-3.5 h-3.5 text-muted/50 shrink-0" />}
+                  </span>
+                ))}
+              </div>
+            </Card>
+
             {/* Accesos a las demás pestañas de Inicio */}
             <Card className="p-6 border border-[var(--glass-border)] bg-[var(--glass-bg)]">
               <h2 className="text-subheading font-bold text-foreground mb-4">Ayuda y recursos de Inicio</h2>

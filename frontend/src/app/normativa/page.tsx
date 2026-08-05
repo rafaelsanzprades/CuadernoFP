@@ -38,8 +38,7 @@ export default function DocumentosPage() {
   const TAB_DESCRIPTIONS: Record<string, string> = {
     ccaa: 'Legislación autonómica y normativa específica.',
     bibliografia: 'Referencias normativas y bibliografía del catálogo.',
-    Plantillas: 'Formatos base recomendados por la administración educativa para programaciones.',
-    Currículos: 'Disposiciones normativas que fijan las enseñanzas mínimas de cada título.',
+    curriculos: 'Disposiciones normativas que fijan las enseñanzas mínimas de cada título.',
     legislacion: 'Leyes orgánicas, reales decretos y órdenes ministeriales vigentes.',
   };
   const [activeTab, setActiveTab] = useState("ccaa");
@@ -81,14 +80,6 @@ export default function DocumentosPage() {
   };
 
   useEffect(() => {
-    const folderMap: Record<string, string> = {
-      "plantillas": "Plantillas",
-      "legislacion": "legislacion"
-    };
-    if (folderMap[activeTab] && folderMap[activeTab] !== activeTab) {
-      setActiveTab(folderMap[activeTab]);
-      return;
-    }
     if (activeTab === "bibliografia") {
       setItems([]);
       setLoadingDocs(false);

@@ -144,6 +144,14 @@ export const ModuleDataSchema = z.object({
   dual_regimen: z.enum(["ninguno", "general", "intensivo"]).optional().default("ninguno"),
   eqavet_evaluacion: z.record(z.string(), z.any()).optional(),
 
+  // Escalas de evaluación cualitativas (EEv): niveles nombrados con un
+  // coeficiente de conversión a la nota numérica 0-10, independientes de ella.
+  escalas_evaluacion: z.array(z.object({
+    id: z.string(),
+    nombre: z.string(),
+    coeficiente: z.number(),
+  })).optional(),
+
   info_modulo: z.record(z.string(), z.any()).optional(),
   config_contexto: z.record(z.string(), z.any()).optional(),
   config_aula: z.record(z.string(), z.any()).optional(),

@@ -21,6 +21,20 @@ import { TabInfoBox } from "@/components/ui/TabInfoBox";
 
 import Link from "next/link";
 
+// Fechas en las que el alumnado cumple 16/18 años, a partir de Nacimiento
+// (DD/MM/AAAA) — dato ya existente en la matrícula, no se modifica nada.
+function computeMilestoneDates(nacimiento?: string): { f16: string; f18: string } | null {
+  if (!nacimiento) return null;
+  const parts = nacimiento.split('/');
+  if (parts.length !== 3) return null;
+  const [d, m, y] = parts.map(Number);
+  if (!d || !m || !y || isNaN(new Date(y, m - 1, d).getTime())) return null;
+  const fmt = (addYears: number) => {
+    const dt = new Date(y + addYears, m - 1, d);
+    return `${String(dt.getDate()).padStart(2, '0')}/${String(dt.getMonth() + 1).padStart(2, '0')}/${dt.getFullYear()}`;
+  };
+  return { f16: fmt(16), f18: fmt(18) };
+}
 
 export default function AlumnadoPage() {
   const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData } = useAppStore();
@@ -383,6 +397,15 @@ export default function AlumnadoPage() {
                                   className={`${fieldClass} w-28`}
                                   placeholder="DD/MM/YYYY"
                                 />
+                                {(() => {
+                                  const milestones = computeMilestoneDates(al.Nacimiento);
+                                  if (!milestones) return null;
+                                  return (
+                                    <span className="text-caption text-muted/70" title="Fechas calculadas a partir de Nacimiento, relevantes para FEOE y mayoría de edad">
+                                      · 16: {milestones.f16} · 18: {milestones.f18}
+                                    </span>
+                                  );
+                                })()}
                               </span>
 
                               <label className="shrink-0 inline-flex items-center gap-1.5 cursor-pointer">

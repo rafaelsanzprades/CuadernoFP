@@ -1,5 +1,5 @@
 "use client";
-import { Calendar, FileEdit, Receipt, Scale, School, UserCircle, Settings , Info } from "lucide-react";
+import { Calendar, FileEdit, Receipt, Scale, School, UserCircle, Settings, Info, ListChecks, Plus, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
@@ -384,6 +384,76 @@ export function DatosTab() {
                 />
                 <p className="text-caption text-muted">Número máximo de Criterios suspensos que se permiten para aprobar un RA.</p>
               </div>
+            </div>
+          );
+        })()}
+      </Card>
+
+      {/* 7. Escalas de evaluación cualitativas (EEv) */}
+      <Card className="p-6 border-l-4 border-l-teal-500">
+        <h4 className="text-subheading font-bold text-foreground mb-2 flex items-center gap-2">
+          <ListChecks className="w-[1.2em] h-[1.2em]" /> Escalas de evaluación cualitativas
+        </h4>
+        <p className="text-caption text-muted mb-4">
+          Niveles nombrados (ej. Insuficiente/Suficiente/Bueno/Excelente) con un coeficiente de
+          conversión a la nota 0-10, independientes de la nota numérica directa.
+        </p>
+        {(() => {
+          const escalas = moduleData?.escalas_evaluacion || [];
+          const updateEscala = (id: string, field: "nombre" | "coeficiente", value: string) => {
+            const next = escalas.map(e => e.id === id
+              ? { ...e, [field]: field === "coeficiente" ? parseFloat(value) || 0 : value }
+              : e);
+            updateModuleData("escalas_evaluacion", next);
+          };
+          const addEscala = () => {
+            const next = [...escalas, { id: `eev_${Date.now()}`, nombre: "", coeficiente: 5 }];
+            updateModuleData("escalas_evaluacion", next);
+          };
+          const removeEscala = (id: string) => {
+            updateModuleData("escalas_evaluacion", escalas.filter(e => e.id !== id));
+          };
+          return (
+            <div className="space-y-3">
+              {escalas.map((escala) => (
+                <div key={escala.id} className="flex items-center gap-3">
+                  <input
+                    type="text"
+                    placeholder="Nombre del nivel (ej. Suficiente)"
+                    value={escala.nombre}
+                    onChange={(e) => updateEscala(escala.id, "nombre", e.target.value)}
+                    className="flex-1 bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground"
+                  />
+                  <input
+                    type="number"
+                    step="0.1"
+                    min="0"
+                    max="10"
+                    placeholder="Nota"
+                    value={escala.coeficiente}
+                    onChange={(e) => updateEscala(escala.id, "coeficiente", e.target.value)}
+                    className="w-28 bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeEscala(escala.id)}
+                    className="p-2 text-danger hover:bg-danger/10 rounded-lg transition-colors shrink-0"
+                    aria-label="Eliminar nivel"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={addEscala}
+                className="flex items-center gap-2 text-body font-semibold text-accent hover:underline"
+              >
+                <Plus className="w-4 h-4" /> Añadir nivel
+              </button>
+              {escalas.length === 0 && (
+                <p className="text-caption text-muted italic">Sin escalas configuradas — la app sigue usando la nota 0-10 directamente.</p>
+              )}
             </div>
           );
         })()}
