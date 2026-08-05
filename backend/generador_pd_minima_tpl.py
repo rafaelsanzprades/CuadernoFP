@@ -173,16 +173,21 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
             table = doc.add_table(rows=1 + len(list_inst), cols=4)
             table.style = 'Table Grid'
 
-            table.columns[0].width = Cm(8.0)
-            table.columns[1].width = Cm(2.67)
-            table.columns[2].width = Cm(2.67)
-            table.columns[3].width = Cm(2.66)
+            col_widths = [Cm(10.0), Cm(2.0), Cm(2.0), Cm(2.0)]
+            for i, w in enumerate(col_widths):
+                table.columns[i].width = w
+            # table.columns[i].width por sí solo no basta: Word respeta el
+            # ancho de cada celda (tcW) por encima del gridCol de la tabla,
+            # así que hay que fijarlo también celda a celda, en todas las filas.
+            for row in table.rows:
+                for i, w in enumerate(col_widths):
+                    row.cells[i].width = w
 
             hdr_cells = table.rows[0].cells
             hdr_cells[0].text = "Instrumento"
-            hdr_cells[1].text = "1er Trimestre"
-            hdr_cells[2].text = "2º Trimestre"
-            hdr_cells[3].text = "3er Trimestre"
+            hdr_cells[1].text = "1er Tri."
+            hdr_cells[2].text = "2º Tri."
+            hdr_cells[3].text = "3er Tri."
 
             for cell in hdr_cells:
                 for hp in cell.paragraphs:
