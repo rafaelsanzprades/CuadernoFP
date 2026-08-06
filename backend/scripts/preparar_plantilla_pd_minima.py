@@ -69,7 +69,7 @@ def main():
 
     p_sub = doc.add_paragraph()
     p_sub.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    run_sub = p_sub.add_run("Módulo: {{ modulo }}\nTítulo: {{ ciclo }}\nCurso: {{ curso_academico }}")
+    run_sub = p_sub.add_run("Módulo: {{ modulo }}\nTítulo: {{ ciclo }}. Curso: {{ curso_academico }}")
     run_sub.font.name = 'Arial'
     run_sub.font.color.rgb = RGBColor(0, 0, 0)
     p_sub.paragraph_format.space_after = Pt(12)

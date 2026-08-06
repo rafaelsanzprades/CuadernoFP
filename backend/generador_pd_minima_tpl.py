@@ -25,9 +25,8 @@ def _build_context(data: dict) -> dict:
     curso_ciclo = data.get("curso_ciclo", "")
     nivel = data.get("nivel", "")
     codificado = " ".join(p for p in [curso_ciclo, nivel] if p)
-    curso = data.get("curso_academico", "")
-    if codificado:
-        curso = f"{curso} [{codificado}]" if curso else f"[{codificado}]"
+    curso_academico = data.get("curso_academico", "")
+    curso = f"{codificado} - {curso_academico}" if (codificado and curso_academico) else (codificado or curso_academico)
     df_ra = data.get("df_ra", [])
     df_ud = data.get("df_ud", [])
     config = data.get("config_contexto", {})
@@ -151,15 +150,21 @@ def _build_context(data: dict) -> dict:
 
 def _quitar_vinetas_listas(doc):
     """Las listas de RA y UD usan en la plantilla el estilo 'List Bullet'
-    (numPr → numId=1 en styles.xml), que es lo que pinta el puntito. Al
-    pasarlas a 'Normal' se pierde la numeración (Normal no tiene numPr) y
-    se fija a mano la sangría uniforme pedida — sin viñeta en ningún ítem,
-    ni en RA, ni en UD, ni en la línea de relación RA↔UD."""
+    (numPr en styles.xml), que es lo que pinta el puntito. Al pasarlas a
+    'Normal' se pierde la numeración (Normal no tiene numPr) y se fija a
+    mano la sangría — sin viñeta en ningún ítem, ni en RA, ni en UD, ni en
+    la línea de relación RA↔UD. Las líneas de relación (que empiezan por
+    "UDxx (") van más sangradas que su RA, para que se lean como un
+    subnivel de éste; el resto (RA sueltos y la lista de contenidos UD)
+    comparte un único nivel de sangría."""
     from docx.shared import Cm
+    import re
+    patron_relacion_ud = re.compile(r"^UD\d+\s*\(")
     for p in doc.paragraphs:
         if p.style is not None and p.style.name == 'List Bullet':
             p.style = doc.styles['Normal']
-            p.paragraph_format.left_indent = Cm(2.0)
+            es_relacion_ud = bool(patron_relacion_ud.match(p.text.strip()))
+            p.paragraph_format.left_indent = Cm(2.0) if es_relacion_ud else Cm(1.0)
 
 
 def _cursivar_lineas_relacion_ud(doc):
@@ -269,8 +274,11 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
                             r.font.size = Pt(9)
                             r.font.color.rgb = RGBColor(0, 0, 0)
 
-            # Mover la tabla para que quede después de este párrafo
+            # Mover la tabla para que quede después de este párrafo y
+            # eliminar el párrafo (ya vacío, era el del marcador) para que
+            # no deje un retorno de carro/línea en blanco antes de la tabla.
             p._p.addnext(table._tbl)
+            p._p.getparent().remove(p._p)
 
     _quitar_vinetas_listas(doc)
     _cursivar_lineas_relacion_ud(doc)
