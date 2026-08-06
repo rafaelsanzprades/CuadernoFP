@@ -86,10 +86,13 @@ def _build_context(data: dict) -> dict:
                 horas = int(float(ud.get('horas_ud', 0) or 0))
                 uds_rel.append(f"{ud_id} ({horas}h) - {int(val)}%")
 
-        linea_ra = f"{ra_id_full}. ({peso}%) {desc}"
+        # Línea del RA y, como elemento de lista aparte (para poder darle
+        # su propio formato de párrafo: indentado y en cursiva), la línea
+        # con las UD relacionadas — siempre empieza por "UDxx (" para poder
+        # reconocerla después del render, ver _sangrar_lineas_relacion_ud().
+        list_ras.append(f"{ra_id_full}. ({peso}%) {desc}")
         if uds_rel:
-            linea_ra += "\n" + ", ".join(uds_rel)
-        list_ras.append(linea_ra)
+            list_ras.append(", ".join(uds_rel))
     context["list_ras"] = list_ras
 
     # --- H1 4: Contenidos / UDs (lista), con horas ──────────────────────
@@ -146,6 +149,37 @@ def _build_context(data: dict) -> dict:
     return context
 
 
+def _sangrar_lineas_relacion_ud(doc):
+    """Las líneas 'UDxx (Yh) - Z%, ...' que list_ras intercala tras cada RA
+    se reconocen por empezar con 'UD' + dígito, y se marcan con sangría e
+    itálica — un párrafo aparte no puede llevar formato distinto al de la
+    línea anterior si van dentro del mismo párrafo, así que esto solo
+    funciona porque _build_context ya las separa en su propio ítem de lista."""
+    import re
+    from docx.shared import Cm
+    patron = re.compile(r"^UD\d+\s*\(")
+    for p in doc.paragraphs:
+        if patron.match(p.text.strip()):
+            p.paragraph_format.left_indent = Cm(1.0)
+            for r in p.runs:
+                r.italic = True
+
+
+def _forzar_arial(doc):
+    """Une el documento bajo una única tipografía (Arial) para que no queden
+    mezclas con la fuente por defecto de la plantilla en los párrafos que no
+    tocamos a mano (título, perfil profesional, listas de RA/UD, etc.)."""
+    for p in doc.paragraphs:
+        for r in p.runs:
+            r.font.name = 'Arial'
+    for table in doc.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                for p in cell.paragraphs:
+                    for r in p.runs:
+                        r.font.name = 'Arial'
+
+
 def generate(data: dict, out_docx: str, out_pdf: str = None):
     """
     Genera la PD- (resumen alumnado) usando la plantilla DOCX.
@@ -159,21 +193,29 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
     tpl = DocxTemplate(TEMPLATE_PATH)
     context = _build_context(data)
     tpl.render(context)
-    
-    # ── Insertar Tabla de Instrumentos ──────────────────────────────
+
     doc = tpl.docx
     from docx.shared import Cm, Pt, RGBColor
-    
+
+    # ── Márgenes de página: 2 izq., 1 arriba/abajo/derecha ───────────
+    for section in doc.sections:
+        section.left_margin = Cm(2)
+        section.right_margin = Cm(1)
+        section.top_margin = Cm(1)
+        section.bottom_margin = Cm(1)
+
+    # ── Insertar Tabla de Instrumentos ──────────────────────────────
     for p in doc.paragraphs:
         if "[[TABLA_INSTRUMENTOS]]" in p.text:
             p.text = p.text.replace("[[TABLA_INSTRUMENTOS]]", "")
-            
+
             # Crear la tabla dinámicamente
             list_inst = context.get("list_instrumentos", [])
             table = doc.add_table(rows=1 + len(list_inst), cols=4)
             table.style = 'Table Grid'
 
-            col_widths = [Cm(10.0), Cm(2.0), Cm(2.0), Cm(2.0)]
+            # 18 cm de ancho total = 21 cm (A4) - 2 cm izq. - 1 cm der.
+            col_widths = [Cm(12.0), Cm(2.0), Cm(2.0), Cm(2.0)]
             for i, w in enumerate(col_widths):
                 table.columns[i].width = w
             # table.columns[i].width por sí solo no basta: Word respeta el
@@ -185,9 +227,9 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
 
             hdr_cells = table.rows[0].cells
             hdr_cells[0].text = "Instrumento"
-            hdr_cells[1].text = "1er Tri."
-            hdr_cells[2].text = "2º Tri."
-            hdr_cells[3].text = "3er Tri."
+            hdr_cells[1].text = f"1er Tri. ({context['pond_1t']}%)"
+            hdr_cells[2].text = f"2º Tri. ({context['pond_2t']}%)"
+            hdr_cells[3].text = f"3er Tri. ({context['pond_3t']}%)"
 
             for cell in hdr_cells:
                 for hp in cell.paragraphs:
@@ -210,22 +252,12 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
                             r.font.name = 'Arial'
                             r.font.size = Pt(9)
                             r.font.color.rgb = RGBColor(0, 0, 0)
-                            
+
             # Mover la tabla para que quede después de este párrafo
             p._p.addnext(table._tbl)
 
-            # Ponderación de cada trimestre en la nota final, justo debajo
-            pond_para = doc.add_paragraph()
-            pond_run = pond_para.add_run(
-                f"Ponderación de cada trimestre en la nota final: "
-                f"1er trimestre {context['pond_1t']}% · 2º trimestre {context['pond_2t']}% · "
-                f"3er trimestre {context['pond_3t']}%"
-            )
-            pond_run.bold = True
-            pond_run.font.name = 'Arial'
-            pond_run.font.size = Pt(9)
-            pond_run.font.color.rgb = RGBColor(0, 0, 0)
-            table._tbl.addnext(pond_para._p)
+    _sangrar_lineas_relacion_ud(doc)
+    _forzar_arial(doc)
 
     # ── Guardar DOCX (y PDF) ─────────────────────────────────────────
     tpl.save(out_docx)
