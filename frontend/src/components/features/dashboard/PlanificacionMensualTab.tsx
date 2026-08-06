@@ -104,6 +104,13 @@ export function PlanificacionMensualTab() {
           </tbody>
         </table>
       </section>
+
+      <p className="text-caption text-muted">
+        Esta previsión estima que las horas lectivas de cada semana se cumplen de forma
+        proporcional a los días festivos o no lectivos que contenga, a falta de que se
+        concreten el calendario oficial del curso académico y la distribución definitiva
+        del horario semanal por días.
+      </p>
     </div>
   );
 }

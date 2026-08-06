@@ -1,5 +1,5 @@
 "use client";
-import { Bus, Puzzle, Shield, Info, Building2 } from "lucide-react";
+import { Bus, Puzzle, Shield, Info, Building2, Users } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { NarrativeField } from "@/components/ui/NarrativeField";
 
@@ -111,6 +111,20 @@ export function PlanesTab() {
             id="textos_pd_feoe_seguimiento"
             title="Seguimiento de FEOE"
             description="Procedimiento para el seguimiento en la empresa y comunicación con tutores duales."
+          />
+        </div>
+      </section>
+
+      {/* Coordinación docente */}
+      <section className="glass-card p-6 border-t-4 border-t-violet-500">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
+          <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Coordinación docente
+        </h2>
+        <div className="space-y-6">
+          <NarrativeField
+            id="textos_pd_metodologia_labor_coordinada"
+            title="Coordinación con otros módulos y su profesorado"
+            description="Cómo se coordina este módulo con otros módulos/profesorado del ciclo (reuniones de equipo docente, dependencias entre módulos, sustitución de tareas en caso de ausencia, etc.)."
           />
         </div>
       </section>

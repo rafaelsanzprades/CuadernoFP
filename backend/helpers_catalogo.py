@@ -113,3 +113,35 @@ def resolve_ce_desc(ce: dict, desc_map: dict) -> str:
     if not desc:
         desc = desc_map.get(_norm_id(str(ce.get("id_ce", ""))), "")
     return desc
+
+
+def fetch_curriculo_from_db(codigo_modulo: str, db) -> dict:
+    """
+    Consulta el catálogo oficial (tablas Module/LearningOutcome/EvaluationCriterion)
+    por código de módulo y lo devuelve en el mismo formato que build_ra_desc_map /
+    build_ce_desc_map esperan de curriculo_data ({"ra": [{"id","descripcion","ce":[...]}]})
+    — el mismo formato que ya sirve GET /api/catalog/module/{module_code}
+    (backend/routers/catalogs.py). Se usa como último recurso cuando df_ra/df_ud/df_ce
+    no traen descripción y el frontend tampoco envió curriculo_data ya resuelto.
+    """
+    if not codigo_modulo:
+        return {}
+    from models import Module, LearningOutcome, EvaluationCriterion
+
+    module = db.query(Module).filter(Module.code == codigo_modulo).first()
+    if not module:
+        return {}
+
+    ras = (
+        db.query(LearningOutcome)
+        .filter(LearningOutcome.module_id == module.id)
+        .order_by(LearningOutcome.ra_number)
+        .all()
+    )
+    ra_data = []
+    for ra in ras:
+        ces = db.query(EvaluationCriterion).filter(EvaluationCriterion.learning_outcome_id == ra.id).all()
+        ce_data = [{"id": ce.ce_code, "descripcion": ce.description} for ce in ces]
+        ra_data.append({"id": f"RA{ra.ra_number}.", "descripcion": ra.description, "ce": ce_data})
+
+    return {"ra": ra_data}

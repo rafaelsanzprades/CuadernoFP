@@ -211,8 +211,8 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
     tpl.render(context)
 
     doc = tpl.docx
-    from docx.shared import Cm, Pt, RGBColor
-    from docx.enum.text import WD_ALIGN_PARAGRAPH
+    from docx.shared import Cm
+    from helpers_pd_tablas import insertar_tabla_instrumentos
 
     # ── Márgenes de página: 2 izq., 1 arriba/abajo/derecha ───────────
     for section in doc.sections:
@@ -225,60 +225,10 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
     for p in doc.paragraphs:
         if "[[TABLA_INSTRUMENTOS]]" in p.text:
             p.text = p.text.replace("[[TABLA_INSTRUMENTOS]]", "")
-
-            # Crear la tabla dinámicamente
-            list_inst = context.get("list_instrumentos", [])
-            table = doc.add_table(rows=1 + len(list_inst), cols=4)
-            table.style = 'Table Grid'
-
-            # 18 cm de ancho total = 21 cm (A4) - 2 cm izq. - 1 cm der.
-            col_widths = [Cm(9.0), Cm(3.0), Cm(3.0), Cm(3.0)]
-            for i, w in enumerate(col_widths):
-                table.columns[i].width = w
-            # table.columns[i].width por sí solo no basta: Word respeta el
-            # ancho de cada celda (tcW) por encima del gridCol de la tabla,
-            # así que hay que fijarlo también celda a celda, en todas las filas.
-            for row in table.rows:
-                for i, w in enumerate(col_widths):
-                    row.cells[i].width = w
-
-            hdr_cells = table.rows[0].cells
-            hdr_cells[0].text = "Instrumento"
-            hdr_cells[1].text = f"1er Tri. ({context['pond_1t']}%)"
-            hdr_cells[2].text = f"2º Tri. ({context['pond_2t']}%)"
-            hdr_cells[3].text = f"3er Tri. ({context['pond_3t']}%)"
-
-            for i, cell in enumerate(hdr_cells):
-                for hp in cell.paragraphs:
-                    if i > 0:
-                        hp.alignment = WD_ALIGN_PARAGRAPH.CENTER
-                    for r in hp.runs:
-                        r.bold = True
-                        r.font.name = 'Arial'
-                        r.font.size = Pt(9)
-                        r.font.color.rgb = RGBColor(0, 0, 0)
-
-            for i, instr in enumerate(list_inst):
-                row_cells = table.rows[i + 1].cells
-                row_cells[0].text = instr.get("nombre", "")
-                row_cells[1].text = instr.get("pct_1t", "")
-                row_cells[2].text = instr.get("pct_2t", "")
-                row_cells[3].text = instr.get("pct_3t", "")
-
-                for j, cell in enumerate(row_cells):
-                    for cp in cell.paragraphs:
-                        if j > 0:
-                            cp.alignment = WD_ALIGN_PARAGRAPH.CENTER
-                        for r in cp.runs:
-                            r.font.name = 'Arial'
-                            r.font.size = Pt(9)
-                            r.font.color.rgb = RGBColor(0, 0, 0)
-
-            # Mover la tabla para que quede después de este párrafo y
-            # eliminar el párrafo (ya vacío, era el del marcador) para que
-            # no deje un retorno de carro/línea en blanco antes de la tabla.
-            p._p.addnext(table._tbl)
-            p._p.getparent().remove(p._p)
+            insertar_tabla_instrumentos(
+                doc, p, context.get("list_instrumentos", []),
+                context["pond_1t"], context["pond_2t"], context["pond_3t"],
+            )
 
     _quitar_vinetas_listas(doc)
     _cursivar_lineas_relacion_ud(doc)

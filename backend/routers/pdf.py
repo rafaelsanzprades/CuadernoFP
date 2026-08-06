@@ -250,6 +250,16 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 else:
                     curso_academico = "2025/2026"
 
+            # curriculo_data (texto oficial de RA/CE) casi nunca viaja en el .fpc
+            # local — se resuelve aquí contra el catálogo BOA/BOE por código de
+            # módulo, como último recurso, para que RA/UD/CE que no traigan
+            # desc_ra/desc_ud/desc_ce en los dataframes locales igualmente
+            # aparezcan en las PD (helpers_catalogo.build_ra_desc_map / _ce_desc_map).
+            curriculo_data = curso_data.get("curriculo_data") or {}
+            if not curriculo_data.get("ra"):
+                from helpers_catalogo import fetch_curriculo_from_db
+                curriculo_data = fetch_curriculo_from_db(info_mod.get("codigo", ""), db) or curriculo_data
+
             data_pd = {
                 "departamento": departamento,
                 "ciclo": info_mod.get("titulo_fp") or info_mod.get("ciclo", "Ciclo Formativo"),
@@ -277,7 +287,7 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 "config_aula": module_data.get("config_aula") or curso_data.get("config_aula") or {},
                 "config_redondeo": curso_data.get("config_redondeo") or {"nota_aprobado": 5.0, "umbral_redondeo": 4.5},
                 "info_modulo": info_mod,
-                "curriculo_data": curso_data.get("curriculo_data") or {},
+                "curriculo_data": curriculo_data,
                 "is_dual": module_data.get("is_dual", False),
                 "metodologias_seleccionadas": module_data.get("metodologias_seleccionadas", []),
                 "instrumentos_seleccionados": module_data.get("instrumentos_seleccionados", []),

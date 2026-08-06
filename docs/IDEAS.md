@@ -16,3 +16,13 @@ También de la hoja `CONF_EV`/`CONF_CE` del Excel: forma alternativa de ponderar
 evaluación por nivel de complejidad en vez de porcentaje manual directo (`peso_ce`). Rafael: "no lo
 tengo claro" — ni aprobado ni descartado, pendiente de decidir si aporta valor real frente al sistema
 actual.
+
+## Página de previsión de planificación en PD-, PD= y PD+ (2026-08-06)
+
+Rafael quiere valorar añadir al final de los tres documentos (PD- como página nueva al final, PD=
+y PD+ donde encaje) una página con la previsión tipo "Planificación mensual"
+(`PlanificacionMensualTab.tsx` / `useDynamicPlanning`): la tabla UD × mes con horas previstas/
+impartidas. "Estoy pensando añadirla" — no es una petición cerrada, solo la intención. Si se hace,
+debe llevar la misma aclaración de la estimación proporcional a festivos que ya está bajo la tabla
+en `/agenda?tab=planificacion` y en la FAQ ("¿Cómo se calcula la previsión de 'Planificación
+mensual'?").
