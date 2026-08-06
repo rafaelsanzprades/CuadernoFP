@@ -14,6 +14,7 @@ import { Skeleton } from "@/components/ui/Skeleton";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { TabSync } from "@/components/ui/TabSync";
+import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -56,6 +57,11 @@ export default function MagiaPage() {
   const [downloadingStr, setDownloadingStr] = useState<string | null>(null);
 
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData } = useAppStore();
+  // df_sgmt guardado en cursoData no se sincroniza con el cálculo dinámico
+  // de Planificación (useDynamicPlanning se recalcula en memoria y nunca se
+  // escribe de vuelta al store) — para que los generadores de PD lean datos
+  // al día se recalcula aquí y se inyecta en el payload al pedir el PDF.
+  const { df_sgmt: liveDfSgmt } = useDynamicPlanning();
   const [loadingData, setLoadingData] = useState(true);
   const [activeTab, setActiveTab] = useState("programacion");
 
@@ -130,7 +136,7 @@ export default function MagiaPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          curso_data: cursoData || {},
+          curso_data: { ...(cursoData || {}), df_sgmt: liveDfSgmt },
           module_data: moduleData || {},
           fecha_corte: fechaCorte,
           extra: extra || null,

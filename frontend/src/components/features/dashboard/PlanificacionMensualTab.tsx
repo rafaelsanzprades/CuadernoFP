@@ -56,18 +56,20 @@ export function PlanificacionMensualTab() {
           <thead>
             <tr className="border-b border-[var(--glass-border)] text-muted bg-foreground/5">
               <th className="p-3 w-[220px] max-w-[220px] sticky left-0 bg-[#111827] z-10 border-r border-[var(--glass-border)]"></th>
-              <th className="p-3 w-[64px] max-w-[64px] sticky left-[220px] bg-[#111827] z-10 text-center"></th>
-              <th className="p-3 w-[64px] max-w-[64px] sticky left-[284px] bg-[#111827] z-10 text-center"></th>
-              <th className="p-3 w-[90px] max-w-[90px] sticky left-[348px] bg-[#111827] z-10 text-center border-r border-[var(--glass-border)]"></th>
+              <th className="p-3 w-[50px] max-w-[50px] sticky left-[220px] bg-[#111827] z-10 text-center"></th>
+              <th className="p-3 w-[64px] max-w-[64px] sticky left-[270px] bg-[#111827] z-10 text-center"></th>
+              <th className="p-3 w-[64px] max-w-[64px] sticky left-[334px] bg-[#111827] z-10 text-center"></th>
+              <th className="p-3 w-[90px] max-w-[90px] sticky left-[398px] bg-[#111827] z-10 text-center border-r border-[var(--glass-border)]"></th>
               {meses_display.map((m) => (
                 <th key={m} colSpan={2} className="p-2 text-center border-r border-[var(--glass-border)]">{m}</th>
               ))}
             </tr>
             <tr className="border-b border-[var(--glass-border)] text-caption text-muted bg-foreground/5">
               <th className="p-2 w-[220px] max-w-[220px] sticky left-0 bg-[#111827] z-10 border-r border-[var(--glass-border)] text-left font-bold text-foreground">UD</th>
-              <th className="p-2 w-[64px] max-w-[64px] sticky left-[220px] bg-[#111827] z-10 text-center text-info">Prv</th>
-              <th className="p-2 w-[64px] max-w-[64px] sticky left-[284px] bg-[#111827] z-10 text-center text-[#14a085]/70">Imp</th>
-              <th className="p-2 w-[90px] max-w-[90px] truncate overflow-hidden sticky left-[348px] bg-[#111827] z-10 text-center text-warning border-r border-[var(--glass-border)]" title="% Impartido / Previsto">%Imp/Prv</th>
+              <th className="p-2 w-[50px] max-w-[50px] sticky left-[220px] bg-[#111827] z-10 text-center" title="Evaluación en la que termina la UD">Ev.</th>
+              <th className="p-2 w-[64px] max-w-[64px] sticky left-[270px] bg-[#111827] z-10 text-center text-info">Prv</th>
+              <th className="p-2 w-[64px] max-w-[64px] sticky left-[334px] bg-[#111827] z-10 text-center text-[#14a085]/70">Imp</th>
+              <th className="p-2 w-[90px] max-w-[90px] truncate overflow-hidden sticky left-[398px] bg-[#111827] z-10 text-center text-warning border-r border-[var(--glass-border)]" title="% Impartido / Previsto">%Imp/Prv</th>
               {meses_display.map((m) => (
                 <React.Fragment key={m}>
                   <th className="p-2 text-center text-info">Prv</th>
@@ -85,9 +87,10 @@ export function PlanificacionMensualTab() {
                 >
                   {getUdLabel(row)}
                 </td>
-                <td className="p-3 w-[64px] max-w-[64px] text-center sticky left-[220px] bg-background group-hover:bg-[#111827] text-info">{row.horas_ud || ''}</td>
-                <td className="p-3 w-[64px] max-w-[64px] text-center sticky left-[284px] bg-background group-hover:bg-[#111827] text-[#14a085] font-bold">{row.Total_Imp || ''}</td>
-                <td className={`p-3 w-[90px] max-w-[90px] text-center sticky left-[348px] bg-background group-hover:bg-[#111827] border-r border-[var(--glass-border)] font-bold ${row.pct_imp_prev >= 100 ? 'text-success' : row.pct_imp_prev > 0 ? 'text-warning' : 'text-muted'}`}>
+                <td className="p-3 w-[50px] max-w-[50px] text-center sticky left-[220px] bg-background group-hover:bg-[#111827]">{row.ev ? `${row.ev}ª` : ''}</td>
+                <td className="p-3 w-[64px] max-w-[64px] text-center sticky left-[270px] bg-background group-hover:bg-[#111827] text-info">{row.horas_ud || ''}</td>
+                <td className="p-3 w-[64px] max-w-[64px] text-center sticky left-[334px] bg-background group-hover:bg-[#111827] text-[#14a085] font-bold">{row.Total_Imp || ''}</td>
+                <td className={`p-3 w-[90px] max-w-[90px] text-center sticky left-[398px] bg-background group-hover:bg-[#111827] border-r border-[var(--glass-border)] font-bold ${row.pct_imp_prev >= 100 ? 'text-success' : row.pct_imp_prev > 0 ? 'text-warning' : 'text-muted'}`}>
                   {row.pct_imp_prev}%
                 </td>
                 {meses_display.map((m) => (

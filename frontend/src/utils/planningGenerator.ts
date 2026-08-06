@@ -89,6 +89,9 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
 
   let currentUdIndex = 0;
   let totalScheduledHours = 0;
+  // Última fecha en la que se han asignado horas a cada UD — sirve para
+  // saber en qué evaluación (trimestre) termina, cruzándola con termRanges.
+  const udLastDate: Record<string, Date> = {};
 
   datesList.forEach((d) => {
     const rawDay = d.getDay(); // 0 = Sun, 1 = Mon, ..., 6 = Sat
@@ -151,8 +154,11 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
       }
 
       const assignedNow = Math.min(hoursLeft, currentUd.h_rem);
-      
+
       currentUd.h_rem -= assignedNow;
+      if (assignedNow > 0) {
+        udLastDate[currentUd.id_ud] = d;
+      }
       prvTracker[currentUd.id_ud][prvKey] = (prvTracker[currentUd.id_ud][prvKey] || 0) + assignedNow;
       if (isPastOrToday) {
         prvTracker[currentUd.id_ud][impKey] = (prvTracker[currentUd.id_ud][impKey] || 0) + assignedNow;
@@ -171,6 +177,15 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
     }
   });
 
+  // Evaluación (1/2/3) en la que cae una fecha, según los rangos de trimestre.
+  const getEvaluacion = (d: Date | undefined): number | null => {
+    if (!d) return null;
+    for (let i = 0; i < termRanges.length; i++) {
+      if (inRange(d, termRanges[i].ini, termRanges[i].fin)) return i + 1;
+    }
+    return null;
+  };
+
   // 4. Build new df_sgmt
   const newDfSgmt: any[] = [];
   const months = ["Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "May", "Jun"];
@@ -180,7 +195,8 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
     const id = ud.id_ud;
     const newRow: any = {
       id_ud: id,
-      horas_ud: ud.duracion || ud.horas_ud || 0
+      horas_ud: ud.duracion || ud.horas_ud || 0,
+      ev: getEvaluacion(udLastDate[id])
     };
 
     months.forEach(m => {

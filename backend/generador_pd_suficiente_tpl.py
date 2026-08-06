@@ -34,17 +34,30 @@ def _build_context(data: dict) -> dict:
         "config_contexto": {...}
     }
     """
+    info_mod = data.get("info_modulo") or {}
     modulo = data.get("modulo", "el módulo profesional")
+    codigo = info_mod.get("codigo", "")
+    if codigo:
+        modulo = f"{codigo} - {modulo}"
     ciclo = data.get("ciclo", "el ciclo formativo")
     departamento = data.get("departamento", "")
-    curso = data.get("curso_academico", "")
+    nivel = data.get("nivel", "")
+    codificado = " ".join(p for p in [data.get("curso_ciclo", ""), nivel] if p)
+    curso_academico_raw = data.get("curso_academico", "")
+    curso = f"{codificado} - {curso_academico_raw}" if (codificado and curso_academico_raw) else (codificado or curso_academico_raw)
     horas_totales = data.get("horas_totales", "")
     horas_semanales = data.get("horas_semanales", "")
     regimen = data.get("regimen", "diurno")
     curso_ciclo = data.get("curso_ciclo", "primero")
     df_ra = data.get("df_ra", [])
     df_ud = data.get("df_ud", [])
+    df_sgmt = data.get("df_sgmt", [])
     config = data.get("config_contexto", {})
+
+    # Mapa id_ud -> evaluación (1/2/3) calculado en Planificación mensual
+    # (frontend/src/utils/planningGenerator.ts) a partir de la fecha en la
+    # que termina cada UD; no hay ningún otro campo en la app que lo derive.
+    ev_map = {str(row.get("id_ud", "")): row.get("ev") for row in df_sgmt}
 
     # Construir mapas de descripciones desde catálogo
     ra_desc_map = build_ra_desc_map(data)
@@ -81,8 +94,8 @@ def _build_context(data: dict) -> dict:
     context["texto_uds_modulo"] = texto_uds
 
     # Lista de UDs (formato "UF0237_12 ...")
-    # En el original son 2 UDs, pero puede haber más
-    for i in range(1, 11):
+    # La plantilla define placeholders ud1_item..ud11_item (11 UDs máximo)
+    for i in range(1, 12):
         if i <= len(df_ud):
             ud = df_ud[i-1]
             id_str = str(ud.get('id_ud', ''))
@@ -110,25 +123,29 @@ def _build_context(data: dict) -> dict:
     context["texto_feoe"] = texto_feoe
 
     # ── SECCIÓN C: SECUENCIACIÓN — Tabla RA×UD ─────────────────────────
-    # Datos de la tabla: porcentajes de cada RA
+    # Datos de la tabla: porcentajes de cada RA (peso_ra es el campo real,
+    # el mismo que usa PD-; "pct_ra" no existe en el modelo de datos)
     for i in range(1, 8):
         if i <= len(df_ra):
             ra = df_ra[i-1]
-            context[f"ra_pct_{i}"] = str(ra.get('pct_ra', ''))
+            context[f"ra_pct_{i}"] = str(ra.get('peso_ra', ''))
         else:
             context[f"ra_pct_{i}"] = ""
 
-    # Datos de la tabla: filas de UDs
-    for i in range(1, 11):
+    # Datos de la tabla: filas de UDs (la plantilla define hasta ud11_*)
+    for i in range(1, 12):
         if i <= len(df_ud):
             ud = df_ud[i-1]
+            ev = ev_map.get(str(ud.get('id_ud', '')))
             context[f"ud{i}_num"] = str(i)
-            context[f"ud{i}_ev"] = str(ud.get('ev_ud', ''))
+            context[f"ud{i}_ev"] = f"{ev}ª" if ev else ""
             context[f"ud{i}_nombre"] = resolve_ud_desc(ud, ud_desc_map)
             context[f"ud{i}_horas"] = str(ud.get('horas_ud', ''))
-            # Porcentajes por RA
+            # Porcentajes por RA: las claves reales son "RA1".."RA7" en cada
+            # UD (igual que en la Matriz RA↔UD y en PD-), no "pct_ra{j}"
             for j in range(1, 8):
-                context[f"ud{i}_ra{j}"] = str(ud.get(f'pct_ra{j}', ''))
+                val = ud.get(f'RA{j}', 0) or 0
+                context[f"ud{i}_ra{j}"] = str(int(val)) if val else ""
         else:
             context[f"ud{i}_num"] = ""
             context[f"ud{i}_ev"] = ""
@@ -138,7 +155,7 @@ def _build_context(data: dict) -> dict:
                 context[f"ud{i}_ra{j}"] = ""
 
     # ── SECCIÓN C1: CONTENIDOS — Títulos de UD ─────────────────────────
-    for i in range(1, 11):
+    for i in range(1, 12):
         if i <= len(df_ud):
             ud = df_ud[i-1]
             context[f"ud{i}_titulo_c1"] = resolve_ud_desc(ud, ud_desc_map)
