@@ -149,18 +149,29 @@ def _build_context(data: dict) -> dict:
     return context
 
 
-def _sangrar_lineas_relacion_ud(doc):
-    """Las líneas 'UDxx (Yh) - Z%, ...' que list_ras intercala tras cada RA
-    se reconocen por empezar con 'UD' + dígito, y se marcan con sangría e
-    itálica — un párrafo aparte no puede llevar formato distinto al de la
-    línea anterior si van dentro del mismo párrafo, así que esto solo
-    funciona porque _build_context ya las separa en su propio ítem de lista."""
-    import re
+def _quitar_vinetas_listas(doc):
+    """Las listas de RA y UD usan en la plantilla el estilo 'List Bullet'
+    (numPr → numId=1 en styles.xml), que es lo que pinta el puntito. Al
+    pasarlas a 'Normal' se pierde la numeración (Normal no tiene numPr) y
+    se fija a mano la sangría uniforme pedida — sin viñeta en ningún ítem,
+    ni en RA, ni en UD, ni en la línea de relación RA↔UD."""
     from docx.shared import Cm
+    for p in doc.paragraphs:
+        if p.style is not None and p.style.name == 'List Bullet':
+            p.style = doc.styles['Normal']
+            p.paragraph_format.left_indent = Cm(2.0)
+
+
+def _cursivar_lineas_relacion_ud(doc):
+    """Las líneas 'UDxx (Yh) - Z%, ...' que list_ras intercala tras cada RA
+    se reconocen por empezar con 'UD' + dígito, y se marcan en cursiva —
+    un párrafo aparte no puede llevar formato distinto al de la línea
+    anterior si van dentro del mismo párrafo, así que esto solo funciona
+    porque _build_context ya las separa en su propio ítem de lista."""
+    import re
     patron = re.compile(r"^UD\d+\s*\(")
     for p in doc.paragraphs:
         if patron.match(p.text.strip()):
-            p.paragraph_format.left_indent = Cm(1.0)
             for r in p.runs:
                 r.italic = True
 
@@ -196,6 +207,7 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
 
     doc = tpl.docx
     from docx.shared import Cm, Pt, RGBColor
+    from docx.enum.text import WD_ALIGN_PARAGRAPH
 
     # ── Márgenes de página: 2 izq., 1 arriba/abajo/derecha ───────────
     for section in doc.sections:
@@ -215,7 +227,7 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
             table.style = 'Table Grid'
 
             # 18 cm de ancho total = 21 cm (A4) - 2 cm izq. - 1 cm der.
-            col_widths = [Cm(12.0), Cm(2.0), Cm(2.0), Cm(2.0)]
+            col_widths = [Cm(9.0), Cm(3.0), Cm(3.0), Cm(3.0)]
             for i, w in enumerate(col_widths):
                 table.columns[i].width = w
             # table.columns[i].width por sí solo no basta: Word respeta el
@@ -231,8 +243,10 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
             hdr_cells[2].text = f"2º Tri. ({context['pond_2t']}%)"
             hdr_cells[3].text = f"3er Tri. ({context['pond_3t']}%)"
 
-            for cell in hdr_cells:
+            for i, cell in enumerate(hdr_cells):
                 for hp in cell.paragraphs:
+                    if i > 0:
+                        hp.alignment = WD_ALIGN_PARAGRAPH.CENTER
                     for r in hp.runs:
                         r.bold = True
                         r.font.name = 'Arial'
@@ -246,8 +260,10 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
                 row_cells[2].text = instr.get("pct_2t", "")
                 row_cells[3].text = instr.get("pct_3t", "")
 
-                for cell in row_cells:
+                for j, cell in enumerate(row_cells):
                     for cp in cell.paragraphs:
+                        if j > 0:
+                            cp.alignment = WD_ALIGN_PARAGRAPH.CENTER
                         for r in cp.runs:
                             r.font.name = 'Arial'
                             r.font.size = Pt(9)
@@ -256,7 +272,8 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
             # Mover la tabla para que quede después de este párrafo
             p._p.addnext(table._tbl)
 
-    _sangrar_lineas_relacion_ud(doc)
+    _quitar_vinetas_listas(doc)
+    _cursivar_lineas_relacion_ud(doc)
     _forzar_arial(doc)
 
     # ── Guardar DOCX (y PDF) ─────────────────────────────────────────
