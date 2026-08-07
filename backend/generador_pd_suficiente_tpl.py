@@ -138,6 +138,7 @@ def _build_context(data: dict) -> dict:
         "ciclo": ciclo,
         "departamento": departamento,
         "curso_academico": curso,
+        "centro": info_mod.get("centro", ""),
     }
 
     # ── SECCIÓN A: INTRODUCCIÓN ────────────────────────────────────────
@@ -217,15 +218,35 @@ def _build_context(data: dict) -> dict:
     for ce in df_ce:
         ce_by_ra.setdefault(str(ce.get("id_ra", "")), []).append(ce)
 
+    # Catálogo oficial agrupado por RA (curriculo_data, resuelto en
+    # routers/pdf.py vía fetch_curriculo_from_db) — hace falta como
+    # respaldo POSICIONAL, no solo por id: el df_ce local suele numerar los
+    # CE con letras ("CE1.a", "CE1.b"...) y el catálogo con números
+    # ("CE1.1", "CE1.2"...), así que aunque sean los mismos criterios el id
+    # normalizado nunca coincide entre uno y otro.
+    catalog_ce_by_ra: dict = {}
+    for ra_cat in (data.get("curriculo_data") or {}).get("ra") or []:
+        rid_cat = str(ra_cat.get("id", "")).strip().rstrip(".")
+        catalog_ce_by_ra[rid_cat] = ra_cat.get("ce") or []
+
     list_c2 = []
     for ra in df_ra:
         rid = str(ra.get("id_ra", ""))
         list_c2.append(f"{_ra_id_full(ra)}. {resolve_ra_desc(ra, ra_desc_map)}")
         list_c2.append("Criterios de evaluación:")
-        for ce in ce_by_ra.get(rid, []):
+
+        ces_locales = ce_by_ra.get(rid, [])
+        ces_catalogo = catalog_ce_by_ra.get(rid, [])
+        mismo_recuento = len(ces_locales) == len(ces_catalogo) and len(ces_catalogo) > 0
+
+        for i, ce in enumerate(ces_locales):
             desc = resolve_ce_desc(ce, ce_desc_map)
+            if not desc and mismo_recuento:
+                desc = ces_catalogo[i].get("descripcion", "")
             if desc:
-                list_c2.append(desc)
+                peso = ce.get("peso_ce")
+                prefijo = f"({int(peso)}%) " if peso else ""
+                list_c2.append(f"{prefijo}{desc}")
     context["list_c2"] = list_c2
 
     # ── SECCIÓN C3: CRITERIOS DE CALIFICACIÓN ──────────────────────────
