@@ -136,8 +136,9 @@ across multiple `<w:t>` runs on formatting/autocorrect boundaries, so searching 
 gives false negatives. Better still, render it with real data and grep the *output* for leftover
 single-line `[[ ... ]]`/`{{ ... }}` — multi-line `[[ ... ]]` blocks are intentionally left for the
 teacher to hand-edit (documented in the template's own "Instrucciones de uso" section), only
-single-line ones with a real corresponding data field are bugs. Full trace in
-`docs/sesion-2026-08-02.md` §14–15.
+single-line ones with a real corresponding data field are bugs. Full trace of this specific
+JEG-template investigation lives in the local, gitignored `RF Ideas/00 IDEAS.md` (2026-08-02 entry)
+— not committed, so it won't be present on a fresh clone or after a machine reset.
 
 `generador_pd_suficiente_tpl.py` (pd=) already ships as a complete, correctly-tagged docxtpl template
 (no prep script needed) — confirmed by rendering it with real data and finding zero unrendered tags.
