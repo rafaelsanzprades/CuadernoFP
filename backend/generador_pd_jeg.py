@@ -11,7 +11,7 @@ Uso:
 
 import os
 from docxtpl import DocxTemplate
-from helpers_catalogo import build_ra_desc_map, build_ud_desc_map, resolve_ra_desc, resolve_ud_desc
+from helpers_catalogo import build_ra_desc_map, build_ud_desc_map, resolve_ra_desc, resolve_ud_desc, resolve_recursos
 
 TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), 'templates', 'modelo_pd_jeg_tpl_final.docx')
 
@@ -235,11 +235,19 @@ def _build_context(data: dict) -> dict:
     context["recursos_materiales"] = config.get("recursos_materiales", "")
     context["recursos_digitales"] = config.get("recursos_digitales", "")
     context["recursos_documentales"] = config.get("recursos_documentales", "")
-    context["bibliografia"] = config.get("bibliografia",
-        config.get("G3_bibliografia", ""))
-    # Recursos adicionales de la plantilla
+    # textos_pd_bibliografia (mismo campo que ya usaba la plantilla más abajo,
+    # ahora con input real en PlanesTab.tsx) es la fuente preferente frente al
+    # huérfano G3_bibliografia, que ninguna pestaña ha escrito nunca.
+    context["bibliografia"] = (
+        config.get("bibliografia")
+        or data.get("textos_pd_bibliografia")
+        or config.get("G3_bibliografia", "")
+    )
+    # Recursos adicionales de la plantilla — recursos_espacios resuelto a
+    # etiquetas legibles (antes se mostraban los ids codificados en crudo,
+    # p.ej. "REC-EPI" en vez de "Equipos de protección individual (EPI)").
     context["otros_recursos"] = config.get("otros_recursos",
-        ", ".join(data.get("recursos_espacios", [])) if data.get("recursos_espacios") else "")
+        ", ".join(resolve_recursos(data.get("recursos_espacios"))))
     context["recursos_multimedia"] = config.get("recursos_multimedia",
         config.get("G2_herramientas", ""))
     context["software_nombre"] = config.get("software_nombre",

@@ -1,5 +1,5 @@
 "use client";
-import { Bus, Puzzle, Shield, Info, Building2, Users } from "lucide-react";
+import { Bus, Puzzle, Shield, Info, Building2, Users, BookOpen } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { NarrativeField } from "@/components/ui/NarrativeField";
 
@@ -125,6 +125,20 @@ export function PlanesTab() {
             id="textos_pd_metodologia_labor_coordinada"
             title="Coordinación con otros módulos y su profesorado"
             description="Cómo se coordina este módulo con otros módulos/profesorado del ciclo (reuniones de equipo docente, dependencias entre módulos, sustitución de tareas en caso de ausencia, etc.)."
+          />
+        </div>
+      </section>
+
+      {/* Bibliografía */}
+      <section className="glass-card p-6 border-t-4 border-t-amber-500">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
+          <span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Bibliografía
+        </h2>
+        <div className="space-y-6">
+          <NarrativeField
+            id="textos_pd_bibliografia"
+            title="Bibliografía y webgrafía del módulo"
+            description="Manuales, normativa técnica, catálogos de fabricantes y recursos web usados como referencia del módulo."
           />
         </div>
       </section>

@@ -115,6 +115,59 @@ def resolve_ce_desc(ce: dict, desc_map: dict) -> str:
     return desc
 
 
+# Espejo en Python del catálogo de frontend/src/data/herramientasRecursos.ts,
+# para resolver los ids codificados que el profesorado marca en "Instrumentos
+# y recursos" a su etiqueta legible en el documento. Compartido entre
+# generadores de PD (PD=, PD+) — si se añade un recurso nuevo al catálogo del
+# frontend, hay que añadirlo aquí también.
+RECURSOS_LABELS = {
+    "REC-AULA": "Aula técnica / polivalente",
+    "REC-TALLER": "Taller específico",
+    "REC-LAB": "Laboratorio",
+    "REC-INFO": "Aula de informática",
+    "REC-ALMACEN": "Almacén / pañol de herramientas",
+    "REC-EXTERIOR": "Espacio exterior / patio de prácticas",
+    "REC-PIZARRA": "Pizarra y proyector / pantalla",
+    "REC-PDI": "Pizarra digital interactiva (PDI)",
+    "REC-ORDENADORES": "Ordenadores e impresora",
+    "REC-TABLETS": "Tablets / dispositivos móviles",
+    "REC-MOBILIARIO": "Mobiliario adaptable (mesas de trabajo en grupo)",
+    "REC-SOFT-OFIMATICA": "Software ofimático (procesador, hoja de cálculo, presentaciones)",
+    "REC-SOFT-ESPECIFICO": "Software específico del módulo / sector",
+    "REC-EVA": "Entorno Virtual de Aprendizaje (Aules / Moodle / Classroom)",
+    "REC-CLASSROOM": "Google Classroom / Google Workspace for Education",
+    "REC-TEAMS": "Microsoft Teams para Educación / Microsoft 365 Educación",
+    "REC-FORMS": "Formularios y cuestionarios online (Forms, Kahoot, Quizizz)",
+    "REC-CAD": "Software de diseño asistido por ordenador (CAD/CAM)",
+    "REC-SIMULADOR": "Software de simulación / entorno virtual de prácticas",
+    "REC-GESTION-TALLER": "Software de gestión y control de taller",
+    "REC-REPOSITORIO": "Repositorio documental compartido (Drive / OneDrive)",
+    "REC-MANUALES": "Manuales técnicos y libros de texto",
+    "REC-NORMATIVA": "Normativa técnica y reglamentos del sector",
+    "REC-FICHAS-TECNICAS": "Fichas técnicas y catálogos de fabricantes",
+    "REC-APUNTES": "Apuntes y material elaborado por el profesorado",
+    "REC-VIDEOTECA": "Videoteca / recursos audiovisuales técnicos",
+    "REC-HERR-MANUALES": "Herramientas manuales",
+    "REC-HERR-ELECTRICAS": "Herramientas eléctricas / motorizadas",
+    "REC-INSTR-MEDIDA": "Instrumentos y equipos de medida",
+    "REC-MAQUINARIA": "Maquinaria y equipos específicos del sector",
+    "REC-CONSUMIBLES": "Materiales consumibles y fungibles de prácticas",
+    "REC-MAQUETAS": "Maquetas y bancos de prácticas / simulación de instalaciones",
+    "REC-EPI": "Equipos de protección individual (EPI)",
+    "REC-EPC": "Equipos de protección colectiva",
+    "REC-SENALIZACION": "Señalización de seguridad del taller",
+    "REC-BOTIQUIN": "Botiquín y material de primeros auxilios",
+    "REC-EMAIL": "Correo electrónico institucional",
+    "REC-APP-COMUNICACION": "App de comunicación con familias/alumnado (Séneca, Educamos, etc.)",
+}
+
+
+def resolve_recursos(recursos_espacios: list) -> list:
+    """Resuelve una lista de recursos_espacios (ids del catálogo o texto libre
+    añadido por el profesorado) a sus etiquetas legibles."""
+    return [RECURSOS_LABELS.get(r, r) for r in (recursos_espacios or [])]
+
+
 def fetch_curriculo_from_db(codigo_modulo: str, db) -> dict:
     """
     Consulta el catálogo oficial (tablas Module/LearningOutcome/EvaluationCriterion)

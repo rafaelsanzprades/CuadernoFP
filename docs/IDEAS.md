@@ -25,29 +25,56 @@ una estimación de esfuerzo de implementación, no de importancia.
 
 ---
 
-## 1. [Fácil] Revisar referencias bibliográficas del checklist de marco normativo
+## 1. ✅ [Fácil] Revisar referencias bibliográficas del checklist de marco normativo
 
 *Origen: Alcántara-Alabort, bloque 3. Rafael: "revisa las referencias bibliográficas, entiendo que
 estará todo bien".*
 
-Contrastar el checklist normativo mínimo del libro (LOE, LO 3/2022, RD 659/2023 —con su disposición
-transitoria segunda—, RD 69/2025, RD de enseñanzas mínimas del título + autonómico: ley de
-educación, decreto de ordenación FP, decreto/orden de currículo, instrucciones de inicio de curso,
-decreto/orden de diversidad, decreto/orden de organización de centros, orden de evaluación) contra
-lo que ya recoge `/normativa` en la app. Verificación puntual, sin cambio de código esperado salvo
-que aparezca algún hueco real.
+Hecho 2026-08-07. Contrastado el checklist normativo del libro contra `backend/documentos/Normativa/`
+(que es lo que sirve `/normativa`). Están: LOE/LOMLOE, LO 3/2022, RD 659/2023, RD 69/2025, decreto de
+ordenación FP de Aragón (D 91-2024), currículos CFGB/CFGM/CFGS (O ECD-841/842/843-2024), orden de
+intervención educativa inclusiva. **Faltan** 4 categorías autonómicas que el libro pide y no hay
+fichero para ellas: ley de educación de Aragón, instrucciones de inicio de curso, decreto/orden de
+organización de centros, orden de evaluación de Aragón. No se han buscado/añadido los PDF reales —
+hace falta que Rafael aporte los enlaces oficiales (no se generan URLs de normativa sin confirmar).
 
-## 2. [Fácil] Arreglar en PD+ (JEG) los mismos bugs de campo que tenía PD=
+## 2. ✅ [Fácil] Bugs de campo en PD+ (JEG) — resultó ser código muerto, no un bug real
 
-*Origen: `docs/pd-plus-pendientes.md` §1.*
+*Origen: `docs/pd-plus-pendientes.md` §1 (ahora corregido tras inspeccionar la plantilla).*
 
-`generador_pd_jeg.py` tiene exactamente los mismos bugs que se arreglaron en
-`generador_pd_suficiente_tpl.py` esta sesión — mismo fix mecánico, sin tocar la plantilla JEG (solo
-contenido/datos, no formato):
-- `ud.get(f'pct_ra{{j}}', '')` → el campo real es `RA{{j}}`.
-- `ud.get('ev_ud', '')` → no existe; el dato real sale de `df_sgmt[].ev` (ya calculado en
-  `planningGenerator.ts`), igual que en PD=.
-- `range(1, 11)` en el bucle de UD → se queda corta la UD11 con 11 UD reales.
+Comprobado 2026-08-07 inspeccionando `modelo_pd_jeg_tpl_final.docx` directamente: la plantilla JEG
+**solo usa** `ud1_titulo`..`ud10_titulo` (por eso `range(1, 11)` SÍ es correcto ahí, cubre justo las
+10 UD que la plantilla soporta — no es el mismo caso que PD=, donde la plantilla sí tenía slots hasta
+ud11). Los campos `ud{{i}}_ra{{j}}`, `ud{{i}}_ev`, `ud{{i}}_horas`, `ud{{i}}_num`, `ud{{i}}_nombre`,
+`ra{{i}}_titulo`, `ra{{i}}_texto` que `_build_context` calcula con `pct_ra{{j}}`/`ev_ud` **no aparecen
+en ningún sitio de la plantilla** — es código que se ejecuta pero cuyo resultado nunca se usa. No
+hay nada que corregir porque no hay ningún efecto visible que arreglar; se deja documentado para no
+reabrirlo, y como aviso de que las notas sobre PD+ escritas sin haber abierto antes su plantilla real
+pueden estar equivocadas (como pasó aquí).
+
+## 3. ✅ [Fácil] Cablear en PD+ los campos de texto que ya existen
+
+*Origen: `docs/pd-plus-pendientes.md` §2.*
+
+Hecho 2026-08-07, solo contenido, plantilla JEG sin tocar:
+- `otros_recursos` (sí existe en la plantilla) mostraba los ids codificados en crudo de
+  `recursos_espacios` (p. ej. "REC-EPI") — ahora se resuelve a su etiqueta legible con
+  `helpers_catalogo.resolve_recursos()` (el diccionario `RECURSOS_LABELS` se movió de
+  `generador_pd_suficiente_tpl.py` a `helpers_catalogo.py` para compartirlo entre PD= y PD+ en vez
+  de duplicarlo).
+- `bibliografia` (sí existe en la plantilla) ahora prefiere `textos_pd_bibliografia` sobre el
+  huérfano `G3_bibliografia` — y `textos_pd_bibliografia` por fin tiene input real
+  (`PlanesTab.tsx` → nueva sección "Bibliografía", mismo patrón `NarrativeField` que "Coordinación
+  docente"). Antes existía en el esquema/whitelist pero ninguna pestaña lo escribía nunca.
+- **Corrección sobre la nota original**: `textos_pd_metodologia_labor_coordinada` no tiene ningún
+  placeholder en la plantilla JEG (comprobado, no estaba en las notas anteriores porque no se había
+  inspeccionado la plantilla) — no hay nada que cablear con ese campo en PD+, solo se usa en PD=.
+- `recursos_multimedia`/`software_nombre` (fallback a `G2_herramientas`) y `ubicacion_recursos`/
+  `tipo_equipos` (fallback a `G1_infraestructuras`) **quedan sin tocar** — sí existen en la
+  plantilla, pero repartir `recursos_espacios` entre estos 4 campos distintos requeriría filtrar por
+  categoría (Espacios/Equipamiento vs. Software y TIC) y el catálogo actual solo expone id→etiqueta,
+  no categoría, desde Python. Tarea aparte si se quiere abordar (añadir categoría a
+  `RECURSOS_LABELS` o construir un mapa `id → categoría`).
 
 ## 3. [Fácil] Cablear en PD+ los campos de texto que ya existen pero no se leían
 
