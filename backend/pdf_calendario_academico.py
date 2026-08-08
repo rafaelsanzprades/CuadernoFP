@@ -1,4 +1,5 @@
-﻿import io
+import io
+import os
 import calendar
 from datetime import date
 from reportlab.lib import colors
@@ -7,9 +8,25 @@ from reportlab.platypus import BaseDocTemplate, Frame, PageTemplate, Table, Tabl
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import cm
 from reportlab.pdfgen import canvas as pdfcanvas
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 
 NOMBRE_MESES = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
                 "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+
+# Arial de verdad si el sistema la tiene (Windows), si no cae a Helvetica
+# (equivalente base14 de PDF, siempre disponible, incluido en Cloud Run).
+try:
+    _WIN_FONTS = "C:/Windows/Fonts"
+    pdfmetrics.registerFont(TTFont("Arial", os.path.join(_WIN_FONTS, "arial.ttf")))
+    pdfmetrics.registerFont(TTFont("Arial-Bold", os.path.join(_WIN_FONTS, "arialbd.ttf")))
+    pdfmetrics.registerFont(TTFont("Arial-Italic", os.path.join(_WIN_FONTS, "ariali.ttf")))
+    pdfmetrics.registerFont(TTFont("Arial-BoldItalic", os.path.join(_WIN_FONTS, "arialbi.ttf")))
+    pdfmetrics.registerFontFamily("Arial", normal="Arial", bold="Arial-Bold",
+                                   italic="Arial-Italic", boldItalic="Arial-BoldItalic")
+    FONT_R, FONT_B, FONT_I, FONT_BI = "Arial", "Arial-Bold", "Arial-Italic", "Arial-BoldItalic"
+except Exception:
+    FONT_R, FONT_B, FONT_I, FONT_BI = "Helvetica", "Helvetica-Bold", "Helvetica-Oblique", "Helvetica-BoldOblique"
 
 # ------------------------------------------------------------------ #
 #  Función que se llama en CADA página para dibujar cabecera y pie   #
@@ -19,12 +36,12 @@ def _draw_page_decorations(canv, doc):
     W, H = landscape(A4)
 
     # ---- CABECERA: Título centrado ----
-    canv.setFont("Helvetica-Bold", 10)
+    canv.setFont(FONT_B, 10)
     canv.setFillColor(colors.HexColor("#777777"))
     canv.drawCentredString(W / 2, H - 1.5 * cm, doc.cal_titulo)
 
     # ---- PIE: Referencia abajo a la derecha ----
-    canv.setFont("Helvetica", 9)
+    canv.setFont(FONT_R, 9)
     canv.setFillColor(colors.HexColor("#777777"))
     canv.drawRightString(W - 1 * cm, 1 * cm, doc.cal_pie)
 
@@ -108,31 +125,16 @@ def generar_pdf_calendario(info_modulo, info_fechas, planning_ledger, calendar_n
     FESTIVO_BG = colors.HexColor("#fdecea")
     UD_BG = colors.HexColor("#ede7f6")
 
-    def build_day_cell(day_str, is_festivo, tfeoe):
-        """Fila 0 de la casilla: solo el número de día (fondo rojizo aparte,
-        vía festivo_bg_cells, si es festivo)."""
+    def build_day_cell(day_str, tfeoe):
+        """Fila 0 de la casilla: solo el número de día, siempre centrado
+        (fondo rojizo aparte, vía festivo_bg_cells, si es festivo)."""
         if not day_str:
             return ""
-        if is_festivo:
-            style = ParagraphStyle(name='F', alignment=1, fontSize=14, fontName='Helvetica-Bold', textColor=colors.black)
-            return Paragraph(f"<b>{day_str}</b>", style)
-
-        inner_t = Table([[day_str, tfeoe]], colWidths=[2.2*cm, 2.2*cm], rowHeights=[0.7*cm])
-        inner_t.setStyle(TableStyle([
-            ('ALIGN', (0,0), (0,0), 'LEFT'),
-            ('ALIGN', (1,0), (1,0), 'RIGHT'),
-            ('VALIGN', (0,0), (1,0), 'MIDDLE'),
-            ('FONTNAME', (0,0), (0,0), 'Helvetica-Bold'),
-            ('FONTSIZE', (0,0), (0,0), 16),
-            ('TEXTCOLOR', (0,0), (1,0), colors.black),
-            ('FONTNAME', (1,0), (1,0), 'Helvetica'),
-            ('FONTSIZE', (1,0), (1,0), 9),
-            ('LEFTPADDING', (0,0), (-1,-1), 2),
-            ('RIGHTPADDING', (0,0), (-1,-1), 2),
-            ('BOTTOMPADDING', (0,0), (-1,-1), 0),
-            ('TOPPADDING', (0,0), (-1,-1), 0),
-        ]))
-        return inner_t
+        texto = f"<b>{day_str}</b>"
+        if tfeoe:
+            texto += f" <font size=8>{tfeoe}</font>"
+        style = ParagraphStyle(name='D', alignment=1, fontSize=14, fontName=FONT_B, textColor=colors.black)
+        return Paragraph(texto, style)
 
     def get_month_grid(year, month):
         cal = calendar.monthcalendar(year, month)
@@ -152,7 +154,7 @@ def generar_pdf_calendario(info_modulo, info_fechas, planning_ledger, calendar_n
                 # 4 filas por casilla: día (con fondo rojizo si es festivo) /
                 # festivo (texto, propio, centrado) / relevante (a la
                 # derecha) / docencia-UD (a la izquierda, fondo malva).
-                fila_dias.append(build_day_cell(td, ef, tfeoe) if td else "")
+                fila_dias.append(build_day_cell(td, tfeoe) if td else "")
                 fila_festivo.append(tfest_desc if ef else "")
                 fila_ud.append("" if ef else tud)
                 fila_rel.append("" if ef else trel)
@@ -225,7 +227,7 @@ def generar_pdf_calendario(info_modulo, info_fechas, planning_ledger, calendar_n
             ('SPAN',       (0, 0), (7, 0)),
             ('ALIGN',      (0, 0), (7, 0), 'CENTER'),
             ('VALIGN',     (0, 0), (7, 0), 'MIDDLE'),
-            ('FONTNAME',   (0, 0), (7, 0), 'Helvetica-Bold'),
+            ('FONTNAME',   (0, 0), (7, 0), FONT_B),
             ('FONTSIZE',   (0, 0), (7, 0), 22),          # 2× cabecera
             ('BACKGROUND', (0, 0), (7, 0), colors.white),
             ('TEXTCOLOR',  (0, 0), (7, 0), colors.black),
@@ -233,7 +235,7 @@ def generar_pdf_calendario(info_modulo, info_fechas, planning_ledger, calendar_n
             # ---- Fila cabecera días ----
             ('ALIGN',      (0, 1), (-1, 1), 'CENTER'),
             ('VALIGN',     (0, 1), (-1, 1), 'MIDDLE'),
-            ('FONTNAME',   (0, 1), (-1, 1), 'Helvetica-Bold'),
+            ('FONTNAME',   (0, 1), (-1, 1), FONT_B),
             ('FONTSIZE',   (0, 1), (-1, 1), 10),
             ('BACKGROUND', (0, 1), (7, 1), colors.HexColor("#e0e0e0")),
             ('TEXTCOLOR',  (0, 1), (-1, 1), colors.black),
@@ -248,7 +250,7 @@ def generar_pdf_calendario(info_modulo, info_fechas, planning_ledger, calendar_n
             ('TEXTCOLOR',  (0, 2), (0, -1), colors.black),
             ('ALIGN',      (0, 2), (0, -1), 'CENTER'),
             ('VALIGN',     (0, 2), (0, -1), 'MIDDLE'),
-            ('FONTNAME',   (0, 2), (0, -1), 'Helvetica-Bold'),
+            ('FONTNAME',   (0, 2), (0, -1), FONT_B),
             ('FONTSIZE',   (0, 2), (0, -1), 16),
         ]
 
@@ -264,7 +266,7 @@ def generar_pdf_calendario(info_modulo, info_fechas, planning_ledger, calendar_n
 
             # Fila 1: festivo, centrado
             style_list += [
-                ('FONTNAME',  (1, r_idx+1), (-1, r_idx+1), 'Helvetica-Bold'),
+                ('FONTNAME',  (1, r_idx+1), (-1, r_idx+1), FONT_B),
                 ('FONTSIZE',  (1, r_idx+1), (-1, r_idx+1), 8),
                 ('TEXTCOLOR', (1, r_idx+1), (-1, r_idx+1), colors.black),
                 ('ALIGN',     (1, r_idx+1), (-1, r_idx+1), 'CENTER'),
@@ -273,7 +275,7 @@ def generar_pdf_calendario(info_modulo, info_fechas, planning_ledger, calendar_n
 
             # Fila 2: relevante, alineado a la derecha
             style_list += [
-                ('FONTNAME',  (1, r_idx+2), (-1, r_idx+2), 'Helvetica-Oblique'),
+                ('FONTNAME',  (1, r_idx+2), (-1, r_idx+2), FONT_I),
                 ('FONTSIZE',  (1, r_idx+2), (-1, r_idx+2), 8),
                 ('TEXTCOLOR', (1, r_idx+2), (-1, r_idx+2), colors.black),
                 ('ALIGN',     (1, r_idx+2), (-1, r_idx+2), 'RIGHT'),
@@ -282,7 +284,7 @@ def generar_pdf_calendario(info_modulo, info_fechas, planning_ledger, calendar_n
 
             # Fila 3: docencia (UD), alineado a la izquierda, fondo malva
             style_list += [
-                ('FONTNAME',  (1, r_idx+3), (-1, r_idx+3), 'Helvetica'),
+                ('FONTNAME',  (1, r_idx+3), (-1, r_idx+3), FONT_R),
                 ('FONTSIZE',  (1, r_idx+3), (-1, r_idx+3), 9),
                 ('TEXTCOLOR', (1, r_idx+3), (-1, r_idx+3), colors.black),
                 ('ALIGN',     (1, r_idx+3), (-1, r_idx+3), 'LEFT'),
@@ -352,6 +354,7 @@ def generar_docx_calendario(info_modulo, info_fechas, planning_ledger, calendar_
         run.bold = bold
         run.italic = italic
         run.font.size = Pt(size)
+        run.font.name = "Arial"
         return p
 
     def get_day_info(year, month, day):
@@ -384,6 +387,7 @@ def generar_docx_calendario(info_modulo, info_fechas, planning_ledger, calendar_
         run = p.add_run(f"{NOMBRE_MESES[month - 1]}  {year}")
         run.bold = True
         run.font.size = Pt(20)
+        run.font.name = "Arial"
 
         semanas = calendar.monthcalendar(year, month)
         table = doc.add_table(rows=1 + 4 * len(semanas), cols=8)
@@ -427,10 +431,11 @@ def generar_docx_calendario(info_modulo, info_fechas, planning_ledger, calendar_
                         set_cell(cell_festivo, info["desc_festivo"], bold=True, size=8, align=WD_ALIGN_PARAGRAPH.CENTER)
                     shade(cell_festivo, _CAL_FESTIVO_BG)
                 else:
-                    dia_p = set_cell(cell_dia, f"{info['day']:02d}", bold=True, size=14, align=WD_ALIGN_PARAGRAPH.LEFT)
+                    dia_p = set_cell(cell_dia, f"{info['day']:02d}", bold=True, size=14, align=WD_ALIGN_PARAGRAPH.CENTER)
                     if info["feoe"]:
                         feoe_run = dia_p.add_run(f"  {info['feoe']}")
                         feoe_run.font.size = Pt(8)
+                        feoe_run.font.name = "Arial"
                     if info["rel"]:
                         set_cell(cell_rel, info["rel"], italic=True, size=7, align=WD_ALIGN_PARAGRAPH.RIGHT)
                     set_cell(cell_ud, info["ud"], size=8, align=WD_ALIGN_PARAGRAPH.LEFT)
