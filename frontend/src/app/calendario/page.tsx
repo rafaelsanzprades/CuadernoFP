@@ -35,35 +35,39 @@ const MONTH_NAMES = [
 const DAY_NAMES_SHORT = ["Lu","Ma","Mi","Ju","Vi","Sa","Do"];
 
 // ── Notes Table Component ─────────────────────────────────────────────────────
-function NotesTable({ calendar_notes, onUpdateNotes }: { calendar_notes: Record<string, string>; onUpdateNotes: (notes: Record<string, string>) => void }) {
+function NotesTable({ calendar_notes, onUpdateNotes, planning_ledger }: {
+  calendar_notes: Record<string, string>;
+  onUpdateNotes: (notes: Record<string, string>) => void;
+  planning_ledger?: Record<string, string[]>;
+}) {
   const { t } = useTranslation();
-  const [newDate, setNewDate]     = useState("");
-  const [newEndDate, setNewEndDate] = useState("");
-  const [newType, setNewType]     = useState<"f" | "r">("f");
-  const [newText, setNewText]     = useState("");
+  const [newDate, setNewDate]         = useState("");
+  const [newEndDate, setNewEndDate]   = useState("");
+  const [newFestivo, setNewFestivo]   = useState("");
+  const [newRelevante, setNewRelevante] = useState("");
 
   function addNote() {
-    if (!newDate || !newText) return;
-    
+    if (!newDate || (!newFestivo && !newRelevante)) return;
+
     const startD = new Date(newDate + "T12:00:00");
     const endD = newEndDate ? new Date(newEndDate + "T12:00:00") : startD;
-    
+
     if (endD < startD) return;
 
     const newNotes = { ...calendar_notes };
-    
+
     let curr = new Date(startD);
     while (curr <= endD) {
       const d = String(curr.getDate()).padStart(2, "0");
       const m = String(curr.getMonth() + 1).padStart(2, "0");
       const y = curr.getFullYear();
-      const key = `${newType}_${d}/${m}/${y}`;
-      newNotes[key] = newText;
+      if (newFestivo) newNotes[`f_${d}/${m}/${y}`] = newFestivo;
+      if (newRelevante) newNotes[`r_${d}/${m}/${y}`] = newRelevante;
       curr.setDate(curr.getDate() + 1);
     }
-    
+
     onUpdateNotes(newNotes);
-    setNewDate(""); setNewEndDate(""); setNewText("");
+    setNewDate(""); setNewEndDate(""); setNewFestivo(""); setNewRelevante("");
   }
 
   function deleteRange(keys: string[]) {
@@ -72,121 +76,107 @@ function NotesTable({ calendar_notes, onUpdateNotes }: { calendar_notes: Record<
     onUpdateNotes(newNotes);
   }
 
-  const entries = Object.entries(calendar_notes).filter(([, v]) => v).sort(([a], [b]) => {
-    const toSortable = (k: string) => { 
-      const str = k.substring(2);
-      if (str.includes("-")) return str; // already YYYY-MM-DD
-      const parts = str.split("/"); 
-      if (parts.length === 3) return `${parts[2]}-${parts[1]}-${parts[0]}`;
-      return str;
-    };
-    return toSortable(a).localeCompare(toSortable(b));
-  });
-
-  const ranges: { start: string, end: string, type: string, desc: string, keys: string[] }[] = [];
-  
-  entries.forEach(([k, v]) => {
-    const type = k.charAt(0);
-    const dateStr = k.substring(2);
-    
-    // Parse Date properly regardless of format
-    let d: Date;
+  // Parsea una clave "DD/MM/YYYY" (formato actual) o "YYYY-MM-DD" (legado) a Date + ISO ordenable.
+  const parseKeyDate = (dateStr: string) => {
     if (dateStr.includes("-")) {
       const [y, m, day] = dateStr.split("-");
-      d = new Date(Number(y), Number(m)-1, Number(day), 12);
-    } else {
-      const parts = dateStr.split("/");
-      d = new Date(Number(parts[2]||0), Number(parts[1]||1)-1, Number(parts[0]||1), 12);
+      return { iso: `${y}-${m}-${day}`, date: new Date(Number(y), Number(m) - 1, Number(day), 12) };
     }
-    
-    if (ranges.length > 0) {
-      const last = ranges[ranges.length - 1];
-      const lastDateStr = last.end.substring(2);
-      let lastD: Date;
-      if (lastDateStr.includes("-")) {
-        const [y, m, day] = lastDateStr.split("-");
-        lastD = new Date(Number(y), Number(m)-1, Number(day), 12);
-      } else {
-        const lastParts = lastDateStr.split("/");
-        lastD = new Date(Number(lastParts[2]||0), Number(lastParts[1]||1)-1, Number(lastParts[0]||1), 12);
-      }
-      
-      const diffDays = Math.round((d.getTime() - lastD.getTime()) / (1000 * 3600 * 24));
-      
-      // Merge if consecutive day, or if gap is weekend
-      if (last.type === type && last.desc === v && (diffDays === 1 || (diffDays === 3 && lastD.getDay() === 5) || (diffDays === 2 && lastD.getDay() === 6))) {
-        last.end = k;
-        last.keys.push(k);
+    const [d, m, y] = dateStr.split("/");
+    return { iso: `${y}-${m}-${d}`, date: new Date(Number(y), Number(m) - 1, Number(d), 12) };
+  };
+
+  // Una fila por fecha, con festivo y relevante como columnas paralelas (un
+  // mismo día puede tener ambos a la vez).
+  type DayRow = { iso: string; date: Date; festivo?: string; relevante?: string };
+  const byDate = new Map<string, DayRow>();
+  Object.entries(calendar_notes).forEach(([k, v]) => {
+    if (!v) return;
+    const type = k.charAt(0); // "f" | "r"
+    const { iso, date } = parseKeyDate(k.substring(2));
+    const entry = byDate.get(iso) || { iso, date };
+    if (type === "f") entry.festivo = v; else entry.relevante = v;
+    byDate.set(iso, entry);
+  });
+  const dayRows = Array.from(byDate.values()).sort((a, b) => a.iso.localeCompare(b.iso));
+
+  // Fusiona días consecutivos en un rango solo si festivo Y relevante coinciden en ambos.
+  const ranges: { start: DayRow; end: DayRow; keys: string[] }[] = [];
+  const keysForDay = (row: DayRow) => [
+    ...(row.festivo ? [`f_${pad(row.date.getDate())}/${pad(row.date.getMonth() + 1)}/${row.date.getFullYear()}`] : []),
+    ...(row.relevante ? [`r_${pad(row.date.getDate())}/${pad(row.date.getMonth() + 1)}/${row.date.getFullYear()}`] : []),
+  ];
+  dayRows.forEach(row => {
+    const last = ranges[ranges.length - 1];
+    if (last) {
+      const diffDays = Math.round((row.date.getTime() - last.end.date.getTime()) / 86400000);
+      const sameContent = last.end.festivo === row.festivo && last.end.relevante === row.relevante;
+      const consecutive = diffDays === 1 || (diffDays === 3 && last.end.date.getDay() === 5) || (diffDays === 2 && last.end.date.getDay() === 6);
+      if (sameContent && consecutive) {
+        last.end = row;
+        last.keys.push(...keysForDay(row));
         return;
       }
     }
-    ranges.push({ start: k, end: k, type, desc: v, keys: [k] });
+    ranges.push({ start: row, end: row, keys: keysForDay(row) });
   });
+
+  const fmt = (d: Date) => `${pad(d.getDate())} ${MONTH_NAMES[d.getMonth()]?.substring(0, 3).toLowerCase() || ""} ${d.getFullYear()}`;
+  const docenciaFor = (row: DayRow) => {
+    if (!planning_ledger) return "";
+    const key = `${pad(row.date.getDate())}/${pad(row.date.getMonth() + 1)}/${row.date.getFullYear()}`;
+    const uds = planning_ledger[key];
+    return uds && uds.length ? uds.join(", ") : "";
+  };
 
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-left text-body border-collapse">
         <thead>
           <tr className="border-b border-[var(--glass-border)] text-muted">
-            <th className="p-2 w-32">{t('table.fecha', {defaultValue: 'Fecha'})}</th>
-            <th className="p-2 w-32">{t('table.hasta', {defaultValue: 'Hasta'})}</th>
-            <th className="p-2 w-24">{t('table.tipo', {defaultValue: 'Tipo'})}</th>
-            <th className="p-2">{t('table.descripcion', {defaultValue: 'Descripción'})}</th>
+            <th className="p-2 w-28">{t('table.fecha', {defaultValue: 'Fecha'})}</th>
+            <th className="p-2 w-28">{t('table.hasta', {defaultValue: 'Hasta'})}</th>
+            <th className="p-2">{t('festivo', {defaultValue: 'Festivo'})}</th>
+            <th className="p-2">{t('evento', {defaultValue: 'Relevante'})}</th>
+            <th className="p-2 w-36">{t('docencia', {defaultValue: 'Docencia'})}</th>
             <th className="p-2 w-10" />
           </tr>
         </thead>
         <tbody>
           {ranges.map((r, i) => {
-            const getMonthYear = (dateString: string) => {
-              if (dateString.includes("-")) {
-                const [y, m] = dateString.split("-");
-                return { m: Number(m), y: y.substring(2) };
-              }
-              const parts = dateString.split("/");
-              return { m: Number(parts[1]), y: (parts[2]||"").substring(2) };
-            };
-            
-            const startMY = getMonthYear(r.start.substring(2));
-            const monthName = MONTH_NAMES[startMY.m - 1] || "Mes";
-            const monthHeader = `${monthName} '${startMY.y}`;
-            
-            let showHeader = false;
-            if (i === 0) showHeader = true;
-            else {
-              const prevMY = getMonthYear(ranges[i-1].start.substring(2));
-              if (prevMY.m !== startMY.m || prevMY.y !== startMY.y) showHeader = true;
-            }
+            const monthHeader = `${MONTH_NAMES[r.start.date.getMonth()]} '${String(r.start.date.getFullYear()).substring(2)}`;
+            const showHeader = i === 0
+              || ranges[i - 1].start.date.getMonth() !== r.start.date.getMonth()
+              || ranges[i - 1].start.date.getFullYear() !== r.start.date.getFullYear();
+            const singleDay = r.start.iso === r.end.iso;
 
-            const isF = r.type === "f";
-            const fmt = (dateString: string) => {
-              if (dateString.includes("-")) {
-                const [y, m, d] = dateString.split("-");
-                return `${d} ${MONTH_NAMES[Number(m)-1]?.substring(0,3).toLowerCase()||""} ${y}`;
-              }
-              const p = dateString.split("/");
-              return `${p[0]} ${MONTH_NAMES[Number(p[1])-1]?.substring(0,3).toLowerCase()||""} ${p[2]}`;
-            };
-            
             return (
-              <React.Fragment key={r.start + r.desc}>
+              <React.Fragment key={r.start.iso}>
                 {showHeader && (
                   <tr>
-                    <td colSpan={5} className="pt-6 pb-2 text-caption font-bold tracking-wider text-accent border-b border-[var(--glass-border)]/50">
+                    <td colSpan={6} className="pt-6 pb-2 text-caption font-bold tracking-wider text-accent border-b border-[var(--glass-border)]/50">
                       {monthHeader}
                     </td>
                   </tr>
                 )}
                 <tr className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
-                  <td className="p-2 font-mono text-foreground/80">{fmt(r.start.substring(2))}</td>
-                  <td className="p-2 font-mono text-foreground/60">{r.start === r.end ? "" : fmt(r.end.substring(2))}</td>
-                  <td className="p-2">
-                    <span className={`text-caption px-2 py-0.5 rounded-full font-semibold ${
-                      isF ? "bg-danger/10 text-danger" : "bg-info/10 text-info"
-                    }`}>
-                      {isF ? <><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('festivo', {defaultValue: 'Festivo'})}</> : <><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('evento', {defaultValue: 'Evento'})}</>}
-                    </span>
+                  <td className="p-2 font-mono text-foreground/80">{fmt(r.start.date)}</td>
+                  <td className="p-2 font-mono text-foreground/60">{singleDay ? "" : fmt(r.end.date)}</td>
+                  <td className="p-2 text-foreground/90">
+                    {r.start.festivo && (
+                      <span className="text-caption px-2 py-0.5 rounded-full font-semibold bg-danger/10 text-danger">
+                        <span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> {r.start.festivo}
+                      </span>
+                    )}
                   </td>
-                  <td className="p-2 text-foreground/90">{r.desc}</td>
+                  <td className="p-2 text-foreground/90">
+                    {r.start.relevante && (
+                      <span className="text-caption px-2 py-0.5 rounded-full font-semibold bg-info/10 text-info">
+                        <span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> {r.start.relevante}
+                      </span>
+                    )}
+                  </td>
+                  <td className="p-2 text-caption text-muted">{singleDay ? docenciaFor(r.start) : ""}</td>
                   <td className="p-2 text-center">
                     <button onClick={() => deleteRange(r.keys)} className="text-muted/80 hover:text-danger font-bold text-subheading leading-none transition-colors">×</button>
                   </td>
@@ -203,16 +193,14 @@ function NotesTable({ calendar_notes, onUpdateNotes }: { calendar_notes: Record<
               <DatePicker value={newEndDate} onChange={v => setNewEndDate(v)} className="w-full" placeholder={t('hasta_opc', {defaultValue: 'Hasta (Opcional)'})} />
             </td>
             <td className="p-2">
-              <select value={newType} onChange={e => setNewType(e.target.value as "f" | "r")} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-body text-foreground focus:border-warning focus:outline-none">
-                <option value="f">{t('festivo', {defaultValue: 'Festivo'})}</option>
-                <option value="r">{t('evento', {defaultValue: 'Evento'})}</option>
-              </select>
+              <input type="text" value={newFestivo} onChange={e => setNewFestivo(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()} placeholder={t('festivo', {defaultValue: 'Festivo...'})} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-body text-foreground focus:border-warning focus:outline-none" />
             </td>
             <td className="p-2">
-              <input type="text" value={newText} onChange={e => setNewText(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()} placeholder={t('descripcion', {defaultValue: 'Descripción...'})} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-body text-foreground focus:border-warning focus:outline-none" />
+              <input type="text" value={newRelevante} onChange={e => setNewRelevante(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()} placeholder={t('evento', {defaultValue: 'Relevante...'})} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-body text-foreground focus:border-warning focus:outline-none" />
             </td>
+            <td className="p-2 text-caption text-muted/60 italic">{t('automatico', {defaultValue: 'Automático'})}</td>
             <td className="p-2 text-center">
-              <button onClick={addNote} disabled={!newDate || !newText} className="text-warning hover:text-warning font-bold text-heading leading-none disabled:text-gray-700 transition-colors">+</button>
+              <button onClick={addNote} disabled={!newDate || (!newFestivo && !newRelevante)} className="text-warning hover:text-warning font-bold text-heading leading-none disabled:text-gray-700 transition-colors">+</button>
             </td>
           </tr>
         </tbody>
@@ -918,8 +906,10 @@ export default function CalendarioPage() {
                   <h2 className="text-subheading font-bold mb-2"> Festivos y eventos</h2>
                   <p className="text-muted text-body mb-4">
                     Introduce manualmente o haz clic en el calendario. Los festivos excluyen horas del cómputo real.
+                    Festivo y Relevante son independientes: un mismo día puede tener los dos a la vez. La columna
+                    Docencia es solo de referencia (viene de Planificación, no se edita aquí).
                   </p>
-                  <NotesTable calendar_notes={calendar_notes} onUpdateNotes={handleUpdateNotes} />
+                  <NotesTable calendar_notes={calendar_notes} onUpdateNotes={handleUpdateNotes} planning_ledger={cursoData?.planning_ledger} />
                 </Card>
               )}
 
