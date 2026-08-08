@@ -213,7 +213,13 @@ function NotesTable({ calendar_notes, onUpdateNotes, planning_ledger }: {
 
 // ── Interactive Calendar Component ────────────────────────────────────────────
 
-function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNote }: { info_fechas: Record<string, string>; horario: Record<string, any>; calendar_notes: Record<string, string>; onUpdateNote: (key: string, val: string) => void }) {
+function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNote, planning_ledger }: {
+  info_fechas: Record<string, string>;
+  horario: Record<string, any>;
+  calendar_notes: Record<string, string>;
+  onUpdateNote: (key: string, val: string) => void;
+  planning_ledger?: Record<string, string[]>;
+}) {
   const { t } = useTranslation();
   const [popup, setPopup] = useState<{ key: string; x: number; y: number } | null>(null);
   const [noteType, setNoteType] = useState<"f" | "r">("f");
@@ -259,6 +265,15 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
     if (inRange(date, t3s, t3e))   return "bg-info/10 text-info hover:bg-info/10 cursor-pointer";
     if (inRange(date, cs, ce))     return "bg-foreground/5 text-muted hover:bg-foreground/10 cursor-pointer";
     return "text-gray-700 cursor-default";
+  }
+
+  function getDayInfo(date: Date) {
+    const dkey = `${pad(date.getDate())}/${pad(date.getMonth() + 1)}/${date.getFullYear()}`;
+    const uds = planning_ledger?.[dkey] || [];
+    const festivo = calendar_notes[`f_${dkey}`] || "";
+    const relevante = calendar_notes[`r_${dkey}`] || "";
+    const isFeoe = inRange(date, feoS, feoE) && date.getDay() !== 0 && date.getDay() !== 6;
+    return { ud: uds.join(", "), festivo, relevante, isFeoe };
   }
 
   function openPopup(e: React.MouseEvent, date: Date) {
@@ -325,14 +340,30 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
                   if (!day) return <div key={`e-${i}`} />;
                   const date = new Date(y, m, day);
                   const isToday = date.toDateString() === new Date().toDateString();
+                  const info = getDayInfo(date);
+                  const dkeyTitle = `${pad(day)}/${pad(m + 1)}/${y}`;
+                  const tooltipLines = [dkeyTitle];
+                  if (info.festivo) tooltipLines.push(`Festivo: ${info.festivo}`);
+                  if (info.relevante) tooltipLines.push(`Relevante: ${info.relevante}`);
+                  if (info.ud) tooltipLines.push(`UD: ${info.ud}`);
+                  if (info.isFeoe) tooltipLines.push("FEOE");
+                  // Línea pequeña bajo el número: UD (prioridad) o si no hay,
+                  // relevante (truncado) - el resto siempre visible al pasar
+                  // el ratón, vía el title.
+                  const subLine = info.ud || info.relevante || (info.isFeoe ? "FEOE" : "");
                   return (
                     <button
                       key={day}
                       onClick={(e) => openPopup(e, date)}
-                      className={`text-center text-caption rounded py-1 transition-all ${getDayStyle(date)} ${isToday ? "ring-1 ring-warning ring-offset-1 ring-offset-black/50" : ""}`}
-                      title={`${pad(day)}/${pad(m + 1)}/${y}`}
+                      className={`flex flex-col items-center justify-center text-center rounded py-1 px-0.5 min-h-[2.6rem] transition-all ${getDayStyle(date)} ${isToday ? "ring-1 ring-warning ring-offset-1 ring-offset-black/50" : ""}`}
+                      title={tooltipLines.join(" · ")}
                     >
-                      {day}
+                      <span className="text-caption leading-none">{day}</span>
+                      {subLine && (
+                        <span className="block w-full truncate text-[9px] leading-tight opacity-80 px-0.5">
+                          {subLine}
+                        </span>
+                      )}
                     </button>
                   );
                 })}
@@ -982,6 +1013,7 @@ export default function CalendarioPage() {
                     horario={horario}
                     calendar_notes={calendar_notes}
                     onUpdateNote={handleUpdateNote}
+                    planning_ledger={cursoData?.planning_ledger}
                   />
                 </Card>
               )}
