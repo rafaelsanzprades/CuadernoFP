@@ -108,17 +108,14 @@ def generar_pdf_calendario(info_modulo, info_fechas, planning_ledger, calendar_n
     FESTIVO_BG = colors.HexColor("#fdecea")
     UD_BG = colors.HexColor("#ede7f6")
 
-    def build_day_cell(day_str, is_festivo, festivo_desc, tfeoe):
+    def build_day_cell(day_str, is_festivo, tfeoe):
+        """Fila 0 de la casilla: solo el número de día (fondo rojizo aparte,
+        vía festivo_bg_cells, si es festivo)."""
         if not day_str:
             return ""
         if is_festivo:
-            # Fila 1: número de día + (si lo hay) nombre del festivo, centrado.
-            texto = f"<b>{day_str}</b>"
-            if festivo_desc:
-                texto += f"<br/><font size=8>{festivo_desc}</font>"
-            style = ParagraphStyle(name='F', alignment=1, fontSize=14, fontName='Helvetica-Bold',
-                                    textColor=colors.black, leading=13)
-            return Paragraph(texto, style)
+            style = ParagraphStyle(name='F', alignment=1, fontSize=14, fontName='Helvetica-Bold', textColor=colors.black)
+            return Paragraph(f"<b>{day_str}</b>", style)
 
         inner_t = Table([[day_str, tfeoe]], colWidths=[2.2*cm, 2.2*cm], rowHeights=[0.7*cm])
         inner_t.setStyle(TableStyle([
@@ -139,46 +136,50 @@ def generar_pdf_calendario(info_modulo, info_fechas, planning_ledger, calendar_n
 
     def get_month_grid(year, month):
         cal = calendar.monthcalendar(year, month)
-        g_dias, g_ud, g_rel, g_fest = [], [], [], []
+        g_dias, g_festivo, g_ud, g_rel, g_fest = [], [], [], [], []
         for week in cal:
             valid_day = next(d for d in week if d != 0)
             week_num  = date(year, month, valid_day).isocalendar()[1]
 
-            fila_dias = [str(week_num)]
-            fila_ud   = [""]
-            fila_rel  = [""]
-            fila_fest = [False]
+            fila_dias    = [str(week_num)]
+            fila_festivo = [""]
+            fila_ud      = [""]
+            fila_rel     = [""]
+            fila_fest    = [False]
 
             for col_idx, d in enumerate(week):
                 td, tud, trel, tfest_desc, ef, tfeoe = get_cell_data(year, month, d)
-                # Fila 1 (festivo, si lo hay): cuando hay festivo no va nada
-                # más en la casilla. Fila 2: relevante (a la derecha). Fila
-                # 3: docencia/UD (a la izquierda, fondo malva).
-                fila_dias.append(build_day_cell(td, ef, tfest_desc, tfeoe) if td else "")
+                # 4 filas por casilla: día (con fondo rojizo si es festivo) /
+                # festivo (texto, propio, centrado) / relevante (a la
+                # derecha) / docencia-UD (a la izquierda, fondo malva).
+                fila_dias.append(build_day_cell(td, ef, tfeoe) if td else "")
+                fila_festivo.append(tfest_desc if ef else "")
                 fila_ud.append("" if ef else tud)
                 fila_rel.append("" if ef else trel)
                 fila_fest.append(ef)
 
             g_dias.append(fila_dias)
+            g_festivo.append(fila_festivo)
             g_ud.append(fila_ud)
             g_rel.append(fila_rel)
             g_fest.append(fila_fest)
 
-        return g_dias, g_ud, g_rel, g_fest
+        return g_dias, g_festivo, g_ud, g_rel, g_fest
 
     # ---- Alturas fijas de fila ----
-    ROW_MES   = 2.5 * cm  # Fila del nombre del mes  (≈ 3× la normal)
-    ROW_HEAD  = 0.7 * cm  # Fila de Lun/Mar/Mié…
-    ROW_DIAS  = 0.7 * cm  # Fila de número de día / festivo
-    ROW_REL   = 0.6 * cm  # Fila de fechas relevantes
-    ROW_UD    = 0.6 * cm  # Fila de docencia (UD)
+    ROW_MES     = 2.5 * cm  # Fila del nombre del mes  (≈ 3× la normal)
+    ROW_HEAD    = 0.7 * cm  # Fila de Lun/Mar/Mié…
+    ROW_DIAS    = 0.6 * cm  # Fila de número de día
+    ROW_FESTIVO = 0.5 * cm  # Fila de nombre del festivo
+    ROW_REL     = 0.5 * cm  # Fila de fechas relevantes
+    ROW_UD      = 0.5 * cm  # Fila de docencia (UD)
 
     # ---- Anchos de columnas ----
     colWidths = [1.5 * cm] + [4.75 * cm] * 5 + [1.5 * cm] * 2
 
     # ---- Construir tabla por mes ----
     for mes_idx, (year, month) in enumerate(meses_curso):
-        g_dias, g_ud, g_rel, g_fest = get_month_grid(year, month)
+        g_dias, g_festivo, g_ud, g_rel, g_fest = get_month_grid(year, month)
         num_weeks = len(g_dias)
 
         t_data = []
@@ -196,24 +197,26 @@ def generar_pdf_calendario(info_modulo, info_fechas, planning_ledger, calendar_n
 
         for w in range(num_weeks):
             t_data.append(g_dias[w])
+            t_data.append(g_festivo[w])
             t_data.append(g_rel[w])
             t_data.append(g_ud[w])
 
             for c in range(1, 8):
                 if g_fest[w][c]:
                     festivo_bg_cells.append((c, row_counter))
-                elif g_ud[w][c] or g_rel[w][c] or (t_data[-3][c] != ""):
+                    festivo_bg_cells.append((c, row_counter + 1))
+                elif g_dias[w][c] != "":
                     # Día lectivo normal (con día asignado en el mes): la fila
                     # de docencia siempre lleva fondo malva, aunque ese día en
                     # concreto no tenga UD todavía asignada.
-                    ud_bg_cells.append((c, row_counter + 2))
+                    ud_bg_cells.append((c, row_counter + 3))
 
-            row_counter += 3
+            row_counter += 4
 
-        # Alturas: [mes, head, (dias, rel, ud) × num_weeks]
+        # Alturas: [mes, head, (dias, festivo, rel, ud) × num_weeks]
         row_heights = [ROW_MES, ROW_HEAD]
         for _ in range(num_weeks):
-            row_heights.extend([ROW_DIAS, ROW_REL, ROW_UD])
+            row_heights.extend([ROW_DIAS, ROW_FESTIVO, ROW_REL, ROW_UD])
 
         t = Table(t_data, colWidths=colWidths, rowHeights=row_heights)
 
@@ -250,36 +253,45 @@ def generar_pdf_calendario(info_modulo, info_fechas, planning_ledger, calendar_n
         ]
 
         # ---- Estilos por fila de datos ----
-        for r_idx in range(2, len(t_data), 3):
-            # Fila 1: número de día / festivo
+        for r_idx in range(2, len(t_data), 4):
+            # Fila 0: número de día
             style_list += [
                 ('ALIGN',    (1, r_idx), (-1, r_idx), 'CENTER'),
                 ('VALIGN',   (1, r_idx), (-1, r_idx), 'MIDDLE'),
-                # Fusionar columna Sem verticalmente con las dos filas debajo
-                ('SPAN',     (0, r_idx), (0, r_idx + 2)),
+                # Fusionar columna Sem verticalmente con las 3 filas debajo
+                ('SPAN',     (0, r_idx), (0, r_idx + 3)),
+            ]
+
+            # Fila 1: festivo, centrado
+            style_list += [
+                ('FONTNAME',  (1, r_idx+1), (-1, r_idx+1), 'Helvetica-Bold'),
+                ('FONTSIZE',  (1, r_idx+1), (-1, r_idx+1), 8),
+                ('TEXTCOLOR', (1, r_idx+1), (-1, r_idx+1), colors.black),
+                ('ALIGN',     (1, r_idx+1), (-1, r_idx+1), 'CENTER'),
+                ('VALIGN',    (1, r_idx+1), (-1, r_idx+1), 'MIDDLE'),
             ]
 
             # Fila 2: relevante, alineado a la derecha
             style_list += [
-                ('FONTNAME',  (1, r_idx+1), (-1, r_idx+1), 'Helvetica-Oblique'),
-                ('FONTSIZE',  (1, r_idx+1), (-1, r_idx+1), 8),
-                ('TEXTCOLOR', (1, r_idx+1), (-1, r_idx+1), colors.black),
-                ('ALIGN',     (1, r_idx+1), (-1, r_idx+1), 'RIGHT'),
-                ('VALIGN',    (1, r_idx+1), (-1, r_idx+1), 'MIDDLE'),
+                ('FONTNAME',  (1, r_idx+2), (-1, r_idx+2), 'Helvetica-Oblique'),
+                ('FONTSIZE',  (1, r_idx+2), (-1, r_idx+2), 8),
+                ('TEXTCOLOR', (1, r_idx+2), (-1, r_idx+2), colors.black),
+                ('ALIGN',     (1, r_idx+2), (-1, r_idx+2), 'RIGHT'),
+                ('VALIGN',    (1, r_idx+2), (-1, r_idx+2), 'MIDDLE'),
             ]
 
             # Fila 3: docencia (UD), alineado a la izquierda, fondo malva
             style_list += [
-                ('FONTNAME',  (1, r_idx+2), (-1, r_idx+2), 'Helvetica'),
-                ('FONTSIZE',  (1, r_idx+2), (-1, r_idx+2), 9),
-                ('TEXTCOLOR', (1, r_idx+2), (-1, r_idx+2), colors.black),
-                ('ALIGN',     (1, r_idx+2), (-1, r_idx+2), 'LEFT'),
-                ('VALIGN',    (1, r_idx+2), (-1, r_idx+2), 'MIDDLE'),
+                ('FONTNAME',  (1, r_idx+3), (-1, r_idx+3), 'Helvetica'),
+                ('FONTSIZE',  (1, r_idx+3), (-1, r_idx+3), 9),
+                ('TEXTCOLOR', (1, r_idx+3), (-1, r_idx+3), colors.black),
+                ('ALIGN',     (1, r_idx+3), (-1, r_idx+3), 'LEFT'),
+                ('VALIGN',    (1, r_idx+3), (-1, r_idx+3), 'MIDDLE'),
                 # Línea divisoria de semana separando bloques diarios
-                ('LINEBELOW', (0, r_idx+2), (-1, r_idx+2), 0.5, colors.HexColor("#bbbbbb")),
+                ('LINEBELOW', (0, r_idx+3), (-1, r_idx+3), 0.5, colors.HexColor("#bbbbbb")),
             ]
 
-        # ---- Fondo rojizo (festivo, solo fila 1) y malva (docencia, solo fila 3) ----
+        # ---- Fondo rojizo (festivo, filas 0-1) y malva (docencia, fila 3) ----
         for (col, row) in festivo_bg_cells:
             style_list.append(('BACKGROUND', (col, row), (col, row), FESTIVO_BG))
         for (col, row) in ud_bg_cells:
@@ -374,7 +386,7 @@ def generar_docx_calendario(info_modulo, info_fechas, planning_ledger, calendar_
         run.font.size = Pt(20)
 
         semanas = calendar.monthcalendar(year, month)
-        table = doc.add_table(rows=1 + 3 * len(semanas), cols=8)
+        table = doc.add_table(rows=1 + 4 * len(semanas), cols=8)
         table.style = "Table Grid"
         table.alignment = WD_TABLE_ALIGNMENT.CENTER
         table.allow_autofit = False
@@ -385,12 +397,12 @@ def generar_docx_calendario(info_modulo, info_fechas, planning_ledger, calendar_
             shade(cell, _CAL_HEADER_BG)
 
         for w, week in enumerate(semanas):
-            base_row = 1 + w * 3
+            base_row = 1 + w * 4
             valid_day = next(d for d in week if d != 0)
             week_num = date(year, month, valid_day).isocalendar()[1]
 
             sem_cell = table.rows[base_row].cells[0]
-            for r in range(1, 3):
+            for r in range(1, 4):
                 sem_cell = sem_cell.merge(table.rows[base_row + r].cells[0])
             set_cell(sem_cell, str(week_num), bold=True, size=14)
             shade(sem_cell, _CAL_SEM_BG)
@@ -400,22 +412,20 @@ def generar_docx_calendario(info_modulo, info_fechas, planning_ledger, calendar_
                 info = get_day_info(year, month, day)
                 if info is None:
                     continue
-                # Fila 1: día (+ festivo, si lo hay, nada más en la casilla).
-                # Fila 2: relevante, a la derecha. Fila 3: docencia (UD), a
-                # la izquierda, fondo malva.
+                # Fila 0: día (fondo rojizo si es festivo). Fila 1: nombre
+                # del festivo, centrado. Fila 2: relevante, a la derecha.
+                # Fila 3: docencia (UD), a la izquierda, fondo malva.
                 cell_dia = table.rows[base_row].cells[c]
-                cell_rel = table.rows[base_row + 1].cells[c]
-                cell_ud = table.rows[base_row + 2].cells[c]
+                cell_festivo = table.rows[base_row + 1].cells[c]
+                cell_rel = table.rows[base_row + 2].cells[c]
+                cell_ud = table.rows[base_row + 3].cells[c]
 
                 if info["es_festivo"]:
-                    texto_dia = f"{info['day']:02d}"
-                    dia_p = set_cell(cell_dia, texto_dia, bold=True, size=14, align=WD_ALIGN_PARAGRAPH.CENTER)
-                    if info["desc_festivo"]:
-                        dia_p.add_run().add_break()
-                        run = dia_p.add_run(info["desc_festivo"])
-                        run.font.size = Pt(8)
-                        run.bold = True
+                    set_cell(cell_dia, f"{info['day']:02d}", bold=True, size=14, align=WD_ALIGN_PARAGRAPH.CENTER)
                     shade(cell_dia, _CAL_FESTIVO_BG)
+                    if info["desc_festivo"]:
+                        set_cell(cell_festivo, info["desc_festivo"], bold=True, size=8, align=WD_ALIGN_PARAGRAPH.CENTER)
+                    shade(cell_festivo, _CAL_FESTIVO_BG)
                 else:
                     dia_p = set_cell(cell_dia, f"{info['day']:02d}", bold=True, size=14, align=WD_ALIGN_PARAGRAPH.LEFT)
                     if info["feoe"]:
