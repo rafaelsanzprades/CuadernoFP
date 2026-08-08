@@ -466,7 +466,7 @@ export default function MagiaPage() {
                     <Card className="p-6 border-t-4 border-t-emerald-500">
                       <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Calendar className="w-4 h-4" /></span> Calendario</h2>
                       <p className="text-body text-muted mb-6">Horario, trimestres, festivos y eventos.</p>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                           <div>
                             <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><CalendarDays className="w-[1.2em] h-[1.2em] mr-1" /></span> Calendario académico</h3>
@@ -481,7 +481,7 @@ export default function MagiaPage() {
                     <Card className="p-6 border-t-4 border-t-emerald-500">
                       <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Users className="w-4 h-4" /></span> Alumnado</h2>
                       <p className="text-body text-muted mb-6">Fichas personales, ubicación en el aula e incidencias.</p>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                           <div>
                             <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Alumnado. Ubicación en el aula</h3>
@@ -519,9 +519,33 @@ export default function MagiaPage() {
                             }}
                           />
                         </div>
+                      </div>
 
-                        {activeAlumnado.length > 0 && (
-                          <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between md:col-span-2">
+                      {activeAlumnado.length > 0 && (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                          <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                            <div>
+                              <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletín de alumnado</h3>
+                              <p className="text-body text-muted mb-4">Genera un boletín detallado de un alumnado específico.</p>
+                              <select id="alumnado_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold">
+                                {activeAlumnado.map((al: Alumnado) => (
+                                  <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre} ({al.ID})</option>
+                                ))}
+                              </select>
+                            </div>
+                            <div className="mt-6">
+                              <DualDownloadButtons
+                                type="individual"
+                                downloadingStr={downloadingStr}
+                                onDownload={(type, fmt) => {
+                                  const sel = document.getElementById('alumnado_select') as HTMLSelectElement;
+                                  if (sel && sel.value) handleDownloadPdf(type, fmt, { al_id: sel.value });
+                                }}
+                              />
+                            </div>
+                          </div>
+
+                          <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                             <div>
                               <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Contact className="w-[1.2em] h-[1.2em] mr-1" /></span> Ficha individual</h3>
                               <p className="text-body text-muted mb-4">Ficha de matrícula + tutoría de un alumno/a, para llevar a una reunión de orientación.</p>
@@ -542,15 +566,15 @@ export default function MagiaPage() {
                               />
                             </div>
                           </div>
-                        )}
-                      </div>
+                        </div>
+                      )}
                     </Card>
 
                     {/* ── Seguimiento ── */}
                     <Card className="p-6 border-t-4 border-t-emerald-500">
                       <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><TrendingUp className="w-4 h-4" /></span> Seguimiento</h2>
                       <p className="text-body text-muted mb-6">Diario de clases, secuenciación por UD y planificación mensual.</p>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                           <div>
                             <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguimiento diario</h3>
@@ -601,11 +625,9 @@ export default function MagiaPage() {
                               <input type="date" value={tri.fecha} onChange={(e) => tri.setFecha(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-body focus:border-info focus:outline-none" />
                             </div>
                             <div className="flex flex-col gap-2 mt-2">
-                              <DualDownloadButtons type={tri.tipo} opts={{ fechaCorte: tri.fecha }} downloadingStr={downloadingStr} onDownload={handleDownloadPdf}
-                                pdfLabel="PDF" docxLabel="DOCX" />
+                              <DualDownloadButtons type={tri.tipo} opts={{ fechaCorte: tri.fecha }} downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
                               <DualDownloadButtons type={`acta_${tri.key}`} opts={{ fechaCorte: tri.fecha, extra: { periodo: tri.key } }} downloadingStr={downloadingStr}
-                                onDownload={(_type, fmt, opts) => handleDownloadPdf('acta_evaluacion', fmt, opts)}
-                                pdfLabel="Acta .pdf" docxLabel="Acta .docx" />
+                                onDownload={(_type, fmt, opts) => handleDownloadPdf('acta_evaluacion', fmt, opts)} />
                               <Button variant="ghost" onClick={() => handleExportCSV(tri.key, tri.fecha)} className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
                                 <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
                               </Button>
@@ -625,11 +647,9 @@ export default function MagiaPage() {
                             </div>
                           </div>
                           <div className="flex flex-col gap-2 mt-auto">
-                            <DualDownloadButtons type="grupal_final" opts={{ fechaCorte: fechaFinal }} downloadingStr={downloadingStr} onDownload={handleDownloadPdf}
-                              pdfLabel="PDF" docxLabel="DOCX" />
+                            <DualDownloadButtons type="grupal_final" opts={{ fechaCorte: fechaFinal }} downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
                             <DualDownloadButtons type="acta_final" opts={{ fechaCorte: fechaFinal, extra: { periodo: "Final" } }} downloadingStr={downloadingStr}
-                              onDownload={(_type, fmt, opts) => handleDownloadPdf('acta_evaluacion', fmt, opts)}
-                              pdfLabel="Acta .pdf" docxLabel="Acta .docx" />
+                              onDownload={(_type, fmt, opts) => handleDownloadPdf('acta_evaluacion', fmt, opts)} />
                             <Button variant="ghost" onClick={() => handleExportCSV('Final', fechaFinal)} className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
                               <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
                             </Button>
@@ -655,55 +675,6 @@ export default function MagiaPage() {
                           </div>
                         </div>
                       </div>
-                    </Card>
-
-                    <Card className="p-6 border-t-4 border-t-blue-500">
-                      <h2 className="text-heading font-bold mb-6"><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> Alumnado individual</h2>
-                      {activeAlumnado.length > 0 ? (
-                        <div className="space-y-6">
-                          <div className="flex flex-col md:flex-row md:items-end gap-6 bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6">
-                            <div className="flex-1">
-                              <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletín de alumnado</h3>
-                              <p className="text-body text-muted mb-4">Genera un boletín detallado de un alumnado específico.</p>
-                              <select id="alumnado_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold">
-                                {activeAlumnado.map((al: Alumnado) => (
-                                  <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre} ({al.ID})</option>
-                                ))}
-                              </select>
-                            </div>
-                            <DualDownloadButtons
-                              type="individual"
-                              downloadingStr={downloadingStr}
-                              onDownload={(type, fmt) => {
-                                const sel = document.getElementById('alumnado_select') as HTMLSelectElement;
-                                if (sel && sel.value) handleDownloadPdf(type, fmt, { al_id: sel.value });
-                              }}
-                            />
-                          </div>
-
-                          <div className="flex flex-col md:flex-row md:items-end gap-6 bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6">
-                            <div className="flex-1">
-                              <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Contact className="w-[1.2em] h-[1.2em] mr-1" /></span> Ficha individual</h3>
-                              <p className="text-body text-muted mb-4">Ficha de matrícula + tutoría de un alumno/a, para llevar a una reunión de orientación.</p>
-                              <select id="ficha_al_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold">
-                                {activeAlumnado.map((al: Alumnado) => (
-                                  <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre} ({al.ID})</option>
-                                ))}
-                              </select>
-                            </div>
-                            <DualDownloadButtons
-                              type="ficha_alumnado"
-                              downloadingStr={downloadingStr}
-                              onDownload={(type, fmt) => {
-                                const sel = document.getElementById('ficha_al_select') as HTMLSelectElement;
-                                if (sel && sel.value) handleDownloadPdf(type, fmt, { al_id: sel.value, extra: { module_document_id: activeCursoId } });
-                              }}
-                            />
-                          </div>
-                        </div>
-                      ) : (
-                        <p className="text-muted italic">No hay estudiantes activos en el curso.</p>
-                      )}
                     </Card>
                   </div>
                 )}
