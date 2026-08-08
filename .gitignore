@@ -41,6 +41,7 @@ env/
 node_modules/
 .next/
 .npm/
+frontend/.firebase/
 
 # Variables de entorno (no subir credenciales)
 .env
