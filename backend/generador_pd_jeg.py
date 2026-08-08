@@ -163,10 +163,12 @@ def _build_context(data: dict) -> dict:
         # Sin campo de origen real (no hay ninguna pestaña que recoja "marco normativo"); queda vacío a propósito.
         "textos_pd_procedimientos_normativos": data.get("textos_pd_procedimientos_normativos", ""),
         # La plantilla solo tiene un placeholder para todo "Plan de contingencia" -> combina profesorado +
-        # alumnado desde config_contexto (ContingenciaTab, /metodologia?tab=contingencia), mismo motivo que arriba.
+        # alumnado + interrupción generalizada desde config_contexto (ContingenciaTab,
+        # /metodologia?tab=contingencia), mismo motivo que arriba.
         "textos_pd_plan_contingencia": "\n\n".join(filter(None, [
             config.get("contingencia_profesor", ""),
             config.get("contingencia_alumnado", ""),
+            config.get("contingencia_general", config.get("J3_contingencia", "")),
         ])),
         "textos_pd_bibliografia": data.get("textos_pd_bibliografia", ""),
         "textos_pd_publicidad": data.get("textos_pd_publicidad", ""),
