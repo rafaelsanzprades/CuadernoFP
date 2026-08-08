@@ -536,7 +536,7 @@ export default function InicioPage() {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-3 text-caption font-semibold text-muted border-t border-[var(--glass-border)] pt-4">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-3 text-body font-semibold text-muted border-t border-[var(--glass-border)] pt-4">
                 {[
                   "Identificación", "Introducción, justificación y normativa", "Contextualización",
                   "Objetivos y competencias", "Carácter intermodular y dual", "Contenidos centrados en RA",
@@ -545,8 +545,8 @@ export default function InicioPage() {
                   "Atención a la diversidad y recursos",
                 ].map((step, i, arr) => (
                   <span key={step} className="flex items-center gap-2">
-                    <span className="px-2.5 py-1 rounded-full bg-foreground/5 border border-[var(--glass-border)] text-foreground/80">{step}</span>
-                    {i < arr.length - 1 && <ArrowRight className="w-3.5 h-3.5 text-muted/50 shrink-0" />}
+                    <span className="px-3 py-1.5 rounded-full bg-foreground/5 border border-[var(--glass-border)] text-foreground/80">{step}</span>
+                    {i < arr.length - 1 && <ArrowRight className="w-4 h-4 text-muted/50 shrink-0" />}
                   </span>
                 ))}
               </div>
@@ -584,7 +584,7 @@ export default function InicioPage() {
                     )}
 
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                       {group.items.map((item, itemIdx) => (
                         <Link key={item.href} href={item.href} className="block group">
                           <Card className="h-full p-5 flex flex-col gap-3 border border-[var(--glass-border)] bg-[var(--glass-bg)] hover:bg-accent/5 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/10 cursor-pointer">
