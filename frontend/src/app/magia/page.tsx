@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Construction, Download, FileEdit, FileSpreadsheet, FileText, FolderOpen, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, BookOpen, Target, Award, ShieldCheck, Contact, FileWarning, TrendingUp } from "lucide-react";
+import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Construction, Download, FileEdit, FileSpreadsheet, FileText, FolderOpen, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, BookOpen, Target, Award, ShieldCheck, Contact, FileWarning, TrendingUp, Compass, Lightbulb, Wrench } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -232,7 +232,8 @@ export default function MagiaPage() {
   const df_act = moduleData?.df_act || [];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    programacion: 'Generación de la programación didáctica oficial, matrices de currículo y documentos de UD/Tareas.',
+    comunidades: 'Generación de la programación didáctica oficial, por comunidad autónoma.',
+    programacion: 'Documentos de apoyo: matriz de currículo y documentos individuales de UD/Tareas.',
     curso: 'Calendario, seguimiento, plano de aula, boletines y actas de evaluación del curso.',
     anexos: 'Comparativa de modelos y el informe EQAVET para la memoria final.',
   };
@@ -287,6 +288,9 @@ export default function MagiaPage() {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
                   <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
                     <TabsList className="max-w-full">
+                      <TabsTrigger value="comunidades">
+                        <MapPin className="w-4 h-4" /> Comunidades
+                      </TabsTrigger>
                       <TabsTrigger value="programacion">
                         <FileText className="w-4 h-4" /> Programación
                       </TabsTrigger>
@@ -302,8 +306,8 @@ export default function MagiaPage() {
 
                 <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
 
-                {/* ══════════════════════════ PROGRAMACIÓN ══════════════════════════ */}
-                {activeTab === "programacion" && (
+                {/* ══════════════════════════ COMUNIDADES ══════════════════════════ */}
+                {activeTab === "comunidades" && (
                   <div className="pt-2 space-y-6">
                     {(!activeCursoId || !activeModuleId) ? (
                       <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
@@ -327,83 +331,117 @@ export default function MagiaPage() {
                         </div>
                       </Card>
                     ) : (
-                      <>
-                        <div className="space-y-4 animate-in fade-in duration-500">
-                          {["Andalucía", "Aragón", "Asturias", "Baleares", "Canarias", "Cantabria", "Castilla-La Mancha", "Castilla y León", "Cataluña", "Comunidad Valenciana", "Extremadura", "Galicia", "Madrid", "Murcia", "Navarra", "País Vasco", "La Rioja", "Ceuta", "Melilla"].map((comunidad) => {
-                            const isAragon = comunidad === "Aragón";
-                            return (
-                              <details key={comunidad} open={isAragon} className="group border border-[var(--glass-border)] rounded-xl bg-background/50 mb-4 shadow-sm overflow-hidden">
-                                <summary className="p-4 font-bold cursor-pointer text-subheading flex items-center justify-between hover:bg-foreground/5 transition-colors list-none border-b border-transparent group-open:border-[var(--glass-border)] group-open:bg-foreground/5">
-                                  <span className="flex items-center gap-2"><MapPin className={`w-5 h-5 ${isAragon ? 'text-purple-500' : 'text-muted-foreground'}`} /> {comunidad}</span>
-                                  <ChevronDown className="w-5 h-5 transition-transform group-open:rotate-180 text-muted" />
-                                </summary>
-                                {isAragon ? (
-                                  <div className="p-6">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                      <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-slate-400">
-                                        <div>
-                                          <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Resumen de la Programación didáctica para el alumnado</h3>
-                                          <p className="text-body text-muted mb-6">Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.</p>
-                                        </div>
-                                        <div className="flex gap-2 mt-auto">
-                                          <Button onClick={() => handleDownloadPdf('programacion_minima_tpl', 'docx')} disabled={downloadingStr === 'programacion_minima_tpl_docx'} className="flex-1 bg-slate-600 hover:bg-slate-700 text-white">
-                                            {downloadingStr === 'programacion_minima_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD ARAGÓN Resumen.docx'}
-                                          </Button>
-                                        </div>
+                      <div className="space-y-4 animate-in fade-in duration-500">
+                        {["Andalucía", "Aragón", "Asturias", "Baleares", "Canarias", "Cantabria", "Castilla-La Mancha", "Castilla y León", "Cataluña", "Comunidad Valenciana", "Extremadura", "Galicia", "Madrid", "Murcia", "Navarra", "País Vasco", "La Rioja", "Ceuta", "Melilla"].map((comunidad) => {
+                          const isAragon = comunidad === "Aragón";
+                          return (
+                            <details key={comunidad} open={isAragon} className="group border border-[var(--glass-border)] rounded-xl bg-background/50 mb-4 shadow-sm overflow-hidden">
+                              <summary className="p-4 font-bold cursor-pointer text-subheading flex items-center justify-between hover:bg-foreground/5 transition-colors list-none border-b border-transparent group-open:border-[var(--glass-border)] group-open:bg-foreground/5">
+                                <span className="flex items-center gap-2"><MapPin className={`w-5 h-5 ${isAragon ? 'text-purple-500' : 'text-muted-foreground'}`} /> {comunidad}</span>
+                                <ChevronDown className="w-5 h-5 transition-transform group-open:rotate-180 text-muted" />
+                              </summary>
+                              {isAragon ? (
+                                <div className="p-6">
+                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-slate-400">
+                                      <div>
+                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Resumen de la Programación didáctica para el alumnado</h3>
+                                        <p className="text-body text-muted mb-6">Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.</p>
                                       </div>
-
-                                      <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-blue-400">
-                                        <div>
-                                          <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica Aragón (BOA nº: 181 de 18 de septiembre de 2025)</h3>
-                                          <p className="text-body text-muted mb-6">Versión BOA con los puntos de la Ley muy específica y concreta (no detalla secuenciación de aula ni extensa teoría).</p>
-                                        </div>
-                                        <div className="flex gap-2 mt-auto">
-                                          <Button onClick={() => handleDownloadPdf('programacion_suficiente_tpl', 'docx')} disabled={downloadingStr === 'programacion_suficiente_tpl_docx'} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
-                                            {downloadingStr === 'programacion_suficiente_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD ARAGÓN BOA.docx'}
-                                          </Button>
-                                        </div>
+                                      <div className="flex gap-2 mt-auto">
+                                        <Button onClick={() => handleDownloadPdf('programacion_minima_tpl', 'docx')} disabled={downloadingStr === 'programacion_minima_tpl_docx'} className="flex-1 bg-slate-600 hover:bg-slate-700 text-white">
+                                          {downloadingStr === 'programacion_minima_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD ARAGÓN Resumen.docx'}
+                                        </Button>
                                       </div>
+                                    </div>
 
-                                      <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-info">
-                                        <div>
-                                          <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica ARAGÓN (Modelo Oficial)</h3>
-                                          <p className="text-body text-muted mb-6">Se cumplimenta el modelo oficial de programación completo.</p>
-                                        </div>
-                                        <div className="flex flex-col gap-2 mt-auto">
-                                          <Button onClick={() => handleDownloadPdf('programacion_jeg', 'docx')} disabled={downloadingStr === 'programacion_jeg_docx'} className="w-full bg-info hover:bg-info/90 text-white">
-                                            {downloadingStr === 'programacion_jeg_docx' ? '⏳ Generando DOCX...' : 'Descargar PD ARAGÓN JEG.docx'}
-                                          </Button>
-                                        </div>
+                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-blue-400">
+                                      <div>
+                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica Aragón (BOA nº: 181 de 18 de septiembre de 2025)</h3>
+                                        <p className="text-body text-muted mb-6">Versión BOA con los puntos de la Ley muy específica y concreta (no detalla secuenciación de aula ni extensa teoría).</p>
+                                      </div>
+                                      <div className="flex gap-2 mt-auto">
+                                        <Button onClick={() => handleDownloadPdf('programacion_suficiente_tpl', 'docx')} disabled={downloadingStr === 'programacion_suficiente_tpl_docx'} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
+                                          {downloadingStr === 'programacion_suficiente_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD ARAGÓN BOA.docx'}
+                                        </Button>
+                                      </div>
+                                    </div>
+
+                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-info">
+                                      <div>
+                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica ARAGÓN (Modelo Oficial)</h3>
+                                        <p className="text-body text-muted mb-6">Se cumplimenta el modelo oficial de programación completo.</p>
+                                      </div>
+                                      <div className="flex flex-col gap-2 mt-auto">
+                                        <Button onClick={() => handleDownloadPdf('programacion_jeg', 'docx')} disabled={downloadingStr === 'programacion_jeg_docx'} className="w-full bg-info hover:bg-info/90 text-white">
+                                          {downloadingStr === 'programacion_jeg_docx' ? '⏳ Generando DOCX...' : 'Descargar PD ARAGÓN JEG.docx'}
+                                        </Button>
                                       </div>
                                     </div>
                                   </div>
-                                ) : (
-                                  <div className="p-12 text-center text-muted-foreground">
-                                    <Construction className="w-12 h-12 mx-auto mb-4 opacity-20" />
-                                    <p>Programaciones específicas para {comunidad} próximamente.</p>
-                                  </div>
-                                )}
-                              </details>
-                            );
-                          })}
-                        </div>
+                                </div>
+                              ) : (
+                                <div className="p-12 text-center text-muted-foreground">
+                                  <Construction className="w-12 h-12 mx-auto mb-4 opacity-20" />
+                                  <p>Programaciones específicas para {comunidad} próximamente.</p>
+                                </div>
+                              )}
+                            </details>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                )}
 
-                        <Card className="p-6 border-t-4 border-t-teal-500">
-                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Grid className="w-[1.2em] h-[1.2em] mr-1" /></span> Documentos de apoyo al currículo</h2>
-                          <p className="text-body text-muted mb-6">Matriz de relación entre Resultados de Aprendizaje y Unidades Didácticas.</p>
-                          <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between max-w-md">
-                            <div>
-                              <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Grid className="w-[1.2em] h-[1.2em] mr-1" /></span> Matriz RA ↔ UD</h3>
-                              <p className="text-body text-muted mb-6">Tabla cruzada de RA y su relación con las Unidades Didácticas.</p>
-                            </div>
-                            <DualDownloadButtons type="matrices" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
+                {/* ══════════════════════════ PROGRAMACIÓN (documentos de apoyo) ══════════════════════════ */}
+                {/* 4 bloques, mismo orden y nombres que el grupo "Programación" del sidebar:
+                    Contexto / Currículo / Metodología / Instrumentos. */}
+                {activeTab === "programacion" && (
+                  <div className="pt-2 space-y-4">
+                    {(!activeCursoId || !activeModuleId) ? (
+                      <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
+                        <FileText className="w-16 h-16 text-muted-foreground opacity-50" />
+                        <h2 className="text-heading font-bold">No hay curso ni programación cargada</h2>
+                        <p className="text-muted mb-4">Debes abrir o crear un archivo de programación y curso en tu Archivos.</p>
+                        <Link href="/archivos">
+                          <Button variant="primary" className="gap-2">
+                            <FolderOpen className="w-4 h-4" /> Ir a mis Archivos
+                          </Button>
+                        </Link>
+                      </Card>
+                    ) : (loadingData || !cursoData || !moduleData) ? (
+                      <Card className="p-12">
+                        <div className="space-y-3">
+                          <Skeleton className="h-8 w-1/4" />
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <Skeleton className="h-40 w-full" />
+                            <Skeleton className="h-40 w-full" />
                           </div>
+                        </div>
+                      </Card>
+                    ) : (
+                      <div className="space-y-4 animate-in fade-in duration-500">
+                        {/* ── Contexto ── */}
+                        <Card className="p-6 border-t-4 border-t-teal-500">
+                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Compass className="w-4 h-4" /></span> Contexto</h2>
+                          <p className="text-body text-muted mb-2">Información general y características del entorno.</p>
+                          <p className="text-caption text-muted italic">Sin documentos de apoyo todavía en esta sección.</p>
                         </Card>
 
+                        {/* ── Currículo ── */}
                         <Card className="p-6 border-t-4 border-t-teal-500">
-                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Unidades didácticas y tareas competenciales</h2>
-                          <p className="text-body text-muted mb-6">Documento individual (.docx) de una UD o una tarea concreta.</p>
+                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Grid className="w-4 h-4" /></span> Currículo</h2>
+                          <p className="text-body text-muted mb-6">Cruce de resultados de aprendizaje y criterios; documentos de UD y tareas.</p>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                              <div>
+                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Grid className="w-[1.2em] h-[1.2em] mr-1" /></span> Matriz RA ↔ UD</h3>
+                                <p className="text-body text-muted mb-6">Tabla cruzada de RA y su relación con las Unidades Didácticas.</p>
+                              </div>
+                              <DualDownloadButtons type="matrices" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
+                            </div>
+
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                               <div>
                                 <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Unidad didáctica</h3>
@@ -427,6 +465,7 @@ export default function MagiaPage() {
                                 {downloadingStr === 'ud_docx' ? '⏳ Generando DOCX...' : 'Descargar UD.docx'}
                               </Button>
                             </div>
+
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                               <div>
                                 <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Tarea competencial</h3>
@@ -452,7 +491,21 @@ export default function MagiaPage() {
                             </div>
                           </div>
                         </Card>
-                      </>
+
+                        {/* ── Metodología ── */}
+                        <Card className="p-6 border-t-4 border-t-teal-500">
+                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Lightbulb className="w-4 h-4" /></span> Metodología</h2>
+                          <p className="text-body text-muted mb-2">Estrategias metodológicas y recursos.</p>
+                          <p className="text-caption text-muted italic">Sin documentos de apoyo todavía en esta sección.</p>
+                        </Card>
+
+                        {/* ── Instrumentos ── */}
+                        <Card className="p-6 border-t-4 border-t-teal-500">
+                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Wrench className="w-4 h-4" /></span> Instrumentos</h2>
+                          <p className="text-body text-muted mb-2">Definición y pesos de las herramientas de evaluación.</p>
+                          <p className="text-caption text-muted italic">Sin documentos de apoyo todavía en esta sección.</p>
+                        </Card>
+                      </div>
                     )}
                   </div>
                 )}

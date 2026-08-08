@@ -91,6 +91,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "ecp-incual", label: "ECP INCUAL" },
   ],
   "/magia": [
+    { id: "comunidades", label: "Comunidades" },
     { id: "programacion", label: "Programación" },
     { id: "curso", label: "Curso" },
     { id: "anexos", label: "Anexos" },
