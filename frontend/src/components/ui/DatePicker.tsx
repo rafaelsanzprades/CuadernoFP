@@ -20,9 +20,21 @@ const DAYS_HEADER = ["L","M","X","J","V","S","D"];
 export default function DatePicker({ value, onChange, label, className, placeholder = "-", id }: DatePickerProps) {
   const today = new Date();
   const [open, setOpen] = useState(false);
+  const [openUpward, setOpenUpward] = useState(false);
   const [viewYear, setViewYear] = useState(today.getFullYear());
   const [viewMonth, setViewMonth] = useState(today.getMonth());
   const ref = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  // El calendario desplegado mide ~340px de alto; si no cabe debajo del
+  // botón (p. ej. está cerca del final de la página), se abre hacia arriba.
+  const toggleOpen = () => {
+    if (!open && buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      setOpenUpward(window.innerHeight - rect.bottom < 340);
+    }
+    setOpen(o => !o);
+  };
 
   const selectedDate = value ? new Date(value + "T12:00:00") : null;
 
@@ -94,8 +106,9 @@ export default function DatePicker({ value, onChange, label, className, placehol
       )}
       <button
         id={id}
+        ref={buttonRef}
         type="button"
-        onClick={() => setOpen(o => !o)}
+        onClick={toggleOpen}
         className={`w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground text-body flex items-center hover:border-[#14a085] focus:outline-none focus:border-[#14a085] transition-colors group ${className?.includes('text-center') ? 'justify-center gap-2' : 'justify-between text-left'}`}
       >
         <span className={selectedDate ? "text-foreground" : "text-muted"}>{displayValue}</span>
@@ -103,7 +116,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
       </button>
 
       {open && (
-        <div className="absolute z-50 mt-1 bg-[#0d1726] border border-[var(--glass-border)] rounded-xl shadow-2xl shadow-black/70 p-3 w-60">
+        <div className={`absolute z-50 ${openUpward ? "bottom-full mb-1" : "top-full mt-1"} bg-[#0d1726] border border-[var(--glass-border)] rounded-xl shadow-2xl shadow-black/70 p-3 w-60`}>
           {/* Nav: prev / mes+año / next */}
           <div className="flex items-center justify-between mb-2">
             <button

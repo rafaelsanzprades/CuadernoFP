@@ -187,7 +187,7 @@ function NotesTable({ calendar_notes, onUpdateNotes, planning_ledger }: {
 
           <tr className="border-t border-[var(--glass-border)] bg-white/3">
             <td className="p-2">
-              <DatePicker value={newDate} onChange={v => setNewDate(v)} className="w-full" placeholder={t('inicio', {defaultValue: 'Inicio...'})} />
+              <DatePicker value={newDate} onChange={v => setNewDate(v)} className="w-full" placeholder="Fecha" />
             </td>
             <td className="p-2">
               <DatePicker value={newEndDate} onChange={v => setNewEndDate(v)} className="w-full" placeholder={t('hasta_opc', {defaultValue: 'Hasta (Opcional)'})} />
