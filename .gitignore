@@ -46,3 +46,10 @@ node_modules/
 .env
 .env.local
 .env.production
+
+# Logs y scratch de depuración
+*.log
+firebase-debug.log
+pdf_debug.log
+retry_deploy.js
+test_dockerfile
