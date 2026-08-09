@@ -1,5 +1,6 @@
 "use client";
-import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Construction, Download, FileEdit, FileSpreadsheet, FileText, FolderOpen, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, BookOpen, Target, Award, ShieldCheck, Contact, FileWarning, TrendingUp, Compass, Lightbulb, Wrench } from "lucide-react";
+import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Construction, Download, FileEdit, FileSpreadsheet, FileText, FolderOpen, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp, Compass, Lightbulb, Wrench } from "lucide-react";
+import * as XLSX from "xlsx";
 import React, { useState, useEffect, useMemo } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -83,15 +84,9 @@ export default function MagiaPage() {
   const [loadingData, setLoadingData] = useState(true);
   const [activeTab, setActiveTab] = useState("programacion");
 
-  const [fecha1T, setFecha1T] = useState("");
-  const [fecha2T, setFecha2T] = useState("");
-  const [fecha3T, setFecha3T] = useState("");
   const [fechaFinal, setFechaFinal] = useState("");
 
   const [comparativaPdContent, setComparativaPdContent] = useState("");
-
-  const [incidenciaFecha, setIncidenciaFecha] = useState("");
-  const [incidenciaMotivo, setIncidenciaMotivo] = useState("");
 
   useEffect(() => {
     if (!comparativaPdContent) {
@@ -127,9 +122,6 @@ export default function MagiaPage() {
 
   useEffect(() => {
     if (cursoData?.info_fechas) {
-      setFecha1T(cursoData.info_fechas.fin_1t || "");
-      setFecha2T(cursoData.info_fechas.fin_2t || "");
-      setFecha3T(cursoData.info_fechas.fin_3t || "");
       setFechaFinal(cursoData.info_fechas.fin_curso || "");
     }
   }, [cursoData?.info_fechas]);
@@ -212,34 +204,28 @@ export default function MagiaPage() {
     }
   };
 
-  const handleExportCSV = (triKey: string, fechaCorte: string) => {
+  const handleExportXlsx = (triKey: string, fechaCorte?: string) => {
     const df_al = cursoData?.df_al || [];
     const df_eval = cursoData?.df_eval || [];
     const activeAl = df_al.filter((al: Alumnado) => al.Estado !== "Baja");
+    activeAl.sort((a: Alumnado, b: Alumnado) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
 
-    let csvContent = `Boletin de Calificaciones - ${triKey}\n`;
-    csvContent += `Modulo: ${moduleData?.info_modulo?.modulo || ""}\n`;
-    csvContent += `Fecha de corte (Acta): ${fechaCorte}\n\n`;
-
-    csvContent += `ID,Apellidos,Nombre,Nota Media ${triKey}\n`;
-
-    activeAl.forEach((al: any) => {
+    const rows = activeAl.map((al: any) => {
       const evRow = df_eval.find((e: any) => e.ID === al.ID);
-      let notaMedia = "";
-      if (evRow) {
-        if (triKey === 'Final') notaMedia = evRow.Nota_Final || "";
-        else notaMedia = evRow[`${triKey}_Nota`] || "";
-      }
-      csvContent += `${al.ID},"${al.Apellidos || ""}","${al.Nombre || ""}",${notaMedia}\n`;
+      const notaMedia = evRow ? (triKey === 'Final' ? evRow.Nota_Final : evRow[`${triKey}_Nota`]) : "";
+      return {
+        ID: al.ID,
+        Apellidos: al.Apellidos || "",
+        Nombre: al.Nombre || "",
+        [`Nota media ${triKey}`]: notaMedia ?? "",
+      };
     });
 
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `Notas_${triKey}_${moduleData?.info_modulo?.modulo || "modulo"}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const ws = XLSX.utils.json_to_sheet(rows);
+    ws["!cols"] = [{ wch: 10 }, { wch: 24 }, { wch: 18 }, { wch: 16 }];
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, triKey.slice(0, 31));
+    XLSX.writeFile(wb, `Notas_${triKey}_${moduleData?.info_modulo?.modulo || "modulo"}.xlsx`);
   };
 
   const df_al = cursoData?.df_al || [];
@@ -551,7 +537,7 @@ export default function MagiaPage() {
                     {/* ── Alumnado ── */}
                     <Card className="p-6 border-t-4 border-t-emerald-500">
                       <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Users className="w-4 h-4" /></span> Alumnado</h2>
-                      <p className="text-body text-muted mb-6">Fichas personales, ubicación en el aula e incidencias.</p>
+                      <p className="text-body text-muted mb-6">Fichas personales y ubicación en el aula.</p>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                           <div>
@@ -559,36 +545,6 @@ export default function MagiaPage() {
                             <p className="text-body text-muted mb-6">Distribución y ubicación del alumnado en el aula.</p>
                           </div>
                           <DualDownloadButtons type="alumnado_ubicacion" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
-                        </div>
-
-                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                          <div>
-                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileWarning className="w-[1.2em] h-[1.2em] mr-1" /></span> Parte de incidencias</h3>
-                            <p className="text-body text-muted mb-4">Justificante de una falta o incidencia concreta.</p>
-                            {activeAlumnado.length > 0 ? (
-                              <div className="space-y-2 mb-4">
-                                <select id="incidencia_al_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-2 text-[var(--foreground)] focus:border-info focus:outline-none font-bold text-caption">
-                                  {activeAlumnado.map((al: Alumnado) => (
-                                    <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre}</option>
-                                  ))}
-                                </select>
-                                <input type="date" value={incidenciaFecha} onChange={(e) => setIncidenciaFecha(e.target.value)}
-                                  className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-caption focus:border-info focus:outline-none" />
-                                <input type="text" placeholder="Motivo (opcional)" value={incidenciaMotivo} onChange={(e) => setIncidenciaMotivo(e.target.value)}
-                                  className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-caption focus:border-info focus:outline-none" />
-                              </div>
-                            ) : (
-                              <p className="text-muted italic mb-4">No hay estudiantes activos.</p>
-                            )}
-                          </div>
-                          <DualDownloadButtons
-                            type="parte_incidencia"
-                            downloadingStr={downloadingStr}
-                            onDownload={(type, fmt) => {
-                              const sel = document.getElementById('incidencia_al_select') as HTMLSelectElement;
-                              if (sel && sel.value) handleDownloadPdf(type, fmt, { al_id: sel.value, extra: { fecha_incidencia: incidenciaFecha, motivo_incidencia: incidenciaMotivo } });
-                            }}
-                          />
                         </div>
                       </div>
                     </Card>
@@ -675,33 +631,36 @@ export default function MagiaPage() {
                         </div>
                       )}
 
-                      <h3 className="text-subheading font-bold mb-4 mt-2"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletines y actas de evaluación</h3>
-
                       {/* Primera fila: 3 Trimestres */}
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
-                          { key: "1T", tipo: "grupal_1t", fecha: fecha1T, setFecha: setFecha1T, label: "1er trimestre", ini: cursoData?.info_fechas?.ini_1t, fin: cursoData?.info_fechas?.fin_1t },
-                          { key: "2T", tipo: "grupal_2t", fecha: fecha2T, setFecha: setFecha2T, label: "2º trimestre", ini: cursoData?.info_fechas?.ini_2t, fin: cursoData?.info_fechas?.fin_2t },
-                          { key: "3T", tipo: "grupal_3t", fecha: fecha3T, setFecha: setFecha3T, label: "3er trimestre", ini: cursoData?.info_fechas?.ini_3t, fin: cursoData?.info_fechas?.fin_3t },
+                          { key: "1T", tipo: "grupal_1t", label: "1er trimestre", ini: cursoData?.info_fechas?.ini_1t, fin: cursoData?.info_fechas?.fin_1t },
+                          { key: "2T", tipo: "grupal_2t", label: "2º trimestre", ini: cursoData?.info_fechas?.ini_2t, fin: cursoData?.info_fechas?.fin_2t },
+                          { key: "3T", tipo: "grupal_3t", label: "3er trimestre", ini: cursoData?.info_fechas?.ini_3t, fin: cursoData?.info_fechas?.fin_3t },
                         ].map(tri => (
                           <div key={tri.key} className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
                             <div>
-                              <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {tri.label}</h3>
-                              <div className="text-caption text-muted mb-2">
-                                Inicio: <span className="font-mono text-foreground">{formatD(tri.ini)}</span><br />
-                                Fin: <span className="font-mono text-foreground">{formatD(tri.fin)}</span>
+                              <h3 className="text-subheading font-bold mb-3"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletín del {tri.label}</h3>
+                              <div className="grid grid-cols-2 gap-2">
+                                <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-lg py-2">
+                                  <div className="text-caption text-muted">Inicio</div>
+                                  <div className="text-subheading font-mono font-bold text-foreground">{formatD(tri.ini)}</div>
+                                </div>
+                                <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-lg py-2">
+                                  <div className="text-caption text-muted">Fin</div>
+                                  <div className="text-subheading font-mono font-bold text-foreground">{formatD(tri.fin)}</div>
+                                </div>
                               </div>
                             </div>
-                            <div className="text-left mt-auto">
-                              <label className="block text-caption text-muted mb-1 font-bold">Fecha de corte / acta:</label>
-                              <input type="date" value={tri.fecha} onChange={(e) => tri.setFecha(e.target.value)} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-foreground text-body focus:border-info focus:outline-none" />
-                            </div>
-                            <div className="flex flex-col gap-2 mt-2">
-                              <DualDownloadButtons type={tri.tipo} opts={{ fechaCorte: tri.fecha }} downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
-                              <DualDownloadButtons type={`acta_${tri.key}`} opts={{ fechaCorte: tri.fecha, extra: { periodo: tri.key } }} downloadingStr={downloadingStr}
-                                onDownload={(_type, fmt, opts) => handleDownloadPdf('acta_evaluacion', fmt, opts)} />
-                              <Button variant="ghost" onClick={() => handleExportCSV(tri.key, tri.fecha)} className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
-                                <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
+                            <div className="flex gap-2 mt-2">
+                              <Button onClick={() => handleDownloadPdf(tri.tipo, "pdf", { fechaCorte: tri.fin })} disabled={downloadingStr === `${tri.tipo}_pdf`} className="flex-1">
+                                {downloadingStr === `${tri.tipo}_pdf` ? "⏳..." : "Vista previa .pdf"}
+                              </Button>
+                              <Button variant="secondary" onClick={() => handleDownloadPdf(tri.tipo, "docx", { fechaCorte: tri.fin })} disabled={downloadingStr === `${tri.tipo}_docx`} className="flex-1">
+                                {downloadingStr === `${tri.tipo}_docx` ? "⏳..." : "Descarga editable .docx"}
+                              </Button>
+                              <Button variant="ghost" onClick={() => handleExportXlsx(tri.key, tri.fin)} className="flex-1 border border-success/30 text-success hover:bg-success/10 flex items-center justify-center gap-1.5">
+                                <FileSpreadsheet className="w-4 h-4" /> Descarga editable .xlsx
                               </Button>
                             </div>
                           </div>
@@ -722,8 +681,8 @@ export default function MagiaPage() {
                             <DualDownloadButtons type="grupal_final" opts={{ fechaCorte: fechaFinal }} downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
                             <DualDownloadButtons type="acta_final" opts={{ fechaCorte: fechaFinal, extra: { periodo: "Final" } }} downloadingStr={downloadingStr}
                               onDownload={(_type, fmt, opts) => handleDownloadPdf('acta_evaluacion', fmt, opts)} />
-                            <Button variant="ghost" onClick={() => handleExportCSV('Final', fechaFinal)} className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
-                              <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
+                            <Button variant="ghost" onClick={() => handleExportXlsx('Final', fechaFinal)} className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
+                              <FileSpreadsheet className="w-4 h-4" /> Descarga editable .xlsx
                             </Button>
                           </div>
                         </div>
@@ -755,9 +714,24 @@ export default function MagiaPage() {
                 {activeTab === "anexos" && (
                   <div className="pt-2 space-y-6">
                     <Card className="p-8 border-t-4 border-t-amber-500">
-                      <div className="prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-th:bg-foreground/5 prose-table:border-collapse prose-table:w-full">
+                      <style>{`
+                        .pd-comparativa table { table-layout: fixed; width: 100%; }
+                        .pd-comparativa th:nth-child(1), .pd-comparativa td:nth-child(1) { width: 3.5rem; }
+                        .pd-comparativa th:nth-child(2), .pd-comparativa td:nth-child(2) { width: 30%; }
+                        .pd-comparativa th:nth-child(3), .pd-comparativa td:nth-child(3),
+                        .pd-comparativa th:nth-child(4), .pd-comparativa td:nth-child(4),
+                        .pd-comparativa th:nth-child(5), .pd-comparativa td:nth-child(5) { width: 23%; }
+                        .pd-comparativa th, .pd-comparativa td { vertical-align: top; word-break: break-word; }
+                      `}</style>
+                      <div className="pd-comparativa prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-th:bg-foreground/5 prose-table:border-collapse prose-table:w-full">
                         {comparativaPdContent ? (
-                          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+                          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}
+                            components={{
+                              table: ({ children }) => (
+                                <div className="overflow-x-auto"><table>{children}</table></div>
+                              ),
+                            }}
+                          >
                             {comparativaPdContent}
                           </ReactMarkdown>
                         ) : (
