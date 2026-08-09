@@ -121,23 +121,30 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
       }
     }
 
-    if (isFestivo || hours <= 0) return;
+    if (isFestivo) return;
 
     const isPastOrToday = d.getTime() <= simulatedToday.getTime();
 
-    // Check FEOE logic
+    // La FEOE ocupa todos los días lectivos de lunes a viernes de su rango,
+    // independientemente del horario semanal habitual del módulo (que solo
+    // define los días/horas de clase normal) — por eso se comprueba antes
+    // del "hours <= 0 return" de más abajo, no después.
     const isFeoe = inRange(d, feoS, feoE);
     if (isFeoe && docencia_dual === 'sin_docencia') {
       newPlanningLedger[lookupDateStr] = ["FEOE"];
-      const monthPrefix = monthKeys[d.getMonth()];
-      const prvKey = `${monthPrefix}_Prv`;
-      const impKey = `${monthPrefix}_Imp`;
-      prvTracker["FEOE"][prvKey] = (prvTracker["FEOE"][prvKey] || 0) + hours;
-      if (isPastOrToday) {
-        prvTracker["FEOE"][impKey] = (prvTracker["FEOE"][impKey] || 0) + hours;
+      if (hours > 0) {
+        const monthPrefix = monthKeys[d.getMonth()];
+        const prvKey = `${monthPrefix}_Prv`;
+        const impKey = `${monthPrefix}_Imp`;
+        prvTracker["FEOE"][prvKey] = (prvTracker["FEOE"][prvKey] || 0) + hours;
+        if (isPastOrToday) {
+          prvTracker["FEOE"][impKey] = (prvTracker["FEOE"][impKey] || 0) + hours;
+        }
       }
       return; // Skip consuming UD hours
     }
+
+    if (hours <= 0) return;
 
     // Allocate available hours to UDs
     let hoursLeft = hours;
