@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Construction, Download, FileEdit, FileSpreadsheet, FileText, FolderOpen, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp, Compass, Lightbulb, Wrench } from "lucide-react";
+import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Download, FileEdit, FileSpreadsheet, FileText, FolderOpen, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp, Compass, Lightbulb, Wrench } from "lucide-react";
 import * as XLSX from "xlsx";
 import React, { useState, useEffect, useMemo } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -212,7 +212,9 @@ export default function MagiaPage() {
 
     const rows = activeAl.map((al: any) => {
       const evRow = df_eval.find((e: any) => e.ID === al.ID);
-      const notaMedia = evRow ? (triKey === 'Final' ? evRow.Nota_Final : evRow[`${triKey}_Nota`]) : "";
+      const notaMedia = evRow
+        ? (triKey === 'Final' ? evRow.Nota_Final_FO : triKey === 'Extraordinaria' ? evRow.Nota_Final_FE : evRow[`${triKey}_Nota`])
+        : "";
       return {
         ID: al.ID,
         Apellidos: al.Apellidos || "",
@@ -409,7 +411,7 @@ export default function MagiaPage() {
 
                                     <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                                       <div>
-                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD+. Programación didáctica detallada</h3>
+                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD+. Programación didáctica detallada ({comunidad})</h3>
                                         <p className="text-body text-muted mb-6">Se cumplimenta el modelo oficial de programación completo.</p>
                                       </div>
                                       <div className="mt-auto">
@@ -417,7 +419,6 @@ export default function MagiaPage() {
                                       </div>
                                     </div>
                                   </div>
-                                  <p className="text-caption text-muted italic text-center mt-4"><Construction className="w-4 h-4 inline mr-1 opacity-60" /> Programaciones específicas para {comunidad} próximamente.</p>
                                 </div>
                               )}
                             </details>
@@ -467,7 +468,7 @@ export default function MagiaPage() {
                         <Card className="p-6 border-t-4 border-t-teal-500">
                           <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Grid className="w-4 h-4" /></span> Currículo</h2>
                           <p className="text-body text-muted mb-6">Cruce de resultados de aprendizaje y criterios; documentos de UD y tareas.</p>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                               <div>
                                 <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Grid className="w-[1.2em] h-[1.2em] mr-1" /></span> Matriz RA ↔ UD</h3>
@@ -578,7 +579,31 @@ export default function MagiaPage() {
                         </div>
 
                         {activeAlumnado.length > 0 && (
-                          <div className="md:col-span-2 bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                          <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                            <div>
+                              <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Progreso del alumnado</h3>
+                              <p className="text-body text-muted mb-4">Genera un informe del avance del alumnado.</p>
+                              <select id="alumnado_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold">
+                                {activeAlumnado.map((al: Alumnado) => (
+                                  <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre} ({al.ID})</option>
+                                ))}
+                              </select>
+                            </div>
+                            <div className="mt-6">
+                              <DualDownloadButtons
+                                type="individual"
+                                downloadingStr={downloadingStr}
+                                onDownload={(type, fmt) => {
+                                  const sel = document.getElementById('alumnado_select') as HTMLSelectElement;
+                                  if (sel && sel.value) handleDownloadPdf(type, fmt, { al_id: sel.value });
+                                }}
+                              />
+                            </div>
+                          </div>
+                        )}
+
+                        {activeAlumnado.length > 0 && (
+                          <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                             <div>
                               <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Contact className="w-[1.2em] h-[1.2em] mr-1" /></span> Ficha individual</h3>
                               <p className="text-body text-muted mb-4">Ficha de matrícula + tutoría de un alumno/a, para llevar a una reunión de orientación.</p>
@@ -637,30 +662,6 @@ export default function MagiaPage() {
                       <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Award className="w-4 h-4" /></span> Calificaciones</h2>
                       <p className="text-body text-muted mb-6">Boletines, actas de evaluación e informes por alumno/a.</p>
 
-                      {activeAlumnado.length > 0 && (
-                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between mb-6">
-                          <div>
-                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletín de alumnado</h3>
-                            <p className="text-body text-muted mb-4">Genera un boletín detallado de un alumnado específico.</p>
-                            <select id="alumnado_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold">
-                              {activeAlumnado.map((al: Alumnado) => (
-                                <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre} ({al.ID})</option>
-                              ))}
-                            </select>
-                          </div>
-                          <div className="mt-6">
-                            <DualDownloadButtons
-                              type="individual"
-                              downloadingStr={downloadingStr}
-                              onDownload={(type, fmt) => {
-                                const sel = document.getElementById('alumnado_select') as HTMLSelectElement;
-                                if (sel && sel.value) handleDownloadPdf(type, fmt, { al_id: sel.value });
-                              }}
-                            />
-                          </div>
-                        </div>
-                      )}
-
                       {/* Primera fila: 3 Trimestres */}
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
@@ -715,14 +716,15 @@ export default function MagiaPage() {
                         </div>
 
                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
-                          <div>
-                            <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Eval. Final Extraordinaria</h3>
-                            <p className="text-caption text-muted italic mt-2">Próximamente disponible</p>
-                          </div>
+                          <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Evaluación final extraordinaria</h3>
                           <div className="flex gap-2 mt-auto">
-                            <Button disabled className="flex-1">Vista .pdf</Button>
-                            <Button variant="secondary" disabled className="flex-1">Editable .docx</Button>
-                            <Button variant="success" disabled className="flex-1 flex items-center justify-center gap-1.5">
+                            <Button onClick={() => handleDownloadPdf('grupal_final', 'pdf', { fechaCorte: fechaFinal })} disabled={downloadingStr === 'grupal_final_pdf'} className="flex-1">
+                              {downloadingStr === 'grupal_final_pdf' ? '⏳...' : 'Vista .pdf'}
+                            </Button>
+                            <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_final', 'docx', { fechaCorte: fechaFinal })} disabled={downloadingStr === 'grupal_final_docx'} className="flex-1">
+                              {downloadingStr === 'grupal_final_docx' ? '⏳...' : 'Editable .docx'}
+                            </Button>
+                            <Button variant="success" onClick={() => handleExportXlsx('Extraordinaria', fechaFinal)} className="flex-1 flex items-center justify-center gap-1.5">
                               <FileSpreadsheet className="w-4 h-4" /> Editable .xlsx
                             </Button>
                           </div>
