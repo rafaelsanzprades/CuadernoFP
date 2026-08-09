@@ -29,10 +29,10 @@ type DownloadOpts = {
   extra?: Record<string, any>;
 };
 
-/** Par de botones "Vista previa .pdf" / "Descarga editable .docx" para los
- * generadores que soportan ambos formatos. */
+/** Par de botones "Vista .pdf" / "Editable .docx" para los generadores que
+ * soportan ambos formatos. */
 function DualDownloadButtons({
-  type, opts, downloadingStr, onDownload, pdfLabel = "Vista previa .pdf", docxLabel = "Descarga editable .docx",
+  type, opts, downloadingStr, onDownload, pdfLabel = "Vista .pdf", docxLabel = "Editable .docx",
 }: {
   type: string;
   opts?: DownloadOpts;
@@ -654,13 +654,13 @@ export default function MagiaPage() {
                             </div>
                             <div className="flex gap-2 mt-2">
                               <Button onClick={() => handleDownloadPdf(tri.tipo, "pdf", { fechaCorte: tri.fin })} disabled={downloadingStr === `${tri.tipo}_pdf`} className="flex-1">
-                                {downloadingStr === `${tri.tipo}_pdf` ? "⏳..." : "Vista previa .pdf"}
+                                {downloadingStr === `${tri.tipo}_pdf` ? "⏳..." : "Vista .pdf"}
                               </Button>
                               <Button variant="secondary" onClick={() => handleDownloadPdf(tri.tipo, "docx", { fechaCorte: tri.fin })} disabled={downloadingStr === `${tri.tipo}_docx`} className="flex-1">
-                                {downloadingStr === `${tri.tipo}_docx` ? "⏳..." : "Descarga editable .docx"}
+                                {downloadingStr === `${tri.tipo}_docx` ? "⏳..." : "Editable .docx"}
                               </Button>
-                              <Button variant="ghost" onClick={() => handleExportXlsx(tri.key, tri.fin)} className="flex-1 border border-success/30 text-success hover:bg-success/10 flex items-center justify-center gap-1.5">
-                                <FileSpreadsheet className="w-4 h-4" /> Descarga editable .xlsx
+                              <Button variant="success" onClick={() => handleExportXlsx(tri.key, tri.fin)} className="flex-1 flex items-center justify-center gap-1.5">
+                                <FileSpreadsheet className="w-4 h-4" /> Editable .xlsx
                               </Button>
                             </div>
                           </div>
@@ -681,8 +681,8 @@ export default function MagiaPage() {
                             <DualDownloadButtons type="grupal_final" opts={{ fechaCorte: fechaFinal }} downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
                             <DualDownloadButtons type="acta_final" opts={{ fechaCorte: fechaFinal, extra: { periodo: "Final" } }} downloadingStr={downloadingStr}
                               onDownload={(_type, fmt, opts) => handleDownloadPdf('acta_evaluacion', fmt, opts)} />
-                            <Button variant="ghost" onClick={() => handleExportXlsx('Final', fechaFinal)} className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
-                              <FileSpreadsheet className="w-4 h-4" /> Descarga editable .xlsx
+                            <Button variant="success" onClick={() => handleExportXlsx('Final', fechaFinal)} className="w-full text-caption flex items-center justify-center gap-2">
+                              <FileSpreadsheet className="w-4 h-4" /> Editable .xlsx
                             </Button>
                           </div>
                         </div>
@@ -700,8 +700,8 @@ export default function MagiaPage() {
                             <Button variant="secondary" disabled className="w-full text-caption">
                               PDF Boletín Extraordinaria
                             </Button>
-                            <Button variant="ghost" disabled className="w-full border border-success/30 text-success hover:bg-success/10 text-caption flex items-center justify-center gap-2">
-                              <FileSpreadsheet className="w-4 h-4" /> Excel / CSV
+                            <Button variant="success" disabled className="w-full text-caption flex items-center justify-center gap-2">
+                              <FileSpreadsheet className="w-4 h-4" /> Editable .xlsx
                             </Button>
                           </div>
                         </div>
