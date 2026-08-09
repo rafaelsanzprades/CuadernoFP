@@ -346,48 +346,78 @@ export default function MagiaPage() {
                               </summary>
                               {isAragon ? (
                                 <div className="p-6">
-                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-slate-400">
+                                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                                       <div>
-                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Resumen de la Programación didáctica para el alumnado</h3>
+                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD-. Resumen para el alumnado</h3>
                                         <p className="text-body text-muted mb-6">Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.</p>
                                       </div>
-                                      <div className="flex gap-2 mt-auto">
-                                        <Button onClick={() => handleDownloadPdf('programacion_minima_tpl', 'docx')} disabled={downloadingStr === 'programacion_minima_tpl_docx'} className="flex-1 bg-slate-600 hover:bg-slate-700 text-white">
-                                          {downloadingStr === 'programacion_minima_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD ARAGÓN Resumen.docx'}
+                                      <div className="mt-auto">
+                                        <Button onClick={() => handleDownloadPdf('programacion_minima_tpl', 'docx')} disabled={downloadingStr === 'programacion_minima_tpl_docx'} className="w-full">
+                                          {downloadingStr === 'programacion_minima_tpl_docx' ? '⏳...' : 'Editable .docx'}
                                         </Button>
                                       </div>
                                     </div>
 
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-blue-400">
+                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                                       <div>
-                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica Aragón (BOA nº: 181 de 18 de septiembre de 2025)</h3>
+                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD=. Programación didáctica BOA nº: 181 18 septiembre 2025</h3>
                                         <p className="text-body text-muted mb-6">Versión BOA con los puntos de la Ley muy específica y concreta (no detalla secuenciación de aula ni extensa teoría).</p>
                                       </div>
-                                      <div className="flex gap-2 mt-auto">
-                                        <Button onClick={() => handleDownloadPdf('programacion_suficiente_tpl', 'docx')} disabled={downloadingStr === 'programacion_suficiente_tpl_docx'} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
-                                          {downloadingStr === 'programacion_suficiente_tpl_docx' ? '⏳ Generando DOCX...' : 'Descargar PD ARAGÓN BOA.docx'}
+                                      <div className="mt-auto">
+                                        <Button onClick={() => handleDownloadPdf('programacion_suficiente_tpl', 'docx')} disabled={downloadingStr === 'programacion_suficiente_tpl_docx'} className="w-full">
+                                          {downloadingStr === 'programacion_suficiente_tpl_docx' ? '⏳...' : 'Editable .docx'}
                                         </Button>
                                       </div>
                                     </div>
 
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between border-l-4 border-l-info">
+                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                                       <div>
-                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Programación didáctica ARAGÓN (Modelo Oficial)</h3>
+                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD+. Programación didáctica CIFPA</h3>
                                         <p className="text-body text-muted mb-6">Se cumplimenta el modelo oficial de programación completo.</p>
                                       </div>
-                                      <div className="flex flex-col gap-2 mt-auto">
-                                        <Button onClick={() => handleDownloadPdf('programacion_jeg', 'docx')} disabled={downloadingStr === 'programacion_jeg_docx'} className="w-full bg-info hover:bg-info/90 text-white">
-                                          {downloadingStr === 'programacion_jeg_docx' ? '⏳ Generando DOCX...' : 'Descargar PD ARAGÓN JEG.docx'}
+                                      <div className="mt-auto">
+                                        <Button onClick={() => handleDownloadPdf('programacion_jeg', 'docx')} disabled={downloadingStr === 'programacion_jeg_docx'} className="w-full">
+                                          {downloadingStr === 'programacion_jeg_docx' ? '⏳...' : 'Editable .docx'}
                                         </Button>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                               ) : (
-                                <div className="p-12 text-center text-muted-foreground">
-                                  <Construction className="w-12 h-12 mx-auto mb-4 opacity-20" />
-                                  <p>Programaciones específicas para {comunidad} próximamente.</p>
+                                <div className="p-6">
+                                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                                      <div>
+                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD-. Resumen para el alumnado</h3>
+                                        <p className="text-body text-muted mb-6">Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.</p>
+                                      </div>
+                                      <div className="mt-auto">
+                                        <Button disabled className="w-full">Editable .docx</Button>
+                                      </div>
+                                    </div>
+
+                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                                      <div>
+                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD=. Programación didáctica ({comunidad})</h3>
+                                        <p className="text-body text-muted mb-6">Versión ajustada a la normativa oficial de {comunidad}.</p>
+                                      </div>
+                                      <div className="mt-auto">
+                                        <Button disabled className="w-full">Editable .docx</Button>
+                                      </div>
+                                    </div>
+
+                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                                      <div>
+                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD+. Programación didáctica detallada</h3>
+                                        <p className="text-body text-muted mb-6">Se cumplimenta el modelo oficial de programación completo.</p>
+                                      </div>
+                                      <div className="mt-auto">
+                                        <Button disabled className="w-full">Editable .docx</Button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <p className="text-caption text-muted italic text-center mt-4"><Construction className="w-4 h-4 inline mr-1 opacity-60" /> Programaciones específicas para {comunidad} próximamente.</p>
                                 </div>
                               )}
                             </details>
@@ -546,6 +576,30 @@ export default function MagiaPage() {
                           </div>
                           <DualDownloadButtons type="alumnado_ubicacion" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
                         </div>
+
+                        {activeAlumnado.length > 0 && (
+                          <div className="md:col-span-2 bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                            <div>
+                              <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Contact className="w-[1.2em] h-[1.2em] mr-1" /></span> Ficha individual</h3>
+                              <p className="text-body text-muted mb-4">Ficha de matrícula + tutoría de un alumno/a, para llevar a una reunión de orientación.</p>
+                              <select id="ficha_al_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold">
+                                {activeAlumnado.map((al: Alumnado) => (
+                                  <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre} ({al.ID})</option>
+                                ))}
+                              </select>
+                            </div>
+                            <div className="mt-6">
+                              <DualDownloadButtons
+                                type="ficha_alumnado"
+                                downloadingStr={downloadingStr}
+                                onDownload={(type, fmt) => {
+                                  const sel = document.getElementById('ficha_al_select') as HTMLSelectElement;
+                                  if (sel && sel.value) handleDownloadPdf(type, fmt, { al_id: sel.value, extra: { module_document_id: activeCursoId } });
+                                }}
+                              />
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </Card>
 
@@ -584,49 +638,25 @@ export default function MagiaPage() {
                       <p className="text-body text-muted mb-6">Boletines, actas de evaluación e informes por alumno/a.</p>
 
                       {activeAlumnado.length > 0 && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                          <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                            <div>
-                              <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletín de alumnado</h3>
-                              <p className="text-body text-muted mb-4">Genera un boletín detallado de un alumnado específico.</p>
-                              <select id="alumnado_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold">
-                                {activeAlumnado.map((al: Alumnado) => (
-                                  <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre} ({al.ID})</option>
-                                ))}
-                              </select>
-                            </div>
-                            <div className="mt-6">
-                              <DualDownloadButtons
-                                type="individual"
-                                downloadingStr={downloadingStr}
-                                onDownload={(type, fmt) => {
-                                  const sel = document.getElementById('alumnado_select') as HTMLSelectElement;
-                                  if (sel && sel.value) handleDownloadPdf(type, fmt, { al_id: sel.value });
-                                }}
-                              />
-                            </div>
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between mb-6">
+                          <div>
+                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletín de alumnado</h3>
+                            <p className="text-body text-muted mb-4">Genera un boletín detallado de un alumnado específico.</p>
+                            <select id="alumnado_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold">
+                              {activeAlumnado.map((al: Alumnado) => (
+                                <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre} ({al.ID})</option>
+                              ))}
+                            </select>
                           </div>
-
-                          <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                            <div>
-                              <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Contact className="w-[1.2em] h-[1.2em] mr-1" /></span> Ficha individual</h3>
-                              <p className="text-body text-muted mb-4">Ficha de matrícula + tutoría de un alumno/a, para llevar a una reunión de orientación.</p>
-                              <select id="ficha_al_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold">
-                                {activeAlumnado.map((al: Alumnado) => (
-                                  <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre} ({al.ID})</option>
-                                ))}
-                              </select>
-                            </div>
-                            <div className="mt-6">
-                              <DualDownloadButtons
-                                type="ficha_alumnado"
-                                downloadingStr={downloadingStr}
-                                onDownload={(type, fmt) => {
-                                  const sel = document.getElementById('ficha_al_select') as HTMLSelectElement;
-                                  if (sel && sel.value) handleDownloadPdf(type, fmt, { al_id: sel.value, extra: { module_document_id: activeCursoId } });
-                                }}
-                              />
-                            </div>
+                          <div className="mt-6">
+                            <DualDownloadButtons
+                              type="individual"
+                              downloadingStr={downloadingStr}
+                              onDownload={(type, fmt) => {
+                                const sel = document.getElementById('alumnado_select') as HTMLSelectElement;
+                                if (sel && sel.value) handleDownloadPdf(type, fmt, { al_id: sel.value });
+                              }}
+                            />
                           </div>
                         </div>
                       )}
