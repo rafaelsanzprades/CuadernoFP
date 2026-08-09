@@ -65,7 +65,7 @@ export default function EstadisticasTab() {
       if (evalPeriod === "1T") notaStr = row.Nota_1T;
       else if (evalPeriod === "2T") notaStr = row.Nota_2T;
       else if (evalPeriod === "3T") notaStr = row.Nota_3T;
-      else notaStr = row.Nota_Final;
+      else notaStr = row.Nota_Final_FO;
 
       const notaNum = parseFloat(notaStr);
       if (!isNaN(notaNum) && notaNum > 0) {
@@ -114,8 +114,8 @@ export default function EstadisticasTab() {
         // We will fake RA averages if not stored directly in df_eval for now
         // In reality, this requires recalculating the notes per RA based on CEs
         // For visual analytics, we simulate RA values based on Nota Final
-        if (row && parseFloat(row.Nota_Final) > 0) {
-           const finalNota = parseFloat(row.Nota_Final);
+        if (row && parseFloat(row.Nota_Final_FO) > 0) {
+           const finalNota = parseFloat(row.Nota_Final_FO);
            // Add slight variation based on RA id
            const variation = (parseInt(ra.id_ra) % 3) * 0.5 - 0.5;
            const val = Math.max(1, Math.min(10, finalNota + variation));

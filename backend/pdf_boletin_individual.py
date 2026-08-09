@@ -181,7 +181,7 @@ def generar_pdf_boletin_individual(
         n2 = float(df_eval.at[idx_ev, "2T_Nota"]) if not pd.isna(df_eval.at[idx_ev, "2T_Nota"]) else 0.0
         n3 = float(df_eval.at[idx_ev, "3T_Nota"]) if not pd.isna(df_eval.at[idx_ev, "3T_Nota"]) else 0.0
         notas_student = {"1T": n1, "2T": n2, "3T": n3}
-        nota_final = float(df_eval.at[idx_ev, "Nota_Final"]) if not pd.isna(df_eval.at[idx_ev, "Nota_Final"]) else 0.0
+        nota_final = float(df_eval.at[idx_ev, "Nota_Final_FO"]) if not pd.isna(df_eval.at[idx_ev, "Nota_Final_FO"]) else 0.0
 
         ra_tb_data = [] # [[Desc, Bar, Info]]
         for ra_id in sorted(ra_info.keys()):
@@ -463,7 +463,7 @@ def generar_docx_boletin_individual(info_modulo, al_id, df_al, df_eval, df_act, 
         n2 = float(df_eval.at[idx_ev, "2T_Nota"]) if not pd.isna(df_eval.at[idx_ev, "2T_Nota"]) else 0.0
         n3 = float(df_eval.at[idx_ev, "3T_Nota"]) if not pd.isna(df_eval.at[idx_ev, "3T_Nota"]) else 0.0
         notas_student = {"1T": n1, "2T": n2, "3T": n3}
-        nota_final = float(df_eval.at[idx_ev, "Nota_Final"]) if not pd.isna(df_eval.at[idx_ev, "Nota_Final"]) else 0.0
+        nota_final = float(df_eval.at[idx_ev, "Nota_Final_FO"]) if not pd.isna(df_eval.at[idx_ev, "Nota_Final_FO"]) else 0.0
 
         ra_rows = []
         for _, ra_row in df_ra.sort_values("id_ra").iterrows() if "id_ra" in df_ra.columns else df_ra.iterrows():

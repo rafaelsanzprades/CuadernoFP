@@ -353,6 +353,14 @@ def _compute_grupal_final_rows(info_modulo: dict, df_al: pd.DataFrame,
             notas_tri["2T"] * (pond_2t / total_pond) +
             notas_tri["3T"] * (pond_3t / total_pond)
         )
+        nota_final_extra = None
+        if "Nota_Final_FE" in df_eval.columns:
+            raw_fe = df_eval.at[idx_ev, "Nota_Final_FE"]
+            if pd.notna(raw_fe):
+                try:
+                    nota_final_extra = float(raw_fe)
+                except (ValueError, TypeError):
+                    nota_final_extra = None
         filas.append({
             "idx": idx_lista,
             "alumnado": f"{apells}, {nombre}" if nombre else apells,
@@ -360,6 +368,7 @@ def _compute_grupal_final_rows(info_modulo: dict, df_al: pd.DataFrame,
             "repite": "Sí" if al.get("Repite") else "No",
             "notas_tri": notas_tri,
             "nota_final_ord": nota_final_ord,
+            "nota_final_extra": nota_final_extra,
         })
 
     return pond_1t, pond_2t, pond_3t, filas
@@ -444,7 +453,7 @@ def generar_pdf_boletin_grupal_final(
             Paragraph(f"{nt['2T']:.1f}", sml),
             Paragraph(f"{nt['3T']:.1f}", sml),
             Paragraph(f"<b>{f['nota_final_ord']:.1f}</b>", normB),
-            Paragraph("", sml)  # ExtraOrd initially empty
+            Paragraph(f"<b>{f['nota_final_extra']:.1f}</b>" if f["nota_final_extra"] is not None else "", sml),
         ]
         table_data.append(row)
 
@@ -522,9 +531,10 @@ def generar_docx_boletin_grupal_final(info_modulo, df_al, df_eval, df_act, fecha
     rows = []
     for f in filas:
         nt = f["notas_tri"]
+        nota_extra_str = f"{f['nota_final_extra']:.1f}" if f["nota_final_extra"] is not None else ""
         rows.append([f["idx"], f["alumnado"], f["edad"], f["repite"],
                      f"{nt['1T']:.1f}", f"{nt['2T']:.1f}", f"{nt['3T']:.1f}",
-                     f"{f['nota_final_ord']:.1f}", ""])
+                     f"{f['nota_final_ord']:.1f}", nota_extra_str])
     if not rows:
         rows.append(["Sin datos para el boletín final."] + [""] * (len(headers) - 1))
     add_table(doc, headers, rows, col_widths_cm=[1, 5] + [1.6] * (len(headers) - 2))

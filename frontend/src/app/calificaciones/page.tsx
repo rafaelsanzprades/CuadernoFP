@@ -227,26 +227,37 @@ export default function ProgresoPage() {
     let evRowIdx = newEval.findIndex(e => e.ID === al_id);
 
     if (evRowIdx === -1) {
-      newEval.push({ ID: al_id, Nota_Final: 0 });
+      newEval.push({ ID: al_id, Nota_Final_FO: 0 });
       evRowIdx = newEval.length - 1;
     }
 
     newEval[evRowIdx][act_id] = val;
 
     const { nota_final } = calcularNotas(al_id, newEval[evRowIdx]);
-    newEval[evRowIdx]["Nota_Final"] = Number(nota_final.toFixed(2));
+    newEval[evRowIdx]["Nota_Final_FO"] = Number(nota_final.toFixed(2));
 
     updateCursoData("df_eval", newEval);
   };
 
-  const handleOverrideNotaFinal = (al_id: string, val: number) => {
+  const handleOverrideNotaFinalFO = (al_id: string, val: number) => {
     const newEval = [...df_eval];
     let evRowIdx = newEval.findIndex(e => e.ID === al_id);
     if (evRowIdx === -1) {
-      newEval.push({ ID: al_id, Nota_Final: 0 });
+      newEval.push({ ID: al_id, Nota_Final_FO: 0 });
       evRowIdx = newEval.length - 1;
     }
-    newEval[evRowIdx]["Nota_Final"] = val;
+    newEval[evRowIdx]["Nota_Final_FO"] = val;
+    updateCursoData("df_eval", newEval);
+  };
+
+  const handleOverrideNotaFinalFE = (al_id: string, val: number) => {
+    const newEval = [...df_eval];
+    let evRowIdx = newEval.findIndex(e => e.ID === al_id);
+    if (evRowIdx === -1) {
+      newEval.push({ ID: al_id, Nota_Final_FE: 0 });
+      evRowIdx = newEval.length - 1;
+    }
+    newEval[evRowIdx]["Nota_Final_FE"] = val;
     updateCursoData("df_eval", newEval);
   };
 
@@ -515,7 +526,7 @@ export default function ProgresoPage() {
                       if (tris.length > 0) {
                         avg = tris.reduce((sum: number, t: string) => sum + notas_student[t], 0) / tris.length;
                       } else {
-                        avg = Number(evalData["Nota_Final"]) || 0;
+                        avg = Number(evalData["Nota_Final_FO"]) || 0;
                       }
                       notasAlumnado.push(avg);
                     });
@@ -668,9 +679,10 @@ export default function ProgresoPage() {
               <div className="space-y-4">
                 {df_evaluable.map((al: any) => {
                   const al_id = al.ID;
-                  const evRow = df_eval.find((e: any) => e.ID === al_id) || { ID: al_id, Nota_Final: 0 };
+                  const evRow = df_eval.find((e: any) => e.ID === al_id) || { ID: al_id, Nota_Final_FO: 0, Nota_Final_FE: 0 };
 
-                  const nota_prev = Number(evRow.Nota_Final) || 0;
+                  const nota_prev = Number(evRow.Nota_Final_FO) || 0;
+                  const nota_prev_fe = Number(evRow.Nota_Final_FE) || 0;
                   const sigad = getSigadInfo(nota_prev);
                   const activeStudentTab = activeTabByStudent[al_id] || "1T";
 
@@ -679,7 +691,7 @@ export default function ProgresoPage() {
                     "2T": Number(evRow["2T_Nota"]) || 0.0,
                     "3T": Number(evRow["3T_Nota"]) || 0.0,
                   };
-                  const nota_final = Number(evRow["Nota_Final"]) || 0.0;
+                  const nota_final = Number(evRow["Nota_Final_FO"]) || 0.0;
 
                   let pct_global_cumplido = 0.0;
                   let suma_pond_ra = 0.0;
@@ -821,12 +833,23 @@ export default function ProgresoPage() {
                                   <div>
                                     <h4 className="font-bold text-foreground mb-4">Calificación de acta</h4>
                                     <div className="mb-4">
-                                      <label className="text-caption text-muted tracking-wider mb-1.5 block font-bold">Nota final (manual / calc)</label>
+                                      <label className="text-caption text-muted tracking-wider mb-1.5 block font-bold">Nota final ordinaria — FO (manual / calc)</label>
                                       <input
                                         type="number"
                                         min="1" max="10" step="0.1"
                                         value={nota_prev || ""}
-                                        onChange={(e) => handleOverrideNotaFinal(al_id, Number(e.target.value) || 0)}
+                                        onChange={(e) => handleOverrideNotaFinalFO(al_id, Number(e.target.value) || 0)}
+                                        onClick={(e) => e.stopPropagation()}
+                                        className="w-full bg-background/50 border border-[var(--glass-border)] rounded px-3 py-2 text-subheading font-bold text-foreground focus:border-info focus:outline-none"
+                                      />
+                                    </div>
+                                    <div className="mb-4">
+                                      <label className="text-caption text-muted tracking-wider mb-1.5 block font-bold">Nota final extraordinaria — FE (manual)</label>
+                                      <input
+                                        type="number"
+                                        min="1" max="10" step="0.1"
+                                        value={nota_prev_fe || ""}
+                                        onChange={(e) => handleOverrideNotaFinalFE(al_id, Number(e.target.value) || 0)}
                                         onClick={(e) => e.stopPropagation()}
                                         className="w-full bg-background/50 border border-[var(--glass-border)] rounded px-3 py-2 text-subheading font-bold text-foreground focus:border-info focus:outline-none"
                                       />

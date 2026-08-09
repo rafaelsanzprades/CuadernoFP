@@ -40,7 +40,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
   }
 
   // Calculate stats
-  const notas_finales = df_eval_activos.map((e: any) => Number(e.Nota_Final) || 0);
+  const notas_finales = df_eval_activos.map((e: any) => Number(e.Nota_Final_FO) || 0);
   const media_grupal = notas_finales.reduce((a, b) => a + b, 0) / (notas_finales.length || 1);
   const aprobados = notas_finales.filter((n: number) => n >= 5).length;
   const total = notas_finales.length;
@@ -88,10 +88,10 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
 
   // Risks
   const risks = df_eval_activos
-    .filter((e: any) => (Number(e.Nota_Final) || 0) < 5)
+    .filter((e: any) => (Number(e.Nota_Final_FO) || 0) < 5)
     .map((e: any) => {
       const al = activeAlumnado.find((a: any) => a.ID === e.ID);
-      const nota = Number(e.Nota_Final) || 0;
+      const nota = Number(e.Nota_Final_FO) || 0;
       let riskLevel = "🟡 Moderado";
       let riskColor = "text-warning";
       if (nota < 3) { riskLevel = "Muy Alto"; riskColor = "text-danger"; }
