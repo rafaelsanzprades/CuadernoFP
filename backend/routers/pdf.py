@@ -15,8 +15,8 @@ class PdfRequest(BaseModel):
     curso_data: Dict[str, Any]
     fecha_corte: Optional[str] = None
     # Campo libre para parámetros específicos de un tipo de documento
-    # (periodo del acta, fecha/motivo del parte de incidencias, etc.) sin
-    # tener que ampliar este modelo cada vez que se añade un generador.
+    # (periodo del acta, module_document_id, etc.) sin tener que ampliar
+    # este modelo cada vez que se añade un generador.
     extra: Optional[Dict[str, Any]] = None
 
 
@@ -63,7 +63,6 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
         from pdf_acta_evaluacion import generar_pdf_acta_evaluacion
         from pdf_informe_eqavet import generar_pdf_informe_eqavet
         from pdf_ficha_alumnado import generar_pdf_ficha_alumnado
-        from pdf_parte_incidencias import generar_pdf_parte_incidencia
 
         module_data = request.module_data
         curso_data = request.curso_data
@@ -154,11 +153,6 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 tutoria_entry = (curso_data.get("tutoria_ledger") or {}).get(al_id)
                 attendance_summary = _compute_attendance_summary(db, extra.get("module_document_id"), al_id)
                 docx_bytes = generar_docx_ficha_alumnado(info_modulo, al_id, df_al, tutoria_entry, attendance_summary)
-            elif type == "parte_incidencia":
-                if not al_id: raise HTTPException(status_code=400, detail="al_id is required for parte_incidencia")
-                from pdf_parte_incidencias import generar_docx_parte_incidencia
-                docx_bytes = generar_docx_parte_incidencia(info_modulo, al_id, df_al,
-                                                             extra.get("fecha_incidencia"), extra.get("motivo_incidencia"))
 
             if docx_bytes is not None:
                 return Response(
@@ -210,10 +204,6 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             tutoria_entry = (curso_data.get("tutoria_ledger") or {}).get(al_id)
             attendance_summary = _compute_attendance_summary(db, extra.get("module_document_id"), al_id)
             buffer = generar_pdf_ficha_alumnado(info_modulo, al_id, df_al, tutoria_entry, attendance_summary)
-        elif type == "parte_incidencia":
-            if not al_id: raise HTTPException(status_code=400, detail="al_id is required for parte_incidencia")
-            buffer = generar_pdf_parte_incidencia(info_modulo, al_id, df_al,
-                                                   extra.get("fecha_incidencia"), extra.get("motivo_incidencia"))
         elif type in ["programacion_suficiente_tpl", "programacion_minima_tpl", "programacion_jeg"]:
             if type == "programacion_minima_tpl":
                 import generador_pd_minima_tpl as generador_pd
