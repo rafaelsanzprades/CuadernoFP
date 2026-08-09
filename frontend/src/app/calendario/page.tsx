@@ -2,7 +2,7 @@
 import { TabSync } from "@/components/ui/TabSync";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { Calendar, Circle, ClipboardList, Search, Settings, Flag, FolderOpen, Bus } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
@@ -15,6 +15,7 @@ import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
+import { getAutoMilestones } from "@/utils/calendarMilestones";
 import Link from "next/link";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -232,6 +233,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
   const feoS = toDate(info_fechas.ini_feoe), feoE = toDate(info_fechas.fin_feoe);
   const dgenS = toDate(info_fechas.ini_dual_gen), dgenE = toDate(info_fechas.fin_dual_gen);
   const dintS = toDate(info_fechas.ini_dual_int), dintE = toDate(info_fechas.fin_dual_int);
+  const autoMilestones = useMemo(() => getAutoMilestones(info_fechas), [info_fechas]);
 
   // Months to show: from course start to course end (default Sep-Jun)
   const refYear = cs ? cs.getFullYear() : new Date().getFullYear();
@@ -252,7 +254,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
     const isWeekend = dow === 0 || dow === 6;
     const dkey = `${pad(date.getDate())}/${pad(date.getMonth() + 1)}/${date.getFullYear()}`;
     const isFestivo = !!calendar_notes[`f_${dkey}`];
-    const isEvento  = !!calendar_notes[`r_${dkey}`];
+    const isEvento  = !!calendar_notes[`r_${dkey}`] || !!autoMilestones[dkey];
 
     if (isFestivo)            return "bg-danger/10 text-foreground font-bold ring-1 ring-danger";
     if (isEvento)             return "bg-info/10 text-foreground font-bold ring-1 ring-info";
@@ -271,7 +273,7 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
     const dkey = `${pad(date.getDate())}/${pad(date.getMonth() + 1)}/${date.getFullYear()}`;
     const uds = planning_ledger?.[dkey] || [];
     const festivo = calendar_notes[`f_${dkey}`] || "";
-    const relevante = calendar_notes[`r_${dkey}`] || "";
+    const relevante = [calendar_notes[`r_${dkey}`], autoMilestones[dkey]].filter(Boolean).join(" / ");
     const isFeoe = inRange(date, feoS, feoE) && date.getDay() !== 0 && date.getDay() !== 6;
     return { ud: uds.join(", "), festivo, relevante, isFeoe };
   }
@@ -726,6 +728,7 @@ export default function CalendarioPage() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
                     { label: "Inicio de curso",   field: "ini_curso" },
+                    { label: "Presentación",       field: "fecha_presentacion" },
                     { label: "Inicio clases (1T)", field: "ini_1t"   },
                     { label: "Fin clases (3T)",    field: "fin_3t"   },
                     { label: "Fin de curso",       field: "fin_curso" },

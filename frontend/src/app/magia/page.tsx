@@ -1,6 +1,6 @@
 "use client";
 import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Construction, Download, FileEdit, FileSpreadsheet, FileText, FolderOpen, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, BookOpen, Target, Award, ShieldCheck, Contact, FileWarning, TrendingUp, Compass, Lightbulb, Wrench } from "lucide-react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import toast from "react-hot-toast";
@@ -15,6 +15,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { TabSync } from "@/components/ui/TabSync";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
+import { getAutoMilestones } from "@/utils/calendarMilestones";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -66,6 +67,19 @@ export default function MagiaPage() {
   // dd/mm/yyyy, igual que calendar_notes — no el yyyy-mm-dd ISO que usa
   // internamente el cálculo dinámico.
   const { df_sgmt: liveDfSgmt, planningLedgerDmy: livePlanningLedger } = useDynamicPlanning();
+  // Hitos derivados de Fechas generales (Inicio clases, Fin de trimestre...)
+  // que se muestran solos como "relevante" sin que el profesor los escriba
+  // a mano en Eventos y festivos — se fusionan aquí con las notas manuales
+  // antes de mandarlas al backend.
+  const liveCalendarNotes = useMemo(() => {
+    const auto = getAutoMilestones(cursoData?.info_fechas);
+    const merged: Record<string, string> = { ...(cursoData?.calendar_notes || {}) };
+    for (const [dmy, label] of Object.entries(auto)) {
+      const key = `r_${dmy}`;
+      merged[key] = merged[key] ? `${merged[key]} / ${label}` : label;
+    }
+    return merged;
+  }, [cursoData?.info_fechas, cursoData?.calendar_notes]);
   const [loadingData, setLoadingData] = useState(true);
   const [activeTab, setActiveTab] = useState("programacion");
 
@@ -140,7 +154,7 @@ export default function MagiaPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          curso_data: { ...(cursoData || {}), df_sgmt: liveDfSgmt, planning_ledger: livePlanningLedger },
+          curso_data: { ...(cursoData || {}), df_sgmt: liveDfSgmt, planning_ledger: livePlanningLedger, calendar_notes: liveCalendarNotes },
           module_data: moduleData || {},
           fecha_corte: fechaCorte,
           extra: extra || null,

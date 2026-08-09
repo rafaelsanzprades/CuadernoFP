@@ -207,10 +207,8 @@ def generar_pdf_calendario(info_modulo, info_fechas, planning_ledger, calendar_n
                 if g_fest[w][c]:
                     festivo_bg_cells.append((c, row_counter))
                     festivo_bg_cells.append((c, row_counter + 1))
-                elif g_dias[w][c] != "":
-                    # Día lectivo normal (con día asignado en el mes): la fila
-                    # de docencia siempre lleva fondo malva, aunque ese día en
-                    # concreto no tenga UD todavía asignada.
+                elif g_dias[w][c] != "" and g_ud[w][c]:
+                    # Fondo malva solo si ese día concreto tiene UD asignada.
                     ud_bg_cells.append((c, row_counter + 3))
 
             row_counter += 4
@@ -439,7 +437,8 @@ def generar_docx_calendario(info_modulo, info_fechas, planning_ledger, calendar_
                     if info["rel"]:
                         set_cell(cell_rel, info["rel"], italic=True, size=7, align=WD_ALIGN_PARAGRAPH.RIGHT)
                     set_cell(cell_ud, info["ud"], size=8, align=WD_ALIGN_PARAGRAPH.LEFT)
-                    shade(cell_ud, _CAL_UD_BG)
+                    if info["ud"]:
+                        shade(cell_ud, _CAL_UD_BG)
 
         for row in table.rows:
             for i, w in enumerate(col_widths):
