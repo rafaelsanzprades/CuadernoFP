@@ -227,3 +227,15 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
 
   return { newPlanningLedger, newDfSgmt, totalUdHours, totalScheduledHours };
 }
+
+/** planning_ledger se calcula con claves ISO (yyyy-mm-dd), pero calendar_notes,
+ * el resto de UI de /calendario y los generadores de PDF del backend usan
+ * dd/mm/yyyy — convierte para esos consumidores en vez de duplicar la lógica. */
+export function ledgerToDmy(ledger: Record<string, string[]>): Record<string, string[]> {
+  const out: Record<string, string[]> = {};
+  for (const [iso, uds] of Object.entries(ledger)) {
+    const [y, m, d] = iso.split('-');
+    if (y && m && d) out[`${d}/${m}/${y}`] = uds;
+  }
+  return out;
+}

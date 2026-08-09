@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
-import { generatePlanning } from "@/utils/planningGenerator";
+import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import Link from "next/link";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -466,6 +466,12 @@ function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNot
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function CalendarioPage() {
   const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, activeModuleId, moduleData, setModuleData, updateDataFrame } = useAppStore();
+  // cursoData.planning_ledger es un campo persistido que nunca se escribe
+  // (no hay ningún punto de la app que lo guarde) — la asignación real de
+  // UD por día se recalcula en memoria vía useDynamicPlanning, igual que en
+  // Seguimiento y Calificaciones. Esta página usa claves dd/mm/yyyy (igual
+  // que calendar_notes), no el yyyy-mm-dd ISO interno del cálculo dinámico.
+  const { planningLedgerDmy: planningLedger } = useDynamicPlanning();
   const [saving, setSaving] = useState(false);
   const { t } = useTranslation();
   const [saveMessage, setSaveMessage] = useState("");
@@ -702,7 +708,7 @@ export default function CalendarioPage() {
                     <Button
                       variant="ghost"
                       onClick={() => {
-                        const ledger = cursoData?.planning_ledger || {};
+                        const ledger = planningLedger || {};
                         const dates = Object.keys(ledger)
                           .map(d => { const [dd,mm,yyyy] = d.split("/"); return `${yyyy}-${mm}-${dd}`; })
                           .sort();
@@ -940,7 +946,7 @@ export default function CalendarioPage() {
                     Festivo y Relevante son independientes: un mismo día puede tener los dos a la vez. La columna
                     Docencia es solo de referencia (viene de Planificación, no se edita aquí).
                   </p>
-                  <NotesTable calendar_notes={calendar_notes} onUpdateNotes={handleUpdateNotes} planning_ledger={cursoData?.planning_ledger} />
+                  <NotesTable calendar_notes={calendar_notes} onUpdateNotes={handleUpdateNotes} planning_ledger={planningLedger} />
                 </Card>
               )}
 
@@ -1013,7 +1019,7 @@ export default function CalendarioPage() {
                     horario={horario}
                     calendar_notes={calendar_notes}
                     onUpdateNote={handleUpdateNote}
-                    planning_ledger={cursoData?.planning_ledger}
+                    planning_ledger={planningLedger}
                   />
                 </Card>
               )}

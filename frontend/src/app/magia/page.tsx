@@ -57,11 +57,15 @@ export default function MagiaPage() {
   const [downloadingStr, setDownloadingStr] = useState<string | null>(null);
 
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData } = useAppStore();
-  // df_sgmt guardado en cursoData no se sincroniza con el cálculo dinámico
-  // de Planificación (useDynamicPlanning se recalcula en memoria y nunca se
-  // escribe de vuelta al store) — para que los generadores de PD lean datos
-  // al día se recalcula aquí y se inyecta en el payload al pedir el PDF.
-  const { df_sgmt: liveDfSgmt } = useDynamicPlanning();
+  // df_sgmt / planning_ledger guardados en cursoData no se sincronizan con el
+  // cálculo dinámico de Planificación (useDynamicPlanning se recalcula en
+  // memoria y nunca se escribe de vuelta al store) — para que los
+  // generadores de PD lean datos al día se recalculan aquí y se inyectan en
+  // el payload al pedir el PDF.
+  // El backend (generadores de PDF) espera planning_ledger con claves
+  // dd/mm/yyyy, igual que calendar_notes — no el yyyy-mm-dd ISO que usa
+  // internamente el cálculo dinámico.
+  const { df_sgmt: liveDfSgmt, planningLedgerDmy: livePlanningLedger } = useDynamicPlanning();
   const [loadingData, setLoadingData] = useState(true);
   const [activeTab, setActiveTab] = useState("programacion");
 
@@ -136,7 +140,7 @@ export default function MagiaPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          curso_data: { ...(cursoData || {}), df_sgmt: liveDfSgmt },
+          curso_data: { ...(cursoData || {}), df_sgmt: liveDfSgmt, planning_ledger: livePlanningLedger },
           module_data: moduleData || {},
           fecha_corte: fechaCorte,
           extra: extra || null,
@@ -573,9 +577,44 @@ export default function MagiaPage() {
                           />
                         </div>
                       </div>
+                    </Card>
+
+                    {/* ── Seguimiento ── */}
+                    <Card className="p-6 border-t-4 border-t-emerald-500">
+                      <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><TrendingUp className="w-4 h-4" /></span> Seguimiento</h2>
+                      <p className="text-body text-muted mb-6">Diario de clases, secuenciación por UD y planificación mensual.</p>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                          <div>
+                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguimiento diario</h3>
+                            <p className="text-body text-muted mb-6">Registro detallado de la planificación del día a día.</p>
+                          </div>
+                          <DualDownloadButtons type="seguimiento" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
+                        </div>
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                          <div>
+                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Clases por UD</h3>
+                            <p className="text-body text-muted mb-6">Secuenciación de sesiones de cada Unidad didáctica.</p>
+                          </div>
+                          <DualDownloadButtons type="clases_ud" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
+                        </div>
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                          <div>
+                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Planificación</h3>
+                            <p className="text-body text-muted mb-6">Distribución temporal mensual (previsto/impartido) por UD.</p>
+                          </div>
+                          <DualDownloadButtons type="planificacion" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
+                        </div>
+                      </div>
+                    </Card>
+
+                    {/* ── Calificaciones ── */}
+                    <Card className="p-6 border-t-4 border-t-blue-500">
+                      <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Award className="w-4 h-4" /></span> Calificaciones</h2>
+                      <p className="text-body text-muted mb-6">Boletines, actas de evaluación e informes por alumno/a.</p>
 
                       {activeAlumnado.length > 0 && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                           <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                             <div>
                               <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletín de alumnado</h3>
@@ -621,41 +660,7 @@ export default function MagiaPage() {
                           </div>
                         </div>
                       )}
-                    </Card>
 
-                    {/* ── Seguimiento ── */}
-                    <Card className="p-6 border-t-4 border-t-emerald-500">
-                      <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><TrendingUp className="w-4 h-4" /></span> Seguimiento</h2>
-                      <p className="text-body text-muted mb-6">Diario de clases, secuenciación por UD y planificación mensual.</p>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                          <div>
-                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguimiento diario</h3>
-                            <p className="text-body text-muted mb-6">Registro detallado de la planificación del día a día.</p>
-                          </div>
-                          <DualDownloadButtons type="seguimiento" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
-                        </div>
-                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                          <div>
-                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Clases por UD</h3>
-                            <p className="text-body text-muted mb-6">Secuenciación de sesiones de cada Unidad didáctica.</p>
-                          </div>
-                          <DualDownloadButtons type="clases_ud" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
-                        </div>
-                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                          <div>
-                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Planificación</h3>
-                            <p className="text-body text-muted mb-6">Distribución temporal mensual (previsto/impartido) por UD.</p>
-                          </div>
-                          <DualDownloadButtons type="planificacion" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
-                        </div>
-                      </div>
-                    </Card>
-
-                    {/* ── Calificaciones ── */}
-                    <Card className="p-6 border-t-4 border-t-blue-500">
-                      <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Award className="w-4 h-4" /></span> Calificaciones</h2>
-                      <p className="text-body text-muted mb-6">Boletines, actas de evaluación e informes por alumno/a.</p>
                       <h3 className="text-subheading font-bold mb-4 mt-2"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletines y actas de evaluación</h3>
 
                       {/* Primera fila: 3 Trimestres */}

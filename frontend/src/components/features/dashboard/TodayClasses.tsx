@@ -5,9 +5,12 @@ import { MotionWrapper } from '@/components/ui/MotionWrapper';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { simulateSchedule } from '@/utils/scheduleSimulator';
+import { useDynamicPlanning } from '@/hooks/useDynamicPlanning';
 
 export const TodayClasses = () => {
   const { moduleData, cursoData, dataSource } = useAppStore();
+  // cursoData.planning_ledger nunca se persiste — se recalcula en memoria.
+  const { planningLedger } = useDynamicPlanning();
 
   if (!moduleData) return null;
 
@@ -15,7 +18,7 @@ export const TodayClasses = () => {
   const now = isDemo ? new Date(new Date().getFullYear(), 4, 2, 10, 0, 0) : new Date();
 
   // Simulate schedule to get exact classroom programming for today
-  const simulation = simulateSchedule(moduleData, cursoData);
+  const simulation = simulateSchedule(moduleData, cursoData ? { ...cursoData, planning_ledger: planningLedger } : cursoData);
   const todayStr = format(now, 'dd/MM/yyyy');
   const todaySchedule = simulation[todayStr];
 

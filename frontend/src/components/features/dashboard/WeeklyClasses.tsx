@@ -5,15 +5,18 @@ import { MotionWrapper } from '@/components/ui/MotionWrapper';
 import { format, isSameDay } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { simulateSchedule, DaySchedule } from '@/utils/scheduleSimulator';
+import { useDynamicPlanning } from '@/hooks/useDynamicPlanning';
 
 export const WeeklyClasses = () => {
   const { moduleData, cursoData, dataSource } = useAppStore();
   const [activeWeekTab, setActiveWeekTab] = useState<'current' | 'next'>('current');
+  // cursoData.planning_ledger nunca se persiste — se recalcula en memoria.
+  const { planningLedger } = useDynamicPlanning();
 
   if (!moduleData) return null;
 
   // 1. Simulate the entire schedule
-  const simulation = simulateSchedule(moduleData, cursoData);
+  const simulation = simulateSchedule(moduleData, cursoData ? { ...cursoData, planning_ledger: planningLedger } : cursoData);
 
   // 2. Compute current and next week dates
   const isDemo = dataSource === 'demo';

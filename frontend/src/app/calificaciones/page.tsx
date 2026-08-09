@@ -20,6 +20,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
+import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import Link from "next/link";
 
 export default function ProgresoPage() {
@@ -31,8 +32,11 @@ export default function ProgresoPage() {
     cursoData, 
     setCursoData, 
     updateCursoData,
-    saveCursoData 
+    saveCursoData
   } = useAppStore();
+  // cursoData.planning_ledger nunca se persiste — se recalcula en memoria,
+  // igual que en Seguimiento y Calendario.
+  const { planningLedger } = useDynamicPlanning();
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -124,7 +128,7 @@ export default function ProgresoPage() {
   const df_ud = moduleData?.df_ud || [];
   const df_pr = moduleData?.df_pr || [];
   const info_fechas = cursoData?.info_fechas || {};
-  const planning_ledger = cursoData?.planning_ledger || {};
+  const planning_ledger = planningLedger || {};
 
   const df_evaluable = df_al.filter((al: any) => al.Estado !== "Baja");
   df_evaluable.sort((a: any, b: any) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
