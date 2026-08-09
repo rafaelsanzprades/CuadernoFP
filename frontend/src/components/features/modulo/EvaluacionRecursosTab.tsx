@@ -2,14 +2,13 @@
 import { useState } from "react";
 import { CheckCircle2, Plus, X } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
-import { INSTRUMENTOS_EVALUACION } from "@/data/instrumentosEvaluacion";
+import { INSTRUMENTOS_EVALUACION, INSTRUMENTOS_CALIFICACION } from "@/data/instrumentosEvaluacion";
 import { RECURSOS_DIDACTICOS } from "@/data/herramientasRecursos";
 
 export function EvaluacionRecursosTab() {
   const { moduleData, updateModuleData } = useAppStore();
   const [nuevoRecurso, setNuevoRecurso] = useState("");
 
-  const INSTRUMENTOS = INSTRUMENTOS_EVALUACION;
 
   const recursosCatalogoIds = new Set(RECURSOS_DIDACTICOS.map((r) => r.id));
   const categorias = Array.from(new Set(RECURSOS_DIDACTICOS.map((r) => r.categoria)));
@@ -53,14 +52,35 @@ export function EvaluacionRecursosTab() {
 
           <div>
             <label className="text-body font-semibold text-foreground mb-2 block">Instrumentos de evaluación</label>
-            <p className="text-caption text-muted mb-3">Procedimientos e instrumentos normativos que se emplearán en el módulo.</p>
+            <p className="text-caption text-muted mb-3">La actividad que genera la evidencia: qué hace el alumnado.</p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-              {INSTRUMENTOS.map((inst) => {
+              {INSTRUMENTOS_EVALUACION.map((inst) => {
                 const isSelected = inst_seleccionados.includes(inst.id);
                 return (
                   <label key={inst.id} className={`flex items-center gap-2 p-2 rounded border cursor-pointer transition-colors ${isSelected ? 'bg-amber-500/10 border-amber-500/30' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
-                    <input 
-                      type="checkbox" 
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => toggleInst(inst.id)}
+                      className="rounded border-white/20 bg-transparent text-amber-500 focus:ring-amber-500"
+                    />
+                    <span className="text-caption"><strong>{inst.id}</strong> - {inst.label}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+
+          <div>
+            <label className="text-body font-semibold text-foreground mb-2 block">Instrumentos de calificación</label>
+            <p className="text-caption text-muted mb-3">Lo que puntúa esa evidencia: la rúbrica o escala aplicada.</p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+              {INSTRUMENTOS_CALIFICACION.map((inst) => {
+                const isSelected = inst_seleccionados.includes(inst.id);
+                return (
+                  <label key={inst.id} className={`flex items-center gap-2 p-2 rounded border cursor-pointer transition-colors ${isSelected ? 'bg-amber-500/10 border-amber-500/30' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
+                    <input
+                      type="checkbox"
                       checked={isSelected}
                       onChange={() => toggleInst(inst.id)}
                       className="rounded border-white/20 bg-transparent text-amber-500 focus:ring-amber-500"

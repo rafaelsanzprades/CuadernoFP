@@ -1,7 +1,7 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import { Target, CheckCircle2, Layers, FolderOpen, Lightbulb, Settings, Shield, HeartHandshake } from "lucide-react";
+import { Target, CheckCircle2, Layers, FolderOpen, Lightbulb, Settings, Shield, HeartHandshake, Rocket } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -12,6 +12,7 @@ import { EvaluacionRecursosTab } from "@/components/features/modulo/EvaluacionRe
 import { OtrosElementosTab } from "@/components/features/modulo/OtrosElementosTab";
 import { ContingenciaTab } from "@/components/features/modulo/ContingenciaTab";
 import { DiversidadTab } from "@/components/features/modulo/DiversidadTab";
+import { InnovacionTab } from "@/components/features/modulo/InnovacionTab";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
@@ -54,6 +55,7 @@ export default function MetodologiaConfigPage() {
     { id: "evaluacion", label: <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 shrink-0" /> Instrumentos y recursos</span>, cleanLabel: "Instrumentos y recursos" },
     { id: "contingencia", label: <span className="flex items-center gap-2"><Shield className="w-4 h-4 shrink-0" /> Plan de contingencia</span>, cleanLabel: "Plan de contingencia" },
     { id: "transversales", label: <span className="flex items-center gap-2"><Layers className="w-4 h-4 shrink-0" /> {t('tabs.otros')}</span>, cleanLabel: "Transversales" },
+    { id: "innovacion", label: <span className="flex items-center gap-2"><Rocket className="w-4 h-4 shrink-0" /> Innovación y actividades</span>, cleanLabel: "Innovación y actividades" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -64,6 +66,7 @@ export default function MetodologiaConfigPage() {
     evaluacion: 'Instrumentos de evaluación seleccionados y recursos y espacios necesarios.',
     contingencia: 'Planes de contingencia y adaptación ante situaciones excepcionales.',
     transversales: 'Elementos transversales, competencias clave y estándares curriculares del módulo.',
+    innovacion: 'Innovación, intermodularidad y actividades complementarias/extraescolares.',
   };
 
   if (!activeModuleId) {
@@ -143,6 +146,7 @@ export default function MetodologiaConfigPage() {
               {activeTab === 'evaluacion' && <EvaluacionRecursosTab />}
               {activeTab === 'contingencia' && <ContingenciaTab />}
               {activeTab === 'transversales' && <OtrosElementosTab />}
+              {activeTab === 'innovacion' && <InnovacionTab />}
             </div>
 
           </MotionWrapper>

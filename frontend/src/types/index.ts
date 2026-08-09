@@ -175,6 +175,7 @@ export const ModuleDataSchema = z.object({
   texto_metodologia_libre: z.string().optional(),
   elementos_transversales: z.array(z.string()).optional(),
   actividades_complementarias: z.array(z.string()).optional(),
+  actividades_extraescolares: z.array(z.string()).optional(),
   medidas_contingencia: z.array(z.string()).optional(),
   texto_contingencia_libre: z.string().optional(),
   

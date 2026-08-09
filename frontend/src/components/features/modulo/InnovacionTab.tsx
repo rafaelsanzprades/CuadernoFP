@@ -10,21 +10,33 @@ export function InnovacionTab() {
     updateModuleData("config_contexto", { ...config_contexto, [field]: value });
   };
 
+  const COMPLEMENTARIAS = [
+    { id: "COMP-VISITA", label: "Visita técnica a empresa" },
+    { id: "COMP-CHARLA", label: "Charla de expertos" },
+    { id: "COMP-TALLER", label: "Taller práctico externo" },
+  ];
   const EXTRAESCOLARES = [
-    { id: "EXT-VISITA", label: "Visita técnica a empresa" },
-    { id: "EXT-CHARLA", label: "Charla de expertos" },
     { id: "EXT-FERIA", label: "Asistencia a ferias/congresos" },
-    { id: "EXT-TALLER", label: "Taller práctico externo" },
-    { id: "EXT-CONC", label: "Concursos / Hackathons" }
+    { id: "EXT-CONC", label: "Concursos / Hackathons" },
+    { id: "EXT-VIAJE", label: "Viaje o intercambio" },
+    { id: "EXT-CULTURAL", label: "Actividad cultural voluntaria" },
   ];
 
   const actividades_complementarias = moduleData?.actividades_complementarias || [];
+  const actividades_extraescolares = moduleData?.actividades_extraescolares || [];
 
-  const toggleExtraescolar = (id: string) => {
+  const toggleComplementaria = (id: string) => {
     const updated = actividades_complementarias.includes(id)
       ? actividades_complementarias.filter((i: string) => i !== id)
       : [...actividades_complementarias, id];
     updateModuleData("actividades_complementarias", updated);
+  };
+
+  const toggleExtraescolar = (id: string) => {
+    const updated = actividades_extraescolares.includes(id)
+      ? actividades_extraescolares.filter((i: string) => i !== id)
+      : [...actividades_extraescolares, id];
+    updateModuleData("actividades_extraescolares", updated);
   };
 
   return (
@@ -59,11 +71,38 @@ export function InnovacionTab() {
           </div>
 
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">H1. Propuestas del departamento / actividades extraescolares</label>
-            <p className="text-caption text-muted mb-2">Selecciona actividades tipo y aporta más detalle abajo.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">H1. Actividades complementarias</label>
+            <p className="text-caption text-muted mb-2">En horario lectivo, ligadas al currículo y evaluables — forman parte de la programación didáctica.</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">
+              {COMPLEMENTARIAS.map((act) => {
+                const isSelected = actividades_complementarias.includes(act.id);
+                return (
+                  <label key={act.id} className={`flex items-center gap-2 p-2 rounded border cursor-pointer transition-colors ${isSelected ? 'bg-amber-500/10 border-amber-500/30' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => toggleComplementaria(act.id)}
+                      className="rounded border-white/20 bg-transparent text-amber-500 focus:ring-amber-500"
+                    />
+                    <span className="text-caption"><strong>{act.id}</strong> - {act.label}</span>
+                  </label>
+                );
+              })}
+            </div>
+            <textarea
+              value={config_contexto["H1_complementarias"] || ""}
+              onChange={e => handleChange("H1_complementarias", e.target.value)}
+              placeholder="Anota lugares a visitar, nombres de empresas, fechas aproximadas o temáticas concretas..."
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="text-body font-semibold text-foreground mb-1 block">H2. Actividades extraescolares</label>
+            <p className="text-caption text-muted mb-2">Fuera de horario lectivo, voluntarias y nunca evaluables — no forman parte de la programación didáctica, van en la PGA del centro. Se anotan aquí solo como referencia.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">
               {EXTRAESCOLARES.map((ext) => {
-                const isSelected = actividades_complementarias.includes(ext.id);
+                const isSelected = actividades_extraescolares.includes(ext.id);
                 return (
                   <label key={ext.id} className={`flex items-center gap-2 p-2 rounded border cursor-pointer transition-colors ${isSelected ? 'bg-amber-500/10 border-amber-500/30' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
                     <input
@@ -78,9 +117,9 @@ export function InnovacionTab() {
               })}
             </div>
             <textarea
-              value={config_contexto["H1_complementarias"] || ""}
-              onChange={e => handleChange("H1_complementarias", e.target.value)}
-              placeholder="Anota lugares a visitar, nombres de empresas, fechas aproximadas o temáticas concretas..."
+              value={config_contexto["H2_extraescolares"] || ""}
+              onChange={e => handleChange("H2_extraescolares", e.target.value)}
+              placeholder="Anota lugares, fechas aproximadas o temáticas concretas de las actividades voluntarias..."
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>

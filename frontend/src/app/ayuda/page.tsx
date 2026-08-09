@@ -34,6 +34,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "evaluacion", label: "Instrumentos y recursos" },
     { id: "contingencia", label: "Plan de contingencia" },
     { id: "transversales", label: "Transversales" },
+    { id: "innovacion", label: "Innovación y actividades" },
   ],
   "/instrumentos": [
     { id: "resumen", label: "Resumen" },
@@ -148,7 +149,9 @@ const FAQS = [
       { q: "¿Tengo que meter a mano todos los RA y CE del BOE?", a: "¡No! El sistema cuenta con un Catálogo oficial que importa automáticamente la normativa legal (Resultados de aprendizaje y Criterios) de tu módulo. Solo tienes que elegir tu Grado y tu Ciclo Formativo en la sección inicial de Catálogo y el sistema lo hace por ti." },
       { q: "¿Qué significa que los RA no suman 100% en las verificaciones?", a: "Para que la evaluación continua matemática funcione, cada Resultado de Aprendizaje (RA) debe tener un 'peso' o importancia. La suma total de los pesos de todos los RA de un módulo debe ser exactamente 100%. Debes ajustar esto en Programación > Currículo > pestaña 'RA y CE'." },
       { q: "¿Cómo configuro las horas que el alumnado pasa en la empresa (FP Dual)?", a: "En Programación > Metodología > bloque 'FP Dual', debes elegir si tu régimen es General o Intensivo. A continuación, usa los deslizadores para repartir el porcentaje de cada Resultado de Aprendizaje entre el Centro Educativo y la Empresa." },
-      { q: "¿Para qué sirve el apartado EQAVET?", a: "Sirve para integrar el ciclo de mejora continua europeo en tu programación. Lo encontrarás como un bloque dentro de Metodología. A final de curso, autoevalúas los indicadores de calidad y anotas tus propuestas de mejora para el próximo año." }
+      { q: "¿Para qué sirve el apartado EQAVET?", a: "Sirve para integrar el ciclo de mejora continua europeo en tu programación. Lo encontrarás como un bloque dentro de Metodología. A final de curso, autoevalúas los indicadores de calidad y anotas tus propuestas de mejora para el próximo año. La rúbrica de autoevaluación docente sigue el modelo DOCENTIA de ANECA (ver aneca.es/docentia), adaptado a la práctica en FP." },
+      { q: "¿Qué diferencia hay entre actividades complementarias y extraescolares?", a: "Son legalmente distintas: las complementarias son en horario lectivo, están ligadas al currículo y son evaluables — forman parte de tu programación didáctica. Las extraescolares son fuera de horario, voluntarias y nunca evaluables — van en la PGA del centro, no en la PD; en Contexto > Innovación puedes anotarlas igualmente como referencia, pero no cuentan en la programación." },
+      { q: "¿Qué diferencia hay entre instrumento de evaluación e instrumento de calificación?", a: "Por cada Criterio de Evaluación (CE) hay dos cosas distintas: el instrumento de evaluación es la actividad que genera la evidencia (una prueba objetiva, una tarea, una defensa oral...), y el instrumento de calificación es lo que puntúa esa evidencia (una rúbrica, una escala, una lista de cotejo...). En Instrumentos puedes codificar ambos por separado al configurar cada instrumento." }
     ]
   },
   {

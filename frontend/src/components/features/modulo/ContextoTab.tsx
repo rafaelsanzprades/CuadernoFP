@@ -79,6 +79,56 @@ export function ContextoTab() {
         </h2>
         <div className="space-y-4">
           <div>
+            <label className="text-body text-muted mb-1 block">Datos de contextualización del grupo</label>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+              <div>
+                <label className="text-caption text-muted mb-1 block">Ratio — Hombres</label>
+                <input
+                  type="number" min="0"
+                  value={config_contexto.ratio_hombres ?? ""}
+                  onChange={e => handleContextoChange("ratio_hombres", e.target.value)}
+                  className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-2 text-foreground focus:border-info focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="text-caption text-muted mb-1 block">Ratio — Mujeres</label>
+                <input
+                  type="number" min="0"
+                  value={config_contexto.ratio_mujeres ?? ""}
+                  onChange={e => handleContextoChange("ratio_mujeres", e.target.value)}
+                  className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-2 text-foreground focus:border-info focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="text-caption text-muted mb-1 block">Repetidores</label>
+                <input
+                  type="number" min="0"
+                  value={config_contexto.num_repetidores ?? ""}
+                  onChange={e => handleContextoChange("num_repetidores", e.target.value)}
+                  className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-2 text-foreground focus:border-info focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="text-caption text-muted mb-1 block">Pendientes del módulo</label>
+                <input
+                  type="number" min="0"
+                  value={config_contexto.num_pendientes ?? ""}
+                  onChange={e => handleContextoChange("num_pendientes", e.target.value)}
+                  className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-2 text-foreground focus:border-info focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="text-caption text-muted mb-1 block">ACNEAE</label>
+                <input
+                  type="number" min="0"
+                  value={config_contexto.num_acneae ?? ""}
+                  onChange={e => handleContextoChange("num_acneae", e.target.value)}
+                  className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-2 text-foreground focus:border-info focus:outline-none"
+                />
+              </div>
+            </div>
+          </div>
+          <div>
             <label className="text-body text-muted mb-1 block">Inclusión</label>
             <textarea
               value={config_contexto.inclusion || ""}

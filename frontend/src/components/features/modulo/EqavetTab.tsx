@@ -64,6 +64,10 @@ export function EqavetTab() {
             <p className="text-muted text-body mt-1">
               Marco de Referencia Europeo de Garantía de la Calidad. Autoevaluación del módulo para la memoria final y el ciclo de mejora continua.
             </p>
+            <p className="text-muted text-caption mt-2">
+              Los indicadores de autoevaluación docente (Planificación / Desarrollo / Resultados) siguen las dimensiones
+              del programa <a href="https://www.aneca.es/docentia" target="_blank" rel="noopener noreferrer" className="underline hover:text-accent">DOCENTIA de ANECA</a>.
+            </p>
           </div>
         </div>
       </Card>
