@@ -670,18 +670,15 @@ export default function MagiaPage() {
                       {/* Segunda fila: Final y Extraordinaria */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
-                          <div>
-                            <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Evaluación final ordinaria</h3>
-                            <div className="text-caption text-muted mb-2">
-                              Inicio: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.ini_final)}</span><br />
-                              Fin: <span className="font-mono text-foreground">{formatD(cursoData?.info_fechas?.fin_final)}</span>
-                            </div>
-                          </div>
-                          <div className="flex flex-col gap-2 mt-auto">
-                            <DualDownloadButtons type="grupal_final" opts={{ fechaCorte: fechaFinal }} downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
-                            <DualDownloadButtons type="acta_final" opts={{ fechaCorte: fechaFinal, extra: { periodo: "Final" } }} downloadingStr={downloadingStr}
-                              onDownload={(_type, fmt, opts) => handleDownloadPdf('acta_evaluacion', fmt, opts)} />
-                            <Button variant="success" onClick={() => handleExportXlsx('Final', fechaFinal)} className="w-full text-caption flex items-center justify-center gap-2">
+                          <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Evaluación final ordinaria</h3>
+                          <div className="flex gap-2 mt-auto">
+                            <Button onClick={() => handleDownloadPdf('grupal_final', 'pdf', { fechaCorte: fechaFinal })} disabled={downloadingStr === 'grupal_final_pdf'} className="flex-1">
+                              {downloadingStr === 'grupal_final_pdf' ? '⏳...' : 'Vista .pdf'}
+                            </Button>
+                            <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_final', 'docx', { fechaCorte: fechaFinal })} disabled={downloadingStr === 'grupal_final_docx'} className="flex-1">
+                              {downloadingStr === 'grupal_final_docx' ? '⏳...' : 'Editable .docx'}
+                            </Button>
+                            <Button variant="success" onClick={() => handleExportXlsx('Final', fechaFinal)} className="flex-1 flex items-center justify-center gap-1.5">
                               <FileSpreadsheet className="w-4 h-4" /> Editable .xlsx
                             </Button>
                           </div>
@@ -690,17 +687,12 @@ export default function MagiaPage() {
                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
                           <div>
                             <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Eval. Final Extraordinaria</h3>
-                            <div className="text-caption text-muted mb-2">
-                              Inicio: <span className="font-mono text-foreground">---</span><br />
-                              Fin: <span className="font-mono text-foreground">---</span>
-                            </div>
                             <p className="text-caption text-muted italic mt-2">Próximamente disponible</p>
                           </div>
-                          <div className="flex flex-col gap-2 mt-auto">
-                            <Button variant="secondary" disabled className="w-full text-caption">
-                              PDF Boletín Extraordinaria
-                            </Button>
-                            <Button variant="success" disabled className="w-full text-caption flex items-center justify-center gap-2">
+                          <div className="flex gap-2 mt-auto">
+                            <Button disabled className="flex-1">Vista .pdf</Button>
+                            <Button variant="secondary" disabled className="flex-1">Editable .docx</Button>
+                            <Button variant="success" disabled className="flex-1 flex items-center justify-center gap-1.5">
                               <FileSpreadsheet className="w-4 h-4" /> Editable .xlsx
                             </Button>
                           </div>
