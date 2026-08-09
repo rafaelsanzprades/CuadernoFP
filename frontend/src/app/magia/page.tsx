@@ -722,8 +722,16 @@ export default function MagiaPage() {
                         .pd-comparativa th:nth-child(4), .pd-comparativa td:nth-child(4),
                         .pd-comparativa th:nth-child(5), .pd-comparativa td:nth-child(5) { width: 23%; }
                         .pd-comparativa th, .pd-comparativa td { vertical-align: top; word-break: break-word; }
+                        .pd-comparativa th {
+                          text-align: left;
+                          font-size: 1rem;
+                          font-weight: 800;
+                          color: #ffffff;
+                          background: rgba(245, 158, 11, 0.15);
+                          border-bottom: 2px solid rgba(245, 158, 11, 0.5);
+                        }
                       `}</style>
-                      <div className="pd-comparativa prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-th:bg-foreground/5 prose-table:border-collapse prose-table:w-full">
+                      <div className="pd-comparativa prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-table:border-collapse prose-table:w-full">
                         {comparativaPdContent ? (
                           <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}
                             components={{
