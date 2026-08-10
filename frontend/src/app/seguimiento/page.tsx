@@ -1,5 +1,5 @@
 "use client";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/Tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { TabSync } from "@/components/ui/TabSync";
 import { useTranslation } from "react-i18next";
 import { Calendar, FileEdit, MapPin, ClipboardCheck, AlertTriangle, FolderOpen } from "lucide-react";
@@ -10,7 +10,6 @@ import { useAppStore } from "@/store/useAppStore";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { AsistenciaTab } from "@/components/features/diario/AsistenciaTab";
 import { AlertaAbandonoTab } from "@/components/features/diario/AlertaAbandonoTab";
-import { TutoriaTab } from "@/components/features/alumnado/TutoriaTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -18,9 +17,14 @@ import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 
+const TABS = [
+  { id: "clases", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Clases</span>, cleanLabel: "Clases" },
+  { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> Asistencia</span>, cleanLabel: "Asistencia" },
+  { id: "abandono", label: <span className="flex items-center gap-2"><AlertTriangle className="w-4 h-4 shrink-0" /> Alerta de abandono</span>, cleanLabel: "Alerta de abandono" },
+];
+
 const TAB_DESCRIPTIONS: Record<string, string> = {
   clases: 'Diario de clases, sesiones lectivas y registro de contingencias.',
-  tutoria: 'Seguimiento tutorial del alumnado.',
   asistencia: 'Control de asistencia del alumnado.',
   abandono: 'Alertas y seguimiento del riesgo de abandono escolar.',
 };
@@ -33,6 +37,8 @@ export default function SeguimientoPage() {
   const [saveMessage, setSaveMessage] = useState("");
   const [activeTab, setActiveTab] = useState("clases");
   const [allDiarioOpen, setAllDiarioOpen] = useState(false);
+
+  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel || activeTab;
 
 
   useEffect(() => {
@@ -184,7 +190,7 @@ export default function SeguimientoPage() {
     <div className="flex min-h-screen bg-background">
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header />
+        <Header breadcrumbSuffix={activeTabCleanLabel} />
         <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
 
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
@@ -195,27 +201,22 @@ export default function SeguimientoPage() {
               description="Tutoría, asistencia y abandonos."
             />
 
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
-                <TabsList className="max-w-full">
-                  <TabsTrigger value="clases">
-                    <FileEdit className="w-4 h-4 shrink-0" /> Clases
-                  </TabsTrigger>
-                  <TabsTrigger value="tutoria">
-                    <ClipboardCheck className="w-4 h-4 shrink-0" /> Tutoría
-                  </TabsTrigger>
-                  <TabsTrigger value="asistencia">
-                    <ClipboardCheck className="w-4 h-4 shrink-0" /> Asistencia
-                  </TabsTrigger>
-                  <TabsTrigger value="abandono">
-                    <AlertTriangle className="w-4 h-4 shrink-0" /> Alerta de abandono
-                  </TabsTrigger>
-                </TabsList>
+                <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+                  <TabsList className="max-w-full">
+                    {TABS.map((tab) => (
+                      <TabsTrigger key={tab.id} value={tab.id}>
+                        {tab.label}
+                      </TabsTrigger>
+                    ))}
+                  </TabsList>
+                </Tabs>
               </div>
 
               <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Seguimiento del alumnado.'} />
 
-              <TabsContent value="clases" className="mt-4">
+              {activeTab === 'clases' && (
+                <div className="mt-4">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
                     <FileEdit className="w-5 h-5 text-accent" /> Diario de clases y contingencias
@@ -317,20 +318,20 @@ export default function SeguimientoPage() {
                     );
                   })}
                 </div>
-              </TabsContent>
+                </div>
+              )}
 
-              <TabsContent value="tutoria" className="mt-4">
-                <TutoriaTab />
-              </TabsContent>
+              {activeTab === 'asistencia' && (
+                <div className="mt-4">
+                  <AsistenciaTab />
+                </div>
+              )}
 
-              <TabsContent value="asistencia" className="mt-4">
-                <AsistenciaTab />
-              </TabsContent>
-
-              <TabsContent value="abandono" className="mt-4">
-                <AlertaAbandonoTab />
-              </TabsContent>
-            </Tabs>
+              {activeTab === 'abandono' && (
+                <div className="mt-4">
+                  <AlertaAbandonoTab />
+                </div>
+              )}
           </MotionWrapper>
         </main>
       </div>

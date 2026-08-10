@@ -226,18 +226,26 @@ export default function MagiaPage() {
   const df_ud = moduleData?.df_ud || [];
   const df_act = moduleData?.df_act || [];
 
+  const TABS = [
+    { id: "comunidades", label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4 shrink-0" /> Comunidades</span>, cleanLabel: "Comunidades" },
+    { id: "programacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> Programación</span>, cleanLabel: "Programación" },
+    { id: "curso", label: <span className="flex items-center gap-2"><Calendar className="w-4 h-4 shrink-0" /> Curso</span>, cleanLabel: "Curso" },
+  ];
+
   const TAB_DESCRIPTIONS: Record<string, string> = {
     comunidades: 'Generación de la programación didáctica oficial, por comunidad autónoma.',
     programacion: 'Documentos de apoyo: matriz de currículo y documentos individuales de UD/Tareas.',
     curso: 'Calendario, seguimiento, plano de aula, boletines y actas de evaluación del curso.',
   };
 
+  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel || activeTab;
+
   return (
     <div className="flex min-h-screen bg-background">
       <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
       <main id="main-content" tabIndex={-1} className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header />
+        <Header breadcrumbSuffix={activeTabCleanLabel} />
 
         <div className="flex-1 overflow-y-auto scrollbar-hide relative">
           {previewUrl ? (
@@ -275,22 +283,18 @@ export default function MagiaPage() {
 
                 <PageHeader
                   icon={Sparkles}
-                  title="Magia"
+                  title="MagIA"
                   description="Generación de la programación didáctica y reportes."
                 />
 
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
                   <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
                     <TabsList className="max-w-full">
-                      <TabsTrigger value="comunidades">
-                        <MapPin className="w-4 h-4" /> Comunidades
-                      </TabsTrigger>
-                      <TabsTrigger value="programacion">
-                        <FileText className="w-4 h-4" /> Programación
-                      </TabsTrigger>
-                      <TabsTrigger value="curso">
-                        <Calendar className="w-4 h-4" /> Curso
-                      </TabsTrigger>
+                      {TABS.map((tab) => (
+                        <TabsTrigger key={tab.id} value={tab.id}>
+                          {tab.label}
+                        </TabsTrigger>
+                      ))}
                     </TabsList>
                   </Tabs>
                 </div>
@@ -348,7 +352,7 @@ export default function MagiaPage() {
 
                                     <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                                       <div>
-                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD=. Programación didáctica BOA nº: 181 18 septiembre 2025</h3>
+                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD=. Programación didáctica BOA nº: 18 septiembre 2025</h3>
                                         <p className="text-body text-muted mb-6">Versión BOA con los puntos de la Ley muy específica y concreta (no detalla secuenciación de aula ni extensa teoría).</p>
                                       </div>
                                       <div className="mt-auto">

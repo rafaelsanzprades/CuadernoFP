@@ -11,6 +11,10 @@ import { useModulesList } from "@/hooks/useApi";
 import { useEffect } from "react";
 import { PlanificacionMensualTab } from "@/components/features/dashboard/PlanificacionMensualTab";
 import { WeeklyClasses } from "@/components/features/dashboard/WeeklyClasses";
+import { InteractiveCalendar } from "@/components/features/dashboard/InteractiveCalendar";
+import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
+import { ContextoAgenda } from "@/components/features/dashboard/ContextoAgenda";
+import { DesarrolloUdActual } from "@/components/features/dashboard/DesarrolloUdActual";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
@@ -24,6 +28,7 @@ export default function AgendaPage() {
   } = useAppStore();
   const [activeTab, setActiveTab] = useState("actual");
   const { data: modulesList, mutate: fetchModules } = useModulesList();
+  const { planningLedger } = useDynamicPlanning();
 
   useEffect(() => {
     if (modulesList) {
@@ -53,7 +58,9 @@ export default function AgendaPage() {
   const TABS = [
     { id: "actual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> Actual</>, cleanLabel: "Actual" },
     { id: "planificacion", label: <><span className="inline-flex"><CalendarRange className="w-[1.2em] h-[1.2em] mr-1" /></span> Planificación</>, cleanLabel: "Planificación" },
-    { id: "progreso-ra-ud", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Progreso y relación RA con UD</>, cleanLabel: "Progreso y relación RA con UD" },
+    { id: "progreso-ra-ud", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Progreso RA y UD</>, cleanLabel: "Progreso RA y UD" },
+    { id: "mensual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> Mensual</>, cleanLabel: "Mensual" },
+
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -62,6 +69,8 @@ export default function AgendaPage() {
     actual: 'Vista de la agenda diaria y tareas pendientes.',
     planificacion: 'Planificación y seguimiento mensual de la programación.',
     'progreso-ra-ud': 'Ponderación y relación entre unidades didácticas y resultados de aprendizaje.',
+    'mensual': 'Vista mensual y calendario interactivo con fechas clave.',
+
   };
 
   return (
@@ -104,11 +113,17 @@ export default function AgendaPage() {
             {/* Contenido Pestaña Actual */}
             {activeTab === "actual" && (
               <div className="space-y-12 animate-in fade-in duration-500">
+                {/* 0. Contexto general de las UDs */}
+                <ContextoAgenda />
+
                 {/* 1. Hoy */}
                 <TodayClasses />
 
                 {/* 2. Semana */}
                 <WeeklyClasses />
+
+                {/* 3. Desarrollo de la UD en curso */}
+                <DesarrolloUdActual />
               </div>
             )}
 
@@ -122,6 +137,25 @@ export default function AgendaPage() {
             {/* Contenido Pestaña Progreso y Relación RA con UD */}
             {activeTab === "progreso-ra-ud" && (
               <TabRelacionRaUd />
+            )}
+
+            {/* Contenido Pestaña Mensual */}
+            {activeTab === "mensual" && (
+              <div className="animate-in fade-in duration-500">
+                <InteractiveCalendar
+                  info_fechas={(cursoData as any)?.info_fechas || (moduleData as any)?.info_fechas || {}}
+                  horario={(cursoData as any)?.horario || (moduleData as any)?.horario || {}}
+                  calendar_notes={(cursoData as any)?.calendar_notes || (moduleData as any)?.calendar_notes || {}}
+                  planning_ledger={planningLedger}
+                  onUpdateNote={(key, val) => {
+                    const storeData = cursoData || moduleData;
+                    if (!storeData) return;
+                    const newNotes = { ...(storeData as any).calendar_notes, [key]: val };
+                    if (activeCursoId) setCursoData({ ...storeData, calendar_notes: newNotes } as any);
+                    else setModuleData({ ...storeData, calendar_notes: newNotes } as any);
+                  }}
+                />
+              </div>
             )}
 
           </div>

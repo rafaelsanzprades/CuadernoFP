@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map, MessageSquare, FileText, Route, FolderOpen, Mail, Phone, Calendar, X } from "lucide-react";
+import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map, MessageSquare, FileText, Route, FolderOpen, Mail, Phone, Calendar, X, ClipboardCheck } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 import { PlanoClaseTab } from "@/components/features/alumnado/PlanoClaseTab";
 
 import { ContextoGrupoTab } from "@/components/features/alumnado/ContextoGrupoTab";
+import { TutoriaTab } from "@/components/features/alumnado/TutoriaTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -48,6 +49,7 @@ export default function AlumnadoPage() {
   const TABS = [
     { id: "listado", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.listado')}</>, cleanLabel: t('tabs.listado') },
     { id: "plano", label: <><span className="inline-flex"><LayoutGrid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.plano')}</>, cleanLabel: t('tabs.plano') },
+    { id: "tutoria", label: <><span className="inline-flex"><ClipboardCheck className="w-[1.2em] h-[1.2em] mr-1" /></span> Tutoría</>, cleanLabel: 'Tutoría' },
     { id: "contexto", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Contexto</>, cleanLabel: 'Contexto del grupo' }
   ];
 
@@ -56,6 +58,7 @@ export default function AlumnadoPage() {
   const TAB_DESCRIPTIONS: Record<string, string> = {
     listado: 'Gestión del listado de alumnado y ficha individual.',
     plano: 'Distribución y plano visual del aula.',
+    tutoria: 'Seguimiento tutorial del alumnado.',
   };
 
   useEffect(() => {
@@ -461,6 +464,7 @@ export default function AlumnadoPage() {
           )}
 
           {activeTab === "plano" && <PlanoClaseTab />}
+          {activeTab === "tutoria" && <div className="mt-4"><TutoriaTab /></div>}
           {activeTab === "contexto" && <ContextoGrupoTab />}
           
           </MotionWrapper>

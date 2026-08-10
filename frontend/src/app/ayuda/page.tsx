@@ -47,7 +47,12 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "fechas", label: "Fechas y horarios" },
     { id: "eventos", label: "Eventos y festivos" },
     { id: "actividades", label: "Actividades extraescolares" },
-    { id: "visual", label: "Calendario visual" },
+  ],
+  "/agenda": [
+    { id: "actual", label: "Actual" },
+    { id: "planificacion", label: "Planificación" },
+    { id: "progreso-ra-ud", label: "Progreso y relación RA con UD" },
+    { id: "mensual", label: "Mensual" },
   ],
   "/alumnado": [
     { id: "listado", label: "Listado" },
@@ -171,7 +176,8 @@ const FAQS = [
       { q: "¿Cómo se calcula la previsión de 'Planificación mensual'?", a: "Esta previsión estima que las horas lectivas de cada semana se cumplen de forma proporcional a los días festivos o no lectivos que contenga, a falta de que se concreten el calendario oficial del curso académico y la distribución definitiva del horario semanal por días. Es una aproximación orientativa, no una previsión exacta." },
       { q: "¿Cómo paso lista o registro faltas de asistencia?", a: "En la sección de Seguimiento tienes la pestaña 'Asistencia'. Verás a todo tu alumnado y con un solo clic en su cuadrícula puedes alternar entre Falta, Retraso o Falta Justificada." },
       { q: "¿Cómo evalúo una tarea o examen concreto?", a: "Ve a la sección 'Calificaciones' > pestaña 'Matriz' para introducir notas enteras (1 al 10, sin decimales) cruzando Indicadores/Instrumentos con el alumnado." },
-      { q: "¿Cómo se calcula exactamente la nota final del trimestre?", a: "El sistema cruza las calificaciones que pones en los Instrumentos con el peso del Indicador (Evaluación > bloque Indicadores), que a su vez alimenta el peso del Criterio de Evaluación (CE) y finalmente el Resultado de Aprendizaje (RA). Todo en tiempo real." }
+      { q: "¿Cómo se calcula exactamente la nota final del trimestre?", a: "El sistema cruza las calificaciones que pones en los Instrumentos con el peso del Indicador (Evaluación > bloque Indicadores), que a su vez alimenta el peso del Criterio de Evaluación (CE) y finalmente el Resultado de Aprendizaje (RA). Todo en tiempo real." },
+      { q: "¿Qué significan los colores (morado, rojo, naranja) en la agenda y el calendario visual?", a: "Los colores del fondo indican el trimestre (evaluación) al que pertenece cada actividad o fecha: 1er trimestre (morado/malva), 2º trimestre (rojo/rosa) y 3er trimestre (naranja/ámbar)." }
     ]
   },
   {

@@ -47,63 +47,71 @@ export function PlanificacionMensualTab() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
-      <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-        <span><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Planificación y seguimiento mensual
-      </h2>
-
-      <section className="glass-card p-6 overflow-x-auto">
+      <Card className="p-6 overflow-x-auto">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-5">
+          <span><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Planificación y seguimiento mensual
+        </h2>
         <table className="w-full text-left border-collapse text-body whitespace-nowrap">
           <thead>
             <tr className="border-b border-[var(--glass-border)] text-muted bg-foreground/5">
-              <th className="p-3 w-[220px] max-w-[220px] sticky left-0 bg-[#111827] z-10 border-r border-[var(--glass-border)]"></th>
-              <th className="p-3 w-[50px] max-w-[50px] sticky left-[220px] bg-[#111827] z-10 text-center"></th>
-              <th className="p-3 w-[64px] max-w-[64px] sticky left-[270px] bg-[#111827] z-10 text-center"></th>
-              <th className="p-3 w-[64px] max-w-[64px] sticky left-[334px] bg-[#111827] z-10 text-center"></th>
-              <th className="p-3 w-[90px] max-w-[90px] sticky left-[398px] bg-[#111827] z-10 text-center border-r border-[var(--glass-border)]"></th>
+              <th className="p-3 w-[50px] max-w-[50px] sticky left-0 bg-[#111827] z-10 border-r border-[var(--glass-border)] text-center"></th>
+              <th className="p-3 w-[440px] max-w-[440px] sticky left-[50px] bg-[#111827] z-10 border-r border-[var(--glass-border)]"></th>
+              <th className="p-3 w-[64px] max-w-[64px] sticky left-[490px] bg-[#111827] z-10 text-center"></th>
+              <th className="p-3 w-[64px] max-w-[64px] sticky left-[554px] bg-[#111827] z-10 text-center"></th>
+              <th className="p-3 w-[90px] max-w-[90px] sticky left-[618px] bg-[#111827] z-10 text-center border-r border-[var(--glass-border)]"></th>
               {meses_display.map((m) => (
-                <th key={m} colSpan={2} className="p-2 text-center border-r border-[var(--glass-border)]">{m}</th>
+                <th key={m} colSpan={2} className="p-1 text-center border-r border-[var(--glass-border)]">{m}</th>
               ))}
             </tr>
             <tr className="border-b border-[var(--glass-border)] text-caption text-muted bg-foreground/5">
-              <th className="p-2 w-[220px] max-w-[220px] sticky left-0 bg-[#111827] z-10 border-r border-[var(--glass-border)] text-left font-bold text-foreground">UD</th>
-              <th className="p-2 w-[50px] max-w-[50px] sticky left-[220px] bg-[#111827] z-10 text-center" title="Evaluación en la que termina la UD">Ev.</th>
-              <th className="p-2 w-[64px] max-w-[64px] sticky left-[270px] bg-[#111827] z-10 text-center text-info">Prv</th>
-              <th className="p-2 w-[64px] max-w-[64px] sticky left-[334px] bg-[#111827] z-10 text-center text-[#14a085]/70">Imp</th>
-              <th className="p-2 w-[90px] max-w-[90px] truncate overflow-hidden sticky left-[398px] bg-[#111827] z-10 text-center text-warning border-r border-[var(--glass-border)]" title="% Impartido / Previsto">%Imp/Prv</th>
+              <th className="p-2 w-[50px] max-w-[50px] sticky left-0 bg-[#111827] z-10 border-r border-[var(--glass-border)] text-center" title="Trimestre en el que termina la UD">Tri.</th>
+              <th className="p-2 w-[440px] max-w-[440px] sticky left-[50px] bg-[#111827] z-10 border-r border-[var(--glass-border)] text-left font-bold text-foreground">UD. Unidad didáctica</th>
+              <th className="p-2 w-[64px] max-w-[64px] sticky left-[490px] bg-[#111827] z-10 text-center text-info">Prv</th>
+              <th className="p-2 w-[64px] max-w-[64px] sticky left-[554px] bg-[#111827] z-10 text-center text-[#14a085]/70">Imp</th>
+              <th className="p-2 w-[90px] max-w-[90px] truncate overflow-hidden sticky left-[618px] bg-[#111827] z-10 text-center text-warning border-r border-[var(--glass-border)]" title="% Impartido / Previsto">%Imp/Prv</th>
               {meses_display.map((m) => (
                 <React.Fragment key={m}>
-                  <th className="p-2 text-center text-info">Prv</th>
-                  <th className="p-2 text-center text-[#14a085]/70 border-r border-[var(--glass-border)]">Imp</th>
+                  <th className="p-1 w-[40px] text-center text-info">Prv</th>
+                  <th className="p-1 w-[40px] text-center text-[#14a085]/70 border-r border-[var(--glass-border)]">Imp</th>
                 </React.Fragment>
               ))}
             </tr>
           </thead>
           <tbody>
-            {df_sgmt_calculated.map((row: any, idx: number) => (
-              <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
+            {df_sgmt_calculated.map((row: any, idx: number) => {
+              const bgClass = row.ev == 1 ? 'bg-purple-500/10 text-white' : row.ev == 2 ? 'bg-rose-500/10 text-white' : row.ev == 3 ? 'bg-amber-500/10 text-white' : 'bg-background hover:bg-[#111827] text-foreground';
+              const stickyBg = row.ev == 1 ? 'bg-[#181530]' : row.ev == 2 ? 'bg-[#261421]' : row.ev == 3 ? 'bg-[#231d11]' : 'bg-background group-hover:bg-[#111827]';
+              const textTriClass = row.ev == 1 ? 'text-purple-300' : row.ev == 2 ? 'text-rose-300' : row.ev == 3 ? 'text-amber-300' : 'text-muted';
+              const isColored = !!row.ev;
+
+              return (
+              <tr key={idx} className={`border-b border-white/5 transition-colors ${bgClass}`}>
+                <td className={`p-3 w-[50px] max-w-[50px] text-center sticky left-0 z-10 border-r border-[var(--glass-border)] font-bold shadow-[2px_0_5px_-2px_rgba(0,0,0,0.5)] ${stickyBg} ${textTriClass}`}>
+                  {row.ev ? `${row.ev}ª` : ''}
+                </td>
                 <td
                   title={getUdLabel(row)}
-                  className="p-3 w-[220px] max-w-[220px] truncate font-mono sticky left-0 bg-background group-hover:bg-[#111827] border-r border-[var(--glass-border)] font-bold"
+                  className={`p-3 w-[440px] max-w-[440px] truncate font-mono sticky left-[50px] z-10 border-r border-[var(--glass-border)] font-bold ${stickyBg}`}
                 >
                   {getUdLabel(row)}
                 </td>
-                <td className="p-3 w-[50px] max-w-[50px] text-center sticky left-[220px] bg-background group-hover:bg-[#111827]">{row.ev ? `${row.ev}ª` : ''}</td>
-                <td className="p-3 w-[64px] max-w-[64px] text-center sticky left-[270px] bg-background group-hover:bg-[#111827] text-info">{row.horas_ud || ''}</td>
-                <td className="p-3 w-[64px] max-w-[64px] text-center sticky left-[334px] bg-background group-hover:bg-[#111827] text-[#14a085] font-bold">{row.Total_Imp || ''}</td>
-                <td className={`p-3 w-[90px] max-w-[90px] text-center sticky left-[398px] bg-background group-hover:bg-[#111827] border-r border-[var(--glass-border)] font-bold ${row.pct_imp_prev >= 100 ? 'text-success' : row.pct_imp_prev > 0 ? 'text-warning' : 'text-muted'}`}>
+                <td className={`p-3 w-[64px] max-w-[64px] text-center sticky left-[490px] z-10 ${stickyBg} ${isColored ? 'text-info/90' : 'text-info'}`}>{row.horas_ud || ''}</td>
+                <td className={`p-3 w-[64px] max-w-[64px] text-center sticky left-[554px] z-10 font-bold ${stickyBg} ${isColored ? 'text-[#34d399]' : 'text-[#14a085]'}`}>{row.Total_Imp || ''}</td>
+                <td className={`p-3 w-[90px] max-w-[90px] text-center sticky left-[618px] z-10 border-r border-[var(--glass-border)] font-bold ${stickyBg} ${row.pct_imp_prev >= 100 ? 'text-success' : row.pct_imp_prev > 0 ? 'text-warning' : (isColored ? 'text-white/60' : 'text-muted')}`}>
                   {row.pct_imp_prev}%
                 </td>
                 {meses_display.map((m) => (
                   <React.Fragment key={m}>
-                    <td className="p-3 text-center text-foreground/60">{Number(row[`${m}_Prv`]) || ''}</td>
-                    <td className="p-3 text-center text-[#14a085] font-semibold border-r border-[var(--glass-border)] bg-[#14a085]/5">{Number(row[`${m}_Imp`]) || ''}</td>
+                    <td className={`p-1 w-[40px] text-center ${isColored ? 'text-white/80' : 'text-foreground/60'}`}>{Number(row[`${m}_Prv`]) || ''}</td>
+                    <td className={`p-1 w-[40px] text-center font-semibold border-r border-[var(--glass-border)] ${isColored ? 'bg-black/20 text-[#34d399]' : 'bg-[#14a085]/5 text-[#14a085]'}`}>{Number(row[`${m}_Imp`]) || ''}</td>
                   </React.Fragment>
                 ))}
               </tr>
-            ))}
+              );
+            })}
           </tbody>
         </table>
-      </section>
+      </Card>
 
       <p className="text-caption text-muted">
         Esta previsión estima que las horas lectivas de cada semana se cumplen de forma

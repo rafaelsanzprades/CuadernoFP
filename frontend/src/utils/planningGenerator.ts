@@ -187,10 +187,22 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
   // Evaluación (1/2/3) en la que cae una fecha, según los rangos de trimestre.
   const getEvaluacion = (d: Date | undefined): number | null => {
     if (!d) return null;
+    let closestTerm = 1;
+    let minDiff = Infinity;
     for (let i = 0; i < termRanges.length; i++) {
       if (inRange(d, termRanges[i].ini, termRanges[i].fin)) return i + 1;
+      
+      // Fallback: si cae en un hueco (ej. vacaciones de navidad), buscar el más cercano
+      if (termRanges[i].ini) {
+        const diffIni = Math.abs(d.getTime() - termRanges[i].ini!.getTime());
+        if (diffIni < minDiff) { minDiff = diffIni; closestTerm = i + 1; }
+      }
+      if (termRanges[i].fin) {
+        const diffFin = Math.abs(d.getTime() - termRanges[i].fin!.getTime());
+        if (diffFin < minDiff) { minDiff = diffFin; closestTerm = i + 1; }
+      }
     }
-    return null;
+    return closestTerm;
   };
 
   // 4. Build new df_sgmt

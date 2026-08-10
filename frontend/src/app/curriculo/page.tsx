@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { Award, BookOpen, Calculator, Check, ClipboardList, GraduationCap, Puzzle, Target, Settings , Info, FolderOpen, Grid } from "lucide-react";
+import { Award, BookOpen, Calculator, Check, ClipboardList, GraduationCap, Puzzle, Target, Settings , Info, FolderOpen, Grid, Wand2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -145,6 +145,73 @@ export default function MatricesPage() {
   const df_ce = moduleData?.df_ce || [];
   const df_sesiones = moduleData?.df_sesiones || [];
   const df_tareas = moduleData?.df_tareas || [];
+
+  const generateAutoSessions = () => {
+    if (!window.confirm("¿Seguro que quieres autocompletar el plan de sesiones? Esto reemplazará las sesiones actuales de todas las UDs.")) return;
+
+    const newSessions: any[] = [];
+
+    df_ud.forEach((ud: any) => {
+      const horas = Number(ud.horas_ud) || 0;
+      if (horas <= 0) return;
+
+      const raStr = ud.ra_mappings ? Object.keys(ud.ra_mappings).join(" / ") : "";
+      let sessionId = 1;
+
+      const addSession = (h: number, tipo: string, contenido: string, clave: string, recursos: string) => {
+        if (h <= 0) return;
+        newSessions.push({
+          id_sesion: `${ud.id_ud}-S${sessionId.toString().padStart(2, '0')}`,
+          id_ud: ud.id_ud,
+          Num_Orden: sessionId,
+          Horas: h,
+          Tipo_Actividad: tipo,
+          RA_CE: raStr,
+          Contenidos: contenido,
+          Aspectos_Clave: clave,
+          Recursos: recursos
+        });
+        sessionId++;
+      };
+
+      if (horas >= 9) {
+        const remaining = horas - 9;
+        const hTeoria = Math.round(remaining * 0.4);
+        const hPractica = remaining - hTeoria;
+
+        addSession(1, "Teoría", "Presentación de la Unidad", "AC-PRO-01", "REC-DID-01");
+        if (hTeoria > 0) addSession(hTeoria, "Teoría", "Exposición teórica", "AC-PRO-01, AC-PRO-03", "REC-DID-01, REC-DID-02");
+        if (hPractica > 0) addSession(hPractica, "Práctica", "Trabajos prácticos", "AC-TEC-01, AC-TEC-02", "REC-TAL-01, REC-TAL-02, REC-TAL-05");
+        addSession(2, "Teoría", "Examen escrito", "AC-ACT-02", "REC-DOC-04");
+        addSession(2, "Práctica", "Examen práctico", "AC-TEC-04, AC-NOR-01", "REC-TAL-03, REC-TAL-04");
+        addSession(4, "Proyecto", "Presentaciones", "AC-ACT-01", "REC-DID-04, REC-DOC-04");
+      } else {
+        // UDs con < 9 horas (Reparto mínimo/escalado)
+        let hLeft = horas;
+        
+        const p1 = Math.min(1, hLeft); hLeft -= p1;
+        addSession(p1, "Teoría", "Presentación de la Unidad", "AC-PRO-01", "REC-DID-01");
+        
+        const p2 = Math.min(Math.floor(hLeft * 0.4), hLeft); hLeft -= p2;
+        if (p2 > 0) addSession(p2, "Teoría", "Exposición teórica", "AC-PRO-01", "REC-DID-01");
+
+        const p3 = Math.min(Math.floor(hLeft * 0.6), hLeft); hLeft -= p3;
+        if (p3 > 0) addSession(p3, "Práctica", "Trabajos prácticos", "AC-TEC-01", "REC-TAL-01");
+        
+        const p4 = Math.min(1, hLeft); hLeft -= p4;
+        if (p4 > 0) addSession(p4, "Teoría", "Examen escrito", "AC-ACT-02", "REC-DOC-04");
+        
+        const p5 = Math.min(1, hLeft); hLeft -= p5;
+        if (p5 > 0) addSession(p5, "Práctica", "Examen práctico", "AC-TEC-04", "REC-TAL-03");
+
+        const p6 = hLeft; hLeft -= p6;
+        if (p6 > 0) addSession(p6, "Proyecto", "Presentaciones", "AC-ACT-01", "REC-DID-04");
+      }
+    });
+
+    updateDataFrame("df_sesiones", newSessions);
+    toast.success("¡Plan de sesiones autocompletado!");
+  };
 
   const handleAddTarea = () => {
     const newTareas = [...df_tareas];
@@ -607,7 +674,7 @@ export default function MatricesPage() {
 
             {/* Unidades didácticas */}
             {activeTab === "unidades" && (
-              <div className="animate-in fade-in duration-500">
+              <div className="animate-in fade-in duration-500 flex flex-col gap-8">
                 <Card className="p-6 border-t-4 border-t-purple-500">
                   <div className="flex justify-between items-center mb-4">
                     <h2 className="text-heading font-bold flex items-center gap-2 text-foreground">
@@ -786,14 +853,23 @@ export default function MatricesPage() {
                     <h2 className="text-heading font-bold flex items-center gap-2 text-foreground">
                       <span><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Secuenciación de UD
                     </h2>
-                    <Button
-                      variant="ghost"
-                      onClick={() => setAllUdsOpen(prev => !prev)}
-                      className="text-body border border-[var(--glass-border)]"
-                    >
-                      <span>{allUdsOpen ? '▲' : '▼'}</span>
-                      {allUdsOpen ? 'Colapsar todas' : 'Expandir todas'}
-                    </Button>
+                    <div className="flex gap-4">
+                      <Button
+                        variant="ghost"
+                        onClick={generateAutoSessions}
+                        className="text-purple-400 hover:text-purple-300 border border-purple-500/30 hover:border-purple-400/50 bg-purple-500/10"
+                      >
+                        <Wand2 className="w-4 h-4 mr-2" /> Autocompletar plan
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        onClick={() => setAllUdsOpen(prev => !prev)}
+                        className="text-body border border-[var(--glass-border)]"
+                      >
+                        <span>{allUdsOpen ? '▲' : '▼'}</span>
+                        {allUdsOpen ? 'Colapsar todas' : 'Expandir todas'}
+                      </Button>
+                    </div>
                   </div>
 
                   {df_ud.length === 0 ? (

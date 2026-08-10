@@ -52,9 +52,9 @@ export function TabRelacionRaUd() {
 
   return (
     <div className="animate-in fade-in duration-500 w-full">
-      <Card className="p-6 border-t-4 border-t-amber-500">
+      <Card className="p-6">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-          <h2 className="text-heading font-bold flex items-center gap-2 text-foreground">
+          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
             <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Progreso y relación entre Resultados de aprendizaje y Unidades didácticas o de trabajo
           </h2>
           <div className="flex items-center gap-4 text-caption bg-background/50 p-2 rounded-lg border border-[var(--glass-border)]">

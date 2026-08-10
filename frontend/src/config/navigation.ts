@@ -8,7 +8,7 @@ export const navGroups = [
       { href: "/archivos?tab=datos", label: "Archivos", icon: FolderOpen, description: "Gestión de archivos de Programación y Curso." },
       { href: "/catalogo?tab=familias", label: "Catálogo", icon: GraduationCap, description: "Familias, títulos, módulos y currículos (RA y CE)." },
       { href: "/normativa?tab=ccaa", label: "Normativa", icon: FileText, description: "Legislación, plantillas y normativas." },
-      { href: "/magia?tab=comunidades", label: "Magia", icon: Sparkles, description: "Generación del PDF y comparativas." }
+      { href: "/magia?tab=comunidades", label: "MagIA", icon: Sparkles, description: "Generación del PDF y comparativas." }
     ]
   },
   {

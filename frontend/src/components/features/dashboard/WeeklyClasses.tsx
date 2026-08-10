@@ -1,7 +1,7 @@
 import { AlertCircle, BookOpen, Calendar, CalendarDays, ChevronRight, Circle, Clock, Layers } from "lucide-react";
 import React, { useState } from 'react';
 import { useAppStore } from '@/store/useAppStore';
-import { MotionWrapper } from '@/components/ui/MotionWrapper';
+import { Card } from '@/components/ui/Card';
 import { format, isSameDay } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { simulateSchedule, DaySchedule } from '@/utils/scheduleSimulator';
@@ -176,11 +176,11 @@ export const WeeklyClasses = () => {
   };
 
   return (
-    <MotionWrapper className="glass-panel p-6 border-l-4 border-l-blue-400">
+    <Card className="p-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
         <div>
           <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-            <CalendarDays className="w-6 h-6 text-info" /> Previsión Semanal
+            <CalendarDays className="w-6 h-6 text-info" /> Previsión semanal
           </h2>
           <p className="text-body text-muted mt-1">
             Distribución temporal de los módulos y las sesiones planificadas en el aula.
@@ -198,7 +198,7 @@ export const WeeklyClasses = () => {
                   : 'text-muted hover:text-foreground'
               }`}
             >
-              Semana Actual
+              Semana actual
             </button>
             <button
               onClick={() => setActiveWeekTab('next')}
@@ -208,13 +208,13 @@ export const WeeklyClasses = () => {
                   : 'text-muted hover:text-foreground'
               }`}
             >
-              Semana Siguiente
+              Semana siguiente
               <ChevronRight className="w-3.5 h-3.5" />
             </button>
           </div>
         ) : (
           <div className="bg-info/10 border border-info/30 text-info text-caption px-3 py-1.5 rounded-lg font-bold">
-            Semana Actual
+            Semana actual
           </div>
         )}
       </div>
@@ -235,6 +235,6 @@ export const WeeklyClasses = () => {
           {renderWeekDays(nextWeekDays)}
         </div>
       )}
-    </MotionWrapper>
+    </Card>
   );
 };

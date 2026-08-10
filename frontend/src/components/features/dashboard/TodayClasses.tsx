@@ -1,7 +1,7 @@
 import { BookOpen, Calendar, Clock, Layers } from "lucide-react";
 import React from 'react';
 import { useAppStore } from '@/store/useAppStore';
-import { MotionWrapper } from '@/components/ui/MotionWrapper';
+import { Card } from '@/components/ui/Card';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { simulateSchedule } from '@/utils/scheduleSimulator';
@@ -31,12 +31,12 @@ export const TodayClasses = () => {
       : "No tienes sesiones planificadas para el día de hoy según el calendario del módulo.";
 
     return (
-      <MotionWrapper className="glass-panel p-6 border-l-4 border-l-gray-400">
+      <Card className="p-6">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-2">
-          <Calendar className="w-6 h-6" /> Tus Clases de Hoy ({formattedToday})
+          <Calendar className="w-6 h-6" /> Tus clases de hoy ({formattedToday})
         </h2>
         <p className="text-muted">{reason}</p>
-      </MotionWrapper>
+      </Card>
     );
   }
 
@@ -44,13 +44,13 @@ export const TodayClasses = () => {
   const udHoy = moduleData.df_ud?.find((u: any) => String(u.id_ud) === udId);
 
   return (
-    <MotionWrapper className="glass-panel p-6 border-l-4 border-l-accent relative overflow-hidden">
+    <Card className="p-6 relative overflow-hidden">
       <div className="absolute -right-10 -top-10 text-accent opacity-10">
         <BookOpen className="w-48 h-48" />
       </div>
       
       <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4 relative z-10">
-        <Calendar className="w-6 h-6 text-accent" /> Tus Clases de Hoy ({formattedToday})
+        <Calendar className="w-6 h-6 text-accent" /> Tus clases de hoy ({formattedToday})
       </h2>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10">
@@ -98,6 +98,6 @@ export const TodayClasses = () => {
           ))}
         </div>
       </div>
-    </MotionWrapper>
+    </Card>
   );
 };
