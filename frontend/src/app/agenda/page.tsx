@@ -14,6 +14,8 @@ import { WeeklyClasses } from "@/components/features/dashboard/WeeklyClasses";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
+import { TabRelacionRaUd } from "@/components/features/curriculo/TabRelacionRaUd";
+import { Target } from "lucide-react";
 
 export default function AgendaPage() {
   const {
@@ -51,6 +53,7 @@ export default function AgendaPage() {
   const TABS = [
     { id: "actual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> Actual</>, cleanLabel: "Actual" },
     { id: "planificacion", label: <><span className="inline-flex"><CalendarRange className="w-[1.2em] h-[1.2em] mr-1" /></span> Planificación</>, cleanLabel: "Planificación" },
+    { id: "relacion-ra-ud", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Relación RA con UD</>, cleanLabel: "Relación RA con UD" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -58,6 +61,7 @@ export default function AgendaPage() {
   const TAB_DESCRIPTIONS: Record<string, string> = {
     actual: 'Vista de la agenda diaria y tareas pendientes.',
     planificacion: 'Planificación y seguimiento mensual de la programación.',
+    'relacion-ra-ud': 'Ponderación y relación entre unidades didácticas y resultados de aprendizaje.',
   };
 
   return (
@@ -110,12 +114,15 @@ export default function AgendaPage() {
 
             {/* Contenido Pestaña Planificación */}
             {activeTab === "planificacion" && (
-              <div className="animate-in fade-in duration-500">
+              <div className="animate-in fade-in duration-500 w-full space-y-4">
                 <PlanificacionMensualTab />
               </div>
             )}
 
-
+            {/* Contenido Pestaña Relación RA con UD */}
+            {activeTab === "relacion-ra-ud" && (
+              <TabRelacionRaUd />
+            )}
 
           </div>
         </div>

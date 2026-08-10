@@ -51,7 +51,6 @@ export default function MatricesPage() {
   const TABS = [
     { id: "ponderacion-ra-ce", label: "Ponderación RA y CE", cleanLabel: "Ponderación RA y CE", icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "unidades", label: "Unidades didácticas", cleanLabel: "Unidades didácticas", icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "relacion-ra-ud", label: "Relación RA con UD", cleanLabel: "Relación RA con UD", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "contribucion-og", label: "Contribución RA en OG", cleanLabel: "Contribución RA en OG", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "tareas", label: "Tareas competenciales", cleanLabel: "Tareas competenciales", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
   ];
@@ -59,7 +58,6 @@ export default function MatricesPage() {
   const TAB_DESCRIPTIONS: Record<string, string> = {
     'ponderacion-ra-ce': 'Matriz de resultados de aprendizaje y criterios de evaluación, y su ponderación.',
     'unidades': 'Definición de unidades didácticas o unidades de trabajo.',
-    'relacion-ra-ud': 'Ponderación y relación entre unidades didácticas y resultados de aprendizaje.',
     'contribucion-og': 'Contribución de los RA a los objetivos generales del título.',
     'tareas': 'Diseño y planificación de tareas y actividades competenciales.',
   };
@@ -809,44 +807,6 @@ export default function MatricesPage() {
                       handleDeleteSesion={handleDeleteSesion}
                       allUdsOpen={allUdsOpen}
                     />
-                  )}
-                </Card>
-              </div>
-            )}
-
-            {/* ── RAs ↔ UDs ────────────────────────────────────── */}
-            {activeTab === "relacion-ra-ud" && (
-              <div className="animate-in fade-in duration-500">
-                <Card className="p-6 border-t-4 border-t-amber-500">
-                  <h2 className="text-heading font-bold flex items-center gap-2 text-foreground mb-4">
-                    <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Relación entre Resultados de aprendizaje y Unidades didácticas o de trabajo
-                  </h2>
-                  {df_ra && df_ra.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                      {df_ra.map((ra: any, idx: number) => {
-                        const uds = df_ud?.filter((ud: any) => ud[ra.id_ra] > 0) || [];
-                        return (
-                          <div key={idx} className="rounded-xl border border-[var(--glass-border)] bg-foreground/5 p-4">
-                            <div className="font-bold text-foreground mb-3">
-                              {ra.id_ra} <span className="text-muted font-normal text-body">({ra.peso_ra}%)</span>
-                            </div>
-                            {uds.length > 0 ? (
-                              <div className="space-y-1.5">
-                                {uds.map((ud: any, uIdx: number) => (
-                                  <div key={uIdx} className="text-caption text-[#ffe599] bg-[#d4af37]/10 border border-[#d4af37]/20 rounded-md px-2 py-1">
-                                    {ud.id_ud} ({ud.horas_ud || ud.Horas || 0}h) · {ud[ra.id_ra]}%
-                                  </div>
-                                ))}
-                              </div>
-                            ) : (
-                              <div className="text-caption text-muted italic">Sin UDs asignadas</div>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  ) : (
-                    <div className="text-center text-muted">No hay Resultados de aprendizaje definidos.</div>
                   )}
                 </Card>
               </div>

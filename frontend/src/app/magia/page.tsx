@@ -86,17 +86,6 @@ export default function MagiaPage() {
 
   const [fechaFinal, setFechaFinal] = useState("");
 
-  const [comparativaPdContent, setComparativaPdContent] = useState("");
-
-  useEffect(() => {
-    if (!comparativaPdContent) {
-      fetch("/Comparativa_PD.md")
-        .then(res => res.text())
-        .then(text => setComparativaPdContent(text))
-        .catch(err => console.error("Error cargando Comparativa_PD.md", err));
-    }
-  }, [comparativaPdContent]);
-
   useEffect(() => {
     const fetchData = async () => {
       setLoadingData(true);
@@ -241,7 +230,6 @@ export default function MagiaPage() {
     comunidades: 'Generación de la programación didáctica oficial, por comunidad autónoma.',
     programacion: 'Documentos de apoyo: matriz de currículo y documentos individuales de UD/Tareas.',
     curso: 'Calendario, seguimiento, plano de aula, boletines y actas de evaluación del curso.',
-    anexos: 'Comparativa de modelos y el informe EQAVET para la memoria final.',
   };
 
   return (
@@ -302,9 +290,6 @@ export default function MagiaPage() {
                       </TabsTrigger>
                       <TabsTrigger value="curso">
                         <Calendar className="w-4 h-4" /> Curso
-                      </TabsTrigger>
-                      <TabsTrigger value="anexos">
-                        <Scale className="w-4 h-4" /> Anexos
                       </TabsTrigger>
                     </TabsList>
                   </Tabs>
@@ -729,60 +714,6 @@ export default function MagiaPage() {
                             </Button>
                           </div>
                         </div>
-                      </div>
-                    </Card>
-                  </div>
-                )}
-
-                {/* ══════════════════════════ ANEXOS ══════════════════════════ */}
-                {activeTab === "anexos" && (
-                  <div className="pt-2 space-y-6">
-                    <Card className="p-8 border-t-4 border-t-amber-500">
-                      <style>{`
-                        .pd-comparativa table { table-layout: fixed; width: 100%; }
-                        .pd-comparativa th:nth-child(1), .pd-comparativa td:nth-child(1) { width: 3.5rem; }
-                        .pd-comparativa th:nth-child(2), .pd-comparativa td:nth-child(2) { width: 30%; }
-                        .pd-comparativa th:nth-child(3), .pd-comparativa td:nth-child(3),
-                        .pd-comparativa th:nth-child(4), .pd-comparativa td:nth-child(4),
-                        .pd-comparativa th:nth-child(5), .pd-comparativa td:nth-child(5) { width: 23%; }
-                        .pd-comparativa th, .pd-comparativa td { vertical-align: top; word-break: break-word; }
-                        .pd-comparativa th {
-                          text-align: left;
-                          font-size: 1rem;
-                          font-weight: 800;
-                          color: #ffffff;
-                          background: rgba(245, 158, 11, 0.15);
-                          border-bottom: 2px solid rgba(245, 158, 11, 0.5);
-                        }
-                      `}</style>
-                      <div className="pd-comparativa prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-table:border-collapse prose-table:w-full">
-                        {comparativaPdContent ? (
-                          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}
-                            components={{
-                              table: ({ children }) => (
-                                <div className="overflow-x-auto"><table>{children}</table></div>
-                              ),
-                            }}
-                          >
-                            {comparativaPdContent}
-                          </ReactMarkdown>
-                        ) : (
-                          <div className="flex justify-center p-8">
-                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-info"></div>
-                          </div>
-                        )}
-                      </div>
-                    </Card>
-
-                    <Card className="p-6 border-t-4 border-t-green-500">
-                      <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><ShieldCheck className="w-[1.2em] h-[1.2em] mr-1" /></span> Calidad EQAVET</h2>
-                      <p className="text-body text-muted mb-6">Informe de autoevaluación EQAVET y propuestas de mejora (PDCA), para la memoria final.</p>
-                      <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between max-w-md">
-                        <div>
-                          <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Award className="w-[1.2em] h-[1.2em] mr-1" /></span> Informe EQAVET</h3>
-                          <p className="text-body text-muted mb-6">Indicadores de calidad + puntos fuertes y áreas de mejora.</p>
-                        </div>
-                        <DualDownloadButtons type="informe_eqavet" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
                       </div>
                     </Card>
                   </div>

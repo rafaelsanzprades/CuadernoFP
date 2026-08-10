@@ -60,7 +60,6 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
         from pdf_boletin_individual import generar_pdf_boletin_individual
         from pdf_clases_ud import generar_pdf_clases_ud
         from pdf_alumnado_ubicacion import generar_pdf_alumnado_ubicacion
-        from pdf_informe_eqavet import generar_pdf_informe_eqavet
         from pdf_ficha_alumnado import generar_pdf_ficha_alumnado
 
         module_data = request.module_data
@@ -139,9 +138,6 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             elif type == "alumnado_ubicacion":
                 from pdf_alumnado_ubicacion import generar_docx_alumnado_ubicacion
                 docx_bytes = generar_docx_alumnado_ubicacion(info_modulo, plano_clase, df_al)
-            elif type == "informe_eqavet":
-                from pdf_informe_eqavet import generar_docx_informe_eqavet
-                docx_bytes = generar_docx_informe_eqavet(info_modulo, module_data.get("eqavet_evaluacion") or {})
             elif type == "ficha_alumnado":
                 if not al_id: raise HTTPException(status_code=400, detail="al_id is required for ficha_alumnado")
                 from pdf_ficha_alumnado import generar_docx_ficha_alumnado
@@ -189,8 +185,6 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             )
         elif type == "alumnado_ubicacion":
             buffer = generar_pdf_alumnado_ubicacion(info_modulo, plano_clase, df_al)
-        elif type == "informe_eqavet":
-            buffer = generar_pdf_informe_eqavet(info_modulo, module_data.get("eqavet_evaluacion") or {})
         elif type == "ficha_alumnado":
             if not al_id: raise HTTPException(status_code=400, detail="al_id is required for ficha_alumnado")
             tutoria_entry = (curso_data.get("tutoria_ledger") or {}).get(al_id)

@@ -20,7 +20,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { useTranslation } from "react-i18next";
 import { OneDriveSyncPanel } from "@/components/features/cloud/OneDriveSyncPanel";
-import { TabAutores } from "@/components/features/catalogo/TabAutores";
+
 
 export default function ArchivosTrabajoPage() {
   const {
@@ -375,7 +375,6 @@ export default function ArchivosTrabajoPage() {
   const TABS = [
     { id: "datos", label: <span className="flex items-center gap-2"><Database className="w-4 h-4 shrink-0" /> Datos</span>, cleanLabel: "Datos" },
     { id: "nube", label: <span className="flex items-center gap-2"><Cloud className="w-4 h-4 shrink-0" /> Nube</span>, cleanLabel: "Nube" },
-    { id: "autores", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> Autores</span>, cleanLabel: "Autores" },
     { id: "seguridad", label: <span className="flex items-center gap-2"><Shield className="w-4 h-4 shrink-0" /> Seguridad</span>, cleanLabel: "Seguridad" },
     { id: "asistente-ia", label: <span className="flex items-center gap-2"><Sparkles className="w-4 h-4 shrink-0" /> Asistente IA</span>, cleanLabel: "Asistente IA" }
   ];
@@ -383,7 +382,6 @@ export default function ArchivosTrabajoPage() {
   const breadcrumbSuffixMap: Record<string, string> = {
     "datos": "Archivos",
     "nube": "Sincronización en la Nube",
-    "autores": "Catálogo de Autores",
     "seguridad": "Seguridad y Privacidad",
     "asistente-ia": "Asistente IA"
   };
@@ -391,7 +389,6 @@ export default function ArchivosTrabajoPage() {
   const TAB_DESCRIPTIONS: Record<string, string> = {
     'datos': 'Gestión de los archivos de estructura y programación didáctica del docente.',
     'nube': 'Sincronización bidireccional segura con Google Drive y Microsoft OneDrive.',
-    'autores': 'Integración de recursos editoriales externos en formato abierto (.fpp).',
     'seguridad': 'Opciones de privacidad, encriptación y control de datos.',
     'asistente-ia': 'Configuración de inteligencia artificial.'
   };
@@ -771,28 +768,12 @@ export default function ArchivosTrabajoPage() {
 
               {/* TAB: NUBE (GOOGLE DRIVE & ONEDRIVE) */}
               {activeTab === "nube" && (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {/* Columna Google Drive */}
-                  <div className="space-y-4">
-                    <h3 className="text-subheading font-bold text-foreground flex items-center gap-2">
-                      <Cloud className="w-5 h-5 text-[#4285F4]" /> Google Drive
-                    </h3>
-                    <GoogleDriveSyncPanel />
-                  </div>
-
-                  {/* Columna OneDrive */}
-                  <div className="space-y-4">
-                    <OneDriveSyncPanel />
-                  </div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+                  <GoogleDriveSyncPanel />
+                  <OneDriveSyncPanel />
                 </div>
               )}
 
-              {/* TAB: AUTORES */}
-              {activeTab === "autores" && (
-                <div className="animate-in fade-in duration-500 w-full">
-                  <TabAutores globalSelection={{ moduloCodigo: activeModuleId ? activeModuleId.split('-')[0] : null }} />
-                </div>
-              )}
 
             </div>
 
@@ -849,12 +830,9 @@ export default function ArchivosTrabajoPage() {
 
               {/* TAB: ASISTENTE IA */}
               {activeTab === "asistente-ia" && (
-                <section className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
-                  <Card className="p-6">
-                    <h2 className="text-subheading font-bold mb-4 flex items-center gap-2"><Sparkles className="w-5 h-5 text-accent"/> Configuración del Asistente IA</h2>
-                    <AISettingsPanel />
-                  </Card>
-                </section>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                  <AISettingsPanel />
+                </div>
               )}
 
             {/* Security notice - always visible, full-width */}

@@ -12,6 +12,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { TabAcronimos } from "@/components/features/catalogo/TabAcronimos";
+import { TabDocumentos } from "@/components/features/ayuda/TabDocumentos";
 
 // ── Mapa de pestañas por página real (misma fuente que usaba /inicio) ──────
 const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
@@ -70,8 +71,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   "/normativa": [
     { id: "ccaa", label: "CCAA" },
     { id: "bibliografia", label: "Bibliografía" },
-    { id: "legislacion", label: "Legislación" },
-    { id: "curriculos", label: "Currículos" },
+    { id: "legislacion", label: "Legislación" }
   ],
   "/mejora": [
     { id: "eqavet", label: "EQAVET" },
@@ -197,6 +197,7 @@ export default function AyudaPage() {
     { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> FAQ</>, cleanLabel: "FAQ" },
     { id: "acronimos", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Acrónimos</>, cleanLabel: "Acrónimos" },
     { id: "mapa", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> Mapa web</>, cleanLabel: "Mapa web" },
+    { id: "documentos", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Documentos</>, cleanLabel: "Documentos" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -205,6 +206,7 @@ export default function AyudaPage() {
     faq: 'Respuestas a las preguntas más frecuentes del profesorado.',
     acronimos: 'Glosario de siglas, acrónimos y conceptos de Formación Profesional.',
     mapa: 'Esquema jerárquico de todas las secciones y utilidades de la aplicación.',
+    documentos: 'Disposiciones normativas que fijan las enseñanzas mínimas de cada título.'
   };
 
   return (
@@ -333,6 +335,11 @@ export default function AyudaPage() {
                   </div>
                 </section>
               </div>
+            )}
+
+            {/* ── CONTENIDO: DOCUMENTOS ────────────────────────────────────── */}
+            {activeTab === "documentos" && (
+              <TabDocumentos />
             )}
 
           </MotionWrapper>

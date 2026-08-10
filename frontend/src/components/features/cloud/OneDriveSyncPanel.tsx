@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
@@ -57,7 +57,7 @@ export function OneDriveSyncPanel() {
   };
 
   return (
-    <Card className="p-8 border border-[var(--glass-border)] rounded-2xl bg-foreground/5 shadow-lg relative overflow-hidden group max-w-3xl mx-auto h-full">
+    <Card className="p-8 border border-[var(--glass-border)] rounded-2xl bg-foreground/5 shadow-lg relative overflow-hidden group h-full w-full">
       <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
         <Cloud className="w-32 h-32 text-info" />
       </div>
@@ -72,56 +72,58 @@ export function OneDriveSyncPanel() {
           </p>
         </div>
 
-        {/* Estado de conexión */}
-        <div className="flex flex-col md:flex-row gap-4 items-center justify-between p-5 rounded-xl border bg-background/50 border-[var(--glass-border)] mt-auto">
-          <div className="flex items-center gap-4">
-            <div className={`p-3 rounded-full ${isOneDriveConnected ? "bg-success/20 text-success" : "bg-muted/20 text-muted"}`}>
-              {isOneDriveConnected ? <CheckCircle2 className="w-6 h-6" /> : <CloudOff className="w-6 h-6" />}
+        <div className="mt-auto flex flex-col gap-4">
+          {/* Estado de conexión */}
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-between p-5 rounded-xl border bg-background/50 border-[var(--glass-border)]">
+            <div className="flex items-center gap-4">
+              <div className={`p-3 rounded-full ${isOneDriveConnected ? "bg-success/20 text-success" : "bg-muted/20 text-muted"}`}>
+                {isOneDriveConnected ? <CheckCircle2 className="w-6 h-6" /> : <CloudOff className="w-6 h-6" />}
+              </div>
+              <div>
+                <p className="font-bold text-foreground">
+                  {isOneDriveConnected ? "Conectado" : "No conectado"}
+                </p>
+                <p className="text-body text-muted">
+                  {isOneDriveConnected ? `Sincronizando con cuenta Microsoft` : "Inicia sesión con Microsoft"}
+                </p>
+              </div>
             </div>
             <div>
-              <p className="font-bold text-foreground">
-                {isOneDriveConnected ? "Conectado" : "No conectado"}
-              </p>
-              <p className="text-body text-muted">
-                {isOneDriveConnected ? `Sincronizando con cuenta Microsoft` : "Inicia sesión con Microsoft"}
-              </p>
+              {isOneDriveConnected ? (
+                <Button onClick={handleDisconnect} variant="ghost" className="text-danger hover:bg-danger/10">
+                  Desconectar
+                </Button>
+              ) : (
+                <Button 
+                  onClick={handleConnect} 
+                  disabled={isLoading}
+                  className={`border transition-all ${dataSource === 'demo' ? 'bg-muted/20 text-muted border-muted/30 cursor-not-allowed opacity-70' : 'bg-[#0078D4]/20 text-[#0078D4] hover:bg-[#0078D4]/30 border-[#0078D4]/30'}`}
+                >
+                  Conectar cuenta
+                </Button>
+              )}
             </div>
           </div>
-          <div>
-            {isOneDriveConnected ? (
-              <Button onClick={handleDisconnect} variant="ghost" className="text-danger hover:bg-danger/10">
-                Desconectar
-              </Button>
-            ) : (
-              <Button 
-                onClick={handleConnect} 
-                disabled={isLoading}
-                className={`border transition-all ${dataSource === 'demo' ? 'bg-muted/20 text-muted border-muted/30 cursor-not-allowed opacity-70' : 'bg-[#0078D4]/20 text-[#0078D4] hover:bg-[#0078D4]/30 border-[#0078D4]/30'}`}
-              >
-                Conectar cuenta
-              </Button>
-            )}
-          </div>
-        </div>
 
-        {/* Configuración de Client ID */}
-        {!isOneDriveConnected && (
-          <div className="flex flex-col gap-3 p-5 rounded-xl border bg-background/50 border-[var(--glass-border)]">
-            <h3 className="font-bold text-foreground flex items-center gap-2">
-              <Key className="w-5 h-5 text-info" /> Azure Client ID
-            </h3>
-            <p className="text-body text-muted">
-              Client ID de tu App registrada en Entra ID (Azure).
-            </p>
-            <Input
-              type="text"
-              placeholder="Ej: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-              value={oneDriveClientId || ""}
-              onChange={(e) => setOneDriveClientId?.(e.target.value)}
-              className="font-mono text-body"
-            />
-          </div>
-        )}
+          {/* Configuración de Client ID */}
+          {!isOneDriveConnected && (
+            <div className="flex flex-col gap-3 p-5 rounded-xl border bg-background/50 border-[var(--glass-border)]">
+              <h3 className="font-bold text-foreground flex items-center gap-2">
+                <Key className="w-5 h-5 text-info" /> Azure Client ID
+              </h3>
+              <p className="text-body text-muted">
+                Client ID de tu App registrada en Entra ID (Azure).
+              </p>
+              <Input
+                type="text"
+                placeholder="Ej: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+                value={oneDriveClientId || ""}
+                onChange={(e) => setOneDriveClientId?.(e.target.value)}
+                className="font-mono text-body"
+              />
+            </div>
+          )}
+        </div>
 
       </div>
     </Card>

@@ -4,7 +4,8 @@ import { NormativaAccordion } from "@/components/features/documentos/NormativaAc
 import { TabNormativa } from "@/components/features/catalogo/TabNormativa";
 import { TabGrados } from "@/components/features/catalogo/TabGrados";
 import { TabComunidades } from "@/components/features/catalogo/TabComunidades";
-import { AlertTriangle, BookOpen, Download, DownloadCloud, File, FileSpreadsheet, FileText, Folder, FolderOpen, MapPin, Scale, Search, X } from "lucide-react";
+import { TabIncual } from "@/components/features/catalogo/TabIncual";
+import { AlertTriangle, Award, BookOpen, Download, DownloadCloud, File, FileSpreadsheet, FileText, Folder, FolderOpen, MapPin, Scale, Search, X } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import { useTranslation } from "react-i18next";
@@ -33,13 +34,13 @@ export default function DocumentosPage() {
     { id: "ccaa", label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4 shrink-0" /> CCAA</span>, cleanLabel: 'CCAA' },
     { id: "bibliografia", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> Bibliografía</span>, cleanLabel: 'Bibliografía' },
     { id: "legislacion", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.legislacion', {defaultValue: 'Legislación'})}</span>, cleanLabel: t('tabs.legislacion', {defaultValue: 'Legislación'}) },
-    { id: "curriculos", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> {t('tabs.curriculos', {defaultValue: 'Currículos'})}</span>, cleanLabel: t('tabs.curriculos', {defaultValue: 'Currículos'}) }
+    { id: "ecp-incual", label: <span className="flex items-center gap-2"><Award className="w-4 h-4 shrink-0 text-purple-500" /> ECP INCUAL</span>, cleanLabel: 'ECP INCUAL' }
   ];
   const TAB_DESCRIPTIONS: Record<string, string> = {
     ccaa: 'Legislación autonómica y normativa específica.',
     bibliografia: 'Referencias normativas y bibliografía del catálogo.',
-    curriculos: 'Disposiciones normativas que fijan las enseñanzas mínimas de cada título.',
     legislacion: 'Leyes orgánicas, reales decretos y órdenes ministeriales vigentes.',
+    'ecp-incual': 'Estándares de Competencia Profesional (ECP) del Catálogo Nacional (INCUAL).',
   };
   const [activeTab, setActiveTab] = useState("ccaa");
   const [currentPath, setCurrentPath] = useState<string>("");
@@ -55,10 +56,38 @@ export default function DocumentosPage() {
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData, dataSource } = useAppStore();
   const [loadingData, setLoadingData] = useState(true);
 
+  const [globalSelection, setGlobalSelection] = useState(() => {
+    if (typeof window !== "undefined") {
+      const saved = sessionStorage.getItem("catalogoSelection");
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch (e) {
+          console.error("Error parsing catalogoSelection", e);
+        }
+      }
+    }
+    return {
+      familia: "Electricidad y Electrónica",
+      tituloCodigo: "ELE203",
+      moduloCodigo: "0237"
+    };
+  });
+
+  const updateGlobalSelection = (updates: Partial<typeof globalSelection>) => {
+    setGlobalSelection((prev: any) => {
+      const next = { ...prev, ...updates };
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("catalogoSelection", JSON.stringify(next));
+      }
+      return next;
+    });
+  };
+
   const fetchDocuments = (path: string) => {
     setLoadingDocs(true);
     setError(null);
-    const backendPath = path === 'legislacion' ? 'Normativa' : path === 'bibliografia' ? 'Bibliografia' : path === 'ccaa' ? 'CCAA' : path === 'curriculos' ? 'Currículos' : path;
+    const backendPath = path === 'legislacion' ? 'Normativa' : path === 'bibliografia' ? 'Bibliografia' : path === 'ccaa' ? 'CCAA' : path;
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/list?path=${encodeURIComponent(backendPath)}`)
       .then((res) => {
         if (!res.ok) throw new Error("Error al acceder a los documentos");
@@ -80,7 +109,7 @@ export default function DocumentosPage() {
   };
 
   useEffect(() => {
-    if (activeTab === "bibliografia") {
+    if (activeTab === "bibliografia" || activeTab === "ecp-incual") {
       setItems([]);
       setLoadingDocs(false);
       setError(null);
@@ -228,6 +257,14 @@ export default function DocumentosPage() {
       return (
         <div className="w-full">
           <TabNormativa searchQuery={searchQuery} />
+        </div>
+      );
+    }
+    
+    if (activeTab === 'ecp-incual') {
+      return (
+        <div className="w-full">
+          <TabIncual globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />
         </div>
       );
     }

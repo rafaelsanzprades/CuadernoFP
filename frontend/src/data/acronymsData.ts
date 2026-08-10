@@ -1212,5 +1212,89 @@ export const acronymsData: AcronymItem[] = [
     "name": "PdEvC. Pérdida del derecho a Evaluación Continua",
     "description": "Situación por exceso de faltas de asistencia que exige una prueba de evaluación alternativa",
     "category": "normativa"
+  },
+  {
+    "id": 199,
+    "name": "DigComp. Marco Europeo de Competencias Digitales para la Ciudadanía",
+    "description": "Marco de la Comisión Europea con 21 competencias digitales en 5 áreas (información y datos, comunicación, creación de contenidos, seguridad, resolución de problemas), con niveles A1 a C2",
+    "category": "normativa"
+  },
+  {
+    "id": 200,
+    "name": "DigCompEdu. Marco Europeo de Competencia Digital para Educadores",
+    "description": "Marco de la Comisión Europea con 6 áreas de competencia digital docente (compromiso profesional, contenidos digitales, enseñanza y aprendizaje, evaluación y retroalimentación, empoderamiento del alumnado, desarrollo de la competencia digital del alumnado)",
+    "category": "normativa"
+  },
+  {
+    "id": 201,
+    "name": "ETHAZI. Modelo de Aprendizaje Colaborativo basado en Retos del País Vasco",
+    "description": "Metodología de Tknika (red de innovación de la FP vasca) estructurada en 11 pasos: plantear el reto, conectar, establecer parámetros, obtener información, generar alternativas, presentar propuestas, seleccionar, planificar, ejecutar, presentar resultados y reflexionar",
+    "category": "metodologia"
+  },
+  {
+    "id": 202,
+    "name": "ACbR. Aprendizaje Colaborativo basado en Retos",
+    "description": "Nombre genérico del enfoque metodológico que aplica el modelo Ethazi",
+    "category": "metodologia"
+  },
+  {
+    "id": 203,
+    "name": "CEDEFOP. Centro Europeo para el Desarrollo de la Formación Profesional",
+    "description": "Agencia de la Unión Europea especializada en FP; publica informes como Skills-OVATE y DigComp at Work",
+    "category": "estructura_fp"
+  },
+  {
+    "id": 204,
+    "name": "ANPROFOL. Asociación Nacional de Profesorado de Formación y Orientación Laboral",
+    "description": "Asociación profesional del colectivo docente de FOL en Formación Profesional",
+    "category": "estructura_fp"
+  },
+  {
+    "id": 205,
+    "name": "IPE. Itinerario Personal para la Empleabilidad",
+    "description": "Módulos transversales I y II de la nueva FP centrados en habilidades para la empleabilidad y el desarrollo personal y social",
+    "category": "estructura_fp"
+  },
+  {
+    "id": 206,
+    "name": "FPE. Formación Profesional para el Empleo",
+    "description": "Oferta formativa dirigida a personas trabajadoras (ocupadas y desempleadas), integrada en el nuevo Sistema Nacional de FP junto al Catálogo Nacional de Estándares de Competencias Profesionales",
+    "category": "estructura_fp"
+  },
+  {
+    "id": 207,
+    "name": "REA. Recursos Educativos Abiertos",
+    "description": "Materiales de enseñanza, aprendizaje e investigación de libre acceso y reutilización, área complementaria del marco DigCompEdu",
+    "category": "otros"
+  },
+  {
+    "id": 208,
+    "name": "AGIL. Metodologías Ágiles",
+    "description": "Enfoques como Design Thinking (empatizar, definir, idear, prototipar, testear), Lean Startup (PMV) y Scrum/Kanban aplicados al aula",
+    "category": "metodologia"
+  },
+  {
+    "id": 209,
+    "name": "CONTR. Contrato de Aprendizaje (Learning Contract)",
+    "description": "Acuerdo individual entre docente y estudiante que fija objetivos, estrategias/recursos, evidencias y criterios de evaluación",
+    "category": "metodologia"
+  },
+  {
+    "id": 210,
+    "name": "DEBATE. Debates y Diálogo Educativo",
+    "description": "Técnica didáctica basada en la confrontación argumentada de ideas para fomentar el pensamiento crítico y la comunicación",
+    "category": "metodologia"
+  },
+  {
+    "id": 211,
+    "name": "PARES. Aprendizaje entre Pares (Peer Teaching)",
+    "description": "Metodología en la que el alumnado enseña y aprende de sus propios compañeros",
+    "category": "metodologia"
+  },
+  {
+    "id": 212,
+    "name": "ESTAC. Estaciones de Aprendizaje",
+    "description": "Organización del aula en rincones o estaciones con actividades distintas y simultáneas por las que rota el alumnado",
+    "category": "metodologia"
   }
 ];

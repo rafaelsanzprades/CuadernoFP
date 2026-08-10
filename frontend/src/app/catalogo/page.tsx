@@ -20,12 +20,12 @@ import {
 import { fileManager } from "@/services/fileManager";
 import toast from "react-hot-toast";
 import { TabNormativa } from "@/components/features/catalogo/TabNormativa";
-import { TabIncual } from "@/components/features/catalogo/TabIncual";
+
 import { useTranslation } from "react-i18next";
 import { useAppStore } from "@/store/useAppStore";
 import { getAcronym } from "@/utils/catalogFormat";
 
-type Tab = "familias" | "titulos" | "modulos" | "ra-ce" | "ecp-incual";
+type Tab = "familias" | "titulos" | "modulos" | "ra-ce";
 
 
 export default function CiclosPage() {
@@ -49,7 +49,7 @@ function CiclosContent() {
 
   const tabParam = searchParams.get("tab") as Tab | null;
   const [activeTab, setActiveTab] = useState<Tab>(
-    tabParam && ["familias", "titulos", "modulos", "ra-ce", "ecp-incual"].includes(tabParam) ? tabParam : "familias"
+    tabParam && ["familias", "titulos", "modulos", "ra-ce"].includes(tabParam) ? tabParam : "familias"
   );
 
   const [globalSelection, setGlobalSelection] = useState(() => {
@@ -107,8 +107,7 @@ function CiclosContent() {
     familias: t('tabs.familias', {defaultValue: 'Familias'}),
     titulos: t('tabs.titulos', {defaultValue: 'Títulos'}),
     modulos: t('tabs.modulos', {defaultValue: 'Módulos'}),
-    'ra-ce': 'RA → CE',
-    'ecp-incual': "ECP INCUAL"
+    'ra-ce': 'RA → CE'
   };
 
   const activeTabCleanLabel = TAB_LABELS[activeTab];
@@ -117,8 +116,7 @@ function CiclosContent() {
     familias: 'El RD 1128/2003 establece el Catálogo Nacional de Cualificaciones Profesionales.',
     titulos: 'Normativa estatal básica y currículo autonómico para ciclos formativos.',
     modulos: 'Bloques de especialización y contenidos asociados a cada curso académico.',
-    'ra-ce': 'Competencias específicas estructuradas en RA y CE (Art. 136, RD 659/2023).',
-    'ecp-incual': 'Estándares de Competencia Profesional (ECP) del Catálogo Nacional (INCUAL).',
+    'ra-ce': 'Competencias específicas estructuradas en RA y CE (Art. 136, RD 659/2023).'
   };
 
   return (
@@ -144,8 +142,7 @@ function CiclosContent() {
                       { id: "familias" as Tab, label: <span className="flex items-center gap-2"><FolderTree className="w-4 h-4" /> {t('tabs.familias', {defaultValue: 'Familias'})}</span> },
                       { id: "titulos" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> {t('tabs.titulos', {defaultValue: 'Títulos'})}</span> },
                       { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> {t('tabs.modulos', {defaultValue: 'Módulos'})}</span> },
-                      { id: "ra-ce" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> RA → CE</span> },
-                      { id: "ecp-incual" as Tab, label: <span className="flex items-center gap-2"><Award className="w-4 h-4 text-purple-500" /> ECP INCUAL</span> },
+                      { id: "ra-ce" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> RA → CE</span> }
                     ]
                   ).map((t) => (
                     <TabsTrigger key={t.id} value={t.id}>
@@ -162,7 +159,6 @@ function CiclosContent() {
             {activeTab === "titulos" && <TabTitulo onSelectTitulo={handleSelectTitulo} globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
             {activeTab === "modulos" && <TabCursos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} onSelectModulo={handleSelectModulo} />}
             {activeTab === "ra-ce" && <TabModulos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
-            {activeTab === "ecp-incual" && <TabIncual globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
           </MotionWrapper>
         </div>
       </main>

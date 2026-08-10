@@ -17,6 +17,24 @@ import Link from "next/link";
 import { Settings2 } from "lucide-react";
 import { InstrumentoConfigModal } from "@/components/features/instrumentos/InstrumentoConfigModal";
 
+const DEFAULT_INSTRUMENTOS_PCT = [
+  { id: "instr_teoricos", nombre: "Exámenes teóricos", pct_1t: 30, pct_2t: 20, pct_3t: 10 },
+  { id: "instr_practicos", nombre: "Exámenes prácticos", pct_1t: 20, pct_2t: 20, pct_3t: 10 },
+  { id: "instr_exposicion", nombre: "Exposición y defensa proyecto", pct_1t: 10, pct_2t: 20, pct_3t: 30 },
+  { id: "instr_informes", nombre: "Informes de ejercicios", pct_1t: 20, pct_2t: 30, pct_3t: 40 },
+  { id: "instr_cuaderno", nombre: "Cuaderno de tareas", pct_1t: 20, pct_2t: 10, pct_3t: 10 },
+];
+
+const normalizeTipo = (t: string) => {
+  if (!t) return "Exámenes teóricos";
+  if (t === "Teoria") return "Exámenes teóricos";
+  if (t === "Practica") return "Exámenes prácticos";
+  if (t === "Informes") return "Informes de ejercicios";
+  if (t === "Tareas") return "Cuaderno de tareas";
+  if (t === "Recuperacion") return "Recuperaciones";
+  return t;
+};
+
 export default function InstrumentosPage() {
   const { activeModuleId, moduleData, setModuleData, updateDataFrame, saveModuleData } = useAppStore();
   const { t } = useTranslation();
@@ -114,6 +132,10 @@ export default function InstrumentosPage() {
   const df_ce = moduleData?.df_ce || [];
   const df_act = moduleData?.df_act || [];
   
+  const instrumentosPct = (moduleData?.instrumentos_pct_trimestre && moduleData.instrumentos_pct_trimestre.length > 0)
+    ? moduleData.instrumentos_pct_trimestre
+    : DEFAULT_INSTRUMENTOS_PCT;
+
   const ce_clean = df_ce.filter((ce: any) => ce.id_ce && ce.id_ce.trim() !== "");
   const lista_ce_ids = ce_clean.map((ce: any) => ce.id_ce);
 
@@ -203,15 +225,14 @@ export default function InstrumentosPage() {
                       <td className="p-2 font-mono sticky left-0 z-10 border-r border-[var(--glass-border)] bg-background group-hover:bg-[#111827]">{act.id_act}</td>
                       <td className="p-2 sticky left-[60px] z-10 border-r border-[var(--glass-border)] bg-background group-hover:bg-[#111827]">
                         <select 
-                          value={act.Tipo || "Teoria"}
+                          value={normalizeTipo(act.Tipo)}
                           onChange={(e) => handleUpdateAct(globalIdx, "Tipo", e.target.value)}
                           className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-info focus:outline-none appearance-none"
                         >
-                          <option value="Teoria">Teoria</option>
-                          <option value="Practica">Practica</option>
-                          <option value="Informes">Informes</option>
-                          <option value="Tareas">Tareas</option>
-                          <option value="Recuperacion">Recuperacion</option>
+                          {instrumentosPct.map((instr: any) => (
+                            <option key={instr.id} value={instr.nombre}>{instr.nombre}</option>
+                          ))}
+                          <option value="Recuperaciones">Recuperaciones</option>
                         </select>
                       </td>
                       <td className="p-2 sticky left-[160px] z-10 border-r border-[var(--glass-border)] bg-background group-hover:bg-[#111827]">
@@ -344,59 +365,59 @@ export default function InstrumentosPage() {
                 <table className="w-full text-body border-collapse">
                   <thead>
                     <tr className="border-b border-[var(--glass-border)]">
-                      <th className="p-3 text-left text-muted font-semibold">Trimestre</th>
-                      <th className="p-3 text-center text-muted font-semibold border-l border-[var(--glass-border)]">Exámenes teóricos</th>
-                      <th className="p-3 text-center text-muted font-semibold border-l border-[var(--glass-border)]">Exámenes prácticos</th>
-                      <th className="p-3 text-center text-muted font-semibold border-l border-[var(--glass-border)]">Informes de ejercicios</th>
-                      <th className="p-3 text-center text-muted font-semibold border-l border-[var(--glass-border)]">Cuaderno de tareas</th>
-                      <th className="p-3 text-center text-muted font-semibold border-l border-[var(--glass-border)]">Recuperaciones</th>
+                      <th className="p-3 text-left text-muted font-semibold">Tipo de instrumento</th>
+                      {trimestres.map(tri => (
+                        <th key={tri.key} className="p-3 text-center text-muted font-semibold border-l border-[var(--glass-border)]">{tri.nombre}</th>
+                      ))}
+                      <th className="p-3 text-center text-muted font-semibold border-l border-[var(--glass-border)]">Total</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {trimestres.map(tri => {
-                      const actTri = df_act.filter((a: any) => String(a.tri_act).toUpperCase() === tri.key);
-                      const nTeo = actTri.filter((a: any) => a.Tipo === "Teoria").length;
-                      const nPra = actTri.filter((a: any) => a.Tipo === "Practica").length;
-                      const nInf = actTri.filter((a: any) => a.Tipo === "Informes").length;
-                      const nTar = actTri.filter((a: any) => a.Tipo === "Tareas").length;
-                      const nRec = actTri.filter((a: any) => a.Tipo === "Recuperacion").length;
+                    {[
+                      ...instrumentosPct.map((instr: any, i: number) => ({
+                        id: instr.nombre,
+                        label: instr.nombre,
+                        bgClass: [
+                          "bg-info/10 text-info",
+                          "bg-success/10 text-success",
+                          "bg-warning/10 text-warning",
+                          "bg-purple-500/10 text-purple-500",
+                          "bg-pink-500/10 text-pink-500",
+                          "bg-indigo-500/10 text-indigo-500"
+                        ][i % 6]
+                      })),
+                      { id: "Recuperaciones", label: "Recuperaciones", bgClass: "bg-danger/10 text-danger" }
+                    ].map(tipo => {
+                      const totalTipo = df_act.filter((a: any) => normalizeTipo(a.Tipo) === tipo.id).length;
                       return (
-    <tr key={tri.key} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
-                          <td className="p-3 font-semibold text-foreground">{tri.nombre}</td>
+                        <tr key={tipo.id} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
+                          <td className="p-3 font-semibold text-foreground">{tipo.label}</td>
+                          {trimestres.map(tri => {
+                            const count = df_act.filter((a: any) => String(a.tri_act).toUpperCase() === tri.key && normalizeTipo(a.Tipo) === tipo.id).length;
+                            return (
+                              <td key={tri.key} className="p-3 text-center border-l border-[var(--glass-border)]">
+                                <span className={`${tipo.bgClass} font-bold text-subheading px-3 py-1 rounded-lg inline-block min-w-[40px]`}>{count}</span>
+                              </td>
+                            );
+                          })}
                           <td className="p-3 text-center border-l border-[var(--glass-border)]">
-                            <span className="bg-info/10 text-info font-bold text-subheading px-3 py-1 rounded-lg inline-block min-w-[40px]">{nTeo}</span>
-                          </td>
-                          <td className="p-3 text-center border-l border-[var(--glass-border)]">
-                            <span className="bg-success/10 text-success font-bold text-subheading px-3 py-1 rounded-lg inline-block min-w-[40px]">{nPra}</span>
-                          </td>
-                          <td className="p-3 text-center border-l border-[var(--glass-border)]">
-                            <span className="bg-warning/10 text-warning font-bold text-subheading px-3 py-1 rounded-lg inline-block min-w-[40px]">{nInf}</span>
-                          </td>
-                          <td className="p-3 text-center border-l border-[var(--glass-border)]">
-                            <span className="bg-info/10 text-info font-bold text-subheading px-3 py-1 rounded-lg inline-block min-w-[40px]">{nTar}</span>
-                          </td>
-                          <td className="p-3 text-center border-l border-[var(--glass-border)]">
-                            <span className="bg-danger/10 text-danger font-bold text-subheading px-3 py-1 rounded-lg inline-block min-w-[40px]">{nRec}</span>
+                            <span className={`${tipo.bgClass} font-extrabold text-heading px-4 py-1.5 rounded-lg inline-block min-w-[50px]`}>{totalTipo}</span>
                           </td>
                         </tr>
                       );
                     })}
                     <tr className="border-t-2 border-[var(--glass-border)] bg-foreground/5">
                       <td className="p-4 font-extrabold text-foreground text-subheading">Total</td>
+                      {trimestres.map(tri => {
+                        const countTri = df_act.filter((a: any) => String(a.tri_act).toUpperCase() === tri.key).length;
+                        return (
+                          <td key={tri.key} className="p-4 text-center border-l border-[var(--glass-border)]">
+                            <span className="bg-foreground/10 text-foreground font-extrabold text-heading px-4 py-1.5 rounded-lg inline-block min-w-[50px]">{countTri}</span>
+                          </td>
+                        );
+                      })}
                       <td className="p-4 text-center border-l border-[var(--glass-border)]">
-                        <span className="bg-info/10 text-info font-extrabold text-heading px-4 py-1.5 rounded-lg inline-block min-w-[50px]">{df_act.filter((a: any) => a.Tipo === "Teoria").length}</span>
-                      </td>
-                      <td className="p-4 text-center border-l border-[var(--glass-border)]">
-                        <span className="bg-success/10 text-success font-extrabold text-heading px-4 py-1.5 rounded-lg inline-block min-w-[50px]">{df_act.filter((a: any) => a.Tipo === "Practica").length}</span>
-                      </td>
-                      <td className="p-4 text-center border-l border-[var(--glass-border)]">
-                        <span className="bg-warning/10 text-warning font-extrabold text-heading px-4 py-1.5 rounded-lg inline-block min-w-[50px]">{df_act.filter((a: any) => a.Tipo === "Informes").length}</span>
-                      </td>
-                      <td className="p-4 text-center border-l border-[var(--glass-border)]">
-                        <span className="bg-info/10 text-info font-extrabold text-heading px-4 py-1.5 rounded-lg inline-block min-w-[50px]">{df_act.filter((a: any) => a.Tipo === "Tareas").length}</span>
-                      </td>
-                      <td className="p-4 text-center border-l border-[var(--glass-border)]">
-                        <span className="bg-danger/10 text-danger font-extrabold text-heading px-4 py-1.5 rounded-lg inline-block min-w-[50px]">{df_act.filter((a: any) => a.Tipo === "Recuperacion").length}</span>
+                        <span className="bg-foreground/20 text-foreground font-extrabold text-heading px-4 py-1.5 rounded-lg inline-block min-w-[50px]">{df_act.length}</span>
                       </td>
                     </tr>
                   </tbody>

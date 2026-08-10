@@ -14,13 +14,15 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 
 const TABS = [
-  { id: "pd-", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD- ← APP</>, cleanLabel: "PD- ← APP", file: "/Guia_pd-.md" },
-  { id: "pd=", label: <><span className="inline-flex"><FileCheck2 className="w-[1.2em] h-[1.2em] mr-1" /></span> PD= ← APP</>, cleanLabel: "PD= ← APP", file: "/Guia_pd%3D.md" },
-  { id: "pd+", label: <><span className="inline-flex"><FileStack className="w-[1.2em] h-[1.2em] mr-1" /></span> PD+ ← APP</>, cleanLabel: "PD+ ← APP", file: "/Guia_pd%2B.md" },
-  { id: "datos", label: <><span className="inline-flex"><Bot className="w-[1.2em] h-[1.2em] mr-1" /></span> APP ← Datos</>, cleanLabel: "APP ← Datos", file: "/Guia.md" },
+  { id: "comparativa", label: <><span className="inline-flex"><GitCompare className="w-[1.2em] h-[1.2em] mr-1" /></span> Comparativa</>, cleanLabel: "Comparativa", file: "/Comparativa_PD.md" },
+  { id: "pd-", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD- / APP</>, cleanLabel: "PD- / APP", file: "/Guia_pd-.md" },
+  { id: "pd=", label: <><span className="inline-flex"><FileCheck2 className="w-[1.2em] h-[1.2em] mr-1" /></span> PD= / APP</>, cleanLabel: "PD= / APP", file: "/Guia_pd%3D.md" },
+  { id: "pd+", label: <><span className="inline-flex"><FileStack className="w-[1.2em] h-[1.2em] mr-1" /></span> PD+ / APP</>, cleanLabel: "PD+ / APP", file: "/Guia_pd%2B.md" },
+  { id: "datos", label: <><span className="inline-flex"><Bot className="w-[1.2em] h-[1.2em] mr-1" /></span> APP / Datos</>, cleanLabel: "APP / Datos", file: "/Guia.md" },
 ];
 
 const TAB_DESCRIPTIONS: Record<string, string> = {
+  "comparativa": "Comparativa de los distintos niveles de programación y dónde se rellena cada apartado.",
   "pd-": "Del resumen de 1-2 folios para el alumnado (PD-) a dónde se rellena cada bloque en la app.",
   "pd=": "Del modelo oficial BOA Aragón, 17 apartados A-Q (PD=), a dónde se rellena cada uno en la app.",
   "pd+": "De la programación detallada tipo JEG (PD+), capítulo a capítulo, a dónde se rellena en la app.",
@@ -46,7 +48,7 @@ const markdownComponents = {
 };
 
 export default function CorrelacionPage() {
-  const [activeTab, setActiveTab] = useState<string>("pd-");
+  const [activeTab, setActiveTab] = useState<string>("comparativa");
   const [content, setContent] = useState<Record<string, string>>({});
   const [loadingTab, setLoadingTab] = useState<string | null>(null);
 
@@ -99,10 +101,29 @@ export default function CorrelacionPage() {
             <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || ''} />
 
             <Card glow className="p-8">
+              {activeTab === "comparativa" && (
+                <style>{`
+                  .pd-comparativa table { table-layout: fixed; width: 100%; }
+                  .pd-comparativa th:nth-child(1), .pd-comparativa td:nth-child(1) { width: 3.5rem; }
+                  .pd-comparativa th:nth-child(2), .pd-comparativa td:nth-child(2) { width: 30%; }
+                  .pd-comparativa th:nth-child(3), .pd-comparativa td:nth-child(3),
+                  .pd-comparativa th:nth-child(4), .pd-comparativa td:nth-child(4),
+                  .pd-comparativa th:nth-child(5), .pd-comparativa td:nth-child(5) { width: 23%; }
+                  .pd-comparativa th, .pd-comparativa td { vertical-align: top; word-break: break-word; }
+                  .pd-comparativa th {
+                    text-align: left;
+                    font-size: 1rem;
+                    font-weight: 800;
+                    color: #ffffff;
+                    background: rgba(245, 158, 11, 0.15);
+                    border-bottom: 2px solid rgba(245, 158, 11, 0.5);
+                  }
+                `}</style>
+              )}
               {loadingTab === activeTab && !content[activeTab] ? (
                 <div className="flex justify-center p-8 text-muted">Cargando...</div>
               ) : (
-                <div className="markdown-body">
+                <div className={`markdown-body ${activeTab === "comparativa" ? "pd-comparativa prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-table:border-collapse prose-table:w-full" : ""}`}>
                   <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={markdownComponents}>
                     {content[activeTab] || ''}
                   </ReactMarkdown>

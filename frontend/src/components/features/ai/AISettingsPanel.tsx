@@ -29,7 +29,7 @@ export function AISettingsPanel() {
       <div className="flex items-center gap-3 mb-2">
         <Sparkles className="w-6 h-6 text-accent" />
         <div>
-          <h3 className="text-subheading font-bold text-foreground">Asistente mágico (IA)</h3>
+          <h3 className="text-subheading font-bold text-foreground">Configuración del Asistente IA</h3>
           <p className="text-body text-muted">Importa programaciones desde PDF automáticamente</p>
         </div>
       </div>

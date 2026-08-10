@@ -338,95 +338,10 @@ export function DatosTab() {
         </div>
       </Card>
 
-
-
-      {/* 5. Evaluación */}
-      <Card className="p-6 border-l-4 border-l-accent">
-        <h4 className="text-subheading font-bold text-foreground mb-6 flex items-center justify-between">
-          <span className="flex items-center gap-2"><span><span className="inline-flex"><Scale className="w-[1.2em] h-[1.2em] mr-1" /></span></span> % Ponderación por trimestres</span>
-          <span className={`text-body font-semibold px-3 py-1 rounded-full ${sumaTrimestres === 100 ? 'bg-success/10 text-success border border-success/30' : 'bg-danger/10 text-danger border border-danger/30'}`}>
-            {sumaTrimestres}% {sumaTrimestres !== 100 && "(Debe sumar 100%)"}
-          </span>
-        </h4>
-        <div className="grid grid-cols-3 gap-6">
-          {[['pond_1t', '1er trimestre (%)'], ['pond_2t', '2º trimestre (%)'], ['pond_3t', '3er trimestre (%)']].map(([k, label]) => (
-            <Input 
-              key={k}
-              label={label}
-              type="number" value={data[k] || 0} onChange={e => updateInfoModulo(k, Number(e.target.value))}
-              className="text-center" 
-            />
-          ))}
-        </div>
-      </Card>
-
-      <Card className="p-6 border-l-4 border-l-purple-500">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
-          <h4 className="text-subheading font-bold text-foreground flex items-center gap-2">
-            <Receipt className="w-[1.2em] h-[1.2em]" /> % Instrumentos de evaluación
-          </h4>
-          <div className="flex gap-2">
-            {[["1er Trim.", sum1t], ["2º Trim.", sum2t], ["3er Trim.", sum3t]].map(([label, sum]) => (
-              <span key={label as string} className={`text-caption font-semibold px-2.5 py-1 rounded-full whitespace-nowrap ${sum === 100 ? 'bg-success/10 text-success border border-success/30' : 'bg-danger/10 text-danger border border-danger/30'}`}>
-                {label}: {sum}%
-              </span>
-            ))}
-          </div>
-        </div>
-        <p className="text-caption text-muted mb-4">
-          Esta tabla es la que se imprime en la PD- ("¿Cómo aprobaré el módulo?"). Cada columna de
-          trimestre debe sumar 100%.
-        </p>
-        <div className="space-y-2">
-          <div style={INSTR_GRID_STYLE} className="text-caption font-bold text-muted px-1">
-            <span>Instrumento</span>
-            <span className="text-center">1er Trimestre</span>
-            <span className="text-center">2º Trimestre</span>
-            <span className="text-center">3er Trimestre</span>
-            <span></span>
-          </div>
-          {instrumentosPct.map((row) => (
-            <div key={row.id} style={INSTR_GRID_STYLE} className="items-center">
-              <input
-                type="text"
-                value={row.nombre}
-                onChange={(e) => updateInstrumentoPctField(row.id, "nombre", e.target.value)}
-                placeholder="Nombre del instrumento"
-                className="bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground w-full"
-              />
-              {(["pct_1t", "pct_2t", "pct_3t"] as const).map((field) => (
-                <input
-                  key={field}
-                  type="number"
-                  value={row[field]}
-                  onChange={(e) => updateInstrumentoPctField(row.id, field, e.target.value)}
-                  className="bg-background border border-[var(--glass-border)] rounded px-2 py-2 text-foreground text-center w-full"
-                />
-              ))}
-              <button
-                type="button"
-                onClick={() => removeInstrumentoPct(row.id)}
-                className="p-2 text-danger hover:bg-danger/10 rounded-lg transition-colors justify-self-center"
-                aria-label="Eliminar instrumento"
-              >
-                <Trash2 className="w-4 h-4" />
-              </button>
-            </div>
-          ))}
-          <button
-            type="button"
-            onClick={addInstrumentoPct}
-            className="flex items-center gap-2 text-body font-semibold text-accent hover:underline mt-2"
-          >
-            <Plus className="w-4 h-4" /> Añadir Tipo de instrumento de evaluación
-          </button>
-        </div>
-      </Card>
-
-      {/* 6. Reglas de redondeo y compensación */}
+      {/* Reglas de redondeo y compensación */}
       <Card className="p-6 border-l-4 border-l-orange-500">
         <h4 className="text-subheading font-bold text-foreground mb-6 flex items-center justify-between">
-          <span className="flex items-center gap-2"><span><span className="inline-flex"><Settings className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Reglas de redondeo y compensación</span>
+          <span className="flex items-center gap-2"><Settings className="w-[1.2em] h-[1.2em] mr-1" /> Reglas de redondeo y compensación</span>
         </h4>
         {(() => {
           const config = moduleData?.config_redondeo || {
@@ -476,6 +391,88 @@ export function DatosTab() {
         })()}
       </Card>
 
+
+
+      {/* 5. Evaluación */}
+      <Card className="p-6 border-l-4 border-l-accent">
+        <h4 className="text-subheading font-bold text-foreground mb-6 flex items-center justify-between">
+          <span className="flex items-center gap-2"><span><span className="inline-flex"><Scale className="w-[1.2em] h-[1.2em] mr-1" /></span></span> % Ponderación por trimestres</span>
+          <span className={`text-body font-semibold px-3 py-1 rounded-full ${sumaTrimestres === 100 ? 'bg-success/10 text-success border border-success/30' : 'bg-danger/10 text-danger border border-danger/30'}`}>
+            {sumaTrimestres}% {sumaTrimestres !== 100 && "(Debe sumar 100%)"}
+          </span>
+        </h4>
+        <div className="grid grid-cols-3 gap-6">
+          {[['pond_1t', '1er trimestre (%)'], ['pond_2t', '2º trimestre (%)'], ['pond_3t', '3er trimestre (%)']].map(([k, label]) => (
+            <Input 
+              key={k}
+              label={label}
+              type="number" value={data[k] || 0} onChange={e => updateInfoModulo(k, Number(e.target.value))}
+              className="text-center" 
+            />
+          ))}
+        </div>
+      </Card>
+
+      <Card className="p-6 border-l-4 border-l-purple-500">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
+          <h4 className="text-subheading font-bold text-foreground flex items-center gap-2">
+            <Receipt className="w-[1.2em] h-[1.2em]" /> % Instrumentos de evaluación
+          </h4>
+          <div className="flex gap-2">
+            {[["1er Trim.", sum1t], ["2º Trim.", sum2t], ["3er Trim.", sum3t]].map(([label, sum]) => (
+              <span key={label as string} className={`text-caption font-semibold px-2.5 py-1 rounded-full whitespace-nowrap ${sum === 100 ? 'bg-success/10 text-success border border-success/30' : 'bg-danger/10 text-danger border border-danger/30'}`}>
+                {label}: {sum}%
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="space-y-2">
+          <div style={INSTR_GRID_STYLE} className="text-caption font-bold text-muted px-1">
+            <span>Instrumento</span>
+            <span className="text-center">1er Trimestre</span>
+            <span className="text-center">2º Trimestre</span>
+            <span className="text-center">3er Trimestre</span>
+            <span></span>
+          </div>
+          {instrumentosPct.map((row) => (
+            <div key={row.id} style={INSTR_GRID_STYLE} className="items-center">
+              <input
+                type="text"
+                value={row.nombre}
+                onChange={(e) => updateInstrumentoPctField(row.id, "nombre", e.target.value)}
+                placeholder="Nombre del instrumento"
+                className="bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground w-full"
+              />
+              {(["pct_1t", "pct_2t", "pct_3t"] as const).map((field) => (
+                <input
+                  key={field}
+                  type="number"
+                  value={row[field]}
+                  onChange={(e) => updateInstrumentoPctField(row.id, field, e.target.value)}
+                  className="bg-background border border-[var(--glass-border)] rounded px-2 py-2 text-foreground text-center w-full"
+                />
+              ))}
+              <button
+                type="button"
+                onClick={() => removeInstrumentoPct(row.id)}
+                className="p-2 text-danger hover:bg-danger/10 rounded-lg transition-colors justify-self-center"
+                aria-label="Eliminar instrumento"
+              >
+                <Trash2 className="w-4 h-4" />
+              </button>
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={addInstrumentoPct}
+            className="flex items-center gap-2 text-body font-semibold text-accent hover:underline mt-2"
+          >
+            <Plus className="w-4 h-4" /> Añadir Tipo de instrumento de evaluación
+          </button>
+        </div>
+      </Card>
+
+
       {/* 7. Escalas de evaluación cualitativas (EEv) */}
       <Card className="p-6 border-l-4 border-l-teal-500">
         <h4 className="text-subheading font-bold text-foreground mb-2 flex items-center gap-2">
@@ -503,43 +500,49 @@ export function DatosTab() {
           const removeEscala = (id: string) => {
             updateModuleData("escalas_evaluacion", escalas.filter(e => e.id !== id));
           };
+          const sortedEscalas = [...escalas].sort((a, b) => (Number(a.coeficiente) || 0) - (Number(b.coeficiente) || 0));
+
           return (
-            <div className="space-y-3">
-              {escalas.map((escala) => (
-                <div key={escala.id} className="flex items-center gap-3">
-                  <input
-                    type="text"
-                    placeholder="Nombre del nivel (ej. Suficiente)"
-                    value={escala.nombre}
-                    onChange={(e) => updateEscala(escala.id, "nombre", e.target.value)}
-                    className="flex-1 bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground"
-                  />
-                  <input
-                    type="number"
-                    step="0.1"
-                    min="0"
-                    max="10"
-                    placeholder="Nota"
-                    value={escala.coeficiente}
-                    onChange={(e) => updateEscala(escala.id, "coeficiente", e.target.value)}
-                    className="w-28 bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
-                  />
+            <div className="flex flex-wrap md:flex-nowrap items-stretch gap-3 overflow-x-auto pb-2">
+              {sortedEscalas.map((escala) => (
+                <div key={escala.id} className="flex flex-col gap-2 min-w-[160px] p-3 border border-[var(--glass-border)] rounded-lg bg-background/50 relative group shadow-sm transition-all hover:border-white/20 hover:bg-background/80">
                   <button
                     type="button"
                     onClick={() => removeEscala(escala.id)}
-                    className="p-2 text-danger hover:bg-danger/10 rounded-lg transition-colors shrink-0"
+                    className="absolute top-2 right-2 p-1.5 text-danger/60 hover:text-danger hover:bg-danger/10 rounded-md opacity-0 group-hover:opacity-100 transition-all"
                     aria-label="Eliminar nivel"
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="w-3.5 h-3.5" />
                   </button>
+                  <input
+                    type="text"
+                    placeholder="Nombre (ej. Suficiente)"
+                    value={escala.nombre}
+                    onChange={(e) => updateEscala(escala.id, "nombre", e.target.value)}
+                    className="w-full bg-background border border-[var(--glass-border)] rounded px-2.5 py-1.5 text-foreground text-sm font-semibold pr-8"
+                  />
+                  <div className="flex items-center justify-between gap-2 mt-auto">
+                    <span className="text-caption text-muted font-medium">Nota:</span>
+                    <input
+                      type="number"
+                      step="0.1"
+                      min="0"
+                      max="10"
+                      placeholder="0.0"
+                      value={escala.coeficiente}
+                      onChange={(e) => updateEscala(escala.id, "coeficiente", e.target.value)}
+                      className="w-16 bg-background border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-center text-sm font-bold"
+                    />
+                  </div>
                 </div>
               ))}
               <button
                 type="button"
                 onClick={addEscala}
-                className="flex items-center gap-2 text-body font-semibold text-accent hover:underline"
+                className="flex flex-col items-center justify-center min-w-[120px] min-h-full p-3 border border-dashed border-[var(--glass-border)] rounded-lg text-muted hover:text-accent hover:border-accent/50 hover:bg-accent/5 transition-colors gap-2"
               >
-                <Plus className="w-4 h-4" /> Añadir nivel
+                <Plus className="w-5 h-5" />
+                <span className="text-caption font-semibold">Añadir</span>
               </button>
               {escalas.length === 0 && (
                 <p className="text-caption text-muted italic">Sin escalas configuradas — la app sigue usando la nota 0-10 directamente.</p>

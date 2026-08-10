@@ -20,7 +20,13 @@ export function MetodologiaTab() {
     { id: "GAMIF", label: "Gamificación / Aprendizaje Basado en Juegos" },
     { id: "ApS", label: "Aprendizaje-Servicio" },
     { id: "DEMO", label: "Demostración Práctica" },
-    { id: "MAGIS", label: "Exposición Didáctica Interactiva apoyada en TIC" }
+    { id: "MAGIS", label: "Exposición Didáctica Interactiva apoyada en TIC" },
+    { id: "ETHAZI", label: "Ethazi / Aprendizaje Colaborativo basado en Retos (ACbR)" },
+    { id: "AGIL", label: "Metodologías Ágiles (Design Thinking, Lean Startup, Scrum)" },
+    { id: "CONTR", label: "Contrato de Aprendizaje (Learning Contract)" },
+    { id: "DEBATE", label: "Debates y Diálogo Educativo" },
+    { id: "PARES", label: "Aprendizaje entre Pares (Peer Teaching)" },
+    { id: "ESTAC", label: "Estaciones de Aprendizaje" }
   ];
 
   const metodologias_seleccionadas = moduleData?.metodologias_seleccionadas || [];
