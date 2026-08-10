@@ -53,7 +53,7 @@ export default function AgendaPage() {
   const TABS = [
     { id: "actual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> Actual</>, cleanLabel: "Actual" },
     { id: "planificacion", label: <><span className="inline-flex"><CalendarRange className="w-[1.2em] h-[1.2em] mr-1" /></span> Planificación</>, cleanLabel: "Planificación" },
-    { id: "relacion-ra-ud", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Relación RA con UD</>, cleanLabel: "Relación RA con UD" },
+    { id: "progreso-ra-ud", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Progreso y relación RA con UD</>, cleanLabel: "Progreso y relación RA con UD" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -61,7 +61,7 @@ export default function AgendaPage() {
   const TAB_DESCRIPTIONS: Record<string, string> = {
     actual: 'Vista de la agenda diaria y tareas pendientes.',
     planificacion: 'Planificación y seguimiento mensual de la programación.',
-    'relacion-ra-ud': 'Ponderación y relación entre unidades didácticas y resultados de aprendizaje.',
+    'progreso-ra-ud': 'Ponderación y relación entre unidades didácticas y resultados de aprendizaje.',
   };
 
   return (
@@ -119,8 +119,8 @@ export default function AgendaPage() {
               </div>
             )}
 
-            {/* Contenido Pestaña Relación RA con UD */}
-            {activeTab === "relacion-ra-ud" && (
+            {/* Contenido Pestaña Progreso y Relación RA con UD */}
+            {activeTab === "progreso-ra-ud" && (
               <TabRelacionRaUd />
             )}
 

@@ -37,7 +37,7 @@ export function SessionTable({
   if (!mounted) return null;
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-8">
       <DragDropContext onDragEnd={onDragEnd}>
       {df_ud.map((ud: UnidadDidactica) => {
         const udSesiones = df_sesiones.filter((s: Sesion) => s.id_ud === ud.id_ud);
@@ -119,14 +119,16 @@ export function SessionTable({
                                   </div>
                                   <div className="w-40 pr-2">
                                     <select 
-                                      value={ses.Tipo_Actividad || "Tª (Teoria)"}
+                                      value={ses.Tipo_Actividad || "Teoría"}
                                       onChange={(e) => handleUpdateSesion(globalIdx, "Tipo_Actividad", e.target.value)}
                                       className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-accent focus:outline-none appearance-none"
                                     >
-                                      <option value="Tª (Teoria)">Tª (Teoria)</option>
-                                      <option value="Pª (Practica)">Pª (Practica)</option>
-                                      <option value="IE (Instrumento de Evaluacion)">IE (Inst. Eval.)</option>
-                                      <option value="Pª+ (Ampliacion/Refuerzo)">Pª+ (Amp/Ref)</option>
+                                      <option value="Teoría">Teoría</option>
+                                      <option value="Práctica">Práctica</option>
+                                      <option value="Proyecto">Proyecto</option>
+                                      <option value="Ejercicios">Ejercicios</option>
+                                      <option value="Tareas">Tareas</option>
+                                      <option value="Recuperaciones">Recuperaciones</option>
                                     </select>
                                   </div>
                                   <div className="w-32 pr-2">

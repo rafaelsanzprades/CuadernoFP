@@ -365,17 +365,19 @@ export default function InstrumentosPage() {
                 <table className="w-full text-body border-collapse">
                   <thead>
                     <tr className="border-b border-[var(--glass-border)]">
-                      <th className="p-3 text-left text-muted font-semibold">Tipo de instrumento</th>
+                      <th className="p-3 text-left text-muted font-semibold w-[30%]">Instrumento</th>
+                      <th className="p-3 text-left text-muted font-semibold w-[14%]">Tipo</th>
                       {trimestres.map(tri => (
-                        <th key={tri.key} className="p-3 text-center text-muted font-semibold border-l border-[var(--glass-border)]">{tri.nombre}</th>
+                        <th key={tri.key} className="p-3 text-center text-muted font-semibold border-l border-[var(--glass-border)] w-[14%]">{tri.nombre}</th>
                       ))}
-                      <th className="p-3 text-center text-muted font-semibold border-l border-[var(--glass-border)]">Total</th>
+                      <th className="p-3 text-center text-muted font-semibold border-l border-[var(--glass-border)] w-[14%]">Total</th>
                     </tr>
                   </thead>
                   <tbody>
                     {[
                       ...instrumentosPct.map((instr: any, i: number) => ({
                         id: instr.nombre,
+                        categoria: instr.categoria || "Teoría",
                         label: instr.nombre,
                         bgClass: [
                           "bg-info/10 text-info",
@@ -386,12 +388,13 @@ export default function InstrumentosPage() {
                           "bg-indigo-500/10 text-indigo-500"
                         ][i % 6]
                       })),
-                      { id: "Recuperaciones", label: "Recuperaciones", bgClass: "bg-danger/10 text-danger" }
+                      { id: "Recuperaciones", categoria: "Recuperaciones", label: "Recuperaciones", bgClass: "bg-danger/10 text-danger" }
                     ].map(tipo => {
                       const totalTipo = df_act.filter((a: any) => normalizeTipo(a.Tipo) === tipo.id).length;
                       return (
                         <tr key={tipo.id} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
                           <td className="p-3 font-semibold text-foreground">{tipo.label}</td>
+                          <td className="p-3 font-semibold text-foreground">{tipo.categoria}</td>
                           {trimestres.map(tri => {
                             const count = df_act.filter((a: any) => String(a.tri_act).toUpperCase() === tri.key && normalizeTipo(a.Tipo) === tipo.id).length;
                             return (
@@ -407,7 +410,7 @@ export default function InstrumentosPage() {
                       );
                     })}
                     <tr className="border-t-2 border-[var(--glass-border)] bg-foreground/5">
-                      <td className="p-4 font-extrabold text-foreground text-subheading">Total</td>
+                      <td colSpan={2} className="p-4 font-extrabold text-foreground text-subheading">Total</td>
                       {trimestres.map(tri => {
                         const countTri = df_act.filter((a: any) => String(a.tri_act).toUpperCase() === tri.key).length;
                         return (

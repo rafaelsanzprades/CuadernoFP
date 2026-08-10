@@ -609,16 +609,29 @@ export default function MatricesPage() {
             {activeTab === "unidades" && (
               <div className="animate-in fade-in duration-500">
                 <Card className="p-6 border-t-4 border-t-purple-500">
-                  <h2 className="text-heading font-bold flex items-center gap-2 text-foreground mb-4">
-                    <span><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></span> UD/T. Unidades didácticas o de trabajo
-                  </h2>
+                  <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-heading font-bold flex items-center gap-2 text-foreground">
+                      <span><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></span> UD/T. Unidades didácticas o de trabajo
+                    </h2>
+                    <div className="flex items-center gap-3 text-[11px] font-semibold">
+                      <div className="bg-info/10 text-info px-3 py-1.5 rounded-full border border-info/20 shadow-sm" title="Suma de las horas asignadas a cada UD">
+                        Horas UDs: {df_ud.reduce((sum: number, ud: any) => sum + (Number(ud.horas_ud) || 0), 0)} h
+                      </div>
+                      <div className="bg-accent/10 text-accent px-3 py-1.5 rounded-full border border-accent/20 shadow-sm" title="Suma de las horas de todas las sesiones">
+                        Horas Secuenciadas: {df_sesiones?.reduce((sum: number, s: any) => sum + (Number(s.Horas) || 0), 0) || 0} h
+                      </div>
+                      <div className="bg-foreground/10 text-foreground px-3 py-1.5 rounded-full border border-foreground/20 shadow-sm" title="Horas totales del módulo según currículo (BOA)">
+                        Total BOA: {moduleData?.info_modulo?.h_boa || 0} h
+                      </div>
+                    </div>
+                  </div>
                   <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                       <thead>
                         <tr className="border-b border-[var(--glass-border)] text-body text-muted">
-                          <th className="p-3 sticky left-0 bg-background z-10">UD/T</th>
-                          <th className="p-3 sticky left-[80px] bg-background z-10">Horas</th>
-                          <th className="p-3 sticky left-[160px] bg-background z-10 w-64">Unidad didáctica o de Trabajo</th>
+                          <th className="py-2 pr-0 sticky left-0 bg-background z-10 min-w-[44px] max-w-[44px]">UD/T</th>
+                          <th className="py-2 px-0 sticky left-[44px] bg-background z-10 min-w-[80px] max-w-[80px] text-center">Horas</th>
+                          <th className="py-2 pl-1 sticky left-[124px] bg-background z-10 min-w-[800px] w-[800px]">Unidad didáctica o de trabajo</th>
                           {df_ra.map((ra: any, i: number) => (
                             <th key={i} className="p-3 text-center min-w-[80px]">
                               <div className="text-caption">{ra.id_ra}</div>
@@ -630,8 +643,8 @@ export default function MatricesPage() {
                       <tbody>
                         {df_ud.map((ud: any, idx: number) => (
                           <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
-                            <td className="p-3 font-mono text-body sticky left-0 bg-background group-hover:bg-[#111827]">{ud.id_ud}</td>
-                            <td className="p-3 sticky left-[80px] bg-background group-hover:bg-[#111827]">
+                            <td className="py-2 pr-0 font-mono text-body sticky left-0 bg-background group-hover:bg-[#111827] min-w-[44px] max-w-[44px]">{ud.id_ud}</td>
+                            <td className="py-2 px-0 sticky left-[44px] bg-background group-hover:bg-[#111827] min-w-[80px] max-w-[80px] text-center">
                               <input
                                 type="number"
                                 value={ud.horas_ud || 0}
@@ -640,10 +653,10 @@ export default function MatricesPage() {
                                   newUd[idx].horas_ud = parseFloat(e.target.value) || 0;
                                   updateDataFrame("df_ud", newUd);
                                 }}
-                                className="w-16 bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-body focus:border-info focus:outline-none"
+                                className="w-16 text-center bg-foreground/15 border border-[var(--glass-border)] rounded px-0 py-1 text-foreground text-body focus:border-info focus:outline-none"
                               />
                             </td>
-                            <td className="p-3 sticky left-[160px] bg-background group-hover:bg-[#111827]">
+                            <td className="py-2 pl-1 sticky left-[124px] bg-background group-hover:bg-[#111827] min-w-[800px] w-[800px]">
                               <input
                                 type="text"
                                 value={ud.desc_ud || ""}
@@ -711,13 +724,6 @@ export default function MatricesPage() {
                         <span>+</span> Añadir nueva UD
                       </Button>
                     </div>
-
-                    <Card className="px-4 py-2 inline-flex items-center gap-2 border-l-4 border-l-purple-500">
-                      <span className="text-muted">Total horas UD:</span>
-                      <span className="font-bold text-info">
-                        {df_ud.reduce((sum: number, ud: any) => sum + (Number(ud.horas_ud) || 0), 0)} h
-                      </span>
-                    </Card>
                   </div>
 
                   {selectedCells.size > 1 && (

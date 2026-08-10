@@ -239,7 +239,7 @@ export default function SeguimientoPage() {
                     if (lectivos.length === 0) return null;
 
                     return (
-                      <details key={m_short} open className="diario-details group bg-foreground/5 rounded-lg border border-[var(--glass-border)] overflow-hidden open:bg-foreground/10 transition-colors">
+                      <details key={m_short} open className="diario-details group bg-[var(--glass-bg)] rounded-lg border border-[var(--glass-border)] overflow-hidden transition-colors">
                         <summary className="p-4 cursor-pointer flex items-center justify-between font-semibold text-subheading select-none hover:bg-foreground/5">
                           <div className="flex items-center gap-3">
                             <span className="text-info"><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
@@ -249,7 +249,7 @@ export default function SeguimientoPage() {
                             {lectivos.length} días lectivos <span className="ml-4 group-open:rotate-180 inline-block transition-transform">▼</span>
                           </div>
                         </summary>
-                        <div className="p-6 border-t border-[var(--glass-border)] bg-foreground/10">
+                        <div className="p-6 border-t border-[var(--glass-border)] bg-transparent">
                           <div className="relative border-l-2 border-[var(--glass-border)] ml-4 space-y-4 pb-4">
                             {lectivos.map((d: Date, i: number) => {
                               const dateStr = d.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
@@ -264,7 +264,7 @@ export default function SeguimientoPage() {
                                   {/* Timeline Node */}
                                   <div className={`absolute -left-[9px] top-4 w-4 h-4 rounded-full border-4 border-black ${nodeColor} shadow-[0_0_10px_rgba(0,0,0,0.5)] transition-colors duration-300 group-hover:scale-125 z-10`} />
 
-                                  <div className="bg-foreground/5 border border-[var(--glass-border)] rounded-xl p-4 hover:bg-foreground/10 transition-all duration-300 shadow-sm">
+                                  <div className="bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl p-4 hover:bg-foreground/5 transition-all duration-300 shadow-sm">
                                     <div className="flex items-center justify-between mb-4">
                                       <div className="flex items-center gap-3">
                                         <span className="font-mono text-subheading font-bold text-foreground tracking-widest">{dateStr.substring(0,5)}</span>

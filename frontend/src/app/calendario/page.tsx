@@ -728,7 +728,6 @@ export default function CalendarioPage() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
                     { label: "Inicio de curso",   field: "ini_curso" },
-                    { label: "Presentación",       field: "fecha_presentacion" },
                     { label: "Inicio clases (1T)", field: "ini_1t"   },
                     { label: "Fin clases (3T)",    field: "fin_3t"   },
                     { label: "Fin de curso",       field: "fin_curso" },

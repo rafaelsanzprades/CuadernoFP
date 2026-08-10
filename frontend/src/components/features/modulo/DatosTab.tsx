@@ -13,16 +13,17 @@ import { Family } from "@/types";
 // depender de que grid-cols-12 se genere correctamente en el build.
 const INSTR_GRID_STYLE: CSSProperties = {
   display: "grid",
-  gridTemplateColumns: "2fr 1fr 1fr 1fr 2.5rem",
+  gridTemplateColumns: "1fr 2fr 1fr 1fr 1fr 2.5rem",
   gap: "0.75rem",
 };
 
 const DEFAULT_INSTRUMENTOS_PCT = [
-  { id: "instr_teoricos", nombre: "Exámenes teóricos", pct_1t: 30, pct_2t: 20, pct_3t: 10 },
-  { id: "instr_practicos", nombre: "Exámenes prácticos", pct_1t: 20, pct_2t: 20, pct_3t: 10 },
-  { id: "instr_exposicion", nombre: "Exposición y defensa proyecto", pct_1t: 10, pct_2t: 20, pct_3t: 30 },
-  { id: "instr_informes", nombre: "Informes de ejercicios", pct_1t: 20, pct_2t: 30, pct_3t: 40 },
-  { id: "instr_cuaderno", nombre: "Cuaderno de tareas", pct_1t: 20, pct_2t: 10, pct_3t: 10 },
+  { id: "instr_teoricos", categoria: "Teoría", nombre: "Exámenes teóricos", pct_1t: 30, pct_2t: 20, pct_3t: 10 },
+  { id: "instr_practicos", categoria: "Práctica", nombre: "Exámenes prácticos", pct_1t: 20, pct_2t: 20, pct_3t: 10 },
+  { id: "instr_exposicion", categoria: "Proyecto", nombre: "Exposición y defensa proyecto", pct_1t: 10, pct_2t: 20, pct_3t: 30 },
+  { id: "instr_informes", categoria: "Ejercicios", nombre: "Informes de ejercicios", pct_1t: 20, pct_2t: 30, pct_3t: 40 },
+  { id: "instr_cuaderno", categoria: "Tareas", nombre: "Cuaderno de tareas", pct_1t: 20, pct_2t: 10, pct_3t: 10 },
+  { id: "instr_recup", categoria: "Recuperaciones", nombre: "Recuperaciones", pct_1t: 0, pct_2t: 0, pct_3t: 0 },
 ];
 
 // Semilla por defecto de "Escalas de evaluación cualitativas" — la escala
@@ -168,16 +169,16 @@ export function DatosTab() {
   const sum2t = instrumentosPct.reduce((a, r) => a + (Number(r.pct_2t) || 0), 0);
   const sum3t = instrumentosPct.reduce((a, r) => a + (Number(r.pct_3t) || 0), 0);
 
-  const updateInstrumentoPctField = (id: string, field: "nombre" | "pct_1t" | "pct_2t" | "pct_3t", value: string) => {
+  const updateInstrumentoPctField = (id: string, field: "categoria" | "nombre" | "pct_1t" | "pct_2t" | "pct_3t", value: string) => {
     const next = instrumentosPct.map(r => r.id === id
-      ? { ...r, [field]: field === "nombre" ? value : (Number(value) || 0) }
+      ? { ...r, [field]: (field === "nombre" || field === "categoria") ? value : (Number(value) || 0) }
       : r);
     updateModuleData("instrumentos_pct_trimestre", next);
   };
   const addInstrumentoPct = () => {
     updateModuleData("instrumentos_pct_trimestre", [
       ...instrumentosPct,
-      { id: `instr_${Date.now()}`, nombre: "", pct_1t: 0, pct_2t: 0, pct_3t: 0 },
+      { id: `instr_${Date.now()}`, categoria: "Teoría", nombre: "", pct_1t: 0, pct_2t: 0, pct_3t: 0 },
     ]);
   };
   const removeInstrumentoPct = (id: string) => {
@@ -428,6 +429,7 @@ export function DatosTab() {
         </div>
         <div className="space-y-2">
           <div style={INSTR_GRID_STYLE} className="text-caption font-bold text-muted px-1">
+            <span>Tipo</span>
             <span>Instrumento</span>
             <span className="text-center">1er Trimestre</span>
             <span className="text-center">2º Trimestre</span>
@@ -436,6 +438,18 @@ export function DatosTab() {
           </div>
           {instrumentosPct.map((row) => (
             <div key={row.id} style={INSTR_GRID_STYLE} className="items-center">
+              <select
+                value={row.categoria || "Teoría"}
+                onChange={(e) => updateInstrumentoPctField(row.id, "categoria", e.target.value)}
+                className="bg-background border border-[var(--glass-border)] rounded px-2 py-2 text-foreground w-full appearance-none"
+              >
+                <option value="Teoría">Teoría</option>
+                <option value="Práctica">Práctica</option>
+                <option value="Proyecto">Proyecto</option>
+                <option value="Ejercicios">Ejercicios</option>
+                <option value="Tareas">Tareas</option>
+                <option value="Recuperaciones">Recuperaciones</option>
+              </select>
               <input
                 type="text"
                 value={row.nombre}
@@ -444,13 +458,17 @@ export function DatosTab() {
                 className="bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground w-full"
               />
               {(["pct_1t", "pct_2t", "pct_3t"] as const).map((field) => (
-                <input
-                  key={field}
-                  type="number"
-                  value={row[field]}
-                  onChange={(e) => updateInstrumentoPctField(row.id, field, e.target.value)}
-                  className="bg-background border border-[var(--glass-border)] rounded px-2 py-2 text-foreground text-center w-full"
-                />
+                row.categoria === "Recuperaciones" ? (
+                  <div key={field} className="text-center text-muted">-</div>
+                ) : (
+                  <input
+                    key={field}
+                    type="number"
+                    value={row[field]}
+                    onChange={(e) => updateInstrumentoPctField(row.id, field, e.target.value)}
+                    className="bg-background border border-[var(--glass-border)] rounded px-2 py-2 text-foreground text-center w-full"
+                  />
+                )
               ))}
               <button
                 type="button"
