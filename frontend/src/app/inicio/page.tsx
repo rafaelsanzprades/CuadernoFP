@@ -4,7 +4,9 @@ import { useAppStore } from "@/store/useAppStore";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
-import { navGroups } from "@/config/navigation";
+import { navGroups, topLevelPages } from "@/config/navigation";
+import { EqavetTab } from "@/components/features/modulo/EqavetTab";
+import { PropuestasTab } from "@/components/features/modulo/PropuestasTab";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import Link from "next/link";
@@ -316,13 +318,13 @@ export default function InicioPage() {
       id: "eqavet",
       icon: <Shield className="w-5 h-5" />,
       title: "Calidad EQAVET",
-      href: "/mejora?tab=eqavet",
+      href: "/inicio?tab=mejora",
       hrefLabel: "Mejora",
       status: (m?.eqavet_evaluacion && Object.keys(m.eqavet_evaluacion).length > 0) ? "ok" : "empty",
       lines: (m?.eqavet_evaluacion && Object.keys(m.eqavet_evaluacion).length > 0)
         ? [`${Object.keys(m.eqavet_evaluacion).length} indicadores EQAVET valorados`]
         : ["Sin indicadores EQAVET valorados"],
-      actionHref: "/mejora?tab=eqavet",
+      actionHref: "/inicio?tab=mejora",
       actionLabel: "Valorar calidad",
     },
     {
@@ -467,12 +469,18 @@ export default function InicioPage() {
 
   const TABS = [
     { id: "bienvenida", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.bienvenida')}</>, cleanLabel: t('tabs.bienvenida') },
+    { id: "verificacion", label: <><span className="inline-flex"><ListChecks className="w-[1.2em] h-[1.2em] mr-1" /></span> Verificación</>, cleanLabel: "Verificación" },
+    { id: "contribuciones", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Contribuciones</>, cleanLabel: "Contribuciones" },
+    { id: "mejora", label: <><span className="inline-flex"><Shield className="w-[1.2em] h-[1.2em] mr-1" /></span> Mejora</>, cleanLabel: "Mejora" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     bienvenida: 'Panel de control de acceso rápido a todas las herramientas.',
+    verificacion: 'Panel de salud y coherencia de los datos de tu cuaderno.',
+    contribuciones: 'Comunidad de Telegram y listado de personas que contribuyen activamente al proyecto.',
+    mejora: 'Gestión de la calidad, evaluación del proceso e indicadores para el módulo.',
   };
 
   return (
@@ -495,11 +503,52 @@ export default function InicioPage() {
 
             <PageHeader icon={Activity} title={t('inicio.title')} description={t('inicio.subtitle')} />
 
+            {/* Pestañas de Navegación */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+                <TabsList className="max-w-full">
+                  {TABS.map(tab => (
+                    <TabsTrigger key={tab.id} value={tab.id}>
+                      {tab.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
+            </div>
+
+            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
+
             {/* ── CONTENIDO: BIENVENIDA ──────────────────────────────── */}
             {activeTab === "bienvenida" && (
               <div className="animate-in fade-in duration-500 w-full">
 
           <div className="w-full space-y-12 pb-12">
+
+            {/* Accesos rápidos: Agenda + páginas generales (sin título de bloque) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                { href: "/agenda", label: "Agenda", icon: CalendarDays, description: "Vista del día, planificación y progreso." },
+                ...topLevelPages,
+              ].map((item) => (
+                <Link key={item.href} href={item.href} className="block group">
+                  <Card className="h-full p-5 flex flex-col gap-3 border border-[var(--glass-border)] bg-[var(--glass-bg)] hover:bg-accent/5 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/10 cursor-pointer">
+                    <div className="flex items-center gap-3">
+                      <div className="text-heading group-hover:scale-110 transition-transform duration-300">
+                        <item.icon className="w-8 h-8" strokeWidth={1.5} />
+                      </div>
+                      <h3 className="font-bold text-body text-foreground group-hover:text-accent transition-colors leading-tight">
+                        {item.label}
+                      </h3>
+                    </div>
+                    {item.description && (
+                      <p className="text-body text-muted mt-auto">
+                        {item.description}
+                      </p>
+                    )}
+                  </Card>
+                </Link>
+              ))}
+            </div>
 
             {/* Posicionamiento: metodología experta detrás de la app */}
             <Card className="p-6 border border-accent/20 bg-accent/5">
@@ -571,6 +620,128 @@ export default function InicioPage() {
 
           </div>
         
+              </div>
+            )}
+
+            {/* ── CONTENIDO: VERIFICACIÓN ──────────────────────────────── */}
+            {activeTab === "verificacion" && (
+              <div className="space-y-4 animate-in fade-in duration-500 w-full">
+
+                <div className="grid grid-cols-3 gap-4">
+                  <Card className="p-4 border border-success/30 bg-success/10 rounded-2xl text-center">
+                    <CheckCircle className="w-7 h-7 text-success mx-auto mb-1" />
+                    <div className="text-heading font-extrabold text-success">{okCount}</div>
+                    <div className="text-caption text-muted mt-0.5">Correctos</div>
+                  </Card>
+                  <Card className="p-4 border border-warning/30 bg-warning/10 rounded-2xl text-center">
+                    <AlertTriangle className="w-7 h-7 text-warning mx-auto mb-1" />
+                    <div className="text-heading font-extrabold text-warning">{warnCount}</div>
+                    <div className="text-caption text-muted mt-0.5">Advertencias</div>
+                  </Card>
+                  <Card className="p-4 border border-danger/30 bg-danger/10 rounded-2xl text-center">
+                    <XCircle className="w-7 h-7 text-danger mx-auto mb-1" />
+                    <div className="text-heading font-extrabold text-danger">{emptyCount}</div>
+                    <div className="text-caption text-muted mt-0.5">Sin datos</div>
+                  </Card>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
+                    <h2 className="text-body font-bold text-foreground flex items-center gap-2">
+                      <BookOpen className="w-4 h-4 text-accent" />
+                      Programación didáctica
+                    </h2>
+                    <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-caption text-muted">
+                      Programación activa: <span className="font-semibold text-foreground">{activeModuleId || "-"}</span>
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                    {moduleChecks.map(item => (
+                      <CheckCard key={item.id} item={item} />
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
+                    <h2 className="text-body font-bold text-foreground flex items-center gap-2">
+                      <Users className="w-4 h-4 text-accent" />
+                      Curso activo
+                    </h2>
+                    <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-caption text-muted">
+                      Curso Activo: <span className="font-semibold text-foreground">{activeCursoId || "-"}</span>
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                    {courseChecks.map(item => (
+                      <CheckCard key={item.id} item={item} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* ── CONTENIDO: CONTRIBUCIONES ──────────────────────────────────────── */}
+            {activeTab === "contribuciones" && (
+              <div className="space-y-12 animate-in fade-in duration-500">
+                <section className="space-y-6">
+                  <div className="flex flex-col md:flex-row items-center gap-5 p-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm mb-8">
+                    <div className="w-12 h-12 shrink-0 rounded-full bg-[#229ED9]/10 flex items-center justify-center">
+                      <MessageCircle className="w-6 h-6 text-[#229ED9]" />
+                    </div>
+                    <div className="flex-1 text-center md:text-left">
+                      <h3 className="text-body font-bold text-foreground">Grupo oficial de Telegram</h3>
+                      <p className="text-body text-muted leading-tight mt-1">
+                        Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad Autónoma.
+                      </p>
+                    </div>
+                    <a
+                      href="https://t.me/cuadernofp"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="shrink-0 px-5 py-2.5 rounded-lg bg-[#229ED9] text-white font-medium hover:bg-[#229ED9]/90 transition-colors flex items-center gap-2 text-body"
+                    >
+                      <Send className="w-4 h-4" />
+                      Unirme al grupo en Telegram
+                    </a>
+                  </div>
+
+                  <h3 className="text-heading font-bold text-foreground border-b border-[var(--glass-border)] pb-2">Contribuidores por Comunidad Autónoma</h3>
+                  <p className="text-muted mb-4">
+                    Mención especial al profesorado que está ayudando a mejorar y a integrar los currículos de las Comunidades Autónomas
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {[
+                      "Andalucía", "Aragón", "Asturias", "Baleares", "Canarias",
+                      "Cantabria", "Castilla y León", "Castilla-La Mancha", "Cataluña", "Ceuta",
+                      "Comunidad Valenciana", "Extremadura", "Galicia", "La Rioja", "Madrid",
+                      "Melilla", "Murcia", "Navarra", "País Vasco"
+                    ].map((comunidad) => (
+                      <div key={comunidad} className="p-4 rounded-xl border border-[var(--glass-border)] bg-background/50 flex flex-col gap-2 transition-all hover:bg-background/80">
+                        <div className="flex items-center gap-2 border-b border-[var(--glass-border)] pb-2 mb-1">
+                          <Map className="w-5 h-5 text-accent" />
+                          <span className="font-bold text-foreground">{comunidad}</span>
+                        </div>
+                        <ul className="text-body text-muted space-y-1.5 pl-2">
+                          {comunidad === "Aragón" ? (
+                            <li className="flex items-center gap-2 text-foreground"><Users className="w-4 h-4 text-accent" /> Jose Javier García</li>
+                          ) : (
+                            <li className="flex items-center gap-2 italic opacity-60"><Users className="w-4 h-4 text-muted-foreground" /> ¡Anímate a contribuir!</li>
+                          )}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              </div>
+            )}
+
+            {/* ── CONTENIDO: MEJORA ──────────────────────────────────────── */}
+            {activeTab === "mejora" && (
+              <div className="space-y-6 animate-in fade-in duration-500 w-full">
+                <EqavetTab />
+                <PropuestasTab />
               </div>
             )}
 

@@ -75,10 +75,6 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "bibliografia", label: "Bibliografía" },
     { id: "legislacion", label: "Legislación" }
   ],
-  "/mejora": [
-    { id: "eqavet", label: "EQAVET" },
-    { id: "propuestas", label: "Propuestas" },
-  ],
   "/archivos": [
     { id: "datos", label: "Datos" },
     { id: "nube", label: "Nube" },
@@ -151,7 +147,7 @@ const FAQS = [
       { q: "¿Tengo que meter a mano todos los RA y CE del BOE?", a: "¡No! El sistema cuenta con un Catálogo oficial que importa automáticamente la normativa legal (Resultados de aprendizaje y Criterios) de tu módulo. Solo tienes que elegir tu Grado y tu Ciclo Formativo en la sección inicial de Catálogo y el sistema lo hace por ti." },
       { q: "¿Qué significa que los RA no suman 100% en las verificaciones?", a: "Para que la evaluación continua matemática funcione, cada Resultado de Aprendizaje (RA) debe tener un 'peso' o importancia. La suma total de los pesos de todos los RA de un módulo debe ser exactamente 100%. Debes ajustar esto en Programación > Currículo > pestaña 'RA y CE'." },
       { q: "¿Cómo configuro las horas que el alumnado pasa en la empresa (FP Dual)?", a: "En Programación > Contexto > pestaña 'Identificación', elige si tu régimen es Dual General, Dual Intensivo o Ninguno. Después, en Programación > Contexto > pestaña 'FEOE y régimen dual' describes cómo se organiza y se hace el seguimiento de esa formación en empresa. Para marcar qué Resultados de Aprendizaje concretos son duales, ve a Programación > Currículo > pestaña 'RA y CE'." },
-      { q: "¿Para qué sirve el apartado EQAVET?", a: "Sirve para integrar el ciclo de mejora continua europeo en tu programación. Lo encontrarás en la sección 'Mejora' > pestaña EQAVET. A final de curso, autoevalúas los indicadores de calidad y anotas tus propuestas de mejora para el próximo año. La rúbrica de autoevaluación docente sigue el modelo DOCENTIA de ANECA (ver aneca.es/docentia), adaptado a la práctica en FP." },
+      { q: "¿Para qué sirve el apartado EQAVET?", a: "Sirve para integrar el ciclo de mejora continua europeo en tu programación. Lo encontrarás en 'Inicio' > pestaña 'Mejora'. A final de curso, autoevalúas los indicadores de calidad y anotas tus propuestas de mejora para el próximo año. La rúbrica de autoevaluación docente sigue el modelo DOCENTIA de ANECA (ver aneca.es/docentia), adaptado a la práctica en FP." },
       { q: "¿Qué diferencia hay entre actividades complementarias y extraescolares?", a: "Son legalmente distintas: las complementarias son en horario lectivo, están ligadas al currículo y son evaluables — forman parte de tu programación didáctica. Las extraescolares son fuera de horario, voluntarias y nunca evaluables — van en la PGA del centro, no en la PD; en Metodología > Transversales puedes anotarlas igualmente como referencia, pero no cuentan en la programación." },
       { q: "¿Qué diferencia hay entre instrumento de evaluación e instrumento de calificación?", a: "Por cada Criterio de Evaluación (CE) hay dos cosas distintas: el instrumento de evaluación es la actividad que genera la evidencia (una prueba objetiva, una tarea, una defensa oral...), y el instrumento de calificación es lo que puntúa esa evidencia (una rúbrica, una escala, una lista de cotejo...). En Instrumentos puedes codificar ambos por separado al configurar cada instrumento." }
     ]
@@ -278,10 +274,10 @@ export default function AyudaPage() {
                     <strong className="text-foreground">¿Es adecuado el agrupamiento actual?</strong> Sí: separa
                     con claridad lo reutilizable (<em>Programación</em>: Contexto/Currículo/Metodología/
                     Instrumentos), lo específico del año (<em>Curso</em>: Calendario/Alumnado/Seguimiento/
-                    Calificaciones), lo transversal (<em>Grupo</em>: Archivos/Catálogo/Normativa/Magia — datos
-                    de consulta y generación de documentos) y el cierre/consulta (<em>Anexos</em>: Mejora/Ayuda/
-                    Legal — reflexión de calidad, documentación y aspectos legales, nada que se rellene mientras
-                    se programa).
+                    Calificaciones) y lo transversal (<em>Grupo</em>: Archivos/Catálogo/Normativa/Magia — datos
+                    de consulta y generación de documentos). Correlación, Ayuda y Legal viven como accesos
+                    directos junto a Agenda (fuera de estos tres grupos, de consulta puntual) y Mejora se
+                    fusionó como pestaña dentro de Inicio.
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">
@@ -290,8 +286,11 @@ export default function AyudaPage() {
                       <h3 className="font-extrabold text-subheading border-b-2 border-accent pb-2 text-foreground">General</h3>
                       <ul className="space-y-4 text-body">
                         {[
-                          { href: "/inicio", label: "Inicio", tabs: [{ id: "bienvenida", label: "Bienvenida" }, { id: "verificacion", label: "Verificación" }, { id: "contribuciones", label: "Contribuciones" }] },
+                          { href: "/inicio", label: "Inicio", tabs: [{ id: "bienvenida", label: "Bienvenida" }, { id: "verificacion", label: "Verificación" }, { id: "contribuciones", label: "Contribuciones" }, { id: "mejora", label: "Mejora" }] },
                           { href: "/agenda", label: "Agenda", tabs: [{ id: "actual", label: "Actual" }, { id: "planificacion", label: "Planificación" }] },
+                          { href: "/correlacion", label: "Correlación", tabs: PAGE_TABS["/correlacion"] },
+                          { href: "/ayuda", label: "Ayuda", tabs: PAGE_TABS["/ayuda"] },
+                          { href: "/legal", label: "Legal", tabs: PAGE_TABS["/legal"] },
                         ].map(page => (
                           <li key={page.href}>
                             <Link href={page.href} className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">

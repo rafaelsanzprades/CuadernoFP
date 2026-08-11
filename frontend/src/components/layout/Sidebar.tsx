@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, CalendarDays, FolderOpen, Hourglass, Save, A
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAppStore } from '@/store/useAppStore';
-import { navGroups } from '@/config/navigation';
+import { navGroups, topLevelPages } from '@/config/navigation';
 import { getAcronym } from '@/utils/catalogFormat';
 import { useEffect, useRef, useState } from 'react';
 import React from 'react';
@@ -246,6 +246,36 @@ export default function Sidebar() {
             </Tooltip>
           </div>
         )}
+
+        {/* ── Correlación / Ayuda / Legal: mismo tratamiento de botón grande que Agenda ── */}
+        <div className="flex flex-col gap-2 pb-2 shrink-0">
+          {topLevelPages.map((page) => {
+            const basePath = page.href.split('?')[0];
+            const isActive = pathname === basePath;
+            const linkContent = (
+              <Link
+                key={page.href}
+                href={page.href}
+                onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
+                className={`flex items-center ${isSidebarOpen ? 'gap-2.5 px-3' : 'justify-center px-0'} py-2.5 rounded-lg transition-all duration-150 group shadow-md bg-gradient-to-r ${dataSource === 'demo' ? 'from-warning/20 to-warning/5 border border-warning/40' : 'from-accent/20 to-accent/5 border border-accent/40'} text-foreground hover:bg-foreground/10`}
+              >
+                <span className={`flex items-center justify-center transition-transform duration-150 ${isActive ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : (dataSource === 'demo' ? 'text-warning group-hover:scale-110' : 'text-accent group-hover:scale-110')}`}>
+                  <page.icon className="w-5 h-5" strokeWidth={2} />
+                </span>
+                {isSidebarOpen && (
+                  <span className={`text-body leading-tight whitespace-nowrap font-bold ${isActive ? (dataSource === 'demo' ? 'text-warning' : 'text-accent') : ''}`}>
+                    {page.label}
+                  </span>
+                )}
+              </Link>
+            );
+            return !isSidebarOpen ? (
+              <Tooltip key={page.href} content={page.label} position="right" delay={0.1}>
+                {linkContent}
+              </Tooltip>
+            ) : linkContent;
+          })}
+        </div>
 
         {/* Grupo (header + link) y ① General: items del primer grupo, mismo hueco que Programación/Curso */}
         {navGroups[0] && (

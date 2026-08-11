@@ -1,4 +1,13 @@
-import { Activity, Building2, Calendar, Compass, FileText, FolderOpen, GraduationCap, Grid, Settings, TrendingUp, Users, Wrench, Sparkles, BarChart3, Shield, Award, Globe, Lightbulb, Info, Scale, GitCompare } from "lucide-react";
+import { Calendar, Compass, FileText, FolderOpen, GraduationCap, Grid, TrendingUp, Users, Wrench, Sparkles, Award, Lightbulb, Info, Scale, GitCompare } from "lucide-react";
+
+// Correlación, Ayuda y Legal viven ahora como botones grandes en la Sidebar
+// (junto a Agenda) y como tarjetas en Inicio > Bienvenida, no en navGroups —
+// ver Sidebar.tsx y app/inicio/page.tsx.
+export const topLevelPages = [
+  { href: "/correlacion?tab=pd-", label: "Correlación", icon: GitCompare, description: "Qué campo de la app corresponde a cada apartado de las PD- / PD= / PD+." },
+  { href: "/ayuda?tab=faq", label: "Ayuda", icon: Info, description: "FAQ, acrónimos y mapa de la aplicación." },
+  { href: "/legal?tab=aviso", label: "Legal", icon: Scale, description: "Aviso legal, privacidad, cookies y accesibilidad." }
+];
 
 export const navGroups = [
   {
@@ -29,16 +38,6 @@ export const navGroups = [
       { href: "/alumnado?tab=listado", label: "Alumnado", icon: Users, description: "Fichas personales y perfiles." },
       { href: "/seguimiento?tab=clases", label: "Seguimiento", icon: TrendingUp, description: "Diario de clases, faltas e incidencias." },
       { href: "/calificaciones?tab=resumen", label: "Calificaciones", icon: Award, description: "Cuaderno de notas y rúbricas aplicadas." },
-    ]
-  },
-  {
-    title: "Anexos",
-    sectionDescription: "Evaluación del proceso, documentación de apoyo y aspectos legales — nada que se rellene mientras se programa.",
-    items: [
-      { href: "/mejora?tab=eqavet", label: "Mejora", icon: Shield, description: "Gestión de la calidad y marco EQAVET." },
-      { href: "/correlacion?tab=pd-", label: "Correlación", icon: GitCompare, description: "Qué campo de la app corresponde a cada apartado de las PD- / PD= / PD+." },
-      { href: "/ayuda?tab=faq", label: "Ayuda", icon: Info, description: "FAQ, acrónimos y mapa de la aplicación." },
-      { href: "/legal?tab=aviso", label: "Legal", icon: Scale, description: "Aviso legal, privacidad, cookies y accesibilidad." }
     ]
   }
 ];
