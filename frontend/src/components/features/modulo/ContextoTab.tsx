@@ -1,20 +1,49 @@
 "use client";
-import { School, Settings, User, Info, FileText, BookOpen } from "lucide-react";
+import { School, User, FileText, BookOpen } from "lucide-react";
 import { NarrativeField } from "@/components/ui/NarrativeField";
 import { useAppStore } from "@/store/useAppStore";
+
+const RASGOS_ENTORNO = [
+  {
+    grupo: "Tipo de entorno", items: [
+      { id: "ENT-URBANO", label: "Urbano" },
+      { id: "ENT-RURAL", label: "Rural" },
+      { id: "ENT-PERIFERIA", label: "Periferia / barrio periférico" },
+      { id: "ENT-INDUSTRIAL", label: "Polígono industrial cercano" },
+    ]
+  },
+  {
+    grupo: "Turno", items: [
+      { id: "TURNO-DIURNO", label: "Diurno" },
+      { id: "TURNO-VESPERTINO", label: "Vespertino" },
+      { id: "TURNO-MIXTO", label: "Mixto" },
+    ]
+  },
+  {
+    grupo: "Modalidad", items: [
+      { id: "MOD-PRESENCIAL", label: "Presencial" },
+      { id: "MOD-SEMIPRESENCIAL", label: "Semipresencial" },
+      { id: "MOD-DISTANCIA", label: "Distancia" },
+    ]
+  },
+];
 
 export function ContextoTab() {
   const { moduleData, updateModuleData } = useAppStore();
 
   const config_contexto = moduleData?.config_contexto || {};
-  const config_aula = moduleData?.config_aula || {};
 
-  const handleContextoChange = (field: string, value: string) => {
+  const handleContextoChange = (field: string, value: any) => {
     updateModuleData("config_contexto", { ...config_contexto, [field]: value });
   };
 
-  const handleAulaChange = (field: string, value: string) => {
-    updateModuleData("config_aula", { ...config_aula, [field]: value });
+  const rasgos_entorno = config_contexto.rasgos_entorno || [];
+
+  const toggleRasgo = (id: string) => {
+    const updated = rasgos_entorno.includes(id)
+      ? rasgos_entorno.filter((r: string) => r !== id)
+      : [...rasgos_entorno, id];
+    handleContextoChange("rasgos_entorno", updated);
   };
 
   return (
@@ -25,6 +54,35 @@ export function ContextoTab() {
           <span className="inline-flex"><School className="w-[1.2em] h-[1.2em] mr-1" /></span> Contexto escolar
         </h2>
         <div className="space-y-4">
+          <div>
+            <label className="text-body font-semibold text-foreground mb-2 block">Rasgos rápidos del entorno</label>
+            <p className="text-caption text-muted mb-3">
+              Selección orientativa para apoyar la redacción de los textos de abajo (primera versión, se irá ampliando).
+            </p>
+            <div className="space-y-3">
+              {RASGOS_ENTORNO.map((grupo) => (
+                <div key={grupo.grupo}>
+                  <p className="text-caption font-semibold text-muted mb-1.5">{grupo.grupo}</p>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                    {grupo.items.map((item) => {
+                      const isSelected = rasgos_entorno.includes(item.id);
+                      return (
+                        <label key={item.id} className={`flex items-center gap-2 p-2 rounded border cursor-pointer transition-colors ${isSelected ? 'bg-indigo-500/10 border-indigo-500/30' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
+                          <input
+                            type="checkbox"
+                            checked={isSelected}
+                            onChange={() => toggleRasgo(item.id)}
+                            className="rounded border-white/20 bg-transparent text-indigo-500 focus:ring-indigo-500"
+                          />
+                          <span className="text-caption">{item.label}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
           <div>
             <label className="text-body text-muted mb-1 block">Entorno geográfico y sociocultural</label>
             <textarea
@@ -129,14 +187,6 @@ export function ContextoTab() {
             </div>
           </div>
           <div>
-            <label className="text-body text-muted mb-1 block">Inclusión</label>
-            <textarea
-              value={config_contexto.inclusion || ""}
-              onChange={e => handleContextoChange("inclusion", e.target.value)}
-              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
-            />
-          </div>
-          <div>
             <label className="text-body text-muted mb-1 block">Elenco de situaciones</label>
             <textarea
               value={config_contexto.elenco_situaciones || ""}
@@ -155,44 +205,12 @@ export function ContextoTab() {
         </div>
       </div>
 
-      <div className="glass-card p-6 border-t-4 border-t-pink-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Settings className="w-[1.2em] h-[1.2em] mr-1" /></span> Configuración del aula
-        </h2>
-        <div className="space-y-4">
-          <div>
-            <label className="text-body text-muted mb-1 block">Estrategias metodológicas. Espacios</label>
-            <textarea
-              value={config_contexto.metodologia || ""}
-              onChange={e => handleContextoChange("metodologia", e.target.value)}
-              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-danger focus:outline-none"
-            />
-          </div>
-          <div>
-            <label className="text-body text-muted mb-1 block">Metodología general (ej. ABR / ABP)</label>
-            <textarea
-              value={config_aula.Metodología || ""}
-              onChange={e => handleAulaChange("Metodología", e.target.value)}
-              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-danger focus:outline-none"
-            />
-          </div>
-          <div>
-            <label className="text-body text-muted mb-1 block">Atención a la diversidad (A. no significativas)</label>
-            <textarea
-              value={config_aula["Atención a la diversidad"] || ""}
-              onChange={e => handleAulaChange("Atención a la diversidad", e.target.value)}
-              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-danger focus:outline-none"
-            />
-          </div>
-        </div>
-      </div>
-
       <div className="glass-card p-6 border-t-4 border-t-teal-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
           <span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Textos del modelo BOA Aragón (pd=)
         </h2>
         <p className="text-caption text-muted mb-4">
-          Estos 4 campos son específicos del documento &quot;Programación suficiente&quot; (modelo oficial BOA Aragón).
+          Estos 2 campos son específicos del documento &quot;Programación suficiente&quot; (modelo oficial BOA Aragón).
           Si se dejan vacíos, se autogenera un texto por defecto razonable a partir del resto de datos del módulo.
         </p>
         <div className="space-y-4">
@@ -211,24 +229,6 @@ export function ContextoTab() {
               value={config_contexto.texto_uds_modulo || ""}
               onChange={e => handleContextoChange("texto_uds_modulo", e.target.value)}
               placeholder="Descripción de cómo se organizan las unidades didácticas. Si se deja vacío, se genera automáticamente a partir de df_ud."
-              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
-            />
-          </div>
-          <div>
-            <label className="text-body text-muted mb-1 block">FEOE</label>
-            <textarea
-              value={config_contexto.texto_feoe || ""}
-              onChange={e => handleContextoChange("texto_feoe", e.target.value)}
-              placeholder="Texto sobre la formación en empresa. Si se deja vacío, se genera automáticamente a partir de los RA marcados como dualizables (is_dual)."
-              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
-            />
-          </div>
-          <div>
-            <label className="text-body text-muted mb-1 block">Criterios de calificación</label>
-            <textarea
-              value={config_contexto.texto_criterios_calificacion || ""}
-              onChange={e => handleContextoChange("texto_criterios_calificacion", e.target.value)}
-              placeholder="Criterios de calificación y redondeo del módulo."
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>

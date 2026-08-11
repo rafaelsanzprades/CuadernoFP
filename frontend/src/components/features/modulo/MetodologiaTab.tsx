@@ -1,13 +1,19 @@
 "use client";
-import { Target , Info } from "lucide-react";
+import { Target, Users } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
+import { NarrativeField } from "@/components/ui/NarrativeField";
 
 export function MetodologiaTab() {
   const { moduleData, updateModuleData } = useAppStore();
   const config_contexto = moduleData?.config_contexto || {};
+  const config_aula = moduleData?.config_aula || {};
 
   const handleChange = (field: string, value: string) => {
     updateModuleData("config_contexto", { ...config_contexto, [field]: value });
+  };
+
+  const handleAulaChange = (field: string, value: string) => {
+    updateModuleData("config_aula", { ...config_aula, [field]: value });
   };
 
   const METODOLOGIAS = [
@@ -88,7 +94,23 @@ export function MetodologiaTab() {
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
-          
+          <div>
+            <label className="text-body font-semibold text-foreground mb-1 block">Estrategias metodológicas. Espacios <span className="text-caption font-normal text-muted">(campo histórico, próximo a fusionarse con el de arriba)</span></label>
+            <textarea
+              value={config_contexto.metodologia || ""}
+              onChange={e => handleChange("metodologia", e.target.value)}
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-body font-semibold text-foreground mb-1 block">Metodología general (ej. ABR / ABP) <span className="text-caption font-normal text-muted">(campo histórico)</span></label>
+            <textarea
+              value={config_aula.Metodología || ""}
+              onChange={e => handleAulaChange("Metodología", e.target.value)}
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+
           <div>
             <label className="text-body font-semibold text-foreground mb-1 block">Anotaciones libres de metodología</label>
             <p className="text-caption text-muted mb-2">Párrafo personalizado que se añadirá al final del apartado de metodologías generadas automáticamente.</p>
@@ -121,6 +143,17 @@ export function MetodologiaTab() {
             />
           </div>
         </div>
+      </div>
+
+      <div className="glass-card p-6 border-t-4 border-t-violet-500">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
+          <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Coordinación docente
+        </h2>
+        <NarrativeField
+          id="textos_pd_metodologia_labor_coordinada"
+          title="Coordinación con otros módulos y su profesorado"
+          description="Cómo se coordina este módulo con otros módulos/profesorado del ciclo (reuniones de equipo docente, dependencias entre módulos, sustitución de tareas en caso de ausencia, etc.)."
+        />
       </div>
     </div>
     </>

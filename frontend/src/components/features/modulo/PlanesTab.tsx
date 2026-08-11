@@ -1,107 +1,79 @@
 "use client";
-import { Bus, Puzzle, Shield, Info, Building2, Users, BookOpen } from "lucide-react";
+import { Building2 } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { NarrativeField } from "@/components/ui/NarrativeField";
 
+const FEOE_CATALOGO = [
+  {
+    grupo: "Modalidad", items: [
+      { id: "FEOE-GEN", label: "Dual general" },
+      { id: "FEOE-INT", label: "Dual intensiva" },
+      { id: "FEOE-SIM", label: "Sin FEOE / formación en centro educativo" },
+    ]
+  },
+  {
+    grupo: "Seguimiento", items: [
+      { id: "FEOE-VISITA", label: "Visitas periódicas al centro de trabajo" },
+      { id: "FEOE-INFORME", label: "Informe final del tutor de empresa" },
+      { id: "FEOE-EVALCONJ", label: "Evaluación conjunta centro-empresa" },
+      { id: "FEOE-CUADERNO", label: "Cuaderno de seguimiento del alumnado" },
+    ]
+  },
+];
+
 export function PlanesTab() {
-  const { moduleData, updateDataFrame, updateModuleData } = useAppStore();
+  const { moduleData, updateModuleData } = useAppStore();
+  const config_contexto = moduleData?.config_contexto || {};
 
-  const CONTINGENCIA = [
-    { id: "CONT-ASINC", label: "Docencia telemática asíncrona" },
-    { id: "CONT-SINC", label: "Docencia telemática síncrona" },
-    { id: "CONT-AUT", label: "Dosier de tareas autoguiadas" }
-  ];
-
-  const medidas_contingencia = moduleData?.medidas_contingencia || [];
-
-  const toggleContingencia = (id: string) => {
-    const updated = medidas_contingencia.includes(id) ? medidas_contingencia.filter((i: string) => i !== id) : [...medidas_contingencia, id];
-    updateModuleData("medidas_contingencia", updated);
+  const handleChange = (field: string, value: any) => {
+    updateModuleData("config_contexto", { ...config_contexto, [field]: value });
   };
 
-  const df_dua = moduleData?.df_dua || [];
-  const df_contingencia = moduleData?.df_contingencia || [];
-  const df_ace = moduleData?.df_ace || [];
-  const df_ra = moduleData?.df_ra || [];
+  const feoe_seleccion = config_contexto.feoe_seleccion || [];
 
-  const addRow = (dataFrame: any[], dfName: string, prefix: string, template: any) => {
-    const newDf = [...dataFrame];
-    const newId = `${prefix}${(newDf.length + 1).toString().padStart(2, '0')}`;
-    newDf.push({ ID: newId, ...template });
-    updateDataFrame(dfName as any, newDf);
-  };
-
-  const updateRow = (dataFrame: any[], dfName: string, idx: number, field: string, value: any) => {
-    const newDf = [...dataFrame];
-    newDf[idx][field] = value;
-    updateDataFrame(dfName as any, newDf);
-  };
-
-  const removeRow = (dataFrame: any[], dfName: string, idx: number) => {
-    const newDf = [...dataFrame];
-    newDf.splice(idx, 1);
-    updateDataFrame(dfName as any, newDf);
+  const toggleFeoe = (id: string) => {
+    const updated = feoe_seleccion.includes(id)
+      ? feoe_seleccion.filter((i: string) => i !== id)
+      : [...feoe_seleccion, id];
+    handleChange("feoe_seleccion", updated);
   };
 
   return (
-    <>
-      <div className="space-y-8 animate-in fade-in duration-500">
-      {/* DUA */}
-      <section className="glass-card p-6 border-t-4 border-t-emerald-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Puzzle className="w-[1.2em] h-[1.2em] mr-1" /></span> Plan de Atención a la diversidad
-        </h2>
-        <div className="overflow-x-auto mb-4">
-          <table className="w-full text-left text-body border-collapse whitespace-nowrap">
-            <thead>
-              <tr className="border-b border-[var(--glass-border)] text-muted">
-                <th className="p-2 w-16">Id</th>
-                <th className="p-2 w-48">Alumnado / Aula</th>
-                <th className="p-2 w-48">Barrera detectada</th>
-                <th className="p-2 min-w-[200px]">Medida metodológica</th>
-                <th className="p-2 w-48">Medida de acceso</th>
-                <th className="p-2 w-48">Medida de evaluación</th>
-                <th className="p-2 w-10"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {df_dua.map((row: any, idx: number) => (
-                <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5">
-                  <td className="p-2 font-mono text-caption">{row.ID}</td>
-                  <td className="p-2 pr-2">
-                    <input type="text" value={row.Alumnado_Aula || ""} onChange={e => updateRow(df_dua, "df_dua", idx, "Alumnado_Aula", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-success focus:outline-none" />
-                  </td>
-                  <td className="p-2 pr-2">
-                    <input type="text" value={row.Barrera || ""} onChange={e => updateRow(df_dua, "df_dua", idx, "Barrera", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-success focus:outline-none" />
-                  </td>
-                  <td className="p-2 pr-2">
-                    <input type="text" value={row.Medida_Metodologica || ""} onChange={e => updateRow(df_dua, "df_dua", idx, "Medida_Metodologica", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-success focus:outline-none" />
-                  </td>
-                  <td className="p-2 pr-2">
-                    <input type="text" value={row.Medida_Acceso || ""} onChange={e => updateRow(df_dua, "df_dua", idx, "Medida_Acceso", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-success focus:outline-none" />
-                  </td>
-                  <td className="p-2 pr-2">
-                    <input type="text" value={row.Medida_Evaluacion || ""} onChange={e => updateRow(df_dua, "df_dua", idx, "Medida_Evaluacion", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-success focus:outline-none" />
-                  </td>
-                  <td className="p-2 text-center">
-                    <button onClick={() => removeRow(df_dua, "df_dua", idx)} className="text-danger hover:text-danger font-bold">×</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <button onClick={() => addRow(df_dua, "df_dua", "DUA", { Alumnado_Aula: "", Barrera: "", Medida_Metodologica: "", Medida_Acceso: "", Medida_Evaluacion: "" })} className="text-body text-success hover:text-success font-semibold flex items-center gap-1">
-          <span>+</span> Añadir medida de Diversidad
-        </button>
-      </section>
-
+    <div className="space-y-8 animate-in fade-in duration-500">
       {/* FEOE */}
-      <section className="glass-card p-6 border-t-4 border-t-blue-500">
+      <div className="glass-card p-6 border-t-4 border-t-blue-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
           <span className="inline-flex"><Building2 className="w-[1.2em] h-[1.2em] mr-1" /></span> FEOE. Formación en Empresa u Organismo Equiparado
         </h2>
         <div className="space-y-6">
+          <div>
+            <label className="text-body font-semibold text-foreground mb-2 block">Modalidad y seguimiento</label>
+            <p className="text-caption text-muted mb-3">Selección orientativa que apoya la redacción de los textos de abajo (primera versión, se irá ampliando).</p>
+            <div className="space-y-3">
+              {FEOE_CATALOGO.map((grupo) => (
+                <div key={grupo.grupo}>
+                  <p className="text-caption font-semibold text-muted mb-1.5">{grupo.grupo}</p>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                    {grupo.items.map((item) => {
+                      const isSelected = feoe_seleccion.includes(item.id);
+                      return (
+                        <label key={item.id} className={`flex items-center gap-2 p-2 rounded border cursor-pointer transition-colors ${isSelected ? 'bg-blue-500/10 border-blue-500/30' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
+                          <input
+                            type="checkbox"
+                            checked={isSelected}
+                            onChange={() => toggleFeoe(item.id)}
+                            className="rounded border-white/20 bg-transparent text-blue-500 focus:ring-blue-500"
+                          />
+                          <span className="text-caption">{item.label}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <NarrativeField
             id="textos_pd_feoe_organizacion"
             title="Organización y modalidad de FEOE"
@@ -112,39 +84,19 @@ export function PlanesTab() {
             title="Seguimiento de FEOE"
             description="Procedimiento para el seguimiento en la empresa y comunicación con tutores duales."
           />
-        </div>
-      </section>
 
-      {/* Coordinación docente */}
-      <section className="glass-card p-6 border-t-4 border-t-violet-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Coordinación docente
-        </h2>
-        <div className="space-y-6">
-          <NarrativeField
-            id="textos_pd_metodologia_labor_coordinada"
-            title="Coordinación con otros módulos y su profesorado"
-            description="Cómo se coordina este módulo con otros módulos/profesorado del ciclo (reuniones de equipo docente, dependencias entre módulos, sustitución de tareas en caso de ausencia, etc.)."
-          />
+          <div>
+            <label className="text-body text-muted mb-1 block">FEOE (texto específico modelo BOA Aragón, pd=)</label>
+            <p className="text-caption text-muted mb-2">Si se deja vacío, se genera automáticamente a partir de los RA marcados como dualizables (is_dual).</p>
+            <textarea
+              value={config_contexto.texto_feoe || ""}
+              onChange={e => handleChange("texto_feoe", e.target.value)}
+              placeholder="Texto sobre la formación en empresa..."
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
         </div>
-      </section>
-
-      {/* Bibliografía */}
-      <section className="glass-card p-6 border-t-4 border-t-amber-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Bibliografía
-        </h2>
-        <div className="space-y-6">
-          <NarrativeField
-            id="textos_pd_bibliografia"
-            title="Bibliografía y webgrafía del módulo"
-            description="Manuales, normativa técnica, catálogos de fabricantes y recursos web usados como referencia del módulo."
-          />
-        </div>
-      </section>
-
+      </div>
     </div>
-    </>
   );
 }
-

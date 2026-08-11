@@ -54,18 +54,18 @@ export default function ContextoConfigPage() {
 
   const TABS = [
     { id: "identificacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> Identificación</span>, cleanLabel: "Identificación" },
-    { id: "entorno", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Contextualización</span>, cleanLabel: "Contextualización" },
-    { id: "planes", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> FEOE y diversidad</span>, cleanLabel: "FEOE y diversidad" },
-    { id: "procedimientos", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> Evaluación y calificación</span>, cleanLabel: "Evaluación y calificación" },
+    { id: "contextualizacion", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Contextualización</span>, cleanLabel: "Contextualización" },
+    { id: "feoe", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> FEOE y régimen dual</span>, cleanLabel: "FEOE y régimen dual" },
+    { id: "criterios", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> Evaluación y calificación</span>, cleanLabel: "Evaluación y calificación" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     identificacion: 'Identificación del módulo: código, denominación, centro, curso académico y profesorado. Cap. 1.1 del PD+.',
-    entorno: 'Entorno geográfico, socioeconómico y escolar del módulo. Cap. 1.3 del PD+.',
-    planes: 'Plan de atención a la diversidad (DUA) y formación en empresa u organismo equiparado (FEOE). Cap. 2.9 y 5 del PD+.',
-    procedimientos: 'Procedimiento de evaluación y de calificación: información al alumnado, pérdida de evaluación continua, recuperación. Cap. 4 del PD+.',
+    contextualizacion: 'Entorno geográfico, socioeconómico y escolar del módulo. Cap. 1.3 del PD+.',
+    feoe: 'Formación en empresa u organismo equiparado (FEOE): modalidad, seguimiento y régimen dual. Cap. 5 del PD+.',
+    criterios: 'Procedimiento de evaluación y de calificación: información al alumnado, pérdida de evaluación continua, recuperación. Cap. 4 del PD+.',
   };
 
   if (!activeModuleId) {
@@ -140,9 +140,9 @@ export default function ContextoConfigPage() {
             <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Configuración del contexto.'} />
 
             {activeTab === "identificacion" && <DatosTab />}
-            {activeTab === "entorno" && <ContextoTab />}
-            {activeTab === "planes" && <PlanesTab />}
-            {activeTab === "procedimientos" && <ProcedimientosTab />}
+            {activeTab === "contextualizacion" && <ContextoTab />}
+            {activeTab === "feoe" && <PlanesTab />}
+            {activeTab === "criterios" && <ProcedimientosTab />}
 
           </MotionWrapper>
         </main>

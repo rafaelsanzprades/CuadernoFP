@@ -1,17 +1,43 @@
 "use client";
-import { Users, Plus, Trash2, ShieldAlert } from "lucide-react";
+import { Users, Plus, Trash2, ShieldAlert, Puzzle } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { Button } from "@/components/ui/Button";
 
 export function DiversidadTab() {
-  const { moduleData, updateModuleData } = useAppStore();
+  const { moduleData, updateModuleData, updateDataFrame } = useAppStore();
   const config_contexto = moduleData?.config_contexto || {};
-  
+  const config_aula = moduleData?.config_aula || {};
+
   // Default structure if not exists
   const acneae = config_contexto.acneae || [];
 
   const handleChange = (field: string, value: any) => {
     updateModuleData("config_contexto", { ...config_contexto, [field]: value });
+  };
+
+  const handleAulaChange = (field: string, value: any) => {
+    updateModuleData("config_aula", { ...config_aula, [field]: value });
+  };
+
+  const df_dua = moduleData?.df_dua || [];
+
+  const addDuaRow = () => {
+    const newDf = [...df_dua];
+    const newId = `DUA${(newDf.length + 1).toString().padStart(2, '0')}`;
+    newDf.push({ ID: newId, Alumnado_Aula: "", Barrera: "", Medida_Metodologica: "", Medida_Acceso: "", Medida_Evaluacion: "" });
+    updateDataFrame("df_dua", newDf);
+  };
+
+  const updateDuaRow = (idx: number, field: string, value: any) => {
+    const newDf = [...df_dua];
+    newDf[idx][field] = value;
+    updateDataFrame("df_dua", newDf);
+  };
+
+  const removeDuaRow = (idx: number) => {
+    const newDf = [...df_dua];
+    newDf.splice(idx, 1);
+    updateDataFrame("df_dua", newDf);
   };
 
   const INCLUSION = [
@@ -137,15 +163,83 @@ export function DiversidadTab() {
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
           <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-violet-400" /></span> F1. Atención a la diversidad
         </h2>
-        <div className="space-y-2">
-          <p className="text-caption text-muted mb-2">Estrategias para adaptar la enseñanza a las características del alumnado.</p>
-          <textarea
-            value={config_contexto["F1_diversidad"] || ""}
-            onChange={e => handleChange("F1_diversidad", e.target.value)}
-            placeholder="Medidas de inclusión y atención a las diferencias individuales..."
-            className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
-          />
+        <div className="space-y-4">
+          <div>
+            <p className="text-caption text-muted mb-2">Estrategias para adaptar la enseñanza a las características del alumnado.</p>
+            <textarea
+              value={config_contexto["F1_diversidad"] || ""}
+              onChange={e => handleChange("F1_diversidad", e.target.value)}
+              placeholder="Medidas de inclusión y atención a las diferencias individuales..."
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-body text-muted mb-1 block">Inclusión — resumen general</label>
+            <textarea
+              value={config_contexto.inclusion || ""}
+              onChange={e => handleChange("inclusion", e.target.value)}
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-body text-muted mb-1 block">Atención a la diversidad (Adaptaciones no significativas)</label>
+            <textarea
+              value={config_aula["Atención a la diversidad"] || ""}
+              onChange={e => handleAulaChange("Atención a la diversidad", e.target.value)}
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
         </div>
+      </div>
+
+      {/* Plan de Atención a la Diversidad (DUA) */}
+      <div className="glass-card p-6 border-t-4 border-t-emerald-500">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
+          <span className="inline-flex"><Puzzle className="w-[1.2em] h-[1.2em] mr-1 text-emerald-400" /></span> Plan de Atención a la Diversidad (DUA)
+        </h2>
+        <div className="overflow-x-auto mb-4">
+          <table className="w-full text-left text-body border-collapse whitespace-nowrap">
+            <thead>
+              <tr className="border-b border-[var(--glass-border)] text-muted">
+                <th className="p-2 w-16">Id</th>
+                <th className="p-2 w-48">Alumnado / Aula</th>
+                <th className="p-2 w-48">Barrera detectada</th>
+                <th className="p-2 min-w-[200px]">Medida metodológica</th>
+                <th className="p-2 w-48">Medida de acceso</th>
+                <th className="p-2 w-48">Medida de evaluación</th>
+                <th className="p-2 w-10"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {df_dua.map((row: any, idx: number) => (
+                <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5">
+                  <td className="p-2 font-mono text-caption">{row.ID}</td>
+                  <td className="p-2 pr-2">
+                    <input type="text" value={row.Alumnado_Aula || ""} onChange={e => updateDuaRow(idx, "Alumnado_Aula", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-success focus:outline-none" />
+                  </td>
+                  <td className="p-2 pr-2">
+                    <input type="text" value={row.Barrera || ""} onChange={e => updateDuaRow(idx, "Barrera", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-success focus:outline-none" />
+                  </td>
+                  <td className="p-2 pr-2">
+                    <input type="text" value={row.Medida_Metodologica || ""} onChange={e => updateDuaRow(idx, "Medida_Metodologica", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-success focus:outline-none" />
+                  </td>
+                  <td className="p-2 pr-2">
+                    <input type="text" value={row.Medida_Acceso || ""} onChange={e => updateDuaRow(idx, "Medida_Acceso", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-success focus:outline-none" />
+                  </td>
+                  <td className="p-2 pr-2">
+                    <input type="text" value={row.Medida_Evaluacion || ""} onChange={e => updateDuaRow(idx, "Medida_Evaluacion", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-success focus:outline-none" />
+                  </td>
+                  <td className="p-2 text-center">
+                    <button onClick={() => removeDuaRow(idx)} className="text-danger hover:text-danger font-bold">×</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <button onClick={addDuaRow} className="text-body text-success hover:text-success font-semibold flex items-center gap-1">
+          <span>+</span> Añadir medida de Diversidad
+        </button>
       </div>
 
       {/* Panel ACNEAE */}

@@ -290,13 +290,13 @@ export default function InicioPage() {
       id: "contexto",
       icon: <BookOpen className="w-5 h-5" />,
       title: "Contexto del módulo",
-      href: "/contexto?tab=entorno",
+      href: "/contexto?tab=contextualizacion",
       hrefLabel: "Contexto",
       status: tieneContexto ? "ok" : "empty",
       lines: tieneContexto
         ? ["Contexto del aula configurado"]
         : ["Sin descripción de contexto ni configuración de aula"],
-      actionHref: !tieneContexto ? "/contexto?tab=entorno" : undefined,
+      actionHref: !tieneContexto ? "/contexto?tab=contextualizacion" : undefined,
       actionLabel: !tieneContexto ? "Añadir contexto" : undefined,
     },
     {
@@ -344,7 +344,7 @@ export default function InicioPage() {
       id: "narrativos-pd",
       icon: <FileText className="w-5 h-5" />,
       title: "Textos narrativos (PD+/JEG)",
-      href: "/contexto?tab=entorno",
+      href: "/contexto?tab=contextualizacion",
       hrefLabel: "Contexto",
       status: !m ? "empty" : narrativosRellenos === NARRATIVOS_PDPLUS.length ? "ok" : narrativosRellenos > 0 ? "warning" : "empty",
       lines: !m
@@ -353,7 +353,7 @@ export default function InicioPage() {
           `${narrativosRellenos} / ${NARRATIVOS_PDPLUS.length} textos redactados`,
           narrativosFaltan.length > 0 ? `Faltan: ${narrativosFaltan.join(", ")}` : "Todos los textos narrativos están redactados",
         ],
-      actionHref: narrativosFaltan.length > 0 ? "/contexto?tab=entorno" : undefined,
+      actionHref: narrativosFaltan.length > 0 ? "/contexto?tab=contextualizacion" : undefined,
       actionLabel: narrativosFaltan.length > 0 ? "Redactar textos" : undefined,
     }
   ];

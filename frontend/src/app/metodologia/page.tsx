@@ -1,12 +1,11 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import { Target, CheckCircle2, Layers, FolderOpen, Lightbulb, Settings, Shield, HeartHandshake, Rocket } from "lucide-react";
+import { Target, CheckCircle2, Layers, FolderOpen, Lightbulb, Settings, Shield } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
-import { useTranslation } from "react-i18next";
 import { MetodologiaTab } from "@/components/features/modulo/MetodologiaTab";
 import { EvaluacionRecursosTab } from "@/components/features/modulo/EvaluacionRecursosTab";
 import { OtrosElementosTab } from "@/components/features/modulo/OtrosElementosTab";
@@ -21,7 +20,6 @@ import { Button } from "@/components/ui/Button";
 
 export default function MetodologiaConfigPage() {
   const { activeModuleId, moduleData, setModuleData } = useAppStore();
-  const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("metodologia");
 
@@ -50,23 +48,19 @@ export default function MetodologiaConfigPage() {
   }, [activeModuleId, setModuleData]);
 
   const TABS = [
-    { id: "metodologia", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.metodologia')}</span>, cleanLabel: t('tabs.metodologia') },
-    { id: "diversidad", label: <span className="flex items-center gap-2"><HeartHandshake className="w-4 h-4 shrink-0" /> Medidas de inclusión</span>, cleanLabel: "Medidas de inclusión" },
+    { id: "metodologia", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> Metodología e inclusión</span>, cleanLabel: "Metodología e inclusión" },
     { id: "evaluacion", label: <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 shrink-0" /> Instrumentos y recursos</span>, cleanLabel: "Instrumentos y recursos" },
     { id: "contingencia", label: <span className="flex items-center gap-2"><Shield className="w-4 h-4 shrink-0" /> Plan de contingencia</span>, cleanLabel: "Plan de contingencia" },
-    { id: "transversales", label: <span className="flex items-center gap-2"><Layers className="w-4 h-4 shrink-0" /> {t('tabs.otros')}</span>, cleanLabel: "Transversales" },
-    { id: "innovacion", label: <span className="flex items-center gap-2"><Rocket className="w-4 h-4 shrink-0" /> Innovación y actividades</span>, cleanLabel: "Innovación y actividades" },
+    { id: "transversales", label: <span className="flex items-center gap-2"><Layers className="w-4 h-4 shrink-0" /> Transversales, competencias y actividades</span>, cleanLabel: "Transversales, competencias y actividades" },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    metodologia: 'Definición de las estrategias metodológicas y actividades formativas.',
-    diversidad: 'Atención a la diversidad, adaptaciones curriculares (DUA) y panel de alumnado ACNEAE.',
+    metodologia: 'Estrategias metodológicas, coordinación docente, atención a la diversidad (DUA) y panel de alumnado ACNEAE.',
     evaluacion: 'Instrumentos de evaluación seleccionados y recursos y espacios necesarios.',
     contingencia: 'Planes de contingencia y adaptación ante situaciones excepcionales.',
-    transversales: 'Elementos transversales, competencias clave y estándares curriculares del módulo.',
-    innovacion: 'Innovación, intermodularidad y actividades complementarias/extraescolares.',
+    transversales: 'Elementos transversales, competencias clave, competencias digitales, innovación e intermodularidad, y actividades complementarias/extraescolares.',
   };
 
   if (!activeModuleId) {
@@ -141,12 +135,10 @@ export default function MetodologiaConfigPage() {
             <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Configuración de la metodología.'} />
 
             <div className="space-y-4">
-              {activeTab === 'metodologia' && <MetodologiaTab />}
-              {activeTab === 'diversidad' && <DiversidadTab />}
+              {activeTab === 'metodologia' && <><MetodologiaTab /><DiversidadTab /></>}
               {activeTab === 'evaluacion' && <EvaluacionRecursosTab />}
               {activeTab === 'contingencia' && <ContingenciaTab />}
-              {activeTab === 'transversales' && <OtrosElementosTab />}
-              {activeTab === 'innovacion' && <InnovacionTab />}
+              {activeTab === 'transversales' && <><OtrosElementosTab /><InnovacionTab /></>}
             </div>
 
           </MotionWrapper>
