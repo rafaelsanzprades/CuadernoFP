@@ -51,15 +51,15 @@ export default function MatricesPage() {
   const TABS = [
     { id: "ponderacion-ra-ce", label: "Ponderación RA y CE", cleanLabel: "Ponderación RA y CE", icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "unidades", label: "Unidades didácticas", cleanLabel: "Unidades didácticas", icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "contribucion-og", label: "Contribución RA en OG", cleanLabel: "Contribución RA en OG", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "tareas", label: "Tareas competenciales", cleanLabel: "Tareas competenciales", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "contribucion-ra-og", label: "Contribución RA en OG", cleanLabel: "Contribución RA en OG", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "competenciales", label: "Tareas competenciales", cleanLabel: "Tareas competenciales", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     'ponderacion-ra-ce': 'Matriz de resultados de aprendizaje y criterios de evaluación, y su ponderación.',
     'unidades': 'Definición de unidades didácticas o unidades de trabajo.',
-    'contribucion-og': 'Contribución de los RA a los objetivos generales del título.',
-    'tareas': 'Diseño y planificación de tareas y actividades competenciales.',
+    'contribucion-ra-og': 'Contribución de los RA a los objetivos generales del título.',
+    'competenciales': 'Diseño y planificación de tareas y actividades competenciales.',
   };
 
   // Load catalog descriptions when module changes (for fallback resolution)
@@ -655,7 +655,7 @@ export default function MatricesPage() {
             )}
 
             {/* Tareas competenciales */}
-            {activeTab === "tareas" && (
+            {activeTab === "competenciales" && (
               <div className="animate-in fade-in duration-500">
                 <Card className="p-6 border-t-4 border-t-blue-500">
                   <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-6">
@@ -895,7 +895,7 @@ export default function MatricesPage() {
             )}
 
             {/* ── Contribución de RA en OG ────────────────────────────────────── */}
-            {activeTab === "contribucion-og" && (
+            {activeTab === "contribucion-ra-og" && (
               <div className="animate-in fade-in duration-500">
                 <RaOgMatrix />
               </div>

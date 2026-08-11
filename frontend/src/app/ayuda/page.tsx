@@ -25,14 +25,14 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   "/contexto": [
     { id: "identificacion", label: "Identificación" },
     { id: "contextualizacion", label: "Contextualización" },
-    { id: "feoe", label: "FEOE y régimen dual" },
+    { id: "dual", label: "Dual FEOE" },
     { id: "criterios", label: "Evaluación y calificación" },
   ],
   "/curriculo": [
     { id: "ponderacion-ra-ce", label: "Ponderación RA y CE" },
     { id: "unidades", label: "Unidades didácticas" },
-    { id: "contribucion-og", label: "Contribución RA en OG" },
-    { id: "tareas", label: "Tareas competenciales" },
+    { id: "contribucion-ra-og", label: "Contribución RA en OG" },
+    { id: "competenciales", label: "Tareas competenciales" },
   ],
   "/metodologia": [
     { id: "metodologia", label: "Metodología e inclusión" },
@@ -48,7 +48,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   ],
   "/calendario": [
     { id: "fechas", label: "Fechas y horarios" },
-    { id: "feoe", label: "FP Dual (FEOE)" },
+    { id: "feoe", label: "Periodo FEOE" },
     { id: "eventos", label: "Eventos y festivos" },
     { id: "actividades", label: "Actividades extraescolares" },
   ],

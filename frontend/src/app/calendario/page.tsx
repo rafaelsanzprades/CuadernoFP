@@ -231,7 +231,7 @@ export default function CalendarioPage() {
 
   const TABS = [
     { id: "fechas", label: <span className="flex items-center gap-2"><Settings className="w-4 h-4 shrink-0" /> Fechas y horarios</span>, cleanLabel: "Fechas y horarios" },
-    { id: "feoe", label: <span className="flex items-center gap-2"><Briefcase className="w-4 h-4 shrink-0" /> FP Dual (FEOE)</span>, cleanLabel: "FP Dual (FEOE)" },
+    { id: "feoe", label: <span className="flex items-center gap-2"><Briefcase className="w-4 h-4 shrink-0" /> Periodo FEOE</span>, cleanLabel: "Periodo FEOE" },
     { id: "eventos", label: <span className="flex items-center gap-2"><Flag className="w-4 h-4 shrink-0" /> Eventos y festivos</span>, cleanLabel: "Eventos y festivos" },
     { id: "actividades", label: <span className="flex items-center gap-2"><Bus className="w-4 h-4 shrink-0" /> Actividades extraescolares</span>, cleanLabel: "Actividades extraescolares" },
   ];
@@ -649,7 +649,7 @@ export default function CalendarioPage() {
                 <div className="space-y-4 mt-4">
                   {/* FP Dual / FEOE - 5 columnas */}
                   <Card className="p-6 border-t-4 border-t-orange-500 overflow-visible">
-                    <h2 className="text-subheading font-bold mb-6">FP Dual (FEOE)</h2>
+                    <h2 className="text-subheading font-bold mb-6">Periodo FEOE</h2>
                     <div className="grid grid-cols-5 gap-4 items-end">
                       {/* Col 1: Selector de tipo */}
                       <div>

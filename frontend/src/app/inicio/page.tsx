@@ -288,7 +288,7 @@ export default function InicioPage() {
       id: "tareas",
       icon: <FileText className="w-5 h-5" />,
       title: "Tareas competenciales",
-      href: "/curriculo?tab=tareas",
+      href: "/curriculo?tab=competenciales",
       hrefLabel: "Currículo",
       status: tareasCount === 0 ? "empty" : tareasSinRA > 0 ? "warning" : "ok",
       lines: tareasCount === 0
@@ -297,7 +297,7 @@ export default function InicioPage() {
           `${tareasCount} tareas definidas`,
           tareasSinRA > 0 ? `${tareasSinRA} tareas sin RA asociado` : "Todas las tareas tienen RA",
         ],
-      actionHref: tareasCount === 0 ? "/curriculo?tab=tareas" : undefined,
+      actionHref: tareasCount === 0 ? "/curriculo?tab=competenciales" : undefined,
       actionLabel: tareasCount === 0 ? "Crear primera tarea" : undefined,
     },
     {

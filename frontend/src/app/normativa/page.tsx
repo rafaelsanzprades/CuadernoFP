@@ -383,7 +383,7 @@ export default function DocumentosPage() {
 
             <PageHeader
               icon={FileText}
-              title={t('pages.documentos_title', {defaultValue: 'Normativa'})}
+              title={t('pages.normativa_title', {defaultValue: 'Normativa'})}
               description={t('pages.documentos_desc', {defaultValue: 'Explorador de legislación, normativas y docs oficiales.'})}
             />
 
