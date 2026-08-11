@@ -16,6 +16,12 @@ import { TabDocumentos } from "@/components/features/ayuda/TabDocumentos";
 
 // ── Mapa de pestañas por página real (misma fuente que usaba /inicio) ──────
 const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
+  "/inicio": [
+    { id: "bienvenida", label: "Bienvenida" },
+    { id: "verificacion", label: "Verificación" },
+    { id: "contribuciones", label: "Contribuciones" },
+    { id: "mejora", label: "Mejora" },
+  ],
   "/contexto": [
     { id: "identificacion", label: "Identificación" },
     { id: "contextualizacion", label: "Contextualización" },
@@ -25,7 +31,6 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   "/curriculo": [
     { id: "ponderacion-ra-ce", label: "Ponderación RA y CE" },
     { id: "unidades", label: "Unidades didácticas" },
-    { id: "relacion-ra-ud", label: "Relación RA con UD" },
     { id: "contribucion-og", label: "Contribución RA en OG" },
     { id: "tareas", label: "Tareas competenciales" },
   ],
@@ -43,13 +48,14 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   ],
   "/calendario": [
     { id: "fechas", label: "Fechas y horarios" },
+    { id: "feoe", label: "FP Dual (FEOE)" },
     { id: "eventos", label: "Eventos y festivos" },
     { id: "actividades", label: "Actividades extraescolares" },
   ],
   "/agenda": [
     { id: "actual", label: "Actual" },
     { id: "planificacion", label: "Planificación" },
-    { id: "progreso-ra-ud", label: "Progreso y relación RA con UD" },
+    { id: "progreso-ra-ud", label: "Progreso RA y UD" },
     { id: "mensual", label: "Mensual" },
   ],
   "/alumnado": [
@@ -73,12 +79,12 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   "/normativa": [
     { id: "ccaa", label: "CCAA" },
     { id: "bibliografia", label: "Bibliografía" },
-    { id: "legislacion", label: "Legislación" }
+    { id: "legislacion", label: "Legislación" },
+    { id: "ecp-incual", label: "ECP INCUAL" },
   ],
   "/archivos": [
     { id: "datos", label: "Datos" },
     { id: "nube", label: "Nube" },
-    { id: "autores", label: "Autores" },
     { id: "seguridad", label: "Seguridad" },
     { id: "asistente-ia", label: "Asistente IA" },
   ],
@@ -87,24 +93,24 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "titulos", label: "Títulos" },
     { id: "modulos", label: "Módulos" },
     { id: "ra-ce", label: "RA → CE" },
-    { id: "ecp-incual", label: "ECP INCUAL" },
   ],
   "/magia": [
     { id: "comunidades", label: "Comunidades" },
     { id: "programacion", label: "Programación" },
     { id: "curso", label: "Curso" },
-    { id: "anexos", label: "Anexos" },
   ],
   "/correlacion": [
-    { id: "pd-", label: "PD- ← APP" },
-    { id: "pd=", label: "PD= ← APP" },
-    { id: "pd+", label: "PD+ ← APP" },
-    { id: "datos", label: "APP ← Datos" },
+    { id: "comparativa", label: "Comparativa" },
+    { id: "pd-", label: "PD- / APP" },
+    { id: "pd=", label: "PD= / APP" },
+    { id: "pd+", label: "PD+ / APP" },
+    { id: "datos", label: "APP / Datos" },
   ],
   "/ayuda": [
     { id: "faq", label: "FAQ" },
     { id: "acronimos", label: "Acrónimos" },
     { id: "mapa", label: "Mapa web" },
+    { id: "documentos", label: "Documentos" },
   ],
   "/legal": [
     { id: "aviso", label: "Aviso legal" },
@@ -280,14 +286,14 @@ export default function AyudaPage() {
                     fusionó como pestaña dentro de Inicio.
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-4">
                     {/* GENERAL: páginas fuera de navGroups */}
                     <div className="space-y-6">
                       <h3 className="font-extrabold text-subheading border-b-2 border-accent pb-2 text-foreground">General</h3>
                       <ul className="space-y-4 text-body">
                         {[
-                          { href: "/inicio", label: "Inicio", tabs: [{ id: "bienvenida", label: "Bienvenida" }, { id: "verificacion", label: "Verificación" }, { id: "contribuciones", label: "Contribuciones" }, { id: "mejora", label: "Mejora" }] },
-                          { href: "/agenda", label: "Agenda", tabs: [{ id: "actual", label: "Actual" }, { id: "planificacion", label: "Planificación" }] },
+                          { href: "/inicio", label: "Inicio", tabs: PAGE_TABS["/inicio"] },
+                          { href: "/agenda", label: "Agenda", tabs: PAGE_TABS["/agenda"] },
                           { href: "/correlacion", label: "Correlación", tabs: PAGE_TABS["/correlacion"] },
                           { href: "/ayuda", label: "Ayuda", tabs: PAGE_TABS["/ayuda"] },
                           { href: "/legal", label: "Legal", tabs: PAGE_TABS["/legal"] },

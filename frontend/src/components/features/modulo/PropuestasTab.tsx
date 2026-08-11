@@ -41,50 +41,50 @@ export function PropuestasTab() {
   };
 
   return (
-    <div className="space-y-6">
-      <Card className="p-6 bg-success/5 border-success/20">
-        <div className="flex items-start gap-4">
-          <CheckCircle2 className="w-6 h-6 text-success mt-1" />
+    <MotionWrapper>
+      <Card className="p-6 border-t-4 border-t-success">
+        <div className="flex items-start gap-4 mb-6">
+          <CheckCircle2 className="w-6 h-6 text-success mt-1 shrink-0" />
           <div>
-            <h3 className="text-subheading font-semibold">Propuestas de Mejora (PDCA)</h3>
+            <h3 className="text-subheading font-bold text-foreground">Propuestas de Mejora (PDCA)</h3>
             <p className="text-muted text-body mt-1">
               Puntos fuertes y áreas de mejora, reflexionados por separado en cada dimensión
               (Planificación / Desarrollo / Resultados) para planificar las acciones del próximo curso.
             </p>
           </div>
         </div>
-      </Card>
 
-      <MotionWrapper className="space-y-6">
-        {CATEGORIAS.map(cat => (
-          <Card key={cat.key} className="p-6">
-            <h3 className="text-subheading font-semibold mb-4 flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-success" />
-              {cat.label}
-            </h3>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-body font-medium mb-1">Puntos fuertes (lo que ha funcionado bien)</label>
-                <textarea
-                  value={eqavet[`puntos_fuertes_${cat.key}`] || ""}
-                  onChange={(e) => handleTextChange(`puntos_fuertes_${cat.key}`, e.target.value)}
-                  className="w-full h-24 rounded-lg bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 text-body focus:outline-none focus:border-success resize-none transition-colors"
-                  placeholder={cat.fuertesPh}
-                />
-              </div>
-              <div>
-                <label className="block text-body font-medium mb-1">Áreas de mejora y acciones para el próximo curso</label>
-                <textarea
-                  value={eqavet[`areas_mejora_${cat.key}`] || ""}
-                  onChange={(e) => handleTextChange(`areas_mejora_${cat.key}`, e.target.value)}
-                  className="w-full h-24 rounded-lg bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 text-body focus:outline-none focus:border-success resize-none transition-colors"
-                  placeholder={cat.mejoraPh}
-                />
+        <div className="space-y-6">
+          {CATEGORIAS.map((cat, idx) => (
+            <div key={cat.key} className={idx > 0 ? "pt-6 border-t border-[var(--glass-border)]" : ""}>
+              <h4 className="font-medium text-body text-success tracking-wider mb-3 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-success" />
+                {cat.label}
+              </h4>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-body font-medium mb-1">Puntos fuertes (lo que ha funcionado bien)</label>
+                  <textarea
+                    value={eqavet[`puntos_fuertes_${cat.key}`] || ""}
+                    onChange={(e) => handleTextChange(`puntos_fuertes_${cat.key}`, e.target.value)}
+                    className="w-full h-24 rounded-lg bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 text-body focus:outline-none focus:border-success resize-none transition-colors"
+                    placeholder={cat.fuertesPh}
+                  />
+                </div>
+                <div>
+                  <label className="block text-body font-medium mb-1">Áreas de mejora y acciones para el próximo curso</label>
+                  <textarea
+                    value={eqavet[`areas_mejora_${cat.key}`] || ""}
+                    onChange={(e) => handleTextChange(`areas_mejora_${cat.key}`, e.target.value)}
+                    className="w-full h-24 rounded-lg bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 text-body focus:outline-none focus:border-success resize-none transition-colors"
+                    placeholder={cat.mejoraPh}
+                  />
+                </div>
               </div>
             </div>
-          </Card>
-        ))}
-      </MotionWrapper>
-    </div>
+          ))}
+        </div>
+      </Card>
+    </MotionWrapper>
   );
 }

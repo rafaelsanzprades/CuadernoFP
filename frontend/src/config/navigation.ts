@@ -1,13 +1,17 @@
-import { Calendar, Compass, FileText, FolderOpen, GraduationCap, Grid, TrendingUp, Users, Wrench, Sparkles, Award, Lightbulb, Info, Scale, GitCompare } from "lucide-react";
+import { Calendar, Compass, FileText, FolderOpen, GraduationCap, Grid, TrendingUp, Users, Wrench, Sparkles, Award, Lightbulb, Info, Scale, GitCompare, Activity } from "lucide-react";
 
-// Correlación, Ayuda y Legal viven ahora como botones grandes en la Sidebar
-// (junto a Agenda) y como tarjetas en Inicio > Bienvenida, no en navGroups —
+// Inicio vive junto a Agenda (aspecto pequeño, arriba del todo en Sidebar);
+// Correlación y Ayuda igual, aspecto pequeño; Legal va solo, en el footer de
+// la Sidebar. Los cuatro se repiten como tarjetas en Inicio > Bienvenida —
 // ver Sidebar.tsx y app/inicio/page.tsx.
+export const inicioPage = { href: "/inicio?tab=bienvenida", label: "Inicio", icon: Activity, description: "Panel principal, guía de inicio, FAQ y validación de datos." };
+
 export const topLevelPages = [
   { href: "/correlacion?tab=pd-", label: "Correlación", icon: GitCompare, description: "Qué campo de la app corresponde a cada apartado de las PD- / PD= / PD+." },
   { href: "/ayuda?tab=faq", label: "Ayuda", icon: Info, description: "FAQ, acrónimos y mapa de la aplicación." },
-  { href: "/legal?tab=aviso", label: "Legal", icon: Scale, description: "Aviso legal, privacidad, cookies y accesibilidad." }
 ];
+
+export const legalPage = { href: "/legal?tab=aviso", label: "Legal", icon: Scale, description: "Aviso legal, privacidad, cookies y accesibilidad." };
 
 export const navGroups = [
   {

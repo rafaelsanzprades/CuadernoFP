@@ -55,14 +55,16 @@ export function EqavetTab() {
   ];
 
   return (
-    <div className="space-y-6">
-      <Card className="p-6 bg-accent/5 border-accent/20">
-        <div className="flex items-start gap-4">
-          <Award className="w-6 h-6 text-accent mt-1" />
+    <MotionWrapper>
+      <Card className="p-6 border-t-4 border-t-accent">
+        <div className="flex items-start gap-4 mb-4">
+          <Award className="w-6 h-6 text-accent mt-1 shrink-0" />
           <div>
-            <h3 className="text-subheading font-semibold">Calidad EQAVET</h3>
+            <h3 className="text-subheading font-bold text-foreground flex items-center gap-2">
+              <ClipboardCheck className="w-5 h-5 text-accent" /> Indicadores de Calidad
+            </h3>
             <p className="text-muted text-body mt-1">
-              Marco de Referencia Europeo de Garantía de la Calidad. Autoevaluación del módulo para la memoria final y el ciclo de mejora continua.
+              Marco de Referencia Europeo de Garantía de la Calidad (EQAVET). Autoevaluación del módulo para la memoria final y el ciclo de mejora continua.
             </p>
             <p className="text-muted text-caption mt-2">
               Los indicadores de autoevaluación docente (Planificación / Desarrollo / Resultados) siguen las dimensiones
@@ -70,53 +72,44 @@ export function EqavetTab() {
             </p>
           </div>
         </div>
-      </Card>
 
-      <MotionWrapper className="space-y-6">
-        <Card className="p-6">
-          <h3 className="text-subheading font-semibold mb-4 flex items-center gap-2">
-            <ClipboardCheck className="w-5 h-5 text-primary" />
-            Indicadores de Calidad
-          </h3>
-          
-          <div className="space-y-6">
-            {["Planificación", "Desarrollo", "Resultados"].map(category => (
-              <div key={category}>
-                <h4 className="font-medium text-body text-accent tracking-wider mb-3">{category}</h4>
-                <div className="space-y-3">
-                  {EQAVET_INDICATORS.filter(ind => ind.category === category).map((ind) => (
-                    <div key={ind.id} className="p-4 rounded-xl border bg-[var(--glass-bg)] flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                      <div className="flex-1">
-                        <p className="text-body font-medium">{ind.label}</p>
-                        {ind.id === "ind7" && pctProgreso !== null && (
-                          <p className="text-caption text-muted mt-1">
-                            Dato real (Magia › Programación › Planificación): <span className="font-semibold text-foreground">{pctProgreso}%</span> impartido sobre lo previsto.
-                          </p>
-                        )}
-                      </div>
-                      <div className="flex flex-wrap gap-2 shrink-0">
-                        {scoreOptions.map(opt => (
-                          <button
-                            key={opt.value}
-                            onClick={() => handleIndicatorChange(ind.id, opt.value)}
-                            className={`px-3 py-1 text-caption rounded-full border transition-colors ${
-                              eqavet[ind.id] === opt.value
-                                ? 'bg-accent/20 border-accent text-accent'
-                                : 'bg-transparent border-white/10 text-muted hover:border-white/30'
-                            }`}
-                          >
-                            {opt.label}
-                          </button>
-                        ))}
-                      </div>
+        <div className="space-y-6">
+          {["Planificación", "Desarrollo", "Resultados"].map(category => (
+            <div key={category}>
+              <h4 className="font-medium text-body text-accent tracking-wider mb-3">{category}</h4>
+              <div className="space-y-3">
+                {EQAVET_INDICATORS.filter(ind => ind.category === category).map((ind) => (
+                  <div key={ind.id} className="p-4 rounded-xl border bg-[var(--glass-bg)] flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div className="flex-1">
+                      <p className="text-body font-medium">{ind.label}</p>
+                      {ind.id === "ind7" && pctProgreso !== null && (
+                        <p className="text-caption text-muted mt-1">
+                          Dato real (Magia › Programación › Planificación): <span className="font-semibold text-foreground">{pctProgreso}%</span> impartido sobre lo previsto.
+                        </p>
+                      )}
                     </div>
-                  ))}
-                </div>
+                    <div className="flex flex-wrap gap-2 shrink-0">
+                      {scoreOptions.map(opt => (
+                        <button
+                          key={opt.value}
+                          onClick={() => handleIndicatorChange(ind.id, opt.value)}
+                          className={`px-3 py-1 text-caption rounded-full border transition-colors ${
+                            eqavet[ind.id] === opt.value
+                              ? 'bg-accent/20 border-accent text-accent'
+                              : 'bg-transparent border-white/10 text-muted hover:border-white/30'
+                          }`}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </Card>
-      </MotionWrapper>
-    </div>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </MotionWrapper>
   );
 }

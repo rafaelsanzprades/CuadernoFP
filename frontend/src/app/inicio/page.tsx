@@ -4,14 +4,15 @@ import { useAppStore } from "@/store/useAppStore";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
-import { navGroups, topLevelPages } from "@/config/navigation";
+import { navGroups, topLevelPages, legalPage } from "@/config/navigation";
 import { EqavetTab } from "@/components/features/modulo/EqavetTab";
 import { PropuestasTab } from "@/components/features/modulo/PropuestasTab";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import Link from "next/link";
 import { TabSync } from "@/components/ui/TabSync";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import type { Family } from "@/types";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
@@ -108,10 +109,37 @@ function CheckCard({ item }: { item: CheckItem }) {
 
 // ── Página Principal ──────────────────────────────────────────────────────
 export default function InicioPage() {
-  const { moduleData, cursoData, globalData, activeModuleId, activeCursoId } = useAppStore();
+  const { moduleData, cursoData, globalData, activeModuleId, activeCursoId, dataSource } = useAppStore();
+  const dataSourceLabel = dataSource === 'demo' ? 'datos DEMO' : 'datos reales';
   const [activeTab, setActiveTab] = useState<string>("bienvenida");
   const { t } = useTranslation();
   const [aiModalOpen, setAiModalOpen] = useState(false);
+
+  // ── Catálogo oficial (fijo) + resolución de familia/título del módulo activo ──
+  const [catalogFamilies, setCatalogFamilies] = useState<Family[]>([]);
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/families`)
+      .then(r => r.json())
+      .then(json => { if (json.status === "success") setCatalogFamilies(json.data); })
+      .catch(() => {});
+  }, []);
+
+  const catalogFamiliasCount = catalogFamilies.length;
+  const catalogDegrees = catalogFamilies.flatMap(f => f.degrees);
+  const catalogTitulosCount = catalogDegrees.length;
+  const catalogPorNivel = catalogDegrees.reduce((acc: Record<string, number>, d) => {
+    acc[d.level] = (acc[d.level] || 0) + 1;
+    return acc;
+  }, {});
+
+  const cleanStr = (s: string) => s ? s.toLowerCase().replace(/^[a-z0-9]+\s*-\s*/i, "").normalize("NFD").replace(/[̀-ͯ]/g, "").trim() : "";
+  const infoModuloGrupo: Record<string, any> = moduleData?.info_modulo || {};
+  const grupoFamilia = catalogFamilies.find(f => cleanStr(f.name) === cleanStr(infoModuloGrupo.familia));
+  const grupoTitulo = grupoFamilia?.degrees.find(d => {
+    const dn = cleanStr(d.name);
+    const cn = cleanStr(infoModuloGrupo.titulo_fp);
+    return dn === cn || (cn && (dn.includes(cn) || cn.includes(dn)));
+  });
 
   // ── Comprobaciones Programación didáctica ────────────────────────────
   const m = moduleData;
@@ -524,32 +552,6 @@ export default function InicioPage() {
 
           <div className="w-full space-y-12 pb-12">
 
-            {/* Accesos rápidos: Agenda + páginas generales (sin título de bloque) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                { href: "/agenda", label: "Agenda", icon: CalendarDays, description: "Vista del día, planificación y progreso." },
-                ...topLevelPages,
-              ].map((item) => (
-                <Link key={item.href} href={item.href} className="block group">
-                  <Card className="h-full p-5 flex flex-col gap-3 border border-[var(--glass-border)] bg-[var(--glass-bg)] hover:bg-accent/5 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/10 cursor-pointer">
-                    <div className="flex items-center gap-3">
-                      <div className="text-heading group-hover:scale-110 transition-transform duration-300">
-                        <item.icon className="w-8 h-8" strokeWidth={1.5} />
-                      </div>
-                      <h3 className="font-bold text-body text-foreground group-hover:text-accent transition-colors leading-tight">
-                        {item.label}
-                      </h3>
-                    </div>
-                    {item.description && (
-                      <p className="text-body text-muted mt-auto">
-                        {item.description}
-                      </p>
-                    )}
-                  </Card>
-                </Link>
-              ))}
-            </div>
-
             {/* Posicionamiento: metodología experta detrás de la app */}
             <Card className="p-6 border border-accent/20 bg-accent/5">
               <div className="flex items-start gap-3 mb-4">
@@ -576,6 +578,33 @@ export default function InicioPage() {
                 ))}
               </div>
             </Card>
+
+            {/* Accesos rápidos: Agenda + páginas generales (sin título de bloque) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                { href: "/agenda", label: "Agenda", icon: CalendarDays, description: "Vista del día, planificación y progreso." },
+                ...topLevelPages,
+                legalPage,
+              ].map((item) => (
+                <Link key={item.href} href={item.href} className="block group">
+                  <Card className="h-full p-5 flex flex-col gap-3 border border-[var(--glass-border)] bg-[var(--glass-bg)] hover:bg-accent/5 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/10 cursor-pointer">
+                    <div className="flex items-center gap-3">
+                      <div className="text-heading group-hover:scale-110 transition-transform duration-300">
+                        <item.icon className="w-8 h-8" strokeWidth={1.5} />
+                      </div>
+                      <h3 className="font-bold text-body text-foreground group-hover:text-accent transition-colors leading-tight">
+                        {item.label}
+                      </h3>
+                    </div>
+                    {item.description && (
+                      <p className="text-body text-muted mt-auto">
+                        {item.description}
+                      </p>
+                    )}
+                  </Card>
+                </Link>
+              ))}
+            </div>
 
             {/* Menus Grid */}
             <div className="space-y-12">
@@ -626,6 +655,57 @@ export default function InicioPage() {
             {/* ── CONTENIDO: VERIFICACIÓN ──────────────────────────────── */}
             {activeTab === "verificacion" && (
               <div className="space-y-4 animate-in fade-in duration-500 w-full">
+
+                <div className="space-y-4">
+                  <h2 className="text-body font-bold text-foreground flex items-center gap-2 border-b border-white/5 pb-2">
+                    <Building2 className="w-4 h-4 text-accent" />
+                    Grupo
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <Card className="p-4 border border-white/5 bg-foreground/5">
+                      <p className="text-caption font-semibold text-muted mb-3">Catálogo oficial (fijo)</p>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="text-center">
+                          <div className="text-heading font-extrabold text-foreground">{catalogFamiliasCount || "-"}</div>
+                          <div className="text-caption text-muted mt-0.5">Familias profesionales</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-heading font-extrabold text-foreground">{catalogTitulosCount || "-"}</div>
+                          <div className="text-caption text-muted mt-0.5">Títulos totales</div>
+                        </div>
+                        {["Grado Básico", "Grado Medio", "Grado Superior"].map(nivel => (
+                          <div key={nivel} className="text-center">
+                            <div className="text-subheading font-bold text-foreground">{catalogPorNivel[nivel] ?? 0}</div>
+                            <div className="text-caption text-muted mt-0.5">{nivel} (GB/GM/GS)</div>
+                          </div>
+                        ))}
+                      </div>
+                    </Card>
+                    <Card className="p-4 border border-white/5 bg-foreground/5">
+                      <p className="text-caption font-semibold text-muted mb-3">
+                        Fichero cargado ({dataSourceLabel})
+                      </p>
+                      {infoModuloGrupo.familia || infoModuloGrupo.titulo_fp ? (
+                        <div className="space-y-2">
+                          <div>
+                            <span className="text-caption text-muted">Familia profesional</span>
+                            <p className="text-body font-semibold text-foreground">{infoModuloGrupo.familia || "-"}</p>
+                          </div>
+                          <div>
+                            <span className="text-caption text-muted">Título</span>
+                            <p className="text-body font-semibold text-foreground">{infoModuloGrupo.titulo_fp || "-"}</p>
+                          </div>
+                          <div>
+                            <span className="text-caption text-muted">Grado</span>
+                            <p className="text-body font-semibold text-foreground">{grupoTitulo?.level || "-"}</p>
+                          </div>
+                        </div>
+                      ) : (
+                        <p className="text-body text-muted">Sin familia/título asignados todavía. Ve a Contexto &gt; Identificación.</p>
+                      )}
+                    </Card>
+                  </div>
+                </div>
 
                 <div className="grid grid-cols-3 gap-4">
                   <Card className="p-4 border border-success/30 bg-success/10 rounded-2xl text-center">
