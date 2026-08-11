@@ -82,7 +82,7 @@ export default function CorrelacionPage() {
 
             <PageHeader
               icon={GitCompare}
-              title="Correlación"
+              title="Equivalencias"
               description="Qué campo de la app corresponde a qué apartado de cada modelo de Programación Didáctica (PD-, PD=, PD+), y qué datos pedir al empezar."
             />
 

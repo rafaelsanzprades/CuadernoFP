@@ -49,7 +49,7 @@ export default function MetodologiaConfigPage() {
 
   const TABS = [
     { id: "metodologia", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> Metodología e inclusión</span>, cleanLabel: "Metodología e inclusión" },
-    { id: "evaluacion", label: <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 shrink-0" /> Instrumentos y recursos</span>, cleanLabel: "Instrumentos y recursos" },
+    { id: "recursos", label: <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 shrink-0" /> Recursos</span>, cleanLabel: "Recursos" },
     { id: "contingencia", label: <span className="flex items-center gap-2"><Shield className="w-4 h-4 shrink-0" /> Plan de contingencia</span>, cleanLabel: "Plan de contingencia" },
     { id: "transversales", label: <span className="flex items-center gap-2"><Layers className="w-4 h-4 shrink-0" /> Transversales, competencias y actividades</span>, cleanLabel: "Transversales, competencias y actividades" },
   ];
@@ -58,7 +58,7 @@ export default function MetodologiaConfigPage() {
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     metodologia: 'Estrategias metodológicas, coordinación docente, atención a la diversidad (DUA) y panel de alumnado ACNEAE.',
-    evaluacion: 'Instrumentos de evaluación seleccionados y recursos y espacios necesarios.',
+    recursos: 'Instrumentos de evaluación seleccionados y recursos y espacios necesarios.',
     contingencia: 'Planes de contingencia y adaptación ante situaciones excepcionales.',
     transversales: 'Elementos transversales, competencias clave, competencias digitales, innovación e intermodularidad, y actividades complementarias/extraescolares.',
   };
@@ -116,7 +116,7 @@ export default function MetodologiaConfigPage() {
           <MotionWrapper>
             <PageHeader
               icon={Lightbulb}
-              title="Metodología y recursos"
+              title="Metodología"
               description="Estrategias metodológicas, recursos, espacios y atención a la diversidad."
             />
 
@@ -136,7 +136,7 @@ export default function MetodologiaConfigPage() {
 
             <div className="space-y-6">
               {activeTab === 'metodologia' && <><MetodologiaTab /><DiversidadTab /></>}
-              {activeTab === 'evaluacion' && <EvaluacionRecursosTab />}
+              {activeTab === 'recursos' && <EvaluacionRecursosTab />}
               {activeTab === 'contingencia' && <ContingenciaTab />}
               {activeTab === 'transversales' && <><OtrosElementosTab /><InnovacionTab /></>}
             </div>

@@ -40,7 +40,7 @@ function computeMilestoneDates(nacimiento?: string): { f16: string; f18: string 
 
 export default function AlumnadoPage() {
   const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData } = useAppStore();
-  const [activeTab, setActiveTab] = useState("listado");
+  const [activeTab, setActiveTab] = useState("matricula");
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -48,16 +48,16 @@ export default function AlumnadoPage() {
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const TABS = [
-    { id: "listado", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.listado')}</>, cleanLabel: t('tabs.listado') },
+    { id: "matricula", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Matrícula</>, cleanLabel: 'Matrícula' },
     { id: "plano", label: <><span className="inline-flex"><LayoutGrid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.plano')}</>, cleanLabel: t('tabs.plano') },
     { id: "tutoria", label: <><span className="inline-flex"><ClipboardCheck className="w-[1.2em] h-[1.2em] mr-1" /></span> Tutoría y alertas</>, cleanLabel: 'Tutoría y alertas' },
-    { id: "contexto", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Contexto</>, cleanLabel: 'Contexto del grupo' }
+    { id: "perfil", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Perfil del grupo</>, cleanLabel: 'Perfil del grupo' }
   ];
 
   const activeTabCleanLabel = TABS.find(t_tab => t_tab.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    listado: 'Gestión del listado de alumnado y ficha individual.',
+    matricula: 'Gestión del listado de alumnado y ficha individual.',
     plano: 'Distribución y plano visual del aula.',
     tutoria: 'Alertas de riesgo de abandono y seguimiento tutorial del alumnado.',
   };
@@ -295,7 +295,7 @@ export default function AlumnadoPage() {
           <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
 
           {/* Tab 1: Alumnado */}
-          {activeTab === "listado" && (
+          {activeTab === "matricula" && (
             <>
             <Card className="p-6 border-t-4 border-t-blue-500">
               <div className="flex justify-between items-end mb-6">
@@ -471,7 +471,7 @@ export default function AlumnadoPage() {
               <TutoriaTab />
             </div>
           )}
-          {activeTab === "contexto" && <ContextoGrupoTab />}
+          {activeTab === "perfil" && <ContextoGrupoTab />}
           
           </MotionWrapper>
         </main>

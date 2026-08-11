@@ -31,18 +31,18 @@ type DocumentItem = {
 export default function DocumentosPage() {
   const { t } = useTranslation();
   const TABS = [
-    { id: "ccaa", label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4 shrink-0" /> CCAA</span>, cleanLabel: 'CCAA' },
+    { id: "autonomias", label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4 shrink-0" /> Autonomías</span>, cleanLabel: 'Autonomías' },
     { id: "bibliografia", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> Bibliografía</span>, cleanLabel: 'Bibliografía' },
     { id: "legislacion", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.legislacion', {defaultValue: 'Legislación'})}</span>, cleanLabel: t('tabs.legislacion', {defaultValue: 'Legislación'}) },
     { id: "ecp-incual", label: <span className="flex items-center gap-2"><Award className="w-4 h-4 shrink-0 text-purple-500" /> ECP INCUAL</span>, cleanLabel: 'ECP INCUAL' }
   ];
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    ccaa: 'Legislación autonómica y normativa específica.',
+    autonomias: 'Legislación autonómica y normativa específica.',
     bibliografia: 'Referencias normativas y bibliografía del catálogo.',
     legislacion: 'Leyes orgánicas, reales decretos y órdenes ministeriales vigentes.',
     'ecp-incual': 'Estándares de Competencia Profesional (ECP) del Catálogo Nacional (INCUAL).',
   };
-  const [activeTab, setActiveTab] = useState("ccaa");
+  const [activeTab, setActiveTab] = useState("autonomias");
   const [currentPath, setCurrentPath] = useState<string>("");
   const [items, setItems] = useState<DocumentItem[]>([]);
   const [loadingDocs, setLoadingDocs] = useState<boolean>(true);
@@ -87,7 +87,7 @@ export default function DocumentosPage() {
   const fetchDocuments = (path: string) => {
     setLoadingDocs(true);
     setError(null);
-    const backendPath = path === 'legislacion' ? 'Normativa' : path === 'bibliografia' ? 'Bibliografia' : path === 'ccaa' ? 'CCAA' : path;
+    const backendPath = path === 'legislacion' ? 'Normativa' : path === 'bibliografia' ? 'Bibliografia' : path === 'autonomias' ? 'CCAA' : path;
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/list?path=${encodeURIComponent(backendPath)}`)
       .then((res) => {
         if (!res.ok) throw new Error("Error al acceder a los documentos");
@@ -269,7 +269,7 @@ export default function DocumentosPage() {
       );
     }
     
-    if (activeTab === 'ccaa') {
+    if (activeTab === 'autonomias') {
       return null;
     }
     
@@ -413,7 +413,7 @@ export default function DocumentosPage() {
             <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión documental y normativa.'} />
 
             <div className="space-y-3 animate-in fade-in duration-500">
-              {activeTab === 'ccaa' && <div className="mb-6"><TabComunidades searchQuery={searchQuery} /></div>}
+              {activeTab === 'autonomias' && <div className="mb-6"><TabComunidades searchQuery={searchQuery} /></div>}
 
               {renderContent()}
             </div>

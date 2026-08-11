@@ -31,7 +31,7 @@ Cuando generes identificadores o guardes datos, usa estos estándares (salvo que
 - **Glosario clave que debes comprender:**
   - **Programación didáctica:** Es el "molde" teórico (.fpp). Contiene la normativa (resultados de aprendizaje y criterios de evaluación) y las unidades didácticas. Se diseña una vez y se puede reutilizar en cursos posteriores.
   - **Curso:** Es la "instancia" real (.fpc). Representa al alumnado físico, sus calificaciones, faltas de asistencia y calendario en un año académico específico (ej. 2025-26).
-  - **Bloques:** 4 bloques principales — `Grupo` (herramientas transversales), `Programación` (el diseño teórico del módulo), `Curso` (el aula real) y `Anexos` (calidad, ayuda y aspectos legales) — con 3 a 5 páginas cada uno.
+  - **Bloques:** 3 bloques principales — `Grupo` (herramientas transversales), `Programación` (el diseño teórico del módulo) y `Curso` (el aula real) — con 3 a 5 páginas cada uno, más un grupo de páginas de acceso directo fuera de los bloques (`Inicio`, `Agenda`, `Equivalencias`, `Ayuda`, `Legal`).
 
 Una vez tengas el contexto necesario, comienza a guiar al usuario o ejecuta las acciones detalladas desde el **Paso 1** en adelante.
 
@@ -46,7 +46,7 @@ Vamos a pedirle al sistema que nos cree el archivo base de la programación carg
 
 - **Bloque:** Grupo
   - **Página:** Normativa
-    - **Pestaña:** CCAA
+    - **Pestaña:** Autonomías
       - **Acción:** Selecciona tu Comunidad Autónoma en el mapa interactivo para cargar la normativa autonómica específica.
   - **Página:** Catálogo
     - **Pestaña:** Familias
@@ -63,10 +63,12 @@ Vamos a pedirle al sistema que nos cree el archivo base de la programación carg
       - **Texto:** Centro educativo y Profesorado.
     - **Pestaña:** Contextualización
       - **Bloque:** Entorno geográfico, socioeconómico y contexto escolar.
-    - **Pestaña:** FEOE y diversidad
-      - **Bloque:** Plan de atención a la diversidad y formación en empresa (FEOE).
+    - **Pestaña:** Dual FEOE
+      - **Bloque:** Modalidad, seguimiento y régimen dual de la Formación en Empresa u Organismo Equiparado (FEOE).
     - **Pestaña:** Evaluación y calificación
       - **Bloque:** Información al alumnado, pérdida de evaluación continua y recuperación.
+
+> La atención a la diversidad ya no vive en Contexto: está en `Programación` › `Metodología` → Pestaña `Metodología e inclusión` (ver 1.4).
 
 ### 1.3. Definir el currículo y las unidades didácticas
 - **Bloque:** Programación
@@ -76,24 +78,20 @@ Vamos a pedirle al sistema que nos cree el archivo base de la programación carg
     - **Pestaña:** Unidades didácticas
       - **Botón:** "Añadir nueva UD". Crea los temas.
       - **Tabla:** Haz clic en la intersección de la UD con el RA al que contribuye.
-      - **Bloque:** Secuenciación de UD (arrastra para reordenar sesiones).
-    - **Pestaña:** Relación RA con UD
-      - **Tarjetas:** Verifica de un vistazo qué UD cubre cada RA.
+      - **Bloque:** Secuenciación de UD (arrastra para reordenar sesiones) y tabla resumen de relaciones RA-UD para verificar de un vistazo qué UD cubre cada RA — todo dentro de esta misma pestaña.
     - **Pestaña:** Contribución RA en OG
       - **Matriz:** Contribución de cada RA a los Objetivos Generales del título.
 
 ### 1.4. Metodología
 - **Bloque:** Programación
   - **Página:** Metodología
-    - **Pestaña:** Metodología
-      - **Selector:** Metodologías Activas (ABP, Retos, etc.).
-    - **Pestaña:** Medidas de inclusión
-      - **Selector:** Medidas de atención a la diversidad.
-    - **Pestaña:** Instrumentos y recursos
-      - **Selector:** Recursos y espacios necesarios (aula, taller, software...).
+    - **Pestaña:** Metodología e inclusión
+      - **Selector:** Metodologías Activas (ABP, Retos, etc.) y medidas de atención a la diversidad, en la misma pestaña.
+    - **Pestaña:** Recursos
+      - **Selector:** Recursos y espacios necesarios (aula, taller, software...) y catálogo de instrumentos de evaluación.
     - **Pestaña:** Plan de contingencia
       - **Texto:** Docencia telemática, tareas autoguiadas.
-    - **Pestaña:** Transversales
+    - **Pestaña:** Transversales, competencias y actividades
       - **Texto:** Proyectos de innovación e interdisciplinariedad.
 
 ### 1.5. Instrumentos de Evaluación
@@ -128,7 +126,7 @@ Una vez configurada la programación base, genera los PDFs oficiales.
       - **Bloque "Documentos de apoyo al currículo":** Matriz RA ↔ UD, en PDF ("Vista previa") o DOCX ("Descarga editable").
       - **Bloque "Unidades didácticas y tareas competenciales":** selector para descargar el `.docx` de una UD o una tarea concreta.
 
-> ¿Quieres saber exactamente qué campo de la app rellena cada apartado del documento? Consulta `Anexos` › `Correlación`.
+> ¿Quieres saber exactamente qué campo de la app rellena cada apartado del documento? Consulta `Equivalencias` (acceso directo junto a Agenda).
 
 ---
 
@@ -148,24 +146,22 @@ Ahora instanciamos la Programación en un año académico y clase real.
 ### 3.2. Configurar el calendario académico
 - **Bloque:** Curso
   - **Página:** Calendario
-    - **Pestaña:** Fechas y horarios
+    - **Pestaña:** Fechas y horario
       - **Fecha:** Inicio y fin de curso, y trimestres.
       - **Horario:** Horas lectivas diarias.
     - **Pestaña:** Eventos y festivos
-      - **Fecha:** Festivos o celebraciones.
+      - **Fecha:** Festivos o celebraciones, con calendario interactivo para marcarlos con un clic.
     - **Pestaña:** Actividades extraescolares
       - **Acción:** Registra actividades complementarias y extraescolares.
-    - **Pestaña:** Calendario visual
-      - **Acción:** Marca en el calendario rápido los festivos.
 
 ### 3.3. Gestionar el alumnado
 - **Bloque:** Curso
   - **Página:** Alumnado
-    - **Pestaña:** Listado
+    - **Pestaña:** Matrícula
       - **Botón:** Importar CSV o Añadir Alumnado a mano.
     - **Pestaña:** Plano de clase
       - **Acción:** Arrastrar al alumnado a sus mesas.
-    - **Pestaña:** Contexto del grupo
+    - **Pestaña:** Perfil del grupo
       - **Texto:** Describe el ambiente de la clase.
 
 ---
@@ -182,24 +178,27 @@ Ahora instanciamos la Programación en un año académico y clase real.
   - **Página:** Seguimiento
     - **Pestaña:** Clases
       - **Texto:** Redacta qué se ha hecho en la clase.
-    - **Pestaña:** Tutoría
-      - **Acción:** Registra tutorías con el alumnado.
     - **Pestaña:** Asistencia
       - **Botón:** Marca Falta, Retraso o Justificado.
-    - **Pestaña:** Alerta de abandono
-      - **Acción:** Activa protocolos de prevención de abandono.
 
-### 4.3. Evaluación
+### 4.3. Tutoría y prevención de abandono
 - **Bloque:** Curso
-  - **Página:** Calificaciones
-    - **Pestaña:** Resumen
+  - **Página:** Alumnado
+    - **Pestaña:** Tutoría y alertas
+      - **Acción:** Registra tutorías con el alumnado y activa protocolos de prevención de abandono.
+
+### 4.4. Evaluación
+- **Bloque:** Curso
+  - **Página:** Seguimiento
+    - **Pestaña:** Progreso de RA y UD
       - **Tablas:** Rendimiento medio por trimestre y por RA.
+    - **Pestaña:** Detalle por alumnado
+      - **Tabla:** Teclea las notas y calcula al vuelo — es el único punto de entrada de calificaciones numéricas de la app.
+  - **Página:** Calificaciones *(solo lectura, resume lo anterior)*
+    - **Pestaña:** Resumen
+      - **Tablas:** Panel global de rendimiento y calificaciones medias.
     - **Pestaña:** Estadísticas
       - **Gráficos:** Estadísticas globales del aula.
-    - **Pestaña:** Matriz (Excel)
-      - **Tabla:** Teclea las notas y calcula al vuelo.
-    - **Pestaña:** Por alumnado
-      - **Acción:** Expande cada alumno o alumna para ver la consecución de sus RA.
     - **Pestañas:** Grupal e Individual
       - **Acción:** Generación de informes (boletines y actas).
 
@@ -216,8 +215,8 @@ Exporta informes, actas, y seguimiento.
       - **Bloque "Clases mensual - por UD":** Seguimiento diario, Clases por UD, Planificación (previsto/impartido) y Parte de incidencias (justificante de una falta concreta, con selector de alumno/a, fecha y motivo).
       - **Bloque "Boletines y actas de evaluación":** por cada trimestre y la Final: PDF/DOCX del boletín grupal, Acta de evaluación firmable (PDF/DOCX) y exportación Excel/CSV.
       - **Bloque "Alumnado individual":** Boletín individual y Ficha individual (matrícula + tutoría) por alumno/a.
-    - **Pestaña:** Anexos
-      - **Texto:** Comparativa de modelos PD e Informe EQAVET (indicadores de calidad + propuestas de mejora) descargable en PDF/DOCX.
+
+> El Informe EQAVET (indicadores de calidad + propuestas de mejora) ya no se descarga desde aquí: vive en `Inicio` → Pestaña `Mejora`.
 
 ---
 
@@ -229,7 +228,7 @@ CuadernoFP genera el mismo contenido base en 3 niveles de detalle:
 - **PD Suficiente (PD=):** Sigue la estructura normativa oficial (BOA Aragón, apartados A-Q), con unos 15 folios, ideal para jefatura.
 - **PD Detallada (PD+):** Programación completa (TFM/Oposiciones) de más de 60 páginas con metodologías expandidas.
 
-Consulta `Anexos` › `Correlación` para ver el mapa completo campo a campo entre la app y cada uno de los tres niveles.
+Consulta `Equivalencias` (acceso directo junto a Agenda) para ver el mapa completo campo a campo entre la app y cada uno de los tres niveles.
 
 ### ¿Qué son los campos "codificados"?
 En lugar de escribir texto genérico, seleccionas opciones de una lista. El sistema redactará automáticamente párrafos enteros, coherentes y normativos en tu PD final.
@@ -238,7 +237,7 @@ En lugar de escribir texto genérico, seleccionas opciones de una lista. El sist
 Lo tecleas en **Programación › Contexto › Identificación**. El sistema lo usará en todo el documento.
 
 ### ¿Cómo indico si mi módulo es Dual?
-En **Curso › Calendario › Fechas y horarios** (bloque FP Dual/FEOE). Podrás ajustar el tipo de dual, la docencia y las fechas.
+En **Curso › Calendario › Periodo FEOE**. Podrás ajustar el tipo de dual, la docencia y las fechas.
 
 ---
 

@@ -20,7 +20,7 @@ A continuación, se detalla el índice oficial de la Programación Didáctica se
 - **1.3.3 Contexto escolar**
   - **Dónde:** `Programación` › `Contexto` → Pestaña `Contextualización`
 - **1.3.4 Características del alumnado**
-  - **Dónde:** `Curso` › `Alumnado` → Pestañas `Listado` y `Contexto del grupo`
+  - **Dónde:** `Curso` › `Alumnado` → Pestañas `Matrícula` y `Perfil del grupo`
 - **1.3.5 Infraestructura y recursos educativos**
   - **Dónde:** `Programación` › `Contexto` → Pestaña `Contextualización`
 
@@ -29,7 +29,7 @@ A continuación, se detalla el índice oficial de la Programación Didáctica se
 ## 2. Desarrollo curricular
 
 ### 2.1 Duración, ubicación y distribución horaria
-- **Dónde:** `Curso` › `Calendario` → Pestaña `Fechas y horarios`
+- **Dónde:** `Curso` › `Calendario` → Pestaña `Fechas y horario`
 
 ### 2.2 Estándares de competencias profesionales (ECP)
 - **Dónde:** `Grupo` › `Catálogo` → Pestaña `ECP INCUAL`
@@ -47,35 +47,35 @@ A continuación, se detalla el índice oficial de la Programación Didáctica se
 - **Dónde:** `Programación` › `Currículo` → Pestaña `Ponderación RA y CE` (integrado con cada RA)
 
 ### 2.7 Relación entre los elementos curriculares
-- **Dónde:** `Programación` › `Currículo` → Pestaña `Relación RA con UD`
+- **Dónde:** `Programación` › `Currículo` → Pestaña `Unidades didácticas` (matriz e informe de relación RA-UD, integrados en la misma pestaña)
 
 ### 2.8 Organización temporal: unidades didácticas
 - **Dónde:** `Programación` › `Currículo` → Pestaña `Unidades didácticas` (y pestaña `Tareas competenciales` para la secuenciación de tareas)
 
 ### 2.9 Formación en empresa (FEOE)
-- **Dónde:** `Programación` › `Contexto` → Pestaña `FEOE y diversidad`
+- **Dónde:** `Programación` › `Contexto` → Pestaña `Dual FEOE`
 
 ---
 
 ## 3. Metodología didáctica
 
 ### 3.1 Principios metodológicos
-- **Dónde:** `Programación` › `Metodología` → Pestaña `Metodología`
+- **Dónde:** `Programación` › `Metodología` → Pestaña `Metodología e inclusión`
 
 ### 3.2 Estrategias metodológicas
-- **Dónde:** `Programación` › `Metodología` → Pestaña `Metodología`
+- **Dónde:** `Programación` › `Metodología` → Pestaña `Metodología e inclusión`
 
 ### 3.3 Materiales y recursos didácticos
-- **Dónde:** `Programación` › `Metodología` → Pestaña `Instrumentos y recursos`
+- **Dónde:** `Programación` › `Metodología` → Pestaña `Recursos`
 
 ### 3.4 Agrupamientos
-- **Dónde:** `Programación` › `Metodología` → Pestaña `Metodología`
+- **Dónde:** `Programación` › `Metodología` → Pestaña `Metodología e inclusión`
 
 ### 3.5 Plan de aplicación de los desdobles / régimen dual
-- **Dónde:** `Curso` › `Calendario` → Pestaña `Fechas y horarios` (bloque FP Dual/FEOE)
+- **Dónde:** `Curso` › `Calendario` → Pestaña `Periodo FEOE`
 
 ### 3.6 Aprendizaje colaborativo (proyectos/retos)
-- **Dónde:** `Programación` › `Metodología` → Pestaña `Transversales`
+- **Dónde:** `Programación` › `Metodología` → Pestaña `Transversales, competencias y actividades`
 
 ---
 
@@ -85,7 +85,7 @@ A continuación, se detalla el índice oficial de la Programación Didáctica se
 - **Dónde:** `Programación` › `Instrumentos` → Pestañas `Resumen`, `1º Trimestre`, `2º Trimestre`, `3º Trimestre`
 
 ### 4.2 Evaluaciones (inicial, parciales, finales)
-- **Dónde:** `Curso` › `Calificaciones` → Pestañas `Resumen`, `Matriz (Excel)`, `Por alumnado`, `Grupal` e `Individual`
+- **Dónde:** `Curso` › `Seguimiento` → Pestañas `Detalle por alumnado` (entrada de notas) y `Progreso de RA y UD`, complementado con `Curso` › `Calificaciones` → Pestañas `Resumen`, `Grupal` e `Individual` (solo lectura)
 
 ### 4.3 Información al alumnado y familias
 - **Dónde:** `Programación` › `Contexto` → Pestaña `Evaluación y calificación`
@@ -97,10 +97,10 @@ A continuación, se detalla el índice oficial de la Programación Didáctica se
 - **Dónde:** `Programación` › `Contexto` → Pestaña `Evaluación y calificación`
 
 ### 4.6 Evaluación de la fase FEOE
-- **Dónde:** `Programación` › `Contexto` → Pestaña `FEOE y diversidad`
+- **Dónde:** `Programación` › `Contexto` → Pestaña `Dual FEOE`
 
 ### 4.7 Criterios de calificación y ponderación
-- **Dónde:** `Programación` › `Currículo` → Pestaña `Ponderación RA y CE` / `Curso` › `Calificaciones` → Pestaña `Matriz (Excel)`
+- **Dónde:** `Programación` › `Currículo` → Pestaña `Ponderación RA y CE` / `Curso` › `Seguimiento` → Pestaña `Detalle por alumnado`
 
 ### 4.8 Plan de recuperación de módulos pendientes
 - **Dónde:** `Programación` › `Contexto` → Pestaña `Evaluación y calificación`
@@ -108,7 +108,7 @@ A continuación, se detalla el índice oficial de la Programación Didáctica se
 ---
 
 ## 5. Medidas de inclusión
-- **Dónde:** `Programación` › `Metodología` → Pestaña `Medidas de inclusión`
+- **Dónde:** `Programación` › `Metodología` → Pestaña `Metodología e inclusión`
 
 ---
 

@@ -58,7 +58,7 @@ export default function AgendaPage() {
   const TABS = [
     { id: "actual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> Actual</>, cleanLabel: "Actual" },
     { id: "planificacion", label: <><span className="inline-flex"><CalendarRange className="w-[1.2em] h-[1.2em] mr-1" /></span> Planificación</>, cleanLabel: "Planificación" },
-    { id: "progreso-ra-ud", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Progreso RA y UD</>, cleanLabel: "Progreso RA y UD" },
+    { id: "progreso-ra-ud", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Previsión RA y UD</>, cleanLabel: "Previsión RA y UD" },
     { id: "mensual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> Mensual</>, cleanLabel: "Mensual" },
 
   ];

@@ -10,7 +10,7 @@ Módulo, código, centro, curso académico, profesorado.
 
 ## 0. Contextualización
 Entorno geográfico, socioeconómico, contexto escolar y características del alumnado (un párrafo por aspecto).
-- **Dónde:** `Programación` › `Contexto` → Pestaña `Contextualización` (entorno geográfico/socioeconómico/escolar) y `Curso` › `Alumnado` → Pestañas `Listado` y `Contexto del grupo` (características del alumnado)
+- **Dónde:** `Programación` › `Contexto` → Pestaña `Contextualización` (entorno geográfico/socioeconómico/escolar) y `Curso` › `Alumnado` → Pestañas `Matrícula` y `Perfil del grupo` (características del alumnado)
 
 ---
 
@@ -24,7 +24,7 @@ Contenidos del módulo, agrupados por UD de destino.
 
 ## C. Principios metodológicos
 Enfoque general, metodologías activas, recursos TIC, aprendizaje colaborativo, atención individualizada.
-- **Dónde:** `Programación` › `Metodología` → Pestaña `Metodología`
+- **Dónde:** `Programación` › `Metodología` → Pestaña `Metodología e inclusión`
 
 ## D. Criterios de evaluación
 Tabla completa de CE vinculados a cada RA.
@@ -32,7 +32,7 @@ Tabla completa de CE vinculados a cada RA.
 
 ## E. Criterios de calificación
 Nota mínima por RA, ponderación de cada RA, tipos de actividades y su peso, fórmula de la nota final.
-- **Dónde:** `Programación` › `Currículo` → Pestaña `Ponderación RA y CE` (% de cada RA/CE) y `Curso` › `Calificaciones` → Pestaña `Matriz (Excel)` (fórmula y redondeo)
+- **Dónde:** `Programación` › `Currículo` → Pestaña `Ponderación RA y CE` (% de cada RA/CE) y `Curso` › `Seguimiento` → Pestaña `Detalle por alumnado` (fórmula y redondeo de la nota final)
 
 ## F. Actividades de recuperación y refuerzo
 Actividades de refuerzo para RA no alcanzados y de ampliación para RA superados.
@@ -52,7 +52,7 @@ Listado completo de RA con descripción detallada.
 
 ## J. Atención a las diferencias individuales
 Agrupamientos flexibles, tareas multinivel, medidas ACNEAE, altas capacidades.
-- **Dónde:** `Programación` › `Metodología` → Pestaña `Medidas de inclusión`
+- **Dónde:** `Programación` › `Metodología` → Pestaña `Metodología e inclusión`
 
 ## K. Plan de aplicación de los desdobles (en su caso)
 Organización de grupos, distribución de actividades y recursos si el módulo contempla desdobles.
@@ -64,7 +64,7 @@ Convocatorias extraordinarias, condiciones y actividades de recuperación.
 
 ## M. Materiales y recursos didácticos
 Libros, software, hardware y recursos web.
-- **Dónde:** `Programación` › `Metodología` → Pestaña `Instrumentos y recursos` (recursos y espacios codificados) y `Programación` › `Contexto` → Pestaña `Contextualización` (bibliografía)
+- **Dónde:** `Programación` › `Metodología` → Pestaña `Recursos` (recursos y espacios codificados) y `Programación` › `Contexto` → Pestaña `Contextualización` (bibliografía)
 
 ## N. Actividades complementarias y extraescolares
 Charlas, visitas a empresas, talleres previstos.

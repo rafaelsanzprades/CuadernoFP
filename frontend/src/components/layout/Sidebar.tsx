@@ -279,7 +279,7 @@ export default function Sidebar() {
           </div>
         )}
 
-        {/* Correlación / Ayuda / Legal: mismo aspecto pequeño que el resto de items de navegación */}
+        {/* Equivalencias / Ayuda / Legal: mismo aspecto pequeño que el resto de items de navegación */}
         <div className="flex flex-col gap-0.5 mb-2 shrink-0">
           {topLevelPages.map((page) => {
             const basePath = page.href.split('?')[0];

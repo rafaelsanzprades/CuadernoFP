@@ -36,7 +36,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   ],
   "/metodologia": [
     { id: "metodologia", label: "Metodología e inclusión" },
-    { id: "evaluacion", label: "Instrumentos y recursos" },
+    { id: "recursos", label: "Recursos" },
     { id: "contingencia", label: "Plan de contingencia" },
     { id: "transversales", label: "Transversales, competencias y actividades" },
   ],
@@ -47,7 +47,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "tri3", label: "3º Trimestre" },
   ],
   "/calendario": [
-    { id: "fechas", label: "Fechas y horarios" },
+    { id: "fechas", label: "Fechas y horario" },
     { id: "feoe", label: "Periodo FEOE" },
     { id: "eventos", label: "Eventos y festivos" },
     { id: "actividades", label: "Actividades extraescolares" },
@@ -55,19 +55,19 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   "/agenda": [
     { id: "actual", label: "Actual" },
     { id: "planificacion", label: "Planificación" },
-    { id: "progreso-ra-ud", label: "Progreso RA y UD" },
+    { id: "progreso-ra-ud", label: "Previsión RA y UD" },
     { id: "mensual", label: "Mensual" },
   ],
   "/alumnado": [
-    { id: "listado", label: "Listado" },
+    { id: "matricula", label: "Matrícula" },
     { id: "plano", label: "Plano de clase" },
     { id: "tutoria", label: "Tutoría y alertas" },
-    { id: "contexto", label: "Contexto del grupo" },
+    { id: "perfil", label: "Perfil del grupo" },
   ],
   "/seguimiento": [
     { id: "clases", label: "Clases" },
     { id: "asistencia", label: "Asistencia" },
-    { id: "progreso-ra", label: "Progreso de RA" },
+    { id: "progreso-ra-ud", label: "Progreso de RA y UD" },
     { id: "detalle", label: "Detalle por alumnado" },
   ],
   "/calificaciones": [
@@ -77,7 +77,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "individual", label: "Individual" },
   ],
   "/normativa": [
-    { id: "ccaa", label: "CCAA" },
+    { id: "autonomias", label: "Autonomías" },
     { id: "bibliografia", label: "Bibliografía" },
     { id: "legislacion", label: "Legislación" },
     { id: "ecp-incual", label: "ECP INCUAL" },
@@ -99,7 +99,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "programacion", label: "Programación" },
     { id: "curso", label: "Curso" },
   ],
-  "/correlacion": [
+  "/equivalencias": [
     { id: "comparativa", label: "Comparativa" },
     { id: "pd-", label: "PD- / APP" },
     { id: "pd=", label: "PD= / APP" },
@@ -281,7 +281,7 @@ export default function AyudaPage() {
                     con claridad lo reutilizable (<em>Programación</em>: Contexto/Currículo/Metodología/
                     Instrumentos), lo específico del año (<em>Curso</em>: Calendario/Alumnado/Seguimiento/
                     Calificaciones) y lo transversal (<em>Grupo</em>: Archivos/Catálogo/Normativa/Magia — datos
-                    de consulta y generación de documentos). Correlación, Ayuda y Legal viven como accesos
+                    de consulta y generación de documentos). Equivalencias, Ayuda y Legal viven como accesos
                     directos junto a Agenda (fuera de estos tres grupos, de consulta puntual) y Mejora se
                     fusionó como pestaña dentro de Inicio.
                   </div>
@@ -294,7 +294,7 @@ export default function AyudaPage() {
                         {[
                           { href: "/inicio", label: "Inicio", tabs: PAGE_TABS["/inicio"] },
                           { href: "/agenda", label: "Agenda", tabs: PAGE_TABS["/agenda"] },
-                          { href: "/correlacion", label: "Correlación", tabs: PAGE_TABS["/correlacion"] },
+                          { href: "/equivalencias", label: "Equivalencias", tabs: PAGE_TABS["/equivalencias"] },
                           { href: "/ayuda", label: "Ayuda", tabs: PAGE_TABS["/ayuda"] },
                           { href: "/legal", label: "Legal", tabs: PAGE_TABS["/legal"] },
                         ].map(page => (

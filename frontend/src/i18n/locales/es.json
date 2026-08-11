@@ -81,7 +81,7 @@
     "normativa": "Normativa",
     "calidad": "Calidad",
     "mejora": "Mejora",
-    "correlacion": "Correlación"
+    "equivalencias": "Equivalencias"
   },
   "navGroups": {
     "general": "General",
@@ -108,13 +108,13 @@
   "pages": {
     "agenda_title": "Agenda",
     "agenda_desc": "Resumen diario: estado de clase y UD a impartir.",
-    "alumnado_title": "Alumnado y tutoría",
+    "alumnado_title": "Alumnado",
     "alumnado_desc": "Gestión de alumnado, tutoría, FEOE y orientación.",
     "diario_title": "Seguimiento diario",
     "diario_desc": "Diario de aula, contingencias, control de asistencia y alertas.",
-    "evaluacion_title": "Evaluación y progreso",
+    "evaluacion_title": "Calificaciones",
     "evaluacion_desc": "Calificaciones, evaluación de RA y analíticas.",
-    "calendario_title": "Calendario y trimestres",
+    "calendario_title": "Calendario",
     "calendario_desc": "Configura festivos, evaluaciones y tu horario semanal.",
     "modulo_title": "Configuración del módulo",
     "modulo_desc": "Configuración de datos, contexto, planes, FEOE, metodología, recursos y elementos transversales.",

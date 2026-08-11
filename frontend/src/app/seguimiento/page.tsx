@@ -21,14 +21,14 @@ import { Button } from "@/components/ui/Button";
 const TABS = [
   { id: "clases", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Clases</span>, cleanLabel: "Clases" },
   { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> Asistencia</span>, cleanLabel: "Asistencia" },
-  { id: "progreso-ra", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> Progreso de RA</span>, cleanLabel: "Progreso de RA" },
+  { id: "progreso-ra-ud", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> Progreso de RA y UD</span>, cleanLabel: "Progreso de RA y UD" },
   { id: "detalle", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> Detalle por alumnado</span>, cleanLabel: "Detalle por alumnado" },
 ];
 
 const TAB_DESCRIPTIONS: Record<string, string> = {
   clases: 'Diario de clases, sesiones lectivas y registro de contingencias.',
   asistencia: 'Control de asistencia del alumnado.',
-  'progreso-ra': 'Grado de consecución de los resultados de aprendizaje por trimestre.',
+  'progreso-ra-ud': 'Grado de consecución de los resultados de aprendizaje por trimestre.',
   detalle: 'Entrada de notas numéricas por alumnado, instrumento de evaluación y nivel de adquisición de RA.',
 };
 
@@ -329,7 +329,7 @@ export default function SeguimientoPage() {
                 </div>
               )}
 
-              {activeTab === 'progreso-ra' && (
+              {activeTab === 'progreso-ra-ud' && (
                 <div className="mt-4">
                   <ProgresoRaTab />
                 </div>
