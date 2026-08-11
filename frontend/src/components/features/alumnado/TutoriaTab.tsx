@@ -51,10 +51,10 @@ export function TutoriaTab() {
   };
 
   return (
-    <div className="space-y-4 animate-in fade-in duration-500 flex gap-6 h-[calc(100vh-200px)]">
-      
+    <div className="animate-in fade-in duration-500 flex gap-6 min-h-[600px]">
+
       {/* Sidebar de Alumnado */}
-      <Card className="w-64 p-4 flex flex-col border-r border-[var(--glass-border)] bg-foreground/5 h-full overflow-hidden">
+      <Card className="w-64 p-4 flex flex-col border-r border-[var(--glass-border)] bg-foreground/5 overflow-hidden">
         <h3 className="font-bold mb-4 text-foreground flex items-center gap-2">
           <ClipboardList className="w-5 h-5 text-accent" />
           Alumnado

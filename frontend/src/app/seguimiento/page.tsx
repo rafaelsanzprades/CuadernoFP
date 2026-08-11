@@ -2,14 +2,15 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { TabSync } from "@/components/ui/TabSync";
 import { useTranslation } from "react-i18next";
-import { Calendar, FileEdit, MapPin, ClipboardCheck, AlertTriangle, FolderOpen } from "lucide-react";
+import { Calendar, FileEdit, MapPin, ClipboardCheck, Target, Users, FolderOpen } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { AsistenciaTab } from "@/components/features/diario/AsistenciaTab";
-import { AlertaAbandonoTab } from "@/components/features/diario/AlertaAbandonoTab";
+import { ProgresoRaTab } from "@/components/features/evaluacion/ProgresoRaTab";
+import { DetalleAlumnadoTab } from "@/components/features/evaluacion/DetalleAlumnadoTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -20,13 +21,15 @@ import { Button } from "@/components/ui/Button";
 const TABS = [
   { id: "clases", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Clases</span>, cleanLabel: "Clases" },
   { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> Asistencia</span>, cleanLabel: "Asistencia" },
-  { id: "abandono", label: <span className="flex items-center gap-2"><AlertTriangle className="w-4 h-4 shrink-0" /> Alerta de abandono</span>, cleanLabel: "Alerta de abandono" },
+  { id: "progreso-ra", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> Progreso de RA</span>, cleanLabel: "Progreso de RA" },
+  { id: "detalle", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> Detalle por alumnado</span>, cleanLabel: "Detalle por alumnado" },
 ];
 
 const TAB_DESCRIPTIONS: Record<string, string> = {
   clases: 'Diario de clases, sesiones lectivas y registro de contingencias.',
   asistencia: 'Control de asistencia del alumnado.',
-  abandono: 'Alertas y seguimiento del riesgo de abandono escolar.',
+  'progreso-ra': 'Grado de consecución de los resultados de aprendizaje por trimestre.',
+  detalle: 'Entrada de notas numéricas por alumnado, instrumento de evaluación y nivel de adquisición de RA.',
 };
 
 export default function SeguimientoPage() {
@@ -37,6 +40,7 @@ export default function SeguimientoPage() {
   const [saveMessage, setSaveMessage] = useState("");
   const [activeTab, setActiveTab] = useState("clases");
   const [allDiarioOpen, setAllDiarioOpen] = useState(false);
+  const { planningLedger } = useDynamicPlanning();
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel || activeTab;
 
@@ -105,8 +109,6 @@ export default function SeguimientoPage() {
       </div>
     );
   }
-
-  const { df_sgmt, planningLedger } = useDynamicPlanning();
 
   if (loading || !moduleData || !cursoData) {
     return <LoadingSpinner text="Cargando datos de seguimiento..." />;
@@ -198,7 +200,7 @@ export default function SeguimientoPage() {
             <PageHeader
               icon={MapPin}
               title="Seguimiento"
-              description="Tutoría, asistencia y abandonos."
+              description="Diario de clases, asistencia, progreso de RA y notas por alumnado."
             />
 
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
@@ -327,9 +329,15 @@ export default function SeguimientoPage() {
                 </div>
               )}
 
-              {activeTab === 'abandono' && (
+              {activeTab === 'progreso-ra' && (
                 <div className="mt-4">
-                  <AlertaAbandonoTab />
+                  <ProgresoRaTab />
+                </div>
+              )}
+
+              {activeTab === 'detalle' && (
+                <div className="mt-4">
+                  <DetalleAlumnadoTab />
                 </div>
               )}
           </MotionWrapper>

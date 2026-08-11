@@ -242,8 +242,8 @@ export default function InicioPage() {
       id: "instr",
       icon: <Wrench className="w-5 h-5" />,
       title: "Instrumentos e Indicadores",
-      href: "/calificaciones?tab=matriz",
-      hrefLabel: "Calificaciones",
+      href: "/archivos?tab=autores",
+      hrefLabel: "Archivos",
       status: (instrCount === 0 || indCount === 0) ? "empty" : indSinCE > 0 ? "warning" : "ok",
       lines: (instrCount === 0 || indCount === 0)
         ? ["No hay instrumentos o indicadores"]
@@ -429,20 +429,20 @@ export default function InicioPage() {
             ? `Faltan ${evalTotal - evalCount} alumnos por evaluar`
             : "Todos los alumnos tienen registros de calificación",
         ],
-      actionHref: evalCount === 0 ? "/calificaciones" : undefined,
-      actionLabel: evalCount === 0 ? "Ir a calificaciones" : undefined,
+      actionHref: evalCount === 0 ? "/seguimiento?tab=detalle" : undefined,
+      actionLabel: evalCount === 0 ? "Introducir notas" : undefined,
     },
     {
       id: "tutoria",
       icon: <HeartHandshake className="w-5 h-5" />,
       title: "Tutoría y alertas",
-      href: "/seguimiento?tab=tutoria",
+      href: "/alumnado?tab=tutoria",
       hrefLabel: "Seguimiento",
       status: tutoriaEntradas === 0 ? "empty" : "ok",
       lines: tutoriaEntradas === 0
         ? ["Sin entradas de tutoría o alertas registradas"]
         : [`${tutoriaEntradas} entradas de tutoría registradas`],
-      actionHref: tutoriaEntradas === 0 ? "/seguimiento?tab=tutoria" : undefined,
+      actionHref: tutoriaEntradas === 0 ? "/alumnado?tab=tutoria" : undefined,
       actionLabel: tutoriaEntradas === 0 ? "Registrar tutoría" : undefined,
     },
     {
