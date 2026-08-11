@@ -7,7 +7,7 @@ import { Calendar, Compass, FileText, FolderOpen, GraduationCap, Grid, TrendingU
 export const inicioPage = { href: "/inicio?tab=bienvenida", label: "Inicio", icon: Activity, description: "Panel principal, guía de inicio, FAQ y validación de datos." };
 
 export const topLevelPages = [
-  { href: "/correlacion?tab=pd-", label: "Correlación", icon: GitCompare, description: "Qué campo de la app corresponde a cada apartado de las PD- / PD= / PD+." },
+  { href: "/correlacion?tab=pd-", label: "Correlación", icon: GitCompare, description: "Correspondencia entre APP y los apartados de PD-, PD= y PD+." },
   { href: "/ayuda?tab=faq", label: "Ayuda", icon: Info, description: "FAQ, acrónimos y mapa de la aplicación." },
 ];
 
