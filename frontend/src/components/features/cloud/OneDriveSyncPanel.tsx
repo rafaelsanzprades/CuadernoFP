@@ -64,7 +64,7 @@ export function OneDriveSyncPanel() {
 
       <div className="relative z-10 flex flex-col gap-6 h-full">
         <div>
-          <h2 className="text-heading font-bold text-foreground flex items-center gap-2">
+          <h2 className="text-subheading font-bold text-foreground flex items-center gap-2">
             <Cloud className="w-6 h-6 text-[#0078D4]" /> Microsoft OneDrive
           </h2>
           <p className="text-muted mt-2">

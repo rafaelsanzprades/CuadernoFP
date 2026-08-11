@@ -39,7 +39,7 @@ export function PlanesTab() {
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
+    <div className="space-y-6 animate-in fade-in duration-500">
       {/* FEOE */}
       <div className="glass-card p-6 border-t-4 border-t-blue-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">

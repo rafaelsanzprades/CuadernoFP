@@ -1,7 +1,6 @@
 "use client";
-import { Target, Users } from "lucide-react";
+import { Target } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
-import { NarrativeField } from "@/components/ui/NarrativeField";
 
 export function MetodologiaTab() {
   const { moduleData, updateModuleData } = useAppStore();
@@ -142,18 +141,17 @@ export function MetodologiaTab() {
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
+          <div>
+            <label className="text-body font-semibold text-foreground mb-1 block">Coordinación con otros módulos y su profesorado</label>
+            <p className="text-caption text-muted mb-2">Cómo se coordina este módulo con otros módulos/profesorado del ciclo (reuniones de equipo docente, dependencias entre módulos, sustitución de tareas en caso de ausencia, etc.).</p>
+            <textarea
+              value={moduleData?.textos_pd_metodologia_labor_coordinada || ""}
+              onChange={e => updateModuleData("textos_pd_metodologia_labor_coordinada", e.target.value)}
+              placeholder="Escribe aquí sobre coordinación con otros módulos y su profesorado..."
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
         </div>
-      </div>
-
-      <div className="glass-card p-6 border-t-4 border-t-violet-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Coordinación docente
-        </h2>
-        <NarrativeField
-          id="textos_pd_metodologia_labor_coordinada"
-          title="Coordinación con otros módulos y su profesorado"
-          description="Cómo se coordina este módulo con otros módulos/profesorado del ciclo (reuniones de equipo docente, dependencias entre módulos, sustitución de tareas en caso de ausencia, etc.)."
-        />
       </div>
     </div>
     </>

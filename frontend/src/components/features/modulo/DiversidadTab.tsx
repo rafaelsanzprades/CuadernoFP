@@ -144,8 +144,8 @@ export function DiversidadTab() {
           </label>
 
           <label className="flex items-start gap-3 p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition-colors cursor-pointer">
-            <input 
-              type="checkbox" 
+            <input
+              type="checkbox"
               className="mt-1"
               checked={config_contexto.medidas_flexibilizacion || false}
               onChange={(e) => handleChange("medidas_flexibilizacion", e.target.checked)}
@@ -155,6 +155,7 @@ export function DiversidadTab() {
               <p className="text-caption text-muted">Alternativas metodológicas en enseñanza y evaluación que no minorarán las calificaciones.</p>
             </div>
           </label>
+          </div>
         </div>
       </div>
 
@@ -320,7 +321,6 @@ export function DiversidadTab() {
             ))}
           </div>
         )}
-        </div>
       </div>
 
     </div>

@@ -134,7 +134,7 @@ export default function MetodologiaConfigPage() {
 
             <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Configuración de la metodología.'} />
 
-            <div className="space-y-4">
+            <div className="space-y-6">
               {activeTab === 'metodologia' && <><MetodologiaTab /><DiversidadTab /></>}
               {activeTab === 'evaluacion' && <EvaluacionRecursosTab />}
               {activeTab === 'contingencia' && <ContingenciaTab />}

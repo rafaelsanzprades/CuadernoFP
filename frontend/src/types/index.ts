@@ -221,6 +221,7 @@ export const CursoDataSchema = z.object({
   planning_ledger: z.record(z.string(), z.any()).optional(),
   plano_clase: z.record(z.string(), z.any()).optional(),
   actuaciones_tutoria: z.array(z.any()).optional(),
+  rasgos_grupo: z.array(z.string()).optional(),
   __version__: z.number().optional(),
 }).passthrough();
 export type CursoData = z.infer<typeof CursoDataSchema>;

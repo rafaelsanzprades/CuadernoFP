@@ -239,7 +239,7 @@ export function ContextoTab() {
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
           <span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Datos de autoría y publicidad
         </h2>
-        <div className="flex flex-col gap-6">
+        <div className="space-y-6">
           <NarrativeField
             id="textos_pd_bibliografia"
             title="Bibliografía y Recursos"

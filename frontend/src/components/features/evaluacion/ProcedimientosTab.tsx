@@ -44,7 +44,7 @@ export function ProcedimientosTab() {
         </div>
 
         <div className="glass-card p-6 border-t-4 border-t-rose-500">
-          <h2 className="text-subheading font-bold text-foreground mb-1">Modelo de recuperación (Javier Edo Gual)</h2>
+          <h2 className="text-subheading font-bold text-foreground mb-1">Modelo de recuperación</h2>
           <p className="text-caption text-muted mb-3">
             Marca los tipos de recuperación/convocatoria extraordinaria que aplicas en este módulo, según el modelo
             R1/R2/R3/RF/EvFE del autor de PD+. <strong>Primera versión</strong>: esto documenta tu modelo en la
@@ -75,37 +75,36 @@ export function ProcedimientosTab() {
           />
         </div>
 
-        <div className="grid grid-cols-1 gap-6">
-          <NarrativeField
-            id="textos_pd_eval_informacion"
-            title="Información al alumnado y familias"
-            description="Cómo se dan a conocer los criterios de evaluación y calificación."
+        <NarrativeField
+          id="textos_pd_eval_informacion"
+          title="Información al alumnado y familias"
+          description="Cómo se dan a conocer los criterios de evaluación y calificación."
+        />
+        <NarrativeField
+          id="textos_pd_eval_perdida_continua"
+          title="Pérdida de evaluación continua"
+          description="Criterios de asistencia y procedimiento cuando se pierde el derecho."
+        />
+        <NarrativeField
+          id="textos_pd_eval_recuperacion"
+          title="Procedimiento de recuperación"
+          description="Cómo se recuperan las partes no superadas y formato de las pruebas extraordinarias."
+        />
+        <NarrativeField
+          id="textos_pd_eval_pendientes"
+          title="Plan de recuperación de módulos pendientes"
+          description="Organización para alumnado de 2º curso con este módulo pendiente."
+        />
+
+        <div className="glass-card p-6 border-t-4 border-t-teal-500">
+          <h2 className="text-subheading font-bold text-foreground mb-1">Criterios de calificación (texto específico modelo BOA Aragón, pd=)</h2>
+          <p className="text-caption text-muted mb-3">Si se deja vacío, se genera automáticamente. Criterios de calificación y redondeo del módulo.</p>
+          <textarea
+            value={config_contexto.texto_criterios_calificacion || ""}
+            onChange={e => handleChange("texto_criterios_calificacion", e.target.value)}
+            placeholder="Criterios de calificación y redondeo del módulo."
+            className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
           />
-          <NarrativeField
-            id="textos_pd_eval_perdida_continua"
-            title="Pérdida de evaluación continua"
-            description="Criterios de asistencia y procedimiento cuando se pierde el derecho."
-          />
-          <NarrativeField
-            id="textos_pd_eval_recuperacion"
-            title="Procedimiento de recuperación"
-            description="Cómo se recuperan las partes no superadas y formato de las pruebas extraordinarias."
-          />
-          <NarrativeField
-            id="textos_pd_eval_pendientes"
-            title="Plan de recuperación de módulos pendientes"
-            description="Organización para alumnado de 2º curso con este módulo pendiente."
-          />
-          <div>
-            <label className="text-body text-muted mb-1 block">Criterios de calificación (texto específico modelo BOA Aragón, pd=)</label>
-            <p className="text-caption text-muted mb-2">Si se deja vacío, se genera automáticamente. Criterios de calificación y redondeo del módulo.</p>
-            <textarea
-              value={config_contexto.texto_criterios_calificacion || ""}
-              onChange={e => handleChange("texto_criterios_calificacion", e.target.value)}
-              placeholder="Criterios de calificación y redondeo del módulo."
-              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
-            />
-          </div>
         </div>
       </div>
     </MotionWrapper>

@@ -57,6 +57,8 @@ const ALLOWED_CURSO_KEYS = [
   'df_empresas', 'planning_ledger', 'plano_clase',
   // Tutoría
   'actuaciones_tutoria',
+  // Contexto del grupo
+  'rasgos_grupo',
   // Metadatos
   '__version__', 'tipo', 'id', 'grupo'
 ];

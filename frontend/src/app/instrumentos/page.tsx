@@ -358,7 +358,7 @@ export default function InstrumentosPage() {
             <>
                 
             <Card className="p-6 animate-in fade-in duration-500">
-              <h2 className="text-heading font-bold flex items-center gap-2 text-foreground mb-5">
+              <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-5">
                 <span><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Resumen de instrumentos de evaluación por trimestres
               </h2>
               <div className="overflow-x-auto">

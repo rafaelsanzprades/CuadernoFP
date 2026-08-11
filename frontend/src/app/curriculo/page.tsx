@@ -328,7 +328,7 @@ export default function MatricesPage() {
             {activeTab === "ponderacion-ra-ce" && (
               <div className="space-y-4 animate-in fade-in duration-500">
                 <Card className="p-6 border-t-4 border-t-accent">
-                  <h2 className="text-heading font-bold flex items-center gap-2 text-foreground mb-4">
+                  <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
                     <span><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></span> RA. Resultados de aprendizaje
                   </h2>
                   <div className="overflow-x-auto">
@@ -455,7 +455,7 @@ export default function MatricesPage() {
                 {/* Criterios de evaluación */}
                 <Card className="p-6 border-t-4 border-t-yellow-500">
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-heading font-bold flex items-center gap-2 text-foreground">
+                    <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
                       <span><span className="inline-flex"><Puzzle className="w-[1.2em] h-[1.2em] mr-1" /></span></span> CE. Criterios de evaluación
                     </h2>
                     <Button
@@ -658,7 +658,7 @@ export default function MatricesPage() {
             {activeTab === "tareas" && (
               <div className="animate-in fade-in duration-500">
                 <Card className="p-6 border-t-4 border-t-blue-500">
-                  <h2 className="text-heading font-bold flex items-center gap-2 text-foreground mb-6">
+                  <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-6">
                     <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Tareas competenciales
                   </h2>
                   <TaskTable
@@ -677,7 +677,7 @@ export default function MatricesPage() {
               <div className="animate-in fade-in duration-500 flex flex-col gap-8">
                 <Card className="p-6 border-t-4 border-t-purple-500">
                   <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-heading font-bold flex items-center gap-2 text-foreground">
+                    <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
                       <span><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></span> UD/T. Unidades didácticas o de trabajo
                     </h2>
                     <div className="flex items-center gap-3 text-[11px] font-semibold">
@@ -850,7 +850,7 @@ export default function MatricesPage() {
 
                 <Card className="p-6 border-t-4 border-t-accent">
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-heading font-bold flex items-center gap-2 text-foreground">
+                    <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
                       <span><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Secuenciación de UD
                     </h2>
                     <div className="flex gap-4">

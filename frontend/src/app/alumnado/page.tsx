@@ -299,7 +299,7 @@ export default function AlumnadoPage() {
             <Card className="p-6 border-t-4 border-t-blue-500">
               <div className="flex justify-between items-end mb-6">
                 <div className="flex items-center gap-4">
-                  <h2 className="text-heading font-bold flex items-center gap-2 text-foreground">
+                  <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
                     <span>Lista oficial</span>
                     <span className="text-body font-normal text-muted bg-foreground/5 px-3 py-1 rounded-full">{df_al.length} alumnado</span>
                   </h2>

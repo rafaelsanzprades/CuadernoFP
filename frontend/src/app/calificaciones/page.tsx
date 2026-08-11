@@ -387,7 +387,7 @@ export default function ProgresoPage() {
               
               {/* Bloque 1: Resumen de calificaciones por trimestres */}
               <Card className="p-6 border-t-4 border-t-blue-500">
-                <h2 className="text-heading font-bold flex items-center gap-2 text-foreground mb-5">
+                <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-5">
                   <span><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Resumen de calificaciones por trimestres
                 </h2>
                 <div className="overflow-x-auto">
@@ -587,7 +587,7 @@ export default function ProgresoPage() {
 
               {/* Bloque 2: Resumen de Resultados de aprendizaje por trimestres */}
               <Card className="p-6 border-t-4 border-t-emerald-500">
-                <h2 className="text-heading font-bold flex items-center gap-2 text-foreground mb-5">
+                <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-5">
                   <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Resumen de resultados de aprendizaje por trimestres
                 </h2>
                 <div className="space-y-5">

@@ -70,7 +70,7 @@ export function GoogleDriveSyncPanel() {
 
       <div className="relative z-10 flex flex-col gap-6 h-full">
         <div>
-          <h2 className="text-heading font-bold text-foreground flex items-center gap-2">
+          <h2 className="text-subheading font-bold text-foreground flex items-center gap-2">
             <Cloud className="w-6 h-6 text-[#4285F4]" /> Google Drive
           </h2>
           <p className="text-muted mt-2">
