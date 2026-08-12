@@ -497,12 +497,12 @@ export default function ArchivosTrabajoPage() {
                         </h3>
                         <p className="text-body text-muted mt-2 leading-relaxed">
                           {isDemoLoaded
-                            ? "Directorio de datos DEMO. Haz doble clic en un Grupo (.fpg) para cargarlo."
-                            : "Abre un Grupo para cargar automáticamente su Programación y su Curso asociado."}
+                            ? "Grupos de ejemplo. Doble clic para cargar."
+                            : "Tus grupos guardados. Doble clic para cargar."}
                         </p>
                       </div>
 
-                      <div className="flex-1 flex flex-col gap-2 min-h-[250px] overflow-y-auto pr-2 custom-scrollbar">
+                      <div className="flex-1 flex flex-col gap-2 min-h-[180px] overflow-y-auto pr-2 custom-scrollbar">
                         {isDemoLoaded ? (
                           demoGroupFiles.length === 0 ? (
                             <div className="h-full flex items-center justify-center text-center p-4">
@@ -594,11 +594,11 @@ export default function ArchivosTrabajoPage() {
                           {hasPdFile && <Badge variant={isDemoLoaded ? 'warning' : 'info'}>Activa</Badge>}
                         </div>
                         <p className="text-body text-muted mt-2 leading-relaxed">
-                          Plantillas curriculares. Doble clic para cargar una programación independiente.
+                          Doble clic para cargar una programación.
                         </p>
                       </div>
 
-                      <div className="flex-1 flex flex-col gap-2 min-h-[250px] overflow-y-auto pr-2 custom-scrollbar">
+                      <div className="flex-1 flex flex-col gap-2 min-h-[180px] overflow-y-auto pr-2 custom-scrollbar">
                         {isDemoLoaded ? (
                           demoProgFiles.length === 0 ? (
                             <div className="h-full flex items-center justify-center text-center p-4">
@@ -694,11 +694,11 @@ export default function ArchivosTrabajoPage() {
                           {hasCursoFile && <Badge variant={isDemoLoaded ? 'warning' : 'success'}>Activo</Badge>}
                         </div>
                         <p className="text-body text-muted mt-2 leading-relaxed">
-                          Cuadernos de clase e instancias temporales de una programación.
+                          Doble clic para cargar un curso.
                         </p>
                       </div>
 
-                      <div className="flex-1 flex flex-col gap-2 min-h-[250px] overflow-y-auto pr-2 custom-scrollbar">
+                      <div className="flex-1 flex flex-col gap-2 min-h-[180px] overflow-y-auto pr-2 custom-scrollbar">
                         {isDemoLoaded ? (
                           demoCursoFiles.length === 0 ? (
                             <div className="h-full flex items-center justify-center text-center p-4">

@@ -27,9 +27,7 @@ export function PlanificacionMensualTab() {
   });
 
   const getUdLabel = (row: any) => {
-    if (row.id_ud === 'FEOE' || row.id_ud === 'FEOE (Sin docencia)' || row.id_ud === 'FEOE (Con docencia)') {
-      return `FEOE (${cursoData?.info_fechas?.docencia_dual === 'con_docencia' ? 'Con docencia' : 'Sin docencia'})`;
-    }
+    if (row.id_ud === 'FEOE') return 'FEOE. Formación en Empresa u Organismo Equiparado';
     if (row.id_ud === 'Sin docencia') return 'Sin docencia';
     const desc = ud_desc_map[row.id_ud];
     return desc ? `${row.id_ud}. ${desc}` : row.id_ud;

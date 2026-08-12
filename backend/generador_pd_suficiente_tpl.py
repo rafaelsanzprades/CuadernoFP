@@ -15,7 +15,7 @@ from helpers_catalogo import (
     build_ra_desc_map, build_ud_desc_map, build_ce_desc_map,
     resolve_ra_desc, resolve_ud_desc, resolve_ce_desc, resolve_recursos,
 )
-from helpers_pd_tablas import insertar_tabla_instrumentos
+from helpers_pd_tablas import insertar_tabla_instrumentos, insertar_tabla_planificacion
 
 TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), 'templates', 'modelo_pd_fp=.docx')
 
@@ -277,6 +277,12 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
                 context["pond_1t"], context["pond_2t"], context["pond_3t"],
             )
             break
+
+    # ── Página final: previsión de planificación mensual (item 9 backlog) ──
+    insertar_tabla_planificacion(
+        doc, data.get("df_ud", []),
+        data.get("info_fechas", {}), data.get("horario", {}), data.get("calendar_notes", {}),
+    )
 
     tpl.save(out_docx)
 

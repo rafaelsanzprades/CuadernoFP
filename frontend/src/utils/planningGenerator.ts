@@ -89,8 +89,13 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
 
   let currentUdIndex = 0;
   let totalScheduledHours = 0;
-  // Última fecha en la que se han asignado horas a cada UD — sirve para
-  // saber en qué evaluación (trimestre) termina, cruzándola con termRanges.
+  // Primera fecha en la que se han asignado horas a cada UD — las UD se
+  // asignan al trimestre en el que EMPIEZAN, no en el que terminan (una UD
+  // que arranca a final de trimestre y se alarga unos días al siguiente
+  // sigue perteneciendo al primero).
+  const udFirstDate: Record<string, Date> = {};
+  // Última fecha con horas asignadas — sirve solo para decidir dónde
+  // insertar la fila FEOE entre las de UD (por orden cronológico real).
   const udLastDate: Record<string, Date> = {};
 
   datesList.forEach((d) => {
@@ -164,6 +169,9 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
 
       currentUd.h_rem -= assignedNow;
       if (assignedNow > 0) {
+        if (udFirstDate[currentUd.id_ud] === undefined) {
+          udFirstDate[currentUd.id_ud] = d;
+        }
         udLastDate[currentUd.id_ud] = d;
       }
       prvTracker[currentUd.id_ud][prvKey] = (prvTracker[currentUd.id_ud][prvKey] || 0) + assignedNow;
@@ -185,7 +193,7 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
   });
 
   // Evaluación (1/2/3) en la que cae una fecha, según los rangos de trimestre.
-  const getEvaluacion = (d: Date | undefined): number | null => {
+  const getEvaluacion = (d: Date | null | undefined): number | null => {
     if (!d) return null;
     let closestTerm = 1;
     let minDiff = Infinity;
@@ -215,7 +223,7 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
     const newRow: any = {
       id_ud: id,
       horas_ud: ud.duracion || ud.horas_ud || 0,
-      ev: getEvaluacion(udLastDate[id])
+      ev: getEvaluacion(udFirstDate[id])
     };
 
     months.forEach(m => {
@@ -226,11 +234,26 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
     newDfSgmt.push(newRow);
   });
 
-  // Add FEOE row if it has any hours
+  // Una UD sin ninguna fecha asignada (el calendario se acaba antes de que
+  // le toque turno en la cola) no tiene ev propio — hereda el de la UD
+  // anterior, así que la última UD del módulo cae en el mismo trimestre
+  // que la última UD que sí llegó a impartirse, en vez de quedar en blanco.
+  let lastKnownEv = 1;
+  newDfSgmt.forEach(row => {
+    if (row.ev == null) row.ev = lastKnownEv;
+    else lastKnownEv = row.ev;
+  });
+
+  // Add FEOE row if it has any hours — insertada por orden cronológico real
+  // (no siempre al final): va justo antes de la primera UD cuya última fecha
+  // impartida cae después del inicio de la FEOE, ya que esa es la UD que la
+  // FEOE interrumpe (una UD puede empezar antes de la FEOE y terminar
+  // después, así que se compara con la ÚLTIMA fecha, no la primera).
   const hasFeoeHours = Object.keys(prvTracker["FEOE"]).length > 0;
   if (hasFeoeHours) {
     const feoeRow: any = {
-      id_ud: `FEOE (${docencia_dual === 'con_docencia' ? 'Con docencia' : 'Sin docencia'})`,
+      id_ud: "FEOE",
+      ev: getEvaluacion(feoS),
     };
     let sumPrv = 0;
     months.forEach(m => {
@@ -241,7 +264,16 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
       sumPrv += prv;
     });
     feoeRow.horas_ud = sumPrv || "-";
-    newDfSgmt.push(feoeRow);
+
+    let insertAt = newDfSgmt.length;
+    if (feoS) {
+      const idx = newDfSgmt.findIndex(row => {
+        const last = udLastDate[row.id_ud];
+        return !last || last.getTime() > feoS.getTime();
+      });
+      if (idx !== -1) insertAt = idx;
+    }
+    newDfSgmt.splice(insertAt, 0, feoeRow);
   }
 
   return { newPlanningLedger, newDfSgmt, totalUdHours, totalScheduledHours };

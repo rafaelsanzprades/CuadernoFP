@@ -277,7 +277,12 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 "texto_inclusion_libre": module_data.get("texto_inclusion_libre", ""),
                 "texto_contingencia_libre": module_data.get("texto_contingencia_libre", ""),
                 "info_fechas": curso_data.get("info_fechas") or {},
-                "horario": module_data.get("horario") or curso_data.get("horario") or {},
+                # Solo curso_data: generatePlanning() en planningGenerator.ts (la
+                # previsión de /agenda?tab=planificacion que esta tabla replica)
+                # lee únicamente cursoData.horario, sin fallback a moduleData —
+                # cualquier fallback aquí desincroniza la tabla del PD respecto a
+                # lo que ve el profesorado en la app.
+                "horario": curso_data.get("horario") or {},
                 "calendar_notes": curso_data.get("calendar_notes") or {},
                 "planning_ledger": curso_data.get("planning_ledger") or {},
                 # Textos narrativos PD (16 campos, ver ALLOWED_PROGRAMACION_KEYS en fileManager.ts)

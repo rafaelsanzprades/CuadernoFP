@@ -212,7 +212,7 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
 
     doc = tpl.docx
     from docx.shared import Cm
-    from helpers_pd_tablas import insertar_tabla_instrumentos
+    from helpers_pd_tablas import insertar_tabla_instrumentos, insertar_tabla_planificacion
 
     # ── Márgenes de página: 2 izq., 1 arriba/abajo/derecha ───────────
     for section in doc.sections:
@@ -229,6 +229,12 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
                 doc, p, context.get("list_instrumentos", []),
                 context["pond_1t"], context["pond_2t"], context["pond_3t"],
             )
+
+    # ── Página final: previsión de planificación mensual (item 9 backlog) ──
+    insertar_tabla_planificacion(
+        doc, data.get("df_ud", []),
+        data.get("info_fechas", {}), data.get("horario", {}), data.get("calendar_notes", {}),
+    )
 
     _quitar_vinetas_listas(doc)
     _cursivar_lineas_relacion_ud(doc)

@@ -287,9 +287,9 @@ export default function AyudaPage() {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-4">
-                    {/* GENERAL: páginas fuera de navGroups */}
+                    {/* Cuaderno FP: páginas fuera de navGroups */}
                     <div className="space-y-6">
-                      <h3 className="font-extrabold text-subheading border-b-2 border-accent pb-2 text-foreground">General</h3>
+                      <h3 className="font-extrabold text-subheading border-b-2 border-accent pb-2 text-foreground">Cuaderno FP</h3>
                       <ul className="space-y-4 text-body">
                         {[
                           { href: "/inicio", label: "Inicio", tabs: PAGE_TABS["/inicio"] },
