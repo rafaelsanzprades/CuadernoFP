@@ -3,7 +3,7 @@ import React from "react";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { NarrativeField } from "@/components/ui/NarrativeField";
 import { useAppStore } from "@/store/useAppStore";
-import { Scale } from "lucide-react";
+import { Scale, MessageCircle } from "lucide-react";
 
 const MODELO_RECUPERACION = [
   { id: "R1", label: "R1 — Recuperación tras 1ª evaluación" },
@@ -75,26 +75,33 @@ export function ProcedimientosTab() {
           />
         </div>
 
-        <NarrativeField
-          id="textos_pd_eval_informacion"
-          title="Información al alumnado y familias"
-          description="Cómo se dan a conocer los criterios de evaluación y calificación."
-        />
-        <NarrativeField
-          id="textos_pd_eval_perdida_continua"
-          title="Pérdida de evaluación continua"
-          description="Criterios de asistencia y procedimiento cuando se pierde el derecho."
-        />
-        <NarrativeField
-          id="textos_pd_eval_recuperacion"
-          title="Procedimiento de recuperación"
-          description="Cómo se recuperan las partes no superadas y formato de las pruebas extraordinarias."
-        />
-        <NarrativeField
-          id="textos_pd_eval_pendientes"
-          title="Plan de recuperación de módulos pendientes"
-          description="Organización para alumnado de 2º curso con este módulo pendiente."
-        />
+        <div className="glass-card p-6 border-t-4 border-t-sky-500">
+          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
+            <span className="inline-flex"><MessageCircle className="w-[1.2em] h-[1.2em] mr-1" /></span> Información y procedimientos
+          </h2>
+          <div className="space-y-6">
+            <NarrativeField
+              id="textos_pd_eval_informacion"
+              title="Información al alumnado y familias"
+              description="Cómo se dan a conocer los criterios de evaluación y calificación."
+            />
+            <NarrativeField
+              id="textos_pd_eval_perdida_continua"
+              title="Pérdida de evaluación continua"
+              description="Criterios de asistencia y procedimiento cuando se pierde el derecho."
+            />
+            <NarrativeField
+              id="textos_pd_eval_recuperacion"
+              title="Procedimiento de recuperación"
+              description="Cómo se recuperan las partes no superadas y formato de las pruebas extraordinarias."
+            />
+            <NarrativeField
+              id="textos_pd_eval_pendientes"
+              title="Plan de recuperación de módulos pendientes"
+              description="Organización para alumnado de 2º curso con este módulo pendiente."
+            />
+          </div>
+        </div>
 
         <div className="glass-card p-6 border-t-4 border-t-teal-500">
           <h2 className="text-subheading font-bold text-foreground mb-1">Criterios de calificación (texto específico modelo Simplificado, pd=)</h2>

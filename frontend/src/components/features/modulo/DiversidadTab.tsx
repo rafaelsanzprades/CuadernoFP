@@ -175,7 +175,7 @@ export function DiversidadTab() {
             />
           </div>
           <div>
-            <label className="text-body text-muted mb-1 block">Inclusión — resumen general</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">Inclusión — resumen general</label>
             <textarea
               value={config_contexto.inclusion || ""}
               onChange={e => handleChange("inclusion", e.target.value)}
@@ -183,7 +183,7 @@ export function DiversidadTab() {
             />
           </div>
           <div>
-            <label className="text-body text-muted mb-1 block">Atención a la diversidad (Adaptaciones no significativas)</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">Atención a la diversidad (Adaptaciones no significativas)</label>
             <textarea
               value={config_aula["Atención a la diversidad"] || ""}
               onChange={e => handleAulaChange("Atención a la diversidad", e.target.value)}

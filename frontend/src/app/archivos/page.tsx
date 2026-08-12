@@ -445,32 +445,48 @@ export default function ArchivosTrabajoPage() {
               {activeTab === "datos" && (
                 <div className="space-y-4">
 
-                <div className="flex items-center gap-3">
-                  <span className="text-body font-bold text-foreground/80">Modo de datos:</span>
-                  <div className="flex bg-foreground/5 rounded-lg p-0.5 gap-0.5">
-                    <button
-                      onClick={switchToDemo}
-                      className={`flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md text-body font-bold transition-all ${dataSource === 'demo'
-                        ? 'bg-warning/20 text-warning shadow-sm ring-1 ring-warning/30'
-                        : 'text-muted hover:bg-foreground/10 hover:text-foreground'}`}
-                    >
-                      <Cloud className="w-3.5 h-3.5" /> {t('sidebar.demo')}
-                    </button>
-                    <button
-                      onClick={switchToLocal}
-                      className={`flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md text-body font-bold transition-all ${dataSource === 'local'
-                        ? 'bg-success/20 text-success shadow-sm ring-1 ring-success/30'
-                        : 'text-muted hover:bg-foreground/10 hover:text-foreground'}`}
-                    >
-                      <HardDrive className="w-3.5 h-3.5" /> {t('sidebar.reales')}
-                    </button>
+                <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-6">
+                  <div className="flex items-center gap-3 shrink-0">
+                    <span className="text-body font-bold text-foreground/80">Modo de datos:</span>
+                    <div className="flex bg-foreground/5 rounded-lg p-0.5 gap-0.5">
+                      <button
+                        onClick={switchToDemo}
+                        className={`flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md text-body font-bold transition-all ${dataSource === 'demo'
+                          ? 'bg-warning/20 text-warning shadow-sm ring-1 ring-warning/30'
+                          : 'text-muted hover:bg-foreground/10 hover:text-foreground'}`}
+                      >
+                        <Cloud className="w-3.5 h-3.5" /> {t('sidebar.demo')}
+                      </button>
+                      <button
+                        onClick={switchToLocal}
+                        className={`flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md text-body font-bold transition-all ${dataSource === 'local'
+                          ? 'bg-success/20 text-success shadow-sm ring-1 ring-success/30'
+                          : 'text-muted hover:bg-foreground/10 hover:text-foreground'}`}
+                      >
+                        <HardDrive className="w-3.5 h-3.5" /> {t('sidebar.reales')}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className={`flex-1 flex items-center gap-2 px-4 py-2 rounded-lg border text-body ${dataSource === 'demo' ? 'bg-warning/10 border-warning/30 text-warning' : 'bg-success/10 border-success/30 text-success'}`}>
+                    {dataSource === 'demo' ? (
+                      <>
+                        <Cloud className="w-4 h-4 shrink-0" />
+                        <span><strong className="font-bold">DEMO:</strong> estás viendo datos de ejemplo. No es tu curso real y no se guarda nada en disco — cambia a REALES para trabajar con tus propios archivos.</span>
+                      </>
+                    ) : (
+                      <>
+                        <HardDrive className="w-4 h-4 shrink-0" />
+                        <span><strong className="font-bold">REAL:</strong> estás trabajando con tus propios archivos .fpg/.fpp/.fpc, guardados en tu equipo. Los cambios se guardan de verdad.</span>
+                      </>
+                    )}
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
                   {/* ── Columna GRUPO ── */}
-                  <Card className={`p-6 border rounded-2xl shadow-lg flex flex-col relative overflow-hidden group ${isDemoLoaded ? 'bg-foreground/5 border-warning/20' : 'bg-foreground/5 border-[var(--glass-border)]'}`}>
+                  <Card className={`p-6 border rounded-2xl shadow-lg flex flex-col h-[452px] relative overflow-hidden group ${isDemoLoaded ? 'bg-foreground/5 border-warning/20' : 'bg-foreground/5 border-[var(--glass-border)]'}`}>
                     <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
                       <FolderOpen className={`w-24 h-24 ${isDemoLoaded ? 'text-warning' : 'text-accent'}`} />
                     </div>
@@ -565,7 +581,7 @@ export default function ArchivosTrabajoPage() {
                   </Card>
 
                   {/* ── Columna PROGRAMACIÓN ── */}
-                  <Card className={`p-6 border rounded-2xl shadow-lg flex flex-col relative overflow-hidden group ${isDemoLoaded ? 'bg-foreground/5 border-warning/20' : 'bg-foreground/5 border-info/20'}`}>
+                  <Card className={`p-6 border rounded-2xl shadow-lg flex flex-col h-[452px] relative overflow-hidden group ${isDemoLoaded ? 'bg-foreground/5 border-warning/20' : 'bg-foreground/5 border-info/20'}`}>
                     <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
                       <BookOpen className={`w-24 h-24 ${isDemoLoaded ? 'text-warning' : 'text-info'}`} />
                     </div>
@@ -665,7 +681,7 @@ export default function ArchivosTrabajoPage() {
                   </Card>
 
                   {/* ── Columna CURSO ── */}
-                  <Card className={`p-6 border rounded-2xl shadow-lg flex flex-col relative overflow-hidden group ${isDemoLoaded ? 'bg-foreground/5 border-warning/20' : 'bg-foreground/5 border-success/20'}`}>
+                  <Card className={`p-6 border rounded-2xl shadow-lg flex flex-col h-[452px] relative overflow-hidden group ${isDemoLoaded ? 'bg-foreground/5 border-warning/20' : 'bg-foreground/5 border-success/20'}`}>
                     <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
                       <Users className={`w-24 h-24 ${isDemoLoaded ? 'text-warning' : 'text-success'}`} />
                     </div>

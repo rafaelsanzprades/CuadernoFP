@@ -254,7 +254,7 @@ export const fileManager = {
                     Descripción: c.descripcion,
                     peso_ce: weight,
                     "Peso (%)": weight,
-                    FEOE: false,
+                    is_dual: false,
                     UD: "",
                   });
                 });
@@ -885,7 +885,7 @@ export const fileManager = {
                       id_ra: r.id, RA: r.id,
                       desc_ce: c.descripcion, Descripción: c.descripcion,
                       peso_ce: weight, "Peso (%)": weight,
-                      FEOE: false, UD: ""
+                      is_dual: false, UD: ""
                     });
                   });
                 }

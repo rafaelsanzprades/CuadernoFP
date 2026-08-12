@@ -80,6 +80,7 @@ export const CriterioEvaluacionSchema = z.object({
   id_ud: z.string().optional(),
   desc_ce: z.string().optional().nullable(),
   peso_ce: z.number().optional(),
+  is_dual: z.boolean().optional().nullable(),
 });
 export type CriterioEvaluacion = z.infer<typeof CriterioEvaluacionSchema>;
 

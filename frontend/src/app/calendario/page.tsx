@@ -485,7 +485,7 @@ export default function CalendarioPage() {
                     { label: "Fin de curso",       field: "fin_curso" },
                   ].map(({ label, field }) => (
                     <div key={field}>
-                      <label className="text-body text-muted mb-1 block">{label}</label>
+                      <label className="text-body font-semibold text-foreground mb-1 block">{label}</label>
                       <DatePicker
                         value={typeof info_fechas[field] === 'string' ? info_fechas[field] : ""}
                         onChange={v => handleUpdateFechas(field, v)}
@@ -509,7 +509,7 @@ export default function CalendarioPage() {
                 <div className="grid grid-cols-5 gap-4">
                   {["Lun", "Mar", "Mié", "Jue", "Vie"].map(day => (
                     <div key={day}>
-                      <label className="text-body text-muted mb-1 block text-center font-bold">{day}</label>
+                      <label className="text-body text-foreground mb-1 block text-center font-bold">{day}</label>
                       <input 
                         type="number" min="0" max="8"
                         value={Number(horario[day]) || 0}
@@ -653,7 +653,7 @@ export default function CalendarioPage() {
                     <div className="grid grid-cols-5 gap-4 items-end">
                       {/* Col 1: Selector de tipo */}
                       <div>
-                        <label className="text-body text-muted mb-2 block font-semibold">Tipo de dual</label>
+                        <label className="text-body font-semibold text-foreground mb-2 block">Tipo de dual</label>
                         <select
                           value={info_fechas.tipo_dual || "general"}
                           onChange={e => {
@@ -673,7 +673,7 @@ export default function CalendarioPage() {
                       </div>
                       {/* Col 1.5: Selector de docencia */}
                       <div>
-                        <label className="text-body text-muted mb-2 block font-semibold">Docencia</label>
+                        <label className="text-body font-semibold text-foreground mb-2 block">Docencia</label>
                         <select
                           value={info_fechas.docencia_dual || (info_fechas.tipo_dual === "intensiva" ? "con_docencia" : "sin_docencia")}
                           onChange={e => handleUpdateFechas("docencia_dual", e.target.value)}
@@ -685,7 +685,7 @@ export default function CalendarioPage() {
                       </div>
                       {/* Col 2: Inicio */}
                       <div>
-                        <label className="text-body text-muted mb-2 block font-semibold">Inicio FEOE</label>
+                        <label className="text-body font-semibold text-foreground mb-2 block">Inicio FEOE</label>
                         <DatePicker
                           value={typeof info_fechas.ini_feoe === 'string' ? info_fechas.ini_feoe : ""}
                           onChange={v => handleUpdateFechas("ini_feoe", v)}
@@ -693,7 +693,7 @@ export default function CalendarioPage() {
                       </div>
                       {/* Col 3: Fin */}
                       <div>
-                        <label className="text-body text-muted mb-2 block font-semibold">Fin FEOE</label>
+                        <label className="text-body font-semibold text-foreground mb-2 block">Fin FEOE</label>
                         <DatePicker
                           value={typeof info_fechas.fin_feoe === 'string' ? info_fechas.fin_feoe : ""}
                           onChange={v => handleUpdateFechas("fin_feoe", v)}
@@ -701,7 +701,7 @@ export default function CalendarioPage() {
                       </div>
                       {/* Col 4: Horas/día */}
                       <div>
-                        <label className="text-body text-muted mb-2 block font-semibold">Horas/día FEOE</label>
+                        <label className="text-body font-semibold text-foreground mb-2 block">Horas/día FEOE</label>
                         <input
                           type="number"
                           value={Number(info_fechas.h_sem_feoe) || 8}

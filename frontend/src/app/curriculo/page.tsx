@@ -146,6 +146,34 @@ export default function MatricesPage() {
   const df_sesiones = moduleData?.df_sesiones || [];
   const df_tareas = moduleData?.df_tareas || [];
 
+  /** Alterna el FEOE (is_dual) de un RA. Usado tanto desde la tabla de RA
+   * como desde la cabecera del acordeón de CE — mismo campo, dos sitios. */
+  const toggleRaDual = (raIdx: number) => {
+    const newRa = [...df_ra];
+    newRa[raIdx].is_dual = !newRa[raIdx].is_dual;
+    updateDataFrame("df_ra", newRa);
+  };
+
+  /** Alterna el FEOE (is_dual) de un CE. Si queda marcado, fuerza el FEOE
+   * del RA al que pertenece (un CE en FEOE implica que su RA está en FEOE) —
+   * pero desmarcar un CE nunca desmarca el RA, que puede seguir en FEOE por
+   * otros CE o de forma independiente. */
+  const toggleCeDual = (globalIdx: number, idRa: string) => {
+    const newCe = [...df_ce];
+    const nowDual = !newCe[globalIdx].is_dual;
+    newCe[globalIdx].is_dual = nowDual;
+    updateDataFrame("df_ce", newCe);
+
+    if (nowDual) {
+      const raIdx = df_ra.findIndex((r: any) => r.id_ra === idRa);
+      if (raIdx !== -1 && !df_ra[raIdx].is_dual) {
+        const newRa = [...df_ra];
+        newRa[raIdx].is_dual = true;
+        updateDataFrame("df_ra", newRa);
+      }
+    }
+  };
+
   const generateAutoSessions = () => {
     if (!window.confirm("¿Seguro que quieres autocompletar el plan de sesiones? Esto reemplazará las sesiones actuales de todas las UDs.")) return;
 
@@ -337,7 +365,7 @@ export default function MatricesPage() {
                         <tr className="text-muted border-b border-[var(--glass-border)]">
                           <th className="pb-2 w-24">RA</th>
                           <th className="pb-2 w-24">% RA</th>
-                          <th className="pb-2 w-16 text-center">Feoe</th>
+                          <th className="pb-2 w-16 text-center">FEOE</th>
                           <th className="pb-2">Resultados de aprendizaje</th>
                           <th className="pb-2 w-32">Comp. Clave</th>
                           <th className="pb-2 w-32">CPE</th>
@@ -372,11 +400,7 @@ export default function MatricesPage() {
                             </td>
                             <td className="py-2 text-center">
                               <button
-                                onClick={() => {
-                                  const newRa = [...df_ra];
-                                  newRa[idx].is_dual = !newRa[idx].is_dual;
-                                  updateDataFrame("df_ra", newRa);
-                                }}
+                                onClick={() => toggleRaDual(idx)}
                                 className={`w-6 h-6 rounded flex items-center justify-center transition-all mx-auto ${ra.is_dual
                                   ? 'bg-[#14a085]/20 text-[#14a085] border border-[#14a085]/50 shadow-[0_0_10px_rgba(20,160,133,0.2)]'
                                   : 'bg-background border border-[var(--glass-border)] text-transparent hover:border-[#14a085]/30 hover:bg-[#14a085]/10'
@@ -475,7 +499,7 @@ export default function MatricesPage() {
                   </div>
 
                   <div className="space-y-4">
-                    {df_ra.map((ra: any) => {
+                    {df_ra.map((ra: any, raIdx: number) => {
                       const ceForRa = df_ce.filter((ce: any) => ce.id_ra === ra.id_ra);
                       const totalPeso = ceForRa.reduce((sum: number, ce: any) => sum + (Number(ce.peso_ce) || 0), 0);
 
@@ -495,6 +519,19 @@ export default function MatricesPage() {
                               <span className="text-body text-muted font-normal truncate max-w-xl">{resolveDescRa(activeModuleId, ra)}</span>
                             </div>
                             <div className="flex items-center gap-6 text-body">
+                              <button
+                                onClick={(e) => { e.stopPropagation(); toggleRaDual(raIdx); }}
+                                title="FEOE"
+                                className={`flex items-center gap-1.5 px-2 py-1 rounded text-caption font-semibold transition-all ${ra.is_dual
+                                  ? 'bg-[#14a085]/20 text-[#14a085] border border-[#14a085]/50 shadow-[0_0_10px_rgba(20,160,133,0.2)]'
+                                  : 'bg-background border border-[var(--glass-border)] text-muted hover:border-[#14a085]/30 hover:bg-[#14a085]/10'
+                                  }`}
+                              >
+                                <span className={`w-4 h-4 rounded flex items-center justify-center ${ra.is_dual ? 'text-[#14a085]' : 'text-transparent'}`}>
+                                  <Check className="w-[1em] h-[1em]" />
+                                </span>
+                                FEOE
+                              </button>
                               <span className="text-muted">{ceForRa.length} CE</span>
                               <span className={`px-2 py-1 rounded ${totalPeso === 100 ? 'bg-success/10 text-success' : 'bg-danger/10 text-danger'}`}>
                                 Σ {totalPeso.toFixed(0)}%
@@ -518,6 +555,7 @@ export default function MatricesPage() {
                                       <tr className="text-muted border-b border-[var(--glass-border)]">
                                         <th className="pb-2 w-24">CE</th>
                                         <th className="pb-2 w-24">% CE</th>
+                                        <th className="pb-2 w-16 text-center">FEOE</th>
                                         <th className="pb-2">Criterio de Evaluación</th>
                                         <th className="pb-2 w-10"></th>
                                       </tr>
@@ -574,6 +612,18 @@ export default function MatricesPage() {
                                                 className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-warning focus:outline-none"
                                               />
                                             </td>
+                                            <td className="py-2 text-center">
+                                              <button
+                                                onClick={() => toggleCeDual(globalIdx, ra.id_ra)}
+                                                title="FEOE"
+                                                className={`w-6 h-6 rounded flex items-center justify-center transition-all mx-auto ${ce.is_dual
+                                                  ? 'bg-[#14a085]/20 text-[#14a085] border border-[#14a085]/50 shadow-[0_0_10px_rgba(20,160,133,0.2)]'
+                                                  : 'bg-background border border-[var(--glass-border)] text-transparent hover:border-[#14a085]/30 hover:bg-[#14a085]/10'
+                                                  }`}
+                                              >
+                                                {ce.is_dual && <span className="text-caption font-medium"><span className="inline-flex"><Check className="w-[1.2em] h-[1.2em] mr-1" /></span></span>}
+                                              </button>
+                                            </td>
                                             <td className="py-2 pr-2">
                                               <input
                                                 type="text"
@@ -623,7 +673,8 @@ export default function MatricesPage() {
                                           id_ra: ra.id_ra,
                                           id_ce: `${ra.id_ra.replace('RA', 'CE')}.`,
                                           peso_ce: 0,
-                                          desc_ce: ""
+                                          desc_ce: "",
+                                          is_dual: false
                                         });
                                         const raCeIndexes = newCe.map((c: any, i: number) => c.id_ra === ra.id_ra ? i : -1).filter((i: number) => i !== -1);
                                         const count = raCeIndexes.length;

@@ -582,9 +582,9 @@ export default function InicioPage() {
             {/* Accesos rápidos: Agenda + páginas generales (sin título de bloque) */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
+                { href: "/inicio?tab=bienvenida", label: "Inicio", icon: Activity, description: "Panel principal, guía de inicio, FAQ y validación de datos." },
                 { href: "/agenda", label: "Agenda", icon: CalendarDays, description: "Vista del día, planificación y progreso." },
                 ...topLevelPages,
-                legalPage,
               ].map((item) => (
                 <Link key={item.href} href={item.href} className="block group">
                   <Card className="h-full p-5 flex flex-col gap-3 border border-[var(--glass-border)] bg-[var(--glass-bg)] hover:bg-accent/5 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/10 cursor-pointer">
@@ -615,9 +615,11 @@ export default function InicioPage() {
                       {group.title.replace(/\s*\[.*\]$/, '')}
                     </h2>
                     {group.sectionDescription && (
-                      <p className="text-muted text-body max-w-4xl pb-4 border-b border-[var(--glass-border)]">
-                        {group.sectionDescription}
-                      </p>
+                      <div className="pb-4 border-b border-[var(--glass-border)]">
+                        <p className="text-muted text-body">
+                          {group.sectionDescription}
+                        </p>
+                      </div>
                     )}
 
 
@@ -647,8 +649,27 @@ export default function InicioPage() {
               ))}
             </div>
 
+            {/* Legal: al final del todo, tras una línea de separación */}
+            <div className="pt-4 border-t border-[var(--glass-border)]">
+              <Link href={legalPage.href} className="block group max-w-xs">
+                <Card className="h-full p-5 flex flex-col gap-3 border border-[var(--glass-border)] bg-[var(--glass-bg)] hover:bg-accent/5 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/10 cursor-pointer">
+                  <div className="flex items-center gap-3">
+                    <div className="text-heading group-hover:scale-110 transition-transform duration-300">
+                      <legalPage.icon className="w-8 h-8" strokeWidth={1.5} />
+                    </div>
+                    <h3 className="font-bold text-body text-foreground group-hover:text-accent transition-colors leading-tight">
+                      {legalPage.label}
+                    </h3>
+                  </div>
+                  <p className="text-body text-muted mt-auto">
+                    {legalPage.description}
+                  </p>
+                </Card>
+              </Link>
+            </div>
+
           </div>
-        
+
               </div>
             )}
 

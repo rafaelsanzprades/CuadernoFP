@@ -90,7 +90,7 @@ def get_module_data(module_id: str, db: Session):
     # Merge Phase 2 Models
     models_map = [
         (LearningOutcomeItem, "df_ra", ["id_ra", "desc_ra", "peso_ra", "is_dual"]),
-        (EvaluationCriterionItem, "df_ce", ["id_ce", "id_ra", "id_ud", "desc_ce", "peso_ce"]),
+        (EvaluationCriterionItem, "df_ce", ["id_ce", "id_ra", "id_ud", "desc_ce", "peso_ce", "is_dual"]),
         (ActivityItem, "df_act", ["id_act", "desc_act", "tipo", "tri_act", "peso_act", "is_active"]),
         (InstrumentItem, "df_pr", ["item_id", "practica"]),
         (TaskItem, "df_tareas", ["item_id", "nombre_tarea", "reto", "ra_asociados", "instrumento"]),
@@ -365,8 +365,8 @@ def update_module_data(module_id: str, body: dict, db: Session):
     db.query(EvaluationCriterionItem).filter_by(module_document_id=pd_id).delete()
     if isinstance(df_ce, list):
         for row in df_ce:
-            d = {k: v for k, v in row.items() if k not in ["id_ce", "id_ra", "id_ud", "desc_ce", "peso_ce"]}
-            db.add(EvaluationCriterionItem(module_document_id=pd_id, id_ce=safe_str(row.get("id_ce")), id_ra=safe_str(row.get("id_ra")), id_ud=safe_str(row.get("id_ud")), desc_ce=safe_str(row.get("desc_ce")), peso_ce=row.get("peso_ce"), data=d))
+            d = {k: v for k, v in row.items() if k not in ["id_ce", "id_ra", "id_ud", "desc_ce", "peso_ce", "is_dual"]}
+            db.add(EvaluationCriterionItem(module_document_id=pd_id, id_ce=safe_str(row.get("id_ce")), id_ra=safe_str(row.get("id_ra")), id_ud=safe_str(row.get("id_ud")), desc_ce=safe_str(row.get("desc_ce")), peso_ce=row.get("peso_ce"), is_dual=bool(row.get("is_dual", False)), data=d))
 
     db.query(ActivityItem).filter_by(module_document_id=pd_id).delete()
     if isinstance(df_act, list):

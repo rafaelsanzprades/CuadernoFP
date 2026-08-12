@@ -228,6 +228,7 @@ class EvaluationCriterionItem(Base):
     id_ud = Column(String)
     desc_ce = Column(String)
     peso_ce = Column(Integer, nullable=True)
+    is_dual = Column(Boolean, default=False)
     data = Column(JSON, default={})
 
 class ActivityItem(Base):

@@ -55,6 +55,7 @@ class CriterioEvaluacion(BaseModel):
     id_ud: Optional[str] = None
     desc_ce: Optional[str] = None
     peso_ce: int | None = None
+    is_dual: Optional[bool] = None
 
 class SeguimientoUD(BaseModel):
     id_ud: Optional[str] = None

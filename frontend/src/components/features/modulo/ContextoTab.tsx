@@ -84,7 +84,7 @@ export function ContextoTab() {
             </div>
           </div>
           <div>
-            <label className="text-body text-muted mb-1 block">Entorno geográfico y sociocultural</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">Entorno geográfico y sociocultural</label>
             <textarea
               value={config_contexto.entorno_geografico || ""}
               onChange={e => handleContextoChange("entorno_geografico", e.target.value)}
@@ -93,7 +93,7 @@ export function ContextoTab() {
             />
           </div>
           <div>
-            <label className="text-body text-muted mb-1 block">Entorno socioeconómico y productivo</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">Entorno socioeconómico y productivo</label>
             <textarea
               value={config_contexto.entorno_socioeconomico || ""}
               onChange={e => handleContextoChange("entorno_socioeconomico", e.target.value)}
@@ -102,7 +102,7 @@ export function ContextoTab() {
             />
           </div>
           <div>
-            <label className="text-body text-muted mb-1 block">Contexto escolar</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">Contexto escolar</label>
             <textarea
               value={config_contexto.contexto_escolar || ""}
               onChange={e => handleContextoChange("contexto_escolar", e.target.value)}
@@ -111,7 +111,7 @@ export function ContextoTab() {
             />
           </div>
           <div>
-            <label className="text-body text-muted mb-1 block">Características del alumnado</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">Características del alumnado</label>
             <textarea
               value={config_contexto.caracteristicas_alumnado || ""}
               onChange={e => handleContextoChange("caracteristicas_alumnado", e.target.value)}
@@ -120,7 +120,7 @@ export function ContextoTab() {
             />
           </div>
           <div>
-            <label className="text-body text-muted mb-1 block">Infraestructura y recursos educativos</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">Infraestructura y recursos educativos</label>
             <textarea
               value={config_contexto.infraestructura || ""}
               onChange={e => handleContextoChange("infraestructura", e.target.value)}
@@ -137,7 +137,7 @@ export function ContextoTab() {
         </h2>
         <div className="space-y-4">
           <div>
-            <label className="text-body text-muted mb-1 block">Datos de contextualización del grupo</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">Datos de contextualización del grupo</label>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
               <div>
                 <label className="text-caption text-muted mb-1 block">Ratio — Hombres</label>
@@ -187,7 +187,7 @@ export function ContextoTab() {
             </div>
           </div>
           <div>
-            <label className="text-body text-muted mb-1 block">Elenco de situaciones</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">Elenco de situaciones</label>
             <textarea
               value={config_contexto.elenco_situaciones || ""}
               onChange={e => handleContextoChange("elenco_situaciones", e.target.value)}
@@ -195,7 +195,7 @@ export function ContextoTab() {
             />
           </div>
           <div>
-            <label className="text-body text-muted mb-1 block">Circunstancias ocultas</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">Circunstancias ocultas</label>
             <textarea
               value={config_contexto.circunstancias_ocultas || ""}
               onChange={e => handleContextoChange("circunstancias_ocultas", e.target.value)}
@@ -215,7 +215,7 @@ export function ContextoTab() {
         </p>
         <div className="space-y-4">
           <div>
-            <label className="text-body text-muted mb-1 block">Introducción</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">Introducción</label>
             <textarea
               value={config_contexto.texto_introduccion || ""}
               onChange={e => handleContextoChange("texto_introduccion", e.target.value)}
@@ -224,7 +224,7 @@ export function ContextoTab() {
             />
           </div>
           <div>
-            <label className="text-body text-muted mb-1 block">Unidades didácticas del módulo</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">Unidades didácticas del módulo</label>
             <textarea
               value={config_contexto.texto_uds_modulo || ""}
               onChange={e => handleContextoChange("texto_uds_modulo", e.target.value)}
