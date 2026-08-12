@@ -29,9 +29,9 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "criterios", label: "Evaluación y calificación" },
   ],
   "/curriculo": [
+    { id: "contribucion-ra-og", label: "Contribución RA en OG" },
     { id: "ponderacion-ra-ce", label: "Ponderación RA y CE" },
     { id: "unidades", label: "Unidades didácticas" },
-    { id: "contribucion-ra-og", label: "Contribución RA en OG" },
     { id: "competenciales", label: "Tareas competenciales" },
   ],
   "/metodologia": [
@@ -294,7 +294,7 @@ export default function AyudaPage() {
                         {[
                           { href: "/inicio", label: "Inicio", tabs: PAGE_TABS["/inicio"] },
                           { href: "/agenda", label: "Agenda", tabs: PAGE_TABS["/agenda"] },
-                          { href: "/equivalencias", label: "Equivalencias", tabs: PAGE_TABS["/equivalencias"] },
+                          { href: "/equivalencias", label: "Equivalencia", tabs: PAGE_TABS["/equivalencias"] },
                           { href: "/ayuda", label: "Ayuda", tabs: PAGE_TABS["/ayuda"] },
                           { href: "/legal", label: "Legal", tabs: PAGE_TABS["/legal"] },
                         ].map(page => (

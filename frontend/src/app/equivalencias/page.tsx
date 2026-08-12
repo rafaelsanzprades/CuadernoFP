@@ -24,7 +24,7 @@ const TABS = [
 const TAB_DESCRIPTIONS: Record<string, string> = {
   "comparativa": "Comparativa de los distintos niveles de programación y dónde se rellena cada apartado.",
   "pd-": "Del resumen de 1-2 folios para el alumnado (PD-) a dónde se rellena cada bloque en la app.",
-  "pd=": "Del modelo oficial BOA Aragón, 17 apartados A-Q (PD=), a dónde se rellena cada uno en la app.",
+  "pd=": "Del modelo oficial simplificado, 17 apartados A-Q (PD=), a dónde se rellena cada uno en la app.",
   "pd+": "De la programación detallada tipo JEG (PD+), capítulo a capítulo, a dónde se rellena en la app.",
   "datos": "Guía de inicio y prompt para IA: qué datos pedir al docente y dónde colocarlos en la app.",
 };
@@ -82,7 +82,7 @@ export default function CorrelacionPage() {
 
             <PageHeader
               icon={GitCompare}
-              title="Equivalencias"
+              title="Equivalencia"
               description="Qué campo de la app corresponde a qué apartado de cada modelo de Programación Didáctica (PD-, PD=, PD+), y qué datos pedir al empezar."
             />
 

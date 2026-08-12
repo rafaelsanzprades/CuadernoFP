@@ -165,7 +165,7 @@ export default function MagiaPage() {
       if (type === 'programacion_minima_tpl') {
         downloadName = `${timestampStr} PD ARAGÓN Resumen.${finalExt}`;
       } else if (type === 'programacion_suficiente_tpl') {
-        downloadName = `${timestampStr} PD ARAGÓN BOA.${finalExt}`;
+        downloadName = `${timestampStr} PD ARAGÓN Simplificada.${finalExt}`;
       } else if (type === 'programacion_jeg') {
         downloadName = `${timestampStr} PD ARAGÓN JEG.${finalExt}`;
       }
@@ -352,8 +352,8 @@ export default function MagiaPage() {
 
                                     <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                                       <div>
-                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD=. Programación didáctica BOA nº: 18 septiembre 2025</h3>
-                                        <p className="text-body text-muted mb-6">Versión BOA con los puntos de la Ley muy específica y concreta (no detalla secuenciación de aula ni extensa teoría).</p>
+                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD=. Programación didáctica Simplificada</h3>
+                                        <p className="text-body text-muted mb-6">Versión simplificada con los puntos de la Ley muy específica y concreta (no detalla secuenciación de aula ni extensa teoría).</p>
                                       </div>
                                       <div className="mt-auto">
                                         <Button onClick={() => handleDownloadPdf('programacion_suficiente_tpl', 'docx')} disabled={downloadingStr === 'programacion_suficiente_tpl_docx'} className="w-full">

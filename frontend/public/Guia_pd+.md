@@ -1,4 +1,4 @@
-# PD+ ← APP: de la programación detallada (JEG) a dónde se rellena
+# PD+ (Detallada JEG) ← APP: de la programación detallada a dónde se rellena
 
 A continuación, se detalla el índice oficial de la Programación Didáctica según el modelo detallado (JEG, >60 páginas) y se indica **exactamente dónde se debe introducir** esa información en CuadernoFP. El motor generador de documentos recopilará automáticamente todos estos datos para confeccionar el archivo DOCX final.
 

@@ -97,7 +97,7 @@ export function ProcedimientosTab() {
         />
 
         <div className="glass-card p-6 border-t-4 border-t-teal-500">
-          <h2 className="text-subheading font-bold text-foreground mb-1">Criterios de calificación (texto específico modelo BOA Aragón, pd=)</h2>
+          <h2 className="text-subheading font-bold text-foreground mb-1">Criterios de calificación (texto específico modelo Simplificado, pd=)</h2>
           <p className="text-caption text-muted mb-3">Si se deja vacío, se genera automáticamente. Criterios de calificación y redondeo del módulo.</p>
           <textarea
             value={config_contexto.texto_criterios_calificacion || ""}

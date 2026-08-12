@@ -34,7 +34,7 @@ export default function MatricesPage() {
   const [allCeOpen, setAllCeOpen] = useState(false);
   const [allUdsOpen, setAllUdsOpen] = useState(false);
   const [openCEs, setOpenCEs] = useState<Set<string>>(new Set());
-  const [activeTab, setActiveTab] = useState("ponderacion-ra-ce");
+  const [activeTab, setActiveTab] = useState("contribucion-ra-og");
   const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
   const [catalogLoaded, setCatalogLoaded] = useState(0);
 
@@ -49,16 +49,16 @@ export default function MatricesPage() {
   }, []);
 
   const TABS = [
+    { id: "contribucion-ra-og", label: "Contribución RA en OG", cleanLabel: "Contribución RA en OG", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "ponderacion-ra-ce", label: "Ponderación RA y CE", cleanLabel: "Ponderación RA y CE", icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "unidades", label: "Unidades didácticas", cleanLabel: "Unidades didácticas", icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "contribucion-ra-og", label: "Contribución RA en OG", cleanLabel: "Contribución RA en OG", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "competenciales", label: "Tareas competenciales", cleanLabel: "Tareas competenciales", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
+    'contribucion-ra-og': 'Contribución de los RA a los objetivos generales del título.',
     'ponderacion-ra-ce': 'Matriz de resultados de aprendizaje y criterios de evaluación, y su ponderación.',
     'unidades': 'Definición de unidades didácticas o unidades de trabajo.',
-    'contribucion-ra-og': 'Contribución de los RA a los objetivos generales del título.',
     'competenciales': 'Diseño y planificación de tareas y actividades competenciales.',
   };
 

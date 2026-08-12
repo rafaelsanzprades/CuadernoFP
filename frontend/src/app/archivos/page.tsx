@@ -408,7 +408,7 @@ export default function ArchivosTrabajoPage() {
 
             <PageHeader
               icon={FolderOpen}
-              title="Archivos"
+              title="Archivo"
               description={t('pages.archivos_desc')}
             />
 

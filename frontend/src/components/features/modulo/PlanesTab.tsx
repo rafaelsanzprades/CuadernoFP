@@ -86,7 +86,7 @@ export function PlanesTab() {
           />
 
           <div>
-            <label className="text-body text-muted mb-1 block">FEOE (texto específico modelo BOA Aragón, pd=)</label>
+            <label className="text-body text-muted mb-1 block">FEOE (texto específico modelo Simplificado, pd=)</label>
             <p className="text-caption text-muted mb-2">Si se deja vacío, se genera automáticamente a partir de los RA marcados como dualizables (is_dual).</p>
             <textarea
               value={config_contexto.texto_feoe || ""}

@@ -3,9 +3,9 @@
 > **Propósito:** Este documento muestra **exactamente dónde aparece** cada campo de la aplicación CuadernoFP en los 3 niveles de Programación Didáctica.
 >
 > **Modelos de referencia:**
-> - **PD- (Mínima):** 1-2 folios visuales → Portada + Resumen RA/CE + Tabla UD
-> - **PD= (BOA/Aragón):** ~10-15 páginas → 17 apartados oficiales A-Q (Orden de Aragón)
-> - **PD+ (Detallada):** >60 páginas → 15 secciones §1–§15 (programación completa tipo TFM/Oposiciones)
+> - **PD- (Resumen):** 1-2 folios visuales → Portada + Resumen RA/CE + Tabla UD
+> - **PD= (Simplificada):** ~10-15 páginas → 17 apartados oficiales A-Q
+> - **PD+ (Detallada JEG):** >60 páginas → 15 secciones §1–§15 (programación completa tipo TFM/Oposiciones)
 >
 > **Fuentes:**
 > - PD=: `43-PD-BOA-10p.md`, `44-PD-Aragon-16p.md` (17 apartados A-Q)
@@ -19,7 +19,7 @@
 
 ### Pestaña: Identificación
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 1 | Nombre del Centro | §Portada | Encabezado del documento | §2.1 · Centro educativo |
 | 2 | Código del Centro | §Portada | — | §2.1 · Centro educativo |
@@ -39,7 +39,7 @@
 
 ### Pestaña: Contextualización
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 16 | Descripción del entorno geográfico y sociocultural | — | — | §2.1 · Centro educativo — Entorno socioeconómico |
 | 17 | Contexto socioeconómico y productivo del entorno | — | — | §2.1 · Centro educativo — Entorno socioeconómico |
@@ -53,7 +53,7 @@ Ver bloque «Curso: Calendario — Pestaña: Periodo FEOE» más abajo para los 
 
 ### Pestaña: Evaluación y calificación
 
-Procedimiento de evaluación y calificación, información al alumnado, pérdida de evaluación continua y recuperación — ver también «Programación: Metodología — Pestaña: Metodología e inclusión» para atención a la diversidad, con la que comparte apartado BOA/PD+ en algunos campos (§J / §2.2).
+Procedimiento de evaluación y calificación, información al alumnado, pérdida de evaluación continua y recuperación — ver también «Programación: Metodología — Pestaña: Metodología e inclusión» para atención a la diversidad, con la que comparte apartado PD=/PD+ en algunos campos (§J / §2.2).
 
 ---
 
@@ -63,7 +63,7 @@ Procedimiento de evaluación y calificación, información al alumnado, pérdida
 
 ### Pestaña: Metodología e inclusión
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 19 | Características del alumnado (ACNEAE) | — | §J · Atención a las diferencias individuales | §2.2 · Alumnado — ACNEAE |
 | 22 | Metodologías Activas (Multiselect: ABP, ABR, FLIP, COLAB, SIM, CASOS, GAMIF, ApS, DEMO, MAGIS) | — | §C · Principios metodológicos | §6.2 · Metodologías activas |
@@ -71,7 +71,7 @@ Procedimiento de evaluación y calificación, información al alumnado, pérdida
 
 ### Pestaña: Recursos
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 25 | Materiales y recursos didácticos (texto) | — | §M · Materiales y recursos didácticos | §10 · Materiales y recursos didácticos |
 | 26 | Recursos Multiselect (AULA, TALLER, INFO, SOFT, EVA, BIBLIO, EPI) | — | §M · Materiales y recursos didácticos | §10 · Materiales y recursos didácticos |
@@ -89,7 +89,7 @@ Planes de adaptación ante situaciones excepcionales (sin correspondencia direct
 
 ### Pestaña: Transversales, competencias y actividades
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 27 | Elementos transversales (Multiselect: ODS, IGUALDAD, PRL, TIC, EMP) | — | §C · Principios metodológicos — §F · Actividades de recuperación y refuerzo | §4.2 · Formación transversal — §6.3 · ABP y TIC |
 | 28 | Actividades complementarias y extraescolares (texto) | — | §N · Actividades complementarias y extraescolares | §14 · Actividades complementarias y extraescolares |
@@ -98,9 +98,16 @@ Planes de adaptación ante situaciones excepcionales (sin correspondencia direct
 
 ## 📋 Programación: Currículo
 
+> Orden de pestañas alineado con el PD+ (2026-08-11): Objetivos Generales (§2.4) va antes que RA/CE
+> (§2.5) en el documento oficial, así que "Contribución RA en OG" pasó a ser la primera pestaña.
+
+### Pestaña: Contribución RA en OG
+
+Matriz de contribución de cada RA a los Objetivos Generales (OG) del título — no tiene apartado propio en PD-/PD=/PD+, se usa como herramienta interna de coherencia curricular.
+
 ### Pestaña: Ponderación RA y CE
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 29 | RA. Resultados de aprendizaje (listado oficial) | §Resumen — Tabla RA | §I · Resultados de aprendizaje | §3.4 · Resultados de aprendizaje |
 | 30 | Ponderación % de cada RA (suma = 100%) | §Resumen — Tabla RA | §I · Resultados de aprendizaje | §3.4 · Resultados de aprendizaje |
@@ -112,7 +119,7 @@ Planes de adaptación ante situaciones excepcionales (sin correspondencia direct
 
 Incluye la antigua pestaña "Secuenciación → Sesiones": la tabla de sesiones por UD vive dentro de cada unidad didáctica, no en una página aparte.
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 34 | Lista de Unidades Didácticas (nombre) | §Tabla UD | §B · Contenidos — §I · Resultados de aprendizaje | §5.1–§5.13 · UD (una por UD) |
 | 35 | Duración estimada de cada UD (horas) | §Tabla UD | §B · Contenidos — §I · Resultados de aprendizaje | §4.3 · Temporalización — §5.x · cada UD |
@@ -123,13 +130,9 @@ Incluye la antigua pestaña "Secuenciación → Sesiones": la tabla de sesiones 
 | 49 | Botón "+" para añadir sesiones | — | §B · Contenidos — §I · Resultados de aprendizaje | §4.3 · Temporalización — §5.x · cada UD |
 | 50 | Contenidos y Recursos de cada sesión (texto) | — | §B · Contenidos — §M · Materiales y recursos didácticos | §4.1 · Contenidos del módulo — §5.x · cada UD |
 
-### Pestaña: Contribución RA en OG
-
-Matriz de contribución de cada RA a los Objetivos Generales (OG) del título — no tiene apartado propio en PD-/PD=/PD+, se usa como herramienta interna de coherencia curricular.
-
 ### Pestaña: Tareas competenciales
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 51 | Botón "Añadir Tarea Competencial" | — | — | §4.3 · Temporalización — §5.x · cada UD |
 | 52 | Diseño de tareas integradoras (reto/proyecto) | — | — | §6.3 · ABP y actividades TIC |
@@ -148,17 +151,17 @@ Seguimiento trimestral del peso real de cada instrumento de evaluación (Resumen
 
 ### Pestaña: Programación
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
-| 53 | Botón PD Mínima (1-2 folios, RA+UD+Criterios) | *Genera este documento* | — | — |
-| 54 | Botón PD Suficiente/BOA/Aragón (~10-15p, 17 apartados A-Q) | — | *Genera este documento* | — |
-| 55 | Botón PD Detallada (>60p, narrativa completa) | — | — | *Genera este documento* |
+| 53 | Botón PD- Resumen (1-2 folios, RA+UD+Criterios) | *Genera este documento* | — | — |
+| 54 | Botón PD= Simplificada (~10-15p, 17 apartados A-Q) | — | *Genera este documento* | — |
+| 55 | Botón PD+ Detallada JEG (>60p, narrativa completa) | — | — | *Genera este documento* |
 | 56 | PDF Matrices (cuadro resumen RA × UD) | §Tabla UD | §D · Criterios de evaluación — §I · Resultados de aprendizaje | §4.3 · Temporalización — §5.x · cada UD |
 | 57 | PDF Planificación (cronograma horas/mes) | — | §B · Contenidos — §I · Resultados de aprendizaje | §4.3 · Temporalización |
 
 ### Pestaña: Curso
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 78 | PDF Calendario | — | — | §4.3 · Temporalización |
 | 79 | PDF Alumnado Ubicación (plano de clase) | — | — | §2.1 · Centro educativo — Infraestructura |
@@ -176,7 +179,7 @@ Seguimiento trimestral del peso real de cada instrumento de evaluación (Resumen
 
 Incluye la antigua pestaña "Visual" (calendario interactivo, clic para marcar festivos), que ahora vive dentro de Eventos y festivos.
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 58 | Inicio de curso | §Encabezado (fechas) | §E · Criterios de calificación | §4.3 · Temporalización |
 | 59 | Inicio clases (1T) | §Encabezado (fechas) | §E · Criterios de calificación | §4.3 · Temporalización |
@@ -187,13 +190,13 @@ Incluye la antigua pestaña "Visual" (calendario interactivo, clic para marcar f
 
 ### Pestaña: Periodo FEOE
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 64 | FP Dual / FEOE (Tipo, Docencia, Inicio, Fin, Horas/día) | §Encabezado (fechas) | §A · RA susceptibles de ser adquiridos en FEOE | §4.3 · Temporalización |
 
 ### Pestaña: Eventos y festivos
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 65 | Festivos y eventos (Fecha Inicio, Hasta, Tipo, Descripción) | — | §E · Criterios de calificación | §4.3 · Temporalización |
 | 66 | Calendario interactivo (clic para marcar festivos) | — | §E · Criterios de calificación | §4.3 · Temporalización |
@@ -208,7 +211,7 @@ Actividades complementarias y extraescolares del curso real — ver también «P
 
 ### Pestaña: Matrícula
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 67 | Importar CSV (Excel con lista de clase) | — | — | §2.2 · Alumnado — ACNEAE |
 | 68 | Añadir Alumnado manualmente | — | — | §2.2 · Alumnado — ACNEAE |
@@ -216,7 +219,7 @@ Actividades complementarias y extraescolares del curso real — ver también «P
 
 ### Pestaña: Plano de clase
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 70 | Plano de clase (arrastrar alumnado a mesas) | — | — | §2.1 · Centro educativo — Infraestructura |
 
@@ -224,7 +227,7 @@ Actividades complementarias y extraescolares del curso real — ver también «P
 
 Incluye la antigua pestaña "Seguimiento → Abandono": el panel de prevención de abandono vive aquí, junto con el resto de tutoría.
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 75 | Panel de prevención de abandono (acciones: llamada familias, orientación) | — | — | §2.2 · Alumnado — ACNEAE — §11 · Seguimiento |
 
@@ -240,20 +243,20 @@ Rasgos y características generales del grupo (sin campo específico todavía en
 
 ### Pestaña: Clases
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 72 | Checkbox Sin Docencia o Público | — | — | §11 · Mecanismos de seguimiento y valoración |
 | 73 | Área de texto de seguimiento (resumen diario) | — | — | §11 · Mecanismos de seguimiento y valoración |
 
 ### Pestaña: Asistencia
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 74 | Tabla de asistencia (Falta, Retraso, Justificado) | — | — | §11 · Mecanismos de seguimiento y valoración |
 
 ### Pestaña: Progreso de RA y UD
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 77 | % de RA al vuelo (cálculo automático) | — | — | §7.1 · Criterios de evaluación — §3.4 · RA |
 
@@ -261,7 +264,7 @@ Rasgos y características generales del grupo (sin campo específico todavía en
 
 Entrada de calificaciones numéricas por alumnado y tarea — es el único punto de entrada de notas de la app (la antigua "Matriz (Excel)" de Calificaciones se eliminó, esta pestaña la sustituye).
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 76 | Tabla de calificaciones (alumnado × tarea) | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
 
@@ -273,7 +276,7 @@ Entrada de calificaciones numéricas por alumnado y tarea — es el único punto
 
 ### Pestañas: Resumen, Estadísticas, Grupal, Individual
 
-| # | Campo | PD- (Mínima) | PD= (BOA/Aragón) | PD+ (Detallada) |
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 82 | Boletín trimestral (1T, 2T, 3T, Final) | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
 | 83 | Excel/CSV de calificaciones | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
@@ -285,17 +288,17 @@ Entrada de calificaciones numéricas por alumnado y tarea — es el único punto
 
 | Nivel | Páginas aprox. | Campos incluidos | Uso principal |
 |-------|---------------|------------------|---------------|
-| **PD- (Mínima)** | 1-2 | 38 (Datos + RA/CE + UD) | Entregar a alumnado el primer día |
-| **PD= (BOA/Aragón)** | 10-15 | 72 (17 apartados normativos A-Q) | Jefatura de estudios, inspección |
-| **PD+ (Detallada)** | >60 | 84 (todo + narrativa expandida) | Oposiciones, TFM, memoria completa |
+| **PD- (Resumen)** | 1-2 | 38 (Datos + RA/CE + UD) | Entregar a alumnado el primer día |
+| **PD= (Simplificada)** | 10-15 | 72 (17 apartados normativos A-Q) | Jefatura de estudios, inspección |
+| **PD+ (Detallada JEG)** | >60 | 84 (todo + narrativa expandida) | Oposiciones, TFM, memoria completa |
 
 ---
 
 ## 📝 Notas
 
 1. **PD-** es un resumen visual de 1-2 folios. Incluye: portada con datos de identificación, tabla de RA/CE con ponderaciones, tabla de UD con duración y contribución. No tiene estructura formal de apartados.
-2. **PD=** sigue la estructura normativa estricta del BOA/Aragón (17 apartados A-Q).
+2. **PD=** sigue la estructura normativa estricta de la Ordenación de FP (17 apartados A-Q).
 3. **PD+** es la versión completa y detallada con 15 secciones §1–§15. Los campos del bloque "Curso" (Calendario, Alumnado, Seguimiento, Calificaciones) solo aparecen en PD+ porque representan la gestión real del curso, no el documento teórico de programación.
 4. Los campos codificados (Multiselect) se generan automáticamente: en PD= aparecen como texto condensado, en PD+ como texto expandido con justificación.
-5. Los **apartados BOA** (A-Q) y **Detallados** (§1–§15) corresponden a la estructura oficial de cada modelo. CuadernoFP mapea automáticamente los campos de la app a estos apartados al generar los documentos.
+5. Los **apartados PD=** (A-Q) y **PD+** (§1–§15) corresponden a la estructura oficial de cada modelo. CuadernoFP mapea automáticamente los campos de la app a estos apartados al generar los documentos.
 6. **Páginas fusionadas desde la última reorganización de navegación:** "Evaluación" y "Secuenciación" (Programación) se repartieron entre Metodología → Recursos y Currículo → Unidades didácticas/Tareas competenciales; "Diario" e "Informes" (Curso) se fusionaron en Seguimiento y en MagIA → Curso respectivamente; "Matriz (Excel)" (Calificaciones) se eliminó y su función de entrada de notas la asume Seguimiento → Detalle por alumnado.

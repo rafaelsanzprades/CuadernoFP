@@ -120,9 +120,9 @@ Una vez configurada la programación base, genera los PDFs oficiales.
     - **Pestaña:** Programación
       - **Acordeón por Comunidad Autónoma:** Aragón viene abierta por defecto; el resto muestra "próximamente".
       - **Botones PD ARAGÓN:** Dispones de tres niveles, siempre en `.docx` editable:
-        1. **PD ARAGÓN Resumen (PD-):** Resumen de 1-2 folios para el alumnado.
-        2. **PD ARAGÓN BOA (PD=):** Formato oficial intermedio (~10-15 páginas).
-        3. **PD ARAGÓN JEG (PD+):** Formato extendido (>60 páginas) con toda la carga narrativa.
+        1. **PD- (Resumen):** Resumen de 1-2 folios para el alumnado.
+        2. **PD= (Simplificada):** Formato oficial intermedio (~10-15 páginas).
+        3. **PD+ (Detallada JEG):** Formato extendido (>60 páginas) con toda la carga narrativa.
       - **Bloque "Documentos de apoyo al currículo":** Matriz RA ↔ UD, en PDF ("Vista previa") o DOCX ("Descarga editable").
       - **Bloque "Unidades didácticas y tareas competenciales":** selector para descargar el `.docx` de una UD o una tarea concreta.
 
@@ -224,9 +224,9 @@ Exporta informes, actas, y seguimiento.
 
 ### ¿Qué diferencia hay entre los 3 niveles de Programación Didáctica (PD-, PD=, PD+)?
 CuadernoFP genera el mismo contenido base en 3 niveles de detalle:
-- **PD Mínima (PD-):** Resumen de 1-2 hojas para entregar al alumnado.
-- **PD Suficiente (PD=):** Sigue la estructura normativa oficial (BOA Aragón, apartados A-Q), con unos 15 folios, ideal para jefatura.
-- **PD Detallada (PD+):** Programación completa (TFM/Oposiciones) de más de 60 páginas con metodologías expandidas.
+- **PD- (Resumen):** Resumen de 1-2 hojas para entregar al alumnado.
+- **PD= (Simplificada):** Sigue la estructura normativa oficial (17 apartados A-Q), con unos 15 folios, ideal para jefatura.
+- **PD+ (Detallada JEG):** Programación completa (TFM/Oposiciones) de más de 60 páginas con metodologías expandidas.
 
 Consulta `Equivalencias` (acceso directo junto a Agenda) para ver el mapa completo campo a campo entre la app y cada uno de los tres niveles.
 

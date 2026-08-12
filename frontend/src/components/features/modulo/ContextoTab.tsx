@@ -207,10 +207,10 @@ export function ContextoTab() {
 
       <div className="glass-card p-6 border-t-4 border-t-teal-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Textos del modelo BOA Aragón (pd=)
+          <span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Textos del modelo Simplificado (pd=)
         </h2>
         <p className="text-caption text-muted mb-4">
-          Estos 2 campos son específicos del documento &quot;Programación suficiente&quot; (modelo oficial BOA Aragón).
+          Estos 2 campos son específicos del documento &quot;Programación suficiente&quot; (modelo oficial Simplificado).
           Si se dejan vacíos, se autogenera un texto por defecto razonable a partir del resto de datos del módulo.
         </p>
         <div className="space-y-4">

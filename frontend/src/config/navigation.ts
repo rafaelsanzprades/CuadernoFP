@@ -7,7 +7,7 @@ import { Calendar, Compass, FileText, FolderOpen, GraduationCap, Grid, TrendingU
 export const inicioPage = { href: "/inicio?tab=bienvenida", label: "Inicio", icon: Activity, description: "Panel principal, guía de inicio, FAQ y validación de datos." };
 
 export const topLevelPages = [
-  { href: "/equivalencias?tab=pd-", label: "Equivalencias", icon: GitCompare, description: "Correspondencia entre APP y los apartados de PD-, PD= y PD+." },
+  { href: "/equivalencias?tab=pd-", label: "Equivalencia", icon: GitCompare, description: "Correspondencia entre APP y los apartados de PD-, PD= y PD+." },
   { href: "/ayuda?tab=faq", label: "Ayuda", icon: Info, description: "FAQ, acrónimos y mapa de la aplicación." },
 ];
 
@@ -18,7 +18,7 @@ export const navGroups = [
     title: "Grupo",
     sectionDescription: "Opciones generales de la aplicación y recursos oficiales.",
     items: [
-      { href: "/archivos?tab=datos", label: "Archivos", icon: FolderOpen, description: "Gestión de archivos de Programación y Curso." },
+      { href: "/archivos?tab=datos", label: "Archivo", icon: FolderOpen, description: "Gestión de archivos de Programación y Curso." },
       { href: "/catalogo?tab=familias", label: "Catálogo", icon: GraduationCap, description: "Familias, títulos, módulos y currículos (RA y CE)." },
       { href: "/normativa?tab=autonomias", label: "Normativa", icon: FileText, description: "Legislación, plantillas y normativas." },
       { href: "/magia?tab=comunidades", label: "MagIA", icon: Sparkles, description: "Generación del PDF y comparativas." }
@@ -29,9 +29,9 @@ export const navGroups = [
     sectionDescription: "Área de diseño y configuración didáctica. Configura el módulo, enlaza las matrices de evaluación, define los instrumentos y secuencia las tareas de aula.",
     items: [
       { href: "/contexto?tab=identificacion", label: "Contexto", icon: Compass, description: "Información general y características del entorno." },
-      { href: "/curriculo?tab=ponderacion-ra-ce", label: "Currículo", icon: Grid, description: "Cruce de resultados de aprendizaje y criterios." },
+      { href: "/curriculo?tab=contribucion-ra-og", label: "Currículo", icon: Grid, description: "Cruce de resultados de aprendizaje y criterios." },
       { href: "/metodologia?tab=metodologia", label: "Metodología", icon: Lightbulb, description: "Estrategias metodológicas y recursos." },
-      { href: "/instrumentos?tab=resumen", label: "Instrumentos", icon: Wrench, description: "Definición y pesos de las herramientas de evaluación." }
+      { href: "/instrumentos?tab=resumen", label: "Instrumento", icon: Wrench, description: "Definición y pesos de las herramientas de evaluación." }
     ]
   },
   {
@@ -41,7 +41,7 @@ export const navGroups = [
       { href: "/calendario?tab=fechas", label: "Calendario", icon: Calendar, description: "Horario, trimestres, festivos y eventos." },
       { href: "/alumnado?tab=matricula", label: "Alumnado", icon: Users, description: "Fichas personales y perfiles." },
       { href: "/seguimiento?tab=clases", label: "Seguimiento", icon: TrendingUp, description: "Diario de clases, faltas e incidencias." },
-      { href: "/calificaciones?tab=resumen", label: "Calificaciones", icon: Award, description: "Cuaderno de notas y rúbricas aplicadas." },
+      { href: "/calificaciones?tab=resumen", label: "Calificación", icon: Award, description: "Cuaderno de notas y rúbricas aplicadas." },
     ]
   }
 ];
