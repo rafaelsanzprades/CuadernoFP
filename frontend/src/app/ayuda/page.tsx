@@ -96,6 +96,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   ],
   "/magia": [
     { id: "comunidades", label: "Comunidades" },
+    { id: "datos", label: "APP / Datos" },
     { id: "programacion", label: "Programación" },
     { id: "curso", label: "Curso" },
   ],
@@ -104,7 +105,6 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "pd-", label: "PD- / APP" },
     { id: "pd=", label: "PD= / APP" },
     { id: "pd+", label: "PD+ / APP" },
-    { id: "datos", label: "APP / Datos" },
   ],
   "/ayuda": [
     { id: "faq", label: "FAQ" },

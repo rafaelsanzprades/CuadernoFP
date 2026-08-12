@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Download, FileEdit, FileSpreadsheet, FileText, FolderOpen, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp, Compass, Lightbulb, Wrench } from "lucide-react";
+import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Download, FileEdit, FileSpreadsheet, FileText, FolderOpen, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp, Compass, Lightbulb, Wrench, Bot } from "lucide-react";
 import * as XLSX from "xlsx";
 import React, { useState, useEffect, useMemo } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -53,10 +53,29 @@ function DualDownloadButtons({
   );
 }
 
+const guiaDatosMarkdownComponents = {
+  h1: ({ node, ...props }: any) => <h1 className="text-heading font-extrabold text-foreground mb-6 pb-2 border-b border-white/10" {...props} />,
+  h2: ({ node, ...props }: any) => <h2 className="text-subheading font-bold text-accent mt-8 mb-4 flex items-center gap-2" {...props} />,
+  h3: ({ node, ...props }: any) => <h3 className="text-subheading font-bold text-foreground mt-6 mb-3" {...props} />,
+  p: ({ node, ...props }: any) => <p className="text-muted leading-relaxed mb-4" {...props} />,
+  ul: ({ node, className, ...props }: any) => <ul className={`list-none space-y-3 mb-6 ml-4 ${className || ''}`} {...props} />,
+  ol: ({ node, className, ...props }: any) => <ol className={`list-decimal space-y-3 mb-6 ml-6 ${className || ''}`} {...props} />,
+  li: ({ node, ...props }: any) => <li className="text-body text-muted leading-relaxed" {...props} />,
+  strong: ({ node, ...props }: any) => <strong className="font-bold text-foreground" {...props} />,
+  a: ({ node, ...props }: any) => <a className="text-accent hover:underline font-semibold" target="_blank" rel="noopener noreferrer" {...props} />,
+  code: ({ node, ...props }: any) => <code className="bg-foreground/10 text-foreground px-1.5 py-0.5 rounded text-body font-mono" {...props} />,
+  pre: ({ node, ...props }: any) => <pre className="block bg-foreground/5 p-4 rounded-xl text-body font-mono overflow-x-auto mb-4 border border-white/5 text-muted" {...props} />,
+  hr: ({ node, ...props }: any) => <hr className="border-white/10 my-8" {...props} />,
+  table: ({ node, ...props }: any) => <div className="overflow-x-auto mb-6"><table className="w-full text-left border-collapse" {...props} /></div>,
+  th: ({ node, ...props }: any) => <th className="p-2 border border-[var(--glass-border)] bg-foreground/5 text-body font-bold text-foreground" {...props} />,
+  td: ({ node, ...props }: any) => <td className="p-2 border border-[var(--glass-border)] text-body text-muted" {...props} />,
+};
+
 export default function MagiaPage() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [previewFilename, setPreviewFilename] = useState<string | null>(null);
   const [downloadingStr, setDownloadingStr] = useState<string | null>(null);
+  const [guiaDatosContent, setGuiaDatosContent] = useState<string | null>(null);
 
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData } = useAppStore();
   // df_sgmt / planning_ledger guardados en cursoData no se sincronizan con el
@@ -114,6 +133,17 @@ export default function MagiaPage() {
       setFechaFinal(cursoData.info_fechas.fin_curso || "");
     }
   }, [cursoData?.info_fechas]);
+
+  useEffect(() => {
+    if (activeTab !== "datos" || guiaDatosContent !== null) return;
+    fetch("/Guia.md")
+      .then(res => res.text())
+      .then(text => setGuiaDatosContent(text))
+      .catch(err => {
+        console.error(err);
+        setGuiaDatosContent("Error cargando el contenido.");
+      });
+  }, [activeTab, guiaDatosContent]);
 
   const formatD = (dStr: string | undefined) => {
     if (!dStr) return "---";
@@ -228,12 +258,14 @@ export default function MagiaPage() {
 
   const TABS = [
     { id: "comunidades", label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4 shrink-0" /> Comunidades</span>, cleanLabel: "Comunidades" },
+    { id: "datos", label: <span className="flex items-center gap-2"><Bot className="w-4 h-4 shrink-0" /> APP / Datos</span>, cleanLabel: "APP / Datos" },
     { id: "programacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> Programación</span>, cleanLabel: "Programación" },
     { id: "curso", label: <span className="flex items-center gap-2"><Calendar className="w-4 h-4 shrink-0" /> Curso</span>, cleanLabel: "Curso" },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     comunidades: 'Generación de la programación didáctica oficial, por comunidad autónoma.',
+    datos: 'Guía de inicio y prompt para IA: qué datos pedir al docente y dónde colocarlos en la app.',
     programacion: 'Documentos de apoyo: matriz de currículo y documentos individuales de UD/Tareas.',
     curso: 'Calendario, seguimiento, plano de aula, boletines y actas de evaluación del curso.',
   };
@@ -416,6 +448,21 @@ export default function MagiaPage() {
                       </div>
                     )}
                   </div>
+                )}
+
+                {/* ══════════════════════════ APP / DATOS (guía de inicio) ══════════════════════════ */}
+                {activeTab === "datos" && (
+                  <Card glow className="p-8">
+                    {guiaDatosContent === null ? (
+                      <div className="flex justify-center p-8 text-muted">Cargando...</div>
+                    ) : (
+                      <div className="markdown-body">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={guiaDatosMarkdownComponents}>
+                          {guiaDatosContent}
+                        </ReactMarkdown>
+                      </div>
+                    )}
+                  </Card>
                 )}
 
                 {/* ══════════════════════════ PROGRAMACIÓN (documentos de apoyo) ══════════════════════════ */}

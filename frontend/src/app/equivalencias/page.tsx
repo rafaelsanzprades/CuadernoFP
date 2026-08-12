@@ -1,5 +1,5 @@
 "use client";
-import { GitCompare, FileText, FileCheck2, FileStack, Bot } from "lucide-react";
+import { GitCompare, FileText, FileCheck2, FileStack } from "lucide-react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -18,7 +18,6 @@ const TABS = [
   { id: "pd-", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD- / APP</>, cleanLabel: "PD- / APP", file: "/Guia_pd-.md" },
   { id: "pd=", label: <><span className="inline-flex"><FileCheck2 className="w-[1.2em] h-[1.2em] mr-1" /></span> PD= / APP</>, cleanLabel: "PD= / APP", file: "/Guia_pd%3D.md" },
   { id: "pd+", label: <><span className="inline-flex"><FileStack className="w-[1.2em] h-[1.2em] mr-1" /></span> PD+ / APP</>, cleanLabel: "PD+ / APP", file: "/Guia_pd%2B.md" },
-  { id: "datos", label: <><span className="inline-flex"><Bot className="w-[1.2em] h-[1.2em] mr-1" /></span> APP / Datos</>, cleanLabel: "APP / Datos", file: "/Guia.md" },
 ];
 
 const TAB_DESCRIPTIONS: Record<string, string> = {
@@ -26,7 +25,6 @@ const TAB_DESCRIPTIONS: Record<string, string> = {
   "pd-": "Del resumen de 1-2 folios para el alumnado (PD-) a dónde se rellena cada bloque en la app.",
   "pd=": "Del modelo oficial simplificado, 17 apartados A-Q (PD=), a dónde se rellena cada uno en la app.",
   "pd+": "De la programación detallada tipo JEG (PD+), capítulo a capítulo, a dónde se rellena en la app.",
-  "datos": "Guía de inicio y prompt para IA: qué datos pedir al docente y dónde colocarlos en la app.",
 };
 
 const markdownComponents = {
