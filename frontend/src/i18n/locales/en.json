@@ -369,15 +369,21 @@
     "seguimiento": "Tracking",
     "calificaciones": "Grades",
     "informes": "Reports",
-    "normativa": "Documents"
+    "normativa": "Documents",
+    "instrumentos": "Instrument",
+    "calidad": "Quality",
+    "mejora": "Improvement",
+    "equivalencias": "Equivalence"
   },
   "navGroups": {
     "general": "General",
+    "grupo": "Group",
     "programacion": "Programming",
     "curso": "Course"
   },
   "sidebar": {
     "en_obras": "Under Construction",
+    "fecha": "Date",
     "demo": "DEMO",
     "reales": "REAL",
     "abrir_grupo": "Open Group",
@@ -421,6 +427,12 @@
     "catalogo_title": "VET Catalog",
     "catalogo_desc": "Explorer of official Titles, Modules, RA and CE.",
     "legal_title": "Legal Notice",
-    "legal_desc": "Legal notice, privacy and licenses."
+    "legal_desc": "Legal notice, privacy, cookies, licenses and accessibility.",
+    "ayuda_desc": "Guides, FAQ, glossary and site map.",
+    "contexto_desc": "General information, environment characteristics, students and module.",
+    "equivalencias_desc": "Which app field corresponds to which section of each Programación Didáctica model (PD-, PD=, PD+), and what data to request at the start.",
+    "magia_desc": "Generation of the teaching plan and reports.",
+    "seguimiento_desc": "Class journal, attendance, RA progress and student grades.",
+    "metodologia_desc": "Methodological strategies, resources, spaces and attention to diversity."
   }
 }

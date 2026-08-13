@@ -317,8 +317,8 @@ export default function MagiaPage() {
 
                 <PageHeader
                   icon={Sparkles}
-                  title="MagIA"
-                  description="Generación de la programación didáctica y reportes."
+                  title={t('nav.magia', { defaultValue: 'MagIA' })}
+                  description={t('pages.magia_desc', { defaultValue: 'Generación de la programación didáctica y reportes.' })}
                 />
 
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">

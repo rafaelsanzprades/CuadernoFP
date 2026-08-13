@@ -82,8 +82,8 @@ export default function CorrelacionPage() {
 
             <PageHeader
               icon={GitCompare}
-              title="Equivalencia"
-              description="Qué campo de la app corresponde a qué apartado de cada modelo de Programación Didáctica (PD-, PD=, PD+), y qué datos pedir al empezar."
+              title={t('nav.equivalencias', { defaultValue: 'Equivalencia' })}
+              description={t('pages.equivalencias_desc', { defaultValue: 'Qué campo de la app corresponde a qué apartado de cada modelo de Programación Didáctica (PD-, PD=, PD+), y qué datos pedir al empezar.' })}
             />
 
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">

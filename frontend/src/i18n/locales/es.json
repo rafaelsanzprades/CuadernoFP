@@ -86,11 +86,13 @@
   },
   "navGroups": {
     "general": "General",
+    "grupo": "Grupo",
     "programacion": "Programación",
     "curso": "Curso"
   },
   "sidebar": {
     "en_obras": "En obras",
+    "fecha": "Fecha",
     "demo": "DEMO",
     "reales": "REALES",
     "abrir_grupo": "Abrir grupo",
@@ -133,8 +135,8 @@
     "documentos_desc": "Legislación, normativa y plantillas descargables.",
     "descargas_title": "Descargas",
     "descargas_desc": "Generación de actas, informes y boletines en PDF/Excel.",
-    "legal_title": "Aviso legal",
-    "legal_desc": "Privacidad, RGPD y condiciones de uso.",
+    "legal_title": "Legal",
+    "legal_desc": "Aviso legal, privacidad, cookies, licencias y accesibilidad.",
     "agenda": "Agenda",
     "alumnado": "Alumnado",
     "diario": "Diario",

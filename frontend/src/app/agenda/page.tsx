@@ -93,8 +93,8 @@ export default function AgendaPage() {
 
             <PageHeader
               icon={Calendar}
-              title="Agenda"
-              description="Resumen diario: estado de clase y UD a impartir."
+              title={t('nav.agenda', { defaultValue: 'Agenda' })}
+              description={t('pages.agenda_desc', { defaultValue: 'Resumen diario: estado de clase y UD a impartir.' })}
             />
 
             {/* Pestañas */}

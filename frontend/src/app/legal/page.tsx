@@ -97,8 +97,8 @@ export default function LegalPage() {
 
             <PageHeader
               icon={Scale}
-              title="Legal"
-              description="Aviso legal, privacidad, cookies, licencias y accesibilidad."
+              title={t('nav.legal', { defaultValue: 'Legal' })}
+              description={t('pages.legal_desc', { defaultValue: 'Aviso legal, privacidad, cookies, licencias y accesibilidad.' })}
             />
 
             {/* Pestañas */}

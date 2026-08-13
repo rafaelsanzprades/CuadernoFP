@@ -121,8 +121,8 @@ export default function ContextoConfigPage() {
           <MotionWrapper>
             <PageHeader
               icon={FileEdit}
-              title="Contexto"
-              description="Información general, características del entorno, alumnado y módulo."
+              title={t('nav.contexto', { defaultValue: 'Contexto' })}
+              description={t('pages.contexto_desc', { defaultValue: 'Información general, características del entorno, alumnado y módulo.' })}
             />
 
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">

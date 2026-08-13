@@ -197,8 +197,8 @@ export default function SeguimientoPage() {
           <MotionWrapper className="space-y-4">
             <PageHeader
               icon={MapPin}
-              title="Seguimiento"
-              description="Diario de clases, asistencia, progreso de RA y notas por alumnado."
+              title={t('nav.seguimiento', { defaultValue: 'Seguimiento' })}
+              description={t('pages.seguimiento_desc', { defaultValue: 'Diario de clases, asistencia, progreso de RA y notas por alumnado.' })}
             />
 
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">

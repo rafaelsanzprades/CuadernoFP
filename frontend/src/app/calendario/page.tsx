@@ -152,10 +152,10 @@ function NotesTable({ calendar_notes, onUpdateNotes, autoMilestones, feoeIni, fe
       <table className="w-full text-left text-body border-collapse">
         <thead>
           <tr className="border-b border-[var(--glass-border)] text-muted">
-            <th className="p-2">{t('festivo', {defaultValue: 'Festivo'})}</th>
-            <th className="p-2">{t('evento', {defaultValue: 'Relevante'})}</th>
             <th className="p-2 w-28">{t('table.fecha', {defaultValue: 'Fecha'})}</th>
             <th className="p-2 w-28">{t('table.hasta', {defaultValue: 'Hasta'})}</th>
+            <th className="p-2">{t('festivo', {defaultValue: 'Festivo'})}</th>
+            <th className="p-2">{t('evento', {defaultValue: 'Relevante'})}</th>
             <th className="p-2 w-10" />
           </tr>
         </thead>
@@ -177,6 +177,8 @@ function NotesTable({ calendar_notes, onUpdateNotes, autoMilestones, feoeIni, fe
                   </tr>
                 )}
                 <tr className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
+                  <td className="p-2 font-mono text-foreground/80">{fmt(r.start.date)}</td>
+                  <td className="p-2 font-mono text-foreground/60">{singleDay ? "" : fmt(r.end.date)}</td>
                   <td className="p-2 text-foreground/90">
                     {r.start.festivo && (
                       <span className="text-caption px-2 py-0.5 rounded-full font-semibold bg-danger/10 text-danger">
@@ -191,8 +193,6 @@ function NotesTable({ calendar_notes, onUpdateNotes, autoMilestones, feoeIni, fe
                       </span>
                     )}
                   </td>
-                  <td className="p-2 font-mono text-foreground/80">{fmt(r.start.date)}</td>
-                  <td className="p-2 font-mono text-foreground/60">{singleDay ? "" : fmt(r.end.date)}</td>
                   <td className="p-2 text-center">
                     {r.auto ? (
                       <span className="text-muted/50" title="Derivado de Fechas generales, no se borra aquí">
@@ -209,16 +209,16 @@ function NotesTable({ calendar_notes, onUpdateNotes, autoMilestones, feoeIni, fe
 
           <tr className="border-t border-[var(--glass-border)] bg-white/3">
             <td className="p-2">
-              <input type="text" value={newFestivo} onChange={e => setNewFestivo(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()} placeholder={t('festivo', {defaultValue: 'Festivo...'})} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-body text-foreground focus:border-warning focus:outline-none" />
-            </td>
-            <td className="p-2">
-              <input type="text" value={newRelevante} onChange={e => setNewRelevante(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()} placeholder={t('evento', {defaultValue: 'Relevante...'})} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-body text-foreground focus:border-warning focus:outline-none" />
-            </td>
-            <td className="p-2">
               <DatePicker value={newDate} onChange={v => setNewDate(v)} className="w-full" placeholder="Fecha" />
             </td>
             <td className="p-2">
               <DatePicker value={newEndDate} onChange={v => setNewEndDate(v)} className="w-full" placeholder={t('hasta_opc', {defaultValue: 'Hasta (Opcional)'})} />
+            </td>
+            <td className="p-2">
+              <input type="text" value={newFestivo} onChange={e => setNewFestivo(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()} placeholder={t('festivo', {defaultValue: 'Festivo...'})} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-body text-foreground focus:border-warning focus:outline-none" />
+            </td>
+            <td className="p-2">
+              <input type="text" value={newRelevante} onChange={e => setNewRelevante(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()} placeholder={t('evento', {defaultValue: 'Relevante...'})} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-body text-foreground focus:border-warning focus:outline-none" />
             </td>
             <td className="p-2 text-center">
               <button onClick={addNote} disabled={!newDate || (!newFestivo && !newRelevante)} className="text-warning hover:text-warning font-bold text-heading leading-none disabled:text-gray-700 transition-colors">+</button>
@@ -445,7 +445,7 @@ export default function CalendarioPage() {
           <MotionWrapper className="space-y-4 pb-12">
             <PageHeader
               icon={Calendar}
-              title={t('pages.calendario_title', {defaultValue: 'Calendario académico'})}
+              title={t('nav.calendario', {defaultValue: 'Calendario'})}
               description={t('pages.calendario_desc', {defaultValue: 'Horarios, trimestres, festivos y eventos del curso.'})}
             />
 

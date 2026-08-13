@@ -176,15 +176,21 @@
     "seguimiento": "Seguimento",
     "calificaciones": "Cualificacións",
     "informes": "Informes",
-    "normativa": "Documentos"
+    "normativa": "Documentos",
+    "instrumentos": "Instrumento",
+    "calidad": "Calidade",
+    "mejora": "Mellora",
+    "equivalencias": "Equivalencia"
   },
   "navGroups": {
     "general": "Xeral",
+    "grupo": "Grupo",
     "programacion": "Programación",
     "curso": "Curso"
   },
   "sidebar": {
     "en_obras": "En Obras",
+    "fecha": "Data",
     "demo": "DEMO",
     "reales": "REAIS",
     "abrir_grupo": "Abrir Grupo",
@@ -228,6 +234,12 @@
     "catalogo_title": "Catálogo FP",
     "catalogo_desc": "Explorador de Títulos, Módulos, RA e CE oficiais.",
     "legal_title": "Aviso Legal",
-    "legal_desc": "Aviso legal, privacidade e licenzas."
+    "legal_desc": "Aviso legal, privacidade, cookies, licenzas e accesibilidade.",
+    "ayuda_desc": "Guías, preguntas frecuentes, glosario e mapa da aplicación.",
+    "contexto_desc": "Información xeral, características da contorna, alumnado e módulo.",
+    "equivalencias_desc": "Que campo da app corresponde a que apartado de cada modelo de Programación Didáctica (PD-, PD=, PD+), e que datos pedir ao comezar.",
+    "magia_desc": "Xeración da programación didáctica e informes.",
+    "seguimiento_desc": "Diario de clases, asistencia, progreso de RA e notas por alumnado.",
+    "metodologia_desc": "Estratexias metodolóxicas, recursos, espazos e atención á diversidade."
   }
 }

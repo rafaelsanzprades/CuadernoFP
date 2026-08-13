@@ -215,7 +215,7 @@ export default function Sidebar() {
             >
               <CalendarDays className="w-3.5 h-3.5 shrink-0" />
               <span suppressHydrationWarning className="truncate">
-                {dataSource === 'demo' ? 'Fecha DEMO: ' : 'Fecha REAL: '}{isMounted ? dateStr : ''}
+                {t('sidebar.fecha', { defaultValue: 'Fecha' })} {dataSource === 'demo' ? 'DEMO' : 'REAL'}: {isMounted ? dateStr : ''}
               </span>
             </Link>
           ) : (
@@ -224,6 +224,7 @@ export default function Sidebar() {
           {isSidebarOpen && <div className="h-px bg-[var(--glass-border)] mx-1" />}
           {[{ href: inicioPage.href, label: inicioPage.label, icon: inicioPage.icon }, ...topLevelPages].map((page) => {
             const basePath = page.href.split('?')[0];
+            const translatedLabel = t('nav.' + basePath.replace('/', ''), { defaultValue: page.label });
             const linkContent = (
               <Link
                 key={page.href}
@@ -240,13 +241,13 @@ export default function Sidebar() {
                 </span>
                 {isSidebarOpen && (
                   <span className={`text-body leading-tight font-medium whitespace-nowrap ${pathname === basePath ? 'text-foreground font-semibold' : ''}`}>
-                    {page.label}
+                    {translatedLabel}
                   </span>
                 )}
               </Link>
             );
             return !isSidebarOpen ? (
-              <Tooltip key={page.href} content={page.label} position="right" delay={0.1}>
+              <Tooltip key={page.href} content={translatedLabel} position="right" delay={0.1}>
                 {linkContent}
               </Tooltip>
             ) : linkContent;
@@ -259,7 +260,7 @@ export default function Sidebar() {
             {isSidebarOpen && (
               <div className="flex flex-col mb-0.5 gap-0.5">
                 <div className="text-body font-bold text-foreground/90 tracking-wide px-1">
-                  Grupo
+                  {t('navGroups.grupo', { defaultValue: 'Grupo' })}
                 </div>
 
                 <Link
@@ -415,13 +416,13 @@ export default function Sidebar() {
                 </span>
                 {isSidebarOpen && (
                   <span className="text-caption leading-tight font-medium whitespace-nowrap">
-                    {legalPage.label}
+                    {t('nav.legal', { defaultValue: legalPage.label })}
                   </span>
                 )}
               </Link>
             );
             return !isSidebarOpen ? (
-              <Tooltip content={legalPage.label} position="right" delay={0.1}>
+              <Tooltip content={t('nav.legal', { defaultValue: legalPage.label })} position="right" delay={0.1}>
                 {linkContent}
               </Tooltip>
             ) : linkContent;

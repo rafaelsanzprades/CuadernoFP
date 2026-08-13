@@ -369,15 +369,21 @@
     "seguimiento": "Segimendua",
     "calificaciones": "Kalifikazioak",
     "informes": "Txostenak",
-    "normativa": "Dokumentuak"
+    "normativa": "Dokumentuak",
+    "instrumentos": "Tresna",
+    "calidad": "Kalitatea",
+    "mejora": "Hobekuntza",
+    "equivalencias": "Baliokidetasuna"
   },
   "navGroups": {
     "general": "Orokorra",
+    "grupo": "Taldea",
     "programacion": "Programazioa",
     "curso": "Ikasturtea"
   },
   "sidebar": {
     "en_obras": "Lanetan",
+    "fecha": "Data",
     "demo": "DEMO",
     "reales": "ERREALAK",
     "abrir_grupo": "Ireki Taldea",
@@ -421,6 +427,12 @@
     "catalogo_title": "LH Katalogoa",
     "catalogo_desc": "Titulu, Modulu, RA eta CE ofizialen esploratzailea.",
     "legal_title": "Lege Oharra",
-    "legal_desc": "Lege oharra, pribatutasuna eta lizentziak."
+    "legal_desc": "Lege oharra, pribatutasuna, cookieak, lizentziak eta irisgarritasuna.",
+    "ayuda_desc": "Gidak, galdera maiztuak, glosarioa eta aplikazioaren mapa.",
+    "contexto_desc": "Informazio orokorra, ingurunearen ezaugarriak, ikasleak eta modulua.",
+    "equivalencias_desc": "Appeko zein eremuk dagokio Programazio Didaktikoaren eredu bakoitzeko zein ataliri (PD-, PD=, PD+), eta zer datu eskatu hasteko.",
+    "magia_desc": "Programazio didaktikoaren eta txostenen sorrera.",
+    "seguimiento_desc": "Klaseen egunerokoa, asistentzia, RAren aurrerapena eta ikaslekako oharrak.",
+    "metodologia_desc": "Metodologia-estrategiak, baliabideak, espazioak eta aniztasunari arreta."
   }
 }

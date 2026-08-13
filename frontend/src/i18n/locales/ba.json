@@ -369,15 +369,21 @@
     "seguimiento": "Siguimientu",
     "calificaciones": "Calificaciones",
     "informes": "Informes",
-    "normativa": "Documentos"
+    "normativa": "Documentos",
+    "instrumentos": "Instrumentu",
+    "calidad": "Calidá",
+    "mejora": "Meyora",
+    "equivalencias": "Equivalencia"
   },
   "navGroups": {
     "general": "General",
+    "grupo": "Grup",
     "programacion": "Programació",
     "curso": "Curs"
   },
   "sidebar": {
     "en_obras": "En Obres",
+    "fecha": "Data",
     "demo": "DEMO",
     "reales": "REALS",
     "abrir_grupo": "Obrir Grup",
@@ -421,6 +427,12 @@
     "catalogo_title": "Catàleg FP",
     "catalogo_desc": "Explorador de Títols, Mòduls, RA i CE oficials.",
     "legal_title": "Avís Legal",
-    "legal_desc": "Avís legal, privacitat i llicències."
+    "legal_desc": "Avís legal, privacitat, cookies, llicències i accessibilitat.",
+    "ayuda_desc": "Guies, preguntes freqüents, glossari i mapa de l'aplicació.",
+    "contexto_desc": "Informació general, característiques de l'entorn, alumnat i mòdul.",
+    "equivalencias_desc": "Quin camp de l'app correspon a quin apartat de cada model de Programació Didàctica (PD-, PD=, PD+), i quines dades demanar en començar.",
+    "magia_desc": "Generació de la programació didàctica i informes.",
+    "seguimiento_desc": "Diari de classes, assistència, progrés de RA i notes per alumnat.",
+    "metodologia_desc": "Estratègies metodològiques, recursos, espais i atenció a la diversitat."
   }
 }

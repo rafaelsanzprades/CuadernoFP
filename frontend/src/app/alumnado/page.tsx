@@ -262,7 +262,7 @@ export default function AlumnadoPage() {
         
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-4 pb-12">
-            <PageHeader icon={Users} title={t('pages.alumnado_title')} description={t('pages.alumnado_desc')} />
+            <PageHeader icon={Users} title={t('nav.alumnado', {defaultValue: 'Alumnado'})} description={t('pages.alumnado_desc')} />
 
           {/* Navigation Tabs */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">

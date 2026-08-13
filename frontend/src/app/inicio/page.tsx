@@ -584,7 +584,9 @@ export default function InicioPage() {
               {[
                 { href: "/inicio?tab=bienvenida", label: "Inicio", icon: Activity, description: "Panel principal, verificación de datos, contribuciones de la comunidad y calidad EQAVET." },
                 ...topLevelPages,
-              ].map((item) => (
+              ].map((item) => {
+                const basePath = item.href.split('?')[0];
+                return (
                 <Link key={item.href} href={item.href} className="block group">
                   <Card className="h-full p-5 flex flex-col gap-3 border border-[var(--glass-border)] bg-[var(--glass-bg)] hover:bg-accent/5 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/10 cursor-pointer">
                     <div className="flex items-center gap-3">
@@ -592,7 +594,7 @@ export default function InicioPage() {
                         <item.icon className="w-8 h-8" strokeWidth={1.5} />
                       </div>
                       <h3 className="font-bold text-body text-foreground group-hover:text-accent transition-colors leading-tight">
-                        {item.label}
+                        {t('nav.' + basePath.replace('/', ''), { defaultValue: item.label })}
                       </h3>
                     </div>
                     {item.description && (
@@ -602,16 +604,23 @@ export default function InicioPage() {
                     )}
                   </Card>
                 </Link>
-              ))}
+                );
+              })}
             </div>
 
             {/* Menus Grid */}
             <div className="space-y-12">
-              {navGroups.map((group, groupIdx) => (
+              {navGroups.map((group, groupIdx) => {
+                const baseTitle = group.title.replace(/\s*\[.*\]$/, '');
+                const translatedTitle = baseTitle === "Grupo" ? t('navGroups.grupo', { defaultValue: 'Grupo' })
+                  : baseTitle === "Programación" ? t('navGroups.programacion', { defaultValue: 'Programación' })
+                  : baseTitle === "Curso" ? t('navGroups.curso', { defaultValue: 'Curso' })
+                  : baseTitle;
+                return (
                 <MotionWrapper key={group.title} delay={groupIdx * 0.1}>
                   <div className="space-y-3">
                     <h2 className="text-subheading font-bold text-foreground flex items-center gap-3">
-                      {group.title.replace(/\s*\[.*\]$/, '')}
+                      {translatedTitle}
                     </h2>
                     {group.sectionDescription && (
                       <div className="pb-4 border-b border-[var(--glass-border)]">
@@ -623,7 +632,9 @@ export default function InicioPage() {
 
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                      {group.items.map((item, itemIdx) => (
+                      {group.items.map((item, itemIdx) => {
+                        const itemBasePath = item.href.split('?')[0];
+                        return (
                         <Link key={item.href} href={item.href} className="block group">
                           <Card className="h-full p-5 flex flex-col gap-3 border border-[var(--glass-border)] bg-[var(--glass-bg)] hover:bg-accent/5 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/10 cursor-pointer">
                             <div className="flex items-center gap-3">
@@ -631,7 +642,7 @@ export default function InicioPage() {
                                 <item.icon className="w-8 h-8" strokeWidth={1.5} />
                               </div>
                               <h3 className="font-bold text-body text-foreground group-hover:text-accent transition-colors leading-tight">
-                                {item.label}
+                                {t('nav.' + itemBasePath.replace('/', ''), { defaultValue: item.label })}
                               </h3>
                             </div>
                             {item.description && (
@@ -641,11 +652,13 @@ export default function InicioPage() {
                             )}
                           </Card>
                         </Link>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
                 </MotionWrapper>
-              ))}
+                );
+              })}
             </div>
 
             {/* Legal: al final del todo, tras una línea de separación */}
@@ -657,7 +670,7 @@ export default function InicioPage() {
                       <legalPage.icon className="w-8 h-8" strokeWidth={1.5} />
                     </div>
                     <h3 className="font-bold text-body text-foreground group-hover:text-accent transition-colors leading-tight">
-                      {legalPage.label}
+                      {t('nav.legal', { defaultValue: legalPage.label })}
                     </h3>
                   </div>
                   <p className="text-body text-muted mt-auto">

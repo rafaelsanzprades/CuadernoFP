@@ -328,7 +328,7 @@ export default function MatricesPage() {
 
         <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-4 pb-12">
-            <PageHeader icon={Grid} title="Currículo" description={t('pages.matrices_desc')} />
+            <PageHeader icon={Grid} title={t('nav.curriculo', { defaultValue: 'Currículo' })} description={t('pages.matrices_desc')} />
 
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">

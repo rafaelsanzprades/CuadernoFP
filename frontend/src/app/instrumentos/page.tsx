@@ -336,7 +336,7 @@ export default function InstrumentosPage() {
           <MotionWrapper className="space-y-4 pb-12">
             <PageHeader
               icon={Wrench}
-              title={t('pages.instrumentos_title')}
+              title={t('nav.instrumentos', {defaultValue: 'Instrumento'})}
               description={t('pages.instrumentos_desc')}
             />
 

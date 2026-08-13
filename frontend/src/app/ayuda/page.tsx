@@ -225,7 +225,7 @@ export default function AyudaPage() {
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
           <MotionWrapper className="space-y-4 pb-12">
 
-            <PageHeader icon={Info} title="Ayuda" description="Guías, preguntas frecuentes, glosario y mapa de la aplicación." />
+            <PageHeader icon={Info} title={t('nav.ayuda', { defaultValue: 'Ayuda' })} description={t('pages.ayuda_desc', { defaultValue: 'Guías, preguntas frecuentes, glosario y mapa de la aplicación.' })} />
 
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">

@@ -118,8 +118,8 @@ export default function MetodologiaConfigPage() {
           <MotionWrapper>
             <PageHeader
               icon={Lightbulb}
-              title="Metodología"
-              description="Estrategias metodológicas, recursos, espacios y atención a la diversidad."
+              title={t('nav.metodologia', { defaultValue: 'Metodología' })}
+              description={t('pages.metodologia_desc', { defaultValue: 'Estrategias metodológicas, recursos, espacios y atención a la diversidad.' })}
             />
 
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">

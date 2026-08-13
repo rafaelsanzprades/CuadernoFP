@@ -130,7 +130,7 @@ function CiclosContent() {
 
             <PageHeader
               icon={GraduationCap}
-              title={t('pages.catalogo_title', {defaultValue: 'Catálogo'})}
+              title={t('nav.catalogo', {defaultValue: 'Catálogo'})}
               description={t('pages.catalogo_desc', {defaultValue: 'Catálogo oficial de familias profesionales, títulos, cursos → módulos.'})}
             />
 
