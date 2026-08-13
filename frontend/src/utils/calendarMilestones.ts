@@ -5,7 +5,7 @@
 const MILESTONE_FIELDS: [string, string][] = [
   ["ini_curso", "Inicio de curso"],
   ["fecha_presentacion", "Presentación"],
-  ["ini_1t", "Inicio clases"],
+  ["ini_1t", "Inicio 1er trimestre"],
   ["fin_1t", "Fin 1er trimestre"],
   ["ini_2t", "Inicio 2º trimestre"],
   ["fin_2t", "Fin 2º trimestre"],

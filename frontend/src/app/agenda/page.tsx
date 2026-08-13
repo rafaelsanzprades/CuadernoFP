@@ -28,7 +28,7 @@ export default function AgendaPage() {
   } = useAppStore();
   const [activeTab, setActiveTab] = useState("actual");
   const { data: modulesList, mutate: fetchModules } = useModulesList();
-  const { planningLedger } = useDynamicPlanning();
+  const { planningLedgerDmy } = useDynamicPlanning();
 
   useEffect(() => {
     if (modulesList) {
@@ -146,7 +146,7 @@ export default function AgendaPage() {
                   info_fechas={(cursoData as any)?.info_fechas || (moduleData as any)?.info_fechas || {}}
                   horario={(cursoData as any)?.horario || (moduleData as any)?.horario || {}}
                   calendar_notes={(cursoData as any)?.calendar_notes || (moduleData as any)?.calendar_notes || {}}
-                  planning_ledger={planningLedger}
+                  planning_ledger={planningLedgerDmy}
                   onUpdateNote={(key, val) => {
                     const storeData = cursoData || moduleData;
                     if (!storeData) return;

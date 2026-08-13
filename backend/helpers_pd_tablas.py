@@ -15,10 +15,10 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 
 TEXTO_ESTIMACION_PLANIFICACION = (
-    "Esta previsión estima que las horas lectivas de cada semana se cumplen de forma "
-    "proporcional a los días festivos o no lectivos que contenga, a falta de que se "
-    "concreten el calendario oficial del curso académico y la distribución definitiva "
-    "del horario semanal por días. Es una aproximación orientativa, no una previsión exacta."
+    "Esta previsión se calcula día a día con el calendario de festivos y el horario semanal "
+    "que ya tienes registrados — no es una estimación proporcional. Cambiará si el calendario "
+    "oficial del curso o la distribución definitiva del horario semanal todavía no están "
+    "completos."
 )
 
 

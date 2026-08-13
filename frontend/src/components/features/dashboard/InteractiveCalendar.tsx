@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { getAutoMilestones } from "@/utils/calendarMilestones";
-import { ClipboardList, Circle } from "lucide-react";
+import { ClipboardList, Circle, Lock } from "lucide-react";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -69,7 +69,7 @@ export function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUp
     if (inRange(date, dgenS, dgenE)) return "bg-yellow-500/20 text-yellow-600 hover:bg-yellow-500/30 font-semibold cursor-pointer";
     if (inRange(date, feoS, feoE)) return "bg-warning/10 text-warning hover:bg-warning/20 cursor-pointer";
     if (inRange(date, t1s, t1e))   return "bg-purple-500/10 text-purple-400 hover:bg-purple-500/20 cursor-pointer";
-    if (inRange(date, t2s, t2e))   return "bg-red-500/10 text-red-400 hover:bg-red-500/20 cursor-pointer";
+    if (inRange(date, t2s, t2e))   return "bg-teal-500/10 text-teal-400 hover:bg-teal-500/20 cursor-pointer";
     if (inRange(date, t3s, t3e))   return "bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 cursor-pointer";
     if (inRange(date, cs, ce))     return "bg-foreground/5 text-muted hover:bg-foreground/10 cursor-pointer";
     return "text-gray-700 cursor-default";
@@ -102,7 +102,31 @@ export function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUp
     setPopup(null);
   }
 
-  const noteEntries = Object.entries(calendar_notes).filter(([, v]) => v);
+  // "dd/mm/yyyy" -> Date, para poder ordenar cronológicamente de verdad —
+  // ordenar las claves como texto (localeCompare) coloca "05/01/2026" antes
+  // que "25/12/2025", que es al revés del orden real.
+  const parseDmy = (s: string): Date => {
+    const [d, m, y] = s.split("/").map(Number);
+    return new Date(y || 0, (m || 1) - 1, d || 1);
+  };
+
+  type NoteEntry = { key: string; dateStr: string; label: string; isAuto: boolean };
+  const byDate = (a: NoteEntry, b: NoteEntry) => parseDmy(a.dateStr).getTime() - parseDmy(b.dateStr).getTime();
+
+  const festivoEntries: NoteEntry[] = Object.entries(calendar_notes)
+    .filter(([k, v]) => k.startsWith("f_") && v)
+    .map(([k, v]) => ({ key: k, dateStr: k.substring(2), label: typeof v === "object" ? JSON.stringify(v) : String(v), isAuto: false }))
+    .sort(byDate);
+
+  const eventoEntries: NoteEntry[] = [
+    ...Object.entries(calendar_notes)
+      .filter(([k, v]) => k.startsWith("r_") && v)
+      .map(([k, v]) => ({ key: k, dateStr: k.substring(2), label: typeof v === "object" ? JSON.stringify(v) : String(v), isAuto: false })),
+    // Hitos automáticos (Inicio/Fin de curso y de cada trimestre) derivados
+    // de Fechas generales — de solo lectura aquí, no tienen `calendar_notes`
+    // propio que borrar; si cambian, cambia la fecha en /calendario?tab=fechas.
+    ...Object.entries(autoMilestones).map(([dkey, label]) => ({ key: `auto_${dkey}`, dateStr: dkey, label, isAuto: true })),
+  ].sort(byDate);
 
   return (
     <div>
@@ -110,7 +134,7 @@ export function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUp
       <div className="flex flex-wrap gap-4 mb-6 text-caption">
         {[
           { cls: "bg-purple-500/10 border-purple-500/30 text-purple-400",      label: t('t1', {defaultValue: "1er trimestre"}) },
-          { cls: "bg-red-500/10 border-red-500/30 text-red-400", label: t('t2', {defaultValue: "2º trimestre"}) },
+          { cls: "bg-teal-500/10 border-teal-500/30 text-teal-400", label: t('t2', {defaultValue: "2º trimestre"}) },
           { cls: "bg-amber-500/10 border-amber-500/30 text-amber-400",  label: t('t3', {defaultValue: "3er trimestre"}) },
           { cls: "bg-danger/10 border-danger/30",        label: t('festivo', {defaultValue: "Festivo"}) },
           { cls: "bg-info/10 border-info/30",      label: t('evento', {defaultValue: "Evento"}) },
@@ -153,10 +177,13 @@ export function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUp
                   if (info.relevante) tooltipLines.push(`Relevante: ${info.relevante}`);
                   if (info.ud) tooltipLines.push(`UD: ${info.ud}`);
                   if (info.isFeoe) tooltipLines.push("FEOE");
-                  // Línea pequeña bajo el número: UD (prioridad) o si no hay,
-                  // relevante (truncado) - el resto siempre visible al pasar
-                  // el ratón, vía el title.
-                  const subLine = info.ud || info.relevante || (info.isFeoe ? "FEOE" : "");
+                  // Línea pequeña bajo el número: UD (prioridad), si no hay
+                  // UD la descripción del festivo (Navidad, Reyes, S.Santa…),
+                  // si no hay festivo FEOE. Deliberadamente NO se muestran
+                  // aquí las notas "relevante" (r_, ej. "Práctica M2"): son
+                  // recordatorios de trabajo, no parte del calendario visual
+                  // — siguen visibles al pasar el ratón, vía el title.
+                  const subLine = info.ud || info.festivo || (info.isFeoe ? "FEOE" : "");
                   return (
                     <button
                       key={day}
@@ -179,35 +206,53 @@ export function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUp
         })}
       </div>
 
-      {/* Notes list */}
-      {noteEntries.length > 0 && (
-        <div className="mt-6">
-          <h3 className="text-body font-semibold text-muted mb-3"><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('notas_reg', {defaultValue: 'Notas registradas'})} ({noteEntries.length})</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-            {noteEntries
-              .sort(([a], [b]) => a.localeCompare(b))
-              .map(([k, v]) => {
-                const isF = k.startsWith("f_");
-                return (
-                  <div
-                    key={k}
-                    className={`flex items-center gap-2 text-caption rounded-lg px-3 py-2 border ${
-                      isF ? "bg-danger/10 border-danger/30 text-danger"
-                          : "bg-info/10 border-info/30 text-info"
-                    }`}
-                  >
+      {/* Notes list — dos bloques, festivos y eventos, cada uno ordenado
+          cronológicamente (no por texto de la clave) */}
+      {(festivoEntries.length > 0 || eventoEntries.length > 0) && (
+        <div className="mt-6 space-y-6">
+          {festivoEntries.length > 0 && (
+            <div>
+              <h3 className="text-body font-semibold text-muted mb-3"><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('festivos', {defaultValue: 'Festivos'})} ({festivoEntries.length})</h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+                {festivoEntries.map(entry => (
+                  <div key={entry.key} className="flex items-center gap-2 text-caption rounded-lg px-3 py-2 border bg-danger/10 border-danger/30 text-danger">
                     <span className="flex-1 truncate">
-                      <span className="text-muted mr-1">{k.substring(2)}</span>
-                      {typeof v === 'object' ? JSON.stringify(v) : String(v)}
+                      <span className="text-muted mr-1">{entry.dateStr}</span>
+                      {entry.label}
                     </span>
                     <button
-                      onClick={() => onUpdateNote(k, "")}
+                      onClick={() => onUpdateNote(entry.key, "")}
                       className="text-muted/80 hover:text-danger font-bold text-body leading-none"
                     >×</button>
                   </div>
-                );
-              })}
-          </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {eventoEntries.length > 0 && (
+            <div>
+              <h3 className="text-body font-semibold text-muted mb-3"><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('eventos', {defaultValue: 'Eventos'})} ({eventoEntries.length})</h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+                {eventoEntries.map(entry => (
+                  <div key={entry.key} className="flex items-center gap-2 text-caption rounded-lg px-3 py-2 border bg-info/10 border-info/30 text-info">
+                    <span className="flex-1 truncate">
+                      <span className="text-muted mr-1">{entry.dateStr}</span>
+                      {entry.label}
+                    </span>
+                    {entry.isAuto ? (
+                      <span className="text-muted/50" title="Derivado de Fechas generales"><Lock className="w-[1em] h-[1em]" /></span>
+                    ) : (
+                      <button
+                        onClick={() => onUpdateNote(entry.key, "")}
+                        className="text-muted/80 hover:text-danger font-bold text-body leading-none"
+                      >×</button>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
 

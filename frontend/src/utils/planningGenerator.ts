@@ -94,9 +94,6 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
   // que arranca a final de trimestre y se alarga unos días al siguiente
   // sigue perteneciendo al primero).
   const udFirstDate: Record<string, Date> = {};
-  // Última fecha con horas asignadas — sirve solo para decidir dónde
-  // insertar la fila FEOE entre las de UD (por orden cronológico real).
-  const udLastDate: Record<string, Date> = {};
 
   datesList.forEach((d) => {
     const rawDay = d.getDay(); // 0 = Sun, 1 = Mon, ..., 6 = Sat
@@ -168,11 +165,8 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
       const assignedNow = Math.min(hoursLeft, currentUd.h_rem);
 
       currentUd.h_rem -= assignedNow;
-      if (assignedNow > 0) {
-        if (udFirstDate[currentUd.id_ud] === undefined) {
-          udFirstDate[currentUd.id_ud] = d;
-        }
-        udLastDate[currentUd.id_ud] = d;
+      if (assignedNow > 0 && udFirstDate[currentUd.id_ud] === undefined) {
+        udFirstDate[currentUd.id_ud] = d;
       }
       prvTracker[currentUd.id_ud][prvKey] = (prvTracker[currentUd.id_ud][prvKey] || 0) + assignedNow;
       if (isPastOrToday) {
@@ -245,10 +239,12 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
   });
 
   // Add FEOE row if it has any hours — insertada por orden cronológico real
-  // (no siempre al final): va justo antes de la primera UD cuya última fecha
-  // impartida cae después del inicio de la FEOE, ya que esa es la UD que la
-  // FEOE interrumpe (una UD puede empezar antes de la FEOE y terminar
-  // después, así que se compara con la ÚLTIMA fecha, no la primera).
+  // (no siempre al final, y es distinto en cada programación según sus
+  // fechas): va justo DESPUÉS de la última UD que ya había empezado cuando
+  // arrancó la FEOE, ya que es esa UD la que la FEOE interrumpe (aunque esa
+  // UD siga impartiéndose más adelante, tras acabar la FEOE) — de ahí
+  // comparar la PRIMERA fecha de cada UD (cuándo empieza) contra el inicio
+  // de la FEOE, no la última.
   const hasFeoeHours = Object.keys(prvTracker["FEOE"]).length > 0;
   if (hasFeoeHours) {
     const feoeRow: any = {
@@ -268,8 +264,8 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
     let insertAt = newDfSgmt.length;
     if (feoS) {
       const idx = newDfSgmt.findIndex(row => {
-        const last = udLastDate[row.id_ud];
-        return !last || last.getTime() > feoS.getTime();
+        const first = udFirstDate[row.id_ud];
+        return !first || first.getTime() > feoS.getTime();
       });
       if (idx !== -1) insertAt = idx;
     }

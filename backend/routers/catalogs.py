@@ -190,6 +190,8 @@ def get_curriculum(degree_code: str, region_id: int = Query(1), db: Session = De
                     curso_str = "Ambos"
                 elif "2" in str(m.curso):
                     curso_str = "2º"
+                elif "3" in str(m.curso):
+                    curso_str = "3º"
                     
             comp_data = []
             if m.convalidation_competences:
@@ -245,6 +247,8 @@ def get_module_curriculum(module_code: str, db: Session = Depends(get_db)):
                 curso_str = "Ambos"
             elif "2" in str(module.curso):
                 curso_str = "2º"
+            elif "3" in str(module.curso):
+                curso_str = "3º"
                 
         comp_data = []
         if module.convalidation_competences:

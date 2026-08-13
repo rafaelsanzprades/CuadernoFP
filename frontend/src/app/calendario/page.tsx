@@ -1,7 +1,7 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import { Calendar, Circle, ClipboardList, Search, Settings, Flag, FolderOpen, Bus, Briefcase } from "lucide-react";
+import { Calendar, Circle, ClipboardList, Search, Settings, Flag, FolderOpen, Bus, Briefcase, Lock } from "lucide-react";
 import React, { useEffect, useMemo, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -36,10 +36,12 @@ const MONTH_NAMES = [
 const DAY_NAMES_SHORT = ["Lu","Ma","Mi","Ju","Vi","Sa","Do"];
 
 // ── Notes Table Component ─────────────────────────────────────────────────────
-function NotesTable({ calendar_notes, onUpdateNotes, planning_ledger }: {
+function NotesTable({ calendar_notes, onUpdateNotes, autoMilestones, feoeIni, feoeFin }: {
   calendar_notes: Record<string, string>;
   onUpdateNotes: (notes: Record<string, string>) => void;
-  planning_ledger?: Record<string, string[]>;
+  autoMilestones: Record<string, string>;
+  feoeIni?: string;
+  feoeFin?: string;
 }) {
   const { t } = useTranslation();
   const [newDate, setNewDate]         = useState("");
@@ -102,14 +104,15 @@ function NotesTable({ calendar_notes, onUpdateNotes, planning_ledger }: {
   const dayRows = Array.from(byDate.values()).sort((a, b) => a.iso.localeCompare(b.iso));
 
   // Fusiona días consecutivos en un rango solo si festivo Y relevante coinciden en ambos.
-  const ranges: { start: DayRow; end: DayRow; keys: string[] }[] = [];
+  type RangeT = { start: DayRow; end: DayRow; keys: string[]; auto?: boolean };
+  const ranges: RangeT[] = [];
   const keysForDay = (row: DayRow) => [
     ...(row.festivo ? [`f_${pad(row.date.getDate())}/${pad(row.date.getMonth() + 1)}/${row.date.getFullYear()}`] : []),
     ...(row.relevante ? [`r_${pad(row.date.getDate())}/${pad(row.date.getMonth() + 1)}/${row.date.getFullYear()}`] : []),
   ];
   dayRows.forEach(row => {
     const last = ranges[ranges.length - 1];
-    if (last) {
+    if (last && !last.auto) {
       const diffDays = Math.round((row.date.getTime() - last.end.date.getTime()) / 86400000);
       const sameContent = last.end.festivo === row.festivo && last.end.relevante === row.relevante;
       const consecutive = diffDays === 1 || (diffDays === 3 && last.end.date.getDay() === 5) || (diffDays === 2 && last.end.date.getDay() === 6);
@@ -122,24 +125,37 @@ function NotesTable({ calendar_notes, onUpdateNotes, planning_ledger }: {
     ranges.push({ start: row, end: row, keys: keysForDay(row) });
   });
 
+  // Hitos automáticos (Inicio/Fin de curso y de cada trimestre, derivados de
+  // Fechas generales) + FEOE (una sola fila con su intervalo completo) — de
+  // solo lectura, sin `calendar_notes` propio que borrar.
+  Object.entries(autoMilestones).forEach(([dkey, label]) => {
+    const { iso, date } = parseKeyDate(dkey);
+    const row: DayRow = { iso, date, relevante: label };
+    ranges.push({ start: row, end: row, keys: [], auto: true });
+  });
+  if (feoeIni) {
+    const start = parseKeyDate(feoeIni);
+    const end = parseKeyDate(feoeFin || feoeIni);
+    ranges.push({
+      start: { iso: start.iso, date: start.date, relevante: "FEOE" },
+      end: { iso: end.iso, date: end.date, relevante: "FEOE" },
+      keys: [],
+      auto: true,
+    });
+  }
+  ranges.sort((a, b) => a.start.iso.localeCompare(b.start.iso));
+
   const fmt = (d: Date) => `${pad(d.getDate())} ${MONTH_NAMES[d.getMonth()]?.substring(0, 3).toLowerCase() || ""} ${d.getFullYear()}`;
-  const docenciaFor = (row: DayRow) => {
-    if (!planning_ledger) return "";
-    const key = `${pad(row.date.getDate())}/${pad(row.date.getMonth() + 1)}/${row.date.getFullYear()}`;
-    const uds = planning_ledger[key];
-    return uds && uds.length ? uds.join(", ") : "";
-  };
 
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-left text-body border-collapse">
         <thead>
           <tr className="border-b border-[var(--glass-border)] text-muted">
-            <th className="p-2 w-28">{t('table.fecha', {defaultValue: 'Fecha'})}</th>
-            <th className="p-2 w-28">{t('table.hasta', {defaultValue: 'Hasta'})}</th>
             <th className="p-2">{t('festivo', {defaultValue: 'Festivo'})}</th>
             <th className="p-2">{t('evento', {defaultValue: 'Relevante'})}</th>
-            <th className="p-2 w-36">{t('docencia', {defaultValue: 'Docencia'})}</th>
+            <th className="p-2 w-28">{t('table.fecha', {defaultValue: 'Fecha'})}</th>
+            <th className="p-2 w-28">{t('table.hasta', {defaultValue: 'Hasta'})}</th>
             <th className="p-2 w-10" />
           </tr>
         </thead>
@@ -152,17 +168,15 @@ function NotesTable({ calendar_notes, onUpdateNotes, planning_ledger }: {
             const singleDay = r.start.iso === r.end.iso;
 
             return (
-              <React.Fragment key={r.start.iso}>
+              <React.Fragment key={`${r.start.iso}-${r.auto ? "auto" : "real"}-${i}`}>
                 {showHeader && (
                   <tr>
-                    <td colSpan={6} className="pt-6 pb-2 text-caption font-bold tracking-wider text-accent border-b border-[var(--glass-border)]/50">
+                    <td colSpan={5} className="pt-6 pb-2 text-caption font-bold tracking-wider text-accent border-b border-[var(--glass-border)]/50">
                       {monthHeader}
                     </td>
                   </tr>
                 )}
                 <tr className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
-                  <td className="p-2 font-mono text-foreground/80">{fmt(r.start.date)}</td>
-                  <td className="p-2 font-mono text-foreground/60">{singleDay ? "" : fmt(r.end.date)}</td>
                   <td className="p-2 text-foreground/90">
                     {r.start.festivo && (
                       <span className="text-caption px-2 py-0.5 rounded-full font-semibold bg-danger/10 text-danger">
@@ -177,9 +191,16 @@ function NotesTable({ calendar_notes, onUpdateNotes, planning_ledger }: {
                       </span>
                     )}
                   </td>
-                  <td className="p-2 text-caption text-muted">{singleDay ? docenciaFor(r.start) : ""}</td>
+                  <td className="p-2 font-mono text-foreground/80">{fmt(r.start.date)}</td>
+                  <td className="p-2 font-mono text-foreground/60">{singleDay ? "" : fmt(r.end.date)}</td>
                   <td className="p-2 text-center">
-                    <button onClick={() => deleteRange(r.keys)} className="text-muted/80 hover:text-danger font-bold text-subheading leading-none transition-colors">×</button>
+                    {r.auto ? (
+                      <span className="text-muted/50" title="Derivado de Fechas generales, no se borra aquí">
+                        <Lock className="w-[1em] h-[1em] inline-block" />
+                      </span>
+                    ) : (
+                      <button onClick={() => deleteRange(r.keys)} className="text-muted/80 hover:text-danger font-bold text-subheading leading-none transition-colors">×</button>
+                    )}
                   </td>
                 </tr>
               </React.Fragment>
@@ -188,18 +209,17 @@ function NotesTable({ calendar_notes, onUpdateNotes, planning_ledger }: {
 
           <tr className="border-t border-[var(--glass-border)] bg-white/3">
             <td className="p-2">
-              <DatePicker value={newDate} onChange={v => setNewDate(v)} className="w-full" placeholder="Fecha" />
-            </td>
-            <td className="p-2">
-              <DatePicker value={newEndDate} onChange={v => setNewEndDate(v)} className="w-full" placeholder={t('hasta_opc', {defaultValue: 'Hasta (Opcional)'})} />
-            </td>
-            <td className="p-2">
               <input type="text" value={newFestivo} onChange={e => setNewFestivo(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()} placeholder={t('festivo', {defaultValue: 'Festivo...'})} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-body text-foreground focus:border-warning focus:outline-none" />
             </td>
             <td className="p-2">
               <input type="text" value={newRelevante} onChange={e => setNewRelevante(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()} placeholder={t('evento', {defaultValue: 'Relevante...'})} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-body text-foreground focus:border-warning focus:outline-none" />
             </td>
-            <td className="p-2 text-caption text-muted/60 italic">{t('automatico', {defaultValue: 'Automático'})}</td>
+            <td className="p-2">
+              <DatePicker value={newDate} onChange={v => setNewDate(v)} className="w-full" placeholder="Fecha" />
+            </td>
+            <td className="p-2">
+              <DatePicker value={newEndDate} onChange={v => setNewEndDate(v)} className="w-full" placeholder={t('hasta_opc', {defaultValue: 'Hasta (Opcional)'})} />
+            </td>
             <td className="p-2 text-center">
               <button onClick={addNote} disabled={!newDate || (!newFestivo && !newRelevante)} className="text-warning hover:text-warning font-bold text-heading leading-none disabled:text-gray-700 transition-colors">+</button>
             </td>
@@ -719,10 +739,18 @@ export default function CalendarioPage() {
                   <h2 className="text-subheading font-bold mb-2"> Festivos y eventos</h2>
                   <p className="text-muted text-body mb-4">
                     Introduce manualmente o haz clic en el calendario. Los festivos excluyen horas del cómputo real.
-                    Festivo y Relevante son independientes: un mismo día puede tener los dos a la vez. La columna
-                    Docencia es solo de referencia (viene de Planificación, no se edita aquí).
+                    Festivo y Relevante son independientes: un mismo día puede tener los dos a la vez. Las filas con
+                    <Lock className="w-[1em] h-[1em] inline-block mx-1" />
+                    (Inicio/Fin de curso y de trimestre, FEOE) vienen de Fechas generales / Periodo FEOE — se editan
+                    ahí, no aquí.
                   </p>
-                  <NotesTable calendar_notes={calendar_notes} onUpdateNotes={handleUpdateNotes} planning_ledger={planningLedger} />
+                  <NotesTable
+                    calendar_notes={calendar_notes}
+                    onUpdateNotes={handleUpdateNotes}
+                    autoMilestones={getAutoMilestones(info_fechas)}
+                    feoeIni={typeof info_fechas.ini_feoe === 'string' ? info_fechas.ini_feoe : undefined}
+                    feoeFin={typeof info_fechas.fin_feoe === 'string' ? info_fechas.fin_feoe : undefined}
+                  />
                 </Card>
               )}
 

@@ -122,9 +122,6 @@ def generate_planning(df_ud, info_fechas, horario, calendar_notes):
     # Primera fecha con horas asignadas por UD — se asigna al trimestre en
     # el que EMPIEZA, no en el que termina (igual que planningGenerator.ts).
     ud_first_date = {}
-    # Última fecha con horas asignadas — solo para decidir dónde insertar la
-    # fila FEOE entre las de UD, por orden cronológico real.
-    ud_last_date = {}
 
     for d in dates_list:
         day_index = d.weekday()  # 0=Lun ... 4=Vie
@@ -160,10 +157,8 @@ def generate_planning(df_ud, info_fechas, horario, calendar_notes):
 
             assigned_now = min(hours_left, current_ud["h_rem"])
             current_ud["h_rem"] -= assigned_now
-            if assigned_now > 0:
-                if current_ud["id_ud"] not in ud_first_date:
-                    ud_first_date[current_ud["id_ud"]] = d
-                ud_last_date[current_ud["id_ud"]] = d
+            if assigned_now > 0 and current_ud["id_ud"] not in ud_first_date:
+                ud_first_date[current_ud["id_ud"]] = d
 
             tracker = prv_tracker[current_ud["id_ud"]]
             tracker[prv_key] = tracker.get(prv_key, 0) + assigned_now
@@ -228,16 +223,17 @@ def generate_planning(df_ud, info_fechas, horario, calendar_notes):
             sum_prv += prv
         feoe_row["horas_ud"] = sum_prv or "-"
 
-        # Insertada por orden cronológico real (no siempre al final): va
-        # justo antes de la primera UD cuya última fecha impartida cae
-        # después del inicio de la FEOE, que es la UD que la FEOE
-        # interrumpe (se compara con la ÚLTIMA fecha, no la primera, porque
-        # una UD puede empezar antes de la FEOE y terminar después).
+        # Insertada por orden cronológico real (no siempre al final, y es
+        # distinto en cada programación según sus fechas): va justo DESPUÉS
+        # de la última UD que ya había empezado cuando arrancó la FEOE, ya
+        # que es esa UD la que la FEOE interrumpe (aunque siga impartiéndose
+        # más adelante, tras acabar la FEOE) — de ahí comparar la PRIMERA
+        # fecha de cada UD contra el inicio de la FEOE, no la última.
         insert_at = len(new_df_sgmt)
         if feo_s:
             for i, row in enumerate(new_df_sgmt):
-                last = ud_last_date.get(row["id_ud"])
-                if not last or last > feo_s:
+                first = ud_first_date.get(row["id_ud"])
+                if not first or first > feo_s:
                     insert_at = i
                     break
         new_df_sgmt.insert(insert_at, feoe_row)
