@@ -22,10 +22,8 @@
     "fechas": "Funtsezko datak",
     "horario": "Asteko ordutegia",
     "datos": "Datuak",
-    "contexto": "Testuingurua",
     "planes": "Planak",
     "contexto_feoe": "FEOE",
-    "metodologia": "Metodologia",
     "evaluacion": "Baliabideak",
     "otros": "Zeharkakoak",
     "ra": "RA eta CE",
@@ -41,7 +39,6 @@
     "archivos_locales": "Fitxategi Lokalak",
     "plantillas": "Txantiloiak",
     "curriculos": "Curriculumak",
-    "normativa": "Araudia",
     "todofp": "TodoFP",
     "autores": "Egileak",
     "informes": "Txostenak",
@@ -49,7 +46,303 @@
     "boletines": "Buletinak",
     "familias": "Familiak",
     "titulos": "Tituluak",
-    "modulos": "Moduluak"
+    "modulos": "Moduluak",
+    "agenda": {
+      "actual": {
+        "label": "Egungoa",
+        "desc": "Gaurko eskolen laburpena, asteko testuingurua eta unean lantzen ari den unitate didaktikoaren garapena."
+      },
+      "planificacion": {
+        "label": "Plangintza",
+        "desc": "Programazioaren hileroko plangintza eta jarraipena."
+      },
+      "progreso-ra-ud": {
+        "label": "RA eta UD aurreikuspena",
+        "desc": "Ikaskuntzaren emaitzen aurrerapena, emandako unitate didaktikoen egoeraren eta haztapenaren arabera."
+      },
+      "mensual": {
+        "label": "Hilekoa",
+        "desc": "Hileko ikuspegia eta egutegi interaktiboa, funtsezko datekin."
+      }
+    },
+    "calendario": {
+      "fechas": {
+        "label": "Datak eta ordutegia",
+        "desc": "Konfiguratu ikasturteko datu orokorrak, hiruhilekoak eta asteko ordutegia."
+      },
+      "feoe": {
+        "label": "FEOE aldia",
+        "desc": "LH Dualerako (FEOE) konfigurazio berezia."
+      },
+      "eventos": {
+        "label": "Ekitaldiak eta jaiegunak",
+        "desc": "Irakaskuntzari eragiten dioten ekitaldi eta jaiegunen erregistroa."
+      },
+      "actividades": {
+        "label": "Eskolaz kanpoko jarduerak",
+        "desc": "Jarduera osagarrien eta eskolaz kanpokoen plangintza."
+      },
+      "visual": {
+        "desc": "Ikasturte osoko egutegiaren hileko ikuspegia."
+      }
+    },
+    "alumnado": {
+      "matricula": {
+        "label": "Matrikula",
+        "desc": "Ikasleen zerrendaren eta banakako fitxaren kudeaketa."
+      },
+      "tutoria": {
+        "label": "Tutoretza eta alertak",
+        "desc": "Uzte-arriskuaren alertak eta ikasleen tutoretza-jarraipena."
+      },
+      "perfil": {
+        "label": "Taldearen profila",
+        "desc": "Taldearen estatistikak, ezaugarriak eta testuinguru narratiboa."
+      },
+      "plano": {
+        "desc": "Ikasgelaren banaketa eta plano bisuala."
+      }
+    },
+    "seguimiento": {
+      "clases": {
+        "label": "Eskolak",
+        "desc": "Eskolen egunerokoa, saio lektiboak eta gorabeheren erregistroa."
+      },
+      "asistencia": {
+        "label": "Asistentzia",
+        "desc": "Ikasleen asistentzia-kontrola."
+      },
+      "progreso-ra-ud": {
+        "label": "RA eta UDen aurrerapena",
+        "desc": "Ikaskuntzaren emaitzen lorpen-maila, hiruhilekoka."
+      },
+      "detalle": {
+        "label": "Ikaslekako xehetasuna",
+        "desc": "Nota numerikoen sarrera, ikasleka, ebaluazio-tresnaka eta RAren eskuratze-mailaka."
+      }
+    },
+    "calificaciones": {
+      "estadisticas": {
+        "label": "Estatistikak",
+        "desc": "Taldearen errendimenduaren estatistika deskriptiboak eta bistaratzeak."
+      },
+      "resumen": {
+        "desc": "Errendimenduaren eta batez besteko kalifikazioen panel orokorra."
+      },
+      "grupal": {
+        "desc": "Taldearen jarduna eta estatistika konparatiboak."
+      },
+      "individual": {
+        "desc": "Banakako aurrerapen-orria, tutoretzetarako."
+      }
+    },
+    "contexto": {
+      "identificacion": {
+        "label": "Identifikazioa",
+        "desc": "Moduluaren eta ikastetxearen identifikazioa, araubide duala, biribiltze-arauak, hiruhileko haztapena, ebaluazio-tresnak eta eskala kualitatiboak. PD+ren 1.1 kap."
+      },
+      "contextualizacion": {
+        "label": "Testuinguratzea",
+        "desc": "Ingurune geografiko, sozioekonomiko eta eskolarra, ACNEAE ikasleak, eredu Sinplifikatuaren testuak eta egiletza-datuak. PD+ren 1.3 kap."
+      },
+      "dual": {
+        "label": "FEOE Duala",
+        "desc": "Enpresan edo baliokidetutako erakundean egindako prestakuntza (FEOE): modalitatea, jarraipena eta araubide duala. PD+ren 5. kap."
+      },
+      "criterios": {
+        "label": "Ebaluazioa eta kalifikazioa",
+        "desc": "Ebaluazio- eta kalifikazio-prozedura: ikasleei emandako informazioa, ebaluazio jarraituaren galera, berreskurapena. PD+ren 4. kap."
+      }
+    },
+    "curriculo": {
+      "contribucion-ra-og": {
+        "label": "RAren ekarpena OGetan",
+        "desc": "RAek tituluaren helburu orokorretan egiten duten ekarpena."
+      },
+      "ponderacion-ra-ce": {
+        "label": "RA eta CEren haztapena",
+        "desc": "Ikaskuntzaren emaitzen eta ebaluazio-irizpideen matrizea, eta haien haztapena."
+      },
+      "unidades": {
+        "label": "Unitate didaktikoak",
+        "desc": "Unitate didaktikoen edo lan-unitateen definizioa eta saioen sekuentziazioa."
+      },
+      "competenciales": {
+        "label": "Zeregin konpetentzialak",
+        "desc": "Zeregin eta jarduera konpetentzialen diseinua eta plangintza."
+      }
+    },
+    "metodologia": {
+      "metodologia": {
+        "label": "Metodologia eta inklusioa",
+        "desc": "Estrategia metodologikoak, irakasle-koordinazioa, aniztasunari arreta (DUA) eta ACNEAE ikasleen panela."
+      },
+      "recursos": {
+        "label": "Baliabideak",
+        "desc": "Hautatutako ebaluazio-tresnak eta behar diren baliabide eta espazioak."
+      },
+      "contingencia": {
+        "label": "Kontingentzia-plana",
+        "desc": "Kontingentzia-planak eta salbuespenezko egoeretarako egokitzapena."
+      },
+      "transversales": {
+        "label": "Zeharkakoak, konpetentziak eta jarduerak",
+        "desc": "Elementu zeharkakoak, funtsezko konpetentziak, konpetentzia digitalak, curriculumaren estandarrak eta helburuak, berrikuntza eta modulu arteko lotura, eta jarduera osagarriak/eskolaz kanpokoak."
+      }
+    },
+    "instrumentos": {
+      "resumen": {
+        "desc": "Erabilitako ebaluazio-tresnen ikuspegi orokorra. RD 659/2023 (136. art.)"
+      },
+      "tri1": {
+        "desc": "1. hiruhilekorako aurreikusitako ebaluazio-tresnak."
+      },
+      "tri2": {
+        "desc": "2. hiruhilekorako aurreikusitako ebaluazio-tresnak."
+      },
+      "tri3": {
+        "desc": "3. hiruhilekorako aurreikusitako ebaluazio-tresnak."
+      }
+    },
+    "archivos": {
+      "datos": {
+        "label": "Datuak",
+        "desc": "Lokalean edo hodeian gordetako Talde, Programazio eta Ikasturte fitxategien kudeaketa."
+      },
+      "nube": {
+        "label": "Hodeia",
+        "desc": "Google Drive eta Microsoft OneDriverekin sinkronizazio bidirekzional segurua."
+      },
+      "seguridad": {
+        "label": "Segurtasuna",
+        "desc": "Pribatutasun, enkriptatze eta datuen kontrol aukerak."
+      },
+      "asistente-ia": {
+        "label": "AI laguntzailea",
+        "desc": "Adimen artifizialaren konfigurazioa."
+      }
+    },
+    "catalogo": {
+      "familias": {
+        "desc": "Lanbide-familiak eta haiei lotutako heziketa-zikloak, mailaka antolatuta."
+      },
+      "titulos": {
+        "desc": "Heziketa-zikloetarako oinarrizko estatu-araudia eta erkidegoko curriculuma."
+      },
+      "modulos": {
+        "desc": "Espezializazio-blokeak eta ikasturte bakoitzari lotutako edukiak."
+      },
+      "ra-ce": {
+        "label": "RA → CE",
+        "desc": "RA eta CEtan egituratutako gaitasun espezifikoak (136. art., RD 659/2023)."
+      }
+    },
+    "normativa": {
+      "autonomias": {
+        "label": "Autonomiak",
+        "desc": "Erkidegoko legedia eta araudi berezia."
+      },
+      "bibliografia": {
+        "label": "Bibliografia",
+        "desc": "LHri buruzko estatuko eta erkidegoko lege, dekretu eta aginduen aurkibidea, aldizkari ofizialerako estekarekin."
+      },
+      "legislacion": {
+        "desc": "Zure erkidegoko dokumentu eta txantiloi deskargagarriak, mailaka antolatuta."
+      },
+      "ecp-incual": {
+        "label": "ECP INCUAL",
+        "desc": "Katalogo Nazionaleko (INCUAL) Lanbide Gaitasun Estandarrak (ECP)."
+      }
+    },
+    "magia": {
+      "comunidades": {
+        "label": "Erkidegoak",
+        "desc": "Programazio didaktiko ofizialaren sorkuntza, erkidegoka."
+      },
+      "guia": {
+        "label": "Gida",
+        "desc": "Hasierako gida eta AIrako prompta: irakasleari zer datu eskatu eta appan non kokatu."
+      },
+      "programacion": {
+        "label": "Programazioa",
+        "desc": "Laguntza-dokumentuak: curriculum-matrizea eta UD/Zereginen banakako dokumentuak."
+      },
+      "curso": {
+        "label": "Ikasturtea",
+        "desc": "Ikasturteko egutegia, jarraipena, ikasgelaren planoa, buletinak eta ebaluazio-aktak."
+      }
+    },
+    "equivalencias": {
+      "comparativa": {
+        "label": "Konparaketa",
+        "desc": "Programazio-maila desberdinen konparaketa, eta atal bakoitza non betetzen den."
+      },
+      "pdminus": {
+        "label": "APP → PD- (Laburpena)",
+        "desc": "Appatik, ikasleentzako 1-2 orriko laburpenean (PD-) bloke bakoitza non agertzen den."
+      },
+      "pdigual": {
+        "label": "APP → PD= (Sinplifikatua)",
+        "desc": "Appatik, eredu ofizial sinplifikatuan (PD=, A-Q arteko 17 atal) eremu bakoitza non agertzen den."
+      },
+      "pdplus": {
+        "label": "APP → PD+ (JEG xehea)",
+        "desc": "Appatik, JEG motako programazio xehean (PD+) eremu bakoitza non agertzen den, kapituluz kapitulu."
+      }
+    },
+    "ayuda": {
+      "faq": {
+        "label": "FAQ",
+        "desc": "Irakasleen galderarik ohikoenen erantzunak."
+      },
+      "acronimos": {
+        "label": "Akronimoak",
+        "desc": "Lanbide Heziketako sigla, akronimo eta kontzeptuen glosarioa."
+      },
+      "mapa": {
+        "label": "Web-mapa",
+        "desc": "Aplikazioaren atal eta erreminta guztien eskema hierarkikoa."
+      },
+      "documentos": {
+        "label": "Dokumentuak",
+        "desc": "Titulu bakoitzaren gutxieneko irakaskuntzak finkatzen dituzten xedapen arauemaileak."
+      }
+    },
+    "legal": {
+      "aviso": {
+        "label": "Lege-oharra",
+        "desc": "Titularraren datuak, erabilera-baldintzak, jabetza intelektuala eta lizentziak (GPLv3 eta CC BY-NC-SA)."
+      },
+      "privacidad": {
+        "label": "Pribatutasuna",
+        "desc": "Pribatutasun-politika, RGPD, tratamenduaren arduraduna eta local-first eredua."
+      },
+      "cookies": {
+        "label": "Cookieak",
+        "desc": "localStorage eta IndexedDB erabilera. Jarraipen-cookierik ez, ez eta hirugarrenen analitikarik ere."
+      },
+      "accesibilidad": {
+        "label": "Irisgarritasuna",
+        "desc": "Irisgarritasun digitalaren adierazpena, RD 1112/2018ren arabera, eta WCAG 2.1 AA konpromisoa."
+      }
+    },
+    "inicio": {
+      "verificacion": {
+        "label": "Egiaztapena",
+        "desc": "Zure koadernoaren datuen osasun- eta koherentzia-panela."
+      },
+      "contribuciones": {
+        "label": "Ekarpenak",
+        "desc": "Telegram komunitatea eta proiektuan aktiboki laguntzen duten pertsonen zerrenda."
+      },
+      "mejora": {
+        "label": "Hobekuntza",
+        "desc": "Kalitatearen kudeaketa, prozesuaren ebaluazioa eta moduluaren adierazleak."
+      },
+      "bienvenida": {
+        "desc": "Erreminta guztietarako sarbide azkarreko kontrol-panela."
+      }
+    }
   },
   "inicio": {
     "title": "Hasiera",
@@ -57,6 +350,7 @@
   },
   "nav": {
     "inicio": "Hasiera",
+    "agenda": "Agenda",
     "perfil": "Profila",
     "archivos": "Fitxategiak",
     "catalogo": "Katalogoa",

@@ -10,6 +10,7 @@ import {
   Eye,
 } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { TabSync } from "@/components/ui/TabSync";
@@ -65,22 +66,23 @@ function SectionHeading({
    PÁGINA LEGAL
    ══════════════════════════════════════════════════════════════ */
 export default function LegalPage() {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("aviso");
 
   const TABS = [
-    { id: "aviso", label: <><FileText className="w-[1.2em] h-[1.2em] mr-1" /> Aviso legal</>, cleanLabel: "Aviso legal" },
-    { id: "privacidad", label: <><Shield className="w-[1.2em] h-[1.2em] mr-1" /> Privacidad</>, cleanLabel: "Privacidad" },
-    { id: "cookies", label: <><Cookie className="w-[1.2em] h-[1.2em] mr-1" /> Cookies</>, cleanLabel: "Cookies" },
-    { id: "accesibilidad", label: <><Accessibility className="w-[1.2em] h-[1.2em] mr-1" /> Accesibilidad</>, cleanLabel: "Accesibilidad" },
+    { id: "aviso", label: <><FileText className="w-[1.2em] h-[1.2em] mr-1" /> {t('tabs.legal.aviso.label', {defaultValue: 'Aviso legal'})}</>, cleanLabel: t('tabs.legal.aviso.label', {defaultValue: 'Aviso legal'}) },
+    { id: "privacidad", label: <><Shield className="w-[1.2em] h-[1.2em] mr-1" /> {t('tabs.legal.privacidad.label', {defaultValue: 'Privacidad'})}</>, cleanLabel: t('tabs.legal.privacidad.label', {defaultValue: 'Privacidad'}) },
+    { id: "cookies", label: <><Cookie className="w-[1.2em] h-[1.2em] mr-1" /> {t('tabs.legal.cookies.label', {defaultValue: 'Cookies'})}</>, cleanLabel: t('tabs.legal.cookies.label', {defaultValue: 'Cookies'}) },
+    { id: "accesibilidad", label: <><Accessibility className="w-[1.2em] h-[1.2em] mr-1" /> {t('tabs.legal.accesibilidad.label', {defaultValue: 'Accesibilidad'})}</>, cleanLabel: t('tabs.legal.accesibilidad.label', {defaultValue: 'Accesibilidad'}) },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    'aviso': 'Datos del titular, condiciones de uso, propiedad intelectual (LPI) y LSSI-CE.',
-    'privacidad': 'Política de privacidad, RGPD, responsable del tratamiento y modelo local-first.',
-    'cookies': 'Uso de localStorage e IndexedDB. Sin cookies de rastreo ni analíticas de terceros.',
-    'accesibilidad': 'Declaración de accesibilidad digital según RD 1112/2018 y compromiso WCAG 2.1 AA.',
+    'aviso': t('tabs.legal.aviso.desc', {defaultValue: 'Datos del titular, condiciones de uso, propiedad intelectual y licencias (GPLv3 y CC BY-NC-SA).'}),
+    'privacidad': t('tabs.legal.privacidad.desc', {defaultValue: 'Política de privacidad, RGPD, responsable del tratamiento y modelo local-first.'}),
+    'cookies': t('tabs.legal.cookies.desc', {defaultValue: 'Uso de localStorage e IndexedDB. Sin cookies de rastreo ni analíticas de terceros.'}),
+    'accesibilidad': t('tabs.legal.accesibilidad.desc', {defaultValue: 'Declaración de accesibilidad digital según RD 1112/2018 y compromiso WCAG 2.1 AA.'}),
   };
 
   return (
@@ -510,7 +512,7 @@ export default function LegalPage() {
                     </p>
                   </div>
                   <p className="text-body text-foreground/80 leading-relaxed">
-                    Esta declaración se aplica a la aplicación web <strong>CuadernoFP</strong> alojada en{" "}
+                    Esta declaración se aplica a la aplicación web <strong>Cuaderno FP</strong> alojada en{" "}
                     <a href="https://cuadernofp.web.app/" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">
                       https://cuadernofp.web.app/
                     </a>.

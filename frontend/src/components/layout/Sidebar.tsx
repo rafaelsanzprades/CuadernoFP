@@ -222,7 +222,7 @@ export default function Sidebar() {
             <div className="w-8 h-px bg-foreground/10 mx-auto" />
           )}
           {isSidebarOpen && <div className="h-px bg-[var(--glass-border)] mx-1" />}
-          {[{ href: inicioPage.href, label: inicioPage.label, icon: inicioPage.icon }, { href: "/agenda", label: t('sidebar.agenda'), icon: CalendarDays }, ...topLevelPages].map((page) => {
+          {[{ href: inicioPage.href, label: inicioPage.label, icon: inicioPage.icon }, ...topLevelPages].map((page) => {
             const basePath = page.href.split('?')[0];
             const linkContent = (
               <Link
@@ -393,8 +393,11 @@ export default function Sidebar() {
         })}
       </nav>
 
+        {/* Separación de lado a lado antes de Legal */}
+        <div className="h-px w-full bg-[var(--glass-border)] shrink-0" />
+
         {/* 🔻 Footer 🔻 */}
-        <div className={`px-4 py-3 border-t border-[var(--glass-border)] flex flex-col items-center gap-1.5`}>
+        <div className={`px-4 py-3 flex flex-col items-center gap-1.5`}>
           {(() => {
             const isActive = pathname === '/legal';
             const linkContent = (

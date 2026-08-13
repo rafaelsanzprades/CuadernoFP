@@ -1,6 +1,6 @@
 # Comparativa de Programación Didáctica (PD) — 3 niveles
 
-> **Propósito:** Este documento muestra **exactamente dónde aparece** cada campo de la aplicación CuadernoFP en los 3 niveles de Programación Didáctica.
+> **Propósito:** Este documento muestra **exactamente dónde aparece** cada campo de la aplicación Cuaderno FP en los 3 niveles de Programación Didáctica.
 >
 > **Modelos de referencia:**
 > - **PD- (Resumen):** 1-2 folios visuales → Portada + Resumen RA/CE + Tabla UD
@@ -300,5 +300,5 @@ Entrada de calificaciones numéricas por alumnado y tarea — es el único punto
 2. **PD=** sigue la estructura normativa estricta de la Ordenación de FP (17 apartados A-Q).
 3. **PD+** es la versión completa y detallada con 15 secciones §1–§15. Los campos del bloque "Curso" (Calendario, Alumnado, Seguimiento, Calificaciones) solo aparecen en PD+ porque representan la gestión real del curso, no el documento teórico de programación.
 4. Los campos codificados (Multiselect) se generan automáticamente: en PD= aparecen como texto condensado, en PD+ como texto expandido con justificación.
-5. Los **apartados PD=** (A-Q) y **PD+** (§1–§15) corresponden a la estructura oficial de cada modelo. CuadernoFP mapea automáticamente los campos de la app a estos apartados al generar los documentos.
+5. Los **apartados PD=** (A-Q) y **PD+** (§1–§15) corresponden a la estructura oficial de cada modelo. Cuaderno FP mapea automáticamente los campos de la app a estos apartados al generar los documentos.
 6. **Páginas fusionadas desde la última reorganización de navegación:** "Evaluación" y "Secuenciación" (Programación) se repartieron entre Metodología → Recursos y Currículo → Unidades didácticas/Tareas competenciales; "Diario" e "Informes" (Curso) se fusionaron en Seguimiento y en MagIA → Curso respectivamente; "Matriz (Excel)" (Calificaciones) se eliminó y su función de entrada de notas la asume Seguimiento → Detalle por alumnado.

@@ -48,18 +48,19 @@ export default function AlumnadoPage() {
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const TABS = [
-    { id: "matricula", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Matrícula</>, cleanLabel: 'Matrícula' },
+    { id: "matricula", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.matricula.label', {defaultValue: 'Matrícula'})}</>, cleanLabel: t('tabs.alumnado.matricula.label', {defaultValue: 'Matrícula'}) },
     { id: "plano", label: <><span className="inline-flex"><LayoutGrid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.plano')}</>, cleanLabel: t('tabs.plano') },
-    { id: "tutoria", label: <><span className="inline-flex"><ClipboardCheck className="w-[1.2em] h-[1.2em] mr-1" /></span> Tutoría y alertas</>, cleanLabel: 'Tutoría y alertas' },
-    { id: "perfil", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Perfil del grupo</>, cleanLabel: 'Perfil del grupo' }
+    { id: "tutoria", label: <><span className="inline-flex"><ClipboardCheck className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.tutoria.label', {defaultValue: 'Tutoría y alertas'})}</>, cleanLabel: t('tabs.alumnado.tutoria.label', {defaultValue: 'Tutoría y alertas'}) },
+    { id: "perfil", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.perfil.label', {defaultValue: 'Perfil del grupo'})}</>, cleanLabel: t('tabs.alumnado.perfil.label', {defaultValue: 'Perfil del grupo'}) }
   ];
 
   const activeTabCleanLabel = TABS.find(t_tab => t_tab.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    matricula: 'Gestión del listado de alumnado y ficha individual.',
-    plano: 'Distribución y plano visual del aula.',
-    tutoria: 'Alertas de riesgo de abandono y seguimiento tutorial del alumnado.',
+    matricula: t('tabs.alumnado.matricula.desc', {defaultValue: 'Gestión del listado de alumnado y ficha individual.'}),
+    perfil: t('tabs.alumnado.perfil.desc', {defaultValue: 'Estadísticas, rasgos característicos y contexto narrativo del grupo.'}),
+    plano: t('tabs.alumnado.plano.desc', {defaultValue: 'Distribución y plano visual del aula.'}),
+    tutoria: t('tabs.alumnado.tutoria.desc', {defaultValue: 'Alertas de riesgo de abandono y seguimiento tutorial del alumnado.'}),
   };
 
   useEffect(() => {

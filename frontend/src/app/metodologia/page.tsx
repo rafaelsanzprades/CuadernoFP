@@ -3,6 +3,7 @@ import { TabSync } from "@/components/ui/TabSync";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { Target, CheckCircle2, Layers, FolderOpen, Lightbulb, Settings, Shield } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
@@ -19,6 +20,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 
 export default function MetodologiaConfigPage() {
+  const { t } = useTranslation();
   const { activeModuleId, moduleData, setModuleData } = useAppStore();
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("metodologia");
@@ -48,19 +50,19 @@ export default function MetodologiaConfigPage() {
   }, [activeModuleId, setModuleData]);
 
   const TABS = [
-    { id: "metodologia", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> Metodología e inclusión</span>, cleanLabel: "Metodología e inclusión" },
-    { id: "recursos", label: <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 shrink-0" /> Recursos</span>, cleanLabel: "Recursos" },
-    { id: "contingencia", label: <span className="flex items-center gap-2"><Shield className="w-4 h-4 shrink-0" /> Plan de contingencia</span>, cleanLabel: "Plan de contingencia" },
-    { id: "transversales", label: <span className="flex items-center gap-2"><Layers className="w-4 h-4 shrink-0" /> Transversales, competencias y actividades</span>, cleanLabel: "Transversales, competencias y actividades" },
+    { id: "metodologia", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.metodologia.label', {defaultValue: 'Metodología e inclusión'})}</span>, cleanLabel: t('tabs.metodologia.metodologia.label', {defaultValue: 'Metodología e inclusión'}) },
+    { id: "recursos", label: <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.recursos.label', {defaultValue: 'Recursos'})}</span>, cleanLabel: t('tabs.metodologia.recursos.label', {defaultValue: 'Recursos'}) },
+    { id: "contingencia", label: <span className="flex items-center gap-2"><Shield className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.contingencia.label', {defaultValue: 'Plan de contingencia'})}</span>, cleanLabel: t('tabs.metodologia.contingencia.label', {defaultValue: 'Plan de contingencia'}) },
+    { id: "transversales", label: <span className="flex items-center gap-2"><Layers className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.transversales.label', {defaultValue: 'Transversales, competencias y actividades'})}</span>, cleanLabel: t('tabs.metodologia.transversales.label', {defaultValue: 'Transversales, competencias y actividades'}) },
   ];
 
-  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+  const activeTabCleanLabel = TABS.find(tab => tab.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    metodologia: 'Estrategias metodológicas, coordinación docente, atención a la diversidad (DUA) y panel de alumnado ACNEAE.',
-    recursos: 'Instrumentos de evaluación seleccionados y recursos y espacios necesarios.',
-    contingencia: 'Planes de contingencia y adaptación ante situaciones excepcionales.',
-    transversales: 'Elementos transversales, competencias clave, competencias digitales, innovación e intermodularidad, y actividades complementarias/extraescolares.',
+    metodologia: t('tabs.metodologia.metodologia.desc', {defaultValue: 'Estrategias metodológicas, coordinación docente, atención a la diversidad (DUA) y panel de alumnado ACNEAE.'}),
+    recursos: t('tabs.metodologia.recursos.desc', {defaultValue: 'Instrumentos de evaluación seleccionados y recursos y espacios necesarios.'}),
+    contingencia: t('tabs.metodologia.contingencia.desc', {defaultValue: 'Planes de contingencia y adaptación ante situaciones excepcionales.'}),
+    transversales: t('tabs.metodologia.transversales.desc', {defaultValue: 'Elementos transversales, competencias clave, competencias digitales, estándares y objetivos del currículo, innovación e intermodularidad, y actividades complementarias/extraescolares.'}),
   };
 
   if (!activeModuleId) {

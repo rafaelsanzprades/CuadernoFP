@@ -125,16 +125,16 @@ export default function ProgresoPage() {
 
   const TABS = [
     { id: "resumen", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.resumen')}</>, cleanLabel: t('tabs.resumen') },
-    { id: "estadisticas", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Estadísticas</>, cleanLabel: "Estadísticas" },
+    { id: "estadisticas", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.estadisticas.label', {defaultValue: 'Estadísticas'})}</>, cleanLabel: t('tabs.calificaciones.estadisticas.label', {defaultValue: 'Estadísticas'}) },
     { id: "grupal", label: <><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.grupal')}</>, cleanLabel: t('tabs.grupal') },
     { id: "individual", label: <><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.individual')}</>, cleanLabel: t('tabs.individual') }
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    resumen: 'Panel global de rendimiento y calificaciones medias.',
-    estadisticas: 'Estadísticas descriptivas y visualizaciones del rendimiento del grupo.',
-    grupal: 'Desempeño y estadísticas comparativas del grupo.',
-    individual: 'Hoja de progreso individual para tutorías.',
+    resumen: t('tabs.calificaciones.resumen.desc', {defaultValue: 'Panel global de rendimiento y calificaciones medias.'}),
+    estadisticas: t('tabs.calificaciones.estadisticas.desc', {defaultValue: 'Estadísticas descriptivas y visualizaciones del rendimiento del grupo.'}),
+    grupal: t('tabs.calificaciones.grupal.desc', {defaultValue: 'Desempeño y estadísticas comparativas del grupo.'}),
+    individual: t('tabs.calificaciones.individual.desc', {defaultValue: 'Hoja de progreso individual para tutorías.'}),
   };
 
   return (

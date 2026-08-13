@@ -2,6 +2,7 @@
 import { Calendar, CalendarRange } from "lucide-react";
 import { TabSync } from "@/components/ui/TabSync";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
@@ -22,6 +23,7 @@ import { TabRelacionRaUd } from "@/components/features/curriculo/TabRelacionRaUd
 import { Target } from "lucide-react";
 
 export default function AgendaPage() {
+  const { t } = useTranslation();
   const {
     isWizardOpen, setWizardOpen, activeModuleId,
     moduleData, setModuleData, activeCursoId, cursoData, setCursoData,
@@ -56,20 +58,20 @@ export default function AgendaPage() {
   }, [activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData]);
 
   const TABS = [
-    { id: "actual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> Actual</>, cleanLabel: "Actual" },
-    { id: "planificacion", label: <><span className="inline-flex"><CalendarRange className="w-[1.2em] h-[1.2em] mr-1" /></span> Planificación</>, cleanLabel: "Planificación" },
-    { id: "progreso-ra-ud", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Previsión RA y UD</>, cleanLabel: "Previsión RA y UD" },
-    { id: "mensual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> Mensual</>, cleanLabel: "Mensual" },
+    { id: "actual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.agenda.actual.label', {defaultValue: 'Actual'})}</>, cleanLabel: t('tabs.agenda.actual.label', {defaultValue: 'Actual'}) },
+    { id: "planificacion", label: <><span className="inline-flex"><CalendarRange className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.agenda.planificacion.label', {defaultValue: 'Planificación'})}</>, cleanLabel: t('tabs.agenda.planificacion.label', {defaultValue: 'Planificación'}) },
+    { id: "progreso-ra-ud", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.agenda.progreso-ra-ud.label', {defaultValue: 'Previsión RA y UD'})}</>, cleanLabel: t('tabs.agenda.progreso-ra-ud.label', {defaultValue: 'Previsión RA y UD'}) },
+    { id: "mensual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.agenda.mensual.label', {defaultValue: 'Mensual'})}</>, cleanLabel: t('tabs.agenda.mensual.label', {defaultValue: 'Mensual'}) },
 
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    actual: 'Vista de la agenda diaria y tareas pendientes.',
-    planificacion: 'Planificación y seguimiento mensual de la programación.',
-    'progreso-ra-ud': 'Ponderación y relación entre unidades didácticas y resultados de aprendizaje.',
-    'mensual': 'Vista mensual y calendario interactivo con fechas clave.',
+    actual: t('tabs.agenda.actual.desc', {defaultValue: 'Resumen de las clases de hoy, contexto de la semana y desarrollo de la unidad didáctica en curso.'}),
+    planificacion: t('tabs.agenda.planificacion.desc', {defaultValue: 'Planificación y seguimiento mensual de la programación.'}),
+    'progreso-ra-ud': t('tabs.agenda.progreso-ra-ud.desc', {defaultValue: 'Progreso de los resultados de aprendizaje según el estado y la ponderación de las unidades didácticas impartidas.'}),
+    'mensual': t('tabs.agenda.mensual.desc', {defaultValue: 'Vista mensual y calendario interactivo con fechas clave.'}),
 
   };
 

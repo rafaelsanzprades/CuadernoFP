@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Download, FileEdit, FileSpreadsheet, FileText, FolderOpen, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp, Compass, Lightbulb, Wrench, Bot } from "lucide-react";
+import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Download, FileEdit, FileSpreadsheet, FileText, FolderOpen, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp, Compass, Lightbulb, Wrench } from "lucide-react";
 import * as XLSX from "xlsx";
 import React, { useState, useEffect, useMemo } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -21,6 +21,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 type DownloadOpts = {
   al_id?: string;
@@ -53,7 +54,7 @@ function DualDownloadButtons({
   );
 }
 
-const guiaDatosMarkdownComponents = {
+const guiaMarkdownComponents = {
   h1: ({ node, ...props }: any) => <h1 className="text-heading font-extrabold text-foreground mb-6 pb-2 border-b border-white/10" {...props} />,
   h2: ({ node, ...props }: any) => <h2 className="text-subheading font-bold text-accent mt-8 mb-4 flex items-center gap-2" {...props} />,
   h3: ({ node, ...props }: any) => <h3 className="text-subheading font-bold text-foreground mt-6 mb-3" {...props} />,
@@ -72,10 +73,11 @@ const guiaDatosMarkdownComponents = {
 };
 
 export default function MagiaPage() {
+  const { t } = useTranslation();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [previewFilename, setPreviewFilename] = useState<string | null>(null);
   const [downloadingStr, setDownloadingStr] = useState<string | null>(null);
-  const [guiaDatosContent, setGuiaDatosContent] = useState<string | null>(null);
+  const [guiaContent, setGuiaContent] = useState<string | null>(null);
 
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData } = useAppStore();
   // df_sgmt / planning_ledger guardados en cursoData no se sincronizan con el
@@ -135,15 +137,15 @@ export default function MagiaPage() {
   }, [cursoData?.info_fechas]);
 
   useEffect(() => {
-    if (activeTab !== "datos" || guiaDatosContent !== null) return;
+    if (activeTab !== "guia" || guiaContent !== null) return;
     fetch("/Guia.md")
       .then(res => res.text())
-      .then(text => setGuiaDatosContent(text))
+      .then(text => setGuiaContent(text))
       .catch(err => {
         console.error(err);
-        setGuiaDatosContent("Error cargando el contenido.");
+        setGuiaContent("Error cargando el contenido.");
       });
-  }, [activeTab, guiaDatosContent]);
+  }, [activeTab, guiaContent]);
 
   const formatD = (dStr: string | undefined) => {
     if (!dStr) return "---";
@@ -257,17 +259,17 @@ export default function MagiaPage() {
   const df_act = moduleData?.df_act || [];
 
   const TABS = [
-    { id: "comunidades", label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4 shrink-0" /> Comunidades</span>, cleanLabel: "Comunidades" },
-    { id: "datos", label: <span className="flex items-center gap-2"><Bot className="w-4 h-4 shrink-0" /> APP / Datos</span>, cleanLabel: "APP / Datos" },
-    { id: "programacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> Programación</span>, cleanLabel: "Programación" },
-    { id: "curso", label: <span className="flex items-center gap-2"><Calendar className="w-4 h-4 shrink-0" /> Curso</span>, cleanLabel: "Curso" },
+    { id: "comunidades", label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4 shrink-0" /> {t('tabs.magia.comunidades.label', {defaultValue: 'Comunidades'})}</span>, cleanLabel: t('tabs.magia.comunidades.label', {defaultValue: 'Comunidades'}) },
+    { id: "guia", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> {t('tabs.magia.guia.label', {defaultValue: 'Guía'})}</span>, cleanLabel: t('tabs.magia.guia.label', {defaultValue: 'Guía'}) },
+    { id: "programacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.magia.programacion.label', {defaultValue: 'Programación'})}</span>, cleanLabel: t('tabs.magia.programacion.label', {defaultValue: 'Programación'}) },
+    { id: "curso", label: <span className="flex items-center gap-2"><Calendar className="w-4 h-4 shrink-0" /> {t('tabs.magia.curso.label', {defaultValue: 'Curso'})}</span>, cleanLabel: t('tabs.magia.curso.label', {defaultValue: 'Curso'}) },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    comunidades: 'Generación de la programación didáctica oficial, por comunidad autónoma.',
-    datos: 'Guía de inicio y prompt para IA: qué datos pedir al docente y dónde colocarlos en la app.',
-    programacion: 'Documentos de apoyo: matriz de currículo y documentos individuales de UD/Tareas.',
-    curso: 'Calendario, seguimiento, plano de aula, boletines y actas de evaluación del curso.',
+    comunidades: t('tabs.magia.comunidades.desc', {defaultValue: 'Generación de la programación didáctica oficial, por comunidad autónoma.'}),
+    guia: t('tabs.magia.guia.desc', {defaultValue: 'Guía de inicio y prompt para IA: qué datos pedir al docente y dónde colocarlos en la app.'}),
+    programacion: t('tabs.magia.programacion.desc', {defaultValue: 'Documentos de apoyo: matriz de currículo y documentos individuales de UD/Tareas.'}),
+    curso: t('tabs.magia.curso.desc', {defaultValue: 'Calendario, seguimiento, plano de aula, boletines y actas de evaluación del curso.'}),
   };
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel || activeTab;
@@ -450,15 +452,15 @@ export default function MagiaPage() {
                   </div>
                 )}
 
-                {/* ══════════════════════════ APP / DATOS (guía de inicio) ══════════════════════════ */}
-                {activeTab === "datos" && (
+                {/* ══════════════════════════ GUÍA (guía de inicio) ══════════════════════════ */}
+                {activeTab === "guia" && (
                   <Card glow className="p-8">
-                    {guiaDatosContent === null ? (
+                    {guiaContent === null ? (
                       <div className="flex justify-center p-8 text-muted">Cargando...</div>
                     ) : (
                       <div className="markdown-body">
-                        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={guiaDatosMarkdownComponents}>
-                          {guiaDatosContent}
+                        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={guiaMarkdownComponents}>
+                          {guiaContent}
                         </ReactMarkdown>
                       </div>
                     )}

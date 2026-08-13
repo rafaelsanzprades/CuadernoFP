@@ -49,17 +49,17 @@ export default function MatricesPage() {
   }, []);
 
   const TABS = [
-    { id: "contribucion-ra-og", label: "Contribución RA en OG", cleanLabel: "Contribución RA en OG", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "ponderacion-ra-ce", label: "Ponderación RA y CE", cleanLabel: "Ponderación RA y CE", icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "unidades", label: "Unidades didácticas", cleanLabel: "Unidades didácticas", icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "competenciales", label: "Tareas competenciales", cleanLabel: "Tareas competenciales", icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "contribucion-ra-og", label: t('tabs.curriculo.contribucion-ra-og.label', {defaultValue: 'Contribución RA en OG'}), cleanLabel: t('tabs.curriculo.contribucion-ra-og.label', {defaultValue: 'Contribución RA en OG'}), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "ponderacion-ra-ce", label: t('tabs.curriculo.ponderacion-ra-ce.label', {defaultValue: 'Ponderación RA y CE'}), cleanLabel: t('tabs.curriculo.ponderacion-ra-ce.label', {defaultValue: 'Ponderación RA y CE'}), icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "unidades", label: t('tabs.curriculo.unidades.label', {defaultValue: 'Unidades didácticas'}), cleanLabel: t('tabs.curriculo.unidades.label', {defaultValue: 'Unidades didácticas'}), icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "competenciales", label: t('tabs.curriculo.competenciales.label', {defaultValue: 'Tareas competenciales'}), cleanLabel: t('tabs.curriculo.competenciales.label', {defaultValue: 'Tareas competenciales'}), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    'contribucion-ra-og': 'Contribución de los RA a los objetivos generales del título.',
-    'ponderacion-ra-ce': 'Matriz de resultados de aprendizaje y criterios de evaluación, y su ponderación.',
-    'unidades': 'Definición de unidades didácticas o unidades de trabajo.',
-    'competenciales': 'Diseño y planificación de tareas y actividades competenciales.',
+    'contribucion-ra-og': t('tabs.curriculo.contribucion-ra-og.desc', {defaultValue: 'Contribución de los RA a los objetivos generales del título.'}),
+    'ponderacion-ra-ce': t('tabs.curriculo.ponderacion-ra-ce.desc', {defaultValue: 'Matriz de resultados de aprendizaje y criterios de evaluación, y su ponderación.'}),
+    'unidades': t('tabs.curriculo.unidades.desc', {defaultValue: 'Definición de unidades didácticas o unidades de trabajo y secuenciación de sus sesiones.'}),
+    'competenciales': t('tabs.curriculo.competenciales.desc', {defaultValue: 'Diseño y planificación de tareas y actividades competenciales.'}),
   };
 
   // Load catalog descriptions when module changes (for fallback resolution)

@@ -1,6 +1,6 @@
-# PD= (Simplificada) ← APP: del modelo oficial a dónde se rellena
+# APP → PD= (Simplificada): del modelo oficial a dónde se rellena
 
-El modelo PD= sigue la estructura normativa oficial de la Ordenación de FP: Portada + Contextualización + 17 apartados con letra (A a Q). A continuación se indica **exactamente dónde se rellena** cada apartado en CuadernoFP. Donde no existe todavía un campo específico se indica claramente — esos apartados requieren redacción manual del docente.
+El modelo PD= sigue la estructura normativa oficial de la Ordenación de FP: Portada + Contextualización + 17 apartados con letra (A a Q). A continuación se indica **exactamente dónde se rellena** cada apartado en Cuaderno FP. Donde no existe todavía un campo específico se indica claramente — esos apartados requieren redacción manual del docente.
 
 ---
 

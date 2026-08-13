@@ -18,23 +18,21 @@ import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 
-const TABS = [
-  { id: "clases", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Clases</span>, cleanLabel: "Clases" },
-  { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> Asistencia</span>, cleanLabel: "Asistencia" },
-  { id: "progreso-ra-ud", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> Progreso de RA y UD</span>, cleanLabel: "Progreso de RA y UD" },
-  { id: "detalle", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> Detalle por alumnado</span>, cleanLabel: "Detalle por alumnado" },
-];
-
-const TAB_DESCRIPTIONS: Record<string, string> = {
-  clases: 'Diario de clases, sesiones lectivas y registro de contingencias.',
-  asistencia: 'Control de asistencia del alumnado.',
-  'progreso-ra-ud': 'Grado de consecución de los resultados de aprendizaje por trimestre.',
-  detalle: 'Entrada de notas numéricas por alumnado, instrumento de evaluación y nivel de adquisición de RA.',
-};
-
 export default function SeguimientoPage() {
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData } = useAppStore();
   const { t } = useTranslation();
+  const TABS = [
+    { id: "clases", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.clases.label', {defaultValue: 'Clases'})}</span>, cleanLabel: t('tabs.seguimiento.clases.label', {defaultValue: 'Clases'}) },
+    { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.asistencia.label', {defaultValue: 'Asistencia'})}</span>, cleanLabel: t('tabs.seguimiento.asistencia.label', {defaultValue: 'Asistencia'}) },
+    { id: "progreso-ra-ud", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.progreso-ra-ud.label', {defaultValue: 'Progreso de RA y UD'})}</span>, cleanLabel: t('tabs.seguimiento.progreso-ra-ud.label', {defaultValue: 'Progreso de RA y UD'}) },
+    { id: "detalle", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.detalle.label', {defaultValue: 'Detalle por alumnado'})}</span>, cleanLabel: t('tabs.seguimiento.detalle.label', {defaultValue: 'Detalle por alumnado'}) },
+  ];
+  const TAB_DESCRIPTIONS: Record<string, string> = {
+    clases: t('tabs.seguimiento.clases.desc', {defaultValue: 'Diario de clases, sesiones lectivas y registro de contingencias.'}),
+    asistencia: t('tabs.seguimiento.asistencia.desc', {defaultValue: 'Control de asistencia del alumnado.'}),
+    'progreso-ra-ud': t('tabs.seguimiento.progreso-ra-ud.desc', {defaultValue: 'Grado de consecución de los resultados de aprendizaje por trimestre.'}),
+    detalle: t('tabs.seguimiento.detalle.desc', {defaultValue: 'Entrada de notas numéricas por alumnado, instrumento de evaluación y nivel de adquisición de RA.'}),
+  };
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");

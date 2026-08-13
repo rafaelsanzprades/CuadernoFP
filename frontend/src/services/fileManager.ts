@@ -445,7 +445,7 @@ export const fileManager = {
     try {
       const [handle] = await (window as any).showOpenFilePicker({
         types: [{
-          description: 'Programación CuadernoFP',
+          description: 'Programación Cuaderno FP',
           accept: { 'application/json': ['.fpp', '.json'] },
         }],
         multiple: false,
@@ -474,7 +474,7 @@ export const fileManager = {
     try {
       const [handle] = await (window as any).showOpenFilePicker({
         types: [{
-          description: 'Curso CuadernoFP',
+          description: 'Curso Cuaderno FP',
           accept: { 'application/json': ['.fpc', '.json'] },
         }],
         multiple: false,
@@ -722,7 +722,7 @@ export const fileManager = {
       const handle = await (window as any).showSaveFilePicker({
         suggestedName: `${activeModuleId}.fpp`,
         types: [{
-          description: 'Programación CuadernoFP',
+          description: 'Programación Cuaderno FP',
           accept: { 'application/json': ['.fpp'] },
         }],
       });
@@ -755,7 +755,7 @@ export const fileManager = {
       const handle = await (window as any).showSaveFilePicker({
         suggestedName: `${activeCursoId}.fpc`,
         types: [{
-          description: 'Curso CuadernoFP',
+          description: 'Curso Cuaderno FP',
           accept: { 'application/json': ['.fpc'] },
         }],
       });

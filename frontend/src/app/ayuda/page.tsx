@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/Card";
 import Link from "next/link";
 import { TabSync } from "@/components/ui/TabSync";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
@@ -96,15 +97,15 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   ],
   "/magia": [
     { id: "comunidades", label: "Comunidades" },
-    { id: "datos", label: "APP / Datos" },
+    { id: "guia", label: "Guía" },
     { id: "programacion", label: "Programación" },
     { id: "curso", label: "Curso" },
   ],
   "/equivalencias": [
     { id: "comparativa", label: "Comparativa" },
-    { id: "pd-", label: "PD- / APP" },
-    { id: "pd=", label: "PD= / APP" },
-    { id: "pd+", label: "PD+ / APP" },
+    { id: "pd-", label: "APP → PD- (Resumen)" },
+    { id: "pd=", label: "APP → PD= (Simplificada)" },
+    { id: "pd+", label: "APP → PD+ (Detallada JEG)" },
   ],
   "/ayuda": [
     { id: "faq", label: "FAQ" },
@@ -176,7 +177,7 @@ const FAQS = [
       { q: "¿Cómo paso lista o registro faltas de asistencia?", a: "En la sección de Seguimiento tienes la pestaña 'Asistencia'. Verás a todo tu alumnado y con un solo clic en su cuadrícula puedes alternar entre Falta, Retraso o Falta Justificada." },
       { q: "¿Cómo evalúo una tarea o examen concreto?", a: "Ve a la sección 'Seguimiento' > pestaña 'Detalle por alumnado' para introducir la nota de cada actividad, por alumno. La nota final se recalcula automáticamente a partir de los pesos de RA y CE." },
       { q: "¿Cómo se calcula exactamente la nota final del trimestre?", a: "El sistema cruza las calificaciones que pones en los Instrumentos con el peso del Indicador (Evaluación > bloque Indicadores), que a su vez alimenta el peso del Criterio de Evaluación (CE) y finalmente el Resultado de Aprendizaje (RA). Todo en tiempo real." },
-      { q: "¿Qué significan los colores (morado, rojo, naranja) en la agenda y el calendario visual?", a: "Los colores del fondo indican el trimestre (evaluación) al que pertenece cada actividad o fecha: 1er trimestre (morado/malva), 2º trimestre (rojo/rosa) y 3er trimestre (naranja/ámbar)." }
+      { q: "¿Qué significan los colores (morado, verde azulado, naranja) en la agenda y el calendario visual?", a: "Los colores del fondo indican el trimestre (evaluación) al que pertenece cada actividad o fecha: 1er trimestre (morado/malva), 2º trimestre (teal/verde azulado) y 3er trimestre (naranja/ámbar) — deliberadamente sin rojo ni azul, esos tonos están reservados a Festivo y Evento." }
     ]
   },
   {
@@ -196,22 +197,23 @@ const FAQS = [
 ];
 
 export default function AyudaPage() {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<string>("faq");
 
   const TABS = [
-    { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> FAQ</>, cleanLabel: "FAQ" },
-    { id: "acronimos", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Acrónimos</>, cleanLabel: "Acrónimos" },
-    { id: "mapa", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> Mapa web</>, cleanLabel: "Mapa web" },
-    { id: "documentos", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Documentos</>, cleanLabel: "Documentos" },
+    { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.faq.label', {defaultValue: 'FAQ'})}</>, cleanLabel: t('tabs.ayuda.faq.label', {defaultValue: 'FAQ'}) },
+    { id: "acronimos", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.acronimos.label', {defaultValue: 'Acrónimos'})}</>, cleanLabel: t('tabs.ayuda.acronimos.label', {defaultValue: 'Acrónimos'}) },
+    { id: "mapa", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.mapa.label', {defaultValue: 'Mapa web'})}</>, cleanLabel: t('tabs.ayuda.mapa.label', {defaultValue: 'Mapa web'}) },
+    { id: "documentos", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.documentos.label', {defaultValue: 'Documentos'})}</>, cleanLabel: t('tabs.ayuda.documentos.label', {defaultValue: 'Documentos'}) },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    faq: 'Respuestas a las preguntas más frecuentes del profesorado.',
-    acronimos: 'Glosario de siglas, acrónimos y conceptos de Formación Profesional.',
-    mapa: 'Esquema jerárquico de todas las secciones y utilidades de la aplicación.',
-    documentos: 'Disposiciones normativas que fijan las enseñanzas mínimas de cada título.'
+    faq: t('tabs.ayuda.faq.desc', {defaultValue: 'Respuestas a las preguntas más frecuentes del profesorado.'}),
+    acronimos: t('tabs.ayuda.acronimos.desc', {defaultValue: 'Glosario de siglas, acrónimos y conceptos de Formación Profesional.'}),
+    mapa: t('tabs.ayuda.mapa.desc', {defaultValue: 'Esquema jerárquico de todas las secciones y utilidades de la aplicación.'}),
+    documentos: t('tabs.ayuda.documentos.desc', {defaultValue: 'Disposiciones normativas que fijan las enseñanzas mínimas de cada título.'})
   };
 
   return (
@@ -280,10 +282,10 @@ export default function AyudaPage() {
                     <strong className="text-foreground">¿Es adecuado el agrupamiento actual?</strong> Sí: separa
                     con claridad lo reutilizable (<em>Programación</em>: Contexto/Currículo/Metodología/
                     Instrumentos), lo específico del año (<em>Curso</em>: Calendario/Alumnado/Seguimiento/
-                    Calificaciones) y lo transversal (<em>Grupo</em>: Archivos/Catálogo/Normativa/Magia — datos
-                    de consulta y generación de documentos). Equivalencias, Ayuda y Legal viven como accesos
-                    directos junto a Agenda (fuera de estos tres grupos, de consulta puntual) y Mejora se
-                    fusionó como pestaña dentro de Inicio.
+                    Calificaciones) y lo transversal (<em>Grupo</em>: Agenda/Archivo/Normativa/Catálogo — vista
+                    diaria y datos de consulta). Ayuda, Equivalencia y MagIA viven como accesos directos junto
+                    a Inicio (fuera de estos tres grupos, de consulta puntual) y Mejora se fusionó como pestaña
+                    dentro de Inicio.
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-4">
@@ -293,9 +295,9 @@ export default function AyudaPage() {
                       <ul className="space-y-4 text-body">
                         {[
                           { href: "/inicio", label: "Inicio", tabs: PAGE_TABS["/inicio"] },
-                          { href: "/agenda", label: "Agenda", tabs: PAGE_TABS["/agenda"] },
-                          { href: "/equivalencias", label: "Equivalencia", tabs: PAGE_TABS["/equivalencias"] },
                           { href: "/ayuda", label: "Ayuda", tabs: PAGE_TABS["/ayuda"] },
+                          { href: "/equivalencias", label: "Equivalencia", tabs: PAGE_TABS["/equivalencias"] },
+                          { href: "/magia", label: "MagIA", tabs: PAGE_TABS["/magia"] },
                           { href: "/legal", label: "Legal", tabs: PAGE_TABS["/legal"] },
                         ].map(page => (
                           <li key={page.href}>

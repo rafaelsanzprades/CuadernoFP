@@ -53,19 +53,19 @@ export default function ContextoConfigPage() {
   }, [activeModuleId, setModuleData, dataSource]);
 
   const TABS = [
-    { id: "identificacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> Identificación</span>, cleanLabel: "Identificación" },
-    { id: "contextualizacion", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> Contextualización</span>, cleanLabel: "Contextualización" },
-    { id: "dual", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> Dual FEOE</span>, cleanLabel: "Dual FEOE" },
-    { id: "criterios", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> Evaluación y calificación</span>, cleanLabel: "Evaluación y calificación" },
+    { id: "identificacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.contexto.identificacion.label', {defaultValue: 'Identificación'})}</span>, cleanLabel: t('tabs.contexto.identificacion.label', {defaultValue: 'Identificación'}) },
+    { id: "contextualizacion", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.contexto.contextualizacion.label', {defaultValue: 'Contextualización'})}</span>, cleanLabel: t('tabs.contexto.contextualizacion.label', {defaultValue: 'Contextualización'}) },
+    { id: "dual", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.contexto.dual.label', {defaultValue: 'Dual FEOE'})}</span>, cleanLabel: t('tabs.contexto.dual.label', {defaultValue: 'Dual FEOE'}) },
+    { id: "criterios", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.contexto.criterios.label', {defaultValue: 'Evaluación y calificación'})}</span>, cleanLabel: t('tabs.contexto.criterios.label', {defaultValue: 'Evaluación y calificación'}) },
   ];
 
-  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+  const activeTabCleanLabel = TABS.find(tab => tab.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    identificacion: 'Identificación del módulo: código, denominación, centro, curso académico y profesorado. Cap. 1.1 del PD+.',
-    contextualizacion: 'Entorno geográfico, socioeconómico y escolar del módulo. Cap. 1.3 del PD+.',
-    dual: 'Formación en empresa u organismo equiparado (FEOE): modalidad, seguimiento y régimen dual. Cap. 5 del PD+.',
-    criterios: 'Procedimiento de evaluación y de calificación: información al alumnado, pérdida de evaluación continua, recuperación. Cap. 4 del PD+.',
+    identificacion: t('tabs.contexto.identificacion.desc', {defaultValue: 'Identificación del módulo y centro, régimen dual, reglas de redondeo, ponderación trimestral, instrumentos de evaluación y escalas cualitativas. Cap. 1.1 del PD+.'}),
+    contextualizacion: t('tabs.contexto.contextualizacion.desc', {defaultValue: 'Entorno geográfico, socioeconómico y escolar, alumnado ACNEAE, textos del modelo Simplificado y datos de autoría. Cap. 1.3 del PD+.'}),
+    dual: t('tabs.contexto.dual.desc', {defaultValue: 'Formación en empresa u organismo equiparado (FEOE): modalidad, seguimiento y régimen dual. Cap. 5 del PD+.'}),
+    criterios: t('tabs.contexto.criterios.desc', {defaultValue: 'Procedimiento de evaluación y de calificación: información al alumnado, pérdida de evaluación continua, recuperación. Cap. 4 del PD+.'}),
   };
 
   if (!activeModuleId) {

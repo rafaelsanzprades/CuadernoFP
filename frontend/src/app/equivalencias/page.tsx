@@ -12,20 +12,7 @@ import rehypeRaw from "rehype-raw";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
-
-const TABS = [
-  { id: "comparativa", label: <><span className="inline-flex"><GitCompare className="w-[1.2em] h-[1.2em] mr-1" /></span> Comparativa</>, cleanLabel: "Comparativa", file: "/Comparativa_PD.md" },
-  { id: "pd-", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD- / APP</>, cleanLabel: "PD- / APP", file: "/Guia_pd-.md" },
-  { id: "pd=", label: <><span className="inline-flex"><FileCheck2 className="w-[1.2em] h-[1.2em] mr-1" /></span> PD= / APP</>, cleanLabel: "PD= / APP", file: "/Guia_pd%3D.md" },
-  { id: "pd+", label: <><span className="inline-flex"><FileStack className="w-[1.2em] h-[1.2em] mr-1" /></span> PD+ / APP</>, cleanLabel: "PD+ / APP", file: "/Guia_pd%2B.md" },
-];
-
-const TAB_DESCRIPTIONS: Record<string, string> = {
-  "comparativa": "Comparativa de los distintos niveles de programación y dónde se rellena cada apartado.",
-  "pd-": "Del resumen de 1-2 folios para el alumnado (PD-) a dónde se rellena cada bloque en la app.",
-  "pd=": "Del modelo oficial simplificado, 17 apartados A-Q (PD=), a dónde se rellena cada uno en la app.",
-  "pd+": "De la programación detallada tipo JEG (PD+), capítulo a capítulo, a dónde se rellena en la app.",
-};
+import { useTranslation } from "react-i18next";
 
 const markdownComponents = {
   h1: ({ node, ...props }: any) => <h1 className="text-heading font-extrabold text-foreground mb-6 pb-2 border-b border-white/10" {...props} />,
@@ -46,6 +33,21 @@ const markdownComponents = {
 };
 
 export default function CorrelacionPage() {
+  const { t } = useTranslation();
+  const TABS = [
+    { id: "comparativa", label: <><span className="inline-flex"><GitCompare className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.equivalencias.comparativa.label', {defaultValue: 'Comparativa'})}</>, cleanLabel: t('tabs.equivalencias.comparativa.label', {defaultValue: 'Comparativa'}), file: "/Comparativa_PD.md" },
+    { id: "pd-", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.equivalencias.pdminus.label', {defaultValue: 'APP → PD- (Resumen)'})}</>, cleanLabel: t('tabs.equivalencias.pdminus.label', {defaultValue: 'APP → PD- (Resumen)'}), file: "/Guia_pd-.md" },
+    { id: "pd=", label: <><span className="inline-flex"><FileCheck2 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.equivalencias.pdigual.label', {defaultValue: 'APP → PD= (Simplificada)'})}</>, cleanLabel: t('tabs.equivalencias.pdigual.label', {defaultValue: 'APP → PD= (Simplificada)'}), file: "/Guia_pd%3D.md" },
+    { id: "pd+", label: <><span className="inline-flex"><FileStack className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.equivalencias.pdplus.label', {defaultValue: 'APP → PD+ (Detallada JEG)'})}</>, cleanLabel: t('tabs.equivalencias.pdplus.label', {defaultValue: 'APP → PD+ (Detallada JEG)'}), file: "/Guia_pd%2B.md" },
+  ];
+
+  const TAB_DESCRIPTIONS: Record<string, string> = {
+    "comparativa": t('tabs.equivalencias.comparativa.desc', {defaultValue: 'Comparativa de los distintos niveles de programación y dónde se rellena cada apartado.'}),
+    "pd-": t('tabs.equivalencias.pdminus.desc', {defaultValue: 'De la app a dónde aparece cada bloque en el resumen de 1-2 folios para el alumnado (PD-).'}),
+    "pd=": t('tabs.equivalencias.pdigual.desc', {defaultValue: 'De la app a dónde aparece cada campo en el modelo oficial simplificado, 17 apartados A-Q (PD=).'}),
+    "pd+": t('tabs.equivalencias.pdplus.desc', {defaultValue: 'De la app a dónde aparece cada campo en la programación detallada tipo JEG (PD+), capítulo a capítulo.'}),
+  };
+
   const [activeTab, setActiveTab] = useState<string>("comparativa");
   const [content, setContent] = useState<Record<string, string>>({});
   const [loadingTab, setLoadingTab] = useState<string | null>(null);

@@ -22,10 +22,8 @@
     "fechas": "Key dates",
     "horario": "Weekly schedule",
     "datos": "Data",
-    "contexto": "Context",
     "planes": "Plans",
     "contexto_feoe": "FEOE",
-    "metodologia": "Methodology",
     "evaluacion": "Resources",
     "otros": "Transversal",
     "ra": "RA and CE",
@@ -41,7 +39,6 @@
     "archivos_locales": "Local Files",
     "plantillas": "Templates",
     "curriculos": "Curriculums",
-    "normativa": "Regulations",
     "todofp": "TodoFP",
     "autores": "Authors",
     "informes": "Reports",
@@ -49,7 +46,303 @@
     "boletines": "Bulletins",
     "familias": "Families",
     "titulos": "Titles",
-    "modulos": "Modules"
+    "modulos": "Modules",
+    "agenda": {
+      "actual": {
+        "label": "Current",
+        "desc": "Summary of today's classes, the context of the week and the progress of the teaching unit currently underway."
+      },
+      "planificacion": {
+        "label": "Planning",
+        "desc": "Monthly planning and tracking of the programming."
+      },
+      "progreso-ra-ud": {
+        "label": "Forecast: learning outcomes & units",
+        "desc": "Progress of learning outcomes based on the status and weighting of the teaching units delivered."
+      },
+      "mensual": {
+        "label": "Monthly",
+        "desc": "Monthly view and interactive calendar with key dates."
+      }
+    },
+    "calendario": {
+      "fechas": {
+        "label": "Dates and schedule",
+        "desc": "Configure the course's general dates, terms and weekly schedule."
+      },
+      "feoe": {
+        "label": "FEOE period",
+        "desc": "Specific configuration for dual VET (FEOE)."
+      },
+      "eventos": {
+        "label": "Events and holidays",
+        "desc": "Record of events and holidays that affect teaching."
+      },
+      "actividades": {
+        "label": "Extracurricular activities",
+        "desc": "Planning of complementary and extracurricular activities."
+      },
+      "visual": {
+        "desc": "Monthly view of the complete academic calendar."
+      }
+    },
+    "alumnado": {
+      "matricula": {
+        "label": "Enrollment",
+        "desc": "Management of the student list and individual records."
+      },
+      "tutoria": {
+        "label": "Tutoring and alerts",
+        "desc": "Drop-out risk alerts and tutorial follow-up for students."
+      },
+      "perfil": {
+        "label": "Group profile",
+        "desc": "Statistics, characteristic traits and narrative context of the group."
+      },
+      "plano": {
+        "desc": "Layout and visual map of the classroom."
+      }
+    },
+    "seguimiento": {
+      "clases": {
+        "label": "Classes",
+        "desc": "Class journal, teaching sessions and record of contingencies."
+      },
+      "asistencia": {
+        "label": "Attendance",
+        "desc": "Student attendance control."
+      },
+      "progreso-ra-ud": {
+        "label": "Progress of learning outcomes and units",
+        "desc": "Degree of attainment of the learning outcomes by term."
+      },
+      "detalle": {
+        "label": "Detail by student",
+        "desc": "Entry of numerical grades by student, evaluation instrument and level of RA attainment."
+      }
+    },
+    "calificaciones": {
+      "estadisticas": {
+        "label": "Statistics",
+        "desc": "Descriptive statistics and visualizations of the group's performance."
+      },
+      "resumen": {
+        "desc": "Overall panel of performance and average grades."
+      },
+      "grupal": {
+        "desc": "Group performance and comparative statistics."
+      },
+      "individual": {
+        "desc": "Individual progress sheet for tutoring sessions."
+      }
+    },
+    "contexto": {
+      "identificacion": {
+        "label": "Identification",
+        "desc": "Identification of the module and center, dual system, rounding rules, term weighting, evaluation instruments and qualitative scales. Chapter 1.1 of the PD+."
+      },
+      "contextualizacion": {
+        "label": "Contextualization",
+        "desc": "Geographic, socioeconomic and school environment, ACNEAE students, texts for the Simplified model, and authorship details. Chapter 1.3 of the PD+."
+      },
+      "dual": {
+        "label": "Dual FEOE",
+        "desc": "Training in a company or equivalent organization (FEOE): modality, tracking and dual system. Chapter 5 of the PD+."
+      },
+      "criterios": {
+        "label": "Evaluation and grading",
+        "desc": "Evaluation and grading procedure: information for students, loss of continuous assessment, remediation. Chapter 4 of the PD+."
+      }
+    },
+    "curriculo": {
+      "contribucion-ra-og": {
+        "label": "Contribution of RA to general objectives",
+        "desc": "Contribution of the learning outcomes to the general objectives of the qualification."
+      },
+      "ponderacion-ra-ce": {
+        "label": "Weighting of RA and CE",
+        "desc": "Matrix of learning outcomes and assessment criteria, and their weighting."
+      },
+      "unidades": {
+        "label": "Teaching units",
+        "desc": "Definition of teaching units or work units and sequencing of their sessions."
+      },
+      "competenciales": {
+        "label": "Competency-based tasks",
+        "desc": "Design and planning of competency-based tasks and activities."
+      }
+    },
+    "metodologia": {
+      "metodologia": {
+        "label": "Methodology and inclusion",
+        "desc": "Methodological strategies, teaching coordination, attention to diversity (UDL) and panel of ACNEAE students."
+      },
+      "recursos": {
+        "label": "Resources",
+        "desc": "Selected evaluation instruments and the resources and spaces required."
+      },
+      "contingencia": {
+        "label": "Contingency plan",
+        "desc": "Contingency plans and adaptation for exceptional situations."
+      },
+      "transversales": {
+        "label": "Transversal elements, competencies and activities",
+        "desc": "Transversal elements, key competencies, digital competencies, curriculum standards and objectives, innovation and cross-module coordination, and complementary/extracurricular activities."
+      }
+    },
+    "instrumentos": {
+      "resumen": {
+        "desc": "Overall view of the evaluation instruments used. RD 659/2023 (Art. 136)"
+      },
+      "tri1": {
+        "desc": "Evaluation instruments planned for the 1st term."
+      },
+      "tri2": {
+        "desc": "Evaluation instruments planned for the 2nd term."
+      },
+      "tri3": {
+        "desc": "Evaluation instruments planned for the 3rd term."
+      }
+    },
+    "archivos": {
+      "datos": {
+        "label": "Data",
+        "desc": "Management of your Group, Programming and Course files saved locally or in the cloud."
+      },
+      "nube": {
+        "label": "Cloud",
+        "desc": "Secure two-way synchronization with Google Drive and Microsoft OneDrive."
+      },
+      "seguridad": {
+        "label": "Security",
+        "desc": "Privacy, encryption and data control options."
+      },
+      "asistente-ia": {
+        "label": "AI Assistant",
+        "desc": "Artificial intelligence configuration."
+      }
+    },
+    "catalogo": {
+      "familias": {
+        "desc": "Professional families and their associated VET programs, organized by level."
+      },
+      "titulos": {
+        "desc": "Basic state regulations and regional curriculum for VET programs."
+      },
+      "modulos": {
+        "desc": "Specialization blocks and content associated with each academic year."
+      },
+      "ra-ce": {
+        "label": "RA → CE",
+        "desc": "Specific competencies structured into learning outcomes and assessment criteria (Art. 136, RD 659/2023)."
+      }
+    },
+    "normativa": {
+      "autonomias": {
+        "label": "Autonomous communities",
+        "desc": "Regional legislation and specific regulations."
+      },
+      "bibliografia": {
+        "label": "Bibliography",
+        "desc": "Index of state and regional VET laws, decrees and orders, with a link to the official gazette."
+      },
+      "legislacion": {
+        "desc": "Downloadable documents and templates for your autonomous community, organized by level."
+      },
+      "ecp-incual": {
+        "label": "ECP INCUAL",
+        "desc": "Professional Competency Standards (ECP) from the National Catalog (INCUAL)."
+      }
+    },
+    "magia": {
+      "comunidades": {
+        "label": "Communities",
+        "desc": "Generation of the official didactic programming, by autonomous community."
+      },
+      "guia": {
+        "label": "Guide",
+        "desc": "Getting-started guide and AI prompt: what data to ask the teacher for and where to place it in the app."
+      },
+      "programacion": {
+        "label": "Programming",
+        "desc": "Supporting documents: curriculum matrix and individual UD/Task documents."
+      },
+      "curso": {
+        "label": "Course",
+        "desc": "Calendar, tracking, classroom map, report cards and evaluation records for the course."
+      }
+    },
+    "equivalencias": {
+      "comparativa": {
+        "label": "Comparison",
+        "desc": "Comparison of the different programming levels and where each section is filled in."
+      },
+      "pdminus": {
+        "label": "APP → PD- (Summary)",
+        "desc": "From the app to where each block appears in the 1-2 page summary for students (PD-)."
+      },
+      "pdigual": {
+        "label": "APP → PD= (Simplified)",
+        "desc": "From the app to where each field appears in the official simplified model, 17 sections A-Q (PD=)."
+      },
+      "pdplus": {
+        "label": "APP → PD+ (Detailed JEG)",
+        "desc": "From the app to where each field appears in the detailed JEG-style programming (PD+), chapter by chapter."
+      }
+    },
+    "ayuda": {
+      "faq": {
+        "label": "FAQ",
+        "desc": "Answers to the most frequently asked questions from teachers."
+      },
+      "acronimos": {
+        "label": "Acronyms",
+        "desc": "Glossary of abbreviations, acronyms and VET concepts."
+      },
+      "mapa": {
+        "label": "Site map",
+        "desc": "Hierarchical outline of all the application's sections and utilities."
+      },
+      "documentos": {
+        "label": "Documents",
+        "desc": "Regulatory provisions that set the minimum curriculum requirements for each qualification."
+      }
+    },
+    "legal": {
+      "aviso": {
+        "label": "Legal notice",
+        "desc": "Owner details, terms of use, intellectual property and licenses (GPLv3 and CC BY-NC-SA)."
+      },
+      "privacidad": {
+        "label": "Privacy",
+        "desc": "Privacy policy, GDPR, data controller and local-first model."
+      },
+      "cookies": {
+        "label": "Cookies",
+        "desc": "Use of localStorage and IndexedDB. No tracking cookies or third-party analytics."
+      },
+      "accesibilidad": {
+        "label": "Accessibility",
+        "desc": "Digital accessibility statement in accordance with RD 1112/2018 and a commitment to WCAG 2.1 AA."
+      }
+    },
+    "inicio": {
+      "verificacion": {
+        "label": "Verification",
+        "desc": "Health and consistency panel for your notebook's data."
+      },
+      "contribuciones": {
+        "label": "Contributions",
+        "desc": "Telegram community and list of people actively contributing to the project."
+      },
+      "mejora": {
+        "label": "Improvement",
+        "desc": "Quality management, process evaluation and indicators for the module."
+      },
+      "bienvenida": {
+        "desc": "Quick-access control panel for all the tools."
+      }
+    }
   },
   "inicio": {
     "title": "Home",
@@ -57,6 +350,7 @@
   },
   "nav": {
     "inicio": "Home",
+    "agenda": "Agenda",
     "perfil": "Profile",
     "archivos": "Files",
     "catalogo": "Catalog",

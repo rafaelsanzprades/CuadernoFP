@@ -31,16 +31,16 @@ type DocumentItem = {
 export default function DocumentosPage() {
   const { t } = useTranslation();
   const TABS = [
-    { id: "autonomias", label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4 shrink-0" /> Autonomías</span>, cleanLabel: 'Autonomías' },
-    { id: "bibliografia", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> Bibliografía</span>, cleanLabel: 'Bibliografía' },
+    { id: "autonomias", label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4 shrink-0" /> {t('tabs.normativa.autonomias.label', {defaultValue: 'Autonomías'})}</span>, cleanLabel: t('tabs.normativa.autonomias.label', {defaultValue: 'Autonomías'}) },
+    { id: "bibliografia", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> {t('tabs.normativa.bibliografia.label', {defaultValue: 'Bibliografía'})}</span>, cleanLabel: t('tabs.normativa.bibliografia.label', {defaultValue: 'Bibliografía'}) },
     { id: "legislacion", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.legislacion', {defaultValue: 'Legislación'})}</span>, cleanLabel: t('tabs.legislacion', {defaultValue: 'Legislación'}) },
-    { id: "ecp-incual", label: <span className="flex items-center gap-2"><Award className="w-4 h-4 shrink-0 text-purple-500" /> ECP INCUAL</span>, cleanLabel: 'ECP INCUAL' }
+    { id: "ecp-incual", label: <span className="flex items-center gap-2"><Award className="w-4 h-4 shrink-0 text-purple-500" /> {t('tabs.normativa.ecp-incual.label', {defaultValue: 'ECP INCUAL'})}</span>, cleanLabel: t('tabs.normativa.ecp-incual.label', {defaultValue: 'ECP INCUAL'}) }
   ];
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    autonomias: 'Legislación autonómica y normativa específica.',
-    bibliografia: 'Referencias normativas y bibliografía del catálogo.',
-    legislacion: 'Leyes orgánicas, reales decretos y órdenes ministeriales vigentes.',
-    'ecp-incual': 'Estándares de Competencia Profesional (ECP) del Catálogo Nacional (INCUAL).',
+    autonomias: t('tabs.normativa.autonomias.desc', {defaultValue: 'Legislación autonómica y normativa específica.'}),
+    bibliografia: t('tabs.normativa.bibliografia.desc', {defaultValue: 'Índice de leyes, decretos y órdenes estatales y autonómicas de FP, con enlace al boletín oficial.'}),
+    legislacion: t('tabs.normativa.legislacion.desc', {defaultValue: 'Documentos y plantillas descargables de tu comunidad autónoma, organizados por grado.'}),
+    'ecp-incual': t('tabs.normativa.ecp-incual.desc', {defaultValue: 'Estándares de Competencia Profesional (ECP) del Catálogo Nacional (INCUAL).'}),
   };
   const [activeTab, setActiveTab] = useState("autonomias");
   const [currentPath, setCurrentPath] = useState<string>("");

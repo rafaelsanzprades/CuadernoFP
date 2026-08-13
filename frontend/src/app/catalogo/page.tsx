@@ -107,16 +107,16 @@ function CiclosContent() {
     familias: t('tabs.familias', {defaultValue: 'Familias'}),
     titulos: t('tabs.titulos', {defaultValue: 'Títulos'}),
     modulos: t('tabs.modulos', {defaultValue: 'Módulos'}),
-    'ra-ce': 'RA → CE'
+    'ra-ce': t('tabs.catalogo.ra-ce.label', {defaultValue: 'RA → CE'})
   };
 
   const activeTabCleanLabel = TAB_LABELS[activeTab];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    familias: 'El RD 1128/2003 establece el Catálogo Nacional de Cualificaciones Profesionales.',
-    titulos: 'Normativa estatal básica y currículo autonómico para ciclos formativos.',
-    modulos: 'Bloques de especialización y contenidos asociados a cada curso académico.',
-    'ra-ce': 'Competencias específicas estructuradas en RA y CE (Art. 136, RD 659/2023).'
+    familias: t('tabs.catalogo.familias.desc', {defaultValue: 'Familias profesionales y sus ciclos formativos asociados, organizados por grado.'}),
+    titulos: t('tabs.catalogo.titulos.desc', {defaultValue: 'Normativa estatal básica y currículo autonómico para ciclos formativos.'}),
+    modulos: t('tabs.catalogo.modulos.desc', {defaultValue: 'Bloques de especialización y contenidos asociados a cada curso académico.'}),
+    'ra-ce': t('tabs.catalogo.ra-ce.desc', {defaultValue: 'Competencias específicas estructuradas en RA y CE (Art. 136, RD 659/2023).'})
   };
 
   return (
@@ -142,7 +142,7 @@ function CiclosContent() {
                       { id: "familias" as Tab, label: <span className="flex items-center gap-2"><FolderTree className="w-4 h-4" /> {t('tabs.familias', {defaultValue: 'Familias'})}</span> },
                       { id: "titulos" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> {t('tabs.titulos', {defaultValue: 'Títulos'})}</span> },
                       { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> {t('tabs.modulos', {defaultValue: 'Módulos'})}</span> },
-                      { id: "ra-ce" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> RA → CE</span> }
+                      { id: "ra-ce" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> {t('tabs.catalogo.ra-ce.label', {defaultValue: 'RA → CE'})}</span> }
                     ]
                   ).map((t) => (
                     <TabsTrigger key={t.id} value={t.id}>

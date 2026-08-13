@@ -1,6 +1,6 @@
-# PD- (Resumen) ← APP: del resumen para el alumnado a dónde se rellena
+# APP → PD- (Resumen): del resumen para el alumnado a dónde se rellena
 
-La PD- (Resumen) es un documento de **1-2 folios** pensado para entregar al alumnado el primer día de clase. No tiene apartados numerados oficiales — se genera a partir de 6 bloques de contenido. A continuación se indica **exactamente dónde se rellena** cada uno en CuadernoFP.
+La PD- (Resumen) es un documento de **1-2 folios** pensado para entregar al alumnado el primer día de clase. No tiene apartados numerados oficiales — se genera a partir de 6 bloques de contenido. A continuación se indica **exactamente dónde se rellena** cada uno en Cuaderno FP.
 
 ---
 

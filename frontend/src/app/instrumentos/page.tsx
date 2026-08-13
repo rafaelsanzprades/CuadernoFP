@@ -47,13 +47,13 @@ export default function InstrumentosPage() {
     { id: "tri1", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri1')}</span>, cleanLabel: t('tabs.tri1') },
     { id: "tri2", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri2')}</span>, cleanLabel: t('tabs.tri2') },
     { id: "tri3", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri3')}</span>, cleanLabel: t('tabs.tri3') }
-  ];const [activeTab, setActiveTab] = useState("resumen");const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+  ];const [activeTab, setActiveTab] = useState("resumen");const activeTabCleanLabel = TABS.find(tab => tab.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    resumen: 'Visión global de los instrumentos de evaluación utilizados. RD 659/2023 (Art. 136)',
-    tri1: 'Instrumentos de evaluación planificados para el 1er trimestre.',
-    tri2: 'Instrumentos de evaluación planificados para el 2º trimestre.',
-    tri3: 'Instrumentos de evaluación planificados para el 3er trimestre.',
+    resumen: t('tabs.instrumentos.resumen.desc', {defaultValue: 'Visión global de los instrumentos de evaluación utilizados. RD 659/2023 (Art. 136)'}),
+    tri1: t('tabs.instrumentos.tri1.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 1er trimestre.'}),
+    tri2: t('tabs.instrumentos.tri2.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 2º trimestre.'}),
+    tri3: t('tabs.instrumentos.tri3.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 3er trimestre.'}),
   };
 
   const [isRecoveryModalOpen, setIsRecoveryModalOpen] = useState(false);

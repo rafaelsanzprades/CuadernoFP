@@ -497,18 +497,18 @@ export default function InicioPage() {
 
   const TABS = [
     { id: "bienvenida", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.bienvenida')}</>, cleanLabel: t('tabs.bienvenida') },
-    { id: "verificacion", label: <><span className="inline-flex"><ListChecks className="w-[1.2em] h-[1.2em] mr-1" /></span> Verificación</>, cleanLabel: "Verificación" },
-    { id: "contribuciones", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Contribuciones</>, cleanLabel: "Contribuciones" },
-    { id: "mejora", label: <><span className="inline-flex"><Shield className="w-[1.2em] h-[1.2em] mr-1" /></span> Mejora</>, cleanLabel: "Mejora" },
+    { id: "verificacion", label: <><span className="inline-flex"><ListChecks className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.inicio.verificacion.label', {defaultValue: 'Verificación'})}</>, cleanLabel: t('tabs.inicio.verificacion.label', {defaultValue: 'Verificación'}) },
+    { id: "contribuciones", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.inicio.contribuciones.label', {defaultValue: 'Contribuciones'})}</>, cleanLabel: t('tabs.inicio.contribuciones.label', {defaultValue: 'Contribuciones'}) },
+    { id: "mejora", label: <><span className="inline-flex"><Shield className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.inicio.mejora.label', {defaultValue: 'Mejora'})}</>, cleanLabel: t('tabs.inicio.mejora.label', {defaultValue: 'Mejora'}) },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    bienvenida: 'Panel de control de acceso rápido a todas las herramientas.',
-    verificacion: 'Panel de salud y coherencia de los datos de tu cuaderno.',
-    contribuciones: 'Comunidad de Telegram y listado de personas que contribuyen activamente al proyecto.',
-    mejora: 'Gestión de la calidad, evaluación del proceso e indicadores para el módulo.',
+    bienvenida: t('tabs.inicio.bienvenida.desc', {defaultValue: 'Panel de control de acceso rápido a todas las herramientas.'}),
+    verificacion: t('tabs.inicio.verificacion.desc', {defaultValue: 'Panel de salud y coherencia de los datos de tu cuaderno.'}),
+    contribuciones: t('tabs.inicio.contribuciones.desc', {defaultValue: 'Comunidad de Telegram y listado de personas que contribuyen activamente al proyecto.'}),
+    mejora: t('tabs.inicio.mejora.desc', {defaultValue: 'Gestión de la calidad, evaluación del proceso e indicadores para el módulo.'}),
   };
 
   return (
@@ -582,8 +582,7 @@ export default function InicioPage() {
             {/* Accesos rápidos: Agenda + páginas generales (sin título de bloque) */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { href: "/inicio?tab=bienvenida", label: "Inicio", icon: Activity, description: "Panel principal, guía de inicio, FAQ y validación de datos." },
-                { href: "/agenda", label: "Agenda", icon: CalendarDays, description: "Vista del día, planificación y progreso." },
+                { href: "/inicio?tab=bienvenida", label: "Inicio", icon: Activity, description: "Panel principal, verificación de datos, contribuciones de la comunidad y calidad EQAVET." },
                 ...topLevelPages,
               ].map((item) => (
                 <Link key={item.href} href={item.href} className="block group">
