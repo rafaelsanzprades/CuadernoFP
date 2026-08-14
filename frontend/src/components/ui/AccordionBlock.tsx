@@ -8,23 +8,26 @@ interface AccordionBlockProps {
   defaultOpen?: boolean;
   className?: string;
   badge?: React.ReactNode;
+  onToggle?: (open: boolean) => void;
 }
 
-export function AccordionBlock({ 
-  title, 
-  icon, 
-  children, 
-  defaultOpen = false, 
+export function AccordionBlock({
+  title,
+  icon,
+  children,
+  defaultOpen = false,
   className,
-  badge 
+  badge,
+  onToggle,
 }: AccordionBlockProps) {
   return (
-    <details 
+    <details
       className={[
         "group rounded-xl border border-border/50 bg-surface/50 overflow-hidden [&_summary::-webkit-details-marker]:hidden mb-4 shadow-sm",
         className
       ].filter(Boolean).join(" ")}
       open={defaultOpen}
+      onToggle={onToggle ? (e) => onToggle((e.target as HTMLDetailsElement).open) : undefined}
     >
       <summary className="flex cursor-pointer items-center justify-between p-4 md:p-5 font-bold text-foreground hover:bg-foreground/5 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/30 select-none">
         <div className="flex items-center gap-3">

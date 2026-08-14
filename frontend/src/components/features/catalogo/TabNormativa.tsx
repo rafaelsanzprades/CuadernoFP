@@ -133,9 +133,8 @@ export function TabNormativa({ searchQuery = "" }: Props) {
       <div className="px-2 mb-6">
         <h2 className="text-subheading font-bold flex items-center gap-3">
           <span className="p-2 bg-primary/10 rounded-lg text-primary shrink-0"><Landmark className="w-5 h-5" /></span>
-          Legislación y Normativa
+          Referencias bibliográficas
         </h2>
-        <p className="text-body text-muted-foreground mt-2 ml-12">Normativa estatal y despliegue autonómico aplicable a la Formación Profesional.</p>
       </div>
 
       {filteredEstatal.length > 0 && (

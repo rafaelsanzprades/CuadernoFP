@@ -299,12 +299,18 @@ export default function DocumentosPage() {
       return (
         <div className="flex flex-col gap-6 w-full">
           <TabGrados />
-          <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md p-6">
-            <NormativaAccordion 
-              communities={filteredItems} 
-              onDownloadDoc={handleDownloadDoc} 
-              formatSize={formatSize} 
-              getFileIcon={getFileIcon} 
+          <div>
+            <div className="px-2 mb-6">
+              <h2 className="text-subheading font-bold flex items-center gap-3">
+                <span className="p-2 bg-primary/10 rounded-lg text-primary shrink-0"><Scale className="w-5 h-5" /></span>
+                Legislación documental
+              </h2>
+            </div>
+            <NormativaAccordion
+              communities={filteredItems}
+              onDownloadDoc={handleDownloadDoc}
+              formatSize={formatSize}
+              getFileIcon={getFileIcon}
             />
           </div>
         </div>
