@@ -158,6 +158,7 @@ export const ModuleDataSchema = z.object({
   // limitada a los 4 tipos fijos que usan los boletines/actas.
   instrumentos_pct_trimestre: z.array(z.object({
     id: z.string(),
+    categoria: z.string().optional(),
     nombre: z.string(),
     pct_1t: z.number(),
     pct_2t: z.number(),
