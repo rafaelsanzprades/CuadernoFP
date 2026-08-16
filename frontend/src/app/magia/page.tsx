@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { useAppStore } from "@/store/useAppStore";
 import { Alumnado } from "@/types";
+import { isAlumnoActivo } from "@/utils/alumnado";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Skeleton } from "@/components/ui/Skeleton";
@@ -228,7 +229,7 @@ export default function MagiaPage() {
   const handleExportXlsx = (triKey: string, fechaCorte?: string) => {
     const df_al = cursoData?.df_al || [];
     const df_eval = cursoData?.df_eval || [];
-    const activeAl = df_al.filter((al: Alumnado) => al.Estado !== "Baja");
+    const activeAl = df_al.filter(isAlumnoActivo);
     activeAl.sort((a: Alumnado, b: Alumnado) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
 
     const rows = activeAl.map((al: any) => {
@@ -252,7 +253,7 @@ export default function MagiaPage() {
   };
 
   const df_al = cursoData?.df_al || [];
-  const activeAlumnado = df_al.filter((al: Alumnado) => al.Estado !== "Baja");
+  const activeAlumnado = df_al.filter(isAlumnoActivo);
   activeAlumnado.sort((a: Alumnado, b: Alumnado) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
 
   const df_ud = moduleData?.df_ud || [];

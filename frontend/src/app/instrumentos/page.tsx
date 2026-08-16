@@ -1,7 +1,7 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BarChart, Check, FileEdit, FolderOpen, Wrench } from "lucide-react";
-import { useEffect, useState } from "react";
+import { BarChart, Check, FileEdit, FolderOpen, Wrench, CheckSquare, Square, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
@@ -16,14 +16,9 @@ import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 import { Settings2 } from "lucide-react";
 import { InstrumentoConfigModal } from "@/components/features/instrumentos/InstrumentoConfigModal";
-
-const DEFAULT_INSTRUMENTOS_PCT = [
-  { id: "instr_teoricos", nombre: "Exámenes teóricos", pct_1t: 30, pct_2t: 20, pct_3t: 10 },
-  { id: "instr_practicos", nombre: "Exámenes prácticos", pct_1t: 20, pct_2t: 20, pct_3t: 10 },
-  { id: "instr_exposicion", nombre: "Exposición y defensa proyecto", pct_1t: 10, pct_2t: 20, pct_3t: 30 },
-  { id: "instr_informes", nombre: "Informes de ejercicios", pct_1t: 20, pct_2t: 30, pct_3t: 40 },
-  { id: "instr_cuaderno", nombre: "Cuaderno de tareas", pct_1t: 20, pct_2t: 10, pct_3t: 10 },
-];
+import { JegModeloTab } from "@/components/features/instrumentos/JegModeloTab";
+import { Layers } from "lucide-react";
+import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
 
 const normalizeTipo = (t: string) => {
   if (!t) return "Exámenes teóricos";
@@ -46,7 +41,8 @@ export default function InstrumentosPage() {
     { id: "resumen", label:  <span className="flex items-center gap-2"><BarChart className="w-4 h-4 shrink-0" /> {t('tabs.resumen')}</span>, cleanLabel: t('tabs.resumen') },
     { id: "tri1", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri1')}</span>, cleanLabel: t('tabs.tri1') },
     { id: "tri2", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri2')}</span>, cleanLabel: t('tabs.tri2') },
-    { id: "tri3", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri3')}</span>, cleanLabel: t('tabs.tri3') }
+    { id: "tri3", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri3')}</span>, cleanLabel: t('tabs.tri3') },
+    { id: "modelo-jeg", label: <span className="flex items-center gap-2"><Layers className="w-4 h-4 shrink-0 text-purple-400" /> Modelo JEG</span>, cleanLabel: "Modelo JEG" }
   ];const [activeTab, setActiveTab] = useState("resumen");const activeTabCleanLabel = TABS.find(tab => tab.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
@@ -54,6 +50,7 @@ export default function InstrumentosPage() {
     tri1: t('tabs.instrumentos.tri1.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 1er trimestre.'}),
     tri2: t('tabs.instrumentos.tri2.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 2º trimestre.'}),
     tri3: t('tabs.instrumentos.tri3.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 3er trimestre.'}),
+    "modelo-jeg": "Nivel Indicador bajo el CE, según el modelo del autor real de PD+ (experimental, decisión D de la Fase 2).",
   };
 
   const [isRecoveryModalOpen, setIsRecoveryModalOpen] = useState(false);
@@ -63,6 +60,70 @@ export default function InstrumentosPage() {
 
   const [configModalOpen, setConfigModalOpen] = useState(false);
   const [activeConfigActIdx, setActiveConfigActIdx] = useState<number | null>(null);
+
+  // Edición masiva de la matriz criterio<->instrumento (decisión F, Fase 2, ver
+  // RF Ideas/propuesta-motor-calificacion-2026-08-16.md). Arrastrar sobre varias
+  // celdas las selecciona (sin cambiar su valor todavía); un clic simple sin
+  // arrastre sigue alternando esa única celda al vuelo, como siempre.
+  const [selectedCells, setSelectedCells] = useState<Set<string>>(new Set());
+  const isDraggingRef = useRef(false);
+  const dragMovedRef = useRef(false);
+  const dragStartCellRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    const onMouseUp = () => {
+      if (isDraggingRef.current && !dragMovedRef.current) {
+        // Fue un clic simple, sin arrastre real: alterna esa única celda.
+        // updateDataFrame se llama directamente aquí (no anidado dentro de un
+        // updater de setState de otro componente) para evitar el aviso de
+        // React "Cannot update a component while rendering a different component".
+        const only = dragStartCellRef.current;
+        if (only) {
+          const currentAct = moduleData?.df_act || [];
+          const [globalIdxStr, ce] = only.split("::");
+          const globalIdx = Number(globalIdxStr);
+          const current = currentAct[globalIdx]?.[ce] === true;
+          const newAct = [...currentAct];
+          newAct[globalIdx] = { ...newAct[globalIdx], [ce]: !current };
+          updateDataFrame("df_act", newAct);
+        }
+        setSelectedCells(new Set());
+      }
+      isDraggingRef.current = false;
+      dragMovedRef.current = false;
+      dragStartCellRef.current = null;
+    };
+    window.addEventListener("mouseup", onMouseUp);
+    return () => window.removeEventListener("mouseup", onMouseUp);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [moduleData]);
+
+  const cellKey = (globalIdx: number, ce: string) => `${globalIdx}::${ce}`;
+
+  const handleCellMouseDown = (globalIdx: number, ce: string) => {
+    isDraggingRef.current = true;
+    dragMovedRef.current = false;
+    dragStartCellRef.current = cellKey(globalIdx, ce);
+    setSelectedCells(new Set([cellKey(globalIdx, ce)]));
+  };
+
+  const handleCellMouseEnter = (globalIdx: number, ce: string) => {
+    if (!isDraggingRef.current) return;
+    dragMovedRef.current = true;
+    setSelectedCells((prev) => new Set(prev).add(cellKey(globalIdx, ce)));
+  };
+
+  const applyBulkSelection = (value: boolean) => {
+    const currentAct = moduleData?.df_act || [];
+    const newAct = [...currentAct];
+    selectedCells.forEach((key) => {
+      const [globalIdxStr, ce] = key.split("::");
+      const globalIdx = Number(globalIdxStr);
+      newAct[globalIdx] = { ...newAct[globalIdx], [ce]: value };
+    });
+    updateDataFrame("df_act", newAct);
+    setSelectedCells(new Set());
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -140,9 +201,9 @@ export default function InstrumentosPage() {
   const lista_ce_ids = ce_clean.map((ce: any) => ce.id_ce);
 
   const trimestres = [
-    { key: "1T", nombre: "1er trimestre" },
-    { key: "2T", nombre: "2º trimestre" },
-    { key: "3T", nombre: "3er trimestre" }
+    { key: "1T", nombre: "1er Trimestre", pctField: "pct_1t" },
+    { key: "2T", nombre: "2º Trimestre", pctField: "pct_2t" },
+    { key: "3T", nombre: "3er Trimestre", pctField: "pct_3t" }
   ];
 
   const handleUpdateAct = (globalIdx: number, field: string, value: any) => {
@@ -244,12 +305,15 @@ export default function InstrumentosPage() {
                         />
                       </td>
                       <td className="p-2 sticky left-[416px] z-10 border-r border-[var(--glass-border)] bg-background group-hover:bg-[#111827]">
-                        <input 
-                          type="number"
-                          value={act.peso_act || 0}
-                          onChange={(e) => handleUpdateAct(globalIdx, "peso_act", Number(e.target.value) || 0)}
-                          className="w-16 bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-info focus:outline-none"
-                        />
+                        <div className="relative">
+                          <input
+                            type="number"
+                            value={act.peso_act || 0}
+                            onChange={(e) => handleUpdateAct(globalIdx, "peso_act", Number(e.target.value) || 0)}
+                            className="w-16 bg-foreground/15 border border-[var(--glass-border)] rounded pl-2 pr-4 py-1 text-foreground focus:border-info focus:outline-none"
+                          />
+                          <span className="absolute right-1.5 top-1/2 -translate-y-1/2 text-muted text-caption pointer-events-none">%</span>
+                        </div>
                       </td>
                       <td className="p-2 text-center sticky left-[486px] z-10 border-r border-[var(--glass-border)] bg-background group-hover:bg-[#111827]">
                         <input 
@@ -259,16 +323,24 @@ export default function InstrumentosPage() {
                           className="accent-indigo-500"
                         />
                       </td>
-                      {lista_ce_ids.map((ce: string) => (
-                        <td key={ce} className="p-2 text-center border-r border-[var(--glass-border)] bg-foreground/5">
-                          <input 
-                            type="checkbox"
-                            checked={act[ce] === true}
-                            onChange={(e) => handleUpdateAct(globalIdx, ce, e.target.checked)}
-                            className="accent-indigo-500"
-                          />
-                        </td>
-                      ))}
+                      {lista_ce_ids.map((ce: string) => {
+                        const isSelected = selectedCells.has(cellKey(globalIdx, ce));
+                        return (
+                          <td
+                            key={ce}
+                            onMouseDown={(e) => { e.preventDefault(); handleCellMouseDown(globalIdx, ce); }}
+                            onMouseEnter={() => handleCellMouseEnter(globalIdx, ce)}
+                            className={`p-2 text-center border-r border-[var(--glass-border)] select-none cursor-pointer transition-colors ${isSelected ? 'bg-purple-500/30 ring-1 ring-inset ring-purple-400' : 'bg-foreground/5 hover:bg-purple-500/10'}`}
+                          >
+                            <input
+                              type="checkbox"
+                              checked={act[ce] === true}
+                              readOnly
+                              className="accent-indigo-500 pointer-events-none"
+                            />
+                          </td>
+                        );
+                      })}
                       <td className="p-2 text-center border-r border-[var(--glass-border)] bg-foreground/5">
                         <button
                           onClick={() => {
@@ -365,8 +437,8 @@ export default function InstrumentosPage() {
                 <table className="w-full text-body border-collapse">
                   <thead>
                     <tr className="border-b border-[var(--glass-border)]">
-                      <th className="p-3 text-left text-muted font-semibold w-[30%]">Instrumento</th>
                       <th className="p-3 text-left text-muted font-semibold w-[14%]">Tipo</th>
+                      <th className="p-3 text-left text-muted font-semibold w-[30%]">Descripción del Instrumento de Evaluación (IE)</th>
                       {trimestres.map(tri => (
                         <th key={tri.key} className="p-3 text-center text-muted font-semibold border-l border-[var(--glass-border)] w-[14%]">{tri.nombre}</th>
                       ))}
@@ -375,10 +447,13 @@ export default function InstrumentosPage() {
                   </thead>
                   <tbody>
                     {[
-                      ...instrumentosPct.map((instr: any, i: number) => ({
+                      ...instrumentosPct.filter((instr: any) => instr.categoria !== "Recuperaciones").map((instr: any, i: number) => ({
                         id: instr.nombre,
                         categoria: instr.categoria || "Teoría",
                         label: instr.nombre,
+                        pct_1t: instr.pct_1t,
+                        pct_2t: instr.pct_2t,
+                        pct_3t: instr.pct_3t,
                         bgClass: [
                           "bg-info/10 text-info",
                           "bg-success/10 text-success",
@@ -388,18 +463,34 @@ export default function InstrumentosPage() {
                           "bg-indigo-500/10 text-indigo-500"
                         ][i % 6]
                       })),
-                      { id: "Recuperaciones", categoria: "Recuperaciones", label: "Recuperaciones", bgClass: "bg-danger/10 text-danger" }
+                      (() => {
+                        const recup = instrumentosPct.find((instr: any) => instr.categoria === "Recuperaciones");
+                        return {
+                          id: "Recuperaciones",
+                          categoria: "Recuperaciones",
+                          label: "Recuperaciones",
+                          pct_1t: recup?.pct_1t ?? 0,
+                          pct_2t: recup?.pct_2t ?? 0,
+                          pct_3t: recup?.pct_3t ?? 0,
+                          bgClass: "bg-danger/10 text-danger"
+                        };
+                      })()
                     ].map(tipo => {
                       const totalTipo = df_act.filter((a: any) => normalizeTipo(a.Tipo) === tipo.id).length;
                       return (
                         <tr key={tipo.id} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
-                          <td className="p-3 font-semibold text-foreground">{tipo.label}</td>
                           <td className="p-3 font-semibold text-foreground">{tipo.categoria}</td>
+                          <td className="p-3 font-semibold text-foreground">{tipo.label}</td>
                           {trimestres.map(tri => {
                             const count = df_act.filter((a: any) => String(a.tri_act).toUpperCase() === tri.key && normalizeTipo(a.Tipo) === tipo.id).length;
+                            const pct = Number((tipo as any)[tri.pctField]) || 0;
                             return (
                               <td key={tri.key} className="p-3 text-center border-l border-[var(--glass-border)]">
-                                <span className={`${tipo.bgClass} font-bold text-subheading px-3 py-1 rounded-lg inline-block min-w-[40px]`}>{count}</span>
+                                <span className={`${tipo.bgClass} font-bold text-subheading px-3 py-1 rounded-lg inline-flex items-center justify-center gap-2 min-w-[40px]`}>
+                                  <span>{count}</span>
+                                  <span>-</span>
+                                  <span>{pct}%</span>
+                                </span>
                               </td>
                             );
                           })}
@@ -433,6 +524,7 @@ export default function InstrumentosPage() {
           {activeTab === "tri1" && renderTrimestreTab("1T", "1er trimestre")}
           {activeTab === "tri2" && renderTrimestreTab("2T", "2º trimestre")}
           {activeTab === "tri3" && renderTrimestreTab("3T", "3er trimestre")}
+          {activeTab === "modelo-jeg" && <JegModeloTab />}
         
         {activeConfigActIdx !== null && df_act[activeConfigActIdx] && (
           <InstrumentoConfigModal 
@@ -515,6 +607,25 @@ export default function InstrumentosPage() {
               </div>
             </div>
           </Card>
+        </div>
+      )}
+
+      {selectedCells.size > 1 && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 bg-[#1e293b] border border-purple-400/40 shadow-2xl rounded-xl px-5 py-3">
+          <span className="text-body font-semibold text-foreground">{selectedCells.size} celdas seleccionadas</span>
+          <Button variant="secondary" className="gap-1.5" onClick={() => applyBulkSelection(true)}>
+            <CheckSquare className="w-4 h-4" /> Marcar todas
+          </Button>
+          <Button variant="secondary" className="gap-1.5" onClick={() => applyBulkSelection(false)}>
+            <Square className="w-4 h-4" /> Desmarcar todas
+          </Button>
+          <button
+            onClick={() => setSelectedCells(new Set())}
+            className="p-1.5 rounded text-muted hover:text-foreground hover:bg-white/10 transition-colors"
+            title="Cancelar selección"
+          >
+            <X className="w-4 h-4" />
+          </button>
         </div>
       )}
     </div>

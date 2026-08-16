@@ -6,6 +6,7 @@ import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
 import { loadCatalogForModule } from "@/services/catalogCache";
+import { isAlumnoActivo } from "@/utils/alumnado";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
@@ -18,6 +19,7 @@ import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
+import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
 
 export default function ProgresoPage() {
   const {
@@ -112,7 +114,7 @@ export default function ProgresoPage() {
   const df_eval = cursoData?.df_eval || [];
   const df_act = moduleData?.df_act || [];
 
-  const df_evaluable = df_al.filter((al: any) => al.Estado !== "Baja");
+  const df_evaluable = df_al.filter(isAlumnoActivo);
   df_evaluable.sort((a: any, b: any) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
 
   const acts_by_tri: Record<string, any[]> = { "1T": [], "2T": [], "3T": [] };
@@ -189,13 +191,6 @@ export default function ProgresoPage() {
                 </h2>
                 <div className="overflow-x-auto">
                   {(() => {
-                    const DEFAULT_INSTRUMENTOS_PCT = [
-                      { id: "instr_teoricos", nombre: "Exámenes teóricos" },
-                      { id: "instr_practicos", nombre: "Exámenes prácticos" },
-                      { id: "instr_exposicion", nombre: "Exposición y defensa proyecto" },
-                      { id: "instr_informes", nombre: "Informes de ejercicios" },
-                      { id: "instr_cuaderno", nombre: "Cuaderno de tareas" },
-                    ];
                     const instrumentosPct = (moduleData?.instrumentos_pct_trimestre && moduleData.instrumentos_pct_trimestre.length > 0)
                       ? moduleData.instrumentos_pct_trimestre
                       : DEFAULT_INSTRUMENTOS_PCT;
@@ -211,7 +206,7 @@ export default function ProgresoPage() {
                     };
 
                     const tipos = [
-                      ...instrumentosPct.map((instr: any, i: number) => ({
+                      ...instrumentosPct.filter((instr: any) => instr.categoria !== "Recuperaciones").map((instr: any, i: number) => ({
                         key: instr.nombre,
                         categoria: instr.categoria || "Teoría",
                         label: instr.nombre,

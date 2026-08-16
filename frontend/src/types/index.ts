@@ -7,6 +7,9 @@ export const SesionSchema = z.object({
   Horas: z.number().or(z.string().transform(Number)),
   Tipo_Actividad: z.string(),
   RA_CE: z.string().optional().nullable(),
+  // % del instrumento de evaluación cuando esta sesión puntúa (p. ej. examen,
+  // corrección de cuaderno) — vacío/null si la sesión no se evalúa.
+  IE: z.number().optional().nullable(),
   Contenidos: z.string().optional().nullable(),
   Aspectos_Clave: z.string().optional().nullable(),
   Recursos: z.string().optional().nullable(),
@@ -32,12 +35,18 @@ export const TareaSchema = z.object({
 });
 export type Tarea = z.infer<typeof TareaSchema>;
 
+// Ciclo de vida del alumno sin borrado (soft-delete): "Baja", "Convalidado" y
+// "No matriculado" conservan el histórico de notas/asistencia pero quedan fuera
+// de las vistas activas (ver utils/alumnado.ts).
+export const ESTADOS_ALUMNO = ["Alta", "Baja", "Convalidado", "No matriculado"] as const;
+export type EstadoAlumno = (typeof ESTADOS_ALUMNO)[number];
+
 export const AlumnadoSchema = z.object({
   ID: z.string().optional(),
   student_id: z.string().optional(),
   Nombre: z.string().optional(),
   Apellidos: z.string().optional(),
-  Estado: z.string().optional(),
+  Estado: z.enum(ESTADOS_ALUMNO).optional(),
   Edad: z.number().optional().nullable(),
   Nacimiento: z.string().optional(),
   Repite: z.boolean().optional(),
@@ -102,6 +111,16 @@ export const InstrumentoSchema = z.object({
   agente: z.enum(["heteroevaluacion", "coevaluacion", "autoevaluacion"]).optional().default("heteroevaluacion"),
   peso_global: z.number().optional().default(1),
   indicadores_vinculados: z.array(z.string()).optional().default([]),
+  // Ítem 12 de la Fase 2: quién cumplimenta este instrumento — el tutor de
+  // empresa en fase dual/FCT, o el profesorado del centro (caso habitual).
+  origen: z.enum(["centro", "empresa"]).optional().default("centro"),
+  // Ítem 30 de la Fase 2 (modelo JEG): un instrumento "ordinario" sigue la
+  // cadena normal Indicador->CE->RA. Uno de "recuperacion" (R1/R2/R3/RF, según
+  // el periodo `evaluacion`) salta el CE y pondera directamente en el RA, y su
+  // resultado sustituye al de la vía ordinaria para ese RA cuando hay dato.
+  // Uno de "extraordinaria" (EvFE) se calcula igual pero se mantiene en una
+  // hoja de resultados aparte, nunca mezclado con la evaluación ordinaria.
+  procedimiento: z.enum(["ordinario", "recuperacion", "extraordinaria"]).optional().default("ordinario"),
 });
 export type Instrumento = z.infer<typeof InstrumentoSchema>;
 

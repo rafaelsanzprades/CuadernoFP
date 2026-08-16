@@ -11,6 +11,8 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import { PlanoClaseTab } from "@/components/features/alumnado/PlanoClaseTab";
+import { ESTADOS_ALUMNO } from "@/types";
+import { ESTADO_ALUMNO_COLOR } from "@/utils/alumnado";
 
 import { ContextoGrupoTab } from "@/components/features/alumnado/ContextoGrupoTab";
 import { TutoriaTab } from "@/components/features/alumnado/TutoriaTab";
@@ -374,10 +376,11 @@ export default function AlumnadoPage() {
                               <select
                                 value={al.Estado || "Alta"}
                                 onChange={(e) => handleUpdateAlumnado(idx, "Estado", e.target.value)}
-                                className={`shrink-0 bg-transparent border border-transparent hover:border-[var(--glass-border)] rounded px-2 py-0.5 text-caption font-semibold focus:outline-none focus:ring-1 focus:ring-accent appearance-none cursor-pointer ${al.Estado === "Baja" ? "text-danger" : "text-success"}`}
+                                className={`shrink-0 bg-transparent border border-transparent hover:border-[var(--glass-border)] rounded px-2 py-0.5 text-caption font-semibold focus:outline-none focus:ring-1 focus:ring-accent appearance-none cursor-pointer ${ESTADO_ALUMNO_COLOR[(al.Estado as typeof ESTADOS_ALUMNO[number]) || "Alta"]}`}
                               >
-                                <option value="Alta" className="text-success">Alta</option>
-                                <option value="Baja" className="text-danger">Baja</option>
+                                {ESTADOS_ALUMNO.map((estado) => (
+                                  <option key={estado} value={estado} className={ESTADO_ALUMNO_COLOR[estado]}>{estado}</option>
+                                ))}
                               </select>
                               {isMenor && (
                                 <span className="shrink-0 text-caption font-semibold text-danger bg-danger/10 px-2 py-0.5 rounded-full">Menor de edad</span>

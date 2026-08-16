@@ -7,6 +7,7 @@ from reportlab.lib import colors
 from reportlab.platypus import BaseDocTemplate, PageTemplate, Frame, Paragraph, Spacer, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER, TA_LEFT
+from helpers_catalogo import resolve_escala_cualitativa
 
 def _draw_page_decorations(canv, doc):
     """Cabecera y pie - idéntico al Calendario académico."""
@@ -31,7 +32,9 @@ def generar_pdf_boletin_individual(
     info_fechas: dict = None,
     planning_ledger: dict = None,
     df_ud: pd.DataFrame = None,
-    df_pr: pd.DataFrame = None
+    df_pr: pd.DataFrame = None,
+    escalas_evaluacion: list = None,
+    config_redondeo: dict = None
 ):
     if info_fechas is None: info_fechas = {}
     if planning_ledger is None: planning_ledger = {}
@@ -177,11 +180,16 @@ def generar_pdf_boletin_individual(
                 "prs": prs_found
             }
 
-        n1 = float(df_eval.at[idx_ev, "1T_Nota"]) if not pd.isna(df_eval.at[idx_ev, "1T_Nota"]) else 0.0
-        n2 = float(df_eval.at[idx_ev, "2T_Nota"]) if not pd.isna(df_eval.at[idx_ev, "2T_Nota"]) else 0.0
-        n3 = float(df_eval.at[idx_ev, "3T_Nota"]) if not pd.isna(df_eval.at[idx_ev, "3T_Nota"]) else 0.0
-        notas_student = {"1T": n1, "2T": n2, "3T": n3}
-        nota_final = float(df_eval.at[idx_ev, "Nota_Final_FO"]) if not pd.isna(df_eval.at[idx_ev, "Nota_Final_FO"]) else 0.0
+        # Motor A (Indicador->CE->RA->Módulo) — ver helpers_catalogo.calcular_notas(), puerto de
+        # utils/calificaciones.ts. Sustituye al cálculo por trimestre (Motor B: 1T_Nota/2T_Nota/
+        # 3T_Nota, que ningún sitio del frontend escribe nunca — decisión C de la Fase 2, ver
+        # RF Ideas/propuesta-motor-calificacion-2026-08-16.md).
+        from helpers_catalogo import calcular_notas
+        evRow_dict = df_eval.loc[idx_ev].to_dict()
+        notas_calc = calcular_notas(
+            evRow_dict, df_ra.to_dict("records"), df_ce.to_dict("records"), df_act.to_dict("records"),
+            config_redondeo
+        )
 
         ra_tb_data = [] # [[Desc, Bar, Info]]
         for ra_id in sorted(ra_info.keys()):
@@ -189,12 +197,13 @@ def generar_pdf_boletin_individual(
             tris = ra_to_tri[ra_id]["tris"]
             uds = ra_to_tri[ra_id]["uds"]
             prs = ra_to_tri[ra_id]["prs"]
-            
-            avg_nota_ra = sum(notas_student[t] for t in tris) / len(tris) if tris else nota_final
-            prop = min(100.0, max(0.0, (avg_nota_ra / 5.0) * 100.0) if avg_nota_ra >= 5.0 else (avg_nota_ra/5.0)*100.0)
-            
+
+            nota_ra = notas_calc["notas_ra"].get(ra_id)
+            prop = min(100.0, max(0.0, (nota_ra / 5.0) * 100.0)) if nota_ra is not None else 0.0
+
             # Choose correct color (monochrome/greyscale)
-            if prop >= 50: bar_color = "#555555"
+            if nota_ra is None: bar_color = "#eeeeee"
+            elif prop >= 50: bar_color = "#555555"
             else: bar_color = "#cccccc"
             
             # Create graphic Drawing
@@ -203,7 +212,8 @@ def generar_pdf_boletin_individual(
             d = Drawing(bar_w, bar_h)
             d.add(Rect(0, 0, bar_w, bar_h, fillColor=colors.HexColor("#eeeeee"), strokeColor=colors.HexColor("#222222"), strokeWidth=0.5))
             d.add(Rect(0, 0, (prop/100.0)*bar_w, bar_h, fillColor=colors.HexColor(bar_color), strokeColor=None))
-            d.add(String(bar_w/2, 3, f"{prop:.0f}%", fontSize=8, fillColor=colors.black if prop < 50 else colors.white, textAnchor='middle', fontName="Helvetica-Bold"))
+            bar_label = "Sin evaluar" if nota_ra is None else f"{prop:.0f}%"
+            d.add(String(bar_w/2, 3, bar_label, fontSize=8, fillColor=colors.black, textAnchor='middle', fontName="Helvetica-Bold"))
             
             desc_text = f"<b>{ra_id} ({info['pond']:.1f}%)</b> - <font size='7' color='#555555'>{info['desc']}</font>"
             desc_p = Paragraph(desc_text, norm)
@@ -374,16 +384,20 @@ def generar_pdf_boletin_individual(
     for tri in ["1T", "2T", "3T"]:
         avg = nota_media_tri[tri] * (100.0 / suma_pesos_usados[tri]) if suma_pesos_usados[tri] > 0 else 0.0
         if suma_pesos_usados[tri] > 0:
-            media_row.append(Paragraph(f"<b>{avg:.2f}</b>", normB_center))
+            escala_tri = resolve_escala_cualitativa(avg, escalas_evaluacion)
+            media_row.append(Paragraph(f"<b>{avg:.2f}</b><br/><font size='6'>{escala_tri}</font>", normB_center))
             fin_avg_sum += avg * pond_map[tri]
             fin_avg_pond_sum += pond_map[tri]
         else:
             media_row.append("")
-            
+
     final_fin_str = ""
+    escala_final = ""
     if fin_avg_pond_sum > 0:
-        final_fin_str = f"{(fin_avg_sum / fin_avg_pond_sum):.2f}"
-    media_row.append(Paragraph(f"<b>{final_fin_str}</b>", normB_center) if final_fin_str else "")
+        nota_final_media = fin_avg_sum / fin_avg_pond_sum
+        final_fin_str = f"{nota_final_media:.2f}"
+        escala_final = resolve_escala_cualitativa(nota_final_media, escalas_evaluacion)
+    media_row.append(Paragraph(f"<b>{final_fin_str}</b><br/><font size='6'>{escala_final}</font>", normB_center) if final_fin_str else "")
     tipo_blocks.append(media_row)
 
     t_unified = Table(tipo_blocks, colWidths=[6.0*cm, 1.5*cm, 2.5*cm, 2.5*cm, 2.5*cm, 3.0*cm], hAlign='LEFT')
@@ -409,7 +423,8 @@ def generar_pdf_boletin_individual(
 
 
 def generar_docx_boletin_individual(info_modulo, al_id, df_al, df_eval, df_act, df_ce, df_ra, df_feoe,
-                                     info_fechas=None, planning_ledger=None, df_ud=None, df_pr=None):
+                                     info_fechas=None, planning_ledger=None, df_ud=None, df_pr=None,
+                                     escalas_evaluacion=None, config_redondeo=None):
     """Versión .docx editable, misma fórmula de ponderación que el PDF, sin
     la barra gráfica (se sustituye por el % en texto)."""
     from datetime import timedelta
@@ -459,11 +474,12 @@ def generar_docx_boletin_individual(info_modulo, al_id, df_al, df_eval, df_act, 
                         uds_por_tri[m_key].add(ud)
                     curr += timedelta(days=1)
 
-        n1 = float(df_eval.at[idx_ev, "1T_Nota"]) if not pd.isna(df_eval.at[idx_ev, "1T_Nota"]) else 0.0
-        n2 = float(df_eval.at[idx_ev, "2T_Nota"]) if not pd.isna(df_eval.at[idx_ev, "2T_Nota"]) else 0.0
-        n3 = float(df_eval.at[idx_ev, "3T_Nota"]) if not pd.isna(df_eval.at[idx_ev, "3T_Nota"]) else 0.0
-        notas_student = {"1T": n1, "2T": n2, "3T": n3}
-        nota_final = float(df_eval.at[idx_ev, "Nota_Final_FO"]) if not pd.isna(df_eval.at[idx_ev, "Nota_Final_FO"]) else 0.0
+        from helpers_catalogo import calcular_notas
+        evRow_dict = df_eval.loc[idx_ev].to_dict()
+        notas_calc = calcular_notas(
+            evRow_dict, df_ra.to_dict("records"), df_ce.to_dict("records"), df_act.to_dict("records"),
+            config_redondeo
+        )
 
         ra_rows = []
         for _, ra_row in df_ra.sort_values("id_ra").iterrows() if "id_ra" in df_ra.columns else df_ra.iterrows():
@@ -483,9 +499,9 @@ def generar_docx_boletin_individual(info_modulo, al_id, df_al, df_eval, df_act, 
             if not tris_found:
                 tris_found = ["1T", "2T", "3T"]
 
-            avg_nota_ra = sum(notas_student[t] for t in tris_found) / len(tris_found) if tris_found else nota_final
-            prop = min(100.0, max(0.0, (avg_nota_ra / 5.0) * 100.0))
-            ra_rows.append([ra_id, f"{pond:.1f}%", desc, f"{prop:.0f}%", ", ".join(tris_found), ", ".join(uds_found) or "-"])
+            nota_ra = notas_calc["notas_ra"].get(ra_id)
+            grado_str = "Sin evaluar" if nota_ra is None else f"{min(100.0, max(0.0, (nota_ra / 5.0) * 100.0)):.0f}%"
+            ra_rows.append([ra_id, f"{pond:.1f}%", desc, grado_str, ", ".join(tris_found), ", ".join(uds_found) or "-"])
 
         if ra_rows:
             add_table(doc, ["RA", "Ponderación", "Descripción", "Grado adquisición", "Evaluado en", "UDs"], ra_rows,
@@ -569,12 +585,18 @@ def generar_docx_boletin_individual(info_modulo, al_id, df_al, df_eval, df_act, 
     for tri in ["1T", "2T", "3T"]:
         avg = nota_media_tri[tri] * (100.0 / suma_pesos_usados[tri]) if suma_pesos_usados[tri] > 0 else 0.0
         if suma_pesos_usados[tri] > 0:
-            media_row.append(f"{avg:.2f}")
+            escala_tri = resolve_escala_cualitativa(avg, escalas_evaluacion)
+            media_row.append(f"{avg:.2f} ({escala_tri})" if escala_tri else f"{avg:.2f}")
             fin_avg_sum += avg * pond_map[tri]
             fin_avg_pond_sum += pond_map[tri]
         else:
             media_row.append("")
-    media_row.append(f"{(fin_avg_sum / fin_avg_pond_sum):.2f}" if fin_avg_pond_sum > 0 else "")
+    if fin_avg_pond_sum > 0:
+        nota_final_media = fin_avg_sum / fin_avg_pond_sum
+        escala_final = resolve_escala_cualitativa(nota_final_media, escalas_evaluacion)
+        media_row.append(f"{nota_final_media:.2f} ({escala_final})" if escala_final else f"{nota_final_media:.2f}")
+    else:
+        media_row.append("")
     rows.append(media_row)
 
     add_table(doc, ["Instrumentos de evaluación", "%", f"1T ({pond_1t}%)", f"2T ({pond_2t}%)", f"3T ({pond_3t}%)", "Final (100%)"],

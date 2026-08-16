@@ -3,6 +3,7 @@ import { AlertTriangle, TrendingDown, Users, Calendar, Info, CheckCircle2, XCirc
 import { useMemo } from "react";
 import { Card } from "@/components/ui/Card";
 import { useAppStore } from "@/store/useAppStore";
+import { isAlumnoActivo } from "@/utils/alumnado";
 
 /**
  * TAB "Alerta abandono" en /diario
@@ -36,7 +37,7 @@ export function AlertaAbandonoTab() {
     if (!alumnos.length) return [];
 
     return alumnos
-      .filter((a: any) => a.Estado !== "Baja")
+      .filter(isAlumnoActivo)
       .map((alumno: any) => {
         const id = alumno.id;
         const asistAlumno = asistencia[id] || {};
@@ -79,7 +80,7 @@ export function AlertaAbandonoTab() {
   }, [alumnos, asistencia, calificaciones]);
 
   const stats = useMemo(() => {
-    const total = alumnos.filter((a: any) => a.Estado !== "Baja").length;
+    const total = alumnos.filter(isAlumnoActivo).length;
     const alto = alertas.filter((a) => a.riesgo === "alto").length;
     const medio = alertas.filter((a) => a.riesgo === "medio").length;
     return { total, alto, medio, tasa: total > 0 ? ((alto / total) * 100).toFixed(1) : "0" };

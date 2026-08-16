@@ -4,6 +4,8 @@ import { Target } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { resolveDescRa } from "@/services/catalogCache";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
+import { isAlumnoActivo } from "@/utils/alumnado";
+import { calcularNotas, DEFAULT_CONFIG_REDONDEO } from "@/utils/calificaciones";
 
 export function ProgresoRaTab() {
   const { activeModuleId, moduleData, cursoData } = useAppStore();
@@ -12,12 +14,15 @@ export function ProgresoRaTab() {
   const df_al = cursoData?.df_al || [];
   const df_eval = cursoData?.df_eval || [];
   const df_ra = moduleData?.df_ra || [];
+  const df_ce = moduleData?.df_ce || [];
+  const df_act = moduleData?.df_act || [];
   const df_ud = moduleData?.df_ud || [];
   const df_pr = moduleData?.df_pr || [];
+  const config_redondeo = { ...DEFAULT_CONFIG_REDONDEO, ...(moduleData?.config_redondeo || {}) };
   const info_fechas = cursoData?.info_fechas || {};
   const planning_ledger = planningLedger || {};
 
-  const df_evaluable = [...df_al].filter((al: any) => al.Estado !== "Baja");
+  const df_evaluable = [...df_al].filter(isAlumnoActivo);
 
   const uds_por_tri: Record<string, Set<string>> = { "1T": new Set(), "2T": new Set(), "3T": new Set() };
 
@@ -95,18 +100,11 @@ export function ProgresoRaTab() {
             df_evaluable.forEach((al: any) => {
               const evalData = df_eval.find((e: any) => e.ID === al.ID);
               if (!evalData) return;
-              const notas_student: Record<string, number> = {
-                "1T": Number(evalData["1T_Nota"]) || 0,
-                "2T": Number(evalData["2T_Nota"]) || 0,
-                "3T": Number(evalData["3T_Nota"]) || 0,
-              };
-              let avg = 0;
-              if (tris.length > 0) {
-                avg = tris.reduce((sum: number, t: string) => sum + notas_student[t], 0) / tris.length;
-              } else {
-                avg = Number(evalData["Nota_Final_FO"]) || 0;
-              }
-              notasAlumnado.push(avg);
+              // Motor A (Indicador->CE->RA->Módulo) — ver utils/calificaciones.ts. Sustituye al
+              // cálculo por trimestre (Motor B, nunca alimentado: 1T_Nota/2T_Nota/3T_Nota no los
+              // escribe nada del frontend, decisión C de la Fase 2).
+              const nota_ra = calcularNotas(evalData, df_ra, df_ce, df_act, config_redondeo).notas_ra[ra_id];
+              if (nota_ra !== null && nota_ra !== undefined) notasAlumnado.push(nota_ra);
             });
 
             const minN = notasAlumnado.length > 0 ? Math.min(...notasAlumnado) : 0;

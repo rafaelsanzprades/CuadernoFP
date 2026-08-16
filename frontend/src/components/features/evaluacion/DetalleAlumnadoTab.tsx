@@ -6,6 +6,8 @@ import { LineChart, Line, ResponsiveContainer, YAxis } from "recharts";
 import { useAppStore } from "@/store/useAppStore";
 import { resolveDescRa } from "@/services/catalogCache";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
+import { isAlumnoActivo } from "@/utils/alumnado";
+import { calcularNotas, getSigadInfo, DEFAULT_CONFIG_REDONDEO } from "@/utils/calificaciones";
 import { Button } from "@/components/ui/Button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 
@@ -27,7 +29,7 @@ export function DetalleAlumnadoTab() {
   const info_fechas = cursoData?.info_fechas || {};
   const planning_ledger = planningLedger || {};
 
-  const df_evaluable = [...df_al].filter((al: any) => al.Estado !== "Baja");
+  const df_evaluable = [...df_al].filter(isAlumnoActivo);
   df_evaluable.sort((a: any, b: any) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
 
   const acts_by_tri: Record<string, any[]> = { "1T": [], "2T": [], "3T": [] };
@@ -38,86 +40,7 @@ export function DetalleAlumnadoTab() {
     }
   });
 
-  const getSigadInfo = (nota: number) => {
-    let n = nota < 5 ? Math.floor(nota) : Math.floor(nota + 0.5);
-    n = Math.max(1, Math.min(10, n));
-    if (nota < 5) return { n, cod: "IN", txt: "Insuficiente", col: "#e74c3c" };
-    if (nota < 6) return { n, cod: "SU", txt: "Suficiente", col: "#e67e22" };
-    if (nota < 7) return { n, cod: "BI", txt: "Bien", col: "#3498db" };
-    if (nota < 9) return { n, cod: "NT", txt: "Notable", col: "#2ecc71" };
-    return { n, cod: "SB", txt: "Sobresaliente", col: "#1abc9c" };
-  };
-
-  const calcularNotas = (al_id: string, evRow: any) => {
-    const peso_ra: Record<string, number> = {};
-    df_ra.forEach((ra: any) => {
-      if (ra.id_ra) peso_ra[ra.id_ra] = Number(ra.peso_ra) || 0;
-    });
-
-    const peso_ce: Record<string, number> = {};
-    const ra_of_ce: Record<string, string> = {};
-    df_ce.forEach((ce: any) => {
-      if (ce.id_ce && ce.id_ra) {
-        peso_ce[ce.id_ce] = Number(ce.peso_ce) || 0;
-        ra_of_ce[ce.id_ce] = ce.id_ra;
-      }
-    });
-
-    const config = moduleData?.config_redondeo || {
-      nota_aprobado: 5.0,
-      umbral_redondeo: 5.0,
-      max_compensables: 0
-    };
-
-    const notas_ce: Record<string, number> = {};
-    Object.keys(peso_ce).forEach(ce_id => {
-      const act_vals: number[] = [];
-      df_act.forEach((act: any) => {
-        if (act[ce_id] === true || act[ce_id] === "true") {
-          const act_id = act.id_act;
-          const val = Number(evRow[act_id]);
-          if (!isNaN(val)) act_vals.push(val);
-        }
-      });
-      notas_ce[ce_id] = act_vals.length > 0 ? act_vals.reduce((a, b) => a + b, 0) / act_vals.length : 0;
-    });
-
-    const notas_ra: Record<string, number> = {};
-    const failed_ces_by_ra: Record<string, number> = {};
-    Object.entries(notas_ce).forEach(([ce_id, n_ce]) => {
-      const r_id = ra_of_ce[ce_id];
-      if (r_id) {
-        if (!notas_ra[r_id]) notas_ra[r_id] = 0;
-        notas_ra[r_id] += n_ce * (peso_ce[ce_id] / 100);
-
-        if (!failed_ces_by_ra[r_id]) failed_ces_by_ra[r_id] = 0;
-        if (n_ce > 0 && n_ce < config.nota_aprobado) {
-          failed_ces_by_ra[r_id]++;
-        }
-      }
-    });
-    Object.keys(notas_ra).forEach(r_id => {
-      let n_ra = notas_ra[r_id];
-      if (n_ra >= config.umbral_redondeo && n_ra < config.nota_aprobado) {
-        n_ra = config.nota_aprobado;
-      }
-      if (failed_ces_by_ra[r_id] > config.max_compensables && n_ra >= config.nota_aprobado) {
-        n_ra = config.nota_aprobado - 0.1;
-      }
-      notas_ra[r_id] = n_ra;
-    });
-
-    let nota_final = 0;
-    Object.entries(notas_ra).forEach(([r_id, n_ra]) => {
-      nota_final += n_ra * ((peso_ra[r_id] || 0) / 100);
-    });
-
-    if (nota_final >= config.umbral_redondeo && nota_final < config.nota_aprobado) {
-      nota_final = config.nota_aprobado;
-    }
-
-    return { notas_ra, nota_final, notas_ce };
-  };
+  const config_redondeo = { ...DEFAULT_CONFIG_REDONDEO, ...(moduleData?.config_redondeo || {}) };
 
   const handleUpdateActNota = (al_id: string, act_id: string, val: number) => {
     const newEval = [...df_eval];
@@ -130,8 +53,8 @@ export function DetalleAlumnadoTab() {
 
     newEval[evRowIdx][act_id] = val;
 
-    const { nota_final } = calcularNotas(al_id, newEval[evRowIdx]);
-    newEval[evRowIdx]["Nota_Final_FO"] = Number(nota_final.toFixed(2));
+    const { nota_final } = calcularNotas(newEval[evRowIdx], df_ra, df_ce, df_act, config_redondeo);
+    newEval[evRowIdx]["Nota_Final_FO"] = nota_final !== null ? Number(nota_final.toFixed(2)) : 0;
 
     updateCursoData("df_eval", newEval);
   };
@@ -254,32 +177,23 @@ export function DetalleAlumnadoTab() {
           const sigad = getSigadInfo(nota_prev);
           const activeStudentTab = activeTabByStudent[al_id] || "1T";
 
-          const notas_student: Record<string, number> = {
-            "1T": Number(evRow["1T_Nota"]) || 0.0,
-            "2T": Number(evRow["2T_Nota"]) || 0.0,
-            "3T": Number(evRow["3T_Nota"]) || 0.0,
-          };
-          const nota_final = Number(evRow["Nota_Final_FO"]) || 0.0;
+          // Motor A (Indicador->CE->RA->Módulo, ver utils/calificaciones.ts) — sustituye al
+          // cálculo por trimestre (Motor B, nunca alimentado por la UI: 1T_Nota/2T_Nota/3T_Nota
+          // no los escribe nada del frontend, decisión C de la Fase 2).
+          const notasCalc = calcularNotas(evRow, df_ra, df_ce, df_act, config_redondeo);
 
           const resultados_ra: any[] = [];
 
           Object.keys(ra_info).forEach(ra_id => {
             const info = ra_info[ra_id];
             const r_data = ra_to_tri[ra_id];
-            const tris = r_data.tris;
+            const nota_ra = notasCalc.notas_ra[ra_id] ?? null;
+            const topeActivo = notasCalc.ra_tope_activo[ra_id] || false;
 
-            let avg_nota_ra = 0.0;
-            if (tris.length > 0) {
-              avg_nota_ra = tris.reduce((sum: number, t: string) => sum + notas_student[t], 0) / tris.length;
-            } else {
-              avg_nota_ra = nota_final;
-            }
-
-            let prop = avg_nota_ra >= 5.0 ? (avg_nota_ra / 5.0) * 100.0 : (avg_nota_ra / 5.0) * 100.0;
-            prop = Math.min(100.0, Math.max(0.0, prop));
+            const prop = nota_ra === null ? 0 : Math.min(100.0, Math.max(0.0, (nota_ra / 5.0) * 100.0));
 
             resultados_ra.push({
-              id: ra_id, desc: info.desc, pond: info.pond, prop, nota: avg_nota_ra,
+              id: ra_id, desc: info.desc, pond: info.pond, prop, nota: nota_ra, topeActivo,
               tris: r_data.tris, uds: r_data.uds, prs: r_data.prs
             });
           });
@@ -444,6 +358,12 @@ export function DetalleAlumnadoTab() {
                                   <div className="mb-1.5 flex items-center gap-2">
                                     <span className="font-extrabold text-foreground">{r.id}</span>
                                     <span className="text-caption text-muted font-semibold">({r.pond.toFixed(1)}%)</span>
+                                    {r.nota === null && (
+                                      <span className="text-caption font-semibold px-2 py-0.5 rounded-full bg-muted/10 text-muted border border-muted/30">Sin evaluar</span>
+                                    )}
+                                    {r.topeActivo && (
+                                      <span className="text-caption font-semibold px-2 py-0.5 rounded-full bg-danger/10 text-danger border border-danger/30" title="Nº de CE suspensos supera el máximo compensable de este módulo (Datos → Reglas de redondeo)">Tope compensables activo</span>
+                                    )}
                                   </div>
                                   <div className="text-caption text-muted mb-3 line-clamp-1">{r.desc}</div>
 

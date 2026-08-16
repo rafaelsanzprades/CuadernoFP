@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { NarrativeField } from "@/components/ui/NarrativeField";
-import { Users, Activity, BarChart2 } from "lucide-react";
+import { Users, Activity, BarChart2, Sparkles } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
+import toast from "react-hot-toast";
 
 const RASGOS_GRUPO = [
   { id: "GRUPO-HETEROG", label: "Grupo heterogéneo en edad y procedencia" },
@@ -36,8 +37,9 @@ function StatCard({ label, value, sub }: { label: string; value: string | number
 }
 
 export function ContextoGrupoTab() {
-  const { cursoData, updateCursoData } = useAppStore();
+  const { cursoData, updateCursoData, moduleData, updateModuleData } = useAppStore();
   const df_al = cursoData?.df_al || [];
+  const [generandoIA, setGenerandoIA] = useState(false);
 
   const rasgos_grupo = (cursoData as any)?.rasgos_grupo || [];
 
@@ -55,6 +57,48 @@ export function ContextoGrupoTab() {
     ? (conEdad.reduce((sum: number, a: any) => sum + a.Edad, 0) / conEdad.length).toFixed(1)
     : "-";
   const repetidores = df_al.filter((a: any) => a.Repite === true).length;
+  const tramosEdad = EDAD_TRAMOS.map((tramo) => ({ label: tramo.label, count: conEdad.filter((a: any) => tramo.test(a.Edad)).length }));
+  const rasgosSeleccionados = RASGOS_GRUPO.filter((r) => rasgos_grupo.includes(r.id)).map((r) => r.label);
+
+  const handleGenerarIA = async () => {
+    if (total === 0) {
+      toast.error("No hay alumnado registrado en este curso todavía.");
+      return;
+    }
+    setGenerandoIA(true);
+    try {
+      const prompt = [
+        "Redacta un párrafo (5-8 líneas, tono técnico-docente, sin listas ni encabezados) para la sección " +
+        "\"Características del alumnado\" de una programación didáctica de Formación Profesional, a partir " +
+        "de estos datos reales del grupo. No inventes datos que no estén aquí.",
+        "",
+        `Alumnado total: ${total}`,
+        `Edad media: ${edadMedia} años`,
+        `Menores de edad: ${menores} (${Math.round((menores / total) * 100)}%)`,
+        `Repetidores: ${repetidores} (${Math.round((repetidores / total) * 100)}%)`,
+        `Franjas de edad: ${tramosEdad.map((t) => `${t.label}: ${t.count}`).join(", ")}`,
+        rasgosSeleccionados.length > 0
+          ? `Rasgos característicos marcados por el profesor: ${rasgosSeleccionados.join("; ")}.`
+          : "Sin rasgos característicos marcados por el profesor.",
+      ].join("\n");
+
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/ai/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: [{ role: "user", parts: prompt }] }),
+      });
+      const data = await res.json();
+      if (!res.ok || data.status !== "success") {
+        throw new Error(data.detail || data.message || "Error desconocido");
+      }
+      updateModuleData("textos_pd_caracteristicas_alumnado" as any, data.reply);
+      toast.success("Texto generado. Revísalo y edítalo antes de guardar.");
+    } catch (err: any) {
+      toast.error(err.message || "Error al generar el texto con IA.");
+    } finally {
+      setGenerandoIA(false);
+    }
+  };
 
   return (
     <MotionWrapper>
@@ -119,11 +163,22 @@ export function ContextoGrupoTab() {
           </div>
         </div>
 
-        <NarrativeField
-          id="textos_pd_caracteristicas_alumnado"
-          title="Características del alumnado"
-          description="Procedencia geográfica principal, franja de edad, nivel competencial inicial, expectativas e implicación, etc."
-        />
+        <div className="relative">
+          <NarrativeField
+            id="textos_pd_caracteristicas_alumnado"
+            title="Características del alumnado"
+            description="Procedencia geográfica principal, franja de edad, nivel competencial inicial, expectativas e implicación, etc."
+          />
+          <button
+            type="button"
+            onClick={handleGenerarIA}
+            disabled={generandoIA || total === 0}
+            className="absolute top-0 right-0 flex items-center gap-1.5 text-caption font-semibold text-accent hover:text-accent/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            <Sparkles className={`w-3.5 h-3.5 ${generandoIA ? "animate-pulse" : ""}`} />
+            {generandoIA ? "Generando..." : "Generar con IA"}
+          </button>
+        </div>
       </div>
     </MotionWrapper>
   );

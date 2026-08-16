@@ -98,14 +98,14 @@ export function DashboardKPIs({ cursoData, moduleData }: DashboardKPIsProps) {
       </h2>
       <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
         <Card glow accent="top" className="p-6 flex flex-col items-center justify-center border-t-blue-500 hover:scale-[1.02] transition-transform">
-          <span className="text-body text-muted mb-1 text-center">Horas Previstas</span>
+          <span className="text-body text-muted mb-1 text-center">Horas previstas</span>
           <span className="text-heading font-bold text-foreground">
             <AnimatedCounter value={total_previsto} /> h
           </span>
         </Card>
         
         <Card glow accent="top" className="p-6 flex flex-col items-center justify-center border-t-[#14a085] hover:scale-[1.02] transition-transform">
-          <span className="text-body text-muted mb-1 text-center">Horas Impartidas</span>
+          <span className="text-body text-muted mb-1 text-center">Horas impartidas</span>
           <span className="text-heading font-bold text-foreground">
             <AnimatedCounter value={total_impartido} /> h
           </span>

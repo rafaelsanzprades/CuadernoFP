@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button';
 import { Printer, FileText, Users, Award, Briefcase, GraduationCap, Target } from 'lucide-react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { resolveDescRa, loadCatalogForModule } from '@/services/catalogCache';
+import { isAlumnoActivo } from '@/utils/alumnado';
 
 export const BoletinesTab = () => {
   const { cursoData, moduleData, activeCursoId, activeModuleId } = useAppStore();
@@ -13,7 +14,7 @@ export const BoletinesTab = () => {
   useEffect(() => { if (activeModuleId) loadCatalogForModule(activeModuleId); }, [activeModuleId]);
   
   const df_al = cursoData?.df_al || [];
-  const activeStudents = df_al.filter((al: Alumnado) => al.Estado !== 'Baja').sort((a, b) => (a.Apellidos || '').localeCompare(b.Apellidos || ''));
+  const activeStudents = df_al.filter(isAlumnoActivo).sort((a, b) => (a.Apellidos || '').localeCompare(b.Apellidos || ''));
   
   const [selectedStudentId, setSelectedStudentId] = useState<string>(activeStudents.length > 0 ? activeStudents[0].ID || '' : '');
 
@@ -149,7 +150,7 @@ export const BoletinesTab = () => {
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-body font-semibold text-muted-foreground">Curso Académico</p>
+                    <p className="text-body font-semibold text-muted-foreground">Curso académico</p>
                     <p className="text-subheading font-bold">{info_modulo.curso_academico || "2025/2026"}</p>
                     <p className="text-caption text-muted mt-2">Fecha: {new Date().toLocaleDateString('es-ES')}</p>
                   </div>
@@ -166,7 +167,7 @@ export const BoletinesTab = () => {
                     </div>
                   </div>
                   <div className="text-right bg-background p-4 rounded-xl shadow-sm border border-white/5">
-                    <p className="text-caption text-muted tracking-wider font-semibold mb-1">Nota Media Estimada</p>
+                    <p className="text-caption text-muted tracking-wider font-semibold mb-1">Nota media estimada</p>
                     <div className="text-heading font-black text-accent">{notaMedia}</div>
                   </div>
                 </div>
@@ -175,7 +176,7 @@ export const BoletinesTab = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                   <div className="bg-foreground/5 p-6 rounded-xl border border-white/5 flex flex-col items-center">
                     <h3 className="text-subheading font-bold mb-4 flex items-center gap-2 w-full">
-                      <Target className="w-5 h-5 text-info" /> Perfil Competencial (Radar)
+                      <Target className="w-5 h-5 text-info" /> Perfil competencial (Radar)
                     </h3>
                     <div className="w-full h-[250px]">
                       <ResponsiveContainer width="100%" height="100%">

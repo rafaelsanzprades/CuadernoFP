@@ -168,6 +168,164 @@ def resolve_recursos(recursos_espacios: list) -> list:
     return [RECURSOS_LABELS.get(r, r) for r in (recursos_espacios or [])]
 
 
+# Escala oficial española (Insuficiente/Suficiente/Bien/Notable/Sobresaliente),
+# idéntica a DEFAULT_ESCALAS_EVALUACION en frontend/src/components/features/modulo/DatosTab.tsx —
+# se usa solo si el profesor no ha definido/editado su propia escala en esa pestaña.
+DEFAULT_ESCALAS_EVALUACION = [
+    {"id": "eev_in", "nombre": "Insuficiente (IN)", "coeficiente": 3},
+    {"id": "eev_su", "nombre": "Suficiente (SU)", "coeficiente": 5},
+    {"id": "eev_bi", "nombre": "Bien (BI)", "coeficiente": 6},
+    {"id": "eev_nt", "nombre": "Notable (NT)", "coeficiente": 7.5},
+    {"id": "eev_sb", "nombre": "Sobresaliente (SB)", "coeficiente": 9.5},
+]
+
+
+def resolve_escala_cualitativa(nota, escalas: list) -> str:
+    """Convierte una nota numérica (0-10) a su etiqueta cualitativa más cercana.
+
+    Cada escala tiene un "coeficiente" = valor central de su tramo (p. ej.
+    Notable=7.5 cubre aprox. 7-8.5), no un umbral inferior — por eso se busca
+    el coeficiente con menor distancia absoluta a la nota, no un lookup por
+    rango. Devuelve "" si no hay nota o no hay escalas definidas.
+    """
+    if nota is None:
+        return ""
+    try:
+        nota = float(nota)
+    except (TypeError, ValueError):
+        return ""
+    escalas = escalas or DEFAULT_ESCALAS_EVALUACION
+    if not escalas:
+        return ""
+    mejor = min(escalas, key=lambda e: abs(float(e.get("coeficiente", 0)) - nota))
+    return str(mejor.get("nombre", ""))
+
+
+# NivelFP (catálogo, LO 3/2022) -> rango de la plantilla PD+/JEG. Solo referencia
+# para cuando se aborde el campo "Titulación" (hoy un bracket [[ ]] de edición
+# manual en modelo_pd_jeg_tpl_final.docx, no un tag Jinja {{ }} — convertirlo
+# requiere tocar la plantilla validada por el Jefe de Servicio de FP, así que
+# no se usa todavía; ver ítem 16 de RF Ideas/00 IDEAS.md).
+NIVEL_FP_A_TITULACION = {
+    "BASICA": "Técnico básico",
+    "MEDIO": "Técnico",
+    "SUPERIOR": "Técnico superior",
+    "ESPECIALIZACION": "Especialista",
+}
+
+
+def resolve_grado_info(codigo_modulo: str, db) -> dict:
+    """Resuelve familia profesional, código y denominación del título desde el
+    catálogo oficial (Degree/ProfessionalFamily), a partir del código de
+    módulo (p. ej. "0237"). Devuelve {} si el módulo no está en el catálogo
+    (título no oficial o todavía no scrapeado) — el llamador debe mantener
+    su propio valor por defecto en ese caso, no asumir que siempre hay dato.
+    """
+    if not codigo_modulo:
+        return {}
+    from models import Module
+
+    module = db.query(Module).filter(Module.code == codigo_modulo).first()
+    if not module or not module.degree:
+        return {}
+
+    degree = module.degree
+    denominacion = degree.name or ""
+    prefix = f"{degree.code} - "
+    if degree.code and denominacion.startswith(prefix):
+        denominacion = denominacion[len(prefix):]
+
+    return {
+        "familia_profesional": degree.family.name if degree.family else "",
+        "codigo_grado": degree.code or "",
+        "denominacion_grado": denominacion,
+        "nivel_fp": degree.level.name if degree.level else "",
+    }
+
+
+DEFAULT_CONFIG_REDONDEO = {
+    "nota_aprobado": 5.0,
+    "umbral_redondeo": 5.0,
+    "max_compensables": 0,
+}
+
+
+def calcular_notas(evRow: dict, df_ra: list, df_ce: list, df_act: list, config: dict = None) -> dict:
+    """Motor de calificación (Motor A: instrumento -> CE -> RA -> módulo).
+
+    Puerto línea a línea de frontend/src/utils/calificaciones.ts — debe
+    mantenerse a mano en sincronía con ese fichero si el algoritmo cambia, no
+    hay código compartido entre frontend y backend (mismo patrón que
+    planning_generator.py / planningGenerator.ts). Un CE sin ninguna
+    actividad calificada se excluye del denominador ponderado de su RA
+    (decisión A de la Fase 2, RF Ideas/propuesta-motor-calificacion-2026-08-16.md)
+    — se representa como `None` ("sin evaluar"), no como 0.
+    """
+    config = {**DEFAULT_CONFIG_REDONDEO, **(config or {})}
+
+    peso_ra = {ra["id_ra"]: float(ra.get("peso_ra") or 0) for ra in df_ra if ra.get("id_ra")}
+
+    peso_ce, ra_of_ce = {}, {}
+    for ce in df_ce:
+        if ce.get("id_ce") and ce.get("id_ra"):
+            peso_ce[ce["id_ce"]] = float(ce.get("peso_ce") or 0)
+            ra_of_ce[ce["id_ce"]] = ce["id_ra"]
+
+    notas_ce = {}
+    for ce_id in peso_ce:
+        vals = []
+        for act in df_act:
+            if act.get(ce_id) is True or act.get(ce_id) == "true":
+                raw = evRow.get(act.get("id_act"))
+                try:
+                    v = float(raw)
+                    if v == v:  # not NaN
+                        vals.append(v)
+                except (TypeError, ValueError):
+                    pass
+        notas_ce[ce_id] = (sum(vals) / len(vals)) if vals else None
+
+    suma_ponderada_ra, peso_usado_ra, failed_ces_by_ra = {}, {}, {}
+    for ce_id, n_ce in notas_ce.items():
+        r_id = ra_of_ce.get(ce_id)
+        if not r_id or n_ce is None:
+            continue
+        suma_ponderada_ra[r_id] = suma_ponderada_ra.get(r_id, 0) + n_ce * peso_ce[ce_id]
+        peso_usado_ra[r_id] = peso_usado_ra.get(r_id, 0) + peso_ce[ce_id]
+        if n_ce < config["nota_aprobado"]:
+            failed_ces_by_ra[r_id] = failed_ces_by_ra.get(r_id, 0) + 1
+
+    all_ra_ids = set(peso_ra.keys()) | set(ra_of_ce.values())
+    notas_ra, ra_tope_activo = {}, {}
+    for r_id in all_ra_ids:
+        peso_usado = peso_usado_ra.get(r_id, 0)
+        if peso_usado <= 0:
+            notas_ra[r_id] = None
+            ra_tope_activo[r_id] = False
+            continue
+        n_ra = suma_ponderada_ra[r_id] / peso_usado
+        if config["umbral_redondeo"] <= n_ra < config["nota_aprobado"]:
+            n_ra = config["nota_aprobado"]
+        tope_activo = failed_ces_by_ra.get(r_id, 0) > config["max_compensables"] and n_ra >= config["nota_aprobado"]
+        if tope_activo:
+            n_ra = config["nota_aprobado"] - 0.1
+        notas_ra[r_id] = n_ra
+        ra_tope_activo[r_id] = tope_activo
+
+    suma_final, peso_final_usado = 0.0, 0.0
+    for r_id, n_ra in notas_ra.items():
+        if n_ra is None:
+            continue
+        suma_final += n_ra * peso_ra.get(r_id, 0)
+        peso_final_usado += peso_ra.get(r_id, 0)
+
+    nota_final = (suma_final / peso_final_usado) if peso_final_usado > 0 else None
+    if nota_final is not None and config["umbral_redondeo"] <= nota_final < config["nota_aprobado"]:
+        nota_final = config["nota_aprobado"]
+
+    return {"notas_ce": notas_ce, "notas_ra": notas_ra, "nota_final": nota_final, "ra_tope_activo": ra_tope_activo}
+
+
 def fetch_curriculo_from_db(codigo_modulo: str, db) -> dict:
     """
     Consulta el catálogo oficial (tablas Module/LearningOutcome/EvaluationCriterion)

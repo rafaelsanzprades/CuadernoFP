@@ -76,6 +76,7 @@ export function SessionTable({
                   <div className="w-16 pr-2">Horas</div>
                   <div className="w-40 pr-2">Tipo</div>
                   <div className="w-32 pr-2">Ra/CE</div>
+                  <div className="w-20 pr-2">IE %</div>
                   <div className="flex-1 pr-2">Contenidos</div>
                   <div className="w-10"></div>
                 </div>
@@ -139,9 +140,21 @@ export function SessionTable({
                                       className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-accent focus:outline-none" 
                                     />
                                   </div>
+                                  <div className="w-20 pr-2">
+                                    <input
+                                      type="number"
+                                      min={0}
+                                      max={100}
+                                      value={ses.IE ?? ""}
+                                      onChange={(e) => handleUpdateSesion(globalIdx, "IE", e.target.value === "" ? null : Number(e.target.value))}
+                                      placeholder="-"
+                                      title="% del instrumento de evaluación, si esta sesión puntúa"
+                                      className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-accent focus:outline-none"
+                                    />
+                                  </div>
                                   <div className="flex-1 pr-2">
-                                    <input 
-                                      type="text" 
+                                    <input
+                                      type="text"
                                       value={ses.Contenidos || ""}
                                       onChange={(e) => handleUpdateSesion(globalIdx, "Contenidos", e.target.value)}
                                       className="w-full min-w-[200px] bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-accent focus:outline-none" 

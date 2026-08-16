@@ -3,13 +3,14 @@ import { useAppStore } from "@/store/useAppStore";
 import { ClipboardList, Plus, Trash2 } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { isAlumnoActivo } from "@/utils/alumnado";
 
 export function TutoriaTab() {
   const { cursoData, updateCursoData } = useAppStore();
 
   const df_al = cursoData?.df_al || [];
   const tutoria_ledger = cursoData?.tutoria_ledger || {}; 
-  const df_evaluable = df_al.filter((al: any) => al.Estado !== "Baja");
+  const df_evaluable = df_al.filter(isAlumnoActivo);
 
   const [selectedAlId, setSelectedAlId] = useState<string>(df_evaluable.length > 0 ? (df_evaluable[0].ID || "") : "");
 

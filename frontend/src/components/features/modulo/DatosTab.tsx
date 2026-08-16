@@ -1,11 +1,12 @@
 "use client";
-import { Calendar, FileEdit, Receipt, Scale, School, UserCircle, Settings, Info, ListChecks, Plus, Trash2 } from "lucide-react";
+import { Calendar, FileEdit, Receipt, Scale, School, UserCircle, Settings, Info, ListChecks, Plus, Trash2, ChevronDown } from "lucide-react";
 import { useEffect, useState, type CSSProperties } from "react";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { Select } from "@/components/ui/Select";
 import { Input } from "@/components/ui/Input";
 import { Family } from "@/types";
+import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
 
 // Semilla por defecto de "% Instrumentos de evaluación" por trimestre — se
 // usa solo mientras el módulo no tenga ninguna fila guardada todavía.
@@ -16,15 +17,6 @@ const INSTR_GRID_STYLE: CSSProperties = {
   gridTemplateColumns: "1fr 2fr 1fr 1fr 1fr 2.5rem",
   gap: "0.75rem",
 };
-
-const DEFAULT_INSTRUMENTOS_PCT = [
-  { id: "instr_teoricos", categoria: "Teoría", nombre: "Exámenes teóricos", pct_1t: 30, pct_2t: 20, pct_3t: 10 },
-  { id: "instr_practicos", categoria: "Práctica", nombre: "Exámenes prácticos", pct_1t: 20, pct_2t: 20, pct_3t: 10 },
-  { id: "instr_exposicion", categoria: "Proyecto", nombre: "Exposición y defensa proyecto", pct_1t: 10, pct_2t: 20, pct_3t: 30 },
-  { id: "instr_informes", categoria: "Ejercicios", nombre: "Informes de ejercicios", pct_1t: 20, pct_2t: 30, pct_3t: 40 },
-  { id: "instr_cuaderno", categoria: "Tareas", nombre: "Cuaderno de tareas", pct_1t: 20, pct_2t: 10, pct_3t: 10 },
-  { id: "instr_recup", categoria: "Recuperaciones", nombre: "Recuperaciones", pct_1t: 0, pct_2t: 0, pct_3t: 0 },
-];
 
 // Semilla por defecto de "Escalas de evaluación cualitativas" — la escala
 // oficial española de siempre (Insuficiente/Suficiente/Bien/Notable/
@@ -385,7 +377,7 @@ export function DatosTab() {
                   onChange={(e) => updateModuleData("config_redondeo", { ...config, max_compensables: parseInt(e.target.value) })}
                   className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
                 />
-                <p className="text-caption text-muted">Número máximo de Criterios suspensos que se permiten para aprobar un RA.</p>
+                <p className="text-caption text-muted">Número máximo de Criterios suspensos que se permiten para aprobar un RA. <strong>0</strong> = cualquier CE suspenso del RA topa su nota justo por debajo del aprobado (comportamiento estricto); sube este número para permitir compensar N criterios suspensos dentro del mismo RA. Cuando el tope está activo para un alumno, aparece marcado en Seguimiento → Detalle por alumnado.</p>
               </div>
             </div>
           );
@@ -429,8 +421,8 @@ export function DatosTab() {
         </div>
         <div className="space-y-2">
           <div style={INSTR_GRID_STYLE} className="text-caption font-bold text-muted px-1">
-            <span>Tipo</span>
-            <span>Instrumento</span>
+            <span>Selección del tipo</span>
+            <span>Descripción del Instrumento de Evaluación (IE)</span>
             <span className="text-center">1er Trimestre</span>
             <span className="text-center">2º Trimestre</span>
             <span className="text-center">3er Trimestre</span>
@@ -438,18 +430,21 @@ export function DatosTab() {
           </div>
           {instrumentosPct.map((row) => (
             <div key={row.id} style={INSTR_GRID_STYLE} className="items-center">
-              <select
-                value={row.categoria || "Teoría"}
-                onChange={(e) => updateInstrumentoPctField(row.id, "categoria", e.target.value)}
-                className="bg-background border border-[var(--glass-border)] rounded px-2 py-2 text-foreground w-full appearance-none"
-              >
-                <option value="Teoría">Teoría</option>
-                <option value="Práctica">Práctica</option>
-                <option value="Proyecto">Proyecto</option>
-                <option value="Ejercicios">Ejercicios</option>
-                <option value="Tareas">Tareas</option>
-                <option value="Recuperaciones">Recuperaciones</option>
-              </select>
+              <div className="relative">
+                <select
+                  value={row.categoria || "Teoría"}
+                  onChange={(e) => updateInstrumentoPctField(row.id, "categoria", e.target.value)}
+                  className="bg-background border border-[var(--glass-border)] rounded pl-2 pr-7 py-2 text-foreground w-full appearance-none"
+                >
+                  <option value="Teoría">Teoría</option>
+                  <option value="Práctica">Práctica</option>
+                  <option value="Proyecto">Proyecto</option>
+                  <option value="Ejercicios">Ejercicios</option>
+                  <option value="Tareas">Tareas</option>
+                  <option value="Recuperaciones">Recuperaciones</option>
+                </select>
+                <ChevronDown className="w-4 h-4 text-muted absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+              </div>
               <input
                 type="text"
                 value={row.nombre}
@@ -461,13 +456,15 @@ export function DatosTab() {
                 row.categoria === "Recuperaciones" ? (
                   <div key={field} className="text-center text-muted">-</div>
                 ) : (
-                  <input
-                    key={field}
-                    type="number"
-                    value={row[field]}
-                    onChange={(e) => updateInstrumentoPctField(row.id, field, e.target.value)}
-                    className="bg-background border border-[var(--glass-border)] rounded px-2 py-2 text-foreground text-center w-full"
-                  />
+                  <div key={field} className="relative">
+                    <input
+                      type="number"
+                      value={row[field]}
+                      onChange={(e) => updateInstrumentoPctField(row.id, field, e.target.value)}
+                      className="bg-background border border-[var(--glass-border)] rounded pl-2 pr-5 py-2 text-foreground text-center w-full"
+                    />
+                    <span className="absolute right-2 top-1/2 -translate-y-1/2 text-muted text-caption pointer-events-none">%</span>
+                  </div>
                 )
               ))}
               <button

@@ -4,6 +4,7 @@ import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { BarChart3, PieChart as PieChartIcon, TrendingUp, AlertTriangle, Users } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart as RePieChart, Pie, Cell, Legend } from "recharts";
+import { isAlumnoActivo } from "@/utils/alumnado";
 
 export default function EstadisticasTab() {
   const { cursoData, moduleData, activeCursoId } = useAppStore();
@@ -23,7 +24,7 @@ export default function EstadisticasTab() {
   const df_al = cursoData?.df_al || [];
   const df_ra = moduleData?.df_ra || [];
 
-  const activeAlumnos = df_al.filter(al => al.Estado === "Matriculado");
+  const activeAlumnos = df_al.filter(isAlumnoActivo);
   const alumnosIds = activeAlumnos.map(a => a.ID);
   
   // Demographics
@@ -47,7 +48,7 @@ export default function EstadisticasTab() {
   });
 
   const repStats = [
-    { name: "Nueva Matrícula", value: totalNew, color: "#3b82f6" },
+    { name: "Nueva matrícula", value: totalNew, color: "#3b82f6" },
     { name: "Repetidores", value: totalRepeaters, color: "#f59e0b" }
   ];
 
@@ -138,7 +139,7 @@ export default function EstadisticasTab() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div>
             <h1 className="text-heading font-bold tracking-tight mb-2 flex items-center gap-3">
-              <BarChart3 className="w-8 h-8 text-accent" /> Dashboard de Analítica
+              <BarChart3 className="w-8 h-8 text-accent" /> Dashboard de analítica
             </h1>
             <p className="text-muted">
               Inteligencia visual sobre el rendimiento y demografía del grupo.
@@ -165,23 +166,23 @@ export default function EstadisticasTab() {
         {/* Fila de Tarjetas Resumen */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="bg-foreground/5 border border-[var(--glass-border)] p-6 rounded-xl text-center">
-            <p className="text-muted text-body mb-2">Alumnos Matriculados</p>
+            <p className="text-muted text-body mb-2">Alumnos matriculados</p>
             <p className="text-heading font-bold text-foreground">{alumnosIds.length}</p>
           </div>
           <div className="bg-foreground/5 border border-[var(--glass-border)] p-6 rounded-xl text-center">
-            <p className="text-muted text-body mb-2">Tasa de Aprobados ({evalPeriod})</p>
+            <p className="text-muted text-body mb-2">Tasa de aprobados ({evalPeriod})</p>
             <p className="text-heading font-bold text-emerald-500">
               {alumnosIds.length > 0 ? Math.round((aprobados / (aprobados+suspensos || 1)) * 100) : 0}%
             </p>
           </div>
           <div className="bg-foreground/5 border border-[var(--glass-border)] p-6 rounded-xl text-center">
-            <p className="text-muted text-body mb-2">Tasa de Repetidores</p>
+            <p className="text-muted text-body mb-2">Tasa de repetidores</p>
             <p className="text-heading font-bold text-amber-500">
               {alumnosIds.length > 0 ? Math.round((totalRepeaters / alumnosIds.length) * 100) : 0}%
             </p>
           </div>
           <div className="bg-foreground/5 border border-[var(--glass-border)] p-6 rounded-xl text-center">
-            <p className="text-muted text-body mb-2">Edad Media</p>
+            <p className="text-muted text-body mb-2">Edad media</p>
             <p className="text-heading font-bold text-blue-500">
               {(() => {
                 const ages = activeAlumnos.map(a => a.Edad).filter((n): n is number => n != null);
@@ -197,7 +198,7 @@ export default function EstadisticasTab() {
           {/* Distribución de Calificaciones */}
           <div className="glass-card p-6 border-t-4 border-t-purple-500 flex flex-col">
             <h3 className="text-subheading font-bold flex items-center gap-2 mb-4">
-              <TrendingUp className="w-5 h-5 text-purple-500" /> Histograma de Calificaciones ({evalPeriod})
+              <TrendingUp className="w-5 h-5 text-purple-500" /> Histograma de calificaciones ({evalPeriod})
             </h3>
             <div className="flex-1 min-h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
@@ -222,7 +223,7 @@ export default function EstadisticasTab() {
           {/* Demografía: Repetidores y Edad */}
           <div className="glass-card p-6 border-t-4 border-t-amber-500 flex flex-col">
             <h3 className="text-subheading font-bold flex items-center gap-2 mb-4">
-              <Users className="w-5 h-5 text-amber-500" /> Composición del Aula
+              <Users className="w-5 h-5 text-amber-500" /> Composición del aula
             </h3>
             <div className="flex-1 grid grid-cols-2 gap-4 min-h-[300px]">
               <div className="flex flex-col items-center justify-center">
@@ -263,7 +264,7 @@ export default function EstadisticasTab() {
         {/* Barras de RAs */}
         <div className="glass-card p-6 border-t-4 border-t-blue-500 flex flex-col">
           <h3 className="text-subheading font-bold flex items-center gap-2 mb-4">
-            <TrendingUp className="w-5 h-5 text-blue-500" /> Rendimiento Medio por Resultado de Aprendizaje
+            <TrendingUp className="w-5 h-5 text-blue-500" /> Rendimiento medio por resultado de aprendizaje
           </h3>
           <p className="text-body text-muted mb-4">
             Muestra la asimilación global de cada bloque competencial (RA) en el grupo. Permite detectar "cuellos de botella" en el aprendizaje.
@@ -278,7 +279,7 @@ export default function EstadisticasTab() {
                   contentStyle={{ backgroundColor: 'var(--glass-bg)', borderColor: 'var(--glass-border)', borderRadius: '8px' }}
                   cursor={{fill: '#ffffff10'}}
                 />
-                <Bar dataKey="media" name="Nota Media" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="media" name="Nota media" fill="#3b82f6" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>

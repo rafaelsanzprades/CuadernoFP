@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button';
 import { Select } from '@/components/ui/Select';
 import { Badge } from '@/components/ui/Badge';
 import { Alumnado } from '@/types';
+import { isAlumnoActivo } from '@/utils/alumnado';
 
 export const PlanoClaseTab = () => {
   const { cursoData, updateCursoData } = useAppStore();
@@ -21,7 +22,7 @@ export const PlanoClaseTab = () => {
   // Filter active students and sort alphabetically
   const activeStudents = useMemo(() => {
     return df_al
-      .filter((al: Alumnado) => al.Estado !== 'Baja')
+      .filter(isAlumnoActivo)
       .sort((a: Alumnado, b: Alumnado) => {
         const nameA = `${a.Apellidos || ''}, ${a.Nombre || ''}`.toLowerCase();
         const nameB = `${b.Apellidos || ''}, ${b.Nombre || ''}`.toLowerCase();

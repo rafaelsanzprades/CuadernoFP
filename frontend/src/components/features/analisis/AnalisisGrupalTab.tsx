@@ -1,5 +1,6 @@
 import { AlertTriangle, ClipboardList, PartyPopper, Target, TrendingDown, TrendingUp } from "lucide-react";
 import { Card } from "@/components/ui/Card";
+import { isAlumnoActivo } from "@/utils/alumnado";
 import {
   BarChart,
   Bar,
@@ -26,7 +27,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
   const df_ra = moduleData?.df_ra || [];
   
   // Filter active students
-  const activeAlumnado = df_al.filter((al: any) => al.Estado !== "Baja");
+  const activeAlumnado = df_al.filter(isAlumnoActivo);
   const activeIds = activeAlumnado.map((al: any) => al.ID);
   const df_eval_activos = df_eval.filter((e: any) => activeIds.includes(e.ID));
 
@@ -131,7 +132,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
 
       <section className="grid grid-cols-4 gap-6">
         <Card className="p-6 border-l-4 border-l-blue-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
-          <span className="text-muted text-body font-semibold tracking-wider mb-2">Media Grupal</span>
+          <span className="text-muted text-body font-semibold tracking-wider mb-2">Media grupal</span>
           <span className="text-heading font-black text-info">{media_grupal.toFixed(2)}</span>
         </Card>
         <Card className="p-6 border-l-4 border-l-emerald-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
