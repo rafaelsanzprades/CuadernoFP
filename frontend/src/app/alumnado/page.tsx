@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import { PlanoClaseTab } from "@/components/features/alumnado/PlanoClaseTab";
 import { ESTADOS_ALUMNO } from "@/types";
-import { ESTADO_ALUMNO_COLOR } from "@/utils/alumnado";
+import { ESTADO_ALUMNO_COLOR, parseAlumnadoCSV } from "@/utils/alumnado";
 
 import { ContextoGrupoTab } from "@/components/features/alumnado/ContextoGrupoTab";
 import { TutoriaTab } from "@/components/features/alumnado/TutoriaTab";
@@ -161,77 +161,22 @@ export default function AlumnadoPage() {
         const text = event.target?.result as string;
         if (!text) return;
 
-        // Splitting by newline and handling both comma and semicolon separators
-        const lines = text.split(/\r?\n/).filter(line => line.trim());
-        if (lines.length < 2) {
-          toast.error("El archivo CSV no tiene datos válidos.");
-          return;
-        }
-
-        // Detect separator by looking at the first line
-        const headerLine = lines[0];
-        const separator = headerLine.includes(';') ? ';' : ',';
-
-        // Find relevant column indices (case insensitive, partial match)
-        const headers = headerLine.split(separator).map(h => h.trim().toLowerCase().replace(/"/g, ''));
-        const nameIdx = headers.findIndex(h => h.includes('nombre'));
-        const surnameIdx = headers.findIndex(h => h.includes('apellido'));
-        const emailIdx = headers.findIndex(h => h.includes('correo') || h.includes('email'));
-        
-        if (nameIdx === -1 && surnameIdx === -1) {
-          toast.error("No se han detectado columnas de Nombre/Apellidos en el CSV.");
-          return;
-        }
-
-        const newAl = [...df_al];
-        let importedCount = 0;
-
-        for (let i = 1; i < lines.length; i++) {
-          // split row considering potential quoted values but simple implementation
-          const cols = lines[i].split(separator).map(c => c.trim().replace(/"/g, ''));
-          if (cols.length <= Math.max(nameIdx, surnameIdx)) continue; // skip invalid rows
-
-          let name = nameIdx !== -1 ? cols[nameIdx] : "";
-          let surname = surnameIdx !== -1 ? cols[surnameIdx] : "";
-          let email = emailIdx !== -1 && emailIdx < cols.length ? cols[emailIdx] : "";
-
-          // Simple heuristic: if there's only a 'nombre' column, maybe it contains "Surname, Name"
-          if (surnameIdx === -1 && name.includes(',')) {
-            const parts = name.split(',');
-            surname = parts[0].trim();
-            name = parts.slice(1).join(',').trim();
-          }
-
-          if (!name && !surname) continue;
-
-          const newId = `AN${(newAl.length + 1).toString().padStart(2, '0')}`;
-          newAl.push({
-            ID: newId,
-            Estado: "Alta",
-            Apellidos: surname,
-            Nombre: name,
-            Edad: null,
-            Nacimiento: "",
-            Repite: false,
-            Matricula: "",
-            Comentarios: "",
-            email: email,
-            Movil: ""
-          });
-          importedCount++;
-        }
-
-        updateCursoData("df_al", newAl);
-        if (importedCount > 0) {
-          toast.success(`Se han importado ${importedCount} estudiantes.`);
+        const { alumnos, importedCount, error } = parseAlumnadoCSV(text, df_al);
+        if (error) {
+          toast.error(error);
         } else {
-          toast.error("No se pudo importar ningún estudiante válido.");
+          updateCursoData("df_al", alumnos);
+          if (importedCount > 0) {
+            toast.success(`Se han importado ${importedCount} estudiantes.`);
+          } else {
+            toast.error("No se pudo importar ningún estudiante válido.");
+          }
         }
       } catch (err) {
         console.error("Error parsing CSV:", err);
         toast.error("Hubo un problema al leer el archivo CSV.");
       }
-      
+
       // Reset input
       if (fileInputRef.current) {
         fileInputRef.current.value = "";

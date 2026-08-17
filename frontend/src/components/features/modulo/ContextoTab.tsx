@@ -28,6 +28,157 @@ const RASGOS_ENTORNO = [
   },
 ];
 
+// Ítems codificados que anteceden a cada campo de texto libre de esta página
+// (mismo patrón que RASGOS_ENTORNO, ya existente para "Entorno geográfico y
+// sociocultural") — preparación para un futuro botón "generar con IA interna"
+// que redacte el texto a partir de estos checks + datos numéricos, en vez de
+// que el profesor parta de una hoja en blanco (pedido por Rafael, 2026-08-17;
+// ítem nuevo anotado en RF Ideas/00 IDEAS.md, el botón de IA en sí no se
+// implementa todavía).
+const RASGOS_SOCIOECONOMICO = [
+  {
+    grupo: "Sector predominante", items: [
+      { id: "SOCIO-INDUSTRIAL", label: "Industrial" },
+      { id: "SOCIO-SERVICIOS", label: "Servicios" },
+      { id: "SOCIO-AGRICOLA", label: "Agrícola/ganadero" },
+      { id: "SOCIO-TURISTICO", label: "Turístico" },
+    ]
+  },
+  {
+    grupo: "Nivel socioeconómico de las familias", items: [
+      { id: "SOCIO-NIVEL-ALTO", label: "Alto" },
+      { id: "SOCIO-NIVEL-MEDIO", label: "Medio" },
+      { id: "SOCIO-NIVEL-BAJO", label: "Bajo" },
+      { id: "SOCIO-NIVEL-MIXTO", label: "Mixto" },
+    ]
+  },
+  {
+    grupo: "Empleo en la zona", items: [
+      { id: "SOCIO-PARO-BAJO", label: "Tasa de paro baja" },
+      { id: "SOCIO-PARO-MEDIO", label: "Tasa de paro media" },
+      { id: "SOCIO-PARO-ALTO", label: "Tasa de paro alta" },
+      { id: "SOCIO-EMPRESAS-SECTOR", label: "Empresas del sector cercanas" },
+    ]
+  },
+];
+
+const RASGOS_CONTEXTO_ESCOLAR = [
+  {
+    grupo: "Titularidad", items: [
+      { id: "ESC-PUBLICO", label: "Público" },
+      { id: "ESC-CONCERTADO", label: "Concertado" },
+      { id: "ESC-PRIVADO", label: "Privado" },
+    ]
+  },
+  {
+    grupo: "Tamaño del centro", items: [
+      { id: "ESC-PEQUENO", label: "Pequeño" },
+      { id: "ESC-MEDIANO", label: "Mediano" },
+      { id: "ESC-GRANDE", label: "Grande" },
+    ]
+  },
+  {
+    grupo: "Oferta educativa", items: [
+      { id: "ESC-ESO", label: "ESO" },
+      { id: "ESC-BACHILLERATO", label: "Bachillerato" },
+      { id: "ESC-FPB", label: "FP Grado Básico" },
+      { id: "ESC-FPGM", label: "FP Grado Medio" },
+      { id: "ESC-FPGS", label: "FP Grado Superior" },
+    ]
+  },
+];
+
+const RASGOS_ALUMNADO = [
+  {
+    grupo: "Procedencia mayoritaria", items: [
+      { id: "AL-PROC-LOCAL", label: "Local" },
+      { id: "AL-PROC-COMARCAL", label: "Comarcal" },
+      { id: "AL-PROC-OTRAS-PROV", label: "Otras provincias" },
+      { id: "AL-PROC-INTERNACIONAL", label: "Internacional" },
+    ]
+  },
+  {
+    grupo: "Vía de acceso predominante", items: [
+      { id: "AL-VIA-ESO", label: "ESO" },
+      { id: "AL-VIA-PRUEBA", label: "Prueba de acceso" },
+      { id: "AL-VIA-OTRO-CICLO", label: "Otro ciclo" },
+      { id: "AL-VIA-BACHILLERATO", label: "Bachillerato" },
+    ]
+  },
+  {
+    grupo: "Perfil del grupo", items: [
+      { id: "AL-MOTIVACION-ALTA", label: "Motivación alta" },
+      { id: "AL-MOTIVACION-BAJA", label: "Motivación baja/irregular" },
+      { id: "AL-DIVERSIDAD-ALTA", label: "Alta diversidad de perfiles" },
+      { id: "AL-REPETIDORES", label: "Presencia significativa de repetidores" },
+    ]
+  },
+];
+
+const RASGOS_INFRAESTRUCTURA = [
+  {
+    grupo: "Tipo de aula", items: [
+      { id: "INFRA-AULA-TALLER", label: "Aula-taller" },
+      { id: "INFRA-AULA-CONVENCIONAL", label: "Aula convencional" },
+      { id: "INFRA-AULA-INFORMATICA", label: "Aula de informática" },
+    ]
+  },
+  {
+    grupo: "Equipamiento", items: [
+      { id: "INFRA-EQUIPO-ACTUALIZADO", label: "Actualizado" },
+      { id: "INFRA-EQUIPO-SUFICIENTE", label: "Suficiente" },
+      { id: "INFRA-EQUIPO-LIMITADO", label: "Limitado" },
+    ]
+  },
+  {
+    grupo: "Conectividad", items: [
+      { id: "INFRA-CONECTIVIDAD-BUENA", label: "Buena" },
+      { id: "INFRA-CONECTIVIDAD-LIMITADA", label: "Limitada" },
+    ]
+  },
+];
+
+interface RasgosRapidosProps {
+  titulo: string;
+  grupos: { grupo: string; items: { id: string; label: string }[] }[];
+  seleccionados: string[];
+  onToggle: (id: string) => void;
+}
+
+function RasgosRapidos({ titulo, grupos, seleccionados, onToggle }: RasgosRapidosProps) {
+  return (
+    <div>
+      <label className="text-body font-semibold text-foreground mb-2 block">{titulo}</label>
+      <p className="text-caption text-muted mb-3">
+        Selección orientativa para apoyar la redacción del texto de abajo (primera versión, se irá ampliando).
+      </p>
+      <div className="space-y-3">
+        {grupos.map((grupo) => (
+          <div key={grupo.grupo}>
+            <p className="text-caption font-semibold text-muted mb-1.5">{grupo.grupo}</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+              {grupo.items.map((item) => {
+                const isSelected = seleccionados.includes(item.id);
+                return (
+                  <label key={item.id} className={`flex items-center gap-2 p-2 rounded border cursor-pointer transition-colors ${isSelected ? 'bg-indigo-500/10 border-indigo-500/30' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => onToggle(item.id)}
+                      className="rounded border-white/20 bg-transparent text-indigo-500 focus:ring-indigo-500"
+                    />
+                    <span className="text-caption">{item.label}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function ContextoTab() {
   const { moduleData, updateModuleData } = useAppStore();
 
@@ -38,12 +189,16 @@ export function ContextoTab() {
   };
 
   const rasgos_entorno = config_contexto.rasgos_entorno || [];
+  const rasgos_socioeconomico = config_contexto.rasgos_socioeconomico || [];
+  const rasgos_escolar = config_contexto.rasgos_escolar || [];
+  const rasgos_alumnado = config_contexto.rasgos_alumnado || [];
+  const rasgos_infraestructura = config_contexto.rasgos_infraestructura || [];
 
-  const toggleRasgo = (id: string) => {
-    const updated = rasgos_entorno.includes(id)
-      ? rasgos_entorno.filter((r: string) => r !== id)
-      : [...rasgos_entorno, id];
-    handleContextoChange("rasgos_entorno", updated);
+  const toggleRasgo = (campo: string, actuales: string[], id: string) => {
+    const updated = actuales.includes(id)
+      ? actuales.filter((r: string) => r !== id)
+      : [...actuales, id];
+    handleContextoChange(campo, updated);
   };
 
   return (
@@ -54,35 +209,12 @@ export function ContextoTab() {
           <span className="inline-flex"><School className="w-[1.2em] h-[1.2em] mr-1" /></span> Contexto escolar
         </h2>
         <div className="space-y-4">
-          <div>
-            <label className="text-body font-semibold text-foreground mb-2 block">Rasgos rápidos del entorno</label>
-            <p className="text-caption text-muted mb-3">
-              Selección orientativa para apoyar la redacción de los textos de abajo (primera versión, se irá ampliando).
-            </p>
-            <div className="space-y-3">
-              {RASGOS_ENTORNO.map((grupo) => (
-                <div key={grupo.grupo}>
-                  <p className="text-caption font-semibold text-muted mb-1.5">{grupo.grupo}</p>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                    {grupo.items.map((item) => {
-                      const isSelected = rasgos_entorno.includes(item.id);
-                      return (
-                        <label key={item.id} className={`flex items-center gap-2 p-2 rounded border cursor-pointer transition-colors ${isSelected ? 'bg-indigo-500/10 border-indigo-500/30' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
-                          <input
-                            type="checkbox"
-                            checked={isSelected}
-                            onChange={() => toggleRasgo(item.id)}
-                            className="rounded border-white/20 bg-transparent text-indigo-500 focus:ring-indigo-500"
-                          />
-                          <span className="text-caption">{item.label}</span>
-                        </label>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <RasgosRapidos
+            titulo="Rasgos rápidos del entorno"
+            grupos={RASGOS_ENTORNO}
+            seleccionados={rasgos_entorno}
+            onToggle={(id) => toggleRasgo("rasgos_entorno", rasgos_entorno, id)}
+          />
           <div>
             <label className="text-body font-semibold text-foreground mb-1 block">Entorno geográfico y sociocultural</label>
             <textarea
@@ -92,6 +224,12 @@ export function ContextoTab() {
               className="w-full h-64 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
+          <RasgosRapidos
+            titulo="Rasgos rápidos del entorno socioeconómico"
+            grupos={RASGOS_SOCIOECONOMICO}
+            seleccionados={rasgos_socioeconomico}
+            onToggle={(id) => toggleRasgo("rasgos_socioeconomico", rasgos_socioeconomico, id)}
+          />
           <div>
             <label className="text-body font-semibold text-foreground mb-1 block">Entorno socioeconómico y productivo</label>
             <textarea
@@ -101,6 +239,12 @@ export function ContextoTab() {
               className="w-full h-64 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
+          <RasgosRapidos
+            titulo="Rasgos rápidos del contexto escolar"
+            grupos={RASGOS_CONTEXTO_ESCOLAR}
+            seleccionados={rasgos_escolar}
+            onToggle={(id) => toggleRasgo("rasgos_escolar", rasgos_escolar, id)}
+          />
           <div>
             <label className="text-body font-semibold text-foreground mb-1 block">Contexto escolar</label>
             <textarea
@@ -110,6 +254,12 @@ export function ContextoTab() {
               className="w-full h-64 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
+          <RasgosRapidos
+            titulo="Rasgos rápidos del alumnado"
+            grupos={RASGOS_ALUMNADO}
+            seleccionados={rasgos_alumnado}
+            onToggle={(id) => toggleRasgo("rasgos_alumnado", rasgos_alumnado, id)}
+          />
           <div>
             <label className="text-body font-semibold text-foreground mb-1 block">Características del alumnado</label>
             <textarea
@@ -119,6 +269,12 @@ export function ContextoTab() {
               className="w-full h-96 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
+          <RasgosRapidos
+            titulo="Rasgos rápidos de infraestructura"
+            grupos={RASGOS_INFRAESTRUCTURA}
+            seleccionados={rasgos_infraestructura}
+            onToggle={(id) => toggleRasgo("rasgos_infraestructura", rasgos_infraestructura, id)}
+          />
           <div>
             <label className="text-body font-semibold text-foreground mb-1 block">Infraestructura y recursos educativos</label>
             <textarea

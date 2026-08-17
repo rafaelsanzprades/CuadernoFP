@@ -18,8 +18,10 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { AIWizardModal } from "@/components/features/ai/AIWizardModal";
 import { AISettingsPanel } from "@/components/features/ai/AISettingsPanel";
+import { NuevoCursoWizard } from "@/components/features/dashboard/NuevoCursoWizard";
+import { RecentModulesPanel } from "@/components/features/dashboard/RecentModulesPanel";
 import { Button } from "@/components/ui/Button";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Rocket } from "lucide-react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
@@ -114,6 +116,7 @@ export default function InicioPage() {
   const [activeTab, setActiveTab] = useState<string>("bienvenida");
   const { t } = useTranslation();
   const [aiModalOpen, setAiModalOpen] = useState(false);
+  const [nuevoCursoWizardOpen, setNuevoCursoWizardOpen] = useState(false);
 
   // ── Catálogo oficial (fijo) + resolución de familia/título del módulo activo ──
   const [catalogFamilies, setCatalogFamilies] = useState<Family[]>([]);
@@ -523,6 +526,9 @@ export default function InicioPage() {
           toast.success("Estructura guardada.");
         }}
       />
+      {nuevoCursoWizardOpen && (
+        <NuevoCursoWizard onClose={() => setNuevoCursoWizardOpen(false)} />
+      )}
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={activeTabCleanLabel} />
         <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
@@ -551,6 +557,9 @@ export default function InicioPage() {
               <div className="animate-in fade-in duration-500 w-full">
 
           <div className="w-full space-y-12 pb-12">
+
+            {/* Módulos recientes (ítem 35) — reabrir con un clic, no se muestra si no hay ninguno */}
+            <RecentModulesPanel />
 
             {/* Posicionamiento: metodología experta detrás de la app */}
             <Card className="p-6 border border-accent/20 bg-accent/5">
@@ -781,9 +790,19 @@ export default function InicioPage() {
                       <Users className="w-4 h-4 text-accent" />
                       Curso activo
                     </h2>
-                    <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-caption text-muted">
-                      Curso Activo: <span className="font-semibold text-foreground">{activeCursoId || "-"}</span>
-                    </span>
+                    <div className="flex items-center gap-3">
+                      <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-caption text-muted">
+                        Curso Activo: <span className="font-semibold text-foreground">{activeCursoId || "-"}</span>
+                      </span>
+                      {activeModuleId && (
+                        <Button
+                          onClick={() => setNuevoCursoWizardOpen(true)}
+                          className="text-caption bg-info/10 hover:bg-info/20 text-info border border-info/30 gap-2"
+                        >
+                          <Rocket className="w-3.5 h-3.5" /> Nuevo curso a partir de esta programación
+                        </Button>
+                      )}
+                    </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                     {courseChecks.map(item => (

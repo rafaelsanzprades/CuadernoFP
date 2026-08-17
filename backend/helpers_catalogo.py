@@ -201,11 +201,10 @@ def resolve_escala_cualitativa(nota, escalas: list) -> str:
     return str(mejor.get("nombre", ""))
 
 
-# NivelFP (catálogo, LO 3/2022) -> rango de la plantilla PD+/JEG. Solo referencia
-# para cuando se aborde el campo "Titulación" (hoy un bracket [[ ]] de edición
-# manual en modelo_pd_jeg_tpl_final.docx, no un tag Jinja {{ }} — convertirlo
-# requiere tocar la plantilla validada por el Jefe de Servicio de FP, así que
-# no se usa todavía; ver ítem 16 de RF Ideas/00 IDEAS.md).
+# NivelFP (catálogo, LO 3/2022) -> rango de la plantilla PD+/JEG (campo
+# "Titulación", ver ítem 16 de RF Ideas/00 IDEAS.md). La subdistinción
+# Especialista/Máster de FP dentro de ESPECIALIZACION no está resuelta en el
+# enum del catálogo — se deja "Especialista" para ese nivel.
 NIVEL_FP_A_TITULACION = {
     "BASICA": "Técnico básico",
     "MEDIO": "Técnico",
@@ -239,7 +238,7 @@ def resolve_grado_info(codigo_modulo: str, db) -> dict:
         "familia_profesional": degree.family.name if degree.family else "",
         "codigo_grado": degree.code or "",
         "denominacion_grado": denominacion,
-        "nivel_fp": degree.level.name if degree.level else "",
+        "titulacion": NIVEL_FP_A_TITULACION.get(degree.level.name, "") if degree.level else "",
     }
 
 

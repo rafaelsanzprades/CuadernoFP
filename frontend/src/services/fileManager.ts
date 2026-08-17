@@ -1,6 +1,7 @@
 import { useAppStore } from "@/store/useAppStore";
 import { ModuleData, CursoData, FileSource } from "@/types";
 import CryptoJS from "crypto-js";
+import { addOrUpdateRecentModule } from "@/services/recentModules";
 export type DataSourceType = 'demo' | 'local';
 
 // ─── Helpers ────────────────────────────────────────────────
@@ -47,6 +48,8 @@ const ALLOWED_PROGRAMACION_KEYS = [
 const ALLOWED_CURSO_KEYS = [
   // Alumnado y evaluación
   'df_al', 'df_sgmt', 'df_feoe', 'df_eval', 'df_calificaciones',
+  // Histórico de cambios de calificación (ítem 33) y reclamaciones (ítem 34)
+  'historial_calificaciones', 'df_reclamaciones',
   // Seguimiento diario y tutoría
   'daily_ledger', 'tutoria_ledger', 'profesional_ledger',
   // Horario y fechas (van en .fpc como datos del curso)
@@ -319,6 +322,43 @@ export const fileManager = {
     }
   },
 
+  /** Clone the currently active programación into a new independent .fpp
+   * (item 32, "Nuevo curso a partir de esta programación"): switches the
+   * active moduleData/pdFileSource to the clone so the teacher edits the
+   * copy, not the original. Sin usuarios reales de estos ficheros todavía,
+   * así que no hace falta preservar el id/nombre original más allá de un
+   * sufijo legible. */
+  async cloneProgramacion(suffix: string): Promise<boolean> {
+    const store = useAppStore.getState();
+    const { moduleData, activeModuleId } = store;
+    if (!moduleData) return false;
+
+    const cloned: ModuleData = JSON.parse(JSON.stringify(moduleData));
+    const newId = `${activeModuleId || 'pd'}-${suffix}`.replace(/[\\/:*?"<>|]/g, '');
+    const fileName = `P - ${newId}.fpp`;
+
+    store.setActiveModuleId(newId);
+    store.setModuleData(cloned);
+
+    const handle = store.workspaceHandle;
+    if (handle) {
+      try {
+        const fileHandle = await handle.getFileHandle(fileName, { create: true });
+        const writable = await (fileHandle as any).createWritable();
+        await writable.write(JSON.stringify(cloned, null, 2));
+        await writable.close();
+        store.setPdFileSource({ type: 'local', fileName, fileHandle });
+      } catch (e) {
+        console.error("Failed to write cloned PD to workspace", e);
+        store.setPdFileSource({ type: 'new', fileName });
+      }
+    } else {
+      store.setPdFileSource({ type: 'new', fileName });
+    }
+
+    return true;
+  },
+
   /** Create a new empty curso */
   async createNewCurso(cursoName: string, year: string): Promise<boolean> {
     const store = useAppStore.getState();
@@ -379,6 +419,11 @@ export const fileManager = {
 
         await groupWritable.write(JSON.stringify(groupData, null, 2));
         await groupWritable.close();
+
+        addOrUpdateRecentModule({
+          id: groupFileName, nombre: cursoName,
+          tipo: 'grupo', fileName: groupFileName, dirHandle: handle,
+        }).catch(() => {});
 
       } catch (e) {
         console.error("Failed to write new Curso to workspace", e);
@@ -460,6 +505,10 @@ export const fileManager = {
           fileHandle: handle,
           fileName: file.name,
         });
+        addOrUpdateRecentModule({
+          id: file.name, nombre: file.name.replace(/\.(fpp|json)$/i, ''),
+          tipo: 'programacion', fileName: file.name, fileHandle: handle,
+        }).catch(() => {});
       }
       return success;
     } catch (e: any) {
@@ -467,6 +516,34 @@ export const fileManager = {
       console.error("Error opening file", e);
       return false;
     }
+  },
+
+  /** Reopen a programación from an already-held FileSystemFileHandle (ítem 35,
+   * "Módulos recientes" — evita volver a mostrar el selector de fichero si el
+   * permiso sigue vigente). Deja propagar el error (p.ej. NotFoundError si el
+   * fichero se movió/borró) en vez de tragárselo — el llamador (el panel de
+   * recientes) necesita distinguir "no se encuentra" de otros fallos para
+   * decidir si quita la entrada o no. */
+  async openProgramacionFromHandle(handle: FileSystemFileHandle): Promise<boolean> {
+    const file = await handle.getFile();
+    const text = await file.text();
+    const success = await this.importProgramacion(text, file.name);
+    if (success) {
+      useAppStore.getState().setPdFileSource({ type: 'local', fileHandle: handle, fileName: file.name });
+    }
+    return success;
+  },
+
+  /** Reopen a curso from an already-held FileSystemFileHandle (ítem 35). Ver
+   * nota de openProgramacionFromHandle sobre por qué no atrapa el error. */
+  async openCursoFromHandle(handle: FileSystemFileHandle): Promise<boolean> {
+    const file = await handle.getFile();
+    const text = await file.text();
+    const success = await this.importCurso(text, file.name);
+    if (success) {
+      useAppStore.getState().setCursoFileSource({ type: 'local', fileHandle: handle, fileName: file.name });
+    }
+    return success;
   },
 
   /** Open curso via File System Access API */
@@ -489,6 +566,10 @@ export const fileManager = {
           fileHandle: handle,
           fileName: file.name,
         });
+        addOrUpdateRecentModule({
+          id: file.name, nombre: file.name.replace(/\.(fpc|json)$/i, ''),
+          tipo: 'curso', fileName: file.name, fileHandle: handle,
+        }).catch(() => {});
       }
       return success;
     } catch (e: any) {
@@ -598,6 +679,10 @@ export const fileManager = {
           fileHandle: groupHandle,
           fileName: groupFileName,
         });
+        addOrUpdateRecentModule({
+          id: groupFileName, nombre: groupData.nombre || groupFileName.replace(/\.(fpg|json)$/i, ''),
+          tipo: 'grupo', fileName: groupFileName, dirHandle,
+        }).catch(() => {});
         return true;
       }
       return false;

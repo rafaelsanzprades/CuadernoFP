@@ -228,11 +228,41 @@ export type ModuleData = z.infer<typeof ModuleDataSchema>;
 
 
 
+// Histórico append-only de cambios de calificación (ítem 33) — registro de
+// respaldo ante una reclamación de nota (ítem 34), no de sesión (a diferencia
+// de zundo/temporal, que se pierde al recargar). Monousuario, sin purga.
+export const HistorialCalificacionEntrySchema = z.object({
+  fecha: z.string(),
+  alumno_id: z.string(),
+  campo: z.string(),
+  valor_anterior: z.union([z.number(), z.null()]),
+  valor_nuevo: z.union([z.number(), z.null()]),
+});
+export type HistorialCalificacionEntry = z.infer<typeof HistorialCalificacionEntrySchema>;
+
+// Reclamación de nota (ítem 34) — registro de que una nota ha sido reclamada,
+// su motivo y cómo se resolvió. `referencia` es el campo de nota reclamado
+// (mismo valor que `campo` en HistorialCalificacionEntry, p.ej. un id_act o
+// "Nota_Final_FO"), para poder cruzar con el histórico como evidencia.
+export const ReclamacionSchema = z.object({
+  id: z.string(),
+  alumno_id: z.string(),
+  referencia: z.string(),
+  fecha_reclamacion: z.string(),
+  motivo: z.string(),
+  estado: z.enum(["pendiente", "resuelta"]).default("pendiente"),
+  resolucion: z.string().optional(),
+  fecha_resolucion: z.string().optional(),
+});
+export type Reclamacion = z.infer<typeof ReclamacionSchema>;
+
 export const CursoDataSchema = z.object({
   df_al: z.array(AlumnadoSchema).optional(),
   df_sgmt: z.array(SeguimientoUDSchema).optional(),
   df_eval: z.array(z.any()).optional(),
   df_calificaciones: z.array(CalificacionSchema).optional(),
+  historial_calificaciones: z.array(HistorialCalificacionEntrySchema).optional(),
+  df_reclamaciones: z.array(ReclamacionSchema).optional(),
   df_feoe: z.array(z.any()).optional(),
   daily_ledger: z.record(z.string(), z.any()).optional(),
   tutoria_ledger: z.record(z.string(), z.any()).optional(),

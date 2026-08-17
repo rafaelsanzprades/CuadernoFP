@@ -70,6 +70,15 @@ SIMPLE_REPLACEMENTS = [
         'dos evaluaciones parciales, una por cuatrimestre ]]',
         '{{ num_evaluaciones_parciales }}',
     ),
+    # Tabla de Identificacion, fila "Titulacion": rango del titulo dentro del
+    # nuevo sistema de FP (LO 3/2022 + RD 659/2023), resuelto desde
+    # Degree.level via NIVEL_FP_A_TITULACION (helpers_catalogo.py) -- ver
+    # item 16 de RF Ideas/00 IDEAS.md.
+    (
+        '[[ Técnico básico | Técnico | Técnico superior | Especialista | '
+        'Máster de Formación Profesional ]]',
+        '{{ titulacion }}',
+    ),
 ]
 
 # --- 2. Reemplazos posicionales: mismo texto exacto se repite, solo se toca la ---------

@@ -147,6 +147,16 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 tutoria_entry = (curso_data.get("tutoria_ledger") or {}).get(al_id)
                 attendance_summary = _compute_attendance_summary(db, extra.get("module_document_id"), al_id)
                 docx_bytes = generar_docx_ficha_alumnado(info_modulo, al_id, df_al, tutoria_entry, attendance_summary)
+            elif type == "reclamacion_notas":
+                if not al_id or not item_id:
+                    raise HTTPException(status_code=400, detail="al_id and item_id are required for reclamacion_notas")
+                from pdf_reclamacion_notas import generar_docx_reclamacion
+                reclamacion = next((r for r in (curso_data.get("df_reclamaciones") or []) if r.get("id") == item_id), None)
+                if not reclamacion:
+                    raise HTTPException(status_code=404, detail="Reclamación no encontrada")
+                evidencia = [h for h in (curso_data.get("historial_calificaciones") or [])
+                             if h.get("alumno_id") == al_id and h.get("campo") == reclamacion.get("referencia")]
+                docx_bytes = generar_docx_reclamacion(info_modulo, al_id, df_al, reclamacion, evidencia)
 
             if docx_bytes is not None:
                 return Response(
@@ -194,6 +204,16 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             tutoria_entry = (curso_data.get("tutoria_ledger") or {}).get(al_id)
             attendance_summary = _compute_attendance_summary(db, extra.get("module_document_id"), al_id)
             buffer = generar_pdf_ficha_alumnado(info_modulo, al_id, df_al, tutoria_entry, attendance_summary)
+        elif type == "reclamacion_notas":
+            if not al_id or not item_id:
+                raise HTTPException(status_code=400, detail="al_id and item_id are required for reclamacion_notas")
+            from pdf_reclamacion_notas import generar_pdf_reclamacion
+            reclamacion = next((r for r in (curso_data.get("df_reclamaciones") or []) if r.get("id") == item_id), None)
+            if not reclamacion:
+                raise HTTPException(status_code=404, detail="Reclamación no encontrada")
+            evidencia = [h for h in (curso_data.get("historial_calificaciones") or [])
+                         if h.get("alumno_id") == al_id and h.get("campo") == reclamacion.get("referencia")]
+            buffer = generar_pdf_reclamacion(info_modulo, al_id, df_al, reclamacion, evidencia)
         elif type in ["programacion_suficiente_tpl", "programacion_minima_tpl", "programacion_jeg"]:
             if type == "programacion_minima_tpl":
                 import generador_pd_minima_tpl as generador_pd
@@ -243,16 +263,17 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 from helpers_catalogo import fetch_curriculo_from_db
                 curriculo_data = fetch_curriculo_from_db(info_mod.get("codigo", ""), db) or curriculo_data
 
-            # Bloque "Grado" del PD+ (familia profesional, código y
-            # denominación del título): resuelto 100% desde el catálogo
-            # oficial (Degree/ProfessionalFamily) por código de módulo — sin
-            # input manual, no hay ningún campo de UI hoy para esto y el
-            # catálogo ya tiene el dato. Si el módulo no está en el catálogo
-            # (título no oficial), se mantiene el placeholder de siempre.
+            # Bloque "Grado" del PD+ (familia profesional, código,
+            # denominación y titulación del título): resuelto 100% desde el
+            # catálogo oficial (Degree/ProfessionalFamily) por código de
+            # módulo — sin input manual, no hay ningún campo de UI hoy para
+            # esto y el catálogo ya tiene el dato. Si el módulo no está en el
+            # catálogo (título no oficial), se mantiene el placeholder de
+            # siempre.
             from helpers_catalogo import resolve_grado_info
             grado_info = resolve_grado_info(info_mod.get("codigo", ""), db)
             config_contexto_pd = dict(curso_data.get("config_contexto") or {})
-            config_contexto_pd.update({k: v for k, v in grado_info.items() if v and k != "nivel_fp"})
+            config_contexto_pd.update({k: v for k, v in grado_info.items() if v})
 
             data_pd = {
                 "departamento": departamento,

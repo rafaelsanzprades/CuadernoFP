@@ -76,6 +76,7 @@ def _build_context(data: dict) -> dict:
         "familia_profesional": config.get("familia_profesional", "Denominacion de la Familia Profesional"),
         "tipo_ensennanza": config.get("tipo_ensenanza", "Tipo de ensenanza"),
         "denominacion_grado": config.get("denominacion_grado", ciclo),
+        "titulacion": config.get("titulacion", ""),
         "grado": grado,
         "nivel": nivel,
         "curso_numero": curso_numero,

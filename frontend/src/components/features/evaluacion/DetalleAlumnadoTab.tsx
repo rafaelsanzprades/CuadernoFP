@@ -21,6 +21,7 @@ export function DetalleAlumnadoTab() {
 
   const df_al = cursoData?.df_al || [];
   const df_eval = cursoData?.df_eval || [];
+  const historial_calificaciones = cursoData?.historial_calificaciones || [];
   const df_act = moduleData?.df_act || [];
   const df_ce = moduleData?.df_ce || [];
   const df_ra = moduleData?.df_ra || [];
@@ -42,6 +43,21 @@ export function DetalleAlumnadoTab() {
 
   const config_redondeo = { ...DEFAULT_CONFIG_REDONDEO, ...(moduleData?.config_redondeo || {}) };
 
+  // Registro append-only de cada cambio de nota (ítem 33) -- respaldo ante una
+  // reclamación futura (ítem 34), independiente del undo/redo de sesión
+  // (zundo), que se pierde al recargar. Sin límite ni purga (monousuario).
+  const pushHistorial = (al_id: string, campo: string, valor_anterior: number | null, valor_nuevo: number | null) => {
+    if (valor_anterior === valor_nuevo) return;
+    const entry = {
+      fecha: new Date().toISOString(),
+      alumno_id: al_id,
+      campo,
+      valor_anterior,
+      valor_nuevo,
+    };
+    updateCursoData("historial_calificaciones", [...historial_calificaciones, entry]);
+  };
+
   const handleUpdateActNota = (al_id: string, act_id: string, val: number) => {
     const newEval = [...df_eval];
     let evRowIdx = newEval.findIndex(e => e.ID === al_id);
@@ -51,12 +67,14 @@ export function DetalleAlumnadoTab() {
       evRowIdx = newEval.length - 1;
     }
 
+    const valorAnterior = newEval[evRowIdx][act_id] ?? null;
     newEval[evRowIdx][act_id] = val;
 
     const { nota_final } = calcularNotas(newEval[evRowIdx], df_ra, df_ce, df_act, config_redondeo);
     newEval[evRowIdx]["Nota_Final_FO"] = nota_final !== null ? Number(nota_final.toFixed(2)) : 0;
 
     updateCursoData("df_eval", newEval);
+    pushHistorial(al_id, act_id, valorAnterior, val);
   };
 
   const handleOverrideNotaFinalFO = (al_id: string, val: number) => {
@@ -66,8 +84,10 @@ export function DetalleAlumnadoTab() {
       newEval.push({ ID: al_id, Nota_Final_FO: 0 });
       evRowIdx = newEval.length - 1;
     }
+    const valorAnterior = newEval[evRowIdx]["Nota_Final_FO"] ?? null;
     newEval[evRowIdx]["Nota_Final_FO"] = val;
     updateCursoData("df_eval", newEval);
+    pushHistorial(al_id, "Nota_Final_FO", valorAnterior, val);
   };
 
   const handleOverrideNotaFinalFE = (al_id: string, val: number) => {
@@ -77,8 +97,10 @@ export function DetalleAlumnadoTab() {
       newEval.push({ ID: al_id, Nota_Final_FE: 0 });
       evRowIdx = newEval.length - 1;
     }
+    const valorAnterior = newEval[evRowIdx]["Nota_Final_FE"] ?? null;
     newEval[evRowIdx]["Nota_Final_FE"] = val;
     updateCursoData("df_eval", newEval);
+    pushHistorial(al_id, "Nota_Final_FE", valorAnterior, val);
   };
 
   // LÓGICA DE PROYECCIÓN DE TRIMESTRES PARA CADA RA
