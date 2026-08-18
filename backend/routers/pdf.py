@@ -157,6 +157,15 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 evidencia = [h for h in (curso_data.get("historial_calificaciones") or [])
                              if h.get("alumno_id") == al_id and h.get("campo") == reclamacion.get("referencia")]
                 docx_bytes = generar_docx_reclamacion(info_modulo, al_id, df_al, reclamacion, evidencia)
+            elif type == "refuerzo_alumno":
+                if not al_id:
+                    raise HTTPException(status_code=400, detail="al_id is required for refuerzo_alumno")
+                from pdf_refuerzo_alumno import generar_docx_refuerzo
+                docx_bytes = generar_docx_refuerzo(
+                    info_modulo, al_id, df_al, df_eval.to_dict("records"), df_ra.to_dict("records"),
+                    df_ce.to_dict("records"), df_act.to_dict("records"), config_redondeo,
+                    curso_data.get("df_autoevaluacion") or []
+                )
 
             if docx_bytes is not None:
                 return Response(
@@ -214,6 +223,15 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             evidencia = [h for h in (curso_data.get("historial_calificaciones") or [])
                          if h.get("alumno_id") == al_id and h.get("campo") == reclamacion.get("referencia")]
             buffer = generar_pdf_reclamacion(info_modulo, al_id, df_al, reclamacion, evidencia)
+        elif type == "refuerzo_alumno":
+            if not al_id:
+                raise HTTPException(status_code=400, detail="al_id is required for refuerzo_alumno")
+            from pdf_refuerzo_alumno import generar_pdf_refuerzo
+            buffer = generar_pdf_refuerzo(
+                info_modulo, al_id, df_al, df_eval.to_dict("records"), df_ra.to_dict("records"),
+                df_ce.to_dict("records"), df_act.to_dict("records"), config_redondeo,
+                curso_data.get("df_autoevaluacion") or []
+            )
         elif type in ["programacion_suficiente_tpl", "programacion_minima_tpl", "programacion_jeg"]:
             if type == "programacion_minima_tpl":
                 import generador_pd_minima_tpl as generador_pd

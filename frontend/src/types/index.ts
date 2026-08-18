@@ -256,10 +256,24 @@ export const ReclamacionSchema = z.object({
 });
 export type Reclamacion = z.infer<typeof ReclamacionSchema>;
 
+// Autoevaluación estructurada por CE (ítem 22) — lo que el profesor recoge
+// del alumnado (SÍ/DUDAS/NO + dificultades autodeclaradas), una entrada por
+// alumno+CE. Insumo del informe de refuerzo automático (ítem 23).
+export const AutoevaluacionEntrySchema = z.object({
+  id: z.string(),
+  alumno_id: z.string(),
+  ce_id: z.string(),
+  valor: z.enum(["SI", "DUDAS", "NO"]),
+  dificultades: z.string().optional(),
+  fecha: z.string(),
+});
+export type AutoevaluacionEntry = z.infer<typeof AutoevaluacionEntrySchema>;
+
 export const CursoDataSchema = z.object({
   df_al: z.array(AlumnadoSchema).optional(),
   df_sgmt: z.array(SeguimientoUDSchema).optional(),
   df_eval: z.array(z.any()).optional(),
+  df_autoevaluacion: z.array(AutoevaluacionEntrySchema).optional(),
   df_calificaciones: z.array(CalificacionSchema).optional(),
   historial_calificaciones: z.array(HistorialCalificacionEntrySchema).optional(),
   df_reclamaciones: z.array(ReclamacionSchema).optional(),

@@ -16,6 +16,7 @@ import { ESTADO_ALUMNO_COLOR, parseAlumnadoCSV } from "@/utils/alumnado";
 
 import { ContextoGrupoTab } from "@/components/features/alumnado/ContextoGrupoTab";
 import { TutoriaTab } from "@/components/features/alumnado/TutoriaTab";
+import { AutoevaluacionTab } from "@/components/features/alumnado/AutoevaluacionTab";
 import { AlertaAbandonoTab } from "@/components/features/diario/AlertaAbandonoTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
@@ -53,6 +54,7 @@ export default function AlumnadoPage() {
     { id: "matricula", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.matricula.label', {defaultValue: 'Matrícula'})}</>, cleanLabel: t('tabs.alumnado.matricula.label', {defaultValue: 'Matrícula'}) },
     { id: "plano", label: <><span className="inline-flex"><LayoutGrid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.plano')}</>, cleanLabel: t('tabs.plano') },
     { id: "tutoria", label: <><span className="inline-flex"><ClipboardCheck className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.tutoria.label', {defaultValue: 'Tutoría y alertas'})}</>, cleanLabel: t('tabs.alumnado.tutoria.label', {defaultValue: 'Tutoría y alertas'}) },
+    { id: "autoevaluacion", label: <><span className="inline-flex"><ClipboardCheck className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.autoevaluacion.label', {defaultValue: 'Autoevaluación'})}</>, cleanLabel: t('tabs.alumnado.autoevaluacion.label', {defaultValue: 'Autoevaluación'}) },
     { id: "perfil", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.perfil.label', {defaultValue: 'Perfil del grupo'})}</>, cleanLabel: t('tabs.alumnado.perfil.label', {defaultValue: 'Perfil del grupo'}) }
   ];
 
@@ -63,6 +65,7 @@ export default function AlumnadoPage() {
     perfil: t('tabs.alumnado.perfil.desc', {defaultValue: 'Estadísticas, rasgos característicos y contexto narrativo del grupo.'}),
     plano: t('tabs.alumnado.plano.desc', {defaultValue: 'Distribución y plano visual del aula.'}),
     tutoria: t('tabs.alumnado.tutoria.desc', {defaultValue: 'Alertas de riesgo de abandono y seguimiento tutorial del alumnado.'}),
+    autoevaluacion: t('tabs.alumnado.autoevaluacion.desc', {defaultValue: 'Autoevaluación del alumnado por criterio de evaluación (SÍ/Dudas/NO) y dificultades declaradas.'}),
   };
 
   useEffect(() => {
@@ -418,6 +421,12 @@ export default function AlumnadoPage() {
             <div className="mt-4 space-y-6">
               <AlertaAbandonoTab />
               <TutoriaTab />
+            </div>
+          )}
+
+          {activeTab === "autoevaluacion" && (
+            <div className="mt-4">
+              <AutoevaluacionTab />
             </div>
           )}
           {activeTab === "perfil" && <ContextoGrupoTab />}
