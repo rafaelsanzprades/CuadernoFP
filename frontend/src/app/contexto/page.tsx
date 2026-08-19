@@ -63,7 +63,7 @@ export default function ContextoConfigPage() {
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     identificacion: t('tabs.contexto.identificacion.desc', {defaultValue: 'Identificación del módulo y centro, régimen dual, reglas de redondeo, ponderación trimestral, instrumentos de evaluación y escalas cualitativas. Cap. 1.1 del PD+.'}),
-    contextualizacion: t('tabs.contexto.contextualizacion.desc', {defaultValue: 'Entorno geográfico, socioeconómico y escolar, alumnado ACNEAE, textos del modelo Simplificado y datos de autoría. Cap. 1.3 del PD+.'}),
+    contextualizacion: t('tabs.contexto.contextualizacion.desc', {defaultValue: 'Entorno geográfico, socioeconómico, escolar e infraestructura, con rasgos rápidos seleccionables; alumnado ACNEAE, textos del modelo Simplificado y datos de autoría. Cap. 1.3 del PD+.'}),
     dual: t('tabs.contexto.dual.desc', {defaultValue: 'Formación en empresa u organismo equiparado (FEOE): modalidad, seguimiento y régimen dual. Cap. 5 del PD+.'}),
     criterios: t('tabs.contexto.criterios.desc', {defaultValue: 'Procedimiento de evaluación y de calificación: información al alumnado, pérdida de evaluación continua, recuperación. Cap. 4 del PD+.'}),
   };

@@ -30,9 +30,9 @@
     "ud": "Unitateak",
     "relacion": "Erlazioa RA-UD",
     "contribucion": "Ekarpena OG",
-    "tri1": "1. Hiruhilekoa",
-    "tri2": "2. Hiruhilekoa",
-    "tri3": "3. Hiruhilekoa",
+    "tri1": "1. hiruhilekoa",
+    "tri2": "2. hiruhilekoa",
+    "tri3": "3. hiruhilekoa",
     "secuenciacion": "Sekuentziazioa",
     "tareas": "Zereginak (TC)",
     "archivos_nube": "Fitxategiak Hodeian",
@@ -79,7 +79,7 @@
         "desc": "Irakaskuntzari eragiten dioten ekitaldi eta jaiegunen erregistroa."
       },
       "actividades": {
-        "label": "Eskolaz kanpoko jarduerak",
+        "label": "Jarduera osagarriak eta eskolaz kanpokoak",
         "desc": "Jarduera osagarrien eta eskolaz kanpokoen plangintza."
       },
       "visual": {
@@ -114,7 +114,7 @@
       },
       "progreso-ra-ud": {
         "label": "RA eta UDen aurrerapena",
-        "desc": "Ikaskuntzaren emaitzen lorpen-maila, hiruhilekoka."
+        "desc": "Ikaskuntzaren emaitzen eta unitate didaktikoen lorpen-maila, hiruhilekoka."
       },
       "detalle": {
         "label": "Ikaslekako xehetasuna",
@@ -202,6 +202,10 @@
       },
       "tri3": {
         "desc": "3. hiruhilekorako aurreikusitako ebaluazio-tresnak."
+      },
+      "modeloJeg": {
+        "label": "JEG eredua",
+        "desc": "Adierazleen araberako kalifikazio-eredu esperimentala: ECaren araberako adierazleak, JEG tresnak eta ikasleko ohiko, errekuperazioko eta ezohiko nota kalkulua."
       }
     },
     "archivos": {
@@ -230,7 +234,7 @@
         "desc": "Heziketa-zikloetarako oinarrizko estatu-araudia eta erkidegoko curriculuma."
       },
       "modulos": {
-        "desc": "Espezializazio-blokeak eta ikasturte bakoitzari lotutako edukiak."
+        "desc": "Titulu bakoitzeko moduluak, ikasturteka antolatuta, ordu-kopuruarekin."
       },
       "ra-ce": {
         "label": "RA → CE",

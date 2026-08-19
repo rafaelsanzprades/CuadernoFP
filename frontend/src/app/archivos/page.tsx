@@ -19,6 +19,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 import { OneDriveSyncPanel } from "@/components/features/cloud/OneDriveSyncPanel";
 
 
@@ -76,12 +77,12 @@ export default function ArchivosTrabajoPage() {
       const ok = await fileManager.importProgramacion(text, name);
       if (ok) {
         useAppStore.getState().setPdFileSource({ type: 'none', fileName: name });
-        toast.success(`Programación ${name} cargada`);
+        toast.success(t('toasts.archivos.programacionCargada', {name, defaultValue: 'Programación {{name}} cargada.'}));
       } else {
-        toast.error("Error al cargar la programación DEMO");
+        toast.error(t('toasts.archivos.errorCargarProgramacionDemo', {defaultValue: "Error al cargar la programación DEMO."}));
       }
     } catch {
-      toast.error("Error al cargar la programación DEMO");
+      toast.error(t('toasts.archivos.errorCargarProgramacionDemo', {defaultValue: "Error al cargar la programación DEMO."}));
     }
   };
 
@@ -91,12 +92,12 @@ export default function ArchivosTrabajoPage() {
       const ok = await fileManager.importCurso(text, name);
       if (ok) {
         useAppStore.getState().setCursoFileSource({ type: 'none', fileName: name });
-        toast.success(`Curso ${name} cargado`);
+        toast.success(t('toasts.archivos.cursoCargado', {name, defaultValue: 'Curso {{name}} cargado.'}));
       } else {
-        toast.error("Error al cargar el curso DEMO");
+        toast.error(t('toasts.archivos.errorCargarCursoDemo', {defaultValue: "Error al cargar el curso DEMO."}));
       }
     } catch {
-      toast.error("Error al cargar el curso DEMO");
+      toast.error(t('toasts.archivos.errorCargarCursoDemo', {defaultValue: "Error al cargar el curso DEMO."}));
     }
   };
 
@@ -112,7 +113,7 @@ export default function ArchivosTrabajoPage() {
   const switchToDemo = () => {
     setDataSource("demo");
     fileManager.loadDemoData();
-    toast.success("Cambiado a Datos DEMO.");
+    toast.success(t('toasts.archivos.cambiadoDemo', {defaultValue: "Cambiado a datos DEMO."}));
   };
 
   const switchToLocal = () => {
@@ -126,7 +127,7 @@ export default function ArchivosTrabajoPage() {
       useAppStore.getState().setGroupFileSource({ type: 'none' });
     }
     setDataSource("local");
-    toast.success("Cambiado a Datos reales en local. Puedes crear o abrir archivos.");
+    toast.success(t('toasts.archivos.cambiadoReal', {defaultValue: "Cambiado a datos reales en local. Puedes crear o abrir archivos."}));
   };
 
   // ── NEW ─────────────────────────────────────────────────
@@ -146,7 +147,7 @@ export default function ArchivosTrabajoPage() {
     if (dataSource === 'demo') setDataSource('local');
     const ok = await fileManager.openProgramacionWithHandle();
     if (ok) {
-      toast.success(<>Programación abierta correctamente <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] ml-1" /></span></>);
+      toast.success(<>{t('toasts.archivos.programacionAbiertaIcono', {defaultValue: "Programación abierta correctamente"})} <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] ml-1" /></span></>);
     }
   };
 
@@ -154,7 +155,7 @@ export default function ArchivosTrabajoPage() {
     if (dataSource === 'demo') setDataSource('local');
     const ok = await fileManager.openCursoWithHandle();
     if (ok) {
-      toast.success(<>Curso abierto correctamente <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] ml-1" /></span></>);
+      toast.success(<>{t('toasts.archivos.cursoAbiertoIcono', {defaultValue: "Curso abierto correctamente"})} <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] ml-1" /></span></>);
     }
   };
 
@@ -173,9 +174,9 @@ export default function ArchivosTrabajoPage() {
       if (success) {
         if (dataSource === 'demo') setDataSource('local');
         useAppStore.getState().setPdFileSource({ type: 'local', fileName: file.name });
-        toast.success(<>Programación importada correctamente <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] ml-1" /></span></>);
+        toast.success(<>{t('toasts.archivos.programacionImportada', {defaultValue: "Programación importada correctamente"})} <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] ml-1" /></span></>);
       } else {
-        toast.error("Error al importar: el archivo no tiene un formato válido de Programación.");
+        toast.error(t('toasts.archivos.errorFormatoProgramacion', {defaultValue: "Error al importar: el archivo no tiene un formato válido de programación."}));
       }
     };
     reader.readAsText(file);
@@ -192,9 +193,9 @@ export default function ArchivosTrabajoPage() {
       if (success) {
         if (dataSource === 'demo') setDataSource('local');
         useAppStore.getState().setCursoFileSource({ type: 'local', fileName: file.name });
-        toast.success(<>Curso importado correctamente <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] ml-1" /></span></>);
+        toast.success(<>{t('toasts.archivos.cursoImportado', {defaultValue: "Curso importado correctamente"})} <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] ml-1" /></span></>);
       } else {
-        toast.error("Error al importar: el archivo no tiene un formato válido de Curso.");
+        toast.error(t('toasts.archivos.errorFormatoCurso', {defaultValue: "Error al importar: el archivo no tiene un formato válido de curso."}));
       }
     };
     reader.readAsText(file);
@@ -205,70 +206,70 @@ export default function ArchivosTrabajoPage() {
 
   const handleSavePd = async () => {
     if (!moduleData) {
-      toast.error("No hay ninguna Programación cargada para guardar.");
+      toast.error(t('toasts.archivos.sinProgramacionGuardar', {defaultValue: "No hay ninguna programación cargada para guardar."}));
       return;
     }
     if (dataSource === 'demo') {
-      toast("Estás en modo demo. Guardando como nuevo archivo...", { icon: 'ℹ️' });
+      toast(t('toasts.archivos.modoDemoGuardarComoNuevo', {defaultValue: "Estás en modo DEMO. Guardando como nuevo archivo..."}), { icon: 'ℹ️' });
       return handleSaveAsPd();
     }
     const ok = await fileManager.saveProgramacion();
-    if (ok) toast.success("Programación guardada correctamente.");
-    else toast.error("Error al guardar la programación.");
+    if (ok) toast.success(t('toasts.archivos.programacionGuardada', {defaultValue: "Programación guardada correctamente."}));
+    else toast.error(t('toasts.archivos.errorGuardarProgramacion', {defaultValue: "Error al guardar la programación."}));
   };
 
   const handleSaveCurso = async () => {
     if (!cursoData) {
-      toast.error("No hay ningún Curso cargado para guardar.");
+      toast.error(t('toasts.archivos.sinCursoGuardar', {defaultValue: "No hay ningún curso cargado para guardar."}));
       return;
     }
     if (dataSource === 'demo') {
-      toast("Estás en modo demo. Guardando como nuevo archivo...", { icon: 'ℹ️' });
+      toast(t('toasts.archivos.modoDemoGuardarComoNuevo', {defaultValue: "Estás en modo DEMO. Guardando como nuevo archivo..."}), { icon: 'ℹ️' });
       return handleSaveAsCurso();
     }
     const ok = await fileManager.saveCurso();
-    if (ok) toast.success("Curso guardado correctamente.");
-    else toast.error("Error al guardar el curso.");
+    if (ok) toast.success(t('toasts.archivos.cursoGuardado', {defaultValue: "Curso guardado correctamente."}));
+    else toast.error(t('toasts.archivos.errorGuardarCurso', {defaultValue: "Error al guardar el curso."}));
   };
 
   // ── SAVE AS ─────────────────────────────────────────────
 
   const handleSaveAsPd = async () => {
     if (!moduleData) {
-      toast.error("No hay ninguna Programación cargada.");
+      toast.error(t('toasts.archivos.sinProgramacion', {defaultValue: "No hay ninguna programación cargada."}));
       return;
     }
     const ok = await fileManager.saveAsProgramacion();
-    if (ok) toast.success("Programación guardada como nuevo archivo.");
+    if (ok) toast.success(t('toasts.archivos.programacionGuardadaComo', {defaultValue: "Programación guardada como nuevo archivo."}));
   };
 
   const handleSaveAsCurso = async () => {
     if (!cursoData) {
-      toast.error("No hay ningún Curso cargado.");
+      toast.error(t('toasts.archivos.sinCurso', {defaultValue: "No hay ningún curso cargado."}));
       return;
     }
     const ok = await fileManager.saveAsCurso();
-    if (ok) toast.success("Curso guardado como nuevo archivo.");
+    if (ok) toast.success(t('toasts.archivos.cursoGuardadoComo', {defaultValue: "Curso guardado como nuevo archivo."}));
   };
 
   // ── DOWNLOAD COPY ───────────────────────────────────────
 
   const handleDownloadPd = () => {
     if (!moduleData) {
-      toast.error("No hay ninguna Programación cargada.");
+      toast.error(t('toasts.archivos.sinProgramacion', {defaultValue: "No hay ninguna programación cargada."}));
       return;
     }
     fileManager.downloadProgramacion();
-    toast.success("Copia de programación descargada.");
+    toast.success(t('toasts.archivos.copiaProgramacionDescargada', {defaultValue: "Copia de programación descargada."}));
   };
 
   const handleDownloadCurso = () => {
     if (!cursoData) {
-      toast.error("No hay ningún Curso cargado.");
+      toast.error(t('toasts.archivos.sinCurso', {defaultValue: "No hay ningún curso cargado."}));
       return;
     }
     fileManager.downloadCurso();
-    toast.success("Copia de curso descargada.");
+    toast.success(t('toasts.archivos.copiaCursoDescargada', {defaultValue: "Copia de curso descargada."}));
   };
 
   // ── Drag & Drop ─────────────────────────────────────────
@@ -288,17 +289,17 @@ export default function ArchivosTrabajoPage() {
         const success = await fileManager.importProgramacion(content, file.name);
         if (success) {
           useAppStore.getState().setPdFileSource({ type: 'local', fileName: file.name });
-          toast.success(<>Programación cargada desde arrastrar <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] ml-1" /></span></>);
+          toast.success(<>{t('toasts.archivos.programacionCargadaArrastre', {defaultValue: "Programación cargada por arrastre"})} <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] ml-1" /></span></>);
         } else {
-          toast.error("El archivo no tiene un formato válido de Programación (.fpp).");
+          toast.error(t('toasts.archivos.errorFormatoProgramacionArrastrar', {defaultValue: "El archivo no tiene un formato válido de programación (.fpp)."}));
         }
       } else {
         const success = await fileManager.importCurso(content, file.name);
         if (success) {
           useAppStore.getState().setCursoFileSource({ type: 'local', fileName: file.name });
-          toast.success(<>Curso cargado desde arrastrar <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] ml-1" /></span></>);
+          toast.success(<>{t('toasts.archivos.cursoCargadoArrastre', {defaultValue: "Curso cargado por arrastre"})} <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] ml-1" /></span></>);
         } else {
-          toast.error("El archivo no tiene un formato válido de Curso (.fpc).");
+          toast.error(t('toasts.archivos.errorFormatoCursoArrastrar', {defaultValue: "El archivo no tiene un formato válido de curso (.fpc)."}));
         }
       }
     };
@@ -516,7 +517,7 @@ export default function ArchivosTrabajoPage() {
                                   key={f.name}
                                   onDoubleClick={async () => {
                                     await fileManager.loadDemoData(f.name);
-                                    toast.success(`Grupo ${f.name} cargado`);
+                                    toast.success(t('toasts.archivos.grupoCargado', {name: f.name, defaultValue: 'Grupo {{name}} cargado.'}));
                                   }}
                                   className={`w-full text-left p-3 rounded-lg border transition-colors group/item ${isActive ? 'bg-warning/10 border-warning/40 shadow-sm' : 'border-[var(--glass-border)] bg-foreground/[0.02] hover:bg-foreground/5'}`}
                                 >
@@ -543,8 +544,8 @@ export default function ArchivosTrabajoPage() {
                               key={g}
                               onDoubleClick={async () => {
                                 const ok = await fileManager.loadGroupFromWorkspace(workspaceHandle, g);
-                                if (ok) toast.success(`Grupo ${g} abierto correctamente`);
-                                else toast.error("Error al abrir el grupo");
+                                if (ok) toast.success(t('toasts.archivos.grupoAbierto', {name: g, defaultValue: 'Grupo {{name}} abierto correctamente.'}));
+                                else toast.error(t('toasts.archivos.errorAbrirGrupo', {defaultValue: "Error al abrir el grupo."}));
                               }}
                               className="w-full text-left p-3 rounded-lg border border-[var(--glass-border)] bg-foreground/[0.02] hover:bg-foreground/5 transition-colors group/item"
                             >
@@ -563,14 +564,14 @@ export default function ArchivosTrabajoPage() {
                           {!workspaceHandle ? (
                             <Button onClick={async () => {
                               const handle = await fileManager.openWorkspaceDirectory();
-                              if (handle) toast.success("Carpeta local conectada.");
+                              if (handle) toast.success(t('toasts.archivos.carpetaConectada', {defaultValue: "Carpeta local conectada."}));
                             }} className="w-full bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 transition-all text-caption h-9">
                               <FolderOpen className="w-3 h-3 mr-1" /> Conectar Carpeta Local
                             </Button>
                           ) : (
                             <Button onClick={async () => {
                               const handle = await fileManager.openWorkspaceDirectory();
-                              if (handle) toast.success("Carpeta local cambiada.");
+                              if (handle) toast.success(t('toasts.archivos.carpetaCambiada', {defaultValue: "Carpeta local cambiada."}));
                             }} className="w-full bg-foreground/5 hover:bg-foreground/10 text-foreground border border-[var(--glass-border)] transition-all text-caption h-9">
                               <FolderOpen className="w-3 h-3 mr-1" /> Cambiar Carpeta Local
                             </Button>
@@ -629,8 +630,8 @@ export default function ArchivosTrabajoPage() {
                                 key={p}
                                 onDoubleClick={async () => {
                                   const ok = await fileManager.loadProgramacionFromWorkspace(workspaceHandle, p);
-                                  if (ok) toast.success(`Programación abierta correctamente`);
-                                  else toast.error("Error al abrir programación");
+                                  if (ok) toast.success(t('toasts.archivos.programacionAbierta', {defaultValue: "Programación abierta correctamente."}));
+                                  else toast.error(t('toasts.archivos.errorAbrirProgramacion', {defaultValue: "Error al abrir la programación."}));
                                 }}
                                 className={`w-full text-left p-3 rounded-lg border transition-colors group/item ${isActive ? 'bg-info/10 border-info/40 shadow-sm' : 'border-[var(--glass-border)] bg-foreground/[0.02] hover:bg-foreground/5'}`}
                               >
@@ -728,7 +729,7 @@ export default function ArchivosTrabajoPage() {
     <button
                                 key={c}
                                 onDoubleClick={() => {
-                                  toast.error("Para abrir un curso de forma segura, haz doble clic en su Grupo asociado en la primera columna.");
+                                  toast.error(t('toasts.archivos.abrirCursoViaGrupo', {defaultValue: "Para abrir un curso de forma segura, haz doble clic en su grupo asociado en la primera columna."}));
                                 }}
                                 className={`w-full text-left p-3 rounded-lg border transition-colors group/item ${isActive ? 'bg-success/10 border-success/40 shadow-sm' : 'border-[var(--glass-border)] bg-foreground/[0.02] hover:bg-foreground/5 opacity-80 hover:opacity-100'}`}
                               >
@@ -915,12 +916,12 @@ export default function ArchivosTrabajoPage() {
                               if (newVal && workspaceHandle) {
                                 const ok = await fileManager.fixWorkspaceLink(workspaceHandle, link.groupName, link.type, newVal);
                                 if (ok) {
-                                  toast.success("Enlace reparado correctamente");
+                                  toast.success(t('toasts.archivos.enlaceReparado', {defaultValue: "Enlace reparado correctamente."}));
                                   setBrokenLinks(prev => prev.filter(l => l !== link));
                                   setFixingLink(null);
                                   fileManager.scanWorkspaceFiles(workspaceHandle).then(setWorkspaceFiles);
                                 } else {
-                                  toast.error("Error al reparar enlace");
+                                  toast.error(t('toasts.archivos.errorReparEnlace', {defaultValue: "Error al reparar el enlace."}));
                                 }
                               }
                             }}
@@ -960,7 +961,7 @@ export default function ArchivosTrabajoPage() {
 
 function handleLoadDemo() {
   fileManager.loadDemoData();
-  toast.success("Datos de demostración cargados correctamente."    );
+  toast.success(i18next.t('toasts.archivos.demoCargada', {defaultValue: "Datos de demostración cargados correctamente."}));
 }
 
 

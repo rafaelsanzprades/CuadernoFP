@@ -30,9 +30,9 @@
     "ud": "Units",
     "relacion": "Relationship RA-UD",
     "contribucion": "Contribution OG",
-    "tri1": "1st Quarter",
-    "tri2": "2nd Quarter",
-    "tri3": "3rd Quarter",
+    "tri1": "1st quarter",
+    "tri2": "2nd quarter",
+    "tri3": "3rd quarter",
     "secuenciacion": "Sequencing",
     "tareas": "Tasks (TC)",
     "archivos_nube": "Cloud Files",
@@ -79,7 +79,7 @@
         "desc": "Record of events and holidays that affect teaching."
       },
       "actividades": {
-        "label": "Extracurricular activities",
+        "label": "Complementary and extracurricular activities",
         "desc": "Planning of complementary and extracurricular activities."
       },
       "visual": {
@@ -114,7 +114,7 @@
       },
       "progreso-ra-ud": {
         "label": "Progress of learning outcomes and units",
-        "desc": "Degree of attainment of the learning outcomes by term."
+        "desc": "Degree of attainment of the learning outcomes and teaching units by term."
       },
       "detalle": {
         "label": "Detail by student",
@@ -202,6 +202,10 @@
       },
       "tri3": {
         "desc": "Evaluation instruments planned for the 3rd term."
+      },
+      "modeloJeg": {
+        "label": "JEG model",
+        "desc": "Experimental indicator-based grading model: indicators per CE, JEG instruments, and ordinary, resit, and special-session grade calculation per student."
       }
     },
     "archivos": {
@@ -230,7 +234,7 @@
         "desc": "Basic state regulations and regional curriculum for VET programs."
       },
       "modulos": {
-        "desc": "Specialization blocks and content associated with each academic year."
+        "desc": "Modules for each qualification, organized by academic year, with their hours."
       },
       "ra-ce": {
         "label": "RA → CE",

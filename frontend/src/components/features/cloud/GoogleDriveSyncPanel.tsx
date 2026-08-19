@@ -7,32 +7,34 @@ import { CheckCircle2, Cloud, CloudOff, Info, RefreshCw, XCircle, Key } from "lu
 import toast from "react-hot-toast";
 import { driveService } from "@/services/driveService";
 import { Input } from "@/components/ui/Input";
+import { useTranslation } from "react-i18next";
 
 export function GoogleDriveSyncPanel() {
-  const { 
+  const {
     isDriveConnected, driveUserEmail, autoSyncDrive, googleClientId, dataSource,
     setDriveConnected, setDriveUserEmail, setAutoSyncDrive, setGoogleClientId
   } = useAppStore();
+  const { t } = useTranslation();
 
   const handleConnect = async () => {
     if (dataSource === 'demo') {
-      toast.error("No puedes sincronizar con Drive en modo DEMO.");
+      toast.error(t('toasts.googleDrive.sinDemo', {defaultValue: "No puedes sincronizar con Drive en modo DEMO."}));
       return;
     }
     if (!googleClientId) {
-      toast.error("Por favor, introduce tu Google Client ID primero.");
+      toast.error(t('toasts.googleDrive.faltaClientId', {defaultValue: "Introduce tu Google Client ID primero."}));
       return;
     }
-    
-    toast.loading("Conectando con Google Drive...", { id: "drive-connect" });
+
+    toast.loading(t('toasts.googleDrive.conectando', {defaultValue: "Conectando con Google Drive..."}), { id: "drive-connect" });
     const result = await driveService.login(googleClientId);
-    
+
     if (result.success) {
       setDriveUserEmail(result.email || "Usuario de Drive");
       setDriveConnected(true);
-      toast.success("Google Drive conectado correctamente", { id: "drive-connect" });
+      toast.success(t('toasts.googleDrive.conectado', {defaultValue: "Google Drive conectado correctamente."}), { id: "drive-connect" });
     } else {
-      toast.error("Fallo al conectar con Google Drive", { id: "drive-connect" });
+      toast.error(t('toasts.googleDrive.errorConectar', {defaultValue: "Fallo al conectar con Google Drive."}), { id: "drive-connect" });
     }
   };
 
@@ -41,24 +43,24 @@ export function GoogleDriveSyncPanel() {
     setDriveConnected(false);
     setDriveUserEmail(null);
     setAutoSyncDrive(false);
-    toast("Desconectado de Google Drive", { icon: "ðŸ‘‹" });
+    toast(t('toasts.googleDrive.desconectado', {defaultValue: "Desconectado de Google Drive"}), { icon: "👋" });
   };
 
   const toggleAutoSync = () => {
     if (dataSource === 'demo') {
-      toast.error("El autoguardado no está disponible en modo DEMO.");
+      toast.error(t('toasts.googleDrive.autoguardadoSinDemo', {defaultValue: "El autoguardado no está disponible en modo DEMO."}));
       return;
     }
     if (!isDriveConnected) {
-      toast.error("Debes conectar tu cuenta de Google Drive primero.");
+      toast.error(t('toasts.googleDrive.faltaConectar', {defaultValue: "Conecta tu cuenta de Google Drive primero."}));
       return;
     }
     const newVal = !autoSyncDrive;
     setAutoSyncDrive(newVal);
     if (newVal) {
-      toast.success("Autoguardado en la nube activado.");
+      toast.success(t('toasts.googleDrive.autoguardadoActivado', {defaultValue: "Autoguardado en la nube activado."}));
     } else {
-      toast("Autoguardado en la nube desactivado.");
+      toast(t('toasts.googleDrive.autoguardadoDesactivado', {defaultValue: "Autoguardado en la nube desactivado."}));
     }
   };
 

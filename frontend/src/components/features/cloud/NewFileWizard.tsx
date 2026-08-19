@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { fileManager } from "@/services/fileManager";
 import { useAppStore } from "@/store/useAppStore";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 interface ModuleOption {
   code: string;
@@ -32,6 +33,7 @@ interface NewFileWizardProps {
 }
 
 export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps) {
+  const { t } = useTranslation();
   const [search, setSearch] = useState("");
   const [selectedModule, setSelectedModule] = useState<ModuleOption | null>(null);
   const [isCreating, setIsCreating] = useState(false);
@@ -97,18 +99,18 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
       if (fileType === 'programacion') {
         const ok = await fileManager.createNewProgramacion(selectedModule.code, selectedModule.name);
         if (ok) {
-          toast.success(`Programación de ${selectedModule.name} creada correctamente.`);
+          toast.success(t('toasts.newFileWizard.programacionCreada', {name: selectedModule.name, defaultValue: 'Programación de {{name}} creada correctamente.'}));
           onClose();
         } else {
-          toast.error("Error al crear la programación.");
+          toast.error(t('toasts.newFileWizard.errorCrearProgramacion', {defaultValue: "Error al crear la programación."}));
         }
       } else {
         const ok = await fileManager.createNewCurso(selectedModule.groupName, getCurrentAcademicYear());
         if (ok) {
-          toast.success(`Curso ${selectedModule.groupName} creado correctamente.`);
+          toast.success(t('toasts.newFileWizard.cursoCreado', {name: selectedModule.groupName, defaultValue: 'Curso {{name}} creado correctamente.'}));
           onClose();
         } else {
-          toast.error("Error al crear el curso.");
+          toast.error(t('toasts.newFileWizard.errorCrearCurso', {defaultValue: "Error al crear el curso."}));
         }
       }
     } finally {
@@ -128,10 +130,10 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
       
       const ok = await fileManager.createNewCurso(fullCursoName, cursoYear);
       if (ok) {
-        toast.success(`Curso ${fullCursoName} y su Grupo creados correctamente.`);
+        toast.success(t('toasts.newFileWizard.cursoYGrupoCreados', {name: fullCursoName, defaultValue: 'Curso {{name}} y su grupo creados correctamente.'}));
         onClose();
       } else {
-        toast.error("Error al crear el curso.");
+        toast.error(t('toasts.newFileWizard.errorCrearCurso', {defaultValue: "Error al crear el curso."}));
       }
     } finally {
       setIsCreating(false);
@@ -143,10 +145,10 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
     try {
       const ok = await fileManager.createNewCursoFromDemo("Curso DEMO", getCurrentAcademicYear());
       if (ok) {
-        toast.success("Curso DEMO creado correctamente.");
+        toast.success(t('toasts.newFileWizard.cursoDemoCreado', {defaultValue: "Curso DEMO creado correctamente."}));
         onClose();
       } else {
-        toast.error("Error al crear el curso DEMO.");
+        toast.error(t('toasts.newFileWizard.errorCrearCursoDemo', {defaultValue: "Error al crear el curso DEMO."}));
       }
     } finally {
       setIsCreating(false);

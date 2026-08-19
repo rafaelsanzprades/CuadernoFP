@@ -42,7 +42,7 @@ export default function InstrumentosPage() {
     { id: "tri1", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri1')}</span>, cleanLabel: t('tabs.tri1') },
     { id: "tri2", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri2')}</span>, cleanLabel: t('tabs.tri2') },
     { id: "tri3", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri3')}</span>, cleanLabel: t('tabs.tri3') },
-    { id: "modelo-jeg", label: <span className="flex items-center gap-2"><Layers className="w-4 h-4 shrink-0 text-purple-400" /> Modelo JEG</span>, cleanLabel: "Modelo JEG" }
+    { id: "modelo-jeg", label: <span className="flex items-center gap-2"><Layers className="w-4 h-4 shrink-0 text-purple-400" /> {t('tabs.instrumentos.modeloJeg.label', {defaultValue: 'Modelo JEG'})}</span>, cleanLabel: t('tabs.instrumentos.modeloJeg.label', {defaultValue: 'Modelo JEG'}) }
   ];const [activeTab, setActiveTab] = useState("resumen");const activeTabCleanLabel = TABS.find(tab => tab.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
@@ -50,7 +50,7 @@ export default function InstrumentosPage() {
     tri1: t('tabs.instrumentos.tri1.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 1er trimestre.'}),
     tri2: t('tabs.instrumentos.tri2.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 2º trimestre.'}),
     tri3: t('tabs.instrumentos.tri3.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 3er trimestre.'}),
-    "modelo-jeg": "Nivel Indicador bajo el CE, según el modelo del autor real de PD+ (experimental, decisión D de la Fase 2).",
+    "modelo-jeg": t('tabs.instrumentos.modeloJeg.desc', {defaultValue: 'Modelo experimental de calificación por indicadores: indicadores por CE, instrumentos JEG y cálculo de nota ordinaria, de recuperación y extraordinaria por alumno.'}),
   };
 
   const [isRecoveryModalOpen, setIsRecoveryModalOpen] = useState(false);
@@ -201,9 +201,9 @@ export default function InstrumentosPage() {
   const lista_ce_ids = ce_clean.map((ce: any) => ce.id_ce);
 
   const trimestres = [
-    { key: "1T", nombre: "1er Trimestre", pctField: "pct_1t" },
-    { key: "2T", nombre: "2º Trimestre", pctField: "pct_2t" },
-    { key: "3T", nombre: "3er Trimestre", pctField: "pct_3t" }
+    { key: "1T", nombre: "1er trimestre", pctField: "pct_1t" },
+    { key: "2T", nombre: "2º trimestre", pctField: "pct_2t" },
+    { key: "3T", nombre: "3er trimestre", pctField: "pct_3t" }
   ];
 
   const handleUpdateAct = (globalIdx: number, field: string, value: any) => {

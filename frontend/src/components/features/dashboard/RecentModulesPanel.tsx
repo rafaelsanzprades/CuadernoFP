@@ -10,6 +10,7 @@ import {
   RecentModuleEntry,
 } from "@/services/recentModules";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const ICONO_TIPO = { grupo: FileStack, programacion: BookOpen, curso: Users } as const;
 const LABEL_TIPO = { grupo: "Grupo", programacion: "Programación", curso: "Curso" } as const;
@@ -33,6 +34,7 @@ async function ensurePermission(handle: FileSystemFileHandle | FileSystemDirecto
 }
 
 export function RecentModulesPanel() {
+  const { t } = useTranslation();
   const [entries, setEntries] = useState<RecentModuleEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [reopening, setReopening] = useState<string | null>(null);
@@ -58,16 +60,16 @@ export function RecentModulesPanel() {
     // entrada ni se muestra un error alarmante por ese caso.
     if (!entry.dirHandle && !entry.fileHandle) {
       if (entry.tipo === "grupo") {
-        toast(`Ve a Archivo → Abrir grupo y selecciona la carpeta que contiene "${entry.fileName}".`);
+        toast(t('toasts.recientes.irAAbrirGrupo', {fileName: entry.fileName, defaultValue: 'Ve a Archivo → Abrir grupo y selecciona la carpeta que contiene "{{fileName}}".'}));
         setReopening(null);
         return;
       }
-      toast(`Selecciona de nuevo "${entry.fileName}" — tu navegador no permite reabrirlo directamente.`);
+      toast(t('toasts.recientes.seleccionaDeNuevo', {fileName: entry.fileName, defaultValue: 'Selecciona de nuevo "{{fileName}}" — tu navegador no permite reabrirlo directamente.'}));
       try {
         const ok = entry.tipo === "curso"
           ? await fileManager.openCursoWithHandle()
           : await fileManager.openProgramacionWithHandle();
-        if (ok) toast.success(`"${entry.nombre}" reabierto.`);
+        if (ok) toast.success(t('toasts.recientes.reabierto', {nombre: entry.nombre, defaultValue: '"{{nombre}}" reabierto.'}));
       } finally {
         setReopening(null);
         refresh();
@@ -80,7 +82,7 @@ export function RecentModulesPanel() {
       if (!(await ensurePermission(handle))) {
         // Permiso denegado esta vez -- el fichero sigue existiendo, no se
         // quita la entrada, el profesor puede volver a intentarlo.
-        toast.error("Permiso denegado para acceder al archivo/carpeta.");
+        toast.error(t('toasts.recientes.permisoDenegado', {defaultValue: "Permiso denegado para acceder al archivo o carpeta."}));
         return;
       }
 
@@ -102,19 +104,19 @@ export function RecentModulesPanel() {
       }
 
       if (ok) {
-        toast.success(`"${entry.nombre}" reabierto.`);
+        toast.success(t('toasts.recientes.reabierto', {nombre: entry.nombre, defaultValue: '"{{nombre}}" reabierto.'}));
       } else {
         // Fallo sin excepción (p.ej. formato de fichero inválido) -- no se
         // sabe si es reversible, no se quita la entrada automáticamente.
-        toast.error(`No se pudo reabrir "${entry.nombre}".`);
+        toast.error(t('toasts.recientes.errorReabrir', {nombre: entry.nombre, defaultValue: 'No se pudo reabrir "{{nombre}}".'}));
       }
     } catch (e: any) {
       if (e?.name === "NotFoundError") {
-        toast.error(`"${entry.nombre}" ya no se encuentra donde estaba. Se quita de recientes.`);
+        toast.error(t('toasts.recientes.yaNoExiste', {nombre: entry.nombre, defaultValue: '"{{nombre}}" ya no se encuentra donde estaba. Se quita de recientes.'}));
         await removeRecentModule(entry.id);
       } else if (e?.name !== "AbortError") {
         console.error("Error reabriendo módulo reciente", e);
-        toast.error("Error al reabrir el archivo.");
+        toast.error(t('toasts.recientes.errorGenerico', {defaultValue: "Error al reabrir el archivo."}));
       }
     } finally {
       setReopening(null);

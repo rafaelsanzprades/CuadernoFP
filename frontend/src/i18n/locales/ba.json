@@ -30,9 +30,9 @@
     "ud": "Unitats",
     "relacion": "Relació RA-UD",
     "contribucion": "Contribució OG",
-    "tri1": "1r Trimestre",
-    "tri2": "2n Trimestre",
-    "tri3": "3r Trimestre",
+    "tri1": "1r trimestre",
+    "tri2": "2n trimestre",
+    "tri3": "3r trimestre",
     "secuenciacion": "Seqüenciació",
     "tareas": "Tasques (TC)",
     "archivos_nube": "Arxius al Núvol",
@@ -79,7 +79,7 @@
         "desc": "Registre d'esdeveniments i festius que afecten la docència."
       },
       "actividades": {
-        "label": "Activitats extraescolars",
+        "label": "Activitats complementàries i extraescolars",
         "desc": "Planificació d'activitats complementàries i extraescolars."
       },
       "visual": {
@@ -114,7 +114,7 @@
       },
       "progreso-ra-ud": {
         "label": "Progrés de RA i UD",
-        "desc": "Grau de consecució dels resultats d'aprenentatge per trimestre."
+        "desc": "Grau de consecució dels resultats d'aprenentatge i les unitats didàctiques per trimestre."
       },
       "detalle": {
         "label": "Detall per alumnat",
@@ -202,6 +202,10 @@
       },
       "tri3": {
         "desc": "Instruments d'avaluació planificats per al 3r trimestre."
+      },
+      "modeloJeg": {
+        "label": "Model JEG",
+        "desc": "Model experimental de qualificació per indicadors: indicadors per CE, instruments JEG i càlcul de nota ordinària, de recuperació i extraordinària per alumne."
       }
     },
     "archivos": {
@@ -230,7 +234,7 @@
         "desc": "Normativa estatal bàsica i currículum autonòmic per a cicles formatius."
       },
       "modulos": {
-        "desc": "Blocs d'especialització i continguts associats a cada curs acadèmic."
+        "desc": "Mòduls de cada títol organitzats per curs acadèmic, amb les seves hores."
       },
       "ra-ce": {
         "label": "RA → CE",

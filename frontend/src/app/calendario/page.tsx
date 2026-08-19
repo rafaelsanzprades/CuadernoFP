@@ -253,7 +253,7 @@ export default function CalendarioPage() {
     { id: "fechas", label: <span className="flex items-center gap-2"><Settings className="w-4 h-4 shrink-0" /> {t('tabs.calendario.fechas.label', {defaultValue: 'Fechas y horario'})}</span>, cleanLabel: t('tabs.calendario.fechas.label', {defaultValue: 'Fechas y horario'}) },
     { id: "feoe", label: <span className="flex items-center gap-2"><Briefcase className="w-4 h-4 shrink-0" /> {t('tabs.calendario.feoe.label', {defaultValue: 'Periodo FEOE'})}</span>, cleanLabel: t('tabs.calendario.feoe.label', {defaultValue: 'Periodo FEOE'}) },
     { id: "eventos", label: <span className="flex items-center gap-2"><Flag className="w-4 h-4 shrink-0" /> {t('tabs.calendario.eventos.label', {defaultValue: 'Eventos y festivos'})}</span>, cleanLabel: t('tabs.calendario.eventos.label', {defaultValue: 'Eventos y festivos'}) },
-    { id: "actividades", label: <span className="flex items-center gap-2"><Bus className="w-4 h-4 shrink-0" /> {t('tabs.calendario.actividades.label', {defaultValue: 'Actividades extraescolares'})}</span>, cleanLabel: t('tabs.calendario.actividades.label', {defaultValue: 'Actividades extraescolares'}) },
+    { id: "actividades", label: <span className="flex items-center gap-2"><Bus className="w-4 h-4 shrink-0" /> {t('tabs.calendario.actividades.label', {defaultValue: 'Actividades complementarias y extraescolares'})}</span>, cleanLabel: t('tabs.calendario.actividades.label', {defaultValue: 'Actividades complementarias y extraescolares'}) },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {

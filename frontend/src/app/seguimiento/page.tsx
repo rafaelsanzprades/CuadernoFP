@@ -30,7 +30,7 @@ export default function SeguimientoPage() {
   const TAB_DESCRIPTIONS: Record<string, string> = {
     clases: t('tabs.seguimiento.clases.desc', {defaultValue: 'Diario de clases, sesiones lectivas y registro de contingencias.'}),
     asistencia: t('tabs.seguimiento.asistencia.desc', {defaultValue: 'Control de asistencia del alumnado.'}),
-    'progreso-ra-ud': t('tabs.seguimiento.progreso-ra-ud.desc', {defaultValue: 'Grado de consecución de los resultados de aprendizaje por trimestre.'}),
+    'progreso-ra-ud': t('tabs.seguimiento.progreso-ra-ud.desc', {defaultValue: 'Grado de consecución de los resultados de aprendizaje y las unidades didácticas por trimestre.'}),
     detalle: t('tabs.seguimiento.detalle.desc', {defaultValue: 'Entrada de notas numéricas por alumnado, instrumento de evaluación y nivel de adquisición de RA.'}),
   };
   const [loading, setLoading] = useState(true);

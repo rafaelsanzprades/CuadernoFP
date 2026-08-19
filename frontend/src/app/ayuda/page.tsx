@@ -43,9 +43,9 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   ],
   "/instrumentos": [
     { id: "resumen", label: "Resumen" },
-    { id: "tri1", label: "1º Trimestre" },
-    { id: "tri2", label: "2º Trimestre" },
-    { id: "tri3", label: "3º Trimestre" },
+    { id: "tri1", label: "1er trimestre" },
+    { id: "tri2", label: "2º trimestre" },
+    { id: "tri3", label: "3er trimestre" },
   ],
   "/calendario": [
     { id: "fechas", label: "Fechas y horario" },

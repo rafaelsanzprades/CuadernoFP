@@ -115,7 +115,7 @@ function CiclosContent() {
   const TAB_DESCRIPTIONS: Record<string, string> = {
     familias: t('tabs.catalogo.familias.desc', {defaultValue: 'Familias profesionales y sus ciclos formativos asociados, organizados por grado.'}),
     titulos: t('tabs.catalogo.titulos.desc', {defaultValue: 'Normativa estatal básica y currículo autonómico para ciclos formativos.'}),
-    modulos: t('tabs.catalogo.modulos.desc', {defaultValue: 'Bloques de especialización y contenidos asociados a cada curso académico.'}),
+    modulos: t('tabs.catalogo.modulos.desc', {defaultValue: 'Módulos de cada título organizados por curso académico, con sus horas.'}),
     'ra-ce': t('tabs.catalogo.ra-ce.desc', {defaultValue: 'Competencias específicas estructuradas en RA y CE (Art. 136, RD 659/2023).'})
   };
 

@@ -30,9 +30,9 @@
     "ud": "Unitats",
     "relacion": "Relació RA-UD",
     "contribucion": "Contribució OG",
-    "tri1": "1r Trimestre",
-    "tri2": "2n Trimestre",
-    "tri3": "3r Trimestre",
+    "tri1": "1r trimestre",
+    "tri2": "2n trimestre",
+    "tri3": "3r trimestre",
     "secuenciacion": "Seqüenciació",
     "tareas": "Tasques (TC)",
     "archivos_nube": "Arxius al Núvol",
@@ -60,7 +60,7 @@
       "fechas": { "label": "Dates i horari", "desc": "Configura les dates generals, els trimestres i l'horari setmanal del curs." },
       "feoe": { "label": "Període FEOE", "desc": "Configuració específica per a FP Dual (FEOE)." },
       "eventos": { "label": "Esdeveniments i festius", "desc": "Registre d'esdeveniments i festius que afecten la docència." },
-      "actividades": { "label": "Activitats extraescolars", "desc": "Planificació d'activitats complementàries i extraescolars." },
+      "actividades": { "label": "Activitats complementàries i extraescolars", "desc": "Planificació d'activitats complementàries i extraescolars." },
       "visual": { "desc": "Vista mensual del calendari acadèmic complet." }
     },
     "alumnado": {
@@ -72,7 +72,7 @@
     "seguimiento": {
       "clases": { "label": "Classes", "desc": "Diari de classes, sessions lectives i registre de contingències." },
       "asistencia": { "label": "Assistència", "desc": "Control d'assistència de l'alumnat." },
-      "progreso-ra-ud": { "label": "Progrés de RA i UD", "desc": "Grau de consecució dels resultats d'aprenentatge per trimestre." },
+      "progreso-ra-ud": { "label": "Progrés de RA i UD", "desc": "Grau de consecució dels resultats d'aprenentatge i les unitats didàctiques per trimestre." },
       "detalle": { "label": "Detall per alumnat", "desc": "Entrada de notes numèriques per alumnat, instrument d'avaluació i nivell d'adquisició de RA." }
     },
     "calificaciones": {
@@ -103,7 +103,8 @@
       "resumen": { "desc": "Visió global dels instruments d'avaluació utilitzats. RD 659/2023 (Art. 136)" },
       "tri1": { "desc": "Instruments d'avaluació planificats per al 1r trimestre." },
       "tri2": { "desc": "Instruments d'avaluació planificats per al 2n trimestre." },
-      "tri3": { "desc": "Instruments d'avaluació planificats per al 3r trimestre." }
+      "tri3": { "desc": "Instruments d'avaluació planificats per al 3r trimestre." },
+      "modeloJeg": { "label": "Model JEG", "desc": "Model experimental de qualificació per indicadors: indicadors per CE, instruments JEG i càlcul de nota ordinària, de recuperació i extraordinària per alumne." }
     },
     "archivos": {
       "datos": { "label": "Dades", "desc": "Gestió dels teus arxius de Grups, Programacions i Cursos desats en local o al núvol." },
@@ -114,7 +115,7 @@
     "catalogo": {
       "familias": { "desc": "Famílies professionals i els seus cicles formatius associats, organitzats per grau." },
       "titulos": { "desc": "Normativa estatal bàsica i currículum autonòmic per a cicles formatius." },
-      "modulos": { "desc": "Blocs d'especialització i continguts associats a cada curs acadèmic." },
+      "modulos": { "desc": "Mòduls de cada títol organitzats per curs acadèmic, amb les seves hores." },
       "ra-ce": { "label": "RA → CE", "desc": "Competències específiques estructurades en RA i CE (Art. 136, RD 659/2023)." }
     },
     "normativa": {

@@ -141,7 +141,7 @@ export default function ProgresoPage() {
     estadisticas: t('tabs.calificaciones.estadisticas.desc', {defaultValue: 'Estadísticas descriptivas y visualizaciones del rendimiento del grupo.'}),
     grupal: t('tabs.calificaciones.grupal.desc', {defaultValue: 'Desempeño y estadísticas comparativas del grupo.'}),
     individual: t('tabs.calificaciones.individual.desc', {defaultValue: 'Hoja de progreso individual para tutorías.'}),
-    historico: t('tabs.calificaciones.historico.desc', {defaultValue: 'Registro de cada cambio de nota: quién, cuándo y de qué valor a qué valor.'}),
+    historico: t('tabs.calificaciones.historico.desc', {defaultValue: 'Registro de cada cambio de nota: cuándo y de qué valor a qué valor.'}),
     reclamaciones: t('tabs.calificaciones.reclamaciones.desc', {defaultValue: 'Registro de reclamaciones de nota, su motivo y su resolución.'}),
   };
 
