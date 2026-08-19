@@ -10,6 +10,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { fileManager } from "@/services/fileManager";
 import { parseAlumnadoCSV } from "@/utils/alumnado";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 interface NuevoCursoWizardProps {
   onClose: () => void;
@@ -40,6 +41,7 @@ function shiftYear(iso: string | undefined, years: number): string {
 
 export function NuevoCursoWizard({ onClose }: NuevoCursoWizardProps) {
   const { cursoData, moduleData, activeModuleId } = useAppStore();
+  const { t } = useTranslation();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
 
@@ -87,7 +89,7 @@ export function NuevoCursoWizard({ onClose }: NuevoCursoWizardProps) {
       if (clonarProgramacion) {
         const ok = await fileManager.cloneProgramacion(cursoAcademico.replace(/\s+/g, ""));
         if (!ok) {
-          toast.error("No se pudo clonar la programación.");
+          toast.error(t('toasts.nuevoCurso.errorClonar', {defaultValue: "No se pudo clonar la programación."}));
           setLoading(false);
           return;
         }
@@ -95,7 +97,7 @@ export function NuevoCursoWizard({ onClose }: NuevoCursoWizardProps) {
 
       const cursoOk = await fileManager.createNewCurso(nombreGrupo, cursoAcademico);
       if (!cursoOk) {
-        toast.error("No se pudo crear el curso nuevo.");
+        toast.error(t('toasts.nuevoCurso.errorCrearCurso', {defaultValue: "No se pudo crear el curso nuevo."}));
         setLoading(false);
         return;
       }
@@ -113,11 +115,11 @@ export function NuevoCursoWizard({ onClose }: NuevoCursoWizardProps) {
 
       store.setCursoData(nuevoCursoData);
 
-      toast.success(`Curso "${nombreGrupo}" (${cursoAcademico}) creado a partir de la programación.`);
+      toast.success(t('toasts.nuevoCurso.creado', {nombreGrupo, cursoAcademico, defaultValue: 'Curso "{{nombreGrupo}}" ({{cursoAcademico}}) creado a partir de la programación.'}));
       onClose();
     } catch (e) {
       console.error("Error en el asistente de nuevo curso", e);
-      toast.error("Ha ocurrido un error creando el nuevo curso.");
+      toast.error(t('toasts.nuevoCurso.errorGenerico', {defaultValue: "Ha ocurrido un error creando el nuevo curso."}));
     } finally {
       setLoading(false);
     }

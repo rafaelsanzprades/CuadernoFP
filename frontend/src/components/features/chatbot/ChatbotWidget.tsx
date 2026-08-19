@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { MessageSquare, X, Send, Bot, User, Loader2, Paperclip, FileText } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 type ChatMessage = {
   role: 'user' | 'model';
@@ -11,6 +12,7 @@ type ChatMessage = {
 };
 
 export const ChatbotWidget = () => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
@@ -32,7 +34,7 @@ export const ChatbotWidget = () => {
     if (!file) return;
 
     if (file.size > 5 * 1024 * 1024) {
-      toast.error('El archivo es demasiado grande. Máximo 5MB.');
+      toast.error(t('toasts.chatbot.archivoDemasiadoGrande', {defaultValue: "El archivo es demasiado grande. Máximo 5 MB."}));
       if (fileInputRef.current) fileInputRef.current.value = '';
       return;
     }
@@ -90,7 +92,7 @@ export const ChatbotWidget = () => {
         throw new Error(data.detail || data.message || 'Error desconocido');
       }
     } catch (error: any) {
-      toast.error('Error al comunicarse con el asistente: ' + error.message);
+      toast.error(t('toasts.chatbot.errorComunicacion', {message: error.message, defaultValue: 'Error al comunicarse con el asistente: {{message}}'}));
       setMessages([...newMessages, { role: 'model', parts: 'âŒ Lo siento, ha ocurrido un error al conectar con mis sistemas. Por favor, inténtalo de nuevo.' }]);
     } finally {
       setIsLoading(false);

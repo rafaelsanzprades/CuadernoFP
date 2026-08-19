@@ -8,43 +8,45 @@ import toast from "react-hot-toast";
 import { signInOneDrive, signOutOneDrive } from "@/services/onedriveService";
 import { useState } from "react";
 import { Input } from "@/components/ui/Input";
+import { useTranslation } from "react-i18next";
 
 export function OneDriveSyncPanel() {
-  const { 
+  const {
     dataSource, autoSyncDrive,
     oneDriveClientId, setOneDriveClientId,
     isOneDriveConnected, setOneDriveConnected,
     oneDriveUserEmail, setOneDriveUserEmail
   } = useAppStore();
+  const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
 
   const handleConnect = async () => {
     if (dataSource === 'demo') {
-      toast.error("No puedes sincronizar en modo DEMO.");
+      toast.error(t('toasts.oneDrive.sinDemo', {defaultValue: "No puedes sincronizar en modo DEMO."}));
       return;
     }
     if (!oneDriveClientId) {
-      toast.error("Por favor, introduce tu Client ID de Microsoft primero.");
+      toast.error(t('toasts.oneDrive.faltaClientId', {defaultValue: "Introduce tu Client ID de Microsoft primero."}));
       return;
     }
-    
-    // Inyectar client ID en Archivos por si se necesita (aunque Msal usa process.env.NEXT_PUBLIC... 
+
+    // Inyectar client ID en Archivos por si se necesita (aunque Msal usa process.env.NEXT_PUBLIC...
     // idealmente se debería inicializar con la var provista aquí si queremos dinamicidad).
-    // Para simplificar, asumiremos que si llegan aquí lo tienen configurado en su .env o modificaremos 
+    // Para simplificar, asumiremos que si llegan aquí lo tienen configurado en su .env o modificaremos
     // msalConfig dinámicamente si es necesario.
 
     setIsLoading(true);
-    toast.loading("Conectando con OneDrive...", { id: "onedrive-connect" });
-    
+    toast.loading(t('toasts.oneDrive.conectando', {defaultValue: "Conectando con OneDrive..."}), { id: "onedrive-connect" });
+
     const token = await signInOneDrive();
-    
+
     if (token) {
       setOneDriveUserEmail("Usuario de Microsoft");
       setOneDriveConnected(true);
-      toast.success("OneDrive conectado correctamente", { id: "onedrive-connect" });
+      toast.success(t('toasts.oneDrive.conectado', {defaultValue: "OneDrive conectado correctamente."}), { id: "onedrive-connect" });
     } else {
-      toast.error("Fallo al conectar con OneDrive", { id: "onedrive-connect" });
+      toast.error(t('toasts.oneDrive.errorConectar', {defaultValue: "Fallo al conectar con OneDrive."}), { id: "onedrive-connect" });
     }
     setIsLoading(false);
   };
@@ -53,7 +55,7 @@ export function OneDriveSyncPanel() {
     await signOutOneDrive();
     setOneDriveConnected(false);
     setOneDriveUserEmail(null);
-    toast("Desconectado de OneDrive", { icon: "👋" });
+    toast(t('toasts.oneDrive.desconectado', {defaultValue: "Desconectado de OneDrive"}), { icon: "👋" });
   };
 
   return (

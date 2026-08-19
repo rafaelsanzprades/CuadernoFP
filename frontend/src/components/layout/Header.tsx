@@ -180,7 +180,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
       } else if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
         // Toggle command palette (placeholder)
-        toast('Comando palette no implementado aún');
+        toast(t('toasts.header.paletaNoImplementada', {defaultValue: "Paleta de comandos no implementada todavía."}));
       }
     };
     window.addEventListener('keydown', handleKeyDown);

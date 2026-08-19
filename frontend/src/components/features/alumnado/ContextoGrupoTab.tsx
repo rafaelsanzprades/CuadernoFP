@@ -5,6 +5,7 @@ import { NarrativeField } from "@/components/ui/NarrativeField";
 import { Users, Activity, BarChart2, Sparkles } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const RASGOS_GRUPO = [
   { id: "GRUPO-HETEROG", label: "Grupo heterogéneo en edad y procedencia" },
@@ -38,6 +39,7 @@ function StatCard({ label, value, sub }: { label: string; value: string | number
 
 export function ContextoGrupoTab() {
   const { cursoData, updateCursoData, moduleData, updateModuleData } = useAppStore();
+  const { t } = useTranslation();
   const df_al = cursoData?.df_al || [];
   const [generandoIA, setGenerandoIA] = useState(false);
 
@@ -62,7 +64,7 @@ export function ContextoGrupoTab() {
 
   const handleGenerarIA = async () => {
     if (total === 0) {
-      toast.error("No hay alumnado registrado en este curso todavía.");
+      toast.error(t('toasts.contextoGrupo.sinAlumnado', {defaultValue: "No hay alumnado registrado en este curso todavía."}));
       return;
     }
     setGenerandoIA(true);
@@ -92,9 +94,9 @@ export function ContextoGrupoTab() {
         throw new Error(data.detail || data.message || "Error desconocido");
       }
       updateModuleData("textos_pd_caracteristicas_alumnado" as any, data.reply);
-      toast.success("Texto generado. Revísalo y edítalo antes de guardar.");
+      toast.success(t('toasts.contextoGrupo.textoGenerado', {defaultValue: "Texto generado. Revísalo y edítalo antes de guardar."}));
     } catch (err: any) {
-      toast.error(err.message || "Error al generar el texto con IA.");
+      toast.error(err.message || t('toasts.contextoGrupo.errorGenerarIA', {defaultValue: "Error al generar el texto con IA."}));
     } finally {
       setGenerandoIA(false);
     }

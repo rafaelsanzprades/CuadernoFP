@@ -3,8 +3,10 @@ import { Key, Bot, Save, Sparkles, CheckCircle2 } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 export function AISettingsPanel() {
+  const { t } = useTranslation();
   const [apiKey, setApiKey] = useState("");
   const [provider, setProvider] = useState("gemini");
   const [saved, setSaved] = useState(false);
@@ -20,7 +22,7 @@ export function AISettingsPanel() {
     localStorage.setItem("cdd_ai_api_key", apiKey.trim());
     localStorage.setItem("cdd_ai_provider", provider);
     setSaved(true);
-    toast.success("Configuración de IA guardada localmente");
+    toast.success(t('toasts.aiSettings.guardadaLocal', {defaultValue: "Configuración de IA guardada localmente."}));
     setTimeout(() => setSaved(false), 2000);
   };
 

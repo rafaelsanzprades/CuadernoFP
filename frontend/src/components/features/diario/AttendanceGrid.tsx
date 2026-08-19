@@ -6,11 +6,13 @@ import { format, subDays, addDays } from 'date-fns';
 import { es } from 'date-fns/locale';
 import toast from 'react-hot-toast';
 import { useVirtualizer } from '@tanstack/react-virtual';
+import { useTranslation } from 'react-i18next';
 
 type AttendanceStatus = 'presente' | 'falta' | 'retraso' | null;
 
 export const AttendanceGrid = () => {
   const { cursoData, activeModuleId, dataSource } = useAppStore();
+  const { t } = useTranslation();
   const isDemo = dataSource === 'demo';
   const [currentDate, setCurrentDate] = useState(isDemo ? new Date(new Date().getFullYear(), 4, 2, 10, 0, 0) : new Date());
   const [attendanceData, setAttendanceData] = useState<Record<string, AttendanceStatus>>({});
@@ -71,7 +73,7 @@ export const AttendanceGrid = () => {
       });
       if (!res.ok) throw new Error("Failed to save");
     } catch (err) {
-      toast.error("Error guardando asistencia");
+      toast.error(t('toasts.asistencia.errorGuardar', {defaultValue: "Error al guardar la asistencia."}));
       // Rollback
       setAttendanceData(prev => ({ ...prev, [studentId]: currentStatus }));
     }

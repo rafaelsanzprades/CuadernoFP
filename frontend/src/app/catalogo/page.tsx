@@ -521,6 +521,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
 
 function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: { globalSelection: { familia: string; tituloCodigo: string; moduloCodigo: string }; updateGlobalSelection: (updates: Partial<{ familia: string; tituloCodigo: string; moduloCodigo: string }>) => void; onSelectModulo: (familia: string, tituloCodigo: string, moduloCodigo: string) => void }) {
   const router = useRouter();
+  const { t } = useTranslation();
   const [families, setFamilies] = useState<Family[]>([]);
   const [famLoading, setFamLoading] = useState(true);
 
@@ -581,13 +582,13 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
     try {
       const ok = await fileManager.createNewProgramacion(code, name, extras);
       if (ok) {
-        toast.success(`Programación de ${name} creada correctamente.`);
+        toast.success(t('toasts.catalogo.programacionCreada', {name, defaultValue: 'Programación de {{name}} creada correctamente.'}));
         router.push("/archivos");
       } else {
-        toast.error("Error al crear la programación.");
+        toast.error(t('toasts.catalogo.errorCrearProgramacion', {defaultValue: "Error al crear la programación."}));
       }
     } catch (err) {
-      toast.error("Error al crear la programación.");
+      toast.error(t('toasts.catalogo.errorCrearProgramacion', {defaultValue: "Error al crear la programación."}));
     }
   };
 
@@ -761,6 +762,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
 
 function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelection: { familia: string; tituloCodigo: string; moduloCodigo: string }; updateGlobalSelection: (updates: Partial<{ familia: string; tituloCodigo: string; moduloCodigo: string }>) => void }) {
   const router = useRouter();
+  const { t } = useTranslation();
   const [families, setFamilies] = useState<any[]>([]);
   const [famLoading, setFamLoading] = useState(true);
   const [expandedRAs, setExpandedRAs] = useState<Set<string>>(new Set());
@@ -785,13 +787,13 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
     try {
       const ok = await fileManager.createNewProgramacion(code, name, extras);
       if (ok) {
-        toast.success(`Programación de ${name} creada correctamente.`);
+        toast.success(t('toasts.catalogo.programacionCreada', {name, defaultValue: 'Programación de {{name}} creada correctamente.'}));
         router.push("/archivos");
       } else {
-        toast.error("Error al crear la programación.");
+        toast.error(t('toasts.catalogo.errorCrearProgramacion', {defaultValue: "Error al crear la programación."}));
       }
     } catch (err) {
-      toast.error("Error al crear la programación.");
+      toast.error(t('toasts.catalogo.errorCrearProgramacion', {defaultValue: "Error al crear la programación."}));
     }
   };
 

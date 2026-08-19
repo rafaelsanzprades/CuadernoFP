@@ -208,7 +208,7 @@ export default function MagiaPage() {
         setPreviewFilename(downloadName);
       } else {
         if (fileFormat === "pdf") {
-          toast("No se pudo generar el PDF. Descargando DOCX como alternativa.", { icon: '⚠️', duration: 5000 });
+          toast(t('toasts.magia.pdfFallback', {defaultValue: "No se pudo generar el PDF. Descargando DOCX como alternativa."}), { icon: '⚠️', duration: 5000 });
         }
         const a = document.createElement('a');
         a.href = urlBlob;
@@ -220,7 +220,7 @@ export default function MagiaPage() {
       }
     } catch (err) {
       console.error(err);
-      toast.error("Error al generar el documento. Verifica la conexión con el backend.");
+      toast.error(t('toasts.magia.errorGenerarDocumento', {defaultValue: "Error al generar el documento. Comprueba la conexión con el backend."}));
     } finally {
       setDownloadingStr(null);
     }

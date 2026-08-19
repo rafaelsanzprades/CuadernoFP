@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AlertTriangle, Download, DownloadCloud, File, FileSpreadsheet, FileText, Folder, FolderOpen, Search, X } from "lucide-react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 type DocumentItem = {
   name: string;
@@ -10,6 +11,7 @@ type DocumentItem = {
 };
 
 export function TabDocumentos() {
+  const { t } = useTranslation();
   const [items, setItems] = useState<DocumentItem[]>([]);
   const [loadingDocs, setLoadingDocs] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -73,7 +75,7 @@ export function TabDocumentos() {
       setPreviewFilename(displayFilename);
     } catch (err) {
       console.error(err);
-      toast.error("Error al cargar la previsualización del documento.");
+      toast.error(t('toasts.documentos.errorPrevisualizacion', {defaultValue: "Error al cargar la previsualización del documento."}));
     } finally {
       setDownloadingStr(null);
     }

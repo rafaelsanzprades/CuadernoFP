@@ -5,6 +5,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const REFERENCIAS_FIJAS = [
   { id: "Nota_Final_FO", label: "Nota final (evaluación ordinaria)" },
@@ -13,6 +14,7 @@ const REFERENCIAS_FIJAS = [
 
 export function ReclamacionesTab() {
   const { moduleData, cursoData, updateCursoData } = useAppStore();
+  const { t } = useTranslation();
   const df_al = cursoData?.df_al || [];
   const df_act = moduleData?.df_act || [];
   const df_reclamaciones = cursoData?.df_reclamaciones || [];
@@ -36,7 +38,7 @@ export function ReclamacionesTab() {
 
   const handleCrear = () => {
     if (!alumnoId || !referencia || !motivo.trim()) {
-      toast.error("Rellena alumno, referencia y motivo.");
+      toast.error(t('toasts.reclamaciones.faltanCampos', {defaultValue: "Rellena alumno, referencia y motivo."}));
       return;
     }
     const nueva = {
@@ -50,12 +52,12 @@ export function ReclamacionesTab() {
     updateCursoData("df_reclamaciones", [...df_reclamaciones, nueva]);
     setFormOpen(false);
     setAlumnoId(""); setReferencia(""); setMotivo("");
-    toast.success("Reclamación registrada.");
+    toast.success(t('toasts.reclamaciones.registrada', {defaultValue: "Reclamación registrada."}));
   };
 
   const handleResolver = (id: string) => {
     if (!resolucionTexto.trim()) {
-      toast.error("Escribe cómo se ha resuelto.");
+      toast.error(t('toasts.reclamaciones.faltaResolucion', {defaultValue: "Escribe cómo se ha resuelto."}));
       return;
     }
     const updated = df_reclamaciones.map((r: any) =>
@@ -64,7 +66,7 @@ export function ReclamacionesTab() {
     updateCursoData("df_reclamaciones", updated);
     setResolviendoId(null);
     setResolucionTexto("");
-    toast.success("Reclamación marcada como resuelta.");
+    toast.success(t('toasts.reclamaciones.resuelta', {defaultValue: "Reclamación marcada como resuelta."}));
   };
 
   const handleGenerarJustificante = async (reclamacion: any) => {
@@ -88,7 +90,7 @@ export function ReclamacionesTab() {
       window.URL.revokeObjectURL(blobUrl);
     } catch (err) {
       console.error(err);
-      toast.error("Error al generar el justificante.");
+      toast.error(t('toasts.reclamaciones.errorJustificante', {defaultValue: "Error al generar el justificante."}));
     } finally {
       setGenerando(null);
     }

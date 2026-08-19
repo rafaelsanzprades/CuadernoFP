@@ -77,9 +77,9 @@ export default function MatricesPage() {
     setSaving(true);
     const ok = await saveModuleData();
     if (ok) {
-      toast.success("Progrmación guardada correctamente");
+      toast.success(t('toasts.curriculo.programacionGuardada', {defaultValue: "Programación guardada correctamente."}));
     } else {
-      toast.error("Error al guardar los datos");
+      toast.error(t('toasts.curriculo.errorGuardar', {defaultValue: "Error al guardar los datos."}));
     }
     setSaving(false);
   };
@@ -104,9 +104,9 @@ export default function MatricesPage() {
     // Save
     const ok = await saveModuleData();
     if (ok) {
-      toast.success(`Propuesta de ${proposal.author} aplicada y guardada.`);
+      toast.success(t('toasts.curriculo.propuestaAplicada', {author: proposal.author, defaultValue: "Propuesta de {{author}} aplicada y guardada."}));
     } else {
-      toast.error("Error al guardar tras aplicar la propuesta.");
+      toast.error(t('toasts.curriculo.errorGuardarPropuesta', {defaultValue: "Error al guardar tras aplicar la propuesta."}));
     }
   };
 
@@ -238,7 +238,7 @@ export default function MatricesPage() {
     });
 
     updateDataFrame("df_sesiones", newSessions);
-    toast.success("¡Plan de sesiones autocompletado!");
+    toast.success(t('toasts.curriculo.planAutocompletado', {defaultValue: "Plan de sesiones autocompletado."}));
   };
 
   const handleAddTarea = () => {

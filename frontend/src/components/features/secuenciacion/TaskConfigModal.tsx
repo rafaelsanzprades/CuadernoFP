@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { useAppStore } from "@/store/useAppStore";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 interface TaskConfigModalProps {
   task: any;
@@ -12,6 +13,7 @@ interface TaskConfigModalProps {
 }
 
 export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps) {
+  const { t } = useTranslation();
   const [formData, setFormData] = React.useState({
     Briefing: task.Briefing || "",
     Pasos: task.Pasos || "",
@@ -54,7 +56,7 @@ export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps)
       window.URL.revokeObjectURL(urlBlob);
     } catch (err) {
       console.error(err);
-      toast.error("Error al exportar la Tarea Competencial.");
+      toast.error(t('toasts.taskConfig.errorExportar', {defaultValue: "Error al exportar la tarea competencial."}));
     } finally {
       setIsExporting(false);
     }

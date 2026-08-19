@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/Input";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { fileManager } from "@/services/fileManager";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 interface WelcomeWizardProps {
   onComplete: () => void;
@@ -13,28 +14,29 @@ interface WelcomeWizardProps {
 }
 
 export function WelcomeWizard({ onComplete, fetchModules }: WelcomeWizardProps) {
+  const { t } = useTranslation();
   const [step, setStep] = useState<"CHOICE" | "CREATE_FORM" | "LOADING">("CHOICE");
   const [newPdName, setNewPdName] = useState("");
   const [newCursoName, setNewCursoName] = useState("");
 
   const handleLoadDemo = async () => {
     setStep("LOADING");
-    const toastId = toast.loading("Inyectando Archivos de demostración...");
+    const toastId = toast.loading(t('toasts.bienvenida.cargandoDemo', {defaultValue: "Cargando archivos de demostración..."}));
     try {
       fileManager.loadDemoData();
       await fetchModules();
-      toast.success("Archivos de demostración cargado!", { id: toastId });
+      toast.success(t('toasts.bienvenida.demoCargados', {defaultValue: "Archivos de demostración cargados."}), { id: toastId });
       onComplete();
     } catch (error: unknown) {
-      const message = error instanceof Error ? error.message : "Error desconocido";
-      toast.error(`Error al cargar demo: ${message}`, { id: toastId });
+      const message = error instanceof Error ? error.message : t('toasts.bienvenida.errorDesconocido', {defaultValue: "Error desconocido."});
+      toast.error(t('toasts.bienvenida.errorCargarDemo', {message, defaultValue: 'Error al cargar demo: {{message}}'}), { id: toastId });
       setStep("CHOICE");
     }
   };
 
   const handleCreateNew = () => {
     if (!newPdName || !newCursoName) {
-      toast.error("Por favor, rellena ambos campos.");
+      toast.error(t('toasts.bienvenida.faltanCampos', {defaultValue: "Rellena ambos campos."}));
       return;
     }
 
@@ -44,7 +46,7 @@ export function WelcomeWizard({ onComplete, fetchModules }: WelcomeWizardProps) 
     // No backend write -- the app is local-first, the backend isn't the source of
     // truth for a session's working data (see CLAUDE.md).
     fileManager.createBlankLocalData(newPdName, newCursoName);
-    toast.success("¡Archivos creado con éxito!");
+    toast.success(t('toasts.bienvenida.archivosCreados', {defaultValue: "Archivos creados correctamente."}));
     onComplete();
   };
 

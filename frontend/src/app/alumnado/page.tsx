@@ -170,14 +170,14 @@ export default function AlumnadoPage() {
         } else {
           updateCursoData("df_al", alumnos);
           if (importedCount > 0) {
-            toast.success(`Se han importado ${importedCount} estudiantes.`);
+            toast.success(t('toasts.alumnado.importados', {count: importedCount, defaultValue: "Se han importado {{count}} estudiantes."}));
           } else {
-            toast.error("No se pudo importar ningún estudiante válido.");
+            toast.error(t('toasts.alumnado.errorImportarNinguno', {defaultValue: "No se pudo importar ningún estudiante válido."}));
           }
         }
       } catch (err) {
         console.error("Error parsing CSV:", err);
-        toast.error("Hubo un problema al leer el archivo CSV.");
+        toast.error(t('toasts.alumnado.errorLeerCsv', {defaultValue: "Hubo un problema al leer el archivo CSV."}));
       }
 
       // Reset input

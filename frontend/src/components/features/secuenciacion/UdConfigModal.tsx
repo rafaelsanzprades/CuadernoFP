@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { useAppStore } from "@/store/useAppStore";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 interface UdConfigModalProps {
   ud: any;
@@ -12,6 +13,7 @@ interface UdConfigModalProps {
 }
 
 export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
+  const { t } = useTranslation();
   const [formData, setFormData] = React.useState({
     Intencion_Educativa: ud.Intencion_Educativa || "",
     Agrupamientos: ud.Agrupamientos || "Gran grupo, Pequeño grupo, Individual",
@@ -53,7 +55,7 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
       window.URL.revokeObjectURL(urlBlob);
     } catch (err) {
       console.error(err);
-      toast.error("Error al exportar la Unidad didáctica.");
+      toast.error(t('toasts.udConfig.errorExportar', {defaultValue: "Error al exportar la unidad didáctica."}));
     } finally {
       setIsExporting(false);
     }

@@ -523,7 +523,7 @@ export default function InicioPage() {
         onClose={() => setAiModalOpen(false)}
         onSuccess={(data) => {
           console.log("Datos recibidos de la IA:", data);
-          toast.success("Estructura guardada.");
+          toast.success(t('toasts.inicio.estructuraGuardada', {defaultValue: "Estructura guardada."}));
         }}
       />
       {nuevoCursoWizardOpen && (

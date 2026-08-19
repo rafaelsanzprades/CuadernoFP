@@ -11,9 +11,11 @@ import { calcularNotas, getSigadInfo, DEFAULT_CONFIG_REDONDEO } from "@/utils/ca
 import { Button } from "@/components/ui/Button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 export function DetalleAlumnadoTab() {
   const { activeModuleId, moduleData, cursoData, updateCursoData } = useAppStore();
+  const { t } = useTranslation();
   const { planningLedger } = useDynamicPlanning();
 
   const [activeTabByStudent, setActiveTabByStudent] = useState<Record<string, string>>({});
@@ -127,7 +129,7 @@ export function DetalleAlumnadoTab() {
       window.URL.revokeObjectURL(blobUrl);
     } catch (err) {
       console.error(err);
-      toast.error("Error al generar el informe de refuerzo.");
+      toast.error(t('toasts.detalleAlumnado.errorInformeRefuerzo', {defaultValue: "Error al generar el informe de refuerzo."}));
     } finally {
       setGenerandoInforme(null);
     }

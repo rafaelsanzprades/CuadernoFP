@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { useAppStore } from "@/store/useAppStore";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 interface DocumentItem {
   name: string;
@@ -16,6 +17,7 @@ interface DocumentItem {
 
 export function TabAutores({ globalSelection }: { globalSelection: any }) {
   const { moduleData, updateDataFrame, updateInfoModulo, updateModuleData, saveModuleData } = useAppStore();
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [proposals, setProposals] = useState<DocumentItem[]>([]);
   const [selectedFile, setSelectedFile] = useState<DocumentItem | null>(null);
@@ -58,7 +60,7 @@ export function TabAutores({ globalSelection }: { globalSelection: any }) {
         })
         .catch((err) => {
           console.error("Error parsing cdda:", err);
-          toast.error("El archivo seleccionado no es un JSON válido o está corrupto.");
+          toast.error(t('toasts.autores.jsonInvalido', {defaultValue: "El archivo seleccionado no es un JSON válido o está corrupto."}));
           setPreviewData(null);
         })
         .finally(() => setLoading(false));
@@ -71,7 +73,7 @@ export function TabAutores({ globalSelection }: { globalSelection: any }) {
     if (!previewData) return;
     
     if (!moduleData) {
-      toast.error("⚠️ No tienes ninguna programación activa. Por favor, abre tu programación desde la pestaña 'Archivos' antes de incorporar una propuesta.");
+      toast.error(t('toasts.autores.sinProgramacionActiva', {defaultValue: "No tienes ninguna programación activa. Abre tu programación desde la pestaña Archivos antes de incorporar una propuesta."}));
       return;
     }
 
@@ -96,14 +98,14 @@ export function TabAutores({ globalSelection }: { globalSelection: any }) {
       
       const ok = await saveModuleData();
       if (ok) {
-        toast.success("¡Propuesta incorporada con éxito!");
+        toast.success(t('toasts.autores.propuestaIncorporada', {defaultValue: "Propuesta incorporada correctamente."}));
         setSelectedFile(null);
       } else {
-        toast.error("Hubo un problema al guardar la programación.");
+        toast.error(t('toasts.autores.errorGuardar', {defaultValue: "Hubo un problema al guardar la programación."}));
       }
     } catch (e) {
       console.error(e);
-      toast.error("Error al inyectar los datos de la propuesta.");
+      toast.error(t('toasts.autores.errorInyectar', {defaultValue: "Error al incorporar los datos de la propuesta."}));
     } finally {
       setIsApplying(false);
     }

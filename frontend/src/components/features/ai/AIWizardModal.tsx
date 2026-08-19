@@ -3,6 +3,7 @@ import React, { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { Bot, FileText, UploadCloud, X, Loader2, AlertCircle, Sparkles } from "lucide-react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 interface AIWizardModalProps {
   isOpen: boolean;
@@ -11,6 +12,7 @@ interface AIWizardModalProps {
 }
 
 export function AIWizardModal({ isOpen, onClose, onSuccess }: AIWizardModalProps) {
+  const { t } = useTranslation();
   const [isProcessing, setIsProcessing] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -52,7 +54,7 @@ export function AIWizardModal({ isOpen, onClose, onSuccess }: AIWizardModalProps
         throw new Error(json.detail || "Error al procesar el documento con IA");
       }
 
-      toast.success("¡Documento procesado mágicamente!");
+      toast.success(t('toasts.aiWizard.documentoProcesado', {defaultValue: "Documento procesado correctamente."}));
       onSuccess(json.data);
       onClose();
     } catch (error: any) {

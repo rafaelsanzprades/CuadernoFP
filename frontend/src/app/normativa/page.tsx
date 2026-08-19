@@ -184,7 +184,7 @@ export default function DocumentosPage() {
       setPreviewFilename(displayFilename);
     } catch (err) {
       console.error(err);
-      toast.error("Error al cargar la previsualización del documento. Verifica la conexión con el backend.");
+      toast.error(t('toasts.normativa.errorPrevisualizacion', {defaultValue: "Error al cargar la previsualización del documento. Verifica la conexión con el backend."}));
     } finally {
       setDownloadingStr(null);
     }
@@ -210,7 +210,7 @@ export default function DocumentosPage() {
       setPreviewFilename(filename);
     } catch (err) {
       console.error(err);
-      toast.error("Error al generar el PDF. Asegúrate de que el backend está configurado correctamente.");
+      toast.error(t('toasts.normativa.errorGenerarPdf', {defaultValue: "Error al generar el PDF. Comprueba que el backend está configurado correctamente."}));
     } finally {
       setDownloadingStr(null);
     }
