@@ -302,7 +302,7 @@ export default function AyudaPage() {
                         ].map(page => (
                           <li key={page.href}>
                             <Link href={page.href} className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                              <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> {page.label}
+                              <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> {t('nav.' + page.href.replace('/', ''), {defaultValue: page.label})}
                             </Link>
                             <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
                               {page.tabs.map(tab => (
@@ -315,10 +315,16 @@ export default function AyudaPage() {
                     </div>
 
                     {/* Columnas dinámicas: una por cada grupo real de navigation.ts */}
-                    {navGroups.map(group => (
+                    {navGroups.map(group => {
+                      const baseTitle = group.title.replace(/\s*\[.*\]$/, '');
+                      const translatedTitle = baseTitle === "Grupo" ? t('navGroups.grupo', {defaultValue: 'Grupo'})
+                        : baseTitle === "Programación" ? t('navGroups.programacion', {defaultValue: 'Programación'})
+                        : baseTitle === "Curso" ? t('navGroups.curso', {defaultValue: 'Curso'})
+                        : baseTitle;
+                      return (
                       <div key={group.title} className="space-y-6">
                         <h3 className="font-extrabold text-subheading border-b-2 border-accent pb-2 text-foreground">
-                          {group.title.replace(/\s*\[.*\]$/, '')}
+                          {translatedTitle}
                         </h3>
                         <ul className="space-y-4 text-body">
                           {group.items.map(item => {
@@ -327,7 +333,7 @@ export default function AyudaPage() {
                             return (
                               <li key={item.href}>
                                 <Link href={basePath} className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                                  <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> {item.label}
+                                  <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> {t('nav.' + basePath.replace('/', ''), {defaultValue: item.label})}
                                 </Link>
                                 {tabs.length > 0 && (
                                   <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
@@ -341,7 +347,8 @@ export default function AyudaPage() {
                           })}
                         </ul>
                       </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </section>
               </div>

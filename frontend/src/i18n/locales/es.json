@@ -88,7 +88,29 @@
     "general": "General",
     "grupo": "Grupo",
     "programacion": "Programación",
-    "curso": "Curso"
+    "curso": "Curso",
+    "grupo_desc": "Opciones generales de la aplicación y recursos oficiales.",
+    "programacion_desc": "Área de diseño y configuración didáctica. Configura el módulo, enlaza las matrices de evaluación, define los instrumentos y secuencia las tareas de aula.",
+    "curso_desc": "Herramientas de seguimiento para el aula viva. Establece el calendario, administra el listado de alumnado, anota el progreso diario y evalúa."
+  },
+  "navDesc": {
+    "inicio": "Panel principal, verificación de datos, contribuciones de la comunidad y calidad EQAVET.",
+    "ayuda": "FAQ, acrónimos, mapa de la aplicación y documentos normativos.",
+    "equivalencias": "Correspondencia entre APP y los apartados de PD-, PD= y PD+.",
+    "magia": "Generación de la programación en PDF por comunidad, guía con IA y documentos del curso.",
+    "legal": "Aviso legal, privacidad, cookies y accesibilidad.",
+    "agenda": "Resumen diario, planificación mensual y previsión de RA y UD pendientes.",
+    "archivos": "Gestión de archivos, sincronización en la nube, seguridad y configuración de la IA.",
+    "normativa": "Normativa autonómica, legislación, bibliografía y estándares INCUAL.",
+    "catalogo": "Familias, títulos, módulos y currículos (RA y CE).",
+    "contexto": "Identificación, contexto del entorno, FP dual y criterios de evaluación y calificación.",
+    "curriculo": "Contribución de los RA a los objetivos, ponderación RA-CE, unidades didácticas y tareas competenciales.",
+    "metodologia": "Metodología, recursos, plan de contingencia y elementos transversales.",
+    "instrumentos": "Definición y pesos de las herramientas de evaluación.",
+    "calendario": "Horario, trimestres, festivos, periodo FEOE y actividades extraescolares.",
+    "alumnado": "Fichas personales, plano de aula y tutoría con alertas de abandono.",
+    "seguimiento": "Diario de clases, asistencia, progreso de RA y UD y entrada de notas.",
+    "calificaciones": "Cuaderno de notas, estadísticas y comparativa grupal e individual."
   },
   "sidebar": {
     "en_obras": "En obras",

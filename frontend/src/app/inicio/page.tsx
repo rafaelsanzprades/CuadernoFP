@@ -608,7 +608,7 @@ export default function InicioPage() {
                     </div>
                     {item.description && (
                       <p className="text-body text-muted mt-auto">
-                        {item.description}
+                        {t('navDesc.' + basePath.replace('/', ''), { defaultValue: item.description })}
                       </p>
                     )}
                   </Card>
@@ -625,6 +625,10 @@ export default function InicioPage() {
                   : baseTitle === "Programación" ? t('navGroups.programacion', { defaultValue: 'Programación' })
                   : baseTitle === "Curso" ? t('navGroups.curso', { defaultValue: 'Curso' })
                   : baseTitle;
+                const translatedSectionDesc = baseTitle === "Grupo" ? t('navGroups.grupo_desc', { defaultValue: group.sectionDescription })
+                  : baseTitle === "Programación" ? t('navGroups.programacion_desc', { defaultValue: group.sectionDescription })
+                  : baseTitle === "Curso" ? t('navGroups.curso_desc', { defaultValue: group.sectionDescription })
+                  : group.sectionDescription;
                 return (
                 <MotionWrapper key={group.title} delay={groupIdx * 0.1}>
                   <div className="space-y-3">
@@ -634,7 +638,7 @@ export default function InicioPage() {
                     {group.sectionDescription && (
                       <div className="pb-4 border-b border-[var(--glass-border)]">
                         <p className="text-muted text-body">
-                          {group.sectionDescription}
+                          {translatedSectionDesc}
                         </p>
                       </div>
                     )}
@@ -656,7 +660,7 @@ export default function InicioPage() {
                             </div>
                             {item.description && (
                               <p className="text-body text-muted mt-auto">
-                                {item.description}
+                                {t('navDesc.' + itemBasePath.replace('/', ''), { defaultValue: item.description })}
                               </p>
                             )}
                           </Card>
@@ -683,7 +687,7 @@ export default function InicioPage() {
                     </h3>
                   </div>
                   <p className="text-body text-muted mt-auto">
-                    {legalPage.description}
+                    {t('navDesc.legal', { defaultValue: legalPage.description })}
                   </p>
                 </Card>
               </Link>
