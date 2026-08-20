@@ -208,7 +208,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
               {/* Search */}
               <input
                 type="text"
-                placeholder="Buscar por código o nombre del módulo..."
+                placeholder={t('placeholders.archivos.buscarModulo', {defaultValue: 'Buscar por código o nombre del módulo...'})}
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 disabled={!viewDegreeId}
@@ -275,7 +275,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
                         value={cursoYear} 
                         onChange={e => setCursoYear(e.target.value)} 
                         className="w-full bg-background border border-[var(--glass-border)] rounded-md px-3 py-1.5 text-body" 
-                        placeholder="ej: 2025-26" 
+                        placeholder={t('placeholders.archivos.ejCursoAcademico', {defaultValue: 'ej: 2025-26'})}
                       />
                     </div>
                     <div className="flex-1">
@@ -285,7 +285,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
                         value={cursoName} 
                         onChange={e => setCursoName(e.target.value)} 
                         className="w-full bg-background border border-[var(--glass-border)] rounded-md px-3 py-1.5 text-body" 
-                        placeholder="ej: 1A-GM" 
+                        placeholder={t('placeholders.archivos.ejNombreGrupo', {defaultValue: 'ej: 1A-GM'})} 
                       />
                     </div>
                   </div>

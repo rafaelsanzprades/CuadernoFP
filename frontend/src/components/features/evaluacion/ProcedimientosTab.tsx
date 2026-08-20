@@ -4,6 +4,7 @@ import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { NarrativeField } from "@/components/ui/NarrativeField";
 import { useAppStore } from "@/store/useAppStore";
 import { Scale, MessageCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const MODELO_RECUPERACION = [
   { id: "R1", label: "R1 — Recuperación tras 1ª evaluación" },
@@ -14,6 +15,7 @@ const MODELO_RECUPERACION = [
 ];
 
 export function ProcedimientosTab() {
+  const { t } = useTranslation();
   const { moduleData, updateModuleData } = useAppStore();
   const config_contexto = moduleData?.config_contexto || {};
 
@@ -70,7 +72,7 @@ export function ProcedimientosTab() {
           <textarea
             value={config_contexto.texto_modelo_recuperacion || ""}
             onChange={e => handleChange("texto_modelo_recuperacion", e.target.value)}
-            placeholder="Describe cómo aplicas estas recuperaciones: qué cubren, cómo se pondera cada una..."
+            placeholder={t('placeholders.evaluacion.textoModeloRecuperacion', {defaultValue: 'Describe cómo aplicas estas recuperaciones: qué cubren, cómo se pondera cada una...'})}
             className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
           />
         </div>
@@ -82,23 +84,23 @@ export function ProcedimientosTab() {
           <div className="space-y-6">
             <NarrativeField
               id="textos_pd_eval_informacion"
-              title="Información al alumnado y familias"
-              description="Cómo se dan a conocer los criterios de evaluación y calificación."
+              title={t('campos.evaluacion.informacionTitulo', {defaultValue: 'Información al alumnado y familias'})}
+              description={t('campos.evaluacion.informacionDesc', {defaultValue: 'Cómo se dan a conocer los criterios de evaluación y calificación.'})}
             />
             <NarrativeField
               id="textos_pd_eval_perdida_continua"
-              title="Pérdida de evaluación continua"
-              description="Criterios de asistencia y procedimiento cuando se pierde el derecho."
+              title={t('campos.evaluacion.perdidaContinuaTitulo', {defaultValue: 'Pérdida de evaluación continua'})}
+              description={t('campos.evaluacion.perdidaContinuaDesc', {defaultValue: 'Criterios de asistencia y procedimiento cuando se pierde el derecho.'})}
             />
             <NarrativeField
               id="textos_pd_eval_recuperacion"
-              title="Procedimiento de recuperación"
-              description="Cómo se recuperan las partes no superadas y formato de las pruebas extraordinarias."
+              title={t('campos.evaluacion.recuperacionTitulo', {defaultValue: 'Procedimiento de recuperación'})}
+              description={t('campos.evaluacion.recuperacionDesc', {defaultValue: 'Cómo se recuperan las partes no superadas y formato de las pruebas extraordinarias.'})}
             />
             <NarrativeField
               id="textos_pd_eval_pendientes"
-              title="Plan de recuperación de módulos pendientes"
-              description="Organización para alumnado de 2º curso con este módulo pendiente."
+              title={t('campos.evaluacion.pendientesTitulo', {defaultValue: 'Plan de recuperación de módulos pendientes'})}
+              description={t('campos.evaluacion.pendientesDesc', {defaultValue: 'Organización para alumnado de 2º curso con este módulo pendiente.'})}
             />
           </div>
         </div>
@@ -109,7 +111,7 @@ export function ProcedimientosTab() {
           <textarea
             value={config_contexto.texto_criterios_calificacion || ""}
             onChange={e => handleChange("texto_criterios_calificacion", e.target.value)}
-            placeholder="Criterios de calificación y redondeo del módulo."
+            placeholder={t('placeholders.evaluacion.textoCriteriosCalificacion', {defaultValue: 'Criterios de calificación y redondeo del módulo.'})}
             className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
           />
         </div>

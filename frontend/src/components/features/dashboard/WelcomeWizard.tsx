@@ -108,7 +108,7 @@ export function WelcomeWizard({ onComplete, fetchModules }: WelcomeWizardProps) 
                 <Input
                   value={newPdName}
                   onChange={(e) => setNewPdName(e.target.value)}
-                  placeholder="Ej: ELE203, 0237-ictve"
+                  placeholder={t('placeholders.dashboard.ejModulo', {defaultValue: 'Ej: ELE203, 0237-ictve'})}
                 />
                 <p className="text-caption text-muted mt-1">Se creará un archivo vacío con este identificador.</p>
               </div>
@@ -117,7 +117,7 @@ export function WelcomeWizard({ onComplete, fetchModules }: WelcomeWizardProps) 
                 <Input
                   value={newCursoName}
                   onChange={(e) => setNewCursoName(e.target.value)}
-                  placeholder="Ej: 2025-26"
+                  placeholder={t('placeholders.archivos.ejCursoAcademico', {defaultValue: 'ej: 2025-26'})}
                 />
                 <p className="text-caption text-muted mt-1">El curso se asociará a este año académico.</p>
               </div>

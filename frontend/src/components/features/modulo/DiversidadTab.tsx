@@ -126,7 +126,7 @@ export function DiversidadTab() {
             <textarea
               value={moduleData?.texto_inclusion_libre || ""}
               onChange={e => updateModuleData("texto_inclusion_libre", e.target.value)}
-              placeholder="Añade aquí medidas específicas, adaptaciones de acceso al aula o justificaciones normativas extra..."
+              placeholder={t('placeholders.modulo.medidasDiversidadExtra', {defaultValue: 'Añade aquí medidas específicas, adaptaciones de acceso al aula o justificaciones normativas extra...'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
@@ -172,7 +172,7 @@ export function DiversidadTab() {
             <textarea
               value={config_contexto["F1_diversidad"] || ""}
               onChange={e => handleChange("F1_diversidad", e.target.value)}
-              placeholder="Medidas de inclusión y atención a las diferencias individuales..."
+              placeholder={t('placeholders.modulo.medidasInclusion', {defaultValue: 'Medidas de inclusión y atención a las diferencias individuales...'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
@@ -270,7 +270,7 @@ export function DiversidadTab() {
                 <button 
                   onClick={() => removeAcneae(student.id)}
                   className="absolute top-4 right-4 text-muted hover:text-danger opacity-0 group-hover:opacity-100 transition-opacity"
-                  title="Eliminar registro"
+                  title={t('tooltips.modulo.eliminarRegistro', {defaultValue: 'Eliminar registro'})}
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -282,7 +282,7 @@ export function DiversidadTab() {
                       type="text" 
                       value={student.nombre}
                       onChange={(e) => updateAcneae(student.id, "nombre", e.target.value)}
-                      placeholder="Ej. Alumno A"
+                      placeholder={t('placeholders.modulo.ejAlumno', {defaultValue: 'Ej. Alumno A'})}
                       className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-2 text-body text-foreground focus:border-info focus:outline-none"
                     />
                   </div>
@@ -292,7 +292,7 @@ export function DiversidadTab() {
                       type="text" 
                       value={student.tipoNecesidad}
                       onChange={(e) => updateAcneae(student.id, "tipoNecesidad", e.target.value)}
-                      placeholder="Ej. Dislexia, TEA, Altas capacidades..."
+                      placeholder={t('placeholders.modulo.ejDificultad', {defaultValue: 'Ej. Dislexia, TEA, altas capacidades...'})}
                       className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-2 text-body text-foreground focus:border-info focus:outline-none"
                     />
                   </div>

@@ -161,7 +161,7 @@ export const ChatbotWidget = () => {
                         {msg.parts.map((p: any, i: number) => {
                           if (typeof p === 'string') return <span key={i}>{p}</span>;
                           if (p.inline_data) return (
-                            <div key={i} className="flex items-center gap-2 bg-black/20 p-2 rounded-lg text-caption" title="Archivo adjunto enviado a la IA">
+                            <div key={i} className="flex items-center gap-2 bg-black/20 p-2 rounded-lg text-caption" title={t('tooltips.chatbot.archivoAdjuntoEnviado', {defaultValue: 'Archivo adjunto enviado a la IA'})}>
                               <FileText size={14} className="text-blue-400"/>
                               <span>Adjunto enviado</span>
                             </div>
@@ -214,7 +214,7 @@ export const ChatbotWidget = () => {
                 <button 
                   onClick={() => fileInputRef.current?.click()}
                   className="p-3 rounded-xl bg-[var(--background)] border border-[var(--glass-border)] text-[var(--muted-foreground)] hover:text-emerald-400 transition-colors h-[44px] flex items-center justify-center"
-                  title="Adjuntar PDF o imagen"
+                  title={t('tooltips.chatbot.adjuntarPdfImagen', {defaultValue: 'Adjuntar PDF o imagen'})}
                 >
                   <Paperclip size={18} />
                 </button>
@@ -223,7 +223,7 @@ export const ChatbotWidget = () => {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    placeholder="Escribe tu mensaje..."
+                    placeholder={t('placeholders.chatbot.escribeMensaje', {defaultValue: 'Escribe tu mensaje...'})}
                     className="w-full bg-[var(--background)] border border-[var(--glass-border)] rounded-xl py-3 pl-4 pr-12 text-body text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] focus:outline-none focus:ring-1 focus:ring-emerald-500/50 resize-none max-h-32"
                     rows={1}
                     style={{ minHeight: '44px' }}

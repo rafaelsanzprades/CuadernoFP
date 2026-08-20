@@ -4,8 +4,10 @@ import React from "react";
 import { useAppStore } from "@/store/useAppStore";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { Card } from "@/components/ui/Card";
+import { useTranslation } from "react-i18next";
 
 export function PlanificacionMensualTab() {
+  const { t } = useTranslation();
   const { cursoData, moduleData } = useAppStore();
   const { df_sgmt } = useDynamicPlanning();
 
@@ -62,11 +64,11 @@ export function PlanificacionMensualTab() {
               ))}
             </tr>
             <tr className="border-b border-[var(--glass-border)] text-caption text-muted bg-foreground/5">
-              <th className="p-2 w-[50px] max-w-[50px] sticky left-0 bg-[#111827] z-10 border-r border-[var(--glass-border)] text-center" title="Trimestre en el que termina la UD">Tri.</th>
+              <th className="p-2 w-[50px] max-w-[50px] sticky left-0 bg-[#111827] z-10 border-r border-[var(--glass-border)] text-center" title={t('tooltips.dashboard.trimestreFinUd', {defaultValue: 'Trimestre en el que termina la UD'})}>Tri.</th>
               <th className="p-2 w-[440px] max-w-[440px] sticky left-[50px] bg-[#111827] z-10 border-r border-[var(--glass-border)] text-left font-bold text-foreground">UD. Unidad didáctica</th>
               <th className="p-2 w-[64px] max-w-[64px] sticky left-[490px] bg-[#111827] z-10 text-center text-info">Prv</th>
               <th className="p-2 w-[64px] max-w-[64px] sticky left-[554px] bg-[#111827] z-10 text-center text-[#14a085]/70">Imp</th>
-              <th className="p-2 w-[90px] max-w-[90px] truncate overflow-hidden sticky left-[618px] bg-[#111827] z-10 text-center text-warning border-r border-[var(--glass-border)]" title="% Impartido / Previsto">%Imp/Prv</th>
+              <th className="p-2 w-[90px] max-w-[90px] truncate overflow-hidden sticky left-[618px] bg-[#111827] z-10 text-center text-warning border-r border-[var(--glass-border)]" title={t('tooltips.dashboard.pctImpartidoPrevisto', {defaultValue: '% impartido / previsto'})}>%Imp/Prv</th>
               {meses_display.map((m) => (
                 <React.Fragment key={m}>
                   <th className="p-1 w-[40px] text-center text-info">Prv</th>

@@ -1,8 +1,10 @@
 "use client";
 import { Map , Info } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
+import { useTranslation } from "react-i18next";
 
 export function ContextoFEOETab() {
+  const { t } = useTranslation();
   const { moduleData, updateModuleData } = useAppStore();
   const config_contexto = moduleData?.config_contexto || {};
 
@@ -24,7 +26,7 @@ export function ContextoFEOETab() {
             <textarea
               value={config_contexto["A1_justificacion"] || ""}
               onChange={e => handleChange("A1_justificacion", e.target.value)}
-              placeholder="Indicar base normativa, Leyes de Educación y Reales Decretos aplicables al título..."
+              placeholder={t('placeholders.modulo.a1Justificacion', {defaultValue: 'Indicar base normativa, leyes de educación y reales decretos aplicables al título...'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
@@ -34,7 +36,7 @@ export function ContextoFEOETab() {
             <textarea
               value={config_contexto["A2_contextualizacion"] || ""}
               onChange={e => handleChange("A2_contextualizacion", e.target.value)}
-              placeholder="Perfil profesional del título, Archivos socioeconómico y características generales del centro..."
+              placeholder={t('placeholders.modulo.a2Contextualizacion', {defaultValue: 'Perfil profesional del título, archivos socioeconómico y características generales del centro...'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
@@ -44,7 +46,7 @@ export function ContextoFEOETab() {
             <textarea
               value={config_contexto["B3_vinculacion_empresa"] || ""}
               onChange={e => handleChange("B3_vinculacion_empresa", e.target.value)}
-              placeholder="Orientaciones sobre las actividades a realizar en la empresa (FEOE)..."
+              placeholder={t('placeholders.modulo.b3VinculacionEmpresa', {defaultValue: 'Orientaciones sobre las actividades a realizar en la empresa (FEOE)...'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>

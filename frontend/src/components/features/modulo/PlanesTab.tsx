@@ -2,6 +2,7 @@
 import { Building2 } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { NarrativeField } from "@/components/ui/NarrativeField";
+import { useTranslation } from "react-i18next";
 
 const FEOE_CATALOGO = [
   {
@@ -22,6 +23,7 @@ const FEOE_CATALOGO = [
 ];
 
 export function PlanesTab() {
+  const { t } = useTranslation();
   const { moduleData, updateModuleData } = useAppStore();
   const config_contexto = moduleData?.config_contexto || {};
 
@@ -76,13 +78,13 @@ export function PlanesTab() {
 
           <NarrativeField
             id="textos_pd_feoe_organizacion"
-            title="Organización y modalidad de FEOE"
-            description="Detalla cómo se organiza el alumnado (FEOE general, intensivo) y qué alternativas hay para el alumnado sin FEOE."
+            title={t('campos.modulo.feoeOrganizacionTitulo', {defaultValue: 'Organización y modalidad de FEOE'})}
+            description={t('campos.modulo.feoeOrganizacionDesc', {defaultValue: 'Detalla cómo se organiza el alumnado (FEOE general, intensivo) y qué alternativas hay para el alumnado sin FEOE.'})}
           />
           <NarrativeField
             id="textos_pd_feoe_seguimiento"
-            title="Seguimiento de FEOE"
-            description="Procedimiento para el seguimiento en la empresa y comunicación con tutores duales."
+            title={t('campos.modulo.feoeSeguimientoTitulo', {defaultValue: 'Seguimiento de FEOE'})}
+            description={t('campos.modulo.feoeSeguimientoDesc', {defaultValue: 'Procedimiento para el seguimiento en la empresa y comunicación con tutores duales.'})}
           />
 
           <div>
@@ -91,7 +93,7 @@ export function PlanesTab() {
             <textarea
               value={config_contexto.texto_feoe || ""}
               onChange={e => handleChange("texto_feoe", e.target.value)}
-              placeholder="Texto sobre la formación en empresa..."
+              placeholder={t('placeholders.modulo.textoFormacionEmpresa', {defaultValue: 'Texto sobre la formación en empresa...'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>

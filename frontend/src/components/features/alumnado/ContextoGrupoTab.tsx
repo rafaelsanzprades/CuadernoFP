@@ -168,8 +168,8 @@ export function ContextoGrupoTab() {
         <div className="relative">
           <NarrativeField
             id="textos_pd_caracteristicas_alumnado"
-            title="Características del alumnado"
-            description="Procedencia geográfica principal, franja de edad, nivel competencial inicial, expectativas e implicación, etc."
+            title={t('campos.alumnado.caracteristicasTitulo', {defaultValue: 'Características del alumnado'})}
+            description={t('campos.alumnado.caracteristicasDesc', {defaultValue: 'Procedencia geográfica principal, franja de edad, nivel competencial inicial, expectativas e implicación, etc.'})}
           />
           <button
             type="button"

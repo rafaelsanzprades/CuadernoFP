@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/Card";
 import { BookOpen, Search } from "lucide-react";
 import { Input } from "@/components/ui/Input";
 import { acronymsData, CATEGORY_LABELS, AcronymCategory } from "@/data/acronymsData";
+import { useTranslation } from "react-i18next";
 
 // El campo `name` de acronymsData sigue la convención "SIGLA. Término
 // completo" cuando existe una sigla real (p.ej. "ABP. Aprendizaje Basado en
@@ -17,6 +18,7 @@ function parseAcronym(name: string): { acronym: string; term: string } {
 }
 
 export function TabAcronimos() {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
 
   const orderedCategories: AcronymCategory[] = [
@@ -47,7 +49,7 @@ export function TabAcronimos() {
               <Search className="w-4 h-4" />
             </div>
             <Input 
-              placeholder="Buscar término o descripción..." 
+              placeholder={t('placeholders.catalogo.buscarTerminoDescripcion', {defaultValue: 'Buscar término o descripción...'})} 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-9"

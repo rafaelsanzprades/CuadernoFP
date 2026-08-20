@@ -670,7 +670,7 @@ export default function ArchivosTrabajoPage() {
                                 <Button onClick={handleSavePd} className="flex-1 bg-info/10 hover:bg-info/20 text-info border border-info/30 transition-all text-caption h-9">
                                   <Save className="w-3 h-3 mr-1" /> {t('common.guardar', {defaultValue: 'Guardar'})}
                                 </Button>
-                                <Button onClick={handleSaveAsPd} className="bg-foreground/5 hover:bg-foreground/10 text-muted border border-[var(--glass-border)] transition-all px-3 h-9" title="Guardar como...">
+                                <Button onClick={handleSaveAsPd} className="bg-foreground/5 hover:bg-foreground/10 text-muted border border-[var(--glass-border)] transition-all px-3 h-9" title={t('tooltips.archivos.guardarComo', {defaultValue: 'Guardar como...'})}>
                                   <Copy className="w-3 h-3" />
                                 </Button>
                               </div>
@@ -756,10 +756,10 @@ export default function ArchivosTrabajoPage() {
                         ) : (
                           <>
                             <div className="flex gap-2">
-                              <Button disabled={!hasPdFile} onClick={handleNewCurso} className="flex-1 bg-success/10 hover:bg-success/20 text-success border border-success/30 transition-all disabled:opacity-30 text-caption h-9" title="Crea un curso y su archivo grupo asociado">
+                              <Button disabled={!hasPdFile} onClick={handleNewCurso} className="flex-1 bg-success/10 hover:bg-success/20 text-success border border-success/30 transition-all disabled:opacity-30 text-caption h-9" title={t('tooltips.archivos.creaCursoGrupo', {defaultValue: 'Crea un curso y su archivo grupo asociado'})}>
                                 <Plus className="w-3 h-3 mr-1" /> {t('botones.archivos.iniciarCursoGrupo', {defaultValue: 'Iniciar curso (+ grupo)'})}
                               </Button>
-                              <Button disabled={!hasPdFile} onClick={handleOpenCurso} className="bg-foreground/5 hover:bg-foreground/10 text-foreground border border-[var(--glass-border)] transition-all px-3 h-9" title="Importar curso huérfano">
+                              <Button disabled={!hasPdFile} onClick={handleOpenCurso} className="bg-foreground/5 hover:bg-foreground/10 text-foreground border border-[var(--glass-border)] transition-all px-3 h-9" title={t('tooltips.archivos.importarCursoHuerfano', {defaultValue: 'Importar curso huérfano'})}>
                                 <FolderOpen className="w-3 h-3" />
                               </Button>
                             </div>
@@ -768,7 +768,7 @@ export default function ArchivosTrabajoPage() {
                                 <Button onClick={handleSaveCurso} className="flex-1 bg-success/10 hover:bg-success/20 text-success border border-success/30 transition-all text-caption h-9">
                                   <Save className="w-3 h-3 mr-1" /> {t('common.guardar', {defaultValue: 'Guardar'})}
                                 </Button>
-                                <Button onClick={handleSaveAsCurso} className="bg-foreground/5 hover:bg-foreground/10 text-muted border border-[var(--glass-border)] transition-all px-3 h-9" title="Guardar como...">
+                                <Button onClick={handleSaveAsCurso} className="bg-foreground/5 hover:bg-foreground/10 text-muted border border-[var(--glass-border)] transition-all px-3 h-9" title={t('tooltips.archivos.guardarComo', {defaultValue: 'Guardar como...'})}>
                                   <Copy className="w-3 h-3" />
                                 </Button>
                               </div>
@@ -823,7 +823,7 @@ export default function ArchivosTrabajoPage() {
                           <input 
                             type="password" 
                             className="flex-1 bg-background border border-border rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent text-body" 
-                            placeholder="Introduce tu clave maestra..."
+                            placeholder={t('placeholders.archivos.claveMaestra', {defaultValue: 'Introduce tu clave maestra...'})}
                             value={useAppStore.getState().encryptionKey || ""}
                             onChange={(e) => useAppStore.getState().setEncryptionKey(e.target.value || null)}
                           />

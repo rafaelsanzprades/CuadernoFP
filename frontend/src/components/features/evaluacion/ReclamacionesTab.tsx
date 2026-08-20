@@ -193,7 +193,7 @@ export function ReclamacionesTab() {
                       <textarea
                         value={resolucionTexto}
                         onChange={e => setResolucionTexto(e.target.value)}
-                        placeholder="Cómo se ha resuelto la reclamación..."
+                        placeholder={t('placeholders.reclamaciones.comoSeHaResuelto', {defaultValue: 'Cómo se ha resuelto la reclamación...'})}
                         className="w-full h-20 bg-background border border-[var(--glass-border)] rounded-lg p-3 text-foreground"
                       />
                       <div className="flex justify-end gap-2">

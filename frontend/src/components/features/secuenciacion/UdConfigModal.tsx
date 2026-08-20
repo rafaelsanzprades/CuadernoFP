@@ -99,7 +99,7 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
               value={formData.Intencion_Educativa}
               onChange={(e) => handleChange("Intencion_Educativa", e.target.value)}
               className="w-full min-h-[120px] bg-foreground/10 border border-[var(--glass-border)] rounded-lg px-4 py-3 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none placeholder:text-muted/40 resize-y"
-              placeholder="Ej: En esta unidad el alumnado comprenderá los fundamentos de..."
+              placeholder={t('placeholders.secuenciacion.intencionEducativa', {defaultValue: 'Ej: En esta unidad el alumnado comprenderá los fundamentos de...'})}
             />
           </div>
 
@@ -114,7 +114,7 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
                 value={formData.Temporizacion}
                 onChange={(e) => handleChange("Temporizacion", e.target.value)}
                 className="w-full min-h-[100px] bg-foreground/10 border border-[var(--glass-border)] rounded-lg px-4 py-3 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none placeholder:text-muted/40 resize-y"
-                placeholder="Ej: 1er Trimestre (Semanas 4 a 6)..."
+                placeholder={t('placeholders.secuenciacion.temporizacion', {defaultValue: 'Ej: 1er trimestre (semanas 4 a 6)...'})}
               />
             </div>
 
@@ -128,7 +128,7 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
                 value={formData.Agrupamientos}
                 onChange={(e) => handleChange("Agrupamientos", e.target.value)}
                 className="w-full min-h-[100px] bg-foreground/10 border border-[var(--glass-border)] rounded-lg px-4 py-3 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none placeholder:text-muted/40 resize-y"
-                placeholder="Gran grupo para teoría, parejas para prácticas..."
+                placeholder={t('placeholders.secuenciacion.agrupamientos', {defaultValue: 'Gran grupo para teoría, parejas para prácticas...'})}
               />
             </div>
           </div>
@@ -143,7 +143,7 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
               value={formData.Transversalidad}
               onChange={(e) => handleChange("Transversalidad", e.target.value)}
               className="w-full min-h-[80px] bg-foreground/10 border border-[var(--glass-border)] rounded-lg px-4 py-3 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none placeholder:text-muted/40 resize-y"
-              placeholder="Ej: Se utilizarán herramientas digitales para..."
+              placeholder={t('placeholders.secuenciacion.transversalidad', {defaultValue: 'Ej: Se utilizarán herramientas digitales para...'})}
             />
           </div>
         </div>

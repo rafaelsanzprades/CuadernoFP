@@ -22,9 +22,10 @@ import { TabInfoBox } from "@/components/ui/TabInfoBox";
    Mini-índice con anclas internas
    ────────────────────────────────────────────────────────────── */
 function SectionIndex({ items }: { items: { id: string; label: string }[] }) {
+  const { t } = useTranslation();
   return (
     <nav
-      aria-label="Índice de secciones"
+      aria-label={t('aria.legal.indiceSecciones', {defaultValue: 'Índice de secciones'})}
       className="flex flex-wrap gap-2 mb-6 p-3 rounded-xl bg-background/40 backdrop-blur-md border border-[var(--glass-border)]"
     >
       {items.map((item) => (

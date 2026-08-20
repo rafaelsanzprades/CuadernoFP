@@ -241,7 +241,7 @@ export function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUp
                       {entry.label}
                     </span>
                     {entry.isAuto ? (
-                      <span className="text-muted/50" title="Derivado de Fechas generales"><Lock className="w-[1em] h-[1em]" /></span>
+                      <span className="text-muted/50" title={t('tooltips.calendario.derivadoFechasGenerales2', {defaultValue: 'Derivado de fechas generales'})}><Lock className="w-[1em] h-[1em]" /></span>
                     ) : (
                       <button
                         onClick={() => onUpdateNote(entry.key, "")}

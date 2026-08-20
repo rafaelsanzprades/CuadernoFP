@@ -1,8 +1,10 @@
 "use client";
 import { Rocket } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
+import { useTranslation } from "react-i18next";
 
 export function InnovacionTab() {
+  const { t } = useTranslation();
   const { moduleData, updateModuleData } = useAppStore();
   const config_contexto = moduleData?.config_contexto || {};
 
@@ -54,7 +56,7 @@ export function InnovacionTab() {
             <textarea
               value={config_contexto["registro_innovacion"] || ""}
               onChange={e => handleChange("registro_innovacion", e.target.value)}
-              placeholder="Describe los proyectos de innovación del módulo..."
+              placeholder={t('placeholders.modulo.proyectosInnovacion', {defaultValue: 'Describe los proyectos de innovación del módulo...'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
@@ -65,7 +67,7 @@ export function InnovacionTab() {
             <textarea
               value={config_contexto["ipe_intermodular"] || ""}
               onChange={e => handleChange("ipe_intermodular", e.target.value)}
-              placeholder="Detalla la participación en proyectos intermodulares..."
+              placeholder={t('placeholders.modulo.proyectosIntermodulares', {defaultValue: 'Detalla la participación en proyectos intermodulares...'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
@@ -92,7 +94,7 @@ export function InnovacionTab() {
             <textarea
               value={config_contexto["H1_complementarias"] || ""}
               onChange={e => handleChange("H1_complementarias", e.target.value)}
-              placeholder="Anota lugares a visitar, nombres de empresas, fechas aproximadas o temáticas concretas..."
+              placeholder={t('placeholders.modulo.complementariasDetalle', {defaultValue: 'Anota lugares a visitar, nombres de empresas, fechas aproximadas o temáticas concretas...'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
@@ -119,7 +121,7 @@ export function InnovacionTab() {
             <textarea
               value={config_contexto["H2_extraescolares"] || ""}
               onChange={e => handleChange("H2_extraescolares", e.target.value)}
-              placeholder="Anota lugares, fechas aproximadas o temáticas concretas de las actividades voluntarias..."
+              placeholder={t('placeholders.modulo.voluntariasDetalle', {defaultValue: 'Anota lugares, fechas aproximadas o temáticas concretas de las actividades voluntarias...'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>

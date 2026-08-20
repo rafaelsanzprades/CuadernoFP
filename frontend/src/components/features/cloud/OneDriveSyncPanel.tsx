@@ -118,7 +118,7 @@ export function OneDriveSyncPanel() {
               </p>
               <Input
                 type="text"
-                placeholder="Ej: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+                placeholder={t('placeholders.cloud.ejemploClientId', {defaultValue: 'Ej: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'})}
                 value={oneDriveClientId || ""}
                 onChange={(e) => setOneDriveClientId?.(e.target.value)}
                 className="font-mono text-body"

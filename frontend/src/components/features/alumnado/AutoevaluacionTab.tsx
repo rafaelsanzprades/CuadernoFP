@@ -4,6 +4,7 @@ import { ClipboardCheck, ChevronDown } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { Card } from "@/components/ui/Card";
+import { useTranslation } from "react-i18next";
 
 const VALORES = [
   { valor: "SI" as const, label: "SÍ", cls: "bg-success/15 text-success border-success/30" },
@@ -12,6 +13,7 @@ const VALORES = [
 ];
 
 export function AutoevaluacionTab() {
+  const { t } = useTranslation();
   const { moduleData, cursoData, updateCursoData } = useAppStore();
   const df_al = (cursoData?.df_al || []).filter(isAlumnoActivo);
   const df_ce = moduleData?.df_ce || [];
@@ -114,7 +116,7 @@ export function AutoevaluacionTab() {
                             type="text"
                             value={entry?.dificultades || ""}
                             onChange={(e) => upsertEntry(al.ID, ce.id_ce, { valor: entry?.valor, dificultades: e.target.value })}
-                            placeholder="Dificultades (opcional)"
+                            placeholder={t('placeholders.alumnado.dificultadesOpcional', {defaultValue: 'Dificultades (opcional)'})}
                             className="flex-1 min-w-[160px] bg-foreground/10 border border-[var(--glass-border)] rounded-lg px-2 py-1 text-caption text-foreground focus:border-info focus:outline-none"
                           />
                         </div>

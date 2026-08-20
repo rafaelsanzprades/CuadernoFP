@@ -310,7 +310,7 @@ export default function MagiaPage() {
                 </div>
               </div>
               <div className="flex-1 w-full p-4">
-                <iframe src={previewUrl} className="w-full h-full rounded-xl border border-[var(--glass-border)] shadow-xl bg-white" title="Vista previa PDF" />
+                <iframe src={previewUrl} className="w-full h-full rounded-xl border border-[var(--glass-border)] shadow-xl bg-white" title={t('tooltips.comun.vistaPreviaPdf', {defaultValue: 'Vista previa PDF'})} />
               </div>
             </div>
           ) : (

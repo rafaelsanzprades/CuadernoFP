@@ -81,7 +81,7 @@ export function ContingenciaTab() {
             <textarea
               value={moduleData?.texto_contingencia_libre || ""}
               onChange={e => updateModuleData("texto_contingencia_libre", e.target.value)}
-              placeholder="Añade aquí protocolos específicos o aclaraciones sobre el uso de recursos para docencia a distancia..."
+              placeholder={t('placeholders.modulo.protocolosContingencia', {defaultValue: 'Añade aquí protocolos específicos o aclaraciones sobre el uso de recursos para docencia a distancia...'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
@@ -166,7 +166,7 @@ export function ContingenciaTab() {
             <textarea
               value={config_contexto["contingencia_general"] || config_contexto["J3_contingencia"] || ""}
               onChange={e => handleChange("contingencia_general", e.target.value)}
-              placeholder="Plataformas online, recursos a distancia..."
+              placeholder={t('placeholders.modulo.plataformasOnline', {defaultValue: 'Plataformas online, recursos a distancia...'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>

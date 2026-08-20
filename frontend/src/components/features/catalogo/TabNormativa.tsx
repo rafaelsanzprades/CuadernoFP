@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/Card";
 import { Landmark, Map, FileText, ChevronDown, ChevronUp, Info } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { AccordionBlock } from "@/components/ui/AccordionBlock";
+import { useTranslation } from "react-i18next";
 
 interface NormativaItem {
   id: string;
@@ -118,7 +119,8 @@ interface Props {
 }
 
 export function TabNormativa({ searchQuery = "" }: Props) {
-  const filteredEstatal = NORMATIVA_ESTATAL.filter(item => 
+  const { t } = useTranslation();
+  const filteredEstatal = NORMATIVA_ESTATAL.filter(item =>
     item.texto.toLowerCase().includes(searchQuery.toLowerCase()) || 
     item.descripcion.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -139,7 +141,7 @@ export function TabNormativa({ searchQuery = "" }: Props) {
 
       {filteredEstatal.length > 0 && (
         <AccordionBlock
-          title="Normativa Estatal"
+          title={t('campos.normativa.normativaEstatal', {defaultValue: 'Normativa estatal'})}
           icon={<Landmark className="w-5 h-5" />}
           defaultOpen={true}
         >
@@ -181,7 +183,7 @@ export function TabNormativa({ searchQuery = "" }: Props) {
         return (
           <AccordionBlock
             key={comunidad}
-            title={`Normativa Autonómica (${comunidad})`}
+            title={t('campos.normativa.normativaAutonomica', {comunidad, defaultValue: `Normativa autonómica (${comunidad})`})}
             icon={<Map className="w-5 h-5" />}
             defaultOpen={items.length > 0 && searchQuery !== ""}
           >

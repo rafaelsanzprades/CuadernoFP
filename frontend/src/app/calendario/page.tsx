@@ -195,7 +195,7 @@ function NotesTable({ calendar_notes, onUpdateNotes, autoMilestones, feoeIni, fe
                   </td>
                   <td className="p-2 text-center">
                     {r.auto ? (
-                      <span className="text-muted/50" title="Derivado de Fechas generales, no se borra aquí">
+                      <span className="text-muted/50" title={t('tooltips.calendario.derivadoFechasGenerales', {defaultValue: 'Derivado de fechas generales, no se borra aquí'})}>
                         <Lock className="w-[1em] h-[1em] inline-block" />
                       </span>
                     ) : (
@@ -209,10 +209,10 @@ function NotesTable({ calendar_notes, onUpdateNotes, autoMilestones, feoeIni, fe
 
           <tr className="border-t border-[var(--glass-border)] bg-white/3">
             <td className="p-2">
-              <DatePicker value={newDate} onChange={v => setNewDate(v)} className="w-full" placeholder="Fecha" />
+              <DatePicker value={newDate} onChange={v => setNewDate(v)} className="w-full" placeholder={t('fecha', {defaultValue: 'Fecha'})} />
             </td>
             <td className="p-2">
-              <DatePicker value={newEndDate} onChange={v => setNewEndDate(v)} className="w-full" placeholder={t('hasta_opc', {defaultValue: 'Hasta (Opcional)'})} />
+              <DatePicker value={newEndDate} onChange={v => setNewEndDate(v)} className="w-full" placeholder={t('hasta_opc', {defaultValue: 'Hasta (opcional)'})} />
             </td>
             <td className="p-2">
               <input type="text" value={newFestivo} onChange={e => setNewFestivo(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()} placeholder={t('festivo', {defaultValue: 'Festivo...'})} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-body text-foreground focus:border-warning focus:outline-none" />
@@ -577,9 +577,9 @@ export default function CalendarioPage() {
                                 <td key={day} className={`p-3 ${!dh ? 'opacity-30' : 'font-mono text-body font-medium'}`}>
                                   {dh > 0 ? (
                                     <div className="flex items-center justify-center gap-2">
-                                      <span title="Días">{days}d</span>
+                                      <span title={t('tooltips.calendario.dias', {defaultValue: 'Días'})}>{days}d</span>
                                       <span className="text-muted/30">|</span>
-                                      <span className="text-info" title="Horas">{days * dh}h</span>
+                                      <span className="text-info" title={t('tooltips.calendario.horas', {defaultValue: 'Horas'})}>{days * dh}h</span>
                                     </div>
                                   ) : '-'}
                                 </td>
@@ -587,9 +587,9 @@ export default function CalendarioPage() {
                             })}
                             <td className="p-3 font-bold border-l border-[var(--glass-border)] text-body font-mono">
                               <div className="flex items-center justify-center gap-2">
-                                <span title="Días">{totalDays}d</span>
+                                <span title={t('tooltips.calendario.dias', {defaultValue: 'Días'})}>{totalDays}d</span>
                                 <span className="text-muted/30">|</span>
-                                <span className="text-success" title="Horas">{totalHours}h</span>
+                                <span className="text-success" title={t('tooltips.calendario.horas', {defaultValue: 'Horas'})}>{totalHours}h</span>
                               </div>
                             </td>
                           </tr>
@@ -605,9 +605,9 @@ export default function CalendarioPage() {
                             <td key={day} className={`p-3 font-mono ${dh === 0 ? 'opacity-30' : ''}`}>
                               {dh > 0 ? (
                                 <div className="flex items-center justify-center gap-2">
-                                  <span title="Días">{daysTotal}d</span>
+                                  <span title={t('tooltips.calendario.dias', {defaultValue: 'Días'})}>{daysTotal}d</span>
                                   <span className="text-muted/30">|</span>
-                                  <span className="text-info" title="Horas">{hoursTotal}h</span>
+                                  <span className="text-info" title={t('tooltips.calendario.horas', {defaultValue: 'Horas'})}>{hoursTotal}h</span>
                                 </div>
                               ) : '-'}
                             </td>
@@ -615,11 +615,11 @@ export default function CalendarioPage() {
                         })}
                         <td className="p-3 border-l border-[var(--glass-border)] font-mono text-subheading">
                           <div className="flex items-center justify-center gap-2">
-                            <span className="text-body mt-0.5" title="Días">
+                            <span className="text-body mt-0.5" title={t('tooltips.calendario.dias', {defaultValue: 'Días'})}>
                               {["Lun", "Mar", "Mié", "Jue", "Vie"].reduce((acc, d) => acc + (wd1[d as keyof typeof wd1] + wd2[d as keyof typeof wd2] + wd3[d as keyof typeof wd3]), 0)}d
                             </span>
                             <span className="text-muted/30">|</span>
-                            <span className="text-success" title="Horas">{h_real}h</span>
+                            <span className="text-success" title={t('tooltips.calendario.horas', {defaultValue: 'Horas'})}>{h_real}h</span>
                           </div>
                         </td>
                       </tr>

@@ -298,7 +298,7 @@ export default function SeguimientoPage() {
                                       <textarea
                                         value={ledgerEntry.seguimiento}
                                         onChange={(e) => handleLedgerChange(dateStr, 'seguimiento', e.target.value)}
-                                        placeholder="Escribe aquí el seguimiento de la clase, incidencias o progreso real..."
+                                        placeholder={t('placeholders.seguimiento.escribeSeguimientoClase', {defaultValue: 'Escribe aquí el seguimiento de la clase, incidencias o progreso real...'})}
                                         className="w-full bg-foreground/20 border border-white/5 hover:border-[var(--glass-border)] rounded-lg px-4 py-3 text-foreground focus:border-info focus:bg-black/60 focus:outline-none transition-all resize-none overflow-hidden min-h-[60px] text-body"
                                         rows={1}
                                         onInput={(e) => {

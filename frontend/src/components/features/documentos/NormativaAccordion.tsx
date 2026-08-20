@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Landmark, Map, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { AccordionBlock } from '@/components/ui/AccordionBlock';
+import { useTranslation } from 'react-i18next';
 
 type DocumentItem = {
   name: string;
@@ -24,18 +25,19 @@ const TODAS_COMUNIDADES = [
 ].sort();
 
 export function NormativaAccordion({ communities, onDownloadDoc, formatSize, getFileIcon }: NormativaAccordionProps) {
+  const { t } = useTranslation();
   const estatalDir = communities.find(c => c.is_dir && c.name === "Estatal");
   const estatalPath = estatalDir ? estatalDir.path : `Normativa/Estatal`;
 
   return (
     <div className="space-y-4 animate-fade-in">
       <LazyAccordionFolder
-        title="Legislación Estatal"
+        title={t('campos.normativa.legislacionEstatal', {defaultValue: 'Legislación estatal'})}
         icon={<Landmark className="w-5 h-5" />}
         defaultOpen={true}
         path={estatalPath}
         hasFiles={!!estatalDir}
-        emptyMessage="No hay documentos normativos estatales por el momento."
+        emptyMessage={t('campos.normativa.sinDocumentosEstatales', {defaultValue: 'No hay documentos normativos estatales por el momento.'})}
         onDownloadDoc={onDownloadDoc}
         formatSize={formatSize}
         getFileIcon={getFileIcon}
@@ -48,11 +50,11 @@ export function NormativaAccordion({ communities, onDownloadDoc, formatSize, get
         return (
           <LazyAccordionFolder
             key={path}
-            title={`Legislación Autonómica (${comunidadName})`}
+            title={t('campos.normativa.legislacionAutonomica', {comunidad: comunidadName, defaultValue: `Legislación autonómica (${comunidadName})`})}
             icon={<Map className="w-5 h-5" />}
             path={path}
             hasFiles={!!backendDir}
-            emptyMessage="No hay documentos normativos en esta comunidad por el momento."
+            emptyMessage={t('campos.normativa.sinDocumentosAutonomicos', {defaultValue: 'No hay documentos normativos en esta comunidad por el momento.'})}
             onDownloadDoc={onDownloadDoc}
             formatSize={formatSize}
             getFileIcon={getFileIcon}

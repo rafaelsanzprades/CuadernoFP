@@ -151,7 +151,7 @@ export function RecentModulesPanel() {
                 <button
                   onClick={() => handleQuitar(entry.id)}
                   className="text-muted hover:text-danger transition-colors shrink-0"
-                  title="Quitar de recientes"
+                  title={t('tooltips.dashboard.quitarDeRecientes', {defaultValue: 'Quitar de recientes'})}
                 >
                   <X className="w-4 h-4" />
                 </button>

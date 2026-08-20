@@ -57,7 +57,7 @@ export function AISettingsPanel() {
           </label>
           <input
             type="password"
-            placeholder={`Pega aquí tu clave secreta de ${provider === 'gemini' ? 'Google AI Studio' : 'OpenAI'}...`}
+            placeholder={t('placeholders.ai.pegaClaveSecreta', {proveedor: provider === 'gemini' ? 'Google AI Studio' : 'OpenAI', defaultValue: `Pega aquí tu clave secreta de ${provider === 'gemini' ? 'Google AI Studio' : 'OpenAI'}...`})}
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
             className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-body text-foreground font-mono focus:outline-none focus:ring-2 focus:ring-accent transition-all"

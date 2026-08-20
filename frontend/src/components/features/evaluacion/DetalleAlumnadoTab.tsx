@@ -416,7 +416,7 @@ export function DetalleAlumnadoTab() {
                                       <span className="text-caption font-semibold px-2 py-0.5 rounded-full bg-muted/10 text-muted border border-muted/30">Sin evaluar</span>
                                     )}
                                     {r.topeActivo && (
-                                      <span className="text-caption font-semibold px-2 py-0.5 rounded-full bg-danger/10 text-danger border border-danger/30" title="Nº de CE suspensos supera el máximo compensable de este módulo (Datos → Reglas de redondeo)">Tope compensables activo</span>
+                                      <span className="text-caption font-semibold px-2 py-0.5 rounded-full bg-danger/10 text-danger border border-danger/30" title={t('tooltips.evaluacion.topeCompensablesActivo', {defaultValue: 'Nº de CE suspensos supera el máximo compensable de este módulo (Datos → Reglas de redondeo)'})}>Tope compensables activo</span>
                                     )}
                                   </div>
                                   <div className="text-caption text-muted mb-3 line-clamp-1">{r.desc}</div>

@@ -103,7 +103,7 @@ export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps)
                   value={formData.Briefing}
                   onChange={(e) => handleChange("Briefing", e.target.value)}
                   className="w-full min-h-[160px] bg-foreground/10 border border-[var(--glass-border)] rounded-lg px-4 py-3 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none placeholder:text-muted/40 resize-y"
-                  placeholder="Ej: Eres el técnico de sistemas de la empresa X y recibes el siguiente ticket de soporte..."
+                  placeholder={t('placeholders.secuenciacion.briefing', {defaultValue: 'Ej: Eres el técnico de sistemas de la empresa X y recibes el siguiente ticket de soporte...'})}
                 />
               </div>
 
@@ -116,7 +116,7 @@ export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps)
                   value={formData.Entrega}
                   onChange={(e) => handleChange("Entrega", e.target.value)}
                   className="w-full min-h-[80px] bg-foreground/10 border border-[var(--glass-border)] rounded-lg px-4 py-3 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none placeholder:text-muted/40 resize-y"
-                  placeholder="Ej: Documento PDF subido a Moodle antes del viernes a las 23:59..."
+                  placeholder={t('placeholders.secuenciacion.entrega', {defaultValue: 'Ej: Documento PDF subido a Moodle antes del viernes a las 23:59...'})}
                 />
               </div>
             </div>
@@ -132,7 +132,7 @@ export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps)
                   value={formData.Pasos}
                   onChange={(e) => handleChange("Pasos", e.target.value)}
                   className="w-full min-h-[160px] bg-foreground/10 border border-[var(--glass-border)] rounded-lg px-4 py-3 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none placeholder:text-muted/40 resize-y"
-                  placeholder="1. Analizar el ticket... 2. Revisar los logs... 3. Proponer solución..."
+                  placeholder={t('placeholders.secuenciacion.pasos', {defaultValue: '1. Analizar el ticket... 2. Revisar los logs... 3. Proponer solución...'})}
                 />
               </div>
 
@@ -145,7 +145,7 @@ export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps)
                   value={formData.Evidencias}
                   onChange={(e) => handleChange("Evidencias", e.target.value)}
                   className="w-full min-h-[80px] bg-foreground/10 border border-[var(--glass-border)] rounded-lg px-4 py-3 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none placeholder:text-muted/40 resize-y"
-                  placeholder="Ej: 1 Informe técnico. 1 Captura de pantalla de la configuración. 1 Presentación oral de 5 min."
+                  placeholder={t('placeholders.secuenciacion.evidencias', {defaultValue: 'Ej: 1 Informe técnico. 1 Captura de pantalla de la configuración. 1 Presentación oral de 5 min.'})}
                 />
               </div>
             </div>

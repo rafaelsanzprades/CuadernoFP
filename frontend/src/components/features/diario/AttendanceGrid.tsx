@@ -135,7 +135,7 @@ export const AttendanceGrid = () => {
             <thead className="sticky top-0 z-10 bg-[#0d1726]">
               <tr className="bg-foreground/5 text-muted border-b border-[var(--glass-border)]">
                 <th className="p-4 font-semibold w-16 text-center">Nº</th>
-                <th className="p-4 font-semibold w-12 text-center" title="Menor de edad"><AlertCircle className="w-4 h-4 mx-auto" /></th>
+                <th className="p-4 font-semibold w-12 text-center" title={t('tooltips.diario.menorDeEdad', {defaultValue: 'Menor de edad'})}><AlertCircle className="w-4 h-4 mx-auto" /></th>
                 <th className="p-4 font-semibold">Alumnado</th>
                 <th className="p-4 font-semibold text-center w-48">Estado</th>
               </tr>

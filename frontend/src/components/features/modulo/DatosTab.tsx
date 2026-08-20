@@ -451,7 +451,7 @@ export function DatosTab() {
                 type="text"
                 value={row.nombre}
                 onChange={(e) => updateInstrumentoPctField(row.id, "nombre", e.target.value)}
-                placeholder="Nombre del instrumento"
+                placeholder={t('placeholders.modulo.nombreInstrumento', {defaultValue: 'Nombre del instrumento'})}
                 className="bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground w-full"
               />
               {(["pct_1t", "pct_2t", "pct_3t"] as const).map((field) => (
@@ -473,7 +473,7 @@ export function DatosTab() {
                 type="button"
                 onClick={() => removeInstrumentoPct(row.id)}
                 className="p-2 text-danger hover:bg-danger/10 rounded-lg transition-colors justify-self-center"
-                aria-label="Eliminar instrumento"
+                aria-label={t('aria.modulo.eliminarInstrumento', {defaultValue: 'Eliminar instrumento'})}
               >
                 <Trash2 className="w-4 h-4" />
               </button>
@@ -527,13 +527,13 @@ export function DatosTab() {
                     type="button"
                     onClick={() => removeEscala(escala.id)}
                     className="absolute top-2 right-2 p-1.5 text-danger/60 hover:text-danger hover:bg-danger/10 rounded-md opacity-0 group-hover:opacity-100 transition-all"
-                    aria-label="Eliminar nivel"
+                    aria-label={t('aria.modulo.eliminarNivel', {defaultValue: 'Eliminar nivel'})}
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
                   <input
                     type="text"
-                    placeholder="Nombre (ej. Suficiente)"
+                    placeholder={t('placeholders.modulo.nombreNivel', {defaultValue: 'Nombre (ej. Suficiente)'})}
                     value={escala.nombre}
                     onChange={(e) => updateEscala(escala.id, "nombre", e.target.value)}
                     className="w-full bg-background border border-[var(--glass-border)] rounded px-2.5 py-1.5 text-foreground text-sm font-semibold pr-8"

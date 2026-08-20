@@ -1,8 +1,10 @@
 "use client";
 import { Layers, Leaf, Cpu, Smartphone } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
+import { useTranslation } from "react-i18next";
 
 export function OtrosElementosTab() {
+  const { t } = useTranslation();
   const { moduleData, updateModuleData } = useAppStore();
   const config_contexto = moduleData?.config_contexto || {};
 
@@ -170,7 +172,7 @@ export function OtrosElementosTab() {
             <textarea
               value={config_contexto["I1_transversales"] || ""}
               onChange={e => handleChange("I1_transversales", e.target.value)}
-              placeholder="Detalla cómo se integrarán los elementos transversales obligatorios..."
+              placeholder={t('placeholders.modulo.elementosTransversales', {defaultValue: 'Detalla cómo se integrarán los elementos transversales obligatorios...'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
@@ -234,7 +236,7 @@ export function OtrosElementosTab() {
             <textarea
               value={config_contexto["digcomp_texto"] || ""}
               onChange={e => handleChange("digcomp_texto", e.target.value)}
-              placeholder="Detalla cómo se desarrollarán las competencias digitales seleccionadas en este módulo..."
+              placeholder={t('placeholders.modulo.competenciasDigitales', {defaultValue: 'Detalla cómo se desarrollarán las competencias digitales seleccionadas en este módulo...'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
@@ -262,7 +264,7 @@ export function OtrosElementosTab() {
             <textarea
               value={config_contexto["cpe"] || ""}
               onChange={e => handleChange("cpe", e.target.value)}
-              placeholder="Competencias específicas y transversales..."
+              placeholder={t('placeholders.modulo.competenciasEspecificas', {defaultValue: 'Competencias específicas y transversales...'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
@@ -271,7 +273,7 @@ export function OtrosElementosTab() {
             <textarea
               value={config_contexto["og"] || ""}
               onChange={e => handleChange("og", e.target.value)}
-              placeholder="Objetivos generales del título aplicables al módulo..."
+              placeholder={t('placeholders.modulo.objetivosGenerales', {defaultValue: 'Objetivos generales del título aplicables al módulo...'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>

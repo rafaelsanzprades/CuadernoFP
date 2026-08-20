@@ -63,7 +63,7 @@ export function SessionTable({
                 <button 
                   onClick={(e) => { e.preventDefault(); setEditingUd(ud); }}
                   className="p-1.5 hover:bg-foreground/10 rounded-md text-muted hover:text-accent transition-colors"
-                  title="Configurar unidad didáctica"
+                  title={t('tooltips.secuenciacion.configurarUd', {defaultValue: 'Configurar unidad didáctica'})}
                 >
                   <Settings className="w-4 h-4" />
                 </button>
@@ -150,7 +150,7 @@ export function SessionTable({
                                       value={ses.IE ?? ""}
                                       onChange={(e) => handleUpdateSesion(globalIdx, "IE", e.target.value === "" ? null : Number(e.target.value))}
                                       placeholder="-"
-                                      title="% del instrumento de evaluación, si esta sesión puntúa"
+                                      title={t('tooltips.secuenciacion.pctInstrumento', {defaultValue: '% del instrumento de evaluación, si esta sesión puntúa'})}
                                       className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-accent focus:outline-none"
                                     />
                                   </div>
@@ -166,7 +166,7 @@ export function SessionTable({
                                     <button
                                       onClick={() => handleDeleteSesion(globalIdx)}
                                       className="text-danger hover:text-danger font-bold text-subheading"
-                                      title="Eliminar sesión"
+                                      title={t('tooltips.secuenciacion.eliminarSesion', {defaultValue: 'Eliminar sesión'})}
                                     >
                                       ×
                                     </button>
@@ -181,7 +181,7 @@ export function SessionTable({
                                       options={getAllAspectosClave()}
                                       selectedIds={ses.Aspectos_Clave ? ses.Aspectos_Clave.split(',').map(s => s.trim()).filter(Boolean) : []}
                                       onChange={(ids) => handleUpdateSesion(globalIdx, "Aspectos_Clave", ids.join(', '))}
-                                      placeholder="Selecciona aspectos clave..."
+                                      placeholder={t('placeholders.secuenciacion.aspectosClave', {defaultValue: 'Selecciona aspectos clave...'})}
                                     />
                                   </div>
                                   <div className="flex-1 flex flex-col pr-10">
@@ -190,7 +190,7 @@ export function SessionTable({
                                       options={getAllRecursos()}
                                       selectedIds={ses.Recursos ? ses.Recursos.split(',').map(s => s.trim()).filter(Boolean) : []}
                                       onChange={(ids) => handleUpdateSesion(globalIdx, "Recursos", ids.join(', '))}
-                                      placeholder="Selecciona recursos..."
+                                      placeholder={t('placeholders.secuenciacion.recursos', {defaultValue: 'Selecciona recursos...'})}
                                     />
                                   </div>
                                 </div>

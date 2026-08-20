@@ -169,7 +169,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
       } else if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
         e.preventDefault();
         // Focus search input
-        const searchInput = document.querySelector('input[placeholder="Buscar..." aria-label="Buscar en la aplicación" role="searchbox"]') as HTMLInputElement;
+        const searchInput = document.getElementById('global-search-input') as HTMLInputElement;
         if (searchInput) {
           searchInput.focus();
         }
@@ -283,7 +283,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
           <button
             onClick={toggleSidebar}
             className="block lg:hidden p-2 rounded-md text-foreground hover:bg-foreground/10 transition-colors"
-            aria-label="Menú principal"
+            aria-label={t('aria.header.menuPrincipal', {defaultValue: 'Menú principal'})}
           >
             <Menu className="w-6 h-6" />
           </button>
@@ -292,12 +292,13 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
             target="_blank"
             rel="noopener noreferrer"
             className="p-1.5 md:p-2 rounded-md text-[#229ED9] hover:bg-[#229ED9]/10 transition-colors hidden sm:block"
-            title="Únete a nuestro grupo de Telegram"
+            title={t('tooltips.header.uneteTelegram', {defaultValue: 'Únete a nuestro grupo de Telegram'})}
           >
             <Send className="w-4 h-4 md:w-5 md:h-5" />
           </a>
           <div className="relative w-36 sm:w-48 md:w-64 shrink-0">
             <input
+              id="global-search-input"
               type="text"
               placeholder={t('header.buscar', { defaultValue: 'Buscar...' }) as string}
               aria-label={t('header.buscar', { defaultValue: 'Buscar...' }) as string}

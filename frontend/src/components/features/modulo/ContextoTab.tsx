@@ -2,6 +2,7 @@
 import { School, User, FileText, BookOpen } from "lucide-react";
 import { NarrativeField } from "@/components/ui/NarrativeField";
 import { useAppStore } from "@/store/useAppStore";
+import { useTranslation } from "react-i18next";
 
 const RASGOS_ENTORNO = [
   {
@@ -180,6 +181,7 @@ function RasgosRapidos({ titulo, grupos, seleccionados, onToggle }: RasgosRapido
 }
 
 export function ContextoTab() {
+  const { t } = useTranslation();
   const { moduleData, updateModuleData } = useAppStore();
 
   const config_contexto = moduleData?.config_contexto || {};
@@ -220,7 +222,7 @@ export function ContextoTab() {
             <textarea
               value={config_contexto.entorno_geografico || ""}
               onChange={e => handleContextoChange("entorno_geografico", e.target.value)}
-              placeholder="Ej: El IES Andalán se sitúa en el barrio X de Zaragoza..."
+              placeholder={t('placeholders.contexto.entornoGeografico', {defaultValue: 'Ej: El IES Andalán se sitúa en el barrio X de Zaragoza...'})}
               className="w-full h-64 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
@@ -235,7 +237,7 @@ export function ContextoTab() {
             <textarea
               value={config_contexto.entorno_socioeconomico || ""}
               onChange={e => handleContextoChange("entorno_socioeconomico", e.target.value)}
-              placeholder="Ej: El tejido empresarial de la zona destaca por..."
+              placeholder={t('placeholders.contexto.entornoSocioeconomico', {defaultValue: 'Ej: El tejido empresarial de la zona destaca por...'})}
               className="w-full h-64 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
@@ -250,7 +252,7 @@ export function ContextoTab() {
             <textarea
               value={config_contexto.contexto_escolar || ""}
               onChange={e => handleContextoChange("contexto_escolar", e.target.value)}
-              placeholder="Ej: Centro de referencia en Formación Profesional..."
+              placeholder={t('placeholders.contexto.contextoEscolar', {defaultValue: 'Ej: Centro de referencia en Formación Profesional...'})}
               className="w-full h-64 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
@@ -265,7 +267,7 @@ export function ContextoTab() {
             <textarea
               value={config_contexto.caracteristicas_alumnado || ""}
               onChange={e => handleContextoChange("caracteristicas_alumnado", e.target.value)}
-              placeholder="Ej: Grupo diverso en edades y perfiles de ingreso..."
+              placeholder={t('placeholders.contexto.caracteristicasAlumnado', {defaultValue: 'Ej: Grupo diverso en edades y perfiles de ingreso...'})}
               className="w-full h-96 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
@@ -280,7 +282,7 @@ export function ContextoTab() {
             <textarea
               value={config_contexto.infraestructura || ""}
               onChange={e => handleContextoChange("infraestructura", e.target.value)}
-              placeholder="Ej: Aula-taller informatizada con 30 puestos..."
+              placeholder={t('placeholders.contexto.infraestructura', {defaultValue: 'Ej: Aula-taller informatizada con 30 puestos...'})}
               className="w-full h-64 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
@@ -375,7 +377,7 @@ export function ContextoTab() {
             <textarea
               value={config_contexto.texto_introduccion || ""}
               onChange={e => handleContextoChange("texto_introduccion", e.target.value)}
-              placeholder="Párrafo introductorio del documento. Si se deja vacío, se genera uno automáticamente con el nombre del módulo, ciclo, régimen y duración."
+              placeholder={t('placeholders.contexto.textoIntroduccion', {defaultValue: 'Párrafo introductorio del documento. Si se deja vacío, se genera uno automáticamente con el nombre del módulo, ciclo, régimen y duración.'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
@@ -384,7 +386,7 @@ export function ContextoTab() {
             <textarea
               value={config_contexto.texto_uds_modulo || ""}
               onChange={e => handleContextoChange("texto_uds_modulo", e.target.value)}
-              placeholder="Descripción de cómo se organizan las unidades didácticas. Si se deja vacío, se genera automáticamente a partir de df_ud."
+              placeholder={t('placeholders.contexto.textoUdsModulo', {defaultValue: 'Descripción de cómo se organizan las unidades didácticas. Si se deja vacío, se genera automáticamente a partir de df_ud.'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
@@ -398,13 +400,13 @@ export function ContextoTab() {
         <div className="space-y-6">
           <NarrativeField
             id="textos_pd_bibliografia"
-            title="Bibliografía y Recursos"
-            description="Bibliografía principal para el profesorado y alumnado."
+            title={t('campos.modulo.bibliografiaTitulo', {defaultValue: 'Bibliografía y recursos'})}
+            description={t('campos.modulo.bibliografiaDesc', {defaultValue: 'Bibliografía principal para el profesorado y alumnado.'})}
           />
           <NarrativeField
             id="textos_pd_publicidad"
-            title="Publicidad de la programación"
-            description="Cómo y dónde se publicará o podrá consultar la programación."
+            title={t('campos.modulo.publicidadTitulo', {defaultValue: 'Publicidad de la programación'})}
+            description={t('campos.modulo.publicidadDesc', {defaultValue: 'Cómo y dónde se publicará o podrá consultar la programación.'})}
           />
         </div>
       </div>

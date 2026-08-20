@@ -6,8 +6,10 @@ import { resolveDescRa } from "@/services/catalogCache";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { calcularNotas, DEFAULT_CONFIG_REDONDEO } from "@/utils/calificaciones";
+import { useTranslation } from "react-i18next";
 
 export function ProgresoRaTab() {
+  const { t } = useTranslation();
   const { activeModuleId, moduleData, cursoData } = useAppStore();
   const { planningLedger } = useDynamicPlanning();
 
@@ -165,7 +167,7 @@ export function ProgresoRaTab() {
                   <div
                     className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-danger bg-danger/10"
                     style={{ left: `calc(${(minN / 10) * 100}% - 6px)` }}
-                    title={`Mín: ${minN.toFixed(1)}`}
+                    title={t('tooltips.evaluacion.minValor', {valor: minN.toFixed(1), defaultValue: `Mín: ${minN.toFixed(1)}`})}
                   />
                   {/* Mean marker */}
                   <div
@@ -175,13 +177,13 @@ export function ProgresoRaTab() {
                       borderColor: getColor(avgN),
                       backgroundColor: getColor(avgN),
                     }}
-                    title={`Media: ${avgN.toFixed(1)}`}
+                    title={t('tooltips.evaluacion.mediaValor', {valor: avgN.toFixed(1), defaultValue: `Media: ${avgN.toFixed(1)}`})}
                   />
                   {/* Max marker */}
                   <div
                     className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-success bg-success/10"
                     style={{ left: `calc(${(maxN / 10) * 100}% - 6px)` }}
-                    title={`Máx: ${maxN.toFixed(1)}`}
+                    title={t('tooltips.evaluacion.maxValor', {valor: maxN.toFixed(1), defaultValue: `Máx: ${maxN.toFixed(1)}`})}
                   />
                 </div>
 

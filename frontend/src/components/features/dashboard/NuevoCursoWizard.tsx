@@ -132,7 +132,7 @@ export function NuevoCursoWizard({ onClose }: NuevoCursoWizardProps) {
           <button
             onClick={onClose}
             className="absolute top-4 right-4 text-muted hover:text-foreground transition-colors"
-            title="Cerrar"
+            title={t('common.cerrar', {defaultValue: 'Cerrar'})}
           >
             <X className="w-5 h-5" />
           </button>
@@ -156,11 +156,11 @@ export function NuevoCursoWizard({ onClose }: NuevoCursoWizardProps) {
             <div className="space-y-5">
               <div>
                 <label className="block text-body font-bold text-foreground mb-2">Curso académico</label>
-                <Input value={cursoAcademico} onChange={(e) => setCursoAcademico(e.target.value)} placeholder="Ej: 2026-27" />
+                <Input value={cursoAcademico} onChange={(e) => setCursoAcademico(e.target.value)} placeholder={t('placeholders.archivos.ejCursoAcademico2', {defaultValue: 'Ej: 2026-27'})} />
               </div>
               <div>
                 <label className="block text-body font-bold text-foreground mb-2">Nombre del grupo</label>
-                <Input value={nombreGrupo} onChange={(e) => setNombreGrupo(e.target.value)} placeholder="Ej: 1A-GM 0237-ICTVE" />
+                <Input value={nombreGrupo} onChange={(e) => setNombreGrupo(e.target.value)} placeholder={t('placeholders.dashboard.ejNombreGrupo', {defaultValue: 'Ej: 1A-GM 0237-ICTVE'})} />
               </div>
               <label className="flex items-start gap-3 p-4 rounded-xl border border-[var(--glass-border)] bg-foreground/5 cursor-pointer">
                 <input

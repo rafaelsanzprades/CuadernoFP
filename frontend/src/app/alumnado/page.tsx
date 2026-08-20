@@ -259,7 +259,7 @@ export default function AlumnadoPage() {
                     variant="ghost"
                     onClick={() => fileInputRef.current?.click()}
                     className="text-accent hover:text-accent hover:bg-accent/10 font-semibold flex items-center gap-1 h-8 px-3 ml-2"
-                    title="Importar CSV (Nombre, Apellidos...)"
+                    title={t('tooltips.alumnado.importarCsv', {defaultValue: 'Importar CSV (Nombre, Apellidos...)'})}
                   >
                     <FolderOpen className="w-4 h-4" /> {t('botones.alumnado.importarCsv', {defaultValue: 'Importar CSV'})}
                   </Button>
@@ -295,7 +295,7 @@ export default function AlumnadoPage() {
                         <button
                           onClick={() => handleRemoveAlumnado(idx)}
                           className="absolute top-3 right-3 text-danger/50 hover:text-danger opacity-0 group-hover:opacity-100 transition-all hover:scale-110"
-                          title="Eliminar alumnado"
+                          title={t('tooltips.alumnado.eliminarAlumnado', {defaultValue: 'Eliminar alumnado'})}
                         >
                           <X className="w-4 h-4" />
                         </button>
@@ -312,14 +312,14 @@ export default function AlumnadoPage() {
                                 value={al.Apellidos || ""}
                                 onChange={(e) => handleUpdateAlumnado(idx, "Apellidos", e.target.value)}
                                 className={`${fieldClass} flex-1 min-w-0 rounded px-1 py-0.5 font-semibold text-foreground`}
-                                placeholder="Apellidos..."
+                                placeholder={t('placeholders.alumnado.apellidos', {defaultValue: 'Apellidos...'})}
                               />
                               <input
                                 type="text"
                                 value={al.Nombre || ""}
                                 onChange={(e) => handleUpdateAlumnado(idx, "Nombre", e.target.value)}
                                 className={`${fieldClass} flex-1 min-w-0 rounded px-1 py-0.5 text-foreground`}
-                                placeholder="Nombre..."
+                                placeholder={t('placeholders.alumnado.nombre', {defaultValue: 'Nombre...'})}
                               />
                               <select
                                 value={al.Estado || "Alta"}
@@ -343,7 +343,7 @@ export default function AlumnadoPage() {
                                   value={al.Edad ?? ""}
                                   onChange={(e) => handleUpdateAlumnado(idx, "Edad", e.target.value === "" ? null : Number(e.target.value))}
                                   className={`${fieldClass} w-14`}
-                                  placeholder="edad"
+                                  placeholder={t('placeholders.alumnado.edad', {defaultValue: 'edad'})}
                                 />
                                 <span>años ·</span>
                                 <input
@@ -357,7 +357,7 @@ export default function AlumnadoPage() {
                                   const milestones = computeMilestoneDates(al.Nacimiento);
                                   if (!milestones) return null;
                                   return (
-                                    <span className="text-caption text-muted/70" title="Fechas calculadas a partir de Nacimiento, relevantes para FEOE y mayoría de edad">
+                                    <span className="text-caption text-muted/70" title={t('tooltips.alumnado.fechasCalculadasNacimiento', {defaultValue: 'Fechas calculadas a partir de nacimiento, relevantes para FEOE y mayoría de edad'})}>
                                       · 16: {milestones.f16} · 18: {milestones.f18}
                                     </span>
                                   );
@@ -392,7 +392,7 @@ export default function AlumnadoPage() {
                                   value={al.Movil || ""}
                                   onChange={(e) => handleUpdateAlumnado(idx, "Movil", e.target.value)}
                                   className={`${fieldClass} flex-1 min-w-0`}
-                                  placeholder="Teléfono"
+                                  placeholder={t('placeholders.alumnado.telefono', {defaultValue: 'Teléfono'})}
                                 />
                               </span>
                             </div>

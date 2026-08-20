@@ -4,8 +4,10 @@ import { CheckCircle2, Plus, X } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { INSTRUMENTOS_EVALUACION, INSTRUMENTOS_CALIFICACION } from "@/data/instrumentosEvaluacion";
 import { RECURSOS_DIDACTICOS } from "@/data/herramientasRecursos";
+import { useTranslation } from "react-i18next";
 
 export function EvaluacionRecursosTab() {
+  const { t } = useTranslation();
   const { moduleData, updateModuleData } = useAppStore();
   const [nuevoRecurso, setNuevoRecurso] = useState("");
 
@@ -126,7 +128,7 @@ export function EvaluacionRecursosTab() {
                     value={nuevoRecurso}
                     onChange={(e) => setNuevoRecurso(e.target.value)}
                     onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); addRecursoPersonalizado(); } }}
-                    placeholder="Añadir un recurso que no esté en la lista..."
+                    placeholder={t('placeholders.modulo.anadirRecurso', {defaultValue: 'Añadir un recurso que no esté en la lista...'})}
                     className="flex-1 px-3 py-2 rounded border border-white/10 bg-white/5 text-caption text-foreground placeholder:text-muted focus:outline-none focus:ring-1 focus:ring-amber-500"
                   />
                   <button

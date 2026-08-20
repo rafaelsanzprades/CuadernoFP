@@ -3,6 +3,7 @@ import { CheckCircle2 } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
+import { useTranslation } from "react-i18next";
 
 // Un par puntos-fuertes/áreas-de-mejora por cada categoría de EqavetTab.tsx
 // (Planificación/Desarrollo/Resultados), en vez de un único par global —
@@ -30,6 +31,7 @@ const CATEGORIAS = [
 ];
 
 export function PropuestasTab() {
+  const { t } = useTranslation();
   const { moduleData, updateModuleData } = useAppStore();
 
   if (!moduleData) return null;
@@ -68,7 +70,7 @@ export function PropuestasTab() {
                     value={eqavet[`puntos_fuertes_${cat.key}`] || ""}
                     onChange={(e) => handleTextChange(`puntos_fuertes_${cat.key}`, e.target.value)}
                     className="w-full h-24 rounded-lg bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 text-body focus:outline-none focus:border-success resize-none transition-colors"
-                    placeholder={cat.fuertesPh}
+                    placeholder={t(`placeholders.modulo.eqavet${cat.key}Fuertes`, {defaultValue: cat.fuertesPh})}
                   />
                 </div>
                 <div>
@@ -77,7 +79,7 @@ export function PropuestasTab() {
                     value={eqavet[`areas_mejora_${cat.key}`] || ""}
                     onChange={(e) => handleTextChange(`areas_mejora_${cat.key}`, e.target.value)}
                     className="w-full h-24 rounded-lg bg-[var(--glass-bg)] border border-[var(--glass-border)] p-3 text-body focus:outline-none focus:border-success resize-none transition-colors"
-                    placeholder={cat.mejoraPh}
+                    placeholder={t(`placeholders.modulo.eqavet${cat.key}Mejora`, {defaultValue: cat.mejoraPh})}
                   />
                 </div>
               </div>

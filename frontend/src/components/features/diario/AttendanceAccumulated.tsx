@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { MotionWrapper } from '@/components/ui/MotionWrapper';
 import { Card } from '@/components/ui/Card';
+import { useTranslation } from 'react-i18next';
 
 type AttendanceStatus = 'presente' | 'falta' | 'retraso' | null;
 
@@ -13,6 +14,7 @@ interface AttendanceRecord {
 }
 
 export const AttendanceAccumulated = () => {
+  const { t } = useTranslation();
   const { cursoData, moduleData, activeModuleId } = useAppStore();
   const [attendanceData, setAttendanceData] = useState<AttendanceRecord[]>([]);
   const [loading, setLoading] = useState(false);
@@ -131,7 +133,7 @@ export const AttendanceAccumulated = () => {
             <thead>
               <tr className="bg-foreground/5 text-muted border-b border-[var(--glass-border)]">
                 <th className="p-4 font-semibold w-16 text-center">Nº</th>
-                <th className="p-4 font-semibold w-12 text-center" title="Menor de edad"><AlertCircle className="w-4 h-4 mx-auto" /></th>
+                <th className="p-4 font-semibold w-12 text-center" title={t('tooltips.diario.menorDeEdad', {defaultValue: 'Menor de edad'})}><AlertCircle className="w-4 h-4 mx-auto" /></th>
                 <th className="p-4 font-semibold">Alumnado</th>
                 <th className="p-4 font-semibold text-center w-24">1t</th>
                 <th className="p-4 font-semibold text-center w-24">2t</th>

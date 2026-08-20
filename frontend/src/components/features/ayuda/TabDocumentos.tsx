@@ -106,7 +106,7 @@ export function TabDocumentos() {
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
         <input
           type="text"
-          placeholder="Buscar documento..."
+          placeholder={t('placeholders.ayuda.buscarDocumento', {defaultValue: 'Buscar documento...'})}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="w-full h-[46px] bg-foreground/5 border border-[var(--glass-border)] rounded-xl pl-10 pr-4 text-body text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all placeholder:text-muted/60"
@@ -217,7 +217,7 @@ export function TabDocumentos() {
             </div>
           </div>
           <div className="flex-1 w-full h-full p-4 bg-[#525659]">
-            <iframe src={`${previewUrl}#toolbar=0`} className="w-full h-full rounded-lg shadow-2xl" title="Vista previa PDF" />
+            <iframe src={`${previewUrl}#toolbar=0`} className="w-full h-full rounded-lg shadow-2xl" title={t('tooltips.comun.vistaPreviaPdf', {defaultValue: 'Vista previa PDF'})} />
           </div>
         </div>
       )}

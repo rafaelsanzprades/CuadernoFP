@@ -655,7 +655,7 @@ export default function MatricesPage() {
                                                   updateDataFrame("df_ce", newCe);
                                                 }}
                                                 className="text-danger hover:text-danger font-bold"
-                                                title="Eliminar CE"
+                                                title={t('tooltips.curriculo.eliminarCe', {defaultValue: 'Eliminar CE'})}
                                               >
                                                 ×
                                               </button>
@@ -732,13 +732,13 @@ export default function MatricesPage() {
                       <span><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></span> UD/T. Unidades didácticas o de trabajo
                     </h2>
                     <div className="flex items-center gap-3 text-[11px] font-semibold">
-                      <div className="bg-info/10 text-info px-3 py-1.5 rounded-full border border-info/20 shadow-sm" title="Suma de las horas asignadas a cada UD">
+                      <div className="bg-info/10 text-info px-3 py-1.5 rounded-full border border-info/20 shadow-sm" title={t('tooltips.curriculo.sumaHorasUd', {defaultValue: 'Suma de las horas asignadas a cada UD'})}>
                         Horas UDs: {df_ud.reduce((sum: number, ud: any) => sum + (Number(ud.horas_ud) || 0), 0)} h
                       </div>
-                      <div className="bg-accent/10 text-accent px-3 py-1.5 rounded-full border border-accent/20 shadow-sm" title="Suma de las horas de todas las sesiones">
+                      <div className="bg-accent/10 text-accent px-3 py-1.5 rounded-full border border-accent/20 shadow-sm" title={t('tooltips.curriculo.sumaHorasSesiones', {defaultValue: 'Suma de las horas de todas las sesiones'})}>
                         Horas Secuenciadas: {df_sesiones?.reduce((sum: number, s: any) => sum + (Number(s.Horas) || 0), 0) || 0} h
                       </div>
-                      <div className="bg-foreground/10 text-foreground px-3 py-1.5 rounded-full border border-foreground/20 shadow-sm" title="Horas totales del módulo según currículo (BOA)">
+                      <div className="bg-foreground/10 text-foreground px-3 py-1.5 rounded-full border border-foreground/20 shadow-sm" title={t('tooltips.curriculo.horasTotalesModulo', {defaultValue: 'Horas totales del módulo según currículo (BOA)'})}>
                         Total BOA: {moduleData?.info_modulo?.h_boa || 0} h
                       </div>
                     </div>
@@ -849,7 +849,7 @@ export default function MatricesPage() {
                       <span className="font-bold text-info">{selectedCells.size} celdas seleccionadas</span>
                       <input
                         type="number"
-                        placeholder="Peso..."
+                        placeholder={t('placeholders.curriculo.peso', {defaultValue: 'Peso...'})}
                         value={selectionValue}
                         onChange={e => setSelectionValue(e.target.value)}
                         className="w-24 bg-foreground/10 border border-[var(--glass-border)] rounded px-3 py-2 focus:border-info focus:outline-none font-bold"

@@ -6,8 +6,10 @@ import { AttendanceGrid } from "@/components/features/diario/AttendanceGrid";
 import { AttendanceAccumulated } from "@/components/features/diario/AttendanceAccumulated";
 import { EmptyState } from "@/components/ui/EmptyState";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 export function AsistenciaTab() {
+  const { t } = useTranslation();
   const { activeModuleId, cursoData } = useAppStore();
   const [activeTab, setActiveTab] = useState("hoy");
 
@@ -43,7 +45,7 @@ export function AsistenciaTab() {
       {(!activeModuleId || !cursoData) ? (
         <EmptyState
           icon={Users}
-          title="Ningún curso activo"
+          title={t('tooltips.diario.ningunCursoActivo', {defaultValue: 'Ningún curso activo'})}
           description={
             <>
               Para pasar lista necesitas tener un Curso activo con alumnado matriculados.

@@ -44,14 +44,14 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
                     <button 
                       onClick={() => setEditingTask(tc)}
                       className="p-1.5 hover:bg-foreground/10 rounded-md text-muted hover:text-accent transition-colors"
-                      title="Configurar tarea competencial"
+                      title={t('tooltips.secuenciacion.configurarTarea', {defaultValue: 'Configurar tarea competencial'})}
                     >
                       <Settings className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => handleDeleteTarea(globalIdx)}
                       className="p-1.5 text-danger/70 hover:bg-danger/10 hover:text-danger rounded-md font-bold transition-colors"
-                      title="Eliminar tarea"
+                      title={t('tooltips.secuenciacion.eliminarTarea', {defaultValue: 'Eliminar tarea'})}
                     >
                       <X className="w-4 h-4" />
                     </button>

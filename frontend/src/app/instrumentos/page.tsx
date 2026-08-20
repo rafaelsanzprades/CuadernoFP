@@ -348,7 +348,7 @@ export default function InstrumentosPage() {
                             setConfigModalOpen(true);
                           }}
                           className="p-1.5 rounded text-muted hover:text-indigo-400 hover:bg-white/10 transition-colors"
-                          title="Configuración avanzada"
+                          title={t('tooltips.instrumentos.configuracionAvanzada', {defaultValue: 'Configuración avanzada'})}
                         >
                           <Settings2 className="w-4 h-4" />
                         </button>
@@ -361,7 +361,7 @@ export default function InstrumentosPage() {
                             updateDataFrame("df_act", newAct);
                           }}
                           className="text-danger hover:text-danger font-bold px-2"
-                          title="Eliminar actividad"
+                          title={t('tooltips.instrumentos.eliminarActividad', {defaultValue: 'Eliminar actividad'})}
                         >
                           ×
                         </button>
@@ -622,7 +622,7 @@ export default function InstrumentosPage() {
           <button
             onClick={() => setSelectedCells(new Set())}
             className="p-1.5 rounded text-muted hover:text-foreground hover:bg-white/10 transition-colors"
-            title="Cancelar selección"
+            title={t('tooltips.instrumentos.cancelarSeleccion', {defaultValue: 'Cancelar selección'})}
           >
             <X className="w-4 h-4" />
           </button>

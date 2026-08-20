@@ -199,7 +199,7 @@ export default function Sidebar() {
 
       {/* ── Navegación principal ── */}
       <nav
-        aria-label="Navegación principal"
+        aria-label={t('aria.sidebar.navegacionPrincipal', {defaultValue: 'Navegación principal'})}
         onScroll={handleScroll}
         className={`sidebar-scroll-container flex-1 ${isSidebarOpen ? 'px-3' : 'px-2'} py-2 space-y-3 overflow-x-hidden overflow-y-auto scrollbar-hide`}
       >

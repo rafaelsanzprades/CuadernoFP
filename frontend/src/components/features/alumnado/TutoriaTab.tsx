@@ -113,7 +113,7 @@ export function TutoriaTab() {
                     <button 
                       onClick={() => handleDeleteTutoria(selectedAlId, idx)}
                       className="absolute top-4 right-4 text-danger/50 hover:text-danger opacity-0 group-hover:opacity-100 transition-opacity"
-                      title="Eliminar registro"
+                      title={t('tooltips.modulo.eliminarRegistro', {defaultValue: 'Eliminar registro'})}
                     >
                       <Trash2 className="w-5 h-5" />
                     </button>
@@ -163,7 +163,7 @@ export function TutoriaTab() {
                         <textarea 
                           value={tut.tema || ""}
                           onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "tema", e.target.value)}
-                          placeholder="Describe brevemente lo comentado en la tutoría..."
+                          placeholder={t('placeholders.alumnado.describeTutoria', {defaultValue: 'Describe brevemente lo comentado en la tutoría...'})}
                           className="w-full bg-foreground/10 border border-[var(--glass-border)] rounded px-3 py-2 min-h-[80px] resize-y focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none placeholder:text-muted/40"
                         />
                       </div>
@@ -172,7 +172,7 @@ export function TutoriaTab() {
                         <textarea 
                           value={tut.acuerdos || ""}
                           onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "acuerdos", e.target.value)}
-                          placeholder="¿A qué acuerdos se ha llegado? ¿Qué tareas pendientes quedan?"
+                          placeholder={t('placeholders.alumnado.acuerdosTutoria', {defaultValue: '¿A qué acuerdos se ha llegado? ¿Qué tareas pendientes quedan?'})}
                           className="w-full bg-success/10 border border-[var(--glass-border)] rounded px-3 py-2 min-h-[60px] resize-y focus:border-success focus:ring-1 focus:ring-success focus:outline-none placeholder:text-success/40"
                         />
                       </div>

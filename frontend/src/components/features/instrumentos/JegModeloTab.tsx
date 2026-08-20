@@ -175,7 +175,7 @@ export function JegModeloTab() {
                             type="text"
                             value={ind.descripcion || ""}
                             onChange={(e) => updateIndicador(ind.id_indicador, "descripcion", e.target.value)}
-                            placeholder="Descripción del indicador"
+                            placeholder={t('placeholders.instrumentos.descripcionIndicador', {defaultValue: 'Descripción del indicador'})}
                             className="flex-1 bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-body focus:border-accent focus:outline-none"
                           />
                           <input
@@ -183,7 +183,7 @@ export function JegModeloTab() {
                             step="0.1"
                             value={ind.peso ?? 1}
                             onChange={(e) => updateIndicador(ind.id_indicador, "peso", Number(e.target.value) || 0)}
-                            title="Peso relativo dentro del CE"
+                            title={t('tooltips.instrumentos.pesoRelativoCe', {defaultValue: 'Peso relativo dentro del CE'})}
                             className="w-20 bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-body text-center focus:border-accent focus:outline-none"
                           />
                           <label className="flex items-center gap-1 text-caption text-muted shrink-0">
@@ -226,7 +226,7 @@ export function JegModeloTab() {
                     type="text"
                     value={instr.titulo || ""}
                     onChange={(e) => updateInstrumento(instr.id_instrumento, "titulo", e.target.value)}
-                    placeholder="Título del instrumento"
+                    placeholder={t('placeholders.instrumentos.tituloInstrumento', {defaultValue: 'Título del instrumento'})}
                     className="flex-1 bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-body focus:border-accent focus:outline-none"
                   />
                   <button onClick={() => removeInstrumento(instr.id_instrumento)} className="text-danger hover:text-danger p-1">
@@ -246,10 +246,10 @@ export function JegModeloTab() {
                   <select value={instr.agente} onChange={(e) => updateInstrumento(instr.id_instrumento, "agente", e.target.value)} className="bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-caption focus:border-accent focus:outline-none">
                     {AGENTES.map((a) => <option key={a.id} value={a.id}>{a.label}</option>)}
                   </select>
-                  <select value={instr.origen || "centro"} onChange={(e) => updateInstrumento(instr.id_instrumento, "origen", e.target.value)} title="Ítem 12: quién cumplimenta este instrumento" className="bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-caption focus:border-accent focus:outline-none">
+                  <select value={instr.origen || "centro"} onChange={(e) => updateInstrumento(instr.id_instrumento, "origen", e.target.value)} title={t('tooltips.instrumentos.item12Origen', {defaultValue: 'Ítem 12: quién cumplimenta este instrumento'})} className="bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-caption focus:border-accent focus:outline-none">
                     {ORIGENES.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
                   </select>
-                  <select value={instr.procedimiento || "ordinario"} onChange={(e) => updateInstrumento(instr.id_instrumento, "procedimiento", e.target.value)} title="Ítem 30: procedimiento JEG (ordinario/recuperación/extraordinaria)" className="bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-caption focus:border-accent focus:outline-none">
+                  <select value={instr.procedimiento || "ordinario"} onChange={(e) => updateInstrumento(instr.id_instrumento, "procedimiento", e.target.value)} title={t('tooltips.instrumentos.item30Procedimiento', {defaultValue: 'Ítem 30: procedimiento JEG (ordinario/recuperación/extraordinaria)'})} className="bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-caption focus:border-accent focus:outline-none">
                     {PROCEDIMIENTOS.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
                   </select>
                 </div>
@@ -267,7 +267,7 @@ export function JegModeloTab() {
                       options={indicadorOptions}
                       selectedIds={instr.indicadores_vinculados || []}
                       onChange={(ids) => updateInstrumento(instr.id_instrumento, "indicadores_vinculados", ids)}
-                      placeholder="Selecciona indicadores..."
+                      placeholder={t('placeholders.instrumentos.seleccionaIndicadores', {defaultValue: 'Selecciona indicadores...'})}
                     />
                   </div>
                 </div>
@@ -335,7 +335,7 @@ export function JegModeloTab() {
                     <div key={ra_id} className="bg-background/30 border border-white/5 rounded-lg p-3 text-center">
                       <div className="text-caption text-muted mb-1 flex items-center justify-center gap-1">
                         {ra_id}
-                        {esRecuperado && <span className="text-caption px-1.5 rounded bg-amber-500/20 text-amber-400" title="Sustituida por recuperación">Rec.</span>}
+                        {esRecuperado && <span className="text-caption px-1.5 rounded bg-amber-500/20 text-amber-400" title={t('tooltips.instrumentos.sustituidaPorRecuperacion', {defaultValue: 'Sustituida por recuperación'})}>Rec.</span>}
                       </div>
                       <div className="font-mono font-bold text-foreground">{nota !== null ? nota.toFixed(2) : "Sin evaluar"}</div>
                     </div>
