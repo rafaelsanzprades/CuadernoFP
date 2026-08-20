@@ -92,7 +92,7 @@ export function HeaderSettings() {
                     onClick={() => setTheme("light")}
                     className={`flex items-center justify-center gap-2 ${theme === 'light' ? 'bg-accent/20 border-accent text-accent' : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'}`}
                   >
-                    <Sun className="w-4 h-4" /> Claro
+                    <Sun className="w-4 h-4" /> {t('botones.header.claro', {defaultValue: 'Claro'})}
                   </Button>
                   <Button
                     variant="secondary"
@@ -100,7 +100,7 @@ export function HeaderSettings() {
                     onClick={() => setTheme("dark")}
                     className={`flex items-center justify-center gap-2 ${theme === 'dark' ? 'bg-accent/20 border-accent text-accent' : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'}`}
                   >
-                    <Moon className="w-4 h-4" /> Oscuro
+                    <Moon className="w-4 h-4" /> {t('botones.header.oscuro', {defaultValue: 'Oscuro'})}
                   </Button>
                 </div>
               </div>
@@ -136,23 +136,23 @@ export function HeaderSettings() {
                 </h4>
                 <div className="space-y-3">
                   <div className="grid grid-cols-3 gap-2">
-                    <Button variant="secondary" size="sm" onClick={() => changeFontSize(100)} className={`text-caption ${fontSizeScale === 100 ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>Normal</Button>
-                    <Button variant="secondary" size="sm" onClick={() => changeFontSize(115)} className={`text-body ${fontSizeScale === 115 ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>Grande</Button>
-                    <Button variant="secondary" size="sm" onClick={() => changeFontSize(130)} className={`text-body font-bold ${fontSizeScale === 130 ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>Extra</Button>
+                    <Button variant="secondary" size="sm" onClick={() => changeFontSize(100)} className={`text-caption ${fontSizeScale === 100 ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>{t('botones.header.normal', {defaultValue: 'Normal'})}</Button>
+                    <Button variant="secondary" size="sm" onClick={() => changeFontSize(115)} className={`text-body ${fontSizeScale === 115 ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>{t('botones.header.grande', {defaultValue: 'Grande'})}</Button>
+                    <Button variant="secondary" size="sm" onClick={() => changeFontSize(130)} className={`text-body font-bold ${fontSizeScale === 130 ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>{t('botones.header.extra', {defaultValue: 'Extra'})}</Button>
                   </div>
-                  
+
                   <Button variant="secondary" size="sm" onClick={toggleHighContrast} className={`w-full flex justify-between ${highContrast ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>
-                    <span className="flex items-center gap-2"><Contrast className="w-4 h-4" /> Alto Contraste</span>
+                    <span className="flex items-center gap-2"><Contrast className="w-4 h-4" /> {t('botones.header.altoContraste', {defaultValue: 'Alto contraste'})}</span>
                     {highContrast && <Check className="w-4 h-4" />}
                   </Button>
-                  
+
                   <Button variant="secondary" size="sm" onClick={toggleReduceMotion} className={`w-full flex justify-between ${reduceMotion ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>
-                    <span className="flex items-center gap-2"><ZapOff className="w-4 h-4" /> Reducir Animaciones</span>
+                    <span className="flex items-center gap-2"><ZapOff className="w-4 h-4" /> {t('botones.header.reducirAnimaciones', {defaultValue: 'Reducir animaciones'})}</span>
                     {reduceMotion && <Check className="w-4 h-4" />}
                   </Button>
 
                   <Button variant="secondary" size="sm" onClick={toggleTts} className={`w-full flex justify-between ${ttsEnabled ? "bg-accent/20 border-accent text-accent" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}>
-                    <span className="flex items-center gap-2"><Volume2 className="w-4 h-4" /> Lector en voz alta</span>
+                    <span className="flex items-center gap-2"><Volume2 className="w-4 h-4" /> {t('botones.header.lectorVoz', {defaultValue: 'Lector en voz alta'})}</span>
                     {ttsEnabled && <Check className="w-4 h-4" />}
                   </Button>
                 </div>

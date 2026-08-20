@@ -125,7 +125,7 @@ export default function MatricesPage() {
                 <p className="text-muted mb-4">Debes abrir o crear un archivo de programación en tu Archivos.</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
-                    <FolderOpen className="w-4 h-4" /> Ir a mis Archivos
+                    <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
                   </Button>
                 </Link>
               </Card>
@@ -346,7 +346,7 @@ export default function MatricesPage() {
                 variant="secondary"
                 className="border-info/50 text-info hover:bg-info/10 whitespace-nowrap shadow-sm"
               >
-                💡 Cargar Propuesta Editorial
+                💡 {t('botones.curriculo.cargarPropuestaEditorial', {defaultValue: 'Cargar propuesta editorial'})}
               </Button>
             </div>
 
@@ -464,7 +464,7 @@ export default function MatricesPage() {
                       }}
                       className="text-accent hover:text-[#1abc9c]"
                     >
-                      <span>+</span> Añadir nuevo RA
+                      <span>+</span> {t('botones.curriculo.anadirNuevoRa', {defaultValue: 'Añadir nuevo RA'})}
                     </Button>
 
                     <Card className="px-4 py-2 inline-flex items-center gap-2 border-l-4 border-l-blue-500">
@@ -494,7 +494,7 @@ export default function MatricesPage() {
                       }}
                     >
                       <span>{allCeOpen ? '▲' : '▼'}</span>
-                      {allCeOpen ? 'Colapsar todas' : 'Expandir todas'}
+                      {allCeOpen ? t('common.colapsar_todas', {defaultValue: 'Colapsar todas'}) : t('common.expandir_todas', {defaultValue: 'Expandir todas'})}
                     </Button>
                   </div>
 
@@ -690,7 +690,7 @@ export default function MatricesPage() {
                                       }}
                                       className="text-caption text-warning hover:text-warning font-semibold flex items-center gap-1"
                                     >
-                                      <span>+</span> Añadir CE a {ra.id_ra}
+                                      <span>+</span> {t('botones.curriculo.anadirCeA', {id: ra.id_ra, defaultValue: `Añadir CE a ${ra.id_ra}`})}
                                     </button>
                                   </div>
                                 </div>
@@ -839,7 +839,7 @@ export default function MatricesPage() {
                         }}
                         className="text-info hover:text-info"
                       >
-                        <span>+</span> Añadir nueva UD
+                        <span>+</span> {t('botones.curriculo.anadirNuevaUd', {defaultValue: 'Añadir nueva UD'})}
                       </Button>
                     </div>
                   </div>
@@ -890,10 +890,10 @@ export default function MatricesPage() {
                         }}
                         className="px-6"
                       >
-                        Aplicar a {selectedCells.size} celdas
+                        {t('botones.curriculo.aplicarACeldas', {count: selectedCells.size, defaultValue: `Aplicar a ${selectedCells.size} celdas`})}
                       </Button>
                       <Button variant="ghost" onClick={() => setSelectedCells(new Set())} className="text-muted hover:text-foreground">
-                        Cancelar
+                        {t('common.cancelar', {defaultValue: 'Cancelar'})}
                       </Button>
                     </div>
                   )}
@@ -910,7 +910,7 @@ export default function MatricesPage() {
                         onClick={generateAutoSessions}
                         className="text-purple-400 hover:text-purple-300 border border-purple-500/30 hover:border-purple-400/50 bg-purple-500/10"
                       >
-                        <Wand2 className="w-4 h-4 mr-2" /> Autocompletar plan
+                        <Wand2 className="w-4 h-4 mr-2" /> {t('botones.curriculo.autocompletarPlan', {defaultValue: 'Autocompletar plan'})}
                       </Button>
                       <Button
                         variant="ghost"
@@ -918,7 +918,7 @@ export default function MatricesPage() {
                         className="text-body border border-[var(--glass-border)]"
                       >
                         <span>{allUdsOpen ? '▲' : '▼'}</span>
-                        {allUdsOpen ? 'Colapsar todas' : 'Expandir todas'}
+                        {allUdsOpen ? t('common.colapsar_todas', {defaultValue: 'Colapsar todas'}) : t('common.expandir_todas', {defaultValue: 'Expandir todas'})}
                       </Button>
                     </div>
                   </div>

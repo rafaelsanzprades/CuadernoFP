@@ -264,7 +264,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
                 <div className="bg-foreground/5 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col gap-4 text-center group">
                   <div className="flex flex-col items-center mb-2">
                     <GraduationCap className="w-12 h-12 text-success/40 mb-3 group-hover:text-success transition-colors" />
-                    <p className="text-foreground font-medium group-hover:text-success transition-colors">Crear curso vacío</p>
+                    <p className="text-foreground font-medium group-hover:text-success transition-colors">{t('botones.archivos.crearCursoVacio', {defaultValue: 'Crear curso vacío'})}</p>
                   </div>
                   
                   <div className="flex gap-2 text-left">
@@ -295,7 +295,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
                     disabled={isCreating || !cursoYear || !cursoName}
                     className="w-full bg-success/10 hover:bg-success/20 text-success border border-success/30 transition-all mt-2"
                   >
-                    Crear ahora
+                    {t('botones.archivos.crearAhora', {defaultValue: 'Crear ahora'})}
                   </Button>
                 </div>
                 <button
@@ -307,7 +307,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
                     RECOMENDADO
                   </div>
                   <BookOpen className="w-12 h-12 text-warning/60 mx-auto mb-3 group-hover:text-warning transition-colors" />
-                  <p className="text-foreground font-medium group-hover:text-warning transition-colors">Cargar datos DEMO</p>
+                  <p className="text-foreground font-medium group-hover:text-warning transition-colors">{t('botones.archivos.cargarDatosDemo', {defaultValue: 'Cargar datos DEMO'})}</p>
                   <p className="text-body text-muted mt-2">Genera un curso pre-rellenado con datos de ejemplo para explorar todas las funciones.</p>
                 </button>
               </div>
@@ -318,7 +318,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
         {/* Footer */}
         <div className="flex items-center justify-end gap-3 p-6 border-t border-[var(--glass-border)]">
           <Button onClick={onClose} className="bg-foreground/5 hover:bg-foreground/10 text-muted border border-[var(--glass-border)]">
-            Cancelar
+            {t('common.cancelar', {defaultValue: 'Cancelar'})}
           </Button>
           {fileType === 'programacion' && (
             <Button
@@ -327,7 +327,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
               className="bg-info/20 hover:bg-info/30 text-info border border-info/30 disabled:opacity-40"
             >
               {isCreating ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <BookOpen className="w-4 h-4 mr-2" />}
-              Crear programación
+              {t('botones.archivos.crearProgramacion', {defaultValue: 'Crear programación'})}
             </Button>
           )}
         </div>

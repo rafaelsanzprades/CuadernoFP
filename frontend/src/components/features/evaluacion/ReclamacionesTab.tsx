@@ -107,7 +107,7 @@ export function ReclamacionesTab() {
             <AlertOctagon className="w-[1.2em] h-[1.2em]" /> Reclamaciones de nota
           </h2>
           <Button onClick={() => setFormOpen(o => !o)} className="bg-danger/10 hover:bg-danger/20 text-danger border border-danger/30 gap-2">
-            <Plus className="w-4 h-4" /> Nueva reclamación
+            <Plus className="w-4 h-4" /> {t('botones.reclamaciones.nuevaReclamacion', {defaultValue: 'Nueva reclamación'})}
           </Button>
         </div>
 
@@ -135,7 +135,7 @@ export function ReclamacionesTab() {
             </div>
             <div className="flex justify-end">
               <Button onClick={handleCrear} className="bg-danger/20 hover:bg-danger/30 text-danger border border-danger/30">
-                Registrar reclamación
+                {t('botones.reclamaciones.registrarReclamacion', {defaultValue: 'Registrar reclamación'})}
               </Button>
             </div>
           </div>
@@ -176,14 +176,14 @@ export function ReclamacionesTab() {
                         disabled={generando === r.id}
                         className="text-caption bg-info/10 hover:bg-info/20 text-info border border-info/30 gap-2"
                       >
-                        <FileDown className="w-3.5 h-3.5" /> {generando === r.id ? "Generando..." : "Justificante"}
+                        <FileDown className="w-3.5 h-3.5" /> {generando === r.id ? t('common.generando', {defaultValue: 'Generando...'}) : t('botones.reclamaciones.justificante', {defaultValue: 'Justificante'})}
                       </Button>
                       {r.estado === "pendiente" && resolviendoId !== r.id && (
                         <Button
                           onClick={() => { setResolviendoId(r.id); setResolucionTexto(""); }}
                           className="text-caption bg-success/10 hover:bg-success/20 text-success border border-success/30 gap-2"
                         >
-                          <CheckCircle2 className="w-3.5 h-3.5" /> Resolver
+                          <CheckCircle2 className="w-3.5 h-3.5" /> {t('botones.reclamaciones.resolver', {defaultValue: 'Resolver'})}
                         </Button>
                       )}
                     </div>
@@ -198,10 +198,10 @@ export function ReclamacionesTab() {
                       />
                       <div className="flex justify-end gap-2">
                         <Button onClick={() => setResolviendoId(null)} className="text-caption bg-foreground/5 hover:bg-foreground/10 text-muted border border-[var(--glass-border)]">
-                          Cancelar
+                          {t('common.cancelar', {defaultValue: 'Cancelar'})}
                         </Button>
                         <Button onClick={() => handleResolver(r.id)} className="text-caption bg-success/20 hover:bg-success/30 text-success border border-success/30">
-                          Confirmar resolución
+                          {t('botones.reclamaciones.confirmarResolucion', {defaultValue: 'Confirmar resolución'})}
                         </Button>
                       </div>
                     </div>

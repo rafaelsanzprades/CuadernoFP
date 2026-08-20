@@ -327,6 +327,7 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
 // ─── TAB 2: Título ─────────────────────────────────────────────────────────────
 
 function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: { onSelectTitulo: (familiaName: string, tituloCodigo: string) => void; globalSelection: { familia: string; tituloCodigo: string; moduloCodigo: string }; updateGlobalSelection: (updates: Partial<{ familia: string; tituloCodigo: string; moduloCodigo: string }>) => void }) {
+  const { t } = useTranslation();
   const [families, setFamilies] = useState<Family[]>([]);
   const [famLoading, setFamLoading] = useState(true);
 
@@ -417,7 +418,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
             </div>
             <Button variant="primary" onClick={() => onSelectTitulo(selectedFamilia, selectedTituloObj.code ?? selectedTituloObj.name)}>
               <BookOpen className="w-4 h-4 mr-2" />
-              Cursos → módulos
+              {t('botones.catalogo.cursosAModulos', {defaultValue: 'Cursos → módulos'})}
             </Button>
           </div>
 
@@ -660,7 +661,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
                       }}
                       className="shrink-0"
                     >
-                      <BookOpen className="w-4 h-4 mr-2" /> Nueva programación
+                      <BookOpen className="w-4 h-4 mr-2" /> {t('botones.catalogo.nuevaProgramacion', {defaultValue: 'Nueva programación'})}
                     </Button>
                     <ChevronDown className="w-4 h-4 -rotate-90 text-muted shrink-0" />
                   </div>
@@ -953,7 +954,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                 className="flex items-center ml-2"
               >
                 <BookOpen className="w-4 h-4 mr-2" />
-                Nueva programación
+                {t('botones.catalogo.nuevaProgramacion', {defaultValue: 'Nueva programación'})}
               </Button>
             </div>
           </div>

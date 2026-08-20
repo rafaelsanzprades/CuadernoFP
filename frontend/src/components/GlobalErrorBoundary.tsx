@@ -1,8 +1,10 @@
 "use client";
 import { AlertTriangle, RefreshCcw } from "lucide-react";
 import { ErrorBoundary, FallbackProps } from "react-error-boundary";
+import { useTranslation } from "react-i18next";
 
 function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col items-center justify-center min-h-[400px] w-full p-8 text-center animate-in fade-in zoom-in duration-500">
       <div className="bg-danger/10 border border-danger/30 p-6 rounded-2xl max-w-lg shadow-xl shadow-red-500/5 backdrop-blur-md">
@@ -20,7 +22,7 @@ function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
           className="bg-danger hover:bg-danger text-white px-6 py-2 rounded-xl font-bold shadow-lg transition-all active:scale-95 flex items-center gap-2 mx-auto"
         >
           <RefreshCcw className="w-4 h-4" />
-          Intentar recargar
+          {t('botones.error.intentarRecargar', {defaultValue: 'Intentar recargar'})}
         </button>
       </div>
     </div>

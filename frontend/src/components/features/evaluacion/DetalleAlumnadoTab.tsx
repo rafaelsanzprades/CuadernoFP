@@ -217,7 +217,7 @@ export function DetalleAlumnadoTab() {
           }}
         >
           <span>{allStudentsOpen ? '▲' : '▼'}</span>
-          {allStudentsOpen ? 'Colapsar todos' : 'Expandir todos'}
+          {allStudentsOpen ? t('common.colapsar_todos', {defaultValue: 'Colapsar todos'}) : t('common.expandir_todos', {defaultValue: 'Expandir todos'})}
         </Button>
       </div>
 
@@ -473,7 +473,7 @@ export function DetalleAlumnadoTab() {
                                 disabled={generandoInforme === al_id}
                                 className="text-caption bg-info/10 hover:bg-info/20 text-info border border-info/30 gap-2"
                               >
-                                <FileDown className="w-3.5 h-3.5" /> {generandoInforme === al_id ? "Generando..." : "Generar informe"}
+                                <FileDown className="w-3.5 h-3.5" /> {generandoInforme === al_id ? t('common.generando', {defaultValue: 'Generando...'}) : t('botones.evaluacion.generarInforme', {defaultValue: 'Generar informe'})}
                               </Button>
                             </div>
                             <div className="space-y-2">

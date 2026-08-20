@@ -331,7 +331,7 @@ export default function CalendarioPage() {
                 <p className="text-muted mb-4">Debes abrir o crear un archivo de curso en tu Archivos.</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
-                    <FolderOpen className="w-4 h-4" /> Ir a mis Archivos
+                    <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
                   </Button>
                 </Link>
               </Card>
@@ -493,7 +493,7 @@ export default function CalendarioPage() {
                       }}
                       className="text-caption text-info hover:text-info border border-[var(--glass-border)]"
                     >
-                      <span className="inline-flex"><Search className="w-[1.2em] h-[1.2em] mr-1" /></span> Autodetectar
+                      <span className="inline-flex"><Search className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('botones.calendario.autodetectar', {defaultValue: 'Autodetectar'})}
                     </Button>
                   </div>
                 </div>
@@ -811,7 +811,7 @@ export default function CalendarioPage() {
                     </table>
                   </div>
                   <button onClick={addRowAce} className="text-body text-[#14a085] hover:text-[#1abc9c] font-semibold flex items-center gap-1">
-                    <span>+</span> Añadir actividad complementaria
+                    <span>+</span> {t('botones.calendario.anadirActividadComplementaria', {defaultValue: 'Añadir actividad complementaria'})}
                   </button>
                 </Card>
               )}

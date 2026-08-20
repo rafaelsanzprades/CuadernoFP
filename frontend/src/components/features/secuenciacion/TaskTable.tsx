@@ -2,8 +2,10 @@ import { Plus, X, Settings } from "lucide-react";
 import React, { useState } from "react";
 import { TaskConfigModal } from "./TaskConfigModal";
 import { INSTRUMENTOS_EVALUACION } from "@/data/instrumentosEvaluacion";
+import { useTranslation } from "react-i18next";
 
 export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handleDeleteTarea }: any) {
+  const { t } = useTranslation();
   const [editingTask, setEditingTask] = useState<any>(null);
   return (
     <div className="overflow-x-auto">
@@ -91,7 +93,7 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
           onClick={handleAddTarea}
           className="text-body text-info hover:text-info font-semibold flex items-center gap-1"
         >
-          <Plus className="w-4 h-4" /> Añadir nueva tarea competencial
+          <Plus className="w-4 h-4" /> {t('botones.secuenciacion.anadirNuevaTareaCompetencial', {defaultValue: 'Añadir nueva tarea competencial'})}
         </button>
       </div>
       {editingTask && (

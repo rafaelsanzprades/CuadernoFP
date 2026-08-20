@@ -108,7 +108,7 @@ export const AttendanceGrid = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between glass-panel p-4">
         <button onClick={() => setCurrentDate(subDays(currentDate, 1))} className="glass-button px-4 py-2 flex items-center gap-2">
-          <ChevronLeft className="w-4 h-4" /> Día anterior
+          <ChevronLeft className="w-4 h-4" /> {t('botones.diario.diaAnterior', {defaultValue: 'Día anterior'})}
         </button>
         <div className="flex items-center gap-4">
           <h2 className="text-subheading font-bold">
@@ -121,7 +121,7 @@ export const AttendanceGrid = () => {
           )}
         </div>
         <button onClick={() => setCurrentDate(addDays(currentDate, 1))} className="glass-button px-4 py-2 flex items-center gap-2">
-          Día siguiente <ChevronRight className="w-4 h-4" />
+          {t('botones.diario.diaSiguiente', {defaultValue: 'Día siguiente'})} <ChevronRight className="w-4 h-4" />
         </button>
       </div>
 

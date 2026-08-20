@@ -6,8 +6,10 @@ import { format, isSameDay } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { simulateSchedule, DaySchedule } from '@/utils/scheduleSimulator';
 import { useDynamicPlanning } from '@/hooks/useDynamicPlanning';
+import { useTranslation } from 'react-i18next';
 
 export const WeeklyClasses = () => {
+  const { t } = useTranslation();
   const { moduleData, cursoData, dataSource } = useAppStore();
   const [activeWeekTab, setActiveWeekTab] = useState<'current' | 'next'>('current');
   // cursoData.planning_ledger nunca se persiste — se recalcula en memoria.
@@ -198,7 +200,7 @@ export const WeeklyClasses = () => {
                   : 'text-muted hover:text-foreground'
               }`}
             >
-              Semana actual
+              {t('botones.dashboard.semanaActual', {defaultValue: 'Semana actual'})}
             </button>
             <button
               onClick={() => setActiveWeekTab('next')}
@@ -208,13 +210,13 @@ export const WeeklyClasses = () => {
                   : 'text-muted hover:text-foreground'
               }`}
             >
-              Semana siguiente
+              {t('botones.dashboard.semanaSiguiente', {defaultValue: 'Semana siguiente'})}
               <ChevronRight className="w-3.5 h-3.5" />
             </button>
           </div>
         ) : (
           <div className="bg-info/10 border border-info/30 text-info text-caption px-3 py-1.5 rounded-lg font-bold">
-            Semana actual
+            {t('botones.dashboard.semanaActual', {defaultValue: 'Semana actual'})}
           </div>
         )}
       </div>

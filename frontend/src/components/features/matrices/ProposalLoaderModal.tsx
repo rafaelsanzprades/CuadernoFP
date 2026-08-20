@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { BookOpen, Target, FileText, CheckCircle2, ChevronRight, DownloadCloud, X, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { PublisherProposal, publisherProposals } from "@/data/proposalsData";
+import { useTranslation } from "react-i18next";
 
 interface ProposalLoaderModalProps {
   isOpen: boolean;
@@ -12,6 +13,7 @@ interface ProposalLoaderModalProps {
 }
 
 export function ProposalLoaderModal({ isOpen, onClose, activeModuleId, onApplyProposal }: ProposalLoaderModalProps) {
+  const { t } = useTranslation();
   const [selectedProposal, setSelectedProposal] = useState<PublisherProposal | null>(null);
 
   if (!isOpen) return null;
@@ -90,7 +92,7 @@ export function ProposalLoaderModal({ isOpen, onClose, activeModuleId, onApplyPr
                     onClick={() => setSelectedProposal(null)}
                     className="text-body text-info hover:underline mb-2 inline-block"
                   >
-                    &larr; Volver a la lista
+                    &larr; {t('botones.curriculo.volverALaLista', {defaultValue: 'Volver a la lista'})}
                   </button>
 
                   <div className="bg-info/10 border border-info/30 rounded-2xl p-5">
@@ -126,9 +128,9 @@ export function ProposalLoaderModal({ isOpen, onClose, activeModuleId, onApplyPr
         {/* Footer */}
         {selectedProposal && (
           <div className="p-6 border-t border-[var(--glass-border)] bg-foreground/5 rounded-b-3xl flex justify-end gap-3">
-            <Button variant="ghost" onClick={() => setSelectedProposal(null)}>Cancelar</Button>
+            <Button variant="ghost" onClick={() => setSelectedProposal(null)}>{t('common.cancelar', {defaultValue: 'Cancelar'})}</Button>
             <Button variant="primary" onClick={handleApply} className="bg-info hover:bg-info/90 text-white border-0">
-              <CheckCircle2 className="w-4 h-4 mr-2" /> Aplicar propuesta
+              <CheckCircle2 className="w-4 h-4 mr-2" /> {t('botones.curriculo.aplicarPropuesta', {defaultValue: 'Aplicar propuesta'})}
             </Button>
           </div>
         )}

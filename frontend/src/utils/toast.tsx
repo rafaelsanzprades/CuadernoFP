@@ -1,5 +1,6 @@
 import { Check, X } from "lucide-react";
 import toast from "react-hot-toast";
+import i18n from "@/i18n";
 
 export const showRichToast = {
   success: (message: string, description?: string) => {
@@ -23,7 +24,7 @@ export const showRichToast = {
             onClick={() => toast.dismiss(t.id)}
             className="w-full h-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-body font-medium text-muted hover:text-foreground hover:bg-foreground/5 focus:outline-none transition-colors"
           >
-            Cerrar
+            {i18n.t('common.cerrar', {defaultValue: 'Cerrar'})}
           </button>
         </div>
       </div>
@@ -51,7 +52,7 @@ export const showRichToast = {
             onClick={() => toast.dismiss(t.id)}
             className="w-full h-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-body font-medium text-muted hover:text-foreground hover:bg-foreground/5 focus:outline-none transition-colors"
           >
-            Cerrar
+            {i18n.t('common.cerrar', {defaultValue: 'Cerrar'})}
           </button>
         </div>
       </div>
@@ -82,13 +83,13 @@ export const showRichToast = {
             }}
             className="w-full flex-1 border-b border-[var(--glass-border)] p-2 flex items-center justify-center text-body font-semibold text-info hover:text-info hover:bg-info/10 transition-colors"
           >
-            Deshacer
+            {i18n.t('botones.comun.deshacer', {defaultValue: 'Deshacer'})}
           </button>
           <button
             onClick={() => toast.dismiss(t.id)}
             className="w-full flex-1 p-2 flex items-center justify-center text-caption font-medium text-muted hover:text-foreground hover:bg-foreground/5 transition-colors"
           >
-            Ignorar
+            {i18n.t('botones.comun.ignorar', {defaultValue: 'Ignorar'})}
           </button>
         </div>
       </div>

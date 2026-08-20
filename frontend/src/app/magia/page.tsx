@@ -34,7 +34,7 @@ type DownloadOpts = {
 /** Par de botones "Vista .pdf" / "Editable .docx" para los generadores que
  * soportan ambos formatos. */
 function DualDownloadButtons({
-  type, opts, downloadingStr, onDownload, pdfLabel = "Vista .pdf", docxLabel = "Editable .docx",
+  type, opts, downloadingStr, onDownload, pdfLabel, docxLabel,
 }: {
   type: string;
   opts?: DownloadOpts;
@@ -43,13 +43,14 @@ function DualDownloadButtons({
   pdfLabel?: string;
   docxLabel?: string;
 }) {
+  const { t } = useTranslation();
   return (
     <div className="flex gap-2 mt-auto">
       <Button onClick={() => onDownload(type, "pdf", opts)} disabled={downloadingStr === `${type}_pdf`} className="flex-1">
-        {downloadingStr === `${type}_pdf` ? "⏳..." : pdfLabel}
+        {downloadingStr === `${type}_pdf` ? "⏳..." : (pdfLabel ?? t('botones.magia.vistaPdf', {defaultValue: 'Vista .pdf'}))}
       </Button>
       <Button variant="secondary" onClick={() => onDownload(type, "docx", opts)} disabled={downloadingStr === `${type}_docx`} className="flex-1">
-        {downloadingStr === `${type}_docx` ? "⏳..." : docxLabel}
+        {downloadingStr === `${type}_docx` ? "⏳..." : (docxLabel ?? t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'}))}
       </Button>
     </div>
   );
@@ -298,13 +299,13 @@ export default function MagiaPage() {
                     a.click();
                     document.body.removeChild(a);
                   }} className="gap-2">
-                    <Download className="w-4 h-4" /> Descargar PDF
+                    <Download className="w-4 h-4" /> {t('common.descargar_pdf', {defaultValue: 'Descargar PDF'})}
                   </Button>
                   <Button variant="ghost" onClick={() => {
                     setPreviewUrl(null);
                     setPreviewFilename(null);
                   }} className="text-muted hover:text-foreground">
-                    <X className="w-5 h-5" /> Cerrar visor
+                    <X className="w-5 h-5" /> {t('botones.magia.cerrarVisor', {defaultValue: 'Cerrar visor'})}
                   </Button>
                 </div>
               </div>
@@ -346,7 +347,7 @@ export default function MagiaPage() {
                         <p className="text-muted mb-4">Debes abrir o crear un archivo de programación y curso en tu Archivos.</p>
                         <Link href="/archivos">
                           <Button variant="primary" className="gap-2">
-                            <FolderOpen className="w-4 h-4" /> Ir a mis Archivos
+                            <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
                           </Button>
                         </Link>
                       </Card>
@@ -380,7 +381,7 @@ export default function MagiaPage() {
                                       </div>
                                       <div className="mt-auto">
                                         <Button onClick={() => handleDownloadPdf('programacion_minima_tpl', 'docx')} disabled={downloadingStr === 'programacion_minima_tpl_docx'} className="w-full">
-                                          {downloadingStr === 'programacion_minima_tpl_docx' ? '⏳...' : 'Editable .docx'}
+                                          {downloadingStr === 'programacion_minima_tpl_docx' ? '⏳...' : t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}
                                         </Button>
                                       </div>
                                     </div>
@@ -392,7 +393,7 @@ export default function MagiaPage() {
                                       </div>
                                       <div className="mt-auto">
                                         <Button onClick={() => handleDownloadPdf('programacion_suficiente_tpl', 'docx')} disabled={downloadingStr === 'programacion_suficiente_tpl_docx'} className="w-full">
-                                          {downloadingStr === 'programacion_suficiente_tpl_docx' ? '⏳...' : 'Editable .docx'}
+                                          {downloadingStr === 'programacion_suficiente_tpl_docx' ? '⏳...' : t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}
                                         </Button>
                                       </div>
                                     </div>
@@ -404,7 +405,7 @@ export default function MagiaPage() {
                                       </div>
                                       <div className="mt-auto">
                                         <Button onClick={() => handleDownloadPdf('programacion_jeg', 'docx')} disabled={downloadingStr === 'programacion_jeg_docx'} className="w-full">
-                                          {downloadingStr === 'programacion_jeg_docx' ? '⏳...' : 'Editable .docx'}
+                                          {downloadingStr === 'programacion_jeg_docx' ? '⏳...' : t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}
                                         </Button>
                                       </div>
                                     </div>
@@ -419,7 +420,7 @@ export default function MagiaPage() {
                                         <p className="text-body text-muted mb-6">Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.</p>
                                       </div>
                                       <div className="mt-auto">
-                                        <Button disabled className="w-full">Editable .docx</Button>
+                                        <Button disabled className="w-full">{t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}</Button>
                                       </div>
                                     </div>
 
@@ -429,7 +430,7 @@ export default function MagiaPage() {
                                         <p className="text-body text-muted mb-6">Versión ajustada a la normativa oficial de {comunidad}.</p>
                                       </div>
                                       <div className="mt-auto">
-                                        <Button disabled className="w-full">Editable .docx</Button>
+                                        <Button disabled className="w-full">{t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}</Button>
                                       </div>
                                     </div>
 
@@ -439,7 +440,7 @@ export default function MagiaPage() {
                                         <p className="text-body text-muted mb-6">Se cumplimenta el modelo oficial de programación completo.</p>
                                       </div>
                                       <div className="mt-auto">
-                                        <Button disabled className="w-full">Editable .docx</Button>
+                                        <Button disabled className="w-full">{t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}</Button>
                                       </div>
                                     </div>
                                   </div>
@@ -480,7 +481,7 @@ export default function MagiaPage() {
                         <p className="text-muted mb-4">Debes abrir o crear un archivo de programación y curso en tu Archivos.</p>
                         <Link href="/archivos">
                           <Button variant="primary" className="gap-2">
-                            <FolderOpen className="w-4 h-4" /> Ir a mis Archivos
+                            <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
                           </Button>
                         </Link>
                       </Card>
@@ -536,7 +537,7 @@ export default function MagiaPage() {
                                 }}
                                 disabled={df_ud.length === 0 || downloadingStr === 'ud_docx'} className="w-full"
                               >
-                                {downloadingStr === 'ud_docx' ? '⏳ Generando DOCX...' : 'Descargar UD.docx'}
+                                {downloadingStr === 'ud_docx' ? t('botones.magia.generandoDocx', {defaultValue: '⏳ Generando DOCX...'}) : t('botones.magia.descargarUdDocx', {defaultValue: 'Descargar UD.docx'})}
                               </Button>
                             </div>
 
@@ -560,7 +561,7 @@ export default function MagiaPage() {
                                 }}
                                 disabled={df_act.length === 0 || downloadingStr === 'tarea_docx'} className="w-full"
                               >
-                                {downloadingStr === 'tarea_docx' ? '⏳ Generando DOCX...' : 'Descargar Tarea.docx'}
+                                {downloadingStr === 'tarea_docx' ? t('botones.magia.generandoDocx', {defaultValue: '⏳ Generando DOCX...'}) : t('botones.magia.descargarTareaDocx', {defaultValue: 'Descargar tarea.docx'})}
                               </Button>
                             </div>
                           </div>
@@ -724,13 +725,13 @@ export default function MagiaPage() {
                             </div>
                             <div className="flex gap-2 mt-2">
                               <Button onClick={() => handleDownloadPdf(tri.tipo, "pdf", { fechaCorte: tri.fin })} disabled={downloadingStr === `${tri.tipo}_pdf`} className="flex-1">
-                                {downloadingStr === `${tri.tipo}_pdf` ? "⏳..." : "Vista .pdf"}
+                                {downloadingStr === `${tri.tipo}_pdf` ? "⏳..." : t('botones.magia.vistaPdf', {defaultValue: 'Vista .pdf'})}
                               </Button>
                               <Button variant="secondary" onClick={() => handleDownloadPdf(tri.tipo, "docx", { fechaCorte: tri.fin })} disabled={downloadingStr === `${tri.tipo}_docx`} className="flex-1">
-                                {downloadingStr === `${tri.tipo}_docx` ? "⏳..." : "Editable .docx"}
+                                {downloadingStr === `${tri.tipo}_docx` ? "⏳..." : t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}
                               </Button>
                               <Button variant="success" onClick={() => handleExportXlsx(tri.key, tri.fin)} className="flex-1 flex items-center justify-center gap-1.5">
-                                <FileSpreadsheet className="w-4 h-4" /> Editable .xlsx
+                                <FileSpreadsheet className="w-4 h-4" /> {t('botones.magia.editableXlsx', {defaultValue: 'Editable .xlsx'})}
                               </Button>
                             </div>
                           </div>
@@ -743,13 +744,13 @@ export default function MagiaPage() {
                           <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Evaluación final ordinaria</h3>
                           <div className="flex gap-2 mt-auto">
                             <Button onClick={() => handleDownloadPdf('grupal_final', 'pdf', { fechaCorte: fechaFinal })} disabled={downloadingStr === 'grupal_final_pdf'} className="flex-1">
-                              {downloadingStr === 'grupal_final_pdf' ? '⏳...' : 'Vista .pdf'}
+                              {downloadingStr === 'grupal_final_pdf' ? '⏳...' : t('botones.magia.vistaPdf', {defaultValue: 'Vista .pdf'})}
                             </Button>
                             <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_final', 'docx', { fechaCorte: fechaFinal })} disabled={downloadingStr === 'grupal_final_docx'} className="flex-1">
-                              {downloadingStr === 'grupal_final_docx' ? '⏳...' : 'Editable .docx'}
+                              {downloadingStr === 'grupal_final_docx' ? '⏳...' : t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}
                             </Button>
                             <Button variant="success" onClick={() => handleExportXlsx('Final', fechaFinal)} className="flex-1 flex items-center justify-center gap-1.5">
-                              <FileSpreadsheet className="w-4 h-4" /> Editable .xlsx
+                              <FileSpreadsheet className="w-4 h-4" /> {t('botones.magia.editableXlsx', {defaultValue: 'Editable .xlsx'})}
                             </Button>
                           </div>
                         </div>
@@ -758,13 +759,13 @@ export default function MagiaPage() {
                           <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Evaluación final extraordinaria</h3>
                           <div className="flex gap-2 mt-auto">
                             <Button onClick={() => handleDownloadPdf('grupal_final', 'pdf', { fechaCorte: fechaFinal })} disabled={downloadingStr === 'grupal_final_pdf'} className="flex-1">
-                              {downloadingStr === 'grupal_final_pdf' ? '⏳...' : 'Vista .pdf'}
+                              {downloadingStr === 'grupal_final_pdf' ? '⏳...' : t('botones.magia.vistaPdf', {defaultValue: 'Vista .pdf'})}
                             </Button>
                             <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_final', 'docx', { fechaCorte: fechaFinal })} disabled={downloadingStr === 'grupal_final_docx'} className="flex-1">
-                              {downloadingStr === 'grupal_final_docx' ? '⏳...' : 'Editable .docx'}
+                              {downloadingStr === 'grupal_final_docx' ? '⏳...' : t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}
                             </Button>
                             <Button variant="success" onClick={() => handleExportXlsx('Extraordinaria', fechaFinal)} className="flex-1 flex items-center justify-center gap-1.5">
-                              <FileSpreadsheet className="w-4 h-4" /> Editable .xlsx
+                              <FileSpreadsheet className="w-4 h-4" /> {t('botones.magia.editableXlsx', {defaultValue: 'Editable .xlsx'})}
                             </Button>
                           </div>
                         </div>

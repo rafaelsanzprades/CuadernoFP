@@ -1,8 +1,10 @@
 "use client";
 import { ShieldAlert, ListChecks } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
+import { useTranslation } from "react-i18next";
 
 export function ContingenciaTab() {
+  const { t } = useTranslation();
   const { moduleData, updateDataFrame, updateModuleData } = useAppStore();
   const config_contexto = moduleData?.config_contexto || {};
 
@@ -133,7 +135,7 @@ export function ContingenciaTab() {
           </table>
         </div>
         <button onClick={() => addRow(df_contingencia, "df_contingencia", "PC", { Escenario: "Otros", Organizacion: "", Actividades: "", Seguimiento: "" })} className="text-body text-warning hover:text-warning font-semibold flex items-center gap-1">
-          <span>+</span> Añadir medida de Contingencia
+          <span>+</span> {t('botones.modulo.anadirMedidaContingencia', {defaultValue: 'Añadir medida de contingencia'})}
         </button>
       </div>
 

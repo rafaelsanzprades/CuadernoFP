@@ -7,8 +7,10 @@ import { Select } from '@/components/ui/Select';
 import { Badge } from '@/components/ui/Badge';
 import { Alumnado } from '@/types';
 import { isAlumnoActivo } from '@/utils/alumnado';
+import { useTranslation } from 'react-i18next';
 
 export const PlanoClaseTab = () => {
+  const { t } = useTranslation();
   const { cursoData, updateCursoData } = useAppStore();
 
   // Load seating chart data, fallback to defaults
@@ -212,7 +214,7 @@ export const PlanoClaseTab = () => {
             onClick={handleAutoFill}
             className="text-caption font-medium flex items-center gap-1.5 bg-info/10 text-info hover:bg-info/10 border border-info/30 px-4 py-2 rounded-xl"
           >
-            <RefreshCw className="w-4 h-4" /> Distribución Alfabética
+            <RefreshCw className="w-4 h-4" /> {t('botones.alumnado.distribucionAlfabetica', {defaultValue: 'Distribución alfabética'})}
           </Button>
 
           <Button
@@ -220,7 +222,7 @@ export const PlanoClaseTab = () => {
             onClick={handleResetLayout}
             className="text-caption font-medium flex items-center gap-1.5 bg-danger/10 text-danger hover:bg-danger/10 border border-danger/30 px-4 py-2 rounded-xl"
           >
-            <Trash2 className="w-4 h-4" /> Vaciar Plano
+            <Trash2 className="w-4 h-4" /> {t('botones.alumnado.vaciarPlano', {defaultValue: 'Vaciar plano'})}
           </Button>
         </div>
       </div>

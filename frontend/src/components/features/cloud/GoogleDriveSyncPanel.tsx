@@ -99,15 +99,15 @@ export function GoogleDriveSyncPanel() {
             <div>
               {isDriveConnected ? (
                 <Button onClick={handleDisconnect} variant="ghost" className="text-danger hover:bg-danger/10">
-                  Desconectar
+                  {t('botones.cloud.desconectar', {defaultValue: 'Desconectar'})}
                 </Button>
               ) : (
                 <Button 
                   onClick={handleConnect} 
                   className={`border transition-all ${dataSource === 'demo' ? 'bg-muted/20 text-muted border-muted/30 cursor-not-allowed opacity-70' : 'bg-[#4285F4]/20 text-[#4285F4] hover:bg-[#4285F4]/30 border-[#4285F4]/30'}`}
-                  title={dataSource === 'demo' ? "Acción no permitida en modo DEMO" : "Conectar cuenta"}
+                  title={dataSource === 'demo' ? t('botones.cloud.accionNoPermitidaDemo', {defaultValue: 'Acción no permitida en modo DEMO'}) : t('botones.cloud.conectarCuenta', {defaultValue: 'Conectar cuenta'})}
                 >
-                  Conectar cuenta
+                  {t('botones.cloud.conectarCuenta', {defaultValue: 'Conectar cuenta'})}
                 </Button>
               )}
             </div>

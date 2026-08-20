@@ -452,7 +452,7 @@ export default function DocumentosPage() {
                   }}
                   className="bg-info hover:bg-info text-foreground px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors"
                 >
-                  <DownloadCloud className="w-5 h-5" /> Descargar
+                  <DownloadCloud className="w-5 h-5" /> {t('common.descargar', {defaultValue: 'Descargar'})}
                 </button>
                 <button
                   onClick={() => {
@@ -461,7 +461,7 @@ export default function DocumentosPage() {
                   }}
                   className="bg-danger hover:bg-danger text-foreground px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors"
                 >
-                  <X className="w-5 h-5" /> Cerrar
+                  <X className="w-5 h-5" /> {t('common.cerrar', {defaultValue: 'Cerrar'})}
                 </button>
               </div>
             </div>

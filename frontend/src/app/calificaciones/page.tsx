@@ -97,7 +97,7 @@ export default function ProgresoPage() {
                 <p className="text-muted mb-4">Debes abrir o crear un archivo de programación y curso en tu Archivos.</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
-                    <FolderOpen className="w-4 h-4" /> Ir a mis Archivos
+                    <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
                   </Button>
                 </Link>
               </Card>
@@ -179,7 +179,7 @@ export default function ProgresoPage() {
                   disabled={saving}
                   className="bg-accent text-background hover:bg-accent/80 font-bold px-6 py-2 rounded-xl flex items-center gap-2"
                 >
-                  {saving ? "Guardando..." : <>Guardar cambios <span className="inline-flex"><Save className="w-[1.2em] h-[1.2em] mr-1" /></span></>}
+                  {saving ? t('common.guardando', {defaultValue: 'Guardando...'}) : <>{t('common.guardar_cambios', {defaultValue: 'Guardar cambios'})} <span className="inline-flex"><Save className="w-[1.2em] h-[1.2em] mr-1" /></span></>}
                 </Button>
               </div>
             </div>

@@ -178,7 +178,7 @@ export function ContextoGrupoTab() {
             className="absolute top-0 right-0 flex items-center gap-1.5 text-caption font-semibold text-accent hover:text-accent/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             <Sparkles className={`w-3.5 h-3.5 ${generandoIA ? "animate-pulse" : ""}`} />
-            {generandoIA ? "Generando..." : "Generar con IA"}
+            {generandoIA ? t('common.generando', {defaultValue: 'Generando...'}) : t('botones.alumnado.generarConIa', {defaultValue: 'Generar con IA'})}
           </button>
         </div>
       </div>

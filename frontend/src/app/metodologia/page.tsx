@@ -80,7 +80,7 @@ export default function MetodologiaConfigPage() {
                 <p className="text-muted mb-4">Debes abrir o crear un archivo de programación en tu Archivos.</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
-                    <FolderOpen className="w-4 h-4" /> Ir a mis Archivos
+                    <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
                   </Button>
                 </Link>
               </div>

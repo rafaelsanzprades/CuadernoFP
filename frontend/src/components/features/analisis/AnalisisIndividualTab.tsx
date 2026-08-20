@@ -6,8 +6,10 @@ import { useAppStore } from "@/store/useAppStore";
 import { resolveDescRa, loadCatalogForModule } from "@/services/catalogCache";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { calcularNotas, getSigadInfo, DEFAULT_CONFIG_REDONDEO } from "@/utils/calificaciones";
+import { useTranslation } from "react-i18next";
 
 export const AnalisisIndividualTab = () => {
+  const { t } = useTranslation();
   const { moduleData, cursoData, activeModuleId } = useAppStore();
 
   useEffect(() => { if (activeModuleId) loadCatalogForModule(activeModuleId); }, [activeModuleId]);
@@ -176,7 +178,7 @@ export const AnalisisIndividualTab = () => {
               onClick={() => setSimVals({})} 
               className="text-body flex items-center gap-1"
             >
-              <span className="inline-flex"><RefreshCw className="w-[1.2em] h-[1.2em] mr-1" /></span> Restaurar a notas reales
+              <span className="inline-flex"><RefreshCw className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('botones.evaluacion.restaurarNotasReales', {defaultValue: 'Restaurar a notas reales'})}
             </Button>
           </div>
 

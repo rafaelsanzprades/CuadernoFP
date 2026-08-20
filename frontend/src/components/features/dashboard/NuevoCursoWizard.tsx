@@ -181,7 +181,7 @@ export function NuevoCursoWizard({ onClose }: NuevoCursoWizardProps) {
               </label>
               <div className="flex justify-end pt-2">
                 <Button onClick={() => setStep(2)} disabled={!canContinueStep1} className="bg-info/20 hover:bg-info/30 text-info border border-info/30">
-                  Siguiente <ArrowRight className="w-4 h-4 ml-2" />
+                  {t('common.siguiente', {defaultValue: 'Siguiente'})} <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
             </div>
@@ -223,10 +223,10 @@ export function NuevoCursoWizard({ onClose }: NuevoCursoWizardProps) {
               </div>
               <div className="flex justify-between pt-2">
                 <Button onClick={() => setStep(1)} className="bg-foreground/5 hover:bg-foreground/10 text-muted border border-[var(--glass-border)]">
-                  <ArrowLeft className="w-4 h-4 mr-2" /> Atrás
+                  <ArrowLeft className="w-4 h-4 mr-2" /> {t('common.atras', {defaultValue: 'Atrás'})}
                 </Button>
                 <Button onClick={() => setStep(3)} className="bg-info/20 hover:bg-info/30 text-info border border-info/30">
-                  Siguiente <ArrowRight className="w-4 h-4 ml-2" />
+                  {t('common.siguiente', {defaultValue: 'Siguiente'})} <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
             </div>
@@ -245,7 +245,7 @@ export function NuevoCursoWizard({ onClose }: NuevoCursoWizardProps) {
                 <label className="flex items-center justify-center gap-2 p-6 rounded-xl border-2 border-dashed border-[var(--glass-border)] hover:border-info/50 cursor-pointer transition-colors">
                   <FolderOpen className="w-5 h-5 text-info" />
                   <span className="text-body text-foreground">
-                    {csvFile ? csvFile.name : "Seleccionar CSV de alumnado"}
+                    {csvFile ? csvFile.name : t('botones.dashboard.seleccionarCsvAlumnado', {defaultValue: 'Seleccionar CSV de alumnado'})}
                   </span>
                   <input
                     type="file"
@@ -260,10 +260,10 @@ export function NuevoCursoWizard({ onClose }: NuevoCursoWizardProps) {
               </div>
               <div className="flex justify-between pt-2">
                 <Button onClick={() => setStep(2)} className="bg-foreground/5 hover:bg-foreground/10 text-muted border border-[var(--glass-border)]" disabled={loading}>
-                  <ArrowLeft className="w-4 h-4 mr-2" /> Atrás
+                  <ArrowLeft className="w-4 h-4 mr-2" /> {t('common.atras', {defaultValue: 'Atrás'})}
                 </Button>
                 <Button onClick={handleFinish} disabled={loading} className="bg-info/20 hover:bg-info/30 text-info border border-info/30">
-                  <Rocket className="w-4 h-4 mr-2" /> {loading ? "Creando curso..." : "Crear curso"}
+                  <Rocket className="w-4 h-4 mr-2" /> {loading ? t('botones.dashboard.creandoCurso', {defaultValue: 'Creando curso...'}) : t('botones.dashboard.crearCurso', {defaultValue: 'Crear curso'})}
                 </Button>
               </div>
             </div>

@@ -7,6 +7,7 @@ import { Select } from "@/components/ui/Select";
 import { Input } from "@/components/ui/Input";
 import { Family } from "@/types";
 import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
+import { useTranslation } from "react-i18next";
 
 // Semilla por defecto de "% Instrumentos de evaluación" por trimestre — se
 // usa solo mientras el módulo no tenga ninguna fila guardada todavía.
@@ -31,6 +32,7 @@ const DEFAULT_ESCALAS_EVALUACION = [
 ];
 
 export function DatosTab() {
+  const { t } = useTranslation();
   const {
     moduleData,
     setModuleData,
@@ -482,7 +484,7 @@ export function DatosTab() {
             onClick={addInstrumentoPct}
             className="flex items-center gap-2 text-body font-semibold text-accent hover:underline mt-2"
           >
-            <Plus className="w-4 h-4" /> Añadir Tipo de instrumento de evaluación
+            <Plus className="w-4 h-4" /> {t('botones.modulo.anadirTipoInstrumento', {defaultValue: 'Añadir tipo de instrumento de evaluación'})}
           </button>
         </div>
       </Card>
@@ -557,7 +559,7 @@ export function DatosTab() {
                 className="flex flex-col items-center justify-center min-w-[120px] min-h-full p-3 border border-dashed border-[var(--glass-border)] rounded-lg text-muted hover:text-accent hover:border-accent/50 hover:bg-accent/5 transition-colors gap-2"
               >
                 <Plus className="w-5 h-5" />
-                <span className="text-caption font-semibold">Añadir</span>
+                <span className="text-caption font-semibold">{t('common.anadir', {defaultValue: 'Añadir'})}</span>
               </button>
               {escalas.length === 0 && (
                 <p className="text-caption text-muted italic">Sin escalas configuradas — la app sigue usando la nota 0-10 directamente.</p>

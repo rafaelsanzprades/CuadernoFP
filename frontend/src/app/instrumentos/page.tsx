@@ -175,7 +175,7 @@ export default function InstrumentosPage() {
                 <p className="text-muted mb-4">Debes abrir o crear un archivo de programación en tu Archivos.</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
-                    <FolderOpen className="w-4 h-4" /> Ir a mis Archivos
+                    <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
                   </Button>
                 </Link>
               </Card>
@@ -377,7 +377,7 @@ export default function InstrumentosPage() {
                 onClick={() => handleAddAct(triKey)}
                 className="text-info hover:text-info font-semibold flex items-center gap-1"
               >
-                <span>+</span> Añadir instrumento/Actividad en {triNombre}
+                <span>+</span> {t('botones.instrumentos.anadirInstrumentoEn', {tri: triNombre, defaultValue: `Añadir instrumento/actividad en ${triNombre}`})}
               </Button>
               <Button 
                 variant="ghost"
@@ -388,7 +388,7 @@ export default function InstrumentosPage() {
                 }}
                 className="text-danger hover:text-danger border border-danger/30 font-semibold flex items-center gap-1"
               >
-                ⛑️ Crear instrumento de Recuperación
+                ⛑️ {t('botones.instrumentos.crearInstrumentoRecuperacion', {defaultValue: 'Crear instrumento de recuperación'})}
               </Button>
             </div>
           </div>
@@ -553,7 +553,7 @@ export default function InstrumentosPage() {
         >
           <Card className="max-w-md w-full p-6 animate-in zoom-in-95 duration-200">
             <h3 id="recovery-modal-title" className="text-subheading font-bold mb-4 flex items-center gap-2">
-              ⛑️ Crear Recuperación ({recoveryTri})
+              ⛑️ {t('botones.instrumentos.crearRecuperacionTri', {tri: recoveryTri, defaultValue: `Crear recuperación (${recoveryTri})`})}
             </h3>
             <div className="space-y-4">
               <div>
@@ -581,7 +581,7 @@ export default function InstrumentosPage() {
                 </select>
               </div>
               <div className="flex justify-end gap-3 mt-6">
-                <Button variant="ghost" onClick={() => setIsRecoveryModalOpen(false)}>Cancelar</Button>
+                <Button variant="ghost" onClick={() => setIsRecoveryModalOpen(false)}>{t('common.cancelar', {defaultValue: 'Cancelar'})}</Button>
                 <Button 
                   disabled={!recoverySourceId}
                   onClick={() => {
@@ -602,7 +602,7 @@ export default function InstrumentosPage() {
                   }}
                   className="bg-danger hover:bg-danger/80 text-white border-none"
                 >
-                  Crear Recuperación
+                  {t('botones.instrumentos.crearRecuperacion', {defaultValue: 'Crear recuperación'})}
                 </Button>
               </div>
             </div>
@@ -614,10 +614,10 @@ export default function InstrumentosPage() {
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 bg-[#1e293b] border border-purple-400/40 shadow-2xl rounded-xl px-5 py-3">
           <span className="text-body font-semibold text-foreground">{selectedCells.size} celdas seleccionadas</span>
           <Button variant="secondary" className="gap-1.5" onClick={() => applyBulkSelection(true)}>
-            <CheckSquare className="w-4 h-4" /> Marcar todas
+            <CheckSquare className="w-4 h-4" /> {t('botones.instrumentos.marcarTodas', {defaultValue: 'Marcar todas'})}
           </Button>
           <Button variant="secondary" className="gap-1.5" onClick={() => applyBulkSelection(false)}>
-            <Square className="w-4 h-4" /> Desmarcar todas
+            <Square className="w-4 h-4" /> {t('botones.instrumentos.desmarcarTodas', {defaultValue: 'Desmarcar todas'})}
           </Button>
           <button
             onClick={() => setSelectedCells(new Set())}

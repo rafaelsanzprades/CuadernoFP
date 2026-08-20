@@ -4,8 +4,10 @@ import { ClipboardList, Plus, Trash2 } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { isAlumnoActivo } from "@/utils/alumnado";
+import { useTranslation } from "react-i18next";
 
 export function TutoriaTab() {
+  const { t } = useTranslation();
   const { cursoData, updateCursoData } = useAppStore();
 
   const df_al = cursoData?.df_al || [];
@@ -94,7 +96,7 @@ export function TutoriaTab() {
                 Registro de tutoría: <span>{df_al.find((a:any) => a.ID === selectedAlId)?.Nombre} {df_al.find((a:any) => a.ID === selectedAlId)?.Apellidos}</span>
               </h2>
               <Button onClick={handleAddTutoria} variant="primary" className="gap-2">
-                <Plus className="w-4 h-4" /> Añadir Registro
+                <Plus className="w-4 h-4" /> {t('botones.alumnado.anadirRegistro', {defaultValue: 'Añadir registro'})}
               </Button>
             </div>
 
@@ -103,7 +105,7 @@ export function TutoriaTab() {
                 <div className="text-center py-12 text-muted flex flex-col items-center justify-center h-full">
                   <ClipboardList className="w-16 h-16 opacity-20 mb-4" />
                   <p>No hay registros de tutoría para este estudiante.</p>
-                  <p className="text-body mt-2 opacity-70">Pulsa "Añadir Registro" para comenzar.</p>
+                  <p className="text-body mt-2 opacity-70">{t('botones.alumnado.pulsaAnadirRegistro', {label: t('botones.alumnado.anadirRegistro', {defaultValue: 'Añadir registro'}), defaultValue: 'Pulsa "{{label}}" para comenzar.'})}</p>
                 </div>
               ) : (
                 getTutorias(selectedAlId).map((tut: any, idx: number) => (

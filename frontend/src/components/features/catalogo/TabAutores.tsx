@@ -167,7 +167,7 @@ export function TabAutores({ globalSelection }: { globalSelection: any }) {
                   className="bg-info hover:bg-info/90 text-white whitespace-nowrap shadow-lg shadow-info/20"
                 >
                   <CheckCircle2 className="w-4 h-4 mr-2" /> 
-                  {isApplying ? "Incorporando..." : "🚀 Incorporar a la Programación"}
+                  {isApplying ? t('botones.catalogo.incorporando', {defaultValue: 'Incorporando...'}) : t('botones.catalogo.incorporarAProgramacion', {defaultValue: '🚀 Incorporar a la programación'})}
                 </Button>
               </div>
 

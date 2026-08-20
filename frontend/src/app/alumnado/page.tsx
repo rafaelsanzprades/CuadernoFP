@@ -118,7 +118,7 @@ export default function AlumnadoPage() {
                 <p className="text-muted mb-4">Debes abrir o crear un archivo de curso en tu Archivos.</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
-                    <FolderOpen className="w-4 h-4" /> Ir a mis Archivos
+                    <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
                   </Button>
                 </Link>
               </Card>
@@ -238,7 +238,7 @@ export default function AlumnadoPage() {
                 disabled={saving}
                 className="bg-accent text-background hover:bg-accent/80 font-bold px-6 py-2 rounded-xl flex items-center gap-2"
               >
-                {saving ? "Guardando..." : <>Guardar cambios <span className="inline-flex"><Save className="w-[1.2em] h-[1.2em] mr-1" /></span></>}
+                {saving ? t('common.guardando', {defaultValue: 'Guardando...'}) : <>{t('common.guardar_cambios', {defaultValue: 'Guardar cambios'})} <span className="inline-flex"><Save className="w-[1.2em] h-[1.2em] mr-1" /></span></>}
               </Button>
             </div>
           </div>
@@ -261,7 +261,7 @@ export default function AlumnadoPage() {
                     className="text-accent hover:text-accent hover:bg-accent/10 font-semibold flex items-center gap-1 h-8 px-3 ml-2"
                     title="Importar CSV (Nombre, Apellidos...)"
                   >
-                    <FolderOpen className="w-4 h-4" /> Importar CSV
+                    <FolderOpen className="w-4 h-4" /> {t('botones.alumnado.importarCsv', {defaultValue: 'Importar CSV'})}
                   </Button>
                   <input 
                     type="file" 
@@ -409,7 +409,7 @@ export default function AlumnadoPage() {
                   onClick={handleAddAlumnado}
                   className="text-info hover:text-info font-semibold flex items-center gap-1"
                 >
-                  <span>+</span> Añadir alumnado
+                  <span>+</span> {t('botones.alumnado.anadirAlumnado', {defaultValue: 'Añadir alumnado'})}
                 </Button>
               </div>
             </Card>

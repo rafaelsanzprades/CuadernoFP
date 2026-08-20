@@ -79,7 +79,7 @@ export function WelcomeWizard({ onComplete, fetchModules }: WelcomeWizardProps) 
               >
                 <div className="flex items-center gap-3 mb-3">
                   <Gift className="w-8 h-8 text-accent group-hover:scale-110 transition-transform" />
-                  <h3 className="text-subheading font-bold text-foreground">Probar con DEMO</h3>
+                  <h3 className="text-subheading font-bold text-foreground">{t('botones.dashboard.probarConDemo', {defaultValue: 'Probar con DEMO'})}</h3>
                 </div>
                 <p className="text-body text-muted">
                   Carga un Archivos de demostración con datos ficticios para explorar todas las funciones de la aplicación.
@@ -92,7 +92,7 @@ export function WelcomeWizard({ onComplete, fetchModules }: WelcomeWizardProps) 
               >
                 <div className="flex items-center gap-3 mb-3">
                   <Rocket className="w-8 h-8 text-info group-hover:scale-110 transition-transform" />
-                  <h3 className="text-subheading font-bold text-foreground">Crear mis archivos</h3>
+                  <h3 className="text-subheading font-bold text-foreground">{t('botones.dashboard.crearMisArchivos', {defaultValue: 'Crear mis archivos'})}</h3>
                 </div>
                 <p className="text-body text-muted">
                   Empieza desde cero creando tu propia programación y curso vacíos para trabajar con tus datos reales.
@@ -123,10 +123,10 @@ export function WelcomeWizard({ onComplete, fetchModules }: WelcomeWizardProps) 
               </div>
               <div className="flex gap-3 pt-2">
                 <Button onClick={() => setStep("CHOICE")} className="flex-1 bg-foreground/5 hover:bg-foreground/10 text-muted border border-[var(--glass-border)]">
-                  Volver
+                  {t('common.volver', {defaultValue: 'Volver'})}
                 </Button>
                 <Button onClick={handleCreateNew} className="flex-1 bg-info/20 hover:bg-info/30 text-info border border-info/30">
-                  <Rocket className="w-4 h-4 mr-2" /> Crear archivos
+                  <Rocket className="w-4 h-4 mr-2" /> {t('botones.dashboard.crearArchivos', {defaultValue: 'Crear archivos'})}
                 </Button>
               </div>
             </div>

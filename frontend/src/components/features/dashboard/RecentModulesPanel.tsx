@@ -164,7 +164,7 @@ export function RecentModulesPanel() {
                 disabled={reopening === entry.id}
                 className="mt-1 text-caption bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 gap-2 justify-center"
               >
-                <FolderOpen className="w-3.5 h-3.5" /> {reopening === entry.id ? "Abriendo..." : "Reabrir"}
+                <FolderOpen className="w-3.5 h-3.5" /> {reopening === entry.id ? t('botones.dashboard.abriendo', {defaultValue: 'Abriendo...'}) : t('botones.dashboard.reabrir', {defaultValue: 'Reabrir'})}
               </Button>
             </div>
           );

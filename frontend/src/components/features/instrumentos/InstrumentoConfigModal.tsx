@@ -1,6 +1,7 @@
 import React from 'react';
 import { Settings2, X } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { useTranslation } from 'react-i18next';
 
 export interface InstrumentoConfigData {
   escala?: string;
@@ -18,6 +19,7 @@ interface InstrumentoConfigModalProps {
 }
 
 export function InstrumentoConfigModal({ isOpen, onClose, instrumentoId, instrumentoDesc, config, onChange }: InstrumentoConfigModalProps) {
+  const { t } = useTranslation();
   if (!isOpen) return null;
 
   return (
@@ -83,7 +85,7 @@ export function InstrumentoConfigModal({ isOpen, onClose, instrumentoId, instrum
 
         <div className="mt-8 flex justify-end">
           <Button variant="primary" onClick={onClose}>
-            Aceptar
+            {t('common.aceptar', {defaultValue: 'Aceptar'})}
           </Button>
         </div>
       </div>

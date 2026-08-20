@@ -73,7 +73,7 @@ export function AISettingsPanel() {
           className="w-full py-3 px-6 rounded-xl font-bold flex items-center justify-center gap-2 bg-accent/20 text-accent hover:bg-accent/30 border border-accent/30 transition-all shadow-md"
         >
           {saved ? <CheckCircle2 className="w-5 h-5" /> : <Save className="w-5 h-5" />}
-          {saved ? "Guardado" : "Guardar configuración"}
+          {saved ? t('common.guardado', {defaultValue: 'Guardado'}) : t('botones.ai.guardarConfiguracion', {defaultValue: 'Guardar configuración'})}
         </Button>
       </div>
     </Card>

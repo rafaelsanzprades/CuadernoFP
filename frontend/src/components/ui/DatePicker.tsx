@@ -1,6 +1,7 @@
 "use client";
 import { Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 interface DatePickerProps {
   value: string; // YYYY-MM-DD
@@ -18,6 +19,7 @@ const MONTHS = [
 const DAYS_HEADER = ["L","M","X","J","V","S","D"];
 
 export default function DatePicker({ value, onChange, label, className, placeholder = "-", id }: DatePickerProps) {
+  const { t } = useTranslation();
   const today = new Date();
   const [open, setOpen] = useState(false);
   const [openUpward, setOpenUpward] = useState(false);
@@ -198,7 +200,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
               }}
               className="text-caption text-[#14a085] hover:text-[#1abc9c] font-semibold transition-colors"
             >
-              Hoy
+              {t('botones.comun.hoy', {defaultValue: 'Hoy'})}
             </button>
             {value && (
               <button
@@ -206,7 +208,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
                 onClick={() => { onChange(""); setOpen(false); }}
                 className="text-caption text-muted hover:text-danger transition-colors"
               >
-                Borrar
+                {t('botones.comun.borrar', {defaultValue: 'Borrar'})}
               </button>
             )}
           </div>

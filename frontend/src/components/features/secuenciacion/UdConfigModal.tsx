@@ -150,14 +150,14 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
 
         <div className="p-6 border-t border-[var(--glass-border)] bg-foreground/5 shrink-0 flex justify-between items-center rounded-b-xl">
           <Button variant="ghost" onClick={handleExport} disabled={isExporting} className="gap-2 text-info hover:text-info hover:bg-info/10">
-            <Download className="w-4 h-4" /> {isExporting ? "Exportando..." : "Exportar Ficha (PDF/DOCX)"}
+            <Download className="w-4 h-4" /> {isExporting ? t('common.exportando', {defaultValue: 'Exportando...'}) : t('botones.secuenciacion.exportarFicha', {defaultValue: 'Exportar ficha (PDF/DOCX)'})}
           </Button>
           <div className="flex gap-3">
             <Button variant="ghost" onClick={onClose}>
-              Cancelar
+              {t('common.cancelar', {defaultValue: 'Cancelar'})}
             </Button>
             <Button variant="primary" onClick={handleSubmit} className="gap-2">
-              <Save className="w-4 h-4" /> Guardar Cambios
+              <Save className="w-4 h-4" /> {t('common.guardar_cambios', {defaultValue: 'Guardar cambios'})}
             </Button>
           </div>
         </div>

@@ -2,6 +2,7 @@
 import { RotateCcw, ShieldAlert } from "lucide-react";
 import { useEffect } from "react";
 import { fileManager } from "@/services/fileManager";
+import { useTranslation } from "react-i18next";
 
 export default function ErrorBoundary({
   error,
@@ -10,6 +11,7 @@ export default function ErrorBoundary({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const { t } = useTranslation();
   useEffect(() => {
     // Log the error to an error reporting service
     console.error("App Crashed:", error);
@@ -44,7 +46,7 @@ export default function ErrorBoundary({
             onClick={() => reset()}
             className="w-full bg-accent hover:bg-accent/80 text-foreground font-bold py-3 px-4 rounded-lg transition-colors"
           >
-            Intentar recuperar la página
+            {t('botones.error.intentarRecuperarPagina', {defaultValue: 'Intentar recuperar la página'})}
           </button>
           
           <button
@@ -52,7 +54,7 @@ export default function ErrorBoundary({
             className="w-full flex items-center justify-center gap-2 bg-foreground/10 hover:bg-foreground/20 text-foreground font-bold py-3 px-4 rounded-lg border border-white/5 transition-colors"
           >
             <RotateCcw className="w-4 h-4" />
-            Reiniciar a modo Demo
+            {t('botones.error.reiniciarModoDemo', {defaultValue: 'Reiniciar a modo Demo'})}
           </button>
         </div>
       </div>

@@ -435,7 +435,7 @@ export default function ArchivosTrabajoPage() {
                     setValidationModalOpen(true);
                   }}
                 >
-                  <ShieldAlert className="w-4 h-4 mr-2" /> Validar workspace
+                  <ShieldAlert className="w-4 h-4 mr-2" /> {t('botones.archivos.validarWorkspace', {defaultValue: 'Validar workspace'})}
                 </Button>
               )}
             </div>
@@ -566,14 +566,14 @@ export default function ArchivosTrabajoPage() {
                               const handle = await fileManager.openWorkspaceDirectory();
                               if (handle) toast.success(t('toasts.archivos.carpetaConectada', {defaultValue: "Carpeta local conectada."}));
                             }} className="w-full bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 transition-all text-caption h-9">
-                              <FolderOpen className="w-3 h-3 mr-1" /> Conectar Carpeta Local
+                              <FolderOpen className="w-3 h-3 mr-1" /> {t('botones.archivos.conectarCarpetaLocal', {defaultValue: 'Conectar carpeta local'})}
                             </Button>
                           ) : (
                             <Button onClick={async () => {
                               const handle = await fileManager.openWorkspaceDirectory();
                               if (handle) toast.success(t('toasts.archivos.carpetaCambiada', {defaultValue: "Carpeta local cambiada."}));
                             }} className="w-full bg-foreground/5 hover:bg-foreground/10 text-foreground border border-[var(--glass-border)] transition-all text-caption h-9">
-                              <FolderOpen className="w-3 h-3 mr-1" /> Cambiar Carpeta Local
+                              <FolderOpen className="w-3 h-3 mr-1" /> {t('botones.archivos.cambiarCarpetaLocal', {defaultValue: 'Cambiar carpeta local'})}
                             </Button>
                           )}
                         </div>
@@ -653,22 +653,22 @@ export default function ArchivosTrabajoPage() {
                       <div className="flex flex-col gap-2 pt-4 mt-auto border-t border-[var(--glass-border)]">
                         {isDemoLoaded ? (
                           <Button onClick={handleLoadDemo} className="w-full bg-warning/20 hover:bg-warning/30 text-warning border border-warning/30">
-                            <Zap className="w-4 h-4 mr-2" /> Recargar DEMO
+                            <Zap className="w-4 h-4 mr-2" /> {t('botones.archivos.recargarDemo', {defaultValue: 'Recargar DEMO'})}
                           </Button>
                         ) : (
                           <>
                             <div className="flex gap-2">
                               <Button onClick={handleNewPd} className="flex-1 bg-info/10 hover:bg-info/20 text-info border border-info/30 transition-all text-caption h-9">
-                                <Plus className="w-3 h-3 mr-1" /> Nueva (Catálogo)
+                                <Plus className="w-3 h-3 mr-1" /> {t('botones.archivos.nuevaCatalogo', {defaultValue: 'Nueva (catálogo)'})}
                               </Button>
                               <Button onClick={handleOpenPd} className="flex-1 bg-foreground/5 hover:bg-foreground/10 text-foreground border border-[var(--glass-border)] transition-all text-caption h-9">
-                                <FolderOpen className="w-3 h-3 mr-1" /> Importar
+                                <FolderOpen className="w-3 h-3 mr-1" /> {t('common.importar', {defaultValue: 'Importar'})}
                               </Button>
                             </div>
                             {hasPdFile && (
                               <div className="flex gap-2">
                                 <Button onClick={handleSavePd} className="flex-1 bg-info/10 hover:bg-info/20 text-info border border-info/30 transition-all text-caption h-9">
-                                  <Save className="w-3 h-3 mr-1" /> Guardar
+                                  <Save className="w-3 h-3 mr-1" /> {t('common.guardar', {defaultValue: 'Guardar'})}
                                 </Button>
                                 <Button onClick={handleSaveAsPd} className="bg-foreground/5 hover:bg-foreground/10 text-muted border border-[var(--glass-border)] transition-all px-3 h-9" title="Guardar como...">
                                   <Copy className="w-3 h-3" />
@@ -751,13 +751,13 @@ export default function ArchivosTrabajoPage() {
                       <div className="flex flex-col gap-2 pt-4 mt-auto border-t border-[var(--glass-border)]">
                         {isDemoLoaded ? (
                           <Button onClick={handleLoadDemo} className="w-full bg-warning/20 hover:bg-warning/30 text-warning border border-warning/30">
-                            <Zap className="w-4 h-4 mr-2" /> Recargar DEMO
+                            <Zap className="w-4 h-4 mr-2" /> {t('botones.archivos.recargarDemo', {defaultValue: 'Recargar DEMO'})}
                           </Button>
                         ) : (
                           <>
                             <div className="flex gap-2">
                               <Button disabled={!hasPdFile} onClick={handleNewCurso} className="flex-1 bg-success/10 hover:bg-success/20 text-success border border-success/30 transition-all disabled:opacity-30 text-caption h-9" title="Crea un curso y su archivo grupo asociado">
-                                <Plus className="w-3 h-3 mr-1" /> Iniciar Curso (+ Grupo)
+                                <Plus className="w-3 h-3 mr-1" /> {t('botones.archivos.iniciarCursoGrupo', {defaultValue: 'Iniciar curso (+ grupo)'})}
                               </Button>
                               <Button disabled={!hasPdFile} onClick={handleOpenCurso} className="bg-foreground/5 hover:bg-foreground/10 text-foreground border border-[var(--glass-border)] transition-all px-3 h-9" title="Importar curso huérfano">
                                 <FolderOpen className="w-3 h-3" />
@@ -766,7 +766,7 @@ export default function ArchivosTrabajoPage() {
                             {hasCursoFile && (
                               <div className="flex gap-2">
                                 <Button onClick={handleSaveCurso} className="flex-1 bg-success/10 hover:bg-success/20 text-success border border-success/30 transition-all text-caption h-9">
-                                  <Save className="w-3 h-3 mr-1" /> Guardar
+                                  <Save className="w-3 h-3 mr-1" /> {t('common.guardar', {defaultValue: 'Guardar'})}
                                 </Button>
                                 <Button onClick={handleSaveAsCurso} className="bg-foreground/5 hover:bg-foreground/10 text-muted border border-[var(--glass-border)] transition-all px-3 h-9" title="Guardar como...">
                                   <Copy className="w-3 h-3" />
@@ -931,7 +931,7 @@ export default function ArchivosTrabajoPage() {
                               <option key={f} value={f}>{f}</option>
                             ))}
                           </select>
-                          <Button size="sm" variant="ghost" onClick={() => setFixingLink(null)}>Cancelar</Button>
+                          <Button size="sm" variant="ghost" onClick={() => setFixingLink(null)}>{t('common.cancelar', {defaultValue: 'Cancelar'})}</Button>
                         </div>
                       ) : (
                         <Button
@@ -940,7 +940,7 @@ export default function ArchivosTrabajoPage() {
                           className="mt-2 border border-foreground/20"
                           onClick={() => setFixingLink(link)}
                         >
-                          Reparar enlace
+                          {t('botones.archivos.repararEnlace', {defaultValue: 'Reparar enlace'})}
                         </Button>
                       )}
                     </li>
@@ -950,7 +950,7 @@ export default function ArchivosTrabajoPage() {
             )}
 
             <div className="mt-6 flex justify-end">
-              <Button onClick={() => setValidationModalOpen(false)}>Cerrar</Button>
+              <Button onClick={() => setValidationModalOpen(false)}>{t('common.cerrar', {defaultValue: 'Cerrar'})}</Button>
             </div>
           </Card>
         </div>

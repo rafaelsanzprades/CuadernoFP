@@ -5,6 +5,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO } from "@/utils/calificaciones";
 import { MultiSelectDropdown } from "@/components/ui/MultiSelectDropdown";
+import { useTranslation } from "react-i18next";
 
 const TIPOS_INSTRUMENTO = [
   { id: "rubrica", label: "Rúbrica" },
@@ -55,6 +56,7 @@ const PROCEDIMIENTOS = [
 ];
 
 export function JegModeloTab() {
+  const { t } = useTranslation();
   const { moduleData, cursoData, updateDataFrame, updateCursoData } = useAppStore();
   const df_ce = moduleData?.df_ce || [];
   const df_ra = moduleData?.df_ra || [];
@@ -159,7 +161,7 @@ export function JegModeloTab() {
                   <div className="flex items-center justify-between mb-2">
                     <span className="font-mono font-bold text-info">{ce.id}</span>
                     <button onClick={() => addIndicador(ce.id)} className="text-caption text-accent hover:text-accent/80 flex items-center gap-1 font-semibold">
-                      <Plus className="w-3.5 h-3.5" /> Añadir indicador
+                      <Plus className="w-3.5 h-3.5" /> {t('botones.instrumentos.anadirIndicador', {defaultValue: 'Añadir indicador'})}
                     </button>
                   </div>
                   {inds.length === 0 ? (
@@ -209,7 +211,7 @@ export function JegModeloTab() {
             <ClipboardList className="w-5 h-5 text-purple-400" /> Instrumentos (modelo JEG)
           </h2>
           <button onClick={addInstrumento} className="text-caption text-accent hover:text-accent/80 flex items-center gap-1 font-semibold">
-            <Plus className="w-3.5 h-3.5" /> Añadir instrumento
+            <Plus className="w-3.5 h-3.5" /> {t('botones.instrumentos.anadirInstrumento', {defaultValue: 'Añadir instrumento'})}
           </button>
         </div>
         {df_instr.length === 0 ? (

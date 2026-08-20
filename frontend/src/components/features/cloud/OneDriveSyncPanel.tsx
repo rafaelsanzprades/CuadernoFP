@@ -93,7 +93,7 @@ export function OneDriveSyncPanel() {
             <div>
               {isOneDriveConnected ? (
                 <Button onClick={handleDisconnect} variant="ghost" className="text-danger hover:bg-danger/10">
-                  Desconectar
+                  {t('botones.cloud.desconectar', {defaultValue: 'Desconectar'})}
                 </Button>
               ) : (
                 <Button 
@@ -101,7 +101,7 @@ export function OneDriveSyncPanel() {
                   disabled={isLoading}
                   className={`border transition-all ${dataSource === 'demo' ? 'bg-muted/20 text-muted border-muted/30 cursor-not-allowed opacity-70' : 'bg-[#0078D4]/20 text-[#0078D4] hover:bg-[#0078D4]/30 border-[#0078D4]/30'}`}
                 >
-                  Conectar cuenta
+                  {t('botones.cloud.conectarCuenta', {defaultValue: 'Conectar cuenta'})}
                 </Button>
               )}
             </div>

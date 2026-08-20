@@ -97,7 +97,7 @@ export default function SeguimientoPage() {
                 <p className="text-muted mb-4">Debes abrir o crear un archivo de programación y curso en tu Archivos.</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
-                    <FolderOpen className="w-4 h-4" /> Ir a mis Archivos
+                    <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
                   </Button>
                 </Link>
               </div>
@@ -231,7 +231,7 @@ export default function SeguimientoPage() {
                     className="text-body font-semibold px-4 py-2 rounded-lg border border-[var(--glass-border)] bg-foreground/15 text-foreground/80 hover:bg-foreground/10 hover:text-foreground transition-colors flex items-center gap-2"
                   >
                     <span>{allDiarioOpen ? '▲' : '▼'}</span>
-                    {allDiarioOpen ? 'Colapsar todos' : 'Expandir todos'}
+                    {allDiarioOpen ? t('common.colapsar_todos', {defaultValue: 'Colapsar todos'}) : t('common.expandir_todos', {defaultValue: 'Expandir todos'})}
                   </button>
                 </div>
                 <div className="space-y-4">

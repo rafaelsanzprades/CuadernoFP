@@ -799,7 +799,7 @@ export default function InicioPage() {
                           onClick={() => setNuevoCursoWizardOpen(true)}
                           className="text-caption bg-info/10 hover:bg-info/20 text-info border border-info/30 gap-2"
                         >
-                          <Rocket className="w-3.5 h-3.5" /> Nuevo curso a partir de esta programación
+                          <Rocket className="w-3.5 h-3.5" /> {t('botones.dashboard.nuevoCursoDeEstaProgramacion', {defaultValue: 'Nuevo curso a partir de esta programación'})}
                         </Button>
                       )}
                     </div>

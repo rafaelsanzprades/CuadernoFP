@@ -7,8 +7,10 @@ import { Printer, FileText, Users, Award, Briefcase, GraduationCap, Target } fro
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { resolveDescRa, loadCatalogForModule } from '@/services/catalogCache';
 import { isAlumnoActivo } from '@/utils/alumnado';
+import { useTranslation } from 'react-i18next';
 
 export const BoletinesTab = () => {
+  const { t } = useTranslation();
   const { cursoData, moduleData, activeCursoId, activeModuleId } = useAppStore();
 
   useEffect(() => { if (activeModuleId) loadCatalogForModule(activeModuleId); }, [activeModuleId]);
@@ -130,7 +132,7 @@ export const BoletinesTab = () => {
                 </h3>
               </div>
               <Button onClick={handlePrint} className="bg-accent text-background hover:bg-accent/80 font-bold px-4 py-2 rounded-xl flex items-center gap-2">
-                <Printer className="w-4 h-4" /> Imprimir boletín
+                <Printer className="w-4 h-4" /> {t('botones.alumnado.imprimirBoletin', {defaultValue: 'Imprimir boletín'})}
               </Button>
             </div>
 

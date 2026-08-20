@@ -6,6 +6,7 @@ import { MultiSelectDropdown } from "@/components/ui/MultiSelectDropdown";
 import { getAllAspectosClave, getAllRecursos } from "@/constants/taxonomies";
 import { UdConfigModal } from "./UdConfigModal";
 import { Settings } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface SessionTableProps {
   df_ud: UnidadDidactica[];
@@ -26,6 +27,7 @@ export function SessionTable({
   handleDeleteSesion,
   allUdsOpen
 }: SessionTableProps) {
+  const { t } = useTranslation();
   const [editingUd, setEditingUd] = useState<UnidadDidactica | null>(null);
 
   // Workaround for hydration mismatches with DragDropContext
@@ -207,7 +209,7 @@ export function SessionTable({
                   onClick={() => handleAddSesion(ud.id_ud)}
                   className="text-body text-accent hover:text-accent/80 font-semibold flex items-center gap-1"
                 >
-                  <span>+</span> Añadir sesión a {ud.id_ud}
+                  <span>+</span> {t('botones.secuenciacion.anadirSesionA', {id: ud.id_ud, defaultValue: `Añadir sesión a ${ud.id_ud}`})}
                 </button>
               </div>
             </div>

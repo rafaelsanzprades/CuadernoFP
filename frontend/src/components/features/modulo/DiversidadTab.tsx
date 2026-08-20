@@ -2,8 +2,10 @@
 import { Users, Plus, Trash2, ShieldAlert, Puzzle } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { Button } from "@/components/ui/Button";
+import { useTranslation } from "react-i18next";
 
 export function DiversidadTab() {
+  const { t } = useTranslation();
   const { moduleData, updateModuleData, updateDataFrame } = useAppStore();
   const config_contexto = moduleData?.config_contexto || {};
   const config_aula = moduleData?.config_aula || {};
@@ -239,7 +241,7 @@ export function DiversidadTab() {
           </table>
         </div>
         <button onClick={addDuaRow} className="text-body text-success hover:text-success font-semibold flex items-center gap-1">
-          <span>+</span> Añadir medida de Diversidad
+          <span>+</span> {t('botones.modulo.anadirMedidaDiversidad', {defaultValue: 'Añadir medida de diversidad'})}
         </button>
       </div>
 
@@ -250,7 +252,7 @@ export function DiversidadTab() {
             <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1 text-pink-400" /></span> Panel de ACNEAE
           </h2>
           <Button size="sm" variant="secondary" onClick={addAcneae} className="gap-2">
-            <Plus className="w-4 h-4" /> Añadir Alumno
+            <Plus className="w-4 h-4" /> {t('botones.modulo.anadirAlumno', {defaultValue: 'Añadir alumno'})}
           </Button>
         </div>
         <p className="text-caption text-muted mb-4">
