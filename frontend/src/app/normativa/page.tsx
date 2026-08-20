@@ -243,7 +243,7 @@ export default function DocumentosPage() {
   const relParts = relativePath.split("/").filter(Boolean);
 
   const breadcrumbs = [
-    { label: "Raíz", path: basePath },
+    { label: t('checks.normativa.raiz', {defaultValue: 'Raíz'}), path: basePath },
     ...relParts.map((part, idx) => ({
       label: part,
       path: (basePath ? basePath + "/" : "") + relParts.slice(0, idx + 1).join("/")

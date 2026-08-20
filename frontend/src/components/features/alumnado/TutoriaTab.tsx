@@ -135,10 +135,10 @@ export function TutoriaTab() {
                           onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "ambito", e.target.value)}
                           className="w-full bg-foreground/10 border border-[var(--glass-border)] rounded px-3 py-1.5 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none"
                         >
-                          <option value="Alumno/a">Alumno/a</option>
-                          <option value="Familia">Familia</option>
-                          <option value="Equipo Docente">Equipo docente</option>
-                          <option value="Orientación">Departamento Orientación</option>
+                          <option value="Alumno/a">{t('checks.alumnado.ambitoAlumno', {defaultValue: 'Alumno/a'})}</option>
+                          <option value="Familia">{t('checks.alumnado.ambitoFamilia', {defaultValue: 'Familia'})}</option>
+                          <option value="Equipo Docente">{t('checks.alumnado.ambitoEquipoDocente', {defaultValue: 'Equipo docente'})}</option>
+                          <option value="Orientación">{t('checks.alumnado.ambitoOrientacion', {defaultValue: 'Departamento orientación'})}</option>
                         </select>
                       </div>
                       <div className="flex-1 min-w-[150px]">
@@ -148,11 +148,11 @@ export function TutoriaTab() {
                           onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "canal", e.target.value)}
                           className="w-full bg-foreground/10 border border-[var(--glass-border)] rounded px-3 py-1.5 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none"
                         >
-                          <option value="Presencial">Reunión presencial</option>
-                          <option value="Videollamada">Videollamada</option>
-                          <option value="Teléfono">Llamada telefónica</option>
-                          <option value="Email">Correo electrónico</option>
-                          <option value="Pasillo">Informal / Pasillo</option>
+                          <option value="Presencial">{t('checks.alumnado.medioPresencial', {defaultValue: 'Reunión presencial'})}</option>
+                          <option value="Videollamada">{t('checks.alumnado.medioVideollamada', {defaultValue: 'Videollamada'})}</option>
+                          <option value="Teléfono">{t('checks.alumnado.medioTelefono', {defaultValue: 'Llamada telefónica'})}</option>
+                          <option value="Email">{t('checks.alumnado.medioEmail', {defaultValue: 'Correo electrónico'})}</option>
+                          <option value="Pasillo">{t('checks.alumnado.medioInformal', {defaultValue: 'Informal / pasillo'})}</option>
                         </select>
                       </div>
                     </div>

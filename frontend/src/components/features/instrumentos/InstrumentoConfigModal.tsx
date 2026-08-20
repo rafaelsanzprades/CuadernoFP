@@ -46,10 +46,10 @@ export function InstrumentoConfigModal({ isOpen, onClose, instrumentoId, instrum
               onChange={(e) => onChange('escala', e.target.value)}
               className="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-body text-white focus:outline-none focus:border-indigo-500"
             >
-              <option value="0-10">Continua (0-10)</option>
-              <option value="1-4">Discreta (1-4)</option>
-              <option value="A-D">Letras (A-D)</option>
-              <option value="Bien-Mal">Bien / Mal</option>
+              <option value="0-10">{t('checks.instrumentos.escala_continua_10', {defaultValue: 'Continua (0-10)'})}</option>
+              <option value="1-4">{t('checks.instrumentos.escala_discreta_4', {defaultValue: 'Discreta (1-4)'})}</option>
+              <option value="A-D">{t('checks.instrumentos.escala_discreta_letras', {defaultValue: 'Letras (A-D)'})}</option>
+              <option value="Bien-Mal">{t('checks.instrumentos.escala_bien_mal', {defaultValue: 'Bien / Mal'})}</option>
             </select>
           </div>
 
@@ -60,9 +60,9 @@ export function InstrumentoConfigModal({ isOpen, onClose, instrumentoId, instrum
               onChange={(e) => onChange('agente', e.target.value)}
               className="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-body text-white focus:outline-none focus:border-indigo-500"
             >
-              <option value="Heteroevaluacion">Heteroevaluación (Profesor)</option>
-              <option value="Coevaluacion">Coevaluación (Entre alumnos)</option>
-              <option value="Autoevaluacion">Autoevaluación (Propio alumno)</option>
+              <option value="Heteroevaluacion">{t('checks.instrumentos.agente_heteroevaluacion', {defaultValue: 'Heteroevaluación (profesor)'})}</option>
+              <option value="Coevaluacion">{t('checks.instrumentos.agente_coevaluacion', {defaultValue: 'Coevaluación (entre alumnos)'})}</option>
+              <option value="Autoevaluacion">{t('checks.instrumentos.agente_autoevaluacion', {defaultValue: 'Autoevaluación (propio alumno)'})}</option>
             </select>
           </div>
 
@@ -74,11 +74,11 @@ export function InstrumentoConfigModal({ isOpen, onClose, instrumentoId, instrum
               onChange={(e) => onChange('recuperacion', e.target.value)}
               className="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-body text-white focus:outline-none focus:border-indigo-500"
             >
-              <option value="No">No (Ordinaria)</option>
-              <option value="R1">Recuperación 1 (R1)</option>
-              <option value="R2">Recuperación 2 (R2)</option>
-              <option value="R3">Recuperación 3 (R3)</option>
-              <option value="RF">Recuperación Final (RF)</option>
+              <option value="No">{t('checks.instrumentos.recup_no', {defaultValue: 'No (ordinaria)'})}</option>
+              <option value="R1">{t('checks.instrumentos.recup_r1', {defaultValue: 'Recuperación 1 (R1)'})}</option>
+              <option value="R2">{t('checks.instrumentos.recup_r2', {defaultValue: 'Recuperación 2 (R2)'})}</option>
+              <option value="R3">{t('checks.instrumentos.recup_r3', {defaultValue: 'Recuperación 3 (R3)'})}</option>
+              <option value="RF">{t('checks.instrumentos.recup_rf', {defaultValue: 'Recuperación final (RF)'})}</option>
             </select>
           </div>
         </div>

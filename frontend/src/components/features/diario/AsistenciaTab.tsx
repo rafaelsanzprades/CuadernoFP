@@ -14,8 +14,8 @@ export function AsistenciaTab() {
   const [activeTab, setActiveTab] = useState("hoy");
 
   const TABS = [
-    { id: "hoy", label: <span className="flex items-center gap-2"><ClipboardEdit className="w-4 h-4"/> Hoy</span>, cleanLabel: "Hoy" },
-    { id: "acumulado", label: <span className="flex items-center gap-2"><BarChart2 className="w-4 h-4"/> Acumulado trimestral</span>, cleanLabel: "Acumulado trimestral" }
+    { id: "hoy", label: <span className="flex items-center gap-2"><ClipboardEdit className="w-4 h-4"/> {t('checks.diario.hoy', {defaultValue: 'Hoy'})}</span>, cleanLabel: t('checks.diario.hoy', {defaultValue: 'Hoy'}) },
+    { id: "acumulado", label: <span className="flex items-center gap-2"><BarChart2 className="w-4 h-4"/> {t('checks.diario.acumuladoTrimestral', {defaultValue: 'Acumulado trimestral'})}</span>, cleanLabel: t('checks.diario.acumuladoTrimestral', {defaultValue: 'Acumulado trimestral'}) }
   ];
 
   return (

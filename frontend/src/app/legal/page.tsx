@@ -124,11 +124,11 @@ export default function LegalPage() {
               <div className="space-y-12 animate-in fade-in duration-500">
                 <SectionIndex
                   items={[
-                    { id: "aviso-titular", label: "1. Datos del titular" },
-                    { id: "aviso-condiciones", label: "2. Condiciones de uso" },
-                    { id: "aviso-propiedad", label: "3. Propiedad intelectual" },
-                    { id: "aviso-licencias", label: "4. Licencias" },
-                    { id: "aviso-resumen", label: "5. Resumen práctico" },
+                    { id: "aviso-titular", label: t('checks.legal.avisoTitular', {defaultValue: '1. Datos del titular'}) },
+                    { id: "aviso-condiciones", label: t('checks.legal.avisoCondiciones', {defaultValue: '2. Condiciones de uso'}) },
+                    { id: "aviso-propiedad", label: t('checks.legal.avisoPropiedad', {defaultValue: '3. Propiedad intelectual'}) },
+                    { id: "aviso-licencias", label: t('checks.legal.avisoLicencias', {defaultValue: '4. Licencias'}) },
+                    { id: "aviso-resumen", label: t('checks.legal.avisoResumen', {defaultValue: '5. Resumen práctico'}) },
                   ]}
                 />
 
@@ -275,12 +275,12 @@ export default function LegalPage() {
               <div className="space-y-12 animate-in fade-in duration-500">
                 <SectionIndex
                   items={[
-                    { id: "priv-modelo", label: "1. Modelo local-first" },
-                    { id: "priv-responsable", label: "2. Responsable RGPD" },
-                    { id: "priv-datos", label: "3. ¿Dónde se guardan los datos?" },
-                    { id: "priv-derechos", label: "4. Derechos ARCO" },
-                    { id: "priv-seguridad", label: "5. Seguridad" },
-                    { id: "priv-base-legal", label: "6. Base legal" },
+                    { id: "priv-modelo", label: t('checks.legal.privModelo', {defaultValue: '1. Modelo local-first'}) },
+                    { id: "priv-responsable", label: t('checks.legal.privResponsable', {defaultValue: '2. Responsable RGPD'}) },
+                    { id: "priv-datos", label: t('checks.legal.privDatos', {defaultValue: '3. ¿Dónde se guardan los datos?'}) },
+                    { id: "priv-derechos", label: t('checks.legal.privDerechos', {defaultValue: '4. Derechos ARCO'}) },
+                    { id: "priv-seguridad", label: t('checks.legal.privSeguridad', {defaultValue: '5. Seguridad'}) },
+                    { id: "priv-base-legal", label: t('checks.legal.privBaseLegal', {defaultValue: '6. Base legal'}) },
                   ]}
                 />
 
@@ -384,10 +384,10 @@ export default function LegalPage() {
               <div className="space-y-12 animate-in fade-in duration-500">
                 <SectionIndex
                   items={[
-                    { id: "cookies-politica", label: "1. Política de cookies" },
-                    { id: "cookies-tecnologias", label: "2. Tecnologías utilizadas" },
-                    { id: "cookies-tabla", label: "3. Detalle de almacenamiento" },
-                    { id: "cookies-gestion", label: "4. Cómo gestionarlos" },
+                    { id: "cookies-politica", label: t('checks.legal.cookiesPolitica', {defaultValue: '1. Política de cookies'}) },
+                    { id: "cookies-tecnologias", label: t('checks.legal.cookiesTecnologias', {defaultValue: '2. Tecnologías utilizadas'}) },
+                    { id: "cookies-tabla", label: t('checks.legal.cookiesTabla', {defaultValue: '3. Detalle de almacenamiento'}) },
+                    { id: "cookies-gestion", label: t('checks.legal.cookiesGestion', {defaultValue: '4. Cómo gestionarlos'}) },
                   ]}
                 />
 
@@ -492,12 +492,12 @@ export default function LegalPage() {
               <div className="space-y-12 animate-in fade-in duration-500">
                 <SectionIndex
                   items={[
-                    { id: "acc-declaracion", label: "1. Declaración" },
-                    { id: "acc-normativa", label: "2. Normativa" },
-                    { id: "acc-estado", label: "3. Estado de conformidad" },
-                    { id: "acc-medidas", label: "4. Medidas adoptadas" },
-                    { id: "acc-excepciones", label: "5. Excepciones" },
-                    { id: "acc-contacto", label: "6. Contacto y quejas" },
+                    { id: "acc-declaracion", label: t('checks.legal.accDeclaracion', {defaultValue: '1. Declaración'}) },
+                    { id: "acc-normativa", label: t('checks.legal.accNormativa', {defaultValue: '2. Normativa'}) },
+                    { id: "acc-estado", label: t('checks.legal.accEstado', {defaultValue: '3. Estado de conformidad'}) },
+                    { id: "acc-medidas", label: t('checks.legal.accMedidas', {defaultValue: '4. Medidas adoptadas'}) },
+                    { id: "acc-excepciones", label: t('checks.legal.accExcepciones', {defaultValue: '5. Excepciones'}) },
+                    { id: "acc-contacto", label: t('checks.legal.accContacto', {defaultValue: '6. Contacto y quejas'}) },
                   ]}
                 />
 

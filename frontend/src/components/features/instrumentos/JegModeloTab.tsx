@@ -235,22 +235,22 @@ export function JegModeloTab() {
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-6 gap-2">
                   <select value={instr.tipo} onChange={(e) => updateInstrumento(instr.id_instrumento, "tipo", e.target.value)} className="bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-caption focus:border-accent focus:outline-none">
-                    {TIPOS_INSTRUMENTO.map((t) => <option key={t.id} value={t.id}>{t.label}</option>)}
+                    {TIPOS_INSTRUMENTO.map((tipo) => <option key={tipo.id} value={tipo.id}>{t(`checks.instrumentos.tipo_${tipo.id}`, {defaultValue: tipo.label})}</option>)}
                   </select>
                   <select value={instr.escala} onChange={(e) => updateInstrumento(instr.id_instrumento, "escala", e.target.value)} className="bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-caption focus:border-accent focus:outline-none">
-                    {ESCALAS.map((s) => <option key={s.id} value={s.id}>{s.label}</option>)}
+                    {ESCALAS.map((s) => <option key={s.id} value={s.id}>{t(`checks.instrumentos.escala_${s.id}`, {defaultValue: s.label})}</option>)}
                   </select>
                   <select value={instr.evaluacion} onChange={(e) => updateInstrumento(instr.id_instrumento, "evaluacion", e.target.value)} className="bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-caption focus:border-accent focus:outline-none">
-                    {PERIODOS_EVALUACION.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
+                    {PERIODOS_EVALUACION.map((p) => <option key={p.id} value={p.id}>{t(`checks.instrumentos.periodo_${p.id}`, {defaultValue: p.label})}</option>)}
                   </select>
                   <select value={instr.agente} onChange={(e) => updateInstrumento(instr.id_instrumento, "agente", e.target.value)} className="bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-caption focus:border-accent focus:outline-none">
-                    {AGENTES.map((a) => <option key={a.id} value={a.id}>{a.label}</option>)}
+                    {AGENTES.map((a) => <option key={a.id} value={a.id}>{t(`checks.instrumentos.agente_${a.id}`, {defaultValue: a.label})}</option>)}
                   </select>
                   <select value={instr.origen || "centro"} onChange={(e) => updateInstrumento(instr.id_instrumento, "origen", e.target.value)} title={t('tooltips.instrumentos.item12Origen', {defaultValue: 'Ítem 12: quién cumplimenta este instrumento'})} className="bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-caption focus:border-accent focus:outline-none">
-                    {ORIGENES.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
+                    {ORIGENES.map((o) => <option key={o.id} value={o.id}>{t(`checks.instrumentos.origen_${o.id}`, {defaultValue: o.label})}</option>)}
                   </select>
                   <select value={instr.procedimiento || "ordinario"} onChange={(e) => updateInstrumento(instr.id_instrumento, "procedimiento", e.target.value)} title={t('tooltips.instrumentos.item30Procedimiento', {defaultValue: 'Ítem 30: procedimiento JEG (ordinario/recuperación/extraordinaria)'})} className="bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-caption focus:border-accent focus:outline-none">
-                    {PROCEDIMIENTOS.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
+                    {PROCEDIMIENTOS.map((p) => <option key={p.id} value={p.id}>{t(`checks.instrumentos.procedimiento_${p.id}`, {defaultValue: p.label})}</option>)}
                   </select>
                 </div>
                 <div className="flex items-center gap-2">

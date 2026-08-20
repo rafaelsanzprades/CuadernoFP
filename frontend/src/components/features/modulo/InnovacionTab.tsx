@@ -13,15 +13,15 @@ export function InnovacionTab() {
   };
 
   const COMPLEMENTARIAS = [
-    { id: "COMP-VISITA", label: "Visita técnica a empresa" },
-    { id: "COMP-CHARLA", label: "Charla de expertos" },
-    { id: "COMP-TALLER", label: "Taller práctico externo" },
+    { id: "COMP-VISITA", label: t('checks.modulo.compVisita', {defaultValue: 'Visita técnica a empresa'}) },
+    { id: "COMP-CHARLA", label: t('checks.modulo.compCharla', {defaultValue: 'Charla de expertos'}) },
+    { id: "COMP-TALLER", label: t('checks.modulo.compTaller', {defaultValue: 'Taller práctico externo'}) },
   ];
   const EXTRAESCOLARES = [
-    { id: "EXT-FERIA", label: "Asistencia a ferias/congresos" },
-    { id: "EXT-CONC", label: "Concursos / Hackathons" },
-    { id: "EXT-VIAJE", label: "Viaje o intercambio" },
-    { id: "EXT-CULTURAL", label: "Actividad cultural voluntaria" },
+    { id: "EXT-FERIA", label: t('checks.modulo.extFeria', {defaultValue: 'Asistencia a ferias/congresos'}) },
+    { id: "EXT-CONC", label: t('checks.modulo.extConcursos', {defaultValue: 'Concursos / Hackathons'}) },
+    { id: "EXT-VIAJE", label: t('checks.modulo.extViaje', {defaultValue: 'Viaje o intercambio'}) },
+    { id: "EXT-CULTURAL", label: t('checks.modulo.extCultural', {defaultValue: 'Actividad cultural voluntaria'}) },
   ];
 
   const actividades_complementarias = moduleData?.actividades_complementarias || [];

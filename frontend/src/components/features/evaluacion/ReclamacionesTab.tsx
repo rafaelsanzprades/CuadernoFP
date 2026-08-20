@@ -32,7 +32,7 @@ export function ReclamacionesTab() {
   df_al.forEach((al: any) => { nombrePorId[al.ID] = `${al.Apellidos || ""}, ${al.Nombre || ""}`.trim(); });
 
   const referenciasDisponibles = [
-    ...REFERENCIAS_FIJAS,
+    ...REFERENCIAS_FIJAS.map(r => ({ id: r.id, label: t(`checks.evaluacion.referencia_${r.id.toLowerCase()}`, {defaultValue: r.label}) })),
     ...df_act.filter((a: any) => a.id_act).map((a: any) => ({ id: a.id_act, label: `${a.id_act} — ${a.desc_act || ""}` })),
   ];
 

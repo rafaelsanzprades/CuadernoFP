@@ -13,9 +13,9 @@ export function ContingenciaTab() {
   };
 
   const CONTINGENCIA = [
-    { id: "CONT-ASINC", label: "Docencia telemática asíncrona" },
-    { id: "CONT-SINC", label: "Docencia telemática síncrona" },
-    { id: "CONT-AUT", label: "Dosier de tareas autoguiadas" }
+    { id: "CONT-ASINC", label: t('checks.modulo.contAsincrona', {defaultValue: 'Docencia telemática asíncrona'}) },
+    { id: "CONT-SINC", label: t('checks.modulo.contSincrona', {defaultValue: 'Docencia telemática síncrona'}) },
+    { id: "CONT-AUT", label: t('checks.modulo.contAutoguiadas', {defaultValue: 'Dosier de tareas autoguiadas'}) }
   ];
 
   const medidas_contingencia = moduleData?.medidas_contingencia || [];
@@ -111,10 +111,10 @@ export function ContingenciaTab() {
                   <td className="p-2 font-mono text-caption">{row.ID}</td>
                   <td className="p-2 pr-2">
                     <select value={row.Escenario || "Otros"} onChange={e => updateRow(df_contingencia, "df_contingencia", idx, "Escenario", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-warning focus:outline-none">
-                      <option value="Ausencia de Profesorado">Ausencia de profesorado</option>
-                      <option value="Ausencia de Alumnado">Ausencia de alumnado</option>
-                      <option value="Interrupción Generalizada">Interrupción generalizada</option>
-                      <option value="Otros">Otros</option>
+                      <option value="Ausencia de Profesorado">{t('checks.modulo.escenarioAusenciaProfesorado', {defaultValue: 'Ausencia de profesorado'})}</option>
+                      <option value="Ausencia de Alumnado">{t('checks.modulo.escenarioAusenciaAlumnado', {defaultValue: 'Ausencia de alumnado'})}</option>
+                      <option value="Interrupción Generalizada">{t('checks.modulo.escenarioInterrupcion', {defaultValue: 'Interrupción generalizada'})}</option>
+                      <option value="Otros">{t('checks.comun.otros', {defaultValue: 'Otros'})}</option>
                     </select>
                   </td>
                   <td className="p-2 pr-2">

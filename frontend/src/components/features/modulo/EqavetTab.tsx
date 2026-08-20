@@ -3,6 +3,7 @@ import { Info, CheckCircle2, Award, ClipboardCheck } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
+import { useTranslation } from "react-i18next";
 
 const EQAVET_INDICATORS = [
   { id: "ind1", category: "Planificación", label: "¿La programación se ha ajustado a las necesidades del sector productivo?" },
@@ -19,6 +20,7 @@ const EQAVET_INDICATORS = [
 ];
 
 export function EqavetTab() {
+  const { t } = useTranslation();
   const { moduleData, cursoData, updateModuleData } = useAppStore();
 
   if (!moduleData) return null;
@@ -61,7 +63,7 @@ export function EqavetTab() {
           <Award className="w-6 h-6 text-accent mt-1 shrink-0" />
           <div>
             <h3 className="text-subheading font-bold text-foreground flex items-center gap-2">
-              <ClipboardCheck className="w-5 h-5 text-accent" /> Indicadores de Calidad
+              <ClipboardCheck className="w-5 h-5 text-accent" /> {t('checks.modulo.indicadoresCalidad', {defaultValue: 'Indicadores de calidad'})}
             </h3>
             <p className="text-muted text-body mt-1">
               Marco de Referencia Europeo de Garantía de la Calidad (EQAVET). Autoevaluación del módulo para la memoria final y el ciclo de mejora continua.
@@ -74,14 +76,18 @@ export function EqavetTab() {
         </div>
 
         <div className="space-y-6">
-          {["Planificación", "Desarrollo", "Resultados"].map(category => (
+          {[
+            { key: "planificacion", label: "Planificación" },
+            { key: "desarrollo", label: "Desarrollo" },
+            { key: "resultados", label: "Resultados" },
+          ].map(({ key, label: category }) => (
             <div key={category}>
-              <h4 className="font-medium text-body text-accent tracking-wider mb-3">{category}</h4>
+              <h4 className="font-medium text-body text-accent tracking-wider mb-3">{t(`checks.modulo.categoria_${key}`, {defaultValue: category})}</h4>
               <div className="space-y-3">
                 {EQAVET_INDICATORS.filter(ind => ind.category === category).map((ind) => (
                   <div key={ind.id} className="p-4 rounded-xl border bg-[var(--glass-bg)] flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div className="flex-1">
-                      <p className="text-body font-medium">{ind.label}</p>
+                      <p className="text-body font-medium">{t(`checks.modulo.eqavet_${ind.id}`, {defaultValue: ind.label})}</p>
                       {ind.id === "ind7" && pctProgreso !== null && (
                         <p className="text-caption text-muted mt-1">
                           Dato real (Magia › Programación › Planificación): <span className="font-semibold text-foreground">{pctProgreso}%</span> impartido sobre lo previsto.
@@ -99,7 +105,7 @@ export function EqavetTab() {
                               : 'bg-transparent border-white/10 text-muted hover:border-white/30'
                           }`}
                         >
-                          {opt.label}
+                          {t(`checks.modulo.score_${opt.value}`, {defaultValue: opt.label})}
                         </button>
                       ))}
                     </div>

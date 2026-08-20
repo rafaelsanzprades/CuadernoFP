@@ -135,7 +135,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
                 className="bg-foreground/10 border border-[var(--glass-border)] rounded px-1 py-0.5 text-foreground text-caption focus:outline-none cursor-pointer"
               >
                 {MONTHS.map((m, i) => (
-                  <option key={i} value={i} className="bg-[#0d1726]">{m}</option>
+                  <option key={i} value={i} className="bg-[#0d1726]">{t(`checks.comun.mes_${i}`, {defaultValue: m})}</option>
                 ))}
               </select>
               <select

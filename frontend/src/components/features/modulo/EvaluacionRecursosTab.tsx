@@ -66,7 +66,7 @@ export function EvaluacionRecursosTab() {
                       onChange={() => toggleInst(inst.id)}
                       className="rounded border-white/20 bg-transparent text-amber-500 focus:ring-amber-500"
                     />
-                    <span className="text-caption"><strong>{inst.id}</strong> - {inst.label}</span>
+                    <span className="text-caption"><strong>{inst.id}</strong> - {t(`checks.modulo.instEval_${inst.id.toLowerCase().replace(/-/g, '_')}`, {defaultValue: inst.label})}</span>
                   </label>
                 );
               })}
@@ -87,7 +87,7 @@ export function EvaluacionRecursosTab() {
                       onChange={() => toggleInst(inst.id)}
                       className="rounded border-white/20 bg-transparent text-amber-500 focus:ring-amber-500"
                     />
-                    <span className="text-caption"><strong>{inst.id}</strong> - {inst.label}</span>
+                    <span className="text-caption"><strong>{inst.id}</strong> - {t(`checks.modulo.instCalif_${inst.id.toLowerCase().replace(/-/g, '_')}`, {defaultValue: inst.label})}</span>
                   </label>
                 );
               })}
@@ -100,7 +100,7 @@ export function EvaluacionRecursosTab() {
             <div className="space-y-4">
               {categorias.map((cat) => (
                 <div key={cat}>
-                  <p className="text-caption font-semibold text-muted mb-1.5">{cat}</p>
+                  <p className="text-caption font-semibold text-muted mb-1.5">{t(`checks.modulo.recCategoria_${cat.toLowerCase().replace(/[^a-z0-9]+/g, '_')}`, {defaultValue: cat})}</p>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                     {RECURSOS_DIDACTICOS.filter((r) => r.categoria === cat).map((rec) => {
                       const isSelected = rec_seleccionados.includes(rec.id);
@@ -112,7 +112,7 @@ export function EvaluacionRecursosTab() {
                             onChange={() => toggleRec(rec.id)}
                             className="rounded border-white/20 bg-transparent text-amber-500 focus:ring-amber-500"
                           />
-                          <span className="text-caption">{rec.label}</span>
+                          <span className="text-caption">{t(`checks.modulo.recurso_${rec.id.toLowerCase().replace(/-/g, '_')}`, {defaultValue: rec.label})}</span>
                         </label>
                       );
                     })}

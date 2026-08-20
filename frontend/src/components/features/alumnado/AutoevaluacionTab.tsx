@@ -108,7 +108,7 @@ export function AutoevaluacionTab() {
                                   entry?.valor === v.valor ? v.cls : "bg-white/5 border-white/10 text-muted hover:bg-white/10"
                                 }`}
                               >
-                                {v.label}
+                                {t(`checks.alumnado.valor_${v.valor.toLowerCase()}`, {defaultValue: v.label})}
                               </button>
                             ))}
                           </div>

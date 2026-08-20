@@ -126,12 +126,12 @@ export function SessionTable({
                                       onChange={(e) => handleUpdateSesion(globalIdx, "Tipo_Actividad", e.target.value)}
                                       className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-accent focus:outline-none appearance-none"
                                     >
-                                      <option value="Teoría">Teoría</option>
-                                      <option value="Práctica">Práctica</option>
-                                      <option value="Proyecto">Proyecto</option>
-                                      <option value="Ejercicios">Ejercicios</option>
-                                      <option value="Tareas">Tareas</option>
-                                      <option value="Recuperaciones">Recuperaciones</option>
+                                      <option value="Teoría">{t('checks.secuenciacion.tipoTeoria', {defaultValue: 'Teoría'})}</option>
+                                      <option value="Práctica">{t('checks.secuenciacion.tipoPractica', {defaultValue: 'Práctica'})}</option>
+                                      <option value="Proyecto">{t('checks.secuenciacion.tipoProyecto', {defaultValue: 'Proyecto'})}</option>
+                                      <option value="Ejercicios">{t('checks.secuenciacion.tipoEjercicios', {defaultValue: 'Ejercicios'})}</option>
+                                      <option value="Tareas">{t('checks.secuenciacion.tipoTareas', {defaultValue: 'Tareas'})}</option>
+                                      <option value="Recuperaciones">{t('checks.secuenciacion.tipoRecuperaciones', {defaultValue: 'Recuperaciones'})}</option>
                                     </select>
                                   </div>
                                   <div className="w-32 pr-2">

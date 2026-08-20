@@ -2,6 +2,7 @@
 import { Award, Info, Layers } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { useAppStore } from "@/store/useAppStore";
+import { useTranslation } from "react-i18next";
 
 /**
  * TAB "Grados" en /modulo
@@ -54,6 +55,7 @@ const GRADOS = [
 ];
 
 export function TabGrados() {
+  const { t } = useTranslation();
   const { moduleData, setModuleData } = useAppStore();
   const gradoActual = (moduleData as any)?.grado_formativo || "D";
 
@@ -67,7 +69,7 @@ export function TabGrados() {
       {/* Tarjetas de grados */}
       <Card className="p-6">
         <h2 className="text-subheading font-bold text-foreground mb-6 flex items-center gap-2">
-          <Layers className="w-6 h-6 text-accent" /> Grados del A al E
+          <Layers className="w-6 h-6 text-accent" /> {t('checks.catalogo.gradosDelAAlE', {defaultValue: 'Grados del A al E'})}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           {GRADOS.map((g) => (
@@ -86,11 +88,11 @@ export function TabGrados() {
               <div className="flex items-center gap-3 mb-3">
                 <span className="text-heading">{g.icon}</span>
                 <div>
-                  <span className="text-body font-bold tracking-wider opacity-70">Grado {g.grado}</span>
-                  <h3 className="text-body font-bold text-foreground leading-tight">{g.nombre}</h3>
+                  <span className="text-body font-bold tracking-wider opacity-70">{t('checks.catalogo.grado', {defaultValue: 'Grado'})} {g.grado}</span>
+                  <h3 className="text-body font-bold text-foreground leading-tight">{t(`checks.catalogo.gradoNombre_${g.grado}`, {defaultValue: g.nombre})}</h3>
                 </div>
               </div>
-              <p className="text-body text-muted leading-relaxed">{g.descripcion}</p>
+              <p className="text-body text-muted leading-relaxed">{t(`checks.catalogo.gradoDesc_${g.grado}`, {defaultValue: g.descripcion})}</p>
               <p className="text-body font-semibold text-muted/80 mt-3 font-mono">{g.normativa}</p>
             </button>
           ))}

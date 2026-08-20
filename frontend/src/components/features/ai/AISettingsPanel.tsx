@@ -46,8 +46,8 @@ export function AISettingsPanel() {
             onChange={(e) => setProvider(e.target.value)}
             className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-body text-foreground font-medium focus:outline-none focus:ring-2 focus:ring-accent transition-all"
           >
-            <option value="gemini">Google Gemini (Recomendado - gratis para desarrolladores)</option>
-            <option value="openai">OpenAI ChatGPT (Requiere saldo en la cuenta)</option>
+            <option value="gemini">{t('checks.ai.proveedorGemini', {defaultValue: 'Google Gemini (recomendado - gratis para desarrolladores)'})}</option>
+            <option value="openai">{t('checks.ai.proveedorOpenai', {defaultValue: 'OpenAI ChatGPT (requiere saldo en la cuenta)'})}</option>
           </select>
         </div>
 

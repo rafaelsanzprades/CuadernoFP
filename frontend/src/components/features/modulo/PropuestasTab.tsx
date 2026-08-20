@@ -61,7 +61,7 @@ export function PropuestasTab() {
             <div key={cat.key} className={idx > 0 ? "pt-6 border-t border-[var(--glass-border)]" : ""}>
               <h4 className="font-medium text-body text-success tracking-wider mb-3 flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-success" />
-                {cat.label}
+                {t(`checks.modulo.categoria_${cat.key}`, {defaultValue: cat.label})}
               </h4>
               <div className="space-y-4">
                 <div>

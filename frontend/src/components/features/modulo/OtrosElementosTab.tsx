@@ -13,11 +13,11 @@ export function OtrosElementosTab() {
   };
 
   const TRANSVERSALES = [
-    { id: "TRANS-DIG", label: "Competencia Digital / Tecnologías" },
-    { id: "TRANS-SOST", label: "Sostenibilidad y Transición Ecológica" },
-    { id: "TRANS-IGUAL", label: "Igualdad de Género" },
-    { id: "TRANS-PRL", label: "Prevención de Riesgos Laborales" },
-    { id: "TRANS-EMPRE", label: "Cultura Emprendedora" }
+    { id: "TRANS-DIG", label: t('checks.modulo.transDigital', {defaultValue: 'Competencia Digital / Tecnologías'}) },
+    { id: "TRANS-SOST", label: t('checks.modulo.transSostenibilidad', {defaultValue: 'Sostenibilidad y Transición Ecológica'}) },
+    { id: "TRANS-IGUAL", label: t('checks.modulo.transIgualdad', {defaultValue: 'Igualdad de Género'}) },
+    { id: "TRANS-PRL", label: t('checks.modulo.transPrl', {defaultValue: 'Prevención de Riesgos Laborales'}) },
+    { id: "TRANS-EMPRE", label: t('checks.modulo.transEmprendedora', {defaultValue: 'Cultura Emprendedora'}) }
   ];
 
   const elementos_transversales = moduleData?.elementos_transversales || [];
@@ -36,66 +36,68 @@ export function OtrosElementosTab() {
   };
 
   const COMPETENCIAS_CLAVE = [
-    { id: "CL", label: "Comunicación Lingüística" },
-    { id: "CSTEM", label: "Competencia Matemática y en Ciencia, Tecnología e Ingeniería" },
-    { id: "CD", label: "Competencia Digital" },
-    { id: "CPSAA", label: "Competencia Personal, Social y de Aprender a Aprender" },
-    { id: "CCEC", label: "Competencia en Conciencia y Expresión Culturales" },
-    { id: "CE", label: "Competencia Emprendedora" },
-    { id: "CIEC", label: "Competencia Ciudadana" }
+    { id: "CL", label: t('checks.modulo.compClaveCL', {defaultValue: 'Comunicación Lingüística'}) },
+    { id: "CSTEM", label: t('checks.modulo.compClaveCSTEM', {defaultValue: 'Competencia Matemática y en Ciencia, Tecnología e Ingeniería'}) },
+    { id: "CD", label: t('checks.modulo.compClaveCD', {defaultValue: 'Competencia Digital'}) },
+    { id: "CPSAA", label: t('checks.modulo.compClaveCPSAA', {defaultValue: 'Competencia Personal, Social y de Aprender a Aprender'}) },
+    { id: "CCEC", label: t('checks.modulo.compClaveCCEC', {defaultValue: 'Competencia en Conciencia y Expresión Culturales'}) },
+    { id: "CE", label: t('checks.modulo.compClaveCE', {defaultValue: 'Competencia Emprendedora'}) },
+    { id: "CIEC", label: t('checks.modulo.compClaveCIEC', {defaultValue: 'Competencia Ciudadana'}) }
   ];
+
+  const digcompKey = (id: string) => `digcomp_${id.replace('.', '_')}`;
 
   const DIGCOMP_AREAS = [
     {
-      area: "1", label: "Información y alfabetización de datos", items: [
-        { id: "1.1", label: "Navegación, búsqueda y filtrado de datos, información y contenidos digitales" },
-        { id: "1.2", label: "Evaluación de datos, información y contenidos digitales" },
-        { id: "1.3", label: "Gestión de datos, información y contenidos digitales" },
+      area: "1", label: t('checks.modulo.digcompArea1', {defaultValue: 'Información y alfabetización de datos'}), items: [
+        { id: "1.1", label: t(`checks.modulo.${digcompKey("1.1")}`, {defaultValue: 'Navegación, búsqueda y filtrado de datos, información y contenidos digitales'}) },
+        { id: "1.2", label: t(`checks.modulo.${digcompKey("1.2")}`, {defaultValue: 'Evaluación de datos, información y contenidos digitales'}) },
+        { id: "1.3", label: t(`checks.modulo.${digcompKey("1.3")}`, {defaultValue: 'Gestión de datos, información y contenidos digitales'}) },
       ]
     },
     {
-      area: "2", label: "Comunicación y colaboración", items: [
-        { id: "2.1", label: "Interacción mediante tecnologías digitales" },
-        { id: "2.2", label: "Compartir información y contenidos digitales" },
-        { id: "2.3", label: "Participación ciudadana en línea" },
-        { id: "2.4", label: "Colaboración mediante tecnologías digitales" },
-        { id: "2.5", label: "Netiqueta" },
-        { id: "2.6", label: "Gestión de la identidad digital" },
+      area: "2", label: t('checks.modulo.digcompArea2', {defaultValue: 'Comunicación y colaboración'}), items: [
+        { id: "2.1", label: t(`checks.modulo.${digcompKey("2.1")}`, {defaultValue: 'Interacción mediante tecnologías digitales'}) },
+        { id: "2.2", label: t(`checks.modulo.${digcompKey("2.2")}`, {defaultValue: 'Compartir información y contenidos digitales'}) },
+        { id: "2.3", label: t(`checks.modulo.${digcompKey("2.3")}`, {defaultValue: 'Participación ciudadana en línea'}) },
+        { id: "2.4", label: t(`checks.modulo.${digcompKey("2.4")}`, {defaultValue: 'Colaboración mediante tecnologías digitales'}) },
+        { id: "2.5", label: t(`checks.modulo.${digcompKey("2.5")}`, {defaultValue: 'Netiqueta'}) },
+        { id: "2.6", label: t(`checks.modulo.${digcompKey("2.6")}`, {defaultValue: 'Gestión de la identidad digital'}) },
       ]
     },
     {
-      area: "3", label: "Creación de contenidos digitales", items: [
-        { id: "3.1", label: "Desarrollo de contenidos digitales" },
-        { id: "3.2", label: "Integración y reelaboración de contenidos digitales" },
-        { id: "3.3", label: "Derechos de autor y licencias" },
-        { id: "3.4", label: "Programación" },
+      area: "3", label: t('checks.modulo.digcompArea3', {defaultValue: 'Creación de contenidos digitales'}), items: [
+        { id: "3.1", label: t(`checks.modulo.${digcompKey("3.1")}`, {defaultValue: 'Desarrollo de contenidos digitales'}) },
+        { id: "3.2", label: t(`checks.modulo.${digcompKey("3.2")}`, {defaultValue: 'Integración y reelaboración de contenidos digitales'}) },
+        { id: "3.3", label: t(`checks.modulo.${digcompKey("3.3")}`, {defaultValue: 'Derechos de autor y licencias'}) },
+        { id: "3.4", label: t(`checks.modulo.${digcompKey("3.4")}`, {defaultValue: 'Programación'}) },
       ]
     },
     {
-      area: "4", label: "Seguridad", items: [
-        { id: "4.1", label: "Protección de dispositivos" },
-        { id: "4.2", label: "Protección de datos personales y privacidad" },
-        { id: "4.3", label: "Protección de la salud y el bienestar" },
-        { id: "4.4", label: "Protección del medioambiente" },
+      area: "4", label: t('checks.modulo.digcompArea4', {defaultValue: 'Seguridad'}), items: [
+        { id: "4.1", label: t(`checks.modulo.${digcompKey("4.1")}`, {defaultValue: 'Protección de dispositivos'}) },
+        { id: "4.2", label: t(`checks.modulo.${digcompKey("4.2")}`, {defaultValue: 'Protección de datos personales y privacidad'}) },
+        { id: "4.3", label: t(`checks.modulo.${digcompKey("4.3")}`, {defaultValue: 'Protección de la salud y el bienestar'}) },
+        { id: "4.4", label: t(`checks.modulo.${digcompKey("4.4")}`, {defaultValue: 'Protección del medioambiente'}) },
       ]
     },
     {
-      area: "5", label: "Resolución de problemas", items: [
-        { id: "5.1", label: "Resolución de problemas técnicos" },
-        { id: "5.2", label: "Identificación de necesidades y respuestas tecnológicas" },
-        { id: "5.3", label: "Uso creativo de la tecnología digital" },
-        { id: "5.4", label: "Identificación de lagunas en la competencia digital" },
+      area: "5", label: t('checks.modulo.digcompArea5', {defaultValue: 'Resolución de problemas'}), items: [
+        { id: "5.1", label: t(`checks.modulo.${digcompKey("5.1")}`, {defaultValue: 'Resolución de problemas técnicos'}) },
+        { id: "5.2", label: t(`checks.modulo.${digcompKey("5.2")}`, {defaultValue: 'Identificación de necesidades y respuestas tecnológicas'}) },
+        { id: "5.3", label: t(`checks.modulo.${digcompKey("5.3")}`, {defaultValue: 'Uso creativo de la tecnología digital'}) },
+        { id: "5.4", label: t(`checks.modulo.${digcompKey("5.4")}`, {defaultValue: 'Identificación de lagunas en la competencia digital'}) },
       ]
     },
   ];
 
   const DIGCOMPEDU_AREAS = [
-    { id: "DCE-1", label: "Compromiso profesional" },
-    { id: "DCE-2", label: "Contenidos digitales" },
-    { id: "DCE-3", label: "Enseñanza y aprendizaje" },
-    { id: "DCE-4", label: "Evaluación y retroalimentación" },
-    { id: "DCE-5", label: "Empoderamiento del alumnado" },
-    { id: "DCE-6", label: "Desarrollo de la competencia digital del alumnado" },
+    { id: "DCE-1", label: t('checks.modulo.digcompeduDCE1', {defaultValue: 'Compromiso profesional'}) },
+    { id: "DCE-2", label: t('checks.modulo.digcompeduDCE2', {defaultValue: 'Contenidos digitales'}) },
+    { id: "DCE-3", label: t('checks.modulo.digcompeduDCE3', {defaultValue: 'Enseñanza y aprendizaje'}) },
+    { id: "DCE-4", label: t('checks.modulo.digcompeduDCE4', {defaultValue: 'Evaluación y retroalimentación'}) },
+    { id: "DCE-5", label: t('checks.modulo.digcompeduDCE5', {defaultValue: 'Empoderamiento del alumnado'}) },
+    { id: "DCE-6", label: t('checks.modulo.digcompeduDCE6', {defaultValue: 'Desarrollo de la competencia digital del alumnado'}) },
   ];
 
   const digcomp_competencias = config_contexto.digcomp_competencias || [];

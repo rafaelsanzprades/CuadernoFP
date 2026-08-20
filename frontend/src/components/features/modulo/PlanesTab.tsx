@@ -54,7 +54,7 @@ export function PlanesTab() {
             <div className="space-y-3">
               {FEOE_CATALOGO.map((grupo) => (
                 <div key={grupo.grupo}>
-                  <p className="text-caption font-semibold text-muted mb-1.5">{grupo.grupo}</p>
+                  <p className="text-caption font-semibold text-muted mb-1.5">{t(`checks.modulo.feoeGrupo_${grupo.grupo.toLowerCase()}`, {defaultValue: grupo.grupo})}</p>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                     {grupo.items.map((item) => {
                       const isSelected = feoe_seleccion.includes(item.id);
@@ -66,7 +66,7 @@ export function PlanesTab() {
                             onChange={() => toggleFeoe(item.id)}
                             className="rounded border-white/20 bg-transparent text-blue-500 focus:ring-blue-500"
                           />
-                          <span className="text-caption">{item.label}</span>
+                          <span className="text-caption">{t(`checks.modulo.feoe_${item.id.toLowerCase().replace(/-/g, '_')}`, {defaultValue: item.label})}</span>
                         </label>
                       );
                     })}

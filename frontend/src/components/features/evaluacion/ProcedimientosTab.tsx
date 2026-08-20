@@ -64,7 +64,7 @@ export function ProcedimientosTab() {
                     onChange={() => toggleModelo(m.id)}
                     className="rounded border-white/20 bg-transparent text-rose-500 focus:ring-rose-500"
                   />
-                  <span className="text-caption">{m.label}</span>
+                  <span className="text-caption">{t(`checks.evaluacion.modeloRecup_${m.id}`, {defaultValue: m.label})}</span>
                 </label>
               );
             })}

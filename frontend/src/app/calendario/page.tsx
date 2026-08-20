@@ -499,13 +499,13 @@ export default function CalendarioPage() {
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
-                    { label: "Inicio de curso",   field: "ini_curso" },
-                    { label: "Inicio clases (1T)", field: "ini_1t"   },
-                    { label: "Fin clases (3T)",    field: "fin_3t"   },
-                    { label: "Fin de curso",       field: "fin_curso" },
-                  ].map(({ label, field }) => (
+                    { label: "Inicio de curso",   field: "ini_curso", key: "checks.dashboard.fechaCampo_ini_curso" },
+                    { label: "Inicio clases (1T)", field: "ini_1t",   key: "checks.calendario.inicioClases1t" },
+                    { label: "Fin clases (3T)",    field: "fin_3t",   key: "checks.calendario.finClases3t" },
+                    { label: "Fin de curso",       field: "fin_curso", key: "checks.dashboard.fechaCampo_fin_curso" },
+                  ].map(({ label, field, key }) => (
                     <div key={field}>
-                      <label className="text-body font-semibold text-foreground mb-1 block">{label}</label>
+                      <label className="text-body font-semibold text-foreground mb-1 block">{t(key, {defaultValue: label})}</label>
                       <DatePicker
                         value={typeof info_fechas[field] === 'string' ? info_fechas[field] : ""}
                         onChange={v => handleUpdateFechas(field, v)}

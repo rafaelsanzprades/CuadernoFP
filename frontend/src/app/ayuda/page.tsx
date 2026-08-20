@@ -332,7 +332,7 @@ export default function AyudaPage() {
                                 {tabs.length > 0 && (
                                   <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
                                     {tabs.map(tab => (
-                                      <Link key={tab.id} href={`${basePath}?tab=${tab.id}`} className="hover:text-accent transition-colors block py-0.5">— {tab.label}</Link>
+                                      <Link key={tab.id} href={`${basePath}?tab=${tab.id}`} className="hover:text-accent transition-colors block py-0.5">— {t(`checks.ayuda.mapa_${basePath.slice(1)}_${tab.id.replace(/[^a-z0-9]/gi, '_')}`, {defaultValue: tab.label})}</Link>
                                     ))}
                                   </div>
                                 )}

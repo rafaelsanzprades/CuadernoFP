@@ -199,7 +199,7 @@ export function NuevoCursoWizard({ onClose }: NuevoCursoWizardProps) {
                 <div className="grid grid-cols-2 gap-4">
                   {FECHA_CAMPOS.map(({ field, label }) => (
                     <div key={field}>
-                      <label className="text-caption font-semibold text-foreground mb-1 block">{label}</label>
+                      <label className="text-caption font-semibold text-foreground mb-1 block">{t(`checks.dashboard.fechaCampo_${field}`, {defaultValue: label})}</label>
                       <DatePicker value={fechas[field]} onChange={(v) => setFechas(f => ({ ...f, [field]: v }))} />
                     </div>
                   ))}

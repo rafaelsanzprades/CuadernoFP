@@ -146,17 +146,20 @@ interface RasgosRapidosProps {
   onToggle: (id: string) => void;
 }
 
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+
 function RasgosRapidos({ titulo, grupos, seleccionados, onToggle }: RasgosRapidosProps) {
+  const { t } = useTranslation();
   return (
     <div>
       <label className="text-body font-semibold text-foreground mb-2 block">{titulo}</label>
       <p className="text-caption text-muted mb-3">
-        Selección orientativa para apoyar la redacción del texto de abajo (primera versión, se irá ampliando).
+        {t('checks.contexto.seleccionOrientativa', {defaultValue: 'Selección orientativa para apoyar la redacción del texto de abajo (primera versión, se irá ampliando).'})}
       </p>
       <div className="space-y-3">
         {grupos.map((grupo) => (
           <div key={grupo.grupo}>
-            <p className="text-caption font-semibold text-muted mb-1.5">{grupo.grupo}</p>
+            <p className="text-caption font-semibold text-muted mb-1.5">{t(`checks.contexto.grupo_${slug(grupo.grupo)}`, {defaultValue: grupo.grupo})}</p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
               {grupo.items.map((item) => {
                 const isSelected = seleccionados.includes(item.id);
@@ -168,7 +171,7 @@ function RasgosRapidos({ titulo, grupos, seleccionados, onToggle }: RasgosRapido
                       onChange={() => onToggle(item.id)}
                       className="rounded border-white/20 bg-transparent text-indigo-500 focus:ring-indigo-500"
                     />
-                    <span className="text-caption">{item.label}</span>
+                    <span className="text-caption">{t(`checks.contexto.item_${item.id.toLowerCase().replace(/-/g, '_')}`, {defaultValue: item.label})}</span>
                   </label>
                 );
               })}
@@ -212,7 +215,7 @@ export function ContextoTab() {
         </h2>
         <div className="space-y-4">
           <RasgosRapidos
-            titulo="Rasgos rápidos del entorno"
+            titulo={t('checks.contexto.tituloEntorno', {defaultValue: 'Rasgos rápidos del entorno'})}
             grupos={RASGOS_ENTORNO}
             seleccionados={rasgos_entorno}
             onToggle={(id) => toggleRasgo("rasgos_entorno", rasgos_entorno, id)}
@@ -227,7 +230,7 @@ export function ContextoTab() {
             />
           </div>
           <RasgosRapidos
-            titulo="Rasgos rápidos del entorno socioeconómico"
+            titulo={t('checks.contexto.tituloSocioeconomico', {defaultValue: 'Rasgos rápidos del entorno socioeconómico'})}
             grupos={RASGOS_SOCIOECONOMICO}
             seleccionados={rasgos_socioeconomico}
             onToggle={(id) => toggleRasgo("rasgos_socioeconomico", rasgos_socioeconomico, id)}
@@ -242,7 +245,7 @@ export function ContextoTab() {
             />
           </div>
           <RasgosRapidos
-            titulo="Rasgos rápidos del contexto escolar"
+            titulo={t('checks.contexto.tituloEscolar', {defaultValue: 'Rasgos rápidos del contexto escolar'})}
             grupos={RASGOS_CONTEXTO_ESCOLAR}
             seleccionados={rasgos_escolar}
             onToggle={(id) => toggleRasgo("rasgos_escolar", rasgos_escolar, id)}
@@ -257,7 +260,7 @@ export function ContextoTab() {
             />
           </div>
           <RasgosRapidos
-            titulo="Rasgos rápidos del alumnado"
+            titulo={t('checks.contexto.tituloAlumnado', {defaultValue: 'Rasgos rápidos del alumnado'})}
             grupos={RASGOS_ALUMNADO}
             seleccionados={rasgos_alumnado}
             onToggle={(id) => toggleRasgo("rasgos_alumnado", rasgos_alumnado, id)}
@@ -272,7 +275,7 @@ export function ContextoTab() {
             />
           </div>
           <RasgosRapidos
-            titulo="Rasgos rápidos de infraestructura"
+            titulo={t('checks.contexto.tituloInfraestructura', {defaultValue: 'Rasgos rápidos de infraestructura'})}
             grupos={RASGOS_INFRAESTRUCTURA}
             seleccionados={rasgos_infraestructura}
             onToggle={(id) => toggleRasgo("rasgos_infraestructura", rasgos_infraestructura, id)}

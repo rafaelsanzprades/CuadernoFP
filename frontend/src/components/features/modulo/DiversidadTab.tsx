@@ -43,12 +43,12 @@ export function DiversidadTab() {
   };
 
   const INCLUSION = [
-    { id: "NIVEL", label: "Actividades multinivel" },
-    { id: "AGRUP", label: "Agrupamientos flexibles / tutoría" },
-    { id: "TIEMPO", label: "Flexibilización en tiempos" },
-    { id: "MATERIAL", label: "Adaptación de materiales" },
-    { id: "ACNS", label: "ACNS (No Significativas)" },
-    { id: "AMPLIA", label: "Ampliación (Altas Capacidades)" }
+    { id: "NIVEL", label: t('checks.modulo.inclusionNivel', {defaultValue: 'Actividades multinivel'}) },
+    { id: "AGRUP", label: t('checks.modulo.inclusionAgrup', {defaultValue: 'Agrupamientos flexibles / tutoría'}) },
+    { id: "TIEMPO", label: t('checks.modulo.inclusionTiempo', {defaultValue: 'Flexibilización en tiempos'}) },
+    { id: "MATERIAL", label: t('checks.modulo.inclusionMaterial', {defaultValue: 'Adaptación de materiales'}) },
+    { id: "ACNS", label: t('checks.modulo.inclusionAcns', {defaultValue: 'ACNS (no significativas)'}) },
+    { id: "AMPLIA", label: t('checks.modulo.inclusionAmplia', {defaultValue: 'Ampliación (altas capacidades)'}) }
   ];
 
   const medidas_inclusion = moduleData?.medidas_inclusion || [];
@@ -83,11 +83,11 @@ export function DiversidadTab() {
   };
 
   const adaptacionesList = [
-    "Tiempo extra en pruebas",
-    "Sistemas de comunicación alternativos",
-    "Medios apropiados/apoyos técnicos",
-    "Adaptación de formato de examen",
-    "Ubicación preferente en el aula"
+    { id: "TIEMPO_EXTRA", label: t('checks.modulo.adaptTiempoExtra', {defaultValue: 'Tiempo extra en pruebas'}) },
+    { id: "COMUNICACION", label: t('checks.modulo.adaptComunicacion', {defaultValue: 'Sistemas de comunicación alternativos'}) },
+    { id: "MEDIOS", label: t('checks.modulo.adaptMedios', {defaultValue: 'Medios apropiados/apoyos técnicos'}) },
+    { id: "FORMATO_EXAMEN", label: t('checks.modulo.adaptFormatoExamen', {defaultValue: 'Adaptación de formato de examen'}) },
+    { id: "UBICACION", label: t('checks.modulo.adaptUbicacion', {defaultValue: 'Ubicación preferente en el aula'}) },
   ];
 
   return (
@@ -302,18 +302,18 @@ export function DiversidadTab() {
                   <label className="text-caption font-semibold text-muted block mb-2">Adaptaciones de evaluación y acceso</label>
                   <div className="flex flex-wrap gap-2">
                     {adaptacionesList.map(adapt => {
-                      const isSelected = (student.adaptaciones || []).includes(adapt);
+                      const isSelected = (student.adaptaciones || []).includes(adapt.id);
                       return (
                         <button
-                          key={adapt}
-                          onClick={() => toggleAdaptacion(student.id, adapt)}
+                          key={adapt.id}
+                          onClick={() => toggleAdaptacion(student.id, adapt.id)}
                           className={`text-caption px-3 py-1.5 rounded-full border transition-colors ${
-                            isSelected 
-                              ? 'bg-pink-500/20 border-pink-500/50 text-pink-200' 
+                            isSelected
+                              ? 'bg-pink-500/20 border-pink-500/50 text-pink-200'
                               : 'bg-white/5 border-white/10 text-muted hover:bg-white/10'
                           }`}
                         >
-                          {adapt}
+                          {adapt.label}
                         </button>
                       );
                     })}

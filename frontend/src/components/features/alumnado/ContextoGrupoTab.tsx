@@ -60,7 +60,7 @@ export function ContextoGrupoTab() {
     : "-";
   const repetidores = df_al.filter((a: any) => a.Repite === true).length;
   const tramosEdad = EDAD_TRAMOS.map((tramo) => ({ label: tramo.label, count: conEdad.filter((a: any) => tramo.test(a.Edad)).length }));
-  const rasgosSeleccionados = RASGOS_GRUPO.filter((r) => rasgos_grupo.includes(r.id)).map((r) => r.label);
+  const rasgosSeleccionados = RASGOS_GRUPO.filter((r) => rasgos_grupo.includes(r.id)).map((r) => t(`checks.alumnado.rasgoGrupo_${r.id.toLowerCase().replace(/-/g, '_')}`, {defaultValue: r.label}));
 
   const handleGenerarIA = async () => {
     if (total === 0) {
@@ -146,7 +146,7 @@ export function ContextoGrupoTab() {
           <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-1">
             <span className="inline-flex"><Activity className="w-[1.2em] h-[1.2em] mr-1 text-cyan-400" /></span> Rasgos característicos del grupo
           </h2>
-          <p className="text-caption text-muted mb-3">Selección orientativa para apoyar la redacción del texto de abajo (primera versión, se irá ampliando).</p>
+          <p className="text-caption text-muted mb-3">{t('checks.contexto.seleccionOrientativa', {defaultValue: 'Selección orientativa para apoyar la redacción del texto de abajo (primera versión, se irá ampliando).'})}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             {RASGOS_GRUPO.map((r) => {
               const isSelected = rasgos_grupo.includes(r.id);
@@ -158,7 +158,7 @@ export function ContextoGrupoTab() {
                     onChange={() => toggleRasgo(r.id)}
                     className="rounded border-white/20 bg-transparent text-cyan-500 focus:ring-cyan-500"
                   />
-                  <span className="text-caption">{r.label}</span>
+                  <span className="text-caption">{t(`checks.alumnado.rasgoGrupo_${r.id.toLowerCase().replace(/-/g, '_')}`, {defaultValue: r.label})}</span>
                 </label>
               );
             })}
