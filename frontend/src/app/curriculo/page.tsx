@@ -366,8 +366,8 @@ export default function MatricesPage() {
                           <th className="pb-2 w-24">RA</th>
                           <th className="pb-2 w-24">% RA</th>
                           <th className="pb-2 w-16 text-center">FEOE</th>
-                          <th className="pb-2">Resultados de aprendizaje</th>
-                          <th className="pb-2 w-32">Comp. Clave</th>
+                          <th className="pb-2">{t('tablas.curriculo.resultadosAprendizaje', {defaultValue: 'Resultados de aprendizaje'})}</th>
+                          <th className="pb-2 w-32">{t('tablas.curriculo.compClave', {defaultValue: 'Comp. clave'})}</th>
                           <th className="pb-2 w-32">CPE</th>
                         </tr>
                       </thead>
@@ -556,7 +556,7 @@ export default function MatricesPage() {
                                         <th className="pb-2 w-24">CE</th>
                                         <th className="pb-2 w-24">% CE</th>
                                         <th className="pb-2 w-16 text-center">FEOE</th>
-                                        <th className="pb-2">Criterio de Evaluación</th>
+                                        <th className="pb-2">{t('tablas.curriculo.criterioEvaluacion', {defaultValue: 'Criterio de evaluación'})}</th>
                                         <th className="pb-2 w-10"></th>
                                       </tr>
                                     </thead>
@@ -748,8 +748,8 @@ export default function MatricesPage() {
                       <thead>
                         <tr className="border-b border-[var(--glass-border)] text-body text-muted">
                           <th className="py-2 pr-0 sticky left-0 bg-background z-10 min-w-[44px] max-w-[44px]">UD/T</th>
-                          <th className="py-2 px-0 sticky left-[44px] bg-background z-10 min-w-[80px] max-w-[80px] text-center">Horas</th>
-                          <th className="py-2 pl-1 sticky left-[124px] bg-background z-10 min-w-[800px] w-[800px]">Unidad didáctica o de trabajo</th>
+                          <th className="py-2 px-0 sticky left-[44px] bg-background z-10 min-w-[80px] max-w-[80px] text-center">{t('tablas.curriculo.horas', {defaultValue: 'Horas'})}</th>
+                          <th className="py-2 pl-1 sticky left-[124px] bg-background z-10 min-w-[800px] w-[800px]">{t('tablas.curriculo.unidadDidacticaTrabajo', {defaultValue: 'Unidad didáctica o de trabajo'})}</th>
                           {df_ra.map((ra: any, i: number) => (
                             <th key={i} className="p-3 text-center min-w-[80px]">
                               <div className="text-caption">{ra.id_ra}</div>

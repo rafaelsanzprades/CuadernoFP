@@ -76,9 +76,9 @@ export function TabAcronimos() {
                   <table>
                     <thead>
                       <tr>
-                        <th className="w-24">Acrónimo</th>
-                        <th className="w-1/3">Nombre</th>
-                        <th>Descripción corta</th>
+                        <th className="w-24">{t('tablas.catalogo.acronimo', {defaultValue: 'Acrónimo'})}</th>
+                        <th className="w-1/3">{t('common.nombre', {defaultValue: 'Nombre'})}</th>
+                        <th>{t('tablas.catalogo.descripcionCorta', {defaultValue: 'Descripción corta'})}</th>
                       </tr>
                     </thead>
                     <tbody>

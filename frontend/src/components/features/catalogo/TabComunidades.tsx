@@ -5,6 +5,7 @@ import { MapPin, ExternalLink, BookOpen, Globe, FileText, Info } from "lucide-re
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import spainMapData from "@/data/spain-paths.json";
+import { useTranslation } from "react-i18next";
 
 const SPAIN_VIEWBOX = spainMapData.viewBox as string;
 const SPAIN_PATHS = spainMapData.locations as {svgId:string;ccaaId:string;path:string}[];
@@ -238,6 +239,7 @@ interface Props {
 }
 
 export function TabComunidades({ searchQuery = "" }: Props) {
+  const { t } = useTranslation();
   const [hovered, setHovered] = useState<string | null>(null);
   const globalData = useAppStore((state) => state.globalData);
   const updateGlobalData = useAppStore((state) => state.updateGlobalData);
@@ -381,11 +383,11 @@ export function TabComunidades({ searchQuery = "" }: Props) {
             <thead>
               <tr className="border-b">
                 <th className="text-left py-2 px-3 font-medium text-muted">#</th>
-                <th className="text-left py-2 px-3 font-medium text-muted">Comunidad Autónoma</th>
-                <th className="text-left py-2 px-3 font-medium text-muted">Siglas</th>
-                <th className="text-left py-2 px-3 font-medium text-muted">Portal Oficial</th>
-                <th className="text-left py-2 px-3 font-medium text-muted">Tipo</th>
-                <th className="text-left py-2 px-3 font-medium text-muted">Nota</th>
+                <th className="text-left py-2 px-3 font-medium text-muted">{t('tablas.catalogo.comunidadAutonoma', {defaultValue: 'Comunidad Autónoma'})}</th>
+                <th className="text-left py-2 px-3 font-medium text-muted">{t('tablas.catalogo.siglas', {defaultValue: 'Siglas'})}</th>
+                <th className="text-left py-2 px-3 font-medium text-muted">{t('tablas.catalogo.portalOficial', {defaultValue: 'Portal oficial'})}</th>
+                <th className="text-left py-2 px-3 font-medium text-muted">{t('common.tipo', {defaultValue: 'Tipo'})}</th>
+                <th className="text-left py-2 px-3 font-medium text-muted">{t('tablas.catalogo.nota', {defaultValue: 'Nota'})}</th>
               </tr>
             </thead>
             <tbody>

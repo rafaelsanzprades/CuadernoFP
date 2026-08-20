@@ -245,8 +245,8 @@ export default function LegalPage() {
                   <table className="w-full text-body text-left border-collapse">
                     <thead className="text-foreground/90 border-b border-[var(--glass-border)]">
                       <tr>
-                        <th className="py-3 font-semibold w-1/2 pr-4">Lo que SÍ PUEDES hacer</th>
-                        <th className="py-3 font-semibold w-1/2 pl-4">Lo que NO PUEDES hacer</th>
+                        <th className="py-3 font-semibold w-1/2 pr-4">{t('tablas.legal.loQueSiPuedes', {defaultValue: 'Lo que SÍ PUEDES hacer'})}</th>
+                        <th className="py-3 font-semibold w-1/2 pl-4">{t('tablas.legal.loQueNoPuedes', {defaultValue: 'Lo que NO PUEDES hacer'})}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-[var(--glass-border)] text-foreground/80">
@@ -436,10 +436,10 @@ export default function LegalPage() {
                   <table className="w-full text-body text-left border-collapse">
                     <thead className="text-foreground/90 border-b border-[var(--glass-border)]">
                       <tr>
-                        <th className="py-3 font-semibold">Clave</th>
-                        <th className="py-3 font-semibold">Tecnología</th>
-                        <th className="py-3 font-semibold">Contenido</th>
-                        <th className="py-3 font-semibold">Duración</th>
+                        <th className="py-3 font-semibold">{t('tablas.legal.clave', {defaultValue: 'Clave'})}</th>
+                        <th className="py-3 font-semibold">{t('tablas.legal.tecnologia', {defaultValue: 'Tecnología'})}</th>
+                        <th className="py-3 font-semibold">{t('tablas.legal.contenido', {defaultValue: 'Contenido'})}</th>
+                        <th className="py-3 font-semibold">{t('tablas.legal.duracion', {defaultValue: 'Duración'})}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-[var(--glass-border)] text-foreground/80">

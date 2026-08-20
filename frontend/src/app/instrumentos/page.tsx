@@ -264,17 +264,17 @@ export default function InstrumentosPage() {
             <table className="w-full text-left text-body border-collapse whitespace-nowrap">
               <thead>
                 <tr className="text-muted border-b border-[var(--glass-border)] bg-background">
-                  <th className="p-2 sticky left-0 z-10 border-r border-[var(--glass-border)] bg-background">Cód.</th>
-                  <th className="p-2 sticky left-[60px] z-10 border-r border-[var(--glass-border)] bg-background">Tipo</th>
-                  <th className="p-2 sticky left-[160px] z-10 border-r border-[var(--glass-border)] bg-background w-64">Instrumento / Actividad</th>
-                  <th className="p-2 sticky left-[416px] z-10 border-r border-[var(--glass-border)] bg-background w-24">% Pond.</th>
+                  <th className="p-2 sticky left-0 z-10 border-r border-[var(--glass-border)] bg-background">{t('tablas.instrumentos.cod', {defaultValue: 'Cód.'})}</th>
+                  <th className="p-2 sticky left-[60px] z-10 border-r border-[var(--glass-border)] bg-background">{t('common.tipo', {defaultValue: 'Tipo'})}</th>
+                  <th className="p-2 sticky left-[160px] z-10 border-r border-[var(--glass-border)] bg-background w-64">{t('tablas.instrumentos.instrumentoActividad', {defaultValue: 'Instrumento / actividad'})}</th>
+                  <th className="p-2 sticky left-[416px] z-10 border-r border-[var(--glass-border)] bg-background w-24">{t('tablas.instrumentos.pctPond', {defaultValue: '% Pond.'})}</th>
                   <th className="p-2 sticky left-[486px] z-10 border-r border-[var(--glass-border)] bg-background"><span className="inline-flex"><Check className="w-[1.2em] h-[1.2em] mr-1" /></span></th>
                   {lista_ce_ids.map((ce: string) => (
                     <th key={ce} className="p-2 text-center text-caption font-mono border-r border-[var(--glass-border)] text-info">
                       {ce}
                     </th>
                   ))}
-                  <th className="p-2 text-center border-r border-[var(--glass-border)]">Config</th>
+                  <th className="p-2 text-center border-r border-[var(--glass-border)]">{t('tablas.instrumentos.config', {defaultValue: 'Config'})}</th>
                   <th className="p-2 text-center"></th>
                 </tr>
               </thead>
@@ -437,12 +437,12 @@ export default function InstrumentosPage() {
                 <table className="w-full text-body border-collapse">
                   <thead>
                     <tr className="border-b border-[var(--glass-border)]">
-                      <th className="p-3 text-left text-muted font-semibold w-[14%]">Tipo</th>
-                      <th className="p-3 text-left text-muted font-semibold w-[30%]">Descripción del Instrumento de Evaluación (IE)</th>
+                      <th className="p-3 text-left text-muted font-semibold w-[14%]">{t('common.tipo', {defaultValue: 'Tipo'})}</th>
+                      <th className="p-3 text-left text-muted font-semibold w-[30%]">{t('tablas.instrumentos.descripcionIE', {defaultValue: 'Descripción del instrumento de evaluación (IE)'})}</th>
                       {trimestres.map(tri => (
                         <th key={tri.key} className="p-3 text-center text-muted font-semibold border-l border-[var(--glass-border)] w-[14%]">{tri.nombre}</th>
                       ))}
-                      <th className="p-3 text-center text-muted font-semibold border-l border-[var(--glass-border)] w-[14%]">Total</th>
+                      <th className="p-3 text-center text-muted font-semibold border-l border-[var(--glass-border)] w-[14%]">{t('common.total', {defaultValue: 'Total'})}</th>
                     </tr>
                   </thead>
                   <tbody>

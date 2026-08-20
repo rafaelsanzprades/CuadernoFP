@@ -3,6 +3,7 @@ import React, { useMemo, useState } from "react";
 import { History } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
+import { useTranslation } from "react-i18next";
 
 function formatFecha(iso: string): string {
   const d = new Date(iso);
@@ -11,6 +12,7 @@ function formatFecha(iso: string): string {
 }
 
 export function HistorialCalificacionesTab() {
+  const { t } = useTranslation();
   const { cursoData } = useAppStore();
   const df_al = cursoData?.df_al || [];
   const historial = cursoData?.historial_calificaciones || [];
@@ -87,11 +89,11 @@ export function HistorialCalificacionesTab() {
             <table className="w-full text-left text-body border-collapse">
               <thead>
                 <tr className="border-b border-[var(--glass-border)] text-muted">
-                  <th className="p-3 font-semibold">Fecha</th>
-                  <th className="p-3 font-semibold">Alumno</th>
-                  <th className="p-3 font-semibold">Campo</th>
-                  <th className="p-3 font-semibold text-center">Anterior</th>
-                  <th className="p-3 font-semibold text-center">Nuevo</th>
+                  <th className="p-3 font-semibold">{t('common.fecha', {defaultValue: 'Fecha'})}</th>
+                  <th className="p-3 font-semibold">{t('tablas.evaluacion.alumno', {defaultValue: 'Alumno'})}</th>
+                  <th className="p-3 font-semibold">{t('tablas.evaluacion.campo', {defaultValue: 'Campo'})}</th>
+                  <th className="p-3 font-semibold text-center">{t('tablas.evaluacion.anterior', {defaultValue: 'Anterior'})}</th>
+                  <th className="p-3 font-semibold text-center">{t('tablas.evaluacion.nuevo', {defaultValue: 'Nuevo'})}</th>
                 </tr>
               </thead>
               <tbody>

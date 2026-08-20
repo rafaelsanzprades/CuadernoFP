@@ -98,10 +98,10 @@ export function ContingenciaTab() {
             <thead>
               <tr className="border-b border-[var(--glass-border)] text-muted">
                 <th className="p-2 w-16">Id</th>
-                <th className="p-2 w-48">Escenario</th>
-                <th className="p-2 min-w-[200px]">Organización y acceso</th>
-                <th className="p-2 min-w-[200px]">Actividades alternativas</th>
-                <th className="p-2 w-48">Seguimiento y corrección</th>
+                <th className="p-2 w-48">{t('tablas.modulo.escenario', {defaultValue: 'Escenario'})}</th>
+                <th className="p-2 min-w-[200px]">{t('tablas.modulo.organizacionAcceso', {defaultValue: 'Organización y acceso'})}</th>
+                <th className="p-2 min-w-[200px]">{t('tablas.modulo.actividadesAlternativas', {defaultValue: 'Actividades alternativas'})}</th>
+                <th className="p-2 w-48">{t('tablas.modulo.seguimientoCorreccion', {defaultValue: 'Seguimiento y corrección'})}</th>
                 <th className="p-2 w-10"></th>
               </tr>
             </thead>

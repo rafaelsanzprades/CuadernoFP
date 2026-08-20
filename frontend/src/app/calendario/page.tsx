@@ -548,14 +548,14 @@ export default function CalendarioPage() {
                   <table className="w-full text-center text-body border-collapse table-fixed">
                     <thead>
                       <tr className="bg-foreground/5 text-muted border-b border-[var(--glass-border)]">
-                        <th className="p-3 text-left font-semibold">Trimestre</th>
+                        <th className="p-3 text-left font-semibold">{t('tablas.calendario.trimestre', {defaultValue: 'Trimestre'})}</th>
                         {["Lun", "Mar", "Mié", "Jue", "Vie"].map(day => (
                           <th key={day} className={`p-3 font-semibold ${!Number(horario[day]) ? 'opacity-40' : ''}`}>
                             {day}
                             {Number(horario[day]) > 0 && <span className="block text-caption text-info font-normal mt-0.5">{horario[day]}h/sem</span>}
                           </th>
                         ))}
-                          <th className="p-3 font-semibold border-l border-[var(--glass-border)]">Total</th>
+                          <th className="p-3 font-semibold border-l border-[var(--glass-border)]">{t('common.total', {defaultValue: 'Total'})}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -761,12 +761,12 @@ export default function CalendarioPage() {
                       <thead>
                         <tr className="border-b border-[var(--glass-border)] text-muted">
                           <th className="p-2 w-16">Id</th>
-                          <th className="p-2 w-32">Tipo</th>
-                          <th className="p-2 w-32">RA vinculados</th>
-                          <th className="p-2 min-w-[200px]">Descripción</th>
-                          <th className="p-2 w-24">Trimestre</th>
-                          <th className="p-2 w-48">Entidad</th>
-                          <th className="p-2 w-48">Evaluación</th>
+                          <th className="p-2 w-32">{t('common.tipo', {defaultValue: 'Tipo'})}</th>
+                          <th className="p-2 w-32">{t('tablas.calendario.raVinculados', {defaultValue: 'RA vinculados'})}</th>
+                          <th className="p-2 min-w-[200px]">{t('common.descripcion', {defaultValue: 'Descripción'})}</th>
+                          <th className="p-2 w-24">{t('tablas.calendario.trimestre', {defaultValue: 'Trimestre'})}</th>
+                          <th className="p-2 w-48">{t('tablas.calendario.entidad', {defaultValue: 'Entidad'})}</th>
+                          <th className="p-2 w-48">{t('tablas.calendario.evaluacion', {defaultValue: 'Evaluación'})}</th>
                           <th className="p-2 w-10"></th>
                         </tr>
                       </thead>

@@ -132,15 +132,15 @@ export const AttendanceAccumulated = () => {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-foreground/5 text-muted border-b border-[var(--glass-border)]">
-                <th className="p-4 font-semibold w-16 text-center">Nº</th>
+                <th className="p-4 font-semibold w-16 text-center">{t('tablas.diario.numero', {defaultValue: 'Nº'})}</th>
                 <th className="p-4 font-semibold w-12 text-center" title={t('tooltips.diario.menorDeEdad', {defaultValue: 'Menor de edad'})}><AlertCircle className="w-4 h-4 mx-auto" /></th>
-                <th className="p-4 font-semibold">Alumnado</th>
+                <th className="p-4 font-semibold">{t('tablas.evaluacion.alumnado', {defaultValue: 'Alumnado'})}</th>
                 <th className="p-4 font-semibold text-center w-24">1t</th>
                 <th className="p-4 font-semibold text-center w-24">2t</th>
                 <th className="p-4 font-semibold text-center w-24">3t</th>
-                <th className="p-4 font-semibold text-center w-24">Total</th>
-                <th className="p-4 font-semibold text-center w-48">Estado PdEvC</th>
-                <th className="p-4 font-semibold w-32">Progreso</th>
+                <th className="p-4 font-semibold text-center w-24">{t('common.total', {defaultValue: 'Total'})}</th>
+                <th className="p-4 font-semibold text-center w-48">{t('tablas.diario.estadoPdevc', {defaultValue: 'Estado PdEvC'})}</th>
+                <th className="p-4 font-semibold w-32">{t('tablas.diario.progreso', {defaultValue: 'Progreso'})}</th>
               </tr>
             </thead>
             <tbody className={loading ? 'opacity-50' : ''}>

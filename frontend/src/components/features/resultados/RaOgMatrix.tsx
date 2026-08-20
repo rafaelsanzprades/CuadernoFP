@@ -4,8 +4,10 @@ import { Check, Link as LinkIcon } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { resolveDescRa, resolveOg, getOgList, loadCatalogForModule } from "@/services/catalogCache";
 import { Card } from "@/components/ui/Card";
+import { useTranslation } from "react-i18next";
 
 export function RaOgMatrix() {
+  const { t } = useTranslation();
   const { moduleData, updateInfoModulo, activeModuleId } = useAppStore();
 
   useEffect(() => { if (activeModuleId) loadCatalogForModule(activeModuleId); }, [activeModuleId]);
@@ -51,7 +53,7 @@ export function RaOgMatrix() {
           <thead>
             <tr>
               <th className="p-3 border-b border-[var(--glass-border)] text-muted font-bold min-w-[300px]">
-                Objetivos Generales
+                {t('tablas.curriculo.objetivosGenerales', {defaultValue: 'Objetivos generales'})}
               </th>
               {ras.map((ra: any) => (
                 <th 

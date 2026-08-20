@@ -251,24 +251,24 @@ export default function ProgresoPage() {
                       <table className="w-full text-body border-collapse">
                         <thead>
                           <tr className="border-b border-[var(--glass-border)]">
-                            <th className="p-3 text-left text-muted font-semibold w-[30%]" rowSpan={2}>Instrumento</th>
-                            <th className="p-3 text-left text-muted font-semibold w-[14%]" rowSpan={2}>Tipo</th>
+                            <th className="p-3 text-left text-muted font-semibold w-[30%]" rowSpan={2}>{t('tablas.calificaciones.instrumento', {defaultValue: 'Instrumento'})}</th>
+                            <th className="p-3 text-left text-muted font-semibold w-[14%]" rowSpan={2}>{t('common.tipo', {defaultValue: 'Tipo'})}</th>
                             {tris.map(tri => (
                               <th key={tri.key} colSpan={3} className="p-2 text-center text-foreground font-semibold border-l border-[var(--glass-border)] w-[14%]">{tri.label}</th>
                             ))}
-                            <th colSpan={3} className="p-2 text-center text-foreground font-semibold border-l border-[var(--glass-border)] w-[14%]">Total</th>
+                            <th colSpan={3} className="p-2 text-center text-foreground font-semibold border-l border-[var(--glass-border)] w-[14%]">{t('common.total', {defaultValue: 'Total'})}</th>
                           </tr>
                           <tr className="border-b border-[var(--glass-border)] text-caption text-muted">
                             {tris.map(tri => (
                               <React.Fragment key={tri.key}>
-                                <th className="p-2 text-center border-l border-[var(--glass-border)]">Mín</th>
-                                <th className="p-2 text-center">Media</th>
-                                <th className="p-2 text-center">Máx</th>
+                                <th className="p-2 text-center border-l border-[var(--glass-border)]">{t('tablas.calificaciones.min', {defaultValue: 'Mín'})}</th>
+                                <th className="p-2 text-center">{t('tablas.calificaciones.media', {defaultValue: 'Media'})}</th>
+                                <th className="p-2 text-center">{t('tablas.calificaciones.max', {defaultValue: 'Máx'})}</th>
                               </React.Fragment>
                             ))}
-                            <th className="p-2 text-center border-l border-[var(--glass-border)]">Mín</th>
-                            <th className="p-2 text-center">Media</th>
-                            <th className="p-2 text-center">Máx</th>
+                            <th className="p-2 text-center border-l border-[var(--glass-border)]">{t('tablas.calificaciones.min', {defaultValue: 'Mín'})}</th>
+                            <th className="p-2 text-center">{t('tablas.calificaciones.media', {defaultValue: 'Media'})}</th>
+                            <th className="p-2 text-center">{t('tablas.calificaciones.max', {defaultValue: 'Máx'})}</th>
                           </tr>
                         </thead>
                         <tbody>

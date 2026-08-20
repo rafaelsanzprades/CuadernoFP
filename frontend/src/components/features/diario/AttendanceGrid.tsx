@@ -134,10 +134,10 @@ export const AttendanceGrid = () => {
           <table className="w-full text-left border-collapse relative">
             <thead className="sticky top-0 z-10 bg-[#0d1726]">
               <tr className="bg-foreground/5 text-muted border-b border-[var(--glass-border)]">
-                <th className="p-4 font-semibold w-16 text-center">Nº</th>
+                <th className="p-4 font-semibold w-16 text-center">{t('tablas.diario.numero', {defaultValue: 'Nº'})}</th>
                 <th className="p-4 font-semibold w-12 text-center" title={t('tooltips.diario.menorDeEdad', {defaultValue: 'Menor de edad'})}><AlertCircle className="w-4 h-4 mx-auto" /></th>
-                <th className="p-4 font-semibold">Alumnado</th>
-                <th className="p-4 font-semibold text-center w-48">Estado</th>
+                <th className="p-4 font-semibold">{t('tablas.evaluacion.alumnado', {defaultValue: 'Alumnado'})}</th>
+                <th className="p-4 font-semibold text-center w-48">{t('common.estado', {defaultValue: 'Estado'})}</th>
               </tr>
             </thead>
             <tbody 

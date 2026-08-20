@@ -14,12 +14,14 @@ import {
   Cell
 } from "recharts";
 import { useAppStore } from "@/store/useAppStore";
+import { useTranslation } from "react-i18next";
 
 interface AnalisisGrupalTabProps {
   setActiveTab?: (tab: string) => void;
 }
 
 export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {}) => {
+  const { t } = useTranslation();
   const { moduleData, cursoData } = useAppStore();
 
   const df_al = cursoData?.df_al || [];
@@ -270,9 +272,9 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
             <table className="w-full text-left text-body whitespace-nowrap">
               <thead>
                 <tr className="text-muted border-b border-[var(--glass-border)]">
-                  <th className="pb-2">Alumnado</th>
-                  <th className="pb-2 text-center">Nota</th>
-                  <th className="pb-2">Nivel de Riesgo</th>
+                  <th className="pb-2">{t('tablas.evaluacion.alumnado', {defaultValue: 'Alumnado'})}</th>
+                  <th className="pb-2 text-center">{t('tablas.evaluacion.nota', {defaultValue: 'Nota'})}</th>
+                  <th className="pb-2">{t('tablas.evaluacion.nivelRiesgo', {defaultValue: 'Nivel de riesgo'})}</th>
                 </tr>
               </thead>
               <tbody>
