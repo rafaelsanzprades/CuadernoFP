@@ -18,8 +18,8 @@ export function InnovacionTab() {
     { id: "COMP-TALLER", label: t('checks.modulo.compTaller', {defaultValue: 'Taller práctico externo'}) },
   ];
   const EXTRAESCOLARES = [
-    { id: "EXT-FERIA", label: t('checks.modulo.extFeria', {defaultValue: 'Asistencia a ferias/congresos'}) },
-    { id: "EXT-CONC", label: t('checks.modulo.extConcursos', {defaultValue: 'Concursos / Hackathons'}) },
+    { id: "EXT-FERIA", label: t('checks.modulo.extFeria', {defaultValue: 'Asistencia a ferias y congresos'}) },
+    { id: "EXT-CONC", label: t('checks.modulo.extConcursos', {defaultValue: 'Concursos y hackathons'}) },
     { id: "EXT-VIAJE", label: t('checks.modulo.extViaje', {defaultValue: 'Viaje o intercambio'}) },
     { id: "EXT-CULTURAL", label: t('checks.modulo.extCultural', {defaultValue: 'Actividad cultural voluntaria'}) },
   ];

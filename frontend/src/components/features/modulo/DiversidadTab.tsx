@@ -44,7 +44,7 @@ export function DiversidadTab() {
 
   const INCLUSION = [
     { id: "NIVEL", label: t('checks.modulo.inclusionNivel', {defaultValue: 'Actividades multinivel'}) },
-    { id: "AGRUP", label: t('checks.modulo.inclusionAgrup', {defaultValue: 'Agrupamientos flexibles / tutoría'}) },
+    { id: "AGRUP", label: t('checks.modulo.inclusionAgrup', {defaultValue: 'Agrupamientos flexibles y tutoría'}) },
     { id: "TIEMPO", label: t('checks.modulo.inclusionTiempo', {defaultValue: 'Flexibilización en tiempos'}) },
     { id: "MATERIAL", label: t('checks.modulo.inclusionMaterial', {defaultValue: 'Adaptación de materiales'}) },
     { id: "ACNS", label: t('checks.modulo.inclusionAcns', {defaultValue: 'ACNS (no significativas)'}) },
@@ -85,7 +85,7 @@ export function DiversidadTab() {
   const adaptacionesList = [
     { id: "TIEMPO_EXTRA", label: t('checks.modulo.adaptTiempoExtra', {defaultValue: 'Tiempo extra en pruebas'}) },
     { id: "COMUNICACION", label: t('checks.modulo.adaptComunicacion', {defaultValue: 'Sistemas de comunicación alternativos'}) },
-    { id: "MEDIOS", label: t('checks.modulo.adaptMedios', {defaultValue: 'Medios apropiados/apoyos técnicos'}) },
+    { id: "MEDIOS", label: t('checks.modulo.adaptMedios', {defaultValue: 'Medios apropiados y apoyos técnicos'}) },
     { id: "FORMATO_EXAMEN", label: t('checks.modulo.adaptFormatoExamen', {defaultValue: 'Adaptación de formato de examen'}) },
     { id: "UBICACION", label: t('checks.modulo.adaptUbicacion', {defaultValue: 'Ubicación preferente en el aula'}) },
   ];

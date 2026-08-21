@@ -270,7 +270,7 @@ export default function MagiaPage() {
   const TAB_DESCRIPTIONS: Record<string, string> = {
     comunidades: t('tabs.magia.comunidades.desc', {defaultValue: 'Generación de la programación didáctica oficial, por comunidad autónoma.'}),
     guia: t('tabs.magia.guia.desc', {defaultValue: 'Guía de inicio y prompt para IA: qué datos pedir al docente y dónde colocarlos en la app.'}),
-    programacion: t('tabs.magia.programacion.desc', {defaultValue: 'Documentos de apoyo: matriz de currículo y documentos individuales de UD/Tareas.'}),
+    programacion: t('tabs.magia.programacion.desc', {defaultValue: 'Documentos de apoyo: matriz de currículo y documentos individuales de UD y Tareas.'}),
     curso: t('tabs.magia.curso.desc', {defaultValue: 'Calendario, seguimiento, plano de aula, boletines y actas de evaluación del curso.'}),
   };
 
