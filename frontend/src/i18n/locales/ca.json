@@ -661,5 +661,139 @@
     "udConfig": {
       "errorExportar": "Error en exportar la unitat didàctica."
     }
+  },
+  "botones": {
+    "ai": {
+      "guardarConfiguracion": "Desar la configuració"
+    },
+    "alumnado": {
+      "anadirAlumnado": "Afegir alumnat",
+      "anadirRegistro": "Afegir registre",
+      "distribucionAlfabetica": "Distribució alfabètica",
+      "generarConIa": "Generar amb IA",
+      "importarCsv": "Importar CSV",
+      "imprimirBoletin": "Imprimir butlletí",
+      "pulsaAnadirRegistro": "Afegir registre",
+      "vaciarPlano": "Buidar el plànol"
+    },
+    "archivos": {
+      "cambiarCarpetaLocal": "Canviar carpeta local",
+      "cargarDatosDemo": "Carregar dades DEMO",
+      "conectarCarpetaLocal": "Connectar carpeta local",
+      "crearAhora": "Crear ara",
+      "crearCursoVacio": "Crear curs buit",
+      "crearProgramacion": "Crear programació",
+      "iniciarCursoGrupo": "Iniciar curs (+ grup)",
+      "nuevaCatalogo": "Nova (catàleg)",
+      "recargarDemo": "Recarregar DEMO",
+      "repararEnlace": "Reparar enllaç",
+      "validarWorkspace": "Validar workspace"
+    },
+    "calendario": {
+      "anadirActividadComplementaria": "Afegir activitat complementària",
+      "autodetectar": "Autodetectar"
+    },
+    "catalogo": {
+      "cursosAModulos": "Cursos → mòduls",
+      "incorporando": "Incorporant...",
+      "incorporarAProgramacion": "🚀 Incorporar a la programació",
+      "nuevaProgramacion": "Nova programació"
+    },
+    "cloud": {
+      "accionNoPermitidaDemo": "Acció no permesa en mode DEMO",
+      "conectarCuenta": "Connectar compte",
+      "desconectar": "Desconnectar"
+    },
+    "comun": {
+      "borrar": "Esborrar",
+      "deshacer": "Desfer",
+      "hoy": "Avui",
+      "ignorar": "Ignorar",
+      "instalarApp": "Instal·lar app"
+    },
+    "curriculo": {
+      "anadirCeA": "Afegir CE a {{id}}",
+      "anadirNuevaUd": "Afegir nova UD",
+      "anadirNuevoRa": "Afegir nou RA",
+      "aplicarACeldas": "Aplicar a {{count}} cel·les",
+      "aplicarPropuesta": "Aplicar proposta",
+      "autocompletarPlan": "Autocompletar pla",
+      "cargarPropuestaEditorial": "Carregar proposta editorial",
+      "volverALaLista": "Tornar a la llista"
+    },
+    "dashboard": {
+      "abriendo": "Obrint...",
+      "creandoCurso": "Creant curs...",
+      "crearArchivos": "Crear arxius",
+      "crearCurso": "Crear curs",
+      "crearMisArchivos": "Crear els meus arxius",
+      "nuevoCursoDeEstaProgramacion": "Nou curs a partir d'aquesta programació",
+      "probarConDemo": "Provar amb DEMO",
+      "reabrir": "Tornar a obrir",
+      "seleccionarCsvAlumnado": "Seleccionar CSV d'alumnat",
+      "semanaActual": "Setmana actual",
+      "semanaSiguiente": "Setmana següent"
+    },
+    "diario": {
+      "diaAnterior": "Dia anterior",
+      "diaSiguiente": "Dia següent"
+    },
+    "error": {
+      "intentarRecargar": "Intentar recarregar",
+      "intentarRecuperarPagina": "Intentar recuperar la pàgina",
+      "reiniciarModoDemo": "Reiniciar a mode Demo"
+    },
+    "evaluacion": {
+      "generarInforme": "Generar informe",
+      "restaurarNotasReales": "Restaurar a notes reals"
+    },
+    "header": {
+      "altoContraste": "Alt contrast",
+      "claro": "Clar",
+      "extra": "Extra",
+      "grande": "Gran",
+      "lectorVoz": "Lector en veu alta",
+      "normal": "Normal",
+      "oscuro": "Fosc",
+      "reducirAnimaciones": "Reduir animacions"
+    },
+    "instrumentos": {
+      "anadirIndicador": "Afegir indicador",
+      "anadirInstrumento": "Afegir instrument",
+      "anadirInstrumentoEn": "Afegir instrument/activitat a {{tri}}",
+      "crearInstrumentoRecuperacion": "Crear instrument de recuperació",
+      "crearRecuperacion": "Crear recuperació",
+      "crearRecuperacionTri": "Crear recuperació ({{tri}})",
+      "desmarcarTodas": "Desmarcar totes",
+      "marcarTodas": "Marcar totes"
+    },
+    "magia": {
+      "cerrarVisor": "Tancar visor",
+      "descargarTareaDocx": "Descarregar tasca.docx",
+      "descargarUdDocx": "Descarregar UD.docx",
+      "editableDocx": "Editable .docx",
+      "editableXlsx": "Editable .xlsx",
+      "generandoDocx": "⏳ Generant DOCX...",
+      "vistaPdf": "Vista .pdf"
+    },
+    "modulo": {
+      "anadirAlumno": "Afegir alumne",
+      "anadirMedidaContingencia": "Afegir mesura de contingència",
+      "anadirMedidaDiversidad": "Afegir mesura de diversitat",
+      "anadirTipoInstrumento": "Afegir tipus d'instrument d'avaluació"
+    },
+    "reclamaciones": {
+      "confirmarResolucion": "Confirmar resolució",
+      "justificante": "Justificant",
+      "nuevaReclamacion": "Nova reclamació",
+      "registrarReclamacion": "Registrar reclamació",
+      "resolver": "Resoldre"
+    },
+    "secuenciacion": {
+      "anadirNuevaTareaCompetencial": "Afegir nova tasca competencial",
+      "anadirSesionA": "Afegir sessió a {{id}}",
+      "exportarBriefing": "Exportar briefing (PDF/DOCX)",
+      "exportarFicha": "Exportar fitxa (PDF/DOCX)"
+    }
   }
 }

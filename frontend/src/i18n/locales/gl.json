@@ -659,5 +659,139 @@
     "udConfig": {
       "errorExportar": "Erro ao exportar a unidade didáctica."
     }
+  },
+  "botones": {
+    "ai": {
+      "guardarConfiguracion": "Gardar a configuración"
+    },
+    "alumnado": {
+      "anadirAlumnado": "Engadir alumnado",
+      "anadirRegistro": "Engadir rexistro",
+      "distribucionAlfabetica": "Distribución alfabética",
+      "generarConIa": "Xerar con IA",
+      "importarCsv": "Importar CSV",
+      "imprimirBoletin": "Imprimir boletín",
+      "pulsaAnadirRegistro": "Engadir rexistro",
+      "vaciarPlano": "Baleirar o plano"
+    },
+    "archivos": {
+      "cambiarCarpetaLocal": "Cambiar cartafol local",
+      "cargarDatosDemo": "Cargar datos DEMO",
+      "conectarCarpetaLocal": "Conectar cartafol local",
+      "crearAhora": "Crear agora",
+      "crearCursoVacio": "Crear curso baleiro",
+      "crearProgramacion": "Crear programación",
+      "iniciarCursoGrupo": "Iniciar curso (+ grupo)",
+      "nuevaCatalogo": "Nova (catálogo)",
+      "recargarDemo": "Recargar DEMO",
+      "repararEnlace": "Reparar ligazón",
+      "validarWorkspace": "Validar workspace"
+    },
+    "calendario": {
+      "anadirActividadComplementaria": "Engadir actividade complementaria",
+      "autodetectar": "Autodetectar"
+    },
+    "catalogo": {
+      "cursosAModulos": "Cursos → módulos",
+      "incorporando": "Incorporando...",
+      "incorporarAProgramacion": "🚀 Incorporar á programación",
+      "nuevaProgramacion": "Nova programación"
+    },
+    "cloud": {
+      "accionNoPermitidaDemo": "Acción non permitida en modo DEMO",
+      "conectarCuenta": "Conectar conta",
+      "desconectar": "Desconectar"
+    },
+    "comun": {
+      "borrar": "Borrar",
+      "deshacer": "Desfacer",
+      "hoy": "Hoxe",
+      "ignorar": "Ignorar",
+      "instalarApp": "Instalar app"
+    },
+    "curriculo": {
+      "anadirCeA": "Engadir CE a {{id}}",
+      "anadirNuevaUd": "Engadir nova UD",
+      "anadirNuevoRa": "Engadir novo RA",
+      "aplicarACeldas": "Aplicar a {{count}} celas",
+      "aplicarPropuesta": "Aplicar proposta",
+      "autocompletarPlan": "Autocompletar plan",
+      "cargarPropuestaEditorial": "Cargar proposta editorial",
+      "volverALaLista": "Volver á lista"
+    },
+    "dashboard": {
+      "abriendo": "Abrindo...",
+      "creandoCurso": "Creando curso...",
+      "crearArchivos": "Crear arquivos",
+      "crearCurso": "Crear curso",
+      "crearMisArchivos": "Crear os meus arquivos",
+      "nuevoCursoDeEstaProgramacion": "Novo curso a partir desta programación",
+      "probarConDemo": "Probar con DEMO",
+      "reabrir": "Reabrir",
+      "seleccionarCsvAlumnado": "Seleccionar CSV de alumnado",
+      "semanaActual": "Semana actual",
+      "semanaSiguiente": "Semana seguinte"
+    },
+    "diario": {
+      "diaAnterior": "Día anterior",
+      "diaSiguiente": "Día seguinte"
+    },
+    "error": {
+      "intentarRecargar": "Intentar recargar",
+      "intentarRecuperarPagina": "Intentar recuperar a páxina",
+      "reiniciarModoDemo": "Reiniciar a modo Demo"
+    },
+    "evaluacion": {
+      "generarInforme": "Xerar informe",
+      "restaurarNotasReales": "Restaurar a notas reais"
+    },
+    "header": {
+      "altoContraste": "Alto contraste",
+      "claro": "Claro",
+      "extra": "Extra",
+      "grande": "Grande",
+      "lectorVoz": "Lector en voz alta",
+      "normal": "Normal",
+      "oscuro": "Escuro",
+      "reducirAnimaciones": "Reducir animacións"
+    },
+    "instrumentos": {
+      "anadirIndicador": "Engadir indicador",
+      "anadirInstrumento": "Engadir instrumento",
+      "anadirInstrumentoEn": "Engadir instrumento/actividade en {{tri}}",
+      "crearInstrumentoRecuperacion": "Crear instrumento de recuperación",
+      "crearRecuperacion": "Crear recuperación",
+      "crearRecuperacionTri": "Crear recuperación ({{tri}})",
+      "desmarcarTodas": "Desmarcar todas",
+      "marcarTodas": "Marcar todas"
+    },
+    "magia": {
+      "cerrarVisor": "Pechar visor",
+      "descargarTareaDocx": "Descargar tarefa.docx",
+      "descargarUdDocx": "Descargar UD.docx",
+      "editableDocx": "Editable .docx",
+      "editableXlsx": "Editable .xlsx",
+      "generandoDocx": "⏳ Xerando DOCX...",
+      "vistaPdf": "Vista .pdf"
+    },
+    "modulo": {
+      "anadirAlumno": "Engadir alumno",
+      "anadirMedidaContingencia": "Engadir medida de continxencia",
+      "anadirMedidaDiversidad": "Engadir medida de diversidade",
+      "anadirTipoInstrumento": "Engadir tipo de instrumento de avaliación"
+    },
+    "reclamaciones": {
+      "confirmarResolucion": "Confirmar resolución",
+      "justificante": "Xustificante",
+      "nuevaReclamacion": "Nova reclamación",
+      "registrarReclamacion": "Rexistrar reclamación",
+      "resolver": "Resolver"
+    },
+    "secuenciacion": {
+      "anadirNuevaTareaCompetencial": "Engadir nova tarefa competencial",
+      "anadirSesionA": "Engadir sesión a {{id}}",
+      "exportarBriefing": "Exportar briefing (PDF/DOCX)",
+      "exportarFicha": "Exportar ficha (PDF/DOCX)"
+    }
   }
 }

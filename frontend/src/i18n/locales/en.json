@@ -659,5 +659,139 @@
     "udConfig": {
       "errorExportar": "Error exporting the teaching unit."
     }
+  },
+  "botones": {
+    "ai": {
+      "guardarConfiguracion": "Save settings"
+    },
+    "alumnado": {
+      "anadirAlumnado": "Add students",
+      "anadirRegistro": "Add record",
+      "distribucionAlfabetica": "Alphabetical layout",
+      "generarConIa": "Generate with AI",
+      "importarCsv": "Import CSV",
+      "imprimirBoletin": "Print report card",
+      "pulsaAnadirRegistro": "Add record",
+      "vaciarPlano": "Clear seating plan"
+    },
+    "archivos": {
+      "cambiarCarpetaLocal": "Change local folder",
+      "cargarDatosDemo": "Load DEMO data",
+      "conectarCarpetaLocal": "Connect local folder",
+      "crearAhora": "Create now",
+      "crearCursoVacio": "Create empty course",
+      "crearProgramacion": "Create programming",
+      "iniciarCursoGrupo": "Start course (+ group)",
+      "nuevaCatalogo": "New (catalog)",
+      "recargarDemo": "Reload DEMO",
+      "repararEnlace": "Repair link",
+      "validarWorkspace": "Validate workspace"
+    },
+    "calendario": {
+      "anadirActividadComplementaria": "Add complementary activity",
+      "autodetectar": "Auto-detect"
+    },
+    "catalogo": {
+      "cursosAModulos": "Courses → modules",
+      "incorporando": "Incorporating...",
+      "incorporarAProgramacion": "🚀 Incorporate into the programming",
+      "nuevaProgramacion": "New programming"
+    },
+    "cloud": {
+      "accionNoPermitidaDemo": "Action not allowed in DEMO mode",
+      "conectarCuenta": "Connect account",
+      "desconectar": "Disconnect"
+    },
+    "comun": {
+      "borrar": "Clear",
+      "deshacer": "Undo",
+      "hoy": "Today",
+      "ignorar": "Dismiss",
+      "instalarApp": "Install app"
+    },
+    "curriculo": {
+      "anadirCeA": "Add CE to {{id}}",
+      "anadirNuevaUd": "Add new UD",
+      "anadirNuevoRa": "Add new RA",
+      "aplicarACeldas": "Apply to {{count}} cells",
+      "aplicarPropuesta": "Apply proposal",
+      "autocompletarPlan": "Auto-complete plan",
+      "cargarPropuestaEditorial": "Load publisher's proposal",
+      "volverALaLista": "Back to the list"
+    },
+    "dashboard": {
+      "abriendo": "Opening...",
+      "creandoCurso": "Creating course...",
+      "crearArchivos": "Create files",
+      "crearCurso": "Create course",
+      "crearMisArchivos": "Create my files",
+      "nuevoCursoDeEstaProgramacion": "New course from this programming",
+      "probarConDemo": "Try with DEMO",
+      "reabrir": "Reopen",
+      "seleccionarCsvAlumnado": "Select student CSV",
+      "semanaActual": "Current week",
+      "semanaSiguiente": "Next week"
+    },
+    "diario": {
+      "diaAnterior": "Previous day",
+      "diaSiguiente": "Next day"
+    },
+    "error": {
+      "intentarRecargar": "Try reloading",
+      "intentarRecuperarPagina": "Try to recover the page",
+      "reiniciarModoDemo": "Restart to Demo mode"
+    },
+    "evaluacion": {
+      "generarInforme": "Generate report",
+      "restaurarNotasReales": "Restore to real grades"
+    },
+    "header": {
+      "altoContraste": "High contrast",
+      "claro": "Light",
+      "extra": "Extra",
+      "grande": "Large",
+      "lectorVoz": "Text-to-speech reader",
+      "normal": "Normal",
+      "oscuro": "Dark",
+      "reducirAnimaciones": "Reduce animations"
+    },
+    "instrumentos": {
+      "anadirIndicador": "Add indicator",
+      "anadirInstrumento": "Add instrument",
+      "anadirInstrumentoEn": "Add instrument/activity in {{tri}}",
+      "crearInstrumentoRecuperacion": "Create recovery instrument",
+      "crearRecuperacion": "Create recovery",
+      "crearRecuperacionTri": "Create recovery ({{tri}})",
+      "desmarcarTodas": "Uncheck all",
+      "marcarTodas": "Check all"
+    },
+    "magia": {
+      "cerrarVisor": "Close viewer",
+      "descargarTareaDocx": "Download task.docx",
+      "descargarUdDocx": "Download UD.docx",
+      "editableDocx": "Editable .docx",
+      "editableXlsx": "Editable .xlsx",
+      "generandoDocx": "⏳ Generating DOCX...",
+      "vistaPdf": "Preview .pdf"
+    },
+    "modulo": {
+      "anadirAlumno": "Add student",
+      "anadirMedidaContingencia": "Add contingency measure",
+      "anadirMedidaDiversidad": "Add diversity measure",
+      "anadirTipoInstrumento": "Add assessment instrument type"
+    },
+    "reclamaciones": {
+      "confirmarResolucion": "Confirm resolution",
+      "justificante": "Supporting document",
+      "nuevaReclamacion": "New complaint",
+      "registrarReclamacion": "Register complaint",
+      "resolver": "Resolve"
+    },
+    "secuenciacion": {
+      "anadirNuevaTareaCompetencial": "Add new competency-based task",
+      "anadirSesionA": "Add session to {{id}}",
+      "exportarBriefing": "Export briefing (PDF/DOCX)",
+      "exportarFicha": "Export sheet (PDF/DOCX)"
+    }
   }
 }

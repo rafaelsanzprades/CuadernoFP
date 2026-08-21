@@ -659,5 +659,139 @@
     "udConfig": {
       "errorExportar": "Errorea unitate didaktikoa esportatzean."
     }
+  },
+  "botones": {
+    "ai": {
+      "guardarConfiguracion": "Konfigurazioa gorde"
+    },
+    "alumnado": {
+      "anadirAlumnado": "Ikasleak gehitu",
+      "anadirRegistro": "Erregistroa gehitu",
+      "distribucionAlfabetica": "Banaketa alfabetikoa",
+      "generarConIa": "AArekin sortu",
+      "importarCsv": "CSV inportatu",
+      "imprimirBoletin": "Boletina inprimatu",
+      "pulsaAnadirRegistro": "Erregistroa gehitu",
+      "vaciarPlano": "Plana hustu"
+    },
+    "archivos": {
+      "cambiarCarpetaLocal": "Karpeta lokala aldatu",
+      "cargarDatosDemo": "DEMO datuak kargatu",
+      "conectarCarpetaLocal": "Karpeta lokala konektatu",
+      "crearAhora": "Sortu orain",
+      "crearCursoVacio": "Ikasturte hutsa sortu",
+      "crearProgramacion": "Programazioa sortu",
+      "iniciarCursoGrupo": "Ikasturtea hasi (+ taldea)",
+      "nuevaCatalogo": "Berria (katalogoa)",
+      "recargarDemo": "DEMO birkargatu",
+      "repararEnlace": "Esteka konpondu",
+      "validarWorkspace": "Workspace balioztatu"
+    },
+    "calendario": {
+      "anadirActividadComplementaria": "Jarduera osagarria gehitu",
+      "autodetectar": "Automatikoki detektatu"
+    },
+    "catalogo": {
+      "cursosAModulos": "Ikasturteak → moduluak",
+      "incorporando": "Gehitzen...",
+      "incorporarAProgramacion": "🚀 Programaziora gehitu",
+      "nuevaProgramacion": "Programazio berria"
+    },
+    "cloud": {
+      "accionNoPermitidaDemo": "Ekintza ez da baimenduta DEMO moduan",
+      "conectarCuenta": "Kontua konektatu",
+      "desconectar": "Deskonektatu"
+    },
+    "comun": {
+      "borrar": "Ezabatu",
+      "deshacer": "Desegin",
+      "hoy": "Gaur",
+      "ignorar": "Ez ikusi egin",
+      "instalarApp": "Aplikazioa instalatu"
+    },
+    "curriculo": {
+      "anadirCeA": "CE gehitu {{id}}(e)ra",
+      "anadirNuevaUd": "UD berria gehitu",
+      "anadirNuevoRa": "RA berria gehitu",
+      "aplicarACeldas": "{{count}} gelaxkari aplikatu",
+      "aplicarPropuesta": "Proposamena aplikatu",
+      "autocompletarPlan": "Plana automatikoki osatu",
+      "cargarPropuestaEditorial": "Argitaletxearen proposamena kargatu",
+      "volverALaLista": "Zerrendara itzuli"
+    },
+    "dashboard": {
+      "abriendo": "Irekitzen...",
+      "creandoCurso": "Ikasturtea sortzen...",
+      "crearArchivos": "Fitxategiak sortu",
+      "crearCurso": "Ikasturtea sortu",
+      "crearMisArchivos": "Nire fitxategiak sortu",
+      "nuevoCursoDeEstaProgramacion": "Ikasturte berria programazio honetatik abiatuta",
+      "probarConDemo": "DEMOrekin probatu",
+      "reabrir": "Berriro ireki",
+      "seleccionarCsvAlumnado": "Ikasleen CSVa hautatu",
+      "semanaActual": "Uneko astea",
+      "semanaSiguiente": "Hurrengo astea"
+    },
+    "diario": {
+      "diaAnterior": "Aurreko eguna",
+      "diaSiguiente": "Hurrengo eguna"
+    },
+    "error": {
+      "intentarRecargar": "Birkargatzen saiatu",
+      "intentarRecuperarPagina": "Orria berreskuratzen saiatu",
+      "reiniciarModoDemo": "Demo modura berrabiarazi"
+    },
+    "evaluacion": {
+      "generarInforme": "Txostena sortu",
+      "restaurarNotasReales": "Benetako notetara leheneratu"
+    },
+    "header": {
+      "altoContraste": "Kontraste altua",
+      "claro": "Argia",
+      "extra": "Estra",
+      "grande": "Handia",
+      "lectorVoz": "Ozen irakurtzeko irakurgailua",
+      "normal": "Normala",
+      "oscuro": "Iluna",
+      "reducirAnimaciones": "Animazioak murriztu"
+    },
+    "instrumentos": {
+      "anadirIndicador": "Adierazlea gehitu",
+      "anadirInstrumento": "Tresna gehitu",
+      "anadirInstrumentoEn": "Tresna/jarduera gehitu {{tri}}(e)an",
+      "crearInstrumentoRecuperacion": "Errekuperazio-tresna sortu",
+      "crearRecuperacion": "Errekuperazioa sortu",
+      "crearRecuperacionTri": "Errekuperazioa sortu ({{tri}})",
+      "desmarcarTodas": "Denak desmarkatu",
+      "marcarTodas": "Denak markatu"
+    },
+    "magia": {
+      "cerrarVisor": "Ikustailea itxi",
+      "descargarTareaDocx": "Zeregina.docx deskargatu",
+      "descargarUdDocx": "UD.docx deskargatu",
+      "editableDocx": "Editagarria .docx",
+      "editableXlsx": "Editagarria .xlsx",
+      "generandoDocx": "⏳ DOCX sortzen...",
+      "vistaPdf": "Ikuspegia .pdf"
+    },
+    "modulo": {
+      "anadirAlumno": "Ikaslea gehitu",
+      "anadirMedidaContingencia": "Kontingentzia-neurria gehitu",
+      "anadirMedidaDiversidad": "Aniztasun-neurria gehitu",
+      "anadirTipoInstrumento": "Ebaluazio-tresna mota gehitu"
+    },
+    "reclamaciones": {
+      "confirmarResolucion": "Ebazpena berretsi",
+      "justificante": "Justifikagiria",
+      "nuevaReclamacion": "Erreklamazio berria",
+      "registrarReclamacion": "Erreklamazioa erregistratu",
+      "resolver": "Ebatzi"
+    },
+    "secuenciacion": {
+      "anadirNuevaTareaCompetencial": "Gaitasun-zeregin berria gehitu",
+      "anadirSesionA": "Saioa gehitu {{id}}(e)ra",
+      "exportarBriefing": "Briefing-a esportatu (PDF/DOCX)",
+      "exportarFicha": "Fitxa esportatu (PDF/DOCX)"
+    }
   }
 }
