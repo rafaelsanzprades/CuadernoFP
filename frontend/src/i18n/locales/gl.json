@@ -48,108 +48,304 @@
     "titulos": "Títulos",
     "modulos": "Módulos",
     "agenda": {
-      "actual": { "label": "Actual", "desc": "Resumo das clases de hoxe, contexto da semana e desenvolvemento da unidade didáctica en curso." },
-      "planificacion": { "label": "Planificación", "desc": "Planificación e seguimento mensual da programación." },
-      "progreso-ra-ud": { "label": "Previsión RA e UD", "desc": "Progreso dos resultados de aprendizaxe segundo o estado e a ponderación das unidades didácticas impartidas." },
-      "mensual": { "label": "Mensual", "desc": "Vista mensual e calendario interactivo con datas clave." }
+      "actual": {
+        "label": "Actual",
+        "desc": "Resumo das clases de hoxe, contexto da semana e desenvolvemento da unidade didáctica en curso."
+      },
+      "planificacion": {
+        "label": "Planificación",
+        "desc": "Planificación e seguimento mensual da programación."
+      },
+      "progreso-ra-ud": {
+        "label": "Previsión RA e UD",
+        "desc": "Progreso dos resultados de aprendizaxe segundo o estado e a ponderación das unidades didácticas impartidas."
+      },
+      "mensual": {
+        "label": "Mensual",
+        "desc": "Vista mensual e calendario interactivo con datas clave."
+      }
     },
     "calendario": {
-      "fechas": { "label": "Datas e horario", "desc": "Configura as datas xerais, os trimestres e o horario semanal do curso." },
-      "feoe": { "label": "Período FEOE", "desc": "Configuración específica para FP Dual (FEOE)." },
-      "eventos": { "label": "Eventos e festivos", "desc": "Rexistro de eventos e festivos que afectan á docencia." },
-      "actividades": { "label": "Actividades complementarias e extraescolares", "desc": "Planificación de actividades complementarias e extraescolares." },
-      "visual": { "desc": "Vista mensual do calendario académico completo." }
+      "fechas": {
+        "label": "Datas e horario",
+        "desc": "Configura as datas xerais, os trimestres e o horario semanal do curso."
+      },
+      "feoe": {
+        "label": "Período FEOE",
+        "desc": "Configuración específica para FP Dual (FEOE)."
+      },
+      "eventos": {
+        "label": "Eventos e festivos",
+        "desc": "Rexistro de eventos e festivos que afectan á docencia."
+      },
+      "actividades": {
+        "label": "Actividades complementarias e extraescolares",
+        "desc": "Planificación de actividades complementarias e extraescolares."
+      },
+      "visual": {
+        "desc": "Vista mensual do calendario académico completo."
+      }
     },
     "alumnado": {
-      "matricula": { "label": "Matrícula", "desc": "Xestión da listaxe de alumnado e ficha individual." },
-      "tutoria": { "label": "Titoría e alertas", "desc": "Alertas de risco de abandono e seguimento titorial do alumnado." },
-      "perfil": { "label": "Perfil do grupo", "desc": "Estatísticas, trazos característicos e contexto narrativo do grupo." },
-      "plano": { "desc": "Distribución e plano visual da aula." }
+      "matricula": {
+        "label": "Matrícula",
+        "desc": "Xestión da listaxe de alumnado e ficha individual."
+      },
+      "tutoria": {
+        "label": "Titoría e alertas",
+        "desc": "Alertas de risco de abandono e seguimento titorial do alumnado."
+      },
+      "perfil": {
+        "label": "Perfil do grupo",
+        "desc": "Estatísticas, trazos característicos e contexto narrativo do grupo."
+      },
+      "plano": {
+        "desc": "Distribución e plano visual da aula."
+      }
     },
     "seguimiento": {
-      "clases": { "label": "Clases", "desc": "Diario de clases, sesións lectivas e rexistro de continxencias." },
-      "asistencia": { "label": "Asistencia", "desc": "Control de asistencia do alumnado." },
-      "progreso-ra-ud": { "label": "Progreso de RA e UD", "desc": "Grao de consecución dos resultados de aprendizaxe e as unidades didácticas por trimestre." },
-      "detalle": { "label": "Detalle por alumnado", "desc": "Entrada de notas numéricas por alumnado, instrumento de avaliación e nivel de adquisición de RA." }
+      "clases": {
+        "label": "Clases",
+        "desc": "Diario de clases, sesións lectivas e rexistro de continxencias."
+      },
+      "asistencia": {
+        "label": "Asistencia",
+        "desc": "Control de asistencia do alumnado."
+      },
+      "progreso-ra-ud": {
+        "label": "Progreso de RA e UD",
+        "desc": "Grao de consecución dos resultados de aprendizaxe e as unidades didácticas por trimestre."
+      },
+      "detalle": {
+        "label": "Detalle por alumnado",
+        "desc": "Entrada de notas numéricas por alumnado, instrumento de avaliación e nivel de adquisición de RA."
+      }
     },
     "calificaciones": {
-      "estadisticas": { "label": "Estatísticas", "desc": "Estatísticas descritivas e visualizacións do rendemento do grupo." },
-      "resumen": { "desc": "Panel global de rendemento e cualificacións medias." },
-      "grupal": { "desc": "Desempeño e estatísticas comparativas do grupo." },
-      "individual": { "desc": "Folla de progreso individual para titorías." }
+      "estadisticas": {
+        "label": "Estatísticas",
+        "desc": "Estatísticas descritivas e visualizacións do rendemento do grupo."
+      },
+      "resumen": {
+        "desc": "Panel global de rendemento e cualificacións medias."
+      },
+      "grupal": {
+        "desc": "Desempeño e estatísticas comparativas do grupo."
+      },
+      "individual": {
+        "desc": "Folla de progreso individual para titorías."
+      }
     },
     "contexto": {
-      "identificacion": { "label": "Identificación", "desc": "Identificación do módulo e centro, réxime dual, regras de arredondamento, ponderación trimestral, instrumentos de avaliación e escalas cualitativas. Cap. 1.1 do PD+." },
-      "contextualizacion": { "label": "Contextualización", "desc": "Contorno xeográfico, socioeconómico e escolar, alumnado ACNEAE, textos do modelo Simplificado e datos de autoría. Cap. 1.3 do PD+." },
-      "dual": { "label": "Dual FEOE", "desc": "Formación en empresa ou organismo equiparado (FEOE): modalidade, seguimento e réxime dual. Cap. 5 do PD+." },
-      "criterios": { "label": "Avaliación e cualificación", "desc": "Procedemento de avaliación e de cualificación: información ao alumnado, perda de avaliación continua, recuperación. Cap. 4 do PD+." }
+      "identificacion": {
+        "label": "Identificación",
+        "desc": "Identificación do módulo e centro, réxime dual, regras de arredondamento, ponderación trimestral, instrumentos de avaliación e escalas cualitativas. Cap. 1.1 do PD+."
+      },
+      "contextualizacion": {
+        "label": "Contextualización",
+        "desc": "Contorno xeográfico, socioeconómico e escolar, alumnado ACNEAE, textos do modelo Simplificado e datos de autoría. Cap. 1.3 do PD+."
+      },
+      "dual": {
+        "label": "Dual FEOE",
+        "desc": "Formación en empresa ou organismo equiparado (FEOE): modalidade, seguimento e réxime dual. Cap. 5 do PD+."
+      },
+      "criterios": {
+        "label": "Avaliación e cualificación",
+        "desc": "Procedemento de avaliación e de cualificación: información ao alumnado, perda de avaliación continua, recuperación. Cap. 4 do PD+."
+      }
     },
     "curriculo": {
-      "contribucion-ra-og": { "label": "Contribución RA en OG", "desc": "Contribución dos RA aos obxectivos xerais do título." },
-      "ponderacion-ra-ce": { "label": "Ponderación RA e CE", "desc": "Matriz de resultados de aprendizaxe e criterios de avaliación, e a súa ponderación." },
-      "unidades": { "label": "Unidades didácticas", "desc": "Definición de unidades didácticas ou unidades de traballo e secuenciación das súas sesións." },
-      "competenciales": { "label": "Tarefas competenciais", "desc": "Deseño e planificación de tarefas e actividades competenciais." }
+      "contribucion-ra-og": {
+        "label": "Contribución RA en OG",
+        "desc": "Contribución dos RA aos obxectivos xerais do título."
+      },
+      "ponderacion-ra-ce": {
+        "label": "Ponderación RA e CE",
+        "desc": "Matriz de resultados de aprendizaxe e criterios de avaliación, e a súa ponderación."
+      },
+      "unidades": {
+        "label": "Unidades didácticas",
+        "desc": "Definición de unidades didácticas ou unidades de traballo e secuenciación das súas sesións."
+      },
+      "competenciales": {
+        "label": "Tarefas competenciais",
+        "desc": "Deseño e planificación de tarefas e actividades competenciais."
+      }
     },
     "metodologia": {
-      "metodologia": { "label": "Metodoloxía e inclusión", "desc": "Estratexias metodolóxicas, coordinación docente, atención á diversidade (DUA) e panel de alumnado ACNEAE." },
-      "recursos": { "label": "Recursos", "desc": "Instrumentos de avaliación seleccionados e recursos e espazos necesarios." },
-      "contingencia": { "label": "Plan de continxencia", "desc": "Plans de continxencia e adaptación ante situacións excepcionais." },
-      "transversales": { "label": "Transversais, competencias e actividades", "desc": "Elementos transversais, competencias clave, competencias dixitais, estándares e obxectivos do currículo, innovación e intermodularidade, e actividades complementarias/extraescolares." }
+      "metodologia": {
+        "label": "Metodoloxía e inclusión",
+        "desc": "Estratexias metodolóxicas, coordinación docente, atención á diversidade (DUA) e panel de alumnado ACNEAE."
+      },
+      "recursos": {
+        "label": "Recursos",
+        "desc": "Instrumentos de avaliación seleccionados e recursos e espazos necesarios."
+      },
+      "contingencia": {
+        "label": "Plan de continxencia",
+        "desc": "Plans de continxencia e adaptación ante situacións excepcionais."
+      },
+      "transversales": {
+        "label": "Transversais, competencias e actividades",
+        "desc": "Elementos transversais, competencias clave, competencias dixitais, estándares e obxectivos do currículo, innovación e intermodularidade, e actividades complementarias/extraescolares."
+      }
     },
     "instrumentos": {
-      "resumen": { "desc": "Visión global dos instrumentos de avaliación utilizados. RD 659/2023 (Art. 136)" },
-      "tri1": { "desc": "Instrumentos de avaliación planificados para o 1º trimestre." },
-      "tri2": { "desc": "Instrumentos de avaliación planificados para o 2º trimestre." },
-      "tri3": { "desc": "Instrumentos de avaliación planificados para o 3º trimestre." },
-      "modeloJeg": { "label": "Modelo JEG", "desc": "Modelo experimental de cualificación por indicadores: indicadores por CE, instrumentos JEG e cálculo de nota ordinaria, de recuperación e extraordinaria por alumno." }
+      "resumen": {
+        "desc": "Visión global dos instrumentos de avaliación utilizados. RD 659/2023 (Art. 136)"
+      },
+      "tri1": {
+        "desc": "Instrumentos de avaliación planificados para o 1º trimestre."
+      },
+      "tri2": {
+        "desc": "Instrumentos de avaliación planificados para o 2º trimestre."
+      },
+      "tri3": {
+        "desc": "Instrumentos de avaliación planificados para o 3º trimestre."
+      },
+      "modeloJeg": {
+        "label": "Modelo JEG",
+        "desc": "Modelo experimental de cualificación por indicadores: indicadores por CE, instrumentos JEG e cálculo de nota ordinaria, de recuperación e extraordinaria por alumno."
+      }
     },
     "archivos": {
-      "datos": { "label": "Datos", "desc": "Xestión dos teus arquivos de Grupos, Programacións e Cursos gardados en local ou na nube." },
-      "nube": { "label": "Nube", "desc": "Sincronización bidireccional segura con Google Drive e Microsoft OneDrive." },
-      "seguridad": { "label": "Seguridade", "desc": "Opcións de privacidade, encriptación e control de datos." },
-      "asistente-ia": { "label": "Asistente IA", "desc": "Configuración de intelixencia artificial." }
+      "datos": {
+        "label": "Datos",
+        "desc": "Xestión dos teus arquivos de Grupos, Programacións e Cursos gardados en local ou na nube."
+      },
+      "nube": {
+        "label": "Nube",
+        "desc": "Sincronización bidireccional segura con Google Drive e Microsoft OneDrive."
+      },
+      "seguridad": {
+        "label": "Seguridade",
+        "desc": "Opcións de privacidade, encriptación e control de datos."
+      },
+      "asistente-ia": {
+        "label": "Asistente IA",
+        "desc": "Configuración de intelixencia artificial."
+      }
     },
     "catalogo": {
-      "familias": { "desc": "Familias profesionais e os seus ciclos formativos asociados, organizados por grao." },
-      "titulos": { "desc": "Normativa estatal básica e currículo autonómico para ciclos formativos." },
-      "modulos": { "desc": "Módulos de cada título organizados por curso académico, coas súas horas." },
-      "ra-ce": { "label": "RA → CE", "desc": "Competencias específicas estruturadas en RA e CE (Art. 136, RD 659/2023)." }
+      "familias": {
+        "desc": "Familias profesionais e os seus ciclos formativos asociados, organizados por grao."
+      },
+      "titulos": {
+        "desc": "Normativa estatal básica e currículo autonómico para ciclos formativos."
+      },
+      "modulos": {
+        "desc": "Módulos de cada título organizados por curso académico, coas súas horas."
+      },
+      "ra-ce": {
+        "label": "RA → CE",
+        "desc": "Competencias específicas estruturadas en RA e CE (Art. 136, RD 659/2023)."
+      }
     },
     "normativa": {
-      "autonomias": { "label": "Autonomías", "desc": "Lexislación autonómica e normativa específica." },
-      "bibliografia": { "label": "Bibliografía", "desc": "Índice de leis, decretos e ordes estatais e autonómicas de FP, con ligazón ao boletín oficial." },
-      "legislacion": { "desc": "Documentos e modelos descargables da túa comunidade autónoma, organizados por grao." },
-      "ecp-incual": { "label": "ECP INCUAL", "desc": "Estándares de Competencia Profesional (ECP) do Catálogo Nacional (INCUAL)." }
+      "autonomias": {
+        "label": "Autonomías",
+        "desc": "Lexislación autonómica e normativa específica."
+      },
+      "bibliografia": {
+        "label": "Bibliografía",
+        "desc": "Índice de leis, decretos e ordes estatais e autonómicas de FP, con ligazón ao boletín oficial."
+      },
+      "legislacion": {
+        "desc": "Documentos e modelos descargables da túa comunidade autónoma, organizados por grao."
+      },
+      "ecp-incual": {
+        "label": "ECP INCUAL",
+        "desc": "Estándares de Competencia Profesional (ECP) do Catálogo Nacional (INCUAL)."
+      }
     },
     "magia": {
-      "comunidades": { "label": "Comunidades", "desc": "Xeración da programación didáctica oficial, por comunidade autónoma." },
-      "guia": { "label": "Guía", "desc": "Guía de inicio e prompt para IA: que datos pedir ao docente e onde colocalos na app." },
-      "programacion": { "label": "Programación", "desc": "Documentos de apoio: matriz de currículo e documentos individuais de UD/Tarefas." },
-      "curso": { "label": "Curso", "desc": "Calendario, seguimento, plano de aula, boletíns e actas de avaliación do curso." }
+      "comunidades": {
+        "label": "Comunidades",
+        "desc": "Xeración da programación didáctica oficial, por comunidade autónoma."
+      },
+      "guia": {
+        "label": "Guía",
+        "desc": "Guía de inicio e prompt para IA: que datos pedir ao docente e onde colocalos na app."
+      },
+      "programacion": {
+        "label": "Programación",
+        "desc": "Documentos de apoio: matriz de currículo e documentos individuais de UD/Tarefas."
+      },
+      "curso": {
+        "label": "Curso",
+        "desc": "Calendario, seguimento, plano de aula, boletíns e actas de avaliación do curso."
+      }
     },
     "equivalencias": {
-      "comparativa": { "label": "Comparativa", "desc": "Comparativa dos distintos niveis de programación e onde se cobre cada apartado." },
-      "pdminus": { "label": "APP → PD- (Resumo)", "desc": "Da app a onde aparece cada bloque no resumo de 1-2 follas para o alumnado (PD-)." },
-      "pdigual": { "label": "APP → PD= (Simplificada)", "desc": "Da app a onde aparece cada campo no modelo oficial simplificado, 17 apartados A-Q (PD=)." },
-      "pdplus": { "label": "APP → PD+ (Detallada JEG)", "desc": "Da app a onde aparece cada campo na programación detallada tipo JEG (PD+), capítulo a capítulo." }
+      "comparativa": {
+        "label": "Comparativa",
+        "desc": "Comparativa dos distintos niveis de programación e onde se cobre cada apartado."
+      },
+      "pdminus": {
+        "label": "APP → PD- (Resumo)",
+        "desc": "Da app a onde aparece cada bloque no resumo de 1-2 follas para o alumnado (PD-)."
+      },
+      "pdigual": {
+        "label": "APP → PD= (Simplificada)",
+        "desc": "Da app a onde aparece cada campo no modelo oficial simplificado, 17 apartados A-Q (PD=)."
+      },
+      "pdplus": {
+        "label": "APP → PD+ (Detallada JEG)",
+        "desc": "Da app a onde aparece cada campo na programación detallada tipo JEG (PD+), capítulo a capítulo."
+      }
     },
     "ayuda": {
-      "faq": { "label": "FAQ", "desc": "Respostas ás preguntas máis frecuentes do profesorado." },
-      "acronimos": { "label": "Acrónimos", "desc": "Glosario de siglas, acrónimos e conceptos de Formación Profesional." },
-      "mapa": { "label": "Mapa web", "desc": "Esquema xerárquico de todas as seccións e utilidades da aplicación." },
-      "documentos": { "label": "Documentos", "desc": "Disposicións normativas que fixan as ensinanzas mínimas de cada título." }
+      "faq": {
+        "label": "FAQ",
+        "desc": "Respostas ás preguntas máis frecuentes do profesorado."
+      },
+      "acronimos": {
+        "label": "Acrónimos",
+        "desc": "Glosario de siglas, acrónimos e conceptos de Formación Profesional."
+      },
+      "mapa": {
+        "label": "Mapa web",
+        "desc": "Esquema xerárquico de todas as seccións e utilidades da aplicación."
+      },
+      "documentos": {
+        "label": "Documentos",
+        "desc": "Disposicións normativas que fixan as ensinanzas mínimas de cada título."
+      }
     },
     "legal": {
-      "aviso": { "label": "Aviso legal", "desc": "Datos do titular, condicións de uso, propiedade intelectual e licenzas (GPLv3 e CC BY-NC-SA)." },
-      "privacidad": { "label": "Privacidade", "desc": "Política de privacidade, RGPD, responsable do tratamento e modelo local-first." },
-      "cookies": { "label": "Cookies", "desc": "Uso de localStorage e IndexedDB. Sen cookies de rastrexo nin analíticas de terceiros." },
-      "accesibilidad": { "label": "Accesibilidade", "desc": "Declaración de accesibilidade dixital segundo o RD 1112/2018 e compromiso WCAG 2.1 AA." }
+      "aviso": {
+        "label": "Aviso legal",
+        "desc": "Datos do titular, condicións de uso, propiedade intelectual e licenzas (GPLv3 e CC BY-NC-SA)."
+      },
+      "privacidad": {
+        "label": "Privacidade",
+        "desc": "Política de privacidade, RGPD, responsable do tratamento e modelo local-first."
+      },
+      "cookies": {
+        "label": "Cookies",
+        "desc": "Uso de localStorage e IndexedDB. Sen cookies de rastrexo nin analíticas de terceiros."
+      },
+      "accesibilidad": {
+        "label": "Accesibilidade",
+        "desc": "Declaración de accesibilidade dixital segundo o RD 1112/2018 e compromiso WCAG 2.1 AA."
+      }
     },
     "inicio": {
-      "verificacion": { "label": "Verificación", "desc": "Panel de saúde e coherencia dos datos do teu caderno." },
-      "contribuciones": { "label": "Contribucións", "desc": "Comunidade de Telegram e listaxe de persoas que contribúen activamente ao proxecto." },
-      "mejora": { "label": "Mellora", "desc": "Xestión da calidade, avaliación do proceso e indicadores para o módulo." },
-      "bienvenida": { "desc": "Panel de control de acceso rápido a todas as ferramentas." }
+      "verificacion": {
+        "label": "Verificación",
+        "desc": "Panel de saúde e coherencia dos datos do teu caderno."
+      },
+      "contribuciones": {
+        "label": "Contribucións",
+        "desc": "Comunidade de Telegram e listaxe de persoas que contribúen activamente ao proxecto."
+      },
+      "mejora": {
+        "label": "Mellora",
+        "desc": "Xestión da calidade, avaliación do proceso e indicadores para o módulo."
+      },
+      "bienvenida": {
+        "desc": "Panel de control de acceso rápido a todas as ferramentas."
+      }
     }
   },
   "inicio": {
@@ -187,7 +383,10 @@
     "general": "Xeral",
     "grupo": "Grupo",
     "programacion": "Programación",
-    "curso": "Curso"
+    "curso": "Curso",
+    "grupo_desc": "Opcións xerais da aplicación e recursos oficiais.",
+    "programacion_desc": "Área de deseño e configuración didáctica. Configura o módulo, vincula as matrices de avaliación, define os instrumentos e secuencia as tarefas de aula.",
+    "curso_desc": "Ferramentas de seguimento para a aula viva. Establece o calendario, administra o listado de alumnado, anota o progreso diario e avalía."
   },
   "sidebar": {
     "en_obras": "En Obras",
@@ -242,5 +441,53 @@
     "magia_desc": "Xeración da programación didáctica e informes.",
     "seguimiento_desc": "Diario de clases, asistencia, progreso de RA e notas por alumnado.",
     "metodologia_desc": "Estratexias metodolóxicas, recursos, espazos e atención á diversidade."
+  },
+  "common": {
+    "aceptar": "Aceptar",
+    "anadir": "Engadir",
+    "atras": "Atrás",
+    "cancelar": "Cancelar",
+    "cerrar": "Pechar",
+    "colapsar_todas": "Contraer todas",
+    "colapsar_todos": "Contraer todos",
+    "descargar": "Descargar",
+    "descargar_pdf": "Descargar PDF",
+    "descripcion": "Descrición",
+    "estado": "Estado",
+    "expandir_todas": "Expandir todas",
+    "expandir_todos": "Expandir todos",
+    "exportando": "Exportando...",
+    "fecha": "Data",
+    "generando": "Xerando...",
+    "guardado": "Gardado",
+    "guardando": "Gardando...",
+    "guardar": "Gardar",
+    "guardar_cambios": "Gardar os cambios",
+    "importar": "Importar",
+    "ir_a_mis_archivos": "Ir aos meus arquivos",
+    "nombre": "Nome",
+    "siguiente": "Seguinte",
+    "tipo": "Tipo",
+    "total": "Total",
+    "volver": "Volver"
+  },
+  "navDesc": {
+    "inicio": "Panel principal, verificación de datos, contribucións da comunidade e calidade EQAVET.",
+    "ayuda": "FAQ, acrónimos, mapa da aplicación e documentos normativos.",
+    "equivalencias": "Correspondencia entre APP e os apartados de PD-, PD= e PD+.",
+    "magia": "Xeración da programación en PDF por comunidade, guía con IA e documentos do curso.",
+    "legal": "Aviso legal, privacidade, cookies e accesibilidade.",
+    "agenda": "Resumo diario, planificación mensual e previsión de RA e UD pendentes.",
+    "archivos": "Xestión de arquivos, sincronización na nube, seguridade e configuración da IA.",
+    "normativa": "Normativa autonómica, lexislación, bibliografía e estándares INCUAL.",
+    "catalogo": "Familias, títulos, módulos e currículos (RA e CE).",
+    "contexto": "Identificación, contexto da contorna, FP dual e criterios de avaliación e cualificación.",
+    "curriculo": "Contribución dos RA aos obxectivos, ponderación RA-CE, unidades didácticas e tarefas competenciais.",
+    "metodologia": "Metodoloxía, recursos, plan de continxencia e elementos transversais.",
+    "instrumentos": "Definición e pesos das ferramentas de avaliación.",
+    "calendario": "Horario, trimestres, festivos, período FEOE e actividades extraescolares.",
+    "alumnado": "Fichas persoais, plano de aula e titoría con alertas de abandono.",
+    "seguimiento": "Diario de clases, asistencia, progreso de RA e UD e entrada de notas.",
+    "calificaciones": "Caderno de notas, estatísticas e comparativa grupal e individual."
   }
 }

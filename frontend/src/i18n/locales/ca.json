@@ -49,110 +49,305 @@
     "modulos": "Mòduls",
     "dual": "FP Dual",
     "eqavet": "EQAVET",
-
     "agenda": {
-      "actual": { "label": "Actual", "desc": "Resum de les classes d'avui, context de la setmana i desenvolupament de la unitat didàctica en curs." },
-      "planificacion": { "label": "Planificació", "desc": "Planificació i seguiment mensual de la programació." },
-      "progreso-ra-ud": { "label": "Previsió RA i UD", "desc": "Progrés dels resultats d'aprenentatge segons l'estat i la ponderació de les unitats didàctiques impartides." },
-      "mensual": { "label": "Mensual", "desc": "Vista mensual i calendari interactiu amb dates clau." }
+      "actual": {
+        "label": "Actual",
+        "desc": "Resum de les classes d'avui, context de la setmana i desenvolupament de la unitat didàctica en curs."
+      },
+      "planificacion": {
+        "label": "Planificació",
+        "desc": "Planificació i seguiment mensual de la programació."
+      },
+      "progreso-ra-ud": {
+        "label": "Previsió RA i UD",
+        "desc": "Progrés dels resultats d'aprenentatge segons l'estat i la ponderació de les unitats didàctiques impartides."
+      },
+      "mensual": {
+        "label": "Mensual",
+        "desc": "Vista mensual i calendari interactiu amb dates clau."
+      }
     },
     "calendario": {
-      "fechas": { "label": "Dates i horari", "desc": "Configura les dates generals, els trimestres i l'horari setmanal del curs." },
-      "feoe": { "label": "Període FEOE", "desc": "Configuració específica per a FP Dual (FEOE)." },
-      "eventos": { "label": "Esdeveniments i festius", "desc": "Registre d'esdeveniments i festius que afecten la docència." },
-      "actividades": { "label": "Activitats complementàries i extraescolars", "desc": "Planificació d'activitats complementàries i extraescolars." },
-      "visual": { "desc": "Vista mensual del calendari acadèmic complet." }
+      "fechas": {
+        "label": "Dates i horari",
+        "desc": "Configura les dates generals, els trimestres i l'horari setmanal del curs."
+      },
+      "feoe": {
+        "label": "Període FEOE",
+        "desc": "Configuració específica per a FP Dual (FEOE)."
+      },
+      "eventos": {
+        "label": "Esdeveniments i festius",
+        "desc": "Registre d'esdeveniments i festius que afecten la docència."
+      },
+      "actividades": {
+        "label": "Activitats complementàries i extraescolars",
+        "desc": "Planificació d'activitats complementàries i extraescolars."
+      },
+      "visual": {
+        "desc": "Vista mensual del calendari acadèmic complet."
+      }
     },
     "alumnado": {
-      "matricula": { "label": "Matrícula", "desc": "Gestió del llistat d'alumnat i fitxa individual." },
-      "tutoria": { "label": "Tutoria i alertes", "desc": "Alertes de risc d'abandonament i seguiment tutorial de l'alumnat." },
-      "perfil": { "label": "Perfil del grup", "desc": "Estadístiques, trets característics i context narratiu del grup." },
-      "plano": { "desc": "Distribució i plànol visual de l'aula." }
+      "matricula": {
+        "label": "Matrícula",
+        "desc": "Gestió del llistat d'alumnat i fitxa individual."
+      },
+      "tutoria": {
+        "label": "Tutoria i alertes",
+        "desc": "Alertes de risc d'abandonament i seguiment tutorial de l'alumnat."
+      },
+      "perfil": {
+        "label": "Perfil del grup",
+        "desc": "Estadístiques, trets característics i context narratiu del grup."
+      },
+      "plano": {
+        "desc": "Distribució i plànol visual de l'aula."
+      }
     },
     "seguimiento": {
-      "clases": { "label": "Classes", "desc": "Diari de classes, sessions lectives i registre de contingències." },
-      "asistencia": { "label": "Assistència", "desc": "Control d'assistència de l'alumnat." },
-      "progreso-ra-ud": { "label": "Progrés de RA i UD", "desc": "Grau de consecució dels resultats d'aprenentatge i les unitats didàctiques per trimestre." },
-      "detalle": { "label": "Detall per alumnat", "desc": "Entrada de notes numèriques per alumnat, instrument d'avaluació i nivell d'adquisició de RA." }
+      "clases": {
+        "label": "Classes",
+        "desc": "Diari de classes, sessions lectives i registre de contingències."
+      },
+      "asistencia": {
+        "label": "Assistència",
+        "desc": "Control d'assistència de l'alumnat."
+      },
+      "progreso-ra-ud": {
+        "label": "Progrés de RA i UD",
+        "desc": "Grau de consecució dels resultats d'aprenentatge i les unitats didàctiques per trimestre."
+      },
+      "detalle": {
+        "label": "Detall per alumnat",
+        "desc": "Entrada de notes numèriques per alumnat, instrument d'avaluació i nivell d'adquisició de RA."
+      }
     },
     "calificaciones": {
-      "estadisticas": { "label": "Estadístiques", "desc": "Estadístiques descriptives i visualitzacions del rendiment del grup." },
-      "resumen": { "desc": "Panell global de rendiment i qualificacions mitjanes." },
-      "grupal": { "desc": "Rendiment i estadístiques comparatives del grup." },
-      "individual": { "desc": "Full de progrés individual per a tutories." }
+      "estadisticas": {
+        "label": "Estadístiques",
+        "desc": "Estadístiques descriptives i visualitzacions del rendiment del grup."
+      },
+      "resumen": {
+        "desc": "Panell global de rendiment i qualificacions mitjanes."
+      },
+      "grupal": {
+        "desc": "Rendiment i estadístiques comparatives del grup."
+      },
+      "individual": {
+        "desc": "Full de progrés individual per a tutories."
+      }
     },
     "contexto": {
-      "identificacion": { "label": "Identificació", "desc": "Identificació del mòdul i centre, règim dual, regles d'arrodoniment, ponderació trimestral, instruments d'avaluació i escales qualitatives. Cap. 1.1 del PD+." },
-      "contextualizacion": { "label": "Contextualització", "desc": "Entorn geogràfic, socioeconòmic i escolar, alumnat ACNEAE, textos del model Simplificat i dades d'autoria. Cap. 1.3 del PD+." },
-      "dual": { "label": "Dual FEOE", "desc": "Formació en empresa o organisme equiparat (FEOE): modalitat, seguiment i règim dual. Cap. 5 del PD+." },
-      "criterios": { "label": "Avaluació i qualificació", "desc": "Procediment d'avaluació i de qualificació: informació a l'alumnat, pèrdua d'avaluació contínua, recuperació. Cap. 4 del PD+." }
+      "identificacion": {
+        "label": "Identificació",
+        "desc": "Identificació del mòdul i centre, règim dual, regles d'arrodoniment, ponderació trimestral, instruments d'avaluació i escales qualitatives. Cap. 1.1 del PD+."
+      },
+      "contextualizacion": {
+        "label": "Contextualització",
+        "desc": "Entorn geogràfic, socioeconòmic i escolar, alumnat ACNEAE, textos del model Simplificat i dades d'autoria. Cap. 1.3 del PD+."
+      },
+      "dual": {
+        "label": "Dual FEOE",
+        "desc": "Formació en empresa o organisme equiparat (FEOE): modalitat, seguiment i règim dual. Cap. 5 del PD+."
+      },
+      "criterios": {
+        "label": "Avaluació i qualificació",
+        "desc": "Procediment d'avaluació i de qualificació: informació a l'alumnat, pèrdua d'avaluació contínua, recuperació. Cap. 4 del PD+."
+      }
     },
     "curriculo": {
-      "contribucion-ra-og": { "label": "Contribució RA en OG", "desc": "Contribució dels RA als objectius generals del títol." },
-      "ponderacion-ra-ce": { "label": "Ponderació RA i CE", "desc": "Matriu de resultats d'aprenentatge i criteris d'avaluació, i la seva ponderació." },
-      "unidades": { "label": "Unitats didàctiques", "desc": "Definició d'unitats didàctiques o unitats de treball i seqüenciació de les seves sessions." },
-      "competenciales": { "label": "Tasques competencials", "desc": "Disseny i planificació de tasques i activitats competencials." }
+      "contribucion-ra-og": {
+        "label": "Contribució RA en OG",
+        "desc": "Contribució dels RA als objectius generals del títol."
+      },
+      "ponderacion-ra-ce": {
+        "label": "Ponderació RA i CE",
+        "desc": "Matriu de resultats d'aprenentatge i criteris d'avaluació, i la seva ponderació."
+      },
+      "unidades": {
+        "label": "Unitats didàctiques",
+        "desc": "Definició d'unitats didàctiques o unitats de treball i seqüenciació de les seves sessions."
+      },
+      "competenciales": {
+        "label": "Tasques competencials",
+        "desc": "Disseny i planificació de tasques i activitats competencials."
+      }
     },
     "metodologia": {
-      "metodologia": { "label": "Metodologia i inclusió", "desc": "Estratègies metodològiques, coordinació docent, atenció a la diversitat (DUA) i panell d'alumnat ACNEAE." },
-      "recursos": { "label": "Recursos", "desc": "Instruments d'avaluació seleccionats i recursos i espais necessaris." },
-      "contingencia": { "label": "Pla de contingència", "desc": "Plans de contingència i adaptació davant situacions excepcionals." },
-      "transversales": { "label": "Transversals, competències i activitats", "desc": "Elements transversals, competències clau, competències digitals, estàndards i objectius del currículum, innovació i intermodularitat, i activitats complementàries/extraescolars." }
+      "metodologia": {
+        "label": "Metodologia i inclusió",
+        "desc": "Estratègies metodològiques, coordinació docent, atenció a la diversitat (DUA) i panell d'alumnat ACNEAE."
+      },
+      "recursos": {
+        "label": "Recursos",
+        "desc": "Instruments d'avaluació seleccionats i recursos i espais necessaris."
+      },
+      "contingencia": {
+        "label": "Pla de contingència",
+        "desc": "Plans de contingència i adaptació davant situacions excepcionals."
+      },
+      "transversales": {
+        "label": "Transversals, competències i activitats",
+        "desc": "Elements transversals, competències clau, competències digitals, estàndards i objectius del currículum, innovació i intermodularitat, i activitats complementàries/extraescolars."
+      }
     },
     "instrumentos": {
-      "resumen": { "desc": "Visió global dels instruments d'avaluació utilitzats. RD 659/2023 (Art. 136)" },
-      "tri1": { "desc": "Instruments d'avaluació planificats per al 1r trimestre." },
-      "tri2": { "desc": "Instruments d'avaluació planificats per al 2n trimestre." },
-      "tri3": { "desc": "Instruments d'avaluació planificats per al 3r trimestre." },
-      "modeloJeg": { "label": "Model JEG", "desc": "Model experimental de qualificació per indicadors: indicadors per CE, instruments JEG i càlcul de nota ordinària, de recuperació i extraordinària per alumne." }
+      "resumen": {
+        "desc": "Visió global dels instruments d'avaluació utilitzats. RD 659/2023 (Art. 136)"
+      },
+      "tri1": {
+        "desc": "Instruments d'avaluació planificats per al 1r trimestre."
+      },
+      "tri2": {
+        "desc": "Instruments d'avaluació planificats per al 2n trimestre."
+      },
+      "tri3": {
+        "desc": "Instruments d'avaluació planificats per al 3r trimestre."
+      },
+      "modeloJeg": {
+        "label": "Model JEG",
+        "desc": "Model experimental de qualificació per indicadors: indicadors per CE, instruments JEG i càlcul de nota ordinària, de recuperació i extraordinària per alumne."
+      }
     },
     "archivos": {
-      "datos": { "label": "Dades", "desc": "Gestió dels teus arxius de Grups, Programacions i Cursos desats en local o al núvol." },
-      "nube": { "label": "Núvol", "desc": "Sincronització bidireccional segura amb Google Drive i Microsoft OneDrive." },
-      "seguridad": { "label": "Seguretat", "desc": "Opcions de privacitat, xifratge i control de dades." },
-      "asistente-ia": { "label": "Assistent IA", "desc": "Configuració d'intel·ligència artificial." }
+      "datos": {
+        "label": "Dades",
+        "desc": "Gestió dels teus arxius de Grups, Programacions i Cursos desats en local o al núvol."
+      },
+      "nube": {
+        "label": "Núvol",
+        "desc": "Sincronització bidireccional segura amb Google Drive i Microsoft OneDrive."
+      },
+      "seguridad": {
+        "label": "Seguretat",
+        "desc": "Opcions de privacitat, xifratge i control de dades."
+      },
+      "asistente-ia": {
+        "label": "Assistent IA",
+        "desc": "Configuració d'intel·ligència artificial."
+      }
     },
     "catalogo": {
-      "familias": { "desc": "Famílies professionals i els seus cicles formatius associats, organitzats per grau." },
-      "titulos": { "desc": "Normativa estatal bàsica i currículum autonòmic per a cicles formatius." },
-      "modulos": { "desc": "Mòduls de cada títol organitzats per curs acadèmic, amb les seves hores." },
-      "ra-ce": { "label": "RA → CE", "desc": "Competències específiques estructurades en RA i CE (Art. 136, RD 659/2023)." }
+      "familias": {
+        "desc": "Famílies professionals i els seus cicles formatius associats, organitzats per grau."
+      },
+      "titulos": {
+        "desc": "Normativa estatal bàsica i currículum autonòmic per a cicles formatius."
+      },
+      "modulos": {
+        "desc": "Mòduls de cada títol organitzats per curs acadèmic, amb les seves hores."
+      },
+      "ra-ce": {
+        "label": "RA → CE",
+        "desc": "Competències específiques estructurades en RA i CE (Art. 136, RD 659/2023)."
+      }
     },
     "normativa": {
-      "autonomias": { "label": "Autonomies", "desc": "Legislació autonòmica i normativa específica." },
-      "bibliografia": { "label": "Bibliografia", "desc": "Índex de lleis, decrets i ordres estatals i autonòmiques de FP, amb enllaç al butlletí oficial." },
-      "legislacion": { "desc": "Documents i plantilles descarregables de la teva comunitat autònoma, organitzats per grau." },
-      "ecp-incual": { "label": "ECP INCUAL", "desc": "Estàndards de Competència Professional (ECP) del Catàleg Nacional (INCUAL)." }
+      "autonomias": {
+        "label": "Autonomies",
+        "desc": "Legislació autonòmica i normativa específica."
+      },
+      "bibliografia": {
+        "label": "Bibliografia",
+        "desc": "Índex de lleis, decrets i ordres estatals i autonòmiques de FP, amb enllaç al butlletí oficial."
+      },
+      "legislacion": {
+        "desc": "Documents i plantilles descarregables de la teva comunitat autònoma, organitzats per grau."
+      },
+      "ecp-incual": {
+        "label": "ECP INCUAL",
+        "desc": "Estàndards de Competència Professional (ECP) del Catàleg Nacional (INCUAL)."
+      }
     },
     "magia": {
-      "comunidades": { "label": "Comunitats", "desc": "Generació de la programació didàctica oficial, per comunitat autònoma." },
-      "guia": { "label": "Guia", "desc": "Guia d'inici i prompt per a IA: quines dades demanar al docent i on col·locar-les a l'app." },
-      "programacion": { "label": "Programació", "desc": "Documents de suport: matriu de currículum i documents individuals d'UD/Tasques." },
-      "curso": { "label": "Curs", "desc": "Calendari, seguiment, plànol d'aula, butlletins i actes d'avaluació del curs." }
+      "comunidades": {
+        "label": "Comunitats",
+        "desc": "Generació de la programació didàctica oficial, per comunitat autònoma."
+      },
+      "guia": {
+        "label": "Guia",
+        "desc": "Guia d'inici i prompt per a IA: quines dades demanar al docent i on col·locar-les a l'app."
+      },
+      "programacion": {
+        "label": "Programació",
+        "desc": "Documents de suport: matriu de currículum i documents individuals d'UD/Tasques."
+      },
+      "curso": {
+        "label": "Curs",
+        "desc": "Calendari, seguiment, plànol d'aula, butlletins i actes d'avaluació del curs."
+      }
     },
     "equivalencias": {
-      "comparativa": { "label": "Comparativa", "desc": "Comparativa dels diferents nivells de programació i on s'emplena cada apartat." },
-      "pdminus": { "label": "APP → PD- (Resum)", "desc": "De l'app a on apareix cada bloc al resum d'1-2 fulls per a l'alumnat (PD-)." },
-      "pdigual": { "label": "APP → PD= (Simplificada)", "desc": "De l'app a on apareix cada camp al model oficial simplificat, 17 apartats A-Q (PD=)." },
-      "pdplus": { "label": "APP → PD+ (Detallada JEG)", "desc": "De l'app a on apareix cada camp a la programació detallada tipus JEG (PD+), capítol a capítol." }
+      "comparativa": {
+        "label": "Comparativa",
+        "desc": "Comparativa dels diferents nivells de programació i on s'emplena cada apartat."
+      },
+      "pdminus": {
+        "label": "APP → PD- (Resum)",
+        "desc": "De l'app a on apareix cada bloc al resum d'1-2 fulls per a l'alumnat (PD-)."
+      },
+      "pdigual": {
+        "label": "APP → PD= (Simplificada)",
+        "desc": "De l'app a on apareix cada camp al model oficial simplificat, 17 apartats A-Q (PD=)."
+      },
+      "pdplus": {
+        "label": "APP → PD+ (Detallada JEG)",
+        "desc": "De l'app a on apareix cada camp a la programació detallada tipus JEG (PD+), capítol a capítol."
+      }
     },
     "ayuda": {
-      "faq": { "label": "FAQ", "desc": "Respostes a les preguntes més freqüents del professorat." },
-      "acronimos": { "label": "Acrònims", "desc": "Glossari de sigles, acrònims i conceptes de Formació Professional." },
-      "mapa": { "label": "Mapa web", "desc": "Esquema jeràrquic de totes les seccions i utilitats de l'aplicació." },
-      "documentos": { "label": "Documents", "desc": "Disposicions normatives que fixen els ensenyaments mínims de cada títol." }
+      "faq": {
+        "label": "FAQ",
+        "desc": "Respostes a les preguntes més freqüents del professorat."
+      },
+      "acronimos": {
+        "label": "Acrònims",
+        "desc": "Glossari de sigles, acrònims i conceptes de Formació Professional."
+      },
+      "mapa": {
+        "label": "Mapa web",
+        "desc": "Esquema jeràrquic de totes les seccions i utilitats de l'aplicació."
+      },
+      "documentos": {
+        "label": "Documents",
+        "desc": "Disposicions normatives que fixen els ensenyaments mínims de cada títol."
+      }
     },
     "legal": {
-      "aviso": { "label": "Avís legal", "desc": "Dades del titular, condicions d'ús, propietat intel·lectual i llicències (GPLv3 i CC BY-NC-SA)." },
-      "privacidad": { "label": "Privacitat", "desc": "Política de privacitat, RGPD, responsable del tractament i model local-first." },
-      "cookies": { "label": "Cookies", "desc": "Ús de localStorage i IndexedDB. Sense cookies de rastreig ni analítiques de tercers." },
-      "accesibilidad": { "label": "Accessibilitat", "desc": "Declaració d'accessibilitat digital segons RD 1112/2018 i compromís WCAG 2.1 AA." }
+      "aviso": {
+        "label": "Avís legal",
+        "desc": "Dades del titular, condicions d'ús, propietat intel·lectual i llicències (GPLv3 i CC BY-NC-SA)."
+      },
+      "privacidad": {
+        "label": "Privacitat",
+        "desc": "Política de privacitat, RGPD, responsable del tractament i model local-first."
+      },
+      "cookies": {
+        "label": "Cookies",
+        "desc": "Ús de localStorage i IndexedDB. Sense cookies de rastreig ni analítiques de tercers."
+      },
+      "accesibilidad": {
+        "label": "Accessibilitat",
+        "desc": "Declaració d'accessibilitat digital segons RD 1112/2018 i compromís WCAG 2.1 AA."
+      }
     },
     "inicio": {
-      "verificacion": { "label": "Verificació", "desc": "Panell de salut i coherència de les dades del teu quadern." },
-      "contribuciones": { "label": "Contribucions", "desc": "Comunitat de Telegram i llistat de persones que contribueixen activament al projecte." },
-      "mejora": { "label": "Millora", "desc": "Gestió de la qualitat, avaluació del procés i indicadors per al mòdul." },
-      "bienvenida": { "desc": "Panell de control d'accés ràpid a totes les eines." }
+      "verificacion": {
+        "label": "Verificació",
+        "desc": "Panell de salut i coherència de les dades del teu quadern."
+      },
+      "contribuciones": {
+        "label": "Contribucions",
+        "desc": "Comunitat de Telegram i llistat de persones que contribueixen activament al projecte."
+      },
+      "mejora": {
+        "label": "Millora",
+        "desc": "Gestió de la qualitat, avaluació del procés i indicadors per al mòdul."
+      },
+      "bienvenida": {
+        "desc": "Panell de control d'accés ràpid a totes les eines."
+      }
     }
   },
   "inicio": {
@@ -190,7 +385,10 @@
     "general": "General",
     "grupo": "Grup",
     "programacion": "Programació",
-    "curso": "Curs"
+    "curso": "Curs",
+    "grupo_desc": "Opcions generals de l'aplicació i recursos oficials.",
+    "programacion_desc": "Àrea de disseny i configuració didàctica. Configura el mòdul, enllaça les matrius d'avaluació, defineix els instruments i seqüencia les tasques d'aula.",
+    "curso_desc": "Eines de seguiment per a l'aula viva. Estableix el calendari, administra el llistat d'alumnat, anota el progrés diari i avalua."
   },
   "sidebar": {
     "en_obras": "En Obres",
@@ -245,5 +443,53 @@
     "magia_desc": "Generació de la programació didàctica i informes.",
     "seguimiento_desc": "Diari de classes, assistència, progrés de RA i notes per alumnat.",
     "metodologia_desc": "Estratègies metodològiques, recursos, espais i atenció a la diversitat."
+  },
+  "common": {
+    "aceptar": "Acceptar",
+    "anadir": "Afegir",
+    "atras": "Enrere",
+    "cancelar": "Cancel·lar",
+    "cerrar": "Tancar",
+    "colapsar_todas": "Col·lapsar totes",
+    "colapsar_todos": "Col·lapsar tots",
+    "descargar": "Descarregar",
+    "descargar_pdf": "Descarregar PDF",
+    "descripcion": "Descripció",
+    "estado": "Estat",
+    "expandir_todas": "Expandir totes",
+    "expandir_todos": "Expandir tots",
+    "exportando": "Exportant...",
+    "fecha": "Data",
+    "generando": "Generant...",
+    "guardado": "Desat",
+    "guardando": "Desant...",
+    "guardar": "Desar",
+    "guardar_cambios": "Desar els canvis",
+    "importar": "Importar",
+    "ir_a_mis_archivos": "Anar als meus arxius",
+    "nombre": "Nom",
+    "siguiente": "Següent",
+    "tipo": "Tipus",
+    "total": "Total",
+    "volver": "Tornar"
+  },
+  "navDesc": {
+    "inicio": "Panell principal, verificació de dades, contribucions de la comunitat i qualitat EQAVET.",
+    "ayuda": "FAQ, acrònims, mapa de l'aplicació i documents normatius.",
+    "equivalencias": "Correspondència entre APP i els apartats de PD-, PD= i PD+.",
+    "magia": "Generació de la programació en PDF per comunitat, guia amb IA i documents del curs.",
+    "legal": "Avís legal, privacitat, cookies i accessibilitat.",
+    "agenda": "Resum diari, planificació mensual i previsió de RA i UD pendents.",
+    "archivos": "Gestió d'arxius, sincronització al núvol, seguretat i configuració de la IA.",
+    "normativa": "Normativa autonòmica, legislació, bibliografia i estàndards INCUAL.",
+    "catalogo": "Famílies, títols, mòduls i currículums (RA i CE).",
+    "contexto": "Identificació, context de l'entorn, FP dual i criteris d'avaluació i qualificació.",
+    "curriculo": "Contribució dels RA als objectius, ponderació RA-CE, unitats didàctiques i tasques competencials.",
+    "metodologia": "Metodologia, recursos, pla de contingència i elements transversals.",
+    "instrumentos": "Definició i pesos de les eines d'avaluació.",
+    "calendario": "Horari, trimestres, festius, període FEOE i activitats extraescolars.",
+    "alumnado": "Fitxes personals, pla d'aula i tutoria amb alertes d'abandonament.",
+    "seguimiento": "Diari de classes, assistència, progrés de RA i UD i entrada de notes.",
+    "calificaciones": "Quadern de notes, estadístiques i comparativa grupal i individual."
   }
 }
