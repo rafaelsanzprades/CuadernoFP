@@ -205,7 +205,7 @@ export function DiversidadTab() {
             <thead>
               <tr className="border-b border-[var(--glass-border)] text-muted">
                 <th className="p-2 w-16">Id</th>
-                <th className="p-2 w-48">{t('tablas.modulo.alumnadoAula', {defaultValue: 'Alumnado / aula'})}</th>
+                <th className="p-2 w-48">{t('tablas.modulo.alumnadoAula', {defaultValue: 'Alumnado y aula'})}</th>
                 <th className="p-2 w-48">{t('tablas.modulo.barreraDetectada', {defaultValue: 'Barrera detectada'})}</th>
                 <th className="p-2 min-w-[200px]">{t('tablas.modulo.medidaMetodologica', {defaultValue: 'Medida metodológica'})}</th>
                 <th className="p-2 w-48">{t('tablas.modulo.medidaAcceso', {defaultValue: 'Medida de acceso'})}</th>

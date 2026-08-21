@@ -266,7 +266,7 @@ export default function InstrumentosPage() {
                 <tr className="text-muted border-b border-[var(--glass-border)] bg-background">
                   <th className="p-2 sticky left-0 z-10 border-r border-[var(--glass-border)] bg-background">{t('tablas.instrumentos.cod', {defaultValue: 'Cód.'})}</th>
                   <th className="p-2 sticky left-[60px] z-10 border-r border-[var(--glass-border)] bg-background">{t('common.tipo', {defaultValue: 'Tipo'})}</th>
-                  <th className="p-2 sticky left-[160px] z-10 border-r border-[var(--glass-border)] bg-background w-64">{t('tablas.instrumentos.instrumentoActividad', {defaultValue: 'Instrumento / actividad'})}</th>
+                  <th className="p-2 sticky left-[160px] z-10 border-r border-[var(--glass-border)] bg-background w-64">{t('tablas.instrumentos.instrumentoActividad', {defaultValue: 'Instrumento y actividad'})}</th>
                   <th className="p-2 sticky left-[416px] z-10 border-r border-[var(--glass-border)] bg-background w-24">{t('tablas.instrumentos.pctPond', {defaultValue: '% Pond.'})}</th>
                   <th className="p-2 sticky left-[486px] z-10 border-r border-[var(--glass-border)] bg-background"><span className="inline-flex"><Check className="w-[1.2em] h-[1.2em] mr-1" /></span></th>
                   {lista_ce_ids.map((ce: string) => (
