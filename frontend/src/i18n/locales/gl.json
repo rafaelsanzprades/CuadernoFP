@@ -489,5 +489,175 @@
     "alumnado": "Fichas persoais, plano de aula e titoría con alertas de abandono.",
     "seguimiento": "Diario de clases, asistencia, progreso de RA e UD e entrada de notas.",
     "calificaciones": "Caderno de notas, estatísticas e comparativa grupal e individual."
+  },
+  "toasts": {
+    "aiSettings": {
+      "guardadaLocal": "Configuración de IA gardada localmente."
+    },
+    "aiWizard": {
+      "documentoProcesado": "Documento procesado correctamente."
+    },
+    "alumnado": {
+      "errorImportarNinguno": "Non se puido importar ningún estudante válido.",
+      "errorLeerCsv": "Houbo un problema ao ler o arquivo CSV.",
+      "importados": "Importáronse {{count}} estudantes."
+    },
+    "archivos": {
+      "abrirCursoViaGrupo": "Para abrir un curso de forma segura, fai dobre clic no seu grupo asociado na primeira columna.",
+      "cambiadoDemo": "Cambiado a datos DEMO.",
+      "cambiadoReal": "Cambiado a datos reais en local. Podes crear ou abrir arquivos.",
+      "carpetaCambiada": "Cartafol local cambiado.",
+      "carpetaConectada": "Cartafol local conectado.",
+      "copiaCursoDescargada": "Copia de curso descargada.",
+      "copiaProgramacionDescargada": "Copia de programación descargada.",
+      "cursoAbiertoIcono": "Curso aberto correctamente",
+      "cursoCargado": "Curso {{name}} cargado.",
+      "cursoCargadoArrastre": "Curso cargado arrastrando",
+      "cursoGuardado": "Curso gardado correctamente.",
+      "cursoGuardadoComo": "Curso gardado como novo arquivo.",
+      "cursoImportado": "Curso importado correctamente",
+      "demoCargada": "Datos de demostración cargados correctamente.",
+      "enlaceReparado": "Ligazón reparada correctamente.",
+      "errorAbrirGrupo": "Erro ao abrir o grupo.",
+      "errorAbrirProgramacion": "Erro ao abrir a programación.",
+      "errorCargarCursoDemo": "Erro ao cargar o curso DEMO.",
+      "errorCargarProgramacionDemo": "Erro ao cargar a programación DEMO.",
+      "errorFormatoCurso": "Erro ao importar: o arquivo non ten un formato válido de curso.",
+      "errorFormatoCursoArrastrar": "O arquivo non ten un formato válido de curso (.fpc).",
+      "errorFormatoProgramacion": "Erro ao importar: o arquivo non ten un formato válido de programación.",
+      "errorFormatoProgramacionArrastrar": "O arquivo non ten un formato válido de programación (.fpp).",
+      "errorGuardarCurso": "Erro ao gardar o curso.",
+      "errorGuardarProgramacion": "Erro ao gardar a programación.",
+      "errorReparEnlace": "Erro ao reparar a ligazón.",
+      "grupoAbierto": "Grupo {{name}} aberto correctamente.",
+      "grupoCargado": "Grupo {{name}} cargado.",
+      "modoDemoGuardarComoNuevo": "Estás en modo DEMO. Gardando como novo arquivo...",
+      "programacionAbierta": "Programación aberta correctamente.",
+      "programacionAbiertaIcono": "Programación aberta correctamente",
+      "programacionCargada": "Programación {{name}} cargada.",
+      "programacionCargadaArrastre": "Programación cargada arrastrando",
+      "programacionGuardada": "Programación gardada correctamente.",
+      "programacionGuardadaComo": "Programación gardada como novo arquivo.",
+      "programacionImportada": "Programación importada correctamente",
+      "sinCurso": "Non hai ningún curso cargado.",
+      "sinCursoGuardar": "Non hai ningún curso cargado para gardar.",
+      "sinProgramacion": "Non hai ningunha programación cargada.",
+      "sinProgramacionGuardar": "Non hai ningunha programación cargada para gardar."
+    },
+    "asistencia": {
+      "errorGuardar": "Erro ao gardar a asistencia."
+    },
+    "autores": {
+      "errorGuardar": "Houbo un problema ao gardar a programación.",
+      "errorInyectar": "Erro ao incorporar os datos da proposta.",
+      "jsonInvalido": "O arquivo seleccionado non é un JSON válido ou está corrompido.",
+      "propuestaIncorporada": "Proposta incorporada correctamente.",
+      "sinProgramacionActiva": "Non tes ningunha programación activa. Abre a túa programación desde a pestana Arquivos antes de incorporar unha proposta."
+    },
+    "bienvenida": {
+      "archivosCreados": "Arquivos creados correctamente.",
+      "cargandoDemo": "Cargando arquivos de demostración...",
+      "demoCargados": "Arquivos de demostración cargados.",
+      "errorCargarDemo": "Erro ao cargar a demo: {{message}}",
+      "errorDesconocido": "Erro descoñecido.",
+      "faltanCampos": "Completa ambos os campos."
+    },
+    "catalogo": {
+      "errorCrearProgramacion": "Erro ao crear a programación.",
+      "programacionCreada": "Programación de {{name}} creada correctamente."
+    },
+    "chatbot": {
+      "archivoDemasiadoGrande": "O arquivo é demasiado grande. Máximo 5 MB.",
+      "errorComunicacion": "Erro ao comunicarse co asistente: {{message}}"
+    },
+    "contextoGrupo": {
+      "errorGenerarIA": "Erro ao xerar o texto con IA.",
+      "sinAlumnado": "Non hai alumnado rexistrado neste curso aínda.",
+      "textoGenerado": "Texto xerado. Revísao e edítao antes de gardar."
+    },
+    "curriculo": {
+      "errorGuardar": "Erro ao gardar os datos.",
+      "errorGuardarPropuesta": "Erro ao gardar tras aplicar a proposta.",
+      "planAutocompletado": "Plan de sesións autocompletado.",
+      "programacionGuardada": "Programación gardada correctamente.",
+      "propuestaAplicada": "Proposta de {{author}} aplicada e gardada."
+    },
+    "detalleAlumnado": {
+      "errorInformeRefuerzo": "Erro ao xerar o informe de reforzo."
+    },
+    "documentos": {
+      "errorPrevisualizacion": "Erro ao cargar a previsualización do documento."
+    },
+    "googleDrive": {
+      "autoguardadoActivado": "Gardado automático na nube activado.",
+      "autoguardadoDesactivado": "Gardado automático na nube desactivado.",
+      "autoguardadoSinDemo": "O gardado automático non está dispoñible en modo DEMO.",
+      "conectado": "Google Drive conectado correctamente.",
+      "conectando": "Conectando con Google Drive...",
+      "desconectado": "Desconectado de Google Drive",
+      "errorConectar": "Fallo ao conectar con Google Drive.",
+      "faltaClientId": "Introduce o teu Google Client ID primeiro.",
+      "faltaConectar": "Conecta a túa conta de Google Drive primeiro.",
+      "sinDemo": "Non podes sincronizar con Drive en modo DEMO."
+    },
+    "header": {
+      "paletaNoImplementada": "Paleta de comandos aínda non implementada."
+    },
+    "inicio": {
+      "estructuraGuardada": "Estrutura gardada."
+    },
+    "magia": {
+      "errorGenerarDocumento": "Erro ao xerar o documento. Comproba a conexión co backend.",
+      "pdfFallback": "Non se puido xerar o PDF. Descargando DOCX como alternativa."
+    },
+    "newFileWizard": {
+      "cursoCreado": "Curso {{name}} creado correctamente.",
+      "cursoDemoCreado": "Curso DEMO creado correctamente.",
+      "cursoYGrupoCreados": "Curso {{name}} e o seu grupo creados correctamente.",
+      "errorCrearCurso": "Erro ao crear o curso.",
+      "errorCrearCursoDemo": "Erro ao crear o curso DEMO.",
+      "errorCrearProgramacion": "Erro ao crear a programación.",
+      "programacionCreada": "Programación de {{name}} creada correctamente."
+    },
+    "normativa": {
+      "errorGenerarPdf": "Erro ao xerar o PDF. Comproba que o backend está configurado correctamente.",
+      "errorPrevisualizacion": "Erro ao cargar a previsualización do documento. Verifica a conexión co backend."
+    },
+    "nuevoCurso": {
+      "creado": "Curso \"{{nombreGrupo}}\" ({{cursoAcademico}}) creado a partir da programación.",
+      "errorClonar": "Non se puido clonar a programación.",
+      "errorCrearCurso": "Non se puido crear o curso novo.",
+      "errorGenerico": "Produciuse un erro ao crear o novo curso."
+    },
+    "oneDrive": {
+      "conectado": "OneDrive conectado correctamente.",
+      "conectando": "Conectando con OneDrive...",
+      "desconectado": "Desconectado de OneDrive",
+      "errorConectar": "Fallo ao conectar con OneDrive.",
+      "faltaClientId": "Introduce o teu Client ID de Microsoft primeiro.",
+      "sinDemo": "Non podes sincronizar en modo DEMO."
+    },
+    "recientes": {
+      "errorGenerico": "Erro ao reabrir o arquivo.",
+      "errorReabrir": "Non se puido reabrir \"{{nombre}}\".",
+      "irAAbrirGrupo": "Vai a Arquivo → Abrir grupo e selecciona o cartafol que contén \"{{fileName}}\".",
+      "permisoDenegado": "Permiso denegado para acceder ao arquivo ou cartafol.",
+      "reabierto": "\"{{nombre}}\" reaberto.",
+      "seleccionaDeNuevo": "Selecciona de novo \"{{fileName}}\" — o teu navegador non permite reabrilo directamente.",
+      "yaNoExiste": "\"{{nombre}}\" xa non se atopa onde estaba. Retírase de recentes."
+    },
+    "reclamaciones": {
+      "errorJustificante": "Erro ao xerar o xustificante.",
+      "faltaResolucion": "Escribe como se resolveu.",
+      "faltanCampos": "Completa alumno, referencia e motivo.",
+      "registrada": "Reclamación rexistrada.",
+      "resuelta": "Reclamación marcada como resolta."
+    },
+    "taskConfig": {
+      "errorExportar": "Erro ao exportar a tarefa competencial."
+    },
+    "udConfig": {
+      "errorExportar": "Erro ao exportar a unidade didáctica."
+    }
   }
 }

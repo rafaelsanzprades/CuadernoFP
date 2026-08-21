@@ -489,5 +489,175 @@
     "alumnado": "Personal records, classroom seating plan and tutoring with dropout alerts.",
     "seguimiento": "Class journal, attendance, RA and UD progress and grade entry.",
     "calificaciones": "Gradebook, statistics and group and individual comparison."
+  },
+  "toasts": {
+    "aiSettings": {
+      "guardadaLocal": "AI settings saved locally."
+    },
+    "aiWizard": {
+      "documentoProcesado": "Document processed successfully."
+    },
+    "alumnado": {
+      "errorImportarNinguno": "Could not import any valid students.",
+      "errorLeerCsv": "There was a problem reading the CSV file.",
+      "importados": "{{count}} students imported."
+    },
+    "archivos": {
+      "abrirCursoViaGrupo": "To open a course safely, double-click its associated group in the first column.",
+      "cambiadoDemo": "Switched to DEMO data.",
+      "cambiadoReal": "Switched to real local data. You can create or open files.",
+      "carpetaCambiada": "Local folder changed.",
+      "carpetaConectada": "Local folder connected.",
+      "copiaCursoDescargada": "Course copy downloaded.",
+      "copiaProgramacionDescargada": "Programming copy downloaded.",
+      "cursoAbiertoIcono": "Course opened successfully",
+      "cursoCargado": "Course {{name}} loaded.",
+      "cursoCargadoArrastre": "Course loaded by drag and drop",
+      "cursoGuardado": "Course saved successfully.",
+      "cursoGuardadoComo": "Course saved as a new file.",
+      "cursoImportado": "Course imported successfully",
+      "demoCargada": "Demo data loaded successfully.",
+      "enlaceReparado": "Link repaired successfully.",
+      "errorAbrirGrupo": "Error opening the group.",
+      "errorAbrirProgramacion": "Error opening the programming.",
+      "errorCargarCursoDemo": "Error loading the DEMO course.",
+      "errorCargarProgramacionDemo": "Error loading the DEMO programming.",
+      "errorFormatoCurso": "Import error: the file does not have a valid course format.",
+      "errorFormatoCursoArrastrar": "The file does not have a valid course format (.fpc).",
+      "errorFormatoProgramacion": "Import error: the file does not have a valid programming format.",
+      "errorFormatoProgramacionArrastrar": "The file does not have a valid programming format (.fpp).",
+      "errorGuardarCurso": "Error saving the course.",
+      "errorGuardarProgramacion": "Error saving the programming.",
+      "errorReparEnlace": "Error repairing the link.",
+      "grupoAbierto": "Group {{name}} opened successfully.",
+      "grupoCargado": "Group {{name}} loaded.",
+      "modoDemoGuardarComoNuevo": "You are in DEMO mode. Saving as a new file...",
+      "programacionAbierta": "Programming opened successfully.",
+      "programacionAbiertaIcono": "Programming opened successfully",
+      "programacionCargada": "Programming {{name}} loaded.",
+      "programacionCargadaArrastre": "Programming loaded by drag and drop",
+      "programacionGuardada": "Programming saved successfully.",
+      "programacionGuardadaComo": "Programming saved as a new file.",
+      "programacionImportada": "Programming imported successfully",
+      "sinCurso": "No course is loaded.",
+      "sinCursoGuardar": "No course is loaded to save.",
+      "sinProgramacion": "No programming is loaded.",
+      "sinProgramacionGuardar": "No programming is loaded to save."
+    },
+    "asistencia": {
+      "errorGuardar": "Error saving attendance."
+    },
+    "autores": {
+      "errorGuardar": "There was a problem saving the programming.",
+      "errorInyectar": "Error incorporating the proposal data.",
+      "jsonInvalido": "The selected file is not a valid JSON or is corrupted.",
+      "propuestaIncorporada": "Proposal incorporated successfully.",
+      "sinProgramacionActiva": "You don't have an active programming. Open your programming from the Files tab before incorporating a proposal."
+    },
+    "bienvenida": {
+      "archivosCreados": "Files created successfully.",
+      "cargandoDemo": "Loading demo files...",
+      "demoCargados": "Demo files loaded.",
+      "errorCargarDemo": "Error loading demo: {{message}}",
+      "errorDesconocido": "Unknown error.",
+      "faltanCampos": "Fill in both fields."
+    },
+    "catalogo": {
+      "errorCrearProgramacion": "Error creating the programming.",
+      "programacionCreada": "Programming for {{name}} created successfully."
+    },
+    "chatbot": {
+      "archivoDemasiadoGrande": "The file is too large. Maximum 5 MB.",
+      "errorComunicacion": "Error communicating with the assistant: {{message}}"
+    },
+    "contextoGrupo": {
+      "errorGenerarIA": "Error generating the text with AI.",
+      "sinAlumnado": "No students are registered in this course yet.",
+      "textoGenerado": "Text generated. Review and edit it before saving."
+    },
+    "curriculo": {
+      "errorGuardar": "Error saving the data.",
+      "errorGuardarPropuesta": "Error saving after applying the proposal.",
+      "planAutocompletado": "Session plan auto-completed.",
+      "programacionGuardada": "Programming saved successfully.",
+      "propuestaAplicada": "Proposal by {{author}} applied and saved."
+    },
+    "detalleAlumnado": {
+      "errorInformeRefuerzo": "Error generating the reinforcement report."
+    },
+    "documentos": {
+      "errorPrevisualizacion": "Error loading the document preview."
+    },
+    "googleDrive": {
+      "autoguardadoActivado": "Cloud autosave enabled.",
+      "autoguardadoDesactivado": "Cloud autosave disabled.",
+      "autoguardadoSinDemo": "Autosave is not available in DEMO mode.",
+      "conectado": "Google Drive connected successfully.",
+      "conectando": "Connecting to Google Drive...",
+      "desconectado": "Disconnected from Google Drive",
+      "errorConectar": "Failed to connect to Google Drive.",
+      "faltaClientId": "Enter your Google Client ID first.",
+      "faltaConectar": "Connect your Google Drive account first.",
+      "sinDemo": "You can't sync with Drive in DEMO mode."
+    },
+    "header": {
+      "paletaNoImplementada": "Command palette not implemented yet."
+    },
+    "inicio": {
+      "estructuraGuardada": "Structure saved."
+    },
+    "magia": {
+      "errorGenerarDocumento": "Error generating the document. Check the connection with the backend.",
+      "pdfFallback": "Could not generate the PDF. Downloading DOCX instead."
+    },
+    "newFileWizard": {
+      "cursoCreado": "Course {{name}} created successfully.",
+      "cursoDemoCreado": "DEMO course created successfully.",
+      "cursoYGrupoCreados": "Course {{name}} and its group created successfully.",
+      "errorCrearCurso": "Error creating the course.",
+      "errorCrearCursoDemo": "Error creating the DEMO course.",
+      "errorCrearProgramacion": "Error creating the programming.",
+      "programacionCreada": "Programming for {{name}} created successfully."
+    },
+    "normativa": {
+      "errorGenerarPdf": "Error generating the PDF. Check that the backend is configured correctly.",
+      "errorPrevisualizacion": "Error loading the document preview. Check the connection with the backend."
+    },
+    "nuevoCurso": {
+      "creado": "Course \"{{nombreGrupo}}\" ({{cursoAcademico}}) created from the programming.",
+      "errorClonar": "Could not clone the programming.",
+      "errorCrearCurso": "Could not create the new course.",
+      "errorGenerico": "An error occurred while creating the new course."
+    },
+    "oneDrive": {
+      "conectado": "OneDrive connected successfully.",
+      "conectando": "Connecting to OneDrive...",
+      "desconectado": "Disconnected from OneDrive",
+      "errorConectar": "Failed to connect to OneDrive.",
+      "faltaClientId": "Enter your Microsoft Client ID first.",
+      "sinDemo": "You can't sync in DEMO mode."
+    },
+    "recientes": {
+      "errorGenerico": "Error reopening the file.",
+      "errorReabrir": "Could not reopen \"{{nombre}}\".",
+      "irAAbrirGrupo": "Go to Files → Open group and select the folder that contains \"{{fileName}}\".",
+      "permisoDenegado": "Permission denied to access the file or folder.",
+      "reabierto": "\"{{nombre}}\" reopened.",
+      "seleccionaDeNuevo": "Select \"{{fileName}}\" again — your browser doesn't allow reopening it directly.",
+      "yaNoExiste": "\"{{nombre}}\" is no longer where it was. Removing it from recents."
+    },
+    "reclamaciones": {
+      "errorJustificante": "Error generating the supporting document.",
+      "faltaResolucion": "Write how it was resolved.",
+      "faltanCampos": "Fill in student, reference and reason.",
+      "registrada": "Complaint registered.",
+      "resuelta": "Complaint marked as resolved."
+    },
+    "taskConfig": {
+      "errorExportar": "Error exporting the competency-based task."
+    },
+    "udConfig": {
+      "errorExportar": "Error exporting the teaching unit."
+    }
   }
 }

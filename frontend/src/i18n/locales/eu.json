@@ -489,5 +489,175 @@
     "alumnado": "Datu-fitxa pertsonalak, gelako plana eta tutoretza uzte-alertekin.",
     "seguimiento": "Eskola-egunkaria, asistentzia, RA eta UD aurrerapena eta noten sarrera.",
     "calificaciones": "Noten koadernoa, estatistikak eta talde zein banakako konparaketa."
+  },
+  "toasts": {
+    "aiSettings": {
+      "guardadaLocal": "AA konfigurazioa lokalki gordeta."
+    },
+    "aiWizard": {
+      "documentoProcesado": "Dokumentua ondo prozesatu da."
+    },
+    "alumnado": {
+      "errorImportarNinguno": "Ez da ikasle baliodunik inportatu.",
+      "errorLeerCsv": "Arazo bat egon da CSV fitxategia irakurtzean.",
+      "importados": "{{count}} ikasle inportatu dira."
+    },
+    "archivos": {
+      "abrirCursoViaGrupo": "Ikasturte bat modu seguruan irekitzeko, egin klik bikoitza lehen zutabeko elkartutako taldean.",
+      "cambiadoDemo": "DEMO datuetara aldatuta.",
+      "cambiadoReal": "Datu errealetara aldatuta lokalean. Fitxategiak sortu edo ireki ditzakezu.",
+      "carpetaCambiada": "Karpeta lokala aldatuta.",
+      "carpetaConectada": "Karpeta lokala konektatuta.",
+      "copiaCursoDescargada": "Ikasturtearen kopia deskargatuta.",
+      "copiaProgramacionDescargada": "Programazioaren kopia deskargatuta.",
+      "cursoAbiertoIcono": "Ikasturtea ondo ireki da",
+      "cursoCargado": "{{name}} ikasturtea kargatuta.",
+      "cursoCargadoArrastre": "Ikasturtea arrastatuz kargatuta",
+      "cursoGuardado": "Ikasturtea ondo gorde da.",
+      "cursoGuardadoComo": "Ikasturtea fitxategi berri gisa gorde da.",
+      "cursoImportado": "Ikasturtea ondo inportatu da",
+      "demoCargada": "Demostrazio-datuak ondo kargatu dira.",
+      "enlaceReparado": "Esteka ondo konpondu da.",
+      "errorAbrirGrupo": "Errorea taldea irekitzean.",
+      "errorAbrirProgramacion": "Errorea programazioa irekitzean.",
+      "errorCargarCursoDemo": "Errorea DEMO ikasturtea kargatzean.",
+      "errorCargarProgramacionDemo": "Errorea DEMO programazioa kargatzean.",
+      "errorFormatoCurso": "Errorea inportatzean: fitxategiak ez du ikasturte-formatu baliozkorik.",
+      "errorFormatoCursoArrastrar": "Fitxategiak ez du ikasturte-formatu baliozkorik (.fpc).",
+      "errorFormatoProgramacion": "Errorea inportatzean: fitxategiak ez du programazio-formatu baliozkorik.",
+      "errorFormatoProgramacionArrastrar": "Fitxategiak ez du programazio-formatu baliozkorik (.fpp).",
+      "errorGuardarCurso": "Errorea ikasturtea gordetzean.",
+      "errorGuardarProgramacion": "Errorea programazioa gordetzean.",
+      "errorReparEnlace": "Errorea esteka konpontzean.",
+      "grupoAbierto": "{{name}} taldea ondo ireki da.",
+      "grupoCargado": "{{name}} taldea kargatuta.",
+      "modoDemoGuardarComoNuevo": "DEMO moduan zaude. Fitxategi berri gisa gordetzen...",
+      "programacionAbierta": "Programazioa ondo ireki da.",
+      "programacionAbiertaIcono": "Programazioa ondo ireki da",
+      "programacionCargada": "{{name}} programazioa kargatuta.",
+      "programacionCargadaArrastre": "Programazioa arrastatuz kargatuta",
+      "programacionGuardada": "Programazioa ondo gorde da.",
+      "programacionGuardadaComo": "Programazioa fitxategi berri gisa gorde da.",
+      "programacionImportada": "Programazioa ondo inportatu da",
+      "sinCurso": "Ez dago ikasturterik kargatuta.",
+      "sinCursoGuardar": "Ez dago gordetzeko ikasturterik kargatuta.",
+      "sinProgramacion": "Ez dago programaziorik kargatuta.",
+      "sinProgramacionGuardar": "Ez dago gordetzeko programaziorik kargatuta."
+    },
+    "asistencia": {
+      "errorGuardar": "Errorea asistentzia gordetzean."
+    },
+    "autores": {
+      "errorGuardar": "Arazo bat egon da programazioa gordetzean.",
+      "errorInyectar": "Errorea proposamenaren datuak gehitzean.",
+      "jsonInvalido": "Hautatutako fitxategia ez da JSON baliozkoa edo hondatuta dago.",
+      "propuestaIncorporada": "Proposamena ondo gehitu da.",
+      "sinProgramacionActiva": "Ez duzu programaziorik aktibo. Ireki zure programazioa Fitxategiak fitxatik proposamen bat gehitu aurretik."
+    },
+    "bienvenida": {
+      "archivosCreados": "Fitxategiak ondo sortu dira.",
+      "cargandoDemo": "Demostrazio-fitxategiak kargatzen...",
+      "demoCargados": "Demostrazio-fitxategiak kargatuta.",
+      "errorCargarDemo": "Errorea demoa kargatzean: {{message}}",
+      "errorDesconocido": "Errore ezezaguna.",
+      "faltanCampos": "Bete bi eremuak."
+    },
+    "catalogo": {
+      "errorCrearProgramacion": "Errorea programazioa sortzean.",
+      "programacionCreada": "{{name}} moduluaren programazioa ondo sortu da."
+    },
+    "chatbot": {
+      "archivoDemasiadoGrande": "Fitxategia handiegia da. Gehienez 5 MB.",
+      "errorComunicacion": "Errorea laguntzailearekin komunikatzean: {{message}}"
+    },
+    "contextoGrupo": {
+      "errorGenerarIA": "Errorea testua AArekin sortzean.",
+      "sinAlumnado": "Ikastura honetan ez dago ikaslerik erregistratuta oraindik.",
+      "textoGenerado": "Testua sortuta. Berrikusi eta editatu gorde aurretik."
+    },
+    "curriculo": {
+      "errorGuardar": "Errorea datuak gordetzean.",
+      "errorGuardarPropuesta": "Errorea proposamena aplikatu ondoren gordetzean.",
+      "planAutocompletado": "Saio-plana automatikoki osatuta.",
+      "programacionGuardada": "Programazioa ondo gorde da.",
+      "propuestaAplicada": "{{author}}(r)en proposamena aplikatu eta gorde da."
+    },
+    "detalleAlumnado": {
+      "errorInformeRefuerzo": "Errorea errefortzu-txostena sortzean."
+    },
+    "documentos": {
+      "errorPrevisualizacion": "Errorea dokumentuaren aurrebista kargatzean."
+    },
+    "googleDrive": {
+      "autoguardadoActivado": "Hodeiko gordetze automatikoa aktibatuta.",
+      "autoguardadoDesactivado": "Hodeiko gordetze automatikoa desaktibatuta.",
+      "autoguardadoSinDemo": "Gordetze automatikoa ez dago erabilgarri DEMO moduan.",
+      "conectado": "Google Drive ondo konektatu da.",
+      "conectando": "Google Driverekin konektatzen...",
+      "desconectado": "Google Drivetik deskonektatuta",
+      "errorConectar": "Hutsegitea Google Driverekin konektatzean.",
+      "faltaClientId": "Sartu zure Google Client ID-a lehenengo.",
+      "faltaConectar": "Konektatu zure Google Drive kontua lehenengo.",
+      "sinDemo": "Ezin duzu Driverekin sinkronizatu DEMO moduan."
+    },
+    "header": {
+      "paletaNoImplementada": "Komando-paleta oraindik ez dago inplementatuta."
+    },
+    "inicio": {
+      "estructuraGuardada": "Egitura gorde da."
+    },
+    "magia": {
+      "errorGenerarDocumento": "Errorea dokumentua sortzean. Egiaztatu backend-arekiko konexioa.",
+      "pdfFallback": "Ezin izan da PDFa sortu. DOCX deskargatzen ordezko gisa."
+    },
+    "newFileWizard": {
+      "cursoCreado": "{{name}} ikasturtea ondo sortu da.",
+      "cursoDemoCreado": "DEMO ikasturtea ondo sortu da.",
+      "cursoYGrupoCreados": "{{name}} ikasturtea eta bere taldea ondo sortu dira.",
+      "errorCrearCurso": "Errorea ikasturtea sortzean.",
+      "errorCrearCursoDemo": "Errorea DEMO ikasturtea sortzean.",
+      "errorCrearProgramacion": "Errorea programazioa sortzean.",
+      "programacionCreada": "{{name}} moduluaren programazioa ondo sortu da."
+    },
+    "normativa": {
+      "errorGenerarPdf": "Errorea PDFa sortzean. Egiaztatu backend-a ondo konfiguratuta dagoela.",
+      "errorPrevisualizacion": "Errorea dokumentuaren aurrebista kargatzean. Egiaztatu backend-arekiko konexioa."
+    },
+    "nuevoCurso": {
+      "creado": "\"{{nombreGrupo}}\" ikasturtea ({{cursoAcademico}}) programaziotik abiatuta sortu da.",
+      "errorClonar": "Ezin izan da programazioa klonatu.",
+      "errorCrearCurso": "Ezin izan da ikasturte berria sortu.",
+      "errorGenerico": "Errore bat gertatu da ikasturte berria sortzean."
+    },
+    "oneDrive": {
+      "conectado": "OneDrive ondo konektatu da.",
+      "conectando": "OneDriverekin konektatzen...",
+      "desconectado": "OneDrivetik deskonektatuta",
+      "errorConectar": "Hutsegitea OneDriverekin konektatzean.",
+      "faltaClientId": "Sartu zure Microsoft Client ID-a lehenengo.",
+      "sinDemo": "Ezin duzu sinkronizatu DEMO moduan."
+    },
+    "recientes": {
+      "errorGenerico": "Errorea fitxategia berriro irekitzean.",
+      "errorReabrir": "Ezin izan da \"{{nombre}}\" berriro ireki.",
+      "irAAbrirGrupo": "Joan Fitxategia → Ireki taldea eta hautatu \"{{fileName}}\" duen karpeta.",
+      "permisoDenegado": "Baimena ukatuta fitxategira edo karpetara sartzeko.",
+      "reabierto": "\"{{nombre}}\" berriro irekita.",
+      "seleccionaDeNuevo": "Hautatu berriro \"{{fileName}}\" — zure nabigatzaileak ez du zuzenean berriro irekitzen uzten.",
+      "yaNoExiste": "\"{{nombre}}\" ez dago zegoen lekuan. Berrienetatik kentzen da."
+    },
+    "reclamaciones": {
+      "errorJustificante": "Errorea justifikagiria sortzean.",
+      "faltaResolucion": "Idatzi nola konpondu den.",
+      "faltanCampos": "Bete ikaslea, erreferentzia eta arrazoia.",
+      "registrada": "Erreklamazioa erregistratuta.",
+      "resuelta": "Erreklamazioa konponduta gisa markatuta."
+    },
+    "taskConfig": {
+      "errorExportar": "Errorea gaitasun-zeregina esportatzean."
+    },
+    "udConfig": {
+      "errorExportar": "Errorea unitate didaktikoa esportatzean."
+    }
   }
 }

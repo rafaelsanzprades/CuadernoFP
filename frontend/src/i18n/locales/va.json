@@ -489,5 +489,175 @@
     "alumnado": "Fitxes personals, pla d'aula i tutoria amb alertes d'abandonament.",
     "seguimiento": "Diari de classes, assistència, progrés de RA i UD i entrada de notes.",
     "calificaciones": "Quadern de notes, estadístiques i comparativa grupal i individual."
+  },
+  "toasts": {
+    "aiSettings": {
+      "guardadaLocal": "Configuració d'IA desada localment."
+    },
+    "aiWizard": {
+      "documentoProcesado": "Document processat correctament."
+    },
+    "alumnado": {
+      "errorImportarNinguno": "No s'ha pogut importar cap estudiant vàlid.",
+      "errorLeerCsv": "Hi ha hagut un problema en llegir l'arxiu CSV.",
+      "importados": "S'han importat {{count}} estudiants."
+    },
+    "archivos": {
+      "abrirCursoViaGrupo": "Per obrir un curs de manera segura, fes doble clic en el seu grup associat a la primera columna.",
+      "cambiadoDemo": "Canviat a dades DEMO.",
+      "cambiadoReal": "Canviat a dades reals en local. Pots crear o obrir arxius.",
+      "carpetaCambiada": "Carpeta local canviada.",
+      "carpetaConectada": "Carpeta local connectada.",
+      "copiaCursoDescargada": "Còpia de curs descarregada.",
+      "copiaProgramacionDescargada": "Còpia de programació descarregada.",
+      "cursoAbiertoIcono": "Curs obert correctament",
+      "cursoCargado": "Curs {{name}} carregat.",
+      "cursoCargadoArrastre": "Curs carregat arrossegant-lo",
+      "cursoGuardado": "Curs desat correctament.",
+      "cursoGuardadoComo": "Curs desat com a arxiu nou.",
+      "cursoImportado": "Curs importat correctament",
+      "demoCargada": "Dades de demostració carregades correctament.",
+      "enlaceReparado": "Enllaç reparat correctament.",
+      "errorAbrirGrupo": "Error en obrir el grup.",
+      "errorAbrirProgramacion": "Error en obrir la programació.",
+      "errorCargarCursoDemo": "Error en carregar el curs DEMO.",
+      "errorCargarProgramacionDemo": "Error en carregar la programació DEMO.",
+      "errorFormatoCurso": "Error en importar: l'arxiu no té un format vàlid de curs.",
+      "errorFormatoCursoArrastrar": "L'arxiu no té un format vàlid de curs (.fpc).",
+      "errorFormatoProgramacion": "Error en importar: l'arxiu no té un format vàlid de programació.",
+      "errorFormatoProgramacionArrastrar": "L'arxiu no té un format vàlid de programació (.fpp).",
+      "errorGuardarCurso": "Error en desar el curs.",
+      "errorGuardarProgramacion": "Error en desar la programació.",
+      "errorReparEnlace": "Error en reparar l'enllaç.",
+      "grupoAbierto": "Grup {{name}} obert correctament.",
+      "grupoCargado": "Grup {{name}} carregat.",
+      "modoDemoGuardarComoNuevo": "Ets en mode DEMO. Desant com a arxiu nou...",
+      "programacionAbierta": "Programació oberta correctament.",
+      "programacionAbiertaIcono": "Programació oberta correctament",
+      "programacionCargada": "Programació {{name}} carregada.",
+      "programacionCargadaArrastre": "Programació carregada arrossegant-la",
+      "programacionGuardada": "Programació desada correctament.",
+      "programacionGuardadaComo": "Programació desada com a arxiu nou.",
+      "programacionImportada": "Programació importada correctament",
+      "sinCurso": "No hi ha cap curs carregat.",
+      "sinCursoGuardar": "No hi ha cap curs carregat per desar.",
+      "sinProgramacion": "No hi ha cap programació carregada.",
+      "sinProgramacionGuardar": "No hi ha cap programació carregada per desar."
+    },
+    "asistencia": {
+      "errorGuardar": "Error en desar l'assistència."
+    },
+    "autores": {
+      "errorGuardar": "Hi ha hagut un problema en desar la programació.",
+      "errorInyectar": "Error en incorporar les dades de la proposta.",
+      "jsonInvalido": "L'arxiu seleccionat no és un JSON vàlid o està corromput.",
+      "propuestaIncorporada": "Proposta incorporada correctament.",
+      "sinProgramacionActiva": "No tens cap programació activa. Obre la teva programació des de la pestanya Arxius abans d'incorporar una proposta."
+    },
+    "bienvenida": {
+      "archivosCreados": "Arxius creats correctament.",
+      "cargandoDemo": "Carregant arxius de demostració...",
+      "demoCargados": "Arxius de demostració carregats.",
+      "errorCargarDemo": "Error en carregar la demo: {{message}}",
+      "errorDesconocido": "Error desconegut.",
+      "faltanCampos": "Omple els dos camps."
+    },
+    "catalogo": {
+      "errorCrearProgramacion": "Error en crear la programació.",
+      "programacionCreada": "Programació de {{name}} creada correctament."
+    },
+    "chatbot": {
+      "archivoDemasiadoGrande": "L'arxiu és massa gran. Màxim 5 MB.",
+      "errorComunicacion": "Error en comunicar-se amb l'assistent: {{message}}"
+    },
+    "contextoGrupo": {
+      "errorGenerarIA": "Error en generar el text amb IA.",
+      "sinAlumnado": "No hi ha alumnat registrat en aquest curs encara.",
+      "textoGenerado": "Text generat. Revisa'l i edita'l abans de desar."
+    },
+    "curriculo": {
+      "errorGuardar": "Error en desar les dades.",
+      "errorGuardarPropuesta": "Error en desar després d'aplicar la proposta.",
+      "planAutocompletado": "Pla de sessions autocompletat.",
+      "programacionGuardada": "Programació desada correctament.",
+      "propuestaAplicada": "Proposta de {{author}} aplicada i desada."
+    },
+    "detalleAlumnado": {
+      "errorInformeRefuerzo": "Error en generar l'informe de reforç."
+    },
+    "documentos": {
+      "errorPrevisualizacion": "Error en carregar la previsualització del document."
+    },
+    "googleDrive": {
+      "autoguardadoActivado": "Desat automàtic al núvol activat.",
+      "autoguardadoDesactivado": "Desat automàtic al núvol desactivat.",
+      "autoguardadoSinDemo": "El desat automàtic no està disponible en mode DEMO.",
+      "conectado": "Google Drive connectat correctament.",
+      "conectando": "Connectant amb Google Drive...",
+      "desconectado": "Desconnectat de Google Drive",
+      "errorConectar": "Error en connectar amb Google Drive.",
+      "faltaClientId": "Introdueix el teu Google Client ID primer.",
+      "faltaConectar": "Connecta el teu compte de Google Drive primer.",
+      "sinDemo": "No pots sincronitzar amb Drive en mode DEMO."
+    },
+    "header": {
+      "paletaNoImplementada": "Paleta d'ordres encara no implementada."
+    },
+    "inicio": {
+      "estructuraGuardada": "Estructura desada."
+    },
+    "magia": {
+      "errorGenerarDocumento": "Error en generar el document. Comprova la connexió amb el backend.",
+      "pdfFallback": "No s'ha pogut generar el PDF. Descarregant DOCX com a alternativa."
+    },
+    "newFileWizard": {
+      "cursoCreado": "Curs {{name}} creat correctament.",
+      "cursoDemoCreado": "Curs DEMO creat correctament.",
+      "cursoYGrupoCreados": "Curs {{name}} i el seu grup creats correctament.",
+      "errorCrearCurso": "Error en crear el curs.",
+      "errorCrearCursoDemo": "Error en crear el curs DEMO.",
+      "errorCrearProgramacion": "Error en crear la programació.",
+      "programacionCreada": "Programació de {{name}} creada correctament."
+    },
+    "normativa": {
+      "errorGenerarPdf": "Error en generar el PDF. Comprova que el backend està configurat correctament.",
+      "errorPrevisualizacion": "Error en carregar la previsualització del document. Verifica la connexió amb el backend."
+    },
+    "nuevoCurso": {
+      "creado": "Curs \"{{nombreGrupo}}\" ({{cursoAcademico}}) creat a partir de la programació.",
+      "errorClonar": "No s'ha pogut clonar la programació.",
+      "errorCrearCurso": "No s'ha pogut crear el curs nou.",
+      "errorGenerico": "S'ha produït un error en crear el nou curs."
+    },
+    "oneDrive": {
+      "conectado": "OneDrive connectat correctament.",
+      "conectando": "Connectant amb OneDrive...",
+      "desconectado": "Desconnectat de OneDrive",
+      "errorConectar": "Error en connectar amb OneDrive.",
+      "faltaClientId": "Introdueix el teu Client ID de Microsoft primer.",
+      "sinDemo": "No pots sincronitzar en mode DEMO."
+    },
+    "recientes": {
+      "errorGenerico": "Error en tornar a obrir l'arxiu.",
+      "errorReabrir": "No s'ha pogut tornar a obrir \"{{nombre}}\".",
+      "irAAbrirGrupo": "Ves a Arxiu → Obrir grup i selecciona la carpeta que conté \"{{fileName}}\".",
+      "permisoDenegado": "Permís denegat per accedir a l'arxiu o carpeta.",
+      "reabierto": "\"{{nombre}}\" tornat a obrir.",
+      "seleccionaDeNuevo": "Selecciona de nou \"{{fileName}}\" — el teu navegador no permet tornar-lo a obrir directament.",
+      "yaNoExiste": "\"{{nombre}}\" ja no es troba on era. Se suprimeix de recents."
+    },
+    "reclamaciones": {
+      "errorJustificante": "Error en generar el justificant.",
+      "faltaResolucion": "Escriu com s'ha resolt.",
+      "faltanCampos": "Omple alumne, referència i motiu.",
+      "registrada": "Reclamació registrada.",
+      "resuelta": "Reclamació marcada com a resolta."
+    },
+    "taskConfig": {
+      "errorExportar": "Error en exportar la tasca competencial."
+    },
+    "udConfig": {
+      "errorExportar": "Error en exportar la unitat didàctica."
+    }
   }
 }
