@@ -401,6 +401,18 @@ def _build_context(data: dict) -> dict:
     else:
         context["elementos_transversales"] = str(et_list)
 
+    # --- Evaluacion de la programacion y propuestas de mejora (EQAVET/PDCA) ---
+    # Item 37: moduleData.eqavet_evaluacion (rellenado en Inicio > Mejora, por
+    # EqavetTab.tsx y PropuestasTab.tsx) no llegaba nunca a la plantilla porque
+    # esta no tenia seccion para ello -- añadida como nueva seccion final tras
+    # "Publicidad de la programacion didactica" en modelo_pd_jeg_tpl_final.docx.
+    eqavet = data.get("eqavet_evaluacion") or {}
+    for ind_id in ("ind1", "ind2", "ind3", "ind4", "ind5", "ind6", "ind7", "ind8"):
+        context[f"eqavet_{ind_id}"] = str(eqavet.get(ind_id, ""))
+    for categoria in ("planificacion", "desarrollo", "resultados"):
+        context[f"eqavet_puntos_fuertes_{categoria}"] = eqavet.get(f"puntos_fuertes_{categoria}", "")
+        context[f"eqavet_areas_mejora_{categoria}"] = eqavet.get(f"areas_mejora_{categoria}", "")
+
     return context
 
 
