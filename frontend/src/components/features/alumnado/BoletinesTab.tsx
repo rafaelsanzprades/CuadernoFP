@@ -54,9 +54,9 @@ export const BoletinesTab = () => {
   if (activeStudents.length === 0) {
     return (
       <Card className="p-8 text-center border-l-4 border-l-yellow-500 mt-6">
-        <h2 className="text-subheading font-bold text-warning mb-2">Falta alumnado</h2>
+        <h2 className="text-subheading font-bold text-warning mb-2">{t('campos.alumnado.faltaAlumnadoTitulo', {defaultValue: 'Falta alumnado'})}</h2>
         <p className="text-foreground/80">
-          Primero debes registrar alumnado en la pestaña principal.
+          {t('campos.alumnado.faltaAlumnadoDesc', {defaultValue: 'Primero debes registrar alumnado en la pestaña principal.'})}
         </p>
       </Card>
     );
@@ -91,7 +91,7 @@ export const BoletinesTab = () => {
       <div className="w-80 bg-foreground/5 border border-white/5 rounded-2xl flex flex-col overflow-hidden shrink-0 no-print">
         <div className="p-4 border-b border-white/5 bg-foreground/10">
           <div className="text-caption font-medium text-muted tracking-wider">
-            Alumnado Activo ({activeStudents.length})
+            {t('campos.alumnado.alumnadoActivoTitulo', {count: activeStudents.length, defaultValue: 'Alumnado Activo ({{count}})'})}
           </div>
         </div>
         <div className="flex-1 overflow-y-auto p-2 space-y-1 scrollbar-hide">
@@ -128,7 +128,7 @@ export const BoletinesTab = () => {
             <div className="p-6 border-b border-white/5 bg-foreground/10 flex justify-between items-center shrink-0 no-print">
               <div>
                 <h3 className="text-subheading font-black text-foreground flex items-center gap-2">
-                  <FileText className="w-5 h-5 text-accent" /> Boletín individual de calificaciones
+                  <FileText className="w-5 h-5 text-accent" /> {t('campos.alumnado.boletinIndividualTitulo', {defaultValue: 'Boletín individual de calificaciones'})}
                 </h3>
               </div>
               <Button onClick={handlePrint} className="bg-accent text-background hover:bg-accent/80 font-bold px-4 py-2 rounded-xl flex items-center gap-2">
@@ -143,33 +143,33 @@ export const BoletinesTab = () => {
                 {/* Cabecera Oficial */}
                 <div className="border-b-2 border-accent pb-6 mb-8 flex justify-between items-start">
                   <div>
-                    <h1 className="text-heading font-black mb-2 tracking-tight">INFORME DE EVALUACIÓN</h1>
+                    <h1 className="text-heading font-black mb-2 tracking-tight">{t('campos.alumnado.informeEvaluacionTitulo', {defaultValue: 'INFORME DE EVALUACIÓN'})}</h1>
                     <p className="text-subheading text-muted-foreground font-semibold flex items-center gap-2">
-                      <GraduationCap className="w-5 h-5" /> Módulo: {info_modulo.codigo && info_modulo.nombre ? `${info_modulo.codigo} - ${info_modulo.nombre}` : info_modulo.modulo || "Módulo profesional"}
+                      <GraduationCap className="w-5 h-5" /> {t('campos.alumnado.moduloLabel', {defaultValue: 'Módulo:'})} {info_modulo.codigo && info_modulo.nombre ? `${info_modulo.codigo} - ${info_modulo.nombre}` : info_modulo.modulo || t('campos.alumnado.moduloProfesionalFallback', {defaultValue: 'Módulo profesional'})}
                     </p>
                     <p className="text-body text-muted flex items-center gap-2 mt-1">
-                      <Briefcase className="w-4 h-4" /> Título: {info_modulo.titulo_fp || "Título de FP"}
+                      <Briefcase className="w-4 h-4" /> {t('campos.alumnado.tituloLabel', {defaultValue: 'Título:'})} {info_modulo.titulo_fp || t('campos.alumnado.tituloFpFallback', {defaultValue: 'Título de FP'})}
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-body font-semibold text-muted-foreground">Curso académico</p>
+                    <p className="text-body font-semibold text-muted-foreground">{t('campos.alumnado.cursoAcademicoLabel', {defaultValue: 'Curso académico'})}</p>
                     <p className="text-subheading font-bold">{info_modulo.curso_academico || "2025/2026"}</p>
-                    <p className="text-caption text-muted mt-2">Fecha: {new Date().toLocaleDateString('es-ES')}</p>
+                    <p className="text-caption text-muted mt-2">{t('campos.alumnado.fechaLabel', {defaultValue: 'Fecha:'})} {new Date().toLocaleDateString('es-ES')}</p>
                   </div>
                 </div>
 
                 {/* Datos del alumnado */}
                 <div className="bg-foreground/5 p-6 rounded-xl mb-8 flex items-center justify-between border border-white/5">
                   <div>
-                    <p className="text-body text-muted tracking-wider font-semibold mb-1">Alumno/a</p>
+                    <p className="text-body text-muted tracking-wider font-semibold mb-1">{t('campos.alumnado.alumnoLabel', {defaultValue: 'Alumno/a'})}</p>
                     <h2 className="text-heading font-bold">{currentStudent.Apellidos}, {currentStudent.Nombre}</h2>
                     <div className="flex gap-4 mt-2 text-body text-muted">
-                      <span>ID: <span className="font-mono text-foreground">{currentStudent.ID}</span></span>
-                      {currentStudent.Matricula && <span>Matrícula: <span className="font-mono text-foreground">{currentStudent.Matricula}</span></span>}
+                      <span>{t('campos.alumnado.idLabel', {defaultValue: 'ID:'})} <span className="font-mono text-foreground">{currentStudent.ID}</span></span>
+                      {currentStudent.Matricula && <span>{t('campos.alumnado.matriculaLabel', {defaultValue: 'Matrícula:'})} <span className="font-mono text-foreground">{currentStudent.Matricula}</span></span>}
                     </div>
                   </div>
                   <div className="text-right bg-background p-4 rounded-xl shadow-sm border border-white/5">
-                    <p className="text-caption text-muted tracking-wider font-semibold mb-1">Nota media estimada</p>
+                    <p className="text-caption text-muted tracking-wider font-semibold mb-1">{t('campos.alumnado.notaMediaLabel', {defaultValue: 'Nota media estimada'})}</p>
                     <div className="text-heading font-black text-accent">{notaMedia}</div>
                   </div>
                 </div>
@@ -178,7 +178,7 @@ export const BoletinesTab = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                   <div className="bg-foreground/5 p-6 rounded-xl border border-white/5 flex flex-col items-center">
                     <h3 className="text-subheading font-bold mb-4 flex items-center gap-2 w-full">
-                      <Target className="w-5 h-5 text-info" /> Perfil competencial (Radar)
+                      <Target className="w-5 h-5 text-info" /> {t('campos.alumnado.perfilCompetencialTitulo', {defaultValue: 'Perfil competencial (Radar)'})}
                     </h3>
                     <div className="w-full h-[250px]">
                       <ResponsiveContainer width="100%" height="100%">
@@ -186,7 +186,7 @@ export const BoletinesTab = () => {
                           <PolarGrid stroke="rgba(255,255,255,0.1)" />
                           <PolarAngleAxis dataKey="subject" tick={{ fill: 'currentColor', fontSize: 12, fontWeight: 'bold' }} />
                           <PolarRadiusAxis angle={30} domain={[0, 10]} tick={{ fill: 'currentColor', fontSize: 10 }} />
-                          <Radar name="Nota" dataKey="nota" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.4} />
+                          <Radar name={t('campos.alumnado.notaSerieLabel', {defaultValue: 'Nota'})} dataKey="nota" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.4} />
                           <Tooltip contentStyle={{ backgroundColor: '#0f172a', border: '1px solid rgba(255,255,255,0.1)' }} />
                         </RadarChart>
                       </ResponsiveContainer>
@@ -195,7 +195,7 @@ export const BoletinesTab = () => {
 
                   <div className="bg-foreground/5 p-6 rounded-xl border border-white/5 flex flex-col items-center">
                     <h3 className="text-subheading font-bold mb-4 flex items-center gap-2 w-full">
-                      <BarChart className="w-5 h-5 text-success" /> Nivel de Logro por RA
+                      <BarChart className="w-5 h-5 text-success" /> {t('campos.alumnado.nivelLogroRaTitulo', {defaultValue: 'Nivel de Logro por RA'})}
                     </h3>
                     <div className="w-full h-[250px]">
                       <ResponsiveContainer width="100%" height="100%">
@@ -213,7 +213,7 @@ export const BoletinesTab = () => {
 
                 {/* Desglose de Resultados */}
                 <h3 className="text-subheading font-bold mb-4 mt-8 flex items-center gap-2 border-b border-white/10 pb-2">
-                  <Award className="w-5 h-5 text-warning" /> Desglose por Resultados de aprendizaje
+                  <Award className="w-5 h-5 text-warning" /> {t('campos.alumnado.desgloseRaTitulo', {defaultValue: 'Desglose por Resultados de aprendizaje'})}
                 </h3>
                 <div className="space-y-4">
                   {radarData.map((ra: any, i: number) => {
@@ -225,11 +225,11 @@ export const BoletinesTab = () => {
                         </div>
                         <div className="flex-1">
                           <div className="font-bold text-body mb-1">{ra.subject}</div>
-                          <div className="text-caption text-muted leading-tight">{ra.desc || "Descripción no disponible en este momento."}</div>
+                          <div className="text-caption text-muted leading-tight">{ra.desc || t('campos.alumnado.descripcionNoDisponible', {defaultValue: 'Descripción no disponible en este momento.'})}</div>
                         </div>
                         <div className="w-24 text-right">
                           <span className={`text-caption font-bold px-2 py-1 rounded-full border ${isAprobado ? 'bg-success/10 text-success border-success/20' : 'bg-danger/10 text-danger border-danger/20'}`}>
-                            {isAprobado ? "SUPERADO" : "NO SUPER."}
+                            {isAprobado ? t('campos.alumnado.raSuperado', {defaultValue: 'SUPERADO'}) : t('campos.alumnado.raNoSuperado', {defaultValue: 'NO SUPER.'})}
                           </span>
                         </div>
                       </div>
@@ -238,8 +238,8 @@ export const BoletinesTab = () => {
                 </div>
 
                 <div className="mt-12 pt-8 border-t border-white/10 text-center text-caption text-muted">
-                  <p>Este informe ha sido generado automáticamente por el sistema de evaluación por competencias.</p>
-                  <p className="mt-1">Las calificaciones mostradas corresponden a las evaluaciones registradas hasta la fecha de emisión.</p>
+                  <p>{t('campos.alumnado.pieInformeAuto', {defaultValue: 'Este informe ha sido generado automáticamente por el sistema de evaluación por competencias.'})}</p>
+                  <p className="mt-1">{t('campos.alumnado.pieInformeFecha', {defaultValue: 'Las calificaciones mostradas corresponden a las evaluaciones registradas hasta la fecha de emisión.'})}</p>
                 </div>
 
               </div>
@@ -248,8 +248,8 @@ export const BoletinesTab = () => {
         ) : (
           <div className="flex-1 flex flex-col justify-center items-center text-center p-8 text-muted">
             <Users className="w-12 h-12 text-muted/50 mb-3" />
-            <p className="font-semibold text-subheading">Selecciona alumnado</p>
-            <p className="text-body opacity-80">Elige alumnado del panel izquierdo para visualizar su boletín.</p>
+            <p className="font-semibold text-subheading">{t('campos.alumnado.seleccionaAlumnadoTitulo', {defaultValue: 'Selecciona alumnado'})}</p>
+            <p className="text-body opacity-80">{t('campos.alumnado.seleccionaAlumnadoDesc', {defaultValue: 'Elige alumnado del panel izquierdo para visualizar su boletín.'})}</p>
           </div>
         )}
       </div>

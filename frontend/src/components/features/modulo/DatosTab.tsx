@@ -186,46 +186,46 @@ export function DatosTab() {
       {/* 1. Centro y docente */}
       <Card className="p-6">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-5">
-<span>‍<span className="inline-flex"><School className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Centro y docente
+<span>‍<span className="inline-flex"><School className="w-[1.2em] h-[1.2em] mr-1" /></span></span> {t('campos.modulo.tituloCentroDocente', {defaultValue: 'Centro y docente'})}
 </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Input 
-            label="Centro educativo"
+          <Input
+            label={t('campos.modulo.centroEducativo', {defaultValue: 'Centro educativo'})}
             type="text"
             value={data.centro || ""}
             onChange={e => updateInfoModulo('centro', e.target.value)}
           />
-          <Input 
-            label="Profesorado"
+          <Input
+            label={t('campos.modulo.profesorado', {defaultValue: 'Profesorado'})}
             type="text"
             value={data.profesorado || data.profesor || ""}
             onChange={e => updateInfoModulo('profesorado', e.target.value)}
           />
           <Select
-            label="Comunidad / Territorio"
+            label={t('campos.modulo.comunidadTerritorio', {defaultValue: 'Comunidad / Territorio'})}
             value={data.ccaa || ""}
             onChange={e => updateInfoModulo('ccaa', e.target.value)}
           >
-            <option value="">-- Selecciona --</option>
-            <option value="andalucia">Andalucía</option>
-            <option value="aragon">Aragón</option>
-            <option value="asturias">Principado de Asturias</option>
-            <option value="baleares">Islas Baleares</option>
-            <option value="canarias">Canarias</option>
-            <option value="cantabria">Cantabria</option>
-            <option value="castilla-mancha">Castilla-La Mancha</option>
-            <option value="castilla-leon">Castilla y León</option>
-            <option value="cataluna">Cataluña</option>
-            <option value="extremadura">Extremadura</option>
-            <option value="galicia">Galicia</option>
-            <option value="la-rioja">La Rioja</option>
-            <option value="madrid">Comunidad de Madrid</option>
-            <option value="murcia">Región de Murcia</option>
-            <option value="navarra">Comunidad Foral de Navarra</option>
-            <option value="pais-vasco">País Vasco</option>
-            <option value="valencia">Comunidad Valenciana</option>
-            <option value="ceuta">Ceuta (Ministerio)</option>
-            <option value="melilla">Melilla (Ministerio)</option>
+            <option value="">{t('campos.modulo.placeholderSelecciona', {defaultValue: '-- Selecciona --'})}</option>
+            <option value="andalucia">{t('checks.modulo.ccaaAndalucia', {defaultValue: 'Andalucía'})}</option>
+            <option value="aragon">{t('checks.modulo.ccaaAragon', {defaultValue: 'Aragón'})}</option>
+            <option value="asturias">{t('checks.modulo.ccaaAsturias', {defaultValue: 'Principado de Asturias'})}</option>
+            <option value="baleares">{t('checks.modulo.ccaaBaleares', {defaultValue: 'Islas Baleares'})}</option>
+            <option value="canarias">{t('checks.modulo.ccaaCanarias', {defaultValue: 'Canarias'})}</option>
+            <option value="cantabria">{t('checks.modulo.ccaaCantabria', {defaultValue: 'Cantabria'})}</option>
+            <option value="castilla-mancha">{t('checks.modulo.ccaaCastillaMancha', {defaultValue: 'Castilla-La Mancha'})}</option>
+            <option value="castilla-leon">{t('checks.modulo.ccaaCastillaLeon', {defaultValue: 'Castilla y León'})}</option>
+            <option value="cataluna">{t('checks.modulo.ccaaCataluna', {defaultValue: 'Cataluña'})}</option>
+            <option value="extremadura">{t('checks.modulo.ccaaExtremadura', {defaultValue: 'Extremadura'})}</option>
+            <option value="galicia">{t('checks.modulo.ccaaGalicia', {defaultValue: 'Galicia'})}</option>
+            <option value="la-rioja">{t('checks.modulo.ccaaLaRioja', {defaultValue: 'La Rioja'})}</option>
+            <option value="madrid">{t('checks.modulo.ccaaMadrid', {defaultValue: 'Comunidad de Madrid'})}</option>
+            <option value="murcia">{t('checks.modulo.ccaaMurcia', {defaultValue: 'Región de Murcia'})}</option>
+            <option value="navarra">{t('checks.modulo.ccaaNavarra', {defaultValue: 'Comunidad Foral de Navarra'})}</option>
+            <option value="pais-vasco">{t('checks.modulo.ccaaPaisVasco', {defaultValue: 'País Vasco'})}</option>
+            <option value="valencia">{t('checks.modulo.ccaaValencia', {defaultValue: 'Comunidad Valenciana'})}</option>
+            <option value="ceuta">{t('checks.modulo.ccaaCeuta', {defaultValue: 'Ceuta (Ministerio)'})}</option>
+            <option value="melilla">{t('checks.modulo.ccaaMelilla', {defaultValue: 'Melilla (Ministerio)'})}</option>
           </Select>
         </div>
       </Card>
@@ -233,27 +233,27 @@ export function DatosTab() {
       {/* 2. Módulo didáctico */}
       <Card className="p-6">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-5">
-<span><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Módulo didáctico
+<span><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span></span> {t('campos.modulo.tituloModuloDidactico', {defaultValue: 'Módulo didáctico'})}
 </h2>
 
         <div className="grid grid-cols-2 gap-4 mb-4">
           <Select
-            label="Familia profesional"
+            label={t('campos.modulo.familiaProfesional', {defaultValue: 'Familia profesional'})}
             value={viewFamilyId}
             onChange={e => { setViewFamilyId(e.target.value); setViewDegreeId(""); setSelectedModuleCode(""); }}
           >
-            <option value="">-- Selecciona Familia --</option>
+            <option value="">{t('campos.modulo.placeholderSeleccionaFamilia', {defaultValue: '-- Selecciona Familia --'})}</option>
             {families.map(f => (
               <option key={f.id} value={f.id}>{f.name}</option>
             ))}
           </Select>
           <Select
-            label="Título de FP (grado D)"
+            label={t('campos.modulo.tituloFpGradoD', {defaultValue: 'Título de FP (grado D)'})}
             value={viewDegreeId}
             onChange={e => { setViewDegreeId(e.target.value); setSelectedModuleCode(""); }}
             disabled={!viewFamilyId}
           >
-            <option value="">-- Selecciona Título --</option>
+            <option value="">{t('campos.modulo.placeholderSeleccionaTitulo', {defaultValue: '-- Selecciona Título --'})}</option>
             {viewFamily?.degrees.map(d => (
               <option key={d.id} value={d.id}>{d.name}</option>
             ))}
@@ -263,12 +263,12 @@ export function DatosTab() {
         <div className="grid grid-cols-6 gap-4 mb-5">
           <div className="col-span-3">
             <Select
-              label="Módulo didáctico"
+              label={t('campos.modulo.labelModuloDidactico', {defaultValue: 'Módulo didáctico'})}
               value={selectedModuleCode}
               onChange={e => handleSelectModule(e.target.value)}
               disabled={!viewDegreeId}
             >
-              <option value="">-- Selecciona Módulo --</option>
+              <option value="">{t('campos.modulo.placeholderSeleccionaModulo', {defaultValue: '-- Selecciona Módulo --'})}</option>
               {degreeModules.map(mod => (
                 <option key={mod.codigo} value={mod.codigo}>
                   {mod.codigo} · {mod.nombre}
@@ -278,18 +278,18 @@ export function DatosTab() {
           </div>
           <div className="col-span-2">
             <Select
-              label="Régimen dual LO 3/2022"
+              label={t('campos.modulo.regimenDualLabel', {defaultValue: 'Régimen dual LO 3/2022'})}
               value={moduleData?.dual_regimen || "ninguno"}
               onChange={e => updateModuleData('dual_regimen', e.target.value)}
             >
-              <option value="ninguno">Ninguno / Tradicional</option>
-              <option value="general">Dual General (25% - 35%)</option>
-              <option value="intensivo">Dual Intensivo (35% - 50%)</option>
+              <option value="ninguno">{t('checks.modulo.dualRegimenNinguno', {defaultValue: 'Ninguno / Tradicional'})}</option>
+              <option value="general">{t('checks.modulo.dualRegimenGeneral', {defaultValue: 'Dual General (25% - 35%)'})}</option>
+              <option value="intensivo">{t('checks.modulo.dualRegimenIntensivo', {defaultValue: 'Dual Intensivo (35% - 50%)'})}</option>
             </Select>
           </div>
           <div className="col-span-1">
-            <Input 
-              label="Curso"
+            <Input
+              label={t('campos.modulo.cursoLabel', {defaultValue: 'Curso'})}
               type="text"
               value={data.curso || ""}
               onChange={e => updateInfoModulo('curso', e.target.value)}
@@ -298,36 +298,36 @@ export function DatosTab() {
         </div>
 
         <div className="grid grid-cols-5 gap-4">
-          <Input 
-            label="Nº de trimestres"
+          <Input
+            label={t('campos.modulo.numTrimestres', {defaultValue: 'Nº de trimestres'})}
             type="text"
             className="text-muted cursor-not-allowed"
-            disabled 
+            disabled
             value="3"
           />
-          <Input 
-            label="Horas/semana clase"
+          <Input
+            label={t('campos.modulo.horasSemanaClase', {defaultValue: 'Horas/semana clase'})}
             type="number"
             value={data.h_sem || 0}
             onChange={e => updateInfoModulo('h_sem', Number(e.target.value))}
           />
-          <Input 
-            label="Horas BOA"
+          <Input
+            label={t('campos.modulo.horasBoa', {defaultValue: 'Horas BOA'})}
             type="number"
             value={data.h_boa || 0}
             onChange={e => updateInfoModulo('h_boa', Number(e.target.value))}
           />
-          <Input 
-            label="% P.Ev. continua"
+          <Input
+            label={t('campos.modulo.pctPEvContinua', {defaultValue: '% P.Ev. continua'})}
             type="number"
             value={data.p_ev || 15}
             onChange={e => updateInfoModulo('p_ev', Number(e.target.value))}
           />
-          <Input 
-            label={`Horas P.Ev. (${p_ev}%)`}
+          <Input
+            label={t('campos.modulo.horasPEvLabel', {pev: p_ev, defaultValue: `Horas P.Ev. (${p_ev}%)`})}
             type="text"
             className="text-warning cursor-not-allowed text-center font-bold"
-            disabled 
+            disabled
             value={`${h_p_ev} h`}
           />
         </div>
@@ -336,7 +336,7 @@ export function DatosTab() {
       {/* Reglas de redondeo y compensación */}
       <Card className="p-6 border-l-4 border-l-orange-500">
         <h4 className="text-subheading font-bold text-foreground mb-6 flex items-center justify-between">
-          <span className="flex items-center gap-2"><Settings className="w-[1.2em] h-[1.2em] mr-1" /> Reglas de redondeo y compensación</span>
+          <span className="flex items-center gap-2"><Settings className="w-[1.2em] h-[1.2em] mr-1" /> {t('campos.modulo.tituloReglasRedondeo', {defaultValue: 'Reglas de redondeo y compensación'})}</span>
         </h4>
         {(() => {
           const config = moduleData?.config_redondeo || {
@@ -347,39 +347,39 @@ export function DatosTab() {
           return (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
-                <label className="text-body font-semibold text-foreground">Nota mínima para aprobar</label>
-                <input 
-                  type="number" 
+                <label className="text-body font-semibold text-foreground">{t('campos.modulo.notaMinimaAprobar', {defaultValue: 'Nota mínima para aprobar'})}</label>
+                <input
+                  type="number"
                   step="0.1"
                   value={config.nota_aprobado ?? 5.0}
                   onChange={(e) => updateModuleData("config_redondeo", { ...config, nota_aprobado: parseFloat(e.target.value) })}
                   className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
                 />
-                <p className="text-caption text-muted">Nota a partir de la cual un RA o Módulo se considera superado (típicamente 5.0).</p>
+                <p className="text-caption text-muted">{t('campos.modulo.notaMinimaAprobarDesc', {defaultValue: 'Nota a partir de la cual un RA o Módulo se considera superado (típicamente 5.0).'})}</p>
               </div>
-              
+
               <div className="space-y-2">
-                <label className="text-body font-semibold text-foreground">Umbral de redondeo al alza</label>
-                <input 
-                  type="number" 
+                <label className="text-body font-semibold text-foreground">{t('campos.modulo.umbralRedondeoAlza', {defaultValue: 'Umbral de redondeo al alza'})}</label>
+                <input
+                  type="number"
                   step="0.1"
                   value={config.umbral_redondeo ?? 5.0}
                   onChange={(e) => updateModuleData("config_redondeo", { ...config, umbral_redondeo: parseFloat(e.target.value) })}
                   className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
                 />
-                <p className="text-caption text-muted">Si el alumnado obtiene esta nota o superior (ej. 4.8), se redondeará automáticamente a la nota de aprobado.</p>
+                <p className="text-caption text-muted">{t('campos.modulo.umbralRedondeoAlzaDesc', {defaultValue: 'Si el alumnado obtiene esta nota o superior (ej. 4.8), se redondeará automáticamente a la nota de aprobado.'})}</p>
               </div>
 
               <div className="space-y-2">
-                <label className="text-body font-semibold text-foreground">Criterios compensables por RA</label>
-                <input 
-                  type="number" 
+                <label className="text-body font-semibold text-foreground">{t('campos.modulo.criteriosCompensablesRA', {defaultValue: 'Criterios compensables por RA'})}</label>
+                <input
+                  type="number"
                   step="1"
                   value={config.max_compensables ?? 0}
                   onChange={(e) => updateModuleData("config_redondeo", { ...config, max_compensables: parseInt(e.target.value) })}
                   className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
                 />
-                <p className="text-caption text-muted">Número máximo de Criterios suspensos que se permiten para aprobar un RA. <strong>0</strong> = cualquier CE suspenso del RA topa su nota justo por debajo del aprobado (comportamiento estricto); sube este número para permitir compensar N criterios suspensos dentro del mismo RA. Cuando el tope está activo para un alumno, aparece marcado en Seguimiento → Detalle por alumnado.</p>
+                <p className="text-caption text-muted">{t('campos.modulo.criteriosCompensablesDescPre', {defaultValue: 'Número máximo de Criterios suspensos que se permiten para aprobar un RA. '})}<strong>0</strong>{t('campos.modulo.criteriosCompensablesDescPost', {defaultValue: ' = cualquier CE suspenso del RA topa su nota justo por debajo del aprobado (comportamiento estricto); sube este número para permitir compensar N criterios suspensos dentro del mismo RA. Cuando el tope está activo para un alumno, aparece marcado en Seguimiento → Detalle por alumnado.'})}</p>
               </div>
             </div>
           );
@@ -391,18 +391,22 @@ export function DatosTab() {
       {/* 5. Evaluación */}
       <Card className="p-6 border-l-4 border-l-accent">
         <h4 className="text-subheading font-bold text-foreground mb-6 flex items-center justify-between">
-          <span className="flex items-center gap-2"><span><span className="inline-flex"><Scale className="w-[1.2em] h-[1.2em] mr-1" /></span></span> % Ponderación por trimestres</span>
+          <span className="flex items-center gap-2"><span><span className="inline-flex"><Scale className="w-[1.2em] h-[1.2em] mr-1" /></span></span> {t('campos.modulo.tituloPonderacionTrimestres', {defaultValue: '% Ponderación por trimestres'})}</span>
           <span className={`text-body font-semibold px-3 py-1 rounded-full ${sumaTrimestres === 100 ? 'bg-success/10 text-success border border-success/30' : 'bg-danger/10 text-danger border border-danger/30'}`}>
-            {sumaTrimestres}% {sumaTrimestres !== 100 && "(Debe sumar 100%)"}
+            {sumaTrimestres}% {sumaTrimestres !== 100 && t('campos.modulo.debeSumarCien', {defaultValue: '(Debe sumar 100%)'})}
           </span>
         </h4>
         <div className="grid grid-cols-3 gap-6">
-          {[['pond_1t', '1er trimestre (%)'], ['pond_2t', '2º trimestre (%)'], ['pond_3t', '3er trimestre (%)']].map(([k, label]) => (
-            <Input 
+          {[
+            ['pond_1t', t('checks.modulo.pond1erTrimestre', {defaultValue: '1er trimestre (%)'})],
+            ['pond_2t', t('checks.modulo.pond2doTrimestre', {defaultValue: '2º trimestre (%)'})],
+            ['pond_3t', t('checks.modulo.pond3erTrimestre', {defaultValue: '3er trimestre (%)'})],
+          ].map(([k, label]) => (
+            <Input
               key={k}
               label={label}
               type="number" value={data[k] || 0} onChange={e => updateInfoModulo(k, Number(e.target.value))}
-              className="text-center" 
+              className="text-center"
             />
           ))}
         </div>
@@ -411,10 +415,14 @@ export function DatosTab() {
       <Card className="p-6 border-l-4 border-l-purple-500">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
           <h4 className="text-subheading font-bold text-foreground flex items-center gap-2">
-            <Receipt className="w-[1.2em] h-[1.2em]" /> % Instrumentos de evaluación
+            <Receipt className="w-[1.2em] h-[1.2em]" /> {t('campos.modulo.tituloInstrumentosEvaluacion', {defaultValue: '% Instrumentos de evaluación'})}
           </h4>
           <div className="flex gap-2">
-            {[["1er Trim.", sum1t], ["2º Trim.", sum2t], ["3er Trim.", sum3t]].map(([label, sum]) => (
+            {[
+              [t('campos.modulo.chipTrim1', {defaultValue: '1er Trim.'}), sum1t],
+              [t('campos.modulo.chipTrim2', {defaultValue: '2º Trim.'}), sum2t],
+              [t('campos.modulo.chipTrim3', {defaultValue: '3er Trim.'}), sum3t],
+            ].map(([label, sum]) => (
               <span key={label as string} className={`text-caption font-semibold px-2.5 py-1 rounded-full whitespace-nowrap ${sum === 100 ? 'bg-success/10 text-success border border-success/30' : 'bg-danger/10 text-danger border border-danger/30'}`}>
                 {label}: {sum}%
               </span>
@@ -423,11 +431,11 @@ export function DatosTab() {
         </div>
         <div className="space-y-2">
           <div style={INSTR_GRID_STYLE} className="text-caption font-bold text-muted px-1">
-            <span>Selección del tipo</span>
-            <span>Descripción del Instrumento de Evaluación (IE)</span>
-            <span className="text-center">1er Trimestre</span>
-            <span className="text-center">2º Trimestre</span>
-            <span className="text-center">3er Trimestre</span>
+            <span>{t('campos.modulo.colSeleccionTipo', {defaultValue: 'Selección del tipo'})}</span>
+            <span>{t('campos.modulo.colDescripcionInstrumento', {defaultValue: 'Descripción del Instrumento de Evaluación (IE)'})}</span>
+            <span className="text-center">{t('campos.modulo.colTrimestre1', {defaultValue: '1er Trimestre'})}</span>
+            <span className="text-center">{t('campos.modulo.colTrimestre2', {defaultValue: '2º Trimestre'})}</span>
+            <span className="text-center">{t('campos.modulo.colTrimestre3', {defaultValue: '3er Trimestre'})}</span>
             <span></span>
           </div>
           {instrumentosPct.map((row) => (
@@ -438,12 +446,12 @@ export function DatosTab() {
                   onChange={(e) => updateInstrumentoPctField(row.id, "categoria", e.target.value)}
                   className="bg-background border border-[var(--glass-border)] rounded pl-2 pr-7 py-2 text-foreground w-full appearance-none"
                 >
-                  <option value="Teoría">Teoría</option>
-                  <option value="Práctica">Práctica</option>
-                  <option value="Proyecto">Proyecto</option>
-                  <option value="Ejercicios">Ejercicios</option>
-                  <option value="Tareas">Tareas</option>
-                  <option value="Recuperaciones">Recuperaciones</option>
+                  <option value="Teoría">{t('checks.modulo.instrCategoriaTeoria', {defaultValue: 'Teoría'})}</option>
+                  <option value="Práctica">{t('checks.modulo.instrCategoriaPractica', {defaultValue: 'Práctica'})}</option>
+                  <option value="Proyecto">{t('checks.modulo.instrCategoriaProyecto', {defaultValue: 'Proyecto'})}</option>
+                  <option value="Ejercicios">{t('checks.modulo.instrCategoriaEjercicios', {defaultValue: 'Ejercicios'})}</option>
+                  <option value="Tareas">{t('checks.modulo.instrCategoriaTareas', {defaultValue: 'Tareas'})}</option>
+                  <option value="Recuperaciones">{t('checks.modulo.instrCategoriaRecuperaciones', {defaultValue: 'Recuperaciones'})}</option>
                 </select>
                 <ChevronDown className="w-4 h-4 text-muted absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
@@ -493,12 +501,10 @@ export function DatosTab() {
       {/* 7. Escalas de evaluación cualitativas (EEv) */}
       <Card className="p-6 border-l-4 border-l-teal-500">
         <h4 className="text-subheading font-bold text-foreground mb-2 flex items-center gap-2">
-          <ListChecks className="w-[1.2em] h-[1.2em]" /> Escalas de evaluación cualitativas
+          <ListChecks className="w-[1.2em] h-[1.2em]" /> {t('campos.modulo.tituloEscalasEvaluacion', {defaultValue: 'Escalas de evaluación cualitativas'})}
         </h4>
         <p className="text-caption text-muted mb-4">
-          Niveles nombrados con un coeficiente de conversión a la nota 0-10, independientes de la
-          nota numérica directa. Precargada con la escala oficial española (Insuficiente/Suficiente/
-          Bien/Notable/Sobresaliente) — edítala o bórrala si usas otra.
+          {t('campos.modulo.escalasEvaluacionDesc', {defaultValue: 'Niveles nombrados con un coeficiente de conversión a la nota 0-10, independientes de la nota numérica directa. Precargada con la escala oficial española (Insuficiente/Suficiente/Bien/Notable/Sobresaliente) — edítala o bórrala si usas otra.'})}
         </p>
         {(() => {
           const escalas = (moduleData?.escalas_evaluacion && moduleData.escalas_evaluacion.length > 0)
@@ -539,7 +545,7 @@ export function DatosTab() {
                     className="w-full bg-background border border-[var(--glass-border)] rounded px-2.5 py-1.5 text-foreground text-sm font-semibold pr-8"
                   />
                   <div className="flex items-center justify-between gap-2 mt-auto">
-                    <span className="text-caption text-muted font-medium">Nota:</span>
+                    <span className="text-caption text-muted font-medium">{t('campos.modulo.notaLabel', {defaultValue: 'Nota:'})}</span>
                     <input
                       type="number"
                       step="0.1"
@@ -562,7 +568,7 @@ export function DatosTab() {
                 <span className="text-caption font-semibold">{t('common.anadir', {defaultValue: 'Añadir'})}</span>
               </button>
               {escalas.length === 0 && (
-                <p className="text-caption text-muted italic">Sin escalas configuradas — la app sigue usando la nota 0-10 directamente.</p>
+                <p className="text-caption text-muted italic">{t('campos.modulo.sinEscalasConfiguradas', {defaultValue: 'Sin escalas configuradas — la app sigue usando la nota 0-10 directamente.'})}</p>
               )}
             </div>
           );

@@ -50,13 +50,13 @@ export function MetodologiaTab() {
       <div className="space-y-6 animate-in fade-in duration-500">
       <div className="glass-card p-6 border-t-4 border-t-green-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1 text-green-400" /></span> Metodología
+          <span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1 text-green-400" /></span> {t('campos.modulo.metodologiaTitulo', {defaultValue: 'Metodología'})}
         </h2>
         <div className="space-y-6">
-          
+
           <div>
-            <label className="text-body font-semibold text-foreground mb-2 block">Metodologías activas (selección múltiple)</label>
-            <p className="text-caption text-muted mb-3">Elige las metodologías que sustentan el desarrollo del módulo. Se redactarán automáticamente en tu Programación Didáctica.</p>
+            <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.modulo.metodologiasActivasTitulo', {defaultValue: 'Metodologías activas (selección múltiple)'})}</label>
+            <p className="text-caption text-muted mb-3">{t('campos.modulo.metodologiasActivasDesc', {defaultValue: 'Elige las metodologías que sustentan el desarrollo del módulo. Se redactarán automáticamente en tu Programación Didáctica.'})}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               {METODOLOGIAS.map((met) => {
                 const isSelected = metodologias_seleccionadas.includes(met.id);
@@ -76,8 +76,8 @@ export function MetodologiaTab() {
           </div>
 
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Principios metodológicos</label>
-            <p className="text-caption text-muted mb-2">Principios pedagógicos generales que guiarán el módulo.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.principiosMetodologicosTitulo', {defaultValue: 'Principios metodológicos'})}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.principiosMetodologicosDesc', {defaultValue: 'Principios pedagógicos generales que guiarán el módulo.'})}</p>
             <textarea
               value={config_contexto["principios_metodologicos"] || ""}
               onChange={e => handleChange("principios_metodologicos", e.target.value)}
@@ -86,8 +86,8 @@ export function MetodologiaTab() {
             />
           </div>
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Estrategias metodológicas</label>
-            <p className="text-caption text-muted mb-2">Estrategias y actividades de enseñanza-aprendizaje a emplear en el aula y taller.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.estrategiasMetodologicasTitulo', {defaultValue: 'Estrategias metodológicas'})}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.estrategiasMetodologicasDesc', {defaultValue: 'Estrategias y actividades de enseñanza-aprendizaje a emplear en el aula y taller.'})}</p>
             <textarea
               value={config_contexto["estrategias_metodologicas"] || config_contexto["D2_actividades_ea"] || ""}
               onChange={e => handleChange("estrategias_metodologicas", e.target.value)}
@@ -96,7 +96,7 @@ export function MetodologiaTab() {
             />
           </div>
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Estrategias metodológicas. Espacios <span className="text-caption font-normal text-muted">(campo histórico, próximo a fusionarse con el de arriba)</span></label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.estrategiasMetodologicasEspaciosTitulo', {defaultValue: 'Estrategias metodológicas. Espacios'})} <span className="text-caption font-normal text-muted">{t('campos.modulo.campoHistoricoFusionAviso', {defaultValue: '(campo histórico, próximo a fusionarse con el de arriba)'})}</span></label>
             <textarea
               value={config_contexto.metodologia || ""}
               onChange={e => handleChange("metodologia", e.target.value)}
@@ -104,7 +104,7 @@ export function MetodologiaTab() {
             />
           </div>
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Metodología general (ej. ABR / ABP) <span className="text-caption font-normal text-muted">(campo histórico)</span></label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.metodologiaGeneralTitulo', {defaultValue: 'Metodología general (ej. ABR / ABP)'})} <span className="text-caption font-normal text-muted">{t('campos.modulo.campoHistoricoAviso', {defaultValue: '(campo histórico)'})}</span></label>
             <textarea
               value={config_aula.Metodología || ""}
               onChange={e => handleAulaChange("Metodología", e.target.value)}
@@ -113,8 +113,8 @@ export function MetodologiaTab() {
           </div>
 
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Anotaciones libres de metodología</label>
-            <p className="text-caption text-muted mb-2">Párrafo personalizado que se añadirá al final del apartado de metodologías generadas automáticamente.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.anotacionesMetodologiaTitulo', {defaultValue: 'Anotaciones libres de metodología'})}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.anotacionesMetodologiaDesc', {defaultValue: 'Párrafo personalizado que se añadirá al final del apartado de metodologías generadas automáticamente.'})}</p>
             <textarea
               value={moduleData?.texto_metodologia_libre || ""}
               onChange={e => updateModuleData("texto_metodologia_libre", e.target.value)}
@@ -124,8 +124,8 @@ export function MetodologiaTab() {
           </div>
 
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Plan de aplicación de los desdobles</label>
-            <p className="text-caption text-muted mb-2">Justificación y organización si el módulo tiene desdobles.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.planDesdoblesTitulo', {defaultValue: 'Plan de aplicación de los desdobles'})}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.planDesdoblesDesc', {defaultValue: 'Justificación y organización si el módulo tiene desdobles.'})}</p>
             <textarea
               value={config_contexto["plan_desdobles"] || config_contexto["D3_agrupamientos"] || ""}
               onChange={e => handleChange("plan_desdobles", e.target.value)}
@@ -134,8 +134,8 @@ export function MetodologiaTab() {
             />
           </div>
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Aprendizaje colaborativo basado en proyectos y/o retos (ABP/ABR)</label>
-            <p className="text-caption text-muted mb-2">Descripción de la aplicación de metodologías activas.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.aprendizajeColaborativoTitulo', {defaultValue: 'Aprendizaje colaborativo basado en proyectos y/o retos (ABP/ABR)'})}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.aprendizajeColaborativoDesc', {defaultValue: 'Descripción de la aplicación de metodologías activas.'})}</p>
             <textarea
               value={config_contexto["aprendizaje_colaborativo"] || ""}
               onChange={e => handleChange("aprendizaje_colaborativo", e.target.value)}
@@ -144,8 +144,8 @@ export function MetodologiaTab() {
             />
           </div>
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Coordinación con otros módulos y su profesorado</label>
-            <p className="text-caption text-muted mb-2">Cómo se coordina este módulo con otros módulos/profesorado del ciclo (reuniones de equipo docente, dependencias entre módulos, sustitución de tareas en caso de ausencia, etc.).</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.coordinacionModulosTitulo', {defaultValue: 'Coordinación con otros módulos y su profesorado'})}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.coordinacionModulosDesc', {defaultValue: 'Cómo se coordina este módulo con otros módulos/profesorado del ciclo (reuniones de equipo docente, dependencias entre módulos, sustitución de tareas en caso de ausencia, etc.).'})}</p>
             <textarea
               value={moduleData?.textos_pd_metodologia_labor_coordinada || ""}
               onChange={e => updateModuleData("textos_pd_metodologia_labor_coordinada", e.target.value)}

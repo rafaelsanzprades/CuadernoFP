@@ -123,15 +123,15 @@ export function OtrosElementosTab() {
       {/* Competencias y Transversales */}
       <div className="glass-card p-6 border-t-4 border-t-cyan-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1 text-cyan-400" /></span> Transversales y Competencias
+          <span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1 text-cyan-400" /></span> {t('campos.modulo.transversalesCompetenciasTitulo', {defaultValue: 'Transversales y Competencias'})}
         </h2>
         <div className="space-y-6">
-          
+
           <div>
             <label className="text-body font-semibold text-foreground mb-2 block flex items-center gap-2">
-              <Cpu className="w-4 h-4 text-muted" /> Competencias Clave
+              <Cpu className="w-4 h-4 text-muted" /> {t('campos.modulo.competenciasClaveTitulo', {defaultValue: 'Competencias Clave'})}
             </label>
-            <p className="text-caption text-muted mb-3">Selecciona las competencias clave (LOMLOE/LO 3/2022) que se desarrollarán en este módulo.</p>
+            <p className="text-caption text-muted mb-3">{t('campos.modulo.competenciasClaveDesc', {defaultValue: 'Selecciona las competencias clave (LOMLOE/LO 3/2022) que se desarrollarán en este módulo.'})}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               {COMPETENCIAS_CLAVE.map((comp) => {
                 const isSelected = (config_contexto.competencias_clave || []).includes(comp.id);
@@ -152,9 +152,9 @@ export function OtrosElementosTab() {
 
           <div>
             <label className="text-body font-semibold text-foreground mb-1 block flex items-center gap-2">
-              <Leaf className="w-4 h-4 text-muted" /> Elementos transversales
+              <Leaf className="w-4 h-4 text-muted" /> {t('campos.modulo.elementosTransversalesTitulo', {defaultValue: 'Elementos transversales'})}
             </label>
-            <p className="text-caption text-muted mb-2">Selecciona los elementos que integrarás en el módulo.</p>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.elementosTransversalesDesc', {defaultValue: 'Selecciona los elementos que integrarás en el módulo.'})}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">
               {TRANSVERSALES.map((trans) => {
                 const isSelected = elementos_transversales.includes(trans.id);
@@ -184,17 +184,17 @@ export function OtrosElementosTab() {
       {/* Competencias digitales: DigComp / DigCompEdu */}
       <div className="glass-card p-6 border-t-4 border-t-sky-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Smartphone className="w-[1.2em] h-[1.2em] mr-1 text-sky-400" /></span> Competencias digitales (DigComp / DigCompEdu)
+          <span className="inline-flex"><Smartphone className="w-[1.2em] h-[1.2em] mr-1 text-sky-400" /></span> {t('campos.modulo.competenciasDigitalesTitulo', {defaultValue: 'Competencias digitales (DigComp / DigCompEdu)'})}
         </h2>
         <div className="space-y-6">
 
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">DigComp — competencias digitales del alumnado</label>
-            <p className="text-caption text-muted mb-3">Marco Europeo de Competencias Digitales para la Ciudadanía. Selecciona las competencias (de las 21, en 5 áreas) que se trabajan en este módulo.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.digcompAlumnadoTitulo', {defaultValue: 'DigComp — competencias digitales del alumnado'})}</label>
+            <p className="text-caption text-muted mb-3">{t('campos.modulo.digcompAlumnadoDesc', {defaultValue: 'Marco Europeo de Competencias Digitales para la Ciudadanía. Selecciona las competencias (de las 21, en 5 áreas) que se trabajan en este módulo.'})}</p>
             <div className="space-y-4">
               {DIGCOMP_AREAS.map((area) => (
                 <div key={area.area}>
-                  <p className="text-caption font-semibold text-muted mb-2">Área {area.area} · {area.label}</p>
+                  <p className="text-caption font-semibold text-muted mb-2">{t('campos.modulo.digcompAreaPrefijo', {defaultValue: 'Área'})} {area.area} · {area.label}</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     {area.items.map((comp) => {
                       const isSelected = digcomp_competencias.includes(comp.id);
@@ -217,8 +217,8 @@ export function OtrosElementosTab() {
           </div>
 
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">DigCompEdu — competencia digital docente</label>
-            <p className="text-caption text-muted mb-3">Marco Europeo de Competencia Digital para Educadores. Selecciona las áreas que aplicarás al impartir este módulo.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.digcompeduDocenteTitulo', {defaultValue: 'DigCompEdu — competencia digital docente'})}</label>
+            <p className="text-caption text-muted mb-3">{t('campos.modulo.digcompeduDocenteDesc', {defaultValue: 'Marco Europeo de Competencia Digital para Educadores. Selecciona las áreas que aplicarás al impartir este módulo.'})}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">
               {DIGCOMPEDU_AREAS.map((area) => {
                 const isSelected = digcompedu_areas.includes(area.id);
@@ -248,21 +248,21 @@ export function OtrosElementosTab() {
       {/* Desarrollo Curricular: ECP, CPE, OG */}
       <div className="glass-card p-6 border-t-4 border-t-indigo-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1 text-indigo-400" /></span> Estándares y Objetivos (Currículo)
+          <span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1 text-indigo-400" /></span> {t('campos.modulo.estandaresObjetivosTitulo', {defaultValue: 'Estándares y Objetivos (Currículo)'})}
         </h2>
         <div className="space-y-4">
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Estándares de competencia profesional (ECP)</label>
-            <p className="text-caption text-muted mb-2">Asociados al módulo profesional según el Real Decreto del título.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.ecpTitulo', {defaultValue: 'Estándares de competencia profesional (ECP)'})}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.ecpDesc', {defaultValue: 'Asociados al módulo profesional según el Real Decreto del título.'})}</p>
             <textarea
               value={config_contexto["ecp"] || ""}
               onChange={e => handleChange("ecp", e.target.value)}
-              placeholder="Ej: UC0001_3: Gestionar..."
+              placeholder={t('placeholders.modulo.ecpEjemplo', {defaultValue: 'Ej: UC0001_3: Gestionar...'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
             />
           </div>
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Competencias profesionales y para la empleabilidad (CPE)</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.cpeTitulo', {defaultValue: 'Competencias profesionales y para la empleabilidad (CPE)'})}</label>
             <textarea
               value={config_contexto["cpe"] || ""}
               onChange={e => handleChange("cpe", e.target.value)}
@@ -271,7 +271,7 @@ export function OtrosElementosTab() {
             />
           </div>
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Objetivos generales (OG)</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.ogTitulo', {defaultValue: 'Objetivos generales (OG)'})}</label>
             <textarea
               value={config_contexto["og"] || ""}
               onChange={e => handleChange("og", e.target.value)}

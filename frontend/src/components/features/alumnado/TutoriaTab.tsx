@@ -60,7 +60,7 @@ export function TutoriaTab() {
       <Card className="w-64 p-4 flex flex-col border-r border-[var(--glass-border)] bg-foreground/5 overflow-hidden">
         <h3 className="font-bold mb-4 text-foreground flex items-center gap-2">
           <ClipboardList className="w-5 h-5 text-accent" />
-          Alumnado
+          {t('campos.alumnado.panelAlumnadoTitulo', {defaultValue: 'Alumnado'})}
         </h3>
         <div className="overflow-y-auto flex-1 space-y-1 pr-2 scrollbar-thin">
           {df_evaluable.map((al: any) => {
@@ -93,7 +93,7 @@ export function TutoriaTab() {
           <>
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-heading font-bold text-foreground">
-                Registro de tutoría: <span>{df_al.find((a:any) => a.ID === selectedAlId)?.Nombre} {df_al.find((a:any) => a.ID === selectedAlId)?.Apellidos}</span>
+                {t('campos.alumnado.registroTutoriaTitulo', {defaultValue: 'Registro de tutoría:'})} <span>{df_al.find((a:any) => a.ID === selectedAlId)?.Nombre} {df_al.find((a:any) => a.ID === selectedAlId)?.Apellidos}</span>
               </h2>
               <Button onClick={handleAddTutoria} variant="primary" className="gap-2">
                 <Plus className="w-4 h-4" /> {t('botones.alumnado.anadirRegistro', {defaultValue: 'Añadir registro'})}
@@ -104,7 +104,7 @@ export function TutoriaTab() {
               {getTutorias(selectedAlId).length === 0 ? (
                 <div className="text-center py-12 text-muted flex flex-col items-center justify-center h-full">
                   <ClipboardList className="w-16 h-16 opacity-20 mb-4" />
-                  <p>No hay registros de tutoría para este estudiante.</p>
+                  <p>{t('campos.alumnado.sinRegistrosTutoria', {defaultValue: 'No hay registros de tutoría para este estudiante.'})}</p>
                   <p className="text-body mt-2 opacity-70">{t('botones.alumnado.pulsaAnadirRegistro', {label: t('botones.alumnado.anadirRegistro', {defaultValue: 'Añadir registro'}), defaultValue: 'Pulsa "{{label}}" para comenzar.'})}</p>
                 </div>
               ) : (
@@ -120,7 +120,7 @@ export function TutoriaTab() {
                     
                     <div className="flex flex-wrap gap-4 mb-4 pr-8">
                       <div className="flex-1 min-w-[150px]">
-                        <label className="block text-caption text-muted-foreground font-bold mb-1">Fecha</label>
+                        <label className="block text-caption text-muted-foreground font-bold mb-1">{t('campos.alumnado.labelFecha', {defaultValue: 'Fecha'})}</label>
                         <input 
                           type="date" 
                           value={tut.fecha || ""} 
@@ -129,7 +129,7 @@ export function TutoriaTab() {
                         />
                       </div>
                       <div className="flex-1 min-w-[150px]">
-                        <label className="block text-caption text-muted-foreground font-bold mb-1">Ámbito</label>
+                        <label className="block text-caption text-muted-foreground font-bold mb-1">{t('campos.alumnado.labelAmbito', {defaultValue: 'Ámbito'})}</label>
                         <select 
                           value={tut.ambito || "Alumno/a"} 
                           onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "ambito", e.target.value)}
@@ -142,7 +142,7 @@ export function TutoriaTab() {
                         </select>
                       </div>
                       <div className="flex-1 min-w-[150px]">
-                        <label className="block text-caption text-muted-foreground font-bold mb-1">Canal</label>
+                        <label className="block text-caption text-muted-foreground font-bold mb-1">{t('campos.alumnado.labelCanal', {defaultValue: 'Canal'})}</label>
                         <select 
                           value={tut.canal || "Presencial"} 
                           onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "canal", e.target.value)}
@@ -159,7 +159,7 @@ export function TutoriaTab() {
 
                     <div className="space-y-3">
                       <div>
-                        <label className="block text-caption text-muted-foreground font-bold mb-1">Tema tratado / Desarrollo</label>
+                        <label className="block text-caption text-muted-foreground font-bold mb-1">{t('campos.alumnado.labelTemaTratado', {defaultValue: 'Tema tratado / Desarrollo'})}</label>
                         <textarea 
                           value={tut.tema || ""}
                           onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "tema", e.target.value)}
@@ -168,7 +168,7 @@ export function TutoriaTab() {
                         />
                       </div>
                       <div>
-                        <label className="block text-caption text-success font-bold mb-1">Acuerdos / Compromisos</label>
+                        <label className="block text-caption text-success font-bold mb-1">{t('campos.alumnado.labelAcuerdos', {defaultValue: 'Acuerdos / Compromisos'})}</label>
                         <textarea 
                           value={tut.acuerdos || ""}
                           onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "acuerdos", e.target.value)}
@@ -184,7 +184,7 @@ export function TutoriaTab() {
           </>
         ) : (
           <div className="flex-1 flex items-center justify-center text-muted">
-            Selecciona un alumno en el panel lateral para ver sus tutorías.
+            {t('campos.alumnado.seleccionaAlumnoTutorias', {defaultValue: 'Selecciona un alumno en el panel lateral para ver sus tutorías.'})}
           </div>
         )}
       </Card>

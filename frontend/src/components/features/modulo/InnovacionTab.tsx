@@ -47,12 +47,12 @@ export function InnovacionTab() {
       {/* Innovación y Proyectos */}
       <div className="glass-card p-6 border-t-4 border-t-amber-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Rocket className="w-[1.2em] h-[1.2em] mr-1 text-amber-400" /></span> Innovación e Intermodularidad
+          <span className="inline-flex"><Rocket className="w-[1.2em] h-[1.2em] mr-1 text-amber-400" /></span> {t('campos.modulo.tituloInnovacionIntermodularidad', {defaultValue: 'Innovación e Intermodularidad'})}
         </h2>
         <div className="space-y-6">
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Registro de innovación</label>
-            <p className="text-caption text-muted mb-2">Proyectos de emprendimiento, metodologías activas y proyectos de equidad/DUA.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.registroInnovacionLabel', {defaultValue: 'Registro de innovación'})}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.registroInnovacionDesc', {defaultValue: 'Proyectos de emprendimiento, metodologías activas y proyectos de equidad/DUA.'})}</p>
             <textarea
               value={config_contexto["registro_innovacion"] || ""}
               onChange={e => handleChange("registro_innovacion", e.target.value)}
@@ -62,8 +62,8 @@ export function InnovacionTab() {
           </div>
 
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">IPE y proyecto intermodular continuo</label>
-            <p className="text-caption text-muted mb-2">Vinculación con el Itinerario Personal para la Empleabilidad o participación en el Proyecto Intermodular (D 91/2024).</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.ipeIntermodularLabel', {defaultValue: 'IPE y proyecto intermodular continuo'})}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.ipeIntermodularDesc', {defaultValue: 'Vinculación con el Itinerario Personal para la Empleabilidad o participación en el Proyecto Intermodular (D 91/2024).'})}</p>
             <textarea
               value={config_contexto["ipe_intermodular"] || ""}
               onChange={e => handleChange("ipe_intermodular", e.target.value)}
@@ -73,8 +73,8 @@ export function InnovacionTab() {
           </div>
 
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">H1. Actividades complementarias</label>
-            <p className="text-caption text-muted mb-2">En horario lectivo, ligadas al currículo y evaluables — forman parte de la programación didáctica.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.actividadesComplementariasLabel', {defaultValue: 'H1. Actividades complementarias'})}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.actividadesComplementariasDesc', {defaultValue: 'En horario lectivo, ligadas al currículo y evaluables — forman parte de la programación didáctica.'})}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">
               {COMPLEMENTARIAS.map((act) => {
                 const isSelected = actividades_complementarias.includes(act.id);
@@ -100,8 +100,8 @@ export function InnovacionTab() {
           </div>
 
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">H2. Actividades extraescolares</label>
-            <p className="text-caption text-muted mb-2">Fuera de horario lectivo, voluntarias y nunca evaluables — no forman parte de la programación didáctica, van en la PGA del centro. Se anotan aquí solo como referencia.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.actividadesExtraescolaresLabel', {defaultValue: 'H2. Actividades extraescolares'})}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.actividadesExtraescolaresDesc', {defaultValue: 'Fuera de horario lectivo, voluntarias y nunca evaluables — no forman parte de la programación didáctica, van en la PGA del centro. Se anotan aquí solo como referencia.'})}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">
               {EXTRAESCOLARES.map((ext) => {
                 const isSelected = actividades_extraescolares.includes(ext.id);

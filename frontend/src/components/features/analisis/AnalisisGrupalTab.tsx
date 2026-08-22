@@ -36,8 +36,8 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
   if (df_eval_activos.length === 0) {
     return (
       <Card className="p-8 text-center border-l-4 border-l-yellow-500 mt-6">
-        <h2 className="text-subheading font-bold text-warning mb-2">Faltan datos</h2>
-        <p className="text-foreground/80">No hay datos de evaluación para alumnado activos. Ve a Evaluación competencial primero.</p>
+        <h2 className="text-subheading font-bold text-warning mb-2">{t('campos.analisis.faltanDatos', {defaultValue: 'Faltan datos'})}</h2>
+        <p className="text-foreground/80">{t('campos.analisis.noHayDatosEvaluacion', {defaultValue: 'No hay datos de evaluación para alumnado activos. Ve a Evaluación competencial primero.'})}</p>
       </Card>
     );
   }
@@ -72,10 +72,10 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
   const avg3T = df_eval_activos.reduce((acc: number, e: any) => acc + (Number(e['Nota_3T']) || 0), 0) / (total || 1);
 
   const trendData = [
-    { name: "1º Trim", Media: Number(avg1T.toFixed(2)) },
-    { name: "2º Trim", Media: Number(avg2T.toFixed(2)) },
-    { name: "3º Trim", Media: Number(avg3T.toFixed(2)) },
-    { name: "Final", Media: Number(media_grupal.toFixed(2)) },
+    { name: t('campos.analisis.trim1', {defaultValue: '1º Trim'}), Media: Number(avg1T.toFixed(2)) },
+    { name: t('campos.analisis.trim2', {defaultValue: '2º Trim'}), Media: Number(avg2T.toFixed(2)) },
+    { name: t('campos.analisis.trim3', {defaultValue: '3º Trim'}), Media: Number(avg3T.toFixed(2)) },
+    { name: t('campos.analisis.final', {defaultValue: 'Final'}), Media: Number(media_grupal.toFixed(2)) },
   ];
 
   // Radar chart data
@@ -95,10 +95,10 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
     .map((e: any) => {
       const al = activeAlumnado.find((a: any) => a.ID === e.ID);
       const nota = Number(e.Nota_Final_FO) || 0;
-      let riskLevel = "🟡 Moderado";
+      let riskLevel = t('campos.analisis.riesgoModerado', {defaultValue: '🟡 Moderado'});
       let riskColor = "text-warning";
-      if (nota < 3) { riskLevel = "Muy Alto"; riskColor = "text-danger"; }
-      else if (nota < 4) { riskLevel = "🟠 Alto"; riskColor = "text-warning"; }
+      if (nota < 3) { riskLevel = t('campos.analisis.riesgoMuyAlto', {defaultValue: 'Muy Alto'}); riskColor = "text-danger"; }
+      else if (nota < 4) { riskLevel = t('campos.analisis.riesgoAlto', {defaultValue: '🟠 Alto'}); riskColor = "text-warning"; }
       
       return {
         id: e.ID,
@@ -129,24 +129,24 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
   return (
     <div className="space-y-8 animate-in slide-in-from-left-4 duration-500">
       <h2 className="text-heading font-extrabold text-foreground tracking-tight flex items-center gap-3">
-        <span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> Resumen datos grupales
+        <span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.analisis.resumenDatosGrupales', {defaultValue: 'Resumen datos grupales'})}
       </h2>
 
       <section className="grid grid-cols-4 gap-6">
         <Card className="p-6 border-l-4 border-l-blue-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
-          <span className="text-muted text-body font-semibold tracking-wider mb-2">Media grupal</span>
+          <span className="text-muted text-body font-semibold tracking-wider mb-2">{t('campos.analisis.mediaGrupal', {defaultValue: 'Media grupal'})}</span>
           <span className="text-heading font-black text-info">{media_grupal.toFixed(2)}</span>
         </Card>
         <Card className="p-6 border-l-4 border-l-emerald-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
-          <span className="text-muted text-body font-semibold tracking-wider mb-2">% Aprobados</span>
+          <span className="text-muted text-body font-semibold tracking-wider mb-2">{t('campos.analisis.porcentajeAprobados', {defaultValue: '% Aprobados'})}</span>
           <span className="text-heading font-black text-success">{tasa_aprobado.toFixed(1)}%</span>
         </Card>
         <Card className="p-6 border-l-4 border-l-purple-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
-          <span className="text-muted text-body font-semibold tracking-wider mb-2">Nº Alumnado</span>
+          <span className="text-muted text-body font-semibold tracking-wider mb-2">{t('campos.analisis.numeroAlumnado', {defaultValue: 'Nº Alumnado'})}</span>
           <span className="text-heading font-black text-info">{total}</span>
         </Card>
         <Card className="p-6 border-l-4 border-l-pink-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
-          <span className="text-muted text-body font-semibold tracking-wider mb-2">Cohesión (Desv.)</span>
+          <span className="text-muted text-body font-semibold tracking-wider mb-2">{t('campos.analisis.cohesionDesviacion', {defaultValue: 'Cohesión (Desv.)'})}</span>
           <span className="text-heading font-black text-danger">{desv_tipica.toFixed(2)}</span>
         </Card>
       </section>
@@ -154,7 +154,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
       <section className="grid grid-cols-2 gap-6">
         <Card className="p-6">
           <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-6">
-            <span className="inline-flex"><TrendingDown className="w-[1.2em] h-[1.2em] mr-1" /></span> Distribución de Calificaciones
+            <span className="inline-flex"><TrendingDown className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.analisis.distribucionCalificaciones', {defaultValue: 'Distribución de Calificaciones'})}
           </h2>
           <div className="h-72 w-full">
             <ResponsiveContainer width="100%" height="100%">
@@ -163,7 +163,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
                 <XAxis dataKey="rango" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
                 <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} allowDecimals={false} />
                 <RechartsTooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(255,255,255,0.05)' }} />
-                <Bar dataKey="alumnado" name="Alumnado" radius={[4, 4, 0, 0]}>
+                <Bar dataKey="alumnado" name={t('campos.analisis.alumnadoLegend', {defaultValue: 'Alumnado'})} radius={[4, 4, 0, 0]}>
                   {distributionData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={index >= 5 ? '#10b981' : '#ef4444'} />
                   ))}
@@ -175,7 +175,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
 
         <Card className="p-6">
           <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-6">
-            <span className="inline-flex"><TrendingUp className="w-[1.2em] h-[1.2em] mr-1" /></span> Evolución por Trimestres
+            <span className="inline-flex"><TrendingUp className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.analisis.evolucionTrimestres', {defaultValue: 'Evolución por Trimestres'})}
           </h2>
           <div className="h-72 w-full">
             <ResponsiveContainer width="100%" height="100%">
@@ -190,7 +190,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
                 <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
                 <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} domain={[0, 10]} />
                 <RechartsTooltip content={<CustomTooltip />} />
-                <Area type="monotone" dataKey="Media" stroke="#3b82f6" strokeWidth={3} fillOpacity={1} fill="url(#colorMedia)" name="Media" />
+                <Area type="monotone" dataKey="Media" stroke="#3b82f6" strokeWidth={3} fillOpacity={1} fill="url(#colorMedia)" name={t('campos.analisis.mediaLegend', {defaultValue: 'Media'})} />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -200,7 +200,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
       {raData.length > 0 && (
         <Card className="p-6">
           <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-6">
-            <span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Rendimiento por RA
+            <span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.analisis.rendimientoPorRA', {defaultValue: 'Rendimiento por RA'})}
           </h2>
           <div className="space-y-4">
             {raData.map((ra: any) => {
@@ -262,12 +262,12 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
       )}
 
       <Card className="p-6">
-        <h2 className="text-subheading font-bold mb-6"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguimiento de riesgo académico</h2>
+        <h2 className="text-subheading font-bold mb-6"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.analisis.seguimientoRiesgo', {defaultValue: 'Seguimiento de riesgo académico'})}</h2>
         {risks.length > 0 ? (
           <>
             <div className="bg-danger/10 border border-danger/30 text-danger px-4 py-3 rounded-lg mb-4 text-body font-semibold flex items-center gap-2">
               <span className="text-subheading"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
-              Se han detectado {risks.length} alumnado(s) con rendimiento insuficiente.
+              {t('campos.analisis.alumnadoRiesgoDetectado', {count: risks.length, defaultValue: `Se han detectado ${risks.length} alumnado(s) con rendimiento insuficiente.`})}
             </div>
             <table className="w-full text-left text-body whitespace-nowrap">
               <thead>
@@ -293,8 +293,8 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
         ) : (
           <div className="bg-success/10 border border-success/30 text-success px-4 py-8 rounded-lg flex flex-col items-center justify-center gap-3 text-center">
             <span className="text-heading"><span className="inline-flex"><PartyPopper className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
-            <span className="font-bold text-subheading">¡Excelente rendimiento!</span>
-            <span className="text-body opacity-80">No hay alumnado en riesgo según la proyección actual.</span>
+            <span className="font-bold text-subheading">{t('campos.analisis.excelenteRendimiento', {defaultValue: '¡Excelente rendimiento!'})}</span>
+            <span className="text-body opacity-80">{t('campos.analisis.noHayAlumnadoRiesgo', {defaultValue: 'No hay alumnado en riesgo según la proyección actual.'})}</span>
           </div>
         )}
       </Card>

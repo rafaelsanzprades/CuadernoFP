@@ -48,10 +48,9 @@ export function PropuestasTab() {
         <div className="flex items-start gap-4 mb-6">
           <CheckCircle2 className="w-6 h-6 text-success mt-1 shrink-0" />
           <div>
-            <h3 className="text-subheading font-bold text-foreground">Propuestas de Mejora (PDCA)</h3>
+            <h3 className="text-subheading font-bold text-foreground">{t('campos.modulo.tituloPropuestasMejora', {defaultValue: 'Propuestas de Mejora (PDCA)'})}</h3>
             <p className="text-muted text-body mt-1">
-              Puntos fuertes y áreas de mejora, reflexionados por separado en cada dimensión
-              (Planificación / Desarrollo / Resultados) para planificar las acciones del próximo curso.
+              {t('campos.modulo.propuestasMejoraDesc', {defaultValue: 'Puntos fuertes y áreas de mejora, reflexionados por separado en cada dimensión (Planificación / Desarrollo / Resultados) para planificar las acciones del próximo curso.'})}
             </p>
           </div>
         </div>
@@ -65,7 +64,7 @@ export function PropuestasTab() {
               </h4>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-body font-medium mb-1">Puntos fuertes (lo que ha funcionado bien)</label>
+                  <label className="block text-body font-medium mb-1">{t('campos.modulo.puntosFuertesLabel', {defaultValue: 'Puntos fuertes (lo que ha funcionado bien)'})}</label>
                   <textarea
                     value={eqavet[`puntos_fuertes_${cat.key}`] || ""}
                     onChange={(e) => handleTextChange(`puntos_fuertes_${cat.key}`, e.target.value)}
@@ -74,7 +73,7 @@ export function PropuestasTab() {
                   />
                 </div>
                 <div>
-                  <label className="block text-body font-medium mb-1">Áreas de mejora y acciones para el próximo curso</label>
+                  <label className="block text-body font-medium mb-1">{t('campos.modulo.areasMejoraLabel', {defaultValue: 'Áreas de mejora y acciones para el próximo curso'})}</label>
                   <textarea
                     value={eqavet[`areas_mejora_${cat.key}`] || ""}
                     onChange={(e) => handleTextChange(`areas_mejora_${cat.key}`, e.target.value)}

@@ -96,13 +96,13 @@ export function DiversidadTab() {
       {/* Marco de Inclusión */}
       <div className="glass-card p-6 border-t-4 border-t-purple-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-purple-400" /></span> Marco de Inclusión (D 91/2024 Art. 29)
+          <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-purple-400" /></span> {t('campos.modulo.marcoInclusionTitulo', {defaultValue: 'Marco de Inclusión (D 91/2024 Art. 29)'})}
         </h2>
         <div className="space-y-6">
 
           <div>
-            <label className="text-body font-semibold text-foreground mb-2 block">Medidas de inclusión (selección múltiple)</label>
-            <p className="text-caption text-muted mb-3">Selecciona las medidas de respuesta educativa que aplicarás de forma general en este módulo.</p>
+            <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.modulo.medidasInclusionTitulo', {defaultValue: 'Medidas de inclusión (selección múltiple)'})}</label>
+            <p className="text-caption text-muted mb-3">{t('campos.modulo.medidasInclusionDesc', {defaultValue: 'Selecciona las medidas de respuesta educativa que aplicarás de forma general en este módulo.'})}</p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {INCLUSION.map((inc) => {
                 const isSelected = medidas_inclusion.includes(inc.id);
@@ -122,7 +122,7 @@ export function DiversidadTab() {
           </div>
 
           <div>
-            <label className="text-body font-semibold text-foreground mb-2 block">Anotaciones libres sobre inclusión</label>
+            <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.modulo.anotacionesInclusionTitulo', {defaultValue: 'Anotaciones libres sobre inclusión'})}</label>
             <textarea
               value={moduleData?.texto_inclusion_libre || ""}
               onChange={e => updateModuleData("texto_inclusion_libre", e.target.value)}
@@ -140,8 +140,8 @@ export function DiversidadTab() {
               onChange={(e) => handleChange("adaptaciones_no_significativas", e.target.checked)}
             />
             <div>
-              <p className="font-semibold text-body">Adaptaciones curriculares no significativas</p>
-              <p className="text-caption text-muted">Ajustes metodológicos, organizativos o de acceso que no alteran los RA ni CE esenciales.</p>
+              <p className="font-semibold text-body">{t('campos.modulo.adaptacionesNoSignificativasTitulo', {defaultValue: 'Adaptaciones curriculares no significativas'})}</p>
+              <p className="text-caption text-muted">{t('campos.modulo.adaptacionesNoSignificativasDesc', {defaultValue: 'Ajustes metodológicos, organizativos o de acceso que no alteran los RA ni CE esenciales.'})}</p>
             </div>
           </label>
 
@@ -153,8 +153,8 @@ export function DiversidadTab() {
               onChange={(e) => handleChange("medidas_flexibilizacion", e.target.checked)}
             />
             <div>
-              <p className="font-semibold text-body">Medidas de flexibilización</p>
-              <p className="text-caption text-muted">Alternativas metodológicas en enseñanza y evaluación que no minorarán las calificaciones.</p>
+              <p className="font-semibold text-body">{t('campos.modulo.medidasFlexibilizacionTitulo', {defaultValue: 'Medidas de flexibilización'})}</p>
+              <p className="text-caption text-muted">{t('campos.modulo.medidasFlexibilizacionDesc', {defaultValue: 'Alternativas metodológicas en enseñanza y evaluación que no minorarán las calificaciones.'})}</p>
             </div>
           </label>
           </div>
@@ -164,11 +164,11 @@ export function DiversidadTab() {
       {/* F1. Atención a la diversidad */}
       <div className="glass-card p-6 border-t-4 border-t-violet-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-violet-400" /></span> F1. Atención a la diversidad
+          <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-violet-400" /></span> {t('campos.modulo.f1AtencionDiversidadTitulo', {defaultValue: 'F1. Atención a la diversidad'})}
         </h2>
         <div className="space-y-4">
           <div>
-            <p className="text-caption text-muted mb-2">Estrategias para adaptar la enseñanza a las características del alumnado.</p>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.f1AtencionDiversidadDesc', {defaultValue: 'Estrategias para adaptar la enseñanza a las características del alumnado.'})}</p>
             <textarea
               value={config_contexto["F1_diversidad"] || ""}
               onChange={e => handleChange("F1_diversidad", e.target.value)}
@@ -177,7 +177,7 @@ export function DiversidadTab() {
             />
           </div>
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Inclusión — resumen general</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.inclusionResumenTitulo', {defaultValue: 'Inclusión — resumen general'})}</label>
             <textarea
               value={config_contexto.inclusion || ""}
               onChange={e => handleChange("inclusion", e.target.value)}
@@ -185,7 +185,7 @@ export function DiversidadTab() {
             />
           </div>
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Atención a la diversidad (Adaptaciones no significativas)</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.atencionDiversidadAulaTitulo', {defaultValue: 'Atención a la diversidad (Adaptaciones no significativas)'})}</label>
             <textarea
               value={config_aula["Atención a la diversidad"] || ""}
               onChange={e => handleAulaChange("Atención a la diversidad", e.target.value)}
@@ -198,13 +198,13 @@ export function DiversidadTab() {
       {/* Plan de Atención a la Diversidad (DUA) */}
       <div className="glass-card p-6 border-t-4 border-t-emerald-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Puzzle className="w-[1.2em] h-[1.2em] mr-1 text-emerald-400" /></span> Plan de Atención a la Diversidad (DUA)
+          <span className="inline-flex"><Puzzle className="w-[1.2em] h-[1.2em] mr-1 text-emerald-400" /></span> {t('campos.modulo.planDuaTitulo', {defaultValue: 'Plan de Atención a la Diversidad (DUA)'})}
         </h2>
         <div className="overflow-x-auto mb-4">
           <table className="w-full text-left text-body border-collapse whitespace-nowrap">
             <thead>
               <tr className="border-b border-[var(--glass-border)] text-muted">
-                <th className="p-2 w-16">Id</th>
+                <th className="p-2 w-16">{t('tablas.modulo.id', {defaultValue: 'Id'})}</th>
                 <th className="p-2 w-48">{t('tablas.modulo.alumnadoAula', {defaultValue: 'Alumnado y aula'})}</th>
                 <th className="p-2 w-48">{t('tablas.modulo.barreraDetectada', {defaultValue: 'Barrera detectada'})}</th>
                 <th className="p-2 min-w-[200px]">{t('tablas.modulo.medidaMetodologica', {defaultValue: 'Medida metodológica'})}</th>
@@ -249,19 +249,19 @@ export function DiversidadTab() {
       <div className="glass-card p-6 border-t-4 border-t-pink-500">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-            <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1 text-pink-400" /></span> Panel de ACNEAE
+            <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1 text-pink-400" /></span> {t('campos.modulo.panelAcneaeTitulo', {defaultValue: 'Panel de ACNEAE'})}
           </h2>
           <Button size="sm" variant="secondary" onClick={addAcneae} className="gap-2">
             <Plus className="w-4 h-4" /> {t('botones.modulo.anadirAlumno', {defaultValue: 'Añadir alumno'})}
           </Button>
         </div>
         <p className="text-caption text-muted mb-4">
-          Registro de Alumnado con Necesidad Específica de Apoyo Educativo y sus adaptaciones asociadas.
+          {t('campos.modulo.panelAcneaeDesc', {defaultValue: 'Registro de Alumnado con Necesidad Específica de Apoyo Educativo y sus adaptaciones asociadas.'})}
         </p>
 
         {acneae.length === 0 ? (
           <div className="text-center py-8 bg-white/5 rounded-lg border border-white/10">
-            <p className="text-muted text-body">No hay alumnos ACNEAE registrados en este módulo.</p>
+            <p className="text-muted text-body">{t('campos.modulo.acneaeVacio', {defaultValue: 'No hay alumnos ACNEAE registrados en este módulo.'})}</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -277,7 +277,7 @@ export function DiversidadTab() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 pr-8">
                   <div>
-                    <label className="text-caption font-semibold text-muted block mb-1">Nombre / Identificador</label>
+                    <label className="text-caption font-semibold text-muted block mb-1">{t('campos.modulo.acneaeNombreTitulo', {defaultValue: 'Nombre / Identificador'})}</label>
                     <input 
                       type="text" 
                       value={student.nombre}
@@ -287,7 +287,7 @@ export function DiversidadTab() {
                     />
                   </div>
                   <div>
-                    <label className="text-caption font-semibold text-muted block mb-1">Tipo de Necesidad</label>
+                    <label className="text-caption font-semibold text-muted block mb-1">{t('campos.modulo.acneaeTipoNecesidadTitulo', {defaultValue: 'Tipo de Necesidad'})}</label>
                     <input 
                       type="text" 
                       value={student.tipoNecesidad}
@@ -299,7 +299,7 @@ export function DiversidadTab() {
                 </div>
 
                 <div>
-                  <label className="text-caption font-semibold text-muted block mb-2">Adaptaciones de evaluación y acceso</label>
+                  <label className="text-caption font-semibold text-muted block mb-2">{t('campos.modulo.acneaeAdaptacionesTitulo', {defaultValue: 'Adaptaciones de evaluación y acceso'})}</label>
                   <div className="flex flex-wrap gap-2">
                     {adaptacionesList.map(adapt => {
                       const isSelected = (student.adaptaciones || []).includes(adapt.id);

@@ -170,7 +170,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
               <GraduationCap className="w-5 h-5 text-success" />
             )}
             <h2 className="text-subheading font-bold text-foreground">
-              Nuevo archivo de {fileType === 'programacion' ? 'Programación' : 'Curso'}
+              {t('campos.cloud.nuevoArchivoPrefijo', {defaultValue: 'Nuevo archivo de'})} {fileType === 'programacion' ? t('campos.cloud.tipoProgramacion', {defaultValue: 'Programación'}) : t('campos.cloud.tipoCurso', {defaultValue: 'Curso'})}
             </h2>
           </div>
           <button onClick={onClose} className="p-1 rounded-lg hover:bg-foreground/10 text-muted">
@@ -183,7 +183,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
           {fileType === 'programacion' ? (
             <>
               <p className="text-body text-muted mb-4">
-                Selecciona el módulo para generar una programación vacía con la estructura correcta (RA/CE desde catálogo oficial).
+                {t('campos.cloud.seleccionaModuloDescripcion', {defaultValue: 'Selecciona el módulo para generar una programación vacía con la estructura correcta (RA/CE desde catálogo oficial).'})}
               </p>
               {/* Familia / Título */}
               <div className="grid grid-cols-2 gap-3 mb-4">
@@ -192,7 +192,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
                   onChange={e => { setViewFamilyId(e.target.value); setViewDegreeId(""); setSelectedModule(null); }}
                   className="w-full px-4 py-2.5 rounded-xl bg-foreground/5 border border-[var(--glass-border)] text-foreground focus:outline-none focus:ring-2 focus:ring-info/50"
                 >
-                  <option value="">-- Familia profesional --</option>
+                  <option value="">{t('campos.cloud.familiaProfesionalOption', {defaultValue: '-- Familia profesional --'})}</option>
                   {families.map(f => <option key={f.id} value={f.id}>{f.name}</option>)}
                 </select>
                 <select
@@ -201,7 +201,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
                   disabled={!viewFamilyId}
                   className="w-full px-4 py-2.5 rounded-xl bg-foreground/5 border border-[var(--glass-border)] text-foreground focus:outline-none focus:ring-2 focus:ring-info/50 disabled:opacity-40"
                 >
-                  <option value="">-- Título --</option>
+                  <option value="">{t('campos.cloud.tituloOption', {defaultValue: '-- Título --'})}</option>
                   {viewFamily?.degrees.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
                 </select>
               </div>
@@ -217,11 +217,11 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
               {/* Module list */}
               <div className="space-y-4">
                 {!viewDegreeId && (
-                  <p className="text-center text-muted py-8">Selecciona una familia y un título para ver sus módulos.</p>
+                  <p className="text-center text-muted py-8">{t('campos.cloud.seleccionaFamiliaYTitulo', {defaultValue: 'Selecciona una familia y un título para ver sus módulos.'})}</p>
                 )}
                 {viewDegreeId && modulesLoading && (
                   <p className="text-center text-muted py-8 flex items-center justify-center gap-2">
-                    <Loader2 className="w-4 h-4 animate-spin" /> Cargando módulos del catálogo...
+                    <Loader2 className="w-4 h-4 animate-spin" /> {t('campos.cloud.cargandoModulos', {defaultValue: 'Cargando módulos del catálogo...'})}
                   </p>
                 )}
                 {Object.entries(grouped).map(([groupName, modules]) => (
@@ -251,14 +251,14 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
                   </div>
                 ))}
                 {viewDegreeId && !modulesLoading && Object.keys(grouped).length === 0 && (
-                  <p className="text-center text-muted py-8">No se encontraron módulos con ese criterio.</p>
+                  <p className="text-center text-muted py-8">{t('campos.cloud.noSeEncontraronModulos', {defaultValue: 'No se encontraron módulos con ese criterio.'})}</p>
                 )}
               </div>
             </>
           ) : (
             <>
               <p className="text-body text-muted mb-6">
-                Elige cómo quieres inicializar tu nuevo archivo de curso.
+                {t('campos.cloud.elegirInicializarCurso', {defaultValue: 'Elige cómo quieres inicializar tu nuevo archivo de curso.'})}
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-foreground/5 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col gap-4 text-center group">
@@ -269,7 +269,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
                   
                   <div className="flex gap-2 text-left">
                     <div className="flex-1">
-                      <label className="text-caption text-muted font-medium mb-1 block">Año Académico</label>
+                      <label className="text-caption text-muted font-medium mb-1 block">{t('campos.cloud.anioAcademico', {defaultValue: 'Año Académico'})}</label>
                       <input 
                         type="text" 
                         value={cursoYear} 
@@ -279,7 +279,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
                       />
                     </div>
                     <div className="flex-1">
-                      <label className="text-caption text-muted font-medium mb-1 block">Letra / Grupo</label>
+                      <label className="text-caption text-muted font-medium mb-1 block">{t('campos.cloud.letraGrupo', {defaultValue: 'Letra / Grupo'})}</label>
                       <input 
                         type="text" 
                         value={cursoName} 
@@ -304,11 +304,11 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
                   className="bg-warning/5 border border-warning/20 rounded-xl p-6 text-center hover:bg-warning/10 hover:border-warning/40 transition-all group relative overflow-hidden"
                 >
                   <div className="absolute top-0 right-0 bg-warning text-warning-foreground text-caption font-bold px-2 py-1 rounded-bl-lg">
-                    RECOMENDADO
+                    {t('campos.cloud.recomendado', {defaultValue: 'RECOMENDADO'})}
                   </div>
                   <BookOpen className="w-12 h-12 text-warning/60 mx-auto mb-3 group-hover:text-warning transition-colors" />
                   <p className="text-foreground font-medium group-hover:text-warning transition-colors">{t('botones.archivos.cargarDatosDemo', {defaultValue: 'Cargar datos DEMO'})}</p>
-                  <p className="text-body text-muted mt-2">Genera un curso pre-rellenado con datos de ejemplo para explorar todas las funciones.</p>
+                  <p className="text-body text-muted mt-2">{t('campos.cloud.generaCursoPrerellenado', {defaultValue: 'Genera un curso pre-rellenado con datos de ejemplo para explorar todas las funciones.'})}</p>
                 </button>
               </div>
             </>

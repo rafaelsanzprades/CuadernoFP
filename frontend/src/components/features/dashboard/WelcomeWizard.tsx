@@ -57,17 +57,17 @@ export function WelcomeWizard({ onComplete, fetchModules }: WelcomeWizardProps) 
           
           <div className="text-center mb-10">
             <h2 className="text-heading font-extrabold text-foreground mb-4 flex items-center justify-center gap-3">
-              <span className="text-heading"><span className="inline-flex"><Hand className="w-[1.2em] h-[1.2em] mr-1" /></span></span> ¡Bienvenido a Cuaderno FP!
+              <span className="text-heading"><span className="inline-flex"><Hand className="w-[1.2em] h-[1.2em] mr-1" /></span></span> {t('campos.dashboard.bienvenidaTitulo', {defaultValue: '¡Bienvenido a Cuaderno FP!'})}
             </h2>
             <p className="text-subheading text-muted">
-              Parece que es tu primera vez aquí. Vamos a preparar tu Archivos para que puedas empezar a volar.
+              {t('campos.dashboard.bienvenidaDescripcion', {defaultValue: 'Parece que es tu primera vez aquí. Vamos a preparar tu Archivos para que puedas empezar a volar.'})}
             </p>
           </div>
 
           {step === "LOADING" && (
             <div className="flex flex-col items-center justify-center py-10">
               <div className="animate-spin rounded-full h-12 w-12 border-4 border-accent border-t-transparent mb-4"></div>
-              <p className="text-muted">Preparando tu espacio...</p>
+              <p className="text-muted">{t('campos.dashboard.preparandoEspacio', {defaultValue: 'Preparando tu espacio...'})}</p>
             </div>
           )}
 
@@ -82,7 +82,7 @@ export function WelcomeWizard({ onComplete, fetchModules }: WelcomeWizardProps) 
                   <h3 className="text-subheading font-bold text-foreground">{t('botones.dashboard.probarConDemo', {defaultValue: 'Probar con DEMO'})}</h3>
                 </div>
                 <p className="text-body text-muted">
-                  Carga un Archivos de demostración con datos ficticios para explorar todas las funciones de la aplicación.
+                  {t('campos.dashboard.demoDescripcion', {defaultValue: 'Carga un Archivos de demostración con datos ficticios para explorar todas las funciones de la aplicación.'})}
                 </p>
               </button>
 
@@ -95,7 +95,7 @@ export function WelcomeWizard({ onComplete, fetchModules }: WelcomeWizardProps) 
                   <h3 className="text-subheading font-bold text-foreground">{t('botones.dashboard.crearMisArchivos', {defaultValue: 'Crear mis archivos'})}</h3>
                 </div>
                 <p className="text-body text-muted">
-                  Empieza desde cero creando tu propia programación y curso vacíos para trabajar con tus datos reales.
+                  {t('campos.dashboard.crearDescripcion', {defaultValue: 'Empieza desde cero creando tu propia programación y curso vacíos para trabajar con tus datos reales.'})}
                 </p>
               </button>
             </div>
@@ -104,22 +104,22 @@ export function WelcomeWizard({ onComplete, fetchModules }: WelcomeWizardProps) 
           {step === "CREATE_FORM" && (
             <div className="space-y-6">
               <div>
-                <label className="block text-body font-bold text-foreground mb-2">Nombre de la Programación</label>
+                <label className="block text-body font-bold text-foreground mb-2">{t('campos.dashboard.nombreProgramacion', {defaultValue: 'Nombre de la Programación'})}</label>
                 <Input
                   value={newPdName}
                   onChange={(e) => setNewPdName(e.target.value)}
                   placeholder={t('placeholders.dashboard.ejModulo', {defaultValue: 'Ej: ELE203, 0237-ictve'})}
                 />
-                <p className="text-caption text-muted mt-1">Se creará un archivo vacío con este identificador.</p>
+                <p className="text-caption text-muted mt-1">{t('campos.dashboard.nombreProgramacionAyuda', {defaultValue: 'Se creará un archivo vacío con este identificador.'})}</p>
               </div>
               <div>
-                <label className="block text-body font-bold text-foreground mb-2">Año del Curso</label>
+                <label className="block text-body font-bold text-foreground mb-2">{t('campos.dashboard.anioCurso', {defaultValue: 'Año del Curso'})}</label>
                 <Input
                   value={newCursoName}
                   onChange={(e) => setNewCursoName(e.target.value)}
                   placeholder={t('placeholders.archivos.ejCursoAcademico', {defaultValue: 'ej: 2025-26'})}
                 />
-                <p className="text-caption text-muted mt-1">El curso se asociará a este año académico.</p>
+                <p className="text-caption text-muted mt-1">{t('campos.dashboard.anioCursoAyuda', {defaultValue: 'El curso se asociará a este año académico.'})}</p>
               </div>
               <div className="flex gap-3 pt-2">
                 <Button onClick={() => setStep("CHOICE")} className="flex-1 bg-foreground/5 hover:bg-foreground/10 text-muted border border-[var(--glass-border)]">

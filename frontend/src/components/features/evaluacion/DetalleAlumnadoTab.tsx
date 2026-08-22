@@ -201,9 +201,9 @@ export function DetalleAlumnadoTab() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-subheading font-bold text-foreground flex items-center gap-2">
-            <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Detalle por alumnado
+            <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.evaluacion.detalleAlumnadoTitulo', {defaultValue: 'Detalle por alumnado'})}
           </h2>
-          <p className="text-caption text-muted mt-1">Notas individuales por alumnado, instrumento de evaluación y nivel de adquisición de RA.</p>
+          <p className="text-caption text-muted mt-1">{t('campos.evaluacion.detalleAlumnadoDesc', {defaultValue: 'Notas individuales por alumnado, instrumento de evaluación y nivel de adquisición de RA.'})}</p>
         </div>
         <Button
           variant="secondary"
@@ -277,7 +277,7 @@ export function DetalleAlumnadoTab() {
                       if (!isNaN(v) && v > 0) allVals.push(v);
                     });
                     const data = allVals.map((v, i) => ({ name: i, value: v }));
-                    if (data.length < 2) return <span className="text-caption text-muted italic">Sin datos suficientes para tendencia</span>;
+                    if (data.length < 2) return <span className="text-caption text-muted italic">{t('campos.evaluacion.sinDatosTendencia', {defaultValue: 'Sin datos suficientes para tendencia'})}</span>;
 
                     return (
                       <ResponsiveContainer width="100%" height="100%">
@@ -313,14 +313,14 @@ export function DetalleAlumnadoTab() {
                       <div className="flex flex-col lg:flex-row gap-8">
                         <div className="flex-1">
                           <h3 className="font-bold text-foreground mb-4 flex items-center gap-2">
-                            <span><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Detalle de calificaciones por instrumento
+                            <span><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span></span> {t('campos.evaluacion.detalleCalificacionesInstrumentoTitulo', {defaultValue: 'Detalle de calificaciones por instrumento'})}
                           </h3>
                           <div onClick={(e) => e.stopPropagation()}>
                             <Tabs value={activeStudentTab} onValueChange={(val) => setActiveTabByStudent(prev => ({ ...prev, [al_id]: val }))}>
                               <TabsList className="mb-4 max-w-full">
-                                {["1T", "2T", "3T"].map(t => (
-                                  <TabsTrigger key={t} value={t}>
-                                    {t === "1T" ? "1º trimestre" : t === "2T" ? "2º trimestre" : "3º trimestre"}
+                                {["1T", "2T", "3T"].map(tri => (
+                                  <TabsTrigger key={tri} value={tri}>
+                                    {tri === "1T" ? t('campos.evaluacion.primerTrimestre', {defaultValue: '1º trimestre'}) : tri === "2T" ? t('campos.evaluacion.segundoTrimestre', {defaultValue: '2º trimestre'}) : t('campos.evaluacion.tercerTrimestre', {defaultValue: '3º trimestre'})}
                                   </TabsTrigger>
                                 ))}
                               </TabsList>
@@ -328,7 +328,7 @@ export function DetalleAlumnadoTab() {
                           </div>
                           <div className="space-y-4">
                             {acts_by_tri[activeStudentTab].length === 0 ? (
-                              <div className="text-muted text-body italic">No hay actividades evaluables definidas para este trimestre.</div>
+                              <div className="text-muted text-body italic">{t('campos.evaluacion.sinActividadesTrimestre', {defaultValue: 'No hay actividades evaluables definidas para este trimestre.'})}</div>
                             ) : (
                               acts_by_tri[activeStudentTab].map(act => {
                                 const act_id = act.id_act;
@@ -337,7 +337,7 @@ export function DetalleAlumnadoTab() {
                                   <div key={act_id} className="flex items-center justify-between gap-4">
                                     <label className="text-body text-foreground/85 flex-1 truncate" title={act.desc_act}>
                                       <span className="text-muted font-medium text-caption tracking-wider bg-foreground/5 border border-white/5 px-2 py-0.5 rounded-md mr-2">
-                                        {act.Tipo || "Act"}
+                                        {act.Tipo || t('campos.evaluacion.actividadAbrev', {defaultValue: 'Act'})}
                                       </span>
                                       {act.desc_act || act_id}
                                     </label>
@@ -361,9 +361,9 @@ export function DetalleAlumnadoTab() {
                         {/* Right: Overrides & Official Badge */}
                         <div className="w-full lg:w-72 flex flex-col justify-between">
                           <div>
-                            <h4 className="font-bold text-foreground mb-4">Calificación de acta</h4>
+                            <h4 className="font-bold text-foreground mb-4">{t('campos.evaluacion.calificacionActaTitulo', {defaultValue: 'Calificación de acta'})}</h4>
                             <div className="mb-4">
-                              <label className="text-caption text-muted tracking-wider mb-1.5 block font-bold">Nota final ordinaria — FO (manual / calc)</label>
+                              <label className="text-caption text-muted tracking-wider mb-1.5 block font-bold">{t('campos.evaluacion.notaFinalOrdinariaLabel', {defaultValue: 'Nota final ordinaria — FO (manual / calc)'})}</label>
                               <input
                                 type="number"
                                 min="1" max="10" step="0.1"
@@ -374,7 +374,7 @@ export function DetalleAlumnadoTab() {
                               />
                             </div>
                             <div className="mb-4">
-                              <label className="text-caption text-muted tracking-wider mb-1.5 block font-bold">Nota final extraordinaria — FE (manual)</label>
+                              <label className="text-caption text-muted tracking-wider mb-1.5 block font-bold">{t('campos.evaluacion.notaFinalExtraordinariaLabel', {defaultValue: 'Nota final extraordinaria — FE (manual)'})}</label>
                               <input
                                 type="number"
                                 min="1" max="10" step="0.1"
@@ -397,7 +397,7 @@ export function DetalleAlumnadoTab() {
                       {/* BLOQUE 2: Grado de consecución de los RA por alumnado */}
                       <div className="pt-6 border-t border-[var(--glass-border)] space-y-4">
                         <h3 className="font-bold text-foreground flex items-center gap-2">
-                          <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Consecución de resultados de aprendizaje (RA)
+                          <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> {t('campos.evaluacion.consecucionRaTitulo', {defaultValue: 'Consecución de resultados de aprendizaje (RA)'})}
                         </h3>
                         <div className="space-y-5">
                           {resultados_ra.map((r, idx) => {
@@ -413,10 +413,10 @@ export function DetalleAlumnadoTab() {
                                     <span className="font-extrabold text-foreground">{r.id}</span>
                                     <span className="text-caption text-muted font-semibold">({r.pond.toFixed(1)}%)</span>
                                     {r.nota === null && (
-                                      <span className="text-caption font-semibold px-2 py-0.5 rounded-full bg-muted/10 text-muted border border-muted/30">Sin evaluar</span>
+                                      <span className="text-caption font-semibold px-2 py-0.5 rounded-full bg-muted/10 text-muted border border-muted/30">{t('campos.evaluacion.sinEvaluarBadge', {defaultValue: 'Sin evaluar'})}</span>
                                     )}
                                     {r.topeActivo && (
-                                      <span className="text-caption font-semibold px-2 py-0.5 rounded-full bg-danger/10 text-danger border border-danger/30" title={t('tooltips.evaluacion.topeCompensablesActivo', {defaultValue: 'Nº de CE suspensos supera el máximo compensable de este módulo (Datos → Reglas de redondeo)'})}>Tope compensables activo</span>
+                                      <span className="text-caption font-semibold px-2 py-0.5 rounded-full bg-danger/10 text-danger border border-danger/30" title={t('tooltips.evaluacion.topeCompensablesActivo', {defaultValue: 'Nº de CE suspensos supera el máximo compensable de este módulo (Datos → Reglas de redondeo)'})}>{t('campos.evaluacion.topeCompensablesBadge', {defaultValue: 'Tope compensables activo'})}</span>
                                     )}
                                   </div>
                                   <div className="text-caption text-muted mb-3 line-clamp-1">{r.desc}</div>
@@ -433,15 +433,15 @@ export function DetalleAlumnadoTab() {
 
                                 <div className="w-full md:w-60 bg-foreground/5 border border-white/5 rounded-lg p-2.5 text-caption text-foreground/80 space-y-1 self-stretch flex flex-col justify-center">
                                   <div className="flex justify-between">
-                                    <span className="text-info font-semibold">Evaluado en:</span>
+                                    <span className="text-info font-semibold">{t('campos.evaluacion.evaluadoEnLabel', {defaultValue: 'Evaluado en:'})}</span>
                                     <span>{r.tris.join(", ") || "-"}</span>
                                   </div>
                                   <div className="flex justify-between">
-                                    <span className="text-warning font-semibold">UDs:</span>
+                                    <span className="text-warning font-semibold">{t('campos.evaluacion.udsLabel', {defaultValue: 'UDs:'})}</span>
                                     <span className="truncate max-w-[120px]" title={r.uds.join(", ")}>{r.uds.join(", ") || "-"}</span>
                                   </div>
                                   <div className="flex justify-between">
-                                    <span className="text-warning font-semibold">Prácticas:</span>
+                                    <span className="text-warning font-semibold">{t('campos.evaluacion.practicasLabel', {defaultValue: 'Prácticas:'})}</span>
                                     <span className="truncate max-w-[120px]" title={r.prs.join(", ")}>{r.prs.join(", ") || "-"}</span>
                                   </div>
                                 </div>
@@ -466,7 +466,7 @@ export function DetalleAlumnadoTab() {
                           <div className="pt-6 border-t border-[var(--glass-border)] space-y-4">
                             <div className="flex items-center justify-between">
                               <h3 className="font-bold text-foreground flex items-center gap-2">
-                                <ClipboardList className="w-[1.2em] h-[1.2em]" /> Plan de Trabajo Individual
+                                <ClipboardList className="w-[1.2em] h-[1.2em]" /> {t('campos.evaluacion.planTrabajoIndividualTitulo', {defaultValue: 'Plan de Trabajo Individual'})}
                               </h3>
                               <Button
                                 onClick={(e) => { e.stopPropagation(); handleGenerarInformeRefuerzo(al_id); }}
@@ -489,7 +489,7 @@ export function DetalleAlumnadoTab() {
                                       <span className={`text-caption font-semibold px-2 py-0.5 rounded-full shrink-0 ${
                                         auto.valor === "NO" ? "bg-danger/15 text-danger" : auto.valor === "DUDAS" ? "bg-warning/15 text-warning" : "bg-success/15 text-success"
                                       }`}>
-                                        Autoevaluación: {auto.valor}
+                                        {t('campos.evaluacion.autoevaluacionLabel', {defaultValue: 'Autoevaluación'})}: {auto.valor}
                                       </span>
                                     )}
                                     {auto?.dificultades && (

@@ -49,8 +49,8 @@ export function PlanesTab() {
         </h2>
         <div className="space-y-6">
           <div>
-            <label className="text-body font-semibold text-foreground mb-2 block">Modalidad y seguimiento</label>
-            <p className="text-caption text-muted mb-3">Selección orientativa que apoya la redacción de los textos de abajo (primera versión, se irá ampliando).</p>
+            <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.modulo.modalidadSeguimientoLabel', {defaultValue: 'Modalidad y seguimiento'})}</label>
+            <p className="text-caption text-muted mb-3">{t('campos.modulo.modalidadSeguimientoDesc', {defaultValue: 'Selección orientativa que apoya la redacción de los textos de abajo (primera versión, se irá ampliando).'})}</p>
             <div className="space-y-3">
               {FEOE_CATALOGO.map((grupo) => (
                 <div key={grupo.grupo}>

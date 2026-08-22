@@ -31,15 +31,15 @@ export function AISettingsPanel() {
       <div className="flex items-center gap-3 mb-2">
         <Sparkles className="w-6 h-6 text-accent" />
         <div>
-          <h3 className="text-subheading font-bold text-foreground">Configuración del Asistente IA</h3>
-          <p className="text-body text-muted">Importa programaciones desde PDF automáticamente</p>
+          <h3 className="text-subheading font-bold text-foreground">{t('campos.ai.configuracionAsistente', {defaultValue: 'Configuración del Asistente IA'})}</h3>
+          <p className="text-body text-muted">{t('campos.ai.importaDesdeC', {defaultValue: 'Importa programaciones desde PDF automáticamente'})}</p>
         </div>
       </div>
 
       <div className="space-y-4">
         <div className="flex flex-col gap-2">
           <label className="text-body font-semibold text-foreground flex items-center gap-2">
-            <Bot className="w-4 h-4 text-info" /> Motor de Inteligencia Artificial
+            <Bot className="w-4 h-4 text-info" /> {t('campos.ai.motorIA', {defaultValue: 'Motor de Inteligencia Artificial'})}
           </label>
           <select
             value={provider}
@@ -53,7 +53,7 @@ export function AISettingsPanel() {
 
         <div className="flex flex-col gap-2">
           <label className="text-body font-semibold text-foreground flex items-center gap-2">
-            <Key className="w-4 h-4 text-info" /> Tu API Key (BYOK)
+            <Key className="w-4 h-4 text-info" /> {t('campos.ai.apiKeyLabel', {defaultValue: 'Tu API Key (BYOK)'})}
           </label>
           <input
             type="password"
@@ -63,7 +63,7 @@ export function AISettingsPanel() {
             className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-body text-foreground font-mono focus:outline-none focus:ring-2 focus:ring-accent transition-all"
           />
           <p className="text-caption text-muted ml-1">
-            Tu clave se guarda de forma segura en tu navegador y nunca se comparte con terceros.
+            {t('campos.ai.claveSeguraAyuda', {defaultValue: 'Tu clave se guarda de forma segura en tu navegador y nunca se comparte con terceros.'})}
           </p>
         </div>
 

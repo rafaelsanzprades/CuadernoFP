@@ -124,8 +124,8 @@ export const ChatbotWidget = () => {
                   <Bot size={20} className="text-emerald-400" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-[var(--foreground)] text-body">Asistente Cuaderno FP</h3>
-                  <p className="text-caption text-[var(--muted-foreground)]">Respuestas generadas por IA</p>
+                  <h3 className="font-semibold text-[var(--foreground)] text-body">{t('campos.chatbot.tituloAsistente', {defaultValue: 'Asistente Cuaderno FP'})}</h3>
+                  <p className="text-caption text-[var(--muted-foreground)]">{t('campos.chatbot.subtituloIa', {defaultValue: 'Respuestas generadas por IA'})}</p>
                 </div>
               </div>
               <button 
@@ -141,7 +141,7 @@ export const ChatbotWidget = () => {
               {messages.length === 0 && (
                 <div className="flex flex-col items-center justify-center h-full text-center space-y-3 text-[var(--muted-foreground)] opacity-70">
                   <Bot size={40} />
-                  <p className="text-body">¡Hola! Soy tu asistente virtual.<br/>Pregúntame sobre la aplicación o dudas de programación didáctica.</p>
+                  <p className="text-body">{t('campos.chatbot.bienvenidaLinea1', {defaultValue: '¡Hola! Soy tu asistente virtual.'})}<br/>{t('campos.chatbot.bienvenidaLinea2', {defaultValue: 'Pregúntame sobre la aplicación o dudas de programación didáctica.'})}</p>
                 </div>
               )}
 
@@ -163,7 +163,7 @@ export const ChatbotWidget = () => {
                           if (p.inline_data) return (
                             <div key={i} className="flex items-center gap-2 bg-black/20 p-2 rounded-lg text-caption" title={t('tooltips.chatbot.archivoAdjuntoEnviado', {defaultValue: 'Archivo adjunto enviado a la IA'})}>
                               <FileText size={14} className="text-blue-400"/>
-                              <span>Adjunto enviado</span>
+                              <span>{t('campos.chatbot.adjuntoEnviado', {defaultValue: 'Adjunto enviado'})}</span>
                             </div>
                           );
                           return null;
@@ -183,7 +183,7 @@ export const ChatbotWidget = () => {
                   </div>
                   <div className="px-4 py-3 rounded-2xl bg-[var(--glass-bg)] border border-[var(--glass-border)] flex items-center gap-2">
                     <Loader2 size={16} className="animate-spin text-emerald-400" />
-                    <span className="text-body text-[var(--muted-foreground)]">Escribiendo...</span>
+                    <span className="text-body text-[var(--muted-foreground)]">{t('campos.chatbot.escribiendo', {defaultValue: 'Escribiendo...'})}</span>
                   </div>
                 </div>
               )}

@@ -104,7 +104,7 @@ export function ReclamacionesTab() {
       <Card className="p-6 border-t-4 border-t-danger">
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-            <AlertOctagon className="w-[1.2em] h-[1.2em]" /> Reclamaciones de nota
+            <AlertOctagon className="w-[1.2em] h-[1.2em]" /> {t('campos.evaluacion.reclamacionesTitulo', {defaultValue: 'Reclamaciones de nota'})}
           </h2>
           <Button onClick={() => setFormOpen(o => !o)} className="bg-danger/10 hover:bg-danger/20 text-danger border border-danger/30 gap-2">
             <Plus className="w-4 h-4" /> {t('botones.reclamaciones.nuevaReclamacion', {defaultValue: 'Nueva reclamación'})}
@@ -115,22 +115,22 @@ export function ReclamacionesTab() {
           <div className="mb-6 p-4 rounded-xl border border-[var(--glass-border)] bg-foreground/5 space-y-3">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="text-caption font-semibold text-muted mb-1 block">Alumno</label>
+                <label className="text-caption font-semibold text-muted mb-1 block">{t('campos.evaluacion.labelAlumno', {defaultValue: 'Alumno'})}</label>
                 <select value={alumnoId} onChange={e => setAlumnoId(e.target.value)} className="w-full bg-background border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground">
-                  <option value="">Selecciona...</option>
+                  <option value="">{t('checks.evaluacion.selecciona', {defaultValue: 'Selecciona...'})}</option>
                   {df_al.map((al: any) => <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre}</option>)}
                 </select>
               </div>
               <div>
-                <label className="text-caption font-semibold text-muted mb-1 block">Nota reclamada</label>
+                <label className="text-caption font-semibold text-muted mb-1 block">{t('campos.evaluacion.notaReclamadaLabel', {defaultValue: 'Nota reclamada'})}</label>
                 <select value={referencia} onChange={e => setReferencia(e.target.value)} className="w-full bg-background border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground">
-                  <option value="">Selecciona...</option>
+                  <option value="">{t('checks.evaluacion.selecciona', {defaultValue: 'Selecciona...'})}</option>
                   {referenciasDisponibles.map(r => <option key={r.id} value={r.id}>{r.label}</option>)}
                 </select>
               </div>
             </div>
             <div>
-              <label className="text-caption font-semibold text-muted mb-1 block">Motivo de la reclamación</label>
+              <label className="text-caption font-semibold text-muted mb-1 block">{t('campos.evaluacion.motivoReclamacionLabel', {defaultValue: 'Motivo de la reclamación'})}</label>
               <textarea value={motivo} onChange={e => setMotivo(e.target.value)} className="w-full h-24 bg-background border border-[var(--glass-border)] rounded-lg p-3 text-foreground" />
             </div>
             <div className="flex justify-end">
@@ -142,7 +142,7 @@ export function ReclamacionesTab() {
         )}
 
         {df_reclamaciones.length === 0 ? (
-          <p className="text-body text-muted text-center py-8">Todavía no hay ninguna reclamación registrada.</p>
+          <p className="text-body text-muted text-center py-8">{t('campos.evaluacion.sinReclamaciones', {defaultValue: 'Todavía no hay ninguna reclamación registrada.'})}</p>
         ) : (
           <div className="space-y-3">
             {[...df_reclamaciones].sort((a: any, b: any) => (a.fecha_reclamacion < b.fecha_reclamacion ? 1 : -1)).map((r: any) => {
@@ -155,17 +155,17 @@ export function ReclamacionesTab() {
                         <span className="font-semibold text-foreground">{nombrePorId[r.alumno_id] || r.alumno_id}</span>
                         <span className="text-caption text-muted font-mono">{r.referencia}</span>
                         <span className={`text-caption px-2 py-0.5 rounded-full font-semibold ${r.estado === "resuelta" ? "bg-success/15 text-success" : "bg-warning/15 text-warning"}`}>
-                          {r.estado === "resuelta" ? "Resuelta" : "Pendiente"}
+                          {r.estado === "resuelta" ? t('campos.evaluacion.estadoResuelta', {defaultValue: 'Resuelta'}) : t('campos.evaluacion.estadoPendiente', {defaultValue: 'Pendiente'})}
                         </span>
                       </div>
                       <p className="text-caption text-muted mt-1">{new Date(r.fecha_reclamacion).toLocaleString("es-ES")}</p>
                       <p className="text-body text-foreground mt-2">{r.motivo}</p>
                       {evidencia.length > 0 && (
-                        <p className="text-caption text-info mt-1">{evidencia.length} cambio(s) registrados en el histórico para esta nota.</p>
+                        <p className="text-caption text-info mt-1">{t('campos.evaluacion.cambiosRegistradosHistorico', {count: evidencia.length, defaultValue: `${evidencia.length} cambio(s) registrados en el histórico para esta nota.`})}</p>
                       )}
                       {r.estado === "resuelta" && (
                         <div className="mt-2 p-2 rounded-lg bg-success/5 border border-success/20">
-                          <p className="text-caption font-semibold text-success">Resolución ({r.fecha_resolucion && new Date(r.fecha_resolucion).toLocaleDateString("es-ES")})</p>
+                          <p className="text-caption font-semibold text-success">{t('campos.evaluacion.resolucionLabel', {defaultValue: 'Resolución'})} ({r.fecha_resolucion && new Date(r.fecha_resolucion).toLocaleDateString("es-ES")})</p>
                           <p className="text-body text-foreground">{r.resolucion}</p>
                         </div>
                       )}

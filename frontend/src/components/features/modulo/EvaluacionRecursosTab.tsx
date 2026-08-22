@@ -48,13 +48,13 @@ export function EvaluacionRecursosTab() {
       <div className="space-y-6 animate-in fade-in duration-500">
       <div className="glass-card p-6 border-t-4 border-t-amber-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><CheckCircle2 className="w-[1.2em] h-[1.2em] mr-1 text-amber-400" /></span> Instrumentos y recursos
+          <span className="inline-flex"><CheckCircle2 className="w-[1.2em] h-[1.2em] mr-1 text-amber-400" /></span> {t('campos.modulo.tituloInstrumentosRecursos', {defaultValue: 'Instrumentos y recursos'})}
         </h2>
         <div className="space-y-6">
 
           <div>
-            <label className="text-body font-semibold text-foreground mb-2 block">Instrumentos de evaluación</label>
-            <p className="text-caption text-muted mb-3">La actividad que genera la evidencia: qué hace el alumnado.</p>
+            <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.modulo.instrumentosEvaluacionLabel', {defaultValue: 'Instrumentos de evaluación'})}</label>
+            <p className="text-caption text-muted mb-3">{t('campos.modulo.instrumentosEvaluacionDesc', {defaultValue: 'La actividad que genera la evidencia: qué hace el alumnado.'})}</p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {INSTRUMENTOS_EVALUACION.map((inst) => {
                 const isSelected = inst_seleccionados.includes(inst.id);
@@ -74,8 +74,8 @@ export function EvaluacionRecursosTab() {
           </div>
 
           <div>
-            <label className="text-body font-semibold text-foreground mb-2 block">Instrumentos de calificación</label>
-            <p className="text-caption text-muted mb-3">Lo que puntúa esa evidencia: la rúbrica o escala aplicada.</p>
+            <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.modulo.instrumentosCalificacionLabel', {defaultValue: 'Instrumentos de calificación'})}</label>
+            <p className="text-caption text-muted mb-3">{t('campos.modulo.instrumentosCalificacionDesc', {defaultValue: 'Lo que puntúa esa evidencia: la rúbrica o escala aplicada.'})}</p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {INSTRUMENTOS_CALIFICACION.map((inst) => {
                 const isSelected = inst_seleccionados.includes(inst.id);
@@ -95,8 +95,8 @@ export function EvaluacionRecursosTab() {
           </div>
 
           <div>
-            <label className="text-body font-semibold text-foreground mb-2 block">Herramientas, recursos y espacios</label>
-            <p className="text-caption text-muted mb-3">Infraestructuras, herramientas y materiales técnicos necesarios para el desarrollo curricular. Si no encuentras algo, añádelo abajo como texto libre.</p>
+            <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.modulo.herramientasRecursosLabel', {defaultValue: 'Herramientas, recursos y espacios'})}</label>
+            <p className="text-caption text-muted mb-3">{t('campos.modulo.herramientasRecursosDesc', {defaultValue: 'Infraestructuras, herramientas y materiales técnicos necesarios para el desarrollo curricular. Si no encuentras algo, añádelo abajo como texto libre.'})}</p>
             <div className="space-y-4">
               {categorias.map((cat) => (
                 <div key={cat}>
@@ -121,7 +121,7 @@ export function EvaluacionRecursosTab() {
               ))}
 
               <div>
-                <p className="text-caption font-semibold text-muted mb-1.5">Añadidos por el profesorado</p>
+                <p className="text-caption font-semibold text-muted mb-1.5">{t('campos.modulo.recursosAnadidosProfesoradoLabel', {defaultValue: 'Añadidos por el profesorado'})}</p>
                 <div className="flex gap-2 mb-2">
                   <input
                     type="text"

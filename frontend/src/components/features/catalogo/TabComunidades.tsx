@@ -280,10 +280,10 @@ export function TabComunidades({ searchQuery = "" }: Props) {
         <Card className="lg:col-span-3 p-4">
           <div className="flex items-center gap-2 mb-3">
             <MapPin className="w-5 h-5 text-primary" />
-            <h3 className="font-semibold">Mapa de CCAA con currículo FP</h3>
+            <h3 className="font-semibold">{t('campos.catalogo.tituloMapaCcaa', {defaultValue: 'Mapa de CCAA con currículo FP'})}</h3>
           </div>
           <p className="text-caption text-muted mb-4">
-            Haz clic en una comunidad para ver su detalle. Fuente: <a href="https://todofp.es" target="_blank" rel="noopener" className="underline text-primary">todofp.es</a>
+            {t('campos.catalogo.instruccionMapaCcaa', {defaultValue: 'Haz clic en una comunidad para ver su detalle. Fuente: '})}<a href="https://todofp.es" target="_blank" rel="noopener" className="underline text-primary">todofp.es</a>
           </p>
 
           <div className="flex justify-center">
@@ -350,7 +350,7 @@ export function TabComunidades({ searchQuery = "" }: Props) {
               <p className="text-caption text-muted">
                 {activeCCAA.siglas} — {activeCCAA.bo}
                 {activeCCAA.id === "aragon" && (
-                  <Badge variant="info" className="ml-2 text-caption">DEMO</Badge>
+                  <Badge variant="info" className="ml-2 text-caption">{t('campos.catalogo.badgeDemo', {defaultValue: 'DEMO'})}</Badge>
                 )}
               </p>
             </div>
@@ -365,7 +365,7 @@ export function TabComunidades({ searchQuery = "" }: Props) {
             <div className="flex flex-col items-center justify-center h-full text-center py-12">
               <MapPin className="w-10 h-10 text-muted mb-3" />
               <p className="text-body text-muted">
-                Selecciona una comunidad autónoma en el mapa para ver su información detallada.
+                {t('campos.catalogo.mensajeSeleccionaCcaa', {defaultValue: 'Selecciona una comunidad autónoma en el mapa para ver su información detallada.'})}
               </p>
             </div>
           )}
@@ -376,7 +376,7 @@ export function TabComunidades({ searchQuery = "" }: Props) {
       <Card className="p-4">
         <div className="flex items-center gap-2 mb-4">
           <FileText className="w-5 h-5 text-primary" />
-          <h3 className="font-semibold">Tabla de comunidades autónomas</h3>
+          <h3 className="font-semibold">{t('campos.catalogo.tituloTablaComunidades', {defaultValue: 'Tabla de comunidades autónomas'})}</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-body">
@@ -411,7 +411,7 @@ export function TabComunidades({ searchQuery = "" }: Props) {
                     <span className="inline-block w-3 h-3 rounded-full mr-2" style={{ backgroundColor: ccaa.color }} />
                     {ccaa.nombre}
                     {ccaa.id === "aragon" && (
-                      <Badge variant="info" className="ml-2 text-caption">DEMO</Badge>
+                      <Badge variant="info" className="ml-2 text-caption">{t('campos.catalogo.badgeDemo', {defaultValue: 'DEMO'})}</Badge>
                     )}
                   </td>
                   <td className="py-2 px-3">{ccaa.siglas}</td>
@@ -428,9 +428,9 @@ export function TabComunidades({ searchQuery = "" }: Props) {
                   </td>
                   <td className="py-2 px-3">
                     {ccaa.bo === "BOE" ? (
-                      <Badge variant="info" className="text-caption">Ciudad Autónoma</Badge>
+                      <Badge variant="info" className="text-caption">{t('campos.catalogo.badgeCiudadAutonoma', {defaultValue: 'Ciudad Autónoma'})}</Badge>
                     ) : (
-                      <Badge variant="info" className="text-caption">CCAA</Badge>
+                      <Badge variant="info" className="text-caption">{t('campos.catalogo.badgeCcaaSigla', {defaultValue: 'CCAA'})}</Badge>
                     )}
                   </td>
                   <td className="py-2 px-3 text-caption text-muted max-w-[200px]">
@@ -449,27 +449,24 @@ export function TabComunidades({ searchQuery = "" }: Props) {
           <Info className="w-5 h-5 text-primary mt-0.5 shrink-0" />
           <div className="space-y-2 text-body text-muted">
             <p>
-              <strong>Fuente principal:</strong>{" "}
+              <strong>{t('campos.catalogo.fuentePrincipalLabel', {defaultValue: 'Fuente principal:'})}</strong>{" "}
               <a href="https://todofp.es" target="_blank" rel="noopener" className="underline text-primary">
                 todofp.es
               </a>{" "}
-              — Portal oficial del Ministerio de Educación y Formación Profesional.
+              {t('campos.catalogo.fuentePrincipalDescripcion', {defaultValue: '— Portal oficial del Ministerio de Educación y Formación Profesional.'})}
             </p>
             <p>
-              Cada comunidad autónoma publica su propio currículo de FP en su boletín oficial.
-              Los enlaces anteriores llevan a la página de <em>currículos por CCAA</em> de todofp.es,
-              donde se puede consultar la normativa específica de cada territorio.
+              {t('campos.catalogo.infoCurriculosCcaaTexto1', {defaultValue: 'Cada comunidad autónoma publica su propio currículo de FP en su boletín oficial. Los enlaces anteriores llevan a la página de '})}<em>{t('campos.catalogo.infoCurriculosCcaaEnfasis', {defaultValue: 'currículos por CCAA'})}</em>{t('campos.catalogo.infoCurriculosCcaaTexto2', {defaultValue: ' de todofp.es, donde se puede consultar la normativa específica de cada territorio.'})}
             </p>
             <p>
-              <strong>Ceuta y Melilla</strong> aplican directamente el currículo del Ministerio (BOE),
-              al no tener competencias transferadas en materia de educación.
+              <strong>{t('campos.catalogo.infoCeutaMelillaEnfasis', {defaultValue: 'Ceuta y Melilla'})}</strong>{t('campos.catalogo.infoCeutaMelillaTexto', {defaultValue: ' aplican directamente el currículo del Ministerio (BOE), al no tener competencias transferadas en materia de educación.'})}
             </p>
             <p className="text-caption">
-              Mapa SVG:{" "}
+              {t('campos.catalogo.mapaSvgCreditoLabel', {defaultValue: 'Mapa SVG:'})}{" "}
               <a href="https://github.com/VictorCazanave/svg-maps/tree/master/packages/spain" target="_blank" rel="noopener" className="underline">
                 @svg-maps/spain
               </a>{" "}
-              (CC-BY-4.0) — Victor Cazanave.
+              {t('campos.catalogo.mapaSvgCreditoTexto', {defaultValue: '(CC-BY-4.0) — Victor Cazanave.'})}
             </p>
           </div>
         </div>
@@ -480,6 +477,7 @@ export function TabComunidades({ searchQuery = "" }: Props) {
 
 /* ── Detalle de una CCAA ── */
 function DetalleCCAA({ ccaa }: { ccaa: CCAA }) {
+  const { t } = useTranslation();
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
@@ -495,7 +493,7 @@ function DetalleCCAA({ ccaa }: { ccaa: CCAA }) {
       {ccaa.id === "aragon" && (
         <div className="p-3 rounded-lg bg-blue-50 border border-blue-200 dark:bg-blue-950/30 dark:border-blue-800">
           <p className="text-caption text-blue-800 dark:text-blue-300">
-            <strong>🌍 Entorno DEMO:</strong> Los datos de ejemplo de esta aplicación usan el currículo de Aragón (BOA) como referencia.
+            <strong>{t('campos.catalogo.demoEntornoLabel', {defaultValue: '🌍 Entorno DEMO:'})}</strong> {t('campos.catalogo.demoEntornoTexto', {defaultValue: 'Los datos de ejemplo de esta aplicación usan el currículo de Aragón (BOA) como referencia.'})}
           </p>
         </div>
       )}
@@ -504,7 +502,7 @@ function DetalleCCAA({ ccaa }: { ccaa: CCAA }) {
         <div className="flex items-start gap-2">
           <BookOpen className="w-4 h-4 text-muted mt-0.5 shrink-0" />
           <div>
-            <p className="text-caption font-medium text-muted">Boletín Oficial</p>
+            <p className="text-caption font-medium text-muted">{t('campos.catalogo.labelBoletinOficial', {defaultValue: 'Boletín Oficial'})}</p>
             <p className="text-body">{ccaa.boNombre}</p>
           </div>
         </div>
@@ -512,8 +510,8 @@ function DetalleCCAA({ ccaa }: { ccaa: CCAA }) {
         <div className="flex items-start gap-2">
           <Globe className="w-4 h-4 text-muted mt-0.5 shrink-0" />
           <div>
-            <p className="text-caption font-medium text-muted">Tipo</p>
-            <p className="text-body">{ccaa.bo === "BOE" ? "Ciudad Autónoma" : "Comunidad Autónoma"}</p>
+            <p className="text-caption font-medium text-muted">{t('common.tipo', {defaultValue: 'Tipo'})}</p>
+            <p className="text-body">{ccaa.bo === "BOE" ? t('campos.catalogo.badgeCiudadAutonoma', {defaultValue: 'Ciudad Autónoma'}) : t('campos.catalogo.badgeComunidadAutonoma', {defaultValue: 'Comunidad Autónoma'})}</p>
           </div>
         </div>
 
@@ -521,7 +519,7 @@ function DetalleCCAA({ ccaa }: { ccaa: CCAA }) {
           <div className="flex items-start gap-2">
             <Info className="w-4 h-4 text-muted mt-0.5 shrink-0" />
             <div>
-              <p className="text-caption font-medium text-muted">Nota</p>
+              <p className="text-caption font-medium text-muted">{t('tablas.catalogo.nota', {defaultValue: 'Nota'})}</p>
               <p className="text-body">{ccaa.nota}</p>
             </div>
           </div>

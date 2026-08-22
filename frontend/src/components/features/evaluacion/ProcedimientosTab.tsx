@@ -40,18 +40,15 @@ export function ProcedimientosTab() {
             <Scale className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-subheading font-bold text-[var(--text-primary)]">Procedimientos normativos</h2>
-            <p className="text-body text-muted-foreground">Configura los aspectos normativos y burocráticos de la evaluación para la Programación Didáctica.</p>
+            <h2 className="text-subheading font-bold text-[var(--text-primary)]">{t('campos.evaluacion.tituloProcedimientosNormativos', {defaultValue: 'Procedimientos normativos'})}</h2>
+            <p className="text-body text-muted-foreground">{t('campos.evaluacion.procedimientosNormativosDesc', {defaultValue: 'Configura los aspectos normativos y burocráticos de la evaluación para la Programación Didáctica.'})}</p>
           </div>
         </div>
 
         <div className="glass-card p-6 border-t-4 border-t-rose-500">
-          <h2 className="text-subheading font-bold text-foreground mb-1">Modelo de recuperación</h2>
+          <h2 className="text-subheading font-bold text-foreground mb-1">{t('campos.evaluacion.tituloModeloRecuperacion', {defaultValue: 'Modelo de recuperación'})}</h2>
           <p className="text-caption text-muted mb-3">
-            Marca los tipos de recuperación/convocatoria extraordinaria que aplicas en este módulo, según el modelo
-            R1/R2/R3/RF/EvFE del autor de PD+. <strong>Primera versión</strong>: esto documenta tu modelo en la
-            programación, pero el cálculo automático de notas siguiendo este esquema (indicador → directo a RA,
-            saltando CE) todavía no está implementado en Calificaciones.
+            {t('campos.evaluacion.modeloRecuperacionDescPre', {defaultValue: 'Marca los tipos de recuperación/convocatoria extraordinaria que aplicas en este módulo, según el modelo R1/R2/R3/RF/EvFE del autor de PD+. '})}<strong>{t('campos.evaluacion.modeloRecuperacionDescStrong', {defaultValue: 'Primera versión'})}</strong>{t('campos.evaluacion.modeloRecuperacionDescPost', {defaultValue: ': esto documenta tu modelo en la programación, pero el cálculo automático de notas siguiendo este esquema (indicador → directo a RA, saltando CE) todavía no está implementado en Calificaciones.'})}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-4">
             {MODELO_RECUPERACION.map((m) => {
@@ -79,7 +76,7 @@ export function ProcedimientosTab() {
 
         <div className="glass-card p-6 border-t-4 border-t-sky-500">
           <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-            <span className="inline-flex"><MessageCircle className="w-[1.2em] h-[1.2em] mr-1" /></span> Información y procedimientos
+            <span className="inline-flex"><MessageCircle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.evaluacion.tituloInformacionProcedimientos', {defaultValue: 'Información y procedimientos'})}
           </h2>
           <div className="space-y-6">
             <NarrativeField
@@ -106,8 +103,8 @@ export function ProcedimientosTab() {
         </div>
 
         <div className="glass-card p-6 border-t-4 border-t-teal-500">
-          <h2 className="text-subheading font-bold text-foreground mb-1">Criterios de calificación (texto específico modelo Simplificado, pd=)</h2>
-          <p className="text-caption text-muted mb-3">Si se deja vacío, se genera automáticamente. Criterios de calificación y redondeo del módulo.</p>
+          <h2 className="text-subheading font-bold text-foreground mb-1">{t('campos.evaluacion.tituloCriteriosCalificacionSimplificado', {defaultValue: 'Criterios de calificación (texto específico modelo Simplificado, pd=)'})}</h2>
+          <p className="text-caption text-muted mb-3">{t('campos.evaluacion.criteriosCalificacionDesc', {defaultValue: 'Si se deja vacío, se genera automáticamente. Criterios de calificación y redondeo del módulo.'})}</p>
           <textarea
             value={config_contexto.texto_criterios_calificacion || ""}
             onChange={e => handleChange("texto_criterios_calificacion", e.target.value)}

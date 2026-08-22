@@ -41,25 +41,25 @@ export function HistorialCalificacionesTab() {
     <div className="space-y-4 animate-in fade-in duration-500">
       <Card className="p-6 border-t-4 border-t-indigo-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-5">
-          <History className="w-[1.2em] h-[1.2em]" /> Histórico de cambios de calificación
+          <History className="w-[1.2em] h-[1.2em]" /> {t('campos.evaluacion.historicoCalificacionesTitulo', {defaultValue: 'Histórico de cambios de calificación'})}
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
           <div>
-            <label className="text-caption font-semibold text-muted mb-1 block">Alumno</label>
+            <label className="text-caption font-semibold text-muted mb-1 block">{t('campos.evaluacion.labelAlumno', {defaultValue: 'Alumno'})}</label>
             <select
               value={filtroAlumno}
               onChange={(e) => setFiltroAlumno(e.target.value)}
               className="w-full bg-background border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground"
             >
-              <option value="">Todos</option>
+              <option value="">{t('checks.evaluacion.todos', {defaultValue: 'Todos'})}</option>
               {df_al.map((al: any) => (
                 <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre}</option>
               ))}
             </select>
           </div>
           <div>
-            <label className="text-caption font-semibold text-muted mb-1 block">Desde</label>
+            <label className="text-caption font-semibold text-muted mb-1 block">{t('campos.evaluacion.labelDesde', {defaultValue: 'Desde'})}</label>
             <input
               type="date"
               value={filtroDesde}
@@ -68,7 +68,7 @@ export function HistorialCalificacionesTab() {
             />
           </div>
           <div>
-            <label className="text-caption font-semibold text-muted mb-1 block">Hasta</label>
+            <label className="text-caption font-semibold text-muted mb-1 block">{t('campos.evaluacion.labelHasta', {defaultValue: 'Hasta'})}</label>
             <input
               type="date"
               value={filtroHasta}
@@ -81,8 +81,8 @@ export function HistorialCalificacionesTab() {
         {filtrado.length === 0 ? (
           <p className="text-body text-muted text-center py-8">
             {historial.length === 0
-              ? "Todavía no se ha registrado ningún cambio de calificación."
-              : "Ningún cambio coincide con el filtro."}
+              ? t('campos.evaluacion.sinCambiosCalificacion', {defaultValue: 'Todavía no se ha registrado ningún cambio de calificación.'})
+              : t('campos.evaluacion.ningunCambioFiltro', {defaultValue: 'Ningún cambio coincide con el filtro.'})}
           </p>
         ) : (
           <div className="overflow-x-auto">

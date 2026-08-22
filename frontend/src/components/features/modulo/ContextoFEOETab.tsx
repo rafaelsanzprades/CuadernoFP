@@ -17,12 +17,12 @@ export function ContextoFEOETab() {
       <div className="space-y-6 animate-in fade-in duration-500">
       <div className="glass-card p-6 border-t-4 border-t-blue-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> FEOE
+          <span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.modulo.tituloFeoeCorto', {defaultValue: 'FEOE'})}
         </h2>
         <div className="space-y-4">
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">A1. Justificación de la programación</label>
-            <p className="text-caption text-muted mb-2">Base legislativa que fundamenta esta programación.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.a1JustificacionLabel', {defaultValue: 'A1. Justificación de la programación'})}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.a1JustificacionDesc', {defaultValue: 'Base legislativa que fundamenta esta programación.'})}</p>
             <textarea
               value={config_contexto["A1_justificacion"] || ""}
               onChange={e => handleChange("A1_justificacion", e.target.value)}
@@ -31,8 +31,8 @@ export function ContextoFEOETab() {
             />
           </div>
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">A2. Contextualización</label>
-            <p className="text-caption text-muted mb-2">Análisis del contexto donde se imparte la formación.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.a2ContextualizacionLabel', {defaultValue: 'A2. Contextualización'})}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.a2ContextualizacionDesc', {defaultValue: 'Análisis del contexto donde se imparte la formación.'})}</p>
             <textarea
               value={config_contexto["A2_contextualizacion"] || ""}
               onChange={e => handleChange("A2_contextualizacion", e.target.value)}
@@ -41,8 +41,8 @@ export function ContextoFEOETab() {
             />
           </div>
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">B3. Vinculación con la empresa colaboradora</label>
-            <p className="text-caption text-muted mb-2">Relación entre el módulo y la formación en la empresa.</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.b3VinculacionEmpresaLabel', {defaultValue: 'B3. Vinculación con la empresa colaboradora'})}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.b3VinculacionEmpresaDesc', {defaultValue: 'Relación entre el módulo y la formación en la empresa.'})}</p>
             <textarea
               value={config_contexto["B3_vinculacion_empresa"] || ""}
               onChange={e => handleChange("B3_vinculacion_empresa", e.target.value)}

@@ -40,8 +40,8 @@ export function ProposalLoaderModal({ isOpen, onClose, activeModuleId, onApplyPr
               <DownloadCloud className="w-5 h-5 text-info" />
             </div>
             <div>
-              <h2 className="text-subheading font-extrabold text-foreground tracking-tight">Propuestas editoriales / autores</h2>
-              <p className="text-body text-muted">Selecciona una propuesta predefinida para este módulo ({moduleCode})</p>
+              <h2 className="text-subheading font-extrabold text-foreground tracking-tight">{t('campos.matrices.propuestasEditorialesTitulo', {defaultValue: 'Propuestas editoriales / autores'})}</h2>
+              <p className="text-body text-muted">{t('campos.matrices.propuestasEditorialesDescripcion', {moduleCode, defaultValue: `Selecciona una propuesta predefinida para este módulo (${moduleCode})`})}</p>
             </div>
           </div>
           <button 
@@ -57,9 +57,9 @@ export function ProposalLoaderModal({ isOpen, onClose, activeModuleId, onApplyPr
           {availableProposals.length === 0 ? (
             <div className="text-center py-12 flex flex-col items-center">
               <FileText className="w-12 h-12 text-muted mb-4 opacity-50" />
-              <h3 className="text-subheading font-bold text-foreground">No hay propuestas disponibles</h3>
+              <h3 className="text-subheading font-bold text-foreground">{t('campos.matrices.noHayPropuestas', {defaultValue: 'No hay propuestas disponibles'})}</h3>
               <p className="text-muted mt-2 max-w-md mx-auto">
-                Actualmente no existen secuenciaciones predefinidas de autores o editoriales para el módulo {moduleCode}.
+                {t('campos.matrices.noHayPropuestasDescripcion', {moduleCode, defaultValue: `Actualmente no existen secuenciaciones predefinidas de autores o editoriales para el módulo ${moduleCode}.`})}
               </p>
             </div>
           ) : (
@@ -112,10 +112,9 @@ export function ProposalLoaderModal({ isOpen, onClose, activeModuleId, onApplyPr
                   <div className="p-4 bg-warning/10 border border-warning/20 rounded-xl flex items-start gap-3">
                     <AlertTriangle className="w-5 h-5 text-warning shrink-0 mt-0.5" />
                     <div className="text-body text-warning/90">
-                      <p className="font-bold mb-1">Atención: Esta acción sobrescribirá datos actuales</p>
+                      <p className="font-bold mb-1">{t('campos.matrices.atencionSobrescribirTitulo', {defaultValue: 'Atención: Esta acción sobrescribirá datos actuales'})}</p>
                       <p>
-                        Se reemplazarán tus Unidades didácticas (UD/T), la relación entre RA y UD/T, y la matriz de contribución RA-OG. 
-                        Asegúrate de que estás de acuerdo antes de aplicar.
+                        {t('campos.matrices.atencionSobrescribirDescripcion', {defaultValue: 'Se reemplazarán tus Unidades didácticas (UD/T), la relación entre RA y UD/T, y la matriz de contribución RA-OG. Asegúrate de que estás de acuerdo antes de aplicar.'})}
                       </p>
                     </div>
                   </div>

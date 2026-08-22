@@ -139,11 +139,10 @@ export function NuevoCursoWizard({ onClose }: NuevoCursoWizardProps) {
 
           <div className="mb-8">
             <h2 className="text-heading font-extrabold text-foreground mb-2 flex items-center gap-3">
-              <Rocket className="w-[1.2em] h-[1.2em] text-info" /> Nuevo curso a partir de esta programación
+              <Rocket className="w-[1.2em] h-[1.2em] text-info" /> {t('campos.dashboard.nuevoCursoTitulo', {defaultValue: 'Nuevo curso a partir de esta programación'})}
             </h2>
             <p className="text-body text-muted">
-              Reutiliza <span className="font-semibold text-foreground">{activeModuleId || "esta programación"}</span> para
-              un curso académico nuevo, sin partir de cero.
+              {t('campos.dashboard.reutilizarPrefijo', {defaultValue: 'Reutiliza'})} <span className="font-semibold text-foreground">{activeModuleId || t('campos.dashboard.estaProgramacionFallback', {defaultValue: 'esta programación'})}</span> {t('campos.dashboard.reutilizarSufijo', {defaultValue: 'para un curso académico nuevo, sin partir de cero.'})}
             </p>
             <div className="flex gap-2 mt-4">
               {[1, 2, 3].map(n => (
@@ -155,11 +154,11 @@ export function NuevoCursoWizard({ onClose }: NuevoCursoWizardProps) {
           {step === 1 && (
             <div className="space-y-5">
               <div>
-                <label className="block text-body font-bold text-foreground mb-2">Curso académico</label>
+                <label className="block text-body font-bold text-foreground mb-2">{t('campos.dashboard.cursoAcademico', {defaultValue: 'Curso académico'})}</label>
                 <Input value={cursoAcademico} onChange={(e) => setCursoAcademico(e.target.value)} placeholder={t('placeholders.archivos.ejCursoAcademico2', {defaultValue: 'Ej: 2026-27'})} />
               </div>
               <div>
-                <label className="block text-body font-bold text-foreground mb-2">Nombre del grupo</label>
+                <label className="block text-body font-bold text-foreground mb-2">{t('campos.dashboard.nombreGrupo', {defaultValue: 'Nombre del grupo'})}</label>
                 <Input value={nombreGrupo} onChange={(e) => setNombreGrupo(e.target.value)} placeholder={t('placeholders.dashboard.ejNombreGrupo', {defaultValue: 'Ej: 1A-GM 0237-ICTVE'})} />
               </div>
               <label className="flex items-start gap-3 p-4 rounded-xl border border-[var(--glass-border)] bg-foreground/5 cursor-pointer">
@@ -171,11 +170,10 @@ export function NuevoCursoWizard({ onClose }: NuevoCursoWizardProps) {
                 />
                 <span>
                   <span className="flex items-center gap-2 font-semibold text-foreground">
-                    <Copy className="w-4 h-4" /> Clonar esta programación
+                    <Copy className="w-4 h-4" /> {t('campos.dashboard.clonarProgramacion', {defaultValue: 'Clonar esta programación'})}
                   </span>
                   <span className="block text-caption text-muted mt-1">
-                    Crea una copia independiente para editarla sin afectar al original. Si lo dejas
-                    desmarcado, el curso nuevo comparte el mismo fichero de programación.
+                    {t('campos.dashboard.clonarProgramacionAyuda', {defaultValue: 'Crea una copia independiente para editarla sin afectar al original. Si lo dejas desmarcado, el curso nuevo comparte el mismo fichero de programación.'})}
                   </span>
                 </span>
               </label>
@@ -191,10 +189,10 @@ export function NuevoCursoWizard({ onClose }: NuevoCursoWizardProps) {
             <div className="space-y-6">
               <div>
                 <h3 className="text-subheading font-bold text-foreground mb-3 flex items-center gap-2">
-                  <Calendar className="w-4 h-4" /> Fechas del curso
+                  <Calendar className="w-4 h-4" /> {t('campos.dashboard.fechasCurso', {defaultValue: 'Fechas del curso'})}
                 </h3>
                 <p className="text-caption text-muted mb-3">
-                  Precargadas un año después del curso actual — ajústalas si no coinciden.
+                  {t('campos.dashboard.fechasCursoAyuda', {defaultValue: 'Precargadas un año después del curso actual — ajústalas si no coinciden.'})}
                 </p>
                 <div className="grid grid-cols-2 gap-4">
                   {FECHA_CAMPOS.map(({ field, label }) => (
@@ -206,7 +204,7 @@ export function NuevoCursoWizard({ onClose }: NuevoCursoWizardProps) {
                 </div>
               </div>
               <div>
-                <h3 className="text-subheading font-bold text-foreground mb-3">Horario semanal</h3>
+                <h3 className="text-subheading font-bold text-foreground mb-3">{t('campos.dashboard.horarioSemanal', {defaultValue: 'Horario semanal'})}</h3>
                 <div className="grid grid-cols-5 gap-3">
                   {DIAS.map(day => (
                     <div key={day}>
@@ -236,11 +234,10 @@ export function NuevoCursoWizard({ onClose }: NuevoCursoWizardProps) {
             <div className="space-y-6">
               <div>
                 <h3 className="text-subheading font-bold text-foreground mb-3 flex items-center gap-2">
-                  <Users className="w-4 h-4" /> Alumnado (opcional)
+                  <Users className="w-4 h-4" /> {t('campos.dashboard.alumnadoOpcional', {defaultValue: 'Alumnado (opcional)'})}
                 </h3>
                 <p className="text-caption text-muted mb-3">
-                  Importa un CSV con columnas Nombre/Apellidos (y opcionalmente correo) para arrancar
-                  la matrícula ya poblada, o sáltalo y añádelo después en Alumnado.
+                  {t('campos.dashboard.alumnadoCsvAyuda', {defaultValue: 'Importa un CSV con columnas Nombre/Apellidos (y opcionalmente correo) para arrancar la matrícula ya poblada, o sáltalo y añádelo después en Alumnado.'})}
                 </p>
                 <label className="flex items-center justify-center gap-2 p-6 rounded-xl border-2 border-dashed border-[var(--glass-border)] hover:border-info/50 cursor-pointer transition-colors">
                   <FolderOpen className="w-5 h-5 text-info" />
@@ -255,7 +252,7 @@ export function NuevoCursoWizard({ onClose }: NuevoCursoWizardProps) {
                   />
                 </label>
                 {csvPreviewCount !== null && (
-                  <p className="text-caption text-success mt-2">{csvPreviewCount} estudiantes detectados.</p>
+                  <p className="text-caption text-success mt-2">{t('campos.dashboard.estudiantesDetectados', {count: csvPreviewCount, defaultValue: `${csvPreviewCount} estudiantes detectados.`})}</p>
                 )}
               </div>
               <div className="flex justify-between pt-2">

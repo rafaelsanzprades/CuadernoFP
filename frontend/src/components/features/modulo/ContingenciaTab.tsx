@@ -52,12 +52,12 @@ export function ContingenciaTab() {
       {/* Medidas de contingencia */}
       <div className="glass-card p-6 border-t-4 border-t-orange-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-orange-400" /></span> Medidas de contingencia
+          <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-orange-400" /></span> {t('campos.modulo.tituloMedidasContingencia', {defaultValue: 'Medidas de contingencia'})}
         </h2>
         <div className="space-y-6">
           <div>
-            <label className="text-body font-semibold text-foreground mb-2 block">Medidas de contingencia (selección múltiple)</label>
-            <p className="text-caption text-muted mb-3">Estrategias generales de actuación ante la imposibilidad de impartir docencia presencial normal.</p>
+            <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.modulo.medidasContingenciaLabel', {defaultValue: 'Medidas de contingencia (selección múltiple)'})}</label>
+            <p className="text-caption text-muted mb-3">{t('campos.modulo.medidasContingenciaDesc', {defaultValue: 'Estrategias generales de actuación ante la imposibilidad de impartir docencia presencial normal.'})}</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
               {CONTINGENCIA.map((cont) => {
                 const isSelected = medidas_contingencia.includes(cont.id);
@@ -77,7 +77,7 @@ export function ContingenciaTab() {
           </div>
 
           <div>
-            <label className="text-body font-semibold text-foreground mb-2 block">Anotaciones libres de contingencia</label>
+            <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.modulo.anotacionesLibresContingencia', {defaultValue: 'Anotaciones libres de contingencia'})}</label>
             <textarea
               value={moduleData?.texto_contingencia_libre || ""}
               onChange={e => updateModuleData("texto_contingencia_libre", e.target.value)}
@@ -91,13 +91,13 @@ export function ContingenciaTab() {
       {/* Registro de escenarios de contingencia */}
       <div className="glass-card p-6 border-t-4 border-t-amber-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><ListChecks className="w-[1.2em] h-[1.2em] mr-1 text-amber-400" /></span> Registro de escenarios de contingencia
+          <span className="inline-flex"><ListChecks className="w-[1.2em] h-[1.2em] mr-1 text-amber-400" /></span> {t('campos.modulo.tituloRegistroEscenariosContingencia', {defaultValue: 'Registro de escenarios de contingencia'})}
         </h2>
         <div className="overflow-x-auto mb-4">
           <table className="w-full text-left text-body border-collapse whitespace-nowrap">
             <thead>
               <tr className="border-b border-[var(--glass-border)] text-muted">
-                <th className="p-2 w-16">Id</th>
+                <th className="p-2 w-16">{t('tablas.modulo.id', {defaultValue: 'Id'})}</th>
                 <th className="p-2 w-48">{t('tablas.modulo.escenario', {defaultValue: 'Escenario'})}</th>
                 <th className="p-2 min-w-[200px]">{t('tablas.modulo.organizacionAcceso', {defaultValue: 'Organización y acceso'})}</th>
                 <th className="p-2 min-w-[200px]">{t('tablas.modulo.actividadesAlternativas', {defaultValue: 'Actividades alternativas'})}</th>
@@ -142,11 +142,11 @@ export function ContingenciaTab() {
       {/* Plan de Contingencia (textos) */}
       <div className="glass-card p-6 border-t-4 border-t-rose-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-rose-400" /></span> Plan de Contingencia
+          <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-rose-400" /></span> {t('campos.modulo.tituloPlanContingencia', {defaultValue: 'Plan de Contingencia'})}
         </h2>
         <div className="space-y-4">
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Ausencia prolongada del profesorado titular</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.contingenciaProfesorLabel', {defaultValue: 'Ausencia prolongada del profesorado titular'})}</label>
             <textarea
               value={config_contexto["contingencia_profesor"] || ""}
               onChange={e => handleChange("contingencia_profesor", e.target.value)}
@@ -154,7 +154,7 @@ export function ContingenciaTab() {
             />
           </div>
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Ausencia prolongada del alumnado por causas justificadas</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.contingenciaAlumnadoLabel', {defaultValue: 'Ausencia prolongada del alumnado por causas justificadas'})}</label>
             <textarea
               value={config_contexto["contingencia_alumnado"] || ""}
               onChange={e => handleChange("contingencia_alumnado", e.target.value)}
@@ -162,7 +162,7 @@ export function ContingenciaTab() {
             />
           </div>
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Interrupción generalizada de las clases</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.contingenciaGeneralLabel', {defaultValue: 'Interrupción generalizada de las clases'})}</label>
             <textarea
               value={config_contexto["contingencia_general"] || config_contexto["J3_contingencia"] || ""}
               onChange={e => handleChange("contingencia_general", e.target.value)}

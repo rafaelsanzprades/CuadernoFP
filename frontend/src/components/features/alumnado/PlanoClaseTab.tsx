@@ -100,7 +100,7 @@ export const PlanoClaseTab = () => {
 
   // Reset all assignments
   const handleResetLayout = () => {
-    if (window.confirm('¿Seguro que deseas vaciar todos los asientos del plano de clase?')) {
+    if (window.confirm(t('campos.alumnado.confirmVaciarPlano', {defaultValue: '¿Seguro que deseas vaciar todos los asientos del plano de clase?'}))) {
       updateCursoData('plano_clase', {
         rows,
         cols,
@@ -113,7 +113,7 @@ export const PlanoClaseTab = () => {
   const handleAutoFill = () => {
     if (
       window.confirm(
-        '¿Deseas asignar automáticamente a todos los alumnado en orden alfabético? Esto sobrescribirá la distribución actual.'
+        t('campos.alumnado.confirmDistribucionAlfabetica', {defaultValue: '¿Deseas asignar automáticamente a todos los alumnado en orden alfabético? Esto sobrescribirá la distribución actual.'})
       )
     ) {
       const newSeats: Record<string, string> = {};
@@ -146,7 +146,7 @@ export const PlanoClaseTab = () => {
         <div className="flex flex-wrap items-center gap-6">
           <div className="flex items-center gap-2">
             <Grid className="w-5 h-5 text-accent" />
-            <span className="text-body font-semibold text-foreground/90">Dimensiones del aula:</span>
+            <span className="text-body font-semibold text-foreground/90">{t('campos.alumnado.dimensionesAula', {defaultValue: 'Dimensiones del aula:'})}</span>
           </div>
 
           <div className="flex items-center gap-4">
@@ -154,7 +154,7 @@ export const PlanoClaseTab = () => {
               <Select
                 value={rows}
                 onChange={(e) => handleSizeChange('rows', parseInt(e.target.value, 10))}
-                label="Filas"
+                label={t('campos.alumnado.labelFilas', {defaultValue: 'Filas'})}
                 className="py-1 text-caption"
               >
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
@@ -169,7 +169,7 @@ export const PlanoClaseTab = () => {
               <Select
                 value={cols}
                 onChange={(e) => handleSizeChange('cols', parseInt(e.target.value, 10))}
-                label="Columnas"
+                label={t('campos.alumnado.labelColumnas', {defaultValue: 'Columnas'})}
                 className="py-1 text-caption"
               >
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
@@ -185,21 +185,21 @@ export const PlanoClaseTab = () => {
         {/* Stats and helper info */}
         <div className="flex items-center gap-4">
           <div className="w-28">
-            <label className="block text-body font-medium text-foreground/80 mb-1.5">Activos</label>
+            <label className="block text-body font-medium text-foreground/80 mb-1.5">{t('campos.alumnado.labelActivos', {defaultValue: 'Activos'})}</label>
             <div className="w-full bg-[var(--input-bg)] border border-[var(--glass-border)] rounded-lg px-3 py-1.5 flex items-center gap-1.5">
               <Users className="w-4 h-4 text-info shrink-0" />
               <span className="text-body font-bold text-foreground">{activeStudents.length}</span>
             </div>
           </div>
           <div className="w-28">
-            <label className="block text-body font-medium text-foreground/80 mb-1.5">Sentados</label>
+            <label className="block text-body font-medium text-foreground/80 mb-1.5">{t('campos.alumnado.labelSentados', {defaultValue: 'Sentados'})}</label>
             <div className="w-full bg-[var(--input-bg)] border border-[var(--glass-border)] rounded-lg px-3 py-1.5 flex items-center gap-1.5">
               <User className="w-4 h-4 text-success shrink-0" />
               <span className="text-body font-bold text-foreground">{assignedStudentIds.size}</span>
             </div>
           </div>
           <div className="w-28">
-            <label className="block text-body font-medium text-foreground/80 mb-1.5">Sin asignar</label>
+            <label className="block text-body font-medium text-foreground/80 mb-1.5">{t('campos.alumnado.labelSinAsignar', {defaultValue: 'Sin asignar'})}</label>
             <div className="w-full bg-[var(--input-bg)] border border-[var(--glass-border)] rounded-lg px-3 py-1.5 flex items-center gap-1.5">
               <HelpCircle className="w-4 h-4 text-warning shrink-0" />
               <span className="text-body font-bold text-foreground">{unassignedStudents.length}</span>
@@ -231,10 +231,10 @@ export const PlanoClaseTab = () => {
       <Card className="border border-white/5 rounded-2xl p-6 bg-foreground/5 shadow-2xl relative overflow-hidden">
         {/* Direction Indicator */}
         <div className="absolute top-2 left-6 text-caption text-muted tracking-wider font-semibold">
-          Fondo de clase ⬆️
+          {t('campos.alumnado.fondoClase', {defaultValue: 'Fondo de clase ⬆️'})}
         </div>
         <div className="absolute bottom-2 left-6 text-caption text-muted tracking-wider font-semibold">
-          Frente de clase / Pizarra ⬇️
+          {t('campos.alumnado.frenteClase', {defaultValue: 'Frente de clase / Pizarra ⬇️'})}
         </div>
 
         {/* Interactive Classroom Grid */}
@@ -268,10 +268,10 @@ export const PlanoClaseTab = () => {
                       </span>
                       {student ? (
                         <Badge variant="info" className="scale-90 origin-right">
-                          Ocupado
+                          {t('campos.alumnado.asientoOcupado', {defaultValue: 'Ocupado'})}
                         </Badge>
                       ) : (
-                        <span className="text-caption text-muted/50 italic">Libre</span>
+                        <span className="text-caption text-muted/50 italic">{t('campos.alumnado.asientoLibre', {defaultValue: 'Libre'})}</span>
                       )}
                     </div>
 
@@ -281,7 +281,7 @@ export const PlanoClaseTab = () => {
                       onChange={(e) => handleAssignSeat(r, c, e.target.value)}
                       className="w-full bg-foreground/15 border border-[var(--glass-border)] text-foreground text-caption rounded-lg px-2 py-1.5 focus:outline-none focus:border-accent transition-colors font-medium cursor-pointer"
                     >
-                      <option value="" className="bg-background text-foreground">-- Sin Asignar --</option>
+                      <option value="" className="bg-background text-foreground">{t('campos.alumnado.optionSinAsignar', {defaultValue: '-- Sin Asignar --'})}</option>
                       {activeStudents.map((al) => {
                         const isAssignedElsewhere =
                           assignedStudentIds.has(al.ID || '') &&
@@ -289,7 +289,7 @@ export const PlanoClaseTab = () => {
 
                         return (
                           <option key={al.ID} value={al.ID} className="bg-background text-foreground">
-                            {al.Apellidos}, {al.Nombre} {isAssignedElsewhere ? ' (Mover)' : ''}
+                            {al.Apellidos}, {al.Nombre} {isAssignedElsewhere ? t('campos.alumnado.optionMover', {defaultValue: ' (Mover)'}) : ''}
                           </option>
                         );
                       })}
@@ -310,7 +310,7 @@ export const PlanoClaseTab = () => {
           
           {/* Teacher Desk */}
           <div className="w-1/3 min-w-[200px] border border-accent/30 bg-accent/5 hover:bg-accent/10 transition-colors duration-300 rounded-xl p-3.5 text-center text-accent font-extrabold text-caption tracking-widest flex items-center justify-center gap-2 shadow-lg">
-            <span>‍<span className="inline-flex"><School className="w-[1.2em] h-[1.2em] mr-1" /></span> Mesa del Profesorado / Pizarra</span>
+            <span>‍<span className="inline-flex"><School className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.mesaProfesorado', {defaultValue: 'Mesa del Profesorado / Pizarra'})}</span>
           </div>
         </div>
       </Card>
@@ -319,18 +319,18 @@ export const PlanoClaseTab = () => {
       <Card className="border border-white/5 rounded-2xl p-6 bg-foreground/5 shadow-lg">
         <div className="flex items-center justify-between mb-4 border-b border-[var(--glass-border)] pb-3">
           <h3 className="text-body font-semibold text-foreground flex items-center gap-2">
-            <Users className="w-5 h-5 text-accent" /> Alumnado sin asignar en el plano ({unassignedStudents.length})
+            <Users className="w-5 h-5 text-accent" /> {t('campos.alumnado.sinAsignarPlanoTitulo', {count: unassignedStudents.length, defaultValue: 'Alumnado sin asignar en el plano ({{count}})'})}
           </h3>
           {unassignedStudents.length > 0 && (
             <span className="text-caption text-muted italic">
-              Aparecerán automáticamente en los desplegables de las mesas.
+              {t('campos.alumnado.sinAsignarPlanoDesc', {defaultValue: 'Aparecerán automáticamente en los desplegables de las mesas.'})}
             </span>
           )}
         </div>
 
         {unassignedStudents.length === 0 ? (
           <div className="text-center py-6 text-body text-success font-semibold">
-            <span className="inline-flex"><PartyPopper className="w-[1.2em] h-[1.2em] mr-1" /></span> ¡Todos los alumnado activos han sido colocados en el plano!
+            <span className="inline-flex"><PartyPopper className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.todosColocadosPlano', {defaultValue: '¡Todos los alumnado activos han sido colocados en el plano!'})}
           </div>
         ) : (
           <div className="flex flex-wrap gap-2">

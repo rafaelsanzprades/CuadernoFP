@@ -17,6 +17,16 @@ function parseAcronym(name: string): { acronym: string; term: string } {
   return { acronym: "", term: name };
 }
 
+const CATEGORY_LABEL_KEYS: Record<AcronymCategory, string> = {
+  metodologia: 'campos.catalogo.categoriaMetodologia',
+  inclusion: 'campos.catalogo.categoriaInclusion',
+  estructura_fp: 'campos.catalogo.categoriaEstructuraFp',
+  normativa: 'campos.catalogo.categoriaNormativa',
+  boletines: 'campos.catalogo.categoriaBoletines',
+  codificacion: 'campos.catalogo.categoriaCodificacion',
+  otros: 'campos.catalogo.categoriaOtros',
+};
+
 export function TabAcronimos() {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
@@ -42,7 +52,7 @@ export function TabAcronimos() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-3">
             <BookOpen className="w-6 h-6 text-accent" />
-            <h2 className="text-subheading font-bold text-foreground">Acrónimos y glosario</h2>
+            <h2 className="text-subheading font-bold text-foreground">{t('campos.catalogo.tituloAcronimosGlosario', {defaultValue: 'Acrónimos y glosario'})}</h2>
           </div>
           <div className="w-full md:w-72 relative">
             <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted z-10 pointer-events-none">
@@ -65,7 +75,7 @@ export function TabAcronimos() {
             return (
               <div key={category} className="animate-in fade-in duration-300">
                 <h3 className="text-body font-semibold text-accent mb-3 border-b border-[var(--glass-border)] pb-2">
-                  {CATEGORY_LABELS[category]}
+                  {t(CATEGORY_LABEL_KEYS[category], {defaultValue: CATEGORY_LABELS[category]})}
                 </h3>
                 
                 <div className="prose prose-sm dark:prose-invert max-w-none 
@@ -101,7 +111,7 @@ export function TabAcronimos() {
           
           {filteredData.length === 0 && (
             <div className="text-center py-12 text-muted border border-dashed border-[var(--glass-border)] rounded-lg">
-              <p>No se han encontrado resultados para "{searchTerm}"</p>
+              <p>{t('campos.catalogo.sinResultadosParaBusqueda', {termino: searchTerm, defaultValue: 'No se han encontrado resultados para "{{termino}}"'})}</p>
             </div>
           )}
         </div>

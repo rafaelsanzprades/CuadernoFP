@@ -21,10 +21,10 @@ const RASGOS_GRUPO = [
 ];
 
 const EDAD_TRAMOS = [
-  { id: "<18", label: "Menores de 18", test: (e: number) => e < 18 },
-  { id: "18-20", label: "18 a 20", test: (e: number) => e >= 18 && e <= 20 },
-  { id: "21-25", label: "21 a 25", test: (e: number) => e >= 21 && e <= 25 },
-  { id: "26+", label: "26 o más", test: (e: number) => e >= 26 },
+  { id: "<18", i18nKey: "menores18", label: "Menores de 18", test: (e: number) => e < 18 },
+  { id: "18-20", i18nKey: "edad18a20", label: "18 a 20", test: (e: number) => e >= 18 && e <= 20 },
+  { id: "21-25", i18nKey: "edad21a25", label: "21 a 25", test: (e: number) => e >= 21 && e <= 25 },
+  { id: "26+", i18nKey: "edad26mas", label: "26 o más", test: (e: number) => e >= 26 },
 ];
 
 function StatCard({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
@@ -110,31 +110,31 @@ export function ContextoGrupoTab() {
             <Users className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-subheading font-bold text-[var(--text-primary)]">Contexto del grupo</h2>
-            <p className="text-body text-muted-foreground">Define las características psico-pedagógicas y sociológicas del alumnado (necesarias para la PD).</p>
+            <h2 className="text-subheading font-bold text-[var(--text-primary)]">{t('campos.alumnado.contextoGrupoTitulo', {defaultValue: 'Contexto del grupo'})}</h2>
+            <p className="text-body text-muted-foreground">{t('campos.alumnado.contextoGrupoDesc', {defaultValue: 'Define las características psico-pedagógicas y sociológicas del alumnado (necesarias para la PD).'})}</p>
           </div>
         </div>
 
         <div className="glass-card p-6 border-t-4 border-t-sky-500">
           <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-1">
-            <span className="inline-flex"><BarChart2 className="w-[1.2em] h-[1.2em] mr-1 text-sky-400" /></span> Datos del grupo (automático)
+            <span className="inline-flex"><BarChart2 className="w-[1.2em] h-[1.2em] mr-1 text-sky-400" /></span> {t('campos.alumnado.datosGrupoTitulo', {defaultValue: 'Datos del grupo (automático)'})}
           </h2>
-          <p className="text-caption text-muted mb-4">Calculado a partir del alumnado registrado en esta pestaña de Curso. Ve a &quot;Listado&quot; para editar Edad/Repite si faltan.</p>
+          <p className="text-caption text-muted mb-4">{t('campos.alumnado.datosGrupoDesc', {defaultValue: 'Calculado a partir del alumnado registrado en esta pestaña de Curso. Ve a "Listado" para editar Edad/Repite si faltan.'})}</p>
           {total === 0 ? (
-            <p className="text-body text-muted">Todavía no hay alumnado registrado en este curso.</p>
+            <p className="text-body text-muted">{t('campos.alumnado.sinAlumnadoRegistrado', {defaultValue: 'Todavía no hay alumnado registrado en este curso.'})}</p>
           ) : (
             <div className="space-y-4">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <StatCard label="Alumnado total" value={total} />
-                <StatCard label="Menores de edad" value={menores} sub={`${Math.round((menores / total) * 100)}%`} />
-                <StatCard label="Edad media" value={edadMedia} />
-                <StatCard label="Repetidores" value={repetidores} sub={`${Math.round((repetidores / total) * 100)}%`} />
+                <StatCard label={t('campos.alumnado.statTotal', {defaultValue: 'Alumnado total'})} value={total} />
+                <StatCard label={t('campos.alumnado.statMenoresEdad', {defaultValue: 'Menores de edad'})} value={menores} sub={`${Math.round((menores / total) * 100)}%`} />
+                <StatCard label={t('campos.alumnado.statEdadMedia', {defaultValue: 'Edad media'})} value={edadMedia} />
+                <StatCard label={t('campos.alumnado.statRepetidores', {defaultValue: 'Repetidores'})} value={repetidores} sub={`${Math.round((repetidores / total) * 100)}%`} />
               </div>
               <div>
-                <p className="text-caption font-semibold text-muted mb-1.5">Franjas de edad</p>
+                <p className="text-caption font-semibold text-muted mb-1.5">{t('campos.alumnado.franjasEdadTitulo', {defaultValue: 'Franjas de edad'})}</p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {EDAD_TRAMOS.map((tramo) => (
-                    <StatCard key={tramo.id} label={tramo.label} value={conEdad.filter((a: any) => tramo.test(a.Edad)).length} />
+                    <StatCard key={tramo.id} label={t(`campos.alumnado.tramoEdad_${tramo.i18nKey}`, {defaultValue: tramo.label})} value={conEdad.filter((a: any) => tramo.test(a.Edad)).length} />
                   ))}
                 </div>
               </div>
@@ -144,7 +144,7 @@ export function ContextoGrupoTab() {
 
         <div className="glass-card p-6 border-t-4 border-t-cyan-500">
           <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-1">
-            <span className="inline-flex"><Activity className="w-[1.2em] h-[1.2em] mr-1 text-cyan-400" /></span> Rasgos característicos del grupo
+            <span className="inline-flex"><Activity className="w-[1.2em] h-[1.2em] mr-1 text-cyan-400" /></span> {t('campos.alumnado.rasgosGrupoTitulo', {defaultValue: 'Rasgos característicos del grupo'})}
           </h2>
           <p className="text-caption text-muted mb-3">{t('checks.contexto.seleccionOrientativa', {defaultValue: 'Selección orientativa para apoyar la redacción del texto de abajo (primera versión, se irá ampliando).'})}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">

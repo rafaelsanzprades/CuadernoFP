@@ -3,19 +3,21 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pi
 import { Card } from "@/components/ui/Card";
 import { useAppStore } from "@/store/useAppStore";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
+import { useTranslation } from "react-i18next";
 
 interface DashboardChartsProps {
   cursoData?: any;
 }
 
 export function DashboardCharts({ cursoData }: DashboardChartsProps) {
+  const { t } = useTranslation();
   const { df_sgmt } = useDynamicPlanning();
   const storeCursoData = useAppStore(state => state.cursoData);
   const actualCursoData = cursoData || storeCursoData;
 
   const barData = (df_sgmt || []).map((ud: any) => ({
-    name: (ud.id_ud === 'FEOE' || ud.id_ud === 'FEOE (Sin docencia)' || ud.id_ud === 'FEOE (Con docencia)') 
-      ? `FEOE (${actualCursoData?.info_fechas?.docencia_dual === 'con_docencia' ? 'Con docencia' : 'Sin docencia'})` 
+    name: (ud.id_ud === 'FEOE' || ud.id_ud === 'FEOE (Sin docencia)' || ud.id_ud === 'FEOE (Con docencia)')
+      ? `FEOE (${actualCursoData?.info_fechas?.docencia_dual === 'con_docencia' ? t('campos.dashboard.conDocencia', {defaultValue: 'Con docencia'}) : t('campos.dashboard.sinDocencia', {defaultValue: 'Sin docencia'})})`
       : ud.id_ud,
     Planificadas: ud.horas_ud || 0,
     Impartidas: Number(ud.Total_Imp || 0),
@@ -34,7 +36,7 @@ export function DashboardCharts({ cursoData }: DashboardChartsProps) {
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
       {/* Bar Chart */}
       <Card glow className="p-6 lg:col-span-2 flex flex-col h-[400px]">
-        <h3 className="text-subheading font-bold text-foreground mb-4">Progreso por unidad didáctica</h3>
+        <h3 className="text-subheading font-bold text-foreground mb-4">{t('campos.dashboard.progresoPorUD', {defaultValue: 'Progreso por unidad didáctica'})}</h3>
         <div className="flex-1">
           <ResponsiveContainer width="100%" height="100%" minWidth={1} minHeight={1}>
             <BarChart data={barData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
@@ -45,8 +47,8 @@ export function DashboardCharts({ cursoData }: DashboardChartsProps) {
                 itemStyle={{ color: '#fff' }}
               />
               <Legend wrapperStyle={{ paddingTop: '10px' }} />
-              <Bar dataKey="Planificadas" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="Impartidas" fill="#14a085" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="Planificadas" name={t('campos.dashboard.planificadas', {defaultValue: 'Planificadas'})} fill="#3b82f6" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="Impartidas" name={t('campos.dashboard.impartidas', {defaultValue: 'Impartidas'})} fill="#14a085" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -54,7 +56,7 @@ export function DashboardCharts({ cursoData }: DashboardChartsProps) {
 
       {/* Pie Chart */}
       <Card glow className="p-6 flex flex-col h-[400px]">
-        <h3 className="text-subheading font-bold text-foreground mb-4">Alta y baja de alumnado</h3>
+        <h3 className="text-subheading font-bold text-foreground mb-4">{t('campos.dashboard.altaBajaAlumnado', {defaultValue: 'Alta y baja de alumnado'})}</h3>
         <div className="flex-1">
           <ResponsiveContainer width="100%" height="100%" minWidth={1} minHeight={1}>
             <PieChart>
