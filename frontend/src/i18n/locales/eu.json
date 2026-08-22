@@ -793,5 +793,196 @@
       "exportarBriefing": "Briefing-a esportatu (PDF/DOCX)",
       "exportarFicha": "Fitxa esportatu (PDF/DOCX)"
     }
+  },
+  "placeholders": {
+    "ai": {
+      "pegaClaveSecreta": "Itsatsi hemen zure {{proveedor}} gako sekretua..."
+    },
+    "alumnado": {
+      "acuerdosTutoria": "Zein akordiotara iritsi zarete? Zein zeregin daude zain?",
+      "apellidos": "Abizenak...",
+      "describeTutoria": "Deskribatu labur tutoretzan hitz egindakoa...",
+      "dificultadesOpcional": "Zailtasunak (aukerakoa)",
+      "edad": "adina",
+      "nombre": "Izena...",
+      "telefono": "Telefonoa"
+    },
+    "archivos": {
+      "buscarModulo": "Bilatu moduluaren kodearen edo izenaren arabera...",
+      "claveMaestra": "Sartu zure gako nagusia...",
+      "ejCursoAcademico": "adib: 2025-26",
+      "ejCursoAcademico2": "Adib: 2026-27",
+      "ejNombreGrupo": "adib: 1A-GM"
+    },
+    "ayuda": {
+      "buscarDocumento": "Bilatu dokumentua..."
+    },
+    "catalogo": {
+      "buscarTerminoDescripcion": "Bilatu terminoa edo deskribapena..."
+    },
+    "chatbot": {
+      "escribeMensaje": "Idatzi zure mezua..."
+    },
+    "cloud": {
+      "ejemploClientId": "Adib: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    },
+    "comun": {
+      "escribeSobre": "Idatzi hemen honi buruz: {{tema}}..."
+    },
+    "contexto": {
+      "caracteristicasAlumnado": "Adib: Adin eta sarrera-profil anitzeko taldea...",
+      "contextoEscolar": "Adib: Lanbide Heziketako erreferentziazko zentroa...",
+      "entornoGeografico": "Adib: Andalán institutua Zaragozako X auzoan dago...",
+      "entornoSocioeconomico": "Adib: Eremuko enpresa-sarea honengatik nabarmentzen da...",
+      "infraestructura": "Adib: Informatikoki hornitutako gela-tailerra, 30 postuko...",
+      "textoIntroduccion": "Dokumentuaren sarrera-paragrafoa. Hutsik uzten bada, automatikoki sortzen da moduluaren izena, zikloa, araubidea eta iraupena erabiliz.",
+      "textoUdsModulo": "Unitate didaktikoak nola antolatzen diren azaltzen du. Hutsik uzten bada, automatikoki sortzen da df_ud-tik abiatuta."
+    },
+    "curriculo": {
+      "peso": "Pisua..."
+    },
+    "dashboard": {
+      "ejModulo": "Adib: ELE203, 0237-ictve",
+      "ejNombreGrupo": "Adib: 1A-GM 0237-ICTVE"
+    },
+    "evaluacion": {
+      "textoCriteriosCalificacion": "Moduluaren kalifikazio- eta biribiltze-irizpideak.",
+      "textoModeloRecuperacion": "Deskribatu errekuperazio hauek nola aplikatzen dituzun: zer estaltzen duten, nola haztatzen den bakoitza..."
+    },
+    "instrumentos": {
+      "descripcionIndicador": "Adierazlearen deskribapena",
+      "seleccionaIndicadores": "Hautatu adierazleak...",
+      "tituloInstrumento": "Tresnaren izenburua"
+    },
+    "modulo": {
+      "a1Justificacion": "Adierazi tituluari aplikagarri zaion oinarri arauemailea, hezkuntza-legeak eta errege-dekretuak...",
+      "a2Contextualizacion": "Tituluaren lanbide-profila, sozioekonomikoa eta zentroaren ezaugarri orokorrak...",
+      "anadirRecurso": "Gehitu zerrendan ez dagoen baliabide bat...",
+      "b3VinculacionEmpresa": "Enpresan egin beharreko jardueren orientabideak (FEOE)...",
+      "competenciasDigitales": "Zehaztu modulu honetan hautatutako gaitasun digitalak nola landuko diren...",
+      "competenciasEspecificas": "Berariazko eta zeharkako gaitasunak...",
+      "complementariasDetalle": "Idatzi bisitatzeko lekuak, enpresen izenak, gutxi gorabeherako datak edo gai zehatzak...",
+      "ejAlumno": "Adib. A ikaslea",
+      "ejDificultad": "Adib. Dislexia, AEN, gaitasun handiak...",
+      "elementosTransversales": "Zehaztu nahitaezko zeharkako elementuak nola txertatuko diren...",
+      "medidasDiversidadExtra": "Gehitu hemen neurri espezifikoak, gelarako sarbide-egokitzapenak edo araudi-justifikazio gehigarriak...",
+      "medidasInclusion": "Inklusio-neurriak eta banakako aldeen arreta...",
+      "metodologiaAplicada": "Erronketan oinarritutako metodologia aplikatuko da...",
+      "metodologiaCoordinacion": "Idatzi hemen beste modulu batzuekiko eta haien irakasleekiko koordinazioari buruz...",
+      "metodologiaEspecificidad": "Idatzi hemen zure eskola emateko moduari buruz aurreko hautaketan jaso ez den edozein berezitasun...",
+      "metodologiaOrganizacionGrupo": "Taldearen antolaketa, arrisku-prebentzioagatiko banaketak edo ratioak...",
+      "metodologiaPrincipios": "Adib: Ikaskuntza esanguratsua, ikaskuntzen funtzionaltasuna...",
+      "metodologiaTipo": "Metodologia motak: teoria, tailerra, simulazio-praktikak...",
+      "nombreInstrumento": "Tresnaren izena",
+      "nombreNivel": "Izena (adib. Nahikoa)",
+      "objetivosGenerales": "Modulura aplikagarri diren tituluaren helburu orokorrak...",
+      "plataformasOnline": "Sareko plataformak, urruneko baliabideak...",
+      "protocolosContingencia": "Gehitu hemen protokolo espezifikoak edo urruneko irakaskuntzarako baliabideen erabilerari buruzko argibideak...",
+      "proyectosInnovacion": "Deskribatu moduluaren berrikuntza-proiektuak...",
+      "proyectosIntermodulares": "Zehaztu modulu arteko proiektuetan parte-hartzea...",
+      "textoFormacionEmpresa": "Enpresako prestakuntzari buruzko testua...",
+      "voluntariasDetalle": "Idatzi borondatezko jardueren lekuak, gutxi gorabeherako datak edo gai zehatzak..."
+    },
+    "reclamaciones": {
+      "comoSeHaResuelto": "Erreklamazioa nola konpondu den..."
+    },
+    "secuenciacion": {
+      "agrupamientos": "Talde handia teoriarako, bikoteak praktiketarako...",
+      "aspectosClave": "Hautatu funtsezko alderdiak...",
+      "briefing": "Adib: X enpresako sistemen teknikaria zara eta laguntza-tiket hau jasotzen duzu...",
+      "entrega": "Adib: PDF dokumentua Moodle-ra igota ostiralean 23:59rako...",
+      "evidencias": "Adib: Txosten tekniko 1. Konfigurazioaren pantaila-argazki 1. 5 minutuko ahozko aurkezpen 1.",
+      "intencionEducativa": "Adib: Unitate honetan ikasleek honako oinarriak ulertuko dituzte...",
+      "pasos": "1. Tiketa aztertu... 2. Erregistroak berrikusi... 3. Konponbidea proposatu...",
+      "recursos": "Hautatu baliabideak...",
+      "temporizacion": "Adib: 1. hiruhilekoa (4. eta 6. asteen artean)...",
+      "transversalidad": "Adib: Tresna digitalak erabiliko dira..."
+    },
+    "seguimiento": {
+      "escribeSeguimientoClase": "Idatzi hemen eskolaren jarraipena, gorabeherak edo benetako aurrerapena..."
+    }
+  },
+  "tooltips": {
+    "alumnado": {
+      "eliminarAlumnado": "Ikasleak ezabatu",
+      "fechasCalculadasNacimiento": "Jaiotze-datatik kalkulatutako datak, FEOE eta adin nagusitasunerako garrantzitsuak",
+      "importarCsv": "CSV inportatu (Izena, Abizenak...)"
+    },
+    "archivos": {
+      "creaCursoGrupo": "Ikasturte bat eta lotutako talde-fitxategia sortzen ditu",
+      "guardarComo": "Gorde honela...",
+      "importarCursoHuerfano": "Kurtso zurtza inportatu"
+    },
+    "calendario": {
+      "derivadoFechasGenerales": "Data orokorretatik eratorria, ez da hemen ezabatzen",
+      "derivadoFechasGenerales2": "Data orokorretatik eratorria",
+      "dias": "Egunak",
+      "horas": "Orduak"
+    },
+    "chatbot": {
+      "adjuntarPdfImagen": "Erantsi PDFa edo irudia",
+      "archivoAdjuntoEnviado": "AAri bidalitako fitxategi erantsia"
+    },
+    "comun": {
+      "vistaPreviaPdf": "PDF aurrebista"
+    },
+    "curriculo": {
+      "eliminarCe": "CE ezabatu",
+      "horasTotalesModulo": "Moduluaren guztizko orduak curriculumaren arabera (BOA)",
+      "sumaHorasSesiones": "Saio guztien orduen batura",
+      "sumaHorasUd": "UD bakoitzari esleitutako orduen batura"
+    },
+    "dashboard": {
+      "pctImpartidoPrevisto": "% emanda / aurreikusita",
+      "quitarDeRecientes": "Berrienetatik kendu",
+      "trimestreFinUd": "UDa amaitzen den hiruhilekoa"
+    },
+    "diario": {
+      "menorDeEdad": "Adingabea",
+      "ningunCursoActivo": "Ez dago ikasturte aktiborik"
+    },
+    "evaluacion": {
+      "maxValor": "Max: {{valor}}",
+      "mediaValor": "Batez bestekoa: {{valor}}",
+      "minValor": "Min: {{valor}}",
+      "topeCompensablesActivo": "Gainditu gabeko CE kopuruak modulu honen konpentsatze-muga gainditzen du (Datuak → Biribiltze-arauak)"
+    },
+    "header": {
+      "uneteTelegram": "Elkartu gure Telegram taldera"
+    },
+    "instrumentos": {
+      "cancelarSeleccion": "Hautapena bertan behera utzi",
+      "configuracionAvanzada": "Konfigurazio aurreratua",
+      "eliminarActividad": "Jarduera ezabatu",
+      "item12Origen": "12. elementua: nork betetzen duen tresna hau",
+      "item30Procedimiento": "30. elementua: JEG prozedura (arrunta/errekuperazioa/apartekoa)",
+      "pesoRelativoCe": "CEaren barruko pisu erlatiboa",
+      "sustituidaPorRecuperacion": "Errekuperazioak ordezkatuta"
+    },
+    "modulo": {
+      "eliminarRegistro": "Erregistroa ezabatu"
+    },
+    "secuenciacion": {
+      "configurarTarea": "Gaitasun-zeregina konfiguratu",
+      "configurarUd": "Unitate didaktikoa konfiguratu",
+      "eliminarSesion": "Saioa ezabatu",
+      "eliminarTarea": "Zeregina ezabatu",
+      "pctInstrumento": "Ebaluazio-tresnaren %, saio honek puntuatzen badu"
+    }
+  },
+  "aria": {
+    "header": {
+      "menuPrincipal": "Menu nagusia"
+    },
+    "legal": {
+      "indiceSecciones": "Atalen aurkibidea"
+    },
+    "modulo": {
+      "eliminarInstrumento": "Tresna ezabatu",
+      "eliminarNivel": "Maila ezabatu"
+    },
+    "sidebar": {
+      "navegacionPrincipal": "Nabigazio nagusia"
+    }
   }
 }

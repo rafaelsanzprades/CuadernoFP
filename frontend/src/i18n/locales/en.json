@@ -793,5 +793,196 @@
       "exportarBriefing": "Export briefing (PDF/DOCX)",
       "exportarFicha": "Export sheet (PDF/DOCX)"
     }
+  },
+  "placeholders": {
+    "ai": {
+      "pegaClaveSecreta": "Paste your {{proveedor}} secret key here..."
+    },
+    "alumnado": {
+      "acuerdosTutoria": "What agreements were reached? What tasks are pending?",
+      "apellidos": "Last name...",
+      "describeTutoria": "Briefly describe what was discussed in the tutoring session...",
+      "dificultadesOpcional": "Difficulties (optional)",
+      "edad": "age",
+      "nombre": "First name...",
+      "telefono": "Phone"
+    },
+    "archivos": {
+      "buscarModulo": "Search by module code or name...",
+      "claveMaestra": "Enter your master key...",
+      "ejCursoAcademico": "e.g.: 2025-26",
+      "ejCursoAcademico2": "E.g.: 2026-27",
+      "ejNombreGrupo": "e.g.: 1A-GM"
+    },
+    "ayuda": {
+      "buscarDocumento": "Search document..."
+    },
+    "catalogo": {
+      "buscarTerminoDescripcion": "Search term or description..."
+    },
+    "chatbot": {
+      "escribeMensaje": "Type your message..."
+    },
+    "cloud": {
+      "ejemploClientId": "E.g.: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    },
+    "comun": {
+      "escribeSobre": "Write here about: {{tema}}..."
+    },
+    "contexto": {
+      "caracteristicasAlumnado": "E.g.: Group diverse in ages and entry profiles...",
+      "contextoEscolar": "E.g.: Reference center in Vocational Training...",
+      "entornoGeografico": "E.g.: IES Andalán is located in district X of Zaragoza...",
+      "entornoSocioeconomico": "E.g.: The business fabric of the area stands out for...",
+      "infraestructura": "E.g.: Computerized classroom-workshop with 30 workstations...",
+      "textoIntroduccion": "Introductory paragraph of the document. If left empty, one is generated automatically with the module name, cycle, arrangement and duration.",
+      "textoUdsModulo": "Description of how the teaching units are organized. If left empty, it is generated automatically from df_ud."
+    },
+    "curriculo": {
+      "peso": "Weight..."
+    },
+    "dashboard": {
+      "ejModulo": "E.g.: ELE203, 0237-ictve",
+      "ejNombreGrupo": "E.g.: 1A-GM 0237-ICTVE"
+    },
+    "evaluacion": {
+      "textoCriteriosCalificacion": "Module grading and rounding criteria.",
+      "textoModeloRecuperacion": "Describe how you apply these recovery assessments: what they cover, how each one is weighted..."
+    },
+    "instrumentos": {
+      "descripcionIndicador": "Indicator description",
+      "seleccionaIndicadores": "Select indicators...",
+      "tituloInstrumento": "Instrument title"
+    },
+    "modulo": {
+      "a1Justificacion": "Indicate the regulatory basis, education laws and royal decrees applicable to the qualification...",
+      "a2Contextualizacion": "Professional profile of the qualification, socioeconomic files and general characteristics of the center...",
+      "anadirRecurso": "Add a resource not on the list...",
+      "b3VinculacionEmpresa": "Guidance on the activities to be carried out at the company (FEOE)...",
+      "competenciasDigitales": "Detail how the digital competences selected for this module will be developed...",
+      "competenciasEspecificas": "Specific and cross-curricular competences...",
+      "complementariasDetalle": "Note places to visit, company names, approximate dates or specific topics...",
+      "ejAlumno": "E.g. Student A",
+      "ejDificultad": "E.g. Dyslexia, ASD, high abilities...",
+      "elementosTransversales": "Detail how the mandatory cross-curricular elements will be integrated...",
+      "medidasDiversidadExtra": "Add specific measures, classroom access adaptations or additional regulatory justifications here...",
+      "medidasInclusion": "Inclusion measures and attention to individual differences...",
+      "metodologiaAplicada": "The challenge-based methodology will be applied to...",
+      "metodologiaCoordinacion": "Write here about coordination with other modules and their teaching staff...",
+      "metodologiaEspecificidad": "Write here any specifics about your teaching style not covered in the selection above...",
+      "metodologiaOrganizacionGrupo": "Group organization, splits for risk prevention or ratios...",
+      "metodologiaPrincipios": "E.g.: Meaningful learning, usefulness of learning...",
+      "metodologiaTipo": "List of methodology types such as theory, workshop, simulated practice...",
+      "nombreInstrumento": "Instrument name",
+      "nombreNivel": "Name (e.g. Satisfactory)",
+      "objetivosGenerales": "General objectives of the qualification applicable to the module...",
+      "plataformasOnline": "Online platforms, remote resources...",
+      "protocolosContingencia": "Add specific protocols or clarifications about the use of resources for remote teaching...",
+      "proyectosInnovacion": "Describe the module's innovation projects...",
+      "proyectosIntermodulares": "Detail participation in cross-module projects...",
+      "textoFormacionEmpresa": "Text about workplace training...",
+      "voluntariasDetalle": "Note places, approximate dates or specific topics of the voluntary activities..."
+    },
+    "reclamaciones": {
+      "comoSeHaResuelto": "How the complaint was resolved..."
+    },
+    "secuenciacion": {
+      "agrupamientos": "Whole group for theory, pairs for practice...",
+      "aspectosClave": "Select key aspects...",
+      "briefing": "E.g.: You are the systems technician at company X and receive the following support ticket...",
+      "entrega": "E.g.: PDF document uploaded to Moodle before Friday at 23:59...",
+      "evidencias": "E.g.: 1 Technical report. 1 Screenshot of the configuration. 1 5-min oral presentation.",
+      "intencionEducativa": "E.g.: In this unit, students will understand the fundamentals of...",
+      "pasos": "1. Analyze the ticket... 2. Review the logs... 3. Propose a solution...",
+      "recursos": "Select resources...",
+      "temporizacion": "E.g.: 1st term (weeks 4 to 6)...",
+      "transversalidad": "E.g.: Digital tools will be used to..."
+    },
+    "seguimiento": {
+      "escribeSeguimientoClase": "Write here the class tracking, incidents or actual progress..."
+    }
+  },
+  "tooltips": {
+    "alumnado": {
+      "eliminarAlumnado": "Remove students",
+      "fechasCalculadasNacimiento": "Dates calculated from date of birth, relevant for FEOE and legal age",
+      "importarCsv": "Import CSV (First name, Last name...)"
+    },
+    "archivos": {
+      "creaCursoGrupo": "Creates a course and its associated group file",
+      "guardarComo": "Save as...",
+      "importarCursoHuerfano": "Import orphaned course"
+    },
+    "calendario": {
+      "derivadoFechasGenerales": "Derived from general dates, cannot be deleted here",
+      "derivadoFechasGenerales2": "Derived from general dates",
+      "dias": "Days",
+      "horas": "Hours"
+    },
+    "chatbot": {
+      "adjuntarPdfImagen": "Attach PDF or image",
+      "archivoAdjuntoEnviado": "Attachment sent to the AI"
+    },
+    "comun": {
+      "vistaPreviaPdf": "PDF preview"
+    },
+    "curriculo": {
+      "eliminarCe": "Remove CE",
+      "horasTotalesModulo": "Total module hours according to the curriculum (BOA)",
+      "sumaHorasSesiones": "Sum of the hours of all sessions",
+      "sumaHorasUd": "Sum of the hours assigned to each UD"
+    },
+    "dashboard": {
+      "pctImpartidoPrevisto": "% delivered / planned",
+      "quitarDeRecientes": "Remove from recents",
+      "trimestreFinUd": "Term in which the UD ends"
+    },
+    "diario": {
+      "menorDeEdad": "Minor",
+      "ningunCursoActivo": "No active course"
+    },
+    "evaluacion": {
+      "maxValor": "Max: {{valor}}",
+      "mediaValor": "Average: {{valor}}",
+      "minValor": "Min: {{valor}}",
+      "topeCompensablesActivo": "Number of failed CE exceeds this module's compensable maximum (Data → Rounding rules)"
+    },
+    "header": {
+      "uneteTelegram": "Join our Telegram group"
+    },
+    "instrumentos": {
+      "cancelarSeleccion": "Cancel selection",
+      "configuracionAvanzada": "Advanced settings",
+      "eliminarActividad": "Remove activity",
+      "item12Origen": "Item 12: who fills in this instrument",
+      "item30Procedimiento": "Item 30: JEG procedure (ordinary/recovery/extraordinary)",
+      "pesoRelativoCe": "Relative weight within the CE",
+      "sustituidaPorRecuperacion": "Replaced by recovery"
+    },
+    "modulo": {
+      "eliminarRegistro": "Remove record"
+    },
+    "secuenciacion": {
+      "configurarTarea": "Configure competency-based task",
+      "configurarUd": "Configure teaching unit",
+      "eliminarSesion": "Remove session",
+      "eliminarTarea": "Remove task",
+      "pctInstrumento": "% of the assessment instrument, if this session scores"
+    }
+  },
+  "aria": {
+    "header": {
+      "menuPrincipal": "Main menu"
+    },
+    "legal": {
+      "indiceSecciones": "Section index"
+    },
+    "modulo": {
+      "eliminarInstrumento": "Remove instrument",
+      "eliminarNivel": "Remove level"
+    },
+    "sidebar": {
+      "navegacionPrincipal": "Main navigation"
+    }
   }
 }

@@ -793,5 +793,196 @@
       "exportarBriefing": "Exportar briefing (PDF/DOCX)",
       "exportarFicha": "Exportar fitxa (PDF/DOCX)"
     }
+  },
+  "placeholders": {
+    "ai": {
+      "pegaClaveSecreta": "Enganxa aquí la teva clau secreta de {{proveedor}}..."
+    },
+    "alumnado": {
+      "acuerdosTutoria": "A quins acords s'ha arribat? Quines tasques pendents queden?",
+      "apellidos": "Cognoms...",
+      "describeTutoria": "Descriu breument el que s'ha comentat a la tutoria...",
+      "dificultadesOpcional": "Dificultats (opcional)",
+      "edad": "edat",
+      "nombre": "Nom...",
+      "telefono": "Telèfon"
+    },
+    "archivos": {
+      "buscarModulo": "Cerca per codi o nom del mòdul...",
+      "claveMaestra": "Introdueix la teva clau mestra...",
+      "ejCursoAcademico": "ex: 2025-26",
+      "ejCursoAcademico2": "Ex: 2026-27",
+      "ejNombreGrupo": "ex: 1A-GM"
+    },
+    "ayuda": {
+      "buscarDocumento": "Cerca document..."
+    },
+    "catalogo": {
+      "buscarTerminoDescripcion": "Cerca terme o descripció..."
+    },
+    "chatbot": {
+      "escribeMensaje": "Escriu el teu missatge..."
+    },
+    "cloud": {
+      "ejemploClientId": "Ex: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    },
+    "comun": {
+      "escribeSobre": "Escriu aquí sobre: {{tema}}..."
+    },
+    "contexto": {
+      "caracteristicasAlumnado": "Ex: Grup divers en edats i perfils d'ingrés...",
+      "contextoEscolar": "Ex: Centre de referència en Formació Professional...",
+      "entornoGeografico": "Ex: L'IES Andalán se situa al barri X de Saragossa...",
+      "entornoSocioeconomico": "Ex: El teixit empresarial de la zona destaca per...",
+      "infraestructura": "Ex: Aula-taller informatitzada amb 30 llocs...",
+      "textoIntroduccion": "Paràgraf introductori del document. Si es deixa buit, es genera un automàticament amb el nom del mòdul, cicle, règim i durada.",
+      "textoUdsModulo": "Descripció de com s'organitzen les unitats didàctiques. Si es deixa buit, es genera automàticament a partir de df_ud."
+    },
+    "curriculo": {
+      "peso": "Pes..."
+    },
+    "dashboard": {
+      "ejModulo": "Ex: ELE203, 0237-ictve",
+      "ejNombreGrupo": "Ex: 1A-GM 0237-ICTVE"
+    },
+    "evaluacion": {
+      "textoCriteriosCalificacion": "Criteris de qualificació i arrodoniment del mòdul.",
+      "textoModeloRecuperacion": "Descriu com apliques aquestes recuperacions: què cobreixen, com es pondera cadascuna..."
+    },
+    "instrumentos": {
+      "descripcionIndicador": "Descripció de l'indicador",
+      "seleccionaIndicadores": "Selecciona indicadors...",
+      "tituloInstrumento": "Títol de l'instrument"
+    },
+    "modulo": {
+      "a1Justificacion": "Indicar base normativa, lleis d'educació i reials decrets aplicables al títol...",
+      "a2Contextualizacion": "Perfil professional del títol, arxius socioeconòmic i característiques generals del centre...",
+      "anadirRecurso": "Afegir un recurs que no estigui a la llista...",
+      "b3VinculacionEmpresa": "Orientacions sobre les activitats a realitzar a l'empresa (FEOE)...",
+      "competenciasDigitales": "Detalla com es desenvoluparan les competències digitals seleccionades en aquest mòdul...",
+      "competenciasEspecificas": "Competències específiques i transversals...",
+      "complementariasDetalle": "Anota llocs a visitar, noms d'empreses, dates aproximades o temàtiques concretes...",
+      "ejAlumno": "Ex. Alumne A",
+      "ejDificultad": "Ex. Dislèxia, TEA, altes capacitats...",
+      "elementosTransversales": "Detalla com s'integraran els elements transversals obligatoris...",
+      "medidasDiversidadExtra": "Afegeix aquí mesures específiques, adaptacions d'accés a l'aula o justificacions normatives extra...",
+      "medidasInclusion": "Mesures d'inclusió i atenció a les diferències individuals...",
+      "metodologiaAplicada": "S'aplicarà la metodologia basada en reptes per a...",
+      "metodologiaCoordinacion": "Escriu aquí sobre coordinació amb altres mòduls i el seu professorat...",
+      "metodologiaEspecificidad": "Escriu aquí qualsevol especificitat sobre la teva manera d'impartir classes que no estigui coberta a la selecció anterior...",
+      "metodologiaOrganizacionGrupo": "Organització del grup, desdoblaments per prevenció de riscos o ràtios...",
+      "metodologiaPrincipios": "Ex: Aprenentatge significatiu, funcionalitat dels aprenentatges...",
+      "metodologiaTipo": "Relació de metodologies tipus com teoria, taller, pràctiques simulades...",
+      "nombreInstrumento": "Nom de l'instrument",
+      "nombreNivel": "Nom (ex. Suficient)",
+      "objetivosGenerales": "Objectius generals del títol aplicables al mòdul...",
+      "plataformasOnline": "Plataformes en línia, recursos a distància...",
+      "protocolosContingencia": "Afegeix aquí protocols específics o aclariments sobre l'ús de recursos per a docència a distància...",
+      "proyectosInnovacion": "Descriu els projectes d'innovació del mòdul...",
+      "proyectosIntermodulares": "Detalla la participació en projectes intermodulars...",
+      "textoFormacionEmpresa": "Text sobre la formació a l'empresa...",
+      "voluntariasDetalle": "Anota llocs, dates aproximades o temàtiques concretes de les activitats voluntàries..."
+    },
+    "reclamaciones": {
+      "comoSeHaResuelto": "Com s'ha resolt la reclamació..."
+    },
+    "secuenciacion": {
+      "agrupamientos": "Gran grup per a teoria, parelles per a pràctiques...",
+      "aspectosClave": "Selecciona aspectes clau...",
+      "briefing": "Ex: Ets el tècnic de sistemes de l'empresa X i reps el següent tiquet de suport...",
+      "entrega": "Ex: Document PDF pujat a Moodle abans de divendres a les 23:59...",
+      "evidencias": "Ex: 1 Informe tècnic. 1 Captura de pantalla de la configuració. 1 Presentació oral de 5 min.",
+      "intencionEducativa": "Ex: En aquesta unitat l'alumnat comprendrà els fonaments de...",
+      "pasos": "1. Analitzar el tiquet... 2. Revisar els logs... 3. Proposar solució...",
+      "recursos": "Selecciona recursos...",
+      "temporizacion": "Ex: 1r trimestre (setmanes 4 a 6)...",
+      "transversalidad": "Ex: S'utilitzaran eines digitals per a..."
+    },
+    "seguimiento": {
+      "escribeSeguimientoClase": "Escriu aquí el seguiment de la classe, incidències o progrés real..."
+    }
+  },
+  "tooltips": {
+    "alumnado": {
+      "eliminarAlumnado": "Eliminar alumnat",
+      "fechasCalculadasNacimiento": "Dates calculades a partir de naixement, rellevants per a FEOE i majoria d'edat",
+      "importarCsv": "Importar CSV (Nom, Cognoms...)"
+    },
+    "archivos": {
+      "creaCursoGrupo": "Crea un curs i el seu arxiu de grup associat",
+      "guardarComo": "Desar com a...",
+      "importarCursoHuerfano": "Importar curs orfe"
+    },
+    "calendario": {
+      "derivadoFechasGenerales": "Derivat de dates generals, no s'esborra aquí",
+      "derivadoFechasGenerales2": "Derivat de dates generals",
+      "dias": "Dies",
+      "horas": "Hores"
+    },
+    "chatbot": {
+      "adjuntarPdfImagen": "Adjuntar PDF o imatge",
+      "archivoAdjuntoEnviado": "Arxiu adjunt enviat a la IA"
+    },
+    "comun": {
+      "vistaPreviaPdf": "Vista prèvia PDF"
+    },
+    "curriculo": {
+      "eliminarCe": "Eliminar CE",
+      "horasTotalesModulo": "Hores totals del mòdul segons currículum (BOA)",
+      "sumaHorasSesiones": "Suma de les hores de totes les sessions",
+      "sumaHorasUd": "Suma de les hores assignades a cada UD"
+    },
+    "dashboard": {
+      "pctImpartidoPrevisto": "% impartit / previst",
+      "quitarDeRecientes": "Treure de recents",
+      "trimestreFinUd": "Trimestre en què acaba la UD"
+    },
+    "diario": {
+      "menorDeEdad": "Menor d'edat",
+      "ningunCursoActivo": "Cap curs actiu"
+    },
+    "evaluacion": {
+      "maxValor": "Màx: {{valor}}",
+      "mediaValor": "Mitjana: {{valor}}",
+      "minValor": "Mín: {{valor}}",
+      "topeCompensablesActivo": "El nombre de CE suspesos supera el màxim compensable d'aquest mòdul (Dades → Regles d'arrodoniment)"
+    },
+    "header": {
+      "uneteTelegram": "Uneix-te al nostre grup de Telegram"
+    },
+    "instrumentos": {
+      "cancelarSeleccion": "Cancel·lar selecció",
+      "configuracionAvanzada": "Configuració avançada",
+      "eliminarActividad": "Eliminar activitat",
+      "item12Origen": "Ítem 12: qui emplena aquest instrument",
+      "item30Procedimiento": "Ítem 30: procediment JEG (ordinari/recuperació/extraordinària)",
+      "pesoRelativoCe": "Pes relatiu dins del CE",
+      "sustituidaPorRecuperacion": "Substituïda per recuperació"
+    },
+    "modulo": {
+      "eliminarRegistro": "Eliminar registre"
+    },
+    "secuenciacion": {
+      "configurarTarea": "Configurar tasca competencial",
+      "configurarUd": "Configurar unitat didàctica",
+      "eliminarSesion": "Eliminar sessió",
+      "eliminarTarea": "Eliminar tasca",
+      "pctInstrumento": "% de l'instrument d'avaluació, si aquesta sessió puntua"
+    }
+  },
+  "aria": {
+    "header": {
+      "menuPrincipal": "Menú principal"
+    },
+    "legal": {
+      "indiceSecciones": "Índex de seccions"
+    },
+    "modulo": {
+      "eliminarInstrumento": "Eliminar instrument",
+      "eliminarNivel": "Eliminar nivell"
+    },
+    "sidebar": {
+      "navegacionPrincipal": "Navegació principal"
+    }
   }
 }

@@ -793,5 +793,196 @@
       "exportarBriefing": "Exportar briefing (PDF/DOCX)",
       "exportarFicha": "Exportar ficha (PDF/DOCX)"
     }
+  },
+  "placeholders": {
+    "ai": {
+      "pegaClaveSecreta": "Pega aquí a túa clave secreta de {{proveedor}}..."
+    },
+    "alumnado": {
+      "acuerdosTutoria": "A que acordos se chegou? Que tarefas pendentes quedan?",
+      "apellidos": "Apelidos...",
+      "describeTutoria": "Describe brevemente o comentado na titoría...",
+      "dificultadesOpcional": "Dificultades (opcional)",
+      "edad": "idade",
+      "nombre": "Nome...",
+      "telefono": "Teléfono"
+    },
+    "archivos": {
+      "buscarModulo": "Buscar por código ou nome do módulo...",
+      "claveMaestra": "Introduce a túa clave mestra...",
+      "ejCursoAcademico": "ex: 2025-26",
+      "ejCursoAcademico2": "Ex: 2026-27",
+      "ejNombreGrupo": "ex: 1A-GM"
+    },
+    "ayuda": {
+      "buscarDocumento": "Buscar documento..."
+    },
+    "catalogo": {
+      "buscarTerminoDescripcion": "Buscar termo ou descrición..."
+    },
+    "chatbot": {
+      "escribeMensaje": "Escribe a túa mensaxe..."
+    },
+    "cloud": {
+      "ejemploClientId": "Ex: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    },
+    "comun": {
+      "escribeSobre": "Escribe aquí sobre: {{tema}}..."
+    },
+    "contexto": {
+      "caracteristicasAlumnado": "Ex: Grupo diverso en idades e perfís de ingreso...",
+      "contextoEscolar": "Ex: Centro de referencia en Formación Profesional...",
+      "entornoGeografico": "Ex: O IES Andalán sitúase no barrio X de Zaragoza...",
+      "entornoSocioeconomico": "Ex: O tecido empresarial da zona destaca por...",
+      "infraestructura": "Ex: Aula-obradoiro informatizada con 30 postos...",
+      "textoIntroduccion": "Parágrafo introdutorio do documento. Se se deixa baleiro, xérase un automaticamente co nome do módulo, ciclo, réxime e duración.",
+      "textoUdsModulo": "Descrición de como se organizan as unidades didácticas. Se se deixa baleiro, xérase automaticamente a partir de df_ud."
+    },
+    "curriculo": {
+      "peso": "Peso..."
+    },
+    "dashboard": {
+      "ejModulo": "Ex: ELE203, 0237-ictve",
+      "ejNombreGrupo": "Ex: 1A-GM 0237-ICTVE"
+    },
+    "evaluacion": {
+      "textoCriteriosCalificacion": "Criterios de cualificación e arredondamento do módulo.",
+      "textoModeloRecuperacion": "Describe como aplicas estas recuperacións: que cobren, como se pondera cada unha..."
+    },
+    "instrumentos": {
+      "descripcionIndicador": "Descrición do indicador",
+      "seleccionaIndicadores": "Selecciona indicadores...",
+      "tituloInstrumento": "Título do instrumento"
+    },
+    "modulo": {
+      "a1Justificacion": "Indicar base normativa, leis de educación e reais decretos aplicables ao título...",
+      "a2Contextualizacion": "Perfil profesional do título, arquivos socioeconómico e características xerais do centro...",
+      "anadirRecurso": "Engadir un recurso que non estea na lista...",
+      "b3VinculacionEmpresa": "Orientacións sobre as actividades a realizar na empresa (FEOE)...",
+      "competenciasDigitales": "Detalla como se desenvolverán as competencias dixitais seleccionadas neste módulo...",
+      "competenciasEspecificas": "Competencias específicas e transversais...",
+      "complementariasDetalle": "Anota lugares a visitar, nomes de empresas, datas aproximadas ou temáticas concretas...",
+      "ejAlumno": "Ex. Alumno A",
+      "ejDificultad": "Ex. Dislexia, TEA, altas capacidades...",
+      "elementosTransversales": "Detalla como se integrarán os elementos transversais obrigatorios...",
+      "medidasDiversidadExtra": "Engade aquí medidas específicas, adaptacións de acceso á aula ou xustificacións normativas extra...",
+      "medidasInclusion": "Medidas de inclusión e atención ás diferenzas individuais...",
+      "metodologiaAplicada": "Aplicarase a metodoloxía baseada en retos para...",
+      "metodologiaCoordinacion": "Escribe aquí sobre coordinación con outros módulos e o seu profesorado...",
+      "metodologiaEspecificidad": "Escribe aquí calquera especificidade sobre a túa forma de impartir clases que non estea cuberta na selección anterior...",
+      "metodologiaOrganizacionGrupo": "Organización do grupo, desdobramentos por prevención de riscos ou ratios...",
+      "metodologiaPrincipios": "Ex: Aprendizaxe significativa, funcionalidade das aprendizaxes...",
+      "metodologiaTipo": "Relación de metodoloxías tipo como teoría, obradoiro, prácticas simuladas...",
+      "nombreInstrumento": "Nome do instrumento",
+      "nombreNivel": "Nome (ex. Suficiente)",
+      "objetivosGenerales": "Obxectivos xerais do título aplicables ao módulo...",
+      "plataformasOnline": "Plataformas en liña, recursos a distancia...",
+      "protocolosContingencia": "Engade aquí protocolos específicos ou aclaracións sobre o uso de recursos para docencia a distancia...",
+      "proyectosInnovacion": "Describe os proxectos de innovación do módulo...",
+      "proyectosIntermodulares": "Detalla a participación en proxectos intermodulares...",
+      "textoFormacionEmpresa": "Texto sobre a formación na empresa...",
+      "voluntariasDetalle": "Anota lugares, datas aproximadas ou temáticas concretas das actividades voluntarias..."
+    },
+    "reclamaciones": {
+      "comoSeHaResuelto": "Como se resolveu a reclamación..."
+    },
+    "secuenciacion": {
+      "agrupamientos": "Gran grupo para teoría, parellas para prácticas...",
+      "aspectosClave": "Selecciona aspectos clave...",
+      "briefing": "Ex: Es o técnico de sistemas da empresa X e recibes o seguinte ticket de soporte...",
+      "entrega": "Ex: Documento PDF subido a Moodle antes do venres ás 23:59...",
+      "evidencias": "Ex: 1 Informe técnico. 1 Captura de pantalla da configuración. 1 Presentación oral de 5 min.",
+      "intencionEducativa": "Ex: Nesta unidade o alumnado comprenderá os fundamentos de...",
+      "pasos": "1. Analizar o ticket... 2. Revisar os logs... 3. Propoñer solución...",
+      "recursos": "Selecciona recursos...",
+      "temporizacion": "Ex: 1º trimestre (semanas 4 a 6)...",
+      "transversalidad": "Ex: Utilizaranse ferramentas dixitais para..."
+    },
+    "seguimiento": {
+      "escribeSeguimientoClase": "Escribe aquí o seguimento da clase, incidencias ou progreso real..."
+    }
+  },
+  "tooltips": {
+    "alumnado": {
+      "eliminarAlumnado": "Eliminar alumnado",
+      "fechasCalculadasNacimiento": "Datas calculadas a partir de nacemento, relevantes para FEOE e maioría de idade",
+      "importarCsv": "Importar CSV (Nome, Apelidos...)"
+    },
+    "archivos": {
+      "creaCursoGrupo": "Crea un curso e o seu arquivo de grupo asociado",
+      "guardarComo": "Gardar como...",
+      "importarCursoHuerfano": "Importar curso orfo"
+    },
+    "calendario": {
+      "derivadoFechasGenerales": "Derivado de datas xerais, non se borra aquí",
+      "derivadoFechasGenerales2": "Derivado de datas xerais",
+      "dias": "Días",
+      "horas": "Horas"
+    },
+    "chatbot": {
+      "adjuntarPdfImagen": "Adxuntar PDF ou imaxe",
+      "archivoAdjuntoEnviado": "Arquivo anexo enviado á IA"
+    },
+    "comun": {
+      "vistaPreviaPdf": "Vista previa PDF"
+    },
+    "curriculo": {
+      "eliminarCe": "Eliminar CE",
+      "horasTotalesModulo": "Horas totais do módulo segundo currículo (BOA)",
+      "sumaHorasSesiones": "Suma das horas de todas as sesións",
+      "sumaHorasUd": "Suma das horas asignadas a cada UD"
+    },
+    "dashboard": {
+      "pctImpartidoPrevisto": "% impartido / previsto",
+      "quitarDeRecientes": "Quitar de recentes",
+      "trimestreFinUd": "Trimestre no que remata a UD"
+    },
+    "diario": {
+      "menorDeEdad": "Menor de idade",
+      "ningunCursoActivo": "Ningún curso activo"
+    },
+    "evaluacion": {
+      "maxValor": "Máx: {{valor}}",
+      "mediaValor": "Media: {{valor}}",
+      "minValor": "Mín: {{valor}}",
+      "topeCompensablesActivo": "O número de CE suspensos supera o máximo compensable deste módulo (Datos → Regras de arredondamento)"
+    },
+    "header": {
+      "uneteTelegram": "Únete ao noso grupo de Telegram"
+    },
+    "instrumentos": {
+      "cancelarSeleccion": "Cancelar selección",
+      "configuracionAvanzada": "Configuración avanzada",
+      "eliminarActividad": "Eliminar actividade",
+      "item12Origen": "Ítem 12: quen cobre este instrumento",
+      "item30Procedimiento": "Ítem 30: procedemento JEG (ordinario/recuperación/extraordinaria)",
+      "pesoRelativoCe": "Peso relativo dentro do CE",
+      "sustituidaPorRecuperacion": "Substituída por recuperación"
+    },
+    "modulo": {
+      "eliminarRegistro": "Eliminar rexistro"
+    },
+    "secuenciacion": {
+      "configurarTarea": "Configurar tarefa competencial",
+      "configurarUd": "Configurar unidade didáctica",
+      "eliminarSesion": "Eliminar sesión",
+      "eliminarTarea": "Eliminar tarefa",
+      "pctInstrumento": "% do instrumento de avaliación, se esta sesión puntúa"
+    }
+  },
+  "aria": {
+    "header": {
+      "menuPrincipal": "Menú principal"
+    },
+    "legal": {
+      "indiceSecciones": "Índice de seccións"
+    },
+    "modulo": {
+      "eliminarInstrumento": "Eliminar instrumento",
+      "eliminarNivel": "Eliminar nivel"
+    },
+    "sidebar": {
+      "navegacionPrincipal": "Navegación principal"
+    }
   }
 }
