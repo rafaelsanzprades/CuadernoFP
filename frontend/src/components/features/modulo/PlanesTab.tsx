@@ -45,7 +45,7 @@ export function PlanesTab() {
       {/* FEOE */}
       <div className="glass-card p-6 border-t-4 border-t-blue-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Building2 className="w-[1.2em] h-[1.2em] mr-1" /></span> FEOE. Formación en Empresa u Organismo Equiparado
+          <span className="inline-flex"><Building2 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.modulo.tituloFeoe', {defaultValue: 'FEOE. Formación en Empresa u Organismo Equiparado'})}
         </h2>
         <div className="space-y-6">
           <div>
@@ -88,8 +88,8 @@ export function PlanesTab() {
           />
 
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">FEOE (texto específico modelo Simplificado, pd=)</label>
-            <p className="text-caption text-muted mb-2">Si se deja vacío, se genera automáticamente a partir de los RA marcados como dualizables (is_dual).</p>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.feoeTextoSimplificadoTitulo', {defaultValue: 'FEOE (texto específico modelo Simplificado, pd=)'})}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.feoeTextoSimplificadoAviso', {defaultValue: 'Si se deja vacío, se genera automáticamente a partir de los RA marcados como dualizables (is_dual).'})}</p>
             <textarea
               value={config_contexto.texto_feoe || ""}
               onChange={e => handleChange("texto_feoe", e.target.value)}

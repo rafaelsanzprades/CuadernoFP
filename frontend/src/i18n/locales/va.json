@@ -1327,7 +1327,10 @@
       "feoeSeguimientoDesc": "Procediment per al seguiment a l'empresa i comunicació amb tutors duals.",
       "feoeSeguimientoTitulo": "Seguiment de FEOE",
       "publicidadDesc": "Com i on es publicarà o es podrà consultar la programació.",
-      "publicidadTitulo": "Publicitat de la programació"
+      "publicidadTitulo": "Publicitat de la programació",
+      "tituloFeoe": "FEOE. Formació en Empresa o Organisme Equiparat",
+      "feoeTextoSimplificadoTitulo": "FEOE (text específic model Simplificat, pd=)",
+      "feoeTextoSimplificadoAviso": "Si es deixa buit, es genera automàticament a partir dels RA marcats com a dualitzables (is_dual)."
     },
     "normativa": {
       "legislacionAutonomica": "Legislació autonòmica ({{comunidad}})",
@@ -1336,6 +1339,28 @@
       "normativaEstatal": "Normativa estatal",
       "sinDocumentosAutonomicos": "No hi ha documents normatius en aquesta comunitat per ara.",
       "sinDocumentosEstatales": "No hi ha documents normatius estatals per ara."
+    },
+    "contexto": {
+      "tituloContextoEscolar": "Context escolar",
+      "entornoGeograficoLabel": "Entorn geogràfic i sociocultural",
+      "entornoSocioeconomicoLabel": "Entorn socioeconòmic i productiu",
+      "contextoEscolarLabel": "Context escolar",
+      "caracteristicasAlumnadoLabel": "Característiques de l'alumnat",
+      "infraestructuraLabel": "Infraestructura i recursos educatius",
+      "tituloAlumnadoAcneae": "Alumnat (ACNEAE)",
+      "datosContextualizacionGrupo": "Dades de contextualització del grup",
+      "ratioHombres": "Ràtio — Homes",
+      "ratioMujeres": "Ràtio — Dones",
+      "repetidores": "Repetidors",
+      "pendientesModulo": "Pendents del mòdul",
+      "acneae": "ACNEAE",
+      "elencoSituaciones": "Elenc de situacions",
+      "circunstanciasOcultas": "Circumstàncies ocultes",
+      "tituloModeloSimplificado": "Textos del model Simplificat (pd=)",
+      "avisoModeloSimplificado": "Aquests 2 camps són específics del document \"Programació suficient\" (model oficial Simplificat). Si es deixen buits, es genera automàticament un text per defecte raonable a partir de la resta de dades del mòdul.",
+      "introduccion": "Introducció",
+      "udsModulo": "Unitats didàctiques del mòdul",
+      "tituloAutoriaPublicidad": "Dades d'autoria i publicitat"
     }
   }
 }

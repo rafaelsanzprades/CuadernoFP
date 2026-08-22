@@ -1327,7 +1327,10 @@
       "feoeSeguimientoDesc": "Enpresan jarraipena egiteko prozedura eta tutore dualekin komunikatzeko modua.",
       "feoeSeguimientoTitulo": "FEOEren jarraipena",
       "publicidadDesc": "Programazioa non eta nola argitaratuko den edo kontsultatu ahal izango den.",
-      "publicidadTitulo": "Programazioaren publizitatea"
+      "publicidadTitulo": "Programazioaren publizitatea",
+      "tituloFeoe": "FEOE. Enpresa edo Erakunde Baliokidean Prestakuntza",
+      "feoeTextoSimplificadoTitulo": "FEOE (Eredu Sinplifikatuaren testu berezia, pd=)",
+      "feoeTextoSimplificadoAviso": "Hutsik uzten bada, dual gisa markatutako RAetatik (is_dual) abiatuta automatikoki sortuko da."
     },
     "normativa": {
       "legislacionAutonomica": "Erkidegoko legedia ({{comunidad}})",
@@ -1336,6 +1339,28 @@
       "normativaEstatal": "Estatuko araudia",
       "sinDocumentosAutonomicos": "Une honetan ez dago araudi-dokumenturik erkidego honetan.",
       "sinDocumentosEstatales": "Une honetan ez dago estatuko araudi-dokumenturik."
+    },
+    "contexto": {
+      "tituloContextoEscolar": "Eskola-testuingurua",
+      "entornoGeograficoLabel": "Ingurune geografikoa eta soziokulturala",
+      "entornoSocioeconomicoLabel": "Ingurune sozioekonomikoa eta produktiboa",
+      "contextoEscolarLabel": "Eskola-testuingurua",
+      "caracteristicasAlumnadoLabel": "Ikasleen ezaugarriak",
+      "infraestructuraLabel": "Azpiegitura eta baliabide pedagogikoak",
+      "tituloAlumnadoAcneae": "Ikasleak (ACNEAE)",
+      "datosContextualizacionGrupo": "Taldearen testuinguru-datuak",
+      "ratioHombres": "Ratioa — Gizonak",
+      "ratioMujeres": "Ratioa — Emakumeak",
+      "repetidores": "Errepikatzaileak",
+      "pendientesModulo": "Moduluko pendienteak",
+      "acneae": "ACNEAE",
+      "elencoSituaciones": "Egoeren zerrenda",
+      "circunstanciasOcultas": "Ezkutuko egoerak",
+      "tituloModeloSimplificado": "Eredu Sinplifikatuaren testuak (pd=)",
+      "avisoModeloSimplificado": "2 eremu hauek \"Programazio nahikoa\" dokumentuari (Eredu Sinplifikatu ofiziala) dagozkio berariaz. Hutsik uzten badira, moduluaren gainerako datuetatik abiatuta testu lehenetsi zentzuzko bat automatikoki sortuko da.",
+      "introduccion": "Sarrera",
+      "udsModulo": "Moduluaren unitate didaktikoak",
+      "tituloAutoriaPublicidad": "Egiletza- eta publizitate-datuak"
     }
   }
 }

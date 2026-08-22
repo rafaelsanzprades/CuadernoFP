@@ -211,7 +211,7 @@ export function ContextoTab() {
       <div className="space-y-6 animate-in fade-in duration-500">
       <div className="glass-card p-6 border-t-4 border-t-indigo-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><School className="w-[1.2em] h-[1.2em] mr-1" /></span> Contexto escolar
+          <span className="inline-flex"><School className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.contexto.tituloContextoEscolar', {defaultValue: 'Contexto escolar'})}
         </h2>
         <div className="space-y-4">
           <RasgosRapidos
@@ -221,7 +221,7 @@ export function ContextoTab() {
             onToggle={(id) => toggleRasgo("rasgos_entorno", rasgos_entorno, id)}
           />
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Entorno geográfico y sociocultural</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.contexto.entornoGeograficoLabel', {defaultValue: 'Entorno geográfico y sociocultural'})}</label>
             <textarea
               value={config_contexto.entorno_geografico || ""}
               onChange={e => handleContextoChange("entorno_geografico", e.target.value)}
@@ -236,7 +236,7 @@ export function ContextoTab() {
             onToggle={(id) => toggleRasgo("rasgos_socioeconomico", rasgos_socioeconomico, id)}
           />
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Entorno socioeconómico y productivo</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.contexto.entornoSocioeconomicoLabel', {defaultValue: 'Entorno socioeconómico y productivo'})}</label>
             <textarea
               value={config_contexto.entorno_socioeconomico || ""}
               onChange={e => handleContextoChange("entorno_socioeconomico", e.target.value)}
@@ -251,7 +251,7 @@ export function ContextoTab() {
             onToggle={(id) => toggleRasgo("rasgos_escolar", rasgos_escolar, id)}
           />
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Contexto escolar</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.contexto.contextoEscolarLabel', {defaultValue: 'Contexto escolar'})}</label>
             <textarea
               value={config_contexto.contexto_escolar || ""}
               onChange={e => handleContextoChange("contexto_escolar", e.target.value)}
@@ -266,7 +266,7 @@ export function ContextoTab() {
             onToggle={(id) => toggleRasgo("rasgos_alumnado", rasgos_alumnado, id)}
           />
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Características del alumnado</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.contexto.caracteristicasAlumnadoLabel', {defaultValue: 'Características del alumnado'})}</label>
             <textarea
               value={config_contexto.caracteristicas_alumnado || ""}
               onChange={e => handleContextoChange("caracteristicas_alumnado", e.target.value)}
@@ -281,7 +281,7 @@ export function ContextoTab() {
             onToggle={(id) => toggleRasgo("rasgos_infraestructura", rasgos_infraestructura, id)}
           />
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Infraestructura y recursos educativos</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.contexto.infraestructuraLabel', {defaultValue: 'Infraestructura y recursos educativos'})}</label>
             <textarea
               value={config_contexto.infraestructura || ""}
               onChange={e => handleContextoChange("infraestructura", e.target.value)}
@@ -294,14 +294,14 @@ export function ContextoTab() {
 
       <div className="glass-card p-6 border-t-4 border-t-purple-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> Alumnado (ACNEAE)
+          <span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.contexto.tituloAlumnadoAcneae', {defaultValue: 'Alumnado (ACNEAE)'})}
         </h2>
         <div className="space-y-4">
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Datos de contextualización del grupo</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.contexto.datosContextualizacionGrupo', {defaultValue: 'Datos de contextualización del grupo'})}</label>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
               <div>
-                <label className="text-caption text-muted mb-1 block">Ratio — Hombres</label>
+                <label className="text-caption text-muted mb-1 block">{t('campos.contexto.ratioHombres', {defaultValue: 'Ratio — Hombres'})}</label>
                 <input
                   type="number" min="0"
                   value={config_contexto.ratio_hombres ?? ""}
@@ -310,7 +310,7 @@ export function ContextoTab() {
                 />
               </div>
               <div>
-                <label className="text-caption text-muted mb-1 block">Ratio — Mujeres</label>
+                <label className="text-caption text-muted mb-1 block">{t('campos.contexto.ratioMujeres', {defaultValue: 'Ratio — Mujeres'})}</label>
                 <input
                   type="number" min="0"
                   value={config_contexto.ratio_mujeres ?? ""}
@@ -319,7 +319,7 @@ export function ContextoTab() {
                 />
               </div>
               <div>
-                <label className="text-caption text-muted mb-1 block">Repetidores</label>
+                <label className="text-caption text-muted mb-1 block">{t('campos.contexto.repetidores', {defaultValue: 'Repetidores'})}</label>
                 <input
                   type="number" min="0"
                   value={config_contexto.num_repetidores ?? ""}
@@ -328,7 +328,7 @@ export function ContextoTab() {
                 />
               </div>
               <div>
-                <label className="text-caption text-muted mb-1 block">Pendientes del módulo</label>
+                <label className="text-caption text-muted mb-1 block">{t('campos.contexto.pendientesModulo', {defaultValue: 'Pendientes del módulo'})}</label>
                 <input
                   type="number" min="0"
                   value={config_contexto.num_pendientes ?? ""}
@@ -337,7 +337,7 @@ export function ContextoTab() {
                 />
               </div>
               <div>
-                <label className="text-caption text-muted mb-1 block">ACNEAE</label>
+                <label className="text-caption text-muted mb-1 block">{t('campos.contexto.acneae', {defaultValue: 'ACNEAE'})}</label>
                 <input
                   type="number" min="0"
                   value={config_contexto.num_acneae ?? ""}
@@ -348,7 +348,7 @@ export function ContextoTab() {
             </div>
           </div>
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Elenco de situaciones</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.contexto.elencoSituaciones', {defaultValue: 'Elenco de situaciones'})}</label>
             <textarea
               value={config_contexto.elenco_situaciones || ""}
               onChange={e => handleContextoChange("elenco_situaciones", e.target.value)}
@@ -356,7 +356,7 @@ export function ContextoTab() {
             />
           </div>
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Circunstancias ocultas</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.contexto.circunstanciasOcultas', {defaultValue: 'Circunstancias ocultas'})}</label>
             <textarea
               value={config_contexto.circunstancias_ocultas || ""}
               onChange={e => handleContextoChange("circunstancias_ocultas", e.target.value)}
@@ -368,15 +368,14 @@ export function ContextoTab() {
 
       <div className="glass-card p-6 border-t-4 border-t-teal-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Textos del modelo Simplificado (pd=)
+          <span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.contexto.tituloModeloSimplificado', {defaultValue: 'Textos del modelo Simplificado (pd=)'})}
         </h2>
         <p className="text-caption text-muted mb-4">
-          Estos 2 campos son específicos del documento &quot;Programación suficiente&quot; (modelo oficial Simplificado).
-          Si se dejan vacíos, se autogenera un texto por defecto razonable a partir del resto de datos del módulo.
+          {t('campos.contexto.avisoModeloSimplificado', {defaultValue: 'Estos 2 campos son específicos del documento "Programación suficiente" (modelo oficial Simplificado). Si se dejan vacíos, se autogenera un texto por defecto razonable a partir del resto de datos del módulo.'})}
         </p>
         <div className="space-y-4">
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Introducción</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.contexto.introduccion', {defaultValue: 'Introducción'})}</label>
             <textarea
               value={config_contexto.texto_introduccion || ""}
               onChange={e => handleContextoChange("texto_introduccion", e.target.value)}
@@ -385,7 +384,7 @@ export function ContextoTab() {
             />
           </div>
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">Unidades didácticas del módulo</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.contexto.udsModulo', {defaultValue: 'Unidades didácticas del módulo'})}</label>
             <textarea
               value={config_contexto.texto_uds_modulo || ""}
               onChange={e => handleContextoChange("texto_uds_modulo", e.target.value)}
@@ -398,7 +397,7 @@ export function ContextoTab() {
 
       <div className="glass-card p-6 border-t-4 border-t-amber-500">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Datos de autoría y publicidad
+          <span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.contexto.tituloAutoriaPublicidad', {defaultValue: 'Datos de autoría y publicidad'})}
         </h2>
         <div className="space-y-6">
           <NarrativeField

@@ -1327,7 +1327,10 @@
       "feoeSeguimientoDesc": "Procedure for company follow-up and communication with dual tutors.",
       "feoeSeguimientoTitulo": "FEOE follow-up",
       "publicidadDesc": "How and where the programming will be published or can be consulted.",
-      "publicidadTitulo": "Publication of the programming"
+      "publicidadTitulo": "Publication of the programming",
+      "tituloFeoe": "FEOE. Training at a Company or Equivalent Organization",
+      "feoeTextoSimplificadoTitulo": "FEOE (text specific to the Simplified model, pd=)",
+      "feoeTextoSimplificadoAviso": "If left blank, it is auto-generated from the LOs marked as dualizable (is_dual)."
     },
     "normativa": {
       "legislacionAutonomica": "Regional legislation ({{comunidad}})",
@@ -1336,6 +1339,28 @@
       "normativaEstatal": "State regulations",
       "sinDocumentosAutonomicos": "There are no regulatory documents for this community yet.",
       "sinDocumentosEstatales": "There are no state regulatory documents yet."
+    },
+    "contexto": {
+      "tituloContextoEscolar": "School context",
+      "entornoGeograficoLabel": "Geographic and sociocultural environment",
+      "entornoSocioeconomicoLabel": "Socioeconomic and productive environment",
+      "contextoEscolarLabel": "School context",
+      "caracteristicasAlumnadoLabel": "Student characteristics",
+      "infraestructuraLabel": "Infrastructure and educational resources",
+      "tituloAlumnadoAcneae": "Students (ACNEAE)",
+      "datosContextualizacionGrupo": "Group contextualization data",
+      "ratioHombres": "Ratio — Men",
+      "ratioMujeres": "Ratio — Women",
+      "repetidores": "Repeating students",
+      "pendientesModulo": "Pending for the module",
+      "acneae": "ACNEAE",
+      "elencoSituaciones": "List of situations",
+      "circunstanciasOcultas": "Hidden circumstances",
+      "tituloModeloSimplificado": "Simplified model texts (pd=)",
+      "avisoModeloSimplificado": "These 2 fields are specific to the \"Sufficient programming\" document (official Simplified model). If left blank, a reasonable default text is auto-generated from the rest of the module's data.",
+      "introduccion": "Introduction",
+      "udsModulo": "Teaching units of the module",
+      "tituloAutoriaPublicidad": "Authorship and publication details"
     }
   }
 }
