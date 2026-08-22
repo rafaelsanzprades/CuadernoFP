@@ -1134,5 +1134,114 @@
       "tipoTareas": "Tasques",
       "tipoTeoria": "Teoria"
     }
+  },
+  "tablas": {
+    "calendario": {
+      "entidad": "Entitat",
+      "evaluacion": "Avaluació",
+      "raVinculados": "RA vinculats",
+      "trimestre": "Trimestre"
+    },
+    "calificaciones": {
+      "instrumento": "Instrument",
+      "max": "Màx",
+      "media": "Mitjana",
+      "min": "Mín"
+    },
+    "catalogo": {
+      "acronimo": "Acrònim",
+      "comunidadAutonoma": "Comunitat Autònoma",
+      "descripcionCorta": "Descripció curta",
+      "nota": "Nota",
+      "portalOficial": "Portal oficial",
+      "siglas": "Sigles"
+    },
+    "curriculo": {
+      "compClave": "Comp. clau",
+      "criterioEvaluacion": "Criteri d'avaluació",
+      "horas": "Hores",
+      "objetivosGenerales": "Objectius generals",
+      "resultadosAprendizaje": "Resultats d'aprenentatge",
+      "unidadDidacticaTrabajo": "Unitat didàctica o de treball"
+    },
+    "dashboard": {
+      "imp": "Imp",
+      "prv": "Prev",
+      "udUnidadDidactica": "UD. Unitat didàctica"
+    },
+    "diario": {
+      "estadoPdevc": "Estat PdEvC",
+      "numero": "Núm.",
+      "progreso": "Progrés"
+    },
+    "evaluacion": {
+      "alumnado": "Alumnat",
+      "alumno": "Alumne",
+      "anterior": "Anterior",
+      "campo": "Camp",
+      "nivelRiesgo": "Nivell de risc",
+      "nota": "Nota",
+      "nuevo": "Nou"
+    },
+    "instrumentos": {
+      "cod": "Cod.",
+      "config": "Config",
+      "descripcionIE": "Descripció de l'instrument d'avaluació (IE)",
+      "instrumentoActividad": "Instrument i activitat",
+      "pctPond": "% Pond."
+    },
+    "legal": {
+      "clave": "Clau",
+      "contenido": "Contingut",
+      "duracion": "Durada",
+      "loQueNoPuedes": "El que NO POTS fer",
+      "loQueSiPuedes": "El que SÍ POTS fer",
+      "tecnologia": "Tecnologia"
+    },
+    "modulo": {
+      "actividadesAlternativas": "Activitats alternatives",
+      "alumnadoAula": "Alumnat i aula",
+      "barreraDetectada": "Barrera detectada",
+      "escenario": "Escenari",
+      "medidaAcceso": "Mesura d'accés",
+      "medidaEvaluacion": "Mesura d'avaluació",
+      "medidaMetodologica": "Mesura metodològica",
+      "organizacionAcceso": "Organització i accés",
+      "seguimientoCorreccion": "Seguiment i correcció"
+    }
+  },
+  "campos": {
+    "alumnado": {
+      "caracteristicasDesc": "Procedència geogràfica principal, franja d'edat, nivell competencial inicial, expectatives i implicació, etc.",
+      "caracteristicasTitulo": "Característiques de l'alumnat"
+    },
+    "evaluacion": {
+      "informacionDesc": "Com es donen a conèixer els criteris d'avaluació i qualificació.",
+      "informacionTitulo": "Informació a l'alumnat i famílies",
+      "pendientesDesc": "Organització per a l'alumnat de 2n curs amb aquest mòdul pendent.",
+      "pendientesTitulo": "Pla de recuperació de mòduls pendents",
+      "perdidaContinuaDesc": "Criteris d'assistència i procediment quan es perd el dret.",
+      "perdidaContinuaTitulo": "Pèrdua d'avaluació contínua",
+      "recuperacionDesc": "Com es recuperen les parts no superades i format de les proves extraordinàries.",
+      "recuperacionTitulo": "Procediment de recuperació"
+    },
+    "modulo": {
+      "bibliografiaDesc": "Bibliografia principal per al professorat i l'alumnat.",
+      "bibliografiaTitulo": "Bibliografia i recursos",
+      "feoeOrganizacionDesc": "Detalla com s'organitza l'alumnat (FEOE general, intensiu) i quines alternatives hi ha per a l'alumnat sense FEOE.",
+      "feoeOrganizacionTitulo": "Organització i modalitat de FEOE",
+      "feoeSeguimientoDesc": "Procediment per al seguiment a l'empresa i comunicació amb tutors duals.",
+      "feoeSeguimientoTitulo": "Seguiment de FEOE",
+      "publicidadDesc": "Com i on es publicarà o es podrà consultar la programació.",
+      "publicidadTitulo": "Publicitat de la programació"
+    },
+    "normativa": {
+      "legislacionAutonomica": "Legislació autonòmica ({{comunidad}})",
+      "legislacionEstatal": "Legislació estatal",
+      "normativaAutonomica": "Normativa autonòmica ({{comunidad}})",
+      "normativaEstatal": "Normativa estatal",
+      "sinDocumentosAutonomicos": "No hi ha documents normatius en aquesta comunitat per ara.",
+      "sinDocumentosEstatales": "No hi ha documents normatius estatals per ara."
+    }
   }
 }

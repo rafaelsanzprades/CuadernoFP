@@ -1134,5 +1134,114 @@
       "tipoTareas": "Tarefas",
       "tipoTeoria": "Teoría"
     }
+  },
+  "tablas": {
+    "calendario": {
+      "entidad": "Entidade",
+      "evaluacion": "Avaliación",
+      "raVinculados": "RA vinculados",
+      "trimestre": "Trimestre"
+    },
+    "calificaciones": {
+      "instrumento": "Instrumento",
+      "max": "Máx",
+      "media": "Media",
+      "min": "Mín"
+    },
+    "catalogo": {
+      "acronimo": "Acrónimo",
+      "comunidadAutonoma": "Comunidade Autónoma",
+      "descripcionCorta": "Descrición curta",
+      "nota": "Nota",
+      "portalOficial": "Portal oficial",
+      "siglas": "Siglas"
+    },
+    "curriculo": {
+      "compClave": "Comp. clave",
+      "criterioEvaluacion": "Criterio de avaliación",
+      "horas": "Horas",
+      "objetivosGenerales": "Obxectivos xerais",
+      "resultadosAprendizaje": "Resultados de aprendizaxe",
+      "unidadDidacticaTrabajo": "Unidade didáctica ou de traballo"
+    },
+    "dashboard": {
+      "imp": "Imp",
+      "prv": "Prev",
+      "udUnidadDidactica": "UD. Unidade didáctica"
+    },
+    "diario": {
+      "estadoPdevc": "Estado PdEvC",
+      "numero": "Núm.",
+      "progreso": "Progreso"
+    },
+    "evaluacion": {
+      "alumnado": "Alumnado",
+      "alumno": "Alumno",
+      "anterior": "Anterior",
+      "campo": "Campo",
+      "nivelRiesgo": "Nivel de risco",
+      "nota": "Nota",
+      "nuevo": "Novo"
+    },
+    "instrumentos": {
+      "cod": "Cód.",
+      "config": "Config",
+      "descripcionIE": "Descrición do instrumento de avaliación (IE)",
+      "instrumentoActividad": "Instrumento e actividade",
+      "pctPond": "% Pond."
+    },
+    "legal": {
+      "clave": "Clave",
+      "contenido": "Contido",
+      "duracion": "Duración",
+      "loQueNoPuedes": "O que NON PODES facer",
+      "loQueSiPuedes": "O que SI PODES facer",
+      "tecnologia": "Tecnoloxía"
+    },
+    "modulo": {
+      "actividadesAlternativas": "Actividades alternativas",
+      "alumnadoAula": "Alumnado e aula",
+      "barreraDetectada": "Barreira detectada",
+      "escenario": "Escenario",
+      "medidaAcceso": "Medida de acceso",
+      "medidaEvaluacion": "Medida de avaliación",
+      "medidaMetodologica": "Medida metodolóxica",
+      "organizacionAcceso": "Organización e acceso",
+      "seguimientoCorreccion": "Seguimento e corrección"
+    }
+  },
+  "campos": {
+    "alumnado": {
+      "caracteristicasDesc": "Procedencia xeográfica principal, franxa de idade, nivel competencial inicial, expectativas e implicación, etc.",
+      "caracteristicasTitulo": "Características do alumnado"
+    },
+    "evaluacion": {
+      "informacionDesc": "Como se dan a coñecer os criterios de avaliación e cualificación.",
+      "informacionTitulo": "Información ao alumnado e familias",
+      "pendientesDesc": "Organización para alumnado de 2º curso con este módulo pendente.",
+      "pendientesTitulo": "Plan de recuperación de módulos pendentes",
+      "perdidaContinuaDesc": "Criterios de asistencia e procedemento cando se perde o dereito.",
+      "perdidaContinuaTitulo": "Perda de avaliación continua",
+      "recuperacionDesc": "Como se recuperan as partes non superadas e formato das probas extraordinarias.",
+      "recuperacionTitulo": "Procedemento de recuperación"
+    },
+    "modulo": {
+      "bibliografiaDesc": "Bibliografía principal para o profesorado e o alumnado.",
+      "bibliografiaTitulo": "Bibliografía e recursos",
+      "feoeOrganizacionDesc": "Detalla como se organiza o alumnado (FEOE xeral, intensivo) e que alternativas hai para o alumnado sen FEOE.",
+      "feoeOrganizacionTitulo": "Organización e modalidade de FEOE",
+      "feoeSeguimientoDesc": "Procedemento para o seguimento na empresa e comunicación con titores duais.",
+      "feoeSeguimientoTitulo": "Seguimento de FEOE",
+      "publicidadDesc": "Como e onde se publicará ou se poderá consultar a programación.",
+      "publicidadTitulo": "Publicidade da programación"
+    },
+    "normativa": {
+      "legislacionAutonomica": "Lexislación autonómica ({{comunidad}})",
+      "legislacionEstatal": "Lexislación estatal",
+      "normativaAutonomica": "Normativa autonómica ({{comunidad}})",
+      "normativaEstatal": "Normativa estatal",
+      "sinDocumentosAutonomicos": "Non hai documentos normativos nesta comunidade polo momento.",
+      "sinDocumentosEstatales": "Non hai documentos normativos estatais polo momento."
+    }
   }
 }

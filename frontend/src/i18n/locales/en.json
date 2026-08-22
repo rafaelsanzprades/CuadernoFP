@@ -1134,5 +1134,114 @@
       "tipoTareas": "Tasks",
       "tipoTeoria": "Theory"
     }
+  },
+  "tablas": {
+    "calendario": {
+      "entidad": "Entity",
+      "evaluacion": "Assessment",
+      "raVinculados": "Linked LOs",
+      "trimestre": "Term"
+    },
+    "calificaciones": {
+      "instrumento": "Instrument",
+      "max": "Max",
+      "media": "Average",
+      "min": "Min"
+    },
+    "catalogo": {
+      "acronimo": "Acronym",
+      "comunidadAutonoma": "Autonomous Community",
+      "descripcionCorta": "Short description",
+      "nota": "Note",
+      "portalOficial": "Official portal",
+      "siglas": "Abbreviation"
+    },
+    "curriculo": {
+      "compClave": "Key comp.",
+      "criterioEvaluacion": "Assessment criterion",
+      "horas": "Hours",
+      "objetivosGenerales": "General objectives",
+      "resultadosAprendizaje": "Learning outcomes",
+      "unidadDidacticaTrabajo": "Teaching or work unit"
+    },
+    "dashboard": {
+      "imp": "Done",
+      "prv": "Plan",
+      "udUnidadDidactica": "UD. Teaching unit"
+    },
+    "diario": {
+      "estadoPdevc": "PdEvC status",
+      "numero": "No.",
+      "progreso": "Progress"
+    },
+    "evaluacion": {
+      "alumnado": "Students",
+      "alumno": "Student",
+      "anterior": "Previous",
+      "campo": "Field",
+      "nivelRiesgo": "Risk level",
+      "nota": "Grade",
+      "nuevo": "New"
+    },
+    "instrumentos": {
+      "cod": "Code",
+      "config": "Config",
+      "descripcionIE": "Description of the assessment instrument (IE)",
+      "instrumentoActividad": "Instrument and activity",
+      "pctPond": "% Weight"
+    },
+    "legal": {
+      "clave": "Key",
+      "contenido": "Content",
+      "duracion": "Duration",
+      "loQueNoPuedes": "What you CANNOT do",
+      "loQueSiPuedes": "What you CAN do",
+      "tecnologia": "Technology"
+    },
+    "modulo": {
+      "actividadesAlternativas": "Alternative activities",
+      "alumnadoAula": "Students and classroom",
+      "barreraDetectada": "Detected barrier",
+      "escenario": "Scenario",
+      "medidaAcceso": "Access measure",
+      "medidaEvaluacion": "Assessment measure",
+      "medidaMetodologica": "Methodological measure",
+      "organizacionAcceso": "Organization and access",
+      "seguimientoCorreccion": "Follow-up and correction"
+    }
+  },
+  "campos": {
+    "alumnado": {
+      "caracteristicasDesc": "Main geographic origin, age range, initial competency level, expectations and involvement, etc.",
+      "caracteristicasTitulo": "Student characteristics"
+    },
+    "evaluacion": {
+      "informacionDesc": "How assessment and grading criteria are communicated.",
+      "informacionTitulo": "Information for students and families",
+      "pendientesDesc": "Organization for 2nd-year students with this module pending.",
+      "pendientesTitulo": "Recovery plan for pending modules",
+      "perdidaContinuaDesc": "Attendance criteria and procedure for when the right is lost.",
+      "perdidaContinuaTitulo": "Loss of continuous assessment",
+      "recuperacionDesc": "How unpassed parts are recovered and the format of extraordinary tests.",
+      "recuperacionTitulo": "Recovery procedure"
+    },
+    "modulo": {
+      "bibliografiaDesc": "Main bibliography for teaching staff and students.",
+      "bibliografiaTitulo": "Bibliography and resources",
+      "feoeOrganizacionDesc": "Details how students are organized (general or intensive FEOE) and what alternatives exist for students without FEOE.",
+      "feoeOrganizacionTitulo": "FEOE organization and mode",
+      "feoeSeguimientoDesc": "Procedure for company follow-up and communication with dual tutors.",
+      "feoeSeguimientoTitulo": "FEOE follow-up",
+      "publicidadDesc": "How and where the programming will be published or can be consulted.",
+      "publicidadTitulo": "Publication of the programming"
+    },
+    "normativa": {
+      "legislacionAutonomica": "Regional legislation ({{comunidad}})",
+      "legislacionEstatal": "State legislation",
+      "normativaAutonomica": "Regional regulations ({{comunidad}})",
+      "normativaEstatal": "State regulations",
+      "sinDocumentosAutonomicos": "There are no regulatory documents for this community yet.",
+      "sinDocumentosEstatales": "There are no state regulatory documents yet."
+    }
   }
 }

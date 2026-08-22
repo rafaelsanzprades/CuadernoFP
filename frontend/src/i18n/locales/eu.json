@@ -1134,5 +1134,114 @@
       "tipoTareas": "Zereginak",
       "tipoTeoria": "Teoria"
     }
+  },
+  "tablas": {
+    "calendario": {
+      "entidad": "Erakundea",
+      "evaluacion": "Ebaluazioa",
+      "raVinculados": "RA lotuak",
+      "trimestre": "Hiruhilekoa"
+    },
+    "calificaciones": {
+      "instrumento": "Tresna",
+      "max": "Max",
+      "media": "Batez bestekoa",
+      "min": "Min"
+    },
+    "catalogo": {
+      "acronimo": "Akronimoa",
+      "comunidadAutonoma": "Autonomia Erkidegoa",
+      "descripcionCorta": "Deskribapen laburra",
+      "nota": "Oharra",
+      "portalOficial": "Portal ofiziala",
+      "siglas": "Siglak"
+    },
+    "curriculo": {
+      "compClave": "Gaitas. gakoa",
+      "criterioEvaluacion": "Ebaluazio-irizpidea",
+      "horas": "Orduak",
+      "objetivosGenerales": "Helburu orokorrak",
+      "resultadosAprendizaje": "Ikaskuntzaren emaitzak",
+      "unidadDidacticaTrabajo": "Unitate didaktikoa edo lan-unitatea"
+    },
+    "dashboard": {
+      "imp": "Em.",
+      "prv": "Aurr.",
+      "udUnidadDidactica": "UD. Unitate didaktikoa"
+    },
+    "diario": {
+      "estadoPdevc": "PdEvC egoera",
+      "numero": "Zk.",
+      "progreso": "Aurrerapena"
+    },
+    "evaluacion": {
+      "alumnado": "Ikasleak",
+      "alumno": "Ikaslea",
+      "anterior": "Aurrekoa",
+      "campo": "Eremua",
+      "nivelRiesgo": "Arrisku-maila",
+      "nota": "Nota",
+      "nuevo": "Berria"
+    },
+    "instrumentos": {
+      "cod": "Kod.",
+      "config": "Konfig",
+      "descripcionIE": "Ebaluazio-tresnaren deskribapena (IE)",
+      "instrumentoActividad": "Tresna eta jarduera",
+      "pctPond": "% Pond."
+    },
+    "legal": {
+      "clave": "Gakoa",
+      "contenido": "Edukia",
+      "duracion": "Iraupena",
+      "loQueNoPuedes": "EZIN duzuna egin",
+      "loQueSiPuedes": "Egin DEZAKEZUNA",
+      "tecnologia": "Teknologia"
+    },
+    "modulo": {
+      "actividadesAlternativas": "Jarduera alternatiboak",
+      "alumnadoAula": "Ikasleak eta gela",
+      "barreraDetectada": "Hautemandako oztopoa",
+      "escenario": "Egoera",
+      "medidaAcceso": "Sarbide-neurria",
+      "medidaEvaluacion": "Ebaluazio-neurria",
+      "medidaMetodologica": "Neurri metodologikoa",
+      "organizacionAcceso": "Antolaketa eta sarbidea",
+      "seguimientoCorreccion": "Jarraipena eta zuzenketa"
+    }
+  },
+  "campos": {
+    "alumnado": {
+      "caracteristicasDesc": "Jatorri geografiko nagusia, adin-tartea, hasierako gaitasun-maila, itxaropenak eta inplikazioa, etab.",
+      "caracteristicasTitulo": "Ikasleen ezaugarriak"
+    },
+    "evaluacion": {
+      "informacionDesc": "Ebaluazio- eta kalifikazio-irizpideak nola ezagutarazten diren.",
+      "informacionTitulo": "Ikasleei eta familiei informazioa ematea",
+      "pendientesDesc": "2. mailako modulu hau gainditu gabe duten ikasleentzako antolaketa.",
+      "pendientesTitulo": "Modulu pendienteak errekuperatzeko plana",
+      "perdidaContinuaDesc": "Asistentzia-irizpideak eta eskubidea galtzen denerako prozedura.",
+      "perdidaContinuaTitulo": "Ebaluazio jarraituaren galera",
+      "recuperacionDesc": "Gainditu gabeko zatiak nola errekuperatzen diren eta ohiz kanpoko proben formatua.",
+      "recuperacionTitulo": "Errekuperazio-prozedura"
+    },
+    "modulo": {
+      "bibliografiaDesc": "Irakasleentzako eta ikasleentzako bibliografia nagusia.",
+      "bibliografiaTitulo": "Bibliografia eta baliabideak",
+      "feoeOrganizacionDesc": "Ikasleak nola antolatzen diren azaltzen du (FEOE orokorra, intentsiboa) eta FEOErik gabeko ikasleentzat zer alternatiba dauden.",
+      "feoeOrganizacionTitulo": "FEOEren antolaketa eta modalitatea",
+      "feoeSeguimientoDesc": "Enpresan jarraipena egiteko prozedura eta tutore dualekin komunikatzeko modua.",
+      "feoeSeguimientoTitulo": "FEOEren jarraipena",
+      "publicidadDesc": "Programazioa non eta nola argitaratuko den edo kontsultatu ahal izango den.",
+      "publicidadTitulo": "Programazioaren publizitatea"
+    },
+    "normativa": {
+      "legislacionAutonomica": "Erkidegoko legedia ({{comunidad}})",
+      "legislacionEstatal": "Estatuko legedia",
+      "normativaAutonomica": "Erkidegoko araudia ({{comunidad}})",
+      "normativaEstatal": "Estatuko araudia",
+      "sinDocumentosAutonomicos": "Une honetan ez dago araudi-dokumenturik erkidego honetan.",
+      "sinDocumentosEstatales": "Une honetan ez dago estatuko araudi-dokumenturik."
+    }
   }
 }
