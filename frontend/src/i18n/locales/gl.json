@@ -101,6 +101,10 @@
       },
       "plano": {
         "desc": "Distribución e plano visual da aula."
+      },
+      "autoevaluacion": {
+        "desc": "Autoavaliación do alumnado por criterio de avaliación (SI/Dúbidas/NON) e dificultades declaradas.",
+        "label": "Autoavaliación"
       }
     },
     "seguimiento": {
@@ -134,6 +138,14 @@
       },
       "individual": {
         "desc": "Folla de progreso individual para titorías."
+      },
+      "historico": {
+        "desc": "Rexistro de cada cambio de nota: cando e de que valor a que valor.",
+        "label": "Histórico"
+      },
+      "reclamaciones": {
+        "desc": "Rexistro de reclamacións de nota, o seu motivo e a súa resolución.",
+        "label": "Reclamacións"
       }
     },
     "contexto": {
@@ -346,7 +358,8 @@
       "bienvenida": {
         "desc": "Panel de control de acceso rápido a todas as ferramentas."
       }
-    }
+    },
+    "legislacion": "Lexislación"
   },
   "inicio": {
     "title": "Inicio",

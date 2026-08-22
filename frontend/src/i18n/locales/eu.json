@@ -101,6 +101,10 @@
       },
       "plano": {
         "desc": "Ikasgelaren banaketa eta plano bisuala."
+      },
+      "autoevaluacion": {
+        "desc": "Ikasleen autoebaluazioa ebaluazio-irizpideka (BAI/Zalantzak/EZ) eta adierazitako zailtasunak.",
+        "label": "Autoebaluazioa"
       }
     },
     "seguimiento": {
@@ -134,6 +138,14 @@
       },
       "individual": {
         "desc": "Banakako aurrerapen-orria, tutoretzetarako."
+      },
+      "historico": {
+        "desc": "Nota-aldaketa bakoitzaren erregistroa: noiz eta zein baliotatik zein baliora.",
+        "label": "Historikoa"
+      },
+      "reclamaciones": {
+        "desc": "Nota-erreklamazioen erregistroa, arrazoia eta ebazpena.",
+        "label": "Erreklamazioak"
       }
     },
     "contexto": {
@@ -346,7 +358,8 @@
       "bienvenida": {
         "desc": "Erreminta guztietarako sarbide azkarreko kontrol-panela."
       }
-    }
+    },
+    "legislacion": "Legedia"
   },
   "inicio": {
     "title": "Hasiera",

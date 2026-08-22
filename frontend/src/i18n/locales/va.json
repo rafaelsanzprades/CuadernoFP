@@ -101,6 +101,10 @@
       },
       "plano": {
         "desc": "Distribució i plànol visual de l'aula."
+      },
+      "autoevaluacion": {
+        "desc": "Autoavaluació de l'alumnat per criteri d'avaluació (SÍ/Dubtes/NO) i dificultats declarades.",
+        "label": "Autoavaluació"
       }
     },
     "seguimiento": {
@@ -134,6 +138,14 @@
       },
       "individual": {
         "desc": "Full de progrés individual per a tutories."
+      },
+      "historico": {
+        "desc": "Registre de cada canvi de nota: quan i de quin valor a quin valor.",
+        "label": "Històric"
+      },
+      "reclamaciones": {
+        "desc": "Registre de reclamacions de nota, el seu motiu i la seva resolució.",
+        "label": "Reclamacions"
       }
     },
     "contexto": {
@@ -346,7 +358,8 @@
       "bienvenida": {
         "desc": "Panell de control d'accés ràpid a totes les eines."
       }
-    }
+    },
+    "legislacion": "Legislació"
   },
   "inicio": {
     "title": "Inici",

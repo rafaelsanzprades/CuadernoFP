@@ -101,6 +101,10 @@
       },
       "plano": {
         "desc": "Layout and visual map of the classroom."
+      },
+      "autoevaluacion": {
+        "desc": "Student self-assessment by grading criterion (YES/Doubts/NO) and reported difficulties.",
+        "label": "Self-assessment"
       }
     },
     "seguimiento": {
@@ -134,6 +138,14 @@
       },
       "individual": {
         "desc": "Individual progress sheet for tutoring sessions."
+      },
+      "historico": {
+        "desc": "Record of every grade change: when, and from what value to what value.",
+        "label": "History"
+      },
+      "reclamaciones": {
+        "desc": "Record of grade appeals, their reason and their resolution.",
+        "label": "Appeals"
       }
     },
     "contexto": {
@@ -346,7 +358,8 @@
       "bienvenida": {
         "desc": "Quick-access control panel for all the tools."
       }
-    }
+    },
+    "legislacion": "Legislation"
   },
   "inicio": {
     "title": "Home",
