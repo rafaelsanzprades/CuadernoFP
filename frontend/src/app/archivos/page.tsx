@@ -803,7 +803,7 @@ export default function ArchivosTrabajoPage() {
                     </div>
                     <div>
                       <h2 className="text-subheading font-bold text-foreground">Tu privacidad por diseño</h2>
-                      <p className="text-muted mt-1 text-body">Cómo garantizamos que tus datos reales son 100% tuyos.</p>
+                      <p className="text-muted mt-1 text-body">Cómo se garantiza que tus datos reales son 100% tuyos.</p>
                     </div>
                   </div>
                   
