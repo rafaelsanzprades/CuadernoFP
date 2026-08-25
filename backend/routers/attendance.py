@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from database import get_db
 import models
 from pydantic import BaseModel
-from typing import Optional
+from typing import Literal, Optional
 
 router = APIRouter(prefix="/api/attendance", tags=["Attendance"])
 
@@ -11,7 +11,7 @@ class AttendanceCreate(BaseModel):
     module_document_id: str
     student_id: str
     date_str: str
-    status: str
+    status: Literal["presente", "falta", "retraso", ""]
 
 class AttendanceResponse(AttendanceCreate):
     id: int

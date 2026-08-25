@@ -522,7 +522,6 @@ export default function InicioPage() {
         isOpen={aiModalOpen}
         onClose={() => setAiModalOpen(false)}
         onSuccess={(data) => {
-          console.log("Datos recibidos de la IA:", data);
           toast.success(t('toasts.inicio.estructuraGuardada', {defaultValue: "Estructura guardada."}));
         }}
       />

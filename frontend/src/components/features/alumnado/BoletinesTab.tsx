@@ -7,6 +7,7 @@ import { Printer, FileText, Users, Award, Briefcase, GraduationCap, Target } fro
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { resolveDescRa, loadCatalogForModule } from '@/services/catalogCache';
 import { isAlumnoActivo } from '@/utils/alumnado';
+import { calcularNotas, DEFAULT_CONFIG_REDONDEO } from '@/utils/calificaciones';
 import { useTranslation } from 'react-i18next';
 
 export const BoletinesTab = () => {
@@ -14,31 +15,26 @@ export const BoletinesTab = () => {
   const { cursoData, moduleData, activeCursoId, activeModuleId } = useAppStore();
 
   useEffect(() => { if (activeModuleId) loadCatalogForModule(activeModuleId); }, [activeModuleId]);
-  
+
   const df_al = cursoData?.df_al || [];
   const activeStudents = df_al.filter(isAlumnoActivo).sort((a, b) => (a.Apellidos || '').localeCompare(b.Apellidos || ''));
-  
+
   const [selectedStudentId, setSelectedStudentId] = useState<string>(activeStudents.length > 0 ? activeStudents[0].ID || '' : '');
 
   const currentStudent = activeStudents.find(s => s.ID === selectedStudentId);
   const df_ra = moduleData?.df_ra || [];
+  const df_ce = moduleData?.df_ce || [];
+  const df_act = moduleData?.df_act || [];
+  const df_eval = cursoData?.df_eval || [];
   const info_modulo = moduleData?.info_modulo || {};
+  const config_redondeo = { ...DEFAULT_CONFIG_REDONDEO, ...(moduleData?.config_redondeo || {}) };
 
-  // Deterministic Mock Data Generator for Grades (since Gradebook is not fully implemented yet)
-  const getMockGrade = (studentId: string, raId: string) => {
-    let hash = 0;
-    const str = studentId + raId;
-    for (let i = 0; i < str.length; i++) {
-      hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    // Generate a grade between 4.0 and 10.0
-    const grade = 4 + (Math.abs(hash) % 60) / 10;
-    return parseFloat(grade.toFixed(2));
-  };
+  const evRow = df_eval.find((e: any) => e.ID === currentStudent?.ID) || {};
+  const notasCalc = calcularNotas(evRow, df_ra, df_ce, df_act, config_redondeo);
 
   const radarData = df_ra.map((ra: ResultadoAprendizaje, idx: number) => ({
     subject: `RA ${idx + 1}`,
-    nota: currentStudent ? getMockGrade(currentStudent.ID || '', ra.id_ra) : 0,
+    nota: currentStudent ? (notasCalc.notas_ra[ra.id_ra] ?? 0) : 0,
     fullMark: 10,
     desc: resolveDescRa(activeModuleId, ra)
   }));

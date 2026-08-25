@@ -1,3 +1,4 @@
+import logging
 from fastapi import APIRouter, Depends, HTTPException, Response
 from sqlalchemy.orm import Session
 import pandas as pd
@@ -6,6 +7,8 @@ from models import ModuleDocument, AttendanceRecord
 
 from pydantic import BaseModel
 from typing import Dict, Any, Optional
+
+logger = logging.getLogger("cdd-pro.pdf")
 
 DOCX_MIME = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 
@@ -49,7 +52,7 @@ def _compute_attendance_summary(db: Session, module_document_id: Optional[str], 
 @router.post("")
 def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, item_id: Optional[str] = None,
                   file_format: Optional[str] = "pdf", db: Session = Depends(get_db)):
-    print(f"--- GENERATE_PDF CALLED! type={type} al_id={al_id} item_id={item_id} format={file_format} ---")
+    logger.info(f"generate_pdf called: type={type} al_id={al_id} item_id={item_id} format={file_format}")
     try:
         # Import PDF modules
         from pdf_calendario_academico import generar_pdf_calendario
@@ -439,5 +442,5 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
         with open("pdf_debug.log", "a", encoding="utf-8") as f:
             f.write(f"--- ERROR IN GENERATE_PDF! type={type} ---\n")
             traceback.print_exc(file=f)
-        print(f"--- ERROR IN GENERATE_PDF! {str(e)} ---")
+        logger.error(f"Error in generate_pdf (type={type}): {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))

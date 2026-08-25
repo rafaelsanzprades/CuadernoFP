@@ -37,7 +37,10 @@ export function useAccessibility() {
       document.documentElement.classList.add("high-contrast");
     }
 
-    const savedMotion = localStorage.getItem("a11y-reduce-motion") === "true";
+    const storedMotion = localStorage.getItem("a11y-reduce-motion");
+    const savedMotion = storedMotion !== null
+      ? storedMotion === "true"
+      : window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (savedMotion) {
       setReduceMotion(true);
       document.documentElement.classList.add("reduce-motion");

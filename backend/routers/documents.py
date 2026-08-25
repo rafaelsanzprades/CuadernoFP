@@ -95,30 +95,34 @@ def preview_document(file_path: str, background_tasks: BackgroundTasks):
     ext = os.path.splitext(target_path)[1].lower()
     
     if ext == '.docx':
+        def cleanup_temp_file(path: str):
+            try:
+                os.unlink(path)
+            except Exception:
+                pass
+
+        temp_pdf = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
+        temp_pdf.close()
+
         try:
-            temp_pdf = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
-            temp_pdf.close()
-            
             convert_to_pdf_sync(target_path, temp_pdf.name)
-            
+
             if not os.path.exists(temp_pdf.name) or os.path.getsize(temp_pdf.name) == 0:
                 raise HTTPException(status_code=500, detail="Error en la conversión a PDF: el archivo está vacío")
-            
-            def cleanup_temp_file(path: str):
-                try:
-                    os.unlink(path)
-                except Exception:
-                    pass
-                    
+
             background_tasks.add_task(cleanup_temp_file, temp_pdf.name)
-            
+
             return FileResponse(
                 path=temp_pdf.name,
                 filename=os.path.basename(target_path).replace(".docx", ".pdf"),
                 media_type="application/pdf",
                 content_disposition_type="inline"
             )
+        except HTTPException:
+            cleanup_temp_file(temp_pdf.name)
+            raise
         except Exception as e:
+            cleanup_temp_file(temp_pdf.name)
             raise HTTPException(status_code=500, detail=f"Error durante la conversión: {str(e)}")
     else:
         media_type, _ = mimetypes.guess_type(target_path)
