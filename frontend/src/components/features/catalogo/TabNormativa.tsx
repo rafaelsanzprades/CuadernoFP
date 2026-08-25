@@ -32,10 +32,40 @@ const NORMATIVA_ESTATAL: NormativaItem[] = [
     link: "https://www.boe.es/buscar/act.php?id=BOE-A-2023-16889"
   },
   {
+    id: "RD_498_2024",
+    texto: "REAL DECRETO 498/2024, de 21 de mayo, por el que se modifican determinados reales decretos por los que se establecen títulos de Formación Profesional de grado básico y se fijan sus enseñanzas mínimas (BOE núm. 129, de 28 de mayo de 2024).",
+    descripcion: "Adaptación de los títulos de Grado Básico al Real Decreto 659/2023.",
+    link: "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-10683"
+  },
+  {
+    id: "RD_499_2024",
+    texto: "REAL DECRETO 499/2024, de 21 de mayo, por el que se modifican determinados reales decretos por los que se establecen títulos de Formación Profesional de grado medio y se fijan sus enseñanzas mínimas (BOE núm. 129, de 28 de mayo de 2024).",
+    descripcion: "Adaptación de los títulos de Grado Medio al Real Decreto 659/2023.",
+    link: "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-10684"
+  },
+  {
+    id: "RD_500_2024",
+    texto: "REAL DECRETO 500/2024, de 21 de mayo, por el que se modifican determinados reales decretos por los que se establecen títulos de Formación Profesional de grado superior y se fijan sus enseñanzas mínimas (BOE núm. 129, de 28 de mayo de 2024).",
+    descripcion: "Adaptación de los títulos de Grado Superior al Real Decreto 659/2023.",
+    link: "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-10685"
+  },
+  {
+    id: "RD_497_2024",
+    texto: "REAL DECRETO 497/2024, de 21 de mayo, por el que se modifican determinados reales decretos por los que se establecen, en el ámbito de la Formación Profesional, cursos de especialización de grado medio y superior y se fijan sus enseñanzas mínimas (BOE núm. 129, de 28 de mayo de 2024).",
+    descripcion: "Adaptación de los Cursos de Especialización (Grado E) al Real Decreto 659/2023.",
+    link: "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-10682"
+  },
+  {
     id: "RD_69_2025",
-    texto: "REAL DECRETO 69/2025, de 4 de febrero, por el que se desarrollan los elementos integrantes y los instrumentos de gestión del Sistema Nacional de Formación Profesional.",
+    texto: "REAL DECRETO 69/2025, de 4 de febrero, por el que se desarrollan los elementos integrantes y los instrumentos de gestión del Sistema Nacional de Formación Profesional, y se modifica el Real Decreto 375/1999, de 5 de marzo, por el que se crea el Instituto Nacional de las Cualificaciones (BOE núm. 31, de 5 de febrero de 2025).",
     descripcion: "Elementos e instrumentos de gestión del sistema de FP.",
-    link: "https://www.boe.es/diario_boe/"
+    link: "https://www.boe.es/buscar/doc.php?id=BOE-A-2025-2039"
+  },
+  {
+    id: "RD_532_2025",
+    texto: "REAL DECRETO 532/2025, de 24 de junio, por el que se incluyen determinados estándares de competencias profesionales y se integran los estándares derivados de las antiguas unidades de competencia del Real Decreto 1128/2003, en el Catálogo Nacional de Estándares de Competencias Profesionales (BOE núm. 151, de 25 de junio de 2025).",
+    descripcion: "Integración de estándares de competencias profesionales en el Catálogo Nacional (ECP).",
+    link: "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2025-13147"
   },
   {
     id: "RD_TITULO",
@@ -108,6 +138,72 @@ const NORMATIVA_AUTONOMICA_ARAGON: NormativaItem[] = [
   }
 ];
 
+const NORMATIVA_AUTONOMICA_VALENCIA: NormativaItem[] = [
+  {
+    id: "D_117_2025",
+    texto: "DECRETO 117/2025, de 5 de agosto, del Consell, por el que se establecen los currículos de los ciclos formativos de Grado Básico de Formación Profesional en la Comunitat Valenciana (DOGV núm. 10182, de 13 de agosto de 2025).",
+    descripcion: "Currículos de los ciclos de Grado Básico en la Comunitat Valenciana.",
+    link: "https://dogv.gva.es/datos/2025/08/13/pdf/2025_32763_es.pdf"
+  },
+  {
+    id: "D_114_2025",
+    texto: "DECRETO 114/2025, de 29 de julio, del Consell, por el que se establecen los currículos de los ciclos formativos de Grado Medio y Grado Superior de Formación Profesional en la Comunitat Valenciana (DOGV núm. 10175, de 4 de agosto de 2025).",
+    descripcion: "Currículos de los ciclos de Grado Medio y Grado Superior en la Comunitat Valenciana.",
+    link: "https://dogv.gva.es/datos/2025/08/04/pdf/2025_29742_es.pdf"
+  },
+  {
+    id: "D_95_2026",
+    texto: "DECRETO 95/2026, de 19 de junio, del Consell, por el que se establecen los currículos de los Cursos de Especialización de Formación Profesional en la Comunitat Valenciana (DOGV núm. 10346, de 25 de junio de 2026).",
+    descripcion: "Currículos de los Cursos de Especialización (Grado E) en la Comunitat Valenciana.",
+    link: "https://dogv.gva.es/datos/2026/06/25/pdf/2026_21170_es.pdf"
+  },
+  {
+    id: "O_30_2022",
+    texto: "ORDEN 30/2022, de 12 de mayo, de la Conselleria de Educación, Cultura y Deporte, por la que se regula la organización de la enseñanza de los ciclos formativos de Formación Profesional en régimen semipresencial (DOGV núm. 9331, de 18 de mayo de 2022).",
+    descripcion: "Modalidad semipresencial de los ciclos formativos.",
+    link: "https://dogv.gva.es/datos/2022/05/18/pdf/2022_4219.pdf"
+  },
+  {
+    id: "O_20_2019",
+    texto: "ORDEN 20/2019, de 30 de abril, de la Conselleria de Educación, Investigación, Cultura y Deporte, por la que se regula la organización de la respuesta educativa para la inclusión del alumnado en centros docentes sostenidos con fondos públicos (DOGV núm. 8543, de 3 de mayo de 2019).",
+    descripcion: "Intervención educativa inclusiva en la Comunitat Valenciana (norma general del sistema educativo, aplicable también a FP).",
+    link: "https://dogv.gva.es/datos/2019/05/03/pdf/2019_4442.pdf"
+  },
+  {
+    id: "R_16_JUL_2026",
+    texto: "RESOLUCIÓN de 16 de julio de 2026, de la Secretaría Autonómica de Educación, por la que se dictan instrucciones para la organización de los centros que impartan Formación Profesional de Grado Básico, Grado Medio, Grado Superior y Cursos de Especialización durante el curso 2026-2027.",
+    descripcion: "Instrucciones anuales de inicio de curso para centros de FP.",
+    link: "https://dogv.gva.es/datos/2026/07/20/pdf/2026_24495_es.pdf"
+  }
+];
+
+const NORMATIVA_AUTONOMICA_NAVARRA: NormativaItem[] = [
+  {
+    id: "DF_108_2024",
+    texto: "DECRETO FORAL 108/2024, de 11 de diciembre, por el que se modifican los currículos y se establecen aspectos básicos de ordenación de los títulos de Formación Profesional Básica en la Comunidad Foral de Navarra (BON núm. 41, de 28 de febrero de 2025).",
+    descripcion: "Currículos y ordenación de la FP Básica en Navarra.",
+    link: "https://bon.navarra.es/es/anuncio/-/texto/2025/41/2"
+  },
+  {
+    id: "DF_109_2024",
+    texto: "DECRETO FORAL 109/2024, de 11 de diciembre, por el que se modifican los currículos y se establecen aspectos básicos de ordenación de los títulos de Formación Profesional de Grado Medio en la Comunidad Foral de Navarra (BON núm. 52, de 14 de marzo de 2025).",
+    descripcion: "Currículos y ordenación de la FP de Grado Medio en Navarra.",
+    link: "https://bon.navarra.es/es/anuncio/-/texto/2025/52/1"
+  },
+  {
+    id: "DF_110_2024",
+    texto: "DECRETO FORAL 110/2024, de 11 de diciembre, por el que se modifican los currículos y se establecen aspectos básicos de ordenación de los títulos de Formación Profesional de Grado Superior en la Comunidad Foral de Navarra (BON núm. 63, de 28 de marzo de 2025).",
+    descripcion: "Currículos y ordenación de la FP de Grado Superior en Navarra.",
+    link: "https://bon.navarra.es/es/anuncio/-/texto/2025/63/0"
+  },
+  {
+    id: "R_474_2026",
+    texto: "RESOLUCIÓN 474/2026, de 9 de julio, del Director General de Educación y Formación Profesional, por la que se dictan instrucciones para la organización y funcionamiento de los centros que imparten Formación Profesional durante el curso 2026-2027.",
+    descripcion: "Instrucciones anuales de inicio de curso para centros de FP en Navarra.",
+    link: "https://www.educacion.navarra.es/documents/27590/27732/Res_474"
+  }
+];
+
 const COMUNIDADES = [
   "Andalucía", "Aragón", "Asturias", "Baleares", "Canarias", "Cantabria", 
   "Castilla-La Mancha", "Castilla y León", "Cataluña", "Comunidad Valenciana", "Extremadura", 
@@ -125,10 +221,26 @@ export function TabNormativa({ searchQuery = "" }: Props) {
     item.descripcion.toLowerCase().includes(searchQuery.toLowerCase())
   );
   
-  const filteredAragon = NORMATIVA_AUTONOMICA_ARAGON.filter(item => 
-    item.texto.toLowerCase().includes(searchQuery.toLowerCase()) || 
+  const filteredAragon = NORMATIVA_AUTONOMICA_ARAGON.filter(item =>
+    item.texto.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.descripcion.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const filteredValencia = NORMATIVA_AUTONOMICA_VALENCIA.filter(item =>
+    item.texto.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.descripcion.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const filteredNavarra = NORMATIVA_AUTONOMICA_NAVARRA.filter(item =>
+    item.texto.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.descripcion.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const ITEMS_POR_COMUNIDAD: Record<string, NormativaItem[]> = {
+    "Aragón": filteredAragon,
+    "Comunidad Valenciana": filteredValencia,
+    "Navarra": filteredNavarra,
+  };
 
   return (
     <div className="space-y-4 animate-fade-in pb-8">
@@ -174,7 +286,7 @@ export function TabNormativa({ searchQuery = "" }: Props) {
       )}
 
       {COMUNIDADES.map(comunidad => {
-        const items = comunidad === 'Aragón' ? filteredAragon : [];
+        const items = ITEMS_POR_COMUNIDAD[comunidad] || [];
         const matchComunidad = comunidad.toLowerCase().includes(searchQuery.toLowerCase());
         
         // Hide if we are searching and neither the community name nor its items match
