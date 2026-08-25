@@ -8,6 +8,7 @@ import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
+import { getSimulatedToday } from "@/utils/planningGenerator";
 import { AsistenciaTab } from "@/components/features/diario/AsistenciaTab";
 import { ProgresoRaTab } from "@/components/features/evaluacion/ProgresoRaTab";
 import { DetalleAlumnadoTab } from "@/components/features/evaluacion/DetalleAlumnadoTab";
@@ -18,8 +19,60 @@ import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 
+const DIAS_SEMANA_LIST = ["Lun", "Mar", "Mié", "Jue", "Vie"];
+
+// Recalcula todos los días lectivos del curso (los 3 trimestres), fuera del
+// closure de render, para poder usarlo también en el useEffect de auto-scroll
+// sin duplicar la lógica de fechas del render principal.
+function getTodosLosLectivos(cursoData: any): { dateStr: string; date: Date }[] {
+  const info_fechas = cursoData?.info_fechas || {};
+  const horario = cursoData?.horario || {};
+  const calendar_notes = cursoData?.calendar_notes || {};
+  const lectivos: { dateStr: string; date: Date }[] = [];
+
+  const checkFechas = (ini_str: string, fin_str: string) => {
+    if (!ini_str || !fin_str) return;
+    const ini = new Date(ini_str);
+    const fin = new Date(fin_str);
+    let curr = new Date(ini);
+    while (curr <= fin) {
+      if (curr.getDay() >= 1 && curr.getDay() <= 5) {
+        const diaSemana = DIAS_SEMANA_LIST[curr.getDay() - 1];
+        const dateStr = curr.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        if (!calendar_notes[`f_${dateStr}`] && (Number(horario[diaSemana]) || 0) > 0) {
+          lectivos.push({ dateStr, date: new Date(curr) });
+        }
+      }
+      curr.setDate(curr.getDate() + 1);
+    }
+  };
+  checkFechas(info_fechas.ini_1t, info_fechas.fin_1t);
+  checkFechas(info_fechas.ini_2t, info_fechas.fin_2t);
+  checkFechas(info_fechas.ini_3t, info_fechas.fin_3t);
+  return lectivos;
+}
+
+// Día lectivo más cercano a hoy (si hoy mismo es lectivo, es ese; si no, el
+// más próximo en el tiempo). El punto de referencia lo decide el llamante:
+// la fecha real en modo REAL, o la fecha simulada (2 de mayo) en modo DEMO.
+function findFechaMasCercanaA(lectivos: { dateStr: string; date: Date }[], referencia: Date): string | null {
+  if (lectivos.length === 0) return null;
+  const ref = new Date(referencia);
+  ref.setHours(0, 0, 0, 0);
+  let best = lectivos[0];
+  let bestDiff = Math.abs(lectivos[0].date.getTime() - ref.getTime());
+  for (const l of lectivos) {
+    const diff = Math.abs(l.date.getTime() - ref.getTime());
+    if (diff < bestDiff) {
+      best = l;
+      bestDiff = diff;
+    }
+  }
+  return best.dateStr;
+}
+
 export default function SeguimientoPage() {
-  const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData } = useAppStore();
+  const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, dataSource } = useAppStore();
   const { t } = useTranslation();
   const TABS = [
     { id: "clases", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.clases.label', {defaultValue: 'Clases'})}</span>, cleanLabel: t('tabs.seguimiento.clases.label', {defaultValue: 'Clases'}) },
@@ -38,6 +91,17 @@ export default function SeguimientoPage() {
   const [saveMessage, setSaveMessage] = useState("");
   const [activeTab, setActiveTab] = useState("clases");
   const [allDiarioOpen, setAllDiarioOpen] = useState(false);
+  // Calculado solo en cliente (useEffect, no en el cuerpo del render) para no
+  // desincronizar el HTML servido por SSR del primer render en cliente — "hoy"
+  // depende del reloj del navegador (o, en DEMO, de cursoData), que el
+  // servidor no puede conocer al generar el HTML inicial. En DEMO usa la
+  // misma fecha simulada (2 de mayo) que el auto-scroll de abajo, para que
+  // la etiqueta "Hoy" marque la fila correcta.
+  const [todayStr, setTodayStr] = useState<string | null>(null);
+  useEffect(() => {
+    const ref = dataSource === 'demo' && cursoData ? getSimulatedToday(cursoData) : new Date();
+    setTodayStr(ref.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+  }, [dataSource, cursoData]);
   const { planningLedger } = useDynamicPlanning();
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel || activeTab;
@@ -69,6 +133,47 @@ export default function SeguimientoPage() {
       setLoading(false);
     }
   }, [activeModuleId, moduleData, activeCursoId, cursoData]);
+
+  // Al entrar en la pestaña "Clases", desplaza la vista al día lectivo más
+  // cercano y lo resalta un momento. En modo REAL usa la fecha real de hoy;
+  // en modo DEMO usa la misma fecha simulada (2 de mayo del año de fin de
+  // curso) que ya usa generatePlanning() para la previsión — así la demo
+  // siempre "aterriza" a mitad de curso en vez de en la fecha real del
+  // sistema, que normalmente cae fuera del curso académico de ejemplo.
+  useEffect(() => {
+    if (activeTab !== 'clases' || !cursoData) return;
+    const lectivos = getTodosLosLectivos(cursoData);
+    const referencia = dataSource === 'demo' ? getSimulatedToday(cursoData) : new Date();
+    const targetDateStr = findFechaMasCercanaA(lectivos, referencia);
+    if (!targetDateStr) return;
+
+    // Reintentos periódicos (no un único setTimeout): la app tiene un
+    // problema de hidratación preexistente (no introducido aquí, se
+    // reproduce igual en /inicio) que fuerza uno o más re-renders completos
+    // del cliente poco después del primer montaje, deshaciendo cualquier
+    // scroll ya aplicado antes de que eso termine de asentarse — volver a
+    // pedir el mismo scroll es idempotente. El resaltado se aplica una sola
+    // vez, en el último intento, para no parpadear.
+    let intentos = 0;
+    const TOTAL_INTENTOS = 6;
+    const intervalId = setInterval(() => {
+      intentos += 1;
+      const el = document.getElementById(`diario-dia-${targetDateStr}`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      if (intentos >= TOTAL_INTENTOS) {
+        clearInterval(intervalId);
+        if (el) {
+          el.classList.add('ring-2', 'ring-accent', 'ring-offset-2', 'ring-offset-background');
+          setTimeout(() => {
+            el.classList.remove('ring-2', 'ring-accent', 'ring-offset-2', 'ring-offset-background');
+          }, 2000);
+        }
+      }
+    }, 300);
+    return () => clearInterval(intervalId);
+  }, [activeTab, cursoData, dataSource]);
 
   const handleSave = async () => {
     setSaving(true);
@@ -259,9 +364,10 @@ export default function SeguimientoPage() {
                               const ledgerEntry = daily_ledger[dateStr] || { sin_docencia: false, seguimiento: "", publico: false };
 
                               const nodeColor = ledgerEntry.sin_docencia ? 'bg-warning' : (ledgerEntry.seguimiento ? 'bg-info' : 'bg-gray-600');
+                              const esHoy = dateStr === todayStr;
 
                               return (
-    <div key={i} className="relative pl-8 group">
+    <div key={i} id={`diario-dia-${dateStr}`} className="relative pl-8 group">
                                   {/* Timeline Node */}
                                   <div className={`absolute -left-[9px] top-4 w-4 h-4 rounded-full border-4 border-black ${nodeColor} shadow-[0_0_10px_rgba(0,0,0,0.5)] transition-colors duration-300 group-hover:scale-125 z-10`} />
 
@@ -270,6 +376,7 @@ export default function SeguimientoPage() {
                                       <div className="flex items-center gap-3">
                                         <span className="font-mono text-subheading font-bold text-foreground tracking-widest">{dateStr.substring(0,5)}</span>
                                         <span className="text-caption font-medium text-muted tracking-wider bg-foreground/5 px-2 py-1 rounded">{diaSemana}</span>
+                                        {esHoy && <span className="bg-accent/10 text-accent border border-accent/30 px-2 py-0.5 rounded text-caption font-bold shadow-sm">Hoy</span>}
                                         {udPrev && <span className="bg-info/10 text-info border border-info/30 px-2 py-0.5 rounded text-caption font-medium shadow-sm">UD: {udPrev}</span>}
                                       </div>
                                       <div className="flex items-center gap-5">

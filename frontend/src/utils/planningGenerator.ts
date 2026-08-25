@@ -1,5 +1,37 @@
 import { ModuleData, CursoData } from '@/types';
 
+// "Hoy" para el modo Datos DEMO: el 2 de mayo del año en que termina el curso
+// de ejemplo, no la fecha real del sistema — así la demo siempre se ve a
+// mitad de curso, con trimestres ya impartidos y trimestres aún por delante,
+// en vez de mostrar un curso completo (si "hoy" cae después de fin de curso)
+// o sin empezar (si cae antes de que arranque). Usado tanto para generar el
+// planning_ledger (más abajo) como para el auto-scroll del diario de clases
+// en /seguimiento?tab=clases (ver seguimiento/page.tsx).
+export function getSimulatedToday(cursoData: CursoData): Date {
+  const info_fechas = (cursoData as any)?.info_fechas || {};
+  let simulatedToday = new Date();
+  if (info_fechas.fin_curso) {
+    const finDate = parseDateDDMMYYYY(info_fechas.fin_curso);
+    if (finDate) {
+      simulatedToday = new Date(finDate.getFullYear(), 4, 2); // Month 4 is May (0-indexed)
+    }
+  }
+  return simulatedToday;
+}
+
+function parseDateDDMMYYYY(s: string): Date | null {
+  if (!s) return null;
+  if (String(s).includes("-")) {
+    const parts = String(s).split("-").map(Number);
+    if (parts.length !== 3 || parts.some(isNaN)) return null;
+    return new Date(parts[0], parts[1] - 1, parts[2]);
+  } else {
+    const parts = String(s).split("/").map(Number);
+    if (parts.length !== 3 || parts.some(isNaN)) return null;
+    return new Date(parts[2], parts[1] - 1, parts[0]);
+  }
+}
+
 export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
   const info_fechas = cursoData.info_fechas || {};
   const horario = cursoData.horario || {};
@@ -7,18 +39,7 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
   const df_ud = moduleData.df_ud || [];
   const docencia_dual = info_fechas.docencia_dual || 'sin_docencia';
 
-  const parseDate = (s: string) => {
-    if (!s) return null;
-    if (String(s).includes("-")) {
-      const parts = String(s).split("-").map(Number);
-      if (parts.length !== 3 || parts.some(isNaN)) return null;
-      return new Date(parts[0], parts[1] - 1, parts[2]);
-    } else {
-      const parts = String(s).split("/").map(Number);
-      if (parts.length !== 3 || parts.some(isNaN)) return null;
-      return new Date(parts[2], parts[1] - 1, parts[0]);
-    }
-  };
+  const parseDate = parseDateDDMMYYYY;
 
   const termRanges = [
     { ini: parseDate(info_fechas.inicio || info_fechas.ini_1t), fin: parseDate(info_fechas.evaluacion_1 || info_fechas.fin_1t) },
@@ -57,13 +78,7 @@ export function generatePlanning(moduleData: ModuleData, cursoData: CursoData) {
   const pad = (n: number) => String(n).padStart(2, "0");
   const monthKeys = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
 
-  let simulatedToday = new Date();
-  if (info_fechas.fin_curso) {
-    const finDate = parseDate(info_fechas.fin_curso);
-    if (finDate) {
-      simulatedToday = new Date(finDate.getFullYear(), 4, 2); // Month 4 is May (0-indexed)
-    }
-  }
+  const simulatedToday = getSimulatedToday(cursoData);
 
   // Prepare a queue of UDs with remaining hours
   let totalUdHours = 0;
