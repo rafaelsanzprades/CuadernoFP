@@ -11,7 +11,7 @@
     "resumen": "Laburpena",
     "listado": "Zerrenda",
     "tutoria": "Tutoretza",
-    "plano": "Ikasgelaren Planoa",
+    "plano": "Planoa",
     "feoe": "FEOE / Anekdotarioa",
     "diario": "Egunerokoa",
     "asistencia": "Asistentzia",
@@ -30,9 +30,9 @@
     "ud": "Unitateak",
     "relacion": "Erlazioa RA-UD",
     "contribucion": "Ekarpena OG",
-    "tri1": "1. hiruhilekoa",
-    "tri2": "2. hiruhilekoa",
-    "tri3": "3. hiruhilekoa",
+    "tri1": "1. Eb.",
+    "tri2": "2. Eb.",
+    "tri3": "3. Eb.",
     "secuenciacion": "Sekuentziazioa",
     "tareas": "Zereginak (TC)",
     "archivos_nube": "Fitxategiak Hodeian",
@@ -53,7 +53,7 @@
         "desc": "Gaurko eskolen laburpena, asteko testuingurua eta unean lantzen ari den unitate didaktikoaren garapena."
       },
       "planificacion": {
-        "label": "Plangintza",
+        "label": "Aurrerapena",
         "desc": "Programazioaren hileroko plangintza eta jarraipena."
       },
       "progreso-ra-ud": {
@@ -95,10 +95,6 @@
         "label": "Tutoretza eta alertak",
         "desc": "Uzte-arriskuaren alertak eta ikasleen tutoretza-jarraipena."
       },
-      "perfil": {
-        "label": "Taldearen profila",
-        "desc": "Taldearen estatistikak, ezaugarriak eta testuinguru narratiboa."
-      },
       "plano": {
         "desc": "Ikasgelaren banaketa eta plano bisuala."
       },
@@ -133,18 +129,15 @@
       "resumen": {
         "desc": "Errendimenduaren eta batez besteko kalifikazioen panel orokorra."
       },
-      "grupal": {
-        "desc": "Taldearen jarduna eta estatistika konparatiboak."
-      },
-      "individual": {
-        "desc": "Banakako aurrerapen-orria, tutoretzetarako."
-      },
       "historico": {
-        "desc": "Nota-aldaketa bakoitzaren erregistroa: noiz eta zein baliotatik zein baliora.",
+        "desc": "Nota-aldaketa bakoitzaren eta aurkeztutako erreklamazioen erregistroa, arrazoiarekin eta ebazpenarekin.",
         "label": "Historikoa"
       },
+      "analisis": {
+        "label": "Analisia",
+        "desc": "Taldearen jarduna eta estatistika konparatiboak, eta banakako aurrerapen-orria tutoretzetarako."
+      },
       "reclamaciones": {
-        "desc": "Nota-erreklamazioen erregistroa, arrazoia eta ebazpena.",
         "label": "Erreklamazioak"
       }
     },
@@ -168,11 +161,11 @@
     },
     "curriculo": {
       "contribucion-ra-og": {
-        "label": "RAren ekarpena OGetan",
+        "label": "RA->OG ekarpena",
         "desc": "RAek tituluaren helburu orokorretan egiten duten ekarpena."
       },
       "ponderacion-ra-ce": {
-        "label": "RA eta CEren haztapena",
+        "label": "RA<-CE haztapena",
         "desc": "Ikaskuntzaren emaitzen eta ebaluazio-irizpideen matrizea, eta haien haztapena."
       },
       "unidades": {
@@ -204,7 +197,7 @@
     },
     "instrumentos": {
       "resumen": {
-        "desc": "Erabilitako ebaluazio-tresnen ikuspegi orokorra. RD 659/2023 (136. art.)"
+        "desc": "Erabilitako ebaluazio-tresnen ikuspegi orokorra (RD 659/2023, 136. art.) eta, behean, adierazleen araberako JEG eredu esperimentala."
       },
       "tri1": {
         "desc": "1. hiruhilekorako aurreikusitako ebaluazio-tresnak."
@@ -214,10 +207,6 @@
       },
       "tri3": {
         "desc": "3. hiruhilekorako aurreikusitako ebaluazio-tresnak."
-      },
-      "modeloJeg": {
-        "label": "JEG eredua",
-        "desc": "Adierazleen araberako kalifikazio-eredu esperimentala: ECaren araberako adierazleak, JEG tresnak eta ikasleko ohiko, errekuperazioko eta ezohiko nota kalkulua."
       }
     },
     "archivos": {
@@ -225,16 +214,12 @@
         "label": "Datuak",
         "desc": "Lokalean edo hodeian gordetako Talde, Programazio eta Ikasturte fitxategien kudeaketa."
       },
-      "nube": {
-        "label": "Hodeia",
-        "desc": "Google Drive eta Microsoft OneDriverekin sinkronizazio bidirekzional segurua."
-      },
       "seguridad": {
         "label": "Segurtasuna",
         "desc": "Pribatutasun, enkriptatze eta datuen kontrol aukerak."
       },
       "asistente-ia": {
-        "label": "AI laguntzailea",
+        "label": "Laguntzailea",
         "desc": "Adimen artifizialaren konfigurazioa."
       }
     },
@@ -286,6 +271,10 @@
       "curso": {
         "label": "Ikasturtea",
         "desc": "Ikasturteko egutegia, jarraipena, ikasgelaren planoa, buletinak eta ebaluazio-aktak."
+      },
+      "analisisPdx": {
+        "label": "APP->PDx Analisia",
+        "desc": "Appetik, Programazio Didaktikoaren eredu bakoitzean (PD-, PD=, PD+) eremu bakoitza non agertzen den."
       }
     },
     "equivalencias": {
@@ -316,7 +305,7 @@
         "desc": "Lanbide Heziketako sigla, akronimo eta kontzeptuen glosarioa."
       },
       "mapa": {
-        "label": "Web-mapa",
+        "label": "Mapa",
         "desc": "Aplikazioaren atal eta erreminta guztien eskema hierarkikoa."
       },
       "documentos": {
@@ -362,11 +351,11 @@
     "legislacion": "Legedia"
   },
   "inicio": {
-    "title": "Hasiera",
-    "subtitle": "Panel nagusia, hasierako gida, FAQ eta datuen balioztatzea."
+    "title": "Panela",
+    "subtitle": "Panel nagusia, komunitatearen ekarpenak, erreferentzia-dokumentuak eta EQAVET kalitatea."
   },
   "nav": {
-    "inicio": "Hasiera",
+    "inicio": "Panela",
     "agenda": "Agenda",
     "perfil": "Profila",
     "archivos": "Fitxategiak",
@@ -389,10 +378,11 @@
     "normativa": "Dokumentuak",
     "instrumentos": "Tresna",
     "calidad": "Kalitatea",
-    "mejora": "Hobekuntza",
-    "equivalencias": "Baliokidetasuna"
+    "mejora": "Hobekuntza"
   },
   "navGroups": {
+    "inicio": "Hasiera",
+    "inicio_desc": "Nondik hasi: zure fitxategiak, laguntza, eta kontsultarako katalogoak eta araudia — talde bat irekita izan ala ez, berdin.",
     "general": "Orokorra",
     "grupo": "Taldea",
     "programacion": "Programazioa",
@@ -450,7 +440,6 @@
     "legal_desc": "Lege oharra, pribatutasuna, cookieak, lizentziak eta irisgarritasuna.",
     "ayuda_desc": "Gidak, galdera maiztuak, glosarioa eta aplikazioaren mapa.",
     "contexto_desc": "Informazio orokorra, ingurunearen ezaugarriak, ikasleak eta modulua.",
-    "equivalencias_desc": "Appeko zein eremuk dagokio Programazio Didaktikoaren eredu bakoitzeko zein ataliri (PD-, PD=, PD+), eta zer datu eskatu hasteko.",
     "magia_desc": "Programazio didaktikoaren eta txostenen sorrera.",
     "seguimiento_desc": "Klaseen egunerokoa, asistentzia, RAren aurrerapena eta ikaslekako oharrak.",
     "metodologia_desc": "Metodologia-estrategiak, baliabideak, espazioak eta aniztasunari arreta."
@@ -485,13 +474,12 @@
     "volver": "Itzuli"
   },
   "navDesc": {
-    "inicio": "Panel nagusia, datuen egiaztapena, komunitatearen ekarpenak eta EQAVET kalitatea.",
-    "ayuda": "FAQ, akronimoak, aplikazioaren mapa eta araudi-dokumentuak.",
-    "equivalencias": "APP eta PD-, PD= eta PD+ atalen arteko korrespondentzia.",
-    "magia": "Programazioa PDF gisa sortzea erkidegoka, AArekin gida eta ikasturteko dokumentuak.",
+    "inicio": "Panel nagusia, komunitatearen ekarpenak, erreferentzia-dokumentuak eta EQAVET kalitatea.",
+    "ayuda": "Hasierako gida, FAQ, akronimoak eta aplikazioaren mapa.",
+    "magia": "APP-PD konparaketa eta korrespondentzia, eta programazioaren eta ikasturtearen laguntza-dokumentuak.",
     "legal": "Lege-oharra, pribatutasuna, cookieak eta irisgarritasuna.",
-    "agenda": "Eguneroko laburpena, hilabeteko plangintza eta falta diren RA eta UD-en aurreikuspena.",
-    "archivos": "Fitxategien kudeaketa, hodeiko sinkronizazioa, segurtasuna eta AAren konfigurazioa.",
+    "agenda": "Eguneroko laburpena, hileroko aurrerapena eta falta diren RA eta UD-en aurreikuspena.",
+    "archivos": "Fitxategien kudeaketa, hodeiko sinkronizazioa, segurtasuna, AA eta datuen egiaztapena.",
     "normativa": "Erkidego-araudia, legedia, bibliografia eta INCUAL estandarrak.",
     "catalogo": "Familiak, tituluak, moduluak eta curriculumak (RA eta CE).",
     "contexto": "Identifikazioa, inguruaren testuingurua, FP dual eta ebaluazio eta kalifikazio irizpideak.",

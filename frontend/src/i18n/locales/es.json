@@ -11,7 +11,7 @@
     "resumen": "Resumen",
     "listado": "Listado",
     "tutoria": "Tutoría",
-    "plano": "Plano de clase",
+    "plano": "Plano",
     "feoe": "FEOE",
     "diario": "Diario",
     "asistencia": "Asistencia",
@@ -32,9 +32,9 @@
     "ud": "Unidades",
     "relacion": "Relación RA-UD",
     "contribucion": "Contribución OG",
-    "tri1": "1er trimestre",
-    "tri2": "2º trimestre",
-    "tri3": "3er trimestre",
+    "tri1": "1ª Ev.",
+    "tri2": "2ª Ev.",
+    "tri3": "3ª Ev.",
     "secuenciacion": "Secuenciación",
     "tareas": "Tareas (TC)",
     "archivos_nube": "Archivos en la nube",
@@ -51,14 +51,20 @@
     "titulos": "Títulos",
     "modulos": "Módulos",
     "dual": "FP Dual",
-    "eqavet": "EQAVET"
+    "eqavet": "EQAVET",
+    "magia": {
+      "analisisPdx": {
+        "label": "Análisis APP->PDx",
+        "desc": "De la app a dónde aparece cada campo en cada modelo de Programación Didáctica (PD-, PD=, PD+)."
+      }
+    }
   },
   "inicio": {
-    "title": "Inicio",
-    "subtitle": "Panel principal, guía de inicio, FAQ y validación de datos."
+    "title": "Panel",
+    "subtitle": "Panel principal, contribuciones de la comunidad, documentos de referencia y calidad EQAVET."
   },
   "nav": {
-    "inicio": "Inicio",
+    "inicio": "Panel",
     "agenda": "Agenda",
     "perfil": "Perfil",
     "archivos": "Archivo",
@@ -81,10 +87,11 @@
     "informes": "Informes",
     "normativa": "Normativa",
     "calidad": "Calidad",
-    "mejora": "Mejora",
-    "equivalencias": "Equivalencia"
+    "mejora": "Mejora"
   },
   "navGroups": {
+    "inicio": "Inicio",
+    "inicio_desc": "Por dónde empezar: tus ficheros, ayuda, y los catálogos y normativa de consulta — todo independiente de tener un grupo abierto.",
     "general": "General",
     "grupo": "Grupo",
     "programacion": "Programación",
@@ -94,13 +101,12 @@
     "curso_desc": "Herramientas de seguimiento para el aula viva. Establece el calendario, administra el listado de alumnado, anota el progreso diario y evalúa."
   },
   "navDesc": {
-    "inicio": "Panel principal, verificación de datos, contribuciones de la comunidad y calidad EQAVET.",
-    "ayuda": "FAQ, acrónimos, mapa de la aplicación y documentos normativos.",
-    "equivalencias": "Correspondencia entre APP y los apartados de PD-, PD= y PD+.",
-    "magia": "Generación de la programación en PDF por comunidad, guía con IA y documentos del curso.",
+    "inicio": "Panel principal, contribuciones de la comunidad, documentos de referencia y calidad EQAVET.",
+    "ayuda": "Guía de inicio, FAQ, acrónimos y mapa de la aplicación.",
+    "magia": "Comparativa y correspondencia APP-PD, y documentos de apoyo de la programación y del curso.",
     "legal": "Aviso legal, privacidad, cookies y accesibilidad.",
-    "agenda": "Resumen diario, planificación mensual y previsión de RA y UD pendientes.",
-    "archivos": "Gestión de archivos, sincronización en la nube, seguridad y configuración de la IA.",
+    "agenda": "Resumen diario, avance mensual y previsión de RA y UD pendientes.",
+    "archivos": "Gestión de archivos, sincronización en la nube, seguridad, IA y verificación de datos.",
     "normativa": "Normativa autonómica, legislación, bibliografía y estándares INCUAL.",
     "catalogo": "Familias, títulos, módulos y currículos (RA y CE).",
     "contexto": "Identificación, contexto del entorno, FP dual y criterios de evaluación y calificación.",

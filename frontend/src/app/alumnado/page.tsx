@@ -55,14 +55,12 @@ export default function AlumnadoPage() {
     { id: "plano", label: <><span className="inline-flex"><LayoutGrid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.plano')}</>, cleanLabel: t('tabs.plano') },
     { id: "tutoria", label: <><span className="inline-flex"><ClipboardCheck className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.tutoria.label', {defaultValue: 'Tutoría y alertas'})}</>, cleanLabel: t('tabs.alumnado.tutoria.label', {defaultValue: 'Tutoría y alertas'}) },
     { id: "autoevaluacion", label: <><span className="inline-flex"><ClipboardCheck className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.autoevaluacion.label', {defaultValue: 'Autoevaluación'})}</>, cleanLabel: t('tabs.alumnado.autoevaluacion.label', {defaultValue: 'Autoevaluación'}) },
-    { id: "perfil", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.perfil.label', {defaultValue: 'Perfil del grupo'})}</>, cleanLabel: t('tabs.alumnado.perfil.label', {defaultValue: 'Perfil del grupo'}) }
   ];
 
   const activeTabCleanLabel = TABS.find(t_tab => t_tab.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    matricula: t('tabs.alumnado.matricula.desc', {defaultValue: 'Gestión del listado de alumnado y ficha individual.'}),
-    perfil: t('tabs.alumnado.perfil.desc', {defaultValue: 'Estadísticas, rasgos característicos y contexto narrativo del grupo.'}),
+    matricula: t('tabs.alumnado.matricula.desc', {defaultValue: 'Gestión del listado de alumnado y ficha individual y, más abajo, el perfil narrativo del grupo.'}),
     plano: t('tabs.alumnado.plano.desc', {defaultValue: 'Distribución y plano visual del aula.'}),
     tutoria: t('tabs.alumnado.tutoria.desc', {defaultValue: 'Alertas de riesgo de abandono y seguimiento tutorial del alumnado.'}),
     autoevaluacion: t('tabs.alumnado.autoevaluacion.desc', {defaultValue: 'Autoevaluación del alumnado por criterio de evaluación (SÍ/Dudas/NO) y dificultades declaradas.'}),
@@ -413,6 +411,13 @@ export default function AlumnadoPage() {
                 </Button>
               </div>
             </Card>
+
+            <div className="flex items-center gap-3 pt-2">
+              <div className="h-px flex-1 bg-[var(--glass-border)]" />
+              <span className="text-caption text-muted uppercase tracking-wider">Perfil del grupo</span>
+              <div className="h-px flex-1 bg-[var(--glass-border)]" />
+            </div>
+            <ContextoGrupoTab />
             </>
           )}
 
@@ -429,8 +434,7 @@ export default function AlumnadoPage() {
               <AutoevaluacionTab />
             </div>
           )}
-          {activeTab === "perfil" && <ContextoGrupoTab />}
-          
+
           </MotionWrapper>
         </main>
       </div>

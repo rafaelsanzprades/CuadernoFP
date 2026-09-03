@@ -11,7 +11,7 @@
     "resumen": "Resum",
     "listado": "Llistat",
     "tutoria": "Tutoria",
-    "plano": "Plànol Aula",
+    "plano": "Plànol",
     "feoe": "FEOE / Anecdotari",
     "diario": "Diari",
     "asistencia": "Assistència",
@@ -30,9 +30,9 @@
     "ud": "Unitats",
     "relacion": "Relació RA-UD",
     "contribucion": "Contribució OG",
-    "tri1": "1r trimestre",
-    "tri2": "2n trimestre",
-    "tri3": "3r trimestre",
+    "tri1": "1a Av.",
+    "tri2": "2a Av.",
+    "tri3": "3a Av.",
     "secuenciacion": "Seqüenciació",
     "tareas": "Tasques (TC)",
     "archivos_nube": "Arxius al Núvol",
@@ -55,7 +55,7 @@
         "desc": "Resum de les classes d'avui, context de la setmana i desenvolupament de la unitat didàctica en curs."
       },
       "planificacion": {
-        "label": "Planificació",
+        "label": "Avanç",
         "desc": "Planificació i seguiment mensual de la programació."
       },
       "progreso-ra-ud": {
@@ -97,10 +97,6 @@
         "label": "Tutoria i alertes",
         "desc": "Alertes de risc d'abandonament i seguiment tutorial de l'alumnat."
       },
-      "perfil": {
-        "label": "Perfil del grup",
-        "desc": "Estadístiques, trets característics i context narratiu del grup."
-      },
       "plano": {
         "desc": "Distribució i plànol visual de l'aula."
       },
@@ -135,18 +131,15 @@
       "resumen": {
         "desc": "Panell global de rendiment i qualificacions mitjanes."
       },
-      "grupal": {
-        "desc": "Rendiment i estadístiques comparatives del grup."
-      },
-      "individual": {
-        "desc": "Full de progrés individual per a tutories."
-      },
       "historico": {
-        "desc": "Registre de cada canvi de nota: quan i de quin valor a quin valor.",
+        "desc": "Registre de cada canvi de nota i de les reclamacions presentades, amb el seu motiu i resolució.",
         "label": "Històric"
       },
+      "analisis": {
+        "label": "Anàlisi",
+        "desc": "Rendiment i estadístiques comparatives del grup, i full de progrés individual per a tutories."
+      },
       "reclamaciones": {
-        "desc": "Registre de reclamacions de nota, el seu motiu i la seva resolució.",
         "label": "Reclamacions"
       }
     },
@@ -170,11 +163,11 @@
     },
     "curriculo": {
       "contribucion-ra-og": {
-        "label": "Contribució RA en OG",
+        "label": "Contribució RA->OG",
         "desc": "Contribució dels RA als objectius generals del títol."
       },
       "ponderacion-ra-ce": {
-        "label": "Ponderació RA i CE",
+        "label": "Ponderació RA<-CE",
         "desc": "Matriu de resultats d'aprenentatge i criteris d'avaluació, i la seva ponderació."
       },
       "unidades": {
@@ -206,7 +199,7 @@
     },
     "instrumentos": {
       "resumen": {
-        "desc": "Visió global dels instruments d'avaluació utilitzats. RD 659/2023 (Art. 136)"
+        "desc": "Visió global dels instruments d'avaluació utilitzats (RD 659/2023, Art. 136) i, més avall, el model experimental JEG per indicadors."
       },
       "tri1": {
         "desc": "Instruments d'avaluació planificats per al 1r trimestre."
@@ -216,10 +209,6 @@
       },
       "tri3": {
         "desc": "Instruments d'avaluació planificats per al 3r trimestre."
-      },
-      "modeloJeg": {
-        "label": "Model JEG",
-        "desc": "Model experimental de qualificació per indicadors: indicadors per CE, instruments JEG i càlcul de nota ordinària, de recuperació i extraordinària per alumne."
       }
     },
     "archivos": {
@@ -227,16 +216,12 @@
         "label": "Dades",
         "desc": "Gestió dels teus arxius de Grups, Programacions i Cursos desats en local o al núvol."
       },
-      "nube": {
-        "label": "Núvol",
-        "desc": "Sincronització bidireccional segura amb Google Drive i Microsoft OneDrive."
-      },
       "seguridad": {
         "label": "Seguretat",
         "desc": "Opcions de privacitat, xifratge i control de dades."
       },
       "asistente-ia": {
-        "label": "Assistent IA",
+        "label": "Assistent",
         "desc": "Configuració d'intel·ligència artificial."
       }
     },
@@ -288,6 +273,10 @@
       "curso": {
         "label": "Curs",
         "desc": "Calendari, seguiment, plànol d'aula, butlletins i actes d'avaluació del curs."
+      },
+      "analisisPdx": {
+        "label": "Anàlisi APP->PDx",
+        "desc": "De l'app a on apareix cada camp en cada model de Programació Didàctica (PD-, PD=, PD+)."
       }
     },
     "equivalencias": {
@@ -318,7 +307,7 @@
         "desc": "Glossari de sigles, acrònims i conceptes de Formació Professional."
       },
       "mapa": {
-        "label": "Mapa web",
+        "label": "Mapa",
         "desc": "Esquema jeràrquic de totes les seccions i utilitats de l'aplicació."
       },
       "documentos": {
@@ -364,11 +353,11 @@
     "legislacion": "Legislació"
   },
   "inicio": {
-    "title": "Inici",
-    "subtitle": "Panell principal, guia d'inici, FAQ i validació de dades."
+    "title": "Panell",
+    "subtitle": "Panell principal, contribucions de la comunitat, documents de referència i qualitat EQAVET."
   },
   "nav": {
-    "inicio": "Inici",
+    "inicio": "Panell",
     "agenda": "Agenda",
     "perfil": "Perfil",
     "archivos": "Arxius",
@@ -391,10 +380,11 @@
     "normativa": "Documents",
     "instrumentos": "Instrument",
     "calidad": "Qualitat",
-    "mejora": "Millora",
-    "equivalencias": "Equivalència"
+    "mejora": "Millora"
   },
   "navGroups": {
+    "inicio": "Inici",
+    "inicio_desc": "Per on començar: els teus fitxers, ajuda, i els catàlegs i normativa de consulta — tot independent de tenir un grup obert.",
     "general": "General",
     "grupo": "Grup",
     "programacion": "Programació",
@@ -452,7 +442,6 @@
     "legal_desc": "Avís legal, privacitat, cookies, llicències i accessibilitat.",
     "ayuda_desc": "Guies, preguntes freqüents, glossari i mapa de l'aplicació.",
     "contexto_desc": "Informació general, característiques de l'entorn, alumnat i mòdul.",
-    "equivalencias_desc": "Quin camp de l'app correspon a quin apartat de cada model de Programació Didàctica (PD-, PD=, PD+), i quines dades demanar en començar.",
     "magia_desc": "Generació de la programació didàctica i informes.",
     "seguimiento_desc": "Diari de classes, assistència, progrés de RA i notes per alumnat.",
     "metodologia_desc": "Estratègies metodològiques, recursos, espais i atenció a la diversitat."
@@ -487,13 +476,12 @@
     "volver": "Tornar"
   },
   "navDesc": {
-    "inicio": "Panell principal, verificació de dades, contribucions de la comunitat i qualitat EQAVET.",
-    "ayuda": "FAQ, acrònims, mapa de l'aplicació i documents normatius.",
-    "equivalencias": "Correspondència entre APP i els apartats de PD-, PD= i PD+.",
-    "magia": "Generació de la programació en PDF per comunitat, guia amb IA i documents del curs.",
+    "inicio": "Panell principal, contribucions de la comunitat, documents de referència i qualitat EQAVET.",
+    "ayuda": "Guia d'inici, FAQ, acrònims i mapa de l'aplicació.",
+    "magia": "Comparativa i correspondència APP-PD, i documents de suport de la programació i del curs.",
     "legal": "Avís legal, privacitat, cookies i accessibilitat.",
-    "agenda": "Resum diari, planificació mensual i previsió de RA i UD pendents.",
-    "archivos": "Gestió d'arxius, sincronització al núvol, seguretat i configuració de la IA.",
+    "agenda": "Resum diari, avanç mensual i previsió de RA i UD pendents.",
+    "archivos": "Gestió d'arxius, sincronització al núvol, seguretat, IA i verificació de dades.",
     "normativa": "Normativa autonòmica, legislació, bibliografia i estàndards INCUAL.",
     "catalogo": "Famílies, títols, mòduls i currículums (RA i CE).",
     "contexto": "Identificació, context de l'entorn, FP dual i criteris d'avaluació i qualificació.",

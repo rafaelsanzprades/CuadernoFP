@@ -17,7 +17,6 @@ import Link from "next/link";
 import { Settings2 } from "lucide-react";
 import { InstrumentoConfigModal } from "@/components/features/instrumentos/InstrumentoConfigModal";
 import { JegModeloTab } from "@/components/features/instrumentos/JegModeloTab";
-import { Layers } from "lucide-react";
 import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
 
 const normalizeTipo = (t: string) => {
@@ -42,15 +41,13 @@ export default function InstrumentosPage() {
     { id: "tri1", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri1')}</span>, cleanLabel: t('tabs.tri1') },
     { id: "tri2", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri2')}</span>, cleanLabel: t('tabs.tri2') },
     { id: "tri3", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri3')}</span>, cleanLabel: t('tabs.tri3') },
-    { id: "modelo-jeg", label: <span className="flex items-center gap-2"><Layers className="w-4 h-4 shrink-0 text-purple-400" /> {t('tabs.instrumentos.modeloJeg.label', {defaultValue: 'Modelo JEG'})}</span>, cleanLabel: t('tabs.instrumentos.modeloJeg.label', {defaultValue: 'Modelo JEG'}) }
   ];const [activeTab, setActiveTab] = useState("resumen");const activeTabCleanLabel = TABS.find(tab => tab.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    resumen: t('tabs.instrumentos.resumen.desc', {defaultValue: 'Visión global de los instrumentos de evaluación utilizados. RD 659/2023 (Art. 136)'}),
+    resumen: t('tabs.instrumentos.resumen.desc', {defaultValue: 'Visión global de los instrumentos de evaluación utilizados (RD 659/2023, Art. 136) y, más abajo, el modelo experimental JEG por indicadores.'}),
     tri1: t('tabs.instrumentos.tri1.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 1er trimestre.'}),
     tri2: t('tabs.instrumentos.tri2.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 2º trimestre.'}),
     tri3: t('tabs.instrumentos.tri3.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 3er trimestre.'}),
-    "modelo-jeg": t('tabs.instrumentos.modeloJeg.desc', {defaultValue: 'Modelo experimental de calificación por indicadores: indicadores por CE, instrumentos JEG y cálculo de nota ordinaria, de recuperación y extraordinaria por alumno.'}),
   };
 
   const [isRecoveryModalOpen, setIsRecoveryModalOpen] = useState(false);
@@ -518,14 +515,20 @@ export default function InstrumentosPage() {
                 </table>
               </div>
             </Card>
+
+            <div className="flex items-center gap-3 pt-2">
+              <div className="h-px flex-1 bg-[var(--glass-border)]" />
+              <span className="text-caption text-muted uppercase tracking-wider">Modelo alternativo</span>
+              <div className="h-px flex-1 bg-[var(--glass-border)]" />
+            </div>
+            <JegModeloTab />
             </>
           )}
 
           {activeTab === "tri1" && renderTrimestreTab("1T", "1er trimestre")}
           {activeTab === "tri2" && renderTrimestreTab("2T", "2º trimestre")}
           {activeTab === "tri3" && renderTrimestreTab("3T", "3er trimestre")}
-          {activeTab === "modelo-jeg" && <JegModeloTab />}
-        
+
         {activeConfigActIdx !== null && df_act[activeConfigActIdx] && (
           <InstrumentoConfigModal 
             isOpen={configModalOpen}

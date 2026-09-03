@@ -11,7 +11,7 @@
     "resumen": "Summary",
     "listado": "List",
     "tutoria": "Tutoring",
-    "plano": "Classroom Map",
+    "plano": "Map",
     "feoe": "FEOE",
     "diario": "Journal",
     "asistencia": "Attendance",
@@ -30,9 +30,9 @@
     "ud": "Units",
     "relacion": "Relationship RA-UD",
     "contribucion": "Contribution OG",
-    "tri1": "1st quarter",
-    "tri2": "2nd quarter",
-    "tri3": "3rd quarter",
+    "tri1": "1st Ev.",
+    "tri2": "2nd Ev.",
+    "tri3": "3rd Ev.",
     "secuenciacion": "Sequencing",
     "tareas": "Tasks (TC)",
     "archivos_nube": "Cloud Files",
@@ -53,7 +53,7 @@
         "desc": "Summary of today's classes, the context of the week and the progress of the teaching unit currently underway."
       },
       "planificacion": {
-        "label": "Planning",
+        "label": "Progress",
         "desc": "Monthly planning and tracking of the programming."
       },
       "progreso-ra-ud": {
@@ -95,10 +95,6 @@
         "label": "Tutoring and alerts",
         "desc": "Drop-out risk alerts and tutorial follow-up for students."
       },
-      "perfil": {
-        "label": "Group profile",
-        "desc": "Statistics, characteristic traits and narrative context of the group."
-      },
       "plano": {
         "desc": "Layout and visual map of the classroom."
       },
@@ -133,18 +129,15 @@
       "resumen": {
         "desc": "Overall panel of performance and average grades."
       },
-      "grupal": {
-        "desc": "Group performance and comparative statistics."
-      },
-      "individual": {
-        "desc": "Individual progress sheet for tutoring sessions."
-      },
       "historico": {
-        "desc": "Record of every grade change: when, and from what value to what value.",
+        "desc": "Record of every grade change and of the appeals filed, with their reason and resolution.",
         "label": "History"
       },
+      "analisis": {
+        "label": "Analysis",
+        "desc": "Group performance and comparative statistics, plus an individual progress sheet for tutoring sessions."
+      },
       "reclamaciones": {
-        "desc": "Record of grade appeals, their reason and their resolution.",
         "label": "Appeals"
       }
     },
@@ -168,11 +161,11 @@
     },
     "curriculo": {
       "contribucion-ra-og": {
-        "label": "Contribution of RA to general objectives",
+        "label": "Contribution RA->OG",
         "desc": "Contribution of the learning outcomes to the general objectives of the qualification."
       },
       "ponderacion-ra-ce": {
-        "label": "Weighting of RA and CE",
+        "label": "Weighting RA<-CE",
         "desc": "Matrix of learning outcomes and assessment criteria, and their weighting."
       },
       "unidades": {
@@ -204,7 +197,7 @@
     },
     "instrumentos": {
       "resumen": {
-        "desc": "Overall view of the evaluation instruments used. RD 659/2023 (Art. 136)"
+        "desc": "Overall view of the evaluation instruments used (RD 659/2023, Art. 136), plus the experimental indicator-based JEG model below."
       },
       "tri1": {
         "desc": "Evaluation instruments planned for the 1st term."
@@ -214,10 +207,6 @@
       },
       "tri3": {
         "desc": "Evaluation instruments planned for the 3rd term."
-      },
-      "modeloJeg": {
-        "label": "JEG model",
-        "desc": "Experimental indicator-based grading model: indicators per CE, JEG instruments, and ordinary, resit, and special-session grade calculation per student."
       }
     },
     "archivos": {
@@ -225,16 +214,12 @@
         "label": "Data",
         "desc": "Management of your Group, Programming and Course files saved locally or in the cloud."
       },
-      "nube": {
-        "label": "Cloud",
-        "desc": "Secure two-way synchronization with Google Drive and Microsoft OneDrive."
-      },
       "seguridad": {
         "label": "Security",
         "desc": "Privacy, encryption and data control options."
       },
       "asistente-ia": {
-        "label": "AI Assistant",
+        "label": "Assistant",
         "desc": "Artificial intelligence configuration."
       }
     },
@@ -286,6 +271,10 @@
       "curso": {
         "label": "Course",
         "desc": "Calendar, tracking, classroom map, report cards and evaluation records for the course."
+      },
+      "analisisPdx": {
+        "label": "APP->PDx Analysis",
+        "desc": "From the app to where each field appears in each Programación Didáctica model (PD-, PD=, PD+)."
       }
     },
     "equivalencias": {
@@ -316,7 +305,7 @@
         "desc": "Glossary of abbreviations, acronyms and VET concepts."
       },
       "mapa": {
-        "label": "Site map",
+        "label": "Map",
         "desc": "Hierarchical outline of all the application's sections and utilities."
       },
       "documentos": {
@@ -362,11 +351,11 @@
     "legislacion": "Legislation"
   },
   "inicio": {
-    "title": "Home",
-    "subtitle": "Main dashboard, starter guide, FAQ and data validation."
+    "title": "Panel",
+    "subtitle": "Main dashboard, community contributions, reference documents and EQAVET quality."
   },
   "nav": {
-    "inicio": "Home",
+    "inicio": "Panel",
     "agenda": "Agenda",
     "perfil": "Profile",
     "archivos": "Files",
@@ -389,10 +378,11 @@
     "normativa": "Documents",
     "instrumentos": "Instrument",
     "calidad": "Quality",
-    "mejora": "Improvement",
-    "equivalencias": "Equivalence"
+    "mejora": "Improvement"
   },
   "navGroups": {
+    "inicio": "Home",
+    "inicio_desc": "Where to start: your files, help, and the reference catalog and regulations — all independent of having a group open.",
     "general": "General",
     "grupo": "Group",
     "programacion": "Programming",
@@ -450,7 +440,6 @@
     "legal_desc": "Legal notice, privacy, cookies, licenses and accessibility.",
     "ayuda_desc": "Guides, FAQ, glossary and site map.",
     "contexto_desc": "General information, environment characteristics, students and module.",
-    "equivalencias_desc": "Which app field corresponds to which section of each Programación Didáctica model (PD-, PD=, PD+), and what data to request at the start.",
     "magia_desc": "Generation of the teaching plan and reports.",
     "seguimiento_desc": "Class journal, attendance, RA progress and student grades.",
     "metodologia_desc": "Methodological strategies, resources, spaces and attention to diversity."
@@ -485,13 +474,12 @@
     "volver": "Back"
   },
   "navDesc": {
-    "inicio": "Main dashboard, data verification, community contributions and EQAVET quality.",
-    "ayuda": "FAQ, acronyms, app map and regulatory documents.",
-    "equivalencias": "Correspondence between APP and the PD-, PD= and PD+ sections.",
-    "magia": "PDF generation of the didactic plan by region, AI-assisted guide and course documents.",
+    "inicio": "Main dashboard, community contributions, reference documents and EQAVET quality.",
+    "ayuda": "Getting-started guide, FAQ, acronyms and app map.",
+    "magia": "APP-PD comparison and mapping, plus supporting documents for the programme and the course.",
     "legal": "Legal notice, privacy, cookies and accessibility.",
-    "agenda": "Daily summary, monthly planning and forecast of pending RA and UD.",
-    "archivos": "File management, cloud sync, security and AI configuration.",
+    "agenda": "Daily summary, monthly progress and forecast of pending RA and UD.",
+    "archivos": "File management, cloud sync, security, AI and data verification.",
     "normativa": "Regional regulations, legislation, bibliography and INCUAL standards.",
     "catalogo": "Families, qualifications, modules and curricula (RA and CE).",
     "contexto": "Identification, environment context, FP dual and assessment and grading criteria.",

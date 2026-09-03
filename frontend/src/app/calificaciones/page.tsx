@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BarChart, ClipboardList, Save, TrendingUp, User, FolderOpen, History, AlertOctagon } from "lucide-react";
+import { BarChart, ClipboardList, Save, TrendingUp, User, FolderOpen, History, AlertOctagon, LineChart } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -39,6 +39,8 @@ export default function ProgresoPage() {
   const [saveMessage, setSaveMessage] = useState("");
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("resumen");
+  const [analisisView, setAnalisisView] = useState<"grupal" | "individual">("grupal");
+  const [historicoView, setHistoricoView] = useState<"historico" | "reclamaciones">("historico");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -130,19 +132,15 @@ export default function ProgresoPage() {
   const TABS = [
     { id: "resumen", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.resumen')}</>, cleanLabel: t('tabs.resumen') },
     { id: "estadisticas", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.estadisticas.label', {defaultValue: 'Estadísticas'})}</>, cleanLabel: t('tabs.calificaciones.estadisticas.label', {defaultValue: 'Estadísticas'}) },
-    { id: "grupal", label: <><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.grupal')}</>, cleanLabel: t('tabs.grupal') },
-    { id: "individual", label: <><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.individual')}</>, cleanLabel: t('tabs.individual') },
+    { id: "analisis", label: <><span className="inline-flex"><LineChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.analisis.label', {defaultValue: 'Análisis'})}</>, cleanLabel: t('tabs.calificaciones.analisis.label', {defaultValue: 'Análisis'}) },
     { id: "historico", label: <><span className="inline-flex"><History className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'})}</>, cleanLabel: t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'}) },
-    { id: "reclamaciones", label: <><span className="inline-flex"><AlertOctagon className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.reclamaciones.label', {defaultValue: 'Reclamaciones'})}</>, cleanLabel: t('tabs.calificaciones.reclamaciones.label', {defaultValue: 'Reclamaciones'}) }
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     resumen: t('tabs.calificaciones.resumen.desc', {defaultValue: 'Panel global de rendimiento y calificaciones medias.'}),
     estadisticas: t('tabs.calificaciones.estadisticas.desc', {defaultValue: 'Estadísticas descriptivas y visualizaciones del rendimiento del grupo.'}),
-    grupal: t('tabs.calificaciones.grupal.desc', {defaultValue: 'Desempeño y estadísticas comparativas del grupo.'}),
-    individual: t('tabs.calificaciones.individual.desc', {defaultValue: 'Hoja de progreso individual para tutorías.'}),
-    historico: t('tabs.calificaciones.historico.desc', {defaultValue: 'Registro de cada cambio de nota: cuándo y de qué valor a qué valor.'}),
-    reclamaciones: t('tabs.calificaciones.reclamaciones.desc', {defaultValue: 'Registro de reclamaciones de nota, su motivo y su resolución.'}),
+    analisis: t('tabs.calificaciones.analisis.desc', {defaultValue: 'Desempeño comparativo del grupo y hoja de progreso individual para tutorías.'}),
+    historico: t('tabs.calificaciones.historico.desc', {defaultValue: 'Registro de cada cambio de nota y de las reclamaciones presentadas, con su motivo y resolución.'}),
   };
 
   return (
@@ -392,25 +390,47 @@ export default function ProgresoPage() {
             </div>
           )}
 
-          {/* TAB 3: GRUPAL */}
-          {activeTab === "grupal" && (
-            <div className="animate-in fade-in duration-500">
-              <AnalisisGrupalTab />
+          {/* TAB 3: ANÁLISIS (grupal + individual) */}
+          {activeTab === "analisis" && (
+            <div className="animate-in fade-in duration-500 space-y-4">
+              <div className="inline-flex rounded-xl border border-[var(--glass-border)] bg-foreground/5 p-1">
+                <button
+                  onClick={() => setAnalisisView("grupal")}
+                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${analisisView === "grupal" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
+                >
+                  <ClipboardList className="w-4 h-4" /> {t('tabs.grupal')}
+                </button>
+                <button
+                  onClick={() => setAnalisisView("individual")}
+                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${analisisView === "individual" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
+                >
+                  <User className="w-4 h-4" /> {t('tabs.individual')}
+                </button>
+              </div>
+              {analisisView === "grupal" ? <AnalisisGrupalTab /> : <AnalisisIndividualTab />}
             </div>
           )}
 
-          {/* TAB 4: INDIVIDUAL */}
-          {activeTab === "individual" && (
-            <div className="animate-in fade-in duration-500">
-              <AnalisisIndividualTab />
+          {/* TAB 4: HISTÓRICO (+ reclamaciones) */}
+          {activeTab === "historico" && (
+            <div className="animate-in fade-in duration-500 space-y-4">
+              <div className="inline-flex rounded-xl border border-[var(--glass-border)] bg-foreground/5 p-1">
+                <button
+                  onClick={() => setHistoricoView("historico")}
+                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${historicoView === "historico" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
+                >
+                  <History className="w-4 h-4" /> {t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'})}
+                </button>
+                <button
+                  onClick={() => setHistoricoView("reclamaciones")}
+                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${historicoView === "reclamaciones" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
+                >
+                  <AlertOctagon className="w-4 h-4" /> {t('tabs.calificaciones.reclamaciones.label', {defaultValue: 'Reclamaciones'})}
+                </button>
+              </div>
+              {historicoView === "historico" ? <HistorialCalificacionesTab /> : <ReclamacionesTab />}
             </div>
           )}
-
-          {/* TAB 5: HISTÓRICO */}
-          {activeTab === "historico" && <HistorialCalificacionesTab />}
-
-          {/* TAB 6: RECLAMACIONES */}
-          {activeTab === "reclamaciones" && <ReclamacionesTab />}
           </MotionWrapper>
         </main>
       </div>

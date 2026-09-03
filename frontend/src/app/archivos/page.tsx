@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { AlertTriangle, BookOpen, CheckCircle, Cloud, Database, Download, FileJson, FolderOpen, Save, Shield, ShieldAlert, Sparkles, Upload, Users, Zap, Plus, Copy, HardDrive, Building2, Lock, Activity } from "lucide-react";
+import { AlertTriangle, BookOpen, CheckCircle, Cloud, Database, Download, FileJson, FolderOpen, ListChecks, Save, Shield, ShieldAlert, Sparkles, Upload, Users, Zap, Plus, Copy, HardDrive, Building2, Lock, Activity } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -21,6 +21,7 @@ import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import { OneDriveSyncPanel } from "@/components/features/cloud/OneDriveSyncPanel";
+import { VerificacionTab } from "@/components/features/archivos/VerificacionTab";
 
 
 export default function ArchivosTrabajoPage() {
@@ -375,23 +376,23 @@ export default function ArchivosTrabajoPage() {
 
   const TABS = [
     { id: "datos", label: <span className="flex items-center gap-2"><Database className="w-4 h-4 shrink-0" /> {t('tabs.archivos.datos.label', {defaultValue: 'Datos'})}</span>, cleanLabel: t('tabs.archivos.datos.label', {defaultValue: 'Datos'}) },
-    { id: "nube", label: <span className="flex items-center gap-2"><Cloud className="w-4 h-4 shrink-0" /> {t('tabs.archivos.nube.label', {defaultValue: 'Nube'})}</span>, cleanLabel: t('tabs.archivos.nube.label', {defaultValue: 'Nube'}) },
+    { id: "asistente-ia", label: <span className="flex items-center gap-2"><Sparkles className="w-4 h-4 shrink-0" /> {t('tabs.archivos.asistente-ia.label', {defaultValue: 'Asistente'})}</span>, cleanLabel: t('tabs.archivos.asistente-ia.label', {defaultValue: 'Asistente'}) },
+    { id: "verificacion", label: <span className="flex items-center gap-2"><ListChecks className="w-4 h-4 shrink-0" /> {t('tabs.inicio.verificacion.label', {defaultValue: 'Verificación'})}</span>, cleanLabel: t('tabs.inicio.verificacion.label', {defaultValue: 'Verificación'}) },
     { id: "seguridad", label: <span className="flex items-center gap-2"><Shield className="w-4 h-4 shrink-0" /> {t('tabs.archivos.seguridad.label', {defaultValue: 'Seguridad'})}</span>, cleanLabel: t('tabs.archivos.seguridad.label', {defaultValue: 'Seguridad'}) },
-    { id: "asistente-ia", label: <span className="flex items-center gap-2"><Sparkles className="w-4 h-4 shrink-0" /> {t('tabs.archivos.asistente-ia.label', {defaultValue: 'Asistente IA'})}</span>, cleanLabel: t('tabs.archivos.asistente-ia.label', {defaultValue: 'Asistente IA'}) }
   ];
 
   const breadcrumbSuffixMap: Record<string, string> = {
     "datos": "Archivos",
-    "nube": "Sincronización en la Nube",
+    "asistente-ia": "Asistente",
+    "verificacion": "Verificación",
     "seguridad": "Seguridad y Privacidad",
-    "asistente-ia": "Asistente IA"
   };
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     'datos': t('tabs.archivos.datos.desc', {defaultValue: 'Gestión de tus archivos de Grupos, Programaciones y Cursos guardados en local o en la nube.'}),
-    'nube': t('tabs.archivos.nube.desc', {defaultValue: 'Sincronización bidireccional segura con Google Drive y Microsoft OneDrive.'}),
+    'asistente-ia': t('tabs.archivos.asistente-ia.desc', {defaultValue: 'Configuración de inteligencia artificial.'}),
+    'verificacion': t('tabs.inicio.verificacion.desc', {defaultValue: 'Panel de salud y coherencia de los datos de tu cuaderno.'}),
     'seguridad': t('tabs.archivos.seguridad.desc', {defaultValue: 'Opciones de privacidad, encriptación y control de datos.'}),
-    'asistente-ia': t('tabs.archivos.asistente-ia.desc', {defaultValue: 'Configuración de inteligencia artificial.'})
   };
 
   // ── Render ──────────────────────────────────────────────
@@ -780,17 +781,20 @@ export default function ArchivosTrabajoPage() {
                   </Card>
 
                 </div>
-                </div>
-              )}
 
-              {/* TAB: NUBE (GOOGLE DRIVE & ONEDRIVE) */}
-              {activeTab === "nube" && (
+                {/* Bloque interno: Nube (Google Drive & OneDrive) */}
+                <div className="flex items-center gap-3 pt-2">
+                  <div className="h-px flex-1 bg-[var(--glass-border)]" />
+                  <span className="text-caption text-muted uppercase tracking-wider">Nube</span>
+                  <div className="h-px flex-1 bg-[var(--glass-border)]" />
+                </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
                   <GoogleDriveSyncPanel />
                   <OneDriveSyncPanel />
                 </div>
-              )}
 
+                </div>
+              )}
 
             </div>
 
@@ -851,6 +855,9 @@ export default function ArchivosTrabajoPage() {
                   <AISettingsPanel />
                 </div>
               )}
+
+              {/* TAB: VERIFICACIÓN */}
+              {activeTab === "verificacion" && <VerificacionTab />}
 
             {/* Security notice - always visible, full-width */}
             <div className="mt-8">

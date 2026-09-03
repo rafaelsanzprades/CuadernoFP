@@ -1,28 +1,30 @@
-import { Calendar, CalendarDays, Compass, FileText, FolderOpen, GraduationCap, Grid, TrendingUp, Users, Wrench, Sparkles, Award, Lightbulb, Info, Scale, GitCompare, Activity } from "lucide-react";
+import { Activity, Award, Calendar, CalendarDays, Compass, FileText, FolderOpen, GraduationCap, Grid, Info, Lightbulb, Scale, Sparkles, TrendingUp, Users, Wrench } from "lucide-react";
 
-// Inicio va solo, arriba del todo en Sidebar (aspecto pequeño); Ayuda,
-// Equivalencia y MagIA le siguen igual, aspecto pequeño; Legal va solo, en
-// el footer de la Sidebar. Los cuatro se repiten como tarjetas en Inicio >
-// Bienvenida — ver Sidebar.tsx y app/inicio/page.tsx.
-export const inicioPage = { href: "/inicio?tab=bienvenida", label: "Inicio", icon: Activity, description: "Panel principal, verificación de datos, contribuciones de la comunidad y calidad EQAVET." };
-
-export const topLevelPages = [
-  { href: "/ayuda?tab=faq", label: "Ayuda", icon: Info, description: "FAQ, acrónimos, mapa de la aplicación y documentos normativos." },
-  { href: "/equivalencias?tab=pd-", label: "Equivalencia", icon: GitCompare, description: "Correspondencia entre APP y los apartados de PD-, PD= y PD+." },
-  { href: "/magia?tab=comunidades", label: "MagIA", icon: Sparkles, description: "Generación de la programación en PDF por comunidad, guía con IA y documentos del curso." },
-];
-
-export const legalPage = { href: "/legal?tab=aviso", label: "Legal", icon: Scale, description: "Aviso legal, privacidad, cookies y accesibilidad." };
-
+// Los 4 bloques del sidebar son siempre 4 páginas cada uno (16 en total),
+// cada página con siempre 4 pestañas propias — ver Sidebar.tsx y
+// app/inicio/page.tsx (pestaña Bienvenida, que repite este mismo array como
+// tarjetas). Bloque "Inicio" muestra debajo la fecha DEMO/REAL; "Grupo",
+// "Programación" y "Curso" muestran el nombre del fichero .fpg/.fpp/.fpc
+// activo respectivamente.
 export const navGroups = [
   {
-    title: "Grupo",
-    sectionDescription: "Opciones generales de la aplicación y recursos oficiales.",
+    title: "Inicio",
+    sectionDescription: "Por dónde empezar: tus ficheros, ayuda, y los catálogos y normativa de consulta — todo independiente de tener un grupo abierto.",
     items: [
-      { href: "/agenda", label: "Agenda", icon: CalendarDays, description: "Resumen diario, planificación mensual y previsión de RA y UD pendientes." },
-      { href: "/archivos?tab=datos", label: "Archivo", icon: FolderOpen, description: "Gestión de archivos, sincronización en la nube, seguridad y configuración de la IA." },
+      { href: "/inicio?tab=bienvenida", label: "Panel", icon: Activity, description: "Panel principal, verificación de datos, contribuciones de la comunidad y calidad EQAVET." },
+      { href: "/ayuda?tab=guia", label: "Ayuda", icon: Info, description: "Guía de inicio, FAQ, acrónimos y mapa de la aplicación." },
       { href: "/normativa?tab=autonomias", label: "Normativa", icon: FileText, description: "Normativa autonómica, legislación, bibliografía y estándares INCUAL." },
-      { href: "/catalogo?tab=familias", label: "Catálogo", icon: GraduationCap, description: "Familias, títulos, módulos y currículos (RA y CE)." }
+      { href: "/catalogo?tab=familias", label: "Catálogo", icon: GraduationCap, description: "Familias, títulos, módulos y currículos (RA y CE)." },
+    ]
+  },
+  {
+    title: "Grupo",
+    sectionDescription: "Tu espacio de trabajo activo: gestión de ficheros, agenda del día a día, aviso legal y las herramientas de MagIA.",
+    items: [
+      { href: "/archivos?tab=datos", label: "Archivo", icon: FolderOpen, description: "Gestión de archivos, sincronización en la nube, seguridad y verificación de datos." },
+      { href: "/agenda", label: "Agenda", icon: CalendarDays, description: "Resumen diario, avance mensual y previsión de RA y UD pendientes." },
+      { href: "/legal?tab=aviso", label: "Legal", icon: Scale, description: "Aviso legal, privacidad, cookies y accesibilidad." },
+      { href: "/magia?tab=comparativa", label: "MagIA", icon: Sparkles, description: "Comparativa y correspondencia APP-PD, documentos de apoyo de la programación y del curso." },
     ]
   },
   {
@@ -46,3 +48,4 @@ export const navGroups = [
     ]
   }
 ];
+

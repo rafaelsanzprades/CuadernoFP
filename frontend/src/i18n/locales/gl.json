@@ -11,7 +11,7 @@
     "resumen": "Resumo",
     "listado": "Listado",
     "tutoria": "Titoría",
-    "plano": "Plano de clase",
+    "plano": "Plano",
     "feoe": "FEOE",
     "diario": "Diario",
     "asistencia": "Asistencia",
@@ -30,9 +30,9 @@
     "ud": "Unidades",
     "relacion": "Relación RA-UD",
     "contribucion": "Contribución OG",
-    "tri1": "1º trimestre",
-    "tri2": "2º trimestre",
-    "tri3": "3º trimestre",
+    "tri1": "1ª Av.",
+    "tri2": "2ª Av.",
+    "tri3": "3ª Av.",
     "secuenciacion": "Secuenciación",
     "tareas": "Tarefas (TC)",
     "archivos_nube": "Arquivos na Nube",
@@ -53,7 +53,7 @@
         "desc": "Resumo das clases de hoxe, contexto da semana e desenvolvemento da unidade didáctica en curso."
       },
       "planificacion": {
-        "label": "Planificación",
+        "label": "Avance",
         "desc": "Planificación e seguimento mensual da programación."
       },
       "progreso-ra-ud": {
@@ -95,10 +95,6 @@
         "label": "Titoría e alertas",
         "desc": "Alertas de risco de abandono e seguimento titorial do alumnado."
       },
-      "perfil": {
-        "label": "Perfil do grupo",
-        "desc": "Estatísticas, trazos característicos e contexto narrativo do grupo."
-      },
       "plano": {
         "desc": "Distribución e plano visual da aula."
       },
@@ -133,18 +129,15 @@
       "resumen": {
         "desc": "Panel global de rendemento e cualificacións medias."
       },
-      "grupal": {
-        "desc": "Desempeño e estatísticas comparativas do grupo."
-      },
-      "individual": {
-        "desc": "Folla de progreso individual para titorías."
-      },
       "historico": {
-        "desc": "Rexistro de cada cambio de nota: cando e de que valor a que valor.",
+        "desc": "Rexistro de cada cambio de nota e das reclamacións presentadas, co seu motivo e resolución.",
         "label": "Histórico"
       },
+      "analisis": {
+        "label": "Análise",
+        "desc": "Desempeño e estatísticas comparativas do grupo, e folla de progreso individual para titorías."
+      },
       "reclamaciones": {
-        "desc": "Rexistro de reclamacións de nota, o seu motivo e a súa resolución.",
         "label": "Reclamacións"
       }
     },
@@ -168,11 +161,11 @@
     },
     "curriculo": {
       "contribucion-ra-og": {
-        "label": "Contribución RA en OG",
+        "label": "Contribución RA->OG",
         "desc": "Contribución dos RA aos obxectivos xerais do título."
       },
       "ponderacion-ra-ce": {
-        "label": "Ponderación RA e CE",
+        "label": "Ponderación RA<-CE",
         "desc": "Matriz de resultados de aprendizaxe e criterios de avaliación, e a súa ponderación."
       },
       "unidades": {
@@ -204,7 +197,7 @@
     },
     "instrumentos": {
       "resumen": {
-        "desc": "Visión global dos instrumentos de avaliación utilizados. RD 659/2023 (Art. 136)"
+        "desc": "Visión global dos instrumentos de avaliación utilizados (RD 659/2023, Art. 136) e, máis abaixo, o modelo experimental JEG por indicadores."
       },
       "tri1": {
         "desc": "Instrumentos de avaliación planificados para o 1º trimestre."
@@ -214,10 +207,6 @@
       },
       "tri3": {
         "desc": "Instrumentos de avaliación planificados para o 3º trimestre."
-      },
-      "modeloJeg": {
-        "label": "Modelo JEG",
-        "desc": "Modelo experimental de cualificación por indicadores: indicadores por CE, instrumentos JEG e cálculo de nota ordinaria, de recuperación e extraordinaria por alumno."
       }
     },
     "archivos": {
@@ -225,16 +214,12 @@
         "label": "Datos",
         "desc": "Xestión dos teus arquivos de Grupos, Programacións e Cursos gardados en local ou na nube."
       },
-      "nube": {
-        "label": "Nube",
-        "desc": "Sincronización bidireccional segura con Google Drive e Microsoft OneDrive."
-      },
       "seguridad": {
         "label": "Seguridade",
         "desc": "Opcións de privacidade, encriptación e control de datos."
       },
       "asistente-ia": {
-        "label": "Asistente IA",
+        "label": "Asistente",
         "desc": "Configuración de intelixencia artificial."
       }
     },
@@ -286,6 +271,10 @@
       "curso": {
         "label": "Curso",
         "desc": "Calendario, seguimento, plano de aula, boletíns e actas de avaliación do curso."
+      },
+      "analisisPdx": {
+        "label": "Análise APP->PDx",
+        "desc": "Da app a onde aparece cada campo en cada modelo de Programación Didáctica (PD-, PD=, PD+)."
       }
     },
     "equivalencias": {
@@ -316,7 +305,7 @@
         "desc": "Glosario de siglas, acrónimos e conceptos de Formación Profesional."
       },
       "mapa": {
-        "label": "Mapa web",
+        "label": "Mapa",
         "desc": "Esquema xerárquico de todas as seccións e utilidades da aplicación."
       },
       "documentos": {
@@ -362,11 +351,11 @@
     "legislacion": "Lexislación"
   },
   "inicio": {
-    "title": "Inicio",
-    "subtitle": "Panel principal, guía de inicio, FAQ e validación de datos."
+    "title": "Panel",
+    "subtitle": "Panel principal, contribucións da comunidade, documentos de referencia e calidade EQAVET."
   },
   "nav": {
-    "inicio": "Inicio",
+    "inicio": "Panel",
     "agenda": "Axenda",
     "perfil": "Perfil",
     "archivos": "Arquivos",
@@ -389,10 +378,11 @@
     "normativa": "Documentos",
     "instrumentos": "Instrumento",
     "calidad": "Calidade",
-    "mejora": "Mellora",
-    "equivalencias": "Equivalencia"
+    "mejora": "Mellora"
   },
   "navGroups": {
+    "inicio": "Inicio",
+    "inicio_desc": "Por onde empezar: os teus ficheiros, axuda, e os catálogos e normativa de consulta — todo independente de ter un grupo aberto.",
     "general": "Xeral",
     "grupo": "Grupo",
     "programacion": "Programación",
@@ -450,7 +440,6 @@
     "legal_desc": "Aviso legal, privacidade, cookies, licenzas e accesibilidade.",
     "ayuda_desc": "Guías, preguntas frecuentes, glosario e mapa da aplicación.",
     "contexto_desc": "Información xeral, características da contorna, alumnado e módulo.",
-    "equivalencias_desc": "Que campo da app corresponde a que apartado de cada modelo de Programación Didáctica (PD-, PD=, PD+), e que datos pedir ao comezar.",
     "magia_desc": "Xeración da programación didáctica e informes.",
     "seguimiento_desc": "Diario de clases, asistencia, progreso de RA e notas por alumnado.",
     "metodologia_desc": "Estratexias metodolóxicas, recursos, espazos e atención á diversidade."
@@ -485,13 +474,12 @@
     "volver": "Volver"
   },
   "navDesc": {
-    "inicio": "Panel principal, verificación de datos, contribucións da comunidade e calidade EQAVET.",
-    "ayuda": "FAQ, acrónimos, mapa da aplicación e documentos normativos.",
-    "equivalencias": "Correspondencia entre APP e os apartados de PD-, PD= e PD+.",
-    "magia": "Xeración da programación en PDF por comunidade, guía con IA e documentos do curso.",
+    "inicio": "Panel principal, contribucións da comunidade, documentos de referencia e calidade EQAVET.",
+    "ayuda": "Guía de inicio, FAQ, acrónimos e mapa da aplicación.",
+    "magia": "Comparativa e correspondencia APP-PD, e documentos de apoio da programación e do curso.",
     "legal": "Aviso legal, privacidade, cookies e accesibilidade.",
-    "agenda": "Resumo diario, planificación mensual e previsión de RA e UD pendentes.",
-    "archivos": "Xestión de arquivos, sincronización na nube, seguridade e configuración da IA.",
+    "agenda": "Resumo diario, avance mensual e previsión de RA e UD pendentes.",
+    "archivos": "Xestión de arquivos, sincronización na nube, seguridade, IA e verificación de datos.",
     "normativa": "Normativa autonómica, lexislación, bibliografía e estándares INCUAL.",
     "catalogo": "Familias, títulos, módulos e currículos (RA e CE).",
     "contexto": "Identificación, contexto da contorna, FP dual e criterios de avaliación e cualificación.",

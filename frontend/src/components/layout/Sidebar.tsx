@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, CalendarDays, FolderOpen, Hourglass, Save, A
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAppStore } from '@/store/useAppStore';
-import { navGroups, topLevelPages, inicioPage, legalPage } from '@/config/navigation';
+import { navGroups } from '@/config/navigation';
 import { getAcronym } from '@/utils/catalogFormat';
 import { useEffect, useRef, useState } from 'react';
 import React from 'react';
@@ -204,8 +204,13 @@ export default function Sidebar() {
         className={`sidebar-scroll-container flex-1 ${isSidebarOpen ? 'px-3' : 'px-2'} py-2 space-y-3 overflow-x-hidden overflow-y-auto scrollbar-hide`}
       >
 
-        {/* ── División Fecha DEMO/REAL + Inicio + Agenda + Equivalencia / Ayuda: todo con el mismo espaciado ── */}
+        {/* Inicio (header + fecha DEMO/REAL): items del bloque Inicio, mismo hueco que Grupo/Programación/Curso */}
         <div className="flex flex-col gap-0.5 mb-2 shrink-0">
+          {isSidebarOpen && (
+            <div className="text-body font-bold text-foreground/90 tracking-wide px-1">
+              {t('navGroups.inicio', { defaultValue: 'Inicio' })}
+            </div>
+          )}
           {isSidebarOpen ? (
             <Link
               href="/archivos"
@@ -222,7 +227,7 @@ export default function Sidebar() {
             <div className="w-8 h-px bg-foreground/10 mx-auto" />
           )}
           {isSidebarOpen && <div className="h-px bg-[var(--glass-border)] mx-1" />}
-          {[{ href: inicioPage.href, label: inicioPage.label, icon: inicioPage.icon }, ...topLevelPages].map((page) => {
+          {navGroups[0]?.items.map((page) => {
             const basePath = page.href.split('?')[0];
             const translatedLabel = t('nav.' + basePath.replace('/', ''), { defaultValue: page.label });
             const linkContent = (
@@ -254,8 +259,8 @@ export default function Sidebar() {
           })}
         </div>
 
-        {/* Grupo (header + link) y ① General: items del primer grupo, mismo hueco que Programación/Curso */}
-        {navGroups[0] && (
+        {/* Grupo (header + link) y ① General: items del segundo grupo, mismo hueco que Programación/Curso */}
+        {navGroups[1] && (
           <div className="flex flex-col gap-0.5 mt-2 relative z-20 shrink-0">
             {isSidebarOpen && (
               <div className="flex flex-col mb-0.5 gap-0.5">
@@ -275,7 +280,7 @@ export default function Sidebar() {
                 <div className="h-px bg-[var(--glass-border)]" />
               </div>
             )}
-            {navGroups[0].items.map((item) => {
+            {navGroups[1].items.map((item) => {
               const linkContent = (
                 <Link
                   href={item.href}
@@ -314,7 +319,7 @@ export default function Sidebar() {
         )}
 
         {/* ③ Programación + ④ Curso con info-box coloreada */}
-        {navGroups.slice(1).map((group) => {
+        {navGroups.slice(2).map((group) => {
           // Extraer el texto base (sin corchetes) y el contenido entre corchetes
           const bracketMatch = group.title.match(/^(.*?)\s*\[.*\]$/);
           let baseTitle = bracketMatch ? bracketMatch[1].trim() : group.title;
@@ -394,39 +399,11 @@ export default function Sidebar() {
         })}
       </nav>
 
-        {/* Separación de lado a lado antes de Legal */}
+        {/* Separación de lado a lado antes del footer */}
         <div className="h-px w-full bg-[var(--glass-border)] shrink-0" />
 
         {/* 🔻 Footer 🔻 */}
         <div className={`px-4 py-3 flex flex-col items-center gap-1.5`}>
-          {(() => {
-            const isActive = pathname === '/legal';
-            const linkContent = (
-              <Link
-                href={legalPage.href}
-                onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
-                className={`flex items-center w-full ${isSidebarOpen ? 'gap-2.5 px-3' : 'justify-center px-0'} py-1 rounded-lg transition-all duration-150 group
-                  ${isActive
-                    ? 'bg-foreground/10 text-foreground'
-                    : 'text-muted hover:text-foreground hover:bg-foreground/5 border border-transparent'
-                  }`}
-              >
-                <span className="flex items-center justify-center transition-transform duration-150 group-hover:scale-110">
-                  <legalPage.icon className="w-4 h-4" strokeWidth={1.75} />
-                </span>
-                {isSidebarOpen && (
-                  <span className="text-caption leading-tight font-medium whitespace-nowrap">
-                    {t('nav.legal', { defaultValue: legalPage.label })}
-                  </span>
-                )}
-              </Link>
-            );
-            return !isSidebarOpen ? (
-              <Tooltip content={t('nav.legal', { defaultValue: legalPage.label })} position="right" delay={0.1}>
-                {linkContent}
-              </Tooltip>
-            ) : linkContent;
-          })()}
           {isSidebarOpen ? (
             <div className="flex w-full items-center gap-2">
               <InstallPwaButton isSidebarOpen={true} />

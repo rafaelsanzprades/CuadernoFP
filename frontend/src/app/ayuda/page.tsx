@@ -13,7 +13,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { TabAcronimos } from "@/components/features/catalogo/TabAcronimos";
-import { TabDocumentos } from "@/components/features/ayuda/TabDocumentos";
+import { GuiaTab } from "@/components/features/ayuda/GuiaTab";
 
 // ── Mapa de pestañas por página real (misma fuente que usaba /inicio) ──────
 const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
@@ -201,19 +201,19 @@ export default function AyudaPage() {
   const [activeTab, setActiveTab] = useState<string>("faq");
 
   const TABS = [
+    { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.magia.guia.label', {defaultValue: 'Guía'})}</>, cleanLabel: t('tabs.magia.guia.label', {defaultValue: 'Guía'}) },
     { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.faq.label', {defaultValue: 'FAQ'})}</>, cleanLabel: t('tabs.ayuda.faq.label', {defaultValue: 'FAQ'}) },
     { id: "acronimos", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.acronimos.label', {defaultValue: 'Acrónimos'})}</>, cleanLabel: t('tabs.ayuda.acronimos.label', {defaultValue: 'Acrónimos'}) },
-    { id: "mapa", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.mapa.label', {defaultValue: 'Mapa web'})}</>, cleanLabel: t('tabs.ayuda.mapa.label', {defaultValue: 'Mapa web'}) },
-    { id: "documentos", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.documentos.label', {defaultValue: 'Documentos'})}</>, cleanLabel: t('tabs.ayuda.documentos.label', {defaultValue: 'Documentos'}) },
+    { id: "mapa", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.mapa.label', {defaultValue: 'Mapa'})}</>, cleanLabel: t('tabs.ayuda.mapa.label', {defaultValue: 'Mapa'}) },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
+    guia: t('tabs.magia.guia.desc', {defaultValue: 'Guía de inicio y prompt para IA: qué datos pedir al docente y dónde colocarlos en la app.'}),
     faq: t('tabs.ayuda.faq.desc', {defaultValue: 'Respuestas a las preguntas más frecuentes del profesorado.'}),
     acronimos: t('tabs.ayuda.acronimos.desc', {defaultValue: 'Glosario de siglas, acrónimos y conceptos de Formación Profesional.'}),
     mapa: t('tabs.ayuda.mapa.desc', {defaultValue: 'Esquema jerárquico de todas las secciones y utilidades de la aplicación.'}),
-    documentos: t('tabs.ayuda.documentos.desc', {defaultValue: 'Disposiciones normativas que fijan las enseñanzas mínimas de cada título.'})
   };
 
   return (
@@ -354,9 +354,9 @@ export default function AyudaPage() {
               </div>
             )}
 
-            {/* ── CONTENIDO: DOCUMENTOS ────────────────────────────────────── */}
-            {activeTab === "documentos" && (
-              <TabDocumentos />
+            {/* ── CONTENIDO: GUÍA ────────────────────────────────────── */}
+            {activeTab === "guia" && (
+              <GuiaTab />
             )}
 
           </MotionWrapper>

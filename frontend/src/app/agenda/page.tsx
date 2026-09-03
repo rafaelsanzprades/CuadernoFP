@@ -59,7 +59,7 @@ export default function AgendaPage() {
 
   const TABS = [
     { id: "actual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.agenda.actual.label', {defaultValue: 'Actual'})}</>, cleanLabel: t('tabs.agenda.actual.label', {defaultValue: 'Actual'}) },
-    { id: "planificacion", label: <><span className="inline-flex"><CalendarRange className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.agenda.planificacion.label', {defaultValue: 'Planificación'})}</>, cleanLabel: t('tabs.agenda.planificacion.label', {defaultValue: 'Planificación'}) },
+    { id: "planificacion", label: <><span className="inline-flex"><CalendarRange className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.agenda.planificacion.label', {defaultValue: 'Avance'})}</>, cleanLabel: t('tabs.agenda.planificacion.label', {defaultValue: 'Avance'}) },
     { id: "progreso-ra-ud", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.agenda.progreso-ra-ud.label', {defaultValue: 'Previsión RA y UD'})}</>, cleanLabel: t('tabs.agenda.progreso-ra-ud.label', {defaultValue: 'Previsión RA y UD'}) },
     { id: "mensual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.agenda.mensual.label', {defaultValue: 'Mensual'})}</>, cleanLabel: t('tabs.agenda.mensual.label', {defaultValue: 'Mensual'}) },
 

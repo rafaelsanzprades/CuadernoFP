@@ -49,8 +49,8 @@ export default function MatricesPage() {
   }, []);
 
   const TABS = [
-    { id: "contribucion-ra-og", label: t('tabs.curriculo.contribucion-ra-og.label', {defaultValue: 'Contribución RA en OG'}), cleanLabel: t('tabs.curriculo.contribucion-ra-og.label', {defaultValue: 'Contribución RA en OG'}), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "ponderacion-ra-ce", label: t('tabs.curriculo.ponderacion-ra-ce.label', {defaultValue: 'Ponderación RA y CE'}), cleanLabel: t('tabs.curriculo.ponderacion-ra-ce.label', {defaultValue: 'Ponderación RA y CE'}), icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "contribucion-ra-og", label: t('tabs.curriculo.contribucion-ra-og.label', {defaultValue: 'Contribución RA->OG'}), cleanLabel: t('tabs.curriculo.contribucion-ra-og.label', {defaultValue: 'Contribución RA->OG'}), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "ponderacion-ra-ce", label: t('tabs.curriculo.ponderacion-ra-ce.label', {defaultValue: 'Ponderación RA<-CE'}), cleanLabel: t('tabs.curriculo.ponderacion-ra-ce.label', {defaultValue: 'Ponderación RA<-CE'}), icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "unidades", label: t('tabs.curriculo.unidades.label', {defaultValue: 'Unidades didácticas'}), cleanLabel: t('tabs.curriculo.unidades.label', {defaultValue: 'Unidades didácticas'}), icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "competenciales", label: t('tabs.curriculo.competenciales.label', {defaultValue: 'Tareas competenciales'}), cleanLabel: t('tabs.curriculo.competenciales.label', {defaultValue: 'Tareas competenciales'}), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
   ];

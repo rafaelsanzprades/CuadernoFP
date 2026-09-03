@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Download, FileEdit, FileSpreadsheet, FileText, FolderOpen, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp, Compass, Lightbulb, Wrench } from "lucide-react";
+import { BarChart, Calculator, Calendar, CalendarDays, Download, FileEdit, FileSpreadsheet, FileText, FileStack, FolderOpen, GitCompare, GraduationCap, Scale, Sparkles, User, Users, X, Grid, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp, Compass, Lightbulb, Wrench } from "lucide-react";
 import * as XLSX from "xlsx";
 import React, { useState, useEffect, useMemo } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -18,9 +18,8 @@ import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { TabSync } from "@/components/ui/TabSync";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { getAutoMilestones } from "@/utils/calendarMilestones";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
+import { ComparativaPdTab } from "@/components/features/magia/ComparativaPdTab";
+import { AnalisisPdxTab } from "@/components/features/magia/AnalisisPdxTab";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 
@@ -56,30 +55,11 @@ function DualDownloadButtons({
   );
 }
 
-const guiaMarkdownComponents = {
-  h1: ({ node, ...props }: any) => <h1 className="text-heading font-extrabold text-foreground mb-6 pb-2 border-b border-white/10" {...props} />,
-  h2: ({ node, ...props }: any) => <h2 className="text-subheading font-bold text-accent mt-8 mb-4 flex items-center gap-2" {...props} />,
-  h3: ({ node, ...props }: any) => <h3 className="text-subheading font-bold text-foreground mt-6 mb-3" {...props} />,
-  p: ({ node, ...props }: any) => <p className="text-muted leading-relaxed mb-4" {...props} />,
-  ul: ({ node, className, ...props }: any) => <ul className={`list-none space-y-3 mb-6 ml-4 ${className || ''}`} {...props} />,
-  ol: ({ node, className, ...props }: any) => <ol className={`list-decimal space-y-3 mb-6 ml-6 ${className || ''}`} {...props} />,
-  li: ({ node, ...props }: any) => <li className="text-body text-muted leading-relaxed" {...props} />,
-  strong: ({ node, ...props }: any) => <strong className="font-bold text-foreground" {...props} />,
-  a: ({ node, ...props }: any) => <a className="text-accent hover:underline font-semibold" target="_blank" rel="noopener noreferrer" {...props} />,
-  code: ({ node, ...props }: any) => <code className="bg-foreground/10 text-foreground px-1.5 py-0.5 rounded text-body font-mono" {...props} />,
-  pre: ({ node, ...props }: any) => <pre className="block bg-foreground/5 p-4 rounded-xl text-body font-mono overflow-x-auto mb-4 border border-white/5 text-muted" {...props} />,
-  hr: ({ node, ...props }: any) => <hr className="border-white/10 my-8" {...props} />,
-  table: ({ node, ...props }: any) => <div className="overflow-x-auto mb-6"><table className="w-full text-left border-collapse" {...props} /></div>,
-  th: ({ node, ...props }: any) => <th className="p-2 border border-[var(--glass-border)] bg-foreground/5 text-body font-bold text-foreground" {...props} />,
-  td: ({ node, ...props }: any) => <td className="p-2 border border-[var(--glass-border)] text-body text-muted" {...props} />,
-};
-
 export default function MagiaPage() {
   const { t } = useTranslation();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [previewFilename, setPreviewFilename] = useState<string | null>(null);
   const [downloadingStr, setDownloadingStr] = useState<string | null>(null);
-  const [guiaContent, setGuiaContent] = useState<string | null>(null);
 
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData } = useAppStore();
   // df_sgmt / planning_ledger guardados en cursoData no se sincronizan con el
@@ -137,17 +117,6 @@ export default function MagiaPage() {
       setFechaFinal(cursoData.info_fechas.fin_curso || "");
     }
   }, [cursoData?.info_fechas]);
-
-  useEffect(() => {
-    if (activeTab !== "guia" || guiaContent !== null) return;
-    fetch("/Guia.md")
-      .then(res => res.text())
-      .then(text => setGuiaContent(text))
-      .catch(err => {
-        console.error(err);
-        setGuiaContent("Error cargando el contenido.");
-      });
-  }, [activeTab, guiaContent]);
 
   const formatD = (dStr: string | undefined) => {
     if (!dStr) return "---";
@@ -261,15 +230,15 @@ export default function MagiaPage() {
   const df_act = moduleData?.df_act || [];
 
   const TABS = [
-    { id: "comunidades", label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4 shrink-0" /> {t('tabs.magia.comunidades.label', {defaultValue: 'Comunidades'})}</span>, cleanLabel: t('tabs.magia.comunidades.label', {defaultValue: 'Comunidades'}) },
-    { id: "guia", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> {t('tabs.magia.guia.label', {defaultValue: 'Guía'})}</span>, cleanLabel: t('tabs.magia.guia.label', {defaultValue: 'Guía'}) },
+    { id: "comparativa", label: <span className="flex items-center gap-2"><GitCompare className="w-4 h-4 shrink-0" /> {t('tabs.equivalencias.comparativa.label', {defaultValue: 'Comparativa'})}</span>, cleanLabel: t('tabs.equivalencias.comparativa.label', {defaultValue: 'Comparativa'}) },
+    { id: "analisis-pdx", label: <span className="flex items-center gap-2"><FileStack className="w-4 h-4 shrink-0" /> {t('tabs.magia.analisisPdx.label', {defaultValue: 'Análisis APP->PDx'})}</span>, cleanLabel: t('tabs.magia.analisisPdx.label', {defaultValue: 'Análisis APP->PDx'}) },
     { id: "programacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.magia.programacion.label', {defaultValue: 'Programación'})}</span>, cleanLabel: t('tabs.magia.programacion.label', {defaultValue: 'Programación'}) },
     { id: "curso", label: <span className="flex items-center gap-2"><Calendar className="w-4 h-4 shrink-0" /> {t('tabs.magia.curso.label', {defaultValue: 'Curso'})}</span>, cleanLabel: t('tabs.magia.curso.label', {defaultValue: 'Curso'}) },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    comunidades: t('tabs.magia.comunidades.desc', {defaultValue: 'Generación de la programación didáctica oficial, por comunidad autónoma.'}),
-    guia: t('tabs.magia.guia.desc', {defaultValue: 'Guía de inicio y prompt para IA: qué datos pedir al docente y dónde colocarlos en la app.'}),
+    comparativa: t('tabs.equivalencias.comparativa.desc', {defaultValue: 'Comparativa de los distintos niveles de programación y dónde se rellena cada apartado.'}),
+    'analisis-pdx': t('tabs.magia.analisisPdx.desc', {defaultValue: 'De la app a dónde aparece cada campo en cada modelo de Programación Didáctica (PD-, PD=, PD+).'}),
     programacion: t('tabs.magia.programacion.desc', {defaultValue: 'Documentos de apoyo: matriz de currículo y documentos individuales de UD y Tareas.'}),
     curso: t('tabs.magia.curso.desc', {defaultValue: 'Calendario, seguimiento, plano de aula, boletines y actas de evaluación del curso.'}),
   };
@@ -337,137 +306,11 @@ export default function MagiaPage() {
 
                 <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
 
-                {/* ══════════════════════════ COMUNIDADES ══════════════════════════ */}
-                {activeTab === "comunidades" && (
-                  <div className="pt-2 space-y-6">
-                    {(!activeCursoId || !activeModuleId) ? (
-                      <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
-                        <FileText className="w-16 h-16 text-muted-foreground opacity-50" />
-                        <h2 className="text-heading font-bold">No hay curso ni programación cargada</h2>
-                        <p className="text-muted mb-4">Debes abrir o crear un archivo de programación y curso en tu Archivos.</p>
-                        <Link href="/archivos">
-                          <Button variant="primary" className="gap-2">
-                            <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
-                          </Button>
-                        </Link>
-                      </Card>
-                    ) : (loadingData || !cursoData || !moduleData) ? (
-                      <Card className="p-12">
-                        <div className="space-y-3">
-                          <Skeleton className="h-8 w-1/4" />
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <Skeleton className="h-40 w-full" />
-                            <Skeleton className="h-40 w-full" />
-                          </div>
-                        </div>
-                      </Card>
-                    ) : (
-                      <div className="space-y-4 animate-in fade-in duration-500">
-                        {["Andalucía", "Aragón", "Asturias", "Baleares", "Canarias", "Cantabria", "Castilla-La Mancha", "Castilla y León", "Cataluña", "Comunidad Valenciana", "Extremadura", "Galicia", "Madrid", "Murcia", "Navarra", "País Vasco", "La Rioja", "Ceuta", "Melilla"].map((comunidad) => {
-                          const isAragon = comunidad === "Aragón";
-                          return (
-                            <details key={comunidad} open={isAragon} className="group border border-[var(--glass-border)] rounded-xl bg-background/50 mb-4 shadow-sm overflow-hidden">
-                              <summary className="p-4 font-bold cursor-pointer text-subheading flex items-center justify-between hover:bg-foreground/5 transition-colors list-none border-b border-transparent group-open:border-[var(--glass-border)] group-open:bg-foreground/5">
-                                <span className="flex items-center gap-2"><MapPin className={`w-5 h-5 ${isAragon ? 'text-purple-500' : 'text-muted-foreground'}`} /> {comunidad}</span>
-                                <ChevronDown className="w-5 h-5 transition-transform group-open:rotate-180 text-muted" />
-                              </summary>
-                              {isAragon ? (
-                                <div className="p-6">
-                                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                                      <div>
-                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD-. Resumen para el alumnado</h3>
-                                        <p className="text-body text-muted mb-6">Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.</p>
-                                      </div>
-                                      <div className="mt-auto">
-                                        <Button onClick={() => handleDownloadPdf('programacion_minima_tpl', 'docx')} disabled={downloadingStr === 'programacion_minima_tpl_docx'} className="w-full">
-                                          {downloadingStr === 'programacion_minima_tpl_docx' ? '⏳...' : t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}
-                                        </Button>
-                                      </div>
-                                    </div>
+                {/* ══════════════════════════ COMPARATIVA ══════════════════════════ */}
+                {activeTab === "comparativa" && <ComparativaPdTab />}
 
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                                      <div>
-                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD=. Programación didáctica Simplificada</h3>
-                                        <p className="text-body text-muted mb-6">Versión simplificada con los puntos de la Ley muy específica y concreta (no detalla secuenciación de aula ni extensa teoría).</p>
-                                      </div>
-                                      <div className="mt-auto">
-                                        <Button onClick={() => handleDownloadPdf('programacion_suficiente_tpl', 'docx')} disabled={downloadingStr === 'programacion_suficiente_tpl_docx'} className="w-full">
-                                          {downloadingStr === 'programacion_suficiente_tpl_docx' ? '⏳...' : t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}
-                                        </Button>
-                                      </div>
-                                    </div>
-
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                                      <div>
-                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD+. Programación didáctica CIFPA</h3>
-                                        <p className="text-body text-muted mb-6">Se cumplimenta el modelo oficial de programación completo.</p>
-                                      </div>
-                                      <div className="mt-auto">
-                                        <Button onClick={() => handleDownloadPdf('programacion_jeg', 'docx')} disabled={downloadingStr === 'programacion_jeg_docx'} className="w-full">
-                                          {downloadingStr === 'programacion_jeg_docx' ? '⏳...' : t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}
-                                        </Button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              ) : (
-                                <div className="p-6">
-                                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                                      <div>
-                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD-. Resumen para el alumnado</h3>
-                                        <p className="text-body text-muted mb-6">Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.</p>
-                                      </div>
-                                      <div className="mt-auto">
-                                        <Button disabled className="w-full">{t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}</Button>
-                                      </div>
-                                    </div>
-
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                                      <div>
-                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD=. Programación didáctica ({comunidad})</h3>
-                                        <p className="text-body text-muted mb-6">Versión ajustada a la normativa oficial de {comunidad}.</p>
-                                      </div>
-                                      <div className="mt-auto">
-                                        <Button disabled className="w-full">{t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}</Button>
-                                      </div>
-                                    </div>
-
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                                      <div>
-                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> PD+. Programación didáctica detallada ({comunidad})</h3>
-                                        <p className="text-body text-muted mb-6">Se cumplimenta el modelo oficial de programación completo.</p>
-                                      </div>
-                                      <div className="mt-auto">
-                                        <Button disabled className="w-full">{t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}</Button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              )}
-                            </details>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* ══════════════════════════ GUÍA (guía de inicio) ══════════════════════════ */}
-                {activeTab === "guia" && (
-                  <Card glow className="p-8">
-                    {guiaContent === null ? (
-                      <div className="flex justify-center p-8 text-muted">Cargando...</div>
-                    ) : (
-                      <div className="markdown-body">
-                        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={guiaMarkdownComponents}>
-                          {guiaContent}
-                        </ReactMarkdown>
-                      </div>
-                    )}
-                  </Card>
-                )}
+                {/* ══════════════════════════ ANÁLISIS APP->PDx ══════════════════════════ */}
+                {activeTab === "analisis-pdx" && <AnalisisPdxTab />}
 
                 {/* ══════════════════════════ PROGRAMACIÓN (documentos de apoyo) ══════════════════════════ */}
                 {/* 4 bloques, mismo orden y nombres que el grupo "Programación" del sidebar:
