@@ -91,7 +91,7 @@ export const AnalisisIndividualTab = () => {
         <Card className="p-6 border-l-4 border-l-teal-500 flex flex-col justify-center items-center relative overflow-hidden">
           <div className="absolute top-0 right-0 p-4 opacity-10 text-heading"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span></div>
           <span className="text-muted text-body font-semibold tracking-wider mb-2">{t('campos.analisis.notaMediaActual', {defaultValue: 'Nota media actual'})}</span>
-          <span className="text-heading font-black text-success">{realCalc.nota_final !== null ? realCalc.nota_final.toFixed(2) : "-"}</span>
+          <span className="text-heading font-black text-success">{realCalc.nota_final !== null ? realCalc.nota_final.toFixed(1) : "-"}</span>
         </Card>
         <Card className="p-6 border-l-4 border-l-blue-500 flex flex-col justify-center items-center relative overflow-hidden">
           <div className="absolute top-0 right-0 p-4 opacity-10 text-heading"><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></div>
@@ -192,7 +192,7 @@ export const AnalisisIndividualTab = () => {
               }}
             >
               <div className="text-body tracking-widest font-bold opacity-80 mb-4">{t('campos.analisis.notaProyectada', {defaultValue: 'Nota proyectada'})}</div>
-              <div className="text-heading font-black mb-4 drop-shadow-lg">{simCalc.nota_final !== null ? simCalc.nota_final.toFixed(2) : "-"}</div>
+              <div className="text-heading font-black mb-4 drop-shadow-lg">{simCalc.nota_final !== null ? simCalc.nota_final.toFixed(1) : "-"}</div>
               <div className="text-subheading font-bold mb-1">{simSigad.txt}</div>
               <div className="text-subheading opacity-80">({simSigad.cod})</div>
             </div>

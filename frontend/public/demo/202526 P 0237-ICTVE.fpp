@@ -749,7 +749,15 @@
       "Tipo": "Teoria",
       "desc_act": "Examen teórico 1T",
       "peso_act": 40,
-      "is_active": true
+      "is_active": true,
+      "CE1.a": true,
+      "CE1.b": true,
+      "CE1.c": true,
+      "CE1.d": true,
+      "CE1.e": true,
+      "CE1.f": true,
+      "CE1.g": true,
+      "CE1.h": true
     },
     {
       "id_act": "ACT02",
@@ -757,7 +765,15 @@
       "Tipo": "Practica",
       "desc_act": "Examen práctico 1T",
       "peso_act": 30,
-      "is_active": true
+      "is_active": true,
+      "CE1.a": true,
+      "CE1.b": true,
+      "CE1.c": true,
+      "CE1.d": true,
+      "CE1.e": true,
+      "CE1.f": true,
+      "CE1.g": true,
+      "CE1.h": true
     },
     {
       "id_act": "ACT03",
@@ -765,7 +781,10 @@
       "Tipo": "Informes",
       "desc_act": "Informe de prácticas Pr11",
       "peso_act": 5,
-      "is_active": true
+      "is_active": true,
+      "rubrica_id": "RUB-INFORME",
+      "CE2.a": true,
+      "CE2.b": true
     },
     {
       "id_act": "ACT04",
@@ -773,7 +792,9 @@
       "Tipo": "Informes",
       "desc_act": "Informe de prácticas Pr12",
       "peso_act": 5,
-      "is_active": true
+      "is_active": true,
+      "CE2.c": true,
+      "CE2.d": true
     },
     {
       "id_act": "ACT05",
@@ -781,7 +802,9 @@
       "Tipo": "Informes",
       "desc_act": "Informe de prácticas Pr13",
       "peso_act": 5,
-      "is_active": true
+      "is_active": true,
+      "CE2.e": true,
+      "CE2.f": true
     },
     {
       "id_act": "ACT06",
@@ -789,7 +812,9 @@
       "Tipo": "Informes",
       "desc_act": "Informe de prácticas Pr14",
       "peso_act": 5,
-      "is_active": true
+      "is_active": true,
+      "CE2.g": true,
+      "CE2.h": true
     },
     {
       "id_act": "ACT07",
@@ -797,7 +822,16 @@
       "Tipo": "Tareas",
       "desc_act": "Cuaderno de tareas 1T",
       "peso_act": 10,
-      "is_active": true
+      "is_active": true,
+      "rubrica_id": "RUB-TAREAS",
+      "CE2.a": true,
+      "CE2.b": true,
+      "CE2.c": true,
+      "CE2.d": true,
+      "CE2.e": true,
+      "CE2.f": true,
+      "CE2.g": true,
+      "CE2.h": true
     },
     {
       "id_act": "ACT08",
@@ -805,7 +839,15 @@
       "Tipo": "Teoria",
       "desc_act": "Examen teórico 2T",
       "peso_act": 40,
-      "is_active": true
+      "is_active": true,
+      "CE1.a": true,
+      "CE1.b": true,
+      "CE1.c": true,
+      "CE1.d": true,
+      "CE1.e": true,
+      "CE1.f": true,
+      "CE1.g": true,
+      "CE1.h": true
     },
     {
       "id_act": "ACT09",
@@ -813,7 +855,15 @@
       "Tipo": "Practica",
       "desc_act": "Examen práctico 2T",
       "peso_act": 30,
-      "is_active": true
+      "is_active": true,
+      "CE1.a": true,
+      "CE1.b": true,
+      "CE1.c": true,
+      "CE1.d": true,
+      "CE1.e": true,
+      "CE1.f": true,
+      "CE1.g": true,
+      "CE1.h": true
     },
     {
       "id_act": "ACT10",
@@ -821,7 +871,12 @@
       "Tipo": "Informes",
       "desc_act": "Informe de prácticas Pr21",
       "peso_act": 5,
-      "is_active": true
+      "is_active": true,
+      "rubrica_id": "RUB-INFORME",
+      "CE3.a": true,
+      "CE3.b": true,
+      "CE3.c": true,
+      "CE3.d": true
     },
     {
       "id_act": "ACT11",
@@ -829,7 +884,11 @@
       "Tipo": "Informes",
       "desc_act": "Informe de prácticas Pr22",
       "peso_act": 5,
-      "is_active": true
+      "is_active": true,
+      "CE3.e": true,
+      "CE3.f": true,
+      "CE3.g": true,
+      "CE3.h": true
     },
     {
       "id_act": "ACT12",
@@ -837,7 +896,11 @@
       "Tipo": "Informes",
       "desc_act": "Informe de prácticas Pr23",
       "peso_act": 5,
-      "is_active": true
+      "is_active": true,
+      "CE4.a": true,
+      "CE4.b": true,
+      "CE4.c": true,
+      "CE4.d": true
     },
     {
       "id_act": "ACT13",
@@ -845,7 +908,9 @@
       "Tipo": "Informes",
       "desc_act": "Informe de prácticas Pr24",
       "peso_act": 5,
-      "is_active": true
+      "is_active": true,
+      "CE4.e": true,
+      "CE4.f": true
     },
     {
       "id_act": "ACT14",
@@ -853,7 +918,22 @@
       "Tipo": "Tareas",
       "desc_act": "Cuaderno de tareas 2T",
       "peso_act": 10,
-      "is_active": true
+      "is_active": true,
+      "rubrica_id": "RUB-TAREAS",
+      "CE3.a": true,
+      "CE3.b": true,
+      "CE3.c": true,
+      "CE3.d": true,
+      "CE3.e": true,
+      "CE3.f": true,
+      "CE3.g": true,
+      "CE3.h": true,
+      "CE4.a": true,
+      "CE4.b": true,
+      "CE4.c": true,
+      "CE4.d": true,
+      "CE4.e": true,
+      "CE4.f": true
     },
     {
       "id_act": "ACT15",
@@ -861,7 +941,15 @@
       "Tipo": "Teoria",
       "desc_act": "Examen teórico 3T",
       "peso_act": 40,
-      "is_active": true
+      "is_active": true,
+      "CE1.a": true,
+      "CE1.b": true,
+      "CE1.c": true,
+      "CE1.d": true,
+      "CE1.e": true,
+      "CE1.f": true,
+      "CE1.g": true,
+      "CE1.h": true
     },
     {
       "id_act": "ACT16",
@@ -869,7 +957,15 @@
       "Tipo": "Practica",
       "desc_act": "Examen práctico 3T",
       "peso_act": 30,
-      "is_active": true
+      "is_active": true,
+      "CE1.a": true,
+      "CE1.b": true,
+      "CE1.c": true,
+      "CE1.d": true,
+      "CE1.e": true,
+      "CE1.f": true,
+      "CE1.g": true,
+      "CE1.h": true
     },
     {
       "id_act": "ACT17",
@@ -877,7 +973,14 @@
       "Tipo": "Informes",
       "desc_act": "Informe de prácticas Pr31",
       "peso_act": 5,
-      "is_active": true
+      "is_active": true,
+      "rubrica_id": "RUB-INFORME",
+      "CE5.a": true,
+      "CE5.b": true,
+      "CE5.c": true,
+      "CE5.d": true,
+      "CE5.e": true,
+      "CE5.f": true
     },
     {
       "id_act": "ACT18",
@@ -885,7 +988,13 @@
       "Tipo": "Informes",
       "desc_act": "Informe de prácticas Pr32",
       "peso_act": 5,
-      "is_active": true
+      "is_active": true,
+      "CE6.a": true,
+      "CE6.b": true,
+      "CE6.c": true,
+      "CE6.d": true,
+      "CE6.e": true,
+      "CE6.f": true
     },
     {
       "id_act": "ACT19",
@@ -893,7 +1002,13 @@
       "Tipo": "Informes",
       "desc_act": "Informe de prácticas Pr33",
       "peso_act": 5,
-      "is_active": true
+      "is_active": true,
+      "CE6.g": true,
+      "CE7.a": true,
+      "CE7.b": true,
+      "CE7.c": true,
+      "CE7.d": true,
+      "CE7.e": true
     },
     {
       "id_act": "ACT20",
@@ -901,7 +1016,11 @@
       "Tipo": "Informes",
       "desc_act": "Informe de prácticas Pr34",
       "peso_act": 5,
-      "is_active": true
+      "is_active": true,
+      "CE7.f": true,
+      "CE7.g": true,
+      "CE7.h": true,
+      "CE7.i": true
     },
     {
       "id_act": "ACT21",
@@ -909,7 +1028,30 @@
       "Tipo": "Tareas",
       "desc_act": "Cuaderno de tareas 3T",
       "peso_act": 10,
-      "is_active": true
+      "is_active": true,
+      "rubrica_id": "RUB-TAREAS",
+      "CE5.a": true,
+      "CE5.b": true,
+      "CE5.c": true,
+      "CE5.d": true,
+      "CE5.e": true,
+      "CE5.f": true,
+      "CE6.a": true,
+      "CE6.b": true,
+      "CE6.c": true,
+      "CE6.d": true,
+      "CE6.e": true,
+      "CE6.f": true,
+      "CE6.g": true,
+      "CE7.a": true,
+      "CE7.b": true,
+      "CE7.c": true,
+      "CE7.d": true,
+      "CE7.e": true,
+      "CE7.f": true,
+      "CE7.g": true,
+      "CE7.h": true,
+      "CE7.i": true
     }
   ],
   "df_instr": [],
@@ -1188,5 +1330,178 @@
     "CONT-AUT"
   ],
   "texto_contingencia_libre": "En caso de suspensión de las clases presenciales, la docencia continuará de forma telemática a través del entorno virtual de aprendizaje, con sesiones de resolución de dudas mediante videoconferencia y entrega de tareas asíncronas.",
-  "texto_contextualizacion_libre": "El Centro educativo en el que se va a impartir el módulo es el Instituto de Enseñanza Secundaria Ramón J. Sender, ubicado en Fraga (Huesca) donde se imparten enseñanzas de ESO, Bachillerato y Formación Profesional. El entorno socioeconómico de la comarca del Bajo Cinca se caracteriza por una importante actividad agrícola, ganadera e industrial, lo que ofrece diversas oportunidades de empleo para los futuros técnicos."
+  "texto_contextualizacion_libre": "El Centro educativo en el que se va a impartir el módulo es el Instituto de Enseñanza Secundaria Ramón J. Sender, ubicado en Fraga (Huesca) donde se imparten enseñanzas de ESO, Bachillerato y Formación Profesional. El entorno socioeconómico de la comarca del Bajo Cinca se caracteriza por una importante actividad agrícola, ganadera e industrial, lo que ofrece diversas oportunidades de empleo para los futuros técnicos.",
+  "df_rubricas": [
+    {
+      "id_rubrica": "RUB-INFORME",
+      "nombre": "Informe de prácticas",
+      "descripcion": "Para calificar los informes de prácticas de laboratorio/taller.",
+      "criterios": [
+        {
+          "id_criterio": "CRIT1",
+          "descripcion": "Contenido técnico y precisión de las medidas",
+          "puntuacion_maxima": 4,
+          "niveles": [
+            {
+              "id_nivel": "NIV1",
+              "descripcion": "Todas las medidas y cálculos son correctos, con justificación técnica clara",
+              "puntos": 4
+            },
+            {
+              "id_nivel": "NIV2",
+              "descripcion": "La mayoría de medidas y cálculos son correctos, con alguna imprecisión menor",
+              "puntos": 3
+            },
+            {
+              "id_nivel": "NIV3",
+              "descripcion": "Contiene errores relevantes en medidas o cálculos",
+              "puntos": 1.5
+            },
+            {
+              "id_nivel": "NIV4",
+              "descripcion": "El contenido técnico es incorrecto o está ausente",
+              "puntos": 0
+            }
+          ]
+        },
+        {
+          "id_criterio": "CRIT2",
+          "descripcion": "Estructura, redacción y uso del vocabulario técnico",
+          "puntuacion_maxima": 3,
+          "niveles": [
+            {
+              "id_nivel": "NIV1",
+              "descripcion": "Informe bien estructurado, redacción clara y vocabulario técnico correcto",
+              "puntos": 3
+            },
+            {
+              "id_nivel": "NIV2",
+              "descripcion": "Estructura y redacción adecuadas con algún fallo puntual",
+              "puntos": 2
+            },
+            {
+              "id_nivel": "NIV3",
+              "descripcion": "Estructura confusa o vocabulario técnico impreciso",
+              "puntos": 1
+            },
+            {
+              "id_nivel": "NIV4",
+              "descripcion": "Informe desordenado o incompleto",
+              "puntos": 0
+            }
+          ]
+        },
+        {
+          "id_criterio": "CRIT3",
+          "descripcion": "Cumplimiento de normativa y prevención de riesgos laborales",
+          "puntuacion_maxima": 3,
+          "niveles": [
+            {
+              "id_nivel": "NIV1",
+              "descripcion": "Aplica correctamente la normativa (REBT/ICT) y las medidas de PRL en todo el informe",
+              "puntos": 3
+            },
+            {
+              "id_nivel": "NIV2",
+              "descripcion": "Aplica la normativa y PRL con alguna omisión menor",
+              "puntos": 2
+            },
+            {
+              "id_nivel": "NIV3",
+              "descripcion": "Omite referencias relevantes a normativa o PRL",
+              "puntos": 1
+            },
+            {
+              "id_nivel": "NIV4",
+              "descripcion": "No hace referencia a normativa ni a PRL",
+              "puntos": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id_rubrica": "RUB-TAREAS",
+      "nombre": "Cuaderno de tareas",
+      "descripcion": "Para calificar el cuaderno de tareas y ejercicios entregado por trimestre.",
+      "criterios": [
+        {
+          "id_criterio": "CRIT1",
+          "descripcion": "Completitud de las tareas entregadas",
+          "puntuacion_maxima": 4,
+          "niveles": [
+            {
+              "id_nivel": "NIV1",
+              "descripcion": "Entrega el 100% de las tareas propuestas",
+              "puntos": 4
+            },
+            {
+              "id_nivel": "NIV2",
+              "descripcion": "Entrega al menos el 75% de las tareas",
+              "puntos": 3
+            },
+            {
+              "id_nivel": "NIV3",
+              "descripcion": "Entrega al menos el 50% de las tareas",
+              "puntos": 2
+            },
+            {
+              "id_nivel": "NIV4",
+              "descripcion": "Entrega menos del 50% de las tareas",
+              "puntos": 0
+            }
+          ]
+        },
+        {
+          "id_criterio": "CRIT2",
+          "descripcion": "Corrección de las respuestas",
+          "puntuacion_maxima": 4,
+          "niveles": [
+            {
+              "id_nivel": "NIV1",
+              "descripcion": "Respuestas correctas y bien justificadas en todos los casos",
+              "puntos": 4
+            },
+            {
+              "id_nivel": "NIV2",
+              "descripcion": "Respuestas mayoritariamente correctas, con algún error puntual",
+              "puntos": 3
+            },
+            {
+              "id_nivel": "NIV3",
+              "descripcion": "Respuestas con errores frecuentes o poco justificadas",
+              "puntos": 2
+            },
+            {
+              "id_nivel": "NIV4",
+              "descripcion": "Respuestas mayoritariamente incorrectas",
+              "puntos": 0
+            }
+          ]
+        },
+        {
+          "id_criterio": "CRIT3",
+          "descripcion": "Orden, presentación y puntualidad en la entrega",
+          "puntuacion_maxima": 2,
+          "niveles": [
+            {
+              "id_nivel": "NIV1",
+              "descripcion": "Cuaderno ordenado, limpio y entregado en plazo",
+              "puntos": 2
+            },
+            {
+              "id_nivel": "NIV2",
+              "descripcion": "Cuaderno con alguna carencia de orden o entregado con retraso justificado",
+              "puntos": 1
+            },
+            {
+              "id_nivel": "NIV3",
+              "descripcion": "Cuaderno desordenado o entregado fuera de plazo sin justificar",
+              "puntos": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

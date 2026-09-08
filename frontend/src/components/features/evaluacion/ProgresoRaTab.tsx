@@ -114,13 +114,17 @@ export function ProgresoRaTab() {
             const avgN = notasAlumnado.length > 0 ? notasAlumnado.reduce((a, b) => a + b, 0) / notasAlumnado.length : 0;
 
             const getColor = (v: number) => v >= 9 ? '#1abc9c' : v >= 7 ? '#2ecc71' : v >= 5 ? '#f39c12' : '#e74c3c';
+            // Grado de consecución del RA: se muestra siempre en % sin decimales (la
+            // nota interna 0-10 se conserva con toda su precisión para el cálculo,
+            // esto solo redondea la etiqueta que ve el profesor).
+            const pct = (v: number) => Math.round(v * 10);
 
             return (
               <div key={ra_id} className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] p-4">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
                     <span className="font-bold text-foreground">{ra_id}</span>
-                    <span className="text-caption text-muted">({info.pond.toFixed(1)}%)</span>
+                    <span className="text-caption text-muted">({Math.round(info.pond)}%)</span>
                     <span className="text-body text-muted truncate max-w-md">{info.desc}</span>
                   </div>
                   <div className="flex items-center gap-4 text-caption">
@@ -167,7 +171,7 @@ export function ProgresoRaTab() {
                   <div
                     className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-danger bg-danger/10"
                     style={{ left: `calc(${(minN / 10) * 100}% - 6px)` }}
-                    title={t('tooltips.evaluacion.minValor', {valor: minN.toFixed(1), defaultValue: `Mín: ${minN.toFixed(1)}`})}
+                    title={t('tooltips.evaluacion.minValor', {valor: `${pct(minN)}%`, defaultValue: `Mín: ${pct(minN)}%`})}
                   />
                   {/* Mean marker */}
                   <div
@@ -177,37 +181,37 @@ export function ProgresoRaTab() {
                       borderColor: getColor(avgN),
                       backgroundColor: getColor(avgN),
                     }}
-                    title={t('tooltips.evaluacion.mediaValor', {valor: avgN.toFixed(1), defaultValue: `Media: ${avgN.toFixed(1)}`})}
+                    title={t('tooltips.evaluacion.mediaValor', {valor: `${pct(avgN)}%`, defaultValue: `Media: ${pct(avgN)}%`})}
                   />
                   {/* Max marker */}
                   <div
                     className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-success bg-success/10"
                     style={{ left: `calc(${(maxN / 10) * 100}% - 6px)` }}
-                    title={t('tooltips.evaluacion.maxValor', {valor: maxN.toFixed(1), defaultValue: `Máx: ${maxN.toFixed(1)}`})}
+                    title={t('tooltips.evaluacion.maxValor', {valor: `${pct(maxN)}%`, defaultValue: `Máx: ${pct(maxN)}%`})}
                   />
                 </div>
 
                 {/* Legend */}
                 <div className="flex items-center justify-between mt-2 text-caption">
-                  <span className="text-muted/80">0</span>
+                  <span className="text-muted/80">0%</span>
                   <div className="flex items-center gap-6">
                     <span className="flex items-center gap-1">
                       <span className="w-2.5 h-2.5 rounded-full bg-danger/10 border border-danger inline-block" />
-                      <span className="text-danger font-mono">{minN.toFixed(1)}</span>
+                      <span className="text-danger font-mono">{pct(minN)}%</span>
                       <span className="text-muted">Mín</span>
                     </span>
                     <span className="flex items-center gap-1">
                       <span className="w-3.5 h-3.5 rounded-full inline-block" style={{ backgroundColor: getColor(avgN) }} />
-                      <span className="font-bold font-mono" style={{ color: getColor(avgN) }}>{avgN.toFixed(1)}</span>
+                      <span className="font-bold font-mono" style={{ color: getColor(avgN) }}>{pct(avgN)}%</span>
                       <span className="text-muted">Media</span>
                     </span>
                     <span className="flex items-center gap-1">
                       <span className="w-2.5 h-2.5 rounded-full bg-success/10 border border-success inline-block" />
-                      <span className="text-success font-mono">{maxN.toFixed(1)}</span>
+                      <span className="text-success font-mono">{pct(maxN)}%</span>
                       <span className="text-muted">Máx</span>
                     </span>
                   </div>
-                  <span className="text-muted/80">10</span>
+                  <span className="text-muted/80">100%</span>
                 </div>
               </div>
             );

@@ -21,6 +21,8 @@ const ALLOWED_PROGRAMACION_KEYS = [
   'instrumentos_pct_trimestre',
   // Indicadores del sistema de calificación por indicador
   'df_indicadores',
+  // Rúbricas reutilizables (criterios + niveles de desempeño)
+  'df_rubricas',
   // Fechas, horario y calendario
   'info_fechas', 'horario', 'calendar_notes', 'config_pesos_trim',
   // Planificación y empresas
@@ -204,7 +206,7 @@ export const fileManager = {
     store.setModuleData({
       info_modulo: { nombre: pdLabel },
       df_ud: [], df_sesiones: [], df_ra: [], df_ce: [], df_tareas: [], df_act: [],
-      df_instr: [], df_indicadores: [],
+      df_instr: [], df_indicadores: [], df_rubricas: [],
       dual_regimen: 'ninguno', eqavet_evaluacion: {}, config_contexto: {},
     } as any);
     store.setPdFileSource({ type: 'new', fileName: pdLabel });

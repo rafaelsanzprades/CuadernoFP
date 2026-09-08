@@ -31,7 +31,10 @@ i18n
       escapeValue: false // React already safes from xss
     },
     detection: {
-      order: ['localStorage', 'cookie', 'navigator'],
+      // Sin 'navigator': si el profesor no ha elegido idioma antes (nada en
+      // localStorage/cookie), la app arranca siempre en fallbackLng (es),
+      // en vez de adivinarlo del idioma del sistema operativo/navegador.
+      order: ['localStorage', 'cookie'],
       caches: ['localStorage', 'cookie'],
     }
   });

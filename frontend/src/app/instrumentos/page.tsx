@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BarChart, Check, FileEdit, FolderOpen, Wrench, CheckSquare, Square, X } from "lucide-react";
+import { BarChart, Check, FileEdit, FolderOpen, Wrench, CheckSquare, Square, X, BookMarked } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -17,6 +17,7 @@ import Link from "next/link";
 import { Settings2 } from "lucide-react";
 import { InstrumentoConfigModal } from "@/components/features/instrumentos/InstrumentoConfigModal";
 import { JegModeloTab } from "@/components/features/instrumentos/JegModeloTab";
+import { GestionRubricasTab } from "@/components/features/instrumentos/GestionRubricasTab";
 import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
 
 const normalizeTipo = (t: string) => {
@@ -41,6 +42,7 @@ export default function InstrumentosPage() {
     { id: "tri1", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri1')}</span>, cleanLabel: t('tabs.tri1') },
     { id: "tri2", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri2')}</span>, cleanLabel: t('tabs.tri2') },
     { id: "tri3", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri3')}</span>, cleanLabel: t('tabs.tri3') },
+    { id: "rubricas", label:  <span className="flex items-center gap-2"><BookMarked className="w-4 h-4 shrink-0" /> {t('tabs.instrumentos.rubricas.nav', {defaultValue: 'Rúbricas'})}</span>, cleanLabel: t('tabs.instrumentos.rubricas.nav', {defaultValue: 'Rúbricas'}) },
   ];const [activeTab, setActiveTab] = useState("resumen");const activeTabCleanLabel = TABS.find(tab => tab.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
@@ -48,6 +50,7 @@ export default function InstrumentosPage() {
     tri1: t('tabs.instrumentos.tri1.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 1er trimestre.'}),
     tri2: t('tabs.instrumentos.tri2.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 2º trimestre.'}),
     tri3: t('tabs.instrumentos.tri3.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 3er trimestre.'}),
+    rubricas: t('tabs.instrumentos.rubricas.desc', {defaultValue: 'Rúbricas reutilizables: define criterios (que deben sumar 10 puntos entre todos) y niveles de desempeño, y asígnalas a cualquier instrumento desde su Configuración avanzada.'}),
   };
 
   const [isRecoveryModalOpen, setIsRecoveryModalOpen] = useState(false);
@@ -528,9 +531,10 @@ export default function InstrumentosPage() {
           {activeTab === "tri1" && renderTrimestreTab("1T", "1er trimestre")}
           {activeTab === "tri2" && renderTrimestreTab("2T", "2º trimestre")}
           {activeTab === "tri3" && renderTrimestreTab("3T", "3er trimestre")}
+          {activeTab === "rubricas" && <GestionRubricasTab />}
 
         {activeConfigActIdx !== null && df_act[activeConfigActIdx] && (
-          <InstrumentoConfigModal 
+          <InstrumentoConfigModal
             isOpen={configModalOpen}
             onClose={() => { setConfigModalOpen(false); setActiveConfigActIdx(null); }}
             instrumentoId={df_act[activeConfigActIdx].id_act}
@@ -538,9 +542,11 @@ export default function InstrumentosPage() {
             config={{
               escala: df_act[activeConfigActIdx].escala,
               agente: df_act[activeConfigActIdx].agente,
-              recuperacion: df_act[activeConfigActIdx].recuperacion
+              recuperacion: df_act[activeConfigActIdx].recuperacion,
+              rubrica_id: df_act[activeConfigActIdx].rubrica_id
             }}
             onChange={(field, value) => handleUpdateAct(activeConfigActIdx, field, value)}
+            rubricas={(moduleData?.df_rubricas as any) || []}
           />
         )}
           </MotionWrapper>

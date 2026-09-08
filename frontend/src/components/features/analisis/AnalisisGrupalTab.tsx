@@ -281,7 +281,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
                 {risks.map((r: any, i: number) => (
                   <tr key={i} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
                     <td className="py-3 font-medium text-foreground/90">{r.alumnado}</td>
-                    <td className="py-3 font-mono text-center font-bold text-foreground/80">{r.nota.toFixed(2)}</td>
+                    <td className="py-3 font-mono text-center font-bold text-foreground/80">{r.nota.toFixed(1)}</td>
                     <td className={`py-3 font-bold ${r.riskColor}`}>
                       <span className="bg-foreground/5 px-2 py-1 rounded-md">{r.riskLevel}</span>
                     </td>

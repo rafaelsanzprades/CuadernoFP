@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { Layers, Plus, Trash2, Target, ClipboardList, Sparkles } from "lucide-react";
+import { Layers, Plus, Trash2, Target, ClipboardList, Sparkles, Grid3x3 } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { isAlumnoActivo } from "@/utils/alumnado";
-import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO } from "@/utils/calificaciones";
+import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, repartoIgualitario } from "@/utils/calificaciones";
 import { MultiSelectDropdown } from "@/components/ui/MultiSelectDropdown";
 import { useTranslation } from "react-i18next";
 
@@ -75,16 +75,41 @@ export function JegModeloTab() {
   // --- Indicadores ---
   const addIndicador = (id_ce: string) => {
     const n = df_indicadores.filter((i: any) => i.id_ce === id_ce).length + 1;
-    const nuevo = { id_indicador: `${id_ce}-IND${n}`, id_ce, descripcion: "", peso: 1, is_basico: false };
-    updateDataFrame("df_indicadores" as any, [...df_indicadores, nuevo]);
+    const nuevo = { id_indicador: `${id_ce}-IND${n}`, id_ce, descripcion: "", peso: 0, is_basico: false };
+    const next = [...df_indicadores, nuevo];
+    const idsDeEsteCe = next.filter((i: any) => i.id_ce === id_ce).map((i: any) => i.id_indicador);
+    const repartos = repartoIgualitario(idsDeEsteCe.length);
+    updateDataFrame("df_indicadores" as any, next.map((i: any) => {
+      const idx = idsDeEsteCe.indexOf(i.id_indicador);
+      return idx === -1 ? i : { ...i, peso: repartos[idx] };
+    }));
   };
   const updateIndicador = (id_indicador: string, field: string, value: any) => {
     updateDataFrame("df_indicadores" as any, df_indicadores.map((i: any) => i.id_indicador === id_indicador ? { ...i, [field]: value } : i));
   };
   const removeIndicador = (id_indicador: string) => {
-    updateDataFrame("df_indicadores" as any, df_indicadores.filter((i: any) => i.id_indicador !== id_indicador));
+    const removed = df_indicadores.find((i: any) => i.id_indicador === id_indicador);
+    const next = df_indicadores.filter((i: any) => i.id_indicador !== id_indicador);
+    const idsDeEsteCe = removed ? next.filter((i: any) => i.id_ce === removed.id_ce).map((i: any) => i.id_indicador) : [];
+    const repartos = repartoIgualitario(idsDeEsteCe.length);
+    updateDataFrame("df_indicadores" as any, next.map((i: any) => {
+      const idx = idsDeEsteCe.indexOf(i.id_indicador);
+      return idx === -1 ? i : { ...i, peso: repartos[idx] };
+    }));
     // Limpieza: también se sueltan las calificaciones huérfanas de ese indicador
     updateCursoData("df_calificaciones" as any, df_calificaciones.filter((c: any) => c.id_indicador !== id_indicador));
+  };
+  // Ítem 42, punto 2/3: mismo patrón "debe sumar 100%" + reparto automático que
+  // ya usan peso_ra/peso_ce en curriculo/page.tsx, aplicado a Indicador.peso
+  // dentro de cada CE (el cálculo real no exige que sumen 100 — es una media
+  // ponderada que se autonormaliza — pero mantiene los pesos legibles como %).
+  const dividirPesosIndicadores = (id_ce: string) => {
+    const idsDeEsteCe = df_indicadores.filter((i: any) => i.id_ce === id_ce).map((i: any) => i.id_indicador);
+    const repartos = repartoIgualitario(idsDeEsteCe.length);
+    updateDataFrame("df_indicadores" as any, df_indicadores.map((i: any) => {
+      const idx = idsDeEsteCe.indexOf(i.id_indicador);
+      return idx === -1 ? i : { ...i, peso: repartos[idx] };
+    }));
   };
 
   // --- Instrumentos ---
@@ -156,13 +181,29 @@ export function JegModeloTab() {
           <div className="space-y-4">
             {ceOptions.map((ce: any) => {
               const inds = df_indicadores.filter((i: any) => i.id_ce === ce.id);
+              const sumaPesos = inds.reduce((s: number, i: any) => s + (Number(i.peso) || 0), 0);
+              const sumaOk = inds.length === 0 || sumaPesos === 100;
               return (
                 <div key={ce.id} className="border border-white/10 rounded-lg p-3">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="font-mono font-bold text-info">{ce.id}</span>
-                    <button onClick={() => addIndicador(ce.id)} className="text-caption text-accent hover:text-accent/80 flex items-center gap-1 font-semibold">
-                      <Plus className="w-3.5 h-3.5" /> {t('botones.instrumentos.anadirIndicador', {defaultValue: 'Añadir indicador'})}
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono font-bold text-info">{ce.id}</span>
+                      {inds.length > 0 && (
+                        <span className={`text-caption font-semibold px-2 py-0.5 rounded-full ${sumaOk ? 'bg-success/10 text-success' : 'bg-danger/10 text-danger'}`}>
+                          {t('campos.instrumentos.sumaPesos', { pct: sumaPesos, defaultValue: `Suma: ${sumaPesos}%` })}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-3">
+                      {inds.length > 1 && (
+                        <button onClick={() => dividirPesosIndicadores(ce.id)} className="text-caption text-muted hover:text-foreground flex items-center gap-1 font-semibold">
+                          {t('botones.instrumentos.dividirPorcentajes', { defaultValue: 'Dividir porcentajes' })}
+                        </button>
+                      )}
+                      <button onClick={() => addIndicador(ce.id)} className="text-caption text-accent hover:text-accent/80 flex items-center gap-1 font-semibold">
+                        <Plus className="w-3.5 h-3.5" /> {t('botones.instrumentos.anadirIndicador', {defaultValue: 'Añadir indicador'})}
+                      </button>
+                    </div>
                   </div>
                   {inds.length === 0 ? (
                     <p className="text-caption text-muted italic">Sin indicadores todavía.</p>
@@ -178,14 +219,17 @@ export function JegModeloTab() {
                             placeholder={t('placeholders.instrumentos.descripcionIndicador', {defaultValue: 'Descripción del indicador'})}
                             className="flex-1 bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-body focus:border-accent focus:outline-none"
                           />
-                          <input
-                            type="number"
-                            step="0.1"
-                            value={ind.peso ?? 1}
-                            onChange={(e) => updateIndicador(ind.id_indicador, "peso", Number(e.target.value) || 0)}
-                            title={t('tooltips.instrumentos.pesoRelativoCe', {defaultValue: 'Peso relativo dentro del CE'})}
-                            className="w-20 bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-body text-center focus:border-accent focus:outline-none"
-                          />
+                          <div className="relative w-20 shrink-0">
+                            <input
+                              type="number"
+                              step="1"
+                              value={ind.peso ?? 0}
+                              onChange={(e) => updateIndicador(ind.id_indicador, "peso", Math.round(Number(e.target.value)) || 0)}
+                              title={t('tooltips.instrumentos.pesoRelativoCe', {defaultValue: 'Peso dentro del CE — entre todos los indicadores de este CE deben sumar 100%.'})}
+                              className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded pl-2 pr-4 py-1 text-foreground text-body text-center focus:border-accent focus:outline-none"
+                            />
+                            <span className="absolute right-1.5 top-1/2 -translate-y-1/2 text-muted text-caption pointer-events-none">%</span>
+                          </div>
                           <label className="flex items-center gap-1 text-caption text-muted shrink-0">
                             <input type="checkbox" checked={!!ind.is_basico} onChange={(e) => updateIndicador(ind.id_indicador, "is_basico", e.target.checked)} />
                             Básico
@@ -277,6 +321,57 @@ export function JegModeloTab() {
         )}
       </div>
 
+      {/* Matriz de cobertura CE x Instrumento (Ítem 42, punto 4): en el modelo
+          JEG un instrumento no enlaza con un CE directamente sino a través de
+          sus Indicadores — esta tabla resuelve esa cadena para responder de
+          un vistazo "¿qué CE no tiene ningún instrumento que lo evalúe
+          todavía?", igual que la matriz CE×instrumento que vimos en la app de
+          referencia del Ítem 43, pero adaptada a nuestra cadena real
+          Instrumento→Indicador→CE en vez de Instrumento→CE directo. */}
+      <div className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] p-4">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
+          <Grid3x3 className="w-5 h-5 text-purple-400" /> {t('campos.instrumentos.matrizCoberturaTitulo', { defaultValue: 'Matriz de cobertura CE × Instrumento' })}
+        </h2>
+        {ceOptions.length === 0 || df_instr.length === 0 ? (
+          <p className="text-body text-muted">{t('campos.instrumentos.matrizCoberturaSinDatos', { defaultValue: 'Añade Criterios de evaluación e Instrumentos para ver aquí qué CE quedan sin ningún instrumento que los evalúe.' })}</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-caption border-collapse">
+              <thead>
+                <tr className="border-b border-[var(--glass-border)] text-muted">
+                  <th className="p-2 sticky left-0 bg-foreground/5 z-10">{t('tablas.instrumentos.criterio', { defaultValue: 'CE' })}</th>
+                  {df_instr.map((instr: any) => (
+                    <th key={instr.id_instrumento} className="p-2 text-center font-mono" title={instr.titulo || instr.id_instrumento}>{instr.id_instrumento}</th>
+                  ))}
+                  <th className="p-2 text-center">{t('tablas.instrumentos.cobertura', { defaultValue: 'Cobertura' })}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ceOptions.map((ce: any) => {
+                  const indsDeEsteCe = df_indicadores.filter((i: any) => i.id_ce === ce.id).map((i: any) => i.id_indicador);
+                  const instrumentosQueCubren = df_instr.filter((instr: any) => (instr.indicadores_vinculados || []).some((id: string) => indsDeEsteCe.includes(id)));
+                  const cubierto = instrumentosQueCubren.length > 0;
+                  return (
+                    <tr key={ce.id} className={`border-b border-white/5 ${!cubierto ? 'bg-danger/10' : ''}`}>
+                      <td className="p-2 font-mono font-bold sticky left-0 bg-background/60 text-info">{ce.id}</td>
+                      {df_instr.map((instr: any) => {
+                        const marca = (instr.indicadores_vinculados || []).some((id: string) => indsDeEsteCe.includes(id));
+                        return <td key={instr.id_instrumento} className="p-2 text-center">{marca ? <span className="text-success font-bold">✓</span> : ''}</td>;
+                      })}
+                      <td className="p-2 text-center">
+                        {cubierto
+                          ? <span className="text-success">{t('campos.instrumentos.nInstrumentos', { count: instrumentosQueCubren.length, defaultValue: `${instrumentosQueCubren.length} instr.` })}</span>
+                          : <span className="text-danger font-semibold">{t('campos.instrumentos.sinCobertura', { defaultValue: 'Sin cobertura' })}</span>}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+
       {/* Calificaciones por alumno + resultado */}
       <div className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] p-4">
         <div className="flex items-center justify-between mb-4">
@@ -344,7 +439,7 @@ export function JegModeloTab() {
               </div>
               <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-3 text-center">
                 <div className="text-caption text-muted mb-1">Nota final (Motor JEG)</div>
-                <div className="text-heading font-black text-purple-300">{resultado.nota_final !== null ? resultado.nota_final.toFixed(2) : "Sin evaluar"}</div>
+                <div className="text-heading font-black text-purple-300">{resultado.nota_final !== null ? resultado.nota_final.toFixed(1) : "Sin evaluar"}</div>
               </div>
             </div>
 
@@ -363,7 +458,7 @@ export function JegModeloTab() {
               </div>
               <div className="bg-rose-500/10 border border-rose-500/30 rounded-lg p-3 text-center">
                 <div className="text-caption text-muted mb-1">Nota final extraordinaria (EvFE)</div>
-                <div className="text-heading font-black text-rose-300">{resultado.nota_final_extraordinaria !== null ? resultado.nota_final_extraordinaria.toFixed(2) : "Sin evaluar"}</div>
+                <div className="text-heading font-black text-rose-300">{resultado.nota_final_extraordinaria !== null ? resultado.nota_final_extraordinaria.toFixed(1) : "Sin evaluar"}</div>
               </div>
             </div>
           </div>

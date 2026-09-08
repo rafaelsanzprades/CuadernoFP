@@ -331,3 +331,22 @@ export function getSigadInfo(nota: number | null): SigadInfo & { sinEvaluar: boo
   if (nota < 9) return { n, cod: "NT", txt: "Notable", col: "#2ecc71", sinEvaluar: false };
   return { n, cod: "SB", txt: "Sobresaliente", col: "#1abc9c", sinEvaluar: false };
 }
+
+/**
+ * Reparte `total` (100 por defecto) a partes iguales entre `count` elementos,
+ * en números enteros, cargando el resto de redondeo en los primeros
+ * elementos en vez de dejarlo caer en decimales (ej. 3 elementos de 100 ->
+ * [34, 33, 33], no [33.33, 33.33, 33.33]). Extraído del reparto de peso_ce
+ * ya usado en curriculo/page.tsx (alta/baja de CE) para poder reutilizarlo
+ * también en el reparto de Indicador.peso del Motor JEG (Ítem 42, punto 3).
+ */
+export function repartoIgualitario(count: number, total: number = 100): number[] {
+  if (count <= 0) return [];
+  const baseShare = Math.floor(total / count);
+  let rem = total - baseShare * count;
+  return Array.from({ length: count }, () => {
+    const share = baseShare + (rem > 0 ? 1 : 0);
+    if (rem > 0) rem--;
+    return share;
+  });
+}

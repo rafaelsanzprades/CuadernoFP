@@ -13,6 +13,7 @@ import { RaOgMatrix } from "@/components/features/resultados/RaOgMatrix";
 import { SessionTable } from "@/components/features/secuenciacion/SessionTable";
 import { TaskTable } from "@/components/features/secuenciacion/TaskTable";
 import { CompetenciaCPP } from "@/types/curriculum";
+import { repartoIgualitario } from "@/utils/calificaciones";
 import toast from "react-hot-toast";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -389,10 +390,11 @@ export default function MatricesPage() {
                             <td className="py-2 pr-2">
                               <input
                                 type="number"
+                                step="1"
                                 value={ra.peso_ra || 0}
                                 onChange={(e) => {
                                   const newRa = [...df_ra];
-                                  newRa[idx].peso_ra = parseFloat(e.target.value) || 0;
+                                  newRa[idx].peso_ra = Math.round(parseFloat(e.target.value)) || 0;
                                   updateDataFrame("df_ra", newRa);
                                 }}
                                 className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-body focus:border-[#14a085] focus:outline-none"
@@ -643,15 +645,9 @@ export default function MatricesPage() {
                                                   const newCe = [...df_ce];
                                                   newCe.splice(globalIdx, 1);
                                                   const raCeIndexes = newCe.map((c: any, i: number) => c.id_ra === ra.id_ra ? i : -1).filter((i: number) => i !== -1);
-                                                  const count = raCeIndexes.length;
-                                                  if (count > 0) {
-                                                    const baseShare = Math.floor(100 / count);
-                                                    let rem = 100 % count;
-                                                    raCeIndexes.forEach(idx => {
-                                                      newCe[idx].peso_ce = baseShare + (rem > 0 ? 1 : 0);
-                                                      if (rem > 0) rem--;
-                                                    });
-                                                  }
+                                                  repartoIgualitario(raCeIndexes.length).forEach((share, i) => {
+                                                    newCe[raCeIndexes[i]].peso_ce = share;
+                                                  });
                                                   updateDataFrame("df_ce", newCe);
                                                 }}
                                                 className="text-danger hover:text-danger font-bold"
@@ -677,15 +673,9 @@ export default function MatricesPage() {
                                           is_dual: false
                                         });
                                         const raCeIndexes = newCe.map((c: any, i: number) => c.id_ra === ra.id_ra ? i : -1).filter((i: number) => i !== -1);
-                                        const count = raCeIndexes.length;
-                                        if (count > 0) {
-                                          const baseShare = Math.floor(100 / count);
-                                          let rem = 100 % count;
-                                          raCeIndexes.forEach(idx => {
-                                            newCe[idx].peso_ce = baseShare + (rem > 0 ? 1 : 0);
-                                            if (rem > 0) rem--;
-                                          });
-                                        }
+                                        repartoIgualitario(raCeIndexes.length).forEach((share, i) => {
+                                          newCe[raCeIndexes[i]].peso_ce = share;
+                                        });
                                         updateDataFrame("df_ce", newCe);
                                       }}
                                       className="text-caption text-warning hover:text-warning font-semibold flex items-center gap-1"
