@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { BarChart, Target, User, Users, ClipboardList, FileDown } from "lucide-react";
+import { BarChart, Target, User, Users, ClipboardList, FileDown, BookMarked } from "lucide-react";
+import { CalificarConRubricaModal } from "./CalificarConRubricaModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { LineChart, Line, ResponsiveContainer, YAxis } from "recharts";
 import { useAppStore } from "@/store/useAppStore";
@@ -28,6 +29,8 @@ export function DetalleAlumnadoTab() {
   const df_autoevaluacion = cursoData?.df_autoevaluacion || [];
   const [generandoInforme, setGenerandoInforme] = useState<string | null>(null);
   const df_act = moduleData?.df_act || [];
+  const df_rubricas = (moduleData as any)?.df_rubricas || [];
+  const [rubricaModal, setRubricaModal] = useState<{ al_id: string; act_id: string; act: any; alumnoNombre: string } | null>(null);
   const df_ce = moduleData?.df_ce || [];
   const df_ra = moduleData?.df_ra || [];
   const df_ud = moduleData?.df_ud || [];
@@ -76,7 +79,10 @@ export function DetalleAlumnadoTab() {
     newEval[evRowIdx][act_id] = val;
 
     const { nota_final } = calcularNotas(newEval[evRowIdx], df_ra, df_ce, df_act, config_redondeo);
-    newEval[evRowIdx]["Nota_Final_FO"] = nota_final !== null ? Number(nota_final.toFixed(2)) : 0;
+    // Nota final oficial (FO) siempre con 1 decimal, como pide Rafael — el cálculo
+    // interno (calcularNotas, notas_ra, notas_ce) conserva toda su precisión, esto
+    // solo redondea el valor que se guarda como nota de acta.
+    newEval[evRowIdx]["Nota_Final_FO"] = nota_final !== null ? Number(nota_final.toFixed(1)) : 0;
 
     updateCursoData("df_eval", newEval);
     pushHistorial(al_id, act_id, valorAnterior, val);
@@ -106,6 +112,26 @@ export function DetalleAlumnadoTab() {
     newEval[evRowIdx]["Nota_Final_FE"] = val;
     updateCursoData("df_eval", newEval);
     pushHistorial(al_id, "Nota_Final_FE", valorAnterior, val);
+  };
+
+  // El Sigad se calcula solo a partir de la Nota_Final_FO (getSigadInfo), pero
+  // Rafael quiere poder subirlo/bajarlo a mano sin tocar la nota numérica —
+  // Sigad_Override guarda ese entero 1-10 y, si existe, manda sobre el cálculo.
+  const handleOverrideSigad = (al_id: string, val: number | null) => {
+    const newEval = [...df_eval];
+    let evRowIdx = newEval.findIndex(e => e.ID === al_id);
+    if (evRowIdx === -1) {
+      newEval.push({ ID: al_id, Nota_Final_FO: 0 });
+      evRowIdx = newEval.length - 1;
+    }
+    const valorAnterior = newEval[evRowIdx]["Sigad_Override"] ?? null;
+    if (val === null) {
+      delete newEval[evRowIdx]["Sigad_Override"];
+    } else {
+      newEval[evRowIdx]["Sigad_Override"] = val;
+    }
+    updateCursoData("df_eval", newEval);
+    pushHistorial(al_id, "Sigad_Override", valorAnterior, val);
   };
 
   const handleGenerarInformeRefuerzo = async (al_id: string) => {
@@ -228,7 +254,11 @@ export function DetalleAlumnadoTab() {
 
           const nota_prev = Number(evRow.Nota_Final_FO) || 0;
           const nota_prev_fe = Number(evRow.Nota_Final_FE) || 0;
-          const sigad = getSigadInfo(nota_prev);
+          // getSigadInfo() traza el mismo umbral 1-10 tanto para una nota 0-10 como
+          // para el entero Sigad directamente (5→SU, 6→BI, 7-8→NT, 9-10→SB, <5→IN),
+          // así que reutilizamos la función también para el override manual.
+          const sigadOverride = evRow.Sigad_Override;
+          const sigad = sigadOverride != null ? getSigadInfo(Number(sigadOverride)) : getSigadInfo(nota_prev);
           const activeStudentTab = activeTabByStudent[al_id] || "1T";
 
           // Motor A (Indicador->CE->RA->Módulo, ver utils/calificaciones.ts) — sustituye al
@@ -341,16 +371,31 @@ export function DetalleAlumnadoTab() {
                                       </span>
                                       {act.desc_act || act_id}
                                     </label>
-                                    <input
-                                      type="number"
-                                      min="0"
-                                      max="10"
-                                      step="0.1"
-                                      value={val || ""}
-                                      onChange={(e) => handleUpdateActNota(al_id, act_id, Number(e.target.value) || 0)}
-                                      onClick={(e) => e.stopPropagation()}
-                                      className="w-20 bg-background/50 border border-[var(--glass-border)] rounded px-3 py-1.5 text-foreground focus:border-info focus:outline-none font-mono text-center text-body font-semibold"
-                                    />
+                                    <div className="flex items-center gap-1.5">
+                                      {act.rubrica_id && df_rubricas.some((r: any) => r.id_rubrica === act.rubrica_id) && (
+                                        <button
+                                          type="button"
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            setRubricaModal({ al_id, act_id, act, alumnoNombre: `${al.Apellidos || ""}, ${al.Nombre || ""}` });
+                                          }}
+                                          title={t('tooltips.evaluacion.calificarConRubrica', { defaultValue: 'Calificar con rúbrica' })}
+                                          className="p-1.5 rounded text-indigo-400 hover:bg-white/10 transition-colors"
+                                        >
+                                          <BookMarked className="w-4 h-4" />
+                                        </button>
+                                      )}
+                                      <input
+                                        type="number"
+                                        min="0"
+                                        max="10"
+                                        step="0.1"
+                                        value={val || ""}
+                                        onChange={(e) => handleUpdateActNota(al_id, act_id, Number(e.target.value) || 0)}
+                                        onClick={(e) => e.stopPropagation()}
+                                        className="w-20 bg-background/50 border border-[var(--glass-border)] rounded px-3 py-1.5 text-foreground focus:border-info focus:outline-none font-mono text-center text-body font-semibold"
+                                      />
+                                    </div>
                                   </div>
                                 );
                               })
@@ -384,6 +429,31 @@ export function DetalleAlumnadoTab() {
                                 className="w-full bg-background/50 border border-[var(--glass-border)] rounded px-3 py-2 text-subheading font-bold text-foreground focus:border-info focus:outline-none"
                               />
                             </div>
+                            <div className="mb-4">
+                              <label className="text-caption text-muted tracking-wider mb-1.5 block font-bold">{t('campos.evaluacion.notaSigadLabel', {defaultValue: 'Nota Sigad (1-10, manual / calc)'})}</label>
+                              <input
+                                type="number"
+                                min="1" max="10" step="1"
+                                value={sigadOverride ?? getSigadInfo(nota_prev).n}
+                                onChange={(e) => {
+                                  const raw = e.target.value;
+                                  if (raw === "") { handleOverrideSigad(al_id, null); return; }
+                                  const clamped = Math.max(1, Math.min(10, Math.round(Number(raw))));
+                                  handleOverrideSigad(al_id, clamped);
+                                }}
+                                onClick={(e) => e.stopPropagation()}
+                                title={t('tooltips.evaluacion.notaSigadOverride', {defaultValue: 'Se calcula solo a partir de la nota final ordinaria. Cámbiala aquí a mano si quieres subirla o bajarla sin tocar esa nota.'})}
+                                className="w-full bg-background/50 border border-[var(--glass-border)] rounded px-3 py-2 text-subheading font-bold text-foreground focus:border-info focus:outline-none"
+                              />
+                              {sigadOverride != null && (
+                                <button
+                                  onClick={(e) => { e.stopPropagation(); handleOverrideSigad(al_id, null); }}
+                                  className="text-caption text-info hover:text-info/80 mt-1"
+                                >
+                                  {t('botones.evaluacion.volverASigadCalculado', {defaultValue: 'Volver al valor calculado'})}
+                                </button>
+                              )}
+                            </div>
                           </div>
 
                           <div className="rounded-xl flex flex-col items-center justify-center p-5 border-2 text-center" style={{ borderColor: sigad.col, backgroundColor: `${sigad.col}11` }}>
@@ -411,7 +481,7 @@ export function DetalleAlumnadoTab() {
                                 <div className="flex-1 w-full">
                                   <div className="mb-1.5 flex items-center gap-2">
                                     <span className="font-extrabold text-foreground">{r.id}</span>
-                                    <span className="text-caption text-muted font-semibold">({r.pond.toFixed(1)}%)</span>
+                                    <span className="text-caption text-muted font-semibold">({Math.round(r.pond)}%)</span>
                                     {r.nota === null && (
                                       <span className="text-caption font-semibold px-2 py-0.5 rounded-full bg-muted/10 text-muted border border-muted/30">{t('campos.evaluacion.sinEvaluarBadge', {defaultValue: 'Sin evaluar'})}</span>
                                     )}
@@ -511,6 +581,21 @@ export function DetalleAlumnadoTab() {
           );
         })}
       </div>
+
+      {rubricaModal && (() => {
+        const rubrica = df_rubricas.find((r: any) => r.id_rubrica === rubricaModal.act.rubrica_id);
+        if (!rubrica) return null;
+        return (
+          <CalificarConRubricaModal
+            isOpen={true}
+            onClose={() => setRubricaModal(null)}
+            rubrica={rubrica}
+            alumnoNombre={rubricaModal.alumnoNombre}
+            actividadDesc={rubricaModal.act.desc_act || rubricaModal.act_id}
+            onGuardar={(nota) => handleUpdateActNota(rubricaModal.al_id, rubricaModal.act_id, nota)}
+          />
+        );
+      })()}
     </div>
   );
 }

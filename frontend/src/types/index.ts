@@ -124,6 +124,35 @@ export const InstrumentoSchema = z.object({
 });
 export type Instrumento = z.infer<typeof InstrumentoSchema>;
 
+// Rúbrica reutilizable: un conjunto de criterios cuya puntuación máxima suma
+// exactamente 10, cada uno con niveles de desempeño (descripción + puntos).
+// Se enlaza opcionalmente a una actividad de `df_act` vía `rubrica_id` (ver
+// InstrumentoConfigModal) y se usa para calificarla en DetalleAlumnadoTab sin
+// tocar el motor de cálculo: el resultado se guarda como una nota 0-10 más,
+// igual que si se hubiera tecleado directamente.
+export const NivelRubricaSchema = z.object({
+  id_nivel: z.string(),
+  descripcion: z.string(),
+  puntos: z.number(),
+});
+export type NivelRubrica = z.infer<typeof NivelRubricaSchema>;
+
+export const CriterioRubricaSchema = z.object({
+  id_criterio: z.string(),
+  descripcion: z.string(),
+  puntuacion_maxima: z.number(),
+  niveles: z.array(NivelRubricaSchema).optional().default([]),
+});
+export type CriterioRubrica = z.infer<typeof CriterioRubricaSchema>;
+
+export const RubricaSchema = z.object({
+  id_rubrica: z.string(),
+  nombre: z.string(),
+  descripcion: z.string().optional().nullable(),
+  criterios: z.array(CriterioRubricaSchema).optional().default([]),
+});
+export type Rubrica = z.infer<typeof RubricaSchema>;
+
 export const CalificacionSchema = z.object({
   id_calificacion: z.string(),
   id_alumno: z.string(),
@@ -155,6 +184,7 @@ export const ModuleDataSchema = z.object({
   df_act: z.array(z.any()).optional(),
   df_instr: z.array(InstrumentoSchema).optional(),
   df_indicadores: z.array(IndicadorSchema).optional(),
+  df_rubricas: z.array(RubricaSchema).optional(),
   df_pr: z.array(z.any()).optional(),
   df_dua: z.array(z.any()).optional(),
   df_contingencia: z.array(z.any()).optional(),

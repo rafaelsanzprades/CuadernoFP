@@ -7,6 +7,12 @@ export interface InstrumentoConfigData {
   escala?: string;
   agente?: string;
   recuperacion?: string;
+  rubrica_id?: string;
+}
+
+interface RubricaOption {
+  id_rubrica: string;
+  nombre: string;
 }
 
 interface InstrumentoConfigModalProps {
@@ -16,9 +22,10 @@ interface InstrumentoConfigModalProps {
   instrumentoDesc: string;
   config: InstrumentoConfigData;
   onChange: (field: keyof InstrumentoConfigData, value: string) => void;
+  rubricas?: RubricaOption[];
 }
 
-export function InstrumentoConfigModal({ isOpen, onClose, instrumentoId, instrumentoDesc, config, onChange }: InstrumentoConfigModalProps) {
+export function InstrumentoConfigModal({ isOpen, onClose, instrumentoId, instrumentoDesc, config, onChange, rubricas = [] }: InstrumentoConfigModalProps) {
   const { t } = useTranslation();
   if (!isOpen) return null;
 
@@ -79,6 +86,20 @@ export function InstrumentoConfigModal({ isOpen, onClose, instrumentoId, instrum
               <option value="R2">{t('checks.instrumentos.recup_r2', {defaultValue: 'Recuperación 2 (R2)'})}</option>
               <option value="R3">{t('checks.instrumentos.recup_r3', {defaultValue: 'Recuperación 3 (R3)'})}</option>
               <option value="RF">{t('checks.instrumentos.recup_rf', {defaultValue: 'Recuperación final (RF)'})}</option>
+            </select>
+          </div>
+          <div>
+            <label className="text-body font-semibold mb-1 block">{t('campos.instrumentos.rubricaAsignada', { defaultValue: 'Rúbrica asignada' })}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.instrumentos.rubricaDescripcion', { defaultValue: 'Si asignas una rúbrica, este instrumento se podrá calificar por niveles en vez de con una nota directa.' })}</p>
+            <select
+              value={config.rubrica_id || ''}
+              onChange={(e) => onChange('rubrica_id', e.target.value)}
+              className="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-body text-white focus:outline-none focus:border-indigo-500"
+            >
+              <option value="">{t('campos.instrumentos.sinRubrica', { defaultValue: '-- Sin rúbrica --' })}</option>
+              {rubricas.map((r) => (
+                <option key={r.id_rubrica} value={r.id_rubrica}>{r.nombre || r.id_rubrica}</option>
+              ))}
             </select>
           </div>
         </div>
