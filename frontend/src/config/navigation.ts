@@ -3,7 +3,7 @@ import { Activity, Award, Calendar, CalendarDays, Compass, FileText, FolderOpen,
 // Los 4 bloques del sidebar son siempre 4 páginas cada uno (16 en total),
 // cada página con siempre 4 pestañas propias — ver Sidebar.tsx y
 // app/inicio/page.tsx (pestaña Bienvenida, que repite este mismo array como
-// tarjetas). Bloque "Inicio" muestra debajo la fecha DEMO/REAL; "Grupo",
+// tarjetas). Bloque "Inicio" muestra debajo la fecha DEMO/REAL; "General",
 // "Programación" y "Curso" muestran el nombre del fichero .fpg/.fpp/.fpc
 // activo respectivamente.
 export const navGroups = [
@@ -18,7 +18,7 @@ export const navGroups = [
     ]
   },
   {
-    title: "Grupo",
+    title: "General",
     sectionDescription: "Tu espacio de trabajo activo: gestión de ficheros, agenda del día a día, aviso legal y las herramientas de MagIA.",
     items: [
       { href: "/archivos?tab=datos", label: "Archivo", icon: FolderOpen, description: "Gestión de archivos, sincronización en la nube, seguridad y verificación de datos." },

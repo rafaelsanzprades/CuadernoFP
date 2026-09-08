@@ -384,12 +384,11 @@
     "inicio": "Inicio",
     "inicio_desc": "Por onde empezar: os teus ficheiros, axuda, e os catálogos e normativa de consulta — todo independente de ter un grupo aberto.",
     "general": "Xeral",
-    "grupo": "Grupo",
     "programacion": "Programación",
     "curso": "Curso",
-    "grupo_desc": "Opcións xerais da aplicación e recursos oficiais.",
     "programacion_desc": "Área de deseño e configuración didáctica. Configura o módulo, vincula as matrices de avaliación, define os instrumentos e secuencia as tarefas de aula.",
-    "curso_desc": "Ferramentas de seguimento para a aula viva. Establece o calendario, administra o listado de alumnado, anota o progreso diario e avalía."
+    "curso_desc": "Ferramentas de seguimento para a aula viva. Establece o calendario, administra o listado de alumnado, anota o progreso diario e avalía.",
+    "general_desc": "O teu espazo de traballo activo: xestión de ficheiros, axenda do día a día, aviso legal e as ferramentas de MagIA."
   },
   "sidebar": {
     "en_obras": "En Obras",

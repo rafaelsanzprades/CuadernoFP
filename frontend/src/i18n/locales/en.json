@@ -384,12 +384,11 @@
     "inicio": "Home",
     "inicio_desc": "Where to start: your files, help, and the reference catalog and regulations — all independent of having a group open.",
     "general": "General",
-    "grupo": "Group",
     "programacion": "Programming",
     "curso": "Course",
-    "grupo_desc": "General application options and official resources.",
     "programacion_desc": "Design and didactic configuration area. Configure the module, link the assessment matrices, define the instruments and sequence the classroom tasks.",
-    "curso_desc": "Tracking tools for the living classroom. Set up the calendar, manage the student roster, log daily progress and grade."
+    "curso_desc": "Tracking tools for the living classroom. Set up the calendar, manage the student roster, log daily progress and grade.",
+    "general_desc": "Your active workspace: file management, day-to-day agenda, legal notice and the MagIA tools."
   },
   "sidebar": {
     "en_obras": "Under Construction",

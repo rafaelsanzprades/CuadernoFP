@@ -115,17 +115,17 @@ export default function InicioPage() {
               </div>
             </Card>
 
-            {/* Menus Grid: los 4 bloques (Inicio, Grupo, Programación, Curso), todos con el mismo trato */}
+            {/* Menus Grid: los 4 bloques (Inicio, General, Programación, Curso), todos con el mismo trato */}
             <div className="space-y-12">
               {navGroups.map((group, groupIdx) => {
                 const baseTitle = group.title.replace(/\s*\[.*\]$/, '');
                 const translatedTitle = baseTitle === "Inicio" ? t('navGroups.inicio', { defaultValue: 'Inicio' })
-                  : baseTitle === "Grupo" ? t('navGroups.grupo', { defaultValue: 'Grupo' })
+                  : baseTitle === "General" ? t('navGroups.general', { defaultValue: 'General' })
                   : baseTitle === "Programación" ? t('navGroups.programacion', { defaultValue: 'Programación' })
                   : baseTitle === "Curso" ? t('navGroups.curso', { defaultValue: 'Curso' })
                   : baseTitle;
                 const translatedSectionDesc = baseTitle === "Inicio" ? t('navGroups.inicio_desc', { defaultValue: group.sectionDescription })
-                  : baseTitle === "Grupo" ? t('navGroups.grupo_desc', { defaultValue: group.sectionDescription })
+                  : baseTitle === "General" ? t('navGroups.general_desc', { defaultValue: group.sectionDescription })
                   : baseTitle === "Programación" ? t('navGroups.programacion_desc', { defaultValue: group.sectionDescription })
                   : baseTitle === "Curso" ? t('navGroups.curso_desc', { defaultValue: group.sectionDescription })
                   : group.sectionDescription;
