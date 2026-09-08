@@ -19,8 +19,8 @@ import { GuiaTab } from "@/components/features/ayuda/GuiaTab";
 const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   "/inicio": [
     { id: "bienvenida", label: "Bienvenida" },
-    { id: "verificacion", label: "Verificación" },
     { id: "contribuciones", label: "Contribuciones" },
+    { id: "documentos", label: "Documentos" },
     { id: "mejora", label: "Mejora" },
   ],
   "/contexto": [
@@ -30,8 +30,8 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "criterios", label: "Evaluación y calificación" },
   ],
   "/curriculo": [
-    { id: "contribucion-ra-og", label: "Contribución RA en OG" },
-    { id: "ponderacion-ra-ce", label: "Ponderación RA y CE" },
+    { id: "contribucion-ra-og", label: "Contribución RA->OG" },
+    { id: "ponderacion-ra-ce", label: "Ponderación RA<-CE" },
     { id: "unidades", label: "Unidades didácticas" },
     { id: "competenciales", label: "Tareas competenciales" },
   ],
@@ -51,11 +51,11 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "fechas", label: "Fechas y horario" },
     { id: "feoe", label: "Periodo FEOE" },
     { id: "eventos", label: "Eventos y festivos" },
-    { id: "actividades", label: "Actividades extraescolares" },
+    { id: "actividades", label: "Actividades complementarias y extraescolares" },
   ],
   "/agenda": [
     { id: "actual", label: "Actual" },
-    { id: "planificacion", label: "Planificación" },
+    { id: "planificacion", label: "Avance" },
     { id: "progreso-ra-ud", label: "Previsión RA y UD" },
     { id: "mensual", label: "Mensual" },
   ],
@@ -63,7 +63,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "matricula", label: "Matrícula" },
     { id: "plano", label: "Plano de clase" },
     { id: "tutoria", label: "Tutoría y alertas" },
-    { id: "perfil", label: "Perfil del grupo" },
+    { id: "autoevaluacion", label: "Autoevaluación" },
   ],
   "/seguimiento": [
     { id: "clases", label: "Clases" },
@@ -74,8 +74,8 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   "/calificaciones": [
     { id: "resumen", label: "Resumen" },
     { id: "estadisticas", label: "Estadísticas" },
-    { id: "grupal", label: "Grupal" },
-    { id: "individual", label: "Individual" },
+    { id: "analisis", label: "Análisis" },
+    { id: "historico", label: "Histórico" },
   ],
   "/normativa": [
     { id: "autonomias", label: "Autonomías" },
@@ -85,9 +85,9 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   ],
   "/archivos": [
     { id: "datos", label: "Datos" },
-    { id: "nube", label: "Nube" },
+    { id: "asistente-ia", label: "Asistente" },
+    { id: "verificacion", label: "Verificación" },
     { id: "seguridad", label: "Seguridad" },
-    { id: "asistente-ia", label: "Asistente IA" },
   ],
   "/catalogo": [
     { id: "familias", label: "Familias" },
@@ -96,22 +96,16 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "ra-ce", label: "RA → CE" },
   ],
   "/magia": [
-    { id: "comunidades", label: "Comunidades" },
-    { id: "guia", label: "Guía" },
+    { id: "comparativa", label: "Comparativa" },
+    { id: "analisis-pdx", label: "Análisis APP->PDx" },
     { id: "programacion", label: "Programación" },
     { id: "curso", label: "Curso" },
   ],
-  "/equivalencias": [
-    { id: "comparativa", label: "Comparativa" },
-    { id: "pd-", label: "APP → PD- (Resumen)" },
-    { id: "pd=", label: "APP → PD= (Simplificada)" },
-    { id: "pd+", label: "APP → PD+ (Detallada JEG)" },
-  ],
   "/ayuda": [
+    { id: "guia", label: "Guía" },
     { id: "faq", label: "FAQ" },
     { id: "acronimos", label: "Acrónimos" },
-    { id: "mapa", label: "Mapa web" },
-    { id: "documentos", label: "Documentos" },
+    { id: "mapa", label: "Mapa" },
   ],
   "/legal": [
     { id: "aviso", label: "Aviso legal" },
@@ -280,44 +274,20 @@ export default function AyudaPage() {
                   </p>
                   <div className="bg-info/5 border border-info/20 rounded-xl p-4 text-body text-muted leading-relaxed">
                     <strong className="text-foreground">¿Es adecuado el agrupamiento actual?</strong> Sí: separa
-                    con claridad lo reutilizable (<em>Programación</em>: Contexto/Currículo/Metodología/
-                    Instrumentos), lo específico del año (<em>Curso</em>: Calendario/Alumnado/Seguimiento/
-                    Calificaciones) y lo transversal (<em>Grupo</em>: Agenda/Archivo/Normativa/Catálogo — vista
-                    diaria y datos de consulta). Ayuda, Equivalencia y MagIA viven como accesos directos junto
-                    a Inicio (fuera de estos tres grupos, de consulta puntual) y Mejora se fusionó como pestaña
-                    dentro de Inicio.
+                    con claridad el punto de partida (<em>Inicio</em>: Panel/Ayuda/Normativa/Catálogo — de
+                    consulta puntual, sin necesitar un grupo abierto), el espacio de trabajo activo (
+                    <em>Grupo</em>: Archivo/Agenda/Legal/MagIA — gestión de ficheros, agenda del día a día y
+                    herramientas de apoyo), lo reutilizable (<em>Programación</em>: Contexto/Currículo/
+                    Metodología/Instrumentos) y lo específico del año (<em>Curso</em>: Calendario/Alumnado/
+                    Seguimiento/Calificaciones).
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-4">
-                    {/* Cuaderno FP: páginas fuera de navGroups */}
-                    <div className="space-y-6">
-                      <h3 className="font-extrabold text-subheading border-b-2 border-accent pb-2 text-foreground">Cuaderno FP</h3>
-                      <ul className="space-y-4 text-body">
-                        {[
-                          { href: "/inicio", label: "Inicio", tabs: PAGE_TABS["/inicio"] },
-                          { href: "/ayuda", label: "Ayuda", tabs: PAGE_TABS["/ayuda"] },
-                          { href: "/equivalencias", label: "Equivalencia", tabs: PAGE_TABS["/equivalencias"] },
-                          { href: "/magia", label: "MagIA", tabs: PAGE_TABS["/magia"] },
-                          { href: "/legal", label: "Legal", tabs: PAGE_TABS["/legal"] },
-                        ].map(page => (
-                          <li key={page.href}>
-                            <Link href={page.href} className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                              <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> {t('nav.' + page.href.replace('/', ''), {defaultValue: page.label})}
-                            </Link>
-                            <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                              {page.tabs.map(tab => (
-                                <Link key={tab.id} href={`${page.href}?tab=${tab.id}`} className="hover:text-accent transition-colors block py-0.5">— {tab.label}</Link>
-                              ))}
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
                     {/* Columnas dinámicas: una por cada grupo real de navigation.ts */}
                     {navGroups.map(group => {
                       const baseTitle = group.title.replace(/\s*\[.*\]$/, '');
-                      const translatedTitle = baseTitle === "Grupo" ? t('navGroups.grupo', {defaultValue: 'Grupo'})
+                      const translatedTitle = baseTitle === "Inicio" ? t('navGroups.inicio', {defaultValue: 'Inicio'})
+                        : baseTitle === "General" ? t('navGroups.general', {defaultValue: 'General'})
                         : baseTitle === "Programación" ? t('navGroups.programacion', {defaultValue: 'Programación'})
                         : baseTitle === "Curso" ? t('navGroups.curso', {defaultValue: 'Curso'})
                         : baseTitle;

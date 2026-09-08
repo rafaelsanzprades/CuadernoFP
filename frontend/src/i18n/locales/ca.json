@@ -386,12 +386,11 @@
     "inicio": "Inici",
     "inicio_desc": "Per on començar: els teus fitxers, ajuda, i els catàlegs i normativa de consulta — tot independent de tenir un grup obert.",
     "general": "General",
-    "grupo": "Grup",
     "programacion": "Programació",
     "curso": "Curs",
-    "grupo_desc": "Opcions generals de l'aplicació i recursos oficials.",
     "programacion_desc": "Àrea de disseny i configuració didàctica. Configura el mòdul, enllaça les matrius d'avaluació, defineix els instruments i seqüencia les tasques d'aula.",
-    "curso_desc": "Eines de seguiment per a l'aula viva. Estableix el calendari, administra el llistat d'alumnat, anota el progrés diari i avalua."
+    "curso_desc": "Eines de seguiment per a l'aula viva. Estableix el calendari, administra el llistat d'alumnat, anota el progrés diari i avalua.",
+    "general_desc": "El teu espai de treball actiu: gestió de fitxers, agenda del dia a dia, avís legal i les eines de MagIA."
   },
   "sidebar": {
     "en_obras": "En Obres",

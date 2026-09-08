@@ -384,12 +384,11 @@
     "inicio": "Hasiera",
     "inicio_desc": "Nondik hasi: zure fitxategiak, laguntza, eta kontsultarako katalogoak eta araudia — talde bat irekita izan ala ez, berdin.",
     "general": "Orokorra",
-    "grupo": "Taldea",
     "programacion": "Programazioa",
     "curso": "Ikasturtea",
-    "grupo_desc": "Aplikazioaren aukera orokorrak eta baliabide ofizialak.",
     "programacion_desc": "Diseinu eta konfigurazio didaktikoaren area. Konfiguratu moduloa, lotu ebaluazio-matrizeak, definitu tresnak eta sekuentziatu geletako zereginak.",
-    "curso_desc": "Gela biziaren jarraipenerako tresnak. Ezarri egutegia, kudeatu ikasleen zerrenda, jaso eguneroko aurrerapena eta ebaluatu."
+    "curso_desc": "Gela biziaren jarraipenerako tresnak. Ezarri egutegia, kudeatu ikasleen zerrenda, jaso eguneroko aurrerapena eta ebaluatu.",
+    "general_desc": "Zure laneko espazio aktiboa: fitxategien kudeaketa, eguneroko agenda, abisu legala eta MagIAren tresnak."
   },
   "sidebar": {
     "en_obras": "Lanetan",

@@ -93,12 +93,11 @@
     "inicio": "Inicio",
     "inicio_desc": "Por dónde empezar: tus ficheros, ayuda, y los catálogos y normativa de consulta — todo independiente de tener un grupo abierto.",
     "general": "General",
-    "grupo": "Grupo",
     "programacion": "Programación",
     "curso": "Curso",
-    "grupo_desc": "Opciones generales de la aplicación y recursos oficiales.",
     "programacion_desc": "Área de diseño y configuración didáctica. Configura el módulo, enlaza las matrices de evaluación, define los instrumentos y secuencia las tareas de aula.",
-    "curso_desc": "Herramientas de seguimiento para el aula viva. Establece el calendario, administra el listado de alumnado, anota el progreso diario y evalúa."
+    "curso_desc": "Herramientas de seguimiento para el aula viva. Establece el calendario, administra el listado de alumnado, anota el progreso diario y evalúa.",
+    "general_desc": "Tu espacio de trabajo activo: gestión de ficheros, agenda del día a día, aviso legal y las herramientas de MagIA."
   },
   "navDesc": {
     "inicio": "Panel principal, contribuciones de la comunidad, documentos de referencia y calidad EQAVET.",

@@ -265,7 +265,7 @@ export default function Sidebar() {
             {isSidebarOpen && (
               <div className="flex flex-col mb-0.5 gap-0.5">
                 <div className="text-body font-bold text-foreground/90 tracking-wide px-1">
-                  {t('navGroups.grupo', { defaultValue: 'Grupo' })}
+                  {t('navGroups.general', { defaultValue: 'General' })}
                 </div>
 
                 <Link
