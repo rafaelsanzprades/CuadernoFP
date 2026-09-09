@@ -3,7 +3,7 @@ import { useAppStore } from '@/store/useAppStore';
 import { Alumnado, ResultadoAprendizaje } from '@/types';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { Printer, FileText, Users, Award, Briefcase, GraduationCap, Target } from 'lucide-react';
+import { Printer, FileText, Users, Award, Briefcase, GraduationCap, Target, BarChart as BarChartIcon } from 'lucide-react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { resolveDescRa, loadCatalogForModule } from '@/services/catalogCache';
 import { isAlumnoActivo } from '@/utils/alumnado';
@@ -191,7 +191,7 @@ export const BoletinesTab = () => {
 
                   <div className="bg-foreground/5 p-6 rounded-xl border border-white/5 flex flex-col items-center">
                     <h3 className="text-subheading font-bold mb-4 flex items-center gap-2 w-full">
-                      <BarChart className="w-5 h-5 text-success" /> {t('campos.alumnado.nivelLogroRaTitulo', {defaultValue: 'Nivel de Logro por RA'})}
+                      <BarChartIcon className="w-5 h-5 text-success" /> {t('campos.alumnado.nivelLogroRaTitulo', {defaultValue: 'Nivel de Logro por RA'})}
                     </h3>
                     <div className="w-full h-[250px]">
                       <ResponsiveContainer width="100%" height="100%">
