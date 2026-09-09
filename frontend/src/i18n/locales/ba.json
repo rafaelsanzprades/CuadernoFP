@@ -192,7 +192,7 @@
       },
       "transversales": {
         "label": "Transversals, competències i activitats",
-        "desc": "Elements transversals, competències clau, competències digitals, estàndards i objectius del currículum, innovació i intermodularitat, i activitats complementàries/extraescolars."
+        "desc": "Elements transversals, competències clau, competències digitals, estàndards i objectius del currículum, innovació i intermodularitat, i activitats complementàries i extraescolars."
       }
     },
     "instrumentos": {
@@ -997,7 +997,7 @@
       "ambitoFamilia": "Família",
       "ambitoOrientacion": "Departament d'orientació",
       "medioEmail": "Correu electrònic",
-      "medioInformal": "Informal / passadís",
+      "medioInformal": "Informal",
       "medioPresencial": "Reunió presencial",
       "medioTelefono": "Trucada telefònica",
       "medioVideollamada": "Videotrucada"

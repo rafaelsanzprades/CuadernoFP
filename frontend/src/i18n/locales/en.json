@@ -192,7 +192,7 @@
       },
       "transversales": {
         "label": "Transversal elements, competencies and activities",
-        "desc": "Transversal elements, key competencies, digital competencies, curriculum standards and objectives, innovation and cross-module coordination, and complementary/extracurricular activities."
+        "desc": "Transversal elements, key competencies, digital competencies, curriculum standards and objectives, innovation and cross-module coordination, and complementary and extracurricular activities."
       }
     },
     "instrumentos": {
@@ -997,7 +997,7 @@
       "ambitoFamilia": "Family",
       "ambitoOrientacion": "Guidance department",
       "medioEmail": "Email",
-      "medioInformal": "Informal / hallway",
+      "medioInformal": "Informal",
       "medioPresencial": "In-person meeting",
       "medioTelefono": "Phone call",
       "medioVideollamada": "Video call"

@@ -152,7 +152,7 @@ export function TutoriaTab() {
                           <option value="Videollamada">{t('checks.alumnado.medioVideollamada', {defaultValue: 'Videollamada'})}</option>
                           <option value="Teléfono">{t('checks.alumnado.medioTelefono', {defaultValue: 'Llamada telefónica'})}</option>
                           <option value="Email">{t('checks.alumnado.medioEmail', {defaultValue: 'Correo electrónico'})}</option>
-                          <option value="Pasillo">{t('checks.alumnado.medioInformal', {defaultValue: 'Informal / pasillo'})}</option>
+                          <option value="Pasillo">{t('checks.alumnado.medioInformal', {defaultValue: 'Informal'})}</option>
                         </select>
                       </div>
                     </div>
