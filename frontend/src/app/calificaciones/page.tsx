@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BarChart, ClipboardList, Save, TrendingUp, User, FolderOpen, History, AlertOctagon, LineChart } from "lucide-react";
+import { BarChart, ClipboardList, Save, TrendingUp, User, FolderOpen, History, AlertOctagon, LineChart, FileText } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -16,6 +16,7 @@ import { AnalisisIndividualTab } from "@/components/features/analisis/AnalisisIn
 import EstadisticasTab from "@/components/features/evaluacion/EstadisticasTab";
 import { HistorialCalificacionesTab } from "@/components/features/evaluacion/HistorialCalificacionesTab";
 import { ReclamacionesTab } from "@/components/features/evaluacion/ReclamacionesTab";
+import { BoletinesTab } from "@/components/features/alumnado/BoletinesTab";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -134,6 +135,7 @@ export default function ProgresoPage() {
     { id: "estadisticas", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.estadisticas.label', {defaultValue: 'Estadísticas'})}</>, cleanLabel: t('tabs.calificaciones.estadisticas.label', {defaultValue: 'Estadísticas'}) },
     { id: "analisis", label: <><span className="inline-flex"><LineChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.analisis.label', {defaultValue: 'Análisis'})}</>, cleanLabel: t('tabs.calificaciones.analisis.label', {defaultValue: 'Análisis'}) },
     { id: "historico", label: <><span className="inline-flex"><History className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'})}</>, cleanLabel: t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'}) },
+    { id: "boletines", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.boletines.label', {defaultValue: 'Boletines'})}</>, cleanLabel: t('tabs.calificaciones.boletines.label', {defaultValue: 'Boletines'}) },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
@@ -141,6 +143,7 @@ export default function ProgresoPage() {
     estadisticas: t('tabs.calificaciones.estadisticas.desc', {defaultValue: 'Estadísticas descriptivas y visualizaciones del rendimiento del grupo.'}),
     analisis: t('tabs.calificaciones.analisis.desc', {defaultValue: 'Desempeño comparativo del grupo y hoja de progreso individual para tutorías.'}),
     historico: t('tabs.calificaciones.historico.desc', {defaultValue: 'Registro de cada cambio de nota y de las reclamaciones presentadas, con su motivo y resolución.'}),
+    boletines: t('tabs.calificaciones.boletines.desc', {defaultValue: 'Boletín individual de calificaciones en pantalla, con radar y barras de nivel de logro por RA.'}),
   };
 
   return (
@@ -429,6 +432,13 @@ export default function ProgresoPage() {
                 </button>
               </div>
               {historicoView === "historico" ? <HistorialCalificacionesTab /> : <ReclamacionesTab />}
+            </div>
+          )}
+
+          {/* TAB 5: BOLETINES */}
+          {activeTab === "boletines" && (
+            <div className="mt-4 animate-in fade-in duration-500">
+              <BoletinesTab />
             </div>
           )}
           </MotionWrapper>
