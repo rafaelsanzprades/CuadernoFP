@@ -192,7 +192,7 @@
       },
       "transversales": {
         "label": "Transversais, competencias e actividades",
-        "desc": "Elementos transversais, competencias clave, competencias dixitais, estándares e obxectivos do currículo, innovación e intermodularidade, e actividades complementarias/extraescolares."
+        "desc": "Elementos transversais, competencias clave, competencias dixitais, estándares e obxectivos do currículo, innovación e intermodularidade, e actividades complementarias e extraescolares."
       }
     },
     "instrumentos": {
@@ -997,7 +997,7 @@
       "ambitoFamilia": "Familia",
       "ambitoOrientacion": "Departamento de orientación",
       "medioEmail": "Correo electrónico",
-      "medioInformal": "Informal / corredor",
+      "medioInformal": "Informal",
       "medioPresencial": "Reunión presencial",
       "medioTelefono": "Chamada telefónica",
       "medioVideollamada": "Videochamada"

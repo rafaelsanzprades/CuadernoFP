@@ -62,7 +62,7 @@ export default function MetodologiaConfigPage() {
     metodologia: t('tabs.metodologia.metodologia.desc', {defaultValue: 'Estrategias metodológicas, coordinación docente, atención a la diversidad (DUA) y panel de alumnado ACNEAE.'}),
     recursos: t('tabs.metodologia.recursos.desc', {defaultValue: 'Instrumentos de evaluación seleccionados y recursos y espacios necesarios.'}),
     contingencia: t('tabs.metodologia.contingencia.desc', {defaultValue: 'Planes de contingencia y adaptación ante situaciones excepcionales.'}),
-    transversales: t('tabs.metodologia.transversales.desc', {defaultValue: 'Elementos transversales, competencias clave, competencias digitales, estándares y objetivos del currículo, innovación e intermodularidad, y actividades complementarias/extraescolares.'}),
+    transversales: t('tabs.metodologia.transversales.desc', {defaultValue: 'Elementos transversales, competencias clave, competencias digitales, estándares y objetivos del currículo, innovación e intermodularidad, y actividades complementarias y extraescolares.'}),
   };
 
   if (!activeModuleId) {

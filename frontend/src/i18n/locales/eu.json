@@ -192,7 +192,7 @@
       },
       "transversales": {
         "label": "Zeharkakoak, konpetentziak eta jarduerak",
-        "desc": "Elementu zeharkakoak, funtsezko konpetentziak, konpetentzia digitalak, curriculumaren estandarrak eta helburuak, berrikuntza eta modulu arteko lotura, eta jarduera osagarriak/eskolaz kanpokoak."
+        "desc": "Elementu zeharkakoak, funtsezko konpetentziak, konpetentzia digitalak, curriculumaren estandarrak eta helburuak, berrikuntza eta modulu arteko lotura, eta jarduera osagarriak eta eskolaz kanpokoak."
       }
     },
     "instrumentos": {
@@ -997,7 +997,7 @@
       "ambitoFamilia": "Familia",
       "ambitoOrientacion": "Orientazio departamentua",
       "medioEmail": "Helbide elektronikoa",
-      "medioInformal": "Informala / korridorean",
+      "medioInformal": "Informala",
       "medioPresencial": "Aurrez aurreko bilera",
       "medioTelefono": "Telefono-deia",
       "medioVideollamada": "Bideo-deia"
