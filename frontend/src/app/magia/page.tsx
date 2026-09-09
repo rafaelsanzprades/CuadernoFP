@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/Button";
 import { useAppStore } from "@/store/useAppStore";
 import { Alumnado } from "@/types";
 import { isAlumnoActivo } from "@/utils/alumnado";
+import { calcularNotas, DEFAULT_CONFIG_REDONDEO, getSigadInfo } from "@/utils/calificaciones";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Skeleton } from "@/components/ui/Skeleton";
@@ -196,30 +197,109 @@ export default function MagiaPage() {
     }
   };
 
-  const handleExportXlsx = (triKey: string, fechaCorte?: string) => {
+  /** Excel completo de calificaciones, 4 hojas: Alumnado, Notas por trimestre,
+   * Consecución de RA (%) y Notas por instrumento (una columna por actividad).
+   * Sustituye al antiguo export de una sola columna (nota media por
+   * trimestre) -- ver Ítem "Exportación de calificaciones a Excel" en
+   * RF Ideas/01 Histórico.md. */
+  const handleExportExcelCompleto = () => {
     const df_al = cursoData?.df_al || [];
     const df_eval = cursoData?.df_eval || [];
+    const df_ra = moduleData?.df_ra || [];
+    const df_ce = moduleData?.df_ce || [];
+    const df_act = moduleData?.df_act || [];
+    const config_redondeo = { ...DEFAULT_CONFIG_REDONDEO, ...(moduleData?.config_redondeo || {}) };
+
     const activeAl = df_al.filter(isAlumnoActivo);
     activeAl.sort((a: Alumnado, b: Alumnado) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
 
-    const rows = activeAl.map((al: any) => {
-      const evRow = df_eval.find((e: any) => e.ID === al.ID);
-      const notaMedia = evRow
-        ? (triKey === 'Final' ? evRow.Nota_Final_FO : triKey === 'Extraordinaria' ? evRow.Nota_Final_FE : evRow[`${triKey}_Nota`])
-        : "";
+    const wb = XLSX.utils.book_new();
+
+    // Hoja 1: Alumnado
+    const wsAlumnado = XLSX.utils.json_to_sheet(activeAl.map((al: any) => ({
+      ID: al.ID,
+      Apellidos: al.Apellidos || "",
+      Nombre: al.Nombre || "",
+      Estado: al.Estado || "",
+      "Matrícula": al.Matricula || "",
+      Edad: al.Edad ?? "",
+      Repite: al.Repite ? "Sí" : "No",
+      Email: al.email || "",
+      "Móvil": al.Movil || "",
+    })));
+    wsAlumnado["!cols"] = [{ wch: 10 }, { wch: 22 }, { wch: 18 }, { wch: 14 }, { wch: 14 }, { wch: 8 }, { wch: 8 }, { wch: 26 }, { wch: 14 }];
+    XLSX.utils.book_append_sheet(wb, wsAlumnado, "Alumnado");
+
+    // Hoja 2: Notas por trimestre (+ Final, Extraordinaria, Sigad)
+    const rowsTri = activeAl.map((al: any) => {
+      const evRow = df_eval.find((e: any) => e.ID === al.ID) || {};
+      const notaFinal = evRow.Nota_Final_FO ?? null;
+      const sigadOverride = evRow.Sigad_Override;
+      const sigad = sigadOverride != null ? getSigadInfo(Number(sigadOverride)) : getSigadInfo(notaFinal);
       return {
         ID: al.ID,
         Apellidos: al.Apellidos || "",
         Nombre: al.Nombre || "",
-        [`Nota media ${triKey}`]: notaMedia ?? "",
+        "1er trimestre": evRow["1T_Nota"] ?? "",
+        "2º trimestre": evRow["2T_Nota"] ?? "",
+        "3er trimestre": evRow["3T_Nota"] ?? "",
+        "Final ordinaria": notaFinal ?? "",
+        "Final extraordinaria": evRow.Nota_Final_FE ?? "",
+        Sigad: sigad.sinEvaluar ? "" : sigad.cod,
       };
     });
+    const wsTri = XLSX.utils.json_to_sheet(rowsTri);
+    wsTri["!cols"] = [{ wch: 10 }, { wch: 22 }, { wch: 18 }, { wch: 14 }, { wch: 14 }, { wch: 14 }, { wch: 16 }, { wch: 18 }, { wch: 8 }];
+    XLSX.utils.book_append_sheet(wb, wsTri, "Notas por trimestre");
 
-    const ws = XLSX.utils.json_to_sheet(rows);
-    ws["!cols"] = [{ wch: 10 }, { wch: 24 }, { wch: 18 }, { wch: 16 }];
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, triKey.slice(0, 31));
-    XLSX.writeFile(wb, `Notas_${triKey}_${moduleData?.info_modulo?.modulo || "modulo"}.xlsx`);
+    // Hoja 3: Consecución de RA (%), con leyenda de descripciones al principio
+    const rowsRa = activeAl.map((al: any) => {
+      const evRow = df_eval.find((e: any) => e.ID === al.ID) || {};
+      const notasCalc = calcularNotas(evRow, df_ra, df_ce, df_act, config_redondeo);
+      const row: Record<string, any> = { ID: al.ID, Apellidos: al.Apellidos || "", Nombre: al.Nombre || "" };
+      df_ra.forEach((ra: any, idx: number) => {
+        const v = notasCalc.notas_ra[ra.id_ra];
+        row[`RA${idx + 1} (%)`] = v == null ? "" : Math.round(v * 10);
+      });
+      return row;
+    });
+    const wsRa = XLSX.utils.aoa_to_sheet([
+      ["Leyenda de Resultados de Aprendizaje"],
+      ...df_ra.map((ra: any, idx: number) => [`RA${idx + 1}`, ra.desc_ra || ""]),
+      [],
+    ]);
+    XLSX.utils.sheet_add_json(wsRa, rowsRa, { origin: -1 });
+    XLSX.utils.book_append_sheet(wb, wsRa, "Consecución RA (%)");
+
+    // Hoja 4: Notas por instrumento -- una columna por actividad, agrupadas
+    // por trimestre y tipo, con leyenda de descripciones al principio
+    const actsOrdenadas = df_act
+      .filter((a: any) => a.id_act && String(a.id_act).trim() !== "")
+      .slice()
+      .sort((a: any, b: any) => {
+        const t = String(a.tri_act || "").localeCompare(String(b.tri_act || ""));
+        if (t !== 0) return t;
+        return String(a.Tipo || "").localeCompare(String(b.Tipo || ""));
+      });
+    const rowsInstr = activeAl.map((al: any) => {
+      const evRow = df_eval.find((e: any) => e.ID === al.ID) || {};
+      const row: Record<string, any> = { ID: al.ID, Apellidos: al.Apellidos || "", Nombre: al.Nombre || "" };
+      actsOrdenadas.forEach((act: any) => {
+        const col = `${act.tri_act || ""} ${act.Tipo || ""} ${act.id_act}`.trim();
+        const v = evRow[act.id_act];
+        row[col] = (v === undefined || v === null || v === "") ? "" : Number(v);
+      });
+      return row;
+    });
+    const wsInstr = XLSX.utils.aoa_to_sheet([
+      ["Leyenda de instrumentos (código: descripción)"],
+      ...actsOrdenadas.map((a: any) => [`${a.tri_act || ""} ${a.Tipo || ""} ${a.id_act}`.trim(), a.desc_act || ""]),
+      [],
+    ]);
+    XLSX.utils.sheet_add_json(wsInstr, rowsInstr, { origin: -1 });
+    XLSX.utils.book_append_sheet(wb, wsInstr, "Notas por instrumento");
+
+    XLSX.writeFile(wb, `Calificaciones_completo_${moduleData?.info_modulo?.modulo || "modulo"}.xlsx`);
   };
 
   const df_al = cursoData?.df_al || [];
@@ -542,8 +622,15 @@ export default function MagiaPage() {
 
                     {/* ── Calificaciones ── */}
                     <Card className="p-6 border-t-4 border-t-blue-500">
-                      <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Award className="w-4 h-4" /></span> Calificaciones</h2>
-                      <p className="text-body text-muted mb-6">Boletines, actas de evaluación e informes por alumno/a.</p>
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+                        <div>
+                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Award className="w-4 h-4" /></span> Calificaciones</h2>
+                          <p className="text-body text-muted">Boletines, actas de evaluación e informes por alumno/a.</p>
+                        </div>
+                        <Button variant="success" onClick={handleExportExcelCompleto} className="gap-2 shrink-0">
+                          <FileSpreadsheet className="w-4 h-4" /> {t('botones.magia.exportarExcelCompleto', {defaultValue: 'Exportar Excel completo'})}
+                        </Button>
+                      </div>
 
                       {/* Primera fila: 3 Trimestres */}
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -573,9 +660,6 @@ export default function MagiaPage() {
                               <Button variant="secondary" onClick={() => handleDownloadPdf(tri.tipo, "docx", { fechaCorte: tri.fin })} disabled={downloadingStr === `${tri.tipo}_docx`} className="flex-1">
                                 {downloadingStr === `${tri.tipo}_docx` ? "⏳..." : t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}
                               </Button>
-                              <Button variant="success" onClick={() => handleExportXlsx(tri.key, tri.fin)} className="flex-1 flex items-center justify-center gap-1.5">
-                                <FileSpreadsheet className="w-4 h-4" /> {t('botones.magia.editableXlsx', {defaultValue: 'Editable .xlsx'})}
-                              </Button>
                             </div>
                           </div>
                         ))}
@@ -592,9 +676,6 @@ export default function MagiaPage() {
                             <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_final', 'docx', { fechaCorte: fechaFinal })} disabled={downloadingStr === 'grupal_final_docx'} className="flex-1">
                               {downloadingStr === 'grupal_final_docx' ? '⏳...' : t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}
                             </Button>
-                            <Button variant="success" onClick={() => handleExportXlsx('Final', fechaFinal)} className="flex-1 flex items-center justify-center gap-1.5">
-                              <FileSpreadsheet className="w-4 h-4" /> {t('botones.magia.editableXlsx', {defaultValue: 'Editable .xlsx'})}
-                            </Button>
                           </div>
                         </div>
 
@@ -606,9 +687,6 @@ export default function MagiaPage() {
                             </Button>
                             <Button variant="secondary" onClick={() => handleDownloadPdf('grupal_final', 'docx', { fechaCorte: fechaFinal })} disabled={downloadingStr === 'grupal_final_docx'} className="flex-1">
                               {downloadingStr === 'grupal_final_docx' ? '⏳...' : t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}
-                            </Button>
-                            <Button variant="success" onClick={() => handleExportXlsx('Extraordinaria', fechaFinal)} className="flex-1 flex items-center justify-center gap-1.5">
-                              <FileSpreadsheet className="w-4 h-4" /> {t('botones.magia.editableXlsx', {defaultValue: 'Editable .xlsx'})}
                             </Button>
                           </div>
                         </div>
