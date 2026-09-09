@@ -31,7 +31,7 @@ jobs:
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
 
       - name: Build Next.js App
-        run: npx next build
+        run: npx next build --webpack
         env:
           NEXT_PUBLIC_API_URL: https://cdd-backend-215337606799.europe-west1.run.app
           NEXTAUTH_URL: https://cuadernofp.web.app
