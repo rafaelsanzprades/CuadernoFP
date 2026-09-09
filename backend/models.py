@@ -99,7 +99,6 @@ class Module(Base):
     name = Column(String, nullable=False) # ej: Bases de Datos
     hours = Column(Integer)
     curso = Column(String, nullable=True) # ej: "1º", "2º", "Ambos"
-    is_dual = Column(Boolean, default=True) # Sujeto a FEOE
     convalidation_competences = Column(String, nullable=True) # JSON con datos de Catedu
     
     degree = relationship("Degree", back_populates="modules")
