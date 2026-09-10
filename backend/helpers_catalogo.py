@@ -325,6 +325,169 @@ def calcular_notas(evRow: dict, df_ra: list, df_ce: list, df_act: list, config: 
     return {"notas_ce": notas_ce, "notas_ra": notas_ra, "nota_final": nota_final, "ra_tope_activo": ra_tope_activo}
 
 
+def calcular_notas_jeg(al_id: str, df_calificaciones: list, df_indicadores: list, df_instr: list,
+                        df_ce: list, df_ra: list, config: dict = None) -> dict:
+    """Motor de calificación JEG (Instrumento -> Indicador -> CE -> RA -> Módulo).
+
+    Puerto línea a línea de calcularNotasJEG() en
+    frontend/src/utils/calificaciones.ts — mismo patrón de sincronización manual
+    que calcular_notas() (Motor A) más arriba, no hay código compartido entre
+    frontend y backend. Modelo de Javier Edo Gual (JEG), con 3 vías: ordinario
+    (pondera vía CE, con el peso de cada Indicador dentro de su CE), y
+    recuperación/extraordinaria (Indicador directo al RA, sin pasar por
+    peso_ce — la recuperación sustituye a la ordinaria en los RA donde el
+    alumno tiene calificación de recuperación; EvFE es una hoja aparte que
+    nunca se mezcla con la ordinaria).
+    """
+    config = {**DEFAULT_CONFIG_REDONDEO, **(config or {})}
+
+    def redondear(n_ra):
+        if config["umbral_redondeo"] <= n_ra < config["nota_aprobado"]:
+            return config["nota_aprobado"]
+        return n_ra
+
+    def nota_final_ponderada(notas_ra, peso_ra):
+        suma, peso_usado = 0.0, 0.0
+        for r_id, n_ra in notas_ra.items():
+            if n_ra is None:
+                continue
+            suma += n_ra * peso_ra.get(r_id, 0)
+            peso_usado += peso_ra.get(r_id, 0)
+        return redondear(suma / peso_usado) if peso_usado > 0 else None
+
+    instr_by_id = {i["id_instrumento"]: i for i in df_instr if i.get("id_instrumento")}
+    cal_alumno = [c for c in df_calificaciones if c.get("id_alumno") == al_id and c.get("valor") is not None]
+
+    def por_procedimiento(proc):
+        return [c for c in cal_alumno
+                if (instr_by_id.get(c.get("id_instrumento"), {}).get("procedimiento") or "ordinario") == proc]
+
+    ce_of_indicador, peso_indicador = {}, {}
+    for ind in df_indicadores:
+        if not ind.get("id_indicador"):
+            continue
+        ce_of_indicador[ind["id_indicador"]] = ind.get("id_ce")
+        peso_indicador[ind["id_indicador"]] = ind["peso"] if ind.get("peso") is not None else 1
+
+    ra_of_ce, peso_ce = {}, {}
+    for ce in df_ce:
+        if not ce.get("id_ce"):
+            continue
+        ra_of_ce[ce["id_ce"]] = ce.get("id_ra")
+        peso_ce[ce["id_ce"]] = float(ce.get("peso_ce") or 0)
+
+    peso_ra = {ra["id_ra"]: float(ra.get("peso_ra") or 0) for ra in df_ra if ra.get("id_ra")}
+    all_ra_ids = set(peso_ra.keys()) | set(ra_of_ce.values())
+
+    def notas_indicador_de(cals):
+        por_indicador: dict = {}
+        for c in cals:
+            instr = instr_by_id.get(c.get("id_instrumento")) or {}
+            raw = c.get("nota_calculada") if isinstance(c.get("nota_calculada"), (int, float)) else c.get("valor")
+            try:
+                valor = float(raw)
+            except (TypeError, ValueError):
+                continue
+            if valor != valor:  # NaN
+                continue
+            peso = instr.get("peso_global")
+            peso = peso if peso is not None else 1
+            por_indicador.setdefault(c.get("id_indicador"), []).append((valor, peso))
+        out = {}
+        for ind in df_indicadores:
+            id_ind = ind.get("id_indicador")
+            if not id_ind:
+                continue
+            entries = por_indicador.get(id_ind)
+            if not entries:
+                out[id_ind] = None
+                continue
+            peso_total = sum(p for _, p in entries)
+            out[id_ind] = (sum(v * p for v, p in entries) / peso_total) if peso_total > 0 \
+                else (sum(v for v, _ in entries) / len(entries))
+        return out
+
+    # Vía ordinaria: Indicador -> CE (con peso_indicador) -> RA (con peso_ce)
+    notas_indicador = notas_indicador_de(por_procedimiento("ordinario"))
+
+    suma_ponderada_ce, peso_usado_ce = {}, {}
+    for id_indicador, n_ind in notas_indicador.items():
+        if n_ind is None:
+            continue
+        ce_id = ce_of_indicador.get(id_indicador)
+        if not ce_id:
+            continue
+        peso = peso_indicador.get(id_indicador, 0)
+        suma_ponderada_ce[ce_id] = suma_ponderada_ce.get(ce_id, 0) + n_ind * peso
+        peso_usado_ce[ce_id] = peso_usado_ce.get(ce_id, 0) + peso
+
+    notas_ce = {}
+    for ce in df_ce:
+        id_ce = ce.get("id_ce")
+        if not id_ce:
+            continue
+        peso_usado = peso_usado_ce.get(id_ce, 0)
+        notas_ce[id_ce] = (suma_ponderada_ce[id_ce] / peso_usado) if peso_usado > 0 else None
+
+    suma_ponderada_ra_ord, peso_usado_ra_ord = {}, {}
+    for ce_id, n_ce in notas_ce.items():
+        if n_ce is None:
+            continue
+        r_id = ra_of_ce.get(ce_id)
+        if not r_id:
+            continue
+        suma_ponderada_ra_ord[r_id] = suma_ponderada_ra_ord.get(r_id, 0) + n_ce * peso_ce[ce_id]
+        peso_usado_ra_ord[r_id] = peso_usado_ra_ord.get(r_id, 0) + peso_ce[ce_id]
+
+    notas_ra_ordinario = {}
+    for r_id in all_ra_ids:
+        peso_usado = peso_usado_ra_ord.get(r_id, 0)
+        notas_ra_ordinario[r_id] = redondear(suma_ponderada_ra_ord[r_id] / peso_usado) if peso_usado > 0 else None
+
+    # Recuperación / extraordinaria: Indicador -> RA DIRECTO, sin pasar por peso_ce.
+    def notas_ra_directas(cals):
+        notas_ind = notas_indicador_de(cals)
+        suma, peso_usado = {}, {}
+        for id_indicador, n_ind in notas_ind.items():
+            if n_ind is None:
+                continue
+            ce_id = ce_of_indicador.get(id_indicador)
+            r_id = ra_of_ce.get(ce_id) if ce_id else None
+            if not r_id:
+                continue
+            peso = peso_indicador.get(id_indicador, 0)
+            suma[r_id] = suma.get(r_id, 0) + n_ind * peso
+            peso_usado[r_id] = peso_usado.get(r_id, 0) + peso
+        out = {}
+        for r_id in all_ra_ids:
+            pu = peso_usado.get(r_id, 0)
+            out[r_id] = redondear(suma[r_id] / pu) if pu > 0 else None
+        return out
+
+    notas_ra_recuperacion = notas_ra_directas(por_procedimiento("recuperacion"))
+    notas_ra = {}
+    for r_id in all_ra_ids:
+        notas_ra[r_id] = notas_ra_recuperacion[r_id] if notas_ra_recuperacion[r_id] is not None \
+            else notas_ra_ordinario[r_id]
+    nota_final = nota_final_ponderada(notas_ra, peso_ra)
+
+    notas_ra_evfe = notas_ra_directas(por_procedimiento("extraordinaria"))
+    notas_ra_extraordinaria = {}
+    for r_id in all_ra_ids:
+        notas_ra_extraordinaria[r_id] = notas_ra_evfe[r_id] if notas_ra_evfe[r_id] is not None else notas_ra[r_id]
+    nota_final_extraordinaria = nota_final_ponderada(notas_ra_extraordinaria, peso_ra)
+
+    return {
+        "notas_indicador": notas_indicador,
+        "notas_ce": notas_ce,
+        "notas_ra_ordinario": notas_ra_ordinario,
+        "notas_ra": notas_ra,
+        "nota_final": nota_final,
+        "notas_ra_extraordinaria": notas_ra_extraordinaria,
+        "nota_final_extraordinaria": nota_final_extraordinaria,
+    }
+
+
 def fetch_curriculo_from_db(codigo_modulo: str, db) -> dict:
     """
     Consulta el catálogo oficial (tablas Module/LearningOutcome/EvaluationCriterion)

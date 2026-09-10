@@ -350,3 +350,104 @@ export function repartoIgualitario(count: number, total: number = 100): number[]
     return share;
   });
 }
+
+const TRI_A_EVALUACION: Record<string, string> = { "1T": "Ev1", "2T": "Ev2", "3T": "Ev3" };
+
+/**
+ * "Modo automático" del Motor JEG (Ítem 42, punto 6): reproduce el gesto de
+ * Motor A -- marcar la casilla "esta actividad evalúa este CE" en
+ * `instrumentos/page.tsx` -- creando/gestionando por debajo el Instrumento y
+ * el Indicador que hacen falta para que `calcularNotasJEG()` pueda calcular,
+ * sin que el profesor tenga que crearlos a mano.
+ *
+ * Una Actividad ES un Instrumento (mismo `id_instrumento === act.id_act`, 1:1
+ * por construcción). Cada (Actividad, CE) vinculado tiene un único Indicador
+ * automático (`${id_act}-${ce_id}`), con el peso repartido igual entre todos
+ * los indicadores de ese CE vía `repartoIgualitario()` -- la misma función
+ * que ya reparte `peso_ce`/`peso_ra`. Con peso igual entre todos, la media
+ * ponderada de `calcularNotasJEG()` es matemáticamente una media simple:
+ * mismo resultado que Motor A hoy, sin que el profesor configure nada.
+ *
+ * Quien quiera el control fino (indicadores con peso distinto, varios por
+ * CE) sigue pudiendo entrar en `JegModeloTab.tsx` y ajustarlo a mano -- este
+ * modo automático es solo el punto de partida por defecto.
+ */
+export function sincronizarIndicadorAuto(
+  act: any,
+  ce_id: string,
+  activo: boolean,
+  df_instr: any[],
+  df_indicadores: any[]
+): { df_instr: any[]; df_indicadores: any[] } {
+  const id_instrumento = act.id_act;
+  let nextInstr = [...df_instr];
+  let nextInd = [...df_indicadores];
+
+  let instrIdx = nextInstr.findIndex((i) => i.id_instrumento === id_instrumento);
+  if (instrIdx === -1) {
+    nextInstr.push({
+      id_instrumento,
+      titulo: act.desc_act || id_instrumento,
+      tipo: "rubrica",
+      escala: "continua_10",
+      evaluacion: TRI_A_EVALUACION[act.tri_act] || "Ev1",
+      agente: "heteroevaluacion",
+      peso_global: 1,
+      indicadores_vinculados: [],
+      origen: "centro",
+      procedimiento: "ordinario",
+    });
+    instrIdx = nextInstr.length - 1;
+  }
+
+  const id_indicador = `${id_instrumento}-${ce_id}`;
+
+  if (activo) {
+    if (!nextInd.some((i) => i.id_indicador === id_indicador)) {
+      nextInd.push({ id_indicador, id_ce: ce_id, descripcion: act.desc_act || "", peso: 0, is_basico: false });
+    }
+    const vinculados = new Set<string>(nextInstr[instrIdx].indicadores_vinculados || []);
+    vinculados.add(id_indicador);
+    nextInstr[instrIdx] = { ...nextInstr[instrIdx], indicadores_vinculados: Array.from(vinculados) };
+  } else {
+    nextInd = nextInd.filter((i) => i.id_indicador !== id_indicador);
+    const vinculados = (nextInstr[instrIdx].indicadores_vinculados || []).filter((id: string) => id !== id_indicador);
+    nextInstr[instrIdx] = { ...nextInstr[instrIdx], indicadores_vinculados: vinculados };
+  }
+
+  // Reparto igualitario entre todos los indicadores que queden en este CE
+  // (los de esta actividad y los de cualquier otra que también lo evalúe).
+  const indsDelCe = nextInd.filter((i) => i.id_ce === ce_id);
+  const shares = repartoIgualitario(indsDelCe.length);
+  const pesoPorId: Record<string, number> = {};
+  indsDelCe.forEach((ind, idx) => { pesoPorId[ind.id_indicador] = shares[idx]; });
+  nextInd = nextInd.map((i) => (i.id_ce === ce_id ? { ...i, peso: pesoPorId[i.id_indicador] } : i));
+
+  return { df_instr: nextInstr, df_indicadores: nextInd };
+}
+
+/** Crea/actualiza/borra una fila de `df_calificaciones` para un (alumno,
+ * instrumento, indicador) -- usado por el modo automático para replicar la
+ * nota de una actividad en cada Indicador auto-generado que le corresponda. */
+export function setCalificacionAuto(
+  df_calificaciones: any[],
+  id_alumno: string,
+  id_instrumento: string,
+  id_indicador: string,
+  valor: number | null
+): any[] {
+  const idx = df_calificaciones.findIndex(
+    (c) => c.id_alumno === id_alumno && c.id_instrumento === id_instrumento && c.id_indicador === id_indicador
+  );
+  const next = [...df_calificaciones];
+  if (valor === null || isNaN(valor)) {
+    if (idx >= 0) next.splice(idx, 1);
+    return next;
+  }
+  const row = {
+    id_calificacion: idx >= 0 ? next[idx].id_calificacion : `${id_alumno}-${id_instrumento}-${id_indicador}`,
+    id_alumno, id_instrumento, id_indicador, valor,
+  };
+  if (idx >= 0) next[idx] = row; else next.push(row);
+  return next;
+}
