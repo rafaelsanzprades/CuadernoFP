@@ -76,6 +76,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "estadisticas", label: "Estadísticas" },
     { id: "analisis", label: "Análisis" },
     { id: "historico", label: "Histórico" },
+    { id: "boletines", label: "Boletines" },
   ],
   "/normativa": [
     { id: "autonomias", label: "Autonomías" },
