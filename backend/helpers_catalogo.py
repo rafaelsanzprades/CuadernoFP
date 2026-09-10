@@ -249,95 +249,20 @@ DEFAULT_CONFIG_REDONDEO = {
 }
 
 
-def calcular_notas(evRow: dict, df_ra: list, df_ce: list, df_act: list, config: dict = None) -> dict:
-    """Motor de calificación (Motor A: instrumento -> CE -> RA -> módulo).
-
-    Puerto línea a línea de frontend/src/utils/calificaciones.ts — debe
-    mantenerse a mano en sincronía con ese fichero si el algoritmo cambia, no
-    hay código compartido entre frontend y backend (mismo patrón que
-    planning_generator.py / planningGenerator.ts). Un CE sin ninguna
-    actividad calificada se excluye del denominador ponderado de su RA
-    (decisión A de la Fase 2, RF Ideas/propuesta-motor-calificacion-2026-08-16.md)
-    — se representa como `None` ("sin evaluar"), no como 0.
-    """
-    config = {**DEFAULT_CONFIG_REDONDEO, **(config or {})}
-
-    peso_ra = {ra["id_ra"]: float(ra.get("peso_ra") or 0) for ra in df_ra if ra.get("id_ra")}
-
-    peso_ce, ra_of_ce = {}, {}
-    for ce in df_ce:
-        if ce.get("id_ce") and ce.get("id_ra"):
-            peso_ce[ce["id_ce"]] = float(ce.get("peso_ce") or 0)
-            ra_of_ce[ce["id_ce"]] = ce["id_ra"]
-
-    notas_ce = {}
-    for ce_id in peso_ce:
-        vals = []
-        for act in df_act:
-            if act.get(ce_id) is True or act.get(ce_id) == "true":
-                raw = evRow.get(act.get("id_act"))
-                try:
-                    v = float(raw)
-                    if v == v:  # not NaN
-                        vals.append(v)
-                except (TypeError, ValueError):
-                    pass
-        notas_ce[ce_id] = (sum(vals) / len(vals)) if vals else None
-
-    suma_ponderada_ra, peso_usado_ra, failed_ces_by_ra = {}, {}, {}
-    for ce_id, n_ce in notas_ce.items():
-        r_id = ra_of_ce.get(ce_id)
-        if not r_id or n_ce is None:
-            continue
-        suma_ponderada_ra[r_id] = suma_ponderada_ra.get(r_id, 0) + n_ce * peso_ce[ce_id]
-        peso_usado_ra[r_id] = peso_usado_ra.get(r_id, 0) + peso_ce[ce_id]
-        if n_ce < config["nota_aprobado"]:
-            failed_ces_by_ra[r_id] = failed_ces_by_ra.get(r_id, 0) + 1
-
-    all_ra_ids = set(peso_ra.keys()) | set(ra_of_ce.values())
-    notas_ra, ra_tope_activo = {}, {}
-    for r_id in all_ra_ids:
-        peso_usado = peso_usado_ra.get(r_id, 0)
-        if peso_usado <= 0:
-            notas_ra[r_id] = None
-            ra_tope_activo[r_id] = False
-            continue
-        n_ra = suma_ponderada_ra[r_id] / peso_usado
-        if config["umbral_redondeo"] <= n_ra < config["nota_aprobado"]:
-            n_ra = config["nota_aprobado"]
-        tope_activo = failed_ces_by_ra.get(r_id, 0) > config["max_compensables"] and n_ra >= config["nota_aprobado"]
-        if tope_activo:
-            n_ra = config["nota_aprobado"] - 0.1
-        notas_ra[r_id] = n_ra
-        ra_tope_activo[r_id] = tope_activo
-
-    suma_final, peso_final_usado = 0.0, 0.0
-    for r_id, n_ra in notas_ra.items():
-        if n_ra is None:
-            continue
-        suma_final += n_ra * peso_ra.get(r_id, 0)
-        peso_final_usado += peso_ra.get(r_id, 0)
-
-    nota_final = (suma_final / peso_final_usado) if peso_final_usado > 0 else None
-    if nota_final is not None and config["umbral_redondeo"] <= nota_final < config["nota_aprobado"]:
-        nota_final = config["nota_aprobado"]
-
-    return {"notas_ce": notas_ce, "notas_ra": notas_ra, "nota_final": nota_final, "ra_tope_activo": ra_tope_activo}
-
-
 def calcular_notas_jeg(al_id: str, df_calificaciones: list, df_indicadores: list, df_instr: list,
                         df_ce: list, df_ra: list, config: dict = None) -> dict:
-    """Motor de calificación JEG (Instrumento -> Indicador -> CE -> RA -> Módulo).
+    """Motor de calificación JEG (Instrumento -> Indicador -> CE -> RA -> Módulo), el único motor de la app.
 
     Puerto línea a línea de calcularNotasJEG() en
-    frontend/src/utils/calificaciones.ts — mismo patrón de sincronización manual
-    que calcular_notas() (Motor A) más arriba, no hay código compartido entre
-    frontend y backend. Modelo de Javier Edo Gual (JEG), con 3 vías: ordinario
-    (pondera vía CE, con el peso de cada Indicador dentro de su CE), y
-    recuperación/extraordinaria (Indicador directo al RA, sin pasar por
-    peso_ce — la recuperación sustituye a la ordinaria en los RA donde el
-    alumno tiene calificación de recuperación; EvFE es una hoja aparte que
-    nunca se mezcla con la ordinaria).
+    frontend/src/utils/calificaciones.ts — sincronización manual, no hay
+    código compartido entre frontend y backend. Modelo de Javier Edo Gual
+    (JEG), con 3 vías: ordinario (pondera vía CE, con el peso de cada
+    Indicador dentro de su CE), y recuperación/extraordinaria (Indicador
+    directo al RA, sin pasar por peso_ce — la recuperación sustituye a la
+    ordinaria en los RA donde el alumno tiene calificación de recuperación;
+    EvFE es una hoja aparte que nunca se mezcla con la ordinaria). Un CE sin
+    ninguna calificación se excluye del denominador ponderado de su RA, en
+    vez de contar como 0 — se representa como `None` ("sin evaluar").
     """
     config = {**DEFAULT_CONFIG_REDONDEO, **(config or {})}
 
