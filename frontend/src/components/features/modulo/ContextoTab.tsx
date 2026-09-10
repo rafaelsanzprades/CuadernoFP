@@ -142,16 +142,19 @@ const RASGOS_INFRAESTRUCTURA = [
   },
 ];
 
+interface SugerenciaGrupo { grupo: string; id: string; label: string; motivo: string }
+
 interface RasgosRapidosProps {
   titulo: string;
   grupos: { grupo: string; items: { id: string; label: string }[] }[];
   seleccionados: string[];
   onToggle: (id: string) => void;
+  sugerencia?: SugerenciaGrupo;
 }
 
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
 
-function RasgosRapidos({ titulo, grupos, seleccionados, onToggle }: RasgosRapidosProps) {
+function RasgosRapidos({ titulo, grupos, seleccionados, onToggle, sugerencia }: RasgosRapidosProps) {
   const { t } = useTranslation();
   return (
     <div>
@@ -160,27 +163,41 @@ function RasgosRapidos({ titulo, grupos, seleccionados, onToggle }: RasgosRapido
         {t('checks.contexto.seleccionOrientativa', {defaultValue: 'Selección orientativa para apoyar la redacción del texto de abajo (primera versión, se irá ampliando).'})}
       </p>
       <div className="space-y-3">
-        {grupos.map((grupo) => (
-          <div key={grupo.grupo}>
-            <p className="text-caption font-semibold text-muted mb-1.5">{t(`checks.contexto.grupo_${slug(grupo.grupo)}`, {defaultValue: grupo.grupo})}</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-              {grupo.items.map((item) => {
-                const isSelected = seleccionados.includes(item.id);
-                return (
-                  <label key={item.id} className={`flex items-center gap-2 p-2 rounded border cursor-pointer transition-colors ${isSelected ? 'bg-indigo-500/10 border-indigo-500/30' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
-                    <input
-                      type="checkbox"
-                      checked={isSelected}
-                      onChange={() => onToggle(item.id)}
-                      className="rounded border-white/20 bg-transparent text-indigo-500 focus:ring-indigo-500"
-                    />
-                    <span className="text-caption">{t(`checks.contexto.item_${item.id.toLowerCase().replace(/-/g, '_')}`, {defaultValue: item.label})}</span>
-                  </label>
-                );
-              })}
+        {grupos.map((grupo) => {
+          const grupoTieneSeleccion = grupo.items.some((i) => seleccionados.includes(i.id));
+          const mostrarSugerencia = !!sugerencia && sugerencia.grupo === grupo.grupo && !grupoTieneSeleccion;
+          return (
+            <div key={grupo.grupo}>
+              <p className="text-caption font-semibold text-muted mb-1.5">{t(`checks.contexto.grupo_${slug(grupo.grupo)}`, {defaultValue: grupo.grupo})}</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                {grupo.items.map((item) => {
+                  const isSelected = seleccionados.includes(item.id);
+                  return (
+                    <label key={item.id} className={`flex items-center gap-2 p-2 rounded border cursor-pointer transition-colors ${isSelected ? 'bg-indigo-500/10 border-indigo-500/30' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
+                      <input
+                        type="checkbox"
+                        checked={isSelected}
+                        onChange={() => onToggle(item.id)}
+                        className="rounded border-white/20 bg-transparent text-indigo-500 focus:ring-indigo-500"
+                      />
+                      <span className="text-caption">{t(`checks.contexto.item_${item.id.toLowerCase().replace(/-/g, '_')}`, {defaultValue: item.label})}</span>
+                    </label>
+                  );
+                })}
+              </div>
+              {mostrarSugerencia && (
+                <button
+                  type="button"
+                  onClick={() => onToggle(sugerencia!.id)}
+                  className="mt-2 flex items-center gap-1.5 text-caption text-accent hover:text-accent/80 transition-colors"
+                >
+                  <Sparkles className="w-3.5 h-3.5" />
+                  {t('checks.contexto.sugerenciaSegunGrado', {label: sugerencia!.label, motivo: sugerencia!.motivo, defaultValue: `Sugerencia según el Grado (${sugerencia!.motivo}): "${sugerencia!.label}". Aplicar`})}
+                </button>
+              )}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
@@ -299,6 +316,23 @@ export function ContextoTab() {
     ];
   })();
 
+  // Sugerencia (no forzada) de "Vía de acceso predominante" según el Grado
+  // del módulo (moduleData.info_modulo.nivel, ya poblado por el catálogo al
+  // elegir el título) — pedido por Rafael, 2026-09-10. Solo se sugiere donde
+  // hay una base estructural/normativa clara (acceso a Grado Medio exige el
+  // título de ESO; a Grado Superior predomina Bachillerato) — Grado Básico
+  // se deja sin sugerencia a propósito: su vía de acceso real (recomendación
+  // del equipo docente desde ESO, sin título) no encaja limpiamente en
+  // ninguna de las opciones existentes, y forzar una encajaría peor que no
+  // sugerir nada.
+  const nivelModulo = (moduleData?.info_modulo as any)?.nivel || "";
+  const sugerenciaViaAcceso: SugerenciaGrupo | undefined =
+    nivelModulo === "Grado Medio"
+      ? { grupo: "Vía de acceso predominante", id: "AL-VIA-ESO", label: "ESO", motivo: nivelModulo }
+      : nivelModulo === "Grado Superior"
+      ? { grupo: "Vía de acceso predominante", id: "AL-VIA-BACHILLERATO", label: "Bachillerato", motivo: nivelModulo }
+      : undefined;
+
   return (
     <>
       <div className="space-y-6 animate-in fade-in duration-500">
@@ -375,6 +409,7 @@ export function ContextoTab() {
             grupos={RASGOS_ALUMNADO}
             seleccionados={rasgos_alumnado}
             onToggle={(id) => toggleRasgo("rasgos_alumnado", rasgos_alumnado, id)}
+            sugerencia={sugerenciaViaAcceso}
           />
           <div>
             <div className="flex items-center justify-between mb-1">
