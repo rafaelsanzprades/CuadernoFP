@@ -19,6 +19,7 @@ import { InstrumentoConfigModal } from "@/components/features/instrumentos/Instr
 import { JegModeloTab } from "@/components/features/instrumentos/JegModeloTab";
 import { GestionRubricasTab } from "@/components/features/instrumentos/GestionRubricasTab";
 import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
+import { sincronizarIndicadorAuto } from "@/utils/calificaciones";
 
 const normalizeTipo = (t: string) => {
   if (!t) return "Exámenes teóricos";
@@ -83,9 +84,16 @@ export default function InstrumentosPage() {
           const [globalIdxStr, ce] = only.split("::");
           const globalIdx = Number(globalIdxStr);
           const current = currentAct[globalIdx]?.[ce] === true;
+          const nuevoValor = !current;
           const newAct = [...currentAct];
-          newAct[globalIdx] = { ...newAct[globalIdx], [ce]: !current };
+          newAct[globalIdx] = { ...newAct[globalIdx], [ce]: nuevoValor };
           updateDataFrame("df_act", newAct);
+
+          // Modo automático del Motor JEG (Ítem 42, punto 6): crea/gestiona el
+          // Indicador correspondiente sin que el profesor tenga que hacerlo a mano.
+          const sync = sincronizarIndicadorAuto(newAct[globalIdx], ce, nuevoValor, moduleData?.df_instr || [], (moduleData as any)?.df_indicadores || []);
+          updateDataFrame("df_instr", sync.df_instr);
+          updateDataFrame("df_indicadores", sync.df_indicadores);
         }
         setSelectedCells(new Set());
       }
@@ -116,12 +124,20 @@ export default function InstrumentosPage() {
   const applyBulkSelection = (value: boolean) => {
     const currentAct = moduleData?.df_act || [];
     const newAct = [...currentAct];
+    let df_instr = moduleData?.df_instr || [];
+    let df_indicadores = (moduleData as any)?.df_indicadores || [];
     selectedCells.forEach((key) => {
       const [globalIdxStr, ce] = key.split("::");
       const globalIdx = Number(globalIdxStr);
       newAct[globalIdx] = { ...newAct[globalIdx], [ce]: value };
+      // Modo automático del Motor JEG (Ítem 42, punto 6) -- ver comentario en onMouseUp.
+      const sync = sincronizarIndicadorAuto(newAct[globalIdx], ce, value, df_instr, df_indicadores);
+      df_instr = sync.df_instr;
+      df_indicadores = sync.df_indicadores;
     });
     updateDataFrame("df_act", newAct);
+    updateDataFrame("df_instr", df_instr);
+    updateDataFrame("df_indicadores", df_indicadores);
     setSelectedCells(new Set());
   };
 

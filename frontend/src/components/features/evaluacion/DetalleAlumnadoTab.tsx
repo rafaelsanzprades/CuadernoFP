@@ -8,7 +8,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { resolveDescRa } from "@/services/catalogCache";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { isAlumnoActivo } from "@/utils/alumnado";
-import { calcularNotas, getSigadInfo, DEFAULT_CONFIG_REDONDEO } from "@/utils/calificaciones";
+import { calcularNotasJEG, getSigadInfo, DEFAULT_CONFIG_REDONDEO, setCalificacionAuto } from "@/utils/calificaciones";
 import { Button } from "@/components/ui/Button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import toast from "react-hot-toast";
@@ -35,6 +35,12 @@ export function DetalleAlumnadoTab() {
   const df_ra = moduleData?.df_ra || [];
   const df_ud = moduleData?.df_ud || [];
   const df_pr = moduleData?.df_pr || [];
+  // Motor JEG, modo automático (Ítem 42, punto 6) -- ver sincronizarIndicadorAuto()
+  // en utils/calificaciones.ts. df_instr/df_indicadores viven en moduleData (config,
+  // igual que df_act); df_calificaciones vive en cursoData (datos, igual que df_eval).
+  const df_instr = moduleData?.df_instr || [];
+  const df_indicadores = (moduleData as any)?.df_indicadores || [];
+  const df_calificaciones = (cursoData as any)?.df_calificaciones || [];
   const info_fechas = cursoData?.info_fechas || {};
   const planning_ledger = planningLedger || {};
 
@@ -78,13 +84,27 @@ export function DetalleAlumnadoTab() {
     const valorAnterior = newEval[evRowIdx][act_id] ?? null;
     newEval[evRowIdx][act_id] = val;
 
-    const { nota_final } = calcularNotas(newEval[evRowIdx], df_ra, df_ce, df_act, config_redondeo);
+    // Motor JEG, modo automático (Ítem 42, punto 6): la misma nota se replica
+    // como Calificación en cada Indicador auto-generado (uno por CE que evalúa
+    // esta actividad, creado ya en instrumentos/page.tsx al marcar la casilla).
+    const act = df_act.find((a: any) => a.id_act === act_id);
+    let newCal = df_calificaciones;
+    if (act) {
+      df_ce.forEach((ce: any) => {
+        if (act[ce.id_ce] === true) {
+          newCal = setCalificacionAuto(newCal, al_id, act_id, `${act_id}-${ce.id_ce}`, val);
+        }
+      });
+    }
+
+    const { nota_final } = calcularNotasJEG(al_id, newCal, df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
     // Nota final oficial (FO) siempre con 1 decimal, como pide Rafael — el cálculo
-    // interno (calcularNotas, notas_ra, notas_ce) conserva toda su precisión, esto
+    // interno (calcularNotasJEG, notas_ra, notas_ce) conserva toda su precisión, esto
     // solo redondea el valor que se guarda como nota de acta.
     newEval[evRowIdx]["Nota_Final_FO"] = nota_final !== null ? Number(nota_final.toFixed(1)) : 0;
 
     updateCursoData("df_eval", newEval);
+    updateCursoData("df_calificaciones", newCal);
     pushHistorial(al_id, act_id, valorAnterior, val);
   };
 
@@ -261,10 +281,11 @@ export function DetalleAlumnadoTab() {
           const sigad = sigadOverride != null ? getSigadInfo(Number(sigadOverride)) : getSigadInfo(nota_prev);
           const activeStudentTab = activeTabByStudent[al_id] || "1T";
 
-          // Motor A (Indicador->CE->RA->Módulo, ver utils/calificaciones.ts) — sustituye al
-          // cálculo por trimestre (Motor B, nunca alimentado por la UI: 1T_Nota/2T_Nota/3T_Nota
-          // no los escribe nada del frontend, decisión C de la Fase 2).
-          const notasCalc = calcularNotas(evRow, df_ra, df_ce, df_act, config_redondeo);
+          // Motor JEG, modo automático (Indicador->CE->RA->Módulo, Ítem 42 punto 6, ver
+          // utils/calificaciones.ts) — sustituye al antiguo Motor A (calcularNotas()).
+          // Con el peso repartido igual entre indicadores (sincronizarIndicadorAuto), el
+          // resultado es matemáticamente el mismo que daba Motor A: misma media.
+          const notasCalc = calcularNotasJEG(al_id, df_calificaciones, df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
 
           const resultados_ra: any[] = [];
 
@@ -272,7 +293,9 @@ export function DetalleAlumnadoTab() {
             const info = ra_info[ra_id];
             const r_data = ra_to_tri[ra_id];
             const nota_ra = notasCalc.notas_ra[ra_id] ?? null;
-            const topeActivo = notasCalc.ra_tope_activo[ra_id] || false;
+            // Motor JEG no tiene "tope de compensables" (concepto propio de Motor A,
+            // Decisión B) -- pendiente decidir si se traslada, ver 00 IDEAS.md.
+            const topeActivo = false;
 
             const prop = nota_ra === null ? 0 : Math.min(100.0, Math.max(0.0, (nota_ra / 5.0) * 100.0));
 
