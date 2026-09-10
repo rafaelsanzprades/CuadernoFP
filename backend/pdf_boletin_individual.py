@@ -188,7 +188,7 @@ def generar_pdf_boletin_individual(
 
         # Motor JEG, modo automático (Ítem 42 punto 6) — ver
         # helpers_catalogo.calcular_notas_jeg(), puerto de calcularNotasJEG() en
-        # utils/calificaciones.ts. Sustituye al antiguo Motor A (calcular_notas()).
+        # utils/calificaciones.ts.
         from helpers_catalogo import calcular_notas_jeg
         notas_calc = calcular_notas_jeg(
             al_id, df_calificaciones.to_dict("records"), df_indicadores.to_dict("records"),

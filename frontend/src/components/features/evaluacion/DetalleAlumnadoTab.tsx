@@ -282,9 +282,8 @@ export function DetalleAlumnadoTab() {
           const activeStudentTab = activeTabByStudent[al_id] || "1T";
 
           // Motor JEG, modo automático (Indicador->CE->RA->Módulo, Ítem 42 punto 6, ver
-          // utils/calificaciones.ts) — sustituye al antiguo Motor A (calcularNotas()).
-          // Con el peso repartido igual entre indicadores (sincronizarIndicadorAuto), el
-          // resultado es matemáticamente el mismo que daba Motor A: misma media.
+          // utils/calificaciones.ts). Con el peso repartido igual entre indicadores
+          // (sincronizarIndicadorAuto), el resultado es una media simple por CE.
           const notasCalc = calcularNotasJEG(al_id, df_calificaciones, df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
 
           const resultados_ra: any[] = [];

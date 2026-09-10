@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 pdf_refuerzo_alumno.py
-Plan de Trabajo Individual (item 23): CE pendientes de un alumno (Motor A,
-via helpers_catalogo.calcular_notas), cruzados con su autoevaluacion
+Plan de Trabajo Individual (item 23): CE pendientes de un alumno (Motor JEG,
+via helpers_catalogo.calcular_notas_jeg), cruzados con su autoevaluacion
 estructurada por CE (item 22, valor SI/DUDAS/NO + dificultades). Convive con
 el texto libre de recuperacion ya existente en la app -- no lo sustituye.
 """
