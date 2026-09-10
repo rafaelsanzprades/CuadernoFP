@@ -90,6 +90,9 @@ export const CriterioEvaluacionSchema = z.object({
   desc_ce: z.string().optional().nullable(),
   peso_ce: z.number().optional(),
   is_dual: z.boolean().optional().nullable(),
+  // Ítem 12 (resto): CE designado para ser evaluado por el tutor de empresa
+  // durante la FCT/FEOE (Anexo XI b), en vez de/además de en el aula.
+  feoe: z.boolean().optional().nullable(),
 });
 export type CriterioEvaluacion = z.infer<typeof CriterioEvaluacionSchema>;
 
