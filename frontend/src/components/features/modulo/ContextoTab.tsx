@@ -1,8 +1,11 @@
 "use client";
-import { School, User, FileText, BookOpen } from "lucide-react";
+import { School, User, FileText, BookOpen, Sparkles } from "lucide-react";
+import { useState } from "react";
 import { NarrativeField } from "@/components/ui/NarrativeField";
 import { useAppStore } from "@/store/useAppStore";
 import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
+import { countField, countBoolean } from "@/components/features/alumnado/TendenciasProfesionalTab";
 
 const RASGOS_ENTORNO = [
   {
@@ -183,9 +186,37 @@ function RasgosRapidos({ titulo, grupos, seleccionados, onToggle }: RasgosRapido
   );
 }
 
+// Instrucción común a todos los prompts de IA de esta pestaña (pedido por
+// Rafael, 2026-09-10: no generalizar ni asociar género/origen/nivel
+// socioeconómico a capacidades o comportamiento del alumnado).
+const AVISO_SIN_ESTEREOTIPOS =
+  "No generalices ni asocies género, origen o nivel socioeconómico con capacidades, actitudes o comportamiento esperado del alumnado. Limítate a los datos objetivos indicados.";
+
+function rasgosSeleccionadosTexto(grupos: { grupo: string; items: { id: string; label: string }[] }[], seleccionados: string[]) {
+  const labels = grupos.flatMap((g) => g.items.filter((i) => seleccionados.includes(i.id)).map((i) => i.label));
+  return labels.length > 0 ? labels.join("; ") : "";
+}
+
+interface IaButtonProps { onClick: () => void; loading: boolean; disabled?: boolean }
+function IaButton({ onClick, loading, disabled }: IaButtonProps) {
+  const { t } = useTranslation();
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={loading || disabled}
+      className="flex items-center gap-1.5 text-caption font-semibold text-accent hover:text-accent/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+    >
+      <Sparkles className={`w-3.5 h-3.5 ${loading ? "animate-pulse" : ""}`} />
+      {loading ? t('common.generando', {defaultValue: 'Generando...'}) : t('botones.alumnado.generarConIa', {defaultValue: 'Generar con IA'})}
+    </button>
+  );
+}
+
 export function ContextoTab() {
   const { t } = useTranslation();
-  const { moduleData, updateModuleData } = useAppStore();
+  const { moduleData, updateModuleData, cursoData } = useAppStore();
+  const [generandoIA, setGenerandoIA] = useState<Record<string, boolean>>({});
 
   const config_contexto = moduleData?.config_contexto || {};
 
@@ -206,6 +237,68 @@ export function ContextoTab() {
     handleContextoChange(campo, updated);
   };
 
+  const handleGenerarIA = async (
+    campo: string,
+    tituloSeccion: string,
+    grupos: { grupo: string; items: { id: string; label: string }[] }[],
+    seleccionados: string[],
+    datosExtra: string[] = []
+  ) => {
+    setGenerandoIA((prev) => ({ ...prev, [campo]: true }));
+    try {
+      const rasgosTexto = rasgosSeleccionadosTexto(grupos, seleccionados);
+      const prompt = [
+        `Redacta un párrafo (5-8 líneas, tono técnico-docente, sin listas ni encabezados) para la sección "${tituloSeccion}" ` +
+        "de una programación didáctica de Formación Profesional, a partir de estos datos reales. No inventes datos que no estén aquí.",
+        "",
+        rasgosTexto ? `Rasgos marcados por el profesor: ${rasgosTexto}.` : "Sin rasgos marcados por el profesor.",
+        ...datosExtra,
+        "",
+        AVISO_SIN_ESTEREOTIPOS,
+      ].join("\n");
+
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/ai/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: [{ role: "user", parts: prompt }] }),
+      });
+      const data = await res.json();
+      if (!res.ok || data.status !== "success") {
+        throw new Error(data.detail || data.message || "Error desconocido");
+      }
+      handleContextoChange(campo, data.reply);
+      toast.success(t('toasts.contextoGrupo.textoGenerado', {defaultValue: "Texto generado. Revísalo y edítalo antes de guardar."}));
+    } catch (err: any) {
+      toast.error(err.message || t('toasts.contextoGrupo.errorGenerarIA', {defaultValue: "Error al generar el texto con IA."}));
+    } finally {
+      setGenerandoIA((prev) => ({ ...prev, [campo]: false }));
+    }
+  };
+
+  // Enriquecimiento del botón de "Características del alumnado" con
+  // agregados de profesional_ledger (orientación profesional), si hay curso
+  // cargado — degrada con gracia a solo Rasgos rápidos si no lo hay.
+  const profesionalLedger = cursoData?.profesional_ledger || {};
+  const datosAlumnadoExtra = (() => {
+    if (Object.keys(profesionalLedger).length === 0) return [];
+    const total = Object.keys(profesionalLedger).length;
+    const topMotivo = countField(profesionalLedger, "motivo_eleccion")[0];
+    const topAptitud = countField(profesionalLedger, "aptitud_principal")[0];
+    const nConExperiencia = Object.values(profesionalLedger).filter(
+      (d: any) => d.experiencia_previa && d.experiencia_previa !== "Sin experiencia"
+    ).length;
+    const nErasmus = countBoolean(profesionalLedger, "interes_erasmus");
+    return [
+      `Datos agregados de orientación profesional (${total} fichas registradas): ` +
+      [
+        topMotivo ? `motivo de elección más frecuente "${topMotivo[0]}"` : null,
+        topAptitud ? `aptitud principal más frecuente "${topAptitud[0]}"` : null,
+        `${nConExperiencia} de ${total} con experiencia laboral previa`,
+        `${nErasmus} con interés en movilidad Erasmus+`,
+      ].filter(Boolean).join(", ") + ".",
+    ];
+  })();
+
   return (
     <>
       <div className="space-y-6 animate-in fade-in duration-500">
@@ -221,7 +314,13 @@ export function ContextoTab() {
             onToggle={(id) => toggleRasgo("rasgos_entorno", rasgos_entorno, id)}
           />
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.contexto.entornoGeograficoLabel', {defaultValue: 'Entorno geográfico y sociocultural'})}</label>
+            <div className="flex items-center justify-between mb-1">
+              <label className="text-body font-semibold text-foreground block">{t('campos.contexto.entornoGeograficoLabel', {defaultValue: 'Entorno geográfico y sociocultural'})}</label>
+              <IaButton
+                loading={!!generandoIA.entorno_geografico}
+                onClick={() => handleGenerarIA("entorno_geografico", "Entorno geográfico y sociocultural", RASGOS_ENTORNO, rasgos_entorno)}
+              />
+            </div>
             <textarea
               value={config_contexto.entorno_geografico || ""}
               onChange={e => handleContextoChange("entorno_geografico", e.target.value)}
@@ -236,7 +335,13 @@ export function ContextoTab() {
             onToggle={(id) => toggleRasgo("rasgos_socioeconomico", rasgos_socioeconomico, id)}
           />
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.contexto.entornoSocioeconomicoLabel', {defaultValue: 'Entorno socioeconómico y productivo'})}</label>
+            <div className="flex items-center justify-between mb-1">
+              <label className="text-body font-semibold text-foreground block">{t('campos.contexto.entornoSocioeconomicoLabel', {defaultValue: 'Entorno socioeconómico y productivo'})}</label>
+              <IaButton
+                loading={!!generandoIA.entorno_socioeconomico}
+                onClick={() => handleGenerarIA("entorno_socioeconomico", "Entorno socioeconómico y productivo", RASGOS_SOCIOECONOMICO, rasgos_socioeconomico)}
+              />
+            </div>
             <textarea
               value={config_contexto.entorno_socioeconomico || ""}
               onChange={e => handleContextoChange("entorno_socioeconomico", e.target.value)}
@@ -251,7 +356,13 @@ export function ContextoTab() {
             onToggle={(id) => toggleRasgo("rasgos_escolar", rasgos_escolar, id)}
           />
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.contexto.contextoEscolarLabel', {defaultValue: 'Contexto escolar'})}</label>
+            <div className="flex items-center justify-between mb-1">
+              <label className="text-body font-semibold text-foreground block">{t('campos.contexto.contextoEscolarLabel', {defaultValue: 'Contexto escolar'})}</label>
+              <IaButton
+                loading={!!generandoIA.contexto_escolar}
+                onClick={() => handleGenerarIA("contexto_escolar", "Contexto escolar", RASGOS_CONTEXTO_ESCOLAR, rasgos_escolar)}
+              />
+            </div>
             <textarea
               value={config_contexto.contexto_escolar || ""}
               onChange={e => handleContextoChange("contexto_escolar", e.target.value)}
@@ -266,7 +377,13 @@ export function ContextoTab() {
             onToggle={(id) => toggleRasgo("rasgos_alumnado", rasgos_alumnado, id)}
           />
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.contexto.caracteristicasAlumnadoLabel', {defaultValue: 'Características del alumnado'})}</label>
+            <div className="flex items-center justify-between mb-1">
+              <label className="text-body font-semibold text-foreground block">{t('campos.contexto.caracteristicasAlumnadoLabel', {defaultValue: 'Características del alumnado'})}</label>
+              <IaButton
+                loading={!!generandoIA.caracteristicas_alumnado}
+                onClick={() => handleGenerarIA("caracteristicas_alumnado", "Características del alumnado", RASGOS_ALUMNADO, rasgos_alumnado, datosAlumnadoExtra)}
+              />
+            </div>
             <textarea
               value={config_contexto.caracteristicas_alumnado || ""}
               onChange={e => handleContextoChange("caracteristicas_alumnado", e.target.value)}
@@ -281,7 +398,13 @@ export function ContextoTab() {
             onToggle={(id) => toggleRasgo("rasgos_infraestructura", rasgos_infraestructura, id)}
           />
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.contexto.infraestructuraLabel', {defaultValue: 'Infraestructura y recursos educativos'})}</label>
+            <div className="flex items-center justify-between mb-1">
+              <label className="text-body font-semibold text-foreground block">{t('campos.contexto.infraestructuraLabel', {defaultValue: 'Infraestructura y recursos educativos'})}</label>
+              <IaButton
+                loading={!!generandoIA.infraestructura}
+                onClick={() => handleGenerarIA("infraestructura", "Infraestructura y recursos educativos", RASGOS_INFRAESTRUCTURA, rasgos_infraestructura)}
+              />
+            </div>
             <textarea
               value={config_contexto.infraestructura || ""}
               onChange={e => handleContextoChange("infraestructura", e.target.value)}
