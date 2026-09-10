@@ -430,6 +430,7 @@ def calcular_notas_jeg(al_id: str, df_calificaciones: list, df_indicadores: list
         notas_ce[id_ce] = (suma_ponderada_ce[id_ce] / peso_usado) if peso_usado > 0 else None
 
     suma_ponderada_ra_ord, peso_usado_ra_ord = {}, {}
+    failed_ces_by_ra = {}
     for ce_id, n_ce in notas_ce.items():
         if n_ce is None:
             continue
@@ -438,11 +439,26 @@ def calcular_notas_jeg(al_id: str, df_calificaciones: list, df_indicadores: list
             continue
         suma_ponderada_ra_ord[r_id] = suma_ponderada_ra_ord.get(r_id, 0) + n_ce * peso_ce[ce_id]
         peso_usado_ra_ord[r_id] = peso_usado_ra_ord.get(r_id, 0) + peso_ce[ce_id]
+        if n_ce < config["nota_aprobado"]:
+            failed_ces_by_ra[r_id] = failed_ces_by_ra.get(r_id, 0) + 1
 
+    # Tope de compensables (Decisión B de Motor A, trasladado -- Ítem 42 punto
+    # 6): solo aplica a la vía ordinaria, recuperación/extraordinaria saltan el
+    # CE y no tienen nada que "compensar".
     notas_ra_ordinario = {}
+    ra_tope_activo = {}
     for r_id in all_ra_ids:
         peso_usado = peso_usado_ra_ord.get(r_id, 0)
-        notas_ra_ordinario[r_id] = redondear(suma_ponderada_ra_ord[r_id] / peso_usado) if peso_usado > 0 else None
+        if peso_usado <= 0:
+            notas_ra_ordinario[r_id] = None
+            ra_tope_activo[r_id] = False
+            continue
+        n_ra = redondear(suma_ponderada_ra_ord[r_id] / peso_usado)
+        tope_activo = failed_ces_by_ra.get(r_id, 0) > config["max_compensables"] and n_ra >= config["nota_aprobado"]
+        if tope_activo:
+            n_ra = config["nota_aprobado"] - 0.1
+        notas_ra_ordinario[r_id] = n_ra
+        ra_tope_activo[r_id] = tope_activo
 
     # Recuperación / extraordinaria: Indicador -> RA DIRECTO, sin pasar por peso_ce.
     def notas_ra_directas(cals):
@@ -485,6 +501,7 @@ def calcular_notas_jeg(al_id: str, df_calificaciones: list, df_indicadores: list
         "nota_final": nota_final,
         "notas_ra_extraordinaria": notas_ra_extraordinaria,
         "nota_final_extraordinaria": nota_final_extraordinaria,
+        "ra_tope_activo": ra_tope_activo,
     }
 
 

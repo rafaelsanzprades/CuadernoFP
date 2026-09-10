@@ -293,9 +293,9 @@ export function DetalleAlumnadoTab() {
             const info = ra_info[ra_id];
             const r_data = ra_to_tri[ra_id];
             const nota_ra = notasCalc.notas_ra[ra_id] ?? null;
-            // Motor JEG no tiene "tope de compensables" (concepto propio de Motor A,
-            // Decisión B) -- pendiente decidir si se traslada, ver 00 IDEAS.md.
-            const topeActivo = false;
+            // Tope de compensables (Decisión B), trasladado a Motor JEG el 2026-09-10
+            // (Ítem 42 punto 6) -- solo se aplica a la vía ordinaria.
+            const topeActivo = notasCalc.ra_tope_activo[ra_id] || false;
 
             const prop = nota_ra === null ? 0 : Math.min(100.0, Math.max(0.0, (nota_ra / 5.0) * 100.0));
 

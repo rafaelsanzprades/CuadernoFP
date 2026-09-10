@@ -351,11 +351,27 @@ def _compute_grupal_final_rows(info_modulo: dict, df_al: pd.DataFrame,
         edad = str(int(_edad)) if pd.notna(_edad) and str(_edad) not in ("", "nan") else ""
         apells = str(al.get("Apellidos", ""))
         nombre = str(al.get("Nombre", ""))
-        nota_final_ord = (
-            notas_tri["1T"] * (pond_1t / total_pond) +
-            notas_tri["2T"] * (pond_2t / total_pond) +
-            notas_tri["3T"] * (pond_3t / total_pond)
-        )
+        # Nota final: se lee Nota_Final_FO directamente (ya calculada por Motor
+        # JEG en DetalleAlumnadoTab, Ítem 42 punto 6) en vez de recalcularla aquí
+        # por su cuenta -- antes este boletín hacía su propia media ponderada por
+        # tipo de instrumento, que podía no coincidir con la nota oficial que
+        # muestra el resto de la app para el mismo alumno. notas_tri se conserva
+        # tal cual, como desglose informativo por trimestre/tipo, no como fuente
+        # de la nota final.
+        nota_final_ord = None
+        if "Nota_Final_FO" in df_eval.columns:
+            raw_fo = df_eval.at[idx_ev, "Nota_Final_FO"]
+            if pd.notna(raw_fo):
+                try:
+                    nota_final_ord = float(raw_fo)
+                except (ValueError, TypeError):
+                    nota_final_ord = None
+        if nota_final_ord is None:
+            nota_final_ord = (
+                notas_tri["1T"] * (pond_1t / total_pond) +
+                notas_tri["2T"] * (pond_2t / total_pond) +
+                notas_tri["3T"] * (pond_3t / total_pond)
+            )
         nota_final_extra = None
         if "Nota_Final_FE" in df_eval.columns:
             raw_fe = df_eval.at[idx_ev, "Nota_Final_FE"]
