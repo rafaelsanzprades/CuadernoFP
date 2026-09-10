@@ -133,14 +133,17 @@ export interface SigadInfo {
 }
 
 // ---------------------------------------------------------------------------
-// Motor JEG (Indicador -> CE -> RA -> Módulo), decisión D de la Fase 2.
-// Aditivo: no sustituye a calcularNotas() (Motor A, arriba) en ninguno de sus
-// consumidores actuales (DetalleAlumnadoTab, AnalisisIndividualTab,
-// ProgresoRaTab, boletines backend) — vive en su propia pestaña "Modelo JEG"
-// de /instrumentos hasta que se decida una migración completa. Usa el
+// Motor JEG (Instrumento -> Indicador -> CE -> RA -> Módulo), decisión D de la
+// Fase 2. Desde el 2026-09-10 (Ítem 42 punto 6, Fases 0-4) es el motor de
+// calificación REAL de toda la app -- calcularNotas() (Motor A) ya no tiene
+// ningún consumidor activo, se mantiene solo por si hiciera falta revertir
+// (Fase 5 del plan, pendiente de decidir). El "modo automático"
+// (sincronizarIndicadorAuto()/setCalificacionAuto(), más abajo) crea y
+// gestiona Instrumento/Indicador solo al marcar una casilla Actividad×CE, para
+// que el gesto del profesor sea idéntico al que tenía con Motor A. Usa el
 // esquema ya existente (IndicadorSchema/InstrumentoSchema/CalificacionSchema
 // en types/index.ts), sin tocar peso_ce/peso_ra del RA/CE (mismos campos que
-// Motor A, para que ambos motores sigan siendo comparables entre sí).
+// tenía Motor A).
 // ---------------------------------------------------------------------------
 
 export interface NotasJEG {
@@ -160,6 +163,12 @@ export interface NotasJEG {
   // recuperación) — EvFE solo repite lo que hiciera falta, no todo el módulo.
   notas_ra_extraordinaria: Record<string, number | null>;
   nota_final_extraordinaria: number | null;
+  // Tope de compensables (Decisión B de Motor A, trasladada — Ítem 42 punto 6):
+  // true si el alumno tiene más CE suspensos que max_compensables en ese RA por
+  // la vía ordinaria, aunque la media ponderada saliera aprobada. Solo aplica a
+  // la vía ordinaria (con CE) -- recuperación/extraordinaria saltan el CE, no
+  // hay nada que "compensar" ahí.
+  ra_tope_activo: Record<string, boolean>;
 }
 
 function redondear(n_ra: number, config: ConfigRedondeo): number {
@@ -266,18 +275,32 @@ export function calcularNotasJEG(
 
   const sumaPonderadaRaOrd: Record<string, number> = {};
   const pesoUsadoRaOrd: Record<string, number> = {};
+  const failedCesByRa: Record<string, number> = {};
   Object.entries(notas_ce).forEach(([ce_id, n_ce]) => {
     if (n_ce === null) return;
     const r_id = ra_of_ce[ce_id];
     if (!r_id) return;
     sumaPonderadaRaOrd[r_id] = (sumaPonderadaRaOrd[r_id] || 0) + n_ce * peso_ce[ce_id];
     pesoUsadoRaOrd[r_id] = (pesoUsadoRaOrd[r_id] || 0) + peso_ce[ce_id];
+    if (n_ce < config.nota_aprobado) {
+      failedCesByRa[r_id] = (failedCesByRa[r_id] || 0) + 1;
+    }
   });
 
   const notas_ra_ordinario: Record<string, number | null> = {};
+  const ra_tope_activo: Record<string, boolean> = {};
   all_ra_ids.forEach((r_id) => {
     const pesoUsado = pesoUsadoRaOrd[r_id] || 0;
-    notas_ra_ordinario[r_id] = pesoUsado > 0 ? redondear(sumaPonderadaRaOrd[r_id] / pesoUsado, config) : null;
+    if (pesoUsado <= 0) {
+      notas_ra_ordinario[r_id] = null;
+      ra_tope_activo[r_id] = false;
+      return;
+    }
+    let n_ra = redondear(sumaPonderadaRaOrd[r_id] / pesoUsado, config);
+    const topeActivo = (failedCesByRa[r_id] || 0) > config.max_compensables && n_ra >= config.nota_aprobado;
+    if (topeActivo) n_ra = config.nota_aprobado - 0.1;
+    notas_ra_ordinario[r_id] = n_ra;
+    ra_tope_activo[r_id] = topeActivo;
   });
 
   // Recuperación / extraordinaria: Indicador -> RA DIRECTO, salta el CE del
@@ -315,7 +338,7 @@ export function calcularNotasJEG(
   });
   const nota_final_extraordinaria = notaFinalPonderada(notas_ra_extraordinaria, peso_ra, config);
 
-  return { notas_indicador, notas_ce, notas_ra_ordinario, notas_ra, nota_final, notas_ra_extraordinaria, nota_final_extraordinaria };
+  return { notas_indicador, notas_ce, notas_ra_ordinario, notas_ra, nota_final, notas_ra_extraordinaria, nota_final_extraordinaria, ra_tope_activo };
 }
 
 /** Nota numérica -> nivel SIGAD (IN/SU/BI/NT/SB) con color. null = sin evaluar. */

@@ -165,9 +165,12 @@ export function JegModeloTab() {
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
       <div className="bg-purple-500/10 border border-purple-500/30 rounded-xl p-4 text-body text-foreground/90">
-        <strong>Modelo JEG (experimental).</strong> Nivel Indicador→CE→RA→Módulo del autor real de PD+
-        (Javier Edo Gual) — convive con la matriz CE/instrumento de las pestañas de trimestre, no la
-        sustituye. Los boletines y el resto de la app todavía usan el motor CE/RA de siempre.
+        <strong>Modelo JEG.</strong> Nivel Instrumento→Indicador→CE→RA→Módulo del autor real de PD+
+        (Javier Edo Gual) — es el motor de calificación real de la app (boletines, PDF y actas incluidos).
+        En el uso normal no hace falta tocar nada aquí: al marcar una actividad sobre un CE en Instrumentos,
+        el Indicador correspondiente se crea y se reparte el peso solo. Esta pantalla es para quien quiera
+        ajustar ese reparto a mano (varios indicadores por CE, pesos distintos) o revisar qué se ha
+        generado automáticamente.
       </div>
 
       {/* Indicadores por CE */}
