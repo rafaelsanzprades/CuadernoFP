@@ -34,12 +34,18 @@ def generar_pdf_boletin_individual(
     df_ud: pd.DataFrame = None,
     df_pr: pd.DataFrame = None,
     escalas_evaluacion: list = None,
-    config_redondeo: dict = None
+    config_redondeo: dict = None,
+    df_indicadores: pd.DataFrame = None,
+    df_instr: pd.DataFrame = None,
+    df_calificaciones: pd.DataFrame = None,
 ):
     if info_fechas is None: info_fechas = {}
     if planning_ledger is None: planning_ledger = {}
     if df_ud is None: df_ud = pd.DataFrame()
     if df_pr is None: df_pr = pd.DataFrame()
+    if df_indicadores is None: df_indicadores = pd.DataFrame()
+    if df_instr is None: df_instr = pd.DataFrame()
+    if df_calificaciones is None: df_calificaciones = pd.DataFrame()
     buffer = io.BytesIO()
     W, H = portrait(A4)
     left_m   = 2.0 * cm
@@ -180,14 +186,13 @@ def generar_pdf_boletin_individual(
                 "prs": prs_found
             }
 
-        # Motor A (Indicador->CE->RA->Módulo) — ver helpers_catalogo.calcular_notas(), puerto de
-        # utils/calificaciones.ts. Sustituye al cálculo por trimestre (Motor B: 1T_Nota/2T_Nota/
-        # 3T_Nota, que ningún sitio del frontend escribe nunca — decisión C de la Fase 2, ver
-        # RF Ideas/propuesta-motor-calificacion-2026-08-16.md).
-        from helpers_catalogo import calcular_notas
-        evRow_dict = df_eval.loc[idx_ev].to_dict()
-        notas_calc = calcular_notas(
-            evRow_dict, df_ra.to_dict("records"), df_ce.to_dict("records"), df_act.to_dict("records"),
+        # Motor JEG, modo automático (Ítem 42 punto 6) — ver
+        # helpers_catalogo.calcular_notas_jeg(), puerto de calcularNotasJEG() en
+        # utils/calificaciones.ts. Sustituye al antiguo Motor A (calcular_notas()).
+        from helpers_catalogo import calcular_notas_jeg
+        notas_calc = calcular_notas_jeg(
+            al_id, df_calificaciones.to_dict("records"), df_indicadores.to_dict("records"),
+            df_instr.to_dict("records"), df_ce.to_dict("records"), df_ra.to_dict("records"),
             config_redondeo
         )
 
@@ -424,7 +429,8 @@ def generar_pdf_boletin_individual(
 
 def generar_docx_boletin_individual(info_modulo, al_id, df_al, df_eval, df_act, df_ce, df_ra, df_feoe,
                                      info_fechas=None, planning_ledger=None, df_ud=None, df_pr=None,
-                                     escalas_evaluacion=None, config_redondeo=None):
+                                     escalas_evaluacion=None, config_redondeo=None,
+                                     df_indicadores=None, df_instr=None, df_calificaciones=None):
     """Versión .docx editable, misma fórmula de ponderación que el PDF, sin
     la barra gráfica (se sustituye por el % en texto)."""
     from datetime import timedelta
@@ -434,6 +440,9 @@ def generar_docx_boletin_individual(info_modulo, al_id, df_al, df_eval, df_act, 
     if planning_ledger is None: planning_ledger = {}
     if df_ud is None: df_ud = pd.DataFrame()
     if df_pr is None: df_pr = pd.DataFrame()
+    if df_indicadores is None: df_indicadores = pd.DataFrame()
+    if df_instr is None: df_instr = pd.DataFrame()
+    if df_calificaciones is None: df_calificaciones = pd.DataFrame()
 
     doc = new_document(landscape=False)
     add_title(doc, "Informe Individual de Evaluación", info_modulo.get("modulo", "Módulo"))
@@ -474,10 +483,12 @@ def generar_docx_boletin_individual(info_modulo, al_id, df_al, df_eval, df_act, 
                         uds_por_tri[m_key].add(ud)
                     curr += timedelta(days=1)
 
-        from helpers_catalogo import calcular_notas
-        evRow_dict = df_eval.loc[idx_ev].to_dict()
-        notas_calc = calcular_notas(
-            evRow_dict, df_ra.to_dict("records"), df_ce.to_dict("records"), df_act.to_dict("records"),
+        # Motor JEG, modo automático (Ítem 42 punto 6) — ver
+        # helpers_catalogo.calcular_notas_jeg(). Sustituye al antiguo Motor A.
+        from helpers_catalogo import calcular_notas_jeg
+        notas_calc = calcular_notas_jeg(
+            al_id, df_calificaciones.to_dict("records"), df_indicadores.to_dict("records"),
+            df_instr.to_dict("records"), df_ce.to_dict("records"), df_ra.to_dict("records"),
             config_redondeo
         )
 

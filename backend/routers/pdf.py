@@ -102,6 +102,11 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
         df_feoe = get_df(curso_data, "df_feoe")
         df_ud = get_df(module_data, "df_ud")
         df_pr = get_df(module_data, "df_pr")
+        # Motor JEG, modo automático (Ítem 42 punto 6) -- ver
+        # helpers_catalogo.calcular_notas_jeg() / DetalleAlumnadoTab.tsx.
+        df_indicadores = get_df(module_data, "df_indicadores")
+        df_instr = get_df(module_data, "df_instr")
+        df_calificaciones = get_df(curso_data, "df_calificaciones")
         plano_clase = curso_data.get("plano_clase") or {}
         escalas_evaluacion = module_data.get("escalas_evaluacion") or []
         config_redondeo = module_data.get("config_redondeo") or {}
@@ -140,7 +145,8 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 from pdf_boletin_individual import generar_docx_boletin_individual
                 docx_bytes = generar_docx_boletin_individual(info_modulo, al_id, df_al, df_eval, df_act, df_ce, df_ra,
                                                                df_feoe, info_fechas, planning_ledger, df_ud, df_pr,
-                                                               escalas_evaluacion, config_redondeo)
+                                                               escalas_evaluacion, config_redondeo,
+                                                               df_indicadores, df_instr, df_calificaciones)
             elif type == "alumnado_ubicacion":
                 from pdf_alumnado_ubicacion import generar_docx_alumnado_ubicacion
                 docx_bytes = generar_docx_alumnado_ubicacion(info_modulo, plano_clase, df_al)
@@ -167,7 +173,8 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 docx_bytes = generar_docx_refuerzo(
                     info_modulo, al_id, df_al, df_eval.to_dict("records"), df_ra.to_dict("records"),
                     df_ce.to_dict("records"), df_act.to_dict("records"), config_redondeo,
-                    curso_data.get("df_autoevaluacion") or []
+                    curso_data.get("df_autoevaluacion") or [],
+                    df_calificaciones.to_dict("records"), df_indicadores.to_dict("records"), df_instr.to_dict("records")
                 )
 
             if docx_bytes is not None:
@@ -207,7 +214,8 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 df_act=df_act, df_ce=df_ce, df_ra=df_ra, df_feoe=df_feoe,
                 info_fechas=info_fechas, planning_ledger=planning_ledger,
                 df_ud=df_ud, df_pr=df_pr, escalas_evaluacion=escalas_evaluacion,
-                config_redondeo=config_redondeo
+                config_redondeo=config_redondeo,
+                df_indicadores=df_indicadores, df_instr=df_instr, df_calificaciones=df_calificaciones
             )
         elif type == "alumnado_ubicacion":
             buffer = generar_pdf_alumnado_ubicacion(info_modulo, plano_clase, df_al)
@@ -233,7 +241,8 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             buffer = generar_pdf_refuerzo(
                 info_modulo, al_id, df_al, df_eval.to_dict("records"), df_ra.to_dict("records"),
                 df_ce.to_dict("records"), df_act.to_dict("records"), config_redondeo,
-                curso_data.get("df_autoevaluacion") or []
+                curso_data.get("df_autoevaluacion") or [],
+                df_calificaciones.to_dict("records"), df_indicadores.to_dict("records"), df_instr.to_dict("records")
             )
         elif type in ["programacion_suficiente_tpl", "programacion_minima_tpl", "programacion_jeg"]:
             if type == "programacion_minima_tpl":
