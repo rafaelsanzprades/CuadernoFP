@@ -7,7 +7,7 @@ import { Printer, FileText, Users, Award, Briefcase, GraduationCap, Target, BarC
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { resolveDescRa, loadCatalogForModule } from '@/services/catalogCache';
 import { isAlumnoActivo } from '@/utils/alumnado';
-import { calcularNotas, DEFAULT_CONFIG_REDONDEO } from '@/utils/calificaciones';
+import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO } from '@/utils/calificaciones';
 import { useTranslation } from 'react-i18next';
 
 export const BoletinesTab = () => {
@@ -24,13 +24,14 @@ export const BoletinesTab = () => {
   const currentStudent = activeStudents.find(s => s.ID === selectedStudentId);
   const df_ra = moduleData?.df_ra || [];
   const df_ce = moduleData?.df_ce || [];
-  const df_act = moduleData?.df_act || [];
-  const df_eval = cursoData?.df_eval || [];
   const info_modulo = moduleData?.info_modulo || {};
   const config_redondeo = { ...DEFAULT_CONFIG_REDONDEO, ...(moduleData?.config_redondeo || {}) };
+  // Motor JEG, modo automático (Ítem 42 punto 6) -- ver DetalleAlumnadoTab.tsx.
+  const df_instr = moduleData?.df_instr || [];
+  const df_indicadores = (moduleData as any)?.df_indicadores || [];
+  const df_calificaciones = (cursoData as any)?.df_calificaciones || [];
 
-  const evRow = df_eval.find((e: any) => e.ID === currentStudent?.ID) || {};
-  const notasCalc = calcularNotas(evRow, df_ra, df_ce, df_act, config_redondeo);
+  const notasCalc = calcularNotasJEG(currentStudent?.ID || "", df_calificaciones, df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
 
   const radarData = df_ra.map((ra: ResultadoAprendizaje, idx: number) => ({
     subject: `RA ${idx + 1}`,

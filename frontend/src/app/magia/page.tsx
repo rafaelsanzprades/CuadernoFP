@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/Button";
 import { useAppStore } from "@/store/useAppStore";
 import { Alumnado } from "@/types";
 import { isAlumnoActivo } from "@/utils/alumnado";
-import { calcularNotas, DEFAULT_CONFIG_REDONDEO, getSigadInfo } from "@/utils/calificaciones";
+import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, getSigadInfo } from "@/utils/calificaciones";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Skeleton } from "@/components/ui/Skeleton";
@@ -207,8 +207,11 @@ export default function MagiaPage() {
     const df_eval = cursoData?.df_eval || [];
     const df_ra = moduleData?.df_ra || [];
     const df_ce = moduleData?.df_ce || [];
-    const df_act = moduleData?.df_act || [];
     const config_redondeo = { ...DEFAULT_CONFIG_REDONDEO, ...(moduleData?.config_redondeo || {}) };
+    // Motor JEG, modo automático (Ítem 42 punto 6) -- ver DetalleAlumnadoTab.tsx.
+    const df_instr = moduleData?.df_instr || [];
+    const df_indicadores = (moduleData as any)?.df_indicadores || [];
+    const df_calificaciones = (cursoData as any)?.df_calificaciones || [];
 
     const activeAl = df_al.filter(isAlumnoActivo);
     activeAl.sort((a: Alumnado, b: Alumnado) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
@@ -254,8 +257,7 @@ export default function MagiaPage() {
 
     // Hoja 3: Consecución de RA (%), con leyenda de descripciones al principio
     const rowsRa = activeAl.map((al: any) => {
-      const evRow = df_eval.find((e: any) => e.ID === al.ID) || {};
-      const notasCalc = calcularNotas(evRow, df_ra, df_ce, df_act, config_redondeo);
+      const notasCalc = calcularNotasJEG(al.ID, df_calificaciones, df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
       const row: Record<string, any> = { ID: al.ID, Apellidos: al.Apellidos || "", Nombre: al.Nombre || "" };
       df_ra.forEach((ra: any, idx: number) => {
         const v = notasCalc.notas_ra[ra.id_ra];
