@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { useAppStore } from "@/store/useAppStore";
 import { resolveDescRa, loadCatalogForModule } from "@/services/catalogCache";
 import { isAlumnoActivo } from "@/utils/alumnado";
-import { calcularNotas, getSigadInfo, DEFAULT_CONFIG_REDONDEO } from "@/utils/calificaciones";
+import { calcularNotasJEG, getSigadInfo, DEFAULT_CONFIG_REDONDEO, setCalificacionAuto } from "@/utils/calificaciones";
 import { useTranslation } from "react-i18next";
 
 export const AnalisisIndividualTab = () => {
@@ -32,6 +32,10 @@ export const AnalisisIndividualTab = () => {
   const df_ce = moduleData?.df_ce || [];
   const df_ra = moduleData?.df_ra || [];
   const df_feoe = cursoData?.df_feoe || [];
+  // Motor JEG, modo automático (Ítem 42 punto 6) -- ver DetalleAlumnadoTab.tsx.
+  const df_instr = moduleData?.df_instr || [];
+  const df_indicadores = (moduleData as any)?.df_indicadores || [];
+  const df_calificaciones = (cursoData as any)?.df_calificaciones || [];
 
   if (activeAlumnado.length === 0) {
     return (
@@ -47,12 +51,25 @@ export const AnalisisIndividualTab = () => {
   const currentAl = activeAlumnado.find((al: any) => al.ID === selectedAlId) || {};
   const currentEv = df_eval.find((e: any) => e.ID === selectedAlId) || {};
 
-  // Real Note (Motor A — ver utils/calificaciones.ts, decisión A de la Fase 2)
-  const realCalc = calcularNotas(currentEv, df_ra, df_ce, df_act, config_redondeo);
+  // Motor JEG, modo automático (Ítem 42 punto 6, ver utils/calificaciones.ts)
+  const realCalc = calcularNotasJEG(selectedAlId, df_calificaciones, df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
   const realSigad = getSigadInfo(realCalc.nota_final);
 
-  // Simulated Note
-  const simCalc = calcularNotas(currentEv, df_ra, df_ce, df_act, config_redondeo, simVals);
+  // Nota simulada: igual que el override de Motor A, pero construido como un
+  // df_calificaciones temporal (nunca persistido) -- cada activity con valor
+  // simulado sobrescribe su Calificación en cada CE que evalúa.
+  const simDfCalificaciones = Object.entries(simVals).reduce((acc, [act_id, val]) => {
+    const act = df_act.find((a: any) => a.id_act === act_id);
+    if (!act) return acc;
+    let next = acc;
+    df_ce.forEach((ce: any) => {
+      if (act[ce.id_ce] === true) {
+        next = setCalificacionAuto(next, selectedAlId, act_id, `${act_id}-${ce.id_ce}`, val);
+      }
+    });
+    return next;
+  }, df_calificaciones);
+  const simCalc = calcularNotasJEG(selectedAlId, simDfCalificaciones, df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
   const simSigad = getSigadInfo(simCalc.nota_final);
 
   // Group activities by trimester for the simulator

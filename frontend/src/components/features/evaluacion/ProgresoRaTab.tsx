@@ -5,7 +5,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { resolveDescRa } from "@/services/catalogCache";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { isAlumnoActivo } from "@/utils/alumnado";
-import { calcularNotas, DEFAULT_CONFIG_REDONDEO } from "@/utils/calificaciones";
+import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO } from "@/utils/calificaciones";
 import { useTranslation } from "react-i18next";
 
 export function ProgresoRaTab() {
@@ -20,6 +20,10 @@ export function ProgresoRaTab() {
   const df_act = moduleData?.df_act || [];
   const df_ud = moduleData?.df_ud || [];
   const df_pr = moduleData?.df_pr || [];
+  // Motor JEG, modo automático (Ítem 42 punto 6) -- ver DetalleAlumnadoTab.tsx.
+  const df_instr = moduleData?.df_instr || [];
+  const df_indicadores = (moduleData as any)?.df_indicadores || [];
+  const df_calificaciones = (cursoData as any)?.df_calificaciones || [];
   const config_redondeo = { ...DEFAULT_CONFIG_REDONDEO, ...(moduleData?.config_redondeo || {}) };
   const info_fechas = cursoData?.info_fechas || {};
   const planning_ledger = planningLedger || {};
@@ -100,12 +104,8 @@ export function ProgresoRaTab() {
 
             const notasAlumnado: number[] = [];
             df_evaluable.forEach((al: any) => {
-              const evalData = df_eval.find((e: any) => e.ID === al.ID);
-              if (!evalData) return;
-              // Motor A (Indicador->CE->RA->Módulo) — ver utils/calificaciones.ts. Sustituye al
-              // cálculo por trimestre (Motor B, nunca alimentado: 1T_Nota/2T_Nota/3T_Nota no los
-              // escribe nada del frontend, decisión C de la Fase 2).
-              const nota_ra = calcularNotas(evalData, df_ra, df_ce, df_act, config_redondeo).notas_ra[ra_id];
+              // Motor JEG, modo automático (Ítem 42 punto 6, ver utils/calificaciones.ts).
+              const nota_ra = calcularNotasJEG(al.ID, df_calificaciones, df_indicadores, df_instr, df_ce, df_ra, config_redondeo).notas_ra[ra_id];
               if (nota_ra !== null && nota_ra !== undefined) notasAlumnado.push(nota_ra);
             });
 
