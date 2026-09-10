@@ -5,7 +5,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { Card } from "@/components/ui/Card";
 
-// ─── Ítem 12 (resto): evaluación del RA desarrollado en empresa (FCT/FEOE) ──
+// ─── Ítem 12 (resto): evaluación del RA desarrollado en empresa (FEOE) ──────
 // El tutor de empresa valora, para los CE que el profesor designe, del 1 al 4
 // (escala real del Anexo XI b) del Gobierno de Aragón: 1 Suspenso, 2
 // Aprobado, 3 Notable, 4 Sobresaliente). El profesor transcribe esos valores
@@ -41,7 +41,7 @@ const SCORE_OPTIONS = [
   { value: 4, label: "4 · Sobresaliente", color: "border-success text-success bg-success/10" },
 ];
 
-export function FctEmpresaTab() {
+export function FeoeEmpresaTab() {
   const { moduleData, cursoData, updateModuleData, updateCursoData } = useAppStore();
   const [selectedStudentId, setSelectedStudentId] = useState<string>("");
 
@@ -75,7 +75,7 @@ export function FctEmpresaTab() {
       ...currentInstr,
       {
         id_instrumento: ID_INSTRUMENTO_FEOE,
-        titulo: "Evaluación del tutor de empresa (FCT/FEOE)",
+        titulo: "Evaluación del tutor de empresa (FEOE)",
         tipo: "escala_valoracion",
         escala: "discreta_4",
         evaluacion: "Ev3",
@@ -162,17 +162,13 @@ export function FctEmpresaTab() {
     updateCursoData("df_calificaciones", next);
   };
 
-  if (ceDesignados.length === 0 && df_ce.length > 0) {
-    // Solo se muestra el estado vacío tras cargar el listado de configuración de abajo.
-  }
-
   return (
     <div className="space-y-6">
       <Card className="p-6 border-t-4 border-t-amber-500">
         <div className="flex items-start gap-3 mb-4">
           <Building2 className="w-6 h-6 text-amber-500 mt-1 shrink-0" />
           <div>
-            <h3 className="text-subheading font-bold text-foreground">Criterios designados para FCT/FEOE</h3>
+            <h3 className="text-subheading font-bold text-foreground">Criterios designados para FEOE</h3>
             <p className="text-muted text-body mt-1">
               Marca los CE que se evalúan en empresa (Anexo XI b) — el tutor de empresa los valora del 1 al 4 y tú transcribes el resultado más abajo, por alumno.
             </p>
