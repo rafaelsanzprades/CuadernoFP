@@ -91,7 +91,7 @@ export const CriterioEvaluacionSchema = z.object({
   peso_ce: z.number().optional(),
   is_dual: z.boolean().optional().nullable(),
   // Ítem 12 (resto): CE designado para ser evaluado por el tutor de empresa
-  // durante la FCT/FEOE (Anexo XI b), en vez de/además de en el aula.
+  // durante la FEOE (Anexo XI b), en vez de/además de en el aula.
   feoe: z.boolean().optional().nullable(),
 });
 export type CriterioEvaluacion = z.infer<typeof CriterioEvaluacionSchema>;
@@ -115,7 +115,7 @@ export const InstrumentoSchema = z.object({
   peso_global: z.number().optional().default(1),
   indicadores_vinculados: z.array(z.string()).optional().default([]),
   // Ítem 12 de la Fase 2: quién cumplimenta este instrumento — el tutor de
-  // empresa en fase dual/FCT, o el profesorado del centro (caso habitual).
+  // empresa en fase dual/FEOE, o el profesorado del centro (caso habitual).
   origen: z.enum(["centro", "empresa"]).optional().default("centro"),
   // Ítem 30 de la Fase 2 (modelo JEG): un instrumento "ordinario" sigue la
   // cadena normal Indicador->CE->RA. Uno de "recuperacion" (R1/R2/R3/RF, según

@@ -12,7 +12,7 @@ import { getSimulatedToday } from "@/utils/planningGenerator";
 import { AsistenciaTab } from "@/components/features/diario/AsistenciaTab";
 import { ProgresoRaTab } from "@/components/features/evaluacion/ProgresoRaTab";
 import { DetalleAlumnadoTab } from "@/components/features/evaluacion/DetalleAlumnadoTab";
-import { FctEmpresaTab } from "@/components/features/evaluacion/FctEmpresaTab";
+import { FeoeEmpresaTab } from "@/components/features/evaluacion/FeoeEmpresaTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -80,14 +80,14 @@ export default function SeguimientoPage() {
     { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.asistencia.label', {defaultValue: 'Asistencia'})}</span>, cleanLabel: t('tabs.seguimiento.asistencia.label', {defaultValue: 'Asistencia'}) },
     { id: "progreso-ra-ud", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.progreso-ra-ud.label', {defaultValue: 'Progreso de RA y UD'})}</span>, cleanLabel: t('tabs.seguimiento.progreso-ra-ud.label', {defaultValue: 'Progreso de RA y UD'}) },
     { id: "detalle", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.detalle.label', {defaultValue: 'Detalle por alumnado'})}</span>, cleanLabel: t('tabs.seguimiento.detalle.label', {defaultValue: 'Detalle por alumnado'}) },
-    { id: "fct-empresa", label: <span className="flex items-center gap-2"><Building2 className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.fctEmpresa.label', {defaultValue: 'FCT / Empresa'})}</span>, cleanLabel: t('tabs.seguimiento.fctEmpresa.label', {defaultValue: 'FCT / Empresa'}) },
+    { id: "feoe-empresa", label: <span className="flex items-center gap-2"><Building2 className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.feoeEmpresa.label', {defaultValue: 'FEOE / Empresa'})}</span>, cleanLabel: t('tabs.seguimiento.feoeEmpresa.label', {defaultValue: 'FEOE / Empresa'}) },
   ];
   const TAB_DESCRIPTIONS: Record<string, string> = {
     clases: t('tabs.seguimiento.clases.desc', {defaultValue: 'Diario de clases, sesiones lectivas y registro de contingencias.'}),
     asistencia: t('tabs.seguimiento.asistencia.desc', {defaultValue: 'Control de asistencia del alumnado.'}),
     'progreso-ra-ud': t('tabs.seguimiento.progreso-ra-ud.desc', {defaultValue: 'Grado de consecución de los resultados de aprendizaje y las unidades didácticas por trimestre.'}),
     detalle: t('tabs.seguimiento.detalle.desc', {defaultValue: 'Entrada de notas numéricas por alumnado, instrumento de evaluación y nivel de adquisición de RA.'}),
-    'fct-empresa': t('tabs.seguimiento.fctEmpresa.desc', {defaultValue: 'Evaluación del alumnado en la empresa durante la FCT/FEOE (Anexo XI b), transcrita por RA/CE.'}),
+    'feoe-empresa': t('tabs.seguimiento.feoeEmpresa.desc', {defaultValue: 'Evaluación del alumnado en la empresa durante la FEOE (Anexo XI b), transcrita por RA/CE.'}),
   };
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -449,9 +449,9 @@ export default function SeguimientoPage() {
                 </div>
               )}
 
-              {activeTab === 'fct-empresa' && (
+              {activeTab === 'feoe-empresa' && (
                 <div className="mt-4">
-                  <FctEmpresaTab />
+                  <FeoeEmpresaTab />
                 </div>
               )}
           </MotionWrapper>

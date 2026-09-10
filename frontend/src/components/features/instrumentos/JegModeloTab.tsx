@@ -38,11 +38,11 @@ const AGENTES = [
 ];
 
 // Ítem 12 de la Fase 2: distingue si el instrumento lo cumplimenta el
-// profesor del centro o el tutor de empresa (fase dual/FCT) — mismo campo
+// profesor del centro o el tutor de empresa (fase dual/FEOE) — mismo campo
 // origen que RF Ideas/propuesta-motor-calificacion-2026-08-16.md propone.
 const ORIGENES = [
   { id: "centro", label: "Centro educativo" },
-  { id: "empresa", label: "Empresa (FCT / dual)" },
+  { id: "empresa", label: "Empresa (FEOE / dual)" },
 ];
 
 // Ítem 30 de la Fase 2: procedimiento JEG. "Recuperación" (R1/R2/R3/RF, según

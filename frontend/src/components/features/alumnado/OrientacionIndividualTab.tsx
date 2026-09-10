@@ -396,7 +396,7 @@ export const OrientacionIndividualTab = () => {
                         { value: "Autónomo", label: "Autónomo" },
                         { value: "Prácticas", label: "Prácticas / becario" },
                         { value: "Beca", label: "Beca" },
-                        { value: "FEOE", label: "Contrato FEOE (FCT)" },
+                        { value: "FEOE", label: "Contrato FEOE" },
                       ])}
                       {renderSelect("valoracion_egresado", "Valoración global del egresado (1-5)", [
                         { value: "1", label: "1 - Muy baja" },
