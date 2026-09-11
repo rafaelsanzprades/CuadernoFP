@@ -8,11 +8,17 @@ export interface InstrumentoConfigData {
   agente?: string;
   recuperacion?: string;
   rubrica_id?: string;
+  id_ud?: string;
 }
 
 interface RubricaOption {
   id_rubrica: string;
   nombre: string;
+}
+
+interface UnidadOption {
+  id_ud: string;
+  desc_ud: string;
 }
 
 interface InstrumentoConfigModalProps {
@@ -23,9 +29,10 @@ interface InstrumentoConfigModalProps {
   config: InstrumentoConfigData;
   onChange: (field: keyof InstrumentoConfigData, value: string) => void;
   rubricas?: RubricaOption[];
+  unidadesDidacticas?: UnidadOption[];
 }
 
-export function InstrumentoConfigModal({ isOpen, onClose, instrumentoId, instrumentoDesc, config, onChange, rubricas = [] }: InstrumentoConfigModalProps) {
+export function InstrumentoConfigModal({ isOpen, onClose, instrumentoId, instrumentoDesc, config, onChange, rubricas = [], unidadesDidacticas = [] }: InstrumentoConfigModalProps) {
   const { t } = useTranslation();
   if (!isOpen) return null;
 
@@ -86,6 +93,20 @@ export function InstrumentoConfigModal({ isOpen, onClose, instrumentoId, instrum
               <option value="R2">{t('checks.instrumentos.recup_r2', {defaultValue: 'Recuperación 2 (R2)'})}</option>
               <option value="R3">{t('checks.instrumentos.recup_r3', {defaultValue: 'Recuperación 3 (R3)'})}</option>
               <option value="RF">{t('checks.instrumentos.recup_rf', {defaultValue: 'Recuperación final (RF)'})}</option>
+            </select>
+          </div>
+          <div>
+            <label className="text-body font-semibold mb-1 block">{t('campos.instrumentos.unidadDidactica', { defaultValue: 'Unidad didáctica' })}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.instrumentos.unidadDidacticaDescripcion', { defaultValue: 'A qué unidad didáctica pertenece este instrumento (para la tabla "Contenidos → UD").' })}</p>
+            <select
+              value={config.id_ud || ''}
+              onChange={(e) => onChange('id_ud', e.target.value)}
+              className="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-body text-white focus:outline-none focus:border-indigo-500"
+            >
+              <option value="">{t('campos.instrumentos.sinUnidadDidactica', { defaultValue: '-- Sin asignar --' })}</option>
+              {unidadesDidacticas.map((ud) => (
+                <option key={ud.id_ud} value={ud.id_ud}>{ud.id_ud} — {ud.desc_ud || ''}</option>
+              ))}
             </select>
           </div>
           <div>

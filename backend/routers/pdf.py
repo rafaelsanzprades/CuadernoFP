@@ -132,7 +132,7 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 docx_bytes = generar_docx_planificacion(info_modulo, df_ud, df_sgmt, daily_ledger, horario, info_fechas, calendar_notes)
             elif type == "matrices":
                 from pdf_matrices import generar_docx_matrices
-                docx_bytes = generar_docx_matrices(info_modulo, df_ra, df_ud)
+                docx_bytes = generar_docx_matrices(info_modulo, df_ra, df_ud, df_act)
             elif type in ("grupal_1t", "grupal_2t", "grupal_3t"):
                 from pdf_boletin_grupal import generar_docx_boletin_grupal
                 tri = type.split("_")[1].upper()
@@ -198,7 +198,7 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             daily_ledger = curso_data.get("daily_ledger", {})
             buffer = generar_pdf_planificacion(info_modulo, df_ud, df_sgmt, daily_ledger, horario, info_fechas, calendar_notes)
         elif type == "matrices":
-            buffer = generar_pdf_matrices(info_modulo, df_ra, df_ud)
+            buffer = generar_pdf_matrices(info_modulo, df_ra, df_ud, df_act)
         elif type == "grupal_1t":
             buffer = generar_pdf_boletin_grupal("1T", info_modulo, df_al, df_eval, df_act, fecha_corte, escalas_evaluacion)
         elif type == "grupal_2t":

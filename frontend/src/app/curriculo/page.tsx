@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { Award, BookOpen, Calculator, Check, ClipboardList, GraduationCap, Puzzle, Target, Settings , Info, FolderOpen, Grid, Wand2 } from "lucide-react";
+import { Award, BookOpen, Calculator, Check, ClipboardList, GraduationCap, Puzzle, Target, Settings , Info, FolderOpen, Grid, Wand2, Layers } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/Button";
 import { motion, AnimatePresence } from "framer-motion";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { RaOgMatrix } from "@/components/features/resultados/RaOgMatrix";
+import { ContenidosUdTab } from "@/components/features/curriculo/ContenidosUdTab";
 import { SessionTable } from "@/components/features/secuenciacion/SessionTable";
 import { TaskTable } from "@/components/features/secuenciacion/TaskTable";
 import { CompetenciaCPP } from "@/types/curriculum";
@@ -54,6 +55,7 @@ export default function MatricesPage() {
     { id: "ponderacion-ra-ce", label: t('tabs.curriculo.ponderacion-ra-ce.label', {defaultValue: 'Ponderación RA<-CE'}), cleanLabel: t('tabs.curriculo.ponderacion-ra-ce.label', {defaultValue: 'Ponderación RA<-CE'}), icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "unidades", label: t('tabs.curriculo.unidades.label', {defaultValue: 'Unidades didácticas'}), cleanLabel: t('tabs.curriculo.unidades.label', {defaultValue: 'Unidades didácticas'}), icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "competenciales", label: t('tabs.curriculo.competenciales.label', {defaultValue: 'Tareas competenciales'}), cleanLabel: t('tabs.curriculo.competenciales.label', {defaultValue: 'Tareas competenciales'}), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "contenidos-ud", label: t('tabs.curriculo.contenidosUd.label', {defaultValue: 'Contenidos → UD'}), cleanLabel: t('tabs.curriculo.contenidosUd.label', {defaultValue: 'Contenidos → UD'}), icon: <><span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
@@ -61,6 +63,7 @@ export default function MatricesPage() {
     'ponderacion-ra-ce': t('tabs.curriculo.ponderacion-ra-ce.desc', {defaultValue: 'Matriz de resultados de aprendizaje y criterios de evaluación, y su ponderación.'}),
     'unidades': t('tabs.curriculo.unidades.desc', {defaultValue: 'Definición de unidades didácticas o unidades de trabajo y secuenciación de sus sesiones.'}),
     'competenciales': t('tabs.curriculo.competenciales.desc', {defaultValue: 'Diseño y planificación de tareas y actividades competenciales.'}),
+    'contenidos-ud': t('tabs.curriculo.contenidosUd.desc', {defaultValue: 'Tabla de contenidos por unidad didáctica agrupados en bloques, con su relación con RA, objetivos generales, horas e instrumentos de evaluación.'}),
   };
 
   // Load catalog descriptions when module changes (for fallback resolution)
@@ -989,6 +992,9 @@ export default function MatricesPage() {
                 <RaOgMatrix />
               </div>
             )}
+
+            {/* ── Contenidos → UD ─────────────────────────────────────────────── */}
+            {activeTab === "contenidos-ud" && <ContenidosUdTab />}
 
 
 

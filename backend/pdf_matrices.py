@@ -27,10 +27,26 @@ def _draw_page_decorations(canv, doc):
     canv.restoreState()
 
 
+def _build_ra_to_og(info_modulo: dict) -> dict:
+    """RA -> lista de ids de OG a los que contribuye. `ra_og_mapping` está
+    indexado por posición de OG (mismo formato que usa el frontend en
+    RaOgMatrix.tsx), no por su id, así que hay que invertirlo aquí."""
+    ogs_raw = info_modulo.get("objetivos_generales", []) or []
+    ogs = [{"id": chr(97 + i), "desc": desc} for i, desc in enumerate(ogs_raw)]
+    mapping = info_modulo.get("ra_og_mapping", {}) or {}
+    ra_to_og: dict = {}
+    for idx, og in enumerate(ogs):
+        ra_ids = mapping.get(str(idx)) or mapping.get(idx) or []
+        for ra_id in ra_ids:
+            ra_to_og.setdefault(ra_id, []).append(og["id"])
+    return ra_to_og
+
+
 def generar_pdf_matrices(
     info_modulo: dict,
     df_ra: pd.DataFrame,
     df_ud: pd.DataFrame,
+    df_act: pd.DataFrame = None,
 ):
     buffer = io.BytesIO()
     W, H = landscape(A4)
@@ -268,13 +284,71 @@ def generar_pdf_matrices(
     else:
         elements.append(Paragraph("<i>No hay datos para mostrar la relación RA ↔ UD.</i>", norm_left))
 
+    # ═══════════════════════════════════════════════════════════
+    #  SECCIÓN 4: Contenidos → UD (bloque 5, Alcántara-Alabort)
+    # ═══════════════════════════════════════════════════════════
+    elements.append(Spacer(1, 20))
+    elements.append(Paragraph("Contenidos → UD", h2))
+
+    if not df_ud.empty:
+        act_df = df_act if df_act is not None else pd.DataFrame()
+        ra_to_og = _build_ra_to_og(info_modulo)
+
+        cud_header = [
+            Paragraph("<b>Bloque de contenidos</b>", smlB),
+            Paragraph("<b>Contenidos por UD</b>", smlB),
+            Paragraph("<b>RA</b>", smlB),
+            Paragraph("<b>Obj</b>", smlB),
+            Paragraph("<b>Horas</b>", smlB),
+            Paragraph("<b>EVAL.</b>", smlB),
+        ]
+        cud_data = [cud_header]
+
+        ra_ids_all = df_ra["id_ra"].tolist() if "id_ra" in df_ra.columns else []
+        for _, ud_row in df_ud.iterrows():
+            ras_ud = [ra_id for ra_id in ra_ids_all if float(ud_row.get(ra_id, 0) or 0) > 0]
+            ogs_ud = sorted(set(og_id for ra_id in ras_ud for og_id in ra_to_og.get(ra_id, [])))
+            if not act_df.empty and "id_ud" in act_df.columns:
+                evals_ud = act_df.loc[act_df["id_ud"] == ud_row.get("id_ud"), "id_act"].tolist() if "id_act" in act_df.columns else []
+            else:
+                evals_ud = []
+            cud_data.append([
+                Paragraph(str(ud_row.get("bloque_contenido") or "").strip() or "<i>Sin bloque asignado</i>", sml_left),
+                Paragraph(f"<b>{ud_row.get('id_ud', '')}</b> — {ud_row.get('desc_ud', '')}", sml_left),
+                Paragraph(", ".join(ras_ud) or "—", sml),
+                Paragraph(", ".join(f"OG{g}" for g in ogs_ud) or "—", sml),
+                Paragraph(f"{int(ud_row.get('horas_ud', 0) or 0)}", sml),
+                Paragraph(", ".join(evals_ud) or "sin asignar", sml),
+            ])
+
+        avail_w = W - left_m - right_m
+        cud_col_widths = [3.5 * cm, avail_w - 12.5 * cm, 2 * cm, 2 * cm, 1.5 * cm, 3.5 * cm]
+
+        cud_table = Table(cud_data, colWidths=cud_col_widths, repeatRows=1)
+        cud_table.setStyle(TableStyle([
+            ("BACKGROUND",    (0, 0), (-1, 0), colors.HexColor("#f0f0f0")),
+            ("TEXTCOLOR",     (0, 0), (-1, 0), colors.black),
+            ("FONTNAME",      (0, 0), (-1, 0), "Helvetica-Bold"),
+            ("LINEBELOW",     (0, 0), (-1, 0), 1.5, colors.HexColor("#222222")),
+            ("VALIGN",        (0, 0), (-1, -1), "MIDDLE"),
+            ("BOX",           (0, 0), (-1, -1), 1.5, colors.HexColor("#222222")),
+            ("GRID",          (0, 0), (-1, -1), 0.5, colors.HexColor("#bbbbbb")),
+            ("TOPPADDING",    (0, 0), (-1, -1), 3),
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
+            ("LEFTPADDING",   (0, 0), (-1, -1), 3),
+            ("RIGHTPADDING",  (0, 0), (-1, -1), 3),
+        ]))
+        elements.append(cud_table)
+    else:
+        elements.append(Paragraph("<i>No hay Unidades Didácticas definidas.</i>", norm_left))
+
     doc.build(elements)
     buffer.seek(0)
     return buffer
 
 
-def generar_docx_matrices(info_modulo, df_ra, df_ud):
-    """Versión .docx editable: tabla de RA + tabla cruzada RA x UD."""
+def generar_docx_matrices(info_modulo, df_ra, df_ud, df_act=None):
+    """Versión .docx editable: tabla de RA + tabla cruzada RA x UD + Contenidos -> UD."""
     from docx_helpers import new_document, add_title, add_meta_line, add_section_heading, add_table, doc_to_bytes
 
     doc = new_document(landscape=True)
@@ -322,6 +396,32 @@ def generar_docx_matrices(info_modulo, df_ra, df_ud):
                    col_widths_cm=[1.8, 1.5, 6] + [1.5] * len(ra_ids), total_row_bg="E8E8E8")
     else:
         doc.add_paragraph("No hay datos de Unidades Didácticas o RA definidos.")
+
+    add_section_heading(doc, "Contenidos → UD")
+    if not df_ud.empty:
+        act_df = df_act if df_act is not None else pd.DataFrame()
+        ra_to_og = _build_ra_to_og(info_modulo)
+        ra_ids_all = df_ra["id_ra"].tolist() if "id_ra" in df_ra.columns else []
+        rows = []
+        for _, ud_row in df_ud.iterrows():
+            ras_ud = [ra_id for ra_id in ra_ids_all if float(ud_row.get(ra_id, 0) or 0) > 0]
+            ogs_ud = sorted(set(og_id for ra_id in ras_ud for og_id in ra_to_og.get(ra_id, [])))
+            if not act_df.empty and "id_ud" in act_df.columns:
+                evals_ud = act_df.loc[act_df["id_ud"] == ud_row.get("id_ud"), "id_act"].tolist() if "id_act" in act_df.columns else []
+            else:
+                evals_ud = []
+            rows.append([
+                str(ud_row.get("bloque_contenido") or "").strip() or "Sin bloque asignado",
+                f"{ud_row.get('id_ud', '')} — {ud_row.get('desc_ud', '')}",
+                ", ".join(ras_ud) or "—",
+                ", ".join(f"OG{g}" for g in ogs_ud) or "—",
+                int(ud_row.get("horas_ud", 0) or 0),
+                ", ".join(evals_ud) or "sin asignar",
+            ])
+        add_table(doc, ["Bloque de contenidos", "Contenidos por UD", "RA", "Obj", "Horas", "EVAL."], rows,
+                   col_widths_cm=[3.5, 8, 2, 2, 1.5, 3.5])
+    else:
+        doc.add_paragraph("No hay Unidades Didácticas definidas.")
 
     return doc_to_bytes(doc)
 
