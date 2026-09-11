@@ -427,16 +427,28 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
               {['article_2', 'article_3', 'article_4', 'article_5', 'article_6', 'article_7', 'article_8', 'article_9'].map((artKey) => {
                 const content = selectedTituloObj.boa_articles?.[artKey];
                 if (!content) return null;
+                // Los artículos 5/6/9 tienen una vista estructurada (CPPS/CP+UC/OG)
+                // que solo un subconjunto de títulos tiene poblada todavía (p.ej.
+                // solo 2/141 para article_6_cps) -- si no existe o está vacía, cae
+                // al texto plano de `content` en vez de dejar la tarjeta sin nada.
+                const structuredKeyByArt: Record<string, string> = {
+                  article_5: 'article_5_cpps',
+                  article_6: 'article_6_cps',
+                  article_9: 'article_9_og',
+                };
+                const structuredKey = structuredKeyByArt[artKey];
+                const structuredArr = structuredKey ? (selectedTituloObj.boa_articles as any)?.[structuredKey] : null;
+                const hasStructured = Array.isArray(structuredArr) && structuredArr.length > 0;
                 return (
                   <Card key={artKey} className="overflow-hidden">
                     <div className="bg-foreground/5 px-6 py-4 border-b border-[var(--glass-border)]">
                       <h3 className="text-body font-bold text-foreground">{articleTitles[artKey] || artKey}</h3>
                     </div>
                     <div className="p-6 text-body text-foreground/80 whitespace-pre-wrap leading-relaxed">
-                      {/* Hide raw text when structured data exists */}
-                      {artKey !== 'article_5' && artKey !== 'article_6' && artKey !== 'article_9' && content}
+                      {/* Texto plano: siempre para los artículos sin vista estructurada, y como fallback para 5/6/9 cuando no hay datos estructurados */}
+                      {(!structuredKey || !hasStructured) && content}
                       {/* CPPS rows (Article 5) */}
-                      {artKey === 'article_5' && Array.isArray(selectedTituloObj.boa_articles?.article_5_cpps) && (
+                      {artKey === 'article_5' && hasStructured && (
                         <div className="mt-6 space-y-2">
                           {(selectedTituloObj.boa_articles as any).article_5_cpps.map((cpp: any) => (
                             <div key={cpp.id} className="flex items-start gap-3 p-3 rounded-lg border border-[var(--glass-border)] bg-foreground/5">
@@ -447,7 +459,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
                         </div>
                       )}
                       {/* CP rows (Article 6) */}
-                      {artKey === 'article_6' && Array.isArray((selectedTituloObj.boa_articles as any)?.article_6_cps) && (
+                      {artKey === 'article_6' && hasStructured && (
                         <div className="mt-6 space-y-4">
                           {(selectedTituloObj.boa_articles as any).article_6_cps.map((cp: any) => (
                             <div key={cp.id} className="rounded-lg border border-[var(--glass-border)] bg-foreground/5 overflow-hidden">
@@ -477,7 +489,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
                         </div>
                       )}
                       {/* OG rows (Article 9) */}
-                      {artKey === 'article_9' && Array.isArray(selectedTituloObj.boa_articles?.article_9_og) && (
+                      {artKey === 'article_9' && hasStructured && (
                         <div className="mt-6 space-y-2">
                           {(selectedTituloObj.boa_articles as any).article_9_og.map((og: any) => (
                             <div key={og.id} className="flex items-start gap-3 p-3 rounded-lg border border-[var(--glass-border)] bg-foreground/5">
