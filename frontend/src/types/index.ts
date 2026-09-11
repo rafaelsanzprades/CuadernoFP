@@ -93,6 +93,12 @@ export const CriterioEvaluacionSchema = z.object({
   // Ítem 12 (resto): CE designado para ser evaluado por el tutor de empresa
   // durante la FEOE (Anexo XI b), en vez de/además de en el aula.
   feoe: z.boolean().optional().nullable(),
+  // Nivel de complejidad del CE (modelo de Edo Gual, CONF_CE/CONF_EV): forma
+  // alternativa de fijar `peso_ce` a partir de un concepto pedagógico en vez
+  // de un número — ver repartoPonderado()/PESO_NIVEL_COMPLEJIDAD en
+  // utils/calificaciones.ts. No lo usa el motor de cálculo directamente,
+  // solo alimenta el botón "Repartir por nivel" de curriculo/page.tsx.
+  nivel_complejidad: z.enum(["basico", "intermedio", "avanzado"]).optional().nullable(),
 });
 export type CriterioEvaluacion = z.infer<typeof CriterioEvaluacionSchema>;
 
