@@ -44,14 +44,16 @@ export default function InstrumentosPage() {
     { id: "tri2", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri2')}</span>, cleanLabel: t('tabs.tri2') },
     { id: "tri3", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri3')}</span>, cleanLabel: t('tabs.tri3') },
     { id: "rubricas", label:  <span className="flex items-center gap-2"><BookMarked className="w-4 h-4 shrink-0" /> {t('tabs.instrumentos.rubricas.nav', {defaultValue: 'Rúbricas'})}</span>, cleanLabel: t('tabs.instrumentos.rubricas.nav', {defaultValue: 'Rúbricas'}) },
+    { id: "jeg", label:  <span className="flex items-center gap-2"><Settings2 className="w-4 h-4 shrink-0" /> {t('tabs.instrumentos.jeg.nav', {defaultValue: 'Modelo JEG'})}</span>, cleanLabel: t('tabs.instrumentos.jeg.nav', {defaultValue: 'Modelo JEG'}) },
   ];const [activeTab, setActiveTab] = useState("resumen");const activeTabCleanLabel = TABS.find(tab => tab.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    resumen: t('tabs.instrumentos.resumen.desc', {defaultValue: 'Visión global de los instrumentos de evaluación utilizados (RD 659/2023, Art. 136) y, más abajo, el modelo JEG por indicadores (motor de calificación real de la app).'}),
+    resumen: t('tabs.instrumentos.resumen.desc', {defaultValue: 'Visión global de los instrumentos de evaluación utilizados (RD 659/2023, Art. 136).'}),
     tri1: t('tabs.instrumentos.tri1.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 1er trimestre.'}),
     tri2: t('tabs.instrumentos.tri2.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 2º trimestre.'}),
     tri3: t('tabs.instrumentos.tri3.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 3er trimestre.'}),
     rubricas: t('tabs.instrumentos.rubricas.desc', {defaultValue: 'Rúbricas reutilizables: define criterios (que deben sumar 10 puntos entre todos) y niveles de desempeño, y asígnalas a cualquier instrumento desde su Configuración avanzada.'}),
+    jeg: t('tabs.instrumentos.jeg.desc', {defaultValue: 'Modelo JEG por indicadores: configuración del motor de calificación real de la app.'}),
   };
 
   const [isRecoveryModalOpen, setIsRecoveryModalOpen] = useState(false);
@@ -534,13 +536,6 @@ export default function InstrumentosPage() {
                 </table>
               </div>
             </Card>
-
-            <div className="flex items-center gap-3 pt-2">
-              <div className="h-px flex-1 bg-[var(--glass-border)]" />
-              <span className="text-caption text-muted uppercase tracking-wider">Modelo alternativo</span>
-              <div className="h-px flex-1 bg-[var(--glass-border)]" />
-            </div>
-            <JegModeloTab />
             </>
           )}
 
@@ -548,6 +543,7 @@ export default function InstrumentosPage() {
           {activeTab === "tri2" && renderTrimestreTab("2T", "2º trimestre")}
           {activeTab === "tri3" && renderTrimestreTab("3T", "3er trimestre")}
           {activeTab === "rubricas" && <GestionRubricasTab />}
+          {activeTab === "jeg" && <JegModeloTab />}
 
         {activeConfigActIdx !== null && df_act[activeConfigActIdx] && (
           <InstrumentoConfigModal
