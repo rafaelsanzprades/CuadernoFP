@@ -7,7 +7,7 @@ import { Printer, FileText, Users, Award, Briefcase, GraduationCap, Target, BarC
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { resolveDescRa, loadCatalogForModule } from '@/services/catalogCache';
 import { isAlumnoActivo } from '@/utils/alumnado';
-import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO } from '@/utils/calificaciones';
+import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, filtrarPorGev } from '@/utils/calificaciones';
 import { useTranslation } from 'react-i18next';
 
 export const BoletinesTab = () => {
@@ -31,7 +31,7 @@ export const BoletinesTab = () => {
   const df_indicadores = (moduleData as any)?.df_indicadores || [];
   const df_calificaciones = (cursoData as any)?.df_calificaciones || [];
 
-  const notasCalc = calcularNotasJEG(currentStudent?.ID || "", df_calificaciones, df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
+  const notasCalc = calcularNotasJEG(currentStudent?.ID || "", filtrarPorGev(df_calificaciones, df_instr, currentStudent?.gev), df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
 
   const radarData = df_ra.map((ra: ResultadoAprendizaje, idx: number) => ({
     subject: `RA ${idx + 1}`,

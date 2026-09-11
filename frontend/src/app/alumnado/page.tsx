@@ -24,6 +24,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
+import { GRUPOS_EVALUACION_DEFECTO } from "@/utils/calificaciones";
 
 import Link from "next/link";
 
@@ -43,7 +44,7 @@ function computeMilestoneDates(nacimiento?: string): { f16: string; f18: string 
 }
 
 export default function AlumnadoPage() {
-  const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData } = useAppStore();
+  const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, moduleData } = useAppStore();
   const [activeTab, setActiveTab] = useState("matricula");
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
@@ -135,6 +136,8 @@ export default function AlumnadoPage() {
   }
 
   const df_al = cursoData?.df_al || [];
+  const gruposEvaluacion: { id: string; nombre: string }[] =
+    ((moduleData as any)?.grupos_evaluacion?.length ? (moduleData as any).grupos_evaluacion : GRUPOS_EVALUACION_DEFECTO);
 
   const handleAddAlumnado = () => {
     const newAl = [...df_al];
@@ -329,6 +332,16 @@ export default function AlumnadoPage() {
                               >
                                 {ESTADOS_ALUMNO.map((estado) => (
                                   <option key={estado} value={estado} className={ESTADO_ALUMNO_COLOR[estado]}>{estado}</option>
+                                ))}
+                              </select>
+                              <select
+                                value={al.gev || "general"}
+                                onChange={(e) => handleUpdateAlumnado(idx, "gev", e.target.value)}
+                                title="Grupo de evaluación (GEv)"
+                                className="shrink-0 bg-transparent border border-transparent hover:border-[var(--glass-border)] rounded px-2 py-0.5 text-caption font-semibold text-muted focus:outline-none focus:ring-1 focus:ring-accent appearance-none cursor-pointer"
+                              >
+                                {gruposEvaluacion.map((g) => (
+                                  <option key={g.id} value={g.id}>{g.nombre}</option>
                                 ))}
                               </select>
                               {isMenor && (

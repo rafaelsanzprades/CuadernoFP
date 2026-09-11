@@ -19,6 +19,8 @@ const ALLOWED_PROGRAMACION_KEYS = [
   'escalas_evaluacion',
   // % instrumentos de evaluación por trimestre (tabla de criterios de calificación de PD-)
   'instrumentos_pct_trimestre',
+  // Grupos de evaluación (GEv) -- subgrupos de alumnado a efectos de evaluación
+  'grupos_evaluacion',
   // Indicadores del sistema de calificación por indicador
   'df_indicadores',
   // Rúbricas reutilizables (criterios + niveles de desempeño)
@@ -61,8 +63,6 @@ const ALLOWED_CURSO_KEYS = [
   'config_pesos_trim', 'config_asistencia',
   // Empresas y planificación
   'df_empresas', 'planning_ledger', 'plano_clase',
-  // Tutoría
-  'actuaciones_tutoria',
   // Contexto del grupo
   'rasgos_grupo',
   // Metadatos
@@ -380,7 +380,6 @@ export const fileManager = {
       calendar_notes: {},
       planning_ledger: {},
       plano_clase: {},
-      actuaciones_tutoria: [],
       __version__: 1,
     };
 

@@ -1,9 +1,10 @@
-﻿"use client";
-import { AlertTriangle, TrendingDown, Users, Calendar, Info, CheckCircle2, XCircle } from "lucide-react";
-import { useMemo } from "react";
+"use client";
+import { AlertTriangle, TrendingDown, Users, Calendar, CheckCircle2, XCircle } from "lucide-react";
+import { useMemo, useState, useEffect } from "react";
 import { Card } from "@/components/ui/Card";
 import { useAppStore } from "@/store/useAppStore";
 import { isAlumnoActivo } from "@/utils/alumnado";
+import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, filtrarPorGev } from "@/utils/calificaciones";
 
 /**
  * TAB "Alerta abandono" en /diario
@@ -14,7 +15,18 @@ import { isAlumnoActivo } from "@/utils/alumnado";
  * - <3 asistencias en las primeras 2 semanas
  * - Faltas reiteradas (>30% de faltas)
  * - Sin evaluación positiva en ningún RA
+ *
+ * Arreglado 2026-09-11: leía `cursoData.asistencia`/`cursoData.calificaciones`
+ * -- campos que no existen en el esquema real (siempre `{}`, así que nunca
+ * salía ninguna alerta) -- y `alumno.id`/`alumno.Apellido1`/`alumno.Apellido2`,
+ * que tampoco existen en AlumnadoSchema (`ID`, `Apellidos`). Ahora usa las
+ * mismas fuentes reales que el resto de la app: asistencia de la API
+ * (`GET /api/attendance/{activeModuleId}`, igual que AttendanceAccumulated.tsx)
+ * y Motor JEG (`calcularNotasJEG`, filtrado por GEv) para las notas.
  */
+
+type AttendanceStatus = "presente" | "falta" | "retraso" | null;
+interface AttendanceRecord { student_id: string; date_str: string; status: AttendanceStatus }
 
 interface AlumnoAlerta {
   id: string;
@@ -27,11 +39,24 @@ interface AlumnoAlerta {
 }
 
 export function AlertaAbandonoTab() {
-  const { cursoData } = useAppStore();
+  const { cursoData, moduleData, activeModuleId } = useAppStore();
+  const [attendanceData, setAttendanceData] = useState<AttendanceRecord[]>([]);
 
-  const alumnos = (cursoData as any)?.df_al || [];
-  const asistencia = (cursoData as any)?.asistencia || {};
-  const calificaciones = (cursoData as any)?.calificaciones || {};
+  useEffect(() => {
+    if (!activeModuleId) return;
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/attendance/${activeModuleId}`)
+      .then((res) => res.json())
+      .then((data) => setAttendanceData(Array.isArray(data) ? data : []))
+      .catch((err) => console.error("Error fetching attendance", err));
+  }, [activeModuleId]);
+
+  const alumnos = cursoData?.df_al || [];
+  const df_ra = moduleData?.df_ra || [];
+  const df_ce = moduleData?.df_ce || [];
+  const df_instr = (moduleData as any)?.df_instr || [];
+  const df_indicadores = (moduleData as any)?.df_indicadores || [];
+  const df_calificaciones = (cursoData as any)?.df_calificaciones || [];
+  const config_redondeo = { ...DEFAULT_CONFIG_REDONDEO, ...(moduleData?.config_redondeo || {}) };
 
   const alertas = useMemo<AlumnoAlerta[]>(() => {
     if (!alumnos.length) return [];
@@ -39,14 +64,14 @@ export function AlertaAbandonoTab() {
     return alumnos
       .filter(isAlumnoActivo)
       .map((alumno: any) => {
-        const id = alumno.id;
-        const asistAlumno = asistencia[id] || {};
-        const totalSesiones = Object.keys(asistAlumno).length;
-        const faltas = Object.values(asistAlumno).filter((v: any) => v === false || v === "F" || v === "falta").length;
+        const id = alumno.ID;
+        const registros = attendanceData.filter((r) => r.student_id === id);
+        const totalSesiones = registros.length;
+        const faltas = registros.filter((r) => r.status === "falta").length;
         const pctAsistencia = totalSesiones > 0 ? ((totalSesiones - faltas) / totalSesiones) * 100 : 100;
 
-        const califAlumno = calificaciones[id] || {};
-        const tieneAlgunaNotaPositiva = Object.values(califAlumno).some((v: any) => typeof v === "number" && v >= 5);
+        const notasCalc = calcularNotasJEG(id, filtrarPorGev(df_calificaciones, df_instr, alumno.gev), df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
+        const tieneAlgunaNotaPositiva = Object.values(notasCalc.notas_ra).some((v) => typeof v === "number" && v >= config_redondeo.nota_aprobado);
 
         let riesgo: "alto" | "medio" | "bajo" = "bajo";
         let motivo = "";
@@ -67,7 +92,7 @@ export function AlertaAbandonoTab() {
 
         return {
           id,
-          nombre: `${alumno.Apellido1 || ""} ${alumno.Apellido2 || ""}, ${alumno.Nombre || ""}`.trim(),
+          nombre: `${alumno.Apellidos || ""}, ${alumno.Nombre || ""}`.trim(),
           riesgo,
           motivo,
           faltas,
@@ -77,7 +102,7 @@ export function AlertaAbandonoTab() {
       })
       .filter((a: AlumnoAlerta) => a.riesgo !== "bajo")
       .sort((a: AlumnoAlerta, b: AlumnoAlerta) => (a.riesgo === "alto" ? -1 : 1));
-  }, [alumnos, asistencia, calificaciones]);
+  }, [alumnos, attendanceData, df_calificaciones, df_instr, df_indicadores, df_ce, df_ra, config_redondeo]);
 
   const stats = useMemo(() => {
     const total = alumnos.filter(isAlumnoActivo).length;
@@ -88,7 +113,6 @@ export function AlertaAbandonoTab() {
 
   return (
     <div className="space-y-6">
-      {/* Info */}
       {/* Estadísticas */}
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
         <Card className="p-4 flex items-center gap-3">
@@ -176,4 +200,3 @@ export function AlertaAbandonoTab() {
     </div>
   );
 }
-

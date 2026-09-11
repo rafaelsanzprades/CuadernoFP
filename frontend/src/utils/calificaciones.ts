@@ -269,17 +269,18 @@ export function repartoIgualitario(count: number, total: number = 100): number[]
   });
 }
 
-// Niveles de complejidad de CE (modelo de Edo Gual, CONF_CE/CONF_EV del
-// Excel de referencia): en vez de escribir un % a mano por CE, se clasifica
-// cada uno como Básico/Intermedio/Avanzado y el peso relativo (1/2/3) sale
-// de ahí -- un Avanzado pesa el triple que un Básico dentro del mismo RA. Un
-// CE sin nivel asignado se trata como Básico (peso 1): así, cuando ningún CE
-// de un RA tiene nivel, el reparto sale exactamente igual que
-// repartoIgualitario() -- mismo comportamiento por defecto que hoy.
-export const PESO_NIVEL_COMPLEJIDAD: Record<string, number> = {
-  basico: 1,
-  intermedio: 2,
-  avanzado: 3,
+// Relevancia de CE (inspirado en el "Nivel" de CONF_CE/CONF_EV de Edo Gual,
+// pero con una escala relativa a un punto neutro en vez de una escala
+// absoluta 1/2/3): en vez de escribir un % a mano por CE, cada uno parte de
+// "normal" (=, peso 1) salvo que se marque explícitamente "menos" (-, la
+// mitad) o "mas" (+, el doble). Un CE sin relevancia asignada cuenta como
+// "normal": así, cuando ningún CE de un RA tiene relevancia marcada, el
+// reparto sale exactamente igual que repartoIgualitario() -- mismo
+// comportamiento por defecto que hoy.
+export const PESO_RELEVANCIA_CE: Record<string, number> = {
+  menos: 0.5,
+  normal: 1,
+  mas: 2,
 };
 
 /**
@@ -306,6 +307,33 @@ export function repartoPonderado(pesos: number[], total: number = 100): number[]
     result[ordenPorResto[k].i]++;
   }
   return result;
+}
+
+// Grupos de evaluación (GEv, modelo de Edo Gual): subgrupos de alumnado a
+// efectos de evaluación -- pedido explícito de Rafael, tipificados con estos
+// 3 nombres literales (respeta las mayúsculas/minúsculas tal cual las dio).
+// "general" es el grupo implícito de cualquier alumno/instrumento sin GEv
+// asignado, así que un módulo sin usar esta función se comporta exactamente
+// igual que antes.
+export const GEV_DEFECTO = "general";
+export const GRUPOS_EVALUACION_DEFECTO: { id: string; nombre: string }[] = [
+  { id: "general", nombre: "General" },
+  { id: "pdevcontinua", nombre: "PDEvContinua" },
+  { id: "recuperacion", nombre: "Recuperación" },
+];
+
+/**
+ * Filtra `df_calificaciones` a solo las de instrumentos cuyo GEv coincide
+ * con el del alumno (ambos "general" si no tienen GEv asignado). Se envuelve
+ * aquí, en vez de tocar calcularNotasJEG(), para no cambiar su firma en los
+ * ~10 sitios que ya la llaman -- basta con pasarle el resultado de esta
+ * función en el parámetro `df_calificaciones` de siempre.
+ */
+export function filtrarPorGev(df_calificaciones: any[], df_instr: any[], alumnoGev?: string | null): any[] {
+  const gev = alumnoGev || GEV_DEFECTO;
+  const gevPorInstr: Record<string, string> = {};
+  df_instr.forEach((i: any) => { gevPorInstr[i.id_instrumento] = i.gev || GEV_DEFECTO; });
+  return df_calificaciones.filter((c: any) => (gevPorInstr[c.id_instrumento] || GEV_DEFECTO) === gev);
 }
 
 const TRI_A_EVALUACION: Record<string, string> = { "1T": "Ev1", "2T": "Ev2", "3T": "Ev3" };
