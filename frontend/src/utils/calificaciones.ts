@@ -269,6 +269,45 @@ export function repartoIgualitario(count: number, total: number = 100): number[]
   });
 }
 
+// Niveles de complejidad de CE (modelo de Edo Gual, CONF_CE/CONF_EV del
+// Excel de referencia): en vez de escribir un % a mano por CE, se clasifica
+// cada uno como Básico/Intermedio/Avanzado y el peso relativo (1/2/3) sale
+// de ahí -- un Avanzado pesa el triple que un Básico dentro del mismo RA. Un
+// CE sin nivel asignado se trata como Básico (peso 1): así, cuando ningún CE
+// de un RA tiene nivel, el reparto sale exactamente igual que
+// repartoIgualitario() -- mismo comportamiento por defecto que hoy.
+export const PESO_NIVEL_COMPLEJIDAD: Record<string, number> = {
+  basico: 1,
+  intermedio: 2,
+  avanzado: 3,
+};
+
+/**
+ * Reparte `total` proporcionalmente a los `pesos` dados (en vez de a partes
+ * iguales como repartoIgualitario), en números enteros que suman
+ * exactamente `total` -- redondeo hacia abajo por defecto, repartiendo el
+ * resto entre los que tenían la parte decimal más alta (método del resto
+ * mayor), para no acumular todo el redondeo en los primeros elementos.
+ */
+export function repartoPonderado(pesos: number[], total: number = 100): number[] {
+  if (pesos.length === 0) return [];
+  const sumaPesos = pesos.reduce((a, b) => a + b, 0);
+  if (sumaPesos <= 0) return repartoIgualitario(pesos.length, total);
+
+  const raw = pesos.map((p) => (p / sumaPesos) * total);
+  const floors = raw.map((r) => Math.floor(r));
+  const resto = Math.round(total - floors.reduce((a, b) => a + b, 0));
+  const ordenPorResto = raw
+    .map((r, i) => ({ i, frac: r - Math.floor(r) }))
+    .sort((a, b) => b.frac - a.frac);
+
+  const result = [...floors];
+  for (let k = 0; k < resto && k < ordenPorResto.length; k++) {
+    result[ordenPorResto[k].i]++;
+  }
+  return result;
+}
+
 const TRI_A_EVALUACION: Record<string, string> = { "1T": "Ev1", "2T": "Ev2", "3T": "Ev3" };
 
 /**

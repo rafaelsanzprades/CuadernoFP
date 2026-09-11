@@ -13,7 +13,7 @@ import { RaOgMatrix } from "@/components/features/resultados/RaOgMatrix";
 import { SessionTable } from "@/components/features/secuenciacion/SessionTable";
 import { TaskTable } from "@/components/features/secuenciacion/TaskTable";
 import { CompetenciaCPP } from "@/types/curriculum";
-import { repartoIgualitario } from "@/utils/calificaciones";
+import { repartoIgualitario, repartoPonderado, PESO_NIVEL_COMPLEJIDAD } from "@/utils/calificaciones";
 import toast from "react-hot-toast";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -557,6 +557,7 @@ export default function MatricesPage() {
                                       <tr className="text-muted border-b border-[var(--glass-border)]">
                                         <th className="pb-2 w-24">CE</th>
                                         <th className="pb-2 w-24">% CE</th>
+                                        <th className="pb-2 w-32">{t('tablas.curriculo.nivelComplejidad', {defaultValue: 'Nivel'})}</th>
                                         <th className="pb-2 w-16 text-center">FEOE</th>
                                         <th className="pb-2">{t('tablas.curriculo.criterioEvaluacion', {defaultValue: 'Criterio de evaluación'})}</th>
                                         <th className="pb-2 w-10"></th>
@@ -614,6 +615,34 @@ export default function MatricesPage() {
                                                 className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground focus:border-warning focus:outline-none"
                                               />
                                             </td>
+                                            <td className="py-2 pr-2">
+                                              <div className="flex gap-1">
+                                                {(["basico", "intermedio", "avanzado"] as const).map((niv) => {
+                                                  const activo = ce.nivel_complejidad === niv;
+                                                  const letra = niv === "basico" ? "B" : niv === "intermedio" ? "I" : "A";
+                                                  const titulo = niv === "basico" ? "Básico" : niv === "intermedio" ? "Intermedio" : "Avanzado";
+                                                  return (
+                                                    <button
+                                                      key={niv}
+                                                      type="button"
+                                                      title={titulo}
+                                                      onClick={() => {
+                                                        const newCe = [...df_ce];
+                                                        newCe[globalIdx] = { ...newCe[globalIdx], nivel_complejidad: activo ? null : niv };
+                                                        updateDataFrame("df_ce", newCe);
+                                                      }}
+                                                      className={`w-6 h-6 rounded text-caption font-semibold border transition-colors ${
+                                                        activo
+                                                          ? 'bg-warning/20 border-warning text-warning'
+                                                          : 'bg-background border-[var(--glass-border)] text-muted hover:border-warning/40'
+                                                      }`}
+                                                    >
+                                                      {letra}
+                                                    </button>
+                                                  );
+                                                })}
+                                              </div>
+                                            </td>
                                             <td className="py-2 text-center">
                                               <button
                                                 onClick={() => toggleCeDual(globalIdx, ra.id_ra)}
@@ -661,7 +690,7 @@ export default function MatricesPage() {
                                       })}
                                     </tbody>
                                   </table>
-                                  <div className="mt-3">
+                                  <div className="mt-3 flex items-center gap-4">
                                     <button
                                       onClick={() => {
                                         const newCe = [...df_ce];
@@ -681,6 +710,23 @@ export default function MatricesPage() {
                                       className="text-caption text-warning hover:text-warning font-semibold flex items-center gap-1"
                                     >
                                       <span>+</span> {t('botones.curriculo.anadirCeA', {id: ra.id_ra, defaultValue: `Añadir CE a ${ra.id_ra}`})}
+                                    </button>
+                                    <button
+                                      title="Recalcula el % de cada CE del RA a partir de su Nivel (Básico=1, Intermedio=2, Avanzado=3) — un CE sin nivel cuenta como Básico"
+                                      onClick={() => {
+                                        const newCe = [...df_ce];
+                                        const raCeIndexes = newCe.map((c: any, i: number) => c.id_ra === ra.id_ra ? i : -1).filter((i: number) => i !== -1);
+                                        if (raCeIndexes.length === 0) return;
+                                        const pesos = raCeIndexes.map((i) => PESO_NIVEL_COMPLEJIDAD[newCe[i].nivel_complejidad || "basico"]);
+                                        repartoPonderado(pesos, 100).forEach((share, i) => {
+                                          newCe[raCeIndexes[i]].peso_ce = share;
+                                        });
+                                        updateDataFrame("df_ce", newCe);
+                                        toast.success(t('toasts.curriculo.repartidoPorNivel', {defaultValue: 'Pesos recalculados a partir del Nivel de cada CE.'}));
+                                      }}
+                                      className="text-caption text-info hover:text-info font-semibold flex items-center gap-1"
+                                    >
+                                      <span>⟳</span> {t('botones.curriculo.repartirPorNivel', {defaultValue: 'Repartir por nivel'})}
                                     </button>
                                   </div>
                                 </div>
