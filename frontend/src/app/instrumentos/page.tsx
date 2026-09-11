@@ -555,10 +555,12 @@ export default function InstrumentosPage() {
               escala: df_act[activeConfigActIdx].escala,
               agente: df_act[activeConfigActIdx].agente,
               recuperacion: df_act[activeConfigActIdx].recuperacion,
-              rubrica_id: df_act[activeConfigActIdx].rubrica_id
+              rubrica_id: df_act[activeConfigActIdx].rubrica_id,
+              id_ud: df_act[activeConfigActIdx].id_ud
             }}
             onChange={(field, value) => handleUpdateAct(activeConfigActIdx, field, value)}
             rubricas={(moduleData?.df_rubricas as any) || []}
+            unidadesDidacticas={(moduleData?.df_ud as any) || []}
           />
         )}
           </MotionWrapper>

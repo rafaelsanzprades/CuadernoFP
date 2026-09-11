@@ -21,6 +21,11 @@ export const UnidadDidacticaSchema = z.object({
   desc_ud: z.string(),
   horas_ud: z.number(),
   ra_mappings: z.record(z.string(), z.any()).optional().nullable(),
+  // Ítem 5 (Alcántara-Alabort, bloque 5): agrupación libre de UD bajo un
+  // mismo bloque de contenidos, para la pestaña "Contenidos -> UD" y su PDF.
+  // Texto libre (mismo patrón que Instrumento.categoria) -- varias UD
+  // comparten bloque escribiendo el mismo texto, sin catálogo propio.
+  bloque_contenido: z.string().optional().nullable(),
 });
 export type UnidadDidactica = z.infer<typeof UnidadDidacticaSchema>;
 
