@@ -157,18 +157,34 @@ def fetch_description(url_slug):
     """Fetch the family description text from the '_descripcion' sub-page.
     The page renders several divs sharing the 'journal-content-article' class
     (empty placeholders plus a "related content" widget); the real
-    description is whichever one actually has the most paragraph text."""
-    soup = get_soup(f"{BASE_URL}/{url_slug}_descripcion")
-    if not soup:
-        return ""
-    containers = soup.find_all("div", class_="journal-content-article")
-    best_paragraphs = []
-    for container in containers:
-        paragraphs = [p.get_text(strip=True) for p in container.find_all("p")]
-        paragraphs = [p for p in paragraphs if p]
-        if sum(len(p) for p in paragraphs) > sum(len(p) for p in best_paragraphs):
-            best_paragraphs = paragraphs
-    return "\n\n".join(best_paragraphs)
+    description is whichever one actually has the most paragraph text.
+
+    INCUAL no es consistente con el slug de esta sub-página entre familias:
+    la mayoría usan `{slug}_descripcion` (sin tilde), pero al menos dos
+    familias más nuevas (transversales, inteligencia) la publicaron con tilde
+    y con guion en vez de guion bajo (`transversales-descripción`,
+    `inteligencia_descripción` -- verificado a mano en incual.educacion.gob.es
+    el 2026-09-11, devolvían 404 con el patrón sin tilde). Se prueban las 3
+    variantes conocidas y se usa la primera que devuelva contenido real."""
+    candidates = [
+        f"{url_slug}_descripcion",
+        f"{url_slug}_descripción",
+        f"{url_slug}-descripción",
+    ]
+    for path in candidates:
+        soup = get_soup(f"{BASE_URL}/{path}")
+        if not soup:
+            continue
+        containers = soup.find_all("div", class_="journal-content-article")
+        best_paragraphs = []
+        for container in containers:
+            paragraphs = [p.get_text(strip=True) for p in container.find_all("p")]
+            paragraphs = [p for p in paragraphs if p]
+            if sum(len(p) for p in paragraphs) > sum(len(p) for p in best_paragraphs):
+                best_paragraphs = paragraphs
+        if best_paragraphs:
+            return "\n\n".join(best_paragraphs)
+    return ""
 
 def parse_crn(soup):
     """Extrae Centros de Referencia Nacional"""
