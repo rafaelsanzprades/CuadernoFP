@@ -130,11 +130,19 @@ export default function ProgresoPage() {
     }
   });
 
+  const reclamacionesPendientes = (cursoData?.df_reclamaciones || []).filter((r: any) => r.estado === "pendiente").length;
+
   const TABS = [
     { id: "resumen", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.resumen')}</>, cleanLabel: t('tabs.resumen') },
     { id: "estadisticas", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.estadisticas.label', {defaultValue: 'Estadísticas'})}</>, cleanLabel: t('tabs.calificaciones.estadisticas.label', {defaultValue: 'Estadísticas'}) },
     { id: "analisis", label: <><span className="inline-flex"><LineChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.analisis.label', {defaultValue: 'Análisis'})}</>, cleanLabel: t('tabs.calificaciones.analisis.label', {defaultValue: 'Análisis'}) },
-    { id: "historico", label: <><span className="inline-flex"><History className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'})}</>, cleanLabel: t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'}) },
+    { id: "historico", label: <><span className="inline-flex"><History className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'})}
+        {reclamacionesPendientes > 0 && (
+          <span className="ml-1.5 inline-flex items-center justify-center min-w-[1.1rem] h-[1.1rem] px-1 rounded-full bg-danger text-white text-[10px] font-bold leading-none">
+            {reclamacionesPendientes}
+          </span>
+        )}
+      </>, cleanLabel: t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'}) },
     { id: "boletines", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.boletines.label', {defaultValue: 'Boletines'})}</>, cleanLabel: t('tabs.calificaciones.boletines.label', {defaultValue: 'Boletines'}) },
   ];
 
@@ -429,6 +437,11 @@ export default function ProgresoPage() {
                   className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${historicoView === "reclamaciones" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
                 >
                   <AlertOctagon className="w-4 h-4" /> {t('tabs.calificaciones.reclamaciones.label', {defaultValue: 'Reclamaciones'})}
+                  {reclamacionesPendientes > 0 && (
+                    <span className={`inline-flex items-center justify-center min-w-[1.1rem] h-[1.1rem] px-1 rounded-full text-[10px] font-bold leading-none ${historicoView === "reclamaciones" ? "bg-background/25 text-background" : "bg-danger text-white"}`}>
+                      {reclamacionesPendientes}
+                    </span>
+                  )}
                 </button>
               </div>
               {historicoView === "historico" ? <HistorialCalificacionesTab /> : <ReclamacionesTab />}
