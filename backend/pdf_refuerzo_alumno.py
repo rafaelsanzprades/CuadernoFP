@@ -14,7 +14,7 @@ from reportlab.platypus import BaseDocTemplate, Frame, PageTemplate, Table, Tabl
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import cm
 
-from helpers_catalogo import calcular_notas_jeg, DEFAULT_CONFIG_REDONDEO
+from helpers_catalogo import calcular_notas_jeg, DEFAULT_CONFIG_REDONDEO, filtrar_por_gev
 
 
 def _nombre_alumno(al_id, df_al):
@@ -26,11 +26,17 @@ def _nombre_alumno(al_id, df_al):
     return f"{apellidos}, {nombre}".strip(", ") or al_id
 
 
-def _ce_pendientes(al_id, df_ra, df_ce, config_redondeo, df_autoevaluacion, df_calificaciones, df_indicadores, df_instr):
+def _gev_alumno(al_id, df_al):
+    if df_al.empty or al_id not in df_al.get("ID", pd.Series(dtype=str)).values:
+        return None
+    return df_al[df_al["ID"] == al_id].iloc[0].get("gev")
+
+
+def _ce_pendientes(al_id, df_ra, df_ce, config_redondeo, df_autoevaluacion, df_calificaciones, df_indicadores, df_instr, alumno_gev=None):
     """Devuelve la lista de CE pendientes (nota None o < nota_aprobado) del
     alumno, cada uno con su autoevaluacion asociada si existe. Motor JEG,
     modo automático (Ítem 42 punto 6) -- ver helpers_catalogo.calcular_notas_jeg()."""
-    resultado = calcular_notas_jeg(al_id, df_calificaciones, df_indicadores, df_instr, df_ce, df_ra, config_redondeo)
+    resultado = calcular_notas_jeg(al_id, filtrar_por_gev(df_calificaciones, df_instr, alumno_gev), df_indicadores, df_instr, df_ce, df_ra, config_redondeo)
     notas_ce = resultado["notas_ce"]
 
     auto_by_ce = {a.get("ce_id"): a for a in df_autoevaluacion if a.get("alumno_id") == al_id}
@@ -70,7 +76,7 @@ def generar_pdf_refuerzo(info_modulo, al_id, df_al, df_eval, df_ra, df_ce, df_ac
     config_redondeo = config_redondeo or DEFAULT_CONFIG_REDONDEO
     df_autoevaluacion = df_autoevaluacion or []
     pendientes = _ce_pendientes(al_id, df_ra, df_ce, config_redondeo, df_autoevaluacion,
-                                 df_calificaciones or [], df_indicadores or [], df_instr or [])
+                                 df_calificaciones or [], df_indicadores or [], df_instr or [], _gev_alumno(al_id, df_al))
 
     buffer = io.BytesIO()
     W, H = portrait(A4)
@@ -131,7 +137,7 @@ def generar_docx_refuerzo(info_modulo, al_id, df_al, df_eval, df_ra, df_ce, df_a
     config_redondeo = config_redondeo or DEFAULT_CONFIG_REDONDEO
     df_autoevaluacion = df_autoevaluacion or []
     pendientes = _ce_pendientes(al_id, df_ra, df_ce, config_redondeo, df_autoevaluacion,
-                                 df_calificaciones or [], df_indicadores or [], df_instr or [])
+                                 df_calificaciones or [], df_indicadores or [], df_instr or [], _gev_alumno(al_id, df_al))
 
     nombre = _nombre_alumno(al_id, df_al)
     doc = new_document(landscape=False)

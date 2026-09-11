@@ -5,7 +5,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { resolveDescRa } from "@/services/catalogCache";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { isAlumnoActivo } from "@/utils/alumnado";
-import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO } from "@/utils/calificaciones";
+import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, filtrarPorGev } from "@/utils/calificaciones";
 import { useTranslation } from "react-i18next";
 
 export function ProgresoRaTab() {
@@ -105,7 +105,7 @@ export function ProgresoRaTab() {
             const notasAlumnado: number[] = [];
             df_evaluable.forEach((al: any) => {
               // Motor JEG, modo automático (Ítem 42 punto 6, ver utils/calificaciones.ts).
-              const nota_ra = calcularNotasJEG(al.ID, df_calificaciones, df_indicadores, df_instr, df_ce, df_ra, config_redondeo).notas_ra[ra_id];
+              const nota_ra = calcularNotasJEG(al.ID, filtrarPorGev(df_calificaciones, df_instr, al.gev), df_indicadores, df_instr, df_ce, df_ra, config_redondeo).notas_ra[ra_id];
               if (nota_ra !== null && nota_ra !== undefined) notasAlumnado.push(nota_ra);
             });
 

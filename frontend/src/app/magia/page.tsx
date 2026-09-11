@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/Button";
 import { useAppStore } from "@/store/useAppStore";
 import { Alumnado } from "@/types";
 import { isAlumnoActivo } from "@/utils/alumnado";
-import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, getSigadInfo } from "@/utils/calificaciones";
+import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, getSigadInfo, filtrarPorGev } from "@/utils/calificaciones";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Skeleton } from "@/components/ui/Skeleton";
@@ -257,7 +257,7 @@ export default function MagiaPage() {
 
     // Hoja 3: Consecución de RA (%), con leyenda de descripciones al principio
     const rowsRa = activeAl.map((al: any) => {
-      const notasCalc = calcularNotasJEG(al.ID, df_calificaciones, df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
+      const notasCalc = calcularNotasJEG(al.ID, filtrarPorGev(df_calificaciones, df_instr, al.gev), df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
       const row: Record<string, any> = { ID: al.ID, Apellidos: al.Apellidos || "", Nombre: al.Nombre || "" };
       df_ra.forEach((ra: any, idx: number) => {
         const v = notasCalc.notas_ra[ra.id_ra];

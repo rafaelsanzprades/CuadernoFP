@@ -189,9 +189,10 @@ def generar_pdf_boletin_individual(
         # Motor JEG, modo automático (Ítem 42 punto 6) — ver
         # helpers_catalogo.calcular_notas_jeg(), puerto de calcularNotasJEG() en
         # utils/calificaciones.ts.
-        from helpers_catalogo import calcular_notas_jeg
+        from helpers_catalogo import calcular_notas_jeg, filtrar_por_gev
         notas_calc = calcular_notas_jeg(
-            al_id, df_calificaciones.to_dict("records"), df_indicadores.to_dict("records"),
+            al_id, filtrar_por_gev(df_calificaciones.to_dict("records"), df_instr.to_dict("records"), al.get("gev") if al is not None else None),
+            df_indicadores.to_dict("records"),
             df_instr.to_dict("records"), df_ce.to_dict("records"), df_ra.to_dict("records"),
             config_redondeo
         )
@@ -485,9 +486,10 @@ def generar_docx_boletin_individual(info_modulo, al_id, df_al, df_eval, df_act, 
 
         # Motor JEG, modo automático (Ítem 42 punto 6) — ver
         # helpers_catalogo.calcular_notas_jeg(). Sustituye al antiguo Motor A.
-        from helpers_catalogo import calcular_notas_jeg
+        from helpers_catalogo import calcular_notas_jeg, filtrar_por_gev
         notas_calc = calcular_notas_jeg(
-            al_id, df_calificaciones.to_dict("records"), df_indicadores.to_dict("records"),
+            al_id, filtrar_por_gev(df_calificaciones.to_dict("records"), df_instr.to_dict("records"), al.get("gev") if al is not None else None),
+            df_indicadores.to_dict("records"),
             df_instr.to_dict("records"), df_ce.to_dict("records"), df_ra.to_dict("records"),
             config_redondeo
         )

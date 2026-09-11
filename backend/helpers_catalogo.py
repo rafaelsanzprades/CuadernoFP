@@ -248,6 +248,17 @@ DEFAULT_CONFIG_REDONDEO = {
     "max_compensables": 0,
 }
 
+GEV_DEFECTO = "general"
+
+
+def filtrar_por_gev(df_calificaciones: list, df_instr: list, alumno_gev: str = None) -> list:
+    """Puerto de filtrarPorGev() en utils/calificaciones.ts -- ver ese fichero
+    para el porqué. Se envuelve aquí en vez de tocar calcular_notas_jeg()
+    para no cambiar su firma en los sitios que ya la llaman."""
+    gev = alumno_gev or GEV_DEFECTO
+    gev_por_instr = {i["id_instrumento"]: (i.get("gev") or GEV_DEFECTO) for i in df_instr}
+    return [c for c in df_calificaciones if gev_por_instr.get(c["id_instrumento"], GEV_DEFECTO) == gev]
+
 
 def calcular_notas_jeg(al_id: str, df_calificaciones: list, df_indicadores: list, df_instr: list,
                         df_ce: list, df_ra: list, config: dict = None) -> dict:

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Layers, Plus, Trash2, Target, ClipboardList, Sparkles, Grid3x3 } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { isAlumnoActivo } from "@/utils/alumnado";
-import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, repartoIgualitario } from "@/utils/calificaciones";
+import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, repartoIgualitario, filtrarPorGev, GRUPOS_EVALUACION_DEFECTO } from "@/utils/calificaciones";
 import { MultiSelectDropdown } from "@/components/ui/MultiSelectDropdown";
 import { useTranslation } from "react-i18next";
 
@@ -57,7 +57,7 @@ const PROCEDIMIENTOS = [
 
 export function JegModeloTab() {
   const { t } = useTranslation();
-  const { moduleData, cursoData, updateDataFrame, updateCursoData } = useAppStore();
+  const { moduleData, cursoData, updateDataFrame, updateCursoData, updateModuleData } = useAppStore();
   const df_ce = moduleData?.df_ce || [];
   const df_ra = moduleData?.df_ra || [];
   const df_indicadores = (moduleData as any)?.df_indicadores || [];
@@ -65,8 +65,20 @@ export function JegModeloTab() {
   const df_calificaciones = (cursoData as any)?.df_calificaciones || [];
   const df_al = cursoData?.df_al || [];
   const activos = df_al.filter(isAlumnoActivo);
+  const gruposEvaluacion: { id: string; nombre: string }[] =
+    ((moduleData as any)?.grupos_evaluacion?.length ? (moduleData as any).grupos_evaluacion : GRUPOS_EVALUACION_DEFECTO);
+  const [nuevoGev, setNuevoGev] = useState("");
+  const addGrupoEvaluacion = () => {
+    const nombre = nuevoGev.trim();
+    if (!nombre) return;
+    const id = nombre.toLowerCase().replace(/[^a-z0-9]+/g, "");
+    if (!id || gruposEvaluacion.some((g) => g.id === id)) return;
+    updateModuleData("grupos_evaluacion" as any, [...gruposEvaluacion, { id, nombre }]);
+    setNuevoGev("");
+  };
 
   const [selectedAlId, setSelectedAlId] = useState<string>(activos[0]?.ID || "");
+  const selectedAl = activos.find((a: any) => a.ID === selectedAlId);
   const config_redondeo = { ...DEFAULT_CONFIG_REDONDEO, ...(moduleData?.config_redondeo || {}) };
 
   const ceOptions = df_ce.filter((ce: any) => ce.id_ce).map((ce: any) => ({ id: ce.id_ce, label: ce.id_ce }));
@@ -159,7 +171,7 @@ export function JegModeloTab() {
   };
 
   const resultado = selectedAlId
-    ? calcularNotasJEG(selectedAlId, df_calificaciones, df_indicadores, df_instr, df_ce, df_ra, config_redondeo)
+    ? calcularNotasJEG(selectedAlId, filtrarPorGev(df_calificaciones, df_instr, selectedAl?.gev), df_indicadores, df_instr, df_ce, df_ra, config_redondeo)
     : null;
 
   return (
@@ -251,6 +263,32 @@ export function JegModeloTab() {
         )}
       </div>
 
+      {/* Grupos de evaluación (GEv) */}
+      <div className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] p-4">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-1">
+          <Grid3x3 className="w-5 h-5 text-purple-400" /> Grupos de evaluación (GEv)
+        </h2>
+        <p className="text-caption text-muted mb-3">
+          Subgrupos de alumnado (p.ej. pérdida de evaluación continua): un instrumento marcado con un GEv solo cuenta para el alumnado de ese mismo grupo. Asigna el GEv de cada alumno en Alumnado → Matrícula.
+        </p>
+        <div className="flex flex-wrap items-center gap-2">
+          {gruposEvaluacion.map((g) => (
+            <span key={g.id} className="text-caption font-semibold px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/30">{g.nombre}</span>
+          ))}
+          <input
+            type="text"
+            value={nuevoGev}
+            onChange={(e) => setNuevoGev(e.target.value)}
+            onKeyDown={(e) => { if (e.key === "Enter") addGrupoEvaluacion(); }}
+            placeholder="Nuevo grupo..."
+            className="w-32 bg-foreground/15 border border-[var(--glass-border)] rounded-full px-3 py-1 text-caption text-foreground focus:border-accent focus:outline-none"
+          />
+          <button onClick={addGrupoEvaluacion} className="text-caption text-accent hover:text-accent/80 flex items-center gap-1 font-semibold">
+            <Plus className="w-3.5 h-3.5" /> Añadir
+          </button>
+        </div>
+      </div>
+
       {/* Instrumentos JEG */}
       <div className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] p-4">
         <div className="flex items-center justify-between mb-4">
@@ -280,7 +318,7 @@ export function JegModeloTab() {
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-6 gap-2">
+                <div className="grid grid-cols-2 md:grid-cols-7 gap-2">
                   <select value={instr.tipo} onChange={(e) => updateInstrumento(instr.id_instrumento, "tipo", e.target.value)} className="bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-caption focus:border-accent focus:outline-none">
                     {TIPOS_INSTRUMENTO.map((tipo) => <option key={tipo.id} value={tipo.id}>{t(`checks.instrumentos.tipo_${tipo.id}`, {defaultValue: tipo.label})}</option>)}
                   </select>
@@ -298,6 +336,9 @@ export function JegModeloTab() {
                   </select>
                   <select value={instr.procedimiento || "ordinario"} onChange={(e) => updateInstrumento(instr.id_instrumento, "procedimiento", e.target.value)} title={t('tooltips.instrumentos.item30Procedimiento', {defaultValue: 'Ítem 30: procedimiento JEG (ordinario/recuperación/extraordinaria)'})} className="bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-caption focus:border-accent focus:outline-none">
                     {PROCEDIMIENTOS.map((p) => <option key={p.id} value={p.id}>{t(`checks.instrumentos.procedimiento_${p.id}`, {defaultValue: p.label})}</option>)}
+                  </select>
+                  <select value={instr.gev || "general"} onChange={(e) => updateInstrumento(instr.id_instrumento, "gev", e.target.value)} title="Grupo de evaluación (GEv): solo cuenta para alumnado de este mismo grupo" className="bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-caption focus:border-accent focus:outline-none">
+                    {gruposEvaluacion.map((g) => <option key={g.id} value={g.id}>{g.nombre}</option>)}
                   </select>
                 </div>
                 <div className="flex items-center gap-2">

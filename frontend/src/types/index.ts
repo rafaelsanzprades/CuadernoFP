@@ -54,24 +54,38 @@ export const AlumnadoSchema = z.object({
   Comentarios: z.string().optional().nullable(),
   email: z.string().optional().nullable(),
   Movil: z.string().optional().nullable(),
+  // Grupo de evaluación (GEv, modelo de Edo Gual): a qué subgrupo pertenece
+  // este alumno a efectos de evaluación (p.ej. pérdida de evaluación
+  // continua) -- sin valor, cuenta como "general". Ver
+  // moduleData.grupos_evaluacion y filtrarPorGev() en utils/calificaciones.ts.
+  gev: z.string().optional().nullable(),
 });
 export type Alumnado = z.infer<typeof AlumnadoSchema>;
 
-export const TutoriaActuacionSchema = z.object({
+// Registro de tutoría — fusión de los dos sistemas que convivían sin
+// comunicarse: `TutoriaActuacionSchema`/`actuaciones_tutoria` (definido en
+// el esquema con campos más completos -- horaInicio/horaFin/participantes --
+// pero código muerto, ningún componente lo leía ni escribía) y
+// `tutoria_ledger` (sin tipar, el que de verdad usa TutoriaTab.tsx). Se
+// queda uno solo, con la forma de almacenamiento del que sí estaba vivo
+// (un array de registros por alumno, indexado por su ID) y los campos más
+// completos del que estaba mejor pensado. Descartados al fusionar:
+// `alumnadoIds` (redundante, el alumno ya es la clave externa del ledger),
+// `tipo` (redundante con `ambito`, que ya distingue con quién es la
+// tutoría) y `desarrollo` (ya cubierto por `tema`, que en la UI real
+// siempre se ha etiquetado "Tema tratado / Desarrollo").
+export const TutoriaLedgerEntrySchema = z.object({
   id: z.string(),
   fecha: z.string(),
-  horaInicio: z.string(),
-  horaFin: z.string(),
-  alumnadoIds: z.array(z.string()),
+  horaInicio: z.string().optional(),
+  horaFin: z.string().optional(),
   ambito: z.string(),
   canal: z.string(),
-  tipo: z.string(),
+  participantes: z.string().optional(),
   tema: z.string(),
-  participantes: z.string(),
-  desarrollo: z.string(),
   acuerdos: z.string(),
 });
-export type TutoriaActuacion = z.infer<typeof TutoriaActuacionSchema>;
+export type TutoriaLedgerEntry = z.infer<typeof TutoriaLedgerEntrySchema>;
 
 export const ResultadoAprendizajeSchema = z.object({
   id_ra: z.string(),
@@ -93,12 +107,15 @@ export const CriterioEvaluacionSchema = z.object({
   // Ítem 12 (resto): CE designado para ser evaluado por el tutor de empresa
   // durante la FEOE (Anexo XI b), en vez de/además de en el aula.
   feoe: z.boolean().optional().nullable(),
-  // Nivel de complejidad del CE (modelo de Edo Gual, CONF_CE/CONF_EV): forma
-  // alternativa de fijar `peso_ce` a partir de un concepto pedagógico en vez
-  // de un número — ver repartoPonderado()/PESO_NIVEL_COMPLEJIDAD en
-  // utils/calificaciones.ts. No lo usa el motor de cálculo directamente,
-  // solo alimenta el botón "Repartir por nivel" de curriculo/page.tsx.
-  nivel_complejidad: z.enum(["basico", "intermedio", "avanzado"]).optional().nullable(),
+  // Relevancia del CE (inspirado en el "Nivel" de CONF_CE/CONF_EV de Edo
+  // Gual, pero con escala relativa a un punto neutro en vez de una escala
+  // absoluta): forma alternativa de fijar `peso_ce` a partir de un concepto
+  // en vez de un número — ver repartoPonderado()/PESO_RELEVANCIA_CE en
+  // utils/calificaciones.ts. "normal" (=) es el punto de partida de todo CE,
+  // "menos" (-) la mitad de peso, "mas" (+) el doble. No lo usa el motor de
+  // cálculo directamente, solo alimenta el botón "Repartir por relevancia"
+  // de curriculo/page.tsx.
+  relevancia_ce: z.enum(["menos", "normal", "mas"]).optional().nullable(),
 });
 export type CriterioEvaluacion = z.infer<typeof CriterioEvaluacionSchema>;
 
@@ -130,6 +147,14 @@ export const InstrumentoSchema = z.object({
   // Uno de "extraordinaria" (EvFE) se calcula igual pero se mantiene en una
   // hoja de resultados aparte, nunca mezclado con la evaluación ordinaria.
   procedimiento: z.enum(["ordinario", "recuperacion", "extraordinaria"]).optional().default("ordinario"),
+  // Grupo de evaluación (GEv, modelo de Edo Gual): a qué subgrupo de
+  // moduleData.grupos_evaluacion pertenece este instrumento -- sin valor,
+  // cuenta como "general". Al calcular la nota de un alumno solo cuentan
+  // los instrumentos cuyo GEv coincide con el GEv de ese alumno (ver
+  // filtrarPorGev() en utils/calificaciones.ts) -- así un instrumento de
+  // "PDEvContinua" solo aplica a los alumnos marcados como tal, sin
+  // mezclarse con las actividades normales del "Gran grupo".
+  gev: z.string().optional().nullable(),
 });
 export type Instrumento = z.infer<typeof InstrumentoSchema>;
 
@@ -221,6 +246,16 @@ export const ModuleDataSchema = z.object({
     pct_1t: z.number(),
     pct_2t: z.number(),
     pct_3t: z.number(),
+  })).optional(),
+
+  // Grupos de evaluación (GEv, modelo de Edo Gual): subgrupos de alumnado a
+  // efectos de evaluación (p.ej. pérdida de evaluación continua), cada uno
+  // con su propio conjunto de instrumentos -- ver Instrumento.gev,
+  // Alumnado.gev y filtrarPorGev() en utils/calificaciones.ts. Si está
+  // vacío, se usan los 3 tipificados por defecto (GRUPOS_EVALUACION_DEFECTO).
+  grupos_evaluacion: z.array(z.object({
+    id: z.string(),
+    nombre: z.string(),
   })).optional(),
 
   info_modulo: z.record(z.string(), z.any()).optional(),
@@ -318,14 +353,14 @@ export const CursoDataSchema = z.object({
   df_reclamaciones: z.array(ReclamacionSchema).optional(),
   df_feoe: z.array(z.any()).optional(),
   daily_ledger: z.record(z.string(), z.any()).optional(),
-  tutoria_ledger: z.record(z.string(), z.any()).optional(),
+  // Un registro de tutoría por alumno -- ver TutoriaLedgerEntrySchema.
+  tutoria_ledger: z.record(z.string(), z.array(TutoriaLedgerEntrySchema)).optional(),
   profesional_ledger: z.record(z.string(), z.any()).optional(),
   horario: z.record(z.string(), z.any()).optional(),
   info_fechas: z.record(z.string(), z.any()).optional(),
   calendar_notes: z.record(z.string(), z.any()).optional(),
   planning_ledger: z.record(z.string(), z.any()).optional(),
   plano_clase: z.record(z.string(), z.any()).optional(),
-  actuaciones_tutoria: z.array(z.any()).optional(),
   rasgos_grupo: z.array(z.string()).optional(),
   __version__: z.number().optional(),
 }).passthrough();

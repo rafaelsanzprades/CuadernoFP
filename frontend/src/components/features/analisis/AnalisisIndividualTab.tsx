@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { useAppStore } from "@/store/useAppStore";
 import { resolveDescRa, loadCatalogForModule } from "@/services/catalogCache";
 import { isAlumnoActivo } from "@/utils/alumnado";
-import { calcularNotasJEG, getSigadInfo, DEFAULT_CONFIG_REDONDEO, setCalificacionAuto } from "@/utils/calificaciones";
+import { calcularNotasJEG, getSigadInfo, DEFAULT_CONFIG_REDONDEO, setCalificacionAuto, filtrarPorGev } from "@/utils/calificaciones";
 import { useTranslation } from "react-i18next";
 
 export const AnalisisIndividualTab = () => {
@@ -52,7 +52,7 @@ export const AnalisisIndividualTab = () => {
   const currentEv = df_eval.find((e: any) => e.ID === selectedAlId) || {};
 
   // Motor JEG, modo automático (Ítem 42 punto 6, ver utils/calificaciones.ts)
-  const realCalc = calcularNotasJEG(selectedAlId, df_calificaciones, df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
+  const realCalc = calcularNotasJEG(selectedAlId, filtrarPorGev(df_calificaciones, df_instr, (currentAl as any).gev), df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
   const realSigad = getSigadInfo(realCalc.nota_final);
 
   // Nota simulada: igual que el override de Motor A, pero construido como un
@@ -69,7 +69,7 @@ export const AnalisisIndividualTab = () => {
     });
     return next;
   }, df_calificaciones);
-  const simCalc = calcularNotasJEG(selectedAlId, simDfCalificaciones, df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
+  const simCalc = calcularNotasJEG(selectedAlId, filtrarPorGev(simDfCalificaciones, df_instr, (currentAl as any).gev), df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
   const simSigad = getSigadInfo(simCalc.nota_final);
 
   // Group activities by trimester for the simulator

@@ -8,7 +8,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { resolveDescRa } from "@/services/catalogCache";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { isAlumnoActivo } from "@/utils/alumnado";
-import { calcularNotasJEG, getSigadInfo, DEFAULT_CONFIG_REDONDEO, setCalificacionAuto } from "@/utils/calificaciones";
+import { calcularNotasJEG, getSigadInfo, DEFAULT_CONFIG_REDONDEO, setCalificacionAuto, filtrarPorGev } from "@/utils/calificaciones";
 import { Button } from "@/components/ui/Button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import toast from "react-hot-toast";
@@ -97,7 +97,7 @@ export function DetalleAlumnadoTab() {
       });
     }
 
-    const { nota_final } = calcularNotasJEG(al_id, newCal, df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
+    const { nota_final } = calcularNotasJEG(al_id, filtrarPorGev(newCal, df_instr, df_al.find((a: any) => a.ID === al_id)?.gev), df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
     // Nota final oficial (FO) siempre con 1 decimal, como pide Rafael — el cálculo
     // interno (calcularNotasJEG, notas_ra, notas_ce) conserva toda su precisión, esto
     // solo redondea el valor que se guarda como nota de acta.
@@ -284,7 +284,7 @@ export function DetalleAlumnadoTab() {
           // Motor JEG, modo automático (Indicador->CE->RA->Módulo, Ítem 42 punto 6, ver
           // utils/calificaciones.ts). Con el peso repartido igual entre indicadores
           // (sincronizarIndicadorAuto), el resultado es una media simple por CE.
-          const notasCalc = calcularNotasJEG(al_id, df_calificaciones, df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
+          const notasCalc = calcularNotasJEG(al_id, filtrarPorGev(df_calificaciones, df_instr, al.gev), df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
 
           const resultados_ra: any[] = [];
 

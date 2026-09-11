@@ -31,8 +31,11 @@ export function TutoriaTab() {
     const newEntry = {
       id: `tut_${now.getTime()}`,
       fecha: now.toISOString().split('T')[0],
+      horaInicio: "",
+      horaFin: "",
       canal: "Presencial",
       ambito: "Alumno/a",
+      participantes: "",
       tema: "",
       acuerdos: ""
     };
@@ -43,7 +46,7 @@ export function TutoriaTab() {
 
   const handleUpdateTutoria = (al_id: string, idx: number, field: string, value: any) => {
     const newLedger = { ...tutoria_ledger };
-    newLedger[al_id][idx][field] = value;
+    (newLedger[al_id][idx] as any)[field] = value;
     updateCursoData("tutoria_ledger", newLedger);
   };
 
@@ -121,10 +124,28 @@ export function TutoriaTab() {
                     <div className="flex flex-wrap gap-4 mb-4 pr-8">
                       <div className="flex-1 min-w-[150px]">
                         <label className="block text-caption text-muted-foreground font-bold mb-1">{t('campos.alumnado.labelFecha', {defaultValue: 'Fecha'})}</label>
-                        <input 
-                          type="date" 
-                          value={tut.fecha || ""} 
+                        <input
+                          type="date"
+                          value={tut.fecha || ""}
                           onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "fecha", e.target.value)}
+                          className="w-full bg-foreground/10 border border-[var(--glass-border)] rounded px-3 py-1.5 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none"
+                        />
+                      </div>
+                      <div className="min-w-[110px]">
+                        <label className="block text-caption text-muted-foreground font-bold mb-1">{t('campos.alumnado.labelHoraInicio', {defaultValue: 'Hora inicio'})}</label>
+                        <input
+                          type="time"
+                          value={tut.horaInicio || ""}
+                          onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "horaInicio", e.target.value)}
+                          className="w-full bg-foreground/10 border border-[var(--glass-border)] rounded px-3 py-1.5 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none"
+                        />
+                      </div>
+                      <div className="min-w-[110px]">
+                        <label className="block text-caption text-muted-foreground font-bold mb-1">{t('campos.alumnado.labelHoraFin', {defaultValue: 'Hora fin'})}</label>
+                        <input
+                          type="time"
+                          value={tut.horaFin || ""}
+                          onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "horaFin", e.target.value)}
                           className="w-full bg-foreground/10 border border-[var(--glass-border)] rounded px-3 py-1.5 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none"
                         />
                       </div>
@@ -158,6 +179,16 @@ export function TutoriaTab() {
                     </div>
 
                     <div className="space-y-3">
+                      <div>
+                        <label className="block text-caption text-muted-foreground font-bold mb-1">{t('campos.alumnado.labelParticipantes', {defaultValue: 'Participantes'})}</label>
+                        <input
+                          type="text"
+                          value={tut.participantes || ""}
+                          onChange={(e) => handleUpdateTutoria(selectedAlId, idx, "participantes", e.target.value)}
+                          placeholder={t('placeholders.alumnado.participantesTutoria', {defaultValue: 'Quién ha estado presente (alumno/a, familia, orientador/a...)'})}
+                          className="w-full bg-foreground/10 border border-[var(--glass-border)] rounded px-3 py-1.5 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none placeholder:text-muted/40"
+                        />
+                      </div>
                       <div>
                         <label className="block text-caption text-muted-foreground font-bold mb-1">{t('campos.alumnado.labelTemaTratado', {defaultValue: 'Tema tratado / Desarrollo'})}</label>
                         <textarea 
