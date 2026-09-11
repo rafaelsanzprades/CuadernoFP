@@ -41,7 +41,6 @@ export default function ProgresoPage() {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("resumen");
   const [analisisView, setAnalisisView] = useState<"grupal" | "individual">("grupal");
-  const [historicoView, setHistoricoView] = useState<"historico" | "reclamaciones">("historico");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -136,13 +135,14 @@ export default function ProgresoPage() {
     { id: "resumen", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.resumen')}</>, cleanLabel: t('tabs.resumen') },
     { id: "estadisticas", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.estadisticas.label', {defaultValue: 'Estadísticas'})}</>, cleanLabel: t('tabs.calificaciones.estadisticas.label', {defaultValue: 'Estadísticas'}) },
     { id: "analisis", label: <><span className="inline-flex"><LineChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.analisis.label', {defaultValue: 'Análisis'})}</>, cleanLabel: t('tabs.calificaciones.analisis.label', {defaultValue: 'Análisis'}) },
-    { id: "historico", label: <><span className="inline-flex"><History className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'})}
+    { id: "historico", label: <><span className="inline-flex"><History className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'})}</>, cleanLabel: t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'}) },
+    { id: "reclamaciones", label: <><span className="inline-flex"><AlertOctagon className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.reclamaciones.label', {defaultValue: 'Reclamaciones'})}
         {reclamacionesPendientes > 0 && (
           <span className="ml-1.5 inline-flex items-center justify-center min-w-[1.1rem] h-[1.1rem] px-1 rounded-full bg-danger text-white text-[10px] font-bold leading-none">
             {reclamacionesPendientes}
           </span>
         )}
-      </>, cleanLabel: t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'}) },
+      </>, cleanLabel: t('tabs.calificaciones.reclamaciones.label', {defaultValue: 'Reclamaciones'}) },
     { id: "boletines", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.boletines.label', {defaultValue: 'Boletines'})}</>, cleanLabel: t('tabs.calificaciones.boletines.label', {defaultValue: 'Boletines'}) },
   ];
 
@@ -150,7 +150,8 @@ export default function ProgresoPage() {
     resumen: t('tabs.calificaciones.resumen.desc', {defaultValue: 'Panel global de rendimiento y calificaciones medias.'}),
     estadisticas: t('tabs.calificaciones.estadisticas.desc', {defaultValue: 'Estadísticas descriptivas y visualizaciones del rendimiento del grupo.'}),
     analisis: t('tabs.calificaciones.analisis.desc', {defaultValue: 'Desempeño comparativo del grupo y hoja de progreso individual para tutorías.'}),
-    historico: t('tabs.calificaciones.historico.desc', {defaultValue: 'Registro de cada cambio de nota y de las reclamaciones presentadas, con su motivo y resolución.'}),
+    historico: t('tabs.calificaciones.historico.desc', {defaultValue: 'Registro de cada cambio de nota, con su fecha, agente y motivo.'}),
+    reclamaciones: t('tabs.calificaciones.reclamaciones.desc', {defaultValue: 'Reclamaciones de nota presentadas por el alumnado, con su motivo y resolución.'}),
     boletines: t('tabs.calificaciones.boletines.desc', {defaultValue: 'Boletín individual de calificaciones en pantalla, con radar y barras de nivel de logro por RA.'}),
   };
 
@@ -422,33 +423,21 @@ export default function ProgresoPage() {
             </div>
           )}
 
-          {/* TAB 4: HISTÓRICO (+ reclamaciones) */}
+          {/* TAB 4: HISTÓRICO */}
           {activeTab === "historico" && (
             <div className="animate-in fade-in duration-500 space-y-4">
-              <div className="inline-flex rounded-xl border border-[var(--glass-border)] bg-foreground/5 p-1">
-                <button
-                  onClick={() => setHistoricoView("historico")}
-                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${historicoView === "historico" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
-                >
-                  <History className="w-4 h-4" /> {t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'})}
-                </button>
-                <button
-                  onClick={() => setHistoricoView("reclamaciones")}
-                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${historicoView === "reclamaciones" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
-                >
-                  <AlertOctagon className="w-4 h-4" /> {t('tabs.calificaciones.reclamaciones.label', {defaultValue: 'Reclamaciones'})}
-                  {reclamacionesPendientes > 0 && (
-                    <span className={`inline-flex items-center justify-center min-w-[1.1rem] h-[1.1rem] px-1 rounded-full text-[10px] font-bold leading-none ${historicoView === "reclamaciones" ? "bg-background/25 text-background" : "bg-danger text-white"}`}>
-                      {reclamacionesPendientes}
-                    </span>
-                  )}
-                </button>
-              </div>
-              {historicoView === "historico" ? <HistorialCalificacionesTab /> : <ReclamacionesTab />}
+              <HistorialCalificacionesTab />
             </div>
           )}
 
-          {/* TAB 5: BOLETINES */}
+          {/* TAB 5: RECLAMACIONES */}
+          {activeTab === "reclamaciones" && (
+            <div className="animate-in fade-in duration-500 space-y-4">
+              <ReclamacionesTab />
+            </div>
+          )}
+
+          {/* TAB 6: BOLETINES */}
           {activeTab === "boletines" && (
             <div className="mt-4 animate-in fade-in duration-500">
               <BoletinesTab />
