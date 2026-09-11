@@ -123,6 +123,7 @@ export function FeoeEmpresaTab() {
       id_indicador,
       valor: valorA10(valor1a4),
       justificacion: justificacion ?? (idx >= 0 ? next[idx].justificacion : undefined),
+      timestamp: Date.now(),
     };
     if (idx >= 0) next[idx] = row; else next.push(row);
     return next;

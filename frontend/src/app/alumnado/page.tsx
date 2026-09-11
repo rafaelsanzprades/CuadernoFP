@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map, MessageSquare, FileText, Route, FolderOpen, Mail, Phone, Calendar, X, ClipboardCheck } from "lucide-react";
+import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map, MessageSquare, FileText, Route, FolderOpen, Mail, Phone, Calendar, X, ClipboardCheck, History } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -18,6 +18,7 @@ import { ContextoGrupoTab } from "@/components/features/alumnado/ContextoGrupoTa
 import { TutoriaTab } from "@/components/features/alumnado/TutoriaTab";
 import { AutoevaluacionTab } from "@/components/features/alumnado/AutoevaluacionTab";
 import { PerfilProfesionalTab } from "@/components/features/alumnado/PerfilProfesionalTab";
+import { ExpedienteTab } from "@/components/features/alumnado/ExpedienteTab";
 import { AlertaAbandonoTab } from "@/components/features/diario/AlertaAbandonoTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
@@ -58,6 +59,7 @@ export default function AlumnadoPage() {
     { id: "tutoria", label: <><span className="inline-flex"><ClipboardCheck className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.tutoria.label', {defaultValue: 'Tutoría y alertas'})}</>, cleanLabel: t('tabs.alumnado.tutoria.label', {defaultValue: 'Tutoría y alertas'}) },
     { id: "autoevaluacion", label: <><span className="inline-flex"><ClipboardCheck className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.autoevaluacion.label', {defaultValue: 'Autoevaluación'})}</>, cleanLabel: t('tabs.alumnado.autoevaluacion.label', {defaultValue: 'Autoevaluación'}) },
     { id: "perfilProfesional", label: <><span className="inline-flex"><Compass className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.perfilProfesional.label', {defaultValue: 'Perfil profesional'})}</>, cleanLabel: t('tabs.alumnado.perfilProfesional.label', {defaultValue: 'Perfil profesional'}) },
+    { id: "expediente", label: <><span className="inline-flex"><History className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.expediente.label', {defaultValue: 'Expediente'})}</>, cleanLabel: t('tabs.alumnado.expediente.label', {defaultValue: 'Expediente'}) },
   ];
 
   const activeTabCleanLabel = TABS.find(t_tab => t_tab.id === activeTab)?.cleanLabel;
@@ -68,6 +70,7 @@ export default function AlumnadoPage() {
     tutoria: t('tabs.alumnado.tutoria.desc', {defaultValue: 'Alertas de riesgo de abandono y seguimiento tutorial del alumnado.'}),
     autoevaluacion: t('tabs.alumnado.autoevaluacion.desc', {defaultValue: 'Autoevaluación del alumnado por criterio de evaluación (SÍ/Dudas/NO) y dificultades declaradas.'}),
     perfilProfesional: t('tabs.alumnado.perfilProfesional.desc', {defaultValue: 'Orientación profesional por alumno/a: motivación, experiencia laboral, aptitudes, aspiraciones e inserción post-ciclo.'}),
+    expediente: t('tabs.alumnado.expediente.desc', {defaultValue: 'Línea temporal de evidencias por alumno/a: calificaciones, autoevaluación, tutoría, reclamaciones, asistencia y diario de clase.'}),
   };
 
   useEffect(() => {
@@ -452,6 +455,8 @@ export default function AlumnadoPage() {
           )}
 
           {activeTab === "perfilProfesional" && <PerfilProfesionalTab />}
+
+          {activeTab === "expediente" && <ExpedienteTab />}
 
           </MotionWrapper>
         </main>

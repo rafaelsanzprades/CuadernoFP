@@ -156,8 +156,11 @@ export function JegModeloTab() {
   const setValor = (id_instrumento: string, id_indicador: string, valor: number | null) => {
     const idx = df_calificaciones.findIndex((c: any) => c.id_alumno === selectedAlId && c.id_instrumento === id_instrumento && c.id_indicador === id_indicador);
     const next = [...df_calificaciones];
+    // timestamp: cuándo se puso/tocó esta nota por última vez -- lo lee el
+    // Expediente del alumnado (línea temporal de evidencias) para ubicar la
+    // calificación en el tiempo; antes no se rellenaba nunca.
     if (idx >= 0) {
-      next[idx] = { ...next[idx], valor };
+      next[idx] = { ...next[idx], valor, timestamp: Date.now() };
     } else {
       next.push({
         id_calificacion: `CAL-${selectedAlId}-${id_instrumento}-${id_indicador}`,
@@ -165,6 +168,7 @@ export function JegModeloTab() {
         id_instrumento,
         id_indicador,
         valor,
+        timestamp: Date.now(),
       });
     }
     updateCursoData("df_calificaciones" as any, next);

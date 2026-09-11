@@ -432,6 +432,9 @@ export function setCalificacionAuto(
   const row = {
     id_calificacion: idx >= 0 ? next[idx].id_calificacion : `${id_alumno}-${id_instrumento}-${id_indicador}`,
     id_alumno, id_instrumento, id_indicador, valor,
+    // Cuándo se puso/tocó esta nota por última vez -- lo lee el Expediente
+    // del alumnado (línea temporal de evidencias); antes no se rellenaba.
+    timestamp: Date.now(),
   };
   if (idx >= 0) next[idx] = row; else next.push(row);
   return next;
