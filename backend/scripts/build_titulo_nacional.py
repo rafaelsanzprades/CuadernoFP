@@ -46,7 +46,7 @@ def extract_articles_2_9(soup: BeautifulSoup) -> dict:
         cls = el.get("class", [])
         if el.name == "h5" and "articulo" in cls:
             txt = el.get_text(strip=True)
-            m = re.match(r"Art[íi]culo (\d+)\.", txt)
+            m = re.match(r"Art[íi]culo\s+(\d+)\.", txt)
             flush()
             current_art = int(m.group(1)) if m and 2 <= int(m.group(1)) <= 9 else None
         elif el.name == "p" and current_art is not None:
@@ -81,7 +81,7 @@ def extract_cualificaciones(articulo_6_text: str):
     entries = re.split(r"\n(?=[a-zñ]\) )", seccion)
     for entry in entries:
         m = re.match(
-            r"^([a-zñ])\)\s*(.+?)\.?\s+([A-Z]{2,4}\s?\d{2,4}_\d)\s*\(((?:R\.D\.|RD|Real Decreto)[^)]+)\)\s*,?\s*que (?:comprende|contiene|incluye)",
+            r"^([a-zñ])\)\s*(.+?)\.?\s+([A-Z]{2,4}\s?\d{2,4}_\d)\.?\s*\(((?:R\.D\.|RD|Real Decreto)[^)]+)\)\s*,?\s*que (?:comprende|contiene|incluye)",
             entry, re.DOTALL,
         )
         if not m:
@@ -123,7 +123,7 @@ def extract_modules_variant_c(soup: BeautifulSoup) -> list:
             continue
         txt = tag.get_text(strip=True)
         m_mod = re.match(r"^M[oó]dulo [Pp]rofesional:\s*(.+?)\.?$", txt)
-        m_cod = re.match(r"^C[oó]digo:\s*(\S+)", txt)
+        m_cod = re.match(r"^C[oó]digo[:.]\s*(\S+)", txt)
         m_ra = re.match(r"^(\d+)\.\s+(.+)$", txt)
         m_ce = re.match(r"^([a-zñ])\)\s*(.+)$", txt)
         if m_mod:
