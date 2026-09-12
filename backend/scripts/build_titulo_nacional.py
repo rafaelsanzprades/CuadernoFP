@@ -73,22 +73,40 @@ def extract_cualificaciones(articulo_6_text: str):
     189/2018 (Comercializacion de Productos Alimentarios). Se detecta
     ese caso y se sintetiza el id 'a' para no perder la cualificacion."""
     cps, ucs = [], []
-    # Solo la seccion de "completa(s)" (antes de "incompletas", si existe)
-    seccion = re.split(r"\n\d+\.\s*Cualificaci[oó]n(?:es)? profesional(?:es)? incompletas?", articulo_6_text)[0]
+    # Solo la seccion de "completa(s)" (antes de "incompletas", si existe).
+    # La numeracion previa a "incompletas" varia: "2." simple (loe_clasica)
+    # o "2.3.2." con puntos intermedios (FPB) -- \d+(?:\.\d+)*\. cubre ambas.
+    seccion = re.split(r"\n\d+(?:\.\d+)*\.\s*Cualificaci[oó]n(?:es)? profesional(?:es)? incompletas?", articulo_6_text)[0]
     seccion = re.sub(r"^.*?Cualificaci[oó]n(?:es)? profesional(?:es)? completa[s]?:\s*\n?", "", seccion, count=1, flags=re.DOTALL)
     if not re.match(r"^[a-zñ]\)\s", seccion):
         seccion = "a) " + seccion
-    entries = re.split(r"\n(?=[a-zñ]\) )", seccion)
+    entries = re.split(r"\n(?=[a-zñ]\)\s)", seccion)
+    # 2 ordenes vistos: "a) {desc} {CODE} (ref), que comprende..." (la
+    # mayoria de loe_clasica) y "a) {CODE}: {desc} (ref), que comprende..."
+    # (FPB, p.ej. "a) HOT222_1: Operaciones basicas de pisos... (RD...)").
+    # "que comprende/contiene/incluye las siguientes unidades de
+    # competencia" al final a veces no aparece en absoluto -- las UC vienen
+    # directamente despues del cierre del parentesis de la cita (visto en
+    # RD 356/2014, Actividades Maritimo-Pesqueras) -- opcional.
+    pat_desc_code = re.compile(
+        r"^([a-zñ])\)\s*(.+?)\.?\s+([A-Z]{2,4}\s?\d{2,4}_\d)\.?\s*\(((?:R\.D\.|RD|Real Decreto|Decreto)[^)]+)\)\.?\s*(?:,?\s*que (?:comprende|contiene|incluye)[^\n]*)?",
+        re.DOTALL,
+    )
+    pat_code_desc = re.compile(
+        r"^([a-zñ])\)\s*([A-Z]{2,4}\s?\d{2,4}_\d)\s*:\s*(.+?)\s*\(((?:R\.D\.|RD|Real Decreto|Decreto)[^)]+)\)\.?\s*(?:,?\s*que (?:comprende|contiene|incluye)[^\n]*)?",
+        re.DOTALL,
+    )
     for entry in entries:
-        m = re.match(
-            r"^([a-zñ])\)\s*(.+?)\.?\s+([A-Z]{2,4}\s?\d{2,4}_\d)\.?\s*\(((?:R\.D\.|RD|Real Decreto)[^)]+)\)\s*,?\s*que (?:comprende|contiene|incluye)",
-            entry, re.DOTALL,
-        )
-        if not m:
-            continue
-        letter, desc, code, ref = m.groups()
+        m = pat_desc_code.match(entry)
+        if m:
+            letter, desc, code, ref = m.groups()
+        else:
+            m = pat_code_desc.match(entry)
+            if not m:
+                continue
+            letter, code, desc, ref = m.groups()
         cps.append({"id": letter, "code": re.sub(r"\s+", "", code), "ref": ref, "desc": desc.strip()})
-        for ucm in re.finditer(r"(UC\d{4}_\d)[:.]\s*(.+)", entry):
+        for ucm in re.finditer(r"^(UC\d{4}_\d)[:.]?\s+(.+)$", entry, re.MULTILINE):
             ucs.append({"id": ucm.group(1), "cp_id": letter, "desc": ucm.group(2).strip()})
     return cps, ucs
 
@@ -239,7 +257,11 @@ def extract_fpb_sections(all_tags, start: int, end: int) -> dict:
         (r"^2\.5\.?\s*Prospectiva del t[ií]tulo", "article_8"),
         (r"^3\.1\.?\s*Objetivos generales del t[ií]tulo\.?$", "article_9"),
         (r"^3\.2\.?\s*M[oó]dulos profesionales\.?$", None),
-        (r"^3\.3\.?\s*Desarrollo de los m[oó]dulos:?$", "__modules__"),
+        # El numero de sub-apartado antes de "Desarrollo de los modulos"
+        # varia (3.3 normalmente, 3.4 cuando hay una seccion extra "3.3
+        # Vinculacion con capacitaciones profesionales" antes) -- \d\.\d+
+        # generico en vez de "3.3" fijo.
+        (r"^3\.\d+\.?\s*Desarrollo de los m[oó]dulos[:.]?$", "__modules__"),
     ]
     sections: dict = {}
     current_key = None
