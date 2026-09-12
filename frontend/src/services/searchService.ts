@@ -68,7 +68,10 @@ export function searchGlobal(query: string): SearchResult[] {
 
   // 3. Buscar en módulos del curso (solo si existe la propiedad)
   if (cursoData && 'modulo' in cursoData && cursoData.modulo) {
-    const modulo = cursoData.modulo as any;
+    // `modulo` no es un campo declarado en CursoDataSchema (solo existe vía
+    // el .passthrough() del esquema) -- de ahí el tipo local en vez de un
+    // campo real de CursoData.
+    const modulo = cursoData.modulo as { nombre?: string; objetivos?: string };
     const moduloSearch = [
       { title: modulo.nombre || 'Módulo', subtitle: 'Configuración del módulo', href: '/modulo' },
       { title: modulo.objetivos || 'Objetivos', subtitle: 'Objetivos del módulo', href: '/modulo' },

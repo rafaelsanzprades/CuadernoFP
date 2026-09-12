@@ -909,7 +909,7 @@ export default function ArchivosTrabajoPage() {
                 <p className="text-muted text-body">Se han detectado los siguientes enlaces rotos en los archivos Grupo. Esto sucede cuando renombras o eliminas una Programación o un Curso en Windows directamente.</p>
                 <ul className="space-y-3 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
                   {brokenLinks.map((link, idx) => (
-                    <li key={idx} className="bg-foreground/5 p-3 rounded-lg border border-[var(--glass-border)] text-body">
+                    <li key={link.groupName || idx} className="bg-foreground/5 p-3 rounded-lg border border-[var(--glass-border)] text-body">
                       <p className="font-semibold">{link.groupName}</p>
                       <p className="text-danger flex items-center gap-2 mt-1">
                         <AlertTriangle className="w-4 h-4" /> {link.type === 'programacion' ? 'Programación' : 'Curso'} no encontrada: <span className="font-mono">{link.missingFile}</span>

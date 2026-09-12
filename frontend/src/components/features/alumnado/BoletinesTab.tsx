@@ -28,8 +28,8 @@ export const BoletinesTab = () => {
   const config_redondeo = { ...DEFAULT_CONFIG_REDONDEO, ...(moduleData?.config_redondeo || {}) };
   // Motor JEG, modo automático (Ítem 42 punto 6) -- ver DetalleAlumnadoTab.tsx.
   const df_instr = moduleData?.df_instr || [];
-  const df_indicadores = (moduleData as any)?.df_indicadores || [];
-  const df_calificaciones = (cursoData as any)?.df_calificaciones || [];
+  const df_indicadores = moduleData?.df_indicadores || [];
+  const df_calificaciones = cursoData?.df_calificaciones || [];
 
   const notasCalc = calcularNotasJEG(currentStudent?.ID || "", filtrarPorGev(df_calificaciones, df_instr, currentStudent?.gev), df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
 
@@ -216,7 +216,7 @@ export const BoletinesTab = () => {
                   {radarData.map((ra: any, i: number) => {
                     const isAprobado = ra.nota >= 5;
                     return (
-                      <div key={i} className="flex items-center gap-4 bg-foreground/5 p-4 rounded-lg border border-white/5">
+                      <div key={ra.subject || i} className="flex items-center gap-4 bg-foreground/5 p-4 rounded-lg border border-white/5">
                         <div className={`text-heading font-black w-16 text-center ${isAprobado ? 'text-success' : 'text-danger'}`}>
                           {ra.nota.toFixed(1)}
                         </div>

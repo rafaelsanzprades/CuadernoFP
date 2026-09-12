@@ -43,13 +43,13 @@ export function ContextoGrupoTab() {
   const df_al = cursoData?.df_al || [];
   const [generandoIA, setGenerandoIA] = useState(false);
 
-  const rasgos_grupo = (cursoData as any)?.rasgos_grupo || [];
+  const rasgos_grupo = cursoData?.rasgos_grupo || [];
 
   const toggleRasgo = (id: string) => {
     const updated = rasgos_grupo.includes(id)
       ? rasgos_grupo.filter((r: string) => r !== id)
       : [...rasgos_grupo, id];
-    updateCursoData("rasgos_grupo" as any, updated);
+    updateCursoData("rasgos_grupo", updated);
   };
 
   const total = df_al.length;
@@ -93,7 +93,7 @@ export function ContextoGrupoTab() {
       if (!res.ok || data.status !== "success") {
         throw new Error(data.detail || data.message || "Error desconocido");
       }
-      updateModuleData("textos_pd_caracteristicas_alumnado" as any, data.reply);
+      updateModuleData("textos_pd_caracteristicas_alumnado", data.reply);
       toast.success(t('toasts.contextoGrupo.textoGenerado', {defaultValue: "Texto generado. Revísalo y edítalo antes de guardar."}));
     } catch (err: any) {
       toast.error(err.message || t('toasts.contextoGrupo.errorGenerarIA', {defaultValue: "Error al generar el texto con IA."}));

@@ -60,20 +60,20 @@ export function JegModeloTab() {
   const { moduleData, cursoData, updateDataFrame, updateCursoData, updateModuleData } = useAppStore();
   const df_ce = moduleData?.df_ce || [];
   const df_ra = moduleData?.df_ra || [];
-  const df_indicadores = (moduleData as any)?.df_indicadores || [];
-  const df_instr = (moduleData as any)?.df_instr || [];
-  const df_calificaciones = (cursoData as any)?.df_calificaciones || [];
+  const df_indicadores = moduleData?.df_indicadores || [];
+  const df_instr = moduleData?.df_instr || [];
+  const df_calificaciones = cursoData?.df_calificaciones || [];
   const df_al = cursoData?.df_al || [];
   const activos = df_al.filter(isAlumnoActivo);
   const gruposEvaluacion: { id: string; nombre: string }[] =
-    ((moduleData as any)?.grupos_evaluacion?.length ? (moduleData as any).grupos_evaluacion : GRUPOS_EVALUACION_DEFECTO);
+    (moduleData?.grupos_evaluacion?.length ? moduleData.grupos_evaluacion : GRUPOS_EVALUACION_DEFECTO);
   const [nuevoGev, setNuevoGev] = useState("");
   const addGrupoEvaluacion = () => {
     const nombre = nuevoGev.trim();
     if (!nombre) return;
     const id = nombre.toLowerCase().replace(/[^a-z0-9]+/g, "");
     if (!id || gruposEvaluacion.some((g) => g.id === id)) return;
-    updateModuleData("grupos_evaluacion" as any, [...gruposEvaluacion, { id, nombre }]);
+    updateModuleData("grupos_evaluacion", [...gruposEvaluacion, { id, nombre }]);
     setNuevoGev("");
   };
 
@@ -91,25 +91,25 @@ export function JegModeloTab() {
     const next = [...df_indicadores, nuevo];
     const idsDeEsteCe = next.filter((i: any) => i.id_ce === id_ce).map((i: any) => i.id_indicador);
     const repartos = repartoIgualitario(idsDeEsteCe.length);
-    updateDataFrame("df_indicadores" as any, next.map((i: any) => {
+    updateDataFrame("df_indicadores", next.map((i: any) => {
       const idx = idsDeEsteCe.indexOf(i.id_indicador);
       return idx === -1 ? i : { ...i, peso: repartos[idx] };
     }));
   };
   const updateIndicador = (id_indicador: string, field: string, value: any) => {
-    updateDataFrame("df_indicadores" as any, df_indicadores.map((i: any) => i.id_indicador === id_indicador ? { ...i, [field]: value } : i));
+    updateDataFrame("df_indicadores", df_indicadores.map((i: any) => i.id_indicador === id_indicador ? { ...i, [field]: value } : i));
   };
   const removeIndicador = (id_indicador: string) => {
     const removed = df_indicadores.find((i: any) => i.id_indicador === id_indicador);
     const next = df_indicadores.filter((i: any) => i.id_indicador !== id_indicador);
     const idsDeEsteCe = removed ? next.filter((i: any) => i.id_ce === removed.id_ce).map((i: any) => i.id_indicador) : [];
     const repartos = repartoIgualitario(idsDeEsteCe.length);
-    updateDataFrame("df_indicadores" as any, next.map((i: any) => {
+    updateDataFrame("df_indicadores", next.map((i: any) => {
       const idx = idsDeEsteCe.indexOf(i.id_indicador);
       return idx === -1 ? i : { ...i, peso: repartos[idx] };
     }));
     // Limpieza: también se sueltan las calificaciones huérfanas de ese indicador
-    updateCursoData("df_calificaciones" as any, df_calificaciones.filter((c: any) => c.id_indicador !== id_indicador));
+    updateCursoData("df_calificaciones", df_calificaciones.filter((c: any) => c.id_indicador !== id_indicador));
   };
   // Ítem 42, punto 2/3: mismo patrón "debe sumar 100%" + reparto automático que
   // ya usan peso_ra/peso_ce en curriculo/page.tsx, aplicado a Indicador.peso
@@ -118,7 +118,7 @@ export function JegModeloTab() {
   const dividirPesosIndicadores = (id_ce: string) => {
     const idsDeEsteCe = df_indicadores.filter((i: any) => i.id_ce === id_ce).map((i: any) => i.id_indicador);
     const repartos = repartoIgualitario(idsDeEsteCe.length);
-    updateDataFrame("df_indicadores" as any, df_indicadores.map((i: any) => {
+    updateDataFrame("df_indicadores", df_indicadores.map((i: any) => {
       const idx = idsDeEsteCe.indexOf(i.id_indicador);
       return idx === -1 ? i : { ...i, peso: repartos[idx] };
     }));
@@ -138,14 +138,14 @@ export function JegModeloTab() {
       origen: "centro",
       procedimiento: "ordinario",
     };
-    updateDataFrame("df_instr" as any, [...df_instr, nuevo]);
+    updateDataFrame("df_instr", [...df_instr, nuevo]);
   };
   const updateInstrumento = (id_instrumento: string, field: string, value: any) => {
-    updateDataFrame("df_instr" as any, df_instr.map((i: any) => i.id_instrumento === id_instrumento ? { ...i, [field]: value } : i));
+    updateDataFrame("df_instr", df_instr.map((i: any) => i.id_instrumento === id_instrumento ? { ...i, [field]: value } : i));
   };
   const removeInstrumento = (id_instrumento: string) => {
-    updateDataFrame("df_instr" as any, df_instr.filter((i: any) => i.id_instrumento !== id_instrumento));
-    updateCursoData("df_calificaciones" as any, df_calificaciones.filter((c: any) => c.id_instrumento !== id_instrumento));
+    updateDataFrame("df_instr", df_instr.filter((i: any) => i.id_instrumento !== id_instrumento));
+    updateCursoData("df_calificaciones", df_calificaciones.filter((c: any) => c.id_instrumento !== id_instrumento));
   };
 
   // --- Calificaciones (por alumno seleccionado) ---
@@ -171,7 +171,7 @@ export function JegModeloTab() {
         timestamp: Date.now(),
       });
     }
-    updateCursoData("df_calificaciones" as any, next);
+    updateCursoData("df_calificaciones", next);
   };
 
   const resultado = selectedAlId

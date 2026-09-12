@@ -54,7 +54,7 @@ function CheckCard({ item }: { item: CheckItem }) {
             </div>
             <ul className="space-y-0.5">
               {item.lines.map((line, i) => (
-                <li key={i} className="text-body text-muted flex items-start gap-1.5">
+                <li key={line || i} className="text-body text-muted flex items-start gap-1.5">
                   <span className="text-foreground/40 font-bold px-1 mt-0.5">•</span>
                   <span>{line}</span>
                 </li>

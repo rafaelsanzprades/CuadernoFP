@@ -240,13 +240,13 @@ export default function AyudaPage() {
             {activeTab === "faq" && (
               <div className="space-y-10 animate-in fade-in duration-500 w-full">
                 {FAQS.map((faqGroup, idx) => (
-                  <div key={idx}>
+                  <div key={faqGroup.group || idx}>
                     <h2 className="text-subheading font-bold mb-4 text-accent border-b border-white/5 pb-2">
                       {faqGroup.group}
                     </h2>
                     <div className="space-y-1">
                       {faqGroup.items.map((item, i) => (
-                        <AccordionItem key={i} question={item.q} answer={item.a} />
+                        <AccordionItem key={item.q || i} question={item.q} answer={item.a} />
                       ))}
                     </div>
                   </div>

@@ -7,9 +7,13 @@ import { toast } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 
 type ChatMessage = {
+  id: string;
   role: 'user' | 'model';
   parts: any;
 };
+
+let chatMessageSeq = 0;
+const nextChatMessageId = () => `msg-${Date.now()}-${chatMessageSeq++}`;
 
 export const ChatbotWidget = () => {
   const { t } = useTranslation();
@@ -67,7 +71,7 @@ export const ChatbotWidget = () => {
       });
     }
 
-    const userMessage: ChatMessage = { role: 'user', parts: parts };
+    const userMessage: ChatMessage = { id: nextChatMessageId(), role: 'user', parts: parts };
     const newMessages = [...messages, userMessage];
     
     setMessages(newMessages);
@@ -87,13 +91,13 @@ export const ChatbotWidget = () => {
       const data = await response.json();
 
       if (response.ok && data.status === 'success') {
-        setMessages([...newMessages, { role: 'model', parts: data.reply }]);
+        setMessages([...newMessages, { id: nextChatMessageId(), role: 'model', parts: data.reply }]);
       } else {
         throw new Error(data.detail || data.message || 'Error desconocido');
       }
     } catch (error: any) {
       toast.error(t('toasts.chatbot.errorComunicacion', {message: error.message, defaultValue: 'Error al comunicarse con el asistente: {{message}}'}));
-      setMessages([...newMessages, { role: 'model', parts: 'âŒ Lo siento, ha ocurrido un error al conectar con mis sistemas. Por favor, inténtalo de nuevo.' }]);
+      setMessages([...newMessages, { id: nextChatMessageId(), role: 'model', parts: 'âŒ Lo siento, ha ocurrido un error al conectar con mis sistemas. Por favor, inténtalo de nuevo.' }]);
     } finally {
       setIsLoading(false);
     }
@@ -145,11 +149,11 @@ export const ChatbotWidget = () => {
                 </div>
               )}
 
-              {messages.map((msg, index) => (
-                <motion.div 
+              {messages.map((msg) => (
+                <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  key={index} 
+                  key={msg.id}
                   className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
                 >
                   <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${msg.role === 'user' ? 'bg-blue-500/20 text-blue-400' : 'bg-emerald-500/20 text-emerald-400'}`}>
@@ -158,6 +162,7 @@ export const ChatbotWidget = () => {
                   <div className={`px-4 py-2 rounded-2xl max-w-[80%] text-body whitespace-pre-wrap shadow-sm ${msg.role === 'user' ? 'bg-blue-500/10 border border-blue-500/20 text-blue-100' : 'bg-[var(--glass-bg)] border border-[var(--glass-border)] text-[var(--foreground)]'}`}>
                     {Array.isArray(msg.parts) ? (
                       <div className="flex flex-col gap-2">
+                        {/* key=i deliberado: partes de un mensaje ya enviado, fijas, nunca se reordenan */}
                         {msg.parts.map((p: any, i: number) => {
                           if (typeof p === 'string') return <span key={i}>{p}</span>;
                           if (p.inline_data) return (

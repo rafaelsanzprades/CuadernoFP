@@ -27,10 +27,9 @@ function tiempoRelativo(iso: string): string {
 }
 
 async function ensurePermission(handle: FileSystemFileHandle | FileSystemDirectoryHandle): Promise<boolean> {
-  const opts = { mode: "readwrite" as const };
-  const anyHandle = handle as any;
-  if ((await anyHandle.queryPermission(opts)) === "granted") return true;
-  return (await anyHandle.requestPermission(opts)) === "granted";
+  const opts: FileSystemHandlePermissionDescriptor = { mode: "readwrite" };
+  if ((await handle.queryPermission(opts)) === "granted") return true;
+  return (await handle.requestPermission(opts)) === "granted";
 }
 
 export function RecentModulesPanel() {

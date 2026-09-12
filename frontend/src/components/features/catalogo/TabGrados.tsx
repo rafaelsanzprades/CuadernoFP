@@ -1,13 +1,14 @@
 "use client";
+import { useState } from "react";
 import { Award, Info, Layers } from "lucide-react";
 import { Card } from "@/components/ui/Card";
-import { useAppStore } from "@/store/useAppStore";
 import { useTranslation } from "react-i18next";
 
 /**
  * TAB "Grados" en /modulo
- * Muestra los 5 grados formativos (A-E) según la Ley 3/2022
- * y permite al profesorado seleccionar el grado de su módulo.
+ * Muestra los 5 grados formativos (A-E) según la Ley 3/2022 -- vista de
+ * referencia; el resaltado de tarjeta seleccionada es solo visual, no se
+ * guarda (no hay ningún otro sitio de la app que use un "grado" del módulo).
  */
 
 const GRADOS = [
@@ -56,11 +57,10 @@ const GRADOS = [
 
 export function TabGrados() {
   const { t } = useTranslation();
-  const { moduleData, setModuleData } = useAppStore();
-  const gradoActual = (moduleData as any)?.grado_formativo || "D";
+  const [gradoActual, setGradoActual] = useState("D");
 
   const handleSelect = (grado: string) => {
-    setModuleData({ ...moduleData, grado_formativo: grado } as any);
+    setGradoActual(grado);
   };
 
   return (

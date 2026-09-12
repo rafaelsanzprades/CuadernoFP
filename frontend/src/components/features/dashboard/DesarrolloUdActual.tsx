@@ -77,7 +77,7 @@ export const DesarrolloUdActual = () => {
           </div>
           <div className="space-y-2">
             {sesiones.map((ses: any, idx: number) => (
-              <div key={idx} className="border-b border-white/5 pb-3">
+              <div key={ses.ID || idx} className="border-b border-white/5 pb-3">
                 {/* Primera Línea */}
                 <div className="flex items-center mb-2">
                   <div className="w-16 pr-2 text-muted">{ses.Num_Orden}</div>

@@ -9,6 +9,7 @@ interface SkeletonProps {
 export function Skeleton({ className = "", count = 1 }: SkeletonProps) {
   return (
     <>
+      {/* key=idx deliberado: placeholders sin datos propios, cantidad fija por render */}
       {Array.from({ length: count }).map((_, idx) => (
         <motion.div
           key={idx}

@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
+import type { ModuleData } from "@/types";
 import { MetodologiaTab } from "@/components/features/modulo/MetodologiaTab";
 import { EvaluacionRecursosTab } from "@/components/features/modulo/EvaluacionRecursosTab";
 import { OtrosElementosTab } from "@/components/features/modulo/OtrosElementosTab";
@@ -39,7 +40,7 @@ export default function MetodologiaConfigPage() {
                 merged[key] = (existing as Record<string, any>)[key];
               }
             }
-            setModuleData(merged as any);
+            setModuleData(merged as unknown as ModuleData);
           } else {
             setModuleData(json.data);
           }

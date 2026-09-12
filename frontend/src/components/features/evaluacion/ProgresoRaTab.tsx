@@ -22,8 +22,8 @@ export function ProgresoRaTab() {
   const df_pr = moduleData?.df_pr || [];
   // Motor JEG, modo automático (Ítem 42 punto 6) -- ver DetalleAlumnadoTab.tsx.
   const df_instr = moduleData?.df_instr || [];
-  const df_indicadores = (moduleData as any)?.df_indicadores || [];
-  const df_calificaciones = (cursoData as any)?.df_calificaciones || [];
+  const df_indicadores = moduleData?.df_indicadores || [];
+  const df_calificaciones = cursoData?.df_calificaciones || [];
   const config_redondeo = { ...DEFAULT_CONFIG_REDONDEO, ...(moduleData?.config_redondeo || {}) };
   const info_fechas = cursoData?.info_fechas || {};
   const planning_ledger = planningLedger || {};

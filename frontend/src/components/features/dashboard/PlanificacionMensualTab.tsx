@@ -85,7 +85,7 @@ export function PlanificacionMensualTab() {
               const isColored = !!row.ev;
 
               return (
-              <tr key={idx} className={`border-b border-white/5 transition-colors ${bgClass}`}>
+              <tr key={`${row.id_ud}-${idx}`} className={`border-b border-white/5 transition-colors ${bgClass}`}>
                 <td className={`p-3 w-[50px] max-w-[50px] text-center sticky left-0 z-10 border-r border-[var(--glass-border)] font-bold shadow-[2px_0_5px_-2px_rgba(0,0,0,0.5)] ${stickyBg} ${textTriClass}`}>
                   {row.ev ? `${row.ev}ª` : ''}
                 </td>

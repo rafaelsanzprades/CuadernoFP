@@ -370,7 +370,7 @@ export default function SeguimientoPage() {
                               const esHoy = dateStr === todayStr;
 
                               return (
-    <div key={i} id={`diario-dia-${dateStr}`} className="relative pl-8 group">
+    <div key={dateStr} id={`diario-dia-${dateStr}`} className="relative pl-8 group">
                                   {/* Timeline Node */}
                                   <div className={`absolute -left-[9px] top-4 w-4 h-4 rounded-full border-4 border-black ${nodeColor} shadow-[0_0_10px_rgba(0,0,0,0.5)] transition-colors duration-300 group-hover:scale-125 z-10`} />
 

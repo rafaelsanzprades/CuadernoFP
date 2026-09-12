@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
+import type { ModuleData } from "@/types";
 import { useTranslation } from "react-i18next";
 import { DatosTab } from "@/components/features/modulo/DatosTab";
 import { ContextoTab } from "@/components/features/modulo/ContextoTab";
@@ -42,7 +43,7 @@ export default function ContextoConfigPage() {
                 merged[key] = (existing as Record<string, any>)[key];
               }
             }
-            setModuleData(merged as any);
+            setModuleData(merged as unknown as ModuleData);
           } else {
             setModuleData(json.data);
           }

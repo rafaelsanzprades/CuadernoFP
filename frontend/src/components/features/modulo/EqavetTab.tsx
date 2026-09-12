@@ -31,7 +31,7 @@ export function EqavetTab() {
   // previstas vs. impartidas) — se muestra aquí como apoyo al indicador ind7
   // en vez de dejar la autoevaluación puramente subjetiva.
   const df_ud = moduleData.df_ud || [];
-  const df_sgmt = (cursoData as any)?.df_sgmt || [];
+  const df_sgmt = cursoData?.df_sgmt || [];
   const totalPrevisto = df_ud.reduce((acc: number, u: any) => acc + (Number(u.horas_ud) || 0), 0);
   const totalImpartido = df_sgmt.reduce((acc: number, row: any) => {
     const imp = Object.keys(row)
