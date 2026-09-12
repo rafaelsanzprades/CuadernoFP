@@ -193,6 +193,169 @@ def extract_hours_curso_from_orden_table(soup: BeautifulSoup, table_index: int =
     return result
 
 
+def find_anexo_range(all_tags, titulo_name_substring: str):
+    """Para un RD que agrupa varios titulos bajo un ANEXO cada uno (p.ej. RD
+    127/2014, 14 FPB en un solo documento) -- localiza el rango [start, end)
+    de tags del ANEXO cuyo h5.anexo_tit contiene `titulo_name_substring`
+    (case-insensitive). El limite final es el siguiente h5.anexo_num (nuevo
+    ANEXO) despues de start. `all_tags` debe venir de
+    soup.find_all(["h5", "p"]) -- el mismo tag-set en todo el modulo, para
+    que los indices sean consistentes entre llamadas."""
+    start = None
+    end = None
+    for i, tag in enumerate(all_tags):
+        if (
+            tag.name == "h5"
+            and tag.get("class") == ["anexo_tit"]
+            and titulo_name_substring.lower() in tag.get_text(strip=True).lower()
+            and start is None
+        ):
+            start = i
+        elif start is not None and tag.name == "h5" and tag.get("class") == ["anexo_num"] and i > start:
+            end = i
+            break
+    return start, end
+
+
+def extract_fpb_sections(all_tags, start: int, end: int) -> dict:
+    """Estructura de Formacion Profesional Basica (RD 127/2014 y hermanos):
+    NO usa 'Articulo N.' -- usa secciones numeradas "1. Identificacion del
+    titulo." / "2.1. Competencia general del titulo." / "2.2. Competencias
+    del titulo." (CPPS, lista a-w) / "2.3. Relacion de cualificaciones..."
+    (igual formato que el Articulo 6 de loe_clasica, reusa
+    extract_cualificaciones) / "2.4. Entorno profesional." / "2.5.
+    Prospectiva..." / "3.1. Objetivos generales del titulo" (lista a-y) /
+    "3.2. Modulos profesionales." (solo tabla de contenidos, se ignora) /
+    "3.3. Desarrollo de los modulos:" (contenido real, ver
+    extract_modules_fpb). Se mapea 1:1 a los mismos campos boa_articles que
+    loe_clasica (article_2/4/5/6/7/8/9) para que el resto de la app (vistas,
+    RaOgMatrix, etc) no necesite tratamiento especial para titulos FPB."""
+    markers = [
+        (r"^1\.\s*Identificaci[oó]n del t[ií]tulo\.?$", "article_2"),
+        (r"^2\.1\.?\s*Competencia general del t[ií]tulo\.?$", "article_4"),
+        (r"^2\.2\.?\s*Competencias del t[ií]tulo\.?$", "article_5"),
+        (r"^2\.3\.?\s*Relaci[oó]n de cualificaciones", "article_6"),
+        (r"^2\.4\.?\s*Entorno profesional\.?$", "article_7"),
+        (r"^2\.5\.?\s*Prospectiva del t[ií]tulo", "article_8"),
+        (r"^3\.1\.?\s*Objetivos generales del t[ií]tulo\.?$", "article_9"),
+        (r"^3\.2\.?\s*M[oó]dulos profesionales\.?$", None),
+        (r"^3\.3\.?\s*Desarrollo de los m[oó]dulos:?$", "__modules__"),
+    ]
+    sections: dict = {}
+    current_key = None
+    buf: list = []
+
+    def flush():
+        if current_key and current_key != "__modules__":
+            sections[current_key] = "\n".join(buf).strip()
+        buf.clear()
+
+    modules_start = None
+    for i in range(start, end):
+        tag = all_tags[i]
+        if tag.name != "p":
+            continue
+        txt = tag.get_text(strip=True)
+        matched_key = None
+        matched = False
+        for pattern, key in markers:
+            if re.match(pattern, txt, re.IGNORECASE):
+                matched = True
+                matched_key = key
+                break
+        if matched:
+            flush()
+            if matched_key == "__modules__":
+                modules_start = i + 1
+                current_key = None
+                break
+            current_key = matched_key
+        elif current_key:
+            buf.append(txt)
+    flush()
+    return sections, modules_start
+
+
+def extract_modules_fpb(all_tags, modules_start: int, end: int) -> list:
+    """Modulos de un titulo FPB (desde '3.3. Desarrollo de los modulos:'
+    hasta `end`, el limite del ANEXO calculado por find_anexo_range()).
+    Mismo patron interno que extract_modules_variant_c (Modulo Profesional:
+    / Codigo: / RA numerados / Criterios de evaluacion: / CE letra) pero
+    ADEMAS captura 'Duracion: N horas.' dentro de cada modulo -- las horas
+    vienen embebidas en el propio RD, un FPB no tiene una Orden de
+    curriculo separada con tabla de horas como loe_clasica."""
+    modules = []
+    cur_mod = None
+    cur_ra = None
+    for i in range(modules_start, end):
+        tag = all_tags[i]
+        if tag.name != "p":
+            continue
+        txt = tag.get_text(strip=True)
+        m_mod = re.match(r"^M[oó]dulo [Pp]rofesional:\s*(.+?)\.?$", txt)
+        # Mismo caso ambiguo que en extract_modules_variant_c: "Modulo:"
+        # a secas puede ser el nombre de un modulo nuevo (si lo que sigue
+        # no son solo digitos) -- visto en "Modulo: Ciencias aplicadas
+        # II." dentro del mismo RD 127/2014.
+        m_mod_short = None if m_mod else re.match(r"^M[oó]dulo:\s*(.+?)\.?$", txt)
+        if m_mod_short and not re.match(r"^\d+$", m_mod_short.group(1).strip()):
+            m_mod = m_mod_short
+            m_mod_short = None
+        m_cod = re.match(r"^C[oó]digo[:.]\s*(\S+)", txt) or m_mod_short
+        m_dur = re.match(r"^Duraci[oó]n:\s*(\d+)\s*horas?\.?$", txt, re.IGNORECASE)
+        m_ra = re.match(r"^(\d+)[.)]\s+(.+)$", txt)
+        m_ce = re.match(r"^([a-zñ])\)\s*(.+)$", txt)
+        if m_mod:
+            if cur_mod:
+                modules.append(cur_mod)
+            cur_mod = {"name": m_mod.group(1).strip(), "code": None, "hours": None, "ras": []}
+            cur_ra = None
+        elif m_cod and cur_mod is not None:
+            cur_mod["code"] = m_cod.group(1).strip().rstrip(".")
+        elif m_dur and cur_mod is not None:
+            cur_mod["hours"] = int(m_dur.group(1))
+        elif txt.startswith("Resultados de aprendizaje") or txt.startswith("Criterios de evaluaci") or txt.startswith("Contenidos"):
+            continue
+        elif m_ra and cur_mod is not None and cur_mod.get("hours") is None:
+            # Los "Contenidos basicos" que siguen a la Duracion tambien
+            # pueden tener lineas que empiezan por numero -- una vez fijada
+            # la duracion del modulo, dejar de interpretar "N. texto" como
+            # RA nuevo (ya estamos en la seccion de contenidos, no en RA/CE).
+            cur_ra = {"ra_number": int(m_ra.group(1)), "desc": m_ra.group(2).strip(), "ces": []}
+            cur_mod["ras"].append(cur_ra)
+        elif m_ce and cur_ra is not None and cur_mod.get("hours") is None:
+            cur_ra["ces"].append({"letter": m_ce.group(1), "desc": m_ce.group(2).strip()})
+    if cur_mod:
+        modules.append(cur_mod)
+    return modules
+
+
+def extract_fpb_hours_from_orden(all_tags, start: int, end: int) -> dict:
+    """Horas REALES por modulo de un titulo FPB, de la Orden de
+    implantacion (p.ej. Orden ECD/1030/2014 para los 14 FPB de RD
+    127/2014) -- las horas que trae el RD 127/2014 (Duracion: N horas.
+    dentro de cada modulo) son solo el curriculo BASICO/minimo, no suman
+    2000h; esta Orden reescribe cada modulo con las horas REALES de
+    ambito Ministerio (mismo patron que loe_clasica: RD = minimas, Orden
+    = curriculo completo). Devuelve {codigo: horas} -- sin curso, un FPB
+    no reparte por curso en esta tabla."""
+    result = {}
+    cur_code = None
+    for i in range(start, end):
+        tag = all_tags[i]
+        if tag.name != "p":
+            continue
+        txt = tag.get_text(strip=True)
+        m_cod = re.match(r"^C[oó]digo[:.]\s*(\S+)", txt)
+        m_dur = re.match(r"^Duraci[oó]n:\s*(\d+)\s*horas?\.?$", txt, re.IGNORECASE)
+        if m_cod:
+            cur_code = m_cod.group(1).strip().rstrip(".")
+        elif m_dur and cur_code:
+            result[cur_code] = int(m_dur.group(1))
+            cur_code = None
+    return result
+
+
 def insert_titulo(conn, *, code, name, level, hours, family_id, region_id,
                    articles, cpps, cps, ucs, og, modules, hours_by_code,
                    fuente):
