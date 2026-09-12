@@ -74,14 +74,14 @@ def extract_cualificaciones(articulo_6_text: str):
     ese caso y se sintetiza el id 'a' para no perder la cualificacion."""
     cps, ucs = [], []
     # Solo la seccion de "completa(s)" (antes de "incompletas", si existe)
-    seccion = re.split(r"\n\d+\.\s*Cualificaci[oó]n(?:es)? profesionales? incompletas?", articulo_6_text)[0]
-    seccion = re.sub(r"^.*?Cualificaci[oó]n(?:es)? profesionales? completa[s]?:\s*\n?", "", seccion, count=1, flags=re.DOTALL)
+    seccion = re.split(r"\n\d+\.\s*Cualificaci[oó]n(?:es)? profesional(?:es)? incompletas?", articulo_6_text)[0]
+    seccion = re.sub(r"^.*?Cualificaci[oó]n(?:es)? profesional(?:es)? completa[s]?:\s*\n?", "", seccion, count=1, flags=re.DOTALL)
     if not re.match(r"^[a-zñ]\)\s", seccion):
         seccion = "a) " + seccion
     entries = re.split(r"\n(?=[a-zñ]\) )", seccion)
     for entry in entries:
         m = re.match(
-            r"^([a-zñ])\)\s*(.+?)\.?\s+([A-Z]{2,4}\s?\d{2,3}_\d)\s*\(((?:R\.D\.|RD|Real Decreto)[^)]+)\)\s*,?\s*que (?:comprende|contiene|incluye)",
+            r"^([a-zñ])\)\s*(.+?)\.?\s+([A-Z]{2,4}\s?\d{2,4}_\d)\s*\(((?:R\.D\.|RD|Real Decreto)[^)]+)\)\s*,?\s*que (?:comprende|contiene|incluye)",
             entry, re.DOTALL,
         )
         if not m:
@@ -106,7 +106,7 @@ def extract_modules_variant_c(soup: BeautifulSoup) -> list:
     start = None
     end = None
     for i, tag in enumerate(all_tags):
-        if tag.name == "h5" and tag.get("class") == ["anexo_tit"] and "dulos Profesionales" in tag.get_text():
+        if tag.name == "h5" and tag.get("class") == ["anexo_tit"] and "dulos profesionales" in tag.get_text().lower():
             start = i
         elif start is not None and tag.name == "h5" and "anexo_tit" in (tag.get("class") or []) and i > start:
             end = i
