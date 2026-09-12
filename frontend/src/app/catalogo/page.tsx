@@ -24,6 +24,8 @@ import { TabNormativa } from "@/components/features/catalogo/TabNormativa";
 import { useTranslation } from "react-i18next";
 import { useAppStore } from "@/store/useAppStore";
 import { getAcronym } from "@/utils/catalogFormat";
+import { GENERACIONES_CURRICULO, getFuenteNormativa } from "@/utils/curriculumGeneraciones";
+import { ExternalLink } from "lucide-react";
 
 type Tab = "familias" | "titulos" | "modulos" | "ra-ce";
 
@@ -421,6 +423,26 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
               {t('botones.catalogo.cursosAModulos', {defaultValue: 'Cursos → módulos'})}
             </Button>
           </div>
+
+          {(() => {
+            const fuente = getFuenteNormativa(selectedTituloObj.boa_articles);
+            const info = GENERACIONES_CURRICULO[fuente.generacion];
+            return (
+              <Card className="p-4 border-l-4 border-l-purple-500">
+                <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                  <span className="text-caption font-semibold text-muted uppercase tracking-wider">Fuente normativa</span>
+                  <Badge variant="default" className="font-mono">{info.label}</Badge>
+                  {fuente.rd_numero && <span className="text-caption text-foreground/80">{fuente.rd_numero}{fuente.rd_fecha ? ` (${fuente.rd_fecha})` : ""}</span>}
+                  {fuente.boe_url && (
+                    <a href={fuente.boe_url} target="_blank" rel="noopener noreferrer" className="text-caption text-info hover:text-info/80 inline-flex items-center gap-1">
+                      <ExternalLink className="w-3 h-3" /> BOE
+                    </a>
+                  )}
+                </div>
+                <p className="text-caption text-muted leading-relaxed">{fuente.nota || info.leyenda}</p>
+              </Card>
+            );
+          })()}
 
           {selectedTituloObj.boa_articles && Object.keys(selectedTituloObj.boa_articles).length > 0 ? (
             <div className="grid grid-cols-1 gap-6">
