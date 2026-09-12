@@ -18,6 +18,7 @@ function AnimatedCounter({ value, suffix = "", decimals = 0 }: { value: number, 
   return <motion.span>{display}</motion.span>;
 }
 
+import { useTranslation } from "react-i18next";
 import { useAppStore } from "@/store/useAppStore";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 
@@ -27,6 +28,7 @@ interface DashboardKPIsProps {
 }
 
 export function DashboardKPIs({ cursoData, moduleData }: DashboardKPIsProps) {
+  const { t } = useTranslation();
   const { df_sgmt } = useDynamicPlanning();
   
   const total_impartido = df_sgmt.reduce((sum: number, row: any) => {
@@ -98,14 +100,14 @@ export function DashboardKPIs({ cursoData, moduleData }: DashboardKPIsProps) {
       </h2>
       <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
         <Card glow accent="top" className="p-6 flex flex-col items-center justify-center border-t-blue-500 hover:scale-[1.02] transition-transform">
-          <span className="text-body text-muted mb-1 text-center">Horas previstas</span>
+          <span className="text-body text-muted mb-1 text-center">{t('campos.dashboard.horasPrevistasLabel', {defaultValue: 'Horas previstas'})}</span>
           <span className="text-heading font-bold text-foreground">
             <AnimatedCounter value={total_previsto} /> h
           </span>
         </Card>
         
         <Card glow accent="top" className="p-6 flex flex-col items-center justify-center border-t-[#14a085] hover:scale-[1.02] transition-transform">
-          <span className="text-body text-muted mb-1 text-center">Horas impartidas</span>
+          <span className="text-body text-muted mb-1 text-center">{t('campos.dashboard.horasImpartidasLabel', {defaultValue: 'Horas impartidas'})}</span>
           <span className="text-heading font-bold text-foreground">
             <AnimatedCounter value={total_impartido} /> h
           </span>
@@ -119,7 +121,7 @@ export function DashboardKPIs({ cursoData, moduleData }: DashboardKPIsProps) {
         </Card>
         
         <Card glow accent="top" className="p-6 flex flex-col items-center justify-center border-t-orange-500 hover:scale-[1.02] transition-transform">
-          <span className="text-body text-muted mb-1 text-center">Horas sin docencia</span>
+          <span className="text-body text-muted mb-1 text-center">{t('campos.dashboard.horasSinDocenciaLabel', {defaultValue: 'Horas sin docencia'})}</span>
           <span className="text-heading font-bold text-foreground">
             <AnimatedCounter value={h_sin_docencia} /> h
           </span>

@@ -402,8 +402,8 @@ export default function MagiaPage() {
                     {(!activeCursoId || !activeModuleId) ? (
                       <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                         <FileText className="w-16 h-16 text-muted-foreground opacity-50" />
-                        <h2 className="text-heading font-bold">No hay curso ni programación cargada</h2>
-                        <p className="text-muted mb-4">Debes abrir o crear un archivo de programación y curso en tu Archivos.</p>
+                        <h2 className="text-heading font-bold">{t('campos.calificaciones.sinCursoNiProgramacionTitulo', {defaultValue: 'No hay curso ni programación cargada'})}</h2>
+                        <p className="text-muted mb-4">{t('campos.calificaciones.sinCursoNiProgramacionDesc', {defaultValue: 'Debes abrir o crear un archivo de programación y curso en tu Archivos.'})}</p>
                         <Link href="/archivos">
                           <Button variant="primary" className="gap-2">
                             <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
@@ -424,27 +424,27 @@ export default function MagiaPage() {
                       <div className="space-y-4 animate-in fade-in duration-500">
                         {/* ── Contexto ── */}
                         <Card className="p-6 border-t-4 border-t-teal-500">
-                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Compass className="w-4 h-4" /></span> Contexto</h2>
-                          <p className="text-body text-muted mb-2">Información general y características del entorno.</p>
-                          <p className="text-caption text-muted italic">Sin documentos de apoyo todavía en esta sección.</p>
+                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Compass className="w-4 h-4" /></span> {t('nav.contexto', {defaultValue: 'Contexto'})}</h2>
+                          <p className="text-body text-muted mb-2">{t('campos.magia.contextoDesc', {defaultValue: 'Información general y características del entorno.'})}</p>
+                          <p className="text-caption text-muted italic">{t('campos.magia.sinDocumentosApoyo', {defaultValue: 'Sin documentos de apoyo todavía en esta sección.'})}</p>
                         </Card>
 
                         {/* ── Currículo ── */}
                         <Card className="p-6 border-t-4 border-t-teal-500">
-                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Grid className="w-4 h-4" /></span> Currículo</h2>
-                          <p className="text-body text-muted mb-6">Cruce de resultados de aprendizaje y criterios; documentos de UD y tareas.</p>
+                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Grid className="w-4 h-4" /></span> {t('nav.curriculo', {defaultValue: 'Currículo'})}</h2>
+                          <p className="text-body text-muted mb-6">{t('campos.magia.curriculoDesc', {defaultValue: 'Cruce de resultados de aprendizaje y criterios; documentos de UD y tareas.'})}</p>
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                               <div>
-                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Grid className="w-[1.2em] h-[1.2em] mr-1" /></span> Matriz RA ↔ UD</h3>
-                                <p className="text-body text-muted mb-6">Tabla cruzada de RA y su relación con las Unidades Didácticas.</p>
+                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Grid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.matrizRaUdTitulo', {defaultValue: 'Matriz RA ↔ UD'})}</h3>
+                                <p className="text-body text-muted mb-6">{t('campos.magia.matrizRaUdDesc', {defaultValue: 'Tabla cruzada de RA y su relación con las Unidades Didácticas.'})}</p>
                               </div>
                               <DualDownloadButtons type="matrices" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
                             </div>
 
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                               <div>
-                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Unidad didáctica</h3>
+                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.curriculo.unidadDidacticaSingular', {defaultValue: 'Unidad didáctica'})}</h3>
                                 {df_ud.length > 0 ? (
                                   <select id="ud_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold mb-4">
                                     {df_ud.map((u: any) => (
@@ -452,7 +452,7 @@ export default function MagiaPage() {
                                     ))}
                                   </select>
                                 ) : (
-                                  <p className="text-muted italic mb-4">No hay Unidades Didácticas definidas.</p>
+                                  <p className="text-muted italic mb-4">{t('campos.magia.sinUdDefinidas', {defaultValue: 'No hay Unidades Didácticas definidas.'})}</p>
                                 )}
                               </div>
                               <Button
@@ -468,15 +468,15 @@ export default function MagiaPage() {
 
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                               <div>
-                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Tarea competencial</h3>
+                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.tareaCompetencialTitulo', {defaultValue: 'Tarea competencial'})}</h3>
                                 {df_act.length > 0 ? (
                                   <select id="tarea_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold mb-4">
-                                    {df_act.map((t: any) => (
-                                      <option key={t.ID || t.id_act} value={t.ID || t.id_act}>{t.ID || t.id_act} - {t.Nombre_Tarea || ''}</option>
+                                    {df_act.map((tarea: any) => (
+                                      <option key={tarea.ID || tarea.id_act} value={tarea.ID || tarea.id_act}>{tarea.ID || tarea.id_act} - {tarea.Nombre_Tarea || ''}</option>
                                     ))}
                                   </select>
                                 ) : (
-                                  <p className="text-muted italic mb-4">No hay Tareas competenciales definidas.</p>
+                                  <p className="text-muted italic mb-4">{t('campos.magia.sinTareasDefinidas', {defaultValue: 'No hay Tareas competenciales definidas.'})}</p>
                                 )}
                               </div>
                               <Button
@@ -494,16 +494,16 @@ export default function MagiaPage() {
 
                         {/* ── Metodología ── */}
                         <Card className="p-6 border-t-4 border-t-teal-500">
-                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Lightbulb className="w-4 h-4" /></span> Metodología</h2>
-                          <p className="text-body text-muted mb-2">Estrategias metodológicas y recursos.</p>
-                          <p className="text-caption text-muted italic">Sin documentos de apoyo todavía en esta sección.</p>
+                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Lightbulb className="w-4 h-4" /></span> {t('nav.metodologia', {defaultValue: 'Metodología'})}</h2>
+                          <p className="text-body text-muted mb-2">{t('campos.magia.metodologiaDesc', {defaultValue: 'Estrategias metodológicas y recursos.'})}</p>
+                          <p className="text-caption text-muted italic">{t('campos.magia.sinDocumentosApoyo', {defaultValue: 'Sin documentos de apoyo todavía en esta sección.'})}</p>
                         </Card>
 
                         {/* ── Instrumentos ── */}
                         <Card className="p-6 border-t-4 border-t-teal-500">
-                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Wrench className="w-4 h-4" /></span> Instrumentos</h2>
-                          <p className="text-body text-muted mb-2">Definición y pesos de las herramientas de evaluación.</p>
-                          <p className="text-caption text-muted italic">Sin documentos de apoyo todavía en esta sección.</p>
+                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Wrench className="w-4 h-4" /></span> {t('campos.magia.instrumentosTitulo', {defaultValue: 'Instrumentos'})}</h2>
+                          <p className="text-body text-muted mb-2">{t('campos.magia.instrumentosDesc', {defaultValue: 'Definición y pesos de las herramientas de evaluación.'})}</p>
+                          <p className="text-caption text-muted italic">{t('campos.magia.sinDocumentosApoyo', {defaultValue: 'Sin documentos de apoyo todavía en esta sección.'})}</p>
                         </Card>
                       </div>
                     )}
@@ -517,13 +517,13 @@ export default function MagiaPage() {
                   <div className="space-y-4 animate-in fade-in duration-500">
                     {/* ── Calendario ── */}
                     <Card className="p-6 border-t-4 border-t-emerald-500">
-                      <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Calendar className="w-4 h-4" /></span> Calendario</h2>
-                      <p className="text-body text-muted mb-6">Horario, trimestres, festivos y eventos.</p>
+                      <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Calendar className="w-4 h-4" /></span> {t('nav.calendario', {defaultValue: 'Calendario'})}</h2>
+                      <p className="text-body text-muted mb-6">{t('campos.magia.calendarioDesc', {defaultValue: 'Horario, trimestres, festivos y eventos.'})}</p>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                           <div>
-                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><CalendarDays className="w-[1.2em] h-[1.2em] mr-1" /></span> Calendario académico</h3>
-                            <p className="text-body text-muted mb-6">Vista global del curso con fechas, sesiones y eventos.</p>
+                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><CalendarDays className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.verificacion.calendarioAcademicoTitulo', {defaultValue: 'Calendario académico'})}</h3>
+                            <p className="text-body text-muted mb-6">{t('campos.magia.calendarioAcademicoDesc', {defaultValue: 'Vista global del curso con fechas, sesiones y eventos.'})}</p>
                           </div>
                           <DualDownloadButtons type="calendario" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
                         </div>
@@ -532,13 +532,13 @@ export default function MagiaPage() {
 
                     {/* ── Alumnado ── */}
                     <Card className="p-6 border-t-4 border-t-emerald-500">
-                      <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Users className="w-4 h-4" /></span> Alumnado</h2>
-                      <p className="text-body text-muted mb-6">Fichas personales y ubicación en el aula.</p>
+                      <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Users className="w-4 h-4" /></span> {t('nav.alumnado', {defaultValue: 'Alumnado'})}</h2>
+                      <p className="text-body text-muted mb-6">{t('campos.magia.alumnadoDesc', {defaultValue: 'Fichas personales y ubicación en el aula.'})}</p>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                           <div>
-                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Alumnado. Ubicación en el aula</h3>
-                            <p className="text-body text-muted mb-6">Distribución y ubicación del alumnado en el aula.</p>
+                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.alumnadoUbicacionAulaTitulo', {defaultValue: 'Alumnado. Ubicación en el aula'})}</h3>
+                            <p className="text-body text-muted mb-6">{t('campos.magia.distribucionUbicacionAulaDesc', {defaultValue: 'Distribución y ubicación del alumnado en el aula.'})}</p>
                           </div>
                           <DualDownloadButtons type="alumnado_ubicacion" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
                         </div>
@@ -546,8 +546,8 @@ export default function MagiaPage() {
                         {activeAlumnado.length > 0 && (
                           <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                             <div>
-                              <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> Progreso del alumnado</h3>
-                              <p className="text-body text-muted mb-4">Genera un informe del avance del alumnado.</p>
+                              <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.progresoAlumnadoTitulo', {defaultValue: 'Progreso del alumnado'})}</h3>
+                              <p className="text-body text-muted mb-4">{t('campos.magia.generaInformeAvanceDesc', {defaultValue: 'Genera un informe del avance del alumnado.'})}</p>
                               <select id="alumnado_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold">
                                 {activeAlumnado.map((al: Alumnado) => (
                                   <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre} ({al.ID})</option>
@@ -570,8 +570,8 @@ export default function MagiaPage() {
                         {activeAlumnado.length > 0 && (
                           <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                             <div>
-                              <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Contact className="w-[1.2em] h-[1.2em] mr-1" /></span> Ficha individual</h3>
-                              <p className="text-body text-muted mb-4">Ficha de matrícula + tutoría de un alumno/a, para llevar a una reunión de orientación.</p>
+                              <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Contact className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.fichaIndividualTitulo', {defaultValue: 'Ficha individual'})}</h3>
+                              <p className="text-body text-muted mb-4">{t('campos.magia.fichaIndividualDesc', {defaultValue: 'Ficha de matrícula + tutoría de un alumno/a, para llevar a una reunión de orientación.'})}</p>
                               <select id="ficha_al_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold">
                                 {activeAlumnado.map((al: Alumnado) => (
                                   <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre} ({al.ID})</option>
@@ -595,27 +595,27 @@ export default function MagiaPage() {
 
                     {/* ── Seguimiento ── */}
                     <Card className="p-6 border-t-4 border-t-emerald-500">
-                      <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><TrendingUp className="w-4 h-4" /></span> Seguimiento</h2>
-                      <p className="text-body text-muted mb-6">Diario de clases, secuenciación por UD y planificación mensual.</p>
+                      <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><TrendingUp className="w-4 h-4" /></span> {t('campos.magia.seguimientoLabel', {defaultValue: 'Seguimiento'})}</h2>
+                      <p className="text-body text-muted mb-6">{t('campos.magia.seguimientoDesc', {defaultValue: 'Diario de clases, secuenciación por UD y planificación mensual.'})}</p>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                           <div>
-                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguimiento diario</h3>
-                            <p className="text-body text-muted mb-6">Registro detallado de la planificación del día a día.</p>
+                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.seguimientoDiarioTitulo', {defaultValue: 'Seguimiento diario'})}</h3>
+                            <p className="text-body text-muted mb-6">{t('campos.magia.seguimientoDiarioDesc', {defaultValue: 'Registro detallado de la planificación del día a día.'})}</p>
                           </div>
                           <DualDownloadButtons type="seguimiento" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
                         </div>
                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                           <div>
-                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> Clases por UD</h3>
-                            <p className="text-body text-muted mb-6">Secuenciación de sesiones de cada Unidad didáctica.</p>
+                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.clasesPorUdTitulo', {defaultValue: 'Clases por UD'})}</h3>
+                            <p className="text-body text-muted mb-6">{t('campos.magia.clasesPorUdDesc', {defaultValue: 'Secuenciación de sesiones de cada Unidad didáctica.'})}</p>
                           </div>
                           <DualDownloadButtons type="clases_ud" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
                         </div>
                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                           <div>
-                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> Planificación</h3>
-                            <p className="text-body text-muted mb-6">Distribución temporal mensual (previsto/impartido) por UD.</p>
+                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.planificacionTitulo', {defaultValue: 'Planificación'})}</h3>
+                            <p className="text-body text-muted mb-6">{t('campos.magia.planificacionDesc', {defaultValue: 'Distribución temporal mensual (previsto/impartido) por UD.'})}</p>
                           </div>
                           <DualDownloadButtons type="planificacion" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
                         </div>
@@ -626,8 +626,8 @@ export default function MagiaPage() {
                     <Card className="p-6 border-t-4 border-t-blue-500">
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
                         <div>
-                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Award className="w-4 h-4" /></span> Calificaciones</h2>
-                          <p className="text-body text-muted">Boletines, actas de evaluación e informes por alumno/a.</p>
+                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Award className="w-4 h-4" /></span> {t('nav.calificaciones', {defaultValue: 'Calificaciones'})}</h2>
+                          <p className="text-body text-muted">{t('campos.magia.calificacionesDesc', {defaultValue: 'Boletines, actas de evaluación e informes por alumno/a.'})}</p>
                         </div>
                         <Button variant="success" onClick={handleExportExcelCompleto} className="gap-2 shrink-0">
                           <FileSpreadsheet className="w-4 h-4" /> {t('botones.magia.exportarExcelCompleto', {defaultValue: 'Exportar Excel completo'})}
@@ -643,14 +643,14 @@ export default function MagiaPage() {
                         ].map(tri => (
                           <div key={tri.key} className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
                             <div>
-                              <h3 className="text-subheading font-bold mb-3"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> Boletín del {tri.label}</h3>
+                              <h3 className="text-subheading font-bold mb-3"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.boletinDelTrimestre', {trimestre: tri.label, defaultValue: 'Boletín del {{trimestre}}'})}</h3>
                               <div className="grid grid-cols-2 gap-2">
                                 <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-lg py-2">
-                                  <div className="text-caption text-muted">Inicio</div>
+                                  <div className="text-caption text-muted">{t('campos.calendario.inicioLabel', {defaultValue: 'Inicio'})}</div>
                                   <div className="text-subheading font-mono font-bold text-foreground">{formatD(tri.ini)}</div>
                                 </div>
                                 <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-lg py-2">
-                                  <div className="text-caption text-muted">Fin</div>
+                                  <div className="text-caption text-muted">{t('campos.calendario.finLabel', {defaultValue: 'Fin'})}</div>
                                   <div className="text-subheading font-mono font-bold text-foreground">{formatD(tri.fin)}</div>
                                 </div>
                               </div>
@@ -670,7 +670,7 @@ export default function MagiaPage() {
                       {/* Segunda fila: Final y Extraordinaria */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
-                          <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Evaluación final ordinaria</h3>
+                          <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.evaluacionFinalOrdinariaTitulo', {defaultValue: 'Evaluación final ordinaria'})}</h3>
                           <div className="flex gap-2 mt-auto">
                             <Button onClick={() => handleDownloadPdf('grupal_final', 'pdf', { fechaCorte: fechaFinal })} disabled={downloadingStr === 'grupal_final_pdf'} className="flex-1">
                               {downloadingStr === 'grupal_final_pdf' ? '⏳...' : t('botones.magia.vistaPdf', {defaultValue: 'Vista .pdf'})}
@@ -682,7 +682,7 @@ export default function MagiaPage() {
                         </div>
 
                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between text-center gap-4">
-                          <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Evaluación final extraordinaria</h3>
+                          <h3 className="text-subheading font-bold mb-1"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.evaluacionFinalExtraordinariaTitulo', {defaultValue: 'Evaluación final extraordinaria'})}</h3>
                           <div className="flex gap-2 mt-auto">
                             <Button onClick={() => handleDownloadPdf('grupal_final', 'pdf', { fechaCorte: fechaFinal })} disabled={downloadingStr === 'grupal_final_pdf'} className="flex-1">
                               {downloadingStr === 'grupal_final_pdf' ? '⏳...' : t('botones.magia.vistaPdf', {defaultValue: 'Vista .pdf'})}

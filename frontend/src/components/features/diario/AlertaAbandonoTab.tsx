@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/Card";
 import { useAppStore } from "@/store/useAppStore";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, filtrarPorGev } from "@/utils/calificaciones";
+import { useTranslation } from "react-i18next";
 
 /**
  * TAB "Alerta abandono" en /diario
@@ -39,6 +40,7 @@ interface AlumnoAlerta {
 }
 
 export function AlertaAbandonoTab() {
+  const { t } = useTranslation();
   const { cursoData, moduleData, activeModuleId } = useAppStore();
   const [attendanceData, setAttendanceData] = useState<AttendanceRecord[]>([]);
 
@@ -118,28 +120,28 @@ export function AlertaAbandonoTab() {
         <Card className="p-4 flex items-center gap-3">
           <Users className="w-5 h-5 text-accent" />
           <div>
-            <p className="text-caption text-muted">Alumnado activo</p>
+            <p className="text-caption text-muted">{t('campos.diario.alumnadoActivoLabel', {defaultValue: 'Alumnado activo'})}</p>
             <p className="text-subheading font-bold text-foreground">{stats.total}</p>
           </div>
         </Card>
         <Card className="p-4 flex items-center gap-3">
           <XCircle className="w-5 h-5 text-red-500" />
           <div>
-            <p className="text-caption text-muted">Riesgo alto</p>
+            <p className="text-caption text-muted">{t('campos.diario.riesgoAltoLabel', {defaultValue: 'Riesgo alto'})}</p>
             <p className="text-subheading font-bold text-red-500">{stats.alto}</p>
           </div>
         </Card>
         <Card className="p-4 flex items-center gap-3">
           <AlertTriangle className="w-5 h-5 text-amber-500" />
           <div>
-            <p className="text-caption text-muted">Riesgo medio</p>
+            <p className="text-caption text-muted">{t('campos.diario.riesgoMedioLabel', {defaultValue: 'Riesgo medio'})}</p>
             <p className="text-subheading font-bold text-amber-500">{stats.medio}</p>
           </div>
         </Card>
         <Card className="p-4 flex items-center gap-3">
           <TrendingDown className="w-5 h-5 text-accent" />
           <div>
-            <p className="text-caption text-muted">Tasa abandono estimada</p>
+            <p className="text-caption text-muted">{t('campos.diario.tasaAbandonoEstimadaLabel', {defaultValue: 'Tasa abandono estimada'})}</p>
             <p className="text-subheading font-bold text-accent">{stats.tasa}%</p>
           </div>
         </Card>
@@ -149,8 +151,8 @@ export function AlertaAbandonoTab() {
       {alertas.length === 0 ? (
         <Card className="p-8 text-center">
           <CheckCircle2 className="w-12 h-12 text-green-500 mx-auto mb-3" />
-          <p className="text-body font-semibold text-foreground">Sin alertas de abandono</p>
-          <p className="text-caption text-muted mt-1">Todo el alumnado activo está dentro de los parámetros normales.</p>
+          <p className="text-body font-semibold text-foreground">{t('campos.diario.sinAlertasAbandono', {defaultValue: 'Sin alertas de abandono'})}</p>
+          <p className="text-caption text-muted mt-1">{t('campos.diario.todoAlumnadoParametrosNormales', {defaultValue: 'Todo el alumnado activo está dentro de los parámetros normales.'})}</p>
         </Card>
       ) : (
         <div className="space-y-3">

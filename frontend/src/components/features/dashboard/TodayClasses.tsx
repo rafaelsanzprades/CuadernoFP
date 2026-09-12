@@ -3,11 +3,15 @@ import React from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { Card } from '@/components/ui/Card';
 import { format } from 'date-fns';
-import { es } from 'date-fns/locale';
+import { useTranslation } from 'react-i18next';
 import { simulateSchedule } from '@/utils/scheduleSimulator';
 import { useDynamicPlanning } from '@/hooks/useDynamicPlanning';
+import { useDateFnsLocale, useDateFormatPatterns } from '@/hooks/useDateFnsLocale';
 
 export const TodayClasses = () => {
+  const { t } = useTranslation();
+  const dateFnsLocale = useDateFnsLocale();
+  const dateFormats = useDateFormatPatterns();
   const { moduleData, cursoData, dataSource } = useAppStore();
   // cursoData.planning_ledger nunca se persiste — se recalcula en memoria.
   const { planningLedger } = useDynamicPlanning();
@@ -23,17 +27,17 @@ export const TodayClasses = () => {
   const todaySchedule = simulation[todayStr];
 
   const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-  const formattedToday = (format(now, "EEEE d 'de' MMMM", { locale: es }));
+  const formattedToday = (format(now, dateFormats.weekdayDayMonth, { locale: dateFnsLocale }));
 
   if (!todaySchedule || todaySchedule.isFestivo || !todaySchedule.udId || todaySchedule.sessions.length === 0) {
-    const reason = todaySchedule?.isFestivo 
-      ? `Festivo: ${todaySchedule.festivoName || "Día no lectivo"}`
-      : "No tienes sesiones planificadas para el día de hoy según el calendario del módulo.";
+    const reason = todaySchedule?.isFestivo
+      ? t('campos.dashboard.festivoRazon', {nombre: todaySchedule.festivoName || t('campos.dashboard.diaNoLectivo', {defaultValue: 'Día no lectivo'}), defaultValue: 'Festivo: {{nombre}}'})
+      : t('campos.dashboard.sinSesionesHoy', {defaultValue: 'No tienes sesiones planificadas para el día de hoy según el calendario del módulo.'});
 
     return (
       <Card className="p-6">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-2">
-          <Calendar className="w-6 h-6" /> Tus clases de hoy ({formattedToday})
+          <Calendar className="w-6 h-6" /> {t('campos.dashboard.tusClasesDeHoy', {fecha: formattedToday, defaultValue: 'Tus clases de hoy ({{fecha}})'})}
         </h2>
         <p className="text-muted">{reason}</p>
       </Card>
@@ -50,7 +54,7 @@ export const TodayClasses = () => {
       </div>
       
       <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4 relative z-10">
-        <Calendar className="w-6 h-6 text-accent" /> Tus clases de hoy ({formattedToday})
+        <Calendar className="w-6 h-6 text-accent" /> {t('campos.dashboard.tusClasesDeHoy', {fecha: formattedToday, defaultValue: 'Tus clases de hoy ({{fecha}})'})}
       </h2>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10">
@@ -85,13 +89,13 @@ export const TodayClasses = () => {
               
               {ses.Contenidos && (
                 <div className="text-body text-muted">
-                  <span className="font-semibold text-foreground/80">Contenidos:</span> {ses.Contenidos}
+                  <span className="font-semibold text-foreground/80">{t('campos.dashboard.contenidosLabelDosPuntos', {defaultValue: 'Contenidos:'})}</span> {ses.Contenidos}
                 </div>
               )}
               
               {ses.Recursos && (
                 <div className="text-caption text-muted/80 bg-foreground/5 p-2 rounded border border-[var(--glass-border)] italic">
-                  <span className="font-semibold text-foreground/70 not-italic">Recursos:</span> {ses.Recursos}
+                  <span className="font-semibold text-foreground/70 not-italic">{t('campos.dashboard.recursosLabelDosPuntos', {defaultValue: 'Recursos:'})}</span> {ses.Recursos}
                 </div>
               )}
             </div>

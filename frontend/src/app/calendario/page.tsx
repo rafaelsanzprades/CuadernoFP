@@ -29,9 +29,11 @@ const toDate = (s: string): Date | null => {
 const inRange = (d: Date, s: Date | null, e: Date | null) =>
   !!(s && e && d >= s && d <= e);
 
-const MONTH_NAMES = [
-  "Enero","Febrero","Marzo","Abril","Mayo","Junio",
-  "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre",
+const getMonthNames = (t: (key: string, opts?: any) => string) => [
+  t('campos.calendario.mesEnero', {defaultValue: 'Enero'}), t('campos.calendario.mesFebrero', {defaultValue: 'Febrero'}), t('campos.calendario.mesMarzo', {defaultValue: 'Marzo'}),
+  t('campos.calendario.mesAbril', {defaultValue: 'Abril'}), t('campos.calendario.mesMayo', {defaultValue: 'Mayo'}), t('campos.calendario.mesJunio', {defaultValue: 'Junio'}),
+  t('campos.calendario.mesJulio', {defaultValue: 'Julio'}), t('campos.calendario.mesAgosto', {defaultValue: 'Agosto'}), t('campos.calendario.mesSeptiembre', {defaultValue: 'Septiembre'}),
+  t('campos.calendario.mesOctubre', {defaultValue: 'Octubre'}), t('campos.calendario.mesNoviembre', {defaultValue: 'Noviembre'}), t('campos.calendario.mesDiciembre', {defaultValue: 'Diciembre'}),
 ];
 const DAY_NAMES_SHORT = ["Lu","Ma","Mi","Ju","Vi","Sa","Do"];
 
@@ -44,6 +46,7 @@ function NotesTable({ calendar_notes, onUpdateNotes, autoMilestones, feoeIni, fe
   feoeFin?: string;
 }) {
   const { t } = useTranslation();
+  const MONTH_NAMES = React.useMemo(() => getMonthNames(t), [t]);
   const [newDate, setNewDate]         = useState("");
   const [newEndDate, setNewEndDate]   = useState("");
   const [newFestivo, setNewFestivo]   = useState("");
@@ -247,6 +250,7 @@ export default function CalendarioPage() {
   const [saving, setSaving] = useState(false);
   const { t } = useTranslation();
   const [saveMessage, setSaveMessage] = useState("");
+  const [saveIsError, setSaveIsError] = useState(false);
   const [activeTab, setActiveTab] = useState("fechas");
 
   const TABS = [
@@ -308,10 +312,12 @@ export default function CalendarioPage() {
     setSaveMessage("");
     const ok = await saveCursoData();
     if (ok) {
-      setSaveMessage("Guardado correctamente");
+      setSaveIsError(false);
+      setSaveMessage(t('toasts.comun.guardadoCorrectamente', {defaultValue: 'Guardado correctamente'}));
       setTimeout(() => setSaveMessage(""), 3000);
     } else {
-      setSaveMessage("Error al guardar");
+      setSaveIsError(true);
+      setSaveMessage(t('toasts.comun.errorGuardar', {defaultValue: 'Error al guardar'}));
     }
     setSaving(false);
   };
@@ -327,8 +333,8 @@ export default function CalendarioPage() {
 
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <Calendar className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-heading font-bold">No hay curso cargado</h2>
-                <p className="text-muted mb-4">Debes abrir o crear un archivo de curso en tu Archivos.</p>
+                <h2 className="text-heading font-bold">{t('campos.comun.sinCursoCargadoTitulo', {defaultValue: 'No hay curso cargado'})}</h2>
+                <p className="text-muted mb-4">{t('campos.comun.sinCursoCargadoDesc', {defaultValue: 'Debes abrir o crear un archivo de curso en tu Archivos.'})}</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
                     <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
@@ -349,7 +355,7 @@ export default function CalendarioPage() {
         <div className="flex-1 flex flex-col relative z-10 min-w-0">
           <Header />
           <main id="main-content" tabIndex={-1} className="flex-1 flex items-center justify-center content-area">
-            <div className="text-subheading text-info animate-pulse">Cargando calendario...</div>
+            <div className="text-subheading text-info animate-pulse">{t('campos.calendario.cargandoCalendario', {defaultValue: 'Cargando calendario...'})}</div>
           </main>
         </div>
       </div>
@@ -451,7 +457,7 @@ export default function CalendarioPage() {
 
           {/* Save message */}
           {saveMessage && (
-            <p className={`text-body font-semibold ${saveMessage.includes("Error") ? "text-danger" : "text-success"}`}>
+            <p className={`text-body font-semibold ${saveIsError ? "text-danger" : "text-success"}`}>
               {saveMessage}
             </p>
           )}
@@ -476,7 +482,7 @@ export default function CalendarioPage() {
               {/* Fechas generales */}
               <Card className="p-6 border-t-4 border-t-blue-500 overflow-visible z-30">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-subheading font-bold">Fechas generales</h2>
+                  <h2 className="text-subheading font-bold">{t('campos.calendario.fechasGeneralesTitulo', {defaultValue: 'Fechas generales'})}</h2>
                   <div className="flex gap-2">
 
                     <Button
@@ -518,9 +524,9 @@ export default function CalendarioPage() {
               {/* Sesiones semanales */}
               <Card className="p-6 border-t-4 border-t-purple-500">
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-subheading font-bold flex items-center gap-2">Horario semanal</h2>
+                  <h2 className="text-subheading font-bold flex items-center gap-2">{t('campos.calendario.horarioSemanalTitulo', {defaultValue: 'Horario semanal'})}</h2>
                   <div className="bg-foreground/15 px-4 py-2 rounded-lg border border-[var(--glass-border)] text-body">
-                    Desfase con BOA ({h_sem} h/sem):{" "}
+                    {t('campos.calendario.desfaseBoa', {h_sem, defaultValue: 'Desfase con BOA ({{h_sem}} h/sem):'})}{" "}
                     <span className={`font-bold ${suma_horario === h_sem ? "text-success" : "text-warning"}`}>
                       {suma_horario - h_sem} h
                     </span>
@@ -543,7 +549,7 @@ export default function CalendarioPage() {
 
               {/* Semana lectiva */}
               <Card className="p-6 border-t-4 border-t-yellow-500 overflow-hidden">
-                <h2 className="text-subheading font-bold mb-4 flex items-center gap-2">Semana lectiva</h2>
+                <h2 className="text-subheading font-bold mb-4 flex items-center gap-2">{t('campos.calendario.semanaLectivaTitulo', {defaultValue: 'Semana lectiva'})}</h2>
                 <div className="overflow-x-auto rounded-xl border border-[var(--glass-border)]">
                   <table className="w-full text-center text-body border-collapse table-fixed">
                     <thead>
@@ -560,9 +566,9 @@ export default function CalendarioPage() {
                     </thead>
                     <tbody>
                       {[
-                        { title: "1ª Ev.", wd: wd1, bg: "bg-purple-500/10" },
-                        { title: "2ª Ev.", wd: wd2, bg: "bg-red-500/10" },
-                        { title: "3ª Ev.", wd: wd3, bg: "bg-amber-500/10" },
+                        { title: t('campos.calendario.eval1Abrev', {defaultValue: '1ª Ev.'}), wd: wd1, bg: "bg-purple-500/10" },
+                        { title: t('campos.calendario.eval2Abrev', {defaultValue: '2ª Ev.'}), wd: wd2, bg: "bg-red-500/10" },
+                        { title: t('campos.calendario.eval3Abrev', {defaultValue: '3ª Ev.'}), wd: wd3, bg: "bg-amber-500/10" },
                       ].map((row, i) => {
                         const daysArr = ["Lun", "Mar", "Mié", "Jue", "Vie"] as const;
                         const totalDays = daysArr.reduce((acc, d) => acc + (row.wd[d] || 0), 0);
@@ -596,7 +602,7 @@ export default function CalendarioPage() {
                         );
                       })}
                       <tr className="bg-foreground/5 border-t-2 border-[var(--glass-border)] text-body font-bold">
-                        <td className="p-3 text-left">Total</td>
+                        <td className="p-3 text-left">{t('common.total', {defaultValue: 'Total'})}</td>
                         {["Lun", "Mar", "Mié", "Jue", "Vie"].map(day => {
                           const dh = Number(horario[day]) || 0;
                           const daysTotal = (wd1[day as keyof typeof wd1] + wd2[day as keyof typeof wd2] + wd3[day as keyof typeof wd3]);
@@ -631,29 +637,29 @@ export default function CalendarioPage() {
               {/* Trimestres */}
               <Card className="p-6 border-t-4 border-t-emerald-500 overflow-visible z-20">
                 <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-subheading font-bold">Trimestres</h2>
+                  <h2 className="text-subheading font-bold">{t('campos.calendario.trimestresTitulo', {defaultValue: 'Trimestres'})}</h2>
                 </div>
                 <div className="grid grid-cols-3 gap-6">
                   {[
-                    { title: "1er trimestre", ini: "ini_1t", fin: "fin_1t", hours: h1 },
-                    { title: "2º trimestre",  ini: "ini_2t", fin: "fin_2t", hours: h2 },
-                    { title: "3er trimestre", ini: "ini_3t", fin: "fin_3t", hours: h3 },
-                  ].map(t => (
-                    <div key={t.title} className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-4 flex flex-col">
-                      <h3 className="text-center font-bold mb-4">{t.title}</h3>
+                    { title: t('t1', {defaultValue: '1er trimestre'}), ini: "ini_1t", fin: "fin_1t", hours: h1 },
+                    { title: t('t2', {defaultValue: '2º trimestre'}),  ini: "ini_2t", fin: "fin_2t", hours: h2 },
+                    { title: t('t3', {defaultValue: '3er trimestre'}), ini: "ini_3t", fin: "fin_3t", hours: h3 },
+                  ].map(tri => (
+                    <div key={tri.title} className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-4 flex flex-col">
+                      <h3 className="text-center font-bold mb-4">{tri.title}</h3>
                       <div className="space-y-3 flex-1">
                         <div>
-                          <label className="text-caption text-muted">Inicio</label>
-                          <DatePicker value={typeof info_fechas[t.ini] === 'string' ? info_fechas[t.ini] : ""} onChange={v => handleUpdateFechas(t.ini, v)} />
+                          <label className="text-caption text-muted">{t('campos.calendario.inicioLabel', {defaultValue: 'Inicio'})}</label>
+                          <DatePicker value={typeof info_fechas[tri.ini] === 'string' ? info_fechas[tri.ini] : ""} onChange={v => handleUpdateFechas(tri.ini, v)} />
                         </div>
                         <div>
-                          <label className="text-caption text-muted">Fin</label>
-                          <DatePicker value={typeof info_fechas[t.fin] === 'string' ? info_fechas[t.fin] : ""} onChange={v => handleUpdateFechas(t.fin, v)} />
+                          <label className="text-caption text-muted">{t('campos.calendario.finLabel', {defaultValue: 'Fin'})}</label>
+                          <DatePicker value={typeof info_fechas[tri.fin] === 'string' ? info_fechas[tri.fin] : ""} onChange={v => handleUpdateFechas(tri.fin, v)} />
                         </div>
                       </div>
                       <div className="mt-4 pt-4 border-t border-[var(--glass-border)] text-center">
-                        <span className="text-caption text-muted block mb-1">Horas lectivas reales</span>
-                        <span className="text-subheading font-bold text-success font-mono">{t.hours} h</span>
+                        <span className="text-caption text-muted block mb-1">{t('campos.calendario.horasLectivasReales', {defaultValue: 'Horas lectivas reales'})}</span>
+                        <span className="text-subheading font-bold text-success font-mono">{tri.hours} h</span>
                       </div>
                     </div>
                   ))}
@@ -669,43 +675,43 @@ export default function CalendarioPage() {
                 <div className="space-y-4 mt-4">
                   {/* FP Dual / FEOE - 5 columnas */}
                   <Card className="p-6 border-t-4 border-t-orange-500 overflow-visible">
-                    <h2 className="text-subheading font-bold mb-6">Periodo FEOE</h2>
+                    <h2 className="text-subheading font-bold mb-6">{t('tabs.calendario.feoe.label', {defaultValue: 'Periodo FEOE'})}</h2>
                     <div className="grid grid-cols-5 gap-4 items-end">
                       {/* Col 1: Selector de tipo */}
                       <div>
-                        <label className="text-body font-semibold text-foreground mb-2 block">Tipo de dual</label>
+                        <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.calendario.tipoDualLabel', {defaultValue: 'Tipo de dual'})}</label>
                         <select
                           value={info_fechas.tipo_dual || "general"}
                           onChange={e => {
                             const newType = e.target.value;
                             const defaultDocencia = newType === "intensiva" ? "con_docencia" : "sin_docencia";
-                            updateCursoData("info_fechas", { 
-                              ...info_fechas, 
+                            updateCursoData("info_fechas", {
+                              ...info_fechas,
                               tipo_dual: newType,
                               docencia_dual: defaultDocencia
                             });
                           }}
                           className="w-full bg-foreground/10 border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground focus:border-orange-500 focus:outline-none"
                         >
-                          <option value="general">Dual General</option>
-                          <option value="intensiva">Dual Intensiva</option>
+                          <option value="general">{t('campos.calendario.dualGeneral', {defaultValue: 'Dual General'})}</option>
+                          <option value="intensiva">{t('campos.calendario.dualIntensiva', {defaultValue: 'Dual Intensiva'})}</option>
                         </select>
                       </div>
                       {/* Col 1.5: Selector de docencia */}
                       <div>
-                        <label className="text-body font-semibold text-foreground mb-2 block">Docencia</label>
+                        <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.calendario.docenciaLabel', {defaultValue: 'Docencia'})}</label>
                         <select
                           value={info_fechas.docencia_dual || (info_fechas.tipo_dual === "intensiva" ? "con_docencia" : "sin_docencia")}
                           onChange={e => handleUpdateFechas("docencia_dual", e.target.value)}
                           className="w-full bg-foreground/10 border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground focus:border-orange-500 focus:outline-none"
                         >
-                          <option value="sin_docencia">Sin docencia</option>
-                          <option value="con_docencia">Con docencia</option>
+                          <option value="sin_docencia">{t('campos.calendario.sinDocencia', {defaultValue: 'Sin docencia'})}</option>
+                          <option value="con_docencia">{t('campos.calendario.conDocencia', {defaultValue: 'Con docencia'})}</option>
                         </select>
                       </div>
                       {/* Col 2: Inicio */}
                       <div>
-                        <label className="text-body font-semibold text-foreground mb-2 block">Inicio FEOE</label>
+                        <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.calendario.inicioFeoeLabel', {defaultValue: 'Inicio FEOE'})}</label>
                         <DatePicker
                           value={typeof info_fechas.ini_feoe === 'string' ? info_fechas.ini_feoe : ""}
                           onChange={v => handleUpdateFechas("ini_feoe", v)}
@@ -713,7 +719,7 @@ export default function CalendarioPage() {
                       </div>
                       {/* Col 3: Fin */}
                       <div>
-                        <label className="text-body font-semibold text-foreground mb-2 block">Fin FEOE</label>
+                        <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.calendario.finFeoeLabel', {defaultValue: 'Fin FEOE'})}</label>
                         <DatePicker
                           value={typeof info_fechas.fin_feoe === 'string' ? info_fechas.fin_feoe : ""}
                           onChange={v => handleUpdateFechas("fin_feoe", v)}
@@ -721,7 +727,7 @@ export default function CalendarioPage() {
                       </div>
                       {/* Col 4: Horas/día */}
                       <div>
-                        <label className="text-body font-semibold text-foreground mb-2 block">Horas/día FEOE</label>
+                        <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.calendario.horasDiaFeoeLabel', {defaultValue: 'Horas/día FEOE'})}</label>
                         <input
                           type="number"
                           value={Number(info_fechas.h_sem_feoe) || 8}
@@ -736,13 +742,11 @@ export default function CalendarioPage() {
 
               {activeTab === 'eventos' && (
                 <Card className="p-6 border-t-4 border-t-yellow-500 overflow-visible z-20 mt-4">
-                  <h2 className="text-subheading font-bold mb-2"> Festivos y eventos</h2>
+                  <h2 className="text-subheading font-bold mb-2"> {t('campos.calendario.festivosEventosTitulo', {defaultValue: 'Festivos y eventos'})}</h2>
                   <p className="text-muted text-body mb-4">
-                    Introduce manualmente o haz clic en el calendario. Los festivos excluyen horas del cómputo real.
-                    Festivo y Relevante son independientes: un mismo día puede tener los dos a la vez. Las filas con
+                    {t('campos.calendario.festivosEventosInstruccionesPre', {defaultValue: 'Introduce manualmente o haz clic en el calendario. Los festivos excluyen horas del cómputo real. Festivo y Relevante son independientes: un mismo día puede tener los dos a la vez. Las filas con'})}
                     <Lock className="w-[1em] h-[1em] inline-block mx-1" />
-                    (Inicio/Fin de curso y de trimestre, FEOE) vienen de Fechas generales / Periodo FEOE — se editan
-                    ahí, no aquí.
+                    {t('campos.calendario.festivosEventosInstruccionesPost', {defaultValue: '(Inicio/Fin de curso y de trimestre, FEOE) vienen de Fechas generales / Periodo FEOE — se editan ahí, no aquí.'})}
                   </p>
                   <NotesTable
                     calendar_notes={calendar_notes}
@@ -760,7 +764,7 @@ export default function CalendarioPage() {
                     <table className="w-full text-left text-body border-collapse whitespace-nowrap">
                       <thead>
                         <tr className="border-b border-[var(--glass-border)] text-muted">
-                          <th className="p-2 w-16">Id</th>
+                          <th className="p-2 w-16">{t('tablas.calendario.id', {defaultValue: 'Id'})}</th>
                           <th className="p-2 w-32">{t('common.tipo', {defaultValue: 'Tipo'})}</th>
                           <th className="p-2 w-32">{t('tablas.calendario.raVinculados', {defaultValue: 'RA vinculados'})}</th>
                           <th className="p-2 min-w-[200px]">{t('common.descripcion', {defaultValue: 'Descripción'})}</th>
@@ -776,8 +780,8 @@ export default function CalendarioPage() {
                             <td className="p-2 font-mono text-caption">{row.ID}</td>
                             <td className="p-2 pr-2">
                               <select value={row.Tipo || "Complementaria"} onChange={e => updateRowAce(idx, "Tipo", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-[#14a085] focus:outline-none">
-                                <option value="Complementaria">Complementaria</option>
-                                <option value="Extraescolar">Extraescolar</option>
+                                <option value="Complementaria">{t('checks.calendario.tipoComplementaria', {defaultValue: 'Complementaria'})}</option>
+                                <option value="Extraescolar">{t('checks.calendario.tipoExtraescolar', {defaultValue: 'Extraescolar'})}</option>
                               </select>
                             </td>
                             <td className="p-2 pr-2">

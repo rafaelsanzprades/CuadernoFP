@@ -101,6 +101,14 @@
       "autoevaluacion": {
         "desc": "Student self-assessment by grading criterion (YES/Doubts/NO) and reported difficulties.",
         "label": "Self-assessment"
+      },
+      "perfilProfesional": {
+        "label": "Professional profile",
+        "desc": "Career guidance per student: motivation, work experience, aptitudes, aspirations and post-programme employment."
+      },
+      "expediente": {
+        "label": "Record",
+        "desc": "Timeline of evidence per student: grades, self-assessment, tutoring, appeals, attendance and class diary."
       }
     },
     "seguimiento": {
@@ -119,6 +127,10 @@
       "detalle": {
         "label": "Detail by student",
         "desc": "Entry of numerical grades by student, evaluation instrument and level of RA attainment."
+      },
+      "feoeEmpresa": {
+        "label": "FEOE / Company",
+        "desc": "Assessment of students at the company during the FEOE (Annex XI b), transcribed by RA/CE."
       }
     },
     "calificaciones": {
@@ -138,7 +150,12 @@
         "desc": "Group performance and comparative statistics, plus an individual progress sheet for tutoring sessions."
       },
       "reclamaciones": {
-        "label": "Appeals"
+        "label": "Appeals",
+        "desc": "Grade appeals submitted by students, with their reason and resolution."
+      },
+      "boletines": {
+        "label": "Reports",
+        "desc": "On-screen individual grade report, with a radar chart and achievement-level bars by RA."
       }
     },
     "contexto": {
@@ -175,6 +192,10 @@
       "competenciales": {
         "label": "Competency-based tasks",
         "desc": "Design and planning of competency-based tasks and activities."
+      },
+      "contenidosUd": {
+        "label": "Contents → UD",
+        "desc": "Table of contents by teaching unit grouped into blocks, showing their relationship with RA, general objectives, hours and assessment instruments."
       }
     },
     "metodologia": {
@@ -207,6 +228,15 @@
       },
       "tri3": {
         "desc": "Evaluation instruments planned for the 3rd term."
+      },
+      "rubricas": {
+        "nav": "Rubrics",
+        "desc": "Reusable rubrics: define criteria (which must add up to 10 points in total) and performance levels, and assign them to any instrument from its Advanced configuration.",
+        "titulo": "Assessment rubrics"
+      },
+      "jeg": {
+        "nav": "JEG Model",
+        "desc": "JEG indicator-based model: configuration of the app's actual grading engine."
       }
     },
     "archivos": {
@@ -378,7 +408,8 @@
     "normativa": "Documents",
     "instrumentos": "Instrument",
     "calidad": "Quality",
-    "mejora": "Improvement"
+    "mejora": "Improvement",
+    "grupos": "Groups"
   },
   "navGroups": {
     "inicio": "Home",
@@ -406,7 +437,8 @@
     "sincronizado": "Synchronized",
     "guardando": "Saving...",
     "guardado": "Saved",
-    "error": "Error"
+    "error": "Error",
+    "settings": "Settings"
   },
   "pages": {
     "agenda_title": "Agenda",
@@ -470,7 +502,10 @@
     "siguiente": "Next",
     "tipo": "Type",
     "total": "Total",
-    "volver": "Back"
+    "volver": "Back",
+    "editar": "Edit",
+    "eliminar": "Delete",
+    "cargando": "Loading..."
   },
   "navDesc": {
     "inicio": "Main dashboard, community contributions, reference documents and EQAVET quality.",
@@ -580,7 +615,8 @@
       "errorGuardarPropuesta": "Error saving after applying the proposal.",
       "planAutocompletado": "Session plan auto-completed.",
       "programacionGuardada": "Programming saved successfully.",
-      "propuestaAplicada": "Proposal by {{author}} applied and saved."
+      "propuestaAplicada": "Proposal by {{author}} applied and saved.",
+      "repartidoPorRelevancia": "Weights recalculated from each CE's Relevance."
     },
     "detalleAlumnado": {
       "errorInformeRefuerzo": "Error generating the reinforcement report."
@@ -601,7 +637,12 @@
       "sinDemo": "You can't sync with Drive in DEMO mode."
     },
     "header": {
-      "paletaNoImplementada": "Command palette not implemented yet."
+      "paletaNoImplementada": "Command palette not implemented yet.",
+      "conflictoVersionesTitulo": "Version conflict",
+      "conflictoVersionesDesc": "The data is outdated. Please reload the page.",
+      "guardadoConExitoTitulo": "Saved successfully",
+      "datosActualizadosDesc": "Data updated.",
+      "revisaConexionDatosDesc": "Check the connection or the data."
     },
     "inicio": {
       "estructuraGuardada": "Structure saved."
@@ -658,6 +699,10 @@
     },
     "udConfig": {
       "errorExportar": "Error exporting the teaching unit."
+    },
+    "comun": {
+      "errorGuardar": "Error saving",
+      "guardadoCorrectamente": "Saved successfully"
     }
   },
   "botones": {
@@ -672,7 +717,10 @@
       "importarCsv": "Import CSV",
       "imprimirBoletin": "Print report card",
       "pulsaAnadirRegistro": "Add record",
-      "vaciarPlano": "Clear seating plan"
+      "vaciarPlano": "Clear seating plan",
+      "perfilProfesionalIndividual": "Individual",
+      "perfilProfesionalResumen": "Summary",
+      "perfilProfesionalTendencias": "Trends"
     },
     "archivos": {
       "cambiarCarpetaLocal": "Change local folder",
@@ -717,7 +765,9 @@
       "aplicarPropuesta": "Apply proposal",
       "autocompletarPlan": "Auto-complete plan",
       "cargarPropuestaEditorial": "Load publisher's proposal",
-      "volverALaLista": "Back to the list"
+      "volverALaLista": "Back to the list",
+      "descargarPdfMagia": "Download PDF/DOCX in MagIA",
+      "repartirPorRelevancia": "Distribute by relevance"
     },
     "dashboard": {
       "abriendo": "Opening...",
@@ -743,7 +793,8 @@
     },
     "evaluacion": {
       "generarInforme": "Generate report",
-      "restaurarNotasReales": "Restore to real grades"
+      "restaurarNotasReales": "Restore to real grades",
+      "volverASigadCalculado": "Revert to calculated value"
     },
     "header": {
       "altoContraste": "High contrast",
@@ -763,7 +814,12 @@
       "crearRecuperacion": "Create recovery",
       "crearRecuperacionTri": "Create recovery ({{tri}})",
       "desmarcarTodas": "Uncheck all",
-      "marcarTodas": "Check all"
+      "marcarTodas": "Check all",
+      "nuevaRubrica": "New rubric",
+      "anadirNivel": "Add level",
+      "anadirCriterio": "Add criterion",
+      "dividirPorcentajes": "Split percentages",
+      "anadir": "Add"
     },
     "magia": {
       "cerrarVisor": "Close viewer",
@@ -772,7 +828,8 @@
       "editableDocx": "Editable .docx",
       "editableXlsx": "Editable .xlsx",
       "generandoDocx": "⏳ Generating DOCX...",
-      "vistaPdf": "Preview .pdf"
+      "vistaPdf": "Preview .pdf",
+      "exportarExcelCompleto": "Export complete Excel"
     },
     "modulo": {
       "anadirAlumno": "Add student",
@@ -792,6 +849,34 @@
       "anadirSesionA": "Add session to {{id}}",
       "exportarBriefing": "Export briefing (PDF/DOCX)",
       "exportarFicha": "Export sheet (PDF/DOCX)"
+    },
+    "verificacion": {
+      "irA": "Go to {{destino}}",
+      "configurarModulo": "Configure module",
+      "anadirPrimeraUd": "Add first UD",
+      "anadirPrimerRa": "Add first RA",
+      "revisarAsignaciones": "Review assignments",
+      "importarDeEditorial": "Import from a publisher",
+      "crearPrimeraTarea": "Create first task",
+      "planificarSesiones": "Plan sessions",
+      "anadirContexto": "Add context",
+      "configurarFpDual": "Configure FP Dual",
+      "valorarCalidad": "Assess quality",
+      "completarIdentificacion": "Complete identification",
+      "redactarTextos": "Write texts",
+      "configurarCalendario": "Configure calendar",
+      "anadirAlumnado": "Add student",
+      "registrarPrimeraSesion": "Record first session",
+      "introducirNotas": "Enter grades",
+      "registrarTutoria": "Record tutoring session",
+      "disenarAula": "Design classroom"
+    },
+    "feoe": {
+      "excelenteTodoA4": "Excellent (all to 4)",
+      "suficienteTodoA3": "Sufficient (all to 3)"
+    },
+    "inicio": {
+      "unirseTelegram": "Join the Telegram group"
     }
   },
   "placeholders": {
@@ -805,7 +890,10 @@
       "dificultadesOpcional": "Difficulties (optional)",
       "edad": "age",
       "nombre": "First name...",
-      "telefono": "Phone"
+      "telefono": "Phone",
+      "participantesTutoria": "Who was present (student, family, counsellor...)",
+      "buscarAlumnado": "Search students...",
+      "correoEjemplo": "email@example.com"
     },
     "archivos": {
       "buscarModulo": "Search by module code or name...",
@@ -839,7 +927,8 @@
       "textoUdsModulo": "Description of how the teaching units are organized. If left empty, it is generated automatically from df_ud."
     },
     "curriculo": {
-      "peso": "Weight..."
+      "peso": "Weight...",
+      "bloqueContenido": "Unassigned..."
     },
     "dashboard": {
       "ejModulo": "E.g.: ELE203, 0237-ictve",
@@ -852,7 +941,11 @@
     "instrumentos": {
       "descripcionIndicador": "Indicator description",
       "seleccionaIndicadores": "Select indicators...",
-      "tituloInstrumento": "Instrument title"
+      "tituloInstrumento": "Instrument title",
+      "nombreRubrica": "Rubric name",
+      "descripcionRubrica": "Description (optional)",
+      "descripcionCriterio": "Criterion description",
+      "descripcionNivel": "Level description"
     },
     "modulo": {
       "a1Justificacion": "Indicate the regulatory basis, education laws and royal decrees applicable to the qualification...",
@@ -907,7 +1000,8 @@
     "alumnado": {
       "eliminarAlumnado": "Remove students",
       "fechasCalculadasNacimiento": "Dates calculated from date of birth, relevant for FEOE and legal age",
-      "importarCsv": "Import CSV (First name, Last name...)"
+      "importarCsv": "Import CSV (First name, Last name...)",
+      "grupoEvaluacionGev": "Assessment group (GEv)"
     },
     "archivos": {
       "creaCursoGrupo": "Creates a course and its associated group file",
@@ -931,7 +1025,8 @@
       "eliminarCe": "Remove CE",
       "horasTotalesModulo": "Total module hours according to the curriculum (BOA)",
       "sumaHorasSesiones": "Sum of the hours of all sessions",
-      "sumaHorasUd": "Sum of the hours assigned to each UD"
+      "sumaHorasUd": "Sum of the hours assigned to each UD",
+      "recalcularPctRelevancia": "Recalculates each CE's % within the RA based on its Relevance (−=half, ==normal, +=double) — a CE with no relevance marked counts as ="
     },
     "dashboard": {
       "pctImpartidoPrevisto": "% delivered / planned",
@@ -946,7 +1041,9 @@
       "maxValor": "Max: {{valor}}",
       "mediaValor": "Average: {{valor}}",
       "minValor": "Min: {{valor}}",
-      "topeCompensablesActivo": "Number of failed CE exceeds this module's compensable maximum (Data → Rounding rules)"
+      "topeCompensablesActivo": "Number of failed CE exceeds this module's compensable maximum (Data → Rounding rules)",
+      "calificarConRubrica": "Grade with rubric",
+      "notaSigadOverride": "It's calculated only from the ordinary final grade. Change it here by hand if you want to raise or lower it without touching that grade."
     },
     "header": {
       "uneteTelegram": "Join our Telegram group"
@@ -958,7 +1055,8 @@
       "item12Origen": "Item 12: who fills in this instrument",
       "item30Procedimiento": "Item 30: JEG procedure (ordinary/recovery/extraordinary)",
       "pesoRelativoCe": "Relative weight within the CE",
-      "sustituidaPorRecuperacion": "Replaced by recovery"
+      "sustituidaPorRecuperacion": "Replaced by recovery",
+      "gevSoloCuentaGrupo": "Assessment group (GEv): only counts for students in this same group"
     },
     "modulo": {
       "eliminarRegistro": "Remove record"
@@ -1000,14 +1098,22 @@
       "medioInformal": "Informal",
       "medioPresencial": "In-person meeting",
       "medioTelefono": "Phone call",
-      "medioVideollamada": "Video call"
+      "medioVideollamada": "Video call",
+      "estadoActivos": "Active",
+      "estadoBaja": "Withdrawn",
+      "todaIntencion": "Any intention",
+      "todaAptitud": "Any aptitude"
     },
     "catalogo": {
       "grado": "Level",
-      "gradosDelAAlE": "Levels A to E"
+      "gradosDelAAlE": "Levels A to E",
+      "seleccionaFamilia": "-- Select Family --",
+      "seleccionaTitulo": "-- Select qualification --",
+      "seleccionaModulo": "-- Select module --"
     },
     "comun": {
-      "otros": "Other"
+      "otros": "Other",
+      "si": "Yes"
     },
     "contexto": {
       "seleccionOrientativa": "Guiding selection to support drafting the text below (first version, will keep expanding).",
@@ -1083,7 +1189,8 @@
       "item_socio_turistico": "Tourism-based",
       "item_turno_diurno": "Day",
       "item_turno_mixto": "Mixed",
-      "item_turno_vespertino": "Evening"
+      "item_turno_vespertino": "Evening",
+      "sugerenciaSegunGrado": "Suggestion based on the Grade ({{motivo}}): \"{{label}}\". Apply"
     },
     "diario": {
       "acumuladoTrimestral": "Term cumulative",
@@ -1118,7 +1225,12 @@
       "tipo_otro": "Other",
       "tipo_prueba_objetiva": "Objective test",
       "tipo_registro_observacion": "Observation record",
-      "tipo_rubrica": "Rubric"
+      "tipo_rubrica": "Rubric",
+      "basico": "Basic",
+      "tipoRecuperaciones": "Retakes",
+      "seleccionaActividad": "-- Select activity --",
+      "metodoSobrescribir": "Overwrite grade if higher",
+      "metodoMedia": "Average with the previous grade"
     },
     "legal": {
       "accContacto": "6. Contact and complaints",
@@ -1263,6 +1375,150 @@
     "evaluacion": {
       "selecciona": "Select...",
       "todos": "All"
+    },
+    "orientacion": {
+      "seleccionar": "-- Select --",
+      "motivoEleccion": {
+        "vocacion": "Vocation / passion for the field",
+        "salidaLaboral": "Clear job prospects",
+        "reorientacion": "Career change",
+        "porDescarte": "By elimination (no other option)",
+        "familia": "Family influence",
+        "costeEconomico": "Cost compared to university"
+      },
+      "viaAcceso": {
+        "eso": "ESO (secondary school diploma)",
+        "fpgb": "FP Basic Grade",
+        "fpgm": "FP Intermediate Grade (to GS)",
+        "bachillerato": "Bachillerato (upper secondary)",
+        "pruebaAcceso": "Entrance exam",
+        "convalidacionParcial": "Partial credit recognition",
+        "otra": "Other route"
+      },
+      "primeraOpcion": "This cycle was their first choice",
+      "estudiaYTrabaja": "Studies while working",
+      "cambioDeCiclo": "Cycle change / second enrollment",
+      "experienciaPrevia": {
+        "sinExperiencia": "No work experience",
+        "esporadica": "Occasional / temporary jobs",
+        "relacionada": "Related to the cycle",
+        "noRelacionada": "Not related to the cycle",
+        "autonomo": "Self-employed activity"
+      },
+      "jornadaActual": {
+        "noTrabaja": "Not currently working",
+        "parcial": "Works part-time",
+        "completa": "Works full-time",
+        "autonomo": "Self-employed"
+      },
+      "cotizaSeguridadSocial": "Currently contributing to Social Security",
+      "aptitudPrincipal": {
+        "tecnica": "Technical / practical",
+        "analitica": "Analytical / research-oriented",
+        "creativa": "Creative / innovative",
+        "comercial": "Commercial / negotiation-oriented",
+        "comunicativa": "Communicative / teaching-oriented",
+        "relacional": "Interpersonal / social",
+        "emprendedora": "Entrepreneurial / independent",
+        "organizativa": "Organizational / management-oriented"
+      },
+      "areaInteres": {
+        "desarrolloSoftware": "Software development / programming",
+        "sistemasInfraestructura": "Systems / infrastructure",
+        "ciberseguridad": "Cybersecurity",
+        "datosIA": "Data / AI / Machine Learning",
+        "disenoUX": "Design / UX / multimedia",
+        "electronicaHardware": "Electronics / hardware",
+        "atencionCliente": "Customer service / support",
+        "gestionAdministracion": "Management / administration",
+        "sanidadCuidados": "Healthcare / caregiving",
+        "industriaProduccion": "Industry / production",
+        "otro": "Other / not yet defined"
+      },
+      "ambitoLaboral": {
+        "empresaGrande": "Large company / corporation",
+        "pyme": "SME / mid-sized company",
+        "startup": "Startup / emerging company",
+        "administracionPublica": "Public administration",
+        "ongSectorSocial": "NGO / social sector",
+        "autonomoFreelance": "Self-employed / freelance",
+        "indiferente": "No preference"
+      },
+      "preferenciaGeografica": {
+        "local": "Local / current city",
+        "nacional": "National (mobility within Spain)",
+        "internacional": "International",
+        "indiferente": "No preference"
+      },
+      "idiomaEspanol": "Spanish (native / fluent)",
+      "idiomaIngles": "English",
+      "idiomaFrances": "French",
+      "idiomaAleman": "German",
+      "idiomaPortugues": "Portuguese",
+      "idiomaOtro": "Other language",
+      "intencionAlTerminar": {
+        "empleoInmediato": "Look for a job immediately",
+        "feoePracticasEmpresa": "FEOE / internship at a partner company",
+        "cicloSuperior": "Continue with another cycle (GM→GS)",
+        "universidad": "Continue on to university",
+        "emprender": "Start a business / self-employment",
+        "sinDecidir": "Still undecided"
+      },
+      "interesErasmus": "Interested in international FEOE (Erasmus+)",
+      "interesBolsaEmpleo": "Interested in the school's job placement service",
+      "interesMentoria": "Wants mentoring from alumni/professionals",
+      "interesEmprender": "Has a business idea / own project",
+      "interesUniversidad": "Considering university after FP",
+      "empresaIdentificada": "Already has a company of interest identified",
+      "estadoInsercion": {
+        "enFormacion": "Still in training / cycle in progress",
+        "enBusqueda": "Graduate - actively job-seeking",
+        "empleadoEmpresa": "Employed at a company",
+        "feoe": "Currently doing FEOE / internship",
+        "autoempleo": "Self-employment / freelance",
+        "sigueEstudiando": "Still studying (cycle / university)",
+        "sinDatos": "No follow-up data"
+      },
+      "relacionCiclo": {
+        "siDirectamente": "Yes, directly related",
+        "parcialmente": "Partially related",
+        "noRelacionado": "Not related to the cycle",
+        "noAplica": "Not applicable (still studying)"
+      },
+      "modalidadContrato": {
+        "indefinido": "Permanent",
+        "temporal": "Temporary / project-based",
+        "autonomo": "Self-employed",
+        "practicas": "Internship / trainee",
+        "beca": "Scholarship/grant",
+        "feoe": "FEOE contract"
+      },
+      "valoracionEgresado": {
+        "v1": "1 - Very low",
+        "v2": "2 - Low",
+        "v3": "3 - Medium",
+        "v4": "4 - High",
+        "v5": "5 - Excellent"
+      },
+      "familiaInformada": "Family / legal guardians informed",
+      "derivadoOrientador": "Referred to the school counsellor",
+      "informeEmitido": "Guidance report issued"
+    },
+    "verificacion": {
+      "sinDatos": "No data",
+      "correcto": "Correct",
+      "advertencia": "Warning",
+      "correctos": "Correct",
+      "advertencias": "Warnings"
+    },
+    "archivos": {
+      "activaFem": "Active",
+      "activoMasc": "Active",
+      "seleccionarArchivoCorrecto": "Select the correct file..."
+    },
+    "calendario": {
+      "tipoComplementaria": "Complementary",
+      "tipoExtraescolar": "Extracurricular"
     }
   },
   "tablas": {
@@ -1270,7 +1526,8 @@
       "entidad": "Entity",
       "evaluacion": "Assessment",
       "raVinculados": "Linked LOs",
-      "trimestre": "Term"
+      "trimestre": "Term",
+      "id": "Id"
     },
     "calificaciones": {
       "instrumento": "Instrument",
@@ -1292,7 +1549,10 @@
       "horas": "Hours",
       "objetivosGenerales": "General objectives",
       "resultadosAprendizaje": "Learning outcomes",
-      "unidadDidacticaTrabajo": "Teaching or work unit"
+      "unidadDidacticaTrabajo": "Teaching or work unit",
+      "relevanciaCe": "Relevance",
+      "objAbrev": "Obj",
+      "evalAbrev": "EVAL."
     },
     "dashboard": {
       "imp": "Done",
@@ -1318,7 +1578,9 @@
       "config": "Config",
       "descripcionIE": "Description of the assessment instrument (IE)",
       "instrumentoActividad": "Instrument and activity",
-      "pctPond": "% Weight"
+      "pctPond": "% Weight",
+      "criterio": "CE",
+      "cobertura": "Coverage"
     },
     "legal": {
       "clave": "Key",
@@ -1339,6 +1601,12 @@
       "organizacionAcceso": "Organization and access",
       "seguimientoCorreccion": "Follow-up and correction",
       "id": "Id"
+    },
+    "secuenciacion": {
+      "numAbrev": "No.",
+      "raCe": "RA/CE",
+      "iePct": "IE %",
+      "raCeSlash": "RA/CE"
     }
   },
   "campos": {
@@ -1412,7 +1680,74 @@
       "tramoEdad_edad18a20": "18 to 20",
       "tramoEdad_edad21a25": "21 to 25",
       "tramoEdad_edad26mas": "26 or older",
-      "tramoEdad_menores18": "Under 18"
+      "tramoEdad_menores18": "Under 18",
+      "labelHoraInicio": "Start time",
+      "labelHoraFin": "End time",
+      "labelParticipantes": "Participants",
+      "conFichaSufijo": "with profile",
+      "viaAccesoLabel": "Access route",
+      "aptitudLabel": "Aptitude",
+      "areaInteresLabel": "Area of interest",
+      "intencionTerminarLabel": "Intention after finishing",
+      "insercionLabel": "Placement",
+      "reunionesLabel": "Meetings",
+      "sinAlumnadoFiltros": "No students match the filters.",
+      "sinFichaBadge": "No profile",
+      "interesadoErasmus": "Interested in Erasmus+",
+      "tieneIdeaNegocio": "Has a business idea",
+      "interesadoUniversidad": "Interested in university",
+      "derivadoAlOrientador": "Referred to counsellor",
+      "perfilSeccionTitulo": "Profile",
+      "motivoEleccionLabel": "Reason for choosing",
+      "experienciaPreviaLabel": "Prior experience",
+      "sectorExperienciaLabel": "Experience sector",
+      "trabajaActualmenteLabel": "Currently working",
+      "empresaActualLabel": "Current company",
+      "bolsaEmpleoBadge": "Job board",
+      "erasmusBadge": "Erasmus+",
+      "emprenderBadge": "Entrepreneurship",
+      "mentoriaBadge": "Mentoring",
+      "universidadBadge": "University",
+      "empresaIdentificadaBadge": "Company identified",
+      "aspiracionesSeccionTitulo": "Aspirations",
+      "preferenciaLaboralLabel": "Job preference",
+      "movilidadGeograficaLabel": "Geographic mobility",
+      "empresaObjetivoLabel": "Target company",
+      "cicloGradoInteresLabel": "Cycle / degree of interest",
+      "seguimientoTutorSeccionTitulo": "Tutor follow-up",
+      "reunionesCelebradasLabel": "Meetings held",
+      "ultimaReunionLabel": "Last meeting",
+      "familiaInformadaLabel": "Family informed",
+      "derivadoOrientadorLabel": "Referred to counsellor",
+      "informeEmitidoLabel": "Report issued",
+      "mostrandoNAlumnado": "Showing {{count}} students",
+      "derivadosLabel": "Referred",
+      "sinAlumnadoRegistradoCurso": "No students registered in this course.",
+      "coberturaFichasOrientacionTitulo": "Guidance profile coverage",
+      "deTotalFichaCompletada": "{{con}} of {{total}} students have a completed profile",
+      "sinDatosOrientacionAun": "No guidance data yet",
+      "completaFichasIndividualesPre": "Complete the individual profiles in the tab",
+      "individualTab": "Individual",
+      "conExperienciaLaboralKpi": "With work experience",
+      "interesErasmusKpi": "Interest in Erasmus+",
+      "interesBolsaEmpleoKpi": "Interest in job board",
+      "conIdeaNegocioKpi": "With a business idea",
+      "intencionFinalizarCicloTitulo": "Intention upon finishing the cycle",
+      "aptitudPrincipalDetectadaTitulo": "Main aptitude detected",
+      "areaInteresDominanteTitulo": "Dominant area of interest",
+      "ambitoLaboralPreferidoTitulo": "Preferred work field",
+      "preferenciaGeograficaTrabajoTitulo": "Geographic work preference",
+      "motivacionEleccionCicloTitulo": "Motivation for choosing the cycle",
+      "distribucionExperienciaLaboralTitulo": "Distribution of prior work experience",
+      "resumenPorAlumnadoTitulo": "Summary by student",
+      "cargandoDatosAlumnado": "Loading student data...",
+      "listaOficialTitulo": "Official list",
+      "numAlumnado": "{{count}} students",
+      "nMenoresEdad": "{{count}} student(s) under 18",
+      "sinAlumnadoRegistradoAun": "No students registered yet.",
+      "menorEdadBadge": "Minor",
+      "perfilGrupoLabel": "Group profile",
+      "anosSeparador": "years old ·"
     },
     "evaluacion": {
       "informacionDesc": "How assessment and grading criteria are communicated.",
@@ -1487,7 +1822,12 @@
       "tituloProcedimientosNormativos": "Regulatory procedures",
       "topeCompensablesBadge": "Compensation cap active",
       "trimestreEvLabel": "{{periodo}} Eval.",
-      "udsLabel": "UDs:"
+      "udsLabel": "UDs:",
+      "calificarConRubricaTitulo": "Grade with rubric",
+      "notaCalculada": "Calculated grade",
+      "notaSigadLabel": "Sigad grade (1-10, manual / calc.)",
+      "minAbrev": "Min",
+      "maxAbrev": "Max"
     },
     "modulo": {
       "bibliografiaDesc": "Main bibliography for teaching staff and students.",
@@ -1643,7 +1983,10 @@
       "normativaAutonomica": "Regional regulations ({{comunidad}})",
       "normativaEstatal": "State regulations",
       "sinDocumentosAutonomicos": "There are no regulatory documents for this community yet.",
-      "sinDocumentosEstatales": "There are no state regulatory documents yet."
+      "sinDocumentosEstatales": "There are no state regulatory documents yet.",
+      "enPreparacion": "In preparation",
+      "cargandoNormativa": "Loading regulations...",
+      "legislacionDocumentalTitulo": "Documentary legislation"
     },
     "contexto": {
       "tituloContextoEscolar": "School context",
@@ -1665,7 +2008,9 @@
       "avisoModeloSimplificado": "These 2 fields are specific to the \"Sufficient programming\" document (official Simplified model). If left blank, a reasonable default text is auto-generated from the rest of the module's data.",
       "introduccion": "Introduction",
       "udsModulo": "Teaching units of the module",
-      "tituloAutoriaPublicidad": "Authorship and publication details"
+      "tituloAutoriaPublicidad": "Authorship and publication details",
+      "cargandoDatos": "Loading context data...",
+      "cargandoDatosMetodologia": "Loading methodology data..."
     },
     "ai": {
       "analizandoDocumento": "Analyzing document...",
@@ -1745,7 +2090,27 @@
       "seleccionaModuloDescripcion": "Select the module to generate an empty curriculum plan with the correct structure (RA/CE from the official catalog).",
       "tipoCurso": "Course",
       "tipoProgramacion": "Curriculum plan",
-      "tituloOption": "-- Qualification --"
+      "tituloOption": "-- Qualification --",
+      "usuarioDrive": "Drive user",
+      "driveDescripcion": "Automatically save your .fpp and .fpc files to Google's cloud so you can access them from any device without having to download them manually.",
+      "conectado": "Connected",
+      "noConectado": "Not connected",
+      "sincronizandoCon": "Syncing with {{email}}",
+      "iniciaSesionGoogle": "Sign in with your Google account",
+      "autoguardadoAutomaticoTitulo": "Automatic Saving",
+      "autoguardadoAutomaticoDesc": "Automatically uploads to Drive every time you press \"Save\" in the app.",
+      "credencialesOAuthTitulo": "OAuth Credentials",
+      "introduceClientIdPre": "Enter the",
+      "introduceClientIdPost": "of your Google Cloud project to authorize the application. This data is stored securely in your browser.",
+      "clientIdPlaceholder": "E.g.: 123456789-abcde.apps.googleusercontent.com",
+      "moduloDesconocido": "Unknown Module",
+      "cursoDemoNombre": "DEMO Course",
+      "usuarioMicrosoft": "Microsoft user",
+      "oneDriveDescripcion": "Save your .fpp and .fpc files to your Microsoft OneDrive account. (Requires registration in the Azure portal).",
+      "sincronizandoCuentaMicrosoft": "Syncing with Microsoft account",
+      "iniciaSesionMicrosoft": "Sign in with Microsoft",
+      "azureClientIdTitulo": "Azure Client ID",
+      "azureClientIdDesc": "Client ID of your App registered in Entra ID (Azure)."
     },
     "dashboard": {
       "altaBajaAlumnado": "Student enrollment and withdrawal",
@@ -1776,7 +2141,35 @@
       "progresoPorUD": "Progress by teaching unit",
       "reutilizarPrefijo": "Reuse",
       "reutilizarSufijo": "for a new academic year, without starting from scratch.",
-      "sinDocencia": "Without teaching"
+      "sinDocencia": "Without teaching",
+      "sinClasesLectivas": "No teaching classes",
+      "udEnCursoLabel": "Current UD",
+      "ningunaUdActiva": "No UD currently active.",
+      "progresoUdLabel": "UD progress",
+      "horasPrevistasLabel": "Planned hours",
+      "horasImpartidasLabel": "Hours taught",
+      "horasSinDocenciaLabel": "Hours without teaching",
+      "contenidosLabelDosPuntos": "Contents:",
+      "diaFestivo": "Holiday",
+      "eventoBadge": "Event",
+      "festivoRazon": "Non-teaching day",
+      "horasLectivasCount": "{{count}} teaching hours",
+      "previsionSemanalDesc": "Weekly time distribution of the modules and sessions planned in the classroom.",
+      "previsionSemanalTitulo": "Weekly forecast",
+      "recursosLabelDosPuntos": "Resources:",
+      "sinClasesPlanificadas": "No classes planned",
+      "sinHorarioLectivo": "No teaching schedule",
+      "sinSesionesHoy": "You have no sessions planned for today according to the module calendar.",
+      "tusClasesDeHoy": "Your classes today ({{fecha}})",
+      "deSesiones": "{{actual}} of {{total}} sessions",
+      "diaNoLectivo": "Non-teaching day",
+      "semanaDelAl": "Week of {{inicio}} to {{fin}}",
+      "desarrolloUnidadEnCursoTitulo": "Development of the current teaching unit",
+      "nSesionesParentesis": "({{count}} sessions)",
+      "planificadoNDias": "Planned ({{count}} days)",
+      "semanaAnterior": "Previous week",
+      "semanaProxima": "Next week",
+      "sesionesLabel": "Sessions: {{label}}"
     },
     "instrumentos": {
       "agenteEvaluacion": "Assessment agent",
@@ -1785,7 +2178,62 @@
       "instrumentoLabel": "Instrument: {{id}} - {{desc}}",
       "recuperacionDescripcion": "Indicates whether this instrument counts toward a resit period (R1, R2, Final).",
       "sirveParaRecuperacion": "Does it count for resits?",
-      "tipoDatoEscala": "Data type and scale"
+      "tipoDatoEscala": "Data type and scale",
+      "sinRubricas": "No rubrics yet. A rubric can be assigned to any instrument from its \"Advanced configuration\" and graded by levels instead of with a direct grade.",
+      "sinNombre": "(no name)",
+      "criterios": "criteria",
+      "nuevaRubricaTitulo": "New rubric",
+      "editarRubricaTitulo": "Edit rubric",
+      "sumaPuntuacionMaxima": "Sum of maximum score",
+      "sumaDebeSerDiez": "The sum of the maximum scores of all criteria must be exactly 10.",
+      "puntuacionMaxima": "Maximum score",
+      "puntos": "Points",
+      "criterioSinNiveles": "This criterion has no levels defined yet.",
+      "rubricaSinCriterios": "This rubric has no criteria defined yet.",
+      "rubricaAsignada": "Assigned rubric",
+      "rubricaDescripcion": "If you assign a rubric, this instrument can be graded by levels instead of with a direct grade.",
+      "sinRubrica": "-- No rubric --",
+      "unidadDidactica": "Teaching unit",
+      "unidadDidacticaDescripcion": "Which teaching unit this instrument belongs to (for the \"Contents → UD\" table).",
+      "sinUnidadDidactica": "-- Unassigned --",
+      "matrizCoberturaTitulo": "CE × Instrument coverage matrix",
+      "matrizCoberturaSinDatos": "Add Assessment criteria and Instruments to see here which CE are not covered by any instrument.",
+      "sinCobertura": "No coverage",
+      "modeloJegTitulo": "JEG Model.",
+      "modeloJegDesc": "The Instrument→Indicator→CE→RA→Module level from the actual author of PD+ (Javier Edo Gual) — it's the app's real grading engine (report cards, PDF and minutes included). In normal use you don't need to touch anything here: when you mark an activity on a CE in Instruments, the corresponding Indicator is created and the weight is distributed automatically. This screen is for anyone who wants to manually adjust that distribution (several indicators per CE, different weights) or review what has been generated automatically.",
+      "indicadoresPorCeTitulo": "Indicators by Assessment Criterion",
+      "primeroAnadeCriterios": "First add Assessment Criteria in Curriculum → RA and CE Weighting.",
+      "sinIndicadoresTodavia": "No indicators yet.",
+      "gruposEvaluacionTitulo": "Assessment groups (GEv)",
+      "gruposEvaluacionDesc": "Student subgroups (e.g. loss of continuous assessment): an instrument marked with a GEv only counts for students in that same group. Assign each student's GEv in Students → Enrollment.",
+      "nuevoGrupoPlaceholder": "New group...",
+      "instrumentosModeloJegTitulo": "Instruments (JEG model)",
+      "sinInstrumentosJegTodavia": "No JEG instruments yet.",
+      "pesoGlobalLabel": "Overall weight",
+      "indicadoresVinculadosLabel": "Linked indicators",
+      "calificacionesPorIndicadorTitulo": "Grades by indicator",
+      "anadeInstrumentosVinculaPrimero": "Add instruments and link them to indicators first.",
+      "sinTitulo": "(untitled)",
+      "recEvaluacion": "Ret. ({{evaluacion}})",
+      "evfe": "EvFE",
+      "rec": "Ret.",
+      "sinEvaluar": "Not assessed",
+      "notaFinalMotorJeg": "Final grade (JEG Engine)",
+      "hojaAparteEvfeTitulo": "Separate sheet: extraordinary final assessment (EvFE)",
+      "hojaAparteEvfeDesc": "Second sitting — never mixed with the ordinary grade above. An RA with no attempt in EvFE inherits the result from the row above.",
+      "notaFinalExtraordinariaLabel": "Extraordinary final grade (EvFE)",
+      "faltanCriteriosEvaluacionTitulo": "Missing assessment criteria",
+      "faltanCriteriosEvaluacionDesc": "First add Assessment criteria in the 'Matrices' tab.",
+      "instrumentosEvaluacionTrimestreTitulo": "Assessment Instruments - {{triNombre}}",
+      "detalleInstrumentosTrimestreDesc": "Detail of the assessment instruments organized for this term.",
+      "numActividades": "{{count}} activities",
+      "actividadOriginalRecuperar": "Original activity to retake",
+      "sinNombreActividad": "No name",
+      "metodoCalculoLabel": "Calculation method",
+      "evaluacionOrdinariaRecuperacion": "Ordinary assessment + recovery (R1-RF) — {{apellidos}}",
+      "nInstrumentos": "{{count}} instr.",
+      "sumaPesos": "Sum: {{pct}}%",
+      "resumenPorTrimestresTitulo": "Summary of assessment instruments by term"
     },
     "matrices": {
       "atencionSobrescribirDescripcion": "Your teaching units (UD/T), the RA-UD/T relationship, and the RA-OG contribution matrix will be replaced. Make sure you agree before applying.",
@@ -1794,6 +2242,674 @@
       "noHayPropuestasDescripcion": "There are currently no predefined sequences from authors or publishers for module {{moduleCode}}.",
       "propuestasEditorialesDescripcion": "Select a predefined proposal for this module ({{moduleCode}})",
       "propuestasEditorialesTitulo": "Publisher / author proposals"
+    },
+    "catalogo": {
+      "tituloAcronimosGlosario": "Acronyms and glossary",
+      "sinResultadosParaBusqueda": "No results found for \"{{termino}}\"",
+      "confirmacionSobrescribirPropuesta": "⚠️ WARNING: This action will overwrite your Teaching units, Instruments, Sessions, Tasks and context configuration for the current module.\n\nAre you completely sure you want to continue?",
+      "tituloCatalogoAutores": "Catalogue of Authors and Publishers",
+      "descripcionCatalogoAutoresTexto1": "Explore complete templates (",
+      "descripcionCatalogoAutoresTexto2": ") proposed by publishers or authors for the module ",
+      "descripcionCatalogoAutoresTexto3": ". These proposals may include teaching units, assessment instruments and classroom sequences.",
+      "tituloArchivosDisponibles": "Available files",
+      "buscandoPropuestas": "Searching for proposals...",
+      "sinArchivosFppTexto1": "No files found ",
+      "sinArchivosFppTexto2": " for this module in your Documents/Authors folder.",
+      "cargandoContenidoPropuesta": "Loading proposal content...",
+      "tituloPrevisualizacionPropuesta": "Proposal preview",
+      "descripcionPrevisualizacionPropuesta": "Review the content before importing it. You'll be able to edit it as you like once it's imported into your syllabus.",
+      "tituloModuloDidactico": "Teaching module",
+      "labelContexto": "Context:",
+      "definido": "Defined",
+      "noDefinido": "Not defined",
+      "tituloMatricesOgRaCeUd": "OG → RA → CE → UD/T matrices",
+      "unidadesDidacticasPropuestas": "Proposed teaching units:",
+      "sinDescripcion": "(No description)",
+      "labelMapeoRaOg": "RA-OG mapping:",
+      "incluido": "Included",
+      "noIncluido": "Not included",
+      "tituloInstrumentosEvaluacion": "Assessment instruments",
+      "instrumentosPredefinidos": "Predefined instruments.",
+      "tituloProgramacionAula": "Classroom plan",
+      "sesionesPlanificadas": "Planned sessions.",
+      "tareasCompetencialesDisenadas": "Competency-based tasks designed.",
+      "tituloNingunFicheroSeleccionado": "No file selected",
+      "descripcionSeleccionaArchivoFpp": "Select a `.fpp` file from the list on the left to preview all its content before adding it to your syllabus.",
+      "tituloMapaCcaa": "Map of Autonomous Communities with VET curriculum",
+      "instruccionMapaCcaa": "Click a community to see its detail. Source: ",
+      "badgeDemo": "DEMO",
+      "mensajeSeleccionaCcaa": "Select an autonomous community on the map to see its detailed information.",
+      "tituloTablaComunidades": "Table of autonomous communities",
+      "badgeCiudadAutonoma": "Autonomous City",
+      "badgeCcaaSigla": "AC",
+      "fuentePrincipalLabel": "Main source:",
+      "fuentePrincipalDescripcion": "— Official portal of the Ministry of Education and Vocational Training.",
+      "infoCurriculosCcaaTexto1": "Each autonomous community publishes its own VET curriculum in its official gazette. The links above lead to the ",
+      "infoCurriculosCcaaEnfasis": "curricula by Autonomous Community",
+      "infoCurriculosCcaaTexto2": " page on todofp.es, where you can check the specific regulations for each territory.",
+      "infoCeutaMelillaEnfasis": "Ceuta and Melilla",
+      "infoCeutaMelillaTexto": " apply the Ministry's curriculum (BOE) directly, as they have no transferred powers in education.",
+      "mapaSvgCreditoLabel": "SVG map:",
+      "mapaSvgCreditoTexto": "(CC-BY-4.0) — Victor Cazanave.",
+      "demoEntornoLabel": "🌍 DEMO environment:",
+      "demoEntornoTexto": "This app's sample data uses Aragón's curriculum (BOA) as a reference.",
+      "labelBoletinOficial": "Official Gazette",
+      "badgeComunidadAutonoma": "Autonomous Community",
+      "cargandoIncual": "Loading National Catalogue data (INCUAL)...",
+      "labelFamiliaProfesional": "Professional Family",
+      "gradoCTitulo": "Grade C",
+      "gradoCDesc": "(Certificates)",
+      "gradoDTitulo": "Grade D",
+      "gradoDDesc": "(Cycles)",
+      "gradoETitulo": "Grade E",
+      "gradoEDesc": "(Specialisation)",
+      "sinDatosIncualFamilia": "No INCUAL data found for the {{familia}} family",
+      "seleccionaFamiliaEstandares": "Select a professional family to see its competency standards",
+      "tituloCrn": "National Reference Centres (CRN)",
+      "labelAreasCrn": "Areas:",
+      "labelTitularCrn": "Managed by:",
+      "tituloEcp": "Professional competency standards (ECP)",
+      "nivelEcpTitulo": "Level {{nivel}} ({{count}})",
+      "enlacePdf": "PDF",
+      "sinEstandaresNivel": "There are no Level {{nivel}} standards for this family.",
+      "labelTitulo": "Title",
+      "ciclosFormativosCount": "Training cycles ({{count}})",
+      "sinCiclosRegistrados": "No training cycles registered.",
+      "detallesCurriculoBoa": "BOA curriculum details",
+      "fuenteNormativaLabel": "Legal source",
+      "sinArticulosCargados": "This qualification does not yet have the curriculum articles loaded in the database.",
+      "sinTitulosFamilia": "No qualifications registered for this family.",
+      "seleccionaFamiliaVerTitulos": "Select a professional family to see its qualifications.",
+      "cursoLabelSufijo": "{{curso}} year",
+      "numModulos": "{{count}} modules",
+      "seleccionaFamiliaTituloModulos": "Select a Family and a Qualification to see the modules organized by year.",
+      "sinDatosCurricularesCargados": "This qualification does not yet have curriculum data loaded.",
+      "modulosDisponiblesCuandoOficial": "Modules will be shown once the official curriculum is available.",
+      "sinModulosTitulo": "No modules for this qualification.",
+      "labelModulo": "Module",
+      "seleccionaModuloVerRA": "Select a module to see the learning outcomes.",
+      "tabResultadosAprendizaje": "Learning outcomes",
+      "tabCompetenciasAcreditables": "Accreditable competencies",
+      "criteriosEvaluacionLabel": "Assessment criteria",
+      "sinCompetenciasConvalidacion": "This module does not have direct competencies associated for validation in the official register.",
+      "comunModulosTransversales": "This is common in cross-curricular modules, project, FEOE or languages.",
+      "opcionesConvalidacionTitulo": "Validation options",
+      "convalidarPrefijo": "To validate this module, you must meet ",
+      "convalidarAlguna": "one",
+      "convalidarSufijo": " of the following options (not all).",
+      "opcionNumero": "Option {{numero}}",
+      "debeAcreditarTodas": "You must accredit ALL of these competencies:",
+      "debeAcreditarUna": "You must accredit this competency:",
+      "conjuntoRequerido": "Required set",
+      "tambienConvalidarias": "With this option you would also validate: "
+    },
+    "curriculo": {
+      "sinUnidadesDidacticas": "There are no teaching units defined yet -- create them in the \"Teaching units\" tab.",
+      "contenidosUdDescripcion": "Groups teaching units by content block and shows at a glance their relationship with RA, general objectives, hours and assessment instruments.",
+      "sinBloqueAsignado": "No block assigned",
+      "bloqueContenido": "Content block",
+      "contenidosPorUd": "Contents by UD",
+      "numHoras": "No. of hours",
+      "sinInstrumento": "unassigned",
+      "avanceRaLabel": "RA progress",
+      "horasLectivasLabel": "Teaching hours",
+      "sinUdsAsignadas": "No UDs assigned",
+      "sinRaDefinidos": "No Learning Outcomes (RA) defined.",
+      "cargandoMatrices": "Loading matrices...",
+      "confirmarAutocompletarPlanSesiones": "Are you sure you want to auto-fill the session plan? This will replace the current sessions of all UDs.",
+      "totalSumaPctRa": "Total RA % sum:",
+      "sinUnidadesDidacticasTitulo": "No teaching units",
+      "sinUnidadesDidacticasDesc1": "You haven't created any Teaching unit (UD) yet.",
+      "sinUnidadesDidacticasDesc2": "To sequence sessions, you must first create the UDs above.",
+      "unidadDidacticaSingular": "Teaching unit",
+      "leyendaCompletado": "Completed",
+      "leyendaEnCurso": "In progress",
+      "leyendaPendiente": "Pending",
+      "progresoRelacionRaUdTitulo": "Progress and relationship between Learning Outcomes and Teaching/Work Units"
+    },
+    "header": {
+      "creaOAbreProgramacion": "Create or open a curriculum plan",
+      "creaOAbreCurso": "Create or open a course"
+    },
+    "archivos": {
+      "programacionFallback": "Curriculum plan",
+      "nuevoSinGuardar": "New (unsaved)",
+      "archivoLocal": "Local file",
+      "programacionImportada": "Imported curriculum plan",
+      "cursoImportado": "Imported course",
+      "breadcrumbArchivos": "Files",
+      "breadcrumbSeguridadPrivacidad": "Security and privacy",
+      "modoDatosLabel": "Data mode:",
+      "avisoDemoDesc": "you are viewing sample data. This is not your real course and nothing is saved to disk — switch to REAL to work with your own files.",
+      "avisoRealDesc": "you are working with your own .fpg/.fpp/.fpc files, saved on your computer. Changes are actually saved.",
+      "gruposEjemploDobleClic": "Sample groups. Double-click to load.",
+      "tusGruposDobleClic": "Your saved groups. Double-click to load.",
+      "sinGruposDemo": "No DEMO groups found.",
+      "usaBotonEnlazarCarpeta": "Use the button below to link your working folder.",
+      "sinGrupos": "No groups found.",
+      "programacionesTitulo": "Curriculum plans",
+      "dobleClicCargarProgramacion": "Double-click to load a curriculum plan.",
+      "sinProgramacionesDemo": "No DEMO curriculum plans found.",
+      "sinProgramaciones": "No curriculum plans found.",
+      "cursosTitulo": "Courses",
+      "dobleClicCargarCurso": "Double-click to load a course.",
+      "sinCursosDemo": "No DEMO courses found.",
+      "sinCursos": "No courses found.",
+      "nubeLabel": "Cloud",
+      "privacidadDisenoTitulo": "Your privacy by design",
+      "privacidadDisenoDesc": "How we guarantee your real data is 100% yours.",
+      "servidorCiegoTitulo": "1. The server is blind",
+      "servidorCiegoDesc": "Our cloud database never stores data about your students, your curriculum plans, or anything you create. The web server only exists to send you the Official Catalogs (BOE/BOCAA). You are invisible to our backend.",
+      "cifradoLocalTitulo": "2. Advanced local AES-256 encryption",
+      "cifradoLocalDesc": "You can enable local encryption. Before any file is saved to your hard drive or the cloud, it is encrypted using your master key inside your browser.",
+      "establecerClaveLabel": "Set security key (not stored anywhere)",
+      "avisoOlvidoClave": "If you forget this key and save a file, we will not be able to help you recover it.",
+      "defensaAtaquesTitulo": "3. Defense against browser attacks",
+      "defensaAtaquesDesc": "We have implemented a strict content security policy (CSP) to block malicious third-party scripts.",
+      "servidorBlindadoTitulo": "4. Shielded, always-available server",
+      "servidorBlindadoDesc": "Our backend server includes rate limiting, ensuring you will always have access to the official catalog of modules.",
+      "seguridadRgpdTitulo": "Security and GDPR guaranteed",
+      "procesaInfoNavegador": "Cuaderno FP processes all your confidential information exclusively in your browser. You own your files.",
+      "ningunDatoNube": "No data about your students is sent to the cloud, unless you use the authorized synchronization in your account.",
+      "asegurateGuardar": "Make sure to press \"Save\" when you finish your work session so you don't lose your latest changes.",
+      "validacionEnlacesTitulo": "Workspace link validation",
+      "todoCorrecto": "All correct!",
+      "sinEnlacesRotos": "No broken links have been detected in the groups in your local folder.",
+      "enlacesRotosDetectados": "The following broken links have been detected in the Group files. This happens when you rename or delete a Curriculum Plan or a Course directly in Windows.",
+      "programacionNoEncontrada": "Curriculum plan not found:",
+      "cursoNoEncontrado": "Course not found:"
+    },
+    "expediente": {
+      "tipoCalificacion": "Grading",
+      "tipoAutoevaluacion": "Self-assessment",
+      "tipoTutoria": "Tutoring",
+      "tipoReclamacion": "Appeal",
+      "tipoAsistencia": "Attendance",
+      "tipoDiarioClase": "Class log",
+      "sinAlumnadoActivoRegistrado": "There are no active students registered in this course.",
+      "sinEvidenciasTodavia": "No evidence yet",
+      "ningunAlumnadoSeleccionado": "No students selected"
+    },
+    "orientacion": {
+      "sinAlumnadoTitulo": "No students",
+      "primeroRegistraAlumnadoPre": "First register students in the tab",
+      "primeroRegistraAlumnadoPost": "Enrollment.",
+      "alumnadoActivoCount": "Active students ({{count}})",
+      "tieneDatosOrientacion": "Has guidance data",
+      "nAnos": "{{n}} years old",
+      "edadNoRegistrada": "Age not recorded",
+      "seccion1Titulo": "Section 1: Motivation and choice of the cycle",
+      "motivoEleccionLabel": "Reason for choosing the cycle",
+      "viaAccesoLabel": "Entry route to the cycle",
+      "cicloPrevioLabel": "Previous cycle or studies completed",
+      "cicloPrevioPlaceholder": "E.g. ASIR, DAW, SMR, Science Bachillerato...",
+      "seccion2Titulo": "Section 2: Work experience and employment status",
+      "experienciaPreviaLabel": "Previous work experience",
+      "sectorExperienciaLabel": "Sector of previous experience",
+      "sectorExperienciaPlaceholder": "E.g. Hospitality, Retail, Technology, Healthcare...",
+      "mesesExperienciaLabel": "Estimated months of experience",
+      "jornadaActualLabel": "Current employment status",
+      "empresaActualLabel": "Current company (if applicable)",
+      "empresaActualPlaceholder": "Company name...",
+      "seccion3Titulo": "Section 3: Detected interests and aptitudes",
+      "aptitudPrincipalLabel": "Main aptitude detected",
+      "areaInteresLabel": "Dominant area of interest",
+      "ambitoLaboralPreferidoLabel": "Preferred work environment",
+      "preferenciaGeograficaLabel": "Geographic work preference",
+      "idiomasTrabajoTitulo": "Working languages",
+      "obsAptitudesLabel": "Tutor's observations on aptitudes and interests",
+      "obsAptitudesPlaceholder": "Describe the observed strengths, areas for improvement, attitude toward teamwork, initiative, etc.",
+      "seccion4Titulo": "Section 4: Aspirations upon finishing the cycle",
+      "intencionAlTerminarLabel": "Main intention upon finishing",
+      "empresaObjetivoLabel": "Target company or sector (if applicable)",
+      "empresaObjetivoPlaceholder": "E.g. local IT company, own clinic...",
+      "cicloSuperiorInteresLabel": "Higher-level cycle / degree of interest",
+      "cicloSuperiorInteresPlaceholder": "E.g. DAM, ASIR, Computer Engineering, ADE...",
+      "interesesEspecificosTitulo": "Specific interests",
+      "seccion5Titulo": "Section 5: Job placement (after the cycle)",
+      "seccion5InfoDesc": "This section is filled in at the end of the cycle or as follow-up for graduates.",
+      "estadoInsercionLabel": "Job placement status",
+      "relacionCicloLabel": "Relationship between the job and the cycle",
+      "empresaInsercionLabel": "Placement company",
+      "empresaInsercionPlaceholder": "Company name...",
+      "puestoObtenidoLabel": "Position or role obtained",
+      "puestoObtenidoPlaceholder": "E.g. Network technician, Junior developer, IT support...",
+      "fechaInsercionLabel": "Start date",
+      "modalidadContratoLabel": "Contract type",
+      "valoracionEgresadoLabel": "Overall rating of the graduate (1-5)",
+      "obsInsercionLabel": "Job placement follow-up notes",
+      "obsInsercionPlaceholder": "Notes on the placement process, difficulties, post-cycle contact...",
+      "seccion6Titulo": "Section 6: Tutor's notes and follow-up",
+      "reunionesCelebradasLabel": "No. of guidance meetings held",
+      "fechaUltimaReunionLabel": "Date of last meeting / interview",
+      "fechaDerivacionLabel": "Date referred to counsellor",
+      "resumenOrientacionLabel": "Guidance summary (free text)",
+      "resumenOrientacionPlaceholder": "Write the guidance summary here: decisions made, agreements with the student and family, next steps...",
+      "selectaAlumnadoDesc": "Select a student from the list on the left."
+    },
+    "comun": {
+      "ningunAlumnadoSeleccionado": "No student selected",
+      "cargandoDocumentos": "Loading documents...",
+      "directorioVacio": "The directory is empty.",
+      "sinCursoCargadoTitulo": "No course loaded",
+      "sinCursoCargadoDesc": "You must open or create a course file in your Files.",
+      "gestionDe": "{{activeTab}} management",
+      "sinProgramacionCargadaTitulo": "No programming loaded",
+      "sinProgramacionCargadaDesc": "You must open or create a programming file in your Files.",
+      "saltarAlContenidoPrincipal": "Skip to main content"
+    },
+    "verificacion": {
+      "entornoGeografico": "Geographic environment",
+      "entornoSocioeconomico": "Socioeconomic environment",
+      "contextoEscolar": "School context",
+      "contingenciaProfesorado": "Contingency (teaching staff)",
+      "contingenciaAlumnado": "Contingency (students)",
+      "bibliografiaLabel": "Bibliography",
+      "publicidadLabel": "Publicity",
+      "moduloDidacticoTitulo": "Teaching module",
+      "sinDatosProgramacion": "No curriculum plan data loaded",
+      "moduloActivo": "Active module: {{id}}",
+      "horasSemanales": "Weekly hours: {{h}} h",
+      "horasBoa": "BOA hours: {{h}} h",
+      "udTitulo": "Teaching units (UD)",
+      "sinUdDefinidas": "No UDs defined",
+      "udDefinidas": "{{count}} UDs defined",
+      "horasDeclaradas": "Declared hours: {{udHoras}} / {{moduloHoras}} h of the module",
+      "diferenciaHoras": "Difference of {{h}} h",
+      "horasCuadranCorrectamente": "Hours match correctly",
+      "raTitulo": "Learning outcomes (RA)",
+      "sinRaDefinidos": "No RAs defined",
+      "raDefinidos": "{{count}} RAs defined",
+      "ceTitulo": "Assessment criteria (CE)",
+      "sinCeDefinidos": "No CEs defined",
+      "ceDefinidos": "{{count}} CEs defined",
+      "ceSinRa": "{{count}} CEs without an assigned RA",
+      "todosLosCeTienenRa": "All CEs have an RA",
+      "instrumentosIndicadoresTitulo": "Instruments and indicators",
+      "sinInstrumentosIndicadores": "No instruments or indicators",
+      "instrumentosIndicadoresCount": "{{instr}} instruments and {{ind}} indicators",
+      "indicadoresSinCe": "{{count}} indicators without an associated CE",
+      "todosLosIndicadoresEvaluanCe": "All indicators assess a CE",
+      "tareasCompetencialesTitulo": "Competency-based tasks",
+      "sinTareasDefinidas": "No tasks defined",
+      "tareasDefinidas": "{{count}} tasks defined",
+      "tareasSinRa": "{{count}} tasks without an associated RA",
+      "todasLasTareasTienenRa": "All tasks have an RA",
+      "sesionesClaseTitulo": "Class sessions",
+      "sinSesionesPlanificadas": "No sessions planned",
+      "sesionesPlanificadasCount": "{{count}} sessions planned",
+      "sesionesSinUd": "{{count}} sessions without an assigned UD",
+      "todasLasSesionesTienenUd": "All sessions have a UD",
+      "contextoModuloTitulo": "Module context",
+      "contextoAulaConfigurado": "Classroom context configured",
+      "sinDescripcionContexto": "No context description or classroom configuration",
+      "fpDualTitulo": "FP Dual",
+      "regimenDual": "General",
+      "dualIntensivoLabel": "Intensive",
+      "regimenTradicional": "Traditional scheme (FP Dual not configured)",
+      "calidadEqavetTitulo": "EQAVET quality",
+      "mejoraLabel": "Improvement",
+      "sinIndicadoresEqavet": "No EQAVET indicators assessed",
+      "identificacionPdTitulo": "Identification (for PD+/pd=/pd-)",
+      "centroProfesoradoFamiliaConfigurados": "School, teaching staff and professional family configured",
+      "camposRellenanPortada": "These fields fill in the cover page of all 3 PD templates",
+      "textosNarrativosTitulo": "Narrative texts (PD+/JEG)",
+      "textosRedactadosCount": "{{rellenos}} / {{total}} texts written",
+      "todosLosTextosRedactados": "All narrative texts are written",
+      "calendarioAcademicoTitulo": "Academic calendar",
+      "horarioSemanalDefinido": "Weekly schedule defined",
+      "sinHorarioSemanal": "No weekly schedule",
+      "fechasEvaluacionConfiguradas": "Assessment dates configured",
+      "sinFechasEvaluacion": "No assessment dates",
+      "sinAlumnadoRegistrado": "No students registered",
+      "alumnosRegistrados": "{{count}} students registered",
+      "registrosIncompletos": "{{count}} incomplete records (missing name/surname)",
+      "todosLosRegistrosCompletos": "All records complete",
+      "diarioAulaTitulo": "Class diary",
+      "seguimientoLabel": "Tracking",
+      "sinEntradasDiario": "No entries in the class diary",
+      "sesionesRegistradasDiario": "{{count}} sessions recorded in the diary",
+      "sinCalificacionesIntroducidas": "No grades entered",
+      "faltanAlumnosEvaluar": "{{count}} students still to be assessed",
+      "todosLosAlumnosTienenRegistro": "All students have grade records",
+      "tutoriaAlertasTitulo": "Tutoring and alerts",
+      "sinEntradasTutoria": "No tutoring entries or alerts recorded",
+      "entradasTutoriaRegistradas": "{{count}} tutoring entries recorded",
+      "planoClaseTitulo": "Classroom plan",
+      "sinAlumnosPlano": "No students placed on the plan",
+      "alumnosUbicadosAulaVisual": "{{count}} students placed in the visual classroom",
+      "grupoTitulo": "Group",
+      "catalogoOficialTitulo": "Official catalog (fixed)",
+      "familiasProfesionalesLabel": "Professional families",
+      "titulosTotalesLabel": "Total qualifications",
+      "gradoBasicoLabel": "Basic Degree (GB/GM/GS)",
+      "gradoMedioLabel": "Intermediate Degree (GB/GM/GS)",
+      "gradoSuperiorLabel": "Higher Degree (GB/GM/GS)",
+      "ficheroCargado": "File loaded ({{origen}})",
+      "gradoLabel": "Degree",
+      "sinFamiliaTituloAsignados": "No family/qualification assigned yet. Go to Context > Identification.",
+      "programacionDidacticaTitulo": "Curriculum plan",
+      "programacionActivaLabel": "Active curriculum plan:",
+      "cursoActivoTitulo": "Active course",
+      "cursoActivoLabel": "Active Course:",
+      "alumnosConRegistro": "{{count}} students with a record out of {{total}} possible ({{pct}})",
+      "dualGeneralLabel": "General",
+      "faltanCampos": "Missing: {{campos}}",
+      "indicadoresEqavetValorados": "{{count}} EQAVET indicators assessed",
+      "sumaPesos": "Sum of weights: {{pct}}% {{estado}}"
+    },
+    "secuenciacion": {
+      "contenidosLabel": "Contents",
+      "aspectosClaveLabel": "Key aspects",
+      "disenoTareaCompetencialTitulo": "Competency Task Design",
+      "scenarioBriefingLabel": "Scenario / briefing (professional context)",
+      "scenarioBriefingDesc": "Credible work situation, specific assignment (e.g. an email from a client, a technical incident).",
+      "formatoEntregaPlazosLabel": "Delivery format and deadlines",
+      "formatoEntregaPlazosDesc": "How, when and where the task must be submitted.",
+      "desarrolloTareaPasosLabel": "Task development (steps)",
+      "desarrolloTareaPasosDesc": "Sequenced instructions that students must follow.",
+      "evidenciasAGenerarLabel": "Evidence to be generated",
+      "evidenciasAGenerarDesc": "What tangible products or demonstrations will be assessed.",
+      "tareaLabel": "Task",
+      "configuracionDetalladaUnidadTitulo": "Detailed unit configuration",
+      "intencionEducativaLabel": "Educational intent / contextualization",
+      "intencionEducativaDesc": "Pedagogical justification for this unit, link to the professional profile and prior knowledge required.",
+      "temporizacionDetalladaLabel": "Detailed timing",
+      "temporizacionDetalladaDesc": "Period of the school year, estimated dates and relationship with other UDs.",
+      "agrupamientosMetodologiaLabel": "Groupings and methodology",
+      "agrupamientosMetodologiaDesc": "Classroom organization (large group, small group, individual work).",
+      "transversalidadInnovacionLabel": "Cross-curricular themes and innovation",
+      "transversalidadInnovacionDesc": "How digitalization, sustainability, equity or UDL are addressed in this unit."
+    },
+    "calendario": {
+      "mesEnero": "January",
+      "mesFebrero": "February",
+      "mesMarzo": "March",
+      "mesAbril": "April",
+      "mesMayo": "May",
+      "mesJunio": "June",
+      "mesJulio": "July",
+      "mesAgosto": "August",
+      "mesSeptiembre": "September",
+      "mesOctubre": "October",
+      "mesNoviembre": "November",
+      "mesDiciembre": "December",
+      "diaLuCorto": "Mo",
+      "diaMaCorto": "Tu",
+      "diaMiCorto": "We",
+      "diaJuCorto": "Th",
+      "diaViCorto": "Fr",
+      "diaSaCorto": "Sa",
+      "diaDoCorto": "Su",
+      "cargandoCalendario": "Loading calendar...",
+      "fechasGeneralesTitulo": "General dates",
+      "horarioSemanalTitulo": "Weekly schedule",
+      "desfaseBoa": "Discrepancy with BOA ({{h_sem}} h/week):",
+      "semanaLectivaTitulo": "Teaching week",
+      "eval1Abrev": "1st Ev.",
+      "eval2Abrev": "2nd Ev.",
+      "eval3Abrev": "3rd Ev.",
+      "trimestresTitulo": "Terms",
+      "inicioLabel": "Start",
+      "finLabel": "End",
+      "horasLectivasReales": "Actual teaching hours",
+      "tipoDualLabel": "Dual type",
+      "dualGeneral": "General Dual",
+      "dualIntensiva": "Intensive Dual",
+      "docenciaLabel": "Teaching",
+      "sinDocencia": "No teaching",
+      "conDocencia": "With teaching",
+      "inicioFeoeLabel": "FEOE start",
+      "finFeoeLabel": "FEOE end",
+      "horasDiaFeoeLabel": "FEOE hours/day",
+      "festivosEventosTitulo": "Holidays and events",
+      "festivosEventosInstruccionesPre": "Enter manually or click on the calendar. Holidays exclude hours from the actual count. Holiday and Relevant are independent: the same day can have both at once. Rows with",
+      "festivosEventosInstruccionesPost": "(Start/End of school year and term, FEOE) come from General dates / FEOE period — edit them there, not here.",
+      "hoyBadge": "Today"
+    },
+    "diario": {
+      "alumnadoActivoLabel": "Active students",
+      "riesgoAltoLabel": "High risk",
+      "riesgoMedioLabel": "Medium risk",
+      "tasaAbandonoEstimadaLabel": "Estimated dropout rate",
+      "sinAlertasAbandono": "No dropout alerts",
+      "todoAlumnadoParametrosNormales": "All active students are within normal parameters.",
+      "horasTotalesModulo": "Total module hours",
+      "asistenciaFecha": "Attendance: {{fecha}}"
+    },
+    "feoe": {
+      "score1": "1 · Fail",
+      "score2": "2 · Pass",
+      "score3": "3 · Good",
+      "score4": "4 · Excellent",
+      "criteriosDesignadosTitulo": "Criteria designated for FEOE",
+      "criteriosDesignadosDesc": "Mark the CEs that are assessed at the company (Annex XI b) — the company tutor rates them from 1 to 4 and you transcribe the result below, per student.",
+      "sinRaCe": "No RA/CE loaded in this module yet.",
+      "marcaAlMenosUnCe": "Mark at least one CE above to start recording company assessments.",
+      "sinAlumnadoActivo": "No active students registered in this course.",
+      "alumnadoActivoCount": "Active students ({{count}})",
+      "rellenaConBotonDesc": "Fill in with one button and manually correct what's needed — it's just a starting point, not a final value.",
+      "sinEvaluar": "Not assessed",
+      "mediaSuperiorA2": "Average of activities > 2, according to Annex XI b)",
+      "superado": "Passed",
+      "mediaInferiorIgualA2": "Average of activities ≤ 2, according to Annex XI b)",
+      "noSuperado": "Not passed",
+      "observacionesTutorPlaceholder": "Company tutor's observations (optional)..."
+    },
+    "onboarding": {
+      "entendido": "Got it!",
+      "siguiente": "Next",
+      "anterior": "⬅ Previous",
+      "bienvenidaTitulo": "Welcome to Cuaderno FP!",
+      "bienvenidaDesc": "We'll give you a quick 4-step tour so you can get the most out of it. You can skip it or close it at any time.",
+      "navegacionTitulo": "Main navigation",
+      "navegacionDesc": "Here you'll find all the tools: Settings, Module, Students and Assessment.",
+      "guardarDeshacerTitulo": "Save and Undo",
+      "guardarDeshacerDesc": "You can save manually here, although there's autosave. You also have arrows for Undo/Redo, or you can use Ctrl+S and Ctrl+Z.",
+      "pestanaArchivosTitulo": "Files Tab",
+      "pestanaArchivosDesc": "To get started, go to Files and select 'DEMO Data' to explore without worry."
+    },
+    "ayuda": {
+      "faq": {
+        "grupo1": {
+          "titulo": "1. Prior concepts and security",
+          "q1": "What is the Hybrid architecture (Local-First + Cloud)?",
+          "a1": "A modern architecture is used. Your working data (students, grades) is processed locally in your browser, guaranteeing total privacy and speed. Heavy operations (PDF report generation or connection with Artificial Intelligence) rely securely on a central server.",
+          "q2": "Where is my data stored?",
+          "a2": "The data from your Curriculum Plan and your Courses resides in your own browser (IndexedDB). You have absolute control over it. For security, it's recommended to frequently use file export (BYOC) from the Files tab.",
+          "q3": "What's the difference between 'Curriculum Plan' and 'Course'?",
+          "a3": "It's a vital concept: the 'Curriculum Plan' is your theoretical template; it contains the letter of the law (learning outcomes, assessment criteria) and your teaching units (reusable year after year). The 'Course' is the real instance; it represents an actual group of flesh-and-blood students in a specific school year, with their grades and absences.",
+          "q4": "What happens if I delete my browser's data or cache?",
+          "a4": "If you clear your browser's deep cache without having exported your data beforehand, you will lose your work. That's why it's vital to periodically use the 'Export' button to save your progress to a .json file, keeping local backups.",
+          "q5": "Can I work from multiple computers?",
+          "a5": "Yes. To transfer your environment between your school computer and your personal laptop, just 'Export' your progress on computer A and click 'Import' on computer B."
+        },
+        "grupo2": {
+          "titulo": "2. Step 1: The didactic curriculum plan",
+          "q1": "Do I have to manually enter all the RA and CE from the BOE?",
+          "a1": "No! The system includes an official Catalog that automatically imports the legal regulations (learning outcomes and criteria) for your module. You just need to choose your Grade and your Training Cycle in the initial Catalog section, and the system does it for you.",
+          "q2": "What does it mean that the RA don't add up to 100% in the checks?",
+          "a2": "For the continuous mathematical assessment to work, each Learning Outcome (RA) must have a 'weight' or level of importance. The total sum of the weights of all the RA in a module must be exactly 100%. You need to adjust this in Curriculum Plan > Curriculum > 'RA and CE' tab.",
+          "q3": "How do I configure the hours students spend at the company (Dual FP)?",
+          "a3": "In Curriculum Plan > Context > 'Identification' tab, choose whether your arrangement is General Dual, Intensive Dual, or None. Then, in Curriculum Plan > Context > 'FEOE and dual arrangement' tab, describe how that in-company training is organized and tracked. To mark which specific Learning Outcomes are dual, go to Curriculum Plan > Curriculum > 'RA and CE' tab.",
+          "q4": "What is the EQAVET section for?",
+          "a4": "It's used to integrate the European continuous-improvement cycle into your curriculum plan. You'll find it under 'Home' > 'Improvement' tab. At the end of the year, you self-assess the quality indicators and note your improvement proposals for the following year. The teaching self-assessment rubric follows ANECA's DOCENTIA model (see aneca.es/docentia), adapted to FP practice.",
+          "q5": "What's the difference between complementary and extracurricular activities?",
+          "a5": "They are legally distinct: complementary activities take place within teaching hours, are linked to the curriculum, and are gradable — they are part of your didactic curriculum plan. Extracurricular activities take place outside school hours, are voluntary, and are never gradable — they go in the centre's PGA, not in the PD; in Methodology > Cross-curricular you can still note them for reference, but they don't count in the curriculum plan.",
+          "q6": "What's the difference between an assessment instrument and a grading instrument?",
+          "a6": "For each Assessment Criterion (CE) there are two distinct things: the assessment instrument is the activity that generates the evidence (an objective test, a task, an oral defence...), and the grading instrument is what scores that evidence (a rubric, a scale, a checklist...). In Instruments you can code both separately when configuring each instrument."
+        },
+        "grupo3": {
+          "titulo": "3. Step 3: Creating the course and roster",
+          "q1": "Can I import students from platforms like Séneca, Rayuela, or an Excel file?",
+          "a1": "Yes. In the 'Students' section you can import a CSV (Excel) file with your class list. Alternatively, the smart table lets you copy and paste cells in bulk, just like a spreadsheet.",
+          "q2": "What level of security does my students' data have?",
+          "a2": "Your local files never leave for our server unless you want them to (using 'Save Locally'). If you choose to save them to Google Drive or OneDrive, the file is transmitted directly between your browser and Microsoft/Google's servers. You can enable local encryption so the file is completely unreadable without your master key.",
+          "q3": "Is the application protected against hacking or outages?",
+          "a3": "Yes. The frontend includes a Content Security Policy (CSP) that blocks code-injection attacks (XSS) to protect your local data. In addition, our server has 'Rate Limiting' (request throttling) that prevents denial-of-service attacks (DDoS), ensuring the official catalogs are always available when you need them.",
+          "q4": "How do I physically arrange students in the classroom?",
+          "a4": "Inside 'Students' you'll find a 'Classroom layout' tab. It's a visual, interactive board where you can drag and drop students onto their respective desks to get the exact layout of your class.",
+          "q5": "How do I use the Dropout Alerts system?",
+          "a5": "The early-prevention panel lets you record calls to families, disciplinary reports, or referrals to the guidance department for students at risk of dropping out."
+        },
+        "grupo4": {
+          "titulo": "4. Step 5: Day-to-day work and assessment",
+          "q1": "What is the 'Classroom diary'?",
+          "a1": "It's your daily logbook. It lets you note what happens in each actual class session: which UD you covered, whether there were any incidents, or mark 'No teaching' days (such as strikes or staff meetings) so they don't count toward your progress.",
+          "q2": "How is the 'Monthly planning' forecast calculated?",
+          "a2": "It's calculated day by day using the holiday calendar and the weekly timetable you already have registered in the app — it's not a proportional estimate, it's an exact calculation from that data. It will change if the official school-year calendar or the final timetable distribution are not yet complete.",
+          "q3": "How do I take attendance or record absences?",
+          "a3": "In the Tracking section you have the 'Attendance' tab. You'll see all your students, and with a single click on their grid cell you can toggle between Absence, Late, or Justified Absence.",
+          "q4": "How do I grade a specific task or exam?",
+          "a4": "Go to the 'Tracking' section > 'Detail by student' tab to enter the grade for each activity, per student. The final grade is automatically recalculated from the RA and CE weights.",
+          "q5": "How exactly is the term's final grade calculated?",
+          "a5": "The system cross-references the grades you enter in the Instruments with the weight of the Indicator (Assessment > Indicators block), which in turn feeds the weight of the Assessment Criterion (CE) and finally the Learning Outcome (RA). All in real time.",
+          "q6": "What do the colors (purple, teal, orange) mean in the agenda and visual calendar?",
+          "a6": "The background colors indicate which term (assessment period) each activity or date belongs to: 1st term (purple/mauve), 2nd term (teal), and 3rd term (orange/amber) — deliberately without red or blue, as those tones are reserved for Holiday and Event."
+        },
+        "grupo5": {
+          "titulo": "5. Downloads and official documents",
+          "q1": "Can I generate automatic report cards for students?",
+          "a1": "Yes. From the 'Course' tab in MagIA, you can generate bulk PDF report cards for the whole class, or hyper-detailed individual summaries that justify the grade based on each Assessment Criterion achieved."
+        },
+        "grupo7": {
+          "titulo": "7. Technical support",
+          "q1": "What happens if the charts on my dashboard don't load?",
+          "a1": "Check in the sidebar that you have enabled 'Real Mode' and have your Group selected. The charts need to know which students and which curriculum plan to point to in order to analyze the data.",
+          "q2": "Can Cuaderno FP be used on a mobile phone?",
+          "a2": "The design is responsive and adapts, but due to the density of information (large assessment tables and curriculum matrices), we strongly recommend using it on computer screens or large tablets.",
+          "q3": "The app is very slow, or I've noticed a strange error",
+          "a3": "Try reloading the page completely (F5 or Ctrl+R). If the error keeps appearing, export your data (.json) immediately to keep it safe, and contact support detailing the steps to reproduce your problem."
+        }
+      },
+      "mapaAplicacionTitulo": "Application map (sitemap)",
+      "mapaAplicacionDescPre": "Organizational structure of Cuaderno FP. It's generated from the actual navigation configuration (",
+      "mapaAplicacionDescPost": "), so it can't become outdated the way its previous version did.",
+      "agrupamientoPreguntaTitulo": "Is the current grouping appropriate?",
+      "agrupamientoRespuestaPre": "Yes: it clearly separates the starting point (",
+      "agrupamientoInicioDesc": ": Dashboard/Help/Regulations/Catalog — for quick reference, without needing an open group), the active workspace (",
+      "grupoLabel": "Group",
+      "agrupamientoGrupoDesc": ": File/Agenda/Legal/MagIA — file management, day-to-day agenda, and support tools), the reusable part (",
+      "programacionLabel": "Curriculum Plan",
+      "agrupamientoProgramacionDesc": ": Context/Curriculum/Methodology/Instruments) and the year-specific part (",
+      "agrupamientoCursoDesc": ": Calendar/Students/Tracking/Grades).",
+      "errorCargandoContenido": "Error loading the content."
+    },
+    "calificaciones": {
+      "sinCursoNiProgramacionTitulo": "No course or programming loaded",
+      "sinCursoNiProgramacionDesc": "You must open or create a programming and course file in your Files.",
+      "cargandoDatosProgreso": "Loading academic progress data..."
+    },
+    "inicio": {
+      "metodologiaEspecificaTitulo": "A tool built on specific methodology",
+      "metodologiaEspecificaDesc": "Cuaderno FP follows bibliographic references updated to the new FP law, the guidance of the Education Inspectorate, the main reference authors, and the official guides of the education administrations: the Learning Outcomes (RA) are considered the causal axis from which everything else in a didactic plan should derive.",
+      "pasoIdentificacion": "Identification",
+      "pasoIntroduccionJustificacionNormativa": "Introduction, justification and regulations",
+      "pasoContextualizacion": "Contextualization",
+      "pasoObjetivosCompetencias": "Objectives and competencies",
+      "pasoCaracterIntermodularDual": "Intermodular and dual nature",
+      "pasoContenidosCentradosRa": "RA-centered content",
+      "pasoSituacionesAprendizaje": "Learning situations",
+      "pasoMetodologiaInclusion": "Methodology and inclusion",
+      "pasoEvaluacion": "Assessment (learning / work placement / exceptions)",
+      "pasoActividadesComplementarias": "Complementary activities",
+      "pasoAtencionDiversidadRecursos": "Attention to diversity and resources",
+      "grupoTelegramTitulo": "Official Telegram group",
+      "grupoTelegramDesc": "Official development and testing group for the free Cuaderno FP web app. Share your suggestions, report bugs, or contribute by providing the official curriculum for your Autonomous Community.",
+      "contribuidoresCcaaTitulo": "Contributors by Autonomous Community",
+      "contribuidoresCcaaDesc": "Special mention to the teachers who are helping improve and integrate the curricula of the Autonomous Communities",
+      "animateAContribuir": "Get involved and contribute!"
+    },
+    "legal": {
+      "datosTitular": "Owner details",
+      "condicionesUso": "Terms of use",
+      "propiedadIntelectual": "Intellectual property (LPI)",
+      "licenciasTitulo": "Licenses",
+      "codigoFuenteGplTitulo": "4a. Source code — GNU GPLv3",
+      "queImplicaTitulo": "What does it mean?",
+      "copyleftTitulo": "Copyleft: Share alike",
+      "verLicenciaCompletaGithub": "View full license on GitHub",
+      "contenidoMaterialesCcTitulo": "4b. Content and materials — CC BY-NC-SA 4.0",
+      "resumenPracticoTitulo": "Practical summary for teachers",
+      "modeloPrivacidadTitulo": "Local-first privacy model",
+      "privacidadAbsolutaTitulo": "Absolute privacy by design",
+      "responsableTratamientoTitulo": "Data controller (GDPR)",
+      "dondeSeGuardanDatosTitulo": "Where is the data stored?",
+      "derechosArcoTitulo": "Student rights (ARCO)",
+      "seguridadTitulo": "Security",
+      "baseLegalNormativaTitulo": "Legal basis and applicable regulations",
+      "politicaCookiesTitulo": "Cookie policy",
+      "tecnologiasAlmacenamientoTitulo": "Storage technologies used",
+      "detalleAlmacenamientoTitulo": "Local storage detail",
+      "contenidoThemeA11y": "Theme and accessibility preferences",
+      "duracionPersistente": "Persistent",
+      "contenidoCatalogCache": "Official catalogs (cycles, modules, RA/CE)",
+      "contenidoSessionData": "Session data and module configuration",
+      "comoGestionarTitulo": "How to manage local storage",
+      "declaracionAccesibilidadTitulo": "Accessibility statement",
+      "normativaAplicableTitulo": "Applicable regulations",
+      "estadoConformidadTitulo": "Conformance status",
+      "medidasAdoptadasTitulo": "Accessibility measures adopted",
+      "navegacionEstructuraTitulo": "Navigation and structure",
+      "interaccionControlesTitulo": "Interaction and controls",
+      "personalizacionTitulo": "Personalization",
+      "excepcionesTitulo": "Exceptions and non-conforming content",
+      "contactoInfoAccesibleTitulo": "Contact and request for accessible information"
+    },
+    "magia": {
+      "contextoDesc": "General information and characteristics of the environment.",
+      "sinDocumentosApoyo": "No supporting documents yet in this section.",
+      "curriculoDesc": "Cross-reference of learning outcomes and criteria; UD documents and tasks.",
+      "matrizRaUdTitulo": "RA ↔ UD matrix",
+      "matrizRaUdDesc": "Cross table of RA and their relationship with the Teaching Units.",
+      "sinUdDefinidas": "No Teaching Units defined.",
+      "tareaCompetencialTitulo": "Competency-based task",
+      "sinTareasDefinidas": "No competency-based tasks defined.",
+      "metodologiaDesc": "Methodological strategies and resources.",
+      "instrumentosTitulo": "Instruments",
+      "instrumentosDesc": "Definition and weights of the assessment tools.",
+      "calendarioDesc": "Schedule, terms, holidays and events.",
+      "calendarioAcademicoDesc": "Global view of the year with dates, sessions and events.",
+      "alumnadoDesc": "Personal records and classroom seating.",
+      "alumnadoUbicacionAulaTitulo": "Students. Classroom seating",
+      "distribucionUbicacionAulaDesc": "Distribution and seating of students in the classroom.",
+      "progresoAlumnadoTitulo": "Student progress",
+      "generaInformeAvanceDesc": "Generates a report on student progress.",
+      "fichaIndividualTitulo": "Individual record",
+      "fichaIndividualDesc": "Enrollment + tutoring record for a student, to bring to a guidance meeting.",
+      "seguimientoLabel": "Tracking",
+      "seguimientoDesc": "Class diary, sequencing by UD, and monthly planning.",
+      "seguimientoDiarioTitulo": "Daily tracking",
+      "seguimientoDiarioDesc": "Detailed record of day-to-day planning.",
+      "clasesPorUdTitulo": "Classes by UD",
+      "clasesPorUdDesc": "Sequencing of sessions for each Teaching Unit.",
+      "planificacionTitulo": "Planning",
+      "planificacionDesc": "Monthly time distribution (planned/delivered) by UD.",
+      "calificacionesDesc": "Report cards, assessment records and reports per student.",
+      "boletinDelTrimestre": "{{trimestre}} report card",
+      "evaluacionFinalExtraordinariaTitulo": "Extraordinary final assessment",
+      "evaluacionFinalOrdinariaTitulo": "Ordinary final assessment"
+    },
+    "seguimiento": {
+      "cargandoDatosSeguimiento": "Loading tracking data..."
     }
-  }
+  },
+  "t1": "1st term",
+  "t2": "2nd term",
+  "t3": "3rd term",
+  "festivo": "Holiday",
+  "evento": "Event",
+  "festivos": "Holidays",
+  "eventos": "Events",
+  "nombre_festivo": "Holiday name...",
+  "desc_evento": "Event description...",
+  "anadir": "Add",
+  "cancelar": "Cancel",
+  "table": {
+    "fecha": "Date",
+    "hasta": "Until"
+  },
+  "fecha": "Date",
+  "hasta_opc": "Until (optional)",
+  "sin_eventos": "No holidays or events yet. Add one above."
 }

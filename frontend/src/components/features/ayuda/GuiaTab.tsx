@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { Card } from "@/components/ui/Card";
+import { useTranslation } from "react-i18next";
 
 const guiaMarkdownComponents = {
   h1: ({ node, ...props }: any) => <h1 className="text-heading font-extrabold text-foreground mb-6 pb-2 border-b border-white/10" {...props} />,
@@ -24,6 +25,7 @@ const guiaMarkdownComponents = {
 };
 
 export function GuiaTab() {
+  const { t } = useTranslation();
   const [guiaContent, setGuiaContent] = useState<string | null>(null);
 
   useEffect(() => {
@@ -33,7 +35,7 @@ export function GuiaTab() {
       .then(text => setGuiaContent(text))
       .catch(err => {
         console.error(err);
-        setGuiaContent("Error cargando el contenido.");
+        setGuiaContent(t('campos.ayuda.errorCargandoContenido', {defaultValue: 'Error cargando el contenido.'}));
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -41,7 +43,7 @@ export function GuiaTab() {
   return (
     <Card glow className="p-8">
       {guiaContent === null ? (
-        <div className="flex justify-center p-8 text-muted">Cargando...</div>
+        <div className="flex justify-center p-8 text-muted">{t('common.cargando', {defaultValue: 'Cargando...'})}</div>
       ) : (
         <div className="markdown-body">
           <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={guiaMarkdownComponents}>

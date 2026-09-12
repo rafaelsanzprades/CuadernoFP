@@ -1,6 +1,7 @@
 "use client";
 import { Brain, Briefcase, Building2, ClipboardList, Compass, Globe2, Map, Monitor, Rocket, Target, Users } from "lucide-react";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { Alumnado } from "@/types";
@@ -40,6 +41,7 @@ function DistributionBar({ label, count, total, color = "bg-accent" }: BarProps)
 // TendenciasTab.tsx (APP-EntidadIES / antigua página /profesional).
 
 export const TendenciasProfesionalTab = () => {
+  const { t } = useTranslation();
   const { cursoData } = useAppStore();
 
   const df_al = cursoData?.df_al || [];
@@ -85,7 +87,7 @@ export const TendenciasProfesionalTab = () => {
     return (
       <Card className="p-12 text-center text-muted flex flex-col items-center gap-4">
         <span className="text-5xl"><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
-        <p className="text-lg">No hay alumnado registrado en este curso.</p>
+        <p className="text-lg">{t('campos.alumnado.sinAlumnadoRegistradoCurso', {defaultValue: 'No hay alumnado registrado en este curso.'})}</p>
       </Card>
     );
   }
@@ -95,9 +97,9 @@ export const TendenciasProfesionalTab = () => {
 
       <Card className="p-5 flex flex-col md:flex-row items-center justify-between gap-4 border border-white/5 bg-foreground/5">
         <div>
-          <h2 className="text-lg font-bold text-foreground">Cobertura de fichas de orientación</h2>
+          <h2 className="text-lg font-bold text-foreground">{t('campos.alumnado.coberturaFichasOrientacionTitulo', {defaultValue: 'Cobertura de fichas de orientación'})}</h2>
           <p className="text-sm text-muted mt-0.5">
-            {withDataCount} de {total} alumnado tienen ficha completada
+            {t('campos.alumnado.deTotalFichaCompletada', {con: withDataCount, total, defaultValue: '{{con}} de {{total}} alumnado tienen ficha completada'})}
           </p>
         </div>
         <div className="flex items-center gap-4">
@@ -111,17 +113,17 @@ export const TendenciasProfesionalTab = () => {
       {withDataCount === 0 ? (
         <Card className="p-12 text-center text-muted flex flex-col items-center gap-4">
           <span className="text-5xl"><span className="inline-flex"><Compass className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
-          <p className="text-lg font-semibold">Sin datos de orientación aún</p>
-          <p className="text-sm">Completa las fichas individuales en la pestaña <strong><span className="inline-flex"><Compass className="w-[1.2em] h-[1.2em] mr-1" /></span> Individual</strong>.</p>
+          <p className="text-lg font-semibold">{t('campos.alumnado.sinDatosOrientacionAun', {defaultValue: 'Sin datos de orientación aún'})}</p>
+          <p className="text-sm">{t('campos.alumnado.completaFichasIndividualesPre', {defaultValue: 'Completa las fichas individuales en la pestaña'})} <strong><span className="inline-flex"><Compass className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.individualTab', {defaultValue: 'Individual'})}</strong>.</p>
         </Card>
       ) : (
         <>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { label: "Con experiencia laboral", value: nConExperiencia, icon: <><span className="inline-flex"><Briefcase className="w-[1.2em] h-[1.2em] mr-1" /></span></>, color: "text-warning" },
-              { label: "Interés en Erasmus+", value: nErasmus, icon: <><span className="inline-flex"><Globe2 className="w-[1.2em] h-[1.2em] mr-1" /></span></>, color: "text-info" },
-              { label: "Interés en bolsa empleo", value: nBolsa, icon: <><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span></>, color: "text-success" },
-              { label: "Con idea de negocio", value: nEmprender, icon: <><span className="inline-flex"><Rocket className="w-[1.2em] h-[1.2em] mr-1" /></span></>, color: "text-info" },
+              { label: t('campos.alumnado.conExperienciaLaboralKpi', {defaultValue: 'Con experiencia laboral'}), value: nConExperiencia, icon: <><span className="inline-flex"><Briefcase className="w-[1.2em] h-[1.2em] mr-1" /></span></>, color: "text-warning" },
+              { label: t('campos.alumnado.interesErasmusKpi', {defaultValue: 'Interés en Erasmus+'}), value: nErasmus, icon: <><span className="inline-flex"><Globe2 className="w-[1.2em] h-[1.2em] mr-1" /></span></>, color: "text-info" },
+              { label: t('campos.alumnado.interesBolsaEmpleoKpi', {defaultValue: 'Interés en bolsa empleo'}), value: nBolsa, icon: <><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span></>, color: "text-success" },
+              { label: t('campos.alumnado.conIdeaNegocioKpi', {defaultValue: 'Con idea de negocio'}), value: nEmprender, icon: <><span className="inline-flex"><Rocket className="w-[1.2em] h-[1.2em] mr-1" /></span></>, color: "text-info" },
             ].map((kpi) => (
               <Card key={kpi.label} className="p-4 text-center border border-white/5 bg-foreground/5">
                 <div className="text-2xl mb-1">{kpi.icon}</div>
@@ -136,7 +138,7 @@ export const TendenciasProfesionalTab = () => {
             {intenciones.length > 0 && (
               <Card className="p-6 border border-white/5 bg-foreground/5 space-y-4">
                 <h3 className="text-base font-bold text-foreground flex items-center gap-2">
-                  <span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Intención al finalizar el ciclo
+                  <span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.intencionFinalizarCicloTitulo', {defaultValue: 'Intención al finalizar el ciclo'})}
                 </h3>
                 <div className="space-y-3">
                   {intenciones.map(([label, count]) => (
@@ -149,7 +151,7 @@ export const TendenciasProfesionalTab = () => {
             {aptitudes.length > 0 && (
               <Card className="p-6 border border-white/5 bg-foreground/5 space-y-4">
                 <h3 className="text-base font-bold text-foreground flex items-center gap-2">
-                  <span className="inline-flex"><Brain className="w-[1.2em] h-[1.2em] mr-1" /></span> Aptitud principal detectada
+                  <span className="inline-flex"><Brain className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.aptitudPrincipalDetectadaTitulo', {defaultValue: 'Aptitud principal detectada'})}
                 </h3>
                 <div className="space-y-3">
                   {aptitudes.map(([label, count]) => (
@@ -162,7 +164,7 @@ export const TendenciasProfesionalTab = () => {
             {areaInteres.length > 0 && (
               <Card className="p-6 border border-white/5 bg-foreground/5 space-y-4">
                 <h3 className="text-base font-bold text-foreground flex items-center gap-2">
-                  <span className="inline-flex"><Monitor className="w-[1.2em] h-[1.2em] mr-1" /></span> Área de interés dominante
+                  <span className="inline-flex"><Monitor className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.areaInteresDominanteTitulo', {defaultValue: 'Área de interés dominante'})}
                 </h3>
                 <div className="space-y-3">
                   {areaInteres.map(([label, count]) => (
@@ -175,7 +177,7 @@ export const TendenciasProfesionalTab = () => {
             {ambitos.length > 0 && (
               <Card className="p-6 border border-white/5 bg-foreground/5 space-y-4">
                 <h3 className="text-base font-bold text-foreground flex items-center gap-2">
-                  <span className="inline-flex"><Building2 className="w-[1.2em] h-[1.2em] mr-1" /></span> Ámbito laboral preferido
+                  <span className="inline-flex"><Building2 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.ambitoLaboralPreferidoTitulo', {defaultValue: 'Ámbito laboral preferido'})}
                 </h3>
                 <div className="space-y-3">
                   {ambitos.map(([label, count]) => (
@@ -188,7 +190,7 @@ export const TendenciasProfesionalTab = () => {
             {geoPrefs.length > 0 && (
               <Card className="p-6 border border-white/5 bg-foreground/5 space-y-4">
                 <h3 className="text-base font-bold text-foreground flex items-center gap-2">
-                  <span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> Preferencia geográfica de trabajo
+                  <span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.preferenciaGeograficaTrabajoTitulo', {defaultValue: 'Preferencia geográfica de trabajo'})}
                 </h3>
                 <div className="space-y-3">
                   {geoPrefs.map(([label, count]) => (
@@ -201,7 +203,7 @@ export const TendenciasProfesionalTab = () => {
             {motivaciones.length > 0 && (
               <Card className="p-6 border border-white/5 bg-foreground/5 space-y-4">
                 <h3 className="text-base font-bold text-foreground flex items-center gap-2">
-                  <span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Motivación de elección del ciclo
+                  <span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.motivacionEleccionCicloTitulo', {defaultValue: 'Motivación de elección del ciclo'})}
                 </h3>
                 <div className="space-y-3">
                   {motivaciones.map(([label, count]) => (
@@ -216,7 +218,7 @@ export const TendenciasProfesionalTab = () => {
           {experiencias.length > 0 && (
             <Card className="p-6 border border-white/5 bg-foreground/5 space-y-4">
               <h3 className="text-base font-bold text-foreground flex items-center gap-2">
-                <span className="inline-flex"><Briefcase className="w-[1.2em] h-[1.2em] mr-1" /></span> Distribución de experiencia laboral previa
+                <span className="inline-flex"><Briefcase className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.distribucionExperienciaLaboralTitulo', {defaultValue: 'Distribución de experiencia laboral previa'})}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {experiencias.map(([label, count]) => (
@@ -228,17 +230,17 @@ export const TendenciasProfesionalTab = () => {
 
           <Card className="border border-white/5 bg-foreground/5 overflow-hidden">
             <div className="p-5 border-b border-white/5">
-              <h3 className="text-base font-bold text-foreground"><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> Resumen por alumnado/a</h3>
+              <h3 className="text-base font-bold text-foreground"><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.resumenPorAlumnadoTitulo', {defaultValue: 'Resumen por alumnado/a'})}</h3>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-white/5 text-muted bg-foreground/5">
-                    <th className="text-left p-3 font-semibold">Alumnado/a</th>
-                    <th className="text-left p-3 font-semibold">Aptitud</th>
-                    <th className="text-left p-3 font-semibold">Área interés</th>
-                    <th className="text-left p-3 font-semibold">Intención al terminar</th>
-                    <th className="text-left p-3 font-semibold">Inserción</th>
+                    <th className="text-left p-3 font-semibold">{t('nav.alumnado', {defaultValue: 'Alumnado/a'})}</th>
+                    <th className="text-left p-3 font-semibold">{t('campos.alumnado.aptitudLabel', {defaultValue: 'Aptitud'})}</th>
+                    <th className="text-left p-3 font-semibold">{t('campos.alumnado.areaInteresLabel', {defaultValue: 'Área interés'})}</th>
+                    <th className="text-left p-3 font-semibold">{t('campos.alumnado.intencionTerminarLabel', {defaultValue: 'Intención al terminar'})}</th>
+                    <th className="text-left p-3 font-semibold">{t('campos.alumnado.insercionLabel', {defaultValue: 'Inserción'})}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -257,7 +259,7 @@ export const TendenciasProfesionalTab = () => {
                             <span className="text-xs font-semibold bg-accent/10 border border-accent/20 text-accent px-2 py-1 rounded-full">
                               {d.intencion_al_terminar}
                             </span>
-                          ) : <span className="text-muted/50 italic text-xs">Sin datos</span>}
+                          ) : <span className="text-muted/50 italic text-xs">{t('checks.verificacion.sinDatos', {defaultValue: 'Sin datos'})}</span>}
                         </td>
                         <td className="p-3 text-foreground/70 text-xs">{d.estado_insercion || <span className="text-muted/50 italic">-</span>}</td>
                       </tr>

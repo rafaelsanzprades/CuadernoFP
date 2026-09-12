@@ -124,11 +124,12 @@ function NormativaFolder({
   formatSize: (bytes: number | null) => string;
   getFileIcon: (filename: string) => React.ReactNode;
 }) {
+  const { t } = useTranslation();
   if (!hasFiles) {
     return (
       <div className="py-8 text-center text-muted-foreground flex flex-col items-center gap-2">
         <span className="text-caption tracking-widest bg-success/10 text-success/70 px-3 py-1 rounded border border-success/20">
-          En preparación
+          {t('campos.normativa.enPreparacion', {defaultValue: 'En preparación'})}
         </span>
       </div>
     );
@@ -140,6 +141,7 @@ function NormativaFolder({
 }
 
 function CommunityFiles({ path, emptyMessage, onDownloadDoc, formatSize, getFileIcon }: { path: string; emptyMessage: string; onDownloadDoc: (path: string, filename: string) => void; formatSize: any; getFileIcon: any; }) {
+  const { t } = useTranslation();
   const [files, setFiles] = useState<DocumentItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -161,7 +163,7 @@ function CommunityFiles({ path, emptyMessage, onDownloadDoc, formatSize, getFile
     return (
       <div className="p-4 text-center text-muted flex flex-col items-center">
         <div className="w-6 h-6 border-2 border-accent border-t-transparent rounded-full animate-spin mb-2"></div>
-        <p className="text-body">Cargando normativa...</p>
+        <p className="text-body">{t('campos.normativa.cargandoNormativa', {defaultValue: 'Cargando normativa...'})}</p>
       </div>
     );
   }

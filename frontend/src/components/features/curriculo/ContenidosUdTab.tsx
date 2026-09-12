@@ -103,9 +103,9 @@ export function ContenidosUdTab() {
                   <th className="p-2 text-muted font-semibold min-w-[160px]">{t('campos.curriculo.bloqueContenido', { defaultValue: 'Bloque de contenidos' })}</th>
                   <th className="p-2 text-muted font-semibold min-w-[280px]">{t('campos.curriculo.contenidosPorUd', { defaultValue: 'Contenidos por UD' })}</th>
                   <th className="p-2 text-muted font-semibold text-center">RA</th>
-                  <th className="p-2 text-muted font-semibold text-center">Obj</th>
+                  <th className="p-2 text-muted font-semibold text-center">{t('tablas.curriculo.objAbrev', {defaultValue: 'Obj'})}</th>
                   <th className="p-2 text-muted font-semibold text-center">{t('campos.curriculo.numHoras', { defaultValue: 'Nº horas' })}</th>
-                  <th className="p-2 text-muted font-semibold min-w-[160px]">EVAL.</th>
+                  <th className="p-2 text-muted font-semibold min-w-[160px]">{t('tablas.curriculo.evalAbrev', {defaultValue: 'EVAL.'})}</th>
                 </tr>
               </thead>
               <tbody>

@@ -7,8 +7,10 @@ import { es } from 'date-fns/locale';
 import { simulateSchedule, DaySchedule } from '@/utils/scheduleSimulator';
 import { useDynamicPlanning } from '@/hooks/useDynamicPlanning';
 import { BookOpen, CalendarDays, History, ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const ContextoAgenda = () => {
+  const { t } = useTranslation();
   const { moduleData, cursoData, dataSource } = useAppStore();
   const { planningLedger } = useDynamicPlanning();
 
@@ -64,7 +66,7 @@ export const ContextoAgenda = () => {
         const maxS = sorted[sorted.length - 1].Num_Orden;
         label = minS === maxS ? `S${minS}` : `S${minS}-S${maxS}`;
       } else {
-        label = `Planificado (${data.daysCount} días)`;
+        label = t('campos.dashboard.planificadoNDias', {count: data.daysCount, defaultValue: 'Planificado ({{count}} días)'});
       }
       return { udId, desc: data.desc, label, count: data.sessions.length };
     });
@@ -130,15 +132,15 @@ export const ContextoAgenda = () => {
   }
 
   const renderSummaryList = (summary: {udId: string, desc: string, label: string, count: number}[]) => {
-    if (summary.length === 0) return <div className="text-muted text-sm italic">Sin clases lectivas</div>;
+    if (summary.length === 0) return <div className="text-muted text-sm italic">{t('campos.dashboard.sinClasesLectivas', {defaultValue: 'Sin clases lectivas'})}</div>;
     return (
       <div className="space-y-2">
         {summary.map(s => (
           <div key={s.udId} className="flex flex-col">
-            <span className="text-body font-bold text-foreground">{s.udId} <span className="font-normal text-muted text-sm ml-1">({s.count} sesiones)</span></span>
+            <span className="text-body font-bold text-foreground">{s.udId} <span className="font-normal text-muted text-sm ml-1">{t('campos.dashboard.nSesionesParentesis', {count: s.count, defaultValue: '({{count}} sesiones)'})}</span></span>
             <span className="text-sm text-muted-foreground truncate" title={s.desc}>{s.desc}</span>
             <span className="text-xs text-accent mt-1 bg-accent/10 px-2 py-0.5 rounded-full w-fit">
-              Sesiones: {s.label}
+              {t('campos.dashboard.sesionesLabel', {label: s.label, defaultValue: 'Sesiones: {{label}}'})}
             </span>
           </div>
         ))}
@@ -152,7 +154,7 @@ export const ContextoAgenda = () => {
         {/* Semana Anterior */}
         <Card className="p-5 opacity-80 hover:opacity-100 transition-opacity flex flex-col">
           <div className="flex items-center gap-2 mb-4 text-muted-foreground font-semibold">
-            <History className="w-4 h-4" /> Semana anterior
+            <History className="w-4 h-4" /> {t('campos.dashboard.semanaAnterior', {defaultValue: 'Semana anterior'})}
           </div>
           {renderSummaryList(prevSummary)}
         </Card>
@@ -165,7 +167,7 @@ export const ContextoAgenda = () => {
           <div className="flex flex-col h-full justify-between relative z-10">
             <div>
               <div className="flex items-center gap-2 mb-2 text-info font-bold uppercase tracking-wider text-sm">
-                <CalendarDays className="w-4 h-4" /> UD en curso
+                <CalendarDays className="w-4 h-4" /> {t('campos.dashboard.udEnCursoLabel', {defaultValue: 'UD en curso'})}
               </div>
               {currentUdId ? (
                 <>
@@ -173,15 +175,15 @@ export const ContextoAgenda = () => {
                   <p className="text-body text-muted mt-1 line-clamp-2" title={currentUdDesc}>{currentUdDesc}</p>
                 </>
               ) : (
-                <p className="text-muted italic">Ninguna UD activa actualmente.</p>
+                <p className="text-muted italic">{t('campos.dashboard.ningunaUdActiva', {defaultValue: 'Ninguna UD activa actualmente.'})}</p>
               )}
             </div>
-            
+
             {currentUdId && currentUdTotal > 0 && (
               <div className="mt-6">
                 <div className="flex justify-between text-xs text-muted-foreground mb-1">
-                  <span>Progreso de la UD</span>
-                  <span>{Math.min(currentUdImpartidas, currentUdTotal)} de {currentUdTotal} sesiones</span>
+                  <span>{t('campos.dashboard.progresoUdLabel', {defaultValue: 'Progreso de la UD'})}</span>
+                  <span>{t('campos.dashboard.deSesiones', {actual: Math.min(currentUdImpartidas, currentUdTotal), total: currentUdTotal, defaultValue: '{{actual}} de {{total}} sesiones'})}</span>
                 </div>
                 <div className="w-full bg-foreground/10 rounded-full h-2">
                   <div 
@@ -197,7 +199,7 @@ export const ContextoAgenda = () => {
         {/* Semana Posterior */}
         <Card className="p-5 opacity-80 hover:opacity-100 transition-opacity flex flex-col">
           <div className="flex items-center justify-end gap-2 mb-4 text-muted-foreground font-semibold">
-            Semana próxima <ArrowRight className="w-4 h-4" />
+            {t('campos.dashboard.semanaProxima', {defaultValue: 'Semana próxima'})} <ArrowRight className="w-4 h-4" />
           </div>
           <div className="text-right">
             {renderSummaryList(nextSummary)}

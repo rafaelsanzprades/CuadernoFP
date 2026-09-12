@@ -124,7 +124,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
       // The user wants "C - 2025-26 - 1A-GM - ELE-203.json" roughly, but our fileManager takes cursoName and year.
       // E.g. "1A-GM - ELE-203"
       const pdFile = useAppStore.getState().pdFileSource.fileName || "";
-      const baseName = pdFile ? pdFile.replace('P - ', '').replace('.json', '') : "Módulo Desconocido";
+      const baseName = pdFile ? pdFile.replace('P - ', '').replace('.json', '') : t('campos.cloud.moduloDesconocido', {defaultValue: 'Módulo Desconocido'});
       
       const fullCursoName = `${cursoName} - ${baseName}`;
       
@@ -143,7 +143,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
   const handleCreateCursoDemo = async () => {
     setIsCreating(true);
     try {
-      const ok = await fileManager.createNewCursoFromDemo("Curso DEMO", getCurrentAcademicYear());
+      const ok = await fileManager.createNewCursoFromDemo(t('campos.cloud.cursoDemoNombre', {defaultValue: 'Curso DEMO'}), getCurrentAcademicYear());
       if (ok) {
         toast.success(t('toasts.newFileWizard.cursoDemoCreado', {defaultValue: "Curso DEMO creado correctamente."}));
         onClose();

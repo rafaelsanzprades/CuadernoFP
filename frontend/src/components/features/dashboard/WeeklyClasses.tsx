@@ -3,13 +3,15 @@ import React, { useState } from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { Card } from '@/components/ui/Card';
 import { format, isSameDay } from 'date-fns';
-import { es } from 'date-fns/locale';
 import { simulateSchedule, DaySchedule } from '@/utils/scheduleSimulator';
 import { useDynamicPlanning } from '@/hooks/useDynamicPlanning';
 import { useTranslation } from 'react-i18next';
+import { useDateFnsLocale, useDateFormatPatterns } from '@/hooks/useDateFnsLocale';
 
 export const WeeklyClasses = () => {
   const { t } = useTranslation();
+  const dateFnsLocale = useDateFnsLocale();
+  const dateFormats = useDateFormatPatterns();
   const { moduleData, cursoData, dataSource } = useAppStore();
   const [activeWeekTab, setActiveWeekTab] = useState<'current' | 'next'>('current');
   // cursoData.planning_ledger nunca se persiste — se recalcula en memoria.
@@ -70,8 +72,8 @@ export const WeeklyClasses = () => {
         {days.map((day) => {
           const schedule = getDaySchedule(day);
           const isToday = isSameDay(day, now);
-          const formattedDayName = (format(day, "EEEE", { locale: es }));
-          const formattedDateNum = format(day, "d 'de' MMM", { locale: es });
+          const formattedDayName = (format(day, "EEEE", { locale: dateFnsLocale }));
+          const formattedDateNum = format(day, dateFormats.dayMonthShort, { locale: dateFnsLocale });
 
           let cardStyle = "bg-background/20 border-white/5";
           let badge = null;
@@ -80,7 +82,7 @@ export const WeeklyClasses = () => {
             cardStyle = "bg-accent/10 border-accent/40 ring-1 ring-accent/30 shadow-[0_0_15px_rgba(20,160,133,0.15)]";
             badge = (
               <span className="bg-accent text-background text-caption font-extrabold px-1.5 py-0.5 rounded tracking-wider ">
-                Hoy
+                {t('campos.calendario.hoyBadge', {defaultValue: 'Hoy'})}
               </span>
             );
           } else if (schedule.isFestivo) {
@@ -109,19 +111,19 @@ export const WeeklyClasses = () => {
               <div className="flex-1 flex flex-col justify-start">
                 {schedule.isFestivo ? (
                   <div className="bg-danger/10 border border-danger/30 p-2.5 rounded-lg text-center my-auto">
-                    <span className="text-danger font-medium text-caption block mb-1"><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> Festivo</span>
+                    <span className="text-danger font-medium text-caption block mb-1"><span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('festivo', {defaultValue: 'Festivo'})}</span>
                     <span className="text-danger text-caption font-medium line-clamp-2">
-                      {schedule.festivoName || "Día festivo"}
+                      {schedule.festivoName || t('campos.dashboard.diaFestivo', {defaultValue: 'Día festivo'})}
                     </span>
                   </div>
                 ) : schedule.hours === 0 ? (
                   <div className="text-center text-muted/60 text-caption py-4 my-auto italic">
-                    Sin horario lectivo
+                    {t('campos.dashboard.sinHorarioLectivo', {defaultValue: 'Sin horario lectivo'})}
                   </div>
                 ) : !schedule.udId || schedule.sessions.length === 0 ? (
                   <div className="text-center text-muted/60 text-caption py-4 my-auto italic flex flex-col items-center gap-1">
                     <AlertCircle className="w-4 h-4 text-muted/50" />
-                    Sin clases planificadas
+                    {t('campos.dashboard.sinClasesPlanificadas', {defaultValue: 'Sin clases planificadas'})}
                   </div>
                 ) : (
                   <div className="space-y-2.5">
@@ -159,13 +161,13 @@ export const WeeklyClasses = () => {
               {/* Day Footer Info */}
               {!schedule.isFestivo && schedule.hours > 0 && (
                 <div className="mt-3 pt-2 border-t border-white/5 flex justify-between items-center text-caption text-muted/80">
-                  <span className="font-semibold">{schedule.hours} horas lectivas</span>
+                  <span className="font-semibold">{t('campos.dashboard.horasLectivasCount', {count: schedule.hours, defaultValue: '{{count}} horas lectivas'})}</span>
                   {schedule.isEvent && (
                     <span
                       className="bg-info/10 text-info border border-info/30 px-1.5 py-0.5 rounded font-bold tracking-wider"
                       title={schedule.eventName}
                     >
-                      Evento
+                      {t('campos.dashboard.eventoBadge', {defaultValue: 'Evento'})}
                     </span>
                   )}
                 </div>
@@ -182,10 +184,10 @@ export const WeeklyClasses = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
         <div>
           <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-            <CalendarDays className="w-6 h-6 text-info" /> Previsión semanal
+            <CalendarDays className="w-6 h-6 text-info" /> {t('campos.dashboard.previsionSemanalTitulo', {defaultValue: 'Previsión semanal'})}
           </h2>
           <p className="text-body text-muted mt-1">
-            Distribución temporal de los módulos y las sesiones planificadas en el aula.
+            {t('campos.dashboard.previsionSemanalDesc', {defaultValue: 'Distribución temporal de los módulos y las sesiones planificadas en el aula.'})}
           </p>
         </div>
 
@@ -225,14 +227,14 @@ export const WeeklyClasses = () => {
       {activeWeekTab === 'current' ? (
         <div className="animate-in fade-in duration-300">
           <div className="text-caption font-medium text-muted tracking-wider mb-3">
-            Semana del {format(currentWeekDays[0], "d 'de' MMMM", { locale: es })} al {format(currentWeekDays[4], "d 'de' MMMM", { locale: es })}
+            {t('campos.dashboard.semanaDelAl', {inicio: format(currentWeekDays[0], dateFormats.dayMonth, { locale: dateFnsLocale }), fin: format(currentWeekDays[4], dateFormats.dayMonth, { locale: dateFnsLocale }), defaultValue: 'Semana del {{inicio}} al {{fin}}'})}
           </div>
           {renderWeekDays(currentWeekDays)}
         </div>
       ) : (
         <div className="animate-in fade-in duration-300">
           <div className="text-caption font-medium text-muted tracking-wider mb-3">
-            Semana del {format(nextWeekDays[0], "d 'de' MMMM", { locale: es })} al {format(nextWeekDays[4], "d 'de' MMMM", { locale: es })}
+            {t('campos.dashboard.semanaDelAl', {inicio: format(nextWeekDays[0], dateFormats.dayMonth, { locale: dateFnsLocale }), fin: format(nextWeekDays[4], dateFormats.dayMonth, { locale: dateFnsLocale }), defaultValue: 'Semana del {{inicio}} al {{fin}}'})}
           </div>
           {renderWeekDays(nextWeekDays)}
         </div>

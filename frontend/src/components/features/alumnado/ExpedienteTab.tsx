@@ -5,24 +5,29 @@ import { useAppStore } from "@/store/useAppStore";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { buildExpediente, EventoExpediente, TipoEvento } from "@/utils/expediente";
 import { Card } from "@/components/ui/Card";
+import { useTranslation } from "react-i18next";
 
 // Expediente del alumnado: línea temporal de evidencias ya existentes en la
 // app (calificaciones, autoevaluación, tutoría, reclamaciones, asistencia,
 // diario de clase), agregadas por alumno -- ver utils/expediente.ts para el
 // detalle de qué fuentes entran y por qué (y cuáles se dejan fuera).
 
-const TIPO_INFO: Record<TipoEvento, { label: string; icon: React.ReactNode; color: string }> = {
-  calificacion: { label: "Calificación", icon: <GraduationCap className="w-4 h-4" />, color: "text-info border-info/30 bg-info/10" },
-  autoevaluacion: { label: "Autoevaluación", icon: <ClipboardCheck className="w-4 h-4" />, color: "text-accent border-accent/30 bg-accent/10" },
-  tutoria: { label: "Tutoría", icon: <MessageSquareText className="w-4 h-4" />, color: "text-success border-success/30 bg-success/10" },
-  reclamacion: { label: "Reclamación", icon: <Scale className="w-4 h-4" />, color: "text-danger border-danger/30 bg-danger/10" },
-  asistencia: { label: "Asistencia", icon: <CalendarX2 className="w-4 h-4" />, color: "text-warning border-warning/30 bg-warning/10" },
-  diario: { label: "Diario de clase", icon: <BookOpen className="w-4 h-4" />, color: "text-muted border-white/10 bg-white/5" },
-};
+const TODOS_LOS_TIPOS: TipoEvento[] = ["calificacion", "autoevaluacion", "tutoria", "reclamacion", "asistencia", "diario"];
 
-const TODOS_LOS_TIPOS = Object.keys(TIPO_INFO) as TipoEvento[];
+function getTipoInfo(t: (key: string, opts?: any) => string): Record<TipoEvento, { label: string; icon: React.ReactNode; color: string }> {
+  return {
+    calificacion: { label: t('campos.expediente.tipoCalificacion', {defaultValue: 'Calificación'}), icon: <GraduationCap className="w-4 h-4" />, color: "text-info border-info/30 bg-info/10" },
+    autoevaluacion: { label: t('campos.expediente.tipoAutoevaluacion', {defaultValue: 'Autoevaluación'}), icon: <ClipboardCheck className="w-4 h-4" />, color: "text-accent border-accent/30 bg-accent/10" },
+    tutoria: { label: t('campos.expediente.tipoTutoria', {defaultValue: 'Tutoría'}), icon: <MessageSquareText className="w-4 h-4" />, color: "text-success border-success/30 bg-success/10" },
+    reclamacion: { label: t('campos.expediente.tipoReclamacion', {defaultValue: 'Reclamación'}), icon: <Scale className="w-4 h-4" />, color: "text-danger border-danger/30 bg-danger/10" },
+    asistencia: { label: t('campos.expediente.tipoAsistencia', {defaultValue: 'Asistencia'}), icon: <CalendarX2 className="w-4 h-4" />, color: "text-warning border-warning/30 bg-warning/10" },
+    diario: { label: t('campos.expediente.tipoDiarioClase', {defaultValue: 'Diario de clase'}), icon: <BookOpen className="w-4 h-4" />, color: "text-muted border-white/10 bg-white/5" },
+  };
+}
 
 export function ExpedienteTab() {
+  const { t } = useTranslation();
+  const TIPO_INFO = useMemo(() => getTipoInfo(t), [t]);
   const { cursoData, moduleData, activeModuleId } = useAppStore();
   const [selectedStudentId, setSelectedStudentId] = useState<string>("");
   const [tiposActivos, setTiposActivos] = useState<Set<TipoEvento>>(new Set(TODOS_LOS_TIPOS));
@@ -66,7 +71,7 @@ export function ExpedienteTab() {
   if (activeStudents.length === 0) {
     return (
       <Card className="p-8 text-center border-l-4 border-l-yellow-500 mt-6">
-        <p className="text-foreground/80">No hay alumnado activo registrado en este curso.</p>
+        <p className="text-foreground/80">{t('campos.expediente.sinAlumnadoActivoRegistrado', {defaultValue: 'No hay alumnado activo registrado en este curso.'})}</p>
       </Card>
     );
   }
@@ -127,7 +132,7 @@ export function ExpedienteTab() {
               {eventosFiltrados.length === 0 && sinFechaFiltrados.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center text-muted py-12">
                   <HelpCircle className="w-12 h-12 opacity-30 mb-3" />
-                  <p className="font-semibold">Sin evidencias todavía</p>
+                  <p className="font-semibold">{t('campos.expediente.sinEvidenciasTodavia', {defaultValue: 'Sin evidencias todavía'})}</p>
                   <p className="text-body opacity-70 mt-1">O están todas filtradas — revisa los tipos marcados arriba.</p>
                 </div>
               ) : (
@@ -173,7 +178,7 @@ export function ExpedienteTab() {
         ) : (
           <div className="flex-1 flex flex-col justify-center items-center text-center p-8 text-muted">
             <HelpCircle className="w-12 h-12 text-muted/50 mb-3" />
-            <p className="font-semibold text-lg">Ningún alumnado seleccionado</p>
+            <p className="font-semibold text-lg">{t('campos.expediente.ningunAlumnadoSeleccionado', {defaultValue: 'Ningún alumnado seleccionado'})}</p>
           </div>
         )}
       </div>

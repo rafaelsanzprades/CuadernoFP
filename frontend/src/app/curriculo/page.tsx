@@ -126,8 +126,8 @@ export default function MatricesPage() {
             <MotionWrapper>
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <Calculator className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-heading font-bold">No hay programación cargada</h2>
-                <p className="text-muted mb-4">Debes abrir o crear un archivo de programación en tu Archivos.</p>
+                <h2 className="text-heading font-bold">{t('campos.comun.sinProgramacionCargadaTitulo', {defaultValue: 'No hay programación cargada'})}</h2>
+                <p className="text-muted mb-4">{t('campos.comun.sinProgramacionCargadaDesc', {defaultValue: 'Debes abrir o crear un archivo de programación en tu Archivos.'})}</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
                     <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
@@ -142,7 +142,7 @@ export default function MatricesPage() {
   }
 
   if (loading) {
-    return <LoadingSpinner text="Cargando matrices..." />;
+    return <LoadingSpinner text={t('campos.curriculo.cargandoMatrices', {defaultValue: 'Cargando matrices...'})} />;
   }
 
   const df_ra = moduleData?.df_ra || [];
@@ -180,7 +180,7 @@ export default function MatricesPage() {
   };
 
   const generateAutoSessions = () => {
-    if (!window.confirm("¿Seguro que quieres autocompletar el plan de sesiones? Esto reemplazará las sesiones actuales de todas las UDs.")) return;
+    if (!window.confirm(t('campos.curriculo.confirmarAutocompletarPlanSesiones', {defaultValue: '¿Seguro que quieres autocompletar el plan de sesiones? Esto reemplazará las sesiones actuales de todas las UDs.'}))) return;
 
     const newSessions: any[] = [];
 
@@ -474,7 +474,7 @@ export default function MatricesPage() {
                     </Button>
 
                     <Card className="px-4 py-2 inline-flex items-center gap-2 border-l-4 border-l-blue-500">
-                      <span className="text-muted">Total suma % RA:</span>
+                      <span className="text-muted">{t('campos.curriculo.totalSumaPctRa', {defaultValue: 'Total suma % RA:'})}</span>
                       <span className={`font-bold ${df_ra.reduce((sum: number, ra: any) => sum + (Number(ra.peso_ra) || 0), 0) === 100 ? 'text-success' : 'text-danger'}`}>
                         {df_ra.reduce((sum: number, ra: any) => sum + (Number(ra.peso_ra) || 0), 0).toFixed(0)}%
                       </span>
@@ -718,7 +718,7 @@ export default function MatricesPage() {
                                       <span>+</span> {t('botones.curriculo.anadirCeA', {id: ra.id_ra, defaultValue: `Añadir CE a ${ra.id_ra}`})}
                                     </button>
                                     <button
-                                      title="Recalcula el % de cada CE del RA a partir de su Relevancia (−=mitad, ==normal, +=doble) — un CE sin relevancia marcada cuenta como ="
+                                      title={t('tooltips.curriculo.recalcularPctRelevancia', {defaultValue: 'Recalcula el % de cada CE del RA a partir de su Relevancia (−=mitad, ==normal, +=doble) — un CE sin relevancia marcada cuenta como ='})}
                                       onClick={() => {
                                         const newCe = [...df_ce];
                                         const raCeIndexes = newCe.map((c: any, i: number) => c.id_ra === ra.id_ra ? i : -1).filter((i: number) => i !== -1);
@@ -970,9 +970,9 @@ export default function MatricesPage() {
                   {df_ud.length === 0 ? (
                     <div className="text-center py-12">
                       <ClipboardList className="w-16 h-16 text-muted-foreground opacity-50 mx-auto mb-4" />
-                      <h3 className="text-subheading font-bold mb-2">No hay unidades didácticas</h3>
-                      <p className="text-muted">Aún no has creado ninguna Unidad didáctica (UD).</p>
-                      <p className="text-muted mt-1">Para secuenciar sesiones, primero debes crear las UDs más arriba.</p>
+                      <h3 className="text-subheading font-bold mb-2">{t('campos.curriculo.sinUnidadesDidacticasTitulo', {defaultValue: 'No hay unidades didácticas'})}</h3>
+                      <p className="text-muted">{t('campos.curriculo.sinUnidadesDidacticasDesc1', {defaultValue: 'Aún no has creado ninguna Unidad didáctica (UD).'})}</p>
+                      <p className="text-muted mt-1">{t('campos.curriculo.sinUnidadesDidacticasDesc2', {defaultValue: 'Para secuenciar sesiones, primero debes crear las UDs más arriba.'})}</p>
                     </div>
                   ) : (
                     <SessionTable

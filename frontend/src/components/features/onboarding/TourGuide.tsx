@@ -3,10 +3,12 @@ import { useEffect, useRef } from "react";
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
 import { usePathname } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 export function TourGuide() {
   const pathname = usePathname();
   const hasRunRef = useRef(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     // Only run on client and once
@@ -22,9 +24,9 @@ export function TourGuide() {
       const tourDriver = driver({
         showProgress: true,
         allowClose: true,
-        doneBtnText: "¡Entendido!",
-        nextBtnText: "Siguiente",
-        prevBtnText: "⬅ Anterior",
+        doneBtnText: t('campos.onboarding.entendido', {defaultValue: '¡Entendido!'}),
+        nextBtnText: t('campos.onboarding.siguiente', {defaultValue: 'Siguiente'}),
+        prevBtnText: t('campos.onboarding.anterior', {defaultValue: '⬅ Anterior'}),
         popoverClass: "driverjs-theme",
         onDestroyed: () => {
           localStorage.setItem("cdd_tour_completed", "true");
@@ -33,16 +35,16 @@ export function TourGuide() {
           {
             element: "body",
             popover: {
-              title: "¡Bienvenido a Cuaderno FP!",
-              description: "Te haremos un breve recorrido de 4 pasos para que le saques el máximo provecho. Puedes saltarlo o cerrarlo en cualquier momento.",
+              title: t('campos.onboarding.bienvenidaTitulo', {defaultValue: '¡Bienvenido a Cuaderno FP!'}),
+              description: t('campos.onboarding.bienvenidaDesc', {defaultValue: 'Te haremos un breve recorrido de 4 pasos para que le saques el máximo provecho. Puedes saltarlo o cerrarlo en cualquier momento.'}),
               align: "center"
             }
           },
           {
             element: "aside",
             popover: {
-              title: "Navegación principal",
-              description: "Aquí tienes todas las herramientas: Configuración, Módulo, Alumnado y Evaluación.",
+              title: t('campos.onboarding.navegacionTitulo', {defaultValue: 'Navegación principal'}),
+              description: t('campos.onboarding.navegacionDesc', {defaultValue: 'Aquí tienes todas las herramientas: Configuración, Módulo, Alumnado y Evaluación.'}),
               side: "right",
               align: "start"
             }
@@ -50,8 +52,8 @@ export function TourGuide() {
           {
             element: "header button:has(svg:first-of-type)", // The save button
             popover: {
-              title: "Guardar y Deshacer",
-              description: "Puedes guardar manualmente aquí, aunque hay autoguardado. También tienes flechas para Deshacer/Rehacer o puedes usar Ctrl+S y Ctrl+Z.",
+              title: t('campos.onboarding.guardarDeshacerTitulo', {defaultValue: 'Guardar y Deshacer'}),
+              description: t('campos.onboarding.guardarDeshacerDesc', {defaultValue: 'Puedes guardar manualmente aquí, aunque hay autoguardado. También tienes flechas para Deshacer/Rehacer o puedes usar Ctrl+S y Ctrl+Z.'}),
               side: "bottom",
               align: "end"
             }
@@ -59,8 +61,8 @@ export function TourGuide() {
           {
             element: "[href='/archivos']", // Archivos tab
             popover: {
-              title: "Pestaña de Archivos",
-              description: "Para empezar, ve a Archivos y selecciona 'Datos DEMO' para explorar sin miedo.",
+              title: t('campos.onboarding.pestanaArchivosTitulo', {defaultValue: 'Pestaña de Archivos'}),
+              description: t('campos.onboarding.pestanaArchivosDesc', {defaultValue: "Para empezar, ve a Archivos y selecciona 'Datos DEMO' para explorar sin miedo."}),
               side: "right",
               align: "center"
             }
@@ -73,7 +75,7 @@ export function TourGuide() {
         tourDriver.drive();
       }, 500);
     }
-  }, [pathname]);
+  }, [pathname, t]);
 
   return null;
 }

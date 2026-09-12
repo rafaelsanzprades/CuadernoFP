@@ -113,7 +113,7 @@ export const AttendanceAccumulated = () => {
       <div className="grid grid-cols-3 gap-6 animate-in slide-in-from-left-4 duration-500">
         <Card className="p-6 border-l-4 border-l-accent flex items-center justify-between">
           <div>
-            <p className="text-body font-semibold text-muted ">Horas totales del módulo</p>
+            <p className="text-body font-semibold text-muted ">{t('campos.diario.horasTotalesModulo', {defaultValue: 'Horas totales del módulo'})}</p>
             <p className="text-heading font-extrabold text-foreground">{totalHours} h</p>
           </div>
           <Clock className="w-10 h-10 text-accent/80" />

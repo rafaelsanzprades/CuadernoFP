@@ -51,6 +51,7 @@ export default function AlumnadoPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
+  const [saveIsError, setSaveIsError] = useState(false);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const TABS = [
@@ -100,10 +101,12 @@ export default function AlumnadoPage() {
     setSaveMessage("");
     const ok = await saveCursoData();
     if (ok) {
-      setSaveMessage("Guardado correctamente");
+      setSaveIsError(false);
+      setSaveMessage(t('toasts.comun.guardadoCorrectamente', {defaultValue: 'Guardado correctamente'}));
       setTimeout(() => setSaveMessage(""), 3000);
     } else {
-      setSaveMessage("Error al guardar");
+      setSaveIsError(true);
+      setSaveMessage(t('toasts.comun.errorGuardar', {defaultValue: 'Error al guardar'}));
     }
     setSaving(false);
   };
@@ -119,8 +122,8 @@ export default function AlumnadoPage() {
             <MotionWrapper>
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <Users className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-heading font-bold">No hay curso cargado</h2>
-                <p className="text-muted mb-4">Debes abrir o crear un archivo de curso en tu Archivos.</p>
+                <h2 className="text-heading font-bold">{t('campos.comun.sinCursoCargadoTitulo', {defaultValue: 'No hay curso cargado'})}</h2>
+                <p className="text-muted mb-4">{t('campos.comun.sinCursoCargadoDesc', {defaultValue: 'Debes abrir o crear un archivo de curso en tu Archivos.'})}</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
                     <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
@@ -135,7 +138,7 @@ export default function AlumnadoPage() {
   }
 
   if (loading || !cursoData) {
-    return <LoadingSpinner text="Cargando datos de alumnado..." />;
+    return <LoadingSpinner text={t('campos.alumnado.cargandoDatosAlumnado', {defaultValue: 'Cargando datos de alumnado...'})} />;
   }
 
   const df_al = cursoData?.df_al || [];
@@ -236,7 +239,7 @@ export default function AlumnadoPage() {
             {/* Save Button */}
             <div className="flex items-center gap-4 shrink-0">
               {saveMessage && (
-                <span className={`text-body font-semibold ${saveMessage.includes("Error") ? "text-danger" : "text-success"}`}>
+                <span className={`text-body font-semibold ${saveIsError ? "text-danger" : "text-success"}`}>
                   {saveMessage}
                 </span>
               )}
@@ -259,8 +262,8 @@ export default function AlumnadoPage() {
               <div className="flex justify-between items-end mb-6">
                 <div className="flex items-center gap-4">
                   <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-                    <span>Lista oficial</span>
-                    <span className="text-body font-normal text-muted bg-foreground/5 px-3 py-1 rounded-full">{df_al.length} alumnado</span>
+                    <span>{t('campos.alumnado.listaOficialTitulo', {defaultValue: 'Lista oficial'})}</span>
+                    <span className="text-body font-normal text-muted bg-foreground/5 px-3 py-1 rounded-full">{t('campos.alumnado.numAlumnado', {count: df_al.length, defaultValue: '{{count}} alumnado'})}</span>
                   </h2>
                   <Button 
                     variant="ghost"
@@ -279,14 +282,14 @@ export default function AlumnadoPage() {
                   />
                 </div>
                 {n_menores > 0 && (
-                  <span className="text-danger text-body font-semibold"> {n_menores} alumnado(s) menor(es) de 18 años</span>
+                  <span className="text-danger text-body font-semibold"> {t('campos.alumnado.nMenoresEdad', {count: n_menores, defaultValue: '{{count}} alumnado(s) menor(es) de 18 años'})}</span>
                 )}
               </div>
               
               {df_al.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-12 text-muted">
                   <Users className="w-12 h-12 mb-3 opacity-20" />
-                  <p>No hay alumnado registrado aún.</p>
+                  <p>{t('campos.alumnado.sinAlumnadoRegistradoAun', {defaultValue: 'No hay alumnado registrado aún.'})}</p>
                 </div>
               ) : (
                 <div className="space-y-3">
@@ -340,7 +343,7 @@ export default function AlumnadoPage() {
                               <select
                                 value={al.gev || "general"}
                                 onChange={(e) => handleUpdateAlumnado(idx, "gev", e.target.value)}
-                                title="Grupo de evaluación (GEv)"
+                                title={t('tooltips.alumnado.grupoEvaluacionGev', {defaultValue: 'Grupo de evaluación (GEv)'})}
                                 className="shrink-0 bg-transparent border border-transparent hover:border-[var(--glass-border)] rounded px-2 py-0.5 text-caption font-semibold text-muted focus:outline-none focus:ring-1 focus:ring-accent appearance-none cursor-pointer"
                               >
                                 {gruposEvaluacion.map((g) => (
@@ -348,7 +351,7 @@ export default function AlumnadoPage() {
                                 ))}
                               </select>
                               {isMenor && (
-                                <span className="shrink-0 text-caption font-semibold text-danger bg-danger/10 px-2 py-0.5 rounded-full">Menor de edad</span>
+                                <span className="shrink-0 text-caption font-semibold text-danger bg-danger/10 px-2 py-0.5 rounded-full">{t('campos.alumnado.menorEdadBadge', {defaultValue: 'Menor de edad'})}</span>
                               )}
                             </div>
 
@@ -362,7 +365,7 @@ export default function AlumnadoPage() {
                                   className={`${fieldClass} w-14`}
                                   placeholder={t('placeholders.alumnado.edad', {defaultValue: 'edad'})}
                                 />
-                                <span>años ·</span>
+                                <span>{t('campos.alumnado.anosSeparador', {defaultValue: 'años ·'})}</span>
                                 <input
                                   type="text"
                                   value={al.Nacimiento || ""}
@@ -398,7 +401,7 @@ export default function AlumnadoPage() {
                                   value={al.email || ""}
                                   onChange={(e) => handleUpdateAlumnado(idx, "email", e.target.value)}
                                   className={`${fieldClass} flex-1 min-w-0`}
-                                  placeholder="correo@ejemplo.com"
+                                  placeholder={t('placeholders.alumnado.correoEjemplo', {defaultValue: 'correo@ejemplo.com'})}
                                 />
                               </span>
 
@@ -433,7 +436,7 @@ export default function AlumnadoPage() {
 
             <div className="flex items-center gap-3 pt-2">
               <div className="h-px flex-1 bg-[var(--glass-border)]" />
-              <span className="text-caption text-muted uppercase tracking-wider">Perfil del grupo</span>
+              <span className="text-caption text-muted uppercase tracking-wider">{t('campos.alumnado.perfilGrupoLabel', {defaultValue: 'Perfil del grupo'})}</span>
               <div className="h-px flex-1 bg-[var(--glass-border)]" />
             </div>
             <ContextoGrupoTab />

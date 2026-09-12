@@ -60,9 +60,9 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
 
   let currentItem = "";
   if (pathname === '/inicio') {
-    currentItem = "Inicio";
+    currentItem = t('nav.inicio', {defaultValue: 'Inicio'});
   } else if (pathname === '/archivos') {
-    currentItem = "Archivos";
+    currentItem = t('nav.archivos', {defaultValue: 'Archivos'});
   } else {
     for (const group of navGroups) {
       const found = group.items.find(item => item.href === pathname);
@@ -144,11 +144,11 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
     }
     
     if (ok === "conflict") {
-      showRichToast.error("Conflicto de versiones", "Los datos están obsoletos. Por favor, recarga la página.");
+      showRichToast.error(t('toasts.header.conflictoVersionesTitulo', {defaultValue: 'Conflicto de versiones'}), t('toasts.header.conflictoVersionesDesc', {defaultValue: 'Los datos están obsoletos. Por favor, recarga la página.'}));
     } else if (ok === true) {
-      showRichToast.success(`Guardado con éxito`, `Datos actualizados.`);
+      showRichToast.success(t('toasts.header.guardadoConExitoTitulo', {defaultValue: 'Guardado con éxito'}), t('toasts.header.datosActualizadosDesc', {defaultValue: 'Datos actualizados.'}));
     } else {
-      showRichToast.error("Error al guardar", "Revisa la conexión o los datos.");
+      showRichToast.error(t('toasts.comun.errorGuardar', {defaultValue: 'Error al guardar'}), t('toasts.header.revisaConexionDatosDesc', {defaultValue: 'Revisa la conexión o los datos.'}));
     }
     setIsSaving(false);
   }, [moduleData, activeModuleId, cursoData, activeCursoId, saveModuleData, saveCursoData]);
@@ -187,7 +187,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [undo, redo, pastStatesLength, futureStatesLength, handleSave]);
 
-  let friendlyModuleName = "Crea o abre una Programación";
+  let friendlyModuleName = t('campos.header.creaOAbreProgramacion', {defaultValue: 'Crea o abre una Programación'});
   if (activeModuleId) {
     const code = activeModuleId.split('-')[0];
     if (moduleData && moduleData.info_modulo) {
@@ -214,14 +214,14 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
       }
       
       const acronym = (nombre && getAcronym(nombre)) || nombre;
-      friendlyModuleName = `P - ${degreeCode} - ${actualCode} - ${acronym || 'Programación'}`;
+      friendlyModuleName = `P - ${degreeCode} - ${actualCode} - ${acronym || t('campos.archivos.programacionFallback', {defaultValue: 'Programación'})}`;
     } else {
       const namePart = activeModuleId.replace('-pd', '').toUpperCase();
       friendlyModuleName = `P - ${namePart}`;
     }
   }
 
-  let friendlyCursoName = "Crea o abre un Curso";
+  let friendlyCursoName = t('campos.header.creaOAbreCurso', {defaultValue: 'Crea o abre un Curso'});
   if (activeCursoId) {
     const parts = activeCursoId.split('-');
     const rawYear = parts[parts.length - 1];

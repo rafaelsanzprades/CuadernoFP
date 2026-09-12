@@ -192,7 +192,7 @@ function RasgosRapidos({ titulo, grupos, seleccionados, onToggle, sugerencia }: 
                   className="mt-2 flex items-center gap-1.5 text-caption text-accent hover:text-accent/80 transition-colors"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
-                  {t('checks.contexto.sugerenciaSegunGrado', {label: sugerencia!.label, motivo: sugerencia!.motivo, defaultValue: `Sugerencia según el Grado (${sugerencia!.motivo}): "${sugerencia!.label}". Aplicar`})}
+                  {t('checks.contexto.sugerenciaSegunGrado', {label: sugerencia!.label, motivo: sugerencia!.motivo, defaultValue: 'Sugerencia según el Grado ({{motivo}}): "{{label}}". Aplicar'})}
                 </button>
               )}
             </div>

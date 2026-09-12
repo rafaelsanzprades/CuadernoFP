@@ -6,8 +6,10 @@ import { simulateSchedule } from '@/utils/scheduleSimulator';
 import { useDynamicPlanning } from '@/hooks/useDynamicPlanning';
 import { BookOpen } from "lucide-react";
 import { TAXONOMY_ASPECTOS_CLAVE, TAXONOMY_RECURSOS, AspectoClaveCode, RecursoCode } from '@/constants/taxonomies';
+import { useTranslation } from 'react-i18next';
 
 export const DesarrolloUdActual = () => {
+  const { t } = useTranslation();
   const { moduleData, cursoData, dataSource } = useAppStore();
   const { planningLedger } = useDynamicPlanning();
 
@@ -60,7 +62,7 @@ export const DesarrolloUdActual = () => {
     <Card className="p-6 mt-8">
       <div className="mb-4 flex flex-col gap-1">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-          <BookOpen className="w-6 h-6" /> Desarrollo de la unidad en curso
+          <BookOpen className="w-6 h-6" /> {t('campos.dashboard.desarrolloUnidadEnCursoTitulo', {defaultValue: 'Desarrollo de la unidad en curso'})}
         </h2>
         <div className="text-subheading font-bold text-foreground ml-8">
           {currentUdId} - {currentUdDesc}
@@ -70,10 +72,10 @@ export const DesarrolloUdActual = () => {
         <div className="min-w-[800px] text-body">
           <div className="flex text-muted border-b border-[var(--glass-border)] pb-2 mb-2 items-center">
             <div className="w-16">Nº</div>
-            <div className="w-16 pr-2">Horas</div>
-            <div className="w-40 pr-2">Tipo</div>
+            <div className="w-16 pr-2">{t('tablas.curriculo.horas', {defaultValue: 'Horas'})}</div>
+            <div className="w-40 pr-2">{t('common.tipo', {defaultValue: 'Tipo'})}</div>
             <div className="w-32 pr-2">RA/CE</div>
-            <div className="flex-1 pr-2">Contenidos</div>
+            <div className="flex-1 pr-2">{t('campos.secuenciacion.contenidosLabel', {defaultValue: 'Contenidos'})}</div>
           </div>
           <div className="space-y-2">
             {sesiones.map((ses: any, idx: number) => (
@@ -96,7 +98,7 @@ export const DesarrolloUdActual = () => {
                   <div className="flex items-center gap-4 pl-[8.5rem]">
                     {ses.Aspectos_Clave && (
                       <div className="flex-1 flex flex-col">
-                        <span className="text-caption text-muted-foreground tracking-wider mb-1 font-semibold">Aspectos clave</span>
+                        <span className="text-caption text-muted-foreground tracking-wider mb-1 font-semibold">{t('campos.secuenciacion.aspectosClaveLabel', {defaultValue: 'Aspectos clave'})}</span>
                         <div className="text-sm text-muted">
                           {ses.Aspectos_Clave.split(',').map((s: string) => TAXONOMY_ASPECTOS_CLAVE[s.trim() as AspectoClaveCode]).filter(Boolean).join(', ')}
                         </div>
@@ -104,7 +106,7 @@ export const DesarrolloUdActual = () => {
                     )}
                     {ses.Recursos && (
                       <div className="flex-1 flex flex-col pr-10">
-                        <span className="text-caption text-muted-foreground tracking-wider mb-1 font-semibold">Recursos</span>
+                        <span className="text-caption text-muted-foreground tracking-wider mb-1 font-semibold">{t('tabs.metodologia.recursos.label', {defaultValue: 'Recursos'})}</span>
                         <div className="text-sm text-muted">
                           {ses.Recursos.split(',').map((s: string) => TAXONOMY_RECURSOS[s.trim() as RecursoCode]).filter(Boolean).join(', ')}
                         </div>
