@@ -106,7 +106,12 @@ def extract_modules_variant_c(soup: BeautifulSoup) -> list:
     start = None
     end = None
     for i, tag in enumerate(all_tags):
-        if tag.name == "h5" and tag.get("class") == ["anexo_tit"] and "dulos profesionales" in tag.get_text().lower():
+        if (
+            tag.name == "h5"
+            and tag.get("class") == ["anexo_tit"]
+            and re.match(r"^m[oó]dulos profesionales\.?$", tag.get_text(strip=True).lower())
+            and start is None
+        ):
             start = i
         elif start is not None and tag.name == "h5" and "anexo_tit" in (tag.get("class") or []) and i > start:
             end = i
@@ -123,7 +128,16 @@ def extract_modules_variant_c(soup: BeautifulSoup) -> list:
             continue
         txt = tag.get_text(strip=True)
         m_mod = re.match(r"^M[oó]dulo [Pp]rofesional:\s*(.+?)\.?$", txt)
-        m_cod = re.match(r"^(?:C[oó]digo|M[oó]dulo)[:.]\s*(\S+)", txt)
+        # "Modulo:" a secas es ambiguo: unas veces es el codigo numerico del
+        # modulo ya abierto ("Modulo: 1027", RD 1144/2012), otras es la
+        # cabecera de un modulo NUEVO con nombre en vez de codigo ("Modulo:
+        # Instalaciones y equipos hiperbaricos.", RD 1073/2012) -- se
+        # distingue por si lo que sigue son solo digitos o no.
+        m_mod_short = None if m_mod else re.match(r"^M[oó]dulo:\s*(.+?)\.?$", txt)
+        if m_mod_short and not re.match(r"^\d+$", m_mod_short.group(1).strip()):
+            m_mod = m_mod_short
+            m_mod_short = None
+        m_cod = re.match(r"^C[oó]digo[:.]\s*(\S+)", txt) or m_mod_short
         m_ra = re.match(r"^(\d+)[.)]\s+(.+)$", txt)
         m_ce = re.match(r"^([a-zñ])\)\s*(.+)$", txt)
         if m_mod:
