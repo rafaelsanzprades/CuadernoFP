@@ -107,8 +107,7 @@ def extract_modules_variant_c(soup: BeautifulSoup) -> list:
     end = None
     for i, tag in enumerate(all_tags):
         if (
-            tag.name == "h5"
-            and tag.get("class") == ["anexo_tit"]
+            tag.name in ("h5", "p")
             and re.match(r"^m[oó]dulos profesionales\.?$", tag.get_text(strip=True).lower())
             and start is None
         ):
