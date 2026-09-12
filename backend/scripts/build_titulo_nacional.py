@@ -88,7 +88,7 @@ def extract_cualificaciones(articulo_6_text: str):
             continue
         letter, desc, code, ref = m.groups()
         cps.append({"id": letter, "code": re.sub(r"\s+", "", code), "ref": ref, "desc": desc.strip()})
-        for ucm in re.finditer(r"(UC\d{4}_\d):\s*(.+)", entry):
+        for ucm in re.finditer(r"(UC\d{4}_\d)[:.]\s*(.+)", entry):
             ucs.append({"id": ucm.group(1), "cp_id": letter, "desc": ucm.group(2).strip()})
     return cps, ucs
 
