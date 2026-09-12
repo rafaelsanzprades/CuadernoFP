@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
+from sqlalchemy import or_
 import json
 from pydantic import BaseModel
 from database import get_db
@@ -45,10 +46,14 @@ def list_families(region_id: int = Query(1), db: Session = Depends(get_db)):
         level_order = {"BASICA": 1, "MEDIO": 2, "SUPERIOR": 3, "ESPECIALIZACION": 4}
         
         for f in families:
+            # region_id=NULL = currículo estatal (BOE), sin capa autonómica propia
+            # todavía -- se muestra como fallback para títulos que Aragón no ha
+            # publicado (p.ej. porque ningún centro los imparte), igual que
+            # cualquier título con region_id=region_id (Aragón).
             degrees = db.query(Degree).filter(
-                Degree.family_id == f.id, 
+                Degree.family_id == f.id,
                 Degree.code.isnot(None),
-                Degree.region_id == region_id
+                or_(Degree.region_id == region_id, Degree.region_id.is_(None))
             ).order_by(Degree.level, Degree.code).all()
             
             # Determine the lowest level for this family (for sorting)
