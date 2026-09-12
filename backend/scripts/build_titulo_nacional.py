@@ -123,7 +123,7 @@ def extract_modules_variant_c(soup: BeautifulSoup) -> list:
             continue
         txt = tag.get_text(strip=True)
         m_mod = re.match(r"^M[oó]dulo [Pp]rofesional:\s*(.+?)\.?$", txt)
-        m_cod = re.match(r"^C[oó]digo[:.]\s*(\S+)", txt)
+        m_cod = re.match(r"^(?:C[oó]digo|M[oó]dulo)[:.]\s*(\S+)", txt)
         m_ra = re.match(r"^(\d+)[.)]\s+(.+)$", txt)
         m_ce = re.match(r"^([a-zñ])\)\s*(.+)$", txt)
         if m_mod:
