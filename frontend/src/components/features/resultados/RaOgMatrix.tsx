@@ -70,7 +70,7 @@ export function RaOgMatrix() {
           </thead>
           <tbody>
             {ogs.map((og: { id: string; desc: string }, idx: number) => (
-              <tr key={idx} className="hover:bg-foreground/5 transition-colors border-b border-[var(--glass-border)]/50 group">
+              <tr key={og.id || idx} className="hover:bg-foreground/5 transition-colors border-b border-[var(--glass-border)]/50 group">
                 <td className="p-3 align-top">
                   <div className="flex gap-2">
                     <span className="font-mono text-caption font-medium text-info mt-0.5">OG{og.id}.</span>

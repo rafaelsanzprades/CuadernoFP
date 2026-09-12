@@ -1,5 +1,5 @@
 ﻿import { PublicClientApplication, Configuration, AuthenticationResult } from "@azure/msal-browser";
-import { Client } from "@microsoft/microsoft-graph-client";
+import { Client, ResponseType } from "@microsoft/microsoft-graph-client";
 import { fileManager } from "./fileManager"; // to use existing save functions
 
 const msalConfig: Configuration = {
@@ -107,7 +107,7 @@ export const uploadFileToOneDrive = async (accessToken: string, fileBlob: Blob, 
 export const downloadFileFromOneDrive = async (accessToken: string, fileId: string): Promise<string | null> => {
   const client = getGraphClient(accessToken);
   try {
-    const response = await client.api(`/me/drive/items/${fileId}/content`).responseType('text' as any).get();
+    const response = await client.api(`/me/drive/items/${fileId}/content`).responseType(ResponseType.TEXT).get();
     return response as string;
   } catch (error) {
     console.error("Error downloading from OneDrive:", error);

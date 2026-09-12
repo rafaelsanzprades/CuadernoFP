@@ -215,7 +215,7 @@ export function DiversidadTab() {
             </thead>
             <tbody>
               {df_dua.map((row: any, idx: number) => (
-                <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5">
+                <tr key={row.ID || idx} className="border-b border-white/5 hover:bg-foreground/5">
                   <td className="p-2 font-mono text-caption">{row.ID}</td>
                   <td className="p-2 pr-2">
                     <input type="text" value={row.Alumnado_Aula || ""} onChange={e => updateDuaRow(idx, "Alumnado_Aula", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-success focus:outline-none" />

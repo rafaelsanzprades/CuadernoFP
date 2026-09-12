@@ -134,6 +134,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
                 onChange={e => setViewMonth(Number(e.target.value))}
                 className="bg-foreground/10 border border-[var(--glass-border)] rounded px-1 py-0.5 text-foreground text-caption focus:outline-none cursor-pointer"
               >
+                {/* key=i deliberado: i ES el número de mes (value={i}), no una posición arbitraria */}
                 {MONTHS.map((m, i) => (
                   <option key={i} value={i} className="bg-[#0d1726]">{t(`checks.comun.mes_${i}`, {defaultValue: m})}</option>
                 ))}
@@ -168,6 +169,7 @@ export default function DatePicker({ value, onChange, label, className, placehol
 
           {/* Celdas días */}
           <div className="grid grid-cols-7 gap-px">
+            {/* key=idx deliberado: rejilla de calendario, la posición ES la celda (hay huecos null) */}
             {cells.map((day, idx) => (
               <button
                 key={idx}

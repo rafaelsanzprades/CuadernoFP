@@ -8,7 +8,7 @@ import { ModuleData, CursoData } from '@/types';
 // planning_ledger (más abajo) como para el auto-scroll del diario de clases
 // en /seguimiento?tab=clases (ver seguimiento/page.tsx).
 export function getSimulatedToday(cursoData: CursoData): Date {
-  const info_fechas = (cursoData as any)?.info_fechas || {};
+  const info_fechas = cursoData?.info_fechas || {};
   let simulatedToday = new Date();
   if (info_fechas.fin_curso) {
     const finDate = parseDateDDMMYYYY(info_fechas.fin_curso);

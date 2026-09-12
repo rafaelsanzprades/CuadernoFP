@@ -325,7 +325,7 @@ export function ContextoTab() {
   // del equipo docente desde ESO, sin título) no encaja limpiamente en
   // ninguna de las opciones existentes, y forzar una encajaría peor que no
   // sugerir nada.
-  const nivelModulo = (moduleData?.info_modulo as any)?.nivel || "";
+  const nivelModulo = moduleData?.info_modulo?.nivel || "";
   const sugerenciaViaAcceso: SugerenciaGrupo | undefined =
     nivelModulo === "Grado Medio"
       ? { grupo: "Vía de acceso predominante", id: "AL-VIA-ESO", label: "ESO", motivo: nivelModulo }

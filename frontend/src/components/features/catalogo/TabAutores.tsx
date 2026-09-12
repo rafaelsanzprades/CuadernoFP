@@ -203,7 +203,7 @@ export function TabAutores({ globalSelection }: { globalSelection: any }) {
                   {previewData.df_instr?.length > 0 && (
                     <div className="flex flex-wrap gap-2 mt-2">
                       {previewData.df_instr.map((ins: any, i: number) => (
-                        <span key={i} className="px-2 py-1 bg-green-500/10 text-green-600 rounded text-caption">{ins.siglas || ins.nombre || `Instr ${i+1}`}</span>
+                        <span key={ins.siglas || ins.nombre || i} className="px-2 py-1 bg-green-500/10 text-green-600 rounded text-caption">{ins.siglas || ins.nombre || `Instr ${i+1}`}</span>
                       ))}
                     </div>
                   )}

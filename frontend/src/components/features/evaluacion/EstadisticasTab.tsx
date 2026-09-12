@@ -149,10 +149,10 @@ export default function EstadisticasTab() {
           </div>
 
           <div className="flex bg-foreground/5 p-1 rounded-lg border border-foreground/10">
-            {["1T", "2T", "3T", "FINAL"].map(periodo => (
+            {(["1T", "2T", "3T", "FINAL"] as const).map(periodo => (
               <button
                 key={periodo}
-                onClick={() => setEvalPeriod(periodo as any)}
+                onClick={() => setEvalPeriod(periodo)}
                 className={`px-4 py-1.5 text-body font-medium rounded-md transition-all ${
                   evalPeriod === periodo
                     ? "bg-primary text-primary-foreground shadow-sm"

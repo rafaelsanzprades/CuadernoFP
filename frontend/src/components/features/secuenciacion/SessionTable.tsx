@@ -12,7 +12,7 @@ interface SessionTableProps {
   df_ud: UnidadDidactica[];
   df_sesiones: Sesion[];
   onDragEnd: (result: any) => void;
-  handleUpdateSesion: (globalIdx: number, field: string, value: any) => void;
+  handleUpdateSesion: (globalIdx: number, field: keyof Sesion, value: any) => void;
   handleAddSesion: (ud_id: string) => void;
   handleDeleteSesion: (globalIdx: number) => void;
   allUdsOpen: boolean;

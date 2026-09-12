@@ -116,7 +116,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
         <div className="bg-[#1e293b] border border-[var(--glass-border)] p-3 rounded-lg shadow-xl">
           <p className="text-foreground font-bold mb-1">{label}</p>
           {payload.map((entry: any, index: number) => (
-            <p key={index} style={{ color: entry.color || entry.fill }} className="text-body font-semibold drop-shadow-md">
+            <p key={entry.name || index} style={{ color: entry.color || entry.fill }} className="text-body font-semibold drop-shadow-md">
               {entry.name}: {entry.value}
             </p>
           ))}
@@ -279,7 +279,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
               </thead>
               <tbody>
                 {risks.map((r: any, i: number) => (
-                  <tr key={i} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
+                  <tr key={r.alumnado || i} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
                     <td className="py-3 font-medium text-foreground/90">{r.alumnado}</td>
                     <td className="py-3 font-mono text-center font-bold text-foreground/80">{r.nota.toFixed(1)}</td>
                     <td className={`py-3 font-bold ${r.riskColor}`}>

@@ -11,7 +11,7 @@ const nuevoCriterio = (n: number): CriterioRubrica => ({ id_criterio: `CRIT${n}`
 export function GestionRubricasTab() {
   const { t } = useTranslation();
   const { moduleData, updateDataFrame } = useAppStore();
-  const df_rubricas: Rubrica[] = (moduleData as any)?.df_rubricas || [];
+  const df_rubricas: Rubrica[] = moduleData?.df_rubricas || [];
 
   const [draft, setDraft] = useState<Rubrica | null>(null);
   const isNew = draft ? !df_rubricas.some(r => r.id_rubrica === draft.id_rubrica) : false;
@@ -31,12 +31,12 @@ export function GestionRubricasTab() {
     const next = exists
       ? df_rubricas.map(r => (r.id_rubrica === draft.id_rubrica ? draft : r))
       : [...df_rubricas, draft];
-    updateDataFrame("df_rubricas" as any, next);
+    updateDataFrame("df_rubricas", next);
     cancelEdit();
   };
 
   const removeRubrica = (id: string) => {
-    updateDataFrame("df_rubricas" as any, df_rubricas.filter(r => r.id_rubrica !== id));
+    updateDataFrame("df_rubricas", df_rubricas.filter(r => r.id_rubrica !== id));
   };
 
   const updateDraftField = (field: keyof Rubrica, value: any) =>

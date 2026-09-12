@@ -1,6 +1,7 @@
 "use client";
 import { ShieldAlert, ListChecks } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
+import type { ModuleData } from "@/types";
 import { useTranslation } from "react-i18next";
 
 export function ContingenciaTab() {
@@ -27,23 +28,23 @@ export function ContingenciaTab() {
 
   const df_contingencia = moduleData?.df_contingencia || [];
 
-  const addRow = (dataFrame: any[], dfName: string, prefix: string, template: any) => {
+  const addRow = (dataFrame: any[], dfName: keyof ModuleData, prefix: string, template: any) => {
     const newDf = [...dataFrame];
     const newId = `${prefix}${(newDf.length + 1).toString().padStart(2, '0')}`;
     newDf.push({ ID: newId, ...template });
-    updateDataFrame(dfName as any, newDf);
+    updateDataFrame(dfName, newDf);
   };
 
-  const updateRow = (dataFrame: any[], dfName: string, idx: number, field: string, value: any) => {
+  const updateRow = (dataFrame: any[], dfName: keyof ModuleData, idx: number, field: string, value: any) => {
     const newDf = [...dataFrame];
     newDf[idx][field] = value;
-    updateDataFrame(dfName as any, newDf);
+    updateDataFrame(dfName, newDf);
   };
 
-  const removeRow = (dataFrame: any[], dfName: string, idx: number) => {
+  const removeRow = (dataFrame: any[], dfName: keyof ModuleData, idx: number) => {
     const newDf = [...dataFrame];
     newDf.splice(idx, 1);
-    updateDataFrame(dfName as any, newDf);
+    updateDataFrame(dfName, newDf);
   };
 
   return (
@@ -107,7 +108,7 @@ export function ContingenciaTab() {
             </thead>
             <tbody>
               {df_contingencia.map((row: any, idx: number) => (
-                <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5">
+                <tr key={row.ID || idx} className="border-b border-white/5 hover:bg-foreground/5">
                   <td className="p-2 font-mono text-caption">{row.ID}</td>
                   <td className="p-2 pr-2">
                     <select value={row.Escenario || "Otros"} onChange={e => updateRow(df_contingencia, "df_contingencia", idx, "Escenario", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-warning focus:outline-none">

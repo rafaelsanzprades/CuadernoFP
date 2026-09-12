@@ -319,7 +319,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
               <div className="absolute top-full left-0 mt-1 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto w-64">
                 {searchResults.map((result, index) => (
                   <div
-                    key={index}
+                    key={result.href || index}
                     className="px-3 py-2 hover:bg-foreground/10 cursor-pointer text-body"
                     onClick={() => {
                       if (result.href) {

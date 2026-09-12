@@ -46,10 +46,10 @@ export function FeoeEmpresaTab() {
   const [selectedStudentId, setSelectedStudentId] = useState<string>("");
 
   const df_ra = moduleData?.df_ra || [];
-  const df_ce = (moduleData as any)?.df_ce || [];
+  const df_ce = moduleData?.df_ce || [];
   const df_al = cursoData?.df_al || [];
-  const df_calificaciones = (cursoData as any)?.df_calificaciones || [];
-  const df_instr = (moduleData as any)?.df_instr || [];
+  const df_calificaciones = cursoData?.df_calificaciones || [];
+  const df_instr = moduleData?.df_instr || [];
 
   const activeStudents = [...df_al.filter(isAlumnoActivo)].sort(
     (a: any, b: any) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || ""))
@@ -130,7 +130,7 @@ export function FeoeEmpresaTab() {
   };
 
   const asegurarInstrumentoEIndicadores = () => {
-    const df_indicadores = (moduleData as any)?.df_indicadores || [];
+    const df_indicadores = moduleData?.df_indicadores || [];
     const nextInstr = ensureInstrumento(df_instr);
     const nextInd = ensureIndicadores(df_indicadores);
     if (nextInstr !== df_instr) updateModuleData("df_instr", nextInstr);

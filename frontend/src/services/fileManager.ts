@@ -176,9 +176,9 @@ export const fileManager = {
       // Set state
       store.setDataSource("demo");
       store.setActiveModuleId(pdId);
-      store.setModuleData(pdData as any);
+      store.setModuleData(pdData);
       store.setActiveCursoId(cursoId);
-      store.setCursoData(cursoData as any);
+      store.setCursoData(cursoData);
       
       // Demo files have no local file handle, but we store the filename for UI
       store.setPdFileSource({ type: 'none', fileName: groupData.archivos.programacion });
@@ -208,14 +208,14 @@ export const fileManager = {
       df_ud: [], df_sesiones: [], df_ra: [], df_ce: [], df_tareas: [], df_act: [],
       df_instr: [], df_indicadores: [], df_rubricas: [],
       dual_regimen: 'ninguno', eqavet_evaluacion: {}, config_contexto: {},
-    } as any);
+    });
     store.setPdFileSource({ type: 'new', fileName: pdLabel });
 
     store.setActiveCursoId(cursoId);
     store.setCursoData({
       df_al: [], df_eval: [], daily_ledger: {}, tutoria_ledger: {},
       horario: {}, info_fechas: {}, plano_clase: {},
-    } as any);
+    });
     store.setCursoFileSource({ type: 'new', fileName: cursoLabel });
 
     store.setGroupFileSource({ type: 'new', fileName: pdName ? `Grupo ${pdName}` : 'Grupo sin nombre' });
@@ -306,7 +306,7 @@ export const fileManager = {
       if (handle) {
         try {
           const fileHandle = await handle.getFileHandle(fileName, { create: true });
-          const writable = await (fileHandle as any).createWritable();
+          const writable = await fileHandle.createWritable();
           await writable.write(JSON.stringify(newModuleData, null, 2));
           await writable.close();
           store.setPdFileSource({ type: 'local', fileName, fileHandle });
@@ -347,7 +347,7 @@ export const fileManager = {
     if (handle) {
       try {
         const fileHandle = await handle.getFileHandle(fileName, { create: true });
-        const writable = await (fileHandle as any).createWritable();
+        const writable = await fileHandle.createWritable();
         await writable.write(JSON.stringify(cloned, null, 2));
         await writable.close();
         store.setPdFileSource({ type: 'local', fileName, fileHandle });
@@ -393,7 +393,7 @@ export const fileManager = {
     if (handle) {
       try {
         const fileHandle = await handle.getFileHandle(fileName, { create: true });
-        const writable = await (fileHandle as any).createWritable();
+        const writable = await fileHandle.createWritable();
         await writable.write(JSON.stringify(newCursoData, null, 2));
         await writable.close();
         store.setCursoFileSource({ type: 'local', fileName, fileHandle });
@@ -401,7 +401,7 @@ export const fileManager = {
         // Also create the Group file
         const groupFileName = `G - ${cursoName.replace(/[\\/:*?"<>|]/g, '')} - ${year}.fpg`;
         const groupHandle = await handle.getFileHandle(groupFileName, { create: true });
-        const groupWritable = await (groupHandle as any).createWritable();
+        const groupWritable = await groupHandle.createWritable();
         
         let relatedPd = "";
         if (pdFileSource.type === 'local' && pdFileSource.fileName) {
@@ -490,7 +490,7 @@ export const fileManager = {
   /** Open file via File System Access API (preserves handle for save) */
   async openProgramacionWithHandle(): Promise<boolean> {
     try {
-      const [handle] = await (window as any).showOpenFilePicker({
+      const [handle] = await window.showOpenFilePicker({
         types: [{
           description: 'Programación Cuaderno FP',
           accept: { 'application/json': ['.fpp', '.json'] },
@@ -551,7 +551,7 @@ export const fileManager = {
   /** Open curso via File System Access API */
   async openCursoWithHandle(): Promise<boolean> {
     try {
-      const [handle] = await (window as any).showOpenFilePicker({
+      const [handle] = await window.showOpenFilePicker({
         types: [{
           description: 'Curso Cuaderno FP',
           accept: { 'application/json': ['.fpc', '.json'] },
@@ -585,7 +585,7 @@ export const fileManager = {
 
   async openWorkspaceDirectory(): Promise<FileSystemDirectoryHandle | null> {
     try {
-      const dirHandle = await (window as any).showDirectoryPicker({
+      const dirHandle = await window.showDirectoryPicker({
         mode: 'readwrite'
       });
       useAppStore.getState().setWorkspaceHandle(dirHandle);
@@ -600,7 +600,7 @@ export const fileManager = {
   async scanGroupsInWorkspace(dirHandle: FileSystemDirectoryHandle): Promise<string[]> {
     const groups: string[] = [];
     try {
-      for await (const entry of (dirHandle as any).values()) {
+      for await (const entry of dirHandle.values()) {
         if (entry.kind === 'file' && entry.name.startsWith('G - ') && (entry.name.endsWith('.fpg') || entry.name.endsWith('.json'))) {
           groups.push(entry.name);
         }
@@ -616,7 +616,7 @@ export const fileManager = {
     const programaciones: string[] = [];
     const cursos: string[] = [];
     try {
-      for await (const entry of (dirHandle as any).values()) {
+      for await (const entry of dirHandle.values()) {
         if (entry.kind === 'file') {
           if (entry.name.startsWith('G - ') && (entry.name.endsWith('.fpg') || entry.name.endsWith('.json'))) grupos.push(entry.name);
           else if (entry.name.startsWith('P - ') && (entry.name.endsWith('.fpp') || entry.name.endsWith('.json'))) programaciones.push(entry.name);
@@ -806,7 +806,7 @@ export const fileManager = {
     if (!activeModuleId || !moduleData) return false;
 
     try {
-      const handle = await (window as any).showSaveFilePicker({
+      const handle = await window.showSaveFilePicker({
         suggestedName: `${activeModuleId}.fpp`,
         types: [{
           description: 'Programación Cuaderno FP',
@@ -839,7 +839,7 @@ export const fileManager = {
     if (!activeCursoId || !cursoData) return false;
 
     try {
-      const handle = await (window as any).showSaveFilePicker({
+      const handle = await window.showSaveFilePicker({
         suggestedName: `${activeCursoId}.fpc`,
         types: [{
           description: 'Curso Cuaderno FP',
@@ -1090,7 +1090,7 @@ export const fileManager = {
 
       if (data.tipo === "GRUPO" && data.archivos) {
         data.archivos[type] = newFileName;
-        const writable = await (fileHandle as any).createWritable();
+        const writable = await fileHandle.createWritable();
         await writable.write(JSON.stringify(data, null, 2));
         await writable.close();
         return true;

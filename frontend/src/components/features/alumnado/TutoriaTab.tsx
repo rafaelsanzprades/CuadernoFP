@@ -4,6 +4,7 @@ import { ClipboardList, Plus, Trash2 } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { isAlumnoActivo } from "@/utils/alumnado";
+import type { TutoriaLedgerEntry } from "@/types";
 import { useTranslation } from "react-i18next";
 
 export function TutoriaTab() {
@@ -44,9 +45,11 @@ export function TutoriaTab() {
     updateCursoData("tutoria_ledger", newLedger);
   };
 
-  const handleUpdateTutoria = (al_id: string, idx: number, field: string, value: any) => {
+  const handleUpdateTutoria = (al_id: string, idx: number, field: keyof TutoriaLedgerEntry, value: string) => {
     const newLedger = { ...tutoria_ledger };
-    (newLedger[al_id][idx] as any)[field] = value;
+    const newEntries = [...newLedger[al_id]];
+    newEntries[idx] = { ...newEntries[idx], [field]: value };
+    newLedger[al_id] = newEntries;
     updateCursoData("tutoria_ledger", newLedger);
   };
 

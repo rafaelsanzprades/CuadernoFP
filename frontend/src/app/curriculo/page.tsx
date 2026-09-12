@@ -14,6 +14,7 @@ import { ContenidosUdTab } from "@/components/features/curriculo/ContenidosUdTab
 import { SessionTable } from "@/components/features/secuenciacion/SessionTable";
 import { TaskTable } from "@/components/features/secuenciacion/TaskTable";
 import { CompetenciaCPP } from "@/types/curriculum";
+import type { Tarea, Sesion } from "@/types";
 import { repartoIgualitario, repartoPonderado, PESO_RELEVANCIA_CE } from "@/utils/calificaciones";
 import toast from "react-hot-toast";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
@@ -258,9 +259,9 @@ export default function MatricesPage() {
     updateDataFrame("df_tareas", newTareas);
   };
 
-  const handleUpdateTarea = (globalIdx: number, field: string, value: any) => {
+  const handleUpdateTarea = (globalIdx: number, field: keyof Tarea, value: any) => {
     const newTareas = [...df_tareas];
-    (newTareas[globalIdx] as any)[field] = value;
+    newTareas[globalIdx] = { ...newTareas[globalIdx], [field]: value };
     updateDataFrame("df_tareas", newTareas);
   };
 
@@ -311,9 +312,9 @@ export default function MatricesPage() {
     updateDataFrame("df_sesiones", newSesiones);
   };
 
-  const handleUpdateSesion = (globalIdx: number, field: string, value: any) => {
+  const handleUpdateSesion = (globalIdx: number, field: keyof Sesion, value: any) => {
     const newSesiones = [...df_sesiones];
-    (newSesiones[globalIdx] as any)[field] = value;
+    newSesiones[globalIdx] = { ...newSesiones[globalIdx], [field]: value };
     updateDataFrame("df_sesiones", newSesiones);
   };
 
@@ -377,7 +378,7 @@ export default function MatricesPage() {
                       </thead>
                       <tbody>
                         {df_ra.map((ra: any, idx: number) => (
-                          <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
+                          <tr key={ra.id_ra || idx} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
                             <td className="py-2 pr-2">
                               <input
                                 type="text"
@@ -792,7 +793,7 @@ export default function MatricesPage() {
                           <th className="py-2 px-0 sticky left-[44px] bg-background z-10 min-w-[80px] max-w-[80px] text-center">{t('tablas.curriculo.horas', {defaultValue: 'Horas'})}</th>
                           <th className="py-2 pl-1 sticky left-[124px] bg-background z-10 min-w-[800px] w-[800px]">{t('tablas.curriculo.unidadDidacticaTrabajo', {defaultValue: 'Unidad didáctica o de trabajo'})}</th>
                           {df_ra.map((ra: any, i: number) => (
-                            <th key={i} className="p-3 text-center min-w-[80px]">
+                            <th key={ra.id_ra || i} className="p-3 text-center min-w-[80px]">
                               <div className="text-caption">{ra.id_ra}</div>
                               <div className="text-caption text-info">({ra.peso_ra || 0}%)</div>
                             </th>
@@ -801,7 +802,7 @@ export default function MatricesPage() {
                       </thead>
                       <tbody>
                         {df_ud.map((ud: any, idx: number) => (
-                          <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
+                          <tr key={ud.id_ud || idx} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
                             <td className="py-2 pr-0 font-mono text-body sticky left-0 bg-background group-hover:bg-[#111827] min-w-[44px] max-w-[44px]">{ud.id_ud}</td>
                             <td className="py-2 px-0 sticky left-[44px] bg-background group-hover:bg-[#111827] min-w-[80px] max-w-[80px] text-center">
                               <input
@@ -851,7 +852,9 @@ export default function MatricesPage() {
                                     value={ud[ra.id_ra] || ""}
                                     onChange={(e) => {
                                       const newUd = [...df_ud];
-                                      (newUd[idx] as any)[ra.id_ra] = parseFloat(e.target.value) || 0;
+                                      // Celda de matriz UD×RA: clave dinámica por id de RA, no un
+                                      // campo fijo del esquema -- ver ra_mappings en UnidadDidacticaSchema.
+                                      (newUd[idx] as unknown as Record<string, number>)[ra.id_ra] = parseFloat(e.target.value) || 0;
                                       updateDataFrame("df_ud", newUd);
                                     }}
                                     onFocus={() => {

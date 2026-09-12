@@ -93,7 +93,7 @@ export default function InstrumentosPage() {
 
           // Modo automático del Motor JEG (Ítem 42, punto 6): crea/gestiona el
           // Indicador correspondiente sin que el profesor tenga que hacerlo a mano.
-          const sync = sincronizarIndicadorAuto(newAct[globalIdx], ce, nuevoValor, moduleData?.df_instr || [], (moduleData as any)?.df_indicadores || []);
+          const sync = sincronizarIndicadorAuto(newAct[globalIdx], ce, nuevoValor, moduleData?.df_instr || [], moduleData?.df_indicadores || []);
           updateDataFrame("df_instr", sync.df_instr);
           updateDataFrame("df_indicadores", sync.df_indicadores);
         }
@@ -127,7 +127,7 @@ export default function InstrumentosPage() {
     const currentAct = moduleData?.df_act || [];
     const newAct = [...currentAct];
     let df_instr = moduleData?.df_instr || [];
-    let df_indicadores = (moduleData as any)?.df_indicadores || [];
+    let df_indicadores = moduleData?.df_indicadores || [];
     selectedCells.forEach((key) => {
       const [globalIdxStr, ce] = key.split("::");
       const globalIdx = Number(globalIdxStr);
@@ -219,9 +219,9 @@ export default function InstrumentosPage() {
   const lista_ce_ids = ce_clean.map((ce: any) => ce.id_ce);
 
   const trimestres = [
-    { key: "1T", nombre: "1er trimestre", pctField: "pct_1t" },
-    { key: "2T", nombre: "2º trimestre", pctField: "pct_2t" },
-    { key: "3T", nombre: "3er trimestre", pctField: "pct_3t" }
+    { key: "1T", nombre: "1er trimestre", pctField: "pct_1t" as const },
+    { key: "2T", nombre: "2º trimestre", pctField: "pct_2t" as const },
+    { key: "3T", nombre: "3er trimestre", pctField: "pct_3t" as const }
   ];
 
   const handleUpdateAct = (globalIdx: number, field: string, value: any) => {
@@ -501,7 +501,7 @@ export default function InstrumentosPage() {
                           <td className="p-3 font-semibold text-foreground">{tipo.label}</td>
                           {trimestres.map(tri => {
                             const count = df_act.filter((a: any) => String(a.tri_act).toUpperCase() === tri.key && normalizeTipo(a.Tipo) === tipo.id).length;
-                            const pct = Number((tipo as any)[tri.pctField]) || 0;
+                            const pct = Number(tipo[tri.pctField]) || 0;
                             return (
                               <td key={tri.key} className="p-3 text-center border-l border-[var(--glass-border)]">
                                 <span className={`${tipo.bgClass} font-bold text-subheading px-3 py-1 rounded-lg inline-flex items-center justify-center gap-2 min-w-[40px]`}>
@@ -559,8 +559,8 @@ export default function InstrumentosPage() {
               id_ud: df_act[activeConfigActIdx].id_ud
             }}
             onChange={(field, value) => handleUpdateAct(activeConfigActIdx, field, value)}
-            rubricas={(moduleData?.df_rubricas as any) || []}
-            unidadesDidacticas={(moduleData?.df_ud as any) || []}
+            rubricas={moduleData?.df_rubricas || []}
+            unidadesDidacticas={moduleData?.df_ud || []}
           />
         )}
           </MotionWrapper>

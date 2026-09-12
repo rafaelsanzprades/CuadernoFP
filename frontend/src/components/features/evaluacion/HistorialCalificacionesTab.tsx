@@ -98,7 +98,7 @@ export function HistorialCalificacionesTab() {
               </thead>
               <tbody>
                 {filtrado.map((h: any, idx: number) => (
-                  <tr key={idx} className="border-b border-white/5 hover:bg-foreground/5">
+                  <tr key={`${h.fecha}-${h.alumno_id}-${h.campo}-${idx}`} className="border-b border-white/5 hover:bg-foreground/5">
                     <td className="p-3 font-mono text-caption">{formatFecha(h.fecha)}</td>
                     <td className="p-3">{nombrePorId[h.alumno_id] || h.alumno_id}</td>
                     <td className="p-3 font-mono text-caption">{h.campo}</td>

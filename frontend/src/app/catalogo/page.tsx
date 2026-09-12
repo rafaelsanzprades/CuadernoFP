@@ -170,7 +170,21 @@ function CiclosContent() {
 
 // ─── TAB 1: Familias profesionales ─────────────────────────────────────────────
 
-type Degree = { id: number; name: string; code: string | null; level: string; boa_articles?: Record<string, string> | null };
+// `boa_articles` mezcla texto plano por artículo (article_2..article_9, todo
+// string) con una vista estructurada opcional para 5/6/9, poblada solo para
+// un subconjunto de títulos -- de ahí el índice de string junto a las 3
+// claves estructuradas (ver render en TabTitulo más abajo).
+type BoaCpps = { id: number; desc: string };
+type BoaCp = { id: number; code: string; ref: string; desc: string };
+type BoaUc = { id: string; cp_id: number; desc: string };
+type BoaOg = { id: number; desc: string };
+type BoaArticles = Record<string, string> & {
+  article_5_cpps?: BoaCpps[];
+  article_6_cps?: BoaCp[];
+  article_6_ucs?: BoaUc[];
+  article_9_og?: BoaOg[];
+};
+type Degree = { id: number; name: string; code: string | null; level: string; boa_articles?: BoaArticles | null };
 type Family = { id: number; code: string; name: string; icon_url: string; color_hex: string; degrees: Degree[] };
 
 
@@ -459,7 +473,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
                   article_9: 'article_9_og',
                 };
                 const structuredKey = structuredKeyByArt[artKey];
-                const structuredArr = structuredKey ? (selectedTituloObj.boa_articles as any)?.[structuredKey] : null;
+                const structuredArr = structuredKey ? selectedTituloObj.boa_articles?.[structuredKey] : null;
                 const hasStructured = Array.isArray(structuredArr) && structuredArr.length > 0;
                 return (
                   <Card key={artKey} className="overflow-hidden">
@@ -472,7 +486,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
                       {/* CPPS rows (Article 5) */}
                       {artKey === 'article_5' && hasStructured && (
                         <div className="mt-6 space-y-2">
-                          {(selectedTituloObj.boa_articles as any).article_5_cpps.map((cpp: any) => (
+                          {(selectedTituloObj.boa_articles?.article_5_cpps ?? []).map((cpp) => (
                             <div key={cpp.id} className="flex items-start gap-3 p-3 rounded-lg border border-[var(--glass-border)] bg-foreground/5">
                               <span className="font-mono font-bold text-[#14a085] shrink-0 mt-0.5">CPPS{cpp.id}.</span>
                               <span className="text-body text-foreground">{cpp.desc}</span>
@@ -483,7 +497,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
                       {/* CP rows (Article 6) */}
                       {artKey === 'article_6' && hasStructured && (
                         <div className="mt-6 space-y-4">
-                          {(selectedTituloObj.boa_articles as any).article_6_cps.map((cp: any) => (
+                          {(selectedTituloObj.boa_articles?.article_6_cps ?? []).map((cp) => (
                             <div key={cp.id} className="rounded-lg border border-[var(--glass-border)] bg-foreground/5 overflow-hidden">
                               <div className="flex items-start gap-3 p-3">
                                 <span className="font-mono font-bold text-[#e67e22] shrink-0 mt-0.5">CP{cp.id}.</span>
@@ -493,11 +507,11 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
                                   <p className="text-body text-foreground mt-1">{cp.desc}</p>
                                 </div>
                               </div>
-                              {Array.isArray((selectedTituloObj.boa_articles as any)?.article_6_ucs) && (
+                              {Array.isArray(selectedTituloObj.boa_articles?.article_6_ucs) && (
                                 <div className="border-t border-[var(--glass-border)] bg-foreground/3 px-4 py-2 space-y-1">
-                                  {(selectedTituloObj.boa_articles as any).article_6_ucs
-                                    .filter((uc: any) => uc.cp_id === cp.id)
-                                    .map((uc: any) => (
+                                  {(selectedTituloObj.boa_articles?.article_6_ucs ?? [])
+                                    .filter((uc) => uc.cp_id === cp.id)
+                                    .map((uc) => (
                                       <div key={uc.id} className="flex items-start gap-2 py-1">
                                         <span className="font-mono font-bold text-caption text-[#2980b9] shrink-0 mt-0.5">{uc.id}:</span>
                                         <span className="text-caption text-foreground/80">{uc.desc}</span>
@@ -513,7 +527,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
                       {/* OG rows (Article 9) */}
                       {artKey === 'article_9' && hasStructured && (
                         <div className="mt-6 space-y-2">
-                          {(selectedTituloObj.boa_articles as any).article_9_og.map((og: any) => (
+                          {(selectedTituloObj.boa_articles?.article_9_og ?? []).map((og) => (
                             <div key={og.id} className="flex items-start gap-3 p-3 rounded-lg border border-[var(--glass-border)] bg-foreground/5">
                               <span className="font-mono font-bold text-info shrink-0 mt-0.5">OG{og.id}.</span>
                               <span className="text-body text-foreground">{og.desc}</span>
@@ -1060,6 +1074,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                   </div>
 
                   {modulo.competencias.map((grupo: any, i: number) => (
+                    // key=i deliberado: la posición ES el dato ("Opción 1", "Opción 2"...), no hay id propio.
                     <Card key={i} className="border border-[var(--glass-border)] overflow-hidden">
                       <div className="bg-foreground/5 border-b border-[var(--glass-border)] p-3 px-4 flex items-center justify-between">
                         <div>

@@ -210,8 +210,8 @@ export default function MagiaPage() {
     const config_redondeo = { ...DEFAULT_CONFIG_REDONDEO, ...(moduleData?.config_redondeo || {}) };
     // Motor JEG, modo automático (Ítem 42 punto 6) -- ver DetalleAlumnadoTab.tsx.
     const df_instr = moduleData?.df_instr || [];
-    const df_indicadores = (moduleData as any)?.df_indicadores || [];
-    const df_calificaciones = (cursoData as any)?.df_calificaciones || [];
+    const df_indicadores = moduleData?.df_indicadores || [];
+    const df_calificaciones = cursoData?.df_calificaciones || [];
 
     const activeAl = df_al.filter(isAlumnoActivo);
     activeAl.sort((a: Alumnado, b: Alumnado) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));

@@ -11,7 +11,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import { PlanoClaseTab } from "@/components/features/alumnado/PlanoClaseTab";
-import { ESTADOS_ALUMNO } from "@/types";
+import { ESTADOS_ALUMNO, type Alumnado } from "@/types";
 import { ESTADO_ALUMNO_COLOR, parseAlumnadoCSV } from "@/utils/alumnado";
 
 import { ContextoGrupoTab } from "@/components/features/alumnado/ContextoGrupoTab";
@@ -140,12 +140,12 @@ export default function AlumnadoPage() {
 
   const df_al = cursoData?.df_al || [];
   const gruposEvaluacion: { id: string; nombre: string }[] =
-    ((moduleData as any)?.grupos_evaluacion?.length ? (moduleData as any).grupos_evaluacion : GRUPOS_EVALUACION_DEFECTO);
+    (moduleData?.grupos_evaluacion?.length ? moduleData.grupos_evaluacion : GRUPOS_EVALUACION_DEFECTO);
 
   const handleAddAlumnado = () => {
     const newAl = [...df_al];
     const newId = `AN${(newAl.length + 1).toString().padStart(2, '0')}`;
-    (newAl as any[]).push({
+    newAl.push({
       ID: newId,
       Estado: "Alta",
       Apellidos: "",
@@ -195,9 +195,9 @@ export default function AlumnadoPage() {
     reader.readAsText(file, "UTF-8"); // "UTF-8" default, can try ISO-8859-1 for spanish chars
   };
 
-  const handleUpdateAlumnado = (idx: number, field: string, value: any) => {
+  const handleUpdateAlumnado = (idx: number, field: keyof Alumnado, value: any) => {
     const newAl = [...df_al];
-    (newAl[idx] as any)[field] = value;
+    newAl[idx] = { ...newAl[idx], [field]: value };
     updateCursoData("df_al", newAl);
   };
 
@@ -296,7 +296,7 @@ export default function AlumnadoPage() {
 
                     return (
                       <div
-                        key={idx}
+                        key={al.ID || idx}
                         className={`group relative rounded-xl border p-4 transition-colors bg-[var(--glass-bg)] hover:bg-foreground/5 ${isMenor ? "border-danger/30" : "border-[var(--glass-border)]"}`}
                       >
                         <button

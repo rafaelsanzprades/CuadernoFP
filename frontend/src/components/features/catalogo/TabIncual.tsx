@@ -155,7 +155,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {incualData.crn_centers.map((crn: any, idx: number) => (
-              <div key={idx} className="p-4 rounded-lg bg-muted/30 border">
+              <div key={crn.name || idx} className="p-4 rounded-lg bg-muted/30 border">
                 <a href={crn.url} target="_blank" rel="noreferrer" className="font-medium text-accent hover:underline flex items-center gap-1">
                   {crn.name} <ExternalLink className="w-3 h-3" />
                 </a>
@@ -183,7 +183,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
           {expandedLevel === '1' && (
             <div className="p-4 pt-0 border-t bg-muted/10 space-y-3">
               {incualData.ecp_nivel_1?.map((ecp: any, idx: number) => (
-                <div key={idx} className="p-3 bg-card border rounded-md shadow-sm hover:shadow-md transition-shadow">
+                <div key={ecp.code || idx} className="p-3 bg-card border rounded-md shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex justify-between items-start gap-4">
                     <div className="text-body leading-relaxed">
                       <span className="inline-block px-2 py-0.5 bg-blue-100 text-blue-800 text-caption font-mono rounded mr-3 align-middle">{ecp.code}</span>
@@ -217,7 +217,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
           {expandedLevel === '2' && (
             <div className="p-4 pt-0 border-t bg-muted/10 space-y-3">
               {incualData.ecp_nivel_2?.map((ecp: any, idx: number) => (
-                <div key={idx} className="p-3 bg-card border rounded-md shadow-sm hover:shadow-md transition-shadow">
+                <div key={ecp.code || idx} className="p-3 bg-card border rounded-md shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex justify-between items-start gap-4">
                     <div className="text-body leading-relaxed">
                       <span className="inline-block px-2 py-0.5 bg-green-100 text-green-800 text-caption font-mono rounded mr-3 align-middle">{ecp.code}</span>
@@ -251,7 +251,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
           {expandedLevel === '3' && (
             <div className="p-4 pt-0 border-t bg-muted/10 space-y-3">
               {incualData.ecp_nivel_3?.map((ecp: any, idx: number) => (
-                <div key={idx} className="p-3 bg-card border rounded-md shadow-sm hover:shadow-md transition-shadow">
+                <div key={ecp.code || idx} className="p-3 bg-card border rounded-md shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex justify-between items-start gap-4">
                     <div className="text-body leading-relaxed">
                       <span className="inline-block px-2 py-0.5 bg-purple-100 text-purple-800 text-caption font-mono rounded mr-3 align-middle">{ecp.code}</span>

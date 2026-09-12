@@ -34,8 +34,8 @@ export const AnalisisIndividualTab = () => {
   const df_feoe = cursoData?.df_feoe || [];
   // Motor JEG, modo automático (Ítem 42 punto 6) -- ver DetalleAlumnadoTab.tsx.
   const df_instr = moduleData?.df_instr || [];
-  const df_indicadores = (moduleData as any)?.df_indicadores || [];
-  const df_calificaciones = (cursoData as any)?.df_calificaciones || [];
+  const df_indicadores = moduleData?.df_indicadores || [];
+  const df_calificaciones = cursoData?.df_calificaciones || [];
 
   if (activeAlumnado.length === 0) {
     return (
@@ -48,11 +48,11 @@ export const AnalisisIndividualTab = () => {
 
   const config_redondeo = { ...DEFAULT_CONFIG_REDONDEO, ...(moduleData?.config_redondeo || {}) };
 
-  const currentAl = activeAlumnado.find((al: any) => al.ID === selectedAlId) || {};
+  const currentAl = activeAlumnado.find((al) => al.ID === selectedAlId) || {};
   const currentEv = df_eval.find((e: any) => e.ID === selectedAlId) || {};
 
   // Motor JEG, modo automático (Ítem 42 punto 6, ver utils/calificaciones.ts)
-  const realCalc = calcularNotasJEG(selectedAlId, filtrarPorGev(df_calificaciones, df_instr, (currentAl as any).gev), df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
+  const realCalc = calcularNotasJEG(selectedAlId, filtrarPorGev(df_calificaciones, df_instr, currentAl.gev), df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
   const realSigad = getSigadInfo(realCalc.nota_final);
 
   // Nota simulada: igual que el override de Motor A, pero construido como un
@@ -69,7 +69,7 @@ export const AnalisisIndividualTab = () => {
     });
     return next;
   }, df_calificaciones);
-  const simCalc = calcularNotasJEG(selectedAlId, filtrarPorGev(simDfCalificaciones, df_instr, (currentAl as any).gev), df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
+  const simCalc = calcularNotasJEG(selectedAlId, filtrarPorGev(simDfCalificaciones, df_instr, currentAl.gev), df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
   const simSigad = getSigadInfo(simCalc.nota_final);
 
   // Group activities by trimester for the simulator

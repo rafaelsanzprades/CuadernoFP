@@ -145,16 +145,14 @@ export default function AgendaPage() {
             {activeTab === "mensual" && (
               <div className="animate-in fade-in duration-500">
                 <InteractiveCalendar
-                  info_fechas={(cursoData as any)?.info_fechas || (moduleData as any)?.info_fechas || {}}
-                  horario={(cursoData as any)?.horario || (moduleData as any)?.horario || {}}
-                  calendar_notes={(cursoData as any)?.calendar_notes || (moduleData as any)?.calendar_notes || {}}
+                  info_fechas={cursoData?.info_fechas || {}}
+                  horario={cursoData?.horario || {}}
+                  calendar_notes={cursoData?.calendar_notes || {}}
                   planning_ledger={planningLedgerDmy}
                   onUpdateNote={(key, val) => {
-                    const storeData = cursoData || moduleData;
-                    if (!storeData) return;
-                    const newNotes = { ...(storeData as any).calendar_notes, [key]: val };
-                    if (activeCursoId) setCursoData({ ...storeData, calendar_notes: newNotes } as any);
-                    else setModuleData({ ...storeData, calendar_notes: newNotes } as any);
+                    if (!cursoData) return;
+                    const newNotes = { ...cursoData.calendar_notes, [key]: val };
+                    setCursoData({ ...cursoData, calendar_notes: newNotes });
                   }}
                 />
               </div>

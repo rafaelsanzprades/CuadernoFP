@@ -69,7 +69,7 @@ export function TabRelacionRaUd() {
               const uds = df_ud?.filter((ud: any) => ud[ra.id_ra] > 0) || [];
               const raSt = getRaStatus(uds);
               return (
-                <div key={idx} className={`rounded-xl border p-4 transition-colors ${raSt.colorClass}`}>
+                <div key={ra.id_ra || idx} className={`rounded-xl border p-4 transition-colors ${raSt.colorClass}`}>
                   <div className="font-bold text-foreground mb-1">
                     {ra.id_ra} <span className="text-muted font-normal text-body">({ra.peso_ra}%)</span>
                   </div>

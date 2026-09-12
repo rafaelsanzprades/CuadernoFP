@@ -85,7 +85,7 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
     // Save to Local File System if connected
     if (pdFileSource.type === 'local' && pdFileSource.fileHandle) {
       try {
-        const writable = await (pdFileSource.fileHandle as any).createWritable();
+        const writable = await pdFileSource.fileHandle.createWritable();
         await writable.write(JSON.stringify(moduleData, null, 2));
         await writable.close();
         localSaved = true;
@@ -122,7 +122,7 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
     // Save to Local File System if connected
     if (cursoFileSource.type === 'local' && cursoFileSource.fileHandle) {
       try {
-        const writable = await (cursoFileSource.fileHandle as any).createWritable();
+        const writable = await cursoFileSource.fileHandle.createWritable();
         await writable.write(JSON.stringify(cursoData, null, 2));
         await writable.close();
         localSaved = true;

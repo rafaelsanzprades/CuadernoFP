@@ -1,9 +1,10 @@
 import React from 'react';
 import { useAppStore } from '@/store/useAppStore';
+import type { ModuleData } from '@/types';
 import { useTranslation } from 'react-i18next';
 
 interface NarrativeFieldProps {
-  id: string; // the key in moduleData (textos_pd_* fields belong to Programación)
+  id: keyof ModuleData; // the key in moduleData (textos_pd_* fields belong to Programación)
   title: string;
   description: string;
 }
@@ -11,10 +12,10 @@ interface NarrativeFieldProps {
 export function NarrativeField({ id, title, description }: NarrativeFieldProps) {
   const { t } = useTranslation();
   const { moduleData, updateModuleData } = useAppStore();
-  const value = moduleData?.[id as keyof typeof moduleData] || '';
+  const value = moduleData?.[id] || '';
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    updateModuleData(id as any, e.target.value);
+    updateModuleData(id, e.target.value);
   };
 
   return (

@@ -29,7 +29,7 @@ export function DetalleAlumnadoTab() {
   const df_autoevaluacion = cursoData?.df_autoevaluacion || [];
   const [generandoInforme, setGenerandoInforme] = useState<string | null>(null);
   const df_act = moduleData?.df_act || [];
-  const df_rubricas = (moduleData as any)?.df_rubricas || [];
+  const df_rubricas = moduleData?.df_rubricas || [];
   const [rubricaModal, setRubricaModal] = useState<{ al_id: string; act_id: string; act: any; alumnoNombre: string } | null>(null);
   const df_ce = moduleData?.df_ce || [];
   const df_ra = moduleData?.df_ra || [];
@@ -39,8 +39,8 @@ export function DetalleAlumnadoTab() {
   // en utils/calificaciones.ts. df_instr/df_indicadores viven en moduleData (config,
   // igual que df_act); df_calificaciones vive en cursoData (datos, igual que df_eval).
   const df_instr = moduleData?.df_instr || [];
-  const df_indicadores = (moduleData as any)?.df_indicadores || [];
-  const df_calificaciones = (cursoData as any)?.df_calificaciones || [];
+  const df_indicadores = moduleData?.df_indicadores || [];
+  const df_calificaciones = cursoData?.df_calificaciones || [];
   const info_fechas = cursoData?.info_fechas || {};
   const planning_ledger = planningLedger || {};
 
@@ -499,7 +499,7 @@ export function DetalleAlumnadoTab() {
                             else if (r.prop >= 50) bar_color = "#ffc107";
 
                             return (
-                              <div key={idx} className="flex flex-col md:flex-row gap-4 items-start bg-background/30 p-4 rounded-xl border border-white/5">
+                              <div key={r.id || idx} className="flex flex-col md:flex-row gap-4 items-start bg-background/30 p-4 rounded-xl border border-white/5">
                                 <div className="flex-1 w-full">
                                   <div className="mb-1.5 flex items-center gap-2">
                                     <span className="font-extrabold text-foreground">{r.id}</span>

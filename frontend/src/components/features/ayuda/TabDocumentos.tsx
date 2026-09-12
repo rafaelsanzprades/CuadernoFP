@@ -144,7 +144,7 @@ export function TabDocumentos() {
               </div>
             ) : filteredItems.map((item, idx) => (
               <div
-                key={idx}
+                key={item.path || idx}
                 className="group flex flex-col items-center p-6 bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-[var(--glass-border)] rounded-xl transition-all cursor-pointer duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 relative"
                 onClick={() => item.is_dir ? handleNavigate(item.path) : handleDownloadDoc(item.path, item.name)}
               >
