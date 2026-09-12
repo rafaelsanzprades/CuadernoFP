@@ -254,7 +254,7 @@ def extract_fpb_sections(all_tags, start: int, end: int) -> dict:
         (r"^2\.2\.?\s*Competencias del t[ií]tulo\.?$", "article_5"),
         (r"^2\.3\.?\s*Relaci[oó]n de cualificaciones", "article_6"),
         (r"^2\.4\.?\s*Entorno profesional\.?$", "article_7"),
-        (r"^2\.5\.?\s*Prospectiva del t[ií]tulo", "article_8"),
+        (r"^2\.5\.?\s*Prospectiva del (?:t[ií]tulo|sector)", "article_8"),
         (r"^3\.1\.?\s*Objetivos generales del t[ií]tulo\.?$", "article_9"),
         (r"^3\.2\.?\s*M[oó]dulos profesionales\.?$", None),
         # El numero de sub-apartado antes de "Desarrollo de los modulos"
@@ -378,6 +378,193 @@ def extract_fpb_hours_from_orden(all_tags, start: int, end: int) -> dict:
     return result
 
 
+def normalize_pdf_lines(raw_text: str, marker_res: list) -> list:
+    """Los curriculos de Aragon (BOA) solo existen como PDF de varias
+    docenas de paginas -- extraidos con PyMuPDF (fitz), NO WebFetch, el
+    texto sale con saltos de linea de MAQUETACION (una frase real puede
+    partirse en 2-3 lineas de PDF) en vez de saltos SEMANTICOS como en el
+    HTML del BOE. Esta funcion une lineas de continuacion con la anterior
+    y descarta cabeceras/pies de pagina repetidos ("csv: BOA...",
+    fecha suelta, "Boletin Oficial de Aragon", "Num. NNN", numero de
+    pagina suelto) que PyMuPDF inserta en mitad del contenido en cada
+    salto de pagina. `marker_res` es una lista de regex (ya compilados)
+    que, si SON el inicio de una linea, abren una entrada NUEVA -- el
+    resto de lineas se van concatenando a la entrada abierta."""
+    footer_res = [
+        re.compile(r"^csv:\s*BOA\d+$"),
+        re.compile(r"^\d{2}/\d{2}/\d{4}$"),
+        re.compile(r"^Bolet[ií]n Oficial de Arag[oó]n$"),
+        re.compile(r"^N[uú]m\.\s*\d+$"),
+        re.compile(r"^\d{4,6}$"),
+    ]
+    lines = []
+    pending_break = True
+    for raw_line in raw_text.split("\n"):
+        line = raw_line.strip()
+        if not line:
+            # Una linea en blanco separa parrafos/items en el PDF
+            # original (p.ej. una lista de competencias sin letra a)/b)
+            # propia, cada punto en su propio parrafo) -- se respeta como
+            # limite aunque no haya marcador, para no fusionar dos items
+            # distintos en una sola linea logica.
+            pending_break = True
+            continue
+        if any(fr.match(line) for fr in footer_res):
+            continue
+        if lines and not pending_break and not any(mr.match(line) for mr in marker_res):
+            lines[-1] = (lines[-1] + " " + line).strip()
+        else:
+            lines.append(line)
+        pending_break = False
+    return lines
+
+
+def extract_modules_from_pdf_text(anexo_text: str) -> list:
+    """Modulos de un Anexo I de un curriculo BOA (Aragon) en PDF, ya
+    normalizado a lineas logicas con normalize_pdf_lines(). Mismo patron
+    interno que extract_modules_variant_c/fpb (Modulo Profesional: /
+    Codigo: / RA numerados / Criterios de evaluacion: / CE letra) mas
+    'Duracion: N horas.' inline (igual que FPB, un curriculo BOA no
+    necesita una Orden aparte para las horas -- ya trae su propia tabla,
+    ver ANEXO VI, pero la duracion tambien viene repetida aqui por
+    modulo)."""
+    marker_res = [
+        re.compile(r"^M[oó]dulo [Pp]rofesional:", re.IGNORECASE),
+        re.compile(r"^C[oó]digo:", re.IGNORECASE),
+        re.compile(r"^Duraci[oó]n:", re.IGNORECASE),
+        re.compile(r"^Equivalencia en cr[eé]ditos", re.IGNORECASE),
+        re.compile(r"^Resultados de aprendizaje", re.IGNORECASE),
+        re.compile(r"^Criterios de evaluaci[oó]n:?$", re.IGNORECASE),
+        re.compile(r"^\d+\.\s"),
+        re.compile(r"^[a-zñ]\)\s"),
+    ]
+    lines = normalize_pdf_lines(anexo_text, marker_res)
+
+    modules = []
+    cur_mod = None
+    cur_ra = None
+    for txt in lines:
+        m_mod = re.match(r"^M[oó]dulo [Pp]rofesional:\s*(.+?)\.?$", txt)
+        m_cod = re.match(r"^C[oó]digo:\s*(\S+)", txt)
+        m_dur = re.match(r"^Duraci[oó]n:\s*(\d+)\s*horas?\.?$", txt, re.IGNORECASE)
+        m_ra = re.match(r"^(\d+)\.\s+(.+)$", txt)
+        m_ce = re.match(r"^([a-zñ])\)\s*(.+)$", txt)
+        if m_mod:
+            if cur_mod:
+                modules.append(cur_mod)
+            cur_mod = {"name": m_mod.group(1).strip(), "code": None, "hours": None, "ras": []}
+            cur_ra = None
+        elif m_cod and cur_mod is not None:
+            cur_mod["code"] = m_cod.group(1).strip().rstrip(".")
+        elif m_dur and cur_mod is not None:
+            cur_mod["hours"] = int(m_dur.group(1))
+        elif txt.startswith("Resultados de aprendizaje") or txt.startswith("Criterios de evaluaci") or txt.startswith("Equivalencia en cr"):
+            continue
+        elif m_ra and cur_mod is not None:
+            cur_ra = {"ra_number": int(m_ra.group(1)), "desc": m_ra.group(2).strip(), "ces": []}
+            cur_mod["ras"].append(cur_ra)
+        elif m_ce and cur_ra is not None:
+            cur_ra["ces"].append({"letter": m_ce.group(1), "desc": m_ce.group(2).strip()})
+    if cur_mod:
+        modules.append(cur_mod)
+    return modules
+
+
+def extract_boa_hours_table(doc, page_range) -> dict:
+    """Tabla de distribucion horaria (ANEXO VI de un curriculo BOA en
+    PDF), via fitz page.find_tables() -- extraccion tabular real, no
+    texto linearizado (las celdas de "Total horas" no coinciden de forma
+    fiable con la duracion citada inline en el ANEXO I del mismo PDF: se
+    ha visto al menos una discrepancia real entre ambas fuentes dentro
+    del mismo documento -- esta tabla, cuya suma coincide exactamente con
+    la duracion total del titulo citada en el Articulo 2, es la fuente de
+    verdad). `doc` es un fitz.Document ya abierto; `page_range` un
+    iterable de indices de pagina (0-based) donde buscar la tabla, p.ej.
+    range(105, 115) -- inspeccionar el PDF a mano primero para acotarlo."""
+    hours = {}
+    for page_idx in page_range:
+        if page_idx >= len(doc):
+            continue
+        page = doc[page_idx]
+        for t in page.find_tables().tables:
+            for row in t.extract():
+                first = (row[0] or "").strip()
+                m = re.match(r"^([A0-9]\d{2,3})\.\s", first)
+                if not m or len(row) < 2:
+                    continue
+                total = (row[1] or "").strip()
+                if total.isdigit():
+                    hours[m.group(1)] = int(total)
+    return hours
+
+
+def extract_boa_sections(full_text: str) -> dict:
+    """Cuerpo del articulado (antes de ANEXO I) de un curriculo BOA
+    (Aragon) en PDF -- misma idea que extract_fpb_sections() pero
+    localizando cada seccion por el TEXTO de su titulo, no por su numero
+    de "Articulo N.": la numeracion real varia de un documento BOA a
+    otro (aqui: 2 Identificacion, 3 Perfil, 4 Competencia general, 5
+    Competencias -> CPPS, 6 Entorno, 7 Prospectiva, 8 Objetivos
+    generales, 9 Modulos profesionales -- el RD base equivalente usa
+    2/3/4/5/7/8/9, con el 6 siendo Cualificaciones/UC, que un curriculo
+    BOA NO repite -- viene del RD base, ver fetch aparte). Devuelve
+    boa_articles-shaped keys article_2/3/4/5/7/8 (article_9 aqui es en
+    realidad "Objetivos generales" del titulo, no modulos)."""
+    markers = [
+        (r"^Art[íi]culo\s+\d+\.\s*Identificaci[oó]n del t[ií]tulo\.?", "article_2"),
+        (r"^Art[íi]culo\s+\d+\.\s*Perfil profesional del t[ií]tulo\.?", "article_3"),
+        (r"^Art[íi]culo\s+\d+\.\s*Competencia general\.?", "article_4"),
+        (r"^Art[íi]culo\s+\d+\.\s*Competencias profesionales[^.]*\.", "article_5"),
+        (r"^Art[íi]culo\s+\d+\.\s*Entorno profesional[^.]*\.", "article_7"),
+        (r"^Art[íi]culo\s+\d+\.\s*Prospectiva del t[ií]tulo[^.]*\.", "article_8"),
+        (r"^Art[íi]culo\s+\d+\.\s*Objetivos generales\.?", "article_9"),
+        (r"^Art[íi]culo\s+\d+\.\s*M[oó]dulos profesionales\.?", None),
+    ]
+    # Los items de las listas de competencias/objetivos SI llevan letra
+    # "a)\t..." en el PDF real (aunque no se vea al extraer solo el texto
+    # visible de la pagina renderizada) -- se anaden como marcador propio
+    # para que cada item quede en su propia linea logica, no fusionado
+    # con la frase introductoria de la lista.
+    marker_res = [re.compile(p) for p, _ in markers] + [re.compile(r"^[a-zñ]\)\s")]
+    lines = normalize_pdf_lines(full_text, marker_res)
+
+    sections: dict = {}
+    current_key = None
+    buf: list = []
+
+    def flush():
+        if current_key:
+            sections[current_key] = "\n".join(buf).strip()
+        buf.clear()
+
+    for txt in lines:
+        matched_key = "__unmatched__"
+        rest = None
+        for pattern, key in markers:
+            m = re.match(pattern, txt)
+            if m:
+                matched_key = key
+                rest = txt[m.end():].strip()
+                break
+        if matched_key != "__unmatched__":
+            flush()
+            if matched_key is None:
+                current_key = None
+                break
+            current_key = matched_key
+            # El marcador y el contenido que le sigue en el mismo titulo
+            # ("Articulo 2. Identificacion del titulo. El titulo de...")
+            # llegan fusionados en una sola linea logica tras
+            # normalize_pdf_lines() -- el resto tras el propio marcador
+            # es ya contenido real de la seccion, no se descarta.
+            if rest:
+                buf.append(rest)
+        elif current_key:
+            buf.append(txt)
+    flush()
+    return sections
+
+
 def insert_titulo(conn, *, code, name, level, hours, family_id, region_id,
                    articles, cpps, cps, ucs, og, modules, hours_by_code,
                    fuente):
@@ -388,7 +575,16 @@ def insert_titulo(conn, *, code, name, level, hours, family_id, region_id,
     No hace commit: llamar conn.commit() solo tras verificar el resultado."""
     import json
 
-    boa_articles = {f"article_{n}": txt for n, txt in articles.items()}
+    # `articles` viene con claves numericas de extract_articles_2_9()
+    # (loe_clasica/rd659_2023) o ya con claves "article_N" de
+    # extract_fpb_sections()/extract_boa_sections() (FPB, BOA) -- se
+    # normalizan las dos formas para no duplicar el prefijo
+    # ("article_article_2", bug real que afecto a los 4 titulos FPB
+    # insertados antes de esta correccion, ver Historico).
+    boa_articles = {
+        (k if isinstance(k, str) and k.startswith("article_") else f"article_{k}"): v
+        for k, v in articles.items()
+    }
     boa_articles["article_5_cpps"] = cpps
     boa_articles["article_6_cps"] = cps
     boa_articles["article_6_ucs"] = ucs
