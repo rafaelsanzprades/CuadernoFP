@@ -67,18 +67,27 @@ def extract_cualificaciones(articulo_6_text: str):
     entre RDs ('comprende'/'contiene'/'incluye') -- visto 'contiene' en RD
     1683/2011, 'comprende' en RD 454/2010/1797/2008. La cita del RD de la
     cualificacion tambien varia: '(R.D. .../...)' o '(Real Decreto
-    .../..., de ...)' -- aceptar ambas formas."""
+    .../..., de ...)' -- aceptar ambas formas. Cuando el titulo solo tiene
+    UNA cualificacion completa, el RD usa singular ("Cualificacion
+    profesional completa:") y NO antepone letra a) -- visto en RD
+    189/2018 (Comercializacion de Productos Alimentarios). Se detecta
+    ese caso y se sintetiza el id 'a' para no perder la cualificacion."""
     cps, ucs = [], []
-    entries = re.split(r"\n(?=[a-zñ]\) )", articulo_6_text)
+    # Solo la seccion de "completa(s)" (antes de "incompletas", si existe)
+    seccion = re.split(r"\n\d+\.\s*Cualificaci[oó]n(?:es)? profesionales? incompletas?", articulo_6_text)[0]
+    seccion = re.sub(r"^.*?Cualificaci[oó]n(?:es)? profesionales? completa[s]?:\s*\n?", "", seccion, count=1, flags=re.DOTALL)
+    if not re.match(r"^[a-zñ]\)\s", seccion):
+        seccion = "a) " + seccion
+    entries = re.split(r"\n(?=[a-zñ]\) )", seccion)
     for entry in entries:
         m = re.match(
-            r"^([a-zñ])\)\s*(.+?)\s+([A-Z]{2,4}\d{2,3}_\d)\s*\(((?:R\.D\.|Real Decreto)[^)]+)\)\s*,?\s*que (?:comprende|contiene|incluye)",
+            r"^([a-zñ])\)\s*(.+?)\.?\s+([A-Z]{2,4}\s?\d{2,3}_\d)\s*\(((?:R\.D\.|RD|Real Decreto)[^)]+)\)\s*,?\s*que (?:comprende|contiene|incluye)",
             entry, re.DOTALL,
         )
         if not m:
             continue
         letter, desc, code, ref = m.groups()
-        cps.append({"id": letter, "code": code, "ref": ref, "desc": desc.strip()})
+        cps.append({"id": letter, "code": re.sub(r"\s+", "", code), "ref": ref, "desc": desc.strip()})
         for ucm in re.finditer(r"(UC\d{4}_\d):\s*(.+)", entry):
             ucs.append({"id": ucm.group(1), "cp_id": letter, "desc": ucm.group(2).strip()})
     return cps, ucs
@@ -123,7 +132,7 @@ def extract_modules_variant_c(soup: BeautifulSoup) -> list:
             cur_mod = {"name": m_mod.group(1).strip(), "code": None, "ras": []}
             cur_ra = None
         elif m_cod and cur_mod is not None:
-            cur_mod["code"] = m_cod.group(1).strip()
+            cur_mod["code"] = m_cod.group(1).strip().rstrip(".")
         elif txt.startswith("Resultados de aprendizaje") or txt.startswith("Criterios de evaluaci"):
             continue
         elif m_ra and cur_mod is not None:
