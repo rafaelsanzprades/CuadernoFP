@@ -4,6 +4,7 @@ import { Building2, CheckCircle2, XCircle, HelpCircle, Sparkles, ThumbsUp } from
 import { useAppStore } from "@/store/useAppStore";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { Card } from "@/components/ui/Card";
+import { useTranslation } from "react-i18next";
 
 // ─── Ítem 12 (resto): evaluación del RA desarrollado en empresa (FEOE) ──────
 // El tutor de empresa valora, para los CE que el profesor designe, del 1 al 4
@@ -34,14 +35,16 @@ const valor10A1 = (valor0a10: number | null | undefined): number | null => {
   return Math.round((valor0a10 / 10) * 3) + 1;
 };
 
-const SCORE_OPTIONS = [
-  { value: 1, label: "1 · Suspenso", color: "border-danger text-danger bg-danger/10" },
-  { value: 2, label: "2 · Aprobado", color: "border-warning text-warning bg-warning/10" },
-  { value: 3, label: "3 · Notable", color: "border-info text-info bg-info/10" },
-  { value: 4, label: "4 · Sobresaliente", color: "border-success text-success bg-success/10" },
+const getScoreOptions = (t: (key: string, opts?: any) => string) => [
+  { value: 1, label: t('campos.feoe.score1', {defaultValue: '1 · Suspenso'}), color: "border-danger text-danger bg-danger/10" },
+  { value: 2, label: t('campos.feoe.score2', {defaultValue: '2 · Aprobado'}), color: "border-warning text-warning bg-warning/10" },
+  { value: 3, label: t('campos.feoe.score3', {defaultValue: '3 · Notable'}), color: "border-info text-info bg-info/10" },
+  { value: 4, label: t('campos.feoe.score4', {defaultValue: '4 · Sobresaliente'}), color: "border-success text-success bg-success/10" },
 ];
 
 export function FeoeEmpresaTab() {
+  const { t } = useTranslation();
+  const SCORE_OPTIONS = React.useMemo(() => getScoreOptions(t), [t]);
   const { moduleData, cursoData, updateModuleData, updateCursoData } = useAppStore();
   const [selectedStudentId, setSelectedStudentId] = useState<string>("");
 
@@ -169,14 +172,14 @@ export function FeoeEmpresaTab() {
         <div className="flex items-start gap-3 mb-4">
           <Building2 className="w-6 h-6 text-amber-500 mt-1 shrink-0" />
           <div>
-            <h3 className="text-subheading font-bold text-foreground">Criterios designados para FEOE</h3>
+            <h3 className="text-subheading font-bold text-foreground">{t('campos.feoe.criteriosDesignadosTitulo', {defaultValue: 'Criterios designados para FEOE'})}</h3>
             <p className="text-muted text-body mt-1">
-              Marca los CE que se evalúan en empresa (Anexo XI b) — el tutor de empresa los valora del 1 al 4 y tú transcribes el resultado más abajo, por alumno.
+              {t('campos.feoe.criteriosDesignadosDesc', {defaultValue: 'Marca los CE que se evalúan en empresa (Anexo XI b) — el tutor de empresa los valora del 1 al 4 y tú transcribes el resultado más abajo, por alumno.'})}
             </p>
           </div>
         </div>
         {df_ra.length === 0 ? (
-          <p className="text-body text-muted">No hay RA/CE cargados en este módulo todavía.</p>
+          <p className="text-body text-muted">{t('campos.feoe.sinRaCe', {defaultValue: 'No hay RA/CE cargados en este módulo todavía.'})}</p>
         ) : (
           <div className="space-y-4">
             {df_ra.map((ra: any) => {
@@ -207,17 +210,17 @@ export function FeoeEmpresaTab() {
 
       {ceDesignados.length === 0 ? (
         <Card className="p-8 text-center border-l-4 border-l-amber-500">
-          <p className="text-foreground/80">Marca al menos un CE arriba para empezar a registrar valoraciones de empresa.</p>
+          <p className="text-foreground/80">{t('campos.feoe.marcaAlMenosUnCe', {defaultValue: 'Marca al menos un CE arriba para empezar a registrar valoraciones de empresa.'})}</p>
         </Card>
       ) : activeStudents.length === 0 ? (
         <Card className="p-8 text-center border-l-4 border-l-yellow-500">
-          <p className="text-foreground/80">No hay alumnado activo registrado en este curso.</p>
+          <p className="text-foreground/80">{t('campos.feoe.sinAlumnadoActivo', {defaultValue: 'No hay alumnado activo registrado en este curso.'})}</p>
         </Card>
       ) : (
         <div className="flex gap-6 min-h-[500px]">
           <div className="w-72 bg-foreground/5 border border-white/5 rounded-2xl flex flex-col overflow-hidden shrink-0">
             <div className="p-4 border-b border-white/5 bg-foreground/10">
-              <div className="text-xs font-medium text-muted tracking-wider">Alumnado activo ({activeStudents.length})</div>
+              <div className="text-xs font-medium text-muted tracking-wider">{t('campos.feoe.alumnadoActivoCount', {count: activeStudents.length, defaultValue: 'Alumnado activo ({{count}})'})}</div>
             </div>
             <div className="flex-1 overflow-y-auto p-2 space-y-1 scrollbar-hide">
               {activeStudents.map((al: any) => {
@@ -254,18 +257,18 @@ export function FeoeEmpresaTab() {
                       onClick={() => rellenarTodo(selectedStudentId, 4)}
                       className="flex items-center gap-1.5 text-caption font-semibold px-3 py-1.5 rounded-full border border-success/30 text-success bg-success/10 hover:bg-success/20 transition-colors"
                     >
-                      <Sparkles className="w-3.5 h-3.5" /> Excelente (todo a 4)
+                      <Sparkles className="w-3.5 h-3.5" /> {t('botones.feoe.excelenteTodoA4', {defaultValue: 'Excelente (todo a 4)'})}
                     </button>
                     <button
                       onClick={() => rellenarTodo(selectedStudentId, 3)}
                       className="flex items-center gap-1.5 text-caption font-semibold px-3 py-1.5 rounded-full border border-info/30 text-info bg-info/10 hover:bg-info/20 transition-colors"
                     >
-                      <ThumbsUp className="w-3.5 h-3.5" /> Suficiente (todo a 3)
+                      <ThumbsUp className="w-3.5 h-3.5" /> {t('botones.feoe.suficienteTodoA3', {defaultValue: 'Suficiente (todo a 3)'})}
                     </button>
                   </div>
                 </div>
                 <p className="px-6 pt-3 text-caption text-muted">
-                  Rellena con un botón y corrige a mano lo que haga falta — es solo un punto de partida, no un valor definitivo.
+                  {t('campos.feoe.rellenaConBotonDesc', {defaultValue: 'Rellena con un botón y corrige a mano lo que haga falta — es solo un punto de partida, no un valor definitivo.'})}
                 </p>
 
                 <div className="flex-1 overflow-y-auto p-6 space-y-5 scrollbar-hide">
@@ -283,14 +286,14 @@ export function FeoeEmpresaTab() {
                             <span className="text-caption text-muted ml-2">{ra.desc_ra || ""}</span>
                           </div>
                           {superado === null ? (
-                            <span className="flex items-center gap-1.5 text-caption text-muted"><HelpCircle className="w-4 h-4" /> Sin evaluar</span>
+                            <span className="flex items-center gap-1.5 text-caption text-muted"><HelpCircle className="w-4 h-4" /> {t('campos.feoe.sinEvaluar', {defaultValue: 'Sin evaluar'})}</span>
                           ) : superado ? (
-                            <span className="flex items-center gap-1.5 text-caption font-semibold text-success" title="Media de las actividades > 2, según el Anexo XI b)">
-                              <CheckCircle2 className="w-4 h-4" /> Superado
+                            <span className="flex items-center gap-1.5 text-caption font-semibold text-success" title={t('campos.feoe.mediaSuperiorA2', {defaultValue: 'Media de las actividades > 2, según el Anexo XI b)'})}>
+                              <CheckCircle2 className="w-4 h-4" /> {t('campos.feoe.superado', {defaultValue: 'Superado'})}
                             </span>
                           ) : (
-                            <span className="flex items-center gap-1.5 text-caption font-semibold text-danger" title="Media de las actividades ≤ 2, según el Anexo XI b)">
-                              <XCircle className="w-4 h-4" /> No superado
+                            <span className="flex items-center gap-1.5 text-caption font-semibold text-danger" title={t('campos.feoe.mediaInferiorIgualA2', {defaultValue: 'Media de las actividades ≤ 2, según el Anexo XI b)'})}>
+                              <XCircle className="w-4 h-4" /> {t('campos.feoe.noSuperado', {defaultValue: 'No superado'})}
                             </span>
                           )}
                         </div>
@@ -320,7 +323,7 @@ export function FeoeEmpresaTab() {
                                   type="text"
                                   value={getObservaciones(selectedStudentId, ce.id_ce)}
                                   onChange={(e) => updateCalificacion(selectedStudentId, ce.id_ce, valorActual, e.target.value)}
-                                  placeholder="Observaciones del tutor de empresa (opcional)..."
+                                  placeholder={t('campos.feoe.observacionesTutorPlaceholder', {defaultValue: 'Observaciones del tutor de empresa (opcional)...'})}
                                   className="w-full mt-2 bg-transparent border-b border-transparent hover:border-[var(--glass-border)] focus:border-accent focus:outline-none text-caption text-foreground/80 placeholder:text-muted/40 py-1"
                                 />
                               </div>
@@ -335,7 +338,7 @@ export function FeoeEmpresaTab() {
             ) : (
               <div className="flex-1 flex flex-col justify-center items-center text-center p-8 text-muted">
                 <HelpCircle className="w-12 h-12 text-muted/50 mb-3" />
-                <p className="font-semibold text-lg">Ningún alumnado seleccionado</p>
+                <p className="font-semibold text-lg">{t('campos.comun.ningunAlumnadoSeleccionado', {defaultValue: 'Ningún alumnado seleccionado'})}</p>
               </div>
             )}
           </div>

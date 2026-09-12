@@ -183,10 +183,10 @@ export default function SeguimientoPage() {
     setSaveMessage("");
     const ok = await saveCursoData();
     if (ok) {
-      setSaveMessage("Guardado correctamente");
+      setSaveMessage(t('toasts.comun.guardadoCorrectamente', {defaultValue: 'Guardado correctamente'}));
       setTimeout(() => setSaveMessage(""), 3000);
     } else {
-      setSaveMessage("Error al guardar");
+      setSaveMessage(t('toasts.comun.errorGuardar', {defaultValue: 'Error al guardar'}));
     }
     setSaving(false);
   };
@@ -201,8 +201,8 @@ export default function SeguimientoPage() {
             <MotionWrapper>
               <div className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <ClipboardCheck className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-heading font-bold">No hay curso ni programación cargada</h2>
-                <p className="text-muted mb-4">Debes abrir o crear un archivo de programación y curso en tu Archivos.</p>
+                <h2 className="text-heading font-bold">{t('campos.calificaciones.sinCursoNiProgramacionTitulo', {defaultValue: 'No hay curso ni programación cargada'})}</h2>
+                <p className="text-muted mb-4">{t('campos.calificaciones.sinCursoNiProgramacionDesc', {defaultValue: 'Debes abrir o crear un archivo de programación y curso en tu Archivos.'})}</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
                     <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
@@ -217,7 +217,7 @@ export default function SeguimientoPage() {
   }
 
   if (loading || !moduleData || !cursoData) {
-    return <LoadingSpinner text="Cargando datos de seguimiento..." />;
+    return <LoadingSpinner text={t('campos.seguimiento.cargandoDatosSeguimiento', {defaultValue: 'Cargando datos de seguimiento...'})} />;
   }
   const daily_ledger = cursoData?.daily_ledger || {};
   const planning_ledger = planningLedger;
@@ -379,7 +379,7 @@ export default function SeguimientoPage() {
                                       <div className="flex items-center gap-3">
                                         <span className="font-mono text-subheading font-bold text-foreground tracking-widest">{dateStr.substring(0,5)}</span>
                                         <span className="text-caption font-medium text-muted tracking-wider bg-foreground/5 px-2 py-1 rounded">{diaSemana}</span>
-                                        {esHoy && <span className="bg-accent/10 text-accent border border-accent/30 px-2 py-0.5 rounded text-caption font-bold shadow-sm">Hoy</span>}
+                                        {esHoy && <span className="bg-accent/10 text-accent border border-accent/30 px-2 py-0.5 rounded text-caption font-bold shadow-sm">{t('campos.calendario.hoyBadge', {defaultValue: 'Hoy'})}</span>}
                                         {udPrev && <span className="bg-info/10 text-info border border-info/30 px-2 py-0.5 rounded text-caption font-medium shadow-sm">UD: {udPrev}</span>}
                                       </div>
                                       <div className="flex items-center gap-5">

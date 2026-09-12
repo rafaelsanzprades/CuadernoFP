@@ -74,7 +74,7 @@ export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps)
           <div>
             <h2 id="modal-title" className="text-subheading font-bold flex items-center gap-2 text-foreground">
               <FileText className="w-5 h-5 text-accent" />
-              Diseño de la Tarea Competencial
+              {t('campos.secuenciacion.disenoTareaCompetencialTitulo', {defaultValue: 'Diseño de la Tarea Competencial'})}
             </h2>
             <p className="text-body text-muted mt-1">
               <span className="font-mono text-accent mr-2">{task.ID || task.id_act}</span>
@@ -96,9 +96,9 @@ export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps)
             <div className="space-y-6">
               <div className="space-y-2">
                 <label className="block text-body font-bold text-foreground">
-                  Scenario / briefing (contexto profesional)
+                  {t('campos.secuenciacion.scenarioBriefingLabel', {defaultValue: 'Scenario / briefing (contexto profesional)'})}
                 </label>
-                <p className="text-caption text-muted">Situación laboral creíble, encargo específico (ej. un correo de un cliente, una incidencia técnica).</p>
+                <p className="text-caption text-muted">{t('campos.secuenciacion.scenarioBriefingDesc', {defaultValue: 'Situación laboral creíble, encargo específico (ej. un correo de un cliente, una incidencia técnica).'})}</p>
                 <textarea 
                   value={formData.Briefing}
                   onChange={(e) => handleChange("Briefing", e.target.value)}
@@ -109,9 +109,9 @@ export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps)
 
               <div className="space-y-2">
                 <label className="block text-body font-bold text-foreground">
-                  Formato de entrega y plazos
+                  {t('campos.secuenciacion.formatoEntregaPlazosLabel', {defaultValue: 'Formato de entrega y plazos'})}
                 </label>
-                <p className="text-caption text-muted">Cómo, cuándo y dónde debe entregarse la tarea.</p>
+                <p className="text-caption text-muted">{t('campos.secuenciacion.formatoEntregaPlazosDesc', {defaultValue: 'Cómo, cuándo y dónde debe entregarse la tarea.'})}</p>
                 <textarea 
                   value={formData.Entrega}
                   onChange={(e) => handleChange("Entrega", e.target.value)}
@@ -125,9 +125,9 @@ export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps)
             <div className="space-y-6">
               <div className="space-y-2">
                 <label className="block text-body font-bold text-foreground">
-                  Desarrollo de la tarea (pasos)
+                  {t('campos.secuenciacion.desarrolloTareaPasosLabel', {defaultValue: 'Desarrollo de la tarea (pasos)'})}
                 </label>
-                <p className="text-caption text-muted">Instrucciones secuenciadas que el alumnado debe seguir.</p>
+                <p className="text-caption text-muted">{t('campos.secuenciacion.desarrolloTareaPasosDesc', {defaultValue: 'Instrucciones secuenciadas que el alumnado debe seguir.'})}</p>
                 <textarea 
                   value={formData.Pasos}
                   onChange={(e) => handleChange("Pasos", e.target.value)}
@@ -138,9 +138,9 @@ export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps)
 
               <div className="space-y-2">
                 <label className="block text-body font-bold text-foreground">
-                  Evidencias a generar
+                  {t('campos.secuenciacion.evidenciasAGenerarLabel', {defaultValue: 'Evidencias a generar'})}
                 </label>
-                <p className="text-caption text-muted">Qué productos tangibles o demostraciones se van a evaluar.</p>
+                <p className="text-caption text-muted">{t('campos.secuenciacion.evidenciasAGenerarDesc', {defaultValue: 'Qué productos tangibles o demostraciones se van a evaluar.'})}</p>
                 <textarea 
                   value={formData.Evidencias}
                   onChange={(e) => handleChange("Evidencias", e.target.value)}

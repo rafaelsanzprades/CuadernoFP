@@ -198,17 +198,17 @@ export function ProgresoRaTab() {
                     <span className="flex items-center gap-1">
                       <span className="w-2.5 h-2.5 rounded-full bg-danger/10 border border-danger inline-block" />
                       <span className="text-danger font-mono">{pct(minN)}%</span>
-                      <span className="text-muted">Mín</span>
+                      <span className="text-muted">{t('campos.evaluacion.minAbrev', {defaultValue: 'Mín'})}</span>
                     </span>
                     <span className="flex items-center gap-1">
                       <span className="w-3.5 h-3.5 rounded-full inline-block" style={{ backgroundColor: getColor(avgN) }} />
                       <span className="font-bold font-mono" style={{ color: getColor(avgN) }}>{pct(avgN)}%</span>
-                      <span className="text-muted">Media</span>
+                      <span className="text-muted">{t('campos.analisis.mediaLegend', {defaultValue: 'Media'})}</span>
                     </span>
                     <span className="flex items-center gap-1">
                       <span className="w-2.5 h-2.5 rounded-full bg-success/10 border border-success inline-block" />
                       <span className="text-success font-mono">{pct(maxN)}%</span>
-                      <span className="text-muted">Máx</span>
+                      <span className="text-muted">{t('campos.evaluacion.maxAbrev', {defaultValue: 'Máx'})}</span>
                     </span>
                   </div>
                   <span className="text-muted/80">100%</span>

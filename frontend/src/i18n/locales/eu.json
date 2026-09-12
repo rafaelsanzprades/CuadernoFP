@@ -101,6 +101,14 @@
       "autoevaluacion": {
         "desc": "Ikasleen autoebaluazioa ebaluazio-irizpideka (BAI/Zalantzak/EZ) eta adierazitako zailtasunak.",
         "label": "Autoebaluazioa"
+      },
+      "perfilProfesional": {
+        "label": "Lanbide-profila",
+        "desc": "Ikasleka lanbide-orientazioa: motibazioa, lan-esperientzia, gaitasunak, asmoak eta zikloaren osteko txertaketa."
+      },
+      "expediente": {
+        "label": "Espedientea",
+        "desc": "Ikasleka ebidentzien denbora-lerroa: kalifikazioak, autoebaluazioa, tutoretza, erreklamazioak, asistentzia eta gelako egunkaria."
       }
     },
     "seguimiento": {
@@ -119,6 +127,10 @@
       "detalle": {
         "label": "Ikaslekako xehetasuna",
         "desc": "Nota numerikoen sarrera, ikasleka, ebaluazio-tresnaka eta RAren eskuratze-mailaka."
+      },
+      "feoeEmpresa": {
+        "label": "FEOE / Enpresa",
+        "desc": "FEOEan zehar enpresan ikasleen ebaluazioa (XI b eranskina), RA/CEka transkribatua."
       }
     },
     "calificaciones": {
@@ -138,7 +150,12 @@
         "desc": "Taldearen jarduna eta estatistika konparatiboak, eta banakako aurrerapen-orria tutoretzetarako."
       },
       "reclamaciones": {
-        "label": "Erreklamazioak"
+        "label": "Erreklamazioak",
+        "desc": "Ikasleek aurkeztutako nota-erreklamazioak, arrazoia eta ebazpena barne."
+      },
+      "boletines": {
+        "label": "Buletinak",
+        "desc": "Pantailako banakako kalifikazio-buletina, RAka lorpen-mailaren erradar eta barrekin."
       }
     },
     "contexto": {
@@ -175,6 +192,10 @@
       "competenciales": {
         "label": "Zeregin konpetentzialak",
         "desc": "Zeregin eta jarduera konpetentzialen diseinua eta plangintza."
+      },
+      "contenidosUd": {
+        "label": "Edukiak → UD",
+        "desc": "Unitate didaktikoka blokeetan taldekatutako edukien taula, RA, helburu orokorrak, orduak eta ebaluazio-tresnekin duten harremana erakutsiz."
       }
     },
     "metodologia": {
@@ -207,6 +228,15 @@
       },
       "tri3": {
         "desc": "3. hiruhilekorako aurreikusitako ebaluazio-tresnak."
+      },
+      "rubricas": {
+        "nav": "Errubrikak",
+        "desc": "Errubrika berrerabilgarriak: definitu irizpideak (guztien artean 10 puntu batu behar dituzte) eta errendimendu-mailak, eta esleitu edozein tresnari bere Konfigurazio aurreratutik.",
+        "titulo": "Ebaluazio-errubrikak"
+      },
+      "jeg": {
+        "nav": "JEG eredua",
+        "desc": "Adierazleen araberako JEG eredua: aplikazioaren benetako kalifikazio-motorraren konfigurazioa."
       }
     },
     "archivos": {
@@ -378,7 +408,8 @@
     "normativa": "Dokumentuak",
     "instrumentos": "Tresna",
     "calidad": "Kalitatea",
-    "mejora": "Hobekuntza"
+    "mejora": "Hobekuntza",
+    "grupos": "Taldeak"
   },
   "navGroups": {
     "inicio": "Hasiera",
@@ -406,7 +437,8 @@
     "sincronizado": "Sinkronizatuta",
     "guardando": "Gordetzen...",
     "guardado": "Gordeta",
-    "error": "Errorea"
+    "error": "Errorea",
+    "settings": "Konfigurazioa"
   },
   "pages": {
     "agenda_title": "Agenda",
@@ -470,7 +502,10 @@
     "siguiente": "Hurrengoa",
     "tipo": "Mota",
     "total": "Guztira",
-    "volver": "Itzuli"
+    "volver": "Itzuli",
+    "editar": "Editatu",
+    "eliminar": "Ezabatu",
+    "cargando": "Kargatzen..."
   },
   "navDesc": {
     "inicio": "Panel nagusia, komunitatearen ekarpenak, erreferentzia-dokumentuak eta EQAVET kalitatea.",
@@ -580,7 +615,8 @@
       "errorGuardarPropuesta": "Errorea proposamena aplikatu ondoren gordetzean.",
       "planAutocompletado": "Saio-plana automatikoki osatuta.",
       "programacionGuardada": "Programazioa ondo gorde da.",
-      "propuestaAplicada": "{{author}}(r)en proposamena aplikatu eta gorde da."
+      "propuestaAplicada": "{{author}}(r)en proposamena aplikatu eta gorde da.",
+      "repartidoPorRelevancia": "Pisuak berkalkulatu dira CE bakoitzaren Garrantziaren arabera."
     },
     "detalleAlumnado": {
       "errorInformeRefuerzo": "Errorea errefortzu-txostena sortzean."
@@ -601,7 +637,12 @@
       "sinDemo": "Ezin duzu Driverekin sinkronizatu DEMO moduan."
     },
     "header": {
-      "paletaNoImplementada": "Komando-paleta oraindik ez dago inplementatuta."
+      "paletaNoImplementada": "Komando-paleta oraindik ez dago inplementatuta.",
+      "conflictoVersionesTitulo": "Bertsio-gatazka",
+      "conflictoVersionesDesc": "Datuak zaharkituta daude. Mesedez, birkargatu orria.",
+      "guardadoConExitoTitulo": "Ondo gorde da",
+      "datosActualizadosDesc": "Datuak eguneratuta.",
+      "revisaConexionDatosDesc": "Egiaztatu konexioa edo datuak."
     },
     "inicio": {
       "estructuraGuardada": "Egitura gorde da."
@@ -658,6 +699,10 @@
     },
     "udConfig": {
       "errorExportar": "Errorea unitate didaktikoa esportatzean."
+    },
+    "comun": {
+      "errorGuardar": "Errorea gordetzean",
+      "guardadoCorrectamente": "Ondo gorde da"
     }
   },
   "botones": {
@@ -672,7 +717,10 @@
       "importarCsv": "CSV inportatu",
       "imprimirBoletin": "Boletina inprimatu",
       "pulsaAnadirRegistro": "Erregistroa gehitu",
-      "vaciarPlano": "Plana hustu"
+      "vaciarPlano": "Plana hustu",
+      "perfilProfesionalIndividual": "Banakakoa",
+      "perfilProfesionalResumen": "Laburpena",
+      "perfilProfesionalTendencias": "Joerak"
     },
     "archivos": {
       "cambiarCarpetaLocal": "Karpeta lokala aldatu",
@@ -717,7 +765,9 @@
       "aplicarPropuesta": "Proposamena aplikatu",
       "autocompletarPlan": "Plana automatikoki osatu",
       "cargarPropuestaEditorial": "Argitaletxearen proposamena kargatu",
-      "volverALaLista": "Zerrendara itzuli"
+      "volverALaLista": "Zerrendara itzuli",
+      "descargarPdfMagia": "Deskargatu PDF/DOCX MagIA-n",
+      "repartirPorRelevancia": "Garrantziaren arabera banatu"
     },
     "dashboard": {
       "abriendo": "Irekitzen...",
@@ -743,7 +793,8 @@
     },
     "evaluacion": {
       "generarInforme": "Txostena sortu",
-      "restaurarNotasReales": "Benetako notetara leheneratu"
+      "restaurarNotasReales": "Benetako notetara leheneratu",
+      "volverASigadCalculado": "Kalkulatutako baliora itzuli"
     },
     "header": {
       "altoContraste": "Kontraste altua",
@@ -763,7 +814,12 @@
       "crearRecuperacion": "Errekuperazioa sortu",
       "crearRecuperacionTri": "Errekuperazioa sortu ({{tri}})",
       "desmarcarTodas": "Denak desmarkatu",
-      "marcarTodas": "Denak markatu"
+      "marcarTodas": "Denak markatu",
+      "nuevaRubrica": "Errubrika berria",
+      "anadirNivel": "Maila gehitu",
+      "anadirCriterio": "Irizpidea gehitu",
+      "dividirPorcentajes": "Ehunekoak banatu",
+      "anadir": "Gehitu"
     },
     "magia": {
       "cerrarVisor": "Ikustailea itxi",
@@ -772,7 +828,8 @@
       "editableDocx": "Editagarria .docx",
       "editableXlsx": "Editagarria .xlsx",
       "generandoDocx": "⏳ DOCX sortzen...",
-      "vistaPdf": "Ikuspegia .pdf"
+      "vistaPdf": "Ikuspegia .pdf",
+      "exportarExcelCompleto": "Excel osoa esportatu"
     },
     "modulo": {
       "anadirAlumno": "Ikaslea gehitu",
@@ -792,6 +849,34 @@
       "anadirSesionA": "Saioa gehitu {{id}}(e)ra",
       "exportarBriefing": "Briefing-a esportatu (PDF/DOCX)",
       "exportarFicha": "Fitxa esportatu (PDF/DOCX)"
+    },
+    "verificacion": {
+      "irA": "Joan hona: {{destino}}",
+      "configurarModulo": "Konfiguratu modulua",
+      "anadirPrimeraUd": "Gehitu lehen UDa",
+      "anadirPrimerRa": "Gehitu lehen RA",
+      "revisarAsignaciones": "Berrikusi esleipenak",
+      "importarDeEditorial": "Inportatu argitaletxe batetik",
+      "crearPrimeraTarea": "Sortu lehen zeregina",
+      "planificarSesiones": "Planifikatu saioak",
+      "anadirContexto": "Gehitu testuingurua",
+      "configurarFpDual": "Konfiguratu FP Duala",
+      "valorarCalidad": "Baloratu kalitatea",
+      "completarIdentificacion": "Osatu identifikazioa",
+      "redactarTextos": "Idatzi testuak",
+      "configurarCalendario": "Konfiguratu egutegia",
+      "anadirAlumnado": "Gehitu ikasleak",
+      "registrarPrimeraSesion": "Erregistratu lehen saioa",
+      "introducirNotas": "Sartu notak",
+      "registrarTutoria": "Erregistratu tutoretza",
+      "disenarAula": "Diseinatu ikasgela"
+    },
+    "feoe": {
+      "excelenteTodoA4": "Bikaina (dena 4ra)",
+      "suficienteTodoA3": "Nahikoa (dena 3ra)"
+    },
+    "inicio": {
+      "unirseTelegram": "Elkartu Telegrameko taldera"
     }
   },
   "placeholders": {
@@ -805,7 +890,10 @@
       "dificultadesOpcional": "Zailtasunak (aukerakoa)",
       "edad": "adina",
       "nombre": "Izena...",
-      "telefono": "Telefonoa"
+      "telefono": "Telefonoa",
+      "participantesTutoria": "Nor egon den bertan (ikaslea, familia, orientatzailea...)",
+      "buscarAlumnado": "Bilatu ikasleak...",
+      "correoEjemplo": "posta@adibidea.eus"
     },
     "archivos": {
       "buscarModulo": "Bilatu moduluaren kodearen edo izenaren arabera...",
@@ -839,7 +927,8 @@
       "textoUdsModulo": "Unitate didaktikoak nola antolatzen diren azaltzen du. Hutsik uzten bada, automatikoki sortzen da df_ud-tik abiatuta."
     },
     "curriculo": {
-      "peso": "Pisua..."
+      "peso": "Pisua...",
+      "bloqueContenido": "Esleitu gabe..."
     },
     "dashboard": {
       "ejModulo": "Adib: ELE203, 0237-ictve",
@@ -852,7 +941,11 @@
     "instrumentos": {
       "descripcionIndicador": "Adierazlearen deskribapena",
       "seleccionaIndicadores": "Hautatu adierazleak...",
-      "tituloInstrumento": "Tresnaren izenburua"
+      "tituloInstrumento": "Tresnaren izenburua",
+      "nombreRubrica": "Errubrikaren izena",
+      "descripcionRubrica": "Deskribapena (aukerakoa)",
+      "descripcionCriterio": "Irizpidearen deskribapena",
+      "descripcionNivel": "Mailaren deskribapena"
     },
     "modulo": {
       "a1Justificacion": "Adierazi tituluari aplikagarri zaion oinarri arauemailea, hezkuntza-legeak eta errege-dekretuak...",
@@ -907,7 +1000,8 @@
     "alumnado": {
       "eliminarAlumnado": "Ikasleak ezabatu",
       "fechasCalculadasNacimiento": "Jaiotze-datatik kalkulatutako datak, FEOE eta adin nagusitasunerako garrantzitsuak",
-      "importarCsv": "CSV inportatu (Izena, Abizenak...)"
+      "importarCsv": "CSV inportatu (Izena, Abizenak...)",
+      "grupoEvaluacionGev": "Ebaluazio-taldea (GEv)"
     },
     "archivos": {
       "creaCursoGrupo": "Ikasturte bat eta lotutako talde-fitxategia sortzen ditu",
@@ -931,7 +1025,8 @@
       "eliminarCe": "CE ezabatu",
       "horasTotalesModulo": "Moduluaren guztizko orduak curriculumaren arabera (BOA)",
       "sumaHorasSesiones": "Saio guztien orduen batura",
-      "sumaHorasUd": "UD bakoitzari esleitutako orduen batura"
+      "sumaHorasUd": "UD bakoitzari esleitutako orduen batura",
+      "recalcularPctRelevancia": "RAren CE bakoitzaren % berrikalkulatzen du bere Garrantziaren arabera (−=erdia, ==normala, +=bikoitza) — garrantzirik markatu gabeko CE batek = balio du"
     },
     "dashboard": {
       "pctImpartidoPrevisto": "% emanda / aurreikusita",
@@ -946,7 +1041,9 @@
       "maxValor": "Max: {{valor}}",
       "mediaValor": "Batez bestekoa: {{valor}}",
       "minValor": "Min: {{valor}}",
-      "topeCompensablesActivo": "Gainditu gabeko CE kopuruak modulu honen konpentsatze-muga gainditzen du (Datuak → Biribiltze-arauak)"
+      "topeCompensablesActivo": "Gainditu gabeko CE kopuruak modulu honen konpentsatze-muga gainditzen du (Datuak → Biribiltze-arauak)",
+      "calificarConRubrica": "Errubrikarekin kalifikatu",
+      "notaSigadOverride": "Ohiko azken notatik soilik kalkulatzen da. Eskuz alda ezazu hemen igo edo jaitsi nahi baduzu, nota hori ukitu gabe."
     },
     "header": {
       "uneteTelegram": "Elkartu gure Telegram taldera"
@@ -958,7 +1055,8 @@
       "item12Origen": "12. elementua: nork betetzen duen tresna hau",
       "item30Procedimiento": "30. elementua: JEG prozedura (arrunta/errekuperazioa/apartekoa)",
       "pesoRelativoCe": "CEaren barruko pisu erlatiboa",
-      "sustituidaPorRecuperacion": "Errekuperazioak ordezkatuta"
+      "sustituidaPorRecuperacion": "Errekuperazioak ordezkatuta",
+      "gevSoloCuentaGrupo": "Ebaluazio-taldea (GEv): talde bereko ikasleentzat bakarrik balio du"
     },
     "modulo": {
       "eliminarRegistro": "Erregistroa ezabatu"
@@ -1000,14 +1098,22 @@
       "medioInformal": "Informala",
       "medioPresencial": "Aurrez aurreko bilera",
       "medioTelefono": "Telefono-deia",
-      "medioVideollamada": "Bideo-deia"
+      "medioVideollamada": "Bideo-deia",
+      "estadoActivos": "Aktiboak",
+      "estadoBaja": "Baja",
+      "todaIntencion": "Edozein asmo",
+      "todaAptitud": "Edozein gaitasun"
     },
     "catalogo": {
       "grado": "Maila",
-      "gradosDelAAlE": "A-tik E-ra bitarteko mailak"
+      "gradosDelAAlE": "A-tik E-ra bitarteko mailak",
+      "seleccionaFamilia": "-- Hautatu Familia --",
+      "seleccionaTitulo": "-- Aukeratu titulua --",
+      "seleccionaModulo": "-- Aukeratu modulua --"
     },
     "comun": {
-      "otros": "Besteak"
+      "otros": "Besteak",
+      "si": "Bai"
     },
     "contexto": {
       "seleccionOrientativa": "Beheko testua idazteko lagungarri den hautapen orientagarria (lehen bertsioa, zabalduz joango da).",
@@ -1083,7 +1189,8 @@
       "item_socio_turistico": "Turistikoa",
       "item_turno_diurno": "Egunekoa",
       "item_turno_mixto": "Mistoa",
-      "item_turno_vespertino": "Arratsaldekoa"
+      "item_turno_vespertino": "Arratsaldekoa",
+      "sugerenciaSegunGrado": "Gradu arabera iradokizuna ({{motivo}}): \"{{label}}\". Aplikatu"
     },
     "diario": {
       "acumuladoTrimestral": "Hiruhileko metatua",
@@ -1118,7 +1225,12 @@
       "tipo_otro": "Beste bat",
       "tipo_prueba_objetiva": "Proba objektiboa",
       "tipo_registro_observacion": "Behaketa-erregistroa",
-      "tipo_rubrica": "Errubrika"
+      "tipo_rubrica": "Errubrika",
+      "basico": "Oinarrizkoa",
+      "tipoRecuperaciones": "Berreskuratzeak",
+      "seleccionaActividad": "-- Aukeratu jarduera --",
+      "metodoSobrescribir": "Gainidatzi nota handiagoa bada",
+      "metodoMedia": "Aurreko notarekin batez bestekoa egin"
     },
     "legal": {
       "accContacto": "6. Kontaktua eta kexak",
@@ -1263,6 +1375,150 @@
     "evaluacion": {
       "selecciona": "Hautatu...",
       "todos": "Denak"
+    },
+    "orientacion": {
+      "seleccionar": "-- Aukeratu --",
+      "motivoEleccion": {
+        "vocacion": "Bokazioa / sektorearekiko pasioa",
+        "salidaLaboral": "Lan-irteera argia",
+        "reorientacion": "Birbideratze profesionala",
+        "porDescarte": "Baztertzez (ez zegoen beste aukerarik)",
+        "familia": "Familiaren eragina",
+        "costeEconomico": "Kostu ekonomikoa unibertsitatearekin alderatuta"
+      },
+      "viaAcceso": {
+        "eso": "ESO (graduatu titulua)",
+        "fpgb": "FP Oinarrizko Maila",
+        "fpgm": "FP Erdi Maila (GSra)",
+        "bachillerato": "Batxilergoa",
+        "pruebaAcceso": "Sarbide-azterketa",
+        "convalidacionParcial": "Zati-baliozkotzea",
+        "otra": "Beste bide bat"
+      },
+      "primeraOpcion": "Ziklo hau zen bere lehen aukera",
+      "estudiaYTrabaja": "Lanean ari den bitartean ikasten du",
+      "cambioDeCiclo": "Ziklo aldaketa / bigarren matrikula",
+      "experienciaPrevia": {
+        "sinExperiencia": "Lan-esperientziarik gabe",
+        "esporadica": "Noizbehinkako / behin-behineko lanak",
+        "relacionada": "Zikloarekin lotua",
+        "noRelacionada": "Zikloarekin lotu gabea",
+        "autonomo": "Jarduera autonomo gisa"
+      },
+      "jornadaActual": {
+        "noTrabaja": "Une honetan ez du lan egiten",
+        "parcial": "Lanaldi partzialean lan egiten du",
+        "completa": "Lanaldi osoan lan egiten du",
+        "autonomo": "Autonomoa / bere kontura"
+      },
+      "cotizaSeguridadSocial": "Gaur egun Gizarte Segurantzan kotizatzen du",
+      "aptitudPrincipal": {
+        "tecnica": "Teknikoa / praktikoa",
+        "analitica": "Analitikoa / ikertzailea",
+        "creativa": "Sortzailea / berritzailea",
+        "comercial": "Salmenta-gaitasuna / negoziatzailea",
+        "comunicativa": "Komunikatzailea / irakaslea",
+        "relacional": "Harremanetarakoa / soziala",
+        "emprendedora": "Ekintzailea / autonomoa",
+        "organizativa": "Antolatzailea / kudeatzailea"
+      },
+      "areaInteres": {
+        "desarrolloSoftware": "Software garapena / programazioa",
+        "sistemasInfraestructura": "Sistemak / azpiegitura",
+        "ciberseguridad": "Zibersegurtasuna",
+        "datosIA": "Datuak / AA / Machine Learning",
+        "disenoUX": "Diseinua / UX / multimedia",
+        "electronicaHardware": "Elektronika / hardwarea",
+        "atencionCliente": "Bezeroarentzako arreta / laguntza",
+        "gestionAdministracion": "Kudeaketa / administrazioa",
+        "sanidadCuidados": "Osasungintza / zainketak",
+        "industriaProduccion": "Industria / ekoizpena",
+        "otro": "Beste bat / oraindik zehaztu gabe"
+      },
+      "ambitoLaboral": {
+        "empresaGrande": "Enpresa handia / korporazioa",
+        "pyme": "ETE / enpresa ertaina",
+        "startup": "Startup / enpresa berri bat",
+        "administracionPublica": "Administrazio publikoa",
+        "ongSectorSocial": "GKE / gizarte-sektorea",
+        "autonomoFreelance": "Autonomoa / freelance",
+        "indiferente": "Berdin dio"
+      },
+      "preferenciaGeografica": {
+        "local": "Lokala / egungo hiria",
+        "nacional": "Nazionala (Espainia barruko mugikortasuna)",
+        "internacional": "Nazioartekoa",
+        "indiferente": "Berdin dio"
+      },
+      "idiomaEspanol": "Gaztelania (natiboa / jarioa)",
+      "idiomaIngles": "Ingelesa",
+      "idiomaFrances": "Frantsesa",
+      "idiomaAleman": "Alemana",
+      "idiomaPortugues": "Portugesa",
+      "idiomaOtro": "Beste hizkuntza bat",
+      "intencionAlTerminar": {
+        "empleoInmediato": "Berehala lan bila hastea",
+        "feoePracticasEmpresa": "FEOE / lankide-enpresan praktikak",
+        "cicloSuperior": "Beste ziklo batekin jarraitzea (GM→GS)",
+        "universidad": "Unibertsitatean jarraitzea",
+        "emprender": "Ekiten hastea / autoenplegua",
+        "sinDecidir": "Oraindik erabaki gabe"
+      },
+      "interesErasmus": "Nazioarteko FEOEarekiko interesa (Erasmus+)",
+      "interesBolsaEmpleo": "Ikastetxeko enplegu-poltsarekiko interesa",
+      "interesMentoria": "Ikasle ohien/profesionalen mentoretza nahi du",
+      "interesEmprender": "Negozio-ideia / proiektu propioa du",
+      "interesUniversidad": "FPren ondoren unibertsitatera sartzea baloratzen du",
+      "empresaIdentificada": "Jada interesekoa duen enpresa bat identifikatuta du",
+      "estadoInsercion": {
+        "enFormacion": "Oraindik prestakuntzan / zikloa martxan",
+        "enBusqueda": "Graduatua - lan bila modu aktiboan",
+        "empleadoEmpresa": "Enpresa batean enplegatuta",
+        "feoe": "FEOE / praktikak egiten",
+        "autoempleo": "Autoenplegua / autonomoa",
+        "sigueEstudiando": "Ikasten jarraitzen du (zikloa / unibertsitatea)",
+        "sinDatos": "Jarraipen-daturik gabe"
+      },
+      "relacionCiclo": {
+        "siDirectamente": "Bai, zuzenean lotuta",
+        "parcialmente": "Partzialki lotuta",
+        "noRelacionado": "Zikloarekin lotu gabea",
+        "noAplica": "Ez dagokio (ikasten jarraitzen du)"
+      },
+      "modalidadContrato": {
+        "indefinido": "Mugagabea",
+        "temporal": "Aldi baterakoa / obra eta zerbitzua",
+        "autonomo": "Autonomoa",
+        "practicas": "Praktikak / bekaduna",
+        "beca": "Beka",
+        "feoe": "FEOE kontratua"
+      },
+      "valoracionEgresado": {
+        "v1": "1 - Oso baxua",
+        "v2": "2 - Baxua",
+        "v3": "3 - Ertaina",
+        "v4": "4 - Altua",
+        "v5": "5 - Bikaina"
+      },
+      "familiaInformada": "Familia / legezko tutoreak jakinaren gainean",
+      "derivadoOrientador": "Ikastetxeko orientatzailera bideratua",
+      "informeEmitido": "Orientazio-txostena igorria"
+    },
+    "verificacion": {
+      "sinDatos": "Daturik ez",
+      "correcto": "Zuzena",
+      "advertencia": "Abisua",
+      "correctos": "Zuzenak",
+      "advertencias": "Abisuak"
+    },
+    "archivos": {
+      "activaFem": "Aktiboa",
+      "activoMasc": "Aktiboa",
+      "seleccionarArchivoCorrecto": "Hautatu fitxategi zuzena..."
+    },
+    "calendario": {
+      "tipoComplementaria": "Osagarria",
+      "tipoExtraescolar": "Eskolaz kanpokoa"
     }
   },
   "tablas": {
@@ -1270,7 +1526,8 @@
       "entidad": "Erakundea",
       "evaluacion": "Ebaluazioa",
       "raVinculados": "RA lotuak",
-      "trimestre": "Hiruhilekoa"
+      "trimestre": "Hiruhilekoa",
+      "id": "Id"
     },
     "calificaciones": {
       "instrumento": "Tresna",
@@ -1292,7 +1549,10 @@
       "horas": "Orduak",
       "objetivosGenerales": "Helburu orokorrak",
       "resultadosAprendizaje": "Ikaskuntzaren emaitzak",
-      "unidadDidacticaTrabajo": "Unitate didaktikoa edo lan-unitatea"
+      "unidadDidacticaTrabajo": "Unitate didaktikoa edo lan-unitatea",
+      "relevanciaCe": "Garrantzia",
+      "objAbrev": "Hel",
+      "evalAbrev": "EBAL."
     },
     "dashboard": {
       "imp": "Em.",
@@ -1318,7 +1578,9 @@
       "config": "Konfig",
       "descripcionIE": "Ebaluazio-tresnaren deskribapena (IE)",
       "instrumentoActividad": "Tresna eta jarduera",
-      "pctPond": "% Pond."
+      "pctPond": "% Pond.",
+      "criterio": "CE",
+      "cobertura": "Estaldura"
     },
     "legal": {
       "clave": "Gakoa",
@@ -1339,6 +1601,12 @@
       "organizacionAcceso": "Antolaketa eta sarbidea",
       "seguimientoCorreccion": "Jarraipena eta zuzenketa",
       "id": "Id"
+    },
+    "secuenciacion": {
+      "numAbrev": "Zk.",
+      "raCe": "RA/CE",
+      "iePct": "IE %",
+      "raCeSlash": "RA/CE"
     }
   },
   "campos": {
@@ -1347,7 +1615,7 @@
       "caracteristicasTitulo": "Ikasleen ezaugarriak",
       "alumnadoActivoTitulo": "Ikasle aktiboak ({{count}})",
       "alumnoLabel": "Ikaslea",
-      "asientoLibre": "Libre",
+      "asientoLibre": "Hutsik",
       "asientoOcupado": "Beteta",
       "boletinIndividualTitulo": "Kalifikazioen banakako txostena",
       "confirmDistribucionAlfabetica": "Ikasle guztiak automatikoki alfabeto-hurrenkeran esleitu nahi dituzu? Honek uneko banaketa gainidatziko du.",
@@ -1412,7 +1680,74 @@
       "tramoEdad_edad18a20": "18-20",
       "tramoEdad_edad21a25": "21-25",
       "tramoEdad_edad26mas": "26 edo gehiago",
-      "tramoEdad_menores18": "18 urte baino gutxiago"
+      "tramoEdad_menores18": "18 urte baino gutxiago",
+      "labelHoraInicio": "Hasiera-ordua",
+      "labelHoraFin": "Amaiera-ordua",
+      "labelParticipantes": "Parte-hartzaileak",
+      "conFichaSufijo": "fitxarekin",
+      "viaAccesoLabel": "Sarbide-bidea",
+      "aptitudLabel": "Gaitasuna",
+      "areaInteresLabel": "Interes-arloa",
+      "intencionTerminarLabel": "Amaitzean duen asmoa",
+      "insercionLabel": "Txertatzea",
+      "reunionesLabel": "Bilerak",
+      "sinAlumnadoFiltros": "Ez dago iragazkiekin bat datorren ikaslerik.",
+      "sinFichaBadge": "Fitxarik gabe",
+      "interesadoErasmus": "Erasmus+ programan interesatua",
+      "tieneIdeaNegocio": "Negozio-ideia badu",
+      "interesadoUniversidad": "Unibertsitatean interesatua",
+      "derivadoAlOrientador": "Orientatzailera bideratua",
+      "perfilSeccionTitulo": "Profila",
+      "motivoEleccionLabel": "Aukeraren arrazoia",
+      "experienciaPreviaLabel": "Aurretiko esperientzia",
+      "sectorExperienciaLabel": "Esperientzia-sektorea",
+      "trabajaActualmenteLabel": "Gaur egun lanean",
+      "empresaActualLabel": "Uneko enpresa",
+      "bolsaEmpleoBadge": "Enplegu-poltsa",
+      "erasmusBadge": "Erasmus+",
+      "emprenderBadge": "Ekintzailetza",
+      "mentoriaBadge": "Mentoretza",
+      "universidadBadge": "Unibertsitatea",
+      "empresaIdentificadaBadge": "Enpresa identifikatua",
+      "aspiracionesSeccionTitulo": "Asmoak",
+      "preferenciaLaboralLabel": "Lan-lehentasuna",
+      "movilidadGeograficaLabel": "Mugikortasun geografikoa",
+      "empresaObjetivoLabel": "Xede-enpresa",
+      "cicloGradoInteresLabel": "Ziklo / gradu interesgarria",
+      "seguimientoTutorSeccionTitulo": "Tutorearen jarraipena",
+      "reunionesCelebradasLabel": "Egindako bilerak",
+      "ultimaReunionLabel": "Azken bilera",
+      "familiaInformadaLabel": "Familia jakinaren gainean",
+      "derivadoOrientadorLabel": "Orientatzailera bideratua",
+      "informeEmitidoLabel": "Txostena igorria",
+      "mostrandoNAlumnado": "{{count}} ikasle erakusten",
+      "derivadosLabel": "Bideratuak",
+      "sinAlumnadoRegistradoCurso": "Ez dago ikaslerik erregistratuta ikasturte honetan.",
+      "coberturaFichasOrientacionTitulo": "Orientazio-fitxen estaldura",
+      "deTotalFichaCompletada": "{{total}} ikasletik {{con}}k fitxa osatua dute",
+      "sinDatosOrientacionAun": "Oraindik ez dago orientazio-daturik",
+      "completaFichasIndividualesPre": "Osatu banakako fitxak fitxan",
+      "individualTab": "Banakakoa",
+      "conExperienciaLaboralKpi": "Lan-esperientziarekin",
+      "interesErasmusKpi": "Erasmus+ programarekiko interesa",
+      "interesBolsaEmpleoKpi": "Enplegu-poltsarekiko interesa",
+      "conIdeaNegocioKpi": "Negozio-ideiarekin",
+      "intencionFinalizarCicloTitulo": "Zikloa amaitzean duen asmoa",
+      "aptitudPrincipalDetectadaTitulo": "Antzemandako gaitasun nagusia",
+      "areaInteresDominanteTitulo": "Interes-arlo nagusia",
+      "ambitoLaboralPreferidoTitulo": "Lan-esparru hobetsia",
+      "preferenciaGeograficaTrabajoTitulo": "Laneko lehentasun geografikoa",
+      "motivacionEleccionCicloTitulo": "Zikloa aukeratzeko arrazoia",
+      "distribucionExperienciaLaboralTitulo": "Aurretiko lan-esperientziaren banaketa",
+      "resumenPorAlumnadoTitulo": "Ikaslearen araberako laburpena",
+      "cargandoDatosAlumnado": "Ikasleen datuak kargatzen...",
+      "listaOficialTitulo": "Zerrenda ofiziala",
+      "numAlumnado": "{{count}} ikasle",
+      "nMenoresEdad": "{{count}} ikasle 18 urtetik beherakoa(k)",
+      "sinAlumnadoRegistradoAun": "Oraindik ez dago ikaslerik erregistratuta.",
+      "menorEdadBadge": "Adingabea",
+      "perfilGrupoLabel": "Taldearen profila",
+      "anosSeparador": "urte ·"
     },
     "evaluacion": {
       "informacionDesc": "Ebaluazio- eta kalifikazio-irizpideak nola ezagutarazten diren.",
@@ -1487,7 +1822,12 @@
       "tituloProcedimientosNormativos": "Prozedura arauemaileak",
       "topeCompensablesBadge": "Konpentsagarrien muga aktibo",
       "trimestreEvLabel": "{{periodo}} Eb.",
-      "udsLabel": "UDak:"
+      "udsLabel": "UDak:",
+      "calificarConRubricaTitulo": "Errubrikarekin kalifikatu",
+      "notaCalculada": "Kalkulatutako nota",
+      "notaSigadLabel": "Sigad nota (1-10, eskuzkoa / kalk.)",
+      "minAbrev": "Gutx",
+      "maxAbrev": "Geh"
     },
     "modulo": {
       "bibliografiaDesc": "Irakasleentzako eta ikasleentzako bibliografia nagusia.",
@@ -1643,7 +1983,10 @@
       "normativaAutonomica": "Erkidegoko araudia ({{comunidad}})",
       "normativaEstatal": "Estatuko araudia",
       "sinDocumentosAutonomicos": "Une honetan ez dago araudi-dokumenturik erkidego honetan.",
-      "sinDocumentosEstatales": "Une honetan ez dago estatuko araudi-dokumenturik."
+      "sinDocumentosEstatales": "Une honetan ez dago estatuko araudi-dokumenturik.",
+      "enPreparacion": "Prestatzen",
+      "cargandoNormativa": "Araudia kargatzen...",
+      "legislacionDocumentalTitulo": "Legislazio dokumentala"
     },
     "contexto": {
       "tituloContextoEscolar": "Eskola-testuingurua",
@@ -1665,7 +2008,9 @@
       "avisoModeloSimplificado": "2 eremu hauek \"Programazio nahikoa\" dokumentuari (Eredu Sinplifikatu ofiziala) dagozkio berariaz. Hutsik uzten badira, moduluaren gainerako datuetatik abiatuta testu lehenetsi zentzuzko bat automatikoki sortuko da.",
       "introduccion": "Sarrera",
       "udsModulo": "Moduluaren unitate didaktikoak",
-      "tituloAutoriaPublicidad": "Egiletza- eta publizitate-datuak"
+      "tituloAutoriaPublicidad": "Egiletza- eta publizitate-datuak",
+      "cargandoDatos": "Testuinguru-datuak kargatzen...",
+      "cargandoDatosMetodologia": "Metodologia-datuak kargatzen..."
     },
     "ai": {
       "analizandoDocumento": "Dokumentua analizatzen...",
@@ -1745,7 +2090,27 @@
       "seleccionaModuloDescripcion": "Hautatu modulua egitura zuzena duen programazio huts bat sortzeko (RA/CE katalogo ofizialetik).",
       "tipoCurso": "Ikastaroa",
       "tipoProgramacion": "Programazioa",
-      "tituloOption": "-- Titulua --"
+      "tituloOption": "-- Titulua --",
+      "usuarioDrive": "Drive erabiltzailea",
+      "driveDescripcion": "Gorde zure .fpp eta .fpc fitxategiak automatikoki Google-ren hodeian, edozein gailutatik eskuz deskargatu behar izan gabe atzitzeko.",
+      "conectado": "Konektatuta",
+      "noConectado": "Konektatu gabe",
+      "sincronizandoCon": "{{email}}(r)ekin sinkronizatzen",
+      "iniciaSesionGoogle": "Hasi saioa zure Google kontuarekin",
+      "autoguardadoAutomaticoTitulo": "Gordetze Automatikoa",
+      "autoguardadoAutomaticoDesc": "Automatikoki igotzen du Drive-ra aplikazioan \"Gorde\" sakatzen duzun bakoitzean.",
+      "credencialesOAuthTitulo": "OAuth kredentzialak",
+      "introduceClientIdPre": "Sartu",
+      "introduceClientIdPost": "zure Google Cloud proiektukoa, aplikazioa baimentzeko. Datu hori zure nabigatzailean gordetzen da modu seguruan.",
+      "clientIdPlaceholder": "Adib: 123456789-abcde.apps.googleusercontent.com",
+      "moduloDesconocido": "Modulu Ezezaguna",
+      "cursoDemoNombre": "DEMO Ikastaroa",
+      "usuarioMicrosoft": "Microsoft erabiltzailea",
+      "oneDriveDescripcion": "Gorde zure .fpp eta .fpc fitxategiak zure Microsoft OneDrive kontuan. (Azure ataritan izena ematea eskatzen du).",
+      "sincronizandoCuentaMicrosoft": "Microsoft kontuarekin sinkronizatzen",
+      "iniciaSesionMicrosoft": "Hasi saioa Microsoft-ekin",
+      "azureClientIdTitulo": "Azure Client ID",
+      "azureClientIdDesc": "Entra ID-n (Azure) erregistratutako zure Aplikazioaren Client ID-a."
     },
     "dashboard": {
       "altaBajaAlumnado": "Ikasleen alta eta baja",
@@ -1776,7 +2141,35 @@
       "progresoPorUD": "UDka aurrerapena",
       "reutilizarPrefijo": "Berrerabili",
       "reutilizarSufijo": "ikasturte berri baterako, zerotik hasi gabe.",
-      "sinDocencia": "Irakaskuntzarik gabe"
+      "sinDocencia": "Irakaskuntzarik gabe",
+      "sinClasesLectivas": "Ez dago eskolarik",
+      "udEnCursoLabel": "Uneko UD",
+      "ningunaUdActiva": "Ez dago UD aktiborik une honetan.",
+      "progresoUdLabel": "UDren aurrerapena",
+      "horasPrevistasLabel": "Aurreikusitako orduak",
+      "horasImpartidasLabel": "Emandako orduak",
+      "horasSinDocenciaLabel": "Irakaskuntzarik gabeko orduak",
+      "contenidosLabelDosPuntos": "Edukiak:",
+      "diaFestivo": "Jaieguna",
+      "eventoBadge": "Ekitaldia",
+      "festivoRazon": "Eskolarik gabeko eguna",
+      "horasLectivasCount": "{{count}} irakastordu",
+      "previsionSemanalDesc": "Modulu eta ikasgelan aurreikusitako saioen aste-banaketa.",
+      "previsionSemanalTitulo": "Asteko aurreikuspena",
+      "recursosLabelDosPuntos": "Baliabideak:",
+      "sinClasesPlanificadas": "Ez dago eskola aurreikusirik",
+      "sinHorarioLectivo": "Ez dago irakastordurik",
+      "sinSesionesHoy": "Ez daukazu gaurko saiorik aurreikusita moduluaren egutegiaren arabera.",
+      "tusClasesDeHoy": "Gaurko zure eskolak ({{fecha}})",
+      "deSesiones": "{{total}}-tik {{actual}} saio",
+      "diaNoLectivo": "Eskolarik gabeko eguna",
+      "semanaDelAl": "{{inicio}} - {{fin}} astea",
+      "desarrolloUnidadEnCursoTitulo": "Uneko unitatearen garapena",
+      "nSesionesParentesis": "({{count}} saio)",
+      "planificadoNDias": "Planifikatuta ({{count}} egun)",
+      "semanaAnterior": "Aurreko astea",
+      "semanaProxima": "Hurrengo astea",
+      "sesionesLabel": "Saioak: {{label}}"
     },
     "instrumentos": {
       "agenteEvaluacion": "Ebaluazio-agentea",
@@ -1785,7 +2178,62 @@
       "instrumentoLabel": "Tresna: {{id}} - {{desc}}",
       "recuperacionDescripcion": "Adierazi tresna honek errekuperazio-aldi batean kalifikatzen duen (R1, R2, Azkena).",
       "sirveParaRecuperacion": "Errekuperaziorako balio du?",
-      "tipoDatoEscala": "Datu mota eta eskala"
+      "tipoDatoEscala": "Datu mota eta eskala",
+      "sinRubricas": "Oraindik ez dago errubrikarik. Errubrika bat edozein tresnari esleitu dakioke bere \"Konfigurazio aurreratua\"tik, eta mailaka kalifikatu, zuzeneko nota batekin egin ordez.",
+      "sinNombre": "(izenik gabe)",
+      "criterios": "irizpide",
+      "nuevaRubricaTitulo": "Errubrika berria",
+      "editarRubricaTitulo": "Errubrika editatu",
+      "sumaPuntuacionMaxima": "Gehienezko puntuazioaren batura",
+      "sumaDebeSerDiez": "Irizpide guztien gehienezko puntuazioen baturak zehazki 10 izan behar du.",
+      "puntuacionMaxima": "Gehienezko puntuazioa",
+      "puntos": "Puntuak",
+      "criterioSinNiveles": "Irizpide honek oraindik ez du mailarik definituta.",
+      "rubricaSinCriterios": "Errubrika honek oraindik ez du irizpiderik definituta.",
+      "rubricaAsignada": "Esleitutako errubrika",
+      "rubricaDescripcion": "Errubrika bat esleitzen baduzu, tresna hori mailaka kalifikatu ahal izango da, zuzeneko nota batekin egin ordez.",
+      "sinRubrica": "-- Errubrikarik gabe --",
+      "unidadDidactica": "Unitate didaktikoa",
+      "unidadDidacticaDescripcion": "Tresna hau zein unitate didaktikori dagokion (\"Edukiak → UD\" taularako).",
+      "sinUnidadDidactica": "-- Esleitu gabe --",
+      "matrizCoberturaTitulo": "CE × Tresna estaldura-matrizea",
+      "matrizCoberturaSinDatos": "Gehitu Ebaluazio-irizpideak eta Tresnak, hemen zein CE geratzen diren ebaluatuko dituen tresnarik gabe ikusteko.",
+      "sinCobertura": "Estaldurarik gabe",
+      "modeloJegTitulo": "JEG eredua.",
+      "modeloJegDesc": "Instrumentua→Adierazlea→CE→RA→Modulua maila, PD+ren benetako egilearena (Javier Edo Gual) — aplikazioaren benetako kalifikazio-motorra da (boletinak, PDFa eta aktak barne). Erabilera arruntean ez da ezer ukitu behar hemen: Instrumentuak atalean CE bati buruzko jarduera bat markatzean, dagokion Adierazlea sortu eta pisua automatikoki banatzen da. Pantaila hau banaketa hori eskuz doitu nahi duenarentzat da (CE bakoitzeko hainbat adierazle, pisu desberdinak) edo automatikoki sortutakoa berrikusi nahi duenarentzat.",
+      "indicadoresPorCeTitulo": "Adierazleak Ebaluazio Irizpideka",
+      "primeroAnadeCriterios": "Lehenik gehitu Ebaluazio Irizpideak Curriculuma → RA eta CE Ponderazioa atalean.",
+      "sinIndicadoresTodavia": "Oraindik adierazlerik ez.",
+      "gruposEvaluacionTitulo": "Ebaluazio-taldeak (GEv)",
+      "gruposEvaluacionDesc": "Ikasle-azpitaldeak (adib. ebaluazio jarraituaren galera): GEv batekin markatutako instrumentu batek talde bereko ikasleentzat bakarrik balio du. Esleitu ikasle bakoitzaren GEv Ikasleak → Matrikula atalean.",
+      "nuevoGrupoPlaceholder": "Talde berria...",
+      "instrumentosModeloJegTitulo": "Instrumentuak (JEG eredua)",
+      "sinInstrumentosJegTodavia": "Oraindik JEG instrumenturik ez.",
+      "pesoGlobalLabel": "Pisu globala",
+      "indicadoresVinculadosLabel": "Lotutako adierazleak",
+      "calificacionesPorIndicadorTitulo": "Kalifikazioak adierazleka",
+      "anadeInstrumentosVinculaPrimero": "Gehitu instrumentuak eta lotu adierazleekin lehenik.",
+      "sinTitulo": "(izenbururik gabe)",
+      "recEvaluacion": "Berr. ({{evaluacion}})",
+      "evfe": "EvFE",
+      "rec": "Berr.",
+      "sinEvaluar": "Ebaluatu gabe",
+      "notaFinalMotorJeg": "Azken nota (JEG Motorra)",
+      "hojaAparteEvfeTitulo": "Orri bereizia: ohiz kanpoko azken ebaluazioa (EvFE)",
+      "hojaAparteEvfeDesc": "Bigarren deialdia — inoiz ez da goiko ohiko notarekin nahasten. EvFEn saiakerarik ez duen RA batek aurreko lerroaren emaitza heredatzen du.",
+      "notaFinalExtraordinariaLabel": "Ohiz kanpoko azken nota (EvFE)",
+      "faltanCriteriosEvaluacionTitulo": "Ebaluazio-irizpideak falta dira",
+      "faltanCriteriosEvaluacionDesc": "Lehenik gehitu Ebaluazio-irizpideak 'Matrizeak' fitxan.",
+      "instrumentosEvaluacionTrimestreTitulo": "Ebaluazio-tresnak - {{triNombre}}",
+      "detalleInstrumentosTrimestreDesc": "Hiruhileko honetarako antolatutako ebaluazio-tresnen xehetasuna.",
+      "numActividades": "{{count}} jarduera",
+      "actividadOriginalRecuperar": "Berreskuratu beharreko jatorrizko jarduera",
+      "sinNombreActividad": "Izenik gabe",
+      "metodoCalculoLabel": "Kalkulu-metodoa",
+      "evaluacionOrdinariaRecuperacion": "Ohiko ebaluazioa + berreskurapena (R1-RF) — {{apellidos}}",
+      "nInstrumentos": "{{count}} tresna",
+      "sumaPesos": "Batura: %{{pct}}",
+      "resumenPorTrimestresTitulo": "Ebaluazio-tresnen laburpena hiruhilekoka"
     },
     "matrices": {
       "atencionSobrescribirDescripcion": "Zure Didaktika Unitateak (UD/T), RA eta UD/T arteko erlazioa, eta RA-OG ekarpen-matrizea ordeztuko dira. Ziurtatu ados zaudela aplikatu aurretik.",
@@ -1794,6 +2242,674 @@
       "noHayPropuestasDescripcion": "Gaur egun ez dago egile edo argitaletxeen aurrez definitutako sekuentziaziorik {{moduleCode}} modulurako.",
       "propuestasEditorialesDescripcion": "Hautatu modulu honetarako aurrez definitutako proposamen bat ({{moduleCode}})",
       "propuestasEditorialesTitulo": "Argitaletxe / egileen proposamenak"
+    },
+    "catalogo": {
+      "tituloAcronimosGlosario": "Akronimoak eta glosarioa",
+      "sinResultadosParaBusqueda": "\"{{termino}}\" bilaketarako ez da emaitzarik aurkitu",
+      "confirmacionSobrescribirPropuesta": "⚠️ KONTUZ: Ekintza honek uneko moduluaren Unitate didaktikoak, Tresnak, Saioak, Zereginak eta testuinguruaren konfigurazioa gainidatziko ditu.\n\nZiur zaude jarraitu nahi duzula?",
+      "tituloCatalogoAutores": "Egile eta Argitaletxeen Katalogoa",
+      "descripcionCatalogoAutoresTexto1": "Arakatu txantiloi osoak (",
+      "descripcionCatalogoAutoresTexto2": ") argitaletxeek edo egileek modulurako proposatuak ",
+      "descripcionCatalogoAutoresTexto3": ". Proposamen horiek unitate didaktikoak, ebaluazio-tresnak eta gelako sekuentziak izan ditzakete.",
+      "tituloArchivosDisponibles": "Fitxategi erabilgarriak",
+      "buscandoPropuestas": "Proposamenak bilatzen...",
+      "sinArchivosFppTexto1": "Ez da fitxategirik aurkitu ",
+      "sinArchivosFppTexto2": " modulu honetarako zure Documentos/Autores karpetan.",
+      "cargandoContenidoPropuesta": "Proposamenaren edukia kargatzen...",
+      "tituloPrevisualizacionPropuesta": "Proposamenaren aurrebista",
+      "descripcionPrevisualizacionPropuesta": "Berrikusi edukia sartu aurretik. Zure programazioan inportatu ondoren nahi bezala editatu ahal izango duzu.",
+      "tituloModuloDidactico": "Modulu didaktikoa",
+      "labelContexto": "Testuingurua:",
+      "definido": "Definituta",
+      "noDefinido": "Definitu gabe",
+      "tituloMatricesOgRaCeUd": "OG → RA → CE → UD/T matrizeak",
+      "unidadesDidacticasPropuestas": "Proposatutako unitate didaktikoak:",
+      "sinDescripcion": "(Deskribapenik gabe)",
+      "labelMapeoRaOg": "RA-OG mapaketa:",
+      "incluido": "Barne hartuta",
+      "noIncluido": "Barne hartu gabe",
+      "tituloInstrumentosEvaluacion": "Ebaluazio-tresnak",
+      "instrumentosPredefinidos": "Aurrez definitutako tresnak.",
+      "tituloProgramacionAula": "Gelako programazioa",
+      "sesionesPlanificadas": "Planifikatutako saioak.",
+      "tareasCompetencialesDisenadas": "Diseinatutako zeregin konpetentzialak.",
+      "tituloNingunFicheroSeleccionado": "Ez da fitxategirik hautatu",
+      "descripcionSeleccionaArchivoFpp": "Hautatu `.fpp` fitxategi bat ezkerreko zerrendatik, zure programazioan sartu aurretik bere eduki osoa aurreikusteko.",
+      "tituloMapaCcaa": "LHko curriculuma duten Autonomia Erkidegoen mapa",
+      "instruccionMapaCcaa": "Egin klik erkidego batean bere xehetasunak ikusteko. Iturria: ",
+      "badgeDemo": "DEMO",
+      "mensajeSeleccionaCcaa": "Hautatu autonomia erkidego bat mapan bere informazio zehatza ikusteko.",
+      "tituloTablaComunidades": "Autonomia erkidegoen taula",
+      "badgeCiudadAutonoma": "Hiri Autonomoa",
+      "badgeCcaaSigla": "AE",
+      "fuentePrincipalLabel": "Iturri nagusia:",
+      "fuentePrincipalDescripcion": "— Hezkuntza eta Lanbide Heziketa Ministerioaren atari ofiziala.",
+      "infoCurriculosCcaaTexto1": "Autonomia erkidego bakoitzak bere LH curriculuma argitaratzen du bere aldizkari ofizialean. Aurreko estekek honako orrira eramaten dute: ",
+      "infoCurriculosCcaaEnfasis": "erkidego bakoitzeko curriculumak",
+      "infoCurriculosCcaaTexto2": " todofp.es-eko orrira, non lurralde bakoitzeko araudi espezifikoa kontsulta daitekeen.",
+      "infoCeutaMelillaEnfasis": "Ceuta eta Melilla",
+      "infoCeutaMelillaTexto": "k Ministerioaren curriculuma (BOE) zuzenean aplikatzen dute, hezkuntza arloan eskumenik transferitu gabe baitaude.",
+      "mapaSvgCreditoLabel": "SVG mapa:",
+      "mapaSvgCreditoTexto": "(CC-BY-4.0) — Victor Cazanave.",
+      "demoEntornoLabel": "🌍 DEMO ingurunea:",
+      "demoEntornoTexto": "Aplikazio honen adibide-datuek Aragoiko curriculuma (BOA) hartzen dute erreferentziatzat.",
+      "labelBoletinOficial": "Aldizkari Ofiziala",
+      "badgeComunidadAutonoma": "Autonomia Erkidegoa",
+      "cargandoIncual": "Katalogo Nazionaleko (INCUAL) datuak kargatzen...",
+      "labelFamiliaProfesional": "Lanbide Familia",
+      "gradoCTitulo": "C Maila",
+      "gradoCDesc": "(Ziurtagiriak)",
+      "gradoDTitulo": "D Maila",
+      "gradoDDesc": "(Zikloak)",
+      "gradoETitulo": "E Maila",
+      "gradoEDesc": "(Espezializazioa)",
+      "sinDatosIncualFamilia": "Ez da INCUAL daturik aurkitu {{familia}} familiarako",
+      "seleccionaFamiliaEstandares": "Hautatu lanbide familia bat bere konpetentzia-estandarrak ikusteko",
+      "tituloCrn": "Erreferentziazko Zentro Nazionalak (CRN)",
+      "labelAreasCrn": "Arloak:",
+      "labelTitularCrn": "Titularra:",
+      "tituloEcp": "Lanbide-konpetentzien estandarrak (ECP)",
+      "nivelEcpTitulo": "{{nivel}} maila ({{count}})",
+      "enlacePdf": "PDF",
+      "sinEstandaresNivel": "Ez dago {{nivel}} mailako estandarrik familia honetarako.",
+      "labelTitulo": "Izenburua",
+      "ciclosFormativosCount": "Prestakuntza-zikloak ({{count}})",
+      "sinCiclosRegistrados": "Ez dago prestakuntza-ziklorik erregistratuta.",
+      "detallesCurriculoBoa": "BOAren curriculumaren xehetasunak",
+      "fuenteNormativaLabel": "Arau-iturria",
+      "sinArticulosCargados": "Titulu honek oraindik ez ditu curriculumaren artikuluak datu-basean kargatuta.",
+      "sinTitulosFamilia": "Ez dago titulurik erregistratuta familia honetarako.",
+      "seleccionaFamiliaVerTitulos": "Aukeratu lanbide-familia bat bere tituluak ikusteko.",
+      "cursoLabelSufijo": "{{curso}} maila",
+      "numModulos": "{{count}} modulu",
+      "seleccionaFamiliaTituloModulos": "Aukeratu Familia bat eta Titulu bat, moduluak mailaka antolatuta ikusteko.",
+      "sinDatosCurricularesCargados": "Titulu honek oraindik ez ditu curriculum-datuak kargatuta.",
+      "modulosDisponiblesCuandoOficial": "Moduluak curriculum ofiziala eskuragarri dagoenean erakutsiko dira.",
+      "sinModulosTitulo": "Ez dago modulurik titulu honetarako.",
+      "labelModulo": "Modulua",
+      "seleccionaModuloVerRA": "Aukeratu modulu bat ikaskuntzaren emaitzak ikusteko.",
+      "tabResultadosAprendizaje": "Ikaskuntzaren emaitzak",
+      "tabCompetenciasAcreditables": "Egiaztagarri diren gaitasunak",
+      "criteriosEvaluacionLabel": "Ebaluazio-irizpideak",
+      "sinCompetenciasConvalidacion": "Modulu honek ez du erregistro ofizialean baliozkotzeko zuzeneko gaitasunik esleituta.",
+      "comunModulosTransversales": "Ohikoa da modulu transbertsaletan, proiektuan, FEOEn edo hizkuntzetan.",
+      "opcionesConvalidacionTitulo": "Baliozkotze-aukerak",
+      "convalidarPrefijo": "Modulu hau baliozkotzeko, honako hau bete behar duzu: ",
+      "convalidarAlguna": "bat",
+      "convalidarSufijo": " ondorengo aukeretatik (ez guztiak).",
+      "opcionNumero": "{{numero}}. aukera",
+      "debeAcreditarTodas": "Gaitasun HAUEK GUZTIAK egiaztatu behar dituzu:",
+      "debeAcreditarUna": "Gaitasun hau egiaztatu behar duzu:",
+      "conjuntoRequerido": "Beharrezko multzoa",
+      "tambienConvalidarias": "Aukera honekin, honako hau ere baliozkotuko zenuke: "
+    },
+    "curriculo": {
+      "sinUnidadesDidacticas": "Oraindik ez dago unitate didaktikorik definituta -- sortu itzazu \"Unitate didaktikoak\" fitxan.",
+      "contenidosUdDescripcion": "Unitate didaktikoak eduki-blokeka taldekatzen ditu, eta begi-kolpe batean erakusten du RA, helburu orokorrak, orduak eta ebaluazio-tresnekin duten harremana.",
+      "sinBloqueAsignado": "Blokerik esleitu gabe",
+      "bloqueContenido": "Eduki-blokea",
+      "contenidosPorUd": "Edukiak UDka",
+      "numHoras": "Ordu kop.",
+      "sinInstrumento": "esleitu gabe",
+      "avanceRaLabel": "RA aurrerapena",
+      "horasLectivasLabel": "Irakastorduak",
+      "sinUdsAsignadas": "Ez dago UDrik esleituta",
+      "sinRaDefinidos": "Ez dago ikaskuntza-emaitzarik (RA) definituta.",
+      "cargandoMatrices": "Matrizeak kargatzen...",
+      "confirmarAutocompletarPlanSesiones": "Ziur zaude saio-plana automatikoki bete nahi duzula? Honek UD guztien uneko saioak ordeztuko ditu.",
+      "totalSumaPctRa": "RA %-en batura guztira:",
+      "sinUnidadesDidacticasTitulo": "Ez dago unitate didaktikorik",
+      "sinUnidadesDidacticasDesc1": "Oraindik ez duzu Unitate didaktikorik (UD) sortu.",
+      "sinUnidadesDidacticasDesc2": "Saioak sekuentziatzeko, lehenik goiko UDak sortu behar dituzu.",
+      "unidadDidacticaSingular": "Unitate didaktikoa",
+      "leyendaCompletado": "Osatuta",
+      "leyendaEnCurso": "Martxan",
+      "leyendaPendiente": "Zain",
+      "progresoRelacionRaUdTitulo": "Ikaskuntza-emaitzen eta Ikas-lan-unitateen arteko aurrerapena eta harremana"
+    },
+    "header": {
+      "creaOAbreProgramacion": "Sortu edo ireki Programazio bat",
+      "creaOAbreCurso": "Sortu edo ireki Ikastaro bat"
+    },
+    "archivos": {
+      "programacionFallback": "Programazioa",
+      "nuevoSinGuardar": "Berria (gorde gabe)",
+      "archivoLocal": "Fitxategi lokala",
+      "programacionImportada": "Inportatutako programazioa",
+      "cursoImportado": "Inportatutako ikastaroa",
+      "breadcrumbArchivos": "Fitxategiak",
+      "breadcrumbSeguridadPrivacidad": "Segurtasuna eta pribatutasuna",
+      "modoDatosLabel": "Datu-modua:",
+      "avisoDemoDesc": "adibide-datuak ikusten ari zara. Ez da zure benetako ikastaroa eta ez da ezer diskoan gordetzen — aldatu ERREALAK aukerara zure fitxategiekin lan egiteko.",
+      "avisoRealDesc": "zure .fpg/.fpp/.fpc fitxategiekin ari zara lanean, zure ekipoan gordeta. Aldaketak benetan gordetzen dira.",
+      "gruposEjemploDobleClic": "Adibidezko taldeak. Klik bikoitza kargatzeko.",
+      "tusGruposDobleClic": "Gordetako zure taldeak. Klik bikoitza kargatzeko.",
+      "sinGruposDemo": "Ez da DEMO talderik aurkitu.",
+      "usaBotonEnlazarCarpeta": "Erabili beheko botoia laneko karpeta lotzeko.",
+      "sinGrupos": "Ez da talderik aurkitu.",
+      "programacionesTitulo": "Programazioak",
+      "dobleClicCargarProgramacion": "Klik bikoitza programazio bat kargatzeko.",
+      "sinProgramacionesDemo": "Ez da DEMO programaziorik aurkitu.",
+      "sinProgramaciones": "Ez da programaziorik aurkitu.",
+      "cursosTitulo": "Ikastaroak",
+      "dobleClicCargarCurso": "Klik bikoitza ikastaro bat kargatzeko.",
+      "sinCursosDemo": "Ez da DEMO ikastarorik aurkitu.",
+      "sinCursos": "Ez da ikastarorik aurkitu.",
+      "nubeLabel": "Hodeia",
+      "privacidadDisenoTitulo": "Zure pribatutasuna diseinuz",
+      "privacidadDisenoDesc": "Zure benetako datuak %100 zureak direla nola bermatzen den.",
+      "servidorCiegoTitulo": "1. Zerbitzaria itsua da",
+      "servidorCiegoDesc": "Gure hodeiko datu-baseak inoiz ez ditu gordetzen zure ikasleen datuak, zure programazioak edo sortzen duzun ezer. Web-zerbitzaria Katalogo Ofizialak (BOE/BOCAA) bidaltzeko soilik existitzen da. Ikusezina zara gure backend-arentzat.",
+      "cifradoLocalTitulo": "2. AES-256 zifratze lokal aurreratua",
+      "cifradoLocalDesc": "Zifratze lokala aktiba dezakezu. Fitxategi bat zure disko gogorrean edo hodeian gorde aurretik, zure gako nagusiarekin zifratzen da zure nabigatzailearen barruan.",
+      "establecerClaveLabel": "Ezarri segurtasun-gakoa (ez da inon gordetzen)",
+      "avisoOlvidoClave": "Gako hau ahazten baduzu eta fitxategi bat gordetzen baduzu, ezingo dizugu berreskuratzen lagundu.",
+      "defensaAtaquesTitulo": "3. Nabigatzailean egindako erasoen aurkako defentsa",
+      "defensaAtaquesDesc": "Edukiaren segurtasun-politika zorrotz bat (CSP) ezarri dugu hirugarrenen script maltzurrak blokeatzeko.",
+      "servidorBlindadoTitulo": "4. Zerbitzari babestua eta beti erabilgarri",
+      "servidorBlindadoDesc": "Gure backend zerbitzariak Rate Limiting delakoa dauka, moduluen katalogo ofizialera beti sarbidea izango duzula bermatuz.",
+      "seguridadRgpdTitulo": "Segurtasuna eta DBEO bermatuta",
+      "procesaInfoNavegador": "Cuaderno FP-k zure informazio konfidentzial guztia zure nabigatzailean bakarrik prozesatzen du. Zu zara zure fitxategien jabea.",
+      "ningunDatoNube": "Zure ikasleen daturik ez da hodeira bidaltzen, zure kontuko sinkronizazio baimendua erabiltzen ez baduzu izan ezik.",
+      "asegurateGuardar": "Ziurtatu \"Gorde\" sakatzen duzula laneko saioa amaitzean, azken aldaketak ez galtzeko.",
+      "validacionEnlacesTitulo": "Laneko eremuko esteken balioztatzea",
+      "todoCorrecto": "Dena zuzen!",
+      "sinEnlacesRotos": "Ez da esteka hondaturik detektatu zure karpeta lokaleko taldeetan.",
+      "enlacesRotosDetectados": "Honako esteka hondatuak detektatu dira Talde fitxategietan. Hori gertatzen da Windowsen zuzenean Programazio bat edo Ikastaro bat berrizendatu edo ezabatzen duzunean.",
+      "programacionNoEncontrada": "Programazioa ez da aurkitu:",
+      "cursoNoEncontrado": "Ikastaroa ez da aurkitu:"
+    },
+    "expediente": {
+      "tipoCalificacion": "Kalifikazioa",
+      "tipoAutoevaluacion": "Autoebaluazioa",
+      "tipoTutoria": "Tutoretza",
+      "tipoReclamacion": "Erreklamazioa",
+      "tipoAsistencia": "Asistentzia",
+      "tipoDiarioClase": "Klase egunkaria",
+      "sinAlumnadoActivoRegistrado": "Ez dago ikasle aktiborik erregistratuta ikastaro honetan.",
+      "sinEvidenciasTodavia": "Oraindik ebidentziarik ez",
+      "ningunAlumnadoSeleccionado": "Ez da ikaslerik hautatu"
+    },
+    "orientacion": {
+      "sinAlumnadoTitulo": "Ikaslerik ez",
+      "primeroRegistraAlumnadoPre": "Lehenengo erregistratu ikasleak fitxan",
+      "primeroRegistraAlumnadoPost": "Matrikula.",
+      "alumnadoActivoCount": "Ikasle aktiboak ({{count}})",
+      "tieneDatosOrientacion": "Orientazio-datuak ditu",
+      "nAnos": "{{n}} urte",
+      "edadNoRegistrada": "Adina erregistratu gabe",
+      "seccion1Titulo": "1. atala: Zikloaren motibazioa eta aukeraketa",
+      "motivoEleccionLabel": "Zikloa aukeratzeko arrazoia",
+      "viaAccesoLabel": "Ziklorako sarbide-bidea",
+      "cicloPrevioLabel": "Aurretiko zikloa edo ikasketak",
+      "cicloPrevioPlaceholder": "Adib. ASIR, DAW, SMR, Zientzietako Batxilergoa...",
+      "seccion2Titulo": "2. atala: Lan-esperientzia eta lan-egoera",
+      "experienciaPreviaLabel": "Aurretiko lan-esperientzia",
+      "sectorExperienciaLabel": "Aurretiko esperientziaren sektorea",
+      "sectorExperienciaPlaceholder": "Adib. Ostalaritza, Merkataritza, Teknologia, Osasungintza...",
+      "mesesExperienciaLabel": "Esperientzia-hilabete estimatuak",
+      "jornadaActualLabel": "Egungo lan-egoera",
+      "empresaActualLabel": "Egungo enpresa (badagokio)",
+      "empresaActualPlaceholder": "Enpresaren izena...",
+      "seccion3Titulo": "3. atala: Antzemandako interesak eta gaitasunak",
+      "aptitudPrincipalLabel": "Antzemandako gaitasun nagusia",
+      "areaInteresLabel": "Interes-eremu nagusia",
+      "ambitoLaboralPreferidoLabel": "Lan-esparru hobetsia",
+      "preferenciaGeograficaLabel": "Laneko kokapen geografikoaren lehentasuna",
+      "idiomasTrabajoTitulo": "Laneko hizkuntzak",
+      "obsAptitudesLabel": "Tutorearen behaketak gaitasun eta interesei buruz",
+      "obsAptitudesPlaceholder": "Deskribatu antzemandako indarguneak, hobetzeko arloak, talde-lanarekiko jarrera, ekimena, etab.",
+      "seccion4Titulo": "4. atala: Zikloa amaitzean dituen asmoak",
+      "intencionAlTerminarLabel": "Amaitzean duen asmo nagusia",
+      "empresaObjetivoLabel": "Helburuko enpresa edo sektorea (badu)",
+      "empresaObjetivoPlaceholder": "Adib. IKT tokiko enpresa, klinika propioa...",
+      "cicloSuperiorInteresLabel": "Goi-mailako zikloa / interesatzen zaion gradua",
+      "cicloSuperiorInteresPlaceholder": "Adib. DAM, ASIR, Informatika Ingeniaritza, ADE...",
+      "interesesEspecificosTitulo": "Interes zehatzak",
+      "seccion5Titulo": "5. atala: Laneratzea (zikloa amaitu ondoren)",
+      "seccion5InfoDesc": "Atal hau zikloa amaitzean edo graduatuen jarraipen gisa betetzen da.",
+      "estadoInsercionLabel": "Laneratze-egoera",
+      "relacionCicloLabel": "Lanaren eta zikloaren arteko lotura",
+      "empresaInsercionLabel": "Laneratze-enpresa",
+      "empresaInsercionPlaceholder": "Enpresaren izena...",
+      "puestoObtenidoLabel": "Lortutako lanpostua edo rola",
+      "puestoObtenidoPlaceholder": "Adib. Sareetako teknikaria, Jr garatzailea, IT laguntza...",
+      "fechaInsercionLabel": "Sarrera data",
+      "modalidadContratoLabel": "Kontratu mota",
+      "valoracionEgresadoLabel": "Graduatuaren balorazio orokorra (1-5)",
+      "obsInsercionLabel": "Txertatze-jarraipenari buruzko oharrak",
+      "obsInsercionPlaceholder": "Txertatze-prozesuari buruzko oharrak, zailtasunak, zikloaren osteko harremana...",
+      "seccion6Titulo": "6. atala: Tutorearen oharrak eta jarraipena",
+      "reunionesCelebradasLabel": "Egindako orientazio-bileren kopurua",
+      "fechaUltimaReunionLabel": "Azken bilera / elkarrizketaren data",
+      "fechaDerivacionLabel": "Orientatzailera bideratze-data",
+      "resumenOrientacionLabel": "Orientazio-laburpena (testu librea)",
+      "resumenOrientacionPlaceholder": "Idatzi hemen orientazioaren laburpena: hartutako erabakiak, ikasleekin eta familiarekin adostutakoa, hurrengo urratsak...",
+      "selectaAlumnadoDesc": "Hautatu ikasle bat ezkerreko zerrendatik."
+    },
+    "comun": {
+      "ningunAlumnadoSeleccionado": "Ez da ikaslerik hautatu",
+      "cargandoDocumentos": "Dokumentuak kargatzen...",
+      "directorioVacio": "Direktorioa hutsik dago.",
+      "sinCursoCargadoTitulo": "Ez dago ikastarorik kargatuta",
+      "sinCursoCargadoDesc": "Ikastaro-fitxategi bat ireki edo sortu behar duzu Fitxategiak atalean.",
+      "gestionDe": "{{activeTab}} kudeaketa",
+      "sinProgramacionCargadaTitulo": "Ez dago programaziorik kargatuta",
+      "sinProgramacionCargadaDesc": "Programazio fitxategi bat ireki edo sortu behar duzu zure Fitxategietan.",
+      "saltarAlContenidoPrincipal": "Joan eduki nagusira"
+    },
+    "verificacion": {
+      "entornoGeografico": "Ingurune geografikoa",
+      "entornoSocioeconomico": "Ingurune sozioekonomikoa",
+      "contextoEscolar": "Eskola-testuingurua",
+      "contingenciaProfesorado": "Kontingentzia (irakasleak)",
+      "contingenciaAlumnado": "Kontingentzia (ikasleak)",
+      "bibliografiaLabel": "Bibliografia",
+      "publicidadLabel": "Publizitatea",
+      "moduloDidacticoTitulo": "Modulu didaktikoa",
+      "sinDatosProgramacion": "Ez da programazio-daturik kargatu",
+      "moduloActivo": "Modulu aktiboa: {{id}}",
+      "horasSemanales": "Asteko orduak: {{h}} h",
+      "horasBoa": "BOA orduak: {{h}} h",
+      "udTitulo": "Unitate didaktikoak (UD)",
+      "sinUdDefinidas": "Ez dago UDrik definituta",
+      "udDefinidas": "{{count}} UD definituta",
+      "horasDeclaradas": "Adierazitako orduak: {{udHoras}} / {{moduloHoras}} h (modulukoak)",
+      "diferenciaHoras": "{{h}} h-ko aldea",
+      "horasCuadranCorrectamente": "Orduak ondo bat datoz",
+      "raTitulo": "Ikaskuntzaren emaitzak (RA)",
+      "sinRaDefinidos": "Ez dago RArik definituta",
+      "raDefinidos": "{{count}} RA definituta",
+      "ceTitulo": "Ebaluazio-irizpideak (CE)",
+      "sinCeDefinidos": "Ez dago CErik definituta",
+      "ceDefinidos": "{{count}} CE definituta",
+      "ceSinRa": "{{count}} CE RArik esleitu gabe",
+      "todosLosCeTienenRa": "CE guztiek dute RA",
+      "instrumentosIndicadoresTitulo": "Tresnak eta adierazleak",
+      "sinInstrumentosIndicadores": "Ez dago tresnarik edo adierazlerik",
+      "instrumentosIndicadoresCount": "{{instr}} tresna eta {{ind}} adierazle",
+      "indicadoresSinCe": "{{count}} adierazle CErik lotu gabe",
+      "todosLosIndicadoresEvaluanCe": "Adierazle guztiek CEren bat ebaluatzen dute",
+      "tareasCompetencialesTitulo": "Konpetentzia-zereginak",
+      "sinTareasDefinidas": "Ez dago zereginik definituta",
+      "tareasDefinidas": "{{count}} zeregin definituta",
+      "tareasSinRa": "{{count}} zeregin RArik lotu gabe",
+      "todasLasTareasTienenRa": "Zeregin guztiek dute RA",
+      "sesionesClaseTitulo": "Eskola-saioak",
+      "sinSesionesPlanificadas": "Ez dago saio planifikaturik",
+      "sesionesPlanificadasCount": "{{count}} saio planifikatuta",
+      "sesionesSinUd": "{{count}} saio UDrik esleitu gabe",
+      "todasLasSesionesTienenUd": "Saio guztiek dute UD",
+      "contextoModuloTitulo": "Moduluaren testuingurua",
+      "contextoAulaConfigurado": "Gelaren testuingurua konfiguratuta",
+      "sinDescripcionContexto": "Ez dago testuinguru-deskribapenik ez gela-konfiguraziorik",
+      "fpDualTitulo": "FP Duala",
+      "regimenDual": "Orokorra",
+      "dualIntensivoLabel": "Trinkoa",
+      "regimenTradicional": "Erregimen tradizionala (FP Duala konfiguratu gabe)",
+      "calidadEqavetTitulo": "EQAVET kalitatea",
+      "mejoraLabel": "Hobekuntza",
+      "sinIndicadoresEqavet": "Ez dago baloratutako EQAVET adierazlerik",
+      "identificacionPdTitulo": "Identifikazioa (PD+/pd=/pd- baterako)",
+      "centroProfesoradoFamiliaConfigurados": "Ikastetxea, irakasleak eta lanbide-familia konfiguratuta",
+      "camposRellenanPortada": "Eremu hauek PDren 3 ereduen azala betetzen dute",
+      "textosNarrativosTitulo": "Testu narratiboak (PD+/JEG)",
+      "textosRedactadosCount": "{{rellenos}} / {{total}} testu idatzita",
+      "todosLosTextosRedactados": "Testu narratibo guztiak idatzita daude",
+      "calendarioAcademicoTitulo": "Egutegi akademikoa",
+      "horarioSemanalDefinido": "Asteko ordutegia definituta",
+      "sinHorarioSemanal": "Asteko ordutegirik gabe",
+      "fechasEvaluacionConfiguradas": "Ebaluazio-datak konfiguratuta",
+      "sinFechasEvaluacion": "Ebaluazio-datarik gabe",
+      "sinAlumnadoRegistrado": "Ez dago ikaslerik erregistratuta",
+      "alumnosRegistrados": "{{count}} ikasle erregistratuta",
+      "registrosIncompletos": "{{count}} erregistro osatugabe (izenik/abizenik gabe)",
+      "todosLosRegistrosCompletos": "Erregistro guztiak osatuta",
+      "diarioAulaTitulo": "Ikasgelako egunkaria",
+      "seguimientoLabel": "Jarraipena",
+      "sinEntradasDiario": "Ez dago sarrerarik ikasgelako egunkarian",
+      "sesionesRegistradasDiario": "{{count}} saio erregistratuta egunkarian",
+      "sinCalificacionesIntroducidas": "Ez da kalifikaziorik sartu",
+      "faltanAlumnosEvaluar": "{{count}} ikasle daude ebaluatzeko",
+      "todosLosAlumnosTienenRegistro": "Ikasle guztiek dute kalifikazio-erregistroa",
+      "tutoriaAlertasTitulo": "Tutoretza eta alertak",
+      "sinEntradasTutoria": "Ez dago tutoretza-sarrerarik edo alertarik erregistratuta",
+      "entradasTutoriaRegistradas": "{{count}} tutoretza-sarrera erregistratuta",
+      "planoClaseTitulo": "Ikasgelaren planoa",
+      "sinAlumnosPlano": "Ez dago ikaslerik planoan kokatuta",
+      "alumnosUbicadosAulaVisual": "{{count}} ikasle kokatuta ikasgela birtualean",
+      "grupoTitulo": "Taldea",
+      "catalogoOficialTitulo": "Katalogo ofiziala (finkoa)",
+      "familiasProfesionalesLabel": "Lanbide-familiak",
+      "titulosTotalesLabel": "Titulu guztiak",
+      "gradoBasicoLabel": "Oinarrizko Gradua (GB/GM/GS)",
+      "gradoMedioLabel": "Erdi Maila (GB/GM/GS)",
+      "gradoSuperiorLabel": "Goi Maila (GB/GM/GS)",
+      "ficheroCargado": "Fitxategia kargatuta ({{origen}})",
+      "gradoLabel": "Maila",
+      "sinFamiliaTituloAsignados": "Oraindik ez da familiarik/titulurik esleitu. Joan Testuingurua > Identifikazioa atalera.",
+      "programacionDidacticaTitulo": "Programazio didaktikoa",
+      "programacionActivaLabel": "Programazio aktiboa:",
+      "cursoActivoTitulo": "Ikasturte aktiboa",
+      "cursoActivoLabel": "Ikasturte Aktiboa:",
+      "alumnosConRegistro": "{{count}} ikasle erregistratuta {{total}} posibletik ({{pct}})",
+      "dualGeneralLabel": "Orokorra",
+      "faltanCampos": "Falta: {{campos}}",
+      "indicadoresEqavetValorados": "EQAVET adierazle {{count}} baloratuta",
+      "sumaPesos": "Pisuen batura: %{{pct}} {{estado}}"
+    },
+    "secuenciacion": {
+      "contenidosLabel": "Edukiak",
+      "aspectosClaveLabel": "Alderdi gakoak",
+      "disenoTareaCompetencialTitulo": "Konpetentzia Zereginaren Diseinua",
+      "scenarioBriefingLabel": "Scenario / briefing (testuinguru profesionala)",
+      "scenarioBriefingDesc": "Lan-egoera sinesgarria, enkargu zehatza (adib. bezero baten mezu elektroniko bat, gorabehera tekniko bat).",
+      "formatoEntregaPlazosLabel": "Entrega-formatua eta epeak",
+      "formatoEntregaPlazosDesc": "Nola, noiz eta non entregatu behar den zeregina.",
+      "desarrolloTareaPasosLabel": "Zereginaren garapena (urratsak)",
+      "desarrolloTareaPasosDesc": "Ikasleek jarraitu behar dituzten urratsez urratseko jarraibideak.",
+      "evidenciasAGenerarLabel": "Sortu beharreko ebidentziak",
+      "evidenciasAGenerarDesc": "Zein produktu ukigarri edo erakustaldi ebaluatuko diren.",
+      "tareaLabel": "Zeregina",
+      "configuracionDetalladaUnidadTitulo": "Unitatearen konfigurazio zehatza",
+      "intencionEducativaLabel": "Asmo hezitzailea / testuinguruan kokatzea",
+      "intencionEducativaDesc": "Unitate honen justifikazio pedagogikoa, lanbide-profilarekiko lotura eta beharrezko aurretiko ezagutzak.",
+      "temporizacionDetalladaLabel": "Denboralizazio zehatza",
+      "temporizacionDetalladaDesc": "Ikasturteko epea, aurreikusitako datak eta beste UDekiko harremana.",
+      "agrupamientosMetodologiaLabel": "Taldekatzeak eta metodologia",
+      "agrupamientosMetodologiaDesc": "Gelaren antolaketa (talde handia, talde txikia, banakako lana).",
+      "transversalidadInnovacionLabel": "Zeharkakotasuna eta berrikuntza",
+      "transversalidadInnovacionDesc": "Unitate honetan digitalizazioa, iraunkortasuna, ekitatea edo DUA nola lantzen diren."
+    },
+    "calendario": {
+      "mesEnero": "Urtarrila",
+      "mesFebrero": "Otsaila",
+      "mesMarzo": "Martxoa",
+      "mesAbril": "Apirila",
+      "mesMayo": "Maiatza",
+      "mesJunio": "Ekaina",
+      "mesJulio": "Uztaila",
+      "mesAgosto": "Abuztua",
+      "mesSeptiembre": "Iraila",
+      "mesOctubre": "Urria",
+      "mesNoviembre": "Azaroa",
+      "mesDiciembre": "Abendua",
+      "diaLuCorto": "Al",
+      "diaMaCorto": "As",
+      "diaMiCorto": "Az",
+      "diaJuCorto": "Og",
+      "diaViCorto": "Or",
+      "diaSaCorto": "Lr",
+      "diaDoCorto": "Ig",
+      "cargandoCalendario": "Egutegia kargatzen...",
+      "fechasGeneralesTitulo": "Data orokorrak",
+      "horarioSemanalTitulo": "Asteko ordutegia",
+      "desfaseBoa": "BOArekiko desfasea ({{h_sem}} o/aste):",
+      "semanaLectivaTitulo": "Aste lektiboa",
+      "eval1Abrev": "1. Eb.",
+      "eval2Abrev": "2. Eb.",
+      "eval3Abrev": "3. Eb.",
+      "trimestresTitulo": "Hiruhilekoak",
+      "inicioLabel": "Hasiera",
+      "finLabel": "Amaiera",
+      "horasLectivasReales": "Benetako irakastorduak",
+      "tipoDualLabel": "Dual mota",
+      "dualGeneral": "Dual Orokorra",
+      "dualIntensiva": "Dual Intentsiboa",
+      "docenciaLabel": "Irakaskuntza",
+      "sinDocencia": "Irakaskuntzarik gabe",
+      "conDocencia": "Irakaskuntzarekin",
+      "inicioFeoeLabel": "FEOE hasiera",
+      "finFeoeLabel": "FEOE amaiera",
+      "horasDiaFeoeLabel": "FEOE orduak/eguna",
+      "festivosEventosTitulo": "Jaiegunak eta ekitaldiak",
+      "festivosEventosInstruccionesPre": "Sartu eskuz edo egin klik egutegian. Jaiegunek benetako zenbaketatik orduak baztertzen dituzte. Jaieguna eta Garrantzitsua independenteak dira: egun berak biak izan ditzake aldi berean. Honakoa duten lerroek",
+      "festivosEventosInstruccionesPost": "(Ikasturtearen/hiruhilekoaren hasiera/amaiera, FEOE) Datu orokorrak / FEOE aldia ataletik datoz — han editatzen dira, ez hemen.",
+      "hoyBadge": "Gaur"
+    },
+    "diario": {
+      "alumnadoActivoLabel": "Ikasle aktiboak",
+      "riesgoAltoLabel": "Arrisku altua",
+      "riesgoMedioLabel": "Arrisku ertaina",
+      "tasaAbandonoEstimadaLabel": "Uzte-tasa estimatua",
+      "sinAlertasAbandono": "Ez dago uzte-alertarik",
+      "todoAlumnadoParametrosNormales": "Ikasle aktibo guztiak parametro normalen barruan daude.",
+      "horasTotalesModulo": "Moduluaren guztizko orduak",
+      "asistenciaFecha": "Asistentzia: {{fecha}}"
+    },
+    "feoe": {
+      "score1": "1 · Ez gainditua",
+      "score2": "2 · Gaindituta",
+      "score3": "3 · Nabarmena",
+      "score4": "4 · Bikaina",
+      "criteriosDesignadosTitulo": "FEOErako izendatutako irizpideak",
+      "criteriosDesignadosDesc": "Markatu enpresan ebaluatzen diren CEak (XI b) eranskina) — enpresako tutoreak 1etik 4ra baloratzen ditu eta zuk emaitza beheko taulan transkribatzen duzu, ikasleka.",
+      "sinRaCe": "Oraindik ez dago RA/CErik kargatuta modulu honetan.",
+      "marcaAlMenosUnCe": "Markatu gutxienez CE bat goian, enpresaren balorazioak erregistratzen hasteko.",
+      "sinAlumnadoActivo": "Ez dago ikasle aktiborik erregistratuta ikastaro honetan.",
+      "alumnadoActivoCount": "Ikasle aktiboak ({{count}})",
+      "rellenaConBotonDesc": "Bete botoi batekin eta zuzendu eskuz behar dena — abiapuntu bat baino ez da, ez balio definitiboa.",
+      "sinEvaluar": "Ebaluatu gabe",
+      "mediaSuperiorA2": "Jardueren batez bestekoa > 2, XI b) Eranskinaren arabera",
+      "superado": "Gaindituta",
+      "mediaInferiorIgualA2": "Jardueren batez bestekoa ≤ 2, XI b) Eranskinaren arabera",
+      "noSuperado": "Gainditu gabe",
+      "observacionesTutorPlaceholder": "Enpresako tutorearen oharrak (aukerakoa)..."
+    },
+    "onboarding": {
+      "entendido": "Ulertuta!",
+      "siguiente": "Hurrengoa",
+      "anterior": "⬅ Aurrekoa",
+      "bienvenidaTitulo": "Ongi etorri Cuaderno FP-ra!",
+      "bienvenidaDesc": "Lau urratseko bira labur bat egingo dugu ahalik eta etekin handiena atera diezaiozun. Edonoiz salta edo itxi dezakezu.",
+      "navegacionTitulo": "Nabigazio nagusia",
+      "navegacionDesc": "Hemen dituzu tresna guztiak: Konfigurazioa, Modulua, Ikasleak eta Ebaluazioa.",
+      "guardarDeshacerTitulo": "Gorde eta Desegin",
+      "guardarDeshacerDesc": "Hemen eskuz gorde dezakezu, nahiz eta gordetze automatikoa egon. Desegin/Berregiteko geziak ere badituzu, edo Ctrl+S eta Ctrl+Z erabil ditzakezu.",
+      "pestanaArchivosTitulo": "Fitxategien Fitxa",
+      "pestanaArchivosDesc": "Hasteko, joan Fitxategiak atalera eta hautatu 'DEMO Datuak' beldurrik gabe arakatzeko."
+    },
+    "ayuda": {
+      "faq": {
+        "grupo1": {
+          "titulo": "1. Aurretiko kontzeptuak eta segurtasuna",
+          "q1": "Zer da Arkitektura Hibridoa (Local-First + Cloud)?",
+          "a1": "Arkitektura moderno bat erabiltzen da. Zure laneko datuak (ikasleak, notak) zure nabigatzailean lokalki prozesatzen dira, pribatutasun eta abiadura osoa bermatuz. Eragiketa astunak (PDF txostenak sortzea edo Adimen Artifizialarekin konexioa) modu seguruan zerbitzari zentral batean oinarritzen dira.",
+          "q2": "Non gordetzen dira nire datuak?",
+          "a2": "Zure Programazioaren eta zure Ikastaroen datuak zure nabigatzailean bertan daude (IndexedDB). Zuk kontrol osoa duzu haien gainean. Segurtasunagatik, gomendagarria da fitxategien esportazioa (BYOC) maiz erabiltzea Fitxategiak fitxatik.",
+          "q3": "Zein diferentzia dago 'Programazioa' eta 'Ikastaroa' artean?",
+          "a3": "Kontzeptu funtsezkoa da: 'Programazioa' zure txantiloi teorikoa da; lege hutsa dauka (ikaskuntza-emaitzak, ebaluazio-irizpideak) eta zure didaktika-unitateak (urtez urte berrerabilgarria). 'Ikastaroa' benetako instantzia da; ikasle talde jakin bat adierazten du, haragizkoa, ikasturte zehatz batean, bere notekin eta hutsegiteekin.",
+          "q4": "Zer gertatzen da nire nabigatzailearen datuak edo katxea ezabatzen baditut?",
+          "a4": "Nabigatzailearen katxe sakona ezabatzen baduzu aurretik zure datuak esportatu gabe, zure lana galduko duzu. Horregatik da funtsezkoa aldian-aldian 'Esportatu' botoia erabiltzea zure aurrerapena .json fitxategi batera gordetzeko, tokiko babeskopiak mantenduz.",
+          "q5": "Hainbat ordenagailutatik lan egin dezaket?",
+          "a5": "Bai. Institutuko ordenagailuaren eta zure ordenagailu eramangarri pertsonalaren artean zure ingurunea transferitzeko, A ordenagailuan zure aurrerapena 'Esportatu' egin eta B ordenagailuan 'Inportatu' sakatu besterik ez duzu egin behar."
+        },
+        "grupo2": {
+          "titulo": "2. 1. urratsa: Programazio didaktikoa",
+          "q1": "Eskuz sartu behar ditut BOEko RA eta CE guztiak?",
+          "a1": "Ez! Sistemak Katalogo ofizial bat du, zure moduluaren araudi legala (ikaskuntza-emaitzak eta irizpideak) automatikoki inportatzen duena. Zure Gradua eta zure Heziketa Zikloa hasierako Katalogo atalean aukeratu besterik ez duzu egin behar, eta sistemak zuretzat egingo du.",
+          "q2": "Zer esan nahi du RAk egiaztapenetan %100 batzen ez izateak?",
+          "a2": "Ebaluazio jarraitu matematikoak funtziona dezan, Ikaskuntza Emaitza (RA) bakoitzak 'pisu' edo garrantzi bat izan behar du. Modulu bateko RA guztien pisuen batura zehazki %100 izan behar da. Hau Programazioa > Curriculuma > 'RA eta CE' fitxan doitu behar duzu.",
+          "q3": "Nola konfiguratzen ditut ikasleek enpresan ematen dituzten orduak (FP Duala)?",
+          "a3": "Programazioa > Testuingurua > 'Identifikazioa' fitxan, aukeratu zure araubidea Duala Orokorra, Duala Intentsiboa edo Bat ere ez den. Ondoren, Programazioa > Testuingurua > 'FEOE eta araubide duala' fitxan, deskribatu enpresako prestakuntza hori nola antolatzen eta jarraitzen den. Zein Ikaskuntza Emaitza zehatz diren dual markatzeko, joan Programazioa > Curriculuma > 'RA eta CE' fitxara.",
+          "q4": "Zertarako balio du EQAVET atalak?",
+          "a4": "Europako etengabeko hobekuntza-zikloa zure programazioan integratzeko balio du. 'Hasiera' > 'Hobekuntza' fitxan aurkituko duzu. Ikasturte amaieran, kalitate-adierazleak autoebaluatzen dituzu eta hurrengo urterako hobekuntza-proposamenak idazten dituzu. Irakasleen autoebaluazio-errubrikak ANECAren DOCENTIA ereduari jarraitzen dio (ikus aneca.es/docentia), FPko praktikara egokituta.",
+          "q5": "Zein diferentzia dago jarduera osagarrien eta eskolaz kanpokoen artean?",
+          "a5": "Legez desberdinak dira: osagarriak irakastordutan izaten dira, curriculumari lotuta daude eta ebaluagarriak dira — zure programazio didaktikoaren parte dira. Eskolaz kanpokoak ordutegitik kanpo dira, borondatezkoak eta inoiz ez dira ebaluagarriak — ikastetxeko PGAn joaten dira, ez PDan; Metodologia > Zeharkakoak atalean erreferentzia gisa idatz ditzakezu hala ere, baina ez dute balio programazioan.",
+          "q6": "Zein diferentzia dago ebaluazio-tresna eta kalifikazio-tresnaren artean?",
+          "a6": "Ebaluazio Irizpide (CE) bakoitzeko bi gauza desberdin daude: ebaluazio-tresna ebidentzia sortzen duen jarduera da (proba objektibo bat, zeregin bat, ahozko defentsa bat...), eta kalifikazio-tresna ebidentzia hori puntuatzen duena da (errubrika bat, eskala bat, egiaztapen-zerrenda bat...). Tresnak atalean biak bereizita kodifika ditzakezu tresna bakoitza konfiguratzean."
+        },
+        "grupo3": {
+          "titulo": "3. 3. urratsa: Ikastaroa eta ikasleak sortzea",
+          "q1": "Ikasleak Séneca, Rayuela edo Excel bezalako plataformetatik inporta ditzaket?",
+          "a1": "Bai. 'Ikasleak' atalean zure klaseko zerrenda duen CSV (Excel) fitxategi bat inporta dezakezu. Bestela, taula adimendunak gelaxkak masiboki kopiatu eta itsasteko aukera ematen dizu, kalkulu-orri bat balitz bezala.",
+          "q2": "Zein segurtasun maila dute nire ikasleen datuek?",
+          "a2": "Zure tokiko fitxategiak inoiz ez dira gure zerbitzarira ateratzen nahi ez baduzu ('Lokalean gorde' erabiliz). Google Drive edo OneDriven gordetzea aukeratzen baduzu, fitxategia zure nabigatzailearen eta Microsoft/Google-ren zerbitzarien artean zuzenean transmititzen da. Tokiko zifratzea aktiba dezakezu fitxategia zure gako maisua izan ezean erabat irakurtezina izan dadin.",
+          "q3": "Aplikazioa babestuta dago hackeoen edo erorketen aurka?",
+          "a3": "Bai. Frontendak Eduki Segurtasun Politika (CSP) bat dauka, kode-injekzio erasoak (XSS) blokeatzen dituena zure tokiko datuak babesteko. Gainera, gure zerbitzariak 'Rate Limiting' (eskaeren mugaketa) du, zerbitzu-ukapen erasoak (DDoS) saihesten dituena, katalogo ofizialak beti eskuragarri egon daitezen behar dituzunean.",
+          "q4": "Nola banatzen ditut ikasleak fisikoki gelan?",
+          "a4": "'Ikasleak' atalaren barruan 'Gelaren plana' fitxa aurkituko duzu. Arbel bisual eta interaktibo bat da, non ikasleak beren mahaietara arrasta eta jaregin ditzakezun zure gelaren diseinu zehatza izateko.",
+          "q5": "Nola erabiltzen dut Uzte Alerten sistema?",
+          "a5": "Goiztiar prebentzio-panelak familiei deiak, diziplina-parteak edo orientazio-saileko bideratzeak erregistratzeko aukera ematen dizu, eskola-uzte arriskuan dauden ikasleentzat."
+        },
+        "grupo4": {
+          "titulo": "4. 5. urratsa: Eguneroko lana eta ebaluazioa",
+          "q1": "Zer da 'Geleko egunkaria'?",
+          "a1": "Zure eguneroko koadernoa da. Klaseko benetako saio bakoitzean gertatzen dena idazteko aukera ematen dizu: zein UD eman duzun, gorabeherarik izan den edo 'Irakaskuntzarik gabe' egunak markatzeko (greba edo klaustroak bezala) zure aurrerapenean ez kontatzeko.",
+          "q2": "Nola kalkulatzen da 'Hilabeteko plangintza' aurreikuspena?",
+          "a2": "Egunez egun kalkulatzen da, aplikazioan jadanik erregistratuta dituzun jaiegunen egutegiarekin eta asteko ordutegiarekin — ez da kalkulu proportzional bat, datu horiekin egindako kalkulu zehatza da. Aldatu egingo da ikasturteko egutegi ofiziala edo ordutegiaren azken banaketa oraindik osatu gabe badaude.",
+          "q3": "Nola pasatzen dut lista edo erregistratzen ditut asistentzia-hutsegiteak?",
+          "a3": "Jarraipena atalean 'Asistentzia' fitxa duzu. Zure ikasle guztiak ikusiko dituzu eta beren laukian klik bakar batekin Hutsegitea, Berandutza edo Hutsegite Justifikatua artean txandaka aldatu ahal izango duzu.",
+          "q4": "Nola ebaluatzen dut zeregin edo azterketa jakin bat?",
+          "a4": "Joan 'Jarraipena' atalera > 'Ikaslekako xehetasuna' fitxara jarduera bakoitzaren nota sartzeko, ikasle bakoitzeko. Azken nota automatikoki berkalkulatzen da RA eta CEen pisuen arabera.",
+          "q5": "Nola kalkulatzen da zehazki hiruhilekoko azken nota?",
+          "a5": "Sistemak Tresnetan jartzen dituzun kalifikazioak Adierazlearen pisuarekin gurutzatzen ditu (Ebaluazioa > Adierazleak blokea), eta horrek, era berean, Ebaluazio Irizpidearen (CE) pisua elikatzen du eta azkenik Ikaskuntza Emaitzarena (RA). Guztia denbora errealean.",
+          "q6": "Zer esan nahi dute koloreek (more, teal, laranja) agendan eta egutegi bisualean?",
+          "a6": "Atzeko planoko koloreek jarduera edo data bakoitza zein hiruhilekori (ebaluazioari) dagokion adierazten dute: 1. hiruhilekoa (more/malba), 2. hiruhilekoa (teal/urdin-berde), eta 3. hiruhilekoa (laranja/anber) — nahita gorririk edo urdinik gabe, tonu horiek Jaieguna eta Ekitaldia adierazteko gordeta baitaude."
+        },
+        "grupo5": {
+          "titulo": "5. Deskargak eta dokumentu ofizialak",
+          "q1": "Ikasleentzako txosten automatikoak sor ditzaket?",
+          "a1": "Bai. MagIAren 'Ikastaroa' fitxatik klase osorako PDF txosten masiboak edo lortutako Ebaluazio Irizpide bakoitzean oinarrituta nota justifikatzen duten banakako laburpen hiperzehatzak sor ditzakezu."
+        },
+        "grupo7": {
+          "titulo": "7. Laguntza teknikoa",
+          "q1": "Zer gertatzen da nire kontrol-panelaren grafikoak kargatzen ez badira?",
+          "a1": "Egiaztatu alboko barran 'Modu Errealak' aktibatuta duzula eta zure Taldea hautatuta duzula. Grafikoek zein ikaslerengana eta zein programaziotara zuzentzen diren jakin behar dute datuak aztertu ahal izateko.",
+          "q2": "Cuaderno FP mugikorrean erabil daiteke?",
+          "a2": "Diseinua erantzunkorra da eta egokitu egiten da, baina informazio-dentsitatea dela eta (ebaluazio-taula masiboak eta curriculum-matrizeak), gogor gomendatzen dizugu ordenagailu-pantailetan edo tableta handietan erabiltzea.",
+          "q3": "Aplikazioa oso motel dabil edo errore arraro bat antzeman dut",
+          "a3": "Saiatu orria erabat berritzen (F5 edo Ctrl+R). Errorea agertzen jarraitzen badu, esportatu zure datuak (.json) berehala jasotzeko eta jarri harremanetan laguntza-zerbitzuarekin, zure arazoa erreproduzitzeko urratsak zehaztuz."
+        }
+      },
+      "mapaAplicacionTitulo": "Aplikazioaren mapa (sitemap)",
+      "mapaAplicacionDescPre": "Cuaderno FParen antolaketa-egitura. Nabigazioaren benetako konfiguraziotik sortzen da (",
+      "mapaAplicacionDescPost": "), beraz ezin da bere aurreko bertsioa bezala zaharkituta geratu.",
+      "agrupamientoPreguntaTitulo": "Egokia al da uneko taldekatzea?",
+      "agrupamientoRespuestaPre": "Bai: abiapuntua argi bereizten du (",
+      "agrupamientoInicioDesc": ": Panela/Laguntza/Araudia/Katalogoa — noizbehinkako kontsultarako, taldea irekita egon beharrik gabe), laneko espazio aktiboa (",
+      "grupoLabel": "Taldea",
+      "agrupamientoGrupoDesc": ": Fitxategia/Agenda/Legala/MagIA — fitxategien kudeaketa, eguneroko agenda eta laguntza-tresnak), berrerabilgarria dena (",
+      "programacionLabel": "Programazioa",
+      "agrupamientoProgramacionDesc": ": Testuingurua/Curriculuma/Metodologia/Tresnak) eta urteari dagokion berariazkoa (",
+      "agrupamientoCursoDesc": ": Egutegia/Ikasleak/Jarraipena/Kalifikazioak).",
+      "errorCargandoContenido": "Errorea edukia kargatzean."
+    },
+    "calificaciones": {
+      "sinCursoNiProgramacionTitulo": "Ez dago ikastarorik ez programaziorik kargatuta",
+      "sinCursoNiProgramacionDesc": "Programazio eta ikastaro fitxategi bat ireki edo sortu behar duzu zure Fitxategietan.",
+      "cargandoDatosProgreso": "Aurrerapen akademikoaren datuak kargatzen..."
+    },
+    "inicio": {
+      "metodologiaEspecificaTitulo": "Metodologia espezifiko baten gainean eraikitako tresna",
+      "metodologiaEspecificaDesc": "Cuaderno FPk FParen lege berrira eguneratutako erreferentzia bibliografikoak, Hezkuntza Ikuskaritzaren orientabideak, erreferentziazko egile nagusiak eta hezkuntza-administrazioen gida ofizialak jarraitzen ditu: Ikaskuntzaren Emaitzak (RA) dira ardatz kausala, programazio didaktiko batean gainerako guztiak hortik eratorri behar duela ulertzen delako.",
+      "pasoIdentificacion": "Identifikazioa",
+      "pasoIntroduccionJustificacionNormativa": "Sarrera, justifikazioa eta araudia",
+      "pasoContextualizacion": "Testuingururatzea",
+      "pasoObjetivosCompetencias": "Helburuak eta gaitasunak",
+      "pasoCaracterIntermodularDual": "Izaera intermodularra eta duala",
+      "pasoContenidosCentradosRa": "RAn zentratutako edukiak",
+      "pasoSituacionesAprendizaje": "Ikaskuntza-egoerak",
+      "pasoMetodologiaInclusion": "Metodologia eta inklusioa",
+      "pasoEvaluacion": "Ebaluazioa (ikaskuntza / praktikak / salbuespenak)",
+      "pasoActividadesComplementarias": "Jarduera osagarriak",
+      "pasoAtencionDiversidadRecursos": "Aniztasunari arreta eta baliabideak",
+      "grupoTelegramTitulo": "Telegrameko talde ofiziala",
+      "grupoTelegramDesc": "Cuaderno FP doako web-aplikazioaren garapen eta probaketarako talde ofiziala. Bidali zure iradokizunak, jakinarazi akatsak edo lagundu zure Autonomia Erkidegoko curriculum ofiziala emanez.",
+      "contribuidoresCcaaTitulo": "Laguntzaileak Autonomia Erkidegoka",
+      "contribuidoresCcaaDesc": "Aipamen berezia Autonomia Erkidegoen curriculumak hobetzen eta integratzen laguntzen ari den irakasleriari",
+      "animateAContribuir": "Anima zaitez laguntzera!"
+    },
+    "legal": {
+      "datosTitular": "Titularraren datuak",
+      "condicionesUso": "Erabilera-baldintzak",
+      "propiedadIntelectual": "Jabetza intelektuala (LPI)",
+      "licenciasTitulo": "Lizentziak",
+      "codigoFuenteGplTitulo": "4a. Iturburu-kodea — GNU GPLv3",
+      "queImplicaTitulo": "Zer dakar?",
+      "copyleftTitulo": "Copyleft: Modu berean partekatu",
+      "verLicenciaCompletaGithub": "Ikusi lizentzia osoa GitHuben",
+      "contenidoMaterialesCcTitulo": "4b. Edukia eta materialak — CC BY-NC-SA 4.0",
+      "resumenPracticoTitulo": "Laburpen praktikoa irakasleentzat",
+      "modeloPrivacidadTitulo": "Local-first pribatutasun-eredua",
+      "privacidadAbsolutaTitulo": "Pribatutasun osoa jatorriz",
+      "responsableTratamientoTitulo": "Tratamenduaren arduraduna (DBEO)",
+      "dondeSeGuardanDatosTitulo": "Non gordetzen dira datuak?",
+      "derechosArcoTitulo": "Ikasleen eskubideak (ARCO)",
+      "seguridadTitulo": "Segurtasuna",
+      "baseLegalNormativaTitulo": "Oinarri legala eta aplikagarri den araudia",
+      "politicaCookiesTitulo": "Cookie-en politika",
+      "tecnologiasAlmacenamientoTitulo": "Erabilitako biltegiratze-teknologiak",
+      "detalleAlmacenamientoTitulo": "Biltegiratze lokalaren xehetasuna",
+      "contenidoThemeA11y": "Gai eta irisgarritasun hobespenak",
+      "duracionPersistente": "Iraunkorra",
+      "contenidoCatalogCache": "Katalogo ofizialak (zikloak, moduluak, RA/CE)",
+      "contenidoSessionData": "Saio-datuak eta moduluaren konfigurazioa",
+      "comoGestionarTitulo": "Biltegiratze lokala nola kudeatu",
+      "declaracionAccesibilidadTitulo": "Irisgarritasun-adierazpena",
+      "normativaAplicableTitulo": "Aplikagarri den araudia",
+      "estadoConformidadTitulo": "Egokitasun-egoera",
+      "medidasAdoptadasTitulo": "Hartutako irisgarritasun-neurriak",
+      "navegacionEstructuraTitulo": "Nabigazioa eta egitura",
+      "interaccionControlesTitulo": "Elkarrekintza eta kontrolak",
+      "personalizacionTitulo": "Pertsonalizazioa",
+      "excepcionesTitulo": "Salbuespenak eta bat ez datorren edukia",
+      "contactoInfoAccesibleTitulo": "Kontaktua eta informazio irisgarria eskatzeko"
+    },
+    "magia": {
+      "contextoDesc": "Inguruneari buruzko informazio orokorra eta ezaugarriak.",
+      "sinDocumentosApoyo": "Atal honetan oraindik ez dago laguntza-dokumenturik.",
+      "curriculoDesc": "Ikaskuntzaren emaitzen eta irizpideen gurutzaketa; UDen dokumentuak eta zereginak.",
+      "matrizRaUdTitulo": "RA ↔ UD matrizea",
+      "matrizRaUdDesc": "RAen eta Unitate Didaktikoekin duten harremanaren gurutzatutako taula.",
+      "sinUdDefinidas": "Ez dago Unitate Didaktikorik definituta.",
+      "tareaCompetencialTitulo": "Gaitasun-zeregina",
+      "sinTareasDefinidas": "Ez dago gaitasun-zereginik definituta.",
+      "metodologiaDesc": "Estrategia metodologikoak eta baliabideak.",
+      "instrumentosTitulo": "Tresnak",
+      "instrumentosDesc": "Ebaluazio-tresnen definizioa eta pisuak.",
+      "calendarioDesc": "Ordutegia, hiruhilekoak, jaiegunak eta ekitaldiak.",
+      "calendarioAcademicoDesc": "Ikasturtearen ikuspegi orokorra, datak, saioak eta ekitaldiekin.",
+      "alumnadoDesc": "Banakako fitxak eta gelan kokapena.",
+      "alumnadoUbicacionAulaTitulo": "Ikasleak. Gelan kokapena",
+      "distribucionUbicacionAulaDesc": "Ikasleen banaketa eta kokapena gelan.",
+      "progresoAlumnadoTitulo": "Ikasleen aurrerapena",
+      "generaInformeAvanceDesc": "Ikasleen aurrerapenari buruzko txostena sortzen du.",
+      "fichaIndividualTitulo": "Banakako fitxa",
+      "fichaIndividualDesc": "Ikasle baten matrikula + tutoretza fitxa, orientabide-bilera batera eramateko.",
+      "seguimientoLabel": "Jarraipena",
+      "seguimientoDesc": "Eskolen egunkaria, UDka sekuentziazioa eta hileroko plangintza.",
+      "seguimientoDiarioTitulo": "Eguneroko jarraipena",
+      "seguimientoDiarioDesc": "Eguneroko plangintzaren erregistro xehatua.",
+      "clasesPorUdTitulo": "UDka eskolak",
+      "clasesPorUdDesc": "Unitate didaktiko bakoitzaren saioen sekuentziazioa.",
+      "planificacionTitulo": "Plangintza",
+      "planificacionDesc": "Hileroko denbora-banaketa (aurreikusita/emanda) UDka.",
+      "calificacionesDesc": "Buletinak, ebaluazio-aktak eta txostenak ikasleka.",
+      "boletinDelTrimestre": "{{trimestre}}. buletina",
+      "evaluacionFinalExtraordinariaTitulo": "Ohiz kanpoko azken ebaluazioa",
+      "evaluacionFinalOrdinariaTitulo": "Ohiko azken ebaluazioa"
+    },
+    "seguimiento": {
+      "cargandoDatosSeguimiento": "Jarraipen-datuak kargatzen..."
     }
-  }
+  },
+  "t1": "1. hiruhilekoa",
+  "t2": "2. hiruhilekoa",
+  "t3": "3. hiruhilekoa",
+  "festivo": "Jaieguna",
+  "evento": "Ekitaldia",
+  "festivos": "Jaiegunak",
+  "eventos": "Ekitaldiak",
+  "nombre_festivo": "Jaiegunaren izena...",
+  "desc_evento": "Ekitaldiaren deskribapena...",
+  "anadir": "Gehitu",
+  "cancelar": "Ezeztatu",
+  "table": {
+    "fecha": "Data",
+    "hasta": "Arte"
+  },
+  "fecha": "Data",
+  "hasta_opc": "Arte (aukerakoa)",
+  "sin_eventos": "Oraindik ez dago jaiegun edo ekitaldirik. Gehitu bat gainean."
 }

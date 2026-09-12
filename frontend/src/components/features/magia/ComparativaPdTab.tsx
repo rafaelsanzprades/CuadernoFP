@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { Card } from "@/components/ui/Card";
+import { useTranslation } from "react-i18next";
 
 const markdownComponents = {
   h1: ({ node, ...props }: any) => <h1 className="text-heading font-extrabold text-foreground mb-6 pb-2 border-b border-white/10" {...props} />,
@@ -24,6 +25,7 @@ const markdownComponents = {
 };
 
 export function ComparativaPdTab() {
+  const { t } = useTranslation();
   const [content, setContent] = useState<string | null>(null);
 
   useEffect(() => {
@@ -33,7 +35,7 @@ export function ComparativaPdTab() {
       .then(text => setContent(text))
       .catch(err => {
         console.error(err);
-        setContent("Error cargando el contenido.");
+        setContent(t('campos.ayuda.errorCargandoContenido', {defaultValue: 'Error cargando el contenido.'}));
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -58,7 +60,7 @@ export function ComparativaPdTab() {
         }
       `}</style>
       {content === null ? (
-        <div className="flex justify-center p-8 text-muted">Cargando...</div>
+        <div className="flex justify-center p-8 text-muted">{t('common.cargando', {defaultValue: 'Cargando...'})}</div>
       ) : (
         <div className="markdown-body pd-comparativa prose prose-invert max-w-none prose-h2:text-info prose-h3:text-success prose-td:border-foreground/10 prose-th:border-foreground/20 prose-table:border-collapse prose-table:w-full">
           <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={markdownComponents}>

@@ -1,11 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import { Compass, ClipboardList, BarChart } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { OrientacionIndividualTab } from "./OrientacionIndividualTab";
 import { ResumenProfesionalTab } from "./ResumenProfesionalTab";
 import { TendenciasProfesionalTab } from "./TendenciasProfesionalTab";
 
 export function PerfilProfesionalTab() {
+  const { t } = useTranslation();
   const [view, setView] = useState<"individual" | "resumen" | "tendencias">("individual");
 
   return (
@@ -15,19 +17,19 @@ export function PerfilProfesionalTab() {
           onClick={() => setView("individual")}
           className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${view === "individual" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
         >
-          <Compass className="w-4 h-4" /> Individual
+          <Compass className="w-4 h-4" /> {t('botones.alumnado.perfilProfesionalIndividual', {defaultValue: 'Individual'})}
         </button>
         <button
           onClick={() => setView("resumen")}
           className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${view === "resumen" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
         >
-          <ClipboardList className="w-4 h-4" /> Resumen
+          <ClipboardList className="w-4 h-4" /> {t('botones.alumnado.perfilProfesionalResumen', {defaultValue: 'Resumen'})}
         </button>
         <button
           onClick={() => setView("tendencias")}
           className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${view === "tendencias" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
         >
-          <BarChart className="w-4 h-4" /> Tendencias
+          <BarChart className="w-4 h-4" /> {t('botones.alumnado.perfilProfesionalTendencias', {defaultValue: 'Tendencias'})}
         </button>
       </div>
 

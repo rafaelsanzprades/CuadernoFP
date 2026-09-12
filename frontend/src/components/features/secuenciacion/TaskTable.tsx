@@ -11,9 +11,9 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
     <div className="overflow-x-auto">
       <div className="w-full text-body">
         <div className="flex text-muted border-b border-[var(--glass-border)] pb-2 mb-2 items-center">
-          <div className="w-16">Id</div>
-          <div className="w-48 pr-2">RA/CE</div>
-          <div className="flex-1 pr-2">Tarea</div>
+          <div className="w-16">{t('tablas.calendario.id', {defaultValue: 'Id'})}</div>
+          <div className="w-48 pr-2">{t('tablas.secuenciacion.raCeSlash', {defaultValue: 'RA/CE'})}</div>
+          <div className="flex-1 pr-2">{t('campos.secuenciacion.tareaLabel', {defaultValue: 'Tarea'})}</div>
           <div className="w-10"></div>
         </div>
         <div className="space-y-2">
@@ -61,7 +61,7 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
                 {/* Segunda Línea: Identada y con Contexto e Instrumento */}
                 <div className="flex items-center gap-4 pl-16">
                   <div className="flex-1 flex flex-col">
-                    <span className="text-caption text-muted-foreground tracking-wider mb-1 font-semibold">Contexto</span>
+                    <span className="text-caption text-muted-foreground tracking-wider mb-1 font-semibold">{t('nav.contexto', {defaultValue: 'Contexto'})}</span>
                     <input 
                       type="text"
                       value={tc.Reto || ""}
@@ -70,7 +70,7 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
                     />
                   </div>
                   <div className="flex-1 flex flex-col pr-10">
-                    <span className="text-caption text-muted-foreground tracking-wider mb-1 font-semibold">Instrumento</span>
+                    <span className="text-caption text-muted-foreground tracking-wider mb-1 font-semibold">{t('tablas.calificaciones.instrumento', {defaultValue: 'Instrumento'})}</span>
                     <select
                       value={tc.Instrumento || ""}
                       onChange={(e) => handleUpdateTarea(globalIdx, "Instrumento", e.target.value)}

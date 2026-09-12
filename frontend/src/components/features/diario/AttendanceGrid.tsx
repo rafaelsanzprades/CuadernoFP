@@ -3,16 +3,18 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { MotionWrapper } from '@/components/ui/MotionWrapper';
 import { format, subDays, addDays } from 'date-fns';
-import { es } from 'date-fns/locale';
 import toast from 'react-hot-toast';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { useTranslation } from 'react-i18next';
+import { useDateFnsLocale, useDateFormatPatterns } from '@/hooks/useDateFnsLocale';
 
 type AttendanceStatus = 'presente' | 'falta' | 'retraso' | null;
 
 export const AttendanceGrid = () => {
   const { cursoData, activeModuleId, dataSource } = useAppStore();
   const { t } = useTranslation();
+  const dateFnsLocale = useDateFnsLocale();
+  const dateFormats = useDateFormatPatterns();
   const isDemo = dataSource === 'demo';
   const [currentDate, setCurrentDate] = useState(isDemo ? new Date(new Date().getFullYear(), 4, 2, 10, 0, 0) : new Date());
   const [attendanceData, setAttendanceData] = useState<Record<string, AttendanceStatus>>({});
@@ -112,11 +114,11 @@ export const AttendanceGrid = () => {
         </button>
         <div className="flex items-center gap-4">
           <h2 className="text-subheading font-bold">
-            Asistencia: {format(currentDate, "EEEE d 'de' MMMM", { locale: es })}
+            {t('campos.diario.asistenciaFecha', {fecha: format(currentDate, dateFormats.weekdayDayMonth, { locale: dateFnsLocale }), defaultValue: 'Asistencia: {{fecha}}'})}
           </h2>
           {menores > 0 && (
             <span className="text-danger font-semibold text-body flex items-center gap-1.5 bg-danger/10 px-3 py-1 rounded-full border border-danger/30">
-              <AlertCircle className="w-4 h-4" /> {menores} alumnado(s) menor(es) de 18 años
+              <AlertCircle className="w-4 h-4" /> {t('campos.alumnado.nMenoresEdad', {count: menores, defaultValue: '{{count}} alumnado(s) menor(es) de 18 años'})}
             </span>
           )}
         </div>

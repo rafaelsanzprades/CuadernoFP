@@ -101,6 +101,14 @@
       "autoevaluacion": {
         "desc": "Autoavaliación do alumnado por criterio de avaliación (SI/Dúbidas/NON) e dificultades declaradas.",
         "label": "Autoavaliación"
+      },
+      "perfilProfesional": {
+        "label": "Perfil profesional",
+        "desc": "Orientación profesional por alumno/a: motivación, experiencia laboral, aptitudes, aspiracións e inserción post-ciclo."
+      },
+      "expediente": {
+        "label": "Expediente",
+        "desc": "Liña temporal de evidencias por alumno/a: cualificacións, autoavaliación, titoría, reclamacións, asistencia e diario de clase."
       }
     },
     "seguimiento": {
@@ -119,6 +127,10 @@
       "detalle": {
         "label": "Detalle por alumnado",
         "desc": "Entrada de notas numéricas por alumnado, instrumento de avaliación e nivel de adquisición de RA."
+      },
+      "feoeEmpresa": {
+        "label": "FEOE / Empresa",
+        "desc": "Avaliación do alumnado na empresa durante a FEOE (Anexo XI b), transcrita por RA/CE."
       }
     },
     "calificaciones": {
@@ -138,7 +150,12 @@
         "desc": "Desempeño e estatísticas comparativas do grupo, e folla de progreso individual para titorías."
       },
       "reclamaciones": {
-        "label": "Reclamacións"
+        "label": "Reclamacións",
+        "desc": "Reclamacións de nota presentadas polo alumnado, co seu motivo e resolución."
+      },
+      "boletines": {
+        "label": "Boletíns",
+        "desc": "Boletín individual de cualificacións en pantalla, con radar e barras de nivel de logro por RA."
       }
     },
     "contexto": {
@@ -175,6 +192,10 @@
       "competenciales": {
         "label": "Tarefas competenciais",
         "desc": "Deseño e planificación de tarefas e actividades competenciais."
+      },
+      "contenidosUd": {
+        "label": "Contidos → UD",
+        "desc": "Táboa de contidos por unidade didáctica agrupados en bloques, coa súa relación con RA, obxectivos xerais, horas e instrumentos de avaliación."
       }
     },
     "metodologia": {
@@ -207,6 +228,15 @@
       },
       "tri3": {
         "desc": "Instrumentos de avaliación planificados para o 3º trimestre."
+      },
+      "rubricas": {
+        "nav": "Rúbricas",
+        "desc": "Rúbricas reutilizables: define criterios (que deben sumar 10 puntos entre todos) e niveis de desempeño, e asígnaas a calquera instrumento desde a súa Configuración avanzada.",
+        "titulo": "Rúbricas de avaliación"
+      },
+      "jeg": {
+        "nav": "Modelo JEG",
+        "desc": "Modelo JEG por indicadores: configuración do motor de cualificación real da app."
       }
     },
     "archivos": {
@@ -378,7 +408,8 @@
     "normativa": "Documentos",
     "instrumentos": "Instrumento",
     "calidad": "Calidade",
-    "mejora": "Mellora"
+    "mejora": "Mellora",
+    "grupos": "Grupos"
   },
   "navGroups": {
     "inicio": "Inicio",
@@ -406,7 +437,8 @@
     "sincronizado": "Sincronizado",
     "guardando": "Gardando...",
     "guardado": "Gardado",
-    "error": "Errorea"
+    "error": "Errorea",
+    "settings": "Configuración"
   },
   "pages": {
     "agenda_title": "Axenda",
@@ -470,7 +502,10 @@
     "siguiente": "Seguinte",
     "tipo": "Tipo",
     "total": "Total",
-    "volver": "Volver"
+    "volver": "Volver",
+    "editar": "Editar",
+    "eliminar": "Eliminar",
+    "cargando": "Cargando..."
   },
   "navDesc": {
     "inicio": "Panel principal, contribucións da comunidade, documentos de referencia e calidade EQAVET.",
@@ -580,7 +615,8 @@
       "errorGuardarPropuesta": "Erro ao gardar tras aplicar a proposta.",
       "planAutocompletado": "Plan de sesións autocompletado.",
       "programacionGuardada": "Programación gardada correctamente.",
-      "propuestaAplicada": "Proposta de {{author}} aplicada e gardada."
+      "propuestaAplicada": "Proposta de {{author}} aplicada e gardada.",
+      "repartidoPorRelevancia": "Pesos recalculados a partir da Relevancia de cada CE."
     },
     "detalleAlumnado": {
       "errorInformeRefuerzo": "Erro ao xerar o informe de reforzo."
@@ -601,7 +637,12 @@
       "sinDemo": "Non podes sincronizar con Drive en modo DEMO."
     },
     "header": {
-      "paletaNoImplementada": "Paleta de comandos aínda non implementada."
+      "paletaNoImplementada": "Paleta de comandos aínda non implementada.",
+      "conflictoVersionesTitulo": "Conflito de versións",
+      "conflictoVersionesDesc": "Os datos están desactualizados. Recarga a páxina, por favor.",
+      "guardadoConExitoTitulo": "Gardado correctamente",
+      "datosActualizadosDesc": "Datos actualizados.",
+      "revisaConexionDatosDesc": "Revisa a conexión ou os datos."
     },
     "inicio": {
       "estructuraGuardada": "Estrutura gardada."
@@ -658,6 +699,10 @@
     },
     "udConfig": {
       "errorExportar": "Erro ao exportar a unidade didáctica."
+    },
+    "comun": {
+      "errorGuardar": "Erro ao gardar",
+      "guardadoCorrectamente": "Gardado correctamente"
     }
   },
   "botones": {
@@ -672,7 +717,10 @@
       "importarCsv": "Importar CSV",
       "imprimirBoletin": "Imprimir boletín",
       "pulsaAnadirRegistro": "Engadir rexistro",
-      "vaciarPlano": "Baleirar o plano"
+      "vaciarPlano": "Baleirar o plano",
+      "perfilProfesionalIndividual": "Individual",
+      "perfilProfesionalResumen": "Resumo",
+      "perfilProfesionalTendencias": "Tendencias"
     },
     "archivos": {
       "cambiarCarpetaLocal": "Cambiar cartafol local",
@@ -717,7 +765,9 @@
       "aplicarPropuesta": "Aplicar proposta",
       "autocompletarPlan": "Autocompletar plan",
       "cargarPropuestaEditorial": "Cargar proposta editorial",
-      "volverALaLista": "Volver á lista"
+      "volverALaLista": "Volver á lista",
+      "descargarPdfMagia": "Descargar PDF/DOCX en MagIA",
+      "repartirPorRelevancia": "Repartir por relevancia"
     },
     "dashboard": {
       "abriendo": "Abrindo...",
@@ -743,7 +793,8 @@
     },
     "evaluacion": {
       "generarInforme": "Xerar informe",
-      "restaurarNotasReales": "Restaurar a notas reais"
+      "restaurarNotasReales": "Restaurar a notas reais",
+      "volverASigadCalculado": "Volver ao valor calculado"
     },
     "header": {
       "altoContraste": "Alto contraste",
@@ -763,7 +814,12 @@
       "crearRecuperacion": "Crear recuperación",
       "crearRecuperacionTri": "Crear recuperación ({{tri}})",
       "desmarcarTodas": "Desmarcar todas",
-      "marcarTodas": "Marcar todas"
+      "marcarTodas": "Marcar todas",
+      "nuevaRubrica": "Nova rúbrica",
+      "anadirNivel": "Engadir nivel",
+      "anadirCriterio": "Engadir criterio",
+      "dividirPorcentajes": "Dividir porcentaxes",
+      "anadir": "Engadir"
     },
     "magia": {
       "cerrarVisor": "Pechar visor",
@@ -772,7 +828,8 @@
       "editableDocx": "Editable .docx",
       "editableXlsx": "Editable .xlsx",
       "generandoDocx": "⏳ Xerando DOCX...",
-      "vistaPdf": "Vista .pdf"
+      "vistaPdf": "Vista .pdf",
+      "exportarExcelCompleto": "Exportar Excel completo"
     },
     "modulo": {
       "anadirAlumno": "Engadir alumno",
@@ -792,6 +849,34 @@
       "anadirSesionA": "Engadir sesión a {{id}}",
       "exportarBriefing": "Exportar briefing (PDF/DOCX)",
       "exportarFicha": "Exportar ficha (PDF/DOCX)"
+    },
+    "verificacion": {
+      "irA": "Ir a {{destino}}",
+      "configurarModulo": "Configurar módulo",
+      "anadirPrimeraUd": "Engadir primeira UD",
+      "anadirPrimerRa": "Engadir primeiro RA",
+      "revisarAsignaciones": "Revisar asignacións",
+      "importarDeEditorial": "Importar dunha editorial",
+      "crearPrimeraTarea": "Crear primeira tarefa",
+      "planificarSesiones": "Planificar sesións",
+      "anadirContexto": "Engadir contexto",
+      "configurarFpDual": "Configurar FP Dual",
+      "valorarCalidad": "Valorar calidade",
+      "completarIdentificacion": "Completar identificación",
+      "redactarTextos": "Redactar textos",
+      "configurarCalendario": "Configurar calendario",
+      "anadirAlumnado": "Engadir alumnado",
+      "registrarPrimeraSesion": "Rexistrar primeira sesión",
+      "introducirNotas": "Introducir notas",
+      "registrarTutoria": "Rexistrar titoría",
+      "disenarAula": "Deseñar aula"
+    },
+    "feoe": {
+      "excelenteTodoA4": "Excelente (todo a 4)",
+      "suficienteTodoA3": "Suficiente (todo a 3)"
+    },
+    "inicio": {
+      "unirseTelegram": "Unirme ao grupo en Telegram"
     }
   },
   "placeholders": {
@@ -805,7 +890,10 @@
       "dificultadesOpcional": "Dificultades (opcional)",
       "edad": "idade",
       "nombre": "Nome...",
-      "telefono": "Teléfono"
+      "telefono": "Teléfono",
+      "participantesTutoria": "Quen estivo presente (alumno/a, familia, orientador/a...)",
+      "buscarAlumnado": "Buscar alumnado...",
+      "correoEjemplo": "correo@exemplo.com"
     },
     "archivos": {
       "buscarModulo": "Buscar por código ou nome do módulo...",
@@ -839,7 +927,8 @@
       "textoUdsModulo": "Descrición de como se organizan as unidades didácticas. Se se deixa baleiro, xérase automaticamente a partir de df_ud."
     },
     "curriculo": {
-      "peso": "Peso..."
+      "peso": "Peso...",
+      "bloqueContenido": "Sen asignar..."
     },
     "dashboard": {
       "ejModulo": "Ex: ELE203, 0237-ictve",
@@ -852,7 +941,11 @@
     "instrumentos": {
       "descripcionIndicador": "Descrición do indicador",
       "seleccionaIndicadores": "Selecciona indicadores...",
-      "tituloInstrumento": "Título do instrumento"
+      "tituloInstrumento": "Título do instrumento",
+      "nombreRubrica": "Nome da rúbrica",
+      "descripcionRubrica": "Descrición (opcional)",
+      "descripcionCriterio": "Descrición do criterio",
+      "descripcionNivel": "Descrición do nivel"
     },
     "modulo": {
       "a1Justificacion": "Indicar base normativa, leis de educación e reais decretos aplicables ao título...",
@@ -907,7 +1000,8 @@
     "alumnado": {
       "eliminarAlumnado": "Eliminar alumnado",
       "fechasCalculadasNacimiento": "Datas calculadas a partir de nacemento, relevantes para FEOE e maioría de idade",
-      "importarCsv": "Importar CSV (Nome, Apelidos...)"
+      "importarCsv": "Importar CSV (Nome, Apelidos...)",
+      "grupoEvaluacionGev": "Grupo de avaliación (GEv)"
     },
     "archivos": {
       "creaCursoGrupo": "Crea un curso e o seu arquivo de grupo asociado",
@@ -931,7 +1025,8 @@
       "eliminarCe": "Eliminar CE",
       "horasTotalesModulo": "Horas totais do módulo segundo currículo (BOA)",
       "sumaHorasSesiones": "Suma das horas de todas as sesións",
-      "sumaHorasUd": "Suma das horas asignadas a cada UD"
+      "sumaHorasUd": "Suma das horas asignadas a cada UD",
+      "recalcularPctRelevancia": "Recalcula o % de cada CE do RA a partir da súa Relevancia (−=metade, ==normal, +=dobre) — un CE sen relevancia marcada conta como ="
     },
     "dashboard": {
       "pctImpartidoPrevisto": "% impartido / previsto",
@@ -946,7 +1041,9 @@
       "maxValor": "Máx: {{valor}}",
       "mediaValor": "Media: {{valor}}",
       "minValor": "Mín: {{valor}}",
-      "topeCompensablesActivo": "O número de CE suspensos supera o máximo compensable deste módulo (Datos → Regras de arredondamento)"
+      "topeCompensablesActivo": "O número de CE suspensos supera o máximo compensable deste módulo (Datos → Regras de arredondamento)",
+      "calificarConRubrica": "Cualificar con rúbrica",
+      "notaSigadOverride": "Calcúlase só a partir da nota final ordinaria. Cámbiaa aquí a man se queres subila ou baixala sen tocar esa nota."
     },
     "header": {
       "uneteTelegram": "Únete ao noso grupo de Telegram"
@@ -958,7 +1055,8 @@
       "item12Origen": "Ítem 12: quen cobre este instrumento",
       "item30Procedimiento": "Ítem 30: procedemento JEG (ordinario/recuperación/extraordinaria)",
       "pesoRelativoCe": "Peso relativo dentro do CE",
-      "sustituidaPorRecuperacion": "Substituída por recuperación"
+      "sustituidaPorRecuperacion": "Substituída por recuperación",
+      "gevSoloCuentaGrupo": "Grupo de avaliación (GEv): só conta para o alumnado deste mesmo grupo"
     },
     "modulo": {
       "eliminarRegistro": "Eliminar rexistro"
@@ -1000,14 +1098,22 @@
       "medioInformal": "Informal",
       "medioPresencial": "Reunión presencial",
       "medioTelefono": "Chamada telefónica",
-      "medioVideollamada": "Videochamada"
+      "medioVideollamada": "Videochamada",
+      "estadoActivos": "Activos",
+      "estadoBaja": "Baixa",
+      "todaIntencion": "Calquera intención",
+      "todaAptitud": "Calquera aptitude"
     },
     "catalogo": {
       "grado": "Grao",
-      "gradosDelAAlE": "Graos do A ao E"
+      "gradosDelAAlE": "Graos do A ao E",
+      "seleccionaFamilia": "-- Selecciona Familia --",
+      "seleccionaTitulo": "-- Selecciona título --",
+      "seleccionaModulo": "-- Selecciona módulo --"
     },
     "comun": {
-      "otros": "Outros"
+      "otros": "Outros",
+      "si": "Si"
     },
     "contexto": {
       "seleccionOrientativa": "Selección orientativa para apoiar a redacción do texto de abaixo (primeira versión, ampliarase).",
@@ -1083,7 +1189,8 @@
       "item_socio_turistico": "Turístico",
       "item_turno_diurno": "Diúrno",
       "item_turno_mixto": "Mixto",
-      "item_turno_vespertino": "Vespertino"
+      "item_turno_vespertino": "Vespertino",
+      "sugerenciaSegunGrado": "Suxestión segundo o Grao ({{motivo}}): \"{{label}}\". Aplicar"
     },
     "diario": {
       "acumuladoTrimestral": "Acumulado trimestral",
@@ -1118,7 +1225,12 @@
       "tipo_otro": "Outro",
       "tipo_prueba_objetiva": "Proba obxectiva",
       "tipo_registro_observacion": "Rexistro de observación",
-      "tipo_rubrica": "Rúbrica"
+      "tipo_rubrica": "Rúbrica",
+      "basico": "Básico",
+      "tipoRecuperaciones": "Recuperacións",
+      "seleccionaActividad": "-- Selecciona actividade --",
+      "metodoSobrescribir": "Sobrescribir a nota se é maior",
+      "metodoMedia": "Facer media coa nota anterior"
     },
     "legal": {
       "accContacto": "6. Contacto e queixas",
@@ -1263,6 +1375,150 @@
     "evaluacion": {
       "selecciona": "Selecciona...",
       "todos": "Todos"
+    },
+    "orientacion": {
+      "seleccionar": "-- Seleccionar --",
+      "motivoEleccion": {
+        "vocacion": "Vocación / paixón polo sector",
+        "salidaLaboral": "Saída laboral clara",
+        "reorientacion": "Reorientación profesional",
+        "porDescarte": "Por descarte (ningunha outra opción)",
+        "familia": "Influencia familiar",
+        "costeEconomico": "Custo económico vs universidade"
+      },
+      "viaAcceso": {
+        "eso": "ESO (título de graduado)",
+        "fpgb": "FP Grao Básico",
+        "fpgm": "FP Grao Medio (a GS)",
+        "bachillerato": "Bacharelato",
+        "pruebaAcceso": "Proba de acceso",
+        "convalidacionParcial": "Convalidación parcial",
+        "otra": "Outra vía"
+      },
+      "primeraOpcion": "Este ciclo era a súa primeira opción",
+      "estudiaYTrabaja": "Estuda á vez que traballa",
+      "cambioDeCiclo": "Cambio de ciclo / segunda matrícula",
+      "experienciaPrevia": {
+        "sinExperiencia": "Sen experiencia laboral",
+        "esporadica": "Traballos esporádicos / eventuais",
+        "relacionada": "Relacionada co ciclo",
+        "noRelacionada": "Non relacionada co ciclo",
+        "autonomo": "Actividade por conta propia"
+      },
+      "jornadaActual": {
+        "noTrabaja": "Non traballa actualmente",
+        "parcial": "Traballa a tempo parcial",
+        "completa": "Traballa a xornada completa",
+        "autonomo": "Autónomo / por conta propia"
+      },
+      "cotizaSeguridadSocial": "Cotiza na Seguridade Social actualmente",
+      "aptitudPrincipal": {
+        "tecnica": "Técnica / práctica",
+        "analitica": "Analítica / investigadora",
+        "creativa": "Creativa / innovadora",
+        "comercial": "Comercial / negociadora",
+        "comunicativa": "Comunicativa / docente",
+        "relacional": "Relacional / social",
+        "emprendedora": "Emprendedora / autónoma",
+        "organizativa": "Organizativa / xestora"
+      },
+      "areaInteres": {
+        "desarrolloSoftware": "Desenvolvemento de software / programación",
+        "sistemasInfraestructura": "Sistemas / infraestrutura",
+        "ciberseguridad": "Ciberseguridade",
+        "datosIA": "Datos / IA / Machine Learning",
+        "disenoUX": "Deseño / UX / multimedia",
+        "electronicaHardware": "Electrónica / hardware",
+        "atencionCliente": "Atención ao cliente / soporte",
+        "gestionAdministracion": "Xestión / administración",
+        "sanidadCuidados": "Sanidade / coidados",
+        "industriaProduccion": "Industria / produción",
+        "otro": "Outro / aínda non definido"
+      },
+      "ambitoLaboral": {
+        "empresaGrande": "Empresa grande / corporación",
+        "pyme": "PEME / empresa mediana",
+        "startup": "Startup / empresa emerxente",
+        "administracionPublica": "Administración pública",
+        "ongSectorSocial": "ONG / sector social",
+        "autonomoFreelance": "Autónomo / freelance",
+        "indiferente": "Indiferente"
+      },
+      "preferenciaGeografica": {
+        "local": "Local / cidade actual",
+        "nacional": "Nacional (mobilidade España)",
+        "internacional": "Internacional",
+        "indiferente": "Indiferente"
+      },
+      "idiomaEspanol": "Español (nativo / fluído)",
+      "idiomaIngles": "Inglés",
+      "idiomaFrances": "Francés",
+      "idiomaAleman": "Alemán",
+      "idiomaPortugues": "Portugués",
+      "idiomaOtro": "Outro idioma",
+      "intencionAlTerminar": {
+        "empleoInmediato": "Buscar emprego inmediatamente",
+        "feoePracticasEmpresa": "FEOE / prácticas en empresa colaboradora",
+        "cicloSuperior": "Continuar con outro ciclo (GM→GS)",
+        "universidad": "Continuar na universidade",
+        "emprender": "Emprender / autoemprego",
+        "sinDecidir": "Aínda sen decidir"
+      },
+      "interesErasmus": "Interese na FEOE internacional (Erasmus+)",
+      "interesBolsaEmpleo": "Interese na bolsa de emprego do centro",
+      "interesMentoria": "Quere mentoría con exalumnado/profesionais",
+      "interesEmprender": "Ten idea de negocio / proxecto propio",
+      "interesUniversidad": "Valora acceder á universidade tras a FP",
+      "empresaIdentificada": "Xa ten empresa de interese identificada",
+      "estadoInsercion": {
+        "enFormacion": "Aínda en formación / ciclo en curso",
+        "enBusqueda": "Egresado - en busca activa",
+        "empleadoEmpresa": "Empregado en empresa",
+        "feoe": "Realizando FEOE / prácticas",
+        "autoempleo": "Autoemprego / autónomo",
+        "sigueEstudiando": "Segue estudando (ciclo / universidade)",
+        "sinDatos": "Sen datos de seguimento"
+      },
+      "relacionCiclo": {
+        "siDirectamente": "Si, directamente relacionado",
+        "parcialmente": "Parcialmente relacionado",
+        "noRelacionado": "Non relacionado co ciclo",
+        "noAplica": "Non aplica (segue estudando)"
+      },
+      "modalidadContrato": {
+        "indefinido": "Indefinido",
+        "temporal": "Temporal / obra e servizo",
+        "autonomo": "Autónomo",
+        "practicas": "Prácticas / becario",
+        "beca": "Bolsa",
+        "feoe": "Contrato FEOE"
+      },
+      "valoracionEgresado": {
+        "v1": "1 - Moi baixa",
+        "v2": "2 - Baixa",
+        "v3": "3 - Media",
+        "v4": "4 - Alta",
+        "v5": "5 - Excelente"
+      },
+      "familiaInformada": "Familia / titores legais informados",
+      "derivadoOrientador": "Derivado/a ao orientador/a do centro",
+      "informeEmitido": "Informe de orientación emitido"
+    },
+    "verificacion": {
+      "sinDatos": "Sen datos",
+      "correcto": "Correcto",
+      "advertencia": "Advertencia",
+      "correctos": "Correctos",
+      "advertencias": "Advertencias"
+    },
+    "archivos": {
+      "activaFem": "Activa",
+      "activoMasc": "Activo",
+      "seleccionarArchivoCorrecto": "Seleccionar o ficheiro correcto..."
+    },
+    "calendario": {
+      "tipoComplementaria": "Complementaria",
+      "tipoExtraescolar": "Extraescolar"
     }
   },
   "tablas": {
@@ -1270,7 +1526,8 @@
       "entidad": "Entidade",
       "evaluacion": "Avaliación",
       "raVinculados": "RA vinculados",
-      "trimestre": "Trimestre"
+      "trimestre": "Trimestre",
+      "id": "Id"
     },
     "calificaciones": {
       "instrumento": "Instrumento",
@@ -1292,7 +1549,10 @@
       "horas": "Horas",
       "objetivosGenerales": "Obxectivos xerais",
       "resultadosAprendizaje": "Resultados de aprendizaxe",
-      "unidadDidacticaTrabajo": "Unidade didáctica ou de traballo"
+      "unidadDidacticaTrabajo": "Unidade didáctica ou de traballo",
+      "relevanciaCe": "Relevancia",
+      "objAbrev": "Obx",
+      "evalAbrev": "AVAL."
     },
     "dashboard": {
       "imp": "Imp",
@@ -1318,7 +1578,9 @@
       "config": "Config",
       "descripcionIE": "Descrición do instrumento de avaliación (IE)",
       "instrumentoActividad": "Instrumento e actividade",
-      "pctPond": "% Pond."
+      "pctPond": "% Pond.",
+      "criterio": "CE",
+      "cobertura": "Cobertura"
     },
     "legal": {
       "clave": "Clave",
@@ -1339,6 +1601,12 @@
       "organizacionAcceso": "Organización e acceso",
       "seguimientoCorreccion": "Seguimento e corrección",
       "id": "Id"
+    },
+    "secuenciacion": {
+      "numAbrev": "Nº",
+      "raCe": "RA/CE",
+      "iePct": "IE %",
+      "raCeSlash": "RA/CE"
     }
   },
   "campos": {
@@ -1412,7 +1680,74 @@
       "tramoEdad_edad18a20": "18 a 20",
       "tramoEdad_edad21a25": "21 a 25",
       "tramoEdad_edad26mas": "26 ou máis",
-      "tramoEdad_menores18": "Menores de 18"
+      "tramoEdad_menores18": "Menores de 18",
+      "labelHoraInicio": "Hora de inicio",
+      "labelHoraFin": "Hora de fin",
+      "labelParticipantes": "Participantes",
+      "conFichaSufijo": "con ficha",
+      "viaAccesoLabel": "Vía de acceso",
+      "aptitudLabel": "Aptitude",
+      "areaInteresLabel": "Área de interese",
+      "intencionTerminarLabel": "Intención ao rematar",
+      "insercionLabel": "Inserción",
+      "reunionesLabel": "Reunións",
+      "sinAlumnadoFiltros": "Non hai alumnado que coincida cos filtros.",
+      "sinFichaBadge": "Sen ficha",
+      "interesadoErasmus": "Interesado/a en Erasmus+",
+      "tieneIdeaNegocio": "Ten unha idea de negocio",
+      "interesadoUniversidad": "Interesado/a na universidade",
+      "derivadoAlOrientador": "Derivado ao orientador",
+      "perfilSeccionTitulo": "Perfil",
+      "motivoEleccionLabel": "Motivo de elección",
+      "experienciaPreviaLabel": "Experiencia previa",
+      "sectorExperienciaLabel": "Sector de experiencia",
+      "trabajaActualmenteLabel": "Traballa actualmente",
+      "empresaActualLabel": "Empresa actual",
+      "bolsaEmpleoBadge": "Bolsa de emprego",
+      "erasmusBadge": "Erasmus+",
+      "emprenderBadge": "Emprender",
+      "mentoriaBadge": "Mentoría",
+      "universidadBadge": "Universidade",
+      "empresaIdentificadaBadge": "Empresa identificada",
+      "aspiracionesSeccionTitulo": "Aspiracións",
+      "preferenciaLaboralLabel": "Preferencia laboral",
+      "movilidadGeograficaLabel": "Mobilidade xeográfica",
+      "empresaObjetivoLabel": "Empresa obxectivo",
+      "cicloGradoInteresLabel": "Ciclo / grao de interese",
+      "seguimientoTutorSeccionTitulo": "Seguimento do titor",
+      "reunionesCelebradasLabel": "Reunións realizadas",
+      "ultimaReunionLabel": "Última reunión",
+      "familiaInformadaLabel": "Familia informada",
+      "derivadoOrientadorLabel": "Derivado a orientador",
+      "informeEmitidoLabel": "Informe emitido",
+      "mostrandoNAlumnado": "Amosando {{count}} alumnado/as",
+      "derivadosLabel": "Derivados",
+      "sinAlumnadoRegistradoCurso": "Non hai alumnado rexistrado neste curso.",
+      "coberturaFichasOrientacionTitulo": "Cobertura de fichas de orientación",
+      "deTotalFichaCompletada": "{{con}} de {{total}} alumnos/as teñen a ficha completada",
+      "sinDatosOrientacionAun": "Aínda sen datos de orientación",
+      "completaFichasIndividualesPre": "Completa as fichas individuais na pestana",
+      "individualTab": "Individual",
+      "conExperienciaLaboralKpi": "Con experiencia laboral",
+      "interesErasmusKpi": "Interese en Erasmus+",
+      "interesBolsaEmpleoKpi": "Interese na bolsa de emprego",
+      "conIdeaNegocioKpi": "Con idea de negocio",
+      "intencionFinalizarCicloTitulo": "Intención ao rematar o ciclo",
+      "aptitudPrincipalDetectadaTitulo": "Aptitude principal detectada",
+      "areaInteresDominanteTitulo": "Área de interese dominante",
+      "ambitoLaboralPreferidoTitulo": "Ámbito laboral preferido",
+      "preferenciaGeograficaTrabajoTitulo": "Preferencia xeográfica de traballo",
+      "motivacionEleccionCicloTitulo": "Motivación de elección do ciclo",
+      "distribucionExperienciaLaboralTitulo": "Distribución da experiencia laboral previa",
+      "resumenPorAlumnadoTitulo": "Resumo por alumno/a",
+      "cargandoDatosAlumnado": "Cargando datos do alumnado...",
+      "listaOficialTitulo": "Lista oficial",
+      "numAlumnado": "{{count}} alumnado",
+      "nMenoresEdad": "{{count}} alumno(s)/a(s) menor(es) de 18 anos",
+      "sinAlumnadoRegistradoAun": "Aínda non hai alumnado rexistrado.",
+      "menorEdadBadge": "Menor de idade",
+      "perfilGrupoLabel": "Perfil do grupo",
+      "anosSeparador": "anos ·"
     },
     "evaluacion": {
       "informacionDesc": "Como se dan a coñecer os criterios de avaliación e cualificación.",
@@ -1487,7 +1822,12 @@
       "tituloProcedimientosNormativos": "Procedementos normativos",
       "topeCompensablesBadge": "Tope compensables activo",
       "trimestreEvLabel": "{{periodo}} Av.",
-      "udsLabel": "UDs:"
+      "udsLabel": "UDs:",
+      "calificarConRubricaTitulo": "Cualificar con rúbrica",
+      "notaCalculada": "Nota calculada",
+      "notaSigadLabel": "Nota Sigad (1-10, manual / calc)",
+      "minAbrev": "Mín",
+      "maxAbrev": "Máx"
     },
     "modulo": {
       "bibliografiaDesc": "Bibliografía principal para o profesorado e o alumnado.",
@@ -1643,7 +1983,10 @@
       "normativaAutonomica": "Normativa autonómica ({{comunidad}})",
       "normativaEstatal": "Normativa estatal",
       "sinDocumentosAutonomicos": "Non hai documentos normativos nesta comunidade polo momento.",
-      "sinDocumentosEstatales": "Non hai documentos normativos estatais polo momento."
+      "sinDocumentosEstatales": "Non hai documentos normativos estatais polo momento.",
+      "enPreparacion": "En preparación",
+      "cargandoNormativa": "Cargando normativa...",
+      "legislacionDocumentalTitulo": "Lexislación documental"
     },
     "contexto": {
       "tituloContextoEscolar": "Contexto escolar",
@@ -1665,7 +2008,9 @@
       "avisoModeloSimplificado": "Estes 2 campos son específicos do documento \"Programación suficiente\" (modelo oficial Simplificado). Se se deixan baleiros, xérase automaticamente un texto por defecto razoable a partir do resto de datos do módulo.",
       "introduccion": "Introdución",
       "udsModulo": "Unidades didácticas do módulo",
-      "tituloAutoriaPublicidad": "Datos de autoría e publicidade"
+      "tituloAutoriaPublicidad": "Datos de autoría e publicidade",
+      "cargandoDatos": "Cargando datos do contexto...",
+      "cargandoDatosMetodologia": "Cargando datos de metodoloxía..."
     },
     "ai": {
       "analizandoDocumento": "Analizando documento...",
@@ -1745,7 +2090,27 @@
       "seleccionaModuloDescripcion": "Selecciona o módulo para xerar unha programación baleira coa estrutura correcta (RA/CE desde catálogo oficial).",
       "tipoCurso": "Curso",
       "tipoProgramacion": "Programación",
-      "tituloOption": "-- Título --"
+      "tituloOption": "-- Título --",
+      "usuarioDrive": "Usuario de Drive",
+      "driveDescripcion": "Garda os teus ficheiros .fpp e .fpc automaticamente na nube de Google para acceder a eles desde calquera dispositivo sen necesidade de descargalos manualmente.",
+      "conectado": "Conectado",
+      "noConectado": "Non conectado",
+      "sincronizandoCon": "Sincronizando con {{email}}",
+      "iniciaSesionGoogle": "Inicia sesión coa túa conta de Google",
+      "autoguardadoAutomaticoTitulo": "Gardado Automático",
+      "autoguardadoAutomaticoDesc": "Sube automaticamente a Drive cada vez que premas \"Gardar\" na app.",
+      "credencialesOAuthTitulo": "Credenciais OAuth",
+      "introduceClientIdPre": "Introduce o",
+      "introduceClientIdPost": "do teu proxecto de Google Cloud para autorizar a aplicación. Este dato gárdase no teu navegador de forma segura.",
+      "clientIdPlaceholder": "Ex: 123456789-abcde.apps.googleusercontent.com",
+      "moduloDesconocido": "Módulo Descoñecido",
+      "cursoDemoNombre": "Curso DEMO",
+      "usuarioMicrosoft": "Usuario de Microsoft",
+      "oneDriveDescripcion": "Garda os teus ficheiros .fpp e .fpc na túa conta de Microsoft OneDrive. (Require rexistro no portal de Azure).",
+      "sincronizandoCuentaMicrosoft": "Sincronizando con conta Microsoft",
+      "iniciaSesionMicrosoft": "Inicia sesión con Microsoft",
+      "azureClientIdTitulo": "Azure Client ID",
+      "azureClientIdDesc": "Client ID da túa App rexistrada en Entra ID (Azure)."
     },
     "dashboard": {
       "altaBajaAlumnado": "Alta e baixa de alumnado",
@@ -1776,7 +2141,35 @@
       "progresoPorUD": "Progreso por unidade didáctica",
       "reutilizarPrefijo": "Reutiliza",
       "reutilizarSufijo": "para un curso académico novo, sen partir de cero.",
-      "sinDocencia": "Sen docencia"
+      "sinDocencia": "Sen docencia",
+      "sinClasesLectivas": "Sen clases lectivas",
+      "udEnCursoLabel": "UD en curso",
+      "ningunaUdActiva": "Ningunha UD activa actualmente.",
+      "progresoUdLabel": "Progreso da UD",
+      "horasPrevistasLabel": "Horas previstas",
+      "horasImpartidasLabel": "Horas impartidas",
+      "horasSinDocenciaLabel": "Horas sen docencia",
+      "contenidosLabelDosPuntos": "Contidos:",
+      "diaFestivo": "Día festivo",
+      "eventoBadge": "Evento",
+      "festivoRazon": "Día non lectivo",
+      "horasLectivasCount": "{{count}} horas lectivas",
+      "previsionSemanalDesc": "Distribución temporal semanal dos módulos e das sesións planificadas na aula.",
+      "previsionSemanalTitulo": "Previsión semanal",
+      "recursosLabelDosPuntos": "Recursos:",
+      "sinClasesPlanificadas": "Sen clases planificadas",
+      "sinHorarioLectivo": "Sen horario lectivo",
+      "sinSesionesHoy": "Non tes sesións planificadas para hoxe segundo o calendario do módulo.",
+      "tusClasesDeHoy": "As túas clases de hoxe ({{fecha}})",
+      "deSesiones": "{{actual}} de {{total}} sesións",
+      "diaNoLectivo": "Día non lectivo",
+      "semanaDelAl": "Semana do {{inicio}} ao {{fin}}",
+      "desarrolloUnidadEnCursoTitulo": "Desenvolvemento da unidade en curso",
+      "nSesionesParentesis": "({{count}} sesións)",
+      "planificadoNDias": "Planificado ({{count}} días)",
+      "semanaAnterior": "Semana anterior",
+      "semanaProxima": "Vindeira semana",
+      "sesionesLabel": "Sesións: {{label}}"
     },
     "instrumentos": {
       "agenteEvaluacion": "Axente de Avaliación",
@@ -1785,7 +2178,62 @@
       "instrumentoLabel": "Instrumento: {{id}} - {{desc}}",
       "recuperacionDescripcion": "Indica se este instrumento cualifica nun período de recuperación (R1, R2, Final).",
       "sirveParaRecuperacion": "Serve para recuperación?",
-      "tipoDatoEscala": "Tipo de dato e Escala"
+      "tipoDatoEscala": "Tipo de dato e Escala",
+      "sinRubricas": "Aínda non hai rúbricas. Unha rúbrica pódese asignar a calquera instrumento desde a súa \"Configuración avanzada\" e cualificarse por niveis en vez de cunha nota directa.",
+      "sinNombre": "(sen nome)",
+      "criterios": "criterios",
+      "nuevaRubricaTitulo": "Nova rúbrica",
+      "editarRubricaTitulo": "Editar rúbrica",
+      "sumaPuntuacionMaxima": "Suma de puntuación máxima",
+      "sumaDebeSerDiez": "A suma das puntuacións máximas de todos os criterios debe ser exactamente 10.",
+      "puntuacionMaxima": "Puntuación máxima",
+      "puntos": "Puntos",
+      "criterioSinNiveles": "Este criterio aínda non ten niveis definidos.",
+      "rubricaSinCriterios": "Esta rúbrica aínda non ten criterios definidos.",
+      "rubricaAsignada": "Rúbrica asignada",
+      "rubricaDescripcion": "Se asignas unha rúbrica, este instrumento poderase cualificar por niveis en vez de cunha nota directa.",
+      "sinRubrica": "-- Sen rúbrica --",
+      "unidadDidactica": "Unidade didáctica",
+      "unidadDidacticaDescripcion": "A que unidade didáctica pertence este instrumento (para a táboa \"Contidos → UD\").",
+      "sinUnidadDidactica": "-- Sen asignar --",
+      "matrizCoberturaTitulo": "Matriz de cobertura CE × Instrumento",
+      "matrizCoberturaSinDatos": "Engade Criterios de avaliación e Instrumentos para ver aquí que CE quedan sen ningún instrumento que os avalíe.",
+      "sinCobertura": "Sen cobertura",
+      "modeloJegTitulo": "Modelo JEG.",
+      "modeloJegDesc": "Nivel Instrumento→Indicador→CE→RA→Módulo do autor real de PD+ (Javier Edo Gual) — é o motor de cualificación real da app (boletíns, PDF e actas incluídos). No uso normal non fai falta tocar nada aquí: ao marcar unha actividade sobre un CE en Instrumentos, o Indicador correspondente créase e o peso repártese só. Esta pantalla é para quen queira axustar ese reparto a man (varios indicadores por CE, pesos distintos) ou revisar o que se xerou automaticamente.",
+      "indicadoresPorCeTitulo": "Indicadores por Criterio de Avaliación",
+      "primeroAnadeCriterios": "Primeiro engade Criterios de avaliación en Currículo → Ponderación RA e CE.",
+      "sinIndicadoresTodavia": "Sen indicadores aínda.",
+      "gruposEvaluacionTitulo": "Grupos de avaliación (GEv)",
+      "gruposEvaluacionDesc": "Subgrupos de alumnado (p.ex. perda de avaliación continua): un instrumento marcado cun GEv só conta para o alumnado dese mesmo grupo. Asigna o GEv de cada alumno en Alumnado → Matrícula.",
+      "nuevoGrupoPlaceholder": "Novo grupo...",
+      "instrumentosModeloJegTitulo": "Instrumentos (modelo JEG)",
+      "sinInstrumentosJegTodavia": "Sen instrumentos JEG aínda.",
+      "pesoGlobalLabel": "Peso global",
+      "indicadoresVinculadosLabel": "Indicadores vinculados",
+      "calificacionesPorIndicadorTitulo": "Cualificacións por indicador",
+      "anadeInstrumentosVinculaPrimero": "Engade instrumentos e vincúlaos a indicadores primeiro.",
+      "sinTitulo": "(sen título)",
+      "recEvaluacion": "Rec. ({{evaluacion}})",
+      "evfe": "EvFE",
+      "rec": "Rec.",
+      "sinEvaluar": "Sen avaliar",
+      "notaFinalMotorJeg": "Nota final (Motor JEG)",
+      "hojaAparteEvfeTitulo": "Folla á parte: avaliación final extraordinaria (EvFE)",
+      "hojaAparteEvfeDesc": "Segunda convocatoria — nunca se mestura coa nota ordinaria de arriba. Un RA sen intento en EvFE herda o resultado da fila anterior.",
+      "notaFinalExtraordinariaLabel": "Nota final extraordinaria (EvFE)",
+      "faltanCriteriosEvaluacionTitulo": "Faltan criterios de avaliación",
+      "faltanCriteriosEvaluacionDesc": "Primeiro engade Criterios de avaliación na pestana 'Matrices'.",
+      "instrumentosEvaluacionTrimestreTitulo": "Instrumentos de Avaliación - {{triNombre}}",
+      "detalleInstrumentosTrimestreDesc": "Detalle dos instrumentos de avaliación organizados para este trimestre.",
+      "numActividades": "{{count}} actividades",
+      "actividadOriginalRecuperar": "Actividade orixinal a recuperar",
+      "sinNombreActividad": "Sen nome",
+      "metodoCalculoLabel": "Método de cálculo",
+      "evaluacionOrdinariaRecuperacion": "Avaliación ordinaria + recuperación (R1-RF) — {{apellidos}}",
+      "nInstrumentos": "{{count}} instr.",
+      "sumaPesos": "Suma: {{pct}}%",
+      "resumenPorTrimestresTitulo": "Resumo de instrumentos de avaliación por trimestres"
     },
     "matrices": {
       "atencionSobrescribirDescripcion": "Substituiranse as túas Unidades didácticas (UD/T), a relación entre RA e UD/T, e a matriz de contribución RA-OG. Asegúrate de que estás de acordo antes de aplicar.",
@@ -1794,6 +2242,674 @@
       "noHayPropuestasDescripcion": "Actualmente non existen secuenciacións predefinidas de autores ou editoriais para o módulo {{moduleCode}}.",
       "propuestasEditorialesDescripcion": "Selecciona unha proposta predefinida para este módulo ({{moduleCode}})",
       "propuestasEditorialesTitulo": "Propostas editoriais / autores"
+    },
+    "catalogo": {
+      "tituloAcronimosGlosario": "Acrónimos e glosario",
+      "sinResultadosParaBusqueda": "Non se atoparon resultados para \"{{termino}}\"",
+      "confirmacionSobrescribirPropuesta": "⚠️ ATENCIÓN: Esta acción sobrescribirá as túas Unidades didácticas, Instrumentos, Sesións, Tarefas e configuración do contexto para o módulo actual.\n\nEstás completamente seguro/a de continuar?",
+      "tituloCatalogoAutores": "Catálogo de Autores e Editoriais",
+      "descripcionCatalogoAutoresTexto1": "Explora modelos completos (",
+      "descripcionCatalogoAutoresTexto2": ") propostas por editoriais ou autores para o módulo ",
+      "descripcionCatalogoAutoresTexto3": ". Estas propostas poden incluír unidades didácticas, instrumentos de avaliación e secuencias de aula.",
+      "tituloArchivosDisponibles": "Arquivos dispoñibles",
+      "buscandoPropuestas": "Buscando propostas...",
+      "sinArchivosFppTexto1": "Non se atoparon arquivos ",
+      "sinArchivosFppTexto2": " para este módulo na túa carpeta Documentos/Autores.",
+      "cargandoContenidoPropuesta": "Cargando contido da proposta...",
+      "tituloPrevisualizacionPropuesta": "Previsualización da proposta",
+      "descripcionPrevisualizacionPropuesta": "Revisa o contido antes de incorporalo. Poderás editalo ao teu gusto unha vez importado na túa programación.",
+      "tituloModuloDidactico": "Módulo didáctico",
+      "labelContexto": "Contexto:",
+      "definido": "Definido",
+      "noDefinido": "Non definido",
+      "tituloMatricesOgRaCeUd": "Matrices OG → RA → CE → UD/T",
+      "unidadesDidacticasPropuestas": "Unidades didácticas propostas:",
+      "sinDescripcion": "(Sen descrición)",
+      "labelMapeoRaOg": "Mapeo RA-OG:",
+      "incluido": "Incluído",
+      "noIncluido": "Non incluído",
+      "tituloInstrumentosEvaluacion": "Instrumentos de avaliación",
+      "instrumentosPredefinidos": "Instrumentos predefinidos.",
+      "tituloProgramacionAula": "Programación de aula",
+      "sesionesPlanificadas": "Sesións planificadas.",
+      "tareasCompetencialesDisenadas": "Tarefas competenciais deseñadas.",
+      "tituloNingunFicheroSeleccionado": "Ningún ficheiro seleccionado",
+      "descripcionSeleccionaArchivoFpp": "Selecciona un ficheiro `.fpp` da lista da esquerda para previsualizar todo o seu contido antes de incorporalo á túa programación.",
+      "tituloMapaCcaa": "Mapa de CCAA con currículo FP",
+      "instruccionMapaCcaa": "Fai clic nunha comunidade para ver o seu detalle. Fonte: ",
+      "badgeDemo": "DEMO",
+      "mensajeSeleccionaCcaa": "Selecciona unha comunidade autónoma no mapa para ver a súa información detallada.",
+      "tituloTablaComunidades": "Táboa de comunidades autónomas",
+      "badgeCiudadAutonoma": "Cidade Autónoma",
+      "badgeCcaaSigla": "CCAA",
+      "fuentePrincipalLabel": "Fonte principal:",
+      "fuentePrincipalDescripcion": "— Portal oficial do Ministerio de Educación e Formación Profesional.",
+      "infoCurriculosCcaaTexto1": "Cada comunidade autónoma publica o seu propio currículo de FP no seu boletín oficial. As ligazóns anteriores levan á páxina de ",
+      "infoCurriculosCcaaEnfasis": "currículos por CCAA",
+      "infoCurriculosCcaaTexto2": " de todofp.es, onde se pode consultar a normativa específica de cada territorio.",
+      "infoCeutaMelillaEnfasis": "Ceuta e Melilla",
+      "infoCeutaMelillaTexto": " aplican directamente o currículo do Ministerio (BOE), ao non teren competencias transferidas en materia de educación.",
+      "mapaSvgCreditoLabel": "Mapa SVG:",
+      "mapaSvgCreditoTexto": "(CC-BY-4.0) — Victor Cazanave.",
+      "demoEntornoLabel": "🌍 Contorno DEMO:",
+      "demoEntornoTexto": "Os datos de exemplo desta aplicación usan o currículo de Aragón (BOA) como referencia.",
+      "labelBoletinOficial": "Boletín Oficial",
+      "badgeComunidadAutonoma": "Comunidade Autónoma",
+      "cargandoIncual": "Cargando datos do Catálogo Nacional (INCUAL)...",
+      "labelFamiliaProfesional": "Familia Profesional",
+      "gradoCTitulo": "Grao C",
+      "gradoCDesc": "(Certificados)",
+      "gradoDTitulo": "Grao D",
+      "gradoDDesc": "(Ciclos)",
+      "gradoETitulo": "Grao E",
+      "gradoEDesc": "(Especialización)",
+      "sinDatosIncualFamilia": "Non se atoparon datos INCUAL para a familia {{familia}}",
+      "seleccionaFamiliaEstandares": "Selecciona unha familia profesional para ver os seus estándares de competencia",
+      "tituloCrn": "Centros de Referencia Nacional (CRN)",
+      "labelAreasCrn": "Áreas:",
+      "labelTitularCrn": "Titular:",
+      "tituloEcp": "Estándares de competencia profesional (ECP)",
+      "nivelEcpTitulo": "Nivel {{nivel}} ({{count}})",
+      "enlacePdf": "PDF",
+      "sinEstandaresNivel": "Non hai estándares de Nivel {{nivel}} para esta familia.",
+      "labelTitulo": "Título",
+      "ciclosFormativosCount": "Ciclos formativos ({{count}})",
+      "sinCiclosRegistrados": "Non hai ciclos formativos rexistrados.",
+      "detallesCurriculoBoa": "Detalles do currículo do BOA",
+      "fuenteNormativaLabel": "Fonte normativa",
+      "sinArticulosCargados": "Este título aínda non ten os artigos do currículo cargados na base de datos.",
+      "sinTitulosFamilia": "Non hai títulos rexistrados para esta familia.",
+      "seleccionaFamiliaVerTitulos": "Selecciona unha familia profesional para ver os seus títulos.",
+      "cursoLabelSufijo": "{{curso}} curso",
+      "numModulos": "{{count}} módulos",
+      "seleccionaFamiliaTituloModulos": "Selecciona unha Familia e un Título para ver os módulos organizados por curso.",
+      "sinDatosCurricularesCargados": "Este título aínda non ten datos curriculares cargados.",
+      "modulosDisponiblesCuandoOficial": "Os módulos mostraranse cando estea dispoñible o currículo oficial.",
+      "sinModulosTitulo": "Non hai módulos para este título.",
+      "labelModulo": "Módulo",
+      "seleccionaModuloVerRA": "Selecciona un módulo para ver os resultados de aprendizaxe.",
+      "tabResultadosAprendizaje": "Resultados de aprendizaxe",
+      "tabCompetenciasAcreditables": "Competencias acreditables",
+      "criteriosEvaluacionLabel": "Criterios de avaliación",
+      "sinCompetenciasConvalidacion": "Este módulo non ten competencias directas asociadas para a convalidación no rexistro oficial.",
+      "comunModulosTransversales": "É común en módulos transversais, proxecto, FEOE ou idiomas.",
+      "opcionesConvalidacionTitulo": "Opcións de convalidación",
+      "convalidarPrefijo": "Para convalidar este módulo, debes cumprir ",
+      "convalidarAlguna": "algunha",
+      "convalidarSufijo": " das seguintes opcións (non todas).",
+      "opcionNumero": "Opción {{numero}}",
+      "debeAcreditarTodas": "Debes acreditar TODAS estas competencias:",
+      "debeAcreditarUna": "Debes acreditar esta competencia:",
+      "conjuntoRequerido": "Conxunto requirido",
+      "tambienConvalidarias": "Con esta opción tamén convalidarías: "
+    },
+    "curriculo": {
+      "sinUnidadesDidacticas": "Aínda non hai unidades didácticas definidas -- creaas na pestana \"Unidades didácticas\".",
+      "contenidosUdDescripcion": "Agrupa as unidades didácticas por bloque de contidos e mostra dun vistazo a súa relación con RA, obxectivos xerais, horas e instrumentos de avaliación.",
+      "sinBloqueAsignado": "Sen bloque asignado",
+      "bloqueContenido": "Bloque de contidos",
+      "contenidosPorUd": "Contidos por UD",
+      "numHoras": "Nº horas",
+      "sinInstrumento": "sen asignar",
+      "avanceRaLabel": "Avance RA",
+      "horasLectivasLabel": "Horas lectivas",
+      "sinUdsAsignadas": "Sen UD asignadas",
+      "sinRaDefinidos": "Non hai Resultados de aprendizaxe (RA) definidos.",
+      "cargandoMatrices": "Cargando matrices...",
+      "confirmarAutocompletarPlanSesiones": "Seguro que queres autocompletar o plan de sesións? Isto substituirá as sesións actuais de todas as UD.",
+      "totalSumaPctRa": "Total suma % RA:",
+      "sinUnidadesDidacticasTitulo": "Non hai unidades didácticas",
+      "sinUnidadesDidacticasDesc1": "Aínda non creaches ningunha Unidade didáctica (UD).",
+      "sinUnidadesDidacticasDesc2": "Para secuenciar sesións, primeiro debes crear as UD máis arriba.",
+      "unidadDidacticaSingular": "Unidade didáctica",
+      "leyendaCompletado": "Completado",
+      "leyendaEnCurso": "En curso",
+      "leyendaPendiente": "Pendente",
+      "progresoRelacionRaUdTitulo": "Progreso e relación entre Resultados de aprendizaxe e Unidades didácticas ou de traballo"
+    },
+    "header": {
+      "creaOAbreProgramacion": "Crea ou abre unha Programación",
+      "creaOAbreCurso": "Crea ou abre un Curso"
+    },
+    "archivos": {
+      "programacionFallback": "Programación",
+      "nuevoSinGuardar": "Novo (sen gardar)",
+      "archivoLocal": "Ficheiro local",
+      "programacionImportada": "Programación importada",
+      "cursoImportado": "Curso importado",
+      "breadcrumbArchivos": "Ficheiros",
+      "breadcrumbSeguridadPrivacidad": "Seguridade e privacidade",
+      "modoDatosLabel": "Modo de datos:",
+      "avisoDemoDesc": "estás vendo datos de exemplo. Non é o teu curso real e non se garda nada no disco — cambia a REAIS para traballar cos teus propios ficheiros.",
+      "avisoRealDesc": "estás traballando cos teus propios ficheiros .fpg/.fpp/.fpc, gardados no teu equipo. Os cambios gárdanse de verdade.",
+      "gruposEjemploDobleClic": "Grupos de exemplo. Dobre clic para cargar.",
+      "tusGruposDobleClic": "Os teus grupos gardados. Dobre clic para cargar.",
+      "sinGruposDemo": "Non se atoparon grupos DEMO.",
+      "usaBotonEnlazarCarpeta": "Usa o botón inferior para ligar o teu cartafol de traballo.",
+      "sinGrupos": "Non se atoparon grupos.",
+      "programacionesTitulo": "Programacións",
+      "dobleClicCargarProgramacion": "Dobre clic para cargar unha programación.",
+      "sinProgramacionesDemo": "Non se atoparon programacións DEMO.",
+      "sinProgramaciones": "Non se atoparon programacións.",
+      "cursosTitulo": "Cursos",
+      "dobleClicCargarCurso": "Dobre clic para cargar un curso.",
+      "sinCursosDemo": "Non se atoparon cursos DEMO.",
+      "sinCursos": "Non se atoparon cursos.",
+      "nubeLabel": "Nube",
+      "privacidadDisenoTitulo": "A túa privacidade por deseño",
+      "privacidadDisenoDesc": "Como se garante que os teus datos reais son 100% teus.",
+      "servidorCiegoTitulo": "1. O servidor é cego",
+      "servidorCiegoDesc": "A nosa base de datos na nube nunca almacena datos dos teus alumnos, das túas programacións, nin nada que crees. O servidor web só existe para enviarche os Catálogos Oficiais (BOE/BOCAA). Es invisible para o noso backend.",
+      "cifradoLocalTitulo": "2. Cifrado local avanzado AES-256",
+      "cifradoLocalDesc": "Podes activar o cifrado local. Antes de que calquera ficheiro se garde no teu disco duro ou na nube, cífrase usando a túa clave mestra dentro do teu navegador.",
+      "establecerClaveLabel": "Establecer clave de seguridade (non se garda en ningún sitio)",
+      "avisoOlvidoClave": "Se esqueces esta clave e gardas un ficheiro, non poderemos axudarche a recuperalo.",
+      "defensaAtaquesTitulo": "3. Defensa contra ataques no navegador",
+      "defensaAtaquesDesc": "Implementamos unha política estrita de seguridade de contido (CSP) para bloquear scripts maliciosos de terceiros.",
+      "servidorBlindadoTitulo": "4. Servidor blindado e sempre dispoñible",
+      "servidorBlindadoDesc": "O noso servidor backend incorpora Rate Limiting, garantindo que sempre terás acceso ao catálogo oficial de módulos.",
+      "seguridadRgpdTitulo": "Seguridade e RXPD garantidos",
+      "procesaInfoNavegador": "Cuaderno FP procesa toda a túa información confidencial exclusivamente no teu navegador. Ti es o propietario dos teus ficheiros.",
+      "ningunDatoNube": "Ningún dato do teu alumnado se envía á nube, salvo que uses a Sincronización autorizada na túa conta.",
+      "asegurateGuardar": "Asegúrate de premer \"Gardar\" ao rematar a túa sesión de traballo para non perder os últimos cambios.",
+      "validacionEnlacesTitulo": "Validación de ligazóns do espazo de traballo",
+      "todoCorrecto": "Todo correcto!",
+      "sinEnlacesRotos": "Non se detectaron ligazóns rotas nos grupos do teu cartafol local.",
+      "enlacesRotosDetectados": "Detectáronse as seguintes ligazóns rotas nos ficheiros Grupo. Isto sucede cando renomeas ou eliminas unha Programación ou un Curso directamente en Windows.",
+      "programacionNoEncontrada": "Programación non atopada:",
+      "cursoNoEncontrado": "Curso non atopado:"
+    },
+    "expediente": {
+      "tipoCalificacion": "Cualificación",
+      "tipoAutoevaluacion": "Autoavaliación",
+      "tipoTutoria": "Titoría",
+      "tipoReclamacion": "Reclamación",
+      "tipoAsistencia": "Asistencia",
+      "tipoDiarioClase": "Diario de clase",
+      "sinAlumnadoActivoRegistrado": "Non hai alumnado activo rexistrado neste curso.",
+      "sinEvidenciasTodavia": "Sen evidencias aínda",
+      "ningunAlumnadoSeleccionado": "Ningún alumnado seleccionado"
+    },
+    "orientacion": {
+      "sinAlumnadoTitulo": "Sen alumnado",
+      "primeroRegistraAlumnadoPre": "Primeiro rexistra alumnado na pestana",
+      "primeroRegistraAlumnadoPost": "Matrícula.",
+      "alumnadoActivoCount": "Alumnado activo ({{count}})",
+      "tieneDatosOrientacion": "Ten datos de orientación",
+      "nAnos": "{{n}} anos",
+      "edadNoRegistrada": "Idade non rexistrada",
+      "seccion1Titulo": "Sección 1: Motivación e elección do ciclo",
+      "motivoEleccionLabel": "Motivo de elección do ciclo",
+      "viaAccesoLabel": "Vía de acceso ao ciclo",
+      "cicloPrevioLabel": "Ciclo ou estudos previos cursados",
+      "cicloPrevioPlaceholder": "Ex. ASIR, DAW, SMR, Bacharelato Científico...",
+      "seccion2Titulo": "Sección 2: Experiencia e situación laboral",
+      "experienciaPreviaLabel": "Experiencia laboral previa",
+      "sectorExperienciaLabel": "Sector de experiencia previa",
+      "sectorExperienciaPlaceholder": "Ex. Hostalaría, Comercio, Tecnoloxía, Sanidade...",
+      "mesesExperienciaLabel": "Meses de experiencia estimados",
+      "jornadaActualLabel": "Situación laboral actual",
+      "empresaActualLabel": "Empresa actual (se aplica)",
+      "empresaActualPlaceholder": "Nome da empresa...",
+      "seccion3Titulo": "Sección 3: Intereses e aptitudes detectadas",
+      "aptitudPrincipalLabel": "Aptitude principal detectada",
+      "areaInteresLabel": "Área de interese dominante",
+      "ambitoLaboralPreferidoLabel": "Ámbito laboral preferido",
+      "preferenciaGeograficaLabel": "Preferencia xeográfica de traballo",
+      "idiomasTrabajoTitulo": "Idiomas de traballo",
+      "obsAptitudesLabel": "Observacións do titor sobre aptitudes e intereses",
+      "obsAptitudesPlaceholder": "Describe as fortalezas observadas, áreas de mellora, actitude ante o traballo en equipo, iniciativa, etc.",
+      "seccion4Titulo": "Sección 4: Aspiracións ao finalizar o ciclo",
+      "intencionAlTerminarLabel": "Intención principal ao rematar",
+      "empresaObjetivoLabel": "Empresa ou sector obxectivo (se o ten)",
+      "empresaObjetivoPlaceholder": "Ex. empresa local TIC, clínica propia...",
+      "cicloSuperiorInteresLabel": "Ciclo superior / grao de interese",
+      "cicloSuperiorInteresPlaceholder": "Ex. DAM, ASIR, Enxeñaría Informática, ADE...",
+      "interesesEspecificosTitulo": "Intereses específicos",
+      "seccion5Titulo": "Sección 5: Inserción laboral (post-ciclo)",
+      "seccion5InfoDesc": "Esta sección compleméntase ao finalizar o ciclo ou como seguimento de egresados.",
+      "estadoInsercionLabel": "Estado de inserción laboral",
+      "relacionCicloLabel": "Relación do emprego co ciclo",
+      "empresaInsercionLabel": "Empresa de inserción",
+      "empresaInsercionPlaceholder": "Nome da empresa...",
+      "puestoObtenidoLabel": "Posto ou rol obtido",
+      "puestoObtenidoPlaceholder": "Ex. Técnico de redes, Desenvolvedor Jr, Soporte TI...",
+      "fechaInsercionLabel": "Data de incorporación",
+      "modalidadContratoLabel": "Modalidade de contrato",
+      "valoracionEgresadoLabel": "Valoración global do egresado (1-5)",
+      "obsInsercionLabel": "Observacións de seguimento de inserción",
+      "obsInsercionPlaceholder": "Notas sobre o proceso de inserción, dificultades, contacto post-ciclo...",
+      "seccion6Titulo": "Sección 6: Notas e seguimento do titor",
+      "reunionesCelebradasLabel": "Núm. de reunións de orientación realizadas",
+      "fechaUltimaReunionLabel": "Data da última reunión / entrevista",
+      "fechaDerivacionLabel": "Data de derivación ao orientador/a",
+      "resumenOrientacionLabel": "Resumo de orientación (campo libre)",
+      "resumenOrientacionPlaceholder": "Escribe aquí o resumo da orientación: decisións tomadas, acordos co alumnado e a familia, próximos pasos...",
+      "selectaAlumnadoDesc": "Selecciona un alumno/a da lista da esquerda."
+    },
+    "comun": {
+      "ningunAlumnadoSeleccionado": "Ningún alumno/a seleccionado/a",
+      "cargandoDocumentos": "Cargando documentos...",
+      "directorioVacio": "O directorio está baleiro.",
+      "sinCursoCargadoTitulo": "Non hai curso cargado",
+      "sinCursoCargadoDesc": "Debes abrir ou crear un ficheiro de curso en Ficheiros.",
+      "gestionDe": "Xestión de {{activeTab}}",
+      "sinProgramacionCargadaTitulo": "Non hai programación cargada",
+      "sinProgramacionCargadaDesc": "Debes abrir ou crear un arquivo de programación nos teus Arquivos.",
+      "saltarAlContenidoPrincipal": "Ir ao contido principal"
+    },
+    "verificacion": {
+      "entornoGeografico": "Contorno xeográfico",
+      "entornoSocioeconomico": "Contorno socioeconómico",
+      "contextoEscolar": "Contexto escolar",
+      "contingenciaProfesorado": "Continxencia (profesorado)",
+      "contingenciaAlumnado": "Continxencia (alumnado)",
+      "bibliografiaLabel": "Bibliografía",
+      "publicidadLabel": "Publicidade",
+      "moduloDidacticoTitulo": "Módulo didáctico",
+      "sinDatosProgramacion": "Sen datos de programación cargados",
+      "moduloActivo": "Módulo activo: {{id}}",
+      "horasSemanales": "Horas semanais: {{h}} h",
+      "horasBoa": "Horas BOA: {{h}} h",
+      "udTitulo": "Unidades didácticas (UD)",
+      "sinUdDefinidas": "Non hai UD definidas",
+      "udDefinidas": "{{count}} UD definidas",
+      "horasDeclaradas": "Horas declaradas: {{udHoras}} / {{moduloHoras}} h do módulo",
+      "diferenciaHoras": "Diferenza de {{h}} h",
+      "horasCuadranCorrectamente": "As horas cadran correctamente",
+      "raTitulo": "Resultados de aprendizaxe (RA)",
+      "sinRaDefinidos": "Non hai RA definidos",
+      "raDefinidos": "{{count}} RA definidos",
+      "ceTitulo": "Criterios de avaliación (CE)",
+      "sinCeDefinidos": "Non hai CE definidos",
+      "ceDefinidos": "{{count}} CE definidos",
+      "ceSinRa": "{{count}} CE sen RA asignado",
+      "todosLosCeTienenRa": "Todos os CE teñen RA",
+      "instrumentosIndicadoresTitulo": "Instrumentos e indicadores",
+      "sinInstrumentosIndicadores": "Non hai instrumentos nin indicadores",
+      "instrumentosIndicadoresCount": "{{instr}} instrumentos e {{ind}} indicadores",
+      "indicadoresSinCe": "{{count}} indicadores sen CE asociado",
+      "todosLosIndicadoresEvaluanCe": "Todos os indicadores avalían algún CE",
+      "tareasCompetencialesTitulo": "Tarefas competenciais",
+      "sinTareasDefinidas": "Non hai tarefas definidas",
+      "tareasDefinidas": "{{count}} tarefas definidas",
+      "tareasSinRa": "{{count}} tarefas sen RA asociado",
+      "todasLasTareasTienenRa": "Todas as tarefas teñen RA",
+      "sesionesClaseTitulo": "Sesións de clase",
+      "sinSesionesPlanificadas": "Non hai sesións planificadas",
+      "sesionesPlanificadasCount": "{{count}} sesións planificadas",
+      "sesionesSinUd": "{{count}} sesións sen UD asignada",
+      "todasLasSesionesTienenUd": "Todas as sesións teñen UD",
+      "contextoModuloTitulo": "Contexto do módulo",
+      "contextoAulaConfigurado": "Contexto da aula configurado",
+      "sinDescripcionContexto": "Sen descrición de contexto nin configuración de aula",
+      "fpDualTitulo": "FP Dual",
+      "regimenDual": "Xeral",
+      "dualIntensivoLabel": "Intensivo",
+      "regimenTradicional": "Réxime tradicional (sen FP Dual configurada)",
+      "calidadEqavetTitulo": "Calidade EQAVET",
+      "mejoraLabel": "Mellora",
+      "sinIndicadoresEqavet": "Sen indicadores EQAVET valorados",
+      "identificacionPdTitulo": "Identificación (para PD+/pd=/pd-)",
+      "centroProfesoradoFamiliaConfigurados": "Centro, profesorado e familia profesional configurados",
+      "camposRellenanPortada": "Estes campos cobren a portada dos 3 modelos de PD",
+      "textosNarrativosTitulo": "Textos narrativos (PD+/JEG)",
+      "textosRedactadosCount": "{{rellenos}} / {{total}} textos redactados",
+      "todosLosTextosRedactados": "Todos os textos narrativos están redactados",
+      "calendarioAcademicoTitulo": "Calendario académico",
+      "horarioSemanalDefinido": "Horario semanal definido",
+      "sinHorarioSemanal": "Sen horario semanal",
+      "fechasEvaluacionConfiguradas": "Datas de avaliación configuradas",
+      "sinFechasEvaluacion": "Sen datas de avaliación",
+      "sinAlumnadoRegistrado": "Non hai alumnado rexistrado",
+      "alumnosRegistrados": "{{count}} alumnos rexistrados",
+      "registrosIncompletos": "{{count}} rexistros incompletos (sen nome/apelidos)",
+      "todosLosRegistrosCompletos": "Todos os rexistros completos",
+      "diarioAulaTitulo": "Diario de aula",
+      "seguimientoLabel": "Seguimento",
+      "sinEntradasDiario": "Sen entradas no diario de aula",
+      "sesionesRegistradasDiario": "{{count}} sesións rexistradas no diario",
+      "sinCalificacionesIntroducidas": "Sen cualificacións introducidas",
+      "faltanAlumnosEvaluar": "Faltan {{count}} alumnos por avaliar",
+      "todosLosAlumnosTienenRegistro": "Todos os alumnos teñen rexistros de cualificación",
+      "tutoriaAlertasTitulo": "Titoría e alertas",
+      "sinEntradasTutoria": "Sen entradas de titoría nin alertas rexistradas",
+      "entradasTutoriaRegistradas": "{{count}} entradas de titoría rexistradas",
+      "planoClaseTitulo": "Plano da aula",
+      "sinAlumnosPlano": "Non hai alumnos ubicados no plano",
+      "alumnosUbicadosAulaVisual": "{{count}} alumnos ubicados na aula visual",
+      "grupoTitulo": "Grupo",
+      "catalogoOficialTitulo": "Catálogo oficial (fixo)",
+      "familiasProfesionalesLabel": "Familias profesionais",
+      "titulosTotalesLabel": "Títulos totais",
+      "gradoBasicoLabel": "Grao Básico (GB/GM/GS)",
+      "gradoMedioLabel": "Grao Medio (GB/GM/GS)",
+      "gradoSuperiorLabel": "Grao Superior (GB/GM/GS)",
+      "ficheroCargado": "Ficheiro cargado ({{origen}})",
+      "gradoLabel": "Grao",
+      "sinFamiliaTituloAsignados": "Sen familia/título asignados aínda. Vai a Contexto > Identificación.",
+      "programacionDidacticaTitulo": "Programación didáctica",
+      "programacionActivaLabel": "Programación activa:",
+      "cursoActivoTitulo": "Curso activo",
+      "cursoActivoLabel": "Curso Activo:",
+      "alumnosConRegistro": "{{count}} alumnos con rexistro de {{total}} posibles ({{pct}})",
+      "dualGeneralLabel": "Xeral",
+      "faltanCampos": "Faltan: {{campos}}",
+      "indicadoresEqavetValorados": "{{count}} indicadores EQAVET valorados",
+      "sumaPesos": "Suma de pesos: {{pct}}% {{estado}}"
+    },
+    "secuenciacion": {
+      "contenidosLabel": "Contidos",
+      "aspectosClaveLabel": "Aspectos clave",
+      "disenoTareaCompetencialTitulo": "Deseño da Tarefa Competencial",
+      "scenarioBriefingLabel": "Scenario / briefing (contexto profesional)",
+      "scenarioBriefingDesc": "Situación laboral crible, encargo específico (ex. un correo dun cliente, unha incidencia técnica).",
+      "formatoEntregaPlazosLabel": "Formato de entrega e prazos",
+      "formatoEntregaPlazosDesc": "Como, cando e onde se debe entregar a tarefa.",
+      "desarrolloTareaPasosLabel": "Desenvolvemento da tarefa (pasos)",
+      "desarrolloTareaPasosDesc": "Instrucións secuenciadas que o alumnado debe seguir.",
+      "evidenciasAGenerarLabel": "Evidencias a xerar",
+      "evidenciasAGenerarDesc": "Que produtos tanxibles ou demostracións se van avaliar.",
+      "tareaLabel": "Tarefa",
+      "configuracionDetalladaUnidadTitulo": "Configuración detallada da unidade",
+      "intencionEducativaLabel": "Intención educativa / contextualización",
+      "intencionEducativaDesc": "Xustificación pedagóxica desta unidade, vinculación ao perfil profesional e coñecementos previos necesarios.",
+      "temporizacionDetalladaLabel": "Temporización detallada",
+      "temporizacionDetalladaDesc": "Período do curso, datas estimadas e relación con outras UD.",
+      "agrupamientosMetodologiaLabel": "Agrupamentos e metodoloxía",
+      "agrupamientosMetodologiaDesc": "Organización da aula (grupo grande, grupo pequeno, traballo individual).",
+      "transversalidadInnovacionLabel": "Transversalidade e innovación",
+      "transversalidadInnovacionDesc": "Como se traballan a dixitalización, a sustentabilidade, a equidade ou o DUA nesta unidade."
+    },
+    "calendario": {
+      "mesEnero": "Xaneiro",
+      "mesFebrero": "Febreiro",
+      "mesMarzo": "Marzo",
+      "mesAbril": "Abril",
+      "mesMayo": "Maio",
+      "mesJunio": "Xuño",
+      "mesJulio": "Xullo",
+      "mesAgosto": "Agosto",
+      "mesSeptiembre": "Setembro",
+      "mesOctubre": "Outubro",
+      "mesNoviembre": "Novembro",
+      "mesDiciembre": "Decembro",
+      "diaLuCorto": "Lu",
+      "diaMaCorto": "Ma",
+      "diaMiCorto": "Me",
+      "diaJuCorto": "Xo",
+      "diaViCorto": "Ve",
+      "diaSaCorto": "Sa",
+      "diaDoCorto": "Do",
+      "cargandoCalendario": "Cargando calendario...",
+      "fechasGeneralesTitulo": "Datas xerais",
+      "horarioSemanalTitulo": "Horario semanal",
+      "desfaseBoa": "Desfase con BOA ({{h_sem}} h/sem):",
+      "semanaLectivaTitulo": "Semana lectiva",
+      "eval1Abrev": "1ª Av.",
+      "eval2Abrev": "2ª Av.",
+      "eval3Abrev": "3ª Av.",
+      "trimestresTitulo": "Trimestres",
+      "inicioLabel": "Inicio",
+      "finLabel": "Fin",
+      "horasLectivasReales": "Horas lectivas reais",
+      "tipoDualLabel": "Tipo de dual",
+      "dualGeneral": "Dual Xeral",
+      "dualIntensiva": "Dual Intensiva",
+      "docenciaLabel": "Docencia",
+      "sinDocencia": "Sen docencia",
+      "conDocencia": "Con docencia",
+      "inicioFeoeLabel": "Inicio FEOE",
+      "finFeoeLabel": "Fin FEOE",
+      "horasDiaFeoeLabel": "Horas/día FEOE",
+      "festivosEventosTitulo": "Festivos e eventos",
+      "festivosEventosInstruccionesPre": "Introduce manualmente ou fai clic no calendario. Os festivos exclúen horas do cómputo real. Festivo e Relevante son independentes: un mesmo día pode ter os dous á vez. As filas con",
+      "festivosEventosInstruccionesPost": "(Inicio/Fin de curso e de trimestre, FEOE) veñen de Datas xerais / Período FEOE — edítanse alí, non aquí.",
+      "hoyBadge": "Hoxe"
+    },
+    "diario": {
+      "alumnadoActivoLabel": "Alumnado activo",
+      "riesgoAltoLabel": "Risco alto",
+      "riesgoMedioLabel": "Risco medio",
+      "tasaAbandonoEstimadaLabel": "Taxa de abandono estimada",
+      "sinAlertasAbandono": "Sen alertas de abandono",
+      "todoAlumnadoParametrosNormales": "Todo o alumnado activo está dentro dos parámetros normais.",
+      "horasTotalesModulo": "Horas totais do módulo",
+      "asistenciaFecha": "Asistencia: {{fecha}}"
+    },
+    "feoe": {
+      "score1": "1 · Suspenso",
+      "score2": "2 · Aprobado",
+      "score3": "3 · Notable",
+      "score4": "4 · Sobresaliente",
+      "criteriosDesignadosTitulo": "Criterios designados para FEOE",
+      "criteriosDesignadosDesc": "Marca os CE que se avalían na empresa (Anexo XI b) — o titor de empresa valóraos do 1 ao 4 e ti transcribes o resultado máis abaixo, por alumno.",
+      "sinRaCe": "Non hai RA/CE cargados neste módulo aínda.",
+      "marcaAlMenosUnCe": "Marca polo menos un CE arriba para comezar a rexistrar valoracións de empresa.",
+      "sinAlumnadoActivo": "Non hai alumnado activo rexistrado neste curso.",
+      "alumnadoActivoCount": "Alumnado activo ({{count}})",
+      "rellenaConBotonDesc": "Enche cun botón e corrixe a man o que faga falta — é só un punto de partida, non un valor definitivo.",
+      "sinEvaluar": "Sen avaliar",
+      "mediaSuperiorA2": "Media das actividades > 2, segundo o Anexo XI b)",
+      "superado": "Superado",
+      "mediaInferiorIgualA2": "Media das actividades ≤ 2, segundo o Anexo XI b)",
+      "noSuperado": "Non superado",
+      "observacionesTutorPlaceholder": "Observacións do titor de empresa (opcional)..."
+    },
+    "onboarding": {
+      "entendido": "Entendido!",
+      "siguiente": "Seguinte",
+      "anterior": "⬅ Anterior",
+      "bienvenidaTitulo": "Benvido a Cuaderno FP!",
+      "bienvenidaDesc": "Faremos un breve percorrido de 4 pasos para que lle saques o máximo proveito. Podes saltalo ou pechalo en calquera momento.",
+      "navegacionTitulo": "Navegación principal",
+      "navegacionDesc": "Aquí tes todas as ferramentas: Configuración, Módulo, Alumnado e Avaliación.",
+      "guardarDeshacerTitulo": "Gardar e Desfacer",
+      "guardarDeshacerDesc": "Podes gardar manualmente aquí, aínda que hai gardado automático. Tamén tes frechas para Desfacer/Refacer ou podes usar Ctrl+S e Ctrl+Z.",
+      "pestanaArchivosTitulo": "Pestana de Ficheiros",
+      "pestanaArchivosDesc": "Para comezar, vai a Ficheiros e selecciona 'Datos DEMO' para explorar sen medo."
+    },
+    "ayuda": {
+      "faq": {
+        "grupo1": {
+          "titulo": "1. Conceptos previos e seguridade",
+          "q1": "Que é a arquitectura Híbrida (Local-First + Cloud)?",
+          "a1": "Utilízase unha arquitectura moderna. Os teus datos de traballo (alumnado, notas) procésanse localmente no teu navegador, garantindo total privacidade e velocidade. As operacións pesadas (xeración de informes PDF ou conexión con Intelixencia Artificial) apóianse de forma segura nun servidor central.",
+          "q2": "Onde se gardan os meus datos?",
+          "a2": "Os datos da túa Programación e dos teus Cursos residen no teu propio navegador (IndexedDB). Ti tes o control absoluto sobre eles. Por seguridade, recoméndase usar con frecuencia a exportación de ficheiros (BYOC) desde a pestana Ficheiros.",
+          "q3": "Que diferenza hai entre 'Programación' e 'Curso'?",
+          "a3": "É un concepto vital: a 'Programación' é o teu molde teórico; contén a lei pura (Resultados de aprendizaxe, Criterios de avaliación) e as túas Unidades didácticas (reutilizable ano tras ano). O 'Curso' é a instancia real; representa a un grupo concreto de alumnado de carne e óso nun ano escolar específico, coas súas notas e faltas.",
+          "q4": "Que pasa se borro os datos ou a caché do meu navegador?",
+          "a4": "Se borras a caché profunda do navegador sen exportar previamente os teus datos, perderás o teu traballo. Por iso é vital usar periodicamente o botón 'Exportar' para gardar o teu progreso nun ficheiro .json e manter copias de seguridade locais.",
+          "q5": "Podo traballar desde varios ordenadores?",
+          "a5": "Si. Para transferir o teu contorno entre o ordenador do instituto e o teu portátil persoal, só tes que 'Exportar' o teu progreso no ordenador A e premer 'Importar' no ordenador B."
+        },
+        "grupo2": {
+          "titulo": "2. Paso 1: A programación didáctica",
+          "q1": "Teño que introducir a man todos os RA e CE do BOE?",
+          "a1": "Non! O sistema conta cun Catálogo oficial que importa automaticamente a normativa legal (Resultados de aprendizaxe e Criterios) do teu módulo. Só tes que escoller o teu Grao e o teu Ciclo Formativo na sección inicial de Catálogo e o sistema fai o resto por ti.",
+          "q2": "Que significa que os RA non suman 100% nas verificacións?",
+          "a2": "Para que a avaliación continua matemática funcione, cada Resultado de Aprendizaxe (RA) debe ter un 'peso' ou importancia. A suma total dos pesos de todos os RA dun módulo debe ser exactamente 100%. Debes axustar isto en Programación > Currículo > pestana 'RA e CE'.",
+          "q3": "Como configuro as horas que o alumnado pasa na empresa (FP Dual)?",
+          "a3": "En Programación > Contexto > pestana 'Identificación', escolle se o teu réxime é Dual Xeral, Dual Intensivo ou Ningún. Despois, en Programación > Contexto > pestana 'FEOE e réxime dual' describes como se organiza e se fai o seguimento desa formación na empresa. Para marcar que Resultados de Aprendizaxe concretos son duais, vai a Programación > Currículo > pestana 'RA e CE'.",
+          "q4": "Para que serve o apartado EQAVET?",
+          "a4": "Serve para integrar o ciclo de mellora continua europeo na túa programación. Atópalo en 'Inicio' > pestana 'Mellora'. A final de curso, autoavalías os indicadores de calidade e anotas as túas propostas de mellora para o próximo ano. A rúbrica de autoavaliación docente segue o modelo DOCENTIA de ANECA (ver aneca.es/docentia), adaptado á práctica na FP.",
+          "q5": "Que diferenza hai entre actividades complementarias e extraescolares?",
+          "a5": "Son legalmente distintas: as complementarias son en horario lectivo, están ligadas ao currículo e son avaliables — forman parte da túa programación didáctica. As extraescolares son fóra de horario, voluntarias e nunca avaliables — van na PGA do centro, non na PD; en Metodoloxía > Transversais podes anotalas igualmente como referencia, pero non contan na programación.",
+          "q6": "Que diferenza hai entre instrumento de avaliación e instrumento de cualificación?",
+          "a6": "Por cada Criterio de Avaliación (CE) hai dúas cousas distintas: o instrumento de avaliación é a actividade que xera a evidencia (unha proba obxectiva, unha tarefa, unha defensa oral...), e o instrumento de cualificación é o que puntúa esa evidencia (unha rúbrica, unha escala, unha lista de cotexo...). En Instrumentos podes codificar ambos por separado ao configurar cada instrumento."
+        },
+        "grupo3": {
+          "titulo": "3. Paso 3: Creación do curso e o alumnado",
+          "q1": "Podo importar alumnado desde plataformas como Séneca, Rayuela ou un Excel?",
+          "a1": "Si. Na sección de 'Alumnado' podes importar un ficheiro CSV (Excel) coa túa lista de clase. Alternativamente, a táboa intelixente permíteche copiar e pegar celas masivamente, igual que se fose unha folla de cálculo.",
+          "q2": "Que nivel de seguridade teñen os datos do meu alumnado?",
+          "a2": "Os teus ficheiros locais nunca saen cara ao noso servidor se non queres (usando 'Gardar en Local'). Se escolles gardalos en Google Drive ou OneDrive, o ficheiro transmítese directamente entre o teu navegador e os servidores de Microsoft/Google. Podes activar o cifrado local para que o ficheiro sexa absolutamente ilexible sen a túa clave mestra.",
+          "q3": "Está a aplicación protexida contra ataques ou caídas?",
+          "a3": "Si. O frontend inclúe unha Política de Seguridade de Contido (CSP) que bloquea ataques de inxección de código (XSS) para protexer os teus datos locais. Ademais, o noso servidor conta con 'Rate Limiting' (limitación de peticións) que previne ataques de denegación de servizo (DDoS) para garantir que os catálogos oficiais estean sempre dispoñibles cando os necesites.",
+          "q4": "Como distribúo fisicamente ao alumnado na aula?",
+          "a4": "Dentro de 'Alumnado' atoparás unha pestana de 'Plano de clase'. É un taboleiro visual e interactivo onde podes arrastrar e soltar aos estudantes aos seus respectivos pupitres para ter o deseño exacto da túa clase.",
+          "q5": "Como uso o sistema de Alertas de Abandono?",
+          "a5": "O panel de prevención temperá permíteche rexistrar chamadas ás familias, partes disciplinarios ou derivacións ao departamento de orientación para alumnado con risco de abandono escolar."
+        },
+        "grupo4": {
+          "titulo": "4. Paso 5: O día a día e a avaliación",
+          "q1": "Que é o 'Diario de aula'?",
+          "a1": "É o teu caderno de bitácora diario. Permíteche anotar o que ocorre en cada sesión real de clase: que UD impartiches, se houbo incidencias ou marcar días 'Sen docencia' (como folgas ou claustros) para que non conten no teu progreso.",
+          "q2": "Como se calcula a previsión de 'Planificación mensual'?",
+          "a2": "Calcúlase día a día co calendario de festivos e o horario semanal que xa tes rexistrados na app — non é unha estimación proporcional, é un cálculo exacto con eses datos. Cambiará se o calendario oficial do curso ou a distribución definitiva do horario aínda non están completos.",
+          "q3": "Como paso lista ou rexistro faltas de asistencia?",
+          "a3": "Na sección de Seguimento tes a pestana 'Asistencia'. Verás a todo o teu alumnado e cun só clic na súa cuadrícula podes alternar entre Falta, Atraso ou Falta Xustificada.",
+          "q4": "Como avalío unha tarefa ou exame concreto?",
+          "a4": "Vai á sección 'Seguimento' > pestana 'Detalle por alumnado' para introducir a nota de cada actividade, por alumno/a. A nota final recalcúlase automaticamente a partir dos pesos de RA e CE.",
+          "q5": "Como se calcula exactamente a nota final do trimestre?",
+          "a5": "O sistema cruza as cualificacións que pos nos Instrumentos co peso do Indicador (Avaliación > bloque Indicadores), que á súa vez alimenta o peso do Criterio de Avaliación (CE) e finalmente o Resultado de Aprendizaxe (RA). Todo en tempo real.",
+          "q6": "Que significan as cores (morado, verde azulado, laranxa) na axenda e o calendario visual?",
+          "a6": "As cores do fondo indican o trimestre (avaliación) ao que pertence cada actividade ou data: 1º trimestre (morado/malva), 2º trimestre (teal/verde azulado) e 3º trimestre (laranxa/ámbar) — deliberadamente sen vermello nin azul, eses tons están reservados a Festivo e Evento."
+        },
+        "grupo5": {
+          "titulo": "5. Descargas e documentos oficiais",
+          "q1": "Podo xerar boletíns automáticos para o alumnado?",
+          "a1": "Si. Desde a pestana 'Curso' de MagIA podes xerar boletíns en PDF masivos para toda a clase ou resumos individuais hiperdetallados que xustifican a nota en base a cada Criterio de Avaliación conseguido."
+        },
+        "grupo7": {
+          "titulo": "7. Soporte técnico",
+          "q1": "Que pasa se as gráficas do meu panel de control non cargan?",
+          "a1": "Comproba na barra lateral que activaches o 'Modo Reais' e tes seleccionado o teu Grupo. As gráficas necesitan saber a que alumnado e a que programación apuntan para poder analizar os datos.",
+          "q2": "Pódese usar Cuaderno FP no móbil?",
+          "a2": "O deseño é responsivo e adáptase, pero pola densidade de información (táboas masivas de avaliación e matrices curriculares), recomendámosche encarecidamente utilizalo en pantallas de ordenador ou tabletas grandes.",
+          "q3": "A app vai moi lenta ou detectei un erro estraño",
+          "a3": "Intenta recargar a páxina completamente (F5 ou Ctrl+R). Se o erro segue aparecendo, exporta os teus datos (.json) inmediatamente para pólos a salvo e ponte en contacto co soporte detallando os pasos para reproducir o teu problema."
+        }
+      },
+      "mapaAplicacionTitulo": "Mapa da aplicación (sitemap)",
+      "mapaAplicacionDescPre": "Estrutura organizativa de Cuaderno FP. Xérase a partir da configuración real de navegación (",
+      "mapaAplicacionDescPost": "), así que non pode quedar desactualizado como a súa versión anterior.",
+      "agrupamientoPreguntaTitulo": "É adecuado o agrupamento actual?",
+      "agrupamientoRespuestaPre": "Si: separa con claridade o punto de partida (",
+      "agrupamientoInicioDesc": ": Panel/Axuda/Normativa/Catálogo — de consulta puntual, sen necesitar un grupo aberto), o espazo de traballo activo (",
+      "grupoLabel": "Grupo",
+      "agrupamientoGrupoDesc": ": Ficheiro/Axenda/Legal/MagIA — xestión de ficheiros, axenda do día a día e ferramentas de apoio), o reutilizable (",
+      "programacionLabel": "Programación",
+      "agrupamientoProgramacionDesc": ": Contexto/Currículo/Metodoloxía/Instrumentos) e o específico do ano (",
+      "agrupamientoCursoDesc": ": Calendario/Alumnado/Seguimento/Cualificacións).",
+      "errorCargandoContenido": "Erro cargando o contido."
+    },
+    "calificaciones": {
+      "sinCursoNiProgramacionTitulo": "Non hai curso nin programación cargada",
+      "sinCursoNiProgramacionDesc": "Debes abrir ou crear un arquivo de programación e curso nos teus Arquivos.",
+      "cargandoDatosProgreso": "Cargando datos de progreso académico..."
+    },
+    "inicio": {
+      "metodologiaEspecificaTitulo": "Unha ferramenta construída sobre metodoloxía específica",
+      "metodologiaEspecificaDesc": "Cuaderno FP segue as referencias bibliográficas actualizadas á nova lei de FP, as orientacións da Inspección Educativa, os principais autores de referencia e as guías oficiais das administracións educativas: os Resultados de Aprendizaxe (RA) son o eixe causal do que se considera debe derivar todo o demais nunha programación didáctica.",
+      "pasoIdentificacion": "Identificación",
+      "pasoIntroduccionJustificacionNormativa": "Introdución, xustificación e normativa",
+      "pasoContextualizacion": "Contextualización",
+      "pasoObjetivosCompetencias": "Obxectivos e competencias",
+      "pasoCaracterIntermodularDual": "Carácter intermodular e dual",
+      "pasoContenidosCentradosRa": "Contidos centrados en RA",
+      "pasoSituacionesAprendizaje": "Situacións de aprendizaxe",
+      "pasoMetodologiaInclusion": "Metodoloxía e inclusión",
+      "pasoEvaluacion": "Avaliación (aprendizaxe / prácticas / excepcións)",
+      "pasoActividadesComplementarias": "Actividades complementarias",
+      "pasoAtencionDiversidadRecursos": "Atención á diversidade e recursos",
+      "grupoTelegramTitulo": "Grupo oficial de Telegram",
+      "grupoTelegramDesc": "Grupo oficial de desenvolvemento e probas da App web gratuíta de Cuaderno FP. Envía as túas suxestións, informa de erros ou colabora achegando o currículo oficial da túa Comunidade Autónoma.",
+      "contribuidoresCcaaTitulo": "Colaboradores por Comunidade Autónoma",
+      "contribuidoresCcaaDesc": "Mención especial ao profesorado que está a axudar a mellorar e a integrar os currículos das Comunidades Autónomas",
+      "animateAContribuir": "Anímate a contribuír!"
+    },
+    "legal": {
+      "datosTitular": "Datos do titular",
+      "condicionesUso": "Condicións de uso",
+      "propiedadIntelectual": "Propiedade intelectual (LPI)",
+      "licenciasTitulo": "Licenzas",
+      "codigoFuenteGplTitulo": "4a. Código fonte — GNU GPLv3",
+      "queImplicaTitulo": "Que implica?",
+      "copyleftTitulo": "Copyleft: Compartir igual",
+      "verLicenciaCompletaGithub": "Ver licenza completa en GitHub",
+      "contenidoMaterialesCcTitulo": "4b. Contido e materiais — CC BY-NC-SA 4.0",
+      "resumenPracticoTitulo": "Resumo práctico para o profesorado",
+      "modeloPrivacidadTitulo": "Modelo de privacidade local-first",
+      "privacidadAbsolutaTitulo": "Privacidade absoluta por deseño",
+      "responsableTratamientoTitulo": "Responsable do tratamento (RXPD)",
+      "dondeSeGuardanDatosTitulo": "Onde se gardan os datos?",
+      "derechosArcoTitulo": "Dereitos do alumnado (ARCO)",
+      "seguridadTitulo": "Seguridade",
+      "baseLegalNormativaTitulo": "Base legal e normativa aplicable",
+      "politicaCookiesTitulo": "Política de cookies",
+      "tecnologiasAlmacenamientoTitulo": "Tecnoloxías de almacenamento utilizadas",
+      "detalleAlmacenamientoTitulo": "Detalle de almacenamento local",
+      "contenidoThemeA11y": "Preferencias de tema e accesibilidade",
+      "duracionPersistente": "Persistente",
+      "contenidoCatalogCache": "Catálogos oficiais (ciclos, módulos, RA/CE)",
+      "contenidoSessionData": "Datos de sesión e configuración de módulo",
+      "comoGestionarTitulo": "Como xestionar o almacenamento local",
+      "declaracionAccesibilidadTitulo": "Declaración de accesibilidade",
+      "normativaAplicableTitulo": "Normativa aplicable",
+      "estadoConformidadTitulo": "Estado de conformidade",
+      "medidasAdoptadasTitulo": "Medidas de accesibilidade adoptadas",
+      "navegacionEstructuraTitulo": "Navegación e estrutura",
+      "interaccionControlesTitulo": "Interacción e controis",
+      "personalizacionTitulo": "Personalización",
+      "excepcionesTitulo": "Excepcións e contido non conforme",
+      "contactoInfoAccesibleTitulo": "Contacto e solicitude de información accesible"
+    },
+    "magia": {
+      "contextoDesc": "Información xeral e características da contorna.",
+      "sinDocumentosApoyo": "Aínda non hai documentos de apoio nesta sección.",
+      "curriculoDesc": "Cruzamento de resultados de aprendizaxe e criterios; documentos de UD e tarefas.",
+      "matrizRaUdTitulo": "Matriz RA ↔ UD",
+      "matrizRaUdDesc": "Táboa cruzada de RA e a súa relación coas Unidades Didácticas.",
+      "sinUdDefinidas": "Non hai Unidades Didácticas definidas.",
+      "tareaCompetencialTitulo": "Tarefa competencial",
+      "sinTareasDefinidas": "Non hai Tarefas competenciais definidas.",
+      "metodologiaDesc": "Estratexias metodolóxicas e recursos.",
+      "instrumentosTitulo": "Instrumentos",
+      "instrumentosDesc": "Definición e pesos das ferramentas de avaliación.",
+      "calendarioDesc": "Horario, trimestres, festivos e eventos.",
+      "calendarioAcademicoDesc": "Vista global do curso con datas, sesións e eventos.",
+      "alumnadoDesc": "Fichas persoais e ubicación na aula.",
+      "alumnadoUbicacionAulaTitulo": "Alumnado. Ubicación na aula",
+      "distribucionUbicacionAulaDesc": "Distribución e ubicación do alumnado na aula.",
+      "progresoAlumnadoTitulo": "Progreso do alumnado",
+      "generaInformeAvanceDesc": "Xera un informe do avance do alumnado.",
+      "fichaIndividualTitulo": "Ficha individual",
+      "fichaIndividualDesc": "Ficha de matrícula + titoría dun alumno/a, para levar a unha reunión de orientación.",
+      "seguimientoLabel": "Seguimento",
+      "seguimientoDesc": "Diario de clases, secuenciación por UD e planificación mensual.",
+      "seguimientoDiarioTitulo": "Seguimento diario",
+      "seguimientoDiarioDesc": "Rexistro detallado da planificación do día a día.",
+      "clasesPorUdTitulo": "Clases por UD",
+      "clasesPorUdDesc": "Secuenciación de sesións de cada Unidade didáctica.",
+      "planificacionTitulo": "Planificación",
+      "planificacionDesc": "Distribución temporal mensual (previsto/impartido) por UD.",
+      "calificacionesDesc": "Boletíns, actas de avaliación e informes por alumno/a.",
+      "boletinDelTrimestre": "Boletín do {{trimestre}}",
+      "evaluacionFinalExtraordinariaTitulo": "Avaliación final extraordinaria",
+      "evaluacionFinalOrdinariaTitulo": "Avaliación final ordinaria"
+    },
+    "seguimiento": {
+      "cargandoDatosSeguimiento": "Cargando datos de seguimento..."
     }
-  }
+  },
+  "t1": "1º trimestre",
+  "t2": "2º trimestre",
+  "t3": "3º trimestre",
+  "festivo": "Festivo",
+  "evento": "Evento",
+  "festivos": "Festivos",
+  "eventos": "Eventos",
+  "nombre_festivo": "Nome do festivo...",
+  "desc_evento": "Descrición do evento...",
+  "anadir": "Engadir",
+  "cancelar": "Cancelar",
+  "table": {
+    "fecha": "Data",
+    "hasta": "Ata"
+  },
+  "fecha": "Data",
+  "hasta_opc": "Ata (opcional)",
+  "sin_eventos": "Aínda non hai festivos nin eventos. Engade un enriba."
 }

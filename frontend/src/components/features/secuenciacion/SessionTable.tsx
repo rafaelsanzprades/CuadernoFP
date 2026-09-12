@@ -74,12 +74,12 @@ export function SessionTable({
               <div className="w-full text-body">
                 <div className="flex text-muted border-b border-[var(--glass-border)] pb-2 mb-2 items-center">
                   <div className="w-10"></div>
-                  <div className="w-16">Nº</div>
-                  <div className="w-16 pr-2">Horas</div>
-                  <div className="w-40 pr-2">Tipo</div>
-                  <div className="w-32 pr-2">Ra/CE</div>
-                  <div className="w-20 pr-2">IE %</div>
-                  <div className="flex-1 pr-2">Contenidos</div>
+                  <div className="w-16">{t('tablas.secuenciacion.numAbrev', {defaultValue: 'Nº'})}</div>
+                  <div className="w-16 pr-2">{t('tablas.curriculo.horas', {defaultValue: 'Horas'})}</div>
+                  <div className="w-40 pr-2">{t('common.tipo', {defaultValue: 'Tipo'})}</div>
+                  <div className="w-32 pr-2">{t('tablas.secuenciacion.raCe', {defaultValue: 'Ra/CE'})}</div>
+                  <div className="w-20 pr-2">{t('tablas.secuenciacion.iePct', {defaultValue: 'IE %'})}</div>
+                  <div className="flex-1 pr-2">{t('campos.secuenciacion.contenidosLabel', {defaultValue: 'Contenidos'})}</div>
                   <div className="w-10"></div>
                 </div>
                 <Droppable droppableId={ud.id_ud}>
@@ -176,7 +176,7 @@ export function SessionTable({
                                 {/* Segunda Línea: Identada y con MultiSelects */}
                                 <div className="flex items-center gap-4 pl-[7.5rem]">
                                   <div className="flex-1 flex flex-col">
-                                    <span className="text-caption text-muted-foreground tracking-wider mb-1 font-semibold">Aspectos Clave</span>
+                                    <span className="text-caption text-muted-foreground tracking-wider mb-1 font-semibold">{t('campos.secuenciacion.aspectosClaveLabel', {defaultValue: 'Aspectos Clave'})}</span>
                                     <MultiSelectDropdown
                                       options={getAllAspectosClave()}
                                       selectedIds={ses.Aspectos_Clave ? ses.Aspectos_Clave.split(',').map(s => s.trim()).filter(Boolean) : []}
@@ -185,7 +185,7 @@ export function SessionTable({
                                     />
                                   </div>
                                   <div className="flex-1 flex flex-col pr-10">
-                                    <span className="text-caption text-muted-foreground tracking-wider mb-1 font-semibold">Recursos</span>
+                                    <span className="text-caption text-muted-foreground tracking-wider mb-1 font-semibold">{t('tabs.metodologia.recursos.label', {defaultValue: 'Recursos'})}</span>
                                     <MultiSelectDropdown
                                       options={getAllRecursos()}
                                       selectedIds={ses.Recursos ? ses.Recursos.split(',').map(s => s.trim()).filter(Boolean) : []}

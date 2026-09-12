@@ -25,6 +25,7 @@ const markdownComponents = {
 };
 
 function AcordeonNivel({ id, file, icon: Icon, defaultOpen, title, desc }: { id: string; file: string; icon: typeof FileText; defaultOpen: boolean; title: string; desc: string }) {
+  const { t } = useTranslation();
   const [content, setContent] = useState<string | null>(null);
   const [open, setOpen] = useState(defaultOpen);
 
@@ -35,7 +36,7 @@ function AcordeonNivel({ id, file, icon: Icon, defaultOpen, title, desc }: { id:
       .then(text => setContent(text))
       .catch(err => {
         console.error(err);
-        setContent("Error cargando el contenido.");
+        setContent(t('campos.ayuda.errorCargandoContenido', {defaultValue: 'Error cargando el contenido.'}));
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
@@ -49,7 +50,7 @@ function AcordeonNivel({ id, file, icon: Icon, defaultOpen, title, desc }: { id:
       <div className="p-6">
         <p className="text-caption text-muted mb-4">{desc}</p>
         {content === null ? (
-          <div className="flex justify-center p-8 text-muted">Cargando...</div>
+          <div className="flex justify-center p-8 text-muted">{t('common.cargando', {defaultValue: 'Cargando...'})}</div>
         ) : (
           <div className="markdown-body">
             <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={markdownComponents}>

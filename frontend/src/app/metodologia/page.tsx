@@ -77,8 +77,8 @@ export default function MetodologiaConfigPage() {
             <MotionWrapper>
               <div className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <Settings className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-heading font-bold">No hay programación cargada</h2>
-                <p className="text-muted mb-4">Debes abrir o crear un archivo de programación en tu Archivos.</p>
+                <h2 className="text-heading font-bold">{t('campos.comun.sinProgramacionCargadaTitulo', {defaultValue: 'No hay programación cargada'})}</h2>
+                <p className="text-muted mb-4">{t('campos.comun.sinProgramacionCargadaDesc', {defaultValue: 'Debes abrir o crear un archivo de programación en tu Archivos.'})}</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
                     <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
@@ -101,7 +101,7 @@ export default function MetodologiaConfigPage() {
           <main id="main-content" tabIndex={-1} className="flex-1 p-8 content-area">
             <div className="flex flex-col items-center justify-center h-full">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mb-4"></div>
-              <p>Cargando datos de metodología...</p>
+              <p>{t('campos.contexto.cargandoDatosMetodologia', {defaultValue: 'Cargando datos de metodología...'})}</p>
             </div>
           </main>
         </div>

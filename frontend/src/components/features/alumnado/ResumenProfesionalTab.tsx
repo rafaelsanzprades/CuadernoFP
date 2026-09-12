@@ -1,6 +1,7 @@
 "use client";
 import { AlertTriangle, Building2, CheckCircle2, ClipboardList, Compass, Globe2, GraduationCap, Handshake, Rocket, Search, Target, XCircle } from "lucide-react";
 import React, { useState, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { Alumnado } from "@/types";
@@ -40,6 +41,7 @@ const APTITUD_COLOR: Record<string, string> = {
 // Adaptado de ResumenTab.tsx (APP-EntidadIES / antigua página /profesional).
 
 export const ResumenProfesionalTab = () => {
+  const { t } = useTranslation();
   const { cursoData } = useAppStore();
 
   const df_al = cursoData?.df_al || [];
@@ -132,7 +134,7 @@ export const ResumenProfesionalTab = () => {
             type="text"
             value={searchText}
             onChange={e => setSearchText(e.target.value)}
-            placeholder="Buscar alumnado/a..."
+            placeholder={t('placeholders.alumnado.buscarAlumnado', {defaultValue: 'Buscar alumnado/a...'})}
             className="w-full bg-foreground/10 border border-[var(--glass-border)] rounded-xl px-4 py-2 pl-9 text-sm text-foreground focus:border-accent focus:outline-none"
           />
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted text-sm"><span className="inline-flex"><Search className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
@@ -145,7 +147,7 @@ export const ResumenProfesionalTab = () => {
               onClick={() => setFilterEstado(v)}
               className={`px-4 py-2 transition-colors ${filterEstado === v ? "bg-accent text-background" : "bg-foreground/5 text-muted hover:text-foreground"}`}
             >
-              {v === "todos" ? "Todos" : v === "Alta" ? <><span className="inline-flex"><CheckCircle2 className="w-[1.2em] h-[1.2em] mr-1" /></span> Activos</> : <><span className="inline-flex"><XCircle className="w-[1.2em] h-[1.2em] mr-1" /></span> Baja</>}
+              {v === "todos" ? t('checks.evaluacion.todos', {defaultValue: 'Todos'}) : v === "Alta" ? <><span className="inline-flex"><CheckCircle2 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('checks.alumnado.estadoActivos', {defaultValue: 'Activos'})}</> : <><span className="inline-flex"><XCircle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('checks.alumnado.estadoBaja', {defaultValue: 'Baja'})}</>}
             </button>
           ))}
         </div>
@@ -155,7 +157,7 @@ export const ResumenProfesionalTab = () => {
           onChange={e => setFilterIntencion(e.target.value)}
           className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl px-3 py-2 text-sm text-foreground focus:border-accent focus:outline-none cursor-pointer"
         >
-          <option value="">Toda intención</option>
+          <option value="">{t('checks.alumnado.todaIntencion', {defaultValue: 'Toda intención'})}</option>
           {uniqueIntenciones.map(v => <option key={v} value={v}>{v}</option>)}
         </select>
 
@@ -164,12 +166,12 @@ export const ResumenProfesionalTab = () => {
           onChange={e => setFilterAptitud(e.target.value)}
           className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl px-3 py-2 text-sm text-foreground focus:border-accent focus:outline-none cursor-pointer"
         >
-          <option value="">Toda aptitud</option>
+          <option value="">{t('checks.alumnado.todaAptitud', {defaultValue: 'Toda aptitud'})}</option>
           {uniqueAptitudes.map(v => <option key={v} value={v}>{v}</option>)}
         </select>
 
         <div className="text-xs text-muted ml-auto shrink-0">
-          <span className="font-bold text-foreground">{nConFicha}</span>/{filtered.length} con ficha
+          <span className="font-bold text-foreground">{nConFicha}</span>/{filtered.length} {t('campos.alumnado.conFichaSufijo', {defaultValue: 'con ficha'})}
         </div>
       </div>
 
@@ -180,31 +182,31 @@ export const ResumenProfesionalTab = () => {
             <thead>
               <tr className="border-b border-white/5 bg-foreground/8 text-muted text-xs tracking-wider">
                 <th className="text-left p-4 font-semibold cursor-pointer hover:text-foreground select-none whitespace-nowrap" onClick={() => toggleSort("apellidos")}>
-                  Alumnado/a <SortIcon field="apellidos" />
+                  {t('nav.alumnado', {defaultValue: 'Alumnado/a'})} <SortIcon field="apellidos" />
                 </th>
-                <th className="p-4 text-left font-semibold whitespace-nowrap">Vía acceso</th>
+                <th className="p-4 text-left font-semibold whitespace-nowrap">{t('campos.alumnado.viaAccesoLabel', {defaultValue: 'Vía acceso'})}</th>
                 <th className="text-left p-4 font-semibold cursor-pointer hover:text-foreground select-none whitespace-nowrap" onClick={() => toggleSort("aptitud")}>
-                  Aptitud <SortIcon field="aptitud" />
+                  {t('campos.alumnado.aptitudLabel', {defaultValue: 'Aptitud'})} <SortIcon field="aptitud" />
                 </th>
                 <th className="text-left p-4 font-semibold cursor-pointer hover:text-foreground select-none whitespace-nowrap" onClick={() => toggleSort("area")}>
-                  Área interés <SortIcon field="area" />
+                  {t('campos.alumnado.areaInteresLabel', {defaultValue: 'Área interés'})} <SortIcon field="area" />
                 </th>
                 <th className="text-left p-4 font-semibold cursor-pointer hover:text-foreground select-none whitespace-nowrap" onClick={() => toggleSort("intencion")}>
-                  Intención al terminar <SortIcon field="intencion" />
+                  {t('campos.alumnado.intencionTerminarLabel', {defaultValue: 'Intención al terminar'})} <SortIcon field="intencion" />
                 </th>
-                <th className="text-left p-4 font-semibold whitespace-nowrap">Inserción</th>
+                <th className="text-left p-4 font-semibold whitespace-nowrap">{t('campos.alumnado.insercionLabel', {defaultValue: 'Inserción'})}</th>
                 <th className="text-center p-4 font-semibold whitespace-nowrap"><span className="inline-flex"><Globe2 className="w-[1.2em] h-[1.2em] mr-1" /></span></th>
                 <th className="text-center p-4 font-semibold whitespace-nowrap"><span className="inline-flex"><Rocket className="w-[1.2em] h-[1.2em] mr-1" /></span></th>
                 <th className="text-center p-4 font-semibold whitespace-nowrap"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></th>
                 <th className="text-center p-4 font-semibold whitespace-nowrap"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span></th>
-                <th className="text-left p-4 font-semibold whitespace-nowrap">Reuniones</th>
+                <th className="text-left p-4 font-semibold whitespace-nowrap">{t('campos.alumnado.reunionesLabel', {defaultValue: 'Reuniones'})}</th>
               </tr>
             </thead>
             <tbody>
               {filtered.length === 0 ? (
                 <tr>
                   <td colSpan={11} className="p-12 text-center text-muted">
-                    No hay alumnado que coincidan con los filtros.
+                    {t('campos.alumnado.sinAlumnadoFiltros', {defaultValue: 'No hay alumnado que coincidan con los filtros.'})}
                   </td>
                 </tr>
               ) : filtered.map((al: Alumnado) => {
@@ -225,12 +227,12 @@ export const ResumenProfesionalTab = () => {
                           <div>
                             <div className="font-semibold text-foreground">
                               {al.Apellidos}, {al.Nombre}
-                              {isBaja && <span className="ml-2 text-[10px] text-danger border border-danger/30 px-1.5 py-0.5 rounded-full">Baja</span>}
+                              {isBaja && <span className="ml-2 text-[10px] text-danger border border-danger/30 px-1.5 py-0.5 rounded-full">{t('checks.alumnado.estadoBaja', {defaultValue: 'Baja'})}</span>}
                             </div>
                             <div className="text-[10px] text-muted font-mono">{al.ID}</div>
                           </div>
                           {!hasFicha && (
-                            <span className="text-[10px] text-muted/50 border border-white/10 px-1.5 py-0.5 rounded-full ml-1">Sin ficha</span>
+                            <span className="text-[10px] text-muted/50 border border-white/10 px-1.5 py-0.5 rounded-full ml-1">{t('campos.alumnado.sinFichaBadge', {defaultValue: 'Sin ficha'})}</span>
                           )}
                         </div>
                       </td>
@@ -260,17 +262,17 @@ export const ResumenProfesionalTab = () => {
                       </td>
 
                       <td className="p-4 text-center">
-                        {d.interes_erasmus === "X" ? <span title="Interesado/a en Erasmus+"><span className="inline-flex"><Globe2 className="w-[1.2em] h-[1.2em] mr-1" /></span></span> : <span className="text-muted/20">·</span>}
+                        {d.interes_erasmus === "X" ? <span title={t('campos.alumnado.interesadoErasmus', {defaultValue: 'Interesado/a en Erasmus+'})}><span className="inline-flex"><Globe2 className="w-[1.2em] h-[1.2em] mr-1" /></span></span> : <span className="text-muted/20">·</span>}
                       </td>
                       <td className="p-4 text-center">
-                        {d.interes_emprender === "X" ? <span title="Tiene idea de negocio"><span className="inline-flex"><Rocket className="w-[1.2em] h-[1.2em] mr-1" /></span></span> : <span className="text-muted/20">·</span>}
+                        {d.interes_emprender === "X" ? <span title={t('campos.alumnado.tieneIdeaNegocio', {defaultValue: 'Tiene idea de negocio'})}><span className="inline-flex"><Rocket className="w-[1.2em] h-[1.2em] mr-1" /></span></span> : <span className="text-muted/20">·</span>}
                       </td>
                       <td className="p-4 text-center">
-                        {d.interes_universidad === "X" ? <span title="Interesado/a en universidad"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></span> : <span className="text-muted/20">·</span>}
+                        {d.interes_universidad === "X" ? <span title={t('campos.alumnado.interesadoUniversidad', {defaultValue: 'Interesado/a en universidad'})}><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></span> : <span className="text-muted/20">·</span>}
                       </td>
                       <td className="p-4 text-center">
                         {d.derivado_orientador === "X"
-                          ? <span className="text-warning font-bold" title="Derivado al orientador"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
+                          ? <span className="text-warning font-bold" title={t('campos.alumnado.derivadoAlOrientador', {defaultValue: 'Derivado al orientador'})}><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
                           : <span className="text-muted/20">·</span>}
                       </td>
                       <td className="p-4 text-center">
@@ -286,13 +288,13 @@ export const ResumenProfesionalTab = () => {
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
 
                             <div className="space-y-3">
-                              <div className="text-[10px] font-bold text-muted tracking-widest mb-2"><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> Perfil</div>
+                              <div className="text-[10px] font-bold text-muted tracking-widest mb-2"><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.perfilSeccionTitulo', {defaultValue: 'Perfil'})}</div>
                               {[
-                                ["Motivo elección", d.motivo_eleccion],
-                                ["Experiencia previa", d.experiencia_previa],
-                                ["Sector experiencia", d.sector_experiencia],
-                                ["Trabaja actualmente", d.jornada_actual],
-                                ["Empresa actual", d.empresa_actual],
+                                [t('campos.alumnado.motivoEleccionLabel', {defaultValue: 'Motivo elección'}), d.motivo_eleccion],
+                                [t('campos.alumnado.experienciaPreviaLabel', {defaultValue: 'Experiencia previa'}), d.experiencia_previa],
+                                [t('campos.alumnado.sectorExperienciaLabel', {defaultValue: 'Sector experiencia'}), d.sector_experiencia],
+                                [t('campos.alumnado.trabajaActualmenteLabel', {defaultValue: 'Trabaja actualmente'}), d.jornada_actual],
+                                [t('campos.alumnado.empresaActualLabel', {defaultValue: 'Empresa actual'}), d.empresa_actual],
                               ].map(([label, val]) => val ? (
                                 <div key={label} className="flex gap-2 text-xs">
                                   <span className="text-muted shrink-0">{label}:</span>
@@ -300,22 +302,22 @@ export const ResumenProfesionalTab = () => {
                                 </div>
                               ) : null)}
                               <div className="flex flex-wrap gap-1.5 pt-1">
-                                {d.interes_bolsa_empleo === "X" && <span className="text-[10px] bg-success/10 text-success border border-success/30 px-2 py-0.5 rounded-full"><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> Bolsa empleo</span>}
-                                {d.interes_erasmus === "X" && <span className="text-[10px] bg-info/10 text-info border border-info/30 px-2 py-0.5 rounded-full"><span className="inline-flex"><Globe2 className="w-[1.2em] h-[1.2em] mr-1" /></span> Erasmus+</span>}
-                                {d.interes_emprender === "X" && <span className="text-[10px] bg-warning/10 text-warning border border-warning/30 px-2 py-0.5 rounded-full"><span className="inline-flex"><Rocket className="w-[1.2em] h-[1.2em] mr-1" /></span> Emprender</span>}
-                                {d.interes_mentoria === "X" && <span className="text-[10px] bg-info/10 text-info border border-info/30 px-2 py-0.5 rounded-full"><span className="inline-flex"><Handshake className="w-[1.2em] h-[1.2em] mr-1" /></span> Mentoría</span>}
-                                {d.interes_universidad === "X" && <span className="text-[10px] bg-info/10 text-info border border-info/30 px-2 py-0.5 rounded-full"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Universidad</span>}
-                                {d.empresa_identificada === "X" && <span className="text-[10px] bg-success/10 text-success border border-success/30 px-2 py-0.5 rounded-full"><span className="inline-flex"><Building2 className="w-[1.2em] h-[1.2em] mr-1" /></span> Empresa identificada</span>}
+                                {d.interes_bolsa_empleo === "X" && <span className="text-[10px] bg-success/10 text-success border border-success/30 px-2 py-0.5 rounded-full"><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.bolsaEmpleoBadge', {defaultValue: 'Bolsa empleo'})}</span>}
+                                {d.interes_erasmus === "X" && <span className="text-[10px] bg-info/10 text-info border border-info/30 px-2 py-0.5 rounded-full"><span className="inline-flex"><Globe2 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.erasmusBadge', {defaultValue: 'Erasmus+'})}</span>}
+                                {d.interes_emprender === "X" && <span className="text-[10px] bg-warning/10 text-warning border border-warning/30 px-2 py-0.5 rounded-full"><span className="inline-flex"><Rocket className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.emprenderBadge', {defaultValue: 'Emprender'})}</span>}
+                                {d.interes_mentoria === "X" && <span className="text-[10px] bg-info/10 text-info border border-info/30 px-2 py-0.5 rounded-full"><span className="inline-flex"><Handshake className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.mentoriaBadge', {defaultValue: 'Mentoría'})}</span>}
+                                {d.interes_universidad === "X" && <span className="text-[10px] bg-info/10 text-info border border-info/30 px-2 py-0.5 rounded-full"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.universidadBadge', {defaultValue: 'Universidad'})}</span>}
+                                {d.empresa_identificada === "X" && <span className="text-[10px] bg-success/10 text-success border border-success/30 px-2 py-0.5 rounded-full"><span className="inline-flex"><Building2 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.empresaIdentificadaBadge', {defaultValue: 'Empresa identificada'})}</span>}
                               </div>
                             </div>
 
                             <div className="space-y-3">
-                              <div className="text-[10px] font-bold text-muted tracking-widest mb-2"><span className="inline-flex"><Compass className="w-[1.2em] h-[1.2em] mr-1" /></span> Aspiraciones</div>
+                              <div className="text-[10px] font-bold text-muted tracking-widest mb-2"><span className="inline-flex"><Compass className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.aspiracionesSeccionTitulo', {defaultValue: 'Aspiraciones'})}</div>
                               {[
-                                ["Preferencia laboral", d.ambito_laboral_preferido],
-                                ["Movilidad geográfica", d.preferencia_geografica],
-                                ["Empresa objetivo", d.empresa_objetivo],
-                                ["Ciclo / grado de interés", d.ciclo_superior_interes],
+                                [t('campos.alumnado.preferenciaLaboralLabel', {defaultValue: 'Preferencia laboral'}), d.ambito_laboral_preferido],
+                                [t('campos.alumnado.movilidadGeograficaLabel', {defaultValue: 'Movilidad geográfica'}), d.preferencia_geografica],
+                                [t('campos.alumnado.empresaObjetivoLabel', {defaultValue: 'Empresa objetivo'}), d.empresa_objetivo],
+                                [t('campos.alumnado.cicloGradoInteresLabel', {defaultValue: 'Ciclo / grado de interés'}), d.ciclo_superior_interes],
                               ].map(([label, val]) => val ? (
                                 <div key={label} className="flex gap-2 text-xs">
                                   <span className="text-muted shrink-0">{label}:</span>
@@ -330,13 +332,13 @@ export const ResumenProfesionalTab = () => {
                             </div>
 
                             <div className="space-y-3">
-                              <div className="text-[10px] font-bold text-muted tracking-widest mb-2"><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> Seguimiento tutor</div>
+                              <div className="text-[10px] font-bold text-muted tracking-widest mb-2"><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.seguimientoTutorSeccionTitulo', {defaultValue: 'Seguimiento tutor'})}</div>
                               {[
-                                ["Reuniones celebradas", d.reuniones_celebradas],
-                                ["Última reunión", d.fecha_ultima_reunion],
-                                ["Familia informada", d.familia_informada === "X" ? "Sí" : null],
-                                ["Derivado a orientador", d.derivado_orientador === "X" ? "Sí" : null],
-                                ["Informe emitido", d.informe_emitido === "X" ? "Sí" : null],
+                                [t('campos.alumnado.reunionesCelebradasLabel', {defaultValue: 'Reuniones celebradas'}), d.reuniones_celebradas],
+                                [t('campos.alumnado.ultimaReunionLabel', {defaultValue: 'Última reunión'}), d.fecha_ultima_reunion],
+                                [t('campos.alumnado.familiaInformadaLabel', {defaultValue: 'Familia informada'}), d.familia_informada === "X" ? t('checks.comun.si', {defaultValue: 'Sí'}) : null],
+                                [t('campos.alumnado.derivadoOrientadorLabel', {defaultValue: 'Derivado a orientador'}), d.derivado_orientador === "X" ? t('checks.comun.si', {defaultValue: 'Sí'}) : null],
+                                [t('campos.alumnado.informeEmitidoLabel', {defaultValue: 'Informe emitido'}), d.informe_emitido === "X" ? t('checks.comun.si', {defaultValue: 'Sí'}) : null],
                               ].map(([label, val]) => val ? (
                                 <div key={label} className="flex gap-2 text-xs">
                                   <span className="text-muted shrink-0">{label}:</span>
@@ -363,13 +365,13 @@ export const ResumenProfesionalTab = () => {
 
         <div className="px-4 py-3 border-t border-white/5 bg-foreground/3 flex items-center justify-between">
           <span className="text-xs text-muted">
-            Mostrando <strong className="text-foreground">{filtered.length}</strong> alumnado/as
+            {t('campos.alumnado.mostrandoNAlumnado', {count: filtered.length, defaultValue: 'Mostrando {{count}} alumnado/as'})}
           </span>
           <div className="flex gap-4 text-xs text-muted">
-            <span><span className="inline-flex"><Globe2 className="w-[1.2em] h-[1.2em] mr-1" /></span> Erasmus: <strong className="text-foreground">{filtered.filter((al: Alumnado) => profesionalLedger[al.ID!]?.interes_erasmus === "X").length}</strong></span>
-            <span><span className="inline-flex"><Rocket className="w-[1.2em] h-[1.2em] mr-1" /></span> Emprender: <strong className="text-foreground">{filtered.filter((al: Alumnado) => profesionalLedger[al.ID!]?.interes_emprender === "X").length}</strong></span>
-            <span><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> Universidad: <strong className="text-foreground">{filtered.filter((al: Alumnado) => profesionalLedger[al.ID!]?.interes_universidad === "X").length}</strong></span>
-            <span><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> Derivados: <strong className="text-warning">{filtered.filter((al: Alumnado) => profesionalLedger[al.ID!]?.derivado_orientador === "X").length}</strong></span>
+            <span><span className="inline-flex"><Globe2 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.erasmusBadge', {defaultValue: 'Erasmus+'})}: <strong className="text-foreground">{filtered.filter((al: Alumnado) => profesionalLedger[al.ID!]?.interes_erasmus === "X").length}</strong></span>
+            <span><span className="inline-flex"><Rocket className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.emprenderBadge', {defaultValue: 'Emprender'})}: <strong className="text-foreground">{filtered.filter((al: Alumnado) => profesionalLedger[al.ID!]?.interes_emprender === "X").length}</strong></span>
+            <span><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.universidadBadge', {defaultValue: 'Universidad'})}: <strong className="text-foreground">{filtered.filter((al: Alumnado) => profesionalLedger[al.ID!]?.interes_universidad === "X").length}</strong></span>
+            <span><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.derivadosLabel', {defaultValue: 'Derivados'})}: <strong className="text-warning">{filtered.filter((al: Alumnado) => profesionalLedger[al.ID!]?.derivado_orientador === "X").length}</strong></span>
           </div>
         </div>
       </Card>

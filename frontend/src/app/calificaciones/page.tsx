@@ -38,6 +38,7 @@ export default function ProgresoPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
+  const [saveIsError, setSaveIsError] = useState(false);
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("resumen");
   const [analisisView, setAnalisisView] = useState<"grupal" | "individual">("grupal");
@@ -75,10 +76,12 @@ export default function ProgresoPage() {
     setSaveMessage("");
     const ok = await saveCursoData();
     if (ok) {
-      setSaveMessage("Guardado correctamente");
+      setSaveIsError(false);
+      setSaveMessage(t('toasts.comun.guardadoCorrectamente', {defaultValue: 'Guardado correctamente'}));
       setTimeout(() => setSaveMessage(""), 3000);
     } else {
-      setSaveMessage("Error al guardar");
+      setSaveIsError(true);
+      setSaveMessage(t('toasts.comun.errorGuardar', {defaultValue: 'Error al guardar'}));
     }
     setSaving(false);
   };
@@ -95,8 +98,8 @@ export default function ProgresoPage() {
 
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <TrendingUp className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-heading font-bold">No hay curso ni programación cargada</h2>
-                <p className="text-muted mb-4">Debes abrir o crear un archivo de programación y curso en tu Archivos.</p>
+                <h2 className="text-heading font-bold">{t('campos.calificaciones.sinCursoNiProgramacionTitulo', {defaultValue: 'No hay curso ni programación cargada'})}</h2>
+                <p className="text-muted mb-4">{t('campos.calificaciones.sinCursoNiProgramacionDesc', {defaultValue: 'Debes abrir o crear un archivo de programación y curso en tu Archivos.'})}</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
                     <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
@@ -111,7 +114,7 @@ export default function ProgresoPage() {
   }
 
   if (loading || !cursoData || !moduleData) {
-    return <LoadingSpinner text="Cargando datos de progreso académico..." />;
+    return <LoadingSpinner text={t('campos.calificaciones.cargandoDatosProgreso', {defaultValue: 'Cargando datos de progreso académico...'})} />;
   }
 
   const df_al = cursoData?.df_al || [];
@@ -180,7 +183,7 @@ export default function ProgresoPage() {
               {/* Save Button */}
               <div className="flex items-center gap-4 shrink-0">
                 {saveMessage && (
-                  <span className={`text-body font-semibold ${saveMessage.includes("Error") ? "text-danger" : "text-success"}`}>
+                  <span className={`text-body font-semibold ${saveIsError ? "text-danger" : "text-success"}`}>
                     {saveMessage}
                   </span>
                 )}
@@ -329,7 +332,7 @@ export default function ProgresoPage() {
                             );
                           })}
                           <tr className="border-t-2 border-[var(--glass-border)] bg-foreground/5">
-                            <td colSpan={2} className="p-4 font-extrabold text-foreground text-subheading">Total</td>
+                            <td colSpan={2} className="p-4 font-extrabold text-foreground text-subheading">{t('common.total', {defaultValue: 'Total'})}</td>
                             {tris.map(tri => {
                               const acts = acts_by_tri[tri.key] || [];
                               const allGradesTri: number[] = [];

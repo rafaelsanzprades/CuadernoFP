@@ -278,7 +278,7 @@ export default function DocumentosPage() {
         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md">
           <div className="p-12 text-center text-muted flex flex-col items-center">
             <div className="w-8 h-8 border-4 border-accent border-t-transparent rounded-full animate-spin mb-4"></div>
-            <p>Cargando documentos...</p>
+            <p>{t('campos.comun.cargandoDocumentos', {defaultValue: 'Cargando documentos...'})}</p>
           </div>
         </div>
       );
@@ -288,7 +288,7 @@ export default function DocumentosPage() {
       return (
         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md">
           <div className="p-12 text-center">
-            <div className="text-danger mb-2"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> Error</div>
+            <div className="text-danger mb-2"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('header.error', {defaultValue: 'Error'})}</div>
             <p className="text-foreground/80">{error}</p>
           </div>
         </div>
@@ -303,7 +303,7 @@ export default function DocumentosPage() {
             <div className="px-2 mb-6">
               <h2 className="text-subheading font-bold flex items-center gap-3">
                 <span className="p-2 bg-primary/10 rounded-lg text-primary shrink-0"><Scale className="w-5 h-5" /></span>
-                Legislación documental
+                {t('campos.normativa.legislacionDocumentalTitulo', {defaultValue: 'Legislación documental'})}
               </h2>
             </div>
             <NormativaAccordion
@@ -322,7 +322,7 @@ export default function DocumentosPage() {
         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md">
             <div className="p-16 text-center text-muted">
               <div className="text-heading mb-4"><span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></div>
-              <p className="text-subheading">El directorio está vacío.</p>
+              <p className="text-subheading">{t('campos.comun.directorioVacio', {defaultValue: 'El directorio está vacío.'})}</p>
             </div>
           </div>
       );

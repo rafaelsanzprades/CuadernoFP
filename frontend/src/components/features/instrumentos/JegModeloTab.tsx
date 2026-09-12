@@ -181,21 +181,16 @@ export function JegModeloTab() {
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
       <div className="bg-purple-500/10 border border-purple-500/30 rounded-xl p-4 text-body text-foreground/90">
-        <strong>Modelo JEG.</strong> Nivel Instrumento→Indicador→CE→RA→Módulo del autor real de PD+
-        (Javier Edo Gual) — es el motor de calificación real de la app (boletines, PDF y actas incluidos).
-        En el uso normal no hace falta tocar nada aquí: al marcar una actividad sobre un CE en Instrumentos,
-        el Indicador correspondiente se crea y se reparte el peso solo. Esta pantalla es para quien quiera
-        ajustar ese reparto a mano (varios indicadores por CE, pesos distintos) o revisar qué se ha
-        generado automáticamente.
+        <strong>{t('campos.instrumentos.modeloJegTitulo', {defaultValue: 'Modelo JEG.'})}</strong> {t('campos.instrumentos.modeloJegDesc', {defaultValue: 'Nivel Instrumento→Indicador→CE→RA→Módulo del autor real de PD+ (Javier Edo Gual) — es el motor de calificación real de la app (boletines, PDF y actas incluidos). En el uso normal no hace falta tocar nada aquí: al marcar una actividad sobre un CE en Instrumentos, el Indicador correspondiente se crea y se reparte el peso solo. Esta pantalla es para quien quiera ajustar ese reparto a mano (varios indicadores por CE, pesos distintos) o revisar qué se ha generado automáticamente.'})}
       </div>
 
       {/* Indicadores por CE */}
       <div className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] p-4">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <Target className="w-5 h-5 text-purple-400" /> Indicadores por Criterio de Evaluación
+          <Target className="w-5 h-5 text-purple-400" /> {t('campos.instrumentos.indicadoresPorCeTitulo', {defaultValue: 'Indicadores por Criterio de Evaluación'})}
         </h2>
         {ceOptions.length === 0 ? (
-          <p className="text-body text-muted">Primero añade Criterios de evaluación en Currículo → Ponderación RA y CE.</p>
+          <p className="text-body text-muted">{t('campos.instrumentos.primeroAnadeCriterios', {defaultValue: 'Primero añade Criterios de evaluación en Currículo → Ponderación RA y CE.'})}</p>
         ) : (
           <div className="space-y-4">
             {ceOptions.map((ce: any) => {
@@ -209,7 +204,7 @@ export function JegModeloTab() {
                       <span className="font-mono font-bold text-info">{ce.id}</span>
                       {inds.length > 0 && (
                         <span className={`text-caption font-semibold px-2 py-0.5 rounded-full ${sumaOk ? 'bg-success/10 text-success' : 'bg-danger/10 text-danger'}`}>
-                          {t('campos.instrumentos.sumaPesos', { pct: sumaPesos, defaultValue: `Suma: ${sumaPesos}%` })}
+                          {t('campos.instrumentos.sumaPesos', { pct: sumaPesos, defaultValue: 'Suma: {{pct}}%' })}
                         </span>
                       )}
                     </div>
@@ -225,7 +220,7 @@ export function JegModeloTab() {
                     </div>
                   </div>
                   {inds.length === 0 ? (
-                    <p className="text-caption text-muted italic">Sin indicadores todavía.</p>
+                    <p className="text-caption text-muted italic">{t('campos.instrumentos.sinIndicadoresTodavia', {defaultValue: 'Sin indicadores todavía.'})}</p>
                   ) : (
                     <div className="space-y-2">
                       {inds.map((ind: any) => (
@@ -251,7 +246,7 @@ export function JegModeloTab() {
                           </div>
                           <label className="flex items-center gap-1 text-caption text-muted shrink-0">
                             <input type="checkbox" checked={!!ind.is_basico} onChange={(e) => updateIndicador(ind.id_indicador, "is_basico", e.target.checked)} />
-                            Básico
+                            {t('checks.instrumentos.basico', {defaultValue: 'Básico'})}
                           </label>
                           <button onClick={() => removeIndicador(ind.id_indicador)} className="text-danger hover:text-danger p-1">
                             <Trash2 className="w-3.5 h-3.5" />
@@ -270,10 +265,10 @@ export function JegModeloTab() {
       {/* Grupos de evaluación (GEv) */}
       <div className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] p-4">
         <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-1">
-          <Grid3x3 className="w-5 h-5 text-purple-400" /> Grupos de evaluación (GEv)
+          <Grid3x3 className="w-5 h-5 text-purple-400" /> {t('campos.instrumentos.gruposEvaluacionTitulo', {defaultValue: 'Grupos de evaluación (GEv)'})}
         </h2>
         <p className="text-caption text-muted mb-3">
-          Subgrupos de alumnado (p.ej. pérdida de evaluación continua): un instrumento marcado con un GEv solo cuenta para el alumnado de ese mismo grupo. Asigna el GEv de cada alumno en Alumnado → Matrícula.
+          {t('campos.instrumentos.gruposEvaluacionDesc', {defaultValue: 'Subgrupos de alumnado (p.ej. pérdida de evaluación continua): un instrumento marcado con un GEv solo cuenta para el alumnado de ese mismo grupo. Asigna el GEv de cada alumno en Alumnado → Matrícula.'})}
         </p>
         <div className="flex flex-wrap items-center gap-2">
           {gruposEvaluacion.map((g) => (
@@ -284,11 +279,11 @@ export function JegModeloTab() {
             value={nuevoGev}
             onChange={(e) => setNuevoGev(e.target.value)}
             onKeyDown={(e) => { if (e.key === "Enter") addGrupoEvaluacion(); }}
-            placeholder="Nuevo grupo..."
+            placeholder={t('campos.instrumentos.nuevoGrupoPlaceholder', {defaultValue: 'Nuevo grupo...'})}
             className="w-32 bg-foreground/15 border border-[var(--glass-border)] rounded-full px-3 py-1 text-caption text-foreground focus:border-accent focus:outline-none"
           />
           <button onClick={addGrupoEvaluacion} className="text-caption text-accent hover:text-accent/80 flex items-center gap-1 font-semibold">
-            <Plus className="w-3.5 h-3.5" /> Añadir
+            <Plus className="w-3.5 h-3.5" /> {t('botones.instrumentos.anadir', {defaultValue: 'Añadir'})}
           </button>
         </div>
       </div>
@@ -297,14 +292,14 @@ export function JegModeloTab() {
       <div className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] p-4">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-            <ClipboardList className="w-5 h-5 text-purple-400" /> Instrumentos (modelo JEG)
+            <ClipboardList className="w-5 h-5 text-purple-400" /> {t('campos.instrumentos.instrumentosModeloJegTitulo', {defaultValue: 'Instrumentos (modelo JEG)'})}
           </h2>
           <button onClick={addInstrumento} className="text-caption text-accent hover:text-accent/80 flex items-center gap-1 font-semibold">
             <Plus className="w-3.5 h-3.5" /> {t('botones.instrumentos.anadirInstrumento', {defaultValue: 'Añadir instrumento'})}
           </button>
         </div>
         {df_instr.length === 0 ? (
-          <p className="text-body text-muted">Sin instrumentos JEG todavía.</p>
+          <p className="text-body text-muted">{t('campos.instrumentos.sinInstrumentosJegTodavia', {defaultValue: 'Sin instrumentos JEG todavía.'})}</p>
         ) : (
           <div className="space-y-3">
             {df_instr.map((instr: any) => (
@@ -341,19 +336,19 @@ export function JegModeloTab() {
                   <select value={instr.procedimiento || "ordinario"} onChange={(e) => updateInstrumento(instr.id_instrumento, "procedimiento", e.target.value)} title={t('tooltips.instrumentos.item30Procedimiento', {defaultValue: 'Ítem 30: procedimiento JEG (ordinario/recuperación/extraordinaria)'})} className="bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-caption focus:border-accent focus:outline-none">
                     {PROCEDIMIENTOS.map((p) => <option key={p.id} value={p.id}>{t(`checks.instrumentos.procedimiento_${p.id}`, {defaultValue: p.label})}</option>)}
                   </select>
-                  <select value={instr.gev || "general"} onChange={(e) => updateInstrumento(instr.id_instrumento, "gev", e.target.value)} title="Grupo de evaluación (GEv): solo cuenta para alumnado de este mismo grupo" className="bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-caption focus:border-accent focus:outline-none">
+                  <select value={instr.gev || "general"} onChange={(e) => updateInstrumento(instr.id_instrumento, "gev", e.target.value)} title={t('tooltips.instrumentos.gevSoloCuentaGrupo', {defaultValue: 'Grupo de evaluación (GEv): solo cuenta para alumnado de este mismo grupo'})} className="bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-caption focus:border-accent focus:outline-none">
                     {gruposEvaluacion.map((g) => <option key={g.id} value={g.id}>{g.nombre}</option>)}
                   </select>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-caption text-muted shrink-0">Peso global</span>
+                  <span className="text-caption text-muted shrink-0">{t('campos.instrumentos.pesoGlobalLabel', {defaultValue: 'Peso global'})}</span>
                   <input
                     type="number" step="0.1"
                     value={instr.peso_global ?? 1}
                     onChange={(e) => updateInstrumento(instr.id_instrumento, "peso_global", Number(e.target.value) || 0)}
                     className="w-20 bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-caption text-center focus:border-accent focus:outline-none"
                   />
-                  <span className="text-caption text-muted shrink-0 ml-2">Indicadores vinculados</span>
+                  <span className="text-caption text-muted shrink-0 ml-2">{t('campos.instrumentos.indicadoresVinculadosLabel', {defaultValue: 'Indicadores vinculados'})}</span>
                   <div className="flex-1">
                     <MultiSelectDropdown
                       options={indicadorOptions}
@@ -408,7 +403,7 @@ export function JegModeloTab() {
                       })}
                       <td className="p-2 text-center">
                         {cubierto
-                          ? <span className="text-success">{t('campos.instrumentos.nInstrumentos', { count: instrumentosQueCubren.length, defaultValue: `${instrumentosQueCubren.length} instr.` })}</span>
+                          ? <span className="text-success">{t('campos.instrumentos.nInstrumentos', { count: instrumentosQueCubren.length, defaultValue: '{{count}} instr.' })}</span>
                           : <span className="text-danger font-semibold">{t('campos.instrumentos.sinCobertura', { defaultValue: 'Sin cobertura' })}</span>}
                       </td>
                     </tr>
@@ -424,7 +419,7 @@ export function JegModeloTab() {
       <div className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] p-4">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-            <Sparkles className="w-5 h-5 text-purple-400" /> Calificaciones por indicador
+            <Sparkles className="w-5 h-5 text-purple-400" /> {t('campos.instrumentos.calificacionesPorIndicadorTitulo', {defaultValue: 'Calificaciones por indicador'})}
           </h2>
           <select value={selectedAlId} onChange={(e) => setSelectedAlId(e.target.value)} className="bg-foreground/15 border border-[var(--glass-border)] rounded px-3 py-1.5 text-foreground text-body focus:border-accent focus:outline-none">
             {activos.map((al: any) => <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre}</option>)}
@@ -432,7 +427,7 @@ export function JegModeloTab() {
         </div>
 
         {df_instr.length === 0 ? (
-          <p className="text-body text-muted">Añade instrumentos y vincúlalos a indicadores primero.</p>
+          <p className="text-body text-muted">{t('campos.instrumentos.anadeInstrumentosVinculaPrimero', {defaultValue: 'Añade instrumentos y vincúlalos a indicadores primero.'})}</p>
         ) : (
           <div className="space-y-2 mb-6">
             {df_instr.map((instr: any) => (
@@ -443,10 +438,10 @@ export function JegModeloTab() {
                 return (
                   <div key={`${instr.id_instrumento}-${id_ind}`} className="flex items-center gap-3">
                     <span className="text-caption text-muted flex-1 truncate">
-                      <span className="font-mono text-accent">{instr.id_instrumento}</span> · {instr.titulo || "(sin título)"}
+                      <span className="font-mono text-accent">{instr.id_instrumento}</span> · {instr.titulo || t('campos.instrumentos.sinTitulo', {defaultValue: '(sin título)'})}
                       {instr.procedimiento && instr.procedimiento !== "ordinario" && (
                         <span className={`ml-1.5 text-caption px-1.5 rounded ${instr.procedimiento === "recuperacion" ? "bg-amber-500/20 text-amber-400" : "bg-rose-500/20 text-rose-400"}`}>
-                          {instr.procedimiento === "recuperacion" ? `Rec. (${instr.evaluacion})` : "EvFE"}
+                          {instr.procedimiento === "recuperacion" ? t('campos.instrumentos.recEvaluacion', {evaluacion: instr.evaluacion, defaultValue: 'Rec. ({{evaluacion}})'}) : t('campos.instrumentos.evfe', {defaultValue: 'EvFE'})}
                         </span>
                       )}
                       {" → "}<span className="font-mono text-info">{id_ind}</span> {ind.descripcion}
@@ -469,7 +464,7 @@ export function JegModeloTab() {
           <div className="border-t border-white/10 pt-4 space-y-6">
             <div>
               <h3 className="text-body font-bold text-foreground mb-3 flex items-center gap-2">
-                <Layers className="w-4 h-4 text-purple-400" /> Evaluación ordinaria {'+'} recuperación (R1-RF) — {activos.find((a: any) => a.ID === selectedAlId)?.Apellidos}
+                <Layers className="w-4 h-4 text-purple-400" /> {t('campos.instrumentos.evaluacionOrdinariaRecuperacion', {apellidos: activos.find((a: any) => a.ID === selectedAlId)?.Apellidos, defaultValue: 'Evaluación ordinaria + recuperación (R1-RF) — {{apellidos}}'})}
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
                 {Object.entries(resultado.notas_ra).map(([ra_id, nota]) => {
@@ -478,35 +473,35 @@ export function JegModeloTab() {
                     <div key={ra_id} className="bg-background/30 border border-white/5 rounded-lg p-3 text-center">
                       <div className="text-caption text-muted mb-1 flex items-center justify-center gap-1">
                         {ra_id}
-                        {esRecuperado && <span className="text-caption px-1.5 rounded bg-amber-500/20 text-amber-400" title={t('tooltips.instrumentos.sustituidaPorRecuperacion', {defaultValue: 'Sustituida por recuperación'})}>Rec.</span>}
+                        {esRecuperado && <span className="text-caption px-1.5 rounded bg-amber-500/20 text-amber-400" title={t('tooltips.instrumentos.sustituidaPorRecuperacion', {defaultValue: 'Sustituida por recuperación'})}>{t('campos.instrumentos.rec', {defaultValue: 'Rec.'})}</span>}
                       </div>
-                      <div className="font-mono font-bold text-foreground">{nota !== null ? nota.toFixed(2) : "Sin evaluar"}</div>
+                      <div className="font-mono font-bold text-foreground">{nota !== null ? nota.toFixed(2) : t('campos.instrumentos.sinEvaluar', {defaultValue: 'Sin evaluar'})}</div>
                     </div>
                   );
                 })}
               </div>
               <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-3 text-center">
-                <div className="text-caption text-muted mb-1">Nota final (Motor JEG)</div>
-                <div className="text-heading font-black text-purple-300">{resultado.nota_final !== null ? resultado.nota_final.toFixed(1) : "Sin evaluar"}</div>
+                <div className="text-caption text-muted mb-1">{t('campos.instrumentos.notaFinalMotorJeg', {defaultValue: 'Nota final (Motor JEG)'})}</div>
+                <div className="text-heading font-black text-purple-300">{resultado.nota_final !== null ? resultado.nota_final.toFixed(1) : t('campos.instrumentos.sinEvaluar', {defaultValue: 'Sin evaluar'})}</div>
               </div>
             </div>
 
             <div>
               <h3 className="text-body font-bold text-foreground mb-3 flex items-center gap-2">
-                <Layers className="w-4 h-4 text-rose-400" /> Hoja aparte: evaluación final extraordinaria (EvFE)
+                <Layers className="w-4 h-4 text-rose-400" /> {t('campos.instrumentos.hojaAparteEvfeTitulo', {defaultValue: 'Hoja aparte: evaluación final extraordinaria (EvFE)'})}
               </h3>
-              <p className="text-caption text-muted mb-3">Segunda convocatoria — nunca se mezcla con la nota ordinaria de arriba. Un RA sin intento en EvFE hereda el resultado de la fila anterior.</p>
+              <p className="text-caption text-muted mb-3">{t('campos.instrumentos.hojaAparteEvfeDesc', {defaultValue: 'Segunda convocatoria — nunca se mezcla con la nota ordinaria de arriba. Un RA sin intento en EvFE hereda el resultado de la fila anterior.'})}</p>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
                 {Object.entries(resultado.notas_ra_extraordinaria).map(([ra_id, nota]) => (
                   <div key={ra_id} className="bg-background/30 border border-white/5 rounded-lg p-3 text-center">
                     <div className="text-caption text-muted mb-1">{ra_id}</div>
-                    <div className="font-mono font-bold text-foreground">{nota !== null ? nota.toFixed(2) : "Sin evaluar"}</div>
+                    <div className="font-mono font-bold text-foreground">{nota !== null ? nota.toFixed(2) : t('campos.instrumentos.sinEvaluar', {defaultValue: 'Sin evaluar'})}</div>
                   </div>
                 ))}
               </div>
               <div className="bg-rose-500/10 border border-rose-500/30 rounded-lg p-3 text-center">
-                <div className="text-caption text-muted mb-1">Nota final extraordinaria (EvFE)</div>
-                <div className="text-heading font-black text-rose-300">{resultado.nota_final_extraordinaria !== null ? resultado.nota_final_extraordinaria.toFixed(1) : "Sin evaluar"}</div>
+                <div className="text-caption text-muted mb-1">{t('campos.instrumentos.notaFinalExtraordinariaLabel', {defaultValue: 'Nota final extraordinaria (EvFE)'})}</div>
+                <div className="text-heading font-black text-rose-300">{resultado.nota_final_extraordinaria !== null ? resultado.nota_final_extraordinaria.toFixed(1) : t('campos.instrumentos.sinEvaluar', {defaultValue: 'Sin evaluar'})}</div>
               </div>
             </div>
           </div>

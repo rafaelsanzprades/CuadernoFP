@@ -170,10 +170,10 @@ export default function InstrumentosPage() {
     setSaveMessage("");
     const ok = await saveModuleData();
     if (ok) {
-      setSaveMessage("Guardado correctamente");
+      setSaveMessage(t('toasts.comun.guardadoCorrectamente', {defaultValue: 'Guardado correctamente'}));
       setTimeout(() => setSaveMessage(""), 3000);
     } else {
-      setSaveMessage("Error al guardar");
+      setSaveMessage(t('toasts.comun.errorGuardar', {defaultValue: 'Error al guardar'}));
     }
     setSaving(false);
   };
@@ -189,8 +189,8 @@ export default function InstrumentosPage() {
             <MotionWrapper>
               <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
                 <FileEdit className="w-16 h-16 text-muted-foreground opacity-50" />
-                <h2 className="text-heading font-bold">No hay programación cargada</h2>
-                <p className="text-muted mb-4">Debes abrir o crear un archivo de programación en tu Archivos.</p>
+                <h2 className="text-heading font-bold">{t('campos.comun.sinProgramacionCargadaTitulo', {defaultValue: 'No hay programación cargada'})}</h2>
+                <p className="text-muted mb-4">{t('campos.comun.sinProgramacionCargadaDesc', {defaultValue: 'Debes abrir o crear un archivo de programación en tu Archivos.'})}</p>
                 <Link href="/archivos">
                   <Button variant="primary" className="gap-2">
                     <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
@@ -205,7 +205,7 @@ export default function InstrumentosPage() {
   }
 
   if (loading || !moduleData) {
-    return <LoadingSpinner text="Cargando..." />;
+    return <LoadingSpinner text={t('common.cargando', {defaultValue: 'Cargando...'})} />;
   }
 
   const df_ce = moduleData?.df_ce || [];
@@ -252,8 +252,8 @@ export default function InstrumentosPage() {
     if (lista_ce_ids.length === 0) {
       return (
         <Card className="p-6 border-l-4 border-l-yellow-500">
-          <h3 className="text-subheading font-bold text-warning mb-2">Faltan criterios de evaluación</h3>
-          <p className="text-foreground/80">Primero añade Criterios de evaluación en la pestaña 'Matrices'.</p>
+          <h3 className="text-subheading font-bold text-warning mb-2">{t('campos.instrumentos.faltanCriteriosEvaluacionTitulo', {defaultValue: 'Faltan criterios de evaluación'})}</h3>
+          <p className="text-foreground/80">{t('campos.instrumentos.faltanCriteriosEvaluacionDesc', {defaultValue: "Primero añade Criterios de evaluación en la pestaña 'Matrices'."})}</p>
         </Card>
       );
     }
@@ -267,12 +267,12 @@ export default function InstrumentosPage() {
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-heading font-extrabold text-foreground tracking-tight flex items-center gap-3">
-              <span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> Instrumentos de Evaluación - {triNombre}
+              <span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.instrumentos.instrumentosEvaluacionTrimestreTitulo', {triNombre, defaultValue: 'Instrumentos de Evaluación - {{triNombre}}'})}
             </h2>
-            <p className="text-muted mt-1">Detalle de los instrumentos de evaluación organizados para este trimestre.</p>
+            <p className="text-muted mt-1">{t('campos.instrumentos.detalleInstrumentosTrimestreDesc', {defaultValue: 'Detalle de los instrumentos de evaluación organizados para este trimestre.'})}</p>
           </div>
           <div className="flex items-center gap-6 text-body">
-            <span className="text-muted">{actTri.length} actividades</span>
+            <span className="text-muted">{t('campos.instrumentos.numActividades', {count: actTri.length, defaultValue: '{{count}} actividades'})}</span>
             <span className="text-info font-mono bg-info/10 px-4 py-2 rounded-lg text-subheading">Σ {sumaPeso.toFixed(0)}%</span>
           </div>
         </div>
@@ -311,7 +311,7 @@ export default function InstrumentosPage() {
                           {instrumentosPct.map((instr: any) => (
                             <option key={instr.id} value={instr.nombre}>{instr.nombre}</option>
                           ))}
-                          <option value="Recuperaciones">Recuperaciones</option>
+                          <option value="Recuperaciones">{t('checks.instrumentos.tipoRecuperaciones', {defaultValue: 'Recuperaciones'})}</option>
                         </select>
                       </td>
                       <td className="p-2 sticky left-[160px] z-10 border-r border-[var(--glass-border)] bg-background group-hover:bg-[#111827]">
@@ -442,14 +442,14 @@ export default function InstrumentosPage() {
             </Tabs>
           </div>
 
-          <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
+          <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || t('campos.comun.gestionDe', {activeTab, defaultValue: 'Gestión de {{activeTab}}'})} />
 
           {activeTab === "resumen" && (
             <>
                 
             <Card className="p-6 animate-in fade-in duration-500">
               <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-5">
-                <span><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Resumen de instrumentos de evaluación por trimestres
+                <span><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span></span> {t('campos.instrumentos.resumenPorTrimestresTitulo', {defaultValue: 'Resumen de instrumentos de evaluación por trimestres'})}
               </h2>
               <div className="overflow-x-auto">
                 <table className="w-full text-body border-collapse">
@@ -519,7 +519,7 @@ export default function InstrumentosPage() {
                       );
                     })}
                     <tr className="border-t-2 border-[var(--glass-border)] bg-foreground/5">
-                      <td colSpan={2} className="p-4 font-extrabold text-foreground text-subheading">Total</td>
+                      <td colSpan={2} className="p-4 font-extrabold text-foreground text-subheading">{t('common.total', {defaultValue: 'Total'})}</td>
                       {trimestres.map(tri => {
                         const countTri = df_act.filter((a: any) => String(a.tri_act).toUpperCase() === tri.key).length;
                         return (
@@ -580,27 +580,27 @@ export default function InstrumentosPage() {
             </h3>
             <div className="space-y-4">
               <div>
-                <label className="block text-body font-semibold mb-1">Actividad original a recuperar</label>
-                <select 
+                <label className="block text-body font-semibold mb-1">{t('campos.instrumentos.actividadOriginalRecuperar', {defaultValue: 'Actividad original a recuperar'})}</label>
+                <select
                   className="w-full bg-foreground/10 border border-[var(--glass-border)] rounded-lg p-2"
                   value={recoverySourceId}
                   onChange={e => setRecoverySourceId(e.target.value)}
                 >
-                  <option value="">-- Selecciona actividad --</option>
+                  <option value="">{t('checks.instrumentos.seleccionaActividad', {defaultValue: '-- Selecciona actividad --'})}</option>
                   {df_act.filter((a: any) => String(a.tri_act).toUpperCase() === recoveryTri && a.Tipo !== "Recuperacion").map((a: any) => (
-                    <option key={a.id_act} value={a.id_act}>{a.id_act} - {a.desc_act || "Sin nombre"}</option>
+                    <option key={a.id_act} value={a.id_act}>{a.id_act} - {a.desc_act || t('campos.instrumentos.sinNombreActividad', {defaultValue: 'Sin nombre'})}</option>
                   ))}
                 </select>
               </div>
               <div>
-                <label className="block text-body font-semibold mb-1">Método de cálculo</label>
-                <select 
+                <label className="block text-body font-semibold mb-1">{t('campos.instrumentos.metodoCalculoLabel', {defaultValue: 'Método de cálculo'})}</label>
+                <select
                   className="w-full bg-foreground/10 border border-[var(--glass-border)] rounded-lg p-2"
                   value={recoveryMethod}
                   onChange={e => setRecoveryMethod(e.target.value)}
                 >
-                  <option value="Sobrescribir">Sobrescribir nota si es mayor</option>
-                  <option value="Media">Hacer media con la nota anterior</option>
+                  <option value="Sobrescribir">{t('checks.instrumentos.metodoSobrescribir', {defaultValue: 'Sobrescribir nota si es mayor'})}</option>
+                  <option value="Media">{t('checks.instrumentos.metodoMedia', {defaultValue: 'Hacer media con la nota anterior'})}</option>
                 </select>
               </div>
               <div className="flex justify-end gap-3 mt-6">

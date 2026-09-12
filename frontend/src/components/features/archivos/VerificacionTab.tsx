@@ -34,14 +34,16 @@ function sumPesos(arr: { peso_ra?: string | number; peso_ce?: string | number }[
 }
 
 function StatusBadge({ status }: { status: CheckStatus }) {
+  const { t } = useTranslation();
   if (status === "ok")
-    return <Badge variant="success" className="bg-success/10 text-success border-success/30 shrink-0">Correcto</Badge>;
+    return <Badge variant="success" className="bg-success/10 text-success border-success/30 shrink-0">{t('checks.verificacion.correcto', {defaultValue: 'Correcto'})}</Badge>;
   if (status === "warning")
-    return <Badge variant="warning" className="bg-warning/10 text-warning border-warning/30 shrink-0">Advertencia</Badge>;
-  return <Badge variant="default" className="bg-danger/10 text-danger border-danger/30 shrink-0">Sin datos</Badge>;
+    return <Badge variant="warning" className="bg-warning/10 text-warning border-warning/30 shrink-0">{t('checks.verificacion.advertencia', {defaultValue: 'Advertencia'})}</Badge>;
+  return <Badge variant="default" className="bg-danger/10 text-danger border-danger/30 shrink-0">{t('checks.verificacion.sinDatos', {defaultValue: 'Sin datos'})}</Badge>;
 }
 
 function CheckCard({ item }: { item: CheckItem }) {
+  const { t } = useTranslation();
   return (
     <Card className="p-5 border border-white/5 rounded-2xl bg-foreground/5 shadow h-full">
       <div className="flex flex-col h-full">
@@ -67,7 +69,7 @@ function CheckCard({ item }: { item: CheckItem }) {
             href={item.href}
             className="inline-flex items-center gap-1.5 text-caption font-semibold text-accent hover:underline"
           >
-            Ir a {item.hrefLabel} <ArrowRight className="w-3.5 h-3.5" />
+            {t('botones.verificacion.irA', {destino: item.hrefLabel, defaultValue: 'Ir a {{destino}}'})} <ArrowRight className="w-3.5 h-3.5" />
           </Link>
           {item.actionHref && item.actionLabel && (
             <Link
@@ -164,13 +166,13 @@ export function VerificacionTab() {
 
   const modData: Record<string, any> = m || {};
   const NARRATIVOS_PDPLUS: { key: string; label: string; source: Record<string, any> }[] = [
-    { key: "entorno_geografico", label: "Entorno geográfico", source: cc },
-    { key: "entorno_socioeconomico", label: "Entorno socioeconómico", source: cc },
-    { key: "contexto_escolar", label: "Contexto escolar", source: cc },
-    { key: "contingencia_profesor", label: "Contingencia (profesorado)", source: cc },
-    { key: "contingencia_alumnado", label: "Contingencia (alumnado)", source: cc },
-    { key: "textos_pd_bibliografia", label: "Bibliografía", source: modData },
-    { key: "textos_pd_publicidad", label: "Publicidad", source: modData },
+    { key: "entorno_geografico", label: t('campos.verificacion.entornoGeografico', {defaultValue: 'Entorno geográfico'}), source: cc },
+    { key: "entorno_socioeconomico", label: t('campos.verificacion.entornoSocioeconomico', {defaultValue: 'Entorno socioeconómico'}), source: cc },
+    { key: "contexto_escolar", label: t('campos.verificacion.contextoEscolar', {defaultValue: 'Contexto escolar'}), source: cc },
+    { key: "contingencia_profesor", label: t('campos.verificacion.contingenciaProfesorado', {defaultValue: 'Contingencia (profesorado)'}), source: cc },
+    { key: "contingencia_alumnado", label: t('campos.verificacion.contingenciaAlumnado', {defaultValue: 'Contingencia (alumnado)'}), source: cc },
+    { key: "textos_pd_bibliografia", label: t('campos.verificacion.bibliografiaLabel', {defaultValue: 'Bibliografía'}), source: modData },
+    { key: "textos_pd_publicidad", label: t('campos.verificacion.publicidadLabel', {defaultValue: 'Publicidad'}), source: modData },
   ];
   const narrativosRellenos = NARRATIVOS_PDPLUS.filter(f => !!f.source[f.key]).length;
   const narrativosFaltan = NARRATIVOS_PDPLUS.filter(f => !f.source[f.key]).map(f => f.label);
@@ -179,186 +181,186 @@ export function VerificacionTab() {
     {
       id: "modulo",
       icon: <BookOpen className="w-5 h-5" />,
-      title: "Módulo didáctico",
+      title: t('campos.verificacion.moduloDidacticoTitulo', {defaultValue: 'Módulo didáctico'}),
       href: "/contexto?tab=identificacion",
-      hrefLabel: "Contexto",
+      hrefLabel: t('nav.contexto', {defaultValue: 'Contexto'}),
       status: !m ? "empty" : "ok",
       lines: !m
-        ? ["Sin datos de programación cargados"]
+        ? [t('campos.verificacion.sinDatosProgramacion', {defaultValue: 'Sin datos de programación cargados'})]
         : [
-          `Módulo activo: ${activeModuleId}`,
-          `Horas semanales: ${m.info_modulo?.h_sem || "-"} h`,
-          `Horas BOA: ${m.info_modulo?.h_boa || "-"} h`,
+          t('campos.verificacion.moduloActivo', {id: activeModuleId, defaultValue: 'Módulo activo: {{id}}'}),
+          t('campos.verificacion.horasSemanales', {h: m.info_modulo?.h_sem || "-", defaultValue: 'Horas semanales: {{h}} h'}),
+          t('campos.verificacion.horasBoa', {h: m.info_modulo?.h_boa || "-", defaultValue: 'Horas BOA: {{h}} h'}),
         ],
       actionHref: !m ? "/contexto?tab=identificacion" : undefined,
-      actionLabel: !m ? "Configurar módulo" : undefined,
+      actionLabel: !m ? t('botones.verificacion.configurarModulo', {defaultValue: 'Configurar módulo'}) : undefined,
     },
     {
       id: "ud",
       icon: <Layers className="w-5 h-5" />,
-      title: "Unidades didácticas (UD)",
+      title: t('campos.verificacion.udTitulo', {defaultValue: 'Unidades didácticas (UD)'}),
       href: "/curriculo?tab=unidades",
-      hrefLabel: "Currículo",
+      hrefLabel: t('nav.curriculo', {defaultValue: 'Currículo'}),
       status: udCount === 0 ? "empty" : horasDiff > 2 ? "warning" : "ok",
       lines: udCount === 0
-        ? ["No hay UD definidas"]
+        ? [t('campos.verificacion.sinUdDefinidas', {defaultValue: 'No hay UD definidas'})]
         : [
-          `${udCount} UD definidas`,
-          `Horas declaradas: ${udHoras} / ${moduloHoras || "-"} h del módulo`,
-          horasDiff > 2 ? `Diferencia de ${horasDiff} h` : "Horas cuadran correctamente",
+          t('campos.verificacion.udDefinidas', {count: udCount, defaultValue: '{{count}} UD definidas'}),
+          t('campos.verificacion.horasDeclaradas', {udHoras, moduloHoras: moduloHoras || "-", defaultValue: 'Horas declaradas: {{udHoras}} / {{moduloHoras}} h del módulo'}),
+          horasDiff > 2 ? t('campos.verificacion.diferenciaHoras', {h: horasDiff, defaultValue: 'Diferencia de {{h}} h'}) : t('campos.verificacion.horasCuadranCorrectamente', {defaultValue: 'Horas cuadran correctamente'}),
         ],
       actionHref: udCount === 0 ? "/curriculo?tab=unidades" : undefined,
-      actionLabel: udCount === 0 ? "Añadir primera UD" : undefined,
+      actionLabel: udCount === 0 ? t('botones.verificacion.anadirPrimeraUd', {defaultValue: 'Añadir primera UD'}) : undefined,
     },
     {
       id: "ra",
       icon: <GraduationCap className="w-5 h-5" />,
-      title: "Resultados de aprendizaje (RA)",
+      title: t('campos.verificacion.raTitulo', {defaultValue: 'Resultados de aprendizaje (RA)'}),
       href: "/curriculo?tab=ponderacion-ra-ce",
-      hrefLabel: "Currículo",
+      hrefLabel: t('nav.curriculo', {defaultValue: 'Currículo'}),
       status: raCount === 0 ? "empty" : Math.abs(raPesoSum - 100) > 1 ? "warning" : "ok",
       lines: raCount === 0
-        ? ["No hay RA definidos"]
+        ? [t('campos.verificacion.sinRaDefinidos', {defaultValue: 'No hay RA definidos'})]
         : [
-          `${raCount} RA definidos`,
-          `Suma de pesos: ${raPesoSum.toFixed(1)}% ${Math.abs(raPesoSum - 100) > 1 ? "(⚠️ no suman 100%)" : "(✅)"}`,
+          t('campos.verificacion.raDefinidos', {count: raCount, defaultValue: '{{count}} RA definidos'}),
+          t('campos.verificacion.sumaPesos', {pct: raPesoSum.toFixed(1), estado: Math.abs(raPesoSum - 100) > 1 ? "(⚠️ no suman 100%)" : "(✅)", defaultValue: 'Suma de pesos: {{pct}}% {{estado}}'}),
         ],
       actionHref: raCount === 0 ? "/curriculo?tab=ponderacion-ra-ce" : undefined,
-      actionLabel: raCount === 0 ? "Añadir primer RA" : undefined,
+      actionLabel: raCount === 0 ? t('botones.verificacion.anadirPrimerRa', {defaultValue: 'Añadir primer RA'}) : undefined,
     },
     {
       id: "ce",
       icon: <ClipboardList className="w-5 h-5" />,
-      title: "Criterios de evaluación (CE)",
+      title: t('campos.verificacion.ceTitulo', {defaultValue: 'Criterios de evaluación (CE)'}),
       href: "/curriculo?tab=ponderacion-ra-ce",
-      hrefLabel: "Currículo",
+      hrefLabel: t('nav.curriculo', {defaultValue: 'Currículo'}),
       status: ceCount === 0 ? "empty" : ceHuerfanos > 0 ? "warning" : "ok",
       lines: ceCount === 0
-        ? ["No hay CE definidos"]
+        ? [t('campos.verificacion.sinCeDefinidos', {defaultValue: 'No hay CE definidos'})]
         : [
-          `${ceCount} CE definidos`,
-          ceHuerfanos > 0 ? `${ceHuerfanos} CE sin RA asignado` : "Todos los CE tienen RA",
+          t('campos.verificacion.ceDefinidos', {count: ceCount, defaultValue: '{{count}} CE definidos'}),
+          ceHuerfanos > 0 ? t('campos.verificacion.ceSinRa', {count: ceHuerfanos, defaultValue: '{{count}} CE sin RA asignado'}) : t('campos.verificacion.todosLosCeTienenRa', {defaultValue: 'Todos los CE tienen RA'}),
         ],
       actionHref: ceHuerfanos > 0 ? "/curriculo?tab=ponderacion-ra-ce" : undefined,
-      actionLabel: ceHuerfanos > 0 ? "Revisar asignaciones" : undefined,
+      actionLabel: ceHuerfanos > 0 ? t('botones.verificacion.revisarAsignaciones', {defaultValue: 'Revisar asignaciones'}) : undefined,
     },
     {
       id: "instr",
       icon: <Wrench className="w-5 h-5" />,
-      title: "Instrumentos e Indicadores",
+      title: t('campos.verificacion.instrumentosIndicadoresTitulo', {defaultValue: 'Instrumentos e Indicadores'}),
       href: "/archivos?tab=autores",
-      hrefLabel: "Archivos",
+      hrefLabel: t('nav.archivos', {defaultValue: 'Archivos'}),
       status: (instrCount === 0 || indCount === 0) ? "empty" : indSinCE > 0 ? "warning" : "ok",
       lines: (instrCount === 0 || indCount === 0)
-        ? ["No hay instrumentos o indicadores"]
+        ? [t('campos.verificacion.sinInstrumentosIndicadores', {defaultValue: 'No hay instrumentos o indicadores'})]
         : [
-          `${instrCount} instrumentos y ${indCount} indicadores`,
-          indSinCE > 0 ? `${indSinCE} indicadores sin CE asociado` : "Todos los indicadores evalúan algún CE",
+          t('campos.verificacion.instrumentosIndicadoresCount', {instr: instrCount, ind: indCount, defaultValue: '{{instr}} instrumentos y {{ind}} indicadores'}),
+          indSinCE > 0 ? t('campos.verificacion.indicadoresSinCe', {count: indSinCE, defaultValue: '{{count}} indicadores sin CE asociado'}) : t('campos.verificacion.todosLosIndicadoresEvaluanCe', {defaultValue: 'Todos los indicadores evalúan algún CE'}),
         ],
       actionHref: (instrCount === 0 || indCount === 0) ? "/archivos?tab=autores" : undefined,
-      actionLabel: (instrCount === 0 || indCount === 0) ? "Importar de un editorial" : undefined,
+      actionLabel: (instrCount === 0 || indCount === 0) ? t('botones.verificacion.importarDeEditorial', {defaultValue: 'Importar de un editorial'}) : undefined,
     },
     {
       id: "tareas",
       icon: <FileText className="w-5 h-5" />,
-      title: "Tareas competenciales",
+      title: t('campos.verificacion.tareasCompetencialesTitulo', {defaultValue: 'Tareas competenciales'}),
       href: "/curriculo?tab=competenciales",
-      hrefLabel: "Currículo",
+      hrefLabel: t('nav.curriculo', {defaultValue: 'Currículo'}),
       status: tareasCount === 0 ? "empty" : tareasSinRA > 0 ? "warning" : "ok",
       lines: tareasCount === 0
-        ? ["No hay tareas definidas"]
+        ? [t('campos.verificacion.sinTareasDefinidas', {defaultValue: 'No hay tareas definidas'})]
         : [
-          `${tareasCount} tareas definidas`,
-          tareasSinRA > 0 ? `${tareasSinRA} tareas sin RA asociado` : "Todas las tareas tienen RA",
+          t('campos.verificacion.tareasDefinidas', {count: tareasCount, defaultValue: '{{count}} tareas definidas'}),
+          tareasSinRA > 0 ? t('campos.verificacion.tareasSinRa', {count: tareasSinRA, defaultValue: '{{count}} tareas sin RA asociado'}) : t('campos.verificacion.todasLasTareasTienenRa', {defaultValue: 'Todas las tareas tienen RA'}),
         ],
       actionHref: tareasCount === 0 ? "/curriculo?tab=competenciales" : undefined,
-      actionLabel: tareasCount === 0 ? "Crear primera tarea" : undefined,
+      actionLabel: tareasCount === 0 ? t('botones.verificacion.crearPrimeraTarea', {defaultValue: 'Crear primera tarea'}) : undefined,
     },
     {
       id: "sesiones",
       icon: <CalendarDays className="w-5 h-5" />,
-      title: "Sesiones de clase",
+      title: t('campos.verificacion.sesionesClaseTitulo', {defaultValue: 'Sesiones de clase'}),
       href: "/curriculo?tab=unidades",
-      hrefLabel: "Currículo",
+      hrefLabel: t('nav.curriculo', {defaultValue: 'Currículo'}),
       status: sesionesCount === 0 ? "empty" : sesionesSinUD > 0 ? "warning" : "ok",
       lines: sesionesCount === 0
-        ? ["No hay sesiones planificadas"]
+        ? [t('campos.verificacion.sinSesionesPlanificadas', {defaultValue: 'No hay sesiones planificadas'})]
         : [
-          `${sesionesCount} sesiones planificadas`,
-          sesionesSinUD > 0 ? `${sesionesSinUD} sesiones sin UD asignada` : "Todas las sesiones tienen UD",
+          t('campos.verificacion.sesionesPlanificadasCount', {count: sesionesCount, defaultValue: '{{count}} sesiones planificadas'}),
+          sesionesSinUD > 0 ? t('campos.verificacion.sesionesSinUd', {count: sesionesSinUD, defaultValue: '{{count}} sesiones sin UD asignada'}) : t('campos.verificacion.todasLasSesionesTienenUd', {defaultValue: 'Todas las sesiones tienen UD'}),
         ],
       actionHref: sesionesCount === 0 ? "/curriculo?tab=unidades" : undefined,
-      actionLabel: sesionesCount === 0 ? "Planificar sesiones" : undefined,
+      actionLabel: sesionesCount === 0 ? t('botones.verificacion.planificarSesiones', {defaultValue: 'Planificar sesiones'}) : undefined,
     },
     {
       id: "contexto",
       icon: <BookOpen className="w-5 h-5" />,
-      title: "Contexto del módulo",
+      title: t('campos.verificacion.contextoModuloTitulo', {defaultValue: 'Contexto del módulo'}),
       href: "/contexto?tab=contextualizacion",
-      hrefLabel: "Contexto",
+      hrefLabel: t('nav.contexto', {defaultValue: 'Contexto'}),
       status: tieneContexto ? "ok" : "empty",
       lines: tieneContexto
-        ? ["Contexto del aula configurado"]
-        : ["Sin descripción de contexto ni configuración de aula"],
+        ? [t('campos.verificacion.contextoAulaConfigurado', {defaultValue: 'Contexto del aula configurado'})]
+        : [t('campos.verificacion.sinDescripcionContexto', {defaultValue: 'Sin descripción de contexto ni configuración de aula'})],
       actionHref: !tieneContexto ? "/contexto?tab=contextualizacion" : undefined,
-      actionLabel: !tieneContexto ? "Añadir contexto" : undefined,
+      actionLabel: !tieneContexto ? t('botones.verificacion.anadirContexto', {defaultValue: 'Añadir contexto'}) : undefined,
     },
     {
       id: "dual",
       icon: <Building2 className="w-5 h-5" />,
-      title: "FP Dual",
+      title: t('campos.verificacion.fpDualTitulo', {defaultValue: 'FP Dual'}),
       href: "/contexto?tab=identificacion",
-      hrefLabel: "Contexto",
+      hrefLabel: t('nav.contexto', {defaultValue: 'Contexto'}),
       status: (m?.dual_regimen && m.dual_regimen !== "ninguno") ? "ok" : "empty",
       lines: (m?.dual_regimen && m.dual_regimen !== "ninguno")
-        ? [`Régimen: Dual ${m.dual_regimen === 'general' ? 'General' : 'Intensivo'}`]
-        : ["Régimen tradicional (sin FP Dual configurada)"],
+        ? [t('campos.verificacion.regimenDual', {regimen: m.dual_regimen === 'general' ? t('campos.verificacion.dualGeneralLabel', {defaultValue: 'General'}) : t('campos.verificacion.dualIntensivoLabel', {defaultValue: 'Intensivo'}), defaultValue: 'Régimen: Dual {{regimen}}'})]
+        : [t('campos.verificacion.regimenTradicional', {defaultValue: 'Régimen tradicional (sin FP Dual configurada)'})],
       actionHref: "/contexto?tab=identificacion",
-      actionLabel: "Configurar FP Dual",
+      actionLabel: t('botones.verificacion.configurarFpDual', {defaultValue: 'Configurar FP Dual'}),
     },
     {
       id: "eqavet",
       icon: <Shield className="w-5 h-5" />,
-      title: "Calidad EQAVET",
+      title: t('campos.verificacion.calidadEqavetTitulo', {defaultValue: 'Calidad EQAVET'}),
       href: "/inicio?tab=mejora",
-      hrefLabel: "Mejora",
+      hrefLabel: t('campos.verificacion.mejoraLabel', {defaultValue: 'Mejora'}),
       status: (m?.eqavet_evaluacion && Object.keys(m.eqavet_evaluacion).length > 0) ? "ok" : "empty",
       lines: (m?.eqavet_evaluacion && Object.keys(m.eqavet_evaluacion).length > 0)
-        ? [`${Object.keys(m.eqavet_evaluacion).length} indicadores EQAVET valorados`]
-        : ["Sin indicadores EQAVET valorados"],
+        ? [t('campos.verificacion.indicadoresEqavetValorados', {count: Object.keys(m.eqavet_evaluacion).length, defaultValue: '{{count}} indicadores EQAVET valorados'})]
+        : [t('campos.verificacion.sinIndicadoresEqavet', {defaultValue: 'Sin indicadores EQAVET valorados'})],
       actionHref: "/inicio?tab=mejora",
-      actionLabel: "Valorar calidad",
+      actionLabel: t('botones.verificacion.valorarCalidad', {defaultValue: 'Valorar calidad'}),
     },
     {
       id: "identificacion-pd",
       icon: <FileText className="w-5 h-5" />,
-      title: "Identificación (para PD+/pd=/pd-)",
+      title: t('campos.verificacion.identificacionPdTitulo', {defaultValue: 'Identificación (para PD+/pd=/pd-)'}),
       href: "/contexto?tab=identificacion",
-      hrefLabel: "Contexto",
+      hrefLabel: t('nav.contexto', {defaultValue: 'Contexto'}),
       status: !m ? "empty" : identificacionFaltan.length === 0 ? "ok" : identificacionFaltan.length < 3 ? "warning" : "empty",
       lines: !m
-        ? ["Sin datos de programación cargados"]
+        ? [t('campos.verificacion.sinDatosProgramacion', {defaultValue: 'Sin datos de programación cargados'})]
         : identificacionFaltan.length === 0
-          ? ["Centro, profesorado y familia profesional configurados"]
-          : [`Faltan: ${identificacionFaltan.join(", ")}`, "Estos campos rellenan la portada de los 3 modelos de PD"],
+          ? [t('campos.verificacion.centroProfesoradoFamiliaConfigurados', {defaultValue: 'Centro, profesorado y familia profesional configurados'})]
+          : [t('campos.verificacion.faltanCampos', {campos: identificacionFaltan.join(", "), defaultValue: 'Faltan: {{campos}}'}), t('campos.verificacion.camposRellenanPortada', {defaultValue: 'Estos campos rellenan la portada de los 3 modelos de PD'})],
       actionHref: identificacionFaltan.length > 0 ? "/contexto?tab=identificacion" : undefined,
-      actionLabel: identificacionFaltan.length > 0 ? "Completar identificación" : undefined,
+      actionLabel: identificacionFaltan.length > 0 ? t('botones.verificacion.completarIdentificacion', {defaultValue: 'Completar identificación'}) : undefined,
     },
     {
       id: "narrativos-pd",
       icon: <FileText className="w-5 h-5" />,
-      title: "Textos narrativos (PD+/JEG)",
+      title: t('campos.verificacion.textosNarrativosTitulo', {defaultValue: 'Textos narrativos (PD+/JEG)'}),
       href: "/contexto?tab=contextualizacion",
-      hrefLabel: "Contexto",
+      hrefLabel: t('nav.contexto', {defaultValue: 'Contexto'}),
       status: !m ? "empty" : narrativosRellenos === NARRATIVOS_PDPLUS.length ? "ok" : narrativosRellenos > 0 ? "warning" : "empty",
       lines: !m
-        ? ["Sin datos de programación cargados"]
+        ? [t('campos.verificacion.sinDatosProgramacion', {defaultValue: 'Sin datos de programación cargados'})]
         : [
-          `${narrativosRellenos} / ${NARRATIVOS_PDPLUS.length} textos redactados`,
-          narrativosFaltan.length > 0 ? `Faltan: ${narrativosFaltan.join(", ")}` : "Todos los textos narrativos están redactados",
+          t('campos.verificacion.textosRedactadosCount', {rellenos: narrativosRellenos, total: NARRATIVOS_PDPLUS.length, defaultValue: '{{rellenos}} / {{total}} textos redactados'}),
+          narrativosFaltan.length > 0 ? t('campos.verificacion.faltanCampos', {campos: narrativosFaltan.join(", "), defaultValue: 'Faltan: {{campos}}'}) : t('campos.verificacion.todosLosTextosRedactados', {defaultValue: 'Todos los textos narrativos están redactados'}),
         ],
       actionHref: narrativosFaltan.length > 0 ? "/contexto?tab=contextualizacion" : undefined,
-      actionLabel: narrativosFaltan.length > 0 ? "Redactar textos" : undefined,
+      actionLabel: narrativosFaltan.length > 0 ? t('botones.verificacion.redactarTextos', {defaultValue: 'Redactar textos'}) : undefined,
     }
   ];
 
@@ -378,89 +380,89 @@ export function VerificacionTab() {
     {
       id: "calendario",
       icon: <CalendarDays className="w-5 h-5" />,
-      title: "Calendario académico",
+      title: t('campos.verificacion.calendarioAcademicoTitulo', {defaultValue: 'Calendario académico'}),
       href: "/calendario",
-      hrefLabel: "Calendario",
+      hrefLabel: t('nav.calendario', {defaultValue: 'Calendario'}),
       status: !tieneHorario && !tieneFechas ? "empty" : (!tieneHorario || !tieneFechas) ? "warning" : "ok",
       lines: [
-        tieneHorario ? "Horario semanal definido" : "Sin horario semanal",
-        tieneFechas ? "Fechas de evaluación configuradas" : "Sin fechas de evaluación",
+        tieneHorario ? t('campos.verificacion.horarioSemanalDefinido', {defaultValue: 'Horario semanal definido'}) : t('campos.verificacion.sinHorarioSemanal', {defaultValue: 'Sin horario semanal'}),
+        tieneFechas ? t('campos.verificacion.fechasEvaluacionConfiguradas', {defaultValue: 'Fechas de evaluación configuradas'}) : t('campos.verificacion.sinFechasEvaluacion', {defaultValue: 'Sin fechas de evaluación'}),
       ],
       actionHref: !tieneHorario ? "/calendario" : undefined,
-      actionLabel: !tieneHorario ? "Configurar calendario" : undefined,
+      actionLabel: !tieneHorario ? t('botones.verificacion.configurarCalendario', {defaultValue: 'Configurar calendario'}) : undefined,
     },
     {
       id: "alumnado",
       icon: <Users className="w-5 h-5" />,
-      title: "Alumnado",
+      title: t('nav.alumnado', {defaultValue: 'Alumnado'}),
       href: "/alumnado",
-      hrefLabel: "Alumnado",
+      hrefLabel: t('nav.alumnado', {defaultValue: 'Alumnado'}),
       status: alumnosCount === 0 ? "empty" : alumnosIncompletos > 0 ? "warning" : "ok",
       lines: alumnosCount === 0
-        ? ["No hay alumnado registrado"]
+        ? [t('campos.verificacion.sinAlumnadoRegistrado', {defaultValue: 'No hay alumnado registrado'})]
         : [
-          `${alumnosCount} alumnos registrados`,
-          alumnosIncompletos > 0 ? `${alumnosIncompletos} registros incompletos (sin nombre/apellidos)` : "Todos los registros completos",
+          t('campos.verificacion.alumnosRegistrados', {count: alumnosCount, defaultValue: '{{count}} alumnos registrados'}),
+          alumnosIncompletos > 0 ? t('campos.verificacion.registrosIncompletos', {count: alumnosIncompletos, defaultValue: '{{count}} registros incompletos (sin nombre/apellidos)'}) : t('campos.verificacion.todosLosRegistrosCompletos', {defaultValue: 'Todos los registros completos'}),
         ],
       actionHref: alumnosCount === 0 ? "/alumnado" : undefined,
-      actionLabel: alumnosCount === 0 ? "Añadir alumnado" : undefined,
+      actionLabel: alumnosCount === 0 ? t('botones.verificacion.anadirAlumnado', {defaultValue: 'Añadir alumnado'}) : undefined,
     },
     {
       id: "seguimiento",
       icon: <ClipboardList className="w-5 h-5" />,
-      title: "Diario de aula",
+      title: t('campos.verificacion.diarioAulaTitulo', {defaultValue: 'Diario de aula'}),
       href: "/seguimiento?tab=clases",
-      hrefLabel: "Seguimiento",
+      hrefLabel: t('campos.verificacion.seguimientoLabel', {defaultValue: 'Seguimiento'}),
       status: sgmtCount === 0 ? "empty" : "ok",
       lines: sgmtCount === 0
-        ? ["Sin entradas en el diario de aula"]
-        : [`${sgmtCount} sesiones registradas en el diario`],
+        ? [t('campos.verificacion.sinEntradasDiario', {defaultValue: 'Sin entradas en el diario de aula'})]
+        : [t('campos.verificacion.sesionesRegistradasDiario', {count: sgmtCount, defaultValue: '{{count}} sesiones registradas en el diario'})],
       actionHref: sgmtCount === 0 ? "/seguimiento?tab=clases" : undefined,
-      actionLabel: sgmtCount === 0 ? "Registrar primera sesión" : undefined,
+      actionLabel: sgmtCount === 0 ? t('botones.verificacion.registrarPrimeraSesion', {defaultValue: 'Registrar primera sesión'}) : undefined,
     },
     {
       id: "evaluaciones",
       icon: <BarChart2 className="w-5 h-5" />,
-      title: "Calificaciones",
+      title: t('nav.calificaciones', {defaultValue: 'Calificaciones'}),
       href: "/calificaciones",
-      hrefLabel: "Calificaciones",
+      hrefLabel: t('nav.calificaciones', {defaultValue: 'Calificaciones'}),
       status: evalCount === 0 ? "empty" : evalTotal > 0 && evalCount < evalTotal ? "warning" : "ok",
       lines: evalCount === 0
-        ? ["Sin calificaciones introducidas"]
+        ? [t('campos.verificacion.sinCalificacionesIntroducidas', {defaultValue: 'Sin calificaciones introducidas'})]
         : [
-          `${evalCount} alumnos con registro de ${evalTotal > 0 ? evalTotal : "?"} posibles (${pct(evalCount, evalTotal)})`,
+          t('campos.verificacion.alumnosConRegistro', {count: evalCount, total: evalTotal > 0 ? evalTotal : "?", pct: pct(evalCount, evalTotal), defaultValue: '{{count}} alumnos con registro de {{total}} posibles ({{pct}})'}),
           evalTotal > 0 && evalCount < evalTotal
-            ? `Faltan ${evalTotal - evalCount} alumnos por evaluar`
-            : "Todos los alumnos tienen registros de calificación",
+            ? t('campos.verificacion.faltanAlumnosEvaluar', {count: evalTotal - evalCount, defaultValue: 'Faltan {{count}} alumnos por evaluar'})
+            : t('campos.verificacion.todosLosAlumnosTienenRegistro', {defaultValue: 'Todos los alumnos tienen registros de calificación'}),
         ],
       actionHref: evalCount === 0 ? "/seguimiento?tab=detalle" : undefined,
-      actionLabel: evalCount === 0 ? "Introducir notas" : undefined,
+      actionLabel: evalCount === 0 ? t('botones.verificacion.introducirNotas', {defaultValue: 'Introducir notas'}) : undefined,
     },
     {
       id: "tutoria",
       icon: <HeartHandshake className="w-5 h-5" />,
-      title: "Tutoría y alertas",
+      title: t('campos.verificacion.tutoriaAlertasTitulo', {defaultValue: 'Tutoría y alertas'}),
       href: "/alumnado?tab=tutoria",
-      hrefLabel: "Seguimiento",
+      hrefLabel: t('campos.verificacion.seguimientoLabel', {defaultValue: 'Seguimiento'}),
       status: tutoriaEntradas === 0 ? "empty" : "ok",
       lines: tutoriaEntradas === 0
-        ? ["Sin entradas de tutoría o alertas registradas"]
-        : [`${tutoriaEntradas} entradas de tutoría registradas`],
+        ? [t('campos.verificacion.sinEntradasTutoria', {defaultValue: 'Sin entradas de tutoría o alertas registradas'})]
+        : [t('campos.verificacion.entradasTutoriaRegistradas', {count: tutoriaEntradas, defaultValue: '{{count}} entradas de tutoría registradas'})],
       actionHref: tutoriaEntradas === 0 ? "/alumnado?tab=tutoria" : undefined,
-      actionLabel: tutoriaEntradas === 0 ? "Registrar tutoría" : undefined,
+      actionLabel: tutoriaEntradas === 0 ? t('botones.verificacion.registrarTutoria', {defaultValue: 'Registrar tutoría'}) : undefined,
     },
     {
       id: "plano",
       icon: <Users className="w-5 h-5" />,
-      title: "Plano de clase",
+      title: t('campos.verificacion.planoClaseTitulo', {defaultValue: 'Plano de clase'}),
       href: "/alumnado?tab=plano",
-      hrefLabel: "Alumnado",
+      hrefLabel: t('nav.alumnado', {defaultValue: 'Alumnado'}),
       status: planoCount === 0 ? "empty" : "ok",
       lines: planoCount === 0
-        ? ["No hay alumnos ubicados en el plano"]
-        : [`${planoCount} alumnos ubicados en el aula visual`],
+        ? [t('campos.verificacion.sinAlumnosPlano', {defaultValue: 'No hay alumnos ubicados en el plano'})]
+        : [t('campos.verificacion.alumnosUbicadosAulaVisual', {count: planoCount, defaultValue: '{{count}} alumnos ubicados en el aula visual'})],
       actionHref: planoCount === 0 ? "/alumnado?tab=plano" : undefined,
-      actionLabel: planoCount === 0 ? "Diseñar aula" : undefined,
+      actionLabel: planoCount === 0 ? t('botones.verificacion.disenarAula', {defaultValue: 'Diseñar aula'}) : undefined,
     },
   ];
 
@@ -479,49 +481,53 @@ export function VerificacionTab() {
       <div className="space-y-4">
         <h2 className="text-body font-bold text-foreground flex items-center gap-2 border-b border-white/5 pb-2">
           <Building2 className="w-4 h-4 text-accent" />
-          Grupo
+          {t('campos.verificacion.grupoTitulo', {defaultValue: 'Grupo'})}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Card className="p-4 border border-white/5 bg-foreground/5">
-            <p className="text-caption font-semibold text-muted mb-3">Catálogo oficial (fijo)</p>
+            <p className="text-caption font-semibold text-muted mb-3">{t('campos.verificacion.catalogoOficialTitulo', {defaultValue: 'Catálogo oficial (fijo)'})}</p>
             <div className="grid grid-cols-2 gap-3">
               <div className="text-center">
                 <div className="text-heading font-extrabold text-foreground">{catalogFamiliasCount || "-"}</div>
-                <div className="text-caption text-muted mt-0.5">Familias profesionales</div>
+                <div className="text-caption text-muted mt-0.5">{t('campos.verificacion.familiasProfesionalesLabel', {defaultValue: 'Familias profesionales'})}</div>
               </div>
               <div className="text-center">
                 <div className="text-heading font-extrabold text-foreground">{catalogTitulosCount || "-"}</div>
-                <div className="text-caption text-muted mt-0.5">Títulos totales</div>
+                <div className="text-caption text-muted mt-0.5">{t('campos.verificacion.titulosTotalesLabel', {defaultValue: 'Títulos totales'})}</div>
               </div>
-              {["Grado Básico", "Grado Medio", "Grado Superior"].map(nivel => (
+              {[
+                { nivel: "Grado Básico", label: t('campos.verificacion.gradoBasicoLabel', {defaultValue: 'Grado Básico (GB/GM/GS)'}) },
+                { nivel: "Grado Medio", label: t('campos.verificacion.gradoMedioLabel', {defaultValue: 'Grado Medio (GB/GM/GS)'}) },
+                { nivel: "Grado Superior", label: t('campos.verificacion.gradoSuperiorLabel', {defaultValue: 'Grado Superior (GB/GM/GS)'}) },
+              ].map(({ nivel, label }) => (
                 <div key={nivel} className="text-center">
                   <div className="text-subheading font-bold text-foreground">{catalogPorNivel[nivel] ?? 0}</div>
-                  <div className="text-caption text-muted mt-0.5">{nivel} (GB/GM/GS)</div>
+                  <div className="text-caption text-muted mt-0.5">{label}</div>
                 </div>
               ))}
             </div>
           </Card>
           <Card className="p-4 border border-white/5 bg-foreground/5">
             <p className="text-caption font-semibold text-muted mb-3">
-              Fichero cargado ({dataSourceLabel})
+              {t('campos.verificacion.ficheroCargado', {origen: dataSourceLabel, defaultValue: 'Fichero cargado ({{origen}})'})}
             </p>
             {infoModuloGrupo.familia || infoModuloGrupo.titulo_fp ? (
               <div className="space-y-2">
                 <div>
-                  <span className="text-caption text-muted">Familia profesional</span>
+                  <span className="text-caption text-muted">{t('campos.catalogo.labelFamiliaProfesional', {defaultValue: 'Familia profesional'})}</span>
                   <p className="text-body font-semibold text-foreground">{infoModuloGrupo.familia || "-"}</p>
                 </div>
                 <div>
-                  <span className="text-caption text-muted">Título</span>
+                  <span className="text-caption text-muted">{t('campos.catalogo.labelTitulo', {defaultValue: 'Título'})}</span>
                   <p className="text-body font-semibold text-foreground">{infoModuloGrupo.titulo_fp || "-"}</p>
                 </div>
                 <div>
-                  <span className="text-caption text-muted">Grado</span>
+                  <span className="text-caption text-muted">{t('campos.verificacion.gradoLabel', {defaultValue: 'Grado'})}</span>
                   <p className="text-body font-semibold text-foreground">{grupoTitulo?.level || "-"}</p>
                 </div>
               </div>
             ) : (
-              <p className="text-body text-muted">Sin familia/título asignados todavía. Ve a Contexto &gt; Identificación.</p>
+              <p className="text-body text-muted">{t('campos.verificacion.sinFamiliaTituloAsignados', {defaultValue: 'Sin familia/título asignados todavía. Ve a Contexto > Identificación.'})}</p>
             )}
           </Card>
         </div>
@@ -531,17 +537,17 @@ export function VerificacionTab() {
         <Card className="p-4 border border-success/30 bg-success/10 rounded-2xl text-center">
           <CheckCircle className="w-7 h-7 text-success mx-auto mb-1" />
           <div className="text-heading font-extrabold text-success">{okCount}</div>
-          <div className="text-caption text-muted mt-0.5">Correctos</div>
+          <div className="text-caption text-muted mt-0.5">{t('checks.verificacion.correctos', {defaultValue: 'Correctos'})}</div>
         </Card>
         <Card className="p-4 border border-warning/30 bg-warning/10 rounded-2xl text-center">
           <AlertTriangle className="w-7 h-7 text-warning mx-auto mb-1" />
           <div className="text-heading font-extrabold text-warning">{warnCount}</div>
-          <div className="text-caption text-muted mt-0.5">Advertencias</div>
+          <div className="text-caption text-muted mt-0.5">{t('checks.verificacion.advertencias', {defaultValue: 'Advertencias'})}</div>
         </Card>
         <Card className="p-4 border border-danger/30 bg-danger/10 rounded-2xl text-center">
           <XCircle className="w-7 h-7 text-danger mx-auto mb-1" />
           <div className="text-heading font-extrabold text-danger">{emptyCount}</div>
-          <div className="text-caption text-muted mt-0.5">Sin datos</div>
+          <div className="text-caption text-muted mt-0.5">{t('checks.verificacion.sinDatos', {defaultValue: 'Sin datos'})}</div>
         </Card>
       </div>
 
@@ -549,10 +555,10 @@ export function VerificacionTab() {
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
           <h2 className="text-body font-bold text-foreground flex items-center gap-2">
             <BookOpen className="w-4 h-4 text-accent" />
-            Programación didáctica
+            {t('campos.verificacion.programacionDidacticaTitulo', {defaultValue: 'Programación didáctica'})}
           </h2>
           <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-caption text-muted">
-            Programación activa: <span className="font-semibold text-foreground">{activeModuleId || "-"}</span>
+            {t('campos.verificacion.programacionActivaLabel', {defaultValue: 'Programación activa:'})} <span className="font-semibold text-foreground">{activeModuleId || "-"}</span>
           </span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -566,11 +572,11 @@ export function VerificacionTab() {
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
           <h2 className="text-body font-bold text-foreground flex items-center gap-2">
             <Users className="w-4 h-4 text-accent" />
-            Curso activo
+            {t('campos.verificacion.cursoActivoTitulo', {defaultValue: 'Curso activo'})}
           </h2>
           <div className="flex items-center gap-3">
             <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-caption text-muted">
-              Curso Activo: <span className="font-semibold text-foreground">{activeCursoId || "-"}</span>
+              {t('campos.verificacion.cursoActivoLabel', {defaultValue: 'Curso Activo:'})} <span className="font-semibold text-foreground">{activeCursoId || "-"}</span>
             </span>
             {activeModuleId && (
               <Button

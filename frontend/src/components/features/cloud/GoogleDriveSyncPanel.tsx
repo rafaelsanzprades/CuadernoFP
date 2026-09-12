@@ -30,7 +30,7 @@ export function GoogleDriveSyncPanel() {
     const result = await driveService.login(googleClientId);
 
     if (result.success) {
-      setDriveUserEmail(result.email || "Usuario de Drive");
+      setDriveUserEmail(result.email || t('campos.cloud.usuarioDrive', {defaultValue: 'Usuario de Drive'}));
       setDriveConnected(true);
       toast.success(t('toasts.googleDrive.conectado', {defaultValue: "Google Drive conectado correctamente."}), { id: "drive-connect" });
     } else {
@@ -76,7 +76,7 @@ export function GoogleDriveSyncPanel() {
             <Cloud className="w-6 h-6 text-[#4285F4]" /> Google Drive
           </h2>
           <p className="text-muted mt-2">
-            Guarda tus archivos .fpp y .fpc automáticamente en la nube de Google para acceder a ellos desde cualquier dispositivo sin necesidad de descargarlos manualmente.
+            {t('campos.cloud.driveDescripcion', {defaultValue: 'Guarda tus archivos .fpp y .fpc automáticamente en la nube de Google para acceder a ellos desde cualquier dispositivo sin necesidad de descargarlos manualmente.'})}
           </p>
         </div>
 
@@ -89,10 +89,10 @@ export function GoogleDriveSyncPanel() {
               </div>
               <div>
                 <p className="font-bold text-foreground">
-                  {isDriveConnected ? "Conectado" : "No conectado"}
+                  {isDriveConnected ? t('campos.cloud.conectado', {defaultValue: 'Conectado'}) : t('campos.cloud.noConectado', {defaultValue: 'No conectado'})}
                 </p>
                 <p className="text-body text-muted">
-                  {isDriveConnected ? `Sincronizando con ${driveUserEmail}` : "Inicia sesión con tu cuenta de Google"}
+                  {isDriveConnected ? t('campos.cloud.sincronizandoCon', {email: driveUserEmail, defaultValue: 'Sincronizando con {{email}}'}) : t('campos.cloud.iniciaSesionGoogle', {defaultValue: 'Inicia sesión con tu cuenta de Google'})}
                 </p>
               </div>
             </div>
@@ -118,10 +118,10 @@ export function GoogleDriveSyncPanel() {
             <div>
               <h3 className="font-bold text-foreground flex items-center gap-2">
                 <RefreshCw className={`w-4 h-4 ${autoSyncDrive ? "text-success animate-spin-slow" : "text-muted"}`} />
-                Autoguardado Automático
+                {t('campos.cloud.autoguardadoAutomaticoTitulo', {defaultValue: 'Autoguardado Automático'})}
               </h3>
               <p className="text-body text-muted">
-                Sube automáticamente a Drive cada vez que pulses "Guardar" en la app.
+                {t('campos.cloud.autoguardadoAutomaticoDesc', {defaultValue: 'Sube automáticamente a Drive cada vez que pulses "Guardar" en la app.'})}
               </p>
             </div>
             <button
@@ -140,14 +140,14 @@ export function GoogleDriveSyncPanel() {
           {!isDriveConnected && (
             <div className="flex flex-col gap-3 p-5 rounded-xl border bg-background/50 border-[var(--glass-border)]">
               <h3 className="font-bold text-foreground flex items-center gap-2">
-                <Key className="w-5 h-5 text-[#4285F4]" /> Credenciales OAuth
+                <Key className="w-5 h-5 text-[#4285F4]" /> {t('campos.cloud.credencialesOAuthTitulo', {defaultValue: 'Credenciales OAuth'})}
               </h3>
               <p className="text-body text-muted">
-                Introduce el <strong>Client ID</strong> de tu proyecto de Google Cloud para autorizar la aplicación. Este dato se guarda en tu navegador de forma segura.
+                {t('campos.cloud.introduceClientIdPre', {defaultValue: 'Introduce el'})} <strong>Client ID</strong> {t('campos.cloud.introduceClientIdPost', {defaultValue: 'de tu proyecto de Google Cloud para autorizar la aplicación. Este dato se guarda en tu navegador de forma segura.'})}
               </p>
               <Input
                 type="password"
-                placeholder="Ej: 123456789-abcde.apps.googleusercontent.com"
+                placeholder={t('campos.cloud.clientIdPlaceholder', {defaultValue: 'Ej: 123456789-abcde.apps.googleusercontent.com'})}
                 value={googleClientId}
                 onChange={(e) => setGoogleClientId(e.target.value)}
                 className="font-mono text-body"

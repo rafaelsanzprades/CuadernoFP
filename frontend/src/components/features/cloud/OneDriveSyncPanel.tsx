@@ -42,7 +42,7 @@ export function OneDriveSyncPanel() {
     const token = await signInOneDrive();
 
     if (token) {
-      setOneDriveUserEmail("Usuario de Microsoft");
+      setOneDriveUserEmail(t('campos.cloud.usuarioMicrosoft', {defaultValue: 'Usuario de Microsoft'}));
       setOneDriveConnected(true);
       toast.success(t('toasts.oneDrive.conectado', {defaultValue: "OneDrive conectado correctamente."}), { id: "onedrive-connect" });
     } else {
@@ -70,7 +70,7 @@ export function OneDriveSyncPanel() {
             <Cloud className="w-6 h-6 text-[#0078D4]" /> Microsoft OneDrive
           </h2>
           <p className="text-muted mt-2">
-            Guarda tus archivos .fpp y .fpc en tu cuenta de Microsoft OneDrive. (Requiere registro en portal de Azure).
+            {t('campos.cloud.oneDriveDescripcion', {defaultValue: 'Guarda tus archivos .fpp y .fpc en tu cuenta de Microsoft OneDrive. (Requiere registro en portal de Azure).'})}
           </p>
         </div>
 
@@ -83,10 +83,10 @@ export function OneDriveSyncPanel() {
               </div>
               <div>
                 <p className="font-bold text-foreground">
-                  {isOneDriveConnected ? "Conectado" : "No conectado"}
+                  {isOneDriveConnected ? t('campos.cloud.conectado', {defaultValue: 'Conectado'}) : t('campos.cloud.noConectado', {defaultValue: 'No conectado'})}
                 </p>
                 <p className="text-body text-muted">
-                  {isOneDriveConnected ? `Sincronizando con cuenta Microsoft` : "Inicia sesión con Microsoft"}
+                  {isOneDriveConnected ? t('campos.cloud.sincronizandoCuentaMicrosoft', {defaultValue: 'Sincronizando con cuenta Microsoft'}) : t('campos.cloud.iniciaSesionMicrosoft', {defaultValue: 'Inicia sesión con Microsoft'})}
                 </p>
               </div>
             </div>
@@ -111,10 +111,10 @@ export function OneDriveSyncPanel() {
           {!isOneDriveConnected && (
             <div className="flex flex-col gap-3 p-5 rounded-xl border bg-background/50 border-[var(--glass-border)]">
               <h3 className="font-bold text-foreground flex items-center gap-2">
-                <Key className="w-5 h-5 text-info" /> Azure Client ID
+                <Key className="w-5 h-5 text-info" /> {t('campos.cloud.azureClientIdTitulo', {defaultValue: 'Azure Client ID'})}
               </h3>
               <p className="text-body text-muted">
-                Client ID de tu App registrada en Entra ID (Azure).
+                {t('campos.cloud.azureClientIdDesc', {defaultValue: 'Client ID de tu App registrada en Entra ID (Azure).'})}
               </p>
               <Input
                 type="text"

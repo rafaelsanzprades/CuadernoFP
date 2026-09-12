@@ -316,14 +316,14 @@ export default function ArchivosTrabajoPage() {
 
   const getFileSourceLabel = (source: typeof pdFileSource) => {
     if (source.type === 'none') return null;
-    if (source.type === 'new') return "Nuevo (sin guardar)";
-    if (source.type === 'local') return source.fileName || "Archivo local";
+    if (source.type === 'new') return t('campos.archivos.nuevoSinGuardar', {defaultValue: 'Nuevo (sin guardar)'});
+    if (source.type === 'local') return source.fileName || t('campos.archivos.archivoLocal', {defaultValue: 'Archivo local'});
     if (source.type === 'drive') return source.fileName || "Google Drive";
     return null;
   };
 
   const getFriendlyPdName = (pdKey: string) => {
-    if (pdKey === "imported-pd") return "Programación importada";
+    if (pdKey === "imported-pd") return t('campos.archivos.programacionImportada', {defaultValue: 'Programación importada'});
 
     if (useAppStore.getState().activeModuleId === pdKey && moduleData?.info_modulo) {
       const { codigo, nombre, titulo_codigo, titulo_fp } = moduleData.info_modulo;
@@ -348,14 +348,14 @@ export default function ArchivosTrabajoPage() {
         }
       }
 
-      return `P - ${degreeCode} - ${actualCode} - ${nombre || 'Programación'}`;
+      return `P - ${degreeCode} - ${actualCode} - ${nombre || t('campos.archivos.programacionFallback', {defaultValue: 'Programación'})}`;
     }
 
     return `P - ${pdKey.replace('-pd', '').toUpperCase()}`;
   };
 
   const getFriendlyCursoName = (cursoKey: string) => {
-    if (cursoKey === "imported-curso") return "Curso importado";
+    if (cursoKey === "imported-curso") return t('campos.archivos.cursoImportado', {defaultValue: 'Curso importado'});
     const parts = cursoKey.split('-');
     const rawYear = parts[parts.length - 1];
 
@@ -382,10 +382,10 @@ export default function ArchivosTrabajoPage() {
   ];
 
   const breadcrumbSuffixMap: Record<string, string> = {
-    "datos": "Archivos",
-    "asistente-ia": "Asistente",
-    "verificacion": "Verificación",
-    "seguridad": "Seguridad y Privacidad",
+    "datos": t('campos.archivos.breadcrumbArchivos', {defaultValue: 'Archivos'}),
+    "asistente-ia": t('tabs.archivos.asistente-ia.label', {defaultValue: 'Asistente'}),
+    "verificacion": t('tabs.inicio.verificacion.label', {defaultValue: 'Verificación'}),
+    "seguridad": t('campos.archivos.breadcrumbSeguridadPrivacidad', {defaultValue: 'Seguridad y Privacidad'}),
   };
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
@@ -449,7 +449,7 @@ export default function ArchivosTrabajoPage() {
 
                 <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-6">
                   <div className="flex items-center gap-3 shrink-0">
-                    <span className="text-body font-bold text-foreground/80">Modo de datos:</span>
+                    <span className="text-body font-bold text-foreground/80">{t('campos.archivos.modoDatosLabel', {defaultValue: 'Modo de datos:'})}</span>
                     <div className="flex bg-foreground/5 rounded-lg p-0.5 gap-0.5">
                       <button
                         onClick={switchToDemo}
@@ -474,12 +474,12 @@ export default function ArchivosTrabajoPage() {
                     {dataSource === 'demo' ? (
                       <>
                         <Cloud className="w-4 h-4 shrink-0" />
-                        <span><strong className="font-bold">DEMO:</strong> estás viendo datos de ejemplo. No es tu curso real y no se guarda nada en disco — cambia a REALES para trabajar con tus propios archivos.</span>
+                        <span><strong className="font-bold">DEMO:</strong> {t('campos.archivos.avisoDemoDesc', {defaultValue: 'estás viendo datos de ejemplo. No es tu curso real y no se guarda nada en disco — cambia a REALES para trabajar con tus propios archivos.'})}</span>
                       </>
                     ) : (
                       <>
                         <HardDrive className="w-4 h-4 shrink-0" />
-                        <span><strong className="font-bold">REAL:</strong> estás trabajando con tus propios archivos .fpg/.fpp/.fpc, guardados en tu equipo. Los cambios se guardan de verdad.</span>
+                        <span><strong className="font-bold">REAL:</strong> {t('campos.archivos.avisoRealDesc', {defaultValue: 'estás trabajando con tus propios archivos .fpg/.fpp/.fpc, guardados en tu equipo. Los cambios se guardan de verdad.'})}</span>
                       </>
                     )}
                   </div>
@@ -495,12 +495,12 @@ export default function ArchivosTrabajoPage() {
                     <div className="relative z-10 flex flex-col h-full flex-1">
                       <div className="mb-4">
                         <h3 className="text-subheading font-bold text-foreground flex items-center gap-2">
-                          <FolderOpen className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : 'text-accent'}`} /> Grupos
+                          <FolderOpen className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : 'text-accent'}`} /> {t('nav.grupos', {defaultValue: 'Grupos'})}
                         </h3>
                         <p className="text-body text-muted mt-2 leading-relaxed">
                           {isDemoLoaded
-                            ? "Grupos de ejemplo. Doble clic para cargar."
-                            : "Tus grupos guardados. Doble clic para cargar."}
+                            ? t('campos.archivos.gruposEjemploDobleClic', {defaultValue: 'Grupos de ejemplo. Doble clic para cargar.'})
+                            : t('campos.archivos.tusGruposDobleClic', {defaultValue: 'Tus grupos guardados. Doble clic para cargar.'})}
                         </p>
                       </div>
 
@@ -508,7 +508,7 @@ export default function ArchivosTrabajoPage() {
                         {isDemoLoaded ? (
                           demoGroupFiles.length === 0 ? (
                             <div className="h-full flex items-center justify-center text-center p-4">
-                              <p className="text-body text-muted">No se han encontrado grupos DEMO.</p>
+                              <p className="text-body text-muted">{t('campos.archivos.sinGruposDemo', {defaultValue: 'No se han encontrado grupos DEMO.'})}</p>
                             </div>
                           ) : (
                             demoGroupFiles.map(f => {
@@ -533,11 +533,11 @@ export default function ArchivosTrabajoPage() {
                         ) : !workspaceHandle ? (
                           <div className="h-full flex flex-col items-center justify-center text-center p-4">
                             <Database className="w-8 h-8 text-muted/50 mb-2" />
-                            <p className="text-body text-muted font-medium">Usa el botón inferior para enlazar tu carpeta de trabajo.</p>
+                            <p className="text-body text-muted font-medium">{t('campos.archivos.usaBotonEnlazarCarpeta', {defaultValue: 'Usa el botón inferior para enlazar tu carpeta de trabajo.'})}</p>
                           </div>
                         ) : workspaceFiles.grupos.length === 0 ? (
                           <div className="h-full flex items-center justify-center text-center p-4">
-                            <p className="text-body text-muted">No se han encontrado grupos.</p>
+                            <p className="text-body text-muted">{t('campos.archivos.sinGrupos', {defaultValue: 'No se han encontrado grupos.'})}</p>
                           </div>
                         ) : (
                           workspaceFiles.grupos.map(g => (
@@ -591,12 +591,12 @@ export default function ArchivosTrabajoPage() {
                       <div className="mb-4">
                         <div className="flex justify-between items-center mb-1">
                           <h3 className="text-subheading font-bold text-foreground flex items-center gap-2">
-                            <BookOpen className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : 'text-info'}`} /> Programaciones
+                            <BookOpen className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : 'text-info'}`} /> {t('campos.archivos.programacionesTitulo', {defaultValue: 'Programaciones'})}
                           </h3>
-                          {hasPdFile && <Badge variant={isDemoLoaded ? 'warning' : 'info'}>Activa</Badge>}
+                          {hasPdFile && <Badge variant={isDemoLoaded ? 'warning' : 'info'}>{t('checks.archivos.activaFem', {defaultValue: 'Activa'})}</Badge>}
                         </div>
                         <p className="text-body text-muted mt-2 leading-relaxed">
-                          Doble clic para cargar una programación.
+                          {t('campos.archivos.dobleClicCargarProgramacion', {defaultValue: 'Doble clic para cargar una programación.'})}
                         </p>
                       </div>
 
@@ -604,7 +604,7 @@ export default function ArchivosTrabajoPage() {
                         {isDemoLoaded ? (
                           demoProgFiles.length === 0 ? (
                             <div className="h-full flex items-center justify-center text-center p-4">
-                              <p className="text-body text-muted">No se han encontrado programaciones DEMO.</p>
+                              <p className="text-body text-muted">{t('campos.archivos.sinProgramacionesDemo', {defaultValue: 'No se han encontrado programaciones DEMO.'})}</p>
                             </div>
                           ) : (
                             demoProgFiles.map(f => {
@@ -645,7 +645,7 @@ export default function ArchivosTrabajoPage() {
                           })
                         ) : workspaceHandle ? (
                           <div className="h-full flex items-center justify-center text-center p-4">
-                            <p className="text-body text-muted">No se han encontrado programaciones.</p>
+                            <p className="text-body text-muted">{t('campos.archivos.sinProgramaciones', {defaultValue: 'No se han encontrado programaciones.'})}</p>
                           </div>
                         ) : null}
                       </div>
@@ -691,12 +691,12 @@ export default function ArchivosTrabajoPage() {
                       <div className="mb-4">
                         <div className="flex justify-between items-center mb-1">
                           <h3 className={`text-subheading font-bold flex items-center gap-2 ${(!isDemoLoaded && !hasPdFile) ? 'text-muted' : 'text-foreground'}`}>
-                            <Users className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : (!isDemoLoaded && !hasPdFile) ? 'text-muted' : 'text-success'}`} /> Cursos
+                            <Users className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : (!isDemoLoaded && !hasPdFile) ? 'text-muted' : 'text-success'}`} /> {t('campos.archivos.cursosTitulo', {defaultValue: 'Cursos'})}
                           </h3>
-                          {hasCursoFile && <Badge variant={isDemoLoaded ? 'warning' : 'success'}>Activo</Badge>}
+                          {hasCursoFile && <Badge variant={isDemoLoaded ? 'warning' : 'success'}>{t('checks.archivos.activoMasc', {defaultValue: 'Activo'})}</Badge>}
                         </div>
                         <p className="text-body text-muted mt-2 leading-relaxed">
-                          Doble clic para cargar un curso.
+                          {t('campos.archivos.dobleClicCargarCurso', {defaultValue: 'Doble clic para cargar un curso.'})}
                         </p>
                       </div>
 
@@ -704,7 +704,7 @@ export default function ArchivosTrabajoPage() {
                         {isDemoLoaded ? (
                           demoCursoFiles.length === 0 ? (
                             <div className="h-full flex items-center justify-center text-center p-4">
-                              <p className="text-body text-muted">No se han encontrado cursos DEMO.</p>
+                              <p className="text-body text-muted">{t('campos.archivos.sinCursosDemo', {defaultValue: 'No se han encontrado cursos DEMO.'})}</p>
                             </div>
                           ) : (
                             demoCursoFiles.map(f => {
@@ -743,7 +743,7 @@ export default function ArchivosTrabajoPage() {
                           })
                         ) : workspaceHandle ? (
                           <div className="h-full flex items-center justify-center text-center p-4">
-                            <p className="text-body text-muted">No se han encontrado cursos.</p>
+                            <p className="text-body text-muted">{t('campos.archivos.sinCursos', {defaultValue: 'No se han encontrado cursos.'})}</p>
                           </div>
                         ) : null}
                       </div>
@@ -785,7 +785,7 @@ export default function ArchivosTrabajoPage() {
                 {/* Bloque interno: Nube (Google Drive & OneDrive) */}
                 <div className="flex items-center gap-3 pt-2">
                   <div className="h-px flex-1 bg-[var(--glass-border)]" />
-                  <span className="text-caption text-muted uppercase tracking-wider">Nube</span>
+                  <span className="text-caption text-muted uppercase tracking-wider">{t('campos.archivos.nubeLabel', {defaultValue: 'Nube'})}</span>
                   <div className="h-px flex-1 bg-[var(--glass-border)]" />
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
@@ -806,44 +806,44 @@ export default function ArchivosTrabajoPage() {
                       <Shield className="w-6 h-6" />
                     </div>
                     <div>
-                      <h2 className="text-subheading font-bold text-foreground">Tu privacidad por diseño</h2>
-                      <p className="text-muted mt-1 text-body">Cómo se garantiza que tus datos reales son 100% tuyos.</p>
+                      <h2 className="text-subheading font-bold text-foreground">{t('campos.archivos.privacidadDisenoTitulo', {defaultValue: 'Tu privacidad por diseño'})}</h2>
+                      <p className="text-muted mt-1 text-body">{t('campos.archivos.privacidadDisenoDesc', {defaultValue: 'Cómo se garantiza que tus datos reales son 100% tuyos.'})}</p>
                     </div>
                   </div>
-                  
+
                   <div className="space-y-4">
                     <div className="p-5 bg-background rounded-xl border border-border/50">
-                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Building2 className="w-5 h-5 text-accent"/> 1. El servidor es ciego</h3>
-                      <p className="text-muted leading-relaxed text-body">Nuestra base de datos en la nube <strong>jamás</strong> almacena datos de tus alumnos, tus programaciones, ni nada que crees. El servidor web solo existe para enviarte los Catálogos Oficiales (BOE/BOCAA). Eres invisible para nuestro backend.</p>
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Building2 className="w-5 h-5 text-accent"/> {t('campos.archivos.servidorCiegoTitulo', {defaultValue: '1. El servidor es ciego'})}</h3>
+                      <p className="text-muted leading-relaxed text-body">{t('campos.archivos.servidorCiegoDesc', {defaultValue: 'Nuestra base de datos en la nube jamás almacena datos de tus alumnos, tus programaciones, ni nada que crees. El servidor web solo existe para enviarte los Catálogos Oficiales (BOE/BOCAA). Eres invisible para nuestro backend.'})}</p>
                     </div>
 
                     <div className="p-5 bg-background rounded-xl border border-border/50">
-                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Lock className="w-5 h-5 text-accent"/> 2. Cifrado local avanzado AES-256</h3>
-                      <p className="text-muted leading-relaxed mb-4 text-body">Puedes activar la encriptación local. Antes de que cualquier archivo se guarde en tu disco duro o nube, se cifra usando tu clave maestra dentro de tu navegador.</p>
-                      
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Lock className="w-5 h-5 text-accent"/> {t('campos.archivos.cifradoLocalTitulo', {defaultValue: '2. Cifrado local avanzado AES-256'})}</h3>
+                      <p className="text-muted leading-relaxed mb-4 text-body">{t('campos.archivos.cifradoLocalDesc', {defaultValue: 'Puedes activar la encriptación local. Antes de que cualquier archivo se guarde en tu disco duro o nube, se cifra usando tu clave maestra dentro de tu navegador.'})}</p>
+
                       <div className="bg-surface border border-border p-4 rounded-lg">
-                        <label className="block text-body font-medium text-foreground mb-2">Establecer clave de seguridad (no se guarda en ningún sitio)</label>
+                        <label className="block text-body font-medium text-foreground mb-2">{t('campos.archivos.establecerClaveLabel', {defaultValue: 'Establecer clave de seguridad (no se guarda en ningún sitio)'})}</label>
                         <div className="flex gap-2">
-                          <input 
-                            type="password" 
-                            className="flex-1 bg-background border border-border rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent text-body" 
+                          <input
+                            type="password"
+                            className="flex-1 bg-background border border-border rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent text-body"
                             placeholder={t('placeholders.archivos.claveMaestra', {defaultValue: 'Introduce tu clave maestra...'})}
                             value={useAppStore.getState().encryptionKey || ""}
                             onChange={(e) => useAppStore.getState().setEncryptionKey(e.target.value || null)}
                           />
                         </div>
-                        <p className="text-caption text-muted mt-2"><AlertTriangle className="w-3 h-3 inline mr-1 text-warning"/> Si olvidas esta clave y guardas un archivo, no podremos ayudarte a recuperarlo.</p>
+                        <p className="text-caption text-muted mt-2"><AlertTriangle className="w-3 h-3 inline mr-1 text-warning"/> {t('campos.archivos.avisoOlvidoClave', {defaultValue: 'Si olvidas esta clave y guardas un archivo, no podremos ayudarte a recuperarlo.'})}</p>
                       </div>
                     </div>
 
                     <div className="p-5 bg-background rounded-xl border border-border/50">
-                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><CheckCircle className="w-5 h-5 text-accent"/> 3. Defensa contra ataques en el navegador</h3>
-                      <p className="text-muted leading-relaxed text-body">Hemos implementado una política estricta de seguridad de contenido (CSP) para bloquear scripts maliciosos de terceros.</p>
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><CheckCircle className="w-5 h-5 text-accent"/> {t('campos.archivos.defensaAtaquesTitulo', {defaultValue: '3. Defensa contra ataques en el navegador'})}</h3>
+                      <p className="text-muted leading-relaxed text-body">{t('campos.archivos.defensaAtaquesDesc', {defaultValue: 'Hemos implementado una política estricta de seguridad de contenido (CSP) para bloquear scripts maliciosos de terceros.'})}</p>
                     </div>
 
                     <div className="p-5 bg-background rounded-xl border border-border/50">
-                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Activity className="w-5 h-5 text-accent"/> 4. Servidor blindado y siempre disponible</h3>
-                      <p className="text-muted leading-relaxed text-body">Nuestro servidor backend incorpora <strong>Rate Limiting</strong>, garantizando que siempre tendrás acceso al catálogo oficial de módulos.</p>
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Activity className="w-5 h-5 text-accent"/> {t('campos.archivos.servidorBlindadoTitulo', {defaultValue: '4. Servidor blindado y siempre disponible'})}</h3>
+                      <p className="text-muted leading-relaxed text-body">{t('campos.archivos.servidorBlindadoDesc', {defaultValue: 'Nuestro servidor backend incorpora Rate Limiting, garantizando que siempre tendrás acceso al catálogo oficial de módulos.'})}</p>
                     </div>
                   </div>
                 </section>
@@ -864,11 +864,11 @@ export default function ArchivosTrabajoPage() {
               <Card className="flex items-start gap-4 p-6 bg-info/5 border border-info/20 rounded-2xl shadow-lg">
                 <span className="text-info mt-1 shrink-0"><ShieldAlert className="w-8 h-8" /></span>
                 <div>
-                  <h3 className="text-subheading font-bold text-foreground mb-2">Seguridad y RGPD garantizados</h3>
+                  <h3 className="text-subheading font-bold text-foreground mb-2">{t('campos.archivos.seguridadRgpdTitulo', {defaultValue: 'Seguridad y RGPD garantizados'})}</h3>
                   <div className="text-body text-foreground/80 space-y-2 leading-relaxed">
-                    <p>Cuaderno FP procesa toda tu información confidencial exclusivamente en tu navegador. <strong>Tú eres el dueño de tus archivos</strong>.</p>
-                    <p>Ningún dato de tu alumnado se envía a la nube, salvo que uses la Sincronización autorizada en tu cuenta.</p>
-                    <p className="font-semibold text-info mt-2">Asegúrate de pulsar &quot;Guardar&quot; al finalizar tu sesión de trabajo para no perder los últimos cambios.</p>
+                    <p>{t('campos.archivos.procesaInfoNavegador', {defaultValue: 'Cuaderno FP procesa toda tu información confidencial exclusivamente en tu navegador. Tú eres el dueño de tus archivos.'})}</p>
+                    <p>{t('campos.archivos.ningunDatoNube', {defaultValue: 'Ningún dato de tu alumnado se envía a la nube, salvo que uses la Sincronización autorizada en tu cuenta.'})}</p>
+                    <p className="font-semibold text-info mt-2">{t('campos.archivos.asegurateGuardar', {defaultValue: 'Asegúrate de pulsar "Guardar" al finalizar tu sesión de trabajo para no perder los últimos cambios.'})}</p>
                   </div>
                 </div>
               </Card>
@@ -895,24 +895,24 @@ export default function ArchivosTrabajoPage() {
           <Card className="w-full max-w-xl p-6 shadow-2xl border-[var(--glass-border)]">
             <h2 id="validation-modal-title" className="text-subheading font-bold mb-4 flex items-center gap-2">
               <ShieldAlert className="w-5 h-5 text-warning" />
-              Validación de Enlaces del Workspace
+              {t('campos.archivos.validacionEnlacesTitulo', {defaultValue: 'Validación de Enlaces del Workspace'})}
             </h2>
 
             {brokenLinks.length === 0 ? (
               <div className="text-center py-8">
                 <CheckCircle className="w-12 h-12 text-success mx-auto mb-4" />
-                <p className="text-foreground font-medium">¡Todo correcto!</p>
-                <p className="text-muted text-body mt-2">No se han detectado enlaces rotos en los grupos de tu carpeta local.</p>
+                <p className="text-foreground font-medium">{t('campos.archivos.todoCorrecto', {defaultValue: '¡Todo correcto!'})}</p>
+                <p className="text-muted text-body mt-2">{t('campos.archivos.sinEnlacesRotos', {defaultValue: 'No se han detectado enlaces rotos en los grupos de tu carpeta local.'})}</p>
               </div>
             ) : (
               <div className="space-y-4">
-                <p className="text-muted text-body">Se han detectado los siguientes enlaces rotos en los archivos Grupo. Esto sucede cuando renombras o eliminas una Programación o un Curso en Windows directamente.</p>
+                <p className="text-muted text-body">{t('campos.archivos.enlacesRotosDetectados', {defaultValue: 'Se han detectado los siguientes enlaces rotos en los archivos Grupo. Esto sucede cuando renombras o eliminas una Programación o un Curso en Windows directamente.'})}</p>
                 <ul className="space-y-3 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
                   {brokenLinks.map((link, idx) => (
                     <li key={link.groupName || idx} className="bg-foreground/5 p-3 rounded-lg border border-[var(--glass-border)] text-body">
                       <p className="font-semibold">{link.groupName}</p>
                       <p className="text-danger flex items-center gap-2 mt-1">
-                        <AlertTriangle className="w-4 h-4" /> {link.type === 'programacion' ? 'Programación' : 'Curso'} no encontrada: <span className="font-mono">{link.missingFile}</span>
+                        <AlertTriangle className="w-4 h-4" /> {link.type === 'programacion' ? t('campos.archivos.programacionNoEncontrada', {defaultValue: 'Programación no encontrada:'}) : t('campos.archivos.cursoNoEncontrado', {defaultValue: 'Curso no encontrado:'})} <span className="font-mono">{link.missingFile}</span>
                       </p>
                       {fixingLink === link ? (
                         <div className="mt-3 flex gap-2">
@@ -933,7 +933,7 @@ export default function ArchivosTrabajoPage() {
                               }
                             }}
                           >
-                            <option value="">Seleccionar archivo correcto...</option>
+                            <option value="">{t('checks.archivos.seleccionarArchivoCorrecto', {defaultValue: 'Seleccionar archivo correcto...'})}</option>
                             {(link.type === 'programacion' ? workspaceFiles.programaciones : workspaceFiles.cursos).map(f => (
                               <option key={f} value={f}>{f}</option>
                             ))}

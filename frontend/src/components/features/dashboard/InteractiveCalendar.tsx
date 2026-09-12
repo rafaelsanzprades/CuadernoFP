@@ -14,11 +14,16 @@ const toDate = (s: string): Date | null => {
 const inRange = (d: Date, s: Date | null, e: Date | null) =>
   !!(s && e && d >= s && d <= e);
 
-const MONTH_NAMES = [
-  "Enero","Febrero","Marzo","Abril","Mayo","Junio",
-  "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre",
+const getMonthNames = (t: (key: string, opts?: any) => string) => [
+  t('campos.calendario.mesEnero', {defaultValue: 'Enero'}), t('campos.calendario.mesFebrero', {defaultValue: 'Febrero'}), t('campos.calendario.mesMarzo', {defaultValue: 'Marzo'}),
+  t('campos.calendario.mesAbril', {defaultValue: 'Abril'}), t('campos.calendario.mesMayo', {defaultValue: 'Mayo'}), t('campos.calendario.mesJunio', {defaultValue: 'Junio'}),
+  t('campos.calendario.mesJulio', {defaultValue: 'Julio'}), t('campos.calendario.mesAgosto', {defaultValue: 'Agosto'}), t('campos.calendario.mesSeptiembre', {defaultValue: 'Septiembre'}),
+  t('campos.calendario.mesOctubre', {defaultValue: 'Octubre'}), t('campos.calendario.mesNoviembre', {defaultValue: 'Noviembre'}), t('campos.calendario.mesDiciembre', {defaultValue: 'Diciembre'}),
 ];
-const DAY_NAMES_SHORT = ["Lu","Ma","Mi","Ju","Vi","Sa","Do"];
+const getDayNamesShort = (t: (key: string, opts?: any) => string) => [
+  t('campos.calendario.diaLuCorto', {defaultValue: 'Lu'}), t('campos.calendario.diaMaCorto', {defaultValue: 'Ma'}), t('campos.calendario.diaMiCorto', {defaultValue: 'Mi'}),
+  t('campos.calendario.diaJuCorto', {defaultValue: 'Ju'}), t('campos.calendario.diaViCorto', {defaultValue: 'Vi'}), t('campos.calendario.diaSaCorto', {defaultValue: 'Sa'}), t('campos.calendario.diaDoCorto', {defaultValue: 'Do'}),
+];
 
 export function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUpdateNote, planning_ledger }: {
   info_fechas: Record<string, string>;
@@ -28,6 +33,8 @@ export function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUp
   planning_ledger?: Record<string, string[]>;
 }) {
   const { t } = useTranslation();
+  const MONTH_NAMES = useMemo(() => getMonthNames(t), [t]);
+  const DAY_NAMES_SHORT = useMemo(() => getDayNamesShort(t), [t]);
   const [popup, setPopup] = useState<{ key: string; x: number; y: number } | null>(null);
   const [noteType, setNoteType] = useState<"f" | "r">("f");
   const [noteText, setNoteText] = useState("");

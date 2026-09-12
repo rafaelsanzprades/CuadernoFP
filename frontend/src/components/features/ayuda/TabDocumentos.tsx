@@ -117,13 +117,13 @@ export function TabDocumentos() {
         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md">
           <div className="p-12 text-center text-muted flex flex-col items-center">
             <div className="w-8 h-8 border-4 border-accent border-t-transparent rounded-full animate-spin mb-4"></div>
-            <p>Cargando documentos...</p>
+            <p>{t('campos.comun.cargandoDocumentos', {defaultValue: 'Cargando documentos...'})}</p>
           </div>
         </div>
       ) : error ? (
         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md">
           <div className="p-12 text-center">
-            <div className="text-danger mb-2"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> Error</div>
+            <div className="text-danger mb-2"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('header.error', {defaultValue: 'Error'})}</div>
             <p className="text-foreground/80">{error}</p>
           </div>
         </div>
@@ -131,7 +131,7 @@ export function TabDocumentos() {
         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md">
           <div className="p-16 text-center text-muted">
             <div className="text-heading mb-4"><span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></div>
-            <p className="text-subheading">El directorio está vacío.</p>
+            <p className="text-subheading">{t('campos.comun.directorioVacio', {defaultValue: 'El directorio está vacío.'})}</p>
           </div>
         </div>
       ) : (

@@ -73,7 +73,7 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
           <div>
             <h2 id="modal-title" className="text-subheading font-bold flex items-center gap-2 text-foreground">
               <Settings2 className="w-5 h-5 text-accent" />
-              Configuración Detallada de la Unidad
+              {t('campos.secuenciacion.configuracionDetalladaUnidadTitulo', {defaultValue: 'Configuración Detallada de la Unidad'})}
             </h2>
             <p className="text-body text-muted mt-1">
               <span className="font-mono text-accent mr-2">{ud.id_ud}</span>
@@ -92,9 +92,9 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
           {/* Intención Educativa */}
           <div className="space-y-2">
             <label className="block text-body font-bold text-foreground">
-              Intención educativa / contextualización
+              {t('campos.secuenciacion.intencionEducativaLabel', {defaultValue: 'Intención educativa / contextualización'})}
             </label>
-            <p className="text-caption text-muted">Justificación pedagógica de esta unidad, vinculación al perfil profesional y conocimientos previos necesarios.</p>
+            <p className="text-caption text-muted">{t('campos.secuenciacion.intencionEducativaDesc', {defaultValue: 'Justificación pedagógica de esta unidad, vinculación al perfil profesional y conocimientos previos necesarios.'})}</p>
             <textarea 
               value={formData.Intencion_Educativa}
               onChange={(e) => handleChange("Intencion_Educativa", e.target.value)}
@@ -107,9 +107,9 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
             {/* Temporización */}
             <div className="space-y-2">
               <label className="block text-body font-bold text-foreground">
-                Temporización detallada
+                {t('campos.secuenciacion.temporizacionDetalladaLabel', {defaultValue: 'Temporización detallada'})}
               </label>
-              <p className="text-caption text-muted">Periodo del curso, fechas estimadas y relación con otras UDs.</p>
+              <p className="text-caption text-muted">{t('campos.secuenciacion.temporizacionDetalladaDesc', {defaultValue: 'Periodo del curso, fechas estimadas y relación con otras UDs.'})}</p>
               <textarea 
                 value={formData.Temporizacion}
                 onChange={(e) => handleChange("Temporizacion", e.target.value)}
@@ -121,9 +121,9 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
             {/* Agrupamientos */}
             <div className="space-y-2">
               <label className="block text-body font-bold text-foreground">
-                Agrupamientos y metodología
+                {t('campos.secuenciacion.agrupamientosMetodologiaLabel', {defaultValue: 'Agrupamientos y metodología'})}
               </label>
-              <p className="text-caption text-muted">Organización del aula (Gran grupo, pequeño grupo, trabajo individual).</p>
+              <p className="text-caption text-muted">{t('campos.secuenciacion.agrupamientosMetodologiaDesc', {defaultValue: 'Organización del aula (Gran grupo, pequeño grupo, trabajo individual).'})}</p>
               <textarea 
                 value={formData.Agrupamientos}
                 onChange={(e) => handleChange("Agrupamientos", e.target.value)}
@@ -136,9 +136,9 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
           {/* Transversalidad */}
           <div className="space-y-2">
             <label className="block text-body font-bold text-foreground">
-              Transversalidad e innovación
+              {t('campos.secuenciacion.transversalidadInnovacionLabel', {defaultValue: 'Transversalidad e innovación'})}
             </label>
-            <p className="text-caption text-muted">Cómo se trabajan la digitalización, sostenibilidad, equidad o DUA en esta unidad.</p>
+            <p className="text-caption text-muted">{t('campos.secuenciacion.transversalidadInnovacionDesc', {defaultValue: 'Cómo se trabajan la digitalización, sostenibilidad, equidad o DUA en esta unidad.'})}</p>
             <textarea 
               value={formData.Transversalidad}
               onChange={(e) => handleChange("Transversalidad", e.target.value)}

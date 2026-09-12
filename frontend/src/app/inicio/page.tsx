@@ -93,19 +93,25 @@ export default function InicioPage() {
               <div className="flex items-start gap-3 mb-4">
                 <GraduationCap className="w-6 h-6 text-accent mt-0.5 shrink-0" />
                 <div>
-                  <h2 className="text-subheading font-bold text-foreground">Una herramienta construida sobre metodología específica</h2>
+                  <h2 className="text-subheading font-bold text-foreground">{t('campos.inicio.metodologiaEspecificaTitulo', {defaultValue: 'Una herramienta construida sobre metodología específica'})}</h2>
                   <p className="text-body text-muted mt-1">
-                    Cuaderno FP sigue las referencias bibliográficas actualizadas a la nueva ley de FP, las orientaciones de la Inspección Educativa, los principales autores de referencia y las guías oficiales de las administraciones educativas: <strong className="text-foreground">los Resultados de Aprendizaje (RA) son el eje causal</strong> del que se considera debe derivar todo lo demás en una programación didáctica.
+                    {t('campos.inicio.metodologiaEspecificaDesc', {defaultValue: 'Cuaderno FP sigue las referencias bibliográficas actualizadas a la nueva ley de FP, las orientaciones de la Inspección Educativa, los principales autores de referencia y las guías oficiales de las administraciones educativas: los Resultados de Aprendizaje (RA) son el eje causal del que se considera debe derivar todo lo demás en una programación didáctica.'})}
                   </p>
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-x-3 gap-y-3 text-body font-semibold text-muted border-t border-[var(--glass-border)] pt-4">
                 {[
-                  "Identificación", "Introducción, justificación y normativa", "Contextualización",
-                  "Objetivos y competencias", "Carácter intermodular y dual", "Contenidos centrados en RA",
-                  "Situaciones de aprendizaje", "Metodología e inclusión",
-                  "Evaluación (aprendizaje / prácticas / excepciones)", "Actividades complementarias",
-                  "Atención a la diversidad y recursos",
+                  t('campos.inicio.pasoIdentificacion', {defaultValue: 'Identificación'}),
+                  t('campos.inicio.pasoIntroduccionJustificacionNormativa', {defaultValue: 'Introducción, justificación y normativa'}),
+                  t('campos.inicio.pasoContextualizacion', {defaultValue: 'Contextualización'}),
+                  t('campos.inicio.pasoObjetivosCompetencias', {defaultValue: 'Objetivos y competencias'}),
+                  t('campos.inicio.pasoCaracterIntermodularDual', {defaultValue: 'Carácter intermodular y dual'}),
+                  t('campos.inicio.pasoContenidosCentradosRa', {defaultValue: 'Contenidos centrados en RA'}),
+                  t('campos.inicio.pasoSituacionesAprendizaje', {defaultValue: 'Situaciones de aprendizaje'}),
+                  t('campos.inicio.pasoMetodologiaInclusion', {defaultValue: 'Metodología e inclusión'}),
+                  t('campos.inicio.pasoEvaluacion', {defaultValue: 'Evaluación (aprendizaje / prácticas / excepciones)'}),
+                  t('campos.inicio.pasoActividadesComplementarias', {defaultValue: 'Actividades complementarias'}),
+                  t('campos.inicio.pasoAtencionDiversidadRecursos', {defaultValue: 'Atención a la diversidad y recursos'}),
                 ].map((step, i, arr) => (
                   <span key={step} className="flex items-center gap-2">
                     <span className="px-3 py-1.5 rounded-full bg-foreground/5 border border-[var(--glass-border)] text-foreground/80">{step}</span>
@@ -188,9 +194,9 @@ export default function InicioPage() {
                       <MessageCircle className="w-6 h-6 text-[#229ED9]" />
                     </div>
                     <div className="flex-1 text-center md:text-left">
-                      <h3 className="text-body font-bold text-foreground">Grupo oficial de Telegram</h3>
+                      <h3 className="text-body font-bold text-foreground">{t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'})}</h3>
                       <p className="text-body text-muted leading-tight mt-1">
-                        Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad Autónoma.
+                        {t('campos.inicio.grupoTelegramDesc', {defaultValue: 'Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad Autónoma.'})}
                       </p>
                     </div>
                     <a
@@ -200,13 +206,13 @@ export default function InicioPage() {
                       className="shrink-0 px-5 py-2.5 rounded-lg bg-[#229ED9] text-white font-medium hover:bg-[#229ED9]/90 transition-colors flex items-center gap-2 text-body"
                     >
                       <Send className="w-4 h-4" />
-                      Unirme al grupo en Telegram
+                      {t('botones.inicio.unirseTelegram', {defaultValue: 'Unirme al grupo en Telegram'})}
                     </a>
                   </div>
 
-                  <h3 className="text-heading font-bold text-foreground border-b border-[var(--glass-border)] pb-2">Contribuidores por Comunidad Autónoma</h3>
+                  <h3 className="text-heading font-bold text-foreground border-b border-[var(--glass-border)] pb-2">{t('campos.inicio.contribuidoresCcaaTitulo', {defaultValue: 'Contribuidores por Comunidad Autónoma'})}</h3>
                   <p className="text-muted mb-4">
-                    Mención especial al profesorado que está ayudando a mejorar y a integrar los currículos de las Comunidades Autónomas
+                    {t('campos.inicio.contribuidoresCcaaDesc', {defaultValue: 'Mención especial al profesorado que está ayudando a mejorar y a integrar los currículos de las Comunidades Autónomas'})}
                   </p>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -225,7 +231,7 @@ export default function InicioPage() {
                           {comunidad === "Aragón" ? (
                             <li className="flex items-center gap-2 text-foreground"><Users className="w-4 h-4 text-accent" /> Jose Javier García</li>
                           ) : (
-                            <li className="flex items-center gap-2 italic opacity-60"><Users className="w-4 h-4 text-muted-foreground" /> ¡Anímate a contribuir!</li>
+                            <li className="flex items-center gap-2 italic opacity-60"><Users className="w-4 h-4 text-muted-foreground" /> {t('campos.inicio.animateAContribuir', {defaultValue: '¡Anímate a contribuir!'})}</li>
                           )}
                         </ul>
                       </div>

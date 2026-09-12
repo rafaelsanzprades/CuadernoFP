@@ -101,6 +101,14 @@
       "autoevaluacion": {
         "desc": "Autoavaluació de l'alumnat per criteri d'avaluació (SÍ/Dubtes/NO) i dificultats declarades.",
         "label": "Autoavaluació"
+      },
+      "perfilProfesional": {
+        "label": "Perfil professional",
+        "desc": "Orientació professional per alumne/a: motivació, experiència laboral, aptituds, aspiracions i inserció post-cicle."
+      },
+      "expediente": {
+        "label": "Expedient",
+        "desc": "Línia temporal d'evidències per alumne/a: qualificacions, autoavaluació, tutoria, reclamacions, assistència i diari de classe."
       }
     },
     "seguimiento": {
@@ -119,6 +127,10 @@
       "detalle": {
         "label": "Detall per alumnat",
         "desc": "Entrada de notes numèriques per alumnat, instrument d'avaluació i nivell d'adquisició de RA."
+      },
+      "feoeEmpresa": {
+        "label": "FEOE / Empresa",
+        "desc": "Avaluació de l'alumnat a l'empresa durant la FEOE (Annex XI b), transcrita per RA/CE."
       }
     },
     "calificaciones": {
@@ -138,7 +150,12 @@
         "desc": "Rendiment i estadístiques comparatives del grup, i full de progrés individual per a tutories."
       },
       "reclamaciones": {
-        "label": "Reclamacions"
+        "label": "Reclamacions",
+        "desc": "Reclamacions de nota presentades per l'alumnat, amb el seu motiu i resolució."
+      },
+      "boletines": {
+        "label": "Butlletins",
+        "desc": "Butlletí individual de qualificacions en pantalla, amb radar i barres de nivell d'assoliment per RA."
       }
     },
     "contexto": {
@@ -175,6 +192,10 @@
       "competenciales": {
         "label": "Tasques competencials",
         "desc": "Disseny i planificació de tasques i activitats competencials."
+      },
+      "contenidosUd": {
+        "label": "Continguts → UD",
+        "desc": "Taula de continguts per unitat didàctica agrupats en blocs, amb la seva relació amb RA, objectius generals, hores i instruments d'avaluació."
       }
     },
     "metodologia": {
@@ -207,6 +228,15 @@
       },
       "tri3": {
         "desc": "Instruments d'avaluació planificats per al 3r trimestre."
+      },
+      "rubricas": {
+        "nav": "Rúbriques",
+        "desc": "Rúbriques reutilitzables: defineix criteris (que han de sumar 10 punts entre tots) i nivells d'acompliment, i assigna-les a qualsevol instrument des de la seva Configuració avançada.",
+        "titulo": "Rúbriques d'avaluació"
+      },
+      "jeg": {
+        "nav": "Model JEG",
+        "desc": "Model JEG per indicadors: configuració del motor de qualificació real de l'app."
       }
     },
     "archivos": {
@@ -378,7 +408,8 @@
     "normativa": "Documents",
     "instrumentos": "Instrument",
     "calidad": "Qualitat",
-    "mejora": "Millora"
+    "mejora": "Millora",
+    "grupos": "Grups"
   },
   "navGroups": {
     "inicio": "Inici",
@@ -406,7 +437,8 @@
     "sincronizado": "Sincronitzat",
     "guardando": "Desant...",
     "guardado": "Desat",
-    "error": "Error"
+    "error": "Error",
+    "settings": "Configuració"
   },
   "pages": {
     "agenda_title": "Agenda",
@@ -470,7 +502,10 @@
     "siguiente": "Següent",
     "tipo": "Tipus",
     "total": "Total",
-    "volver": "Tornar"
+    "volver": "Tornar",
+    "editar": "Editar",
+    "eliminar": "Eliminar",
+    "cargando": "Carregant..."
   },
   "navDesc": {
     "inicio": "Panell principal, contribucions de la comunitat, documents de referència i qualitat EQAVET.",
@@ -580,7 +615,8 @@
       "errorGuardarPropuesta": "Error en desar després d'aplicar la proposta.",
       "planAutocompletado": "Pla de sessions autocompletat.",
       "programacionGuardada": "Programació desada correctament.",
-      "propuestaAplicada": "Proposta de {{author}} aplicada i desada."
+      "propuestaAplicada": "Proposta de {{author}} aplicada i desada.",
+      "repartidoPorRelevancia": "Pesos recalculats a partir de la Rellevància de cada CE."
     },
     "detalleAlumnado": {
       "errorInformeRefuerzo": "Error en generar l'informe de reforç."
@@ -601,7 +637,12 @@
       "sinDemo": "No pots sincronitzar amb Drive en mode DEMO."
     },
     "header": {
-      "paletaNoImplementada": "Paleta d'ordres encara no implementada."
+      "paletaNoImplementada": "Paleta d'ordres encara no implementada.",
+      "conflictoVersionesTitulo": "Conflicte de versions",
+      "conflictoVersionesDesc": "Les dades estan desactualitzades. Si us plau, recarrega la pàgina.",
+      "guardadoConExitoTitulo": "Desat correctament",
+      "datosActualizadosDesc": "Dades actualitzades.",
+      "revisaConexionDatosDesc": "Revisa la connexió o les dades."
     },
     "inicio": {
       "estructuraGuardada": "Estructura desada."
@@ -658,6 +699,10 @@
     },
     "udConfig": {
       "errorExportar": "Error en exportar la unitat didàctica."
+    },
+    "comun": {
+      "errorGuardar": "Error en desar",
+      "guardadoCorrectamente": "Desat correctament"
     }
   },
   "botones": {
@@ -672,7 +717,10 @@
       "importarCsv": "Importar CSV",
       "imprimirBoletin": "Imprimir butlletí",
       "pulsaAnadirRegistro": "Afegir registre",
-      "vaciarPlano": "Buidar el plànol"
+      "vaciarPlano": "Buidar el plànol",
+      "perfilProfesionalIndividual": "Individual",
+      "perfilProfesionalResumen": "Resum",
+      "perfilProfesionalTendencias": "Tendències"
     },
     "archivos": {
       "cambiarCarpetaLocal": "Canviar carpeta local",
@@ -717,7 +765,9 @@
       "aplicarPropuesta": "Aplicar proposta",
       "autocompletarPlan": "Autocompletar pla",
       "cargarPropuestaEditorial": "Carregar proposta editorial",
-      "volverALaLista": "Tornar a la llista"
+      "volverALaLista": "Tornar a la llista",
+      "descargarPdfMagia": "Descarregar PDF/DOCX a MagIA",
+      "repartirPorRelevancia": "Repartir per rellevància"
     },
     "dashboard": {
       "abriendo": "Obrint...",
@@ -743,7 +793,8 @@
     },
     "evaluacion": {
       "generarInforme": "Generar informe",
-      "restaurarNotasReales": "Restaurar a notes reals"
+      "restaurarNotasReales": "Restaurar a notes reals",
+      "volverASigadCalculado": "Tornar al valor calculat"
     },
     "header": {
       "altoContraste": "Alt contrast",
@@ -763,7 +814,12 @@
       "crearRecuperacion": "Crear recuperació",
       "crearRecuperacionTri": "Crear recuperació ({{tri}})",
       "desmarcarTodas": "Desmarcar totes",
-      "marcarTodas": "Marcar totes"
+      "marcarTodas": "Marcar totes",
+      "nuevaRubrica": "Nova rúbrica",
+      "anadirNivel": "Afegir nivell",
+      "anadirCriterio": "Afegir criteri",
+      "dividirPorcentajes": "Dividir percentatges",
+      "anadir": "Afegeix"
     },
     "magia": {
       "cerrarVisor": "Tancar visor",
@@ -772,7 +828,8 @@
       "editableDocx": "Editable .docx",
       "editableXlsx": "Editable .xlsx",
       "generandoDocx": "⏳ Generant DOCX...",
-      "vistaPdf": "Vista .pdf"
+      "vistaPdf": "Vista .pdf",
+      "exportarExcelCompleto": "Exportar Excel complet"
     },
     "modulo": {
       "anadirAlumno": "Afegir alumne",
@@ -792,6 +849,34 @@
       "anadirSesionA": "Afegir sessió a {{id}}",
       "exportarBriefing": "Exportar briefing (PDF/DOCX)",
       "exportarFicha": "Exportar fitxa (PDF/DOCX)"
+    },
+    "verificacion": {
+      "irA": "Anar a {{destino}}",
+      "configurarModulo": "Configurar mòdul",
+      "anadirPrimeraUd": "Afegir primera UD",
+      "anadirPrimerRa": "Afegir primer RA",
+      "revisarAsignaciones": "Revisar assignacions",
+      "importarDeEditorial": "Importar d'una editorial",
+      "crearPrimeraTarea": "Crear primera tasca",
+      "planificarSesiones": "Planificar sessions",
+      "anadirContexto": "Afegir context",
+      "configurarFpDual": "Configurar FP Dual",
+      "valorarCalidad": "Valorar qualitat",
+      "completarIdentificacion": "Completar identificació",
+      "redactarTextos": "Redactar textos",
+      "configurarCalendario": "Configurar calendari",
+      "anadirAlumnado": "Afegir alumnat",
+      "registrarPrimeraSesion": "Registra la primera sessió",
+      "introducirNotas": "Introdueix notes",
+      "registrarTutoria": "Registra tutoria",
+      "disenarAula": "Dissenya l'aula"
+    },
+    "feoe": {
+      "excelenteTodoA4": "Excel·lent (tot a 4)",
+      "suficienteTodoA3": "Suficient (tot a 3)"
+    },
+    "inicio": {
+      "unirseTelegram": "Unir-me al grup a Telegram"
     }
   },
   "placeholders": {
@@ -805,7 +890,10 @@
       "dificultadesOpcional": "Dificultats (opcional)",
       "edad": "edat",
       "nombre": "Nom...",
-      "telefono": "Telèfon"
+      "telefono": "Telèfon",
+      "participantesTutoria": "Qui hi ha estat present (alumne/a, família, orientador/a...)",
+      "buscarAlumnado": "Cerca alumnat...",
+      "correoEjemplo": "correu@exemple.com"
     },
     "archivos": {
       "buscarModulo": "Cerca per codi o nom del mòdul...",
@@ -839,7 +927,8 @@
       "textoUdsModulo": "Descripció de com s'organitzen les unitats didàctiques. Si es deixa buit, es genera automàticament a partir de df_ud."
     },
     "curriculo": {
-      "peso": "Pes..."
+      "peso": "Pes...",
+      "bloqueContenido": "Sense assignar..."
     },
     "dashboard": {
       "ejModulo": "Ex: ELE203, 0237-ictve",
@@ -852,7 +941,11 @@
     "instrumentos": {
       "descripcionIndicador": "Descripció de l'indicador",
       "seleccionaIndicadores": "Selecciona indicadors...",
-      "tituloInstrumento": "Títol de l'instrument"
+      "tituloInstrumento": "Títol de l'instrument",
+      "nombreRubrica": "Nom de la rúbrica",
+      "descripcionRubrica": "Descripció (opcional)",
+      "descripcionCriterio": "Descripció del criteri",
+      "descripcionNivel": "Descripció del nivell"
     },
     "modulo": {
       "a1Justificacion": "Indicar base normativa, lleis d'educació i reials decrets aplicables al títol...",
@@ -907,7 +1000,8 @@
     "alumnado": {
       "eliminarAlumnado": "Eliminar alumnat",
       "fechasCalculadasNacimiento": "Dates calculades a partir de naixement, rellevants per a FEOE i majoria d'edat",
-      "importarCsv": "Importar CSV (Nom, Cognoms...)"
+      "importarCsv": "Importar CSV (Nom, Cognoms...)",
+      "grupoEvaluacionGev": "Grup d'avaluació (GEv)"
     },
     "archivos": {
       "creaCursoGrupo": "Crea un curs i el seu arxiu de grup associat",
@@ -931,7 +1025,8 @@
       "eliminarCe": "Eliminar CE",
       "horasTotalesModulo": "Hores totals del mòdul segons currículum (BOA)",
       "sumaHorasSesiones": "Suma de les hores de totes les sessions",
-      "sumaHorasUd": "Suma de les hores assignades a cada UD"
+      "sumaHorasUd": "Suma de les hores assignades a cada UD",
+      "recalcularPctRelevancia": "Recalcula el % de cada CE del RA a partir de la seva Rellevància (−=meitat, ==normal, +=doble) — un CE sense rellevància marcada compta com ="
     },
     "dashboard": {
       "pctImpartidoPrevisto": "% impartit / previst",
@@ -946,7 +1041,9 @@
       "maxValor": "Màx: {{valor}}",
       "mediaValor": "Mitjana: {{valor}}",
       "minValor": "Mín: {{valor}}",
-      "topeCompensablesActivo": "El nombre de CE suspesos supera el màxim compensable d'aquest mòdul (Dades → Regles d'arrodoniment)"
+      "topeCompensablesActivo": "El nombre de CE suspesos supera el màxim compensable d'aquest mòdul (Dades → Regles d'arrodoniment)",
+      "calificarConRubrica": "Qualificar amb rúbrica",
+      "notaSigadOverride": "Es calcula només a partir de la nota final ordinària. Canvia-la aquí a mà si vols pujar-la o baixar-la sense tocar aquesta nota."
     },
     "header": {
       "uneteTelegram": "Uneix-te al nostre grup de Telegram"
@@ -958,7 +1055,8 @@
       "item12Origen": "Ítem 12: qui emplena aquest instrument",
       "item30Procedimiento": "Ítem 30: procediment JEG (ordinari/recuperació/extraordinària)",
       "pesoRelativoCe": "Pes relatiu dins del CE",
-      "sustituidaPorRecuperacion": "Substituïda per recuperació"
+      "sustituidaPorRecuperacion": "Substituïda per recuperació",
+      "gevSoloCuentaGrupo": "Grup d'avaluació (GEv): només compta per a l'alumnat d'aquest mateix grup"
     },
     "modulo": {
       "eliminarRegistro": "Eliminar registre"
@@ -1000,14 +1098,22 @@
       "medioInformal": "Informal",
       "medioPresencial": "Reunió presencial",
       "medioTelefono": "Trucada telefònica",
-      "medioVideollamada": "Videotrucada"
+      "medioVideollamada": "Videotrucada",
+      "estadoActivos": "Actius",
+      "estadoBaja": "Baixa",
+      "todaIntencion": "Qualsevol intenció",
+      "todaAptitud": "Qualsevol aptitud"
     },
     "catalogo": {
       "grado": "Grau",
-      "gradosDelAAlE": "Graus de l'A a l'E"
+      "gradosDelAAlE": "Graus de l'A a l'E",
+      "seleccionaFamilia": "-- Selecciona Família --",
+      "seleccionaTitulo": "-- Selecciona títol --",
+      "seleccionaModulo": "-- Selecciona mòdul --"
     },
     "comun": {
-      "otros": "Altres"
+      "otros": "Altres",
+      "si": "Sí"
     },
     "contexto": {
       "seleccionOrientativa": "Selecció orientativa per ajudar a redactar el text de sota (primera versió, s'anirà ampliant).",
@@ -1083,7 +1189,8 @@
       "item_socio_turistico": "Turístic",
       "item_turno_diurno": "Diürn",
       "item_turno_mixto": "Mixt",
-      "item_turno_vespertino": "Vespertí"
+      "item_turno_vespertino": "Vespertí",
+      "sugerenciaSegunGrado": "Suggeriment segons el Grau ({{motivo}}): \"{{label}}\". Aplicar"
     },
     "diario": {
       "acumuladoTrimestral": "Acumulat trimestral",
@@ -1118,7 +1225,12 @@
       "tipo_otro": "Altre",
       "tipo_prueba_objetiva": "Prova objectiva",
       "tipo_registro_observacion": "Registre d'observació",
-      "tipo_rubrica": "Rúbrica"
+      "tipo_rubrica": "Rúbrica",
+      "basico": "Bàsic",
+      "tipoRecuperaciones": "Recuperacions",
+      "seleccionaActividad": "-- Selecciona activitat --",
+      "metodoSobrescribir": "Sobreescriure la nota si és més alta",
+      "metodoMedia": "Fer mitjana amb la nota anterior"
     },
     "legal": {
       "accContacto": "6. Contacte i queixes",
@@ -1263,6 +1375,150 @@
     "evaluacion": {
       "selecciona": "Selecciona...",
       "todos": "Tots"
+    },
+    "orientacion": {
+      "seleccionar": "-- Selecciona --",
+      "motivoEleccion": {
+        "vocacion": "Vocació / passió pel sector",
+        "salidaLaboral": "Sortida laboral clara",
+        "reorientacion": "Reorientació professional",
+        "porDescarte": "Per descart (cap altra opció)",
+        "familia": "Influència familiar",
+        "costeEconomico": "Cost econòmic vs universitat"
+      },
+      "viaAcceso": {
+        "eso": "ESO (títol de graduat)",
+        "fpgb": "FP Grau Bàsic",
+        "fpgm": "FP Grau Mitjà (a GS)",
+        "bachillerato": "Batxillerat",
+        "pruebaAcceso": "Prova d'accés",
+        "convalidacionParcial": "Convalidació parcial",
+        "otra": "Altra via"
+      },
+      "primeraOpcion": "Aquest cicle era la seva primera opció",
+      "estudiaYTrabaja": "Estudia alhora que treballa",
+      "cambioDeCiclo": "Canvi de cicle / segona matrícula",
+      "experienciaPrevia": {
+        "sinExperiencia": "Sense experiència laboral",
+        "esporadica": "Treballs esporàdics / eventuals",
+        "relacionada": "Relacionada amb el cicle",
+        "noRelacionada": "No relacionada amb el cicle",
+        "autonomo": "Activitat per compte propi"
+      },
+      "jornadaActual": {
+        "noTrabaja": "No treballa actualment",
+        "parcial": "Treballa a temps parcial",
+        "completa": "Treballa a jornada completa",
+        "autonomo": "Autònom / per compte propi"
+      },
+      "cotizaSeguridadSocial": "Cotitza a la Seguretat Social actualment",
+      "aptitudPrincipal": {
+        "tecnica": "Tècnica / pràctica",
+        "analitica": "Analítica / investigadora",
+        "creativa": "Creativa / innovadora",
+        "comercial": "Comercial / negociadora",
+        "comunicativa": "Comunicativa / docent",
+        "relacional": "Relacional / social",
+        "emprendedora": "Emprenedora / autònoma",
+        "organizativa": "Organitzativa / gestora"
+      },
+      "areaInteres": {
+        "desarrolloSoftware": "Desenvolupament de software / programació",
+        "sistemasInfraestructura": "Sistemes / infraestructura",
+        "ciberseguridad": "Ciberseguretat",
+        "datosIA": "Dades / IA / Machine Learning",
+        "disenoUX": "Disseny / UX / multimèdia",
+        "electronicaHardware": "Electrònica / hardware",
+        "atencionCliente": "Atenció al client / suport",
+        "gestionAdministracion": "Gestió / administració",
+        "sanidadCuidados": "Sanitat / cures",
+        "industriaProduccion": "Indústria / producció",
+        "otro": "Altre / encara no definit"
+      },
+      "ambitoLaboral": {
+        "empresaGrande": "Empresa gran / corporació",
+        "pyme": "PIME / empresa mitjana",
+        "startup": "Startup / empresa emergent",
+        "administracionPublica": "Administració pública",
+        "ongSectorSocial": "ONG / sector social",
+        "autonomoFreelance": "Autònom / freelance",
+        "indiferente": "Indiferent"
+      },
+      "preferenciaGeografica": {
+        "local": "Local / ciutat actual",
+        "nacional": "Nacional (mobilitat Espanya)",
+        "internacional": "Internacional",
+        "indiferente": "Indiferent"
+      },
+      "idiomaEspanol": "Espanyol (natiu / fluid)",
+      "idiomaIngles": "Anglès",
+      "idiomaFrances": "Francès",
+      "idiomaAleman": "Alemany",
+      "idiomaPortugues": "Portuguès",
+      "idiomaOtro": "Altre idioma",
+      "intencionAlTerminar": {
+        "empleoInmediato": "Buscar feina immediatament",
+        "feoePracticasEmpresa": "FEOE / pràctiques en empresa col·laboradora",
+        "cicloSuperior": "Continuar amb un altre cicle (GM→GS)",
+        "universidad": "Continuar a la universitat",
+        "emprender": "Emprendre / autoocupació",
+        "sinDecidir": "Encara sense decidir"
+      },
+      "interesErasmus": "Interès en la FEOE internacional (Erasmus+)",
+      "interesBolsaEmpleo": "Interès en la borsa de treball del centre",
+      "interesMentoria": "Vol mentoria amb exalumnat/professionals",
+      "interesEmprender": "Té idea de negoci / projecte propi",
+      "interesUniversidad": "Valora accedir a la universitat després de FP",
+      "empresaIdentificada": "Ja té empresa d'interès identificada",
+      "estadoInsercion": {
+        "enFormacion": "Encara en formació / cicle en curs",
+        "enBusqueda": "Egressat - en cerca activa",
+        "empleadoEmpresa": "Emprat en empresa",
+        "feoe": "Realitzant FEOE / pràctiques",
+        "autoempleo": "Autoocupació / autònom",
+        "sigueEstudiando": "Continua estudiant (cicle / universitat)",
+        "sinDatos": "Sense dades de seguiment"
+      },
+      "relacionCiclo": {
+        "siDirectamente": "Sí, directament relacionat",
+        "parcialmente": "Parcialment relacionat",
+        "noRelacionado": "No relacionat amb el cicle",
+        "noAplica": "No aplica (continua estudiant)"
+      },
+      "modalidadContrato": {
+        "indefinido": "Indefinit",
+        "temporal": "Temporal / obra i servei",
+        "autonomo": "Autònom",
+        "practicas": "Pràctiques / becari",
+        "beca": "Beca",
+        "feoe": "Contracte FEOE"
+      },
+      "valoracionEgresado": {
+        "v1": "1 - Molt baixa",
+        "v2": "2 - Baixa",
+        "v3": "3 - Mitjana",
+        "v4": "4 - Alta",
+        "v5": "5 - Excel·lent"
+      },
+      "familiaInformada": "Família / tutors legals informats",
+      "derivadoOrientador": "Derivat/da a l'orientador/a del centre",
+      "informeEmitido": "Informe d'orientació emès"
+    },
+    "verificacion": {
+      "sinDatos": "Sense dades",
+      "correcto": "Correcte",
+      "advertencia": "Advertència",
+      "correctos": "Correctes",
+      "advertencias": "Advertències"
+    },
+    "archivos": {
+      "activaFem": "Activa",
+      "activoMasc": "Actiu",
+      "seleccionarArchivoCorrecto": "Selecciona l'arxiu correcte..."
+    },
+    "calendario": {
+      "tipoComplementaria": "Complementària",
+      "tipoExtraescolar": "Extraescolar"
     }
   },
   "tablas": {
@@ -1270,7 +1526,8 @@
       "entidad": "Entitat",
       "evaluacion": "Avaluació",
       "raVinculados": "RA vinculats",
-      "trimestre": "Trimestre"
+      "trimestre": "Trimestre",
+      "id": "Id"
     },
     "calificaciones": {
       "instrumento": "Instrument",
@@ -1292,7 +1549,10 @@
       "horas": "Hores",
       "objetivosGenerales": "Objectius generals",
       "resultadosAprendizaje": "Resultats d'aprenentatge",
-      "unidadDidacticaTrabajo": "Unitat didàctica o de treball"
+      "unidadDidacticaTrabajo": "Unitat didàctica o de treball",
+      "relevanciaCe": "Rellevància",
+      "objAbrev": "Obj",
+      "evalAbrev": "AVAL."
     },
     "dashboard": {
       "imp": "Imp",
@@ -1318,7 +1578,9 @@
       "config": "Config",
       "descripcionIE": "Descripció de l'instrument d'avaluació (IE)",
       "instrumentoActividad": "Instrument i activitat",
-      "pctPond": "% Pond."
+      "pctPond": "% Pond.",
+      "criterio": "CE",
+      "cobertura": "Cobertura"
     },
     "legal": {
       "clave": "Clau",
@@ -1339,6 +1601,12 @@
       "organizacionAcceso": "Organització i accés",
       "seguimientoCorreccion": "Seguiment i correcció",
       "id": "Id"
+    },
+    "secuenciacion": {
+      "numAbrev": "Núm.",
+      "raCe": "RA/CE",
+      "iePct": "IE %",
+      "raCeSlash": "RA/CE"
     }
   },
   "campos": {
@@ -1391,7 +1659,7 @@
       "perfilCompetencialTitulo": "Perfil competencial (Radar)",
       "pieInformeAuto": "Aquest informe ha estat generat automàticament pel sistema d'avaluació per competències.",
       "pieInformeFecha": "Les qualificacions mostrades corresponen a les avaluacions registrades fins a la data d'emissió.",
-      "raNoSuperado": "NO SUPER.",
+      "raNoSuperado": "NO SUP.",
       "raSuperado": "SUPERAT",
       "rasgosGrupoTitulo": "Trets característics del grup",
       "registroTutoriaTitulo": "Registre de tutoria:",
@@ -1412,7 +1680,74 @@
       "tramoEdad_edad18a20": "18 a 20",
       "tramoEdad_edad21a25": "21 a 25",
       "tramoEdad_edad26mas": "26 o més",
-      "tramoEdad_menores18": "Menors de 18"
+      "tramoEdad_menores18": "Menors de 18",
+      "labelHoraInicio": "Hora d'inici",
+      "labelHoraFin": "Hora de fi",
+      "labelParticipantes": "Participants",
+      "conFichaSufijo": "amb fitxa",
+      "viaAccesoLabel": "Via d'accés",
+      "aptitudLabel": "Aptitud",
+      "areaInteresLabel": "Àrea d'interès",
+      "intencionTerminarLabel": "Intenció en acabar",
+      "insercionLabel": "Inserció",
+      "reunionesLabel": "Reunions",
+      "sinAlumnadoFiltros": "No hi ha alumnat que coincideixi amb els filtres.",
+      "sinFichaBadge": "Sense fitxa",
+      "interesadoErasmus": "Interessat/da en Erasmus+",
+      "tieneIdeaNegocio": "Té una idea de negoci",
+      "interesadoUniversidad": "Interessat/da en la universitat",
+      "derivadoAlOrientador": "Derivat a l'orientador",
+      "perfilSeccionTitulo": "Perfil",
+      "motivoEleccionLabel": "Motiu d'elecció",
+      "experienciaPreviaLabel": "Experiència prèvia",
+      "sectorExperienciaLabel": "Sector d'experiència",
+      "trabajaActualmenteLabel": "Treballa actualment",
+      "empresaActualLabel": "Empresa actual",
+      "bolsaEmpleoBadge": "Borsa de treball",
+      "erasmusBadge": "Erasmus+",
+      "emprenderBadge": "Emprendre",
+      "mentoriaBadge": "Mentoria",
+      "universidadBadge": "Universitat",
+      "empresaIdentificadaBadge": "Empresa identificada",
+      "aspiracionesSeccionTitulo": "Aspiracions",
+      "preferenciaLaboralLabel": "Preferència laboral",
+      "movilidadGeograficaLabel": "Mobilitat geogràfica",
+      "empresaObjetivoLabel": "Empresa objectiu",
+      "cicloGradoInteresLabel": "Cicle / grau d'interès",
+      "seguimientoTutorSeccionTitulo": "Seguiment del tutor",
+      "reunionesCelebradasLabel": "Reunions realitzades",
+      "ultimaReunionLabel": "Última reunió",
+      "familiaInformadaLabel": "Família informada",
+      "derivadoOrientadorLabel": "Derivat a orientador",
+      "informeEmitidoLabel": "Informe emès",
+      "mostrandoNAlumnado": "Mostrant {{count}} alumnes",
+      "derivadosLabel": "Derivats",
+      "sinAlumnadoRegistradoCurso": "No hi ha alumnat registrat en aquest curs.",
+      "coberturaFichasOrientacionTitulo": "Cobertura de fitxes d'orientació",
+      "deTotalFichaCompletada": "{{con}} de {{total}} alumnes tenen la fitxa completada",
+      "sinDatosOrientacionAun": "Encara sense dades d'orientació",
+      "completaFichasIndividualesPre": "Completa les fitxes individuals a la pestanya",
+      "individualTab": "Individual",
+      "conExperienciaLaboralKpi": "Amb experiència laboral",
+      "interesErasmusKpi": "Interès en Erasmus+",
+      "interesBolsaEmpleoKpi": "Interès en la borsa de treball",
+      "conIdeaNegocioKpi": "Amb idea de negoci",
+      "intencionFinalizarCicloTitulo": "Intenció en finalitzar el cicle",
+      "aptitudPrincipalDetectadaTitulo": "Aptitud principal detectada",
+      "areaInteresDominanteTitulo": "Àrea d'interès dominant",
+      "ambitoLaboralPreferidoTitulo": "Àmbit laboral preferit",
+      "preferenciaGeograficaTrabajoTitulo": "Preferència geogràfica de treball",
+      "motivacionEleccionCicloTitulo": "Motivació d'elecció del cicle",
+      "distribucionExperienciaLaboralTitulo": "Distribució de l'experiència laboral prèvia",
+      "resumenPorAlumnadoTitulo": "Resum per alumne/a",
+      "cargandoDatosAlumnado": "Carregant dades de l'alumnat...",
+      "listaOficialTitulo": "Llista oficial",
+      "numAlumnado": "{{count}} alumnes",
+      "nMenoresEdad": "{{count}} alumne(s) menor(s) de 18 anys",
+      "sinAlumnadoRegistradoAun": "Encara no hi ha alumnat registrat.",
+      "menorEdadBadge": "Menor d'edat",
+      "perfilGrupoLabel": "Perfil del grup",
+      "anosSeparador": "anys ·"
     },
     "evaluacion": {
       "informacionDesc": "Com es donen a conèixer els criteris d'avaluació i qualificació.",
@@ -1487,7 +1822,12 @@
       "tituloProcedimientosNormativos": "Procediments normatius",
       "topeCompensablesBadge": "Topall de compensables actiu",
       "trimestreEvLabel": "{{periodo}} Av.",
-      "udsLabel": "UDs:"
+      "udsLabel": "UDs:",
+      "calificarConRubricaTitulo": "Qualificar amb rúbrica",
+      "notaCalculada": "Nota calculada",
+      "notaSigadLabel": "Nota Sigad (1-10, manual / calc)",
+      "minAbrev": "Mín",
+      "maxAbrev": "Màx"
     },
     "modulo": {
       "bibliografiaDesc": "Bibliografia principal per al professorat i l'alumnat.",
@@ -1643,7 +1983,10 @@
       "normativaAutonomica": "Normativa autonòmica ({{comunidad}})",
       "normativaEstatal": "Normativa estatal",
       "sinDocumentosAutonomicos": "No hi ha documents normatius en aquesta comunitat per ara.",
-      "sinDocumentosEstatales": "No hi ha documents normatius estatals per ara."
+      "sinDocumentosEstatales": "No hi ha documents normatius estatals per ara.",
+      "enPreparacion": "En preparació",
+      "cargandoNormativa": "Carregant normativa...",
+      "legislacionDocumentalTitulo": "Legislació documental"
     },
     "contexto": {
       "tituloContextoEscolar": "Context escolar",
@@ -1665,7 +2008,9 @@
       "avisoModeloSimplificado": "Aquests 2 camps són específics del document \"Programació suficient\" (model oficial Simplificat). Si es deixen buits, es genera automàticament un text per defecte raonable a partir de la resta de dades del mòdul.",
       "introduccion": "Introducció",
       "udsModulo": "Unitats didàctiques del mòdul",
-      "tituloAutoriaPublicidad": "Dades d'autoria i publicitat"
+      "tituloAutoriaPublicidad": "Dades d'autoria i publicitat",
+      "cargandoDatos": "Carregant dades del context...",
+      "cargandoDatosMetodologia": "Carregant dades de metodologia..."
     },
     "ai": {
       "analizandoDocumento": "Analitzant document...",
@@ -1745,7 +2090,27 @@
       "seleccionaModuloDescripcion": "Selecciona el mòdul per generar una programació buida amb l'estructura correcta (RA/CE des del catàleg oficial).",
       "tipoCurso": "Curs",
       "tipoProgramacion": "Programació",
-      "tituloOption": "-- Títol --"
+      "tituloOption": "-- Títol --",
+      "usuarioDrive": "Usuari de Drive",
+      "driveDescripcion": "Desa els teus fitxers .fpp i .fpc automàticament al núvol de Google per accedir-hi des de qualsevol dispositiu sense necessitat de descarregar-los manualment.",
+      "conectado": "Connectat",
+      "noConectado": "No connectat",
+      "sincronizandoCon": "Sincronitzant amb {{email}}",
+      "iniciaSesionGoogle": "Inicia sessió amb el teu compte de Google",
+      "autoguardadoAutomaticoTitulo": "Desat Automàtic",
+      "autoguardadoAutomaticoDesc": "Puja automàticament a Drive cada vegada que prems \"Desa\" a l'app.",
+      "credencialesOAuthTitulo": "Credencials OAuth",
+      "introduceClientIdPre": "Introdueix el",
+      "introduceClientIdPost": "del teu projecte de Google Cloud per autoritzar l'aplicació. Aquesta dada es desa al teu navegador de forma segura.",
+      "clientIdPlaceholder": "Ex: 123456789-abcde.apps.googleusercontent.com",
+      "moduloDesconocido": "Mòdul Desconegut",
+      "cursoDemoNombre": "Curs DEMO",
+      "usuarioMicrosoft": "Usuari de Microsoft",
+      "oneDriveDescripcion": "Desa els teus fitxers .fpp i .fpc al teu compte de Microsoft OneDrive. (Requereix registre al portal d'Azure).",
+      "sincronizandoCuentaMicrosoft": "Sincronitzant amb compte de Microsoft",
+      "iniciaSesionMicrosoft": "Inicia sessió amb Microsoft",
+      "azureClientIdTitulo": "Azure Client ID",
+      "azureClientIdDesc": "Client ID de la teva App registrada a Entra ID (Azure)."
     },
     "dashboard": {
       "altaBajaAlumnado": "Alta i baixa d'alumnat",
@@ -1776,7 +2141,35 @@
       "progresoPorUD": "Progrés per unitat didàctica",
       "reutilizarPrefijo": "Reutilitza",
       "reutilizarSufijo": "per a un curs acadèmic nou, sense partir de zero.",
-      "sinDocencia": "Sense docència"
+      "sinDocencia": "Sense docència",
+      "sinClasesLectivas": "Sense classes lectives",
+      "udEnCursoLabel": "UD en curs",
+      "ningunaUdActiva": "Cap UD activa actualment.",
+      "progresoUdLabel": "Progrés de la UD",
+      "horasPrevistasLabel": "Hores previstes",
+      "horasImpartidasLabel": "Hores impartides",
+      "horasSinDocenciaLabel": "Hores sense docència",
+      "contenidosLabelDosPuntos": "Continguts:",
+      "diaFestivo": "Dia festiu",
+      "eventoBadge": "Esdeveniment",
+      "festivoRazon": "Dia no lectiu",
+      "horasLectivasCount": "{{count}} hores lectives",
+      "previsionSemanalDesc": "Distribució temporal setmanal dels mòduls i les sessions planificades a l'aula.",
+      "previsionSemanalTitulo": "Previsió setmanal",
+      "recursosLabelDosPuntos": "Recursos:",
+      "sinClasesPlanificadas": "Sense classes planificades",
+      "sinHorarioLectivo": "Sense horari lectiu",
+      "sinSesionesHoy": "No tens sessions planificades per avui segons el calendari del mòdul.",
+      "tusClasesDeHoy": "Les teves classes d'avui ({{fecha}})",
+      "deSesiones": "{{actual}} de {{total}} sessions",
+      "diaNoLectivo": "Dia no lectiu",
+      "semanaDelAl": "Setmana del {{inicio}} al {{fin}}",
+      "desarrolloUnidadEnCursoTitulo": "Desenvolupament de la unitat en curs",
+      "nSesionesParentesis": "({{count}} sessions)",
+      "planificadoNDias": "Planificat ({{count}} dies)",
+      "semanaAnterior": "Setmana anterior",
+      "semanaProxima": "Setmana pròxima",
+      "sesionesLabel": "Sessions: {{label}}"
     },
     "instrumentos": {
       "agenteEvaluacion": "Agent d'avaluació",
@@ -1785,7 +2178,62 @@
       "instrumentoLabel": "Instrument: {{id}} - {{desc}}",
       "recuperacionDescripcion": "Indica si aquest instrument qualifica en un període de recuperació (R1, R2, Final).",
       "sirveParaRecuperacion": "Serveix per a recuperació?",
-      "tipoDatoEscala": "Tipus de dada i escala"
+      "tipoDatoEscala": "Tipus de dada i escala",
+      "sinRubricas": "Encara no hi ha rúbriques. Una rúbrica es pot assignar a qualsevol instrument des de la seva \"Configuració avançada\" i qualificar-se per nivells en comptes d'amb una nota directa.",
+      "sinNombre": "(sense nom)",
+      "criterios": "criteris",
+      "nuevaRubricaTitulo": "Nova rúbrica",
+      "editarRubricaTitulo": "Editar rúbrica",
+      "sumaPuntuacionMaxima": "Suma de puntuació màxima",
+      "sumaDebeSerDiez": "La suma de les puntuacions màximes de tots els criteris ha de ser exactament 10.",
+      "puntuacionMaxima": "Puntuació màxima",
+      "puntos": "Punts",
+      "criterioSinNiveles": "Aquest criteri encara no té nivells definits.",
+      "rubricaSinCriterios": "Aquesta rúbrica encara no té criteris definits.",
+      "rubricaAsignada": "Rúbrica assignada",
+      "rubricaDescripcion": "Si assignes una rúbrica, aquest instrument es podrà qualificar per nivells en comptes d'amb una nota directa.",
+      "sinRubrica": "-- Sense rúbrica --",
+      "unidadDidactica": "Unitat didàctica",
+      "unidadDidacticaDescripcion": "A quina unitat didàctica pertany aquest instrument (per a la taula \"Continguts → UD\").",
+      "sinUnidadDidactica": "-- Sense assignar --",
+      "matrizCoberturaTitulo": "Matriu de cobertura CE × Instrument",
+      "matrizCoberturaSinDatos": "Afegeix Criteris d'avaluació i Instruments per veure aquí quins CE queden sense cap instrument que els avaluï.",
+      "sinCobertura": "Sense cobertura",
+      "modeloJegTitulo": "Model JEG.",
+      "modeloJegDesc": "Nivell Instrument→Indicador→CE→RA→Mòdul de l'autor real de PD+ (Javier Edo Gual) — és el motor de qualificació real de l'app (butlletins, PDF i actes inclosos). En l'ús normal no cal tocar res aquí: en marcar una activitat sobre un CE a Instruments, l'Indicador corresponent es crea i es reparteix el pes sol. Aquesta pantalla és per a qui vulgui ajustar aquest repartiment a mà (diversos indicadors per CE, pesos diferents) o revisar què s'ha generat automàticament.",
+      "indicadoresPorCeTitulo": "Indicadors per Criteri d'Avaluació",
+      "primeroAnadeCriterios": "Primer afegeix Criteris d'avaluació a Currículum → Ponderació RA i CE.",
+      "sinIndicadoresTodavia": "Sense indicadors encara.",
+      "gruposEvaluacionTitulo": "Grups d'avaluació (GEv)",
+      "gruposEvaluacionDesc": "Subgrups d'alumnat (p. ex. pèrdua d'avaluació contínua): un instrument marcat amb un GEv només compta per a l'alumnat d'aquest mateix grup. Assigna el GEv de cada alumne a Alumnat → Matrícula.",
+      "nuevoGrupoPlaceholder": "Nou grup...",
+      "instrumentosModeloJegTitulo": "Instruments (model JEG)",
+      "sinInstrumentosJegTodavia": "Sense instruments JEG encara.",
+      "pesoGlobalLabel": "Pes global",
+      "indicadoresVinculadosLabel": "Indicadors vinculats",
+      "calificacionesPorIndicadorTitulo": "Qualificacions per indicador",
+      "anadeInstrumentosVinculaPrimero": "Afegeix instruments i vincula'ls a indicadors primer.",
+      "sinTitulo": "(sense títol)",
+      "recEvaluacion": "Rec. ({{evaluacion}})",
+      "evfe": "EvFE",
+      "rec": "Rec.",
+      "sinEvaluar": "Sense avaluar",
+      "notaFinalMotorJeg": "Nota final (Motor JEG)",
+      "hojaAparteEvfeTitulo": "Full a part: avaluació final extraordinària (EvFE)",
+      "hojaAparteEvfeDesc": "Segona convocatòria — mai es barreja amb la nota ordinària de dalt. Un RA sense intent a EvFE hereta el resultat de la fila anterior.",
+      "notaFinalExtraordinariaLabel": "Nota final extraordinària (EvFE)",
+      "faltanCriteriosEvaluacionTitulo": "Falten criteris d'avaluació",
+      "faltanCriteriosEvaluacionDesc": "Primer afegeix Criteris d'avaluació a la pestanya 'Matrius'.",
+      "instrumentosEvaluacionTrimestreTitulo": "Instruments d'Avaluació - {{triNombre}}",
+      "detalleInstrumentosTrimestreDesc": "Detall dels instruments d'avaluació organitzats per a aquest trimestre.",
+      "numActividades": "{{count}} activitats",
+      "actividadOriginalRecuperar": "Activitat original a recuperar",
+      "sinNombreActividad": "Sense nom",
+      "metodoCalculoLabel": "Mètode de càlcul",
+      "evaluacionOrdinariaRecuperacion": "Avaluació ordinària + recuperació (R1-RF) — {{apellidos}}",
+      "nInstrumentos": "{{count}} instr.",
+      "sumaPesos": "Suma: {{pct}}%",
+      "resumenPorTrimestresTitulo": "Resum d'instruments d'avaluació per trimestres"
     },
     "matrices": {
       "atencionSobrescribirDescripcion": "Es reemplaçaran les teves unitats didàctiques (UD/T), la relació entre RA i UD/T, i la matriu de contribució RA-OG. Assegura't que hi estàs d'acord abans d'aplicar.",
@@ -1794,6 +2242,674 @@
       "noHayPropuestasDescripcion": "Actualment no existeixen seqüenciacions predefinides d'autors o editorials per al mòdul {{moduleCode}}.",
       "propuestasEditorialesDescripcion": "Selecciona una proposta predefinida per a aquest mòdul ({{moduleCode}})",
       "propuestasEditorialesTitulo": "Propostes editorials / autors"
+    },
+    "catalogo": {
+      "tituloAcronimosGlosario": "Acrònims i glossari",
+      "sinResultadosParaBusqueda": "No s'han trobat resultats per a \"{{termino}}\"",
+      "confirmacionSobrescribirPropuesta": "⚠️ ATENCIÓ: Aquesta acció sobreescriurà les teves Unitats didàctiques, Instruments, Sessions, Tasques i configuració del context per al mòdul actual.\n\nEstàs completament segur/a de continuar?",
+      "tituloCatalogoAutores": "Catàleg d'Autors i Editorials",
+      "descripcionCatalogoAutoresTexto1": "Explora plantilles completes (",
+      "descripcionCatalogoAutoresTexto2": ") proposades per editorials o autors per al mòdul ",
+      "descripcionCatalogoAutoresTexto3": ". Aquestes propostes poden incloure unitats didàctiques, instruments d'avaluació i seqüències d'aula.",
+      "tituloArchivosDisponibles": "Fitxers disponibles",
+      "buscandoPropuestas": "Cercant propostes...",
+      "sinArchivosFppTexto1": "No s'han trobat fitxers ",
+      "sinArchivosFppTexto2": " per a aquest mòdul a la teva carpeta Documents/Autors.",
+      "cargandoContenidoPropuesta": "Carregant contingut de la proposta...",
+      "tituloPrevisualizacionPropuesta": "Previsualització de la proposta",
+      "descripcionPrevisualizacionPropuesta": "Revisa el contingut abans d'incorporar-lo. Podràs editar-lo al teu gust un cop importat a la teva programació.",
+      "tituloModuloDidactico": "Mòdul didàctic",
+      "labelContexto": "Context:",
+      "definido": "Definit",
+      "noDefinido": "No definit",
+      "tituloMatricesOgRaCeUd": "Matrius OG → RA → CE → UD/T",
+      "unidadesDidacticasPropuestas": "Unitats didàctiques proposades:",
+      "sinDescripcion": "(Sense descripció)",
+      "labelMapeoRaOg": "Mapatge RA-OG:",
+      "incluido": "Inclòs",
+      "noIncluido": "No inclòs",
+      "tituloInstrumentosEvaluacion": "Instruments d'avaluació",
+      "instrumentosPredefinidos": "Instruments predefinits.",
+      "tituloProgramacionAula": "Programació d'aula",
+      "sesionesPlanificadas": "Sessions planificades.",
+      "tareasCompetencialesDisenadas": "Tasques competencials dissenyades.",
+      "tituloNingunFicheroSeleccionado": "Cap fitxer seleccionat",
+      "descripcionSeleccionaArchivoFpp": "Selecciona un fitxer `.fpp` de la llista de l'esquerra per previsualitzar-ne tot el contingut abans d'incorporar-lo a la teva programació.",
+      "tituloMapaCcaa": "Mapa de CCAA amb currículum FP",
+      "instruccionMapaCcaa": "Fes clic en una comunitat per veure'n el detall. Font: ",
+      "badgeDemo": "DEMO",
+      "mensajeSeleccionaCcaa": "Selecciona una comunitat autònoma al mapa per veure'n la informació detallada.",
+      "tituloTablaComunidades": "Taula de comunitats autònomes",
+      "badgeCiudadAutonoma": "Ciutat Autònoma",
+      "badgeCcaaSigla": "CCAA",
+      "fuentePrincipalLabel": "Font principal:",
+      "fuentePrincipalDescripcion": "— Portal oficial del Ministeri d'Educació i Formació Professional.",
+      "infoCurriculosCcaaTexto1": "Cada comunitat autònoma publica el seu propi currículum d'FP al seu butlletí oficial. Els enllaços anteriors porten a la pàgina de ",
+      "infoCurriculosCcaaEnfasis": "currículums per CCAA",
+      "infoCurriculosCcaaTexto2": " de todofp.es, on es pot consultar la normativa específica de cada territori.",
+      "infoCeutaMelillaEnfasis": "Ceuta i Melilla",
+      "infoCeutaMelillaTexto": " apliquen directament el currículum del Ministeri (BOE), en no tenir competències transferides en matèria d'educació.",
+      "mapaSvgCreditoLabel": "Mapa SVG:",
+      "mapaSvgCreditoTexto": "(CC-BY-4.0) — Victor Cazanave.",
+      "demoEntornoLabel": "🌍 Entorn DEMO:",
+      "demoEntornoTexto": "Les dades d'exemple d'aquesta aplicació utilitzen el currículum d'Aragó (BOA) com a referència.",
+      "labelBoletinOficial": "Butlletí Oficial",
+      "badgeComunidadAutonoma": "Comunitat Autònoma",
+      "cargandoIncual": "Carregant dades del Catàleg Nacional (INCUAL)...",
+      "labelFamiliaProfesional": "Família Professional",
+      "gradoCTitulo": "Grau C",
+      "gradoCDesc": "(Certificats)",
+      "gradoDTitulo": "Grau D",
+      "gradoDDesc": "(Cicles)",
+      "gradoETitulo": "Grau E",
+      "gradoEDesc": "(Especialització)",
+      "sinDatosIncualFamilia": "No s'han trobat dades INCUAL per a la família {{familia}}",
+      "seleccionaFamiliaEstandares": "Selecciona una família professional per veure'n els estàndards de competència",
+      "tituloCrn": "Centres de Referència Nacional (CRN)",
+      "labelAreasCrn": "Àrees:",
+      "labelTitularCrn": "Titular:",
+      "tituloEcp": "Estàndards de competència professional (ECP)",
+      "nivelEcpTitulo": "Nivell {{nivel}} ({{count}})",
+      "enlacePdf": "PDF",
+      "sinEstandaresNivel": "No hi ha estàndards de Nivell {{nivel}} per a aquesta família.",
+      "labelTitulo": "Títol",
+      "ciclosFormativosCount": "Cicles formatius ({{count}})",
+      "sinCiclosRegistrados": "No hi ha cicles formatius registrats.",
+      "detallesCurriculoBoa": "Detalls del currículum del BOA",
+      "fuenteNormativaLabel": "Font normativa",
+      "sinArticulosCargados": "Aquest títol encara no té els articles del currículum carregats a la base de dades.",
+      "sinTitulosFamilia": "No hi ha títols registrats per a aquesta família.",
+      "seleccionaFamiliaVerTitulos": "Selecciona una família professional per veure els seus títols.",
+      "cursoLabelSufijo": "{{curso}} curs",
+      "numModulos": "{{count}} mòduls",
+      "seleccionaFamiliaTituloModulos": "Selecciona una Família i un Títol per veure els mòduls organitzats per curs.",
+      "sinDatosCurricularesCargados": "Aquest títol encara no té dades curriculars carregades.",
+      "modulosDisponiblesCuandoOficial": "Els mòduls es mostraran quan estigui disponible el currículum oficial.",
+      "sinModulosTitulo": "No hi ha mòduls per a aquest títol.",
+      "labelModulo": "Mòdul",
+      "seleccionaModuloVerRA": "Selecciona un mòdul per veure els resultats d'aprenentatge.",
+      "tabResultadosAprendizaje": "Resultats d'aprenentatge",
+      "tabCompetenciasAcreditables": "Competències acreditables",
+      "criteriosEvaluacionLabel": "Criteris d'avaluació",
+      "sinCompetenciasConvalidacion": "Aquest mòdul no té competències directes associades per a la convalidació en el registre oficial.",
+      "comunModulosTransversales": "És comú en mòduls transversals, projecte, FEOE o idiomes.",
+      "opcionesConvalidacionTitulo": "Opcions de convalidació",
+      "convalidarPrefijo": "Per convalidar aquest mòdul, has de complir ",
+      "convalidarAlguna": "alguna",
+      "convalidarSufijo": " de les següents opcions (no totes).",
+      "opcionNumero": "Opció {{numero}}",
+      "debeAcreditarTodas": "Has d'acreditar TOTES aquestes competències:",
+      "debeAcreditarUna": "Has d'acreditar aquesta competència:",
+      "conjuntoRequerido": "Conjunt requerit",
+      "tambienConvalidarias": "Amb aquesta opció també convalidaries: "
+    },
+    "curriculo": {
+      "sinUnidadesDidacticas": "Encara no hi ha unitats didàctiques definides -- crea-les a la pestanya \"Unitats didàctiques\".",
+      "contenidosUdDescripcion": "Agrupa les unitats didàctiques per bloc de continguts i mostra d'un cop d'ull la seva relació amb RA, objectius generals, hores i instruments d'avaluació.",
+      "sinBloqueAsignado": "Sense bloc assignat",
+      "bloqueContenido": "Bloc de continguts",
+      "contenidosPorUd": "Continguts per UD",
+      "numHoras": "Núm. hores",
+      "sinInstrumento": "sense assignar",
+      "avanceRaLabel": "Avanç RA",
+      "horasLectivasLabel": "Hores lectives",
+      "sinUdsAsignadas": "Sense UD assignades",
+      "sinRaDefinidos": "No hi ha Resultats d'aprenentatge (RA) definits.",
+      "cargandoMatrices": "Carregant matrius...",
+      "confirmarAutocompletarPlanSesiones": "Segur que vols autocompletar el pla de sessions? Això reemplaçarà les sessions actuals de totes les UD.",
+      "totalSumaPctRa": "Total suma % RA:",
+      "sinUnidadesDidacticasTitulo": "No hi ha unitats didàctiques",
+      "sinUnidadesDidacticasDesc1": "Encara no has creat cap Unitat didàctica (UD).",
+      "sinUnidadesDidacticasDesc2": "Per seqüenciar sessions, primer has de crear les UD més amunt.",
+      "unidadDidacticaSingular": "Unitat didàctica",
+      "leyendaCompletado": "Completat",
+      "leyendaEnCurso": "En curs",
+      "leyendaPendiente": "Pendent",
+      "progresoRelacionRaUdTitulo": "Progrés i relació entre Resultats d'aprenentatge i Unitats didàctiques o de treball"
+    },
+    "header": {
+      "creaOAbreProgramacion": "Crea o obre una Programació",
+      "creaOAbreCurso": "Crea o obre un Curs"
+    },
+    "archivos": {
+      "programacionFallback": "Programació",
+      "nuevoSinGuardar": "Nou (sense desar)",
+      "archivoLocal": "Arxiu local",
+      "programacionImportada": "Programació importada",
+      "cursoImportado": "Curs importat",
+      "breadcrumbArchivos": "Arxius",
+      "breadcrumbSeguridadPrivacidad": "Seguretat i privacitat",
+      "modoDatosLabel": "Mode de dades:",
+      "avisoDemoDesc": "estàs veient dades d'exemple. No és el teu curs real i no es desa res al disc — canvia a REALS per treballar amb els teus propis arxius.",
+      "avisoRealDesc": "estàs treballant amb els teus propis arxius .fpg/.fpp/.fpc, desats al teu equip. Els canvis es desen de veritat.",
+      "gruposEjemploDobleClic": "Grups d'exemple. Doble clic per carregar.",
+      "tusGruposDobleClic": "Els teus grups desats. Doble clic per carregar.",
+      "sinGruposDemo": "No s'han trobat grups DEMO.",
+      "usaBotonEnlazarCarpeta": "Utilitza el botó inferior per enllaçar la teva carpeta de treball.",
+      "sinGrupos": "No s'han trobat grups.",
+      "programacionesTitulo": "Programacions",
+      "dobleClicCargarProgramacion": "Doble clic per carregar una programació.",
+      "sinProgramacionesDemo": "No s'han trobat programacions DEMO.",
+      "sinProgramaciones": "No s'han trobat programacions.",
+      "cursosTitulo": "Cursos",
+      "dobleClicCargarCurso": "Doble clic per carregar un curs.",
+      "sinCursosDemo": "No s'han trobat cursos DEMO.",
+      "sinCursos": "No s'han trobat cursos.",
+      "nubeLabel": "Núvol",
+      "privacidadDisenoTitulo": "La teva privacitat per disseny",
+      "privacidadDisenoDesc": "Com es garanteix que les teves dades reals són 100% teves.",
+      "servidorCiegoTitulo": "1. El servidor és cec",
+      "servidorCiegoDesc": "La nostra base de dades al núvol mai emmagatzema dades dels teus alumnes, les teves programacions, ni res que creïs. El servidor web només existeix per enviar-te els Catàlegs Oficials (BOE/BOCAA). Ets invisible per al nostre backend.",
+      "cifradoLocalTitulo": "2. Xifratge local avançat AES-256",
+      "cifradoLocalDesc": "Pots activar l'encriptació local. Abans que qualsevol arxiu es desi al teu disc dur o núvol, es xifra utilitzant la teva clau mestra dins del teu navegador.",
+      "establecerClaveLabel": "Estableix la clau de seguretat (no es desa enlloc)",
+      "avisoOlvidoClave": "Si oblides aquesta clau i deses un arxiu, no podrem ajudar-te a recuperar-lo.",
+      "defensaAtaquesTitulo": "3. Defensa contra atacs al navegador",
+      "defensaAtaquesDesc": "Hem implementat una política estricta de seguretat de contingut (CSP) per bloquejar scripts maliciosos de tercers.",
+      "servidorBlindadoTitulo": "4. Servidor blindat i sempre disponible",
+      "servidorBlindadoDesc": "El nostre servidor backend incorpora Rate Limiting, garantint que sempre tindràs accés al catàleg oficial de mòduls.",
+      "seguridadRgpdTitulo": "Seguretat i RGPD garantits",
+      "procesaInfoNavegador": "Cuaderno FP processa tota la teva informació confidencial exclusivament al teu navegador. Tu ets el propietari dels teus arxius.",
+      "ningunDatoNube": "Cap dada del teu alumnat s'envia al núvol, tret que utilitzis la Sincronització autoritzada al teu compte.",
+      "asegurateGuardar": "Assegura't de prémer \"Desar\" en acabar la teva sessió de treball per no perdre els últims canvis.",
+      "validacionEnlacesTitulo": "Validació d'enllaços de l'espai de treball",
+      "todoCorrecto": "Tot correcte!",
+      "sinEnlacesRotos": "No s'han detectat enllaços trencats als grups de la teva carpeta local.",
+      "enlacesRotosDetectados": "S'han detectat els següents enllaços trencats als arxius Grup. Això passa quan renombres o elimines una Programació o un Curs directament a Windows.",
+      "programacionNoEncontrada": "Programació no trobada:",
+      "cursoNoEncontrado": "Curs no trobat:"
+    },
+    "expediente": {
+      "tipoCalificacion": "Qualificació",
+      "tipoAutoevaluacion": "Autoavaluació",
+      "tipoTutoria": "Tutoria",
+      "tipoReclamacion": "Reclamació",
+      "tipoAsistencia": "Assistència",
+      "tipoDiarioClase": "Diari de classe",
+      "sinAlumnadoActivoRegistrado": "No hi ha alumnat actiu registrat en aquest curs.",
+      "sinEvidenciasTodavia": "Sense evidències encara",
+      "ningunAlumnadoSeleccionado": "Cap alumnat seleccionat"
+    },
+    "orientacion": {
+      "sinAlumnadoTitulo": "Sense alumnat",
+      "primeroRegistraAlumnadoPre": "Primer registra alumnat a la pestanya",
+      "primeroRegistraAlumnadoPost": "Matrícula.",
+      "alumnadoActivoCount": "Alumnat actiu ({{count}})",
+      "tieneDatosOrientacion": "Té dades d'orientació",
+      "nAnos": "{{n}} anys",
+      "edadNoRegistrada": "Edat no registrada",
+      "seccion1Titulo": "Secció 1: Motivació i elecció del cicle",
+      "motivoEleccionLabel": "Motiu d'elecció del cicle",
+      "viaAccesoLabel": "Via d'accés al cicle",
+      "cicloPrevioLabel": "Cicle o estudis previs cursats",
+      "cicloPrevioPlaceholder": "Ex. ASIR, DAW, SMR, Batxillerat Científic...",
+      "seccion2Titulo": "Secció 2: Experiència i situació laboral",
+      "experienciaPreviaLabel": "Experiència laboral prèvia",
+      "sectorExperienciaLabel": "Sector d'experiència prèvia",
+      "sectorExperienciaPlaceholder": "Ex. Hostaleria, Comerç, Tecnologia, Sanitat...",
+      "mesesExperienciaLabel": "Mesos d'experiència estimats",
+      "jornadaActualLabel": "Situació laboral actual",
+      "empresaActualLabel": "Empresa actual (si escau)",
+      "empresaActualPlaceholder": "Nom de l'empresa...",
+      "seccion3Titulo": "Secció 3: Interessos i aptituds detectades",
+      "aptitudPrincipalLabel": "Aptitud principal detectada",
+      "areaInteresLabel": "Àrea d'interès dominant",
+      "ambitoLaboralPreferidoLabel": "Àmbit laboral preferit",
+      "preferenciaGeograficaLabel": "Preferència geogràfica de treball",
+      "idiomasTrabajoTitulo": "Idiomes de treball",
+      "obsAptitudesLabel": "Observacions del tutor sobre aptituds i interessos",
+      "obsAptitudesPlaceholder": "Descriu les fortaleses observades, àrees de millora, actitud davant el treball en equip, iniciativa, etc.",
+      "seccion4Titulo": "Secció 4: Aspiracions en finalitzar el cicle",
+      "intencionAlTerminarLabel": "Intenció principal en acabar",
+      "empresaObjetivoLabel": "Empresa o sector objectiu (si en té)",
+      "empresaObjetivoPlaceholder": "Ex. empresa local TIC, clínica pròpia...",
+      "cicloSuperiorInteresLabel": "Cicle superior / grau d'interès",
+      "cicloSuperiorInteresPlaceholder": "Ex. DAM, ASIR, Enginyeria Informàtica, ADE...",
+      "interesesEspecificosTitulo": "Interessos específics",
+      "seccion5Titulo": "Secció 5: Inserció laboral (post-cicle)",
+      "seccion5InfoDesc": "Aquesta secció s'emplena en finalitzar el cicle o com a seguiment de l'alumnat egressat.",
+      "estadoInsercionLabel": "Estat d'inserció laboral",
+      "relacionCicloLabel": "Relació de la feina amb el cicle",
+      "empresaInsercionLabel": "Empresa d'inserció",
+      "empresaInsercionPlaceholder": "Nom de l'empresa...",
+      "puestoObtenidoLabel": "Lloc o rol obtingut",
+      "puestoObtenidoPlaceholder": "Ex. Tècnic de xarxes, Desenvolupador Jr, Suport TI...",
+      "fechaInsercionLabel": "Data d'incorporació",
+      "modalidadContratoLabel": "Modalitat de contracte",
+      "valoracionEgresadoLabel": "Valoració global de l'egressat (1-5)",
+      "obsInsercionLabel": "Observacions de seguiment d'inserció",
+      "obsInsercionPlaceholder": "Notes sobre el procés d'inserció, dificultats, contacte post-cicle...",
+      "seccion6Titulo": "Secció 6: Notes i seguiment del tutor",
+      "reunionesCelebradasLabel": "Núm. de reunions d'orientació realitzades",
+      "fechaUltimaReunionLabel": "Data de l'última reunió / entrevista",
+      "fechaDerivacionLabel": "Data de derivació a l'orientador/a",
+      "resumenOrientacionLabel": "Resum d'orientació (camp lliure)",
+      "resumenOrientacionPlaceholder": "Escriu aquí el resum de l'orientació: decisions preses, acords amb l'alumnat i la família, propers passos...",
+      "selectaAlumnadoDesc": "Selecciona un alumne/a de la llista de l'esquerra."
+    },
+    "comun": {
+      "ningunAlumnadoSeleccionado": "Cap alumne/a seleccionat/da",
+      "cargandoDocumentos": "Carregant documents...",
+      "directorioVacio": "El directori és buit.",
+      "sinCursoCargadoTitulo": "No hi ha cap curs carregat",
+      "sinCursoCargadoDesc": "Has d'obrir o crear un arxiu de curs a Arxius.",
+      "gestionDe": "Gestió de {{activeTab}}",
+      "sinProgramacionCargadaTitulo": "No hi ha programació carregada",
+      "sinProgramacionCargadaDesc": "Has d'obrir o crear un arxiu de programació a Els teus arxius.",
+      "saltarAlContenidoPrincipal": "Vés al contingut principal"
+    },
+    "verificacion": {
+      "entornoGeografico": "Entorn geogràfic",
+      "entornoSocioeconomico": "Entorn socioeconòmic",
+      "contextoEscolar": "Context escolar",
+      "contingenciaProfesorado": "Contingència (professorat)",
+      "contingenciaAlumnado": "Contingència (alumnat)",
+      "bibliografiaLabel": "Bibliografia",
+      "publicidadLabel": "Publicitat",
+      "moduloDidacticoTitulo": "Mòdul didàctic",
+      "sinDatosProgramacion": "Sense dades de programació carregades",
+      "moduloActivo": "Mòdul actiu: {{id}}",
+      "horasSemanales": "Hores setmanals: {{h}} h",
+      "horasBoa": "Hores BOA: {{h}} h",
+      "udTitulo": "Unitats didàctiques (UD)",
+      "sinUdDefinidas": "No hi ha UD definides",
+      "udDefinidas": "{{count}} UD definides",
+      "horasDeclaradas": "Hores declarades: {{udHoras}} / {{moduloHoras}} h del mòdul",
+      "diferenciaHoras": "Diferència de {{h}} h",
+      "horasCuadranCorrectamente": "Les hores quadren correctament",
+      "raTitulo": "Resultats d'aprenentatge (RA)",
+      "sinRaDefinidos": "No hi ha RA definits",
+      "raDefinidos": "{{count}} RA definits",
+      "ceTitulo": "Criteris d'avaluació (CE)",
+      "sinCeDefinidos": "No hi ha CE definits",
+      "ceDefinidos": "{{count}} CE definits",
+      "ceSinRa": "{{count}} CE sense RA assignat",
+      "todosLosCeTienenRa": "Tots els CE tenen RA",
+      "instrumentosIndicadoresTitulo": "Instruments i indicadors",
+      "sinInstrumentosIndicadores": "No hi ha instruments ni indicadors",
+      "instrumentosIndicadoresCount": "{{instr}} instruments i {{ind}} indicadors",
+      "indicadoresSinCe": "{{count}} indicadors sense CE associat",
+      "todosLosIndicadoresEvaluanCe": "Tots els indicadors avaluen algun CE",
+      "tareasCompetencialesTitulo": "Tasques competencials",
+      "sinTareasDefinidas": "No hi ha tasques definides",
+      "tareasDefinidas": "{{count}} tasques definides",
+      "tareasSinRa": "{{count}} tasques sense RA associat",
+      "todasLasTareasTienenRa": "Totes les tasques tenen RA",
+      "sesionesClaseTitulo": "Sessions de classe",
+      "sinSesionesPlanificadas": "No hi ha sessions planificades",
+      "sesionesPlanificadasCount": "{{count}} sessions planificades",
+      "sesionesSinUd": "{{count}} sessions sense UD assignada",
+      "todasLasSesionesTienenUd": "Totes les sessions tenen UD",
+      "contextoModuloTitulo": "Context del mòdul",
+      "contextoAulaConfigurado": "Context de l'aula configurat",
+      "sinDescripcionContexto": "Sense descripció de context ni configuració d'aula",
+      "fpDualTitulo": "FP Dual",
+      "regimenDual": "General",
+      "dualIntensivoLabel": "Intensiu",
+      "regimenTradicional": "Règim tradicional (sense FP Dual configurada)",
+      "calidadEqavetTitulo": "Qualitat EQAVET",
+      "mejoraLabel": "Millora",
+      "sinIndicadoresEqavet": "Sense indicadors EQAVET valorats",
+      "identificacionPdTitulo": "Identificació (per a PD+/pd=/pd-)",
+      "centroProfesoradoFamiliaConfigurados": "Centre, professorat i família professional configurats",
+      "camposRellenanPortada": "Aquests camps emplenen la portada dels 3 models de PD",
+      "textosNarrativosTitulo": "Textos narratius (PD+/JEG)",
+      "textosRedactadosCount": "{{rellenos}} / {{total}} textos redactats",
+      "todosLosTextosRedactados": "Tots els textos narratius estan redactats",
+      "calendarioAcademicoTitulo": "Calendari acadèmic",
+      "horarioSemanalDefinido": "Horari setmanal definit",
+      "sinHorarioSemanal": "Sense horari setmanal",
+      "fechasEvaluacionConfiguradas": "Dates d'avaluació configurades",
+      "sinFechasEvaluacion": "Sense dates d'avaluació",
+      "sinAlumnadoRegistrado": "No hi ha alumnat registrat",
+      "alumnosRegistrados": "{{count}} alumnes registrats",
+      "registrosIncompletos": "{{count}} registres incomplets (sense nom/cognoms)",
+      "todosLosRegistrosCompletos": "Tots els registres complets",
+      "diarioAulaTitulo": "Diari d'aula",
+      "seguimientoLabel": "Seguiment",
+      "sinEntradasDiario": "Sense entrades al diari d'aula",
+      "sesionesRegistradasDiario": "{{count}} sessions registrades al diari",
+      "sinCalificacionesIntroducidas": "Sense qualificacions introduïdes",
+      "faltanAlumnosEvaluar": "Falten {{count}} alumnes per avaluar",
+      "todosLosAlumnosTienenRegistro": "Tots els alumnes tenen registres de qualificació",
+      "tutoriaAlertasTitulo": "Tutoria i alertes",
+      "sinEntradasTutoria": "Sense entrades de tutoria ni alertes registrades",
+      "entradasTutoriaRegistradas": "{{count}} entrades de tutoria registrades",
+      "planoClaseTitulo": "Plànol de l'aula",
+      "sinAlumnosPlano": "No hi ha alumnes ubicats al plànol",
+      "alumnosUbicadosAulaVisual": "{{count}} alumnes ubicats a l'aula visual",
+      "grupoTitulo": "Grup",
+      "catalogoOficialTitulo": "Catàleg oficial (fix)",
+      "familiasProfesionalesLabel": "Famílies professionals",
+      "titulosTotalesLabel": "Títols totals",
+      "gradoBasicoLabel": "Grau Bàsic (GB/GM/GS)",
+      "gradoMedioLabel": "Grau Mitjà (GB/GM/GS)",
+      "gradoSuperiorLabel": "Grau Superior (GB/GM/GS)",
+      "ficheroCargado": "Fitxer carregat ({{origen}})",
+      "gradoLabel": "Grau",
+      "sinFamiliaTituloAsignados": "Sense família/títol assignats encara. Vés a Context > Identificació.",
+      "programacionDidacticaTitulo": "Programació didàctica",
+      "programacionActivaLabel": "Programació activa:",
+      "cursoActivoTitulo": "Curs actiu",
+      "cursoActivoLabel": "Curs Actiu:",
+      "alumnosConRegistro": "{{count}} alumnes amb registre de {{total}} possibles ({{pct}})",
+      "dualGeneralLabel": "General",
+      "faltanCampos": "Falten: {{campos}}",
+      "indicadoresEqavetValorados": "{{count}} indicadors EQAVET valorats",
+      "sumaPesos": "Suma de pesos: {{pct}}% {{estado}}"
+    },
+    "secuenciacion": {
+      "contenidosLabel": "Continguts",
+      "aspectosClaveLabel": "Aspectes clau",
+      "disenoTareaCompetencialTitulo": "Disseny de la Tasca Competencial",
+      "scenarioBriefingLabel": "Scenario / briefing (context professional)",
+      "scenarioBriefingDesc": "Situació laboral creïble, encàrrec específic (ex. un correu d'un client, una incidència tècnica).",
+      "formatoEntregaPlazosLabel": "Format de lliurament i terminis",
+      "formatoEntregaPlazosDesc": "Com, quan i on s'ha de lliurar la tasca.",
+      "desarrolloTareaPasosLabel": "Desenvolupament de la tasca (passos)",
+      "desarrolloTareaPasosDesc": "Instruccions seqüenciades que l'alumnat ha de seguir.",
+      "evidenciasAGenerarLabel": "Evidències a generar",
+      "evidenciasAGenerarDesc": "Quins productes tangibles o demostracions s'avaluaran.",
+      "tareaLabel": "Tasca",
+      "configuracionDetalladaUnidadTitulo": "Configuració detallada de la unitat",
+      "intencionEducativaLabel": "Intenció educativa / contextualització",
+      "intencionEducativaDesc": "Justificació pedagògica d'aquesta unitat, vinculació al perfil professional i coneixements previs necessaris.",
+      "temporizacionDetalladaLabel": "Temporització detallada",
+      "temporizacionDetalladaDesc": "Període del curs, dates estimades i relació amb altres UD.",
+      "agrupamientosMetodologiaLabel": "Agrupaments i metodologia",
+      "agrupamientosMetodologiaDesc": "Organització de l'aula (grup gran, grup petit, treball individual).",
+      "transversalidadInnovacionLabel": "Transversalitat i innovació",
+      "transversalidadInnovacionDesc": "Com es treballen la digitalització, la sostenibilitat, l'equitat o el DUA en aquesta unitat."
+    },
+    "calendario": {
+      "mesEnero": "Gener",
+      "mesFebrero": "Febrer",
+      "mesMarzo": "Març",
+      "mesAbril": "Abril",
+      "mesMayo": "Maig",
+      "mesJunio": "Juny",
+      "mesJulio": "Juliol",
+      "mesAgosto": "Agost",
+      "mesSeptiembre": "Setembre",
+      "mesOctubre": "Octubre",
+      "mesNoviembre": "Novembre",
+      "mesDiciembre": "Desembre",
+      "diaLuCorto": "Dl",
+      "diaMaCorto": "Dt",
+      "diaMiCorto": "Dc",
+      "diaJuCorto": "Dj",
+      "diaViCorto": "Dv",
+      "diaSaCorto": "Ds",
+      "diaDoCorto": "Dg",
+      "cargandoCalendario": "Carregant calendari...",
+      "fechasGeneralesTitulo": "Dates generals",
+      "horarioSemanalTitulo": "Horari setmanal",
+      "desfaseBoa": "Desfasament amb BOA ({{h_sem}} h/set):",
+      "semanaLectivaTitulo": "Setmana lectiva",
+      "eval1Abrev": "1a Av.",
+      "eval2Abrev": "2a Av.",
+      "eval3Abrev": "3a Av.",
+      "trimestresTitulo": "Trimestres",
+      "inicioLabel": "Inici",
+      "finLabel": "Fi",
+      "horasLectivasReales": "Hores lectives reals",
+      "tipoDualLabel": "Tipus de dual",
+      "dualGeneral": "Dual General",
+      "dualIntensiva": "Dual Intensiva",
+      "docenciaLabel": "Docència",
+      "sinDocencia": "Sense docència",
+      "conDocencia": "Amb docència",
+      "inicioFeoeLabel": "Inici FEOE",
+      "finFeoeLabel": "Fi FEOE",
+      "horasDiaFeoeLabel": "Hores/dia FEOE",
+      "festivosEventosTitulo": "Festius i esdeveniments",
+      "festivosEventosInstruccionesPre": "Introdueix manualment o fes clic al calendari. Els festius exclouen hores del còmput real. Festiu i Rellevant són independents: un mateix dia pot tenir els dos alhora. Les files amb",
+      "festivosEventosInstruccionesPost": "(Inici/Fi de curs i de trimestre, FEOE) provenen de Dates generals / Període FEOE — s'editen allà, no aquí.",
+      "hoyBadge": "Avui"
+    },
+    "diario": {
+      "alumnadoActivoLabel": "Alumnat actiu",
+      "riesgoAltoLabel": "Risc alt",
+      "riesgoMedioLabel": "Risc mitjà",
+      "tasaAbandonoEstimadaLabel": "Taxa d'abandonament estimada",
+      "sinAlertasAbandono": "Sense alertes d'abandonament",
+      "todoAlumnadoParametrosNormales": "Tot l'alumnat actiu està dins dels paràmetres normals.",
+      "horasTotalesModulo": "Hores totals del mòdul",
+      "asistenciaFecha": "Assistència: {{fecha}}"
+    },
+    "feoe": {
+      "score1": "1 · Suspès",
+      "score2": "2 · Aprovat",
+      "score3": "3 · Notable",
+      "score4": "4 · Excel·lent",
+      "criteriosDesignadosTitulo": "Criteris designats per a FEOE",
+      "criteriosDesignadosDesc": "Marca els CE que s'avaluen a l'empresa (Annex XI b) — el tutor d'empresa els valora de l'1 al 4 i tu transcrius el resultat més avall, per alumne.",
+      "sinRaCe": "No hi ha RA/CE carregats en aquest mòdul encara.",
+      "marcaAlMenosUnCe": "Marca almenys un CE a dalt per començar a registrar valoracions d'empresa.",
+      "sinAlumnadoActivo": "No hi ha alumnat actiu registrat en aquest curs.",
+      "alumnadoActivoCount": "Alumnat actiu ({{count}})",
+      "rellenaConBotonDesc": "Omple amb un botó i corregeix a mà el que calgui — és només un punt de partida, no un valor definitiu.",
+      "sinEvaluar": "Sense avaluar",
+      "mediaSuperiorA2": "Mitjana de les activitats > 2, segons l'Annex XI b)",
+      "superado": "Superat",
+      "mediaInferiorIgualA2": "Mitjana de les activitats ≤ 2, segons l'Annex XI b)",
+      "noSuperado": "No superat",
+      "observacionesTutorPlaceholder": "Observacions del tutor d'empresa (opcional)..."
+    },
+    "onboarding": {
+      "entendido": "Entès!",
+      "siguiente": "Següent",
+      "anterior": "⬅ Anterior",
+      "bienvenidaTitulo": "Benvingut a Cuaderno FP!",
+      "bienvenidaDesc": "Et farem un breu recorregut de 4 passos perquè n'aprofitis al màxim. Pots saltar-lo o tancar-lo en qualsevol moment.",
+      "navegacionTitulo": "Navegació principal",
+      "navegacionDesc": "Aquí tens totes les eines: Configuració, Mòdul, Alumnat i Avaluació.",
+      "guardarDeshacerTitulo": "Desa i Desfés",
+      "guardarDeshacerDesc": "Pots desar manualment aquí, tot i que hi ha desat automàtic. També tens fletxes per a Desfer/Refer o pots fer servir Ctrl+S i Ctrl+Z.",
+      "pestanaArchivosTitulo": "Pestanya d'Arxius",
+      "pestanaArchivosDesc": "Per començar, vés a Arxius i selecciona 'Dades DEMO' per explorar sense por."
+    },
+    "ayuda": {
+      "faq": {
+        "grupo1": {
+          "titulo": "1. Conceptes previs i seguretat",
+          "q1": "Què és l'arquitectura Híbrida (Local-First + Cloud)?",
+          "a1": "S'utilitza una arquitectura moderna. Les teves dades de treball (alumnat, notes) es processen localment al teu navegador, garantint total privacitat i velocitat. Les operacions pesades (generació d'informes PDF o connexió amb Intel·ligència Artificial) es recolzen de forma segura en un servidor central.",
+          "q2": "On es guarden les meves dades?",
+          "a2": "Les dades de la teva Programació i els teus Cursos resideixen al teu propi navegador (IndexedDB). Tu tens el control absolut sobre elles. Per seguretat, es recomana utilitzar freqüentment l'exportació d'arxius (BYOC) des de la pestanya Arxius.",
+          "q3": "Quina diferència hi ha entre 'Programació' i 'Curs'?",
+          "a3": "És un concepte vital: la 'Programació' és el teu motlle teòric; conté la llei pura (Resultats d'aprenentatge, Criteris d'avaluació) i les teves Unitats didàctiques (reutilitzable any rere any). El 'Curs' és la instància real; representa un grup concret d'alumnat de carn i ossos en un any escolar específic, amb les seves notes i absències.",
+          "q4": "Què passa si esborro les dades o la memòria cau del meu navegador?",
+          "a4": "Si esborres la memòria cau profunda del navegador sense haver exportat prèviament les teves dades, perdràs la teva feina. Per això és vital utilitzar periòdicament el botó 'Exportar' per desar el teu progrés en un arxiu .json i mantenir còpies de seguretat locals.",
+          "q5": "Puc treballar des de diversos ordinadors?",
+          "a5": "Sí. Per transferir el teu entorn entre l'ordinador de l'institut i el teu portàtil personal, només has d''Exportar' el teu progrés a l'ordinador A i prémer 'Importar' a l'ordinador B."
+        },
+        "grupo2": {
+          "titulo": "2. Pas 1: La programació didàctica",
+          "q1": "He d'introduir a mà tots els RA i CE del BOE?",
+          "a1": "No! El sistema compta amb un Catàleg oficial que importa automàticament la normativa legal (Resultats d'aprenentatge i Criteris) del teu mòdul. Només has de triar el teu Grau i el teu Cicle Formatiu a la secció inicial de Catàleg i el sistema ho fa per tu.",
+          "q2": "Què significa que els RA no sumen 100% a les verificacions?",
+          "a2": "Perquè l'avaluació contínua matemàtica funcioni, cada Resultat d'Aprenentatge (RA) ha de tenir un 'pes' o importància. La suma total dels pesos de tots els RA d'un mòdul ha de ser exactament 100%. Has d'ajustar això a Programació > Currículum > pestanya 'RA i CE'.",
+          "q3": "Com configuro les hores que l'alumnat passa a l'empresa (FP Dual)?",
+          "a3": "A Programació > Context > pestanya 'Identificació', tria si el teu règim és Dual General, Dual Intensiu o Cap. Després, a Programació > Context > pestanya 'FEOE i règim dual' descrius com s'organitza i es fa el seguiment d'aquesta formació a l'empresa. Per marcar quins Resultats d'Aprenentatge concrets són duals, vés a Programació > Currículum > pestanya 'RA i CE'.",
+          "q4": "Per a què serveix l'apartat EQAVET?",
+          "a4": "Serveix per integrar el cicle de millora contínua europeu a la teva programació. El trobaràs a 'Inici' > pestanya 'Millora'. A final de curs, autoavalues els indicadors de qualitat i anotes les teves propostes de millora per al pròxim any. La rúbrica d'autoavaluació docent segueix el model DOCENTIA d'ANECA (vegeu aneca.es/docentia), adaptat a la pràctica en FP.",
+          "q5": "Quina diferència hi ha entre activitats complementàries i extraescolars?",
+          "a5": "Són legalment diferents: les complementàries són en horari lectiu, estan lligades al currículum i són avaluables — formen part de la teva programació didàctica. Les extraescolars són fora d'horari, voluntàries i mai avaluables — van a la PGA del centre, no a la PD; a Metodologia > Transversals les pots anotar igualment com a referència, però no compten a la programació.",
+          "q6": "Quina diferència hi ha entre instrument d'avaluació i instrument de qualificació?",
+          "a6": "Per a cada Criteri d'Avaluació (CE) hi ha dues coses diferents: l'instrument d'avaluació és l'activitat que genera l'evidència (una prova objectiva, una tasca, una defensa oral...), i l'instrument de qualificació és el que puntua aquesta evidència (una rúbrica, una escala, una llista de cotejament...). A Instruments pots codificar tots dos per separat en configurar cada instrument."
+        },
+        "grupo3": {
+          "titulo": "3. Pas 3: Creació del curs i l'alumnat",
+          "q1": "Puc importar alumnat des de plataformes com Séneca, Rayuela o un Excel?",
+          "a1": "Sí. A la secció d'‘Alumnat' pots importar un arxiu CSV (Excel) amb la teva llista de classe. Alternativament, la taula intel·ligent et permet copiar i enganxar cel·les massivament, igual que si fos un full de càlcul.",
+          "q2": "Quin nivell de seguretat tenen les dades del meu alumnat?",
+          "a2": "Els teus arxius locals mai surten cap al nostre servidor si no vols (utilitzant 'Desar en Local'). Si tries desar-los a Google Drive o OneDrive, l'arxiu es transmet directament entre el teu navegador i els servidors de Microsoft/Google. Pots activar el xifratge local perquè l'arxiu sigui absolutament il·legible sense la teva clau mestra.",
+          "q3": "Està l'aplicació protegida contra atacs o caigudes?",
+          "a3": "Sí. El frontend inclou una Política de Seguretat de Contingut (CSP) que bloqueja atacs d'injecció de codi (XSS) per protegir les teves dades locals. A més, el nostre servidor compta amb 'Rate Limiting' (limitació de peticions) que evita atacs de denegació de servei (DDoS) per garantir que els catàlegs oficials estiguin sempre disponibles quan els necessitis.",
+          "q4": "Com distribueixo físicament l'alumnat a l'aula?",
+          "a4": "Dins d''Alumnat' trobaràs una pestanya de 'Plànol de classe'. És una pissarra visual i interactiva on pots arrossegar i deixar anar els estudiants als seus respectius pupitres per tenir el disseny exacte de la teva classe.",
+          "q5": "Com utilitzo el sistema d'Alertes d'Abandonament?",
+          "a5": "El panell de prevenció primerenca et permet registrar trucades a les famílies, partes disciplinaris o derivacions al departament d'orientació per a alumnat amb risc d'abandonament escolar."
+        },
+        "grupo4": {
+          "titulo": "4. Pas 5: El dia a dia i l'avaluació",
+          "q1": "Què és el 'Diari d'aula'?",
+          "a1": "És el teu quadern de bitàcola diari. Et permet anotar el que passa en cada sessió real de classe: quina UD has impartit, si hi ha hagut incidències o marcar dies 'Sense docència' (com vagues o claustres) perquè no comptin en el teu progrés.",
+          "q2": "Com es calcula la previsió de 'Planificació mensual'?",
+          "a2": "Es calcula dia a dia amb el calendari de festius i l'horari setmanal que ja tens registrats a l'app — no és una estimació proporcional, és un càlcul exacte amb aquestes dades. Canviarà si el calendari oficial del curs o la distribució definitiva de l'horari encara no estan complets.",
+          "q3": "Com passo llista o registro faltes d'assistència?",
+          "a3": "A la secció de Seguiment tens la pestanya 'Assistència'. Veuràs tot el teu alumnat i amb un sol clic a la seva graella pots alternar entre Falta, Retard o Falta Justificada.",
+          "q4": "Com avaluo una tasca o examen concret?",
+          "a4": "Vés a la secció 'Seguiment' > pestanya 'Detall per alumnat' per introduir la nota de cada activitat, per alumne/a. La nota final es recalcula automàticament a partir dels pesos de RA i CE.",
+          "q5": "Com es calcula exactament la nota final del trimestre?",
+          "a5": "El sistema creua les qualificacions que poses als Instruments amb el pes de l'Indicador (Avaluació > bloc Indicadors), que al seu torn alimenta el pes del Criteri d'Avaluació (CE) i finalment el Resultat d'Aprenentatge (RA). Tot en temps real.",
+          "q6": "Què signifiquen els colors (morat, verd blavós, taronja) a l'agenda i el calendari visual?",
+          "a6": "Els colors del fons indiquen el trimestre (avaluació) al qual pertany cada activitat o data: 1r trimestre (morat/malva), 2n trimestre (teal/verd blavós) i 3r trimestre (taronja/ambre) — deliberadament sense vermell ni blau, aquests tons estan reservats a Festiu i Esdeveniment."
+        },
+        "grupo5": {
+          "titulo": "5. Descàrregues i documents oficials",
+          "q1": "Puc generar butlletins automàtics per a l'alumnat?",
+          "a1": "Sí. Des de la pestanya 'Curs' de MagIA pots generar butlletins en PDF massius per a tota la classe o resums individuals hiperdetallats que justifiquen la nota en base a cada Criteri d'Avaluació assolit."
+        },
+        "grupo7": {
+          "titulo": "7. Suport tècnic",
+          "q1": "Què passa si els gràfics del meu tauler de control no carreguen?",
+          "a1": "Comprova a la barra lateral que has activat el 'Mode Reals' i tens seleccionat el teu Grup. Els gràfics necessiten saber a quin alumnat i a quina programació apunten per poder analitzar les dades.",
+          "q2": "Es pot fer servir Cuaderno FP al mòbil?",
+          "a2": "El disseny és responsiu i s'adapta, però per la densitat d'informació (taules massives d'avaluació i matrius curriculars), et recomanem encaridament utilitzar-lo en pantalles d'ordinador o tauletes grans.",
+          "q3": "L'app va molt lenta o he detectat un error estrany",
+          "a3": "Intenta recarregar la pàgina completament (F5 o Ctrl+R). Si l'error segueix apareixent, exporta les teves dades (.json) immediatament per posar-les a salvo i contacta amb el suport detallant els passos per reproduir el teu problema."
+        }
+      },
+      "mapaAplicacionTitulo": "Mapa de l'aplicació (sitemap)",
+      "mapaAplicacionDescPre": "Estructura organitzativa de Cuaderno FP. Es genera a partir de la configuració real de navegació (",
+      "mapaAplicacionDescPost": "), així que no pot quedar desactualitzat com la seva versió anterior.",
+      "agrupamientoPreguntaTitulo": "És adequat l'agrupament actual?",
+      "agrupamientoRespuestaPre": "Sí: separa amb claredat el punt de partida (",
+      "agrupamientoInicioDesc": ": Tauler/Ajuda/Normativa/Catàleg — de consulta puntual, sense necessitar un grup obert), l'espai de treball actiu (",
+      "grupoLabel": "Grup",
+      "agrupamientoGrupoDesc": ": Arxiu/Agenda/Legal/MagIA — gestió de fitxers, agenda del dia a dia i eines de suport), el reutilitzable (",
+      "programacionLabel": "Programació",
+      "agrupamientoProgramacionDesc": ": Context/Currículum/Metodologia/Instruments) i l'específic de l'any (",
+      "agrupamientoCursoDesc": ": Calendari/Alumnat/Seguiment/Qualificacions).",
+      "errorCargandoContenido": "Error en carregar el contingut."
+    },
+    "calificaciones": {
+      "sinCursoNiProgramacionTitulo": "No hi ha curs ni programació carregada",
+      "sinCursoNiProgramacionDesc": "Has d'obrir o crear un arxiu de programació i curs a Els teus arxius.",
+      "cargandoDatosProgreso": "Carregant dades de progrés acadèmic..."
+    },
+    "inicio": {
+      "metodologiaEspecificaTitulo": "Una eina construïda sobre metodologia específica",
+      "metodologiaEspecificaDesc": "Cuaderno FP segueix les referències bibliogràfiques actualitzades a la nova llei de FP, les orientacions de la Inspecció Educativa, els principals autors de referència i les guies oficials de les administracions educatives: els Resultats d'Aprenentatge (RA) són l'eix causal del qual es considera que ha de derivar tota la resta en una programació didàctica.",
+      "pasoIdentificacion": "Identificació",
+      "pasoIntroduccionJustificacionNormativa": "Introducció, justificació i normativa",
+      "pasoContextualizacion": "Contextualització",
+      "pasoObjetivosCompetencias": "Objectius i competències",
+      "pasoCaracterIntermodularDual": "Caràcter intermodular i dual",
+      "pasoContenidosCentradosRa": "Continguts centrats en RA",
+      "pasoSituacionesAprendizaje": "Situacions d'aprenentatge",
+      "pasoMetodologiaInclusion": "Metodologia i inclusió",
+      "pasoEvaluacion": "Avaluació (aprenentatge / pràctiques / excepcions)",
+      "pasoActividadesComplementarias": "Activitats complementàries",
+      "pasoAtencionDiversidadRecursos": "Atenció a la diversitat i recursos",
+      "grupoTelegramTitulo": "Grup oficial de Telegram",
+      "grupoTelegramDesc": "Grup oficial de desenvolupament i proves de l'App web gratuïta de Cuaderno FP. Puja els teus suggeriments, reporta errors o col·labora aportant el currículum oficial de la teva Comunitat Autònoma.",
+      "contribuidoresCcaaTitulo": "Col·laboradors per Comunitat Autònoma",
+      "contribuidoresCcaaDesc": "Menció especial al professorat que està ajudant a millorar i a integrar els currículums de les Comunitats Autònomes",
+      "animateAContribuir": "Anima't a contribuir!"
+    },
+    "legal": {
+      "datosTitular": "Dades del titular",
+      "condicionesUso": "Condicions d'ús",
+      "propiedadIntelectual": "Propietat intel·lectual (LPI)",
+      "licenciasTitulo": "Llicències",
+      "codigoFuenteGplTitulo": "4a. Codi font — GNU GPLv3",
+      "queImplicaTitulo": "Què implica?",
+      "copyleftTitulo": "Copyleft: Compartir igual",
+      "verLicenciaCompletaGithub": "Veure llicència completa a GitHub",
+      "contenidoMaterialesCcTitulo": "4b. Contingut i materials — CC BY-NC-SA 4.0",
+      "resumenPracticoTitulo": "Resum pràctic per al professorat",
+      "modeloPrivacidadTitulo": "Model de privadesa local-first",
+      "privacidadAbsolutaTitulo": "Privadesa absoluta per disseny",
+      "responsableTratamientoTitulo": "Responsable del tractament (RGPD)",
+      "dondeSeGuardanDatosTitulo": "On es guarden les dades?",
+      "derechosArcoTitulo": "Drets de l'alumnat (ARCO)",
+      "seguridadTitulo": "Seguretat",
+      "baseLegalNormativaTitulo": "Base legal i normativa aplicable",
+      "politicaCookiesTitulo": "Política de cookies",
+      "tecnologiasAlmacenamientoTitulo": "Tecnologies d'emmagatzematge utilitzades",
+      "detalleAlmacenamientoTitulo": "Detall d'emmagatzematge local",
+      "contenidoThemeA11y": "Preferències de tema i accessibilitat",
+      "duracionPersistente": "Persistent",
+      "contenidoCatalogCache": "Catàlegs oficials (cicles, mòduls, RA/CE)",
+      "contenidoSessionData": "Dades de sessió i configuració de mòdul",
+      "comoGestionarTitulo": "Com gestionar l'emmagatzematge local",
+      "declaracionAccesibilidadTitulo": "Declaració d'accessibilitat",
+      "normativaAplicableTitulo": "Normativa aplicable",
+      "estadoConformidadTitulo": "Estat de conformitat",
+      "medidasAdoptadasTitulo": "Mesures d'accessibilitat adoptades",
+      "navegacionEstructuraTitulo": "Navegació i estructura",
+      "interaccionControlesTitulo": "Interacció i controls",
+      "personalizacionTitulo": "Personalització",
+      "excepcionesTitulo": "Excepcions i contingut no conforme",
+      "contactoInfoAccesibleTitulo": "Contacte i sol·licitud d'informació accessible"
+    },
+    "magia": {
+      "contextoDesc": "Informació general i característiques de l'entorn.",
+      "sinDocumentosApoyo": "Encara no hi ha documents de suport en aquesta secció.",
+      "curriculoDesc": "Encreuament de resultats d'aprenentatge i criteris; documents d'UD i tasques.",
+      "matrizRaUdTitulo": "Matriu RA ↔ UD",
+      "matrizRaUdDesc": "Taula creuada de RA i la seva relació amb les Unitats Didàctiques.",
+      "sinUdDefinidas": "No hi ha Unitats Didàctiques definides.",
+      "tareaCompetencialTitulo": "Tasca competencial",
+      "sinTareasDefinidas": "No hi ha Tasques competencials definides.",
+      "metodologiaDesc": "Estratègies metodològiques i recursos.",
+      "instrumentosTitulo": "Instruments",
+      "instrumentosDesc": "Definició i pesos de les eines d'avaluació.",
+      "calendarioDesc": "Horari, trimestres, festius i esdeveniments.",
+      "calendarioAcademicoDesc": "Vista global del curs amb dates, sessions i esdeveniments.",
+      "alumnadoDesc": "Fitxes personals i ubicació a l'aula.",
+      "alumnadoUbicacionAulaTitulo": "Alumnat. Ubicació a l'aula",
+      "distribucionUbicacionAulaDesc": "Distribució i ubicació de l'alumnat a l'aula.",
+      "progresoAlumnadoTitulo": "Progrés de l'alumnat",
+      "generaInformeAvanceDesc": "Genera un informe de l'avenç de l'alumnat.",
+      "fichaIndividualTitulo": "Fitxa individual",
+      "fichaIndividualDesc": "Fitxa de matrícula + tutoria d'un alumne/a, per portar a una reunió d'orientació.",
+      "seguimientoLabel": "Seguiment",
+      "seguimientoDesc": "Diari de classes, seqüenciació per UD i planificació mensual.",
+      "seguimientoDiarioTitulo": "Seguiment diari",
+      "seguimientoDiarioDesc": "Registre detallat de la planificació del dia a dia.",
+      "clasesPorUdTitulo": "Classes per UD",
+      "clasesPorUdDesc": "Seqüenciació de sessions de cada Unitat didàctica.",
+      "planificacionTitulo": "Planificació",
+      "planificacionDesc": "Distribució temporal mensual (previst/impartit) per UD.",
+      "calificacionesDesc": "Butlletins, actes d'avaluació i informes per alumne/a.",
+      "boletinDelTrimestre": "Butlletí del {{trimestre}}",
+      "evaluacionFinalExtraordinariaTitulo": "Avaluació final extraordinària",
+      "evaluacionFinalOrdinariaTitulo": "Avaluació final ordinària"
+    },
+    "seguimiento": {
+      "cargandoDatosSeguimiento": "Carregant dades de seguiment..."
     }
-  }
+  },
+  "t1": "1r trimestre",
+  "t2": "2n trimestre",
+  "t3": "3r trimestre",
+  "festivo": "Festiu",
+  "evento": "Esdeveniment",
+  "festivos": "Festius",
+  "eventos": "Esdeveniments",
+  "nombre_festivo": "Nom del festiu...",
+  "desc_evento": "Descripció de l'esdeveniment...",
+  "anadir": "Afegir",
+  "cancelar": "Cancel·lar",
+  "table": {
+    "fecha": "Data",
+    "hasta": "Fins a"
+  },
+  "fecha": "Data",
+  "hasta_opc": "Fins a (opcional)",
+  "sin_eventos": "Encara no hi ha festius ni esdeveniments. Afegeix-ne un a dalt."
 }
