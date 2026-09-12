@@ -122,7 +122,7 @@ def extract_modules_variant_c(soup: BeautifulSoup) -> list:
         if tag.name != "p":
             continue
         txt = tag.get_text(strip=True)
-        m_mod = re.match(r"^M[oó]dulo Profesional:\s*(.+?)\.?$", txt)
+        m_mod = re.match(r"^M[oó]dulo [Pp]rofesional:\s*(.+?)\.?$", txt)
         m_cod = re.match(r"^C[oó]digo:\s*(\S+)", txt)
         m_ra = re.match(r"^(\d+)\.\s+(.+)$", txt)
         m_ce = re.match(r"^([a-zñ])\)\s*(.+)$", txt)
@@ -158,9 +158,9 @@ def extract_hours_curso_from_orden_table(soup: BeautifulSoup, table_index: int =
     result = {}
     for r in rows:
         cells = [c.get_text(strip=True) for c in r.find_all(["td", "th"])]
-        if not cells or not re.match(r"^\d{4}\.", cells[0]):
+        if not cells or not re.match(r"^\d{4}\.?\s", cells[0]):
             continue
-        m_code = re.match(r"^(\d{4})\.\s*(.+?)\.?$", cells[0])
+        m_code = re.match(r"^(\d{4})\.?\s*(.+?)\.?$", cells[0])
         if not m_code:
             continue
         code = m_code.group(1)
