@@ -318,7 +318,7 @@
       },
       "pdigual": {
         "label": "APP → PD= (Simplificada)",
-        "desc": "Da app a onde aparece cada campo no modelo oficial simplificado, 17 apartados A-Q (PD=)."
+        "desc": "Da app a onde aparece cada campo no modelo oficial simplificado, 14 apartados A-N (PD=)."
       },
       "pdplus": {
         "label": "APP → PD+ (Detallada JEG)",

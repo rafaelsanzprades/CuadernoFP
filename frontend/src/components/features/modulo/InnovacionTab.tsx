@@ -73,6 +73,17 @@ export function InnovacionTab() {
           </div>
 
           <div>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.medidasBilingueLabel', {defaultValue: 'Medidas complementarias en proyectos o bilingües (apartado L, modelo Simplificado, pd=)'})}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.medidasBilingueDesc', {defaultValue: 'En su caso, medidas para el tratamiento del módulo dentro de proyectos o itinerarios bilingües. Si se deja vacío, se indica que no aplica.'})}</p>
+            <textarea
+              value={config_contexto["texto_medidas_bilingue"] || ""}
+              onChange={e => handleChange("texto_medidas_bilingue", e.target.value)}
+              placeholder={t('placeholders.modulo.medidasBilingue', {defaultValue: 'Ej: Glosario técnico bilingüe, materiales adaptados, evaluación bilingüe...'})}
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+
+          <div>
             <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.actividadesComplementariasLabel', {defaultValue: 'H1. Actividades complementarias'})}</label>
             <p className="text-caption text-muted mb-2">{t('campos.modulo.actividadesComplementariasDesc', {defaultValue: 'En horario lectivo, ligadas al currículo y evaluables — forman parte de la programación didáctica.'})}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">

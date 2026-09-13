@@ -302,7 +302,11 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             # siempre.
             from helpers_catalogo import resolve_grado_info
             grado_info = resolve_grado_info(info_mod.get("codigo", ""), db)
-            config_contexto_pd = dict(curso_data.get("config_contexto") or {})
+            # config_contexto vive en moduleData (ALLOWED_PROGRAMACION_KEYS en
+            # fileManager.ts, no en ALLOWED_CURSO_KEYS) -- leerlo de curso_data
+            # devolvía siempre {} y anulaba en silencio todo texto personalizado
+            # (texto_introduccion, texto_feoe, texto_criterios_calificacion...).
+            config_contexto_pd = dict(module_data.get("config_contexto") or {})
             config_contexto_pd.update({k: v for k, v in grado_info.items() if v})
 
             data_pd = {

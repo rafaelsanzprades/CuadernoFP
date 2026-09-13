@@ -75,7 +75,7 @@ export function AnalisisPdxTab() {
       <AcordeonNivel
         id="pd=" file="/Guia_pd%3D.md" icon={FileCheck2} defaultOpen={false}
         title={t('tabs.equivalencias.pdigual.label', {defaultValue: 'APP → PD= (Simplificada)'})}
-        desc={t('tabs.equivalencias.pdigual.desc', {defaultValue: 'De la app a dónde aparece cada campo en el modelo oficial simplificado, 17 apartados A-Q (PD=).'})}
+        desc={t('tabs.equivalencias.pdigual.desc', {defaultValue: 'De la app a dónde aparece cada campo en el modelo oficial simplificado, 14 apartados A-N (PD=).'})}
       />
       <AcordeonNivel
         id="pd+" file="/Guia_pd%2B.md" icon={FileStack} defaultOpen={false}

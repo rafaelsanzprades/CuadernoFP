@@ -318,7 +318,7 @@
       },
       "pdigual": {
         "label": "APP → PD= (Simplified)",
-        "desc": "From the app to where each field appears in the official simplified model, 17 sections A-Q (PD=)."
+        "desc": "From the app to where each field appears in the official simplified model, 14 sections A-N (PD=)."
       },
       "pdplus": {
         "label": "APP → PD+ (Detailed JEG)",
