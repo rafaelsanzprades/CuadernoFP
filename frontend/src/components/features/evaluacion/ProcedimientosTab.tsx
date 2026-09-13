@@ -112,6 +112,17 @@ export function ProcedimientosTab() {
             className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
           />
         </div>
+
+        <div className="glass-card p-6 border-t-4 border-t-cyan-500">
+          <h2 className="text-subheading font-bold text-foreground mb-1">{t('campos.evaluacion.tituloEvaluacionInicial', {defaultValue: 'Evaluación inicial (apartado E, modelo Simplificado, pd=)'})}</h2>
+          <p className="text-caption text-muted mb-3">{t('campos.evaluacion.evaluacionInicialDesc', {defaultValue: 'Instrumento diagnóstico, contenidos evaluados y consecuencias de sus resultados en la programación. Si se deja vacío, se genera un texto genérico.'})}</p>
+          <textarea
+            value={config_contexto.texto_evaluacion_inicial || ""}
+            onChange={e => handleChange("texto_evaluacion_inicial", e.target.value)}
+            placeholder={t('placeholders.evaluacion.textoEvaluacionInicial', {defaultValue: 'Ej: Se realiza un cuestionario inicial sobre conocimientos previos del módulo...'})}
+            className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+          />
+        </div>
       </div>
     </MotionWrapper>
   );
