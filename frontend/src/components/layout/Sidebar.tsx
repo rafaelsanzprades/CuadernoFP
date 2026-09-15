@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, CalendarDays, FolderOpen, Hourglass, Save, A
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAppStore } from '@/store/useAppStore';
-import { navGroups } from '@/config/navigation';
+import { navGroups, footerPages } from '@/config/navigation';
 import { getAcronym } from '@/utils/catalogFormat';
 import { useEffect, useRef, useState } from 'react';
 import React from 'react';
@@ -204,7 +204,12 @@ export default function Sidebar() {
         className={`sidebar-scroll-container flex-1 ${isSidebarOpen ? 'px-3' : 'px-2'} py-2 space-y-3 overflow-x-hidden overflow-y-auto scrollbar-hide`}
       >
 
-        {/* Inicio (header + fecha DEMO/REAL): items del bloque Inicio, mismo hueco que Grupo/Programación/Curso */}
+        {/* Inicio (header + fecha DEMO/REAL + fichero de grupo abierto): items
+            del bloque Inicio (Panel/Archivo/Ayuda), mismo hueco que
+            Programación/Curso. Fusiona lo que antes eran dos bloques
+            separados (Inicio y General) en uno solo — Archivo, que abre
+            grupos, vive ahora dentro de este mismo bloque, así que se
+            muestran ambos indicadores (fecha y fichero de grupo) juntos. */}
         <div className="flex flex-col gap-0.5 mb-2 shrink-0">
           {isSidebarOpen && (
             <div className="text-body font-bold text-foreground/90 tracking-wide px-1">
@@ -212,17 +217,28 @@ export default function Sidebar() {
             </div>
           )}
           {isSidebarOpen ? (
-            <Link
-              href="/archivos"
-              onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
-              className="mx-1 text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
-              style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
-            >
-              <CalendarDays className="w-3.5 h-3.5 shrink-0" />
-              <span suppressHydrationWarning className="truncate">
-                {t('sidebar.fecha', { defaultValue: 'Fecha' })} {dataSource === 'demo' ? 'DEMO' : 'REAL'}: {isMounted ? dateStr : ''}
-              </span>
-            </Link>
+            <>
+              <Link
+                href="/archivos"
+                onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
+                className="mx-1 text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
+                style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
+              >
+                <CalendarDays className="w-3.5 h-3.5 shrink-0" />
+                <span suppressHydrationWarning className="truncate">
+                  {t('sidebar.fecha', { defaultValue: 'Fecha' })} {dataSource === 'demo' ? 'DEMO' : 'REAL'}: {isMounted ? dateStr : ''}
+                </span>
+              </Link>
+              <Link
+                href="/archivos"
+                onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
+                className="mx-1 text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
+                style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
+              >
+                <FolderOpen className="w-3.5 h-3.5 shrink-0" />
+                <span className="truncate">{groupFileSource.fileName ? groupFileSource.fileName.replace(/\.fpg$/, '') : t('sidebar.abrir_grupo')}</span>
+              </Link>
+            </>
           ) : (
             <div className="w-8 h-px bg-foreground/10 mx-auto" />
           )}
@@ -259,67 +275,8 @@ export default function Sidebar() {
           })}
         </div>
 
-        {/* Grupo (header + link) y ① General: items del segundo grupo, mismo hueco que Programación/Curso */}
-        {navGroups[1] && (
-          <div className="flex flex-col gap-0.5 mt-2 relative z-20 shrink-0">
-            {isSidebarOpen && (
-              <div className="flex flex-col mb-0.5 gap-0.5">
-                <div className="text-body font-bold text-foreground/90 tracking-wide px-1">
-                  {t('navGroups.general', { defaultValue: 'General' })}
-                </div>
-
-                <Link
-                  href="/archivos"
-                  onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
-                  className="mx-1 text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
-                  style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
-                >
-                  <FolderOpen className="w-3.5 h-3.5 shrink-0" />
-                  <span className="truncate">{groupFileSource.fileName ? groupFileSource.fileName.replace(/\.fpg$/, '') : t('sidebar.abrir_grupo')}</span>
-                </Link>
-                <div className="h-px bg-[var(--glass-border)]" />
-              </div>
-            )}
-            {navGroups[1].items.map((item) => {
-              const linkContent = (
-                <Link
-                  href={item.href}
-                  onClick={(e) => {
-                    if (item.href === "#wizard") {
-                      e.preventDefault();
-                      useAppStore.getState().setWizardOpen(true);
-                    }
-                    if (window.innerWidth < 1024) toggleSidebar();
-                  }}
-                  className={`flex items-center ${isSidebarOpen ? 'gap-2.5 px-3' : 'justify-center px-0'} py-1 rounded-lg transition-all duration-150 group
-                    ${pathname === item.href.split('?')[0]
-                      ? 'bg-foreground/10 text-foreground'
-                      : 'text-muted hover:text-foreground hover:bg-foreground/5 border border-transparent'
-                    }`}
-                >
-                  <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === item.href.split('?')[0] ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : 'group-hover:scale-110'}`}>
-                    <item.icon className="w-5 h-5" strokeWidth={1.75} />
-                  </span>
-                  {isSidebarOpen && (
-                    <span className={`text-body leading-tight font-medium whitespace-nowrap ${pathname === item.href.split('?')[0] ? 'text-foreground font-semibold' : ''}`}>
-                      {t('nav.' + item.href.split('?')[0].replace('/', ''))}
-                    </span>
-                  )}
-                </Link>
-              );
-              return !isSidebarOpen ? (
-                <Tooltip key={item.href} content={t('nav.' + item.href.split('?')[0].replace('/', ''))} position="right" delay={0.1}>
-                  {linkContent}
-                </Tooltip>
-              ) : (
-                <React.Fragment key={item.href}>{linkContent}</React.Fragment>
-              );
-            })}
-          </div>
-        )}
-
-        {/* ③ Programación + ④ Curso con info-box coloreada */}
-        {navGroups.slice(2).map((group) => {
+        {/* Programación + Curso con info-box coloreada */}
+        {navGroups.slice(1).map((group) => {
           // Extraer el texto base (sin corchetes) y el contenido entre corchetes
           const bracketMatch = group.title.match(/^(.*?)\s*\[.*\]$/);
           let baseTitle = bracketMatch ? bracketMatch[1].trim() : group.title;
@@ -397,6 +354,42 @@ export default function Sidebar() {
             </div>
           );
         })}
+
+        {/* Legal: enlace suelto al pie de la navegación, fuera de los 3
+            bloques — contenido de cumplimiento que casi nunca se visita, no
+            necesita el mismo tratamiento que un bloque de trabajo. */}
+        <div className="flex flex-col gap-0.5 mt-2 pt-2 border-t border-[var(--glass-border)] shrink-0">
+          {footerPages.map((page) => {
+            const basePath = page.href.split('?')[0];
+            const translatedLabel = t('nav.' + basePath.replace('/', ''), { defaultValue: page.label });
+            const linkContent = (
+              <Link
+                key={page.href}
+                href={page.href}
+                onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
+                className={`flex items-center ${isSidebarOpen ? 'gap-2.5 px-3' : 'justify-center px-0'} py-1 rounded-lg transition-all duration-150 group
+                  ${pathname === basePath
+                    ? 'bg-foreground/10 text-foreground'
+                    : 'text-muted/70 hover:text-foreground hover:bg-foreground/5 border border-transparent'
+                  }`}
+              >
+                <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === basePath ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : 'group-hover:scale-110'}`}>
+                  <page.icon className="w-4 h-4" strokeWidth={1.75} />
+                </span>
+                {isSidebarOpen && (
+                  <span className={`text-caption leading-tight font-medium whitespace-nowrap ${pathname === basePath ? 'text-foreground font-semibold' : ''}`}>
+                    {translatedLabel}
+                  </span>
+                )}
+              </Link>
+            );
+            return !isSidebarOpen ? (
+              <Tooltip key={page.href} content={translatedLabel} position="right" delay={0.1}>
+                {linkContent}
+              </Tooltip>
+            ) : linkContent;
+          })}
+        </div>
       </nav>
 
         {/* Separación de lado a lado antes del footer */}

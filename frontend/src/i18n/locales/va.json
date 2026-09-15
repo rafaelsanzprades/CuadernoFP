@@ -413,7 +413,7 @@
   },
   "navGroups": {
     "inicio": "Inici",
-    "inicio_desc": "Per on començar: els teus fitxers, ajuda, i els catàlegs i normativa de consulta — tot independent de tindre un grup obert.",
+    "inicio_desc": "Per on començar: el teu tauler, els teus fitxers i l'ajuda de l'aplicació — tot independent de tindre un grup obert.",
     "general": "General",
     "programacion": "Programació",
     "curso": "Curs",
@@ -2783,17 +2783,21 @@
         }
       },
       "mapaAplicacionTitulo": "Mapa de l'aplicació (sitemap)",
-      "mapaAplicacionDescPre": "Estructura organitzativa de Cuaderno FP. Es genera a partir de la configuració real de navegació (",
-      "mapaAplicacionDescPost": "), així que no pot quedar desactualitzat com la seva versió anterior.",
+      "mapaAplicacionDescPre": "Estructura organitzativa de Cuaderno FP. La llista de pàgines es genera a partir de la configuració real de navegació (",
+      "mapaAplicacionDescPost": "), així que poden quedar desactualitzades si s'afegeix o es treu una pestanya sense actualitzar-ho també aquí.",
       "agrupamientoPreguntaTitulo": "És adequat l'agrupament actual?",
-      "agrupamientoRespuestaPre": "Sí: separa amb claredat el punt de partida (",
-      "agrupamientoInicioDesc": ": Tauler/Ajuda/Normativa/Catàleg — de consulta puntual, sense necessitar un grup obert), l'espai de treball actiu (",
+      "agrupamientoRespuestaPre": "Sí: separa amb claredat la utilitat universal (",
+      "agrupamientoInicioDesc": ": Tauler/Arxiu/Ajuda — independent de tenir un grup obert), el disseny de la programació (",
       "grupoLabel": "Grup",
       "agrupamientoGrupoDesc": ": Arxiu/Agenda/Legal/MagIA — gestió de fitxers, agenda del dia a dia i eines de suport), el reutilitzable (",
       "programacionLabel": "Programació",
-      "agrupamientoProgramacionDesc": ": Context/Currículum/Metodologia/Instruments) i l'específic de l'any (",
-      "agrupamientoCursoDesc": ": Calendari/Alumnat/Seguiment/Qualificacions).",
-      "errorCargandoContenido": "Error en carregar el contingut."
+      "agrupamientoProgramacionDesc": ": Normativa/Catàleg/Context/Currículum/Metodologia/Instrument) i el dia a dia del curs real (",
+      "agrupamientoCursoDesc": ": Agenda/Calendari/Alumnat/Seguiment/Qualificació/MagIA). ",
+      "errorCargandoContenido": "Error en carregar el contingut.",
+      "iniciarRecorrido": "Inicia el recorregut guiat",
+      "mapaAplicacionDescMid": "). Les pestanyes de cada pàgina es mantenen a mà en aquest mateix fitxer (",
+      "agrupamientoLegalDesc": "Legal viu a part, com un enllaç al peu del sidebar: és contingut de compliment normatiu, no una eina de treball.",
+      "legalMapaTitulo": "Legal (peu del sidebar)"
     },
     "calificaciones": {
       "sinCursoNiProgramacionTitulo": "No hi ha curs ni programació carregada",

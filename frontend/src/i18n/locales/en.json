@@ -413,7 +413,7 @@
   },
   "navGroups": {
     "inicio": "Home",
-    "inicio_desc": "Where to start: your files, help, and the reference catalog and regulations — all independent of having a group open.",
+    "inicio_desc": "Where to start: your dashboard, your files, and the app's help — all independent of having a group open.",
     "general": "General",
     "programacion": "Programming",
     "curso": "Course",
@@ -2783,17 +2783,21 @@
         }
       },
       "mapaAplicacionTitulo": "Application map (sitemap)",
-      "mapaAplicacionDescPre": "Organizational structure of Cuaderno FP. It's generated from the actual navigation configuration (",
-      "mapaAplicacionDescPost": "), so it can't become outdated the way its previous version did.",
+      "mapaAplicacionDescPre": "Organizational structure of Cuaderno FP. The page list is generated from the actual navigation configuration (",
+      "mapaAplicacionDescPost": "), so they can become outdated if a tab is added or removed without also updating it here.",
       "agrupamientoPreguntaTitulo": "Is the current grouping appropriate?",
-      "agrupamientoRespuestaPre": "Yes: it clearly separates the starting point (",
-      "agrupamientoInicioDesc": ": Dashboard/Help/Regulations/Catalog — for quick reference, without needing an open group), the active workspace (",
+      "agrupamientoRespuestaPre": "Yes: it clearly separates universal utility (",
+      "agrupamientoInicioDesc": ": Dashboard/Files/Help — independent of having an open group), programación design (",
       "grupoLabel": "Group",
       "agrupamientoGrupoDesc": ": File/Agenda/Legal/MagIA — file management, day-to-day agenda, and support tools), the reusable part (",
       "programacionLabel": "Curriculum Plan",
-      "agrupamientoProgramacionDesc": ": Context/Curriculum/Methodology/Instruments) and the year-specific part (",
-      "agrupamientoCursoDesc": ": Calendar/Students/Tracking/Grades).",
-      "errorCargandoContenido": "Error loading the content."
+      "agrupamientoProgramacionDesc": ": Regulations/Catalog/Context/Curriculum/Methodology/Instruments) and the day-to-day of a real course (",
+      "agrupamientoCursoDesc": ": Agenda/Calendar/Students/Tracking/Grades/MagIA). ",
+      "errorCargandoContenido": "Error loading the content.",
+      "iniciarRecorrido": "Start guided tour",
+      "mapaAplicacionDescMid": "). Each page's tabs are maintained by hand in this same file (",
+      "agrupamientoLegalDesc": "Legal lives apart, as a link at the bottom of the sidebar: it's compliance content, not a work tool.",
+      "legalMapaTitulo": "Legal (sidebar footer)"
     },
     "calificaciones": {
       "sinCursoNiProgramacionTitulo": "No course or programming loaded",

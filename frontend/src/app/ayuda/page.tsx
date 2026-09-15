@@ -1,10 +1,11 @@
 "use client";
-import { BookOpen, Info, Map, ChevronDown } from "lucide-react";
+import { BookOpen, Info, Map, ChevronDown, Compass } from "lucide-react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
-import { navGroups } from "@/config/navigation";
+import { navGroups, footerPages } from "@/config/navigation";
 import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { TabSync } from "@/components/ui/TabSync";
 import { useState, useMemo } from "react";
@@ -14,6 +15,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { TabAcronimos } from "@/components/features/catalogo/TabAcronimos";
 import { GuiaTab } from "@/components/features/ayuda/GuiaTab";
+import { useOnboardingTour } from "@/components/features/onboarding/TourGuide";
 
 // ── Mapa de pestañas por página real (misma fuente que usaba /inicio) ──────
 const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
@@ -34,6 +36,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "ponderacion-ra-ce", label: "Ponderación RA<-CE" },
     { id: "unidades", label: "Unidades didácticas" },
     { id: "competenciales", label: "Tareas competenciales" },
+    { id: "contenidos-ud", label: "Contenidos → UD" },
   ],
   "/metodologia": [
     { id: "metodologia", label: "Metodología e inclusión" },
@@ -46,6 +49,8 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "tri1", label: "1er trimestre" },
     { id: "tri2", label: "2º trimestre" },
     { id: "tri3", label: "3er trimestre" },
+    { id: "rubricas", label: "Rúbricas" },
+    { id: "jeg", label: "Modelo JEG" },
   ],
   "/calendario": [
     { id: "fechas", label: "Fechas y horario" },
@@ -64,18 +69,21 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "plano", label: "Plano de clase" },
     { id: "tutoria", label: "Tutoría y alertas" },
     { id: "autoevaluacion", label: "Autoevaluación" },
+    { id: "expediente", label: "Expediente" },
   ],
   "/seguimiento": [
     { id: "clases", label: "Clases" },
     { id: "asistencia", label: "Asistencia" },
     { id: "progreso-ra-ud", label: "Progreso de RA y UD" },
     { id: "detalle", label: "Detalle por alumnado" },
+    { id: "feoe-empresa", label: "FEOE / Empresa" },
   ],
   "/calificaciones": [
     { id: "resumen", label: "Resumen" },
     { id: "estadisticas", label: "Estadísticas" },
     { id: "analisis", label: "Análisis" },
     { id: "historico", label: "Histórico" },
+    { id: "reclamaciones", label: "Reclamaciones" },
     { id: "boletines", label: "Boletines" },
   ],
   "/normativa": [
@@ -195,6 +203,7 @@ export default function AyudaPage() {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<string>("faq");
   const FAQS = useMemo(() => getFaqs(t), [t]);
+  const { startTour } = useOnboardingTour();
 
   const TABS = [
     { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.magia.guia.label', {defaultValue: 'Guía'})}</>, cleanLabel: t('tabs.magia.guia.label', {defaultValue: 'Guía'}) },
@@ -235,7 +244,15 @@ export default function AyudaPage() {
               </Tabs>
             </div>
 
-            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || t('campos.comun.gestionDe', {activeTab, defaultValue: 'Gestión de {{activeTab}}'})} />
+            <TabInfoBox
+              description={TAB_DESCRIPTIONS[activeTab] || t('campos.comun.gestionDe', {activeTab, defaultValue: 'Gestión de {{activeTab}}'})}
+              action={activeTab === "guia" ? (
+                <Button variant="primary" size="sm" onClick={startTour}>
+                  <Compass className="w-4 h-4" />
+                  {t('campos.ayuda.iniciarRecorrido', {defaultValue: 'Iniciar recorrido guiado'})}
+                </Button>
+              ) : undefined}
+            />
 
             {/* ── CONTENIDO: FAQ ────────────────────────────────────────── */}
             {activeTab === "faq" && (
@@ -270,18 +287,17 @@ export default function AyudaPage() {
                     {t('campos.ayuda.mapaAplicacionTitulo', {defaultValue: 'Mapa de la aplicación (sitemap)'})}
                   </h2>
                   <p className="text-body text-foreground/80 leading-relaxed">
-                    {t('campos.ayuda.mapaAplicacionDescPre', {defaultValue: 'Estructura organizativa de Cuaderno FP. Se genera a partir de la configuración real de navegación ('})}<code className="text-caption bg-foreground/10 px-1 rounded">config/navigation.ts</code>{t('campos.ayuda.mapaAplicacionDescPost', {defaultValue: '), así que no puede quedarse desactualizado como su versión anterior.'})}
+                    {t('campos.ayuda.mapaAplicacionDescPre', {defaultValue: 'Estructura organizativa de Cuaderno FP. La lista de páginas se genera a partir de la configuración real de navegación ('})}<code className="text-caption bg-foreground/10 px-1 rounded">config/navigation.ts</code>{t('campos.ayuda.mapaAplicacionDescMid', {defaultValue: '). Las pestañas de cada página se mantienen a mano en este mismo fichero ('})}<code className="text-caption bg-foreground/10 px-1 rounded">PAGE_TABS</code>{t('campos.ayuda.mapaAplicacionDescPost', {defaultValue: '), así que pueden quedarse desactualizadas si se añade o quita una pestaña sin actualizar también aquí.'})}
                   </p>
                   <div className="bg-info/5 border border-info/20 rounded-xl p-4 text-body text-muted leading-relaxed">
-                    <strong className="text-foreground">{t('campos.ayuda.agrupamientoPreguntaTitulo', {defaultValue: '¿Es adecuado el agrupamiento actual?'})}</strong> {t('campos.ayuda.agrupamientoRespuestaPre', {defaultValue: 'Sí: separa con claridad el punto de partida ('})}<em>{t('nav.inicio', {defaultValue: 'Inicio'})}</em>{t('campos.ayuda.agrupamientoInicioDesc', {defaultValue: ': Panel/Ayuda/Normativa/Catálogo — de consulta puntual, sin necesitar un grupo abierto), el espacio de trabajo activo ('})}<em>{t('campos.ayuda.grupoLabel', {defaultValue: 'Grupo'})}</em>{t('campos.ayuda.agrupamientoGrupoDesc', {defaultValue: ': Archivo/Agenda/Legal/MagIA — gestión de ficheros, agenda del día a día y herramientas de apoyo), lo reutilizable ('})}<em>{t('campos.ayuda.programacionLabel', {defaultValue: 'Programación'})}</em>{t('campos.ayuda.agrupamientoProgramacionDesc', {defaultValue: ': Contexto/Currículo/Metodología/Instrumentos) y lo específico del año ('})}<em>{t('navGroups.curso', {defaultValue: 'Curso'})}</em>{t('campos.ayuda.agrupamientoCursoDesc', {defaultValue: ': Calendario/Alumnado/Seguimiento/Calificaciones).'})}
+                    <strong className="text-foreground">{t('campos.ayuda.agrupamientoPreguntaTitulo', {defaultValue: '¿Es adecuado el agrupamiento actual?'})}</strong> {t('campos.ayuda.agrupamientoRespuestaPre', {defaultValue: 'Sí: separa con claridad la utilidad universal ('})}<em>{t('navGroups.inicio', {defaultValue: 'Inicio'})}</em>{t('campos.ayuda.agrupamientoInicioDesc', {defaultValue: ': Panel/Archivo/Ayuda — independiente de tener un grupo abierto), el diseño de la programación ('})}<em>{t('campos.ayuda.programacionLabel', {defaultValue: 'Programación'})}</em>{t('campos.ayuda.agrupamientoProgramacionDesc', {defaultValue: ': Normativa/Catálogo/Contexto/Currículo/Metodología/Instrumento) y el día a día del curso real ('})}<em>{t('navGroups.curso', {defaultValue: 'Curso'})}</em>{t('campos.ayuda.agrupamientoCursoDesc', {defaultValue: ': Agenda/Calendario/Alumnado/Seguimiento/Calificación/MagIA). '})}{t('campos.ayuda.agrupamientoLegalDesc', {defaultValue: 'Legal vive aparte, como enlace al pie del sidebar: es contenido de cumplimiento normativo, no una herramienta de trabajo.'})}
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">
                     {/* Columnas dinámicas: una por cada grupo real de navigation.ts */}
                     {navGroups.map(group => {
                       const baseTitle = group.title.replace(/\s*\[.*\]$/, '');
                       const translatedTitle = baseTitle === "Inicio" ? t('navGroups.inicio', {defaultValue: 'Inicio'})
-                        : baseTitle === "General" ? t('navGroups.general', {defaultValue: 'General'})
                         : baseTitle === "Programación" ? t('navGroups.programacion', {defaultValue: 'Programación'})
                         : baseTitle === "Curso" ? t('navGroups.curso', {defaultValue: 'Curso'})
                         : baseTitle;
@@ -313,6 +329,33 @@ export default function AyudaPage() {
                       </div>
                       );
                     })}
+                  </div>
+
+                  {/* Legal: aparte de los 3 bloques, enlace suelto al pie del sidebar */}
+                  <div className="max-w-xs space-y-6 pt-4">
+                    <h3 className="font-extrabold text-subheading border-b-2 border-accent pb-2 text-foreground">
+                      {t('campos.ayuda.legalMapaTitulo', {defaultValue: 'Legal (pie del sidebar)'})}
+                    </h3>
+                    <ul className="space-y-4 text-body">
+                      {footerPages.map(item => {
+                        const basePath = item.href.split('?')[0];
+                        const tabs = PAGE_TABS[basePath] || [];
+                        return (
+                          <li key={item.href}>
+                            <Link href={basePath} className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
+                              <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> {t('nav.' + basePath.replace('/', ''), {defaultValue: item.label})}
+                            </Link>
+                            {tabs.length > 0 && (
+                              <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
+                                {tabs.map(tab => (
+                                  <Link key={tab.id} href={`${basePath}?tab=${tab.id}`} className="hover:text-accent transition-colors block py-0.5">— {t(`checks.ayuda.mapa_${basePath.slice(1)}_${tab.id.replace(/[^a-z0-9]/gi, '_')}`, {defaultValue: tab.label})}</Link>
+                                ))}
+                              </div>
+                            )}
+                          </li>
+                        );
+                      })}
+                    </ul>
                   </div>
                 </section>
               </div>
