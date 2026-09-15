@@ -413,7 +413,7 @@
   },
   "navGroups": {
     "inicio": "Inicio",
-    "inicio_desc": "Por onde empezar: os teus ficheiros, axuda, e os catálogos e normativa de consulta — todo independente de ter un grupo aberto.",
+    "inicio_desc": "Por onde empezar: o teu panel, os teus ficheiros e a axuda da aplicación — todo independente de ter un grupo aberto.",
     "general": "Xeral",
     "programacion": "Programación",
     "curso": "Curso",
@@ -2783,17 +2783,21 @@
         }
       },
       "mapaAplicacionTitulo": "Mapa da aplicación (sitemap)",
-      "mapaAplicacionDescPre": "Estrutura organizativa de Cuaderno FP. Xérase a partir da configuración real de navegación (",
-      "mapaAplicacionDescPost": "), así que non pode quedar desactualizado como a súa versión anterior.",
+      "mapaAplicacionDescPre": "Estrutura organizativa de Cuaderno FP. A lista de páxinas xérase a partir da configuración real de navegación (",
+      "mapaAplicacionDescPost": "), así que poden quedar desactualizadas se se engade ou quita unha pestana sen actualizalo tamén aquí.",
       "agrupamientoPreguntaTitulo": "É adecuado o agrupamento actual?",
-      "agrupamientoRespuestaPre": "Si: separa con claridade o punto de partida (",
-      "agrupamientoInicioDesc": ": Panel/Axuda/Normativa/Catálogo — de consulta puntual, sen necesitar un grupo aberto), o espazo de traballo activo (",
+      "agrupamientoRespuestaPre": "Si: separa con claridade a utilidade universal (",
+      "agrupamientoInicioDesc": ": Panel/Arquivo/Axuda — independente de ter un grupo aberto), o deseño da programación (",
       "grupoLabel": "Grupo",
       "agrupamientoGrupoDesc": ": Ficheiro/Axenda/Legal/MagIA — xestión de ficheiros, axenda do día a día e ferramentas de apoio), o reutilizable (",
       "programacionLabel": "Programación",
-      "agrupamientoProgramacionDesc": ": Contexto/Currículo/Metodoloxía/Instrumentos) e o específico do ano (",
-      "agrupamientoCursoDesc": ": Calendario/Alumnado/Seguimento/Cualificacións).",
-      "errorCargandoContenido": "Erro cargando o contido."
+      "agrupamientoProgramacionDesc": ": Normativa/Catálogo/Contexto/Currículo/Metodoloxía/Instrumento) e o día a día do curso real (",
+      "agrupamientoCursoDesc": ": Axenda/Calendario/Alumnado/Seguimento/Cualificación/MagIA). ",
+      "errorCargandoContenido": "Erro cargando o contido.",
+      "iniciarRecorrido": "Iniciar o percorrido guiado",
+      "mapaAplicacionDescMid": "). As pestanas de cada páxina mantéñense a man neste mesmo ficheiro (",
+      "agrupamientoLegalDesc": "Legal vive á parte, como ligazón ao pé do sidebar: é contido de cumprimento normativo, non unha ferramenta de traballo.",
+      "legalMapaTitulo": "Legal (pé do sidebar)"
     },
     "calificaciones": {
       "sinCursoNiProgramacionTitulo": "Non hai curso nin programación cargada",

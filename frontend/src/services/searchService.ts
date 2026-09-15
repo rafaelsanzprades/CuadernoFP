@@ -1,4 +1,4 @@
-import { navGroups } from "@/config/navigation";
+import { navGroups, footerPages } from "@/config/navigation";
 import { useAppStore } from "@/store/useAppStore";
 import i18n from "@/i18n";
 
@@ -19,26 +19,25 @@ export function searchGlobal(query: string): SearchResult[] {
   const normalizedQuery = query.toLowerCase().trim();
   const results: SearchResult[] = [];
 
-  // 1. Buscar en páginas de navegación
-  navGroups.forEach(group => {
-    group.items.forEach(item => {
-      const basePath = item.href.split('?')[0];
-      const key = basePath.replace('/', '');
-      const translatedLabel = i18n.t('nav.' + key, { defaultValue: item.label }) as string;
-      const translatedDesc = item.description ? (i18n.t('navDesc.' + key, { defaultValue: item.description }) as string) : undefined;
-      const titleMatch = translatedLabel.toLowerCase().includes(normalizedQuery);
-      const descMatch = translatedDesc?.toLowerCase().includes(normalizedQuery);
+  // 1. Buscar en páginas de navegación (los 3 bloques del sidebar + Legal,
+  // que vive aparte como enlace al pie pero debe ser igualmente buscable)
+  [...navGroups.flatMap(group => group.items), ...footerPages].forEach(item => {
+    const basePath = item.href.split('?')[0];
+    const key = basePath.replace('/', '');
+    const translatedLabel = i18n.t('nav.' + key, { defaultValue: item.label }) as string;
+    const translatedDesc = item.description ? (i18n.t('navDesc.' + key, { defaultValue: item.description }) as string) : undefined;
+    const titleMatch = translatedLabel.toLowerCase().includes(normalizedQuery);
+    const descMatch = translatedDesc?.toLowerCase().includes(normalizedQuery);
 
-      if (titleMatch || descMatch) {
-        results.push({
-          type: 'page',
-          title: translatedLabel,
-          subtitle: translatedDesc,
-          href: item.href,
-          score: titleMatch ? 100 : 80
-        });
-      }
-    });
+    if (titleMatch || descMatch) {
+      results.push({
+        type: 'page',
+        title: translatedLabel,
+        subtitle: translatedDesc,
+        href: item.href,
+        score: titleMatch ? 100 : 80
+      });
+    }
   });
 
   // 2. Buscar en datos del store (alumnos)

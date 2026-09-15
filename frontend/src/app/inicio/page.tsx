@@ -10,13 +10,14 @@ import { PropuestasTab } from "@/components/features/modulo/PropuestasTab";
 import { Card } from "@/components/ui/Card";
 import Link from "next/link";
 import { TabSync } from "@/components/ui/TabSync";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { AIWizardModal } from "@/components/features/ai/AIWizardModal";
 import { TabDocumentos } from "@/components/features/ayuda/TabDocumentos";
 import { RecentModulesPanel } from "@/components/features/dashboard/RecentModulesPanel";
+import { WelcomeWizard } from "@/components/features/dashboard/WelcomeWizard";
 import { Button } from "@/components/ui/Button";
 import { Sparkles } from "lucide-react";
 import toast from "react-hot-toast";
@@ -24,10 +25,28 @@ import { useTranslation } from "react-i18next";
 
 // ── Página Principal ──────────────────────────────────────────────────────
 export default function InicioPage() {
-  const { moduleData, cursoData, globalData, activeModuleId, activeCursoId, dataSource } = useAppStore();
+  const {
+    moduleData, cursoData, globalData, activeModuleId, activeCursoId, dataSource,
+    isWizardOpen, setWizardOpen,
+  } = useAppStore();
   const [activeTab, setActiveTab] = useState<string>("bienvenida");
   const { t } = useTranslation();
   const [aiModalOpen, setAiModalOpen] = useState(false);
+
+  // Navegador nuevo / sin datos locales (ningún archivo abierto todavía, ni
+  // Programación ni Curso): ofrecer DEMO o crear archivos propios en vez de
+  // dejar el panel en blanco. A diferencia del mismo aviso en /agenda, este
+  // se basa en el estado local (activeModuleId/activeCursoId), no en la lista
+  // de módulos del backend — es local-first, el backend no es la fuente de
+  // verdad de si hay o no datos de trabajo en este navegador. Sincroniza en
+  // ambas direcciones (no solo abre, también cierra) porque la rehidratación
+  // de zustand-persist desde IndexedDB es asíncrona: en el primer render
+  // activeModuleId todavía es null aunque haya datos guardados, así que si
+  // solo abriéramos el wizard se quedaría abierto para siempre una vez que
+  // la rehidratación completase y activeModuleId pasara a tener valor.
+  useEffect(() => {
+    setWizardOpen(!activeModuleId && !activeCursoId);
+  }, [activeModuleId, activeCursoId, setWizardOpen]);
 
   const TABS = [
     { id: "bienvenida", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.bienvenida')}</>, cleanLabel: t('tabs.bienvenida') },
@@ -48,6 +67,12 @@ export default function InicioPage() {
   return (
     <div className="flex min-h-screen bg-background">
       <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
+      {isWizardOpen && (
+        <WelcomeWizard
+          onComplete={() => setWizardOpen(false)}
+          fetchModules={() => {}}
+        />
+      )}
       <Sidebar />
       <AIWizardModal
         isOpen={aiModalOpen}
@@ -121,17 +146,15 @@ export default function InicioPage() {
               </div>
             </Card>
 
-            {/* Menus Grid: los 4 bloques (Inicio, General, Programación, Curso), todos con el mismo trato */}
+            {/* Menus Grid: los 3 bloques (Inicio, Programación, Curso), todos con el mismo trato */}
             <div className="space-y-12">
               {navGroups.map((group, groupIdx) => {
                 const baseTitle = group.title.replace(/\s*\[.*\]$/, '');
                 const translatedTitle = baseTitle === "Inicio" ? t('navGroups.inicio', { defaultValue: 'Inicio' })
-                  : baseTitle === "General" ? t('navGroups.general', { defaultValue: 'General' })
                   : baseTitle === "Programación" ? t('navGroups.programacion', { defaultValue: 'Programación' })
                   : baseTitle === "Curso" ? t('navGroups.curso', { defaultValue: 'Curso' })
                   : baseTitle;
                 const translatedSectionDesc = baseTitle === "Inicio" ? t('navGroups.inicio_desc', { defaultValue: group.sectionDescription })
-                  : baseTitle === "General" ? t('navGroups.general_desc', { defaultValue: group.sectionDescription })
                   : baseTitle === "Programación" ? t('navGroups.programacion_desc', { defaultValue: group.sectionDescription })
                   : baseTitle === "Curso" ? t('navGroups.curso_desc', { defaultValue: group.sectionDescription })
                   : group.sectionDescription;
@@ -150,7 +173,7 @@ export default function InicioPage() {
                     )}
 
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {group.items.map((item, itemIdx) => {
                         const itemBasePath = item.href.split('?')[0];
                         return (

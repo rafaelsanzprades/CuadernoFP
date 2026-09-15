@@ -26,7 +26,6 @@ export const metadata: Metadata = {
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { AuthProvider } from "@/components/AuthProvider";
 import { Toaster } from "react-hot-toast";
-import { TourGuide } from "@/components/features/onboarding/TourGuide";
 import { GlobalErrorBoundary } from "@/components/GlobalErrorBoundary";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { ChatbotWidget } from "@/components/features/chatbot/ChatbotWidget";
@@ -52,7 +51,6 @@ export default function RootLayout({
                   {children}
                 </PageTransition>
               </GlobalErrorBoundary>
-              <TourGuide />
               <ChatbotWidget />
               <Toaster position="bottom-right" toastOptions={{
                 style: { background: 'var(--glass-bg)', color: 'var(--foreground)', backdropFilter: 'blur(12px)', border: '1px solid var(--glass-border)' },

@@ -413,7 +413,7 @@
   },
   "navGroups": {
     "inicio": "Hasiera",
-    "inicio_desc": "Nondik hasi: zure fitxategiak, laguntza, eta kontsultarako katalogoak eta araudia — talde bat irekita izan ala ez, berdin.",
+    "inicio_desc": "Nondik hasi: zure panela, zure fitxategiak eta aplikazioaren laguntza — talde bat irekita izan ala ez, berdin.",
     "general": "Orokorra",
     "programacion": "Programazioa",
     "curso": "Ikasturtea",
@@ -2783,17 +2783,21 @@
         }
       },
       "mapaAplicacionTitulo": "Aplikazioaren mapa (sitemap)",
-      "mapaAplicacionDescPre": "Cuaderno FParen antolaketa-egitura. Nabigazioaren benetako konfiguraziotik sortzen da (",
-      "mapaAplicacionDescPost": "), beraz ezin da bere aurreko bertsioa bezala zaharkituta geratu.",
+      "mapaAplicacionDescPre": "Cuaderno FParen antolaketa-egitura. Orrialde-zerrenda nabigazioaren benetako konfiguraziotik sortzen da (",
+      "mapaAplicacionDescPost": "), beraz zaharkituta gera daitezke fitxa bat gehitzen edo kentzen bada hemen ere eguneratu gabe.",
       "agrupamientoPreguntaTitulo": "Egokia al da uneko taldekatzea?",
-      "agrupamientoRespuestaPre": "Bai: abiapuntua argi bereizten du (",
-      "agrupamientoInicioDesc": ": Panela/Laguntza/Araudia/Katalogoa — noizbehinkako kontsultarako, taldea irekita egon beharrik gabe), laneko espazio aktiboa (",
+      "agrupamientoRespuestaPre": "Bai: erabilgarritasun unibertsala argi bereizten du (",
+      "agrupamientoInicioDesc": ": Panela/Fitxategia/Laguntza — taldea irekita egon beharrik gabe), programazioaren diseinua (",
       "grupoLabel": "Taldea",
       "agrupamientoGrupoDesc": ": Fitxategia/Agenda/Legala/MagIA — fitxategien kudeaketa, eguneroko agenda eta laguntza-tresnak), berrerabilgarria dena (",
       "programacionLabel": "Programazioa",
-      "agrupamientoProgramacionDesc": ": Testuingurua/Curriculuma/Metodologia/Tresnak) eta urteari dagokion berariazkoa (",
-      "agrupamientoCursoDesc": ": Egutegia/Ikasleak/Jarraipena/Kalifikazioak).",
-      "errorCargandoContenido": "Errorea edukia kargatzean."
+      "agrupamientoProgramacionDesc": ": Araudia/Katalogoa/Testuingurua/Curriculuma/Metodologia/Tresna) eta benetako ikasturtearen eguneroko lana (",
+      "agrupamientoCursoDesc": ": Agenda/Egutegia/Ikasleak/Jarraipena/Kalifikazioa/MagIA). ",
+      "errorCargandoContenido": "Errorea edukia kargatzean.",
+      "iniciarRecorrido": "Hasi gidatutako ibilbidea",
+      "mapaAplicacionDescMid": "). Orrialde bakoitzaren fitxak eskuz mantentzen dira fitxategi honetan bertan (",
+      "agrupamientoLegalDesc": "Legal bereiz bizi da, sidebarraren oinean esteka gisa: betetze-eduki da, ez lan-tresna.",
+      "legalMapaTitulo": "Legal (sidebarraren oina)"
     },
     "calificaciones": {
       "sinCursoNiProgramacionTitulo": "Ez dago ikastarorik ez programaziorik kargatuta",
