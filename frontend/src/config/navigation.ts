@@ -12,7 +12,7 @@ import { Activity, Award, Calendar, CalendarDays, Compass, FileText, FolderOpen,
 // día a día de un curso real) — ver 01 Histórico.md.
 export const navGroups = [
   {
-    title: "Inicio",
+    title: "General",
     sectionDescription: "Por dónde empezar: tu panel, tus ficheros y la ayuda de la aplicación — todo independiente de tener un grupo abierto.",
     items: [
       { href: "/inicio?tab=bienvenida", label: "Panel", icon: Activity, description: "Panel principal, verificación de datos, contribuciones de la comunidad y calidad EQAVET." },
