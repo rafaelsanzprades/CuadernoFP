@@ -204,43 +204,45 @@ export default function Sidebar() {
         className={`sidebar-scroll-container flex-1 ${isSidebarOpen ? 'px-3' : 'px-2'} py-2 space-y-3 overflow-x-hidden overflow-y-auto scrollbar-hide`}
       >
 
-        {/* Inicio (header + fecha DEMO/REAL + fichero de grupo abierto): items
-            del bloque Inicio (Panel/Archivo/Ayuda), mismo hueco que
+        {/* General (fecha DEMO/REAL + header + fichero de grupo abierto):
+            items del bloque General (Panel/Archivo/Ayuda), mismo hueco que
             Programación/Curso. Fusiona lo que antes eran dos bloques
             separados (Inicio y General) en uno solo — Archivo, que abre
-            grupos, vive ahora dentro de este mismo bloque, así que se
-            muestran ambos indicadores (fecha y fichero de grupo) juntos. */}
+            grupos, vive ahora dentro de este mismo bloque. La fecha va antes
+            del título porque es un indicador global de la app, no algo
+            propio de este bloque en particular (a diferencia del fichero de
+            grupo, que sí lo es). */}
         <div className="flex flex-col gap-0.5 mb-2 shrink-0">
-          {isSidebarOpen && (
-            <div className="text-body font-bold text-foreground/90 tracking-wide px-1">
-              {t('navGroups.inicio', { defaultValue: 'Inicio' })}
-            </div>
-          )}
           {isSidebarOpen ? (
-            <>
-              <Link
-                href="/archivos"
-                onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
-                className="mx-1 text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
-                style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
-              >
-                <CalendarDays className="w-3.5 h-3.5 shrink-0" />
-                <span suppressHydrationWarning className="truncate">
-                  {t('sidebar.fecha', { defaultValue: 'Fecha' })} {dataSource === 'demo' ? 'DEMO' : 'REAL'}: {isMounted ? dateStr : ''}
-                </span>
-              </Link>
-              <Link
-                href="/archivos"
-                onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
-                className="mx-1 text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
-                style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
-              >
-                <FolderOpen className="w-3.5 h-3.5 shrink-0" />
-                <span className="truncate">{groupFileSource.fileName ? groupFileSource.fileName.replace(/\.fpg$/, '') : t('sidebar.abrir_grupo')}</span>
-              </Link>
-            </>
+            <Link
+              href="/archivos"
+              onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
+              className="mx-1 text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
+              style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
+            >
+              <CalendarDays className="w-3.5 h-3.5 shrink-0" />
+              <span suppressHydrationWarning className="truncate">
+                {t('sidebar.fecha', { defaultValue: 'Fecha' })} {dataSource === 'demo' ? 'DEMO' : 'REAL'}: {isMounted ? dateStr : ''}
+              </span>
+            </Link>
           ) : (
             <div className="w-8 h-px bg-foreground/10 mx-auto" />
+          )}
+          {isSidebarOpen && (
+            <div className="text-body font-bold text-foreground/90 tracking-wide px-1 mt-2">
+              {t('navGroups.general', { defaultValue: 'General' })}
+            </div>
+          )}
+          {isSidebarOpen && (
+            <Link
+              href="/archivos"
+              onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
+              className="mx-1 text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
+              style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
+            >
+              <FolderOpen className="w-3.5 h-3.5 shrink-0" />
+              <span className="truncate">{groupFileSource.fileName ? groupFileSource.fileName.replace(/\.fpg$/, '') : t('sidebar.abrir_grupo')}</span>
+            </Link>
           )}
           {isSidebarOpen && <div className="h-px bg-[var(--glass-border)] mx-1" />}
           {navGroups[0]?.items.map((page) => {

@@ -150,11 +150,11 @@ export default function InicioPage() {
             <div className="space-y-12">
               {navGroups.map((group, groupIdx) => {
                 const baseTitle = group.title.replace(/\s*\[.*\]$/, '');
-                const translatedTitle = baseTitle === "Inicio" ? t('navGroups.inicio', { defaultValue: 'Inicio' })
+                const translatedTitle = baseTitle === "General" ? t('navGroups.general', { defaultValue: 'General' })
                   : baseTitle === "Programación" ? t('navGroups.programacion', { defaultValue: 'Programación' })
                   : baseTitle === "Curso" ? t('navGroups.curso', { defaultValue: 'Curso' })
                   : baseTitle;
-                const translatedSectionDesc = baseTitle === "Inicio" ? t('navGroups.inicio_desc', { defaultValue: group.sectionDescription })
+                const translatedSectionDesc = baseTitle === "General" ? t('navGroups.general_desc', { defaultValue: group.sectionDescription })
                   : baseTitle === "Programación" ? t('navGroups.programacion_desc', { defaultValue: group.sectionDescription })
                   : baseTitle === "Curso" ? t('navGroups.curso_desc', { defaultValue: group.sectionDescription })
                   : group.sectionDescription;
