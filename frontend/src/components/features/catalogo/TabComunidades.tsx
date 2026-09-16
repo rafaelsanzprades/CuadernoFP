@@ -291,8 +291,11 @@ export function TabComunidades({ searchQuery = "" }: Props) {
             <svg
               className="w-full max-w-lg h-auto"
               xmlns="http://www.w3.org/2000/svg"
-              // Ajustamos el viewBox para recortar el espacio vacío del sur y escalar el mapa
-              viewBox="20 0 593 410"
+              // Ajustamos el viewBox para recortar el espacio vacío del sur y escalar el mapa.
+              // Altura medida con getBBox() real: la península llega hasta y≈276 y el recuadro
+              // de Canarias (ya trasladado) hasta y≈300 -- 320 deja un margen pequeño sin
+              // reservar los ~80px de lienzo vacío que sobraban con la altura anterior (410).
+              viewBox="20 0 593 320"
             >
               {SPAIN_PATHS.map((item) => {
                 const ccaa = CCAA_MAP[item.ccaaId];
@@ -300,9 +303,10 @@ export function TabComunidades({ searchQuery = "" }: Props) {
                 const isActive = activeId === item.ccaaId;
                 const isDemo = item.ccaaId === "aragon";
                 
-                // Si es Canarias, lo movemos a la izquierda de la península
+                // Si es Canarias, lo movemos a la izquierda de la península y lo subimos
+                // para que ocupe menos alto (ver ajuste de viewBox más arriba).
                 const isCanarias = item.ccaaId === "canarias";
-                const transform = isCanarias ? "translate(20, -220)" : undefined;
+                const transform = isCanarias ? "translate(20, -250)" : undefined;
 
                 return (
                   <g key={item.svgId} transform={transform}>
