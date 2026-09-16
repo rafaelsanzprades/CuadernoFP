@@ -283,9 +283,6 @@ export function TabComunidades({ searchQuery = "" }: Props) {
             <MapPin className="w-5 h-5 text-primary" />
             <h3 className="font-semibold">{t('campos.catalogo.tituloMapaCcaa', {defaultValue: 'Mapa de CCAA con currículo FP'})}</h3>
           </div>
-          <p className="text-caption text-muted mb-4">
-            {t('campos.catalogo.instruccionMapaCcaa', {defaultValue: 'Haz clic en una comunidad para ver su detalle. Fuente: '})}<a href="https://todofp.es" target="_blank" rel="noopener" className="underline text-primary">todofp.es</a>
-          </p>
 
           <div className="flex justify-center">
             <svg
@@ -350,8 +347,13 @@ export function TabComunidades({ searchQuery = "" }: Props) {
         </Card>
 
         {/* Card detalle CCAA seleccionada */}
-        <Card className="lg:col-span-2 p-4">
-          <DetalleCCAA ccaa={CCAA_MAP[selected]} />
+        <Card className="lg:col-span-2 p-4 flex flex-col">
+          <div className="flex-1">
+            <DetalleCCAA ccaa={CCAA_MAP[selected]} />
+          </div>
+          <p className="text-caption text-muted text-right mt-4">
+            {t('campos.catalogo.fuenteMapaCcaa', {defaultValue: 'Fuente: '})}<a href="https://todofp.es" target="_blank" rel="noopener" className="underline text-primary">todofp.es</a>
+          </p>
         </Card>
       </div>
 
