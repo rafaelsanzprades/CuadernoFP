@@ -244,26 +244,27 @@ export function TabComunidades({ searchQuery = "" }: Props) {
   const globalData = useAppStore((state) => state.globalData);
   const updateGlobalData = useAppStore((state) => state.updateGlobalData);
   
-  // Mapping local string id to DB region_id (mock)
+  // Mapping local string id -> DB region_id, solo para las regiones que de
+  // verdad existen en la tabla `regions` (hoy solo Aragón) -- necesario para
+  // el filtro de familias por región de /catalogo. La ficha de información
+  // de esta pestaña (columna derecha) es puramente local/estática y no
+  // depende de que exista ese id: antes ambas cosas compartían el mismo
+  // estado (globalData.regionId), así que al hacer clic en cualquier CCAA
+  // sin id real en regionIdMap, el "|| 1" recaía siempre en Aragón y la
+  // columna derecha nunca cambiaba (bug real, reportado por Rafael).
   const regionIdMap: Record<string, number> = {
     "aragon": 1,
-    "cataluna": 2, // fake for testing
   };
-  
-  const reverseRegionMap: Record<number, string> = {
-    1: "aragon",
-    2: "cataluna",
-  };
-  
-  const selected = globalData?.regionId ? reverseRegionMap[globalData.regionId] || "aragon" : "aragon";
-  
-  const setSelected = (id: string | null) => {
-    const rId = id ? regionIdMap[id] || 1 : 1;
-    updateGlobalData('regionId', rId);
+
+  const [selected, setSelectedLocal] = useState<string>("aragon");
+
+  const setSelected = (id: string) => {
+    setSelectedLocal(id);
+    const rId = regionIdMap[id];
+    if (rId) updateGlobalData('regionId', rId);
   };
 
   const activeId = hovered || selected;
-  const activeCCAA = activeId ? CCAA_MAP[activeId] : null;
 
   // Build a lookup from svgId → ccaaId
   const svgToCcaa = useMemo(() => {
@@ -333,42 +334,20 @@ export function TabComunidades({ searchQuery = "" }: Props) {
                       className="cursor-pointer transition-all duration-200"
                       onMouseEnter={() => setHovered(item.ccaaId)}
                       onMouseLeave={() => setHovered(null)}
-                      onClick={() => setSelected(selected === item.ccaaId ? null : item.ccaaId)}
+                      onClick={() => setSelected(item.ccaaId)}
                     >
-                      <title>{ccaa.nombre} ({ccaa.siglas}) — {ccaa.bo}</title>
+                      <title>{`${ccaa.nombre} (${ccaa.siglas}) — ${ccaa.bo}`}</title>
                     </path>
                   </g>
                 );
               })}
             </svg>
           </div>
-
-          {/* Tooltip flotante */}
-          {activeCCAA && (
-            <div className="mt-3 p-3 rounded-lg border bg-accent/5 text-center">
-              <p className="font-semibold text-body">{activeCCAA.nombre}</p>
-              <p className="text-caption text-muted">
-                {activeCCAA.siglas} — {activeCCAA.bo}
-                {activeCCAA.id === "aragon" && (
-                  <Badge variant="info" className="ml-2 text-caption">{t('campos.catalogo.badgeDemo', {defaultValue: 'DEMO'})}</Badge>
-                )}
-              </p>
-            </div>
-          )}
         </Card>
 
         {/* Card detalle CCAA seleccionada */}
         <Card className="lg:col-span-2 p-4">
-          {selected && CCAA_MAP[selected] ? (
-            <DetalleCCAA ccaa={CCAA_MAP[selected]} />
-          ) : (
-            <div className="flex flex-col items-center justify-center h-full text-center py-12">
-              <MapPin className="w-10 h-10 text-muted mb-3" />
-              <p className="text-body text-muted">
-                {t('campos.catalogo.mensajeSeleccionaCcaa', {defaultValue: 'Selecciona una comunidad autónoma en el mapa para ver su información detallada.'})}
-              </p>
-            </div>
-          )}
+          <DetalleCCAA ccaa={CCAA_MAP[selected]} />
         </Card>
       </div>
 
@@ -404,7 +383,7 @@ export function TabComunidades({ searchQuery = "" }: Props) {
                   className={`border-b cursor-pointer hover:bg-accent/10 transition-colors ${
                     selected === ccaa.id ? "bg-accent/15" : ""
                   }`}
-                  onClick={() => setSelected(selected === ccaa.id ? null : ccaa.id)}
+                  onClick={() => setSelected(ccaa.id)}
                 >
                   <td className="py-2 px-3 text-muted">{i + 1}</td>
                   <td className="py-2 px-3 font-medium">
