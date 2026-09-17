@@ -2878,6 +2878,8 @@
       "metodologiaDesc": "Estrategia metodologikoak eta baliabideak.",
       "instrumentosTitulo": "Tresnak",
       "instrumentosDesc": "Ebaluazio-tresnen definizioa eta pisuak.",
+      "coberturaCeTitulo": "EI × Tresna estaldura-matrizea",
+      "coberturaCeDesc": "Zein tresnak ebaluatzen duen Ebaluazio Irizpide bakoitza, ebaluazio-aldiaren arabera koloreztatuta (Tresnak > JEG eredua atalean bezala).",
       "calendarioDesc": "Ordutegia, hiruhilekoak, jaiegunak eta ekitaldiak.",
       "calendarioAcademicoDesc": "Ikasturtearen ikuspegi orokorra, datak, saioak eta ekitaldiekin.",
       "alumnadoDesc": "Banakako fitxak eta gelan kokapena.",

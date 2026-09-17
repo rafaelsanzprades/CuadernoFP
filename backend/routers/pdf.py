@@ -59,6 +59,7 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
         from pdf_seguimiento_diario import generar_pdf_seguimiento
         from pdf_planificacion import generar_pdf_planificacion
         from pdf_matrices import generar_pdf_matrices
+        from pdf_cobertura_ce import generar_pdf_cobertura_ce
         from pdf_boletin_grupal import generar_pdf_boletin_grupal, generar_pdf_boletin_grupal_final
         from pdf_boletin_individual import generar_pdf_boletin_individual
         from pdf_clases_ud import generar_pdf_clases_ud
@@ -133,6 +134,9 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             elif type == "matrices":
                 from pdf_matrices import generar_docx_matrices
                 docx_bytes = generar_docx_matrices(info_modulo, df_ra, df_ud, df_act)
+            elif type == "cobertura_ce":
+                from pdf_cobertura_ce import generar_docx_cobertura_ce
+                docx_bytes = generar_docx_cobertura_ce(info_modulo, df_ce, df_indicadores, df_instr)
             elif type in ("grupal_1t", "grupal_2t", "grupal_3t"):
                 from pdf_boletin_grupal import generar_docx_boletin_grupal
                 tri = type.split("_")[1].upper()
@@ -199,6 +203,8 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             buffer = generar_pdf_planificacion(info_modulo, df_ud, df_sgmt, daily_ledger, horario, info_fechas, calendar_notes)
         elif type == "matrices":
             buffer = generar_pdf_matrices(info_modulo, df_ra, df_ud, df_act)
+        elif type == "cobertura_ce":
+            buffer = generar_pdf_cobertura_ce(info_modulo, df_ce, df_indicadores, df_instr)
         elif type == "grupal_1t":
             buffer = generar_pdf_boletin_grupal("1T", info_modulo, df_al, df_eval, df_act, fecha_corte, escalas_evaluacion)
         elif type == "grupal_2t":

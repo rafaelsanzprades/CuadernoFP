@@ -2878,6 +2878,8 @@
       "metodologiaDesc": "Estratègies metodològiques i recursos.",
       "instrumentosTitulo": "Instruments",
       "instrumentosDesc": "Definició i pesos de les eines d'avaluació.",
+      "coberturaCeTitulo": "Matriu de cobertura CA × Instrument",
+      "coberturaCeDesc": "Quins instruments avaluen cada Criteri d'avaluació, acolorits per període d'avaluació (igual que a Instruments > Model JEG).",
       "calendarioDesc": "Horari, trimestres, festius i esdeveniments.",
       "calendarioAcademicoDesc": "Vista global del curs amb dates, sessions i esdeveniments.",
       "alumnadoDesc": "Fitxes personals i ubicació a l'aula.",
