@@ -2878,6 +2878,8 @@
       "metodologiaDesc": "Methodological strategies and resources.",
       "instrumentosTitulo": "Instruments",
       "instrumentosDesc": "Definition and weights of the assessment tools.",
+      "coberturaCeTitulo": "CE × Instrument coverage matrix",
+      "coberturaCeDesc": "Which instruments assess each Assessment Criterion, colour-coded by evaluation period (same as in Instruments > JEG Model).",
       "calendarioDesc": "Schedule, terms, holidays and events.",
       "calendarioAcademicoDesc": "Global view of the year with dates, sessions and events.",
       "alumnadoDesc": "Personal records and classroom seating.",

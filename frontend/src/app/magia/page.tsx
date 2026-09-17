@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Calculator, Calendar, CalendarDays, Download, FileEdit, FileSpreadsheet, FileText, FileStack, FolderOpen, GitCompare, GraduationCap, Scale, Sparkles, User, Users, X, Grid, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp, Compass, Lightbulb, Wrench } from "lucide-react";
+import { BarChart, Calculator, Calendar, CalendarDays, Download, FileEdit, FileSpreadsheet, FileText, FileStack, FolderOpen, GitCompare, GraduationCap, Scale, Sparkles, User, Users, X, Grid, Grid3x3, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp, Compass, Lightbulb, Wrench } from "lucide-react";
 import * as XLSX from "xlsx";
 import React, { useState, useEffect, useMemo } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -502,8 +502,16 @@ export default function MagiaPage() {
                         {/* ── Instrumentos ── */}
                         <Card className="p-6 border-t-4 border-t-teal-500">
                           <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Wrench className="w-4 h-4" /></span> {t('campos.magia.instrumentosTitulo', {defaultValue: 'Instrumentos'})}</h2>
-                          <p className="text-body text-muted mb-2">{t('campos.magia.instrumentosDesc', {defaultValue: 'Definición y pesos de las herramientas de evaluación.'})}</p>
-                          <p className="text-caption text-muted italic">{t('campos.magia.sinDocumentosApoyo', {defaultValue: 'Sin documentos de apoyo todavía en esta sección.'})}</p>
+                          <p className="text-body text-muted mb-6">{t('campos.magia.instrumentosDesc', {defaultValue: 'Definición y pesos de las herramientas de evaluación.'})}</p>
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                              <div>
+                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Grid3x3 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.coberturaCeTitulo', {defaultValue: 'Matriz de cobertura CE × Instrumento'})}</h3>
+                                <p className="text-body text-muted mb-6">{t('campos.magia.coberturaCeDesc', {defaultValue: 'Qué instrumentos evalúan cada Criterio de evaluación, coloreados por evaluación (igual que en Instrumentos > Modelo JEG).'})}</p>
+                              </div>
+                              <DualDownloadButtons type="cobertura_ce" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
+                            </div>
+                          </div>
                         </Card>
                       </div>
                     )}
