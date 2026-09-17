@@ -31,6 +31,18 @@ const PERIODOS_EVALUACION = [
   { id: "EvFE", label: "EvFE — Final extraordinaria" },
 ];
 
+// Mismos colores que usa el calendario para cada trimestre (InteractiveCalendar.tsx:
+// purple=1er, teal=2º, amber=3er) -- para que la matriz de cobertura se lea con el
+// mismo código de color que ya conoce el docente del resto de la app. EvFO/EvFE no
+// son un trimestre real, así que quedan en un gris neutro en vez de inventarles color.
+const COLOR_POR_EVALUACION: Record<string, { header: string; mark: string }> = {
+  Ev1: { header: "text-purple-400", mark: "bg-purple-500/15 text-purple-400" },
+  Ev2: { header: "text-teal-400", mark: "bg-teal-500/15 text-teal-400" },
+  Ev3: { header: "text-amber-400", mark: "bg-amber-500/15 text-amber-400" },
+  EvFO: { header: "text-muted", mark: "bg-foreground/10 text-muted" },
+  EvFE: { header: "text-muted", mark: "bg-foreground/10 text-muted" },
+};
+
 const AGENTES = [
   { id: "heteroevaluacion", label: "Heteroevaluación (profesor)" },
   { id: "coevaluacion", label: "Coevaluación (entre alumnado)" },
@@ -372,9 +384,17 @@ export function JegModeloTab() {
           referencia del Ítem 43, pero adaptada a nuestra cadena real
           Instrumento→Indicador→CE en vez de Instrumento→CE directo. */}
       <div className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] p-4">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-2">
           <Grid3x3 className="w-5 h-5 text-purple-400" /> {t('campos.instrumentos.matrizCoberturaTitulo', { defaultValue: 'Matriz de cobertura CE × Instrumento' })}
         </h2>
+        {/* Mismos colores que el calendario (Calendario > Fechas y horario): 1er/2º/3er
+            trimestre = morado/verde azulado/ámbar. EvFO/EvFE no son un trimestre, van en gris. */}
+        <div className="flex flex-wrap gap-3 mb-4 text-caption text-muted">
+          <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-purple-500" /> Ev1</span>
+          <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-teal-500" /> Ev2</span>
+          <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-amber-500" /> Ev3</span>
+          <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-foreground/30" /> EvFO / EvFE</span>
+        </div>
         {ceOptions.length === 0 || df_instr.length === 0 ? (
           <p className="text-body text-muted">{t('campos.instrumentos.matrizCoberturaSinDatos', { defaultValue: 'Añade Criterios de evaluación e Instrumentos para ver aquí qué CE quedan sin ningún instrumento que los evalúe.' })}</p>
         ) : (
@@ -384,7 +404,13 @@ export function JegModeloTab() {
                 <tr className="border-b border-[var(--glass-border)] text-muted">
                   <th className="p-2 sticky left-0 bg-foreground/5 z-10">{t('tablas.instrumentos.criterio', { defaultValue: 'CE' })}</th>
                   {df_instr.map((instr: any) => (
-                    <th key={instr.id_instrumento} className="p-2 text-center font-mono" title={instr.titulo || instr.id_instrumento}>{instr.id_instrumento}</th>
+                    <th
+                      key={instr.id_instrumento}
+                      className={`p-2 text-center font-mono ${COLOR_POR_EVALUACION[instr.evaluacion]?.header || "text-muted"}`}
+                      title={`${instr.titulo || instr.id_instrumento} (${instr.evaluacion})`}
+                    >
+                      {instr.id_instrumento}
+                    </th>
                   ))}
                   <th className="p-2 text-center">{t('tablas.instrumentos.cobertura', { defaultValue: 'Cobertura' })}</th>
                 </tr>
@@ -399,7 +425,12 @@ export function JegModeloTab() {
                       <td className="p-2 font-mono font-bold sticky left-0 bg-background/60 text-info">{ce.id}</td>
                       {df_instr.map((instr: any) => {
                         const marca = (instr.indicadores_vinculados || []).some((id: string) => indsDeEsteCe.includes(id));
-                        return <td key={instr.id_instrumento} className="p-2 text-center">{marca ? <span className="text-success font-bold">✓</span> : ''}</td>;
+                        const colorCls = COLOR_POR_EVALUACION[instr.evaluacion]?.mark || "bg-foreground/10 text-muted";
+                        return (
+                          <td key={instr.id_instrumento} className="p-2 text-center">
+                            {marca ? <span className={`inline-flex items-center justify-center w-6 h-6 rounded-full font-bold ${colorCls}`}>✓</span> : ''}
+                          </td>
+                        );
                       })}
                       <td className="p-2 text-center">
                         {cubierto
