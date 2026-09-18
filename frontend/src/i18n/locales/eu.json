@@ -30,9 +30,7 @@
     "ud": "Unitateak",
     "relacion": "Erlazioa RA-UD",
     "contribucion": "Ekarpena OG",
-    "tri1": "1. Eb.",
-    "tri2": "2. Eb.",
-    "tri3": "3. Eb.",
+    "trimestres": "Hiruhilekoak",
     "secuenciacion": "Sekuentziazioa",
     "tareas": "Zereginak (TC)",
     "archivos_nube": "Fitxategiak Hodeian",
@@ -220,14 +218,8 @@
       "resumen": {
         "desc": "Erabilitako ebaluazio-tresnen ikuspegi orokorra (RD 659/2023, 136. art.) eta, behean, adierazleen araberako JEG eredu esperimentala."
       },
-      "tri1": {
-        "desc": "1. hiruhilekorako aurreikusitako ebaluazio-tresnak."
-      },
-      "tri2": {
-        "desc": "2. hiruhilekorako aurreikusitako ebaluazio-tresnak."
-      },
-      "tri3": {
-        "desc": "3. hiruhilekorako aurreikusitako ebaluazio-tresnak."
+      "trimestres": {
+        "desc": "Hiruhileko bakoitzerako aurreikusitako ebaluazio-tresnak."
       },
       "rubricas": {
         "nav": "Errubrikak",
