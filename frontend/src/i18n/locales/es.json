@@ -60,11 +60,11 @@
     }
   },
   "inicio": {
-    "title": "Panel",
+    "title": "Inicio",
     "subtitle": "Panel principal, contribuciones de la comunidad, documentos de referencia y calidad EQAVET."
   },
   "nav": {
-    "inicio": "Panel",
+    "inicio": "Inicio",
     "agenda": "Agenda",
     "perfil": "Perfil",
     "archivos": "Archivo",

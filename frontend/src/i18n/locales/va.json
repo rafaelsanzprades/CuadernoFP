@@ -381,11 +381,11 @@
     "legislacion": "Legislació"
   },
   "inicio": {
-    "title": "Panell",
+    "title": "Inici",
     "subtitle": "Panell principal, contribucions de la comunitat, documents de referència i qualitat EQAVET."
   },
   "nav": {
-    "inicio": "Panell",
+    "inicio": "Inici",
     "agenda": "Agenda",
     "perfil": "Perfil",
     "archivos": "Arxius",
@@ -612,10 +612,8 @@
     },
     "curriculo": {
       "errorGuardar": "Error en desar les dades.",
-      "errorGuardarPropuesta": "Error en desar després d'aplicar la proposta.",
       "planAutocompletado": "Pla de sessions autocompletat.",
       "programacionGuardada": "Programació desada correctament.",
-      "propuestaAplicada": "Proposta de {{author}} aplicada i desada.",
       "repartidoPorRelevancia": "Pesos recalculats a partir de la Rellevància de cada CE."
     },
     "detalleAlumnado": {
@@ -762,10 +760,7 @@
       "anadirNuevaUd": "Afegir nova UD",
       "anadirNuevoRa": "Afegir nou RA",
       "aplicarACeldas": "Aplicar a {{count}} cel·les",
-      "aplicarPropuesta": "Aplicar proposta",
       "autocompletarPlan": "Autocompletar pla",
-      "cargarPropuestaEditorial": "Carregar proposta editorial",
-      "volverALaLista": "Tornar a la llista",
       "descargarPdfMagia": "Descarregar PDF/DOCX a MagIA",
       "repartirPorRelevancia": "Repartir per rellevància"
     },
@@ -2241,14 +2236,7 @@
       "sumaPesos": "Suma: {{pct}}%",
       "resumenPorTrimestresTitulo": "Resum d'instruments d'avaluació per trimestres"
     },
-    "matrices": {
-      "atencionSobrescribirDescripcion": "Es reemplaçaran les teves unitats didàctiques (UD/T), la relació entre RA i UD/T, i la matriu de contribució RA-OG. Assegura't que hi estàs d'acord abans d'aplicar.",
-      "atencionSobrescribirTitulo": "Atenció: aquesta acció sobreescriurà dades actuals",
-      "noHayPropuestas": "No hi ha propostes disponibles",
-      "noHayPropuestasDescripcion": "Actualment no existeixen seqüenciacions predefinides d'autors o editorials per al mòdul {{moduleCode}}.",
-      "propuestasEditorialesDescripcion": "Selecciona una proposta predefinida per a aquest mòdul ({{moduleCode}})",
-      "propuestasEditorialesTitulo": "Propostes editorials / autors"
-    },
+    "matrices": {},
     "catalogo": {
       "tituloAcronimosGlosario": "Acrònims i glossari",
       "sinResultadosParaBusqueda": "No s'han trobat resultats per a \"{{termino}}\"",

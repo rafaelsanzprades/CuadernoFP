@@ -381,11 +381,11 @@
     "legislacion": "Lexislación"
   },
   "inicio": {
-    "title": "Panel",
+    "title": "Inicio",
     "subtitle": "Panel principal, contribucións da comunidade, documentos de referencia e calidade EQAVET."
   },
   "nav": {
-    "inicio": "Panel",
+    "inicio": "Inicio",
     "agenda": "Axenda",
     "perfil": "Perfil",
     "archivos": "Arquivos",
@@ -612,10 +612,8 @@
     },
     "curriculo": {
       "errorGuardar": "Erro ao gardar os datos.",
-      "errorGuardarPropuesta": "Erro ao gardar tras aplicar a proposta.",
       "planAutocompletado": "Plan de sesións autocompletado.",
       "programacionGuardada": "Programación gardada correctamente.",
-      "propuestaAplicada": "Proposta de {{author}} aplicada e gardada.",
       "repartidoPorRelevancia": "Pesos recalculados a partir da Relevancia de cada CE."
     },
     "detalleAlumnado": {
@@ -762,10 +760,7 @@
       "anadirNuevaUd": "Engadir nova UD",
       "anadirNuevoRa": "Engadir novo RA",
       "aplicarACeldas": "Aplicar a {{count}} celas",
-      "aplicarPropuesta": "Aplicar proposta",
       "autocompletarPlan": "Autocompletar plan",
-      "cargarPropuestaEditorial": "Cargar proposta editorial",
-      "volverALaLista": "Volver á lista",
       "descargarPdfMagia": "Descargar PDF/DOCX en MagIA",
       "repartirPorRelevancia": "Repartir por relevancia"
     },
@@ -2241,14 +2236,7 @@
       "sumaPesos": "Suma: {{pct}}%",
       "resumenPorTrimestresTitulo": "Resumo de instrumentos de avaliación por trimestres"
     },
-    "matrices": {
-      "atencionSobrescribirDescripcion": "Substituiranse as túas Unidades didácticas (UD/T), a relación entre RA e UD/T, e a matriz de contribución RA-OG. Asegúrate de que estás de acordo antes de aplicar.",
-      "atencionSobrescribirTitulo": "Atención: Esta acción substituirá datos actuais",
-      "noHayPropuestas": "Non hai propostas dispoñibles",
-      "noHayPropuestasDescripcion": "Actualmente non existen secuenciacións predefinidas de autores ou editoriais para o módulo {{moduleCode}}.",
-      "propuestasEditorialesDescripcion": "Selecciona unha proposta predefinida para este módulo ({{moduleCode}})",
-      "propuestasEditorialesTitulo": "Propostas editoriais / autores"
-    },
+    "matrices": {},
     "catalogo": {
       "tituloAcronimosGlosario": "Acrónimos e glosario",
       "sinResultadosParaBusqueda": "Non se atoparon resultados para \"{{termino}}\"",
