@@ -381,11 +381,11 @@
     "legislacion": "Legislation"
   },
   "inicio": {
-    "title": "Panel",
+    "title": "Home",
     "subtitle": "Main dashboard, community contributions, reference documents and EQAVET quality."
   },
   "nav": {
-    "inicio": "Panel",
+    "inicio": "Home",
     "agenda": "Agenda",
     "perfil": "Profile",
     "archivos": "Files",
@@ -612,10 +612,8 @@
     },
     "curriculo": {
       "errorGuardar": "Error saving the data.",
-      "errorGuardarPropuesta": "Error saving after applying the proposal.",
       "planAutocompletado": "Session plan auto-completed.",
       "programacionGuardada": "Programming saved successfully.",
-      "propuestaAplicada": "Proposal by {{author}} applied and saved.",
       "repartidoPorRelevancia": "Weights recalculated from each CE's Relevance."
     },
     "detalleAlumnado": {
@@ -762,10 +760,7 @@
       "anadirNuevaUd": "Add new UD",
       "anadirNuevoRa": "Add new RA",
       "aplicarACeldas": "Apply to {{count}} cells",
-      "aplicarPropuesta": "Apply proposal",
       "autocompletarPlan": "Auto-complete plan",
-      "cargarPropuestaEditorial": "Load publisher's proposal",
-      "volverALaLista": "Back to the list",
       "descargarPdfMagia": "Download PDF/DOCX in MagIA",
       "repartirPorRelevancia": "Distribute by relevance"
     },
@@ -2241,14 +2236,7 @@
       "sumaPesos": "Sum: {{pct}}%",
       "resumenPorTrimestresTitulo": "Summary of assessment instruments by term"
     },
-    "matrices": {
-      "atencionSobrescribirDescripcion": "Your teaching units (UD/T), the RA-UD/T relationship, and the RA-OG contribution matrix will be replaced. Make sure you agree before applying.",
-      "atencionSobrescribirTitulo": "Warning: This action will overwrite current data",
-      "noHayPropuestas": "No proposals available",
-      "noHayPropuestasDescripcion": "There are currently no predefined sequences from authors or publishers for module {{moduleCode}}.",
-      "propuestasEditorialesDescripcion": "Select a predefined proposal for this module ({{moduleCode}})",
-      "propuestasEditorialesTitulo": "Publisher / author proposals"
-    },
+    "matrices": {},
     "catalogo": {
       "tituloAcronimosGlosario": "Acronyms and glossary",
       "sinResultadosParaBusqueda": "No results found for \"{{termino}}\"",

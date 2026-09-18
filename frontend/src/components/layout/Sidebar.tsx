@@ -174,7 +174,7 @@ export default function Sidebar() {
   const sidebarContent = (
     <>
       {/* ── Header: título + reloj + botón colapsar ── */}
-      <div className={`px-4 pt-4 pb-2 flex ${isSidebarOpen ? 'justify-between' : 'justify-center'} items-start`}>
+      <div className={`px-4 pt-4 pb-3 flex ${isSidebarOpen ? 'justify-between' : 'justify-center'} items-start`}>
         {isSidebarOpen && (
           <div className="flex flex-col mb-3 w-full pr-2 min-w-0">
               <Link href="/inicio?tab=bienvenida" onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}>
@@ -189,6 +189,17 @@ export default function Sidebar() {
                 <div suppressHydrationWarning className="border border-[var(--glass-border)] bg-background/50 px-2 py-0.5 rounded text-body text-muted/80 font-mono whitespace-nowrap shadow-sm ml-0.5">
                   Versión: {isMounted ? dateCompactStr : '...'}
                 </div>
+                <Link
+                  href="/archivos"
+                  onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
+                  className="text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity ml-0.5"
+                  style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
+                >
+                  <CalendarDays className="w-3.5 h-3.5 shrink-0" />
+                  <span suppressHydrationWarning className="truncate">
+                    {t('sidebar.fecha', { defaultValue: 'Fecha' })} {dataSource === 'demo' ? 'DEMO' : 'REAL'}: {isMounted ? dateStr : ''}
+                  </span>
+                </Link>
               </div>
           </div>
         )}
@@ -213,23 +224,8 @@ export default function Sidebar() {
             propio de este bloque en particular (a diferencia del fichero de
             grupo, que sí lo es). */}
         <div className="flex flex-col gap-0.5 mb-2 shrink-0">
-          {isSidebarOpen ? (
-            <Link
-              href="/archivos"
-              onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
-              className="mx-1 text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
-              style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
-            >
-              <CalendarDays className="w-3.5 h-3.5 shrink-0" />
-              <span suppressHydrationWarning className="truncate">
-                {t('sidebar.fecha', { defaultValue: 'Fecha' })} {dataSource === 'demo' ? 'DEMO' : 'REAL'}: {isMounted ? dateStr : ''}
-              </span>
-            </Link>
-          ) : (
-            <div className="w-8 h-px bg-foreground/10 mx-auto" />
-          )}
           {isSidebarOpen && (
-            <div className="text-body font-bold text-foreground/90 tracking-wide px-1 mt-2">
+            <div className="text-body font-bold text-foreground/90 tracking-wide px-1">
               {t('navGroups.general', { defaultValue: 'General' })}
             </div>
           )}

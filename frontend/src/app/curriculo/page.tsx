@@ -25,8 +25,6 @@ import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { loadCatalogForModule, resolveDescRa, resolveDescCe } from "@/services/catalogCache";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useTranslation } from "react-i18next";
-import { ProposalLoaderModal } from "@/components/features/matrices/ProposalLoaderModal";
-import { PublisherProposal } from "@/data/proposalsData";
 
 export default function MatricesPage() {
   const { activeModuleId, moduleData, setModuleData, updateDataFrame, updateModuleData, saveModuleData, cursoData, updateCursoData, updateInfoModulo } = useAppStore();
@@ -38,7 +36,6 @@ export default function MatricesPage() {
   const [allUdsOpen, setAllUdsOpen] = useState(false);
   const [openCEs, setOpenCEs] = useState<Set<string>>(new Set());
   const [activeTab, setActiveTab] = useState("contribucion-ra-og");
-  const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
   const [catalogLoaded, setCatalogLoaded] = useState(0);
 
   const [isDragging, setIsDragging] = useState(false);
@@ -87,32 +84,6 @@ export default function MatricesPage() {
       toast.error(t('toasts.curriculo.errorGuardar', {defaultValue: "Error al guardar los datos."}));
     }
     setSaving(false);
-  };
-
-  const handleApplyProposal = async (proposal: PublisherProposal) => {
-    // 1. Update UDs
-    const newUdList = proposal.df_ud.map((ud, index) => ({
-      id_ud: ud.id_ud,
-      desc_ud: ud.desc_ud,
-      horas_ud: ud.horas_ud,
-      ra_mappings: ud.ra_mappings
-    }));
-    
-    // 2. Update RA->OG mappings
-    const infoModulo = { ...(moduleData?.info_modulo || {}) };
-    infoModulo.ra_og_mapping = proposal.ra_og_mapping;
-
-    // Apply to store
-    updateDataFrame("df_ud", newUdList);
-    updateInfoModulo("ra_og_mapping", proposal.ra_og_mapping);
-
-    // Save
-    const ok = await saveModuleData();
-    if (ok) {
-      toast.success(t('toasts.curriculo.propuestaAplicada', {author: proposal.author, defaultValue: "Propuesta de {{author}} aplicada y guardada."}));
-    } else {
-      toast.error(t('toasts.curriculo.errorGuardarPropuesta', {defaultValue: "Error al guardar tras aplicar la propuesta."}));
-    }
   };
 
   if (!activeModuleId) {
@@ -335,7 +306,7 @@ export default function MatricesPage() {
           <MotionWrapper className="space-y-4 pb-12">
             <PageHeader icon={Grid} title={t('nav.curriculo', { defaultValue: 'Currículo' })} description={t('pages.matrices_desc')} />
 
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+            <div className="mb-2">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
                 <TabsList className="max-w-full">
                   {TABS.map(tab => (
@@ -346,13 +317,6 @@ export default function MatricesPage() {
                   ))}
                 </TabsList>
               </Tabs>
-              <Button
-                onClick={() => setIsProposalModalOpen(true)}
-                variant="secondary"
-                className="border-info/50 text-info hover:bg-info/10 whitespace-nowrap shadow-sm"
-              >
-                💡 {t('botones.curriculo.cargarPropuestaEditorial', {defaultValue: 'Cargar propuesta editorial'})}
-              </Button>
             </div>
 
             <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
@@ -1005,13 +969,6 @@ export default function MatricesPage() {
           </MotionWrapper>
         </main>
       </div>
-      
-      <ProposalLoaderModal 
-        isOpen={isProposalModalOpen}
-        onClose={() => setIsProposalModalOpen(false)}
-        activeModuleId={activeModuleId}
-        onApplyProposal={handleApplyProposal}
-      />
     </div>
       );
 }

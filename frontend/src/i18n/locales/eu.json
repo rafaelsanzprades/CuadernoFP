@@ -381,11 +381,11 @@
     "legislacion": "Legedia"
   },
   "inicio": {
-    "title": "Panela",
+    "title": "Hasiera",
     "subtitle": "Panel nagusia, komunitatearen ekarpenak, erreferentzia-dokumentuak eta EQAVET kalitatea."
   },
   "nav": {
-    "inicio": "Panela",
+    "inicio": "Hasiera",
     "agenda": "Agenda",
     "perfil": "Profila",
     "archivos": "Fitxategiak",
@@ -612,10 +612,8 @@
     },
     "curriculo": {
       "errorGuardar": "Errorea datuak gordetzean.",
-      "errorGuardarPropuesta": "Errorea proposamena aplikatu ondoren gordetzean.",
       "planAutocompletado": "Saio-plana automatikoki osatuta.",
       "programacionGuardada": "Programazioa ondo gorde da.",
-      "propuestaAplicada": "{{author}}(r)en proposamena aplikatu eta gorde da.",
       "repartidoPorRelevancia": "Pisuak berkalkulatu dira CE bakoitzaren Garrantziaren arabera."
     },
     "detalleAlumnado": {
@@ -762,10 +760,7 @@
       "anadirNuevaUd": "UD berria gehitu",
       "anadirNuevoRa": "RA berria gehitu",
       "aplicarACeldas": "{{count}} gelaxkari aplikatu",
-      "aplicarPropuesta": "Proposamena aplikatu",
       "autocompletarPlan": "Plana automatikoki osatu",
-      "cargarPropuestaEditorial": "Argitaletxearen proposamena kargatu",
-      "volverALaLista": "Zerrendara itzuli",
       "descargarPdfMagia": "Deskargatu PDF/DOCX MagIA-n",
       "repartirPorRelevancia": "Garrantziaren arabera banatu"
     },
@@ -2241,14 +2236,7 @@
       "sumaPesos": "Batura: %{{pct}}",
       "resumenPorTrimestresTitulo": "Ebaluazio-tresnen laburpena hiruhilekoka"
     },
-    "matrices": {
-      "atencionSobrescribirDescripcion": "Zure Didaktika Unitateak (UD/T), RA eta UD/T arteko erlazioa, eta RA-OG ekarpen-matrizea ordeztuko dira. Ziurtatu ados zaudela aplikatu aurretik.",
-      "atencionSobrescribirTitulo": "Kontuz: ekintza honek uneko datuak gainidatziko ditu",
-      "noHayPropuestas": "Ez dago proposamenik erabilgarri",
-      "noHayPropuestasDescripcion": "Gaur egun ez dago egile edo argitaletxeen aurrez definitutako sekuentziaziorik {{moduleCode}} modulurako.",
-      "propuestasEditorialesDescripcion": "Hautatu modulu honetarako aurrez definitutako proposamen bat ({{moduleCode}})",
-      "propuestasEditorialesTitulo": "Argitaletxe / egileen proposamenak"
-    },
+    "matrices": {},
     "catalogo": {
       "tituloAcronimosGlosario": "Akronimoak eta glosarioa",
       "sinResultadosParaBusqueda": "\"{{termino}}\" bilaketarako ez da emaitzarik aurkitu",
