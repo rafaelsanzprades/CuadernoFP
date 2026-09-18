@@ -234,9 +234,6 @@ export const fileManager = {
   /** Create a new empty programación from catalog data */
   async createNewProgramacion(moduleCode: string, moduleName: string, extras?: Record<string, any>): Promise<boolean> {
     try {
-      const store = useAppStore.getState();
-      store.setDataSource("local");
-
       // Fetch RA/CE from catalog
       let df_ra: any[] = [];
       let df_ce: any[] = [];
@@ -307,23 +304,31 @@ export const fileManager = {
 
       const id = `${moduleCode}-pd`;
       const fileName = `P - ${moduleCode} - ${moduleName.replace(/[\\/:*?"<>|]/g, '')}.json`;
-      store.setActiveModuleId(id);
-      store.setModuleData(newModuleData);
 
-      const handle = store.workspaceHandle;
+      // Un unico setState atomico (dataSource + activeModuleId + moduleData
+      // juntos) -- ver nota en loadDemoData(): si se hiciera setDataSource("local")
+      // por separado antes del fetch al catalogo, una navegacion/recarga durante
+      // ese fetch podria persistir dataSource="local" sin moduleData todavia.
+      useAppStore.setState({
+        dataSource: "local",
+        activeModuleId: id,
+        moduleData: newModuleData,
+      });
+
+      const handle = useAppStore.getState().workspaceHandle;
       if (handle) {
         try {
           const fileHandle = await handle.getFileHandle(fileName, { create: true });
           const writable = await fileHandle.createWritable();
           await writable.write(JSON.stringify(newModuleData, null, 2));
           await writable.close();
-          store.setPdFileSource({ type: 'local', fileName, fileHandle });
+          useAppStore.getState().setPdFileSource({ type: 'local', fileName, fileHandle });
         } catch (e) {
           console.error("Failed to write new PD to workspace", e);
-          store.setPdFileSource({ type: 'new', fileName });
+          useAppStore.getState().setPdFileSource({ type: 'new', fileName });
         }
       } else {
-        store.setPdFileSource({ type: 'new', fileName });
+        useAppStore.getState().setPdFileSource({ type: 'new', fileName });
       }
 
       return true;
@@ -348,8 +353,7 @@ export const fileManager = {
     const newId = `${activeModuleId || 'pd'}-${suffix}`.replace(/[\\/:*?"<>|]/g, '');
     const fileName = `P - ${newId}.fpp`;
 
-    store.setActiveModuleId(newId);
-    store.setModuleData(cloned);
+    useAppStore.setState({ activeModuleId: newId, moduleData: cloned });
 
     const handle = store.workspaceHandle;
     if (handle) {
@@ -358,13 +362,13 @@ export const fileManager = {
         const writable = await fileHandle.createWritable();
         await writable.write(JSON.stringify(cloned, null, 2));
         await writable.close();
-        store.setPdFileSource({ type: 'local', fileName, fileHandle });
+        useAppStore.getState().setPdFileSource({ type: 'local', fileName, fileHandle });
       } catch (e) {
         console.error("Failed to write cloned PD to workspace", e);
-        store.setPdFileSource({ type: 'new', fileName });
+        useAppStore.getState().setPdFileSource({ type: 'new', fileName });
       }
     } else {
-      store.setPdFileSource({ type: 'new', fileName });
+      useAppStore.getState().setPdFileSource({ type: 'new', fileName });
     }
 
     return true;
@@ -372,9 +376,6 @@ export const fileManager = {
 
   /** Create a new empty curso */
   async createNewCurso(cursoName: string, year: string): Promise<boolean> {
-    const store = useAppStore.getState();
-    store.setDataSource("local");
-
     const newCursoData: CursoData = {
       df_al: [],
       df_sgmt: [],
@@ -393,18 +394,20 @@ export const fileManager = {
 
     const fileName = `C - ${year} - ${cursoName.replace(/[\\/:*?"<>|]/g, '')}.fpc`;
     const id = fileName;
-    store.setActiveCursoId(id);
-    store.setCursoData(newCursoData);
 
-    const handle = store.workspaceHandle;
-    const pdFileSource = store.pdFileSource;
+    // setState atomico (dataSource + activeCursoId + cursoData) -- ver nota
+    // en loadDemoData().
+    useAppStore.setState({ dataSource: "local", activeCursoId: id, cursoData: newCursoData });
+
+    const handle = useAppStore.getState().workspaceHandle;
+    const pdFileSource = useAppStore.getState().pdFileSource;
     if (handle) {
       try {
         const fileHandle = await handle.getFileHandle(fileName, { create: true });
         const writable = await fileHandle.createWritable();
         await writable.write(JSON.stringify(newCursoData, null, 2));
         await writable.close();
-        store.setCursoFileSource({ type: 'local', fileName, fileHandle });
+        useAppStore.getState().setCursoFileSource({ type: 'local', fileName, fileHandle });
 
         // Also create the Group file
         const groupFileName = `G - ${cursoName.replace(/[\\/:*?"<>|]/g, '')} - ${year}.fpg`;
@@ -437,10 +440,10 @@ export const fileManager = {
 
       } catch (e) {
         console.error("Failed to write new Curso to workspace", e);
-        store.setCursoFileSource({ type: 'new', fileName });
+        useAppStore.getState().setCursoFileSource({ type: 'new', fileName });
       }
     } else {
-      store.setCursoFileSource({ type: 'new', fileName });
+      useAppStore.getState().setCursoFileSource({ type: 'new', fileName });
     }
 
     return true;
@@ -485,11 +488,13 @@ export const fileManager = {
     // We want the ID to start with 0237 so Header formats it correctly
     const id = `0237-demo-${year}`;
 
-    // Update store with new curso
-    store.setDataSource("local");
-    store.setActiveCursoId(id);
-    store.setCursoData(newCursoData);
-    store.setCursoFileSource({ type: 'new', fileName: `${id}.fpc` });
+    // Update store with new curso -- setState atomico, ver nota en loadDemoData().
+    useAppStore.setState({
+      dataSource: "local",
+      activeCursoId: id,
+      cursoData: newCursoData,
+      cursoFileSource: { type: 'new', fileName: `${id}.fpc` },
+    });
     return true;
   },
 
@@ -672,22 +677,12 @@ export const fileManager = {
       const cursoSuccess = await this.importCurso(cursoText, cursoFile.name);
 
       if (pdSuccess && cursoSuccess) {
-        // Also update file sources to use these handles for saving
-        const store = useAppStore.getState();
-        store.setPdFileSource({
-          type: 'local',
-          fileHandle: pdHandle,
-          fileName: pdFile.name,
-        });
-        store.setCursoFileSource({
-          type: 'local',
-          fileHandle: cursoHandle,
-          fileName: cursoFile.name,
-        });
-        store.setGroupFileSource({
-          type: 'local',
-          fileHandle: groupHandle,
-          fileName: groupFileName,
+        // Also update file sources to use these handles for saving -- setState
+        // atomico, ver nota en loadDemoData().
+        useAppStore.setState({
+          pdFileSource: { type: 'local', fileHandle: pdHandle, fileName: pdFile.name },
+          cursoFileSource: { type: 'local', fileHandle: cursoHandle, fileName: cursoFile.name },
+          groupFileSource: { type: 'local', fileHandle: groupHandle, fileName: groupFileName },
         });
         addOrUpdateRecentModule({
           id: groupFileName, nombre: groupData.nombre || groupFileName.replace(/\.(fpg|json)$/i, ''),
@@ -712,16 +707,14 @@ export const fileManager = {
       const pdSuccess = await this.importProgramacion(pdText, pdFile.name);
       
       if (pdSuccess) {
-        const store = useAppStore.getState();
-        store.setPdFileSource({
-          type: 'local',
-          fileHandle: pdHandle,
-          fileName: pdFile.name,
+        // setState atomico (incluye el "descargar" el curso anterior) -- ver
+        // nota en loadDemoData().
+        useAppStore.setState({
+          pdFileSource: { type: 'local', fileHandle: pdHandle, fileName: pdFile.name },
+          activeCursoId: "",
+          cursoData: null,
+          cursoFileSource: { type: 'none' },
         });
-        // Unload curso
-        store.setActiveCursoId("");
-        store.setCursoData(null);
-        store.setCursoFileSource({ type: 'none' });
         return true;
       }
       return false;
@@ -992,8 +985,9 @@ export const fileManager = {
         console.warn("Could not fetch curriculum for module", moduleCode);
       }
 
-      useAppStore.getState().setActiveModuleId(id);
-      useAppStore.getState().setModuleData(parsed);
+      // setState atomico -- ver nota en loadDemoData(); esta funcion la usan
+      // varios flujos de apertura (selector de fichero, recientes, workspace).
+      useAppStore.setState({ activeModuleId: id, moduleData: parsed });
       return true;
     } catch (e) {
       return false;
@@ -1027,8 +1021,8 @@ export const fileManager = {
       parsed = Array.isArray(parsed) ? parsed[0] : parsed;
       if (!parsed || !parsed.df_al) return false;
       const id = filename.replace('.fpc', '').replace('.json', '') || "imported-curso";
-      useAppStore.getState().setActiveCursoId(id);
-      useAppStore.getState().setCursoData(parsed);
+      // setState atomico -- ver nota en importProgramacion() / loadDemoData().
+      useAppStore.setState({ activeCursoId: id, cursoData: parsed });
       return true;
     } catch (e) {
       return false;
