@@ -18,6 +18,7 @@ from reportlab.platypus import BaseDocTemplate, Frame, PageTemplate, Table, Tabl
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import cm
 from reportlab.lib.enums import TA_LEFT, TA_CENTER
+from pdf_helpers import esc
 
 
 def _draw_page_decorations(canv, doc):
@@ -88,12 +89,12 @@ def generar_pdf_ficha_alumnado(info_modulo, al_id, df_al, tutoria_entry=None, at
         buffer.seek(0)
         return buffer
 
-    elements.append(Paragraph(f"{ficha['apellidos']}, {ficha['nombre']}", ParagraphStyle("H1", parent=styles["Heading1"], fontSize=16)))
+    elements.append(Paragraph(esc(f"{ficha['apellidos']}, {ficha['nombre']}"), ParagraphStyle("H1", parent=styles["Heading1"], fontSize=16)))
     ficha_data = [
-        [Paragraph("<b>NIF/NIE:</b>", sml), Paragraph(al_id, sml), Paragraph("<b>Edad:</b>", sml), Paragraph(ficha["edad"], sml)],
-        [Paragraph("<b>Repite:</b>", sml), Paragraph(ficha["repite"], sml), Paragraph("<b>Estado:</b>", sml), Paragraph(ficha["estado"], sml)],
-        [Paragraph("<b>Email:</b>", sml), Paragraph(ficha["email"], sml), Paragraph("<b>Teléfono:</b>", sml), Paragraph(ficha["telefono"], sml)],
-        [Paragraph("<b>Observaciones:</b>", sml), Paragraph(ficha["comentarios"], sml), "", ""],
+        [Paragraph("<b>NIF/NIE:</b>", sml), Paragraph(esc(al_id), sml), Paragraph("<b>Edad:</b>", sml), Paragraph(ficha["edad"], sml)],
+        [Paragraph("<b>Repite:</b>", sml), Paragraph(ficha["repite"], sml), Paragraph("<b>Estado:</b>", sml), Paragraph(esc(ficha["estado"]), sml)],
+        [Paragraph("<b>Email:</b>", sml), Paragraph(esc(ficha["email"]), sml), Paragraph("<b>Teléfono:</b>", sml), Paragraph(esc(ficha["telefono"]), sml)],
+        [Paragraph("<b>Observaciones:</b>", sml), Paragraph(esc(ficha["comentarios"]), sml), "", ""],
     ]
     t_ficha = Table(ficha_data, colWidths=[3.5 * cm, 5.5 * cm, 3.5 * cm, 5.5 * cm], hAlign="LEFT")
     t_ficha.setStyle(TableStyle([
@@ -111,8 +112,8 @@ def generar_pdf_ficha_alumnado(info_modulo, al_id, df_al, tutoria_entry=None, at
         data = [[Paragraph("<b>Fecha</b>", smlB), Paragraph("<b>Canal</b>", smlB), Paragraph("<b>Ámbito</b>", smlB),
                  Paragraph("<b>Tema</b>", smlB), Paragraph("<b>Acuerdos</b>", smlB)]]
         for fecha, canal, ambito, tema, acuerdos in filas:
-            data.append([Paragraph(fecha, sml), Paragraph(canal, sml), Paragraph(ambito, sml),
-                         Paragraph(tema, sml), Paragraph(acuerdos, sml)])
+            data.append([Paragraph(esc(fecha), sml), Paragraph(esc(canal), sml), Paragraph(esc(ambito), sml),
+                         Paragraph(esc(tema), sml), Paragraph(esc(acuerdos), sml)])
         t = Table(data, colWidths=[2.2 * cm, 2.8 * cm, 2.8 * cm, 4.2 * cm, 6 * cm])
         t.setStyle(TableStyle([
             ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#f0f0f0")),
@@ -122,7 +123,7 @@ def generar_pdf_ficha_alumnado(info_modulo, al_id, df_al, tutoria_entry=None, at
         ]))
         elements.append(t)
     elif modo == "intake":
-        data = [[Paragraph(k, sml), Paragraph(v, sml)] for k, v in filas]
+        data = [[Paragraph(esc(k), sml), Paragraph(esc(v), sml)] for k, v in filas]
         t = Table(data, colWidths=[7 * cm, 11 * cm])
         t.setStyle(TableStyle([
             ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#bbbbbb")),

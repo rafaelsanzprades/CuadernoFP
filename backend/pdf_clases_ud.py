@@ -5,6 +5,7 @@ from reportlab.lib.pagesizes import A4, portrait
 from reportlab.platypus import BaseDocTemplate, Frame, PageTemplate, Table, TableStyle, Paragraph, PageBreak, Spacer
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import cm
+from pdf_helpers import esc
 
 def _draw_page_decorations(canv, doc):
     canv.saveState()
@@ -92,19 +93,19 @@ def generar_pdf_clases_ud(info_modulo, df_ud, df_sesiones):
                     aspectos = str(s_row.get("Aspectos_Clave", ""))
                     recursos = str(s_row.get("Recursos", ""))
                     
-                    p_cont = Paragraph(contenidos, style_normal_left) if contenidos else Paragraph("-", style_normal_left)
+                    p_cont = Paragraph(esc(contenidos), style_normal_left) if contenidos else Paragraph("-", style_normal_left)
                     if recursos:
-                        cont_widget = [p_cont, Paragraph(recursos, style_rec)]
+                        cont_widget = [p_cont, Paragraph(esc(recursos), style_rec)]
                     else:
                         cont_widget = p_cont
-                    
+
                     t_data.append([
                         Paragraph(num_orden, style_normal_bold),
                         Paragraph(horas, style_normal),
-                        Paragraph(tipo, style_normal_left),
-                        Paragraph(ra_ce, style_normal_left),
+                        Paragraph(esc(tipo), style_normal_left),
+                        Paragraph(esc(ra_ce), style_normal_left),
                         cont_widget,
-                        Paragraph(aspectos, style_normal_left)
+                        Paragraph(esc(aspectos), style_normal_left)
                     ])
                     row_heights.append(None)
             
@@ -147,7 +148,7 @@ def generar_pdf_clases_ud(info_modulo, df_ud, df_sesiones):
                 
                 elements.append(t)
             else:
-                elements.append(Paragraph(f"{ud_id} - {ud_desc}", ParagraphStyle('UD', fontName='Helvetica-Bold', fontSize=14)))
+                elements.append(Paragraph(f"{ud_id} - {esc(ud_desc)}", ParagraphStyle('UD', fontName='Helvetica-Bold', fontSize=14)))
                 elements.append(Spacer(1, 0.5 * cm))
                 elements.append(Paragraph("No hay sesiones definidas para esta unidad didáctica.", style_normal_left))
             

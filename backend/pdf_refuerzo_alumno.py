@@ -13,6 +13,7 @@ from reportlab.lib.pagesizes import A4, portrait
 from reportlab.platypus import BaseDocTemplate, Frame, PageTemplate, Table, TableStyle, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import cm
+from pdf_helpers import esc
 
 from helpers_catalogo import calcular_notas_jeg, DEFAULT_CONFIG_REDONDEO, filtrar_por_gev
 
@@ -94,7 +95,7 @@ def generar_pdf_refuerzo(info_modulo, al_id, df_al, df_eval, df_ra, df_ce, df_ac
     sml = ParagraphStyle("Sm", parent=styles["Normal"], fontSize=9, leading=12)
 
     nombre = _nombre_alumno(al_id, df_al)
-    elements = [Paragraph(nombre, ParagraphStyle("H1", parent=styles["Heading1"], fontSize=16))]
+    elements = [Paragraph(esc(nombre), ParagraphStyle("H1", parent=styles["Heading1"], fontSize=16))]
 
     if not pendientes:
         elements.append(Paragraph("Sin criterios de evaluación pendientes de refuerzo en este momento.", norm))
@@ -105,9 +106,9 @@ def generar_pdf_refuerzo(info_modulo, al_id, df_al, df_eval, df_ra, df_ce, df_ac
         for p in pendientes:
             nota_txt = f"{p['nota']:.1f}" if p["nota"] is not None else "Sin evaluar"
             data.append([
-                Paragraph(p["id_ce"], sml), Paragraph(p["desc_ce"], sml),
-                Paragraph(nota_txt, sml), Paragraph(p["autoeval_valor"] or "-", sml),
-                Paragraph(p["autoeval_dificultades"] or "-", sml),
+                Paragraph(esc(p["id_ce"]), sml), Paragraph(esc(p["desc_ce"]), sml),
+                Paragraph(nota_txt, sml), Paragraph(esc(p["autoeval_valor"] or "-"), sml),
+                Paragraph(esc(p["autoeval_dificultades"] or "-"), sml),
             ])
         t = Table(data, colWidths=[1.8 * cm, 6.5 * cm, 2 * cm, 2.7 * cm, 4 * cm])
         t.setStyle(TableStyle([
