@@ -46,9 +46,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   ],
   "/instrumentos": [
     { id: "resumen", label: "Resumen" },
-    { id: "tri1", label: "1er trimestre" },
-    { id: "tri2", label: "2º trimestre" },
-    { id: "tri3", label: "3er trimestre" },
+    { id: "trimestres", label: "Trimestres" },
     { id: "rubricas", label: "Rúbricas" },
     { id: "jeg", label: "Modelo JEG" },
   ],

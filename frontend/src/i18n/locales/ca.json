@@ -30,9 +30,7 @@
     "ud": "Unitats",
     "relacion": "Relació RA-UD",
     "contribucion": "Contribució OG",
-    "tri1": "1a Av.",
-    "tri2": "2a Av.",
-    "tri3": "3a Av.",
+    "trimestres": "Trimestres",
     "secuenciacion": "Seqüenciació",
     "tareas": "Tasques (TC)",
     "archivos_nube": "Arxius al Núvol",
@@ -222,14 +220,8 @@
       "resumen": {
         "desc": "Visió global dels instruments d'avaluació utilitzats (RD 659/2023, Art. 136) i, més avall, el model experimental JEG per indicadors."
       },
-      "tri1": {
-        "desc": "Instruments d'avaluació planificats per al 1r trimestre."
-      },
-      "tri2": {
-        "desc": "Instruments d'avaluació planificats per al 2n trimestre."
-      },
-      "tri3": {
-        "desc": "Instruments d'avaluació planificats per al 3r trimestre."
+      "trimestres": {
+        "desc": "Instruments d'avaluació planificats per a cada trimestre."
       },
       "rubricas": {
         "nav": "Rúbriques",

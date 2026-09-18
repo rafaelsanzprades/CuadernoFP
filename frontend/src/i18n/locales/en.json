@@ -30,9 +30,7 @@
     "ud": "Units",
     "relacion": "Relationship RA-UD",
     "contribucion": "Contribution OG",
-    "tri1": "1st Ev.",
-    "tri2": "2nd Ev.",
-    "tri3": "3rd Ev.",
+    "trimestres": "Terms",
     "secuenciacion": "Sequencing",
     "tareas": "Tasks (TC)",
     "archivos_nube": "Cloud Files",
@@ -220,14 +218,8 @@
       "resumen": {
         "desc": "Overall view of the evaluation instruments used (RD 659/2023, Art. 136), plus the experimental indicator-based JEG model below."
       },
-      "tri1": {
-        "desc": "Evaluation instruments planned for the 1st term."
-      },
-      "tri2": {
-        "desc": "Evaluation instruments planned for the 2nd term."
-      },
-      "tri3": {
-        "desc": "Evaluation instruments planned for the 3rd term."
+      "trimestres": {
+        "desc": "Evaluation instruments planned for each term."
       },
       "rubricas": {
         "nav": "Rubrics",

@@ -13,6 +13,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
+import { AccordionBlock } from "@/components/ui/AccordionBlock";
 import Link from "next/link";
 import { Settings2 } from "lucide-react";
 import { InstrumentoConfigModal } from "@/components/features/instrumentos/InstrumentoConfigModal";
@@ -32,7 +33,7 @@ const normalizeTipo = (t: string) => {
 };
 
 export default function InstrumentosPage() {
-  const { activeModuleId, moduleData, setModuleData, updateDataFrame, saveModuleData } = useAppStore();
+  const { activeModuleId, moduleData, setModuleData, updateDataFrame, saveModuleData, cursoData, dataSource } = useAppStore();
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -40,21 +41,47 @@ export default function InstrumentosPage() {
 
   const TABS = [
     { id: "resumen", label:  <span className="flex items-center gap-2"><BarChart className="w-4 h-4 shrink-0" /> {t('tabs.resumen')}</span>, cleanLabel: t('tabs.resumen') },
-    { id: "tri1", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri1')}</span>, cleanLabel: t('tabs.tri1') },
-    { id: "tri2", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri2')}</span>, cleanLabel: t('tabs.tri2') },
-    { id: "tri3", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.tri3')}</span>, cleanLabel: t('tabs.tri3') },
+    { id: "trimestres", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.trimestres', {defaultValue: 'Trimestres'})}</span>, cleanLabel: t('tabs.trimestres', {defaultValue: 'Trimestres'}) },
     { id: "rubricas", label:  <span className="flex items-center gap-2"><BookMarked className="w-4 h-4 shrink-0" /> {t('tabs.instrumentos.rubricas.nav', {defaultValue: 'Rúbricas'})}</span>, cleanLabel: t('tabs.instrumentos.rubricas.nav', {defaultValue: 'Rúbricas'}) },
     { id: "jeg", label:  <span className="flex items-center gap-2"><Settings2 className="w-4 h-4 shrink-0" /> {t('tabs.instrumentos.jeg.nav', {defaultValue: 'Modelo JEG'})}</span>, cleanLabel: t('tabs.instrumentos.jeg.nav', {defaultValue: 'Modelo JEG'}) },
-  ];const [activeTab, setActiveTab] = useState("resumen");const activeTabCleanLabel = TABS.find(tab => tab.id === activeTab)?.cleanLabel;
+  ];
+  const [activeTabRaw, setActiveTab] = useState("resumen");
+  // Compat con enlaces antiguos a ?tab=tri1/tri2/tri3, fusionadas ahora en
+  // una sola pestaña "Trimestres" con acordeón (a petición de Rafael,
+  // 2026-09-18).
+  const activeTab = ["tri1", "tri2", "tri3"].includes(activeTabRaw) ? "trimestres" : activeTabRaw;
+  const activeTabCleanLabel = TABS.find(tab => tab.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     resumen: t('tabs.instrumentos.resumen.desc', {defaultValue: 'Visión global de los instrumentos de evaluación utilizados (RD 659/2023, Art. 136).'}),
-    tri1: t('tabs.instrumentos.tri1.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 1er trimestre.'}),
-    tri2: t('tabs.instrumentos.tri2.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 2º trimestre.'}),
-    tri3: t('tabs.instrumentos.tri3.desc', {defaultValue: 'Instrumentos de evaluación planificados para el 3er trimestre.'}),
+    trimestres: t('tabs.instrumentos.trimestres.desc', {defaultValue: 'Instrumentos de evaluación planificados para cada trimestre.'}),
     rubricas: t('tabs.instrumentos.rubricas.desc', {defaultValue: 'Rúbricas reutilizables: define criterios (que deben sumar 10 puntos entre todos) y niveles de desempeño, y asígnalas a cualquier instrumento desde su Configuración avanzada.'}),
     jeg: t('tabs.instrumentos.jeg.desc', {defaultValue: 'Modelo JEG por indicadores: configuración del motor de calificación real de la app.'}),
   };
+
+  /** Trimestre que debe abrirse por defecto en el acordeón: el que contiene
+   * la fecha efectiva de hoy (DEMO = 2 de mayo fijo, REAL = fecha real) si
+   * es el 2º o 3er trimestre; en cualquier otro caso (antes de curso, en
+   * pleno 1er trimestre, entre trimestres o tras acabar el curso) se abre
+   * el 1er trimestre. */
+  const trimestreAbiertoPorDefecto = (() => {
+    const parseIso = (s?: string) => {
+      if (!s) return null;
+      const [y, m, d] = s.split("-").map(Number);
+      if (!y || !m || !d) return null;
+      return new Date(y, m - 1, d);
+    };
+    const infoFechas = cursoData?.info_fechas || {};
+    const hoy = dataSource === 'demo' ? new Date(new Date().getFullYear(), 4, 2) : new Date();
+    const dentroDe = (iniKey: string, finKey: string) => {
+      const ini = parseIso(infoFechas[iniKey]);
+      const fin = parseIso(infoFechas[finKey]);
+      return !!(ini && fin && hoy >= ini && hoy <= fin);
+    };
+    if (dentroDe("ini_2t", "fin_2t")) return "2T";
+    if (dentroDe("ini_3t", "fin_3t")) return "3T";
+    return "1T";
+  })();
 
   const [isRecoveryModalOpen, setIsRecoveryModalOpen] = useState(false);
   const [recoveryTri, setRecoveryTri] = useState<string>("");
@@ -539,9 +566,19 @@ export default function InstrumentosPage() {
             </>
           )}
 
-          {activeTab === "tri1" && renderTrimestreTab("1T", "1er trimestre")}
-          {activeTab === "tri2" && renderTrimestreTab("2T", "2º trimestre")}
-          {activeTab === "tri3" && renderTrimestreTab("3T", "3er trimestre")}
+          {activeTab === "trimestres" && (
+            <div className="animate-in fade-in duration-500">
+              <AccordionBlock key="1T" title="1er trimestre" icon={<FileEdit className="w-4 h-4" />} defaultOpen={trimestreAbiertoPorDefecto === "1T"}>
+                {renderTrimestreTab("1T", "1er trimestre")}
+              </AccordionBlock>
+              <AccordionBlock key="2T" title="2º trimestre" icon={<FileEdit className="w-4 h-4" />} defaultOpen={trimestreAbiertoPorDefecto === "2T"}>
+                {renderTrimestreTab("2T", "2º trimestre")}
+              </AccordionBlock>
+              <AccordionBlock key="3T" title="3er trimestre" icon={<FileEdit className="w-4 h-4" />} defaultOpen={trimestreAbiertoPorDefecto === "3T"}>
+                {renderTrimestreTab("3T", "3er trimestre")}
+              </AccordionBlock>
+            </div>
+          )}
           {activeTab === "rubricas" && <GestionRubricasTab />}
           {activeTab === "jeg" && <JegModeloTab />}
 

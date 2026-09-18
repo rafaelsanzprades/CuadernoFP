@@ -30,9 +30,7 @@
     "ud": "Unidades",
     "relacion": "Relación RA-UD",
     "contribucion": "Contribución OG",
-    "tri1": "1ª Av.",
-    "tri2": "2ª Av.",
-    "tri3": "3ª Av.",
+    "trimestres": "Trimestres",
     "secuenciacion": "Secuenciación",
     "tareas": "Tarefas (TC)",
     "archivos_nube": "Arquivos na Nube",
@@ -220,14 +218,8 @@
       "resumen": {
         "desc": "Visión global dos instrumentos de avaliación utilizados (RD 659/2023, Art. 136) e, máis abaixo, o modelo experimental JEG por indicadores."
       },
-      "tri1": {
-        "desc": "Instrumentos de avaliación planificados para o 1º trimestre."
-      },
-      "tri2": {
-        "desc": "Instrumentos de avaliación planificados para o 2º trimestre."
-      },
-      "tri3": {
-        "desc": "Instrumentos de avaliación planificados para o 3º trimestre."
+      "trimestres": {
+        "desc": "Instrumentos de avaliación planificados para cada trimestre."
       },
       "rubricas": {
         "nav": "Rúbricas",
