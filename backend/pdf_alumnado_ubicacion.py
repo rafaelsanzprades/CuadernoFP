@@ -17,6 +17,7 @@ from reportlab.platypus import (
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import cm
 from reportlab.lib.enums import TA_CENTER, TA_LEFT
+from pdf_helpers import esc
 
 
 def _draw_page_decorations(canv, doc):
@@ -100,7 +101,7 @@ def generar_pdf_alumnado_ubicacion(
             al_id = seats.get(f"{r}_{c}", "")
             nombre = id_to_name.get(al_id, "")
             if al_id and nombre:
-                cell = [Paragraph(f"F{r + 1}-C{c + 1}", seat_coord), Paragraph(nombre, seat_name)]
+                cell = [Paragraph(f"F{r + 1}-C{c + 1}", seat_coord), Paragraph(esc(nombre), seat_name)]
             else:
                 cell = [Paragraph(f"F{r + 1}-C{c + 1}", seat_coord), Paragraph("-- Libre --", seat_empty)]
             row_cells.append(cell)

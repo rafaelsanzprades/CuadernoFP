@@ -12,6 +12,7 @@ from reportlab.lib.pagesizes import A4, portrait
 from reportlab.platypus import BaseDocTemplate, Frame, PageTemplate, Table, TableStyle, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import cm
+from pdf_helpers import esc
 
 
 def _nombre_alumno(al_id, df_al):
@@ -61,10 +62,10 @@ def generar_pdf_reclamacion(info_modulo, al_id, df_al, reclamacion, evidencia):
     sml = ParagraphStyle("Sm", parent=styles["Normal"], fontSize=9, leading=12)
 
     nombre = _nombre_alumno(al_id, df_al)
-    elements = [Paragraph(nombre, ParagraphStyle("H1", parent=styles["Heading1"], fontSize=16))]
+    elements = [Paragraph(esc(nombre), ParagraphStyle("H1", parent=styles["Heading1"], fontSize=16))]
 
     datos = [
-        [Paragraph("<b>Nota reclamada:</b>", sml), Paragraph(str(reclamacion.get("referencia", "-")), sml)],
+        [Paragraph("<b>Nota reclamada:</b>", sml), Paragraph(esc(reclamacion.get("referencia", "-")), sml)],
         [Paragraph("<b>Fecha de la reclamación:</b>", sml), Paragraph(_fmt_fecha(reclamacion.get("fecha_reclamacion")), sml)],
         [Paragraph("<b>Estado:</b>", sml), Paragraph("Resuelta" if reclamacion.get("estado") == "resuelta" else "Pendiente", sml)],
     ]
@@ -79,13 +80,13 @@ def generar_pdf_reclamacion(info_modulo, al_id, df_al, reclamacion, evidencia):
     elements.append(Spacer(1, 12))
 
     elements.append(Paragraph("Motivo", h2))
-    elements.append(Paragraph(reclamacion.get("motivo", "-"), norm))
+    elements.append(Paragraph(esc(reclamacion.get("motivo", "-")), norm))
     elements.append(Spacer(1, 8))
 
     elements.append(Paragraph("Resolución", h2))
     if reclamacion.get("estado") == "resuelta":
         elements.append(Paragraph(
-            f"{reclamacion.get('resolucion', '-')}  (resuelta el {_fmt_fecha(reclamacion.get('fecha_resolucion'))})", norm
+            f"{esc(reclamacion.get('resolucion', '-'))}  (resuelta el {_fmt_fecha(reclamacion.get('fecha_resolucion'))})", norm
         ))
     else:
         elements.append(Paragraph("<i>Reclamación todavía pendiente de resolver.</i>", sml))
@@ -97,8 +98,8 @@ def generar_pdf_reclamacion(info_modulo, al_id, df_al, reclamacion, evidencia):
         for h in evidencia:
             data.append([
                 Paragraph(_fmt_fecha(h.get("fecha")), sml),
-                Paragraph(str(h.get("valor_anterior", "-")), sml),
-                Paragraph(str(h.get("valor_nuevo", "-")), sml),
+                Paragraph(esc(h.get("valor_anterior", "-")), sml),
+                Paragraph(esc(h.get("valor_nuevo", "-")), sml),
             ])
         te = Table(data, colWidths=[6 * cm, 5.5 * cm, 5.5 * cm])
         te.setStyle(TableStyle([

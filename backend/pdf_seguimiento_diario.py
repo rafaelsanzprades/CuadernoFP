@@ -5,6 +5,7 @@ from reportlab.lib.pagesizes import A4, portrait
 from reportlab.platypus import BaseDocTemplate, Frame, PageTemplate, Table, TableStyle, Paragraph, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import cm
+from pdf_helpers import esc
 
 NOMBRE_MESES = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
                 "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
@@ -160,7 +161,7 @@ def generar_pdf_seguimiento(info_modulo, info_fechas, horario, planning_ledger, 
             ud_feoe_texto = " / ".join(ud_feoe_hitos)
             
             if festivo:
-                seg_widget = Paragraph(f"<b>Festivo: {festivo.upper()}</b>", style_festivo)
+                seg_widget = Paragraph(f"<b>Festivo: {esc(festivo.upper())}</b>", style_festivo)
                 ud_feoe_texto = "-" 
                 horas = "-"
                 relevante = "-"
@@ -186,10 +187,10 @@ def generar_pdf_seguimiento(info_modulo, info_fechas, horario, planning_ledger, 
                             h_a_consumir -= s["h_rem"]
                             ud_session_tracker[ud_act].pop(0)
 
-                    p_cont = Paragraph(cont, style_normal_left) if cont else Paragraph("-", style_normal_left)
+                    p_cont = Paragraph(esc(cont), style_normal_left) if cont else Paragraph("-", style_normal_left)
                     if rec:
                         style_rec = ParagraphStyle('Recurso', alignment=2, fontName='Helvetica-Oblique', fontSize=8, textColor=colors.HexColor("#444444"), leading=10)
-                        seg_widget = [p_cont, Paragraph(rec, style_rec)]
+                        seg_widget = [p_cont, Paragraph(esc(rec), style_rec)]
                     else:
                         seg_widget = p_cont
 
@@ -204,7 +205,7 @@ def generar_pdf_seguimiento(info_modulo, info_fechas, horario, planning_ledger, 
                 Paragraph(horas, style_normal),
                 Paragraph(ud_feoe_texto, style_normal),
                 seg_widget,
-                Paragraph(relevante, style_normal)
+                Paragraph(esc(relevante), style_normal)
             ])
             row_idx += 1
             

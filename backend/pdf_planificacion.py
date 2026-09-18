@@ -16,6 +16,7 @@ from reportlab.platypus import (
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import cm
 from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
+from pdf_helpers import esc
 
 def _draw_page_decorations(canv, doc):
     canv.saveState()
@@ -233,7 +234,7 @@ def generar_pdf_planificacion(
         elements.append(Spacer(1, 14))
         for id_ud in sorted(ud_desc_map.keys()):
             desc = ud_desc_map[id_ud]
-            texto = f"<b>{id_ud}</b> - {desc}" if desc else f"<b>{id_ud}</b>"
+            texto = f"<b>{id_ud}</b> - {esc(desc)}" if desc else f"<b>{id_ud}</b>"
             elements.append(Paragraph(texto, sml_left))
 
     doc.build(elements)

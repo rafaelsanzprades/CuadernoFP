@@ -14,6 +14,7 @@ from reportlab.platypus import (
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import cm
 from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
+from pdf_helpers import esc
 
 
 def _draw_page_decorations(canv, doc):
@@ -107,7 +108,7 @@ def generar_pdf_matrices(
                 Paragraph(f"<b>{row.get('id_ra', '')}</b>", normB),
                 Paragraph(f"{peso}", norm),
                 Paragraph("✓" if is_dual else "", norm),
-                Paragraph(str(row.get("desc_ra", "")), norm_left),
+                Paragraph(esc(row.get("desc_ra", "")), norm_left),
             ])
 
         # Fila de totales
@@ -175,7 +176,7 @@ def generar_pdf_matrices(
             ud_row = [
                 Paragraph(f"<b>{row.get('id_ud', '')}</b>", normB),
                 Paragraph(f"{int(row.get('horas_ud', 0))}", norm),
-                Paragraph(str(row.get("desc_ud", "")), sml_left),
+                Paragraph(esc(row.get("desc_ud", "")), sml_left),
             ]
             for ra_id in ra_ids:
                 val = row.get(ra_id, 0)
@@ -263,7 +264,7 @@ def generar_pdf_matrices(
             peso_ra = ra_row.get("peso_ra", 0)
             desc_ra = ra_row.get("desc_ra", "")
 
-            elements.append(Paragraph(f"{ra_id} ({peso_ra}%). <font size='9' color='#555555'>{desc_ra}</font>", ra_title))
+            elements.append(Paragraph(f"{ra_id} ({peso_ra}%). <font size='9' color='#555555'>{esc(desc_ra)}</font>", ra_title))
 
             # Find UDs linked to this RA
             has_uds = False
@@ -313,8 +314,8 @@ def generar_pdf_matrices(
             else:
                 evals_ud = []
             cud_data.append([
-                Paragraph(str(ud_row.get("bloque_contenido") or "").strip() or "<i>Sin bloque asignado</i>", sml_left),
-                Paragraph(f"<b>{ud_row.get('id_ud', '')}</b> — {ud_row.get('desc_ud', '')}", sml_left),
+                Paragraph(esc(ud_row.get("bloque_contenido") or "").strip() or "<i>Sin bloque asignado</i>", sml_left),
+                Paragraph(f"<b>{ud_row.get('id_ud', '')}</b> — {esc(ud_row.get('desc_ud', ''))}", sml_left),
                 Paragraph(", ".join(ras_ud) or "—", sml),
                 Paragraph(", ".join(f"OG{g}" for g in ogs_ud) or "—", sml),
                 Paragraph(f"{int(ud_row.get('horas_ud', 0) or 0)}", sml),

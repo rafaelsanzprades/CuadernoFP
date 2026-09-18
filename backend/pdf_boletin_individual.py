@@ -8,6 +8,7 @@ from reportlab.platypus import BaseDocTemplate, PageTemplate, Frame, Paragraph, 
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from helpers_catalogo import resolve_escala_cualitativa
+from pdf_helpers import esc
 
 def _draw_page_decorations(canv, doc):
     """Cabecera y pie - idéntico al Calendario académico."""
@@ -113,10 +114,10 @@ def generar_pdf_boletin_individual(
     elements.append(Paragraph("Alumnado", h2))
     
     ficha_data = [
-        [Paragraph("<b>Apellidos y Nombre:</b>", sml), Paragraph(f"{apellidos}, {nombre}", sml), Paragraph("<b>NIF / NIE:</b>", sml), Paragraph(al_id, sml)],
-        [Paragraph("<b>Email:</b>", sml), Paragraph(email, sml), Paragraph("<b>Teléfono:</b>", sml), Paragraph(telefono, sml)],
+        [Paragraph("<b>Apellidos y Nombre:</b>", sml), Paragraph(esc(f"{apellidos}, {nombre}"), sml), Paragraph("<b>NIF / NIE:</b>", sml), Paragraph(esc(al_id), sml)],
+        [Paragraph("<b>Email:</b>", sml), Paragraph(esc(email), sml), Paragraph("<b>Teléfono:</b>", sml), Paragraph(esc(telefono), sml)],
         [Paragraph("<b>Edad:</b>", sml), Paragraph(edad, sml), Paragraph("<b>Repite:</b>", sml), Paragraph(repite, sml)],
-        [Paragraph("<b>Estado:</b>", sml), Paragraph(estado, sml), Paragraph("<b>Observaciones:</b>", sml), Paragraph(obs, sml)]
+        [Paragraph("<b>Estado:</b>", sml), Paragraph(esc(estado), sml), Paragraph("<b>Observaciones:</b>", sml), Paragraph(esc(obs), sml)]
     ]
     t_ficha = Table(ficha_data, colWidths=[3.5*cm, 5.5*cm, 3.5*cm, 5.5*cm], hAlign='LEFT')
     t_ficha.setStyle(TableStyle([
@@ -221,7 +222,7 @@ def generar_pdf_boletin_individual(
             bar_label = "Sin evaluar" if nota_ra is None else f"{prop:.0f}%"
             d.add(String(bar_w/2, 3, bar_label, fontSize=8, fillColor=colors.black, textAnchor='middle', fontName="Helvetica-Bold"))
             
-            desc_text = f"<b>{ra_id} ({info['pond']:.1f}%)</b> - <font size='7' color='#555555'>{info['desc']}</font>"
+            desc_text = f"<b>{ra_id} ({info['pond']:.1f}%)</b> - <font size='7' color='#555555'>{esc(info['desc'])}</font>"
             desc_p = Paragraph(desc_text, norm)
             
             tris_lbl = ", ".join(tris)
@@ -391,7 +392,7 @@ def generar_pdf_boletin_individual(
         avg = nota_media_tri[tri] * (100.0 / suma_pesos_usados[tri]) if suma_pesos_usados[tri] > 0 else 0.0
         if suma_pesos_usados[tri] > 0:
             escala_tri = resolve_escala_cualitativa(avg, escalas_evaluacion)
-            media_row.append(Paragraph(f"<b>{avg:.2f}</b><br/><font size='6'>{escala_tri}</font>", normB_center))
+            media_row.append(Paragraph(f"<b>{avg:.2f}</b><br/><font size='6'>{esc(escala_tri)}</font>", normB_center))
             fin_avg_sum += avg * pond_map[tri]
             fin_avg_pond_sum += pond_map[tri]
         else:
@@ -403,7 +404,7 @@ def generar_pdf_boletin_individual(
         nota_final_media = fin_avg_sum / fin_avg_pond_sum
         final_fin_str = f"{nota_final_media:.2f}"
         escala_final = resolve_escala_cualitativa(nota_final_media, escalas_evaluacion)
-    media_row.append(Paragraph(f"<b>{final_fin_str}</b><br/><font size='6'>{escala_final}</font>", normB_center) if final_fin_str else "")
+    media_row.append(Paragraph(f"<b>{final_fin_str}</b><br/><font size='6'>{esc(escala_final)}</font>", normB_center) if final_fin_str else "")
     tipo_blocks.append(media_row)
 
     t_unified = Table(tipo_blocks, colWidths=[6.0*cm, 1.5*cm, 2.5*cm, 2.5*cm, 2.5*cm, 3.0*cm], hAlign='LEFT')

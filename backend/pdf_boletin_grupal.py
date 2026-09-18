@@ -17,6 +17,7 @@ from reportlab.platypus import (
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import cm
 from helpers_catalogo import resolve_escala_cualitativa
+from pdf_helpers import esc
 
 
 def _draw_page_decorations(canv, doc):
@@ -220,10 +221,10 @@ def generar_pdf_boletin_grupal(
         row_acts = [Paragraph(f"{v:.1f}", sml) for v in f["notas_por_tipo"]]
         row = (
             [Paragraph(str(f["idx"]), sml),
-             Paragraph(f["alumnado"], norm),
+             Paragraph(esc(f["alumnado"]), norm),
              Paragraph(f["edad"], sml), Paragraph(f["repite"], sml)]
             + row_acts
-            + [Paragraph(f"<b>{f['nota_media']:.1f}</b><br/><font size='6'>{f['escala_media']}</font>", normB)]
+            + [Paragraph(f"<b>{f['nota_media']:.1f}</b><br/><font size='6'>{esc(f['escala_media'])}</font>", normB)]
         )
         table_data.append(row)
 
@@ -468,14 +469,14 @@ def generar_pdf_boletin_grupal_final(
         nt = f["notas_tri"]
         row = [
             Paragraph(str(f["idx"]), sml),
-            Paragraph(f["alumnado"], norm),
+            Paragraph(esc(f["alumnado"]), norm),
             Paragraph(f["edad"], sml),
             Paragraph(f["repite"], sml),
             Paragraph(f"{nt['1T']:.1f}", sml),
             Paragraph(f"{nt['2T']:.1f}", sml),
             Paragraph(f"{nt['3T']:.1f}", sml),
-            Paragraph(f"<b>{f['nota_final_ord']:.1f}</b><br/><font size='6'>{f['escala_final_ord']}</font>", normB),
-            Paragraph(f"<b>{f['nota_final_extra']:.1f}</b><br/><font size='6'>{f['escala_final_extra']}</font>" if f["nota_final_extra"] is not None else "", sml),
+            Paragraph(f"<b>{f['nota_final_ord']:.1f}</b><br/><font size='6'>{esc(f['escala_final_ord'])}</font>", normB),
+            Paragraph(f"<b>{f['nota_final_extra']:.1f}</b><br/><font size='6'>{esc(f['escala_final_extra'])}</font>" if f["nota_final_extra"] is not None else "", sml),
         ]
         table_data.append(row)
 
