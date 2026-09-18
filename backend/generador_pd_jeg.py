@@ -681,7 +681,13 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
 
     tpl = DocxTemplate(TEMPLATE_PATH)
     context = _build_context(data)
-    tpl.render(context)
+    # autoescape=True: docxtpl renderiza el propio XML del docx como plantilla
+    # Jinja2 -- sin esto, un '<' o '&' suelto en texto libre del profesor
+    # (desc_ra, textos narrativos...) se inserta tal cual en el XML y puede
+    # dejar el documento mal formado (Word pide "reparar" el archivo al
+    # abrirlo, o se pierde contenido en silencio). Con autoescape, Jinja2
+    # escapa esos caracteres antes de insertarlos, sin tocar el dato guardado.
+    tpl.render(context, autoescape=True)
 
     doc = tpl.docx
     _rellenar_tabla_organizacion_ud(doc, context["tabla_organizacion_ud"])
