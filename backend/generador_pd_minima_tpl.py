@@ -208,7 +208,10 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
 
     tpl = DocxTemplate(TEMPLATE_PATH)
     context = _build_context(data)
-    tpl.render(context)
+    # autoescape=True: ver nota en generador_pd_jeg.py -- sin esto, un '<' o
+    # '&' suelto en texto libre del profesor se inserta tal cual en el XML
+    # del docx y puede dejar el documento mal formado.
+    tpl.render(context, autoescape=True)
 
     doc = tpl.docx
     from docx.shared import Cm
