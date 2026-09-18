@@ -141,7 +141,6 @@ export const fileManager = {
 
     const fpgName = groupId;
     const moduleCode = groupId.includes('0223') ? '0223' : '0237';
-    const store = useAppStore.getState();
 
     try {
       // 1. Fetch .fpg (Group project file)
@@ -173,17 +172,25 @@ export const fileManager = {
       const pdId = pdData.id || `${moduleCode}-pd`;
       const cursoId = cursoData.id || `${moduleCode}-curso`;
 
-      // Set state
-      store.setDataSource("demo");
-      store.setActiveModuleId(pdId);
-      store.setModuleData(pdData);
-      store.setActiveCursoId(cursoId);
-      store.setCursoData(cursoData);
-      
-      // Demo files have no local file handle, but we store the filename for UI
-      store.setPdFileSource({ type: 'none', fileName: groupData.archivos.programacion });
-      store.setCursoFileSource({ type: 'none', fileName: groupData.archivos.curso });
-      store.setGroupFileSource({ type: 'none', fileName: fpgName });
+      // Set state -- en una sola llamada a setState (no 8 store.setXxx()
+      // sueltas): cada set() individual dispara su propia escritura async a
+      // IndexedDB (persist middleware), y si el usuario navega/recarga muy
+      // rapido tras cargar la DEMO, solo la primera escritura (con
+      // dataSource pero sin activeModuleId/moduleData todavia) llega a
+      // completarse -- la recarga siguiente rehidrata ese estado a medias
+      // ("No hay programación cargada" hasta cambiar de pestaña). Un unico
+      // set() = una unica escritura atomica con el estado ya completo.
+      useAppStore.setState({
+        dataSource: "demo",
+        activeModuleId: pdId,
+        moduleData: pdData,
+        activeCursoId: cursoId,
+        cursoData: cursoData,
+        // Demo files have no local file handle, but we store the filename for UI
+        pdFileSource: { type: 'none', fileName: groupData.archivos.programacion },
+        cursoFileSource: { type: 'none', fileName: groupData.archivos.curso },
+        groupFileSource: { type: 'none', fileName: fpgName },
+      });
 
     } catch (e) {
       console.error("Error loading demo data from fpg:", e);
@@ -195,30 +202,31 @@ export const fileManager = {
    * pdName/cursoName to seed a named Archivos instead (used by the welcome wizard's
    * "Crear mis archivos" flow). */
   createBlankLocalData(pdName?: string, cursoName?: string): void {
-    const store = useAppStore.getState();
-
     const pdId = pdName ? `${pdName}-pd` : 'sin-nombre-pd';
     const pdLabel = pdName ? `Programación ${pdName}` : 'Programación sin nombre';
     const cursoId = pdName ? `${pdName}-curso-${cursoName || ''}` : 'sin-nombre-curso';
     const cursoLabel = cursoName ? `Curso ${cursoName}` : 'Curso sin nombre';
 
-    store.setActiveModuleId(pdId);
-    store.setModuleData({
-      info_modulo: { nombre: pdLabel },
-      df_ud: [], df_sesiones: [], df_ra: [], df_ce: [], df_tareas: [], df_act: [],
-      df_instr: [], df_indicadores: [], df_rubricas: [],
-      dual_regimen: 'ninguno', eqavet_evaluacion: {}, config_contexto: {},
+    // Una sola llamada a setState -- ver nota en loadDemoData() sobre por
+    // que varias store.setXxx() sueltas pueden persistir a medias si el
+    // usuario navega justo despues.
+    useAppStore.setState({
+      activeModuleId: pdId,
+      moduleData: {
+        info_modulo: { nombre: pdLabel },
+        df_ud: [], df_sesiones: [], df_ra: [], df_ce: [], df_tareas: [], df_act: [],
+        df_instr: [], df_indicadores: [], df_rubricas: [],
+        dual_regimen: 'ninguno', eqavet_evaluacion: {}, config_contexto: {},
+      },
+      pdFileSource: { type: 'new', fileName: pdLabel },
+      activeCursoId: cursoId,
+      cursoData: {
+        df_al: [], df_eval: [], daily_ledger: {}, tutoria_ledger: {},
+        horario: {}, info_fechas: {}, plano_clase: {},
+      },
+      cursoFileSource: { type: 'new', fileName: cursoLabel },
+      groupFileSource: { type: 'new', fileName: pdName ? `Grupo ${pdName}` : 'Grupo sin nombre' },
     });
-    store.setPdFileSource({ type: 'new', fileName: pdLabel });
-
-    store.setActiveCursoId(cursoId);
-    store.setCursoData({
-      df_al: [], df_eval: [], daily_ledger: {}, tutoria_ledger: {},
-      horario: {}, info_fechas: {}, plano_clase: {},
-    });
-    store.setCursoFileSource({ type: 'new', fileName: cursoLabel });
-
-    store.setGroupFileSource({ type: 'new', fileName: pdName ? `Grupo ${pdName}` : 'Grupo sin nombre' });
   },
 
   // ── NEW (Wizard) ────────────────────────────────────────
