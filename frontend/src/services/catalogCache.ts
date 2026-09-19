@@ -16,6 +16,12 @@ interface CachedCatalogData {
 
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
 const cache = new Map<string, CachedCatalogData>();
+// Varios componentes (RaOgMatrix, curriculo/page.tsx, ...) piden el mismo
+// moduleId en su propio useEffect al montar -- sin este dedup, cada uno
+// dispara su propio fetch en paralelo (visto: 3x peticiones identicas a la
+// vez), lo que alarga sin necesidad la ventana en la que el catalogo todavia
+// no esta listo.
+const inFlight = new Map<string, Promise<void>>();
 
 /**
  * Fetch catalog data for a module code and cache it.
@@ -27,7 +33,18 @@ export async function loadCatalogForModule(moduleId: string): Promise<void> {
   const moduleCode = moduleId.split('-')[0];
   const existing = cache.get(moduleCode);
   if (existing && (Date.now() - existing.loaded) < CACHE_TTL_MS) return;
-  
+
+  const pending = inFlight.get(moduleCode);
+  if (pending) return pending;
+
+  const promise = fetchCatalogForModule(moduleCode).finally(() => {
+    inFlight.delete(moduleCode);
+  });
+  inFlight.set(moduleCode, promise);
+  return promise;
+}
+
+async function fetchCatalogForModule(moduleCode: string): Promise<void> {
   try {
     const res = await fetch(`/api/catalog/module/${moduleCode}`);
     if (!res.ok) return;

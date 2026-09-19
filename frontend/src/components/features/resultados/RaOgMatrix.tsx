@@ -1,16 +1,32 @@
 "use client";
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Check, Link as LinkIcon } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { resolveDescRa, resolveOg, getOgList, loadCatalogForModule } from "@/services/catalogCache";
 import { Card } from "@/components/ui/Card";
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { useTranslation } from "react-i18next";
 
 export function RaOgMatrix() {
   const { t } = useTranslation();
   const { moduleData, updateInfoModulo, activeModuleId } = useAppStore();
+  // getOgList() lee de un cache en memoria (catalogCache.ts) que se puebla via
+  // fetch async -- no es estado reactivo de Zustand, asi que un simple re-render
+  // no "sabe" cuando el fetch termina. Sin este flag, la 1a vez que se entra a
+  // esta pestaña (fetch todavia en curso) se ve el mensaje de "no hay OG
+  // configurados" -- engañoso, ya que en realidad solo esta cargando -- hasta
+  // que algo fuerce un remount (cambiar de pestaña y volver).
+  const [catalogReady, setCatalogReady] = useState(false);
 
-  useEffect(() => { if (activeModuleId) loadCatalogForModule(activeModuleId); }, [activeModuleId]);
+  useEffect(() => {
+    setCatalogReady(false);
+    if (!activeModuleId) return;
+    let cancelled = false;
+    loadCatalogForModule(activeModuleId).finally(() => {
+      if (!cancelled) setCatalogReady(true);
+    });
+    return () => { cancelled = true; };
+  }, [activeModuleId]);
 
   const ogList = getOgList(activeModuleId || '');
   const ogs = ogList.length > 0 ? ogList : (moduleData?.info_modulo?.objetivos_generales || []).map((desc: string, i: number) => ({ id: String.fromCharCode(97 + i), desc }));
@@ -31,6 +47,14 @@ export function RaOgMatrix() {
       [ogIndex]: updated
     });
   };
+
+  if (!ogs.length && !catalogReady) {
+    return (
+      <Card className="p-8 text-center border-t-4 border-t-yellow-500">
+        <LoadingSpinner text="Cargando objetivos generales del catálogo..." />
+      </Card>
+    );
+  }
 
   if (!ogs.length || !ras.length) {
     return (
