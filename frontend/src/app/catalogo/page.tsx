@@ -9,7 +9,7 @@ import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import {
   type CurriculumTitulo,
@@ -127,16 +127,13 @@ function CiclosContent() {
       <main id="main-content" tabIndex={-1} className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={activeTabCleanLabel} />
 
-        <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="w-full space-y-6 pb-12">
-
-            <PageHeader
-              icon={GraduationCap}
-              title={t('nav.catalogo', {defaultValue: 'Catálogo'})}
-              description={t('pages.catalogo_desc', {defaultValue: 'Catálogo oficial de familias profesionales, títulos, cursos → módulos.'})}
-            />
-
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+        <div className="flex-1 overflow-y-auto scrollbar-hide">
+          <StickyPageHeader
+            icon={GraduationCap}
+            title={t('nav.catalogo', {defaultValue: 'Catálogo'})}
+            description={t('pages.catalogo_desc', {defaultValue: 'Catálogo oficial de familias profesionales, títulos, cursos → módulos.'})}
+          >
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Tabs value={activeTab} onValueChange={(val: any) => handleTabChange(val as Tab)} className="flex-1">
                 <TabsList className="max-w-full">
                   {(
@@ -154,7 +151,9 @@ function CiclosContent() {
                 </TabsList>
               </Tabs>
             </div>
+          </StickyPageHeader>
 
+          <MotionWrapper className="w-full space-y-6 px-8 pt-4 pb-12">
             <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Catálogo Nacional Oficial.'} />
 
             {activeTab === "familias" && <TabFamilias onSelectTitulo={handleSelectFamiliaToTitulo} />}

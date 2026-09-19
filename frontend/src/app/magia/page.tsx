@@ -14,7 +14,7 @@ import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, getSigadInfo, filtrarPorGev 
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Skeleton } from "@/components/ui/Skeleton";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { TabSync } from "@/components/ui/TabSync";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
@@ -365,27 +365,24 @@ export default function MagiaPage() {
               </div>
             </div>
           ) : (
-            <div className="p-8">
-              <MotionWrapper className="w-full space-y-3 pb-12">
+            <div>
+              <StickyPageHeader
+                icon={Sparkles}
+                title={t('nav.magia', { defaultValue: 'MagIA' })}
+                description={t('pages.magia_desc', { defaultValue: 'Generación de la programación didáctica y reportes.' })}
+              >
+                <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+                  <TabsList className="max-w-full">
+                    {TABS.map((tab) => (
+                      <TabsTrigger key={tab.id} value={tab.id}>
+                        {tab.label}
+                      </TabsTrigger>
+                    ))}
+                  </TabsList>
+                </Tabs>
+              </StickyPageHeader>
 
-                <PageHeader
-                  icon={Sparkles}
-                  title={t('nav.magia', { defaultValue: 'MagIA' })}
-                  description={t('pages.magia_desc', { defaultValue: 'Generación de la programación didáctica y reportes.' })}
-                />
-
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
-                  <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
-                    <TabsList className="max-w-full">
-                      {TABS.map((tab) => (
-                        <TabsTrigger key={tab.id} value={tab.id}>
-                          {tab.label}
-                        </TabsTrigger>
-                      ))}
-                    </TabsList>
-                  </Tabs>
-                </div>
-
+              <MotionWrapper className="w-full space-y-3 px-8 pt-4 pb-12">
                 <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
 
                 {/* ══════════════════════════ COMPARATIVA ══════════════════════════ */}

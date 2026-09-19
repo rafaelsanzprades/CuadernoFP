@@ -17,7 +17,7 @@ import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { ContextoAgenda } from "@/components/features/dashboard/ContextoAgenda";
 import { DesarrolloUdActual } from "@/components/features/dashboard/DesarrolloUdActual";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { TabRelacionRaUd } from "@/components/features/curriculo/TabRelacionRaUd";
 import { Target } from "lucide-react";
@@ -88,17 +88,14 @@ export default function AgendaPage() {
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={activeTabCleanLabel} />
 
-        <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
-          <div className="w-full space-y-4 pb-12">
-
-            <PageHeader
-              icon={Calendar}
-              title={t('nav.agenda', { defaultValue: 'Agenda' })}
-              description={t('pages.agenda_desc', { defaultValue: 'Resumen diario: estado de clase y UD a impartir.' })}
-            />
-
+        <div className="flex-1 overflow-y-auto scrollbar-hide">
+          <StickyPageHeader
+            icon={Calendar}
+            title={t('nav.agenda', { defaultValue: 'Agenda' })}
+            description={t('pages.agenda_desc', { defaultValue: 'Resumen diario: estado de clase y UD a impartir.' })}
+          >
             {/* Pestañas */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
                 <TabsList className="max-w-full">
                   {TABS.map(tab => (
@@ -109,6 +106,9 @@ export default function AgendaPage() {
                 </TabsList>
               </Tabs>
             </div>
+          </StickyPageHeader>
+
+          <div className="w-full space-y-4 px-8 pt-4 pb-12">
 
             <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
 

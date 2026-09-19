@@ -16,7 +16,7 @@ import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { GoogleDriveSyncPanel } from "@/components/features/cloud/GoogleDriveSyncPanel";
 import { NewFileWizard } from "@/components/features/cloud/NewFileWizard";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
@@ -404,18 +404,13 @@ export default function ArchivosTrabajoPage() {
       <div className="flex-1 flex flex-col h-screen min-w-0">
         <Header breadcrumbSuffix={breadcrumbSuffixMap[activeTab] ?? "Archivos"} />
 
-        <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="w-full space-y-4 pb-12">
-
-
-            <PageHeader
-              icon={FolderOpen}
-              title={t('nav.archivos', { defaultValue: 'Archivo' })}
-              description={t('pages.archivos_desc')}
-            />
-
-            {/* Navigation Tabs */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+        <div className="flex-1 overflow-y-auto scrollbar-hide">
+          <StickyPageHeader
+            icon={FolderOpen}
+            title={t('nav.archivos', { defaultValue: 'Archivo' })}
+            description={t('pages.archivos_desc')}
+          >
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
                 <TabsList className="max-w-full">
                   {TABS.map(tab => (
@@ -440,6 +435,9 @@ export default function ArchivosTrabajoPage() {
                 </Button>
               )}
             </div>
+          </StickyPageHeader>
+
+          <MotionWrapper className="w-full space-y-4 px-8 pt-4 pb-12">
             <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de archivos.'} />
 
             <div className="space-y-4 animate-in fade-in duration-300">

@@ -15,7 +15,7 @@ import { DetalleAlumnadoTab } from "@/components/features/evaluacion/DetalleAlum
 import { FeoeEmpresaTab } from "@/components/features/evaluacion/FeoeEmpresaTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
@@ -301,26 +301,26 @@ export default function SeguimientoPage() {
         <Header breadcrumbSuffix={activeTabCleanLabel} />
         <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
 
-        <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-4">
-            <PageHeader
-              icon={MapPin}
-              title={t('nav.seguimiento', { defaultValue: 'Seguimiento' })}
-              description={t('pages.seguimiento_desc', { defaultValue: 'Diario de clases, asistencia, progreso de RA y notas por alumnado.' })}
-            />
+        <main className="flex-1 content-area overflow-y-auto scrollbar-hide">
+          <StickyPageHeader
+            icon={MapPin}
+            title={t('nav.seguimiento', { defaultValue: 'Seguimiento' })}
+            description={t('pages.seguimiento_desc', { defaultValue: 'Diario de clases, asistencia, progreso de RA y notas por alumnado.' })}
+          >
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+                <TabsList className="max-w-full">
+                  {TABS.map((tab) => (
+                    <TabsTrigger key={tab.id} value={tab.id}>
+                      {tab.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
+            </div>
+          </StickyPageHeader>
 
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
-                <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
-                  <TabsList className="max-w-full">
-                    {TABS.map((tab) => (
-                      <TabsTrigger key={tab.id} value={tab.id}>
-                        {tab.label}
-                      </TabsTrigger>
-                    ))}
-                  </TabsList>
-                </Tabs>
-              </div>
-
+          <MotionWrapper className="space-y-4 px-8 pt-4">
               <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Seguimiento del alumnado.'} />
 
               {activeTab === 'clases' && (

@@ -12,7 +12,7 @@ import Link from "next/link";
 import { TabSync } from "@/components/ui/TabSync";
 import { useState, useEffect } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { AIWizardModal } from "@/components/features/ai/AIWizardModal";
 import { TabDocumentos } from "@/components/features/ayuda/TabDocumentos";
@@ -83,25 +83,20 @@ export default function InicioPage() {
       />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={activeTabCleanLabel} />
-        <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-4 pb-12">
+        <div className="flex-1 overflow-y-auto scrollbar-hide">
+          <StickyPageHeader icon={Activity} title={t('inicio.title')} description={t('inicio.subtitle')}>
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+              <TabsList className="max-w-full">
+                {TABS.map(tab => (
+                  <TabsTrigger key={tab.id} value={tab.id}>
+                    {tab.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
+          </StickyPageHeader>
 
-
-            <PageHeader icon={Activity} title={t('inicio.title')} description={t('inicio.subtitle')} />
-
-            {/* Pestañas de Navegación */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
-              <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
-                <TabsList className="max-w-full">
-                  {TABS.map(tab => (
-                    <TabsTrigger key={tab.id} value={tab.id}>
-                      {tab.label}
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
-              </Tabs>
-            </div>
-
+          <MotionWrapper className="space-y-4 px-8 pt-4 pb-12">
             <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
 
             {/* ── CONTENIDO: BIENVENIDA ──────────────────────────────── */}

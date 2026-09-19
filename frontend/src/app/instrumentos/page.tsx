@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/Button";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { AccordionBlock } from "@/components/ui/AccordionBlock";
 import Link from "next/link";
@@ -449,26 +449,26 @@ export default function InstrumentosPage() {
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
 
-        <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-4 pb-12">
-            <PageHeader
-              icon={Wrench}
-              title={t('nav.instrumentos', {defaultValue: 'Instrumento'})}
-              description={t('pages.instrumentos_desc')}
-            />
+        <main className="flex-1 content-area overflow-y-auto scrollbar-hide">
+          <StickyPageHeader
+            icon={Wrench}
+            title={t('nav.instrumentos', {defaultValue: 'Instrumento'})}
+            description={t('pages.instrumentos_desc')}
+          >
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+                <TabsList className="max-w-full">
+                  {TABS.map(tab => (
+                    <TabsTrigger key={tab.id} value={tab.id}>
+                      {tab.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
+            </div>
+          </StickyPageHeader>
 
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
-              <TabsList className="max-w-full">
-                {TABS.map(tab => (
-                  <TabsTrigger key={tab.id} value={tab.id}>
-                    {tab.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
-          </div>
-
+          <MotionWrapper className="space-y-4 px-8 pt-4 pb-12">
           <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || t('campos.comun.gestionDe', {activeTab, defaultValue: 'Gestión de {{activeTab}}'})} />
 
           {activeTab === "resumen" && (
