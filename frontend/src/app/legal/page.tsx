@@ -15,7 +15,7 @@ import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { TabSync } from "@/components/ui/TabSync";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 
 /* ──────────────────────────────────────────────────────────────
@@ -93,17 +93,14 @@ export default function LegalPage() {
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={activeTabCleanLabel} />
 
-        <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
-          <div className="w-full space-y-4 pb-12">
-
-            <PageHeader
-              icon={Scale}
-              title={t('nav.legal', { defaultValue: 'Legal' })}
-              description={t('pages.legal_desc', { defaultValue: 'Aviso legal, privacidad, cookies, licencias y accesibilidad.' })}
-            />
-
+        <div className="flex-1 overflow-y-auto scrollbar-hide">
+          <StickyPageHeader
+            icon={Scale}
+            title={t('nav.legal', { defaultValue: 'Legal' })}
+            description={t('pages.legal_desc', { defaultValue: 'Aviso legal, privacidad, cookies, licencias y accesibilidad.' })}
+          >
             {/* Pestañas */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
                 <TabsList className="max-w-full">
                   {TABS.map(tab => (
@@ -114,6 +111,9 @@ export default function LegalPage() {
                 </TabsList>
               </Tabs>
             </div>
+          </StickyPageHeader>
+
+          <div className="w-full space-y-4 px-8 pt-4 pb-12">
 
             <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Información legal.'} />
 

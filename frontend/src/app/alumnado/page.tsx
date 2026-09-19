@@ -23,7 +23,7 @@ import { AlertaAbandonoTab } from "@/components/features/diario/AlertaAbandonoTa
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { GRUPOS_EVALUACION_DEFECTO } from "@/utils/calificaciones";
 
@@ -220,39 +220,38 @@ export default function AlumnadoPage() {
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={activeTabCleanLabel} />
         
-        <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-4 pb-12">
-            <PageHeader icon={Users} title={t('nav.alumnado', {defaultValue: 'Alumnado'})} description={t('pages.alumnado_desc')} />
+        <main className="flex-1 content-area overflow-y-auto scrollbar-hide">
+          <StickyPageHeader icon={Users} title={t('nav.alumnado', {defaultValue: 'Alumnado'})} description={t('pages.alumnado_desc')}>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+                <TabsList className="max-w-full">
+                  {TABS.map(tab => (
+                    <TabsTrigger key={tab.id} value={tab.id}>
+                      {tab.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
 
-          {/* Navigation Tabs */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
-              <TabsList className="max-w-full">
-                {TABS.map(tab => (
-                  <TabsTrigger key={tab.id} value={tab.id}>
-                    {tab.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
-
-            {/* Save Button */}
-            <div className="flex items-center gap-4 shrink-0">
-              {saveMessage && (
-                <span className={`text-body font-semibold ${saveIsError ? "text-danger" : "text-success"}`}>
-                  {saveMessage}
-                </span>
-              )}
-              <Button
-                onClick={handleSave}
-                disabled={saving}
-                className="bg-accent text-background hover:bg-accent/80 font-bold px-6 py-2 rounded-xl flex items-center gap-2"
-              >
-                {saving ? t('common.guardando', {defaultValue: 'Guardando...'}) : <>{t('common.guardar_cambios', {defaultValue: 'Guardar cambios'})} <span className="inline-flex"><Save className="w-[1.2em] h-[1.2em] mr-1" /></span></>}
-              </Button>
+              {/* Save Button */}
+              <div className="flex items-center gap-4 shrink-0">
+                {saveMessage && (
+                  <span className={`text-body font-semibold ${saveIsError ? "text-danger" : "text-success"}`}>
+                    {saveMessage}
+                  </span>
+                )}
+                <Button
+                  onClick={handleSave}
+                  disabled={saving}
+                  className="bg-accent text-background hover:bg-accent/80 font-bold px-6 py-2 rounded-xl flex items-center gap-2"
+                >
+                  {saving ? t('common.guardando', {defaultValue: 'Guardando...'}) : <>{t('common.guardar_cambios', {defaultValue: 'Guardar cambios'})} <span className="inline-flex"><Save className="w-[1.2em] h-[1.2em] mr-1" /></span></>}
+                </Button>
+              </div>
             </div>
-          </div>
+          </StickyPageHeader>
 
+          <MotionWrapper className="space-y-4 px-8 pt-4 pb-12">
           <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
 
           {/* Tab 1: Alumnado */}

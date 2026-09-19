@@ -11,7 +11,7 @@ import { TabSync } from "@/components/ui/TabSync";
 import { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { TabAcronimos } from "@/components/features/catalogo/TabAcronimos";
 import { GuiaTab } from "@/components/features/ayuda/GuiaTab";
@@ -225,12 +225,9 @@ export default function AyudaPage() {
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={activeTabCleanLabel} />
-        <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-4 pb-12">
-
-            <PageHeader icon={Info} title={t('nav.ayuda', { defaultValue: 'Ayuda' })} description={t('pages.ayuda_desc', { defaultValue: 'Guías, preguntas frecuentes, glosario y mapa de la aplicación.' })} />
-
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+        <div className="flex-1 overflow-y-auto scrollbar-hide">
+          <StickyPageHeader icon={Info} title={t('nav.ayuda', { defaultValue: 'Ayuda' })} description={t('pages.ayuda_desc', { defaultValue: 'Guías, preguntas frecuentes, glosario y mapa de la aplicación.' })}>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
                 <TabsList className="max-w-full">
                   {TABS.map(tab => (
@@ -241,7 +238,9 @@ export default function AyudaPage() {
                 </TabsList>
               </Tabs>
             </div>
+          </StickyPageHeader>
 
+          <MotionWrapper className="space-y-4 px-8 pt-4 pb-12">
             <TabInfoBox
               description={TAB_DESCRIPTIONS[activeTab] || t('campos.comun.gestionDe', {activeTab, defaultValue: 'Gestión de {{activeTab}}'})}
               action={activeTab === "guia" ? (

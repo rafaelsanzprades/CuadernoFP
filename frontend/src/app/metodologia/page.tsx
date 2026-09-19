@@ -15,7 +15,7 @@ import { ContingenciaTab } from "@/components/features/modulo/ContingenciaTab";
 import { DiversidadTab } from "@/components/features/modulo/DiversidadTab";
 import { InnovacionTab } from "@/components/features/modulo/InnovacionTab";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
@@ -115,15 +115,13 @@ export default function MetodologiaConfigPage() {
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={activeTabCleanLabel} />
-        <main id="main-content" tabIndex={-1} className="flex-1 p-8 content-area">
-          <MotionWrapper>
-            <PageHeader
-              icon={Lightbulb}
-              title={t('nav.metodologia', { defaultValue: 'Metodología' })}
-              description={t('pages.metodologia_desc', { defaultValue: 'Estrategias metodológicas, recursos, espacios y atención a la diversidad.' })}
-            />
-
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+        <main id="main-content" tabIndex={-1} className="flex-1 content-area overflow-y-auto scrollbar-hide">
+          <StickyPageHeader
+            icon={Lightbulb}
+            title={t('nav.metodologia', { defaultValue: 'Metodología' })}
+            description={t('pages.metodologia_desc', { defaultValue: 'Estrategias metodológicas, recursos, espacios y atención a la diversidad.' })}
+          >
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
                 <TabsList className="max-w-full">
                   {TABS.map((tab) => (
@@ -134,7 +132,9 @@ export default function MetodologiaConfigPage() {
                 </TabsList>
               </Tabs>
             </div>
+          </StickyPageHeader>
 
+          <MotionWrapper className="px-8 pt-4 pb-12">
             <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Configuración de la metodología.'} />
 
             <div className="space-y-6">

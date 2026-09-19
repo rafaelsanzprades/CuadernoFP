@@ -18,7 +18,7 @@ import { Alumnado } from "@/types";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Skeleton } from "@/components/ui/Skeleton";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 
 type DocumentItem = {
@@ -383,17 +383,13 @@ export default function DocumentosPage() {
       <main id="main-content" tabIndex={-1} className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
 
-        <div className="flex-1 p-8 overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="w-full space-y-3 pb-12">
-
-
-            <PageHeader
-              icon={FileText}
-              title={t('nav.normativa', {defaultValue: 'Normativa'})}
-              description={t('pages.documentos_desc', {defaultValue: 'Explorador de legislación, normativas y docs oficiales.'})}
-            />
-
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+        <div className="flex-1 overflow-y-auto scrollbar-hide">
+          <StickyPageHeader
+            icon={FileText}
+            title={t('nav.normativa', {defaultValue: 'Normativa'})}
+            description={t('pages.documentos_desc', {defaultValue: 'Explorador de legislación, normativas y docs oficiales.'})}
+          >
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Tabs value={activeTab} onValueChange={(val) => { setActiveTab(val); fetchDocuments(val); }} className="flex-1">
                 <TabsList className="max-w-full">
                   {TABS.map(tab => (
@@ -415,7 +411,9 @@ export default function DocumentosPage() {
                 />
               </div>
             </div>
+          </StickyPageHeader>
 
+          <MotionWrapper className="w-full space-y-3 px-8 pt-4 pb-12">
             <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión documental y normativa.'} />
 
             <div className="space-y-3 animate-in fade-in duration-500">

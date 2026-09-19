@@ -18,7 +18,7 @@ import type { Tarea, Sesion } from "@/types";
 import { repartoIgualitario, repartoPonderado, PESO_RELEVANCIA_CE } from "@/utils/calificaciones";
 import toast from "react-hot-toast";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -302,23 +302,21 @@ export default function MatricesPage() {
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
 
-        <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-4 pb-12">
-            <PageHeader icon={Grid} title={t('nav.curriculo', { defaultValue: 'Currículo' })} description={t('pages.matrices_desc')} />
+        <main className="flex-1 content-area overflow-y-auto scrollbar-hide">
+          <StickyPageHeader icon={Grid} title={t('nav.curriculo', { defaultValue: 'Currículo' })} description={t('pages.matrices_desc')}>
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+              <TabsList className="max-w-full">
+                {TABS.map(tab => (
+                  <TabsTrigger key={tab.id} value={tab.id}>
+                    <span className="mr-2">{tab.icon}</span>
+                    {tab.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
+          </StickyPageHeader>
 
-            <div className="mb-2">
-              <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
-                <TabsList className="max-w-full">
-                  {TABS.map(tab => (
-                    <TabsTrigger key={tab.id} value={tab.id}>
-                      <span className="mr-2">{tab.icon}</span>
-                      {tab.label}
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
-              </Tabs>
-            </div>
-
+          <MotionWrapper className="space-y-4 px-8 pt-4 pb-12">
             <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
 
             {/* Resultados de aprendizaje y CE */}

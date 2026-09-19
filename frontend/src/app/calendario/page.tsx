@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/Button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { getAutoMilestones } from "@/utils/calendarMilestones";
@@ -447,22 +447,13 @@ export default function CalendarioPage() {
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={activeTabCleanLabel} />
 
-        <main id="main-content" tabIndex={-1} className="flex-1 p-8 content-area">
-          <MotionWrapper className="space-y-4 pb-12">
-            <PageHeader
-              icon={Calendar}
-              title={t('nav.calendario', {defaultValue: 'Calendario'})}
-              description={t('pages.calendario_desc', {defaultValue: 'Horarios, trimestres, festivos y eventos del curso.'})}
-            />
-
-          {/* Save message */}
-          {saveMessage && (
-            <p className={`text-body font-semibold ${saveIsError ? "text-danger" : "text-success"}`}>
-              {saveMessage}
-            </p>
-          )}
-
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+        <main id="main-content" tabIndex={-1} className="flex-1 content-area overflow-y-auto scrollbar-hide">
+          <StickyPageHeader
+            icon={Calendar}
+            title={t('nav.calendario', {defaultValue: 'Calendario'})}
+            description={t('pages.calendario_desc', {defaultValue: 'Horarios, trimestres, festivos y eventos del curso.'})}
+          >
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
                 <TabsList className="max-w-full">
                   {TABS.map((tab) => (
@@ -473,6 +464,15 @@ export default function CalendarioPage() {
                 </TabsList>
               </Tabs>
             </div>
+          </StickyPageHeader>
+
+          <MotionWrapper className="space-y-4 px-8 pt-4 pb-12">
+          {/* Save message */}
+          {saveMessage && (
+            <p className={`text-body font-semibold ${saveIsError ? "text-danger" : "text-success"}`}>
+              {saveMessage}
+            </p>
+          )}
 
             <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión del calendario académico.'} />
 

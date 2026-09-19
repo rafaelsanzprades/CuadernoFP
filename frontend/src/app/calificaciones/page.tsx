@@ -19,7 +19,7 @@ import { ReclamacionesTab } from "@/components/features/evaluacion/Reclamaciones
 import { BoletinesTab } from "@/components/features/alumnado/BoletinesTab";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
@@ -165,11 +165,9 @@ export default function ProgresoPage() {
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={TABS.find(t => t.id === activeTab)?.label} />
 
-        <main className="flex-1 p-8 content-area overflow-y-auto scrollbar-hide">
-          <MotionWrapper className="space-y-3 pb-12">
-            <PageHeader icon={TrendingUp} title={t('nav.calificaciones', {defaultValue: 'Calificación'})} description={t('pages.evaluacion_desc')} />
-
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+        <main className="flex-1 content-area overflow-y-auto scrollbar-hide">
+          <StickyPageHeader icon={TrendingUp} title={t('nav.calificaciones', {defaultValue: 'Calificación'})} description={t('pages.evaluacion_desc')}>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
                 <TabsList className="max-w-full">
                   {TABS.map(tab => (
@@ -196,7 +194,9 @@ export default function ProgresoPage() {
                 </Button>
               </div>
             </div>
+          </StickyPageHeader>
 
+          <MotionWrapper className="space-y-3 px-8 pt-4 pb-12">
           <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
 
           {/* TAB 1: RESUMEN */}
