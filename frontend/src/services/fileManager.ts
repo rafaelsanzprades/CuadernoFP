@@ -129,44 +129,72 @@ function serializeData(data: any): string {
   return jsonStr;
 }
 
+// ─── DEMO prefetch cache ────────────────────────────────────
+// Descarga los 3 JSON de la DEMO (fpg/fpp/fpc) en segundo plano tan pronto
+// como se sabe que el WelcomeWizard se va a mostrar (sin datos locales
+// todavia), sin esperar a que el usuario pulse "Probar con DEMO" -- ver
+// prefetchDemoData(). loadDemoData() reutiliza esa misma promesa si ya esta
+// en curso; si prefetchDemoData() nunca se llamo, o fallo, hace el fetch
+// normal como si no existiera esta cache.
+interface DemoBundle { groupData: any; pdData: any; cursoData: any }
+const demoPrefetchCache = new Map<string, Promise<DemoBundle>>();
+
+function resolveDemoGroupId(groupId?: string): string {
+  if (!groupId || groupId === '0237' || groupId === '0237-1a') return '202526 G 1A-GM 0237-ICTVE.fpg';
+  return groupId;
+}
+
+async function fetchDemoBundle(fpgName: string): Promise<DemoBundle> {
+  const fpgRes = await fetch(`/demo/${encodeURIComponent(fpgName)}`);
+  if (!fpgRes.ok) throw new Error(`Failed to fetch /demo/${fpgName}`);
+  const groupData = JSON.parse(await fpgRes.text());
+  if (groupData.tipo !== "GRUPO" || !groupData.archivos) throw new Error("Invalid .fpg format");
+
+  const fppRes = await fetch(`/demo/${encodeURIComponent(groupData.archivos.programacion)}`);
+  if (!fppRes.ok) throw new Error(`Failed to fetch /demo/${groupData.archivos.programacion}`);
+  const pdData = JSON.parse(await fppRes.text());
+
+  const fpcRes = await fetch(`/demo/${encodeURIComponent(groupData.archivos.curso)}`);
+  if (!fpcRes.ok) throw new Error(`Failed to fetch /demo/${groupData.archivos.curso}`);
+  const cursoDataArray = JSON.parse(await fpcRes.text());
+  const cursoData = Array.isArray(cursoDataArray) ? cursoDataArray[0] : cursoDataArray;
+
+  return { groupData, pdData, cursoData };
+}
+
 // ─── File Manager ───────────────────────────────────────────
 
 export const fileManager = {
 
   // ── DEMO ────────────────────────────────────────────────
 
-  async loadDemoData(groupId?: string): Promise<void> {
-    // If no group is passed, default to a sensible demo group
-    if (!groupId || groupId === '0237' || groupId === '0237-1a') groupId = '202526 G 1A-GM 0237-ICTVE.fpg';
+  /** Empieza a descargar los ficheros DEMO en segundo plano antes de que el
+   * usuario pulse "Probar con DEMO" -- pensado para llamarse al montar el
+   * WelcomeWizard (el primer instante en que se sabe que no hay datos
+   * locales). Fire-and-forget: si falla, loadDemoData() simplemente
+   * reintenta el fetch desde cero, como si esta funcion no se hubiera
+   * llamado nunca. */
+  prefetchDemoData(groupId?: string): void {
+    const fpgName = resolveDemoGroupId(groupId);
+    if (demoPrefetchCache.has(fpgName)) return;
+    const promise = fetchDemoBundle(fpgName);
+    demoPrefetchCache.set(fpgName, promise);
+    promise.catch(() => { demoPrefetchCache.delete(fpgName); });
+  },
 
-    const fpgName = groupId;
-    const moduleCode = groupId.includes('0223') ? '0223' : '0237';
+  async loadDemoData(groupId?: string): Promise<void> {
+    const fpgName = resolveDemoGroupId(groupId);
+    const moduleCode = fpgName.includes('0223') ? '0223' : '0237';
 
     try {
-      // 1. Fetch .fpg (Group project file)
-      const fpgRes = await fetch(`/demo/${encodeURIComponent(fpgName)}`);
-      if (!fpgRes.ok) throw new Error(`Failed to fetch /demo/${fpgName}`);
-      const fpgText = await fpgRes.text();
-      const groupData = JSON.parse(fpgText);
-
-      if (groupData.tipo !== "GRUPO" || !groupData.archivos) {
-        throw new Error("Invalid .fpg format");
-      }
-
-      // 2. Fetch linked .fpp (programación)
-      const fppRes = await fetch(`/demo/${encodeURIComponent(groupData.archivos.programacion)}`);
-      if (!fppRes.ok) throw new Error(`Failed to fetch /demo/${groupData.archivos.programacion}`);
-      const pdText = await fppRes.text();
-      const pdData = JSON.parse(pdText);
-
-      // 3. Fetch linked .fpc (curso)
-      const fpcRes = await fetch(`/demo/${encodeURIComponent(groupData.archivos.curso)}`);
-      if (!fpcRes.ok) throw new Error(`Failed to fetch /demo/${groupData.archivos.curso}`);
-      const fpcText = await fpcRes.text();
-      let cursoDataArray = JSON.parse(fpcText);
-      
-      // If legacy array format, pick the first
-      let cursoData = Array.isArray(cursoDataArray) ? cursoDataArray[0] : cursoDataArray;
+      // Reutiliza el prefetch si ya esta en curso/listo (ver
+      // prefetchDemoData); se borra de la cache al consumirse para que una
+      // segunda carga de la DEMO (p.ej. "restablecer datos DEMO") siempre
+      // traiga un objeto fresco y no reutilice el mismo pdData/cursoData
+      // que el resto de la app pueda haber mutado mientras tanto.
+      const bundlePromise = demoPrefetchCache.get(fpgName) || fetchDemoBundle(fpgName);
+      demoPrefetchCache.delete(fpgName);
+      const { groupData, pdData, cursoData } = await bundlePromise;
 
       // Extract IDs
       const pdId = pdData.id || `${moduleCode}-pd`;

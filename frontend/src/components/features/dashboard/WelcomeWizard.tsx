@@ -1,5 +1,5 @@
 import { Gift, Hand, Rocket } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -18,6 +18,13 @@ export function WelcomeWizard({ onComplete, fetchModules }: WelcomeWizardProps) 
   const [step, setStep] = useState<"CHOICE" | "CREATE_FORM" | "LOADING">("CHOICE");
   const [newPdName, setNewPdName] = useState("");
   const [newCursoName, setNewCursoName] = useState("");
+
+  // Este componente solo se monta cuando ya se sabe que no hay datos locales
+  // (ni Programación ni Curso abiertos) -- el momento exacto en que tiene
+  // sentido adelantar la descarga de la DEMO, sin esperar a que el usuario
+  // pulse "Probar con DEMO". Si acaba eligiendo "Crear mis archivos" en su
+  // lugar, la descarga adelantada simplemente no se usa (no se toca el store).
+  useEffect(() => { fileManager.prefetchDemoData(); }, []);
 
   const handleLoadDemo = async () => {
     setStep("LOADING");
