@@ -68,7 +68,7 @@
         "label": "Dates i horari",
         "desc": "Configura les dates generals, els trimestres i l'horari setmanal del curs."
       },
-      "feoe": {
+      "periodoFeoe": {
         "label": "Període FEOE",
         "desc": "Configuració específica per a la FP Dual (FEOE)."
       },
@@ -118,8 +118,8 @@
         "label": "Notes",
         "desc": "Entrada de notes numèriques per alumnat, instrument d'avaluació i nivell d'adquisició de RA."
       },
-      "feoeEmpresa": {
-        "label": "FEOE / Empresa",
+      "empresaFeoe": {
+        "label": "Empresa FEOE",
         "desc": "Avaluació de l'alumnat a l'empresa durant la FEOE (Annex XI b), transcrita per RA/CE."
       }
     },
@@ -157,8 +157,8 @@
         "label": "Contextualització",
         "desc": "Entorn geogràfic, socioeconòmic i escolar, alumnat ACNEAE, textos del model Simplificat i dades d'autoria. Cap. 1.3 del PD+."
       },
-      "dual": {
-        "label": "Dual FEOE",
+      "planFeoe": {
+        "label": "Pla FEOE",
         "desc": "Formació en empresa o organisme equiparat (FEOE): modalitat, seguiment i règim dual. Cap. 5 del PD+."
       },
       "criterios": {
@@ -854,7 +854,8 @@
     },
     "feoe": {
       "excelenteTodoA4": "Excel·lent (tot a 4)",
-      "suficienteTodoA3": "Suficient (tot a 3)"
+      "suficienteTodoA3": "Suficient (tot a 3)",
+      "gestionarEnCurriculo": "Gestionar a Currículum"
     },
     "inicio": {
       "unirseTelegram": "Unir-me al grup a Telegram"
@@ -2662,9 +2663,11 @@
       "score3": "3 · Notable",
       "score4": "4 · Excel·lent",
       "criteriosDesignadosTitulo": "Criteris designats per a FEOE",
-      "criteriosDesignadosDesc": "Marca els CE que s'avaluen a l'empresa (Annex XI b) — el tutor d'empresa els valora de l'1 al 4 i tu transcrius el resultat més avall, per alumne.",
+      "criteriosDesignadosDesc": "Els CE marcats com a FEOE a Currículum són els que valora el tutor d'empresa (Annex XI b) — tu transcrius el resultat més avall, per alumne.",
       "sinRaCe": "No hi ha RA/CE carregats en aquest mòdul encara.",
-      "marcaAlMenosUnCe": "Marca almenys un CE a dalt per començar a registrar valoracions d'empresa.",
+      "ningunCeMarcadoDesc": "Encara no hi ha cap CE marcat com a FEOE. Marca'ls a Currículum -> OG<-RA<-CE (columna \"FEOE\").",
+      "delRaSufijo": "del RA",
+      "marcaAlMenosUnCe": "Marca almenys un CE com a FEOE a Currículum -> OG<-RA<-CE per començar a registrar valoracions d'empresa.",
       "sinAlumnadoActivo": "No hi ha alumnat actiu registrat en aquest curs.",
       "alumnadoActivoCount": "Alumnat actiu ({{count}})",
       "rellenaConBotonDesc": "Omple amb un botó i corregeix a mà el que calgui — és només un punt de partida, no un valor definitiu.",

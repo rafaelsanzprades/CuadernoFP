@@ -83,10 +83,13 @@ export const CriterioEvaluacionSchema = z.object({
   id_ud: z.string().optional(),
   desc_ce: z.string().optional().nullable(),
   peso_ce: z.number().optional(),
+  // FEOE (Anexo XI b): además de marcar el RA/CE como parte de la modalidad
+  // dual, is_dual es también el criterio que usa FeoeEmpresaTab.tsx para
+  // decidir qué CE transcribe el tutor de empresa -- antes había un campo
+  // "feoe" aparte con su propio checkbox en esa pantalla, una segunda
+  // selección redundante que no se enteraba de esta; se unificaron el
+  // 2026-09-20 a petición de Rafael.
   is_dual: z.boolean().optional().nullable(),
-  // Ítem 12 (resto): CE designado para ser evaluado por el tutor de empresa
-  // durante la FEOE (Anexo XI b), en vez de/además de en el aula.
-  feoe: z.boolean().optional().nullable(),
   // Relevancia del CE (inspirado en el "Nivel" de CONF_CE/CONF_EV de Edo
   // Gual, pero con escala relativa a un punto neutro en vez de una escala
   // absoluta): forma alternativa de fijar `peso_ce` a partir de un concepto

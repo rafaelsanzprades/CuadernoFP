@@ -78,13 +78,13 @@ export default function SeguimientoPage() {
     { id: "clases", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.clases.label', {defaultValue: 'Clases'})}</span>, cleanLabel: t('tabs.seguimiento.clases.label', {defaultValue: 'Clases'}) },
     { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.asistencia.label', {defaultValue: 'Asistencia'})}</span>, cleanLabel: t('tabs.seguimiento.asistencia.label', {defaultValue: 'Asistencia'}) },
     { id: "detalle", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.detalle.label', {defaultValue: 'Notas'})}</span>, cleanLabel: t('tabs.seguimiento.detalle.label', {defaultValue: 'Notas'}) },
-    { id: "feoe-empresa", label: <span className="flex items-center gap-2"><Building2 className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.feoeEmpresa.label', {defaultValue: 'FEOE / Empresa'})}</span>, cleanLabel: t('tabs.seguimiento.feoeEmpresa.label', {defaultValue: 'FEOE / Empresa'}) },
+    { id: "empresa-feoe", label: <span className="flex items-center gap-2"><Building2 className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.empresaFeoe.label', {defaultValue: 'Empresa FEOE'})}</span>, cleanLabel: t('tabs.seguimiento.empresaFeoe.label', {defaultValue: 'Empresa FEOE'}) },
   ];
   const TAB_DESCRIPTIONS: Record<string, string> = {
     clases: t('tabs.seguimiento.clases.desc', {defaultValue: 'Diario de clases, sesiones lectivas y registro de contingencias.'}),
     asistencia: t('tabs.seguimiento.asistencia.desc', {defaultValue: 'Control de asistencia del alumnado.'}),
     detalle: t('tabs.seguimiento.detalle.desc', {defaultValue: 'Entrada de notas numéricas por alumnado, instrumento de evaluación y nivel de adquisición de RA.'}),
-    'feoe-empresa': t('tabs.seguimiento.feoeEmpresa.desc', {defaultValue: 'Evaluación del alumnado en la empresa durante la FEOE (Anexo XI b), transcrita por RA/CE.'}),
+    'empresa-feoe': t('tabs.seguimiento.empresaFeoe.desc', {defaultValue: 'Evaluación del alumnado en la empresa durante la FEOE (Anexo XI b), transcrita por RA/CE.'}),
   };
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -440,7 +440,7 @@ export default function SeguimientoPage() {
                 </div>
               )}
 
-              {activeTab === 'feoe-empresa' && (
+              {activeTab === 'empresa-feoe' && (
                 <div className="mt-4">
                   <FeoeEmpresaTab />
                 </div>
