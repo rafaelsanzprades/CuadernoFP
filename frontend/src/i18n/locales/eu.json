@@ -96,13 +96,9 @@
         "label": "Banakakoa",
         "desc": "Ikasleka lanbide-orientazioa: motibazioa, lan-esperientzia, gaitasunak, asmoak eta zikloaren osteko txertaketa."
       },
-      "perfilResumen": {
-        "label": "Laburpena",
-        "desc": "Taldearen lanbide-profilaren ikuspegi orokorra, taula iragazgarrian."
-      },
       "perfilTendencias": {
         "label": "Joerak",
-        "desc": "Taldearen lanbide-profilaren agregatuak eta joerak."
+        "desc": "Taldearen lanbide-profilaren agregatuak eta joerak, eta ikasle guztien taula iragazgarria."
       },
       "expediente": {
         "label": "Espedientea",

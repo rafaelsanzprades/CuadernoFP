@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { Alumnado } from "@/types";
+import { ResumenProfesionalTab } from "@/components/features/alumnado/ResumenProfesionalTab";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -228,47 +229,17 @@ export const TendenciasProfesionalTab = () => {
             </Card>
           )}
 
-          <Card className="border border-white/5 bg-foreground/5 overflow-hidden">
-            <div className="p-5 border-b border-white/5">
-              <h3 className="text-base font-bold text-foreground"><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.resumenPorAlumnadoTitulo', {defaultValue: 'Resumen por alumnado/a'})}</h3>
-            </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-white/5 text-muted bg-foreground/5">
-                    <th className="text-left p-3 font-semibold">{t('nav.alumnado', {defaultValue: 'Alumnado/a'})}</th>
-                    <th className="text-left p-3 font-semibold">{t('campos.alumnado.aptitudLabel', {defaultValue: 'Aptitud'})}</th>
-                    <th className="text-left p-3 font-semibold">{t('campos.alumnado.areaInteresLabel', {defaultValue: 'Área interés'})}</th>
-                    <th className="text-left p-3 font-semibold">{t('campos.alumnado.intencionTerminarLabel', {defaultValue: 'Intención al terminar'})}</th>
-                    <th className="text-left p-3 font-semibold">{t('campos.alumnado.insercionLabel', {defaultValue: 'Inserción'})}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {activeStudents.map((al: any) => {
-                    const d = profesionalLedger[al.ID] || {};
-                    return (
-                      <tr key={al.ID} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
-                        <td className="p-3 font-medium text-foreground">
-                          {al.Apellidos}, {al.Nombre}
-                          <div className="text-[10px] text-muted font-mono">{al.ID}</div>
-                        </td>
-                        <td className="p-3 text-foreground/70">{d.aptitud_principal || <span className="text-muted/50 italic text-xs">-</span>}</td>
-                        <td className="p-3 text-foreground/70 max-w-[160px] truncate">{d.area_interes || <span className="text-muted/50 italic text-xs">-</span>}</td>
-                        <td className="p-3">
-                          {d.intencion_al_terminar ? (
-                            <span className="text-xs font-semibold bg-accent/10 border border-accent/20 text-accent px-2 py-1 rounded-full">
-                              {d.intencion_al_terminar}
-                            </span>
-                          ) : <span className="text-muted/50 italic text-xs">{t('checks.verificacion.sinDatos', {defaultValue: 'Sin datos'})}</span>}
-                        </td>
-                        <td className="p-3 text-foreground/70 text-xs">{d.estado_insercion || <span className="text-muted/50 italic">-</span>}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </Card>
+          {/* Bloque 2: tabla completa de Resumen (filtrable/ordenable/con
+              detalle expandible) -- traída aquí desde la antigua pestaña
+              "Resumen" el 2026-09-20 a petición de Rafael, ya que duplicaba
+              en peor (sin filtros ni detalle) un subconjunto de esta misma
+              tabla. Con esto se elimina esa pestaña. */}
+          <div className="pt-6 border-t border-[var(--glass-border)] space-y-4">
+            <h3 className="text-base font-bold text-foreground flex items-center gap-2">
+              <span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.resumenPorAlumnadoTitulo', {defaultValue: 'Resumen por alumnado/a'})}
+            </h3>
+            <ResumenProfesionalTab />
+          </div>
         </>
       )}
     </div>
