@@ -54,7 +54,7 @@ export default function MetodologiaConfigPage() {
     { id: "metodologia", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.metodologia.label', {defaultValue: 'Metodología e inclusión'})}</span>, cleanLabel: t('tabs.metodologia.metodologia.label', {defaultValue: 'Metodología e inclusión'}) },
     { id: "recursos", label: <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.recursos.label', {defaultValue: 'Recursos'})}</span>, cleanLabel: t('tabs.metodologia.recursos.label', {defaultValue: 'Recursos'}) },
     { id: "contingencia", label: <span className="flex items-center gap-2"><Shield className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.contingencia.label', {defaultValue: 'Plan de contingencia'})}</span>, cleanLabel: t('tabs.metodologia.contingencia.label', {defaultValue: 'Plan de contingencia'}) },
-    { id: "transversales", label: <span className="flex items-center gap-2"><Layers className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.transversales.label', {defaultValue: 'Transversales, competencias y actividades'})}</span>, cleanLabel: t('tabs.metodologia.transversales.label', {defaultValue: 'Transversales, competencias y actividades'}) },
+    { id: "transversales", label: <span className="flex items-center gap-2"><Layers className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.transversales.label', {defaultValue: 'Transversales'})}</span>, cleanLabel: t('tabs.metodologia.transversales.label', {defaultValue: 'Transversales'}) },
   ];
 
   const activeTabCleanLabel = TABS.find(tab => tab.id === activeTab)?.cleanLabel;

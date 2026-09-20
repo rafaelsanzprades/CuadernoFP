@@ -77,7 +77,7 @@
         "desc": "Irakaskuntzari eragiten dioten ekitaldi eta jaiegunen erregistroa."
       },
       "actividades": {
-        "label": "Jarduera osagarriak eta eskolaz kanpokoak",
+        "label": "Osagarriak eta eskolaz kanpokoak",
         "desc": "Jarduera osagarrien eta eskolaz kanpokoen plangintza."
       },
       "visual": {
@@ -176,8 +176,8 @@
         "desc": "RAek tituluaren helburu orokorretan egiten duten ekarpena."
       },
       "ponderacion-ra-ce": {
-        "label": "RA<-CE haztapena",
-        "desc": "Ikaskuntzaren emaitzen eta ebaluazio-irizpideen matrizea, eta haien haztapena."
+        "label": "OG<-RA<-CE",
+        "desc": "Ikaskuntzaren emaitzen eta ebaluazio-irizpideen matrizea eta haien haztapena, eta ikaskuntzaren emaitzek titulazioaren helburu orokorretan duten ekarpena."
       },
       "unidades": {
         "label": "Unitate didaktikoak",
@@ -206,7 +206,7 @@
         "desc": "Kontingentzia-planak eta salbuespenezko egoeretarako egokitzapena."
       },
       "transversales": {
-        "label": "Zeharkakoak, konpetentziak eta jarduerak",
+        "label": "Zeharkakoak",
         "desc": "Elementu zeharkakoak, funtsezko konpetentziak, konpetentzia digitalak, curriculumaren estandarrak eta helburuak, berrikuntza eta modulu arteko lotura, eta jarduera osagarriak eta eskolaz kanpokoak."
       }
     },
