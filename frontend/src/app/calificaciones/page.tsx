@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BarChart, ClipboardList, Save, TrendingUp, User, FolderOpen, History, AlertOctagon, LineChart, FileText } from "lucide-react";
+import { BarChart, ClipboardList, Save, TrendingUp, User, FolderOpen, History, AlertOctagon, LineChart, FileText, Target } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -14,10 +14,12 @@ import { useTranslation } from "react-i18next";
 import { AnalisisGrupalTab } from "@/components/features/analisis/AnalisisGrupalTab";
 import { AnalisisIndividualTab } from "@/components/features/analisis/AnalisisIndividualTab";
 import EstadisticasTab from "@/components/features/evaluacion/EstadisticasTab";
+import { ProgresoRaTab } from "@/components/features/evaluacion/ProgresoRaTab";
 import { HistorialCalificacionesTab } from "@/components/features/evaluacion/HistorialCalificacionesTab";
 import { ReclamacionesTab } from "@/components/features/evaluacion/ReclamacionesTab";
 import { BoletinesTab } from "@/components/features/alumnado/BoletinesTab";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
+import { AccordionBlock } from "@/components/ui/AccordionBlock";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
@@ -136,8 +138,6 @@ export default function ProgresoPage() {
 
   const TABS = [
     { id: "resumen", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.resumen')}</>, cleanLabel: t('tabs.resumen') },
-    { id: "estadisticas", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.estadisticas.label', {defaultValue: 'Estadísticas'})}</>, cleanLabel: t('tabs.calificaciones.estadisticas.label', {defaultValue: 'Estadísticas'}) },
-    { id: "analisis", label: <><span className="inline-flex"><LineChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.analisis.label', {defaultValue: 'Análisis'})}</>, cleanLabel: t('tabs.calificaciones.analisis.label', {defaultValue: 'Análisis'}) },
     { id: "historico", label: <><span className="inline-flex"><History className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'})}</>, cleanLabel: t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'}) },
     { id: "reclamaciones", label: <><span className="inline-flex"><AlertOctagon className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.reclamaciones.label', {defaultValue: 'Reclamaciones'})}
         {reclamacionesPendientes > 0 && (
@@ -150,9 +150,7 @@ export default function ProgresoPage() {
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    resumen: t('tabs.calificaciones.resumen.desc', {defaultValue: 'Panel global de rendimiento y calificaciones medias.'}),
-    estadisticas: t('tabs.calificaciones.estadisticas.desc', {defaultValue: 'Estadísticas descriptivas y visualizaciones del rendimiento del grupo.'}),
-    analisis: t('tabs.calificaciones.analisis.desc', {defaultValue: 'Desempeño comparativo del grupo y hoja de progreso individual para tutorías.'}),
+    resumen: t('tabs.calificaciones.resumen.desc', {defaultValue: 'Panel global de rendimiento: calificaciones medias, progreso por RA/UD, estadísticas y análisis comparativo.'}),
     historico: t('tabs.calificaciones.historico.desc', {defaultValue: 'Registro de cada cambio de nota, con su fecha, agente y motivo.'}),
     reclamaciones: t('tabs.calificaciones.reclamaciones.desc', {defaultValue: 'Reclamaciones de nota presentadas por el alumnado, con su motivo y resolución.'}),
     boletines: t('tabs.calificaciones.boletines.desc', {defaultValue: 'Boletín individual de calificaciones en pantalla, con radar y barras de nivel de logro por RA.'}),
@@ -199,15 +197,22 @@ export default function ProgresoPage() {
           <MotionWrapper className="space-y-3 px-8 pt-4 pb-12">
           <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
 
-          {/* TAB 1: RESUMEN */}
+          {/* TAB 1: RESUMEN -- fusiona (2026-09-20) lo que antes eran 3 pestañas
+              aparte (Resumen, Estadísticas, Análisis) más "Progreso de RA y UD"
+              (traído desde Seguimiento) en un único acordeón, para bajar de 6 a
+              4 pestañas en esta página. De paso se quitaron dos gráficos de "RA"
+              que llevaban datos inventados en vez de reales (ver 01 Histórico.md,
+              entrada de esta misma fecha): el "Rendimiento medio por RA" de
+              Estadísticas simulaba la nota a partir de la nota final +/- un
+              desplazamiento fijo por índice de RA, y el "Rendimiento por RA" de
+              Análisis Grupal usaba una onda seno sobre la media del grupo -- ninguno
+              de los dos leía notas reales. El único gráfico de RA que queda aquí
+              (bloque "Progreso RA-UD") es el que ya calculaba esto de verdad, vía
+              Motor JEG. */}
           {activeTab === "resumen" && (
             <div className="space-y-4 animate-in fade-in duration-500">
-              
-              {/* Bloque 1: Resumen de calificaciones por trimestres */}
-              <Card className="p-6 border-t-4 border-t-blue-500">
-                <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-5">
-                  <span><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Resumen de calificaciones por trimestres
-                </h2>
+
+              <AccordionBlock title="Resumen de calificaciones por trimestres" icon={<BarChart className="w-5 h-5" />} defaultOpen>
                 <div className="overflow-x-auto">
                   {(() => {
                     const instrumentosPct = (moduleData?.instrumentos_pct_trimestre && moduleData.instrumentos_pct_trimestre.length > 0)
@@ -394,35 +399,35 @@ export default function ProgresoPage() {
                     );
                   })()}
                 </div>
-              </Card>
-            </div>
-          )}
+              </AccordionBlock>
 
-          {/* TAB ESTADISTICAS */}
-          {activeTab === "estadisticas" && (
-            <div className="space-y-4 animate-in fade-in duration-500">
-              <EstadisticasTab />
-            </div>
-          )}
+              <AccordionBlock title="Progreso RA-UD" icon={<Target className="w-5 h-5" />}>
+                <ProgresoRaTab />
+              </AccordionBlock>
 
-          {/* TAB 3: ANÁLISIS (grupal + individual) */}
-          {activeTab === "analisis" && (
-            <div className="animate-in fade-in duration-500 space-y-4">
-              <div className="inline-flex rounded-xl border border-[var(--glass-border)] bg-foreground/5 p-1">
-                <button
-                  onClick={() => setAnalisisView("grupal")}
-                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${analisisView === "grupal" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
-                >
-                  <ClipboardList className="w-4 h-4" /> {t('tabs.grupal')}
-                </button>
-                <button
-                  onClick={() => setAnalisisView("individual")}
-                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${analisisView === "individual" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
-                >
-                  <User className="w-4 h-4" /> {t('tabs.individual')}
-                </button>
-              </div>
-              {analisisView === "grupal" ? <AnalisisGrupalTab /> : <AnalisisIndividualTab />}
+              <AccordionBlock title="Estadísticas" icon={<BarChart className="w-5 h-5" />}>
+                <EstadisticasTab />
+              </AccordionBlock>
+
+              <AccordionBlock title="Análisis" icon={<LineChart className="w-5 h-5" />}>
+                <div className="space-y-4">
+                  <div className="inline-flex rounded-xl border border-[var(--glass-border)] bg-foreground/5 p-1">
+                    <button
+                      onClick={() => setAnalisisView("grupal")}
+                      className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${analisisView === "grupal" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
+                    >
+                      <ClipboardList className="w-4 h-4" /> {t('tabs.grupal')}
+                    </button>
+                    <button
+                      onClick={() => setAnalisisView("individual")}
+                      className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${analisisView === "individual" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
+                    >
+                      <User className="w-4 h-4" /> {t('tabs.individual')}
+                    </button>
+                  </div>
+                  {analisisView === "grupal" ? <AnalisisGrupalTab /> : <AnalisisIndividualTab />}
+                </div>
+              </AccordionBlock>
             </div>
           )}
 

@@ -118,12 +118,8 @@
         "label": "Assistència",
         "desc": "Control d'assistència de l'alumnat."
       },
-      "progreso-ra-ud": {
-        "label": "Progrés de RA i UD",
-        "desc": "Grau de consecució dels resultats d'aprenentatge i les unitats didàctiques per trimestre."
-      },
       "detalle": {
-        "label": "Detall per alumnat",
+        "label": "Notes",
         "desc": "Entrada de notes numèriques per alumnat, instrument d'avaluació i nivell d'adquisició de RA."
       },
       "feoeEmpresa": {
@@ -464,7 +460,7 @@
     "ayuda_desc": "Guies, preguntes freqüents, glossari i mapa de l'aplicació.",
     "contexto_desc": "Informació general, característiques de l'entorn, alumnat i mòdul.",
     "magia_desc": "Generació de la programació didàctica i informes.",
-    "seguimiento_desc": "Diari de classes, assistència, progrés de RA i notes per alumnat.",
+    "seguimiento_desc": "Diari de classes, assistència i notes per alumnat.",
     "metodologia_desc": "Estratègies metodològiques, recursos, espais i atenció a la diversitat."
   },
   "common": {
@@ -514,7 +510,7 @@
     "instrumentos": "Definició i pesos de les eines d'avaluació.",
     "calendario": "Horari, trimestres, festius, període FEOE i activitats extraescolars.",
     "alumnado": "Fitxes personals, pla d'aula i tutoria amb alertes d'abandonament.",
-    "seguimiento": "Diari de classes, assistència, progrés de RA i UD i entrada de notes.",
+    "seguimiento": "Diari de classes, assistència i entrada de notes.",
     "calificaciones": "Quadern de notes, estadístiques i comparativa grupal i individual."
   },
   "toasts": {

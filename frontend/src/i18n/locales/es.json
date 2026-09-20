@@ -112,7 +112,7 @@
     "instrumentos": "Definición y pesos de las herramientas de evaluación.",
     "calendario": "Horario, trimestres, festivos, periodo FEOE y actividades extraescolares.",
     "alumnado": "Fichas personales, plano de aula y tutoría con alertas de abandono.",
-    "seguimiento": "Diario de clases, asistencia, progreso de RA y UD y entrada de notas.",
+    "seguimiento": "Diario de clases, asistencia y entrada de notas.",
     "calificaciones": "Cuaderno de notas, estadísticas y comparativa grupal e individual."
   },
   "sidebar": {
