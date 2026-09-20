@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, ClipboardList, Map, MessageSquare, FileText, Route, FolderOpen, Mail, Phone, Calendar, X } from "lucide-react";
+import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, Map, MessageSquare, FileText, Route, FolderOpen, Mail, Phone, Calendar, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -16,7 +16,6 @@ import { ESTADO_ALUMNO_COLOR, parseAlumnadoCSV } from "@/utils/alumnado";
 
 import { ContextoGrupoTab } from "@/components/features/alumnado/ContextoGrupoTab";
 import { OrientacionIndividualTab } from "@/components/features/alumnado/OrientacionIndividualTab";
-import { ResumenProfesionalTab } from "@/components/features/alumnado/ResumenProfesionalTab";
 import { TendenciasProfesionalTab } from "@/components/features/alumnado/TendenciasProfesionalTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
@@ -57,9 +56,11 @@ export default function AlumnadoPage() {
     { id: "plano", label: <><span className="inline-flex"><LayoutGrid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.plano')}</>, cleanLabel: t('tabs.plano') },
     // Antes sub-vistas de una sola pestaña "Perfil profesional" (switcher
     // interno) -- sacadas a pestañas principales el 2026-09-20 a petición de
-    // Rafael ("luego veremos qué hacemos con ellas").
+    // Rafael ("luego veremos qué hacemos con ellas"). La sub-vista "Resumen"
+    // se plegó de nuevo, ese mismo día, dentro de Tendencias (segundo bloque,
+    // debajo de los agregados) al comprobar que duplicaba en peor una tabla
+    // que ya vivía ahí.
     { id: "perfilIndividual", label: <><span className="inline-flex"><Compass className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.perfilIndividual.label', {defaultValue: 'Individual'})}</>, cleanLabel: t('tabs.alumnado.perfilIndividual.label', {defaultValue: 'Individual'}) },
-    { id: "perfilResumen", label: <><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.perfilResumen.label', {defaultValue: 'Resumen'})}</>, cleanLabel: t('tabs.alumnado.perfilResumen.label', {defaultValue: 'Resumen'}) },
     { id: "perfilTendencias", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.perfilTendencias.label', {defaultValue: 'Tendencias'})}</>, cleanLabel: t('tabs.alumnado.perfilTendencias.label', {defaultValue: 'Tendencias'}) },
   ];
 
@@ -69,8 +70,7 @@ export default function AlumnadoPage() {
     matricula: t('tabs.alumnado.matricula.desc', {defaultValue: 'Gestión del listado de alumnado y ficha individual y, más abajo, el perfil narrativo del grupo.'}),
     plano: t('tabs.alumnado.plano.desc', {defaultValue: 'Distribución y plano visual del aula.'}),
     perfilIndividual: t('tabs.alumnado.perfilIndividual.desc', {defaultValue: 'Orientación profesional por alumno/a: motivación, experiencia laboral, aptitudes, aspiraciones e inserción post-ciclo.'}),
-    perfilResumen: t('tabs.alumnado.perfilResumen.desc', {defaultValue: 'Vista de conjunto del perfil profesional de todo el grupo, en tabla filtrable.'}),
-    perfilTendencias: t('tabs.alumnado.perfilTendencias.desc', {defaultValue: 'Agregados y tendencias del perfil profesional del grupo.'}),
+    perfilTendencias: t('tabs.alumnado.perfilTendencias.desc', {defaultValue: 'Agregados y tendencias del perfil profesional del grupo, y tabla filtrable de todo el alumnado.'}),
   };
 
   useEffect(() => {
@@ -446,12 +446,6 @@ export default function AlumnadoPage() {
           {activeTab === "perfilIndividual" && (
             <div className="mt-4">
               <OrientacionIndividualTab />
-            </div>
-          )}
-
-          {activeTab === "perfilResumen" && (
-            <div className="mt-4">
-              <ResumenProfesionalTab />
             </div>
           )}
 

@@ -135,7 +135,7 @@ export const BoletinesTab = () => {
 
             <div className="flex-1 overflow-y-auto p-6 scrollbar-hide">
               {/* PRINTABLE AREA */}
-              <div className="printable-boletin bg-background p-8 rounded-xl border border-white/5 shadow-sm max-w-4xl mx-auto text-foreground">
+              <div className="printable-boletin bg-background p-8 rounded-xl border border-white/5 shadow-sm w-full text-foreground">
                 
                 {/* Cabecera Oficial */}
                 <div className="border-b-2 border-accent pb-6 mb-8 flex justify-between items-start">

@@ -96,13 +96,9 @@
         "label": "Individual",
         "desc": "Career guidance per student: motivation, work experience, aptitudes, aspirations and post-programme employment."
       },
-      "perfilResumen": {
-        "label": "Summary",
-        "desc": "Overview of the whole group's professional profile, in a filterable table."
-      },
       "perfilTendencias": {
         "label": "Trends",
-        "desc": "Aggregates and trends for the group's professional profile."
+        "desc": "Aggregates and trends for the group's professional profile, and a filterable table of all students."
       },
       "expediente": {
         "label": "Record",

@@ -98,13 +98,9 @@
         "label": "Individual",
         "desc": "Orientació professional per alumne/a: motivació, experiència laboral, aptituds, aspiracions i inserció post-cicle."
       },
-      "perfilResumen": {
-        "label": "Resum",
-        "desc": "Vista de conjunt del perfil professional de tot el grup, en taula filtrable."
-      },
       "perfilTendencias": {
         "label": "Tendències",
-        "desc": "Agregats i tendències del perfil professional del grup."
+        "desc": "Agregats i tendències del perfil professional del grup, i taula filtrable de tot l'alumnat."
       },
       "expediente": {
         "label": "Expedient",

@@ -65,7 +65,6 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "matricula", label: "Matrícula" },
     { id: "plano", label: "Plano de clase" },
     { id: "perfilIndividual", label: "Individual" },
-    { id: "perfilResumen", label: "Resumen" },
     { id: "perfilTendencias", label: "Tendencias" },
   ],
   "/seguimiento": [
