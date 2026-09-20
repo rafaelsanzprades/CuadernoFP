@@ -23,7 +23,7 @@ export function AccordionBlock({
   return (
     <details
       className={[
-        "group rounded-xl border border-border/50 bg-surface/50 overflow-hidden [&_summary::-webkit-details-marker]:hidden mb-4 shadow-sm",
+        "group rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] overflow-hidden [&_summary::-webkit-details-marker]:hidden mb-4 shadow-sm",
         className
       ].filter(Boolean).join(" ")}
       open={defaultOpen}
@@ -39,7 +39,7 @@ export function AccordionBlock({
           <ChevronDown className="w-5 h-5" />
         </span>
       </summary>
-      <div className="p-4 md:p-5 pt-2 text-muted leading-relaxed border-t border-border/50 bg-background/30 animate-in slide-in-from-top-2 fade-in duration-300">
+      <div className="p-4 md:p-5 pt-2 text-muted leading-relaxed border-t border-[var(--glass-border)] bg-background/30 animate-in slide-in-from-top-2 fade-in duration-300">
         {children}
       </div>
     </details>

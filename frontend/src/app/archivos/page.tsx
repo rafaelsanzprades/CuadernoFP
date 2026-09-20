@@ -810,21 +810,21 @@ export default function ArchivosTrabajoPage() {
                   </div>
 
                   <div className="space-y-4">
-                    <div className="p-5 bg-background rounded-xl border border-border/50">
+                    <div className="p-5 bg-background rounded-xl border border-[var(--glass-border)]">
                       <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Building2 className="w-5 h-5 text-accent"/> {t('campos.archivos.servidorCiegoTitulo', {defaultValue: '1. El servidor es ciego'})}</h3>
                       <p className="text-muted leading-relaxed text-body">{t('campos.archivos.servidorCiegoDesc', {defaultValue: 'Nuestra base de datos en la nube jamás almacena datos de tus alumnos, tus programaciones, ni nada que crees. El servidor web solo existe para enviarte los Catálogos Oficiales (BOE/BOCAA). Eres invisible para nuestro backend.'})}</p>
                     </div>
 
-                    <div className="p-5 bg-background rounded-xl border border-border/50">
+                    <div className="p-5 bg-background rounded-xl border border-[var(--glass-border)]">
                       <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Lock className="w-5 h-5 text-accent"/> {t('campos.archivos.cifradoLocalTitulo', {defaultValue: '2. Cifrado local avanzado AES-256'})}</h3>
                       <p className="text-muted leading-relaxed mb-4 text-body">{t('campos.archivos.cifradoLocalDesc', {defaultValue: 'Puedes activar la encriptación local. Antes de que cualquier archivo se guarde en tu disco duro o nube, se cifra usando tu clave maestra dentro de tu navegador.'})}</p>
 
-                      <div className="bg-surface border border-border p-4 rounded-lg">
+                      <div className="bg-[var(--glass-bg)] border border-[var(--glass-border)] p-4 rounded-lg">
                         <label className="block text-body font-medium text-foreground mb-2">{t('campos.archivos.establecerClaveLabel', {defaultValue: 'Establecer clave de seguridad (no se guarda en ningún sitio)'})}</label>
                         <div className="flex gap-2">
                           <input
                             type="password"
-                            className="flex-1 bg-background border border-border rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent text-body"
+                            className="flex-1 bg-background border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent text-body"
                             placeholder={t('placeholders.archivos.claveMaestra', {defaultValue: 'Introduce tu clave maestra...'})}
                             value={useAppStore.getState().encryptionKey || ""}
                             onChange={(e) => useAppStore.getState().setEncryptionKey(e.target.value || null)}
@@ -834,12 +834,12 @@ export default function ArchivosTrabajoPage() {
                       </div>
                     </div>
 
-                    <div className="p-5 bg-background rounded-xl border border-border/50">
+                    <div className="p-5 bg-background rounded-xl border border-[var(--glass-border)]">
                       <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><CheckCircle className="w-5 h-5 text-accent"/> {t('campos.archivos.defensaAtaquesTitulo', {defaultValue: '3. Defensa contra ataques en el navegador'})}</h3>
                       <p className="text-muted leading-relaxed text-body">{t('campos.archivos.defensaAtaquesDesc', {defaultValue: 'Hemos implementado una política estricta de seguridad de contenido (CSP) para bloquear scripts maliciosos de terceros.'})}</p>
                     </div>
 
-                    <div className="p-5 bg-background rounded-xl border border-border/50">
+                    <div className="p-5 bg-background rounded-xl border border-[var(--glass-border)]">
                       <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Activity className="w-5 h-5 text-accent"/> {t('campos.archivos.servidorBlindadoTitulo', {defaultValue: '4. Servidor blindado y siempre disponible'})}</h3>
                       <p className="text-muted leading-relaxed text-body">{t('campos.archivos.servidorBlindadoDesc', {defaultValue: 'Nuestro servidor backend incorpora Rate Limiting, garantizando que siempre tendrás acceso al catálogo oficial de módulos.'})}</p>
                     </div>
