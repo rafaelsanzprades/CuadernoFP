@@ -32,8 +32,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "criterios", label: "Evaluación y calificación" },
   ],
   "/curriculo": [
-    { id: "contribucion-ra-og", label: "Contribución RA->OG" },
-    { id: "ponderacion-ra-ce", label: "Ponderación RA<-CE" },
+    { id: "ponderacion-ra-ce", label: "OG<-RA<-CE" },
     { id: "unidades", label: "Unidades didácticas" },
     { id: "competenciales", label: "Tareas competenciales" },
     { id: "contenidos-ud", label: "Contenidos → UD" },
@@ -42,7 +41,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "metodologia", label: "Metodología e inclusión" },
     { id: "recursos", label: "Recursos" },
     { id: "contingencia", label: "Plan de contingencia" },
-    { id: "transversales", label: "Transversales, competencias y actividades" },
+    { id: "transversales", label: "Transversales" },
   ],
   "/instrumentos": [
     { id: "resumen", label: "Resumen" },
@@ -54,7 +53,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "fechas", label: "Fechas y horario" },
     { id: "feoe", label: "Periodo FEOE" },
     { id: "eventos", label: "Eventos y festivos" },
-    { id: "actividades", label: "Actividades complementarias y extraescolares" },
+    { id: "actividades", label: "Complementarias y extraescolares" },
   ],
   "/agenda": [
     { id: "actual", label: "Actual" },

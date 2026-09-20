@@ -77,7 +77,7 @@
         "desc": "Record of events and holidays that affect teaching."
       },
       "actividades": {
-        "label": "Complementary and extracurricular activities",
+        "label": "Complementary and extracurricular",
         "desc": "Planning of complementary and extracurricular activities."
       },
       "visual": {
@@ -176,8 +176,8 @@
         "desc": "Contribution of the learning outcomes to the general objectives of the qualification."
       },
       "ponderacion-ra-ce": {
-        "label": "Weighting RA<-CE",
-        "desc": "Matrix of learning outcomes and assessment criteria, and their weighting."
+        "label": "OG<-RA<-CE",
+        "desc": "Matrix of learning outcomes and assessment criteria with their weighting, and contribution of learning outcomes to the qualification's general objectives."
       },
       "unidades": {
         "label": "Teaching units",
@@ -206,7 +206,7 @@
         "desc": "Contingency plans and adaptation for exceptional situations."
       },
       "transversales": {
-        "label": "Transversal elements, competencies and activities",
+        "label": "Transversal",
         "desc": "Transversal elements, key competencies, digital competencies, curriculum standards and objectives, innovation and cross-module coordination, and complementary and extracurricular activities."
       }
     },

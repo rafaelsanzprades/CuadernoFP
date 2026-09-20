@@ -79,7 +79,7 @@
         "desc": "Registre d'esdeveniments i festius que afecten la docència."
       },
       "actividades": {
-        "label": "Activitats complementàries i extraescolars",
+        "label": "Complementàries i extraescolars",
         "desc": "Planificació d'activitats complementàries i extraescolars."
       },
       "visual": {
@@ -178,8 +178,8 @@
         "desc": "Contribució dels RA als objectius generals del títol."
       },
       "ponderacion-ra-ce": {
-        "label": "Ponderació RA<-CE",
-        "desc": "Matriu de resultats d'aprenentatge i criteris d'avaluació, i la seva ponderació."
+        "label": "OG<-RA<-CE",
+        "desc": "Matriu de resultats d'aprenentatge i criteris d'avaluació amb la seva ponderació, i contribució dels resultats d'aprenentatge als objectius generals del títol."
       },
       "unidades": {
         "label": "Unitats didàctiques",
@@ -208,7 +208,7 @@
         "desc": "Plans de contingència i adaptació davant situacions excepcionals."
       },
       "transversales": {
-        "label": "Transversals, competències i activitats",
+        "label": "Transversals",
         "desc": "Elements transversals, competències clau, competències digitals, estàndards i objectius del currículum, innovació i intermodularitat, i activitats complementàries i extraescolars."
       }
     },

@@ -18,6 +18,7 @@ import type { Tarea, Sesion } from "@/types";
 import { repartoIgualitario, repartoPonderado, PESO_RELEVANCIA_CE } from "@/utils/calificaciones";
 import toast from "react-hot-toast";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
+import { AccordionBlock } from "@/components/ui/AccordionBlock";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
@@ -35,7 +36,12 @@ export default function MatricesPage() {
   const [allCeOpen, setAllCeOpen] = useState(false);
   const [allUdsOpen, setAllUdsOpen] = useState(false);
   const [openCEs, setOpenCEs] = useState<Set<string>>(new Set());
-  const [activeTab, setActiveTab] = useState("contribucion-ra-og");
+  // "contribucion-ra-og" ya no es una pestaña propia -- se fusionó (2026-09-20)
+  // como bloque dentro de "ponderacion-ra-ce" (ver TABS más abajo). Normaliza
+  // el id antiguo para que los enlaces/marcadores con ?tab=contribucion-ra-og
+  // sigan funcionando, mismo patrón que instrumentos/page.tsx con tri1/2/3.
+  const [activeTabRaw, setActiveTab] = useState("ponderacion-ra-ce");
+  const activeTab = activeTabRaw === "contribucion-ra-og" ? "ponderacion-ra-ce" : activeTabRaw;
   const [catalogLoaded, setCatalogLoaded] = useState(0);
 
   const [isDragging, setIsDragging] = useState(false);
@@ -49,16 +55,14 @@ export default function MatricesPage() {
   }, []);
 
   const TABS = [
-    { id: "contribucion-ra-og", label: t('tabs.curriculo.contribucion-ra-og.label', {defaultValue: 'Contribución RA->OG'}), cleanLabel: t('tabs.curriculo.contribucion-ra-og.label', {defaultValue: 'Contribución RA->OG'}), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "ponderacion-ra-ce", label: t('tabs.curriculo.ponderacion-ra-ce.label', {defaultValue: 'Ponderación RA<-CE'}), cleanLabel: t('tabs.curriculo.ponderacion-ra-ce.label', {defaultValue: 'Ponderación RA<-CE'}), icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "ponderacion-ra-ce", label: t('tabs.curriculo.ponderacion-ra-ce.label', {defaultValue: 'OG<-RA<-CE'}), cleanLabel: t('tabs.curriculo.ponderacion-ra-ce.label', {defaultValue: 'OG<-RA<-CE'}), icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "unidades", label: t('tabs.curriculo.unidades.label', {defaultValue: 'Unidades didácticas'}), cleanLabel: t('tabs.curriculo.unidades.label', {defaultValue: 'Unidades didácticas'}), icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "competenciales", label: t('tabs.curriculo.competenciales.label', {defaultValue: 'Tareas competenciales'}), cleanLabel: t('tabs.curriculo.competenciales.label', {defaultValue: 'Tareas competenciales'}), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
     { id: "contenidos-ud", label: t('tabs.curriculo.contenidosUd.label', {defaultValue: 'Contenidos → UD'}), cleanLabel: t('tabs.curriculo.contenidosUd.label', {defaultValue: 'Contenidos → UD'}), icon: <><span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    'contribucion-ra-og': t('tabs.curriculo.contribucion-ra-og.desc', {defaultValue: 'Contribución de los RA a los objetivos generales del título.'}),
-    'ponderacion-ra-ce': t('tabs.curriculo.ponderacion-ra-ce.desc', {defaultValue: 'Matriz de resultados de aprendizaje y criterios de evaluación, y su ponderación.'}),
+    'ponderacion-ra-ce': t('tabs.curriculo.ponderacion-ra-ce.desc', {defaultValue: 'Matriz de resultados de aprendizaje y criterios de evaluación con su ponderación, y contribución de los RA a los objetivos generales del título.'}),
     'unidades': t('tabs.curriculo.unidades.desc', {defaultValue: 'Definición de unidades didácticas o unidades de trabajo y secuenciación de sus sesiones.'}),
     'competenciales': t('tabs.curriculo.competenciales.desc', {defaultValue: 'Diseño y planificación de tareas y actividades competenciales.'}),
     'contenidos-ud': t('tabs.curriculo.contenidosUd.desc', {defaultValue: 'Tabla de contenidos por unidad didáctica agrupados en bloques, con su relación con RA, objetivos generales, horas e instrumentos de evaluación.'}),
@@ -706,6 +710,12 @@ export default function MatricesPage() {
                     })}
                   </div>
                 </Card>
+
+                {/* Fusionado aquí (2026-09-20) desde la antigua pestaña "Contribución
+                    RA->OG" -- ver nota en el useState de activeTabRaw más arriba. */}
+                <AccordionBlock title={t('tabs.curriculo.contribucion-ra-og.label', {defaultValue: 'Contribución RA->OG'})} icon={<Target className="w-5 h-5" />}>
+                  <RaOgMatrix />
+                </AccordionBlock>
               </div>
             )}
 
@@ -948,13 +958,6 @@ export default function MatricesPage() {
                     />
                   )}
                 </Card>
-              </div>
-            )}
-
-            {/* ── Contribución de RA en OG ────────────────────────────────────── */}
-            {activeTab === "contribucion-ra-og" && (
-              <div className="animate-in fade-in duration-500">
-                <RaOgMatrix />
               </div>
             )}
 

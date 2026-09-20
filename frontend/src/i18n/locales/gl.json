@@ -77,7 +77,7 @@
         "desc": "Rexistro de eventos e festivos que afectan á docencia."
       },
       "actividades": {
-        "label": "Actividades complementarias e extraescolares",
+        "label": "Complementarias e extraescolares",
         "desc": "Planificación de actividades complementarias e extraescolares."
       },
       "visual": {
@@ -176,8 +176,8 @@
         "desc": "Contribución dos RA aos obxectivos xerais do título."
       },
       "ponderacion-ra-ce": {
-        "label": "Ponderación RA<-CE",
-        "desc": "Matriz de resultados de aprendizaxe e criterios de avaliación, e a súa ponderación."
+        "label": "OG<-RA<-CE",
+        "desc": "Matriz de resultados de aprendizaxe e criterios de avaliación coa súa ponderación, e contribución dos resultados de aprendizaxe aos obxectivos xerais do título."
       },
       "unidades": {
         "label": "Unidades didácticas",
@@ -206,7 +206,7 @@
         "desc": "Plans de continxencia e adaptación ante situacións excepcionais."
       },
       "transversales": {
-        "label": "Transversais, competencias e actividades",
+        "label": "Transversais",
         "desc": "Elementos transversais, competencias clave, competencias dixitais, estándares e obxectivos do currículo, innovación e intermodularidade, e actividades complementarias e extraescolares."
       }
     },
