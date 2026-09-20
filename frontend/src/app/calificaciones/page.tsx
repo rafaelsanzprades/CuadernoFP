@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BarChart, ClipboardList, Save, TrendingUp, User, FolderOpen, History, AlertOctagon, LineChart, FileText, Target } from "lucide-react";
+import { BarChart, ClipboardList, Save, TrendingUp, User, FolderOpen, History, AlertOctagon, LineChart, FileText, Target, FileClock } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -18,6 +18,7 @@ import { ProgresoRaTab } from "@/components/features/evaluacion/ProgresoRaTab";
 import { HistorialCalificacionesTab } from "@/components/features/evaluacion/HistorialCalificacionesTab";
 import { ReclamacionesTab } from "@/components/features/evaluacion/ReclamacionesTab";
 import { BoletinesTab } from "@/components/features/alumnado/BoletinesTab";
+import { ExpedienteTab } from "@/components/features/alumnado/ExpedienteTab";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { AccordionBlock } from "@/components/ui/AccordionBlock";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -147,6 +148,7 @@ export default function ProgresoPage() {
         )}
       </>, cleanLabel: t('tabs.calificaciones.reclamaciones.label', {defaultValue: 'Reclamaciones'}) },
     { id: "boletines", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.boletines.label', {defaultValue: 'Boletines'})}</>, cleanLabel: t('tabs.calificaciones.boletines.label', {defaultValue: 'Boletines'}) },
+    { id: "expediente", label: <><span className="inline-flex"><FileClock className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.expediente.label', {defaultValue: 'Expediente'})}</>, cleanLabel: t('tabs.alumnado.expediente.label', {defaultValue: 'Expediente'}) },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
@@ -154,6 +156,7 @@ export default function ProgresoPage() {
     historico: t('tabs.calificaciones.historico.desc', {defaultValue: 'Registro de cada cambio de nota, con su fecha, agente y motivo.'}),
     reclamaciones: t('tabs.calificaciones.reclamaciones.desc', {defaultValue: 'Reclamaciones de nota presentadas por el alumnado, con su motivo y resolución.'}),
     boletines: t('tabs.calificaciones.boletines.desc', {defaultValue: 'Boletín individual de calificaciones en pantalla, con radar y barras de nivel de logro por RA.'}),
+    expediente: t('tabs.alumnado.expediente.desc', {defaultValue: 'Línea temporal de evidencias por alumno/a: calificaciones, reclamaciones, asistencia y diario de clase.'}),
   };
 
   return (
@@ -449,6 +452,15 @@ export default function ProgresoPage() {
           {activeTab === "boletines" && (
             <div className="mt-4 animate-in fade-in duration-500">
               <BoletinesTab />
+            </div>
+          )}
+
+          {/* TAB 7: EXPEDIENTE -- traída desde Alumnado (2026-09-20, petición de
+              Rafael): línea temporal de evidencias por alumno, encaja mejor aquí
+              que en Alumnado porque la mayoría de sus fuentes son de evaluación. */}
+          {activeTab === "expediente" && (
+            <div className="mt-4 animate-in fade-in duration-500">
+              <ExpedienteTab />
             </div>
           )}
           </MotionWrapper>

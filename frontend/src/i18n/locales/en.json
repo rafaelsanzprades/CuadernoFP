@@ -89,24 +89,24 @@
         "label": "Enrollment",
         "desc": "Management of the student list and individual records."
       },
-      "tutoria": {
-        "label": "Tutoring and alerts",
-        "desc": "Drop-out risk alerts and tutorial follow-up for students."
-      },
       "plano": {
         "desc": "Layout and visual map of the classroom."
       },
-      "autoevaluacion": {
-        "desc": "Student self-assessment by grading criterion (YES/Doubts/NO) and reported difficulties.",
-        "label": "Self-assessment"
-      },
-      "perfilProfesional": {
-        "label": "Professional profile",
+      "perfilIndividual": {
+        "label": "Individual",
         "desc": "Career guidance per student: motivation, work experience, aptitudes, aspirations and post-programme employment."
+      },
+      "perfilResumen": {
+        "label": "Summary",
+        "desc": "Overview of the whole group's professional profile, in a filterable table."
+      },
+      "perfilTendencias": {
+        "label": "Trends",
+        "desc": "Aggregates and trends for the group's professional profile."
       },
       "expediente": {
         "label": "Record",
-        "desc": "Timeline of evidence per student: grades, self-assessment, tutoring, appeals, attendance and class diary."
+        "desc": "Timeline of evidence per student: grades, appeals, attendance and class diary."
       }
     },
     "seguimiento": {
@@ -432,7 +432,7 @@
     "agenda_title": "Agenda",
     "agenda_desc": "Daily summary: class status and UD to teach.",
     "alumnado_title": "Students",
-    "alumnado_desc": "Management of students, tutoring, FEOE and orientation.",
+    "alumnado_desc": "Student management, classroom seating plan and professional guidance.",
     "diario_title": "Daily Tracking",
     "diario_desc": "Classroom journal, contingencies, attendance control and alerts.",
     "evaluacion_title": "Grade",
@@ -509,7 +509,7 @@
     "metodologia": "Methodology, resources, contingency plan and cross-curricular elements.",
     "instrumentos": "Definition and weighting of assessment instruments.",
     "calendario": "Timetable, terms, holidays, FEOE period and extracurricular activities.",
-    "alumnado": "Personal records, classroom seating plan and tutoring with dropout alerts.",
+    "alumnado": "Personal records, classroom seating plan and professional guidance.",
     "seguimiento": "Class journal, attendance and grade entry.",
     "calificaciones": "Gradebook, statistics and group and individual comparison."
   },
@@ -1179,7 +1179,8 @@
     },
     "diario": {
       "acumuladoTrimestral": "Term cumulative",
-      "hoy": "Today"
+      "hoy": "Today",
+      "alertasAbandono": "Drop-out alerts"
     },
     "instrumentos": {
       "agente_autoevaluacion": "Self-assessment (student themselves)",

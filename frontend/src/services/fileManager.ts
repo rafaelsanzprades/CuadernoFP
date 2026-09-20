@@ -52,11 +52,10 @@ const ALLOWED_PROGRAMACION_KEYS = [
 const ALLOWED_CURSO_KEYS = [
   // Alumnado y evaluación
   'df_al', 'df_sgmt', 'df_feoe', 'df_eval', 'df_calificaciones',
-  // Histórico de cambios de calificación (ítem 33), reclamaciones (ítem 34)
-  // y autoevaluación estructurada por CE (ítem 22)
-  'historial_calificaciones', 'df_reclamaciones', 'df_autoevaluacion',
-  // Seguimiento diario y tutoría
-  'daily_ledger', 'tutoria_ledger', 'profesional_ledger',
+  // Histórico de cambios de calificación (ítem 33) y reclamaciones (ítem 34)
+  'historial_calificaciones', 'df_reclamaciones',
+  // Seguimiento diario
+  'daily_ledger', 'profesional_ledger',
   // Horario y fechas (van en .fpc como datos del curso)
   'horario', 'info_fechas', 'calendar_notes',
   // Configuración
@@ -249,7 +248,7 @@ export const fileManager = {
       pdFileSource: { type: 'new', fileName: pdLabel },
       activeCursoId: cursoId,
       cursoData: {
-        df_al: [], df_eval: [], daily_ledger: {}, tutoria_ledger: {},
+        df_al: [], df_eval: [], daily_ledger: {},
         horario: {}, info_fechas: {}, plano_clase: {},
       },
       cursoFileSource: { type: 'new', fileName: cursoLabel },
@@ -410,7 +409,6 @@ export const fileManager = {
       df_feoe: [],
       df_eval: [],
       daily_ledger: {},
-      tutoria_ledger: {},
       profesional_ledger: {},
       horario: {},
       info_fechas: {},

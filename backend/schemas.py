@@ -105,7 +105,6 @@ class ModuleUpdateBody(BaseModel):
     horario: Optional[Dict[str, Any]] = None
     planning_ledger: Optional[Dict[str, Any]] = None
     calendar_notes: Optional[Dict[str, Any]] = None
-    tutoria_ledger: Optional[Dict[str, Any]] = None
     plano_clase: Optional[Any] = None
     daily_ledger: Optional[Dict[str, Any]] = None
     attendance_records: Optional[List[Any]] = None

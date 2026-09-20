@@ -67,31 +67,6 @@ export const AlumnadoSchema = z.object({
 });
 export type Alumnado = z.infer<typeof AlumnadoSchema>;
 
-// Registro de tutoría — fusión de los dos sistemas que convivían sin
-// comunicarse: `TutoriaActuacionSchema`/`actuaciones_tutoria` (definido en
-// el esquema con campos más completos -- horaInicio/horaFin/participantes --
-// pero código muerto, ningún componente lo leía ni escribía) y
-// `tutoria_ledger` (sin tipar, el que de verdad usa TutoriaTab.tsx). Se
-// queda uno solo, con la forma de almacenamiento del que sí estaba vivo
-// (un array de registros por alumno, indexado por su ID) y los campos más
-// completos del que estaba mejor pensado. Descartados al fusionar:
-// `alumnadoIds` (redundante, el alumno ya es la clave externa del ledger),
-// `tipo` (redundante con `ambito`, que ya distingue con quién es la
-// tutoría) y `desarrollo` (ya cubierto por `tema`, que en la UI real
-// siempre se ha etiquetado "Tema tratado / Desarrollo").
-export const TutoriaLedgerEntrySchema = z.object({
-  id: z.string(),
-  fecha: z.string(),
-  horaInicio: z.string().optional(),
-  horaFin: z.string().optional(),
-  ambito: z.string(),
-  canal: z.string(),
-  participantes: z.string().optional(),
-  tema: z.string(),
-  acuerdos: z.string(),
-});
-export type TutoriaLedgerEntry = z.infer<typeof TutoriaLedgerEntrySchema>;
-
 export const ResultadoAprendizajeSchema = z.object({
   id_ra: z.string(),
   desc_ra: z.string().optional().nullable(),
@@ -335,31 +310,15 @@ export const ReclamacionSchema = z.object({
 });
 export type Reclamacion = z.infer<typeof ReclamacionSchema>;
 
-// Autoevaluación estructurada por CE (ítem 22) — lo que el profesor recoge
-// del alumnado (SÍ/DUDAS/NO + dificultades autodeclaradas), una entrada por
-// alumno+CE. Insumo del informe de refuerzo automático (ítem 23).
-export const AutoevaluacionEntrySchema = z.object({
-  id: z.string(),
-  alumno_id: z.string(),
-  ce_id: z.string(),
-  valor: z.enum(["SI", "DUDAS", "NO"]),
-  dificultades: z.string().optional(),
-  fecha: z.string(),
-});
-export type AutoevaluacionEntry = z.infer<typeof AutoevaluacionEntrySchema>;
-
 export const CursoDataSchema = z.object({
   df_al: z.array(AlumnadoSchema).optional(),
   df_sgmt: z.array(SeguimientoUDSchema).optional(),
   df_eval: z.array(z.any()).optional(),
-  df_autoevaluacion: z.array(AutoevaluacionEntrySchema).optional(),
   df_calificaciones: z.array(CalificacionSchema).optional(),
   historial_calificaciones: z.array(HistorialCalificacionEntrySchema).optional(),
   df_reclamaciones: z.array(ReclamacionSchema).optional(),
   df_feoe: z.array(z.any()).optional(),
   daily_ledger: z.record(z.string(), z.any()).optional(),
-  // Un registro de tutoría por alumno -- ver TutoriaLedgerEntrySchema.
-  tutoria_ledger: z.record(z.string(), z.array(TutoriaLedgerEntrySchema)).optional(),
   profesional_ledger: z.record(z.string(), z.any()).optional(),
   horario: z.record(z.string(), z.any()).optional(),
   info_fechas: z.record(z.string(), z.any()).optional(),

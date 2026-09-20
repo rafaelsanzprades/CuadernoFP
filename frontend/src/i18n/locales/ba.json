@@ -89,24 +89,24 @@
         "label": "Matrícula",
         "desc": "Gestió del llistat d'alumnat i fitxa individual."
       },
-      "tutoria": {
-        "label": "Tutoria i alertes",
-        "desc": "Alertes de risc d'abandonament i seguiment tutorial de l'alumnat."
-      },
       "plano": {
         "desc": "Distribució i plànol visual de l'aula."
       },
-      "autoevaluacion": {
-        "desc": "Autoavaluació de l'alumnat per criteri d'avaluació (SÍ/Dubtes/NO) i dificultats declarades.",
-        "label": "Autoavaluació"
-      },
-      "perfilProfesional": {
-        "label": "Perfil professional",
+      "perfilIndividual": {
+        "label": "Individual",
         "desc": "Orientació professional per alumne/a: motivació, experiència laboral, aptituds, aspiracions i inserció post-cicle."
+      },
+      "perfilResumen": {
+        "label": "Resum",
+        "desc": "Vista de conjunt del perfil professional de tot el grup, en taula filtrable."
+      },
+      "perfilTendencias": {
+        "label": "Tendències",
+        "desc": "Agregats i tendències del perfil professional del grup."
       },
       "expediente": {
         "label": "Expedient",
-        "desc": "Línia temporal d'evidències per alumne/a: qualificacions, autoavaluació, tutoria, reclamacions, assistència i diari de classe."
+        "desc": "Línia temporal d'evidències per alumne/a: qualificacions, reclamacions, assistència i diari de classe."
       }
     },
     "seguimiento": {
@@ -432,7 +432,7 @@
     "agenda_title": "Agenda",
     "agenda_desc": "Resum diari: estat de classe i UD a impartir.",
     "alumnado_title": "Alumnat",
-    "alumnado_desc": "Gestió d'alumnat, tutoria, FEOE i orientació.",
+    "alumnado_desc": "Gestió d'alumnat, plànol de l'aula i orientació professional.",
     "diario_title": "Seguiment Diari",
     "diario_desc": "Diari d'aula, contingències, control d'assistència i alertes.",
     "evaluacion_title": "Qualificació",
@@ -509,7 +509,7 @@
     "metodologia": "Metodologia, recursos, pla de contingència i elements transversals.",
     "instrumentos": "Definició i pesos de les eines d'avaluació.",
     "calendario": "Horari, trimestres, festius, període FEOE i activitats extraescolars.",
-    "alumnado": "Fitxes personals, pla d'aula i tutoria amb alertes d'abandonament.",
+    "alumnado": "Fitxes personals, pla d'aula i orientació professional.",
     "seguimiento": "Diari de classes, assistència i entrada de notes.",
     "calificaciones": "Quadern de notes, estadístiques i comparativa grupal i individual."
   },
@@ -1179,7 +1179,8 @@
     },
     "diario": {
       "acumuladoTrimestral": "Acumulat trimestral",
-      "hoy": "Avui"
+      "hoy": "Avui",
+      "alertasAbandono": "Alertes d'abandonament"
     },
     "instrumentos": {
       "agente_autoevaluacion": "Autoavaluació (propi alumne)",

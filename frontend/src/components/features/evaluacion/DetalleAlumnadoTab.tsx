@@ -26,7 +26,6 @@ export function DetalleAlumnadoTab() {
   const df_al = cursoData?.df_al || [];
   const df_eval = cursoData?.df_eval || [];
   const historial_calificaciones = cursoData?.historial_calificaciones || [];
-  const df_autoevaluacion = cursoData?.df_autoevaluacion || [];
   const [generandoInforme, setGenerandoInforme] = useState<string | null>(null);
   const df_act = moduleData?.df_act || [];
   const df_rubricas = moduleData?.df_rubricas || [];
@@ -543,11 +542,9 @@ export function DetalleAlumnadoTab() {
                         </div>
                       </div>
 
-                      {/* BLOQUE 3: Plan de Trabajo Individual (ítem 23) — CE pendientes cruzados
-                          con la autoevaluación del alumno (ítem 22); convive con el texto libre
-                          de recuperación ya existente, no lo sustituye. */}
+                      {/* BLOQUE 3: Plan de Trabajo Individual (ítem 23) — CE pendientes; convive
+                          con el texto libre de recuperación ya existente, no lo sustituye. */}
                       {(() => {
-                        const ceAutoeval = df_autoevaluacion.filter((e: any) => e.alumno_id === al_id);
                         const cePendientes = df_ce.filter((ce: any) => {
                           if (!ce.id_ce) return false;
                           const nota = notasCalc.notas_ce[ce.id_ce];
@@ -569,27 +566,14 @@ export function DetalleAlumnadoTab() {
                               </Button>
                             </div>
                             <div className="space-y-2">
-                              {cePendientes.map((ce: any) => {
-                                const auto = ceAutoeval.find((e: any) => e.ce_id === ce.id_ce);
-                                return (
-                                  <div key={ce.id_ce} className="flex flex-wrap items-center gap-3 p-3 rounded-lg bg-danger/5 border border-danger/20">
-                                    <span className="font-mono text-caption text-danger shrink-0">{ce.id_ce}</span>
-                                    <span className="flex-1 min-w-[200px] text-caption text-foreground/80 truncate" title={ce.desc_ce || ce.Descripción}>
-                                      {ce.desc_ce || ce.Descripción || ""}
-                                    </span>
-                                    {auto && (
-                                      <span className={`text-caption font-semibold px-2 py-0.5 rounded-full shrink-0 ${
-                                        auto.valor === "NO" ? "bg-danger/15 text-danger" : auto.valor === "DUDAS" ? "bg-warning/15 text-warning" : "bg-success/15 text-success"
-                                      }`}>
-                                        {t('campos.evaluacion.autoevaluacionLabel', {defaultValue: 'Autoevaluación'})}: {auto.valor}
-                                      </span>
-                                    )}
-                                    {auto?.dificultades && (
-                                      <span className="text-caption text-muted italic w-full">"{auto.dificultades}"</span>
-                                    )}
-                                  </div>
-                                );
-                              })}
+                              {cePendientes.map((ce: any) => (
+                                <div key={ce.id_ce} className="flex flex-wrap items-center gap-3 p-3 rounded-lg bg-danger/5 border border-danger/20">
+                                  <span className="font-mono text-caption text-danger shrink-0">{ce.id_ce}</span>
+                                  <span className="flex-1 min-w-[200px] text-caption text-foreground/80 truncate" title={ce.desc_ce || ce.Descripción}>
+                                    {ce.desc_ce || ce.Descripción || ""}
+                                  </span>
+                                </div>
+                              ))}
                             </div>
                           </div>
                         );

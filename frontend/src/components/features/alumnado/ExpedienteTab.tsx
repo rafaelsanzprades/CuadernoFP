@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
-import { ClipboardCheck, MessageSquareText, Scale, CalendarX2, BookOpen, GraduationCap, HelpCircle, Filter } from "lucide-react";
+import { Scale, CalendarX2, BookOpen, GraduationCap, HelpCircle, Filter } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { buildExpediente, EventoExpediente, TipoEvento } from "@/utils/expediente";
@@ -8,17 +8,15 @@ import { Card } from "@/components/ui/Card";
 import { useTranslation } from "react-i18next";
 
 // Expediente del alumnado: línea temporal de evidencias ya existentes en la
-// app (calificaciones, autoevaluación, tutoría, reclamaciones, asistencia,
-// diario de clase), agregadas por alumno -- ver utils/expediente.ts para el
-// detalle de qué fuentes entran y por qué (y cuáles se dejan fuera).
+// app (calificaciones, reclamaciones, asistencia, diario de clase),
+// agregadas por alumno -- ver utils/expediente.ts para el detalle de qué
+// fuentes entran y por qué (y cuáles se dejan fuera).
 
-const TODOS_LOS_TIPOS: TipoEvento[] = ["calificacion", "autoevaluacion", "tutoria", "reclamacion", "asistencia", "diario"];
+const TODOS_LOS_TIPOS: TipoEvento[] = ["calificacion", "reclamacion", "asistencia", "diario"];
 
 function getTipoInfo(t: (key: string, opts?: any) => string): Record<TipoEvento, { label: string; icon: React.ReactNode; color: string }> {
   return {
     calificacion: { label: t('campos.expediente.tipoCalificacion', {defaultValue: 'Calificación'}), icon: <GraduationCap className="w-4 h-4" />, color: "text-info border-info/30 bg-info/10" },
-    autoevaluacion: { label: t('campos.expediente.tipoAutoevaluacion', {defaultValue: 'Autoevaluación'}), icon: <ClipboardCheck className="w-4 h-4" />, color: "text-accent border-accent/30 bg-accent/10" },
-    tutoria: { label: t('campos.expediente.tipoTutoria', {defaultValue: 'Tutoría'}), icon: <MessageSquareText className="w-4 h-4" />, color: "text-success border-success/30 bg-success/10" },
     reclamacion: { label: t('campos.expediente.tipoReclamacion', {defaultValue: 'Reclamación'}), icon: <Scale className="w-4 h-4" />, color: "text-danger border-danger/30 bg-danger/10" },
     asistencia: { label: t('campos.expediente.tipoAsistencia', {defaultValue: 'Asistencia'}), icon: <CalendarX2 className="w-4 h-4" />, color: "text-warning border-warning/30 bg-warning/10" },
     diario: { label: t('campos.expediente.tipoDiarioClase', {defaultValue: 'Diario de clase'}), icon: <BookOpen className="w-4 h-4" />, color: "text-muted border-white/10 bg-white/5" },

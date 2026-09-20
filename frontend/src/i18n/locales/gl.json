@@ -89,24 +89,24 @@
         "label": "Matrícula",
         "desc": "Xestión da listaxe de alumnado e ficha individual."
       },
-      "tutoria": {
-        "label": "Titoría e alertas",
-        "desc": "Alertas de risco de abandono e seguimento titorial do alumnado."
-      },
       "plano": {
         "desc": "Distribución e plano visual da aula."
       },
-      "autoevaluacion": {
-        "desc": "Autoavaliación do alumnado por criterio de avaliación (SI/Dúbidas/NON) e dificultades declaradas.",
-        "label": "Autoavaliación"
-      },
-      "perfilProfesional": {
-        "label": "Perfil profesional",
+      "perfilIndividual": {
+        "label": "Individual",
         "desc": "Orientación profesional por alumno/a: motivación, experiencia laboral, aptitudes, aspiracións e inserción post-ciclo."
+      },
+      "perfilResumen": {
+        "label": "Resumo",
+        "desc": "Vista de conxunto do perfil profesional de todo o grupo, en táboa filtrable."
+      },
+      "perfilTendencias": {
+        "label": "Tendencias",
+        "desc": "Agregados e tendencias do perfil profesional do grupo."
       },
       "expediente": {
         "label": "Expediente",
-        "desc": "Liña temporal de evidencias por alumno/a: cualificacións, autoavaliación, titoría, reclamacións, asistencia e diario de clase."
+        "desc": "Liña temporal de evidencias por alumno/a: cualificacións, reclamacións, asistencia e diario de clase."
       }
     },
     "seguimiento": {
@@ -432,7 +432,7 @@
     "agenda_title": "Axenda",
     "agenda_desc": "Resumo diario: estado de clase e UD a impartir.",
     "alumnado_title": "Alumnado",
-    "alumnado_desc": "Xestión de alumnado, titoría, FEOE e orientación.",
+    "alumnado_desc": "Xestión de alumnado, plano da aula e orientación profesional.",
     "diario_title": "Seguimento Diario",
     "diario_desc": "Diario de aula, continxencias, control de asistencia e alertas.",
     "evaluacion_title": "Cualificación",
@@ -509,7 +509,7 @@
     "metodologia": "Metodoloxía, recursos, plan de continxencia e elementos transversais.",
     "instrumentos": "Definición e pesos das ferramentas de avaliación.",
     "calendario": "Horario, trimestres, festivos, período FEOE e actividades extraescolares.",
-    "alumnado": "Fichas persoais, plano de aula e titoría con alertas de abandono.",
+    "alumnado": "Fichas persoais, plano de aula e orientación profesional.",
     "seguimiento": "Diario de clases, asistencia e entrada de notas.",
     "calificaciones": "Caderno de notas, estatísticas e comparativa grupal e individual."
   },
@@ -1179,7 +1179,8 @@
     },
     "diario": {
       "acumuladoTrimestral": "Acumulado trimestral",
-      "hoy": "Hoxe"
+      "hoy": "Hoxe",
+      "alertasAbandono": "Alertas de abandono"
     },
     "instrumentos": {
       "agente_autoevaluacion": "Autoavaliación (propio alumno)",
