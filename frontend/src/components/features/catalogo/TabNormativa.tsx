@@ -937,7 +937,7 @@ export function TabNormativa({ searchQuery = "" }: Props) {
 
       {/* NO RESULTS */}
       {filteredEstatal.length === 0 && Object.values(ITEMS_POR_COMUNIDAD).every(items => items.length === 0) && !COMUNIDADES.some(c => c.toLowerCase().includes(searchQuery.toLowerCase())) && (
-        <div className="py-12 text-center text-muted-foreground border border-border/50 rounded-xl bg-surface/50">
+        <div className="py-12 text-center text-muted-foreground border border-[var(--glass-border)] rounded-xl bg-[var(--glass-bg)]">
           No se encontraron resultados para "{searchQuery}".
         </div>
       )}
