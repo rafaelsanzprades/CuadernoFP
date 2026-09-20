@@ -1,9 +1,7 @@
-import { AlertTriangle, ClipboardList, PartyPopper, Target, TrendingDown, TrendingUp } from "lucide-react";
+import { AlertTriangle, ClipboardList, PartyPopper, TrendingUp } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import {
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -11,7 +9,6 @@ import {
   ResponsiveContainer,
   AreaChart,
   Area,
-  Cell
 } from "recharts";
 import { useAppStore } from "@/store/useAppStore";
 import { useTranslation } from "react-i18next";
@@ -22,12 +19,11 @@ interface AnalisisGrupalTabProps {
 
 export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {}) => {
   const { t } = useTranslation();
-  const { moduleData, cursoData } = useAppStore();
+  const { cursoData } = useAppStore();
 
   const df_al = cursoData?.df_al || [];
   const df_eval = cursoData?.df_eval || [];
-  const df_ra = moduleData?.df_ra || [];
-  
+
   // Filter active students
   const activeAlumnado = df_al.filter(isAlumnoActivo);
   const activeIds = activeAlumnado.map((al: any) => al.ID);
@@ -45,26 +41,11 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
   // Calculate stats
   const notas_finales = df_eval_activos.map((e: any) => Number(e.Nota_Final_FO) || 0);
   const media_grupal = notas_finales.reduce((a, b) => a + b, 0) / (notas_finales.length || 1);
-  const aprobados = notas_finales.filter((n: number) => n >= 5).length;
   const total = notas_finales.length;
-  const tasa_aprobado = total > 0 ? (aprobados / total) * 100 : 0;
-  
+
   // Std dev
   const variance = notas_finales.reduce((a, b) => a + Math.pow(b - media_grupal, 2), 0) / (total || 1);
   const desv_tipica = Math.sqrt(variance);
-
-  // Distribution chart data
-  const bins = Array(10).fill(0);
-  notas_finales.forEach((n: number) => {
-    let idx = Math.floor(n);
-    if (idx >= 10) idx = 9;
-    bins[idx]++;
-  });
-  
-  const distributionData = bins.map((val, idx) => ({
-    rango: `${idx}-${idx + 1}`,
-    alumnado: val,
-  }));
 
   // Trend Data (Trimestres)
   const avg1T = df_eval_activos.reduce((acc: number, e: any) => acc + (Number(e['Nota_1T']) || 0), 0) / (total || 1);
@@ -77,17 +58,6 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
     { name: t('campos.analisis.trim3', {defaultValue: '3º Trim'}), Media: Number(avg3T.toFixed(2)) },
     { name: t('campos.analisis.final', {defaultValue: 'Final'}), Media: Number(media_grupal.toFixed(2)) },
   ];
-
-  // Radar chart data
-  const raData = df_ra.map((ra: any, idx: number) => {
-    // Generate a realistic average for each RA based on the overall media
-    const performance = Math.min(10, Math.max(0, media_grupal + (Math.sin(idx) * 1.5)));
-    return {
-      subject: ra.id_ra || `RA${idx+1}`,
-      A: Number(performance.toFixed(2)),
-      fullMark: 10,
-    };
-  });
 
   // Risks
   const risks = df_eval_activos
@@ -132,14 +102,10 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
         <span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.analisis.resumenDatosGrupales', {defaultValue: 'Resumen datos grupales'})}
       </h2>
 
-      <section className="grid grid-cols-4 gap-6">
+      <section className="grid grid-cols-3 gap-6">
         <Card className="p-6 border-l-4 border-l-blue-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
           <span className="text-muted text-body font-semibold tracking-wider mb-2">{t('campos.analisis.mediaGrupal', {defaultValue: 'Media grupal'})}</span>
           <span className="text-heading font-black text-info">{media_grupal.toFixed(2)}</span>
-        </Card>
-        <Card className="p-6 border-l-4 border-l-emerald-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
-          <span className="text-muted text-body font-semibold tracking-wider mb-2">{t('campos.analisis.porcentajeAprobados', {defaultValue: '% Aprobados'})}</span>
-          <span className="text-heading font-black text-success">{tasa_aprobado.toFixed(1)}%</span>
         </Card>
         <Card className="p-6 border-l-4 border-l-purple-500 flex flex-col justify-center items-center hover:scale-105 transition-transform">
           <span className="text-muted text-body font-semibold tracking-wider mb-2">{t('campos.analisis.numeroAlumnado', {defaultValue: 'Nº Alumnado'})}</span>
@@ -151,115 +117,28 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
         </Card>
       </section>
 
-      <section className="grid grid-cols-2 gap-6">
-        <Card className="p-6">
-          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-6">
-            <span className="inline-flex"><TrendingDown className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.analisis.distribucionCalificaciones', {defaultValue: 'Distribución de Calificaciones'})}
-          </h2>
-          <div className="h-72 w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={distributionData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} />
-                <XAxis dataKey="rango" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} allowDecimals={false} />
-                <RechartsTooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(255,255,255,0.05)' }} />
-                <Bar dataKey="alumnado" name={t('campos.analisis.alumnadoLegend', {defaultValue: 'Alumnado'})} radius={[4, 4, 0, 0]}>
-                  {distributionData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={index >= 5 ? '#10b981' : '#ef4444'} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </Card>
-
-        <Card className="p-6">
-          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-6">
-            <span className="inline-flex"><TrendingUp className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.analisis.evolucionTrimestres', {defaultValue: 'Evolución por Trimestres'})}
-          </h2>
-          <div className="h-72 w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={trendData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                <defs>
-                  <linearGradient id="colorMedia" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.8}/>
-                    <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} />
-                <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} domain={[0, 10]} />
-                <RechartsTooltip content={<CustomTooltip />} />
-                <Area type="monotone" dataKey="Media" stroke="#3b82f6" strokeWidth={3} fillOpacity={1} fill="url(#colorMedia)" name={t('campos.analisis.mediaLegend', {defaultValue: 'Media'})} />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
-        </Card>
-      </section>
-
-      {raData.length > 0 && (
-        <Card className="p-6">
-          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-6">
-            <span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.analisis.rendimientoPorRA', {defaultValue: 'Rendimiento por RA'})}
-          </h2>
-          <div className="space-y-4">
-            {raData.map((ra: any) => {
-              const val = ra.A;
-              const pct = (val / 10) * 100;
-
-              const interpolateColor = (v: number) => {
-                const p = Math.max(0, Math.min(1, v / 10));
-                const stops = [
-                  { p: 0, r: 231, g: 76, b: 60 },
-                  { p: 0.25, r: 230, g: 126, b: 34 },
-                  { p: 0.5, r: 241, g: 196, b: 15 },
-                  { p: 0.75, r: 127, g: 190, b: 58 },
-                  { p: 1, r: 39, g: 174, b: 96 },
-                ];
-                let i = 0;
-                for (i = 0; i < stops.length - 1; i++) { if (p <= stops[i + 1].p) break; }
-                const s1 = stops[i], s2 = stops[Math.min(i + 1, stops.length - 1)];
-                const t = s2.p > s1.p ? (p - s1.p) / (s2.p - s1.p) : 0;
-                const r = Math.round(s1.r + (s2.r - s1.r) * t);
-                const g = Math.round(s1.g + (s2.g - s1.g) * t);
-                const b = Math.round(s1.b + (s2.b - s1.b) * t);
-                return `rgb(${r},${g},${b})`;
-              };
-
-              return (
-                <div key={ra.subject} className="flex items-center gap-4">
-                  <span className="w-16 text-body font-semibold text-foreground shrink-0">{ra.subject}</span>
-                  <div className="flex-1 relative h-7 bg-foreground/20 rounded-full border border-[var(--glass-border)] overflow-hidden">
-                    <div
-                      className="absolute top-0.5 bottom-0.5 left-0 rounded-full transition-all duration-700 flex items-center justify-end pr-3"
-                      style={{
-                        width: `${Math.max(pct, 3)}%`,
-                        background: `linear-gradient(to right, ${interpolateColor(0)}, ${interpolateColor(val)})`,
-                      }}
-                    >
-                      {pct > 12 && (
-                        <span className="text-caption font-bold text-foreground drop-shadow-md">{val.toFixed(1)}</span>
-                      )}
-                    </div>
-                    {/* 5.0 threshold */}
-                    <div className="absolute top-0 bottom-0 w-px bg-warning/10" style={{ left: '50%' }} />
-                  </div>
-                  {pct <= 12 && (
-                    <span className="text-body font-semibold text-foreground/80 w-10">{val.toFixed(1)}</span>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-          <div className="flex justify-between text-caption text-muted/80 mt-2 px-20">
-            <span>0</span>
-            <span>2.5</span>
-            <span>5.0</span>
-            <span>7.5</span>
-            <span>10</span>
-          </div>
-        </Card>
-      )}
+      <Card className="p-6">
+        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-6">
+          <span className="inline-flex"><TrendingUp className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.analisis.evolucionTrimestres', {defaultValue: 'Evolución por Trimestres'})}
+        </h2>
+        <div className="h-72 w-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={trendData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+              <defs>
+                <linearGradient id="colorMedia" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.8}/>
+                  <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} />
+              <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
+              <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} domain={[0, 10]} />
+              <RechartsTooltip content={<CustomTooltip />} />
+              <Area type="monotone" dataKey="Media" stroke="#3b82f6" strokeWidth={3} fillOpacity={1} fill="url(#colorMedia)" name={t('campos.analisis.mediaLegend', {defaultValue: 'Media'})} />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      </Card>
 
       <Card className="p-6">
         <h2 className="text-subheading font-bold mb-6"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.analisis.seguimientoRiesgo', {defaultValue: 'Seguimiento de riesgo académico'})}</h2>

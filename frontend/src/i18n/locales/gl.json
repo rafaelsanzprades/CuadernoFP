@@ -118,12 +118,8 @@
         "label": "Asistencia",
         "desc": "Control de asistencia do alumnado."
       },
-      "progreso-ra-ud": {
-        "label": "Progreso de RA e UD",
-        "desc": "Grao de consecución dos resultados de aprendizaxe e as unidades didácticas por trimestre."
-      },
       "detalle": {
-        "label": "Detalle por alumnado",
+        "label": "Notas",
         "desc": "Entrada de notas numéricas por alumnado, instrumento de avaliación e nivel de adquisición de RA."
       },
       "feoeEmpresa": {
@@ -464,7 +460,7 @@
     "ayuda_desc": "Guías, preguntas frecuentes, glosario e mapa da aplicación.",
     "contexto_desc": "Información xeral, características da contorna, alumnado e módulo.",
     "magia_desc": "Xeración da programación didáctica e informes.",
-    "seguimiento_desc": "Diario de clases, asistencia, progreso de RA e notas por alumnado.",
+    "seguimiento_desc": "Diario de clases, asistencia e notas por alumnado.",
     "metodologia_desc": "Estratexias metodolóxicas, recursos, espazos e atención á diversidade."
   },
   "common": {
@@ -514,7 +510,7 @@
     "instrumentos": "Definición e pesos das ferramentas de avaliación.",
     "calendario": "Horario, trimestres, festivos, período FEOE e actividades extraescolares.",
     "alumnado": "Fichas persoais, plano de aula e titoría con alertas de abandono.",
-    "seguimiento": "Diario de clases, asistencia, progreso de RA e UD e entrada de notas.",
+    "seguimiento": "Diario de clases, asistencia e entrada de notas.",
     "calificaciones": "Caderno de notas, estatísticas e comparativa grupal e individual."
   },
   "toasts": {

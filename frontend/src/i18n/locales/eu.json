@@ -118,12 +118,8 @@
         "label": "Asistentzia",
         "desc": "Ikasleen asistentzia-kontrola."
       },
-      "progreso-ra-ud": {
-        "label": "RA eta UDen aurrerapena",
-        "desc": "Ikaskuntzaren emaitzen eta unitate didaktikoen lorpen-maila, hiruhilekoka."
-      },
       "detalle": {
-        "label": "Ikaslekako xehetasuna",
+        "label": "Oharrak",
         "desc": "Nota numerikoen sarrera, ikasleka, ebaluazio-tresnaka eta RAren eskuratze-mailaka."
       },
       "feoeEmpresa": {
@@ -464,7 +460,7 @@
     "ayuda_desc": "Gidak, galdera maiztuak, glosarioa eta aplikazioaren mapa.",
     "contexto_desc": "Informazio orokorra, ingurunearen ezaugarriak, ikasleak eta modulua.",
     "magia_desc": "Programazio didaktikoaren eta txostenen sorrera.",
-    "seguimiento_desc": "Klaseen egunerokoa, asistentzia, RAren aurrerapena eta ikaslekako oharrak.",
+    "seguimiento_desc": "Klaseen egunerokoa, asistentzia eta ikaslekako oharrak.",
     "metodologia_desc": "Metodologia-estrategiak, baliabideak, espazioak eta aniztasunari arreta."
   },
   "common": {
@@ -514,7 +510,7 @@
     "instrumentos": "Ebaluazio-tresnen definizioa eta pisuak.",
     "calendario": "Ordutegia, hiruhilekoak, jaiegunak, FEOE aldia eta eskolaz kanpoko jarduerak.",
     "alumnado": "Datu-fitxa pertsonalak, gelako plana eta tutoretza uzte-alertekin.",
-    "seguimiento": "Eskola-egunkaria, asistentzia, RA eta UD aurrerapena eta noten sarrera.",
+    "seguimiento": "Eskola-egunkaria, asistentzia eta noten sarrera.",
     "calificaciones": "Noten koadernoa, estatistikak eta talde zein banakako konparaketa."
   },
   "toasts": {

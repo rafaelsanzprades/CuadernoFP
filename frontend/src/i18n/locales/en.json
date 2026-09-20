@@ -118,12 +118,8 @@
         "label": "Attendance",
         "desc": "Student attendance control."
       },
-      "progreso-ra-ud": {
-        "label": "Progress of learning outcomes and units",
-        "desc": "Degree of attainment of the learning outcomes and teaching units by term."
-      },
       "detalle": {
-        "label": "Detail by student",
+        "label": "Grades",
         "desc": "Entry of numerical grades by student, evaluation instrument and level of RA attainment."
       },
       "feoeEmpresa": {
@@ -464,7 +460,7 @@
     "ayuda_desc": "Guides, FAQ, glossary and site map.",
     "contexto_desc": "General information, environment characteristics, students and module.",
     "magia_desc": "Generation of the teaching plan and reports.",
-    "seguimiento_desc": "Class journal, attendance, RA progress and student grades.",
+    "seguimiento_desc": "Class journal, attendance and student grades.",
     "metodologia_desc": "Methodological strategies, resources, spaces and attention to diversity."
   },
   "common": {
@@ -514,7 +510,7 @@
     "instrumentos": "Definition and weighting of assessment instruments.",
     "calendario": "Timetable, terms, holidays, FEOE period and extracurricular activities.",
     "alumnado": "Personal records, classroom seating plan and tutoring with dropout alerts.",
-    "seguimiento": "Class journal, attendance, RA and UD progress and grade entry.",
+    "seguimiento": "Class journal, attendance and grade entry.",
     "calificaciones": "Gradebook, statistics and group and individual comparison."
   },
   "toasts": {

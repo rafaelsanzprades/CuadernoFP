@@ -72,14 +72,11 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   "/seguimiento": [
     { id: "clases", label: "Clases" },
     { id: "asistencia", label: "Asistencia" },
-    { id: "progreso-ra-ud", label: "Progreso de RA y UD" },
-    { id: "detalle", label: "Detalle por alumnado" },
+    { id: "detalle", label: "Notas" },
     { id: "feoe-empresa", label: "FEOE / Empresa" },
   ],
   "/calificaciones": [
     { id: "resumen", label: "Resumen" },
-    { id: "estadisticas", label: "Estadísticas" },
-    { id: "analisis", label: "Análisis" },
     { id: "historico", label: "Histórico" },
     { id: "reclamaciones", label: "Reclamaciones" },
     { id: "boletines", label: "Boletines" },

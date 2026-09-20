@@ -2,7 +2,7 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { TabSync } from "@/components/ui/TabSync";
 import { useTranslation } from "react-i18next";
-import { Calendar, FileEdit, MapPin, ClipboardCheck, Target, Users, FolderOpen, Building2 } from "lucide-react";
+import { Calendar, FileEdit, MapPin, ClipboardCheck, Users, FolderOpen, Building2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -10,7 +10,6 @@ import { useAppStore } from "@/store/useAppStore";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { getSimulatedToday } from "@/utils/planningGenerator";
 import { AsistenciaTab } from "@/components/features/diario/AsistenciaTab";
-import { ProgresoRaTab } from "@/components/features/evaluacion/ProgresoRaTab";
 import { DetalleAlumnadoTab } from "@/components/features/evaluacion/DetalleAlumnadoTab";
 import { FeoeEmpresaTab } from "@/components/features/evaluacion/FeoeEmpresaTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
@@ -78,14 +77,12 @@ export default function SeguimientoPage() {
   const TABS = [
     { id: "clases", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.clases.label', {defaultValue: 'Clases'})}</span>, cleanLabel: t('tabs.seguimiento.clases.label', {defaultValue: 'Clases'}) },
     { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.asistencia.label', {defaultValue: 'Asistencia'})}</span>, cleanLabel: t('tabs.seguimiento.asistencia.label', {defaultValue: 'Asistencia'}) },
-    { id: "progreso-ra-ud", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.progreso-ra-ud.label', {defaultValue: 'Progreso de RA y UD'})}</span>, cleanLabel: t('tabs.seguimiento.progreso-ra-ud.label', {defaultValue: 'Progreso de RA y UD'}) },
-    { id: "detalle", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.detalle.label', {defaultValue: 'Detalle por alumnado'})}</span>, cleanLabel: t('tabs.seguimiento.detalle.label', {defaultValue: 'Detalle por alumnado'}) },
+    { id: "detalle", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.detalle.label', {defaultValue: 'Notas'})}</span>, cleanLabel: t('tabs.seguimiento.detalle.label', {defaultValue: 'Notas'}) },
     { id: "feoe-empresa", label: <span className="flex items-center gap-2"><Building2 className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.feoeEmpresa.label', {defaultValue: 'FEOE / Empresa'})}</span>, cleanLabel: t('tabs.seguimiento.feoeEmpresa.label', {defaultValue: 'FEOE / Empresa'}) },
   ];
   const TAB_DESCRIPTIONS: Record<string, string> = {
     clases: t('tabs.seguimiento.clases.desc', {defaultValue: 'Diario de clases, sesiones lectivas y registro de contingencias.'}),
     asistencia: t('tabs.seguimiento.asistencia.desc', {defaultValue: 'Control de asistencia del alumnado.'}),
-    'progreso-ra-ud': t('tabs.seguimiento.progreso-ra-ud.desc', {defaultValue: 'Grado de consecución de los resultados de aprendizaje y las unidades didácticas por trimestre.'}),
     detalle: t('tabs.seguimiento.detalle.desc', {defaultValue: 'Entrada de notas numéricas por alumnado, instrumento de evaluación y nivel de adquisición de RA.'}),
     'feoe-empresa': t('tabs.seguimiento.feoeEmpresa.desc', {defaultValue: 'Evaluación del alumnado en la empresa durante la FEOE (Anexo XI b), transcrita por RA/CE.'}),
   };
@@ -305,7 +302,7 @@ export default function SeguimientoPage() {
           <StickyPageHeader
             icon={MapPin}
             title={t('nav.seguimiento', { defaultValue: 'Seguimiento' })}
-            description={t('pages.seguimiento_desc', { defaultValue: 'Diario de clases, asistencia, progreso de RA y notas por alumnado.' })}
+            description={t('pages.seguimiento_desc', { defaultValue: 'Diario de clases, asistencia y notas por alumnado.' })}
           >
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
@@ -434,12 +431,6 @@ export default function SeguimientoPage() {
               {activeTab === 'asistencia' && (
                 <div className="mt-4">
                   <AsistenciaTab />
-                </div>
-              )}
-
-              {activeTab === 'progreso-ra-ud' && (
-                <div className="mt-4">
-                  <ProgresoRaTab />
                 </div>
               )}
 

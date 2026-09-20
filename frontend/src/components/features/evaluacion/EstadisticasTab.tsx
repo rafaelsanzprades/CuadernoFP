@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 
 export default function EstadisticasTab() {
   const { t } = useTranslation();
-  const { cursoData, moduleData, activeCursoId } = useAppStore();
+  const { cursoData, activeCursoId } = useAppStore();
   const [evalPeriod, setEvalPeriod] = useState<"1T" | "2T" | "3T" | "FINAL">("FINAL");
 
   if (!activeCursoId) {
@@ -24,7 +24,6 @@ export default function EstadisticasTab() {
 
   const df_eval = cursoData?.df_eval || [];
   const df_al = cursoData?.df_al || [];
-  const df_ra = moduleData?.df_ra || [];
 
   const activeAlumnos = df_al.filter(isAlumnoActivo);
   const alumnosIds = activeAlumnos.map(a => a.ID);
@@ -106,34 +105,6 @@ export default function EstadisticasTab() {
     value: gradesDist[k as keyof typeof gradesDist],
     fill: k.startsWith("IN") ? "#f43f5e" : k.startsWith("SU") ? "#f59e0b" : k.startsWith("BI") ? "#3b82f6" : k.startsWith("NT") ? "#10b981" : "#8b5cf6"
   }));
-
-  // Average per RA
-  const getRaStats = () => {
-    return df_ra.map(ra => {
-      let sum = 0;
-      let count = 0;
-      alumnosIds.forEach(id => {
-        const row = df_eval.find(r => r.ID === id);
-        // We will fake RA averages if not stored directly in df_eval for now
-        // In reality, this requires recalculating the notes per RA based on CEs
-        // For visual analytics, we simulate RA values based on Nota Final
-        if (row && parseFloat(row.Nota_Final_FO) > 0) {
-           const finalNota = parseFloat(row.Nota_Final_FO);
-           // Add slight variation based on RA id
-           const variation = (parseInt(ra.id_ra) % 3) * 0.5 - 0.5;
-           const val = Math.max(1, Math.min(10, finalNota + variation));
-           sum += val;
-           count++;
-        }
-      });
-      return {
-        name: `RA ${ra.id_ra}`,
-        media: count > 0 ? parseFloat((sum / count).toFixed(2)) : 0,
-      };
-    });
-  };
-
-  const raStats = getRaStats();
 
   return (
     <MotionWrapper>
@@ -260,30 +231,6 @@ export default function EstadisticasTab() {
                  </ResponsiveContainer>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Barras de RAs */}
-        <div className="glass-card p-6 border-t-4 border-t-blue-500 flex flex-col">
-          <h3 className="text-subheading font-bold flex items-center gap-2 mb-4">
-            <TrendingUp className="w-5 h-5 text-blue-500" /> {t('campos.evaluacion.rendimientoMedioRaTitulo', {defaultValue: 'Rendimiento medio por resultado de aprendizaje'})}
-          </h3>
-          <p className="text-body text-muted mb-4">
-            {t('campos.evaluacion.rendimientoMedioRaDesc', {defaultValue: 'Muestra la asimilación global de cada bloque competencial (RA) en el grupo. Permite detectar "cuellos de botella" en el aprendizaje.'})}
-          </p>
-          <div className="flex-1 min-h-[300px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={raStats}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#ffffff20" vertical={false} />
-                <XAxis dataKey="name" stroke="#ffffff50" fontSize={12} tickLine={false} />
-                <YAxis stroke="#ffffff50" fontSize={12} tickLine={false} axisLine={false} domain={[0, 10]} />
-                <Tooltip 
-                  contentStyle={{ backgroundColor: 'var(--glass-bg)', borderColor: 'var(--glass-border)', borderRadius: '8px' }}
-                  cursor={{fill: '#ffffff10'}}
-                />
-                <Bar dataKey="media" name={t('campos.evaluacion.notaMediaSeriesLabel', {defaultValue: 'Nota media'})} fill="#3b82f6" radius={[4, 4, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
           </div>
         </div>
 
