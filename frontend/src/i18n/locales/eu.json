@@ -68,7 +68,7 @@
         "label": "Datak eta ordutegia",
         "desc": "Konfiguratu ikasturteko datu orokorrak, hiruhilekoak eta asteko ordutegia."
       },
-      "feoe": {
+      "periodoFeoe": {
         "label": "FEOE aldia",
         "desc": "LH Dualerako (FEOE) konfigurazio berezia."
       },
@@ -118,8 +118,8 @@
         "label": "Oharrak",
         "desc": "Nota numerikoen sarrera, ikasleka, ebaluazio-tresnaka eta RAren eskuratze-mailaka."
       },
-      "feoeEmpresa": {
-        "label": "FEOE / Enpresa",
+      "empresaFeoe": {
+        "label": "FEOE enpresa",
         "desc": "FEOEan zehar enpresan ikasleen ebaluazioa (XI b eranskina), RA/CEka transkribatua."
       }
     },
@@ -157,8 +157,8 @@
         "label": "Testuinguratzea",
         "desc": "Ingurune geografiko, sozioekonomiko eta eskolarra, ACNEAE ikasleak, eredu Sinplifikatuaren testuak eta egiletza-datuak. PD+ren 1.3 kap."
       },
-      "dual": {
-        "label": "FEOE Duala",
+      "planFeoe": {
+        "label": "FEOE plana",
         "desc": "Enpresan edo baliokidetutako erakundean egindako prestakuntza (FEOE): modalitatea, jarraipena eta araubide duala. PD+ren 5. kap."
       },
       "criterios": {
@@ -854,7 +854,8 @@
     },
     "feoe": {
       "excelenteTodoA4": "Bikaina (dena 4ra)",
-      "suficienteTodoA3": "Nahikoa (dena 3ra)"
+      "suficienteTodoA3": "Nahikoa (dena 3ra)",
+      "gestionarEnCurriculo": "Kudeatu Curriculumean"
     },
     "inicio": {
       "unirseTelegram": "Elkartu Telegrameko taldera"
@@ -2662,9 +2663,11 @@
       "score3": "3 · Nabarmena",
       "score4": "4 · Bikaina",
       "criteriosDesignadosTitulo": "FEOErako izendatutako irizpideak",
-      "criteriosDesignadosDesc": "Markatu enpresan ebaluatzen diren CEak (XI b) eranskina) — enpresako tutoreak 1etik 4ra baloratzen ditu eta zuk emaitza beheko taulan transkribatzen duzu, ikasleka.",
+      "criteriosDesignadosDesc": "Curriculumean FEOE gisa markatutako CEak dira enpresako tutoreak baloratzen dituenak (XI b eranskina) — zuk emaitza beheko taulan transkribatzen duzu, ikasleka.",
       "sinRaCe": "Oraindik ez dago RA/CErik kargatuta modulu honetan.",
-      "marcaAlMenosUnCe": "Markatu gutxienez CE bat goian, enpresaren balorazioak erregistratzen hasteko.",
+      "ningunCeMarcadoDesc": "Oraindik ez dago CErik FEOE gisa markatuta. Markatu Curriculumean -> OG<-RA<-CE (\"FEOE\" zutabea).",
+      "delRaSufijo": "RAren",
+      "marcaAlMenosUnCe": "Markatu gutxienez CE bat FEOE gisa Curriculumean -> OG<-RA<-CE, enpresaren balorazioak erregistratzen hasteko.",
       "sinAlumnadoActivo": "Ez dago ikasle aktiborik erregistratuta ikastaro honetan.",
       "alumnadoActivoCount": "Ikasle aktiboak ({{count}})",
       "rellenaConBotonDesc": "Bete botoi batekin eta zuzendu eskuz behar dena — abiapuntu bat baino ez da, ez balio definitiboa.",

@@ -255,14 +255,14 @@ export default function CalendarioPage() {
 
   const TABS = [
     { id: "fechas", label: <span className="flex items-center gap-2"><Settings className="w-4 h-4 shrink-0" /> {t('tabs.calendario.fechas.label', {defaultValue: 'Fechas y horario'})}</span>, cleanLabel: t('tabs.calendario.fechas.label', {defaultValue: 'Fechas y horario'}) },
-    { id: "feoe", label: <span className="flex items-center gap-2"><Briefcase className="w-4 h-4 shrink-0" /> {t('tabs.calendario.feoe.label', {defaultValue: 'Periodo FEOE'})}</span>, cleanLabel: t('tabs.calendario.feoe.label', {defaultValue: 'Periodo FEOE'}) },
+    { id: "periodo-feoe", label: <span className="flex items-center gap-2"><Briefcase className="w-4 h-4 shrink-0" /> {t('tabs.calendario.periodoFeoe.label', {defaultValue: 'Periodo FEOE'})}</span>, cleanLabel: t('tabs.calendario.periodoFeoe.label', {defaultValue: 'Periodo FEOE'}) },
     { id: "eventos", label: <span className="flex items-center gap-2"><Flag className="w-4 h-4 shrink-0" /> {t('tabs.calendario.eventos.label', {defaultValue: 'Eventos y festivos'})}</span>, cleanLabel: t('tabs.calendario.eventos.label', {defaultValue: 'Eventos y festivos'}) },
     { id: "actividades", label: <span className="flex items-center gap-2"><Bus className="w-4 h-4 shrink-0" /> {t('tabs.calendario.actividades.label', {defaultValue: 'Complementarias y extraescolares'})}</span>, cleanLabel: t('tabs.calendario.actividades.label', {defaultValue: 'Complementarias y extraescolares'}) },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     fechas: t('tabs.calendario.fechas.desc', {defaultValue: 'Configura las fechas generales, los trimestres y el horario semanal del curso.'}),
-    feoe: t('tabs.calendario.feoe.desc', {defaultValue: 'Configuración específica para FP Dual (FEOE).'}),
+    'periodo-feoe': t('tabs.calendario.periodoFeoe.desc', {defaultValue: 'Configuración específica para FP Dual (FEOE).'}),
     eventos: t('tabs.calendario.eventos.desc', {defaultValue: 'Registro de eventos y festivos que afectan a la docencia.'}),
     actividades: t('tabs.calendario.actividades.desc', {defaultValue: 'Planificación de actividades complementarias y extraescolares.'}),
     visual: t('tabs.calendario.visual.desc', {defaultValue: 'Vista mensual del calendario académico completo.'}),
@@ -671,11 +671,11 @@ export default function CalendarioPage() {
                 </div>
               )}
 
-              {activeTab === 'feoe' && (
+              {activeTab === 'periodo-feoe' && (
                 <div className="space-y-4 mt-4">
                   {/* FP Dual / FEOE - 5 columnas */}
                   <Card className="p-6 border-t-4 border-t-orange-500 overflow-visible">
-                    <h2 className="text-subheading font-bold mb-6">{t('tabs.calendario.feoe.label', {defaultValue: 'Periodo FEOE'})}</h2>
+                    <h2 className="text-subheading font-bold mb-6">{t('tabs.calendario.periodoFeoe.label', {defaultValue: 'Periodo FEOE'})}</h2>
                     <div className="grid grid-cols-5 gap-4 items-end">
                       {/* Col 1: Selector de tipo */}
                       <div>

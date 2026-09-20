@@ -1,10 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import { Building2, CheckCircle2, XCircle, HelpCircle, Sparkles, ThumbsUp } from "lucide-react";
+import { Building2, CheckCircle2, XCircle, HelpCircle, Sparkles, ThumbsUp, GraduationCap } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 // ─── Ítem 12 (resto): evaluación del RA desarrollado en empresa (FEOE) ──────
 // El tutor de empresa valora, para los CE que el profesor designe, del 1 al 4
@@ -64,13 +66,12 @@ export function FeoeEmpresaTab() {
     }
   }, [activeStudents.length]);
 
-  const ceDesignados = df_ce.filter((ce: any) => ce.feoe === true);
+  // La designación de qué CE evalúa el tutor de empresa es la misma que
+  // is_dual (FEOE) en Currículo->OG<-RA<-CE -- antes había aquí un checkbox
+  // propio (campo "feoe") que duplicaba esa selección sin enterarse de ella;
+  // se unificaron el 2026-09-20 a petición de Rafael.
+  const ceDesignados = df_ce.filter((ce: any) => ce.is_dual === true);
   const raConDesignados = df_ra.filter((ra: any) => ceDesignados.some((ce: any) => ce.id_ra === ra.id_ra));
-
-  const toggleFeoe = (ce_id: string) => {
-    const newDfCe = df_ce.map((ce: any) => (ce.id_ce === ce_id ? { ...ce, feoe: !ce.feoe } : ce));
-    updateModuleData("df_ce", newDfCe);
-  };
 
   const ensureInstrumento = (currentInstr: any[]) => {
     if (currentInstr.some((i) => i.id_instrumento === ID_INSTRUMENTO_FEOE)) return currentInstr;
@@ -169,36 +170,46 @@ export function FeoeEmpresaTab() {
   return (
     <div className="space-y-6">
       <Card className="p-6 border-t-4 border-t-amber-500">
-        <div className="flex items-start gap-3 mb-4">
-          <Building2 className="w-6 h-6 text-amber-500 mt-1 shrink-0" />
-          <div>
-            <h3 className="text-subheading font-bold text-foreground">{t('campos.feoe.criteriosDesignadosTitulo', {defaultValue: 'Criterios designados para FEOE'})}</h3>
-            <p className="text-muted text-body mt-1">
-              {t('campos.feoe.criteriosDesignadosDesc', {defaultValue: 'Marca los CE que se evalúan en empresa (Anexo XI b) — el tutor de empresa los valora del 1 al 4 y tú transcribes el resultado más abajo, por alumno.'})}
-            </p>
+        <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
+          <div className="flex items-start gap-3">
+            <Building2 className="w-6 h-6 text-amber-500 mt-1 shrink-0" />
+            <div>
+              <h3 className="text-subheading font-bold text-foreground">{t('campos.feoe.criteriosDesignadosTitulo', {defaultValue: 'Criterios designados para FEOE'})}</h3>
+              <p className="text-muted text-body mt-1">
+                {t('campos.feoe.criteriosDesignadosDesc', {defaultValue: 'Los CE marcados como FEOE en Currículo son los que valora el tutor de empresa (Anexo XI b) — tú transcribes el resultado más abajo, por alumno.'})}
+              </p>
+            </div>
           </div>
+          <Link href="/curriculo?tab=ponderacion-ra-ce">
+            <Button variant="secondary" className="shrink-0 gap-2 text-caption">
+              <GraduationCap className="w-3.5 h-3.5" /> {t('botones.feoe.gestionarEnCurriculo', {defaultValue: 'Gestionar en Currículo'})}
+            </Button>
+          </Link>
         </div>
         {df_ra.length === 0 ? (
           <p className="text-body text-muted">{t('campos.feoe.sinRaCe', {defaultValue: 'No hay RA/CE cargados en este módulo todavía.'})}</p>
+        ) : raConDesignados.length === 0 ? (
+          <p className="text-body text-muted">
+            {t('campos.feoe.ningunCeMarcadoDesc', {defaultValue: 'Todavía no hay ningún CE marcado como FEOE. Márcalos en Currículo -> OG<-RA<-CE (columna "FEOE").'})}
+          </p>
         ) : (
           <div className="space-y-4">
-            {df_ra.map((ra: any) => {
-              const cesDeRa = df_ce.filter((ce: any) => ce.id_ra === ra.id_ra);
-              if (cesDeRa.length === 0) return null;
+            {raConDesignados.map((ra: any) => {
+              const cesDeRa = ceDesignados.filter((ce: any) => ce.id_ra === ra.id_ra);
+              const pesoDesignado = cesDeRa.reduce((sum: number, ce: any) => sum + (Number(ce.peso_ce) || 0), 0);
               return (
                 <div key={ra.id_ra}>
-                  <p className="text-caption font-semibold text-muted mb-1.5">{ra.id_ra} — {ra.desc_ra || ""}</p>
+                  <div className="flex items-center justify-between mb-1.5 gap-3">
+                    <p className="text-caption font-semibold text-muted truncate">{ra.id_ra} — {ra.desc_ra || ""}</p>
+                    <span className={`shrink-0 text-caption font-semibold px-2 py-0.5 rounded-full ${pesoDesignado === 100 ? 'bg-success/10 text-success' : 'bg-amber-500/10 text-amber-500'}`}>
+                      {pesoDesignado.toFixed(0)}% {t('campos.feoe.delRaSufijo', {defaultValue: 'del RA'})}
+                    </span>
+                  </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     {cesDeRa.map((ce: any) => (
-                      <label key={ce.id_ce} className={`flex items-center gap-2 p-2 rounded border cursor-pointer transition-colors ${ce.feoe ? 'bg-amber-500/10 border-amber-500/30' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
-                        <input
-                          type="checkbox"
-                          checked={!!ce.feoe}
-                          onChange={() => toggleFeoe(ce.id_ce)}
-                          className="rounded border-white/20 bg-transparent text-amber-500 focus:ring-amber-500"
-                        />
-                        <span className="text-caption">{ce.id_ce} — {ce.desc_ce || ""}</span>
-                      </label>
+                      <div key={ce.id_ce} className="flex items-center gap-2 p-2 rounded border bg-amber-500/10 border-amber-500/30">
+                        <span className="text-caption">{ce.id_ce} — {ce.desc_ce || ""} <span className="text-muted">({ce.peso_ce || 0}%)</span></span>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -210,7 +221,12 @@ export function FeoeEmpresaTab() {
 
       {ceDesignados.length === 0 ? (
         <Card className="p-8 text-center border-l-4 border-l-amber-500">
-          <p className="text-foreground/80">{t('campos.feoe.marcaAlMenosUnCe', {defaultValue: 'Marca al menos un CE arriba para empezar a registrar valoraciones de empresa.'})}</p>
+          <p className="text-foreground/80">{t('campos.feoe.marcaAlMenosUnCe', {defaultValue: 'Marca al menos un CE como FEOE en Currículo -> OG<-RA<-CE para empezar a registrar valoraciones de empresa.'})}</p>
+          <Link href="/curriculo?tab=ponderacion-ra-ce" className="inline-block mt-4">
+            <Button variant="secondary" className="gap-2">
+              <GraduationCap className="w-4 h-4" /> {t('botones.feoe.gestionarEnCurriculo', {defaultValue: 'Gestionar en Currículo'})}
+            </Button>
+          </Link>
         </Card>
       ) : activeStudents.length === 0 ? (
         <Card className="p-8 text-center border-l-4 border-l-yellow-500">

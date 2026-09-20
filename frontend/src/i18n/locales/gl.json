@@ -68,7 +68,7 @@
         "label": "Datas e horario",
         "desc": "Configura as datas xerais, os trimestres e o horario semanal do curso."
       },
-      "feoe": {
+      "periodoFeoe": {
         "label": "Período FEOE",
         "desc": "Configuración específica para FP Dual (FEOE)."
       },
@@ -118,8 +118,8 @@
         "label": "Notas",
         "desc": "Entrada de notas numéricas por alumnado, instrumento de avaliación e nivel de adquisición de RA."
       },
-      "feoeEmpresa": {
-        "label": "FEOE / Empresa",
+      "empresaFeoe": {
+        "label": "Empresa FEOE",
         "desc": "Avaliación do alumnado na empresa durante a FEOE (Anexo XI b), transcrita por RA/CE."
       }
     },
@@ -157,8 +157,8 @@
         "label": "Contextualización",
         "desc": "Contorno xeográfico, socioeconómico e escolar, alumnado ACNEAE, textos do modelo Simplificado e datos de autoría. Cap. 1.3 do PD+."
       },
-      "dual": {
-        "label": "Dual FEOE",
+      "planFeoe": {
+        "label": "Plan FEOE",
         "desc": "Formación en empresa ou organismo equiparado (FEOE): modalidade, seguimento e réxime dual. Cap. 5 do PD+."
       },
       "criterios": {
@@ -854,7 +854,8 @@
     },
     "feoe": {
       "excelenteTodoA4": "Excelente (todo a 4)",
-      "suficienteTodoA3": "Suficiente (todo a 3)"
+      "suficienteTodoA3": "Suficiente (todo a 3)",
+      "gestionarEnCurriculo": "Xestionar en Currículo"
     },
     "inicio": {
       "unirseTelegram": "Unirme ao grupo en Telegram"
@@ -2662,9 +2663,11 @@
       "score3": "3 · Notable",
       "score4": "4 · Sobresaliente",
       "criteriosDesignadosTitulo": "Criterios designados para FEOE",
-      "criteriosDesignadosDesc": "Marca os CE que se avalían na empresa (Anexo XI b) — o titor de empresa valóraos do 1 ao 4 e ti transcribes o resultado máis abaixo, por alumno.",
+      "criteriosDesignadosDesc": "Os CE marcados como FEOE en Currículo son os que valora o titor de empresa (Anexo XI b) — ti transcribes o resultado máis abaixo, por alumno.",
       "sinRaCe": "Non hai RA/CE cargados neste módulo aínda.",
-      "marcaAlMenosUnCe": "Marca polo menos un CE arriba para comezar a rexistrar valoracións de empresa.",
+      "ningunCeMarcadoDesc": "Aínda non hai ningún CE marcado como FEOE. Márcaos en Currículo -> OG<-RA<-CE (columna \"FEOE\").",
+      "delRaSufijo": "do RA",
+      "marcaAlMenosUnCe": "Marca polo menos un CE como FEOE en Currículo -> OG<-RA<-CE para comezar a rexistrar valoracións de empresa.",
       "sinAlumnadoActivo": "Non hai alumnado activo rexistrado neste curso.",
       "alumnadoActivoCount": "Alumnado activo ({{count}})",
       "rellenaConBotonDesc": "Enche cun botón e corrixe a man o que faga falta — é só un punto de partida, non un valor definitivo.",

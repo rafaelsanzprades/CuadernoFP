@@ -68,7 +68,7 @@
         "label": "Dates and schedule",
         "desc": "Configure the course's general dates, terms and weekly schedule."
       },
-      "feoe": {
+      "periodoFeoe": {
         "label": "FEOE period",
         "desc": "Specific configuration for dual VET (FEOE)."
       },
@@ -118,8 +118,8 @@
         "label": "Grades",
         "desc": "Entry of numerical grades by student, evaluation instrument and level of RA attainment."
       },
-      "feoeEmpresa": {
-        "label": "FEOE / Company",
+      "empresaFeoe": {
+        "label": "FEOE company",
         "desc": "Assessment of students at the company during the FEOE (Annex XI b), transcribed by RA/CE."
       }
     },
@@ -157,8 +157,8 @@
         "label": "Contextualization",
         "desc": "Geographic, socioeconomic and school environment, ACNEAE students, texts for the Simplified model, and authorship details. Chapter 1.3 of the PD+."
       },
-      "dual": {
-        "label": "Dual FEOE",
+      "planFeoe": {
+        "label": "FEOE plan",
         "desc": "Training in a company or equivalent organization (FEOE): modality, tracking and dual system. Chapter 5 of the PD+."
       },
       "criterios": {
@@ -854,7 +854,8 @@
     },
     "feoe": {
       "excelenteTodoA4": "Excellent (all to 4)",
-      "suficienteTodoA3": "Sufficient (all to 3)"
+      "suficienteTodoA3": "Sufficient (all to 3)",
+      "gestionarEnCurriculo": "Manage in Curriculum"
     },
     "inicio": {
       "unirseTelegram": "Join the Telegram group"
@@ -2662,9 +2663,11 @@
       "score3": "3 · Good",
       "score4": "4 · Excellent",
       "criteriosDesignadosTitulo": "Criteria designated for FEOE",
-      "criteriosDesignadosDesc": "Mark the CEs that are assessed at the company (Annex XI b) — the company tutor rates them from 1 to 4 and you transcribe the result below, per student.",
+      "criteriosDesignadosDesc": "The CEs marked as FEOE in Curriculum are the ones the company tutor rates (Annex XI b) — you transcribe the result below, per student.",
       "sinRaCe": "No RA/CE loaded in this module yet.",
-      "marcaAlMenosUnCe": "Mark at least one CE above to start recording company assessments.",
+      "ningunCeMarcadoDesc": "No CE has been marked as FEOE yet. Mark them in Curriculum -> OG<-RA<-CE (\"FEOE\" column).",
+      "delRaSufijo": "of the RA",
+      "marcaAlMenosUnCe": "Mark at least one CE as FEOE in Curriculum -> OG<-RA<-CE to start recording company assessments.",
       "sinAlumnadoActivo": "No active students registered in this course.",
       "alumnadoActivoCount": "Active students ({{count}})",
       "rellenaConBotonDesc": "Fill in with one button and manually correct what's needed — it's just a starting point, not a final value.",

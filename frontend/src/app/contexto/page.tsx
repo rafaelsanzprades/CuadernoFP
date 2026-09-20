@@ -56,7 +56,7 @@ export default function ContextoConfigPage() {
   const TABS = [
     { id: "identificacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.contexto.identificacion.label', {defaultValue: 'Identificación'})}</span>, cleanLabel: t('tabs.contexto.identificacion.label', {defaultValue: 'Identificación'}) },
     { id: "contextualizacion", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.contexto.contextualizacion.label', {defaultValue: 'Contextualización'})}</span>, cleanLabel: t('tabs.contexto.contextualizacion.label', {defaultValue: 'Contextualización'}) },
-    { id: "dual", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.contexto.dual.label', {defaultValue: 'Dual FEOE'})}</span>, cleanLabel: t('tabs.contexto.dual.label', {defaultValue: 'Dual FEOE'}) },
+    { id: "plan-feoe", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.contexto.planFeoe.label', {defaultValue: 'Plan FEOE'})}</span>, cleanLabel: t('tabs.contexto.planFeoe.label', {defaultValue: 'Plan FEOE'}) },
     { id: "criterios", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.contexto.criterios.label', {defaultValue: 'Evaluación y calificación'})}</span>, cleanLabel: t('tabs.contexto.criterios.label', {defaultValue: 'Evaluación y calificación'}) },
   ];
 
@@ -65,7 +65,7 @@ export default function ContextoConfigPage() {
   const TAB_DESCRIPTIONS: Record<string, string> = {
     identificacion: t('tabs.contexto.identificacion.desc', {defaultValue: 'Identificación del módulo y centro, régimen dual, reglas de redondeo, ponderación trimestral, instrumentos de evaluación y escalas cualitativas. Cap. 1.1 del PD+.'}),
     contextualizacion: t('tabs.contexto.contextualizacion.desc', {defaultValue: 'Entorno geográfico, socioeconómico, escolar e infraestructura, con rasgos rápidos seleccionables; alumnado ACNEAE, textos del modelo Simplificado y datos de autoría. Cap. 1.3 del PD+.'}),
-    dual: t('tabs.contexto.dual.desc', {defaultValue: 'Formación en empresa u organismo equiparado (FEOE): modalidad, seguimiento y régimen dual. Cap. 5 del PD+.'}),
+    'plan-feoe': t('tabs.contexto.planFeoe.desc', {defaultValue: 'Formación en empresa u organismo equiparado (FEOE): modalidad, seguimiento y régimen dual. Cap. 5 del PD+.'}),
     criterios: t('tabs.contexto.criterios.desc', {defaultValue: 'Procedimiento de evaluación y de calificación: información al alumnado, pérdida de evaluación continua, recuperación. Cap. 4 del PD+.'}),
   };
 
@@ -142,7 +142,7 @@ export default function ContextoConfigPage() {
 
             {activeTab === "identificacion" && <DatosTab />}
             {activeTab === "contextualizacion" && <ContextoTab />}
-            {activeTab === "dual" && <PlanesTab />}
+            {activeTab === "plan-feoe" && <PlanesTab />}
             {activeTab === "criterios" && <ProcedimientosTab />}
 
           </MotionWrapper>

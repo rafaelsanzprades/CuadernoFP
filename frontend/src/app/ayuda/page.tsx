@@ -28,7 +28,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   "/contexto": [
     { id: "identificacion", label: "Identificación" },
     { id: "contextualizacion", label: "Contextualización" },
-    { id: "dual", label: "Dual FEOE" },
+    { id: "plan-feoe", label: "Plan FEOE" },
     { id: "criterios", label: "Evaluación y calificación" },
   ],
   "/curriculo": [
@@ -51,7 +51,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   ],
   "/calendario": [
     { id: "fechas", label: "Fechas y horario" },
-    { id: "feoe", label: "Periodo FEOE" },
+    { id: "periodo-feoe", label: "Periodo FEOE" },
     { id: "eventos", label: "Eventos y festivos" },
     { id: "actividades", label: "Complementarias y extraescolares" },
   ],
@@ -71,7 +71,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "clases", label: "Clases" },
     { id: "asistencia", label: "Asistencia" },
     { id: "detalle", label: "Notas" },
-    { id: "feoe-empresa", label: "FEOE / Empresa" },
+    { id: "empresa-feoe", label: "Empresa FEOE" },
   ],
   "/calificaciones": [
     { id: "resumen", label: "Resumen" },
