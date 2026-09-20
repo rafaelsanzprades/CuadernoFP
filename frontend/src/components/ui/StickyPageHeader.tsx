@@ -17,8 +17,8 @@ interface StickyPageHeaderProps {
 export function StickyPageHeader({ icon: Icon, title, description, children }: StickyPageHeaderProps) {
   return (
     <div className="sticky top-0 z-20 bg-background/95 backdrop-blur-xl border-b border-[var(--glass-border)] px-8 pt-4 pb-3 shadow-sm">
-      <h1 className="text-subheading font-bold tracking-tight flex items-center gap-2.5 text-foreground">
-        <Icon className="w-6 h-6 text-accent shrink-0" />
+      <h1 className="text-heading font-bold tracking-tight flex items-center gap-2.5 text-foreground">
+        <Icon className="w-7 h-7 text-accent shrink-0" />
         {title}
       </h1>
       <p className="text-caption text-muted mt-1 mb-3 hidden sm:block">{description}</p>
