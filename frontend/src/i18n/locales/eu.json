@@ -89,24 +89,24 @@
         "label": "Matrikula",
         "desc": "Ikasleen zerrendaren eta banakako fitxaren kudeaketa."
       },
-      "tutoria": {
-        "label": "Tutoretza eta alertak",
-        "desc": "Uzte-arriskuaren alertak eta ikasleen tutoretza-jarraipena."
-      },
       "plano": {
         "desc": "Ikasgelaren banaketa eta plano bisuala."
       },
-      "autoevaluacion": {
-        "desc": "Ikasleen autoebaluazioa ebaluazio-irizpideka (BAI/Zalantzak/EZ) eta adierazitako zailtasunak.",
-        "label": "Autoebaluazioa"
-      },
-      "perfilProfesional": {
-        "label": "Lanbide-profila",
+      "perfilIndividual": {
+        "label": "Banakakoa",
         "desc": "Ikasleka lanbide-orientazioa: motibazioa, lan-esperientzia, gaitasunak, asmoak eta zikloaren osteko txertaketa."
+      },
+      "perfilResumen": {
+        "label": "Laburpena",
+        "desc": "Taldearen lanbide-profilaren ikuspegi orokorra, taula iragazgarrian."
+      },
+      "perfilTendencias": {
+        "label": "Joerak",
+        "desc": "Taldearen lanbide-profilaren agregatuak eta joerak."
       },
       "expediente": {
         "label": "Espedientea",
-        "desc": "Ikasleka ebidentzien denbora-lerroa: kalifikazioak, autoebaluazioa, tutoretza, erreklamazioak, asistentzia eta gelako egunkaria."
+        "desc": "Ikasleka ebidentzien denbora-lerroa: kalifikazioak, erreklamazioak, asistentzia eta gelako egunkaria."
       }
     },
     "seguimiento": {
@@ -432,7 +432,7 @@
     "agenda_title": "Agenda",
     "agenda_desc": "Eguneroko laburpena: klasearen egoera eta emateko UDa.",
     "alumnado_title": "Ikasleak",
-    "alumnado_desc": "Ikasleen, tutoretzaren, FEOEren eta orientazioaren kudeaketa.",
+    "alumnado_desc": "Ikasleen kudeaketa, gelaren planoa eta orientazio profesionala.",
     "diario_title": "Eguneroko Segimendua",
     "diario_desc": "Ikasgelako egunerokoa, kontingentziak, asistentzia kontrola eta alertak.",
     "evaluacion_title": "Kalifikazioa",
@@ -509,7 +509,7 @@
     "metodologia": "Metodologia, baliabideak, kontingentzia-plana eta zeharkako elementuak.",
     "instrumentos": "Ebaluazio-tresnen definizioa eta pisuak.",
     "calendario": "Ordutegia, hiruhilekoak, jaiegunak, FEOE aldia eta eskolaz kanpoko jarduerak.",
-    "alumnado": "Datu-fitxa pertsonalak, gelako plana eta tutoretza uzte-alertekin.",
+    "alumnado": "Datu-fitxa pertsonalak, gelako plana eta orientazio profesionala.",
     "seguimiento": "Eskola-egunkaria, asistentzia eta noten sarrera.",
     "calificaciones": "Noten koadernoa, estatistikak eta talde zein banakako konparaketa."
   },
@@ -1179,7 +1179,8 @@
     },
     "diario": {
       "acumuladoTrimestral": "Hiruhileko metatua",
-      "hoy": "Gaur"
+      "hoy": "Gaur",
+      "alertasAbandono": "Uzte-arriskuaren alertak"
     },
     "instrumentos": {
       "agente_autoevaluacion": "Autoebaluazioa (ikasle bera)",

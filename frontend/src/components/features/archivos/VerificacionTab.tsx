@@ -1,5 +1,5 @@
 "use client";
-import { AlertTriangle, ArrowRight, BarChart2, BookOpen, Building2, CalendarDays, CheckCircle, ClipboardList, FileText, GraduationCap, HeartHandshake, Layers, Rocket, Shield, Users, Wrench, XCircle } from "lucide-react";
+import { AlertTriangle, ArrowRight, BarChart2, BookOpen, Building2, CalendarDays, CheckCircle, ClipboardList, FileText, GraduationCap, Layers, Rocket, Shield, Users, Wrench, XCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useAppStore } from "@/store/useAppStore";
@@ -370,7 +370,6 @@ export function VerificacionTab() {
   const alumnosCount = c?.df_al?.length ?? 0;
   const alumnosIncompletos = (c?.df_al ?? []).filter((a: any) => !a.Nombre || !a.Apellidos).length;
   const sgmtCount = Object.keys(c?.daily_ledger ?? {}).length;
-  const tutoriaEntradas = Object.keys(c?.tutoria_ledger ?? {}).length;
   const planoCount = Object.keys(c?.plano_clase ?? {}).length;
 
   const evalCount = c?.df_eval?.length ?? 0;
@@ -437,19 +436,6 @@ export function VerificacionTab() {
         ],
       actionHref: evalCount === 0 ? "/seguimiento?tab=detalle" : undefined,
       actionLabel: evalCount === 0 ? t('botones.verificacion.introducirNotas', {defaultValue: 'Introducir notas'}) : undefined,
-    },
-    {
-      id: "tutoria",
-      icon: <HeartHandshake className="w-5 h-5" />,
-      title: t('campos.verificacion.tutoriaAlertasTitulo', {defaultValue: 'Tutoría y alertas'}),
-      href: "/alumnado?tab=tutoria",
-      hrefLabel: t('campos.verificacion.seguimientoLabel', {defaultValue: 'Seguimiento'}),
-      status: tutoriaEntradas === 0 ? "empty" : "ok",
-      lines: tutoriaEntradas === 0
-        ? [t('campos.verificacion.sinEntradasTutoria', {defaultValue: 'Sin entradas de tutoría o alertas registradas'})]
-        : [t('campos.verificacion.entradasTutoriaRegistradas', {count: tutoriaEntradas, defaultValue: '{{count}} entradas de tutoría registradas'})],
-      actionHref: tutoriaEntradas === 0 ? "/alumnado?tab=tutoria" : undefined,
-      actionLabel: tutoriaEntradas === 0 ? t('botones.verificacion.registrarTutoria', {defaultValue: 'Registrar tutoría'}) : undefined,
     },
     {
       id: "plano",

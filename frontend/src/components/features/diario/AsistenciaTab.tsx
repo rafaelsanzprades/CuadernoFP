@@ -1,9 +1,10 @@
 ﻿"use client";
-import { BarChart2, ClipboardEdit, Settings, Users , Info } from "lucide-react";
+import { BarChart2, ClipboardEdit, Settings, Users, AlertTriangle, Info } from "lucide-react";
 import { useState } from "react";
 import { useAppStore } from "@/store/useAppStore";
 import { AttendanceGrid } from "@/components/features/diario/AttendanceGrid";
 import { AttendanceAccumulated } from "@/components/features/diario/AttendanceAccumulated";
+import { AlertaAbandonoTab } from "@/components/features/diario/AlertaAbandonoTab";
 import { EmptyState } from "@/components/ui/EmptyState";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
@@ -15,7 +16,12 @@ export function AsistenciaTab() {
 
   const TABS = [
     { id: "hoy", label: <span className="flex items-center gap-2"><ClipboardEdit className="w-4 h-4"/> {t('checks.diario.hoy', {defaultValue: 'Hoy'})}</span>, cleanLabel: t('checks.diario.hoy', {defaultValue: 'Hoy'}) },
-    { id: "acumulado", label: <span className="flex items-center gap-2"><BarChart2 className="w-4 h-4"/> {t('checks.diario.acumuladoTrimestral', {defaultValue: 'Acumulado trimestral'})}</span>, cleanLabel: t('checks.diario.acumuladoTrimestral', {defaultValue: 'Acumulado trimestral'}) }
+    { id: "acumulado", label: <span className="flex items-center gap-2"><BarChart2 className="w-4 h-4"/> {t('checks.diario.acumuladoTrimestral', {defaultValue: 'Acumulado trimestral'})}</span>, cleanLabel: t('checks.diario.acumuladoTrimestral', {defaultValue: 'Acumulado trimestral'}) },
+    // Traída desde Alumnado (2026-09-20, petición de Rafael): es un indicador
+    // automático (asistencia+notas reales, Indicador 1.5 del Sistema Estatal),
+    // no algo ligado al rol de tutor/a -- encaja mejor aquí, junto al resto de
+    // vistas de asistencia, que en Alumnado.
+    { id: "alertas", label: <span className="flex items-center gap-2"><AlertTriangle className="w-4 h-4"/> {t('checks.diario.alertasAbandono', {defaultValue: 'Alertas de abandono'})}</span>, cleanLabel: t('checks.diario.alertasAbandono', {defaultValue: 'Alertas de abandono'}) },
   ];
 
   return (
@@ -61,6 +67,7 @@ export function AsistenciaTab() {
         <>
           {activeTab === "hoy" && <AttendanceGrid />}
           {activeTab === "acumulado" && <AttendanceAccumulated />}
+          {activeTab === "alertas" && <AlertaAbandonoTab />}
         </>
       )}
     </div>

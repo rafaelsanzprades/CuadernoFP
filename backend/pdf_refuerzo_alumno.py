@@ -2,9 +2,8 @@
 """
 pdf_refuerzo_alumno.py
 Plan de Trabajo Individual (item 23): CE pendientes de un alumno (Motor JEG,
-via helpers_catalogo.calcular_notas_jeg), cruzados con su autoevaluacion
-estructurada por CE (item 22, valor SI/DUDAS/NO + dificultades). Convive con
-el texto libre de recuperacion ya existente en la app -- no lo sustituye.
+via helpers_catalogo.calcular_notas_jeg). Convive con el texto libre de
+recuperacion ya existente en la app -- no lo sustituye.
 """
 import io
 import pandas as pd
@@ -33,14 +32,12 @@ def _gev_alumno(al_id, df_al):
     return df_al[df_al["ID"] == al_id].iloc[0].get("gev")
 
 
-def _ce_pendientes(al_id, df_ra, df_ce, config_redondeo, df_autoevaluacion, df_calificaciones, df_indicadores, df_instr, alumno_gev=None):
+def _ce_pendientes(al_id, df_ra, df_ce, config_redondeo, df_calificaciones, df_indicadores, df_instr, alumno_gev=None):
     """Devuelve la lista de CE pendientes (nota None o < nota_aprobado) del
-    alumno, cada uno con su autoevaluacion asociada si existe. Motor JEG,
-    modo automático (Ítem 42 punto 6) -- ver helpers_catalogo.calcular_notas_jeg()."""
+    alumno. Motor JEG, modo automático (Ítem 42 punto 6) -- ver
+    helpers_catalogo.calcular_notas_jeg()."""
     resultado = calcular_notas_jeg(al_id, filtrar_por_gev(df_calificaciones, df_instr, alumno_gev), df_indicadores, df_instr, df_ce, df_ra, config_redondeo)
     notas_ce = resultado["notas_ce"]
-
-    auto_by_ce = {a.get("ce_id"): a for a in df_autoevaluacion if a.get("alumno_id") == al_id}
 
     pendientes = []
     for ce in df_ce:
@@ -50,13 +47,10 @@ def _ce_pendientes(al_id, df_ra, df_ce, config_redondeo, df_autoevaluacion, df_c
         nota = notas_ce[ce_id]
         if nota is not None and nota >= config_redondeo.get("nota_aprobado", 5.0):
             continue
-        auto = auto_by_ce.get(ce_id)
         pendientes.append({
             "id_ce": ce_id,
             "desc_ce": ce.get("desc_ce") or ce.get("Descripción") or "",
             "nota": nota,
-            "autoeval_valor": auto.get("valor") if auto else None,
-            "autoeval_dificultades": auto.get("dificultades") if auto else None,
         })
     return pendientes
 
@@ -72,11 +66,10 @@ def _draw_page_decorations(canv, doc):
     canv.restoreState()
 
 
-def generar_pdf_refuerzo(info_modulo, al_id, df_al, df_eval, df_ra, df_ce, df_act, config_redondeo=None, df_autoevaluacion=None,
+def generar_pdf_refuerzo(info_modulo, al_id, df_al, df_eval, df_ra, df_ce, df_act, config_redondeo=None,
                           df_calificaciones=None, df_indicadores=None, df_instr=None):
     config_redondeo = config_redondeo or DEFAULT_CONFIG_REDONDEO
-    df_autoevaluacion = df_autoevaluacion or []
-    pendientes = _ce_pendientes(al_id, df_ra, df_ce, config_redondeo, df_autoevaluacion,
+    pendientes = _ce_pendientes(al_id, df_ra, df_ce, config_redondeo,
                                  df_calificaciones or [], df_indicadores or [], df_instr or [], _gev_alumno(al_id, df_al))
 
     buffer = io.BytesIO()
@@ -101,16 +94,14 @@ def generar_pdf_refuerzo(info_modulo, al_id, df_al, df_eval, df_ra, df_ce, df_ac
         elements.append(Paragraph("Sin criterios de evaluación pendientes de refuerzo en este momento.", norm))
     else:
         data = [[Paragraph("<b>CE</b>", sml), Paragraph("<b>Descripción</b>", sml),
-                 Paragraph("<b>Nota</b>", sml), Paragraph("<b>Autoevaluación</b>", sml),
-                 Paragraph("<b>Dificultades declaradas</b>", sml)]]
+                 Paragraph("<b>Nota</b>", sml)]]
         for p in pendientes:
             nota_txt = f"{p['nota']:.1f}" if p["nota"] is not None else "Sin evaluar"
             data.append([
                 Paragraph(esc(p["id_ce"]), sml), Paragraph(esc(p["desc_ce"]), sml),
-                Paragraph(nota_txt, sml), Paragraph(esc(p["autoeval_valor"] or "-"), sml),
-                Paragraph(esc(p["autoeval_dificultades"] or "-"), sml),
+                Paragraph(nota_txt, sml),
             ])
-        t = Table(data, colWidths=[1.8 * cm, 6.5 * cm, 2 * cm, 2.7 * cm, 4 * cm])
+        t = Table(data, colWidths=[2.2 * cm, 11 * cm, 2.5 * cm])
         t.setStyle(TableStyle([
             ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#f0f0f0")),
             ("BOX", (0, 0), (-1, -1), 1.5, colors.HexColor("#222222")),
@@ -131,13 +122,12 @@ def generar_pdf_refuerzo(info_modulo, al_id, df_al, df_eval, df_ra, df_ce, df_ac
     return buffer
 
 
-def generar_docx_refuerzo(info_modulo, al_id, df_al, df_eval, df_ra, df_ce, df_act, config_redondeo=None, df_autoevaluacion=None,
+def generar_docx_refuerzo(info_modulo, al_id, df_al, df_eval, df_ra, df_ce, df_act, config_redondeo=None,
                            df_calificaciones=None, df_indicadores=None, df_instr=None):
     from docx_helpers import new_document, add_title, add_meta_line, add_section_heading, add_table, doc_to_bytes
 
     config_redondeo = config_redondeo or DEFAULT_CONFIG_REDONDEO
-    df_autoevaluacion = df_autoevaluacion or []
-    pendientes = _ce_pendientes(al_id, df_ra, df_ce, config_redondeo, df_autoevaluacion,
+    pendientes = _ce_pendientes(al_id, df_ra, df_ce, config_redondeo,
                                  df_calificaciones or [], df_indicadores or [], df_instr or [], _gev_alumno(al_id, df_al))
 
     nombre = _nombre_alumno(al_id, df_al)
@@ -150,13 +140,12 @@ def generar_docx_refuerzo(info_modulo, al_id, df_al, df_eval, df_ra, df_ce, df_a
         doc.add_paragraph("Sin criterios de evaluación pendientes de refuerzo en este momento.")
     else:
         add_table(
-            doc, ["CE", "Descripción", "Nota", "Autoevaluación", "Dificultades declaradas"],
+            doc, ["CE", "Descripción", "Nota"],
             [[
                 p["id_ce"], p["desc_ce"],
                 f"{p['nota']:.1f}" if p["nota"] is not None else "Sin evaluar",
-                p["autoeval_valor"] or "-", p["autoeval_dificultades"] or "-",
             ] for p in pendientes],
-            col_widths_cm=[1.8, 6, 2, 2.7, 4],
+            col_widths_cm=[2.2, 11, 2.5],
         )
         add_section_heading(doc, "Medidas de refuerzo propuestas")
         doc.add_paragraph("_" * 90)

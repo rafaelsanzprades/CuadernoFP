@@ -111,7 +111,7 @@
     "metodologia": "Metodología, recursos, plan de contingencia y elementos transversales.",
     "instrumentos": "Definición y pesos de las herramientas de evaluación.",
     "calendario": "Horario, trimestres, festivos, periodo FEOE y actividades extraescolares.",
-    "alumnado": "Fichas personales, plano de aula y tutoría con alertas de abandono.",
+    "alumnado": "Fichas personales, plano de aula y orientación profesional.",
     "seguimiento": "Diario de clases, asistencia y entrada de notas.",
     "calificaciones": "Cuaderno de notas, estadísticas y comparativa grupal e individual."
   },
@@ -137,7 +137,7 @@
     "agenda_title": "Agenda",
     "agenda_desc": "Resumen diario: estado de clase y UD a impartir.",
     "alumnado_title": "Alumnado",
-    "alumnado_desc": "Gestión de alumnado, tutoría, FEOE y orientación.",
+    "alumnado_desc": "Gestión de alumnado, plano de aula y orientación profesional.",
     "diario_title": "Seguimiento diario",
     "diario_desc": "Diario de aula, contingencias, control de asistencia y alertas.",
     "evaluacion_title": "Calificación",

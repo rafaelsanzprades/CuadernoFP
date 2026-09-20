@@ -1,7 +1,8 @@
 // Expediente del alumnado — línea temporal de evidencias (backlog, análisis
 // Aularis 2026-08-23). Agrega SOLO datos que ya existen repartidos por la
-// app, sin dato nuevo: calificaciones, autoevaluación, tutoría,
-// reclamaciones, asistencia y diario de clase.
+// app, sin dato nuevo: calificaciones, reclamaciones, asistencia y diario de
+// clase. "Autoevaluación" y "Tutoría" se retiraron de la app el 2026-09-20
+// (petición de Rafael) -- ver 01 Histórico.md.
 //
 // Fuentes deliberadamente fuera: `historial_calificaciones` (redundante con
 // `df_calificaciones.timestamp`, ya poblado por todos los puntos de guardado
@@ -12,8 +13,6 @@
 
 export type TipoEvento =
   | "calificacion"
-  | "autoevaluacion"
-  | "tutoria"
   | "reclamacion"
   | "asistencia"
   | "diario";
@@ -111,37 +110,7 @@ export function buildExpediente(
     }
   });
 
-  // 2. Autoevaluación.
-  const df_autoevaluacion = cursoData?.df_autoevaluacion || [];
-  df_autoevaluacion
-    .filter((a: any) => a.alumno_id === al_id)
-    .forEach((a: any) => {
-      const fecha = parseFechaFlexible(a.fecha);
-      if (!fecha) return;
-      eventos.push({
-        id: `auto-${a.id}`,
-        fecha,
-        tipo: "autoevaluacion",
-        titulo: `Autoevaluación ${a.ce_id}: ${a.valor}`,
-        detalle: a.dificultades || undefined,
-      });
-    });
-
-  // 3. Tutoría.
-  const tutorias = cursoData?.tutoria_ledger?.[al_id] || [];
-  tutorias.forEach((t: any) => {
-    const fecha = parseFechaFlexible(t.fecha);
-    if (!fecha) return;
-    eventos.push({
-      id: `tut-${t.id}`,
-      fecha,
-      tipo: "tutoria",
-      titulo: `Tutoría (${t.ambito || "—"})`,
-      detalle: t.tema || t.acuerdos || undefined,
-    });
-  });
-
-  // 4. Reclamaciones -- hasta 2 eventos por reclamación (presentada + resuelta).
+  // 2. Reclamaciones -- hasta 2 eventos por reclamación (presentada + resuelta).
   const df_reclamaciones = cursoData?.df_reclamaciones || [];
   df_reclamaciones
     .filter((r: any) => r.alumno_id === al_id)
@@ -170,7 +139,7 @@ export function buildExpediente(
       }
     });
 
-  // 5. Asistencia -- solo faltas/retrasos, "presente" es el caso normal y
+  // 3. Asistencia -- solo faltas/retrasos, "presente" es el caso normal y
   // aportaría más ruido que información en una línea temporal de evidencias.
   const faltasPorFecha = new Set<string>();
   attendanceRecords
@@ -189,7 +158,7 @@ export function buildExpediente(
       }
     });
 
-  // 6. Diario de clase -- es por grupo-clase, no por alumno; se muestra en el
+  // 4. Diario de clase -- es por grupo-clase, no por alumno; se muestra en el
   // expediente de un alumno solo si ese día no consta como falta suya (si
   // faltó, lo que se hizo en clase no es evidencia de SU evolución).
   const daily_ledger = cursoData?.daily_ledger || {};

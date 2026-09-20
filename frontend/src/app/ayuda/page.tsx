@@ -64,9 +64,9 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   "/alumnado": [
     { id: "matricula", label: "Matrícula" },
     { id: "plano", label: "Plano de clase" },
-    { id: "tutoria", label: "Tutoría y alertas" },
-    { id: "autoevaluacion", label: "Autoevaluación" },
-    { id: "expediente", label: "Expediente" },
+    { id: "perfilIndividual", label: "Individual" },
+    { id: "perfilResumen", label: "Resumen" },
+    { id: "perfilTendencias", label: "Tendencias" },
   ],
   "/seguimiento": [
     { id: "clases", label: "Clases" },
@@ -79,6 +79,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "historico", label: "Histórico" },
     { id: "reclamaciones", label: "Reclamaciones" },
     { id: "boletines", label: "Boletines" },
+    { id: "expediente", label: "Expediente" },
   ],
   "/normativa": [
     { id: "autonomias", label: "Autonomías" },

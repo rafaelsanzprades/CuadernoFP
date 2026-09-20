@@ -157,9 +157,8 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             elif type == "ficha_alumnado":
                 if not al_id: raise HTTPException(status_code=400, detail="al_id is required for ficha_alumnado")
                 from pdf_ficha_alumnado import generar_docx_ficha_alumnado
-                tutoria_entry = (curso_data.get("tutoria_ledger") or {}).get(al_id)
                 attendance_summary = _compute_attendance_summary(db, extra.get("module_document_id"), al_id)
-                docx_bytes = generar_docx_ficha_alumnado(info_modulo, al_id, df_al, tutoria_entry, attendance_summary)
+                docx_bytes = generar_docx_ficha_alumnado(info_modulo, al_id, df_al, attendance_summary)
             elif type == "reclamacion_notas":
                 if not al_id or not item_id:
                     raise HTTPException(status_code=400, detail="al_id and item_id are required for reclamacion_notas")
@@ -177,7 +176,6 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 docx_bytes = generar_docx_refuerzo(
                     info_modulo, al_id, df_al, df_eval.to_dict("records"), df_ra.to_dict("records"),
                     df_ce.to_dict("records"), df_act.to_dict("records"), config_redondeo,
-                    curso_data.get("df_autoevaluacion") or [],
                     df_calificaciones.to_dict("records"), df_indicadores.to_dict("records"), df_instr.to_dict("records")
                 )
 
@@ -227,9 +225,8 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             buffer = generar_pdf_alumnado_ubicacion(info_modulo, plano_clase, df_al)
         elif type == "ficha_alumnado":
             if not al_id: raise HTTPException(status_code=400, detail="al_id is required for ficha_alumnado")
-            tutoria_entry = (curso_data.get("tutoria_ledger") or {}).get(al_id)
             attendance_summary = _compute_attendance_summary(db, extra.get("module_document_id"), al_id)
-            buffer = generar_pdf_ficha_alumnado(info_modulo, al_id, df_al, tutoria_entry, attendance_summary)
+            buffer = generar_pdf_ficha_alumnado(info_modulo, al_id, df_al, attendance_summary)
         elif type == "reclamacion_notas":
             if not al_id or not item_id:
                 raise HTTPException(status_code=400, detail="al_id and item_id are required for reclamacion_notas")
@@ -247,7 +244,6 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             buffer = generar_pdf_refuerzo(
                 info_modulo, al_id, df_al, df_eval.to_dict("records"), df_ra.to_dict("records"),
                 df_ce.to_dict("records"), df_act.to_dict("records"), config_redondeo,
-                curso_data.get("df_autoevaluacion") or [],
                 df_calificaciones.to_dict("records"), df_indicadores.to_dict("records"), df_instr.to_dict("records")
             )
         elif type in ["programacion_suficiente_tpl", "programacion_minima_tpl", "programacion_jeg"]:
