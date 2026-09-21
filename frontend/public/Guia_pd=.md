@@ -30,31 +30,31 @@ RA + sus CE, con ponderación.
 
 ### C3. Criterios de calificación
 Nota mínima por RA, tabla de instrumentos por trimestre, fórmula de la nota final.
-- **Dónde:** `Programación` › `Currículo` → Pestaña `OG<-RA<-CE` (% de cada RA/CE) y `Programación` › `Evaluación` → Pestaña `Procedimientos` (texto override de criterios de calificación)
+- **Dónde:** `Programación` › `Currículo` → Pestaña `OG<-RA<-CE` (% de cada RA/CE) y `Programación` › `Contexto` → Pestaña `Evaluación y calificación` (texto override de criterios de calificación)
 
 ## D. Principios metodológicos
 Metodologías activas, principios pedagógicos, estrategias y aprendizaje colaborativo.
-- **Dónde:** `Programación` › `Módulo` → Pestaña `Metodología` (metodologías activas marcadas, principios metodológicos, estrategias, aprendizaje colaborativo, anotaciones libres)
+- **Dónde:** `Programación` › `Metodología` → Pestaña `Metodología e inclusión` (metodologías activas marcadas, principios metodológicos, estrategias, aprendizaje colaborativo, anotaciones libres)
 
 ## E. Evaluación inicial
 Instrumento diagnóstico, contenidos evaluados y medidas derivadas.
-- **Dónde:** `Programación` › `Evaluación` → Pestaña `Procedimientos` (campo "Evaluación inicial")
+- **Dónde:** `Programación` › `Contexto` → Pestaña `Evaluación y calificación` (campo "Evaluación inicial")
 
 ### E1. Atención a las diferencias individuales
 Medidas de inclusión, adaptaciones no significativas/flexibilización, Plan DUA, panel ACNEAE.
-- **Dónde:** `Programación` › `Módulo` → Pestaña `Diversidad`
+- **Dónde:** `Programación` › `Metodología` → Pestaña `Metodología e inclusión` (ya no es una pestaña aparte, comparte apartado con D)
 
 ## F. Procedimientos e instrumentos de evaluación
 Tabla de instrumentos y su descripción, información al alumnado y familias.
-- **Dónde:** `Programación` › `Instrumentos` → Pestañas `Resumen`, `1º/2º/3º Trimestre` (tabla de instrumentos) y `Programación` › `Evaluación` → Pestaña `Procedimientos` (texto de información al alumnado)
+- **Dónde:** `Programación` › `Instrumento` → Pestaña `Resumen` (tabla de instrumentos) y `Programación` › `Contexto` → Pestaña `Evaluación y calificación` (texto de información al alumnado)
 
 ## G. Actividades de recuperación y refuerzo
 Modelo de recuperación (R1/R2/R3/RF/EvFE), actividades de refuerzo, pérdida de evaluación continua.
-- **Dónde:** `Programación` › `Evaluación` → Pestaña `Procedimientos` (Modelo de recuperación, Procedimiento de recuperación, Pérdida de evaluación continua)
+- **Dónde:** `Programación` › `Contexto` → Pestaña `Evaluación y calificación` (Modelo de recuperación, Procedimiento de recuperación, Pérdida de evaluación continua)
 
 ### G1. Plan de recuperación
 Convocatoria extraordinaria y alumnado con el módulo pendiente de curso anterior.
-- **Dónde:** `Programación` › `Evaluación` → Pestaña `Procedimientos` (Plan de recuperación de módulos pendientes)
+- **Dónde:** `Programación` › `Contexto` → Pestaña `Evaluación y calificación` (Plan de recuperación de módulos pendientes)
 
 ## H. Resultados de aprendizaje
 Listado completo de RA con descripción detallada.
@@ -62,15 +62,15 @@ Listado completo de RA con descripción detallada.
 
 ## I. Plan de aplicación de los desdobles (en su caso)
 Organización de grupos y recursos si el módulo contempla desdobles.
-- **Dónde:** `Programación` › `Módulo` → Pestaña `Metodología` (campo "Plan de aplicación de los desdobles")
+- **Dónde:** `Programación` › `Metodología` → Pestaña `Metodología e inclusión` (campo "Plan de aplicación de los desdobles")
 
 ## J. Materiales y recursos didácticos
 Herramientas, catálogo de recursos y espacios, bibliografía.
-- **Dónde:** `Programación` › `Módulo` → Pestaña `Evaluación y Recursos` (recursos y espacios codificados) y `Programación` › `Contexto` → sección "Datos de autoría y publicidad" (bibliografía)
+- **Dónde:** `Programación` › `Metodología` → Pestaña `Recursos` (recursos y espacios codificados) y `Programación` › `Contexto` → sección "Datos de autoría y publicidad" (bibliografía)
 
 ## K. Actividades complementarias y extraescolares
 Solo las complementarias (en horario lectivo, evaluables); las extraescolares no forman parte de la PD, van en la PGA del centro.
-- **Dónde:** `Programación` › `Módulo` → Pestaña `Innovación` (checklist + detalle de actividades complementarias)
+- **Dónde:** `Programación` › `Metodología` → Pestaña `Transversales` (checklist/innovación) y `Curso` › `Calendario` → Pestaña `Complementarias y extraescolares` (detalle de cada actividad)
 
 ## L. Medidas complementarias en proyectos o bilingües (en su caso)
 Adaptación para módulos en proyectos o itinerarios bilingües.
@@ -78,11 +78,11 @@ Adaptación para módulos en proyectos o itinerarios bilingües.
 
 ## M. Mecanismos de seguimiento y valoración
 Indicadores de calidad EQAVET y propuestas de mejora (PDCA), normalmente cumplimentados a fin de curso.
-- **Dónde:** `Programación` › `Módulo` → Pestañas `EQAVET` y `Propuestas de mejora` (si están vacíos, se usa un texto por defecto genérico)
+- **Dónde:** `General` › `Inicio` → Pestaña `Mejora` (si están vacíos, se usa un texto por defecto genérico)
 
 ## N. Plan de contingencia
 Coordinación docente, escenarios (ausencia de profesorado/alumnado, interrupción generalizada) y registro de medidas.
-- **Dónde:** `Programación` › `Módulo` → Pestaña `Metodología` (coordinación con otros módulos) y Pestaña `Contingencia` (medidas de contingencia, escenarios profesor/alumnado/general, registro de escenarios)
+- **Dónde:** `Programación` › `Metodología` → Pestaña `Metodología e inclusión` (coordinación con otros módulos) y Pestaña `Plan de contingencia` (medidas de contingencia, escenarios profesor/alumnado/general, registro de escenarios)
 
 ---
 

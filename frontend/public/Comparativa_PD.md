@@ -87,7 +87,7 @@ Procedimiento de evaluación y calificación, información al alumnado, pérdida
 
 Planes de adaptación ante situaciones excepcionales — mapea a §N · Plan de contingencia en PD= (sin correspondencia directa en PD-; contenido interno de planificación docente).
 
-### Pestaña: Transversales, competencias y actividades
+### Pestaña: Transversales
 
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
@@ -98,14 +98,15 @@ Planes de adaptación ante situaciones excepcionales — mapea a §N · Plan de 
 
 ## 📋 Programación: Currículo
 
-> Orden de pestañas alineado con el PD+ (2026-08-11): Objetivos Generales (§2.4) va antes que RA/CE
-> (§2.5) en el documento oficial, así que "Contribución RA en OG" pasó a ser la primera pestaña.
-
-### Pestaña: Contribución RA en OG
-
-Matriz de contribución de cada RA a los Objetivos Generales (OG) del título — no tiene apartado propio en PD-/PD=/PD+, se usa como herramienta interna de coherencia curricular.
+> **Actualizado 2026-09-20:** "Contribución RA en OG" dejó de ser una pestaña propia — se fusionó como
+> bloque plegable (colapsado por defecto) al final de "Ponderación RA<-CE", que a la vez se renombró a
+> "OG<-RA<-CE" para reflejar que ahora vive ahí. Currículo pasó así de 5 a 4 pestañas.
 
 ### Pestaña: OG<-RA<-CE
+
+Incluye, al final (bloque plegable "Contribución RA→OG"), la matriz de contribución de cada RA a los
+Objetivos Generales (OG) del título — no tiene apartado propio en PD-/PD=/PD+, se usa como herramienta
+interna de coherencia curricular.
 
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
@@ -139,15 +140,19 @@ Incluye la antigua pestaña "Secuenciación → Sesiones": la tabla de sesiones 
 
 ---
 
-## 📋 Programación: Instrumentos
+## 📋 Programación: Instrumento
 
-Seguimiento trimestral del peso real de cada instrumento de evaluación (Resumen, 1º/2º/3º Trimestre) — es el "cuaderno de bitácora" de lo definido en Metodología → Recursos; no genera un apartado propio en PD-/PD=/PD+, alimenta los porcentajes de §F / §9.
+Seguimiento trimestral del peso real de cada instrumento de evaluación — pestañas `Resumen` (visión
+global), `Trimestres` (1º/2º/3º), `Rúbricas` y `Modelo JEG` (reparto avanzado Instrumento→Indicador→CE,
+normalmente no hace falta tocarlo) — es el "cuaderno de bitácora" de lo definido en Metodología →
+Recursos; no genera un apartado propio en PD-/PD=/PD+, alimenta los porcentajes de §F / §9.
 
 ---
 
-## 📥 Grupo: MagIA (Descargas)
+## 📥 MagIA (Descargas)
 
-> MagIA vive en el bloque **Grupo** (no en Programación) porque genera documentos tanto de la Programación como del Curso.
+> MagIA no vive dentro de ningún bloque del sidebar (ni General, ni Programación, ni Curso) — es una
+> página suelta, junto a Legal, porque genera documentos tanto de la Programación como del Curso.
 
 ### Pestaña: Programación
 
@@ -201,13 +206,21 @@ Incluye la antigua pestaña "Visual" (calendario interactivo, clic para marcar f
 | 65 | Festivos y eventos (Fecha Inicio, Hasta, Tipo, Descripción) | — | §C3 · Criterios de calificación | §4.3 · Temporalización |
 | 66 | Calendario interactivo (clic para marcar festivos) | — | §C3 · Criterios de calificación | §4.3 · Temporalización |
 
-### Pestaña: Actividades extraescolares
+### Pestaña: Complementarias y extraescolares
 
-Actividades complementarias y extraescolares del curso real — ver también «Programación: Metodología — Pestaña: Transversales, competencias y actividades» (campo 28) para su planificación teórica.
+Actividades complementarias y extraescolares del curso real — ver también «Programación: Metodología — Pestaña: Transversales» (campo 28) para su planificación teórica.
 
 ---
 
 ## 🎓 Curso: Alumnado
+
+> **Actualizado 2026-09-21:** Alumnado bajó de 6 a 4 pestañas. Se eliminaron por completo Tutoría (ser
+> tutor de un grupo se considera un rol ajeno a esta app) y Autoevaluación (no interviene en el motor
+> de cálculo JEG). El detector de riesgo de abandono que vivía dentro de Tutoría se conservó y se
+> trasladó a `Curso` › `Seguimiento` → Pestaña `Asistencia` (sub-vista "Alertas de abandono"). Expediente
+> se trasladó a `Curso` › `Calificación`. "Perfil profesional" (antes 3 sub-vistas internas) se aplanó a
+> pestañas propias, y su sub-vista "Resumen" se plegó de nuevo dentro de "Tendencias" al comprobar que
+> duplicaba en peor una tabla que ya vivía ahí.
 
 ### Pestaña: Matrícula
 
@@ -217,29 +230,35 @@ Actividades complementarias y extraescolares del curso real — ver también «P
 | 68 | Añadir Alumnado manualmente | — | — | §2.2 · Alumnado — ACNEAE |
 | 69 | Tabla: Estado, Apellidos, Nombre, Edad, Nacimiento, Repite, Email, Móvil | — | — | §2.2 · Alumnado — ACNEAE |
 
-### Pestaña: Plano de clase
+Incluye, más abajo en la misma pestaña, el bloque "Perfil del grupo" (rasgos y características
+generales de la clase — sin campo específico todavía en PD-/PD=/PD+; complementa §E1 / §2.2 con una
+vista agregada del grupo en vez de individuo a individuo).
+
+### Pestaña: Plano
 
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 70 | Plano de clase (arrastrar alumnado a mesas) | — | — | §2.1 · Centro educativo — Infraestructura |
 
-### Pestaña: Tutoría y alertas
+### Pestaña: Individual
 
-Incluye la antigua pestaña "Seguimiento → Abandono": el panel de prevención de abandono vive aquí, junto con el resto de tutoría.
+Ficha de orientación profesional por alumno/a (motivación, experiencia laboral, aptitudes,
+aspiraciones, inserción post-ciclo) — sin apartado propio en PD-/PD=/PD+.
 
-| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
-|---|-------|-------------|-----------------|-----------|
-| 75 | Panel de prevención de abandono (acciones: llamada familias, orientación) | — | — | §2.2 · Alumnado — ACNEAE — §11 · Seguimiento |
+### Pestaña: Tendencias
 
-### Pestaña: Perfil del grupo
-
-Rasgos y características generales del grupo (sin campo específico todavía en PD-/PD=/PD+; complementa §E1 / §2.2 con una vista agregada del grupo en vez de individuo a individuo).
+Agregados y tendencias del perfil profesional del grupo, con una tabla completa filtrable de todo el
+alumnado como segundo bloque (más abajo, en la misma pestaña) — sin apartado propio en PD-/PD=/PD+.
 
 ---
 
 ## 📝 Curso: Seguimiento
 
-> Incluye la antigua página "Diario" (fusionada en la pestaña Clases) y la entrada de notas numéricas, que antes vivía en Calificaciones → "Matriz (Excel)" (pestaña eliminada) y ahora está aquí, en Detalle por alumnado.
+> Incluye la antigua página "Diario" (fusionada en la pestaña Clases) y la entrada de notas numéricas,
+> que antes vivía en Calificaciones → "Matriz (Excel)" (pestaña eliminada) y ahora está aquí, en Notas.
+> **Actualizado 2026-09-20:** "Progreso de RA y UD" dejó de ser pestaña propia de Seguimiento — se
+> fusionó, junto con Estadísticas y Análisis, dentro de `Curso` › `Calificación` → Pestaña `Resumen`.
+> "Detalle por alumnado" se renombró a `Notas` (nombres más cortos para tablet).
 
 ### Pestaña: Clases
 
@@ -254,33 +273,64 @@ Rasgos y características generales del grupo (sin campo específico todavía en
 |---|-------|-------------|-----------------|-----------|
 | 74 | Tabla de asistencia (Falta, Retraso, Justificado) | — | — | §11 · Mecanismos de seguimiento y valoración |
 
-### Pestaña: Progreso de RA y UD
+Incluye una sub-vista "Alertas de abandono" (detector automático de riesgo, campo 75 — trasladado
+desde la antigua pestaña Tutoría de Alumnado, eliminada el 2026-09-21).
 
-| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
-|---|-------|-------------|-----------------|-----------|
-| 77 | % de RA al vuelo (cálculo automático) | — | — | §7.1 · Criterios de evaluación — §3.4 · RA |
-
-### Pestaña: Detalle por alumnado
+### Pestaña: Notas
 
 Entrada de calificaciones numéricas por alumnado y tarea — es el único punto de entrada de notas de la app (la antigua "Matriz (Excel)" de Calificaciones se eliminó, esta pestaña la sustituye).
 
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 76 | Tabla de calificaciones (alumnado × tarea) | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
+| 77 | % de RA al vuelo (cálculo automático) | — | — | §7.1 · Criterios de evaluación — §3.4 · RA |
+
+### Pestaña: Empresa FEOE
+
+Transcripción de la valoración del tutor de empresa (escala 1-4, Anexo XI b) para los CE marcados FEOE
+en Currículo → OG<-RA<-CE — sin apartado propio en PD-/PD=/PD+; la nota entra en el motor JEG como un
+instrumento más.
 
 ---
 
-## 📊 Curso: Calificaciones
+## 📊 Curso: Calificación
 
-> Página de solo lectura ("visor"): resume y analiza las notas introducidas en Seguimiento → Detalle por alumnado. No es un punto de entrada de datos.
+> Página mayormente de solo lectura ("visor"): resume y analiza las notas introducidas en Seguimiento →
+> Notas. **Actualizado 2026-09-20/21:** ahora tiene 5 pestañas (antes 3): Resumen, Histórico,
+> Reclamaciones, Boletines y Expediente (esta última trasladada desde Alumnado el 2026-09-21).
 
-### Pestañas: Resumen, Estadísticas, Grupal, Individual
+### Pestaña: Resumen
+
+Panel global de rendimiento; incluye, más abajo en la misma pestaña, los bloques plegables "Progreso
+RA-UD", "Estadísticas" y "Análisis" (este último con switcher Grupal/Individual) — fusionados aquí desde
+Seguimiento el 2026-09-20.
 
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 82 | Boletín trimestral (1T, 2T, 3T, Final) | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
 | 83 | Excel/CSV de calificaciones | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
-| 84 | Boletín individual (selector de alumnado) | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
+
+### Pestaña: Histórico
+
+Registro de cada cambio de nota, con fecha, agente y motivo — trazabilidad completa desde la nota final
+hasta el indicador evaluado. Sin apartado propio en PD-/PD=/PD+.
+
+### Pestaña: Reclamaciones
+
+Registro y resolución de reclamaciones de nota, con generación de justificante (PDF/DOCX). Sin apartado
+propio en PD-/PD=/PD+.
+
+### Pestaña: Boletines
+
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
+|---|-------|-------------|-----------------|-----------|
+| 84 | Boletín individual (selector de alumnado, radar + barras por RA) | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
+
+### Pestaña: Expediente
+
+Línea temporal de evidencias por alumno/a (calificaciones, reclamaciones, asistencia, diario de clase) —
+trasladada desde Alumnado el 2026-09-21, mejor encaje aquí porque la mayoría de sus fuentes son de
+evaluación. Sin apartado propio en PD-/PD=/PD+.
 
 ---
 
@@ -298,7 +348,7 @@ Entrada de calificaciones numéricas por alumnado y tarea — es el único punto
 
 1. **PD-** es un resumen visual de 1-2 folios. Incluye: portada con datos de identificación, tabla de RA/CE con ponderaciones, tabla de UD con duración y contribución. No tiene estructura formal de apartados.
 2. **PD=** sigue la estructura normativa del Art. 100.2 del Decreto 91/2024 (Aragón), en su redacción dada por el **BOA nº 181, de 18 de septiembre de 2025**: 14 apartados A-N, con subapartados anidados en C (Secuenciación: C1 Contenidos, C2 Criterios de evaluación, C3 Criterios de calificación), E (Evaluación inicial: E1 Atención a las diferencias individuales) y G (Recuperación y refuerzo: G1 Plan de recuperación). Aplica a Grado D (que incluye tanto Grado Medio como Grado Superior) sin distinción.
-3. **PD+** es la versión completa y detallada con 15 secciones §1–§15. Los campos del bloque "Curso" (Calendario, Alumnado, Seguimiento, Calificaciones) solo aparecen en PD+ porque representan la gestión real del curso, no el documento teórico de programación.
+3. **PD+** es la versión completa y detallada con 15 secciones §1–§15. Los campos del bloque "Curso" (Calendario, Alumnado, Seguimiento, Calificación) solo aparecen en PD+ porque representan la gestión real del curso, no el documento teórico de programación.
 4. Los campos codificados (Multiselect) se generan automáticamente: en PD= aparecen como texto condensado, en PD+ como texto expandido con justificación.
 5. Los **apartados PD=** (A-N) y **PD+** (§1–§15) corresponden a la estructura oficial de cada modelo. Cuaderno FP mapea automáticamente los campos de la app a estos apartados al generar los documentos.
-6. **Páginas fusionadas desde la última reorganización de navegación:** "Evaluación" y "Secuenciación" (Programación) se repartieron entre Metodología → Recursos y Currículo → Unidades didácticas/Tareas competenciales; "Diario" e "Informes" (Curso) se fusionaron en Seguimiento y en MagIA → Curso respectivamente; "Matriz (Excel)" (Calificaciones) se eliminó y su función de entrada de notas la asume Seguimiento → Detalle por alumnado.
+6. **Páginas fusionadas desde la reorganización de navegación (histórico, varias rondas):** "Evaluación" y "Secuenciación" (Programación) se repartieron entre Contexto → Evaluación y calificación, Metodología → Recursos y Currículo → Unidades didácticas/Tareas competenciales; "Diario" e "Informes" (Curso) se fusionaron en Seguimiento y en MagIA → Curso respectivamente; "Matriz (Excel)" (Calificación) se eliminó y su función de entrada de notas la asume Seguimiento → Notas; "Progreso de RA y UD"/Estadísticas/Análisis (Seguimiento) se fusionaron en Calificación → Resumen; Tutoría y Autoevaluación (Alumnado) se eliminaron por completo.
