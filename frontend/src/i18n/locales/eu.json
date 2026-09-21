@@ -255,14 +255,14 @@
     "normativa": {
       "autonomias": {
         "label": "Autonomiak",
-        "desc": "Erkidegoko legedia eta araudi berezia."
+        "desc": "Zure erkidegoko dokumentu eta txantiloi deskargagarriak, mailaka antolatuta."
       },
       "bibliografia": {
         "label": "Bibliografia",
         "desc": "LHri buruzko estatuko eta erkidegoko lege, dekretu eta aginduen aurkibidea, aldizkari ofizialerako estekarekin."
       },
       "legislacion": {
-        "desc": "Zure erkidegoko dokumentu eta txantiloi deskargagarriak, mailaka antolatuta."
+        "desc": "Erkidegoko legedia eta araudi berezia."
       },
       "ecp-incual": {
         "label": "ECP INCUAL",
@@ -566,13 +566,6 @@
     "asistencia": {
       "errorGuardar": "Errorea asistentzia gordetzean."
     },
-    "autores": {
-      "errorGuardar": "Arazo bat egon da programazioa gordetzean.",
-      "errorInyectar": "Errorea proposamenaren datuak gehitzean.",
-      "jsonInvalido": "Hautatutako fitxategia ez da JSON baliozkoa edo hondatuta dago.",
-      "propuestaIncorporada": "Proposamena ondo gehitu da.",
-      "sinProgramacionActiva": "Ez duzu programaziorik aktibo. Ireki zure programazioa Fitxategiak fitxatik proposamen bat gehitu aurretik."
-    },
     "bienvenida": {
       "archivosCreados": "Fitxategiak ondo sortu dira.",
       "cargandoDemo": "Demostrazio-fitxategiak kargatzen...",
@@ -723,8 +716,6 @@
     },
     "catalogo": {
       "cursosAModulos": "Ikasturteak → moduluak",
-      "incorporando": "Gehitzen...",
-      "incorporarAProgramacion": "🚀 Programaziora gehitu",
       "nuevaProgramacion": "Programazio berria"
     },
     "cloud": {
@@ -837,7 +828,6 @@
       "anadirPrimeraUd": "Gehitu lehen UDa",
       "anadirPrimerRa": "Gehitu lehen RA",
       "revisarAsignaciones": "Berrikusi esleipenak",
-      "importarDeEditorial": "Inportatu argitaletxe batetik",
       "crearPrimeraTarea": "Sortu lehen zeregina",
       "planificarSesiones": "Planifikatu saioak",
       "anadirContexto": "Gehitu testuingurua",
@@ -2189,7 +2179,7 @@
       "modeloJegTitulo": "JEG eredua.",
       "modeloJegDesc": "Instrumentua→Adierazlea→CE→RA→Modulua maila, PD+ren benetako egilearena (Javier Edo Gual) — aplikazioaren benetako kalifikazio-motorra da (boletinak, PDFa eta aktak barne). Erabilera arruntean ez da ezer ukitu behar hemen: Instrumentuak atalean CE bati buruzko jarduera bat markatzean, dagokion Adierazlea sortu eta pisua automatikoki banatzen da. Pantaila hau banaketa hori eskuz doitu nahi duenarentzat da (CE bakoitzeko hainbat adierazle, pisu desberdinak) edo automatikoki sortutakoa berrikusi nahi duenarentzat.",
       "indicadoresPorCeTitulo": "Adierazleak Ebaluazio Irizpideka",
-      "primeroAnadeCriterios": "Lehenik gehitu Ebaluazio Irizpideak Curriculuma → RA eta CE Ponderazioa atalean.",
+      "primeroAnadeCriterios": "Lehenik gehitu Ebaluazio Irizpideak Curriculuma → OG<-RA<-CE atalean.",
       "sinIndicadoresTodavia": "Oraindik adierazlerik ez.",
       "gruposEvaluacionTitulo": "Ebaluazio-taldeak (GEv)",
       "gruposEvaluacionDesc": "Ikasle-azpitaldeak (adib. ebaluazio jarraituaren galera): GEv batekin markatutako instrumentu batek talde bereko ikasleentzat bakarrik balio du. Esleitu ikasle bakoitzaren GEv Ikasleak → Matrikula atalean.",
@@ -2226,35 +2216,6 @@
     "catalogo": {
       "tituloAcronimosGlosario": "Akronimoak eta glosarioa",
       "sinResultadosParaBusqueda": "\"{{termino}}\" bilaketarako ez da emaitzarik aurkitu",
-      "confirmacionSobrescribirPropuesta": "⚠️ KONTUZ: Ekintza honek uneko moduluaren Unitate didaktikoak, Tresnak, Saioak, Zereginak eta testuinguruaren konfigurazioa gainidatziko ditu.\n\nZiur zaude jarraitu nahi duzula?",
-      "tituloCatalogoAutores": "Egile eta Argitaletxeen Katalogoa",
-      "descripcionCatalogoAutoresTexto1": "Arakatu txantiloi osoak (",
-      "descripcionCatalogoAutoresTexto2": ") argitaletxeek edo egileek modulurako proposatuak ",
-      "descripcionCatalogoAutoresTexto3": ". Proposamen horiek unitate didaktikoak, ebaluazio-tresnak eta gelako sekuentziak izan ditzakete.",
-      "tituloArchivosDisponibles": "Fitxategi erabilgarriak",
-      "buscandoPropuestas": "Proposamenak bilatzen...",
-      "sinArchivosFppTexto1": "Ez da fitxategirik aurkitu ",
-      "sinArchivosFppTexto2": " modulu honetarako zure Documentos/Autores karpetan.",
-      "cargandoContenidoPropuesta": "Proposamenaren edukia kargatzen...",
-      "tituloPrevisualizacionPropuesta": "Proposamenaren aurrebista",
-      "descripcionPrevisualizacionPropuesta": "Berrikusi edukia sartu aurretik. Zure programazioan inportatu ondoren nahi bezala editatu ahal izango duzu.",
-      "tituloModuloDidactico": "Modulu didaktikoa",
-      "labelContexto": "Testuingurua:",
-      "definido": "Definituta",
-      "noDefinido": "Definitu gabe",
-      "tituloMatricesOgRaCeUd": "OG → RA → CE → UD/T matrizeak",
-      "unidadesDidacticasPropuestas": "Proposatutako unitate didaktikoak:",
-      "sinDescripcion": "(Deskribapenik gabe)",
-      "labelMapeoRaOg": "RA-OG mapaketa:",
-      "incluido": "Barne hartuta",
-      "noIncluido": "Barne hartu gabe",
-      "tituloInstrumentosEvaluacion": "Ebaluazio-tresnak",
-      "instrumentosPredefinidos": "Aurrez definitutako tresnak.",
-      "tituloProgramacionAula": "Gelako programazioa",
-      "sesionesPlanificadas": "Planifikatutako saioak.",
-      "tareasCompetencialesDisenadas": "Diseinatutako zeregin konpetentzialak.",
-      "tituloNingunFicheroSeleccionado": "Ez da fitxategirik hautatu",
-      "descripcionSeleccionaArchivoFpp": "Hautatu `.fpp` fitxategi bat ezkerreko zerrendatik, zure programazioan sartu aurretik bere eduki osoa aurreikusteko.",
       "tituloMapaCcaa": "LHko curriculuma duten Autonomia Erkidegoen mapa",
       "instruccionMapaCcaa": "Egin klik erkidego batean bere xehetasunak ikusteko. Iturria: ",
       "badgeDemo": "DEMO",
@@ -2864,7 +2825,7 @@
       "progresoAlumnadoTitulo": "Ikasleen aurrerapena",
       "generaInformeAvanceDesc": "Ikasleen aurrerapenari buruzko txostena sortzen du.",
       "fichaIndividualTitulo": "Banakako fitxa",
-      "fichaIndividualDesc": "Ikasle baten matrikula + tutoretza fitxa, orientabide-bilera batera eramateko.",
+      "fichaIndividualDesc": "Ikasle baten matrikula eta asistentzia fitxa, bilera batera eramateko.",
       "seguimientoLabel": "Jarraipena",
       "seguimientoDesc": "Eskolen egunkaria, UDka sekuentziazioa eta hileroko plangintza.",
       "seguimientoDiarioTitulo": "Eguneroko jarraipena",

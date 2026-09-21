@@ -14,7 +14,7 @@ Marco normativo, contextualización, datos del módulo/ciclo/duración y relaci�
 
 ## B. Resultados de aprendizaje susceptibles de ser adquiridos en FEOE
 Qué RA se trabajan durante la Formación en Empresa u Organismo Equiparado.
-- **Dónde:** `Programación` › `Currículo` → Pestaña `Ponderación RA y CE` (columna "Feoe" de cada RA) · texto override en `Programación` › `Módulo` → Pestaña `Planes` (FEOE)
+- **Dónde:** `Programación` › `Currículo` → Pestaña `OG<-RA<-CE` (columna "FEOE" de cada RA) · texto override en `Programación` › `Contexto` → Pestaña `Plan FEOE`
 
 ## C. Secuenciación y organización temporal de las unidades didácticas
 Tabla RA × UD con horas y porcentajes de contribución.
@@ -26,11 +26,11 @@ Listado de UD con su descripción.
 
 ### C2. Criterios de evaluación
 RA + sus CE, con ponderación.
-- **Dónde:** `Programación` › `Currículo` → Pestaña `Ponderación RA y CE`
+- **Dónde:** `Programación` › `Currículo` → Pestaña `OG<-RA<-CE`
 
 ### C3. Criterios de calificación
 Nota mínima por RA, tabla de instrumentos por trimestre, fórmula de la nota final.
-- **Dónde:** `Programación` › `Currículo` → Pestaña `Ponderación RA y CE` (% de cada RA/CE) y `Programación` › `Evaluación` → Pestaña `Procedimientos` (texto override de criterios de calificación)
+- **Dónde:** `Programación` › `Currículo` → Pestaña `OG<-RA<-CE` (% de cada RA/CE) y `Programación` › `Evaluación` → Pestaña `Procedimientos` (texto override de criterios de calificación)
 
 ## D. Principios metodológicos
 Metodologías activas, principios pedagógicos, estrategias y aprendizaje colaborativo.
@@ -58,7 +58,7 @@ Convocatoria extraordinaria y alumnado con el módulo pendiente de curso anterio
 
 ## H. Resultados de aprendizaje
 Listado completo de RA con descripción detallada.
-- **Dónde:** `Programación` › `Currículo` → Pestaña `Ponderación RA y CE`
+- **Dónde:** `Programación` › `Currículo` → Pestaña `OG<-RA<-CE`
 
 ## I. Plan de aplicación de los desdobles (en su caso)
 Organización de grupos y recursos si el módulo contempla desdobles.

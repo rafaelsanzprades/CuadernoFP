@@ -255,14 +255,14 @@
     "normativa": {
       "autonomias": {
         "label": "Autonomous communities",
-        "desc": "Regional legislation and specific regulations."
+        "desc": "Downloadable documents and templates for your autonomous community, organized by level."
       },
       "bibliografia": {
         "label": "Bibliography",
         "desc": "Index of state and regional VET laws, decrees and orders, with a link to the official gazette."
       },
       "legislacion": {
-        "desc": "Downloadable documents and templates for your autonomous community, organized by level."
+        "desc": "Regional legislation and specific regulations."
       },
       "ecp-incual": {
         "label": "ECP INCUAL",
@@ -566,13 +566,6 @@
     "asistencia": {
       "errorGuardar": "Error saving attendance."
     },
-    "autores": {
-      "errorGuardar": "There was a problem saving the programming.",
-      "errorInyectar": "Error incorporating the proposal data.",
-      "jsonInvalido": "The selected file is not a valid JSON or is corrupted.",
-      "propuestaIncorporada": "Proposal incorporated successfully.",
-      "sinProgramacionActiva": "You don't have an active programming. Open your programming from the Files tab before incorporating a proposal."
-    },
     "bienvenida": {
       "archivosCreados": "Files created successfully.",
       "cargandoDemo": "Loading demo files...",
@@ -723,8 +716,6 @@
     },
     "catalogo": {
       "cursosAModulos": "Courses → modules",
-      "incorporando": "Incorporating...",
-      "incorporarAProgramacion": "🚀 Incorporate into the programming",
       "nuevaProgramacion": "New programming"
     },
     "cloud": {
@@ -837,7 +828,6 @@
       "anadirPrimeraUd": "Add first UD",
       "anadirPrimerRa": "Add first RA",
       "revisarAsignaciones": "Review assignments",
-      "importarDeEditorial": "Import from a publisher",
       "crearPrimeraTarea": "Create first task",
       "planificarSesiones": "Plan sessions",
       "anadirContexto": "Add context",
@@ -2189,7 +2179,7 @@
       "modeloJegTitulo": "JEG Model.",
       "modeloJegDesc": "The Instrument→Indicator→CE→RA→Module level from the actual author of PD+ (Javier Edo Gual) — it's the app's real grading engine (report cards, PDF and minutes included). In normal use you don't need to touch anything here: when you mark an activity on a CE in Instruments, the corresponding Indicator is created and the weight is distributed automatically. This screen is for anyone who wants to manually adjust that distribution (several indicators per CE, different weights) or review what has been generated automatically.",
       "indicadoresPorCeTitulo": "Indicators by Assessment Criterion",
-      "primeroAnadeCriterios": "First add Assessment Criteria in Curriculum → RA and CE Weighting.",
+      "primeroAnadeCriterios": "First add Assessment Criteria in Curriculum → OG<-RA<-CE.",
       "sinIndicadoresTodavia": "No indicators yet.",
       "gruposEvaluacionTitulo": "Assessment groups (GEv)",
       "gruposEvaluacionDesc": "Student subgroups (e.g. loss of continuous assessment): an instrument marked with a GEv only counts for students in that same group. Assign each student's GEv in Students → Enrollment.",
@@ -2226,35 +2216,6 @@
     "catalogo": {
       "tituloAcronimosGlosario": "Acronyms and glossary",
       "sinResultadosParaBusqueda": "No results found for \"{{termino}}\"",
-      "confirmacionSobrescribirPropuesta": "⚠️ WARNING: This action will overwrite your Teaching units, Instruments, Sessions, Tasks and context configuration for the current module.\n\nAre you completely sure you want to continue?",
-      "tituloCatalogoAutores": "Catalogue of Authors and Publishers",
-      "descripcionCatalogoAutoresTexto1": "Explore complete templates (",
-      "descripcionCatalogoAutoresTexto2": ") proposed by publishers or authors for the module ",
-      "descripcionCatalogoAutoresTexto3": ". These proposals may include teaching units, assessment instruments and classroom sequences.",
-      "tituloArchivosDisponibles": "Available files",
-      "buscandoPropuestas": "Searching for proposals...",
-      "sinArchivosFppTexto1": "No files found ",
-      "sinArchivosFppTexto2": " for this module in your Documents/Authors folder.",
-      "cargandoContenidoPropuesta": "Loading proposal content...",
-      "tituloPrevisualizacionPropuesta": "Proposal preview",
-      "descripcionPrevisualizacionPropuesta": "Review the content before importing it. You'll be able to edit it as you like once it's imported into your syllabus.",
-      "tituloModuloDidactico": "Teaching module",
-      "labelContexto": "Context:",
-      "definido": "Defined",
-      "noDefinido": "Not defined",
-      "tituloMatricesOgRaCeUd": "OG → RA → CE → UD/T matrices",
-      "unidadesDidacticasPropuestas": "Proposed teaching units:",
-      "sinDescripcion": "(No description)",
-      "labelMapeoRaOg": "RA-OG mapping:",
-      "incluido": "Included",
-      "noIncluido": "Not included",
-      "tituloInstrumentosEvaluacion": "Assessment instruments",
-      "instrumentosPredefinidos": "Predefined instruments.",
-      "tituloProgramacionAula": "Classroom plan",
-      "sesionesPlanificadas": "Planned sessions.",
-      "tareasCompetencialesDisenadas": "Competency-based tasks designed.",
-      "tituloNingunFicheroSeleccionado": "No file selected",
-      "descripcionSeleccionaArchivoFpp": "Select a `.fpp` file from the list on the left to preview all its content before adding it to your syllabus.",
       "tituloMapaCcaa": "Map of Autonomous Communities with VET curriculum",
       "instruccionMapaCcaa": "Click a community to see its detail. Source: ",
       "badgeDemo": "DEMO",
@@ -2864,7 +2825,7 @@
       "progresoAlumnadoTitulo": "Student progress",
       "generaInformeAvanceDesc": "Generates a report on student progress.",
       "fichaIndividualTitulo": "Individual record",
-      "fichaIndividualDesc": "Enrollment + tutoring record for a student, to bring to a guidance meeting.",
+      "fichaIndividualDesc": "Enrollment and attendance record for a student, to bring to a meeting.",
       "seguimientoLabel": "Tracking",
       "seguimientoDesc": "Class diary, sequencing by UD, and monthly planning.",
       "seguimientoDiarioTitulo": "Daily tracking",

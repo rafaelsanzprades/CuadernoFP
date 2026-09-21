@@ -255,14 +255,14 @@
     "normativa": {
       "autonomias": {
         "label": "Autonomías",
-        "desc": "Lexislación autonómica e normativa específica."
+        "desc": "Documentos e modelos descargables da túa comunidade autónoma, organizados por grao."
       },
       "bibliografia": {
         "label": "Bibliografía",
         "desc": "Índice de leis, decretos e ordes estatais e autonómicas de FP, con ligazón ao boletín oficial."
       },
       "legislacion": {
-        "desc": "Documentos e modelos descargables da túa comunidade autónoma, organizados por grao."
+        "desc": "Lexislación autonómica e normativa específica."
       },
       "ecp-incual": {
         "label": "ECP INCUAL",
@@ -566,13 +566,6 @@
     "asistencia": {
       "errorGuardar": "Erro ao gardar a asistencia."
     },
-    "autores": {
-      "errorGuardar": "Houbo un problema ao gardar a programación.",
-      "errorInyectar": "Erro ao incorporar os datos da proposta.",
-      "jsonInvalido": "O arquivo seleccionado non é un JSON válido ou está corrompido.",
-      "propuestaIncorporada": "Proposta incorporada correctamente.",
-      "sinProgramacionActiva": "Non tes ningunha programación activa. Abre a túa programación desde a pestana Arquivos antes de incorporar unha proposta."
-    },
     "bienvenida": {
       "archivosCreados": "Arquivos creados correctamente.",
       "cargandoDemo": "Cargando arquivos de demostración...",
@@ -723,8 +716,6 @@
     },
     "catalogo": {
       "cursosAModulos": "Cursos → módulos",
-      "incorporando": "Incorporando...",
-      "incorporarAProgramacion": "🚀 Incorporar á programación",
       "nuevaProgramacion": "Nova programación"
     },
     "cloud": {
@@ -837,7 +828,6 @@
       "anadirPrimeraUd": "Engadir primeira UD",
       "anadirPrimerRa": "Engadir primeiro RA",
       "revisarAsignaciones": "Revisar asignacións",
-      "importarDeEditorial": "Importar dunha editorial",
       "crearPrimeraTarea": "Crear primeira tarefa",
       "planificarSesiones": "Planificar sesións",
       "anadirContexto": "Engadir contexto",
@@ -2189,7 +2179,7 @@
       "modeloJegTitulo": "Modelo JEG.",
       "modeloJegDesc": "Nivel Instrumento→Indicador→CE→RA→Módulo do autor real de PD+ (Javier Edo Gual) — é o motor de cualificación real da app (boletíns, PDF e actas incluídos). No uso normal non fai falta tocar nada aquí: ao marcar unha actividade sobre un CE en Instrumentos, o Indicador correspondente créase e o peso repártese só. Esta pantalla é para quen queira axustar ese reparto a man (varios indicadores por CE, pesos distintos) ou revisar o que se xerou automaticamente.",
       "indicadoresPorCeTitulo": "Indicadores por Criterio de Avaliación",
-      "primeroAnadeCriterios": "Primeiro engade Criterios de avaliación en Currículo → Ponderación RA e CE.",
+      "primeroAnadeCriterios": "Primeiro engade Criterios de avaliación en Currículo → OG<-RA<-CE.",
       "sinIndicadoresTodavia": "Sen indicadores aínda.",
       "gruposEvaluacionTitulo": "Grupos de avaliación (GEv)",
       "gruposEvaluacionDesc": "Subgrupos de alumnado (p.ex. perda de avaliación continua): un instrumento marcado cun GEv só conta para o alumnado dese mesmo grupo. Asigna o GEv de cada alumno en Alumnado → Matrícula.",
@@ -2226,35 +2216,6 @@
     "catalogo": {
       "tituloAcronimosGlosario": "Acrónimos e glosario",
       "sinResultadosParaBusqueda": "Non se atoparon resultados para \"{{termino}}\"",
-      "confirmacionSobrescribirPropuesta": "⚠️ ATENCIÓN: Esta acción sobrescribirá as túas Unidades didácticas, Instrumentos, Sesións, Tarefas e configuración do contexto para o módulo actual.\n\nEstás completamente seguro/a de continuar?",
-      "tituloCatalogoAutores": "Catálogo de Autores e Editoriais",
-      "descripcionCatalogoAutoresTexto1": "Explora modelos completos (",
-      "descripcionCatalogoAutoresTexto2": ") propostas por editoriais ou autores para o módulo ",
-      "descripcionCatalogoAutoresTexto3": ". Estas propostas poden incluír unidades didácticas, instrumentos de avaliación e secuencias de aula.",
-      "tituloArchivosDisponibles": "Arquivos dispoñibles",
-      "buscandoPropuestas": "Buscando propostas...",
-      "sinArchivosFppTexto1": "Non se atoparon arquivos ",
-      "sinArchivosFppTexto2": " para este módulo na túa carpeta Documentos/Autores.",
-      "cargandoContenidoPropuesta": "Cargando contido da proposta...",
-      "tituloPrevisualizacionPropuesta": "Previsualización da proposta",
-      "descripcionPrevisualizacionPropuesta": "Revisa o contido antes de incorporalo. Poderás editalo ao teu gusto unha vez importado na túa programación.",
-      "tituloModuloDidactico": "Módulo didáctico",
-      "labelContexto": "Contexto:",
-      "definido": "Definido",
-      "noDefinido": "Non definido",
-      "tituloMatricesOgRaCeUd": "Matrices OG → RA → CE → UD/T",
-      "unidadesDidacticasPropuestas": "Unidades didácticas propostas:",
-      "sinDescripcion": "(Sen descrición)",
-      "labelMapeoRaOg": "Mapeo RA-OG:",
-      "incluido": "Incluído",
-      "noIncluido": "Non incluído",
-      "tituloInstrumentosEvaluacion": "Instrumentos de avaliación",
-      "instrumentosPredefinidos": "Instrumentos predefinidos.",
-      "tituloProgramacionAula": "Programación de aula",
-      "sesionesPlanificadas": "Sesións planificadas.",
-      "tareasCompetencialesDisenadas": "Tarefas competenciais deseñadas.",
-      "tituloNingunFicheroSeleccionado": "Ningún ficheiro seleccionado",
-      "descripcionSeleccionaArchivoFpp": "Selecciona un ficheiro `.fpp` da lista da esquerda para previsualizar todo o seu contido antes de incorporalo á túa programación.",
       "tituloMapaCcaa": "Mapa de CCAA con currículo FP",
       "instruccionMapaCcaa": "Fai clic nunha comunidade para ver o seu detalle. Fonte: ",
       "badgeDemo": "DEMO",
@@ -2864,7 +2825,7 @@
       "progresoAlumnadoTitulo": "Progreso do alumnado",
       "generaInformeAvanceDesc": "Xera un informe do avance do alumnado.",
       "fichaIndividualTitulo": "Ficha individual",
-      "fichaIndividualDesc": "Ficha de matrícula + titoría dun alumno/a, para levar a unha reunión de orientación.",
+      "fichaIndividualDesc": "Ficha de matrícula e asistencia dun alumno/a, para levar a unha reunión.",
       "seguimientoLabel": "Seguimento",
       "seguimientoDesc": "Diario de clases, secuenciación por UD e planificación mensual.",
       "seguimientoDiarioTitulo": "Seguimento diario",

@@ -13,7 +13,7 @@ Párrafo sobre la competencia general del título asociada al módulo.
 - **Dónde:** se autogenera igual que el anterior. Sin campo específico en la app por ahora.
 
 ## 3. Resultados de aprendizaje (listado numerado)
-- **Dónde:** `Programación` › `Currículo` → Pestaña `Ponderación RA y CE` (tabla de RA)
+- **Dónde:** `Programación` › `Currículo` → Pestaña `OG<-RA<-CE` (tabla de RA)
 
 ## 4. Unidades didácticas (título y horas)
 - **Dónde:** `Programación` › `Currículo` → Pestaña `Unidades didácticas`

@@ -63,7 +63,7 @@ Vamos a pedirle al sistema que nos cree el archivo base de la programación carg
       - **Texto:** Centro educativo y Profesorado.
     - **Pestaña:** Contextualización
       - **Bloque:** Entorno geográfico, socioeconómico y contexto escolar.
-    - **Pestaña:** Dual FEOE
+    - **Pestaña:** Plan FEOE
       - **Bloque:** Modalidad, seguimiento y régimen dual de la Formación en Empresa u Organismo Equiparado (FEOE).
     - **Pestaña:** Evaluación y calificación
       - **Bloque:** Información al alumnado, pérdida de evaluación continua y recuperación.
@@ -75,7 +75,7 @@ Vamos a pedirle al sistema que nos cree el archivo base de la programación carg
   - **Página:** Currículo
     - **Pestaña:** Contribución RA en OG
       - **Matriz:** Contribución de cada RA a los Objetivos Generales del título.
-    - **Pestaña:** Ponderación RA y CE
+    - **Pestaña:** OG<-RA<-CE
       - **Número:** Asignar el % de cada RA y de cada CE.
     - **Pestaña:** Unidades didácticas
       - **Botón:** "Añadir nueva UD". Crea los temas.

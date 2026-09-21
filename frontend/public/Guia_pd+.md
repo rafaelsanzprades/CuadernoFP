@@ -41,10 +41,10 @@ A continuación, se detalla el índice oficial de la Programación Didáctica se
 - **Dónde:** `Programación` › `Currículo` → Pestaña `Contribución RA en OG`
 
 ### 2.5 Resultados de aprendizaje (RA) y criterios de evaluación (CE)
-- **Dónde:** `Programación` › `Currículo` → Pestaña `Ponderación RA y CE`
+- **Dónde:** `Programación` › `Currículo` → Pestaña `OG<-RA<-CE`
 
 ### 2.6 Contenidos (C)
-- **Dónde:** `Programación` › `Currículo` → Pestaña `Ponderación RA y CE` (integrado con cada RA)
+- **Dónde:** `Programación` › `Currículo` → Pestaña `OG<-RA<-CE` (integrado con cada RA)
 
 ### 2.7 Relación entre los elementos curriculares
 - **Dónde:** `Programación` › `Currículo` → Pestaña `Unidades didácticas` (matriz e informe de relación RA-UD, integrados en la misma pestaña)
@@ -53,7 +53,7 @@ A continuación, se detalla el índice oficial de la Programación Didáctica se
 - **Dónde:** `Programación` › `Currículo` → Pestaña `Unidades didácticas` (y pestaña `Tareas competenciales` para la secuenciación de tareas)
 
 ### 2.9 Formación en empresa (FEOE)
-- **Dónde:** `Programación` › `Contexto` → Pestaña `Dual FEOE`
+- **Dónde:** `Programación` › `Contexto` → Pestaña `Plan FEOE`
 
 ---
 
@@ -97,10 +97,10 @@ A continuación, se detalla el índice oficial de la Programación Didáctica se
 - **Dónde:** `Programación` › `Contexto` → Pestaña `Evaluación y calificación`
 
 ### 4.6 Evaluación de la fase FEOE
-- **Dónde:** `Programación` › `Contexto` → Pestaña `Dual FEOE`
+- **Dónde:** `Programación` › `Contexto` → Pestaña `Plan FEOE`
 
 ### 4.7 Criterios de calificación y ponderación
-- **Dónde:** `Programación` › `Currículo` → Pestaña `Ponderación RA y CE` / `Curso` › `Seguimiento` → Pestaña `Detalle por alumnado`
+- **Dónde:** `Programación` › `Currículo` → Pestaña `OG<-RA<-CE` / `Curso` › `Seguimiento` → Pestaña `Detalle por alumnado`
 
 ### 4.8 Plan de recuperación de módulos pendientes
 - **Dónde:** `Programación` › `Contexto` → Pestaña `Evaluación y calificación`
