@@ -703,7 +703,8 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
                           h_boa: mod.horas,
                           h_sem: h_sem,
                           p_ev: 15,
-                          h_feoe: h_feoe
+                          h_feoe: h_feoe,
+                          carga_lectiva_anual: 1000
                         };
                         handleCreateNewProgramacion(mod.codigo, mod.nombre, extras);
                       }}
@@ -995,7 +996,8 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                     h_boa: modulo.horas || 0,
                     h_sem: h_sem,
                     p_ev: 15,
-                    h_feoe: h_feoe
+                    h_feoe: h_feoe,
+                    carga_lectiva_anual: 1000
                   };
                   handleCreateNewProgramacion(modulo.codigo, modulo.nombre, extras);
                 }}
