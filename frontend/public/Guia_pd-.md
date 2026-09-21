@@ -19,7 +19,7 @@ Párrafo sobre la competencia general del título asociada al módulo.
 - **Dónde:** `Programación` › `Currículo` → Pestaña `Unidades didácticas`
 
 ## 5. Criterios de calificación (instrumentos y su peso)
-- **Dónde:** `Programación` › `Currículo` → Pestaña `Tareas competenciales` (columna Instrumento) y `Programación` › `Instrumentos` → Pestañas `1º/2º/3º Trimestre` (peso de cada instrumento)
+- **Dónde:** `Programación` › `Currículo` → Pestaña `Tareas competenciales` (columna Instrumento) y `Programación` › `Instrumento` → Pestaña `Trimestres` (peso de cada instrumento, por trimestre)
 
 ## 6. Recordatorio final (asistencia y ánimo)
 Aviso sobre pérdida de evaluación continua por faltas, y una frase de cierre.

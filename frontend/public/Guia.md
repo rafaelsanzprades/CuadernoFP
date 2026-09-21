@@ -31,7 +31,7 @@ Cuando generes identificadores o guardes datos, usa estos estándares (salvo que
 - **Glosario clave que debes comprender:**
   - **Programación didáctica:** Es el "molde" teórico (.fpp). Contiene la normativa (resultados de aprendizaje y criterios de evaluación) y las unidades didácticas. Se diseña una vez y se puede reutilizar en cursos posteriores.
   - **Curso:** Es la "instancia" real (.fpc). Representa al alumnado físico, sus calificaciones, faltas de asistencia y calendario en un año académico específico (ej. 2025-26).
-  - **Bloques:** 3 bloques principales — `Grupo` (Agenda, Archivo, Normativa, Catálogo), `Programación` (el diseño teórico del módulo) y `Curso` (el aula real) — con 3 a 5 páginas cada uno, más un grupo de páginas de acceso directo fuera de los bloques (`Inicio`, `Ayuda`, `Equivalencia`, `MagIA`, `Legal`). Esta misma guía vive dentro de `MagIA`, pestaña `Guía`.
+  - **Bloques:** 3 grupos en el sidebar — `General` (Inicio, Archivo, Ayuda), `Programación` (Normativa, Catálogo, Contexto, Currículo, Metodología, Instrumento — el diseño teórico del módulo) y `Curso` (Agenda, Calendario, Alumnado, Seguimiento, Calificación — el aula real) — más `MagIA` y `Legal`, sueltas fuera de cualquier grupo. Esta misma guía vive dentro de `Ayuda`, pestaña `Guía` (no en `MagIA`).
 
 Una vez tengas el contexto necesario, comienza a guiar al usuario o ejecuta las acciones detalladas desde el **Paso 1** en adelante.
 
@@ -44,7 +44,7 @@ El primer paso es crear el "molde" o plantilla curricular de tu módulo a partir
 ### 1.1. Iniciar desde el catálogo oficial
 Vamos a pedirle al sistema que nos cree el archivo base de la programación cargando automáticamente la ley.
 
-- **Bloque:** Grupo
+- **Bloque:** Programación
   - **Página:** Normativa
     - **Pestaña:** Autonomías
       - **Acción:** Selecciona tu Comunidad Autónoma en el mapa interactivo para cargar la normativa autonómica específica.
@@ -73,10 +73,9 @@ Vamos a pedirle al sistema que nos cree el archivo base de la programación carg
 ### 1.3. Definir el currículo, las unidades didácticas y las tareas competenciales
 - **Bloque:** Programación
   - **Página:** Currículo
-    - **Pestaña:** Contribución RA en OG
-      - **Matriz:** Contribución de cada RA a los Objetivos Generales del título.
     - **Pestaña:** OG<-RA<-CE
       - **Número:** Asignar el % de cada RA y de cada CE.
+      - **Bloque:** "Contribución RA→OG" (plegable, al final de la misma pestaña) — matriz de contribución de cada RA a los Objetivos Generales del título.
     - **Pestaña:** Unidades didácticas
       - **Botón:** "Añadir nueva UD". Crea los temas.
       - **Tabla:** Haz clic en la intersección de la UD con el RA al que contribuye.
@@ -94,16 +93,23 @@ Vamos a pedirle al sistema que nos cree el archivo base de la programación carg
       - **Selector:** Recursos y espacios necesarios (aula, taller, software...) y catálogo de instrumentos de evaluación.
     - **Pestaña:** Plan de contingencia
       - **Texto:** Docencia telemática, tareas autoguiadas.
-    - **Pestaña:** Transversales, competencias y actividades
+    - **Pestaña:** Transversales
       - **Texto:** Proyectos de innovación e interdisciplinariedad.
 
 ### 1.5. Instrumento de Evaluación
 - **Bloque:** Programación
   - **Página:** Instrumento
     - **Pestaña:** Resumen
-      - **Número:** Configura redondeo y compensaciones.
-    - **Pestañas:** 1º/2º/3º Trimestre
-      - **Botón:** "Añadir Instrumento". Exámenes, prácticas, rúbricas...
+      - **Tabla:** Visión global de los instrumentos por trimestre (nº y % de peso).
+    - **Pestaña:** Trimestres
+      - **Sub-pestañas:** 1º/2º/3º Trimestre. **Botón:** "Añadir Instrumento". Exámenes, prácticas, rúbricas...
+    - **Pestaña:** Rúbricas
+      - **Botón:** "Nueva rúbrica" (o importar/exportar desde Classroom).
+    - **Pestaña:** Modelo JEG
+      - **Acción:** Reparto avanzado Instrumento→Indicador→CE (normalmente no hace falta tocarlo).
+
+> Las reglas de redondeo y compensación (nota mínima, umbral de redondeo, criterios compensables por
+> RA) no viven en Instrumento: están en `Programación` › `Contexto` → Pestaña `Identificación`.
 
 ---
 
@@ -116,7 +122,7 @@ Una vez configurada la programación base, genera los PDFs oficiales.
       - **Acordeón por Comunidad Autónoma:** Aragón viene abierta por defecto; el resto muestra "próximamente".
       - **Botones PD ARAGÓN:** Dispones de tres niveles, siempre en `.docx` editable:
         1. **PD- (Resumen):** Resumen de 1-2 folios para el alumnado.
-        2. **PD= (Simplificada):** Formato oficial intermedio (~10-15 páginas).
+        2. **PD= (Simplificada):** Formato oficial intermedio (~15-20 páginas).
         3. **PD+ (Detallada JEG):** Formato extendido (>60 páginas) con toda la carga narrativa.
 
            PD- y PD= incluyen, al final, una página de previsión de planificación mensual (UD × mes,
@@ -124,7 +130,7 @@ Una vez configurada la programación base, genera los PDFs oficiales.
       - **Bloque "Documentos de apoyo al currículo":** Matriz RA ↔ UD, en PDF ("Vista previa") o DOCX ("Descarga editable").
       - **Bloque "Unidades didácticas y tareas competenciales":** selector para descargar el `.docx` de una UD o una tarea concreta.
 
-> ¿Quieres saber exactamente qué campo de la app rellena cada apartado del documento? Consulta `Equivalencia` (acceso directo, junto a Inicio y Ayuda).
+> ¿Quieres saber exactamente qué campo de la app rellena cada apartado del documento? Consulta `MagIA` → Pestaña `Análisis APP->PDx`.
 
 ---
 
@@ -133,7 +139,7 @@ Una vez configurada la programación base, genera los PDFs oficiales.
 Ahora instanciamos la Programación en un año académico y clase real.
 
 ### 3.1. Iniciar un nuevo curso y grupo
-- **Bloque:** Grupo
+- **Bloque:** General
   - **Página:** Archivo
     - **Pestaña:** Datos
       - **Botón:** Iniciar Curso (+ Grupo).
@@ -154,7 +160,7 @@ Ahora instanciamos la Programación en un año académico y clase real.
       - **Nota:** Los hitos de Fechas generales (inicio/fin de curso y de cada trimestre) y el periodo
         FEOE aparecen aquí automáticamente, en gris y sin poder borrarse — cambian si cambias esas
         fechas, no aquí.
-    - **Pestaña:** Actividades extraescolares
+    - **Pestaña:** Complementarias y extraescolares
       - **Acción:** Registra actividades complementarias y extraescolares.
 
 ### 3.3. Gestionar el alumnado
@@ -162,17 +168,16 @@ Ahora instanciamos la Programación en un año académico y clase real.
   - **Página:** Alumnado
     - **Pestaña:** Matrícula
       - **Botón:** Importar CSV o Añadir Alumnado a mano.
-    - **Pestaña:** Plano de clase
+      - **Bloque:** "Perfil del grupo" (más abajo, en la misma pestaña) — describe el ambiente de la clase.
+    - **Pestaña:** Plano
       - **Acción:** Arrastrar al alumnado a sus mesas.
-    - **Pestaña:** Perfil del grupo
-      - **Texto:** Describe el ambiente de la clase.
 
 ---
 
 ## 👨‍🏫 Paso 4: Tu día a día en el aula
 
 ### 4.1. Abrir tu clase
-- **Bloque:** Grupo
+- **Bloque:** General
   - **Página:** Archivo
     - **Acción:** Haz DOBLE CLIC sobre tu grupo.
 
@@ -183,27 +188,29 @@ Ahora instanciamos la Programación en un año académico y clase real.
       - **Texto:** Redacta qué se ha hecho en la clase.
     - **Pestaña:** Asistencia
       - **Botón:** Marca Falta, Retraso o Justificado.
+      - **Sub-vista:** "Alertas de abandono" (dentro de la misma pestaña) — detector automático de riesgo, sin necesidad de registrar nada a mano.
 
-### 4.3. Tutoría y prevención de abandono
-- **Bloque:** Curso
-  - **Página:** Alumnado
-    - **Pestaña:** Tutoría y alertas
-      - **Acción:** Registra tutorías con el alumnado y activa protocolos de prevención de abandono.
+> No hay pestaña de Tutoría: se eliminó por completo (2026-09-21) — ser tutor de un grupo se
+> considera un rol ajeno a esta app.
 
 ### 4.4. Evaluación
 - **Bloque:** Curso
   - **Página:** Seguimiento
-    - **Pestaña:** Progreso de RA y UD
-      - **Tablas:** Rendimiento medio por trimestre y por RA.
-    - **Pestaña:** Detalle por alumnado
-      - **Tabla:** Teclea las notas y calcula al vuelo — es el único punto de entrada de calificaciones numéricas de la app.
-  - **Página:** Calificación *(solo lectura, resume lo anterior)*
+    - **Pestaña:** Notas
+      - **Tabla:** Teclea las notas y calcula al vuelo, por alumnado — es el único punto de entrada de calificaciones numéricas de la app.
+    - **Pestaña:** Empresa FEOE
+      - **Acción:** Transcribe las valoraciones del tutor de empresa (1-4, Anexo XI b) para los CE marcados FEOE en Currículo.
+  - **Página:** Calificación *(mayormente de solo lectura, resume lo anterior)*
     - **Pestaña:** Resumen
-      - **Tablas:** Panel global de rendimiento y calificaciones medias.
-    - **Pestaña:** Estadísticas
-      - **Gráficos:** Estadísticas globales del aula.
-    - **Pestañas:** Grupal e Individual
-      - **Acción:** Generación de informes (boletines y actas).
+      - **Tablas:** Panel global de rendimiento, y bloques plegables "Progreso RA-UD", "Estadísticas" y "Análisis" (con switcher Grupal/Individual) más abajo en la misma pestaña.
+    - **Pestaña:** Histórico
+      - **Tabla:** Registro de cada cambio de nota, con fecha, agente y motivo.
+    - **Pestaña:** Reclamaciones
+      - **Acción:** Registra y resuelve reclamaciones de nota, con generación de justificante.
+    - **Pestaña:** Boletines
+      - **Acción:** Boletín individual en pantalla (radar + barras por RA), con botón de impresión.
+    - **Pestaña:** Expediente
+      - **Acción:** Línea temporal de evidencias por alumno/a (calificaciones, reclamaciones, asistencia, diario).
 
 ---
 
@@ -216,7 +223,7 @@ Exporta informes, actas, y seguimiento.
       - **Bloque "Grupo":** Calendario académico y Plano de aula (ubicación del alumnado) — ambos en "Vista previa .pdf" / "Descarga editable .docx".
       - **Bloque "Clases mensual - por UD":** Seguimiento diario, Clases por UD, Planificación (previsto/impartido) y Parte de incidencias (justificante de una falta concreta, con selector de alumno/a, fecha y motivo).
       - **Bloque "Boletines y actas de evaluación":** por cada trimestre y la Final: PDF/DOCX del boletín grupal, Acta de evaluación firmable (PDF/DOCX) y exportación Excel/CSV.
-      - **Bloque "Alumnado individual":** Boletín individual y Ficha individual (matrícula + tutoría) por alumno/a.
+      - **Bloque "Alumnado individual":** Boletín individual y Ficha individual (matrícula + asistencia) por alumno/a.
 
 > El Informe EQAVET (indicadores de calidad + propuestas de mejora) ya no se descarga desde aquí: vive en `Inicio` → Pestaña `Mejora`.
 
@@ -227,10 +234,10 @@ Exporta informes, actas, y seguimiento.
 ### ¿Qué diferencia hay entre los 3 niveles de Programación Didáctica (PD-, PD=, PD+)?
 Cuaderno FP genera el mismo contenido base en 3 niveles de detalle:
 - **PD- (Resumen):** Resumen de 1-2 hojas para entregar al alumnado.
-- **PD= (Simplificada):** Sigue la estructura normativa oficial (17 apartados A-Q), con unos 15 folios, ideal para jefatura.
+- **PD= (Simplificada):** Sigue la estructura normativa oficial (14 apartados A-N, formato BOA/Aragón vigente desde sept. 2025), unas 15-20 páginas, ideal para jefatura.
 - **PD+ (Detallada JEG):** Programación completa (TFM/Oposiciones) de más de 60 páginas con metodologías expandidas.
 
-Consulta `Equivalencia` (acceso directo, junto a Inicio y Ayuda) para ver el mapa completo campo a campo entre la app y cada uno de los tres niveles.
+Consulta `MagIA` → Pestaña `Análisis APP->PDx` para ver el mapa completo campo a campo entre la app y cada uno de los tres niveles.
 
 ### ¿Qué son los campos "codificados"?
 En lugar de escribir texto genérico, seleccionas opciones de una lista. El sistema redactará automáticamente párrafos enteros, coherentes y normativos en tu PD final.
