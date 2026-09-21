@@ -1,8 +1,9 @@
 "use client";
-import { Building2 } from "lucide-react";
+import { Building2, Calculator } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { NarrativeField } from "@/components/ui/NarrativeField";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 const FEOE_CATALOGO = [
   {
@@ -24,12 +25,23 @@ const FEOE_CATALOGO = [
 
 export function PlanesTab() {
   const { t } = useTranslation();
-  const { moduleData, updateModuleData } = useAppStore();
+  const { moduleData, updateModuleData, updateInfoModulo } = useAppStore();
   const config_contexto = moduleData?.config_contexto || {};
+  const info_modulo = moduleData?.info_modulo || {};
 
   const handleChange = (field: string, value: any) => {
     updateModuleData("config_contexto", { ...config_contexto, [field]: value });
   };
+
+  // Peso de la FEOE en tu módulo (Ítem 2, 00 IDEAS.md, 2026-09-21): caja
+  // informativa -- no fija el peso real de la nota FEOE (eso sigue siendo
+  // un valor libre que se ajusta en Seguimiento->Empresa FEOE). h_feoe y
+  // carga_lectiva_anual se editan en Identificación, no aquí.
+  const hFeoeCurso = info_modulo.h_feoe != null ? Number(info_modulo.h_feoe) : (info_modulo.curso === '2º' ? 360 : 140);
+  const cargaLectivaAnual = Number(info_modulo.carga_lectiva_anual) || 1000;
+  const techoPct = cargaLectivaAnual > 0 ? (hFeoeCurso / cargaLectivaAnual) * 100 : 0;
+  const horasImputadas = Number(info_modulo.horas_imputadas_feoe) || 0;
+  const pctModulo = cargaLectivaAnual > 0 ? (horasImputadas / cargaLectivaAnual) * 100 : 0;
 
   const feoe_seleccion = config_contexto.feoe_seleccion || [];
 
@@ -48,6 +60,49 @@ export function PlanesTab() {
           <span className="inline-flex"><Building2 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.modulo.tituloFeoe', {defaultValue: 'FEOE. Formación en Empresa u Organismo Equiparado'})}
         </h2>
         <div className="space-y-6">
+          <div className="p-5 rounded-xl border border-[var(--glass-border)] bg-foreground/5 space-y-4">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h3 className="text-body font-bold text-foreground flex items-center gap-2">
+                <Calculator className="w-[1.1em] h-[1.1em]" /> {t('campos.modulo.pesoFeoeTitulo', {defaultValue: 'Peso de la FEOE en tu módulo'})}
+              </h3>
+              <Link href="/contexto?tab=identificacion" className="text-caption text-info hover:underline">
+                {t('botones.modulo.editarEnIdentificacion', {defaultValue: 'Editar Horas FEOE / Carga lectiva en Identificación'})}
+              </Link>
+            </div>
+            <p className="text-caption text-muted">
+              {t('campos.modulo.pesoFeoeDesc', {defaultValue: 'Solo contexto/apoyo -- no fija el peso real de la nota FEOE, que sigues ajustando tú en Seguimiento -> Empresa FEOE.'})}
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <div className="p-3 rounded-lg bg-background/40 border border-white/5 text-center">
+                <div className="text-caption text-muted">{t('campos.modulo.cargaLectivaAnualLabel', {defaultValue: 'Carga lectiva anual'})}</div>
+                <div className="text-subheading font-bold text-foreground">{cargaLectivaAnual}h</div>
+              </div>
+              <div className="p-3 rounded-lg bg-background/40 border border-white/5 text-center">
+                <div className="text-caption text-muted">{t('campos.modulo.horasFeoeCursoLabel', {defaultValue: 'Horas FEOE del curso'})}</div>
+                <div className="text-subheading font-bold text-foreground">{hFeoeCurso}h</div>
+              </div>
+              <div className="p-3 rounded-lg bg-amber-500/10 border border-amber-500/30 text-center">
+                <div className="text-caption text-muted">{t('campos.modulo.techoFeoeLabel', {defaultValue: 'Techo FEOE (máximo)'})}</div>
+                <div className="text-subheading font-bold text-amber-500">{techoPct.toFixed(0)}%</div>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end pt-2 border-t border-[var(--glass-border)]">
+              <div>
+                <label className="text-caption font-semibold text-muted mb-1 block">{t('campos.modulo.horasImputadasModuloLabel', {defaultValue: 'Horas imputadas a este módulo'})}</label>
+                <input
+                  type="number"
+                  value={info_modulo.horas_imputadas_feoe ?? 0}
+                  onChange={e => updateInfoModulo('horas_imputadas_feoe', Number(e.target.value))}
+                  className="w-full bg-background border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground focus:border-amber-500 focus:outline-none"
+                />
+              </div>
+              <div className="p-3 rounded-lg bg-amber-500/10 border border-amber-500/30 text-center">
+                <div className="text-caption text-muted">{t('campos.modulo.pctModuloFeoeLabel', {defaultValue: '% resultante de tu módulo'})}</div>
+                <div className="text-subheading font-bold text-amber-500">{pctModulo.toFixed(0)}%</div>
+              </div>
+            </div>
+          </div>
+
           <div>
             <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.modulo.modalidadSeguimientoLabel', {defaultValue: 'Modalidad y seguimiento'})}</label>
             <p className="text-caption text-muted mb-3">{t('campos.modulo.modalidadSeguimientoDesc', {defaultValue: 'Selección orientativa que apoya la redacción de los textos de abajo (primera versión, se irá ampliando).'})}</p>
@@ -94,6 +149,17 @@ export function PlanesTab() {
               value={config_contexto.texto_feoe || ""}
               onChange={e => handleChange("texto_feoe", e.target.value)}
               placeholder={t('placeholders.modulo.textoFormacionEmpresa', {defaultValue: 'Texto sobre la formación en empresa...'})}
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.trabajosAlternativosTitulo', {defaultValue: 'Trabajos alternativos para módulos no dualizados FEOE'})}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.trabajosAlternativosDesc', {defaultValue: 'Qué se le pide al alumnado en tu módulo durante el periodo FEOE cuando no tiene horas imputadas directamente (trabajos, cuaderno, entregas...).'})}</p>
+            <textarea
+              value={config_contexto.texto_feoe_trabajos_alternativos || ""}
+              onChange={e => handleChange("texto_feoe_trabajos_alternativos", e.target.value)}
+              placeholder={t('placeholders.modulo.textoTrabajosAlternativos', {defaultValue: 'Trabajos, tareas o entregas que sustituyen a la evaluación presencial durante la FEOE...'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>

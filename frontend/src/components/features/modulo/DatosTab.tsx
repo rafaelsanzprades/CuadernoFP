@@ -122,6 +122,9 @@ export function DatosTab() {
     updateInfoModulo("p_ev", 15);
     updateInfoModulo("h_feoe", h_feoe);
     updateInfoModulo("curso", mod.curso);
+    if (!moduleData?.info_modulo?.carga_lectiva_anual) {
+      updateInfoModulo("carga_lectiva_anual", 1000);
+    }
 
     if (Array.isArray(mod.ra) && mod.ra.length > 0) {
       const pesoRa = Math.round(100 / mod.ra.length);
@@ -145,8 +148,22 @@ export function DatosTab() {
     }
   };
 
+  // Cambiar el desplegable de Curso resincroniza h_feoe (140 en 1º, 360 en
+  // 2º) -- salvo que el docente ya lo haya personalizado (0, 500, o
+  // cualquier valor fuera de esos dos por defecto), para no pisarle un
+  // ajuste ya hecho a propósito (Ítem 2, 00 IDEAS.md, 2026-09-21).
+  const handleCursoChange = (nuevoCurso: string) => {
+    const hFeoeActual = Number(moduleData?.info_modulo?.h_feoe);
+    const siguePorDefecto = !moduleData?.info_modulo?.h_feoe || hFeoeActual === 140 || hFeoeActual === 360;
+    updateInfoModulo('curso', nuevoCurso);
+    if (siguePorDefecto) {
+      updateInfoModulo('h_feoe', nuevoCurso === '2º' ? 360 : 140);
+    }
+  };
+
   // --- Data Extraction ---
   const data = moduleData?.info_modulo || {};
+  const hFeoePorDefecto = data.curso === '2º' ? 360 : 140;
 
   const h_sem = Number(data.h_sem) || 0;
   const h_boa = Number(data.h_boa) || 0;
@@ -288,13 +305,38 @@ export function DatosTab() {
             </Select>
           </div>
           <div className="col-span-1">
-            <Input
+            <Select
               label={t('campos.modulo.cursoLabel', {defaultValue: 'Curso'})}
-              type="text"
-              value={data.curso || ""}
-              onChange={e => updateInfoModulo('curso', e.target.value)}
-            />
+              value={data.curso || "1º"}
+              onChange={e => handleCursoChange(e.target.value)}
+            >
+              <option value="1º">1º</option>
+              <option value="2º">2º</option>
+              <option value="Ambos">{t('checks.modulo.cursoAmbos', {defaultValue: 'Ambos'})}</option>
+            </Select>
           </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+          <Input
+            label={t('campos.modulo.horasFeoeCursoLabel', {defaultValue: 'Horas FEOE del curso'})}
+            type="number"
+            value={data.h_feoe ?? hFeoePorDefecto}
+            onChange={e => updateInfoModulo('h_feoe', Number(e.target.value))}
+          />
+          <Input
+            label={t('campos.modulo.cargaLectivaAnualLabel', {defaultValue: 'Carga lectiva anual'})}
+            type="number"
+            value={data.carga_lectiva_anual ?? 1000}
+            onChange={e => updateInfoModulo('carga_lectiva_anual', Number(e.target.value))}
+          />
+          <Input
+            label={t('campos.modulo.techoFeoeLabel', {defaultValue: 'Techo FEOE (máximo)'})}
+            type="text"
+            className="text-warning cursor-not-allowed text-center font-bold"
+            disabled
+            value={`${(((Number(data.h_feoe ?? hFeoePorDefecto)) / (Number(data.carga_lectiva_anual) || 1000)) * 100).toFixed(0)}%`}
+          />
         </div>
 
         <div className="grid grid-cols-5 gap-4">
