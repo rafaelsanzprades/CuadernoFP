@@ -202,7 +202,7 @@ export function JegModeloTab() {
           <Target className="w-5 h-5 text-purple-400" /> {t('campos.instrumentos.indicadoresPorCeTitulo', {defaultValue: 'Indicadores por Criterio de Evaluación'})}
         </h2>
         {ceOptions.length === 0 ? (
-          <p className="text-body text-muted">{t('campos.instrumentos.primeroAnadeCriterios', {defaultValue: 'Primero añade Criterios de evaluación en Currículo → Ponderación RA y CE.'})}</p>
+          <p className="text-body text-muted">{t('campos.instrumentos.primeroAnadeCriterios', {defaultValue: 'Primero añade Criterios de evaluación en Currículo → OG<-RA<-CE.'})}</p>
         ) : (
           <div className="space-y-4">
             {ceOptions.map((ce: any) => {

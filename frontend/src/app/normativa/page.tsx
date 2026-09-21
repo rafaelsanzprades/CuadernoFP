@@ -37,9 +37,9 @@ export default function DocumentosPage() {
     { id: "ecp-incual", label: <span className="flex items-center gap-2"><Award className="w-4 h-4 shrink-0 text-purple-500" /> {t('tabs.normativa.ecp-incual.label', {defaultValue: 'ECP INCUAL'})}</span>, cleanLabel: t('tabs.normativa.ecp-incual.label', {defaultValue: 'ECP INCUAL'}) }
   ];
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    autonomias: t('tabs.normativa.autonomias.desc', {defaultValue: 'Legislación autonómica y normativa específica.'}),
+    autonomias: t('tabs.normativa.autonomias.desc', {defaultValue: 'Documentos y plantillas descargables de tu comunidad autónoma, organizados por grado.'}),
     bibliografia: t('tabs.normativa.bibliografia.desc', {defaultValue: 'Índice de leyes, decretos y órdenes estatales y autonómicas de FP, con enlace al boletín oficial.'}),
-    legislacion: t('tabs.normativa.legislacion.desc', {defaultValue: 'Documentos y plantillas descargables de tu comunidad autónoma, organizados por grado.'}),
+    legislacion: t('tabs.normativa.legislacion.desc', {defaultValue: 'Legislación autonómica y normativa específica.'}),
     'ecp-incual': t('tabs.normativa.ecp-incual.desc', {defaultValue: 'Estándares de Competencia Profesional (ECP) del Catálogo Nacional (INCUAL).'}),
   };
   const [activeTab, setActiveTab] = useState("autonomias");
@@ -84,11 +84,11 @@ export default function DocumentosPage() {
     });
   };
 
-  const fetchDocuments = (path: string) => {
+  const fetchDocuments = (path: string, signal: AbortSignal) => {
     setLoadingDocs(true);
     setError(null);
     const backendPath = path === 'legislacion' ? 'Normativa' : path === 'bibliografia' ? 'Bibliografia' : path === 'autonomias' ? 'CCAA' : path;
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/list?path=${encodeURIComponent(backendPath)}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/list?path=${encodeURIComponent(backendPath)}`, { signal })
       .then((res) => {
         if (!res.ok) throw new Error("Error al acceder a los documentos");
         return res.json();
@@ -102,10 +102,18 @@ export default function DocumentosPage() {
         }
       })
       .catch((err) => {
+        // Una pestaña abandonada a mitad de carga (p.ej. al entrar directamente
+        // con ?tab=legislacion, que dispara primero un fetch para la pestaña
+        // por defecto "autonomias" antes de que TabSync corrija activeTab) no
+        // debe dejar un error falso encima de los datos correctos que ya
+        // llegaron -- se ignora silenciosamente.
+        if (err.name === 'AbortError') return;
         // console.error("Error fetching documents:", err); // Suppressed to avoid red logs when backend is down
         setError(err.message);
       })
-      .finally(() => setLoadingDocs(false));
+      .finally(() => {
+        if (!signal.aborted) setLoadingDocs(false);
+      });
   };
 
   useEffect(() => {
@@ -115,7 +123,9 @@ export default function DocumentosPage() {
       setError(null);
       return;
     }
-    fetchDocuments(activeTab);
+    const controller = new AbortController();
+    fetchDocuments(activeTab, controller.signal);
+    return () => controller.abort();
   }, [activeTab, dataSource]);
 
   useEffect(() => {
@@ -150,7 +160,7 @@ export default function DocumentosPage() {
   }, [activeModuleId, moduleData, activeCursoId, cursoData, setModuleData, setCursoData, dataSource]);
 
   const handleNavigate = (newPath: string) => {
-    fetchDocuments(newPath);
+    fetchDocuments(newPath, new AbortController().signal);
   };
 
   const handleGoUp = () => {
@@ -158,7 +168,7 @@ export default function DocumentosPage() {
     const parts = currentPath.split("/").filter(Boolean);
     parts.pop();
     const parentPath = parts.join("/");
-    fetchDocuments(parentPath);
+    fetchDocuments(parentPath, new AbortController().signal);
   };
 
   const handleDownloadDoc = async (filePath: string, filename: string) => {
@@ -390,7 +400,7 @@ export default function DocumentosPage() {
             description={t('pages.documentos_desc', {defaultValue: 'Explorador de legislación, normativas y docs oficiales.'})}
           >
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <Tabs value={activeTab} onValueChange={(val) => { setActiveTab(val); fetchDocuments(val); }} className="flex-1">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
                 <TabsList className="max-w-full">
                   {TABS.map(tab => (
                     <TabsTrigger key={tab.id} value={tab.id}>

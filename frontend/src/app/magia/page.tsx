@@ -576,7 +576,7 @@ export default function MagiaPage() {
                           <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                             <div>
                               <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Contact className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.fichaIndividualTitulo', {defaultValue: 'Ficha individual'})}</h3>
-                              <p className="text-body text-muted mb-4">{t('campos.magia.fichaIndividualDesc', {defaultValue: 'Ficha de matrícula + tutoría de un alumno/a, para llevar a una reunión de orientación.'})}</p>
+                              <p className="text-body text-muted mb-4">{t('campos.magia.fichaIndividualDesc', {defaultValue: 'Ficha de matrícula y asistencia de un alumno/a, para llevar a una reunión.'})}</p>
                               <select id="ficha_al_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold">
                                 {activeAlumnado.map((al: Alumnado) => (
                                   <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre} ({al.ID})</option>

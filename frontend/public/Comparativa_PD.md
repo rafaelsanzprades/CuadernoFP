@@ -47,7 +47,7 @@
 | 20 | Infraestructura y recursos disponibles | — | §J · Materiales y recursos didácticos | §2.1 · Centro educativo |
 | 21 | Conexión con empresas locales | — | — | §2.1 · Centro educativo — Entorno socioeconómico |
 
-### Pestaña: Dual FEOE
+### Pestaña: Plan FEOE
 
 Ver bloque «Curso: Calendario — Pestaña: Periodo FEOE» más abajo para los campos de fechas/horas de la FEOE; esta pestaña de Contexto recoge la parte normativa (modalidad, régimen dual, seguimiento).
 
@@ -105,7 +105,7 @@ Planes de adaptación ante situaciones excepcionales — mapea a §N · Plan de 
 
 Matriz de contribución de cada RA a los Objetivos Generales (OG) del título — no tiene apartado propio en PD-/PD=/PD+, se usa como herramienta interna de coherencia curricular.
 
-### Pestaña: Ponderación RA y CE
+### Pestaña: OG<-RA<-CE
 
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|

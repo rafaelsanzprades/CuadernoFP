@@ -248,8 +248,8 @@ export function VerificacionTab() {
       id: "instr",
       icon: <Wrench className="w-5 h-5" />,
       title: t('campos.verificacion.instrumentosIndicadoresTitulo', {defaultValue: 'Instrumentos e Indicadores'}),
-      href: "/archivos?tab=autores",
-      hrefLabel: t('nav.archivos', {defaultValue: 'Archivos'}),
+      href: "/instrumentos?tab=resumen",
+      hrefLabel: t('nav.instrumentos', {defaultValue: 'Instrumento'}),
       status: (instrCount === 0 || indCount === 0) ? "empty" : indSinCE > 0 ? "warning" : "ok",
       lines: (instrCount === 0 || indCount === 0)
         ? [t('campos.verificacion.sinInstrumentosIndicadores', {defaultValue: 'No hay instrumentos o indicadores'})]
@@ -257,8 +257,6 @@ export function VerificacionTab() {
           t('campos.verificacion.instrumentosIndicadoresCount', {instr: instrCount, ind: indCount, defaultValue: '{{instr}} instrumentos y {{ind}} indicadores'}),
           indSinCE > 0 ? t('campos.verificacion.indicadoresSinCe', {count: indSinCE, defaultValue: '{{count}} indicadores sin CE asociado'}) : t('campos.verificacion.todosLosIndicadoresEvaluanCe', {defaultValue: 'Todos los indicadores evalúan algún CE'}),
         ],
-      actionHref: (instrCount === 0 || indCount === 0) ? "/archivos?tab=autores" : undefined,
-      actionLabel: (instrCount === 0 || indCount === 0) ? t('botones.verificacion.importarDeEditorial', {defaultValue: 'Importar de un editorial'}) : undefined,
     },
     {
       id: "tareas",

@@ -255,14 +255,14 @@
     "normativa": {
       "autonomias": {
         "label": "Comunitats autònomes",
-        "desc": "Legislació autonòmica i normativa específica."
+        "desc": "Documents i plantilles descarregables de la teua comunitat autònoma, organitzats per grau."
       },
       "bibliografia": {
         "label": "Bibliografia",
         "desc": "Índex de lleis, decrets i ordres estatals i autonòmiques d'FP, amb enllaç al butlletí oficial."
       },
       "legislacion": {
-        "desc": "Documents i plantilles descarregables de la teua comunitat autònoma, organitzats per grau."
+        "desc": "Legislació autonòmica i normativa específica."
       },
       "ecp-incual": {
         "label": "ECP INCUAL",
@@ -566,13 +566,6 @@
     "asistencia": {
       "errorGuardar": "Error en desar l'assistència."
     },
-    "autores": {
-      "errorGuardar": "Hi ha hagut un problema en desar la programació.",
-      "errorInyectar": "Error en incorporar les dades de la proposta.",
-      "jsonInvalido": "L'arxiu seleccionat no és un JSON vàlid o està corromput.",
-      "propuestaIncorporada": "Proposta incorporada correctament.",
-      "sinProgramacionActiva": "No tens cap programació activa. Obre la teva programació des de la pestanya Arxius abans d'incorporar una proposta."
-    },
     "bienvenida": {
       "archivosCreados": "Arxius creats correctament.",
       "cargandoDemo": "Carregant arxius de demostració...",
@@ -723,8 +716,6 @@
     },
     "catalogo": {
       "cursosAModulos": "Cursos → mòduls",
-      "incorporando": "Incorporant...",
-      "incorporarAProgramacion": "🚀 Incorporar a la programació",
       "nuevaProgramacion": "Nova programació"
     },
     "cloud": {
@@ -837,7 +828,6 @@
       "anadirPrimeraUd": "Afegir primera UD",
       "anadirPrimerRa": "Afegir primer RA",
       "revisarAsignaciones": "Revisar assignacions",
-      "importarDeEditorial": "Importar d'una editorial",
       "crearPrimeraTarea": "Crear primera tasca",
       "planificarSesiones": "Planificar sessions",
       "anadirContexto": "Afegir context",
@@ -2189,7 +2179,7 @@
       "modeloJegTitulo": "Model JEG.",
       "modeloJegDesc": "Nivell Instrument→Indicador→CE→RA→Mòdul de l'autor real de PD+ (Javier Edo Gual) — és el motor de qualificació real de l'app (butlletins, PDF i actes inclosos). En l'ús normal no cal tocar res aquí: en marcar una activitat sobre un CE a Instruments, l'Indicador corresponent es crea i es reparteix el pes sol. Aquesta pantalla és per a qui vulgui ajustar aquest repartiment a mà (diversos indicadors per CE, pesos diferents) o revisar què s'ha generat automàticament.",
       "indicadoresPorCeTitulo": "Indicadors per Criteri d'Avaluació",
-      "primeroAnadeCriterios": "Primer afegeix Criteris d'avaluació a Currículum → Ponderació RA i CE.",
+      "primeroAnadeCriterios": "Primer afegeix Criteris d'avaluació a Currículum → OG<-RA<-CE.",
       "sinIndicadoresTodavia": "Sense indicadors encara.",
       "gruposEvaluacionTitulo": "Grups d'avaluació (GEv)",
       "gruposEvaluacionDesc": "Subgrups d'alumnat (p. ex. pèrdua d'avaluació contínua): un instrument marcat amb un GEv només compta per a l'alumnat d'aquest mateix grup. Assigna el GEv de cada alumne a Alumnat → Matrícula.",
@@ -2226,35 +2216,6 @@
     "catalogo": {
       "tituloAcronimosGlosario": "Acrònims i glossari",
       "sinResultadosParaBusqueda": "No s'han trobat resultats per a \"{{termino}}\"",
-      "confirmacionSobrescribirPropuesta": "⚠️ ATENCIÓ: Aquesta acció sobreescriurà les teves Unitats didàctiques, Instruments, Sessions, Tasques i configuració del context per al mòdul actual.\n\nEstàs completament segur/a de continuar?",
-      "tituloCatalogoAutores": "Catàleg d'Autors i Editorials",
-      "descripcionCatalogoAutoresTexto1": "Explora plantilles completes (",
-      "descripcionCatalogoAutoresTexto2": ") proposades per editorials o autors per al mòdul ",
-      "descripcionCatalogoAutoresTexto3": ". Aquestes propostes poden incloure unitats didàctiques, instruments d'avaluació i seqüències d'aula.",
-      "tituloArchivosDisponibles": "Fitxers disponibles",
-      "buscandoPropuestas": "Cercant propostes...",
-      "sinArchivosFppTexto1": "No s'han trobat fitxers ",
-      "sinArchivosFppTexto2": " per a aquest mòdul a la teva carpeta Documents/Autors.",
-      "cargandoContenidoPropuesta": "Carregant contingut de la proposta...",
-      "tituloPrevisualizacionPropuesta": "Previsualització de la proposta",
-      "descripcionPrevisualizacionPropuesta": "Revisa el contingut abans d'incorporar-lo. Podràs editar-lo al teu gust un cop importat a la teva programació.",
-      "tituloModuloDidactico": "Mòdul didàctic",
-      "labelContexto": "Context:",
-      "definido": "Definit",
-      "noDefinido": "No definit",
-      "tituloMatricesOgRaCeUd": "Matrius OG → RA → CE → UD/T",
-      "unidadesDidacticasPropuestas": "Unitats didàctiques proposades:",
-      "sinDescripcion": "(Sense descripció)",
-      "labelMapeoRaOg": "Mapatge RA-OG:",
-      "incluido": "Inclòs",
-      "noIncluido": "No inclòs",
-      "tituloInstrumentosEvaluacion": "Instruments d'avaluació",
-      "instrumentosPredefinidos": "Instruments predefinits.",
-      "tituloProgramacionAula": "Programació d'aula",
-      "sesionesPlanificadas": "Sessions planificades.",
-      "tareasCompetencialesDisenadas": "Tasques competencials dissenyades.",
-      "tituloNingunFicheroSeleccionado": "Cap fitxer seleccionat",
-      "descripcionSeleccionaArchivoFpp": "Selecciona un fitxer `.fpp` de la llista de l'esquerra per previsualitzar-ne tot el contingut abans d'incorporar-lo a la teva programació.",
       "tituloMapaCcaa": "Mapa de CCAA amb currículum FP",
       "instruccionMapaCcaa": "Fes clic en una comunitat per veure'n el detall. Font: ",
       "badgeDemo": "DEMO",
@@ -2864,7 +2825,7 @@
       "progresoAlumnadoTitulo": "Progrés de l'alumnat",
       "generaInformeAvanceDesc": "Genera un informe de l'avenç de l'alumnat.",
       "fichaIndividualTitulo": "Fitxa individual",
-      "fichaIndividualDesc": "Fitxa de matrícula + tutoria d'un alumne/a, per portar a una reunió d'orientació.",
+      "fichaIndividualDesc": "Fitxa de matrícula i assistència d'un alumne/a, per portar a una reunió.",
       "seguimientoLabel": "Seguiment",
       "seguimientoDesc": "Diari de classes, seqüenciació per UD i planificació mensual.",
       "seguimientoDiarioTitulo": "Seguiment diari",
