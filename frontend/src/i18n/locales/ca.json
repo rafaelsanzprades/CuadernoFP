@@ -1861,7 +1861,7 @@
       "coordinacionModulosDesc": "Com es coordina aquest mòdul amb altres mòduls/professorat del cicle (reunions d'equip docent, dependències entre mòduls, substitució de tasques en cas d'absència, etc.).",
       "coordinacionModulosTitulo": "Coordinació amb altres mòduls i el seu professorat",
       "cpeTitulo": "Competències professionals i per a l'ocupabilitat (CPE)",
-      "criteriosCompensablesDescPost": " = qualsevol CE suspès del RA topa la seva nota just per sota de l'aprovat (comportament estricte); puja aquest número per permetre compensar N criteris suspesos dins del mateix RA. Quan el topall està actiu per a un alumne, apareix marcat a Seguiment → Detall per alumnat.",
+      "criteriosCompensablesDescPost": " = qualsevol CE suspès del RA topa la seva nota just per sota de l'aprovat (comportament estricte); puja aquest número per permetre compensar N criteris suspesos dins del mateix RA. Quan el topall està actiu per a un alumne, apareix marcat a Seguiment → Detall per alumnat. Exemple amb 0: CE1.a=9.0 i CE1.b=4.9 al 50% donen una mitjana de 6.95, però com que CE1.b està suspès el RA es topa en 4.9, no en 6.95.",
       "criteriosCompensablesDescPre": "Nombre màxim de criteris suspesos que es permeten per aprovar un RA. ",
       "criteriosCompensablesRA": "Criteris compensables per RA",
       "cursoLabel": "Curs",

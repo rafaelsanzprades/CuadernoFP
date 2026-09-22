@@ -1859,7 +1859,7 @@
       "coordinacionModulosDesc": "Modulu hau zikloko beste modulu/irakasleekin nola koordinatzen den (irakasle-taldearen bilerak, moduluen arteko mendekotasunak, zereginen ordezkapena absentzia kasuan, etab.).",
       "coordinacionModulosTitulo": "Beste moduluekiko eta haien irakasleekiko koordinazioa",
       "cpeTitulo": "Konpetentzia profesionalak eta enplegagarritasunerakoak (CPE)",
-      "criteriosCompensablesDescPost": " = RAren edozein CE gainditu gabek bere nota gainditzearen azpitik topatuko du (portaera zorrotza); igo zenbaki hau RA berean N irizpide gainditu gabe konpentsatzeko aukera emateko. Muga ikasle batentzat aktibo dagoenean, Jarraipena → Ikaslez ikasleko xehetasunean markatuta agertzen da.",
+      "criteriosCompensablesDescPost": " = RAren edozein CE gainditu gabek bere nota gainditzearen azpitik topatuko du (portaera zorrotza); igo zenbaki hau RA berean N irizpide gainditu gabe konpentsatzeko aukera emateko. Muga ikasle batentzat aktibo dagoenean, Jarraipena → Ikaslez ikasleko xehetasunean markatuta agertzen da. Adibidea 0rekin: CE1.a=9.0 eta CE1.b=4.9, %50ean, batez besteko 6.95 ematen dute, baina CE1.b gainditu gabe dagoenez RA 4.9an topatzen da, ez 6.95ean.",
       "criteriosCompensablesDescPre": "RA bat gainditzeko onartzen den gehienezko gainditu gabeko irizpide kopurua. ",
       "criteriosCompensablesRA": "RAka konpentsagarriak diren irizpideak",
       "cursoLabel": "Ikastaroa",

@@ -1859,7 +1859,7 @@
       "coordinacionModulosDesc": "Como se coordina este módulo con outros módulos/profesorado do ciclo (reunións de equipo docente, dependencias entre módulos, substitución de tarefas en caso de ausencia, etc.).",
       "coordinacionModulosTitulo": "Coordinación con outros módulos e o seu profesorado",
       "cpeTitulo": "Competencias profesionais e para a empregabilidade (CPE)",
-      "criteriosCompensablesDescPost": " = calquera CE suspenso do RA topa a súa nota xusto por debaixo do aprobado (comportamento estrito); sobe este número para permitir compensar N criterios suspensos dentro do mesmo RA. Cando o tope está activo para un alumno, aparece marcado en Seguimento → Detalle por alumnado.",
+      "criteriosCompensablesDescPost": " = calquera CE suspenso do RA topa a súa nota xusto por debaixo do aprobado (comportamento estrito); sobe este número para permitir compensar N criterios suspensos dentro do mesmo RA. Cando o tope está activo para un alumno, aparece marcado en Seguimento → Detalle por alumnado. Exemplo con 0: CE1.a=9.0 e CE1.b=4.9 ao 50% dan unha media de 6.95, pero como CE1.b está suspenso o RA tópase en 4.9, non en 6.95.",
       "criteriosCompensablesDescPre": "Número máximo de Criterios suspensos que se permiten para aprobar un RA. ",
       "criteriosCompensablesRA": "Criterios compensables por RA",
       "cursoLabel": "Curso",

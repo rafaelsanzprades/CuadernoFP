@@ -421,7 +421,7 @@ export function DatosTab() {
                   onChange={(e) => updateModuleData("config_redondeo", { ...config, max_compensables: parseInt(e.target.value) })}
                   className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
                 />
-                <p className="text-caption text-muted">{t('campos.modulo.criteriosCompensablesDescPre', {defaultValue: 'Número máximo de Criterios suspensos que se permiten para aprobar un RA. '})}<strong>0</strong>{t('campos.modulo.criteriosCompensablesDescPost', {defaultValue: ' = cualquier CE suspenso del RA topa su nota justo por debajo del aprobado (comportamiento estricto); sube este número para permitir compensar N criterios suspensos dentro del mismo RA. Cuando el tope está activo para un alumno, aparece marcado en Seguimiento → Detalle por alumnado.'})}</p>
+                <p className="text-caption text-muted">{t('campos.modulo.criteriosCompensablesDescPre', {defaultValue: 'Número máximo de Criterios suspensos que se permiten para aprobar un RA. '})}<strong>0</strong>{t('campos.modulo.criteriosCompensablesDescPost', {defaultValue: ' = cualquier CE suspenso del RA topa su nota justo por debajo del aprobado (comportamiento estricto); sube este número para permitir compensar N criterios suspensos dentro del mismo RA. Cuando el tope está activo para un alumno, aparece marcado en Seguimiento → Detalle por alumnado. Ejemplo con 0: CE1.a=9.0 y CE1.b=4.9 al 50% dan una media de 6.95, pero al estar CE1.b suspenso el RA se topa en 4.9, no en 6.95.'})}</p>
               </div>
             </div>
           );
