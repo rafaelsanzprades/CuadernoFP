@@ -1,10 +1,11 @@
 "use client";
 import { AlertTriangle, TrendingDown, Users, Calendar, CheckCircle2, XCircle } from "lucide-react";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo } from "react";
 import { Card } from "@/components/ui/Card";
 import { useAppStore } from "@/store/useAppStore";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, filtrarPorGev } from "@/utils/calificaciones";
+import { flattenAttendanceLedger } from "@/utils/attendance";
 import { useTranslation } from "react-i18next";
 
 /**
@@ -21,13 +22,11 @@ import { useTranslation } from "react-i18next";
  * -- campos que no existen en el esquema real (siempre `{}`, así que nunca
  * salía ninguna alerta) -- y `alumno.id`/`alumno.Apellido1`/`alumno.Apellido2`,
  * que tampoco existen en AlumnadoSchema (`ID`, `Apellidos`). Ahora usa las
- * mismas fuentes reales que el resto de la app: asistencia de la API
- * (`GET /api/attendance/{activeModuleId}`, igual que AttendanceAccumulated.tsx)
- * y Motor JEG (`calcularNotasJEG`, filtrado por GEv) para las notas.
+ * mismas fuentes reales que el resto de la app: asistencia de
+ * `cursoData.attendance_ledger` (100% local desde 2026-09-22, Ítem 45,
+ * igual que AttendanceAccumulated.tsx) y Motor JEG (`calcularNotasJEG`,
+ * filtrado por GEv) para las notas.
  */
-
-type AttendanceStatus = "presente" | "falta" | "retraso" | null;
-interface AttendanceRecord { student_id: string; date_str: string; status: AttendanceStatus }
 
 interface AlumnoAlerta {
   id: string;
@@ -41,16 +40,8 @@ interface AlumnoAlerta {
 
 export function AlertaAbandonoTab() {
   const { t } = useTranslation();
-  const { cursoData, moduleData, activeModuleId } = useAppStore();
-  const [attendanceData, setAttendanceData] = useState<AttendanceRecord[]>([]);
-
-  useEffect(() => {
-    if (!activeModuleId) return;
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/attendance/${activeModuleId}`)
-      .then((res) => res.json())
-      .then((data) => setAttendanceData(Array.isArray(data) ? data : []))
-      .catch((err) => console.error("Error fetching attendance", err));
-  }, [activeModuleId]);
+  const { cursoData, moduleData } = useAppStore();
+  const attendanceData = useMemo(() => flattenAttendanceLedger(cursoData?.attendance_ledger), [cursoData?.attendance_ledger]);
 
   const alumnos = cursoData?.df_al || [];
   const df_ra = moduleData?.df_ra || [];

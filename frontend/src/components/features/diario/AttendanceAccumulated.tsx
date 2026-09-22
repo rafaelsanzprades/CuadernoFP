@@ -1,47 +1,21 @@
 import { AlertCircle, Clock, OctagonAlert } from "lucide-react";
-import React, { useState, useEffect } from 'react';
+import React, { useMemo } from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { MotionWrapper } from '@/components/ui/MotionWrapper';
 import { Card } from '@/components/ui/Card';
 import { useTranslation } from 'react-i18next';
-
-type AttendanceStatus = 'presente' | 'falta' | 'retraso' | null;
-
-interface AttendanceRecord {
-  student_id: string;
-  date_str: string;
-  status: AttendanceStatus;
-}
+import { flattenAttendanceLedger } from '@/utils/attendance';
 
 export const AttendanceAccumulated = () => {
   const { t } = useTranslation();
-  const { cursoData, moduleData, activeModuleId } = useAppStore();
-  const [attendanceData, setAttendanceData] = useState<AttendanceRecord[]>([]);
-  const [loading, setLoading] = useState(false);
+  const { cursoData, moduleData } = useAppStore();
 
   const alumnado = cursoData?.df_al || [];
   const menores = alumnado.filter((a: any) => (a.Edad ?? 18) < 18).length;
   const info_fechas = cursoData?.info_fechas || {};
   const info_modulo = moduleData?.info_modulo || {};
 
-  useEffect(() => {
-    if (activeModuleId) {
-      fetchAttendance();
-    }
-  }, [activeModuleId]);
-
-  const fetchAttendance = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/attendance/${activeModuleId}`);
-      const data = await res.json();
-      setAttendanceData(data);
-    } catch (err) {
-      console.error("Error fetching attendance", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const attendanceData = useMemo(() => flattenAttendanceLedger(cursoData?.attendance_ledger), [cursoData?.attendance_ledger]);
 
   const isDateInPeriod = (dateStr: string, startStr: string, endStr: string) => {
     if (!startStr || !endStr || !dateStr) return false;
@@ -143,7 +117,7 @@ export const AttendanceAccumulated = () => {
                 <th className="p-4 font-semibold w-32">{t('tablas.diario.progreso', {defaultValue: 'Progreso'})}</th>
               </tr>
             </thead>
-            <tbody className={loading ? 'opacity-50' : ''}>
+            <tbody>
               {alumnado.map((alumnado, index) => {
                 const studentId = alumnado.student_id || alumnado.ID || String(index);
                 const studentRecords = attendanceData.filter(r => r.student_id === studentId && r.status === 'falta');

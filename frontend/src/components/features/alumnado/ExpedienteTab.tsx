@@ -4,6 +4,7 @@ import { Scale, CalendarX2, BookOpen, GraduationCap, HelpCircle, Filter } from "
 import { useAppStore } from "@/store/useAppStore";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { buildExpediente, EventoExpediente, TipoEvento } from "@/utils/expediente";
+import { flattenAttendanceLedger } from "@/utils/attendance";
 import { Card } from "@/components/ui/Card";
 import { useTranslation } from "react-i18next";
 
@@ -26,18 +27,10 @@ function getTipoInfo(t: (key: string, opts?: any) => string): Record<TipoEvento,
 export function ExpedienteTab() {
   const { t } = useTranslation();
   const TIPO_INFO = useMemo(() => getTipoInfo(t), [t]);
-  const { cursoData, moduleData, activeModuleId } = useAppStore();
+  const { cursoData, moduleData } = useAppStore();
   const [selectedStudentId, setSelectedStudentId] = useState<string>("");
   const [tiposActivos, setTiposActivos] = useState<Set<TipoEvento>>(new Set(TODOS_LOS_TIPOS));
-  const [attendanceRecords, setAttendanceRecords] = useState<{ student_id: string; date_str: string; status: string }[]>([]);
-
-  useEffect(() => {
-    if (!activeModuleId) return;
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/attendance/${activeModuleId}`)
-      .then((res) => res.json())
-      .then((data) => setAttendanceRecords(Array.isArray(data) ? data : []))
-      .catch((err) => console.error("Error fetching attendance", err));
-  }, [activeModuleId]);
+  const attendanceRecords = useMemo(() => flattenAttendanceLedger(cursoData?.attendance_ledger), [cursoData?.attendance_ledger]);
 
   const df_al = cursoData?.df_al || [];
   const activeStudents = [...df_al.filter(isAlumnoActivo)].sort(

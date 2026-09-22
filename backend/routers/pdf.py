@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException, Response
 from sqlalchemy.orm import Session
 import pandas as pd
 from database import get_db
-from models import ModuleDocument, AttendanceRecord
+from models import ModuleDocument
 
 from pydantic import BaseModel
 from typing import Dict, Any, Optional
@@ -26,25 +26,22 @@ class PdfRequest(BaseModel):
 router = APIRouter(prefix="/api/pdf", tags=["PDF Generation"])
 
 
-def _compute_attendance_summary(db: Session, module_document_id: Optional[str], al_id: str):
-    """Resumen best-effort de asistencia para la Ficha individual. Devuelve
-    None si no se aporta module_document_id o no hay registros: la
-    asistencia vive en la tabla attendance_records, no en module_data/
-    curso_data, así que solo está disponible si el frontend la indica."""
-    if not module_document_id:
+def _compute_attendance_summary(curso_data: Dict[str, Any], al_id: str):
+    """Resumen best-effort de asistencia para la Ficha individual. La
+    asistencia vive en curso_data["attendance_ledger"] (local, como el resto
+    del curso -- ver Ítem 45 de 00 IDEAS.md, 2026-09-22: antes vivía en la
+    tabla attendance_records del servidor, migrada a local para no
+    contradecir "el servidor es ciego"). Estructura del ledger:
+    { fecha: { alumno_id: "presente"|"falta"|"retraso"|"" } }."""
+    ledger = curso_data.get("attendance_ledger") or {}
+    if not ledger:
         return None
-    try:
-        records = db.query(AttendanceRecord).filter(
-            AttendanceRecord.module_document_id == module_document_id,
-            AttendanceRecord.student_id == al_id,
-        ).all()
-    except Exception:
+    estados = [dia.get(al_id) for dia in ledger.values() if isinstance(dia, dict) and dia.get(al_id)]
+    if not estados:
         return None
-    if not records:
-        return None
-    faltas = sum(1 for r in records if r.status == "falta")
-    retrasos = sum(1 for r in records if r.status == "retraso")
-    total = len(records)
+    faltas = sum(1 for s in estados if s == "falta")
+    retrasos = sum(1 for s in estados if s == "retraso")
+    total = len(estados)
     pct_faltas = (faltas / total * 100) if total else 0.0
     return {"faltas": faltas, "retrasos": retrasos, "pct_faltas": pct_faltas}
 
@@ -157,7 +154,7 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             elif type == "ficha_alumnado":
                 if not al_id: raise HTTPException(status_code=400, detail="al_id is required for ficha_alumnado")
                 from pdf_ficha_alumnado import generar_docx_ficha_alumnado
-                attendance_summary = _compute_attendance_summary(db, extra.get("module_document_id"), al_id)
+                attendance_summary = _compute_attendance_summary(curso_data, al_id)
                 docx_bytes = generar_docx_ficha_alumnado(info_modulo, al_id, df_al, attendance_summary)
             elif type == "reclamacion_notas":
                 if not al_id or not item_id:
@@ -225,7 +222,7 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
             buffer = generar_pdf_alumnado_ubicacion(info_modulo, plano_clase, df_al)
         elif type == "ficha_alumnado":
             if not al_id: raise HTTPException(status_code=400, detail="al_id is required for ficha_alumnado")
-            attendance_summary = _compute_attendance_summary(db, extra.get("module_document_id"), al_id)
+            attendance_summary = _compute_attendance_summary(curso_data, al_id)
             buffer = generar_pdf_ficha_alumnado(info_modulo, al_id, df_al, attendance_summary)
         elif type == "reclamacion_notas":
             if not al_id or not item_id:
