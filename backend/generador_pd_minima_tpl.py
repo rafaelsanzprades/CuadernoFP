@@ -35,10 +35,20 @@ def _build_context(data: dict) -> dict:
     ra_desc_map = build_ra_desc_map(data)
     ud_desc_map = build_ud_desc_map(data)
 
+    # Ítem 48 (00 IDEAS.md): la plantilla no tenía ningún tag para
+    # "Departamento / Área" (Mimo señaló que `Comparativa_PD.md` lo daba por
+    # existente; comprobado que no había ni el tag ni el dato) -- se añade el
+    # tag a la plantilla y se deriva aquí igual que `departamento_pedagogico`
+    # en generador_pd_suficiente_tpl.py: la familia profesional real del
+    # módulo, resuelta por el catálogo oficial en routers/pdf.py.
+    familia = data.get("familia") or (data.get("info_modulo") or {}).get("familia", "")
+    departamento_area = familia or data.get("departamento", "")
+
     context = {
         "modulo": modulo,
         "ciclo": ciclo,
         "curso_academico": curso,
+        "departamento_area": departamento_area,
     }
 
     # ── H1 1: Perfil profesional ───────────────────────────────────────
