@@ -322,6 +322,11 @@ export const CursoDataSchema = z.object({
   df_reclamaciones: z.array(ReclamacionSchema).optional(),
   df_feoe: z.array(z.any()).optional(),
   daily_ledger: z.record(z.string(), z.any()).optional(),
+  // Asistencia (presente/falta/retraso) por fecha y alumno/a. Antes vivía en
+  // el servidor (tabla attendance_records) -- migrado a local el 2026-09-22
+  // (Ítem 45, 00 IDEAS.md) porque contradecía "el servidor es ciego".
+  // Forma: { [fecha_ISO]: { [alumno_ID]: "presente"|"falta"|"retraso"|"" } }
+  attendance_ledger: z.record(z.string(), z.any()).optional(),
   profesional_ledger: z.record(z.string(), z.any()).optional(),
   horario: z.record(z.string(), z.any()).optional(),
   info_fechas: z.record(z.string(), z.any()).optional(),

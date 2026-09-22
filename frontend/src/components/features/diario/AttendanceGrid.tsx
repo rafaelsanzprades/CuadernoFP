@@ -1,84 +1,38 @@
 import { AlertCircle, CheckCircle, ChevronLeft, ChevronRight, Clock, XCircle } from "lucide-react";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { MotionWrapper } from '@/components/ui/MotionWrapper';
 import { format, subDays, addDays } from 'date-fns';
-import toast from 'react-hot-toast';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { useTranslation } from 'react-i18next';
 import { useDateFnsLocale, useDateFormatPatterns } from '@/hooks/useDateFnsLocale';
-
-type AttendanceStatus = 'presente' | 'falta' | 'retraso' | null;
+import { AttendanceStatus, getAttendanceForDate, withAttendanceStatus } from '@/utils/attendance';
 
 export const AttendanceGrid = () => {
-  const { cursoData, activeModuleId, dataSource } = useAppStore();
+  const { cursoData, dataSource, updateCursoData } = useAppStore();
   const { t } = useTranslation();
   const dateFnsLocale = useDateFnsLocale();
   const dateFormats = useDateFormatPatterns();
   const isDemo = dataSource === 'demo';
   const [currentDate, setCurrentDate] = useState(isDemo ? new Date(new Date().getFullYear(), 4, 2, 10, 0, 0) : new Date());
-  const [attendanceData, setAttendanceData] = useState<Record<string, AttendanceStatus>>({});
-  const [loading, setLoading] = useState(false);
   const parentRef = useRef<HTMLDivElement>(null);
 
   const alumnado = cursoData?.df_al || [];
   const menores = alumnado.filter(a => (a.Edad ?? 18) < 18).length;
 
   const dateStr = format(currentDate, 'yyyy-MM-dd');
+  const ledger = cursoData?.attendance_ledger;
+  const attendanceData = getAttendanceForDate(ledger, dateStr);
 
-  useEffect(() => {
-    if (activeModuleId) {
-      fetchAttendance();
-    }
-  }, [activeModuleId, dateStr]);
-
-  const fetchAttendance = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/attendance/${activeModuleId}?date_str=${dateStr}`);
-      const data = await res.json();
-      const newAtt: Record<string, AttendanceStatus> = {};
-      data.forEach((record: any) => {
-        newAtt[record.student_id] = record.status as AttendanceStatus;
-      });
-      setAttendanceData(newAtt);
-    } catch (err) {
-      console.error("Error fetching attendance", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const toggleAttendance = async (studentId: string, currentStatus: AttendanceStatus) => {
-    if (!activeModuleId) return;
-
-    // Cycle: null -> presente -> falta -> retraso -> null
-    let nextStatus: AttendanceStatus = null;
-    if (currentStatus === null) nextStatus = 'presente';
+  const toggleAttendance = (studentId: string, currentStatus: AttendanceStatus) => {
+    // Cycle: '' -> presente -> falta -> retraso -> ''
+    let nextStatus: AttendanceStatus = '';
+    if (currentStatus === '') nextStatus = 'presente';
     else if (currentStatus === 'presente') nextStatus = 'falta';
     else if (currentStatus === 'falta') nextStatus = 'retraso';
-    else nextStatus = null; // back to null
+    else nextStatus = '';
 
-    // Optimistic update
-    setAttendanceData(prev => ({ ...prev, [studentId]: nextStatus }));
-
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/attendance/`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          module_document_id: activeModuleId,
-          student_id: studentId,
-          date_str: dateStr,
-          status: nextStatus || '' 
-        })
-      });
-      if (!res.ok) throw new Error("Failed to save");
-    } catch (err) {
-      toast.error(t('toasts.asistencia.errorGuardar', {defaultValue: "Error al guardar la asistencia."}));
-      // Rollback
-      setAttendanceData(prev => ({ ...prev, [studentId]: currentStatus }));
-    }
+    updateCursoData('attendance_ledger', withAttendanceStatus(ledger, dateStr, studentId, nextStatus));
   };
 
   const getStatusColor = (status: AttendanceStatus) => {
@@ -128,7 +82,7 @@ export const AttendanceGrid = () => {
       </div>
 
       <MotionWrapper className="glass-panel overflow-hidden">
-        <div 
+        <div
           ref={parentRef}
           className="overflow-x-auto overflow-y-auto"
           style={{ maxHeight: '600px' }}
@@ -142,8 +96,7 @@ export const AttendanceGrid = () => {
                 <th className="p-4 font-semibold text-center w-48">{t('common.estado', {defaultValue: 'Estado'})}</th>
               </tr>
             </thead>
-            <tbody 
-              className={loading ? 'opacity-50' : ''}
+            <tbody
               style={{
                 height: `${rowVirtualizer.getTotalSize()}px`,
                 position: 'relative',
@@ -153,11 +106,11 @@ export const AttendanceGrid = () => {
                 const index = virtualRow.index;
                 const al = alumnado[index];
                 const studentId = al.student_id || al.ID || String(index);
-                const status = attendanceData[studentId] || null;
-                
+                const status = attendanceData[studentId] || '';
+
                 return (
-                  <tr 
-                    key={virtualRow.key} 
+                  <tr
+                    key={virtualRow.key}
                     data-index={index}
                     ref={rowVirtualizer.measureElement}
                     className="border-b border-[var(--glass-border)]/50 hover:bg-foreground/5 transition-colors absolute top-0 left-0 w-full flex"
@@ -171,7 +124,7 @@ export const AttendanceGrid = () => {
                       {al.Apellidos}, {al.Nombre}
                     </td>
                     <td className="p-4 text-center w-48 flex items-center justify-center shrink-0">
-                      <button 
+                      <button
                         id={`attendance-btn-${index}`}
                         data-row-index={index}
                         onClick={() => toggleAttendance(studentId, status)}
