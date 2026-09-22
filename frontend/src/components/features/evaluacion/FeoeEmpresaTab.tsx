@@ -189,9 +189,14 @@ export function FeoeEmpresaTab() {
         {df_ra.length === 0 ? (
           <p className="text-body text-muted">{t('campos.feoe.sinRaCe', {defaultValue: 'No hay RA/CE cargados en este módulo todavía.'})}</p>
         ) : raConDesignados.length === 0 ? (
-          <p className="text-body text-muted">
-            {t('campos.feoe.ningunCeMarcadoDesc', {defaultValue: 'Todavía no hay ningún CE marcado como FEOE. Márcalos en Currículo -> OG<-RA<-CE (columna "FEOE").'})}
-          </p>
+          <div className="space-y-2">
+            <p className="text-body text-muted">
+              {t('campos.feoe.ningunCeMarcadoDesc', {defaultValue: 'Este módulo no está dualizado todavía: no hay ningún CE marcado como FEOE. Márcalos en Currículo -> OG<-RA<-CE (columna "FEOE").'})}
+            </p>
+            <Link href="/contexto?tab=plan-feoe" className="text-caption text-info hover:underline inline-block">
+              {t('botones.feoe.configurarEnPlanFeoe', {defaultValue: 'Configurar horas y régimen en Plan FEOE'})}
+            </Link>
+          </div>
         ) : (
           <div className="space-y-4">
             {raConDesignados.map((ra: any) => {
@@ -221,12 +226,19 @@ export function FeoeEmpresaTab() {
 
       {ceDesignados.length === 0 ? (
         <Card className="p-8 text-center border-l-4 border-l-amber-500">
-          <p className="text-foreground/80">{t('campos.feoe.marcaAlMenosUnCe', {defaultValue: 'Marca al menos un CE como FEOE en Currículo -> OG<-RA<-CE para empezar a registrar valoraciones de empresa.'})}</p>
-          <Link href="/curriculo?tab=ponderacion-ra-ce" className="inline-block mt-4">
-            <Button variant="secondary" className="gap-2">
-              <GraduationCap className="w-4 h-4" /> {t('botones.feoe.gestionarEnCurriculo', {defaultValue: 'Gestionar en Currículo'})}
-            </Button>
-          </Link>
+          <p className="text-foreground/80">{t('campos.feoe.marcaAlMenosUnCe', {defaultValue: 'Este módulo no está dualizado: marca al menos un CE como FEOE en Currículo -> OG<-RA<-CE para empezar a registrar valoraciones de empresa.'})}</p>
+          <div className="flex items-center justify-center gap-3 mt-4">
+            <Link href="/curriculo?tab=ponderacion-ra-ce">
+              <Button variant="secondary" className="gap-2">
+                <GraduationCap className="w-4 h-4" /> {t('botones.feoe.gestionarEnCurriculo', {defaultValue: 'Gestionar en Currículo'})}
+              </Button>
+            </Link>
+            <Link href="/contexto?tab=plan-feoe">
+              <Button variant="secondary" className="gap-2">
+                <Building2 className="w-4 h-4" /> {t('botones.feoe.configurarEnPlanFeoe', {defaultValue: 'Configurar horas y régimen en Plan FEOE'})}
+              </Button>
+            </Link>
+          </div>
         </Card>
       ) : activeStudents.length === 0 ? (
         <Card className="p-8 text-center border-l-4 border-l-yellow-500">

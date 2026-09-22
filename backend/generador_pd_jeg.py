@@ -15,6 +15,7 @@ from docxtpl import DocxTemplate
 from helpers_catalogo import (
     build_ra_desc_map, build_ud_desc_map, build_ce_desc_map,
     resolve_ra_desc, resolve_ud_desc, resolve_ce_desc, resolve_recursos,
+    resolve_feoe_dual,
 )
 
 TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), 'templates', 'modelo_pd_jeg_tpl_final.docx')
@@ -325,13 +326,28 @@ def _build_context(data: dict) -> dict:
     context["organizacion_secuencial"] = config.get("organizacion_secuencial", "secuencial")
 
     # --- FEOE ---
-    is_dual = data.get("is_dual", False)
-    context["regimen_feoe"] = config.get("regimen_feoe", "general")
-    context["fecha_inicio_feoe"] = fechas.get("fecha_inicio_feoe", "")
-    context["fecha_fin_feoe"] = fechas.get("fecha_fin_feoe", "")
-    context["num_ra_feoe"] = str(config.get("num_ra_feoe", 0))
+    # Ítem 47 (00 IDEAS.md, decisión Rafael 2026-09-22): estos 3 tags ya
+    # existían en la plantilla pero leían de campos que ninguna pantalla de
+    # la app llega a escribir nunca (config.regimen_feoe/num_ra_feoe/
+    # organizacion_no_feoe, e is_dual a nivel de módulo -- resto de un
+    # campo de BD eliminado, ver alembic 0222ab355bfd) -- siempre caían en
+    # su valor por defecto. Se conectan aquí a datos reales: régimen desde
+    # Calendario->Periodo FEOE (info_fechas.tipo_dual), nº de RA dualizados
+    # desde is_dual del CE (resolve_feoe_dual, misma fuente de verdad que
+    # usa generador_pd_suficiente_tpl.py), y el texto para el alumnado no
+    # dualizado desde Plan FEOE (textos_pd_feoe_organizacion, con
+    # texto_feoe_trabajos_alternativos como respaldo si ese está vacío).
+    feoe = resolve_feoe_dual(data)
+    context["regimen_feoe"] = fechas.get("tipo_dual") or config.get("regimen_feoe", "general")
+    context["fecha_inicio_feoe"] = fechas.get("ini_feoe", "")
+    context["fecha_fin_feoe"] = fechas.get("fin_feoe", "")
+    context["num_ra_feoe"] = str(len(feoe["ra_ids_dual"]))
     context["num_total_ra"] = str(len(df_ra))
-    context["organizacion_no_feoe"] = config.get("organizacion_no_feoe", "")
+    context["organizacion_no_feoe"] = (
+        data.get("textos_pd_feoe_organizacion")
+        or config.get("texto_feoe_trabajos_alternativos", "")
+        or config.get("organizacion_no_feoe", "")
+    )
 
     # --- Metodologia ---
     met_list = data.get("metodologias_seleccionadas", [])

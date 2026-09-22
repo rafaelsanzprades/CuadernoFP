@@ -807,7 +807,8 @@
       "anadirAlumno": "Add student",
       "anadirMedidaContingencia": "Add contingency measure",
       "anadirMedidaDiversidad": "Add diversity measure",
-      "anadirTipoInstrumento": "Add assessment instrument type"
+      "anadirTipoInstrumento": "Add assessment instrument type",
+      "marcarCeComoFeoe": "Mark CE as FEOE in Curriculum"
     },
     "reclamaciones": {
       "confirmarResolucion": "Confirm resolution",
@@ -845,7 +846,8 @@
     "feoe": {
       "excelenteTodoA4": "Excellent (all to 4)",
       "suficienteTodoA3": "Sufficient (all to 3)",
-      "gestionarEnCurriculo": "Manage in Curriculum"
+      "gestionarEnCurriculo": "Manage in Curriculum",
+      "configurarEnPlanFeoe": "Configure hours and regime in FEOE Plan"
     },
     "inicio": {
       "unirseTelegram": "Join the Telegram group"
@@ -1812,6 +1814,7 @@
       "publicidadDesc": "How and where the programming will be published or can be consulted.",
       "publicidadTitulo": "Publication of the programming",
       "tituloFeoe": "FEOE. Training at a Company or Equivalent Organization",
+      "moduloNoDualizadoDesc": "This module isn't dualized yet: no CE has been marked as FEOE.",
       "feoeTextoSimplificadoTitulo": "FEOE (text specific to the Simplified model, pd=)",
       "feoeTextoSimplificadoAviso": "If left blank, it is auto-generated from the LOs marked as dualizable (is_dual).",
       "a1JustificacionDesc": "Legislative basis underpinning this curriculum plan.",
@@ -2626,9 +2629,9 @@
       "criteriosDesignadosTitulo": "Criteria designated for FEOE",
       "criteriosDesignadosDesc": "The CEs marked as FEOE in Curriculum are the ones the company tutor rates (Annex XI b) — you transcribe the result below, per student.",
       "sinRaCe": "No RA/CE loaded in this module yet.",
-      "ningunCeMarcadoDesc": "No CE has been marked as FEOE yet. Mark them in Curriculum -> OG<-RA<-CE (\"FEOE\" column).",
+      "ningunCeMarcadoDesc": "This module isn't dualized yet: no CE has been marked as FEOE. Mark them in Curriculum -> OG<-RA<-CE (\"FEOE\" column).",
       "delRaSufijo": "of the RA",
-      "marcaAlMenosUnCe": "Mark at least one CE as FEOE in Curriculum -> OG<-RA<-CE to start recording company assessments.",
+      "marcaAlMenosUnCe": "This module isn't dualized: mark at least one CE as FEOE in Curriculum -> OG<-RA<-CE to start recording company assessments.",
       "sinAlumnadoActivo": "No active students registered in this course.",
       "alumnadoActivoCount": "Active students ({{count}})",
       "rellenaConBotonDesc": "Fill in with one button and manually correct what's needed — it's just a starting point, not a final value.",
