@@ -809,7 +809,8 @@
       "anadirAlumno": "Afegir alumne",
       "anadirMedidaContingencia": "Afegir mesura de contingència",
       "anadirMedidaDiversidad": "Afegir mesura de diversitat",
-      "anadirTipoInstrumento": "Afegir tipus d'instrument d'avaluació"
+      "anadirTipoInstrumento": "Afegir tipus d'instrument d'avaluació",
+      "marcarCeComoFeoe": "Marcar CE com a FEOE a Currículum"
     },
     "reclamaciones": {
       "confirmarResolucion": "Confirmar resolució",
@@ -847,7 +848,8 @@
     "feoe": {
       "excelenteTodoA4": "Excel·lent (tot a 4)",
       "suficienteTodoA3": "Suficient (tot a 3)",
-      "gestionarEnCurriculo": "Gestionar a Currículum"
+      "gestionarEnCurriculo": "Gestionar a Currículum",
+      "configurarEnPlanFeoe": "Configurar hores i règim al Pla FEOE"
     },
     "inicio": {
       "unirseTelegram": "Unir-me al grup a Telegram"
@@ -1814,6 +1816,7 @@
       "publicidadDesc": "Com i on es publicarà o es podrà consultar la programació.",
       "publicidadTitulo": "Publicitat de la programació",
       "tituloFeoe": "FEOE. Formació en Empresa o Organisme Equiparat",
+      "moduloNoDualizadoDesc": "Aquest mòdul encara no està dualitzat: no hi ha cap CE marcat com a FEOE.",
       "feoeTextoSimplificadoTitulo": "FEOE (text específic model Simplificat, pd=)",
       "feoeTextoSimplificadoAviso": "Si es deixa buit, es genera automàticament a partir dels RA marcats com a dualitzables (is_dual).",
       "a1JustificacionDesc": "Base legislativa que fonamenta aquesta programació.",
@@ -2628,9 +2631,9 @@
       "criteriosDesignadosTitulo": "Criteris designats per a FEOE",
       "criteriosDesignadosDesc": "Els CE marcats com a FEOE a Currículum són els que valora el tutor d'empresa (Annex XI b) — tu transcrius el resultat més avall, per alumne.",
       "sinRaCe": "No hi ha RA/CE carregats en aquest mòdul encara.",
-      "ningunCeMarcadoDesc": "Encara no hi ha cap CE marcat com a FEOE. Marca'ls a Currículum -> OG<-RA<-CE (columna \"FEOE\").",
+      "ningunCeMarcadoDesc": "Aquest mòdul encara no està dualitzat: no hi ha cap CE marcat com a FEOE. Marca'ls a Currículum -> OG<-RA<-CE (columna \"FEOE\").",
       "delRaSufijo": "del RA",
-      "marcaAlMenosUnCe": "Marca almenys un CE com a FEOE a Currículum -> OG<-RA<-CE per començar a registrar valoracions d'empresa.",
+      "marcaAlMenosUnCe": "Aquest mòdul no està dualitzat: marca almenys un CE com a FEOE a Currículum -> OG<-RA<-CE per començar a registrar valoracions d'empresa.",
       "sinAlumnadoActivo": "No hi ha alumnat actiu registrat en aquest curs.",
       "alumnadoActivoCount": "Alumnat actiu ({{count}})",
       "rellenaConBotonDesc": "Omple amb un botó i corregeix a mà el que calgui — és només un punt de partida, no un valor definitiu.",

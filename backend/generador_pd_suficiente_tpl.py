@@ -14,6 +14,7 @@ from docxtpl import DocxTemplate
 from helpers_catalogo import (
     build_ra_desc_map, build_ud_desc_map, build_ce_desc_map,
     resolve_ra_desc, resolve_ud_desc, resolve_ce_desc, resolve_recursos,
+    resolve_feoe_dual, _norm_id,
 )
 from helpers_pd_tablas import insertar_tabla_instrumentos, insertar_tabla_planificacion
 
@@ -242,17 +243,41 @@ def _build_context(data: dict) -> dict:
     context["list_uf_items"] = list_uf_items
 
     # ── SECCIÓN B: FEOE ────────────────────────────────────────────────
+    # Ítem 47 (00 IDEAS.md, decisión Rafael 2026-09-22): la unidad real de
+    # dualización es el CE (is_dual), no el RA -- un RA puede tener solo
+    # parte de sus CE marcados. Dos ramas: para los RA con CE dualizados,
+    # se listan los CE concretos que evalúa el tutor de empresa (Anexo XI
+    # b); para el resto del módulo, se usa el texto de trabajos
+    # alternativos si el profesor lo ha rellenado (Plan FEOE).
     texto_feoe = config.get("texto_feoe", "")
     if not texto_feoe:
-        if df_ra:
-            ra_feoe = [ra for ra in df_ra if ra.get('is_dual')]
-            if ra_feoe:
-                ids = ", ".join(_ra_id_full(ra) for ra in ra_feoe)
-                texto_feoe = f"Los RA susceptibles de ser adquiridos en FEOE son: {ids}."
-            else:
-                texto_feoe = "No hay ningún RA dualizado."
+        feoe = resolve_feoe_dual(data)
+        trabajos_alt = config.get("texto_feoe_trabajos_alternativos", "")
+        if feoe["dualizado"]:
+            ce_by_ra = {}
+            for ce in feoe["ce_dual"]:
+                ce_by_ra.setdefault(_norm_id(str(ce.get("id_ra", ""))), []).append(ce)
+            partes_dual = []
+            for ra in df_ra:
+                ces_ra = ce_by_ra.get(_norm_id(str(ra.get("id_ra", ""))))
+                if not ces_ra:
+                    continue
+                ce_ids = ", ".join(str(ce.get("id_ce", "")) for ce in ces_ra)
+                partes_dual.append(f"{_ra_id_full(ra)} ({ce_ids})")
+            texto_feoe = (
+                "En el periodo de Formación en Empresas u Organismos Equiparados (FEOE), la "
+                "consecución de los siguientes RA se evalúa a partir de la valoración del tutor/a "
+                f"de la empresa u organismo equiparado, según el Anexo XI b: {'; '.join(partes_dual)}."
+            )
+            horas_imputadas = info_mod.get("horas_imputadas_feoe")
+            if horas_imputadas:
+                texto_feoe += f" Este módulo tiene imputadas {int(horas_imputadas)} horas lectivas al periodo FEOE."
+            ra_no_dual = [ra for ra in df_ra if _norm_id(str(ra.get("id_ra", ""))) not in feoe["ra_ids_dual"]]
+            if ra_no_dual and trabajos_alt:
+                ids_no_dual = ", ".join(_ra_id_full(ra) for ra in ra_no_dual)
+                texto_feoe += f" Para el resto del módulo ({ids_no_dual}), durante ese mismo periodo: {trabajos_alt}"
         else:
-            texto_feoe = "No hay ningún RA dualizado."
+            texto_feoe = trabajos_alt or "Este módulo no tiene ningún RA/CE dualizado; no se imparte en modalidad FEOE."
     # B3_vinculacion_empresa: mismo caso que A1/A2 -- texto real bajo un
     # nombre de campo heredado, se añade si existe.
     b3_vinculacion = config.get("B3_vinculacion_empresa", "")

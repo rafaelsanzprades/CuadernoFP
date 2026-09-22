@@ -482,19 +482,22 @@
       "id_ce": "CE3.a",
       "id_ra": "RA3",
       "id_ud": "UD01",
-      "peso_ce": 13
+      "peso_ce": 13,
+      "is_dual": true
     },
     {
       "id_ce": "CE3.b",
       "id_ra": "RA3",
       "id_ud": "UD01",
-      "peso_ce": 13
+      "peso_ce": 13,
+      "is_dual": true
     },
     {
       "id_ce": "CE3.c",
       "id_ra": "RA3",
       "id_ud": "UD01",
-      "peso_ce": 13
+      "peso_ce": 13,
+      "is_dual": true
     },
     {
       "id_ce": "CE3.d",
@@ -566,13 +569,15 @@
       "id_ce": "CE5.a",
       "id_ra": "RA5",
       "id_ud": "UD01",
-      "peso_ce": 17
+      "peso_ce": 17,
+      "is_dual": true
     },
     {
       "id_ce": "CE5.b",
       "id_ra": "RA5",
       "id_ud": "UD01",
-      "peso_ce": 17
+      "peso_ce": 17,
+      "is_dual": true
     },
     {
       "id_ce": "CE5.c",
@@ -1613,6 +1618,7 @@
     }
   },
   "config_contexto": {
+    "texto_feoe_trabajos_alternativos": "Para el alumnado sin RA/CE dualizados, se solicitan tareas competenciales y entregas del cuaderno de tareas equivalentes a las del resto del grupo durante ese periodo, revisadas por el profesor del módulo.",
     "A1_justificacion": "El presente módulo profesional se imparte dentro del ciclo formativo y aporta al alumnado los conocimientos, procedimientos y actitudes necesarios para el ejercicio profesional en el sector correspondiente, en coherencia con los Resultados de aprendizaje establecidos en el currículo oficial y en el marco de la normativa vigente de Formación Profesional.",
     "A2_contextualizacion": "El IES Andalán es un centro de titularidad pública situado en el barrio de La Almozara, en Zaragoza. La oferta académica del instituto es amplia y diversa, abarcando diferentes niveles de Educación Secundaria Obligatoria, Bachillerato y Formación Profesional (Familias de Administración y Gestión, y Electricidad y Electrónica). \\nUn rasgo distintivo de la identidad del centro es su compromiso con la inclusión, siendo un centro preferente para la escolarización de alumnado con Trastorno del Espectro Autista (TEA) y alumnado con discapacidad motora.",
     "B3_vinculacion_empresa": "El módulo mantiene una relación directa con el tejido empresarial y tecnológico de nuestro entorno. Las orientaciones metodológicas y las tareas competenciales diseñadas persiguen acercar al alumnado a la realidad del sector productivo, preparándolos técnica y actitudinalmente para el módulo de Formación en Empresa u Organismo Equiparado (FEOE) en las empresas colaboradoras de la especialidad.",

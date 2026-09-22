@@ -115,6 +115,29 @@ def resolve_ce_desc(ce: dict, desc_map: dict) -> str:
     return desc
 
 
+def resolve_feoe_dual(data: dict) -> dict:
+    """
+    Determina qué RA/CE de un módulo están dualizados (FEOE), usando is_dual
+    del CE como fuente de verdad única (no el is_dual del RA, que es un flag
+    independiente y puede desincronizarse -- ver RF Ideas/00 IDEAS.md, Ítem 47,
+    decisión de Rafael 2026-09-22: CE es la unidad real, un RA cuenta como
+    dualizado si tiene al menos 1 CE marcado, nunca al revés).
+
+    Devuelve:
+      - ce_dual: lista de dict de CE con is_dual=True
+      - ra_ids_dual: set de id_ra (normalizados) con >=1 CE dual
+      - dualizado: True si el módulo tiene al menos 1 CE marcado
+    """
+    df_ce = data.get("df_ce") or []
+    ce_dual = [ce for ce in df_ce if ce.get("is_dual")]
+    ra_ids_dual = {_norm_id(str(ce.get("id_ra", ""))) for ce in ce_dual if ce.get("id_ra")}
+    return {
+        "ce_dual": ce_dual,
+        "ra_ids_dual": ra_ids_dual,
+        "dualizado": bool(ce_dual),
+    }
+
+
 # Espejo en Python del catálogo de frontend/src/data/herramientasRecursos.ts,
 # para resolver los ids codificados que el profesorado marca en "Instrumentos
 # y recursos" a su etiqueta legible en el documento. Compartido entre

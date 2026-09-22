@@ -807,7 +807,8 @@
       "anadirAlumno": "Ikaslea gehitu",
       "anadirMedidaContingencia": "Kontingentzia-neurria gehitu",
       "anadirMedidaDiversidad": "Aniztasun-neurria gehitu",
-      "anadirTipoInstrumento": "Ebaluazio-tresna mota gehitu"
+      "anadirTipoInstrumento": "Ebaluazio-tresna mota gehitu",
+      "marcarCeComoFeoe": "Markatu CE FEOE gisa Curriculumean"
     },
     "reclamaciones": {
       "confirmarResolucion": "Ebazpena berretsi",
@@ -845,7 +846,8 @@
     "feoe": {
       "excelenteTodoA4": "Bikaina (dena 4ra)",
       "suficienteTodoA3": "Nahikoa (dena 3ra)",
-      "gestionarEnCurriculo": "Kudeatu Curriculumean"
+      "gestionarEnCurriculo": "Kudeatu Curriculumean",
+      "configurarEnPlanFeoe": "Konfiguratu orduak eta erregimena FEOE Planean"
     },
     "inicio": {
       "unirseTelegram": "Elkartu Telegrameko taldera"
@@ -1812,6 +1814,7 @@
       "publicidadDesc": "Programazioa non eta nola argitaratuko den edo kontsultatu ahal izango den.",
       "publicidadTitulo": "Programazioaren publizitatea",
       "tituloFeoe": "FEOE. Enpresa edo Erakunde Baliokidean Prestakuntza",
+      "moduloNoDualizadoDesc": "Modulu hau ez dago oraindik dualizatuta: ez dago CErik FEOE gisa markatuta.",
       "feoeTextoSimplificadoTitulo": "FEOE (Eredu Sinplifikatuaren testu berezia, pd=)",
       "feoeTextoSimplificadoAviso": "Hutsik uzten bada, dual gisa markatutako RAetatik (is_dual) abiatuta automatikoki sortuko da.",
       "a1JustificacionDesc": "Programazio hau oinarritzen duen oinarri legegilea.",
@@ -2626,9 +2629,9 @@
       "criteriosDesignadosTitulo": "FEOErako izendatutako irizpideak",
       "criteriosDesignadosDesc": "Curriculumean FEOE gisa markatutako CEak dira enpresako tutoreak baloratzen dituenak (XI b eranskina) — zuk emaitza beheko taulan transkribatzen duzu, ikasleka.",
       "sinRaCe": "Oraindik ez dago RA/CErik kargatuta modulu honetan.",
-      "ningunCeMarcadoDesc": "Oraindik ez dago CErik FEOE gisa markatuta. Markatu Curriculumean -> OG<-RA<-CE (\"FEOE\" zutabea).",
+      "ningunCeMarcadoDesc": "Modulu hau ez dago oraindik dualizatuta: ez dago CErik FEOE gisa markatuta. Markatu Curriculumean -> OG<-RA<-CE (\"FEOE\" zutabea).",
       "delRaSufijo": "RAren",
-      "marcaAlMenosUnCe": "Markatu gutxienez CE bat FEOE gisa Curriculumean -> OG<-RA<-CE, enpresaren balorazioak erregistratzen hasteko.",
+      "marcaAlMenosUnCe": "Modulu hau ez dago dualizatuta: markatu gutxienez CE bat FEOE gisa Curriculumean -> OG<-RA<-CE, enpresaren balorazioak erregistratzen hasteko.",
       "sinAlumnadoActivo": "Ez dago ikasle aktiborik erregistratuta ikastaro honetan.",
       "alumnadoActivoCount": "Ikasle aktiboak ({{count}})",
       "rellenaConBotonDesc": "Bete botoi batekin eta zuzendu eskuz behar dena — abiapuntu bat baino ez da, ez balio definitiboa.",

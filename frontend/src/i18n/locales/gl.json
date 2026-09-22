@@ -807,7 +807,8 @@
       "anadirAlumno": "Engadir alumno",
       "anadirMedidaContingencia": "Engadir medida de continxencia",
       "anadirMedidaDiversidad": "Engadir medida de diversidade",
-      "anadirTipoInstrumento": "Engadir tipo de instrumento de avaliación"
+      "anadirTipoInstrumento": "Engadir tipo de instrumento de avaliación",
+      "marcarCeComoFeoe": "Marcar CE como FEOE en Currículo"
     },
     "reclamaciones": {
       "confirmarResolucion": "Confirmar resolución",
@@ -845,7 +846,8 @@
     "feoe": {
       "excelenteTodoA4": "Excelente (todo a 4)",
       "suficienteTodoA3": "Suficiente (todo a 3)",
-      "gestionarEnCurriculo": "Xestionar en Currículo"
+      "gestionarEnCurriculo": "Xestionar en Currículo",
+      "configurarEnPlanFeoe": "Configurar horas e réxime en Plan FEOE"
     },
     "inicio": {
       "unirseTelegram": "Unirme ao grupo en Telegram"
@@ -1812,6 +1814,7 @@
       "publicidadDesc": "Como e onde se publicará ou se poderá consultar a programación.",
       "publicidadTitulo": "Publicidade da programación",
       "tituloFeoe": "FEOE. Formación en Empresa ou Organismo Equiparado",
+      "moduloNoDualizadoDesc": "Este módulo aínda non está dualizado: non hai ningún CE marcado como FEOE.",
       "feoeTextoSimplificadoTitulo": "FEOE (texto específico modelo Simplificado, pd=)",
       "feoeTextoSimplificadoAviso": "Se se deixa baleiro, xérase automaticamente a partir dos RA marcados como dualizables (is_dual).",
       "a1JustificacionDesc": "Base lexislativa que fundamenta esta programación.",
@@ -2626,9 +2629,9 @@
       "criteriosDesignadosTitulo": "Criterios designados para FEOE",
       "criteriosDesignadosDesc": "Os CE marcados como FEOE en Currículo son os que valora o titor de empresa (Anexo XI b) — ti transcribes o resultado máis abaixo, por alumno.",
       "sinRaCe": "Non hai RA/CE cargados neste módulo aínda.",
-      "ningunCeMarcadoDesc": "Aínda non hai ningún CE marcado como FEOE. Márcaos en Currículo -> OG<-RA<-CE (columna \"FEOE\").",
+      "ningunCeMarcadoDesc": "Este módulo aínda non está dualizado: non hai ningún CE marcado como FEOE. Márcaos en Currículo -> OG<-RA<-CE (columna \"FEOE\").",
       "delRaSufijo": "do RA",
-      "marcaAlMenosUnCe": "Marca polo menos un CE como FEOE en Currículo -> OG<-RA<-CE para comezar a rexistrar valoracións de empresa.",
+      "marcaAlMenosUnCe": "Este módulo non está dualizado: marca polo menos un CE como FEOE en Currículo -> OG<-RA<-CE para comezar a rexistrar valoracións de empresa.",
       "sinAlumnadoActivo": "Non hai alumnado activo rexistrado neste curso.",
       "alumnadoActivoCount": "Alumnado activo ({{count}})",
       "rellenaConBotonDesc": "Enche cun botón e corrixe a man o que faga falta — é só un punto de partida, non un valor definitivo.",

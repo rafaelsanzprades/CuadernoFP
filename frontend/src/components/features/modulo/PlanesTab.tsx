@@ -44,6 +44,8 @@ export function PlanesTab() {
   const pctModulo = cargaLectivaAnual > 0 ? (horasImputadas / cargaLectivaAnual) * 100 : 0;
 
   const feoe_seleccion = config_contexto.feoe_seleccion || [];
+  const df_ce = moduleData?.df_ce || [];
+  const hayCeDual = df_ce.some((ce: any) => ce.is_dual);
 
   const toggleFeoe = (id: string) => {
     const updated = feoe_seleccion.includes(id)
@@ -102,6 +104,17 @@ export function PlanesTab() {
               </div>
             </div>
           </div>
+
+          {!hayCeDual && (
+            <div className="p-4 rounded-xl border border-amber-500/30 bg-amber-500/10 flex flex-wrap items-center justify-between gap-3">
+              <p className="text-body text-foreground/80">
+                {t('campos.modulo.moduloNoDualizadoDesc', {defaultValue: 'Este módulo no está dualizado todavía: no hay ningún CE marcado como FEOE.'})}
+              </p>
+              <Link href="/curriculo?tab=ponderacion-ra-ce" className="text-caption text-info hover:underline shrink-0">
+                {t('botones.modulo.marcarCeComoFeoe', {defaultValue: 'Marcar CE como FEOE en Currículo'})}
+              </Link>
+            </div>
+          )}
 
           <div>
             <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.modulo.modalidadSeguimientoLabel', {defaultValue: 'Modalidad y seguimiento'})}</label>

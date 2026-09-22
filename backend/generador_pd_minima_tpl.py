@@ -11,7 +11,7 @@ Uso:
 
 import os
 from docxtpl import DocxTemplate
-from helpers_catalogo import build_ra_desc_map, build_ud_desc_map, resolve_ra_desc, resolve_ud_desc
+from helpers_catalogo import build_ra_desc_map, build_ud_desc_map, resolve_ra_desc, resolve_ud_desc, resolve_feoe_dual, _norm_id
 
 TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), 'templates', 'modelo_pd_fp-.docx')
 
@@ -62,6 +62,12 @@ def _build_context(data: dict) -> dict:
     context["texto_competencia_general"] = texto_comp
 
     # --- H1 3: Resultados de Aprendizaje (lista), con % y las UD que lo cubren ──
+    # Ítem 47 (00 IDEAS.md, decisión Rafael 2026-09-22): la PD- no tenía
+    # ningún tag para FEOE en su plantilla (resumen de 1-2 folios, sin
+    # sección propia) -- en vez de añadir uno nuevo, se marca el RA
+    # dualizado directamente en su línea de esta lista, ya existente. La
+    # unidad real es el CE (is_dual), no el RA -- ver resolve_feoe_dual().
+    feoe = resolve_feoe_dual(data)
     list_ras = []
     for ra in df_ra:
         id_str = str(ra.get('id_ra', '')).strip().rstrip('.')
@@ -72,6 +78,7 @@ def _build_context(data: dict) -> dict:
             peso = int(float(ra.get('peso_ra', 0) or 0))
         except (ValueError, TypeError):
             peso = 0
+        sufijo_feoe = " [FEOE]" if _norm_id(str(ra.get('id_ra', ''))) in feoe["ra_ids_dual"] else ""
 
         # UDs relacionadas con este RA (misma info que la Matriz RA↔UD)
         uds_rel = []
@@ -89,7 +96,7 @@ def _build_context(data: dict) -> dict:
         # su propio formato de párrafo: indentado y en cursiva), la línea
         # con las UD relacionadas — siempre empieza por "UDxx (" para poder
         # reconocerla después del render, ver _sangrar_lineas_relacion_ud().
-        list_ras.append(f"{ra_id_full}. ({peso}%) {desc}")
+        list_ras.append(f"{ra_id_full}. ({peso}%) {desc}{sufijo_feoe}")
         if uds_rel:
             list_ras.append(", ".join(uds_rel))
     context["list_ras"] = list_ras
