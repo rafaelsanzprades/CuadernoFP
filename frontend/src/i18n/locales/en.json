@@ -1859,7 +1859,7 @@
       "coordinacionModulosDesc": "How this module is coordinated with other modules/teachers in the program (teaching team meetings, dependencies between modules, task substitution in case of absence, etc.).",
       "coordinacionModulosTitulo": "Coordination with other modules and their teachers",
       "cpeTitulo": "Professional and employability competences (CPE)",
-      "criteriosCompensablesDescPost": " = any failed CE of the RA caps its grade just below passing (strict behavior); increase this number to allow compensating N failed criteria within the same RA. When the cap is active for a student, it appears marked in Tracking → Detail by student.",
+      "criteriosCompensablesDescPost": " = any failed CE of the RA caps its grade just below passing (strict behavior); increase this number to allow compensating N failed criteria within the same RA. When the cap is active for a student, it appears marked in Tracking → Detail by student. Example with 0: CE1.a=9.0 and CE1.b=4.9 at 50% each give an average of 6.95, but since CE1.b is failing the RA caps at 4.9, not 6.95.",
       "criteriosCompensablesDescPre": "Maximum number of failed Criteria allowed to pass an RA. ",
       "criteriosCompensablesRA": "Compensable criteria per RA",
       "cursoLabel": "Year",
