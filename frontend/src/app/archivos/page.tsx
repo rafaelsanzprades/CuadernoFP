@@ -19,6 +19,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 import i18next from "i18next";
 import { OneDriveSyncPanel } from "@/components/features/cloud/OneDriveSyncPanel";
 import { VerificacionTab } from "@/components/features/archivos/VerificacionTab";
@@ -439,7 +440,16 @@ export default function ArchivosTrabajoPage() {
           </StickyPageHeader>
 
           <MotionWrapper className="w-full space-y-4 px-8 pt-4 pb-12">
-            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de archivos.'} />
+            <TabInfoBox
+              description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de archivos.'}
+              action={activeTab === "comparativa" ? (
+                <Link href="/magia?tab=documentos-pdx">
+                  <Button variant="primary" size="sm" className="gap-2">
+                    <Sparkles className="w-4 h-4" /> {t('botones.archivos.irADocumentosPdx', {defaultValue: 'Ir a Documentos PDx'})}
+                  </Button>
+                </Link>
+              ) : undefined}
+            />
 
             <div className="space-y-4 animate-in fade-in duration-300">
               {/* TAB: FILE MANAGER */}
