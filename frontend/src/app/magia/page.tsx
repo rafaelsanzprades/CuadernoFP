@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Download, FileEdit, FileSpreadsheet, FileText, FileStack, FolderOpen, GitCompare, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, Grid3x3, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp, Compass, Lightbulb, Wrench } from "lucide-react";
+import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Download, FileEdit, FileSpreadsheet, FileText, FileStack, FolderOpen, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, Grid3x3, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp, Compass, Lightbulb, Wrench } from "lucide-react";
 import * as XLSX from "xlsx";
 import React, { useState, useEffect, useMemo } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -19,7 +19,6 @@ import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { TabSync } from "@/components/ui/TabSync";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { getAutoMilestones } from "@/utils/calendarMilestones";
-import { ComparativaPdTab } from "@/components/features/magia/ComparativaPdTab";
 import { AnalisisPdxTab } from "@/components/features/magia/AnalisisPdxTab";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
@@ -313,7 +312,6 @@ export default function MagiaPage() {
 
   const TABS = [
     { id: "documentos-pdx", label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4 shrink-0" /> {t('tabs.magia.documentosPdx.label', {defaultValue: 'Documentos PDx'})}</span>, cleanLabel: t('tabs.magia.documentosPdx.label', {defaultValue: 'Documentos PDx'}) },
-    { id: "comparativa", label: <span className="flex items-center gap-2"><GitCompare className="w-4 h-4 shrink-0" /> {t('tabs.equivalencias.comparativa.label', {defaultValue: 'Comparativa'})}</span>, cleanLabel: t('tabs.equivalencias.comparativa.label', {defaultValue: 'Comparativa'}) },
     { id: "analisis-pdx", label: <span className="flex items-center gap-2"><FileStack className="w-4 h-4 shrink-0" /> {t('tabs.magia.analisisPdx.label', {defaultValue: 'Análisis APP->PDx'})}</span>, cleanLabel: t('tabs.magia.analisisPdx.label', {defaultValue: 'Análisis APP->PDx'}) },
     { id: "programacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.magia.programacion.label', {defaultValue: 'Programación'})}</span>, cleanLabel: t('tabs.magia.programacion.label', {defaultValue: 'Programación'}) },
     { id: "curso", label: <span className="flex items-center gap-2"><Calendar className="w-4 h-4 shrink-0" /> {t('tabs.magia.curso.label', {defaultValue: 'Curso'})}</span>, cleanLabel: t('tabs.magia.curso.label', {defaultValue: 'Curso'}) },
@@ -321,7 +319,6 @@ export default function MagiaPage() {
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     'documentos-pdx': t('tabs.magia.documentosPdx.desc', {defaultValue: 'Genera y descarga las programaciones didácticas PD-, PD= y PD+ en formato editable, por comunidad autónoma.'}),
-    comparativa: t('tabs.equivalencias.comparativa.desc', {defaultValue: 'Comparativa de los distintos niveles de programación y dónde se rellena cada apartado.'}),
     'analisis-pdx': t('tabs.magia.analisisPdx.desc', {defaultValue: 'De la app a dónde aparece cada campo en cada modelo de Programación Didáctica (PD-, PD=, PD+).'}),
     programacion: t('tabs.magia.programacion.desc', {defaultValue: 'Documentos de apoyo: matriz de currículo y documentos individuales de UD y Tareas.'}),
     curso: t('tabs.magia.curso.desc', {defaultValue: 'Calendario, seguimiento, plano de aula, boletines y actas de evaluación del curso.'}),
@@ -507,9 +504,6 @@ export default function MagiaPage() {
                     )}
                   </div>
                 )}
-
-                {/* ══════════════════════════ COMPARATIVA ══════════════════════════ */}
-                {activeTab === "comparativa" && <ComparativaPdTab />}
 
                 {/* ══════════════════════════ ANÁLISIS APP->PDx ══════════════════════════ */}
                 {activeTab === "analisis-pdx" && <AnalisisPdxTab />}
