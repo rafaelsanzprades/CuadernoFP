@@ -378,21 +378,18 @@ export default function ArchivosTrabajoPage() {
     { id: "datos", label: <span className="flex items-center gap-2"><Database className="w-4 h-4 shrink-0" /> {t('tabs.archivos.datos.label', {defaultValue: 'Datos'})}</span>, cleanLabel: t('tabs.archivos.datos.label', {defaultValue: 'Datos'}) },
     { id: "asistente-ia", label: <span className="flex items-center gap-2"><Sparkles className="w-4 h-4 shrink-0" /> {t('tabs.archivos.asistente-ia.label', {defaultValue: 'Asistente'})}</span>, cleanLabel: t('tabs.archivos.asistente-ia.label', {defaultValue: 'Asistente'}) },
     { id: "verificacion", label: <span className="flex items-center gap-2"><ListChecks className="w-4 h-4 shrink-0" /> {t('tabs.inicio.verificacion.label', {defaultValue: 'Verificación'})}</span>, cleanLabel: t('tabs.inicio.verificacion.label', {defaultValue: 'Verificación'}) },
-    { id: "seguridad", label: <span className="flex items-center gap-2"><Shield className="w-4 h-4 shrink-0" /> {t('tabs.archivos.seguridad.label', {defaultValue: 'Seguridad'})}</span>, cleanLabel: t('tabs.archivos.seguridad.label', {defaultValue: 'Seguridad'}) },
   ];
 
   const breadcrumbSuffixMap: Record<string, string> = {
     "datos": t('campos.archivos.breadcrumbArchivos', {defaultValue: 'Archivos'}),
     "asistente-ia": t('tabs.archivos.asistente-ia.label', {defaultValue: 'Asistente'}),
     "verificacion": t('tabs.inicio.verificacion.label', {defaultValue: 'Verificación'}),
-    "seguridad": t('campos.archivos.breadcrumbSeguridadPrivacidad', {defaultValue: 'Seguridad y Privacidad'}),
   };
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     'datos': t('tabs.archivos.datos.desc', {defaultValue: 'Gestión de tus archivos de Grupos, Programaciones y Cursos guardados en local o en la nube.'}),
     'asistente-ia': t('tabs.archivos.asistente-ia.desc', {defaultValue: 'Configuración de inteligencia artificial.'}),
     'verificacion': t('tabs.inicio.verificacion.desc', {defaultValue: 'Panel de salud y coherencia de los datos de tu cuaderno.'}),
-    'seguridad': t('tabs.archivos.seguridad.desc', {defaultValue: 'Opciones de privacidad, encriptación y control de datos.'}),
   };
 
   // ── Render ──────────────────────────────────────────────
@@ -791,13 +788,14 @@ export default function ArchivosTrabajoPage() {
                   <OneDriveSyncPanel />
                 </div>
 
-                </div>
-              )}
-
-            </div>
-
-              {/* TAB: SEGURIDAD */}
-              {activeTab === "seguridad" && (
+                {/* Seguridad y privacidad -- antes pestaña propia, unificada aquí
+                    al final de Datos (Rafael, 2026-09-23): quitaba sitio a una
+                    pestaña completa para un contenido que es, en esencia, una
+                    ampliación de "de dónde vienen y a dónde van tus datos",
+                    justo el tema de esta pestaña. El cartel corto "Seguridad y
+                    RGPD garantizados" que antes aparecía siempre, en las 4
+                    pestañas de Archivo, se retira: este bloque ya cubre lo mismo
+                    con más detalle. */}
                 <section className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl p-8">
                   <div className="flex items-center gap-4 mb-2">
                     <div className="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
@@ -845,7 +843,11 @@ export default function ArchivosTrabajoPage() {
                     </div>
                   </div>
                 </section>
+
+                </div>
               )}
+
+            </div>
 
               {/* TAB: ASISTENTE IA */}
               {activeTab === "asistente-ia" && (
@@ -856,21 +858,6 @@ export default function ArchivosTrabajoPage() {
 
               {/* TAB: VERIFICACIÓN */}
               {activeTab === "verificacion" && <VerificacionTab />}
-
-            {/* Security notice - always visible, full-width */}
-            <div className="mt-8">
-              <Card className="flex items-start gap-4 p-6 bg-info/5 border border-info/20 rounded-2xl shadow-lg">
-                <span className="text-info mt-1 shrink-0"><ShieldAlert className="w-8 h-8" /></span>
-                <div>
-                  <h3 className="text-subheading font-bold text-foreground mb-2">{t('campos.archivos.seguridadRgpdTitulo', {defaultValue: 'Seguridad y RGPD garantizados'})}</h3>
-                  <div className="text-body text-foreground/80 space-y-2 leading-relaxed">
-                    <p>{t('campos.archivos.procesaInfoNavegador', {defaultValue: 'Cuaderno FP procesa toda tu información confidencial exclusivamente en tu navegador. Tú eres el dueño de tus archivos.'})}</p>
-                    <p>{t('campos.archivos.ningunDatoNube', {defaultValue: 'Ningún dato de tu alumnado se envía a la nube, salvo que uses la Sincronización autorizada en tu cuenta.'})}</p>
-                    <p className="font-semibold text-info mt-2">{t('campos.archivos.asegurateGuardar', {defaultValue: 'Asegúrate de pulsar "Guardar" al finalizar tu sesión de trabajo para no perder los últimos cambios.'})}</p>
-                  </div>
-                </div>
-              </Card>
-            </div>
           </MotionWrapper>
         </div>
       </div>
