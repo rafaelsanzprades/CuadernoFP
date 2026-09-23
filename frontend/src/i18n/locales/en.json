@@ -289,6 +289,10 @@
       "analisisPdx": {
         "label": "APP->PDx Analysis",
         "desc": "From the app to where each field appears in each Programación Didáctica model (PD-, PD=, PD+)."
+      },
+      "documentosPdx": {
+        "label": "PDx documents",
+        "desc": "Generate and download the PD-, PD= and PD+ programming documents in editable format, by autonomous community."
       }
     },
     "equivalencias": {
@@ -2807,6 +2811,15 @@
       "contactoInfoAccesibleTitulo": "Contact and request for accessible information"
     },
     "magia": {
+      "pdMinimaTitulo": "PD-. Summary for students",
+      "pdMinimaDesc": "One-page document to hand out to students. Contains basic information and grading criteria.",
+      "pdSuficienteAragonTitulo": "PD=. Simplified programming",
+      "pdSuficienteAragonDesc": "Simplified version with the very specific and concrete points of the Law (does not detail classroom sequencing or extensive theory).",
+      "pdJegAragonTitulo": "PD+. CIFPA programming",
+      "pdCompletaDesc": "Fills in the full official programming model.",
+      "pdSuficienteComunidadTitulo": "PD=. Programming ({{comunidad}})",
+      "pdSuficienteComunidadDesc": "Version adjusted to the official regulations of {{comunidad}}.",
+      "pdJegComunidadTitulo": "PD+. Detailed programming ({{comunidad}})",
       "contextoDesc": "General information and characteristics of the environment.",
       "sinDocumentosApoyo": "No supporting documents yet in this section.",
       "curriculoDesc": "Cross-reference of learning outcomes and criteria; UD documents and tasks.",
