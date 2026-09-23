@@ -90,7 +90,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "datos", label: "Datos" },
     { id: "asistente-ia", label: "Asistente" },
     { id: "verificacion", label: "Verificación" },
-    { id: "seguridad", label: "Seguridad" },
+    { id: "comparativa", label: "Comparativa" },
   ],
   "/catalogo": [
     { id: "familias", label: "Familias" },
@@ -99,7 +99,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "ra-ce", label: "RA → CE" },
   ],
   "/magia": [
-    { id: "comparativa", label: "Comparativa" },
+    { id: "documentos-pdx", label: "Documentos PDx" },
     { id: "analisis-pdx", label: "Análisis APP->PDx" },
     { id: "programacion", label: "Programación" },
     { id: "curso", label: "Curso" },
