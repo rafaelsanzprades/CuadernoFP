@@ -76,9 +76,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   "/calificaciones": [
     { id: "resumen", label: "Resumen" },
     { id: "historico", label: "Histórico" },
-    { id: "reclamaciones", label: "Reclamaciones" },
-    { id: "boletines", label: "Boletines" },
-    { id: "expediente", label: "Expediente" },
+    { id: "individual", label: "Individual" },
   ],
   "/normativa": [
     { id: "autonomias", label: "Autonomías" },
