@@ -146,7 +146,14 @@
       "boletines": {
         "label": "Boletíns",
         "desc": "Boletín individual de cualificacións en pantalla, con radar e barras de nivel de logro por RA."
-      }
+      },
+      "individual": {
+        "label": "Individual",
+        "desc": "Boletín e expediente de evidencias por alumno/a."
+      },
+      "resumenTrimestral": "Trimestral",
+      "progresoRaUd": "Progreso RA-UD",
+      "cambiosNota": "Cambios de nota"
     },
     "contexto": {
       "identificacion": {

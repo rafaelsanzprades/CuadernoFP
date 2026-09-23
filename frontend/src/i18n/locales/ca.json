@@ -148,7 +148,14 @@
       "boletines": {
         "label": "Butlletins",
         "desc": "Butlletí individual de qualificacions en pantalla, amb radar i barres de nivell d'assoliment per RA."
-      }
+      },
+      "individual": {
+        "label": "Individual",
+        "desc": "Butlletí i expedient d'evidències per alumne/a."
+      },
+      "resumenTrimestral": "Trimestral",
+      "progresoRaUd": "Progrés RA-UD",
+      "cambiosNota": "Canvis de nota"
     },
     "contexto": {
       "identificacion": {

@@ -146,7 +146,14 @@
       "boletines": {
         "label": "Reports",
         "desc": "On-screen individual grade report, with a radar chart and achievement-level bars by RA."
-      }
+      },
+      "individual": {
+        "label": "Individual",
+        "desc": "Report and record of evidence by student."
+      },
+      "resumenTrimestral": "By term",
+      "progresoRaUd": "RA-UD progress",
+      "cambiosNota": "Grade changes"
     },
     "contexto": {
       "identificacion": {

@@ -20,7 +20,6 @@ import { ReclamacionesTab } from "@/components/features/evaluacion/Reclamaciones
 import { BoletinesTab } from "@/components/features/alumnado/BoletinesTab";
 import { ExpedienteTab } from "@/components/features/alumnado/ExpedienteTab";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import { AccordionBlock } from "@/components/ui/AccordionBlock";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
@@ -44,7 +43,10 @@ export default function ProgresoPage() {
   const [saveIsError, setSaveIsError] = useState(false);
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("resumen");
+  const [resumenView, setResumenView] = useState<"trimestral" | "progreso" | "estadisticas" | "analisis">("trimestral");
   const [analisisView, setAnalisisView] = useState<"grupal" | "individual">("grupal");
+  const [historicoView, setHistoricoView] = useState<"cambios" | "reclamaciones">("cambios");
+  const [individualView, setIndividualView] = useState<"boletin" | "expediente">("boletin");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -137,26 +139,30 @@ export default function ProgresoPage() {
 
   const reclamacionesPendientes = (cursoData?.df_reclamaciones || []).filter((r: any) => r.estado === "pendiente").length;
 
+  // Ítem "reorganización Calificación" (2026-09-23, petición de Rafael): de 5
+  // pestañas a 3, cada una con un switcher interno en vez de acordeones o
+  // pestañas separadas para contenido muy afín -- mismo patrón que ya
+  // validó Rafael para Análisis (Grupal/Individual). Histórico+Reclamaciones
+  // se fusionan (las dos son un registro que está vacío hasta que se usa) y
+  // Boletines+Expediente se fusionan (las dos son "ficha de un alumno",
+  // comparten el mismo selector de alumnado, solo cambia si se ve un informe
+  // formateado o la línea temporal en bruto).
   const TABS = [
     { id: "resumen", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.resumen')}</>, cleanLabel: t('tabs.resumen') },
-    { id: "historico", label: <><span className="inline-flex"><History className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'})}</>, cleanLabel: t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'}) },
-    { id: "reclamaciones", label: <><span className="inline-flex"><AlertOctagon className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.reclamaciones.label', {defaultValue: 'Reclamaciones'})}
+    { id: "historico", label: <><span className="inline-flex"><History className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'})}
         {reclamacionesPendientes > 0 && (
           <span className="ml-1.5 inline-flex items-center justify-center min-w-[1.1rem] h-[1.1rem] px-1 rounded-full bg-danger text-white text-[10px] font-bold leading-none">
             {reclamacionesPendientes}
           </span>
         )}
-      </>, cleanLabel: t('tabs.calificaciones.reclamaciones.label', {defaultValue: 'Reclamaciones'}) },
-    { id: "boletines", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.boletines.label', {defaultValue: 'Boletines'})}</>, cleanLabel: t('tabs.calificaciones.boletines.label', {defaultValue: 'Boletines'}) },
-    { id: "expediente", label: <><span className="inline-flex"><FileClock className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.expediente.label', {defaultValue: 'Expediente'})}</>, cleanLabel: t('tabs.alumnado.expediente.label', {defaultValue: 'Expediente'}) },
+      </>, cleanLabel: t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'}) },
+    { id: "individual", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.individual.label', {defaultValue: 'Individual'})}</>, cleanLabel: t('tabs.calificaciones.individual.label', {defaultValue: 'Individual'}) },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     resumen: t('tabs.calificaciones.resumen.desc', {defaultValue: 'Panel global de rendimiento: calificaciones medias, progreso por RA/UD, estadísticas y análisis comparativo.'}),
-    historico: t('tabs.calificaciones.historico.desc', {defaultValue: 'Registro de cada cambio de nota, con su fecha, agente y motivo.'}),
-    reclamaciones: t('tabs.calificaciones.reclamaciones.desc', {defaultValue: 'Reclamaciones de nota presentadas por el alumnado, con su motivo y resolución.'}),
-    boletines: t('tabs.calificaciones.boletines.desc', {defaultValue: 'Boletín individual de calificaciones en pantalla, con radar y barras de nivel de logro por RA.'}),
-    expediente: t('tabs.alumnado.expediente.desc', {defaultValue: 'Línea temporal de evidencias por alumno/a: calificaciones, reclamaciones, asistencia y diario de clase.'}),
+    historico: t('tabs.calificaciones.historico.desc', {defaultValue: 'Registro de cambios de nota y reclamaciones presentadas por el alumnado.'}),
+    individual: t('tabs.calificaciones.individual.desc', {defaultValue: 'Boletín y expediente de evidencias por alumno/a.'}),
   };
 
   return (
@@ -211,11 +217,43 @@ export default function ProgresoPage() {
               Análisis Grupal usaba una onda seno sobre la media del grupo -- ninguno
               de los dos leía notas reales. El único gráfico de RA que queda aquí
               (bloque "Progreso RA-UD") es el que ya calculaba esto de verdad, vía
-              Motor JEG. */}
+              Motor JEG.
+
+              2026-09-23 (petición de Rafael): los 4 acordeones apilados se
+              cambian por un switcher (mismo patrón que ya usa Análisis para
+              Grupal/Individual) -- con acordeón, abrir cualquier sección
+              empujaba a las demás hacia abajo; con switcher solo se ve una
+              sección cada vez, sin perder ningún contenido. */}
           {activeTab === "resumen" && (
             <div className="space-y-4 animate-in fade-in duration-500">
+              <div className="inline-flex flex-wrap rounded-xl border border-[var(--glass-border)] bg-foreground/5 p-1 gap-1">
+                <button
+                  onClick={() => setResumenView("trimestral")}
+                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${resumenView === "trimestral" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
+                >
+                  <BarChart className="w-4 h-4" /> {t('tabs.calificaciones.resumenTrimestral', {defaultValue: 'Trimestral'})}
+                </button>
+                <button
+                  onClick={() => setResumenView("progreso")}
+                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${resumenView === "progreso" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
+                >
+                  <Target className="w-4 h-4" /> {t('tabs.calificaciones.progresoRaUd', {defaultValue: 'Progreso RA-UD'})}
+                </button>
+                <button
+                  onClick={() => setResumenView("estadisticas")}
+                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${resumenView === "estadisticas" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
+                >
+                  <BarChart className="w-4 h-4" /> {t('tabs.calificaciones.estadisticas.label', {defaultValue: 'Estadísticas'})}
+                </button>
+                <button
+                  onClick={() => setResumenView("analisis")}
+                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${resumenView === "analisis" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
+                >
+                  <LineChart className="w-4 h-4" /> {t('tabs.calificaciones.analisis.label', {defaultValue: 'Análisis'})}
+                </button>
+              </div>
 
-              <AccordionBlock title="Resumen de calificaciones por trimestres" icon={<BarChart className="w-5 h-5" />} defaultOpen>
+              {resumenView === "trimestral" && (
                 <div className="overflow-x-auto">
                   {(() => {
                     const instrumentosPct = (moduleData?.instrumentos_pct_trimestre && moduleData.instrumentos_pct_trimestre.length > 0)
@@ -402,17 +440,13 @@ export default function ProgresoPage() {
                     );
                   })()}
                 </div>
-              </AccordionBlock>
+              )}
 
-              <AccordionBlock title="Progreso RA-UD" icon={<Target className="w-5 h-5" />}>
-                <ProgresoRaTab />
-              </AccordionBlock>
+              {resumenView === "progreso" && <ProgresoRaTab />}
 
-              <AccordionBlock title="Estadísticas" icon={<BarChart className="w-5 h-5" />}>
-                <EstadisticasTab />
-              </AccordionBlock>
+              {resumenView === "estadisticas" && <EstadisticasTab />}
 
-              <AccordionBlock title="Análisis" icon={<LineChart className="w-5 h-5" />}>
+              {resumenView === "analisis" && (
                 <div className="space-y-4">
                   <div className="inline-flex rounded-xl border border-[var(--glass-border)] bg-foreground/5 p-1">
                     <button
@@ -430,37 +464,62 @@ export default function ProgresoPage() {
                   </div>
                   {analisisView === "grupal" ? <AnalisisGrupalTab /> : <AnalisisIndividualTab />}
                 </div>
-              </AccordionBlock>
+              )}
             </div>
           )}
 
-          {/* TAB 4: HISTÓRICO */}
+          {/* TAB 2: HISTÓRICO -- fusiona (2026-09-23) Histórico de cambios de
+              nota y Reclamaciones: las dos son un registro que en la
+              práctica está vacío hasta que se usa, mismo patrón de switcher
+              que el resto de la página. */}
           {activeTab === "historico" && (
             <div className="animate-in fade-in duration-500 space-y-4">
-              <HistorialCalificacionesTab />
+              <div className="inline-flex rounded-xl border border-[var(--glass-border)] bg-foreground/5 p-1">
+                <button
+                  onClick={() => setHistoricoView("cambios")}
+                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${historicoView === "cambios" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
+                >
+                  <History className="w-4 h-4" /> {t('tabs.calificaciones.cambiosNota', {defaultValue: 'Cambios de nota'})}
+                </button>
+                <button
+                  onClick={() => setHistoricoView("reclamaciones")}
+                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${historicoView === "reclamaciones" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
+                >
+                  <AlertOctagon className="w-4 h-4" /> {t('tabs.calificaciones.reclamaciones.label', {defaultValue: 'Reclamaciones'})}
+                  {reclamacionesPendientes > 0 && (
+                    <span className="ml-1 inline-flex items-center justify-center min-w-[1.1rem] h-[1.1rem] px-1 rounded-full bg-danger text-white text-[10px] font-bold leading-none">
+                      {reclamacionesPendientes}
+                    </span>
+                  )}
+                </button>
+              </div>
+              {historicoView === "cambios" ? <HistorialCalificacionesTab /> : <ReclamacionesTab />}
             </div>
           )}
 
-          {/* TAB 5: RECLAMACIONES */}
-          {activeTab === "reclamaciones" && (
-            <div className="animate-in fade-in duration-500 space-y-4">
-              <ReclamacionesTab />
-            </div>
-          )}
-
-          {/* TAB 6: BOLETINES */}
-          {activeTab === "boletines" && (
-            <div className="mt-4 animate-in fade-in duration-500">
-              <BoletinesTab />
-            </div>
-          )}
-
-          {/* TAB 7: EXPEDIENTE -- traída desde Alumnado (2026-09-20, petición de
-              Rafael): línea temporal de evidencias por alumno, encaja mejor aquí
-              que en Alumnado porque la mayoría de sus fuentes son de evaluación. */}
-          {activeTab === "expediente" && (
-            <div className="mt-4 animate-in fade-in duration-500">
-              <ExpedienteTab />
+          {/* TAB 3: INDIVIDUAL -- fusiona (2026-09-23) Boletines y Expediente:
+              las dos son "ficha de un alumno" (comparten el mismo selector de
+              alumnado a la izquierda), solo cambia si se ve un informe
+              formateado para imprimir o la línea temporal en bruto de
+              evidencias. Expediente había llegado aquí desde Alumnado
+              (2026-09-20) porque la mayoría de sus fuentes son de evaluación. */}
+          {activeTab === "individual" && (
+            <div className="mt-4 animate-in fade-in duration-500 space-y-4">
+              <div className="inline-flex rounded-xl border border-[var(--glass-border)] bg-foreground/5 p-1">
+                <button
+                  onClick={() => setIndividualView("boletin")}
+                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${individualView === "boletin" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
+                >
+                  <FileText className="w-4 h-4" /> {t('tabs.calificaciones.boletines.label', {defaultValue: 'Boletines'})}
+                </button>
+                <button
+                  onClick={() => setIndividualView("expediente")}
+                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${individualView === "expediente" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
+                >
+                  <FileClock className="w-4 h-4" /> {t('tabs.alumnado.expediente.label', {defaultValue: 'Expediente'})}
+                </button>
+              </div>
+              {individualView === "boletin" ? <BoletinesTab /> : <ExpedienteTab />}
             </div>
           )}
           </MotionWrapper>
