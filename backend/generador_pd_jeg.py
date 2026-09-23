@@ -105,7 +105,14 @@ def _build_context(data: dict) -> dict:
         "tipo_elemento": tipo_elemento,
         "modulo": modulo,
         "familia_profesional": config.get("familia_profesional", "Denominacion de la Familia Profesional"),
-        "tipo_ensennanza": config.get("tipo_ensenanza", "Tipo de ensenanza"),
+        # "Tipo de enseñanza" (tabla Identificación): sin fuente propia en la
+        # app (no es un dato de catálogo ni tiene campo de UI) -- por defecto
+        # se deriva de la modalidad (presencial/distancia/semipresencial),
+        # que sí existe y ya se muestra correctamente en portada e
+        # Identificación. Antes caía siempre en el texto de ejemplo de la
+        # plantilla ("Tipo de ensenanza") porque config.tipo_ensenanza no lo
+        # escribe ninguna pantalla.
+        "tipo_ensennanza": config.get("tipo_ensenanza") or config.get("modalidad", "presencial").capitalize(),
         "denominacion_grado": config.get("denominacion_grado", ciclo),
         "titulacion": config.get("titulacion", ""),
         "grado": grado,
