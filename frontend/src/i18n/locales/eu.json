@@ -289,6 +289,10 @@
       "analisisPdx": {
         "label": "APP->PDx Analisia",
         "desc": "Appetik, Programazio Didaktikoaren eredu bakoitzean (PD-, PD=, PD+) eremu bakoitza non agertzen den."
+      },
+      "documentosPdx": {
+        "label": "PDx dokumentuak",
+        "desc": "Sortu eta deskargatu PD-, PD= eta PD+ programazio didaktikoak formatu editagarrian, autonomia erkidegoka."
       }
     },
     "equivalencias": {
@@ -2807,6 +2811,15 @@
       "contactoInfoAccesibleTitulo": "Kontaktua eta informazio irisgarria eskatzeko"
     },
     "magia": {
+      "pdMinimaTitulo": "PD-. Ikasleentzako laburpena",
+      "pdMinimaDesc": "Ikasleei emateko orri bakarreko dokumentua. Oinarrizko informazioa eta kalifikazio-irizpideak ditu.",
+      "pdSuficienteAragonTitulo": "PD=. Programazio didaktiko Sinplifikatua",
+      "pdSuficienteAragonDesc": "Legearen puntu oso espezifiko eta zehatzekin bertsio sinplifikatua (ez du gela-sekuentziazioa edo teoria zabala zehazten).",
+      "pdJegAragonTitulo": "PD+. CIFPA programazio didaktikoa",
+      "pdCompletaDesc": "Programazio-eredu ofizial osoa betetzen da.",
+      "pdSuficienteComunidadTitulo": "PD=. Programazio didaktikoa ({{comunidad}})",
+      "pdSuficienteComunidadDesc": "{{comunidad}}-(r)en araudi ofizialera egokitutako bertsioa.",
+      "pdJegComunidadTitulo": "PD+. Programazio didaktiko zehatza ({{comunidad}})",
       "contextoDesc": "Inguruneari buruzko informazio orokorra eta ezaugarriak.",
       "sinDocumentosApoyo": "Atal honetan oraindik ez dago laguntza-dokumenturik.",
       "curriculoDesc": "Ikaskuntzaren emaitzen eta irizpideen gurutzaketa; UDen dokumentuak eta zereginak.",

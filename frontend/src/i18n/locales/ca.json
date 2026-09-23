@@ -291,6 +291,10 @@
       "analisisPdx": {
         "label": "Anàlisi APP->PDx",
         "desc": "De l'app a on apareix cada camp en cada model de Programació Didàctica (PD-, PD=, PD+)."
+      },
+      "documentosPdx": {
+        "label": "Documents PDx",
+        "desc": "Genera i descarrega les programacions didàctiques PD-, PD= i PD+ en format editable, per comunitat autònoma."
       }
     },
     "equivalencias": {
@@ -2809,6 +2813,15 @@
       "contactoInfoAccesibleTitulo": "Contacte i sol·licitud d'informació accessible"
     },
     "magia": {
+      "pdMinimaTitulo": "PD-. Resum per a l'alumnat",
+      "pdMinimaDesc": "Document d'un full per lliurar a l'alumnat. Conté informació bàsica i criteris de qualificació.",
+      "pdSuficienteAragonTitulo": "PD=. Programació didàctica Simplificada",
+      "pdSuficienteAragonDesc": "Versió simplificada amb els punts de la Llei molt específica i concreta (no detalla seqüenciació d'aula ni teoria extensa).",
+      "pdJegAragonTitulo": "PD+. Programació didàctica CIFPA",
+      "pdCompletaDesc": "Es complimenta el model oficial de programació complet.",
+      "pdSuficienteComunidadTitulo": "PD=. Programació didàctica ({{comunidad}})",
+      "pdSuficienteComunidadDesc": "Versió ajustada a la normativa oficial de {{comunidad}}.",
+      "pdJegComunidadTitulo": "PD+. Programació didàctica detallada ({{comunidad}})",
       "contextoDesc": "Informació general i característiques de l'entorn.",
       "sinDocumentosApoyo": "Encara no hi ha documents de suport en aquesta secció.",
       "curriculoDesc": "Encreuament de resultats d'aprenentatge i criteris; documents d'UD i tasques.",

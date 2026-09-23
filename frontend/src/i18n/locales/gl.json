@@ -289,6 +289,10 @@
       "analisisPdx": {
         "label": "Análise APP->PDx",
         "desc": "Da app a onde aparece cada campo en cada modelo de Programación Didáctica (PD-, PD=, PD+)."
+      },
+      "documentosPdx": {
+        "label": "Documentos PDx",
+        "desc": "Xera e descarga as programacións didácticas PD-, PD= e PD+ en formato editable, por comunidade autónoma."
       }
     },
     "equivalencias": {
@@ -2807,6 +2811,15 @@
       "contactoInfoAccesibleTitulo": "Contacto e solicitude de información accesible"
     },
     "magia": {
+      "pdMinimaTitulo": "PD-. Resumo para o alumnado",
+      "pdMinimaDesc": "Documento dunha folla para entregar ao alumnado. Contén información básica e criterios de cualificación.",
+      "pdSuficienteAragonTitulo": "PD=. Programación didáctica Simplificada",
+      "pdSuficienteAragonDesc": "Versión simplificada cos puntos da Lei moi específica e concreta (non detalla secuenciación de aula nin extensa teoría).",
+      "pdJegAragonTitulo": "PD+. Programación didáctica CIFPA",
+      "pdCompletaDesc": "Cumpriméntase o modelo oficial de programación completo.",
+      "pdSuficienteComunidadTitulo": "PD=. Programación didáctica ({{comunidad}})",
+      "pdSuficienteComunidadDesc": "Versión axustada á normativa oficial de {{comunidad}}.",
+      "pdJegComunidadTitulo": "PD+. Programación didáctica detallada ({{comunidad}})",
       "contextoDesc": "Información xeral e características da contorna.",
       "sinDocumentosApoyo": "Aínda non hai documentos de apoio nesta sección.",
       "curriculoDesc": "Cruzamento de resultados de aprendizaxe e criterios; documentos de UD e tarefas.",
