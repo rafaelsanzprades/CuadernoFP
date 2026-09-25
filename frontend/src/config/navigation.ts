@@ -55,7 +55,6 @@ export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "guia", label: "Guía" },
     { id: "faq", label: "FAQ" },
     { id: "acronimos", label: "Acrónimos" },
-    { id: "mapa", label: "Mapa" },
   ],
   "/contexto": [
     { id: "identificacion", label: "Identificación" },
