@@ -31,7 +31,7 @@ Cuando generes identificadores o guardes datos, usa estos estándares (salvo que
 - **Glosario clave que debes comprender:**
   - **Programación didáctica:** Es el "molde" teórico (.fpp). Contiene la normativa (resultados de aprendizaje y criterios de evaluación) y las unidades didácticas. Se diseña una vez y se puede reutilizar en cursos posteriores.
   - **Curso:** Es la "instancia" real (.fpc). Representa al alumnado físico, sus calificaciones, faltas de asistencia y calendario en un año académico específico (ej. 2025-26).
-  - **Bloques:** 3 grupos en el sidebar — `General` (Inicio, Archivo, Ayuda), `Programación` (Normativa, Catálogo, Contexto, Currículo, Metodología, Instrumento — el diseño teórico del módulo) y `Curso` (Agenda, Calendario, Alumnado, Seguimiento, Calificación — el aula real) — más `MagIA` y `Legal`, sueltas fuera de cualquier grupo. Esta misma guía vive dentro de `Ayuda`, pestaña `Guía` (no en `MagIA`).
+  - **Bloques:** 3 grupos en el sidebar — `General` (Inicio, Archivo, Normativa, MagIA, Legal), `Programación` (Catálogo, Contexto, Currículo, Metodología, Instrumento — el diseño teórico del módulo) y `Curso` (Agenda, Calendario, Alumnado, Seguimiento, Calificación — el aula real). Esta misma guía vive dentro de `Inicio`, pestaña `Guía` (no en `MagIA`).
 
 Una vez tengas el contexto necesario, comienza a guiar al usuario o ejecuta las acciones detalladas desde el **Paso 1** en adelante.
 
@@ -225,7 +225,7 @@ Exporta informes, actas, y seguimiento.
       - **Bloque "Boletines y actas de evaluación":** por cada trimestre y la Final: PDF/DOCX del boletín grupal, Acta de evaluación firmable (PDF/DOCX) y exportación Excel/CSV.
       - **Bloque "Alumnado individual":** Boletín individual y Ficha individual (matrícula + asistencia) por alumno/a.
 
-> El Informe EQAVET (indicadores de calidad + propuestas de mejora) ya no se descarga desde aquí: vive en `Inicio` → Pestaña `Mejora`.
+> El Informe EQAVET (indicadores de calidad + propuestas de mejora) ya no se descarga desde aquí: vive en `Calificación` → Pestaña `Mejora`.
 
 ---
 

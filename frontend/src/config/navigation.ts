@@ -1,14 +1,14 @@
-import { Activity, Award, Calendar, CalendarDays, Compass, FileText, FolderOpen, GraduationCap, Grid, Info, Lightbulb, Scale, Sparkles, TrendingUp, Users, Wrench } from "lucide-react";
+import { Activity, Award, Calendar, CalendarDays, Compass, FileText, FolderOpen, GraduationCap, Grid, Lightbulb, Scale, Sparkles, TrendingUp, Users, Wrench } from "lucide-react";
 
 // PRUEBA 2026-09-23 (a petición de Rafael, ver 00 IDEAS.md): reequilibrado
 // de 3+6+6 a 3 bloques de 5 páginas cada uno (15 en total) -- Normativa sale
-// de Programación y MagIA sale de Curso, ambas entran en General. Pendiente
-// de revisar tras la prueba: sectionDescription de General todavía dice
-// "todo independiente de tener un grupo abierto", pero Normativa (contenido
-// por módulo) y sobre todo MagIA (necesita programación + curso activos)
-// no cumplen eso -- y el Mapa de Ayuda (ayuda/page.tsx, PAGE_TABS) y este
-// mismo comentario de cabecera quedan desactualizados. No tocado todavía,
-// a la espera de que Rafael confirme si la prueba se queda así.
+// de Programación y MagIA sale de Curso, ambas entran en General. Ayuda se
+// eliminó como página propia el 2026-09-25 (sus pestañas pasaron a Inicio) y
+// Legal, que antes vivía aparte en footerPages, ocupa ahora su hueco en
+// General -- el bloque se mantiene en 5 páginas. Pendiente de revisar:
+// sectionDescription de General todavía dice "todo independiente de tener
+// un grupo abierto", pero Normativa (contenido por módulo) y sobre todo
+// MagIA (necesita programación + curso activos) no cumplen eso.
 export const navGroups = [
   {
     title: "General",
@@ -16,9 +16,9 @@ export const navGroups = [
     items: [
       { href: "/inicio?tab=bienvenida", label: "Inicio", icon: Activity, description: "Panel principal, contribuciones de la comunidad y documentos de referencia." },
       { href: "/archivos?tab=datos", label: "Archivo", icon: FolderOpen, description: "Gestión de archivos, sincronización en la nube, seguridad y verificación de datos." },
-      { href: "/ayuda?tab=guia", label: "Ayuda", icon: Info, description: "Guía de inicio, FAQ, acrónimos y mapa de la aplicación." },
       { href: "/normativa?tab=autonomias", label: "Normativa", icon: FileText, description: "Normativa autonómica, legislación, bibliografía y estándares INCUAL." },
       { href: "/magia?tab=programacion", label: "MagIA", icon: Sparkles, description: "Generación de programaciones PD-/PD=/PD+, correspondencia APP-PD y documentos de apoyo de la programación y del curso." },
+      { href: "/legal?tab=aviso", label: "Legal", icon: Scale, description: "Aviso legal, privacidad, cookies y accesibilidad." },
     ]
   },
   {
@@ -45,10 +45,99 @@ export const navGroups = [
   }
 ];
 
-// Enlace suelto al pie del sidebar (ver Sidebar.tsx) — mismo formato que un
-// item de navGroups para poder reutilizar el resto de piezas (buscador
-// global, tarjeta del mapa en /ayuda) sin duplicar su definición.
-export const footerPages = [
-  { href: "/legal?tab=aviso", label: "Legal", icon: Scale, description: "Aviso legal, privacidad, cookies y accesibilidad." },
-];
+// Mapa de pestañas por página real (usado por la sección "Mapa del web" de
+// Inicio, tanto en los baldosines como en la pestaña "Mapa" que vino de la
+// antigua /ayuda) -- mantenido a mano, se desactualiza si se añade o quita
+// una pestaña de una página sin tocar también esto.
+export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
+  "/inicio": [
+    { id: "bienvenida", label: "Bienvenida" },
+    { id: "guia", label: "Guía" },
+    { id: "faq", label: "FAQ" },
+    { id: "acronimos", label: "Acrónimos" },
+    { id: "mapa", label: "Mapa" },
+  ],
+  "/contexto": [
+    { id: "identificacion", label: "Identificación" },
+    { id: "contextualizacion", label: "Contextualización" },
+    { id: "plan-feoe", label: "Plan FEOE" },
+    { id: "criterios", label: "Evaluación y calificación" },
+  ],
+  "/curriculo": [
+    { id: "ponderacion-ra-ce", label: "OG<-RA<-CE" },
+    { id: "unidades", label: "Unidades didácticas" },
+    { id: "competenciales", label: "Tareas competenciales" },
+    { id: "contenidos-ud", label: "Contenidos → UD" },
+  ],
+  "/metodologia": [
+    { id: "metodologia", label: "Metodología e inclusión" },
+    { id: "recursos", label: "Recursos" },
+    { id: "contingencia", label: "Plan de contingencia" },
+    { id: "transversales", label: "Transversales" },
+  ],
+  "/instrumentos": [
+    { id: "resumen", label: "Resumen" },
+    { id: "trimestres", label: "Trimestres" },
+    { id: "rubricas", label: "Rúbricas" },
+    { id: "jeg", label: "Modelo JEG" },
+  ],
+  "/calendario": [
+    { id: "fechas", label: "Fechas y horario" },
+    { id: "periodo-feoe", label: "Periodo FEOE" },
+    { id: "eventos", label: "Eventos y festivos" },
+    { id: "actividades", label: "Complementarias y extraescolares" },
+  ],
+  "/agenda": [
+    { id: "actual", label: "Actual" },
+    { id: "planificacion", label: "Avance" },
+    { id: "progreso-ra-ud", label: "Previsión RA y UD" },
+    { id: "mensual", label: "Mensual" },
+  ],
+  "/alumnado": [
+    { id: "matricula", label: "Matrícula" },
+    { id: "plano", label: "Plano de clase" },
+    { id: "perfilIndividual", label: "Individual" },
+    { id: "perfilTendencias", label: "Tendencias" },
+  ],
+  "/seguimiento": [
+    { id: "clases", label: "Clases" },
+    { id: "asistencia", label: "Asistencia" },
+    { id: "detalle", label: "Notas" },
+    { id: "empresa-feoe", label: "Empresa FEOE" },
+  ],
+  "/calificaciones": [
+    { id: "resumen", label: "Resumen" },
+    { id: "historico", label: "Histórico" },
+    { id: "individual", label: "Individual" },
+    { id: "mejora", label: "Mejora" },
+  ],
+  "/normativa": [
+    { id: "autonomias", label: "Autonomías" },
+    { id: "bibliografia", label: "Bibliografía" },
+    { id: "legislacion", label: "Legislación" },
+    { id: "ecp-incual", label: "ECP INCUAL" },
+  ],
+  "/archivos": [
+    { id: "datos", label: "Datos" },
+    { id: "asistente-ia", label: "Asistente" },
+    { id: "verificacion", label: "Verificación" },
+  ],
+  "/catalogo": [
+    { id: "familias", label: "Familias" },
+    { id: "titulos", label: "Títulos" },
+    { id: "modulos", label: "Módulos" },
+    { id: "ra-ce", label: "RA → CE" },
+  ],
+  "/magia": [
+    { id: "analisis-pdx", label: "Análisis APP->PDx" },
+    { id: "programacion", label: "Programación" },
+    { id: "curso", label: "Curso" },
+  ],
+  "/legal": [
+    { id: "aviso", label: "Aviso legal" },
+    { id: "privacidad", label: "Privacidad" },
+    { id: "cookies", label: "Cookies" },
+    { id: "accesibilidad", label: "Accesibilidad" },
+  ],
+};
 
