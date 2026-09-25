@@ -88,7 +88,6 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "datos", label: "Datos" },
     { id: "asistente-ia", label: "Asistente" },
     { id: "verificacion", label: "Verificación" },
-    { id: "comparativa", label: "Comparativa" },
   ],
   "/catalogo": [
     { id: "familias", label: "Familias" },

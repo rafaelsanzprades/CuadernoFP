@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { AlertTriangle, BookOpen, CheckCircle, Cloud, Database, Download, FileJson, FolderOpen, GitCompare, ListChecks, Save, Shield, ShieldAlert, Sparkles, Upload, Users, Zap, Plus, Copy, HardDrive, Building2, Lock, Activity } from "lucide-react";
+import { AlertTriangle, BookOpen, CheckCircle, Cloud, Database, Download, FileJson, FolderOpen, ListChecks, Save, Shield, ShieldAlert, Sparkles, Upload, Users, Zap, Plus, Copy, HardDrive, Building2, Lock, Activity } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -19,11 +19,9 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { useTranslation } from "react-i18next";
-import Link from "next/link";
 import i18next from "i18next";
 import { OneDriveSyncPanel } from "@/components/features/cloud/OneDriveSyncPanel";
 import { VerificacionTab } from "@/components/features/archivos/VerificacionTab";
-import { ComparativaPdTab } from "@/components/features/magia/ComparativaPdTab";
 
 
 export default function ArchivosTrabajoPage() {
@@ -380,21 +378,18 @@ export default function ArchivosTrabajoPage() {
     { id: "datos", label: <span className="flex items-center gap-2"><Database className="w-4 h-4 shrink-0" /> {t('tabs.archivos.datos.label', {defaultValue: 'Datos'})}</span>, cleanLabel: t('tabs.archivos.datos.label', {defaultValue: 'Datos'}) },
     { id: "asistente-ia", label: <span className="flex items-center gap-2"><Sparkles className="w-4 h-4 shrink-0" /> {t('tabs.archivos.asistente-ia.label', {defaultValue: 'Asistente'})}</span>, cleanLabel: t('tabs.archivos.asistente-ia.label', {defaultValue: 'Asistente'}) },
     { id: "verificacion", label: <span className="flex items-center gap-2"><ListChecks className="w-4 h-4 shrink-0" /> {t('tabs.inicio.verificacion.label', {defaultValue: 'Verificación'})}</span>, cleanLabel: t('tabs.inicio.verificacion.label', {defaultValue: 'Verificación'}) },
-    { id: "comparativa", label: <span className="flex items-center gap-2"><GitCompare className="w-4 h-4 shrink-0" /> {t('tabs.equivalencias.comparativa.label', {defaultValue: 'Comparativa'})}</span>, cleanLabel: t('tabs.equivalencias.comparativa.label', {defaultValue: 'Comparativa'}) },
   ];
 
   const breadcrumbSuffixMap: Record<string, string> = {
     "datos": t('campos.archivos.breadcrumbArchivos', {defaultValue: 'Archivos'}),
     "asistente-ia": t('tabs.archivos.asistente-ia.label', {defaultValue: 'Asistente'}),
     "verificacion": t('tabs.inicio.verificacion.label', {defaultValue: 'Verificación'}),
-    "comparativa": t('tabs.equivalencias.comparativa.label', {defaultValue: 'Comparativa'}),
   };
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     'datos': t('tabs.archivos.datos.desc', {defaultValue: 'Gestión de tus archivos de Grupos, Programaciones y Cursos guardados en local o en la nube.'}),
     'asistente-ia': t('tabs.archivos.asistente-ia.desc', {defaultValue: 'Configuración de inteligencia artificial.'}),
     'verificacion': t('tabs.inicio.verificacion.desc', {defaultValue: 'Panel de salud y coherencia de los datos de tu cuaderno.'}),
-    'comparativa': t('tabs.equivalencias.comparativa.desc', {defaultValue: 'Comparativa de los distintos niveles de programación y dónde se rellena cada apartado.'}),
   };
 
   // ── Render ──────────────────────────────────────────────
@@ -440,16 +435,7 @@ export default function ArchivosTrabajoPage() {
           </StickyPageHeader>
 
           <MotionWrapper className="w-full space-y-4 px-8 pt-4 pb-12">
-            <TabInfoBox
-              description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de archivos.'}
-              action={activeTab === "comparativa" ? (
-                <Link href="/magia?tab=programacion">
-                  <Button variant="primary" size="sm" className="gap-2">
-                    <Sparkles className="w-4 h-4" /> {t('botones.archivos.irADocumentosPdx', {defaultValue: 'Ir a MagIA'})}
-                  </Button>
-                </Link>
-              ) : undefined}
-            />
+            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de archivos.'} />
 
             <div className="space-y-4 animate-in fade-in duration-300">
               {/* TAB: FILE MANAGER */}
@@ -872,9 +858,6 @@ export default function ArchivosTrabajoPage() {
 
               {/* TAB: VERIFICACIÓN */}
               {activeTab === "verificacion" && <VerificacionTab />}
-
-              {/* TAB: COMPARATIVA */}
-              {activeTab === "comparativa" && <ComparativaPdTab />}
           </MotionWrapper>
         </div>
       </div>
