@@ -130,6 +130,7 @@ export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   "/magia": [
     { id: "analisis-pdx", label: "Análisis APP->PDx" },
     { id: "programacion", label: "Programación" },
+    { id: "comparativa-pdx", label: "Comparativa PDx" },
     { id: "curso", label: "Curso" },
   ],
   "/legal": [
