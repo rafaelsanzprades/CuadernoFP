@@ -377,7 +377,7 @@
   },
   "inicio": {
     "title": "Inici",
-    "subtitle": "Panell principal, contribucions de la comunitat, documents de referència i qualitat EQAVET."
+    "subtitle": "Panell principal, contribucions de la comunitat i documents de referència."
   },
   "nav": {
     "inicio": "Inici",
@@ -443,7 +443,7 @@
     "diario_title": "Seguiment Diari",
     "diario_desc": "Diari d'aula, contingències, control d'assistència i alertes.",
     "evaluacion_title": "Qualificació",
-    "evaluacion_desc": "Qualificacions, avaluació de RA i analítiques.",
+    "evaluacion_desc": "Qualificacions, avaluació de RA, analítiques i qualitat EQAVET.",
     "calendario_title": "Calendari",
     "calendario_desc": "Configura festius, avaluacions i el teu horari setmanal.",
     "modulo_title": "Configuració del Mòdul",
@@ -503,7 +503,7 @@
     "cargando": "Carregant..."
   },
   "navDesc": {
-    "inicio": "Panell principal, contribucions de la comunitat, documents de referència i qualitat EQAVET.",
+    "inicio": "Panell principal, contribucions de la comunitat i documents de referència.",
     "ayuda": "Guia d'inici, FAQ, acrònims i mapa de l'aplicació.",
     "magia": "Comparativa i correspondència APP-PD, i documents de suport de la programació i del curs.",
     "legal": "Avís legal, privacitat, cookies i accessibilitat.",

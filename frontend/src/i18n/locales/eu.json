@@ -377,7 +377,7 @@
   },
   "inicio": {
     "title": "Hasiera",
-    "subtitle": "Panel nagusia, komunitatearen ekarpenak, erreferentzia-dokumentuak eta EQAVET kalitatea."
+    "subtitle": "Panel nagusia, komunitatearen ekarpenak eta erreferentzia-dokumentuak."
   },
   "nav": {
     "inicio": "Hasiera",
@@ -443,7 +443,7 @@
     "diario_title": "Eguneroko Segimendua",
     "diario_desc": "Ikasgelako egunerokoa, kontingentziak, asistentzia kontrola eta alertak.",
     "evaluacion_title": "Kalifikazioa",
-    "evaluacion_desc": "Kalifikazioak, RAren ebaluazioa eta analitikak.",
+    "evaluacion_desc": "Kalifikazioak, RAren ebaluazioa, analitikak eta EQAVET kalitatea.",
     "calendario_title": "Egutegia",
     "calendario_desc": "Konfiguratu jaiegunak, ebaluazioak eta zure asteko ordutegia.",
     "modulo_title": "Moduluaren konfigurazioa",
@@ -503,7 +503,7 @@
     "cargando": "Kargatzen..."
   },
   "navDesc": {
-    "inicio": "Panel nagusia, komunitatearen ekarpenak, erreferentzia-dokumentuak eta EQAVET kalitatea.",
+    "inicio": "Panel nagusia, komunitatearen ekarpenak eta erreferentzia-dokumentuak.",
     "ayuda": "Hasierako gida, FAQ, akronimoak eta aplikazioaren mapa.",
     "magia": "APP-PD konparaketa eta korrespondentzia, eta programazioaren eta ikasturtearen laguntza-dokumentuak.",
     "legal": "Lege-oharra, pribatutasuna, cookieak eta irisgarritasuna.",

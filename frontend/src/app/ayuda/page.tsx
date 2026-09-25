@@ -23,7 +23,6 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "bienvenida", label: "Bienvenida" },
     { id: "contribuciones", label: "Contribuciones" },
     { id: "documentos", label: "Documentos" },
-    { id: "mejora", label: "Mejora" },
   ],
   "/contexto": [
     { id: "identificacion", label: "Identificación" },
@@ -77,6 +76,7 @@ const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "resumen", label: "Resumen" },
     { id: "historico", label: "Histórico" },
     { id: "individual", label: "Individual" },
+    { id: "mejora", label: "Mejora" },
   ],
   "/normativa": [
     { id: "autonomias", label: "Autonomías" },

@@ -1,12 +1,10 @@
 "use client";
-import { Activity, ArrowRight, BookOpen, GraduationCap, Users, Send, Info, Shield, Map, MessageCircle } from "lucide-react";
+import { Activity, ArrowRight, BookOpen, GraduationCap, Users, Send, Info, Map, MessageCircle } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { navGroups } from "@/config/navigation";
-import { EqavetTab } from "@/components/features/modulo/EqavetTab";
-import { PropuestasTab } from "@/components/features/modulo/PropuestasTab";
 import { Card } from "@/components/ui/Card";
 import Link from "next/link";
 import { TabSync } from "@/components/ui/TabSync";
@@ -52,7 +50,6 @@ export default function InicioPage() {
     { id: "bienvenida", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.bienvenida')}</>, cleanLabel: t('tabs.bienvenida') },
     { id: "contribuciones", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.inicio.contribuciones.label', {defaultValue: 'Contribuciones'})}</>, cleanLabel: t('tabs.inicio.contribuciones.label', {defaultValue: 'Contribuciones'}) },
     { id: "documentos", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.documentos.label', {defaultValue: 'Documentos'})}</>, cleanLabel: t('tabs.ayuda.documentos.label', {defaultValue: 'Documentos'}) },
-    { id: "mejora", label: <><span className="inline-flex"><Shield className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.inicio.mejora.label', {defaultValue: 'Mejora'})}</>, cleanLabel: t('tabs.inicio.mejora.label', {defaultValue: 'Mejora'}) },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -61,7 +58,6 @@ export default function InicioPage() {
     bienvenida: t('tabs.inicio.bienvenida.desc', {defaultValue: 'Panel de control de acceso rápido a todas las herramientas.'}),
     contribuciones: t('tabs.inicio.contribuciones.desc', {defaultValue: 'Comunidad de Telegram y listado de personas que contribuyen activamente al proyecto.'}),
     documentos: t('tabs.ayuda.documentos.desc', {defaultValue: 'Currículos, guías y documentos de referencia descargables.'}),
-    mejora: t('tabs.inicio.mejora.desc', {defaultValue: 'Gestión de la calidad, evaluación del proceso e indicadores para el módulo.'}),
   };
 
   return (
@@ -263,14 +259,6 @@ export default function InicioPage() {
             {activeTab === "documentos" && (
               <div className="animate-in fade-in duration-500 w-full">
                 <TabDocumentos />
-              </div>
-            )}
-
-            {/* ── CONTENIDO: MEJORA ──────────────────────────────────────── */}
-            {activeTab === "mejora" && (
-              <div className="space-y-6 animate-in fade-in duration-500 w-full">
-                <EqavetTab />
-                <PropuestasTab />
               </div>
             )}
 

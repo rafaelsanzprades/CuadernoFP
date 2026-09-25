@@ -320,13 +320,13 @@ export function VerificacionTab() {
       id: "eqavet",
       icon: <Shield className="w-5 h-5" />,
       title: t('campos.verificacion.calidadEqavetTitulo', {defaultValue: 'Calidad EQAVET'}),
-      href: "/inicio?tab=mejora",
+      href: "/calificaciones?tab=mejora",
       hrefLabel: t('campos.verificacion.mejoraLabel', {defaultValue: 'Mejora'}),
       status: (m?.eqavet_evaluacion && Object.keys(m.eqavet_evaluacion).length > 0) ? "ok" : "empty",
       lines: (m?.eqavet_evaluacion && Object.keys(m.eqavet_evaluacion).length > 0)
         ? [t('campos.verificacion.indicadoresEqavetValorados', {count: Object.keys(m.eqavet_evaluacion).length, defaultValue: '{{count}} indicadores EQAVET valorados'})]
         : [t('campos.verificacion.sinIndicadoresEqavet', {defaultValue: 'Sin indicadores EQAVET valorados'})],
-      actionHref: "/inicio?tab=mejora",
+      actionHref: "/calificaciones?tab=mejora",
       actionLabel: t('botones.verificacion.valorarCalidad', {defaultValue: 'Valorar calidad'}),
     },
     {

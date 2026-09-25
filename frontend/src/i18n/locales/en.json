@@ -377,7 +377,7 @@
   },
   "inicio": {
     "title": "Home",
-    "subtitle": "Main dashboard, community contributions, reference documents and EQAVET quality."
+    "subtitle": "Main dashboard, community contributions and reference documents."
   },
   "nav": {
     "inicio": "Home",
@@ -443,7 +443,7 @@
     "diario_title": "Daily Tracking",
     "diario_desc": "Classroom journal, contingencies, attendance control and alerts.",
     "evaluacion_title": "Grade",
-    "evaluacion_desc": "Grades, RA evaluation and analytics.",
+    "evaluacion_desc": "Grades, RA evaluation, analytics and EQAVET quality.",
     "calendario_title": "Calendar",
     "calendario_desc": "Set holidays, evaluations and your weekly schedule.",
     "modulo_title": "Module Configuration",
@@ -503,7 +503,7 @@
     "cargando": "Loading..."
   },
   "navDesc": {
-    "inicio": "Main dashboard, community contributions, reference documents and EQAVET quality.",
+    "inicio": "Main dashboard, community contributions and reference documents.",
     "ayuda": "Getting-started guide, FAQ, acronyms and app map.",
     "magia": "APP-PD comparison and mapping, plus supporting documents for the programme and the course.",
     "legal": "Legal notice, privacy, cookies and accessibility.",
