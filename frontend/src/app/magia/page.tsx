@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Download, FileEdit, FileSpreadsheet, FileText, FileStack, FolderOpen, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, Grid3x3, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp, Compass, Lightbulb, Wrench } from "lucide-react";
+import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Download, FileEdit, FileSpreadsheet, FileText, FileStack, FolderOpen, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, Grid3x3, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp, Wrench } from "lucide-react";
 import * as XLSX from "xlsx";
 import React, { useState, useEffect, useMemo } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -413,13 +413,6 @@ export default function MagiaPage() {
                       </Card>
                     ) : (
                       <div className="space-y-4 animate-in fade-in duration-500">
-                        {/* ── Contexto ── */}
-                        <Card className="p-6 border-t-4 border-t-teal-500">
-                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Compass className="w-4 h-4" /></span> {t('nav.contexto', {defaultValue: 'Contexto'})}</h2>
-                          <p className="text-body text-muted mb-2">{t('campos.magia.contextoDesc', {defaultValue: 'Información general y características del entorno.'})}</p>
-                          <p className="text-caption text-muted italic">{t('campos.magia.sinDocumentosApoyo', {defaultValue: 'Sin documentos de apoyo todavía en esta sección.'})}</p>
-                        </Card>
-
                         {/* ── Currículo ── */}
                         <Card className="p-6 border-t-4 border-t-teal-500">
                           <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Grid className="w-4 h-4" /></span> {t('nav.curriculo', {defaultValue: 'Currículo'})}</h2>
@@ -483,16 +476,9 @@ export default function MagiaPage() {
                           </div>
                         </Card>
 
-                        {/* ── Metodología ── */}
+                        {/* ── Instrumento ── */}
                         <Card className="p-6 border-t-4 border-t-teal-500">
-                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Lightbulb className="w-4 h-4" /></span> {t('nav.metodologia', {defaultValue: 'Metodología'})}</h2>
-                          <p className="text-body text-muted mb-2">{t('campos.magia.metodologiaDesc', {defaultValue: 'Estrategias metodológicas y recursos.'})}</p>
-                          <p className="text-caption text-muted italic">{t('campos.magia.sinDocumentosApoyo', {defaultValue: 'Sin documentos de apoyo todavía en esta sección.'})}</p>
-                        </Card>
-
-                        {/* ── Instrumentos ── */}
-                        <Card className="p-6 border-t-4 border-t-teal-500">
-                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Wrench className="w-4 h-4" /></span> {t('campos.magia.instrumentosTitulo', {defaultValue: 'Instrumentos'})}</h2>
+                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Wrench className="w-4 h-4" /></span> {t('campos.magia.instrumentosTitulo', {defaultValue: 'Instrumento'})}</h2>
                           <p className="text-body text-muted mb-6">{t('campos.magia.instrumentosDesc', {defaultValue: 'Definición y pesos de las herramientas de evaluación.'})}</p>
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
