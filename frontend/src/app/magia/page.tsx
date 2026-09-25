@@ -311,14 +311,12 @@ export default function MagiaPage() {
   const df_act = moduleData?.df_act || [];
 
   const TABS = [
-    { id: "documentos-pdx", label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4 shrink-0" /> {t('tabs.magia.documentosPdx.label', {defaultValue: 'Documentos PDx'})}</span>, cleanLabel: t('tabs.magia.documentosPdx.label', {defaultValue: 'Documentos PDx'}) },
     { id: "analisis-pdx", label: <span className="flex items-center gap-2"><FileStack className="w-4 h-4 shrink-0" /> {t('tabs.magia.analisisPdx.label', {defaultValue: 'Análisis APP->PDx'})}</span>, cleanLabel: t('tabs.magia.analisisPdx.label', {defaultValue: 'Análisis APP->PDx'}) },
     { id: "programacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.magia.programacion.label', {defaultValue: 'Programación'})}</span>, cleanLabel: t('tabs.magia.programacion.label', {defaultValue: 'Programación'}) },
     { id: "curso", label: <span className="flex items-center gap-2"><Calendar className="w-4 h-4 shrink-0" /> {t('tabs.magia.curso.label', {defaultValue: 'Curso'})}</span>, cleanLabel: t('tabs.magia.curso.label', {defaultValue: 'Curso'}) },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    'documentos-pdx': t('tabs.magia.documentosPdx.desc', {defaultValue: 'Genera y descarga las programaciones didácticas PD-, PD= y PD+ en formato editable, por comunidad autónoma.'}),
     'analisis-pdx': t('tabs.magia.analisisPdx.desc', {defaultValue: 'De la app a dónde aparece cada campo en cada modelo de Programación Didáctica (PD-, PD=, PD+).'}),
     programacion: t('tabs.magia.programacion.desc', {defaultValue: 'Documentos de apoyo: matriz de currículo y documentos individuales de UD y Tareas.'}),
     curso: t('tabs.magia.curso.desc', {defaultValue: 'Calendario, seguimiento, plano de aula, boletines y actas de evaluación del curso.'}),
@@ -383,127 +381,6 @@ export default function MagiaPage() {
 
               <MotionWrapper className="w-full space-y-3 px-8 pt-4 pb-12">
                 <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
-
-                {/* ══════════════════════════ DOCUMENTOS PDx (antes "Comunidades") ══════════════════════════ */}
-                {/* Eliminada el 2026-09-03 en la reorganización del sidebar (con confirmación
-                    de Rafael), recuperada el 2026-09-23 con nuevo nombre -- es la única función
-                    real de generación de PD-/PD=/PD+ en .docx por comunidad (Aragón funcional,
-                    el resto deshabilitado a falta de plantillas propias). */}
-                {activeTab === "documentos-pdx" && (
-                  <div className="pt-2 space-y-6">
-                    {(!activeCursoId || !activeModuleId) ? (
-                      <Card className="p-12 text-center flex flex-col items-center justify-center gap-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl">
-                        <FileText className="w-16 h-16 text-muted-foreground opacity-50" />
-                        <h2 className="text-heading font-bold">{t('campos.calificaciones.sinCursoNiProgramacionTitulo', {defaultValue: 'No hay curso ni programación cargada'})}</h2>
-                        <p className="text-muted mb-4">{t('campos.calificaciones.sinCursoNiProgramacionDesc', {defaultValue: 'Debes abrir o crear un archivo de programación y curso en tu Archivos.'})}</p>
-                        <Link href="/archivos">
-                          <Button variant="primary" className="gap-2">
-                            <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
-                          </Button>
-                        </Link>
-                      </Card>
-                    ) : (loadingData || !cursoData || !moduleData) ? (
-                      <Card className="p-12">
-                        <div className="space-y-3">
-                          <Skeleton className="h-8 w-1/4" />
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <Skeleton className="h-40 w-full" />
-                            <Skeleton className="h-40 w-full" />
-                          </div>
-                        </div>
-                      </Card>
-                    ) : (
-                      <div className="space-y-4 animate-in fade-in duration-500">
-                        {["Andalucía", "Aragón", "Asturias", "Baleares", "Canarias", "Cantabria", "Castilla-La Mancha", "Castilla y León", "Cataluña", "Comunidad Valenciana", "Extremadura", "Galicia", "Madrid", "Murcia", "Navarra", "País Vasco", "La Rioja", "Ceuta", "Melilla"].map((comunidad) => {
-                          const isAragon = comunidad === "Aragón";
-                          return (
-                            <details key={comunidad} open={isAragon} className="group border border-[var(--glass-border)] rounded-xl bg-background/50 mb-4 shadow-sm overflow-hidden">
-                              <summary className="p-4 font-bold cursor-pointer text-subheading flex items-center justify-between hover:bg-foreground/5 transition-colors list-none border-b border-transparent group-open:border-[var(--glass-border)] group-open:bg-foreground/5">
-                                <span className="flex items-center gap-2"><MapPin className={`w-5 h-5 ${isAragon ? 'text-purple-500' : 'text-muted-foreground'}`} /> {comunidad}</span>
-                                <ChevronDown className="w-5 h-5 transition-transform group-open:rotate-180 text-muted" />
-                              </summary>
-                              {isAragon ? (
-                                <div className="p-6">
-                                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                                      <div>
-                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.pdMinimaTitulo', {defaultValue: 'PD-. Resumen para el alumnado'})}</h3>
-                                        <p className="text-body text-muted mb-6">{t('campos.magia.pdMinimaDesc', {defaultValue: 'Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.'})}</p>
-                                      </div>
-                                      <div className="mt-auto">
-                                        <Button onClick={() => handleDownloadPdf('programacion_minima_tpl', 'docx')} disabled={downloadingStr === 'programacion_minima_tpl_docx'} className="w-full">
-                                          {downloadingStr === 'programacion_minima_tpl_docx' ? t('botones.magia.generandoDocx', {defaultValue: '⏳ Generando DOCX...'}) : t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}
-                                        </Button>
-                                      </div>
-                                    </div>
-
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                                      <div>
-                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.pdSuficienteAragonTitulo', {defaultValue: 'PD=. Programación didáctica Simplificada'})}</h3>
-                                        <p className="text-body text-muted mb-6">{t('campos.magia.pdSuficienteAragonDesc', {defaultValue: 'Versión simplificada con los puntos de la Ley muy específica y concreta (no detalla secuenciación de aula ni extensa teoría).'})}</p>
-                                      </div>
-                                      <div className="mt-auto">
-                                        <Button onClick={() => handleDownloadPdf('programacion_suficiente_tpl', 'docx')} disabled={downloadingStr === 'programacion_suficiente_tpl_docx'} className="w-full">
-                                          {downloadingStr === 'programacion_suficiente_tpl_docx' ? t('botones.magia.generandoDocx', {defaultValue: '⏳ Generando DOCX...'}) : t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}
-                                        </Button>
-                                      </div>
-                                    </div>
-
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                                      <div>
-                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.pdJegAragonTitulo', {defaultValue: 'PD+. Programación didáctica CIFPA'})}</h3>
-                                        <p className="text-body text-muted mb-6">{t('campos.magia.pdCompletaDesc', {defaultValue: 'Se cumplimenta el modelo oficial de programación completo.'})}</p>
-                                      </div>
-                                      <div className="mt-auto">
-                                        <Button onClick={() => handleDownloadPdf('programacion_jeg', 'docx')} disabled={downloadingStr === 'programacion_jeg_docx'} className="w-full">
-                                          {downloadingStr === 'programacion_jeg_docx' ? t('botones.magia.generandoDocx', {defaultValue: '⏳ Generando DOCX...'}) : t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}
-                                        </Button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              ) : (
-                                <div className="p-6">
-                                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                                      <div>
-                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.pdMinimaTitulo', {defaultValue: 'PD-. Resumen para el alumnado'})}</h3>
-                                        <p className="text-body text-muted mb-6">{t('campos.magia.pdMinimaDesc', {defaultValue: 'Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.'})}</p>
-                                      </div>
-                                      <div className="mt-auto">
-                                        <Button disabled className="w-full">{t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}</Button>
-                                      </div>
-                                    </div>
-
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                                      <div>
-                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.pdSuficienteComunidadTitulo', {defaultValue: 'PD=. Programación didáctica ({{comunidad}})', comunidad})}</h3>
-                                        <p className="text-body text-muted mb-6">{t('campos.magia.pdSuficienteComunidadDesc', {defaultValue: 'Versión ajustada a la normativa oficial de {{comunidad}}.', comunidad})}</p>
-                                      </div>
-                                      <div className="mt-auto">
-                                        <Button disabled className="w-full">{t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}</Button>
-                                      </div>
-                                    </div>
-
-                                    <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                                      <div>
-                                        <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.pdJegComunidadTitulo', {defaultValue: 'PD+. Programación didáctica detallada ({{comunidad}})', comunidad})}</h3>
-                                        <p className="text-body text-muted mb-6">{t('campos.magia.pdCompletaDesc', {defaultValue: 'Se cumplimenta el modelo oficial de programación completo.'})}</p>
-                                      </div>
-                                      <div className="mt-auto">
-                                        <Button disabled className="w-full">{t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}</Button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              )}
-                            </details>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
-                )}
 
                 {/* ══════════════════════════ ANÁLISIS APP->PDx ══════════════════════════ */}
                 {activeTab === "analisis-pdx" && <AnalisisPdxTab />}
@@ -625,6 +502,102 @@ export default function MagiaPage() {
                               </div>
                               <DualDownloadButtons type="cobertura_ce" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
                             </div>
+                          </div>
+                        </Card>
+
+                        {/* ── Documentos programáticos por Comunidades autónomas (antes
+                            pestaña propia "Documentos PDx" / "Comunidades" -- traída aquí
+                            debajo, 2026-09-25, petición de Rafael) ── */}
+                        <Card className="p-6 border-t-4 border-t-purple-500">
+                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><MapPin className="w-4 h-4" /></span> {t('campos.magia.documentosPorComunidadTitulo', {defaultValue: 'Documentos programáticos por Comunidades autónomas'})}</h2>
+                          <p className="text-body text-muted mb-6">{t('tabs.magia.documentosPdx.desc', {defaultValue: 'Genera y descarga las programaciones didácticas PD-, PD= y PD+ en formato editable, por comunidad autónoma.'})}</p>
+                          <div className="space-y-4">
+                            {["Andalucía", "Aragón", "Asturias", "Baleares", "Canarias", "Cantabria", "Castilla-La Mancha", "Castilla y León", "Cataluña", "Comunidad Valenciana", "Extremadura", "Galicia", "Madrid", "Murcia", "Navarra", "País Vasco", "La Rioja", "Ceuta", "Melilla"].map((comunidad) => {
+                              const isAragon = comunidad === "Aragón";
+                              return (
+                                <details key={comunidad} open={isAragon} className="group border border-[var(--glass-border)] rounded-xl bg-background/50 mb-4 shadow-sm overflow-hidden">
+                                  <summary className="p-4 font-bold cursor-pointer text-subheading flex items-center justify-between hover:bg-foreground/5 transition-colors list-none border-b border-transparent group-open:border-[var(--glass-border)] group-open:bg-foreground/5">
+                                    <span className="flex items-center gap-2"><MapPin className={`w-5 h-5 ${isAragon ? 'text-purple-500' : 'text-muted-foreground'}`} /> {comunidad}</span>
+                                    <ChevronDown className="w-5 h-5 transition-transform group-open:rotate-180 text-muted" />
+                                  </summary>
+                                  {isAragon ? (
+                                    <div className="p-6">
+                                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                                          <div>
+                                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.pdMinimaTitulo', {defaultValue: 'PD-. Resumen para el alumnado'})}</h3>
+                                            <p className="text-body text-muted mb-6">{t('campos.magia.pdMinimaDesc', {defaultValue: 'Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.'})}</p>
+                                          </div>
+                                          <div className="mt-auto">
+                                            <Button onClick={() => handleDownloadPdf('programacion_minima_tpl', 'docx')} disabled={downloadingStr === 'programacion_minima_tpl_docx'} className="w-full">
+                                              {downloadingStr === 'programacion_minima_tpl_docx' ? t('botones.magia.generandoDocx', {defaultValue: '⏳ Generando DOCX...'}) : t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}
+                                            </Button>
+                                          </div>
+                                        </div>
+
+                                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                                          <div>
+                                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.pdSuficienteAragonTitulo', {defaultValue: 'PD=. Programación didáctica Simplificada'})}</h3>
+                                            <p className="text-body text-muted mb-6">{t('campos.magia.pdSuficienteAragonDesc', {defaultValue: 'Versión simplificada con los puntos de la Ley muy específica y concreta (no detalla secuenciación de aula ni extensa teoría).'})}</p>
+                                          </div>
+                                          <div className="mt-auto">
+                                            <Button onClick={() => handleDownloadPdf('programacion_suficiente_tpl', 'docx')} disabled={downloadingStr === 'programacion_suficiente_tpl_docx'} className="w-full">
+                                              {downloadingStr === 'programacion_suficiente_tpl_docx' ? t('botones.magia.generandoDocx', {defaultValue: '⏳ Generando DOCX...'}) : t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}
+                                            </Button>
+                                          </div>
+                                        </div>
+
+                                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                                          <div>
+                                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.pdJegAragonTitulo', {defaultValue: 'PD+. Programación didáctica CIFPA'})}</h3>
+                                            <p className="text-body text-muted mb-6">{t('campos.magia.pdCompletaDesc', {defaultValue: 'Se cumplimenta el modelo oficial de programación completo.'})}</p>
+                                          </div>
+                                          <div className="mt-auto">
+                                            <Button onClick={() => handleDownloadPdf('programacion_jeg', 'docx')} disabled={downloadingStr === 'programacion_jeg_docx'} className="w-full">
+                                              {downloadingStr === 'programacion_jeg_docx' ? t('botones.magia.generandoDocx', {defaultValue: '⏳ Generando DOCX...'}) : t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}
+                                            </Button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  ) : (
+                                    <div className="p-6">
+                                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                                          <div>
+                                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.pdMinimaTitulo', {defaultValue: 'PD-. Resumen para el alumnado'})}</h3>
+                                            <p className="text-body text-muted mb-6">{t('campos.magia.pdMinimaDesc', {defaultValue: 'Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.'})}</p>
+                                          </div>
+                                          <div className="mt-auto">
+                                            <Button disabled className="w-full">{t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}</Button>
+                                          </div>
+                                        </div>
+
+                                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                                          <div>
+                                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.pdSuficienteComunidadTitulo', {defaultValue: 'PD=. Programación didáctica ({{comunidad}})', comunidad})}</h3>
+                                            <p className="text-body text-muted mb-6">{t('campos.magia.pdSuficienteComunidadDesc', {defaultValue: 'Versión ajustada a la normativa oficial de {{comunidad}}.', comunidad})}</p>
+                                          </div>
+                                          <div className="mt-auto">
+                                            <Button disabled className="w-full">{t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}</Button>
+                                          </div>
+                                        </div>
+
+                                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                                          <div>
+                                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.pdJegComunidadTitulo', {defaultValue: 'PD+. Programación didáctica detallada ({{comunidad}})', comunidad})}</h3>
+                                            <p className="text-body text-muted mb-6">{t('campos.magia.pdCompletaDesc', {defaultValue: 'Se cumplimenta el modelo oficial de programación completo.'})}</p>
+                                          </div>
+                                          <div className="mt-auto">
+                                            <Button disabled className="w-full">{t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}</Button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  )}
+                                </details>
+                              );
+                            })}
                           </div>
                         </Card>
                       </div>

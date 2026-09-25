@@ -443,9 +443,9 @@ export default function ArchivosTrabajoPage() {
             <TabInfoBox
               description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de archivos.'}
               action={activeTab === "comparativa" ? (
-                <Link href="/magia?tab=documentos-pdx">
+                <Link href="/magia?tab=programacion">
                   <Button variant="primary" size="sm" className="gap-2">
-                    <Sparkles className="w-4 h-4" /> {t('botones.archivos.irADocumentosPdx', {defaultValue: 'Ir a Documentos PDx'})}
+                    <Sparkles className="w-4 h-4" /> {t('botones.archivos.irADocumentosPdx', {defaultValue: 'Ir a MagIA'})}
                   </Button>
                 </Link>
               ) : undefined}
