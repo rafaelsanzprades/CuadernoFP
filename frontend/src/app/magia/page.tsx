@@ -422,7 +422,7 @@ export default function MagiaPage() {
                         <Card className="p-6 border-t-4 border-t-teal-500">
                           <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Grid className="w-4 h-4" /></span> {t('campos.magia.documentosApoyoCurriculoTitulo', {defaultValue: 'Documentos de apoyo al currículo'})}</h2>
                           <p className="text-body text-muted mb-6">{t('campos.magia.documentosApoyoCurriculoDesc', {defaultValue: 'Cruce de resultados de aprendizaje, criterios e instrumentos; documentos de UD y tareas.'})}</p>
-                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                               <div>
                                 <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Grid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.matrizRaUdTitulo', {defaultValue: 'Matriz RA ↔ UD'})}</h3>
