@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Download, FileEdit, FileSpreadsheet, FileText, FileStack, FolderOpen, GitCompare, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, Grid3x3, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp, Wrench } from "lucide-react";
+import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Download, FileEdit, FileSpreadsheet, FileText, FileStack, FolderOpen, GitCompare, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, Grid3x3, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp } from "lucide-react";
 import * as XLSX from "xlsx";
 import React, { useState, useEffect, useMemo } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -416,11 +416,13 @@ export default function MagiaPage() {
                       </Card>
                     ) : (
                       <div className="space-y-4 animate-in fade-in duration-500">
-                        {/* ── Currículo ── */}
+                        {/* ── Currículo + Instrumento fusionados en un solo bloque
+                            (antes 2 Cards separadas, 2026-09-25, petición de Rafael:
+                            "mejor quitar los dos bloques... uno solo... y ya esta claro") ── */}
                         <Card className="p-6 border-t-4 border-t-teal-500">
-                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Grid className="w-4 h-4" /></span> {t('nav.curriculo', {defaultValue: 'Currículo'})}</h2>
-                          <p className="text-body text-muted mb-6">{t('campos.magia.curriculoDesc', {defaultValue: 'Cruce de resultados de aprendizaje y criterios; documentos de UD y tareas.'})}</p>
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Grid className="w-4 h-4" /></span> {t('campos.magia.documentosApoyoCurriculoTitulo', {defaultValue: 'Documentos de apoyo al currículo'})}</h2>
+                          <p className="text-body text-muted mb-6">{t('campos.magia.documentosApoyoCurriculoDesc', {defaultValue: 'Cruce de resultados de aprendizaje, criterios e instrumentos; documentos de UD y tareas.'})}</p>
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                               <div>
                                 <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Grid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.matrizRaUdTitulo', {defaultValue: 'Matriz RA ↔ UD'})}</h3>
@@ -476,14 +478,7 @@ export default function MagiaPage() {
                                 {downloadingStr === 'tarea_docx' ? t('botones.magia.generandoDocx', {defaultValue: '⏳ Generando DOCX...'}) : t('botones.magia.descargarTareaDocx', {defaultValue: 'Descargar tarea.docx'})}
                               </Button>
                             </div>
-                          </div>
-                        </Card>
 
-                        {/* ── Instrumento ── */}
-                        <Card className="p-6 border-t-4 border-t-teal-500">
-                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Wrench className="w-4 h-4" /></span> {t('campos.magia.instrumentosTitulo', {defaultValue: 'Instrumento'})}</h2>
-                          <p className="text-body text-muted mb-6">{t('campos.magia.instrumentosDesc', {defaultValue: 'Definición y pesos de las herramientas de evaluación.'})}</p>
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                               <div>
                                 <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Grid3x3 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.coberturaCeTitulo', {defaultValue: 'Matriz de cobertura CE × Instrumento'})}</h3>
