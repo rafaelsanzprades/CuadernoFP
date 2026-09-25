@@ -130,7 +130,6 @@ export default function InicioPage() {
     { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.magia.guia.label', {defaultValue: 'Guía'})}</>, cleanLabel: t('tabs.magia.guia.label', {defaultValue: 'Guía'}) },
     { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.faq.label', {defaultValue: 'FAQ'})}</>, cleanLabel: t('tabs.ayuda.faq.label', {defaultValue: 'FAQ'}) },
     { id: "acronimos", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.acronimos.label', {defaultValue: 'Acrónimos'})}</>, cleanLabel: t('tabs.ayuda.acronimos.label', {defaultValue: 'Acrónimos'}) },
-    { id: "mapa", label: <><span className="inline-flex"><Map className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.mapa.label', {defaultValue: 'Mapa'})}</>, cleanLabel: t('tabs.ayuda.mapa.label', {defaultValue: 'Mapa'}) },
   ];
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
@@ -140,7 +139,6 @@ export default function InicioPage() {
     guia: t('tabs.magia.guia.desc', {defaultValue: 'Guía de inicio y prompt para IA: qué datos pedir al docente y dónde colocarlos en la app.'}),
     faq: t('tabs.ayuda.faq.desc', {defaultValue: 'Respuestas a las preguntas más frecuentes del profesorado.'}),
     acronimos: t('tabs.ayuda.acronimos.desc', {defaultValue: 'Glosario de siglas, acrónimos y conceptos de Formación Profesional.'}),
-    mapa: t('tabs.ayuda.mapa.desc', {defaultValue: 'Esquema jerárquico de todas las secciones y utilidades de la aplicación.'}),
   };
 
   return (
@@ -281,11 +279,9 @@ export default function InicioPage() {
                                 </p>
                               )}
                               {itemTabs.length > 0 && (
-                                <div className="mt-auto pt-2 flex flex-wrap gap-1 border-t border-[var(--glass-border)]/60">
+                                <div className="mt-auto pt-2 pl-2 grid grid-cols-1 gap-0.5 text-caption text-muted/80 border-l-2 border-[var(--glass-border)] ml-1">
                                   {itemTabs.map(tab => (
-                                    <span key={tab.id} className="text-caption text-muted/80 bg-foreground/5 px-1.5 py-0.5 rounded">
-                                      {t(`checks.ayuda.mapa_${itemBasePath.slice(1)}_${tab.id.replace(/[^a-z0-9]/gi, '_')}`, {defaultValue: tab.label})}
-                                    </span>
+                                    <span key={tab.id}>— {t(`checks.ayuda.mapa_${itemBasePath.slice(1)}_${tab.id.replace(/[^a-z0-9]/gi, '_')}`, {defaultValue: tab.label})}</span>
                                   ))}
                                 </div>
                               )}
@@ -385,61 +381,6 @@ export default function InicioPage() {
             {activeTab === "acronimos" && (
               <div className="animate-in fade-in duration-500 w-full">
                 <TabAcronimos />
-              </div>
-            )}
-
-            {/* ── CONTENIDO: MAPA WEB ──────────────────────────────────────── */}
-            {activeTab === "mapa" && (
-              <div className="space-y-12 animate-in fade-in duration-500">
-                <section className="space-y-3">
-                  <h2 className="text-subheading font-bold text-foreground border-b border-[var(--glass-border)] pb-2">
-                    {t('campos.ayuda.mapaAplicacionTitulo', {defaultValue: 'Mapa de la aplicación (sitemap)'})}
-                  </h2>
-                  <p className="text-body text-foreground/80 leading-relaxed">
-                    {t('campos.ayuda.mapaAplicacionDescPre', {defaultValue: 'Estructura organizativa de Cuaderno FP. La lista de páginas se genera a partir de la configuración real de navegación ('})}<code className="text-caption bg-foreground/10 px-1 rounded">config/navigation.ts</code>{t('campos.ayuda.mapaAplicacionDescMid', {defaultValue: '). Las pestañas de cada página se mantienen a mano en este mismo fichero ('})}<code className="text-caption bg-foreground/10 px-1 rounded">PAGE_TABS</code>{t('campos.ayuda.mapaAplicacionDescPost', {defaultValue: '), así que pueden quedarse desactualizadas si se añade o quita una pestaña sin actualizar también aquí.'})}
-                  </p>
-                  <div className="bg-info/5 border border-info/20 rounded-xl p-4 text-body text-muted leading-relaxed">
-                    <strong className="text-foreground">{t('campos.ayuda.agrupamientoPreguntaTitulo', {defaultValue: '¿Es adecuado el agrupamiento actual?'})}</strong> {t('campos.ayuda.agrupamientoRespuestaPre', {defaultValue: 'Sí: separa con claridad la utilidad universal ('})}<em>{t('navGroups.general', {defaultValue: 'General'})}</em>{t('campos.ayuda.agrupamientoInicioDesc', {defaultValue: ': Inicio/Archivo/Normativa/MagIA/Legal — independiente de tener un grupo abierto), el diseño de la programación ('})}<em>{t('campos.ayuda.programacionLabel', {defaultValue: 'Programación'})}</em>{t('campos.ayuda.agrupamientoProgramacionDesc', {defaultValue: ': Catálogo/Contexto/Currículo/Metodología/Instrumento) y el día a día del curso real ('})}<em>{t('navGroups.curso', {defaultValue: 'Curso'})}</em>{t('campos.ayuda.agrupamientoCursoDesc', {defaultValue: ': Agenda/Calendario/Alumnado/Seguimiento/Calificación).'})}
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">
-                    {/* Columnas dinámicas: una por cada grupo real de navigation.ts */}
-                    {navGroups.map(group => {
-                      const baseTitle = group.title.replace(/\s*\[.*\]$/, '');
-                      const translatedTitle = baseTitle === "General" ? t('navGroups.general', {defaultValue: 'General'})
-                        : baseTitle === "Programación" ? t('navGroups.programacion', {defaultValue: 'Programación'})
-                        : baseTitle === "Curso" ? t('navGroups.curso', {defaultValue: 'Curso'})
-                        : baseTitle;
-                      return (
-                      <div key={group.title} className="space-y-6">
-                        <h3 className="font-extrabold text-subheading border-b-2 border-accent pb-2 text-foreground">
-                          {translatedTitle}
-                        </h3>
-                        <ul className="space-y-4 text-body">
-                          {group.items.map(item => {
-                            const basePath = item.href.split('?')[0];
-                            const tabs = PAGE_TABS[basePath] || [];
-                            return (
-                              <li key={item.href}>
-                                <Link href={basePath} className="text-foreground hover:text-accent font-bold flex items-center gap-2 transition-colors">
-                                  <span className="w-1.5 h-1.5 rounded-full bg-accent"></span> {t('nav.' + basePath.replace('/', ''), {defaultValue: item.label})}
-                                </Link>
-                                {tabs.length > 0 && (
-                                  <div className="pl-5 mt-1.5 grid grid-cols-1 gap-1 text-muted border-l-2 border-[var(--glass-border)] ml-1">
-                                    {tabs.map(tab => (
-                                      <Link key={tab.id} href={`${basePath}?tab=${tab.id}`} className="hover:text-accent transition-colors block py-0.5">— {t(`checks.ayuda.mapa_${basePath.slice(1)}_${tab.id.replace(/[^a-z0-9]/gi, '_')}`, {defaultValue: tab.label})}</Link>
-                                    ))}
-                                  </div>
-                                )}
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </div>
-                      );
-                    })}
-                  </div>
-                </section>
               </div>
             )}
 
