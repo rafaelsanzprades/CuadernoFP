@@ -26,7 +26,7 @@ def _find_free_port() -> int:
         return s.getsockname()[1]
 
 
-def main() -> None:
+def run_server() -> None:
     if "DATABASE_URL" not in os.environ:
         db_path = os.path.join(_backend_dir, "cdd_pro.db")
         os.environ["DATABASE_URL"] = f"sqlite:///{db_path}"
@@ -40,14 +40,20 @@ def main() -> None:
 
     # Import diferido a propósito: DATABASE_URL/CORS_ORIGINS deben quedar
     # fijados en el entorno antes de que main.py (y database.py, que lee
-    # DATABASE_URL en tiempo de import) se importen.
+    # DATABASE_URL en tiempo de import) se importen. Se pasa el objeto `app`
+    # ya importado a uvicorn.run(), no el string "main:app" -- dentro del
+    # ejecutable empaquetado con PyInstaller, la resolución dinámica de
+    # módulos por nombre que usa uvicorn para el string falla ("Could not
+    # import module main"); importar el objeto directamente evita ese paso
+    # y además hace que PyInstaller rastree main.py como import estático.
     import uvicorn
+    import main as backend_app
 
     print(f"PORT={port}", flush=True)
     sys.stdout.flush()
 
-    uvicorn.run("main:app", host="127.0.0.1", port=port, reload=False, log_level="info")
+    uvicorn.run(backend_app.app, host="127.0.0.1", port=port, reload=False, log_level="info")
 
 
 if __name__ == "__main__":
-    main()
+    run_server()
