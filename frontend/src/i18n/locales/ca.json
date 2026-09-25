@@ -2840,7 +2840,7 @@
       "tareaCompetencialTitulo": "Tasca competencial",
       "sinTareasDefinidas": "No hi ha Tasques competencials definides.",
       "metodologiaDesc": "Estratègies metodològiques i recursos.",
-      "instrumentosTitulo": "Instruments",
+      "instrumentosTitulo": "Instrument",
       "instrumentosDesc": "Definició i pesos de les eines d'avaluació.",
       "coberturaCeTitulo": "Matriu de cobertura CA × Instrument",
       "coberturaCeDesc": "Quins instruments avaluen cada Criteri d'avaluació, acolorits per període d'avaluació (igual que a Instruments > Model JEG).",

@@ -2838,7 +2838,7 @@
       "tareaCompetencialTitulo": "Tarefa competencial",
       "sinTareasDefinidas": "Non hai Tarefas competenciais definidas.",
       "metodologiaDesc": "Estratexias metodolóxicas e recursos.",
-      "instrumentosTitulo": "Instrumentos",
+      "instrumentosTitulo": "Instrumento",
       "instrumentosDesc": "Definición e pesos das ferramentas de avaliación.",
       "coberturaCeTitulo": "Matriz de cobertura CA × Instrumento",
       "coberturaCeDesc": "Que instrumentos avalían cada Criterio de avaliación, coloreados por período de avaliación (igual que en Instrumentos > Modelo JEG).",
