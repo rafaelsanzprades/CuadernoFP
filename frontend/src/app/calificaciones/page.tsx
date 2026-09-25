@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BarChart, ClipboardList, Save, TrendingUp, User, FolderOpen, History, AlertOctagon, LineChart, FileText, Target, FileClock } from "lucide-react";
+import { BarChart, ClipboardList, Save, TrendingUp, User, FolderOpen, History, AlertOctagon, LineChart, FileText, Target, FileClock, Shield } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -19,6 +19,8 @@ import { HistorialCalificacionesTab } from "@/components/features/evaluacion/His
 import { ReclamacionesTab } from "@/components/features/evaluacion/ReclamacionesTab";
 import { BoletinesTab } from "@/components/features/alumnado/BoletinesTab";
 import { ExpedienteTab } from "@/components/features/alumnado/ExpedienteTab";
+import { EqavetTab } from "@/components/features/modulo/EqavetTab";
+import { PropuestasTab } from "@/components/features/modulo/PropuestasTab";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
@@ -157,12 +159,14 @@ export default function ProgresoPage() {
         )}
       </>, cleanLabel: t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'}) },
     { id: "individual", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.individual.label', {defaultValue: 'Individual'})}</>, cleanLabel: t('tabs.calificaciones.individual.label', {defaultValue: 'Individual'}) },
+    { id: "mejora", label: <><span className="inline-flex"><Shield className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.inicio.mejora.label', {defaultValue: 'Mejora'})}</>, cleanLabel: t('tabs.inicio.mejora.label', {defaultValue: 'Mejora'}) },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     resumen: t('tabs.calificaciones.resumen.desc', {defaultValue: 'Panel global de rendimiento: calificaciones medias, progreso por RA/UD, estadísticas y análisis comparativo.'}),
     historico: t('tabs.calificaciones.historico.desc', {defaultValue: 'Registro de cambios de nota y reclamaciones presentadas por el alumnado.'}),
     individual: t('tabs.calificaciones.individual.desc', {defaultValue: 'Boletín y expediente de evidencias por alumno/a.'}),
+    mejora: t('tabs.inicio.mejora.desc', {defaultValue: 'Gestión de la calidad, evaluación del proceso e indicadores para el módulo.'}),
   };
 
   return (
@@ -520,6 +524,15 @@ export default function ProgresoPage() {
                 </button>
               </div>
               {individualView === "boletin" ? <BoletinesTab /> : <ExpedienteTab />}
+            </div>
+          )}
+
+          {/* TAB 4: MEJORA -- traída desde Inicio (2026-09-25, petición de Rafael):
+              calidad EQAVET y propuestas de mejora del módulo. */}
+          {activeTab === "mejora" && (
+            <div className="mt-4 animate-in fade-in duration-500 space-y-6">
+              <EqavetTab />
+              <PropuestasTab />
             </div>
           )}
           </MotionWrapper>

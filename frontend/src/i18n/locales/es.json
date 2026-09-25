@@ -59,7 +59,7 @@
   },
   "inicio": {
     "title": "Inicio",
-    "subtitle": "Panel principal, contribuciones de la comunidad, documentos de referencia y calidad EQAVET."
+    "subtitle": "Panel principal, contribuciones de la comunidad y documentos de referencia."
   },
   "nav": {
     "inicio": "Inicio",
@@ -98,7 +98,7 @@
     "general_desc": "Por dónde empezar: tu panel, tus ficheros y la ayuda de la aplicación — todo independiente de tener un grupo abierto."
   },
   "navDesc": {
-    "inicio": "Panel principal, contribuciones de la comunidad, documentos de referencia y calidad EQAVET.",
+    "inicio": "Panel principal, contribuciones de la comunidad y documentos de referencia.",
     "ayuda": "Guía de inicio, FAQ, acrónimos y mapa de la aplicación.",
     "magia": "Comparativa y correspondencia APP-PD, y documentos de apoyo de la programación y del curso.",
     "legal": "Aviso legal, privacidad, cookies y accesibilidad.",
@@ -141,7 +141,7 @@
     "diario_title": "Seguimiento diario",
     "diario_desc": "Diario de aula, contingencias, control de asistencia y alertas.",
     "evaluacion_title": "Calificación",
-    "evaluacion_desc": "Calificaciones, evaluación de RA y analíticas.",
+    "evaluacion_desc": "Calificaciones, evaluación de RA, analíticas y calidad EQAVET.",
     "calendario_title": "Calendario",
     "calendario_desc": "Configura festivos, evaluaciones y tu horario semanal.",
     "modulo_title": "Configuración del módulo",

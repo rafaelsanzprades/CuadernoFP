@@ -14,7 +14,7 @@ export const navGroups = [
     title: "General",
     sectionDescription: "Por dónde empezar: tu panel, tus ficheros y la ayuda de la aplicación — todo independiente de tener un grupo abierto.",
     items: [
-      { href: "/inicio?tab=bienvenida", label: "Inicio", icon: Activity, description: "Panel principal, verificación de datos, contribuciones de la comunidad y calidad EQAVET." },
+      { href: "/inicio?tab=bienvenida", label: "Inicio", icon: Activity, description: "Panel principal, contribuciones de la comunidad y documentos de referencia." },
       { href: "/archivos?tab=datos", label: "Archivo", icon: FolderOpen, description: "Gestión de archivos, sincronización en la nube, seguridad y verificación de datos." },
       { href: "/ayuda?tab=guia", label: "Ayuda", icon: Info, description: "Guía de inicio, FAQ, acrónimos y mapa de la aplicación." },
       { href: "/normativa?tab=autonomias", label: "Normativa", icon: FileText, description: "Normativa autonómica, legislación, bibliografía y estándares INCUAL." },
