@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, CalendarDays, FolderOpen, Hourglass, Save, A
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAppStore } from '@/store/useAppStore';
-import { navGroups, footerPages } from '@/config/navigation';
+import { navGroups } from '@/config/navigation';
 import { getAcronym } from '@/utils/catalogFormat';
 import { useEffect, useRef, useState } from 'react';
 import React from 'react';
@@ -352,42 +352,6 @@ export default function Sidebar() {
             </div>
           );
         })}
-
-        {/* Legal: enlace suelto al pie de la navegación, fuera de los 3
-            bloques — contenido de cumplimiento que casi nunca se visita, no
-            necesita el mismo tratamiento que un bloque de trabajo. */}
-        <div className="flex flex-col gap-0.5 mt-2 pt-2 border-t border-[var(--glass-border)] shrink-0">
-          {footerPages.map((page) => {
-            const basePath = page.href.split('?')[0];
-            const translatedLabel = t('nav.' + basePath.replace('/', ''), { defaultValue: page.label });
-            const linkContent = (
-              <Link
-                key={page.href}
-                href={page.href}
-                onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
-                className={`flex items-center ${isSidebarOpen ? 'gap-2.5 px-3' : 'justify-center px-0'} py-1 rounded-lg transition-all duration-150 group
-                  ${pathname === basePath
-                    ? 'bg-foreground/10 text-foreground'
-                    : 'text-muted/70 hover:text-foreground hover:bg-foreground/5 border border-transparent'
-                  }`}
-              >
-                <span className={`flex items-center justify-center transition-transform duration-150 ${pathname === basePath ? (dataSource === 'demo' ? 'scale-110 text-warning' : 'scale-110 text-accent') : 'group-hover:scale-110'}`}>
-                  <page.icon className="w-4 h-4" strokeWidth={1.75} />
-                </span>
-                {isSidebarOpen && (
-                  <span className={`text-caption leading-tight font-medium whitespace-nowrap ${pathname === basePath ? 'text-foreground font-semibold' : ''}`}>
-                    {translatedLabel}
-                  </span>
-                )}
-              </Link>
-            );
-            return !isSidebarOpen ? (
-              <Tooltip key={page.href} content={translatedLabel} position="right" delay={0.1}>
-                {linkContent}
-              </Tooltip>
-            ) : linkContent;
-          })}
-        </div>
       </nav>
 
         {/* Separación de lado a lado antes del footer */}
