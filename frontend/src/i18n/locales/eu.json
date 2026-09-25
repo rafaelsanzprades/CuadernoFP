@@ -377,7 +377,7 @@
   },
   "inicio": {
     "title": "Hasiera",
-    "subtitle": "Panel nagusia, komunitatearen ekarpenak eta erreferentzia-dokumentuak."
+    "subtitle": "Panel nagusia, fitxategien kudeaketa, IA eta datuen egiaztapena."
   },
   "nav": {
     "inicio": "Hasiera",
@@ -464,7 +464,7 @@
     "catalogo_desc": "Titulu, Modulu, RA eta CE ofizialen esploratzailea.",
     "legal_title": "Lege Oharra",
     "legal_desc": "Lege oharra, pribatutasuna, cookieak, lizentziak eta irisgarritasuna.",
-    "ayuda_desc": "Gidak, galdera maiztuak, glosarioa eta aplikazioaren mapa.",
+    "ayuda_desc": "Hasierako gida, FAQ, akronimoak eta komunitatearen ekarpenak.",
     "contexto_desc": "Informazio orokorra, ingurunearen ezaugarriak, ikasleak eta modulua.",
     "magia_desc": "Programazio didaktikoaren eta txostenen sorrera.",
     "seguimiento_desc": "Klaseen egunerokoa, asistentzia eta ikaslekako oharrak.",
@@ -503,8 +503,8 @@
     "cargando": "Kargatzen..."
   },
   "navDesc": {
-    "inicio": "Panel nagusia, komunitatearen ekarpenak eta erreferentzia-dokumentuak.",
-    "ayuda": "Hasierako gida, FAQ, akronimoak eta aplikazioaren mapa.",
+    "inicio": "Panel nagusia, fitxategien kudeaketa, IA eta datuen egiaztapena.",
+    "ayuda": "Hasierako gida, FAQ, akronimoak eta komunitatearen ekarpenak.",
     "magia": "APP-PD konparaketa eta korrespondentzia, eta programazioaren eta ikasturtearen laguntza-dokumentuak.",
     "legal": "Lege-oharra, pribatutasuna, cookieak eta irisgarritasuna.",
     "agenda": "Eguneroko laburpena, hileroko aurrerapena eta falta diren RA eta UD-en aurreikuspena.",

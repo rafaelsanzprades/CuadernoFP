@@ -377,7 +377,7 @@
   },
   "inicio": {
     "title": "Inici",
-    "subtitle": "Panell principal, contribucions de la comunitat i documents de referència."
+    "subtitle": "Panell principal, gestió d'arxius, IA i verificació de dades."
   },
   "nav": {
     "inicio": "Inici",
@@ -464,7 +464,7 @@
     "catalogo_desc": "Explorador de Títols, Mòduls, RA i CE oficials.",
     "legal_title": "Avís Legal",
     "legal_desc": "Avís legal, privacitat, cookies, llicències i accessibilitat.",
-    "ayuda_desc": "Guies, preguntes freqüents, glossari i mapa de l'aplicació.",
+    "ayuda_desc": "Guia d'inici, FAQ, acrònims i contribucions de la comunitat.",
     "contexto_desc": "Informació general, característiques de l'entorn, alumnat i mòdul.",
     "magia_desc": "Generació de la programació didàctica i informes.",
     "seguimiento_desc": "Diari de classes, assistència i notes per alumnat.",
@@ -503,8 +503,8 @@
     "cargando": "Carregant..."
   },
   "navDesc": {
-    "inicio": "Panell principal, contribucions de la comunitat i documents de referència.",
-    "ayuda": "Guia d'inici, FAQ, acrònims i mapa de l'aplicació.",
+    "inicio": "Panell principal, gestió d'arxius, IA i verificació de dades.",
+    "ayuda": "Guia d'inici, FAQ, acrònims i contribucions de la comunitat.",
     "magia": "Comparativa i correspondència APP-PD, i documents de suport de la programació i del curs.",
     "legal": "Avís legal, privacitat, cookies i accessibilitat.",
     "agenda": "Resum diari, avanç mensual i previsió de RA i UD pendents.",

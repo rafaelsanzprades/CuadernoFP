@@ -79,7 +79,7 @@ export default function MetodologiaConfigPage() {
                 <Settings className="w-16 h-16 text-muted-foreground opacity-50" />
                 <h2 className="text-heading font-bold">{t('campos.comun.sinProgramacionCargadaTitulo', {defaultValue: 'No hay programación cargada'})}</h2>
                 <p className="text-muted mb-4">{t('campos.comun.sinProgramacionCargadaDesc', {defaultValue: 'Debes abrir o crear un archivo de programación en tu Archivos.'})}</p>
-                <Link href="/archivos">
+                <Link href="/inicio?tab=datos">
                   <Button variant="primary" className="gap-2">
                     <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
                   </Button>

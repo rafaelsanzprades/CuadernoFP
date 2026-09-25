@@ -42,10 +42,10 @@ export function useOnboardingTour() {
           }
         },
         {
-          element: "[href='/archivos']", // Archivos tab
+          element: "[href='/inicio?tab=bienvenida']", // Inicio -- pestaña Datos, dentro
           popover: {
-            title: t('campos.onboarding.pestanaArchivosTitulo', {defaultValue: 'Pestaña de Archivos'}),
-            description: t('campos.onboarding.pestanaArchivosDesc', {defaultValue: "Para empezar, ve a Archivos y selecciona 'Datos DEMO' para explorar sin miedo."}),
+            title: t('campos.onboarding.pestanaArchivosTitulo', {defaultValue: 'Pestaña de Datos'}),
+            description: t('campos.onboarding.pestanaArchivosDesc', {defaultValue: "Para empezar, ve a Inicio, abre la pestaña Datos y selecciona 'Datos DEMO' para explorar sin miedo."}),
             side: "right",
             align: "center"
           }
