@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Download, FileEdit, FileSpreadsheet, FileText, FileStack, FolderOpen, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, Grid3x3, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp, Wrench } from "lucide-react";
+import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Download, FileEdit, FileSpreadsheet, FileText, FileStack, FolderOpen, GitCompare, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, Grid3x3, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp, Wrench } from "lucide-react";
 import * as XLSX from "xlsx";
 import React, { useState, useEffect, useMemo } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -20,6 +20,7 @@ import { TabSync } from "@/components/ui/TabSync";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { getAutoMilestones } from "@/utils/calendarMilestones";
 import { AnalisisPdxTab } from "@/components/features/magia/AnalisisPdxTab";
+import { ComparativaPdTab } from "@/components/features/magia/ComparativaPdTab";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 
@@ -586,6 +587,14 @@ export default function MagiaPage() {
                             })}
                           </div>
                         </Card>
+
+                        {/* ── Comparativa PDx (antes pestaña propia "Comparativa" en
+                            Archivo -- traída aquí, 2026-09-25, petición de Rafael) ── */}
+                        <div>
+                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><GitCompare className="w-4 h-4" /></span> {t('campos.magia.comparativaPdxTitulo', {defaultValue: 'Comparativa PDx'})}</h2>
+                          <p className="text-body text-muted mb-4">{t('tabs.equivalencias.comparativa.desc', {defaultValue: 'Comparativa de los distintos niveles de programación y dónde se rellena cada apartado.'})}</p>
+                        </div>
+                        <ComparativaPdTab />
                       </div>
                     )}
                   </div>
