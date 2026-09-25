@@ -377,7 +377,7 @@
   },
   "inicio": {
     "title": "Inicio",
-    "subtitle": "Panel principal, contribucións da comunidade e documentos de referencia."
+    "subtitle": "Panel principal, xestión de arquivos, IA e verificación de datos."
   },
   "nav": {
     "inicio": "Inicio",
@@ -464,7 +464,7 @@
     "catalogo_desc": "Explorador de Títulos, Módulos, RA e CE oficiais.",
     "legal_title": "Aviso Legal",
     "legal_desc": "Aviso legal, privacidade, cookies, licenzas e accesibilidade.",
-    "ayuda_desc": "Guías, preguntas frecuentes, glosario e mapa da aplicación.",
+    "ayuda_desc": "Guía de inicio, FAQ, acrónimos e contribucións da comunidade.",
     "contexto_desc": "Información xeral, características da contorna, alumnado e módulo.",
     "magia_desc": "Xeración da programación didáctica e informes.",
     "seguimiento_desc": "Diario de clases, asistencia e notas por alumnado.",
@@ -503,8 +503,8 @@
     "cargando": "Cargando..."
   },
   "navDesc": {
-    "inicio": "Panel principal, contribucións da comunidade e documentos de referencia.",
-    "ayuda": "Guía de inicio, FAQ, acrónimos e mapa da aplicación.",
+    "inicio": "Panel principal, xestión de arquivos, IA e verificación de datos.",
+    "ayuda": "Guía de inicio, FAQ, acrónimos e contribucións da comunidade.",
     "magia": "Comparativa e correspondencia APP-PD, e documentos de apoio da programación e do curso.",
     "legal": "Aviso legal, privacidade, cookies e accesibilidade.",
     "agenda": "Resumo diario, avance mensual e previsión de RA e UD pendentes.",

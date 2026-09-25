@@ -190,7 +190,7 @@ export default function Sidebar() {
                   Versión: {isMounted ? dateCompactStr : '...'}
                 </div>
                 <Link
-                  href="/archivos"
+                  href="/inicio?tab=datos"
                   onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
                   className="text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity ml-0.5"
                   style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
@@ -216,13 +216,13 @@ export default function Sidebar() {
       >
 
         {/* General (fecha DEMO/REAL + header + fichero de grupo abierto):
-            items del bloque General (Panel/Archivo/Ayuda), mismo hueco que
-            Programación/Curso. Fusiona lo que antes eran dos bloques
-            separados (Inicio y General) en uno solo — Archivo, que abre
-            grupos, vive ahora dentro de este mismo bloque. La fecha va antes
-            del título porque es un indicador global de la app, no algo
-            propio de este bloque en particular (a diferencia del fichero de
-            grupo, que sí lo es). */}
+            items del bloque General (Inicio/Ayuda/MagIA/Normativa/Legal),
+            mismo hueco que Programación/Curso. Fusiona lo que antes eran dos
+            bloques separados (Inicio y General) en uno solo — abrir grupos
+            vive dentro de Inicio → pestaña Datos (antes página Archivo
+            aparte, retirada 2026-09-25). La fecha va antes del título porque
+            es un indicador global de la app, no algo propio de este bloque
+            en particular (a diferencia del fichero de grupo, que sí lo es). */}
         <div className="flex flex-col gap-0.5 mb-2 shrink-0">
           {isSidebarOpen && (
             <div className="text-body font-bold text-foreground/90 tracking-wide px-1">
@@ -231,7 +231,7 @@ export default function Sidebar() {
           )}
           {isSidebarOpen && (
             <Link
-              href="/archivos"
+              href="/inicio?tab=datos"
               onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
               className="mx-1 text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
               style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
@@ -297,7 +297,7 @@ export default function Sidebar() {
                   </div>
                   {infoValue && infoValue !== 'CÓDIGO' && infoValue !== 'AÑO' && (
                     <Link
-                      href="/archivos"
+                      href="/inicio?tab=datos"
                       onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
                       className="mx-1 text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
                       style={{

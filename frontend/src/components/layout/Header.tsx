@@ -61,8 +61,8 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
   let currentItem = "";
   if (pathname === '/inicio') {
     currentItem = t('nav.inicio', {defaultValue: 'Inicio'});
-  } else if (pathname === '/archivos') {
-    currentItem = t('nav.archivos', {defaultValue: 'Archivos'});
+  } else if (pathname === '/ayuda') {
+    currentItem = t('nav.ayuda', {defaultValue: 'Ayuda'});
   } else {
     for (const group of navGroups) {
       const found = group.items.find(item => item.href === pathname);

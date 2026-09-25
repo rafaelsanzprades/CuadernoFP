@@ -377,7 +377,7 @@
   },
   "inicio": {
     "title": "Home",
-    "subtitle": "Main dashboard, community contributions and reference documents."
+    "subtitle": "Main dashboard, file management, AI and data verification."
   },
   "nav": {
     "inicio": "Home",
@@ -464,7 +464,7 @@
     "catalogo_desc": "Explorer of official Titles, Modules, RA and CE.",
     "legal_title": "Legal Notice",
     "legal_desc": "Legal notice, privacy, cookies, licenses and accessibility.",
-    "ayuda_desc": "Guides, FAQ, glossary and site map.",
+    "ayuda_desc": "Getting-started guide, FAQ, acronyms and community contributions.",
     "contexto_desc": "General information, environment characteristics, students and module.",
     "magia_desc": "Generation of the teaching plan and reports.",
     "seguimiento_desc": "Class journal, attendance and student grades.",
@@ -503,8 +503,8 @@
     "cargando": "Loading..."
   },
   "navDesc": {
-    "inicio": "Main dashboard, community contributions and reference documents.",
-    "ayuda": "Getting-started guide, FAQ, acronyms and app map.",
+    "inicio": "Main dashboard, file management, AI and data verification.",
+    "ayuda": "Getting-started guide, FAQ, acronyms and community contributions.",
     "magia": "APP-PD comparison and mapping, plus supporting documents for the programme and the course.",
     "legal": "Legal notice, privacy, cookies and accessibility.",
     "agenda": "Daily summary, monthly progress and forecast of pending RA and UD.",

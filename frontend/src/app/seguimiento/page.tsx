@@ -200,7 +200,7 @@ export default function SeguimientoPage() {
                 <ClipboardCheck className="w-16 h-16 text-muted-foreground opacity-50" />
                 <h2 className="text-heading font-bold">{t('campos.calificaciones.sinCursoNiProgramacionTitulo', {defaultValue: 'No hay curso ni programación cargada'})}</h2>
                 <p className="text-muted mb-4">{t('campos.calificaciones.sinCursoNiProgramacionDesc', {defaultValue: 'Debes abrir o crear un archivo de programación y curso en tu Archivos.'})}</p>
-                <Link href="/archivos">
+                <Link href="/inicio?tab=datos">
                   <Button variant="primary" className="gap-2">
                     <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
                   </Button>

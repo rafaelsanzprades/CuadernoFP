@@ -1,23 +1,25 @@
-import { Activity, Award, Calendar, CalendarDays, Compass, FileText, FolderOpen, GraduationCap, Grid, Lightbulb, Scale, Sparkles, TrendingUp, Users, Wrench } from "lucide-react";
+import { Activity, Award, Calendar, CalendarDays, Compass, FileText, GraduationCap, Grid, Info, Lightbulb, Scale, Sparkles, TrendingUp, Users, Wrench } from "lucide-react";
 
 // PRUEBA 2026-09-23 (a petición de Rafael, ver 00 IDEAS.md): reequilibrado
 // de 3+6+6 a 3 bloques de 5 páginas cada uno (15 en total) -- Normativa sale
-// de Programación y MagIA sale de Curso, ambas entran en General. Ayuda se
-// eliminó como página propia el 2026-09-25 (sus pestañas pasaron a Inicio) y
-// Legal, que antes vivía aparte en footerPages, ocupa ahora su hueco en
-// General -- el bloque se mantiene en 5 páginas. Pendiente de revisar:
-// sectionDescription de General todavía dice "todo independiente de tener
-// un grupo abierto", pero Normativa (contenido por módulo) y sobre todo
-// MagIA (necesita programación + curso activos) no cumplen eso.
+// de Programación y MagIA sale de Curso, ambas entran en General. Archivo
+// se eliminó como página propia el 2026-09-25 (sus pestañas Datos/Asistente/
+// Verificación pasaron a Inicio) y Ayuda vuelve a existir en su hueco, con
+// Guía/FAQ/Acrónimos/Contribuciones -- el bloque se mantiene en 5 páginas.
+// Legal, que antes vivía aparte en footerPages, ocupa su propio hueco desde
+// ese mismo cambio. Pendiente de revisar: sectionDescription de General
+// todavía dice "todo independiente de tener un grupo abierto", pero
+// Normativa (contenido por módulo) y sobre todo MagIA (necesita programación
+// + curso activos) no cumplen eso.
 export const navGroups = [
   {
     title: "General",
     sectionDescription: "Por dónde empezar: tu panel, tus ficheros y la ayuda de la aplicación — todo independiente de tener un grupo abierto.",
     items: [
-      { href: "/inicio?tab=bienvenida", label: "Inicio", icon: Activity, description: "Panel principal, contribuciones de la comunidad y documentos de referencia." },
-      { href: "/archivos?tab=datos", label: "Archivo", icon: FolderOpen, description: "Gestión de archivos, sincronización en la nube, seguridad y verificación de datos." },
-      { href: "/normativa?tab=autonomias", label: "Normativa", icon: FileText, description: "Normativa autonómica, legislación, bibliografía y estándares INCUAL." },
+      { href: "/inicio?tab=bienvenida", label: "Inicio", icon: Activity, description: "Panel principal, gestión de archivos, IA y verificación de datos." },
+      { href: "/ayuda?tab=guia", label: "Ayuda", icon: Info, description: "Guía de inicio, FAQ, acrónimos y contribuciones de la comunidad." },
       { href: "/magia?tab=programacion", label: "MagIA", icon: Sparkles, description: "Generación de programaciones PD-/PD=/PD+, correspondencia APP-PD y documentos de apoyo de la programación y del curso." },
+      { href: "/normativa?tab=autonomias", label: "Normativa", icon: FileText, description: "Normativa autonómica, legislación, bibliografía y estándares INCUAL." },
       { href: "/legal?tab=aviso", label: "Legal", icon: Scale, description: "Aviso legal, privacidad, cookies y accesibilidad." },
     ]
   },
@@ -52,9 +54,15 @@ export const navGroups = [
 export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   "/inicio": [
     { id: "bienvenida", label: "Bienvenida" },
+    { id: "datos", label: "Datos" },
+    { id: "asistente-ia", label: "Asistente" },
+    { id: "verificacion", label: "Verificación" },
+  ],
+  "/ayuda": [
     { id: "guia", label: "Guía" },
     { id: "faq", label: "FAQ" },
     { id: "acronimos", label: "Acrónimos" },
+    { id: "contribuciones", label: "Contribuciones" },
   ],
   "/contexto": [
     { id: "identificacion", label: "Identificación" },
@@ -115,11 +123,6 @@ export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "bibliografia", label: "Bibliografía" },
     { id: "legislacion", label: "Legislación" },
     { id: "ecp-incual", label: "ECP INCUAL" },
-  ],
-  "/archivos": [
-    { id: "datos", label: "Datos" },
-    { id: "asistente-ia", label: "Asistente" },
-    { id: "verificacion", label: "Verificación" },
   ],
   "/catalogo": [
     { id: "familias", label: "Familias" },

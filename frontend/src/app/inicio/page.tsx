@@ -1,114 +1,291 @@
 "use client";
-import { Activity, ArrowRight, BookOpen, GraduationCap, Users, Send, Info, Map, MessageCircle, ChevronDown, Compass } from "lucide-react";
+import { Activity, ArrowRight, AlertTriangle, BookOpen, Building2, CheckCircle, Cloud, Copy, Database, FolderOpen, GraduationCap, HardDrive, Info, ListChecks, Lock, Map, MessageCircle, Plus, Save, Send, Shield, ShieldAlert, Users, Zap } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { navGroups, PAGE_TABS } from "@/config/navigation";
 import { Card } from "@/components/ui/Card";
+import { Badge } from "@/components/ui/Badge";
 import Link from "next/link";
 import { TabSync } from "@/components/ui/TabSync";
-import { useState, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { AIWizardModal } from "@/components/features/ai/AIWizardModal";
+import { AISettingsPanel } from "@/components/features/ai/AISettingsPanel";
 import { RecentModulesPanel } from "@/components/features/dashboard/RecentModulesPanel";
 import { WelcomeWizard } from "@/components/features/dashboard/WelcomeWizard";
+import { GoogleDriveSyncPanel } from "@/components/features/cloud/GoogleDriveSyncPanel";
+import { OneDriveSyncPanel } from "@/components/features/cloud/OneDriveSyncPanel";
+import { NewFileWizard } from "@/components/features/cloud/NewFileWizard";
+import { VerificacionTab } from "@/components/features/archivos/VerificacionTab";
 import { Button } from "@/components/ui/Button";
 import { Sparkles } from "lucide-react";
 import toast from "react-hot-toast";
+import i18next from "i18next";
 import { useTranslation } from "react-i18next";
-import { TabAcronimos } from "@/components/features/catalogo/TabAcronimos";
-import { GuiaTab } from "@/components/features/ayuda/GuiaTab";
-import { useOnboardingTour } from "@/components/features/onboarding/TourGuide";
-
-function AccordionItem({ question, answer }: { question: string, answer: React.ReactNode }) {
-  return (
-    <details className="group glass-card rounded-xl overflow-hidden [&_summary::-webkit-details-marker]:hidden mb-3 border border-white/5">
-      <summary className="flex cursor-pointer items-center justify-between p-4 font-semibold text-foreground hover:bg-foreground/5 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/50">
-        <span>{question}</span>
-        <span className="transition duration-300 group-open:-rotate-180 text-muted">
-          <ChevronDown className="w-5 h-5" />
-        </span>
-      </summary>
-      <div className="p-4 pt-0 text-muted leading-relaxed border-t border-white/5 mt-1 bg-foreground/5">
-        {answer}
-      </div>
-    </details>
-  );
-}
-
-const getFaqs = (t: (key: string, opts?: any) => string) => [
-  {
-    group: t('campos.ayuda.faq.grupo1.titulo', {defaultValue: '1. Conceptos previos y seguridad'}),
-    items: [
-      { q: t('campos.ayuda.faq.grupo1.q1', {defaultValue: '¿Qué es la arquitectura Híbrida (Local-First + Cloud)?'}), a: t('campos.ayuda.faq.grupo1.a1', {defaultValue: 'Se utiliza una arquitectura moderna. Tus datos de trabajo (alumnado, notas) se procesan localmente en tu navegador, garantizando total privacidad y velocidad. Las operaciones pesadas (generación de informes PDF o conexión con Inteligencia Artificial) se apoyan de forma segura en un servidor central.'}) },
-      { q: t('campos.ayuda.faq.grupo1.q2', {defaultValue: '¿Dónde se guardan mis datos?'}), a: t('campos.ayuda.faq.grupo1.a2', {defaultValue: 'Los datos de tu Programación y tus Cursos residen en tu propio navegador (IndexedDB). Tú tienes el control absoluto sobre ellos. Por seguridad, se recomienda usar frecuentemente la exportación de archivos (BYOC) desde la pestaña Archivos.'}) },
-      { q: t('campos.ayuda.faq.grupo1.q3', {defaultValue: "¿Qué diferencia hay entre 'Programación' y 'Curso'?"}), a: t('campos.ayuda.faq.grupo1.a3', {defaultValue: "Es un concepto vital: La 'Programación' es tu molde teórico; contiene la ley pura (Resultados de aprendizaje, Criterios de evaluación) y tus Unidades didácticas (reutilizable año tras año). El 'Curso' es la instancia real; representa a un grupo concreto de alumnado de carne y hueso en un año escolar específico, con sus notas y ausencias."}) },
-      { q: t('campos.ayuda.faq.grupo1.q4', {defaultValue: '¿Qué pasa si borro los datos o la caché de mi navegador?'}), a: t('campos.ayuda.faq.grupo1.a4', {defaultValue: "Si borras la caché profunda del navegador sin haber exportado tus datos previamente, perderás tu trabajo. Por eso es vital usar el botón de 'Exportar' tu progreso a un archivo .json periódicamente para mantener copias de seguridad locales."}) },
-      { q: t('campos.ayuda.faq.grupo1.q5', {defaultValue: '¿Puedo trabajar desde varios ordenadores?'}), a: t('campos.ayuda.faq.grupo1.a5', {defaultValue: "Sí. Para transferir tu entorno entre el ordenador del instituto y tu portátil personal, solo tienes que 'Exportar' tu progreso en el ordenador A y darle a 'Importar' en el ordenador B."}) }
-    ]
-  },
-  {
-    group: t('campos.ayuda.faq.grupo2.titulo', {defaultValue: '2. Paso 1: La programación didáctica'}),
-    items: [
-      { q: t('campos.ayuda.faq.grupo2.q1', {defaultValue: '¿Tengo que meter a mano todos los RA y CE del BOE?'}), a: t('campos.ayuda.faq.grupo2.a1', {defaultValue: '¡No! El sistema cuenta con un Catálogo oficial que importa automáticamente la normativa legal (Resultados de aprendizaje y Criterios) de tu módulo. Solo tienes que elegir tu Grado y tu Ciclo Formativo en la sección inicial de Catálogo y el sistema lo hace por ti.'}) },
-      { q: t('campos.ayuda.faq.grupo2.q2', {defaultValue: '¿Qué significa que los RA no suman 100% en las verificaciones?'}), a: t('campos.ayuda.faq.grupo2.a2', {defaultValue: "Para que la evaluación continua matemática funcione, cada Resultado de Aprendizaje (RA) debe tener un 'peso' o importancia. La suma total de los pesos de todos los RA de un módulo debe ser exactamente 100%. Debes ajustar esto en Programación > Currículo > pestaña 'RA y CE'."}) },
-      { q: t('campos.ayuda.faq.grupo2.q3', {defaultValue: '¿Cómo configuro las horas que el alumnado pasa en la empresa (FP Dual)?'}), a: t('campos.ayuda.faq.grupo2.a3', {defaultValue: "En Programación > Contexto > pestaña 'Identificación', elige si tu régimen es Dual General, Dual Intensivo o Ninguno. Después, en Programación > Contexto > pestaña 'FEOE y régimen dual' describes cómo se organiza y se hace el seguimiento de esa formación en empresa. Para marcar qué Resultados de Aprendizaje concretos son duales, ve a Programación > Currículo > pestaña 'RA y CE'."}) },
-      { q: t('campos.ayuda.faq.grupo2.q4', {defaultValue: '¿Para qué sirve el apartado EQAVET?'}), a: t('campos.ayuda.faq.grupo2.a4', {defaultValue: "Sirve para integrar el ciclo de mejora continua europeo en tu programación. Lo encontrarás en 'Calificación' > pestaña 'Mejora'. A final de curso, autoevalúas los indicadores de calidad y anotas tus propuestas de mejora para el próximo año. La rúbrica de autoevaluación docente sigue el modelo DOCENTIA de ANECA (ver aneca.es/docentia), adaptado a la práctica en FP."}) },
-      { q: t('campos.ayuda.faq.grupo2.q5', {defaultValue: '¿Qué diferencia hay entre actividades complementarias y extraescolares?'}), a: t('campos.ayuda.faq.grupo2.a5', {defaultValue: 'Son legalmente distintas: las complementarias son en horario lectivo, están ligadas al currículo y son evaluables — forman parte de tu programación didáctica. Las extraescolares son fuera de horario, voluntarias y nunca evaluables — van en la PGA del centro, no en la PD; en Metodología > Transversales puedes anotarlas igualmente como referencia, pero no cuentan en la programación.'}) },
-      { q: t('campos.ayuda.faq.grupo2.q6', {defaultValue: '¿Qué diferencia hay entre instrumento de evaluación e instrumento de calificación?'}), a: t('campos.ayuda.faq.grupo2.a6', {defaultValue: 'Por cada Criterio de Evaluación (CE) hay dos cosas distintas: el instrumento de evaluación es la actividad que genera la evidencia (una prueba objetiva, una tarea, una defensa oral...), y el instrumento de calificación es lo que puntúa esa evidencia (una rúbrica, una escala, una lista de cotejo...). En Instrumentos puedes codificar ambos por separado al configurar cada instrumento.'}) }
-    ]
-  },
-  {
-    group: t('campos.ayuda.faq.grupo3.titulo', {defaultValue: '3. Paso 3: Creación del curso y alumnado'}),
-    items: [
-      { q: t('campos.ayuda.faq.grupo3.q1', {defaultValue: '¿Puedo importar alumnado desde plataformas como Seneca, Rayuela o un Excel?'}), a: t('campos.ayuda.faq.grupo3.a1', {defaultValue: "Sí. En la sección de 'Alumnado' puedes importar un archivo CSV (Excel) con tu lista de clase. Alternativamente, la tabla inteligente te permite copiar y pegar celdas masivamente, igual que si fuera una hoja de cálculo."}) },
-      { q: t('campos.ayuda.faq.grupo3.q2', {defaultValue: '¿Qué nivel de seguridad tienen los datos de mi alumnado?'}), a: t('campos.ayuda.faq.grupo3.a2', {defaultValue: "Tus archivos locales no salen nunca hacia nuestro servidor si no quieres (usando 'Guardar en Local'). Si eliges guardarlos en Google Drive o OneDrive, el archivo es transmitido directamente entre tu navegador y los servidores de Microsoft/Google. Puedes activar el cifrado local para que el archivo sea absolutamente ilegible sin tu clave maestra."}) },
-      { q: t('campos.ayuda.faq.grupo3.q3', {defaultValue: '¿Está la aplicación protegida contra hackeos o caídas?'}), a: t('campos.ayuda.faq.grupo3.a3', {defaultValue: "Sí. El frontend incluye una Política de Seguridad de Contenido (CSP) que bloquea ataques de inyección de código (XSS) para proteger tus datos locales. Además, nuestro servidor cuenta con 'Rate Limiting' (limitación de peticiones) que previene ataques de denegación de servicio (DDoS) para garantizar que los catálogos oficiales siempre estén disponibles cuando los necesites."}) },
-      { q: t('campos.ayuda.faq.grupo3.q4', {defaultValue: '¿Cómo distribuyo físicamente al alumnado en el aula?'}), a: t('campos.ayuda.faq.grupo3.a4', {defaultValue: "Dentro de 'Alumnado' encontrarás una pestaña de 'Plano de clase'. Es una pizarra visual e interactiva donde puedes arrastrar y soltar a los estudiantes a sus respectivos pupitres para tener el diseño exacto de tu clase."}) },
-      { q: t('campos.ayuda.faq.grupo3.q5', {defaultValue: '¿Cómo uso el sistema de Alertas de Abandono?'}), a: t('campos.ayuda.faq.grupo3.a5', {defaultValue: 'El panel de prevención temprana te permite registrar llamadas a las familias, partes disciplinarios o derivaciones al departamento de orientación para alumnado con riesgo de abandono escolar.'}) }
-    ]
-  },
-  {
-    group: t('campos.ayuda.faq.grupo4.titulo', {defaultValue: '4. Paso 5: El día a día y la evaluación'}),
-    items: [
-      { q: t('campos.ayuda.faq.grupo4.q1', {defaultValue: "¿Qué es el 'Diario de aula'?"}), a: t('campos.ayuda.faq.grupo4.a1', {defaultValue: "Es tu cuaderno de bitácora diario. Te permite anotar lo que ocurre en cada sesión real de clase: qué UD has impartido, si ha habido incidencias o marcar días 'Sin docencia' (como huelgas o claustros) para que no cuenten en tu progreso."}) },
-      { q: t('campos.ayuda.faq.grupo4.q2', {defaultValue: "¿Cómo se calcula la previsión de 'Planificación mensual'?"}), a: t('campos.ayuda.faq.grupo4.a2', {defaultValue: 'Se calcula día a día con el calendario de festivos y el horario semanal que ya tienes registrados en la app — no es una estimación proporcional, es un cálculo exacto con esos datos. Cambiará si el calendario oficial del curso o la distribución definitiva del horario todavía no están completos.'}) },
-      { q: t('campos.ayuda.faq.grupo4.q3', {defaultValue: '¿Cómo paso lista o registro faltas de asistencia?'}), a: t('campos.ayuda.faq.grupo4.a3', {defaultValue: "En la sección de Seguimiento tienes la pestaña 'Asistencia'. Verás a todo tu alumnado y con un solo clic en su cuadrícula puedes alternar entre Falta, Retraso o Falta Justificada."}) },
-      { q: t('campos.ayuda.faq.grupo4.q4', {defaultValue: '¿Cómo evalúo una tarea o examen concreto?'}), a: t('campos.ayuda.faq.grupo4.a4', {defaultValue: "Ve a la sección 'Seguimiento' > pestaña 'Detalle por alumnado' para introducir la nota de cada actividad, por alumno/a. La nota final se recalcula automáticamente a partir de los pesos de RA y CE."}) },
-      { q: t('campos.ayuda.faq.grupo4.q5', {defaultValue: '¿Cómo se calcula exactamente la nota final del trimestre?'}), a: t('campos.ayuda.faq.grupo4.a5', {defaultValue: 'El sistema cruza las calificaciones que pones en los Instrumentos con el peso del Indicador (Evaluación > bloque Indicadores), que a su vez alimenta el peso del Criterio de Evaluación (CE) y finalmente el Resultado de Aprendizaje (RA). Todo en tiempo real.'}) },
-      { q: t('campos.ayuda.faq.grupo4.q6', {defaultValue: '¿Qué significan los colores (morado, verde azulado, naranja) en la agenda y el calendario visual?'}), a: t('campos.ayuda.faq.grupo4.a6', {defaultValue: 'Los colores del fondo indican el trimestre (evaluación) al que pertenece cada actividad o fecha: 1er trimestre (morado/malva), 2º trimestre (teal/verde azulado) y 3er trimestre (naranja/ámbar) — deliberadamente sin rojo ni azul, esos tonos están reservados a Festivo y Evento.'}) }
-    ]
-  },
-  {
-    group: t('campos.ayuda.faq.grupo5.titulo', {defaultValue: '5. Descargas y documentos oficiales'}),
-    items: [
-      { q: t('campos.ayuda.faq.grupo5.q1', {defaultValue: '¿Puedo generar boletines automáticos para el alumnado?'}), a: t('campos.ayuda.faq.grupo5.a1', {defaultValue: "Sí. Desde la pestaña 'Curso' de Magia puedes generar boletines en PDF masivos para toda la clase o resúmenes individuales hiperdetallados que justifican la nota en base a cada Criterio de Evaluación conseguido."}) }
-    ]
-  },
-  {
-    group: t('campos.ayuda.faq.grupo7.titulo', {defaultValue: '7. Soporte técnico'}),
-    items: [
-      { q: t('campos.ayuda.faq.grupo7.q1', {defaultValue: '¿Qué pasa si las gráficas de mi panel de control no cargan?'}), a: t('campos.ayuda.faq.grupo7.a1', {defaultValue: "Comprueba en la barra lateral que has activado el 'Modo Reales' y tienes seleccionado tu Grupo. Las gráficas necesitan saber a qué alumnado y a qué programación apuntan para poder analizar los datos."}) },
-      { q: t('campos.ayuda.faq.grupo7.q2', {defaultValue: '¿Se puede usar Cuaderno FP en el móvil?'}), a: t('campos.ayuda.faq.grupo7.a2', {defaultValue: 'El diseño es responsivo y se adapta, pero por la densidad de información (tablas masivas de evaluación y matrices curriculares), te recomendamos encarecidamente utilizarlo en pantallas de ordenador o tabletas grandes.'}) },
-      { q: t('campos.ayuda.faq.grupo7.q3', {defaultValue: 'La app va muy lenta o he detectado un error extraño'}), a: t('campos.ayuda.faq.grupo7.a3', {defaultValue: 'Intenta recargar la página completamente (F5 o Ctrl+R). Si el error sigue apareciendo, exporta tus datos (.json) inmediatamente para ponerlos a salvo y ponte en contacto con el soporte detallando los pasos para reproducir tu problema.'}) }
-    ]
-  }
-];
+import { useRouter } from "next/navigation";
+import { fileManager } from "@/services/fileManager";
 
 // ── Página Principal ──────────────────────────────────────────────────────
 export default function InicioPage() {
   const {
-    moduleData, cursoData, globalData, activeModuleId, activeCursoId, dataSource,
+    moduleData, cursoData, globalData, activeModuleId, activeCursoId, dataSource, setDataSource,
     isWizardOpen, setWizardOpen,
+    pdFileSource, cursoFileSource, groupFileSource, workspaceHandle,
   } = useAppStore();
   const [activeTab, setActiveTab] = useState<string>("bienvenida");
   const { t } = useTranslation();
+  const router = useRouter();
   const [aiModalOpen, setAiModalOpen] = useState(false);
-  const FAQS = useMemo(() => getFaqs(t), [t]);
-  const { startTour } = useOnboardingTour();
+
+  const [workspaceFiles, setWorkspaceFiles] = useState<{ grupos: string[], programaciones: string[], cursos: string[] }>({ grupos: [], programaciones: [], cursos: [] });
+  const [demoFiles, setDemoFiles] = useState<{ name: string, ext: string, size: number }[]>([]);
+
+  useEffect(() => {
+    if (workspaceHandle) {
+      fileManager.scanWorkspaceFiles(workspaceHandle).then(setWorkspaceFiles);
+    } else {
+      setWorkspaceFiles({ grupos: [], programaciones: [], cursos: [] });
+    }
+  }, [workspaceHandle]);
+
+  useEffect(() => {
+    fetch('/api/demo')
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success') {
+          setDemoFiles(data.files || []);
+        }
+      })
+      .catch(err => console.error("Error fetching demo files:", err));
+  }, []);
+
+  const [newFileWizardOpen, setNewFileWizardOpen] = useState(false);
+  const [wizardType, setWizardType] = useState<'programacion' | 'curso'>('programacion');
+
+  const [validationModalOpen, setValidationModalOpen] = useState(false);
+  const [brokenLinks, setBrokenLinks] = useState<{ groupName: string; missingFile: string; type: 'programacion' | 'curso' }[]>([]);
+  const [fixingLink, setFixingLink] = useState<{ groupName: string; missingFile: string; type: 'programacion' | 'curso' } | null>(null);
+
+  const pdInputRef = useRef<HTMLInputElement>(null);
+  const cursoInputRef = useRef<HTMLInputElement>(null);
+
+  const isDemoLoaded = dataSource === 'demo';
+  const hasPdFile = !!moduleData;
+  const hasCursoFile = !!cursoData;
+
+  const demoGroupFiles = demoFiles.filter(f => f.ext === 'fpg');
+  const demoProgFiles = demoFiles.filter(f => f.ext === 'fpp');
+  const demoCursoFiles = demoFiles.filter(f => f.ext === 'fpc');
+
+  const loadDemoProgramacion = async (name: string) => {
+    try {
+      const text = await fetch(`/demo/${encodeURIComponent(name)}`).then(r => r.text());
+      const ok = await fileManager.importProgramacion(text, name);
+      if (ok) {
+        useAppStore.getState().setPdFileSource({ type: 'none', fileName: name });
+        toast.success(t('toasts.archivos.programacionCargada', {name, defaultValue: 'Programación {{name}} cargada.'}));
+      } else {
+        toast.error(t('toasts.archivos.errorCargarProgramacionDemo', {defaultValue: "Error al cargar la programación DEMO."}));
+      }
+    } catch {
+      toast.error(t('toasts.archivos.errorCargarProgramacionDemo', {defaultValue: "Error al cargar la programación DEMO."}));
+    }
+  };
+
+  const loadDemoCurso = async (name: string) => {
+    try {
+      const text = await fetch(`/demo/${encodeURIComponent(name)}`).then(r => r.text());
+      const ok = await fileManager.importCurso(text, name);
+      if (ok) {
+        useAppStore.getState().setCursoFileSource({ type: 'none', fileName: name });
+        toast.success(t('toasts.archivos.cursoCargado', {name, defaultValue: 'Curso {{name}} cargado.'}));
+      } else {
+        toast.error(t('toasts.archivos.errorCargarCursoDemo', {defaultValue: "Error al cargar el curso DEMO."}));
+      }
+    } catch {
+      toast.error(t('toasts.archivos.errorCargarCursoDemo', {defaultValue: "Error al cargar el curso DEMO."}));
+    }
+  };
+
+  // Auto-load demo data on first visit
+  useEffect(() => {
+    if (dataSource === 'demo' && (!moduleData || !cursoData)) {
+      fileManager.loadDemoData();
+    }
+  }, [dataSource, moduleData, cursoData]);
+
+  // ── Mode switching ──────────────────────────────────────
+
+  const switchToDemo = () => {
+    setDataSource("demo");
+    fileManager.loadDemoData();
+    toast.success(t('toasts.archivos.cambiadoDemo', {defaultValue: "Cambiado a datos DEMO."}));
+  };
+
+  const switchToLocal = () => {
+    if (dataSource === 'demo') {
+      useAppStore.getState().setModuleData(null);
+      useAppStore.getState().setCursoData(null);
+      useAppStore.getState().setActiveModuleId("");
+      useAppStore.getState().setActiveCursoId("");
+      useAppStore.getState().setPdFileSource({ type: 'none' });
+      useAppStore.getState().setCursoFileSource({ type: 'none' });
+      useAppStore.getState().setGroupFileSource({ type: 'none' });
+    }
+    setDataSource("local");
+    toast.success(t('toasts.archivos.cambiadoReal', {defaultValue: "Cambiado a datos reales en local. Puedes crear o abrir archivos."}));
+  };
+
+  // ── NEW ─────────────────────────────────────────────────
+
+  const handleNewPd = () => {
+    router.push("/catalogo?tab=cursos");
+  };
+
+  const handleNewCurso = () => {
+    setWizardType('curso');
+    setNewFileWizardOpen(true);
+  };
+
+  // ── OPEN (with File System Access API) ──────────────────
+
+  const handleOpenPd = async () => {
+    if (dataSource === 'demo') setDataSource('local');
+    const ok = await fileManager.openProgramacionWithHandle();
+    if (ok) {
+      toast.success(<>{t('toasts.archivos.programacionAbiertaIcono', {defaultValue: "Programación abierta correctamente"})} <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] ml-1" /></span></>);
+    }
+  };
+
+  const handleOpenCurso = async () => {
+    if (dataSource === 'demo') setDataSource('local');
+    const ok = await fileManager.openCursoWithHandle();
+    if (ok) {
+      toast.success(<>{t('toasts.archivos.cursoAbiertoIcono', {defaultValue: "Curso abierto correctamente"})} <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] ml-1" /></span></>);
+    }
+  };
+
+  // ── SAVE ────────────────────────────────────────────────
+
+  const handleSavePd = async () => {
+    if (!moduleData) {
+      toast.error(t('toasts.archivos.sinProgramacionGuardar', {defaultValue: "No hay ninguna programación cargada para guardar."}));
+      return;
+    }
+    if (dataSource === 'demo') {
+      toast(t('toasts.archivos.modoDemoGuardarComoNuevo', {defaultValue: "Estás en modo DEMO. Guardando como nuevo archivo..."}), { icon: 'ℹ️' });
+      return handleSaveAsPd();
+    }
+    const ok = await fileManager.saveProgramacion();
+    if (ok) toast.success(t('toasts.archivos.programacionGuardada', {defaultValue: "Programación guardada correctamente."}));
+    else toast.error(t('toasts.archivos.errorGuardarProgramacion', {defaultValue: "Error al guardar la programación."}));
+  };
+
+  const handleSaveCurso = async () => {
+    if (!cursoData) {
+      toast.error(t('toasts.archivos.sinCursoGuardar', {defaultValue: "No hay ningún curso cargado para guardar."}));
+      return;
+    }
+    if (dataSource === 'demo') {
+      toast(t('toasts.archivos.modoDemoGuardarComoNuevo', {defaultValue: "Estás en modo DEMO. Guardando como nuevo archivo..."}), { icon: 'ℹ️' });
+      return handleSaveAsCurso();
+    }
+    const ok = await fileManager.saveCurso();
+    if (ok) toast.success(t('toasts.archivos.cursoGuardado', {defaultValue: "Curso guardado correctamente."}));
+    else toast.error(t('toasts.archivos.errorGuardarCurso', {defaultValue: "Error al guardar el curso."}));
+  };
+
+  // ── SAVE AS ─────────────────────────────────────────────
+
+  const handleSaveAsPd = async () => {
+    if (!moduleData) {
+      toast.error(t('toasts.archivos.sinProgramacion', {defaultValue: "No hay ninguna programación cargada."}));
+      return;
+    }
+    const ok = await fileManager.saveAsProgramacion();
+    if (ok) toast.success(t('toasts.archivos.programacionGuardadaComo', {defaultValue: "Programación guardada como nuevo archivo."}));
+  };
+
+  const handleSaveAsCurso = async () => {
+    if (!cursoData) {
+      toast.error(t('toasts.archivos.sinCurso', {defaultValue: "No hay ningún curso cargado."}));
+      return;
+    }
+    const ok = await fileManager.saveAsCurso();
+    if (ok) toast.success(t('toasts.archivos.cursoGuardadoComo', {defaultValue: "Curso guardado como nuevo archivo."}));
+  };
+
+  // ── Drag & Drop ─────────────────────────────────────────
+
+  const handleDrop = useCallback(async (e: React.DragEvent, type: 'pd' | 'curso') => {
+    e.preventDefault();
+    e.stopPropagation();
+    const file = e.dataTransfer.files[0];
+    if (!file) return;
+
+    if (dataSource === 'demo') setDataSource('local');
+
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+      const content = event.target?.result as string;
+      if (type === 'pd') {
+        const success = await fileManager.importProgramacion(content, file.name);
+        if (success) {
+          useAppStore.getState().setPdFileSource({ type: 'local', fileName: file.name });
+          toast.success(<>{t('toasts.archivos.programacionCargadaArrastre', {defaultValue: "Programación cargada por arrastre"})} <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] ml-1" /></span></>);
+        } else {
+          toast.error(t('toasts.archivos.errorFormatoProgramacionArrastrar', {defaultValue: "El archivo no tiene un formato válido de programación (.fpp)."}));
+        }
+      } else {
+        const success = await fileManager.importCurso(content, file.name);
+        if (success) {
+          useAppStore.getState().setCursoFileSource({ type: 'local', fileName: file.name });
+          toast.success(<>{t('toasts.archivos.cursoCargadoArrastre', {defaultValue: "Curso cargado por arrastre"})} <span className="inline-flex"><FolderOpen className="w-[1.2em] h-[1.2em] ml-1" /></span></>);
+        } else {
+          toast.error(t('toasts.archivos.errorFormatoCursoArrastrar', {defaultValue: "El archivo no tiene un formato válido de curso (.fpc)."}));
+        }
+      }
+    };
+    reader.readAsText(file);
+  }, [dataSource, setDataSource]);
+
+  // ── Helpers ─────────────────────────────────────────────
+
+  const getFriendlyPdName = (pdKey: string) => {
+    if (pdKey === "imported-pd") return t('campos.archivos.programacionImportada', {defaultValue: 'Programación importada'});
+
+    if (useAppStore.getState().activeModuleId === pdKey && moduleData?.info_modulo) {
+      const { codigo, nombre, titulo_codigo, titulo_fp } = moduleData.info_modulo;
+      const actualCode = codigo || pdKey.split('-')[0];
+
+      let degreeCode = actualCode;
+      if (titulo_codigo) {
+        degreeCode = titulo_codigo;
+      } else if (titulo_fp) {
+        const lowerCiclo = titulo_fp.toLowerCase();
+        const firstWord = titulo_fp.split(' ')[0];
+        if (/^[A-Z]{2,4}\d{2,3}$/i.test(firstWord) || /^[A-Z]+-\d+$/i.test(firstWord)) {
+          degreeCode = firstWord;
+        } else if (lowerCiclo.includes("superior")) {
+          degreeCode = "GS";
+        } else if (lowerCiclo.includes("básico") || lowerCiclo.includes("basico") || lowerCiclo.includes("profesional")) {
+          degreeCode = "GB";
+        } else if (lowerCiclo.includes("técnico") || lowerCiclo.includes("tecnico")) {
+          degreeCode = "GM";
+        } else {
+          degreeCode = firstWord;
+        }
+      }
+
+      return `P - ${degreeCode} - ${actualCode} - ${nombre || t('campos.archivos.programacionFallback', {defaultValue: 'Programación'})}`;
+    }
+
+    return `P - ${pdKey.replace('-pd', '').toUpperCase()}`;
+  };
 
   // Navegador nuevo / sin datos locales (ningún archivo abierto todavía, ni
   // Programación ni Curso): ofrecer DEMO o crear archivos propios en vez de
@@ -127,18 +304,18 @@ export default function InicioPage() {
 
   const TABS = [
     { id: "bienvenida", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.bienvenida')}</>, cleanLabel: t('tabs.bienvenida') },
-    { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.magia.guia.label', {defaultValue: 'Guía'})}</>, cleanLabel: t('tabs.magia.guia.label', {defaultValue: 'Guía'}) },
-    { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.faq.label', {defaultValue: 'FAQ'})}</>, cleanLabel: t('tabs.ayuda.faq.label', {defaultValue: 'FAQ'}) },
-    { id: "acronimos", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.acronimos.label', {defaultValue: 'Acrónimos'})}</>, cleanLabel: t('tabs.ayuda.acronimos.label', {defaultValue: 'Acrónimos'}) },
+    { id: "datos", label: <span className="flex items-center gap-2"><Database className="w-4 h-4 shrink-0" /> {t('tabs.archivos.datos.label', {defaultValue: 'Datos'})}</span>, cleanLabel: t('tabs.archivos.datos.label', {defaultValue: 'Datos'}) },
+    { id: "asistente-ia", label: <span className="flex items-center gap-2"><Sparkles className="w-4 h-4 shrink-0" /> {t('tabs.archivos.asistente-ia.label', {defaultValue: 'Asistente'})}</span>, cleanLabel: t('tabs.archivos.asistente-ia.label', {defaultValue: 'Asistente'}) },
+    { id: "verificacion", label: <span className="flex items-center gap-2"><ListChecks className="w-4 h-4 shrink-0" /> {t('tabs.inicio.verificacion.label', {defaultValue: 'Verificación'})}</span>, cleanLabel: t('tabs.inicio.verificacion.label', {defaultValue: 'Verificación'}) },
   ];
 
-  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+  const activeTabCleanLabel = TABS.find(tab => tab.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     bienvenida: t('tabs.inicio.bienvenida.desc', {defaultValue: 'Panel de control de acceso rápido a todas las herramientas.'}),
-    guia: t('tabs.magia.guia.desc', {defaultValue: 'Guía de inicio y prompt para IA: qué datos pedir al docente y dónde colocarlos en la app.'}),
-    faq: t('tabs.ayuda.faq.desc', {defaultValue: 'Respuestas a las preguntas más frecuentes del profesorado.'}),
-    acronimos: t('tabs.ayuda.acronimos.desc', {defaultValue: 'Glosario de siglas, acrónimos y conceptos de Formación Profesional.'}),
+    datos: t('tabs.archivos.datos.desc', {defaultValue: 'Gestión de tus archivos de Grupos, Programaciones y Cursos guardados en local o en la nube.'}),
+    'asistente-ia': t('tabs.archivos.asistente-ia.desc', {defaultValue: 'Configuración de inteligencia artificial.'}),
+    verificacion: t('tabs.inicio.verificacion.desc', {defaultValue: 'Panel de salud y coherencia de los datos de tu cuaderno.'}),
   };
 
   return (
@@ -162,27 +339,35 @@ export default function InicioPage() {
         <Header breadcrumbSuffix={activeTabCleanLabel} />
         <div className="flex-1 overflow-y-auto scrollbar-hide">
           <StickyPageHeader icon={Activity} title={t('inicio.title')} description={t('inicio.subtitle')}>
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
-              <TabsList className="max-w-full">
-                {TABS.map(tab => (
-                  <TabsTrigger key={tab.id} value={tab.id}>
-                    {tab.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+                <TabsList className="max-w-full">
+                  {TABS.map(tab => (
+                    <TabsTrigger key={tab.id} value={tab.id}>
+                      {tab.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
+              {activeTab === "datos" && workspaceHandle && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="border border-warning/50 text-warning hover:bg-warning/10"
+                  onClick={async () => {
+                    const res = await fileManager.validateWorkspaceLinks(workspaceHandle);
+                    setBrokenLinks(res.brokenGroups);
+                    setValidationModalOpen(true);
+                  }}
+                >
+                  <ShieldAlert className="w-4 h-4 mr-2" /> {t('botones.archivos.validarWorkspace', {defaultValue: 'Validar workspace'})}
+                </Button>
+              )}
+            </div>
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-4 px-8 pt-4 pb-12">
-            <TabInfoBox
-              description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab}
-              action={activeTab === "guia" ? (
-                <Button variant="primary" size="sm" onClick={startTour}>
-                  <Compass className="w-4 h-4" />
-                  {t('campos.ayuda.iniciarRecorrido', {defaultValue: 'Iniciar recorrido guiado'})}
-                </Button>
-              ) : undefined}
-            />
+            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
 
             {/* ── CONTENIDO: BIENVENIDA ──────────────────────────────── */}
             {activeTab === "bienvenida" && (
@@ -297,96 +482,524 @@ export default function InicioPage() {
               </div>
             </div>
 
-            {/* Contribuciones: comunidad de Telegram y contribuidores por CCAA */}
-            <div className="space-y-6">
-              <div className="flex flex-col md:flex-row items-center gap-5 p-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
-                <div className="w-12 h-12 shrink-0 rounded-full bg-[#229ED9]/10 flex items-center justify-center">
-                  <MessageCircle className="w-6 h-6 text-[#229ED9]" />
-                </div>
-                <div className="flex-1 text-center md:text-left">
-                  <h3 className="text-body font-bold text-foreground">{t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'})}</h3>
-                  <p className="text-body text-muted leading-tight mt-1">
-                    {t('campos.inicio.grupoTelegramDesc', {defaultValue: 'Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad Autónoma.'})}
-                  </p>
-                </div>
-                <a
-                  href="https://t.me/cuadernofp"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="shrink-0 px-5 py-2.5 rounded-lg bg-[#229ED9] text-white font-medium hover:bg-[#229ED9]/90 transition-colors flex items-center gap-2 text-body"
-                >
-                  <Send className="w-4 h-4" />
-                  {t('botones.inicio.unirseTelegram', {defaultValue: 'Unirme al grupo en Telegram'})}
-                </a>
-              </div>
-
-              <h3 className="text-heading font-bold text-foreground border-b border-[var(--glass-border)] pb-2">{t('campos.inicio.contribuidoresCcaaTitulo', {defaultValue: 'Contribuidores por Comunidad Autónoma'})}</h3>
-              <p className="text-muted mb-4">
-                {t('campos.inicio.contribuidoresCcaaDesc', {defaultValue: 'Mención especial al profesorado que está ayudando a mejorar y a integrar los currículos de las Comunidades Autónomas'})}
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {[
-                  "Andalucía", "Aragón", "Asturias", "Baleares", "Canarias",
-                  "Cantabria", "Castilla y León", "Castilla-La Mancha", "Cataluña", "Ceuta",
-                  "Comunidad Valenciana", "Extremadura", "Galicia", "La Rioja", "Madrid",
-                  "Melilla", "Murcia", "Navarra", "País Vasco"
-                ].map((comunidad) => (
-                  <div key={comunidad} className="p-4 rounded-xl border border-[var(--glass-border)] bg-background/50 flex flex-col gap-2 transition-all hover:bg-background/80">
-                    <div className="flex items-center gap-2 border-b border-[var(--glass-border)] pb-2 mb-1">
-                      <Map className="w-5 h-5 text-accent" />
-                      <span className="font-bold text-foreground">{comunidad}</span>
-                    </div>
-                    <ul className="text-body text-muted space-y-1.5 pl-2">
-                      {comunidad === "Aragón" ? (
-                        <li className="flex items-center gap-2 text-foreground"><Users className="w-4 h-4 text-accent" /> Jose Javier García</li>
-                      ) : (
-                        <li className="flex items-center gap-2 italic opacity-60"><Users className="w-4 h-4 text-muted-foreground" /> {t('campos.inicio.animateAContribuir', {defaultValue: '¡Anímate a contribuir!'})}</li>
-                      )}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-
           </div>
 
               </div>
             )}
 
-            {/* ── CONTENIDO: GUÍA ────────────────────────────────────── */}
-            {activeTab === "guia" && (
-              <GuiaTab />
-            )}
+            {/* ── CONTENIDO: DATOS ────────────────────────────────────── */}
+            {activeTab === "datos" && (
+              <div className="space-y-4 animate-in fade-in duration-300">
 
-            {/* ── CONTENIDO: FAQ ────────────────────────────────────────── */}
-            {activeTab === "faq" && (
-              <div className="space-y-10 animate-in fade-in duration-500 w-full">
-                {FAQS.map((faqGroup, idx) => (
-                  <div key={faqGroup.group || idx}>
-                    <h2 className="text-subheading font-bold mb-4 text-accent border-b border-white/5 pb-2">
-                      {faqGroup.group}
-                    </h2>
-                    <div className="space-y-1">
-                      {faqGroup.items.map((item, i) => (
-                        <AccordionItem key={item.q || i} question={item.q} answer={item.a} />
-                      ))}
+                <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-6">
+                  <div className="flex items-center gap-3 shrink-0">
+                    <span className="text-body font-bold text-foreground/80">{t('campos.archivos.modoDatosLabel', {defaultValue: 'Modo de datos:'})}</span>
+                    <div className="flex bg-foreground/5 rounded-lg p-0.5 gap-0.5">
+                      <button
+                        onClick={switchToDemo}
+                        className={`flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md text-body font-bold transition-all ${dataSource === 'demo'
+                          ? 'bg-warning/20 text-warning shadow-sm ring-1 ring-warning/30'
+                          : 'text-muted hover:bg-foreground/10 hover:text-foreground'}`}
+                      >
+                        <Cloud className="w-3.5 h-3.5" /> {t('sidebar.demo')}
+                      </button>
+                      <button
+                        onClick={switchToLocal}
+                        className={`flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-md text-body font-bold transition-all ${dataSource === 'local'
+                          ? 'bg-success/20 text-success shadow-sm ring-1 ring-success/30'
+                          : 'text-muted hover:bg-foreground/10 hover:text-foreground'}`}
+                      >
+                        <HardDrive className="w-3.5 h-3.5" /> {t('sidebar.reales')}
+                      </button>
                     </div>
                   </div>
-                ))}
+
+                  <div className={`flex-1 flex items-center gap-2 px-4 py-2 rounded-lg border text-body ${dataSource === 'demo' ? 'bg-warning/10 border-warning/30 text-warning' : 'bg-success/10 border-success/30 text-success'}`}>
+                    {dataSource === 'demo' ? (
+                      <>
+                        <Cloud className="w-4 h-4 shrink-0" />
+                        <span><strong className="font-bold">DEMO:</strong> {t('campos.archivos.avisoDemoDesc', {defaultValue: 'estás viendo datos de ejemplo. No es tu curso real y no se guarda nada en disco — cambia a REALES para trabajar con tus propios archivos.'})}</span>
+                      </>
+                    ) : (
+                      <>
+                        <HardDrive className="w-4 h-4 shrink-0" />
+                        <span><strong className="font-bold">REAL:</strong> {t('campos.archivos.avisoRealDesc', {defaultValue: 'estás trabajando con tus propios archivos .fpg/.fpp/.fpc, guardados en tu equipo. Los cambios se guardan de verdad.'})}</span>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                  {/* ── Columna GRUPO ── */}
+                  <Card className={`p-6 border rounded-2xl shadow-lg flex flex-col h-[452px] relative overflow-hidden group ${isDemoLoaded ? 'bg-foreground/5 border-warning/20' : 'bg-foreground/5 border-[var(--glass-border)]'}`}>
+                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
+                      <FolderOpen className={`w-24 h-24 ${isDemoLoaded ? 'text-warning' : 'text-accent'}`} />
+                    </div>
+                    <div className="relative z-10 flex flex-col h-full flex-1">
+                      <div className="mb-4">
+                        <h3 className="text-subheading font-bold text-foreground flex items-center gap-2">
+                          <FolderOpen className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : 'text-accent'}`} /> {t('nav.grupos', {defaultValue: 'Grupos'})}
+                        </h3>
+                        <p className="text-body text-muted mt-2 leading-relaxed">
+                          {isDemoLoaded
+                            ? t('campos.archivos.gruposEjemploDobleClic', {defaultValue: 'Grupos de ejemplo. Doble clic para cargar.'})
+                            : t('campos.archivos.tusGruposDobleClic', {defaultValue: 'Tus grupos guardados. Doble clic para cargar.'})}
+                        </p>
+                      </div>
+
+                      <div className="flex-1 flex flex-col gap-2 min-h-[180px] overflow-y-auto pr-2 custom-scrollbar">
+                        {isDemoLoaded ? (
+                          demoGroupFiles.length === 0 ? (
+                            <div className="h-full flex items-center justify-center text-center p-4">
+                              <p className="text-body text-muted">{t('campos.archivos.sinGruposDemo', {defaultValue: 'No se han encontrado grupos DEMO.'})}</p>
+                            </div>
+                          ) : (
+                            demoGroupFiles.map(f => {
+                              const isActive = groupFileSource.fileName === f.name;
+                              return (
+                                <button
+                                  key={f.name}
+                                  onDoubleClick={async () => {
+                                    await fileManager.loadDemoData(f.name);
+                                    toast.success(t('toasts.archivos.grupoCargado', {name: f.name, defaultValue: 'Grupo {{name}} cargado.'}));
+                                  }}
+                                  className={`w-full text-left p-3 rounded-lg border transition-colors group/item ${isActive ? 'bg-warning/10 border-warning/40 shadow-sm' : 'border-[var(--glass-border)] bg-foreground/[0.02] hover:bg-foreground/5'}`}
+                                >
+                                  <div className="flex items-center gap-2">
+                                    <FolderOpen className={`w-4 h-4 shrink-0 transition-colors ${isActive ? 'text-warning' : 'text-warning/70 group-hover/item:text-warning'}`} />
+                                    <span className={`text-body font-medium truncate ${isActive ? 'text-warning font-bold' : ''}`} title={f.name}>{f.name.replace('.fpg', '')}</span>
+                                  </div>
+                                </button>
+                              );
+                            })
+                          )
+                        ) : !workspaceHandle ? (
+                          <div className="h-full flex flex-col items-center justify-center text-center p-4">
+                            <Database className="w-8 h-8 text-muted/50 mb-2" />
+                            <p className="text-body text-muted font-medium">{t('campos.archivos.usaBotonEnlazarCarpeta', {defaultValue: 'Usa el botón inferior para enlazar tu carpeta de trabajo.'})}</p>
+                          </div>
+                        ) : workspaceFiles.grupos.length === 0 ? (
+                          <div className="h-full flex items-center justify-center text-center p-4">
+                            <p className="text-body text-muted">{t('campos.archivos.sinGrupos', {defaultValue: 'No se han encontrado grupos.'})}</p>
+                          </div>
+                        ) : (
+                          workspaceFiles.grupos.map(g => (
+                            <button
+                              key={g}
+                              onDoubleClick={async () => {
+                                const ok = await fileManager.loadGroupFromWorkspace(workspaceHandle, g);
+                                if (ok) toast.success(t('toasts.archivos.grupoAbierto', {name: g, defaultValue: 'Grupo {{name}} abierto correctamente.'}));
+                                else toast.error(t('toasts.archivos.errorAbrirGrupo', {defaultValue: "Error al abrir el grupo."}));
+                              }}
+                              className="w-full text-left p-3 rounded-lg border border-[var(--glass-border)] bg-foreground/[0.02] hover:bg-foreground/5 transition-colors group/item"
+                            >
+                              <div className="flex items-center gap-2">
+                                <FolderOpen className="w-4 h-4 text-accent/70 group-hover/item:text-accent transition-colors shrink-0" />
+                                <span className="text-body font-medium truncate" title={g}>{g.replace('.json', '')}</span>
+                              </div>
+                            </button>
+                          ))
+                        )}
+                      </div>
+
+                      {/* Botonera Grupos */}
+                      {!isDemoLoaded && (
+                        <div className="flex flex-col gap-2 pt-4 mt-auto border-t border-[var(--glass-border)]">
+                          {!workspaceHandle ? (
+                            <Button onClick={async () => {
+                              const handle = await fileManager.openWorkspaceDirectory();
+                              if (handle) toast.success(t('toasts.archivos.carpetaConectada', {defaultValue: "Carpeta local conectada."}));
+                            }} className="w-full bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 transition-all text-caption h-9">
+                              <FolderOpen className="w-3 h-3 mr-1" /> {t('botones.archivos.conectarCarpetaLocal', {defaultValue: 'Conectar carpeta local'})}
+                            </Button>
+                          ) : (
+                            <Button onClick={async () => {
+                              const handle = await fileManager.openWorkspaceDirectory();
+                              if (handle) toast.success(t('toasts.archivos.carpetaCambiada', {defaultValue: "Carpeta local cambiada."}));
+                            }} className="w-full bg-foreground/5 hover:bg-foreground/10 text-foreground border border-[var(--glass-border)] transition-all text-caption h-9">
+                              <FolderOpen className="w-3 h-3 mr-1" /> {t('botones.archivos.cambiarCarpetaLocal', {defaultValue: 'Cambiar carpeta local'})}
+                            </Button>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </Card>
+
+                  {/* ── Columna PROGRAMACIÓN ── */}
+                  <Card className={`p-6 border rounded-2xl shadow-lg flex flex-col h-[452px] relative overflow-hidden group ${isDemoLoaded ? 'bg-foreground/5 border-warning/20' : 'bg-foreground/5 border-info/20'}`}>
+                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
+                      <BookOpen className={`w-24 h-24 ${isDemoLoaded ? 'text-warning' : 'text-info'}`} />
+                    </div>
+                    <div className="relative z-10 flex flex-col h-full flex-1">
+                      <div className="mb-4">
+                        <div className="flex justify-between items-center mb-1">
+                          <h3 className="text-subheading font-bold text-foreground flex items-center gap-2">
+                            <BookOpen className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : 'text-info'}`} /> {t('campos.archivos.programacionesTitulo', {defaultValue: 'Programaciones'})}
+                          </h3>
+                          {hasPdFile && <Badge variant={isDemoLoaded ? 'warning' : 'info'}>{t('checks.archivos.activaFem', {defaultValue: 'Activa'})}</Badge>}
+                        </div>
+                        <p className="text-body text-muted mt-2 leading-relaxed">
+                          {t('campos.archivos.dobleClicCargarProgramacion', {defaultValue: 'Doble clic para cargar una programación.'})}
+                        </p>
+                      </div>
+
+                      <div className="flex-1 flex flex-col gap-2 min-h-[180px] overflow-y-auto pr-2 custom-scrollbar">
+                        {isDemoLoaded ? (
+                          demoProgFiles.length === 0 ? (
+                            <div className="h-full flex items-center justify-center text-center p-4">
+                              <p className="text-body text-muted">{t('campos.archivos.sinProgramacionesDemo', {defaultValue: 'No se han encontrado programaciones DEMO.'})}</p>
+                            </div>
+                          ) : (
+                            demoProgFiles.map(f => {
+                              const isActive = pdFileSource.fileName === f.name;
+                              return (
+                                <button
+                                  key={f.name}
+                                  onDoubleClick={() => loadDemoProgramacion(f.name)}
+                                  className={`w-full text-left p-3 rounded-lg border transition-colors group/item ${isActive ? 'bg-info/10 border-info/40 shadow-sm' : 'border-[var(--glass-border)] bg-foreground/[0.02] hover:bg-foreground/5'}`}
+                                >
+                                  <div className="flex items-center gap-2">
+                                    <BookOpen className={`w-4 h-4 shrink-0 transition-colors ${isActive ? 'text-info' : 'text-info/70 group-hover/item:text-info'}`} />
+                                    <span className={`text-body font-medium truncate ${isActive ? 'text-info font-bold' : ''}`} title={f.name}>{f.name.replace('.fpp', '')}</span>
+                                  </div>
+                                </button>
+                              );
+                            })
+                          )
+                        ) : workspaceHandle && workspaceFiles.programaciones.length > 0 ? (
+                          workspaceFiles.programaciones.map(p => {
+                            const isActive = pdFileSource.type === 'local' && pdFileSource.fileName === p;
+                            return (
+                              <button
+                                key={p}
+                                onDoubleClick={async () => {
+                                  const ok = await fileManager.loadProgramacionFromWorkspace(workspaceHandle, p);
+                                  if (ok) toast.success(t('toasts.archivos.programacionAbierta', {defaultValue: "Programación abierta correctamente."}));
+                                  else toast.error(t('toasts.archivos.errorAbrirProgramacion', {defaultValue: "Error al abrir la programación."}));
+                                }}
+                                className={`w-full text-left p-3 rounded-lg border transition-colors group/item ${isActive ? 'bg-info/10 border-info/40 shadow-sm' : 'border-[var(--glass-border)] bg-foreground/[0.02] hover:bg-foreground/5'}`}
+                              >
+                                <div className="flex items-center gap-2">
+                                  <BookOpen className={`w-4 h-4 shrink-0 transition-colors ${isActive ? 'text-info' : 'text-info/70 group-hover/item:text-info'}`} />
+                                  <span className={`text-body font-medium truncate ${isActive ? 'text-info font-bold' : ''}`} title={p}>{p.replace('.json', '')}</span>
+                                </div>
+                              </button>
+                            );
+                          })
+                        ) : workspaceHandle ? (
+                          <div className="h-full flex items-center justify-center text-center p-4">
+                            <p className="text-body text-muted">{t('campos.archivos.sinProgramaciones', {defaultValue: 'No se han encontrado programaciones.'})}</p>
+                          </div>
+                        ) : null}
+                      </div>
+
+                      {/* Botonera Programación */}
+                      <div className="flex flex-col gap-2 pt-4 mt-auto border-t border-[var(--glass-border)]">
+                        {isDemoLoaded ? (
+                          <Button onClick={handleLoadDemo} className="w-full bg-warning/20 hover:bg-warning/30 text-warning border border-warning/30">
+                            <Zap className="w-4 h-4 mr-2" /> {t('botones.archivos.recargarDemo', {defaultValue: 'Recargar DEMO'})}
+                          </Button>
+                        ) : (
+                          <>
+                            <div className="flex gap-2">
+                              <Button onClick={handleNewPd} className="flex-1 bg-info/10 hover:bg-info/20 text-info border border-info/30 transition-all text-caption h-9">
+                                <Plus className="w-3 h-3 mr-1" /> {t('botones.archivos.nuevaCatalogo', {defaultValue: 'Nueva (catálogo)'})}
+                              </Button>
+                              <Button onClick={handleOpenPd} className="flex-1 bg-foreground/5 hover:bg-foreground/10 text-foreground border border-[var(--glass-border)] transition-all text-caption h-9">
+                                <FolderOpen className="w-3 h-3 mr-1" /> {t('common.importar', {defaultValue: 'Importar'})}
+                              </Button>
+                            </div>
+                            {hasPdFile && (
+                              <div className="flex gap-2">
+                                <Button onClick={handleSavePd} className="flex-1 bg-info/10 hover:bg-info/20 text-info border border-info/30 transition-all text-caption h-9">
+                                  <Save className="w-3 h-3 mr-1" /> {t('common.guardar', {defaultValue: 'Guardar'})}
+                                </Button>
+                                <Button onClick={handleSaveAsPd} className="bg-foreground/5 hover:bg-foreground/10 text-muted border border-[var(--glass-border)] transition-all px-3 h-9" title={t('tooltips.archivos.guardarComo', {defaultValue: 'Guardar como...'})}>
+                                  <Copy className="w-3 h-3" />
+                                </Button>
+                              </div>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </Card>
+
+                  {/* ── Columna CURSO ── */}
+                  <Card className={`p-6 border rounded-2xl shadow-lg flex flex-col h-[452px] relative overflow-hidden group ${isDemoLoaded ? 'bg-foreground/5 border-warning/20' : 'bg-foreground/5 border-success/20'}`}>
+                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
+                      <Users className={`w-24 h-24 ${isDemoLoaded ? 'text-warning' : 'text-success'}`} />
+                    </div>
+                    <div className="relative z-10 flex flex-col h-full flex-1">
+                      <div className="mb-4">
+                        <div className="flex justify-between items-center mb-1">
+                          <h3 className={`text-subheading font-bold flex items-center gap-2 ${(!isDemoLoaded && !hasPdFile) ? 'text-muted' : 'text-foreground'}`}>
+                            <Users className={`w-5 h-5 ${isDemoLoaded ? 'text-warning' : (!isDemoLoaded && !hasPdFile) ? 'text-muted' : 'text-success'}`} /> {t('campos.archivos.cursosTitulo', {defaultValue: 'Cursos'})}
+                          </h3>
+                          {hasCursoFile && <Badge variant={isDemoLoaded ? 'warning' : 'success'}>{t('checks.archivos.activoMasc', {defaultValue: 'Activo'})}</Badge>}
+                        </div>
+                        <p className="text-body text-muted mt-2 leading-relaxed">
+                          {t('campos.archivos.dobleClicCargarCurso', {defaultValue: 'Doble clic para cargar un curso.'})}
+                        </p>
+                      </div>
+
+                      <div className="flex-1 flex flex-col gap-2 min-h-[180px] overflow-y-auto pr-2 custom-scrollbar">
+                        {isDemoLoaded ? (
+                          demoCursoFiles.length === 0 ? (
+                            <div className="h-full flex items-center justify-center text-center p-4">
+                              <p className="text-body text-muted">{t('campos.archivos.sinCursosDemo', {defaultValue: 'No se han encontrado cursos DEMO.'})}</p>
+                            </div>
+                          ) : (
+                            demoCursoFiles.map(f => {
+                              const isActive = cursoFileSource.fileName === f.name;
+                              return (
+                                <button
+                                  key={f.name}
+                                  onDoubleClick={() => loadDemoCurso(f.name)}
+                                  className={`w-full text-left p-3 rounded-lg border transition-colors group/item ${isActive ? 'bg-success/10 border-success/40 shadow-sm' : 'border-[var(--glass-border)] bg-foreground/[0.02] hover:bg-foreground/5'}`}
+                                >
+                                  <div className="flex items-center gap-2">
+                                    <Users className={`w-4 h-4 shrink-0 transition-colors ${isActive ? 'text-success' : 'text-success/70 group-hover/item:text-success'}`} />
+                                    <span className={`text-body font-medium truncate ${isActive ? 'text-success font-bold' : ''}`} title={f.name}>{f.name.replace('.fpc', '')}</span>
+                                  </div>
+                                </button>
+                              );
+                            })
+                          )
+                        ) : workspaceHandle && workspaceFiles.cursos.length > 0 ? (
+                          workspaceFiles.cursos.map(c => {
+                            const isActive = cursoFileSource.type === 'local' && cursoFileSource.fileName === c;
+                            return (
+                              <button
+                                key={c}
+                                onDoubleClick={() => {
+                                  toast.error(t('toasts.archivos.abrirCursoViaGrupo', {defaultValue: "Para abrir un curso de forma segura, haz doble clic en su grupo asociado en la primera columna."}));
+                                }}
+                                className={`w-full text-left p-3 rounded-lg border transition-colors group/item ${isActive ? 'bg-success/10 border-success/40 shadow-sm' : 'border-[var(--glass-border)] bg-foreground/[0.02] hover:bg-foreground/5 opacity-80 hover:opacity-100'}`}
+                              >
+                                <div className="flex items-center gap-2">
+                                  <Users className={`w-4 h-4 shrink-0 transition-colors ${isActive ? 'text-success' : 'text-success/70 group-hover/item:text-success'}`} />
+                                  <span className={`text-body font-medium truncate ${isActive ? 'text-success font-bold' : ''}`} title={c}>{c.replace('.json', '')}</span>
+                                </div>
+                              </button>
+                            );
+                          })
+                        ) : workspaceHandle ? (
+                          <div className="h-full flex items-center justify-center text-center p-4">
+                            <p className="text-body text-muted">{t('campos.archivos.sinCursos', {defaultValue: 'No se han encontrado cursos.'})}</p>
+                          </div>
+                        ) : null}
+                      </div>
+
+                      {/* Botonera Curso */}
+                      <div className="flex flex-col gap-2 pt-4 mt-auto border-t border-[var(--glass-border)]">
+                        {isDemoLoaded ? (
+                          <Button onClick={handleLoadDemo} className="w-full bg-warning/20 hover:bg-warning/30 text-warning border border-warning/30">
+                            <Zap className="w-4 h-4 mr-2" /> {t('botones.archivos.recargarDemo', {defaultValue: 'Recargar DEMO'})}
+                          </Button>
+                        ) : (
+                          <>
+                            <div className="flex gap-2">
+                              <Button disabled={!hasPdFile} onClick={handleNewCurso} className="flex-1 bg-success/10 hover:bg-success/20 text-success border border-success/30 transition-all disabled:opacity-30 text-caption h-9" title={t('tooltips.archivos.creaCursoGrupo', {defaultValue: 'Crea un curso y su archivo grupo asociado'})}>
+                                <Plus className="w-3 h-3 mr-1" /> {t('botones.archivos.iniciarCursoGrupo', {defaultValue: 'Iniciar curso (+ grupo)'})}
+                              </Button>
+                              <Button disabled={!hasPdFile} onClick={handleOpenCurso} className="bg-foreground/5 hover:bg-foreground/10 text-foreground border border-[var(--glass-border)] transition-all px-3 h-9" title={t('tooltips.archivos.importarCursoHuerfano', {defaultValue: 'Importar curso huérfano'})}>
+                                <FolderOpen className="w-3 h-3" />
+                              </Button>
+                            </div>
+                            {hasCursoFile && (
+                              <div className="flex gap-2">
+                                <Button onClick={handleSaveCurso} className="flex-1 bg-success/10 hover:bg-success/20 text-success border border-success/30 transition-all text-caption h-9">
+                                  <Save className="w-3 h-3 mr-1" /> {t('common.guardar', {defaultValue: 'Guardar'})}
+                                </Button>
+                                <Button onClick={handleSaveAsCurso} className="bg-foreground/5 hover:bg-foreground/10 text-muted border border-[var(--glass-border)] transition-all px-3 h-9" title={t('tooltips.archivos.guardarComo', {defaultValue: 'Guardar como...'})}>
+                                  <Copy className="w-3 h-3" />
+                                </Button>
+                              </div>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </Card>
+
+                </div>
+
+                {/* Bloque interno: Nube (Google Drive & OneDrive) */}
+                <div className="flex items-center gap-3 pt-2">
+                  <div className="h-px flex-1 bg-[var(--glass-border)]" />
+                  <span className="text-caption text-muted uppercase tracking-wider">{t('campos.archivos.nubeLabel', {defaultValue: 'Nube'})}</span>
+                  <div className="h-px flex-1 bg-[var(--glass-border)]" />
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+                  <GoogleDriveSyncPanel />
+                  <OneDriveSyncPanel />
+                </div>
+
+                {/* Seguridad y privacidad -- antes pestaña propia, unificada aquí
+                    al final de Datos (Rafael, 2026-09-23): quitaba sitio a una
+                    pestaña completa para un contenido que es, en esencia, una
+                    ampliación de "de dónde vienen y a dónde van tus datos",
+                    justo el tema de esta pestaña. El cartel corto "Seguridad y
+                    RGPD garantizados" que antes aparecía siempre, en las 4
+                    pestañas de Archivo, se retira: este bloque ya cubre lo mismo
+                    con más detalle. */}
+                <section className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl p-8">
+                  <div className="flex items-center gap-4 mb-2">
+                    <div className="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
+                      <Shield className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h2 className="text-subheading font-bold text-foreground">{t('campos.archivos.privacidadDisenoTitulo', {defaultValue: 'Tu privacidad por diseño'})}</h2>
+                      <p className="text-muted mt-1 text-body">{t('campos.archivos.privacidadDisenoDesc', {defaultValue: 'Cómo se garantiza que tus datos reales son 100% tuyos.'})}</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="p-5 bg-background rounded-xl border border-[var(--glass-border)]">
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Building2 className="w-5 h-5 text-accent"/> {t('campos.archivos.servidorCiegoTitulo', {defaultValue: '1. El servidor es ciego'})}</h3>
+                      <p className="text-muted leading-relaxed text-body">{t('campos.archivos.servidorCiegoDesc', {defaultValue: 'Nuestra base de datos en la nube jamás almacena datos de tus alumnos, tus programaciones, ni nada que crees. El servidor web solo existe para enviarte los Catálogos Oficiales (BOE/BOCAA). Eres invisible para nuestro backend.'})}</p>
+                    </div>
+
+                    <div className="p-5 bg-background rounded-xl border border-[var(--glass-border)]">
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Lock className="w-5 h-5 text-accent"/> {t('campos.archivos.cifradoLocalTitulo', {defaultValue: '2. Cifrado local avanzado AES-256'})}</h3>
+                      <p className="text-muted leading-relaxed mb-4 text-body">{t('campos.archivos.cifradoLocalDesc', {defaultValue: 'Puedes activar la encriptación local. Antes de que cualquier archivo se guarde en tu disco duro o nube, se cifra usando tu clave maestra dentro de tu navegador.'})}</p>
+
+                      <div className="bg-[var(--glass-bg)] border border-[var(--glass-border)] p-4 rounded-lg">
+                        <label className="block text-body font-medium text-foreground mb-2">{t('campos.archivos.establecerClaveLabel', {defaultValue: 'Establecer clave de seguridad (no se guarda en ningún sitio)'})}</label>
+                        <div className="flex gap-2">
+                          <input
+                            type="password"
+                            className="flex-1 bg-background border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent text-body"
+                            placeholder={t('placeholders.archivos.claveMaestra', {defaultValue: 'Introduce tu clave maestra...'})}
+                            value={useAppStore.getState().encryptionKey || ""}
+                            onChange={(e) => useAppStore.getState().setEncryptionKey(e.target.value || null)}
+                          />
+                        </div>
+                        <p className="text-caption text-muted mt-2"><AlertTriangle className="w-3 h-3 inline mr-1 text-warning"/> {t('campos.archivos.avisoOlvidoClave', {defaultValue: 'Si olvidas esta clave y guardas un archivo, no podremos ayudarte a recuperarlo.'})}</p>
+                      </div>
+                    </div>
+
+                    <div className="p-5 bg-background rounded-xl border border-[var(--glass-border)]">
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><CheckCircle className="w-5 h-5 text-accent"/> {t('campos.archivos.defensaAtaquesTitulo', {defaultValue: '3. Defensa contra ataques en el navegador'})}</h3>
+                      <p className="text-muted leading-relaxed text-body">{t('campos.archivos.defensaAtaquesDesc', {defaultValue: 'Hemos implementado una política estricta de seguridad de contenido (CSP) para bloquear scripts maliciosos de terceros.'})}</p>
+                    </div>
+
+                    <div className="p-5 bg-background rounded-xl border border-[var(--glass-border)]">
+                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Activity className="w-5 h-5 text-accent"/> {t('campos.archivos.servidorBlindadoTitulo', {defaultValue: '4. Servidor blindado y siempre disponible'})}</h3>
+                      <p className="text-muted leading-relaxed text-body">{t('campos.archivos.servidorBlindadoDesc', {defaultValue: 'Nuestro servidor backend incorpora Rate Limiting, garantizando que siempre tendrás acceso al catálogo oficial de módulos.'})}</p>
+                    </div>
+                  </div>
+                </section>
+
               </div>
             )}
 
-            {/* ── CONTENIDO: ACRONIMOS ──────────────────────────────────────── */}
-            {activeTab === "acronimos" && (
-              <div className="animate-in fade-in duration-500 w-full">
-                <TabAcronimos />
+            {/* ── CONTENIDO: ASISTENTE IA ────────────────────────────── */}
+            {activeTab === "asistente-ia" && (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                <AISettingsPanel />
               </div>
             )}
+
+            {/* ── CONTENIDO: VERIFICACIÓN ────────────────────────────── */}
+            {activeTab === "verificacion" && <VerificacionTab />}
 
             </MotionWrapper>
         </div>
       </div>
+
+      {/* New File Wizard */}
+      <NewFileWizard
+        isOpen={newFileWizardOpen}
+        onClose={() => setNewFileWizardOpen(false)}
+        fileType={wizardType}
+      />
+
+      {/* VALIDATION MODAL */}
+      {validationModalOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="validation-modal-title"
+        >
+          <Card className="w-full max-w-xl p-6 shadow-2xl border-[var(--glass-border)]">
+            <h2 id="validation-modal-title" className="text-subheading font-bold mb-4 flex items-center gap-2">
+              <ShieldAlert className="w-5 h-5 text-warning" />
+              {t('campos.archivos.validacionEnlacesTitulo', {defaultValue: 'Validación de Enlaces del Workspace'})}
+            </h2>
+
+            {brokenLinks.length === 0 ? (
+              <div className="text-center py-8">
+                <CheckCircle className="w-12 h-12 text-success mx-auto mb-4" />
+                <p className="text-foreground font-medium">{t('campos.archivos.todoCorrecto', {defaultValue: '¡Todo correcto!'})}</p>
+                <p className="text-muted text-body mt-2">{t('campos.archivos.sinEnlacesRotos', {defaultValue: 'No se han detectado enlaces rotos en los grupos de tu carpeta local.'})}</p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <p className="text-muted text-body">{t('campos.archivos.enlacesRotosDetectados', {defaultValue: 'Se han detectado los siguientes enlaces rotos en los archivos Grupo. Esto sucede cuando renombras o eliminas una Programación o un Curso en Windows directamente.'})}</p>
+                <ul className="space-y-3 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
+                  {brokenLinks.map((link, idx) => (
+                    <li key={link.groupName || idx} className="bg-foreground/5 p-3 rounded-lg border border-[var(--glass-border)] text-body">
+                      <p className="font-semibold">{link.groupName}</p>
+                      <p className="text-danger flex items-center gap-2 mt-1">
+                        <AlertTriangle className="w-4 h-4" /> {link.type === 'programacion' ? t('campos.archivos.programacionNoEncontrada', {defaultValue: 'Programación no encontrada:'}) : t('campos.archivos.cursoNoEncontrado', {defaultValue: 'Curso no encontrado:'})} <span className="font-mono">{link.missingFile}</span>
+                      </p>
+                      {fixingLink === link ? (
+                        <div className="mt-3 flex gap-2">
+                          <select
+                            className="flex-1 bg-background border border-[var(--glass-border)] rounded px-2 py-1"
+                            onChange={async (e) => {
+                              const newVal = e.target.value;
+                              if (newVal && workspaceHandle) {
+                                const ok = await fileManager.fixWorkspaceLink(workspaceHandle, link.groupName, link.type, newVal);
+                                if (ok) {
+                                  toast.success(t('toasts.archivos.enlaceReparado', {defaultValue: "Enlace reparado correctamente."}));
+                                  setBrokenLinks(prev => prev.filter(l => l !== link));
+                                  setFixingLink(null);
+                                  fileManager.scanWorkspaceFiles(workspaceHandle).then(setWorkspaceFiles);
+                                } else {
+                                  toast.error(t('toasts.archivos.errorReparEnlace', {defaultValue: "Error al reparar el enlace."}));
+                                }
+                              }
+                            }}
+                          >
+                            <option value="">{t('checks.archivos.seleccionarArchivoCorrecto', {defaultValue: 'Seleccionar archivo correcto...'})}</option>
+                            {(link.type === 'programacion' ? workspaceFiles.programaciones : workspaceFiles.cursos).map(f => (
+                              <option key={f} value={f}>{f}</option>
+                            ))}
+                          </select>
+                          <Button size="sm" variant="ghost" onClick={() => setFixingLink(null)}>{t('common.cancelar', {defaultValue: 'Cancelar'})}</Button>
+                        </div>
+                      ) : (
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          className="mt-2 border border-foreground/20"
+                          onClick={() => setFixingLink(link)}
+                        >
+                          {t('botones.archivos.repararEnlace', {defaultValue: 'Reparar enlace'})}
+                        </Button>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div className="mt-6 flex justify-end">
+              <Button onClick={() => setValidationModalOpen(false)}>{t('common.cerrar', {defaultValue: 'Cerrar'})}</Button>
+            </div>
+          </Card>
+        </div>
+      )}
     </div>
-      );
+  );
+}
+
+function handleLoadDemo() {
+  fileManager.loadDemoData();
+  toast.success(i18next.t('toasts.archivos.demoCargada', {defaultValue: "Datos de demostración cargados correctamente."}));
 }
