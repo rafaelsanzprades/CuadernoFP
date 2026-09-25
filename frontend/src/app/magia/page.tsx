@@ -314,12 +314,14 @@ export default function MagiaPage() {
   const TABS = [
     { id: "analisis-pdx", label: <span className="flex items-center gap-2"><FileStack className="w-4 h-4 shrink-0" /> {t('tabs.magia.analisisPdx.label', {defaultValue: 'Análisis APP->PDx'})}</span>, cleanLabel: t('tabs.magia.analisisPdx.label', {defaultValue: 'Análisis APP->PDx'}) },
     { id: "programacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.magia.programacion.label', {defaultValue: 'Programación'})}</span>, cleanLabel: t('tabs.magia.programacion.label', {defaultValue: 'Programación'}) },
+    { id: "comparativa-pdx", label: <span className="flex items-center gap-2"><GitCompare className="w-4 h-4 shrink-0" /> {t('tabs.magia.comparativaPdx.label', {defaultValue: 'Comparativa PDx'})}</span>, cleanLabel: t('tabs.magia.comparativaPdx.label', {defaultValue: 'Comparativa PDx'}) },
     { id: "curso", label: <span className="flex items-center gap-2"><Calendar className="w-4 h-4 shrink-0" /> {t('tabs.magia.curso.label', {defaultValue: 'Curso'})}</span>, cleanLabel: t('tabs.magia.curso.label', {defaultValue: 'Curso'}) },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     'analisis-pdx': t('tabs.magia.analisisPdx.desc', {defaultValue: 'De la app a dónde aparece cada campo en cada modelo de Programación Didáctica (PD-, PD=, PD+).'}),
     programacion: t('tabs.magia.programacion.desc', {defaultValue: 'Documentos de apoyo: matriz de currículo y documentos individuales de UD y Tareas.'}),
+    'comparativa-pdx': t('tabs.magia.comparativaPdx.desc', {defaultValue: 'Comparativa de los distintos niveles de programación y dónde se rellena cada apartado.'}),
     curso: t('tabs.magia.curso.desc', {defaultValue: 'Calendario, seguimiento, plano de aula, boletines y actas de evaluación del curso.'}),
   };
 
@@ -587,18 +589,13 @@ export default function MagiaPage() {
                             })}
                           </div>
                         </Card>
-
-                        {/* ── Comparativa PDx (antes pestaña propia "Comparativa" en
-                            Archivo -- traída aquí, 2026-09-25, petición de Rafael) ── */}
-                        <div>
-                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><GitCompare className="w-4 h-4" /></span> {t('campos.magia.comparativaPdxTitulo', {defaultValue: 'Comparativa PDx'})}</h2>
-                          <p className="text-body text-muted mb-4">{t('tabs.equivalencias.comparativa.desc', {defaultValue: 'Comparativa de los distintos niveles de programación y dónde se rellena cada apartado.'})}</p>
-                        </div>
-                        <ComparativaPdTab />
                       </div>
                     )}
                   </div>
                 )}
+
+                {/* ══════════════════════════ COMPARATIVA PDx ══════════════════════════ */}
+                {activeTab === "comparativa-pdx" && <ComparativaPdTab />}
 
                 {/* ══════════════════════════ CURSO ══════════════════════════ */}
                 {/* 4 bloques, mismo orden y nombres que el grupo "Curso" del sidebar:
