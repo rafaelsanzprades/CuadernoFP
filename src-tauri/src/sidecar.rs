@@ -16,22 +16,32 @@ pub fn get_backend_port(state: State<BackendPort>) -> Option<u16> {
     *state.0.lock().unwrap()
 }
 
+/// Puerto del backend de desarrollo gestionado por PM2/iniciar.bat
+/// (ecosystem.config.js: `uvicorn main:app --reload --port 8000`). El
+/// frontend en dev ya sabe hablar con él solo -- `NEXT_PUBLIC_API_URL` en
+/// frontend/.env.development apunta aquí -- así que en `tauri dev` no
+/// arrancamos el sidecar empaquetado en absoluto: la ventana carga la misma
+/// página de :3000 que ya usas en el navegador, con el mismo backend detrás.
+const DEV_BACKEND_PORT: u16 = 8000;
+
 pub fn spawn_backend(app: &AppHandle) -> Result<(), Box<dyn std::error::Error>> {
-    // En `tauri dev` los `resources` de tauri.conf.json no se copian a
-    // ningún lado (eso solo pasa al empaquetar) -- BaseDirectory::Resource
-    // no resuelve a un fichero real todavía. En dev apuntamos directamente
-    // al cdd_pro.db real del repo (src-tauri/../backend/cdd_pro.db); en
-    // release sí usamos el recurso empaquetado.
-    let db_path = if cfg!(debug_assertions) {
-        // CARGO_MANIFEST_DIR es una constante fijada en tiempo de
-        // compilación (siempre src-tauri/), no depende del cwd real con el
-        // que se lance el binario -- más fiable que BaseDirectory::Resource
-        // en dev, que en `tauri dev` todavía no tiene nada copiado.
-        std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../backend/cdd_pro.db")
-    } else {
-        app.path()
-            .resolve("cdd_pro.db", tauri::path::BaseDirectory::Resource)?
-    };
+    if cfg!(debug_assertions) {
+        log::info!(
+            "[backend] modo dev: usando el backend de PM2 en 127.0.0.1:{DEV_BACKEND_PORT} \
+             (con --reload) en vez de arrancar el .exe empaquetado. Asegúrate de tener \
+             iniciar.bat / PM2 corriendo."
+        );
+        if let Some(state) = app.try_state::<BackendPort>() {
+            *state.0.lock().unwrap() = Some(DEV_BACKEND_PORT);
+        }
+        return Ok(());
+    }
+
+    // A partir de aquí solo se ejecuta en release (arriba se vuelve en dev
+    // con un `return` anticipado) -- recurso empaquetado de verdad.
+    let db_path = app
+        .path()
+        .resolve("cdd_pro.db", tauri::path::BaseDirectory::Resource)?;
     // OJO: nada de std::fs::canonicalize aquí -- en Windows antepone el
     // prefijo de ruta verbatim `\\?\`, que tras el reemplazo de '\' por '/'
     // de abajo deja la URL de sqlite con cuatro barras iniciales y rota
