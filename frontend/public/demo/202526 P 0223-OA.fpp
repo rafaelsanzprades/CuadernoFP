@@ -129,72 +129,63 @@
       "peso_ra": 10,
       "is_dual": false,
       "comp_clave": "",
-      "cpe": "",
-      "desc_ra": "Instala y actualiza aplicaciones ofimáticas, interpretando especificaciones y describiendo los pasos a seguir en el proceso."
+      "cpe": ""
     },
     {
       "id_ra": "RA2",
       "peso_ra": 20,
       "is_dual": false,
       "comp_clave": "",
-      "cpe": "",
-      "desc_ra": "Elabora documentos y plantillas, describiendo y aplicando las opciones avanzadas de procesadores de textos."
+      "cpe": ""
     },
     {
       "id_ra": "RA3",
       "peso_ra": 15,
       "is_dual": false,
       "comp_clave": "",
-      "cpe": "",
-      "desc_ra": "Elabora documentos y plantillas de cálculo, describiendo y aplicando opciones avanzadas de hojas de cálculo."
+      "cpe": ""
     },
     {
       "id_ra": "RA4",
       "peso_ra": 10,
       "is_dual": false,
       "comp_clave": "",
-      "cpe": "",
-      "desc_ra": "Elabora documentos con bases de datos ofimáticas describiendo y aplicando operaciones de manipulación de datos."
+      "cpe": ""
     },
     {
       "id_ra": "RA5",
       "peso_ra": 15,
       "is_dual": false,
       "comp_clave": "",
-      "cpe": "",
-      "desc_ra": "Manipula imágenes digitales analizando las posibilidades de distintos programas y aplicando técnicas de captura y edición básicas."
+      "cpe": ""
     },
     {
       "id_ra": "RA6",
       "peso_ra": 10,
       "is_dual": false,
       "comp_clave": "",
-      "cpe": "",
-      "desc_ra": "Manipula secuencias de vídeo analizando las posibilidades de distintos programas y aplicando técnicas de captura y edición básicas."
+      "cpe": ""
     },
     {
       "id_ra": "RA7",
       "peso_ra": 10,
       "is_dual": false,
       "comp_clave": "",
-      "cpe": "",
-      "desc_ra": "Elabora presentaciones multimedia describiendo y aplicando normas básicas de composición y diseño."
+      "cpe": ""
     },
     {
       "id_ra": "RA8",
       "peso_ra": 5,
       "is_dual": false,
       "comp_clave": "",
-      "cpe": "",
-      "desc_ra": "Realiza operaciones de gestión del correo y la agenda electrónica, relacionando necesidades de uso con su configuración."
+      "cpe": ""
     },
     {
       "id_ra": "RA9",
       "peso_ra": 5,
       "is_dual": false,
       "comp_clave": "",
-      "cpe": "",
-      "desc_ra": "Aplica técnicas de soporte en el uso de aplicaciones, identificando y resolviendo incidencias."
+      "cpe": ""
     }
   ],
   "df_ce": [
@@ -668,8 +659,7 @@
       "peso_ce": 0,
       "FEOE": false,
       "UD": "",
-      "id_ud": "UD5",
-      "desc_ce": "Se han realizado informes de incidencias."
+      "id_ud": "UD5"
     },
     {
       "id_ce": "CE9.f",
@@ -677,8 +667,7 @@
       "peso_ce": 0,
       "FEOE": false,
       "UD": "",
-      "id_ud": "UD5",
-      "desc_ce": "Se han aplicado los procedimientos necesarios para salvaguardar la información y su recuperación."
+      "id_ud": "UD5"
     },
     {
       "id_ce": "CE9.g",
@@ -686,8 +675,7 @@
       "peso_ce": 0,
       "FEOE": false,
       "UD": "",
-      "id_ud": "UD5",
-      "desc_ce": "Se han utilizado los recursos disponibles (documentación técnica, ayudas en línea, soporte técnico, entre otros) para solventar incidencias."
+      "id_ud": "UD5"
     },
     {
       "id_ce": "CE9.h",
@@ -695,8 +683,7 @@
       "peso_ce": 0,
       "FEOE": false,
       "UD": "",
-      "id_ud": "UD5",
-      "desc_ce": "Se han solventando las incidencias en el tiempo adecuado y con el nivel de calidad esperado."
+      "id_ud": "UD5"
     }
   ],
   "info_modulo": {
