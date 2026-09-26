@@ -15,7 +15,7 @@ export const BoletinesTab = () => {
   const { cursoData, moduleData, activeCursoId, activeModuleId } = useAppStore();
 
   const [, setCatalogLoaded] = useState(0);
-  useEffect(() => { if (activeModuleId) loadCatalogForModule(activeModuleId).then(() => setCatalogLoaded(Date.now())); }, [activeModuleId]);
+  useEffect(() => { if (activeModuleId) loadCatalogForModule(activeModuleId, moduleData?.info_modulo?.titulo_codigo).then(() => setCatalogLoaded(Date.now())); }, [activeModuleId]);
 
   const df_al = cursoData?.df_al || [];
   const activeStudents = df_al.filter(isAlumnoActivo).sort((a, b) => (a.Apellidos || '').localeCompare(b.Apellidos || ''));

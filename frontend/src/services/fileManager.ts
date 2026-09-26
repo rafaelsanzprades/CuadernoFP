@@ -282,7 +282,11 @@ export const fileManager = {
       let df_ra: any[] = [];
       let df_ce: any[] = [];
       try {
-        const res = await fetch(`/api/catalog/module/${moduleCode}`);
+        const degreeCode = extras?.titulo_codigo;
+        const url = degreeCode
+          ? `/api/catalog/module/${moduleCode}?degree_code=${encodeURIComponent(degreeCode)}`
+          : `/api/catalog/module/${moduleCode}`;
+        const res = await fetch(url);
         if (res.ok) {
           const json = await res.json();
           if (json.status === 'success' && json.data?.ra) {
@@ -861,7 +865,11 @@ export const fileManager = {
       // Fetch curriculum to reconstruct descriptions
       const moduleCode = parsed.info_modulo?.codigo || id.split('-')[0];
       try {
-        const res = await fetch(`/api/catalog/module/${moduleCode}`);
+        const degreeCode = parsed.info_modulo?.titulo_codigo;
+        const url = degreeCode
+          ? `/api/catalog/module/${moduleCode}?degree_code=${encodeURIComponent(degreeCode)}`
+          : `/api/catalog/module/${moduleCode}`;
+        const res = await fetch(url);
         if (res.ok) {
           const catalogData = await res.json();
           if (catalogData.status === 'success' && catalogData.data) {

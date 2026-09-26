@@ -238,7 +238,7 @@ export function ContextoTab() {
   const [generandoIA, setGenerandoIA] = useState<Record<string, boolean>>({});
   const [, setCatalogLoaded] = useState(0);
   useEffect(() => {
-    if (activeModuleId) loadCatalogForModule(activeModuleId).then(() => setCatalogLoaded(Date.now()));
+    if (activeModuleId) loadCatalogForModule(activeModuleId, moduleData?.info_modulo?.titulo_codigo).then(() => setCatalogLoaded(Date.now()));
   }, [activeModuleId]);
 
   const config_contexto = moduleData?.config_contexto || {};

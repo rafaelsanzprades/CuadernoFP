@@ -49,8 +49,18 @@ const inFlight = new Map<string, Promise<void>>();
  * Returns RA descriptions as a Map keyed by "RA1", "RA2", etc.
  * Returns CE descriptions as a Map keyed by "CE1.a", "CE1.b", etc.
  * Also loads OG and CPPS from the curriculum endpoint (boa_articles).
+ *
+ * `degreeCodeHint`: código del título (p.ej. "ELE203"), si se conoce --
+ * un mismo código de módulo puede existir en varios títulos con contenido
+ * distinto (p.ej. '0237' es a la vez un módulo de ELE203 y de ELE202), así
+ * que sin esta pista el backend puede devolver el módulo equivocado. Viene
+ * normalmente de `moduleData.info_modulo.titulo_codigo`, guardado al crear
+ * la programación desde el catálogo (`catalogo/page.tsx`) -- los ficheros
+ * DEMO y los importados de antes de que existiera ese campo no lo tienen,
+ * y el backend cae a su comportamiento anterior (el primer módulo que
+ * encuentre con ese código) si no se pasa o no encaja.
  */
-export async function loadCatalogForModule(moduleId: string): Promise<void> {
+export async function loadCatalogForModule(moduleId: string, degreeCodeHint?: string | null): Promise<void> {
   const moduleCode = moduleId.split('-')[0];
   const existing = cache.get(moduleCode);
   if (existing && (Date.now() - existing.loaded) < CACHE_TTL_MS) return;
@@ -58,16 +68,19 @@ export async function loadCatalogForModule(moduleId: string): Promise<void> {
   const pending = inFlight.get(moduleCode);
   if (pending) return pending;
 
-  const promise = fetchCatalogForModule(moduleCode).finally(() => {
+  const promise = fetchCatalogForModule(moduleCode, degreeCodeHint).finally(() => {
     inFlight.delete(moduleCode);
   });
   inFlight.set(moduleCode, promise);
   return promise;
 }
 
-async function fetchCatalogForModule(moduleCode: string): Promise<void> {
+async function fetchCatalogForModule(moduleCode: string, degreeCodeHint?: string | null): Promise<void> {
   try {
-    const res = await fetch(`/api/catalog/module/${moduleCode}`);
+    const url = degreeCodeHint
+      ? `/api/catalog/module/${moduleCode}?degree_code=${encodeURIComponent(degreeCodeHint)}`
+      : `/api/catalog/module/${moduleCode}`;
+    const res = await fetch(url);
     if (!res.ok) return;
     const json = await res.json();
     if (json.status !== 'success' || !json.data) return;

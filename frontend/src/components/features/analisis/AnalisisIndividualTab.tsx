@@ -12,7 +12,7 @@ export const AnalisisIndividualTab = () => {
   const { t } = useTranslation();
   const { moduleData, cursoData, activeModuleId } = useAppStore();
 
-  useEffect(() => { if (activeModuleId) loadCatalogForModule(activeModuleId); }, [activeModuleId]);
+  useEffect(() => { if (activeModuleId) loadCatalogForModule(activeModuleId, moduleData?.info_modulo?.titulo_codigo); }, [activeModuleId]);
   const [selectedAlId, setSelectedAlId] = useState<string>("");
   const [simVals, setSimVals] = useState<Record<string, number>>({});
 

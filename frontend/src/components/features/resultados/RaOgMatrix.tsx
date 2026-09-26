@@ -22,7 +22,7 @@ export function RaOgMatrix() {
     setCatalogReady(false);
     if (!activeModuleId) return;
     let cancelled = false;
-    loadCatalogForModule(activeModuleId).finally(() => {
+    loadCatalogForModule(activeModuleId, moduleData?.info_modulo?.titulo_codigo).finally(() => {
       if (!cancelled) setCatalogReady(true);
     });
     return () => { cancelled = true; };
