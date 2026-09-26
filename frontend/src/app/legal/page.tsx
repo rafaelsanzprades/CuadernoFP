@@ -16,7 +16,6 @@ import Header from "@/components/layout/Header";
 import { TabSync } from "@/components/ui/TabSync";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
-import { TabInfoBox } from "@/components/ui/TabInfoBox";
 
 /* ──────────────────────────────────────────────────────────────
    Mini-índice con anclas internas -- vive dentro de StickyPageHeader
@@ -59,12 +58,12 @@ function SectionHeading({
     <h2
       id={id}
       // scroll-mt cubre TODO lo que queda fijo encima al saltar por ancla:
-      // el banner "En obras" (~66px, sticky top-0 de toda la app) + el
-      // StickyPageHeader de esta página (~303px, con las pestañas, el
-      // índice de secciones y ahora también el TabInfoBox dentro). Medido
-      // en vivo con getBoundingClientRect() tras cada cambio -- si crece
-      // más contenido fijo, este valor puede quedarse corto otra vez.
-      className="text-subheading font-bold text-foreground border-b border-[var(--glass-border)] pb-2 scroll-mt-[380px]"
+      // el banner "En obras" (~65px, sticky top-0 de toda la app) + el
+      // StickyPageHeader de esta página (~241px, con las pestañas, la
+      // descripción en texto plano y el índice de secciones). Medido en
+      // vivo con getBoundingClientRect() tras cada cambio -- si crece más
+      // contenido fijo, este valor puede quedarse corto otra vez.
+      className="text-subheading font-bold text-foreground border-b border-[var(--glass-border)] pb-2 scroll-mt-[320px]"
     >
       {number}. {children}
     </h2>
@@ -155,15 +154,17 @@ export default function LegalPage() {
               </Tabs>
             </div>
 
+            {/* Descripción de la pestaña activa -- texto plano, sin el marco
+                de TabInfoBox (componente compartido con otras páginas, no
+                se toca su estilo global) -- entre las pestañas y el índice,
+                pedido explícito de Rafael. */}
+            <p className="text-body text-muted mt-3">
+              {TAB_DESCRIPTIONS[activeTab] || 'Información legal.'}
+            </p>
+
             {/* Índice de secciones de la pestaña activa -- dentro del header
                 fijo (sticky top-0), así que no se pierde al hacer scroll. */}
             <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} />
-
-            {/* Descripción de la pestaña activa -- movida aquí (prueba de
-                Rafael) para que quede fija junto al resto del header. */}
-            <div className="mt-3">
-              <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Información legal.'} />
-            </div>
           </StickyPageHeader>
 
           <div className="w-full space-y-4 px-8 pt-4 pb-12">
