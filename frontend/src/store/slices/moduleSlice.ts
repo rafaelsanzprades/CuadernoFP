@@ -1,5 +1,6 @@
 import { StateCreator } from 'zustand';
 import { AppState, ModuleData, CursoData } from '@/types';
+import { writeFile } from '@/services/fileBackend';
 
 type ModuleSlice = Pick<AppState,
   | 'activeModuleId' | 'setActiveModuleId'
@@ -83,11 +84,9 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
     let localSaved = false;
 
     // Save to Local File System if connected
-    if (pdFileSource.type === 'local' && pdFileSource.fileHandle) {
+    if (pdFileSource.type === 'local' && pdFileSource.fileRef) {
       try {
-        const writable = await pdFileSource.fileHandle.createWritable();
-        await writable.write(JSON.stringify(moduleData, null, 2));
-        await writable.close();
+        await writeFile(pdFileSource.fileRef, JSON.stringify(moduleData, null, 2));
         localSaved = true;
       } catch (e) {
         console.error("Failed to write PD to local file system:", e);
@@ -120,11 +119,9 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
     let localSaved = false;
 
     // Save to Local File System if connected
-    if (cursoFileSource.type === 'local' && cursoFileSource.fileHandle) {
+    if (cursoFileSource.type === 'local' && cursoFileSource.fileRef) {
       try {
-        const writable = await cursoFileSource.fileHandle.createWritable();
-        await writable.write(JSON.stringify(cursoData, null, 2));
-        await writable.close();
+        await writeFile(cursoFileSource.fileRef, JSON.stringify(cursoData, null, 2));
         localSaved = true;
       } catch (e) {
         console.error("Failed to write Curso to local file system:", e);

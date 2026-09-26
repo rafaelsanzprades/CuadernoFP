@@ -9,6 +9,7 @@ import {
   getRecentModules, removeRecentModule, supportsFileSystemAccess,
   RecentModuleEntry,
 } from "@/services/recentModules";
+import { ensureReadWritePermission, getFileRefInDir } from "@/services/fileBackend";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
@@ -24,12 +25,6 @@ function tiempoRelativo(iso: string): string {
   if (h < 24) return `hace ${h} h`;
   const d = Math.round(h / 24);
   return `hace ${d} d`;
-}
-
-async function ensurePermission(handle: FileSystemFileHandle | FileSystemDirectoryHandle): Promise<boolean> {
-  const opts: FileSystemHandlePermissionDescriptor = { mode: "readwrite" };
-  if ((await handle.queryPermission(opts)) === "granted") return true;
-  return (await handle.requestPermission(opts)) === "granted";
 }
 
 export function RecentModulesPanel() {
@@ -52,12 +47,12 @@ export function RecentModulesPanel() {
 
   const handleReabrir = async (entry: RecentModuleEntry) => {
     setReopening(entry.id);
-    // Sin handle guardado (Firefox/Safari, o entrada solo-metadato): cae al
+    // Sin ref guardada (Firefox/Safari, o entrada solo-metadato): cae al
     // selector de fichero normal. openProgramacionWithHandle/openCursoWithHandle
     // ya devuelven false sin más en caso de AbortError (usuario cancela el
     // selector) -- eso NO es un fallo real, así que aquí nunca se quita la
     // entrada ni se muestra un error alarmante por ese caso.
-    if (!entry.dirHandle && !entry.fileHandle) {
+    if (!entry.dirRef && !entry.fileRef) {
       if (entry.tipo === "grupo") {
         toast(t('toasts.recientes.irAAbrirGrupo', {fileName: entry.fileName, defaultValue: 'Ve a Archivo → Abrir grupo y selecciona la carpeta que contiene "{{fileName}}".'}));
         setReopening(null);
@@ -77,8 +72,8 @@ export function RecentModulesPanel() {
     }
 
     try {
-      const handle = (entry.tipo === "grupo" ? entry.dirHandle : entry.fileHandle)!;
-      if (!(await ensurePermission(handle))) {
+      const ref = (entry.tipo === "grupo" ? entry.dirRef : entry.fileRef)!;
+      if (!(await ensureReadWritePermission(ref))) {
         // Permiso denegado esta vez -- el fichero sigue existiendo, no se
         // quita la entrada, el profesor puede volver a intentarlo.
         toast.error(t('toasts.recientes.permisoDenegado', {defaultValue: "Permiso denegado para acceder al archivo o carpeta."}));
@@ -86,20 +81,20 @@ export function RecentModulesPanel() {
       }
 
       let ok = false;
-      if (entry.tipo === "grupo" && entry.dirHandle) {
+      if (entry.tipo === "grupo" && entry.dirRef) {
         // loadGroupFromWorkspace se traga sus propios errores internamente
         // (se comparte con el flujo normal de abrir grupo, que no distingue
         // "no encontrado" de otros fallos) -- comprobación previa aparte para
         // poder detectar aquí un NotFoundError real y limpiar la entrada.
-        await entry.dirHandle.getFileHandle(entry.fileName);
-        useAppStore.getState().setWorkspaceHandle(entry.dirHandle);
-        ok = await fileManager.loadGroupFromWorkspace(entry.dirHandle, entry.fileName);
-      } else if (entry.tipo === "programacion" && entry.fileHandle) {
+        await getFileRefInDir(entry.dirRef, entry.fileName);
+        useAppStore.getState().setWorkspaceHandle(entry.dirRef);
+        ok = await fileManager.loadGroupFromWorkspace(entry.dirRef, entry.fileName);
+      } else if (entry.tipo === "programacion" && entry.fileRef) {
         useAppStore.getState().setDataSource("local");
-        ok = await fileManager.openProgramacionFromHandle(entry.fileHandle);
-      } else if (entry.tipo === "curso" && entry.fileHandle) {
+        ok = await fileManager.openProgramacionFromHandle(entry.fileRef);
+      } else if (entry.tipo === "curso" && entry.fileRef) {
         useAppStore.getState().setDataSource("local");
-        ok = await fileManager.openCursoFromHandle(entry.fileHandle);
+        ok = await fileManager.openCursoFromHandle(entry.fileRef);
       }
 
       if (ok) {
