@@ -1,3 +1,4 @@
+mod credentials;
 mod sidecar;
 
 use std::sync::Mutex;
@@ -10,9 +11,16 @@ pub fn run() {
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_store::Builder::new().build())
+        .plugin(tauri_plugin_oauth::init())
+        .plugin(tauri_plugin_http::init())
         .manage(sidecar::BackendPort(Mutex::new(None)))
         .manage(sidecar::BackendProcess(Mutex::new(None)))
-        .invoke_handler(tauri::generate_handler![sidecar::get_backend_port])
+        .invoke_handler(tauri::generate_handler![
+            sidecar::get_backend_port,
+            credentials::store_credential,
+            credentials::get_credential,
+            credentials::delete_credential,
+        ])
         .setup(|app| {
             if cfg!(debug_assertions) {
                 app.handle().plugin(

@@ -3,9 +3,11 @@
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { CheckCircle2, Cloud, CloudOff, RefreshCw, Key } from "lucide-react";
+import { CheckCircle2, Cloud, CloudOff, RefreshCw, Key, Info } from "lucide-react";
 import toast from "react-hot-toast";
 import { signInOneDrive, signOutOneDrive } from "@/services/onedriveService";
+import { connectOneDrive, disconnectOneDrive } from "@/services/nativeOAuth";
+import { isTauri } from "@tauri-apps/api/core";
 import { useState } from "react";
 import { Input } from "@/components/ui/Input";
 import { useTranslation } from "react-i18next";
@@ -31,13 +33,26 @@ export function OneDriveSyncPanel() {
       return;
     }
 
-    // Inyectar client ID en Archivos por si se necesita (aunque Msal usa process.env.NEXT_PUBLIC...
-    // idealmente se debería inicializar con la var provista aquí si queremos dinamicidad).
-    // Para simplificar, asumiremos que si llegan aquí lo tienen configurado en su .env o modificaremos
-    // msalConfig dinámicamente si es necesario.
-
     setIsLoading(true);
     toast.loading(t('toasts.oneDrive.conectando', {defaultValue: "Conectando con OneDrive..."}), { id: "onedrive-connect" });
+
+    // Bajo Tauri, el popup de MSAL (signInOneDrive) no puede funcionar --
+    // depende de un origen http(s) real ya registrado en Azure, y el origen
+    // del webview de Tauri no lo es. Login nativo por navegador del sistema
+    // + loopback en su lugar (Fase 7 del plan Tauri).
+    if (isTauri()) {
+      try {
+        const result = await connectOneDrive(oneDriveClientId);
+        setOneDriveUserEmail(result.email || t('campos.cloud.usuarioMicrosoft', {defaultValue: 'Usuario de Microsoft'}));
+        setOneDriveConnected(true);
+        toast.success(t('toasts.oneDrive.conectado', {defaultValue: "OneDrive conectado correctamente."}), { id: "onedrive-connect" });
+      } catch (e) {
+        console.error("Error conectando OneDrive (nativo)", e);
+        toast.error(t('toasts.oneDrive.errorConectar', {defaultValue: "Fallo al conectar con OneDrive."}), { id: "onedrive-connect" });
+      }
+      setIsLoading(false);
+      return;
+    }
 
     const token = await signInOneDrive();
 
@@ -52,7 +67,11 @@ export function OneDriveSyncPanel() {
   };
 
   const handleDisconnect = async () => {
-    await signOutOneDrive();
+    if (isTauri()) {
+      await disconnectOneDrive().catch(() => {});
+    } else {
+      await signOutOneDrive();
+    }
     setOneDriveConnected(false);
     setOneDriveUserEmail(null);
     toast(t('toasts.oneDrive.desconectado', {defaultValue: "Desconectado de OneDrive"}), { icon: "👋" });
@@ -116,6 +135,12 @@ export function OneDriveSyncPanel() {
               <p className="text-body text-muted">
                 {t('campos.cloud.azureClientIdDesc', {defaultValue: 'Client ID de tu App registrada en Entra ID (Azure).'})}
               </p>
+              {isTauri() && (
+                <p className="text-caption text-muted flex items-start gap-2 bg-background/50 rounded-lg p-3 border border-[var(--glass-border)]">
+                  <Info className="w-4 h-4 shrink-0 mt-0.5" />
+                  {t('campos.cloud.azureClientIdTauriHint', {defaultValue: 'En la app de escritorio (Tauri) necesitas un Client ID registrado como "Mobile and desktop applications" en Azure, distinto del que usas en el navegador.'})}
+                </p>
+              )}
               <Input
                 type="text"
                 placeholder={t('placeholders.cloud.ejemploClientId', {defaultValue: 'Ej: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'})}

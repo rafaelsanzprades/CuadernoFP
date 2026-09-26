@@ -2091,6 +2091,7 @@
       "introduceClientIdPre": "Enter the",
       "introduceClientIdPost": "of your Google Cloud project to authorize the application. This data is stored securely in your browser.",
       "clientIdPlaceholder": "E.g.: 123456789-abcde.apps.googleusercontent.com",
+      "clientIdTauriHint": "In the desktop app (Tauri) you need a \"Desktop app\" type Client ID, different from the one you use in the browser — you can register it in the same Google Cloud project.",
       "moduloDesconocido": "Unknown Module",
       "cursoDemoNombre": "DEMO Course",
       "usuarioMicrosoft": "Microsoft user",
@@ -2098,7 +2099,8 @@
       "sincronizandoCuentaMicrosoft": "Syncing with Microsoft account",
       "iniciaSesionMicrosoft": "Sign in with Microsoft",
       "azureClientIdTitulo": "Azure Client ID",
-      "azureClientIdDesc": "Client ID of your App registered in Entra ID (Azure)."
+      "azureClientIdDesc": "Client ID of your App registered in Entra ID (Azure).",
+      "azureClientIdTauriHint": "In the desktop app (Tauri) you need a Client ID registered as \"Mobile and desktop applications\" in Azure, different from the one you use in the browser."
     },
     "dashboard": {
       "altaBajaAlumnado": "Student enrollment and withdrawal",

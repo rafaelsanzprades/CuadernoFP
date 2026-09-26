@@ -15,6 +15,7 @@
   "dependencies": {
     "@azure/msal-browser": "^5.14.0",
     "@ducanh2912/next-pwa": "^10.2.9",
+    "@fabianlars/tauri-plugin-oauth": "^2.1.0",
     "@fortawesome/fontawesome-free": "^7.3.0",
     "@hello-pangea/dnd": "^18.0.1",
     "@microsoft/microsoft-graph-client": "^3.0.7",
@@ -22,6 +23,8 @@
     "@tauri-apps/api": "^2.11.1",
     "@tauri-apps/plugin-dialog": "^2.7.3",
     "@tauri-apps/plugin-fs": "^2.5.2",
+    "@tauri-apps/plugin-http": "^2.6.1",
+    "@tauri-apps/plugin-shell": "^2.3.6",
     "@tauri-apps/plugin-store": "^2.4.5",
     "@types/crypto-js": "^4.2.2",
     "@types/js-cookie": "^3.0.6",
