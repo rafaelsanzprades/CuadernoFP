@@ -91,6 +91,19 @@ function prepareProgramacionForExport(data: any): any {
       delete ce.Descripción;
     });
   }
+  if (exportData.info_modulo) {
+    // Solo lo que es texto/dato oficial puro, sin uso editable en ningún
+    // sitio (ver catalogCache.ts::resolveModulo*, que los resuelve en vivo
+    // al mostrarlos) -- NO se tocan h_boa/h_sem/p_ev/h_feoe/curso/
+    // carga_lectiva_anual: esos sí son editables por el profesor y se usan
+    // en cálculos reales (Calendario, Verificación, DatosTab, asistencia).
+    delete exportData.info_modulo.nombre;
+    delete exportData.info_modulo.horas;
+    delete exportData.info_modulo.horas_totales;
+    delete exportData.info_modulo.familia;
+    delete exportData.info_modulo.titulo_fp;
+    delete exportData.info_modulo.nivel;
+  }
   return exportData;
 }
 

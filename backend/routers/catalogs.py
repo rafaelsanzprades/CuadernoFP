@@ -218,6 +218,8 @@ def get_curriculum(degree_code: str, region_id: int = Query(1), db: Session = De
             "status": "success",
             "data": {
                 "familia": family.name if family else "",
+                "titulo_fp": degree.name,
+                "nivel": degree.level,
                 "modulos": modulos_data,
                 "boa_articles": degree.boa_articles
             }

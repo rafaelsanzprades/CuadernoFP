@@ -23,6 +23,7 @@ import { AnalisisPdxTab } from "@/components/features/magia/AnalisisPdxTab";
 import { ComparativaPdTab } from "@/components/features/magia/ComparativaPdTab";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
+import { loadCatalogForModule, enrichInfoModulo } from "@/services/catalogCache";
 
 type DownloadOpts = {
   al_id?: string;
@@ -91,6 +92,15 @@ export default function MagiaPage() {
   const [fechaFinal, setFechaFinal] = useState("");
 
   useEffect(() => {
+    if (activeModuleId) loadCatalogForModule(activeModuleId);
+  }, [activeModuleId]);
+
+  const buildEnrichedModuleData = () => {
+    if (!moduleData) return moduleData;
+    return { ...moduleData, info_modulo: enrichInfoModulo(activeModuleId, moduleData.info_modulo) };
+  };
+
+  useEffect(() => {
     const fetchData = async () => {
       setLoadingData(true);
       try {
@@ -140,7 +150,7 @@ export default function MagiaPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           curso_data: { ...(cursoData || {}), df_sgmt: liveDfSgmt, planning_ledger: livePlanningLedger, calendar_notes: liveCalendarNotes },
-          module_data: moduleData || {},
+          module_data: buildEnrichedModuleData() || {},
           fecha_corte: fechaCorte,
           extra: extra || null,
         })

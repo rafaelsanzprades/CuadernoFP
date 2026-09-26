@@ -5,13 +5,34 @@
  * Used as fallback when module data doesn't include descriptive text (e.g., .fpp files).
  */
 
+interface ModuloInfo {
+  nombre: string;
+  horas: number | null;
+  curso: string;
+  familia: string;
+  tituloFp: string;
+  nivel: string;
+}
+
 interface CachedCatalogData {
   ra: Map<string, string>;          // id_ra → desc_ra
   ce: Map<string, string>;          // id_ce → desc_ce
   ud: Map<string, string>;          // id_ud → desc_ud (from catalog if available)
   og: Array<{ id: string; desc: string }>;  // article_9_og
   cpps: Array<{ id: string; desc: string }>; // article_5_cpps
+  modulo: ModuloInfo | null;        // nombre/horas/familia/título/nivel oficiales
   loaded: number;                   // timestamp
+}
+
+// La BBDD guarda degrees.level en corto ("BASICO"/"MEDIO"/"SUPERIOR"); el
+// resto de la app (VerificacionTab, ContextoTab...) compara contra el
+// texto largo ("Grado Medio") que se guardaba antes a mano en info_modulo.
+function normalizeNivel(raw: string): string {
+  const key = raw.trim().toUpperCase();
+  if (key === 'BASICO' || key === 'BÁSICO') return 'Grado Básico';
+  if (key === 'MEDIO') return 'Grado Medio';
+  if (key === 'SUPERIOR') return 'Grado Superior';
+  return raw;
 }
 
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
@@ -64,25 +85,43 @@ async function fetchCatalogForModule(moduleCode: string): Promise<void> {
       }
     }
     
-    // Load OG and CPPS from curriculum endpoint (boa_articles)
+    // Load OG, CPPS y datos de título/familia del endpoint de currículo
     let og: Array<{ id: string; desc: string }> = [];
     let cpps: Array<{ id: string; desc: string }> = [];
+    let familia = '';
+    let tituloFp = '';
+    let nivel = '';
     try {
       const degreeCode = json.data.degree_code || moduleCode;
       const curRes = await fetch(`/api/catalog/curriculum/${degreeCode}`);
       if (curRes.ok) {
         const curJson = await curRes.json();
-        if (curJson.status === 'success' && curJson.data?.boa_articles) {
-          og = curJson.data.boa_articles.article_9_og || [];
-          cpps = curJson.data.boa_articles.article_5_cpps || [];
+        if (curJson.status === 'success' && curJson.data) {
+          if (curJson.data.boa_articles) {
+            og = curJson.data.boa_articles.article_9_og || [];
+            cpps = curJson.data.boa_articles.article_5_cpps || [];
+          }
+          familia = curJson.data.familia || '';
+          tituloFp = curJson.data.titulo_fp || '';
+          nivel = curJson.data.nivel || '';
         }
       }
-    } catch { /* OG/CPPS not critical */ }
-    
+    } catch { /* OG/CPPS/título no críticos */ }
+
+    const modulo: ModuloInfo = {
+      nombre: json.data.nombre || '',
+      horas: typeof json.data.horas === 'number' ? json.data.horas : null,
+      curso: json.data.curso || '',
+      familia,
+      tituloFp,
+      nivel: normalizeNivel(nivel),
+    };
+
     cache.set(moduleCode, {
       ra: raMap,
       ce: ceMap,
       ud: new Map(),
+      modulo,
       og,
       cpps,
       loaded: Date.now()
@@ -183,6 +222,69 @@ export function resolveOg(moduleId: string | null, ogIndex: number): string {
 export function getCppsList(moduleId: string): Array<{ id: string; desc: string }> {
   const code = moduleId.split('-')[0];
   return cache.get(code)?.cpps || [];
+}
+
+/**
+ * Resuelve un campo informativo del módulo (nombre, horas, familia,
+ * título de FP, nivel) con el mismo criterio que resolveDescRa/resolveDescCe:
+ * 1. El valor ya guardado en info_modulo, si viene informado.
+ * 2. El del catálogo, cacheado por loadCatalogForModule().
+ * moduleCode acepta tanto el código puro ("0237") como un activeModuleId
+ * con sufijo ("0237-pd").
+ */
+function resolveModuloField<K extends keyof ModuloInfo>(
+  moduleCode: string | null | undefined,
+  storedValue: ModuloInfo[K] | null | undefined,
+  field: K
+): ModuloInfo[K] | undefined {
+  if (storedValue !== undefined && storedValue !== null && storedValue !== '') return storedValue;
+  if (!moduleCode) return undefined;
+  const code = moduleCode.split('-')[0];
+  const modulo = cache.get(code)?.modulo;
+  return modulo ? modulo[field] : undefined;
+}
+
+export function resolveModuloNombre(moduleCode: string | null | undefined, storedNombre?: string | null): string {
+  return resolveModuloField(moduleCode, storedNombre, 'nombre') || '';
+}
+
+export function resolveModuloHoras(moduleCode: string | null | undefined, storedHoras?: number | null): number | null {
+  const v = resolveModuloField(moduleCode, storedHoras, 'horas');
+  return v ?? null;
+}
+
+export function resolveModuloFamilia(moduleCode: string | null | undefined, storedFamilia?: string | null): string {
+  return resolveModuloField(moduleCode, storedFamilia, 'familia') || '';
+}
+
+export function resolveModuloTituloFp(moduleCode: string | null | undefined, storedTituloFp?: string | null): string {
+  return resolveModuloField(moduleCode, storedTituloFp, 'tituloFp') || '';
+}
+
+export function resolveModuloNivel(moduleCode: string | null | undefined, storedNivel?: string | null): string {
+  return resolveModuloField(moduleCode, storedNivel, 'nivel') || '';
+}
+
+/**
+ * `info_modulo` ya no guarda nombre/horas/familia/titulo_fp/nivel (vienen
+ * siempre del catálogo -- Ítem 51, RF Ideas/00 IDEAS.md). Los generadores de
+ * documentos del backend (routers/pdf.py y afines) sí esperan encontrarlos
+ * en el payload que reciben, así que cualquier fetch que mande `module_data`
+ * al backend debe enviar el `info_modulo` pasado por esta función en vez del
+ * de `moduleData` tal cual -- no muta el store, solo enriquece la copia que
+ * se envía. Llamar solo después de que `loadCatalogForModule(moduleCode)`
+ * haya tenido ocasión de resolver (los componentes que generan documentos ya
+ * lo hacen para poder mostrar RA/CE, así que normalmente ya está en cache).
+ */
+export function enrichInfoModulo(moduleCode: string | null | undefined, infoModulo: any): any {
+  return {
+    ...infoModulo,
+    nombre: resolveModuloNombre(moduleCode, infoModulo?.nombre),
+    horas: resolveModuloHoras(moduleCode, infoModulo?.horas) ?? infoModulo?.horas,
+    familia: resolveModuloFamilia(moduleCode, infoModulo?.familia),
+    titulo_fp: resolveModuloTituloFp(moduleCode, infoModulo?.titulo_fp),
+    nivel: resolveModuloNivel(moduleCode, infoModulo?.nivel),
+  };
 }
 
 
