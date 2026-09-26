@@ -1,6 +1,7 @@
 import { StateCreator } from 'zustand';
 import { AppState, ModuleData, CursoData } from '@/types';
 import { writeFile } from '@/services/fileBackend';
+import { prepareProgramacionForExport, prepareCursoForExport, serializeData } from '@/services/fileExport';
 
 type ModuleSlice = Pick<AppState,
   | 'activeModuleId' | 'setActiveModuleId'
@@ -76,17 +77,26 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
   }),
 
   saveModuleData: async () => {
-    const { activeModuleId, moduleData, isDriveConnected, autoSyncDrive, pdFileSource, setSyncStatus } = get();
+    const { activeModuleId, moduleData, isDriveConnected, autoSyncDrive, pdFileSource, encryptionKey, setSyncStatus } = get();
     if (!activeModuleId || !moduleData) return false;
-    
+
     setSyncStatus('saving');
-    
+
+    // Misma preparación que fileManager.ts::saveProgramacion() (lista blanca
+    // de claves + borrado de desc_ra/desc_ce/info_modulo catalog-duplicado +
+    // cifrado si hay clave) -- antes este guardado (el que dispara el
+    // autoguardado de 3s de Header.tsx) escribía moduleData tal cual, sin
+    // pasar por ninguna de las dos, así que el .fpp real en disco casi
+    // siempre acababa sin depurar y sin cifrar pese a tener clave puesta.
+    const exportData = prepareProgramacionForExport(moduleData);
+    const jsonStr = serializeData(exportData, encryptionKey);
+
     let localSaved = false;
 
     // Save to Local File System if connected
     if (pdFileSource.type === 'local' && pdFileSource.fileRef) {
       try {
-        await writeFile(pdFileSource.fileRef, JSON.stringify(moduleData, null, 2));
+        await writeFile(pdFileSource.fileRef, jsonStr);
         localSaved = true;
       } catch (e) {
         console.error("Failed to write PD to local file system:", e);
@@ -98,10 +108,10 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
     // Save to Google Drive if connected
     if (isDriveConnected && autoSyncDrive) {
       import('@/services/driveService').then(({ driveService }) => {
-        driveService.saveFile(`${activeModuleId}.fpp`, moduleData);
+        driveService.saveFile(`${activeModuleId}.fpp`, exportData);
       });
     }
-    
+
     setSyncStatus('saved');
     setTimeout(() => {
       if (get().syncStatus === 'saved') setSyncStatus('idle');
@@ -111,17 +121,22 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
   },
 
   saveCursoData: async () => {
-    const { activeCursoId, cursoData, isDriveConnected, autoSyncDrive, cursoFileSource, setSyncStatus } = get();
+    const { activeCursoId, cursoData, isDriveConnected, autoSyncDrive, cursoFileSource, encryptionKey, setSyncStatus } = get();
     if (!activeCursoId || !cursoData) return false;
-    
+
     setSyncStatus('saving');
-    
+
+    // Ver nota en saveModuleData() -- misma preparación que
+    // fileManager.ts::saveCurso().
+    const exportData = prepareCursoForExport(cursoData);
+    const jsonStr = serializeData(exportData, encryptionKey);
+
     let localSaved = false;
 
     // Save to Local File System if connected
     if (cursoFileSource.type === 'local' && cursoFileSource.fileRef) {
       try {
-        await writeFile(cursoFileSource.fileRef, JSON.stringify(cursoData, null, 2));
+        await writeFile(cursoFileSource.fileRef, jsonStr);
         localSaved = true;
       } catch (e) {
         console.error("Failed to write Curso to local file system:", e);
@@ -133,10 +148,10 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
     // Save to Google Drive if connected
     if (isDriveConnected && autoSyncDrive) {
       import('@/services/driveService').then(({ driveService }) => {
-        driveService.saveFile(`${activeCursoId}.fpc`, cursoData);
+        driveService.saveFile(`${activeCursoId}.fpc`, exportData);
       });
     }
-    
+
     setSyncStatus('saved');
     setTimeout(() => {
       if (get().syncStatus === 'saved') setSyncStatus('idle');
