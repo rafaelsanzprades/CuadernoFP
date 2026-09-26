@@ -357,9 +357,23 @@ export interface Degree {
   level: string;
 }
 
+// Referencia opaca a un fichero/carpeta real en disco -- 'handle' bajo la
+// File System Access API del navegador (Chrome/Edge), 'path' bajo Tauri
+// (plugin-dialog/plugin-fs no trabajan con handles, solo con rutas de
+// texto). Ver frontend/src/services/fileBackend.ts, que es el único sitio
+// que debe leer/escribir estas refs -- el resto de la app las trata como
+// opacas.
+export type FileRef =
+  | { kind: 'handle'; handle: FileSystemFileHandle }
+  | { kind: 'path'; path: string };
+
+export type DirRef =
+  | { kind: 'handle'; handle: FileSystemDirectoryHandle }
+  | { kind: 'path'; path: string };
+
 export interface FileSource {
   type: 'none' | 'new' | 'local' | 'drive';
-  fileHandle?: FileSystemFileHandle;
+  fileRef?: FileRef;
   driveFileId?: string;
   fileName?: string;
 }
@@ -429,8 +443,8 @@ export interface AppState {
   setCursoFileSource: (source: FileSource) => void;
   groupFileSource: FileSource;
   setGroupFileSource: (source: FileSource) => void;
-  workspaceHandle: FileSystemDirectoryHandle | null;
-  setWorkspaceHandle: (handle: FileSystemDirectoryHandle | null) => void;
+  workspaceHandle: DirRef | null;
+  setWorkspaceHandle: (handle: DirRef | null) => void;
 
   syncStatus: 'idle' | 'unsaved' | 'saving' | 'saved' | 'error';
   setSyncStatus: (status: 'idle' | 'unsaved' | 'saving' | 'saved' | 'error') => void;

@@ -1,4 +1,6 @@
 import { get, set } from "idb-keyval";
+import { isTauri } from "@tauri-apps/api/core";
+import type { DirRef, FileRef } from "@/types";
 
 // Lista de módulos-curso abiertos recientemente (ítem 35), para reabrir con
 // un clic sin recordar dónde está guardado el fichero. Clave dedicada en
@@ -20,12 +22,12 @@ export interface RecentModuleEntry {
   lastAccessed: string;
   // 'grupo' se reabre vía directorio (loadGroupFromWorkspace necesita
   // resolver los .fpp/.fpc enlazados por nombre); 'programacion'/'curso'
-  // sueltos (abiertos sin workspace) se reabren directamente por su propio
-  // fileHandle. Ninguno de los dos existe si el navegador no soporta la
-  // File System Access API (Firefox/Safari) — la entrada queda como
-  // metadato puro, y "reabrir" cae al selector de fichero normal.
-  dirHandle?: FileSystemDirectoryHandle;
-  fileHandle?: FileSystemFileHandle;
+  // sueltos (abiertos sin workspace) se reabren directamente por su propia
+  // fileRef. Bajo el navegador (no Tauri), ninguno de los dos existe si no
+  // soporta la File System Access API (Firefox/Safari) — la entrada queda
+  // como metadato puro, y "reabrir" cae al selector de fichero normal.
+  dirRef?: DirRef;
+  fileRef?: FileRef;
 }
 
 export async function getRecentModules(): Promise<RecentModuleEntry[]> {
@@ -50,5 +52,6 @@ export async function removeRecentModule(id: string): Promise<void> {
 }
 
 export function supportsFileSystemAccess(): boolean {
+  if (isTauri()) return true;
   return typeof window !== "undefined" && "showOpenFilePicker" in window;
 }

@@ -1,5 +1,5 @@
 import { StateCreator } from 'zustand';
-import { AppState, FileSource } from '@/types';
+import { AppState, FileSource, DirRef } from '@/types';
 
 const defaultFileSource: FileSource = { type: 'none' };
 
@@ -36,7 +36,7 @@ export const createUiSlice: StateCreator<AppState, [], [], UiSlice> = (set) => (
   groupFileSource: defaultFileSource,
   setGroupFileSource: (source: FileSource) => set({ groupFileSource: source }),
   workspaceHandle: null,
-  setWorkspaceHandle: (handle: FileSystemDirectoryHandle | null) => set({ workspaceHandle: handle }),
+  setWorkspaceHandle: (handle: DirRef | null) => set({ workspaceHandle: handle }),
   syncStatus: 'idle',
   setSyncStatus: (status) => set({ syncStatus: status }),
 });

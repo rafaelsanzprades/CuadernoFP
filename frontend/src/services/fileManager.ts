@@ -1,7 +1,11 @@
 import { useAppStore } from "@/store/useAppStore";
-import { ModuleData, CursoData, FileSource } from "@/types";
+import { ModuleData, CursoData, FileSource, DirRef, FileRef } from "@/types";
 import CryptoJS from "crypto-js";
 import { addOrUpdateRecentModule } from "@/services/recentModules";
+import {
+  pickOpenFile, pickSaveFile, pickDirectory, writeFile, readFile,
+  listDirFileNames, readFileInDir, writeFileInDir,
+} from "@/services/fileBackend";
 export type DataSourceType = 'demo' | 'local';
 
 // ─── Helpers ────────────────────────────────────────────────
@@ -355,14 +359,11 @@ export const fileManager = {
         moduleData: newModuleData,
       });
 
-      const handle = useAppStore.getState().workspaceHandle;
-      if (handle) {
+      const dir = useAppStore.getState().workspaceHandle;
+      if (dir) {
         try {
-          const fileHandle = await handle.getFileHandle(fileName, { create: true });
-          const writable = await fileHandle.createWritable();
-          await writable.write(JSON.stringify(newModuleData, null, 2));
-          await writable.close();
-          useAppStore.getState().setPdFileSource({ type: 'local', fileName, fileHandle });
+          const fileRef = await writeFileInDir(dir, fileName, JSON.stringify(newModuleData, null, 2));
+          useAppStore.getState().setPdFileSource({ type: 'local', fileName, fileRef });
         } catch (e) {
           console.error("Failed to write new PD to workspace", e);
           useAppStore.getState().setPdFileSource({ type: 'new', fileName });
@@ -395,14 +396,11 @@ export const fileManager = {
 
     useAppStore.setState({ activeModuleId: newId, moduleData: cloned });
 
-    const handle = store.workspaceHandle;
-    if (handle) {
+    const dir = store.workspaceHandle;
+    if (dir) {
       try {
-        const fileHandle = await handle.getFileHandle(fileName, { create: true });
-        const writable = await fileHandle.createWritable();
-        await writable.write(JSON.stringify(cloned, null, 2));
-        await writable.close();
-        useAppStore.getState().setPdFileSource({ type: 'local', fileName, fileHandle });
+        const fileRef = await writeFileInDir(dir, fileName, JSON.stringify(cloned, null, 2));
+        useAppStore.getState().setPdFileSource({ type: 'local', fileName, fileRef });
       } catch (e) {
         console.error("Failed to write cloned PD to workspace", e);
         useAppStore.getState().setPdFileSource({ type: 'new', fileName });
@@ -439,21 +437,16 @@ export const fileManager = {
     // en loadDemoData().
     useAppStore.setState({ dataSource: "local", activeCursoId: id, cursoData: newCursoData });
 
-    const handle = useAppStore.getState().workspaceHandle;
+    const dir = useAppStore.getState().workspaceHandle;
     const pdFileSource = useAppStore.getState().pdFileSource;
-    if (handle) {
+    if (dir) {
       try {
-        const fileHandle = await handle.getFileHandle(fileName, { create: true });
-        const writable = await fileHandle.createWritable();
-        await writable.write(JSON.stringify(newCursoData, null, 2));
-        await writable.close();
-        useAppStore.getState().setCursoFileSource({ type: 'local', fileName, fileHandle });
+        const fileRef = await writeFileInDir(dir, fileName, JSON.stringify(newCursoData, null, 2));
+        useAppStore.getState().setCursoFileSource({ type: 'local', fileName, fileRef });
 
         // Also create the Group file
         const groupFileName = `G - ${cursoName.replace(/[\\/:*?"<>|]/g, '')} - ${year}.fpg`;
-        const groupHandle = await handle.getFileHandle(groupFileName, { create: true });
-        const groupWritable = await groupHandle.createWritable();
-        
+
         let relatedPd = "";
         if (pdFileSource.type === 'local' && pdFileSource.fileName) {
           relatedPd = pdFileSource.fileName;
@@ -470,12 +463,11 @@ export const fileManager = {
           }
         };
 
-        await groupWritable.write(JSON.stringify(groupData, null, 2));
-        await groupWritable.close();
+        await writeFileInDir(dir, groupFileName, JSON.stringify(groupData, null, 2));
 
         addOrUpdateRecentModule({
           id: groupFileName, nombre: cursoName,
-          tipo: 'grupo', fileName: groupFileName, dirHandle: handle,
+          tipo: 'grupo', fileName: groupFileName, dirRef: dir,
         }).catch(() => {});
 
       } catch (e) {
@@ -540,157 +532,100 @@ export const fileManager = {
 
   // ── OPEN (File picker + drag & drop) ────────────────────
 
-  /** Open file via File System Access API (preserves handle for save) */
+  /** Open file via file picker (preserves ref for save) */
   async openProgramacionWithHandle(): Promise<boolean> {
-    try {
-      const [handle] = await window.showOpenFilePicker({
-        types: [{
-          description: 'Programación Cuaderno FP',
-          accept: { 'application/json': ['.fpp', '.json'] },
-        }],
-        multiple: false,
-      });
-      const file = await handle.getFile();
-      const text = await file.text();
-      const success = await this.importProgramacion(text, file.name);
-      if (success) {
-        const store = useAppStore.getState();
-        store.setPdFileSource({
-          type: 'local',
-          fileHandle: handle,
-          fileName: file.name,
-        });
-        addOrUpdateRecentModule({
-          id: file.name, nombre: file.name.replace(/\.(fpp|json)$/i, ''),
-          tipo: 'programacion', fileName: file.name, fileHandle: handle,
-        }).catch(() => {});
-      }
-      return success;
-    } catch (e: any) {
-      if (e?.name === 'AbortError') return false; // User cancelled
-      console.error("Error opening file", e);
-      return false;
+    const picked = await pickOpenFile({ description: 'Programación Cuaderno FP', extensions: ['fpp', 'json'] });
+    if (!picked) return false; // User cancelled
+    const { ref, name, content } = picked;
+    const success = await this.importProgramacion(content, name);
+    if (success) {
+      const store = useAppStore.getState();
+      store.setPdFileSource({ type: 'local', fileRef: ref, fileName: name });
+      addOrUpdateRecentModule({
+        id: name, nombre: name.replace(/\.(fpp|json)$/i, ''),
+        tipo: 'programacion', fileName: name, fileRef: ref,
+      }).catch(() => {});
     }
+    return success;
   },
 
-  /** Reopen a programación from an already-held FileSystemFileHandle (ítem 35,
+  /** Reopen a programación from an already-held FileRef (ítem 35,
    * "Módulos recientes" — evita volver a mostrar el selector de fichero si el
    * permiso sigue vigente). Deja propagar el error (p.ej. NotFoundError si el
    * fichero se movió/borró) en vez de tragárselo — el llamador (el panel de
    * recientes) necesita distinguir "no se encuentra" de otros fallos para
    * decidir si quita la entrada o no. */
-  async openProgramacionFromHandle(handle: FileSystemFileHandle): Promise<boolean> {
-    const file = await handle.getFile();
-    const text = await file.text();
-    const success = await this.importProgramacion(text, file.name);
+  async openProgramacionFromHandle(ref: FileRef): Promise<boolean> {
+    const { name, content } = await readFile(ref);
+    const success = await this.importProgramacion(content, name);
     if (success) {
-      useAppStore.getState().setPdFileSource({ type: 'local', fileHandle: handle, fileName: file.name });
+      useAppStore.getState().setPdFileSource({ type: 'local', fileRef: ref, fileName: name });
     }
     return success;
   },
 
-  /** Reopen a curso from an already-held FileSystemFileHandle (ítem 35). Ver
+  /** Reopen a curso from an already-held FileRef (ítem 35). Ver
    * nota de openProgramacionFromHandle sobre por qué no atrapa el error. */
-  async openCursoFromHandle(handle: FileSystemFileHandle): Promise<boolean> {
-    const file = await handle.getFile();
-    const text = await file.text();
-    const success = await this.importCurso(text, file.name);
+  async openCursoFromHandle(ref: FileRef): Promise<boolean> {
+    const { name, content } = await readFile(ref);
+    const success = await this.importCurso(content, name);
     if (success) {
-      useAppStore.getState().setCursoFileSource({ type: 'local', fileHandle: handle, fileName: file.name });
+      useAppStore.getState().setCursoFileSource({ type: 'local', fileRef: ref, fileName: name });
     }
     return success;
   },
 
-  /** Open curso via File System Access API */
+  /** Open curso via file picker */
   async openCursoWithHandle(): Promise<boolean> {
-    try {
-      const [handle] = await window.showOpenFilePicker({
-        types: [{
-          description: 'Curso Cuaderno FP',
-          accept: { 'application/json': ['.fpc', '.json'] },
-        }],
-        multiple: false,
-      });
-      const file = await handle.getFile();
-      const text = await file.text();
-      const success = await this.importCurso(text, file.name);
-      if (success) {
-        const store = useAppStore.getState();
-        store.setCursoFileSource({
-          type: 'local',
-          fileHandle: handle,
-          fileName: file.name,
-        });
-        addOrUpdateRecentModule({
-          id: file.name, nombre: file.name.replace(/\.(fpc|json)$/i, ''),
-          tipo: 'curso', fileName: file.name, fileHandle: handle,
-        }).catch(() => {});
-      }
-      return success;
-    } catch (e: any) {
-      if (e?.name === 'AbortError') return false;
-      console.error("Error opening curso file", e);
-      return false;
+    const picked = await pickOpenFile({ description: 'Curso Cuaderno FP', extensions: ['fpc', 'json'] });
+    if (!picked) return false;
+    const { ref, name, content } = picked;
+    const success = await this.importCurso(content, name);
+    if (success) {
+      const store = useAppStore.getState();
+      store.setCursoFileSource({ type: 'local', fileRef: ref, fileName: name });
+      addOrUpdateRecentModule({
+        id: name, nombre: name.replace(/\.(fpc|json)$/i, ''),
+        tipo: 'curso', fileName: name, fileRef: ref,
+      }).catch(() => {});
     }
+    return success;
   },
 
   // ── WORKSPACE (Directory picking for groups) ────────────────────
 
-  async openWorkspaceDirectory(): Promise<FileSystemDirectoryHandle | null> {
-    try {
-      const dirHandle = await window.showDirectoryPicker({
-        mode: 'readwrite'
-      });
-      useAppStore.getState().setWorkspaceHandle(dirHandle);
-      return dirHandle;
-    } catch (e: any) {
-      if (e?.name === 'AbortError') return null;
-      console.error("Error opening workspace directory", e);
-      return null;
-    }
+  async openWorkspaceDirectory(): Promise<DirRef | null> {
+    const dir = await pickDirectory();
+    if (dir) useAppStore.getState().setWorkspaceHandle(dir);
+    return dir;
   },
 
-  async scanGroupsInWorkspace(dirHandle: FileSystemDirectoryHandle): Promise<string[]> {
-    const groups: string[] = [];
+  async scanGroupsInWorkspace(dir: DirRef): Promise<string[]> {
     try {
-      for await (const entry of dirHandle.values()) {
-        if (entry.kind === 'file' && entry.name.startsWith('G - ') && (entry.name.endsWith('.fpg') || entry.name.endsWith('.json'))) {
-          groups.push(entry.name);
-        }
-      }
+      return await listDirFileNames(dir, { prefix: 'G - ', extensions: ['fpg', 'json'] });
     } catch (e) {
       console.error("Error scanning groups", e);
+      return [];
     }
-    return groups.sort();
   },
 
-  async scanWorkspaceFiles(dirHandle: FileSystemDirectoryHandle): Promise<{grupos: string[], programaciones: string[], cursos: string[]}> {
-    const grupos: string[] = [];
-    const programaciones: string[] = [];
-    const cursos: string[] = [];
+  async scanWorkspaceFiles(dir: DirRef): Promise<{grupos: string[], programaciones: string[], cursos: string[]}> {
     try {
-      for await (const entry of dirHandle.values()) {
-        if (entry.kind === 'file') {
-          if (entry.name.startsWith('G - ') && (entry.name.endsWith('.fpg') || entry.name.endsWith('.json'))) grupos.push(entry.name);
-          else if (entry.name.startsWith('P - ') && (entry.name.endsWith('.fpp') || entry.name.endsWith('.json'))) programaciones.push(entry.name);
-          else if (entry.name.startsWith('C - ') && (entry.name.endsWith('.fpc') || entry.name.endsWith('.json'))) cursos.push(entry.name);
-        }
-      }
+      const [grupos, programaciones, cursos] = await Promise.all([
+        listDirFileNames(dir, { prefix: 'G - ', extensions: ['fpg', 'json'] }),
+        listDirFileNames(dir, { prefix: 'P - ', extensions: ['fpp', 'json'] }),
+        listDirFileNames(dir, { prefix: 'C - ', extensions: ['fpc', 'json'] }),
+      ]);
+      return { grupos, programaciones, cursos };
     } catch (e) {
       console.error("Error scanning workspace files", e);
+      return { grupos: [], programaciones: [], cursos: [] };
     }
-    return {
-      grupos: grupos.sort(),
-      programaciones: programaciones.sort(),
-      cursos: cursos.sort()
-    };
   },
 
-  async loadGroupFromWorkspace(dirHandle: FileSystemDirectoryHandle, groupFileName: string): Promise<boolean> {
+  async loadGroupFromWorkspace(dir: DirRef, groupFileName: string): Promise<boolean> {
     try {
-      const groupHandle = await dirHandle.getFileHandle(groupFileName);
-      const groupFile = await groupHandle.getFile();
-      const groupText = await groupFile.text();
+      const { content: groupText, ref: groupRef } = await readFileInDir(dir, groupFileName);
       const groupData = JSON.parse(groupText);
 
       if (groupData.tipo !== 'grupo' || !groupData.programacion || !groupData.curso) {
@@ -699,34 +634,30 @@ export const fileManager = {
 
       // Read Programacion
       const pdFileName = groupData.programacion.endsWith('.fpp') || groupData.programacion.endsWith('.json') ? groupData.programacion : `${groupData.programacion}.fpp`;
-      const pdHandle = await dirHandle.getFileHandle(pdFileName);
-      const pdFile = await pdHandle.getFile();
-      const pdText = await pdFile.text();
-      
+      const { content: pdText, ref: pdRef } = await readFileInDir(dir, pdFileName);
+
       // Read Curso
       const cursoFileName = groupData.curso.endsWith('.fpc') || groupData.curso.endsWith('.json') ? groupData.curso : `${groupData.curso}.fpc`;
-      const cursoHandle = await dirHandle.getFileHandle(cursoFileName);
-      const cursoFile = await cursoHandle.getFile();
-      const cursoText = await cursoFile.text();
+      const { content: cursoText, ref: cursoRef } = await readFileInDir(dir, cursoFileName);
 
       // Set Source explicitly to local to break away from demo
       useAppStore.getState().setDataSource('local');
 
       // Import them into state
-      const pdSuccess = await this.importProgramacion(pdText, pdFile.name);
-      const cursoSuccess = await this.importCurso(cursoText, cursoFile.name);
+      const pdSuccess = await this.importProgramacion(pdText, pdFileName);
+      const cursoSuccess = await this.importCurso(cursoText, cursoFileName);
 
       if (pdSuccess && cursoSuccess) {
-        // Also update file sources to use these handles for saving -- setState
+        // Also update file sources to use these refs for saving -- setState
         // atomico, ver nota en loadDemoData().
         useAppStore.setState({
-          pdFileSource: { type: 'local', fileHandle: pdHandle, fileName: pdFile.name },
-          cursoFileSource: { type: 'local', fileHandle: cursoHandle, fileName: cursoFile.name },
-          groupFileSource: { type: 'local', fileHandle: groupHandle, fileName: groupFileName },
+          pdFileSource: { type: 'local', fileRef: pdRef, fileName: pdFileName },
+          cursoFileSource: { type: 'local', fileRef: cursoRef, fileName: cursoFileName },
+          groupFileSource: { type: 'local', fileRef: groupRef, fileName: groupFileName },
         });
         addOrUpdateRecentModule({
           id: groupFileName, nombre: groupData.nombre || groupFileName.replace(/\.(fpg|json)$/i, ''),
-          tipo: 'grupo', fileName: groupFileName, dirHandle,
+          tipo: 'grupo', fileName: groupFileName, dirRef: dir,
         }).catch(() => {});
         return true;
       }
@@ -737,20 +668,18 @@ export const fileManager = {
     }
   },
 
-  async loadProgramacionFromWorkspace(dirHandle: FileSystemDirectoryHandle, pdFileName: string): Promise<boolean> {
+  async loadProgramacionFromWorkspace(dir: DirRef, pdFileName: string): Promise<boolean> {
     try {
-      const pdHandle = await dirHandle.getFileHandle(pdFileName);
-      const pdFile = await pdHandle.getFile();
-      const pdText = await pdFile.text();
-      
+      const { content: pdText, ref: pdRef } = await readFileInDir(dir, pdFileName);
+
       useAppStore.getState().setDataSource('local');
-      const pdSuccess = await this.importProgramacion(pdText, pdFile.name);
-      
+      const pdSuccess = await this.importProgramacion(pdText, pdFileName);
+
       if (pdSuccess) {
         // setState atomico (incluye el "descargar" el curso anterior) -- ver
         // nota en loadDemoData().
         useAppStore.setState({
-          pdFileSource: { type: 'local', fileHandle: pdHandle, fileName: pdFile.name },
+          pdFileSource: { type: 'local', fileRef: pdRef, fileName: pdFileName },
           activeCursoId: "",
           cursoData: null,
           cursoFileSource: { type: 'none' },
@@ -775,12 +704,10 @@ export const fileManager = {
     const exportData = prepareProgramacionForExport(moduleData);
     const jsonStr = serializeData(exportData);
 
-    // 1. Overwrite original file via File System Access API
-    if (pdFileSource.type === 'local' && pdFileSource.fileHandle) {
+    // 1. Overwrite original file
+    if (pdFileSource.type === 'local' && pdFileSource.fileRef) {
       try {
-        const writable = await (pdFileSource.fileHandle as FileSystemFileHandle).createWritable();
-        await writable.write(jsonStr);
-        await writable.close();
+        await writeFile(pdFileSource.fileRef, jsonStr);
       } catch (e: any) {
         if (e?.name === 'AbortError') return false;
         console.error("Error saving to local file", e);
@@ -811,12 +738,10 @@ export const fileManager = {
     const exportData = prepareCursoForExport(cursoData);
     const jsonStr = serializeData(exportData);
 
-    // 1. Overwrite original file via File System Access API
-    if (cursoFileSource.type === 'local' && cursoFileSource.fileHandle) {
+    // 1. Overwrite original file
+    if (cursoFileSource.type === 'local' && cursoFileSource.fileRef) {
       try {
-        const writable = await (cursoFileSource.fileHandle as FileSystemFileHandle).createWritable();
-        await writable.write(jsonStr);
-        await writable.close();
+        await writeFile(cursoFileSource.fileRef, jsonStr);
       } catch (e: any) {
         if (e?.name === 'AbortError') return false;
         console.error("Error saving to local curso file", e);
@@ -846,25 +771,14 @@ export const fileManager = {
     const { activeModuleId, moduleData } = store;
     if (!activeModuleId || !moduleData) return false;
 
+    const picked = await pickSaveFile(`${activeModuleId}.fpp`, { description: 'Programación Cuaderno FP', extensions: ['fpp'] });
+    if (!picked) return false;
+
     try {
-      const handle = await window.showSaveFilePicker({
-        suggestedName: `${activeModuleId}.fpp`,
-        types: [{
-          description: 'Programación Cuaderno FP',
-          accept: { 'application/json': ['.fpp'] },
-        }],
-      });
       const exportData = prepareProgramacionForExport(moduleData);
       const jsonStr = serializeData(exportData);
-      const writable = await handle.createWritable();
-      await writable.write(jsonStr);
-      await writable.close();
-
-      store.setPdFileSource({
-        type: 'local',
-        fileHandle: handle,
-        fileName: handle.name,
-      });
+      await writeFile(picked.ref, jsonStr);
+      store.setPdFileSource({ type: 'local', fileRef: picked.ref, fileName: picked.name });
       return true;
     } catch (e: any) {
       if (e?.name === 'AbortError') return false;
@@ -879,25 +793,14 @@ export const fileManager = {
     const { activeCursoId, cursoData } = store;
     if (!activeCursoId || !cursoData) return false;
 
+    const picked = await pickSaveFile(`${activeCursoId}.fpc`, { description: 'Curso Cuaderno FP', extensions: ['fpc'] });
+    if (!picked) return false;
+
     try {
-      const handle = await window.showSaveFilePicker({
-        suggestedName: `${activeCursoId}.fpc`,
-        types: [{
-          description: 'Curso Cuaderno FP',
-          accept: { 'application/json': ['.fpc'] },
-        }],
-      });
       const exportData = prepareCursoForExport(cursoData);
       const jsonStr = serializeData(exportData);
-      const writable = await handle.createWritable();
-      await writable.write(jsonStr);
-      await writable.close();
-
-      store.setCursoFileSource({
-        type: 'local',
-        fileHandle: handle,
-        fileName: handle.name,
-      });
+      await writeFile(picked.ref, jsonStr);
+      store.setCursoFileSource({ type: 'local', fileRef: picked.ref, fileName: picked.name });
       return true;
     } catch (e: any) {
       if (e?.name === 'AbortError') return false;
@@ -1089,17 +992,15 @@ export const fileManager = {
   setOneDriveConnected() {},
   getOneDriveUser() { return "";  },
 
-  async validateWorkspaceLinks(handle: FileSystemDirectoryHandle): Promise<{
+  async validateWorkspaceLinks(dir: DirRef): Promise<{
     brokenGroups: { groupName: string; missingFile: string; type: 'programacion' | 'curso' }[];
   }> {
     const brokenGroups: { groupName: string; missingFile: string; type: 'programacion' | 'curso' }[] = [];
-    const files = await this.scanWorkspaceFiles(handle);
+    const files = await this.scanWorkspaceFiles(dir);
 
     for (const g of files.grupos) {
       try {
-        const fileHandle = await handle.getFileHandle(g);
-        const file = await fileHandle.getFile();
-        const text = await file.text();
+        const { content: text } = await readFileInDir(dir, g);
         const data = JSON.parse(text);
 
         if (data.tipo === "GRUPO" && data.archivos) {
@@ -1119,22 +1020,18 @@ export const fileManager = {
   },
 
   async fixWorkspaceLink(
-    handle: FileSystemDirectoryHandle, 
-    groupName: string, 
-    type: 'programacion' | 'curso', 
+    dir: DirRef,
+    groupName: string,
+    type: 'programacion' | 'curso',
     newFileName: string
   ): Promise<boolean> {
     try {
-      const fileHandle = await handle.getFileHandle(groupName);
-      const file = await fileHandle.getFile();
-      const text = await file.text();
+      const { content: text } = await readFileInDir(dir, groupName);
       const data = JSON.parse(text);
 
       if (data.tipo === "GRUPO" && data.archivos) {
         data.archivos[type] = newFileName;
-        const writable = await fileHandle.createWritable();
-        await writable.write(JSON.stringify(data, null, 2));
-        await writable.close();
+        await writeFileInDir(dir, groupName, JSON.stringify(data, null, 2));
         return true;
       }
       return false;
