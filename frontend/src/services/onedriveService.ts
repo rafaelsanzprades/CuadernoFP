@@ -1,33 +1,52 @@
-﻿import { PublicClientApplication, Configuration, AuthenticationResult } from "@azure/msal-browser";
+import { PublicClientApplication, Configuration, AuthenticationResult } from "@azure/msal-browser";
 import { Client, ResponseType } from "@microsoft/microsoft-graph-client";
 import { fileManager } from "./fileManager"; // to use existing save functions
 
-const msalConfig: Configuration = {
-  auth: {
-    clientId: process.env.NEXT_PUBLIC_ONEDRIVE_CLIENT_ID || "PROVIDE_YOUR_CLIENT_ID_HERE",
-    authority: "https://login.microsoftonline.com/common",
-    redirectUri: typeof window !== "undefined" ? window.location.origin : "",
-  },
-  cache: {
-    cacheLocation: "sessionStorage"
-  },
-};
+// El Client ID lo trae cada profesor (modelo "trae tu propio Client ID", ver
+// GoogleDriveSyncPanel.tsx/driveService.ts -- mismo criterio), tecleado en
+// OneDriveSyncPanel.tsx y guardado en oneDriveClientId del store. Antes se
+// construía msalConfig UNA VEZ a nivel de módulo con
+// NEXT_PUBLIC_ONEDRIVE_CLIENT_ID/un placeholder fijo, así que ese valor
+// nunca llegaba a usarse de verdad (bug real, encontrado durante la Fase 7
+// del plan Tauri) -- ahora se construye por petición con el Client ID que
+// venga.
+function buildMsalConfig(clientId: string): Configuration {
+  return {
+    auth: {
+      clientId,
+      authority: "https://login.microsoftonline.com/common",
+      redirectUri: typeof window !== "undefined" ? window.location.origin : "",
+    },
+    cache: {
+      cacheLocation: "sessionStorage"
+    },
+  };
+}
 
 const graphScopes = ["user.read", "files.readwrite.all"];
 
 let msalInstance: PublicClientApplication | null = null;
+let msalInstanceClientId: string | null = null;
 
-export const initializeMsal = async () => {
-  if (!msalInstance) {
-    msalInstance = new PublicClientApplication(msalConfig);
+/**
+ * Devuelve la instancia de MSAL para este clientId, reutilizando la ya
+ * creada si el clientId no ha cambiado desde la última vez -- si el
+ * profesor edita el Client ID y reconecta, la instancia vieja (con el
+ * clientId antiguo) NO se reutiliza sin más.
+ */
+export const initializeMsal = async (clientId: string) => {
+  if (!clientId) throw new Error("Falta el Client ID de OneDrive.");
+  if (!msalInstance || msalInstanceClientId !== clientId) {
+    msalInstance = new PublicClientApplication(buildMsalConfig(clientId));
     await msalInstance.initialize();
+    msalInstanceClientId = clientId;
   }
   return msalInstance;
 };
 
-export const signInOneDrive = async (): Promise<string | null> => {
+export const signInOneDrive = async (clientId: string): Promise<string | null> => {
   try {
-    const instance = await initializeMsal();
+    const instance = await initializeMsal(clientId);
     const response = await instance.loginPopup({ scopes: graphScopes });
     return response.accessToken;
   } catch (error) {
@@ -38,10 +57,10 @@ export const signInOneDrive = async (): Promise<string | null> => {
 
 export const signOutOneDrive = async () => {
   try {
-    const instance = await initializeMsal();
-    const account = instance.getAllAccounts()[0];
+    if (!msalInstance) return; // nunca se llegó a iniciar sesión, nada que cerrar
+    const account = msalInstance.getAllAccounts()[0];
     if (account) {
-      await instance.logoutPopup({ account });
+      await msalInstance.logoutPopup({ account });
     }
   } catch (error) {
     console.error("Error signing out of OneDrive:", error);
@@ -68,7 +87,7 @@ export const listCuadernoFiles = async (accessToken: string): Promise<OneDriveFi
   try {
     // We assume CuadernoFP creates a folder named "CuadernoFP" in the user's root directory
     const folderRes = await client.api('/me/drive/root:/CuadernoFP').get().catch(() => null);
-    
+
     if (!folderRes) {
       // Create folder if it doesn't exist
       await client.api('/me/drive/root/children').post({
@@ -83,7 +102,7 @@ export const listCuadernoFiles = async (accessToken: string): Promise<OneDriveFi
       .select('id,name,size,lastModifiedDateTime')
       .filter("endswith(name,'.fpp') or endswith(name,'.fpc')")
       .get();
-      
+
     return res.value as OneDriveFile[];
   } catch (error) {
     console.error("Error listing OneDrive files:", error);
@@ -114,4 +133,3 @@ export const downloadFileFromOneDrive = async (accessToken: string, fileId: stri
     return null;
   }
 };
-
