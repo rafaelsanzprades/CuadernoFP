@@ -2096,6 +2096,8 @@
       "cursoDemoNombre": "DEMO Ikastaroa",
       "usuarioMicrosoft": "Microsoft erabiltzailea",
       "oneDriveDescripcion": "Gorde zure .fpp eta .fpc fitxategiak zure Microsoft OneDrive kontuan. (Azure ataritan izena ematea eskatzen du).",
+      "oneDriveProximamente": "Laster",
+      "oneDriveNoDisponibleTauri": "Oraindik ez dago erabilgarri mahaigaineko aplikazioan -- web bertsioan funtzionatzen jarraitzen du.",
       "sincronizandoCuentaMicrosoft": "Microsoft kontuarekin sinkronizatzen",
       "iniciaSesionMicrosoft": "Hasi saioa Microsoft-ekin",
       "azureClientIdTitulo": "Azure Client ID",

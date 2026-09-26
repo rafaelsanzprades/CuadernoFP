@@ -3,7 +3,7 @@
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { CheckCircle2, Cloud, CloudOff, RefreshCw, Key, Info } from "lucide-react";
+import { CheckCircle2, Cloud, CloudOff, RefreshCw, Key } from "lucide-react";
 import toast from "react-hot-toast";
 import { signInOneDrive, signOutOneDrive } from "@/services/onedriveService";
 import { connectOneDrive, disconnectOneDrive } from "@/services/nativeOAuth";
@@ -23,7 +23,17 @@ export function OneDriveSyncPanel() {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  // Bajo Tauri, el login nativo de OneDrive necesita un Client ID de Azure
+  // de tipo "Mobile and desktop applications" que todavía no está
+  // registrado -- Rafael decidió publicar la app de escritorio sin esperar
+  // a resolverlo (el registro en Azure se atascó con un error de tenant),
+  // dejando el botón deshabilitado con un aviso en vez de un intento de
+  // login que fallaría igualmente. La versión web sigue funcionando igual
+  // que siempre -- esto NO la afecta.
+  const oneDriveDisabledInTauri = isTauri();
+
   const handleConnect = async () => {
+    if (oneDriveDisabledInTauri) return;
     if (dataSource === 'demo') {
       toast.error(t('toasts.oneDrive.sinDemo', {defaultValue: "No puedes sincronizar en modo DEMO."}));
       return;
@@ -87,9 +97,16 @@ export function OneDriveSyncPanel() {
         <div>
           <h2 className="text-subheading font-bold text-foreground flex items-center gap-2">
             <Cloud className="w-6 h-6 text-[#0078D4]" /> Microsoft OneDrive
+            {oneDriveDisabledInTauri && (
+              <span className="text-caption font-normal px-2 py-0.5 rounded-full bg-warning/20 text-warning border border-warning/30">
+                {t('campos.cloud.oneDriveProximamente', {defaultValue: 'Próximamente'})}
+              </span>
+            )}
           </h2>
           <p className="text-muted mt-2">
-            {t('campos.cloud.oneDriveDescripcion', {defaultValue: 'Guarda tus archivos .fpp y .fpc en tu cuenta de Microsoft OneDrive. (Requiere registro en portal de Azure).'})}
+            {oneDriveDisabledInTauri
+              ? t('campos.cloud.oneDriveNoDisponibleTauri', {defaultValue: 'Todavía no disponible en la app de escritorio -- sigue funcionando en la versión web.'})
+              : t('campos.cloud.oneDriveDescripcion', {defaultValue: 'Guarda tus archivos .fpp y .fpc en tu cuenta de Microsoft OneDrive. (Requiere registro en portal de Azure).'})}
           </p>
         </div>
 
@@ -115,19 +132,24 @@ export function OneDriveSyncPanel() {
                   {t('botones.cloud.desconectar', {defaultValue: 'Desconectar'})}
                 </Button>
               ) : (
-                <Button 
-                  onClick={handleConnect} 
-                  disabled={isLoading}
-                  className={`border transition-all ${dataSource === 'demo' ? 'bg-muted/20 text-muted border-muted/30 cursor-not-allowed opacity-70' : 'bg-[#0078D4]/20 text-[#0078D4] hover:bg-[#0078D4]/30 border-[#0078D4]/30'}`}
+                <Button
+                  onClick={handleConnect}
+                  disabled={isLoading || oneDriveDisabledInTauri}
+                  title={oneDriveDisabledInTauri ? t('campos.cloud.oneDriveNoDisponibleTauri', {defaultValue: 'Todavía no disponible en la app de escritorio -- sigue funcionando en la versión web.'}) : undefined}
+                  className={`border transition-all ${dataSource === 'demo' || oneDriveDisabledInTauri ? 'bg-muted/20 text-muted border-muted/30 cursor-not-allowed opacity-70' : 'bg-[#0078D4]/20 text-[#0078D4] hover:bg-[#0078D4]/30 border-[#0078D4]/30'}`}
                 >
-                  {t('botones.cloud.conectarCuenta', {defaultValue: 'Conectar cuenta'})}
+                  {oneDriveDisabledInTauri
+                    ? t('campos.cloud.oneDriveProximamente', {defaultValue: 'Próximamente'})
+                    : t('botones.cloud.conectarCuenta', {defaultValue: 'Conectar cuenta'})}
                 </Button>
               )}
             </div>
           </div>
 
-          {/* Configuración de Client ID */}
-          {!isOneDriveConnected && (
+          {/* Configuración de Client ID -- oculta en Tauri, la función entera
+              está deshabilitada ahí (ver oneDriveDisabledInTauri), no tiene
+              sentido pedir un Client ID para algo que no se puede usar. */}
+          {!isOneDriveConnected && !oneDriveDisabledInTauri && (
             <div className="flex flex-col gap-3 p-5 rounded-xl border bg-background/50 border-[var(--glass-border)]">
               <h3 className="font-bold text-foreground flex items-center gap-2">
                 <Key className="w-5 h-5 text-info" /> {t('campos.cloud.azureClientIdTitulo', {defaultValue: 'Azure Client ID'})}
@@ -135,12 +157,6 @@ export function OneDriveSyncPanel() {
               <p className="text-body text-muted">
                 {t('campos.cloud.azureClientIdDesc', {defaultValue: 'Client ID de tu App registrada en Entra ID (Azure).'})}
               </p>
-              {isTauri() && (
-                <p className="text-caption text-muted flex items-start gap-2 bg-background/50 rounded-lg p-3 border border-[var(--glass-border)]">
-                  <Info className="w-4 h-4 shrink-0 mt-0.5" />
-                  {t('campos.cloud.azureClientIdTauriHint', {defaultValue: 'En la app de escritorio (Tauri) necesitas un Client ID registrado como "Mobile and desktop applications" en Azure, distinto del que usas en el navegador.'})}
-                </p>
-              )}
               <Input
                 type="text"
                 placeholder={t('placeholders.cloud.ejemploClientId', {defaultValue: 'Ej: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'})}
