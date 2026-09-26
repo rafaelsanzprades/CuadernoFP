@@ -29,6 +29,8 @@ tauri-plugin-fs = "2"
 tauri-plugin-store = "2"
 tauri-plugin-oauth = "2"
 tauri-plugin-http = "2"
+tauri-plugin-updater = "2"
+tauri-plugin-process = "2"
 reqwest = { version = "0.12", default-features = false, features = ["rustls-tls"] }
 tokio = { version = "1", features = ["time"] }
 keyring = { version = "3", features = ["apple-native", "windows-native", "sync-secret-service"] }

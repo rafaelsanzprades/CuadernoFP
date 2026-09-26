@@ -16,6 +16,7 @@ import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { AIWizardModal } from "@/components/features/ai/AIWizardModal";
 import { AISettingsPanel } from "@/components/features/ai/AISettingsPanel";
 import { RecentModulesPanel } from "@/components/features/dashboard/RecentModulesPanel";
+import { UpdateChecker } from "@/components/features/dashboard/UpdateChecker";
 import { WelcomeWizard } from "@/components/features/dashboard/WelcomeWizard";
 import { GoogleDriveSyncPanel } from "@/components/features/cloud/GoogleDriveSyncPanel";
 import { OneDriveSyncPanel } from "@/components/features/cloud/OneDriveSyncPanel";
@@ -374,6 +375,9 @@ export default function InicioPage() {
               <div className="animate-in fade-in duration-500 w-full">
 
           <div className="w-full space-y-12 pb-12">
+
+            {/* Autoactualización (Fase 9 del plan Tauri) -- no renderiza nada fuera de la app de escritorio */}
+            <UpdateChecker />
 
             {/* Módulos recientes (ítem 35) — reabrir con un clic, no se muestra si no hay ninguno */}
             <RecentModulesPanel />
