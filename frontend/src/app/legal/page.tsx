@@ -19,14 +19,16 @@ import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 
 /* ──────────────────────────────────────────────────────────────
-   Mini-índice con anclas internas
+   Mini-índice con anclas internas -- vive dentro de StickyPageHeader
+   (sticky top-0), justo debajo de las pestañas, así que queda fijo
+   mientras se hace scroll por el contenido de la pestaña activa.
    ────────────────────────────────────────────────────────────── */
 function SectionIndex({ items }: { items: { id: string; label: string }[] }) {
   const { t } = useTranslation();
   return (
     <nav
       aria-label={t('aria.legal.indiceSecciones', {defaultValue: 'Índice de secciones'})}
-      className="flex flex-wrap gap-2 mb-6 p-3 rounded-xl bg-background/40 backdrop-blur-md border border-[var(--glass-border)]"
+      className="flex flex-wrap gap-2 mt-3 p-3 rounded-xl bg-background/40 backdrop-blur-md border border-[var(--glass-border)]"
     >
       {items.map((item) => (
         <a
@@ -86,6 +88,41 @@ export default function LegalPage() {
     'accesibilidad': t('tabs.legal.accesibilidad.desc', {defaultValue: 'Declaración de accesibilidad digital según RD 1112/2018 y compromiso WCAG 2.1 AA.'}),
   };
 
+  // Índice de secciones por pestaña -- se renderiza una sola vez dentro de
+  // StickyPageHeader (ver más abajo), no repetido dentro de cada bloque de
+  // contenido como antes.
+  const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
+    aviso: [
+      { id: "aviso-titular", label: t('checks.legal.avisoTitular', {defaultValue: '1. Datos del titular'}) },
+      { id: "aviso-condiciones", label: t('checks.legal.avisoCondiciones', {defaultValue: '2. Condiciones de uso'}) },
+      { id: "aviso-propiedad", label: t('checks.legal.avisoPropiedad', {defaultValue: '3. Propiedad intelectual'}) },
+      { id: "aviso-licencias", label: t('checks.legal.avisoLicencias', {defaultValue: '4. Licencias'}) },
+      { id: "aviso-resumen", label: t('checks.legal.avisoResumen', {defaultValue: '5. Resumen práctico'}) },
+    ],
+    privacidad: [
+      { id: "priv-modelo", label: t('checks.legal.privModelo', {defaultValue: '1. Modelo local-first'}) },
+      { id: "priv-responsable", label: t('checks.legal.privResponsable', {defaultValue: '2. Responsable RGPD'}) },
+      { id: "priv-datos", label: t('checks.legal.privDatos', {defaultValue: '3. ¿Dónde se guardan los datos?'}) },
+      { id: "priv-derechos", label: t('checks.legal.privDerechos', {defaultValue: '4. Derechos ARCO'}) },
+      { id: "priv-seguridad", label: t('checks.legal.privSeguridad', {defaultValue: '5. Seguridad'}) },
+      { id: "priv-base-legal", label: t('checks.legal.privBaseLegal', {defaultValue: '6. Base legal'}) },
+    ],
+    cookies: [
+      { id: "cookies-politica", label: t('checks.legal.cookiesPolitica', {defaultValue: '1. Política de cookies'}) },
+      { id: "cookies-tecnologias", label: t('checks.legal.cookiesTecnologias', {defaultValue: '2. Tecnologías utilizadas'}) },
+      { id: "cookies-tabla", label: t('checks.legal.cookiesTabla', {defaultValue: '3. Detalle de almacenamiento'}) },
+      { id: "cookies-gestion", label: t('checks.legal.cookiesGestion', {defaultValue: '4. Cómo gestionarlos'}) },
+    ],
+    accesibilidad: [
+      { id: "acc-declaracion", label: t('checks.legal.accDeclaracion', {defaultValue: '1. Declaración'}) },
+      { id: "acc-normativa", label: t('checks.legal.accNormativa', {defaultValue: '2. Normativa'}) },
+      { id: "acc-estado", label: t('checks.legal.accEstado', {defaultValue: '3. Estado de conformidad'}) },
+      { id: "acc-medidas", label: t('checks.legal.accMedidas', {defaultValue: '4. Medidas adoptadas'}) },
+      { id: "acc-excepciones", label: t('checks.legal.accExcepciones', {defaultValue: '5. Excepciones'}) },
+      { id: "acc-contacto", label: t('checks.legal.accContacto', {defaultValue: '6. Contacto y quejas'}) },
+    ],
+  };
+
   return (
     <div className="flex min-h-screen bg-background relative">
       <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -111,6 +148,10 @@ export default function LegalPage() {
                 </TabsList>
               </Tabs>
             </div>
+
+            {/* Índice de secciones de la pestaña activa -- dentro del header
+                fijo (sticky top-0), así que no se pierde al hacer scroll. */}
+            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} />
           </StickyPageHeader>
 
           <div className="w-full space-y-4 px-8 pt-4 pb-12">
@@ -122,16 +163,6 @@ export default function LegalPage() {
                 ═══════════════════════════════════════════════════ */}
             {activeTab === "aviso" && (
               <div className="space-y-12 animate-in fade-in duration-500">
-                <SectionIndex
-                  items={[
-                    { id: "aviso-titular", label: t('checks.legal.avisoTitular', {defaultValue: '1. Datos del titular'}) },
-                    { id: "aviso-condiciones", label: t('checks.legal.avisoCondiciones', {defaultValue: '2. Condiciones de uso'}) },
-                    { id: "aviso-propiedad", label: t('checks.legal.avisoPropiedad', {defaultValue: '3. Propiedad intelectual'}) },
-                    { id: "aviso-licencias", label: t('checks.legal.avisoLicencias', {defaultValue: '4. Licencias'}) },
-                    { id: "aviso-resumen", label: t('checks.legal.avisoResumen', {defaultValue: '5. Resumen práctico'}) },
-                  ]}
-                />
-
                 {/* 1. Datos del titular */}
                 <section className="space-y-3">
                   <SectionHeading id="aviso-titular" number={1}>
@@ -273,17 +304,6 @@ export default function LegalPage() {
                 ═══════════════════════════════════════════════════ */}
             {activeTab === "privacidad" && (
               <div className="space-y-12 animate-in fade-in duration-500">
-                <SectionIndex
-                  items={[
-                    { id: "priv-modelo", label: t('checks.legal.privModelo', {defaultValue: '1. Modelo local-first'}) },
-                    { id: "priv-responsable", label: t('checks.legal.privResponsable', {defaultValue: '2. Responsable RGPD'}) },
-                    { id: "priv-datos", label: t('checks.legal.privDatos', {defaultValue: '3. ¿Dónde se guardan los datos?'}) },
-                    { id: "priv-derechos", label: t('checks.legal.privDerechos', {defaultValue: '4. Derechos ARCO'}) },
-                    { id: "priv-seguridad", label: t('checks.legal.privSeguridad', {defaultValue: '5. Seguridad'}) },
-                    { id: "priv-base-legal", label: t('checks.legal.privBaseLegal', {defaultValue: '6. Base legal'}) },
-                  ]}
-                />
-
                 {/* 1. Modelo local-first */}
                 <section className="space-y-3">
                   <SectionHeading id="priv-modelo" number={1}>
@@ -382,15 +402,6 @@ export default function LegalPage() {
                 ═══════════════════════════════════════════════════ */}
             {activeTab === "cookies" && (
               <div className="space-y-12 animate-in fade-in duration-500">
-                <SectionIndex
-                  items={[
-                    { id: "cookies-politica", label: t('checks.legal.cookiesPolitica', {defaultValue: '1. Política de cookies'}) },
-                    { id: "cookies-tecnologias", label: t('checks.legal.cookiesTecnologias', {defaultValue: '2. Tecnologías utilizadas'}) },
-                    { id: "cookies-tabla", label: t('checks.legal.cookiesTabla', {defaultValue: '3. Detalle de almacenamiento'}) },
-                    { id: "cookies-gestion", label: t('checks.legal.cookiesGestion', {defaultValue: '4. Cómo gestionarlos'}) },
-                  ]}
-                />
-
                 {/* 1. Política */}
                 <section className="space-y-3">
                   <SectionHeading id="cookies-politica" number={1}>
@@ -490,17 +501,6 @@ export default function LegalPage() {
                 ═══════════════════════════════════════════════════ */}
             {activeTab === "accesibilidad" && (
               <div className="space-y-12 animate-in fade-in duration-500">
-                <SectionIndex
-                  items={[
-                    { id: "acc-declaracion", label: t('checks.legal.accDeclaracion', {defaultValue: '1. Declaración'}) },
-                    { id: "acc-normativa", label: t('checks.legal.accNormativa', {defaultValue: '2. Normativa'}) },
-                    { id: "acc-estado", label: t('checks.legal.accEstado', {defaultValue: '3. Estado de conformidad'}) },
-                    { id: "acc-medidas", label: t('checks.legal.accMedidas', {defaultValue: '4. Medidas adoptadas'}) },
-                    { id: "acc-excepciones", label: t('checks.legal.accExcepciones', {defaultValue: '5. Excepciones'}) },
-                    { id: "acc-contacto", label: t('checks.legal.accContacto', {defaultValue: '6. Contacto y quejas'}) },
-                  ]}
-                />
-
                 {/* 1. Declaración */}
                 <section className="space-y-3">
                   <SectionHeading id="acc-declaracion" number={1}>
