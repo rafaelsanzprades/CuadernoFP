@@ -11,6 +11,7 @@ import { useMounted } from '@/hooks/useMounted';
 import { Tooltip } from '@/components/ui/Tooltip';
 import { InstallPwaButton } from '@/components/features/settings/InstallPwaButton';
 import { fileManager } from '@/services/fileManager';
+import { loadCatalogForModule, resolveModuloNombre } from '@/services/catalogCache';
 import { useTranslation } from "react-i18next";
 
 export default function Sidebar() {
@@ -129,6 +130,14 @@ export default function Sidebar() {
     };
   }, [activeModuleId, dataSource]);
 
+  // catalogLoaded solo se usa para forzar un rerender cuando la promesa de
+  // loadCatalogForModule() resuelve -- el cache en sí es un Map a nivel de
+  // módulo, no estado reactivo (mismo patrón que curriculo/page.tsx).
+  const [catalogLoaded, setCatalogLoaded] = useState(0);
+  useEffect(() => {
+    if (activeModuleId) loadCatalogForModule(activeModuleId).then(() => setCatalogLoaded(Date.now()));
+  }, [activeModuleId]);
+
   const handleScroll = (e: React.UIEvent<HTMLElement>) => {
     sessionStorage.setItem('sidebar-scroll', e.currentTarget.scrollTop.toString());
   };
@@ -139,7 +148,7 @@ export default function Sidebar() {
   } else if (isMounted && activeModuleId) {
     const code = activeModuleId.split('-')[0];
     moduleTitleSuffix = code;
-    const nombre = storeState.moduleData?.info_modulo?.nombre;
+    const nombre = resolveModuloNombre(activeModuleId, storeState.moduleData?.info_modulo?.nombre);
     const foundAcronym = nombre ? getAcronym(nombre) : '';
     if (foundAcronym) {
       moduleTitleSuffix = `${code} ${foundAcronym}`;

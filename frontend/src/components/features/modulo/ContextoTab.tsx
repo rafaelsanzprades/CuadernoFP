@@ -1,11 +1,12 @@
 "use client";
 import { School, User, FileText, BookOpen, Sparkles } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NarrativeField } from "@/components/ui/NarrativeField";
 import { useAppStore } from "@/store/useAppStore";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { countField, countBoolean } from "@/components/features/alumnado/TendenciasProfesionalTab";
+import { loadCatalogForModule, resolveModuloNivel } from "@/services/catalogCache";
 
 const RASGOS_ENTORNO = [
   {
@@ -232,8 +233,12 @@ function IaButton({ onClick, loading, disabled }: IaButtonProps) {
 
 export function ContextoTab() {
   const { t } = useTranslation();
-  const { moduleData, updateModuleData, cursoData } = useAppStore();
+  const { moduleData, updateModuleData, cursoData, activeModuleId } = useAppStore();
   const [generandoIA, setGenerandoIA] = useState<Record<string, boolean>>({});
+  const [, setCatalogLoaded] = useState(0);
+  useEffect(() => {
+    if (activeModuleId) loadCatalogForModule(activeModuleId).then(() => setCatalogLoaded(Date.now()));
+  }, [activeModuleId]);
 
   const config_contexto = moduleData?.config_contexto || {};
 
@@ -325,7 +330,7 @@ export function ContextoTab() {
   // del equipo docente desde ESO, sin título) no encaja limpiamente en
   // ninguna de las opciones existentes, y forzar una encajaría peor que no
   // sugerir nada.
-  const nivelModulo = moduleData?.info_modulo?.nivel || "";
+  const nivelModulo = resolveModuloNivel(activeModuleId, moduleData?.info_modulo?.nivel);
   const sugerenciaViaAcceso: SugerenciaGrupo | undefined =
     nivelModulo === "Grado Medio"
       ? { grupo: "Vía de acceso predominante", id: "AL-VIA-ESO", label: "ESO", motivo: nivelModulo }

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { useAppStore } from "@/store/useAppStore";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import { enrichInfoModulo } from "@/services/catalogCache";
 
 interface TaskConfigModalProps {
   task: any;
@@ -25,7 +26,7 @@ export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps)
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const { cursoData, moduleData } = useAppStore();
+  const { cursoData, moduleData, activeModuleId } = useAppStore();
   const [isExporting, setIsExporting] = useState(false);
 
   const handleExport = async () => {
@@ -39,7 +40,7 @@ export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps)
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           curso_data: cursoData || {},
-          module_data: moduleData || {},
+          module_data: moduleData ? { ...moduleData, info_modulo: enrichInfoModulo(activeModuleId, moduleData.info_modulo) } : {},
         })
       });
 

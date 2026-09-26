@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import { enrichInfoModulo } from "@/services/catalogCache";
 
 const REFERENCIAS_FIJAS = [
   { id: "Nota_Final_FO", label: "Nota final (evaluación ordinaria)" },
@@ -13,7 +14,7 @@ const REFERENCIAS_FIJAS = [
 ];
 
 export function ReclamacionesTab() {
-  const { moduleData, cursoData, updateCursoData } = useAppStore();
+  const { moduleData, cursoData, updateCursoData, activeModuleId } = useAppStore();
   const { t } = useTranslation();
   const df_al = cursoData?.df_al || [];
   const df_act = moduleData?.df_act || [];
@@ -76,7 +77,7 @@ export function ReclamacionesTab() {
       const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ curso_data: cursoData || {}, module_data: moduleData || {} }),
+        body: JSON.stringify({ curso_data: cursoData || {}, module_data: moduleData ? { ...moduleData, info_modulo: enrichInfoModulo(activeModuleId, moduleData.info_modulo) } : {} }),
       });
       if (!response.ok) throw new Error("Error generando el justificante");
       const blob = await response.blob();

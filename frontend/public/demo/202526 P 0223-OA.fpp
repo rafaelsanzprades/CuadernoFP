@@ -687,15 +687,11 @@
     }
   ],
   "info_modulo": {
-    "nombre": "Aplicaciones Ofimáticas",
     "codigo": "0223",
     "acronimo": "AO",
-    "horas": 200,
     "curso": "1",
-    "familia": "Informática y Comunicaciones",
     "ciclo": "Sistemas microinformáticos y redes (SMR)",
     "grado": "D",
-    "nivel": "2",
     "pond_1t": 30,
     "pond_2t": 30,
     "pond_3t": 40,
@@ -706,7 +702,6 @@
     "h_sem": 6,
     "centro": "CPIFP CIFPA",
     "profesorado": "Javier Edo Gual",
-    "titulo_fp": "IFC201 - Sistemas microinformáticos y redes",
     "ccaa": "aragon"
   },
   "config_contexto": {

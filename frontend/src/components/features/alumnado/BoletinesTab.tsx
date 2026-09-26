@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Printer, FileText, Users, Award, Briefcase, GraduationCap, Target, BarChart as BarChartIcon } from 'lucide-react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
-import { resolveDescRa, loadCatalogForModule } from '@/services/catalogCache';
+import { resolveDescRa, loadCatalogForModule, resolveModuloNombre, resolveModuloTituloFp } from '@/services/catalogCache';
 import { isAlumnoActivo } from '@/utils/alumnado';
 import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, filtrarPorGev } from '@/utils/calificaciones';
 import { useTranslation } from 'react-i18next';
@@ -14,7 +14,8 @@ export const BoletinesTab = () => {
   const { t } = useTranslation();
   const { cursoData, moduleData, activeCursoId, activeModuleId } = useAppStore();
 
-  useEffect(() => { if (activeModuleId) loadCatalogForModule(activeModuleId); }, [activeModuleId]);
+  const [, setCatalogLoaded] = useState(0);
+  useEffect(() => { if (activeModuleId) loadCatalogForModule(activeModuleId).then(() => setCatalogLoaded(Date.now())); }, [activeModuleId]);
 
   const df_al = cursoData?.df_al || [];
   const activeStudents = df_al.filter(isAlumnoActivo).sort((a, b) => (a.Apellidos || '').localeCompare(b.Apellidos || ''));
@@ -142,10 +143,10 @@ export const BoletinesTab = () => {
                   <div>
                     <h1 className="text-heading font-black mb-2 tracking-tight">{t('campos.alumnado.informeEvaluacionTitulo', {defaultValue: 'INFORME DE EVALUACIÓN'})}</h1>
                     <p className="text-subheading text-muted-foreground font-semibold flex items-center gap-2">
-                      <GraduationCap className="w-5 h-5" /> {t('campos.alumnado.moduloLabel', {defaultValue: 'Módulo:'})} {info_modulo.codigo && info_modulo.nombre ? `${info_modulo.codigo} - ${info_modulo.nombre}` : info_modulo.modulo || t('campos.alumnado.moduloProfesionalFallback', {defaultValue: 'Módulo profesional'})}
+                      <GraduationCap className="w-5 h-5" /> {t('campos.alumnado.moduloLabel', {defaultValue: 'Módulo:'})} {info_modulo.codigo && resolveModuloNombre(activeModuleId, info_modulo.nombre) ? `${info_modulo.codigo} - ${resolveModuloNombre(activeModuleId, info_modulo.nombre)}` : info_modulo.modulo || t('campos.alumnado.moduloProfesionalFallback', {defaultValue: 'Módulo profesional'})}
                     </p>
                     <p className="text-body text-muted flex items-center gap-2 mt-1">
-                      <Briefcase className="w-4 h-4" /> {t('campos.alumnado.tituloLabel', {defaultValue: 'Título:'})} {info_modulo.titulo_fp || t('campos.alumnado.tituloFpFallback', {defaultValue: 'Título de FP'})}
+                      <Briefcase className="w-4 h-4" /> {t('campos.alumnado.tituloLabel', {defaultValue: 'Título:'})} {resolveModuloTituloFp(activeModuleId, info_modulo.titulo_fp) || t('campos.alumnado.tituloFpFallback', {defaultValue: 'Título de FP'})}
                     </p>
                   </div>
                   <div className="text-right">

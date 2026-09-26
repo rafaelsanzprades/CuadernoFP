@@ -5,7 +5,7 @@ import { CalificarConRubricaModal } from "./CalificarConRubricaModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { LineChart, Line, ResponsiveContainer, YAxis } from "recharts";
 import { useAppStore } from "@/store/useAppStore";
-import { resolveDescRa } from "@/services/catalogCache";
+import { resolveDescRa, enrichInfoModulo } from "@/services/catalogCache";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { calcularNotasJEG, getSigadInfo, DEFAULT_CONFIG_REDONDEO, setCalificacionAuto, filtrarPorGev } from "@/utils/calificaciones";
@@ -160,7 +160,7 @@ export function DetalleAlumnadoTab() {
       const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ curso_data: cursoData || {}, module_data: moduleData || {} }),
+        body: JSON.stringify({ curso_data: cursoData || {}, module_data: moduleData ? { ...moduleData, info_modulo: enrichInfoModulo(activeModuleId, moduleData.info_modulo) } : {} }),
       });
       if (!response.ok) throw new Error("Error generando el informe");
       const blob = await response.blob();
