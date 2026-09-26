@@ -27,6 +27,7 @@
       "allow": [
         { "path": "**" }
       ]
-    }
+    },
+    "store:default"
   ]
 }

@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist, StateStorage, createJSONStorage } from 'zustand/middleware';
 import { temporal } from 'zundo';
 import { get, set, del } from 'idb-keyval';
+import { isTauri } from '@tauri-apps/api/core';
 import { AppState } from '@/types';
 
 function debounce<T extends (...args: any[]) => void>(func: T, wait: number) {
@@ -48,6 +49,18 @@ export const useAppStore = create<AppState>()(
         },
         partialize: (state) => {
           const { workspaceHandle, ...rest } = state;
+          // Bajo Tauri, moduleData/cursoData/*FileSource NUNCA se cachean en el
+          // storage propio del webview -- Rafael ha sido explícito en que los
+          // datos del profesor viven SIEMPRE y SOLO en los ficheros .fpg/.fpp/
+          // .fpc reales en disco (ver Fase 5 del plan Tauri). La red de
+          // seguridad frente a un cierre inesperado es el autoguardado directo
+          // al fichero ya abierto (Header.tsx, moduleSlice.ts), no una copia en
+          // IndexedDB. En el navegador (web app) este cache sigue existiendo
+          // igual que siempre -- ahí SÍ es la única red de seguridad real.
+          if (isTauri()) {
+            const { moduleData, cursoData, pdFileSource, cursoFileSource, groupFileSource, ...uiOnly } = rest;
+            return uiOnly;
+          }
           return rest;
         },
       }
