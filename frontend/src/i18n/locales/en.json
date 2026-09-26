@@ -2096,6 +2096,8 @@
       "cursoDemoNombre": "DEMO Course",
       "usuarioMicrosoft": "Microsoft user",
       "oneDriveDescripcion": "Save your .fpp and .fpc files to your Microsoft OneDrive account. (Requires registration in the Azure portal).",
+      "oneDriveProximamente": "Coming soon",
+      "oneDriveNoDisponibleTauri": "Not yet available in the desktop app -- still works in the web version.",
       "sincronizandoCuentaMicrosoft": "Syncing with Microsoft account",
       "iniciaSesionMicrosoft": "Sign in with Microsoft",
       "azureClientIdTitulo": "Azure Client ID",

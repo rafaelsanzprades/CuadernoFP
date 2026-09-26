@@ -2098,6 +2098,8 @@
       "cursoDemoNombre": "Curs DEMO",
       "usuarioMicrosoft": "Usuari de Microsoft",
       "oneDriveDescripcion": "Desa els teus fitxers .fpp i .fpc al teu compte de Microsoft OneDrive. (Requereix registre al portal d'Azure).",
+      "oneDriveProximamente": "Pròximament",
+      "oneDriveNoDisponibleTauri": "Encara no disponible a l'app d'escriptori -- segueix funcionant a la versió web.",
       "sincronizandoCuentaMicrosoft": "Sincronitzant amb compte de Microsoft",
       "iniciaSesionMicrosoft": "Inicia sessió amb Microsoft",
       "azureClientIdTitulo": "Azure Client ID",

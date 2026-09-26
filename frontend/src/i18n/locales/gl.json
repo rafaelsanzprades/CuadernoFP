@@ -2096,6 +2096,8 @@
       "cursoDemoNombre": "Curso DEMO",
       "usuarioMicrosoft": "Usuario de Microsoft",
       "oneDriveDescripcion": "Garda os teus ficheiros .fpp e .fpc na túa conta de Microsoft OneDrive. (Require rexistro no portal de Azure).",
+      "oneDriveProximamente": "Proximamente",
+      "oneDriveNoDisponibleTauri": "Aínda non dispoñible na app de escritorio -- segue funcionando na versión web.",
       "sincronizandoCuentaMicrosoft": "Sincronizando con conta Microsoft",
       "iniciaSesionMicrosoft": "Inicia sesión con Microsoft",
       "azureClientIdTitulo": "Azure Client ID",
