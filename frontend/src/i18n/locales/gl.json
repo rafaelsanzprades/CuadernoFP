@@ -2091,6 +2091,7 @@
       "introduceClientIdPre": "Introduce o",
       "introduceClientIdPost": "do teu proxecto de Google Cloud para autorizar a aplicación. Este dato gárdase no teu navegador de forma segura.",
       "clientIdPlaceholder": "Ex: 123456789-abcde.apps.googleusercontent.com",
+      "clientIdTauriHint": "Na app de escritorio (Tauri) precisas un Client ID de tipo \"Desktop app\", distinto do que usas no navegador — podes rexistralo no mesmo proxecto de Google Cloud.",
       "moduloDesconocido": "Módulo Descoñecido",
       "cursoDemoNombre": "Curso DEMO",
       "usuarioMicrosoft": "Usuario de Microsoft",
@@ -2098,7 +2099,8 @@
       "sincronizandoCuentaMicrosoft": "Sincronizando con conta Microsoft",
       "iniciaSesionMicrosoft": "Inicia sesión con Microsoft",
       "azureClientIdTitulo": "Azure Client ID",
-      "azureClientIdDesc": "Client ID da túa App rexistrada en Entra ID (Azure)."
+      "azureClientIdDesc": "Client ID da túa App rexistrada en Entra ID (Azure).",
+      "azureClientIdTauriHint": "Na app de escritorio (Tauri) precisas un Client ID rexistrado como \"Mobile and desktop applications\" en Azure, distinto do que usas no navegador."
     },
     "dashboard": {
       "altaBajaAlumnado": "Alta e baixa de alumnado",

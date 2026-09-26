@@ -2091,6 +2091,7 @@
       "introduceClientIdPre": "Introdueix el",
       "introduceClientIdPost": "del teu projecte de Google Cloud per autoritzar l'aplicació. Aquesta dada es desa al teu navegador de forma segura.",
       "clientIdPlaceholder": "Ex: 123456789-abcde.apps.googleusercontent.com",
+      "clientIdTauriHint": "A l'app d'escriptori (Tauri) necessites un Client ID de tipus \"Desktop app\", diferent del que fas servir al navegador — pots registrar-lo al mateix projecte de Google Cloud.",
       "moduloDesconocido": "Mòdul Desconegut",
       "cursoDemoNombre": "Curs DEMO",
       "usuarioMicrosoft": "Usuari de Microsoft",
@@ -2098,7 +2099,8 @@
       "sincronizandoCuentaMicrosoft": "Sincronitzant amb compte de Microsoft",
       "iniciaSesionMicrosoft": "Inicia sessió amb Microsoft",
       "azureClientIdTitulo": "Azure Client ID",
-      "azureClientIdDesc": "Client ID de la teva App registrada a Entra ID (Azure)."
+      "azureClientIdDesc": "Client ID de la teva App registrada a Entra ID (Azure).",
+      "azureClientIdTauriHint": "A l'app d'escriptori (Tauri) necessites un Client ID registrat com a \"Mobile and desktop applications\" a Azure, diferent del que fas servir al navegador."
     },
     "dashboard": {
       "altaBajaAlumnado": "Alta i baixa d'alumnat",

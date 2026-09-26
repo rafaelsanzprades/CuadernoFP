@@ -2091,6 +2091,7 @@
       "introduceClientIdPre": "Sartu",
       "introduceClientIdPost": "zure Google Cloud proiektukoa, aplikazioa baimentzeko. Datu hori zure nabigatzailean gordetzen da modu seguruan.",
       "clientIdPlaceholder": "Adib: 123456789-abcde.apps.googleusercontent.com",
+      "clientIdTauriHint": "Mahaigaineko aplikazioan (Tauri) \"Desktop app\" motako Client ID bat behar duzu, nabigatzailean erabiltzen duzunaz bestelakoa — Google Cloud proiektu berean erregistra dezakezu.",
       "moduloDesconocido": "Modulu Ezezaguna",
       "cursoDemoNombre": "DEMO Ikastaroa",
       "usuarioMicrosoft": "Microsoft erabiltzailea",
@@ -2098,7 +2099,8 @@
       "sincronizandoCuentaMicrosoft": "Microsoft kontuarekin sinkronizatzen",
       "iniciaSesionMicrosoft": "Hasi saioa Microsoft-ekin",
       "azureClientIdTitulo": "Azure Client ID",
-      "azureClientIdDesc": "Entra ID-n (Azure) erregistratutako zure Aplikazioaren Client ID-a."
+      "azureClientIdDesc": "Entra ID-n (Azure) erregistratutako zure Aplikazioaren Client ID-a.",
+      "azureClientIdTauriHint": "Mahaigaineko aplikazioan (Tauri) Azuren \"Mobile and desktop applications\" gisa erregistratutako Client ID bat behar duzu, nabigatzailekoaz bestelakoa."
     },
     "dashboard": {
       "altaBajaAlumnado": "Ikasleen alta eta baja",

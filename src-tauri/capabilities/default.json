@@ -8,6 +8,7 @@
   "permissions": [
     "core:default",
     "shell:allow-execute",
+    "shell:allow-open",
     {
       "identifier": "shell:allow-execute",
       "allow": [
@@ -17,6 +18,8 @@
         }
       ]
     },
+    "oauth:allow-start",
+    "oauth:allow-cancel",
     "dialog:default",
     "fs:allow-read-text-file",
     "fs:allow-write-text-file",
@@ -28,6 +31,15 @@
         { "path": "**" }
       ]
     },
-    "store:default"
+    "store:default",
+    {
+      "identifier": "http:default",
+      "allow": [
+        { "url": "https://oauth2.googleapis.com/*" },
+        { "url": "https://www.googleapis.com/*" },
+        { "url": "https://login.microsoftonline.com/*" },
+        { "url": "https://graph.microsoft.com/*" }
+      ]
+    }
   ]
 }

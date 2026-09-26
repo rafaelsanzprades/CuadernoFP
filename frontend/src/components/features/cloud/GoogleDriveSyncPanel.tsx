@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/Button";
 import { CheckCircle2, Cloud, CloudOff, Info, RefreshCw, XCircle, Key } from "lucide-react";
 import toast from "react-hot-toast";
 import { driveService } from "@/services/driveService";
+import { connectGoogleDrive, disconnectGoogleDrive } from "@/services/nativeOAuth";
+import { isTauri } from "@tauri-apps/api/core";
 import { Input } from "@/components/ui/Input";
 import { useTranslation } from "react-i18next";
 
@@ -27,6 +29,24 @@ export function GoogleDriveSyncPanel() {
     }
 
     toast.loading(t('toasts.googleDrive.conectando', {defaultValue: "Conectando con Google Drive..."}), { id: "drive-connect" });
+
+    // Bajo Tauri, el popup de Google Identity Services (driveService.login)
+    // no puede funcionar -- depende de un origen http(s) real ya registrado
+    // en Google, y el origen del webview de Tauri no lo es. Login nativo por
+    // navegador del sistema + loopback en su lugar (Fase 7 del plan Tauri).
+    if (isTauri()) {
+      try {
+        const result = await connectGoogleDrive(googleClientId);
+        setDriveUserEmail(result.email || t('campos.cloud.usuarioDrive', {defaultValue: 'Usuario de Drive'}));
+        setDriveConnected(true);
+        toast.success(t('toasts.googleDrive.conectado', {defaultValue: "Google Drive conectado correctamente."}), { id: "drive-connect" });
+      } catch (e) {
+        console.error("Error conectando Google Drive (nativo)", e);
+        toast.error(t('toasts.googleDrive.errorConectar', {defaultValue: "Fallo al conectar con Google Drive."}), { id: "drive-connect" });
+      }
+      return;
+    }
+
     const result = await driveService.login(googleClientId);
 
     if (result.success) {
@@ -39,7 +59,11 @@ export function GoogleDriveSyncPanel() {
   };
 
   const handleDisconnect = () => {
-    driveService.logout();
+    if (isTauri()) {
+      disconnectGoogleDrive().catch(() => {});
+    } else {
+      driveService.logout();
+    }
     setDriveConnected(false);
     setDriveUserEmail(null);
     setAutoSyncDrive(false);
@@ -145,6 +169,12 @@ export function GoogleDriveSyncPanel() {
               <p className="text-body text-muted">
                 {t('campos.cloud.introduceClientIdPre', {defaultValue: 'Introduce el'})} <strong>Client ID</strong> {t('campos.cloud.introduceClientIdPost', {defaultValue: 'de tu proyecto de Google Cloud para autorizar la aplicación. Este dato se guarda en tu navegador de forma segura.'})}
               </p>
+              {isTauri() && (
+                <p className="text-caption text-muted flex items-start gap-2 bg-background/50 rounded-lg p-3 border border-[var(--glass-border)]">
+                  <Info className="w-4 h-4 shrink-0 mt-0.5" />
+                  {t('campos.cloud.clientIdTauriHint', {defaultValue: 'En la app de escritorio (Tauri) necesitas un Client ID de tipo "Desktop app", distinto del que usas en el navegador — puedes registrarlo en el mismo proyecto de Google Cloud.'})}
+                </p>
+              )}
               <Input
                 type="password"
                 placeholder={t('campos.cloud.clientIdPlaceholder', {defaultValue: 'Ej: 123456789-abcde.apps.googleusercontent.com'})}
