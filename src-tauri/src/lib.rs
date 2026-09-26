@@ -9,6 +9,7 @@ pub fn run() {
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_fs::init())
+        .plugin(tauri_plugin_store::Builder::new().build())
         .manage(sidecar::BackendPort(Mutex::new(None)))
         .manage(sidecar::BackendProcess(Mutex::new(None)))
         .invoke_handler(tauri::generate_handler![sidecar::get_backend_port])
