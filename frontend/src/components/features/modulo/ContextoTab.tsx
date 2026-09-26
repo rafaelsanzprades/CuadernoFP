@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { countField, countBoolean } from "@/components/features/alumnado/TendenciasProfesionalTab";
 import { loadCatalogForModule, resolveModuloNivel } from "@/services/catalogCache";
+import { getApiBase } from "@/services/apiBase";
 
 const RASGOS_ENTORNO = [
   {
@@ -279,7 +280,7 @@ export function ContextoTab() {
         AVISO_SIN_ESTEREOTIPOS,
       ].join("\n");
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/ai/chat`, {
+      const res = await fetch(`${getApiBase()}/api/ai/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: [{ role: "user", parts: prompt }] }),

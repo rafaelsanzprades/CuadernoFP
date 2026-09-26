@@ -26,6 +26,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { getAcronym } from "@/utils/catalogFormat";
 import { GENERACIONES_CURRICULO, getFuenteNormativa } from "@/utils/curriculumGeneraciones";
 import { ExternalLink } from "lucide-react";
+import { getApiBase } from "@/services/apiBase";
 
 type Tab = "familias" | "titulos" | "modulos" | "ra-ce";
 
@@ -211,7 +212,7 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
   const regionId = globalData?.regionId || 1;
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/families?region_id=${regionId}`)
+    fetch(`${getApiBase()}/api/families?region_id=${regionId}`)
       .then((res) => res.json())
       .then((json) => {
         if (json.status === "success") {
@@ -348,7 +349,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
   const [famLoading, setFamLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/families`)
+    fetch(`${getApiBase()}/api/families`)
       .then((res) => res.json())
       .then((json) => {
         if (json.status === "success") setFamilies(json.data);
@@ -575,7 +576,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
   const [famLoading, setFamLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/families`)
+    fetch(`${getApiBase()}/api/families`)
       .then((res) => res.json())
       .then((json) => {
         if (json.status === "success") setFamilies(json.data);
@@ -595,7 +596,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
   useEffect(() => {
     if (selectedTitulo) {
       setTituloLoading(true);
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/catalog/curriculum/${selectedTitulo}`)
+      fetch(`${getApiBase()}/api/catalog/curriculum/${selectedTitulo}`)
         .then(res => res.json())
         .then(json => {
           if (json.status === 'success') setTitulo(json.data);
@@ -818,7 +819,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
   const [expandedRAs, setExpandedRAs] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/families`)
+    fetch(`${getApiBase()}/api/families`)
       .then((res) => res.json())
       .then((json) => {
         if (json.status === "success") setFamilies(json.data);
@@ -853,7 +854,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
   useEffect(() => {
     if (selectedTitulo) {
       setTituloLoading(true);
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/catalog/curriculum/${selectedTitulo}`)
+      fetch(`${getApiBase()}/api/catalog/curriculum/${selectedTitulo}`)
         .then(res => res.json())
         .then(json => {
           if (json.status === 'success') setTitulo(json.data);

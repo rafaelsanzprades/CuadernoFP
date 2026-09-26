@@ -19,6 +19,7 @@ import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { getApiBase } from "@/services/apiBase";
 
 export default function MetodologiaConfigPage() {
   const { t } = useTranslation();
@@ -27,7 +28,7 @@ export default function MetodologiaConfigPage() {
   const [activeTab, setActiveTab] = useState("metodologia");
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeModuleId}`)
+    fetch(`${getApiBase()}/api/module/${activeModuleId}`)
       .then(res => res.json())
       .then(json => {
         if (json.status === "success") {

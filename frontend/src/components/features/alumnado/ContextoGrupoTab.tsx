@@ -6,6 +6,7 @@ import { Users, Activity, BarChart2, Sparkles } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import { getApiBase } from "@/services/apiBase";
 
 const RASGOS_GRUPO = [
   { id: "GRUPO-HETEROG", label: "Grupo heterogéneo en edad y procedencia" },
@@ -84,7 +85,7 @@ export function ContextoGrupoTab() {
           : "Sin rasgos característicos marcados por el profesor.",
       ].join("\n");
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/ai/chat`, {
+      const res = await fetch(`${getApiBase()}/api/ai/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: [{ role: "user", parts: prompt }] }),

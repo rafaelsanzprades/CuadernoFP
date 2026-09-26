@@ -21,6 +21,7 @@ import { JegModeloTab } from "@/components/features/instrumentos/JegModeloTab";
 import { GestionRubricasTab } from "@/components/features/instrumentos/GestionRubricasTab";
 import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
 import { sincronizarIndicadorAuto } from "@/utils/calificaciones";
+import { getApiBase } from "@/services/apiBase";
 
 const normalizeTipo = (t: string) => {
   if (!t) return "Exámenes teóricos";
@@ -175,7 +176,7 @@ export default function InstrumentosPage() {
       setLoading(true);
       try {
         if (activeModuleId && !moduleData) {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeModuleId}`);
+          const res = await fetch(`${getApiBase()}/api/module/${activeModuleId}`);
           const data = await res.json();
           if (data.status === "success") setModuleData(data.data);
         }

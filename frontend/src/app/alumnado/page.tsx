@@ -25,6 +25,7 @@ import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { GRUPOS_EVALUACION_DEFECTO } from "@/utils/calificaciones";
 
 import Link from "next/link";
+import { getApiBase } from "@/services/apiBase";
 
 // Fechas en las que el alumnado cumple 16/18 años, a partir de Nacimiento
 // (DD/MM/AAAA) — dato ya existente en la matrícula, no se modifica nada.
@@ -78,7 +79,7 @@ export default function AlumnadoPage() {
       setLoading(true);
       try {
         if (activeCursoId && !cursoData) {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeCursoId}`);
+          const res = await fetch(`${getApiBase()}/api/module/${activeCursoId}`);
           const data = await res.json();
           if (data.status === "success") setCursoData(data.data);
         }

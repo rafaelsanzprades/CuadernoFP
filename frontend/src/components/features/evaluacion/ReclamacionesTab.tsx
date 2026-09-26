@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { enrichInfoModulo } from "@/services/catalogCache";
+import { getApiBase } from "@/services/apiBase";
 
 const REFERENCIAS_FIJAS = [
   { id: "Nota_Final_FO", label: "Nota final (evaluación ordinaria)" },
@@ -73,7 +74,7 @@ export function ReclamacionesTab() {
   const handleGenerarJustificante = async (reclamacion: any) => {
     setGenerando(reclamacion.id);
     try {
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/pdf?type=reclamacion_notas&al_id=${reclamacion.alumno_id}&item_id=${reclamacion.id}&file_format=docx`;
+      const url = `${getApiBase()}/api/pdf?type=reclamacion_notas&al_id=${reclamacion.alumno_id}&item_id=${reclamacion.id}&file_format=docx`;
       const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

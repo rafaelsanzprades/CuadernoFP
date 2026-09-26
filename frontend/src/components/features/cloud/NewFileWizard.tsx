@@ -6,6 +6,7 @@ import { fileManager } from "@/services/fileManager";
 import { useAppStore } from "@/store/useAppStore";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import { getApiBase } from "@/services/apiBase";
 
 interface ModuleOption {
   code: string;
@@ -50,7 +51,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
 
   useEffect(() => {
     if (!isOpen) return;
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/families`)
+    fetch(`${getApiBase()}/api/families`)
       .then(r => r.json())
       .then(json => { if (json.status === "success") setFamilies(json.data); });
   }, [isOpen]);
@@ -64,7 +65,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
       return;
     }
     setModulesLoading(true);
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/catalog/curriculum/${viewDegree.code}`)
+    fetch(`${getApiBase()}/api/catalog/curriculum/${viewDegree.code}`)
       .then(r => r.json())
       .then(json => {
         const modulos = json.status === "success" ? json.data.modulos : [];

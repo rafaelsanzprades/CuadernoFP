@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/Button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import { getApiBase } from "@/services/apiBase";
 
 export function DetalleAlumnadoTab() {
   const { activeModuleId, moduleData, cursoData, updateCursoData } = useAppStore();
@@ -156,7 +157,7 @@ export function DetalleAlumnadoTab() {
   const handleGenerarInformeRefuerzo = async (al_id: string) => {
     setGenerandoInforme(al_id);
     try {
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/pdf?type=refuerzo_alumno&al_id=${al_id}&file_format=docx`;
+      const url = `${getApiBase()}/api/pdf?type=refuerzo_alumno&al_id=${al_id}&file_format=docx`;
       const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -4,6 +4,7 @@ import { useDropzone } from "react-dropzone";
 import { Bot, FileText, UploadCloud, X, Loader2, AlertCircle, Sparkles } from "lucide-react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import { getApiBase } from "@/services/apiBase";
 
 interface AIWizardModalProps {
   isOpen: boolean;
@@ -43,7 +44,7 @@ export function AIWizardModal({ isOpen, onClose, onSuccess }: AIWizardModalProps
       formData.append("provider", provider);
 
       // Llama a tu backend pasándole el texto extraído y el modelo
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/ai/parse-curriculum`, {
+      const res = await fetch(`${getApiBase()}/api/ai/parse-curriculum`, {
         method: "POST",
         body: formData,
       });

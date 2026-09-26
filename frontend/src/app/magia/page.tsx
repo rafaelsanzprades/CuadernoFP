@@ -24,6 +24,7 @@ import { ComparativaPdTab } from "@/components/features/magia/ComparativaPdTab";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { loadCatalogForModule, enrichInfoModulo } from "@/services/catalogCache";
+import { getApiBase } from "@/services/apiBase";
 
 type DownloadOpts = {
   al_id?: string;
@@ -105,12 +106,12 @@ export default function MagiaPage() {
       setLoadingData(true);
       try {
         if (activeModuleId && !moduleData) {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeModuleId}`);
+          const res = await fetch(`${getApiBase()}/api/module/${activeModuleId}`);
           const data = await res.json();
           if (data.status === "success") setModuleData(data.data);
         }
         if (activeCursoId && !cursoData) {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeCursoId}`);
+          const res = await fetch(`${getApiBase()}/api/module/${activeCursoId}`);
           const data = await res.json();
           if (data.status === "success") setCursoData(data.data);
         }
@@ -141,7 +142,7 @@ export default function MagiaPage() {
     const { al_id, item_id, fechaCorte, extra } = opts || {};
     try {
       setDownloadingStr(`${type}_${fileFormat}`);
-      let url = `${process.env.NEXT_PUBLIC_API_URL}/api/pdf?type=${type}&file_format=${fileFormat}`;
+      let url = `${getApiBase()}/api/pdf?type=${type}&file_format=${fileFormat}`;
       if (al_id) url += `&al_id=${al_id}`;
       if (item_id) url += `&item_id=${item_id}`;
 

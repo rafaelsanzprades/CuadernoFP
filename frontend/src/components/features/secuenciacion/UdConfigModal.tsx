@@ -6,6 +6,7 @@ import { useAppStore } from "@/store/useAppStore";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { enrichInfoModulo } from "@/services/catalogCache";
+import { getApiBase } from "@/services/apiBase";
 
 interface UdConfigModalProps {
   ud: any;
@@ -32,7 +33,7 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
   const handleExport = async () => {
     try {
       setIsExporting(true);
-      let url = `${process.env.NEXT_PUBLIC_API_URL}/api/pdf?type=ud&item_id=${ud.id_ud}`;
+      let url = `${getApiBase()}/api/pdf?type=ud&item_id=${ud.id_ud}`;
       
       const response = await fetch(url, {
         method: 'POST',
