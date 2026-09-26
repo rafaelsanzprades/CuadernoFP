@@ -58,7 +58,13 @@ function SectionHeading({
   return (
     <h2
       id={id}
-      className="text-subheading font-bold text-foreground border-b border-[var(--glass-border)] pb-2 scroll-mt-24"
+      // scroll-mt cubre TODO lo que queda fijo encima al saltar por ancla:
+      // el banner "En obras" (~66px, sticky top-0 de toda la app) + el
+      // StickyPageHeader de esta página, que ahora es más alto desde que
+      // lleva también el índice de secciones (~211px con él). Medido en
+      // vivo con getBoundingClientRect() tras el cambio -- si el índice o
+      // el banner cambian de tamaño, este valor puede quedarse corto.
+      className="text-subheading font-bold text-foreground border-b border-[var(--glass-border)] pb-2 scroll-mt-[300px]"
     >
       {number}. {children}
     </h2>
