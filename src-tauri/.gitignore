@@ -7,3 +7,9 @@
 # binario generado, no fuente; además supera con creces el límite de 100MB
 # de GitHub. Se reconstruye con PyInstaller antes de cada `tauri build`.
 /binaries/
+
+# Clave privada de firma de actualizaciones (Fase 9 del plan Tauri) -- NUNCA
+# al repo. Genera la tuya con `npx @tauri-apps/cli signer generate` y
+# guárdala fuera del proyecto (gestor de contraseñas, etc.) además de aquí.
+/updater-signing-key.pem
+/updater-signing-key.pem.pub

@@ -40,6 +40,8 @@
         { "url": "https://login.microsoftonline.com/*" },
         { "url": "https://graph.microsoft.com/*" }
       ]
-    }
+    },
+    "updater:default",
+    "process:allow-restart"
   ]
 }
