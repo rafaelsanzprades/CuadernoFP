@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { AlertTriangle, Download, DownloadCloud, File, FileSpreadsheet, FileText, Folder, FolderOpen, Search, X } from "lucide-react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import { getApiBase } from "@/services/apiBase";
 
 type DocumentItem = {
   name: string;
@@ -25,7 +26,7 @@ export function TabDocumentos() {
   const fetchDocuments = (path: string) => {
     setLoadingDocs(true);
     setError(null);
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/list?path=${encodeURIComponent(path)}`)
+    fetch(`${getApiBase()}/api/documents/list?path=${encodeURIComponent(path)}`)
       .then((res) => {
         if (!res.ok) throw new Error("Error al acceder a los documentos");
         return res.json();
@@ -57,13 +58,13 @@ export function TabDocumentos() {
     const previewable = ['pdf', 'txt', 'png', 'jpg', 'jpeg', 'docx'].includes(ext);
 
     if (!previewable) {
-      window.open(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/download?file_path=${encodeURIComponent(filePath)}`, "_blank");
+      window.open(`${getApiBase()}/api/documents/download?file_path=${encodeURIComponent(filePath)}`, "_blank");
       return;
     }
 
     try {
       setDownloadingStr(filePath);
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/documents/preview?file_path=${encodeURIComponent(filePath)}`;
+      const url = `${getApiBase()}/api/documents/preview?file_path=${encodeURIComponent(filePath)}`;
       const response = await fetch(url);
       if (!response.ok) throw new Error("Error fetching document");
 

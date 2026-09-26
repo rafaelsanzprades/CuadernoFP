@@ -3,6 +3,7 @@ import { Landmark, Map, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { AccordionBlock } from '@/components/ui/AccordionBlock';
 import { useTranslation } from 'react-i18next';
+import { getApiBase } from "@/services/apiBase";
 
 type DocumentItem = {
   name: string;
@@ -147,7 +148,7 @@ function CommunityFiles({ path, emptyMessage, onDownloadDoc, formatSize, getFile
 
   useEffect(() => {
     setLoading(true);
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/list?path=${encodeURIComponent(path)}`)
+    fetch(`${getApiBase()}/api/documents/list?path=${encodeURIComponent(path)}`)
       .then(res => res.json())
       .then(json => {
         if (json.status === 'success') {

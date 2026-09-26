@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/Input";
 import { Family } from "@/types";
 import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
 import { useTranslation } from "react-i18next";
+import { getApiBase } from "@/services/apiBase";
 
 // Semilla por defecto de "% Instrumentos de evaluación" por trimestre — se
 // usa solo mientras el módulo no tenga ninguna fila guardada todavía.
@@ -55,7 +56,7 @@ export function DatosTab() {
   }, [activeModuleId]);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/families`)
+    fetch(`${getApiBase()}/api/families`)
       .then(r => r.json())
       .then(json => { if (json.status === "success") setFamilies(json.data); });
   }, []);
@@ -99,7 +100,7 @@ export function DatosTab() {
       setDegreeModules([]);
       return;
     }
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/catalog/curriculum/${viewDegree.code}`)
+    fetch(`${getApiBase()}/api/catalog/curriculum/${viewDegree.code}`)
       .then(r => r.json())
       .then(json => { setDegreeModules(json.status === "success" ? json.data.modulos : []); })
       .catch(() => setDegreeModules([]));

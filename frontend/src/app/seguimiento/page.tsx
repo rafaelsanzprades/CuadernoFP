@@ -18,6 +18,7 @@ import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { getApiBase } from "@/services/apiBase";
 
 const DIAS_SEMANA_LIST = ["Lun", "Mar", "Mié", "Jue", "Vie"];
 
@@ -112,12 +113,12 @@ export default function SeguimientoPage() {
       setLoading(true);
       try {
         if (activeModuleId && !moduleData) {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeModuleId}`);
+          const res = await fetch(`${getApiBase()}/api/module/${activeModuleId}`);
           const data = await res.json();
           if (data.status === "success") setModuleData(data.data);
         }
         if (activeCursoId && !cursoData) {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeCursoId}`);
+          const res = await fetch(`${getApiBase()}/api/module/${activeCursoId}`);
           const data = await res.json();
           if (data.status === "success") setCursoData(data.data);
         }

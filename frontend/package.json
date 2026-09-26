@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build",
+    "build:tauri": "node scripts/build-tauri.mjs",
     "start": "next start",
     "lint": "next lint",
     "test:e2e": "npx playwright test",

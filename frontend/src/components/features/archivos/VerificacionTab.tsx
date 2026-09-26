@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { useTranslation } from "react-i18next";
 import type { Family } from "@/types";
 import { NuevoCursoWizard } from "@/components/features/dashboard/NuevoCursoWizard";
+import { getApiBase } from "@/services/apiBase";
 
 type CheckStatus = "ok" | "warning" | "empty";
 
@@ -94,7 +95,7 @@ export function VerificacionTab() {
   // ── Catálogo oficial (fijo) + resolución de familia/título del módulo activo ──
   const [catalogFamilies, setCatalogFamilies] = useState<Family[]>([]);
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/families`)
+    fetch(`${getApiBase()}/api/families`)
       .then(r => r.json())
       .then(json => { if (json.status === "success") setCatalogFamilies(json.data); })
       .catch(() => {});

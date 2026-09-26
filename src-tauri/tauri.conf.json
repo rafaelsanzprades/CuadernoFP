@@ -6,7 +6,7 @@
   "build": {
     "frontendDist": "../frontend/out",
     "devUrl": "http://localhost:3000",
-    "beforeBuildCommand": "npm --prefix ../frontend run build"
+    "beforeBuildCommand": "npm --prefix ../frontend run build:tauri"
   },
   "app": {
     "windows": [

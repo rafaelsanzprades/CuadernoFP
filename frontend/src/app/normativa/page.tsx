@@ -20,6 +20,7 @@ import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
+import { getApiBase } from "@/services/apiBase";
 
 type DocumentItem = {
   name: string;
@@ -88,7 +89,7 @@ export default function DocumentosPage() {
     setLoadingDocs(true);
     setError(null);
     const backendPath = path === 'legislacion' ? 'Normativa' : path === 'bibliografia' ? 'Bibliografia' : path === 'autonomias' ? 'CCAA' : path;
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/list?path=${encodeURIComponent(backendPath)}`, { signal })
+    fetch(`${getApiBase()}/api/documents/list?path=${encodeURIComponent(backendPath)}`, { signal })
       .then((res) => {
         if (!res.ok) throw new Error("Error al acceder a los documentos");
         return res.json();
@@ -137,12 +138,12 @@ export default function DocumentosPage() {
       }
       try {
         if (activeModuleId && !moduleData) {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeModuleId}`);
+          const res = await fetch(`${getApiBase()}/api/module/${activeModuleId}`);
           const data = await res.json();
           if (data.status === "success") setModuleData(data.data);
         }
         if (activeCursoId && !cursoData) {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeCursoId}`);
+          const res = await fetch(`${getApiBase()}/api/module/${activeCursoId}`);
           const data = await res.json();
           if (data.status === "success") setCursoData(data.data);
         }
@@ -176,13 +177,13 @@ export default function DocumentosPage() {
     const previewable = ['pdf', 'txt', 'png', 'jpg', 'jpeg', 'docx'].includes(ext);
 
     if (!previewable) {
-      window.open(`${process.env.NEXT_PUBLIC_API_URL}/api/documents/download?file_path=${encodeURIComponent(filePath)}`, "_blank");
+      window.open(`${getApiBase()}/api/documents/download?file_path=${encodeURIComponent(filePath)}`, "_blank");
       return;
     }
 
     try {
       setDownloadingStr(filePath);
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/documents/preview?file_path=${encodeURIComponent(filePath)}`;
+      const url = `${getApiBase()}/api/documents/preview?file_path=${encodeURIComponent(filePath)}`;
       const response = await fetch(url);
       if (!response.ok) throw new Error("Error fetching document");
 
@@ -203,7 +204,7 @@ export default function DocumentosPage() {
   const handleDownloadPdf = async (type: string, al_id?: string) => {
     try {
       setDownloadingStr(type);
-      let url = `${process.env.NEXT_PUBLIC_API_URL}/api/pdf?type=${type}&pd_id=${activeModuleId}&curso_id=${activeCursoId}`;
+      let url = `${getApiBase()}/api/pdf?type=${type}&pd_id=${activeModuleId}&curso_id=${activeCursoId}`;
       if (al_id) url += `&al_id=${al_id}`;
 
       const response = await fetch(url);

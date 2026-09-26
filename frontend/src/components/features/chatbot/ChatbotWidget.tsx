@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { MessageSquare, X, Send, Bot, User, Loader2, Paperclip, FileText } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
+import { getApiBase } from "@/services/apiBase";
 
 type ChatMessage = {
   id: string;
@@ -80,7 +81,7 @@ export const ChatbotWidget = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/ai/chat`, {
+      const response = await fetch(`${getApiBase()}/api/ai/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

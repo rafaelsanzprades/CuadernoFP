@@ -27,6 +27,7 @@ import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
+import { getApiBase } from "@/services/apiBase";
 
 export default function ProgresoPage() {
   const {
@@ -55,13 +56,13 @@ export default function ProgresoPage() {
       setLoading(true);
       try {
         if (activeModuleId && !moduleData) {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeModuleId}`);
+          const res = await fetch(`${getApiBase()}/api/module/${activeModuleId}`);
           const data = await res.json();
           if (data.status === "success") setModuleData(data.data);
           loadCatalogForModule(activeModuleId);
         }
         if (activeCursoId && !cursoData) {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeCursoId}`);
+          const res = await fetch(`${getApiBase()}/api/module/${activeCursoId}`);
           const data = await res.json();
           if (data.status === "success") setCursoData(data.data);
         }

@@ -17,6 +17,7 @@ import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { getAutoMilestones } from "@/utils/calendarMilestones";
 import Link from "next/link";
+import { getApiBase } from "@/services/apiBase";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -294,13 +295,13 @@ export default function CalendarioPage() {
 
   useEffect(() => {
     if (activeCursoId && !cursoData) {
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeCursoId}`)
+      fetch(`${getApiBase()}/api/module/${activeCursoId}`)
         .then(r => r.json())
         .then(json => { if (json.status === "success") setCursoData(json.data); })
         .catch(console.error);
     }
     if (activeModuleId && !moduleData) {
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/module/${activeModuleId}`)
+      fetch(`${getApiBase()}/api/module/${activeModuleId}`)
         .then(r => r.json())
         .then(json => { if (json.status === "success") setModuleData(json.data); })
         .catch(console.error);
