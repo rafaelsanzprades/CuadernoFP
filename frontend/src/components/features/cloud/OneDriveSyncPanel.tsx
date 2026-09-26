@@ -54,7 +54,7 @@ export function OneDriveSyncPanel() {
       return;
     }
 
-    const token = await signInOneDrive();
+    const token = await signInOneDrive(oneDriveClientId);
 
     if (token) {
       setOneDriveUserEmail(t('campos.cloud.usuarioMicrosoft', {defaultValue: 'Usuario de Microsoft'}));
