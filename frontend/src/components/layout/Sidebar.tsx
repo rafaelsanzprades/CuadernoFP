@@ -135,7 +135,7 @@ export default function Sidebar() {
   // módulo, no estado reactivo (mismo patrón que curriculo/page.tsx).
   const [catalogLoaded, setCatalogLoaded] = useState(0);
   useEffect(() => {
-    if (activeModuleId) loadCatalogForModule(activeModuleId).then(() => setCatalogLoaded(Date.now()));
+    if (activeModuleId) loadCatalogForModule(activeModuleId, storeState.moduleData?.info_modulo?.titulo_codigo).then(() => setCatalogLoaded(Date.now()));
   }, [activeModuleId]);
 
   const handleScroll = (e: React.UIEvent<HTMLElement>) => {

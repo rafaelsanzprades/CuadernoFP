@@ -59,7 +59,7 @@ export default function ProgresoPage() {
           const res = await fetch(`${getApiBase()}/api/module/${activeModuleId}`);
           const data = await res.json();
           if (data.status === "success") setModuleData(data.data);
-          loadCatalogForModule(activeModuleId);
+          loadCatalogForModule(activeModuleId, data.data?.info_modulo?.titulo_codigo);
         }
         if (activeCursoId && !cursoData) {
           const res = await fetch(`${getApiBase()}/api/module/${activeCursoId}`);

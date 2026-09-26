@@ -231,9 +231,25 @@ def get_curriculum(degree_code: str, region_id: int = Query(1), db: Session = De
 
 
 @router.get("/catalog/module/{module_code}")
-def get_module_curriculum(module_code: str, db: Session = Depends(get_db)):
+def get_module_curriculum(module_code: str, degree_code: str | None = Query(None), db: Session = Depends(get_db)):
     try:
-        module = db.query(Module).filter(Module.code == module_code).first()
+        # Un mismo código de módulo puede existir en varios títulos distintos
+        # con contenido distinto (p.ej. '0237' es a la vez un módulo de
+        # ELE203 y de ELE202) -- si el llamador sabe a qué título pertenece
+        # (info_modulo.titulo_codigo, guardado al crear la programación
+        # desde el catálogo), se usa para desambiguar. Si no lo sabe, o el
+        # título indicado no tiene ese módulo, se cae al primero que
+        # encuentre -- mismo comportamiento que había antes de este cambio.
+        module = None
+        if degree_code:
+            module = (
+                db.query(Module)
+                .join(Degree, Module.degree_id == Degree.id)
+                .filter(Module.code == module_code, Degree.code == degree_code)
+                .first()
+            )
+        if not module:
+            module = db.query(Module).filter(Module.code == module_code).first()
         if not module:
             raise HTTPException(status_code=404, detail="Module not found")
             

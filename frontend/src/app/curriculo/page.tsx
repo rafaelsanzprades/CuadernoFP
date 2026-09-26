@@ -71,7 +71,7 @@ export default function MatricesPage() {
   // Load catalog descriptions when module changes (for fallback resolution)
   useEffect(() => {
     if (activeModuleId) {
-      loadCatalogForModule(activeModuleId).then(() => setCatalogLoaded(Date.now()));
+      loadCatalogForModule(activeModuleId, moduleData?.info_modulo?.titulo_codigo).then(() => setCatalogLoaded(Date.now()));
     }
   }, [activeModuleId]);
 

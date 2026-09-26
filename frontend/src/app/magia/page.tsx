@@ -93,7 +93,7 @@ export default function MagiaPage() {
   const [fechaFinal, setFechaFinal] = useState("");
 
   useEffect(() => {
-    if (activeModuleId) loadCatalogForModule(activeModuleId);
+    if (activeModuleId) loadCatalogForModule(activeModuleId, moduleData?.info_modulo?.titulo_codigo);
   }, [activeModuleId]);
 
   const buildEnrichedModuleData = () => {
