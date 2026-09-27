@@ -10,7 +10,6 @@ import { Badge } from "@/components/ui/Badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
-import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import {
   type CurriculumTitulo,
   type CurriculumModulo,
@@ -152,10 +151,15 @@ function CiclosContent() {
                 </TabsList>
               </Tabs>
             </div>
+
+            {/* Descripción de la pestaña activa -- texto plano, sin cajón,
+                mismo patrón que Inicio/Ayuda/MagIA/Normativa/Legal */}
+            <p className="text-body text-muted mt-3">
+              {TAB_DESCRIPTIONS[activeTab] || 'Catálogo Nacional Oficial.'}
+            </p>
           </StickyPageHeader>
 
           <MotionWrapper className="w-full space-y-6 px-8 pt-4 pb-12">
-            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Catálogo Nacional Oficial.'} />
 
             {activeTab === "familias" && <TabFamilias onSelectTitulo={handleSelectFamiliaToTitulo} />}
             {activeTab === "titulos" && <TabTitulo onSelectTitulo={handleSelectTitulo} globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}

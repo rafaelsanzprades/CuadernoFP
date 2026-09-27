@@ -12,7 +12,6 @@ import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
-import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { AccordionBlock } from "@/components/ui/AccordionBlock";
 import Link from "next/link";
 import { Settings2 } from "lucide-react";
@@ -467,10 +466,15 @@ export default function InstrumentosPage() {
                 </TabsList>
               </Tabs>
             </div>
+
+            {/* Descripción de la pestaña activa -- texto plano, sin cajón,
+                mismo patrón que Inicio/Ayuda/MagIA/Normativa/Legal */}
+            <p className="text-body text-muted mt-3">
+              {TAB_DESCRIPTIONS[activeTab] || t('campos.comun.gestionDe', {activeTab, defaultValue: 'Gestión de {{activeTab}}'})}
+            </p>
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-4 px-8 pt-4 pb-12">
-          <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || t('campos.comun.gestionDe', {activeTab, defaultValue: 'Gestión de {{activeTab}}'})} />
 
           {activeTab === "resumen" && (
             <>

@@ -1,5 +1,5 @@
 "use client";
-import { Search, AlertTriangle, ChevronRight, ChevronDown, Cloud, Hourglass, Moon, Redo2, Save, Shield, Sun, Undo2, XCircle, CalendarDays, FolderOpen, Menu, Send } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useAppStore, useTemporalStore } from "@/store/useAppStore";
 import Link from "next/link";
@@ -9,17 +9,11 @@ import toast from "react-hot-toast";
 import { navGroups } from "@/config/navigation";
 import { getAcronym } from "@/utils/catalogFormat";
 import { showRichToast } from "@/utils/toast";
-import { motion } from "framer-motion";
-import { fileManager } from "@/services/fileManager";
-import { searchGlobal, type SearchResult } from "@/services/searchService";
-import { HeaderSettings } from "@/components/layout/HeaderSettings";
 import { useTranslation } from "react-i18next";
 
 
 export default function Header({ title, breadcrumbSuffix }: { title?: React.ReactNode; breadcrumbSuffix?: React.ReactNode }) {
-  const { activeModuleId, activeCursoId, moduleData, cursoData, pdFileSource, cursoFileSource, saveModuleData, saveCursoData, isSidebarOpen, toggleSidebar, dataSource, workspaceHandle, syncStatus } = useAppStore();
-  const [localGroups, setLocalGroups] = useState<string[]>([]);
-  const [activeLocalGroup, setActiveLocalGroup] = useState<string>("");
+  const { activeModuleId, activeCursoId, moduleData, cursoData, pdFileSource, cursoFileSource, saveModuleData, saveCursoData, toggleSidebar } = useAppStore();
   const [isSaving, setIsSaving] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -36,27 +30,6 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
   const redo = useTemporalStore((state) => state.redo);
 
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  const [cloudSynced, setCloudSynced] = useState(false);
-  
-  // Estado para búsqueda
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-  const [showResults, setShowResults] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const updateStates = () => {
-      setCloudSynced(fileManager.isGoogleConnected() || fileManager.isOneDriveConnected());
-    };
-    updateStates();
-  }, []);
-
-  useEffect(() => {
-    if (workspaceHandle && dataSource === 'local') {
-      fileManager.scanGroupsInWorkspace(workspaceHandle).then(groups => setLocalGroups(groups));
-    }
-  }, [workspaceHandle, dataSource]);
 
   let currentItem = "";
   if (pathname === '/inicio') {
@@ -166,13 +139,6 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
         }
       } else if ((e.ctrlKey || e.metaKey) && e.key === 'y') {
         if (futureStatesLength > 0) redo();
-      } else if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
-        e.preventDefault();
-        // Focus search input
-        const searchInput = document.getElementById('global-search-input') as HTMLInputElement;
-        if (searchInput) {
-          searchInput.focus();
-        }
       } else if ((e.ctrlKey || e.metaKey) && e.key === '/') {
         e.preventDefault();
         // Navigate to help
@@ -256,117 +222,19 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
   }
 
   return (
-    <div className="w-full flex flex-col z-40 sticky top-0 bg-background/95 backdrop-blur-xl border-b border-[var(--glass-border)] pb-2 shadow-md">
-      {/* Fila 2: Buscar y Acciones */}
-      <div className="w-full px-4 md:px-6 py-2 bg-white/[0.02] border-t border-[var(--glass-border)] flex items-center justify-between gap-2 text-body text-muted tracking-wide relative">
-        
-          {mounted && (
-            <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-3">
-              <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-orange-500/10 border border-orange-500/30 rounded-lg text-orange-500 shrink-0 shadow-sm pointer-events-none">
-                <AlertTriangle className="w-4 h-4 shrink-0" strokeWidth={2.5} />
-                <span className="text-caption font-bold tracking-widest">{t('sidebar.en_obras')}</span>
-              </div>
-              
-              {dataSource === 'local' && (
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-foreground/5 text-caption font-medium text-muted/80 whitespace-nowrap border border-[var(--glass-border)] shadow-sm pointer-events-none">
-                  {syncStatus === 'saving' && <><Hourglass className="w-3.5 h-3.5 text-warning animate-spin" /><span className="text-warning">{t('header.guardando', { defaultValue: 'Guardando...' })}</span></>}
-                  {syncStatus === 'saved' && <><Save className="w-3.5 h-3.5 text-success" /><span className="text-success">{t('header.guardado', { defaultValue: 'Guardado' })}</span></>}
-                  {syncStatus === 'error' && <><AlertTriangle className="w-3.5 h-3.5 text-danger" /><span className="text-danger">{t('header.error', { defaultValue: 'Error' })}</span></>}
-                  {syncStatus === 'idle' && <><Cloud className="w-3.5 h-3.5 text-muted/50" /><span>{t('header.sincronizado', { defaultValue: 'Sincronizado' })}</span></>}
-                </div>
-              )}
-            </div>
-          )}
-          
-          {/* Búsqueda a la izquierda y menú móvil */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={toggleSidebar}
-            className="block lg:hidden p-2 rounded-md text-foreground hover:bg-foreground/10 transition-colors"
-            aria-label={t('aria.header.menuPrincipal', {defaultValue: 'Menú principal'})}
-          >
-            <Menu className="w-6 h-6" />
-          </button>
-          <a
-            href="https://t.me/cuadernofp"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-1.5 md:p-2 rounded-md text-[#229ED9] hover:bg-[#229ED9]/10 transition-colors hidden sm:block"
-            title={t('tooltips.header.uneteTelegram', {defaultValue: 'Únete a nuestro grupo de Telegram'})}
-          >
-            <Send className="w-4 h-4 md:w-5 md:h-5" />
-          </a>
-          <div className="relative w-36 sm:w-48 md:w-64 shrink-0">
-            <input
-              id="global-search-input"
-              type="text"
-              placeholder={t('header.buscar', { defaultValue: 'Buscar...' }) as string}
-              aria-label={t('header.buscar', { defaultValue: 'Buscar...' }) as string}
-              role="searchbox"
-              value={searchQuery}
-              onChange={(e) => {
-                const query = e.target.value;
-                setSearchQuery(query);
-                const results = searchGlobal(query);
-                setSearchResults(results);
-                setShowResults(results.length > 0);
-              }}
-              onFocus={() => setShowResults(searchResults.length > 0)}
-              onBlur={() => setTimeout(() => setShowResults(false), 200)}
-              className="bg-foreground/5 border border-[var(--glass-border)] rounded-lg px-3 py-1.5 text-caption text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-accent/50 w-full"
-            />
-            {showResults && searchResults.length > 0 && (
-              <div className="absolute top-full left-0 mt-1 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto w-64">
-                {searchResults.map((result, index) => (
-                  <div
-                    key={result.href || index}
-                    className="px-3 py-2 hover:bg-foreground/10 cursor-pointer text-body"
-                    onClick={() => {
-                      if (result.href) {
-                        router.push(result.href);
-                        setSearchQuery("");
-                        setShowResults(false);
-                      }
-                    }}
-                  >
-                    <div className="font-medium text-[var(--text-primary)]">{result.title}</div>
-                    {result.subtitle && (
-                      <div className="text-caption text-[var(--text-muted)]">{result.subtitle}</div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-        
-        {/* Acciones a la derecha */}
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-0.5 bg-foreground/5 p-1 rounded-lg">
-            <button
-              onClick={() => undo()}
-              disabled={pastStatesLength === 0}
-              className="p-1.5 rounded text-muted hover:text-foreground hover:bg-foreground/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-              title={`${t('header.deshacer', { defaultValue: 'Deshacer' })} (Ctrl+Z)`}
-            >
-              <Undo2 className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => redo()}
-              disabled={futureStatesLength === 0}
-              className="p-1.5 rounded text-muted hover:text-foreground hover:bg-foreground/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-              title={`${t('header.rehacer', { defaultValue: 'Rehacer' })} (Ctrl+Y)`}
-            >
-              <Redo2 className="w-4 h-4" />
-            </button>
-          </div>
-
-          {mounted && (
-            <div className="flex items-center bg-foreground/5 rounded-lg p-0.5">
-              <HeaderSettings />
-            </div>
-          )}
-        </div>
+    <>
+      {/* Barra solo-móvil: el resto de la fila (Telegram, deshacer/rehacer,
+          configuración, En obras) vive ahora en la zona fija del Sidebar --
+          en escritorio no queda ninguna barra aquí, para dar más espacio a
+          la página. */}
+      <div className="lg:hidden w-full flex items-center z-40 sticky top-0 bg-background/95 backdrop-blur-xl border-b border-[var(--glass-border)]">
+        <button
+          onClick={toggleSidebar}
+          className="p-2 m-1 rounded-md text-foreground hover:bg-foreground/10 transition-colors"
+          aria-label={t('aria.header.menuPrincipal', {defaultValue: 'Menú principal'})}
+        >
+          <Menu className="w-6 h-6" />
+        </button>
       </div>
 
       {title && (
@@ -378,6 +246,6 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
           </div>
         </header>
       )}
-    </div>
+    </>
   );
 }

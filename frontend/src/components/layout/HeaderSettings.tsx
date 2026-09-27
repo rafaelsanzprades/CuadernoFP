@@ -19,7 +19,7 @@ const LANGUAGES = [
 
 import { useAccessibility } from "@/hooks/useAccessibility";
 
-export function HeaderSettings() {
+export function HeaderSettings({ align = "right" }: { align?: "left" | "right" }) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -75,7 +75,7 @@ export function HeaderSettings() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 top-full mt-2 w-80 p-5 z-50 rounded-xl shadow-2xl border border-white/10"
+            className={`absolute ${align === "left" ? "left-0" : "right-0"} top-full mt-2 w-80 p-5 z-50 rounded-xl shadow-2xl border border-white/10`}
             style={{ backgroundColor: "rgba(15, 23, 42, 0.98)", color: "#f8fafc" }}
           >
             <div className="space-y-6">

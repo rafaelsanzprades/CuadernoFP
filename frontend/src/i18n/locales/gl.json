@@ -2674,7 +2674,7 @@
     "ayuda": {
       "faq": {
         "grupo1": {
-          "titulo": "1. Conceptos previos e seguridade",
+          "titulo": "1. Conceptos previos",
           "q1": "Que é a arquitectura Híbrida (Local-First + Cloud)?",
           "a1": "Utilízase unha arquitectura moderna. Os teus datos de traballo (alumnado, notas) procésanse localmente no teu navegador, garantindo total privacidade e velocidade. As operacións pesadas (xeración de informes PDF ou conexión con Intelixencia Artificial) apóianse de forma segura nun servidor central.",
           "q2": "Onde se gardan os meus datos?",
@@ -2687,7 +2687,7 @@
           "a5": "Si. Para transferir o teu contorno entre o ordenador do instituto e o teu portátil persoal, só tes que 'Exportar' o teu progreso no ordenador A e premer 'Importar' no ordenador B."
         },
         "grupo2": {
-          "titulo": "2. Paso 1: A programación didáctica",
+          "titulo": "2. Programación didáctica",
           "q1": "Teño que introducir a man todos os RA e CE do BOE?",
           "a1": "Non! O sistema conta cun Catálogo oficial que importa automaticamente a normativa legal (Resultados de aprendizaxe e Criterios) do teu módulo. Só tes que escoller o teu Grao e o teu Ciclo Formativo na sección inicial de Catálogo e o sistema fai o resto por ti.",
           "q2": "Que significa que os RA non suman 100% nas verificacións?",
@@ -2702,7 +2702,7 @@
           "a6": "Por cada Criterio de Avaliación (CE) hai dúas cousas distintas: o instrumento de avaliación é a actividade que xera a evidencia (unha proba obxectiva, unha tarefa, unha defensa oral...), e o instrumento de cualificación é o que puntúa esa evidencia (unha rúbrica, unha escala, unha lista de cotexo...). En Instrumentos podes codificar ambos por separado ao configurar cada instrumento."
         },
         "grupo3": {
-          "titulo": "3. Paso 3: Creación do curso e o alumnado",
+          "titulo": "3. Creación do curso",
           "q1": "Podo importar alumnado desde plataformas como Séneca, Rayuela ou un Excel?",
           "a1": "Si. Na sección de 'Alumnado' podes importar un ficheiro CSV (Excel) coa túa lista de clase. Alternativamente, a táboa intelixente permíteche copiar e pegar celas masivamente, igual que se fose unha folla de cálculo.",
           "q2": "Que nivel de seguridade teñen os datos do meu alumnado?",
@@ -2715,7 +2715,7 @@
           "a5": "O panel de prevención temperá permíteche rexistrar chamadas ás familias, partes disciplinarios ou derivacións ao departamento de orientación para alumnado con risco de abandono escolar."
         },
         "grupo4": {
-          "titulo": "4. Paso 5: O día a día e a avaliación",
+          "titulo": "4. O día a día e a avaliación",
           "q1": "Que é o 'Diario de aula'?",
           "a1": "É o teu caderno de bitácora diario. Permíteche anotar o que ocorre en cada sesión real de clase: que UD impartiches, se houbo incidencias ou marcar días 'Sen docencia' (como folgas ou claustros) para que non conten no teu progreso.",
           "q2": "Como se calcula a previsión de 'Planificación mensual'?",
@@ -2735,7 +2735,7 @@
           "a1": "Si. Desde a pestana 'Curso' de MagIA podes xerar boletíns en PDF masivos para toda a clase ou resumos individuais hiperdetallados que xustifican a nota en base a cada Criterio de Avaliación conseguido."
         },
         "grupo7": {
-          "titulo": "7. Soporte técnico",
+          "titulo": "6. Soporte técnico",
           "q1": "Que pasa se as gráficas do meu panel de control non cargan?",
           "a1": "Comproba na barra lateral que activaches o 'Modo Reais' e tes seleccionado o teu Grupo. As gráficas necesitan saber a que alumnado e a que programación apuntan para poder analizar os datos.",
           "q2": "Pódese usar Cuaderno FP no móbil?",
@@ -2767,15 +2767,15 @@
       "cargandoDatosProgreso": "Cargando datos de progreso académico..."
     },
     "inicio": {
-      "metodologiaEspecificaTitulo": "Unha ferramenta construída sobre metodoloxía específica",
+      "metodologiaEspecificaTitulo": "Metodoloxía específica de Formación Profesional",
       "metodologiaEspecificaDesc": "Cuaderno FP segue as referencias bibliográficas actualizadas á nova lei de FP, as orientacións da Inspección Educativa, os principais autores de referencia e as guías oficiais das administracións educativas: os Resultados de Aprendizaxe (RA) son o eixe causal do que se considera debe derivar todo o demais nunha programación didáctica.",
       "pasoIdentificacion": "Identificación",
       "pasoIntroduccionJustificacionNormativa": "Introdución, xustificación e normativa",
       "pasoContextualizacion": "Contextualización",
       "pasoObjetivosCompetencias": "Obxectivos e competencias",
       "pasoCaracterIntermodularDual": "Carácter intermodular e dual",
-      "pasoContenidosCentradosRa": "Contidos centrados en RA",
-      "pasoSituacionesAprendizaje": "Situacións de aprendizaxe",
+      "pasoContenidosCentradosRa": "Contidos teórico-prácticos",
+      "pasoSituacionesAprendizaje": "Resultados de aprendizaxe",
       "pasoMetodologiaInclusion": "Metodoloxía e inclusión",
       "pasoEvaluacion": "Avaliación (aprendizaxe / prácticas / excepcións)",
       "pasoActividadesComplementarias": "Actividades complementarias",

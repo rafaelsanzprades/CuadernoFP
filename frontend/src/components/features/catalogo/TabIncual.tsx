@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card } from "@/components/ui/Card";
 import { Award, BookOpen, ChevronDown, ChevronUp, ExternalLink, MapPin, Loader2, Bookmark } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useTranslation } from "react-i18next";
 
 interface TabIncualProps {
@@ -75,8 +76,19 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
     );
   }
 
+  const CRN_TITULO = t('campos.catalogo.tituloCrn', {defaultValue: 'Centros de Referencia Nacional (CRN)'});
+  const ECP_TITULO = t('campos.catalogo.tituloEcp', {defaultValue: 'Estándares de Competencia Profesional (ECP)'});
+
   return (
     <div className="space-y-6 animate-in fade-in duration-300">
+      {/* El índice de este bloque vive en la cabecera fija de la página
+          (normativa/page.tsx), no aquí -- mismo patrón que /legal. */}
+
+      {/* Bloque 1 -- título al inicio, cajón global que engloba selector,
+          tarjetas de grado y CRN hasta que empieza el bloque de ECP. */}
+      <div className="space-y-3">
+        <SectionHeading id="incual-crn" icon={MapPin} scrollMt="260px">{CRN_TITULO}</SectionHeading>
+        <Card className="p-6 space-y-6">
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
         {/* Selector Familia */}
         <Card className="p-6 bg-gradient-to-br from-card to-accent/5 lg:col-span-2 flex flex-col justify-center gap-2">
@@ -143,33 +155,29 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
         </div>
       )}
 
-      {incualData && (
-        <>
-
-      {/* Centros de Referencia Nacional (CRN) */}
-      {incualData.crn_centers && incualData.crn_centers.length > 0 && (
-        <Card className="p-6">
-          <h3 className="text-subheading font-bold mb-4 flex items-center gap-2">
-            <MapPin className="w-5 h-5 text-accent" />
-            {t('campos.catalogo.tituloCrn', {defaultValue: 'Centros de Referencia Nacional (CRN)'})}
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {incualData.crn_centers.map((crn: any, idx: number) => (
-              <div key={crn.name || idx} className="p-4 rounded-lg bg-muted/30 border">
-                <a href={crn.url} target="_blank" rel="noreferrer" className="font-medium text-accent hover:underline flex items-center gap-1">
-                  {crn.name} <ExternalLink className="w-3 h-3" />
-                </a>
-                <p className="text-body mt-2"><span className="text-muted">{t('campos.catalogo.labelAreasCrn', {defaultValue: 'Áreas:'})}</span> {crn.areas}</p>
-                <p className="text-body"><span className="text-muted">{t('campos.catalogo.labelTitularCrn', {defaultValue: 'Titular:'})}</span> {crn.titular}</p>
-              </div>
-            ))}
-          </div>
-        </Card>
+      {/* Centros de Referencia Nacional (CRN) -- separación extra + línea
+          divisoria respecto a la fila del selector/grados de arriba, que si
+          no quedaban demasiado pegadas */}
+      {incualData && incualData.crn_centers && incualData.crn_centers.length > 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-6 mt-2 border-t border-[var(--glass-border)]">
+          {incualData.crn_centers.map((crn: any, idx: number) => (
+            <div key={crn.name || idx} className="p-4 rounded-lg bg-muted/30 border">
+              <a href={crn.url} target="_blank" rel="noreferrer" className="font-medium text-accent hover:underline flex items-center gap-1">
+                {crn.name} <ExternalLink className="w-3 h-3" />
+              </a>
+              <p className="text-body mt-2"><span className="text-muted">{t('campos.catalogo.labelAreasCrn', {defaultValue: 'Áreas:'})}</span> {crn.areas}</p>
+              <p className="text-body"><span className="text-muted">{t('campos.catalogo.labelTitularCrn', {defaultValue: 'Titular:'})}</span> {crn.titular}</p>
+            </div>
+          ))}
+        </div>
       )}
+        </Card>
+      </div>
 
-      {/* Listado de ECPs */}
-      <h3 className="text-subheading font-bold mt-8 mb-4">{t('campos.catalogo.tituloEcp', {defaultValue: 'Estándares de competencia profesional (ECP)'})}</h3>
-      
+      {/* Bloque 2 -- Estándares de Competencia Profesional (ECP) */}
+      {incualData && (
+      <div className="space-y-3">
+        <SectionHeading id="incual-ecp" icon={BookOpen} scrollMt="260px">{ECP_TITULO}</SectionHeading>
       <div className="space-y-4">
         {/* Nivel 1 */}
         <Card className="overflow-hidden">
@@ -273,7 +281,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
           )}
         </Card>
       </div>
-        </>
+      </div>
       )}
     </div>
   );

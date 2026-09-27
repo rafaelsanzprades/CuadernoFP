@@ -1,5 +1,5 @@
 "use client";
-import { BookOpen, ChevronDown, Compass, Info, MessageCircle, Map, Send, Users } from "lucide-react";
+import { BookOpen, CheckCircle, ChevronDown, Compass, Download, Info, MessageCircle, Map, Send, Shield, Users, Wrench } from "lucide-react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -9,10 +9,18 @@ import { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
-import { TabInfoBox } from "@/components/ui/TabInfoBox";
+import { SectionIndex } from "@/components/ui/SectionIndex";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TabAcronimos } from "@/components/features/catalogo/TabAcronimos";
 import { GuiaTab } from "@/components/features/ayuda/GuiaTab";
 import { useOnboardingTour } from "@/components/features/onboarding/TourGuide";
+import { CATEGORY_LABELS, CATEGORY_ORDER } from "@/data/acronymsData";
+import { GUIA_PASOS } from "@/data/guiaData";
+
+// Un icono por grupo de FAQ, en el mismo orden que getFaqs() -- el grupo ya
+// lleva su número dentro del propio texto ("1. Conceptos previos..."), así
+// que SectionHeading se usa aquí en modo icono, sin la prop `number`.
+const FAQ_GROUP_ICONS = [Shield, BookOpen, Users, CheckCircle, Download, Wrench];
 
 function AccordionItem({ question, answer }: { question: string, answer: React.ReactNode }) {
   return (
@@ -32,7 +40,7 @@ function AccordionItem({ question, answer }: { question: string, answer: React.R
 
 const getFaqs = (t: (key: string, opts?: any) => string) => [
   {
-    group: t('campos.ayuda.faq.grupo1.titulo', {defaultValue: '1. Conceptos previos y seguridad'}),
+    group: t('campos.ayuda.faq.grupo1.titulo', {defaultValue: '1. Conceptos previos'}),
     items: [
       { q: t('campos.ayuda.faq.grupo1.q1', {defaultValue: '¿Qué es la arquitectura Híbrida (Local-First + Cloud)?'}), a: t('campos.ayuda.faq.grupo1.a1', {defaultValue: 'Se utiliza una arquitectura moderna. Tus datos de trabajo (alumnado, notas) se procesan localmente en tu navegador, garantizando total privacidad y velocidad. Las operaciones pesadas (generación de informes PDF o conexión con Inteligencia Artificial) se apoyan de forma segura en un servidor central.'}) },
       { q: t('campos.ayuda.faq.grupo1.q2', {defaultValue: '¿Dónde se guardan mis datos?'}), a: t('campos.ayuda.faq.grupo1.a2', {defaultValue: 'Los datos de tu Programación y tus Cursos residen en tu propio navegador (IndexedDB). Tú tienes el control absoluto sobre ellos. Por seguridad, se recomienda usar frecuentemente la exportación de archivos (BYOC) desde la pestaña Archivos.'}) },
@@ -42,7 +50,7 @@ const getFaqs = (t: (key: string, opts?: any) => string) => [
     ]
   },
   {
-    group: t('campos.ayuda.faq.grupo2.titulo', {defaultValue: '2. Paso 1: La programación didáctica'}),
+    group: t('campos.ayuda.faq.grupo2.titulo', {defaultValue: '2. Programación didáctica'}),
     items: [
       { q: t('campos.ayuda.faq.grupo2.q1', {defaultValue: '¿Tengo que meter a mano todos los RA y CE del BOE?'}), a: t('campos.ayuda.faq.grupo2.a1', {defaultValue: '¡No! El sistema cuenta con un Catálogo oficial que importa automáticamente la normativa legal (Resultados de aprendizaje y Criterios) de tu módulo. Solo tienes que elegir tu Grado y tu Ciclo Formativo en la sección inicial de Catálogo y el sistema lo hace por ti.'}) },
       { q: t('campos.ayuda.faq.grupo2.q2', {defaultValue: '¿Qué significa que los RA no suman 100% en las verificaciones?'}), a: t('campos.ayuda.faq.grupo2.a2', {defaultValue: "Para que la evaluación continua matemática funcione, cada Resultado de Aprendizaje (RA) debe tener un 'peso' o importancia. La suma total de los pesos de todos los RA de un módulo debe ser exactamente 100%. Debes ajustar esto en Programación > Currículo > pestaña 'RA y CE'."}) },
@@ -53,7 +61,7 @@ const getFaqs = (t: (key: string, opts?: any) => string) => [
     ]
   },
   {
-    group: t('campos.ayuda.faq.grupo3.titulo', {defaultValue: '3. Paso 3: Creación del curso y alumnado'}),
+    group: t('campos.ayuda.faq.grupo3.titulo', {defaultValue: '3. Creación del curso'}),
     items: [
       { q: t('campos.ayuda.faq.grupo3.q1', {defaultValue: '¿Puedo importar alumnado desde plataformas como Seneca, Rayuela o un Excel?'}), a: t('campos.ayuda.faq.grupo3.a1', {defaultValue: "Sí. En la sección de 'Alumnado' puedes importar un archivo CSV (Excel) con tu lista de clase. Alternativamente, la tabla inteligente te permite copiar y pegar celdas masivamente, igual que si fuera una hoja de cálculo."}) },
       { q: t('campos.ayuda.faq.grupo3.q2', {defaultValue: '¿Qué nivel de seguridad tienen los datos de mi alumnado?'}), a: t('campos.ayuda.faq.grupo3.a2', {defaultValue: "Tus archivos locales no salen nunca hacia nuestro servidor si no quieres (usando 'Guardar en Local'). Si eliges guardarlos en Google Drive o OneDrive, el archivo es transmitido directamente entre tu navegador y los servidores de Microsoft/Google. Puedes activar el cifrado local para que el archivo sea absolutamente ilegible sin tu clave maestra."}) },
@@ -63,7 +71,7 @@ const getFaqs = (t: (key: string, opts?: any) => string) => [
     ]
   },
   {
-    group: t('campos.ayuda.faq.grupo4.titulo', {defaultValue: '4. Paso 5: El día a día y la evaluación'}),
+    group: t('campos.ayuda.faq.grupo4.titulo', {defaultValue: '4. El día a día y la evaluación'}),
     items: [
       { q: t('campos.ayuda.faq.grupo4.q1', {defaultValue: "¿Qué es el 'Diario de aula'?"}), a: t('campos.ayuda.faq.grupo4.a1', {defaultValue: "Es tu cuaderno de bitácora diario. Te permite anotar lo que ocurre en cada sesión real de clase: qué UD has impartido, si ha habido incidencias o marcar días 'Sin docencia' (como huelgas o claustros) para que no cuenten en tu progreso."}) },
       { q: t('campos.ayuda.faq.grupo4.q2', {defaultValue: "¿Cómo se calcula la previsión de 'Planificación mensual'?"}), a: t('campos.ayuda.faq.grupo4.a2', {defaultValue: 'Se calcula día a día con el calendario de festivos y el horario semanal que ya tienes registrados en la app — no es una estimación proporcional, es un cálculo exacto con esos datos. Cambiará si el calendario oficial del curso o la distribución definitiva del horario todavía no están completos.'}) },
@@ -76,11 +84,15 @@ const getFaqs = (t: (key: string, opts?: any) => string) => [
   {
     group: t('campos.ayuda.faq.grupo5.titulo', {defaultValue: '5. Descargas y documentos oficiales'}),
     items: [
-      { q: t('campos.ayuda.faq.grupo5.q1', {defaultValue: '¿Puedo generar boletines automáticos para el alumnado?'}), a: t('campos.ayuda.faq.grupo5.a1', {defaultValue: "Sí. Desde la pestaña 'Curso' de Magia puedes generar boletines en PDF masivos para toda la clase o resúmenes individuales hiperdetallados que justifican la nota en base a cada Criterio de Evaluación conseguido."}) }
+      { q: t('campos.ayuda.faq.grupo5.q1', {defaultValue: '¿Puedo generar boletines automáticos para el alumnado?'}), a: t('campos.ayuda.faq.grupo5.a1', {defaultValue: "Sí. Desde la pestaña 'Curso' de Magia puedes generar boletines en PDF masivos para toda la clase o resúmenes individuales hiperdetallados que justifican la nota en base a cada Criterio de Evaluación conseguido."}) },
+      { q: t('campos.ayuda.faq.grupo5.q2', {defaultValue: '¿Qué diferencia hay entre los 3 niveles de Programación Didáctica (PD-, PD=, PD+)?'}), a: t('campos.ayuda.faq.grupo5.a2', {defaultValue: 'Cuaderno FP genera el mismo contenido base en 3 niveles de detalle, pensados para públicos distintos: el alumnado, jefatura de estudios y la propia inspección/oposiciones. Puedes generar los tres a la vez desde MagIA → Programación, y consultar MagIA → Análisis APP->PDx para ver el mapa completo campo a campo entre la app y cada uno de los tres niveles.'}) },
+      { q: t('campos.ayuda.faq.grupo5.q3', {defaultValue: 'Nivel PD- (Resumen)'}), a: t('campos.ayuda.faq.grupo5.a3', {defaultValue: 'Resumen de 1 a 2 hojas para entregar al alumnado: lo esencial de la programación (RA, criterios de calificación, instrumentos) sin la carga narrativa de los otros dos niveles.'}) },
+      { q: t('campos.ayuda.faq.grupo5.q4', {defaultValue: 'Nivel PD= (Simplificada)'}), a: t('campos.ayuda.faq.grupo5.a4', {defaultValue: 'Sigue la estructura normativa oficial (14 apartados A-N, formato BOA/Aragón vigente desde sept. 2025), unas 15-20 páginas. Es el nivel pensado para entregar a jefatura de estudios o inspección educativa.'}) },
+      { q: t('campos.ayuda.faq.grupo5.q5', {defaultValue: 'PD+ (Detallada JEG)'}), a: t('campos.ayuda.faq.grupo5.a5', {defaultValue: 'Programación completa (formato TFM/oposiciones) de más de 60 páginas con metodologías expandidas y toda la carga narrativa: la más completa de las tres, pensada para oposiciones o TFM del máster de profesorado.'}) }
     ]
   },
   {
-    group: t('campos.ayuda.faq.grupo7.titulo', {defaultValue: '7. Soporte técnico'}),
+    group: t('campos.ayuda.faq.grupo7.titulo', {defaultValue: '6. Soporte técnico'}),
     items: [
       { q: t('campos.ayuda.faq.grupo7.q1', {defaultValue: '¿Qué pasa si las gráficas de mi panel de control no cargan?'}), a: t('campos.ayuda.faq.grupo7.a1', {defaultValue: "Comprueba en la barra lateral que has activado el 'Modo Reales' y tienes seleccionado tu Grupo. Las gráficas necesitan saber a qué alumnado y a qué programación apuntan para poder analizar los datos."}) },
       { q: t('campos.ayuda.faq.grupo7.q2', {defaultValue: '¿Se puede usar Cuaderno FP en el móvil?'}), a: t('campos.ayuda.faq.grupo7.a2', {defaultValue: 'El diseño es responsivo y se adapta, pero por la densidad de información (tablas masivas de evaluación y matrices curriculares), te recomendamos encarecidamente utilizarlo en pantallas de ordenador o tabletas grandes.'}) },
@@ -111,6 +123,21 @@ export default function AyudaPage() {
     contribuciones: t('tabs.inicio.contribuciones.desc', {defaultValue: 'Comunidad de Telegram y listado de personas que contribuyen activamente al proyecto.'}),
   };
 
+  // Índice de bloques -- solo la pestaña FAQ tiene 2+ bloques reales
+  // (un grupo por tema); el resto son un único bloque, sin índice.
+  const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
+    guia: GUIA_PASOS.map(p => ({ id: p.id, label: `${p.numero}. ${p.titulo}` })),
+    faq: FAQS.map((g, idx) => ({ id: `faq-grupo-${idx}`, label: g.group })),
+    acronimos: [
+      ...CATEGORY_ORDER.map(cat => ({ id: `acronimos-${cat}`, label: CATEGORY_LABELS[cat] })),
+      { id: "acronimos-anexo-catalogo", label: "Anexo: Catálogo de Elementos a Codificar" },
+    ],
+    contribuciones: [
+      { id: "contrib-telegram", label: t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'}) },
+      { id: "contrib-comunidades", label: t('campos.inicio.contribuidoresCcaaTitulo', {defaultValue: 'Contribuidores por Comunidad Autónoma'}) },
+    ],
+  };
+
   return (
     <div className="flex min-h-screen bg-background">
       <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -128,19 +155,29 @@ export default function AyudaPage() {
                 ))}
               </TabsList>
             </Tabs>
-          </StickyPageHeader>
 
-          <MotionWrapper className="space-y-4 px-8 pt-4 pb-12">
-            <TabInfoBox
-              description={TAB_DESCRIPTIONS[activeTab] || t('campos.comun.gestionDe', {activeTab, defaultValue: 'Gestión de {{activeTab}}'})}
-              action={activeTab === "guia" ? (
-                <Button variant="primary" size="sm" onClick={startTour}>
+            {/* Descripción de la pestaña activa -- texto plano, sin cajón,
+                mismo patrón que /legal. El botón de recorrido guiado (solo en
+                Guía) va a la derecha, mismo hueco que ocupaba antes dentro
+                del cajón de TabInfoBox. */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-3">
+              <p className="text-body text-muted">
+                {TAB_DESCRIPTIONS[activeTab] || t('campos.comun.gestionDe', {activeTab, defaultValue: 'Gestión de {{activeTab}}'})}
+              </p>
+              {activeTab === "guia" && (
+                <Button variant="primary" size="sm" onClick={startTour} className="shrink-0">
                   <Compass className="w-4 h-4" />
                   {t('campos.ayuda.iniciarRecorrido', {defaultValue: 'Iniciar recorrido guiado'})}
                 </Button>
-              ) : undefined}
-            />
+              )}
+            </div>
 
+            {/* Índice de bloques de la pestaña activa -- dentro del header
+                fijo (sticky top-0), así que no se pierde al hacer scroll. */}
+            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} />
+          </StickyPageHeader>
+
+          <MotionWrapper className="space-y-4 px-8 pt-4 pb-[280px]">
             {/* ── CONTENIDO: GUÍA ────────────────────────────────────── */}
             {activeTab === "guia" && (
               <GuiaTab />
@@ -150,10 +187,10 @@ export default function AyudaPage() {
             {activeTab === "faq" && (
               <div className="space-y-10 animate-in fade-in duration-500 w-full">
                 {FAQS.map((faqGroup, idx) => (
-                  <div key={faqGroup.group || idx}>
-                    <h2 className="text-subheading font-bold mb-4 text-accent border-b border-white/5 pb-2">
+                  <div key={faqGroup.group || idx} className="space-y-4">
+                    <SectionHeading id={`faq-grupo-${idx}`} icon={FAQ_GROUP_ICONS[idx % FAQ_GROUP_ICONS.length]} scrollMt="260px">
                       {faqGroup.group}
-                    </h2>
+                    </SectionHeading>
                     <div className="space-y-1">
                       {faqGroup.items.map((item, i) => (
                         <AccordionItem key={item.q || i} question={item.q} answer={item.a} />
@@ -173,15 +210,17 @@ export default function AyudaPage() {
 
             {/* ── CONTENIDO: CONTRIBUCIONES ──────────────────────────────────────── */}
             {activeTab === "contribuciones" && (
-              <div className="space-y-12 animate-in fade-in duration-500">
-                <section className="space-y-6">
-                  <div className="flex flex-col md:flex-row items-center gap-5 p-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm mb-8">
+              <div className="space-y-6 animate-in fade-in duration-500">
+                <div className="space-y-3">
+                  <SectionHeading id="contrib-telegram" icon={MessageCircle} scrollMt="260px">
+                    {t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'})}
+                  </SectionHeading>
+                  <div className="flex flex-col md:flex-row items-center gap-5 p-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
                     <div className="w-12 h-12 shrink-0 rounded-full bg-[#229ED9]/10 flex items-center justify-center">
                       <MessageCircle className="w-6 h-6 text-[#229ED9]" />
                     </div>
                     <div className="flex-1 text-center md:text-left">
-                      <h3 className="text-body font-bold text-foreground">{t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'})}</h3>
-                      <p className="text-body text-muted leading-tight mt-1">
+                      <p className="text-body text-muted leading-tight">
                         {t('campos.inicio.grupoTelegramDesc', {defaultValue: 'Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad Autónoma.'})}
                       </p>
                     </div>
@@ -195,9 +234,13 @@ export default function AyudaPage() {
                       {t('botones.inicio.unirseTelegram', {defaultValue: 'Unirme al grupo en Telegram'})}
                     </a>
                   </div>
+                </div>
 
-                  <h3 className="text-heading font-bold text-foreground border-b border-[var(--glass-border)] pb-2">{t('campos.inicio.contribuidoresCcaaTitulo', {defaultValue: 'Contribuidores por Comunidad Autónoma'})}</h3>
-                  <p className="text-muted mb-4">
+                <div className="space-y-3">
+                  <SectionHeading id="contrib-comunidades" icon={Users} scrollMt="260px">
+                    {t('campos.inicio.contribuidoresCcaaTitulo', {defaultValue: 'Contribuidores por Comunidad Autónoma'})}
+                  </SectionHeading>
+                  <p className="text-muted">
                     {t('campos.inicio.contribuidoresCcaaDesc', {defaultValue: 'Mención especial al profesorado que está ayudando a mejorar y a integrar los currículos de las Comunidades Autónomas'})}
                   </p>
 
@@ -223,7 +266,7 @@ export default function AyudaPage() {
                       </div>
                     ))}
                   </div>
-                </section>
+                </div>
               </div>
             )}
 

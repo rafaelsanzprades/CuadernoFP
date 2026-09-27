@@ -13,7 +13,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
-import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { getAutoMilestones } from "@/utils/calendarMilestones";
 import Link from "next/link";
@@ -465,6 +464,12 @@ export default function CalendarioPage() {
                 </TabsList>
               </Tabs>
             </div>
+
+            {/* Descripción de la pestaña activa -- texto plano, sin cajón,
+                mismo patrón que Inicio/Ayuda/MagIA/Normativa/Legal */}
+            <p className="text-body text-muted mt-3">
+              {TAB_DESCRIPTIONS[activeTab] || 'Gestión del calendario académico.'}
+            </p>
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-4 px-8 pt-4 pb-12">
@@ -474,8 +479,6 @@ export default function CalendarioPage() {
               {saveMessage}
             </p>
           )}
-
-            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión del calendario académico.'} />
 
             <div className="space-y-4">
               {activeTab === 'fechas' && (

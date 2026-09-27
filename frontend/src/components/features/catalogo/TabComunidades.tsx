@@ -4,6 +4,7 @@ import React, { useState, useMemo } from "react";
 import { MapPin, ExternalLink, BookOpen, Globe, FileText, Info } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import spainMapData from "@/data/spain-paths.json";
 import { useTranslation } from "react-i18next";
 
@@ -273,25 +274,29 @@ export function TabComunidades({ searchQuery = "" }: Props) {
     return map;
   }, []);
 
+  const MAPA_TITULO = t('campos.catalogo.tituloMapaCcaa', {defaultValue: 'Mapa de CCAA con currículo FP'});
+  const TABLA_TITULO = t('campos.catalogo.tituloTablaComunidades', {defaultValue: 'Tabla de comunidades autónomas'});
+
   return (
     <div className="space-y-6">
+      {/* El índice de este bloque vive en la cabecera fija de la página
+          (normativa/page.tsx), no aquí -- mismo patrón que /legal. */}
+
       {/* Mapa + Info lado a lado */}
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+      <div className="space-y-3">
+        <SectionHeading id="ccaa-mapa" icon={MapPin} scrollMt="260px">{MAPA_TITULO}</SectionHeading>
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Mapa SVG real */}
         <Card className="lg:col-span-3 p-4">
-          <div className="flex items-center gap-2 mb-3">
-            <MapPin className="w-5 h-5 text-primary" />
-            <h3 className="font-semibold">{t('campos.catalogo.tituloMapaCcaa', {defaultValue: 'Mapa de CCAA con currículo FP'})}</h3>
-          </div>
-
           <div className="flex justify-center">
+            {/* Ajustamos el viewBox para recortar el espacio vacío del sur y escalar el
+                mapa. Altura medida con getBBox() real: la península llega hasta y≈276 y
+                el recuadro de Canarias (ya trasladado) hasta y≈300 -- 320 deja un margen
+                pequeño sin reservar los ~80px de lienzo vacío que sobraban con la altura
+                anterior (410). */}
             <svg
               className="w-full max-w-lg h-auto"
               xmlns="http://www.w3.org/2000/svg"
-              // Ajustamos el viewBox para recortar el espacio vacío del sur y escalar el mapa.
-              // Altura medida con getBBox() real: la península llega hasta y≈276 y el recuadro
-              // de Canarias (ya trasladado) hasta y≈300 -- 320 deja un margen pequeño sin
-              // reservar los ~80px de lienzo vacío que sobraban con la altura anterior (410).
               viewBox="20 0 593 320"
             >
               {SPAIN_PATHS.map((item) => {
@@ -355,14 +360,13 @@ export function TabComunidades({ searchQuery = "" }: Props) {
             {t('campos.catalogo.fuenteMapaCcaa', {defaultValue: 'Fuente: '})}<a href="https://todofp.es" target="_blank" rel="noopener" className="underline text-primary">todofp.es</a>
           </p>
         </Card>
+        </div>
       </div>
 
       {/* Tabla de todas las CCAA */}
-      <Card className="p-4">
-        <div className="flex items-center gap-2 mb-4">
-          <FileText className="w-5 h-5 text-primary" />
-          <h3 className="font-semibold">{t('campos.catalogo.tituloTablaComunidades', {defaultValue: 'Tabla de comunidades autónomas'})}</h3>
-        </div>
+      <div className="space-y-3">
+        <SectionHeading id="ccaa-tabla" icon={FileText} scrollMt="260px">{TABLA_TITULO}</SectionHeading>
+        <Card className="p-4">
         <div className="overflow-x-auto">
           <table className="w-full text-body">
             <thead>
@@ -426,7 +430,8 @@ export function TabComunidades({ searchQuery = "" }: Props) {
             </tbody>
           </table>
         </div>
-      </Card>
+        </Card>
+      </div>
 
       {/* Sección informativa */}
       <Card className="p-4">

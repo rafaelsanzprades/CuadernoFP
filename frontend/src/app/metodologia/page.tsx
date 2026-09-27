@@ -16,7 +16,6 @@ import { DiversidadTab } from "@/components/features/modulo/DiversidadTab";
 import { InnovacionTab } from "@/components/features/modulo/InnovacionTab";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
-import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { getApiBase } from "@/services/apiBase";
@@ -133,10 +132,15 @@ export default function MetodologiaConfigPage() {
                 </TabsList>
               </Tabs>
             </div>
+
+            {/* Descripción de la pestaña activa -- texto plano, sin cajón,
+                mismo patrón que Inicio/Ayuda/MagIA/Normativa/Legal */}
+            <p className="text-body text-muted mt-3">
+              {TAB_DESCRIPTIONS[activeTab] || 'Configuración de la metodología.'}
+            </p>
           </StickyPageHeader>
 
           <MotionWrapper className="px-8 pt-4 pb-12">
-            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Configuración de la metodología.'} />
 
             <div className="space-y-6">
               {activeTab === 'metodologia' && <><MetodologiaTab /><DiversidadTab /></>}

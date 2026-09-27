@@ -1,8 +1,8 @@
 "use client";
-import { ChevronLeft, ChevronRight, CalendarDays, FolderOpen, Hourglass, Save, AlertTriangle, HelpCircle } from "lucide-react";
+import { ChevronLeft, ChevronRight, CalendarDays, FolderOpen, Hourglass, Save, AlertTriangle, HelpCircle, Cloud, Send, Undo2, Redo2 } from "lucide-react";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useAppStore } from '@/store/useAppStore';
+import { useAppStore, useTemporalStore } from '@/store/useAppStore';
 import { navGroups } from '@/config/navigation';
 import { getAcronym } from '@/utils/catalogFormat';
 import { useEffect, useRef, useState } from 'react';
@@ -12,6 +12,7 @@ import { Tooltip } from '@/components/ui/Tooltip';
 import { InstallPwaButton } from '@/components/features/settings/InstallPwaButton';
 import { fileManager } from '@/services/fileManager';
 import { loadCatalogForModule, resolveModuloNombre } from '@/services/catalogCache';
+import { HeaderSettings } from '@/components/layout/HeaderSettings';
 import { useTranslation } from "react-i18next";
 
 export default function Sidebar() {
@@ -20,6 +21,10 @@ export default function Sidebar() {
   const { t } = useTranslation();
   const storeState = useAppStore();
   const { activeModuleId, activeCursoId, toggleSidebar, workspaceHandle, syncStatus, groupFileSource } = storeState;
+  const pastStatesLength = useTemporalStore((state) => state.pastStates.length);
+  const futureStatesLength = useTemporalStore((state) => state.futureStates.length);
+  const undo = useTemporalStore((state) => state.undo);
+  const redo = useTemporalStore((state) => state.redo);
   const isSidebarOpen = isMounted ? storeState.isSidebarOpen : true;
   const dataSource = isMounted ? storeState.dataSource : 'demo';
   const [localGroups, setLocalGroups] = useState<string[]>([]);
@@ -195,6 +200,36 @@ export default function Sidebar() {
                 <span suppressHydrationWarning className="text-body text-muted/80 font-mono ml-0.5">
                   {isMounted ? timeStr : '\u00A0'}
                 </span>
+                <div className="flex items-center justify-between w-full ml-0.5">
+                  <a
+                    href="https://t.me/cuadernofp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-1.5 rounded-md text-[#229ED9] hover:bg-[#229ED9]/10 transition-colors"
+                    title={t('tooltips.header.uneteTelegram', {defaultValue: 'Únete a nuestro grupo de Telegram'})}
+                  >
+                    <Send className="w-4 h-4" />
+                  </a>
+                  <div className="flex items-center gap-1">
+                    <button
+                      onClick={() => undo()}
+                      disabled={pastStatesLength === 0}
+                      className="p-1.5 rounded-md text-muted hover:text-foreground hover:bg-foreground/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                      title={`${t('header.deshacer', { defaultValue: 'Deshacer' })} (Ctrl+Z)`}
+                    >
+                      <Undo2 className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => redo()}
+                      disabled={futureStatesLength === 0}
+                      className="p-1.5 rounded-md text-muted hover:text-foreground hover:bg-foreground/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                      title={`${t('header.rehacer', { defaultValue: 'Rehacer' })} (Ctrl+Y)`}
+                    >
+                      <Redo2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <HeaderSettings align="left" />
+                </div>
                 <div suppressHydrationWarning className="border border-[var(--glass-border)] bg-background/50 px-2 py-0.5 rounded text-body text-muted/80 font-mono whitespace-nowrap shadow-sm ml-0.5">
                   Versión: {isMounted ? dateCompactStr : '...'}
                 </div>
@@ -361,6 +396,24 @@ export default function Sidebar() {
             </div>
           );
         })}
+
+        {/* Estado de la app, al final del menú */}
+        {isSidebarOpen && (
+          <div className="flex flex-col gap-1.5 mt-2 pt-3 border-t border-[var(--glass-border)] shrink-0">
+            <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-orange-500/10 border border-orange-500/30 rounded-lg text-orange-500 shadow-sm">
+              <AlertTriangle className="w-4 h-4 shrink-0" strokeWidth={2.5} />
+              <span className="text-caption font-bold tracking-widest">{t('sidebar.en_obras')}</span>
+            </div>
+            {dataSource === 'local' && (
+              <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full bg-foreground/5 text-caption font-medium text-muted/80 whitespace-nowrap border border-[var(--glass-border)] shadow-sm">
+                {syncStatus === 'saving' && <><Hourglass className="w-3.5 h-3.5 text-warning animate-spin" /><span className="text-warning">{t('header.guardando', { defaultValue: 'Guardando...' })}</span></>}
+                {syncStatus === 'saved' && <><Save className="w-3.5 h-3.5 text-success" /><span className="text-success">{t('header.guardado', { defaultValue: 'Guardado' })}</span></>}
+                {syncStatus === 'error' && <><AlertTriangle className="w-3.5 h-3.5 text-danger" /><span className="text-danger">{t('header.error', { defaultValue: 'Error' })}</span></>}
+                {syncStatus === 'idle' && <><Cloud className="w-3.5 h-3.5 text-muted/50" /><span>{t('header.sincronizado', { defaultValue: 'Sincronizado' })}</span></>}
+              </div>
+            )}
+          </div>
+        )}
       </nav>
 
         {/* Separación de lado a lado antes del footer */}

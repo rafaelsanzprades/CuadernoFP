@@ -15,7 +15,6 @@ import { FeoeEmpresaTab } from "@/components/features/evaluacion/FeoeEmpresaTab"
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
-import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { getApiBase } from "@/services/apiBase";
@@ -316,10 +315,15 @@ export default function SeguimientoPage() {
                 </TabsList>
               </Tabs>
             </div>
+
+            {/* Descripción de la pestaña activa -- texto plano, sin cajón,
+                mismo patrón que Inicio/Ayuda/MagIA/Normativa/Legal */}
+            <p className="text-body text-muted mt-3">
+              {TAB_DESCRIPTIONS[activeTab] || 'Seguimiento del alumnado.'}
+            </p>
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-4 px-8 pt-4">
-              <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Seguimiento del alumnado.'} />
 
               {activeTab === 'clases' && (
                 <div className="mt-4">

@@ -19,7 +19,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
-import { TabInfoBox } from "@/components/ui/TabInfoBox";
+import { SectionIndex } from "@/components/ui/SectionIndex";
 import { getApiBase } from "@/services/apiBase";
 
 type DocumentItem = {
@@ -42,6 +42,29 @@ export default function DocumentosPage() {
     bibliografia: t('tabs.normativa.bibliografia.desc', {defaultValue: 'Índice de leyes, decretos y órdenes estatales y autonómicas de FP, con enlace al boletín oficial.'}),
     legislacion: t('tabs.normativa.legislacion.desc', {defaultValue: 'Legislación autonómica y normativa específica.'}),
     'ecp-incual': t('tabs.normativa.ecp-incual.desc', {defaultValue: 'Estándares de Competencia Profesional (ECP) del Catálogo Nacional (INCUAL).'}),
+  };
+
+  // Índice de bloques por pestaña -- se renderiza una sola vez dentro de
+  // StickyPageHeader (mismo patrón que /legal), no repetido dentro de cada
+  // componente de pestaña como antes.
+  const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
+    autonomias: [
+      { id: "ccaa-mapa", label: t('campos.catalogo.tituloMapaCcaa', {defaultValue: 'Mapa de CCAA con currículo FP'}) },
+      { id: "ccaa-tabla", label: t('campos.catalogo.tituloTablaComunidades', {defaultValue: 'Tabla de comunidades autónomas'}) },
+    ],
+    bibliografia: [
+      { id: "bib-general", label: t('campos.normativa.normativaGeneral', {defaultValue: 'Normativa general'}) },
+      { id: "bib-autonomica", label: t('campos.normativa.normativaAutonomicaTitulo', {defaultValue: 'Normativa autonómica'}) },
+    ],
+    legislacion: [
+      { id: "leg-grados", label: t('checks.catalogo.gradosDelAAlE', {defaultValue: 'Grados del A al E'}) },
+      { id: "leg-general", label: t('campos.normativa.legislacionGeneral', {defaultValue: 'Legislación general'}) },
+      { id: "leg-autonomica", label: t('campos.normativa.legislacionAutonomicaTitulo', {defaultValue: 'Legislación autonómica'}) },
+    ],
+    'ecp-incual': [
+      { id: "incual-crn", label: t('campos.catalogo.tituloCrn', {defaultValue: 'Centros de Referencia Nacional (CRN)'}) },
+      { id: "incual-ecp", label: t('campos.catalogo.tituloEcp', {defaultValue: 'Estándares de Competencia Profesional (ECP)'}) },
+    ],
   };
   const [activeTab, setActiveTab] = useState("autonomias");
   const [currentPath, setCurrentPath] = useState<string>("");
@@ -309,21 +332,15 @@ export default function DocumentosPage() {
     if (activeTab === 'legislacion' && currentPath === 'Normativa') {
       return (
         <div className="flex flex-col gap-6 w-full">
-          <TabGrados />
-          <div>
-            <div className="px-2 mb-6">
-              <h2 className="text-subheading font-bold flex items-center gap-3">
-                <span className="p-2 bg-primary/10 rounded-lg text-primary shrink-0"><Scale className="w-5 h-5" /></span>
-                {t('campos.normativa.legislacionDocumentalTitulo', {defaultValue: 'Legislación documental'})}
-              </h2>
-            </div>
-            <NormativaAccordion
-              communities={filteredItems}
-              onDownloadDoc={handleDownloadDoc}
-              formatSize={formatSize}
-              getFileIcon={getFileIcon}
-            />
+          <div id="leg-grados" style={{ scrollMarginTop: "260px" }}>
+            <TabGrados />
           </div>
+          <NormativaAccordion
+            communities={filteredItems}
+            onDownloadDoc={handleDownloadDoc}
+            formatSize={formatSize}
+            getFileIcon={getFileIcon}
+          />
         </div>
       );
     }
@@ -422,11 +439,19 @@ export default function DocumentosPage() {
                 />
               </div>
             </div>
+
+            {/* Descripción de la pestaña activa -- texto plano, sin cajón,
+                mismo patrón que /legal */}
+            <p className="text-body text-muted mt-3">
+              {TAB_DESCRIPTIONS[activeTab] || t('campos.normativa.gestionDocumental', {defaultValue: 'Gestión documental y normativa.'})}
+            </p>
+
+            {/* Índice de bloques de la pestaña activa -- dentro del header
+                fijo (sticky top-0), así que no se pierde al hacer scroll. */}
+            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} />
           </StickyPageHeader>
 
-          <MotionWrapper className="w-full space-y-3 px-8 pt-4 pb-12">
-            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión documental y normativa.'} />
-
+          <MotionWrapper className="w-full space-y-3 px-8 pt-4 pb-[280px]">
             <div className="space-y-3 animate-in fade-in duration-500">
               {activeTab === 'autonomias' && <div className="mb-6"><TabComunidades searchQuery={searchQuery} /></div>}
 

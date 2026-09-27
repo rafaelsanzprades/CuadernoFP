@@ -12,11 +12,13 @@ import { TabSync } from "@/components/ui/TabSync";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
-import { TabInfoBox } from "@/components/ui/TabInfoBox";
+import { SectionIndex } from "@/components/ui/SectionIndex";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AIWizardModal } from "@/components/features/ai/AIWizardModal";
 import { AISettingsPanel } from "@/components/features/ai/AISettingsPanel";
 import { RecentModulesPanel } from "@/components/features/dashboard/RecentModulesPanel";
 import { UpdateChecker } from "@/components/features/dashboard/UpdateChecker";
+import { DownloadDesktopApp } from "@/components/features/dashboard/DownloadDesktopApp";
 import { WelcomeWizard } from "@/components/features/dashboard/WelcomeWizard";
 import { GoogleDriveSyncPanel } from "@/components/features/cloud/GoogleDriveSyncPanel";
 import { OneDriveSyncPanel } from "@/components/features/cloud/OneDriveSyncPanel";
@@ -319,6 +321,21 @@ export default function InicioPage() {
     verificacion: t('tabs.inicio.verificacion.desc', {defaultValue: 'Panel de salud y coherencia de los datos de tu cuaderno.'}),
   };
 
+  // Índice de bloques por pestaña -- mismo patrón que /legal y /normativa,
+  // solo en las pestañas con 2+ bloques reales que merezca la pena enlazar.
+  const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
+    bienvenida: [
+      { id: "bienvenida-metodologia", label: t('campos.inicio.metodologiaEspecificaTitulo', {defaultValue: 'Metodología específica de Formación Profesional'}) },
+      { id: "bienvenida-mapa", label: t('campos.inicio.mapaWebTitulo', {defaultValue: 'Mapa del web'}) },
+      { id: "bienvenida-privacidad", label: t('campos.archivos.privacidadDisenoTitulo', {defaultValue: 'Tu privacidad por diseño'}) },
+    ],
+    verificacion: [
+      { id: "verificacion-grupo", label: t('campos.verificacion.grupoTitulo', {defaultValue: 'Grupo'}) },
+      { id: "verificacion-programacion", label: t('campos.verificacion.programacionTitulo', {defaultValue: 'Programación didáctica'}) },
+      { id: "verificacion-curso", label: t('campos.verificacion.cursoTitulo', {defaultValue: 'Curso activo'}) },
+    ],
+  };
+
   return (
     <div className="flex min-h-screen bg-background">
       <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -365,43 +382,50 @@ export default function InicioPage() {
                 </Button>
               )}
             </div>
+
+            {/* Descripción de la pestaña activa -- texto plano, sin cajón,
+                mismo patrón que /legal */}
+            <p className="text-body text-muted mt-3">
+              {TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab}
+            </p>
+
+            {/* Índice de bloques de la pestaña activa -- dentro del header
+                fijo (sticky top-0), así que no se pierde al hacer scroll. */}
+            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} />
           </StickyPageHeader>
 
-          <MotionWrapper className="space-y-4 px-8 pt-4 pb-12">
-            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
-
+          <MotionWrapper className="space-y-4 px-8 pt-4 pb-[280px]">
             {/* ── CONTENIDO: BIENVENIDA ──────────────────────────────── */}
             {activeTab === "bienvenida" && (
               <div className="animate-in fade-in duration-500 w-full">
 
           <div className="w-full space-y-12 pb-12">
 
-            {/* Autoactualización (Fase 9 del plan Tauri) -- no renderiza nada fuera de la app de escritorio */}
-            <UpdateChecker />
-
             {/* Módulos recientes (ítem 35) — reabrir con un clic, no se muestra si no hay ninguno */}
             <RecentModulesPanel />
 
-            {/* Posicionamiento: metodología experta detrás de la app */}
-            <Card className="p-6 border border-accent/20 bg-accent/5">
-              <div className="flex items-start gap-3 mb-4">
-                <GraduationCap className="w-6 h-6 text-accent mt-0.5 shrink-0" />
-                <div>
-                  <h2 className="text-subheading font-bold text-foreground">{t('campos.inicio.metodologiaEspecificaTitulo', {defaultValue: 'Una herramienta construida sobre metodología específica'})}</h2>
-                  <p className="text-body text-muted mt-1">
-                    {t('campos.inicio.metodologiaEspecificaDesc', {defaultValue: 'Cuaderno FP sigue las referencias bibliográficas actualizadas a la nueva ley de FP, las orientaciones de la Inspección Educativa, los principales autores de referencia y las guías oficiales de las administraciones educativas: los Resultados de Aprendizaje (RA) son el eje causal del que se considera debe derivar todo lo demás en una programación didáctica.'})}
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-3 text-body font-semibold text-muted border-t border-[var(--glass-border)] pt-4">
+            {/* Posicionamiento: metodología experta detrás de la app -- la
+                descarga de escritorio / autoactualización vive dentro de
+                este mismo apartado (petición de Rafael, 2026-09-27), no
+                como bloque aparte. Solo una de las dos se renderiza según
+                isTauri(), nunca las dos a la vez. */}
+            <div className="space-y-3">
+              <SectionHeading id="bienvenida-metodologia" icon={GraduationCap} scrollMt="260px">
+                {t('campos.inicio.metodologiaEspecificaTitulo', {defaultValue: 'Metodología específica de Formación Profesional'})}
+              </SectionHeading>
+              <Card className="p-6 border border-accent/20 bg-accent/5">
+              <p className="text-body text-muted">
+                {t('campos.inicio.metodologiaEspecificaDesc', {defaultValue: 'Cuaderno FP sigue las referencias bibliográficas actualizadas a la nueva ley de FP, las orientaciones de la Inspección Educativa, los principales autores de referencia y las guías oficiales de las administraciones educativas: los Resultados de Aprendizaje (RA) son el eje causal del que se considera debe derivar todo lo demás en una programación didáctica.'})}
+              </p>
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-3 text-body font-semibold text-muted border-t border-[var(--glass-border)] pt-4 mt-4">
                 {[
                   t('campos.inicio.pasoIdentificacion', {defaultValue: 'Identificación'}),
                   t('campos.inicio.pasoIntroduccionJustificacionNormativa', {defaultValue: 'Introducción, justificación y normativa'}),
                   t('campos.inicio.pasoContextualizacion', {defaultValue: 'Contextualización'}),
                   t('campos.inicio.pasoObjetivosCompetencias', {defaultValue: 'Objetivos y competencias'}),
                   t('campos.inicio.pasoCaracterIntermodularDual', {defaultValue: 'Carácter intermodular y dual'}),
-                  t('campos.inicio.pasoContenidosCentradosRa', {defaultValue: 'Contenidos centrados en RA'}),
-                  t('campos.inicio.pasoSituacionesAprendizaje', {defaultValue: 'Situaciones de aprendizaje'}),
+                  t('campos.inicio.pasoContenidosCentradosRa', {defaultValue: 'Contenidos teórico-prácticos'}),
+                  t('campos.inicio.pasoSituacionesAprendizaje', {defaultValue: 'Resultados de aprendizaje'}),
                   t('campos.inicio.pasoMetodologiaInclusion', {defaultValue: 'Metodología e inclusión'}),
                   t('campos.inicio.pasoEvaluacion', {defaultValue: 'Evaluación (aprendizaje / prácticas / excepciones)'}),
                   t('campos.inicio.pasoActividadesComplementarias', {defaultValue: 'Actividades complementarias'}),
@@ -413,14 +437,19 @@ export default function InicioPage() {
                   </span>
                 ))}
               </div>
-            </Card>
+              <div className="border-t border-[var(--glass-border)] pt-4 mt-4">
+                <DownloadDesktopApp />
+                <UpdateChecker />
+              </div>
+              </Card>
+            </div>
 
             {/* Mapa del web: los 3 bloques (Inicio, Programación, Curso), cada
                 baldosín lista también las pestañas que contiene esa página. */}
             <div className="space-y-3">
-              <h2 className="text-heading font-bold text-foreground border-b border-[var(--glass-border)] pb-2">
+              <SectionHeading id="bienvenida-mapa" icon={Map} scrollMt="260px">
                 {t('campos.inicio.mapaWebTitulo', {defaultValue: 'Mapa del web'})}
-              </h2>
+              </SectionHeading>
               <div className="space-y-12">
                 {navGroups.map((group, groupIdx) => {
                   const baseTitle = group.title.replace(/\s*\[.*\]$/, '');
@@ -490,54 +519,47 @@ export default function InicioPage() {
 
                 {/* Seguridad y privacidad -- movida al final de Bienvenida
                     (Rafael, 2026-09-26; antes al final de Datos desde
-                    2026-09-23). */}
-                <section className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl p-8">
-                  <div className="flex items-center gap-4 mb-2">
-                    <div className="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
-                      <Shield className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h2 className="text-subheading font-bold text-foreground">{t('campos.archivos.privacidadDisenoTitulo', {defaultValue: 'Tu privacidad por diseño'})}</h2>
-                      <p className="text-muted mt-1 text-body">{t('campos.archivos.privacidadDisenoDesc', {defaultValue: 'Cómo se garantiza que tus datos reales son 100% tuyos.'})}</p>
-                    </div>
+                    2026-09-23). Simplificado (2026-09-27, "mucha caja dentro
+                    de otra caja"): un único Card, sin cajón por apartado --
+                    mismo patrón que los "Paso N" de Ayuda > Guía. */}
+                <div className="space-y-3">
+                <SectionHeading id="bienvenida-privacidad" icon={Shield} scrollMt="260px">
+                  {t('campos.archivos.privacidadDisenoTitulo', {defaultValue: 'Tu privacidad por diseño'})}
+                </SectionHeading>
+                <Card className="p-6 space-y-6">
+                  <p className="text-muted text-body">{t('campos.archivos.privacidadDisenoDesc', {defaultValue: 'Cómo se garantiza que tus datos reales son 100% tuyos.'})}</p>
+
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground flex items-center gap-2"><Building2 className="w-5 h-5 text-accent"/> {t('campos.archivos.servidorCiegoTitulo', {defaultValue: '1. El servidor es ciego'})}</h4>
+                    <p className="text-muted leading-relaxed text-body">{t('campos.archivos.servidorCiegoDesc', {defaultValue: 'Nuestra base de datos en la nube jamás almacena datos de tus alumnos, tus programaciones, ni nada que crees. El servidor web solo existe para enviarte los Catálogos Oficiales (BOE/BOCAA). Eres invisible para nuestro backend.'})}</p>
                   </div>
 
-                  <div className="space-y-4">
-                    <div className="p-5 bg-background rounded-xl border border-[var(--glass-border)]">
-                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Building2 className="w-5 h-5 text-accent"/> {t('campos.archivos.servidorCiegoTitulo', {defaultValue: '1. El servidor es ciego'})}</h3>
-                      <p className="text-muted leading-relaxed text-body">{t('campos.archivos.servidorCiegoDesc', {defaultValue: 'Nuestra base de datos en la nube jamás almacena datos de tus alumnos, tus programaciones, ni nada que crees. El servidor web solo existe para enviarte los Catálogos Oficiales (BOE/BOCAA). Eres invisible para nuestro backend.'})}</p>
-                    </div>
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground flex items-center gap-2"><Lock className="w-5 h-5 text-accent"/> {t('campos.archivos.cifradoLocalTitulo', {defaultValue: '2. Cifrado local avanzado AES-256'})}</h4>
+                    <p className="text-muted leading-relaxed text-body">{t('campos.archivos.cifradoLocalDesc', {defaultValue: 'Puedes activar la encriptación local. Antes de que cualquier archivo se guarde en tu disco duro o nube, se cifra usando tu clave maestra dentro de tu navegador.'})}</p>
 
-                    <div className="p-5 bg-background rounded-xl border border-[var(--glass-border)]">
-                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Lock className="w-5 h-5 text-accent"/> {t('campos.archivos.cifradoLocalTitulo', {defaultValue: '2. Cifrado local avanzado AES-256'})}</h3>
-                      <p className="text-muted leading-relaxed mb-4 text-body">{t('campos.archivos.cifradoLocalDesc', {defaultValue: 'Puedes activar la encriptación local. Antes de que cualquier archivo se guarde en tu disco duro o nube, se cifra usando tu clave maestra dentro de tu navegador.'})}</p>
-
-                      <div className="bg-[var(--glass-bg)] border border-[var(--glass-border)] p-4 rounded-lg">
-                        <label className="block text-body font-medium text-foreground mb-2">{t('campos.archivos.establecerClaveLabel', {defaultValue: 'Establecer clave de seguridad (no se guarda en ningún sitio)'})}</label>
-                        <div className="flex gap-2">
-                          <input
-                            type="password"
-                            className="flex-1 bg-background border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent text-body"
-                            placeholder={t('placeholders.archivos.claveMaestra', {defaultValue: 'Introduce tu clave maestra...'})}
-                            value={useAppStore.getState().encryptionKey || ""}
-                            onChange={(e) => useAppStore.getState().setEncryptionKey(e.target.value || null)}
-                          />
-                        </div>
-                        <p className="text-caption text-muted mt-2"><AlertTriangle className="w-3 h-3 inline mr-1 text-warning"/> {t('campos.archivos.avisoOlvidoClave', {defaultValue: 'Si olvidas esta clave y guardas un archivo, no podremos ayudarte a recuperarlo.'})}</p>
-                      </div>
-                    </div>
-
-                    <div className="p-5 bg-background rounded-xl border border-[var(--glass-border)]">
-                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><CheckCircle className="w-5 h-5 text-accent"/> {t('campos.archivos.defensaAtaquesTitulo', {defaultValue: '3. Defensa contra ataques en el navegador'})}</h3>
-                      <p className="text-muted leading-relaxed text-body">{t('campos.archivos.defensaAtaquesDesc', {defaultValue: 'Hemos implementado una política estricta de seguridad de contenido (CSP) para bloquear scripts maliciosos de terceros.'})}</p>
-                    </div>
-
-                    <div className="p-5 bg-background rounded-xl border border-[var(--glass-border)]">
-                      <h3 className="font-semibold text-foreground flex items-center gap-2 mb-2"><Activity className="w-5 h-5 text-accent"/> {t('campos.archivos.servidorBlindadoTitulo', {defaultValue: '4. Servidor blindado y siempre disponible'})}</h3>
-                      <p className="text-muted leading-relaxed text-body">{t('campos.archivos.servidorBlindadoDesc', {defaultValue: 'Nuestro servidor backend incorpora Rate Limiting, garantizando que siempre tendrás acceso al catálogo oficial de módulos.'})}</p>
-                    </div>
+                    <label className="block text-body font-medium text-foreground mt-3 mb-2">{t('campos.archivos.establecerClaveLabel', {defaultValue: 'Establecer clave de seguridad (no se guarda en ningún sitio)'})}</label>
+                    <input
+                      type="password"
+                      className="w-full bg-background border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent text-body"
+                      placeholder={t('placeholders.archivos.claveMaestra', {defaultValue: 'Introduce tu clave maestra...'})}
+                      value={useAppStore.getState().encryptionKey || ""}
+                      onChange={(e) => useAppStore.getState().setEncryptionKey(e.target.value || null)}
+                    />
+                    <p className="text-caption text-muted mt-2"><AlertTriangle className="w-3 h-3 inline mr-1 text-warning"/> {t('campos.archivos.avisoOlvidoClave', {defaultValue: 'Si olvidas esta clave y guardas un archivo, no podremos ayudarte a recuperarlo.'})}</p>
                   </div>
-                </section>
+
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground flex items-center gap-2"><CheckCircle className="w-5 h-5 text-accent"/> {t('campos.archivos.defensaAtaquesTitulo', {defaultValue: '3. Defensa contra ataques en el navegador'})}</h4>
+                    <p className="text-muted leading-relaxed text-body">{t('campos.archivos.defensaAtaquesDesc', {defaultValue: 'Hemos implementado una política estricta de seguridad de contenido (CSP) para bloquear scripts maliciosos de terceros.'})}</p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground flex items-center gap-2"><Activity className="w-5 h-5 text-accent"/> {t('campos.archivos.servidorBlindadoTitulo', {defaultValue: '4. Servidor blindado y siempre disponible'})}</h4>
+                    <p className="text-muted leading-relaxed text-body">{t('campos.archivos.servidorBlindadoDesc', {defaultValue: 'Nuestro servidor backend incorpora Rate Limiting, garantizando que siempre tendrás acceso al catálogo oficial de módulos.'})}</p>
+                  </div>
+                </Card>
+                </div>
 
               </div>
             )}

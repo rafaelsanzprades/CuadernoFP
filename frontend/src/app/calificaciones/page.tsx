@@ -24,7 +24,6 @@ import { PropuestasTab } from "@/components/features/modulo/PropuestasTab";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
-import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import Link from "next/link";
 import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
 import { getApiBase } from "@/services/apiBase";
@@ -206,10 +205,15 @@ export default function ProgresoPage() {
                 </Button>
               </div>
             </div>
+
+            {/* Descripción de la pestaña activa -- texto plano, sin cajón,
+                mismo patrón que Inicio/Ayuda/MagIA/Normativa/Legal */}
+            <p className="text-body text-muted mt-3">
+              {TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab}
+            </p>
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-3 px-8 pt-4 pb-12">
-          <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
 
           {/* TAB 1: RESUMEN -- fusiona (2026-09-20) lo que antes eran 3 pestañas
               aparte (Resumen, Estadísticas, Análisis) más "Progreso de RA y UD"

@@ -1,56 +1,72 @@
 "use client";
-import { useState, useEffect } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
+import { Bot, Wrench, Download, CalendarDays, ClipboardList, FileSpreadsheet, type LucideIcon } from "lucide-react";
 import { Card } from "@/components/ui/Card";
-import { useTranslation } from "react-i18next";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { GUIA_PASOS, type GuiaNode } from "@/data/guiaData";
 
-const guiaMarkdownComponents = {
-  h1: ({ node, ...props }: any) => <h1 className="text-heading font-extrabold text-foreground mb-6 pb-2 border-b border-white/10" {...props} />,
-  h2: ({ node, ...props }: any) => <h2 className="text-subheading font-bold text-accent mt-8 mb-4 flex items-center gap-2" {...props} />,
-  h3: ({ node, ...props }: any) => <h3 className="text-subheading font-bold text-foreground mt-6 mb-3" {...props} />,
-  p: ({ node, ...props }: any) => <p className="text-muted leading-relaxed mb-4" {...props} />,
-  ul: ({ node, className, ...props }: any) => <ul className={`list-none space-y-3 mb-6 ml-4 ${className || ''}`} {...props} />,
-  ol: ({ node, className, ...props }: any) => <ol className={`list-decimal space-y-3 mb-6 ml-6 ${className || ''}`} {...props} />,
-  li: ({ node, ...props }: any) => <li className="text-body text-muted leading-relaxed" {...props} />,
-  strong: ({ node, ...props }: any) => <strong className="font-bold text-foreground" {...props} />,
-  a: ({ node, ...props }: any) => <a className="text-accent hover:underline font-semibold" target="_blank" rel="noopener noreferrer" {...props} />,
-  code: ({ node, ...props }: any) => <code className="bg-foreground/10 text-foreground px-1.5 py-0.5 rounded text-body font-mono" {...props} />,
-  pre: ({ node, ...props }: any) => <pre className="block bg-foreground/5 p-4 rounded-xl text-body font-mono overflow-x-auto mb-4 border border-white/5 text-muted" {...props} />,
-  hr: ({ node, ...props }: any) => <hr className="border-white/10 my-8" {...props} />,
-  table: ({ node, ...props }: any) => <div className="overflow-x-auto mb-6"><table className="w-full text-left border-collapse" {...props} /></div>,
-  th: ({ node, ...props }: any) => <th className="p-2 border border-[var(--glass-border)] bg-foreground/5 text-body font-bold text-foreground" {...props} />,
-  td: ({ node, ...props }: any) => <td className="p-2 border border-[var(--glass-border)] text-body text-muted" {...props} />,
+const PASO_ICONS: Record<string, LucideIcon> = {
+  "0": Bot,
+  "1": Wrench,
+  "2": Download,
+  "3": CalendarDays,
+  "4": ClipboardList,
+  "5": FileSpreadsheet,
 };
 
-export function GuiaTab() {
-  const { t } = useTranslation();
-  const [guiaContent, setGuiaContent] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (guiaContent !== null) return;
-    fetch("/Guia.md")
-      .then(res => res.text())
-      .then(text => setGuiaContent(text))
-      .catch(err => {
-        console.error(err);
-        setGuiaContent(t('campos.ayuda.errorCargandoContenido', {defaultValue: 'Error cargando el contenido.'}));
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+// Árbol de navegación (Bloque > Página > Pestaña > Acción...) -- una guía de
+// "dónde hacer clic exactamente", así que se renderiza como lista anidada
+// con una guía vertical por nivel, en vez de intentar reproducir cada tipo
+// de campo (Botón/Selector/Tabla/...) con un estilo distinto.
+export function GuiaTree({ nodes, depth = 0 }: { nodes: GuiaNode[]; depth?: number }) {
   return (
-    <Card glow className="p-8">
-      {guiaContent === null ? (
-        <div className="flex justify-center p-8 text-muted">{t('common.cargando', {defaultValue: 'Cargando...'})}</div>
-      ) : (
-        <div className="markdown-body">
-          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={guiaMarkdownComponents}>
-            {guiaContent}
-          </ReactMarkdown>
+    <ul className={depth > 0 ? "mt-2 ml-4 pl-4 space-y-2 border-l border-[var(--glass-border)]" : "space-y-2"}>
+      {nodes.map((node, i) => (
+        <li key={i}>
+          <p className="text-body text-muted leading-relaxed">
+            {node.label && <span className="font-semibold text-foreground">{node.label}: </span>}
+            {node.text}
+          </p>
+          {node.children && <GuiaTree nodes={node.children} depth={depth + 1} />}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export function GuiaTab() {
+  return (
+    <div className="space-y-6 animate-in fade-in duration-300">
+      {GUIA_PASOS.map(paso => (
+        <div key={paso.id} className="space-y-3">
+          <SectionHeading id={paso.id} number={Number(paso.numero)} icon={PASO_ICONS[paso.numero]} scrollMt="260px">
+            {paso.titulo}
+          </SectionHeading>
+          <Card className="p-6 space-y-6">
+            {paso.intro?.map((p, i) => (
+              <p key={i} className="text-body text-muted leading-relaxed">{p}</p>
+            ))}
+            {paso.subsecciones.map((sub, idx) => (
+              <div key={sub.numero} className={idx > 0 ? "space-y-2 pt-6 border-t border-[var(--glass-border)]" : "space-y-2"}>
+                <h4 className="text-body font-bold text-foreground">{sub.numero}. {sub.titulo}</h4>
+                <div className="pl-4 border-l border-[var(--glass-border)] space-y-2">
+                  {sub.intro && <p className="text-body text-muted leading-relaxed">{sub.intro}</p>}
+                  <GuiaTree nodes={sub.nodes} />
+                  {sub.nota && (
+                    <div className="mt-3 p-3 rounded-lg bg-info/5 border border-info/20 text-body text-muted">
+                      {sub.nota}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+            {paso.notaFinal && (
+              <div className="p-3 rounded-lg bg-accent/5 border border-accent/20 text-body text-muted">
+                {paso.notaFinal}
+              </div>
+            )}
+          </Card>
         </div>
-      )}
-    </Card>
+      ))}
+    </div>
   );
 }

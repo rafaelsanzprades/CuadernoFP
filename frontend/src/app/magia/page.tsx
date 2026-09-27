@@ -15,7 +15,8 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
-import { TabInfoBox } from "@/components/ui/TabInfoBox";
+import { SectionIndex } from "@/components/ui/SectionIndex";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TabSync } from "@/components/ui/TabSync";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { getAutoMilestones } from "@/utils/calendarMilestones";
@@ -338,6 +339,20 @@ export default function MagiaPage() {
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel || activeTab;
 
+  // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
+  const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
+    programacion: [
+      { id: "magia-programacion-documentos", label: t('campos.magia.documentosApoyoCurriculoTitulo', {defaultValue: 'Documentos de apoyo al currículo'}) },
+      { id: "magia-programacion-comunidades", label: t('campos.magia.documentosPorComunidadTitulo', {defaultValue: 'Documentos programáticos por Comunidades autónomas'}) },
+    ],
+    curso: [
+      { id: "magia-curso-calendario", label: t('nav.calendario', {defaultValue: 'Calendario'}) },
+      { id: "magia-curso-alumnado", label: t('nav.alumnado', {defaultValue: 'Alumnado'}) },
+      { id: "magia-curso-seguimiento", label: t('campos.magia.seguimientoLabel', {defaultValue: 'Seguimiento'}) },
+      { id: "magia-curso-calificaciones", label: t('nav.calificaciones', {defaultValue: 'Calificaciones'}) },
+    ],
+  };
+
   return (
     <div className="flex min-h-screen bg-background">
       <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -391,11 +406,19 @@ export default function MagiaPage() {
                     ))}
                   </TabsList>
                 </Tabs>
+
+                {/* Descripción de la pestaña activa -- texto plano, sin cajón,
+                    mismo patrón que /legal */}
+                <p className="text-body text-muted mt-3">
+                  {TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab}
+                </p>
+
+                {/* Índice de bloques de la pestaña activa -- dentro del header
+                    fijo (sticky top-0), así que no se pierde al hacer scroll. */}
+                <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} />
               </StickyPageHeader>
 
-              <MotionWrapper className="w-full space-y-3 px-8 pt-4 pb-12">
-                <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
-
+              <MotionWrapper className="w-full space-y-3 px-8 pt-4 pb-[280px]">
                 {/* ══════════════════════════ ANÁLISIS APP->PDx ══════════════════════════ */}
                 {activeTab === "analisis-pdx" && <AnalisisPdxTab />}
 
@@ -430,8 +453,10 @@ export default function MagiaPage() {
                         {/* ── Currículo + Instrumento fusionados en un solo bloque
                             (antes 2 Cards separadas, 2026-09-25, petición de Rafael:
                             "mejor quitar los dos bloques... uno solo... y ya esta claro") ── */}
+                        <SectionHeading id="magia-programacion-documentos" icon={Grid} scrollMt="260px">
+                          {t('campos.magia.documentosApoyoCurriculoTitulo', {defaultValue: 'Documentos de apoyo al currículo'})}
+                        </SectionHeading>
                         <Card className="p-6 border-t-4 border-t-teal-500">
-                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Grid className="w-4 h-4" /></span> {t('campos.magia.documentosApoyoCurriculoTitulo', {defaultValue: 'Documentos de apoyo al currículo'})}</h2>
                           <p className="text-body text-muted mb-6">{t('campos.magia.documentosApoyoCurriculoDesc', {defaultValue: 'Cruce de resultados de aprendizaje, criterios e instrumentos; documentos de UD y tareas.'})}</p>
                           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
@@ -503,8 +528,10 @@ export default function MagiaPage() {
                         {/* ── Documentos programáticos por Comunidades autónomas (antes
                             pestaña propia "Documentos PDx" / "Comunidades" -- traída aquí
                             debajo, 2026-09-25, petición de Rafael) ── */}
+                        <SectionHeading id="magia-programacion-comunidades" icon={MapPin} scrollMt="260px">
+                          {t('campos.magia.documentosPorComunidadTitulo', {defaultValue: 'Documentos programáticos por Comunidades autónomas'})}
+                        </SectionHeading>
                         <Card className="p-6 border-t-4 border-t-purple-500">
-                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><MapPin className="w-4 h-4" /></span> {t('campos.magia.documentosPorComunidadTitulo', {defaultValue: 'Documentos programáticos por Comunidades autónomas'})}</h2>
                           <p className="text-body text-muted mb-6">{t('tabs.magia.documentosPdx.desc', {defaultValue: 'Genera y descarga las programaciones didácticas PD-, PD= y PD+ en formato editable, por comunidad autónoma.'})}</p>
                           <div className="space-y-4">
                             {["Andalucía", "Aragón", "Asturias", "Baleares", "Canarias", "Cantabria", "Castilla-La Mancha", "Castilla y León", "Cataluña", "Comunidad Valenciana", "Extremadura", "Galicia", "Madrid", "Murcia", "Navarra", "País Vasco", "La Rioja", "Ceuta", "Melilla"].map((comunidad) => {
@@ -609,8 +636,10 @@ export default function MagiaPage() {
                 {activeTab === 'curso' && (
                   <div className="space-y-4 animate-in fade-in duration-500">
                     {/* ── Calendario ── */}
+                    <SectionHeading id="magia-curso-calendario" icon={Calendar} scrollMt="260px">
+                      {t('nav.calendario', {defaultValue: 'Calendario'})}
+                    </SectionHeading>
                     <Card className="p-6 border-t-4 border-t-emerald-500">
-                      <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Calendar className="w-4 h-4" /></span> {t('nav.calendario', {defaultValue: 'Calendario'})}</h2>
                       <p className="text-body text-muted mb-6">{t('campos.magia.calendarioDesc', {defaultValue: 'Horario, trimestres, festivos y eventos.'})}</p>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
@@ -624,8 +653,10 @@ export default function MagiaPage() {
                     </Card>
 
                     {/* ── Alumnado ── */}
+                    <SectionHeading id="magia-curso-alumnado" icon={Users} scrollMt="260px">
+                      {t('nav.alumnado', {defaultValue: 'Alumnado'})}
+                    </SectionHeading>
                     <Card className="p-6 border-t-4 border-t-emerald-500">
-                      <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Users className="w-4 h-4" /></span> {t('nav.alumnado', {defaultValue: 'Alumnado'})}</h2>
                       <p className="text-body text-muted mb-6">{t('campos.magia.alumnadoDesc', {defaultValue: 'Fichas personales y ubicación en el aula.'})}</p>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
@@ -687,8 +718,10 @@ export default function MagiaPage() {
                     </Card>
 
                     {/* ── Seguimiento ── */}
+                    <SectionHeading id="magia-curso-seguimiento" icon={TrendingUp} scrollMt="260px">
+                      {t('campos.magia.seguimientoLabel', {defaultValue: 'Seguimiento'})}
+                    </SectionHeading>
                     <Card className="p-6 border-t-4 border-t-emerald-500">
-                      <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><TrendingUp className="w-4 h-4" /></span> {t('campos.magia.seguimientoLabel', {defaultValue: 'Seguimiento'})}</h2>
                       <p className="text-body text-muted mb-6">{t('campos.magia.seguimientoDesc', {defaultValue: 'Diario de clases, secuenciación por UD y planificación mensual.'})}</p>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
@@ -716,16 +749,16 @@ export default function MagiaPage() {
                     </Card>
 
                     {/* ── Calificaciones ── */}
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                      <SectionHeading id="magia-curso-calificaciones" icon={Award} scrollMt="260px" className="flex-1">
+                        {t('nav.calificaciones', {defaultValue: 'Calificaciones'})}
+                      </SectionHeading>
+                      <Button variant="success" onClick={handleExportExcelCompleto} className="gap-2 shrink-0">
+                        <FileSpreadsheet className="w-4 h-4" /> {t('botones.magia.exportarExcelCompleto', {defaultValue: 'Exportar Excel completo'})}
+                      </Button>
+                    </div>
                     <Card className="p-6 border-t-4 border-t-blue-500">
-                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
-                        <div>
-                          <h2 className="text-heading font-bold mb-1"><span className="inline-flex"><Award className="w-4 h-4" /></span> {t('nav.calificaciones', {defaultValue: 'Calificaciones'})}</h2>
-                          <p className="text-body text-muted">{t('campos.magia.calificacionesDesc', {defaultValue: 'Boletines, actas de evaluación e informes por alumno/a.'})}</p>
-                        </div>
-                        <Button variant="success" onClick={handleExportExcelCompleto} className="gap-2 shrink-0">
-                          <FileSpreadsheet className="w-4 h-4" /> {t('botones.magia.exportarExcelCompleto', {defaultValue: 'Exportar Excel completo'})}
-                        </Button>
-                      </div>
+                      <p className="text-body text-muted mb-6">{t('campos.magia.calificacionesDesc', {defaultValue: 'Boletines, actas de evaluación e informes por alumno/a.'})}</p>
 
                       {/* Primera fila: 3 Trimestres */}
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

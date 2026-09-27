@@ -18,7 +18,6 @@ import { ContextoAgenda } from "@/components/features/dashboard/ContextoAgenda";
 import { DesarrolloUdActual } from "@/components/features/dashboard/DesarrolloUdActual";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
-import { TabInfoBox } from "@/components/ui/TabInfoBox";
 import { TabRelacionRaUd } from "@/components/features/curriculo/TabRelacionRaUd";
 import { Target } from "lucide-react";
 import { getApiBase } from "@/services/apiBase";
@@ -107,11 +106,16 @@ export default function AgendaPage() {
                 </TabsList>
               </Tabs>
             </div>
+
+            {/* Descripción de la pestaña activa -- texto plano, sin cajón,
+                mismo patrón que Inicio/Ayuda/MagIA/Normativa/Legal */}
+            <p className="text-body text-muted mt-3">
+              {TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab}
+            </p>
           </StickyPageHeader>
 
           <div className="w-full space-y-4 px-8 pt-4 pb-12">
 
-            <TabInfoBox description={TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab} />
 
             {/* Contenido Pestaña Actual */}
             {activeTab === "actual" && (
