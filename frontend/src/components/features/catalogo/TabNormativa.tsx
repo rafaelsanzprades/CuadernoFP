@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/Card";
 import { Landmark, Map, FileText, ChevronDown, ChevronUp, Info } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { AccordionBlock } from "@/components/ui/AccordionBlock";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useTranslation } from "react-i18next";
 
 interface NormativaItem {
@@ -841,20 +842,24 @@ export function TabNormativa({ searchQuery = "" }: Props) {
     ])
   );
 
+  const GENERAL_TITULO = t('campos.normativa.normativaGeneral', {defaultValue: 'Normativa general'});
+  const AUTONOMICA_TITULO = t('campos.normativa.normativaAutonomicaTitulo', {defaultValue: 'Normativa autonómica'});
+
   return (
-    <div className="space-y-4 animate-fade-in pb-8">
-      <div className="px-2 mb-6">
-        <h2 className="text-subheading font-bold flex items-center gap-3">
-          <span className="p-2 bg-primary/10 rounded-lg text-primary shrink-0"><Landmark className="w-5 h-5" /></span>
-          Referencias bibliográficas
-        </h2>
-      </div>
+    <div className="space-y-6 animate-fade-in pb-8">
+      {/* El índice de este bloque vive en la cabecera fija de la página
+          (normativa/page.tsx), no aquí -- mismo patrón que /legal. */}
+
+      <div className="space-y-3">
+        <SectionHeading id="bib-general" icon={Landmark} scrollMt="260px">
+          {GENERAL_TITULO}
+        </SectionHeading>
 
       {filteredEstatal.length > 0 && (
         <AccordionBlock
-          title={t('campos.normativa.normativaEstatal', {defaultValue: 'Normativa estatal'})}
+          title={t('campos.normativa.estatal', {defaultValue: 'Estatal'})}
           icon={<Landmark className="w-5 h-5" />}
-          defaultOpen={true}
+          defaultOpen={false}
         >
           <div className="overflow-x-auto">
             <table className="w-full text-left text-body">
@@ -883,18 +888,24 @@ export function TabNormativa({ searchQuery = "" }: Props) {
           </div>
         </AccordionBlock>
       )}
+      </div>
+
+      <div className="space-y-3">
+        <SectionHeading id="bib-autonomica" icon={Map} scrollMt="260px">
+          {AUTONOMICA_TITULO}
+        </SectionHeading>
 
       {COMUNIDADES.map(comunidad => {
         const items = ITEMS_POR_COMUNIDAD[comunidad] || [];
         const matchComunidad = comunidad.toLowerCase().includes(searchQuery.toLowerCase());
-        
+
         // Hide if we are searching and neither the community name nor its items match
         if (searchQuery !== "" && items.length === 0 && !matchComunidad) return null;
 
         return (
           <AccordionBlock
             key={comunidad}
-            title={t('campos.normativa.normativaAutonomica', {comunidad, defaultValue: `Normativa autonómica (${comunidad})`})}
+            title={comunidad}
             icon={<Map className="w-5 h-5" />}
             defaultOpen={items.length > 0 && searchQuery !== ""}
           >
@@ -934,6 +945,7 @@ export function TabNormativa({ searchQuery = "" }: Props) {
           </AccordionBlock>
         );
       })}
+      </div>
 
       {/* NO RESULTS */}
       {filteredEstatal.length === 0 && Object.values(ITEMS_POR_COMUNIDAD).every(items => items.length === 0) && !COMUNIDADES.some(c => c.toLowerCase().includes(searchQuery.toLowerCase())) && (

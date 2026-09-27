@@ -2676,7 +2676,7 @@
     "ayuda": {
       "faq": {
         "grupo1": {
-          "titulo": "1. Conceptes previs i seguretat",
+          "titulo": "1. Conceptes previs",
           "q1": "Què és l'arquitectura Híbrida (Local-First + Cloud)?",
           "a1": "S'utilitza una arquitectura moderna. Les teves dades de treball (alumnat, notes) es processen localment al teu navegador, garantint total privacitat i velocitat. Les operacions pesades (generació d'informes PDF o connexió amb Intel·ligència Artificial) es recolzen de forma segura en un servidor central.",
           "q2": "On es guarden les meves dades?",
@@ -2689,7 +2689,7 @@
           "a5": "Sí. Per transferir el teu entorn entre l'ordinador de l'institut i el teu portàtil personal, només has d''Exportar' el teu progrés a l'ordinador A i prémer 'Importar' a l'ordinador B."
         },
         "grupo2": {
-          "titulo": "2. Pas 1: La programació didàctica",
+          "titulo": "2. Programació didàctica",
           "q1": "He d'introduir a mà tots els RA i CE del BOE?",
           "a1": "No! El sistema compta amb un Catàleg oficial que importa automàticament la normativa legal (Resultats d'aprenentatge i Criteris) del teu mòdul. Només has de triar el teu Grau i el teu Cicle Formatiu a la secció inicial de Catàleg i el sistema ho fa per tu.",
           "q2": "Què significa que els RA no sumen 100% a les verificacions?",
@@ -2704,7 +2704,7 @@
           "a6": "Per a cada Criteri d'Avaluació (CE) hi ha dues coses diferents: l'instrument d'avaluació és l'activitat que genera l'evidència (una prova objectiva, una tasca, una defensa oral...), i l'instrument de qualificació és el que puntua aquesta evidència (una rúbrica, una escala, una llista de cotejament...). A Instruments pots codificar tots dos per separat en configurar cada instrument."
         },
         "grupo3": {
-          "titulo": "3. Pas 3: Creació del curs i l'alumnat",
+          "titulo": "3. Creació del curs",
           "q1": "Puc importar alumnat des de plataformes com Séneca, Rayuela o un Excel?",
           "a1": "Sí. A la secció d'‘Alumnat' pots importar un arxiu CSV (Excel) amb la teva llista de classe. Alternativament, la taula intel·ligent et permet copiar i enganxar cel·les massivament, igual que si fos un full de càlcul.",
           "q2": "Quin nivell de seguretat tenen les dades del meu alumnat?",
@@ -2717,7 +2717,7 @@
           "a5": "El panell de prevenció primerenca et permet registrar trucades a les famílies, partes disciplinaris o derivacions al departament d'orientació per a alumnat amb risc d'abandonament escolar."
         },
         "grupo4": {
-          "titulo": "4. Pas 5: El dia a dia i l'avaluació",
+          "titulo": "4. El dia a dia i l'avaluació",
           "q1": "Què és el 'Diari d'aula'?",
           "a1": "És el teu quadern de bitàcola diari. Et permet anotar el que passa en cada sessió real de classe: quina UD has impartit, si hi ha hagut incidències o marcar dies 'Sense docència' (com vagues o claustres) perquè no comptin en el teu progrés.",
           "q2": "Com es calcula la previsió de 'Planificació mensual'?",
@@ -2737,7 +2737,7 @@
           "a1": "Sí. Des de la pestanya 'Curs' de MagIA pots generar butlletins en PDF massius per a tota la classe o resums individuals hiperdetallats que justifiquen la nota en base a cada Criteri d'Avaluació assolit."
         },
         "grupo7": {
-          "titulo": "7. Suport tècnic",
+          "titulo": "6. Suport tècnic",
           "q1": "Què passa si els gràfics del meu tauler de control no carreguen?",
           "a1": "Comprova a la barra lateral que has activat el 'Mode Reals' i tens seleccionat el teu Grup. Els gràfics necessiten saber a quin alumnat i a quina programació apunten per poder analitzar les dades.",
           "q2": "Es pot fer servir Cuaderno FP al mòbil?",
@@ -2769,15 +2769,15 @@
       "cargandoDatosProgreso": "Carregant dades de progrés acadèmic..."
     },
     "inicio": {
-      "metodologiaEspecificaTitulo": "Una eina construïda sobre metodologia específica",
+      "metodologiaEspecificaTitulo": "Metodologia específica de Formació Professional",
       "metodologiaEspecificaDesc": "Cuaderno FP segueix les referències bibliogràfiques actualitzades a la nova llei de FP, les orientacions de la Inspecció Educativa, els principals autors de referència i les guies oficials de les administracions educatives: els Resultats d'Aprenentatge (RA) són l'eix causal del qual es considera que ha de derivar tota la resta en una programació didàctica.",
       "pasoIdentificacion": "Identificació",
       "pasoIntroduccionJustificacionNormativa": "Introducció, justificació i normativa",
       "pasoContextualizacion": "Contextualització",
       "pasoObjetivosCompetencias": "Objectius i competències",
       "pasoCaracterIntermodularDual": "Caràcter intermodular i dual",
-      "pasoContenidosCentradosRa": "Continguts centrats en RA",
-      "pasoSituacionesAprendizaje": "Situacions d'aprenentatge",
+      "pasoContenidosCentradosRa": "Continguts teoricopràctics",
+      "pasoSituacionesAprendizaje": "Resultats d'aprenentatge",
       "pasoMetodologiaInclusion": "Metodologia i inclusió",
       "pasoEvaluacion": "Avaluació (aprenentatge / pràctiques / excepcions)",
       "pasoActividadesComplementarias": "Activitats complementàries",

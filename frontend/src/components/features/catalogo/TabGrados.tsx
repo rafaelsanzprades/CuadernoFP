@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Award, Info, Layers } from "lucide-react";
 import { Card } from "@/components/ui/Card";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useTranslation } from "react-i18next";
 
 /**
@@ -64,13 +65,12 @@ export function TabGrados() {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Cabecera */}
+    <div className="space-y-3">
+      <SectionHeading icon={Layers}>
+        {t('checks.catalogo.gradosDelAAlE', {defaultValue: 'Grados del A al E'})}
+      </SectionHeading>
       {/* Tarjetas de grados */}
       <Card className="p-6">
-        <h2 className="text-subheading font-bold text-foreground mb-6 flex items-center gap-2">
-          <Layers className="w-6 h-6 text-accent" /> {t('checks.catalogo.gradosDelAAlE', {defaultValue: 'Grados del A al E'})}
-        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           {GRADOS.map((g) => (
             <button

@@ -2674,7 +2674,7 @@
     "ayuda": {
       "faq": {
         "grupo1": {
-          "titulo": "1. Prior concepts and security",
+          "titulo": "1. Prior concepts",
           "q1": "What is the Hybrid architecture (Local-First + Cloud)?",
           "a1": "A modern architecture is used. Your working data (students, grades) is processed locally in your browser, guaranteeing total privacy and speed. Heavy operations (PDF report generation or connection with Artificial Intelligence) rely securely on a central server.",
           "q2": "Where is my data stored?",
@@ -2687,7 +2687,7 @@
           "a5": "Yes. To transfer your environment between your school computer and your personal laptop, just 'Export' your progress on computer A and click 'Import' on computer B."
         },
         "grupo2": {
-          "titulo": "2. Step 1: The didactic curriculum plan",
+          "titulo": "2. Didactic curriculum plan",
           "q1": "Do I have to manually enter all the RA and CE from the BOE?",
           "a1": "No! The system includes an official Catalog that automatically imports the legal regulations (learning outcomes and criteria) for your module. You just need to choose your Grade and your Training Cycle in the initial Catalog section, and the system does it for you.",
           "q2": "What does it mean that the RA don't add up to 100% in the checks?",
@@ -2702,7 +2702,7 @@
           "a6": "For each Assessment Criterion (CE) there are two distinct things: the assessment instrument is the activity that generates the evidence (an objective test, a task, an oral defence...), and the grading instrument is what scores that evidence (a rubric, a scale, a checklist...). In Instruments you can code both separately when configuring each instrument."
         },
         "grupo3": {
-          "titulo": "3. Step 3: Creating the course and roster",
+          "titulo": "3. Creating the course",
           "q1": "Can I import students from platforms like Séneca, Rayuela, or an Excel file?",
           "a1": "Yes. In the 'Students' section you can import a CSV (Excel) file with your class list. Alternatively, the smart table lets you copy and paste cells in bulk, just like a spreadsheet.",
           "q2": "What level of security does my students' data have?",
@@ -2715,7 +2715,7 @@
           "a5": "The early-prevention panel lets you record calls to families, disciplinary reports, or referrals to the guidance department for students at risk of dropping out."
         },
         "grupo4": {
-          "titulo": "4. Step 5: Day-to-day work and assessment",
+          "titulo": "4. Day-to-day work and assessment",
           "q1": "What is the 'Classroom diary'?",
           "a1": "It's your daily logbook. It lets you note what happens in each actual class session: which UD you covered, whether there were any incidents, or mark 'No teaching' days (such as strikes or staff meetings) so they don't count toward your progress.",
           "q2": "How is the 'Monthly planning' forecast calculated?",
@@ -2735,7 +2735,7 @@
           "a1": "Yes. From the 'Course' tab in MagIA, you can generate bulk PDF report cards for the whole class, or hyper-detailed individual summaries that justify the grade based on each Assessment Criterion achieved."
         },
         "grupo7": {
-          "titulo": "7. Technical support",
+          "titulo": "6. Technical support",
           "q1": "What happens if the charts on my dashboard don't load?",
           "a1": "Check in the sidebar that you have enabled 'Real Mode' and have your Group selected. The charts need to know which students and which curriculum plan to point to in order to analyze the data.",
           "q2": "Can Cuaderno FP be used on a mobile phone?",
@@ -2767,15 +2767,15 @@
       "cargandoDatosProgreso": "Loading academic progress data..."
     },
     "inicio": {
-      "metodologiaEspecificaTitulo": "A tool built on specific methodology",
+      "metodologiaEspecificaTitulo": "Specific Vocational Training methodology",
       "metodologiaEspecificaDesc": "Cuaderno FP follows bibliographic references updated to the new FP law, the guidance of the Education Inspectorate, the main reference authors, and the official guides of the education administrations: the Learning Outcomes (RA) are considered the causal axis from which everything else in a didactic plan should derive.",
       "pasoIdentificacion": "Identification",
       "pasoIntroduccionJustificacionNormativa": "Introduction, justification and regulations",
       "pasoContextualizacion": "Contextualization",
       "pasoObjetivosCompetencias": "Objectives and competencies",
       "pasoCaracterIntermodularDual": "Intermodular and dual nature",
-      "pasoContenidosCentradosRa": "RA-centered content",
-      "pasoSituacionesAprendizaje": "Learning situations",
+      "pasoContenidosCentradosRa": "Theoretical-practical content",
+      "pasoSituacionesAprendizaje": "Learning outcomes",
       "pasoMetodologiaInclusion": "Methodology and inclusion",
       "pasoEvaluacion": "Assessment (learning / work placement / exceptions)",
       "pasoActividadesComplementarias": "Complementary activities",

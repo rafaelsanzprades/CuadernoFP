@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Landmark, Map, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { AccordionBlock } from '@/components/ui/AccordionBlock';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 import { useTranslation } from 'react-i18next';
 import { getApiBase } from "@/services/apiBase";
 
@@ -31,37 +32,47 @@ export function NormativaAccordion({ communities, onDownloadDoc, formatSize, get
   const estatalPath = estatalDir ? estatalDir.path : `Normativa/Estatal`;
 
   return (
-    <div className="space-y-4 animate-fade-in">
-      <LazyAccordionFolder
-        title={t('campos.normativa.legislacionEstatal', {defaultValue: 'Legislación estatal'})}
-        icon={<Landmark className="w-5 h-5" />}
-        defaultOpen={true}
-        path={estatalPath}
-        hasFiles={!!estatalDir}
-        emptyMessage={t('campos.normativa.sinDocumentosEstatales', {defaultValue: 'No hay documentos normativos estatales por el momento.'})}
-        onDownloadDoc={onDownloadDoc}
-        formatSize={formatSize}
-        getFileIcon={getFileIcon}
-      />
+    <div className="space-y-6 animate-fade-in">
+      <div className="space-y-3">
+        <SectionHeading id="leg-general" icon={Landmark} scrollMt="260px">
+          {t('campos.normativa.legislacionGeneral', {defaultValue: 'Legislación general'})}
+        </SectionHeading>
+        <LazyAccordionFolder
+          title={t('campos.normativa.estatal', {defaultValue: 'Estatal'})}
+          icon={<Landmark className="w-5 h-5" />}
+          defaultOpen={false}
+          path={estatalPath}
+          hasFiles={!!estatalDir}
+          emptyMessage={t('campos.normativa.sinDocumentosEstatales', {defaultValue: 'No hay documentos normativos estatales por el momento.'})}
+          onDownloadDoc={onDownloadDoc}
+          formatSize={formatSize}
+          getFileIcon={getFileIcon}
+        />
+      </div>
 
-      {TODAS_COMUNIDADES.map((comunidadName) => {
-        const backendDir = communities.find(c => c.is_dir && c.name === comunidadName);
-        const path = backendDir ? backendDir.path : `Normativa/${comunidadName}`;
+      <div className="space-y-3">
+        <SectionHeading id="leg-autonomica" icon={Map} scrollMt="260px">
+          {t('campos.normativa.legislacionAutonomicaTitulo', {defaultValue: 'Legislación autonómica'})}
+        </SectionHeading>
+        {TODAS_COMUNIDADES.map((comunidadName) => {
+          const backendDir = communities.find(c => c.is_dir && c.name === comunidadName);
+          const path = backendDir ? backendDir.path : `Normativa/${comunidadName}`;
 
-        return (
-          <LazyAccordionFolder
-            key={path}
-            title={t('campos.normativa.legislacionAutonomica', {comunidad: comunidadName, defaultValue: `Legislación autonómica (${comunidadName})`})}
-            icon={<Map className="w-5 h-5" />}
-            path={path}
-            hasFiles={!!backendDir}
-            emptyMessage={t('campos.normativa.sinDocumentosAutonomicos', {defaultValue: 'No hay documentos normativos en esta comunidad por el momento.'})}
-            onDownloadDoc={onDownloadDoc}
-            formatSize={formatSize}
-            getFileIcon={getFileIcon}
-          />
-        );
-      })}
+          return (
+            <LazyAccordionFolder
+              key={path}
+              title={comunidadName}
+              icon={<Map className="w-5 h-5" />}
+              path={path}
+              hasFiles={!!backendDir}
+              emptyMessage={t('campos.normativa.sinDocumentosAutonomicos', {defaultValue: 'No hay documentos normativos en esta comunidad por el momento.'})}
+              onDownloadDoc={onDownloadDoc}
+              formatSize={formatSize}
+              getFileIcon={getFileIcon}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

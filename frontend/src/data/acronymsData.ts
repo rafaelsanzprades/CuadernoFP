@@ -24,6 +24,18 @@ export const CATEGORY_LABELS: Record<AcronymCategory, string> = {
   otros: "Contexto educativo y otros"
 };
 
+// Orden de presentación de las categorías -- compartido entre TabAcronimos.tsx
+// (que las renderiza) y ayuda/page.tsx (que arma el índice de la cabecera).
+export const CATEGORY_ORDER: AcronymCategory[] = [
+  'metodologia',
+  'inclusion',
+  'estructura_fp',
+  'normativa',
+  'boletines',
+  'codificacion',
+  'otros',
+];
+
 export const acronymsData: AcronymItem[] = [
   {
     "id": 0,

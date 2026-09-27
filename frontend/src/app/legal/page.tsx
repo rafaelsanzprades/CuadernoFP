@@ -16,34 +16,14 @@ import Header from "@/components/layout/Header";
 import { TabSync } from "@/components/ui/TabSync";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
+import { SectionHeading as SharedSectionHeading } from "@/components/ui/SectionHeading";
+import { SectionIndex } from "@/components/ui/SectionIndex";
 
 /* ──────────────────────────────────────────────────────────────
-   Mini-índice con anclas internas -- vive dentro de StickyPageHeader
-   (sticky top-0), justo debajo de las pestañas, así que queda fijo
-   mientras se hace scroll por el contenido de la pestaña activa.
-   ────────────────────────────────────────────────────────────── */
-function SectionIndex({ items }: { items: { id: string; label: string }[] }) {
-  const { t } = useTranslation();
-  return (
-    <nav
-      aria-label={t('aria.legal.indiceSecciones', {defaultValue: 'Índice de secciones'})}
-      className="flex flex-wrap gap-2 mt-3 p-3 rounded-xl bg-background/40 backdrop-blur-md border border-[var(--glass-border)]"
-    >
-      {items.map((item) => (
-        <a
-          key={item.id}
-          href={`#${item.id}`}
-          className="text-caption font-medium px-3 py-1.5 rounded-lg bg-accent/5 text-accent hover:bg-accent/15 border border-accent/20 transition-colors"
-        >
-          {item.label}
-        </a>
-      ))}
-    </nav>
-  );
-}
-
-/* ──────────────────────────────────────────────────────────────
-   Título de sección con ancla
+   Título de sección con ancla -- envuelve el componente compartido
+   components/ui/SectionHeading.tsx (mismo tamaño, blanco, línea fina
+   debajo y separación, ahora reutilizado también en otras páginas)
+   fijando el scroll-mt propio de esta página.
    ────────────────────────────────────────────────────────────── */
 function SectionHeading({
   id,
@@ -55,18 +35,20 @@ function SectionHeading({
   children: React.ReactNode;
 }) {
   return (
-    <h2
+    <SharedSectionHeading
       id={id}
-      // scroll-mt cubre TODO lo que queda fijo encima al saltar por ancla:
-      // el banner "En obras" (~65px, sticky top-0 de toda la app) + el
-      // StickyPageHeader de esta página (~241px, con las pestañas, la
-      // descripción en texto plano y el índice de secciones). Medido en
-      // vivo con getBoundingClientRect() tras cada cambio -- si crece más
-      // contenido fijo, este valor puede quedarse corto otra vez.
-      className="text-subheading font-bold text-foreground border-b border-[var(--glass-border)] pb-2 scroll-mt-[320px]"
+      number={number}
+      // scroll-mt cubre todo lo que queda fijo encima al saltar por ancla:
+      // el StickyPageHeader de esta página (pestañas, descripción en texto
+      // plano e índice de secciones), ~243px medidos en vivo con
+      // getBoundingClientRect() tras quitar la barra global "En obras"
+      // (movida al sidebar) mas un pequeño margen. Si el header fijo crece
+      // (más texto, más ítems en el índice), este valor puede quedarse
+      // corto -- volver a medir con el mismo método.
+      scrollMt="260px"
     >
-      {number}. {children}
-    </h2>
+      {children}
+    </SharedSectionHeading>
   );
 }
 
@@ -167,7 +149,11 @@ export default function LegalPage() {
             <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} />
           </StickyPageHeader>
 
-          <div className="w-full space-y-4 px-8 pt-4 pb-12">
+          {/* pb grande a propósito: dejar sitio de sobra para que la última
+              sección de cada pestaña pueda desplazarse hasta quedar debajo
+              del header fijo (scroll-mt) en vez de topar con el final del
+              contenido y quedarse corta. */}
+          <div className="w-full space-y-4 px-8 pt-4 pb-[280px]">
 
             {/* ═══════════════════════════════════════════════════
                 TAB — AVISO LEGAL

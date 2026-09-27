@@ -464,7 +464,7 @@ export function VerificacionTab() {
       )}
 
       <div className="space-y-4">
-        <h2 className="text-body font-bold text-foreground flex items-center gap-2 border-b border-white/5 pb-2">
+        <h2 id="verificacion-grupo" style={{ scrollMarginTop: "260px" }} className="text-body font-bold text-foreground flex items-center gap-2 border-b border-white/5 pb-2">
           <Building2 className="w-4 h-4 text-accent" />
           {t('campos.verificacion.grupoTitulo', {defaultValue: 'Grupo'})}
         </h2>
@@ -537,7 +537,7 @@ export function VerificacionTab() {
       </div>
 
       <div className="space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
+        <div id="verificacion-programacion" style={{ scrollMarginTop: "260px" }} className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
           <h2 className="text-body font-bold text-foreground flex items-center gap-2">
             <BookOpen className="w-4 h-4 text-accent" />
             {t('campos.verificacion.programacionDidacticaTitulo', {defaultValue: 'Programación didáctica'})}
@@ -554,7 +554,7 @@ export function VerificacionTab() {
       </div>
 
       <div className="space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
+        <div id="verificacion-curso" style={{ scrollMarginTop: "260px" }} className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
           <h2 className="text-body font-bold text-foreground flex items-center gap-2">
             <Users className="w-4 h-4 text-accent" />
             {t('campos.verificacion.cursoActivoTitulo', {defaultValue: 'Curso activo'})}

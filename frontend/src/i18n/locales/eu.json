@@ -2674,7 +2674,7 @@
     "ayuda": {
       "faq": {
         "grupo1": {
-          "titulo": "1. Aurretiko kontzeptuak eta segurtasuna",
+          "titulo": "1. Aurretiko kontzeptuak",
           "q1": "Zer da Arkitektura Hibridoa (Local-First + Cloud)?",
           "a1": "Arkitektura moderno bat erabiltzen da. Zure laneko datuak (ikasleak, notak) zure nabigatzailean lokalki prozesatzen dira, pribatutasun eta abiadura osoa bermatuz. Eragiketa astunak (PDF txostenak sortzea edo Adimen Artifizialarekin konexioa) modu seguruan zerbitzari zentral batean oinarritzen dira.",
           "q2": "Non gordetzen dira nire datuak?",
@@ -2687,7 +2687,7 @@
           "a5": "Bai. Institutuko ordenagailuaren eta zure ordenagailu eramangarri pertsonalaren artean zure ingurunea transferitzeko, A ordenagailuan zure aurrerapena 'Esportatu' egin eta B ordenagailuan 'Inportatu' sakatu besterik ez duzu egin behar."
         },
         "grupo2": {
-          "titulo": "2. 1. urratsa: Programazio didaktikoa",
+          "titulo": "2. Programazio didaktikoa",
           "q1": "Eskuz sartu behar ditut BOEko RA eta CE guztiak?",
           "a1": "Ez! Sistemak Katalogo ofizial bat du, zure moduluaren araudi legala (ikaskuntza-emaitzak eta irizpideak) automatikoki inportatzen duena. Zure Gradua eta zure Heziketa Zikloa hasierako Katalogo atalean aukeratu besterik ez duzu egin behar, eta sistemak zuretzat egingo du.",
           "q2": "Zer esan nahi du RAk egiaztapenetan %100 batzen ez izateak?",
@@ -2702,7 +2702,7 @@
           "a6": "Ebaluazio Irizpide (CE) bakoitzeko bi gauza desberdin daude: ebaluazio-tresna ebidentzia sortzen duen jarduera da (proba objektibo bat, zeregin bat, ahozko defentsa bat...), eta kalifikazio-tresna ebidentzia hori puntuatzen duena da (errubrika bat, eskala bat, egiaztapen-zerrenda bat...). Tresnak atalean biak bereizita kodifika ditzakezu tresna bakoitza konfiguratzean."
         },
         "grupo3": {
-          "titulo": "3. 3. urratsa: Ikastaroa eta ikasleak sortzea",
+          "titulo": "3. Ikastaroa sortzea",
           "q1": "Ikasleak Séneca, Rayuela edo Excel bezalako plataformetatik inporta ditzaket?",
           "a1": "Bai. 'Ikasleak' atalean zure klaseko zerrenda duen CSV (Excel) fitxategi bat inporta dezakezu. Bestela, taula adimendunak gelaxkak masiboki kopiatu eta itsasteko aukera ematen dizu, kalkulu-orri bat balitz bezala.",
           "q2": "Zein segurtasun maila dute nire ikasleen datuek?",
@@ -2715,7 +2715,7 @@
           "a5": "Goiztiar prebentzio-panelak familiei deiak, diziplina-parteak edo orientazio-saileko bideratzeak erregistratzeko aukera ematen dizu, eskola-uzte arriskuan dauden ikasleentzat."
         },
         "grupo4": {
-          "titulo": "4. 5. urratsa: Eguneroko lana eta ebaluazioa",
+          "titulo": "4. Eguneroko lana eta ebaluazioa",
           "q1": "Zer da 'Geleko egunkaria'?",
           "a1": "Zure eguneroko koadernoa da. Klaseko benetako saio bakoitzean gertatzen dena idazteko aukera ematen dizu: zein UD eman duzun, gorabeherarik izan den edo 'Irakaskuntzarik gabe' egunak markatzeko (greba edo klaustroak bezala) zure aurrerapenean ez kontatzeko.",
           "q2": "Nola kalkulatzen da 'Hilabeteko plangintza' aurreikuspena?",
@@ -2735,7 +2735,7 @@
           "a1": "Bai. MagIAren 'Ikastaroa' fitxatik klase osorako PDF txosten masiboak edo lortutako Ebaluazio Irizpide bakoitzean oinarrituta nota justifikatzen duten banakako laburpen hiperzehatzak sor ditzakezu."
         },
         "grupo7": {
-          "titulo": "7. Laguntza teknikoa",
+          "titulo": "6. Laguntza teknikoa",
           "q1": "Zer gertatzen da nire kontrol-panelaren grafikoak kargatzen ez badira?",
           "a1": "Egiaztatu alboko barran 'Modu Errealak' aktibatuta duzula eta zure Taldea hautatuta duzula. Grafikoek zein ikaslerengana eta zein programaziotara zuzentzen diren jakin behar dute datuak aztertu ahal izateko.",
           "q2": "Cuaderno FP mugikorrean erabil daiteke?",
@@ -2767,15 +2767,15 @@
       "cargandoDatosProgreso": "Aurrerapen akademikoaren datuak kargatzen..."
     },
     "inicio": {
-      "metodologiaEspecificaTitulo": "Metodologia espezifiko baten gainean eraikitako tresna",
+      "metodologiaEspecificaTitulo": "Lanbide Heziketako metodologia espezifikoa",
       "metodologiaEspecificaDesc": "Cuaderno FPk FParen lege berrira eguneratutako erreferentzia bibliografikoak, Hezkuntza Ikuskaritzaren orientabideak, erreferentziazko egile nagusiak eta hezkuntza-administrazioen gida ofizialak jarraitzen ditu: Ikaskuntzaren Emaitzak (RA) dira ardatz kausala, programazio didaktiko batean gainerako guztiak hortik eratorri behar duela ulertzen delako.",
       "pasoIdentificacion": "Identifikazioa",
       "pasoIntroduccionJustificacionNormativa": "Sarrera, justifikazioa eta araudia",
       "pasoContextualizacion": "Testuingururatzea",
       "pasoObjetivosCompetencias": "Helburuak eta gaitasunak",
       "pasoCaracterIntermodularDual": "Izaera intermodularra eta duala",
-      "pasoContenidosCentradosRa": "RAn zentratutako edukiak",
-      "pasoSituacionesAprendizaje": "Ikaskuntza-egoerak",
+      "pasoContenidosCentradosRa": "Eduki teoriko-praktikoak",
+      "pasoSituacionesAprendizaje": "Ikaskuntzaren emaitzak",
       "pasoMetodologiaInclusion": "Metodologia eta inklusioa",
       "pasoEvaluacion": "Ebaluazioa (ikaskuntza / praktikak / salbuespenak)",
       "pasoActividadesComplementarias": "Jarduera osagarriak",
