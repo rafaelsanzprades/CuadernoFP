@@ -77,7 +77,7 @@ export const GUIA_PASOS: {
         nodes: [
           { label: "Programación didáctica", text: 'Es el "molde" teórico (.fpp). Contiene la normativa (resultados de aprendizaje y criterios de evaluación) y las unidades didácticas. Se diseña una vez y se puede reutilizar en cursos posteriores.' },
           { label: "Curso", text: 'Es la "instancia" real (.fpc). Representa al alumnado físico, sus calificaciones, faltas de asistencia y calendario en un año académico específico (ej. 2025-26).' },
-          { label: "Bloques", text: "3 grupos en el sidebar — General (Inicio, Archivo, Normativa, MagIA, Legal), Programación (Catálogo, Contexto, Currículo, Metodología, Instrumento — el diseño teórico del módulo) y Curso (Agenda, Calendario, Alumnado, Seguimiento, Calificación — el aula real). Esta misma guía vive dentro de Inicio, pestaña Guía (no en MagIA)." },
+          { label: "Bloques", text: "3 grupos en el sidebar — General (Inicio, Ayuda, MagIA, Normativa, Legal), Programación (Catálogo, Contexto, Currículo, Metodología, Instrumento — el diseño teórico del módulo) y Curso (Agenda, Calendario, Alumnado, Seguimiento, Calificación — el aula real). Esta misma guía vive dentro de Ayuda, pestaña Guía (no en Inicio ni en MagIA); esa misma página Ayuda tiene también FAQ, Acrónimos y Contribuciones para consultas rápidas." },
         ],
       },
     ],
@@ -97,7 +97,7 @@ export const GUIA_PASOS: {
         intro: "Vamos a pedirle al sistema que nos cree el archivo base de la programación cargando automáticamente la ley.",
         nodes: [
           {
-            label: "Bloque", text: "Programación",
+            label: "Bloque", text: "General",
             children: [
               {
                 label: "Página", text: "Normativa",
@@ -107,12 +107,18 @@ export const GUIA_PASOS: {
                   ] },
                 ],
               },
+            ],
+          },
+          {
+            label: "Bloque", text: "Programación",
+            children: [
               {
                 label: "Página", text: "Catálogo",
                 children: [
                   { label: "Pestaña", text: "Familias", children: [{ label: "Acción", text: "Haz clic en la tarjeta de tu familia profesional." }] },
                   { label: "Pestaña", text: "Títulos", children: [{ label: "Selector", text: "Familia profesional y Título. Selecciona tu ciclo formativo." }] },
                   { label: "Pestaña", text: "Módulos", children: [{ label: "Botón", text: '"Nueva programación", en el módulo deseado dentro de su curso (1º/2º).' }] },
+                  { label: "Pestaña", text: "RA → CE", children: [{ label: "Acción", text: "Consulta de solo lectura del currículo oficial ya cargado: resultados de aprendizaje y criterios de evaluación de tu módulo, tal como los fija la normativa." }] },
                 ],
               },
             ],
@@ -162,6 +168,9 @@ export const GUIA_PASOS: {
                   { label: "Pestaña", text: "Tareas competenciales", children: [
                     { label: "Botón", text: '"Añadir nueva tarea competencial".' },
                     { label: "Selector", text: "Instrumento (codificado) con el que se evalúa cada tarea." },
+                  ] },
+                  { label: "Pestaña", text: "Contenidos → UD", children: [
+                    { label: "Acción", text: "Reparte los contenidos oficiales del currículo entre tus Unidades didácticas, para comprobar que ninguno se queda sin asignar." },
                   ] },
                 ],
               },
@@ -231,18 +240,18 @@ export const GUIA_PASOS: {
               {
                 label: "Pestaña", text: "Programación",
                 children: [
-                  { label: "Acordeón por Comunidad Autónoma", text: 'Aragón viene abierta por defecto; el resto muestra "próximamente".' },
                   {
-                    label: "Botones PD ARAGÓN", text: "Dispones de tres niveles, siempre en .docx editable:",
+                    label: 'Bloque "Documentos de apoyo al currículo"', text: "Matriz RA ↔ UD, selector de UD y de tarea competencial, y matriz de cobertura CE × Instrumento — todo en un único bloque, en PDF (\"Vista previa\") o DOCX (\"Descarga editable\").",
+                  },
+                  {
+                    label: 'Bloque "Documentos programáticos por Comunidades autónomas"', text: 'Acordeón por Comunidad Autónoma (Aragón viene abierta por defecto; el resto muestra "próximamente"). Dentro de cada comunidad con contenido, tres niveles de programación, siempre en .docx editable:',
                     children: [
                       { label: "PD- (Resumen)", text: "Resumen de 1-2 folios para el alumnado." },
                       { label: "PD= (Simplificada)", text: "Formato oficial intermedio (~15-20 páginas)." },
                       { label: "PD+ (Detallada JEG)", text: "Formato extendido (>60 páginas) con toda la carga narrativa." },
-                      { text: "PD- y PD= incluyen, al final, una página de previsión de planificación mensual (UD × mes, calculada igual que Agenda › Planificación); PD+ todavía no la lleva." },
+                      { text: "PD- y PD= incluyen, al final, una página de previsión de planificación mensual (UD × mes, calculada igual que Agenda › Avance); PD+ todavía no la lleva." },
                     ],
                   },
-                  { label: 'Bloque "Documentos de apoyo al currículo"', text: 'Matriz RA ↔ UD, en PDF ("Vista previa") o DOCX ("Descarga editable").' },
-                  { label: 'Bloque "Unidades didácticas y tareas competenciales"', text: "Selector para descargar el .docx de una UD o una tarea concreta." },
                 ],
               },
             ],
@@ -266,10 +275,10 @@ export const GUIA_PASOS: {
             label: "Bloque", text: "General",
             children: [
               {
-                label: "Página", text: "Archivo",
+                label: "Página", text: "Inicio",
                 children: [
                   { label: "Pestaña", text: "Datos", children: [
-                    { label: "Botón", text: "Iniciar Curso (+ Grupo)." },
+                    { label: "Botón", text: '"Iniciar curso (+ grupo)".' },
                     { label: "Número", text: "Año Académico (ej. 2025-26)." },
                     { label: "Alfanumérico", text: "Letra / Grupo (ej. 1A-GM)." },
                     { label: "Botón", text: "Crear ahora." },
@@ -324,7 +333,7 @@ export const GUIA_PASOS: {
                     { label: "Botón", text: "Importar CSV o Añadir Alumnado a mano." },
                     { label: "Bloque", text: '"Perfil del grupo" (más abajo, en la misma pestaña) — describe el ambiente de la clase.' },
                   ] },
-                  { label: "Pestaña", text: "Plano", children: [
+                  { label: "Pestaña", text: "Plano de clase", children: [
                     { label: "Acción", text: "Arrastrar al alumnado a sus mesas." },
                   ] },
                 ],
@@ -347,8 +356,10 @@ export const GUIA_PASOS: {
           {
             label: "Bloque", text: "General",
             children: [
-              { label: "Página", text: "Archivo", children: [
-                { label: "Acción", text: "Haz DOBLE CLIC sobre tu grupo." },
+              { label: "Página", text: "Inicio", children: [
+                { label: "Pestaña", text: "Datos", children: [
+                  { label: "Acción", text: "Haz DOBLE CLIC sobre tu grupo, tu programación o tu curso guardados." },
+                ] },
               ] },
             ],
           },
@@ -356,6 +367,26 @@ export const GUIA_PASOS: {
       },
       {
         numero: "4.2",
+        titulo: "Ver tu resumen del día",
+        nodes: [
+          {
+            label: "Bloque", text: "Curso",
+            children: [
+              {
+                label: "Página", text: "Agenda",
+                children: [
+                  { label: "Pestaña", text: "Actual", children: [{ label: "Acción", text: "Resumen de las clases de hoy, contexto de la semana y desarrollo de la unidad didáctica en curso." }] },
+                  { label: "Pestaña", text: "Avance", children: [{ label: "Acción", text: "Planificación y seguimiento mensual de la programación." }] },
+                  { label: "Pestaña", text: "Previsión RA y UD", children: [{ label: "Acción", text: "Progreso de los resultados de aprendizaje según el estado y la ponderación de las unidades didácticas ya impartidas." }] },
+                  { label: "Pestaña", text: "Mensual", children: [{ label: "Acción", text: "Vista mensual y calendario interactivo con fechas clave." }] },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        numero: "4.3",
         titulo: "Registrar el día a día y la asistencia",
         nodes: [
           {
@@ -394,10 +425,9 @@ export const GUIA_PASOS: {
                 label: "Página", text: "Calificación (mayormente de solo lectura, resume lo anterior)",
                 children: [
                   { label: "Pestaña", text: "Resumen", children: [{ label: "Tablas", text: 'Panel global de rendimiento, y bloques plegables "Progreso RA-UD", "Estadísticas" y "Análisis" (con switcher Grupal/Individual) más abajo en la misma pestaña.' }] },
-                  { label: "Pestaña", text: "Histórico", children: [{ label: "Tabla", text: "Registro de cada cambio de nota, con fecha, agente y motivo." }] },
-                  { label: "Pestaña", text: "Reclamaciones", children: [{ label: "Acción", text: "Registra y resuelve reclamaciones de nota, con generación de justificante." }] },
-                  { label: "Pestaña", text: "Boletines", children: [{ label: "Acción", text: "Boletín individual en pantalla (radar + barras por RA), con botón de impresión." }] },
-                  { label: "Pestaña", text: "Expediente", children: [{ label: "Acción", text: "Línea temporal de evidencias por alumno/a (calificaciones, reclamaciones, asistencia, diario)." }] },
+                  { label: "Pestaña", text: "Histórico", children: [{ label: "Switcher", text: '"Cambios de nota" (registro de cada cambio, con fecha, agente y motivo) / "Reclamaciones" (registra y resuelve reclamaciones de nota, con generación de justificante).' }] },
+                  { label: "Pestaña", text: "Individual", children: [{ label: "Switcher", text: '"Boletines" (boletín individual en pantalla, radar + barras por RA, con botón de impresión) / "Expediente" (línea temporal de evidencias por alumno/a: calificaciones, reclamaciones, asistencia, diario).' }] },
+                  { label: "Pestaña", text: "Mejora", children: [{ label: "Acción", text: "Indicadores de calidad EQAVET y propuestas de mejora del módulo, de cara a la memoria final de curso." }] },
                 ],
               },
             ],
