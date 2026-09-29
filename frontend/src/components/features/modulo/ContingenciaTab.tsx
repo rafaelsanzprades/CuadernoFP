@@ -3,6 +3,7 @@ import { ShieldAlert, ListChecks } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import type { ModuleData } from "@/types";
 import { useTranslation } from "react-i18next";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function ContingenciaTab() {
   const { t } = useTranslation();
@@ -51,10 +52,11 @@ export function ContingenciaTab() {
     <div className="space-y-6 animate-in fade-in duration-500">
 
       {/* Medidas de contingencia */}
+      <div className="space-y-3">
+      <SectionHeading id="metodologia-contingencia-medidas" icon={ShieldAlert} scrollMt="260px">
+        {t('campos.modulo.tituloMedidasContingencia', {defaultValue: 'Medidas de contingencia'})}
+      </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-orange-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-orange-400" /></span> {t('campos.modulo.tituloMedidasContingencia', {defaultValue: 'Medidas de contingencia'})}
-        </h2>
         <div className="space-y-6">
           <div>
             <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.modulo.medidasContingenciaLabel', {defaultValue: 'Medidas de contingencia (selección múltiple)'})}</label>
@@ -88,12 +90,14 @@ export function ContingenciaTab() {
           </div>
         </div>
       </div>
+      </div>
 
       {/* Registro de escenarios de contingencia */}
+      <div className="space-y-3">
+      <SectionHeading id="metodologia-contingencia-registro" icon={ListChecks} scrollMt="260px">
+        {t('campos.modulo.tituloRegistroEscenariosContingencia', {defaultValue: 'Registro de escenarios de contingencia'})}
+      </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-amber-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><ListChecks className="w-[1.2em] h-[1.2em] mr-1 text-amber-400" /></span> {t('campos.modulo.tituloRegistroEscenariosContingencia', {defaultValue: 'Registro de escenarios de contingencia'})}
-        </h2>
         <div className="overflow-x-auto mb-4">
           <table className="w-full text-left text-body border-collapse whitespace-nowrap">
             <thead>
@@ -139,12 +143,14 @@ export function ContingenciaTab() {
           <span>+</span> {t('botones.modulo.anadirMedidaContingencia', {defaultValue: 'Añadir medida de contingencia'})}
         </button>
       </div>
+      </div>
 
       {/* Plan de Contingencia (textos) */}
+      <div className="space-y-3">
+      <SectionHeading id="metodologia-contingencia-plan" icon={ShieldAlert} scrollMt="260px">
+        {t('campos.modulo.tituloPlanContingencia', {defaultValue: 'Plan de Contingencia'})}
+      </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-rose-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-rose-400" /></span> {t('campos.modulo.tituloPlanContingencia', {defaultValue: 'Plan de Contingencia'})}
-        </h2>
         <div className="space-y-4">
           <div>
             <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.contingenciaProfesorLabel', {defaultValue: 'Ausencia prolongada del profesorado titular'})}</label>
@@ -172,6 +178,7 @@ export function ContingenciaTab() {
             />
           </div>
         </div>
+      </div>
       </div>
 
     </div>

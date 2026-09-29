@@ -14,6 +14,7 @@ import { ProcedimientosTab } from "@/components/features/evaluacion/Procedimient
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
+import { SectionIndex } from "@/components/ui/SectionIndex";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { getApiBase } from "@/services/apiBase";
@@ -67,6 +68,30 @@ export default function ContextoConfigPage() {
     contextualizacion: t('tabs.contexto.contextualizacion.desc', {defaultValue: 'Entorno geográfico, socioeconómico, escolar e infraestructura, con rasgos rápidos seleccionables; alumnado ACNEAE, textos del modelo Simplificado y datos de autoría. Cap. 1.3 del PD+.'}),
     'plan-feoe': t('tabs.contexto.planFeoe.desc', {defaultValue: 'Formación en empresa u organismo equiparado (FEOE): modalidad, seguimiento y régimen dual. Cap. 5 del PD+.'}),
     criterios: t('tabs.contexto.criterios.desc', {defaultValue: 'Procedimiento de evaluación y de calificación: información al alumnado, pérdida de evaluación continua, recuperación. Cap. 4 del PD+.'}),
+  };
+
+  // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
+  const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
+    identificacion: [
+      { id: "datos-centro-docente", label: t('campos.modulo.tituloCentroDocente', {defaultValue: 'Centro y docente'}) },
+      { id: "datos-modulo-didactico", label: t('campos.modulo.tituloModuloDidactico', {defaultValue: 'Módulo didáctico'}) },
+      { id: "datos-reglas-redondeo", label: t('campos.modulo.tituloReglasRedondeo', {defaultValue: 'Reglas de redondeo y compensación'}) },
+      { id: "datos-ponderacion-trimestres", label: t('campos.modulo.tituloPonderacionTrimestres', {defaultValue: '% Ponderación por trimestres'}) },
+      { id: "datos-instrumentos-evaluacion", label: t('campos.modulo.tituloInstrumentosEvaluacion', {defaultValue: '% Instrumentos de evaluación'}) },
+      { id: "datos-escalas-evaluacion", label: t('campos.modulo.tituloEscalasEvaluacion', {defaultValue: 'Escalas de evaluación cualitativas'}) },
+    ],
+    contextualizacion: [
+      { id: "contexto-escolar", label: t('campos.contexto.tituloContextoEscolar', {defaultValue: 'Contexto escolar'}) },
+      { id: "contexto-alumnado-acneae", label: t('campos.contexto.tituloAlumnadoAcneae', {defaultValue: 'Alumnado (ACNEAE)'}) },
+      { id: "contexto-modelo-simplificado", label: t('campos.contexto.tituloModeloSimplificado', {defaultValue: 'Textos del modelo Simplificado (pd=)'}) },
+      { id: "contexto-autoria-publicidad", label: t('campos.contexto.tituloAutoriaPublicidad', {defaultValue: 'Datos de autoría y publicidad'}) },
+    ],
+    criterios: [
+      { id: "procedimientos-modelo-recuperacion", label: t('campos.evaluacion.tituloModeloRecuperacion', {defaultValue: 'Modelo de recuperación'}) },
+      { id: "procedimientos-informacion", label: t('campos.evaluacion.tituloInformacionProcedimientos', {defaultValue: 'Información y procedimientos'}) },
+      { id: "procedimientos-criterios-calificacion", label: t('campos.evaluacion.tituloCriteriosCalificacionSimplificado', {defaultValue: 'Criterios de calificación (texto específico modelo Simplificado, pd=)'}) },
+      { id: "procedimientos-evaluacion-inicial", label: t('campos.evaluacion.tituloEvaluacionInicial', {defaultValue: 'Evaluación inicial (apartado E, modelo Simplificado, pd=)'}) },
+    ],
   };
 
   if (!activeModuleId) {
@@ -141,6 +166,10 @@ export default function ContextoConfigPage() {
             <p className="text-body text-muted mt-3">
               {TAB_DESCRIPTIONS[activeTab] || 'Configuración del contexto.'}
             </p>
+
+            {/* Índice de bloques de la pestaña activa -- dentro del header
+                fijo (sticky top-0), así que no se pierde al hacer scroll. */}
+            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
           </StickyPageHeader>
 
           <MotionWrapper className="px-8 pt-4 pb-12">

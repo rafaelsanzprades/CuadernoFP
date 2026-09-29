@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Key, Bot, Save, Sparkles, CheckCircle2 } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
@@ -27,14 +28,12 @@ export function AISettingsPanel() {
   };
 
   return (
+    <div className="space-y-3">
+    <SectionHeading id="asistente-configuracion" icon={Sparkles} scrollMt="260px">
+      {t('campos.ai.configuracionAsistente', {defaultValue: 'Configuración del Asistente IA'})}
+    </SectionHeading>
     <Card className="p-6 border border-accent/25 rounded-2xl bg-accent/5 shadow-lg space-y-4">
-      <div className="flex items-center gap-3 mb-2">
-        <Sparkles className="w-6 h-6 text-accent" />
-        <div>
-          <h3 className="text-subheading font-bold text-foreground">{t('campos.ai.configuracionAsistente', {defaultValue: 'Configuración del Asistente IA'})}</h3>
-          <p className="text-body text-muted">{t('campos.ai.importaDesdeC', {defaultValue: 'Importa programaciones desde PDF automáticamente'})}</p>
-        </div>
-      </div>
+      <p className="text-body text-muted">{t('campos.ai.importaDesdeC', {defaultValue: 'Importa programaciones desde PDF automáticamente'})}</p>
 
       <div className="space-y-4">
         <div className="flex flex-col gap-2">
@@ -77,5 +76,6 @@ export function AISettingsPanel() {
         </Button>
       </div>
     </Card>
+    </div>
   );
 }

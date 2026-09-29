@@ -16,7 +16,7 @@ interface StickyPageHeaderProps {
  * del borde superior del área con scroll, sin hueco. */
 export function StickyPageHeader({ icon: Icon, title, description, children }: StickyPageHeaderProps) {
   return (
-    <div className="sticky top-0 z-20 bg-background/95 backdrop-blur-xl border-b border-[var(--glass-border)] px-8 pt-4 pb-3 shadow-sm">
+    <div className="sticky top-0 z-20 bg-background backdrop-blur-xl border-b border-[var(--glass-border)] px-8 pt-4 pb-3 shadow-sm">
       <h1 className="text-heading font-bold tracking-tight flex items-center gap-2.5 text-foreground">
         <Icon className="w-7 h-7 text-accent shrink-0" />
         {title}

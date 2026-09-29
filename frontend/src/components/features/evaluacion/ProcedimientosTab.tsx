@@ -2,6 +2,7 @@
 import React from "react";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { NarrativeField } from "@/components/ui/NarrativeField";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useAppStore } from "@/store/useAppStore";
 import { Scale, MessageCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -45,8 +46,11 @@ export function ProcedimientosTab() {
           </div>
         </div>
 
+        <div className="space-y-3">
+        <SectionHeading id="procedimientos-modelo-recuperacion" scrollMt="260px">
+          {t('campos.evaluacion.tituloModeloRecuperacion', {defaultValue: 'Modelo de recuperación'})}
+        </SectionHeading>
         <div className="glass-card p-6 border-t-4 border-t-rose-500">
-          <h2 className="text-subheading font-bold text-foreground mb-1">{t('campos.evaluacion.tituloModeloRecuperacion', {defaultValue: 'Modelo de recuperación'})}</h2>
           <p className="text-caption text-muted mb-3">
             {t('campos.evaluacion.modeloRecuperacionDescPre', {defaultValue: 'Marca los tipos de recuperación/convocatoria extraordinaria que aplicas en este módulo, según el modelo R1/R2/R3/RF/EvFE del autor de PD+. '})}<strong>{t('campos.evaluacion.modeloRecuperacionDescStrong', {defaultValue: 'Primera versión'})}</strong>{t('campos.evaluacion.modeloRecuperacionDescPost', {defaultValue: ': esto documenta tu modelo en la programación, pero el cálculo automático de notas siguiendo este esquema (indicador → directo a RA, saltando CE) todavía no está implementado en Calificaciones.'})}
           </p>
@@ -73,11 +77,13 @@ export function ProcedimientosTab() {
             className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
           />
         </div>
+        </div>
 
+        <div className="space-y-3">
+        <SectionHeading id="procedimientos-informacion" icon={MessageCircle} scrollMt="260px">
+          {t('campos.evaluacion.tituloInformacionProcedimientos', {defaultValue: 'Información y procedimientos'})}
+        </SectionHeading>
         <div className="glass-card p-6 border-t-4 border-t-sky-500">
-          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-            <span className="inline-flex"><MessageCircle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.evaluacion.tituloInformacionProcedimientos', {defaultValue: 'Información y procedimientos'})}
-          </h2>
           <div className="space-y-6">
             <NarrativeField
               id="textos_pd_eval_informacion"
@@ -101,9 +107,13 @@ export function ProcedimientosTab() {
             />
           </div>
         </div>
+        </div>
 
+        <div className="space-y-3">
+        <SectionHeading id="procedimientos-criterios-calificacion" scrollMt="260px">
+          {t('campos.evaluacion.tituloCriteriosCalificacionSimplificado', {defaultValue: 'Criterios de calificación (texto específico modelo Simplificado, pd=)'})}
+        </SectionHeading>
         <div className="glass-card p-6 border-t-4 border-t-teal-500">
-          <h2 className="text-subheading font-bold text-foreground mb-1">{t('campos.evaluacion.tituloCriteriosCalificacionSimplificado', {defaultValue: 'Criterios de calificación (texto específico modelo Simplificado, pd=)'})}</h2>
           <p className="text-caption text-muted mb-3">{t('campos.evaluacion.criteriosCalificacionDesc', {defaultValue: 'Si se deja vacío, se genera automáticamente. Criterios de calificación y redondeo del módulo.'})}</p>
           <textarea
             value={config_contexto.texto_criterios_calificacion || ""}
@@ -112,9 +122,13 @@ export function ProcedimientosTab() {
             className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
           />
         </div>
+        </div>
 
+        <div className="space-y-3">
+        <SectionHeading id="procedimientos-evaluacion-inicial" scrollMt="260px">
+          {t('campos.evaluacion.tituloEvaluacionInicial', {defaultValue: 'Evaluación inicial (apartado E, modelo Simplificado, pd=)'})}
+        </SectionHeading>
         <div className="glass-card p-6 border-t-4 border-t-cyan-500">
-          <h2 className="text-subheading font-bold text-foreground mb-1">{t('campos.evaluacion.tituloEvaluacionInicial', {defaultValue: 'Evaluación inicial (apartado E, modelo Simplificado, pd=)'})}</h2>
           <p className="text-caption text-muted mb-3">{t('campos.evaluacion.evaluacionInicialDesc', {defaultValue: 'Instrumento diagnóstico, contenidos evaluados y consecuencias de sus resultados en la programación. Si se deja vacío, se genera un texto genérico.'})}</p>
           <textarea
             value={config_contexto.texto_evaluacion_inicial || ""}
@@ -122,6 +136,7 @@ export function ProcedimientosTab() {
             placeholder={t('placeholders.evaluacion.textoEvaluacionInicial', {defaultValue: 'Ej: Se realiza un cuestionario inicial sobre conocimientos previos del módulo...'})}
             className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
           />
+        </div>
         </div>
       </div>
     </MotionWrapper>

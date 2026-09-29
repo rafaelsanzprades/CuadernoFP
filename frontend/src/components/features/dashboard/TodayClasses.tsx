@@ -2,6 +2,7 @@ import { BookOpen, Calendar, Clock, Layers } from "lucide-react";
 import React from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { Card } from '@/components/ui/Card';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { simulateSchedule } from '@/utils/scheduleSimulator';
@@ -35,12 +36,14 @@ export const TodayClasses = () => {
       : t('campos.dashboard.sinSesionesHoy', {defaultValue: 'No tienes sesiones planificadas para el día de hoy según el calendario del módulo.'});
 
     return (
+      <div className="space-y-3">
+      <SectionHeading id="agenda-clases-hoy" icon={Calendar} scrollMt="260px">
+        {t('campos.dashboard.tusClasesDeHoy', {fecha: formattedToday, defaultValue: 'Tus clases de hoy ({{fecha}})'})}
+      </SectionHeading>
       <Card className="p-6">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-2">
-          <Calendar className="w-6 h-6" /> {t('campos.dashboard.tusClasesDeHoy', {fecha: formattedToday, defaultValue: 'Tus clases de hoy ({{fecha}})'})}
-        </h2>
         <p className="text-muted">{reason}</p>
       </Card>
+      </div>
     );
   }
 
@@ -48,15 +51,15 @@ export const TodayClasses = () => {
   const udHoy = moduleData.df_ud?.find((u: any) => String(u.id_ud) === udId);
 
   return (
+    <div className="space-y-3">
+    <SectionHeading id="agenda-clases-hoy" icon={Calendar} scrollMt="260px">
+      {t('campos.dashboard.tusClasesDeHoy', {fecha: formattedToday, defaultValue: 'Tus clases de hoy ({{fecha}})'})}
+    </SectionHeading>
     <Card className="p-6 relative overflow-hidden">
       <div className="absolute -right-10 -top-10 text-accent opacity-10">
         <BookOpen className="w-48 h-48" />
       </div>
-      
-      <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4 relative z-10">
-        <Calendar className="w-6 h-6 text-accent" /> {t('campos.dashboard.tusClasesDeHoy', {fecha: formattedToday, defaultValue: 'Tus clases de hoy ({{fecha}})'})}
-      </h2>
-      
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10">
         {/* UD Info Card */}
         <div className="bg-background/40 p-5 rounded-xl border border-[var(--glass-border)] flex flex-col justify-between">
@@ -103,5 +106,6 @@ export const TodayClasses = () => {
         </div>
       </div>
     </Card>
+    </div>
   );
 };

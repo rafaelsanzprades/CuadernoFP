@@ -3,6 +3,7 @@ import { Users, Plus, Trash2, ShieldAlert, Puzzle } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { Button } from "@/components/ui/Button";
 import { useTranslation } from "react-i18next";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function DiversidadTab() {
   const { t } = useTranslation();
@@ -94,10 +95,11 @@ export function DiversidadTab() {
     <div className="space-y-6 animate-in fade-in duration-500">
 
       {/* Marco de Inclusión */}
+      <div className="space-y-3">
+      <SectionHeading id="metodologia-marco-inclusion" icon={ShieldAlert} scrollMt="260px">
+        {t('campos.modulo.marcoInclusionTitulo', {defaultValue: 'Marco de Inclusión (D 91/2024 Art. 29)'})}
+      </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-purple-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-purple-400" /></span> {t('campos.modulo.marcoInclusionTitulo', {defaultValue: 'Marco de Inclusión (D 91/2024 Art. 29)'})}
-        </h2>
         <div className="space-y-6">
 
           <div>
@@ -160,12 +162,14 @@ export function DiversidadTab() {
           </div>
         </div>
       </div>
+      </div>
 
       {/* F1. Atención a la diversidad */}
+      <div className="space-y-3">
+      <SectionHeading id="metodologia-f1-diversidad" icon={ShieldAlert} scrollMt="260px">
+        {t('campos.modulo.f1AtencionDiversidadTitulo', {defaultValue: 'F1. Atención a la diversidad'})}
+      </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-violet-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><ShieldAlert className="w-[1.2em] h-[1.2em] mr-1 text-violet-400" /></span> {t('campos.modulo.f1AtencionDiversidadTitulo', {defaultValue: 'F1. Atención a la diversidad'})}
-        </h2>
         <div className="space-y-4">
           <div>
             <p className="text-caption text-muted mb-2">{t('campos.modulo.f1AtencionDiversidadDesc', {defaultValue: 'Estrategias para adaptar la enseñanza a las características del alumnado.'})}</p>
@@ -194,12 +198,14 @@ export function DiversidadTab() {
           </div>
         </div>
       </div>
+      </div>
 
       {/* Plan de Atención a la Diversidad (DUA) */}
+      <div className="space-y-3">
+      <SectionHeading id="metodologia-plan-dua" icon={Puzzle} scrollMt="260px">
+        {t('campos.modulo.planDuaTitulo', {defaultValue: 'Plan de Atención a la Diversidad (DUA)'})}
+      </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-emerald-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Puzzle className="w-[1.2em] h-[1.2em] mr-1 text-emerald-400" /></span> {t('campos.modulo.planDuaTitulo', {defaultValue: 'Plan de Atención a la Diversidad (DUA)'})}
-        </h2>
         <div className="overflow-x-auto mb-4">
           <table className="w-full text-left text-body border-collapse whitespace-nowrap">
             <thead>
@@ -244,17 +250,19 @@ export function DiversidadTab() {
           <span>+</span> {t('botones.modulo.anadirMedidaDiversidad', {defaultValue: 'Añadir medida de diversidad'})}
         </button>
       </div>
+      </div>
 
       {/* Panel ACNEAE */}
+      <div className="space-y-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <SectionHeading id="metodologia-acneae" icon={Users} scrollMt="260px" className="flex-1">
+          {t('campos.modulo.panelAcneaeTitulo', {defaultValue: 'Panel de ACNEAE'})}
+        </SectionHeading>
+        <Button size="sm" variant="secondary" onClick={addAcneae} className="gap-2 shrink-0">
+          <Plus className="w-4 h-4" /> {t('botones.modulo.anadirAlumno', {defaultValue: 'Añadir alumno'})}
+        </Button>
+      </div>
       <div className="glass-card p-6 border-t-4 border-t-pink-500">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-            <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1 text-pink-400" /></span> {t('campos.modulo.panelAcneaeTitulo', {defaultValue: 'Panel de ACNEAE'})}
-          </h2>
-          <Button size="sm" variant="secondary" onClick={addAcneae} className="gap-2">
-            <Plus className="w-4 h-4" /> {t('botones.modulo.anadirAlumno', {defaultValue: 'Añadir alumno'})}
-          </Button>
-        </div>
         <p className="text-caption text-muted mb-4">
           {t('campos.modulo.panelAcneaeDesc', {defaultValue: 'Registro de Alumnado con Necesidad Específica de Apoyo Educativo y sus adaptaciones asociadas.'})}
         </p>
@@ -323,6 +331,7 @@ export function DiversidadTab() {
             ))}
           </div>
         )}
+      </div>
       </div>
 
     </div>

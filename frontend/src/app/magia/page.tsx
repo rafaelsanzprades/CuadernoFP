@@ -415,7 +415,7 @@ export default function MagiaPage() {
 
                 {/* Índice de bloques de la pestaña activa -- dentro del header
                     fijo (sticky top-0), así que no se pierde al hacer scroll. */}
-                <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} />
+                <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
               </StickyPageHeader>
 
               <MotionWrapper className="w-full space-y-3 px-8 pt-4 pb-[280px]">

@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { enrichInfoModulo } from "@/services/catalogCache";
 import { getApiBase } from "@/services/apiBase";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const REFERENCIAS_FIJAS = [
   { id: "Nota_Final_FO", label: "Nota final (evaluación ordinaria)" },
@@ -103,16 +104,16 @@ export function ReclamacionesTab() {
 
   return (
     <div className="space-y-4 animate-in fade-in duration-500">
+      <div className="space-y-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <SectionHeading id="calificaciones-reclamaciones" icon={AlertOctagon} scrollMt="260px" className="flex-1">
+          {t('campos.evaluacion.reclamacionesTitulo', {defaultValue: 'Reclamaciones de nota'})}
+        </SectionHeading>
+        <Button onClick={() => setFormOpen(o => !o)} className="bg-danger/10 hover:bg-danger/20 text-danger border border-danger/30 gap-2 shrink-0">
+          <Plus className="w-4 h-4" /> {t('botones.reclamaciones.nuevaReclamacion', {defaultValue: 'Nueva reclamación'})}
+        </Button>
+      </div>
       <Card className="p-6 border-t-4 border-t-danger">
-        <div className="flex items-center justify-between mb-5">
-          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-            <AlertOctagon className="w-[1.2em] h-[1.2em]" /> {t('campos.evaluacion.reclamacionesTitulo', {defaultValue: 'Reclamaciones de nota'})}
-          </h2>
-          <Button onClick={() => setFormOpen(o => !o)} className="bg-danger/10 hover:bg-danger/20 text-danger border border-danger/30 gap-2">
-            <Plus className="w-4 h-4" /> {t('botones.reclamaciones.nuevaReclamacion', {defaultValue: 'Nueva reclamación'})}
-          </Button>
-        </div>
-
         {formOpen && (
           <div className="mb-6 p-4 rounded-xl border border-[var(--glass-border)] bg-foreground/5 space-y-3">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -214,6 +215,7 @@ export function ReclamacionesTab() {
           </div>
         )}
       </Card>
+      </div>
     </div>
   );
 }

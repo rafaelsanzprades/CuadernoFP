@@ -7,6 +7,7 @@ import { resolveDescRa, loadCatalogForModule } from "@/services/catalogCache";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { calcularNotasJEG, getSigadInfo, DEFAULT_CONFIG_REDONDEO, setCalificacionAuto, filtrarPorGev } from "@/utils/calificaciones";
 import { useTranslation } from "react-i18next";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export const AnalisisIndividualTab = () => {
   const { t } = useTranslation();
@@ -124,8 +125,11 @@ export const AnalisisIndividualTab = () => {
         </Card>
       </section>
 
+      <div className="space-y-3">
+      <SectionHeading id="calificaciones-adquisicion-competencias" icon={Target} scrollMt="260px">
+        {t('campos.analisis.adquisicionCompetencias', {defaultValue: 'Adquisición de competencias (RA)'})}
+      </SectionHeading>
       <Card className="p-6">
-        <h2 className="text-subheading font-bold mb-6"><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.analisis.adquisicionCompetencias', {defaultValue: 'Adquisición de competencias (RA)'})}</h2>
         <div className="grid grid-cols-2 gap-6">
           {df_ra.map((ra: any) => {
             if (!ra.id_ra) return null;
@@ -152,9 +156,13 @@ export const AnalisisIndividualTab = () => {
           })}
         </div>
       </Card>
+      </div>
 
+      <div className="space-y-3">
+      <SectionHeading id="calificaciones-simulador-calificaciones" scrollMt="260px">
+        {t('campos.analisis.simuladorCalificaciones', {defaultValue: 'Simulador de calificaciones'})}
+      </SectionHeading>
       <Card className="p-6 border-t-4 border-t-purple-500">
-        <h2 className="text-subheading font-bold mb-2"> {t('campos.analisis.simuladorCalificaciones', {defaultValue: 'Simulador de calificaciones'})}</h2>
         <p className="text-muted mb-6 text-body">{t('campos.analisis.simuladorDescripcion', {defaultValue: 'Experimenta con tus notas para proyectar tu resultado final.'})}</p>
 
         <div className="flex gap-8">
@@ -216,6 +224,7 @@ export const AnalisisIndividualTab = () => {
           </div>
         </div>
       </Card>
+      </div>
     </div>
   );
 };

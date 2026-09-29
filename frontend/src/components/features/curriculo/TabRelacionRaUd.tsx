@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { Card } from "@/components/ui/Card";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Target, CheckCircle2, Clock, Calendar as CalendarIcon } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
@@ -54,17 +55,18 @@ export function TabRelacionRaUd() {
 
   return (
     <div className="animate-in fade-in duration-500 w-full">
-      <Card className="p-6">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-            <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> {t('campos.curriculo.progresoRelacionRaUdTitulo', {defaultValue: 'Progreso y relación entre Resultados de aprendizaje y Unidades didácticas o de trabajo'})}
-          </h2>
-          <div className="flex items-center gap-4 text-caption bg-background/50 p-2 rounded-lg border border-[var(--glass-border)]">
-            <span className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-success" /> {t('campos.curriculo.leyendaCompletado', {defaultValue: 'Completado'})}</span>
-            <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-info" /> {t('campos.curriculo.leyendaEnCurso', {defaultValue: 'En curso'})}</span>
-            <span className="flex items-center gap-1.5"><CalendarIcon className="w-3.5 h-3.5 text-muted" /> {t('campos.curriculo.leyendaPendiente', {defaultValue: 'Pendiente'})}</span>
-          </div>
+      <div className="space-y-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <SectionHeading id="agenda-progreso-ra-ud" icon={Target} scrollMt="260px" className="flex-1">
+          {t('campos.curriculo.progresoRelacionRaUdTitulo', {defaultValue: 'Progreso y relación entre Resultados de aprendizaje y Unidades didácticas o de trabajo'})}
+        </SectionHeading>
+        <div className="flex items-center gap-4 text-caption bg-background/50 p-2 rounded-lg border border-[var(--glass-border)] shrink-0">
+          <span className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-success" /> {t('campos.curriculo.leyendaCompletado', {defaultValue: 'Completado'})}</span>
+          <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-info" /> {t('campos.curriculo.leyendaEnCurso', {defaultValue: 'En curso'})}</span>
+          <span className="flex items-center gap-1.5"><CalendarIcon className="w-3.5 h-3.5 text-muted" /> {t('campos.curriculo.leyendaPendiente', {defaultValue: 'Pendiente'})}</span>
         </div>
+      </div>
+      <Card className="p-6">
         {df_ra && df_ra.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-4">
             {df_ra.map((ra: any, idx: number) => {
@@ -131,6 +133,7 @@ export function TabRelacionRaUd() {
           <div className="text-center text-muted p-8">{t('campos.curriculo.sinRaDefinidos', {defaultValue: 'No hay Resultados de aprendizaje definidos.'})}</div>
         )}
       </Card>
+      </div>
     </div>
   );
 }

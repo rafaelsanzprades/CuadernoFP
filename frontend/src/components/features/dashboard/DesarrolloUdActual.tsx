@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { Card } from '@/components/ui/Card';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 import { format } from 'date-fns';
 import { simulateSchedule } from '@/utils/scheduleSimulator';
 import { useDynamicPlanning } from '@/hooks/useDynamicPlanning';
@@ -59,12 +60,13 @@ export const DesarrolloUdActual = () => {
   sesiones.sort((a: any, b: any) => (Number(a.Num_Orden) || 0) - (Number(b.Num_Orden) || 0));
 
   return (
+    <div className="space-y-3">
+    <SectionHeading id="agenda-desarrollo-ud" icon={BookOpen} scrollMt="260px">
+      {t('campos.dashboard.desarrolloUnidadEnCursoTitulo', {defaultValue: 'Desarrollo de la unidad en curso'})}
+    </SectionHeading>
     <Card className="p-6 mt-8">
       <div className="mb-4 flex flex-col gap-1">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-          <BookOpen className="w-6 h-6" /> {t('campos.dashboard.desarrolloUnidadEnCursoTitulo', {defaultValue: 'Desarrollo de la unidad en curso'})}
-        </h2>
-        <div className="text-subheading font-bold text-foreground ml-8">
+        <div className="text-subheading font-bold text-foreground">
           {currentUdId} - {currentUdDesc}
         </div>
       </div>
@@ -120,5 +122,6 @@ export const DesarrolloUdActual = () => {
         </div>
       </div>
     </Card>
+    </div>
   );
 };

@@ -146,7 +146,7 @@ export default function LegalPage() {
 
             {/* Índice de secciones de la pestaña activa -- dentro del header
                 fijo (sticky top-0), así que no se pierde al hacer scroll. */}
-            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} />
+            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
           </StickyPageHeader>
 
           {/* pb grande a propósito: dejar sitio de sobra para que la última

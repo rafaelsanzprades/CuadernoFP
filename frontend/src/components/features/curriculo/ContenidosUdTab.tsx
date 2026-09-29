@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useAppStore } from "@/store/useAppStore";
 import { getOgList } from "@/services/catalogCache";
 import { Card } from "@/components/ui/Card";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useTranslation } from "react-i18next";
 
 // Pestaña "Contenidos -> UD" (ítem 5 del backlog, bloque 5 de Alcántara-Alabort):
@@ -68,26 +69,25 @@ export function ContenidosUdTab() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
+      <div className="space-y-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <SectionHeading id="curriculo-contenidos-ud" icon={Layers} scrollMt="260px" className="flex-1">
+          {t('tabs.curriculo.contenidosUd.label', { defaultValue: 'Contenidos → UD' })}
+        </SectionHeading>
+        <Link
+          href="/magia?tab=programacion"
+          className="shrink-0 inline-flex items-center gap-1.5 text-body font-semibold text-info hover:text-info/80 transition-colors whitespace-nowrap"
+        >
+          <ExternalLink className="w-4 h-4" />
+          {t('botones.curriculo.descargarPdfMagia', { defaultValue: 'Descargar PDF/DOCX en MagIA' })}
+        </Link>
+      </div>
       <Card className="p-6 border-l-4 border-l-indigo-500">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-          <div>
-            <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-1">
-              <Layers className="w-5 h-5 text-indigo-400" />
-              {t('tabs.curriculo.contenidosUd.label', { defaultValue: 'Contenidos → UD' })}
-            </h2>
-            <p className="text-body text-muted">
-              {t('campos.curriculo.contenidosUdDescripcion', { defaultValue: 'Agrupa las unidades didácticas por bloque de contenidos y muestra de un vistazo su relación con RA, objetivos generales, horas e instrumentos de evaluación.' })}
-            </p>
-          </div>
-          <Link
-            href="/magia?tab=programacion"
-            className="shrink-0 inline-flex items-center gap-1.5 text-body font-semibold text-info hover:text-info/80 transition-colors whitespace-nowrap"
-          >
-            <ExternalLink className="w-4 h-4" />
-            {t('botones.curriculo.descargarPdfMagia', { defaultValue: 'Descargar PDF/DOCX en MagIA' })}
-          </Link>
-        </div>
+        <p className="text-body text-muted">
+          {t('campos.curriculo.contenidosUdDescripcion', { defaultValue: 'Agrupa las unidades didácticas por bloque de contenidos y muestra de un vistazo su relación con RA, objetivos generales, horas e instrumentos de evaluación.' })}
+        </p>
       </Card>
+      </div>
 
       {bloques.map(([bloque, uds]) => (
         <Card key={bloque} className="p-6 overflow-hidden">

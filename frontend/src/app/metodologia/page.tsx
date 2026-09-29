@@ -16,6 +16,7 @@ import { DiversidadTab } from "@/components/features/modulo/DiversidadTab";
 import { InnovacionTab } from "@/components/features/modulo/InnovacionTab";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
+import { SectionIndex } from "@/components/ui/SectionIndex";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { getApiBase } from "@/services/apiBase";
@@ -64,6 +65,28 @@ export default function MetodologiaConfigPage() {
     recursos: t('tabs.metodologia.recursos.desc', {defaultValue: 'Instrumentos de evaluación seleccionados y recursos y espacios necesarios.'}),
     contingencia: t('tabs.metodologia.contingencia.desc', {defaultValue: 'Planes de contingencia y adaptación ante situaciones excepcionales.'}),
     transversales: t('tabs.metodologia.transversales.desc', {defaultValue: 'Elementos transversales, competencias clave, competencias digitales, estándares y objetivos del currículo, innovación e intermodularidad, y actividades complementarias y extraescolares.'}),
+  };
+
+  // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
+  const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
+    metodologia: [
+      { id: "metodologia-metodologia", label: t('campos.modulo.metodologiaTitulo', {defaultValue: 'Metodología'}) },
+      { id: "metodologia-marco-inclusion", label: t('campos.modulo.marcoInclusionTitulo', {defaultValue: 'Marco de Inclusión (D 91/2024 Art. 29)'}) },
+      { id: "metodologia-f1-diversidad", label: t('campos.modulo.f1AtencionDiversidadTitulo', {defaultValue: 'F1. Atención a la diversidad'}) },
+      { id: "metodologia-plan-dua", label: t('campos.modulo.planDuaTitulo', {defaultValue: 'Plan de Atención a la Diversidad (DUA)'}) },
+      { id: "metodologia-acneae", label: t('campos.modulo.panelAcneaeTitulo', {defaultValue: 'Panel de ACNEAE'}) },
+    ],
+    contingencia: [
+      { id: "metodologia-contingencia-medidas", label: t('campos.modulo.tituloMedidasContingencia', {defaultValue: 'Medidas de contingencia'}) },
+      { id: "metodologia-contingencia-registro", label: t('campos.modulo.tituloRegistroEscenariosContingencia', {defaultValue: 'Registro de escenarios de contingencia'}) },
+      { id: "metodologia-contingencia-plan", label: t('campos.modulo.tituloPlanContingencia', {defaultValue: 'Plan de Contingencia'}) },
+    ],
+    transversales: [
+      { id: "metodologia-transversales", label: t('campos.modulo.transversalesCompetenciasTitulo', {defaultValue: 'Transversales y Competencias'}) },
+      { id: "metodologia-digcomp", label: t('campos.modulo.competenciasDigitalesTitulo', {defaultValue: 'Competencias digitales (DigComp / DigCompEdu)'}) },
+      { id: "metodologia-estandares", label: t('campos.modulo.estandaresObjetivosTitulo', {defaultValue: 'Estándares y Objetivos (Currículo)'}) },
+      { id: "metodologia-innovacion", label: t('campos.modulo.tituloInnovacionIntermodularidad', {defaultValue: 'Innovación e Intermodularidad'}) },
+    ],
   };
 
   if (!activeModuleId) {
@@ -138,6 +161,10 @@ export default function MetodologiaConfigPage() {
             <p className="text-body text-muted mt-3">
               {TAB_DESCRIPTIONS[activeTab] || 'Configuración de la metodología.'}
             </p>
+
+            {/* Índice de bloques de la pestaña activa -- dentro del header
+                fijo (sticky top-0), así que no se pierde al hacer scroll. */}
+            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
           </StickyPageHeader>
 
           <MotionWrapper className="px-8 pt-4 pb-12">

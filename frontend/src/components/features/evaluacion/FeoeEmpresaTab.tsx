@@ -5,6 +5,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 
@@ -169,23 +170,21 @@ export function FeoeEmpresaTab() {
 
   return (
     <div className="space-y-6">
+      <div className="space-y-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <SectionHeading id="feoe-criterios-designados" icon={Building2} scrollMt="260px" className="flex-1">
+          {t('campos.feoe.criteriosDesignadosTitulo', {defaultValue: 'Criterios designados para FEOE'})}
+        </SectionHeading>
+        <Link href="/curriculo?tab=ponderacion-ra-ce" className="shrink-0">
+          <Button variant="secondary" className="gap-2 text-caption">
+            <GraduationCap className="w-3.5 h-3.5" /> {t('botones.feoe.gestionarEnCurriculo', {defaultValue: 'Gestionar en Currículo'})}
+          </Button>
+        </Link>
+      </div>
       <Card className="p-6 border-t-4 border-t-amber-500">
-        <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
-          <div className="flex items-start gap-3">
-            <Building2 className="w-6 h-6 text-amber-500 mt-1 shrink-0" />
-            <div>
-              <h3 className="text-subheading font-bold text-foreground">{t('campos.feoe.criteriosDesignadosTitulo', {defaultValue: 'Criterios designados para FEOE'})}</h3>
-              <p className="text-muted text-body mt-1">
-                {t('campos.feoe.criteriosDesignadosDesc', {defaultValue: 'Los CE marcados como FEOE en Currículo son los que valora el tutor de empresa (Anexo XI b) — tú transcribes el resultado más abajo, por alumno.'})}
-              </p>
-            </div>
-          </div>
-          <Link href="/curriculo?tab=ponderacion-ra-ce">
-            <Button variant="secondary" className="shrink-0 gap-2 text-caption">
-              <GraduationCap className="w-3.5 h-3.5" /> {t('botones.feoe.gestionarEnCurriculo', {defaultValue: 'Gestionar en Currículo'})}
-            </Button>
-          </Link>
-        </div>
+        <p className="text-muted text-body mb-4">
+          {t('campos.feoe.criteriosDesignadosDesc', {defaultValue: 'Los CE marcados como FEOE en Currículo son los que valora el tutor de empresa (Anexo XI b) — tú transcribes el resultado más abajo, por alumno.'})}
+        </p>
         {df_ra.length === 0 ? (
           <p className="text-body text-muted">{t('campos.feoe.sinRaCe', {defaultValue: 'No hay RA/CE cargados en este módulo todavía.'})}</p>
         ) : raConDesignados.length === 0 ? (
@@ -223,6 +222,7 @@ export function FeoeEmpresaTab() {
           </div>
         )}
       </Card>
+      </div>
 
       {ceDesignados.length === 0 ? (
         <Card className="p-8 text-center border-l-4 border-l-amber-500">

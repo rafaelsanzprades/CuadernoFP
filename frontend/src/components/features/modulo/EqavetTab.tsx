@@ -1,9 +1,10 @@
 "use client";
-import { Info, CheckCircle2, Award, ClipboardCheck } from "lucide-react";
+import { Info, CheckCircle2, ClipboardCheck } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { useTranslation } from "react-i18next";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const EQAVET_INDICATORS = [
   { id: "ind1", category: "Planificación", label: "¿La programación se ha ajustado a las necesidades del sector productivo?" },
@@ -58,22 +59,18 @@ export function EqavetTab() {
 
   return (
     <MotionWrapper>
+      <div className="space-y-3">
+      <SectionHeading id="calificaciones-eqavet" icon={ClipboardCheck} scrollMt="260px">
+        {t('checks.modulo.indicadoresCalidad', {defaultValue: 'Indicadores de calidad'})}
+      </SectionHeading>
       <Card className="p-6 border-t-4 border-t-accent">
-        <div className="flex items-start gap-4 mb-4">
-          <Award className="w-6 h-6 text-accent mt-1 shrink-0" />
-          <div>
-            <h3 className="text-subheading font-bold text-foreground flex items-center gap-2">
-              <ClipboardCheck className="w-5 h-5 text-accent" /> {t('checks.modulo.indicadoresCalidad', {defaultValue: 'Indicadores de calidad'})}
-            </h3>
-            <p className="text-muted text-body mt-1">
-              Marco de Referencia Europeo de Garantía de la Calidad (EQAVET). Autoevaluación del módulo para la memoria final y el ciclo de mejora continua.
-            </p>
-            <p className="text-muted text-caption mt-2">
-              Los indicadores de autoevaluación docente (Planificación / Desarrollo / Resultados) siguen las dimensiones
-              del programa <a href="https://www.aneca.es/docentia" target="_blank" rel="noopener noreferrer" className="underline hover:text-accent">DOCENTIA de ANECA</a>.
-            </p>
-          </div>
-        </div>
+        <p className="text-muted text-body">
+          Marco de Referencia Europeo de Garantía de la Calidad (EQAVET). Autoevaluación del módulo para la memoria final y el ciclo de mejora continua.
+        </p>
+        <p className="text-muted text-caption mt-2 mb-4">
+          Los indicadores de autoevaluación docente (Planificación / Desarrollo / Resultados) siguen las dimensiones
+          del programa <a href="https://www.aneca.es/docentia" target="_blank" rel="noopener noreferrer" className="underline hover:text-accent">DOCENTIA de ANECA</a>.
+        </p>
 
         <div className="space-y-6">
           {[
@@ -116,6 +113,7 @@ export function EqavetTab() {
           ))}
         </div>
       </Card>
+      </div>
     </MotionWrapper>
   );
 }

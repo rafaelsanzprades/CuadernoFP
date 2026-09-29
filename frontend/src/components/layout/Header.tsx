@@ -1,5 +1,5 @@
 "use client";
-import { Menu } from "lucide-react";
+import { Menu, AlertTriangle } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useAppStore, useTemporalStore } from "@/store/useAppStore";
 import Link from "next/link";
@@ -224,10 +224,10 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
   return (
     <>
       {/* Barra solo-móvil: el resto de la fila (Telegram, deshacer/rehacer,
-          configuración, En obras) vive ahora en la zona fija del Sidebar --
-          en escritorio no queda ninguna barra aquí, para dar más espacio a
-          la página. */}
-      <div className="lg:hidden w-full flex items-center z-40 sticky top-0 bg-background/95 backdrop-blur-xl border-b border-[var(--glass-border)]">
+          configuración) vive ahora en la zona fija del Sidebar -- en
+          escritorio no queda ninguna barra aquí, para dar más espacio a la
+          página. */}
+      <div className="lg:hidden w-full flex items-center z-40 sticky top-0 bg-background backdrop-blur-xl border-b border-[var(--glass-border)]">
         <button
           onClick={toggleSidebar}
           className="p-2 m-1 rounded-md text-foreground hover:bg-foreground/10 transition-colors"
@@ -235,6 +235,15 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
         >
           <Menu className="w-6 h-6" />
         </button>
+      </div>
+
+      {/* "En obras" -- esquina superior derecha de la página, en todas las
+          páginas (antes al final del menú del Sidebar, molestaba más ahí;
+          petición de Rafael, 2026-09-29). Solo escritorio, mismo criterio
+          que el resto de esta cabecera. */}
+      <div className="hidden lg:flex fixed top-3 right-3 z-50 items-center gap-1.5 px-3 py-1.5 bg-orange-500/10 border border-orange-500/30 rounded-lg text-orange-500 shadow-sm">
+        <AlertTriangle className="w-4 h-4 shrink-0" strokeWidth={2.5} />
+        <span className="text-caption font-bold tracking-widest">{t('sidebar.en_obras')}</span>
       </div>
 
       {title && (

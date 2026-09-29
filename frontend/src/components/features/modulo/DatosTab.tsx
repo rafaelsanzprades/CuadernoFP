@@ -5,6 +5,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { Select } from "@/components/ui/Select";
 import { Input } from "@/components/ui/Input";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Family } from "@/types";
 import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
 import { useTranslation } from "react-i18next";
@@ -202,10 +203,11 @@ export function DatosTab() {
       <div className="space-y-8 animate-in fade-in duration-500">
       
       {/* 1. Centro y docente */}
+      <div className="space-y-3">
+      <SectionHeading id="datos-centro-docente" icon={School} scrollMt="260px">
+        {t('campos.modulo.tituloCentroDocente', {defaultValue: 'Centro y docente'})}
+      </SectionHeading>
       <Card className="p-6">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-5">
-<span>‍<span className="inline-flex"><School className="w-[1.2em] h-[1.2em] mr-1" /></span></span> {t('campos.modulo.tituloCentroDocente', {defaultValue: 'Centro y docente'})}
-</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Input
             label={t('campos.modulo.centroEducativo', {defaultValue: 'Centro educativo'})}
@@ -247,13 +249,14 @@ export function DatosTab() {
           </Select>
         </div>
       </Card>
+      </div>
 
       {/* 2. Módulo didáctico */}
+      <div className="space-y-3">
+      <SectionHeading id="datos-modulo-didactico" icon={FileEdit} scrollMt="260px">
+        {t('campos.modulo.tituloModuloDidactico', {defaultValue: 'Módulo didáctico'})}
+      </SectionHeading>
       <Card className="p-6">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-5">
-<span><span className="inline-flex"><FileEdit className="w-[1.2em] h-[1.2em] mr-1" /></span></span> {t('campos.modulo.tituloModuloDidactico', {defaultValue: 'Módulo didáctico'})}
-</h2>
-
         <div className="grid grid-cols-2 gap-4 mb-4">
           <Select
             label={t('campos.modulo.familiaProfesional', {defaultValue: 'Familia profesional'})}
@@ -375,12 +378,14 @@ export function DatosTab() {
           />
         </div>
       </Card>
+      </div>
 
       {/* Reglas de redondeo y compensación */}
+      <div className="space-y-3">
+      <SectionHeading id="datos-reglas-redondeo" icon={Settings} scrollMt="260px">
+        {t('campos.modulo.tituloReglasRedondeo', {defaultValue: 'Reglas de redondeo y compensación'})}
+      </SectionHeading>
       <Card className="p-6 border-l-4 border-l-orange-500">
-        <h4 className="text-subheading font-bold text-foreground mb-6 flex items-center justify-between">
-          <span className="flex items-center gap-2"><Settings className="w-[1.2em] h-[1.2em] mr-1" /> {t('campos.modulo.tituloReglasRedondeo', {defaultValue: 'Reglas de redondeo y compensación'})}</span>
-        </h4>
         {(() => {
           const config = moduleData?.config_redondeo || {
             nota_aprobado: 5.0,
@@ -428,17 +433,19 @@ export function DatosTab() {
           );
         })()}
       </Card>
-
-
+      </div>
 
       {/* 5. Evaluación */}
+      <div className="space-y-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <SectionHeading id="datos-ponderacion-trimestres" icon={Scale} scrollMt="260px" className="flex-1">
+          {t('campos.modulo.tituloPonderacionTrimestres', {defaultValue: '% Ponderación por trimestres'})}
+        </SectionHeading>
+        <span className={`text-body font-semibold px-3 py-1 rounded-full shrink-0 ${sumaTrimestres === 100 ? 'bg-success/10 text-success border border-success/30' : 'bg-danger/10 text-danger border border-danger/30'}`}>
+          {sumaTrimestres}% {sumaTrimestres !== 100 && t('campos.modulo.debeSumarCien', {defaultValue: '(Debe sumar 100%)'})}
+        </span>
+      </div>
       <Card className="p-6 border-l-4 border-l-accent">
-        <h4 className="text-subheading font-bold text-foreground mb-6 flex items-center justify-between">
-          <span className="flex items-center gap-2"><span><span className="inline-flex"><Scale className="w-[1.2em] h-[1.2em] mr-1" /></span></span> {t('campos.modulo.tituloPonderacionTrimestres', {defaultValue: '% Ponderación por trimestres'})}</span>
-          <span className={`text-body font-semibold px-3 py-1 rounded-full ${sumaTrimestres === 100 ? 'bg-success/10 text-success border border-success/30' : 'bg-danger/10 text-danger border border-danger/30'}`}>
-            {sumaTrimestres}% {sumaTrimestres !== 100 && t('campos.modulo.debeSumarCien', {defaultValue: '(Debe sumar 100%)'})}
-          </span>
-        </h4>
         <div className="grid grid-cols-3 gap-6">
           {[
             ['pond_1t', t('checks.modulo.pond1erTrimestre', {defaultValue: '1er trimestre (%)'})],
@@ -454,24 +461,26 @@ export function DatosTab() {
           ))}
         </div>
       </Card>
+      </div>
 
-      <Card className="p-6 border-l-4 border-l-purple-500">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
-          <h4 className="text-subheading font-bold text-foreground flex items-center gap-2">
-            <Receipt className="w-[1.2em] h-[1.2em]" /> {t('campos.modulo.tituloInstrumentosEvaluacion', {defaultValue: '% Instrumentos de evaluación'})}
-          </h4>
-          <div className="flex gap-2">
-            {[
-              [t('campos.modulo.chipTrim1', {defaultValue: '1er Trim.'}), sum1t],
-              [t('campos.modulo.chipTrim2', {defaultValue: '2º Trim.'}), sum2t],
-              [t('campos.modulo.chipTrim3', {defaultValue: '3er Trim.'}), sum3t],
-            ].map(([label, sum]) => (
-              <span key={label as string} className={`text-caption font-semibold px-2.5 py-1 rounded-full whitespace-nowrap ${sum === 100 ? 'bg-success/10 text-success border border-success/30' : 'bg-danger/10 text-danger border border-danger/30'}`}>
-                {label}: {sum}%
-              </span>
-            ))}
-          </div>
+      <div className="space-y-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <SectionHeading id="datos-instrumentos-evaluacion" icon={Receipt} scrollMt="260px" className="flex-1">
+          {t('campos.modulo.tituloInstrumentosEvaluacion', {defaultValue: '% Instrumentos de evaluación'})}
+        </SectionHeading>
+        <div className="flex gap-2 shrink-0">
+          {[
+            [t('campos.modulo.chipTrim1', {defaultValue: '1er Trim.'}), sum1t],
+            [t('campos.modulo.chipTrim2', {defaultValue: '2º Trim.'}), sum2t],
+            [t('campos.modulo.chipTrim3', {defaultValue: '3er Trim.'}), sum3t],
+          ].map(([label, sum]) => (
+            <span key={label as string} className={`text-caption font-semibold px-2.5 py-1 rounded-full whitespace-nowrap ${sum === 100 ? 'bg-success/10 text-success border border-success/30' : 'bg-danger/10 text-danger border border-danger/30'}`}>
+              {label}: {sum}%
+            </span>
+          ))}
         </div>
+      </div>
+      <Card className="p-6 border-l-4 border-l-purple-500">
         <div className="space-y-2">
           <div style={INSTR_GRID_STYLE} className="text-caption font-bold text-muted px-1">
             <span>{t('campos.modulo.colSeleccionTipo', {defaultValue: 'Selección del tipo'})}</span>
@@ -539,13 +548,14 @@ export function DatosTab() {
           </button>
         </div>
       </Card>
-
+      </div>
 
       {/* 7. Escalas de evaluación cualitativas (EEv) */}
+      <div className="space-y-3">
+      <SectionHeading id="datos-escalas-evaluacion" icon={ListChecks} scrollMt="260px">
+        {t('campos.modulo.tituloEscalasEvaluacion', {defaultValue: 'Escalas de evaluación cualitativas'})}
+      </SectionHeading>
       <Card className="p-6 border-l-4 border-l-teal-500">
-        <h4 className="text-subheading font-bold text-foreground mb-2 flex items-center gap-2">
-          <ListChecks className="w-[1.2em] h-[1.2em]" /> {t('campos.modulo.tituloEscalasEvaluacion', {defaultValue: 'Escalas de evaluación cualitativas'})}
-        </h4>
         <p className="text-caption text-muted mb-4">
           {t('campos.modulo.escalasEvaluacionDesc', {defaultValue: 'Niveles nombrados con un coeficiente de conversión a la nota 0-10, independientes de la nota numérica directa. Precargada con la escala oficial española (Insuficiente/Suficiente/Bien/Notable/Sobresaliente) — edítala o bórrala si usas otra.'})}
         </p>
@@ -617,6 +627,7 @@ export function DatosTab() {
           );
         })()}
       </Card>
+      </div>
 
     </div>
     </>

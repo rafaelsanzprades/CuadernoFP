@@ -98,9 +98,15 @@ export default function SeguimientoPage() {
   // misma fecha simulada (2 de mayo) que el auto-scroll de abajo, para que
   // la etiqueta "Hoy" marque la fila correcta.
   const [todayStr, setTodayStr] = useState<string | null>(null);
+  // Mes en curso (número 1-12) -- solo su acordeón del Diario arranca
+  // desplegado, el resto arrancan colapsados (petición de Rafael,
+  // 2026-09-29). Mismo cálculo que todayStr, null hasta que se monta en
+  // cliente para no desincronizar el HTML de SSR.
+  const [currentMonthNum, setCurrentMonthNum] = useState<number | null>(null);
   useEffect(() => {
     const ref = dataSource === 'demo' && cursoData ? getSimulatedToday(cursoData) : new Date();
     setTodayStr(ref.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+    setCurrentMonthNum(ref.getMonth() + 1);
   }, [dataSource, cursoData]);
   const { planningLedger } = useDynamicPlanning();
 
@@ -350,7 +356,7 @@ export default function SeguimientoPage() {
                     if (lectivos.length === 0) return null;
 
                     return (
-                      <details key={m_short} open className="diario-details group bg-[var(--glass-bg)] rounded-lg border border-[var(--glass-border)] overflow-hidden transition-colors">
+                      <details key={m_short} open={currentMonthNum !== null && meses_num[m_short] === currentMonthNum} className="diario-details group bg-[var(--glass-bg)] rounded-lg border border-[var(--glass-border)] overflow-hidden transition-colors">
                         <summary className="p-4 cursor-pointer flex items-center justify-between font-semibold text-subheading select-none hover:bg-foreground/5">
                           <div className="flex items-center gap-3">
                             <span className="text-info"><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span></span>

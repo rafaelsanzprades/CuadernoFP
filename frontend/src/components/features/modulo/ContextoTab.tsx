@@ -2,6 +2,7 @@
 import { School, User, FileText, BookOpen, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import { NarrativeField } from "@/components/ui/NarrativeField";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useAppStore } from "@/store/useAppStore";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
@@ -342,10 +343,11 @@ export function ContextoTab() {
   return (
     <>
       <div className="space-y-6 animate-in fade-in duration-500">
+      <div className="space-y-3">
+      <SectionHeading id="contexto-escolar" icon={School} scrollMt="260px">
+        {t('campos.contexto.tituloContextoEscolar', {defaultValue: 'Contexto escolar'})}
+      </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-indigo-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><School className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.contexto.tituloContextoEscolar', {defaultValue: 'Contexto escolar'})}
-        </h2>
         <div className="space-y-4">
           <RasgosRapidos
             titulo={t('checks.contexto.tituloEntorno', {defaultValue: 'Rasgos rápidos del entorno'})}
@@ -455,11 +457,13 @@ export function ContextoTab() {
           </div>
         </div>
       </div>
+      </div>
 
+      <div className="space-y-3">
+      <SectionHeading id="contexto-alumnado-acneae" icon={User} scrollMt="260px">
+        {t('campos.contexto.tituloAlumnadoAcneae', {defaultValue: 'Alumnado (ACNEAE)'})}
+      </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-purple-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.contexto.tituloAlumnadoAcneae', {defaultValue: 'Alumnado (ACNEAE)'})}
-        </h2>
         <div className="space-y-4">
           <div>
             <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.contexto.datosContextualizacionGrupo', {defaultValue: 'Datos de contextualización del grupo'})}</label>
@@ -529,11 +533,13 @@ export function ContextoTab() {
           </div>
         </div>
       </div>
+      </div>
 
+      <div className="space-y-3">
+      <SectionHeading id="contexto-modelo-simplificado" icon={BookOpen} scrollMt="260px">
+        {t('campos.contexto.tituloModeloSimplificado', {defaultValue: 'Textos del modelo Simplificado (pd=)'})}
+      </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-teal-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.contexto.tituloModeloSimplificado', {defaultValue: 'Textos del modelo Simplificado (pd=)'})}
-        </h2>
         <p className="text-caption text-muted mb-4">
           {t('campos.contexto.avisoModeloSimplificado', {defaultValue: 'Estos 2 campos son específicos del documento "Programación suficiente" (modelo oficial Simplificado). Si se dejan vacíos, se autogenera un texto por defecto razonable a partir del resto de datos del módulo.'})}
         </p>
@@ -558,11 +564,13 @@ export function ContextoTab() {
           </div>
         </div>
       </div>
+      </div>
 
+      <div className="space-y-3">
+      <SectionHeading id="contexto-autoria-publicidad" icon={FileText} scrollMt="260px">
+        {t('campos.contexto.tituloAutoriaPublicidad', {defaultValue: 'Datos de autoría y publicidad'})}
+      </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-amber-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.contexto.tituloAutoriaPublicidad', {defaultValue: 'Datos de autoría y publicidad'})}
-        </h2>
         <div className="space-y-6">
           <NarrativeField
             id="textos_pd_bibliografia"
@@ -575,6 +583,7 @@ export function ContextoTab() {
             description={t('campos.modulo.publicidadDesc', {defaultValue: 'Cómo y dónde se publicará o podrá consultar la programación.'})}
           />
         </div>
+      </div>
       </div>
     </div>
     </>
