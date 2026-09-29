@@ -24,6 +24,7 @@ import { PropuestasTab } from "@/components/features/modulo/PropuestasTab";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
+import { SectionIndex } from "@/components/ui/SectionIndex";
 import Link from "next/link";
 import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
 import { getApiBase } from "@/services/apiBase";
@@ -169,6 +170,19 @@ export default function ProgresoPage() {
     mejora: t('tabs.inicio.mejora.desc', {defaultValue: 'Gestión de la calidad, evaluación del proceso e indicadores para el módulo.'}),
   };
 
+  // Índice de bloques -- solo en pestañas con 2+ bloques reales. resumen/
+  // historico/individual quedan fuera: cada una tiene un switcher interno
+  // (estado, no Tabs) que cambia de vista sin cambiar activeTab, así que un
+  // índice plano por activeTab mostraría las anclas equivocadas cuando
+  // cambia el switcher. mejora es una pestaña apilada normal (EqavetTab +
+  // PropuestasTab), así que sí mapea limpiamente.
+  const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
+    mejora: [
+      { id: "calificaciones-eqavet", label: t('checks.modulo.indicadoresCalidad', {defaultValue: 'Indicadores de calidad'}) },
+      { id: "calificaciones-propuestas", label: t('campos.modulo.tituloPropuestasMejora', {defaultValue: 'Propuestas de Mejora (PDCA)'}) },
+    ],
+  };
+
   return (
     <div className="flex min-h-screen bg-background">
       <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -211,6 +225,11 @@ export default function ProgresoPage() {
             <p className="text-body text-muted mt-3">
               {TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab}
             </p>
+
+            {/* Índice de bloques de la pestaña activa -- solo mejora tiene
+                entradas; resumen/historico/individual resuelven a [] y no
+                pintan nada (ver comentario junto a SECTION_INDEX_ITEMS). */}
+            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-3 px-8 pt-4 pb-12">

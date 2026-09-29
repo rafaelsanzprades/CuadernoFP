@@ -13,6 +13,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { SectionIndex } from "@/components/ui/SectionIndex";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { getAutoMilestones } from "@/utils/calendarMilestones";
 import Link from "next/link";
@@ -268,6 +270,16 @@ export default function CalendarioPage() {
     visual: t('tabs.calendario.visual.desc', {defaultValue: 'Vista mensual del calendario académico completo.'}),
   };
 
+  // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
+  const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
+    fechas: [
+      { id: "calendario-fechas-generales", label: t('campos.calendario.fechasGeneralesTitulo', {defaultValue: 'Fechas generales'}) },
+      { id: "calendario-horario-semanal", label: t('campos.calendario.horarioSemanalTitulo', {defaultValue: 'Horario semanal'}) },
+      { id: "calendario-semana-lectiva", label: t('campos.calendario.semanaLectivaTitulo', {defaultValue: 'Semana lectiva'}) },
+      { id: "calendario-trimestres", label: t('campos.calendario.trimestresTitulo', {defaultValue: 'Trimestres'}) },
+    ],
+  };
+
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
 
   const df_ace = moduleData?.df_ace || [];
@@ -470,6 +482,10 @@ export default function CalendarioPage() {
             <p className="text-body text-muted mt-3">
               {TAB_DESCRIPTIONS[activeTab] || 'Gestión del calendario académico.'}
             </p>
+
+            {/* Índice de bloques de la pestaña activa -- dentro del header
+                fijo (sticky top-0), así que no se pierde al hacer scroll. */}
+            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-4 px-8 pt-4 pb-12">
@@ -484,29 +500,31 @@ export default function CalendarioPage() {
               {activeTab === 'fechas' && (
                 <div className="space-y-4 mt-4">
               {/* Fechas generales */}
-              <Card className="p-6 border-t-4 border-t-blue-500 overflow-visible z-30">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-subheading font-bold">{t('campos.calendario.fechasGeneralesTitulo', {defaultValue: 'Fechas generales'})}</h2>
-                  <div className="flex gap-2">
-
-                    <Button
-                      variant="ghost"
-                      onClick={() => {
-                        const ledger = planningLedger || {};
-                        const dates = Object.keys(ledger)
-                          .map(d => { const [dd,mm,yyyy] = d.split("/"); return `${yyyy}-${mm}-${dd}`; })
-                          .sort();
-                        if (dates.length > 0) {
-                          handleUpdateFechas("ini_curso", dates[0]);
-                          handleUpdateFechas("fin_curso", dates[dates.length - 1]);
-                        }
-                      }}
-                      className="text-caption text-info hover:text-info border border-[var(--glass-border)]"
-                    >
-                      <span className="inline-flex"><Search className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('botones.calendario.autodetectar', {defaultValue: 'Autodetectar'})}
-                    </Button>
-                  </div>
+              <div className="space-y-3">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <SectionHeading id="calendario-fechas-generales" scrollMt="260px" className="flex-1">
+                  {t('campos.calendario.fechasGeneralesTitulo', {defaultValue: 'Fechas generales'})}
+                </SectionHeading>
+                <div className="flex gap-2 shrink-0">
+                  <Button
+                    variant="ghost"
+                    onClick={() => {
+                      const ledger = planningLedger || {};
+                      const dates = Object.keys(ledger)
+                        .map(d => { const [dd,mm,yyyy] = d.split("/"); return `${yyyy}-${mm}-${dd}`; })
+                        .sort();
+                      if (dates.length > 0) {
+                        handleUpdateFechas("ini_curso", dates[0]);
+                        handleUpdateFechas("fin_curso", dates[dates.length - 1]);
+                      }
+                    }}
+                    className="text-caption text-info hover:text-info border border-[var(--glass-border)]"
+                  >
+                    <span className="inline-flex"><Search className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('botones.calendario.autodetectar', {defaultValue: 'Autodetectar'})}
+                  </Button>
                 </div>
+              </div>
+              <Card className="p-6 border-t-4 border-t-blue-500 overflow-visible z-30">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
                     { label: "Inicio de curso",   field: "ini_curso", key: "checks.dashboard.fechaCampo_ini_curso" },
@@ -524,18 +542,22 @@ export default function CalendarioPage() {
                   ))}
                 </div>
               </Card>
+              </div>
 
               {/* Sesiones semanales */}
-              <Card className="p-6 border-t-4 border-t-purple-500">
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-subheading font-bold flex items-center gap-2">{t('campos.calendario.horarioSemanalTitulo', {defaultValue: 'Horario semanal'})}</h2>
-                  <div className="bg-foreground/15 px-4 py-2 rounded-lg border border-[var(--glass-border)] text-body">
-                    {t('campos.calendario.desfaseBoa', {h_sem, defaultValue: 'Desfase con BOA ({{h_sem}} h/sem):'})}{" "}
-                    <span className={`font-bold ${suma_horario === h_sem ? "text-success" : "text-warning"}`}>
-                      {suma_horario - h_sem} h
-                    </span>
-                  </div>
+              <div className="space-y-3">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <SectionHeading id="calendario-horario-semanal" scrollMt="260px" className="flex-1">
+                  {t('campos.calendario.horarioSemanalTitulo', {defaultValue: 'Horario semanal'})}
+                </SectionHeading>
+                <div className="bg-foreground/15 px-4 py-2 rounded-lg border border-[var(--glass-border)] text-body shrink-0">
+                  {t('campos.calendario.desfaseBoa', {h_sem, defaultValue: 'Desfase con BOA ({{h_sem}} h/sem):'})}{" "}
+                  <span className={`font-bold ${suma_horario === h_sem ? "text-success" : "text-warning"}`}>
+                    {suma_horario - h_sem} h
+                  </span>
                 </div>
+              </div>
+              <Card className="p-6 border-t-4 border-t-purple-500">
                 <div className="grid grid-cols-5 gap-4">
                   {["Lun", "Mar", "Mié", "Jue", "Vie"].map(day => (
                     <div key={day}>
@@ -550,10 +572,14 @@ export default function CalendarioPage() {
                   ))}
                 </div>
               </Card>
+              </div>
 
               {/* Semana lectiva */}
+              <div className="space-y-3">
+              <SectionHeading id="calendario-semana-lectiva" scrollMt="260px">
+                {t('campos.calendario.semanaLectivaTitulo', {defaultValue: 'Semana lectiva'})}
+              </SectionHeading>
               <Card className="p-6 border-t-4 border-t-yellow-500 overflow-hidden">
-                <h2 className="text-subheading font-bold mb-4 flex items-center gap-2">{t('campos.calendario.semanaLectivaTitulo', {defaultValue: 'Semana lectiva'})}</h2>
                 <div className="overflow-x-auto rounded-xl border border-[var(--glass-border)]">
                   <table className="w-full text-center text-body border-collapse table-fixed">
                     <thead>
@@ -637,12 +663,14 @@ export default function CalendarioPage() {
                   </table>
                 </div>
               </Card>
+              </div>
 
               {/* Trimestres */}
+              <div className="space-y-3">
+              <SectionHeading id="calendario-trimestres" scrollMt="260px">
+                {t('campos.calendario.trimestresTitulo', {defaultValue: 'Trimestres'})}
+              </SectionHeading>
               <Card className="p-6 border-t-4 border-t-emerald-500 overflow-visible z-20">
-                <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-subheading font-bold">{t('campos.calendario.trimestresTitulo', {defaultValue: 'Trimestres'})}</h2>
-                </div>
                 <div className="grid grid-cols-3 gap-6">
                   {[
                     { title: t('t1', {defaultValue: '1er trimestre'}), ini: "ini_1t", fin: "fin_1t", hours: h1 },
@@ -669,6 +697,7 @@ export default function CalendarioPage() {
                   ))}
                 </div>
               </Card>
+              </div>
 
 
 
@@ -678,8 +707,11 @@ export default function CalendarioPage() {
               {activeTab === 'periodo-feoe' && (
                 <div className="space-y-4 mt-4">
                   {/* FP Dual / FEOE - 5 columnas */}
+                  <div className="space-y-3">
+                  <SectionHeading id="calendario-periodo-feoe" scrollMt="260px">
+                    {t('tabs.calendario.periodoFeoe.label', {defaultValue: 'Periodo FEOE'})}
+                  </SectionHeading>
                   <Card className="p-6 border-t-4 border-t-orange-500 overflow-visible">
-                    <h2 className="text-subheading font-bold mb-6">{t('tabs.calendario.periodoFeoe.label', {defaultValue: 'Periodo FEOE'})}</h2>
                     <div className="grid grid-cols-5 gap-4 items-end">
                       {/* Col 1: Selector de tipo */}
                       <div>
@@ -741,12 +773,16 @@ export default function CalendarioPage() {
                       </div>
                     </div>
                   </Card>
+                  </div>
                 </div>
               )}
 
               {activeTab === 'eventos' && (
-                <Card className="p-6 border-t-4 border-t-yellow-500 overflow-visible z-20 mt-4">
-                  <h2 className="text-subheading font-bold mb-2"> {t('campos.calendario.festivosEventosTitulo', {defaultValue: 'Festivos y eventos'})}</h2>
+                <div className="space-y-3 mt-4">
+                <SectionHeading id="calendario-festivos-eventos" scrollMt="260px">
+                  {t('campos.calendario.festivosEventosTitulo', {defaultValue: 'Festivos y eventos'})}
+                </SectionHeading>
+                <Card className="p-6 border-t-4 border-t-yellow-500 overflow-visible z-20">
                   <p className="text-muted text-body mb-4">
                     {t('campos.calendario.festivosEventosInstruccionesPre', {defaultValue: 'Introduce manualmente o haz clic en el calendario. Los festivos excluyen horas del cómputo real. Festivo y Relevante son independientes: un mismo día puede tener los dos a la vez. Las filas con'})}
                     <Lock className="w-[1em] h-[1em] inline-block mx-1" />
@@ -760,6 +796,7 @@ export default function CalendarioPage() {
                     feoeFin={typeof info_fechas.fin_feoe === 'string' ? info_fechas.fin_feoe : undefined}
                   />
                 </Card>
+                </div>
               )}
 
               {activeTab === 'actividades' && (

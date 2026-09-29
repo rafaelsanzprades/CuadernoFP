@@ -12,6 +12,8 @@ import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { SectionIndex } from "@/components/ui/SectionIndex";
 import { AccordionBlock } from "@/components/ui/AccordionBlock";
 import Link from "next/link";
 import { Settings2 } from "lucide-react";
@@ -57,6 +59,17 @@ export default function InstrumentosPage() {
     trimestres: t('tabs.instrumentos.trimestres.desc', {defaultValue: 'Instrumentos de evaluación planificados para cada trimestre.'}),
     rubricas: t('tabs.instrumentos.rubricas.desc', {defaultValue: 'Rúbricas reutilizables: define criterios (que deben sumar 10 puntos entre todos) y niveles de desempeño, y asígnalas a cualquier instrumento desde su Configuración avanzada.'}),
     jeg: t('tabs.instrumentos.jeg.desc', {defaultValue: 'Modelo JEG por indicadores: configuración del motor de calificación real de la app.'}),
+  };
+
+  // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
+  const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
+    jeg: [
+      { id: "instrumentos-indicadores-ce", label: t('campos.instrumentos.indicadoresPorCeTitulo', {defaultValue: 'Indicadores por Criterio de Evaluación'}) },
+      { id: "instrumentos-grupos-evaluacion", label: t('campos.instrumentos.gruposEvaluacionTitulo', {defaultValue: 'Grupos de evaluación (GEv)'}) },
+      { id: "instrumentos-instrumentos-jeg", label: t('campos.instrumentos.instrumentosModeloJegTitulo', {defaultValue: 'Instrumentos (modelo JEG)'}) },
+      { id: "instrumentos-matriz-cobertura", label: t('campos.instrumentos.matrizCoberturaTitulo', { defaultValue: 'Matriz de cobertura CE × Instrumento' }) },
+      { id: "instrumentos-calificaciones-indicador", label: t('campos.instrumentos.calificacionesPorIndicadorTitulo', {defaultValue: 'Calificaciones por indicador'}) },
+    ],
   };
 
   /** Trimestre que debe abrirse por defecto en el acordeón: el que contiene
@@ -472,17 +485,20 @@ export default function InstrumentosPage() {
             <p className="text-body text-muted mt-3">
               {TAB_DESCRIPTIONS[activeTab] || t('campos.comun.gestionDe', {activeTab, defaultValue: 'Gestión de {{activeTab}}'})}
             </p>
+
+            {/* Índice de bloques de la pestaña activa -- dentro del header
+                fijo (sticky top-0), así que no se pierde al hacer scroll. */}
+            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-4 px-8 pt-4 pb-12">
 
           {activeTab === "resumen" && (
-            <>
-                
+            <div className="space-y-3">
+            <SectionHeading id="instrumentos-resumen" icon={BarChart} scrollMt="260px">
+              {t('campos.instrumentos.resumenPorTrimestresTitulo', {defaultValue: 'Resumen de instrumentos de evaluación por trimestres'})}
+            </SectionHeading>
             <Card className="p-6 animate-in fade-in duration-500">
-              <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-5">
-                <span><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span></span> {t('campos.instrumentos.resumenPorTrimestresTitulo', {defaultValue: 'Resumen de instrumentos de evaluación por trimestres'})}
-              </h2>
               <div className="overflow-x-auto">
                 <table className="w-full text-body border-collapse">
                   <thead>
@@ -568,7 +584,7 @@ export default function InstrumentosPage() {
                 </table>
               </div>
             </Card>
-            </>
+            </div>
           )}
 
           {activeTab === "trimestres" && (

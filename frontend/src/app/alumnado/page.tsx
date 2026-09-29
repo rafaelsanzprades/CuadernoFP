@@ -21,6 +21,8 @@ import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { SectionIndex } from "@/components/ui/SectionIndex";
 import { GRUPOS_EVALUACION_DEFECTO } from "@/utils/calificaciones";
 
 import Link from "next/link";
@@ -71,6 +73,15 @@ export default function AlumnadoPage() {
     plano: t('tabs.alumnado.plano.desc', {defaultValue: 'Distribución y plano visual del aula.'}),
     perfilIndividual: t('tabs.alumnado.perfilIndividual.desc', {defaultValue: 'Orientación profesional por alumno/a: motivación, experiencia laboral, aptitudes, aspiraciones e inserción post-ciclo.'}),
     perfilTendencias: t('tabs.alumnado.perfilTendencias.desc', {defaultValue: 'Agregados y tendencias del perfil profesional del grupo, y tabla filtrable de todo el alumnado.'}),
+  };
+
+  // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
+  const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
+    matricula: [
+      { id: "alumnado-lista-oficial", label: t('campos.alumnado.listaOficialTitulo', {defaultValue: 'Lista oficial'}) },
+      { id: "alumnado-datos-grupo", label: t('campos.alumnado.datosGrupoTitulo', {defaultValue: 'Datos del grupo (automático)'}) },
+      { id: "alumnado-rasgos-grupo", label: t('campos.alumnado.rasgosGrupoTitulo', {defaultValue: 'Rasgos característicos del grupo'}) },
+    ],
   };
 
   useEffect(() => {
@@ -254,6 +265,10 @@ export default function AlumnadoPage() {
             <p className="text-body text-muted mt-3">
               {TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab}
             </p>
+
+            {/* Índice de bloques de la pestaña activa -- dentro del header
+                fijo (sticky top-0), así que no se pierde al hacer scroll. */}
+            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-4 px-8 pt-4 pb-12">
@@ -261,34 +276,34 @@ export default function AlumnadoPage() {
           {/* Tab 1: Alumnado */}
           {activeTab === "matricula" && (
             <>
-            <Card className="p-6 border-t-4 border-t-blue-500">
-              <div className="flex justify-between items-end mb-6">
-                <div className="flex items-center gap-4">
-                  <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-                    <span>{t('campos.alumnado.listaOficialTitulo', {defaultValue: 'Lista oficial'})}</span>
-                    <span className="text-body font-normal text-muted bg-foreground/5 px-3 py-1 rounded-full">{t('campos.alumnado.numAlumnado', {count: df_al.length, defaultValue: '{{count}} alumnado'})}</span>
-                  </h2>
-                  <Button 
-                    variant="ghost"
-                    onClick={() => fileInputRef.current?.click()}
-                    className="text-accent hover:text-accent hover:bg-accent/10 font-semibold flex items-center gap-1 h-8 px-3 ml-2"
-                    title={t('tooltips.alumnado.importarCsv', {defaultValue: 'Importar CSV (Nombre, Apellidos...)'})}
-                  >
-                    <FolderOpen className="w-4 h-4" /> {t('botones.alumnado.importarCsv', {defaultValue: 'Importar CSV'})}
-                  </Button>
-                  <input 
-                    type="file" 
-                    accept=".csv" 
-                    ref={fileInputRef} 
-                    onChange={handleImportCSV} 
-                    className="hidden" 
-                  />
-                </div>
-                {n_menores > 0 && (
-                  <span className="text-danger text-body font-semibold"> {t('campos.alumnado.nMenoresEdad', {count: n_menores, defaultValue: '{{count}} alumnado(s) menor(es) de 18 años'})}</span>
-                )}
+            <div className="space-y-3">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div className="flex items-center gap-4 flex-1">
+                <SectionHeading id="alumnado-lista-oficial" scrollMt="260px" className="flex-1">
+                  {t('campos.alumnado.listaOficialTitulo', {defaultValue: 'Lista oficial'})}
+                </SectionHeading>
+                <span className="text-body font-normal text-muted bg-foreground/5 px-3 py-1 rounded-full shrink-0">{t('campos.alumnado.numAlumnado', {count: df_al.length, defaultValue: '{{count}} alumnado'})}</span>
+                <Button
+                  variant="ghost"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="text-accent hover:text-accent hover:bg-accent/10 font-semibold flex items-center gap-1 h-8 px-3 shrink-0"
+                  title={t('tooltips.alumnado.importarCsv', {defaultValue: 'Importar CSV (Nombre, Apellidos...)'})}
+                >
+                  <FolderOpen className="w-4 h-4" /> {t('botones.alumnado.importarCsv', {defaultValue: 'Importar CSV'})}
+                </Button>
+                <input
+                  type="file"
+                  accept=".csv"
+                  ref={fileInputRef}
+                  onChange={handleImportCSV}
+                  className="hidden"
+                />
               </div>
-              
+              {n_menores > 0 && (
+                <span className="text-danger text-body font-semibold shrink-0">{t('campos.alumnado.nMenoresEdad', {count: n_menores, defaultValue: '{{count}} alumnado(s) menor(es) de 18 años'})}</span>
+              )}
+            </div>
+            <Card className="p-6 border-t-4 border-t-blue-500">
               {df_al.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-12 text-muted">
                   <Users className="w-12 h-12 mb-3 opacity-20" />
@@ -436,6 +451,7 @@ export default function AlumnadoPage() {
                 </Button>
               </div>
             </Card>
+            </div>
 
             <div className="flex items-center gap-3 pt-2">
               <div className="h-px flex-1 bg-[var(--glass-border)]" />

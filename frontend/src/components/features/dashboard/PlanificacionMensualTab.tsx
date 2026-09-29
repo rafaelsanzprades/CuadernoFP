@@ -4,6 +4,7 @@ import React from "react";
 import { useAppStore } from "@/store/useAppStore";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { Card } from "@/components/ui/Card";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useTranslation } from "react-i18next";
 
 export function PlanificacionMensualTab() {
@@ -47,10 +48,11 @@ export function PlanificacionMensualTab() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
+      <div className="space-y-3">
+      <SectionHeading id="agenda-planificacion-mensual" icon={Calendar} scrollMt="260px">
+        Planificación y seguimiento mensual
+      </SectionHeading>
       <Card className="p-6 overflow-x-auto">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-5">
-          <span><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Planificación y seguimiento mensual
-        </h2>
         <table className="w-full text-left border-collapse text-body whitespace-nowrap">
           <thead>
             <tr className="border-b border-[var(--glass-border)] text-muted bg-foreground/5">
@@ -112,6 +114,7 @@ export function PlanificacionMensualTab() {
           </tbody>
         </table>
       </Card>
+      </div>
 
       <p className="text-caption text-muted">
         Esta previsión se calcula día a día con el calendario de festivos y el horario semanal

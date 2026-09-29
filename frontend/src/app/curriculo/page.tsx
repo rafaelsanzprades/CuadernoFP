@@ -20,6 +20,8 @@ import toast from "react-hot-toast";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { AccordionBlock } from "@/components/ui/AccordionBlock";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { SectionIndex } from "@/components/ui/SectionIndex";
 import Link from "next/link";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { loadCatalogForModule, resolveDescRa, resolveDescCe } from "@/services/catalogCache";
@@ -65,6 +67,18 @@ export default function MatricesPage() {
     'unidades': t('tabs.curriculo.unidades.desc', {defaultValue: 'Definición de unidades didácticas o unidades de trabajo y secuenciación de sus sesiones.'}),
     'competenciales': t('tabs.curriculo.competenciales.desc', {defaultValue: 'Diseño y planificación de tareas y actividades competenciales.'}),
     'contenidos-ud': t('tabs.curriculo.contenidosUd.desc', {defaultValue: 'Tabla de contenidos por unidad didáctica agrupados en bloques, con su relación con RA, objetivos generales, horas e instrumentos de evaluación.'}),
+  };
+
+  // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
+  const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
+    'ponderacion-ra-ce': [
+      { id: "curriculo-ra", label: "RA. Resultados de aprendizaje" },
+      { id: "curriculo-ce", label: "CE. Criterios de evaluación" },
+    ],
+    unidades: [
+      { id: "curriculo-ud", label: "UD/T. Unidades didácticas o de trabajo" },
+      { id: "curriculo-secuenciacion", label: "Secuenciación de UD" },
+    ],
   };
 
   // Load catalog descriptions when module changes (for fallback resolution)
@@ -323,6 +337,10 @@ export default function MatricesPage() {
             <p className="text-body text-muted mt-3">
               {TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab}
             </p>
+
+            {/* Índice de bloques de la pestaña activa -- dentro del header
+                fijo (sticky top-0), así que no se pierde al hacer scroll. */}
+            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-4 px-8 pt-4 pb-12">
@@ -330,10 +348,11 @@ export default function MatricesPage() {
             {/* Resultados de aprendizaje y CE */}
             {activeTab === "ponderacion-ra-ce" && (
               <div className="space-y-4 animate-in fade-in duration-500">
+                <div className="space-y-3">
+                <SectionHeading id="curriculo-ra" icon={GraduationCap} scrollMt="260px">
+                  RA. Resultados de aprendizaje
+                </SectionHeading>
                 <Card className="p-6 border-t-4 border-t-accent">
-                  <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-                    <span><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></span> RA. Resultados de aprendizaje
-                  </h2>
                   <div className="overflow-x-auto">
                     <table className="w-full text-left text-body">
                       <thead>
@@ -451,29 +470,31 @@ export default function MatricesPage() {
                     </Card>
                   </div>
                 </Card>
+                </div>
 
                 {/* Criterios de evaluación */}
+                <div className="space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <SectionHeading id="curriculo-ce" icon={Puzzle} scrollMt="260px" className="flex-1">
+                    CE. Criterios de evaluación
+                  </SectionHeading>
+                  <Button
+                    variant="secondary"
+                    onClick={() => {
+                      if (allCeOpen) {
+                        setOpenCEs(new Set());
+                      } else {
+                        setOpenCEs(new Set(df_ra.map((ra: any) => ra.id_ra)));
+                      }
+                      setAllCeOpen(!allCeOpen);
+                    }}
+                    className="shrink-0"
+                  >
+                    <span>{allCeOpen ? '▲' : '▼'}</span>
+                    {allCeOpen ? t('common.colapsar_todas', {defaultValue: 'Colapsar todas'}) : t('common.expandir_todas', {defaultValue: 'Expandir todas'})}
+                  </Button>
+                </div>
                 <Card className="p-6 border-t-4 border-t-yellow-500">
-                  <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-                      <span><span className="inline-flex"><Puzzle className="w-[1.2em] h-[1.2em] mr-1" /></span></span> CE. Criterios de evaluación
-                    </h2>
-                    <Button
-                      variant="secondary"
-                      onClick={() => {
-                        if (allCeOpen) {
-                          setOpenCEs(new Set());
-                        } else {
-                          setOpenCEs(new Set(df_ra.map((ra: any) => ra.id_ra)));
-                        }
-                        setAllCeOpen(!allCeOpen);
-                      }}
-                    >
-                      <span>{allCeOpen ? '▲' : '▼'}</span>
-                      {allCeOpen ? t('common.colapsar_todas', {defaultValue: 'Colapsar todas'}) : t('common.expandir_todas', {defaultValue: 'Expandir todas'})}
-                    </Button>
-                  </div>
-
                   <div className="space-y-4">
                     {df_ra.map((ra: any, raIdx: number) => {
                       const ceForRa = df_ce.filter((ce: any) => ce.id_ra === ra.id_ra);
@@ -714,6 +735,7 @@ export default function MatricesPage() {
                     })}
                   </div>
                 </Card>
+                </div>
 
                 {/* Fusionado aquí (2026-09-20) desde la antigua pestaña "Contribución
                     RA->OG" -- ver nota en el useState de activeTabRaw más arriba. */}
@@ -726,10 +748,11 @@ export default function MatricesPage() {
             {/* Tareas competenciales */}
             {activeTab === "competenciales" && (
               <div className="animate-in fade-in duration-500">
+                <div className="space-y-3">
+                <SectionHeading id="curriculo-tareas-competenciales" icon={Target} scrollMt="260px">
+                  Tareas competenciales
+                </SectionHeading>
                 <Card className="p-6 border-t-4 border-t-blue-500">
-                  <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-6">
-                    <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Tareas competenciales
-                  </h2>
                   <TaskTable
                     df_ud={df_ud}
                     df_tareas={df_tareas}
@@ -738,29 +761,31 @@ export default function MatricesPage() {
                     handleDeleteTarea={handleDeleteTarea}
                   />
                 </Card>
+                </div>
               </div>
             )}
 
             {/* Unidades didácticas */}
             {activeTab === "unidades" && (
               <div className="animate-in fade-in duration-500 flex flex-col gap-8">
-                <Card className="p-6 border-t-4 border-t-purple-500">
-                  <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-                      <span><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></span> UD/T. Unidades didácticas o de trabajo
-                    </h2>
-                    <div className="flex items-center gap-3 text-[11px] font-semibold">
-                      <div className="bg-info/10 text-info px-3 py-1.5 rounded-full border border-info/20 shadow-sm" title={t('tooltips.curriculo.sumaHorasUd', {defaultValue: 'Suma de las horas asignadas a cada UD'})}>
-                        Horas UDs: {df_ud.reduce((sum: number, ud: any) => sum + (Number(ud.horas_ud) || 0), 0)} h
-                      </div>
-                      <div className="bg-accent/10 text-accent px-3 py-1.5 rounded-full border border-accent/20 shadow-sm" title={t('tooltips.curriculo.sumaHorasSesiones', {defaultValue: 'Suma de las horas de todas las sesiones'})}>
-                        Horas Secuenciadas: {df_sesiones?.reduce((sum: number, s: any) => sum + (Number(s.Horas) || 0), 0) || 0} h
-                      </div>
-                      <div className="bg-foreground/10 text-foreground px-3 py-1.5 rounded-full border border-foreground/20 shadow-sm" title={t('tooltips.curriculo.horasTotalesModulo', {defaultValue: 'Horas totales del módulo según currículo (BOA)'})}>
-                        Total BOA: {moduleData?.info_modulo?.h_boa || 0} h
-                      </div>
+                <div className="space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <SectionHeading id="curriculo-ud" icon={BookOpen} scrollMt="260px" className="flex-1">
+                    UD/T. Unidades didácticas o de trabajo
+                  </SectionHeading>
+                  <div className="flex items-center gap-3 text-[11px] font-semibold shrink-0">
+                    <div className="bg-info/10 text-info px-3 py-1.5 rounded-full border border-info/20 shadow-sm" title={t('tooltips.curriculo.sumaHorasUd', {defaultValue: 'Suma de las horas asignadas a cada UD'})}>
+                      Horas UDs: {df_ud.reduce((sum: number, ud: any) => sum + (Number(ud.horas_ud) || 0), 0)} h
+                    </div>
+                    <div className="bg-accent/10 text-accent px-3 py-1.5 rounded-full border border-accent/20 shadow-sm" title={t('tooltips.curriculo.sumaHorasSesiones', {defaultValue: 'Suma de las horas de todas las sesiones'})}>
+                      Horas Secuenciadas: {df_sesiones?.reduce((sum: number, s: any) => sum + (Number(s.Horas) || 0), 0) || 0} h
+                    </div>
+                    <div className="bg-foreground/10 text-foreground px-3 py-1.5 rounded-full border border-foreground/20 shadow-sm" title={t('tooltips.curriculo.horasTotalesModulo', {defaultValue: 'Horas totales del módulo según currículo (BOA)'})}>
+                      Total BOA: {moduleData?.info_modulo?.h_boa || 0} h
                     </div>
                   </div>
+                </div>
+                <Card className="p-6 border-t-4 border-t-purple-500">
                   <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                       <thead>
@@ -918,30 +943,32 @@ export default function MatricesPage() {
                     </div>
                   )}
                 </Card>
+                </div>
 
-                <Card className="p-6 border-t-4 border-t-accent">
-                  <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-                      <span><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Secuenciación de UD
-                    </h2>
-                    <div className="flex gap-4">
-                      <Button
-                        variant="ghost"
-                        onClick={generateAutoSessions}
-                        className="text-purple-400 hover:text-purple-300 border border-purple-500/30 hover:border-purple-400/50 bg-purple-500/10"
-                      >
-                        <Wand2 className="w-4 h-4 mr-2" /> {t('botones.curriculo.autocompletarPlan', {defaultValue: 'Autocompletar plan'})}
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        onClick={() => setAllUdsOpen(prev => !prev)}
-                        className="text-body border border-[var(--glass-border)]"
-                      >
-                        <span>{allUdsOpen ? '▲' : '▼'}</span>
-                        {allUdsOpen ? t('common.colapsar_todas', {defaultValue: 'Colapsar todas'}) : t('common.expandir_todas', {defaultValue: 'Expandir todas'})}
-                      </Button>
-                    </div>
+                <div className="space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <SectionHeading id="curriculo-secuenciacion" icon={ClipboardList} scrollMt="260px" className="flex-1">
+                    Secuenciación de UD
+                  </SectionHeading>
+                  <div className="flex gap-4 shrink-0">
+                    <Button
+                      variant="ghost"
+                      onClick={generateAutoSessions}
+                      className="text-purple-400 hover:text-purple-300 border border-purple-500/30 hover:border-purple-400/50 bg-purple-500/10"
+                    >
+                      <Wand2 className="w-4 h-4 mr-2" /> {t('botones.curriculo.autocompletarPlan', {defaultValue: 'Autocompletar plan'})}
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      onClick={() => setAllUdsOpen(prev => !prev)}
+                      className="text-body border border-[var(--glass-border)]"
+                    >
+                      <span>{allUdsOpen ? '▲' : '▼'}</span>
+                      {allUdsOpen ? t('common.colapsar_todas', {defaultValue: 'Colapsar todas'}) : t('common.expandir_todas', {defaultValue: 'Expandir todas'})}
+                    </Button>
                   </div>
+                </div>
+                <Card className="p-6 border-t-4 border-t-accent">
 
                   {df_ud.length === 0 ? (
                     <div className="text-center py-12">
@@ -962,6 +989,7 @@ export default function MatricesPage() {
                     />
                   )}
                 </Card>
+                </div>
               </div>
             )}
 

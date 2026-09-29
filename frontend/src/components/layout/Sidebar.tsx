@@ -65,8 +65,6 @@ export default function Sidebar() {
   }, [isSidebarOpen]);
 
   const [dateStr, setDateStr] = useState<string>("");
-  const [timeStr, setTimeStr] = useState<string>("");
-  const [dateCompactStr, setDateCompactStr] = useState<string>("");
   const [currentYear, setCurrentYear] = useState<number | string>("");
   const [displayGroup, setDisplayGroup] = useState<string>("");
 
@@ -92,17 +90,7 @@ export default function Sidebar() {
         year = currentYearVal;
       }
 
-      const hours = String(realNow.getHours()).padStart(2, '0');
-      const minutes = String(realNow.getMinutes()).padStart(2, '0');
-
       setDateStr(`${day} de ${monthStr} de ${year}`);
-      setTimeStr(`${hours}:${minutes} h`);
-      
-      let versionValue = process.env.NEXT_PUBLIC_APP_VERSION;
-      if (!versionValue || versionValue === 'unknown') {
-        versionValue = "Desconocida";
-      }
-      setDateCompactStr(versionValue);
 
       let groupStr = "";
       if (state.activeCursoId) {
@@ -188,18 +176,26 @@ export default function Sidebar() {
   const sidebarContent = (
     <>
       {/* ── Header: título + reloj + botón colapsar ── */}
-      <div className={`px-4 pt-4 pb-3 flex ${isSidebarOpen ? 'justify-between' : 'justify-center'} items-start`}>
+      <div className={`px-4 pt-4 pb-1 flex ${isSidebarOpen ? 'justify-between' : 'justify-center'} items-start`}>
         {isSidebarOpen && (
-          <div className="flex flex-col mb-3 w-full pr-2 min-w-0">
+          <div className="flex flex-col w-full pr-2 min-w-0">
               <Link href="/inicio?tab=bienvenida" onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}>
                 <h1 className={`text-heading font-extrabold leading-tight transition-colors tracking-tight whitespace-nowrap cursor-pointer ${dataSource === 'demo' ? 'text-warning hover:text-white' : 'text-success hover:text-white'}`}>
                   Cuaderno FP
                 </h1>
               </Link>
               <div className="flex flex-col items-start mt-1 w-full gap-1">
-                <span suppressHydrationWarning className="text-body text-muted/80 font-mono ml-0.5">
-                  {isMounted ? timeStr : '\u00A0'}
-                </span>
+                <Link
+                  href="/inicio?tab=datos"
+                  onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
+                  className="text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity ml-0.5"
+                  style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
+                >
+                  <CalendarDays className="w-3.5 h-3.5 shrink-0" />
+                  <span suppressHydrationWarning className="truncate">
+                    {t('sidebar.fecha', { defaultValue: 'Fecha' })} {dataSource === 'demo' ? 'DEMO' : 'REAL'}: {isMounted ? dateStr : ''}
+                  </span>
+                </Link>
                 <div className="flex items-center justify-between w-full ml-0.5">
                   <a
                     href="https://t.me/cuadernofp"
@@ -230,20 +226,6 @@ export default function Sidebar() {
                   </div>
                   <HeaderSettings align="left" />
                 </div>
-                <div suppressHydrationWarning className="border border-[var(--glass-border)] bg-background/50 px-2 py-0.5 rounded text-body text-muted/80 font-mono whitespace-nowrap shadow-sm ml-0.5">
-                  Versión: {isMounted ? dateCompactStr : '...'}
-                </div>
-                <Link
-                  href="/inicio?tab=datos"
-                  onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
-                  className="text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity ml-0.5"
-                  style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
-                >
-                  <CalendarDays className="w-3.5 h-3.5 shrink-0" />
-                  <span suppressHydrationWarning className="truncate">
-                    {t('sidebar.fecha', { defaultValue: 'Fecha' })} {dataSource === 'demo' ? 'DEMO' : 'REAL'}: {isMounted ? dateStr : ''}
-                  </span>
-                </Link>
               </div>
           </div>
         )}
@@ -397,21 +379,18 @@ export default function Sidebar() {
           );
         })}
 
-        {/* Estado de la app, al final del menú */}
-        {isSidebarOpen && (
+        {/* Estado de sincronización, al final del menú -- "En obras" se
+            movió a la esquina superior derecha de la página (Header.tsx,
+            petición de Rafael, 2026-09-29): molestaba menos ahí que aquí
+            abajo, entre la navegación y el footer. */}
+        {isSidebarOpen && dataSource === 'local' && (
           <div className="flex flex-col gap-1.5 mt-2 pt-3 border-t border-[var(--glass-border)] shrink-0">
-            <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-orange-500/10 border border-orange-500/30 rounded-lg text-orange-500 shadow-sm">
-              <AlertTriangle className="w-4 h-4 shrink-0" strokeWidth={2.5} />
-              <span className="text-caption font-bold tracking-widest">{t('sidebar.en_obras')}</span>
+            <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full bg-foreground/5 text-caption font-medium text-muted/80 whitespace-nowrap border border-[var(--glass-border)] shadow-sm">
+              {syncStatus === 'saving' && <><Hourglass className="w-3.5 h-3.5 text-warning animate-spin" /><span className="text-warning">{t('header.guardando', { defaultValue: 'Guardando...' })}</span></>}
+              {syncStatus === 'saved' && <><Save className="w-3.5 h-3.5 text-success" /><span className="text-success">{t('header.guardado', { defaultValue: 'Guardado' })}</span></>}
+              {syncStatus === 'error' && <><AlertTriangle className="w-3.5 h-3.5 text-danger" /><span className="text-danger">{t('header.error', { defaultValue: 'Error' })}</span></>}
+              {syncStatus === 'idle' && <><Cloud className="w-3.5 h-3.5 text-muted/50" /><span>{t('header.sincronizado', { defaultValue: 'Sincronizado' })}</span></>}
             </div>
-            {dataSource === 'local' && (
-              <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full bg-foreground/5 text-caption font-medium text-muted/80 whitespace-nowrap border border-[var(--glass-border)] shadow-sm">
-                {syncStatus === 'saving' && <><Hourglass className="w-3.5 h-3.5 text-warning animate-spin" /><span className="text-warning">{t('header.guardando', { defaultValue: 'Guardando...' })}</span></>}
-                {syncStatus === 'saved' && <><Save className="w-3.5 h-3.5 text-success" /><span className="text-success">{t('header.guardado', { defaultValue: 'Guardado' })}</span></>}
-                {syncStatus === 'error' && <><AlertTriangle className="w-3.5 h-3.5 text-danger" /><span className="text-danger">{t('header.error', { defaultValue: 'Error' })}</span></>}
-                {syncStatus === 'idle' && <><Cloud className="w-3.5 h-3.5 text-muted/50" /><span>{t('header.sincronizado', { defaultValue: 'Sincronizado' })}</span></>}
-              </div>
-            )}
           </div>
         )}
       </nav>

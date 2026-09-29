@@ -18,6 +18,7 @@ import { ContextoAgenda } from "@/components/features/dashboard/ContextoAgenda";
 import { DesarrolloUdActual } from "@/components/features/dashboard/DesarrolloUdActual";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
+import { SectionIndex } from "@/components/ui/SectionIndex";
 import { TabRelacionRaUd } from "@/components/features/curriculo/TabRelacionRaUd";
 import { Target } from "lucide-react";
 import { getApiBase } from "@/services/apiBase";
@@ -75,6 +76,15 @@ export default function AgendaPage() {
 
   };
 
+  // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
+  const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
+    actual: [
+      { id: "agenda-clases-hoy", label: 'Tus clases de hoy' },
+      { id: "agenda-prevision-semanal", label: t('campos.dashboard.previsionSemanalTitulo', {defaultValue: 'Previsión semanal'}) },
+      { id: "agenda-desarrollo-ud", label: t('campos.dashboard.desarrolloUnidadEnCursoTitulo', {defaultValue: 'Desarrollo de la unidad en curso'}) },
+    ],
+  };
+
   return (
     <div className="flex min-h-screen bg-background relative">
       <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -112,6 +122,10 @@ export default function AgendaPage() {
             <p className="text-body text-muted mt-3">
               {TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab}
             </p>
+
+            {/* Índice de bloques de la pestaña activa -- dentro del header
+                fijo (sticky top-0), así que no se pierde al hacer scroll. */}
+            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
           </StickyPageHeader>
 
           <div className="w-full space-y-4 px-8 pt-4 pb-12">

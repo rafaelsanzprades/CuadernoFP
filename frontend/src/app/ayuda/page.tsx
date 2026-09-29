@@ -174,7 +174,7 @@ export default function AyudaPage() {
 
             {/* Índice de bloques de la pestaña activa -- dentro del header
                 fijo (sticky top-0), así que no se pierde al hacer scroll. */}
-            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} />
+            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-4 px-8 pt-4 pb-[280px]">

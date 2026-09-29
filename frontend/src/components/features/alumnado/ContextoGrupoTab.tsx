@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { NarrativeField } from "@/components/ui/NarrativeField";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Users, Activity, BarChart2, Sparkles } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import toast from "react-hot-toast";
@@ -116,10 +117,11 @@ export function ContextoGrupoTab() {
           </div>
         </div>
 
+        <div className="space-y-3">
+        <SectionHeading id="alumnado-datos-grupo" icon={BarChart2} scrollMt="260px">
+          {t('campos.alumnado.datosGrupoTitulo', {defaultValue: 'Datos del grupo (automático)'})}
+        </SectionHeading>
         <div className="glass-card p-6 border-t-4 border-t-sky-500">
-          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-1">
-            <span className="inline-flex"><BarChart2 className="w-[1.2em] h-[1.2em] mr-1 text-sky-400" /></span> {t('campos.alumnado.datosGrupoTitulo', {defaultValue: 'Datos del grupo (automático)'})}
-          </h2>
           <p className="text-caption text-muted mb-4">{t('campos.alumnado.datosGrupoDesc', {defaultValue: 'Calculado a partir del alumnado registrado en esta pestaña de Curso. Ve a "Listado" para editar Edad/Repite si faltan.'})}</p>
           {total === 0 ? (
             <p className="text-body text-muted">{t('campos.alumnado.sinAlumnadoRegistrado', {defaultValue: 'Todavía no hay alumnado registrado en este curso.'})}</p>
@@ -142,11 +144,13 @@ export function ContextoGrupoTab() {
             </div>
           )}
         </div>
+        </div>
 
+        <div className="space-y-3">
+        <SectionHeading id="alumnado-rasgos-grupo" icon={Activity} scrollMt="260px">
+          {t('campos.alumnado.rasgosGrupoTitulo', {defaultValue: 'Rasgos característicos del grupo'})}
+        </SectionHeading>
         <div className="glass-card p-6 border-t-4 border-t-cyan-500">
-          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-1">
-            <span className="inline-flex"><Activity className="w-[1.2em] h-[1.2em] mr-1 text-cyan-400" /></span> {t('campos.alumnado.rasgosGrupoTitulo', {defaultValue: 'Rasgos característicos del grupo'})}
-          </h2>
           <p className="text-caption text-muted mb-3">{t('checks.contexto.seleccionOrientativa', {defaultValue: 'Selección orientativa para apoyar la redacción del texto de abajo (primera versión, se irá ampliando).'})}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             {RASGOS_GRUPO.map((r) => {
@@ -164,6 +168,7 @@ export function ContextoGrupoTab() {
               );
             })}
           </div>
+        </div>
         </div>
 
         <div className="relative">

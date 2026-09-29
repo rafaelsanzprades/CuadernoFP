@@ -6,6 +6,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart as RePieChart, Pie, Cell, Legend } from "recharts";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { useTranslation } from "react-i18next";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export default function EstadisticasTab() {
   const { t } = useTranslation();
@@ -169,10 +170,11 @@ export default function EstadisticasTab() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           
           {/* Distribución de Calificaciones */}
+          <div className="space-y-3">
+          <SectionHeading id="calificaciones-histograma" icon={TrendingUp} scrollMt="260px">
+            {t('campos.evaluacion.histogramaCalificacionesTitulo', {periodo: evalPeriod, defaultValue: `Histograma de calificaciones (${evalPeriod})`})}
+          </SectionHeading>
           <div className="glass-card p-6 border-t-4 border-t-purple-500 flex flex-col">
-            <h3 className="text-subheading font-bold flex items-center gap-2 mb-4">
-              <TrendingUp className="w-5 h-5 text-purple-500" /> {t('campos.evaluacion.histogramaCalificacionesTitulo', {periodo: evalPeriod, defaultValue: `Histograma de calificaciones (${evalPeriod})`})}
-            </h3>
             <div className="flex-1 min-h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={distStats}>
@@ -192,12 +194,14 @@ export default function EstadisticasTab() {
               </ResponsiveContainer>
             </div>
           </div>
+          </div>
 
           {/* Demografía: Repetidores y Edad */}
+          <div className="space-y-3">
+          <SectionHeading id="calificaciones-composicion-aula" icon={Users} scrollMt="260px">
+            {t('campos.evaluacion.composicionAulaTitulo', {defaultValue: 'Composición del aula'})}
+          </SectionHeading>
           <div className="glass-card p-6 border-t-4 border-t-amber-500 flex flex-col">
-            <h3 className="text-subheading font-bold flex items-center gap-2 mb-4">
-              <Users className="w-5 h-5 text-amber-500" /> {t('campos.evaluacion.composicionAulaTitulo', {defaultValue: 'Composición del aula'})}
-            </h3>
             <div className="flex-1 grid grid-cols-2 gap-4 min-h-[300px]">
               <div className="flex flex-col items-center justify-center">
                  <h4 className="text-body font-semibold text-muted mb-2 text-center">{t('campos.evaluacion.matriculaOrdinariaLabel', {defaultValue: 'Matrícula ordinaria'})}</h4>
@@ -231,6 +235,7 @@ export default function EstadisticasTab() {
                  </ResponsiveContainer>
               </div>
             </div>
+          </div>
           </div>
         </div>
 

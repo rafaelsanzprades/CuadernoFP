@@ -4,6 +4,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { useTranslation } from "react-i18next";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 // Un par puntos-fuertes/áreas-de-mejora por cada categoría de EqavetTab.tsx
 // (Planificación/Desarrollo/Resultados), en vez de un único par global —
@@ -44,16 +45,14 @@ export function PropuestasTab() {
 
   return (
     <MotionWrapper>
+      <div className="space-y-3">
+      <SectionHeading id="calificaciones-propuestas" icon={CheckCircle2} scrollMt="260px">
+        {t('campos.modulo.tituloPropuestasMejora', {defaultValue: 'Propuestas de Mejora (PDCA)'})}
+      </SectionHeading>
       <Card className="p-6 border-t-4 border-t-success">
-        <div className="flex items-start gap-4 mb-6">
-          <CheckCircle2 className="w-6 h-6 text-success mt-1 shrink-0" />
-          <div>
-            <h3 className="text-subheading font-bold text-foreground">{t('campos.modulo.tituloPropuestasMejora', {defaultValue: 'Propuestas de Mejora (PDCA)'})}</h3>
-            <p className="text-muted text-body mt-1">
-              {t('campos.modulo.propuestasMejoraDesc', {defaultValue: 'Puntos fuertes y áreas de mejora, reflexionados por separado en cada dimensión (Planificación / Desarrollo / Resultados) para planificar las acciones del próximo curso.'})}
-            </p>
-          </div>
-        </div>
+        <p className="text-muted text-body mb-6">
+          {t('campos.modulo.propuestasMejoraDesc', {defaultValue: 'Puntos fuertes y áreas de mejora, reflexionados por separado en cada dimensión (Planificación / Desarrollo / Resultados) para planificar las acciones del próximo curso.'})}
+        </p>
 
         <div className="space-y-6">
           {CATEGORIAS.map((cat, idx) => (
@@ -86,6 +85,7 @@ export function PropuestasTab() {
           ))}
         </div>
       </Card>
+      </div>
     </MotionWrapper>
   );
 }

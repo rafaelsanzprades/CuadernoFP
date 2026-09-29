@@ -5,6 +5,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, repartoIgualitario, filtrarPorGev, GRUPOS_EVALUACION_DEFECTO } from "@/utils/calificaciones";
 import { MultiSelectDropdown } from "@/components/ui/MultiSelectDropdown";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useTranslation } from "react-i18next";
 
 const TIPOS_INSTRUMENTO = [
@@ -197,10 +198,11 @@ export function JegModeloTab() {
       </div>
 
       {/* Indicadores por CE */}
+      <div className="space-y-3">
+      <SectionHeading id="instrumentos-indicadores-ce" icon={Target} scrollMt="260px">
+        {t('campos.instrumentos.indicadoresPorCeTitulo', {defaultValue: 'Indicadores por Criterio de Evaluación'})}
+      </SectionHeading>
       <div className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] p-4">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <Target className="w-5 h-5 text-purple-400" /> {t('campos.instrumentos.indicadoresPorCeTitulo', {defaultValue: 'Indicadores por Criterio de Evaluación'})}
-        </h2>
         {ceOptions.length === 0 ? (
           <p className="text-body text-muted">{t('campos.instrumentos.primeroAnadeCriterios', {defaultValue: 'Primero añade Criterios de evaluación en Currículo → OG<-RA<-CE.'})}</p>
         ) : (
@@ -273,12 +275,14 @@ export function JegModeloTab() {
           </div>
         )}
       </div>
+      </div>
 
       {/* Grupos de evaluación (GEv) */}
+      <div className="space-y-3">
+      <SectionHeading id="instrumentos-grupos-evaluacion" icon={Grid3x3} scrollMt="260px">
+        {t('campos.instrumentos.gruposEvaluacionTitulo', {defaultValue: 'Grupos de evaluación (GEv)'})}
+      </SectionHeading>
       <div className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] p-4">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-1">
-          <Grid3x3 className="w-5 h-5 text-purple-400" /> {t('campos.instrumentos.gruposEvaluacionTitulo', {defaultValue: 'Grupos de evaluación (GEv)'})}
-        </h2>
         <p className="text-caption text-muted mb-3">
           {t('campos.instrumentos.gruposEvaluacionDesc', {defaultValue: 'Subgrupos de alumnado (p.ej. pérdida de evaluación continua): un instrumento marcado con un GEv solo cuenta para el alumnado de ese mismo grupo. Asigna el GEv de cada alumno en Alumnado → Matrícula.'})}
         </p>
@@ -299,17 +303,19 @@ export function JegModeloTab() {
           </button>
         </div>
       </div>
+      </div>
 
       {/* Instrumentos JEG */}
+      <div className="space-y-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <SectionHeading id="instrumentos-instrumentos-jeg" icon={ClipboardList} scrollMt="260px" className="flex-1">
+          {t('campos.instrumentos.instrumentosModeloJegTitulo', {defaultValue: 'Instrumentos (modelo JEG)'})}
+        </SectionHeading>
+        <button onClick={addInstrumento} className="text-caption text-accent hover:text-accent/80 flex items-center gap-1 font-semibold shrink-0">
+          <Plus className="w-3.5 h-3.5" /> {t('botones.instrumentos.anadirInstrumento', {defaultValue: 'Añadir instrumento'})}
+        </button>
+      </div>
       <div className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] p-4">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-            <ClipboardList className="w-5 h-5 text-purple-400" /> {t('campos.instrumentos.instrumentosModeloJegTitulo', {defaultValue: 'Instrumentos (modelo JEG)'})}
-          </h2>
-          <button onClick={addInstrumento} className="text-caption text-accent hover:text-accent/80 flex items-center gap-1 font-semibold">
-            <Plus className="w-3.5 h-3.5" /> {t('botones.instrumentos.anadirInstrumento', {defaultValue: 'Añadir instrumento'})}
-          </button>
-        </div>
         {df_instr.length === 0 ? (
           <p className="text-body text-muted">{t('campos.instrumentos.sinInstrumentosJegTodavia', {defaultValue: 'Sin instrumentos JEG todavía.'})}</p>
         ) : (
@@ -375,6 +381,7 @@ export function JegModeloTab() {
           </div>
         )}
       </div>
+      </div>
 
       {/* Matriz de cobertura CE x Instrumento (Ítem 42, punto 4): en el modelo
           JEG un instrumento no enlaza con un CE directamente sino a través de
@@ -383,10 +390,11 @@ export function JegModeloTab() {
           todavía?", igual que la matriz CE×instrumento que vimos en la app de
           referencia del Ítem 43, pero adaptada a nuestra cadena real
           Instrumento→Indicador→CE en vez de Instrumento→CE directo. */}
+      <div className="space-y-3">
+      <SectionHeading id="instrumentos-matriz-cobertura" icon={Grid3x3} scrollMt="260px">
+        {t('campos.instrumentos.matrizCoberturaTitulo', { defaultValue: 'Matriz de cobertura CE × Instrumento' })}
+      </SectionHeading>
       <div className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] p-4">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-2">
-          <Grid3x3 className="w-5 h-5 text-purple-400" /> {t('campos.instrumentos.matrizCoberturaTitulo', { defaultValue: 'Matriz de cobertura CE × Instrumento' })}
-        </h2>
         {/* Mismos colores que el calendario (Calendario > Fechas y horario): 1er/2º/3er
             trimestre = morado/verde azulado/ámbar. EvFO/EvFE no son un trimestre, van en gris. */}
         <div className="flex flex-wrap gap-3 mb-4 text-caption text-muted">
@@ -445,17 +453,19 @@ export function JegModeloTab() {
           </div>
         )}
       </div>
+      </div>
 
       {/* Calificaciones por alumno + resultado */}
+      <div className="space-y-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <SectionHeading id="instrumentos-calificaciones-indicador" icon={Sparkles} scrollMt="260px" className="flex-1">
+          {t('campos.instrumentos.calificacionesPorIndicadorTitulo', {defaultValue: 'Calificaciones por indicador'})}
+        </SectionHeading>
+        <select value={selectedAlId} onChange={(e) => setSelectedAlId(e.target.value)} className="bg-foreground/15 border border-[var(--glass-border)] rounded px-3 py-1.5 text-foreground text-body focus:border-accent focus:outline-none shrink-0">
+          {activos.map((al: any) => <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre}</option>)}
+        </select>
+      </div>
       <div className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] p-4">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-            <Sparkles className="w-5 h-5 text-purple-400" /> {t('campos.instrumentos.calificacionesPorIndicadorTitulo', {defaultValue: 'Calificaciones por indicador'})}
-          </h2>
-          <select value={selectedAlId} onChange={(e) => setSelectedAlId(e.target.value)} className="bg-foreground/15 border border-[var(--glass-border)] rounded px-3 py-1.5 text-foreground text-body focus:border-accent focus:outline-none">
-            {activos.map((al: any) => <option key={al.ID} value={al.ID}>{al.Apellidos}, {al.Nombre}</option>)}
-          </select>
-        </div>
 
         {df_instr.length === 0 ? (
           <p className="text-body text-muted">{t('campos.instrumentos.anadeInstrumentosVinculaPrimero', {defaultValue: 'Añade instrumentos y vincúlalos a indicadores primero.'})}</p>
@@ -537,6 +547,7 @@ export function JegModeloTab() {
             </div>
           </div>
         )}
+      </div>
       </div>
     </div>
   );

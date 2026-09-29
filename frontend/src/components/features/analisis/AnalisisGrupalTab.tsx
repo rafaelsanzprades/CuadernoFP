@@ -12,6 +12,7 @@ import {
 } from "recharts";
 import { useAppStore } from "@/store/useAppStore";
 import { useTranslation } from "react-i18next";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 interface AnalisisGrupalTabProps {
   setActiveTab?: (tab: string) => void;
@@ -117,10 +118,11 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
         </Card>
       </section>
 
+      <div className="space-y-3">
+      <SectionHeading id="calificaciones-evolucion-trimestres" icon={TrendingUp} scrollMt="260px">
+        {t('campos.analisis.evolucionTrimestres', {defaultValue: 'Evolución por Trimestres'})}
+      </SectionHeading>
       <Card className="p-6">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-6">
-          <span className="inline-flex"><TrendingUp className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.analisis.evolucionTrimestres', {defaultValue: 'Evolución por Trimestres'})}
-        </h2>
         <div className="h-72 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={trendData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
@@ -139,9 +141,13 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
           </ResponsiveContainer>
         </div>
       </Card>
+      </div>
 
+      <div className="space-y-3">
+      <SectionHeading id="calificaciones-riesgo-academico" icon={AlertTriangle} scrollMt="260px">
+        {t('campos.analisis.seguimientoRiesgo', {defaultValue: 'Seguimiento de riesgo académico'})}
+      </SectionHeading>
       <Card className="p-6">
-        <h2 className="text-subheading font-bold mb-6"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.analisis.seguimientoRiesgo', {defaultValue: 'Seguimiento de riesgo académico'})}</h2>
         {risks.length > 0 ? (
           <>
             <div className="bg-danger/10 border border-danger/30 text-danger px-4 py-3 rounded-lg mb-4 text-body font-semibold flex items-center gap-2">
@@ -177,6 +183,7 @@ export const AnalisisGrupalTab = ({ setActiveTab }: AnalisisGrupalTabProps = {})
           </div>
         )}
       </Card>
+      </div>
     </div>
   );
 };

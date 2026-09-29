@@ -1,5 +1,5 @@
 "use client";
-import { Activity, ArrowRight, AlertTriangle, BookOpen, Building2, CheckCircle, Cloud, Copy, Database, FolderOpen, GraduationCap, HardDrive, Info, ListChecks, Lock, Map, MessageCircle, Plus, Save, Send, Shield, ShieldAlert, Users, Zap } from "lucide-react";
+import { Activity, ArrowRight, AlertTriangle, BookOpen, Building2, CheckCircle, Cloud, Copy, Database, Download, FolderOpen, GraduationCap, HardDrive, Info, ListChecks, Lock, Map, MessageCircle, Plus, Save, Send, Shield, ShieldAlert, Users, Zap } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -18,7 +18,7 @@ import { AIWizardModal } from "@/components/features/ai/AIWizardModal";
 import { AISettingsPanel } from "@/components/features/ai/AISettingsPanel";
 import { RecentModulesPanel } from "@/components/features/dashboard/RecentModulesPanel";
 import { UpdateChecker } from "@/components/features/dashboard/UpdateChecker";
-import { DownloadDesktopApp } from "@/components/features/dashboard/DownloadDesktopApp";
+import { VersionBar } from "@/components/features/dashboard/VersionBar";
 import { WelcomeWizard } from "@/components/features/dashboard/WelcomeWizard";
 import { GoogleDriveSyncPanel } from "@/components/features/cloud/GoogleDriveSyncPanel";
 import { OneDriveSyncPanel } from "@/components/features/cloud/OneDriveSyncPanel";
@@ -31,6 +31,7 @@ import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 import { fileManager } from "@/services/fileManager";
+import { isTauri } from "@tauri-apps/api/core";
 
 // ── Página Principal ──────────────────────────────────────────────────────
 export default function InicioPage() {
@@ -325,14 +326,23 @@ export default function InicioPage() {
   // solo en las pestañas con 2+ bloques reales que merezca la pena enlazar.
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
     bienvenida: [
+      { id: "bienvenida-descarga-escritorio", label: t('campos.inicio.aplicacionEscritorioTitulo', {defaultValue: 'Aplicación de escritorio para Windows'}) },
       { id: "bienvenida-metodologia", label: t('campos.inicio.metodologiaEspecificaTitulo', {defaultValue: 'Metodología específica de Formación Profesional'}) },
       { id: "bienvenida-mapa", label: t('campos.inicio.mapaWebTitulo', {defaultValue: 'Mapa del web'}) },
       { id: "bienvenida-privacidad", label: t('campos.archivos.privacidadDisenoTitulo', {defaultValue: 'Tu privacidad por diseño'}) },
     ],
     verificacion: [
-      { id: "verificacion-grupo", label: t('campos.verificacion.grupoTitulo', {defaultValue: 'Grupo'}) },
-      { id: "verificacion-programacion", label: t('campos.verificacion.programacionTitulo', {defaultValue: 'Programación didáctica'}) },
-      { id: "verificacion-curso", label: t('campos.verificacion.cursoTitulo', {defaultValue: 'Curso activo'}) },
+      { id: "verificacion-grupo", label: t('campos.verificacion.grupoTitulo', {defaultValue: 'General'}) },
+      { id: "verificacion-programacion", label: t('campos.verificacion.programacionTitulo', {defaultValue: 'Programación'}) },
+      { id: "verificacion-curso", label: t('campos.verificacion.cursoTitulo', {defaultValue: 'Curso'}) },
+    ],
+    datos: [
+      { id: "datos-modo-datos", label: t('campos.archivos.modoDatosTitulo', {defaultValue: 'Modo de datos'}) },
+      { id: "datos-archivos", label: t('campos.archivos.archivosTitulo', {defaultValue: 'Archivos'}) },
+      { id: "datos-nube", label: t('campos.archivos.nubeLabel', {defaultValue: 'Nube'}) },
+    ],
+    "asistente-ia": [
+      { id: "asistente-configuracion", label: t('campos.ai.configuracionAsistente', {defaultValue: 'Configuración del Asistente IA'}) },
     ],
   };
 
@@ -359,7 +369,7 @@ export default function InicioPage() {
           <StickyPageHeader icon={Activity} title={t('inicio.title')} description={t('inicio.subtitle')}>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
-                <TabsList className="max-w-full">
+                <TabsList className="max-w-full" bare>
                   {TABS.map(tab => (
                     <TabsTrigger key={tab.id} value={tab.id}>
                       {tab.label}
@@ -391,7 +401,7 @@ export default function InicioPage() {
 
             {/* Índice de bloques de la pestaña activa -- dentro del header
                 fijo (sticky top-0), así que no se pierde al hacer scroll. */}
-            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} />
+            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-4 px-8 pt-4 pb-[280px]">
@@ -401,14 +411,25 @@ export default function InicioPage() {
 
           <div className="w-full space-y-12 pb-12">
 
+            {/* Descarga de escritorio -- primer subtítulo de la página
+                (petición de Rafael, 2026-09-29), antes vivía en <VersionBar/>
+                como fila delgada fuera de la pestaña, encima de la barra de
+                pestañas. */}
+            <div className="space-y-3">
+              <SectionHeading id="bienvenida-descarga-escritorio" icon={Download} scrollMt="260px">
+                {t('campos.inicio.aplicacionEscritorioTitulo', {defaultValue: 'Aplicación de escritorio para Windows'})}
+              </SectionHeading>
+              <Card className="p-6">
+                <VersionBar />
+              </Card>
+            </div>
+
             {/* Módulos recientes (ítem 35) — reabrir con un clic, no se muestra si no hay ninguno */}
             <RecentModulesPanel />
 
-            {/* Posicionamiento: metodología experta detrás de la app -- la
-                descarga de escritorio / autoactualización vive dentro de
-                este mismo apartado (petición de Rafael, 2026-09-27), no
-                como bloque aparte. Solo una de las dos se renderiza según
-                isTauri(), nunca las dos a la vez. */}
+            {/* Posicionamiento: metodología experta detrás de la app. La
+                autoactualización se queda aquí, y solo dentro de Tauri --
+                fuera de Tauri no hay nada que revisar. */}
             <div className="space-y-3">
               <SectionHeading id="bienvenida-metodologia" icon={GraduationCap} scrollMt="260px">
                 {t('campos.inicio.metodologiaEspecificaTitulo', {defaultValue: 'Metodología específica de Formación Profesional'})}
@@ -437,10 +458,11 @@ export default function InicioPage() {
                   </span>
                 ))}
               </div>
-              <div className="border-t border-[var(--glass-border)] pt-4 mt-4">
-                <DownloadDesktopApp />
-                <UpdateChecker />
-              </div>
+              {isTauri() && (
+                <div className="border-t border-[var(--glass-border)] pt-4 mt-4">
+                  <UpdateChecker />
+                </div>
+              )}
               </Card>
             </div>
 
@@ -568,6 +590,9 @@ export default function InicioPage() {
             {activeTab === "datos" && (
               <div className="space-y-4 animate-in fade-in duration-300">
 
+                <SectionHeading id="datos-modo-datos" icon={Database} scrollMt="260px">
+                  {t('campos.archivos.modoDatosTitulo', {defaultValue: 'Modo de datos'})}
+                </SectionHeading>
                 <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-6">
                   <div className="flex items-center gap-3 shrink-0">
                     <span className="text-body font-bold text-foreground/80">{t('campos.archivos.modoDatosLabel', {defaultValue: 'Modo de datos:'})}</span>
@@ -606,6 +631,9 @@ export default function InicioPage() {
                   </div>
                 </div>
 
+                <SectionHeading id="datos-archivos" icon={FolderOpen} scrollMt="260px">
+                  {t('campos.archivos.archivosTitulo', {defaultValue: 'Archivos'})}
+                </SectionHeading>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
                   {/* ── Columna GRUPO ── */}
@@ -904,11 +932,9 @@ export default function InicioPage() {
                 </div>
 
                 {/* Bloque interno: Nube (Google Drive & OneDrive) */}
-                <div className="flex items-center gap-3 pt-2">
-                  <div className="h-px flex-1 bg-[var(--glass-border)]" />
-                  <span className="text-caption text-muted uppercase tracking-wider">{t('campos.archivos.nubeLabel', {defaultValue: 'Nube'})}</span>
-                  <div className="h-px flex-1 bg-[var(--glass-border)]" />
-                </div>
+                <SectionHeading id="datos-nube" icon={Cloud} scrollMt="260px" className="pt-2">
+                  {t('campos.archivos.nubeLabel', {defaultValue: 'Nube'})}
+                </SectionHeading>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
                   <GoogleDriveSyncPanel />
                   <OneDriveSyncPanel />

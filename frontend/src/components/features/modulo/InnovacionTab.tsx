@@ -2,6 +2,7 @@
 import { Rocket } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { useTranslation } from "react-i18next";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function InnovacionTab() {
   const { t } = useTranslation();
@@ -45,10 +46,11 @@ export function InnovacionTab() {
     <div className="space-y-6 animate-in fade-in duration-500">
 
       {/* Innovación y Proyectos */}
+      <div className="space-y-3">
+      <SectionHeading id="metodologia-innovacion" icon={Rocket} scrollMt="260px">
+        {t('campos.modulo.tituloInnovacionIntermodularidad', {defaultValue: 'Innovación e Intermodularidad'})}
+      </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-amber-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Rocket className="w-[1.2em] h-[1.2em] mr-1 text-amber-400" /></span> {t('campos.modulo.tituloInnovacionIntermodularidad', {defaultValue: 'Innovación e Intermodularidad'})}
-        </h2>
         <div className="space-y-6">
           <div>
             <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.registroInnovacionLabel', {defaultValue: 'Registro de innovación'})}</label>
@@ -137,6 +139,7 @@ export function InnovacionTab() {
             />
           </div>
         </div>
+      </div>
       </div>
 
     </div>

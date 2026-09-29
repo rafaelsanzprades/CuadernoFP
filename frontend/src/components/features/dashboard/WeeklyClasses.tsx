@@ -2,6 +2,7 @@ import { AlertCircle, BookOpen, Calendar, CalendarDays, ChevronRight, Circle, Cl
 import React, { useState } from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { Card } from '@/components/ui/Card';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 import { format, isSameDay } from 'date-fns';
 import { simulateSchedule, DaySchedule } from '@/utils/scheduleSimulator';
 import { useDynamicPlanning } from '@/hooks/useDynamicPlanning';
@@ -180,48 +181,47 @@ export const WeeklyClasses = () => {
   };
 
   return (
-    <Card className="p-6">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-        <div>
-          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-            <CalendarDays className="w-6 h-6 text-info" /> {t('campos.dashboard.previsionSemanalTitulo', {defaultValue: 'Previsión semanal'})}
-          </h2>
-          <p className="text-body text-muted mt-1">
-            {t('campos.dashboard.previsionSemanalDesc', {defaultValue: 'Distribución temporal de los módulos y las sesiones planificadas en el aula.'})}
-          </p>
-        </div>
+    <div className="space-y-3">
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <SectionHeading id="agenda-prevision-semanal" icon={CalendarDays} scrollMt="260px" className="flex-1">
+        {t('campos.dashboard.previsionSemanalTitulo', {defaultValue: 'Previsión semanal'})}
+      </SectionHeading>
 
-        {/* Tab Switcher */}
-        {isThursdayOrLater ? (
-          <div className="flex bg-background/50 p-1 rounded-xl border border-[var(--glass-border)] self-start md:self-auto">
-            <button
-              onClick={() => setActiveWeekTab('current')}
-              className={`px-4 py-2 rounded-lg text-caption font-medium transition-all ${
-                activeWeekTab === 'current'
-                  ? 'bg-info text-white shadow-sm'
-                  : 'text-muted hover:text-foreground'
-              }`}
-            >
-              {t('botones.dashboard.semanaActual', {defaultValue: 'Semana actual'})}
-            </button>
-            <button
-              onClick={() => setActiveWeekTab('next')}
-              className={`px-4 py-2 rounded-lg text-caption font-medium transition-all flex items-center gap-1.5 ${
-                activeWeekTab === 'next'
-                  ? 'bg-info text-white shadow-sm'
-                  : 'text-muted hover:text-foreground'
-              }`}
-            >
-              {t('botones.dashboard.semanaSiguiente', {defaultValue: 'Semana siguiente'})}
-              <ChevronRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
-        ) : (
-          <div className="bg-info/10 border border-info/30 text-info text-caption px-3 py-1.5 rounded-lg font-bold">
+      {/* Tab Switcher */}
+      {isThursdayOrLater ? (
+        <div className="flex bg-background/50 p-1 rounded-xl border border-[var(--glass-border)] self-start md:self-auto shrink-0">
+          <button
+            onClick={() => setActiveWeekTab('current')}
+            className={`px-4 py-2 rounded-lg text-caption font-medium transition-all ${
+              activeWeekTab === 'current'
+                ? 'bg-info text-white shadow-sm'
+                : 'text-muted hover:text-foreground'
+            }`}
+          >
             {t('botones.dashboard.semanaActual', {defaultValue: 'Semana actual'})}
-          </div>
-        )}
-      </div>
+          </button>
+          <button
+            onClick={() => setActiveWeekTab('next')}
+            className={`px-4 py-2 rounded-lg text-caption font-medium transition-all flex items-center gap-1.5 ${
+              activeWeekTab === 'next'
+                ? 'bg-info text-white shadow-sm'
+                : 'text-muted hover:text-foreground'
+            }`}
+          >
+            {t('botones.dashboard.semanaSiguiente', {defaultValue: 'Semana siguiente'})}
+            <ChevronRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      ) : (
+        <div className="bg-info/10 border border-info/30 text-info text-caption px-3 py-1.5 rounded-lg font-bold shrink-0">
+          {t('botones.dashboard.semanaActual', {defaultValue: 'Semana actual'})}
+        </div>
+      )}
+    </div>
+    <Card className="p-6">
+      <p className="text-body text-muted mb-6">
+        {t('campos.dashboard.previsionSemanalDesc', {defaultValue: 'Distribución temporal de los módulos y las sesiones planificadas en el aula.'})}
+      </p>
 
       {/* Week Contents */}
       {activeWeekTab === 'current' ? (
@@ -240,5 +240,6 @@ export const WeeklyClasses = () => {
         </div>
       )}
     </Card>
+    </div>
   );
 };

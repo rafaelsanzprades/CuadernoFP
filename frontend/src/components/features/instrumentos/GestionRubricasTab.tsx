@@ -5,6 +5,7 @@ import * as XLSX from "xlsx";
 import { useAppStore } from "@/store/useAppStore";
 import { useTranslation } from "react-i18next";
 import type { Rubrica, CriterioRubrica, NivelRubrica } from "@/types";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const nuevoNivel = (n: number): NivelRubrica => ({ id_nivel: `NIV${n}`, descripcion: "", puntos: 0 });
 const nuevoCriterio = (n: number): CriterioRubrica => ({ id_criterio: `CRIT${n}`, descripcion: "", puntuacion_maxima: 0, niveles: [] });
@@ -178,41 +179,42 @@ export function GestionRubricasTab() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
+      <div className="space-y-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <SectionHeading id="instrumentos-rubricas" icon={BookMarked} scrollMt="260px" className="flex-1">
+          {t('tabs.instrumentos.rubricas.titulo', { defaultValue: 'Rúbricas de evaluación' })}
+        </SectionHeading>
+        {!draft && (
+          <div className="flex items-center gap-3 shrink-0">
+            <input
+              ref={importInputRef}
+              type="file"
+              accept=".xlsx"
+              className="hidden"
+              onChange={handleImportFileChange}
+            />
+            <button
+              onClick={() => importInputRef.current?.click()}
+              className="text-caption text-muted hover:text-foreground flex items-center gap-1 font-semibold"
+              title={t('campos.instrumentos.importarClassroomAyuda', { defaultValue: 'Importar una rúbrica desde un .xlsx exportado de Google Classroom' })}
+            >
+              <Upload className="w-3.5 h-3.5" /> {t('botones.instrumentos.importarClassroom', { defaultValue: 'Importar de Classroom' })}
+            </button>
+            <button
+              onClick={handleExportClassroom}
+              disabled={df_rubricas.length === 0}
+              className="text-caption text-muted hover:text-foreground flex items-center gap-1 font-semibold disabled:opacity-40 disabled:cursor-not-allowed"
+              title={t('campos.instrumentos.exportarClassroomAyuda', { defaultValue: 'Exportar todas las rúbricas a un .xlsx compatible con Google Classroom' })}
+            >
+              <FileSpreadsheet className="w-3.5 h-3.5" /> {t('botones.instrumentos.exportarClassroom', { defaultValue: 'Exportar a Classroom' })}
+            </button>
+            <button onClick={startNew} className="text-caption text-accent hover:text-accent/80 flex items-center gap-1 font-semibold">
+              <Plus className="w-3.5 h-3.5" /> {t('botones.instrumentos.nuevaRubrica', { defaultValue: 'Nueva rúbrica' })}
+            </button>
+          </div>
+        )}
+      </div>
       <div className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] p-4">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-            <BookMarked className="w-5 h-5 text-indigo-400" /> {t('tabs.instrumentos.rubricas.titulo', { defaultValue: 'Rúbricas de evaluación' })}
-          </h2>
-          {!draft && (
-            <div className="flex items-center gap-3">
-              <input
-                ref={importInputRef}
-                type="file"
-                accept=".xlsx"
-                className="hidden"
-                onChange={handleImportFileChange}
-              />
-              <button
-                onClick={() => importInputRef.current?.click()}
-                className="text-caption text-muted hover:text-foreground flex items-center gap-1 font-semibold"
-                title={t('campos.instrumentos.importarClassroomAyuda', { defaultValue: 'Importar una rúbrica desde un .xlsx exportado de Google Classroom' })}
-              >
-                <Upload className="w-3.5 h-3.5" /> {t('botones.instrumentos.importarClassroom', { defaultValue: 'Importar de Classroom' })}
-              </button>
-              <button
-                onClick={handleExportClassroom}
-                disabled={df_rubricas.length === 0}
-                className="text-caption text-muted hover:text-foreground flex items-center gap-1 font-semibold disabled:opacity-40 disabled:cursor-not-allowed"
-                title={t('campos.instrumentos.exportarClassroomAyuda', { defaultValue: 'Exportar todas las rúbricas a un .xlsx compatible con Google Classroom' })}
-              >
-                <FileSpreadsheet className="w-3.5 h-3.5" /> {t('botones.instrumentos.exportarClassroom', { defaultValue: 'Exportar a Classroom' })}
-              </button>
-              <button onClick={startNew} className="text-caption text-accent hover:text-accent/80 flex items-center gap-1 font-semibold">
-                <Plus className="w-3.5 h-3.5" /> {t('botones.instrumentos.nuevaRubrica', { defaultValue: 'Nueva rúbrica' })}
-              </button>
-            </div>
-          )}
-        </div>
 
         {importError && (
           <p className="text-caption text-danger mb-3">{importError}</p>
@@ -348,6 +350,7 @@ export function GestionRubricasTab() {
             </div>
           </div>
         )}
+      </div>
       </div>
     </div>
   );

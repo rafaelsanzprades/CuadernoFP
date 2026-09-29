@@ -2,6 +2,7 @@
 import { Layers, Leaf, Cpu, Smartphone } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { useTranslation } from "react-i18next";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function OtrosElementosTab() {
   const { t } = useTranslation();
@@ -121,10 +122,11 @@ export function OtrosElementosTab() {
     <div className="space-y-6 animate-in fade-in duration-500">
       
       {/* Competencias y Transversales */}
+      <div className="space-y-3">
+      <SectionHeading id="metodologia-transversales" icon={Layers} scrollMt="260px">
+        {t('campos.modulo.transversalesCompetenciasTitulo', {defaultValue: 'Transversales y Competencias'})}
+      </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-cyan-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1 text-cyan-400" /></span> {t('campos.modulo.transversalesCompetenciasTitulo', {defaultValue: 'Transversales y Competencias'})}
-        </h2>
         <div className="space-y-6">
 
           <div>
@@ -180,12 +182,14 @@ export function OtrosElementosTab() {
           </div>
         </div>
       </div>
+      </div>
 
       {/* Competencias digitales: DigComp / DigCompEdu */}
+      <div className="space-y-3">
+      <SectionHeading id="metodologia-digcomp" icon={Smartphone} scrollMt="260px">
+        {t('campos.modulo.competenciasDigitalesTitulo', {defaultValue: 'Competencias digitales (DigComp / DigCompEdu)'})}
+      </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-sky-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Smartphone className="w-[1.2em] h-[1.2em] mr-1 text-sky-400" /></span> {t('campos.modulo.competenciasDigitalesTitulo', {defaultValue: 'Competencias digitales (DigComp / DigCompEdu)'})}
-        </h2>
         <div className="space-y-6">
 
           <div>
@@ -244,12 +248,14 @@ export function OtrosElementosTab() {
           </div>
         </div>
       </div>
+      </div>
 
       {/* Desarrollo Curricular: ECP, CPE, OG */}
+      <div className="space-y-3">
+      <SectionHeading id="metodologia-estandares" icon={Layers} scrollMt="260px">
+        {t('campos.modulo.estandaresObjetivosTitulo', {defaultValue: 'Estándares y Objetivos (Currículo)'})}
+      </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-indigo-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1 text-indigo-400" /></span> {t('campos.modulo.estandaresObjetivosTitulo', {defaultValue: 'Estándares y Objetivos (Currículo)'})}
-        </h2>
         <div className="space-y-4">
           <div>
             <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.ecpTitulo', {defaultValue: 'Estándares de competencia profesional (ECP)'})}</label>
@@ -280,6 +286,7 @@ export function OtrosElementosTab() {
             />
           </div>
         </div>
+      </div>
       </div>
 
     </div>

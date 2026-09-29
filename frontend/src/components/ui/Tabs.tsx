@@ -40,13 +40,17 @@ export function Tabs({
 export function TabsList({
   children,
   className = "",
+  bare = false,
 }: {
   children: React.ReactNode;
   className?: string;
+  /** Prueba (2026-09-28, /inicio?tab=bienvenida): sin el cajón que engloba
+   * las pestañas -- mismo layout, sin fondo/borde/padding propios. */
+  bare?: boolean;
 }) {
   return (
     <div
-      className={`flex items-center gap-2 p-1.5 rounded-xl bg-background/40 backdrop-blur-md border border-[var(--glass-border)] shadow-sm overflow-x-auto scrollbar-hide ${className}`}
+      className={`flex items-center gap-2 overflow-x-auto scrollbar-hide ${bare ? "" : "p-1.5 rounded-xl bg-background/40 backdrop-blur-md border border-[var(--glass-border)] shadow-sm"} ${className}`}
     >
       {children}
     </div>

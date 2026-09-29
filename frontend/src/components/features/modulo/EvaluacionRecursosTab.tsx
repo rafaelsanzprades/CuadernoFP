@@ -5,6 +5,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { INSTRUMENTOS_EVALUACION, INSTRUMENTOS_CALIFICACION } from "@/data/instrumentosEvaluacion";
 import { RECURSOS_DIDACTICOS } from "@/data/herramientasRecursos";
 import { useTranslation } from "react-i18next";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function EvaluacionRecursosTab() {
   const { t } = useTranslation();
@@ -46,10 +47,11 @@ export function EvaluacionRecursosTab() {
   return (
     <>
       <div className="space-y-6 animate-in fade-in duration-500">
+      <div className="space-y-3">
+      <SectionHeading id="metodologia-recursos-instrumentos" icon={CheckCircle2} scrollMt="260px">
+        {t('campos.modulo.tituloInstrumentosRecursos', {defaultValue: 'Instrumentos y recursos'})}
+      </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-amber-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><CheckCircle2 className="w-[1.2em] h-[1.2em] mr-1 text-amber-400" /></span> {t('campos.modulo.tituloInstrumentosRecursos', {defaultValue: 'Instrumentos y recursos'})}
-        </h2>
         <div className="space-y-6">
 
           <div>
@@ -155,6 +157,7 @@ export function EvaluacionRecursosTab() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
     </>

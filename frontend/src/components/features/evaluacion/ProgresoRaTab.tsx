@@ -7,6 +7,7 @@ import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, filtrarPorGev } from "@/utils/calificaciones";
 import { useTranslation } from "react-i18next";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function ProgresoRaTab() {
   const { t } = useTranslation();
@@ -92,10 +93,11 @@ export function ProgresoRaTab() {
 
   return (
     <div className="space-y-4 animate-in fade-in duration-500">
+      <div className="space-y-3">
+      <SectionHeading id="calificaciones-progreso-ra" icon={Target} scrollMt="260px">
+        Resumen de resultados de aprendizaje por trimestres
+      </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-emerald-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-5">
-          <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> Resumen de resultados de aprendizaje por trimestres
-        </h2>
         <div className="space-y-5">
           {Object.keys(ra_info).map(ra_id => {
             const info = ra_info[ra_id];
@@ -217,6 +219,7 @@ export function ProgresoRaTab() {
             );
           })}
         </div>
+      </div>
       </div>
     </div>
   );

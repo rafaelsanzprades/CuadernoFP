@@ -2,6 +2,7 @@
 import { Building2, Calculator } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { NarrativeField } from "@/components/ui/NarrativeField";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 
@@ -57,10 +58,11 @@ export function PlanesTab() {
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
       {/* FEOE */}
+      <div className="space-y-3">
+      <SectionHeading id="planes-feoe" icon={Building2} scrollMt="260px">
+        {t('campos.modulo.tituloFeoe', {defaultValue: 'FEOE. Formación en Empresa u Organismo Equiparado'})}
+      </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-blue-500">
-        <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-4">
-          <span className="inline-flex"><Building2 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.modulo.tituloFeoe', {defaultValue: 'FEOE. Formación en Empresa u Organismo Equiparado'})}
-        </h2>
         <div className="space-y-6">
           <div className="p-5 rounded-xl border border-[var(--glass-border)] bg-foreground/5 space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -177,6 +179,7 @@ export function PlanesTab() {
             />
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

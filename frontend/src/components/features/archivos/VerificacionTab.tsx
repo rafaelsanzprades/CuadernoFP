@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { useTranslation } from "react-i18next";
 import type { Family } from "@/types";
@@ -464,10 +465,9 @@ export function VerificacionTab() {
       )}
 
       <div className="space-y-4">
-        <h2 id="verificacion-grupo" style={{ scrollMarginTop: "260px" }} className="text-body font-bold text-foreground flex items-center gap-2 border-b border-white/5 pb-2">
-          <Building2 className="w-4 h-4 text-accent" />
-          {t('campos.verificacion.grupoTitulo', {defaultValue: 'Grupo'})}
-        </h2>
+        <SectionHeading id="verificacion-grupo" icon={Building2} scrollMt="260px">
+          {t('campos.verificacion.grupoTitulo', {defaultValue: 'General'})}
+        </SectionHeading>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Card className="p-4 border border-white/5 bg-foreground/5">
             <p className="text-caption font-semibold text-muted mb-3">{t('campos.verificacion.catalogoOficialTitulo', {defaultValue: 'Catálogo oficial (fijo)'})}</p>
@@ -537,12 +537,11 @@ export function VerificacionTab() {
       </div>
 
       <div className="space-y-4">
-        <div id="verificacion-programacion" style={{ scrollMarginTop: "260px" }} className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
-          <h2 className="text-body font-bold text-foreground flex items-center gap-2">
-            <BookOpen className="w-4 h-4 text-accent" />
-            {t('campos.verificacion.programacionDidacticaTitulo', {defaultValue: 'Programación didáctica'})}
-          </h2>
-          <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-caption text-muted">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <SectionHeading id="verificacion-programacion" icon={BookOpen} scrollMt="260px" className="flex-1">
+            {t('campos.verificacion.programacionDidacticaTitulo', {defaultValue: 'Programación'})}
+          </SectionHeading>
+          <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-caption text-muted shrink-0">
             {t('campos.verificacion.programacionActivaLabel', {defaultValue: 'Programación activa:'})} <span className="font-semibold text-foreground">{activeModuleId || "-"}</span>
           </span>
         </div>
@@ -554,12 +553,11 @@ export function VerificacionTab() {
       </div>
 
       <div className="space-y-4">
-        <div id="verificacion-curso" style={{ scrollMarginTop: "260px" }} className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-2">
-          <h2 className="text-body font-bold text-foreground flex items-center gap-2">
-            <Users className="w-4 h-4 text-accent" />
-            {t('campos.verificacion.cursoActivoTitulo', {defaultValue: 'Curso activo'})}
-          </h2>
-          <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <SectionHeading id="verificacion-curso" icon={Users} scrollMt="260px" className="flex-1">
+            {t('campos.verificacion.cursoActivoTitulo', {defaultValue: 'Curso'})}
+          </SectionHeading>
+          <div className="flex items-center gap-3 shrink-0">
             <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-caption text-muted">
               {t('campos.verificacion.cursoActivoLabel', {defaultValue: 'Curso Activo:'})} <span className="font-semibold text-foreground">{activeCursoId || "-"}</span>
             </span>
