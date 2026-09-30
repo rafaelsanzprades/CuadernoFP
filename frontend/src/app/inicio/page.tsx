@@ -25,7 +25,6 @@ import { OneDriveSyncPanel } from "@/components/features/cloud/OneDriveSyncPanel
 import { NewFileWizard } from "@/components/features/cloud/NewFileWizard";
 import { VerificacionTab } from "@/components/features/archivos/VerificacionTab";
 import { Button } from "@/components/ui/Button";
-import { Sparkles } from "lucide-react";
 import toast from "react-hot-toast";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
@@ -309,7 +308,6 @@ export default function InicioPage() {
   const TABS = [
     { id: "bienvenida", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.bienvenida')}</>, cleanLabel: t('tabs.bienvenida') },
     { id: "datos", label: <span className="flex items-center gap-2"><Database className="w-4 h-4 shrink-0" /> {t('tabs.archivos.datos.label', {defaultValue: 'Datos'})}</span>, cleanLabel: t('tabs.archivos.datos.label', {defaultValue: 'Datos'}) },
-    { id: "asistente-ia", label: <span className="flex items-center gap-2"><Sparkles className="w-4 h-4 shrink-0" /> {t('tabs.archivos.asistente-ia.label', {defaultValue: 'Asistente'})}</span>, cleanLabel: t('tabs.archivos.asistente-ia.label', {defaultValue: 'Asistente'}) },
     { id: "verificacion", label: <span className="flex items-center gap-2"><ListChecks className="w-4 h-4 shrink-0" /> {t('tabs.inicio.verificacion.label', {defaultValue: 'Verificación'})}</span>, cleanLabel: t('tabs.inicio.verificacion.label', {defaultValue: 'Verificación'}) },
   ];
 
@@ -318,7 +316,6 @@ export default function InicioPage() {
   const TAB_DESCRIPTIONS: Record<string, string> = {
     bienvenida: t('tabs.inicio.bienvenida.desc', {defaultValue: 'Panel de control de acceso rápido a todas las herramientas.'}),
     datos: t('tabs.archivos.datos.desc', {defaultValue: 'Gestión de tus archivos de Grupos, Programaciones y Cursos guardados en local o en la nube.'}),
-    'asistente-ia': t('tabs.archivos.asistente-ia.desc', {defaultValue: 'Configuración de inteligencia artificial.'}),
     verificacion: t('tabs.inicio.verificacion.desc', {defaultValue: 'Panel de salud y coherencia de los datos de tu cuaderno.'}),
   };
 
@@ -329,7 +326,8 @@ export default function InicioPage() {
       { id: "bienvenida-descarga-escritorio", label: t('campos.inicio.aplicacionEscritorioTitulo', {defaultValue: 'Aplicación de escritorio para Windows'}) },
       { id: "bienvenida-metodologia", label: t('campos.inicio.metodologiaEspecificaTitulo', {defaultValue: 'Metodología específica de Formación Profesional'}) },
       { id: "bienvenida-mapa", label: t('campos.inicio.mapaWebTitulo', {defaultValue: 'Mapa del web'}) },
-      { id: "bienvenida-privacidad", label: t('campos.archivos.privacidadDisenoTitulo', {defaultValue: 'Tu privacidad por diseño'}) },
+      { id: "bienvenida-contrib-telegram", label: t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'}) },
+      { id: "bienvenida-contrib-comunidades", label: t('campos.inicio.contribuidoresCcaaTitulo', {defaultValue: 'Contribuidores por Comunidad Autónoma'}) },
     ],
     verificacion: [
       { id: "verificacion-grupo", label: t('campos.verificacion.grupoTitulo', {defaultValue: 'General'}) },
@@ -339,10 +337,8 @@ export default function InicioPage() {
     datos: [
       { id: "datos-modo-datos", label: t('campos.archivos.modoDatosTitulo', {defaultValue: 'Modo de datos'}) },
       { id: "datos-archivos", label: t('campos.archivos.archivosTitulo', {defaultValue: 'Archivos'}) },
-      { id: "datos-nube", label: t('campos.archivos.nubeLabel', {defaultValue: 'Nube'}) },
-    ],
-    "asistente-ia": [
-      { id: "asistente-configuracion", label: t('campos.ai.configuracionAsistente', {defaultValue: 'Configuración del Asistente IA'}) },
+      { id: "datos-nube", label: t('campos.archivos.nubeAsistenteTitulo', {defaultValue: 'Nube y Asistente IA'}) },
+      { id: "datos-privacidad", label: t('campos.archivos.privacidadDisenoTitulo', {defaultValue: 'Tu privacidad por diseño'}) },
     ],
   };
 
@@ -539,48 +535,64 @@ export default function InicioPage() {
 
           </div>
 
-                {/* Seguridad y privacidad -- movida al final de Bienvenida
-                    (Rafael, 2026-09-26; antes al final de Datos desde
-                    2026-09-23). Simplificado (2026-09-27, "mucha caja dentro
-                    de otra caja"): un único Card, sin cajón por apartado --
-                    mismo patrón que los "Paso N" de Ayuda > Guía. */}
+                {/* Contribuciones -- movida aquí desde Ayuda (antes pestaña
+                    propia, eliminada, petición de Rafael, 2026-09-30), como
+                    último bloque de Bienvenida. */}
                 <div className="space-y-3">
-                <SectionHeading id="bienvenida-privacidad" icon={Shield} scrollMt="260px">
-                  {t('campos.archivos.privacidadDisenoTitulo', {defaultValue: 'Tu privacidad por diseño'})}
-                </SectionHeading>
-                <Card className="p-6 space-y-6">
-                  <p className="text-muted text-body">{t('campos.archivos.privacidadDisenoDesc', {defaultValue: 'Cómo se garantiza que tus datos reales son 100% tuyos.'})}</p>
-
-                  <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground flex items-center gap-2"><Building2 className="w-5 h-5 text-accent"/> {t('campos.archivos.servidorCiegoTitulo', {defaultValue: '1. El servidor es ciego'})}</h4>
-                    <p className="text-muted leading-relaxed text-body">{t('campos.archivos.servidorCiegoDesc', {defaultValue: 'Nuestra base de datos en la nube jamás almacena datos de tus alumnos, tus programaciones, ni nada que crees. El servidor web solo existe para enviarte los Catálogos Oficiales (BOE/BOCAA). Eres invisible para nuestro backend.'})}</p>
+                  <SectionHeading id="bienvenida-contrib-telegram" icon={MessageCircle} scrollMt="260px">
+                    {t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'})}
+                  </SectionHeading>
+                  <div className="flex flex-col md:flex-row items-center gap-5 p-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
+                    <div className="w-12 h-12 shrink-0 rounded-full bg-[#229ED9]/10 flex items-center justify-center">
+                      <MessageCircle className="w-6 h-6 text-[#229ED9]" />
+                    </div>
+                    <div className="flex-1 text-center md:text-left">
+                      <p className="text-body text-muted leading-tight">
+                        {t('campos.inicio.grupoTelegramDesc', {defaultValue: 'Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad Autónoma.'})}
+                      </p>
+                    </div>
+                    <a
+                      href="https://t.me/cuadernofp"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="shrink-0 px-5 py-2.5 rounded-lg bg-[#229ED9] text-white font-medium hover:bg-[#229ED9]/90 transition-colors flex items-center gap-2 text-body"
+                    >
+                      <Send className="w-4 h-4" />
+                      {t('botones.inicio.unirseTelegram', {defaultValue: 'Unirme al grupo en Telegram'})}
+                    </a>
                   </div>
+                </div>
 
-                  <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground flex items-center gap-2"><Lock className="w-5 h-5 text-accent"/> {t('campos.archivos.cifradoLocalTitulo', {defaultValue: '2. Cifrado local avanzado AES-256'})}</h4>
-                    <p className="text-muted leading-relaxed text-body">{t('campos.archivos.cifradoLocalDesc', {defaultValue: 'Puedes activar la encriptación local. Antes de que cualquier archivo se guarde en tu disco duro o nube, se cifra usando tu clave maestra dentro de tu navegador.'})}</p>
+                <div className="space-y-3">
+                  <SectionHeading id="bienvenida-contrib-comunidades" icon={Users} scrollMt="260px">
+                    {t('campos.inicio.contribuidoresCcaaTitulo', {defaultValue: 'Contribuidores por Comunidad Autónoma'})}
+                  </SectionHeading>
+                  <p className="text-muted">
+                    {t('campos.inicio.contribuidoresCcaaDesc', {defaultValue: 'Mención especial al profesorado que está ayudando a mejorar y a integrar los currículos de las Comunidades Autónomas'})}
+                  </p>
 
-                    <label className="block text-body font-medium text-foreground mt-3 mb-2">{t('campos.archivos.establecerClaveLabel', {defaultValue: 'Establecer clave de seguridad (no se guarda en ningún sitio)'})}</label>
-                    <input
-                      type="password"
-                      className="w-full bg-background border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent text-body"
-                      placeholder={t('placeholders.archivos.claveMaestra', {defaultValue: 'Introduce tu clave maestra...'})}
-                      value={useAppStore.getState().encryptionKey || ""}
-                      onChange={(e) => useAppStore.getState().setEncryptionKey(e.target.value || null)}
-                    />
-                    <p className="text-caption text-muted mt-2"><AlertTriangle className="w-3 h-3 inline mr-1 text-warning"/> {t('campos.archivos.avisoOlvidoClave', {defaultValue: 'Si olvidas esta clave y guardas un archivo, no podremos ayudarte a recuperarlo.'})}</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {[
+                      "Andalucía", "Aragón", "Asturias", "Baleares", "Canarias",
+                      "Cantabria", "Castilla y León", "Castilla-La Mancha", "Cataluña", "Ceuta",
+                      "Comunidad Valenciana", "Extremadura", "Galicia", "La Rioja", "Madrid",
+                      "Melilla", "Murcia", "Navarra", "País Vasco"
+                    ].map((comunidad) => (
+                      <div key={comunidad} className="p-4 rounded-xl border border-[var(--glass-border)] bg-background/50 flex flex-col gap-2 transition-all hover:bg-background/80">
+                        <div className="flex items-center gap-2 border-b border-[var(--glass-border)] pb-2 mb-1">
+                          <Map className="w-5 h-5 text-accent" />
+                          <span className="font-bold text-foreground">{comunidad}</span>
+                        </div>
+                        <ul className="text-body text-muted space-y-1.5 pl-2">
+                          {comunidad === "Aragón" ? (
+                            <li className="flex items-center gap-2 text-foreground"><Users className="w-4 h-4 text-accent" /> Jose Javier García</li>
+                          ) : (
+                            <li className="flex items-center gap-2 italic opacity-60"><Users className="w-4 h-4 text-muted-foreground" /> {t('campos.inicio.animateAContribuir', {defaultValue: '¡Anímate a contribuir!'})}</li>
+                          )}
+                        </ul>
+                      </div>
+                    ))}
                   </div>
-
-                  <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground flex items-center gap-2"><CheckCircle className="w-5 h-5 text-accent"/> {t('campos.archivos.defensaAtaquesTitulo', {defaultValue: '3. Defensa contra ataques en el navegador'})}</h4>
-                    <p className="text-muted leading-relaxed text-body">{t('campos.archivos.defensaAtaquesDesc', {defaultValue: 'Hemos implementado una política estricta de seguridad de contenido (CSP) para bloquear scripts maliciosos de terceros.'})}</p>
-                  </div>
-
-                  <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground flex items-center gap-2"><Activity className="w-5 h-5 text-accent"/> {t('campos.archivos.servidorBlindadoTitulo', {defaultValue: '4. Servidor blindado y siempre disponible'})}</h4>
-                    <p className="text-muted leading-relaxed text-body">{t('campos.archivos.servidorBlindadoDesc', {defaultValue: 'Nuestro servidor backend incorpora Rate Limiting, garantizando que siempre tendrás acceso al catálogo oficial de módulos.'})}</p>
-                  </div>
-                </Card>
                 </div>
 
               </div>
@@ -931,22 +943,65 @@ export default function InicioPage() {
 
                 </div>
 
-                {/* Bloque interno: Nube (Google Drive & OneDrive) */}
+                {/* Bloque interno: Nube (Google Drive & OneDrive) + Asistente
+                    IA, como tercera columna (antes pestaña propia
+                    "Asistente", eliminada -- petición de Rafael,
+                    2026-09-30). */}
                 <SectionHeading id="datos-nube" icon={Cloud} scrollMt="260px" className="pt-2">
-                  {t('campos.archivos.nubeLabel', {defaultValue: 'Nube'})}
+                  {t('campos.archivos.nubeAsistenteTitulo', {defaultValue: 'Nube y Asistente IA'})}
                 </SectionHeading>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
                   <GoogleDriveSyncPanel />
                   <OneDriveSyncPanel />
+                  <AISettingsPanel />
                 </div>
 
-              </div>
-            )}
+                {/* Seguridad y privacidad -- movida aquí desde el final de
+                    Bienvenida (petición de Rafael, 2026-09-30; antes al
+                    final de Datos desde 2026-09-23, luego a Bienvenida el
+                    2026-09-26 -- vuelve a Datos, tiene más sentido junto al
+                    resto de esta pestaña). Un único Card, sin cajón por
+                    apartado -- mismo patrón que los "Paso N" de Ayuda >
+                    Guía. */}
+                <div className="space-y-3">
+                <SectionHeading id="datos-privacidad" icon={Shield} scrollMt="260px">
+                  {t('campos.archivos.privacidadDisenoTitulo', {defaultValue: 'Tu privacidad por diseño'})}
+                </SectionHeading>
+                <Card className="p-6 space-y-6">
+                  <p className="text-muted text-body">{t('campos.archivos.privacidadDisenoDesc', {defaultValue: 'Cómo se garantiza que tus datos reales son 100% tuyos.'})}</p>
 
-            {/* ── CONTENIDO: ASISTENTE IA ────────────────────────────── */}
-            {activeTab === "asistente-ia" && (
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
-                <AISettingsPanel />
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground flex items-center gap-2"><Building2 className="w-5 h-5 text-accent"/> {t('campos.archivos.servidorCiegoTitulo', {defaultValue: '1. El servidor es ciego'})}</h4>
+                    <p className="text-muted leading-relaxed text-body">{t('campos.archivos.servidorCiegoDesc', {defaultValue: 'Nuestra base de datos en la nube jamás almacena datos de tus alumnos, tus programaciones, ni nada que crees. El servidor web solo existe para enviarte los Catálogos Oficiales (BOE/BOCAA). Eres invisible para nuestro backend.'})}</p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground flex items-center gap-2"><Lock className="w-5 h-5 text-accent"/> {t('campos.archivos.cifradoLocalTitulo', {defaultValue: '2. Cifrado local avanzado AES-256'})}</h4>
+                    <p className="text-muted leading-relaxed text-body">{t('campos.archivos.cifradoLocalDesc', {defaultValue: 'Puedes activar la encriptación local. Antes de que cualquier archivo se guarde en tu disco duro o nube, se cifra usando tu clave maestra dentro de tu navegador.'})}</p>
+
+                    <label className="block text-body font-medium text-foreground mt-3 mb-2">{t('campos.archivos.establecerClaveLabel', {defaultValue: 'Establecer clave de seguridad (no se guarda en ningún sitio)'})}</label>
+                    <input
+                      type="password"
+                      className="w-full bg-background border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent text-body"
+                      placeholder={t('placeholders.archivos.claveMaestra', {defaultValue: 'Introduce tu clave maestra...'})}
+                      value={useAppStore.getState().encryptionKey || ""}
+                      onChange={(e) => useAppStore.getState().setEncryptionKey(e.target.value || null)}
+                    />
+                    <p className="text-caption text-muted mt-2"><AlertTriangle className="w-3 h-3 inline mr-1 text-warning"/> {t('campos.archivos.avisoOlvidoClave', {defaultValue: 'Si olvidas esta clave y guardas un archivo, no podremos ayudarte a recuperarlo.'})}</p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground flex items-center gap-2"><CheckCircle className="w-5 h-5 text-accent"/> {t('campos.archivos.defensaAtaquesTitulo', {defaultValue: '3. Defensa contra ataques en el navegador'})}</h4>
+                    <p className="text-muted leading-relaxed text-body">{t('campos.archivos.defensaAtaquesDesc', {defaultValue: 'Hemos implementado una política estricta de seguridad de contenido (CSP) para bloquear scripts maliciosos de terceros.'})}</p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground flex items-center gap-2"><Activity className="w-5 h-5 text-accent"/> {t('campos.archivos.servidorBlindadoTitulo', {defaultValue: '4. Servidor blindado y siempre disponible'})}</h4>
+                    <p className="text-muted leading-relaxed text-body">{t('campos.archivos.servidorBlindadoDesc', {defaultValue: 'Nuestro servidor backend incorpora Rate Limiting, garantizando que siempre tendrás acceso al catálogo oficial de módulos.'})}</p>
+                  </div>
+                </Card>
+                </div>
+
               </div>
             )}
 

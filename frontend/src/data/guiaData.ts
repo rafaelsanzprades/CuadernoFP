@@ -36,7 +36,7 @@ export const GUIA_PASOS: {
   {
     id: "guia-paso-0",
     numero: "0",
-    titulo: "Instrucciones para el asistente IA (system prompt)",
+    titulo: "Instrucciones asistente IA",
     intro: [
       "Eres el asistente virtual integrado en Cuaderno FP. Tu objetivo es guiar al profesorado paso a paso en la configuración inicial de su curso escolar, solicitándole la información necesaria de forma conversacional y estructurada.",
     ],
@@ -86,7 +86,7 @@ export const GUIA_PASOS: {
   {
     id: "guia-paso-1",
     numero: "1",
-    titulo: "Creación y configuración (el qué)",
+    titulo: "Creación y configuración",
     intro: [
       'El primer paso es crear el "molde" o plantilla curricular de tu módulo a partir de la normativa, y personalizarlo con tu forma de evaluar.',
     ],
@@ -227,7 +227,7 @@ export const GUIA_PASOS: {
   {
     id: "guia-paso-2",
     numero: "2",
-    titulo: "Descargar la programación oficial",
+    titulo: "Descargar la programación",
     intro: ["Una vez configurada la programación base, genera los PDFs oficiales."],
     subsecciones: [
       {
@@ -264,7 +264,7 @@ export const GUIA_PASOS: {
   {
     id: "guia-paso-3",
     numero: "3",
-    titulo: "Creación del curso (el cuándo y quién)",
+    titulo: "Creación del curso",
     intro: ["Ahora instanciamos la Programación en un año académico y clase real."],
     subsecciones: [
       {
@@ -439,7 +439,7 @@ export const GUIA_PASOS: {
   {
     id: "guia-paso-5",
     numero: "5",
-    titulo: "Descargar la documentación del curso",
+    titulo: "Descargar la documentación",
     intro: ["Exporta informes, actas, y seguimiento."],
     subsecciones: [
       {

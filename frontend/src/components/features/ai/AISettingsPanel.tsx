@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Key, Bot, Save, Sparkles, CheckCircle2 } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
@@ -28,14 +27,16 @@ export function AISettingsPanel() {
   };
 
   return (
-    <div className="space-y-3">
-    <SectionHeading id="asistente-configuracion" icon={Sparkles} scrollMt="260px">
-      {t('campos.ai.configuracionAsistente', {defaultValue: 'Configuración del Asistente IA'})}
-    </SectionHeading>
-    <Card className="p-6 border border-accent/25 rounded-2xl bg-accent/5 shadow-lg space-y-4">
-      <p className="text-body text-muted">{t('campos.ai.importaDesdeC', {defaultValue: 'Importa programaciones desde PDF automáticamente'})}</p>
+    <Card className="p-8 border border-accent/25 rounded-2xl bg-accent/5 shadow-lg h-full w-full">
+      <div className="flex flex-col gap-6 h-full">
+        <div>
+          <h2 className="text-subheading font-bold text-foreground flex items-center gap-2">
+            <Sparkles className="w-6 h-6 text-accent" /> {t('campos.ai.configuracionAsistente', {defaultValue: 'Configuración del Asistente IA'})}
+          </h2>
+          <p className="text-muted mt-2">{t('campos.ai.importaDesdeC', {defaultValue: 'Importa programaciones desde PDF automáticamente'})}</p>
+        </div>
 
-      <div className="space-y-4">
+        <div className="space-y-4 mt-auto">
         <div className="flex flex-col gap-2">
           <label className="text-body font-semibold text-foreground flex items-center gap-2">
             <Bot className="w-4 h-4 text-info" /> {t('campos.ai.motorIA', {defaultValue: 'Motor de Inteligencia Artificial'})}
@@ -74,8 +75,8 @@ export function AISettingsPanel() {
           {saved ? <CheckCircle2 className="w-5 h-5" /> : <Save className="w-5 h-5" />}
           {saved ? t('common.guardado', {defaultValue: 'Guardado'}) : t('botones.ai.guardarConfiguracion', {defaultValue: 'Guardar configuración'})}
         </Button>
+        </div>
       </div>
     </Card>
-    </div>
   );
 }

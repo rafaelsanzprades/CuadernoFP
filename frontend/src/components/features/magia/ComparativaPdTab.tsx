@@ -4,11 +4,44 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { Card } from "@/components/ui/Card";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useTranslation } from "react-i18next";
+
+// Anclas del índice de secciones (magia/page.tsx, SECTION_INDEX_ITEMS
+// ['analisis-pdx'] -- este componente se renderiza al final de esa pestaña,
+// ya no tiene pestaña propia, ver comentario en magia/page.tsx) -- fijadas
+// a mano contra el texto exacto de cada "## " de Comparativa_PD.md, no
+// autogeneradas, para que sigan siendo estables aunque cambie el título de
+// una sección en el .md (si no hay match, esa sección simplemente no lleva
+// ancla, sin romper nada).
+const COMPARATIVA_SECTION_IDS: Record<string, string> = {
+  "📋 Programación: Contexto": "comparativa-contexto",
+  "📋 Programación: Metodología": "comparativa-metodologia",
+  "📋 Programación: Currículo": "comparativa-curriculo",
+  "📋 Programación: Instrumento": "comparativa-instrumento",
+  "📥 MagIA (Descargas)": "comparativa-magia-descargas",
+  "📅 Curso: Calendario": "comparativa-calendario",
+  "🎓 Curso: Alumnado": "comparativa-alumnado",
+  "📝 Curso: Seguimiento": "comparativa-seguimiento",
+  "📊 Curso: Calificación": "comparativa-calificacion",
+  "📊 Resumen de cobertura por nivel": "comparativa-resumen-cobertura",
+  "📝 Notas": "comparativa-notas",
+};
+
+function flattenText(node: any): string {
+  if (typeof node === "string") return node;
+  if (Array.isArray(node)) return node.map(flattenText).join("");
+  if (node?.props?.children) return flattenText(node.props.children);
+  return "";
+}
 
 const markdownComponents = {
   h1: ({ node, ...props }: any) => <h1 className="text-heading font-extrabold text-foreground mb-6 pb-2 border-b border-white/10" {...props} />,
-  h2: ({ node, ...props }: any) => <h2 className="text-subheading font-bold text-accent mt-8 mb-4 flex items-center gap-2" {...props} />,
+  h2: ({ node, children, ...props }: any) => (
+    <SectionHeading id={COMPARATIVA_SECTION_IDS[flattenText(children).trim()]} scrollMt="260px" className="mt-8 mb-4">
+      {children}
+    </SectionHeading>
+  ),
   h3: ({ node, ...props }: any) => <h3 className="text-subheading font-bold text-foreground mt-6 mb-3" {...props} />,
   p: ({ node, ...props }: any) => <p className="text-muted leading-relaxed mb-4" {...props} />,
   ul: ({ node, className, ...props }: any) => <ul className={`list-none space-y-3 mb-6 ml-4 ${className || ''}`} {...props} />,

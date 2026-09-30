@@ -4,7 +4,6 @@ import {
   Shield,
   ShieldCheck,
   ExternalLink,
-  Cookie,
   Accessibility,
   FileText,
   Eye,
@@ -62,7 +61,6 @@ export default function LegalPage() {
   const TABS = [
     { id: "aviso", label: <><FileText className="w-[1.2em] h-[1.2em] mr-1" /> {t('tabs.legal.aviso.label', {defaultValue: 'Aviso legal'})}</>, cleanLabel: t('tabs.legal.aviso.label', {defaultValue: 'Aviso legal'}) },
     { id: "privacidad", label: <><Shield className="w-[1.2em] h-[1.2em] mr-1" /> {t('tabs.legal.privacidad.label', {defaultValue: 'Privacidad'})}</>, cleanLabel: t('tabs.legal.privacidad.label', {defaultValue: 'Privacidad'}) },
-    { id: "cookies", label: <><Cookie className="w-[1.2em] h-[1.2em] mr-1" /> {t('tabs.legal.cookies.label', {defaultValue: 'Cookies'})}</>, cleanLabel: t('tabs.legal.cookies.label', {defaultValue: 'Cookies'}) },
     { id: "accesibilidad", label: <><Accessibility className="w-[1.2em] h-[1.2em] mr-1" /> {t('tabs.legal.accesibilidad.label', {defaultValue: 'Accesibilidad'})}</>, cleanLabel: t('tabs.legal.accesibilidad.label', {defaultValue: 'Accesibilidad'}) },
   ];
 
@@ -70,8 +68,7 @@ export default function LegalPage() {
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     'aviso': t('tabs.legal.aviso.desc', {defaultValue: 'Datos del titular, condiciones de uso, propiedad intelectual y licencias (GPLv3 y CC BY-NC-SA).'}),
-    'privacidad': t('tabs.legal.privacidad.desc', {defaultValue: 'Política de privacidad, RGPD, responsable del tratamiento y modelo local-first.'}),
-    'cookies': t('tabs.legal.cookies.desc', {defaultValue: 'Uso de localStorage e IndexedDB. Sin cookies de rastreo ni analíticas de terceros.'}),
+    'privacidad': t('tabs.legal.privacidad.desc', {defaultValue: 'Política de privacidad, RGPD, responsable del tratamiento, modelo local-first y uso de localStorage/IndexedDB (sin cookies de rastreo ni analíticas de terceros).'}),
     'accesibilidad': t('tabs.legal.accesibilidad.desc', {defaultValue: 'Declaración de accesibilidad digital según RD 1112/2018 y compromiso WCAG 2.1 AA.'}),
   };
 
@@ -93,12 +90,10 @@ export default function LegalPage() {
       { id: "priv-derechos", label: t('checks.legal.privDerechos', {defaultValue: '4. Derechos ARCO'}) },
       { id: "priv-seguridad", label: t('checks.legal.privSeguridad', {defaultValue: '5. Seguridad'}) },
       { id: "priv-base-legal", label: t('checks.legal.privBaseLegal', {defaultValue: '6. Base legal'}) },
-    ],
-    cookies: [
-      { id: "cookies-politica", label: t('checks.legal.cookiesPolitica', {defaultValue: '1. Política de cookies'}) },
-      { id: "cookies-tecnologias", label: t('checks.legal.cookiesTecnologias', {defaultValue: '2. Tecnologías utilizadas'}) },
-      { id: "cookies-tabla", label: t('checks.legal.cookiesTabla', {defaultValue: '3. Detalle de almacenamiento'}) },
-      { id: "cookies-gestion", label: t('checks.legal.cookiesGestion', {defaultValue: '4. Cómo gestionarlos'}) },
+      { id: "cookies-politica", label: t('checks.legal.cookiesPolitica', {defaultValue: '7. Política de cookies'}) },
+      { id: "cookies-tecnologias", label: t('checks.legal.cookiesTecnologias', {defaultValue: '8. Tecnologías utilizadas'}) },
+      { id: "cookies-tabla", label: t('checks.legal.cookiesTabla', {defaultValue: '9. Detalle de almacenamiento'}) },
+      { id: "cookies-gestion", label: t('checks.legal.cookiesGestion', {defaultValue: '10. Cómo gestionarlos'}) },
     ],
     accesibilidad: [
       { id: "acc-declaracion", label: t('checks.legal.accDeclaracion', {defaultValue: '1. Declaración'}) },
@@ -391,17 +386,12 @@ export default function LegalPage() {
                     <li><strong>LSSI-CE:</strong> Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y Comercio Electrónico.</li>
                   </ul>
                 </section>
-              </div>
-            )}
 
-            {/* ═══════════════════════════════════════════════════
-                TAB — COOKIES Y ALMACENAMIENTO LOCAL
-                ═══════════════════════════════════════════════════ */}
-            {activeTab === "cookies" && (
-              <div className="space-y-12 animate-in fade-in duration-500">
-                {/* 1. Política */}
+                {/* 7. Política de cookies -- pestaña propia "Cookies"
+                    fusionada aquí al final (antes pestaña propia,
+                    eliminada, petición de Rafael, 2026-09-30). */}
                 <section className="space-y-3">
-                  <SectionHeading id="cookies-politica" number={1}>
+                  <SectionHeading id="cookies-politica" number={7}>
                     {t('campos.legal.politicaCookiesTitulo', {defaultValue: 'Política de cookies'})}
                   </SectionHeading>
                   <div className="flex items-start gap-3 mb-4">
@@ -412,9 +402,9 @@ export default function LegalPage() {
                   </div>
                 </section>
 
-                {/* 2. Tecnologías */}
+                {/* 8. Tecnologías */}
                 <section className="space-y-3">
-                  <SectionHeading id="cookies-tecnologias" number={2}>
+                  <SectionHeading id="cookies-tecnologias" number={8}>
                     {t('campos.legal.tecnologiasAlmacenamientoTitulo', {defaultValue: 'Tecnologías de almacenamiento utilizadas'})}
                   </SectionHeading>
                   <p className="text-body text-foreground/80 leading-relaxed">
@@ -436,9 +426,9 @@ export default function LegalPage() {
                   </div>
                 </section>
 
-                {/* 3. Tabla detalle */}
+                {/* 9. Tabla detalle */}
                 <section className="space-y-3">
-                  <SectionHeading id="cookies-tabla" number={3}>
+                  <SectionHeading id="cookies-tabla" number={9}>
                     {t('campos.legal.detalleAlmacenamientoTitulo', {defaultValue: 'Detalle de almacenamiento local'})}
                   </SectionHeading>
                   <table className="w-full text-body text-left border-collapse">
@@ -473,9 +463,9 @@ export default function LegalPage() {
                   </table>
                 </section>
 
-                {/* 4. Gestión */}
+                {/* 10. Gestión */}
                 <section className="space-y-3">
-                  <SectionHeading id="cookies-gestion" number={4}>
+                  <SectionHeading id="cookies-gestion" number={10}>
                     {t('campos.legal.comoGestionarTitulo', {defaultValue: 'Cómo gestionar el almacenamiento local'})}
                   </SectionHeading>
                   <p className="text-body text-foreground/80 leading-relaxed">

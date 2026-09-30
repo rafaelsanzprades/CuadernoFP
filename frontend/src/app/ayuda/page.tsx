@@ -1,5 +1,5 @@
 "use client";
-import { BookOpen, CheckCircle, ChevronDown, Compass, Download, Info, MessageCircle, Map, Send, Shield, Users, Wrench } from "lucide-react";
+import { BookOpen, CheckCircle, ChevronDown, Compass, Download, Info, Shield, Users, Wrench } from "lucide-react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -111,7 +111,6 @@ export default function AyudaPage() {
     { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.magia.guia.label', {defaultValue: 'Guía'})}</>, cleanLabel: t('tabs.magia.guia.label', {defaultValue: 'Guía'}) },
     { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.faq.label', {defaultValue: 'FAQ'})}</>, cleanLabel: t('tabs.ayuda.faq.label', {defaultValue: 'FAQ'}) },
     { id: "acronimos", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.acronimos.label', {defaultValue: 'Acrónimos'})}</>, cleanLabel: t('tabs.ayuda.acronimos.label', {defaultValue: 'Acrónimos'}) },
-    { id: "contribuciones", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.inicio.contribuciones.label', {defaultValue: 'Contribuciones'})}</>, cleanLabel: t('tabs.inicio.contribuciones.label', {defaultValue: 'Contribuciones'}) },
   ];
 
   const activeTabCleanLabel = TABS.find(tab => tab.id === activeTab)?.cleanLabel;
@@ -120,21 +119,17 @@ export default function AyudaPage() {
     guia: t('tabs.magia.guia.desc', {defaultValue: 'Guía de inicio y prompt para IA: qué datos pedir al docente y dónde colocarlos en la app.'}),
     faq: t('tabs.ayuda.faq.desc', {defaultValue: 'Respuestas a las preguntas más frecuentes del profesorado.'}),
     acronimos: t('tabs.ayuda.acronimos.desc', {defaultValue: 'Glosario de siglas, acrónimos y conceptos de Formación Profesional.'}),
-    contribuciones: t('tabs.inicio.contribuciones.desc', {defaultValue: 'Comunidad de Telegram y listado de personas que contribuyen activamente al proyecto.'}),
   };
 
-  // Índice de bloques -- solo la pestaña FAQ tiene 2+ bloques reales
-  // (un grupo por tema); el resto son un único bloque, sin índice.
+  // Índice de bloques por pestaña -- Contribuciones se fusionó al final de
+  // Inicio->Bienvenida (antes pestaña propia aquí, eliminada, petición de
+  // Rafael, 2026-09-30).
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
     guia: GUIA_PASOS.map(p => ({ id: p.id, label: `${p.numero}. ${p.titulo}` })),
     faq: FAQS.map((g, idx) => ({ id: `faq-grupo-${idx}`, label: g.group })),
     acronimos: [
       ...CATEGORY_ORDER.map(cat => ({ id: `acronimos-${cat}`, label: CATEGORY_LABELS[cat] })),
-      { id: "acronimos-anexo-catalogo", label: "Anexo: Catálogo de Elementos a Codificar" },
-    ],
-    contribuciones: [
-      { id: "contrib-telegram", label: t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'}) },
-      { id: "contrib-comunidades", label: t('campos.inicio.contribuidoresCcaaTitulo', {defaultValue: 'Contribuidores por Comunidad Autónoma'}) },
+      { id: "acronimos-anexo-catalogo", label: "Acrónimos codificados" },
     ],
   };
 
@@ -205,68 +200,6 @@ export default function AyudaPage() {
             {activeTab === "acronimos" && (
               <div className="animate-in fade-in duration-500 w-full">
                 <TabAcronimos />
-              </div>
-            )}
-
-            {/* ── CONTENIDO: CONTRIBUCIONES ──────────────────────────────────────── */}
-            {activeTab === "contribuciones" && (
-              <div className="space-y-6 animate-in fade-in duration-500">
-                <div className="space-y-3">
-                  <SectionHeading id="contrib-telegram" icon={MessageCircle} scrollMt="260px">
-                    {t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'})}
-                  </SectionHeading>
-                  <div className="flex flex-col md:flex-row items-center gap-5 p-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
-                    <div className="w-12 h-12 shrink-0 rounded-full bg-[#229ED9]/10 flex items-center justify-center">
-                      <MessageCircle className="w-6 h-6 text-[#229ED9]" />
-                    </div>
-                    <div className="flex-1 text-center md:text-left">
-                      <p className="text-body text-muted leading-tight">
-                        {t('campos.inicio.grupoTelegramDesc', {defaultValue: 'Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad Autónoma.'})}
-                      </p>
-                    </div>
-                    <a
-                      href="https://t.me/cuadernofp"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="shrink-0 px-5 py-2.5 rounded-lg bg-[#229ED9] text-white font-medium hover:bg-[#229ED9]/90 transition-colors flex items-center gap-2 text-body"
-                    >
-                      <Send className="w-4 h-4" />
-                      {t('botones.inicio.unirseTelegram', {defaultValue: 'Unirme al grupo en Telegram'})}
-                    </a>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <SectionHeading id="contrib-comunidades" icon={Users} scrollMt="260px">
-                    {t('campos.inicio.contribuidoresCcaaTitulo', {defaultValue: 'Contribuidores por Comunidad Autónoma'})}
-                  </SectionHeading>
-                  <p className="text-muted">
-                    {t('campos.inicio.contribuidoresCcaaDesc', {defaultValue: 'Mención especial al profesorado que está ayudando a mejorar y a integrar los currículos de las Comunidades Autónomas'})}
-                  </p>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {[
-                      "Andalucía", "Aragón", "Asturias", "Baleares", "Canarias",
-                      "Cantabria", "Castilla y León", "Castilla-La Mancha", "Cataluña", "Ceuta",
-                      "Comunidad Valenciana", "Extremadura", "Galicia", "La Rioja", "Madrid",
-                      "Melilla", "Murcia", "Navarra", "País Vasco"
-                    ].map((comunidad) => (
-                      <div key={comunidad} className="p-4 rounded-xl border border-[var(--glass-border)] bg-background/50 flex flex-col gap-2 transition-all hover:bg-background/80">
-                        <div className="flex items-center gap-2 border-b border-[var(--glass-border)] pb-2 mb-1">
-                          <Map className="w-5 h-5 text-accent" />
-                          <span className="font-bold text-foreground">{comunidad}</span>
-                        </div>
-                        <ul className="text-body text-muted space-y-1.5 pl-2">
-                          {comunidad === "Aragón" ? (
-                            <li className="flex items-center gap-2 text-foreground"><Users className="w-4 h-4 text-accent" /> Jose Javier García</li>
-                          ) : (
-                            <li className="flex items-center gap-2 italic opacity-60"><Users className="w-4 h-4 text-muted-foreground" /> {t('campos.inicio.animateAContribuir', {defaultValue: '¡Anímate a contribuir!'})}</li>
-                          )}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-                </div>
               </div>
             )}
 
