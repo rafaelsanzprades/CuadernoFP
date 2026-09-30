@@ -125,7 +125,7 @@ export function TabAcronimos() {
           pasos. */}
       <div className="space-y-3">
         <SectionHeading id="acronimos-anexo-catalogo" icon={Code2} scrollMt="260px">
-          Anexo: Catálogo de Elementos a Codificar
+          Acrónimos codificados
         </SectionHeading>
         <Card className="p-6 space-y-6">
           {GUIA_CATALOGO.map(grupo => (

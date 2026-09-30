@@ -4,8 +4,7 @@ import { NormativaAccordion } from "@/components/features/documentos/NormativaAc
 import { TabNormativa } from "@/components/features/catalogo/TabNormativa";
 import { TabGrados } from "@/components/features/catalogo/TabGrados";
 import { TabComunidades } from "@/components/features/catalogo/TabComunidades";
-import { TabIncual } from "@/components/features/catalogo/TabIncual";
-import { AlertTriangle, Award, BookOpen, Download, DownloadCloud, File, FileSpreadsheet, FileText, Folder, FolderOpen, MapPin, Scale, Search, X } from "lucide-react";
+import { AlertTriangle, BookOpen, Download, DownloadCloud, File, FileSpreadsheet, FileText, Folder, FolderOpen, MapPin, Scale, Search, X } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import { useTranslation } from "react-i18next";
@@ -35,13 +34,11 @@ export default function DocumentosPage() {
     { id: "autonomias", label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4 shrink-0" /> {t('tabs.normativa.autonomias.label', {defaultValue: 'Autonomías'})}</span>, cleanLabel: t('tabs.normativa.autonomias.label', {defaultValue: 'Autonomías'}) },
     { id: "bibliografia", label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 shrink-0" /> {t('tabs.normativa.bibliografia.label', {defaultValue: 'Bibliografía'})}</span>, cleanLabel: t('tabs.normativa.bibliografia.label', {defaultValue: 'Bibliografía'}) },
     { id: "legislacion", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.legislacion', {defaultValue: 'Legislación'})}</span>, cleanLabel: t('tabs.legislacion', {defaultValue: 'Legislación'}) },
-    { id: "ecp-incual", label: <span className="flex items-center gap-2"><Award className="w-4 h-4 shrink-0 text-purple-500" /> {t('tabs.normativa.ecp-incual.label', {defaultValue: 'ECP INCUAL'})}</span>, cleanLabel: t('tabs.normativa.ecp-incual.label', {defaultValue: 'ECP INCUAL'}) }
   ];
   const TAB_DESCRIPTIONS: Record<string, string> = {
     autonomias: t('tabs.normativa.autonomias.desc', {defaultValue: 'Documentos y plantillas descargables de tu comunidad autónoma, organizados por grado.'}),
     bibliografia: t('tabs.normativa.bibliografia.desc', {defaultValue: 'Índice de leyes, decretos y órdenes estatales y autonómicas de FP, con enlace al boletín oficial.'}),
     legislacion: t('tabs.normativa.legislacion.desc', {defaultValue: 'Legislación autonómica y normativa específica.'}),
-    'ecp-incual': t('tabs.normativa.ecp-incual.desc', {defaultValue: 'Estándares de Competencia Profesional (ECP) del Catálogo Nacional (INCUAL).'}),
   };
 
   // Índice de bloques por pestaña -- se renderiza una sola vez dentro de
@@ -61,10 +58,6 @@ export default function DocumentosPage() {
       { id: "leg-general", label: t('campos.normativa.legislacionGeneral', {defaultValue: 'Legislación general'}) },
       { id: "leg-autonomica", label: t('campos.normativa.legislacionAutonomicaTitulo', {defaultValue: 'Legislación autonómica'}) },
     ],
-    'ecp-incual': [
-      { id: "incual-crn", label: t('campos.catalogo.tituloCrn', {defaultValue: 'Centros de Referencia Nacional (CRN)'}) },
-      { id: "incual-ecp", label: t('campos.catalogo.tituloEcp', {defaultValue: 'Estándares de Competencia Profesional (ECP)'}) },
-    ],
   };
   const [activeTab, setActiveTab] = useState("autonomias");
   const [currentPath, setCurrentPath] = useState<string>("");
@@ -79,34 +72,6 @@ export default function DocumentosPage() {
 
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData, dataSource } = useAppStore();
   const [loadingData, setLoadingData] = useState(true);
-
-  const [globalSelection, setGlobalSelection] = useState(() => {
-    if (typeof window !== "undefined") {
-      const saved = sessionStorage.getItem("catalogoSelection");
-      if (saved) {
-        try {
-          return JSON.parse(saved);
-        } catch (e) {
-          console.error("Error parsing catalogoSelection", e);
-        }
-      }
-    }
-    return {
-      familia: "Electricidad y Electrónica",
-      tituloCodigo: "ELE203",
-      moduloCodigo: "0237"
-    };
-  });
-
-  const updateGlobalSelection = (updates: Partial<typeof globalSelection>) => {
-    setGlobalSelection((prev: any) => {
-      const next = { ...prev, ...updates };
-      if (typeof window !== "undefined") {
-        sessionStorage.setItem("catalogoSelection", JSON.stringify(next));
-      }
-      return next;
-    });
-  };
 
   const fetchDocuments = (path: string, signal: AbortSignal) => {
     setLoadingDocs(true);
@@ -141,7 +106,7 @@ export default function DocumentosPage() {
   };
 
   useEffect(() => {
-    if (activeTab === "bibliografia" || activeTab === "ecp-incual") {
+    if (activeTab === "bibliografia") {
       setItems([]);
       setLoadingDocs(false);
       setError(null);
@@ -291,14 +256,6 @@ export default function DocumentosPage() {
       return (
         <div className="w-full">
           <TabNormativa searchQuery={searchQuery} />
-        </div>
-      );
-    }
-    
-    if (activeTab === 'ecp-incual') {
-      return (
-        <div className="w-full">
-          <TabIncual globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />
         </div>
       );
     }

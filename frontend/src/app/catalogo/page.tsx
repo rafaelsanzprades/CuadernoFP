@@ -10,6 +10,8 @@ import { Badge } from "@/components/ui/Badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
+import { SectionIndex } from "@/components/ui/SectionIndex";
+import { TabIncual } from "@/components/features/catalogo/TabIncual";
 import {
   type CurriculumTitulo,
   type CurriculumModulo,
@@ -27,7 +29,7 @@ import { GENERACIONES_CURRICULO, getFuenteNormativa } from "@/utils/curriculumGe
 import { ExternalLink } from "lucide-react";
 import { getApiBase } from "@/services/apiBase";
 
-type Tab = "familias" | "titulos" | "modulos" | "ra-ce";
+type Tab = "familias" | "ecp-incual" | "titulos" | "modulos" | "ra-ce";
 
 
 export default function CiclosPage() {
@@ -51,7 +53,7 @@ function CiclosContent() {
 
   const tabParam = searchParams.get("tab") as Tab | null;
   const [activeTab, setActiveTab] = useState<Tab>(
-    tabParam && ["familias", "titulos", "modulos", "ra-ce"].includes(tabParam) ? tabParam : "familias"
+    tabParam && ["familias", "ecp-incual", "titulos", "modulos", "ra-ce"].includes(tabParam) ? tabParam : "familias"
   );
 
   const [globalSelection, setGlobalSelection] = useState(() => {
@@ -107,6 +109,7 @@ function CiclosContent() {
 
   const TAB_LABELS: Record<Tab, string> = {
     familias: t('tabs.familias', {defaultValue: 'Familias'}),
+    'ecp-incual': t('tabs.normativa.ecp-incual.label', {defaultValue: 'ECP INCUAL'}),
     titulos: t('tabs.titulos', {defaultValue: 'Títulos'}),
     modulos: t('tabs.modulos', {defaultValue: 'Módulos'}),
     'ra-ce': t('tabs.catalogo.ra-ce.label', {defaultValue: 'RA → CE'})
@@ -116,9 +119,19 @@ function CiclosContent() {
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     familias: t('tabs.catalogo.familias.desc', {defaultValue: 'Familias profesionales y sus ciclos formativos asociados, organizados por grado.'}),
+    'ecp-incual': t('tabs.normativa.ecp-incual.desc', {defaultValue: 'Estándares de Competencia Profesional (ECP) del Catálogo Nacional (INCUAL).'}),
     titulos: t('tabs.catalogo.titulos.desc', {defaultValue: 'Normativa estatal básica y currículo autonómico para ciclos formativos.'}),
     modulos: t('tabs.catalogo.modulos.desc', {defaultValue: 'Módulos de cada título organizados por curso académico, con sus horas.'}),
     'ra-ce': t('tabs.catalogo.ra-ce.desc', {defaultValue: 'Competencias específicas estructuradas en RA y CE (Art. 136, RD 659/2023).'})
+  };
+
+  // Índice de bloques -- solo ECP INCUAL tiene 2+ bloques reales (el resto
+  // de esta página son grids de tarjetas repetidas, sin índice).
+  const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
+    'ecp-incual': [
+      { id: "incual-crn", label: t('campos.catalogo.tituloCrn', {defaultValue: 'Centros de Referencia Nacional (CRN)'}) },
+      { id: "incual-ecp", label: t('campos.catalogo.tituloEcp', {defaultValue: 'Estándares de Competencia Profesional (ECP)'}) },
+    ],
   };
 
   return (
@@ -139,6 +152,7 @@ function CiclosContent() {
                   {(
                     [
                       { id: "familias" as Tab, label: <span className="flex items-center gap-2"><FolderTree className="w-4 h-4" /> {t('tabs.familias', {defaultValue: 'Familias'})}</span> },
+                      { id: "ecp-incual" as Tab, label: <span className="flex items-center gap-2"><Award className="w-4 h-4 text-purple-500" /> {t('tabs.normativa.ecp-incual.label', {defaultValue: 'ECP INCUAL'})}</span> },
                       { id: "titulos" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> {t('tabs.titulos', {defaultValue: 'Títulos'})}</span> },
                       { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> {t('tabs.modulos', {defaultValue: 'Módulos'})}</span> },
                       { id: "ra-ce" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> {t('tabs.catalogo.ra-ce.label', {defaultValue: 'RA → CE'})}</span> }
@@ -157,11 +171,16 @@ function CiclosContent() {
             <p className="text-body text-muted mt-3">
               {TAB_DESCRIPTIONS[activeTab] || 'Catálogo Nacional Oficial.'}
             </p>
+
+            {/* Índice de bloques de la pestaña activa -- dentro del header
+                fijo (sticky top-0), así que no se pierde al hacer scroll. */}
+            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
           </StickyPageHeader>
 
           <MotionWrapper className="w-full space-y-6 px-8 pt-4 pb-12">
 
             {activeTab === "familias" && <TabFamilias onSelectTitulo={handleSelectFamiliaToTitulo} />}
+            {activeTab === "ecp-incual" && <TabIncual globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
             {activeTab === "titulos" && <TabTitulo onSelectTitulo={handleSelectTitulo} globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
             {activeTab === "modulos" && <TabCursos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} onSelectModulo={handleSelectModulo} />}
             {activeTab === "ra-ce" && <TabModulos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}

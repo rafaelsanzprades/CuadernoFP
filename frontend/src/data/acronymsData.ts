@@ -17,11 +17,11 @@ export interface AcronymItem {
 export const CATEGORY_LABELS: Record<AcronymCategory, string> = {
   metodologia: "Metodología y aprendizaje",
   inclusion: "Atención a la diversidad e inclusión",
-  estructura_fp: "Estructura de la Formación Profesional",
-  normativa: "Normativa, evaluación y documentación de centro",
+  estructura_fp: "Estructura en FP",
+  normativa: "Normativa, evaluación y documentación",
   boletines: "Boletines oficiales",
-  codificacion: "Acrónimos de codificación de la APP",
-  otros: "Contexto educativo y otros"
+  codificacion: "Acrónimos en la APP",
+  otros: "Contexto educativo"
 };
 
 // Orden de presentación de las categorías -- compartido entre TabAcronimos.tsx

@@ -55,14 +55,12 @@ export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   "/inicio": [
     { id: "bienvenida", label: "Bienvenida" },
     { id: "datos", label: "Datos" },
-    { id: "asistente-ia", label: "Asistente" },
     { id: "verificacion", label: "Verificación" },
   ],
   "/ayuda": [
     { id: "guia", label: "Guía" },
     { id: "faq", label: "FAQ" },
     { id: "acronimos", label: "Acrónimos" },
-    { id: "contribuciones", label: "Contribuciones" },
   ],
   "/contexto": [
     { id: "identificacion", label: "Identificación" },
@@ -122,24 +120,22 @@ export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "autonomias", label: "Autonomías" },
     { id: "bibliografia", label: "Bibliografía" },
     { id: "legislacion", label: "Legislación" },
-    { id: "ecp-incual", label: "ECP INCUAL" },
   ],
   "/catalogo": [
     { id: "familias", label: "Familias" },
+    { id: "ecp-incual", label: "ECP INCUAL" },
     { id: "titulos", label: "Títulos" },
     { id: "modulos", label: "Módulos" },
     { id: "ra-ce", label: "RA → CE" },
   ],
   "/magia": [
     { id: "programacion", label: "Programación" },
-    { id: "comparativa-pdx", label: "Comparativa PDx" },
     { id: "curso", label: "Curso" },
     { id: "analisis-pdx", label: "Análisis APP->PDx" },
   ],
   "/legal": [
     { id: "aviso", label: "Aviso legal" },
     { id: "privacidad", label: "Privacidad" },
-    { id: "cookies", label: "Cookies" },
     { id: "accesibilidad", label: "Accesibilidad" },
   ],
 };
