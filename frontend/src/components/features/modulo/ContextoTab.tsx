@@ -9,6 +9,8 @@ import toast from "react-hot-toast";
 import { countField, countBoolean } from "@/components/features/alumnado/TendenciasProfesionalTab";
 import { loadCatalogForModule, resolveModuloNivel } from "@/services/catalogCache";
 import { getApiBase } from "@/services/apiBase";
+import { PlanesTab } from "@/components/features/modulo/PlanesTab";
+import { ActividadesComplementariasTab } from "@/components/features/modulo/ActividadesComplementariasTab";
 
 const RASGOS_ENTORNO = [
   {
@@ -458,6 +460,15 @@ export function ContextoTab() {
         </div>
       </div>
       </div>
+
+      {/* Actividades complementarias y extraescolares -- traídas de Calendario
+          (2026-10-03, petición de Rafael), tras Contexto escolar. */}
+      <ActividadesComplementariasTab />
+
+      {/* Plan FEOE -- traído aquí desde su propia pestaña "Plan FEOE"
+          (eliminada, petición de Rafael, 2026-09-30), como bloque previo a
+          Alumnado (ACNEAE). */}
+      <PlanesTab />
 
       <div className="space-y-3">
       <SectionHeading id="contexto-alumnado-acneae" icon={User} scrollMt="260px">

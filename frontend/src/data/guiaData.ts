@@ -77,7 +77,7 @@ export const GUIA_PASOS: {
         nodes: [
           { label: "Programación didáctica", text: 'Es el "molde" teórico (.fpp). Contiene la normativa (resultados de aprendizaje y criterios de evaluación) y las unidades didácticas. Se diseña una vez y se puede reutilizar en cursos posteriores.' },
           { label: "Curso", text: 'Es la "instancia" real (.fpc). Representa al alumnado físico, sus calificaciones, faltas de asistencia y calendario en un año académico específico (ej. 2025-26).' },
-          { label: "Bloques", text: "3 grupos en el sidebar — General (Inicio, Ayuda, MagIA, Normativa, Legal), Programación (Catálogo, Contexto, Currículo, Metodología, Instrumento — el diseño teórico del módulo) y Curso (Agenda, Calendario, Alumnado, Seguimiento, Calificación — el aula real). Esta misma guía vive dentro de Ayuda, pestaña Guía (no en Inicio ni en MagIA); esa misma página Ayuda tiene también FAQ, Acrónimos y Contribuciones para consultas rápidas." },
+          { label: "Bloques", text: "3 grupos en el sidebar — General (Inicio, Ayuda, MagIA, Normativa, Legal), Programación (Catálogo, Contexto, Currículo, Metodología, Instrumento — el diseño teórico del módulo) y Curso (Calendario, Agenda, Seguimiento, Alumnado, Cierre — el aula real). Esta misma guía vive dentro de Ayuda, pestaña Guía (no en Inicio ni en MagIA); esa misma página Ayuda tiene también FAQ, Acrónimos y Contribuciones para consultas rápidas." },
         ],
       },
     ],
@@ -249,7 +249,7 @@ export const GUIA_PASOS: {
                       { label: "PD- (Resumen)", text: "Resumen de 1-2 folios para el alumnado." },
                       { label: "PD= (Simplificada)", text: "Formato oficial intermedio (~15-20 páginas)." },
                       { label: "PD+ (Detallada JEG)", text: "Formato extendido (>60 páginas) con toda la carga narrativa." },
-                      { text: "PD- y PD= incluyen, al final, una página de previsión de planificación mensual (UD × mes, calculada igual que Agenda › Avance); PD+ todavía no la lleva." },
+                      { text: "PD- y PD= incluyen, al final, una página de previsión de planificación mensual (UD × mes, calculada igual que Seguimiento › Avance); PD+ todavía no la lleva." },
                     ],
                   },
                 ],
@@ -302,17 +302,13 @@ export const GUIA_PASOS: {
                   { label: "Pestaña", text: "Fechas y horario", children: [
                     { label: "Fecha", text: "Inicio y fin de curso, y trimestres." },
                     { label: "Horario", text: "Horas lectivas diarias." },
-                  ] },
-                  { label: "Pestaña", text: "Periodo FEOE", children: [
-                    { label: "Fecha", text: "Inicio y fin de la Formación en Empresa u Organismo Equiparado, tipo de dual y horas/día." },
+                    { label: "Bloque", text: '"Periodo FEOE" (al final de la pestaña): inicio y fin de la Formación en Empresa u Organismo Equiparado, tipo de dual y horas/día.' },
                   ] },
                   { label: "Pestaña", text: "Eventos y festivos", children: [
                     { label: "Fecha", text: "Festivos o celebraciones, con calendario interactivo para marcarlos con un clic." },
                     { label: "Nota", text: "Los hitos de Fechas generales (inicio/fin de curso y de cada trimestre) y el periodo FEOE aparecen aquí automáticamente, en gris y sin poder borrarse — cambian si cambias esas fechas, no aquí." },
                   ] },
-                  { label: "Pestaña", text: "Complementarias y extraescolares", children: [
-                    { label: "Acción", text: "Registra actividades complementarias y extraescolares." },
-                  ] },
+                  { label: "Pestaña", text: "Mensual", children: [{ label: "Acción", text: "Vista mensual y calendario interactivo con fechas clave y las sesiones planificadas." }] },
                 ],
               },
             ],
@@ -335,6 +331,9 @@ export const GUIA_PASOS: {
                   ] },
                   { label: "Pestaña", text: "Plano de clase", children: [
                     { label: "Acción", text: "Arrastrar al alumnado a sus mesas." },
+                  ] },
+                  { label: "Pestaña", text: "Individual", children: [
+                    { label: "Acordeones", text: "Orientación profesional por alumno/a (secciones 1-6), más su Boletín individual en pantalla con botón de impresión (sección 7) y su Expediente, la línea temporal de evidencias: calificaciones, reclamaciones, asistencia y diario (sección 8)." },
                   ] },
                 ],
               },
@@ -376,8 +375,6 @@ export const GUIA_PASOS: {
                 label: "Página", text: "Agenda",
                 children: [
                   { label: "Pestaña", text: "Actual", children: [{ label: "Acción", text: "Resumen de las clases de hoy, contexto de la semana y desarrollo de la unidad didáctica en curso." }] },
-                  { label: "Pestaña", text: "Avance", children: [{ label: "Acción", text: "Planificación y seguimiento mensual de la programación." }] },
-                  { label: "Pestaña", text: "Previsión RA y UD", children: [{ label: "Acción", text: "Progreso de los resultados de aprendizaje según el estado y la ponderación de las unidades didácticas ya impartidas." }] },
                   { label: "Pestaña", text: "Mensual", children: [{ label: "Acción", text: "Vista mensual y calendario interactivo con fechas clave." }] },
                 ],
               },
@@ -398,7 +395,7 @@ export const GUIA_PASOS: {
                   { label: "Pestaña", text: "Clases", children: [{ label: "Texto", text: "Redacta qué se ha hecho en la clase." }] },
                   { label: "Pestaña", text: "Asistencia", children: [
                     { label: "Botón", text: "Marca Falta, Retraso o Justificado." },
-                    { label: "Sub-vista", text: '"Alertas de abandono" (dentro de la misma pestaña) — detector automático de riesgo, sin necesidad de registrar nada a mano.' },
+                    { label: "Bloques", text: '"Hoy", "Acumulado trimestral" y "Alertas de abandono" (apilados con su índice) — detector automático de riesgo, sin necesidad de registrar nada a mano.' },
                   ] },
                 ],
               },
@@ -415,18 +412,23 @@ export const GUIA_PASOS: {
             label: "Bloque", text: "Curso",
             children: [
               {
-                label: "Página", text: "Seguimiento",
+                label: "Página", text: "Alumnado",
                 children: [
                   { label: "Pestaña", text: "Notas", children: [{ label: "Tabla", text: "Teclea las notas y calcula al vuelo, por alumnado — es el único punto de entrada de calificaciones numéricas de la app." }] },
+                ],
+              },
+              {
+                label: "Página", text: "Seguimiento",
+                children: [
+                  { label: "Pestaña", text: "Avance", children: [{ label: "Bloques", text: "Planificación mensual (UD × mes) y progreso de los resultados de aprendizaje según el estado y la ponderación de las unidades didácticas ya impartidas." }] },
                   { label: "Pestaña", text: "Empresa FEOE", children: [{ label: "Acción", text: "Transcribe las valoraciones del tutor de empresa (1-4, Anexo XI b) para los CE marcados FEOE en Currículo." }] },
                 ],
               },
               {
-                label: "Página", text: "Calificación (mayormente de solo lectura, resume lo anterior)",
+                label: "Página", text: "Cierre (mayormente de solo lectura, resume lo anterior)",
                 children: [
-                  { label: "Pestaña", text: "Resumen", children: [{ label: "Tablas", text: 'Panel global de rendimiento, y bloques plegables "Progreso RA-UD", "Estadísticas" y "Análisis" (con switcher Grupal/Individual) más abajo en la misma pestaña.' }] },
-                  { label: "Pestaña", text: "Histórico", children: [{ label: "Switcher", text: '"Cambios de nota" (registro de cada cambio, con fecha, agente y motivo) / "Reclamaciones" (registra y resuelve reclamaciones de nota, con generación de justificante).' }] },
-                  { label: "Pestaña", text: "Individual", children: [{ label: "Switcher", text: '"Boletines" (boletín individual en pantalla, radar + barras por RA, con botón de impresión) / "Expediente" (línea temporal de evidencias por alumno/a: calificaciones, reclamaciones, asistencia, diario).' }] },
+                  { label: "Pestaña", text: "Resumen", children: [{ label: "Tablas", text: 'Panel global de rendimiento, y, apilados debajo con su índice, los bloques "Trimestral", "Progreso RA-UD", "Estadísticas" y "Análisis" (este último con switcher Grupal/Individual).' }] },
+                  { label: "Pestaña", text: "Histórico", children: [{ label: "Bloques", text: '"Cambios de nota" (registro de cada cambio, con fecha, agente y motivo) y "Reclamaciones" (registra y resuelve reclamaciones de nota, con generación de justificante).' }] },
                   { label: "Pestaña", text: "Mejora", children: [{ label: "Acción", text: "Indicadores de calidad EQAVET y propuestas de mejora del módulo, de cara a la memoria final de curso." }] },
                 ],
               },
@@ -461,7 +463,7 @@ export const GUIA_PASOS: {
             ],
           },
         ],
-        nota: "El Informe EQAVET (indicadores de calidad + propuestas de mejora) ya no se descarga desde aquí: vive en Calificación → Pestaña Mejora.",
+        nota: "El Informe EQAVET (indicadores de calidad + propuestas de mejora) ya no se descarga desde aquí: vive en Cierre → Pestaña Mejora.",
       },
     ],
   },

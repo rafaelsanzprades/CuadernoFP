@@ -9,7 +9,6 @@ import type { ModuleData } from "@/types";
 import { useTranslation } from "react-i18next";
 import { DatosTab } from "@/components/features/modulo/DatosTab";
 import { ContextoTab } from "@/components/features/modulo/ContextoTab";
-import { PlanesTab } from "@/components/features/modulo/PlanesTab";
 import { ProcedimientosTab } from "@/components/features/evaluacion/ProcedimientosTab";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
@@ -57,7 +56,6 @@ export default function ContextoConfigPage() {
   const TABS = [
     { id: "identificacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.contexto.identificacion.label', {defaultValue: 'Identificación'})}</span>, cleanLabel: t('tabs.contexto.identificacion.label', {defaultValue: 'Identificación'}) },
     { id: "contextualizacion", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.contexto.contextualizacion.label', {defaultValue: 'Contextualización'})}</span>, cleanLabel: t('tabs.contexto.contextualizacion.label', {defaultValue: 'Contextualización'}) },
-    { id: "plan-feoe", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.contexto.planFeoe.label', {defaultValue: 'Plan FEOE'})}</span>, cleanLabel: t('tabs.contexto.planFeoe.label', {defaultValue: 'Plan FEOE'}) },
     { id: "criterios", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.contexto.criterios.label', {defaultValue: 'Evaluación y calificación'})}</span>, cleanLabel: t('tabs.contexto.criterios.label', {defaultValue: 'Evaluación y calificación'}) },
   ];
 
@@ -65,8 +63,7 @@ export default function ContextoConfigPage() {
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     identificacion: t('tabs.contexto.identificacion.desc', {defaultValue: 'Identificación del módulo y centro, régimen dual, reglas de redondeo, ponderación trimestral, instrumentos de evaluación y escalas cualitativas. Cap. 1.1 del PD+.'}),
-    contextualizacion: t('tabs.contexto.contextualizacion.desc', {defaultValue: 'Entorno geográfico, socioeconómico, escolar e infraestructura, con rasgos rápidos seleccionables; alumnado ACNEAE, textos del modelo Simplificado y datos de autoría. Cap. 1.3 del PD+.'}),
-    'plan-feoe': t('tabs.contexto.planFeoe.desc', {defaultValue: 'Formación en empresa u organismo equiparado (FEOE): modalidad, seguimiento y régimen dual. Cap. 5 del PD+.'}),
+    contextualizacion: t('tabs.contexto.contextualizacion.desc', {defaultValue: 'Entorno geográfico, socioeconómico, escolar e infraestructura, con rasgos rápidos seleccionables; actividades complementarias y extraescolares, Plan FEOE, alumnado ACNEAE, textos del modelo Simplificado y datos de autoría. Cap. 1.3 y 5 del PD+.'}),
     criterios: t('tabs.contexto.criterios.desc', {defaultValue: 'Procedimiento de evaluación y de calificación: información al alumnado, pérdida de evaluación continua, recuperación. Cap. 4 del PD+.'}),
   };
 
@@ -82,6 +79,8 @@ export default function ContextoConfigPage() {
     ],
     contextualizacion: [
       { id: "contexto-escolar", label: t('campos.contexto.tituloContextoEscolar', {defaultValue: 'Contexto escolar'}) },
+      { id: "contexto-actividades", label: t('campos.contexto.tituloActividades', {defaultValue: 'Complementarias y extraescolares'}) },
+      { id: "planes-feoe", label: t('campos.modulo.tituloFeoe', {defaultValue: 'FEOE. Formación en Empresa u Organismo Equiparado'}) },
       { id: "contexto-alumnado-acneae", label: t('campos.contexto.tituloAlumnadoAcneae', {defaultValue: 'Alumnado (ACNEAE)'}) },
       { id: "contexto-modelo-simplificado", label: t('campos.contexto.tituloModeloSimplificado', {defaultValue: 'Textos del modelo Simplificado (pd=)'}) },
       { id: "contexto-autoria-publicidad", label: t('campos.contexto.tituloAutoriaPublicidad', {defaultValue: 'Datos de autoría y publicidad'}) },
@@ -176,7 +175,6 @@ export default function ContextoConfigPage() {
 
             {activeTab === "identificacion" && <DatosTab />}
             {activeTab === "contextualizacion" && <ContextoTab />}
-            {activeTab === "plan-feoe" && <PlanesTab />}
             {activeTab === "criterios" && <ProcedimientosTab />}
 
           </MotionWrapper>

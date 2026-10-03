@@ -1,7 +1,5 @@
 "use client";
-import { Calendar, CalendarRange } from "lucide-react";
-import { TabSync } from "@/components/ui/TabSync";
-import { useState } from "react";
+import { Calendar } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -10,17 +8,11 @@ import { TodayClasses } from "@/components/features/dashboard/TodayClasses";
 import { WelcomeWizard } from "@/components/features/dashboard/WelcomeWizard";
 import { useModulesList } from "@/hooks/useApi";
 import { useEffect } from "react";
-import { PlanificacionMensualTab } from "@/components/features/dashboard/PlanificacionMensualTab";
 import { WeeklyClasses } from "@/components/features/dashboard/WeeklyClasses";
-import { InteractiveCalendar } from "@/components/features/dashboard/InteractiveCalendar";
-import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { ContextoAgenda } from "@/components/features/dashboard/ContextoAgenda";
 import { DesarrolloUdActual } from "@/components/features/dashboard/DesarrolloUdActual";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { SectionIndex } from "@/components/ui/SectionIndex";
-import { TabRelacionRaUd } from "@/components/features/curriculo/TabRelacionRaUd";
-import { Target } from "lucide-react";
 import { getApiBase } from "@/services/apiBase";
 
 export default function AgendaPage() {
@@ -29,9 +21,7 @@ export default function AgendaPage() {
     isWizardOpen, setWizardOpen, activeModuleId,
     moduleData, setModuleData, activeCursoId, cursoData, setCursoData,
   } = useAppStore();
-  const [activeTab, setActiveTab] = useState("actual");
   const { data: modulesList, mutate: fetchModules } = useModulesList();
-  const { planningLedgerDmy } = useDynamicPlanning();
 
   useEffect(() => {
     if (modulesList) {
@@ -58,36 +48,17 @@ export default function AgendaPage() {
     }
   }, [activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData]);
 
-  const TABS = [
-    { id: "actual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.agenda.actual.label', {defaultValue: 'Actual'})}</>, cleanLabel: t('tabs.agenda.actual.label', {defaultValue: 'Actual'}) },
-    { id: "planificacion", label: <><span className="inline-flex"><CalendarRange className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.agenda.planificacion.label', {defaultValue: 'Avance'})}</>, cleanLabel: t('tabs.agenda.planificacion.label', {defaultValue: 'Avance'}) },
-    { id: "progreso-ra-ud", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.agenda.progreso-ra-ud.label', {defaultValue: 'Previsión RA y UD'})}</>, cleanLabel: t('tabs.agenda.progreso-ra-ud.label', {defaultValue: 'Previsión RA y UD'}) },
-    { id: "mensual", label: <><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.agenda.mensual.label', {defaultValue: 'Mensual'})}</>, cleanLabel: t('tabs.agenda.mensual.label', {defaultValue: 'Mensual'}) },
-
+  // Agenda ya no tiene pestañas (2026-10-02, petición de Rafael): una sola
+  // página con bloques e índice. El calendario mensual pasó a Calendario ->
+  // Mensual.
+  const SECTION_INDEX_ITEMS: { id: string; label: string }[] = [
+    { id: "agenda-clases-hoy", label: 'Tus clases de hoy' },
+    { id: "agenda-prevision-semanal", label: t('campos.dashboard.previsionSemanalTitulo', {defaultValue: 'Previsión semanal'}) },
+    { id: "agenda-desarrollo-ud", label: t('campos.dashboard.desarrolloUnidadEnCursoTitulo', {defaultValue: 'Desarrollo de la unidad en curso'}) },
   ];
-
-  const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
-
-  const TAB_DESCRIPTIONS: Record<string, string> = {
-    actual: t('tabs.agenda.actual.desc', {defaultValue: 'Resumen de las clases de hoy, contexto de la semana y desarrollo de la unidad didáctica en curso.'}),
-    planificacion: t('tabs.agenda.planificacion.desc', {defaultValue: 'Planificación y seguimiento mensual de la programación.'}),
-    'progreso-ra-ud': t('tabs.agenda.progreso-ra-ud.desc', {defaultValue: 'Progreso de los resultados de aprendizaje según el estado y la ponderación de las unidades didácticas impartidas.'}),
-    'mensual': t('tabs.agenda.mensual.desc', {defaultValue: 'Vista mensual y calendario interactivo con fechas clave.'}),
-
-  };
-
-  // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
-  const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
-    actual: [
-      { id: "agenda-clases-hoy", label: 'Tus clases de hoy' },
-      { id: "agenda-prevision-semanal", label: t('campos.dashboard.previsionSemanalTitulo', {defaultValue: 'Previsión semanal'}) },
-      { id: "agenda-desarrollo-ud", label: t('campos.dashboard.desarrolloUnidadEnCursoTitulo', {defaultValue: 'Desarrollo de la unidad en curso'}) },
-    ],
-  };
 
   return (
     <div className="flex min-h-screen bg-background relative">
-      <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       {isWizardOpen && (
         <WelcomeWizard
           onComplete={() => setWizardOpen(false)}
@@ -96,86 +67,36 @@ export default function AgendaPage() {
       )}
       <Sidebar />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
-        <Header breadcrumbSuffix={activeTabCleanLabel} />
+        <Header />
 
         <div className="flex-1 overflow-y-auto scrollbar-hide">
           <StickyPageHeader
             icon={Calendar}
             title={t('nav.agenda', { defaultValue: 'Agenda' })}
-            description={t('pages.agenda_desc', { defaultValue: 'Resumen diario: estado de clase y UD a impartir.' })}
+            description={t('pages.agenda_desc', { defaultValue: 'Tus clases de hoy, la semana y la unidad en curso.' })}
           >
-            {/* Pestañas */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
-                <TabsList className="max-w-full">
-                  {TABS.map(tab => (
-                    <TabsTrigger key={tab.id} value={tab.id}>
-                      {tab.label}
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
-              </Tabs>
-            </div>
-
-            {/* Descripción de la pestaña activa -- texto plano, sin cajón,
-                mismo patrón que Inicio/Ayuda/MagIA/Normativa/Legal */}
-            <p className="text-body text-muted mt-3">
-              {TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab}
-            </p>
-
-            {/* Índice de bloques de la pestaña activa -- dentro del header
-                fijo (sticky top-0), así que no se pierde al hacer scroll. */}
-            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
+            {/* Índice de bloques -- dentro del header fijo (sticky top-0), así
+                que no se pierde al hacer scroll. */}
+            <SectionIndex items={SECTION_INDEX_ITEMS} bare />
           </StickyPageHeader>
 
           <div className="w-full space-y-4 px-8 pt-4 pb-12">
 
 
-            {/* Contenido Pestaña Actual */}
-            {activeTab === "actual" && (
-              <div className="space-y-12 animate-in fade-in duration-500">
-                {/* 0. Contexto general de las UDs */}
-                <ContextoAgenda />
+            <div className="space-y-12 animate-in fade-in duration-500">
+              {/* 0. Contexto general de las UDs */}
+              <ContextoAgenda />
 
-                {/* 1. Hoy */}
-                <TodayClasses />
+              {/* 1. Hoy */}
+              <TodayClasses />
 
-                {/* 2. Semana */}
-                <WeeklyClasses />
+              {/* 2. Semana */}
+              <WeeklyClasses />
 
-                {/* 3. Desarrollo de la UD en curso */}
-                <DesarrolloUdActual />
-              </div>
-            )}
+              {/* 3. Desarrollo de la UD en curso */}
+              <DesarrolloUdActual />
 
-            {/* Contenido Pestaña Planificación */}
-            {activeTab === "planificacion" && (
-              <div className="animate-in fade-in duration-500 w-full space-y-4">
-                <PlanificacionMensualTab />
-              </div>
-            )}
-
-            {/* Contenido Pestaña Progreso y Relación RA con UD */}
-            {activeTab === "progreso-ra-ud" && (
-              <TabRelacionRaUd />
-            )}
-
-            {/* Contenido Pestaña Mensual */}
-            {activeTab === "mensual" && (
-              <div className="animate-in fade-in duration-500">
-                <InteractiveCalendar
-                  info_fechas={cursoData?.info_fechas || {}}
-                  horario={cursoData?.horario || {}}
-                  calendar_notes={cursoData?.calendar_notes || {}}
-                  planning_ledger={planningLedgerDmy}
-                  onUpdateNote={(key, val) => {
-                    if (!cursoData) return;
-                    const newNotes = { ...cursoData.calendar_notes, [key]: val };
-                    setCursoData({ ...cursoData, calendar_notes: newNotes });
-                  }}
-                />
-              </div>
-            )}
+            </div>
 
           </div>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BarChart, ClipboardList, Save, TrendingUp, User, FolderOpen, History, AlertOctagon, LineChart, FileText, Target, FileClock, Shield } from "lucide-react";
+import { BarChart, ClipboardList, Save, TrendingUp, User, FolderOpen, History, AlertOctagon, LineChart, Target, Shield, PieChart } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -17,14 +17,13 @@ import EstadisticasTab from "@/components/features/evaluacion/EstadisticasTab";
 import { ProgresoRaTab } from "@/components/features/evaluacion/ProgresoRaTab";
 import { HistorialCalificacionesTab } from "@/components/features/evaluacion/HistorialCalificacionesTab";
 import { ReclamacionesTab } from "@/components/features/evaluacion/ReclamacionesTab";
-import { BoletinesTab } from "@/components/features/alumnado/BoletinesTab";
-import { ExpedienteTab } from "@/components/features/alumnado/ExpedienteTab";
 import { EqavetTab } from "@/components/features/modulo/EqavetTab";
 import { PropuestasTab } from "@/components/features/modulo/PropuestasTab";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { SectionIndex } from "@/components/ui/SectionIndex";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import Link from "next/link";
 import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
 import { getApiBase } from "@/services/apiBase";
@@ -46,10 +45,7 @@ export default function ProgresoPage() {
   const [saveIsError, setSaveIsError] = useState(false);
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("resumen");
-  const [resumenView, setResumenView] = useState<"trimestral" | "progreso" | "estadisticas" | "analisis">("trimestral");
   const [analisisView, setAnalisisView] = useState<"grupal" | "individual">("grupal");
-  const [historicoView, setHistoricoView] = useState<"cambios" | "reclamaciones">("cambios");
-  const [individualView, setIndividualView] = useState<"boletin" | "expediente">("boletin");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -159,24 +155,34 @@ export default function ProgresoPage() {
           </span>
         )}
       </>, cleanLabel: t('tabs.calificaciones.historico.label', {defaultValue: 'Histórico'}) },
-    { id: "individual", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.individual.label', {defaultValue: 'Individual'})}</>, cleanLabel: t('tabs.calificaciones.individual.label', {defaultValue: 'Individual'}) },
     { id: "mejora", label: <><span className="inline-flex"><Shield className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.inicio.mejora.label', {defaultValue: 'Mejora'})}</>, cleanLabel: t('tabs.inicio.mejora.label', {defaultValue: 'Mejora'}) },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     resumen: t('tabs.calificaciones.resumen.desc', {defaultValue: 'Panel global de rendimiento: calificaciones medias, progreso por RA/UD, estadísticas y análisis comparativo.'}),
     historico: t('tabs.calificaciones.historico.desc', {defaultValue: 'Registro de cambios de nota y reclamaciones presentadas por el alumnado.'}),
-    individual: t('tabs.calificaciones.individual.desc', {defaultValue: 'Boletín y expediente de evidencias por alumno/a.'}),
     mejora: t('tabs.inicio.mejora.desc', {defaultValue: 'Gestión de la calidad, evaluación del proceso e indicadores para el módulo.'}),
   };
 
-  // Índice de bloques -- solo en pestañas con 2+ bloques reales. resumen/
-  // historico/individual quedan fuera: cada una tiene un switcher interno
-  // (estado, no Tabs) que cambia de vista sin cambiar activeTab, así que un
-  // índice plano por activeTab mostraría las anclas equivocadas cuando
-  // cambia el switcher. mejora es una pestaña apilada normal (EqavetTab +
-  // PropuestasTab), así que sí mapea limpiamente.
+  // Índice de bloques -- solo en pestañas con 2+ bloques reales. resumen e
+  // historico pasaron de switcher a bloques apilados con su propio
+  // SectionHeading (petición de Rafael, 2026-10-01), mismo patrón que el
+  // resto de la app. individual se eliminó como pestaña propia ese mismo
+  // día: Boletín y Expediente pasaron a Alumnado -> Individual (Secciones 7
+  // y 8), reutilizando el alumnado ya seleccionado allí en vez de duplicar
+  // el selector. mejora es una pestaña apilada normal (EqavetTab +
+  // PropuestasTab).
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
+    resumen: [
+      { id: "calificaciones-resumen-trimestral", label: t('tabs.calificaciones.resumenTrimestral', {defaultValue: 'Trimestral'})},
+      { id: "calificaciones-resumen-progreso", label: t('tabs.calificaciones.progresoRaUd', {defaultValue: 'Progreso RA-UD'})},
+      { id: "calificaciones-resumen-estadisticas", label: t('tabs.calificaciones.estadisticas.label', {defaultValue: 'Estadísticas'})},
+      { id: "calificaciones-resumen-analisis", label: t('tabs.calificaciones.analisis.label', {defaultValue: 'Análisis'})},
+    ],
+    historico: [
+      { id: "calificaciones-historico-cambios", label: t('tabs.calificaciones.cambiosNota', {defaultValue: 'Cambios de nota'})},
+      { id: "calificaciones-historico-reclamaciones", label: t('tabs.calificaciones.reclamaciones.label', {defaultValue: 'Reclamaciones'})},
+    ],
     mejora: [
       { id: "calificaciones-eqavet", label: t('checks.modulo.indicadoresCalidad', {defaultValue: 'Indicadores de calidad'}) },
       { id: "calificaciones-propuestas", label: t('campos.modulo.tituloPropuestasMejora', {defaultValue: 'Propuestas de Mejora (PDCA)'}) },
@@ -191,7 +197,7 @@ export default function ProgresoPage() {
         <Header breadcrumbSuffix={TABS.find(t => t.id === activeTab)?.label} />
 
         <main className="flex-1 content-area overflow-y-auto scrollbar-hide">
-          <StickyPageHeader icon={TrendingUp} title={t('nav.calificaciones', {defaultValue: 'Calificación'})} description={t('pages.evaluacion_desc')}>
+          <StickyPageHeader icon={TrendingUp} title={t('nav.calificaciones', {defaultValue: 'Cierre'})} description={t('pages.evaluacion_desc')}>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
                 <TabsList className="max-w-full">
@@ -226,9 +232,9 @@ export default function ProgresoPage() {
               {TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab}
             </p>
 
-            {/* Índice de bloques de la pestaña activa -- solo mejora tiene
-                entradas; resumen/historico/individual resuelven a [] y no
-                pintan nada (ver comentario junto a SECTION_INDEX_ITEMS). */}
+            {/* Índice de bloques de la pestaña activa -- individual resuelve
+                a [] y no pinta nada (ver comentario junto a
+                SECTION_INDEX_ITEMS). */}
             <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
           </StickyPageHeader>
 
@@ -247,41 +253,19 @@ export default function ProgresoPage() {
               (bloque "Progreso RA-UD") es el que ya calculaba esto de verdad, vía
               Motor JEG.
 
-              2026-09-23 (petición de Rafael): los 4 acordeones apilados se
-              cambian por un switcher (mismo patrón que ya usa Análisis para
-              Grupal/Individual) -- con acordeón, abrir cualquier sección
-              empujaba a las demás hacia abajo; con switcher solo se ve una
-              sección cada vez, sin perder ningún contenido. */}
+              2026-10-01 (petición de Rafael): los 4 bloques, que habían
+              pasado por acordeón (hasta 2026-09-23) y luego por switcher,
+              se apilan de nuevo como bloques independientes con su propio
+              SectionHeading + ancla, mismo patrón de índice que el resto de
+              la app -- el switcher ocultaba 3 de cada 4 bloques sin razón
+              una vez que la página ya tiene su propio índice de navegación
+              rápida en el header. */}
           {activeTab === "resumen" && (
-            <div className="space-y-4 animate-in fade-in duration-500">
-              <div className="inline-flex flex-wrap rounded-xl border border-[var(--glass-border)] bg-foreground/5 p-1 gap-1">
-                <button
-                  onClick={() => setResumenView("trimestral")}
-                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${resumenView === "trimestral" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
-                >
-                  <BarChart className="w-4 h-4" /> {t('tabs.calificaciones.resumenTrimestral', {defaultValue: 'Trimestral'})}
-                </button>
-                <button
-                  onClick={() => setResumenView("progreso")}
-                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${resumenView === "progreso" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
-                >
-                  <Target className="w-4 h-4" /> {t('tabs.calificaciones.progresoRaUd', {defaultValue: 'Progreso RA-UD'})}
-                </button>
-                <button
-                  onClick={() => setResumenView("estadisticas")}
-                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${resumenView === "estadisticas" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
-                >
-                  <BarChart className="w-4 h-4" /> {t('tabs.calificaciones.estadisticas.label', {defaultValue: 'Estadísticas'})}
-                </button>
-                <button
-                  onClick={() => setResumenView("analisis")}
-                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${resumenView === "analisis" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
-                >
-                  <LineChart className="w-4 h-4" /> {t('tabs.calificaciones.analisis.label', {defaultValue: 'Análisis'})}
-                </button>
-              </div>
-
-              {resumenView === "trimestral" && (
+            <div className="space-y-8 animate-in fade-in duration-500">
+              <div className="space-y-3">
+              <SectionHeading id="calificaciones-resumen-trimestral" icon={BarChart} scrollMt="260px">
+                {t('tabs.calificaciones.resumenTrimestral', {defaultValue: 'Trimestral'})}
+              </SectionHeading>
                 <div className="overflow-x-auto">
                   {(() => {
                     const instrumentosPct = (moduleData?.instrumentos_pct_trimestre && moduleData.instrumentos_pct_trimestre.length > 0)
@@ -468,90 +452,78 @@ export default function ProgresoPage() {
                     );
                   })()}
                 </div>
-              )}
+              </div>
 
-              {resumenView === "progreso" && <ProgresoRaTab />}
+              <div className="space-y-3">
+              <SectionHeading id="calificaciones-resumen-progreso" icon={Target} scrollMt="260px">
+                {t('tabs.calificaciones.progresoRaUd', {defaultValue: 'Progreso RA-UD'})}
+              </SectionHeading>
+              <ProgresoRaTab />
+              </div>
 
-              {resumenView === "estadisticas" && <EstadisticasTab />}
+              <div className="space-y-3">
+              <SectionHeading id="calificaciones-resumen-estadisticas" icon={PieChart} scrollMt="260px">
+                {t('tabs.calificaciones.estadisticas.label', {defaultValue: 'Estadísticas'})}
+              </SectionHeading>
+              <EstadisticasTab />
+              </div>
 
-              {resumenView === "analisis" && (
-                <div className="space-y-4">
-                  <div className="inline-flex rounded-xl border border-[var(--glass-border)] bg-foreground/5 p-1">
-                    <button
-                      onClick={() => setAnalisisView("grupal")}
-                      className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${analisisView === "grupal" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
-                    >
-                      <ClipboardList className="w-4 h-4" /> {t('tabs.grupal')}
-                    </button>
-                    <button
-                      onClick={() => setAnalisisView("individual")}
-                      className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${analisisView === "individual" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
-                    >
-                      <User className="w-4 h-4" /> {t('tabs.individual')}
-                    </button>
-                  </div>
-                  {analisisView === "grupal" ? <AnalisisGrupalTab /> : <AnalisisIndividualTab />}
+              <div className="space-y-3">
+              <SectionHeading id="calificaciones-resumen-analisis" icon={LineChart} scrollMt="260px">
+                {t('tabs.calificaciones.analisis.label', {defaultValue: 'Análisis'})}
+              </SectionHeading>
+              <div className="space-y-4">
+                <div className="inline-flex rounded-xl border border-[var(--glass-border)] bg-foreground/5 p-1">
+                  <button
+                    onClick={() => setAnalisisView("grupal")}
+                    className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${analisisView === "grupal" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
+                  >
+                    <ClipboardList className="w-4 h-4" /> {t('tabs.grupal')}
+                  </button>
+                  <button
+                    onClick={() => setAnalisisView("individual")}
+                    className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${analisisView === "individual" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
+                  >
+                    <User className="w-4 h-4" /> {t('tabs.individual')}
+                  </button>
                 </div>
-              )}
+                {analisisView === "grupal" ? <AnalisisGrupalTab /> : <AnalisisIndividualTab />}
+              </div>
+              </div>
             </div>
           )}
 
           {/* TAB 2: HISTÓRICO -- fusiona (2026-09-23) Histórico de cambios de
               nota y Reclamaciones: las dos son un registro que en la
-              práctica está vacío hasta que se usa, mismo patrón de switcher
-              que el resto de la página. */}
+              práctica está vacío hasta que se usa. 2026-10-01 (petición de
+              Rafael): de switcher a bloques apilados, mismo cambio que
+              Resumen más arriba. */}
           {activeTab === "historico" && (
-            <div className="animate-in fade-in duration-500 space-y-4">
-              <div className="inline-flex rounded-xl border border-[var(--glass-border)] bg-foreground/5 p-1">
-                <button
-                  onClick={() => setHistoricoView("cambios")}
-                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${historicoView === "cambios" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
-                >
-                  <History className="w-4 h-4" /> {t('tabs.calificaciones.cambiosNota', {defaultValue: 'Cambios de nota'})}
-                </button>
-                <button
-                  onClick={() => setHistoricoView("reclamaciones")}
-                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${historicoView === "reclamaciones" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
-                >
-                  <AlertOctagon className="w-4 h-4" /> {t('tabs.calificaciones.reclamaciones.label', {defaultValue: 'Reclamaciones'})}
+            <div className="space-y-8 animate-in fade-in duration-500">
+              <div className="space-y-3">
+              <SectionHeading id="calificaciones-historico-cambios" icon={History} scrollMt="260px">
+                {t('tabs.calificaciones.cambiosNota', {defaultValue: 'Cambios de nota'})}
+              </SectionHeading>
+              <HistorialCalificacionesTab />
+              </div>
+
+              <div className="space-y-3">
+              <SectionHeading id="calificaciones-historico-reclamaciones" icon={AlertOctagon} scrollMt="260px">
+                <span className="inline-flex items-center gap-2">
+                  {t('tabs.calificaciones.reclamaciones.label', {defaultValue: 'Reclamaciones'})}
                   {reclamacionesPendientes > 0 && (
-                    <span className="ml-1 inline-flex items-center justify-center min-w-[1.1rem] h-[1.1rem] px-1 rounded-full bg-danger text-white text-[10px] font-bold leading-none">
+                    <span className="inline-flex items-center justify-center min-w-[1.1rem] h-[1.1rem] px-1 rounded-full bg-danger text-white text-[10px] font-bold leading-none">
                       {reclamacionesPendientes}
                     </span>
                   )}
-                </button>
+                </span>
+              </SectionHeading>
+              <ReclamacionesTab />
               </div>
-              {historicoView === "cambios" ? <HistorialCalificacionesTab /> : <ReclamacionesTab />}
             </div>
           )}
 
-          {/* TAB 3: INDIVIDUAL -- fusiona (2026-09-23) Boletines y Expediente:
-              las dos son "ficha de un alumno" (comparten el mismo selector de
-              alumnado a la izquierda), solo cambia si se ve un informe
-              formateado para imprimir o la línea temporal en bruto de
-              evidencias. Expediente había llegado aquí desde Alumnado
-              (2026-09-20) porque la mayoría de sus fuentes son de evaluación. */}
-          {activeTab === "individual" && (
-            <div className="mt-4 animate-in fade-in duration-500 space-y-4">
-              <div className="inline-flex rounded-xl border border-[var(--glass-border)] bg-foreground/5 p-1">
-                <button
-                  onClick={() => setIndividualView("boletin")}
-                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${individualView === "boletin" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
-                >
-                  <FileText className="w-4 h-4" /> {t('tabs.calificaciones.boletines.label', {defaultValue: 'Boletines'})}
-                </button>
-                <button
-                  onClick={() => setIndividualView("expediente")}
-                  className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${individualView === "expediente" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
-                >
-                  <FileClock className="w-4 h-4" /> {t('tabs.alumnado.expediente.label', {defaultValue: 'Expediente'})}
-                </button>
-              </div>
-              {individualView === "boletin" ? <BoletinesTab /> : <ExpedienteTab />}
-            </div>
-          )}
-
-          {/* TAB 4: MEJORA -- traída desde Inicio (2026-09-25, petición de Rafael):
+          {/* TAB 3: MEJORA -- traída desde Inicio (2026-09-25, petición de Rafael):
               calidad EQAVET y propuestas de mejora del módulo. */}
           {activeTab === "mejora" && (
             <div className="mt-4 animate-in fade-in duration-500 space-y-6">

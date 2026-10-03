@@ -23,7 +23,7 @@ const COMPARATIVA_SECTION_IDS: Record<string, string> = {
   "📅 Curso: Calendario": "comparativa-calendario",
   "🎓 Curso: Alumnado": "comparativa-alumnado",
   "📝 Curso: Seguimiento": "comparativa-seguimiento",
-  "📊 Curso: Calificación": "comparativa-calificacion",
+  "📊 Curso: Cierre": "comparativa-calificacion",
   "📊 Resumen de cobertura por nivel": "comparativa-resumen-cobertura",
   "📝 Notas": "comparativa-notas",
 };

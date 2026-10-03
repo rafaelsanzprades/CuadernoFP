@@ -12,7 +12,9 @@ import { useTranslation } from "react-i18next";
    ────────────────────────────────────────────────────────────── */
 // bare: prueba (2026-09-28, /inicio?tab=bienvenida) -- sin el cajón global;
 // en su lugar, cada pastilla lleva su propio marquito blanco fino.
-export function SectionIndex({ items, bare = false }: { items: { id: string; label: string }[]; bare?: boolean }) {
+// onItemClick: gancho opcional para que la página haga algo extra al pulsar
+// una pastilla (p.ej. desplegar el acordeón al que apunta el ancla).
+export function SectionIndex({ items, bare = false, onItemClick }: { items: { id: string; label: string }[]; bare?: boolean; onItemClick?: (id: string) => void }) {
   const { t } = useTranslation();
   if (items.length === 0) return null;
   return (
@@ -24,6 +26,7 @@ export function SectionIndex({ items, bare = false }: { items: { id: string; lab
         <a
           key={item.id}
           href={`#${item.id}`}
+          onClick={onItemClick ? () => onItemClick(item.id) : undefined}
           className={`text-caption font-medium px-3 py-1.5 rounded-lg text-white hover:bg-white/10 transition-colors ${bare ? "border border-white/20" : ""}`}
         >
           {item.label}

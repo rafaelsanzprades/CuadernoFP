@@ -50,8 +50,8 @@ export default function DocumentosPage() {
       { id: "ccaa-tabla", label: t('campos.catalogo.tituloTablaComunidades', {defaultValue: 'Tabla de comunidades autónomas'}) },
     ],
     bibliografia: [
-      { id: "bib-general", label: t('campos.normativa.normativaGeneral', {defaultValue: 'Normativa general'}) },
-      { id: "bib-autonomica", label: t('campos.normativa.normativaAutonomicaTitulo', {defaultValue: 'Normativa autonómica'}) },
+      { id: "bib-general", label: t('campos.normativa.normativaGeneral', {defaultValue: 'Referencias generales'}) },
+      { id: "bib-autonomica", label: t('campos.normativa.normativaAutonomicaTitulo', {defaultValue: 'Referencias autonómicas'}) },
     ],
     legislacion: [
       { id: "leg-grados", label: t('checks.catalogo.gradosDelAAlE', {defaultValue: 'Grados del A al E'}) },

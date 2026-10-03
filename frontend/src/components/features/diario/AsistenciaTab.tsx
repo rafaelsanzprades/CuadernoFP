@@ -1,77 +1,65 @@
 ﻿"use client";
-import { BarChart2, ClipboardEdit, Settings, Users, AlertTriangle, Info } from "lucide-react";
-import { useState } from "react";
+import { BarChart2, ClipboardEdit, Settings, Users, AlertTriangle } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { AttendanceGrid } from "@/components/features/diario/AttendanceGrid";
 import { AttendanceAccumulated } from "@/components/features/diario/AttendanceAccumulated";
 import { AlertaAbandonoTab } from "@/components/features/diario/AlertaAbandonoTab";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 
+// Hoy / Acumulado trimestral / Alertas de abandono: antes pestañas internas
+// (switcher), ahora bloques apilados con su SectionHeading + índice en la
+// cabecera de Seguimiento (petición de Rafael, 2026-10-02). Las alertas
+// vinieron de Alumnado (2026-09-20): son un indicador automático
+// (asistencia+notas reales, Indicador 1.5 del Sistema Estatal), no algo
+// ligado al rol de tutor/a.
 export function AsistenciaTab() {
   const { t } = useTranslation();
   const { activeModuleId, cursoData } = useAppStore();
-  const [activeTab, setActiveTab] = useState("hoy");
 
-  const TABS = [
-    { id: "hoy", label: <span className="flex items-center gap-2"><ClipboardEdit className="w-4 h-4"/> {t('checks.diario.hoy', {defaultValue: 'Hoy'})}</span>, cleanLabel: t('checks.diario.hoy', {defaultValue: 'Hoy'}) },
-    { id: "acumulado", label: <span className="flex items-center gap-2"><BarChart2 className="w-4 h-4"/> {t('checks.diario.acumuladoTrimestral', {defaultValue: 'Acumulado trimestral'})}</span>, cleanLabel: t('checks.diario.acumuladoTrimestral', {defaultValue: 'Acumulado trimestral'}) },
-    // Traída desde Alumnado (2026-09-20, petición de Rafael): es un indicador
-    // automático (asistencia+notas reales, Indicador 1.5 del Sistema Estatal),
-    // no algo ligado al rol de tutor/a -- encaja mejor aquí, junto al resto de
-    // vistas de asistencia, que en Alumnado.
-    { id: "alertas", label: <span className="flex items-center gap-2"><AlertTriangle className="w-4 h-4"/> {t('checks.diario.alertasAbandono', {defaultValue: 'Alertas de abandono'})}</span>, cleanLabel: t('checks.diario.alertasAbandono', {defaultValue: 'Alertas de abandono'}) },
-  ];
+  if (!activeModuleId || !cursoData) {
+    return (
+      <EmptyState
+        icon={Users}
+        title={t('tooltips.diario.ningunCursoActivo', {defaultValue: 'Ningún curso activo'})}
+        description={
+          <>
+            Para pasar lista necesitas tener un Curso activo con alumnado matriculados.
+          </>
+        }
+        action={
+          <Link href="/inicio?tab=datos" className="glass-button bg-accent/10 text-accent hover:bg-accent/20 px-6 py-3 rounded-lg font-bold flex items-center gap-2">
+            Ir a Inicio <Settings className="w-5 h-5" />
+          </Link>
+        }
+      />
+    );
+  }
 
   return (
-    <>
-      <div className="space-y-8 animate-in fade-in duration-500">
-      <div>
-        <h2 className="text-subheading font-bold flex items-center gap-3 text-foreground">
-          <Users className="w-8 h-8 text-accent" /> Control de asistencia
-        </h2>
-        <p className="text-muted mt-2">
-          Pasa lista diaria o revisa el estado acumulado de las faltas y las alertas PdEvC.
-        </p>
+    <div className="space-y-8 animate-in fade-in duration-500">
+      <div className="space-y-3">
+        <SectionHeading id="asistencia-hoy" icon={ClipboardEdit} scrollMt="260px">
+          {t('checks.diario.hoy', {defaultValue: 'Hoy'})}
+        </SectionHeading>
+        <AttendanceGrid />
       </div>
 
-      <div className="flex border-b border-[var(--glass-border)] overflow-x-auto scrollbar-hide">
-        {TABS.map(tab => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`px-6 py-4 font-semibold text-body border-b-2 transition-colors whitespace-nowrap ${activeTab === tab.id ? 'border-accent text-accent' : 'border-transparent text-muted hover:text-foreground'}`}
-          >
-            {tab.label}
-          </button>
-        ))}
+      <div className="space-y-3">
+        <SectionHeading id="asistencia-acumulado" icon={BarChart2} scrollMt="260px">
+          {t('checks.diario.acumuladoTrimestral', {defaultValue: 'Acumulado trimestral'})}
+        </SectionHeading>
+        <AttendanceAccumulated />
       </div>
 
-      {(!activeModuleId || !cursoData) ? (
-        <EmptyState
-          icon={Users}
-          title={t('tooltips.diario.ningunCursoActivo', {defaultValue: 'Ningún curso activo'})}
-          description={
-            <>
-              Para pasar lista necesitas tener un Curso activo con alumnado matriculados.
-            </>
-          }
-          action={
-            <Link href="/inicio?tab=datos" className="glass-button bg-accent/10 text-accent hover:bg-accent/20 px-6 py-3 rounded-lg font-bold flex items-center gap-2">
-              Ir a Inicio <Settings className="w-5 h-5" />
-            </Link>
-          }
-        />
-      ) : (
-        <>
-          {activeTab === "hoy" && <AttendanceGrid />}
-          {activeTab === "acumulado" && <AttendanceAccumulated />}
-          {activeTab === "alertas" && <AlertaAbandonoTab />}
-        </>
-      )}
+      <div className="space-y-3">
+        <SectionHeading id="asistencia-alertas" icon={AlertTriangle} scrollMt="260px">
+          {t('checks.diario.alertasAbandono', {defaultValue: 'Alertas de abandono'})}
+        </SectionHeading>
+        <AlertaAbandonoTab />
+      </div>
     </div>
-    </>
   );
 }
-

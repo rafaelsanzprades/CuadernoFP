@@ -324,9 +324,9 @@ export default function InicioPage() {
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
     bienvenida: [
       { id: "bienvenida-descarga-escritorio", label: t('campos.inicio.aplicacionEscritorioTitulo', {defaultValue: 'Aplicación de escritorio para Windows'}) },
+      { id: "bienvenida-contrib-telegram", label: t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'}) },
       { id: "bienvenida-metodologia", label: t('campos.inicio.metodologiaEspecificaTitulo', {defaultValue: 'Metodología específica de Formación Profesional'}) },
       { id: "bienvenida-mapa", label: t('campos.inicio.mapaWebTitulo', {defaultValue: 'Mapa del web'}) },
-      { id: "bienvenida-contrib-telegram", label: t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'}) },
       { id: "bienvenida-contrib-comunidades", label: t('campos.inicio.contribuidoresCcaaTitulo', {defaultValue: 'Contribuidores por Comunidad Autónoma'}) },
     ],
     verificacion: [
@@ -418,6 +418,34 @@ export default function InicioPage() {
               <Card className="p-6">
                 <VersionBar />
               </Card>
+            </div>
+
+            {/* Grupo oficial de Telegram -- traído aquí justo detrás de
+                Aplicación de escritorio (antes al final, tras el Mapa del
+                web; petición de Rafael, 2026-09-30). */}
+            <div className="space-y-3">
+              <SectionHeading id="bienvenida-contrib-telegram" icon={MessageCircle} scrollMt="260px">
+                {t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'})}
+              </SectionHeading>
+              <div className="flex flex-col md:flex-row items-center gap-5 p-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
+                <div className="w-12 h-12 shrink-0 rounded-full bg-[#229ED9]/10 flex items-center justify-center">
+                  <MessageCircle className="w-6 h-6 text-[#229ED9]" />
+                </div>
+                <div className="flex-1 text-center md:text-left">
+                  <p className="text-body text-muted leading-tight">
+                    {t('campos.inicio.grupoTelegramDesc', {defaultValue: 'Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad Autónoma.'})}
+                  </p>
+                </div>
+                <a
+                  href="https://t.me/cuadernofp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 px-5 py-2.5 rounded-lg bg-[#229ED9] text-white font-medium hover:bg-[#229ED9]/90 transition-colors flex items-center gap-2 text-body"
+                >
+                  <Send className="w-4 h-4" />
+                  {t('botones.inicio.unirseTelegram', {defaultValue: 'Unirme al grupo en Telegram'})}
+                </a>
+              </div>
             </div>
 
             {/* Módulos recientes (ítem 35) — reabrir con un clic, no se muestra si no hay ninguno */}
@@ -533,36 +561,11 @@ export default function InicioPage() {
               </div>
             </div>
 
-          </div>
-
-                {/* Contribuciones -- movida aquí desde Ayuda (antes pestaña
-                    propia, eliminada, petición de Rafael, 2026-09-30), como
-                    último bloque de Bienvenida. */}
-                <div className="space-y-3">
-                  <SectionHeading id="bienvenida-contrib-telegram" icon={MessageCircle} scrollMt="260px">
-                    {t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'})}
-                  </SectionHeading>
-                  <div className="flex flex-col md:flex-row items-center gap-5 p-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
-                    <div className="w-12 h-12 shrink-0 rounded-full bg-[#229ED9]/10 flex items-center justify-center">
-                      <MessageCircle className="w-6 h-6 text-[#229ED9]" />
-                    </div>
-                    <div className="flex-1 text-center md:text-left">
-                      <p className="text-body text-muted leading-tight">
-                        {t('campos.inicio.grupoTelegramDesc', {defaultValue: 'Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad Autónoma.'})}
-                      </p>
-                    </div>
-                    <a
-                      href="https://t.me/cuadernofp"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="shrink-0 px-5 py-2.5 rounded-lg bg-[#229ED9] text-white font-medium hover:bg-[#229ED9]/90 transition-colors flex items-center gap-2 text-body"
-                    >
-                      <Send className="w-4 h-4" />
-                      {t('botones.inicio.unirseTelegram', {defaultValue: 'Unirme al grupo en Telegram'})}
-                    </a>
-                  </div>
-                </div>
-
+                {/* Contribuidores por CCAA -- último bloque de Bienvenida
+                    (Grupo de Telegram se movió detrás de "Aplicación de
+                    escritorio", 2026-09-30). Se queda dentro del mismo
+                    contenedor `space-y-12` de arriba para heredar la
+                    separación vertical respecto al Mapa del web. */}
                 <div className="space-y-3">
                   <SectionHeading id="bienvenida-contrib-comunidades" icon={Users} scrollMt="260px">
                     {t('campos.inicio.contribuidoresCcaaTitulo', {defaultValue: 'Contribuidores por Comunidad Autónoma'})}
@@ -594,6 +597,8 @@ export default function InicioPage() {
                     ))}
                   </div>
                 </div>
+
+          </div>
 
               </div>
             )}
@@ -632,7 +637,7 @@ export default function InicioPage() {
                     {dataSource === 'demo' ? (
                       <>
                         <Cloud className="w-4 h-4 shrink-0" />
-                        <span><strong className="font-bold">DEMO:</strong> {t('campos.archivos.avisoDemoDesc', {defaultValue: 'estás viendo datos de ejemplo. No es tu curso real y no se guarda nada en disco — cambia a REALES para trabajar con tus propios archivos.'})}</span>
+                        <span><strong className="font-bold">DEMO:</strong> {t('campos.archivos.avisoDemoDesc', {defaultValue: 'datos de ejemplo, nada se guarda. Cambia a REALES para tus propios archivos.'})}</span>
                       </>
                     ) : (
                       <>

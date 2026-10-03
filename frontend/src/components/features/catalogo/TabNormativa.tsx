@@ -842,8 +842,8 @@ export function TabNormativa({ searchQuery = "" }: Props) {
     ])
   );
 
-  const GENERAL_TITULO = t('campos.normativa.normativaGeneral', {defaultValue: 'Normativa general'});
-  const AUTONOMICA_TITULO = t('campos.normativa.normativaAutonomicaTitulo', {defaultValue: 'Normativa autonómica'});
+  const GENERAL_TITULO = t('campos.normativa.normativaGeneral', {defaultValue: 'Referencias generales'});
+  const AUTONOMICA_TITULO = t('campos.normativa.normativaAutonomicaTitulo', {defaultValue: 'Referencias autonómicas'});
 
   return (
     <div className="space-y-6 animate-fade-in pb-8">

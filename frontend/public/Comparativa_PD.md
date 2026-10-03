@@ -293,7 +293,7 @@ instrumento más.
 
 ---
 
-## 📊 Curso: Calificación
+## 📊 Curso: Cierre
 
 > Página mayormente de solo lectura ("visor"): resume y analiza las notas introducidas en Seguimiento →
 > Notas. **Actualizado 2026-09-20/21:** ahora tiene 5 pestañas (antes 3): Resumen, Histórico,

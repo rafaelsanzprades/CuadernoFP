@@ -1,7 +1,7 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import { Calendar, Circle, ClipboardList, Search, Settings, Flag, FolderOpen, Bus, Briefcase, Lock } from "lucide-react";
+import { Calendar, CalendarDays, Circle, ClipboardList, Search, Settings, Flag, FolderOpen, Briefcase, Lock } from "lucide-react";
 import React, { useEffect, useMemo, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -16,6 +16,7 @@ import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionIndex } from "@/components/ui/SectionIndex";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
+import { InteractiveCalendar } from "@/components/features/dashboard/InteractiveCalendar";
 import { getAutoMilestones } from "@/utils/calendarMilestones";
 import Link from "next/link";
 import { getApiBase } from "@/services/apiBase";
@@ -242,7 +243,7 @@ function NotesTable({ calendar_notes, onUpdateNotes, autoMilestones, feoeIni, fe
 
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function CalendarioPage() {
-  const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, activeModuleId, moduleData, setModuleData, updateDataFrame } = useAppStore();
+  const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, activeModuleId, moduleData, setModuleData } = useAppStore();
   // cursoData.planning_ledger es un campo persistido que nunca se escribe
   // (no hay ningún punto de la app que lo guarde) — la asignación real de
   // UD por día se recalcula en memoria vía useDynamicPlanning, igual que en
@@ -257,17 +258,16 @@ export default function CalendarioPage() {
 
   const TABS = [
     { id: "fechas", label: <span className="flex items-center gap-2"><Settings className="w-4 h-4 shrink-0" /> {t('tabs.calendario.fechas.label', {defaultValue: 'Fechas y horario'})}</span>, cleanLabel: t('tabs.calendario.fechas.label', {defaultValue: 'Fechas y horario'}) },
-    { id: "periodo-feoe", label: <span className="flex items-center gap-2"><Briefcase className="w-4 h-4 shrink-0" /> {t('tabs.calendario.periodoFeoe.label', {defaultValue: 'Periodo FEOE'})}</span>, cleanLabel: t('tabs.calendario.periodoFeoe.label', {defaultValue: 'Periodo FEOE'}) },
     { id: "eventos", label: <span className="flex items-center gap-2"><Flag className="w-4 h-4 shrink-0" /> {t('tabs.calendario.eventos.label', {defaultValue: 'Eventos y festivos'})}</span>, cleanLabel: t('tabs.calendario.eventos.label', {defaultValue: 'Eventos y festivos'}) },
-    { id: "actividades", label: <span className="flex items-center gap-2"><Bus className="w-4 h-4 shrink-0" /> {t('tabs.calendario.actividades.label', {defaultValue: 'Complementarias y extraescolares'})}</span>, cleanLabel: t('tabs.calendario.actividades.label', {defaultValue: 'Complementarias y extraescolares'}) },
+    // Traída desde Agenda (2026-10-02, petición de Rafael): vista mensual del
+    // calendario con las sesiones planificadas.
+    { id: "mensual", label: <span className="flex items-center gap-2"><CalendarDays className="w-4 h-4 shrink-0" /> {t('tabs.calendario.mensual.label', {defaultValue: 'Mensual'})}</span>, cleanLabel: t('tabs.calendario.mensual.label', {defaultValue: 'Mensual'}) },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    fechas: t('tabs.calendario.fechas.desc', {defaultValue: 'Configura las fechas generales, los trimestres y el horario semanal del curso.'}),
-    'periodo-feoe': t('tabs.calendario.periodoFeoe.desc', {defaultValue: 'Configuración específica para FP Dual (FEOE).'}),
+    fechas: t('tabs.calendario.fechas.desc', {defaultValue: 'Configura las fechas generales, el horario semanal, los trimestres y el periodo FEOE del curso.'}),
     eventos: t('tabs.calendario.eventos.desc', {defaultValue: 'Registro de eventos y festivos que afectan a la docencia.'}),
-    actividades: t('tabs.calendario.actividades.desc', {defaultValue: 'Planificación de actividades complementarias y extraescolares.'}),
-    visual: t('tabs.calendario.visual.desc', {defaultValue: 'Vista mensual del calendario académico completo.'}),
+    mensual: t('tabs.calendario.mensual.desc', {defaultValue: 'Vista mensual y calendario interactivo con fechas clave y sesiones planificadas.'}),
   };
 
   // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
@@ -277,32 +277,11 @@ export default function CalendarioPage() {
       { id: "calendario-horario-semanal", label: t('campos.calendario.horarioSemanalTitulo', {defaultValue: 'Horario semanal'}) },
       { id: "calendario-semana-lectiva", label: t('campos.calendario.semanaLectivaTitulo', {defaultValue: 'Semana lectiva'}) },
       { id: "calendario-trimestres", label: t('campos.calendario.trimestresTitulo', {defaultValue: 'Trimestres'}) },
+      { id: "calendario-periodo-feoe", label: t('campos.calendario.periodoFeoeTitulo', {defaultValue: 'Periodo FEOE'}) },
     ],
   };
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
-
-  const df_ace = moduleData?.df_ace || [];
-  const df_ra = moduleData?.df_ra || [];
-
-  const addRowAce = () => {
-    const newDf = [...df_ace];
-    const newId = `ACE${(newDf.length + 1).toString().padStart(2, '0')}`;
-    newDf.push({ ID: newId, Tipo: "Complementaria", RA_Vinculados: "", Actividad: "", Trimestre: "1T", Entidad: "", Evaluacion: "" });
-    updateDataFrame("df_ace", newDf);
-  };
-
-  const updateRowAce = (idx: number, field: string, value: any) => {
-    const newDf = [...df_ace];
-    newDf[idx][field] = value;
-    updateDataFrame("df_ace", newDf);
-  };
-
-  const removeRowAce = (idx: number) => {
-    const newDf = [...df_ace];
-    newDf.splice(idx, 1);
-    updateDataFrame("df_ace", newDf);
-  };
 
   useEffect(() => {
     if (activeCursoId && !cursoData) {
@@ -699,17 +678,12 @@ export default function CalendarioPage() {
               </Card>
               </div>
 
-
-
-                </div>
-              )}
-
-              {activeTab === 'periodo-feoe' && (
-                <div className="space-y-4 mt-4">
+              {/* Periodo FEOE (antes pestaña propia, movida aquí 2026-10-02,
+                  petición de Rafael) */}
                   {/* FP Dual / FEOE - 5 columnas */}
                   <div className="space-y-3">
                   <SectionHeading id="calendario-periodo-feoe" scrollMt="260px">
-                    {t('tabs.calendario.periodoFeoe.label', {defaultValue: 'Periodo FEOE'})}
+                    {t('campos.calendario.periodoFeoeTitulo', {defaultValue: 'Periodo FEOE'})}
                   </SectionHeading>
                   <Card className="p-6 border-t-4 border-t-orange-500 overflow-visible">
                     <div className="grid grid-cols-5 gap-4 items-end">
@@ -774,6 +748,7 @@ export default function CalendarioPage() {
                     </div>
                   </Card>
                   </div>
+
                 </div>
               )}
 
@@ -799,66 +774,19 @@ export default function CalendarioPage() {
                 </div>
               )}
 
-              {activeTab === 'actividades' && (
-                <Card className="p-6 border-t-4 border-t-[#14a085] mt-4">
-                  <div className="overflow-x-auto mb-4">
-                    <table className="w-full text-left text-body border-collapse whitespace-nowrap">
-                      <thead>
-                        <tr className="border-b border-[var(--glass-border)] text-muted">
-                          <th className="p-2 w-16">{t('tablas.calendario.id', {defaultValue: 'Id'})}</th>
-                          <th className="p-2 w-32">{t('common.tipo', {defaultValue: 'Tipo'})}</th>
-                          <th className="p-2 w-32">{t('tablas.calendario.raVinculados', {defaultValue: 'RA vinculados'})}</th>
-                          <th className="p-2 min-w-[200px]">{t('common.descripcion', {defaultValue: 'Descripción'})}</th>
-                          <th className="p-2 w-24">{t('tablas.calendario.trimestre', {defaultValue: 'Trimestre'})}</th>
-                          <th className="p-2 w-48">{t('tablas.calendario.entidad', {defaultValue: 'Entidad'})}</th>
-                          <th className="p-2 w-48">{t('tablas.calendario.evaluacion', {defaultValue: 'Evaluación'})}</th>
-                          <th className="p-2 w-10"></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {df_ace.map((row: any, idx: number) => (
-                          <tr key={row.ID || idx} className="border-b border-white/5 hover:bg-foreground/5">
-                            <td className="p-2 font-mono text-caption">{row.ID}</td>
-                            <td className="p-2 pr-2">
-                              <select value={row.Tipo || "Complementaria"} onChange={e => updateRowAce(idx, "Tipo", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-[#14a085] focus:outline-none">
-                                <option value="Complementaria">{t('checks.calendario.tipoComplementaria', {defaultValue: 'Complementaria'})}</option>
-                                <option value="Extraescolar">{t('checks.calendario.tipoExtraescolar', {defaultValue: 'Extraescolar'})}</option>
-                              </select>
-                            </td>
-                            <td className="p-2 pr-2">
-                              <select value={row.RA_Vinculados || ""} onChange={e => updateRowAce(idx, "RA_Vinculados", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-[#14a085] focus:outline-none">
-                                <option value="">-</option>
-                                {df_ra.map((ra: any) => ra.id_ra && <option key={ra.id_ra} value={ra.id_ra}>{ra.id_ra}</option>)}
-                              </select>
-                            </td>
-                            <td className="p-2 pr-2">
-                              <input type="text" value={row.Actividad || ""} onChange={e => updateRowAce(idx, "Actividad", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-[#14a085] focus:outline-none" />
-                            </td>
-                            <td className="p-2 pr-2">
-                              <select value={row.Trimestre || "1T"} onChange={e => updateRowAce(idx, "Trimestre", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-[#14a085] focus:outline-none">
-                                <option value="1T">1t</option>
-                                <option value="2T">2t</option>
-                                <option value="3T">3t</option>
-                              </select>
-                            </td>
-                            <td className="p-2 pr-2">
-                              <input type="text" value={row.Entidad || ""} onChange={e => updateRowAce(idx, "Entidad", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-[#14a085] focus:outline-none" />
-                            </td>
-                            <td className="p-2 pr-2">
-                              <input type="text" value={row.Evaluacion || ""} onChange={e => updateRowAce(idx, "Evaluacion", e.target.value)} className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 focus:border-[#14a085] focus:outline-none" />
-                            </td>
-                            <td className="p-2 text-center">
-                              <button onClick={() => removeRowAce(idx)} className="text-danger hover:text-danger font-bold">×</button>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                  <button onClick={addRowAce} className="text-body text-[#14a085] hover:text-[#1abc9c] font-semibold flex items-center gap-1">
-                    <span>+</span> {t('botones.calendario.anadirActividadComplementaria', {defaultValue: 'Añadir actividad complementaria'})}
-                  </button>
-                </Card>
+              {activeTab === 'mensual' && (
+                <div className="mt-4 animate-in fade-in duration-500">
+                  <InteractiveCalendar
+                    info_fechas={info_fechas}
+                    horario={horario}
+                    calendar_notes={calendar_notes}
+                    planning_ledger={planningLedger}
+                    onUpdateNote={(key, val) => {
+                      if (!cursoData) return;
+                      setCursoData({ ...cursoData, calendar_notes: { ...cursoData.calendar_notes, [key]: val } });
+                    }}
+                  />
+                </div>
               )}
 
             </div>

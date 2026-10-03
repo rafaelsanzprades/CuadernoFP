@@ -3,16 +3,21 @@ import { useAppStore } from '@/store/useAppStore';
 import { Alumnado, ResultadoAprendizaje } from '@/types';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { Printer, FileText, Users, Award, Briefcase, GraduationCap, Target, BarChart as BarChartIcon } from 'lucide-react';
+import { Printer, Award, Briefcase, GraduationCap, Target, BarChart as BarChartIcon } from 'lucide-react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { resolveDescRa, loadCatalogForModule, resolveModuloNombre, resolveModuloTituloFp } from '@/services/catalogCache';
 import { isAlumnoActivo } from '@/utils/alumnado';
 import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, filtrarPorGev } from '@/utils/calificaciones';
 import { useTranslation } from 'react-i18next';
 
-export const BoletinesTab = () => {
+// Boletín individual de un alumno/a concreto, embebido como Sección 7 en
+// Alumnado -> Individual (OrientacionIndividualTab), que ya tiene su propio
+// selector de alumnado -- studentId viene de ahí, este componente no pinta
+// uno propio (antes vivía como pestaña independiente en Calificaciones ->
+// Individual, eliminada el 2026-10-01 al traer este contenido aquí).
+export const BoletinesTab = ({ studentId }: { studentId: string }) => {
   const { t } = useTranslation();
-  const { cursoData, moduleData, activeCursoId, activeModuleId } = useAppStore();
+  const { cursoData, moduleData, activeModuleId } = useAppStore();
 
   const [, setCatalogLoaded] = useState(0);
   useEffect(() => { if (activeModuleId) loadCatalogForModule(activeModuleId, moduleData?.info_modulo?.titulo_codigo).then(() => setCatalogLoaded(Date.now())); }, [activeModuleId]);
@@ -20,9 +25,7 @@ export const BoletinesTab = () => {
   const df_al = cursoData?.df_al || [];
   const activeStudents = df_al.filter(isAlumnoActivo).sort((a, b) => (a.Apellidos || '').localeCompare(b.Apellidos || ''));
 
-  const [selectedStudentId, setSelectedStudentId] = useState<string>(activeStudents.length > 0 ? activeStudents[0].ID || '' : '');
-
-  const currentStudent = activeStudents.find(s => s.ID === selectedStudentId);
+  const currentStudent = activeStudents.find(s => s.ID === studentId);
   const df_ra = moduleData?.df_ra || [];
   const df_ce = moduleData?.df_ce || [];
   const info_modulo = moduleData?.info_modulo || {};
@@ -61,19 +64,19 @@ export const BoletinesTab = () => {
   }
 
   return (
-    <div className="flex gap-6 h-[calc(100vh-280px)] min-h-[500px]">
-      
+    <div>
+
       <style dangerouslySetInnerHTML={{__html: `
         @media print {
           body * { visibility: hidden; }
           .printable-boletin, .printable-boletin * { visibility: visible; }
-          .printable-boletin { 
-            position: absolute; 
-            left: 0; 
-            top: 0; 
-            width: 100%; 
-            margin: 0; 
-            padding: 2cm; 
+          .printable-boletin {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            margin: 0;
+            padding: 2cm;
             background: white !important;
             color: black !important;
           }
@@ -85,56 +88,16 @@ export const BoletinesTab = () => {
         }
       `}} />
 
-      {/* Sidebar List (Hidden on Print) */}
-      <div className="w-80 bg-foreground/5 border border-white/5 rounded-2xl flex flex-col overflow-hidden shrink-0 no-print">
-        <div className="p-4 border-b border-white/5 bg-foreground/10">
-          <div className="text-caption font-medium text-muted tracking-wider">
-            {t('campos.alumnado.alumnadoActivoTitulo', {count: activeStudents.length, defaultValue: 'Alumnado Activo ({{count}})'})}
-          </div>
-        </div>
-        <div className="flex-1 overflow-y-auto p-2 space-y-1 scrollbar-hide">
-          {activeStudents.map((al) => {
-            const isSelected = al.ID === selectedStudentId;
-            return (
-              <button
-                key={al.ID}
-                onClick={() => setSelectedStudentId(al.ID || '')}
-                className={`w-full text-left px-3.5 py-3 rounded-xl transition-all flex items-center justify-between ${
-                  isSelected 
-                    ? 'bg-accent text-background font-bold shadow-md shadow-accent/15'
-                    : 'text-foreground/80 hover:bg-foreground/5'
-                }`}
-              >
-                <div className="truncate pr-2">
-                  <div className="text-body truncate">
-                    {al.Apellidos}, {al.Nombre}
-                  </div>
-                  <div className={`text-caption font-mono ${isSelected ? 'text-background/80' : 'text-muted'}`}>
-                    {al.ID}
-                  </div>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Main Report Area */}
-      <div className="flex-1 bg-background/5 border border-white/5 rounded-2xl flex flex-col overflow-hidden relative">
+      <div className="bg-background/5 border border-white/5 rounded-2xl overflow-hidden relative">
         {currentStudent ? (
           <>
-            <div className="p-6 border-b border-white/5 bg-foreground/10 flex justify-between items-center shrink-0 no-print">
-              <div>
-                <h3 className="text-subheading font-black text-foreground flex items-center gap-2">
-                  <FileText className="w-5 h-5 text-accent" /> {t('campos.alumnado.boletinIndividualTitulo', {defaultValue: 'Boletín individual de calificaciones'})}
-                </h3>
-              </div>
+            <div className="p-4 border-b border-white/5 bg-foreground/10 flex justify-end items-center shrink-0 no-print">
               <Button onClick={handlePrint} className="bg-accent text-background hover:bg-accent/80 font-bold px-4 py-2 rounded-xl flex items-center gap-2">
                 <Printer className="w-4 h-4" /> {t('botones.alumnado.imprimirBoletin', {defaultValue: 'Imprimir boletín'})}
               </Button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-6 scrollbar-hide">
+            <div className="p-6">
               {/* PRINTABLE AREA */}
               <div className="printable-boletin bg-background p-8 rounded-xl border border-white/5 shadow-sm w-full text-foreground">
                 
@@ -244,10 +207,8 @@ export const BoletinesTab = () => {
             </div>
           </>
         ) : (
-          <div className="flex-1 flex flex-col justify-center items-center text-center p-8 text-muted">
-            <Users className="w-12 h-12 text-muted/50 mb-3" />
+          <div className="flex flex-col justify-center items-center text-center p-8 text-muted">
             <p className="font-semibold text-subheading">{t('campos.alumnado.seleccionaAlumnadoTitulo', {defaultValue: 'Selecciona alumnado'})}</p>
-            <p className="text-body opacity-80">{t('campos.alumnado.seleccionaAlumnadoDesc', {defaultValue: 'Elige alumnado del panel izquierdo para visualizar su boletín.'})}</p>
           </div>
         )}
       </div>

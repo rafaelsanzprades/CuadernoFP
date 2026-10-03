@@ -45,43 +45,21 @@
     "familias": "Families",
     "titulos": "Titles",
     "modulos": "Modules",
-    "agenda": {
-      "actual": {
-        "label": "Current",
-        "desc": "Summary of today's classes, the context of the week and the progress of the teaching unit currently underway."
-      },
-      "planificacion": {
-        "label": "Progress",
-        "desc": "Monthly planning and tracking of the programming."
-      },
-      "progreso-ra-ud": {
-        "label": "Forecast: learning outcomes & units",
-        "desc": "Progress of learning outcomes based on the status and weighting of the teaching units delivered."
-      },
-      "mensual": {
-        "label": "Monthly",
-        "desc": "Monthly view and interactive calendar with key dates."
-      }
-    },
     "calendario": {
       "fechas": {
         "label": "Dates and schedule",
         "desc": "Configure the course's general dates, terms and weekly schedule."
       },
-      "periodoFeoe": {
-        "label": "FEOE period",
-        "desc": "Specific configuration for dual VET (FEOE)."
-      },
       "eventos": {
         "label": "Events and holidays",
         "desc": "Record of events and holidays that affect teaching."
       },
-      "actividades": {
-        "label": "Complementary and extracurricular",
-        "desc": "Planning of complementary and extracurricular activities."
-      },
       "visual": {
         "desc": "Monthly view of the complete academic calendar."
+      },
+      "mensual": {
+        "label": "Monthly",
+        "desc": "Monthly view and interactive calendar with key dates and planned sessions."
       }
     },
     "alumnado": {
@@ -100,9 +78,9 @@
         "label": "Trends",
         "desc": "Aggregates and trends for the group's professional profile, and a filterable table of all students."
       },
-      "expediente": {
-        "label": "Record",
-        "desc": "Timeline of evidence per student: grades, appeals, attendance and class diary."
+      "notas": {
+        "label": "Grades",
+        "desc": "Entry of numerical grades by student, evaluation instrument and level of RA attainment."
       }
     },
     "seguimiento": {
@@ -114,13 +92,13 @@
         "label": "Attendance",
         "desc": "Student attendance control."
       },
-      "detalle": {
-        "label": "Grades",
-        "desc": "Entry of numerical grades by student, evaluation instrument and level of RA attainment."
-      },
       "empresaFeoe": {
         "label": "FEOE company",
         "desc": "Assessment of students at the company during the FEOE (Annex XI b), transcribed by RA/CE."
+      },
+      "planificacion": {
+        "label": "Progress",
+        "desc": "Monthly planning of the teaching units and progress of the learning outcomes based on what has been delivered."
       }
     },
     "calificaciones": {
@@ -143,14 +121,6 @@
         "label": "Appeals",
         "desc": "Grade appeals submitted by students, with their reason and resolution."
       },
-      "boletines": {
-        "label": "Reports",
-        "desc": "On-screen individual grade report, with a radar chart and achievement-level bars by RA."
-      },
-      "individual": {
-        "label": "Individual",
-        "desc": "Report and record of evidence by student."
-      },
       "resumenTrimestral": "By term",
       "progresoRaUd": "RA-UD progress",
       "cambiosNota": "Grade changes"
@@ -162,11 +132,7 @@
       },
       "contextualizacion": {
         "label": "Contextualization",
-        "desc": "Geographic, socioeconomic and school environment, ACNEAE students, texts for the Simplified model, and authorship details. Chapter 1.3 of the PD+."
-      },
-      "planFeoe": {
-        "label": "FEOE plan",
-        "desc": "Training in a company or equivalent organization (FEOE): modality, tracking and dual system. Chapter 5 of the PD+."
+        "desc": "Geographic, socioeconomic and school environment, FEOE plan, ACNEAE students, texts for the Simplified model, and authorship details. Chapters 1.3 and 5 of the PD+."
       },
       "criterios": {
         "label": "Evaluation and grading",
@@ -398,7 +364,7 @@
     "alumnado": "Students",
     "diario": "Journal",
     "seguimiento": "Tracking",
-    "calificaciones": "Grades",
+    "calificaciones": "Closing",
     "informes": "Reports",
     "normativa": "Documents",
     "instrumentos": "Instrument",
@@ -437,13 +403,13 @@
   },
   "pages": {
     "agenda_title": "Agenda",
-    "agenda_desc": "Daily summary: class status and UD to teach.",
+    "agenda_desc": "Today's classes, the week and the current unit.",
     "alumnado_title": "Students",
-    "alumnado_desc": "Student management, classroom seating plan and professional guidance.",
+    "alumnado_desc": "Student management, classroom layout, career guidance and grades.",
     "diario_title": "Daily Tracking",
     "diario_desc": "Classroom journal, contingencies, attendance control and alerts.",
     "evaluacion_title": "Grade",
-    "evaluacion_desc": "Grades, RA evaluation, analytics and EQAVET quality.",
+    "evaluacion_desc": "Results, grades, analytics and teaching improvement (EQAVET).",
     "calendario_title": "Calendar",
     "calendario_desc": "Set holidays, evaluations and your weekly schedule.",
     "modulo_title": "Module Configuration",
@@ -467,7 +433,7 @@
     "ayuda_desc": "Getting-started guide, FAQ, acronyms and community contributions.",
     "contexto_desc": "General information, environment characteristics, students and module.",
     "magia_desc": "Generation of the teaching plan and reports.",
-    "seguimiento_desc": "Class journal, attendance and student grades.",
+    "seguimiento_desc": "Class journal, attendance, curriculum progress and FEOE company.",
     "metodologia_desc": "Methodological strategies, resources, spaces and attention to diversity."
   },
   "common": {
@@ -507,7 +473,7 @@
     "ayuda": "Getting-started guide, FAQ, acronyms and community contributions.",
     "magia": "APP-PD comparison and mapping, plus supporting documents for the programme and the course.",
     "legal": "Legal notice, privacy, cookies and accessibility.",
-    "agenda": "Daily summary, monthly progress and forecast of pending RA and UD.",
+    "agenda": "Today's classes, the week and the current unit.",
     "archivos": "File management, cloud sync, security, AI and data verification.",
     "normativa": "Regional regulations, legislation, bibliography and INCUAL standards.",
     "catalogo": "Families, qualifications, modules and curricula (RA and CE).",
@@ -515,10 +481,10 @@
     "curriculo": "Contribution of RA to objectives, RA-CE weighting, teaching units and competency-based tasks.",
     "metodologia": "Methodology, resources, contingency plan and cross-curricular elements.",
     "instrumentos": "Definition and weighting of assessment instruments.",
-    "calendario": "Timetable, terms, holidays, FEOE period and extracurricular activities.",
-    "alumnado": "Personal records, classroom seating plan and professional guidance.",
-    "seguimiento": "Class journal, attendance and grade entry.",
-    "calificaciones": "Gradebook, statistics and group and individual comparison."
+    "calendario": "Timetable, terms, holidays, FEOE period and monthly view.",
+    "alumnado": "Personal records, classroom layout, career guidance and grade entry per student.",
+    "seguimiento": "Class journal, attendance, curriculum progress and student assessment at the company (FEOE).",
+    "calificaciones": "Course results and grades, history and appeals, and module improvement (EQAVET and PDCA)."
   },
   "toasts": {
     "aiSettings": {
@@ -1600,11 +1566,9 @@
     "alumnado": {
       "caracteristicasDesc": "Main geographic origin, age range, initial competency level, expectations and involvement, etc.",
       "caracteristicasTitulo": "Student characteristics",
-      "alumnadoActivoTitulo": "Active students ({{count}})",
       "alumnoLabel": "Student",
       "asientoLibre": "Free",
       "asientoOcupado": "Occupied",
-      "boletinIndividualTitulo": "Individual grade report",
       "confirmDistribucionAlfabetica": "Do you want to automatically assign all students in alphabetical order? This will overwrite the current layout.",
       "confirmVaciarPlano": "Are you sure you want to clear all seats in the classroom layout?",
       "contextoGrupoDesc": "Define the psycho-pedagogical and sociological characteristics of the students (required for the curriculum plan).",
@@ -1650,7 +1614,6 @@
       "raSuperado": "PASSED",
       "rasgosGrupoTitulo": "Characteristic traits of the group",
       "registroTutoriaTitulo": "Tutoring record:",
-      "seleccionaAlumnadoDesc": "Choose a student from the left panel to view their report.",
       "seleccionaAlumnadoTitulo": "Select a student",
       "seleccionaAlumnoTutorias": "Select a student in the side panel to view their tutoring sessions.",
       "sinAlumnadoRegistrado": "There are no students registered in this course yet.",
@@ -1755,8 +1718,6 @@
       "composicionAulaTitulo": "Classroom composition",
       "consecucionRaTitulo": "Achievement of learning outcomes (RA)",
       "criteriosCalificacionDesc": "If left empty, it will be generated automatically. Module grading and rounding criteria.",
-      "dashboardAnaliticaDesc": "Visual insight into the group's performance and demographics.",
-      "dashboardAnaliticaTitulo": "Analytics dashboard",
       "detalleAlumnadoDesc": "Individual grades by student, assessment instrument and RA acquisition level.",
       "detalleAlumnadoTitulo": "Detail by student",
       "detalleCalificacionesInstrumentoTitulo": "Grade detail by instrument",
@@ -1998,7 +1959,8 @@
       "udsModulo": "Teaching units of the module",
       "tituloAutoriaPublicidad": "Authorship and publication details",
       "cargandoDatos": "Loading context data...",
-      "cargandoDatosMetodologia": "Loading methodology data..."
+      "cargandoDatosMetodologia": "Loading methodology data...",
+      "tituloActividades": "Complementary and extracurricular"
     },
     "ai": {
       "analizandoDocumento": "Analyzing document...",
@@ -2325,7 +2287,7 @@
       "leyendaCompletado": "Completed",
       "leyendaEnCurso": "In progress",
       "leyendaPendiente": "Pending",
-      "progresoRelacionRaUdTitulo": "Progress and relationship between Learning Outcomes and Teaching/Work Units"
+      "progresoRelacionRaUdTitulo": "RA progress by teaching unit"
     },
     "header": {
       "creaOAbreProgramacion": "Create or open a curriculum plan",
@@ -2340,7 +2302,7 @@
       "breadcrumbArchivos": "Files",
       "breadcrumbSeguridadPrivacidad": "Security and privacy",
       "modoDatosLabel": "Data mode:",
-      "avisoDemoDesc": "you are viewing sample data. This is not your real course and nothing is saved to disk — switch to REAL to work with your own files.",
+      "avisoDemoDesc": "sample data, nothing is saved. Switch to REAL for your own files.",
       "avisoRealDesc": "you are working with your own .fpg/.fpp/.fpc files, saved on your computer. Changes are actually saved.",
       "gruposEjemploDobleClic": "Sample groups. Double-click to load.",
       "tusGruposDobleClic": "Your saved groups. Double-click to load.",
@@ -2387,8 +2349,7 @@
       "tipoAsistencia": "Attendance",
       "tipoDiarioClase": "Class log",
       "sinAlumnadoActivoRegistrado": "There are no active students registered in this course.",
-      "sinEvidenciasTodavia": "No evidence yet",
-      "ningunAlumnadoSeleccionado": "No students selected"
+      "sinEvidenciasTodavia": "No evidence yet"
     },
     "orientacion": {
       "sinAlumnadoTitulo": "No students",
@@ -2625,7 +2586,8 @@
       "festivosEventosTitulo": "Holidays and events",
       "festivosEventosInstruccionesPre": "Enter manually or click on the calendar. Holidays exclude hours from the actual count. Holiday and Relevant are independent: the same day can have both at once. Rows with",
       "festivosEventosInstruccionesPost": "(Start/End of school year and term, FEOE) come from General dates / FEOE period — edit them there, not here.",
-      "hoyBadge": "Today"
+      "hoyBadge": "Today",
+      "periodoFeoeTitulo": "FEOE period"
     },
     "diario": {
       "alumnadoActivoLabel": "Active students",
@@ -2695,7 +2657,7 @@
           "q3": "How do I configure the hours students spend at the company (Dual FP)?",
           "a3": "In Curriculum Plan > Context > 'Identification' tab, choose whether your arrangement is General Dual, Intensive Dual, or None. Then, in Curriculum Plan > Context > 'FEOE and dual arrangement' tab, describe how that in-company training is organized and tracked. To mark which specific Learning Outcomes are dual, go to Curriculum Plan > Curriculum > 'RA and CE' tab.",
           "q4": "What is the EQAVET section for?",
-          "a4": "It's used to integrate the European continuous-improvement cycle into your curriculum plan. You'll find it under 'Home' > 'Improvement' tab. At the end of the year, you self-assess the quality indicators and note your improvement proposals for the following year. The teaching self-assessment rubric follows ANECA's DOCENTIA model (see aneca.es/docentia), adapted to FP practice.",
+          "a4": "It's used to integrate the European continuous-improvement cycle into your curriculum plan. You'll find it under 'Closing' > 'Improvement' tab. At the end of the year, you self-assess the quality indicators and note your improvement proposals for the following year. The teaching self-assessment rubric follows ANECA's DOCENTIA model (see aneca.es/docentia), adapted to FP practice.",
           "q5": "What's the difference between complementary and extracurricular activities?",
           "a5": "They are legally distinct: complementary activities take place within teaching hours, are linked to the curriculum, and are gradable — they are part of your didactic curriculum plan. Extracurricular activities take place outside school hours, are voluntary, and are never gradable — they go in the centre's PGA, not in the PD; in Methodology > Cross-curricular you can still note them for reference, but they don't count in the curriculum plan.",
           "q6": "What's the difference between an assessment instrument and a grading instrument?",
@@ -2723,7 +2685,7 @@
           "q3": "How do I take attendance or record absences?",
           "a3": "In the Tracking section you have the 'Attendance' tab. You'll see all your students, and with a single click on their grid cell you can toggle between Absence, Late, or Justified Absence.",
           "q4": "How do I grade a specific task or exam?",
-          "a4": "Go to the 'Tracking' section > 'Detail by student' tab to enter the grade for each activity, per student. The final grade is automatically recalculated from the RA and CE weights.",
+          "a4": "Go to the 'Students' section > 'Grades' tab to enter the grade for each activity, per student. The final grade is automatically recalculated from the RA and CE weights.",
           "q5": "How exactly is the term's final grade calculated?",
           "a5": "The system cross-references the grades you enter in the Instruments with the weight of the Indicator (Assessment > Indicators block), which in turn feeds the weight of the Assessment Criterion (CE) and finally the Learning Outcome (RA). All in real time.",
           "q6": "What do the colors (purple, teal, orange) mean in the agenda and visual calendar?",
@@ -2870,7 +2832,9 @@
       "evaluacionFinalOrdinariaTitulo": "Ordinary final assessment"
     },
     "seguimiento": {
-      "cargandoDatosSeguimiento": "Loading tracking data..."
+      "cargandoDatosSeguimiento": "Loading tracking data...",
+      "mesActualPrefijo": "CURRENT",
+      "planificacionMensualTitulo": "Monthly planning"
     }
   },
   "t1": "1st term",

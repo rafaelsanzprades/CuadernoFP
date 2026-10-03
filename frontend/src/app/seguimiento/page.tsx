@@ -2,7 +2,7 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { TabSync } from "@/components/ui/TabSync";
 import { useTranslation } from "react-i18next";
-import { Calendar, FileEdit, MapPin, ClipboardCheck, Users, FolderOpen, Building2 } from "lucide-react";
+import { Calendar, FileEdit, MapPin, ClipboardCheck, FolderOpen, Building2, CalendarRange } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -10,11 +10,13 @@ import { useAppStore } from "@/store/useAppStore";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { getSimulatedToday } from "@/utils/planningGenerator";
 import { AsistenciaTab } from "@/components/features/diario/AsistenciaTab";
-import { DetalleAlumnadoTab } from "@/components/features/evaluacion/DetalleAlumnadoTab";
+import { PlanificacionMensualTab } from "@/components/features/dashboard/PlanificacionMensualTab";
+import { TabRelacionRaUd } from "@/components/features/curriculo/TabRelacionRaUd";
 import { FeoeEmpresaTab } from "@/components/features/evaluacion/FeoeEmpresaTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
+import { SectionIndex } from "@/components/ui/SectionIndex";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { getApiBase } from "@/services/apiBase";
@@ -77,13 +79,15 @@ export default function SeguimientoPage() {
   const TABS = [
     { id: "clases", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.clases.label', {defaultValue: 'Clases'})}</span>, cleanLabel: t('tabs.seguimiento.clases.label', {defaultValue: 'Clases'}) },
     { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.asistencia.label', {defaultValue: 'Asistencia'})}</span>, cleanLabel: t('tabs.seguimiento.asistencia.label', {defaultValue: 'Asistencia'}) },
-    { id: "detalle", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.detalle.label', {defaultValue: 'Notas'})}</span>, cleanLabel: t('tabs.seguimiento.detalle.label', {defaultValue: 'Notas'}) },
+    // Traída desde Agenda (2026-10-02, petición de Rafael): planificación y
+    // avance mensual de la programación.
+    { id: "planificacion", label: <span className="flex items-center gap-2"><CalendarRange className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.planificacion.label', {defaultValue: 'Avance'})}</span>, cleanLabel: t('tabs.seguimiento.planificacion.label', {defaultValue: 'Avance'}) },
     { id: "empresa-feoe", label: <span className="flex items-center gap-2"><Building2 className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.empresaFeoe.label', {defaultValue: 'Empresa FEOE'})}</span>, cleanLabel: t('tabs.seguimiento.empresaFeoe.label', {defaultValue: 'Empresa FEOE'}) },
   ];
   const TAB_DESCRIPTIONS: Record<string, string> = {
     clases: t('tabs.seguimiento.clases.desc', {defaultValue: 'Diario de clases, sesiones lectivas y registro de contingencias.'}),
     asistencia: t('tabs.seguimiento.asistencia.desc', {defaultValue: 'Control de asistencia del alumnado.'}),
-    detalle: t('tabs.seguimiento.detalle.desc', {defaultValue: 'Entrada de notas numéricas por alumnado, instrumento de evaluación y nivel de adquisición de RA.'}),
+    planificacion: t('tabs.seguimiento.planificacion.desc', {defaultValue: 'Planificación mensual de las unidades didácticas y progreso de los resultados de aprendizaje según lo impartido.'}),
     'empresa-feoe': t('tabs.seguimiento.empresaFeoe.desc', {defaultValue: 'Evaluación del alumnado en la empresa durante la FEOE (Anexo XI b), transcrita por RA/CE.'}),
   };
   const [loading, setLoading] = useState(true);
@@ -288,6 +292,35 @@ export default function SeguimientoPage() {
     return lectivos;
   };
 
+  // Índice dinámico de meses del Diario (petición de Rafael, 2026-10-02):
+  // empieza por el mes en curso ("ACTUAL. Mayo"), sigue hasta junio, vuelve
+  // a septiembre y termina en el mes anterior al actual. Fuera de curso
+  // (julio/agosto, sin mes actual con clase) mantiene el orden natural.
+  const mesesConClase = meses_display.filter((m) => getLectivosMes(meses_num[m]).length > 0);
+  const idxMesActual = currentMonthNum === null ? -1 : mesesConClase.findIndex((m) => meses_num[m] === currentMonthNum);
+  const mesesIndice = idxMesActual > 0
+    ? [...mesesConClase.slice(idxMesActual), ...mesesConClase.slice(0, idxMesActual)]
+    : mesesConClase;
+  const diarioIndexItems = mesesIndice.map((m) => ({
+    id: `diario-mes-${m}`,
+    label: meses_num[m] === currentMonthNum
+      ? `${t('campos.seguimiento.mesActualPrefijo', { defaultValue: 'ACTUAL' })}. ${meses_nombres[m as keyof typeof meses_nombres]}`
+      : meses_nombres[m as keyof typeof meses_nombres],
+  }));
+  const avanceIndexItems = [
+    { id: "seguimiento-avance-planificacion", label: t('campos.seguimiento.planificacionMensualTitulo', { defaultValue: 'Planificación mensual' }) },
+    { id: "seguimiento-avance-progreso-ra", label: t('campos.curriculo.progresoRelacionRaUdTitulo', { defaultValue: 'Progreso de RA según las UD' }) },
+  ];
+  const asistenciaIndexItems = [
+    { id: "asistencia-hoy", label: t('checks.diario.hoy', { defaultValue: 'Hoy' }) },
+    { id: "asistencia-acumulado", label: t('checks.diario.acumuladoTrimestral', { defaultValue: 'Acumulado trimestral' }) },
+    { id: "asistencia-alertas", label: t('checks.diario.alertasAbandono', { defaultValue: 'Alertas de abandono' }) },
+  ];
+  const abrirMesDiario = (id: string) => {
+    const el = document.getElementById(id);
+    if (el instanceof HTMLDetailsElement) el.open = true;
+  };
+
   const handleLedgerChange = (dateStr: string, field: string, value: any) => {
     const newLedger = { ...daily_ledger };
     if (!newLedger[dateStr]) {
@@ -308,7 +341,7 @@ export default function SeguimientoPage() {
           <StickyPageHeader
             icon={MapPin}
             title={t('nav.seguimiento', { defaultValue: 'Seguimiento' })}
-            description={t('pages.seguimiento_desc', { defaultValue: 'Diario de clases, asistencia y notas por alumnado.' })}
+            description={t('pages.seguimiento_desc', { defaultValue: 'Diario de clases, asistencia, avance de la programación y empresa FEOE.' })}
           >
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
@@ -327,6 +360,9 @@ export default function SeguimientoPage() {
             <p className="text-body text-muted mt-3">
               {TAB_DESCRIPTIONS[activeTab] || 'Seguimiento del alumnado.'}
             </p>
+
+            {/* Índice: meses dinámicos en Clases (Diario), bloques en Asistencia y Avance. */}
+            <SectionIndex items={activeTab === 'clases' ? diarioIndexItems : activeTab === 'asistencia' ? asistenciaIndexItems : activeTab === 'planificacion' ? avanceIndexItems : []} bare onItemClick={abrirMesDiario} />
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-4 px-8 pt-4">
@@ -356,7 +392,7 @@ export default function SeguimientoPage() {
                     if (lectivos.length === 0) return null;
 
                     return (
-                      <details key={m_short} open={currentMonthNum !== null && meses_num[m_short] === currentMonthNum} className="diario-details group bg-[var(--glass-bg)] rounded-lg border border-[var(--glass-border)] overflow-hidden transition-colors">
+                      <details key={m_short} id={`diario-mes-${m_short}`} style={{ scrollMarginTop: "260px" }} open={currentMonthNum !== null && meses_num[m_short] === currentMonthNum} className="diario-details group bg-[var(--glass-bg)] rounded-lg border border-[var(--glass-border)] overflow-hidden transition-colors">
                         <summary className="p-4 cursor-pointer flex items-center justify-between font-semibold text-subheading select-none hover:bg-foreground/5">
                           <div className="flex items-center gap-3">
                             <span className="text-info"><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
@@ -445,9 +481,10 @@ export default function SeguimientoPage() {
                 </div>
               )}
 
-              {activeTab === 'detalle' && (
-                <div className="mt-4">
-                  <DetalleAlumnadoTab />
+              {activeTab === 'planificacion' && (
+                <div className="mt-4 animate-in fade-in duration-500 w-full space-y-8">
+                  <PlanificacionMensualTab />
+                  <TabRelacionRaUd />
                 </div>
               )}
 
