@@ -17,6 +17,7 @@ import { ESTADO_ALUMNO_COLOR, parseAlumnadoCSV } from "@/utils/alumnado";
 import { ContextoGrupoTab } from "@/components/features/alumnado/ContextoGrupoTab";
 import { OrientacionIndividualTab } from "@/components/features/alumnado/OrientacionIndividualTab";
 import { TendenciasProfesionalTab } from "@/components/features/alumnado/TendenciasProfesionalTab";
+import { DetalleAlumnadoTab } from "@/components/features/evaluacion/DetalleAlumnadoTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -44,7 +45,7 @@ function computeMilestoneDates(nacimiento?: string): { f16: string; f18: string 
 }
 
 export default function AlumnadoPage() {
-  const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, moduleData } = useAppStore();
+  const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, moduleData, activeModuleId, setModuleData } = useAppStore();
   const [activeTab, setActiveTab] = useState("matricula");
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
@@ -55,6 +56,9 @@ export default function AlumnadoPage() {
 
   const TABS = [
     { id: "matricula", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.matricula.label', {defaultValue: 'Matrícula'})}</>, cleanLabel: t('tabs.alumnado.matricula.label', {defaultValue: 'Matrícula'}) },
+    // Traída desde Seguimiento (2026-10-02, petición de Rafael): entrada de
+    // notas por alumnado, instrumento y RA.
+    { id: "notas", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.notas.label', {defaultValue: 'Notas'})}</>, cleanLabel: t('tabs.alumnado.notas.label', {defaultValue: 'Notas'}) },
     { id: "plano", label: <><span className="inline-flex"><LayoutGrid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.plano')}</>, cleanLabel: t('tabs.plano') },
     // Antes sub-vistas de una sola pestaña "Perfil profesional" (switcher
     // interno) -- sacadas a pestañas principales el 2026-09-20 a petición de
@@ -73,6 +77,7 @@ export default function AlumnadoPage() {
     plano: t('tabs.alumnado.plano.desc', {defaultValue: 'Distribución y plano visual del aula.'}),
     perfilIndividual: t('tabs.alumnado.perfilIndividual.desc', {defaultValue: 'Orientación profesional por alumno/a: motivación, experiencia laboral, aptitudes, aspiraciones e inserción post-ciclo.'}),
     perfilTendencias: t('tabs.alumnado.perfilTendencias.desc', {defaultValue: 'Agregados y tendencias del perfil profesional del grupo, y tabla filtrable de todo el alumnado.'}),
+    notas: t('tabs.alumnado.notas.desc', {defaultValue: 'Entrada de notas numéricas por alumnado, instrumento de evaluación y nivel de adquisición de RA.'}),
   };
 
   // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
@@ -88,6 +93,11 @@ export default function AlumnadoPage() {
     const fetchData = async () => {
       setLoading(true);
       try {
+        if (activeModuleId && !moduleData) {
+          const res = await fetch(`${getApiBase()}/api/module/${activeModuleId}`);
+          const data = await res.json();
+          if (data.status === "success") setModuleData(data.data);
+        }
         if (activeCursoId && !cursoData) {
           const res = await fetch(`${getApiBase()}/api/module/${activeCursoId}`);
           const data = await res.json();
@@ -104,7 +114,7 @@ export default function AlumnadoPage() {
     } else {
       setLoading(false);
     }
-  }, [activeCursoId, cursoData]);
+  }, [activeCursoId, cursoData, activeModuleId, moduleData]);
 
   const handleSave = async () => {
     setSaving(true);
@@ -473,6 +483,12 @@ export default function AlumnadoPage() {
           {activeTab === "perfilTendencias" && (
             <div className="mt-4">
               <TendenciasProfesionalTab />
+            </div>
+          )}
+
+          {activeTab === "notas" && (
+            <div className="mt-4">
+              <DetalleAlumnadoTab />
             </div>
           )}
 

@@ -38,11 +38,11 @@ export const navGroups = [
     title: "Curso [Año]",
     sectionDescription: "Herramientas de seguimiento para el aula viva. Establece el calendario, administra el listado de alumnado, anota el progreso diario y evalúa.",
     items: [
-      { href: "/agenda", label: "Agenda", icon: CalendarDays, description: "Resumen diario, avance mensual y previsión de RA y UD pendientes." },
-      { href: "/calendario?tab=fechas", label: "Calendario", icon: Calendar, description: "Horario, trimestres, festivos, periodo FEOE y actividades extraescolares." },
-      { href: "/alumnado?tab=matricula", label: "Alumnado", icon: Users, description: "Fichas personales, plano de aula y tutoría con alertas de abandono." },
-      { href: "/seguimiento?tab=clases", label: "Seguimiento", icon: TrendingUp, description: "Diario de clases, asistencia, progreso de RA y UD y entrada de notas." },
-      { href: "/calificaciones?tab=resumen", label: "Calificación", icon: Award, description: "Cuaderno de notas, estadísticas y comparativa grupal e individual." },
+      { href: "/calendario?tab=fechas", label: "Calendario", icon: Calendar, description: "Horario, trimestres, festivos, periodo FEOE y vista mensual." },
+      { href: "/agenda", label: "Agenda", icon: CalendarDays, description: "Tus clases de hoy, la semana y la unidad en curso." },
+      { href: "/seguimiento?tab=clases", label: "Seguimiento", icon: TrendingUp, description: "Diario de clases, asistencia, avance de la programación y valoración del alumnado en la empresa (FEOE)." },
+      { href: "/alumnado?tab=matricula", label: "Alumnado", icon: Users, description: "Fichas personales, plano de aula, orientación profesional y entrada de notas por alumnado." },
+      { href: "/calificaciones?tab=resumen", label: "Cierre", icon: Award, description: "Resultados y notas del curso, histórico y reclamaciones, y mejora del módulo (EQAVET y PDCA)." },
     ]
   }
 ];
@@ -65,7 +65,6 @@ export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   "/contexto": [
     { id: "identificacion", label: "Identificación" },
     { id: "contextualizacion", label: "Contextualización" },
-    { id: "plan-feoe", label: "Plan FEOE" },
     { id: "criterios", label: "Evaluación y calificación" },
   ],
   "/curriculo": [
@@ -88,18 +87,12 @@ export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   ],
   "/calendario": [
     { id: "fechas", label: "Fechas y horario" },
-    { id: "periodo-feoe", label: "Periodo FEOE" },
     { id: "eventos", label: "Eventos y festivos" },
-    { id: "actividades", label: "Complementarias y extraescolares" },
-  ],
-  "/agenda": [
-    { id: "actual", label: "Actual" },
-    { id: "planificacion", label: "Avance" },
-    { id: "progreso-ra-ud", label: "Previsión RA y UD" },
     { id: "mensual", label: "Mensual" },
   ],
   "/alumnado": [
     { id: "matricula", label: "Matrícula" },
+    { id: "notas", label: "Notas" },
     { id: "plano", label: "Plano de clase" },
     { id: "perfilIndividual", label: "Individual" },
     { id: "perfilTendencias", label: "Tendencias" },
@@ -107,13 +100,12 @@ export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   "/seguimiento": [
     { id: "clases", label: "Clases" },
     { id: "asistencia", label: "Asistencia" },
-    { id: "detalle", label: "Notas" },
+    { id: "planificacion", label: "Avance" },
     { id: "empresa-feoe", label: "Empresa FEOE" },
   ],
   "/calificaciones": [
     { id: "resumen", label: "Resumen" },
     { id: "historico", label: "Histórico" },
-    { id: "individual", label: "Individual" },
     { id: "mejora", label: "Mejora" },
   ],
   "/normativa": [

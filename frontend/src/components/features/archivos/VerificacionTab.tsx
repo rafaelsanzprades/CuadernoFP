@@ -422,9 +422,9 @@ export function VerificacionTab() {
     {
       id: "evaluaciones",
       icon: <BarChart2 className="w-5 h-5" />,
-      title: t('nav.calificaciones', {defaultValue: 'Calificaciones'}),
+      title: t('nav.calificaciones', {defaultValue: 'Cierre'}),
       href: "/calificaciones",
-      hrefLabel: t('nav.calificaciones', {defaultValue: 'Calificaciones'}),
+      hrefLabel: t('nav.calificaciones', {defaultValue: 'Cierre'}),
       status: evalCount === 0 ? "empty" : evalTotal > 0 && evalCount < evalTotal ? "warning" : "ok",
       lines: evalCount === 0
         ? [t('campos.verificacion.sinCalificacionesIntroducidas', {defaultValue: 'Sin calificaciones introducidas'})]
@@ -434,7 +434,7 @@ export function VerificacionTab() {
             ? t('campos.verificacion.faltanAlumnosEvaluar', {count: evalTotal - evalCount, defaultValue: 'Faltan {{count}} alumnos por evaluar'})
             : t('campos.verificacion.todosLosAlumnosTienenRegistro', {defaultValue: 'Todos los alumnos tienen registros de calificación'}),
         ],
-      actionHref: evalCount === 0 ? "/seguimiento?tab=detalle" : undefined,
+      actionHref: evalCount === 0 ? "/alumnado?tab=notas" : undefined,
       actionLabel: evalCount === 0 ? t('botones.verificacion.introducirNotas', {defaultValue: 'Introducir notas'}) : undefined,
     },
     {

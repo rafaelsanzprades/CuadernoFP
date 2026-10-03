@@ -45,43 +45,21 @@
     "familias": "Familiak",
     "titulos": "Tituluak",
     "modulos": "Moduluak",
-    "agenda": {
-      "actual": {
-        "label": "Egungoa",
-        "desc": "Gaurko eskolen laburpena, asteko testuingurua eta unean lantzen ari den unitate didaktikoaren garapena."
-      },
-      "planificacion": {
-        "label": "Aurrerapena",
-        "desc": "Programazioaren hileroko plangintza eta jarraipena."
-      },
-      "progreso-ra-ud": {
-        "label": "RA eta UD aurreikuspena",
-        "desc": "Ikaskuntzaren emaitzen aurrerapena, emandako unitate didaktikoen egoeraren eta haztapenaren arabera."
-      },
-      "mensual": {
-        "label": "Hilekoa",
-        "desc": "Hileko ikuspegia eta egutegi interaktiboa, funtsezko datekin."
-      }
-    },
     "calendario": {
       "fechas": {
         "label": "Datak eta ordutegia",
         "desc": "Konfiguratu ikasturteko datu orokorrak, hiruhilekoak eta asteko ordutegia."
       },
-      "periodoFeoe": {
-        "label": "FEOE aldia",
-        "desc": "LH Dualerako (FEOE) konfigurazio berezia."
-      },
       "eventos": {
         "label": "Ekitaldiak eta jaiegunak",
         "desc": "Irakaskuntzari eragiten dioten ekitaldi eta jaiegunen erregistroa."
       },
-      "actividades": {
-        "label": "Osagarriak eta eskolaz kanpokoak",
-        "desc": "Jarduera osagarrien eta eskolaz kanpokoen plangintza."
-      },
       "visual": {
         "desc": "Ikasturte osoko egutegiaren hileko ikuspegia."
+      },
+      "mensual": {
+        "label": "Hilekoa",
+        "desc": "Hileko ikuspegia eta egutegi interaktiboa data nagusiekin eta planifikatutako saioekin."
       }
     },
     "alumnado": {
@@ -100,9 +78,9 @@
         "label": "Joerak",
         "desc": "Taldearen lanbide-profilaren agregatuak eta joerak, eta ikasle guztien taula iragazgarria."
       },
-      "expediente": {
-        "label": "Espedientea",
-        "desc": "Ikasleka ebidentzien denbora-lerroa: kalifikazioak, erreklamazioak, asistentzia eta gelako egunkaria."
+      "notas": {
+        "label": "Oharrak",
+        "desc": "Nota numerikoen sarrera, ikasleka, ebaluazio-tresnaka eta RAren eskuratze-mailaka."
       }
     },
     "seguimiento": {
@@ -114,13 +92,13 @@
         "label": "Asistentzia",
         "desc": "Ikasleen asistentzia-kontrola."
       },
-      "detalle": {
-        "label": "Oharrak",
-        "desc": "Nota numerikoen sarrera, ikasleka, ebaluazio-tresnaka eta RAren eskuratze-mailaka."
-      },
       "empresaFeoe": {
         "label": "FEOE enpresa",
         "desc": "FEOEan zehar enpresan ikasleen ebaluazioa (XI b eranskina), RA/CEka transkribatua."
+      },
+      "planificacion": {
+        "label": "Aurrerapena",
+        "desc": "Ikas-unitateen hileko plangintza eta ikaskuntza-emaitzen aurrerapena emandakoaren arabera."
       }
     },
     "calificaciones": {
@@ -143,14 +121,6 @@
         "label": "Erreklamazioak",
         "desc": "Ikasleek aurkeztutako nota-erreklamazioak, arrazoia eta ebazpena barne."
       },
-      "boletines": {
-        "label": "Buletinak",
-        "desc": "Pantailako banakako kalifikazio-buletina, RAka lorpen-mailaren erradar eta barrekin."
-      },
-      "individual": {
-        "label": "Banakakoa",
-        "desc": "Ikasle bakoitzaren buletina eta ebidentzia-espedientea."
-      },
       "resumenTrimestral": "Hiruhilekoka",
       "progresoRaUd": "RA-UD aurrerapena",
       "cambiosNota": "Nota-aldaketak"
@@ -162,11 +132,7 @@
       },
       "contextualizacion": {
         "label": "Testuinguratzea",
-        "desc": "Ingurune geografiko, sozioekonomiko eta eskolarra, ACNEAE ikasleak, eredu Sinplifikatuaren testuak eta egiletza-datuak. PD+ren 1.3 kap."
-      },
-      "planFeoe": {
-        "label": "FEOE plana",
-        "desc": "Enpresan edo baliokidetutako erakundean egindako prestakuntza (FEOE): modalitatea, jarraipena eta araubide duala. PD+ren 5. kap."
+        "desc": "Ingurune geografiko, sozioekonomiko eta eskolarra, FEOE plana, ACNEAE ikasleak, eredu Sinplifikatuaren testuak eta egiletza-datuak. PD+ren 1.3 eta 5. kap."
       },
       "criterios": {
         "label": "Ebaluazioa eta kalifikazioa",
@@ -398,7 +364,7 @@
     "alumnado": "Ikasleak",
     "diario": "Egunerokoa",
     "seguimiento": "Segimendua",
-    "calificaciones": "Kalifikazioak",
+    "calificaciones": "Itxiera",
     "informes": "Txostenak",
     "normativa": "Dokumentuak",
     "instrumentos": "Tresna",
@@ -437,13 +403,13 @@
   },
   "pages": {
     "agenda_title": "Agenda",
-    "agenda_desc": "Eguneroko laburpena: klasearen egoera eta emateko UDa.",
+    "agenda_desc": "Gaurko klaseak, astea eta unitate aktiboa.",
     "alumnado_title": "Ikasleak",
-    "alumnado_desc": "Ikasleen kudeaketa, gelaren planoa eta orientazio profesionala.",
+    "alumnado_desc": "Ikasleen kudeaketa, gelako plana, orientazio profesionala eta notak.",
     "diario_title": "Eguneroko Segimendua",
     "diario_desc": "Ikasgelako egunerokoa, kontingentziak, asistentzia kontrola eta alertak.",
     "evaluacion_title": "Kalifikazioa",
-    "evaluacion_desc": "Kalifikazioak, RAren ebaluazioa, analitikak eta EQAVET kalitatea.",
+    "evaluacion_desc": "Emaitzak, kalifikazioak, analitikak eta irakaskuntzaren hobekuntza (EQAVET).",
     "calendario_title": "Egutegia",
     "calendario_desc": "Konfiguratu jaiegunak, ebaluazioak eta zure asteko ordutegia.",
     "modulo_title": "Moduluaren konfigurazioa",
@@ -467,7 +433,7 @@
     "ayuda_desc": "Hasierako gida, FAQ, akronimoak eta komunitatearen ekarpenak.",
     "contexto_desc": "Informazio orokorra, ingurunearen ezaugarriak, ikasleak eta modulua.",
     "magia_desc": "Programazio didaktikoaren eta txostenen sorrera.",
-    "seguimiento_desc": "Klaseen egunerokoa, asistentzia eta ikaslekako oharrak.",
+    "seguimiento_desc": "Klase-egunkaria, asistentzia, programazioaren aurrerapena eta FEOE enpresa.",
     "metodologia_desc": "Metodologia-estrategiak, baliabideak, espazioak eta aniztasunari arreta."
   },
   "common": {
@@ -507,7 +473,7 @@
     "ayuda": "Hasierako gida, FAQ, akronimoak eta komunitatearen ekarpenak.",
     "magia": "APP-PD konparaketa eta korrespondentzia, eta programazioaren eta ikasturtearen laguntza-dokumentuak.",
     "legal": "Lege-oharra, pribatutasuna, cookieak eta irisgarritasuna.",
-    "agenda": "Eguneroko laburpena, hileroko aurrerapena eta falta diren RA eta UD-en aurreikuspena.",
+    "agenda": "Gaurko klaseak, astea eta unitate aktiboa.",
     "archivos": "Fitxategien kudeaketa, hodeiko sinkronizazioa, segurtasuna, AA eta datuen egiaztapena.",
     "normativa": "Erkidego-araudia, legedia, bibliografia eta INCUAL estandarrak.",
     "catalogo": "Familiak, tituluak, moduluak eta curriculumak (RA eta CE).",
@@ -515,10 +481,10 @@
     "curriculo": "RAk helburuei egiten dien ekarpena, RA-CE haztapena, unitate didaktikoak eta gaitasun-zereginak.",
     "metodologia": "Metodologia, baliabideak, kontingentzia-plana eta zeharkako elementuak.",
     "instrumentos": "Ebaluazio-tresnen definizioa eta pisuak.",
-    "calendario": "Ordutegia, hiruhilekoak, jaiegunak, FEOE aldia eta eskolaz kanpoko jarduerak.",
-    "alumnado": "Datu-fitxa pertsonalak, gelako plana eta orientazio profesionala.",
-    "seguimiento": "Eskola-egunkaria, asistentzia eta noten sarrera.",
-    "calificaciones": "Noten koadernoa, estatistikak eta talde zein banakako konparaketa."
+    "calendario": "Ordutegia, hiruhilekoak, jaiegunak, FEOE aldia eta hileko ikuspegia.",
+    "alumnado": "Fitxa pertsonalak, gelako plana, orientazio profesionala eta ikasleen araberako nota-sarrera.",
+    "seguimiento": "Klase-egunkaria, asistentzia, programazioaren aurrerapena eta ikasleen balorazioa enpresan (FEOE).",
+    "calificaciones": "Ikastaroaren emaitzak eta notak, historiala eta erreklamazioak, eta moduluaren hobekuntza (EQAVET eta PDCA)."
   },
   "toasts": {
     "aiSettings": {
@@ -1600,11 +1566,9 @@
     "alumnado": {
       "caracteristicasDesc": "Jatorri geografiko nagusia, adin-tartea, hasierako gaitasun-maila, itxaropenak eta inplikazioa, etab.",
       "caracteristicasTitulo": "Ikasleen ezaugarriak",
-      "alumnadoActivoTitulo": "Ikasle aktiboak ({{count}})",
       "alumnoLabel": "Ikaslea",
       "asientoLibre": "Hutsik",
       "asientoOcupado": "Beteta",
-      "boletinIndividualTitulo": "Kalifikazioen banakako txostena",
       "confirmDistribucionAlfabetica": "Ikasle guztiak automatikoki alfabeto-hurrenkeran esleitu nahi dituzu? Honek uneko banaketa gainidatziko du.",
       "confirmVaciarPlano": "Ziur zaude gelako planoko eserleku guztiak hustu nahi dituzula?",
       "contextoGrupoDesc": "Zehaztu ikasleen ezaugarri psikopedagogiko eta soziologikoak (PDrako beharrezkoak).",
@@ -1650,7 +1614,6 @@
       "raSuperado": "GAINDITUTA",
       "rasgosGrupoTitulo": "Taldearen ezaugarriak",
       "registroTutoriaTitulo": "Tutoretza-erregistroa:",
-      "seleccionaAlumnadoDesc": "Aukeratu ikaslea ezkerreko paneletik bere txostena ikusteko.",
       "seleccionaAlumnadoTitulo": "Hautatu ikaslea",
       "seleccionaAlumnoTutorias": "Hautatu ikasle bat alboko panelean bere tutoretzak ikusteko.",
       "sinAlumnadoRegistrado": "Oraindik ez dago ikaslerik erregistratuta ikastaro honetan.",
@@ -1755,8 +1718,6 @@
       "composicionAulaTitulo": "Gelaren osaera",
       "consecucionRaTitulo": "Ikaskuntza-emaitzen (RA) lorpena",
       "criteriosCalificacionDesc": "Hutsik uzten bada, automatikoki sortuko da. Moduluaren kalifikazio- eta biribiltze-irizpideak.",
-      "dashboardAnaliticaDesc": "Taldearen errendimenduari eta demografiari buruzko adimen bisuala.",
-      "dashboardAnaliticaTitulo": "Analitikaren dashboarda",
       "detalleAlumnadoDesc": "Banakako notak ikaslez, ebaluazio-tresnaz eta RAren eskurapen-mailaz.",
       "detalleAlumnadoTitulo": "Ikaslez ikasleko xehetasuna",
       "detalleCalificacionesInstrumentoTitulo": "Tresnaka kalifikazioen xehetasuna",
@@ -1998,7 +1959,8 @@
       "udsModulo": "Moduluaren unitate didaktikoak",
       "tituloAutoriaPublicidad": "Egiletza- eta publizitate-datuak",
       "cargandoDatos": "Testuinguru-datuak kargatzen...",
-      "cargandoDatosMetodologia": "Metodologia-datuak kargatzen..."
+      "cargandoDatosMetodologia": "Metodologia-datuak kargatzen...",
+      "tituloActividades": "Osagarriak eta eskolaz kanpokoak"
     },
     "ai": {
       "analizandoDocumento": "Dokumentua analizatzen...",
@@ -2325,7 +2287,7 @@
       "leyendaCompletado": "Osatuta",
       "leyendaEnCurso": "Martxan",
       "leyendaPendiente": "Zain",
-      "progresoRelacionRaUdTitulo": "Ikaskuntza-emaitzen eta Ikas-lan-unitateen arteko aurrerapena eta harremana"
+      "progresoRelacionRaUdTitulo": "RAen aurrerapena UDen arabera"
     },
     "header": {
       "creaOAbreProgramacion": "Sortu edo ireki Programazio bat",
@@ -2340,7 +2302,7 @@
       "breadcrumbArchivos": "Fitxategiak",
       "breadcrumbSeguridadPrivacidad": "Segurtasuna eta pribatutasuna",
       "modoDatosLabel": "Datu-modua:",
-      "avisoDemoDesc": "adibide-datuak ikusten ari zara. Ez da zure benetako ikastaroa eta ez da ezer diskoan gordetzen — aldatu ERREALAK aukerara zure fitxategiekin lan egiteko.",
+      "avisoDemoDesc": "adibide-datuak dira, ez da ezer gordetzen. Aldatu ERREALAK aukerara zure fitxategietarako.",
       "avisoRealDesc": "zure .fpg/.fpp/.fpc fitxategiekin ari zara lanean, zure ekipoan gordeta. Aldaketak benetan gordetzen dira.",
       "gruposEjemploDobleClic": "Adibidezko taldeak. Klik bikoitza kargatzeko.",
       "tusGruposDobleClic": "Gordetako zure taldeak. Klik bikoitza kargatzeko.",
@@ -2387,8 +2349,7 @@
       "tipoAsistencia": "Asistentzia",
       "tipoDiarioClase": "Klase egunkaria",
       "sinAlumnadoActivoRegistrado": "Ez dago ikasle aktiborik erregistratuta ikastaro honetan.",
-      "sinEvidenciasTodavia": "Oraindik ebidentziarik ez",
-      "ningunAlumnadoSeleccionado": "Ez da ikaslerik hautatu"
+      "sinEvidenciasTodavia": "Oraindik ebidentziarik ez"
     },
     "orientacion": {
       "sinAlumnadoTitulo": "Ikaslerik ez",
@@ -2625,7 +2586,8 @@
       "festivosEventosTitulo": "Jaiegunak eta ekitaldiak",
       "festivosEventosInstruccionesPre": "Sartu eskuz edo egin klik egutegian. Jaiegunek benetako zenbaketatik orduak baztertzen dituzte. Jaieguna eta Garrantzitsua independenteak dira: egun berak biak izan ditzake aldi berean. Honakoa duten lerroek",
       "festivosEventosInstruccionesPost": "(Ikasturtearen/hiruhilekoaren hasiera/amaiera, FEOE) Datu orokorrak / FEOE aldia ataletik datoz — han editatzen dira, ez hemen.",
-      "hoyBadge": "Gaur"
+      "hoyBadge": "Gaur",
+      "periodoFeoeTitulo": "FEOE aldia"
     },
     "diario": {
       "alumnadoActivoLabel": "Ikasle aktiboak",
@@ -2695,7 +2657,7 @@
           "q3": "Nola konfiguratzen ditut ikasleek enpresan ematen dituzten orduak (FP Duala)?",
           "a3": "Programazioa > Testuingurua > 'Identifikazioa' fitxan, aukeratu zure araubidea Duala Orokorra, Duala Intentsiboa edo Bat ere ez den. Ondoren, Programazioa > Testuingurua > 'FEOE eta araubide duala' fitxan, deskribatu enpresako prestakuntza hori nola antolatzen eta jarraitzen den. Zein Ikaskuntza Emaitza zehatz diren dual markatzeko, joan Programazioa > Curriculuma > 'RA eta CE' fitxara.",
           "q4": "Zertarako balio du EQAVET atalak?",
-          "a4": "Europako etengabeko hobekuntza-zikloa zure programazioan integratzeko balio du. 'Hasiera' > 'Hobekuntza' fitxan aurkituko duzu. Ikasturte amaieran, kalitate-adierazleak autoebaluatzen dituzu eta hurrengo urterako hobekuntza-proposamenak idazten dituzu. Irakasleen autoebaluazio-errubrikak ANECAren DOCENTIA ereduari jarraitzen dio (ikus aneca.es/docentia), FPko praktikara egokituta.",
+          "a4": "Europako etengabeko hobekuntza-zikloa zure programazioan integratzeko balio du. 'Itxiera' > 'Hobekuntza' fitxan aurkituko duzu. Ikasturte amaieran, kalitate-adierazleak autoebaluatzen dituzu eta hurrengo urterako hobekuntza-proposamenak idazten dituzu. Irakasleen autoebaluazio-errubrikak ANECAren DOCENTIA ereduari jarraitzen dio (ikus aneca.es/docentia), FPko praktikara egokituta.",
           "q5": "Zein diferentzia dago jarduera osagarrien eta eskolaz kanpokoen artean?",
           "a5": "Legez desberdinak dira: osagarriak irakastordutan izaten dira, curriculumari lotuta daude eta ebaluagarriak dira — zure programazio didaktikoaren parte dira. Eskolaz kanpokoak ordutegitik kanpo dira, borondatezkoak eta inoiz ez dira ebaluagarriak — ikastetxeko PGAn joaten dira, ez PDan; Metodologia > Zeharkakoak atalean erreferentzia gisa idatz ditzakezu hala ere, baina ez dute balio programazioan.",
           "q6": "Zein diferentzia dago ebaluazio-tresna eta kalifikazio-tresnaren artean?",
@@ -2723,7 +2685,7 @@
           "q3": "Nola pasatzen dut lista edo erregistratzen ditut asistentzia-hutsegiteak?",
           "a3": "Jarraipena atalean 'Asistentzia' fitxa duzu. Zure ikasle guztiak ikusiko dituzu eta beren laukian klik bakar batekin Hutsegitea, Berandutza edo Hutsegite Justifikatua artean txandaka aldatu ahal izango duzu.",
           "q4": "Nola ebaluatzen dut zeregin edo azterketa jakin bat?",
-          "a4": "Joan 'Jarraipena' atalera > 'Ikaslekako xehetasuna' fitxara jarduera bakoitzaren nota sartzeko, ikasle bakoitzeko. Azken nota automatikoki berkalkulatzen da RA eta CEen pisuen arabera.",
+          "a4": "Joan 'Ikasleak' atalera > 'Notak' fitxara jarduera bakoitzaren nota sartzeko, ikasle bakoitzeko. Azken nota automatikoki berkalkulatzen da RA eta CEen pisuen arabera.",
           "q5": "Nola kalkulatzen da zehazki hiruhilekoko azken nota?",
           "a5": "Sistemak Tresnetan jartzen dituzun kalifikazioak Adierazlearen pisuarekin gurutzatzen ditu (Ebaluazioa > Adierazleak blokea), eta horrek, era berean, Ebaluazio Irizpidearen (CE) pisua elikatzen du eta azkenik Ikaskuntza Emaitzarena (RA). Guztia denbora errealean.",
           "q6": "Zer esan nahi dute koloreek (more, teal, laranja) agendan eta egutegi bisualean?",
@@ -2870,7 +2832,9 @@
       "evaluacionFinalOrdinariaTitulo": "Ohiko azken ebaluazioa"
     },
     "seguimiento": {
-      "cargandoDatosSeguimiento": "Jarraipen-datuak kargatzen..."
+      "cargandoDatosSeguimiento": "Jarraipen-datuak kargatzen...",
+      "mesActualPrefijo": "UNEKOA",
+      "planificacionMensualTitulo": "Hileko plangintza"
     }
   },
   "t1": "1. hiruhilekoa",

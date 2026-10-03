@@ -1,13 +1,11 @@
 "use client";
 import React from "react";
-import { Target } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { resolveDescRa } from "@/services/catalogCache";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, filtrarPorGev } from "@/utils/calificaciones";
 import { useTranslation } from "react-i18next";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function ProgresoRaTab() {
   const { t } = useTranslation();
@@ -93,10 +91,6 @@ export function ProgresoRaTab() {
 
   return (
     <div className="space-y-4 animate-in fade-in duration-500">
-      <div className="space-y-3">
-      <SectionHeading id="calificaciones-progreso-ra" icon={Target} scrollMt="260px">
-        Resumen de resultados de aprendizaje por trimestres
-      </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-emerald-500">
         <div className="space-y-5">
           {Object.keys(ra_info).map(ra_id => {
@@ -219,7 +213,6 @@ export function ProgresoRaTab() {
             );
           })}
         </div>
-      </div>
       </div>
     </div>
   );

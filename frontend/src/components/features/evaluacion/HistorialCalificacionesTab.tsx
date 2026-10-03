@@ -1,10 +1,8 @@
 "use client";
 import React, { useMemo, useState } from "react";
-import { History } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { useTranslation } from "react-i18next";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 
 function formatFecha(iso: string): string {
   const d = new Date(iso);
@@ -40,10 +38,6 @@ export function HistorialCalificacionesTab() {
 
   return (
     <div className="space-y-4 animate-in fade-in duration-500">
-      <div className="space-y-3">
-      <SectionHeading id="calificaciones-historico-cambios" icon={History} scrollMt="260px">
-        {t('campos.evaluacion.historicoCalificacionesTitulo', {defaultValue: 'Histórico de cambios de calificación'})}
-      </SectionHeading>
       <Card className="p-6 border-t-4 border-t-indigo-500">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
           <div>
@@ -112,7 +106,6 @@ export function HistorialCalificacionesTab() {
           </div>
         )}
       </Card>
-      </div>
     </div>
   );
 }

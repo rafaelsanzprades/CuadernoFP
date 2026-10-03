@@ -45,43 +45,21 @@
     "familias": "Familias",
     "titulos": "Títulos",
     "modulos": "Módulos",
-    "agenda": {
-      "actual": {
-        "label": "Actual",
-        "desc": "Resumo das clases de hoxe, contexto da semana e desenvolvemento da unidade didáctica en curso."
-      },
-      "planificacion": {
-        "label": "Avance",
-        "desc": "Planificación e seguimento mensual da programación."
-      },
-      "progreso-ra-ud": {
-        "label": "Previsión RA e UD",
-        "desc": "Progreso dos resultados de aprendizaxe segundo o estado e a ponderación das unidades didácticas impartidas."
-      },
-      "mensual": {
-        "label": "Mensual",
-        "desc": "Vista mensual e calendario interactivo con datas clave."
-      }
-    },
     "calendario": {
       "fechas": {
         "label": "Datas e horario",
         "desc": "Configura as datas xerais, os trimestres e o horario semanal do curso."
       },
-      "periodoFeoe": {
-        "label": "Período FEOE",
-        "desc": "Configuración específica para FP Dual (FEOE)."
-      },
       "eventos": {
         "label": "Eventos e festivos",
         "desc": "Rexistro de eventos e festivos que afectan á docencia."
       },
-      "actividades": {
-        "label": "Complementarias e extraescolares",
-        "desc": "Planificación de actividades complementarias e extraescolares."
-      },
       "visual": {
         "desc": "Vista mensual do calendario académico completo."
+      },
+      "mensual": {
+        "label": "Mensual",
+        "desc": "Vista mensual e calendario interactivo con datas clave e sesións planificadas."
       }
     },
     "alumnado": {
@@ -100,9 +78,9 @@
         "label": "Tendencias",
         "desc": "Agregados e tendencias do perfil profesional do grupo, e táboa filtrable de todo o alumnado."
       },
-      "expediente": {
-        "label": "Expediente",
-        "desc": "Liña temporal de evidencias por alumno/a: cualificacións, reclamacións, asistencia e diario de clase."
+      "notas": {
+        "label": "Notas",
+        "desc": "Entrada de notas numéricas por alumnado, instrumento de avaliación e nivel de adquisición de RA."
       }
     },
     "seguimiento": {
@@ -114,13 +92,13 @@
         "label": "Asistencia",
         "desc": "Control de asistencia do alumnado."
       },
-      "detalle": {
-        "label": "Notas",
-        "desc": "Entrada de notas numéricas por alumnado, instrumento de avaliación e nivel de adquisición de RA."
-      },
       "empresaFeoe": {
         "label": "Empresa FEOE",
         "desc": "Avaliación do alumnado na empresa durante a FEOE (Anexo XI b), transcrita por RA/CE."
+      },
+      "planificacion": {
+        "label": "Avance",
+        "desc": "Planificación mensual das unidades didácticas e progreso dos resultados de aprendizaxe segundo o impartido."
       }
     },
     "calificaciones": {
@@ -143,14 +121,6 @@
         "label": "Reclamacións",
         "desc": "Reclamacións de nota presentadas polo alumnado, co seu motivo e resolución."
       },
-      "boletines": {
-        "label": "Boletíns",
-        "desc": "Boletín individual de cualificacións en pantalla, con radar e barras de nivel de logro por RA."
-      },
-      "individual": {
-        "label": "Individual",
-        "desc": "Boletín e expediente de evidencias por alumno/a."
-      },
       "resumenTrimestral": "Trimestral",
       "progresoRaUd": "Progreso RA-UD",
       "cambiosNota": "Cambios de nota"
@@ -162,11 +132,7 @@
       },
       "contextualizacion": {
         "label": "Contextualización",
-        "desc": "Contorno xeográfico, socioeconómico e escolar, alumnado ACNEAE, textos do modelo Simplificado e datos de autoría. Cap. 1.3 do PD+."
-      },
-      "planFeoe": {
-        "label": "Plan FEOE",
-        "desc": "Formación en empresa ou organismo equiparado (FEOE): modalidade, seguimento e réxime dual. Cap. 5 do PD+."
+        "desc": "Contorno xeográfico, socioeconómico e escolar, Plan FEOE, alumnado ACNEAE, textos do modelo Simplificado e datos de autoría. Cap. 1.3 e 5 do PD+."
       },
       "criterios": {
         "label": "Avaliación e cualificación",
@@ -398,7 +364,7 @@
     "alumnado": "Alumnado",
     "diario": "Diario",
     "seguimiento": "Seguimento",
-    "calificaciones": "Cualificacións",
+    "calificaciones": "Peche",
     "informes": "Informes",
     "normativa": "Documentos",
     "instrumentos": "Instrumento",
@@ -437,13 +403,13 @@
   },
   "pages": {
     "agenda_title": "Axenda",
-    "agenda_desc": "Resumo diario: estado de clase e UD a impartir.",
+    "agenda_desc": "As túas clases de hoxe, a semana e a unidade en curso.",
     "alumnado_title": "Alumnado",
-    "alumnado_desc": "Xestión de alumnado, plano da aula e orientación profesional.",
+    "alumnado_desc": "Xestión do alumnado, plano de aula, orientación profesional e notas.",
     "diario_title": "Seguimento Diario",
     "diario_desc": "Diario de aula, continxencias, control de asistencia e alertas.",
     "evaluacion_title": "Cualificación",
-    "evaluacion_desc": "Cualificacións, avaliación de RA, analíticas e calidade EQAVET.",
+    "evaluacion_desc": "Resultados, cualificacións, analíticas e mellora da docencia (EQAVET).",
     "calendario_title": "Calendario",
     "calendario_desc": "Configura festivos, avaliacións e o teu horario semanal.",
     "modulo_title": "Configuración do Módulo",
@@ -467,7 +433,7 @@
     "ayuda_desc": "Guía de inicio, FAQ, acrónimos e contribucións da comunidade.",
     "contexto_desc": "Información xeral, características da contorna, alumnado e módulo.",
     "magia_desc": "Xeración da programación didáctica e informes.",
-    "seguimiento_desc": "Diario de clases, asistencia e notas por alumnado.",
+    "seguimiento_desc": "Diario de clases, asistencia, avance da programación e empresa FEOE.",
     "metodologia_desc": "Estratexias metodolóxicas, recursos, espazos e atención á diversidade."
   },
   "common": {
@@ -507,7 +473,7 @@
     "ayuda": "Guía de inicio, FAQ, acrónimos e contribucións da comunidade.",
     "magia": "Comparativa e correspondencia APP-PD, e documentos de apoio da programación e do curso.",
     "legal": "Aviso legal, privacidade, cookies e accesibilidade.",
-    "agenda": "Resumo diario, avance mensual e previsión de RA e UD pendentes.",
+    "agenda": "As túas clases de hoxe, a semana e a unidade en curso.",
     "archivos": "Xestión de arquivos, sincronización na nube, seguridade, IA e verificación de datos.",
     "normativa": "Normativa autonómica, lexislación, bibliografía e estándares INCUAL.",
     "catalogo": "Familias, títulos, módulos e currículos (RA e CE).",
@@ -515,10 +481,10 @@
     "curriculo": "Contribución dos RA aos obxectivos, ponderación RA-CE, unidades didácticas e tarefas competenciais.",
     "metodologia": "Metodoloxía, recursos, plan de continxencia e elementos transversais.",
     "instrumentos": "Definición e pesos das ferramentas de avaliación.",
-    "calendario": "Horario, trimestres, festivos, período FEOE e actividades extraescolares.",
-    "alumnado": "Fichas persoais, plano de aula e orientación profesional.",
-    "seguimiento": "Diario de clases, asistencia e entrada de notas.",
-    "calificaciones": "Caderno de notas, estatísticas e comparativa grupal e individual."
+    "calendario": "Horario, trimestres, festivos, período FEOE e vista mensual.",
+    "alumnado": "Fichas persoais, plano de aula, orientación profesional e entrada de notas por alumno.",
+    "seguimiento": "Diario de clases, asistencia, avance da programación e valoración do alumnado na empresa (FEOE).",
+    "calificaciones": "Resultados e notas do curso, histórico e reclamacións, e mellora do módulo (EQAVET e PDCA)."
   },
   "toasts": {
     "aiSettings": {
@@ -1600,11 +1566,9 @@
     "alumnado": {
       "caracteristicasDesc": "Procedencia xeográfica principal, franxa de idade, nivel competencial inicial, expectativas e implicación, etc.",
       "caracteristicasTitulo": "Características do alumnado",
-      "alumnadoActivoTitulo": "Alumnado Activo ({{count}})",
       "alumnoLabel": "Alumno/a",
       "asientoLibre": "Libre",
       "asientoOcupado": "Ocupado",
-      "boletinIndividualTitulo": "Boletín individual de cualificacións",
       "confirmDistribucionAlfabetica": "Desexas asignar automaticamente a todo o alumnado por orde alfabética? Isto sobrescribirá a distribución actual.",
       "confirmVaciarPlano": "Seguro que desexas baleirar todos os asentos do plano de clase?",
       "contextoGrupoDesc": "Define as características psicopedagóxicas e sociolóxicas do alumnado (necesarias para a PD).",
@@ -1650,7 +1614,6 @@
       "raSuperado": "SUPERADO",
       "rasgosGrupoTitulo": "Trazos característicos do grupo",
       "registroTutoriaTitulo": "Rexistro de titoría:",
-      "seleccionaAlumnadoDesc": "Escolle alumnado do panel esquerdo para visualizar o seu boletín.",
       "seleccionaAlumnadoTitulo": "Selecciona alumnado",
       "seleccionaAlumnoTutorias": "Selecciona un alumno no panel lateral para ver as súas titorías.",
       "sinAlumnadoRegistrado": "Aínda non hai alumnado rexistrado neste curso.",
@@ -1755,8 +1718,6 @@
       "composicionAulaTitulo": "Composición da aula",
       "consecucionRaTitulo": "Consecución de resultados de aprendizaxe (RA)",
       "criteriosCalificacionDesc": "Se se deixa baleiro, xérase automaticamente. Criterios de cualificación e arredondamento do módulo.",
-      "dashboardAnaliticaDesc": "Intelixencia visual sobre o rendemento e demografía do grupo.",
-      "dashboardAnaliticaTitulo": "Dashboard de analítica",
       "detalleAlumnadoDesc": "Notas individuais por alumnado, instrumento de avaliación e nivel de adquisición de RA.",
       "detalleAlumnadoTitulo": "Detalle por alumnado",
       "detalleCalificacionesInstrumentoTitulo": "Detalle de cualificacións por instrumento",
@@ -1998,7 +1959,8 @@
       "udsModulo": "Unidades didácticas do módulo",
       "tituloAutoriaPublicidad": "Datos de autoría e publicidade",
       "cargandoDatos": "Cargando datos do contexto...",
-      "cargandoDatosMetodologia": "Cargando datos de metodoloxía..."
+      "cargandoDatosMetodologia": "Cargando datos de metodoloxía...",
+      "tituloActividades": "Complementarias e extraescolares"
     },
     "ai": {
       "analizandoDocumento": "Analizando documento...",
@@ -2325,7 +2287,7 @@
       "leyendaCompletado": "Completado",
       "leyendaEnCurso": "En curso",
       "leyendaPendiente": "Pendente",
-      "progresoRelacionRaUdTitulo": "Progreso e relación entre Resultados de aprendizaxe e Unidades didácticas ou de traballo"
+      "progresoRelacionRaUdTitulo": "Progreso dos RA segundo as UD"
     },
     "header": {
       "creaOAbreProgramacion": "Crea ou abre unha Programación",
@@ -2340,7 +2302,7 @@
       "breadcrumbArchivos": "Ficheiros",
       "breadcrumbSeguridadPrivacidad": "Seguridade e privacidade",
       "modoDatosLabel": "Modo de datos:",
-      "avisoDemoDesc": "estás vendo datos de exemplo. Non é o teu curso real e non se garda nada no disco — cambia a REAIS para traballar cos teus propios ficheiros.",
+      "avisoDemoDesc": "datos de exemplo, non se garda nada. Cambia a REAIS para os teus propios ficheiros.",
       "avisoRealDesc": "estás traballando cos teus propios ficheiros .fpg/.fpp/.fpc, gardados no teu equipo. Os cambios gárdanse de verdade.",
       "gruposEjemploDobleClic": "Grupos de exemplo. Dobre clic para cargar.",
       "tusGruposDobleClic": "Os teus grupos gardados. Dobre clic para cargar.",
@@ -2387,8 +2349,7 @@
       "tipoAsistencia": "Asistencia",
       "tipoDiarioClase": "Diario de clase",
       "sinAlumnadoActivoRegistrado": "Non hai alumnado activo rexistrado neste curso.",
-      "sinEvidenciasTodavia": "Sen evidencias aínda",
-      "ningunAlumnadoSeleccionado": "Ningún alumnado seleccionado"
+      "sinEvidenciasTodavia": "Sen evidencias aínda"
     },
     "orientacion": {
       "sinAlumnadoTitulo": "Sen alumnado",
@@ -2625,7 +2586,8 @@
       "festivosEventosTitulo": "Festivos e eventos",
       "festivosEventosInstruccionesPre": "Introduce manualmente ou fai clic no calendario. Os festivos exclúen horas do cómputo real. Festivo e Relevante son independentes: un mesmo día pode ter os dous á vez. As filas con",
       "festivosEventosInstruccionesPost": "(Inicio/Fin de curso e de trimestre, FEOE) veñen de Datas xerais / Período FEOE — edítanse alí, non aquí.",
-      "hoyBadge": "Hoxe"
+      "hoyBadge": "Hoxe",
+      "periodoFeoeTitulo": "Período FEOE"
     },
     "diario": {
       "alumnadoActivoLabel": "Alumnado activo",
@@ -2695,7 +2657,7 @@
           "q3": "Como configuro as horas que o alumnado pasa na empresa (FP Dual)?",
           "a3": "En Programación > Contexto > pestana 'Identificación', escolle se o teu réxime é Dual Xeral, Dual Intensivo ou Ningún. Despois, en Programación > Contexto > pestana 'FEOE e réxime dual' describes como se organiza e se fai o seguimento desa formación na empresa. Para marcar que Resultados de Aprendizaxe concretos son duais, vai a Programación > Currículo > pestana 'RA e CE'.",
           "q4": "Para que serve o apartado EQAVET?",
-          "a4": "Serve para integrar o ciclo de mellora continua europeo na túa programación. Atópalo en 'Inicio' > pestana 'Mellora'. A final de curso, autoavalías os indicadores de calidade e anotas as túas propostas de mellora para o próximo ano. A rúbrica de autoavaliación docente segue o modelo DOCENTIA de ANECA (ver aneca.es/docentia), adaptado á práctica na FP.",
+          "a4": "Serve para integrar o ciclo de mellora continua europeo na túa programación. Atópalo en 'Peche' > pestana 'Mellora'. A final de curso, autoavalías os indicadores de calidade e anotas as túas propostas de mellora para o próximo ano. A rúbrica de autoavaliación docente segue o modelo DOCENTIA de ANECA (ver aneca.es/docentia), adaptado á práctica na FP.",
           "q5": "Que diferenza hai entre actividades complementarias e extraescolares?",
           "a5": "Son legalmente distintas: as complementarias son en horario lectivo, están ligadas ao currículo e son avaliables — forman parte da túa programación didáctica. As extraescolares son fóra de horario, voluntarias e nunca avaliables — van na PGA do centro, non na PD; en Metodoloxía > Transversais podes anotalas igualmente como referencia, pero non contan na programación.",
           "q6": "Que diferenza hai entre instrumento de avaliación e instrumento de cualificación?",
@@ -2723,7 +2685,7 @@
           "q3": "Como paso lista ou rexistro faltas de asistencia?",
           "a3": "Na sección de Seguimento tes a pestana 'Asistencia'. Verás a todo o teu alumnado e cun só clic na súa cuadrícula podes alternar entre Falta, Atraso ou Falta Xustificada.",
           "q4": "Como avalío unha tarefa ou exame concreto?",
-          "a4": "Vai á sección 'Seguimento' > pestana 'Detalle por alumnado' para introducir a nota de cada actividade, por alumno/a. A nota final recalcúlase automaticamente a partir dos pesos de RA e CE.",
+          "a4": "Vai á sección 'Alumnado' > pestana 'Notas' para introducir a nota de cada actividade, por alumno/a. A nota final recalcúlase automaticamente a partir dos pesos de RA e CE.",
           "q5": "Como se calcula exactamente a nota final do trimestre?",
           "a5": "O sistema cruza as cualificacións que pos nos Instrumentos co peso do Indicador (Avaliación > bloque Indicadores), que á súa vez alimenta o peso do Criterio de Avaliación (CE) e finalmente o Resultado de Aprendizaxe (RA). Todo en tempo real.",
           "q6": "Que significan as cores (morado, verde azulado, laranxa) na axenda e o calendario visual?",
@@ -2870,7 +2832,9 @@
       "evaluacionFinalOrdinariaTitulo": "Avaliación final ordinaria"
     },
     "seguimiento": {
-      "cargandoDatosSeguimiento": "Cargando datos de seguimento..."
+      "cargandoDatosSeguimiento": "Cargando datos de seguimento...",
+      "mesActualPrefijo": "ACTUAL",
+      "planificacionMensualTitulo": "Planificación mensual"
     }
   },
   "t1": "1º trimestre",

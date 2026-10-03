@@ -192,7 +192,7 @@ export function FeoeEmpresaTab() {
             <p className="text-body text-muted">
               {t('campos.feoe.ningunCeMarcadoDesc', {defaultValue: 'Este módulo no está dualizado todavía: no hay ningún CE marcado como FEOE. Márcalos en Currículo -> OG<-RA<-CE (columna "FEOE").'})}
             </p>
-            <Link href="/contexto?tab=plan-feoe" className="text-caption text-info hover:underline inline-block">
+            <Link href="/contexto?tab=contextualizacion" className="text-caption text-info hover:underline inline-block">
               {t('botones.feoe.configurarEnPlanFeoe', {defaultValue: 'Configurar horas y régimen en Plan FEOE'})}
             </Link>
           </div>
@@ -233,7 +233,7 @@ export function FeoeEmpresaTab() {
                 <GraduationCap className="w-4 h-4" /> {t('botones.feoe.gestionarEnCurriculo', {defaultValue: 'Gestionar en Currículo'})}
               </Button>
             </Link>
-            <Link href="/contexto?tab=plan-feoe">
+            <Link href="/contexto?tab=contextualizacion">
               <Button variant="secondary" className="gap-2">
                 <Building2 className="w-4 h-4" /> {t('botones.feoe.configurarEnPlanFeoe', {defaultValue: 'Configurar horas y régimen en Plan FEOE'})}
               </Button>

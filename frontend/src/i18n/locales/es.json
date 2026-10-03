@@ -55,6 +55,13 @@
         "label": "Análisis APP->PDx",
         "desc": "De la app a dónde aparece cada campo en cada modelo de Programación Didáctica (PD-, PD=, PD+)."
       }
+    },
+    "seguimiento": {},
+    "calendario": {
+      "mensual": {
+        "label": "Mensual",
+        "desc": "Vista mensual y calendario interactivo con fechas clave y sesiones planificadas."
+      }
     }
   },
   "inicio": {
@@ -81,7 +88,7 @@
     "alumnado": "Alumnado",
     "diario": "Diario",
     "seguimiento": "Seguimiento",
-    "calificaciones": "Calificación",
+    "calificaciones": "Cierre",
     "informes": "Informes",
     "normativa": "Normativa",
     "calidad": "Calidad",
@@ -102,7 +109,7 @@
     "ayuda": "Guía de inicio, FAQ, acrónimos y contribuciones de la comunidad.",
     "magia": "Comparativa y correspondencia APP-PD, y documentos de apoyo de la programación y del curso.",
     "legal": "Aviso legal, privacidad, cookies y accesibilidad.",
-    "agenda": "Resumen diario, avance mensual y previsión de RA y UD pendientes.",
+    "agenda": "Tus clases de hoy, la semana y la unidad en curso.",
     "archivos": "Gestión de archivos, sincronización en la nube, seguridad, IA y verificación de datos.",
     "normativa": "Normativa autonómica, legislación, bibliografía y estándares INCUAL.",
     "catalogo": "Familias, títulos, módulos y currículos (RA y CE).",
@@ -110,10 +117,10 @@
     "curriculo": "Contribución de los RA a los objetivos, ponderación RA-CE, unidades didácticas y tareas competenciales.",
     "metodologia": "Metodología, recursos, plan de contingencia y elementos transversales.",
     "instrumentos": "Definición y pesos de las herramientas de evaluación.",
-    "calendario": "Horario, trimestres, festivos, periodo FEOE y actividades extraescolares.",
-    "alumnado": "Fichas personales, plano de aula y orientación profesional.",
-    "seguimiento": "Diario de clases, asistencia y entrada de notas.",
-    "calificaciones": "Cuaderno de notas, estadísticas y comparativa grupal e individual."
+    "calendario": "Horario, trimestres, festivos, periodo FEOE y vista mensual.",
+    "alumnado": "Fichas personales, plano de aula, orientación profesional y entrada de notas por alumnado.",
+    "seguimiento": "Diario de clases, asistencia, avance de la programación y valoración del alumnado en la empresa (FEOE).",
+    "calificaciones": "Resultados y notas del curso, histórico y reclamaciones, y mejora del módulo (EQAVET y PDCA)."
   },
   "sidebar": {
     "en_obras": "En obras",
@@ -135,13 +142,13 @@
   },
   "pages": {
     "agenda_title": "Agenda",
-    "agenda_desc": "Resumen diario: estado de clase y UD a impartir.",
+    "agenda_desc": "Tus clases de hoy, la semana y la unidad en curso.",
     "alumnado_title": "Alumnado",
-    "alumnado_desc": "Gestión de alumnado, plano de aula y orientación profesional.",
+    "alumnado_desc": "Gestión de alumnado, plano de aula, orientación profesional y notas.",
     "diario_title": "Seguimiento diario",
     "diario_desc": "Diario de aula, contingencias, control de asistencia y alertas.",
     "evaluacion_title": "Calificación",
-    "evaluacion_desc": "Calificaciones, evaluación de RA, analíticas y calidad EQAVET.",
+    "evaluacion_desc": "Resultados, calificaciones, analíticas y mejora de la docencia (EQAVET).",
     "calendario_title": "Calendario",
     "calendario_desc": "Configura festivos, evaluaciones y tu horario semanal.",
     "modulo_title": "Configuración del módulo",
@@ -429,5 +436,11 @@
     "fondo_celda": "Fondo de celda",
     "margen_celda": "Margen de celda",
     "espaciado_celda": "Espaciado de celda"
+  },
+  "campos": {
+    "dashboard": {},
+    "seguimiento": {
+      "planificacionMensualTitulo": "Planificación mensual"
+    }
   }
 }

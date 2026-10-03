@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { AlertOctagon, Plus, FileDown, CheckCircle2 } from "lucide-react";
+import { Plus, FileDown, CheckCircle2 } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -8,7 +8,6 @@ import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { enrichInfoModulo } from "@/services/catalogCache";
 import { getApiBase } from "@/services/apiBase";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const REFERENCIAS_FIJAS = [
   { id: "Nota_Final_FO", label: "Nota final (evaluación ordinaria)" },
@@ -104,11 +103,7 @@ export function ReclamacionesTab() {
 
   return (
     <div className="space-y-4 animate-in fade-in duration-500">
-      <div className="space-y-3">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <SectionHeading id="calificaciones-reclamaciones" icon={AlertOctagon} scrollMt="260px" className="flex-1">
-          {t('campos.evaluacion.reclamacionesTitulo', {defaultValue: 'Reclamaciones de nota'})}
-        </SectionHeading>
+      <div className="flex justify-end">
         <Button onClick={() => setFormOpen(o => !o)} className="bg-danger/10 hover:bg-danger/20 text-danger border border-danger/30 gap-2 shrink-0">
           <Plus className="w-4 h-4" /> {t('botones.reclamaciones.nuevaReclamacion', {defaultValue: 'Nueva reclamación'})}
         </Button>
@@ -215,7 +210,6 @@ export function ReclamacionesTab() {
           </div>
         )}
       </Card>
-      </div>
     </div>
   );
 }

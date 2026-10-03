@@ -1,10 +1,12 @@
 "use client";
-import { Brain, Briefcase, ChevronDown, ChevronUp, HelpCircle, NotebookPen, Rocket, Target, TrendingUp, Users } from "lucide-react";
+import { Brain, Briefcase, ChevronDown, ChevronUp, FileClock, FileText, HelpCircle, NotebookPen, Rocket, Target, TrendingUp, Users } from "lucide-react";
 import React, { useState } from "react";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { Alumnado } from "@/types";
 import { useTranslation } from "react-i18next";
+import { BoletinesTab } from "./BoletinesTab";
+import { ExpedienteTab } from "./ExpedienteTab";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -45,6 +47,8 @@ export const OrientacionIndividualTab = () => {
     aspiraciones: false,
     insercion: false,
     notas: false,
+    boletin: false,
+    expediente: false,
   });
 
   const df_al = cursoData?.df_al || [];
@@ -431,6 +435,28 @@ export const OrientacionIndividualTab = () => {
                     <div className="md:col-span-2">
                       {renderTextarea("resumen_orientacion", t('campos.orientacion.resumenOrientacionLabel', {defaultValue: 'Resumen de orientación (campo libre)'}), t('campos.orientacion.resumenOrientacionPlaceholder', {defaultValue: 'Escribe aquí el resumen de la orientación: decisiones tomadas, acuerdos con el alumnado/a y la familia, próximos pasos...'}))}
                     </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Sección 7: Boletín -- traída de Calificaciones -> Individual
+                  (petición de Rafael, 2026-10-01), reutilizando el alumnado
+                  ya seleccionado arriba en vez de duplicar el selector. */}
+              <div className="space-y-3">
+                {renderSectionHeader("boletin", t('campos.orientacion.seccion7Titulo', {defaultValue: 'Sección 7: Boletín individual de calificaciones'}), <FileText className="w-5 h-5 text-accent" />, openSections.boletin, toggleSection)}
+                {openSections.boletin && (
+                  <div className="animate-in slide-in-from-top-2 duration-300">
+                    <BoletinesTab studentId={selectedStudentId} />
+                  </div>
+                )}
+              </div>
+
+              {/* Sección 8: Expediente -- misma procedencia que la Sección 7. */}
+              <div className="space-y-3">
+                {renderSectionHeader("expediente", t('campos.orientacion.seccion8Titulo', {defaultValue: 'Sección 8: Expediente (línea temporal de evidencias)'}), <FileClock className="w-5 h-5 text-muted" />, openSections.expediente, toggleSection)}
+                {openSections.expediente && (
+                  <div className="animate-in slide-in-from-top-2 duration-300">
+                    <ExpedienteTab studentId={selectedStudentId} />
                   </div>
                 )}
               </div>

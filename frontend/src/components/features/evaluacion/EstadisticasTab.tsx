@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
-import { BarChart3, PieChart as PieChartIcon, TrendingUp, AlertTriangle, Users } from "lucide-react";
+import { PieChart as PieChartIcon, TrendingUp, AlertTriangle, Users } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart as RePieChart, Pie, Cell, Legend } from "recharts";
 import { isAlumnoActivo } from "@/utils/alumnado";
@@ -110,16 +110,7 @@ export default function EstadisticasTab() {
   return (
     <MotionWrapper>
       <div className="space-y-6 animate-in fade-in duration-500">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-          <div>
-            <h1 className="text-heading font-bold tracking-tight mb-2 flex items-center gap-3">
-              <BarChart3 className="w-8 h-8 text-accent" /> {t('campos.evaluacion.dashboardAnaliticaTitulo', {defaultValue: 'Dashboard de analítica'})}
-            </h1>
-            <p className="text-muted">
-              {t('campos.evaluacion.dashboardAnaliticaDesc', {defaultValue: 'Inteligencia visual sobre el rendimiento y demografía del grupo.'})}
-            </p>
-          </div>
-
+        <div className="flex justify-end mb-6">
           <div className="flex bg-foreground/5 p-1 rounded-lg border border-foreground/10">
             {(["1T", "2T", "3T", "FINAL"] as const).map(periodo => (
               <button

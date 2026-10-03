@@ -341,15 +341,15 @@ export default function MagiaPage() {
 
   // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
-    programacion: [
-      { id: "magia-programacion-documentos", label: t('campos.magia.documentosApoyoCurriculoTitulo', {defaultValue: 'Plantillas de apoyo al currículo'}) },
-      { id: "magia-programacion-comunidades", label: t('campos.magia.documentosPorComunidadTitulo', {defaultValue: 'Programaciones didácticas por Comunidades Autónomas'}) },
-    ],
+    // Programación se quedó con un único bloque real (Comunidades) al mover
+    // "Plantillas de apoyo al currículo" a Curso -- sin índice, mismo
+    // criterio que el resto de la app (solo 2+ bloques).
     curso: [
+      { id: "magia-curso-documentos", label: t('campos.magia.documentosApoyoCurriculoTitulo', {defaultValue: 'Plantillas de apoyo al currículo'}) },
       { id: "magia-curso-calendario", label: t('nav.calendario', {defaultValue: 'Calendario'}) },
       { id: "magia-curso-alumnado", label: t('nav.alumnado', {defaultValue: 'Alumnado'}) },
       { id: "magia-curso-seguimiento", label: t('campos.magia.seguimientoLabel', {defaultValue: 'Seguimiento'}) },
-      { id: "magia-curso-calificaciones", label: t('nav.calificaciones', {defaultValue: 'Calificaciones'}) },
+      { id: "magia-curso-calificaciones", label: t('nav.calificaciones', {defaultValue: 'Cierre'}) },
     ],
     // Comparativa PDx, fusionada al final de Análisis APP->PDx (antes
     // pestaña propia, 2026-09-30). ids fijados a mano en
@@ -366,7 +366,7 @@ export default function MagiaPage() {
       { id: "comparativa-calendario", label: t('nav.calendario', {defaultValue: 'Calendario'}) },
       { id: "comparativa-alumnado", label: t('nav.alumnado', {defaultValue: 'Alumnado'}) },
       { id: "comparativa-seguimiento", label: t('campos.magia.seguimientoLabel', {defaultValue: 'Seguimiento'}) },
-      { id: "comparativa-calificacion", label: t('nav.calificaciones', {defaultValue: 'Calificación'}) },
+      { id: "comparativa-calificacion", label: t('nav.calificaciones', {defaultValue: 'Cierre'}) },
       { id: "comparativa-resumen-cobertura", label: 'Resumen de cobertura por nivel' },
       { id: "comparativa-notas", label: 'Notas' },
     ],
@@ -476,81 +476,6 @@ export default function MagiaPage() {
                       </Card>
                     ) : (
                       <div className="space-y-4 animate-in fade-in duration-500">
-                        {/* ── Currículo + Instrumento fusionados en un solo bloque
-                            (antes 2 Cards separadas, 2026-09-25, petición de Rafael:
-                            "mejor quitar los dos bloques... uno solo... y ya esta claro") ── */}
-                        <SectionHeading id="magia-programacion-documentos" icon={Grid} scrollMt="260px">
-                          {t('campos.magia.documentosApoyoCurriculoTitulo', {defaultValue: 'Plantillas de apoyo al currículo'})}
-                        </SectionHeading>
-                        <Card className="p-6 border-t-4 border-t-teal-500">
-                          <p className="text-body text-muted mb-6">{t('campos.magia.documentosApoyoCurriculoDesc', {defaultValue: 'Cruce de resultados de aprendizaje, criterios e instrumentos; documentos de UD y tareas.'})}</p>
-                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                              <div>
-                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Grid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.matrizRaUdTitulo', {defaultValue: 'Matriz RA ↔ UD'})}</h3>
-                                <p className="text-body text-muted mb-6">{t('campos.magia.matrizRaUdDesc', {defaultValue: 'Tabla cruzada de RA y su relación con las Unidades Didácticas.'})}</p>
-                              </div>
-                              <DualDownloadButtons type="matrices" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
-                            </div>
-
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                              <div>
-                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.curriculo.unidadDidacticaSingular', {defaultValue: 'Unidad didáctica'})}</h3>
-                                {df_ud.length > 0 ? (
-                                  <select id="ud_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold mb-4">
-                                    {df_ud.map((u: any) => (
-                                      <option key={u.id_ud} value={u.id_ud}>{u.id_ud} - {u.desc_ud}</option>
-                                    ))}
-                                  </select>
-                                ) : (
-                                  <p className="text-muted italic mb-4">{t('campos.magia.sinUdDefinidas', {defaultValue: 'No hay Unidades Didácticas definidas.'})}</p>
-                                )}
-                              </div>
-                              <Button
-                                onClick={() => {
-                                  const sel = document.getElementById('ud_select') as HTMLSelectElement;
-                                  if (sel && sel.value) handleDownloadPdf('ud', 'docx', { item_id: sel.value });
-                                }}
-                                disabled={df_ud.length === 0 || downloadingStr === 'ud_docx'} className="w-full"
-                              >
-                                {downloadingStr === 'ud_docx' ? t('botones.magia.generandoDocx', {defaultValue: '⏳ Generando DOCX...'}) : t('botones.magia.descargarUdDocx', {defaultValue: 'Descargar UD.docx'})}
-                              </Button>
-                            </div>
-
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                              <div>
-                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.tareaCompetencialTitulo', {defaultValue: 'Tarea competencial'})}</h3>
-                                {df_act.length > 0 ? (
-                                  <select id="tarea_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold mb-4">
-                                    {df_act.map((tarea: any) => (
-                                      <option key={tarea.ID || tarea.id_act} value={tarea.ID || tarea.id_act}>{tarea.ID || tarea.id_act} - {tarea.Nombre_Tarea || ''}</option>
-                                    ))}
-                                  </select>
-                                ) : (
-                                  <p className="text-muted italic mb-4">{t('campos.magia.sinTareasDefinidas', {defaultValue: 'No hay Tareas competenciales definidas.'})}</p>
-                                )}
-                              </div>
-                              <Button
-                                onClick={() => {
-                                  const sel = document.getElementById('tarea_select') as HTMLSelectElement;
-                                  if (sel && sel.value) handleDownloadPdf('tarea', 'docx', { item_id: sel.value });
-                                }}
-                                disabled={df_act.length === 0 || downloadingStr === 'tarea_docx'} className="w-full"
-                              >
-                                {downloadingStr === 'tarea_docx' ? t('botones.magia.generandoDocx', {defaultValue: '⏳ Generando DOCX...'}) : t('botones.magia.descargarTareaDocx', {defaultValue: 'Descargar tarea.docx'})}
-                              </Button>
-                            </div>
-
-                            <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
-                              <div>
-                                <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Grid3x3 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.coberturaCeTitulo', {defaultValue: 'Matriz de cobertura CE × Instrumento'})}</h3>
-                                <p className="text-body text-muted mb-6">{t('campos.magia.coberturaCeDesc', {defaultValue: 'Qué instrumentos evalúan cada Criterio de evaluación, coloreados por evaluación (igual que en Instrumentos > Modelo JEG).'})}</p>
-                              </div>
-                              <DualDownloadButtons type="cobertura_ce" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
-                            </div>
-                          </div>
-                        </Card>
-
                         {/* ── Documentos programáticos por Comunidades autónomas (antes
                             pestaña propia "Documentos PDx" / "Comunidades" -- traída aquí
                             debajo, 2026-09-25, petición de Rafael) ── */}
@@ -658,6 +583,82 @@ export default function MagiaPage() {
                     Calendario / Alumnado / Seguimiento / Calificaciones. */}
                 {activeTab === 'curso' && (
                   <div className="space-y-4 animate-in fade-in duration-500">
+                    {/* ── Plantillas de apoyo al currículo (antes primer bloque
+                        de la pestaña Programación, movida aquí como bloque
+                        previo a lo ya existente -- petición de Rafael,
+                        2026-09-30) ── */}
+                    <SectionHeading id="magia-curso-documentos" icon={Grid} scrollMt="260px">
+                      {t('campos.magia.documentosApoyoCurriculoTitulo', {defaultValue: 'Plantillas de apoyo al currículo'})}
+                    </SectionHeading>
+                    <Card className="p-6 border-t-4 border-t-teal-500">
+                      <p className="text-body text-muted mb-6">{t('campos.magia.documentosApoyoCurriculoDesc', {defaultValue: 'Cruce de resultados de aprendizaje, criterios e instrumentos; documentos de UD y tareas.'})}</p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                          <div>
+                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Grid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.matrizRaUdTitulo', {defaultValue: 'Matriz RA ↔ UD'})}</h3>
+                            <p className="text-body text-muted mb-6">{t('campos.magia.matrizRaUdDesc', {defaultValue: 'Tabla cruzada de RA y su relación con las Unidades Didácticas.'})}</p>
+                          </div>
+                          <DualDownloadButtons type="matrices" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
+                        </div>
+
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                          <div>
+                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.curriculo.unidadDidacticaSingular', {defaultValue: 'Unidad didáctica'})}</h3>
+                            {df_ud.length > 0 ? (
+                              <select id="ud_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold mb-4">
+                                {df_ud.map((u: any) => (
+                                  <option key={u.id_ud} value={u.id_ud}>{u.id_ud} - {u.desc_ud}</option>
+                                ))}
+                              </select>
+                            ) : (
+                              <p className="text-muted italic mb-4">{t('campos.magia.sinUdDefinidas', {defaultValue: 'No hay Unidades Didácticas definidas.'})}</p>
+                            )}
+                          </div>
+                          <Button
+                            onClick={() => {
+                              const sel = document.getElementById('ud_select') as HTMLSelectElement;
+                              if (sel && sel.value) handleDownloadPdf('ud', 'docx', { item_id: sel.value });
+                            }}
+                            disabled={df_ud.length === 0 || downloadingStr === 'ud_docx'} className="w-full"
+                          >
+                            {downloadingStr === 'ud_docx' ? t('botones.magia.generandoDocx', {defaultValue: '⏳ Generando DOCX...'}) : t('botones.magia.descargarUdDocx', {defaultValue: 'Descargar UD.docx'})}
+                          </Button>
+                        </div>
+
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                          <div>
+                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.tareaCompetencialTitulo', {defaultValue: 'Tarea competencial'})}</h3>
+                            {df_act.length > 0 ? (
+                              <select id="tarea_select" className="w-full bg-foreground/25 border border-[var(--glass-border)] rounded-lg p-3 text-[var(--foreground)] focus:border-info focus:outline-none font-bold mb-4">
+                                {df_act.map((tarea: any) => (
+                                  <option key={tarea.ID || tarea.id_act} value={tarea.ID || tarea.id_act}>{tarea.ID || tarea.id_act} - {tarea.Nombre_Tarea || ''}</option>
+                                ))}
+                              </select>
+                            ) : (
+                              <p className="text-muted italic mb-4">{t('campos.magia.sinTareasDefinidas', {defaultValue: 'No hay Tareas competenciales definidas.'})}</p>
+                            )}
+                          </div>
+                          <Button
+                            onClick={() => {
+                              const sel = document.getElementById('tarea_select') as HTMLSelectElement;
+                              if (sel && sel.value) handleDownloadPdf('tarea', 'docx', { item_id: sel.value });
+                            }}
+                            disabled={df_act.length === 0 || downloadingStr === 'tarea_docx'} className="w-full"
+                          >
+                            {downloadingStr === 'tarea_docx' ? t('botones.magia.generandoDocx', {defaultValue: '⏳ Generando DOCX...'}) : t('botones.magia.descargarTareaDocx', {defaultValue: 'Descargar tarea.docx'})}
+                          </Button>
+                        </div>
+
+                        <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
+                          <div>
+                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Grid3x3 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.coberturaCeTitulo', {defaultValue: 'Matriz de cobertura CE × Instrumento'})}</h3>
+                            <p className="text-body text-muted mb-6">{t('campos.magia.coberturaCeDesc', {defaultValue: 'Qué instrumentos evalúan cada Criterio de evaluación, coloreados por evaluación (igual que en Instrumentos > Modelo JEG).'})}</p>
+                          </div>
+                          <DualDownloadButtons type="cobertura_ce" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
+                        </div>
+                      </div>
+                    </Card>
+
                     {/* ── Calendario ── */}
                     <SectionHeading id="magia-curso-calendario" icon={Calendar} scrollMt="260px">
                       {t('nav.calendario', {defaultValue: 'Calendario'})}
@@ -774,7 +775,7 @@ export default function MagiaPage() {
                     {/* ── Calificaciones ── */}
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                       <SectionHeading id="magia-curso-calificaciones" icon={Award} scrollMt="260px" className="flex-1">
-                        {t('nav.calificaciones', {defaultValue: 'Calificaciones'})}
+                        {t('nav.calificaciones', {defaultValue: 'Cierre'})}
                       </SectionHeading>
                       <Button variant="success" onClick={handleExportExcelCompleto} className="gap-2 shrink-0">
                         <FileSpreadsheet className="w-4 h-4" /> {t('botones.magia.exportarExcelCompleto', {defaultValue: 'Exportar Excel completo'})}
