@@ -49,8 +49,8 @@ export function PlanificacionMensualTab() {
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
       <div className="space-y-3">
-      <SectionHeading id="seguimiento-avance-planificacion" icon={Calendar} scrollMt="260px">
-        {t('campos.seguimiento.planificacionMensualTitulo', {defaultValue: 'Planificación mensual'})}
+      <SectionHeading id="agenda-planificacion-mensual" icon={Calendar} scrollMt="260px">
+        {t('campos.agenda.planificacionSeguimientoMensualTitulo', {defaultValue: 'Planificación y seguimiento mensual'})}
       </SectionHeading>
       <Card className="p-6 overflow-x-auto">
         <table className="w-full text-left border-collapse text-body whitespace-nowrap">

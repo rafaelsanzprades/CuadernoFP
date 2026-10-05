@@ -36,7 +36,7 @@ export function PlanesTab() {
 
   // Peso de la FEOE en tu módulo (Ítem 2, 00 IDEAS.md, 2026-09-21): caja
   // informativa -- no fija el peso real de la nota FEOE (eso sigue siendo
-  // un valor libre que se ajusta en Seguimiento->Empresa FEOE). h_feoe y
+  // un valor libre que se ajusta en Calificaciones->Empresa FEOE). h_feoe y
   // carga_lectiva_anual se editan en Identificación, no aquí.
   const hFeoeCurso = info_modulo.h_feoe != null ? Number(info_modulo.h_feoe) : (info_modulo.curso === '2º' ? 360 : 140);
   const cargaLectivaAnual = Number(info_modulo.carga_lectiva_anual) || 1000;
@@ -74,7 +74,7 @@ export function PlanesTab() {
               </Link>
             </div>
             <p className="text-caption text-muted">
-              {t('campos.modulo.pesoFeoeDesc', {defaultValue: 'Solo contexto/apoyo -- no fija el peso real de la nota FEOE, que sigues ajustando tú en Seguimiento -> Empresa FEOE.'})}
+              {t('campos.modulo.pesoFeoeDesc', {defaultValue: 'Solo contexto/apoyo -- no fija el peso real de la nota FEOE, que sigues ajustando tú en Calificaciones -> Empresa FEOE.'})}
             </p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               <div className="p-3 rounded-lg bg-background/40 border border-white/5 text-center">

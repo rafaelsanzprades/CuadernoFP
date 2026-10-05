@@ -1,5 +1,5 @@
 "use client";
-import { AlertTriangle, Building2, CheckCircle2, ClipboardList, Compass, Globe2, GraduationCap, Handshake, Rocket, Search, Target, XCircle } from "lucide-react";
+import { Building2, ClipboardList, CheckCircle2, Compass, Globe2, GraduationCap, Handshake, Rocket, Search, Target, XCircle } from "lucide-react";
 import React, { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useAppStore } from "@/store/useAppStore";
@@ -198,14 +198,12 @@ export const ResumenProfesionalTab = () => {
                 <th className="text-center p-4 font-semibold whitespace-nowrap"><span className="inline-flex"><Globe2 className="w-[1.2em] h-[1.2em] mr-1" /></span></th>
                 <th className="text-center p-4 font-semibold whitespace-nowrap"><span className="inline-flex"><Rocket className="w-[1.2em] h-[1.2em] mr-1" /></span></th>
                 <th className="text-center p-4 font-semibold whitespace-nowrap"><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></th>
-                <th className="text-center p-4 font-semibold whitespace-nowrap"><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span></th>
-                <th className="text-left p-4 font-semibold whitespace-nowrap">{t('campos.alumnado.reunionesLabel', {defaultValue: 'Reuniones'})}</th>
               </tr>
             </thead>
             <tbody>
               {filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={11} className="p-12 text-center text-muted">
+                  <td colSpan={9} className="p-12 text-center text-muted">
                     {t('campos.alumnado.sinAlumnadoFiltros', {defaultValue: 'No hay alumnado que coincidan con los filtros.'})}
                   </td>
                 </tr>
@@ -270,22 +268,12 @@ export const ResumenProfesionalTab = () => {
                       <td className="p-4 text-center">
                         {d.interes_universidad === "X" ? <span title={t('campos.alumnado.interesadoUniversidad', {defaultValue: 'Interesado/a en universidad'})}><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></span> : <span className="text-muted/20">·</span>}
                       </td>
-                      <td className="p-4 text-center">
-                        {d.derivado_orientador === "X"
-                          ? <span className="text-warning font-bold" title={t('campos.alumnado.derivadoAlOrientador', {defaultValue: 'Derivado al orientador'})}><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
-                          : <span className="text-muted/20">·</span>}
-                      </td>
-                      <td className="p-4 text-center">
-                        {d.reuniones_celebradas
-                          ? <span className="text-xs font-medium text-foreground/80 bg-foreground/10 px-2 py-0.5 rounded-full">{d.reuniones_celebradas}</span>
-                          : <span className="text-muted/40 text-xs">-</span>}
-                      </td>
                     </tr>
 
                     {isExpanded && (
                       <tr className="border-b border-white/5 bg-accent/3">
-                        <td colSpan={11} className="px-8 py-5">
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <td colSpan={9} className="px-8 py-5">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 
                             <div className="space-y-3">
                               <div className="text-[10px] font-bold text-muted tracking-widest mb-2"><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.perfilSeccionTitulo', {defaultValue: 'Perfil'})}</div>
@@ -331,27 +319,6 @@ export const ResumenProfesionalTab = () => {
                               )}
                             </div>
 
-                            <div className="space-y-3">
-                              <div className="text-[10px] font-bold text-muted tracking-widest mb-2"><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.seguimientoTutorSeccionTitulo', {defaultValue: 'Seguimiento tutor'})}</div>
-                              {[
-                                [t('campos.alumnado.reunionesCelebradasLabel', {defaultValue: 'Reuniones celebradas'}), d.reuniones_celebradas],
-                                [t('campos.alumnado.ultimaReunionLabel', {defaultValue: 'Última reunión'}), d.fecha_ultima_reunion],
-                                [t('campos.alumnado.familiaInformadaLabel', {defaultValue: 'Familia informada'}), d.familia_informada === "X" ? t('checks.comun.si', {defaultValue: 'Sí'}) : null],
-                                [t('campos.alumnado.derivadoOrientadorLabel', {defaultValue: 'Derivado a orientador'}), d.derivado_orientador === "X" ? t('checks.comun.si', {defaultValue: 'Sí'}) : null],
-                                [t('campos.alumnado.informeEmitidoLabel', {defaultValue: 'Informe emitido'}), d.informe_emitido === "X" ? t('checks.comun.si', {defaultValue: 'Sí'}) : null],
-                              ].map(([label, val]) => val ? (
-                                <div key={label} className="flex gap-2 text-xs">
-                                  <span className="text-muted shrink-0">{label}:</span>
-                                  <span className="text-foreground/80">{val}</span>
-                                </div>
-                              ) : null)}
-                              {d.resumen_orientacion && (
-                                <div className="text-xs text-foreground/80 bg-foreground/5 border border-white/5 rounded-lg px-3 py-2 leading-relaxed mt-2">
-                                  {d.resumen_orientacion}
-                                </div>
-                              )}
-                            </div>
-
                           </div>
                         </td>
                       </tr>
@@ -371,7 +338,6 @@ export const ResumenProfesionalTab = () => {
             <span><span className="inline-flex"><Globe2 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.erasmusBadge', {defaultValue: 'Erasmus+'})}: <strong className="text-foreground">{filtered.filter((al: Alumnado) => profesionalLedger[al.ID!]?.interes_erasmus === "X").length}</strong></span>
             <span><span className="inline-flex"><Rocket className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.emprenderBadge', {defaultValue: 'Emprender'})}: <strong className="text-foreground">{filtered.filter((al: Alumnado) => profesionalLedger[al.ID!]?.interes_emprender === "X").length}</strong></span>
             <span><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.universidadBadge', {defaultValue: 'Universidad'})}: <strong className="text-foreground">{filtered.filter((al: Alumnado) => profesionalLedger[al.ID!]?.interes_universidad === "X").length}</strong></span>
-            <span><span className="inline-flex"><AlertTriangle className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.derivadosLabel', {defaultValue: 'Derivados'})}: <strong className="text-warning">{filtered.filter((al: Alumnado) => profesionalLedger[al.ID!]?.derivado_orientador === "X").length}</strong></span>
           </div>
         </div>
       </Card>

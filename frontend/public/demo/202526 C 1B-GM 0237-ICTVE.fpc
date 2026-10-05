@@ -78,19 +78,6 @@
     {
       "ID": "AN03",
       "Estado": "Alta",
-      "Apellidos": "Domínguez Demo1B",
-      "Nombre": "Alba",
-      "Edad": 24,
-      "Nacimiento": "03/08/2002",
-      "Repite": false,
-      "Matricula": "",
-      "Comentarios": "",
-      "email": "adominguez31-demo@gmail.com",
-      "Movil": "536 326 261"
-    },
-    {
-      "ID": "AN04",
-      "Estado": "Alta",
       "Apellidos": "Díaz Demo1B",
       "Nombre": "David",
       "Edad": 17,
@@ -100,6 +87,19 @@
       "Comentarios": "",
       "email": "ddiaz13-demo@gmail.com",
       "Movil": "597 411 784"
+    },
+    {
+      "ID": "AN04",
+      "Estado": "Alta",
+      "Apellidos": "Domínguez Demo1B",
+      "Nombre": "Alba",
+      "Edad": 24,
+      "Nacimiento": "03/08/2002",
+      "Repite": false,
+      "Matricula": "",
+      "Comentarios": "",
+      "email": "adominguez31-demo@gmail.com",
+      "Movil": "536 326 261"
     },
     {
       "ID": "AN05",
@@ -238,7 +238,7 @@
       "Nota_Final_FE": 0
     },
     {
-      "ID": "AN03",
+      "ID": "AN04",
       "ACT01": 4.4,
       "ACT02": 6.6,
       "ACT03": 5,
@@ -264,7 +264,7 @@
       "Nota_Final_FE": 0
     },
     {
-      "ID": "AN04",
+      "ID": "AN03",
       "ACT01": 6.6,
       "ACT02": 4.2,
       "ACT03": 5.6,
@@ -877,7 +877,7 @@
       "informe_emitido": "",
       "resumen_orientacion": "Valentina tiene muy claro que quiere seguir estudiando. Se le ha informado de los accesos a ASIR y al grado universitario en Ingeniería."
     },
-    "AN03": {
+    "AN04": {
       "motivo_eleccion": "Reorientación",
       "via_acceso": "FPGM",
       "ciclo_previo": "SMR (Sistemas Microinformáticos y Redes)",
@@ -919,7 +919,7 @@
       "informe_emitido": "",
       "resumen_orientacion": "Ya trabaja. Solo necesita el título. Muy buen perfil profesional."
     },
-    "AN04": {
+    "AN03": {
       "motivo_eleccion": "Por descarte",
       "via_acceso": "ESO",
       "ciclo_previo": "",
@@ -1699,8 +1699,8 @@
     "seats": {
       "0_0": "AN01",
       "0_1": "AN02",
-      "0_2": "AN03",
-      "1_0": "AN04",
+      "0_2": "AN04",
+      "1_0": "AN03",
       "1_1": "AN05",
       "1_2": "AN06",
       "2_0": "AN07",
@@ -1722,15 +1722,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT01-ACT01-CE1.a",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT01-ACT01-CE1.a",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT01",
       "id_indicador": "ACT01-CE1.a",
       "valor": 4.4
     },
     {
-      "id_calificacion": "AN04-ACT01-ACT01-CE1.a",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT01-ACT01-CE1.a",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT01",
       "id_indicador": "ACT01-CE1.a",
       "valor": 6.6
@@ -1785,15 +1785,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT01-ACT01-CE1.b",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT01-ACT01-CE1.b",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT01",
       "id_indicador": "ACT01-CE1.b",
       "valor": 4.4
     },
     {
-      "id_calificacion": "AN04-ACT01-ACT01-CE1.b",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT01-ACT01-CE1.b",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT01",
       "id_indicador": "ACT01-CE1.b",
       "valor": 6.6
@@ -1848,15 +1848,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT01-ACT01-CE1.c",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT01-ACT01-CE1.c",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT01",
       "id_indicador": "ACT01-CE1.c",
       "valor": 4.4
     },
     {
-      "id_calificacion": "AN04-ACT01-ACT01-CE1.c",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT01-ACT01-CE1.c",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT01",
       "id_indicador": "ACT01-CE1.c",
       "valor": 6.6
@@ -1911,15 +1911,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT01-ACT01-CE1.d",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT01-ACT01-CE1.d",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT01",
       "id_indicador": "ACT01-CE1.d",
       "valor": 4.4
     },
     {
-      "id_calificacion": "AN04-ACT01-ACT01-CE1.d",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT01-ACT01-CE1.d",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT01",
       "id_indicador": "ACT01-CE1.d",
       "valor": 6.6
@@ -1974,15 +1974,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT01-ACT01-CE1.e",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT01-ACT01-CE1.e",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT01",
       "id_indicador": "ACT01-CE1.e",
       "valor": 4.4
     },
     {
-      "id_calificacion": "AN04-ACT01-ACT01-CE1.e",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT01-ACT01-CE1.e",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT01",
       "id_indicador": "ACT01-CE1.e",
       "valor": 6.6
@@ -2037,15 +2037,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT01-ACT01-CE1.f",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT01-ACT01-CE1.f",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT01",
       "id_indicador": "ACT01-CE1.f",
       "valor": 4.4
     },
     {
-      "id_calificacion": "AN04-ACT01-ACT01-CE1.f",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT01-ACT01-CE1.f",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT01",
       "id_indicador": "ACT01-CE1.f",
       "valor": 6.6
@@ -2100,15 +2100,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT01-ACT01-CE1.g",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT01-ACT01-CE1.g",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT01",
       "id_indicador": "ACT01-CE1.g",
       "valor": 4.4
     },
     {
-      "id_calificacion": "AN04-ACT01-ACT01-CE1.g",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT01-ACT01-CE1.g",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT01",
       "id_indicador": "ACT01-CE1.g",
       "valor": 6.6
@@ -2163,15 +2163,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT01-ACT01-CE1.h",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT01-ACT01-CE1.h",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT01",
       "id_indicador": "ACT01-CE1.h",
       "valor": 4.4
     },
     {
-      "id_calificacion": "AN04-ACT01-ACT01-CE1.h",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT01-ACT01-CE1.h",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT01",
       "id_indicador": "ACT01-CE1.h",
       "valor": 6.6
@@ -2226,15 +2226,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT02-ACT02-CE1.a",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT02-ACT02-CE1.a",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT02",
       "id_indicador": "ACT02-CE1.a",
       "valor": 6.6
     },
     {
-      "id_calificacion": "AN04-ACT02-ACT02-CE1.a",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT02-ACT02-CE1.a",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT02",
       "id_indicador": "ACT02-CE1.a",
       "valor": 4.2
@@ -2289,15 +2289,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT02-ACT02-CE1.b",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT02-ACT02-CE1.b",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT02",
       "id_indicador": "ACT02-CE1.b",
       "valor": 6.6
     },
     {
-      "id_calificacion": "AN04-ACT02-ACT02-CE1.b",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT02-ACT02-CE1.b",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT02",
       "id_indicador": "ACT02-CE1.b",
       "valor": 4.2
@@ -2352,15 +2352,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT02-ACT02-CE1.c",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT02-ACT02-CE1.c",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT02",
       "id_indicador": "ACT02-CE1.c",
       "valor": 6.6
     },
     {
-      "id_calificacion": "AN04-ACT02-ACT02-CE1.c",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT02-ACT02-CE1.c",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT02",
       "id_indicador": "ACT02-CE1.c",
       "valor": 4.2
@@ -2415,15 +2415,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT02-ACT02-CE1.d",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT02-ACT02-CE1.d",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT02",
       "id_indicador": "ACT02-CE1.d",
       "valor": 6.6
     },
     {
-      "id_calificacion": "AN04-ACT02-ACT02-CE1.d",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT02-ACT02-CE1.d",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT02",
       "id_indicador": "ACT02-CE1.d",
       "valor": 4.2
@@ -2478,15 +2478,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT02-ACT02-CE1.e",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT02-ACT02-CE1.e",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT02",
       "id_indicador": "ACT02-CE1.e",
       "valor": 6.6
     },
     {
-      "id_calificacion": "AN04-ACT02-ACT02-CE1.e",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT02-ACT02-CE1.e",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT02",
       "id_indicador": "ACT02-CE1.e",
       "valor": 4.2
@@ -2541,15 +2541,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT02-ACT02-CE1.f",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT02-ACT02-CE1.f",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT02",
       "id_indicador": "ACT02-CE1.f",
       "valor": 6.6
     },
     {
-      "id_calificacion": "AN04-ACT02-ACT02-CE1.f",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT02-ACT02-CE1.f",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT02",
       "id_indicador": "ACT02-CE1.f",
       "valor": 4.2
@@ -2604,15 +2604,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT02-ACT02-CE1.g",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT02-ACT02-CE1.g",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT02",
       "id_indicador": "ACT02-CE1.g",
       "valor": 6.6
     },
     {
-      "id_calificacion": "AN04-ACT02-ACT02-CE1.g",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT02-ACT02-CE1.g",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT02",
       "id_indicador": "ACT02-CE1.g",
       "valor": 4.2
@@ -2667,15 +2667,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT02-ACT02-CE1.h",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT02-ACT02-CE1.h",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT02",
       "id_indicador": "ACT02-CE1.h",
       "valor": 6.6
     },
     {
-      "id_calificacion": "AN04-ACT02-ACT02-CE1.h",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT02-ACT02-CE1.h",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT02",
       "id_indicador": "ACT02-CE1.h",
       "valor": 4.2
@@ -2730,15 +2730,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT03-ACT03-CE2.a",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT03-ACT03-CE2.a",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT03",
       "id_indicador": "ACT03-CE2.a",
       "valor": 5
     },
     {
-      "id_calificacion": "AN04-ACT03-ACT03-CE2.a",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT03-ACT03-CE2.a",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT03",
       "id_indicador": "ACT03-CE2.a",
       "valor": 5.6
@@ -2793,15 +2793,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT03-ACT03-CE2.b",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT03-ACT03-CE2.b",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT03",
       "id_indicador": "ACT03-CE2.b",
       "valor": 5
     },
     {
-      "id_calificacion": "AN04-ACT03-ACT03-CE2.b",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT03-ACT03-CE2.b",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT03",
       "id_indicador": "ACT03-CE2.b",
       "valor": 5.6
@@ -2856,15 +2856,15 @@
       "valor": 8.1
     },
     {
-      "id_calificacion": "AN03-ACT04-ACT04-CE2.c",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT04-ACT04-CE2.c",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT04",
       "id_indicador": "ACT04-CE2.c",
       "valor": 6.2
     },
     {
-      "id_calificacion": "AN04-ACT04-ACT04-CE2.c",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT04-ACT04-CE2.c",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT04",
       "id_indicador": "ACT04-CE2.c",
       "valor": 5.6
@@ -2919,15 +2919,15 @@
       "valor": 8.1
     },
     {
-      "id_calificacion": "AN03-ACT04-ACT04-CE2.d",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT04-ACT04-CE2.d",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT04",
       "id_indicador": "ACT04-CE2.d",
       "valor": 6.2
     },
     {
-      "id_calificacion": "AN04-ACT04-ACT04-CE2.d",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT04-ACT04-CE2.d",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT04",
       "id_indicador": "ACT04-CE2.d",
       "valor": 5.6
@@ -2982,15 +2982,15 @@
       "valor": 7.4
     },
     {
-      "id_calificacion": "AN03-ACT05-ACT05-CE2.e",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT05-ACT05-CE2.e",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT05",
       "id_indicador": "ACT05-CE2.e",
       "valor": 6.7
     },
     {
-      "id_calificacion": "AN04-ACT05-ACT05-CE2.e",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT05-ACT05-CE2.e",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT05",
       "id_indicador": "ACT05-CE2.e",
       "valor": 4.5
@@ -3045,15 +3045,15 @@
       "valor": 7.4
     },
     {
-      "id_calificacion": "AN03-ACT05-ACT05-CE2.f",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT05-ACT05-CE2.f",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT05",
       "id_indicador": "ACT05-CE2.f",
       "valor": 6.7
     },
     {
-      "id_calificacion": "AN04-ACT05-ACT05-CE2.f",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT05-ACT05-CE2.f",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT05",
       "id_indicador": "ACT05-CE2.f",
       "valor": 4.5
@@ -3108,15 +3108,15 @@
       "valor": 7.3
     },
     {
-      "id_calificacion": "AN03-ACT06-ACT06-CE2.g",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT06-ACT06-CE2.g",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT06",
       "id_indicador": "ACT06-CE2.g",
       "valor": 5.5
     },
     {
-      "id_calificacion": "AN04-ACT06-ACT06-CE2.g",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT06-ACT06-CE2.g",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT06",
       "id_indicador": "ACT06-CE2.g",
       "valor": 5.2
@@ -3171,15 +3171,15 @@
       "valor": 7.3
     },
     {
-      "id_calificacion": "AN03-ACT06-ACT06-CE2.h",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT06-ACT06-CE2.h",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT06",
       "id_indicador": "ACT06-CE2.h",
       "valor": 5.5
     },
     {
-      "id_calificacion": "AN04-ACT06-ACT06-CE2.h",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT06-ACT06-CE2.h",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT06",
       "id_indicador": "ACT06-CE2.h",
       "valor": 5.2
@@ -3234,15 +3234,15 @@
       "valor": 8.9
     },
     {
-      "id_calificacion": "AN03-ACT07-ACT07-CE2.a",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT07-ACT07-CE2.a",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT07",
       "id_indicador": "ACT07-CE2.a",
       "valor": 6.1
     },
     {
-      "id_calificacion": "AN04-ACT07-ACT07-CE2.a",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT07-ACT07-CE2.a",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT07",
       "id_indicador": "ACT07-CE2.a",
       "valor": 4.3
@@ -3297,15 +3297,15 @@
       "valor": 8.9
     },
     {
-      "id_calificacion": "AN03-ACT07-ACT07-CE2.b",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT07-ACT07-CE2.b",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT07",
       "id_indicador": "ACT07-CE2.b",
       "valor": 6.1
     },
     {
-      "id_calificacion": "AN04-ACT07-ACT07-CE2.b",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT07-ACT07-CE2.b",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT07",
       "id_indicador": "ACT07-CE2.b",
       "valor": 4.3
@@ -3360,15 +3360,15 @@
       "valor": 8.9
     },
     {
-      "id_calificacion": "AN03-ACT07-ACT07-CE2.c",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT07-ACT07-CE2.c",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT07",
       "id_indicador": "ACT07-CE2.c",
       "valor": 6.1
     },
     {
-      "id_calificacion": "AN04-ACT07-ACT07-CE2.c",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT07-ACT07-CE2.c",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT07",
       "id_indicador": "ACT07-CE2.c",
       "valor": 4.3
@@ -3423,15 +3423,15 @@
       "valor": 8.9
     },
     {
-      "id_calificacion": "AN03-ACT07-ACT07-CE2.d",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT07-ACT07-CE2.d",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT07",
       "id_indicador": "ACT07-CE2.d",
       "valor": 6.1
     },
     {
-      "id_calificacion": "AN04-ACT07-ACT07-CE2.d",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT07-ACT07-CE2.d",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT07",
       "id_indicador": "ACT07-CE2.d",
       "valor": 4.3
@@ -3486,15 +3486,15 @@
       "valor": 8.9
     },
     {
-      "id_calificacion": "AN03-ACT07-ACT07-CE2.e",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT07-ACT07-CE2.e",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT07",
       "id_indicador": "ACT07-CE2.e",
       "valor": 6.1
     },
     {
-      "id_calificacion": "AN04-ACT07-ACT07-CE2.e",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT07-ACT07-CE2.e",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT07",
       "id_indicador": "ACT07-CE2.e",
       "valor": 4.3
@@ -3549,15 +3549,15 @@
       "valor": 8.9
     },
     {
-      "id_calificacion": "AN03-ACT07-ACT07-CE2.f",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT07-ACT07-CE2.f",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT07",
       "id_indicador": "ACT07-CE2.f",
       "valor": 6.1
     },
     {
-      "id_calificacion": "AN04-ACT07-ACT07-CE2.f",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT07-ACT07-CE2.f",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT07",
       "id_indicador": "ACT07-CE2.f",
       "valor": 4.3
@@ -3612,15 +3612,15 @@
       "valor": 8.9
     },
     {
-      "id_calificacion": "AN03-ACT07-ACT07-CE2.g",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT07-ACT07-CE2.g",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT07",
       "id_indicador": "ACT07-CE2.g",
       "valor": 6.1
     },
     {
-      "id_calificacion": "AN04-ACT07-ACT07-CE2.g",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT07-ACT07-CE2.g",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT07",
       "id_indicador": "ACT07-CE2.g",
       "valor": 4.3
@@ -3675,15 +3675,15 @@
       "valor": 8.9
     },
     {
-      "id_calificacion": "AN03-ACT07-ACT07-CE2.h",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT07-ACT07-CE2.h",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT07",
       "id_indicador": "ACT07-CE2.h",
       "valor": 6.1
     },
     {
-      "id_calificacion": "AN04-ACT07-ACT07-CE2.h",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT07-ACT07-CE2.h",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT07",
       "id_indicador": "ACT07-CE2.h",
       "valor": 4.3
@@ -3738,15 +3738,15 @@
       "valor": 8.4
     },
     {
-      "id_calificacion": "AN03-ACT08-ACT08-CE1.a",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT08-ACT08-CE1.a",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT08",
       "id_indicador": "ACT08-CE1.a",
       "valor": 6.3
     },
     {
-      "id_calificacion": "AN04-ACT08-ACT08-CE1.a",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT08-ACT08-CE1.a",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT08",
       "id_indicador": "ACT08-CE1.a",
       "valor": 4.3
@@ -3801,15 +3801,15 @@
       "valor": 8.4
     },
     {
-      "id_calificacion": "AN03-ACT08-ACT08-CE1.b",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT08-ACT08-CE1.b",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT08",
       "id_indicador": "ACT08-CE1.b",
       "valor": 6.3
     },
     {
-      "id_calificacion": "AN04-ACT08-ACT08-CE1.b",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT08-ACT08-CE1.b",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT08",
       "id_indicador": "ACT08-CE1.b",
       "valor": 4.3
@@ -3864,15 +3864,15 @@
       "valor": 8.4
     },
     {
-      "id_calificacion": "AN03-ACT08-ACT08-CE1.c",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT08-ACT08-CE1.c",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT08",
       "id_indicador": "ACT08-CE1.c",
       "valor": 6.3
     },
     {
-      "id_calificacion": "AN04-ACT08-ACT08-CE1.c",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT08-ACT08-CE1.c",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT08",
       "id_indicador": "ACT08-CE1.c",
       "valor": 4.3
@@ -3927,15 +3927,15 @@
       "valor": 8.4
     },
     {
-      "id_calificacion": "AN03-ACT08-ACT08-CE1.d",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT08-ACT08-CE1.d",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT08",
       "id_indicador": "ACT08-CE1.d",
       "valor": 6.3
     },
     {
-      "id_calificacion": "AN04-ACT08-ACT08-CE1.d",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT08-ACT08-CE1.d",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT08",
       "id_indicador": "ACT08-CE1.d",
       "valor": 4.3
@@ -3990,15 +3990,15 @@
       "valor": 8.4
     },
     {
-      "id_calificacion": "AN03-ACT08-ACT08-CE1.e",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT08-ACT08-CE1.e",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT08",
       "id_indicador": "ACT08-CE1.e",
       "valor": 6.3
     },
     {
-      "id_calificacion": "AN04-ACT08-ACT08-CE1.e",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT08-ACT08-CE1.e",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT08",
       "id_indicador": "ACT08-CE1.e",
       "valor": 4.3
@@ -4053,15 +4053,15 @@
       "valor": 8.4
     },
     {
-      "id_calificacion": "AN03-ACT08-ACT08-CE1.f",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT08-ACT08-CE1.f",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT08",
       "id_indicador": "ACT08-CE1.f",
       "valor": 6.3
     },
     {
-      "id_calificacion": "AN04-ACT08-ACT08-CE1.f",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT08-ACT08-CE1.f",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT08",
       "id_indicador": "ACT08-CE1.f",
       "valor": 4.3
@@ -4116,15 +4116,15 @@
       "valor": 8.4
     },
     {
-      "id_calificacion": "AN03-ACT08-ACT08-CE1.g",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT08-ACT08-CE1.g",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT08",
       "id_indicador": "ACT08-CE1.g",
       "valor": 6.3
     },
     {
-      "id_calificacion": "AN04-ACT08-ACT08-CE1.g",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT08-ACT08-CE1.g",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT08",
       "id_indicador": "ACT08-CE1.g",
       "valor": 4.3
@@ -4179,15 +4179,15 @@
       "valor": 8.4
     },
     {
-      "id_calificacion": "AN03-ACT08-ACT08-CE1.h",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT08-ACT08-CE1.h",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT08",
       "id_indicador": "ACT08-CE1.h",
       "valor": 6.3
     },
     {
-      "id_calificacion": "AN04-ACT08-ACT08-CE1.h",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT08-ACT08-CE1.h",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT08",
       "id_indicador": "ACT08-CE1.h",
       "valor": 4.3
@@ -4242,15 +4242,15 @@
       "valor": 7.2
     },
     {
-      "id_calificacion": "AN03-ACT09-ACT09-CE1.a",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT09-ACT09-CE1.a",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT09",
       "id_indicador": "ACT09-CE1.a",
       "valor": 5.9
     },
     {
-      "id_calificacion": "AN04-ACT09-ACT09-CE1.a",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT09-ACT09-CE1.a",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT09",
       "id_indicador": "ACT09-CE1.a",
       "valor": 7
@@ -4305,15 +4305,15 @@
       "valor": 7.2
     },
     {
-      "id_calificacion": "AN03-ACT09-ACT09-CE1.b",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT09-ACT09-CE1.b",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT09",
       "id_indicador": "ACT09-CE1.b",
       "valor": 5.9
     },
     {
-      "id_calificacion": "AN04-ACT09-ACT09-CE1.b",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT09-ACT09-CE1.b",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT09",
       "id_indicador": "ACT09-CE1.b",
       "valor": 7
@@ -4368,15 +4368,15 @@
       "valor": 7.2
     },
     {
-      "id_calificacion": "AN03-ACT09-ACT09-CE1.c",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT09-ACT09-CE1.c",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT09",
       "id_indicador": "ACT09-CE1.c",
       "valor": 5.9
     },
     {
-      "id_calificacion": "AN04-ACT09-ACT09-CE1.c",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT09-ACT09-CE1.c",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT09",
       "id_indicador": "ACT09-CE1.c",
       "valor": 7
@@ -4431,15 +4431,15 @@
       "valor": 7.2
     },
     {
-      "id_calificacion": "AN03-ACT09-ACT09-CE1.d",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT09-ACT09-CE1.d",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT09",
       "id_indicador": "ACT09-CE1.d",
       "valor": 5.9
     },
     {
-      "id_calificacion": "AN04-ACT09-ACT09-CE1.d",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT09-ACT09-CE1.d",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT09",
       "id_indicador": "ACT09-CE1.d",
       "valor": 7
@@ -4494,15 +4494,15 @@
       "valor": 7.2
     },
     {
-      "id_calificacion": "AN03-ACT09-ACT09-CE1.e",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT09-ACT09-CE1.e",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT09",
       "id_indicador": "ACT09-CE1.e",
       "valor": 5.9
     },
     {
-      "id_calificacion": "AN04-ACT09-ACT09-CE1.e",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT09-ACT09-CE1.e",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT09",
       "id_indicador": "ACT09-CE1.e",
       "valor": 7
@@ -4557,15 +4557,15 @@
       "valor": 7.2
     },
     {
-      "id_calificacion": "AN03-ACT09-ACT09-CE1.f",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT09-ACT09-CE1.f",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT09",
       "id_indicador": "ACT09-CE1.f",
       "valor": 5.9
     },
     {
-      "id_calificacion": "AN04-ACT09-ACT09-CE1.f",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT09-ACT09-CE1.f",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT09",
       "id_indicador": "ACT09-CE1.f",
       "valor": 7
@@ -4620,15 +4620,15 @@
       "valor": 7.2
     },
     {
-      "id_calificacion": "AN03-ACT09-ACT09-CE1.g",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT09-ACT09-CE1.g",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT09",
       "id_indicador": "ACT09-CE1.g",
       "valor": 5.9
     },
     {
-      "id_calificacion": "AN04-ACT09-ACT09-CE1.g",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT09-ACT09-CE1.g",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT09",
       "id_indicador": "ACT09-CE1.g",
       "valor": 7
@@ -4683,15 +4683,15 @@
       "valor": 7.2
     },
     {
-      "id_calificacion": "AN03-ACT09-ACT09-CE1.h",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT09-ACT09-CE1.h",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT09",
       "id_indicador": "ACT09-CE1.h",
       "valor": 5.9
     },
     {
-      "id_calificacion": "AN04-ACT09-ACT09-CE1.h",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT09-ACT09-CE1.h",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT09",
       "id_indicador": "ACT09-CE1.h",
       "valor": 7
@@ -4746,15 +4746,15 @@
       "valor": 7.3
     },
     {
-      "id_calificacion": "AN03-ACT10-ACT10-CE3.a",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT10-ACT10-CE3.a",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT10",
       "id_indicador": "ACT10-CE3.a",
       "valor": 4.9
     },
     {
-      "id_calificacion": "AN04-ACT10-ACT10-CE3.a",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT10-ACT10-CE3.a",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT10",
       "id_indicador": "ACT10-CE3.a",
       "valor": 6.5
@@ -4809,15 +4809,15 @@
       "valor": 7.3
     },
     {
-      "id_calificacion": "AN03-ACT10-ACT10-CE3.b",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT10-ACT10-CE3.b",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT10",
       "id_indicador": "ACT10-CE3.b",
       "valor": 4.9
     },
     {
-      "id_calificacion": "AN04-ACT10-ACT10-CE3.b",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT10-ACT10-CE3.b",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT10",
       "id_indicador": "ACT10-CE3.b",
       "valor": 6.5
@@ -4872,15 +4872,15 @@
       "valor": 7.3
     },
     {
-      "id_calificacion": "AN03-ACT10-ACT10-CE3.c",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT10-ACT10-CE3.c",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT10",
       "id_indicador": "ACT10-CE3.c",
       "valor": 4.9
     },
     {
-      "id_calificacion": "AN04-ACT10-ACT10-CE3.c",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT10-ACT10-CE3.c",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT10",
       "id_indicador": "ACT10-CE3.c",
       "valor": 6.5
@@ -4935,15 +4935,15 @@
       "valor": 7.3
     },
     {
-      "id_calificacion": "AN03-ACT10-ACT10-CE3.d",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT10-ACT10-CE3.d",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT10",
       "id_indicador": "ACT10-CE3.d",
       "valor": 4.9
     },
     {
-      "id_calificacion": "AN04-ACT10-ACT10-CE3.d",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT10-ACT10-CE3.d",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT10",
       "id_indicador": "ACT10-CE3.d",
       "valor": 6.5
@@ -4998,15 +4998,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT11-ACT11-CE3.e",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT11-ACT11-CE3.e",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT11",
       "id_indicador": "ACT11-CE3.e",
       "valor": 4.8
     },
     {
-      "id_calificacion": "AN04-ACT11-ACT11-CE3.e",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT11-ACT11-CE3.e",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT11",
       "id_indicador": "ACT11-CE3.e",
       "valor": 4.6
@@ -5061,15 +5061,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT11-ACT11-CE3.f",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT11-ACT11-CE3.f",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT11",
       "id_indicador": "ACT11-CE3.f",
       "valor": 4.8
     },
     {
-      "id_calificacion": "AN04-ACT11-ACT11-CE3.f",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT11-ACT11-CE3.f",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT11",
       "id_indicador": "ACT11-CE3.f",
       "valor": 4.6
@@ -5124,15 +5124,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT11-ACT11-CE3.g",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT11-ACT11-CE3.g",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT11",
       "id_indicador": "ACT11-CE3.g",
       "valor": 4.8
     },
     {
-      "id_calificacion": "AN04-ACT11-ACT11-CE3.g",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT11-ACT11-CE3.g",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT11",
       "id_indicador": "ACT11-CE3.g",
       "valor": 4.6
@@ -5187,15 +5187,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT11-ACT11-CE3.h",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT11-ACT11-CE3.h",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT11",
       "id_indicador": "ACT11-CE3.h",
       "valor": 4.8
     },
     {
-      "id_calificacion": "AN04-ACT11-ACT11-CE3.h",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT11-ACT11-CE3.h",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT11",
       "id_indicador": "ACT11-CE3.h",
       "valor": 4.6
@@ -5250,15 +5250,15 @@
       "valor": 8.1
     },
     {
-      "id_calificacion": "AN03-ACT12-ACT12-CE4.a",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT12-ACT12-CE4.a",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT12",
       "id_indicador": "ACT12-CE4.a",
       "valor": 4.3
     },
     {
-      "id_calificacion": "AN04-ACT12-ACT12-CE4.a",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT12-ACT12-CE4.a",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT12",
       "id_indicador": "ACT12-CE4.a",
       "valor": 4.1
@@ -5313,15 +5313,15 @@
       "valor": 8.1
     },
     {
-      "id_calificacion": "AN03-ACT12-ACT12-CE4.b",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT12-ACT12-CE4.b",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT12",
       "id_indicador": "ACT12-CE4.b",
       "valor": 4.3
     },
     {
-      "id_calificacion": "AN04-ACT12-ACT12-CE4.b",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT12-ACT12-CE4.b",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT12",
       "id_indicador": "ACT12-CE4.b",
       "valor": 4.1
@@ -5376,15 +5376,15 @@
       "valor": 8.1
     },
     {
-      "id_calificacion": "AN03-ACT12-ACT12-CE4.c",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT12-ACT12-CE4.c",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT12",
       "id_indicador": "ACT12-CE4.c",
       "valor": 4.3
     },
     {
-      "id_calificacion": "AN04-ACT12-ACT12-CE4.c",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT12-ACT12-CE4.c",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT12",
       "id_indicador": "ACT12-CE4.c",
       "valor": 4.1
@@ -5439,15 +5439,15 @@
       "valor": 8.1
     },
     {
-      "id_calificacion": "AN03-ACT12-ACT12-CE4.d",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT12-ACT12-CE4.d",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT12",
       "id_indicador": "ACT12-CE4.d",
       "valor": 4.3
     },
     {
-      "id_calificacion": "AN04-ACT12-ACT12-CE4.d",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT12-ACT12-CE4.d",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT12",
       "id_indicador": "ACT12-CE4.d",
       "valor": 4.1
@@ -5502,15 +5502,15 @@
       "valor": 7.9
     },
     {
-      "id_calificacion": "AN03-ACT13-ACT13-CE4.e",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT13-ACT13-CE4.e",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT13",
       "id_indicador": "ACT13-CE4.e",
       "valor": 4.9
     },
     {
-      "id_calificacion": "AN04-ACT13-ACT13-CE4.e",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT13-ACT13-CE4.e",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT13",
       "id_indicador": "ACT13-CE4.e",
       "valor": 6.9
@@ -5565,15 +5565,15 @@
       "valor": 7.9
     },
     {
-      "id_calificacion": "AN03-ACT13-ACT13-CE4.f",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT13-ACT13-CE4.f",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT13",
       "id_indicador": "ACT13-CE4.f",
       "valor": 4.9
     },
     {
-      "id_calificacion": "AN04-ACT13-ACT13-CE4.f",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT13-ACT13-CE4.f",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT13",
       "id_indicador": "ACT13-CE4.f",
       "valor": 6.9
@@ -5628,15 +5628,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT14-ACT14-CE3.a",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT14-ACT14-CE3.a",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE3.a",
       "valor": 7
     },
     {
-      "id_calificacion": "AN04-ACT14-ACT14-CE3.a",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT14-ACT14-CE3.a",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE3.a",
       "valor": 5.8
@@ -5691,15 +5691,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT14-ACT14-CE3.b",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT14-ACT14-CE3.b",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE3.b",
       "valor": 7
     },
     {
-      "id_calificacion": "AN04-ACT14-ACT14-CE3.b",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT14-ACT14-CE3.b",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE3.b",
       "valor": 5.8
@@ -5754,15 +5754,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT14-ACT14-CE3.c",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT14-ACT14-CE3.c",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE3.c",
       "valor": 7
     },
     {
-      "id_calificacion": "AN04-ACT14-ACT14-CE3.c",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT14-ACT14-CE3.c",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE3.c",
       "valor": 5.8
@@ -5817,15 +5817,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT14-ACT14-CE3.d",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT14-ACT14-CE3.d",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE3.d",
       "valor": 7
     },
     {
-      "id_calificacion": "AN04-ACT14-ACT14-CE3.d",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT14-ACT14-CE3.d",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE3.d",
       "valor": 5.8
@@ -5880,15 +5880,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT14-ACT14-CE3.e",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT14-ACT14-CE3.e",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE3.e",
       "valor": 7
     },
     {
-      "id_calificacion": "AN04-ACT14-ACT14-CE3.e",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT14-ACT14-CE3.e",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE3.e",
       "valor": 5.8
@@ -5943,15 +5943,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT14-ACT14-CE3.f",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT14-ACT14-CE3.f",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE3.f",
       "valor": 7
     },
     {
-      "id_calificacion": "AN04-ACT14-ACT14-CE3.f",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT14-ACT14-CE3.f",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE3.f",
       "valor": 5.8
@@ -6006,15 +6006,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT14-ACT14-CE3.g",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT14-ACT14-CE3.g",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE3.g",
       "valor": 7
     },
     {
-      "id_calificacion": "AN04-ACT14-ACT14-CE3.g",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT14-ACT14-CE3.g",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE3.g",
       "valor": 5.8
@@ -6069,15 +6069,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT14-ACT14-CE3.h",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT14-ACT14-CE3.h",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE3.h",
       "valor": 7
     },
     {
-      "id_calificacion": "AN04-ACT14-ACT14-CE3.h",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT14-ACT14-CE3.h",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE3.h",
       "valor": 5.8
@@ -6132,15 +6132,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT14-ACT14-CE4.a",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT14-ACT14-CE4.a",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE4.a",
       "valor": 7
     },
     {
-      "id_calificacion": "AN04-ACT14-ACT14-CE4.a",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT14-ACT14-CE4.a",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE4.a",
       "valor": 5.8
@@ -6195,15 +6195,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT14-ACT14-CE4.b",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT14-ACT14-CE4.b",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE4.b",
       "valor": 7
     },
     {
-      "id_calificacion": "AN04-ACT14-ACT14-CE4.b",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT14-ACT14-CE4.b",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE4.b",
       "valor": 5.8
@@ -6258,15 +6258,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT14-ACT14-CE4.c",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT14-ACT14-CE4.c",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE4.c",
       "valor": 7
     },
     {
-      "id_calificacion": "AN04-ACT14-ACT14-CE4.c",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT14-ACT14-CE4.c",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE4.c",
       "valor": 5.8
@@ -6321,15 +6321,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT14-ACT14-CE4.d",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT14-ACT14-CE4.d",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE4.d",
       "valor": 7
     },
     {
-      "id_calificacion": "AN04-ACT14-ACT14-CE4.d",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT14-ACT14-CE4.d",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE4.d",
       "valor": 5.8
@@ -6384,15 +6384,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT14-ACT14-CE4.e",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT14-ACT14-CE4.e",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE4.e",
       "valor": 7
     },
     {
-      "id_calificacion": "AN04-ACT14-ACT14-CE4.e",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT14-ACT14-CE4.e",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE4.e",
       "valor": 5.8
@@ -6447,15 +6447,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT14-ACT14-CE4.f",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT14-ACT14-CE4.f",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE4.f",
       "valor": 7
     },
     {
-      "id_calificacion": "AN04-ACT14-ACT14-CE4.f",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT14-ACT14-CE4.f",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT14",
       "id_indicador": "ACT14-CE4.f",
       "valor": 5.8
@@ -6510,15 +6510,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT15-ACT15-CE1.a",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT15-ACT15-CE1.a",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT15",
       "id_indicador": "ACT15-CE1.a",
       "valor": 5.7
     },
     {
-      "id_calificacion": "AN04-ACT15-ACT15-CE1.a",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT15-ACT15-CE1.a",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT15",
       "id_indicador": "ACT15-CE1.a",
       "valor": 6.4
@@ -6573,15 +6573,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT15-ACT15-CE1.b",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT15-ACT15-CE1.b",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT15",
       "id_indicador": "ACT15-CE1.b",
       "valor": 5.7
     },
     {
-      "id_calificacion": "AN04-ACT15-ACT15-CE1.b",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT15-ACT15-CE1.b",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT15",
       "id_indicador": "ACT15-CE1.b",
       "valor": 6.4
@@ -6636,15 +6636,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT15-ACT15-CE1.c",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT15-ACT15-CE1.c",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT15",
       "id_indicador": "ACT15-CE1.c",
       "valor": 5.7
     },
     {
-      "id_calificacion": "AN04-ACT15-ACT15-CE1.c",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT15-ACT15-CE1.c",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT15",
       "id_indicador": "ACT15-CE1.c",
       "valor": 6.4
@@ -6699,15 +6699,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT15-ACT15-CE1.d",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT15-ACT15-CE1.d",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT15",
       "id_indicador": "ACT15-CE1.d",
       "valor": 5.7
     },
     {
-      "id_calificacion": "AN04-ACT15-ACT15-CE1.d",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT15-ACT15-CE1.d",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT15",
       "id_indicador": "ACT15-CE1.d",
       "valor": 6.4
@@ -6762,15 +6762,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT15-ACT15-CE1.e",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT15-ACT15-CE1.e",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT15",
       "id_indicador": "ACT15-CE1.e",
       "valor": 5.7
     },
     {
-      "id_calificacion": "AN04-ACT15-ACT15-CE1.e",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT15-ACT15-CE1.e",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT15",
       "id_indicador": "ACT15-CE1.e",
       "valor": 6.4
@@ -6825,15 +6825,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT15-ACT15-CE1.f",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT15-ACT15-CE1.f",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT15",
       "id_indicador": "ACT15-CE1.f",
       "valor": 5.7
     },
     {
-      "id_calificacion": "AN04-ACT15-ACT15-CE1.f",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT15-ACT15-CE1.f",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT15",
       "id_indicador": "ACT15-CE1.f",
       "valor": 6.4
@@ -6888,15 +6888,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT15-ACT15-CE1.g",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT15-ACT15-CE1.g",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT15",
       "id_indicador": "ACT15-CE1.g",
       "valor": 5.7
     },
     {
-      "id_calificacion": "AN04-ACT15-ACT15-CE1.g",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT15-ACT15-CE1.g",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT15",
       "id_indicador": "ACT15-CE1.g",
       "valor": 6.4
@@ -6951,15 +6951,15 @@
       "valor": 8.5
     },
     {
-      "id_calificacion": "AN03-ACT15-ACT15-CE1.h",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT15-ACT15-CE1.h",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT15",
       "id_indicador": "ACT15-CE1.h",
       "valor": 5.7
     },
     {
-      "id_calificacion": "AN04-ACT15-ACT15-CE1.h",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT15-ACT15-CE1.h",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT15",
       "id_indicador": "ACT15-CE1.h",
       "valor": 6.4
@@ -7014,15 +7014,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT16-ACT16-CE1.a",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT16-ACT16-CE1.a",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT16",
       "id_indicador": "ACT16-CE1.a",
       "valor": 5.2
     },
     {
-      "id_calificacion": "AN04-ACT16-ACT16-CE1.a",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT16-ACT16-CE1.a",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT16",
       "id_indicador": "ACT16-CE1.a",
       "valor": 5.2
@@ -7077,15 +7077,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT16-ACT16-CE1.b",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT16-ACT16-CE1.b",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT16",
       "id_indicador": "ACT16-CE1.b",
       "valor": 5.2
     },
     {
-      "id_calificacion": "AN04-ACT16-ACT16-CE1.b",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT16-ACT16-CE1.b",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT16",
       "id_indicador": "ACT16-CE1.b",
       "valor": 5.2
@@ -7140,15 +7140,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT16-ACT16-CE1.c",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT16-ACT16-CE1.c",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT16",
       "id_indicador": "ACT16-CE1.c",
       "valor": 5.2
     },
     {
-      "id_calificacion": "AN04-ACT16-ACT16-CE1.c",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT16-ACT16-CE1.c",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT16",
       "id_indicador": "ACT16-CE1.c",
       "valor": 5.2
@@ -7203,15 +7203,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT16-ACT16-CE1.d",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT16-ACT16-CE1.d",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT16",
       "id_indicador": "ACT16-CE1.d",
       "valor": 5.2
     },
     {
-      "id_calificacion": "AN04-ACT16-ACT16-CE1.d",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT16-ACT16-CE1.d",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT16",
       "id_indicador": "ACT16-CE1.d",
       "valor": 5.2
@@ -7266,15 +7266,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT16-ACT16-CE1.e",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT16-ACT16-CE1.e",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT16",
       "id_indicador": "ACT16-CE1.e",
       "valor": 5.2
     },
     {
-      "id_calificacion": "AN04-ACT16-ACT16-CE1.e",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT16-ACT16-CE1.e",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT16",
       "id_indicador": "ACT16-CE1.e",
       "valor": 5.2
@@ -7329,15 +7329,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT16-ACT16-CE1.f",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT16-ACT16-CE1.f",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT16",
       "id_indicador": "ACT16-CE1.f",
       "valor": 5.2
     },
     {
-      "id_calificacion": "AN04-ACT16-ACT16-CE1.f",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT16-ACT16-CE1.f",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT16",
       "id_indicador": "ACT16-CE1.f",
       "valor": 5.2
@@ -7392,15 +7392,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT16-ACT16-CE1.g",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT16-ACT16-CE1.g",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT16",
       "id_indicador": "ACT16-CE1.g",
       "valor": 5.2
     },
     {
-      "id_calificacion": "AN04-ACT16-ACT16-CE1.g",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT16-ACT16-CE1.g",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT16",
       "id_indicador": "ACT16-CE1.g",
       "valor": 5.2
@@ -7455,15 +7455,15 @@
       "valor": 7.1
     },
     {
-      "id_calificacion": "AN03-ACT16-ACT16-CE1.h",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT16-ACT16-CE1.h",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT16",
       "id_indicador": "ACT16-CE1.h",
       "valor": 5.2
     },
     {
-      "id_calificacion": "AN04-ACT16-ACT16-CE1.h",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT16-ACT16-CE1.h",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT16",
       "id_indicador": "ACT16-CE1.h",
       "valor": 5.2
@@ -7518,15 +7518,15 @@
       "valor": 7.9
     },
     {
-      "id_calificacion": "AN03-ACT17-ACT17-CE5.a",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT17-ACT17-CE5.a",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT17",
       "id_indicador": "ACT17-CE5.a",
       "valor": 4.1
     },
     {
-      "id_calificacion": "AN04-ACT17-ACT17-CE5.a",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT17-ACT17-CE5.a",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT17",
       "id_indicador": "ACT17-CE5.a",
       "valor": 5.3
@@ -7581,15 +7581,15 @@
       "valor": 7.9
     },
     {
-      "id_calificacion": "AN03-ACT17-ACT17-CE5.b",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT17-ACT17-CE5.b",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT17",
       "id_indicador": "ACT17-CE5.b",
       "valor": 4.1
     },
     {
-      "id_calificacion": "AN04-ACT17-ACT17-CE5.b",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT17-ACT17-CE5.b",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT17",
       "id_indicador": "ACT17-CE5.b",
       "valor": 5.3
@@ -7644,15 +7644,15 @@
       "valor": 7.9
     },
     {
-      "id_calificacion": "AN03-ACT17-ACT17-CE5.c",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT17-ACT17-CE5.c",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT17",
       "id_indicador": "ACT17-CE5.c",
       "valor": 4.1
     },
     {
-      "id_calificacion": "AN04-ACT17-ACT17-CE5.c",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT17-ACT17-CE5.c",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT17",
       "id_indicador": "ACT17-CE5.c",
       "valor": 5.3
@@ -7707,15 +7707,15 @@
       "valor": 7.9
     },
     {
-      "id_calificacion": "AN03-ACT17-ACT17-CE5.d",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT17-ACT17-CE5.d",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT17",
       "id_indicador": "ACT17-CE5.d",
       "valor": 4.1
     },
     {
-      "id_calificacion": "AN04-ACT17-ACT17-CE5.d",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT17-ACT17-CE5.d",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT17",
       "id_indicador": "ACT17-CE5.d",
       "valor": 5.3
@@ -7770,15 +7770,15 @@
       "valor": 7.9
     },
     {
-      "id_calificacion": "AN03-ACT17-ACT17-CE5.e",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT17-ACT17-CE5.e",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT17",
       "id_indicador": "ACT17-CE5.e",
       "valor": 4.1
     },
     {
-      "id_calificacion": "AN04-ACT17-ACT17-CE5.e",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT17-ACT17-CE5.e",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT17",
       "id_indicador": "ACT17-CE5.e",
       "valor": 5.3
@@ -7833,15 +7833,15 @@
       "valor": 7.9
     },
     {
-      "id_calificacion": "AN03-ACT17-ACT17-CE5.f",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT17-ACT17-CE5.f",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT17",
       "id_indicador": "ACT17-CE5.f",
       "valor": 4.1
     },
     {
-      "id_calificacion": "AN04-ACT17-ACT17-CE5.f",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT17-ACT17-CE5.f",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT17",
       "id_indicador": "ACT17-CE5.f",
       "valor": 5.3
@@ -7896,15 +7896,15 @@
       "valor": 7.7
     },
     {
-      "id_calificacion": "AN03-ACT18-ACT18-CE6.a",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT18-ACT18-CE6.a",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT18",
       "id_indicador": "ACT18-CE6.a",
       "valor": 5.3
     },
     {
-      "id_calificacion": "AN04-ACT18-ACT18-CE6.a",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT18-ACT18-CE6.a",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT18",
       "id_indicador": "ACT18-CE6.a",
       "valor": 4.1
@@ -7959,15 +7959,15 @@
       "valor": 7.7
     },
     {
-      "id_calificacion": "AN03-ACT18-ACT18-CE6.b",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT18-ACT18-CE6.b",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT18",
       "id_indicador": "ACT18-CE6.b",
       "valor": 5.3
     },
     {
-      "id_calificacion": "AN04-ACT18-ACT18-CE6.b",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT18-ACT18-CE6.b",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT18",
       "id_indicador": "ACT18-CE6.b",
       "valor": 4.1
@@ -8022,15 +8022,15 @@
       "valor": 7.7
     },
     {
-      "id_calificacion": "AN03-ACT18-ACT18-CE6.c",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT18-ACT18-CE6.c",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT18",
       "id_indicador": "ACT18-CE6.c",
       "valor": 5.3
     },
     {
-      "id_calificacion": "AN04-ACT18-ACT18-CE6.c",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT18-ACT18-CE6.c",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT18",
       "id_indicador": "ACT18-CE6.c",
       "valor": 4.1
@@ -8085,15 +8085,15 @@
       "valor": 7.7
     },
     {
-      "id_calificacion": "AN03-ACT18-ACT18-CE6.d",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT18-ACT18-CE6.d",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT18",
       "id_indicador": "ACT18-CE6.d",
       "valor": 5.3
     },
     {
-      "id_calificacion": "AN04-ACT18-ACT18-CE6.d",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT18-ACT18-CE6.d",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT18",
       "id_indicador": "ACT18-CE6.d",
       "valor": 4.1
@@ -8148,15 +8148,15 @@
       "valor": 7.7
     },
     {
-      "id_calificacion": "AN03-ACT18-ACT18-CE6.e",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT18-ACT18-CE6.e",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT18",
       "id_indicador": "ACT18-CE6.e",
       "valor": 5.3
     },
     {
-      "id_calificacion": "AN04-ACT18-ACT18-CE6.e",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT18-ACT18-CE6.e",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT18",
       "id_indicador": "ACT18-CE6.e",
       "valor": 4.1
@@ -8211,15 +8211,15 @@
       "valor": 7.7
     },
     {
-      "id_calificacion": "AN03-ACT18-ACT18-CE6.f",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT18-ACT18-CE6.f",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT18",
       "id_indicador": "ACT18-CE6.f",
       "valor": 5.3
     },
     {
-      "id_calificacion": "AN04-ACT18-ACT18-CE6.f",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT18-ACT18-CE6.f",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT18",
       "id_indicador": "ACT18-CE6.f",
       "valor": 4.1
@@ -8274,15 +8274,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT19-ACT19-CE6.g",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT19-ACT19-CE6.g",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT19",
       "id_indicador": "ACT19-CE6.g",
       "valor": 6.4
     },
     {
-      "id_calificacion": "AN04-ACT19-ACT19-CE6.g",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT19-ACT19-CE6.g",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT19",
       "id_indicador": "ACT19-CE6.g",
       "valor": 5.3
@@ -8337,15 +8337,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT19-ACT19-CE7.a",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT19-ACT19-CE7.a",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT19",
       "id_indicador": "ACT19-CE7.a",
       "valor": 6.4
     },
     {
-      "id_calificacion": "AN04-ACT19-ACT19-CE7.a",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT19-ACT19-CE7.a",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT19",
       "id_indicador": "ACT19-CE7.a",
       "valor": 5.3
@@ -8400,15 +8400,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT19-ACT19-CE7.b",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT19-ACT19-CE7.b",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT19",
       "id_indicador": "ACT19-CE7.b",
       "valor": 6.4
     },
     {
-      "id_calificacion": "AN04-ACT19-ACT19-CE7.b",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT19-ACT19-CE7.b",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT19",
       "id_indicador": "ACT19-CE7.b",
       "valor": 5.3
@@ -8463,15 +8463,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT19-ACT19-CE7.c",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT19-ACT19-CE7.c",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT19",
       "id_indicador": "ACT19-CE7.c",
       "valor": 6.4
     },
     {
-      "id_calificacion": "AN04-ACT19-ACT19-CE7.c",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT19-ACT19-CE7.c",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT19",
       "id_indicador": "ACT19-CE7.c",
       "valor": 5.3
@@ -8526,15 +8526,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT19-ACT19-CE7.d",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT19-ACT19-CE7.d",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT19",
       "id_indicador": "ACT19-CE7.d",
       "valor": 6.4
     },
     {
-      "id_calificacion": "AN04-ACT19-ACT19-CE7.d",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT19-ACT19-CE7.d",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT19",
       "id_indicador": "ACT19-CE7.d",
       "valor": 5.3
@@ -8589,15 +8589,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT19-ACT19-CE7.e",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT19-ACT19-CE7.e",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT19",
       "id_indicador": "ACT19-CE7.e",
       "valor": 6.4
     },
     {
-      "id_calificacion": "AN04-ACT19-ACT19-CE7.e",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT19-ACT19-CE7.e",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT19",
       "id_indicador": "ACT19-CE7.e",
       "valor": 5.3
@@ -8652,15 +8652,15 @@
       "valor": 7.6
     },
     {
-      "id_calificacion": "AN03-ACT20-ACT20-CE7.f",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT20-ACT20-CE7.f",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT20",
       "id_indicador": "ACT20-CE7.f",
       "valor": 7
     },
     {
-      "id_calificacion": "AN04-ACT20-ACT20-CE7.f",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT20-ACT20-CE7.f",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT20",
       "id_indicador": "ACT20-CE7.f",
       "valor": 4.9
@@ -8715,15 +8715,15 @@
       "valor": 7.6
     },
     {
-      "id_calificacion": "AN03-ACT20-ACT20-CE7.g",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT20-ACT20-CE7.g",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT20",
       "id_indicador": "ACT20-CE7.g",
       "valor": 7
     },
     {
-      "id_calificacion": "AN04-ACT20-ACT20-CE7.g",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT20-ACT20-CE7.g",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT20",
       "id_indicador": "ACT20-CE7.g",
       "valor": 4.9
@@ -8778,15 +8778,15 @@
       "valor": 7.6
     },
     {
-      "id_calificacion": "AN03-ACT20-ACT20-CE7.h",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT20-ACT20-CE7.h",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT20",
       "id_indicador": "ACT20-CE7.h",
       "valor": 7
     },
     {
-      "id_calificacion": "AN04-ACT20-ACT20-CE7.h",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT20-ACT20-CE7.h",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT20",
       "id_indicador": "ACT20-CE7.h",
       "valor": 4.9
@@ -8841,15 +8841,15 @@
       "valor": 7.6
     },
     {
-      "id_calificacion": "AN03-ACT20-ACT20-CE7.i",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT20-ACT20-CE7.i",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT20",
       "id_indicador": "ACT20-CE7.i",
       "valor": 7
     },
     {
-      "id_calificacion": "AN04-ACT20-ACT20-CE7.i",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT20-ACT20-CE7.i",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT20",
       "id_indicador": "ACT20-CE7.i",
       "valor": 4.9
@@ -8904,15 +8904,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE5.a",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE5.a",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE5.a",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE5.a",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE5.a",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE5.a",
       "valor": 6.1
@@ -8967,15 +8967,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE5.b",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE5.b",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE5.b",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE5.b",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE5.b",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE5.b",
       "valor": 6.1
@@ -9030,15 +9030,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE5.c",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE5.c",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE5.c",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE5.c",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE5.c",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE5.c",
       "valor": 6.1
@@ -9093,15 +9093,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE5.d",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE5.d",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE5.d",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE5.d",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE5.d",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE5.d",
       "valor": 6.1
@@ -9156,15 +9156,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE5.e",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE5.e",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE5.e",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE5.e",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE5.e",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE5.e",
       "valor": 6.1
@@ -9219,15 +9219,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE5.f",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE5.f",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE5.f",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE5.f",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE5.f",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE5.f",
       "valor": 6.1
@@ -9282,15 +9282,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE6.a",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE6.a",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE6.a",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE6.a",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE6.a",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE6.a",
       "valor": 6.1
@@ -9345,15 +9345,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE6.b",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE6.b",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE6.b",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE6.b",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE6.b",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE6.b",
       "valor": 6.1
@@ -9408,15 +9408,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE6.c",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE6.c",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE6.c",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE6.c",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE6.c",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE6.c",
       "valor": 6.1
@@ -9471,15 +9471,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE6.d",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE6.d",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE6.d",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE6.d",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE6.d",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE6.d",
       "valor": 6.1
@@ -9534,15 +9534,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE6.e",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE6.e",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE6.e",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE6.e",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE6.e",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE6.e",
       "valor": 6.1
@@ -9597,15 +9597,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE6.f",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE6.f",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE6.f",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE6.f",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE6.f",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE6.f",
       "valor": 6.1
@@ -9660,15 +9660,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE6.g",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE6.g",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE6.g",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE6.g",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE6.g",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE6.g",
       "valor": 6.1
@@ -9723,15 +9723,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE7.a",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE7.a",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE7.a",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE7.a",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE7.a",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE7.a",
       "valor": 6.1
@@ -9786,15 +9786,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE7.b",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE7.b",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE7.b",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE7.b",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE7.b",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE7.b",
       "valor": 6.1
@@ -9849,15 +9849,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE7.c",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE7.c",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE7.c",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE7.c",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE7.c",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE7.c",
       "valor": 6.1
@@ -9912,15 +9912,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE7.d",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE7.d",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE7.d",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE7.d",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE7.d",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE7.d",
       "valor": 6.1
@@ -9975,15 +9975,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE7.e",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE7.e",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE7.e",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE7.e",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE7.e",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE7.e",
       "valor": 6.1
@@ -10038,15 +10038,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE7.f",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE7.f",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE7.f",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE7.f",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE7.f",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE7.f",
       "valor": 6.1
@@ -10101,15 +10101,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE7.g",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE7.g",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE7.g",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE7.g",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE7.g",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE7.g",
       "valor": 6.1
@@ -10164,15 +10164,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE7.h",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE7.h",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE7.h",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE7.h",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE7.h",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE7.h",
       "valor": 6.1
@@ -10227,15 +10227,15 @@
       "valor": 8
     },
     {
-      "id_calificacion": "AN03-ACT21-ACT21-CE7.i",
-      "id_alumno": "AN03",
+      "id_calificacion": "AN04-ACT21-ACT21-CE7.i",
+      "id_alumno": "AN04",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE7.i",
       "valor": 4.7
     },
     {
-      "id_calificacion": "AN04-ACT21-ACT21-CE7.i",
-      "id_alumno": "AN04",
+      "id_calificacion": "AN03-ACT21-ACT21-CE7.i",
+      "id_alumno": "AN03",
       "id_instrumento": "ACT21",
       "id_indicador": "ACT21-CE7.i",
       "valor": 6.1

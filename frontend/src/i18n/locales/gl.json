@@ -1,5 +1,11 @@
 {
   "tabs": {
+    "cierre": {
+      "expediente": {
+        "label": "Expediente",
+        "desc": "Inserción laboral post-ciclo e expediente (liña temporal de evidencias) por alumnado."
+      }
+    },
     "bienvenida": "Benvida",
     "seguridad": "Seguridade",
     "asistente": "Asistente IA",
@@ -11,7 +17,6 @@
     "resumen": "Resumo",
     "listado": "Listado",
     "tutoria": "Titoría",
-    "plano": "Plano",
     "feoe": "FEOE",
     "diario": "Diario",
     "asistencia": "Asistencia",
@@ -67,19 +72,20 @@
         "label": "Matrícula",
         "desc": "Xestión da listaxe de alumnado e ficha individual."
       },
-      "plano": {
-        "desc": "Distribución e plano visual da aula."
+      "orientacion": {
+        "label": "Orientación",
+        "desc": "Orientación profesional por alumno/a: motivación, experiencia laboral, aptitudes e aspiracións."
       },
-      "perfilIndividual": {
-        "label": "Individual",
-        "desc": "Orientación profesional por alumno/a: motivación, experiencia laboral, aptitudes, aspiracións e inserción post-ciclo."
+      "rasgos": {
+        "label": "Trazos",
+        "desc": "Trazos característicos do grupo e datos automáticos do grupo."
       },
       "perfilTendencias": {
         "label": "Tendencias",
         "desc": "Agregados e tendencias do perfil profesional do grupo, e táboa filtrable de todo o alumnado."
       },
-      "notas": {
-        "label": "Notas",
+      "academicas": {
+        "label": "Académicas",
         "desc": "Entrada de notas numéricas por alumnado, instrumento de avaliación e nivel de adquisición de RA."
       }
     },
@@ -95,10 +101,6 @@
       "empresaFeoe": {
         "label": "Empresa FEOE",
         "desc": "Avaliación do alumnado na empresa durante a FEOE (Anexo XI b), transcrita por RA/CE."
-      },
-      "planificacion": {
-        "label": "Avance",
-        "desc": "Planificación mensual das unidades didácticas e progreso dos resultados de aprendizaxe segundo o impartido."
       }
     },
     "calificaciones": {
@@ -339,7 +341,25 @@
         "desc": "Panel de control de acceso rápido a todas as ferramentas."
       }
     },
-    "legislacion": "Lexislación"
+    "legislacion": "Lexislación",
+    "agenda": {
+      "agenda": {
+        "label": "Agenda",
+        "desc": "As túas clases de hoxe, a semana e a unidade en curso."
+      },
+      "avance": {
+        "label": "Avance",
+        "desc": "Planificación e seguimento mensual das unidades didácticas segundo o impartido."
+      },
+      "progresoRaUd": {
+        "label": "Progreso dos RA segundo as UD",
+        "desc": "Progreso dos resultados de aprendizaxe segundo o estado e a ponderación das unidades didácticas impartidas."
+      },
+      "planoAula": {
+        "label": "Plano de aula",
+        "desc": "Distribución e plano visual da aula."
+      }
+    }
   },
   "inicio": {
     "title": "Inicio",
@@ -347,7 +367,6 @@
   },
   "nav": {
     "inicio": "Inicio",
-    "agenda": "Axenda",
     "perfil": "Perfil",
     "archivos": "Arquivos",
     "catalogo": "Catálogo",
@@ -364,7 +383,8 @@
     "alumnado": "Alumnado",
     "diario": "Diario",
     "seguimiento": "Seguimento",
-    "calificaciones": "Peche",
+    "calificaciones": "Cualificacións",
+    "cierre": "Peche",
     "informes": "Informes",
     "normativa": "Documentos",
     "instrumentos": "Instrumento",
@@ -388,7 +408,7 @@
     "demo": "DEMO",
     "reales": "REAIS",
     "abrir_grupo": "Abrir Grupo",
-    "agenda": "Axenda",
+    "agenda": "Clases",
     "legal": "Legal"
   },
   "header": {
@@ -402,10 +422,10 @@
     "settings": "Configuración"
   },
   "pages": {
-    "agenda_title": "Axenda",
-    "agenda_desc": "As túas clases de hoxe, a semana e a unidade en curso.",
+    "agenda_title": "Clases",
+    "agenda_desc": "Notas, boletín e valoración na empresa (FEOE) por alumnado, e reclamacións.",
     "alumnado_title": "Alumnado",
-    "alumnado_desc": "Xestión do alumnado, plano de aula, orientación profesional e notas.",
+    "alumnado_desc": "Xestión do alumnado, notas e orientación profesional.",
     "diario_title": "Seguimento Diario",
     "diario_desc": "Diario de aula, continxencias, control de asistencia e alertas.",
     "evaluacion_title": "Cualificación",
@@ -433,7 +453,7 @@
     "ayuda_desc": "Guía de inicio, FAQ, acrónimos e contribucións da comunidade.",
     "contexto_desc": "Información xeral, características da contorna, alumnado e módulo.",
     "magia_desc": "Xeración da programación didáctica e informes.",
-    "seguimiento_desc": "Diario de clases, asistencia, avance da programación e empresa FEOE.",
+    "seguimiento_desc": "Diario de clases, asistencia e empresa FEOE.",
     "metodologia_desc": "Estratexias metodolóxicas, recursos, espazos e atención á diversidade."
   },
   "common": {
@@ -473,7 +493,6 @@
     "ayuda": "Guía de inicio, FAQ, acrónimos e contribucións da comunidade.",
     "magia": "Comparativa e correspondencia APP-PD, e documentos de apoio da programación e do curso.",
     "legal": "Aviso legal, privacidade, cookies e accesibilidade.",
-    "agenda": "As túas clases de hoxe, a semana e a unidade en curso.",
     "archivos": "Xestión de arquivos, sincronización na nube, seguridade, IA e verificación de datos.",
     "normativa": "Normativa autonómica, lexislación, bibliografía e estándares INCUAL.",
     "catalogo": "Familias, títulos, módulos e currículos (RA e CE).",
@@ -481,10 +500,11 @@
     "curriculo": "Contribución dos RA aos obxectivos, ponderación RA-CE, unidades didácticas e tarefas competenciais.",
     "metodologia": "Metodoloxía, recursos, plan de continxencia e elementos transversais.",
     "instrumentos": "Definición e pesos das ferramentas de avaliación.",
-    "calendario": "Horario, trimestres, festivos, período FEOE e vista mensual.",
-    "alumnado": "Fichas persoais, plano de aula, orientación profesional e entrada de notas por alumno.",
-    "seguimiento": "Diario de clases, asistencia, avance da programación e valoración do alumnado na empresa (FEOE).",
-    "calificaciones": "Resultados e notas do curso, histórico e reclamacións, e mellora do módulo (EQAVET e PDCA)."
+    "calendario": "Horario, trimestres, festivos, período FEOE, vista mensual e as túas clases de hoxe, a semana e a unidade en curso.",
+    "alumnado": "Fichas persoais e orientación profesional.",
+    "seguimiento": "Diario de clases, avance mensual, progreso dos RA e asistencia.",
+    "calificaciones": "Notas, boletín e valoración na empresa (FEOE) por alumnado, e reclamacións.",
+    "cierre": "Resultados e notas do curso, mellora do módulo (EQAVET e PDCA), tendencias do grupo, e inserción laboral e expediente por alumnado."
   },
   "toasts": {
     "aiSettings": {
@@ -1452,10 +1472,7 @@
         "v3": "3 - Media",
         "v4": "4 - Alta",
         "v5": "5 - Excelente"
-      },
-      "familiaInformada": "Familia / titores legais informados",
-      "derivadoOrientador": "Derivado/a ao orientador/a do centro",
-      "informeEmitido": "Informe de orientación emitido"
+      }
     },
     "verificacion": {
       "sinDatos": "Sen datos",
@@ -1640,13 +1657,11 @@
       "areaInteresLabel": "Área de interese",
       "intencionTerminarLabel": "Intención ao rematar",
       "insercionLabel": "Inserción",
-      "reunionesLabel": "Reunións",
       "sinAlumnadoFiltros": "Non hai alumnado que coincida cos filtros.",
       "sinFichaBadge": "Sen ficha",
       "interesadoErasmus": "Interesado/a en Erasmus+",
       "tieneIdeaNegocio": "Ten unha idea de negocio",
       "interesadoUniversidad": "Interesado/a na universidade",
-      "derivadoAlOrientador": "Derivado ao orientador",
       "perfilSeccionTitulo": "Perfil",
       "motivoEleccionLabel": "Motivo de elección",
       "experienciaPreviaLabel": "Experiencia previa",
@@ -1664,14 +1679,7 @@
       "movilidadGeograficaLabel": "Mobilidade xeográfica",
       "empresaObjetivoLabel": "Empresa obxectivo",
       "cicloGradoInteresLabel": "Ciclo / grao de interese",
-      "seguimientoTutorSeccionTitulo": "Seguimento do titor",
-      "reunionesCelebradasLabel": "Reunións realizadas",
-      "ultimaReunionLabel": "Última reunión",
-      "familiaInformadaLabel": "Familia informada",
-      "derivadoOrientadorLabel": "Derivado a orientador",
-      "informeEmitidoLabel": "Informe emitido",
       "mostrandoNAlumnado": "Amosando {{count}} alumnado/as",
-      "derivadosLabel": "Derivados",
       "sinAlumnadoRegistradoCurso": "Non hai alumnado rexistrado neste curso.",
       "coberturaFichasOrientacionTitulo": "Cobertura de fichas de orientación",
       "deTotalFichaCompletada": "{{con}} de {{total}} alumnos/as teñen a ficha completada",
@@ -1835,7 +1843,7 @@
       "coordinacionModulosDesc": "Como se coordina este módulo con outros módulos/profesorado do ciclo (reunións de equipo docente, dependencias entre módulos, substitución de tarefas en caso de ausencia, etc.).",
       "coordinacionModulosTitulo": "Coordinación con outros módulos e o seu profesorado",
       "cpeTitulo": "Competencias profesionais e para a empregabilidade (CPE)",
-      "criteriosCompensablesDescPost": " = calquera CE suspenso do RA topa a súa nota xusto por debaixo do aprobado (comportamento estrito); sobe este número para permitir compensar N criterios suspensos dentro do mesmo RA. Cando o tope está activo para un alumno, aparece marcado en Seguimento → Detalle por alumnado. Exemplo con 0: CE1.a=9.0 e CE1.b=4.9 ao 50% dan unha media de 6.95, pero como CE1.b está suspenso o RA tópase en 4.9, non en 6.95.",
+      "criteriosCompensablesDescPost": " = calquera CE suspenso do RA topa a súa nota xusto por debaixo do aprobado (comportamento estrito); sobe este número para permitir compensar N criterios suspensos dentro do mesmo RA. Cando o tope está activo para un alumno, aparece marcado en Alumnado → Notas. Exemplo con 0: CE1.a=9.0 e CE1.b=4.9 ao 50% dan unha media de 6.95, pero como CE1.b está suspenso o RA tópase en 4.9, non en 6.95.",
       "criteriosCompensablesDescPre": "Número máximo de Criterios suspensos que se permiten para aprobar un RA. ",
       "criteriosCompensablesRA": "Criterios compensables por RA",
       "cursoLabel": "Curso",
@@ -2359,12 +2367,12 @@
       "tieneDatosOrientacion": "Ten datos de orientación",
       "nAnos": "{{n}} anos",
       "edadNoRegistrada": "Idade non rexistrada",
-      "seccion1Titulo": "Sección 1: Motivación e elección do ciclo",
+      "seccion1Titulo": "Motivación e experiencia",
       "motivoEleccionLabel": "Motivo de elección do ciclo",
       "viaAccesoLabel": "Vía de acceso ao ciclo",
       "cicloPrevioLabel": "Ciclo ou estudos previos cursados",
       "cicloPrevioPlaceholder": "Ex. ASIR, DAW, SMR, Bacharelato Científico...",
-      "seccion2Titulo": "Sección 2: Experiencia e situación laboral",
+      "seccion2Titulo": "Intereses e aspiracións",
       "experienciaPreviaLabel": "Experiencia laboral previa",
       "sectorExperienciaLabel": "Sector de experiencia previa",
       "sectorExperienciaPlaceholder": "Ex. Hostalaría, Comercio, Tecnoloxía, Sanidade...",
@@ -2372,7 +2380,6 @@
       "jornadaActualLabel": "Situación laboral actual",
       "empresaActualLabel": "Empresa actual (se aplica)",
       "empresaActualPlaceholder": "Nome da empresa...",
-      "seccion3Titulo": "Sección 3: Intereses e aptitudes detectadas",
       "aptitudPrincipalLabel": "Aptitude principal detectada",
       "areaInteresLabel": "Área de interese dominante",
       "ambitoLaboralPreferidoLabel": "Ámbito laboral preferido",
@@ -2380,14 +2387,13 @@
       "idiomasTrabajoTitulo": "Idiomas de traballo",
       "obsAptitudesLabel": "Observacións do titor sobre aptitudes e intereses",
       "obsAptitudesPlaceholder": "Describe as fortalezas observadas, áreas de mellora, actitude ante o traballo en equipo, iniciativa, etc.",
-      "seccion4Titulo": "Sección 4: Aspiracións ao finalizar o ciclo",
       "intencionAlTerminarLabel": "Intención principal ao rematar",
       "empresaObjetivoLabel": "Empresa ou sector obxectivo (se o ten)",
       "empresaObjetivoPlaceholder": "Ex. empresa local TIC, clínica propia...",
       "cicloSuperiorInteresLabel": "Ciclo superior / grao de interese",
       "cicloSuperiorInteresPlaceholder": "Ex. DAM, ASIR, Enxeñaría Informática, ADE...",
       "interesesEspecificosTitulo": "Intereses específicos",
-      "seccion5Titulo": "Sección 5: Inserción laboral (post-ciclo)",
+      "seccion5Titulo": "Inserción laboral (post-ciclo)",
       "seccion5InfoDesc": "Esta sección compleméntase ao finalizar o ciclo ou como seguimento de egresados.",
       "estadoInsercionLabel": "Estado de inserción laboral",
       "relacionCicloLabel": "Relación do emprego co ciclo",
@@ -2400,12 +2406,6 @@
       "valoracionEgresadoLabel": "Valoración global do egresado (1-5)",
       "obsInsercionLabel": "Observacións de seguimento de inserción",
       "obsInsercionPlaceholder": "Notas sobre o proceso de inserción, dificultades, contacto post-ciclo...",
-      "seccion6Titulo": "Sección 6: Notas e seguimento do titor",
-      "reunionesCelebradasLabel": "Núm. de reunións de orientación realizadas",
-      "fechaUltimaReunionLabel": "Data da última reunión / entrevista",
-      "fechaDerivacionLabel": "Data de derivación ao orientador/a",
-      "resumenOrientacionLabel": "Resumo de orientación (campo libre)",
-      "resumenOrientacionPlaceholder": "Escribe aquí o resumo da orientación: decisións tomadas, acordos co alumnado e a familia, próximos pasos...",
       "selectaAlumnadoDesc": "Selecciona un alumno/a da lista da esquerda."
     },
     "comun": {
@@ -2571,6 +2571,9 @@
       "eval2Abrev": "2ª Av.",
       "eval3Abrev": "3ª Av.",
       "trimestresTitulo": "Trimestres",
+      "trimestre1": "1.º trimestre",
+      "trimestre2": "2.º trimestre",
+      "trimestre3": "3.º trimestre",
       "inicioLabel": "Inicio",
       "finLabel": "Fin",
       "horasLectivasReales": "Horas lectivas reais",
@@ -2587,7 +2590,9 @@
       "festivosEventosInstruccionesPre": "Introduce manualmente ou fai clic no calendario. Os festivos exclúen horas do cómputo real. Festivo e Relevante son independentes: un mesmo día pode ter os dous á vez. As filas con",
       "festivosEventosInstruccionesPost": "(Inicio/Fin de curso e de trimestre, FEOE) veñen de Datas xerais / Período FEOE — edítanse alí, non aquí.",
       "hoyBadge": "Hoxe",
-      "periodoFeoeTitulo": "Período FEOE"
+      "periodoFeoeTitulo": "Período FEOE",
+      "nEntradasMes_one": "{{count}} entrada",
+      "nEntradasMes_other": "{{count}} entradas"
     },
     "diario": {
       "alumnadoActivoLabel": "Alumnado activo",
@@ -2833,8 +2838,11 @@
     },
     "seguimiento": {
       "cargandoDatosSeguimiento": "Cargando datos de seguimento...",
-      "mesActualPrefijo": "ACTUAL",
-      "planificacionMensualTitulo": "Planificación mensual"
+      "mesActualPrefijo": "ACTUAL"
+    },
+    "agenda": {
+      "planificacionSeguimientoMensualTitulo": "Planificación e seguimento mensual",
+      "planoAulaTitulo": "Plano de aula"
     }
   },
   "t1": "1º trimestre",
@@ -2854,5 +2862,5 @@
   },
   "fecha": "Data",
   "hasta_opc": "Ata (opcional)",
-  "sin_eventos": "Aínda non hai festivos nin eventos. Engade un enriba."
+  "sin_eventos": "Aínda non hai festivos nin eventos. Engade un embaixo."
 }

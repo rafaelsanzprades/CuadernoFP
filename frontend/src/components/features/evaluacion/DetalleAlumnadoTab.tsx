@@ -1,6 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { BarChart, Target, User, Users, ClipboardList, FileDown, BookMarked } from "lucide-react";
+import { BarChart, Target, ClipboardList, FileDown, BookMarked, FileText, Building2 } from "lucide-react";
+import { PanelPorAlumno, SeccionAcordeon } from "@/components/features/alumnado/PanelPorAlumno";
+import { BoletinesTab } from "@/components/features/alumnado/BoletinesTab";
+import { FeoeEmpresaAlumno } from "./FeoeEmpresaTab";
 import { CalificarConRubricaModal } from "./CalificarConRubricaModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { LineChart, Line, ResponsiveContainer, YAxis } from "recharts";
@@ -21,8 +24,6 @@ export function DetalleAlumnadoTab() {
   const { planningLedger } = useDynamicPlanning();
 
   const [activeTabByStudent, setActiveTabByStudent] = useState<Record<string, string>>({});
-  const [allStudentsOpen, setAllStudentsOpen] = useState(false);
-  const [openStudents, setOpenStudents] = useState<Set<string>>(new Set());
 
   const df_al = cursoData?.df_al || [];
   const df_eval = cursoData?.df_eval || [];
@@ -242,33 +243,9 @@ export function DetalleAlumnadoTab() {
     };
   });
 
-  return (
-    <div className="space-y-3 animate-in fade-in duration-500">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-subheading font-bold text-foreground flex items-center gap-2">
-            <span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.evaluacion.detalleAlumnadoTitulo', {defaultValue: 'Detalle por alumnado'})}
-          </h2>
-          <p className="text-caption text-muted mt-1">{t('campos.evaluacion.detalleAlumnadoDesc', {defaultValue: 'Notas individuales por alumnado, instrumento de evaluación y nivel de adquisición de RA.'})}</p>
-        </div>
-        <Button
-          variant="secondary"
-          onClick={() => {
-            if (allStudentsOpen) {
-              setOpenStudents(new Set());
-            } else {
-              setOpenStudents(new Set(df_evaluable.map((a: any) => a.ID)));
-            }
-            setAllStudentsOpen(!allStudentsOpen);
-          }}
-        >
-          <span>{allStudentsOpen ? '▲' : '▼'}</span>
-          {allStudentsOpen ? t('common.colapsar_todos', {defaultValue: 'Colapsar todos'}) : t('common.expandir_todos', {defaultValue: 'Expandir todos'})}
-        </Button>
-      </div>
-
-      <div className="space-y-4">
-        {df_evaluable.map((al: any) => {
+  // Contenido de la sección "Notas" de UN alumno/a (el selector de alumnado
+  // lo aporta PanelPorAlumno).
+  const renderNotas = (al: any) => {
           const al_id = al.ID;
           const evRow = df_eval.find((e: any) => e.ID === al_id) || { ID: al_id, Nota_Final_FO: 0, Nota_Final_FE: 0 };
 
@@ -304,62 +281,8 @@ export function DetalleAlumnadoTab() {
             });
           });
 
-          return (
-            <div key={al_id} className="group bg-foreground/5 rounded-lg border border-[var(--glass-border)] overflow-hidden transition-colors">
-              <div
-                onClick={() => {
-                  const newSet = new Set(openStudents);
-                  if (newSet.has(al_id)) newSet.delete(al_id);
-                  else newSet.add(al_id);
-                  setOpenStudents(newSet);
-                }}
-                className="p-4 cursor-pointer flex items-center justify-between font-semibold text-subheading select-none hover:bg-foreground/10 transition-colors"
-              >
-                <div className="flex items-center gap-4 w-1/3">
-                  <span className="text-heading"><span className="inline-flex"><User className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
-                  <span>{al.Apellidos}, {al.Nombre}</span>
-                </div>
-
-                {/* Sparkline (Tendencia) */}
-                <div className="flex-1 h-10 flex items-center px-4 opacity-70 group-hover:opacity-100 transition-opacity pointer-events-none">
-                  {(() => {
-                    const allVals: number[] = [];
-                    df_act.forEach((act: any) => {
-                      const v = Number(evRow[act.id_act]);
-                      if (!isNaN(v) && v > 0) allVals.push(v);
-                    });
-                    const data = allVals.map((v, i) => ({ name: i, value: v }));
-                    if (data.length < 2) return <span className="text-caption text-muted italic">{t('campos.evaluacion.sinDatosTendencia', {defaultValue: 'Sin datos suficientes para tendencia'})}</span>;
-
-                    return (
-                      <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={data}>
-                          <YAxis domain={[0, 10]} hide />
-                          <Line type="monotone" dataKey="value" stroke={sigad.col} strokeWidth={2} dot={false} isAnimationActive={false} />
-                        </LineChart>
-                      </ResponsiveContainer>
-                    );
-                  })()}
-                </div>
-
-                <div className="flex items-center gap-6 text-body w-1/4 justify-end">
-                  <span className="font-bold text-subheading" style={{ color: sigad.col }}>
-                    {sigad.n} · {sigad.cod} <span className="text-body font-normal text-muted">({sigad.txt})</span>
-                  </span>
-                  <span className={`ml-4 inline-block transition-transform duration-300 text-muted ${openStudents.has(al_id) ? 'rotate-180' : ''}`}>▼</span>
-                </div>
-              </div>
-
-              <AnimatePresence initial={false}>
-                {openStudents.has(al_id) && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="overflow-hidden bg-foreground/10 border-t border-[var(--glass-border)]"
-                  >
-                    <div className="p-6 space-y-4">
+    return (
+      <div className="space-y-4">
 
                       {/* BLOQUE 1: Detalle de calificaciones por instrumento */}
                       <div className="flex flex-col lg:flex-row gap-8">
@@ -580,14 +503,37 @@ export function DetalleAlumnadoTab() {
                         );
                       })()}
 
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          );
-        })}
       </div>
+    );
+  };
+
+  const badgeSigad = (al: any) => {
+    const evRow = df_eval.find((e: any) => e.ID === al.ID) || {};
+    const sigad = evRow.Sigad_Override != null ? getSigadInfo(Number(evRow.Sigad_Override)) : getSigadInfo(Number(evRow.Nota_Final_FO) || 0);
+    return (
+      <span className="font-bold text-subheading" style={{ color: sigad.col }}>
+        {sigad.n} · {sigad.cod} <span className="text-body font-normal text-muted">({sigad.txt})</span>
+      </span>
+    );
+  };
+
+  return (
+    <div className="space-y-3 animate-in fade-in duration-500">
+      <PanelPorAlumno badge={badgeSigad}>
+        {(al: any) => (
+          <>
+            <SeccionAcordeon defaultOpen title={t('campos.evaluacion.detalleAlumnadoTitulo', {defaultValue: 'Notas'})} icon={<BarChart className="w-5 h-5 text-info" />}>
+              {renderNotas(al)}
+            </SeccionAcordeon>
+            <SeccionAcordeon title={t('campos.orientacion.seccion7Titulo', {defaultValue: 'Boletín individual de calificaciones'})} icon={<FileText className="w-5 h-5 text-accent" />}>
+              <BoletinesTab studentId={al.ID} />
+            </SeccionAcordeon>
+            <SeccionAcordeon title={t('tabs.seguimiento.empresaFeoe.label', {defaultValue: 'Empresa FEOE'})} icon={<Building2 className="w-5 h-5 text-warning" />}>
+              <FeoeEmpresaAlumno studentId={al.ID} />
+            </SeccionAcordeon>
+          </>
+        )}
+      </PanelPorAlumno>
 
       {rubricaModal && (() => {
         const rubrica = df_rubricas.find((r: any) => r.id_rubrica === rubricaModal.act.rubrica_id);

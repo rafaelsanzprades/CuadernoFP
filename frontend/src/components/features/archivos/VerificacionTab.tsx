@@ -322,13 +322,13 @@ export function VerificacionTab() {
       id: "eqavet",
       icon: <Shield className="w-5 h-5" />,
       title: t('campos.verificacion.calidadEqavetTitulo', {defaultValue: 'Calidad EQAVET'}),
-      href: "/calificaciones?tab=mejora",
+      href: "/cierre?tab=mejora",
       hrefLabel: t('campos.verificacion.mejoraLabel', {defaultValue: 'Mejora'}),
       status: (m?.eqavet_evaluacion && Object.keys(m.eqavet_evaluacion).length > 0) ? "ok" : "empty",
       lines: (m?.eqavet_evaluacion && Object.keys(m.eqavet_evaluacion).length > 0)
         ? [t('campos.verificacion.indicadoresEqavetValorados', {count: Object.keys(m.eqavet_evaluacion).length, defaultValue: '{{count}} indicadores EQAVET valorados'})]
         : [t('campos.verificacion.sinIndicadoresEqavet', {defaultValue: 'Sin indicadores EQAVET valorados'})],
-      actionHref: "/calificaciones?tab=mejora",
+      actionHref: "/cierre?tab=mejora",
       actionLabel: t('botones.verificacion.valorarCalidad', {defaultValue: 'Valorar calidad'}),
     },
     {
@@ -422,9 +422,9 @@ export function VerificacionTab() {
     {
       id: "evaluaciones",
       icon: <BarChart2 className="w-5 h-5" />,
-      title: t('nav.calificaciones', {defaultValue: 'Cierre'}),
-      href: "/calificaciones",
-      hrefLabel: t('nav.calificaciones', {defaultValue: 'Cierre'}),
+      title: t('nav.cierre', {defaultValue: 'Cierre'}),
+      href: "/cierre",
+      hrefLabel: t('nav.cierre', {defaultValue: 'Cierre'}),
       status: evalCount === 0 ? "empty" : evalTotal > 0 && evalCount < evalTotal ? "warning" : "ok",
       lines: evalCount === 0
         ? [t('campos.verificacion.sinCalificacionesIntroducidas', {defaultValue: 'Sin calificaciones introducidas'})]
@@ -434,20 +434,20 @@ export function VerificacionTab() {
             ? t('campos.verificacion.faltanAlumnosEvaluar', {count: evalTotal - evalCount, defaultValue: 'Faltan {{count}} alumnos por evaluar'})
             : t('campos.verificacion.todosLosAlumnosTienenRegistro', {defaultValue: 'Todos los alumnos tienen registros de calificación'}),
         ],
-      actionHref: evalCount === 0 ? "/alumnado?tab=notas" : undefined,
+      actionHref: evalCount === 0 ? "/calificaciones?tab=academicas" : undefined,
       actionLabel: evalCount === 0 ? t('botones.verificacion.introducirNotas', {defaultValue: 'Introducir notas'}) : undefined,
     },
     {
       id: "plano",
       icon: <Users className="w-5 h-5" />,
       title: t('campos.verificacion.planoClaseTitulo', {defaultValue: 'Plano de clase'}),
-      href: "/alumnado?tab=plano",
-      hrefLabel: t('nav.alumnado', {defaultValue: 'Alumnado'}),
+      href: "/calificaciones?tab=plano",
+      hrefLabel: t('nav.calificaciones', {defaultValue: 'Calificaciones'}),
       status: planoCount === 0 ? "empty" : "ok",
       lines: planoCount === 0
         ? [t('campos.verificacion.sinAlumnosPlano', {defaultValue: 'No hay alumnos ubicados en el plano'})]
         : [t('campos.verificacion.alumnosUbicadosAulaVisual', {count: planoCount, defaultValue: '{{count}} alumnos ubicados en el aula visual'})],
-      actionHref: planoCount === 0 ? "/alumnado?tab=plano" : undefined,
+      actionHref: planoCount === 0 ? "/calificaciones?tab=plano" : undefined,
       actionLabel: planoCount === 0 ? t('botones.verificacion.disenarAula', {defaultValue: 'Diseñar aula'}) : undefined,
     },
   ];

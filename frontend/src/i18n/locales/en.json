@@ -1,5 +1,11 @@
 {
   "tabs": {
+    "cierre": {
+      "expediente": {
+        "label": "Record",
+        "desc": "Job placement after the cycle and record (timeline of evidence) per student."
+      }
+    },
     "bienvenida": "Welcome",
     "seguridad": "Security",
     "asistente": "AI Assistant",
@@ -11,7 +17,6 @@
     "resumen": "Summary",
     "listado": "List",
     "tutoria": "Tutoring",
-    "plano": "Map",
     "feoe": "FEOE",
     "diario": "Journal",
     "asistencia": "Attendance",
@@ -67,19 +72,20 @@
         "label": "Enrollment",
         "desc": "Management of the student list and individual records."
       },
-      "plano": {
-        "desc": "Layout and visual map of the classroom."
+      "orientacion": {
+        "label": "Guidance",
+        "desc": "Career guidance per student: motivation, work experience, aptitudes and aspirations."
       },
-      "perfilIndividual": {
-        "label": "Individual",
-        "desc": "Career guidance per student: motivation, work experience, aptitudes, aspirations and post-programme employment."
+      "rasgos": {
+        "label": "Traits",
+        "desc": "Characteristic traits of the group and automatic group data."
       },
       "perfilTendencias": {
         "label": "Trends",
         "desc": "Aggregates and trends for the group's professional profile, and a filterable table of all students."
       },
-      "notas": {
-        "label": "Grades",
+      "academicas": {
+        "label": "Academic",
         "desc": "Entry of numerical grades by student, evaluation instrument and level of RA attainment."
       }
     },
@@ -95,10 +101,6 @@
       "empresaFeoe": {
         "label": "FEOE company",
         "desc": "Assessment of students at the company during the FEOE (Annex XI b), transcribed by RA/CE."
-      },
-      "planificacion": {
-        "label": "Progress",
-        "desc": "Monthly planning of the teaching units and progress of the learning outcomes based on what has been delivered."
       }
     },
     "calificaciones": {
@@ -339,7 +341,25 @@
         "desc": "Quick-access control panel for all the tools."
       }
     },
-    "legislacion": "Legislation"
+    "legislacion": "Legislation",
+    "agenda": {
+      "agenda": {
+        "label": "Agenda",
+        "desc": "Today's classes, the week and the current unit."
+      },
+      "avance": {
+        "label": "Progress",
+        "desc": "Monthly planning and tracking of the teaching units based on what has been delivered."
+      },
+      "progresoRaUd": {
+        "label": "RA progress by teaching unit",
+        "desc": "Progress of the learning outcomes based on the status and weighting of the teaching units delivered."
+      },
+      "planoAula": {
+        "label": "Classroom layout",
+        "desc": "Layout and visual map of the classroom."
+      }
+    }
   },
   "inicio": {
     "title": "Home",
@@ -347,7 +367,6 @@
   },
   "nav": {
     "inicio": "Home",
-    "agenda": "Agenda",
     "perfil": "Profile",
     "archivos": "Files",
     "catalogo": "Catalog",
@@ -364,7 +383,8 @@
     "alumnado": "Students",
     "diario": "Journal",
     "seguimiento": "Tracking",
-    "calificaciones": "Closing",
+    "calificaciones": "Grades",
+    "cierre": "Closing",
     "informes": "Reports",
     "normativa": "Documents",
     "instrumentos": "Instrument",
@@ -388,7 +408,7 @@
     "demo": "DEMO",
     "reales": "REAL",
     "abrir_grupo": "Open Group",
-    "agenda": "Agenda",
+    "agenda": "Classes",
     "legal": "Legal"
   },
   "header": {
@@ -402,10 +422,10 @@
     "settings": "Settings"
   },
   "pages": {
-    "agenda_title": "Agenda",
-    "agenda_desc": "Today's classes, the week and the current unit.",
+    "agenda_title": "Classes",
+    "agenda_desc": "Grades, report card and company assessment (FEOE) per student, and appeals.",
     "alumnado_title": "Students",
-    "alumnado_desc": "Student management, classroom layout, career guidance and grades.",
+    "alumnado_desc": "Student management, grades and career guidance.",
     "diario_title": "Daily Tracking",
     "diario_desc": "Classroom journal, contingencies, attendance control and alerts.",
     "evaluacion_title": "Grade",
@@ -433,7 +453,7 @@
     "ayuda_desc": "Getting-started guide, FAQ, acronyms and community contributions.",
     "contexto_desc": "General information, environment characteristics, students and module.",
     "magia_desc": "Generation of the teaching plan and reports.",
-    "seguimiento_desc": "Class journal, attendance, curriculum progress and FEOE company.",
+    "seguimiento_desc": "Class journal, attendance and FEOE company.",
     "metodologia_desc": "Methodological strategies, resources, spaces and attention to diversity."
   },
   "common": {
@@ -473,7 +493,6 @@
     "ayuda": "Getting-started guide, FAQ, acronyms and community contributions.",
     "magia": "APP-PD comparison and mapping, plus supporting documents for the programme and the course.",
     "legal": "Legal notice, privacy, cookies and accessibility.",
-    "agenda": "Today's classes, the week and the current unit.",
     "archivos": "File management, cloud sync, security, AI and data verification.",
     "normativa": "Regional regulations, legislation, bibliography and INCUAL standards.",
     "catalogo": "Families, qualifications, modules and curricula (RA and CE).",
@@ -481,10 +500,11 @@
     "curriculo": "Contribution of RA to objectives, RA-CE weighting, teaching units and competency-based tasks.",
     "metodologia": "Methodology, resources, contingency plan and cross-curricular elements.",
     "instrumentos": "Definition and weighting of assessment instruments.",
-    "calendario": "Timetable, terms, holidays, FEOE period and monthly view.",
-    "alumnado": "Personal records, classroom layout, career guidance and grade entry per student.",
-    "seguimiento": "Class journal, attendance, curriculum progress and student assessment at the company (FEOE).",
-    "calificaciones": "Course results and grades, history and appeals, and module improvement (EQAVET and PDCA)."
+    "calendario": "Schedule, terms, holidays, FEOE period, monthly view and today's classes, the week and the current unit.",
+    "alumnado": "Personal records and career guidance.",
+    "seguimiento": "Class diary, monthly progress, RA progress and attendance.",
+    "calificaciones": "Grades, report card and company assessment (FEOE) per student, and appeals.",
+    "cierre": "Course results and grades, module improvement (EQAVET and PDCA), group trends, and job placement and record per student."
   },
   "toasts": {
     "aiSettings": {
@@ -1452,10 +1472,7 @@
         "v3": "3 - Medium",
         "v4": "4 - High",
         "v5": "5 - Excellent"
-      },
-      "familiaInformada": "Family / legal guardians informed",
-      "derivadoOrientador": "Referred to the school counsellor",
-      "informeEmitido": "Guidance report issued"
+      }
     },
     "verificacion": {
       "sinDatos": "No data",
@@ -1640,13 +1657,11 @@
       "areaInteresLabel": "Area of interest",
       "intencionTerminarLabel": "Intention after finishing",
       "insercionLabel": "Placement",
-      "reunionesLabel": "Meetings",
       "sinAlumnadoFiltros": "No students match the filters.",
       "sinFichaBadge": "No profile",
       "interesadoErasmus": "Interested in Erasmus+",
       "tieneIdeaNegocio": "Has a business idea",
       "interesadoUniversidad": "Interested in university",
-      "derivadoAlOrientador": "Referred to counsellor",
       "perfilSeccionTitulo": "Profile",
       "motivoEleccionLabel": "Reason for choosing",
       "experienciaPreviaLabel": "Prior experience",
@@ -1664,14 +1679,7 @@
       "movilidadGeograficaLabel": "Geographic mobility",
       "empresaObjetivoLabel": "Target company",
       "cicloGradoInteresLabel": "Cycle / degree of interest",
-      "seguimientoTutorSeccionTitulo": "Tutor follow-up",
-      "reunionesCelebradasLabel": "Meetings held",
-      "ultimaReunionLabel": "Last meeting",
-      "familiaInformadaLabel": "Family informed",
-      "derivadoOrientadorLabel": "Referred to counsellor",
-      "informeEmitidoLabel": "Report issued",
       "mostrandoNAlumnado": "Showing {{count}} students",
-      "derivadosLabel": "Referred",
       "sinAlumnadoRegistradoCurso": "No students registered in this course.",
       "coberturaFichasOrientacionTitulo": "Guidance profile coverage",
       "deTotalFichaCompletada": "{{con}} of {{total}} students have a completed profile",
@@ -1835,7 +1843,7 @@
       "coordinacionModulosDesc": "How this module is coordinated with other modules/teachers in the program (teaching team meetings, dependencies between modules, task substitution in case of absence, etc.).",
       "coordinacionModulosTitulo": "Coordination with other modules and their teachers",
       "cpeTitulo": "Professional and employability competences (CPE)",
-      "criteriosCompensablesDescPost": " = any failed CE of the RA caps its grade just below passing (strict behavior); increase this number to allow compensating N failed criteria within the same RA. When the cap is active for a student, it appears marked in Tracking → Detail by student. Example with 0: CE1.a=9.0 and CE1.b=4.9 at 50% each give an average of 6.95, but since CE1.b is failing the RA caps at 4.9, not 6.95.",
+      "criteriosCompensablesDescPost": " = any failed CE of the RA caps its grade just below passing (strict behavior); increase this number to allow compensating N failed criteria within the same RA. When the cap is active for a student, it appears marked in Students → Grades. Example with 0: CE1.a=9.0 and CE1.b=4.9 at 50% each give an average of 6.95, but since CE1.b is failing the RA caps at 4.9, not 6.95.",
       "criteriosCompensablesDescPre": "Maximum number of failed Criteria allowed to pass an RA. ",
       "criteriosCompensablesRA": "Compensable criteria per RA",
       "cursoLabel": "Year",
@@ -2359,12 +2367,12 @@
       "tieneDatosOrientacion": "Has guidance data",
       "nAnos": "{{n}} years old",
       "edadNoRegistrada": "Age not recorded",
-      "seccion1Titulo": "Section 1: Motivation and choice of the cycle",
+      "seccion1Titulo": "Motivation and experience",
       "motivoEleccionLabel": "Reason for choosing the cycle",
       "viaAccesoLabel": "Entry route to the cycle",
       "cicloPrevioLabel": "Previous cycle or studies completed",
       "cicloPrevioPlaceholder": "E.g. ASIR, DAW, SMR, Science Bachillerato...",
-      "seccion2Titulo": "Section 2: Work experience and employment status",
+      "seccion2Titulo": "Interests and aspirations",
       "experienciaPreviaLabel": "Previous work experience",
       "sectorExperienciaLabel": "Sector of previous experience",
       "sectorExperienciaPlaceholder": "E.g. Hospitality, Retail, Technology, Healthcare...",
@@ -2372,7 +2380,6 @@
       "jornadaActualLabel": "Current employment status",
       "empresaActualLabel": "Current company (if applicable)",
       "empresaActualPlaceholder": "Company name...",
-      "seccion3Titulo": "Section 3: Detected interests and aptitudes",
       "aptitudPrincipalLabel": "Main aptitude detected",
       "areaInteresLabel": "Dominant area of interest",
       "ambitoLaboralPreferidoLabel": "Preferred work environment",
@@ -2380,14 +2387,13 @@
       "idiomasTrabajoTitulo": "Working languages",
       "obsAptitudesLabel": "Tutor's observations on aptitudes and interests",
       "obsAptitudesPlaceholder": "Describe the observed strengths, areas for improvement, attitude toward teamwork, initiative, etc.",
-      "seccion4Titulo": "Section 4: Aspirations upon finishing the cycle",
       "intencionAlTerminarLabel": "Main intention upon finishing",
       "empresaObjetivoLabel": "Target company or sector (if applicable)",
       "empresaObjetivoPlaceholder": "E.g. local IT company, own clinic...",
       "cicloSuperiorInteresLabel": "Higher-level cycle / degree of interest",
       "cicloSuperiorInteresPlaceholder": "E.g. DAM, ASIR, Computer Engineering, ADE...",
       "interesesEspecificosTitulo": "Specific interests",
-      "seccion5Titulo": "Section 5: Job placement (after the cycle)",
+      "seccion5Titulo": "Job placement (after the cycle)",
       "seccion5InfoDesc": "This section is filled in at the end of the cycle or as follow-up for graduates.",
       "estadoInsercionLabel": "Job placement status",
       "relacionCicloLabel": "Relationship between the job and the cycle",
@@ -2400,12 +2406,6 @@
       "valoracionEgresadoLabel": "Overall rating of the graduate (1-5)",
       "obsInsercionLabel": "Job placement follow-up notes",
       "obsInsercionPlaceholder": "Notes on the placement process, difficulties, post-cycle contact...",
-      "seccion6Titulo": "Section 6: Tutor's notes and follow-up",
-      "reunionesCelebradasLabel": "No. of guidance meetings held",
-      "fechaUltimaReunionLabel": "Date of last meeting / interview",
-      "fechaDerivacionLabel": "Date referred to counsellor",
-      "resumenOrientacionLabel": "Guidance summary (free text)",
-      "resumenOrientacionPlaceholder": "Write the guidance summary here: decisions made, agreements with the student and family, next steps...",
       "selectaAlumnadoDesc": "Select a student from the list on the left."
     },
     "comun": {
@@ -2571,6 +2571,9 @@
       "eval2Abrev": "2nd Ev.",
       "eval3Abrev": "3rd Ev.",
       "trimestresTitulo": "Terms",
+      "trimestre1": "1st term",
+      "trimestre2": "2nd term",
+      "trimestre3": "3rd term",
       "inicioLabel": "Start",
       "finLabel": "End",
       "horasLectivasReales": "Actual teaching hours",
@@ -2587,7 +2590,9 @@
       "festivosEventosInstruccionesPre": "Enter manually or click on the calendar. Holidays exclude hours from the actual count. Holiday and Relevant are independent: the same day can have both at once. Rows with",
       "festivosEventosInstruccionesPost": "(Start/End of school year and term, FEOE) come from General dates / FEOE period — edit them there, not here.",
       "hoyBadge": "Today",
-      "periodoFeoeTitulo": "FEOE period"
+      "periodoFeoeTitulo": "FEOE period",
+      "nEntradasMes_one": "{{count}} entry",
+      "nEntradasMes_other": "{{count}} entries"
     },
     "diario": {
       "alumnadoActivoLabel": "Active students",
@@ -2833,8 +2838,11 @@
     },
     "seguimiento": {
       "cargandoDatosSeguimiento": "Loading tracking data...",
-      "mesActualPrefijo": "CURRENT",
-      "planificacionMensualTitulo": "Monthly planning"
+      "mesActualPrefijo": "CURRENT"
+    },
+    "agenda": {
+      "planificacionSeguimientoMensualTitulo": "Monthly planning and tracking",
+      "planoAulaTitulo": "Classroom layout"
     }
   },
   "t1": "1st term",
@@ -2854,5 +2862,5 @@
   },
   "fecha": "Date",
   "hasta_opc": "Until (optional)",
-  "sin_eventos": "No holidays or events yet. Add one above."
+  "sin_eventos": "No holidays or events yet. Add one below."
 }

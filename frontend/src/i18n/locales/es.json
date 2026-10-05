@@ -11,7 +11,6 @@
     "resumen": "Resumen",
     "listado": "Listado",
     "tutoria": "Tutoría",
-    "plano": "Plano",
     "feoe": "FEOE",
     "diario": "Diario",
     "asistencia": "Asistencia",
@@ -62,6 +61,24 @@
         "label": "Mensual",
         "desc": "Vista mensual y calendario interactivo con fechas clave y sesiones planificadas."
       }
+    },
+    "agenda": {
+      "agenda": {
+        "label": "Agenda",
+        "desc": "Tus clases de hoy, la semana y la unidad en curso."
+      },
+      "avance": {
+        "label": "Avance",
+        "desc": "Planificación y seguimiento mensual de las unidades didácticas según lo impartido."
+      },
+      "progresoRaUd": {
+        "label": "Progreso de RA según las UD",
+        "desc": "Progreso de los resultados de aprendizaje según el estado y la ponderación de las unidades didácticas impartidas."
+      },
+      "planoAula": {
+        "label": "Plano de aula",
+        "desc": "Distribución y plano visual del aula."
+      }
     }
   },
   "inicio": {
@@ -70,7 +87,6 @@
   },
   "nav": {
     "inicio": "Inicio",
-    "agenda": "Agenda",
     "perfil": "Perfil",
     "archivos": "Archivo",
     "catalogo": "Catálogo",
@@ -88,7 +104,8 @@
     "alumnado": "Alumnado",
     "diario": "Diario",
     "seguimiento": "Seguimiento",
-    "calificaciones": "Cierre",
+    "calificaciones": "Calificaciones",
+    "cierre": "Cierre",
     "informes": "Informes",
     "normativa": "Normativa",
     "calidad": "Calidad",
@@ -109,7 +126,6 @@
     "ayuda": "Guía de inicio, FAQ, acrónimos y contribuciones de la comunidad.",
     "magia": "Comparativa y correspondencia APP-PD, y documentos de apoyo de la programación y del curso.",
     "legal": "Aviso legal, privacidad, cookies y accesibilidad.",
-    "agenda": "Tus clases de hoy, la semana y la unidad en curso.",
     "archivos": "Gestión de archivos, sincronización en la nube, seguridad, IA y verificación de datos.",
     "normativa": "Normativa autonómica, legislación, bibliografía y estándares INCUAL.",
     "catalogo": "Familias, títulos, módulos y currículos (RA y CE).",
@@ -117,10 +133,11 @@
     "curriculo": "Contribución de los RA a los objetivos, ponderación RA-CE, unidades didácticas y tareas competenciales.",
     "metodologia": "Metodología, recursos, plan de contingencia y elementos transversales.",
     "instrumentos": "Definición y pesos de las herramientas de evaluación.",
-    "calendario": "Horario, trimestres, festivos, periodo FEOE y vista mensual.",
-    "alumnado": "Fichas personales, plano de aula, orientación profesional y entrada de notas por alumnado.",
-    "seguimiento": "Diario de clases, asistencia, avance de la programación y valoración del alumnado en la empresa (FEOE).",
-    "calificaciones": "Resultados y notas del curso, histórico y reclamaciones, y mejora del módulo (EQAVET y PDCA)."
+    "calendario": "Horario, trimestres, festivos, periodo FEOE, vista mensual y tus clases de hoy, la semana y la unidad en curso.",
+    "alumnado": "Fichas personales y orientación profesional.",
+    "seguimiento": "Diario de clases, avance mensual, progreso de RA y asistencia.",
+    "calificaciones": "Notas, boletín y valoración en la empresa (FEOE) por alumnado, y reclamaciones.",
+    "cierre": "Resultados y notas del curso, mejora del módulo (EQAVET y PDCA), tendencias del grupo, e inserción laboral y expediente por alumnado."
   },
   "sidebar": {
     "en_obras": "En obras",
@@ -128,7 +145,7 @@
     "demo": "DEMO",
     "reales": "REALES",
     "abrir_grupo": "Abrir grupo",
-    "agenda": "Agenda",
+    "agenda": "Clases",
     "legal": "Legal"
   },
   "header": {
@@ -141,10 +158,10 @@
     "error": "Error"
   },
   "pages": {
-    "agenda_title": "Agenda",
-    "agenda_desc": "Tus clases de hoy, la semana y la unidad en curso.",
+    "agenda_title": "Clases",
+    "agenda_desc": "Notas, boletín y valoración en la empresa (FEOE) por alumnado, y reclamaciones.",
     "alumnado_title": "Alumnado",
-    "alumnado_desc": "Gestión de alumnado, plano de aula, orientación profesional y notas.",
+    "alumnado_desc": "Gestión de alumnado, notas y orientación profesional.",
     "diario_title": "Seguimiento diario",
     "diario_desc": "Diario de aula, contingencias, control de asistencia y alertas.",
     "evaluacion_title": "Calificación",
@@ -169,7 +186,7 @@
     "descargas_desc": "Generación de actas, informes y boletines en PDF/Excel.",
     "legal_title": "Legal",
     "legal_desc": "Aviso legal, privacidad, cookies, licencias y accesibilidad.",
-    "agenda": "Agenda",
+    "agenda": "Clases",
     "alumnado": "Alumnado",
     "diario": "Diario",
     "evaluacion": "Evaluación",
@@ -439,8 +456,10 @@
   },
   "campos": {
     "dashboard": {},
-    "seguimiento": {
-      "planificacionMensualTitulo": "Planificación mensual"
+    "seguimiento": {},
+    "agenda": {
+      "planificacionSeguimientoMensualTitulo": "Planificación y seguimiento mensual",
+      "planoAulaTitulo": "Plano de aula"
     }
   }
 }

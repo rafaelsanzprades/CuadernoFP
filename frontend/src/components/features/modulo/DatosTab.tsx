@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/Card";
 import { Select } from "@/components/ui/Select";
 import { Input } from "@/components/ui/Input";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { InfoTip } from "@/components/ui/InfoTip";
 import { Family } from "@/types";
 import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
 import { useTranslation } from "react-i18next";
@@ -395,7 +396,10 @@ export function DatosTab() {
           return (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
-                <label className="text-body font-semibold text-foreground">{t('campos.modulo.notaMinimaAprobar', {defaultValue: 'Nota mínima para aprobar'})}</label>
+                <label className="text-body font-semibold text-foreground flex items-center gap-1.5">
+                  {t('campos.modulo.notaMinimaAprobar', {defaultValue: 'Nota mínima para aprobar'})}
+                  <InfoTip>{t('campos.modulo.notaMinimaAprobarDesc', {defaultValue: 'Nota a partir de la cual un RA o Módulo se considera superado (típicamente 5.0).'})}</InfoTip>
+                </label>
                 <input
                   type="number"
                   step="0.1"
@@ -403,11 +407,13 @@ export function DatosTab() {
                   onChange={(e) => updateModuleData("config_redondeo", { ...config, nota_aprobado: parseFloat(e.target.value) })}
                   className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
                 />
-                <p className="text-caption text-muted">{t('campos.modulo.notaMinimaAprobarDesc', {defaultValue: 'Nota a partir de la cual un RA o Módulo se considera superado (típicamente 5.0).'})}</p>
               </div>
 
               <div className="space-y-2">
-                <label className="text-body font-semibold text-foreground">{t('campos.modulo.umbralRedondeoAlza', {defaultValue: 'Umbral de redondeo al alza'})}</label>
+                <label className="text-body font-semibold text-foreground flex items-center gap-1.5">
+                  {t('campos.modulo.umbralRedondeoAlza', {defaultValue: 'Umbral de redondeo al alza'})}
+                  <InfoTip>{t('campos.modulo.umbralRedondeoAlzaDesc', {defaultValue: 'Si el alumnado obtiene esta nota o superior (ej. 4.8), se redondeará automáticamente a la nota de aprobado.'})}</InfoTip>
+                </label>
                 <input
                   type="number"
                   step="0.1"
@@ -415,11 +421,13 @@ export function DatosTab() {
                   onChange={(e) => updateModuleData("config_redondeo", { ...config, umbral_redondeo: parseFloat(e.target.value) })}
                   className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
                 />
-                <p className="text-caption text-muted">{t('campos.modulo.umbralRedondeoAlzaDesc', {defaultValue: 'Si el alumnado obtiene esta nota o superior (ej. 4.8), se redondeará automáticamente a la nota de aprobado.'})}</p>
               </div>
 
               <div className="space-y-2">
-                <label className="text-body font-semibold text-foreground">{t('campos.modulo.criteriosCompensablesRA', {defaultValue: 'Criterios compensables por RA'})}</label>
+                <label className="text-body font-semibold text-foreground flex items-center gap-1.5">
+                  {t('campos.modulo.criteriosCompensablesRA', {defaultValue: 'Criterios compensables por RA'})}
+                  <InfoTip align="right">{t('campos.modulo.criteriosCompensablesDescPre', {defaultValue: 'Número máximo de Criterios suspensos que se permiten para aprobar un RA. '})}<strong>0</strong>{t('campos.modulo.criteriosCompensablesDescPost', {defaultValue: ' = cualquier CE suspenso del RA topa su nota justo por debajo del aprobado (comportamiento estricto); sube este número para permitir compensar N criterios suspensos dentro del mismo RA. Cuando el tope está activo para un alumno, aparece marcado en Alumnado → Notas. Ejemplo con 0: CE1.a=9.0 y CE1.b=4.9 al 50% dan una media de 6.95, pero al estar CE1.b suspenso el RA se topa en 4.9, no en 6.95.'})}</InfoTip>
+                </label>
                 <input
                   type="number"
                   step="1"
@@ -427,7 +435,6 @@ export function DatosTab() {
                   onChange={(e) => updateModuleData("config_redondeo", { ...config, max_compensables: parseInt(e.target.value) })}
                   className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
                 />
-                <p className="text-caption text-muted">{t('campos.modulo.criteriosCompensablesDescPre', {defaultValue: 'Número máximo de Criterios suspensos que se permiten para aprobar un RA. '})}<strong>0</strong>{t('campos.modulo.criteriosCompensablesDescPost', {defaultValue: ' = cualquier CE suspenso del RA topa su nota justo por debajo del aprobado (comportamiento estricto); sube este número para permitir compensar N criterios suspensos dentro del mismo RA. Cuando el tope está activo para un alumno, aparece marcado en Seguimiento → Detalle por alumnado. Ejemplo con 0: CE1.a=9.0 y CE1.b=4.9 al 50% dan una media de 6.95, pero al estar CE1.b suspenso el RA se topa en 4.9, no en 6.95.'})}</p>
               </div>
             </div>
           );

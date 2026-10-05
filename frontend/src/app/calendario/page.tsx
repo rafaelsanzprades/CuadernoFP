@@ -16,8 +16,13 @@ import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionIndex } from "@/components/ui/SectionIndex";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
+import { TodayClasses } from "@/components/features/dashboard/TodayClasses";
+import { WeeklyClasses } from "@/components/features/dashboard/WeeklyClasses";
+import { ContextoAgenda } from "@/components/features/dashboard/ContextoAgenda";
+import { DesarrolloUdActual } from "@/components/features/dashboard/DesarrolloUdActual";
 import { InteractiveCalendar } from "@/components/features/dashboard/InteractiveCalendar";
 import { getAutoMilestones } from "@/utils/calendarMilestones";
+import { getSimulatedToday } from "@/utils/planningGenerator";
 import Link from "next/link";
 import { getApiBase } from "@/services/apiBase";
 
@@ -40,64 +45,30 @@ const getMonthNames = (t: (key: string, opts?: any) => string) => [
 ];
 const DAY_NAMES_SHORT = ["Lu","Ma","Mi","Ju","Vi","Sa","Do"];
 
-// ── Notes Table Component ─────────────────────────────────────────────────────
-function NotesTable({ calendar_notes, onUpdateNotes, autoMilestones, feoeIni, feoeFin }: {
-  calendar_notes: Record<string, string>;
-  onUpdateNotes: (notes: Record<string, string>) => void;
-  autoMilestones: Record<string, string>;
-  feoeIni?: string;
-  feoeFin?: string;
-}) {
-  const { t } = useTranslation();
-  const MONTH_NAMES = React.useMemo(() => getMonthNames(t), [t]);
-  const [newDate, setNewDate]         = useState("");
-  const [newEndDate, setNewEndDate]   = useState("");
-  const [newFestivo, setNewFestivo]   = useState("");
-  const [newRelevante, setNewRelevante] = useState("");
-
-  function addNote() {
-    if (!newDate || (!newFestivo && !newRelevante)) return;
-
-    const startD = new Date(newDate + "T12:00:00");
-    const endD = newEndDate ? new Date(newEndDate + "T12:00:00") : startD;
-
-    if (endD < startD) return;
-
-    const newNotes = { ...calendar_notes };
-
-    let curr = new Date(startD);
-    while (curr <= endD) {
-      const d = String(curr.getDate()).padStart(2, "0");
-      const m = String(curr.getMonth() + 1).padStart(2, "0");
-      const y = curr.getFullYear();
-      if (newFestivo) newNotes[`f_${d}/${m}/${y}`] = newFestivo;
-      if (newRelevante) newNotes[`r_${d}/${m}/${y}`] = newRelevante;
-      curr.setDate(curr.getDate() + 1);
-    }
-
-    onUpdateNotes(newNotes);
-    setNewDate(""); setNewEndDate(""); setNewFestivo(""); setNewRelevante("");
+// Parsea una clave "DD/MM/YYYY" (formato actual) o "YYYY-MM-DD" (legado) a Date + ISO ordenable.
+const parseKeyDate = (dateStr: string) => {
+  if (dateStr.includes("-")) {
+    const [y, m, day] = dateStr.split("-");
+    return { iso: `${y}-${m}-${day}`, date: new Date(Number(y), Number(m) - 1, Number(day), 12) };
   }
+  const [d, m, y] = dateStr.split("/");
+  return { iso: `${y}-${m}-${d}`, date: new Date(Number(y), Number(m) - 1, Number(d), 12) };
+};
 
-  function deleteRange(keys: string[]) {
-    const newNotes = { ...calendar_notes };
-    keys.forEach(k => delete newNotes[k]);
-    onUpdateNotes(newNotes);
-  }
 
-  // Parsea una clave "DD/MM/YYYY" (formato actual) o "YYYY-MM-DD" (legado) a Date + ISO ordenable.
-  const parseKeyDate = (dateStr: string) => {
-    if (dateStr.includes("-")) {
-      const [y, m, day] = dateStr.split("-");
-      return { iso: `${y}-${m}-${day}`, date: new Date(Number(y), Number(m) - 1, Number(day), 12) };
-    }
-    const [d, m, y] = dateStr.split("/");
-    return { iso: `${y}-${m}-${d}`, date: new Date(Number(y), Number(m) - 1, Number(d), 12) };
-  };
+type DayRow = { iso: string; date: Date; festivo?: string; relevante?: string };
+type RangeT = { start: DayRow; end: DayRow; keys: string[]; auto?: boolean };
 
+// Rangos de festivos/eventos ordenados por fecha (los que pinta la tabla de
+// Eventos y festivos); también los usa la página para el índice de meses.
+function buildEventRanges(
+  calendar_notes: Record<string, string>,
+  autoMilestones: Record<string, string>,
+  feoeIni?: string,
+  feoeFin?: string,
+): RangeT[] {
   // Una fila por fecha, con festivo y relevante como columnas paralelas (un
   // mismo día puede tener ambos a la vez).
-  type DayRow = { iso: string; date: Date; festivo?: string; relevante?: string };
   const byDate = new Map<string, DayRow>();
   Object.entries(calendar_notes).forEach(([k, v]) => {
     if (!v) return;
@@ -110,7 +81,6 @@ function NotesTable({ calendar_notes, onUpdateNotes, autoMilestones, feoeIni, fe
   const dayRows = Array.from(byDate.values()).sort((a, b) => a.iso.localeCompare(b.iso));
 
   // Fusiona días consecutivos en un rango solo si festivo Y relevante coinciden en ambos.
-  type RangeT = { start: DayRow; end: DayRow; keys: string[]; auto?: boolean };
   const ranges: RangeT[] = [];
   const keysForDay = (row: DayRow) => [
     ...(row.festivo ? [`f_${pad(row.date.getDate())}/${pad(row.date.getMonth() + 1)}/${row.date.getFullYear()}`] : []),
@@ -150,89 +120,196 @@ function NotesTable({ calendar_notes, onUpdateNotes, autoMilestones, feoeIni, fe
     });
   }
   ranges.sort((a, b) => a.start.iso.localeCompare(b.start.iso));
+  return ranges;
+}
+
+// ── Notes Table Component ─────────────────────────────────────────────────────
+function NotesTable({ calendar_notes, onUpdateNotes, autoMilestones, feoeIni, feoeFin, currentMonthKey }: {
+  calendar_notes: Record<string, string>;
+  onUpdateNotes: (notes: Record<string, string>) => void;
+  autoMilestones: Record<string, string>;
+  feoeIni?: string;
+  feoeFin?: string;
+  currentMonthKey: string | null;
+}) {
+  const { t } = useTranslation();
+  const MONTH_NAMES = React.useMemo(() => getMonthNames(t), [t]);
+  const [newDate, setNewDate]         = useState("");
+  const [newEndDate, setNewEndDate]   = useState("");
+  const [newFestivo, setNewFestivo]   = useState("");
+  const [newRelevante, setNewRelevante] = useState("");
+  const [allOpen, setAllOpen] = useState(false);
+
+  function addNote() {
+    if (!newDate || (!newFestivo && !newRelevante)) return;
+
+    const startD = new Date(newDate + "T12:00:00");
+    const endD = newEndDate ? new Date(newEndDate + "T12:00:00") : startD;
+
+    if (endD < startD) return;
+
+    const newNotes = { ...calendar_notes };
+
+    let curr = new Date(startD);
+    while (curr <= endD) {
+      const d = String(curr.getDate()).padStart(2, "0");
+      const m = String(curr.getMonth() + 1).padStart(2, "0");
+      const y = curr.getFullYear();
+      if (newFestivo) newNotes[`f_${d}/${m}/${y}`] = newFestivo;
+      if (newRelevante) newNotes[`r_${d}/${m}/${y}`] = newRelevante;
+      curr.setDate(curr.getDate() + 1);
+    }
+
+    onUpdateNotes(newNotes);
+    setNewDate(""); setNewEndDate(""); setNewFestivo(""); setNewRelevante("");
+  }
+
+  function deleteRange(keys: string[]) {
+    const newNotes = { ...calendar_notes };
+    keys.forEach(k => delete newNotes[k]);
+    onUpdateNotes(newNotes);
+  }
+
+  const ranges = buildEventRanges(calendar_notes, autoMilestones, feoeIni, feoeFin);
 
   const fmt = (d: Date) => `${pad(d.getDate())} ${MONTH_NAMES[d.getMonth()]?.substring(0, 3).toLowerCase() || ""} ${d.getFullYear()}`;
 
+  // Un acordeón por mes (mismo aspecto que el Diario de Seguimiento -> Clases,
+  // petición de Rafael, 2026-10-03): solo el mes en curso arranca abierto.
+  const groups: { key: string; year: number; month: number; items: RangeT[] }[] = [];
+  ranges.forEach(r => {
+    const year = r.start.date.getFullYear();
+    const month = r.start.date.getMonth();
+    const key = `${year}-${pad(month + 1)}`;
+    const last = groups[groups.length - 1];
+    if (last && last.key === key) last.items.push(r);
+    else groups.push({ key, year, month, items: [r] });
+  });
+
+  const colgroup = (
+    <colgroup>
+      <col style={{ width: "7.5rem" }} />
+      <col style={{ width: "7.5rem" }} />
+      <col />
+      <col />
+      <col style={{ width: "2.5rem" }} />
+    </colgroup>
+  );
+
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-left text-body border-collapse">
-        <thead>
-          <tr className="border-b border-[var(--glass-border)] text-muted">
-            <th className="p-2 w-28">{t('table.fecha', {defaultValue: 'Fecha'})}</th>
-            <th className="p-2 w-28">{t('table.hasta', {defaultValue: 'Hasta'})}</th>
-            <th className="p-2">{t('festivo', {defaultValue: 'Festivo'})}</th>
-            <th className="p-2">{t('evento', {defaultValue: 'Relevante'})}</th>
-            <th className="p-2 w-10" />
-          </tr>
-        </thead>
-        <tbody>
-          {ranges.map((r, i) => {
-            const monthHeader = `${MONTH_NAMES[r.start.date.getMonth()]} '${String(r.start.date.getFullYear()).substring(2)}`;
-            const showHeader = i === 0
-              || ranges[i - 1].start.date.getMonth() !== r.start.date.getMonth()
-              || ranges[i - 1].start.date.getFullYear() !== r.start.date.getFullYear();
-            const singleDay = r.start.iso === r.end.iso;
+    <div>
+      {groups.length > 0 && (
+        <div className="flex justify-end mb-4">
+          <button
+            onClick={() => {
+              setAllOpen(prev => !prev);
+              document.querySelectorAll('.eventos-details').forEach((el) => {
+                (el as HTMLDetailsElement).open = !allOpen;
+              });
+            }}
+            className="text-body font-semibold px-4 py-2 rounded-lg border border-[var(--glass-border)] bg-foreground/15 text-foreground/80 hover:bg-foreground/10 hover:text-foreground transition-colors flex items-center gap-2"
+          >
+            <span>{allOpen ? '▲' : '▼'}</span>
+            {allOpen ? t('common.colapsar_todos', {defaultValue: 'Colapsar todos'}) : t('common.expandir_todos', {defaultValue: 'Expandir todos'})}
+          </button>
+        </div>
+      )}
 
-            return (
-              <React.Fragment key={`${r.start.iso}-${r.auto ? "auto" : "real"}-${i}`}>
-                {showHeader && (
-                  <tr>
-                    <td colSpan={5} className="pt-6 pb-2 text-caption font-bold tracking-wider text-accent border-b border-[var(--glass-border)]/50">
-                      {monthHeader}
-                    </td>
+      <div className="space-y-4">
+        {groups.map(g => (
+          <details
+            key={g.key}
+            id={`eventos-mes-${g.key}`}
+            style={{ scrollMarginTop: "260px" }}
+            open={currentMonthKey !== null && g.key === currentMonthKey}
+            className="eventos-details group bg-[var(--glass-bg)] rounded-lg border border-[var(--glass-border)] overflow-hidden transition-colors"
+          >
+            <summary className="p-4 cursor-pointer flex items-center justify-between font-semibold text-subheading select-none hover:bg-foreground/5">
+              <div className="flex items-center gap-3">
+                <span className="text-info"><span className="inline-flex"><Calendar className="w-[1.2em] h-[1.2em] mr-1" /></span></span>
+                <span>{MONTH_NAMES[g.month]} {g.year}</span>
+              </div>
+              <div className="text-body text-muted">
+                {t('campos.calendario.nEntradasMes', {count: g.items.length, defaultValue_one: '{{count}} entrada', defaultValue_other: '{{count}} entradas'})} <span className="ml-4 group-open:rotate-180 inline-block transition-transform">▼</span>
+              </div>
+            </summary>
+            <div className="p-6 border-t border-[var(--glass-border)] bg-transparent overflow-x-auto">
+              <table className="w-full text-left text-body border-collapse table-fixed">
+                {colgroup}
+                <thead>
+                  <tr className="border-b border-[var(--glass-border)] text-muted">
+                    <th className="p-2">{t('table.fecha', {defaultValue: 'Fecha'})}</th>
+                    <th className="p-2">{t('table.hasta', {defaultValue: 'Hasta'})}</th>
+                    <th className="p-2">{t('festivo', {defaultValue: 'Festivo'})}</th>
+                    <th className="p-2">{t('evento', {defaultValue: 'Relevante'})}</th>
+                    <th className="p-2" />
                   </tr>
-                )}
-                <tr className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
-                  <td className="p-2 font-mono text-foreground/80">{fmt(r.start.date)}</td>
-                  <td className="p-2 font-mono text-foreground/60">{singleDay ? "" : fmt(r.end.date)}</td>
-                  <td className="p-2 text-foreground/90">
-                    {r.start.festivo && (
-                      <span className="text-caption px-2 py-0.5 rounded-full font-semibold bg-danger/10 text-danger">
-                        <span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> {r.start.festivo}
-                      </span>
-                    )}
-                  </td>
-                  <td className="p-2 text-foreground/90">
-                    {r.start.relevante && (
-                      <span className="text-caption px-2 py-0.5 rounded-full font-semibold bg-info/10 text-info">
-                        <span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> {r.start.relevante}
-                      </span>
-                    )}
-                  </td>
-                  <td className="p-2 text-center">
-                    {r.auto ? (
-                      <span className="text-muted/50" title={t('tooltips.calendario.derivadoFechasGenerales', {defaultValue: 'Derivado de fechas generales, no se borra aquí'})}>
-                        <Lock className="w-[1em] h-[1em] inline-block" />
-                      </span>
-                    ) : (
-                      <button onClick={() => deleteRange(r.keys)} className="text-muted/80 hover:text-danger font-bold text-subheading leading-none transition-colors">×</button>
-                    )}
-                  </td>
-                </tr>
-              </React.Fragment>
-            );
-          })}
+                </thead>
+                <tbody>
+                  {g.items.map((r, i) => {
+                    const singleDay = r.start.iso === r.end.iso;
+                    return (
+                      <tr key={`${r.start.iso}-${r.auto ? "auto" : "real"}-${i}`} className="border-b border-white/5 hover:bg-foreground/5 transition-colors">
+                        <td className="p-2 font-mono text-foreground/80">{fmt(r.start.date)}</td>
+                        <td className="p-2 font-mono text-foreground/60">{singleDay ? "" : fmt(r.end.date)}</td>
+                        <td className="p-2 text-foreground/90">
+                          {r.start.festivo && (
+                            <span className="text-caption px-2 py-0.5 rounded-full font-semibold bg-danger/10 text-danger">
+                              <span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> {r.start.festivo}
+                            </span>
+                          )}
+                        </td>
+                        <td className="p-2 text-foreground/90">
+                          {r.start.relevante && (
+                            <span className="text-caption px-2 py-0.5 rounded-full font-semibold bg-info/10 text-info">
+                              <span className="inline-flex"><Circle className="w-[1.2em] h-[1.2em] mr-1" /></span> {r.start.relevante}
+                            </span>
+                          )}
+                        </td>
+                        <td className="p-2 text-center">
+                          {r.auto ? (
+                            <span className="text-muted/50" title={t('tooltips.calendario.derivadoFechasGenerales', {defaultValue: 'Derivado de fechas generales, no se borra aquí'})}>
+                              <Lock className="w-[1em] h-[1em] inline-block" />
+                            </span>
+                          ) : (
+                            <button onClick={() => deleteRange(r.keys)} className="text-muted/80 hover:text-danger font-bold text-subheading leading-none transition-colors">×</button>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </details>
+        ))}
+      </div>
+      {ranges.length === 0 && <p className="text-center text-muted/80 text-body py-4">{t('sin_eventos', {defaultValue: 'Sin festivos ni eventos aún. Añade uno abajo.'})}</p>}
 
-          <tr className="border-t border-[var(--glass-border)] bg-white/3">
-            <td className="p-2">
-              <DatePicker value={newDate} onChange={v => setNewDate(v)} className="w-full" placeholder={t('fecha', {defaultValue: 'Fecha'})} />
-            </td>
-            <td className="p-2">
-              <DatePicker value={newEndDate} onChange={v => setNewEndDate(v)} className="w-full" placeholder={t('hasta_opc', {defaultValue: 'Hasta (opcional)'})} />
-            </td>
-            <td className="p-2">
+      <div className="mt-6 overflow-x-auto">
+        <table className="w-full text-left text-body border-collapse table-fixed">
+          {colgroup}
+          <tbody>
+            <tr className="border-t border-[var(--glass-border)] bg-white/3">
+              <td className="p-2">
+                <DatePicker value={newDate} onChange={v => setNewDate(v)} className="w-full" placeholder={t('fecha', {defaultValue: 'Fecha'})} />
+              </td>
+              <td className="p-2">
+                <DatePicker value={newEndDate} onChange={v => setNewEndDate(v)} className="w-full" placeholder={t('hasta_opc', {defaultValue: 'Hasta (opcional)'})} />
+              </td>
+              <td className="p-2">
               <input type="text" value={newFestivo} onChange={e => setNewFestivo(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()} placeholder={t('festivo', {defaultValue: 'Festivo...'})} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-body text-foreground focus:border-warning focus:outline-none" />
-            </td>
-            <td className="p-2">
+              </td>
+              <td className="p-2">
               <input type="text" value={newRelevante} onChange={e => setNewRelevante(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()} placeholder={t('evento', {defaultValue: 'Relevante...'})} className="w-full bg-foreground/20 border border-[var(--glass-border)] rounded p-2 text-body text-foreground focus:border-warning focus:outline-none" />
-            </td>
-            <td className="p-2 text-center">
+              </td>
+              <td className="p-2 text-center">
               <button onClick={addNote} disabled={!newDate || (!newFestivo && !newRelevante)} className="text-warning hover:text-warning font-bold text-heading leading-none disabled:text-gray-700 transition-colors">+</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      {ranges.length === 0 && <p className="text-center text-muted/80 text-body py-4">{t('sin_eventos', {defaultValue: 'Sin festivos ni eventos aún. Añade uno arriba.'})}</p>}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
@@ -243,7 +320,7 @@ function NotesTable({ calendar_notes, onUpdateNotes, autoMilestones, feoeIni, fe
 
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function CalendarioPage() {
-  const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, activeModuleId, moduleData, setModuleData } = useAppStore();
+  const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, activeModuleId, moduleData, setModuleData, dataSource } = useAppStore();
   // cursoData.planning_ledger es un campo persistido que nunca se escribe
   // (no hay ningún punto de la app que lo guarde) — la asignación real de
   // UD por día se recalcula en memoria vía useDynamicPlanning, igual que en
@@ -255,6 +332,13 @@ export default function CalendarioPage() {
   const [saveMessage, setSaveMessage] = useState("");
   const [saveIsError, setSaveIsError] = useState(false);
   const [activeTab, setActiveTab] = useState("fechas");
+  // Mes en curso ("aaaa-mm"), null hasta montar en cliente (el HTML de SSR no
+  // conoce el reloj del navegador). En DEMO, la fecha simulada del curso.
+  const [currentMonthKey, setCurrentMonthKey] = useState<string | null>(null);
+  useEffect(() => {
+    const ref = dataSource === 'demo' && cursoData ? getSimulatedToday(cursoData) : new Date();
+    setCurrentMonthKey(`${ref.getFullYear()}-${pad(ref.getMonth() + 1)}`);
+  }, [dataSource, cursoData]);
 
   const TABS = [
     { id: "fechas", label: <span className="flex items-center gap-2"><Settings className="w-4 h-4 shrink-0" /> {t('tabs.calendario.fechas.label', {defaultValue: 'Fechas y horario'})}</span>, cleanLabel: t('tabs.calendario.fechas.label', {defaultValue: 'Fechas y horario'}) },
@@ -262,16 +346,25 @@ export default function CalendarioPage() {
     // Traída desde Agenda (2026-10-02, petición de Rafael): vista mensual del
     // calendario con las sesiones planificadas.
     { id: "mensual", label: <span className="flex items-center gap-2"><CalendarDays className="w-4 h-4 shrink-0" /> {t('tabs.calendario.mensual.label', {defaultValue: 'Mensual'})}</span>, cleanLabel: t('tabs.calendario.mensual.label', {defaultValue: 'Mensual'}) },
+    // Traída desde Clases (2026-10-05, petición de Rafael): lo de hoy, la
+    // semana y la unidad en curso.
+    { id: "agenda", label: <span className="flex items-center gap-2"><Calendar className="w-4 h-4 shrink-0" /> {t('tabs.agenda.agenda.label', {defaultValue: 'Agenda'})}</span>, cleanLabel: t('tabs.agenda.agenda.label', {defaultValue: 'Agenda'}) },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     fechas: t('tabs.calendario.fechas.desc', {defaultValue: 'Configura las fechas generales, el horario semanal, los trimestres y el periodo FEOE del curso.'}),
     eventos: t('tabs.calendario.eventos.desc', {defaultValue: 'Registro de eventos y festivos que afectan a la docencia.'}),
+    agenda: t('tabs.agenda.agenda.desc', {defaultValue: 'Tus clases de hoy, la semana y la unidad en curso.'}),
     mensual: t('tabs.calendario.mensual.desc', {defaultValue: 'Vista mensual y calendario interactivo con fechas clave y sesiones planificadas.'}),
   };
 
   // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
+    agenda: [
+      { id: "agenda-clases-hoy", label: 'Tus clases de hoy' },
+      { id: "agenda-prevision-semanal", label: t('campos.dashboard.previsionSemanalTitulo', {defaultValue: 'Previsión semanal'}) },
+      { id: "agenda-desarrollo-ud", label: t('campos.dashboard.desarrolloUnidadEnCursoTitulo', {defaultValue: 'Desarrollo de la unidad en curso'}) },
+    ],
     fechas: [
       { id: "calendario-fechas-generales", label: t('campos.calendario.fechasGeneralesTitulo', {defaultValue: 'Fechas generales'}) },
       { id: "calendario-horario-semanal", label: t('campos.calendario.horarioSemanalTitulo', {defaultValue: 'Horario semanal'}) },
@@ -356,6 +449,44 @@ export default function CalendarioPage() {
   const info_fechas   = cursoData?.info_fechas   || {};
   const horario       = cursoData?.horario       || { Lun: 0, Mar: 0, "Mié": 0, Jue: 0, Vie: 0 };
   const calendar_notes = cursoData?.calendar_notes || {};
+
+  // Índice dinámico de meses de Eventos y festivos (petición de Rafael,
+  // 2026-10-03; mismo criterio que el Diario de Seguimiento -> Clases):
+  // empieza por el mes en curso ("ACTUAL. Mayo"), sigue en orden cronológico
+  // y, tras el último mes con entradas, vuelve al primero hasta el mes
+  // anterior al actual. Si el mes en curso no tiene entradas, arranca por
+  // el siguiente que sí las tenga.
+  const eventRanges = buildEventRanges(
+    calendar_notes,
+    getAutoMilestones(info_fechas),
+    typeof info_fechas.ini_feoe === 'string' ? info_fechas.ini_feoe : undefined,
+    typeof info_fechas.fin_feoe === 'string' ? info_fechas.fin_feoe : undefined,
+  );
+  const monthKeysEventos = Array.from(new Set(eventRanges.map(r => `${r.start.date.getFullYear()}-${pad(r.start.date.getMonth() + 1)}`)));
+  const idxStartEventos = currentMonthKey === null ? -1 : monthKeysEventos.findIndex(k => k >= currentMonthKey);
+  const monthKeysOrdenados = idxStartEventos > 0
+    ? [...monthKeysEventos.slice(idxStartEventos), ...monthKeysEventos.slice(0, idxStartEventos)]
+    : monthKeysEventos;
+  const nombresMes = getMonthNames(t);
+  const mesesRepetidos = new Set(monthKeysEventos.map(k => k.slice(5)).filter((m, i, a) => a.indexOf(m) !== i));
+  const eventosIndexItems = monthKeysOrdenados.map(k => {
+    const [y, m] = k.split("-");
+    const nombre = nombresMes[Number(m) - 1] + (mesesRepetidos.has(m) ? ` '${y.slice(2)}` : "");
+    return {
+      id: `eventos-mes-${k}`,
+      label: k === currentMonthKey ? `${t('campos.seguimiento.mesActualPrefijo', { defaultValue: 'ACTUAL' })}. ${nombre}` : nombre,
+    };
+  });
+
+  // Índice de Mensual: un ancla por trimestre, al mes en que empieza (los
+  // trimestres sin fecha de inicio no aparecen). Orden cronológico, sin
+  // priorizar el mes actual.
+  const mensualIndexItems = [1, 2, 3]
+    .filter(n => /^\d{4}-\d{2}/.test(info_fechas?.[`ini_${n}t`] || ""))
+    .map(n => ({
+      id: `mensual-mes-${info_fechas[`ini_${n}t`].slice(0, 7)}`,
+      label: t(`campos.calendario.trimestre${n}`, { defaultValue: `${n}.º trimestre` }),
+    }));
 
   const h_boa = Number(moduleData?.info_modulo?.h_boa) || 0;
   const h_sem = Number(moduleData?.info_modulo?.h_sem) || 0;
@@ -464,7 +595,7 @@ export default function CalendarioPage() {
 
             {/* Índice de bloques de la pestaña activa -- dentro del header
                 fijo (sticky top-0), así que no se pierde al hacer scroll. */}
-            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
+            <SectionIndex items={activeTab === 'eventos' ? eventosIndexItems : activeTab === 'mensual' ? mensualIndexItems : (SECTION_INDEX_ITEMS[activeTab] || [])} bare onItemClick={(id) => { const el = document.getElementById(id); if (el instanceof HTMLDetailsElement) el.open = true; }} />
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-4 px-8 pt-4 pb-12">
@@ -753,7 +884,7 @@ export default function CalendarioPage() {
               )}
 
               {activeTab === 'eventos' && (
-                <div className="space-y-3 mt-4">
+                <div className="space-y-3 mt-4 pb-[40vh]">
                 <SectionHeading id="calendario-festivos-eventos" scrollMt="260px">
                   {t('campos.calendario.festivosEventosTitulo', {defaultValue: 'Festivos y eventos'})}
                 </SectionHeading>
@@ -764,6 +895,7 @@ export default function CalendarioPage() {
                     {t('campos.calendario.festivosEventosInstruccionesPost', {defaultValue: '(Inicio/Fin de curso y de trimestre, FEOE) vienen de Fechas generales / Periodo FEOE — se editan ahí, no aquí.'})}
                   </p>
                   <NotesTable
+                    currentMonthKey={currentMonthKey}
                     calendar_notes={calendar_notes}
                     onUpdateNotes={handleUpdateNotes}
                     autoMilestones={getAutoMilestones(info_fechas)}
@@ -771,6 +903,15 @@ export default function CalendarioPage() {
                     feoeFin={typeof info_fechas.fin_feoe === 'string' ? info_fechas.fin_feoe : undefined}
                   />
                 </Card>
+                </div>
+              )}
+
+              {activeTab === 'agenda' && (
+                <div className="space-y-12 mt-4 animate-in fade-in duration-500">
+                  <ContextoAgenda />
+                  <TodayClasses />
+                  <WeeklyClasses />
+                  <DesarrolloUdActual />
                 </div>
               )}
 
