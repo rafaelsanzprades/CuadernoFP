@@ -41,8 +41,8 @@ export const navGroups = [
       { href: "/calendario?tab=fechas", label: "Calendario", icon: Calendar, description: "Horario, trimestres, festivos, periodo FEOE, vista mensual y tus clases de hoy, la semana y la unidad en curso." },
       { href: "/alumnado?tab=orientacion", label: "Alumnado", icon: Users, description: "Fichas personales, orientación profesional, tendencias del grupo." },
       { href: "/calificaciones?tab=academicas", label: "Calificaciones", icon: CalendarDays, description: "Notas, boletín y valoración en la empresa (FEOE) por alumnado, y reclamaciones." },
-      { href: "/seguimiento?tab=clases", label: "Seguimiento", icon: TrendingUp, description: "Diario de clases, avance mensual, progreso de RA y asistencia." },
-      { href: "/cierre?tab=expediente", label: "Cierre", icon: Award, description: "Resultados y notas del curso, mejora del módulo (EQAVET y PDCA), tendencias del grupo, e inserción laboral y expediente por alumnado." },
+      { href: "/seguimiento?tab=asistencia", label: "Seguimiento", icon: TrendingUp, description: "Asistencia, riesgo de abandono, diario de clases, avance mensual de UD y progreso de RA." },
+      { href: "/cierre?tab=expediente", label: "Cierre", icon: Award, description: "Resultados y notas del curso, mejora del módulo (EQAVET y PDCA), tendencias del grupo e inserción laboral y expediente por alumnado." },
     ]
   }
 ];
@@ -99,20 +99,22 @@ export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   ],
   "/calificaciones": [
     { id: "academicas", label: "Académicas" },
+    { id: "trimestral", label: "Trimestral" },
     { id: "reclamaciones", label: "Reclamaciones" },
     { id: "empresa-feoe", label: "Empresa FEOE" },
   ],
   "/seguimiento": [
-    { id: "clases", label: "Clases" },
-    { id: "avance", label: "Avance" },
-    { id: "progreso-ra-ud", label: "Progreso de RA según las UD" },
     { id: "asistencia", label: "Asistencia" },
+    { id: "abandono", label: "Riesgo de abandono" },
+    { id: "clases", label: "Clases" },
+    { id: "avance-ud", label: "Avance de UD" },
+    { id: "progreso-ra-ud", label: "Progreso RA-UD" },
   ],
   "/cierre": [
     { id: "expediente", label: "Expediente" },
     { id: "resumen", label: "Resumen" },
-    { id: "mejora", label: "Mejora" },
     { id: "perfilTendencias", label: "Tendencias" },
+    { id: "mejora", label: "Mejora" },
   ],
   "/normativa": [
     { id: "autonomias", label: "Autonomías" },

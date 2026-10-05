@@ -1,7 +1,7 @@
 {
   "tabs": {
     "cierre": {
-      "expediente": {
+        "expediente": {
         "label": "Espedientea",
         "desc": "Zikloaren osteko laneratzea eta espedientea (ebidentzien denbora-lerroa) ikasleka."
       }
@@ -90,6 +90,10 @@
       }
     },
     "seguimiento": {
+        "abandono": {
+          "label": "Uzte-arriskua",
+          "desc": "Uzte-arriskuaren laburpena asistentzia eta notetan oinarrituta."
+        },
       "clases": {
         "label": "Eskolak",
         "desc": "Eskolen egunerokoa, saio lektiboak eta gorabeheren erregistroa."
@@ -348,7 +352,7 @@
         "desc": "Gaurko klaseak, astea eta unitate aktiboa."
       },
       "avance": {
-        "label": "Aurrerapena",
+        "label": "Ikas-unitatearen aurrerapena",
         "desc": "Ikas-unitateen hileko plangintza eta jarraipena emandakoaren arabera."
       },
       "progresoRaUd": {
@@ -453,7 +457,7 @@
     "ayuda_desc": "Hasierako gida, FAQ, akronimoak eta komunitatearen ekarpenak.",
     "contexto_desc": "Informazio orokorra, ingurunearen ezaugarriak, ikasleak eta modulua.",
     "magia_desc": "Programazio didaktikoaren eta txostenen sorrera.",
-    "seguimiento_desc": "Klase-egunkaria, asistentzia eta FEOE enpresa.",
+    "seguimiento_desc": "Asistentzia, uzte-arriskua, klase-egunkaria, IUen hileko aurrerapena eta IEen aurrerapena.",
     "metodologia_desc": "Metodologia-estrategiak, baliabideak, espazioak eta aniztasunari arreta."
   },
   "common": {
@@ -502,7 +506,7 @@
     "instrumentos": "Ebaluazio-tresnen definizioa eta pisuak.",
     "calendario": "Ordutegia, hiruhilekoak, jaiegunak, FEOE aldia, hileko ikuspegia eta gaurko klaseak, astea eta unitate aktiboa.",
     "alumnado": "Fitxa pertsonalak eta lanbide-orientazioa.",
-    "seguimiento": "Klase-egunkaria, hileko aurrerapena, RAen aurrerapena eta asistentzia.",
+    "seguimiento": "Asistentzia, uzte-arriskua, klase-egunkaria, IUen hileko aurrerapena eta IEen aurrerapena.",
     "calificaciones": "Notak, buletina eta enpresako balorazioa (FEOE) ikasleka, eta erreklamazioak.",
     "cierre": "Ikastaroaren emaitzak eta notak, moduluaren hobekuntza (EQAVET eta PDCA), taldearen joerak, eta laneratzea eta espedientea ikasleka."
   },
@@ -1167,7 +1171,7 @@
     "diario": {
       "acumuladoTrimestral": "Hiruhileko metatua",
       "hoy": "Gaur",
-      "alertasAbandono": "Uzte-arriskuaren alertak"
+      "alertasAbandono": "Uzte-laburpena"
     },
     "instrumentos": {
       "agente_autoevaluacion": "Autoebaluazioa (ikasle bera)",
@@ -2016,7 +2020,8 @@
       "riesgoAlto": "🟠 Handia",
       "riesgoModerado": "🟡 Ertaina",
       "riesgoMuyAlto": "Oso handia",
-      "seguimientoRiesgo": "Arrisku akademikoaren jarraipena",
+      "seguimientoRiesgo": "Errendimendu akademikoaren kontrola",
+      "controlFaltasAsistencia": "Asistentzia-hutsegiteen kontrola",
       "simuladorCalificaciones": "Kalifikazio-simulagailua",
       "simuladorDescripcion": "Egin proba zure notekin, azken emaitza proiektatzeko.",
       "sinActividades": "Jarduerarik gabe",
@@ -2284,6 +2289,7 @@
       "avanceRaLabel": "RA aurrerapena",
       "horasLectivasLabel": "Irakastorduak",
       "sinUdsAsignadas": "Ez dago UDrik esleituta",
+      "sinDocenciaTodavia": "Oraindik irakaskuntzarik gabe",
       "sinRaDefinidos": "Ez dago ikaskuntza-emaitzarik (RA) definituta.",
       "cargandoMatrices": "Matrizeak kargatzen...",
       "confirmarAutocompletarPlanSesiones": "Ziur zaude saio-plana automatikoki bete nahi duzula? Honek UD guztien uneko saioak ordeztuko ditu.",
@@ -2393,7 +2399,8 @@
       "cicloSuperiorInteresLabel": "Goi-mailako zikloa / interesatzen zaion gradua",
       "cicloSuperiorInteresPlaceholder": "Adib. DAM, ASIR, Informatika Ingeniaritza, ADE...",
       "interesesEspecificosTitulo": "Interes zehatzak",
-      "seccion5Titulo": "Laneratzea (zikloa amaitu ondoren)",
+      "seccion5Titulo": "Laneratzea",
+      "seccion8Titulo": "Ebidentzien txostena",
       "seccion5InfoDesc": "Atal hau zikloa amaitzean edo graduatuen jarraipen gisa betetzen da.",
       "estadoInsercionLabel": "Laneratze-egoera",
       "relacionCicloLabel": "Lanaren eta zikloaren arteko lotura",

@@ -2,20 +2,24 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { TabSync } from "@/components/ui/TabSync";
 import { useTranslation } from "react-i18next";
-import { Calendar, CalendarRange, Target, FileEdit, MapPin, ClipboardCheck, FolderOpen } from "lucide-react";
+import { AlertTriangle, Target, Calendar, CalendarRange, FileEdit, MapPin, ClipboardCheck, FolderOpen } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { getSimulatedToday } from "@/utils/planningGenerator";
+import { AlertaAbandonoTab } from "@/components/features/diario/AlertaAbandonoTab";
 import { AsistenciaTab } from "@/components/features/diario/AsistenciaTab";
-import { TabRelacionRaUd } from "@/components/features/curriculo/TabRelacionRaUd";
 import { PlanificacionMensualTab } from "@/components/features/dashboard/PlanificacionMensualTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
+import { IndiceAlumnadoPanel } from "@/components/features/alumnado/PanelPorAlumno";
 import { SectionIndex } from "@/components/ui/SectionIndex";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ProgresoRaTab } from "@/components/features/evaluacion/ProgresoRaTab";
+import { RiesgoAcademicoTab } from "@/components/features/analisis/RiesgoAcademicoTab";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { getApiBase } from "@/services/apiBase";
@@ -76,21 +80,23 @@ export default function SeguimientoPage() {
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, dataSource } = useAppStore();
   const { t } = useTranslation();
   const TABS = [
-    { id: "clases", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.clases.label', {defaultValue: 'Clases'})}</span>, cleanLabel: t('tabs.seguimiento.clases.label', {defaultValue: 'Clases'}) },
-    { id: "avance", label: <span className="flex items-center gap-2"><CalendarRange className="w-4 h-4 shrink-0" /> {t('tabs.agenda.avance.label', {defaultValue: 'Avance'})}</span>, cleanLabel: t('tabs.agenda.avance.label', {defaultValue: 'Avance'}) },
-    { id: "progreso-ra-ud", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.agenda.progresoRaUd.label', {defaultValue: 'Progreso de RA según las UD'})}</span>, cleanLabel: t('tabs.agenda.progresoRaUd.label', {defaultValue: 'Progreso de RA según las UD'}) },
     { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.asistencia.label', {defaultValue: 'Asistencia'})}</span>, cleanLabel: t('tabs.seguimiento.asistencia.label', {defaultValue: 'Asistencia'}) },
+    { id: "abandono", label: <span className="flex items-center gap-2"><AlertTriangle className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.abandono.label', {defaultValue: 'Riesgo de abandono'})}</span>, cleanLabel: t('tabs.seguimiento.abandono.label', {defaultValue: 'Riesgo de abandono'}) },
+    { id: "clases", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.clases.label', {defaultValue: 'Clases'})}</span>, cleanLabel: t('tabs.seguimiento.clases.label', {defaultValue: 'Clases'}) },
+    { id: "avance-ud", label: <span className="flex items-center gap-2"><CalendarRange className="w-4 h-4 shrink-0" /> {t('tabs.agenda.avance.label', {defaultValue: 'Avance de UD'})}</span>, cleanLabel: t('tabs.agenda.avance.label', {defaultValue: 'Avance de UD'}) },
+    { id: "progreso-ra-ud", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.calificaciones.progresoRaUd', {defaultValue: 'Progreso RA-UD'})}</span>, cleanLabel: t('tabs.calificaciones.progresoRaUd', {defaultValue: 'Progreso RA-UD'}) },
   ];
   const TAB_DESCRIPTIONS: Record<string, string> = {
     clases: t('tabs.seguimiento.clases.desc', {defaultValue: 'Diario de clases, sesiones lectivas y registro de contingencias.'}),
-    avance: t('tabs.agenda.avance.desc', {defaultValue: 'Planificación y seguimiento mensual de las unidades didácticas según lo impartido.'}),
-    'progreso-ra-ud': t('tabs.agenda.progresoRaUd.desc', {defaultValue: 'Progreso de los resultados de aprendizaje según el estado y la ponderación de las unidades didácticas impartidas.'}),
+    abandono: t('tabs.seguimiento.abandono.desc', {defaultValue: 'Resumen de riesgo de abandono a partir de la asistencia y las notas.'}),
+    'progreso-ra-ud': t('tabs.agenda.progresoRaUd.desc', {defaultValue: 'Progreso de los resultados de aprendizaje: nota del grupo, avance, horas y estado de las unidades didácticas de cada RA.'}),
+    'avance-ud': t('tabs.agenda.avance.desc', {defaultValue: 'Planificación y seguimiento mensual de las unidades didácticas según lo impartido.'}),
     asistencia: t('tabs.seguimiento.asistencia.desc', {defaultValue: 'Control de asistencia del alumnado.'}),
   };
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
-  const [activeTab, setActiveTab] = useState("clases");
+  const [activeTab, setActiveTab] = useState("asistencia");
   const [allDiarioOpen, setAllDiarioOpen] = useState(false);
   // Calculado solo en cliente (useEffect, no en el cuerpo del render) para no
   // desincronizar el HTML servido por SSR del primer render en cliente — "hoy"
@@ -109,7 +115,7 @@ export default function SeguimientoPage() {
     setTodayStr(ref.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }));
     setCurrentMonthNum(ref.getMonth() + 1);
   }, [dataSource, cursoData]);
-  const { planningLedger } = useDynamicPlanning();
+  const { planningLedgerDmy } = useDynamicPlanning();
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel || activeTab;
 
@@ -224,7 +230,8 @@ export default function SeguimientoPage() {
     return <LoadingSpinner text={t('campos.seguimiento.cargandoDatosSeguimiento', {defaultValue: 'Cargando datos de seguimiento...'})} />;
   }
   const daily_ledger = cursoData?.daily_ledger || {};
-  const planning_ledger = planningLedger;
+  // Claves dd/mm/aaaa, las mismas que usa este diario para sus fechas.
+  const planning_ledger = planningLedgerDmy;
   const info_fechas = cursoData?.info_fechas || {};
   const horario = cursoData?.horario || {};
   const calendar_notes = cursoData?.calendar_notes || {};
@@ -304,10 +311,10 @@ export default function SeguimientoPage() {
       ? `${t('campos.seguimiento.mesActualPrefijo', { defaultValue: 'ACTUAL' })}. ${meses_nombres[m as keyof typeof meses_nombres]}`
       : meses_nombres[m as keyof typeof meses_nombres],
   }));
-  const asistenciaIndexItems = [
-    { id: "asistencia-hoy", label: t('checks.diario.hoy', { defaultValue: 'Hoy' }) },
-    { id: "asistencia-acumulado", label: t('checks.diario.acumuladoTrimestral', { defaultValue: 'Acumulado trimestral' }) },
-    { id: "asistencia-alertas", label: t('checks.diario.alertasAbandono', { defaultValue: 'Alertas de abandono' }) },
+  // Riesgo de abandono: dos bloques (asistencia+notas, y nota final < 5).
+  const abandonoIndexItems = [
+    { id: "seguimiento-riesgo-abandono", label: t('campos.analisis.controlFaltasAsistencia', { defaultValue: 'Control de faltas de asistencia' }) },
+    { id: "calificaciones-riesgo-academico", label: t('campos.analisis.seguimientoRiesgo', { defaultValue: 'Control de rendimiento académico' }) },
   ];
   const abrirMesDiario = (id: string) => {
     const el = document.getElementById(id);
@@ -334,7 +341,7 @@ export default function SeguimientoPage() {
           <StickyPageHeader
             icon={MapPin}
             title={t('nav.seguimiento', { defaultValue: 'Seguimiento' })}
-            description={t('pages.seguimiento_desc', { defaultValue: 'Diario de clases, avance mensual, progreso de RA y asistencia.' })}
+            description={t('pages.seguimiento_desc', { defaultValue: 'Asistencia, riesgo de abandono, diario de clases, avance mensual de UD y progreso de RA.' })}
           >
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
@@ -355,7 +362,9 @@ export default function SeguimientoPage() {
             </p>
 
             {/* Índice: meses dinámicos en Clases (Diario), bloques en Asistencia. */}
-            <SectionIndex items={activeTab === 'clases' ? diarioIndexItems : activeTab === 'asistencia' ? asistenciaIndexItems : []} bare onItemClick={abrirMesDiario} />
+            <SectionIndex items={activeTab === 'clases' ? diarioIndexItems : activeTab === 'abandono' ? abandonoIndexItems : []} bare onItemClick={abrirMesDiario} />
+
+            {activeTab === 'asistencia' && <IndiceAlumnadoPanel className="mt-3" />}
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-4 px-8 pt-4">
@@ -468,7 +477,7 @@ export default function SeguimientoPage() {
                 </div>
               )}
 
-              {activeTab === 'avance' && (
+              {activeTab === 'avance-ud' && (
                 <div className="mt-4">
                   <PlanificacionMensualTab />
                 </div>
@@ -476,7 +485,19 @@ export default function SeguimientoPage() {
 
               {activeTab === 'progreso-ra-ud' && (
                 <div className="mt-4">
-                  <TabRelacionRaUd />
+                  <ProgresoRaTab />
+                </div>
+              )}
+
+              {activeTab === 'abandono' && (
+                <div className="mt-4 space-y-8">
+                  <div className="space-y-3">
+                    <SectionHeading id="seguimiento-riesgo-abandono" icon={AlertTriangle} scrollMt="260px">
+                      {t('campos.analisis.controlFaltasAsistencia', {defaultValue: 'Control de faltas de asistencia'})}
+                    </SectionHeading>
+                    <AlertaAbandonoTab />
+                  </div>
+                  <RiesgoAcademicoTab />
                 </div>
               )}
 

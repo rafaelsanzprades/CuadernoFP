@@ -1,7 +1,7 @@
 {
   "tabs": {
     "cierre": {
-      "expediente": {
+        "expediente": {
         "label": "Expediente",
         "desc": "Inserción laboral post-ciclo e expediente (liña temporal de evidencias) por alumnado."
       }
@@ -90,6 +90,10 @@
       }
     },
     "seguimiento": {
+        "abandono": {
+          "label": "Risco de abandono",
+          "desc": "Resumo do risco de abandono a partir da asistencia e das notas."
+        },
       "clases": {
         "label": "Clases",
         "desc": "Diario de clases, sesións lectivas e rexistro de continxencias."
@@ -348,7 +352,7 @@
         "desc": "As túas clases de hoxe, a semana e a unidade en curso."
       },
       "avance": {
-        "label": "Avance",
+        "label": "Avance de UD",
         "desc": "Planificación e seguimento mensual das unidades didácticas segundo o impartido."
       },
       "progresoRaUd": {
@@ -453,7 +457,7 @@
     "ayuda_desc": "Guía de inicio, FAQ, acrónimos e contribucións da comunidade.",
     "contexto_desc": "Información xeral, características da contorna, alumnado e módulo.",
     "magia_desc": "Xeración da programación didáctica e informes.",
-    "seguimiento_desc": "Diario de clases, asistencia e empresa FEOE.",
+    "seguimiento_desc": "Asistencia, risco de abandono, diario de clases, avance mensual de UD e progreso dos RA.",
     "metodologia_desc": "Estratexias metodolóxicas, recursos, espazos e atención á diversidade."
   },
   "common": {
@@ -502,7 +506,7 @@
     "instrumentos": "Definición e pesos das ferramentas de avaliación.",
     "calendario": "Horario, trimestres, festivos, período FEOE, vista mensual e as túas clases de hoxe, a semana e a unidade en curso.",
     "alumnado": "Fichas persoais e orientación profesional.",
-    "seguimiento": "Diario de clases, avance mensual, progreso dos RA e asistencia.",
+    "seguimiento": "Asistencia, risco de abandono, diario de clases, avance mensual de UD e progreso dos RA.",
     "calificaciones": "Notas, boletín e valoración na empresa (FEOE) por alumnado, e reclamacións.",
     "cierre": "Resultados e notas do curso, mellora do módulo (EQAVET e PDCA), tendencias do grupo, e inserción laboral e expediente por alumnado."
   },
@@ -1167,7 +1171,7 @@
     "diario": {
       "acumuladoTrimestral": "Acumulado trimestral",
       "hoy": "Hoxe",
-      "alertasAbandono": "Alertas de abandono"
+      "alertasAbandono": "Resumo de abandono"
     },
     "instrumentos": {
       "agente_autoevaluacion": "Autoavaliación (propio alumno)",
@@ -2016,7 +2020,8 @@
       "riesgoAlto": "🟠 Alto",
       "riesgoModerado": "🟡 Moderado",
       "riesgoMuyAlto": "Moi Alto",
-      "seguimientoRiesgo": "Seguimento de risco académico",
+      "seguimientoRiesgo": "Control de rendemento académico",
+      "controlFaltasAsistencia": "Control de faltas de asistencia",
       "simuladorCalificaciones": "Simulador de cualificacións",
       "simuladorDescripcion": "Experimenta coas túas notas para proxectar o teu resultado final.",
       "sinActividades": "Sen actividades",
@@ -2284,6 +2289,7 @@
       "avanceRaLabel": "Avance RA",
       "horasLectivasLabel": "Horas lectivas",
       "sinUdsAsignadas": "Sen UD asignadas",
+      "sinDocenciaTodavia": "Aínda sen docencia",
       "sinRaDefinidos": "Non hai Resultados de aprendizaxe (RA) definidos.",
       "cargandoMatrices": "Cargando matrices...",
       "confirmarAutocompletarPlanSesiones": "Seguro que queres autocompletar o plan de sesións? Isto substituirá as sesións actuais de todas as UD.",
@@ -2393,7 +2399,8 @@
       "cicloSuperiorInteresLabel": "Ciclo superior / grao de interese",
       "cicloSuperiorInteresPlaceholder": "Ex. DAM, ASIR, Enxeñaría Informática, ADE...",
       "interesesEspecificosTitulo": "Intereses específicos",
-      "seccion5Titulo": "Inserción laboral (post-ciclo)",
+      "seccion5Titulo": "Inserción laboral",
+      "seccion8Titulo": "Informe de evidencias",
       "seccion5InfoDesc": "Esta sección compleméntase ao finalizar o ciclo ou como seguimento de egresados.",
       "estadoInsercionLabel": "Estado de inserción laboral",
       "relacionCicloLabel": "Relación do emprego co ciclo",

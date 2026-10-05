@@ -66,11 +66,11 @@ export const InsercionExpedienteTab = () => {
     <PanelPorAlumno>
       {(al) => (
         <>
-          <SeccionAcordeon defaultOpen title={t('campos.orientacion.seccion5Titulo', {defaultValue: 'Inserción laboral (post-ciclo)'})} icon={<TrendingUp className="w-5 h-5 text-info" />}>
-            <Insercion studentId={al.ID!} />
-          </SeccionAcordeon>
-          <SeccionAcordeon title={t('campos.orientacion.seccion8Titulo', {defaultValue: 'Expediente (línea temporal de evidencias)'})} icon={<FileClock className="w-5 h-5 text-muted" />}>
+          <SeccionAcordeon defaultOpen title={t('campos.orientacion.seccion8Titulo', {defaultValue: 'Informe de evidencias'})} icon={<FileClock className="w-5 h-5 text-muted" />}>
             <ExpedienteTab studentId={al.ID!} />
+          </SeccionAcordeon>
+          <SeccionAcordeon title={t('campos.orientacion.seccion5Titulo', {defaultValue: 'Inserción laboral'})} icon={<TrendingUp className="w-5 h-5 text-info" />}>
+            <Insercion studentId={al.ID!} />
           </SeccionAcordeon>
         </>
       )}

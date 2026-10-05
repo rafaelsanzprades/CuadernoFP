@@ -21,7 +21,7 @@ import { getApiBase } from "@/services/apiBase";
 export function DetalleAlumnadoTab() {
   const { activeModuleId, moduleData, cursoData, updateCursoData } = useAppStore();
   const { t } = useTranslation();
-  const { planningLedger } = useDynamicPlanning();
+  const { planningLedgerDmy } = useDynamicPlanning();
 
   const [activeTabByStudent, setActiveTabByStudent] = useState<Record<string, string>>({});
 
@@ -43,7 +43,7 @@ export function DetalleAlumnadoTab() {
   const df_indicadores = moduleData?.df_indicadores || [];
   const df_calificaciones = cursoData?.df_calificaciones || [];
   const info_fechas = cursoData?.info_fechas || {};
-  const planning_ledger = planningLedger || {};
+  const planning_ledger = planningLedgerDmy || {}; // claves dd/mm/aaaa
 
   const df_evaluable = [...df_al].filter(isAlumnoActivo);
   df_evaluable.sort((a: any, b: any) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
