@@ -77,7 +77,7 @@ export const GUIA_PASOS: {
         nodes: [
           { label: "Programación didáctica", text: 'Es el "molde" teórico (.fpp). Contiene la normativa (resultados de aprendizaje y criterios de evaluación) y las unidades didácticas. Se diseña una vez y se puede reutilizar en cursos posteriores.' },
           { label: "Curso", text: 'Es la "instancia" real (.fpc). Representa al alumnado físico, sus calificaciones, faltas de asistencia y calendario en un año académico específico (ej. 2025-26).' },
-          { label: "Bloques", text: "3 grupos en el sidebar — General (Inicio, Ayuda, MagIA, Normativa, Legal), Programación (Catálogo, Contexto, Currículo, Metodología, Instrumento — el diseño teórico del módulo) y Curso (Calendario, Agenda, Seguimiento, Alumnado, Cierre — el aula real). Esta misma guía vive dentro de Ayuda, pestaña Guía (no en Inicio ni en MagIA); esa misma página Ayuda tiene también FAQ, Acrónimos y Contribuciones para consultas rápidas." },
+          { label: "Bloques", text: "3 grupos en el sidebar — General (Inicio, Ayuda, MagIA, Normativa, Legal), Programación (Catálogo, Contexto, Currículo, Metodología, Instrumento — el diseño teórico del módulo) y Curso (Calendario, Alumnado, Clases, Seguimiento, Cierre — el aula real). Esta misma guía vive dentro de Ayuda, pestaña Guía (no en Inicio ni en MagIA); esa misma página Ayuda tiene también FAQ, Acrónimos y Contribuciones para consultas rápidas." },
         ],
       },
     ],
@@ -325,15 +325,17 @@ export const GUIA_PASOS: {
               {
                 label: "Página", text: "Alumnado",
                 children: [
+                  { label: "Pestaña", text: "Orientación", children: [
+                    { label: "Acordeones", text: "Orientación profesional por alumno/a, en dos secciones: \"Motivación y experiencia\" e \"Intereses y aspiraciones\". Se rellena al empezar el curso." },
+                  ] },
                   { label: "Pestaña", text: "Matrícula", children: [
                     { label: "Botón", text: "Importar CSV o Añadir Alumnado a mano." },
-                    { label: "Bloque", text: '"Perfil del grupo" (más abajo, en la misma pestaña) — describe el ambiente de la clase.' },
                   ] },
-                  { label: "Pestaña", text: "Plano de clase", children: [
+                  { label: "Pestaña", text: "Rasgos", children: [
+                    { label: "Bloque", text: "Datos automáticos del grupo y rasgos característicos del grupo — describe el ambiente de la clase." },
+                  ] },
+                  { label: "Pestaña", text: "Plano de aula", children: [
                     { label: "Acción", text: "Arrastrar al alumnado a sus mesas." },
-                  ] },
-                  { label: "Pestaña", text: "Individual", children: [
-                    { label: "Acordeones", text: "Orientación profesional por alumno/a (secciones 1-6), más su Boletín individual en pantalla con botón de impresión (sección 7) y su Expediente, la línea temporal de evidencias: calificaciones, reclamaciones, asistencia y diario (sección 8)." },
                   ] },
                 ],
               },
@@ -372,10 +374,9 @@ export const GUIA_PASOS: {
             label: "Bloque", text: "Curso",
             children: [
               {
-                label: "Página", text: "Agenda",
+                label: "Página", text: "Calendario",
                 children: [
-                  { label: "Pestaña", text: "Actual", children: [{ label: "Acción", text: "Resumen de las clases de hoy, contexto de la semana y desarrollo de la unidad didáctica en curso." }] },
-                  { label: "Pestaña", text: "Mensual", children: [{ label: "Acción", text: "Vista mensual y calendario interactivo con fechas clave." }] },
+                  { label: "Pestaña", text: "Agenda", children: [{ label: "Acción", text: "Resumen de las clases de hoy, contexto de la semana y desarrollo de la unidad didáctica en curso." }] },
                 ],
               },
             ],
@@ -393,6 +394,8 @@ export const GUIA_PASOS: {
                 label: "Página", text: "Seguimiento",
                 children: [
                   { label: "Pestaña", text: "Clases", children: [{ label: "Texto", text: "Redacta qué se ha hecho en la clase." }] },
+                  { label: "Pestaña", text: "Avance", children: [{ label: "Acción", text: "Planificación y seguimiento mensual de las unidades didácticas según lo impartido (UD × mes)." }] },
+                  { label: "Pestaña", text: "Progreso de RA según las UD", children: [{ label: "Acción", text: "Progreso de los resultados de aprendizaje según el estado y la ponderación de las unidades didácticas ya impartidas." }] },
                   { label: "Pestaña", text: "Asistencia", children: [
                     { label: "Botón", text: "Marca Falta, Retraso o Justificado." },
                     { label: "Bloques", text: '"Hoy", "Acumulado trimestral" y "Alertas de abandono" (apilados con su índice) — detector automático de riesgo, sin necesidad de registrar nada a mano.' },
@@ -412,23 +415,19 @@ export const GUIA_PASOS: {
             label: "Bloque", text: "Curso",
             children: [
               {
-                label: "Página", text: "Alumnado",
+                label: "Página", text: "Calificaciones",
                 children: [
-                  { label: "Pestaña", text: "Notas", children: [{ label: "Tabla", text: "Teclea las notas y calcula al vuelo, por alumnado — es el único punto de entrada de calificaciones numéricas de la app." }] },
-                ],
-              },
-              {
-                label: "Página", text: "Seguimiento",
-                children: [
-                  { label: "Pestaña", text: "Avance", children: [{ label: "Bloques", text: "Planificación mensual (UD × mes) y progreso de los resultados de aprendizaje según el estado y la ponderación de las unidades didácticas ya impartidas." }] },
-                  { label: "Pestaña", text: "Empresa FEOE", children: [{ label: "Acción", text: "Transcribe las valoraciones del tutor de empresa (1-4, Anexo XI b) para los CE marcados FEOE en Currículo." }] },
+                  { label: "Pestaña", text: "Académicas", children: [
+                    { label: "Acordeones", text: "Por alumno/a, en tres secciones: \"Notas\" (teclea las notas y calcula al vuelo — es el único punto de entrada de calificaciones numéricas de la app), \"Boletín individual\" en pantalla con botón de impresión y \"Empresa FEOE\" (transcribe las valoraciones del tutor de empresa, 1-4, Anexo XI b, para los CE marcados FEOE en Currículo)." },
+                  ] },
+                  { label: "Pestaña", text: "Reclamaciones", children: [{ label: "Bloques", text: '"Cambios de nota" (registro de cada cambio, con fecha, agente y motivo) y "Reclamaciones" (registra y resuelve reclamaciones de nota, con generación de justificante).' }] },
                 ],
               },
               {
                 label: "Página", text: "Cierre (mayormente de solo lectura, resume lo anterior)",
                 children: [
+                  { label: "Pestaña", text: "Expediente", children: [{ label: "Acordeones", text: "Por alumno/a: \"Inserción laboral (post-ciclo)\" y \"Expediente\", la línea temporal de evidencias (calificaciones, reclamaciones, asistencia y diario)." }] },
                   { label: "Pestaña", text: "Resumen", children: [{ label: "Tablas", text: 'Panel global de rendimiento, y, apilados debajo con su índice, los bloques "Trimestral", "Progreso RA-UD", "Estadísticas" y "Análisis" (este último con switcher Grupal/Individual).' }] },
-                  { label: "Pestaña", text: "Histórico", children: [{ label: "Bloques", text: '"Cambios de nota" (registro de cada cambio, con fecha, agente y motivo) y "Reclamaciones" (registra y resuelve reclamaciones de nota, con generación de justificante).' }] },
                   { label: "Pestaña", text: "Mejora", children: [{ label: "Acción", text: "Indicadores de calidad EQAVET y propuestas de mejora del módulo, de cara a la memoria final de curso." }] },
                 ],
               },

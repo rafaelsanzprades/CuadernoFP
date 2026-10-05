@@ -109,7 +109,7 @@ def insertar_tabla_planificacion(doc, df_ud, info_fechas, horario, calendar_note
     planificación mensual: Tri. | UD | Prev. total | Prev. por mes, con la
     fila FEOE colocada por orden cronológico (no siempre al final).
 
-    A diferencia de /agenda?tab=planificacion (PlanificacionMensualTab.tsx),
+    A diferencia de /seguimiento?tab=avance (PlanificacionMensualTab.tsx),
     que muestra Prv/Imp/%Imp/Prv porque es una herramienta de seguimiento
     día a día, esta página del PD es solo una previsión — un documento que
     normalmente se entrega antes de empezar a impartir el módulo, así que no

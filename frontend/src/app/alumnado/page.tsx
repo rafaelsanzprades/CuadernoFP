@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BarChart, Save, Target, Users, LayoutGrid, AlertTriangle, Building2, Compass, Map, MessageSquare, FileText, Route, FolderOpen, Mail, Phone, Calendar, X } from "lucide-react";
+import { Activity, LayoutGrid, Save, Target, Users, AlertTriangle, Compass, Map, MessageSquare, Route, FolderOpen, Mail, Phone, Calendar, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -10,14 +10,13 @@ import { useTranslation } from "react-i18next";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import toast from "react-hot-toast";
-import { PlanoClaseTab } from "@/components/features/alumnado/PlanoClaseTab";
 import { ESTADOS_ALUMNO, type Alumnado } from "@/types";
 import { ESTADO_ALUMNO_COLOR, parseAlumnadoCSV } from "@/utils/alumnado";
+import { eliminarAlumnado, idProvisional, ordenarYRenumerarAlumnado } from "@/utils/renumerarAlumnado";
 
 import { ContextoGrupoTab } from "@/components/features/alumnado/ContextoGrupoTab";
+import { PlanoClaseTab } from "@/components/features/alumnado/PlanoClaseTab";
 import { OrientacionIndividualTab } from "@/components/features/alumnado/OrientacionIndividualTab";
-import { TendenciasProfesionalTab } from "@/components/features/alumnado/TendenciasProfesionalTab";
-import { DetalleAlumnadoTab } from "@/components/features/evaluacion/DetalleAlumnadoTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -44,9 +43,16 @@ function computeMilestoneDates(nacimiento?: string): { f16: string; f18: string 
   return { f16: fmt(16), f18: fmt(18) };
 }
 
+const GRUPOS_LETRAS = ["ABC", "DEF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ"];
+
+// Inicial del primer apellido sin acentos y en mayúscula (Ñ cuenta como N).
+function inicialApellido(apellidos?: string): string {
+  return String(apellidos || "").trim().normalize("NFD").replace(/[̀-ͯ]/g, "").charAt(0).toUpperCase();
+}
+
 export default function AlumnadoPage() {
   const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, moduleData, activeModuleId, setModuleData } = useAppStore();
-  const [activeTab, setActiveTab] = useState("matricula");
+  const [activeTab, setActiveTab] = useState("orientacion");
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -55,35 +61,30 @@ export default function AlumnadoPage() {
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const TABS = [
-    { id: "matricula", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.matricula.label', {defaultValue: 'Matrícula'})}</>, cleanLabel: t('tabs.alumnado.matricula.label', {defaultValue: 'Matrícula'}) },
-    // Traída desde Seguimiento (2026-10-02, petición de Rafael): entrada de
-    // notas por alumnado, instrumento y RA.
-    { id: "notas", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.notas.label', {defaultValue: 'Notas'})}</>, cleanLabel: t('tabs.alumnado.notas.label', {defaultValue: 'Notas'}) },
-    { id: "plano", label: <><span className="inline-flex"><LayoutGrid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.plano')}</>, cleanLabel: t('tabs.plano') },
     // Antes sub-vistas de una sola pestaña "Perfil profesional" (switcher
     // interno) -- sacadas a pestañas principales el 2026-09-20 a petición de
     // Rafael ("luego veremos qué hacemos con ellas"). La sub-vista "Resumen"
     // se plegó de nuevo, ese mismo día, dentro de Tendencias (segundo bloque,
     // debajo de los agregados) al comprobar que duplicaba en peor una tabla
     // que ya vivía ahí.
-    { id: "perfilIndividual", label: <><span className="inline-flex"><Compass className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.perfilIndividual.label', {defaultValue: 'Individual'})}</>, cleanLabel: t('tabs.alumnado.perfilIndividual.label', {defaultValue: 'Individual'}) },
-    { id: "perfilTendencias", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.perfilTendencias.label', {defaultValue: 'Tendencias'})}</>, cleanLabel: t('tabs.alumnado.perfilTendencias.label', {defaultValue: 'Tendencias'}) },
+    { id: "orientacion", label: <><span className="inline-flex"><Compass className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.orientacion.label', {defaultValue: 'Orientación'})}</>, cleanLabel: t('tabs.alumnado.orientacion.label', {defaultValue: 'Orientación'}) },
+    { id: "matricula", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.matricula.label', {defaultValue: 'Matrícula'})}</>, cleanLabel: t('tabs.alumnado.matricula.label', {defaultValue: 'Matrícula'}) },
+    { id: "rasgos", label: <><span className="inline-flex"><Activity className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.rasgos.label', {defaultValue: 'Rasgos'})}</>, cleanLabel: t('tabs.alumnado.rasgos.label', {defaultValue: 'Rasgos'}) },
+    { id: "plano", label: <><span className="inline-flex"><LayoutGrid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.agenda.planoAula.label', {defaultValue: 'Plano de aula'})}</>, cleanLabel: t('tabs.agenda.planoAula.label', {defaultValue: 'Plano de aula'}) },
   ];
 
   const activeTabCleanLabel = TABS.find(t_tab => t_tab.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    matricula: t('tabs.alumnado.matricula.desc', {defaultValue: 'Gestión del listado de alumnado y ficha individual y, más abajo, el perfil narrativo del grupo.'}),
-    plano: t('tabs.alumnado.plano.desc', {defaultValue: 'Distribución y plano visual del aula.'}),
-    perfilIndividual: t('tabs.alumnado.perfilIndividual.desc', {defaultValue: 'Orientación profesional por alumno/a: motivación, experiencia laboral, aptitudes, aspiraciones e inserción post-ciclo.'}),
-    perfilTendencias: t('tabs.alumnado.perfilTendencias.desc', {defaultValue: 'Agregados y tendencias del perfil profesional del grupo, y tabla filtrable de todo el alumnado.'}),
-    notas: t('tabs.alumnado.notas.desc', {defaultValue: 'Entrada de notas numéricas por alumnado, instrumento de evaluación y nivel de adquisición de RA.'}),
+    matricula: t('tabs.alumnado.matricula.desc', {defaultValue: 'Gestión del listado de alumnado y ficha individual.'}),
+    plano: t('tabs.agenda.planoAula.desc', {defaultValue: 'Distribución y plano visual del aula.'}),
+    rasgos: t('tabs.alumnado.rasgos.desc', {defaultValue: 'Rasgos característicos del grupo y datos automáticos del grupo.'}),
+    orientacion: t('tabs.alumnado.orientacion.desc', {defaultValue: 'Orientación profesional por alumno/a: motivación, experiencia laboral, aptitudes y aspiraciones.'}),
   };
 
   // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
-    matricula: [
-      { id: "alumnado-lista-oficial", label: t('campos.alumnado.listaOficialTitulo', {defaultValue: 'Lista oficial'}) },
+    rasgos: [
       { id: "alumnado-datos-grupo", label: t('campos.alumnado.datosGrupoTitulo', {defaultValue: 'Datos del grupo (automático)'}) },
       { id: "alumnado-rasgos-grupo", label: t('campos.alumnado.rasgosGrupoTitulo', {defaultValue: 'Rasgos característicos del grupo'}) },
     ],
@@ -167,7 +168,9 @@ export default function AlumnadoPage() {
 
   const handleAddAlumnado = () => {
     const newAl = [...df_al];
-    const newId = `AN${(newAl.length + 1).toString().padStart(2, '0')}`;
+    // Fila en blanco al final con ID provisional; al escribir los apellidos
+    // (onBlur) se coloca en su sitio alfabético y se renumera todo.
+    const newId = idProvisional(newAl);
     newAl.push({
       ID: newId,
       Estado: "Alta",
@@ -198,7 +201,7 @@ export default function AlumnadoPage() {
         if (error) {
           toast.error(error);
         } else {
-          updateCursoData("df_al", alumnos);
+          setCursoData(ordenarYRenumerarAlumnado({ ...(cursoData as any), df_al: alumnos }));
           if (importedCount > 0) {
             toast.success(t('toasts.alumnado.importados', {count: importedCount, defaultValue: "Se han importado {{count}} estudiantes."}));
           } else {
@@ -225,10 +228,15 @@ export default function AlumnadoPage() {
   };
 
   const handleRemoveAlumnado = (idx: number) => {
-    const newAl = [...df_al];
-    // updateCursoData("df_al", newAl);
-    newAl.splice(idx, 1);
-    updateCursoData("df_al", newAl);
+    if (!cursoData || !df_al[idx]) return;
+    setCursoData(eliminarAlumnado(cursoData, df_al[idx].ID!));
+  };
+
+  // Al terminar de escribir apellidos/nombre: el alumno/a se recoloca en su
+  // posición alfabética y los ID de todos se desplazan (ver renumerarAlumnado.ts).
+  const handleReordenar = () => {
+    const actual = useAppStore.getState().cursoData;
+    if (actual) setCursoData(ordenarYRenumerarAlumnado(actual));
   };
 
   const n_menores = df_al.filter((al: any) => al.Edad > 0 && al.Edad < 18).length;
@@ -279,6 +287,30 @@ export default function AlumnadoPage() {
             {/* Índice de bloques de la pestaña activa -- dentro del header
                 fijo (sticky top-0), así que no se pierde al hacer scroll. */}
             <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
+
+            {/* Índice tipo teclado de teléfono (ABC, DEF, ...) por la inicial del
+                primer apellido -- lleva al primer alumno/a (por orden alfabético)
+                de cada grupo de letras. */}
+            {activeTab === 'matricula' && df_al.length > 0 && (
+              <nav aria-label={t('aria.alumnado.indiceAlfabetico', {defaultValue: 'Índice alfabético'})} className="flex flex-wrap gap-2 mt-3">
+                {GRUPOS_LETRAS.map((grupo) => {
+                  const destino = df_al
+                    .map((al: any, idx: number) => ({ idx, clave: inicialApellido(al.Apellidos), apellidos: String(al.Apellidos || "") }))
+                    .filter((x: any) => grupo.includes(x.clave))
+                    .sort((x: any, y: any) => x.apellidos.localeCompare(y.apellidos, "es"))[0];
+                  return (
+                    <button
+                      key={grupo}
+                      disabled={!destino}
+                      onClick={() => document.getElementById(`alumno-fila-${destino.idx}`)?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                      className="text-caption font-medium px-3 py-1.5 rounded-lg text-white border border-white/20 hover:bg-white/10 transition-colors tracking-widest disabled:opacity-30 disabled:cursor-default disabled:hover:bg-transparent"
+                    >
+                      {grupo}
+                    </button>
+                  );
+                })}
+              </nav>
+            )}
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-4 px-8 pt-4 pb-12">
@@ -328,6 +360,8 @@ export default function AlumnadoPage() {
                     return (
                       <div
                         key={al.ID || idx}
+                        id={`alumno-fila-${idx}`}
+                        style={{ scrollMarginTop: "260px" }}
                         className={`group relative rounded-xl border p-4 transition-colors bg-[var(--glass-bg)] hover:bg-foreground/5 ${isMenor ? "border-danger/30" : "border-[var(--glass-border)]"}`}
                       >
                         <button
@@ -349,6 +383,7 @@ export default function AlumnadoPage() {
                                 type="text"
                                 value={al.Apellidos || ""}
                                 onChange={(e) => handleUpdateAlumnado(idx, "Apellidos", e.target.value)}
+                                onBlur={handleReordenar}
                                 className={`${fieldClass} flex-1 min-w-0 rounded px-1 py-0.5 font-semibold text-foreground`}
                                 placeholder={t('placeholders.alumnado.apellidos', {defaultValue: 'Apellidos...'})}
                               />
@@ -356,6 +391,7 @@ export default function AlumnadoPage() {
                                 type="text"
                                 value={al.Nombre || ""}
                                 onChange={(e) => handleUpdateAlumnado(idx, "Nombre", e.target.value)}
+                                onBlur={handleReordenar}
                                 className={`${fieldClass} flex-1 min-w-0 rounded px-1 py-0.5 text-foreground`}
                                 placeholder={t('placeholders.alumnado.nombre', {defaultValue: 'Nombre...'})}
                               />
@@ -463,32 +499,24 @@ export default function AlumnadoPage() {
             </Card>
             </div>
 
-            <div className="flex items-center gap-3 pt-2">
-              <div className="h-px flex-1 bg-[var(--glass-border)]" />
-              <span className="text-caption text-muted uppercase tracking-wider">{t('campos.alumnado.perfilGrupoLabel', {defaultValue: 'Perfil del grupo'})}</span>
-              <div className="h-px flex-1 bg-[var(--glass-border)]" />
-            </div>
-            <ContextoGrupoTab />
             </>
           )}
 
-          {activeTab === "plano" && <PlanoClaseTab />}
+          {activeTab === "plano" && (
+            <div className="mt-4">
+              <PlanoClaseTab />
+            </div>
+          )}
 
-          {activeTab === "perfilIndividual" && (
+          {activeTab === "rasgos" && (
+            <div className="mt-4">
+              <ContextoGrupoTab />
+            </div>
+          )}
+
+          {activeTab === "orientacion" && (
             <div className="mt-4">
               <OrientacionIndividualTab />
-            </div>
-          )}
-
-          {activeTab === "perfilTendencias" && (
-            <div className="mt-4">
-              <TendenciasProfesionalTab />
-            </div>
-          )}
-
-          {activeTab === "notas" && (
-            <div className="mt-4">
-              <DetalleAlumnadoTab />
             </div>
           )}
 

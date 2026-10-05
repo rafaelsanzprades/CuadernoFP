@@ -57,7 +57,7 @@ export function TabRelacionRaUd() {
     <div className="animate-in fade-in duration-500 w-full">
       <div className="space-y-3">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <SectionHeading id="seguimiento-avance-progreso-ra" icon={Target} scrollMt="260px" className="flex-1">
+        <SectionHeading id="agenda-progreso-ra-ud" icon={Target} scrollMt="260px" className="flex-1">
           {t('campos.curriculo.progresoRelacionRaUdTitulo', {defaultValue: 'Progreso de RA según las UD'})}
         </SectionHeading>
         <div className="flex items-center gap-4 text-caption bg-background/50 p-2 rounded-lg border border-[var(--glass-border)] shrink-0">

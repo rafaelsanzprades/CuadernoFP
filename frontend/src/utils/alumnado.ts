@@ -1,4 +1,5 @@
 import { Alumnado, EstadoAlumno } from "@/types";
+import { idProvisional } from "@/utils/renumerarAlumnado";
 
 // Un alumno sin Estado explícito cuenta como "Alta" (valor por defecto en las
 // altas de alumnado/page.tsx). Solo "Alta" participa en las vistas activas:
@@ -64,7 +65,7 @@ export function parseAlumnadoCSV(text: string, existingAl: any[] = []): ParsedAl
 
     if (!name && !surname) continue;
 
-    const newId = `AN${(newAl.length + 1).toString().padStart(2, '0')}`;
+    const newId = idProvisional(newAl);
     newAl.push({
       ID: newId,
       Estado: "Alta",

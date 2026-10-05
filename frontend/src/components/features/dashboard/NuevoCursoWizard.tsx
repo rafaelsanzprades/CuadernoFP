@@ -9,6 +9,7 @@ import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { useAppStore } from "@/store/useAppStore";
 import { fileManager } from "@/services/fileManager";
 import { parseAlumnadoCSV } from "@/utils/alumnado";
+import { ordenarYRenumerarAlumnado } from "@/utils/renumerarAlumnado";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
@@ -110,7 +111,7 @@ export function NuevoCursoWizard({ onClose }: NuevoCursoWizardProps) {
       if (csvFile) {
         const text = await csvFile.text();
         const { alumnos, error } = parseAlumnadoCSV(text, []);
-        if (!error) nuevoCursoData.df_al = alumnos;
+        if (!error) nuevoCursoData.df_al = ordenarYRenumerarAlumnado({ df_al: alumnos }).df_al;
       }
 
       store.setCursoData(nuevoCursoData);

@@ -349,7 +349,7 @@ export default function MagiaPage() {
       { id: "magia-curso-calendario", label: t('nav.calendario', {defaultValue: 'Calendario'}) },
       { id: "magia-curso-alumnado", label: t('nav.alumnado', {defaultValue: 'Alumnado'}) },
       { id: "magia-curso-seguimiento", label: t('campos.magia.seguimientoLabel', {defaultValue: 'Seguimiento'}) },
-      { id: "magia-curso-calificaciones", label: t('nav.calificaciones', {defaultValue: 'Cierre'}) },
+      { id: "magia-curso-calificaciones", label: t('nav.cierre', {defaultValue: 'Cierre'}) },
     ],
     // Comparativa PDx, fusionada al final de Análisis APP->PDx (antes
     // pestaña propia, 2026-09-30). ids fijados a mano en
@@ -366,7 +366,7 @@ export default function MagiaPage() {
       { id: "comparativa-calendario", label: t('nav.calendario', {defaultValue: 'Calendario'}) },
       { id: "comparativa-alumnado", label: t('nav.alumnado', {defaultValue: 'Alumnado'}) },
       { id: "comparativa-seguimiento", label: t('campos.magia.seguimientoLabel', {defaultValue: 'Seguimiento'}) },
-      { id: "comparativa-calificacion", label: t('nav.calificaciones', {defaultValue: 'Cierre'}) },
+      { id: "comparativa-calificacion", label: t('nav.cierre', {defaultValue: 'Cierre'}) },
       { id: "comparativa-resumen-cobertura", label: 'Resumen de cobertura por nivel' },
       { id: "comparativa-notas", label: 'Notas' },
     ],
@@ -775,7 +775,7 @@ export default function MagiaPage() {
                     {/* ── Calificaciones ── */}
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                       <SectionHeading id="magia-curso-calificaciones" icon={Award} scrollMt="260px" className="flex-1">
-                        {t('nav.calificaciones', {defaultValue: 'Cierre'})}
+                        {t('nav.cierre', {defaultValue: 'Cierre'})}
                       </SectionHeading>
                       <Button variant="success" onClick={handleExportExcelCompleto} className="gap-2 shrink-0">
                         <FileSpreadsheet className="w-4 h-4" /> {t('botones.magia.exportarExcelCompleto', {defaultValue: 'Exportar Excel completo'})}

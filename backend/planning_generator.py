@@ -1,14 +1,14 @@
 """
 Port de frontend/src/utils/planningGenerator.ts (función generatePlanning) a Python.
 
-La página /agenda?tab=planificacion NO lee el df_sgmt guardado en el .fpc: lo
+La página /seguimiento?tab=avance NO lee el df_sgmt guardado en el .fpc: lo
 recalcula en cada render a partir de df_ud + info_fechas + horario +
 calendar_notes (reparto proporcional de horas por semana, saltando festivos,
 con la FEOE ocupando su propio rango de fechas). El df_sgmt guardado puede
 quedar desactualizado en cuanto cambian esos datos de origen — por eso los
 generadores de PD también deben recalcularlo aquí en vez de leer el snapshot,
 para que la página de previsión del PD coincida con lo que ve el profesorado
-en /agenda?tab=planificacion.
+en /seguimiento?tab=avance.
 
 Debe mantenerse en sincronía a mano con planningGenerator.ts si ese algoritmo
 cambia — no hay compartición de código entre frontend (TS) y backend (Python).

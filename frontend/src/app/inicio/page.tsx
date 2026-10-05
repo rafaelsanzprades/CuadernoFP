@@ -292,7 +292,7 @@ export default function InicioPage() {
 
   // Navegador nuevo / sin datos locales (ningún archivo abierto todavía, ni
   // Programación ni Curso): ofrecer DEMO o crear archivos propios en vez de
-  // dejar el panel en blanco. A diferencia del mismo aviso en /agenda, este
+  // dejar el panel en blanco. A diferencia del mismo aviso en /calificaciones, este
   // se basa en el estado local (activeModuleId/activeCursoId), no en la lista
   // de módulos del backend — es local-first, el backend no es la fuente de
   // verdad de si hay o no datos de trabajo en este navegador. Sincroniza en

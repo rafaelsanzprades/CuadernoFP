@@ -48,7 +48,7 @@ npm run test:e2e:report
 | # | Test | Descripción |
 |---|------|-------------|
 | 1 | Navegar a Inicio | Verifica carga de `/inicio` |
-| 2 | Navegar a Agenda | Verifica carga de `/agenda` |
+| 2 | Navegar a Agenda | Verifica carga de `/calificaciones` |
 | 3 | Navegar a Alumnado | Verifica carga de `/alumnado` |
 | 4 | Navegar a Calendario | Verifica carga de `/calendario` |
 | 5 | Navegar a Catálogo | Verifica carga de `/catalogo` |

@@ -165,7 +165,7 @@ export function InteractiveCalendar({ info_fechas, horario, calendar_notes, onUp
           while (cells.length % 7 !== 0) cells.push(null);
 
           return (
-            <div key={`${y}-${m}`} className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-4">
+            <div key={`${y}-${m}`} id={`mensual-mes-${y}-${String(m + 1).padStart(2, "0")}`} style={{ scrollMarginTop: "260px" }} className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-4">
               <h3 className="text-center font-semibold text-body mb-3 text-foreground/90">
                 {MONTH_NAMES[m]} {y}
               </h3>

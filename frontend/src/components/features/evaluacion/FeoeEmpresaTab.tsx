@@ -1,11 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { Building2, CheckCircle2, XCircle, HelpCircle, Sparkles, ThumbsUp, GraduationCap } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
-import { isAlumnoActivo } from "@/utils/alumnado";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 
@@ -45,27 +43,17 @@ const getScoreOptions = (t: (key: string, opts?: any) => string) => [
   { value: 4, label: t('campos.feoe.score4', {defaultValue: '4 · Sobresaliente'}), color: "border-success text-success bg-success/10" },
 ];
 
-export function FeoeEmpresaTab() {
+// Valoración del tutor de empresa de UN alumno/a (sección "Empresa FEOE" de
+// Calificaciones -> Académicas, que aporta el selector de alumnado).
+export function FeoeEmpresaAlumno({ studentId }: { studentId: string }) {
   const { t } = useTranslation();
   const SCORE_OPTIONS = React.useMemo(() => getScoreOptions(t), [t]);
   const { moduleData, cursoData, updateModuleData, updateCursoData } = useAppStore();
-  const [selectedStudentId, setSelectedStudentId] = useState<string>("");
 
   const df_ra = moduleData?.df_ra || [];
   const df_ce = moduleData?.df_ce || [];
-  const df_al = cursoData?.df_al || [];
   const df_calificaciones = cursoData?.df_calificaciones || [];
   const df_instr = moduleData?.df_instr || [];
-
-  const activeStudents = [...df_al.filter(isAlumnoActivo)].sort(
-    (a: any, b: any) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || ""))
-  );
-
-  React.useEffect(() => {
-    if (activeStudents.length > 0 && !selectedStudentId) {
-      setSelectedStudentId(activeStudents[0].ID || "");
-    }
-  }, [activeStudents.length]);
 
   // La designación de qué CE evalúa el tutor de empresa es la misma que
   // is_dual (FEOE) en Currículo->OG<-RA<-CE -- antes había aquí un checkbox
@@ -168,63 +156,8 @@ export function FeoeEmpresaTab() {
     updateCursoData("df_calificaciones", next);
   };
 
-  return (
-    <div className="space-y-6">
-      <div className="space-y-3">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <SectionHeading id="feoe-criterios-designados" icon={Building2} scrollMt="260px" className="flex-1">
-          {t('campos.feoe.criteriosDesignadosTitulo', {defaultValue: 'Criterios designados para FEOE'})}
-        </SectionHeading>
-        <Link href="/curriculo?tab=ponderacion-ra-ce" className="shrink-0">
-          <Button variant="secondary" className="gap-2 text-caption">
-            <GraduationCap className="w-3.5 h-3.5" /> {t('botones.feoe.gestionarEnCurriculo', {defaultValue: 'Gestionar en Currículo'})}
-          </Button>
-        </Link>
-      </div>
-      <Card className="p-6 border-t-4 border-t-amber-500">
-        <p className="text-muted text-body mb-4">
-          {t('campos.feoe.criteriosDesignadosDesc', {defaultValue: 'Los CE marcados como FEOE en Currículo son los que valora el tutor de empresa (Anexo XI b) — tú transcribes el resultado más abajo, por alumno.'})}
-        </p>
-        {df_ra.length === 0 ? (
-          <p className="text-body text-muted">{t('campos.feoe.sinRaCe', {defaultValue: 'No hay RA/CE cargados en este módulo todavía.'})}</p>
-        ) : raConDesignados.length === 0 ? (
-          <div className="space-y-2">
-            <p className="text-body text-muted">
-              {t('campos.feoe.ningunCeMarcadoDesc', {defaultValue: 'Este módulo no está dualizado todavía: no hay ningún CE marcado como FEOE. Márcalos en Currículo -> OG<-RA<-CE (columna "FEOE").'})}
-            </p>
-            <Link href="/contexto?tab=contextualizacion" className="text-caption text-info hover:underline inline-block">
-              {t('botones.feoe.configurarEnPlanFeoe', {defaultValue: 'Configurar horas y régimen en Plan FEOE'})}
-            </Link>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {raConDesignados.map((ra: any) => {
-              const cesDeRa = ceDesignados.filter((ce: any) => ce.id_ra === ra.id_ra);
-              const pesoDesignado = cesDeRa.reduce((sum: number, ce: any) => sum + (Number(ce.peso_ce) || 0), 0);
-              return (
-                <div key={ra.id_ra}>
-                  <div className="flex items-center justify-between mb-1.5 gap-3">
-                    <p className="text-caption font-semibold text-muted truncate">{ra.id_ra} — {ra.desc_ra || ""}</p>
-                    <span className={`shrink-0 text-caption font-semibold px-2 py-0.5 rounded-full ${pesoDesignado === 100 ? 'bg-success/10 text-success' : 'bg-amber-500/10 text-amber-500'}`}>
-                      {pesoDesignado.toFixed(0)}% {t('campos.feoe.delRaSufijo', {defaultValue: 'del RA'})}
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                    {cesDeRa.map((ce: any) => (
-                      <div key={ce.id_ce} className="flex items-center gap-2 p-2 rounded border bg-amber-500/10 border-amber-500/30">
-                        <span className="text-caption">{ce.id_ce} — {ce.desc_ce || ""} <span className="text-muted">({ce.peso_ce || 0}%)</span></span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </Card>
-      </div>
-
-      {ceDesignados.length === 0 ? (
+  if (ceDesignados.length === 0) {
+    return (
         <Card className="p-8 text-center border-l-4 border-l-amber-500">
           <p className="text-foreground/80">{t('campos.feoe.marcaAlMenosUnCe', {defaultValue: 'Este módulo no está dualizado: marca al menos un CE como FEOE en Currículo -> OG<-RA<-CE para empezar a registrar valoraciones de empresa.'})}</p>
           <div className="flex items-center justify-center gap-3 mt-4">
@@ -240,69 +173,33 @@ export function FeoeEmpresaTab() {
             </Link>
           </div>
         </Card>
-      ) : activeStudents.length === 0 ? (
-        <Card className="p-8 text-center border-l-4 border-l-yellow-500">
-          <p className="text-foreground/80">{t('campos.feoe.sinAlumnadoActivo', {defaultValue: 'No hay alumnado activo registrado en este curso.'})}</p>
-        </Card>
-      ) : (
-        <div className="flex gap-6 min-h-[500px]">
-          <div className="w-72 bg-foreground/5 border border-white/5 rounded-2xl flex flex-col overflow-hidden shrink-0">
-            <div className="p-4 border-b border-white/5 bg-foreground/10">
-              <div className="text-xs font-medium text-muted tracking-wider">{t('campos.feoe.alumnadoActivoCount', {count: activeStudents.length, defaultValue: 'Alumnado activo ({{count}})'})}</div>
-            </div>
-            <div className="flex-1 overflow-y-auto p-2 space-y-1 scrollbar-hide">
-              {activeStudents.map((al: any) => {
-                const isSelected = al.ID === selectedStudentId;
-                const hasData = ceDesignados.some((ce: any) => getValor(al.ID, ce.id_ce) !== null);
-                return (
-                  <button
-                    key={al.ID}
-                    onClick={() => setSelectedStudentId(al.ID || "")}
-                    className={`w-full text-left px-3.5 py-3 rounded-xl transition-all flex items-center justify-between ${
-                      isSelected ? "bg-accent text-background font-bold shadow-md shadow-accent/15" : "text-foreground/80 hover:bg-foreground/5"
-                    }`}
-                  >
-                    <div className="truncate pr-2">
-                      <div className="text-sm truncate">{al.Apellidos}, {al.Nombre}</div>
-                      <div className={`text-[10px] font-mono ${isSelected ? "text-background/70" : "text-muted"}`}>{al.ID}</div>
-                    </div>
-                    {hasData && <div className={`w-2 h-2 rounded-full shrink-0 ${isSelected ? "bg-background/60" : "bg-amber-500/70"}`} />}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+    );
+  }
 
-          <div className="flex-1 bg-foreground/5 border border-white/5 rounded-2xl flex flex-col overflow-hidden">
-            {selectedStudentId ? (
-              <>
-                <div className="p-6 border-b border-white/5 bg-foreground/10 flex flex-wrap justify-between items-center gap-3 shrink-0">
-                  <h3 className="text-xl font-black text-foreground">
-                    {activeStudents.find((a: any) => a.ID === selectedStudentId)?.Nombre} {activeStudents.find((a: any) => a.ID === selectedStudentId)?.Apellidos}
-                  </h3>
+  return (
+    <div className="space-y-5">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <p className="text-caption text-muted flex-1 min-w-[240px]">
+          {t('campos.feoe.rellenaConBotonDesc', {defaultValue: 'Rellena con un botón y corrige a mano lo que haga falta — es solo un punto de partida, no un valor definitivo.'})}
+        </p>
                   <div className="flex gap-2">
                     <button
-                      onClick={() => rellenarTodo(selectedStudentId, 4)}
+                      onClick={() => rellenarTodo(studentId, 4)}
                       className="flex items-center gap-1.5 text-caption font-semibold px-3 py-1.5 rounded-full border border-success/30 text-success bg-success/10 hover:bg-success/20 transition-colors"
                     >
                       <Sparkles className="w-3.5 h-3.5" /> {t('botones.feoe.excelenteTodoA4', {defaultValue: 'Excelente (todo a 4)'})}
                     </button>
                     <button
-                      onClick={() => rellenarTodo(selectedStudentId, 3)}
+                      onClick={() => rellenarTodo(studentId, 3)}
                       className="flex items-center gap-1.5 text-caption font-semibold px-3 py-1.5 rounded-full border border-info/30 text-info bg-info/10 hover:bg-info/20 transition-colors"
                     >
                       <ThumbsUp className="w-3.5 h-3.5" /> {t('botones.feoe.suficienteTodoA3', {defaultValue: 'Suficiente (todo a 3)'})}
                     </button>
                   </div>
-                </div>
-                <p className="px-6 pt-3 text-caption text-muted">
-                  {t('campos.feoe.rellenaConBotonDesc', {defaultValue: 'Rellena con un botón y corrige a mano lo que haga falta — es solo un punto de partida, no un valor definitivo.'})}
-                </p>
-
-                <div className="flex-1 overflow-y-auto p-6 space-y-5 scrollbar-hide">
+      </div>
                   {raConDesignados.map((ra: any) => {
                     const cesDeRa = ceDesignados.filter((ce: any) => ce.id_ra === ra.id_ra);
-                    const valores = cesDeRa.map((ce: any) => getValor(selectedStudentId, ce.id_ce)).filter((v: any) => v !== null) as number[];
+                    const valores = cesDeRa.map((ce: any) => getValor(studentId, ce.id_ce)).filter((v: any) => v !== null) as number[];
                     const media = valores.length > 0 ? valores.reduce((a, b) => a + b, 0) / valores.length : null;
                     const superado = media !== null ? media > 2 : null;
 
@@ -328,7 +225,7 @@ export function FeoeEmpresaTab() {
 
                         <div className="space-y-3">
                           {cesDeRa.map((ce: any) => {
-                            const valorActual = getValor(selectedStudentId, ce.id_ce);
+                            const valorActual = getValor(studentId, ce.id_ce);
                             return (
                               <div key={ce.id_ce} className="p-3 rounded-lg bg-foreground/5 border border-white/5">
                                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
@@ -337,7 +234,7 @@ export function FeoeEmpresaTab() {
                                     {SCORE_OPTIONS.map((opt) => (
                                       <button
                                         key={opt.value}
-                                        onClick={() => updateCalificacion(selectedStudentId, ce.id_ce, opt.value)}
+                                        onClick={() => updateCalificacion(studentId, ce.id_ce, opt.value)}
                                         className={`px-2.5 py-1 text-caption rounded-full border transition-colors ${
                                           valorActual === opt.value ? opt.color : "bg-transparent border-white/10 text-muted hover:border-white/30"
                                         }`}
@@ -349,8 +246,8 @@ export function FeoeEmpresaTab() {
                                 </div>
                                 <input
                                   type="text"
-                                  value={getObservaciones(selectedStudentId, ce.id_ce)}
-                                  onChange={(e) => updateCalificacion(selectedStudentId, ce.id_ce, valorActual, e.target.value)}
+                                  value={getObservaciones(studentId, ce.id_ce)}
+                                  onChange={(e) => updateCalificacion(studentId, ce.id_ce, valorActual, e.target.value)}
                                   placeholder={t('campos.feoe.observacionesTutorPlaceholder', {defaultValue: 'Observaciones del tutor de empresa (opcional)...'})}
                                   className="w-full mt-2 bg-transparent border-b border-transparent hover:border-[var(--glass-border)] focus:border-accent focus:outline-none text-caption text-foreground/80 placeholder:text-muted/40 py-1"
                                 />
@@ -361,17 +258,6 @@ export function FeoeEmpresaTab() {
                       </div>
                     );
                   })}
-                </div>
-              </>
-            ) : (
-              <div className="flex-1 flex flex-col justify-center items-center text-center p-8 text-muted">
-                <HelpCircle className="w-12 h-12 text-muted/50 mb-3" />
-                <p className="font-semibold text-lg">{t('campos.comun.ningunAlumnadoSeleccionado', {defaultValue: 'Ningún alumnado seleccionado'})}</p>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   );
 }

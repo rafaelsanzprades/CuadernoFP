@@ -1,5 +1,11 @@
 {
   "tabs": {
+    "cierre": {
+      "expediente": {
+        "label": "Expedient",
+        "desc": "Inserció laboral post-cicle i expedient (línia temporal d'evidències) per alumnat."
+      }
+    },
     "bienvenida": "Benvinguda",
     "seguridad": "Seguretat",
     "asistente": "Assistent IA",
@@ -11,7 +17,6 @@
     "resumen": "Resum",
     "listado": "Llistat",
     "tutoria": "Tutoria",
-    "plano": "Plànol",
     "feoe": "FEOE / Anecdotari",
     "diario": "Diari",
     "asistencia": "Assistència",
@@ -69,19 +74,20 @@
         "label": "Matrícula",
         "desc": "Gestió del llistat d'alumnat i fitxa individual."
       },
-      "plano": {
-        "desc": "Distribució i plànol visual de l'aula."
+      "orientacion": {
+        "label": "Orientació",
+        "desc": "Orientació professional per alumne/a: motivació, experiència laboral, aptituds i aspiracions."
       },
-      "perfilIndividual": {
-        "label": "Individual",
-        "desc": "Orientació professional per alumne/a: motivació, experiència laboral, aptituds, aspiracions i inserció post-cicle."
+      "rasgos": {
+        "label": "Trets",
+        "desc": "Trets característics del grup i dades automàtiques del grup."
       },
       "perfilTendencias": {
         "label": "Tendències",
         "desc": "Agregats i tendències del perfil professional del grup, i taula filtrable de tot l'alumnat."
       },
-      "notas": {
-        "label": "Notes",
+      "academicas": {
+        "label": "Acadèmiques",
         "desc": "Entrada de notes numèriques per alumnat, instrument d'avaluació i nivell d'adquisició de RA."
       }
     },
@@ -97,10 +103,6 @@
       "empresaFeoe": {
         "label": "Empresa FEOE",
         "desc": "Avaluació de l'alumnat a l'empresa durant la FEOE (Annex XI b), transcrita per RA/CE."
-      },
-      "planificacion": {
-        "label": "Avanç",
-        "desc": "Planificació mensual de les unitats didàctiques i progrés dels resultats d'aprenentatge segons el que s'ha impartit."
       }
     },
     "calificaciones": {
@@ -341,7 +343,25 @@
         "desc": "Panell de control d'accés ràpid a totes les eines."
       }
     },
-    "legislacion": "Legislació"
+    "legislacion": "Legislació",
+    "agenda": {
+      "agenda": {
+        "label": "Agenda",
+        "desc": "Les teves classes d'avui, la setmana i la unitat en curs."
+      },
+      "avance": {
+        "label": "Avanç",
+        "desc": "Planificació i seguiment mensual de les unitats didàctiques segons el que s'ha impartit."
+      },
+      "progresoRaUd": {
+        "label": "Progrés dels RA segons les UD",
+        "desc": "Progrés dels resultats d'aprenentatge segons l'estat i la ponderació de les unitats didàctiques impartides."
+      },
+      "planoAula": {
+        "label": "Plànol d'aula",
+        "desc": "Distribució i plànol visual de l'aula."
+      }
+    }
   },
   "inicio": {
     "title": "Inici",
@@ -349,7 +369,6 @@
   },
   "nav": {
     "inicio": "Inici",
-    "agenda": "Agenda",
     "perfil": "Perfil",
     "archivos": "Arxius",
     "catalogo": "Catàleg",
@@ -366,7 +385,8 @@
     "alumnado": "Alumnat",
     "diario": "Diari",
     "seguimiento": "Seguiment",
-    "calificaciones": "Tancament",
+    "calificaciones": "Qualificacions",
+    "cierre": "Tancament",
     "informes": "Informes",
     "normativa": "Documents",
     "instrumentos": "Instrument",
@@ -390,7 +410,7 @@
     "demo": "DEMO",
     "reales": "REALS",
     "abrir_grupo": "Obrir Grup",
-    "agenda": "Agenda",
+    "agenda": "Classes",
     "legal": "Legal"
   },
   "header": {
@@ -404,10 +424,10 @@
     "settings": "Configuració"
   },
   "pages": {
-    "agenda_title": "Agenda",
-    "agenda_desc": "Les teves classes d'avui, la setmana i la unitat en curs.",
+    "agenda_title": "Classes",
+    "agenda_desc": "Notes, butlletí i valoració a l'empresa (FEOE) per alumnat, i reclamacions.",
     "alumnado_title": "Alumnat",
-    "alumnado_desc": "Gestió de l'alumnat, plànol d'aula, orientació professional i notes.",
+    "alumnado_desc": "Gestió de l'alumnat, notes i orientació professional.",
     "diario_title": "Seguiment Diari",
     "diario_desc": "Diari d'aula, contingències, control d'assistència i alertes.",
     "evaluacion_title": "Qualificació",
@@ -435,7 +455,7 @@
     "ayuda_desc": "Guia d'inici, FAQ, acrònims i contribucions de la comunitat.",
     "contexto_desc": "Informació general, característiques de l'entorn, alumnat i mòdul.",
     "magia_desc": "Generació de la programació didàctica i informes.",
-    "seguimiento_desc": "Diari de classes, assistència, avanç de la programació i empresa FEOE.",
+    "seguimiento_desc": "Diari de classes, assistència i empresa FEOE.",
     "metodologia_desc": "Estratègies metodològiques, recursos, espais i atenció a la diversitat."
   },
   "common": {
@@ -475,7 +495,6 @@
     "ayuda": "Guia d'inici, FAQ, acrònims i contribucions de la comunitat.",
     "magia": "Comparativa i correspondència APP-PD, i documents de suport de la programació i del curs.",
     "legal": "Avís legal, privacitat, cookies i accessibilitat.",
-    "agenda": "Les teves classes d'avui, la setmana i la unitat en curs.",
     "archivos": "Gestió d'arxius, sincronització al núvol, seguretat, IA i verificació de dades.",
     "normativa": "Normativa autonòmica, legislació, bibliografia i estàndards INCUAL.",
     "catalogo": "Famílies, títols, mòduls i currículums (RA i CE).",
@@ -483,10 +502,11 @@
     "curriculo": "Contribució dels RA als objectius, ponderació RA-CE, unitats didàctiques i tasques competencials.",
     "metodologia": "Metodologia, recursos, pla de contingència i elements transversals.",
     "instrumentos": "Definició i pesos de les eines d'avaluació.",
-    "calendario": "Horari, trimestres, festius, període FEOE i vista mensual.",
-    "alumnado": "Fitxes personals, plànol d'aula, orientació professional i entrada de notes per alumne.",
-    "seguimiento": "Diari de classes, assistència, avanç de la programació i valoració de l'alumnat a l'empresa (FEOE).",
-    "calificaciones": "Resultats i notes del curs, històric i reclamacions, i millora del mòdul (EQAVET i PDCA)."
+    "calendario": "Horari, trimestres, festius, període FEOE, vista mensual i les teves classes d'avui, la setmana i la unitat en curs.",
+    "alumnado": "Fitxes personals i orientació professional.",
+    "seguimiento": "Diari de classes, avanç mensual, progrés dels RA i assistència.",
+    "calificaciones": "Notes, butlletí i valoració a l'empresa (FEOE) per alumnat, i reclamacions.",
+    "cierre": "Resultats i notes del curs, millora del mòdul (EQAVET i PDCA), tendències del grup, i inserció laboral i expedient per alumnat."
   },
   "toasts": {
     "aiSettings": {
@@ -1454,10 +1474,7 @@
         "v3": "3 - Mitjana",
         "v4": "4 - Alta",
         "v5": "5 - Excel·lent"
-      },
-      "familiaInformada": "Família / tutors legals informats",
-      "derivadoOrientador": "Derivat/da a l'orientador/a del centre",
-      "informeEmitido": "Informe d'orientació emès"
+      }
     },
     "verificacion": {
       "sinDatos": "Sense dades",
@@ -1642,13 +1659,11 @@
       "areaInteresLabel": "Àrea d'interès",
       "intencionTerminarLabel": "Intenció en acabar",
       "insercionLabel": "Inserció",
-      "reunionesLabel": "Reunions",
       "sinAlumnadoFiltros": "No hi ha alumnat que coincideixi amb els filtres.",
       "sinFichaBadge": "Sense fitxa",
       "interesadoErasmus": "Interessat/da en Erasmus+",
       "tieneIdeaNegocio": "Té una idea de negoci",
       "interesadoUniversidad": "Interessat/da en la universitat",
-      "derivadoAlOrientador": "Derivat a l'orientador",
       "perfilSeccionTitulo": "Perfil",
       "motivoEleccionLabel": "Motiu d'elecció",
       "experienciaPreviaLabel": "Experiència prèvia",
@@ -1666,14 +1681,7 @@
       "movilidadGeograficaLabel": "Mobilitat geogràfica",
       "empresaObjetivoLabel": "Empresa objectiu",
       "cicloGradoInteresLabel": "Cicle / grau d'interès",
-      "seguimientoTutorSeccionTitulo": "Seguiment del tutor",
-      "reunionesCelebradasLabel": "Reunions realitzades",
-      "ultimaReunionLabel": "Última reunió",
-      "familiaInformadaLabel": "Família informada",
-      "derivadoOrientadorLabel": "Derivat a orientador",
-      "informeEmitidoLabel": "Informe emès",
       "mostrandoNAlumnado": "Mostrant {{count}} alumnes",
-      "derivadosLabel": "Derivats",
       "sinAlumnadoRegistradoCurso": "No hi ha alumnat registrat en aquest curs.",
       "coberturaFichasOrientacionTitulo": "Cobertura de fitxes d'orientació",
       "deTotalFichaCompletada": "{{con}} de {{total}} alumnes tenen la fitxa completada",
@@ -1837,7 +1845,7 @@
       "coordinacionModulosDesc": "Com es coordina aquest mòdul amb altres mòduls/professorat del cicle (reunions d'equip docent, dependències entre mòduls, substitució de tasques en cas d'absència, etc.).",
       "coordinacionModulosTitulo": "Coordinació amb altres mòduls i el seu professorat",
       "cpeTitulo": "Competències professionals i per a l'ocupabilitat (CPE)",
-      "criteriosCompensablesDescPost": " = qualsevol CE suspès del RA topa la seva nota just per sota de l'aprovat (comportament estricte); puja aquest número per permetre compensar N criteris suspesos dins del mateix RA. Quan el topall està actiu per a un alumne, apareix marcat a Seguiment → Detall per alumnat. Exemple amb 0: CE1.a=9.0 i CE1.b=4.9 al 50% donen una mitjana de 6.95, però com que CE1.b està suspès el RA es topa en 4.9, no en 6.95.",
+      "criteriosCompensablesDescPost": " = qualsevol CE suspès del RA topa la seva nota just per sota de l'aprovat (comportament estricte); puja aquest número per permetre compensar N criteris suspesos dins del mateix RA. Quan el topall està actiu per a un alumne, apareix marcat a Alumnat → Notes. Exemple amb 0: CE1.a=9.0 i CE1.b=4.9 al 50% donen una mitjana de 6.95, però com que CE1.b està suspès el RA es topa en 4.9, no en 6.95.",
       "criteriosCompensablesDescPre": "Nombre màxim de criteris suspesos que es permeten per aprovar un RA. ",
       "criteriosCompensablesRA": "Criteris compensables per RA",
       "cursoLabel": "Curs",
@@ -2361,12 +2369,12 @@
       "tieneDatosOrientacion": "Té dades d'orientació",
       "nAnos": "{{n}} anys",
       "edadNoRegistrada": "Edat no registrada",
-      "seccion1Titulo": "Secció 1: Motivació i elecció del cicle",
+      "seccion1Titulo": "Motivació i experiència",
       "motivoEleccionLabel": "Motiu d'elecció del cicle",
       "viaAccesoLabel": "Via d'accés al cicle",
       "cicloPrevioLabel": "Cicle o estudis previs cursats",
       "cicloPrevioPlaceholder": "Ex. ASIR, DAW, SMR, Batxillerat Científic...",
-      "seccion2Titulo": "Secció 2: Experiència i situació laboral",
+      "seccion2Titulo": "Interessos i aspiracions",
       "experienciaPreviaLabel": "Experiència laboral prèvia",
       "sectorExperienciaLabel": "Sector d'experiència prèvia",
       "sectorExperienciaPlaceholder": "Ex. Hostaleria, Comerç, Tecnologia, Sanitat...",
@@ -2374,7 +2382,6 @@
       "jornadaActualLabel": "Situació laboral actual",
       "empresaActualLabel": "Empresa actual (si escau)",
       "empresaActualPlaceholder": "Nom de l'empresa...",
-      "seccion3Titulo": "Secció 3: Interessos i aptituds detectades",
       "aptitudPrincipalLabel": "Aptitud principal detectada",
       "areaInteresLabel": "Àrea d'interès dominant",
       "ambitoLaboralPreferidoLabel": "Àmbit laboral preferit",
@@ -2382,14 +2389,13 @@
       "idiomasTrabajoTitulo": "Idiomes de treball",
       "obsAptitudesLabel": "Observacions del tutor sobre aptituds i interessos",
       "obsAptitudesPlaceholder": "Descriu les fortaleses observades, àrees de millora, actitud davant el treball en equip, iniciativa, etc.",
-      "seccion4Titulo": "Secció 4: Aspiracions en finalitzar el cicle",
       "intencionAlTerminarLabel": "Intenció principal en acabar",
       "empresaObjetivoLabel": "Empresa o sector objectiu (si en té)",
       "empresaObjetivoPlaceholder": "Ex. empresa local TIC, clínica pròpia...",
       "cicloSuperiorInteresLabel": "Cicle superior / grau d'interès",
       "cicloSuperiorInteresPlaceholder": "Ex. DAM, ASIR, Enginyeria Informàtica, ADE...",
       "interesesEspecificosTitulo": "Interessos específics",
-      "seccion5Titulo": "Secció 5: Inserció laboral (post-cicle)",
+      "seccion5Titulo": "Inserció laboral (post-cicle)",
       "seccion5InfoDesc": "Aquesta secció s'emplena en finalitzar el cicle o com a seguiment de l'alumnat egressat.",
       "estadoInsercionLabel": "Estat d'inserció laboral",
       "relacionCicloLabel": "Relació de la feina amb el cicle",
@@ -2402,12 +2408,6 @@
       "valoracionEgresadoLabel": "Valoració global de l'egressat (1-5)",
       "obsInsercionLabel": "Observacions de seguiment d'inserció",
       "obsInsercionPlaceholder": "Notes sobre el procés d'inserció, dificultats, contacte post-cicle...",
-      "seccion6Titulo": "Secció 6: Notes i seguiment del tutor",
-      "reunionesCelebradasLabel": "Núm. de reunions d'orientació realitzades",
-      "fechaUltimaReunionLabel": "Data de l'última reunió / entrevista",
-      "fechaDerivacionLabel": "Data de derivació a l'orientador/a",
-      "resumenOrientacionLabel": "Resum d'orientació (camp lliure)",
-      "resumenOrientacionPlaceholder": "Escriu aquí el resum de l'orientació: decisions preses, acords amb l'alumnat i la família, propers passos...",
       "selectaAlumnadoDesc": "Selecciona un alumne/a de la llista de l'esquerra."
     },
     "comun": {
@@ -2573,6 +2573,9 @@
       "eval2Abrev": "2a Av.",
       "eval3Abrev": "3a Av.",
       "trimestresTitulo": "Trimestres",
+      "trimestre1": "1r trimestre",
+      "trimestre2": "2n trimestre",
+      "trimestre3": "3r trimestre",
       "inicioLabel": "Inici",
       "finLabel": "Fi",
       "horasLectivasReales": "Hores lectives reals",
@@ -2589,7 +2592,9 @@
       "festivosEventosInstruccionesPre": "Introdueix manualment o fes clic al calendari. Els festius exclouen hores del còmput real. Festiu i Rellevant són independents: un mateix dia pot tenir els dos alhora. Les files amb",
       "festivosEventosInstruccionesPost": "(Inici/Fi de curs i de trimestre, FEOE) provenen de Dates generals / Període FEOE — s'editen allà, no aquí.",
       "hoyBadge": "Avui",
-      "periodoFeoeTitulo": "Període FEOE"
+      "periodoFeoeTitulo": "Període FEOE",
+      "nEntradasMes_one": "{{count}} entrada",
+      "nEntradasMes_other": "{{count}} entrades"
     },
     "diario": {
       "alumnadoActivoLabel": "Alumnat actiu",
@@ -2835,8 +2840,11 @@
     },
     "seguimiento": {
       "cargandoDatosSeguimiento": "Carregant dades de seguiment...",
-      "mesActualPrefijo": "ACTUAL",
-      "planificacionMensualTitulo": "Planificació mensual"
+      "mesActualPrefijo": "ACTUAL"
+    },
+    "agenda": {
+      "planificacionSeguimientoMensualTitulo": "Planificació i seguiment mensual",
+      "planoAulaTitulo": "Plànol d'aula"
     }
   },
   "t1": "1r trimestre",
@@ -2856,5 +2864,5 @@
   },
   "fecha": "Data",
   "hasta_opc": "Fins a (opcional)",
-  "sin_eventos": "Encara no hi ha festius ni esdeveniments. Afegeix-ne un a dalt."
+  "sin_eventos": "Encara no hi ha festius ni esdeveniments. Afegeix-ne un a baix."
 }

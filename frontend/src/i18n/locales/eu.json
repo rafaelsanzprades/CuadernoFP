@@ -1,5 +1,11 @@
 {
   "tabs": {
+    "cierre": {
+      "expediente": {
+        "label": "Espedientea",
+        "desc": "Zikloaren osteko laneratzea eta espedientea (ebidentzien denbora-lerroa) ikasleka."
+      }
+    },
     "bienvenida": "Ongi etorri",
     "seguridad": "Segurtasuna",
     "asistente": "AI Laguntzailea",
@@ -11,7 +17,6 @@
     "resumen": "Laburpena",
     "listado": "Zerrenda",
     "tutoria": "Tutoretza",
-    "plano": "Planoa",
     "feoe": "FEOE / Anekdotarioa",
     "diario": "Egunerokoa",
     "asistencia": "Asistentzia",
@@ -67,19 +72,20 @@
         "label": "Matrikula",
         "desc": "Ikasleen zerrendaren eta banakako fitxaren kudeaketa."
       },
-      "plano": {
-        "desc": "Ikasgelaren banaketa eta plano bisuala."
+      "orientacion": {
+        "label": "Orientazioa",
+        "desc": "Ikasleka lanbide-orientazioa: motibazioa, lan-esperientzia, gaitasunak eta asmoak."
       },
-      "perfilIndividual": {
-        "label": "Banakakoa",
-        "desc": "Ikasleka lanbide-orientazioa: motibazioa, lan-esperientzia, gaitasunak, asmoak eta zikloaren osteko txertaketa."
+      "rasgos": {
+        "label": "Ezaugarriak",
+        "desc": "Taldearen ezaugarri bereizgarriak eta taldearen datu automatikoak."
       },
       "perfilTendencias": {
         "label": "Joerak",
         "desc": "Taldearen lanbide-profilaren agregatuak eta joerak, eta ikasle guztien taula iragazgarria."
       },
-      "notas": {
-        "label": "Oharrak",
+      "academicas": {
+        "label": "Akademikoak",
         "desc": "Nota numerikoen sarrera, ikasleka, ebaluazio-tresnaka eta RAren eskuratze-mailaka."
       }
     },
@@ -95,10 +101,6 @@
       "empresaFeoe": {
         "label": "FEOE enpresa",
         "desc": "FEOEan zehar enpresan ikasleen ebaluazioa (XI b eranskina), RA/CEka transkribatua."
-      },
-      "planificacion": {
-        "label": "Aurrerapena",
-        "desc": "Ikas-unitateen hileko plangintza eta ikaskuntza-emaitzen aurrerapena emandakoaren arabera."
       }
     },
     "calificaciones": {
@@ -339,7 +341,25 @@
         "desc": "Erreminta guztietarako sarbide azkarreko kontrol-panela."
       }
     },
-    "legislacion": "Legedia"
+    "legislacion": "Legedia",
+    "agenda": {
+      "agenda": {
+        "label": "Agenda",
+        "desc": "Gaurko klaseak, astea eta unitate aktiboa."
+      },
+      "avance": {
+        "label": "Aurrerapena",
+        "desc": "Ikas-unitateen hileko plangintza eta jarraipena emandakoaren arabera."
+      },
+      "progresoRaUd": {
+        "label": "RAen aurrerapena UDen arabera",
+        "desc": "Ikaskuntza-emaitzen aurrerapena, emandako ikas-unitateen egoeraren eta haztapenaren arabera."
+      },
+      "planoAula": {
+        "label": "Gelako plana",
+        "desc": "Ikasgelaren banaketa eta plano bisuala."
+      }
+    }
   },
   "inicio": {
     "title": "Hasiera",
@@ -347,7 +367,6 @@
   },
   "nav": {
     "inicio": "Hasiera",
-    "agenda": "Agenda",
     "perfil": "Profila",
     "archivos": "Fitxategiak",
     "catalogo": "Katalogoa",
@@ -364,7 +383,8 @@
     "alumnado": "Ikasleak",
     "diario": "Egunerokoa",
     "seguimiento": "Segimendua",
-    "calificaciones": "Itxiera",
+    "calificaciones": "Kalifikazioak",
+    "cierre": "Itxiera",
     "informes": "Txostenak",
     "normativa": "Dokumentuak",
     "instrumentos": "Tresna",
@@ -388,7 +408,7 @@
     "demo": "DEMO",
     "reales": "ERREALAK",
     "abrir_grupo": "Ireki Taldea",
-    "agenda": "Agenda",
+    "agenda": "Klaseak",
     "legal": "Legezkoa"
   },
   "header": {
@@ -402,10 +422,10 @@
     "settings": "Konfigurazioa"
   },
   "pages": {
-    "agenda_title": "Agenda",
-    "agenda_desc": "Gaurko klaseak, astea eta unitate aktiboa.",
+    "agenda_title": "Klaseak",
+    "agenda_desc": "Notak, buletina eta enpresako balorazioa (FEOE) ikasleka, eta erreklamazioak.",
     "alumnado_title": "Ikasleak",
-    "alumnado_desc": "Ikasleen kudeaketa, gelako plana, orientazio profesionala eta notak.",
+    "alumnado_desc": "Ikasleen kudeaketa, notak eta orientazio profesionala.",
     "diario_title": "Eguneroko Segimendua",
     "diario_desc": "Ikasgelako egunerokoa, kontingentziak, asistentzia kontrola eta alertak.",
     "evaluacion_title": "Kalifikazioa",
@@ -433,7 +453,7 @@
     "ayuda_desc": "Hasierako gida, FAQ, akronimoak eta komunitatearen ekarpenak.",
     "contexto_desc": "Informazio orokorra, ingurunearen ezaugarriak, ikasleak eta modulua.",
     "magia_desc": "Programazio didaktikoaren eta txostenen sorrera.",
-    "seguimiento_desc": "Klase-egunkaria, asistentzia, programazioaren aurrerapena eta FEOE enpresa.",
+    "seguimiento_desc": "Klase-egunkaria, asistentzia eta FEOE enpresa.",
     "metodologia_desc": "Metodologia-estrategiak, baliabideak, espazioak eta aniztasunari arreta."
   },
   "common": {
@@ -473,7 +493,6 @@
     "ayuda": "Hasierako gida, FAQ, akronimoak eta komunitatearen ekarpenak.",
     "magia": "APP-PD konparaketa eta korrespondentzia, eta programazioaren eta ikasturtearen laguntza-dokumentuak.",
     "legal": "Lege-oharra, pribatutasuna, cookieak eta irisgarritasuna.",
-    "agenda": "Gaurko klaseak, astea eta unitate aktiboa.",
     "archivos": "Fitxategien kudeaketa, hodeiko sinkronizazioa, segurtasuna, AA eta datuen egiaztapena.",
     "normativa": "Erkidego-araudia, legedia, bibliografia eta INCUAL estandarrak.",
     "catalogo": "Familiak, tituluak, moduluak eta curriculumak (RA eta CE).",
@@ -481,10 +500,11 @@
     "curriculo": "RAk helburuei egiten dien ekarpena, RA-CE haztapena, unitate didaktikoak eta gaitasun-zereginak.",
     "metodologia": "Metodologia, baliabideak, kontingentzia-plana eta zeharkako elementuak.",
     "instrumentos": "Ebaluazio-tresnen definizioa eta pisuak.",
-    "calendario": "Ordutegia, hiruhilekoak, jaiegunak, FEOE aldia eta hileko ikuspegia.",
-    "alumnado": "Fitxa pertsonalak, gelako plana, orientazio profesionala eta ikasleen araberako nota-sarrera.",
-    "seguimiento": "Klase-egunkaria, asistentzia, programazioaren aurrerapena eta ikasleen balorazioa enpresan (FEOE).",
-    "calificaciones": "Ikastaroaren emaitzak eta notak, historiala eta erreklamazioak, eta moduluaren hobekuntza (EQAVET eta PDCA)."
+    "calendario": "Ordutegia, hiruhilekoak, jaiegunak, FEOE aldia, hileko ikuspegia eta gaurko klaseak, astea eta unitate aktiboa.",
+    "alumnado": "Fitxa pertsonalak eta lanbide-orientazioa.",
+    "seguimiento": "Klase-egunkaria, hileko aurrerapena, RAen aurrerapena eta asistentzia.",
+    "calificaciones": "Notak, buletina eta enpresako balorazioa (FEOE) ikasleka, eta erreklamazioak.",
+    "cierre": "Ikastaroaren emaitzak eta notak, moduluaren hobekuntza (EQAVET eta PDCA), taldearen joerak, eta laneratzea eta espedientea ikasleka."
   },
   "toasts": {
     "aiSettings": {
@@ -1452,10 +1472,7 @@
         "v3": "3 - Ertaina",
         "v4": "4 - Altua",
         "v5": "5 - Bikaina"
-      },
-      "familiaInformada": "Familia / legezko tutoreak jakinaren gainean",
-      "derivadoOrientador": "Ikastetxeko orientatzailera bideratua",
-      "informeEmitido": "Orientazio-txostena igorria"
+      }
     },
     "verificacion": {
       "sinDatos": "Daturik ez",
@@ -1640,13 +1657,11 @@
       "areaInteresLabel": "Interes-arloa",
       "intencionTerminarLabel": "Amaitzean duen asmoa",
       "insercionLabel": "Txertatzea",
-      "reunionesLabel": "Bilerak",
       "sinAlumnadoFiltros": "Ez dago iragazkiekin bat datorren ikaslerik.",
       "sinFichaBadge": "Fitxarik gabe",
       "interesadoErasmus": "Erasmus+ programan interesatua",
       "tieneIdeaNegocio": "Negozio-ideia badu",
       "interesadoUniversidad": "Unibertsitatean interesatua",
-      "derivadoAlOrientador": "Orientatzailera bideratua",
       "perfilSeccionTitulo": "Profila",
       "motivoEleccionLabel": "Aukeraren arrazoia",
       "experienciaPreviaLabel": "Aurretiko esperientzia",
@@ -1664,14 +1679,7 @@
       "movilidadGeograficaLabel": "Mugikortasun geografikoa",
       "empresaObjetivoLabel": "Xede-enpresa",
       "cicloGradoInteresLabel": "Ziklo / gradu interesgarria",
-      "seguimientoTutorSeccionTitulo": "Tutorearen jarraipena",
-      "reunionesCelebradasLabel": "Egindako bilerak",
-      "ultimaReunionLabel": "Azken bilera",
-      "familiaInformadaLabel": "Familia jakinaren gainean",
-      "derivadoOrientadorLabel": "Orientatzailera bideratua",
-      "informeEmitidoLabel": "Txostena igorria",
       "mostrandoNAlumnado": "{{count}} ikasle erakusten",
-      "derivadosLabel": "Bideratuak",
       "sinAlumnadoRegistradoCurso": "Ez dago ikaslerik erregistratuta ikasturte honetan.",
       "coberturaFichasOrientacionTitulo": "Orientazio-fitxen estaldura",
       "deTotalFichaCompletada": "{{total}} ikasletik {{con}}k fitxa osatua dute",
@@ -1835,7 +1843,7 @@
       "coordinacionModulosDesc": "Modulu hau zikloko beste modulu/irakasleekin nola koordinatzen den (irakasle-taldearen bilerak, moduluen arteko mendekotasunak, zereginen ordezkapena absentzia kasuan, etab.).",
       "coordinacionModulosTitulo": "Beste moduluekiko eta haien irakasleekiko koordinazioa",
       "cpeTitulo": "Konpetentzia profesionalak eta enplegagarritasunerakoak (CPE)",
-      "criteriosCompensablesDescPost": " = RAren edozein CE gainditu gabek bere nota gainditzearen azpitik topatuko du (portaera zorrotza); igo zenbaki hau RA berean N irizpide gainditu gabe konpentsatzeko aukera emateko. Muga ikasle batentzat aktibo dagoenean, Jarraipena → Ikaslez ikasleko xehetasunean markatuta agertzen da. Adibidea 0rekin: CE1.a=9.0 eta CE1.b=4.9, %50ean, batez besteko 6.95 ematen dute, baina CE1.b gainditu gabe dagoenez RA 4.9an topatzen da, ez 6.95ean.",
+      "criteriosCompensablesDescPost": " = RAren edozein CE gainditu gabek bere nota gainditzearen azpitik topatuko du (portaera zorrotza); igo zenbaki hau RA berean N irizpide gainditu gabe konpentsatzeko aukera emateko. Muga ikasle batentzat aktibo dagoenean, Ikasleak → Notak atalean markatuta agertzen da. Adibidea 0rekin: CE1.a=9.0 eta CE1.b=4.9, %50ean, batez besteko 6.95 ematen dute, baina CE1.b gainditu gabe dagoenez RA 4.9an topatzen da, ez 6.95ean.",
       "criteriosCompensablesDescPre": "RA bat gainditzeko onartzen den gehienezko gainditu gabeko irizpide kopurua. ",
       "criteriosCompensablesRA": "RAka konpentsagarriak diren irizpideak",
       "cursoLabel": "Ikastaroa",
@@ -2359,12 +2367,12 @@
       "tieneDatosOrientacion": "Orientazio-datuak ditu",
       "nAnos": "{{n}} urte",
       "edadNoRegistrada": "Adina erregistratu gabe",
-      "seccion1Titulo": "1. atala: Zikloaren motibazioa eta aukeraketa",
+      "seccion1Titulo": "Motibazioa eta esperientzia",
       "motivoEleccionLabel": "Zikloa aukeratzeko arrazoia",
       "viaAccesoLabel": "Ziklorako sarbide-bidea",
       "cicloPrevioLabel": "Aurretiko zikloa edo ikasketak",
       "cicloPrevioPlaceholder": "Adib. ASIR, DAW, SMR, Zientzietako Batxilergoa...",
-      "seccion2Titulo": "2. atala: Lan-esperientzia eta lan-egoera",
+      "seccion2Titulo": "Interesak eta asmoak",
       "experienciaPreviaLabel": "Aurretiko lan-esperientzia",
       "sectorExperienciaLabel": "Aurretiko esperientziaren sektorea",
       "sectorExperienciaPlaceholder": "Adib. Ostalaritza, Merkataritza, Teknologia, Osasungintza...",
@@ -2372,7 +2380,6 @@
       "jornadaActualLabel": "Egungo lan-egoera",
       "empresaActualLabel": "Egungo enpresa (badagokio)",
       "empresaActualPlaceholder": "Enpresaren izena...",
-      "seccion3Titulo": "3. atala: Antzemandako interesak eta gaitasunak",
       "aptitudPrincipalLabel": "Antzemandako gaitasun nagusia",
       "areaInteresLabel": "Interes-eremu nagusia",
       "ambitoLaboralPreferidoLabel": "Lan-esparru hobetsia",
@@ -2380,14 +2387,13 @@
       "idiomasTrabajoTitulo": "Laneko hizkuntzak",
       "obsAptitudesLabel": "Tutorearen behaketak gaitasun eta interesei buruz",
       "obsAptitudesPlaceholder": "Deskribatu antzemandako indarguneak, hobetzeko arloak, talde-lanarekiko jarrera, ekimena, etab.",
-      "seccion4Titulo": "4. atala: Zikloa amaitzean dituen asmoak",
       "intencionAlTerminarLabel": "Amaitzean duen asmo nagusia",
       "empresaObjetivoLabel": "Helburuko enpresa edo sektorea (badu)",
       "empresaObjetivoPlaceholder": "Adib. IKT tokiko enpresa, klinika propioa...",
       "cicloSuperiorInteresLabel": "Goi-mailako zikloa / interesatzen zaion gradua",
       "cicloSuperiorInteresPlaceholder": "Adib. DAM, ASIR, Informatika Ingeniaritza, ADE...",
       "interesesEspecificosTitulo": "Interes zehatzak",
-      "seccion5Titulo": "5. atala: Laneratzea (zikloa amaitu ondoren)",
+      "seccion5Titulo": "Laneratzea (zikloa amaitu ondoren)",
       "seccion5InfoDesc": "Atal hau zikloa amaitzean edo graduatuen jarraipen gisa betetzen da.",
       "estadoInsercionLabel": "Laneratze-egoera",
       "relacionCicloLabel": "Lanaren eta zikloaren arteko lotura",
@@ -2400,12 +2406,6 @@
       "valoracionEgresadoLabel": "Graduatuaren balorazio orokorra (1-5)",
       "obsInsercionLabel": "Txertatze-jarraipenari buruzko oharrak",
       "obsInsercionPlaceholder": "Txertatze-prozesuari buruzko oharrak, zailtasunak, zikloaren osteko harremana...",
-      "seccion6Titulo": "6. atala: Tutorearen oharrak eta jarraipena",
-      "reunionesCelebradasLabel": "Egindako orientazio-bileren kopurua",
-      "fechaUltimaReunionLabel": "Azken bilera / elkarrizketaren data",
-      "fechaDerivacionLabel": "Orientatzailera bideratze-data",
-      "resumenOrientacionLabel": "Orientazio-laburpena (testu librea)",
-      "resumenOrientacionPlaceholder": "Idatzi hemen orientazioaren laburpena: hartutako erabakiak, ikasleekin eta familiarekin adostutakoa, hurrengo urratsak...",
       "selectaAlumnadoDesc": "Hautatu ikasle bat ezkerreko zerrendatik."
     },
     "comun": {
@@ -2571,6 +2571,9 @@
       "eval2Abrev": "2. Eb.",
       "eval3Abrev": "3. Eb.",
       "trimestresTitulo": "Hiruhilekoak",
+      "trimestre1": "1. hiruhilekoa",
+      "trimestre2": "2. hiruhilekoa",
+      "trimestre3": "3. hiruhilekoa",
       "inicioLabel": "Hasiera",
       "finLabel": "Amaiera",
       "horasLectivasReales": "Benetako irakastorduak",
@@ -2587,7 +2590,9 @@
       "festivosEventosInstruccionesPre": "Sartu eskuz edo egin klik egutegian. Jaiegunek benetako zenbaketatik orduak baztertzen dituzte. Jaieguna eta Garrantzitsua independenteak dira: egun berak biak izan ditzake aldi berean. Honakoa duten lerroek",
       "festivosEventosInstruccionesPost": "(Ikasturtearen/hiruhilekoaren hasiera/amaiera, FEOE) Datu orokorrak / FEOE aldia ataletik datoz — han editatzen dira, ez hemen.",
       "hoyBadge": "Gaur",
-      "periodoFeoeTitulo": "FEOE aldia"
+      "periodoFeoeTitulo": "FEOE aldia",
+      "nEntradasMes_one": "{{count}} sarrera",
+      "nEntradasMes_other": "{{count}} sarrera"
     },
     "diario": {
       "alumnadoActivoLabel": "Ikasle aktiboak",
@@ -2833,8 +2838,11 @@
     },
     "seguimiento": {
       "cargandoDatosSeguimiento": "Jarraipen-datuak kargatzen...",
-      "mesActualPrefijo": "UNEKOA",
-      "planificacionMensualTitulo": "Hileko plangintza"
+      "mesActualPrefijo": "UNEKOA"
+    },
+    "agenda": {
+      "planificacionSeguimientoMensualTitulo": "Hileko plangintza eta jarraipena",
+      "planoAulaTitulo": "Gelako plana"
     }
   },
   "t1": "1. hiruhilekoa",
@@ -2854,5 +2862,5 @@
   },
   "fecha": "Data",
   "hasta_opc": "Arte (aukerakoa)",
-  "sin_eventos": "Oraindik ez dago jaiegun edo ekitaldirik. Gehitu bat gainean."
+  "sin_eventos": "Oraindik ez dago jaiegun edo ekitaldirik. Gehitu bat azpian."
 }

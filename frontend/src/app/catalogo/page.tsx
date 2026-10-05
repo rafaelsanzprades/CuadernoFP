@@ -234,6 +234,15 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
   const globalData = useAppStore((state) => state.globalData);
   const regionId = globalData?.regionId || 1;
 
+  // Nº de columnas según el ancho (mismos puntos de corte md/lg de Tailwind).
+  const [numCols, setNumCols] = useState(3);
+  useEffect(() => {
+    const calc = () => setNumCols(window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1);
+    calc();
+    window.addEventListener("resize", calc);
+    return () => window.removeEventListener("resize", calc);
+  }, []);
+
   useEffect(() => {
     fetch(`${getApiBase()}/api/families?region_id=${regionId}`)
       .then((res) => res.json())
@@ -242,6 +251,7 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
           const order: Record<string, number> = { BASICA: 1, MEDIO: 2, SUPERIOR: 3, ESPECIALIZACION: 4 };
           const sorted = json.data
             .filter((f: Family) => f.code !== "AAT")
+            .sort((a: Family, b: Family) => a.name.localeCompare(b.name, "es"))
             .map((f: Family) => ({
             ...f,
             degrees: [...f.degrees].sort((a, b) => {
@@ -269,10 +279,25 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
     );
   }
 
+  // Mampostería (petición de Rafael, 2026-10-03): las baldosas, de alturas
+  // muy distintas, se encajan unas bajo otras con el mismo hueco (24px) en
+  // horizontal y vertical, pero el orden alfabético se lee de izquierda a
+  // derecha: cada familia, en orden, va a la columna que en ese momento es
+  // más corta (altura estimada: cabecera + una fila por ciclo formativo).
+  const columns: Family[][] = Array.from({ length: numCols }, () => []);
+  const heights: number[] = Array.from({ length: numCols }, () => 0);
+  families.forEach((family) => {
+    const target = heights.indexOf(Math.min(...heights));
+    columns[target].push(family);
+    heights[target] += 280 + Math.max(family.degrees.length, 1) * 56;
+  });
+
   return (
     <div className="animate-in fade-in duration-300">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {families.map((family) => (
+      <div className="flex gap-6 items-start">
+        {columns.map((colFamilies, colIdx) => (
+        <div key={colIdx} className="flex-1 min-w-0 flex flex-col gap-6">
+        {colFamilies.map((family) => (
           <div
             key={family.id}
             className="glass-card overflow-hidden hover:-translate-y-1 transition-transform duration-300"
@@ -358,6 +383,8 @@ function TabFamilias({ onSelectTitulo }: { onSelectTitulo: (familiaName: string,
               )}
             </div>
           </div>
+        ))}
+        </div>
         ))}
       </div>
     </div>

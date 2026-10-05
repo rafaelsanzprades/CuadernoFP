@@ -1,6 +1,6 @@
 // Semilla por defecto de "% Instrumentos de evaluación" por trimestre.
 // Única fuente — antes vivía duplicada (y desincronizada) en DatosTab.tsx,
-// app/instrumentos/page.tsx y app/calificaciones/page.tsx: las dos últimas
+// app/instrumentos/page.tsx y app/cierre/page.tsx: las dos últimas
 // copias no tenían `categoria`, así que el Tipo de todas las filas caía
 // siempre en el valor por defecto "Teoría" en la tabla resumen de
 // /instrumentos (bug real, detectado por Rafael el 2026-08-16).
