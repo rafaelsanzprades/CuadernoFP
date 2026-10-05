@@ -22,7 +22,9 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { IndiceAlumnadoPanel } from "@/components/features/alumnado/PanelPorAlumno";
 import { SectionIndex } from "@/components/ui/SectionIndex";
+import { IndiceAlfabetico } from "@/components/ui/IndiceAlfabetico";
 import { GRUPOS_EVALUACION_DEFECTO } from "@/utils/calificaciones";
 
 import Link from "next/link";
@@ -41,13 +43,6 @@ function computeMilestoneDates(nacimiento?: string): { f16: string; f18: string 
     return `${String(dt.getDate()).padStart(2, '0')}/${String(dt.getMonth() + 1).padStart(2, '0')}/${dt.getFullYear()}`;
   };
   return { f16: fmt(16), f18: fmt(18) };
-}
-
-const GRUPOS_LETRAS = ["ABC", "DEF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ"];
-
-// Inicial del primer apellido sin acentos y en mayúscula (Ñ cuenta como N).
-function inicialApellido(apellidos?: string): string {
-  return String(apellidos || "").trim().normalize("NFD").replace(/[̀-ͯ]/g, "").charAt(0).toUpperCase();
 }
 
 export default function AlumnadoPage() {
@@ -288,28 +283,16 @@ export default function AlumnadoPage() {
                 fijo (sticky top-0), así que no se pierde al hacer scroll. */}
             <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
 
-            {/* Índice tipo teclado de teléfono (ABC, DEF, ...) por la inicial del
-                primer apellido -- lleva al primer alumno/a (por orden alfabético)
-                de cada grupo de letras. */}
+            {activeTab === 'orientacion' && <IndiceAlumnadoPanel className="mt-3" />}
+
+            {/* Índice tipo teclado de teléfono (ABC, DEF, ...) -- lleva al primer
+                alumno/a (por orden alfabético) de cada grupo de letras. */}
             {activeTab === 'matricula' && df_al.length > 0 && (
-              <nav aria-label={t('aria.alumnado.indiceAlfabetico', {defaultValue: 'Índice alfabético'})} className="flex flex-wrap gap-2 mt-3">
-                {GRUPOS_LETRAS.map((grupo) => {
-                  const destino = df_al
-                    .map((al: any, idx: number) => ({ idx, clave: inicialApellido(al.Apellidos), apellidos: String(al.Apellidos || "") }))
-                    .filter((x: any) => grupo.includes(x.clave))
-                    .sort((x: any, y: any) => x.apellidos.localeCompare(y.apellidos, "es"))[0];
-                  return (
-                    <button
-                      key={grupo}
-                      disabled={!destino}
-                      onClick={() => document.getElementById(`alumno-fila-${destino.idx}`)?.scrollIntoView({ behavior: "smooth", block: "start" })}
-                      className="text-caption font-medium px-3 py-1.5 rounded-lg text-white border border-white/20 hover:bg-white/10 transition-colors tracking-widest disabled:opacity-30 disabled:cursor-default disabled:hover:bg-transparent"
-                    >
-                      {grupo}
-                    </button>
-                  );
-                })}
-              </nav>
+              <IndiceAlfabetico
+                className="mt-3"
+                alumnos={df_al.map((al: any, idx: number) => ({ id: idx, apellidos: al.Apellidos }))}
+                onSelect={(idx) => document.getElementById(`alumno-fila-${idx}`)?.scrollIntoView({ behavior: "smooth", block: "start" })}
+              />
             )}
           </StickyPageHeader>
 

@@ -6,10 +6,11 @@ import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { Card } from "@/components/ui/Card";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useTranslation } from "react-i18next";
+import { getSimulatedToday } from "@/utils/planningGenerator";
 
 export function PlanificacionMensualTab() {
   const { t } = useTranslation();
-  const { cursoData, moduleData } = useAppStore();
+  const { cursoData, moduleData, dataSource } = useAppStore();
   const { df_sgmt } = useDynamicPlanning();
 
   const df_sgmt_calculated = df_sgmt.map((row: any) => {
@@ -37,6 +38,11 @@ export function PlanificacionMensualTab() {
   };
 
   const meses_display = ["Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "May", "Jun"];
+  // Mes en curso (en DEMO, el de la fecha simulada): se destaca su columna y
+  // las UD que tienen previsto o impartido algo en él.
+  const hoy = dataSource === "demo" && cursoData ? getSimulatedToday(cursoData) : new Date();
+  const mesActual = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"][hoy.getMonth()];
+  const colActual = "bg-accent/20!";
 
   if (!cursoData || !moduleData) {
     return (
@@ -62,7 +68,7 @@ export function PlanificacionMensualTab() {
               <th className="p-3 w-[64px] max-w-[64px] sticky left-[554px] bg-[#111827] z-10 text-center"></th>
               <th className="p-3 w-[90px] max-w-[90px] sticky left-[618px] bg-[#111827] z-10 text-center border-r border-[var(--glass-border)]"></th>
               {meses_display.map((m) => (
-                <th key={m} colSpan={2} className="p-1 text-center border-r border-[var(--glass-border)]">{m}</th>
+                <th key={m} colSpan={2} className={`p-1 text-center border-r border-[var(--glass-border)] ${m === mesActual ? "bg-accent/25 text-accent font-bold border-t-2 border-t-accent" : ""}`}>{m}</th>
               ))}
             </tr>
             <tr className="border-b border-[var(--glass-border)] text-caption text-muted bg-foreground/5">
@@ -73,8 +79,8 @@ export function PlanificacionMensualTab() {
               <th className="p-2 w-[90px] max-w-[90px] truncate overflow-hidden sticky left-[618px] bg-[#111827] z-10 text-center text-warning border-r border-[var(--glass-border)]" title={t('tooltips.dashboard.pctImpartidoPrevisto', {defaultValue: '% impartido / previsto'})}>%Imp/Prv</th>
               {meses_display.map((m) => (
                 <React.Fragment key={m}>
-                  <th className="p-1 w-[40px] text-center text-info">{t('tablas.dashboard.prv', {defaultValue: 'Prv'})}</th>
-                  <th className="p-1 w-[40px] text-center text-[#14a085]/70 border-r border-[var(--glass-border)]">{t('tablas.dashboard.imp', {defaultValue: 'Imp'})}</th>
+                  <th className={`p-1 w-[40px] text-center text-info ${m === mesActual ? colActual : ""}`}>{t('tablas.dashboard.prv', {defaultValue: 'Prv'})}</th>
+                  <th className={`p-1 w-[40px] text-center text-[#14a085]/70 border-r border-[var(--glass-border)] ${m === mesActual ? colActual : ""}`}>{t('tablas.dashboard.imp', {defaultValue: 'Imp'})}</th>
                 </React.Fragment>
               ))}
             </tr>
@@ -85,10 +91,12 @@ export function PlanificacionMensualTab() {
               const stickyBg = row.ev == 1 ? 'bg-[#181530]' : row.ev == 2 ? 'bg-[#261421]' : row.ev == 3 ? 'bg-[#231d11]' : 'bg-background group-hover:bg-[#111827]';
               const textTriClass = row.ev == 1 ? 'text-purple-300' : row.ev == 2 ? 'text-rose-300' : row.ev == 3 ? 'text-amber-300' : 'text-muted';
               const isColored = !!row.ev;
+              // UD con algo previsto o impartido en el mes en curso.
+              const activaEnMes = (Number(row[`${mesActual}_Prv`]) || 0) > 0 || (Number(row[`${mesActual}_Imp`]) || 0) > 0;
 
               return (
-              <tr key={`${row.id_ud}-${idx}`} className={`border-b border-white/5 transition-colors ${bgClass}`}>
-                <td className={`p-3 w-[50px] max-w-[50px] text-center sticky left-0 z-10 border-r border-[var(--glass-border)] font-bold shadow-[2px_0_5px_-2px_rgba(0,0,0,0.5)] ${stickyBg} ${textTriClass}`}>
+              <tr key={`${row.id_ud}-${idx}`} className={`border-b border-white/5 transition-colors ${bgClass} ${activaEnMes ? "outline outline-1 -outline-offset-1 outline-accent/60" : ""}`}>
+                <td className={`p-3 w-[50px] max-w-[50px] text-center sticky left-0 z-10 border-r border-[var(--glass-border)] font-bold shadow-[2px_0_5px_-2px_rgba(0,0,0,0.5)] ${stickyBg} ${textTriClass} ${activaEnMes ? "border-l-4 border-l-accent" : ""}`}>
                   {row.ev ? `${row.ev}ª` : ''}
                 </td>
                 <td
@@ -104,8 +112,8 @@ export function PlanificacionMensualTab() {
                 </td>
                 {meses_display.map((m) => (
                   <React.Fragment key={m}>
-                    <td className={`p-1 w-[40px] text-center ${isColored ? 'text-white/80' : 'text-foreground/60'}`}>{Number(row[`${m}_Prv`]) || ''}</td>
-                    <td className={`p-1 w-[40px] text-center font-semibold border-r border-[var(--glass-border)] ${isColored ? 'bg-black/20 text-[#34d399]' : 'bg-[#14a085]/5 text-[#14a085]'}`}>{Number(row[`${m}_Imp`]) || ''}</td>
+                    <td className={`p-1 w-[40px] text-center ${m === mesActual ? colActual : ''} ${isColored ? 'text-white/80' : 'text-foreground/60'}`}>{Number(row[`${m}_Prv`]) || ''}</td>
+                    <td className={`p-1 w-[40px] text-center font-semibold border-r border-[var(--glass-border)] ${m === mesActual ? colActual : ''} ${isColored ? 'bg-black/20 text-[#34d399]' : 'bg-[#14a085]/5 text-[#14a085]'}`}>{Number(row[`${m}_Imp`]) || ''}</td>
                   </React.Fragment>
                 ))}
               </tr>

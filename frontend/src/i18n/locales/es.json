@@ -68,7 +68,7 @@
         "desc": "Tus clases de hoy, la semana y la unidad en curso."
       },
       "avance": {
-        "label": "Avance",
+        "label": "Avance de UD",
         "desc": "Planificación y seguimiento mensual de las unidades didácticas según lo impartido."
       },
       "progresoRaUd": {
@@ -135,7 +135,7 @@
     "instrumentos": "Definición y pesos de las herramientas de evaluación.",
     "calendario": "Horario, trimestres, festivos, periodo FEOE, vista mensual y tus clases de hoy, la semana y la unidad en curso.",
     "alumnado": "Fichas personales y orientación profesional.",
-    "seguimiento": "Diario de clases, avance mensual, progreso de RA y asistencia.",
+    "seguimiento": "Asistencia, riesgo de abandono, diario de clases, avance mensual de UD y progreso de RA.",
     "calificaciones": "Notas, boletín y valoración en la empresa (FEOE) por alumnado, y reclamaciones.",
     "cierre": "Resultados y notas del curso, mejora del módulo (EQAVET y PDCA), tendencias del grupo, e inserción laboral y expediente por alumnado."
   },

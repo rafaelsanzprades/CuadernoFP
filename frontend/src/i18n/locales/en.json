@@ -1,7 +1,7 @@
 {
   "tabs": {
     "cierre": {
-      "expediente": {
+        "expediente": {
         "label": "Record",
         "desc": "Job placement after the cycle and record (timeline of evidence) per student."
       }
@@ -90,6 +90,10 @@
       }
     },
     "seguimiento": {
+        "abandono": {
+          "label": "Dropout risk",
+          "desc": "Dropout risk summary based on attendance and grades."
+        },
       "clases": {
         "label": "Classes",
         "desc": "Class journal, teaching sessions and record of contingencies."
@@ -348,7 +352,7 @@
         "desc": "Today's classes, the week and the current unit."
       },
       "avance": {
-        "label": "Progress",
+        "label": "Teaching unit progress",
         "desc": "Monthly planning and tracking of the teaching units based on what has been delivered."
       },
       "progresoRaUd": {
@@ -453,7 +457,7 @@
     "ayuda_desc": "Getting-started guide, FAQ, acronyms and community contributions.",
     "contexto_desc": "General information, environment characteristics, students and module.",
     "magia_desc": "Generation of the teaching plan and reports.",
-    "seguimiento_desc": "Class journal, attendance and FEOE company.",
+    "seguimiento_desc": "Attendance, dropout risk, class diary, monthly progress of teaching units and RA progress.",
     "metodologia_desc": "Methodological strategies, resources, spaces and attention to diversity."
   },
   "common": {
@@ -502,7 +506,7 @@
     "instrumentos": "Definition and weighting of assessment instruments.",
     "calendario": "Schedule, terms, holidays, FEOE period, monthly view and today's classes, the week and the current unit.",
     "alumnado": "Personal records and career guidance.",
-    "seguimiento": "Class diary, monthly progress, RA progress and attendance.",
+    "seguimiento": "Attendance, dropout risk, class diary, monthly progress of teaching units and RA progress.",
     "calificaciones": "Grades, report card and company assessment (FEOE) per student, and appeals.",
     "cierre": "Course results and grades, module improvement (EQAVET and PDCA), group trends, and job placement and record per student."
   },
@@ -1167,7 +1171,7 @@
     "diario": {
       "acumuladoTrimestral": "Term cumulative",
       "hoy": "Today",
-      "alertasAbandono": "Drop-out alerts"
+      "alertasAbandono": "Dropout summary"
     },
     "instrumentos": {
       "agente_autoevaluacion": "Self-assessment (student themselves)",
@@ -2016,7 +2020,8 @@
       "riesgoAlto": "🟠 High",
       "riesgoModerado": "🟡 Moderate",
       "riesgoMuyAlto": "Very high",
-      "seguimientoRiesgo": "Academic risk tracking",
+      "seguimientoRiesgo": "Academic performance control",
+      "controlFaltasAsistencia": "Absence control",
       "simuladorCalificaciones": "Grade simulator",
       "simuladorDescripcion": "Experiment with your grades to project your final result.",
       "sinActividades": "No activities",
@@ -2284,6 +2289,7 @@
       "avanceRaLabel": "RA progress",
       "horasLectivasLabel": "Teaching hours",
       "sinUdsAsignadas": "No UDs assigned",
+      "sinDocenciaTodavia": "No teaching yet",
       "sinRaDefinidos": "No Learning Outcomes (RA) defined.",
       "cargandoMatrices": "Loading matrices...",
       "confirmarAutocompletarPlanSesiones": "Are you sure you want to auto-fill the session plan? This will replace the current sessions of all UDs.",
@@ -2393,7 +2399,8 @@
       "cicloSuperiorInteresLabel": "Higher-level cycle / degree of interest",
       "cicloSuperiorInteresPlaceholder": "E.g. DAM, ASIR, Computer Engineering, ADE...",
       "interesesEspecificosTitulo": "Specific interests",
-      "seccion5Titulo": "Job placement (after the cycle)",
+      "seccion5Titulo": "Job placement",
+      "seccion8Titulo": "Evidence report",
       "seccion5InfoDesc": "This section is filled in at the end of the cycle or as follow-up for graduates.",
       "estadoInsercionLabel": "Job placement status",
       "relacionCicloLabel": "Relationship between the job and the cycle",

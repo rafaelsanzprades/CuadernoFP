@@ -1,11 +1,28 @@
 "use client";
 import { ChevronDown, ChevronUp, HelpCircle, Users } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { Alumnado } from "@/types";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { useTranslation } from "react-i18next";
+import { IndiceAlfabetico } from "@/components/ui/IndiceAlfabetico";
+
+// El índice alfabético (ABC DEF ...) vive en la cabecera fija de cada página
+// (fuera de este panel) y avisa por evento de a quién seleccionar.
+const EVENTO_SELECCIONAR = "panel-alumno-seleccionar";
+
+export function IndiceAlumnadoPanel({ className = "" }: { className?: string }) {
+  const { cursoData } = useAppStore();
+  const activos = (cursoData?.df_al || []).filter(isAlumnoActivo);
+  return (
+    <IndiceAlfabetico
+      className={className}
+      alumnos={activos.map((a: Alumnado) => ({ id: a.ID || "", apellidos: a.Apellidos }))}
+      onSelect={(id) => window.dispatchEvent(new CustomEvent(EVENTO_SELECCIONAR, { detail: id }))}
+    />
+  );
+}
 
 // Estilo "lista de alumnado a la izquierda + panel de secciones desplegables
 // a la derecha", común a Alumnado -> Orientación profesional, Calificaciones
@@ -115,13 +132,16 @@ export function useFichaProfesional(studentId: string) {
 // ─── Panel: lista de alumnado + secciones ─────────────────────────────────────
 
 export function PanelPorAlumno({
-  children, badge, hasData,
+  children, badge, hasData, rowExtra,
 }: {
   children: (student: Alumnado) => React.ReactNode;
   // Etiqueta opcional a la derecha de la cabecera del alumno/a.
   badge?: (student: Alumnado) => React.ReactNode;
   // Punto indicador en la lista (p.ej. "ya tiene datos").
   hasData?: (studentId: string) => boolean;
+  // Contenido opcional a la derecha de cada fila de la lista (p.ej. el estado
+  // de asistencia del día). Recibe el alumno/a; sus clics no seleccionan la fila.
+  rowExtra?: (student: Alumnado) => React.ReactNode;
 }) {
   const { t } = useTranslation();
   const { cursoData } = useAppStore();
@@ -138,6 +158,16 @@ export function PanelPorAlumno({
       setSelectedStudentId(activeStudents[0].ID || "");
     }
   }, [activeStudents.length]);
+
+  useEffect(() => {
+    const alSeleccionar = (e: Event) => {
+      const id = (e as CustomEvent<string>).detail;
+      setSelectedStudentId(id);
+      setTimeout(() => document.getElementById(`panel-alumno-${id}`)?.scrollIntoView({ block: "nearest", behavior: "smooth" }), 0);
+    };
+    window.addEventListener(EVENTO_SELECCIONAR, alSeleccionar);
+    return () => window.removeEventListener(EVENTO_SELECCIONAR, alSeleccionar);
+  }, []);
 
   if (activeStudents.length === 0) {
     return (
@@ -164,6 +194,7 @@ export function PanelPorAlumno({
             return (
               <button
                 key={al.ID}
+                id={`panel-alumno-${al.ID}`}
                 onClick={() => setSelectedStudentId(al.ID || "")}
                 className={`w-full text-left px-3.5 py-3 rounded-xl transition-all flex items-center justify-between ${
                   isSelected
@@ -175,6 +206,7 @@ export function PanelPorAlumno({
                   <div className="text-body truncate">{al.Apellidos}, {al.Nombre}</div>
                   <div className={`text-caption font-mono ${isSelected ? "text-background/70" : "text-muted"}`}>{al.ID}</div>
                 </div>
+                {rowExtra?.(al)}
                 {hasData?.(al.ID!) && (
                   <div
                     className={`w-2 h-2 rounded-full shrink-0 ${isSelected ? "bg-background/60" : "bg-accent/70"}`}

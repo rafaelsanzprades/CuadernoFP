@@ -1,5 +1,5 @@
 "use client";
-import { AlertOctagon, Calendar, FileText, History } from "lucide-react";
+import { AlertOctagon, BarChart, Calendar, FileText, History } from "lucide-react";
 import { TabSync } from "@/components/ui/TabSync";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { useTranslation } from "react-i18next";
@@ -9,11 +9,13 @@ import { useAppStore } from "@/store/useAppStore";
 import { WelcomeWizard } from "@/components/features/dashboard/WelcomeWizard";
 import { useModulesList } from "@/hooks/useApi";
 import { useEffect, useState } from "react";
+import { ResumenTrimestralTab } from "@/components/features/evaluacion/ResumenTrimestralTab";
 import { HistorialCalificacionesTab } from "@/components/features/evaluacion/HistorialCalificacionesTab";
 import { ReclamacionesTab } from "@/components/features/evaluacion/ReclamacionesTab";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { DetalleAlumnadoTab } from "@/components/features/evaluacion/DetalleAlumnadoTab";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
+import { IndiceAlumnadoPanel } from "@/components/features/alumnado/PanelPorAlumno";
 import { SectionIndex } from "@/components/ui/SectionIndex";
 import { getApiBase } from "@/services/apiBase";
 
@@ -56,6 +58,7 @@ export default function AgendaPage() {
   const reclamacionesPendientes = (cursoData?.df_reclamaciones || []).filter((r: any) => r.estado === "pendiente").length;
   const TABS = [
     { id: "academicas", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.academicas.label', {defaultValue: 'Académicas'})}</>, cleanLabel: t('tabs.alumnado.academicas.label', {defaultValue: 'Académicas'}) },
+    { id: "trimestral", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.resumenTrimestral', {defaultValue: 'Trimestral'})}</>, cleanLabel: t('tabs.calificaciones.resumenTrimestral', {defaultValue: 'Trimestral'}) },
     // Traída desde Cierre (antes pestaña "Histórico", 2026-10-05).
     { id: "reclamaciones", label: <><span className="inline-flex"><AlertOctagon className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.reclamaciones.label', {defaultValue: 'Reclamaciones'})}
         {reclamacionesPendientes > 0 && (
@@ -69,6 +72,7 @@ export default function AgendaPage() {
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     academicas: t('tabs.alumnado.academicas.desc', {defaultValue: 'Entrada de notas numéricas por alumnado, instrumento de evaluación y nivel de adquisición de RA.'}),
+    trimestral: t('tabs.calificaciones.resumen.desc', {defaultValue: 'Notas del grupo por instrumento y trimestre.'}),
     reclamaciones: t('tabs.calificaciones.historico.desc', {defaultValue: 'Registro de cambios de nota y reclamaciones presentadas por el alumnado.'}),
   };
 
@@ -117,6 +121,8 @@ export default function AgendaPage() {
             {/* Índice de bloques de la pestaña activa -- dentro del header
                 fijo (sticky top-0), así que no se pierde al hacer scroll. */}
             <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
+
+            {activeTab === 'academicas' && <IndiceAlumnadoPanel className="mt-3" />}
           </StickyPageHeader>
 
           <div className="w-full space-y-4 px-8 pt-4 pb-12">
@@ -125,6 +131,12 @@ export default function AgendaPage() {
             {activeTab === "academicas" && (
               <div className="animate-in fade-in duration-500 w-full">
                 <DetalleAlumnadoTab />
+              </div>
+            )}
+
+            {activeTab === "trimestral" && (
+              <div className="animate-in fade-in duration-500 w-full">
+                <ResumenTrimestralTab />
               </div>
             )}
 

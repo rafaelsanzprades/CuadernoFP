@@ -1,7 +1,7 @@
 {
   "tabs": {
     "cierre": {
-      "expediente": {
+        "expediente": {
         "label": "Expedient",
         "desc": "Inserció laboral post-cicle i expedient (línia temporal d'evidències) per alumnat."
       }
@@ -92,6 +92,10 @@
       }
     },
     "seguimiento": {
+        "abandono": {
+          "label": "Risc d'abandonament",
+          "desc": "Resum de risc d'abandonament a partir de l'assistència i les notes."
+        },
       "clases": {
         "label": "Classes",
         "desc": "Diari de classes, sessions lectives i registre de contingències."
@@ -350,7 +354,7 @@
         "desc": "Les teves classes d'avui, la setmana i la unitat en curs."
       },
       "avance": {
-        "label": "Avanç",
+        "label": "Avanç d'UD",
         "desc": "Planificació i seguiment mensual de les unitats didàctiques segons el que s'ha impartit."
       },
       "progresoRaUd": {
@@ -455,7 +459,7 @@
     "ayuda_desc": "Guia d'inici, FAQ, acrònims i contribucions de la comunitat.",
     "contexto_desc": "Informació general, característiques de l'entorn, alumnat i mòdul.",
     "magia_desc": "Generació de la programació didàctica i informes.",
-    "seguimiento_desc": "Diari de classes, assistència i empresa FEOE.",
+    "seguimiento_desc": "Assistència, risc d'abandonament, diari de classes, avanç mensual d'UD i progrés dels RA.",
     "metodologia_desc": "Estratègies metodològiques, recursos, espais i atenció a la diversitat."
   },
   "common": {
@@ -504,7 +508,7 @@
     "instrumentos": "Definició i pesos de les eines d'avaluació.",
     "calendario": "Horari, trimestres, festius, període FEOE, vista mensual i les teves classes d'avui, la setmana i la unitat en curs.",
     "alumnado": "Fitxes personals i orientació professional.",
-    "seguimiento": "Diari de classes, avanç mensual, progrés dels RA i assistència.",
+    "seguimiento": "Assistència, risc d'abandonament, diari de classes, avanç mensual d'UD i progrés dels RA.",
     "calificaciones": "Notes, butlletí i valoració a l'empresa (FEOE) per alumnat, i reclamacions.",
     "cierre": "Resultats i notes del curs, millora del mòdul (EQAVET i PDCA), tendències del grup, i inserció laboral i expedient per alumnat."
   },
@@ -1169,7 +1173,7 @@
     "diario": {
       "acumuladoTrimestral": "Acumulat trimestral",
       "hoy": "Avui",
-      "alertasAbandono": "Alertes d'abandonament"
+      "alertasAbandono": "Resum d'abandonament"
     },
     "instrumentos": {
       "agente_autoevaluacion": "Autoavaluació (propi alumne)",
@@ -2018,7 +2022,8 @@
       "riesgoAlto": "🟠 Alt",
       "riesgoModerado": "🟡 Moderat",
       "riesgoMuyAlto": "Molt alt",
-      "seguimientoRiesgo": "Seguiment de risc acadèmic",
+      "seguimientoRiesgo": "Control de rendiment acadèmic",
+      "controlFaltasAsistencia": "Control de faltes d'assistència",
       "simuladorCalificaciones": "Simulador de qualificacions",
       "simuladorDescripcion": "Experimenta amb les teves notes per projectar el teu resultat final.",
       "sinActividades": "Sense activitats",
@@ -2286,6 +2291,7 @@
       "avanceRaLabel": "Avanç RA",
       "horasLectivasLabel": "Hores lectives",
       "sinUdsAsignadas": "Sense UD assignades",
+      "sinDocenciaTodavia": "Encara sense docència",
       "sinRaDefinidos": "No hi ha Resultats d'aprenentatge (RA) definits.",
       "cargandoMatrices": "Carregant matrius...",
       "confirmarAutocompletarPlanSesiones": "Segur que vols autocompletar el pla de sessions? Això reemplaçarà les sessions actuals de totes les UD.",
@@ -2395,7 +2401,8 @@
       "cicloSuperiorInteresLabel": "Cicle superior / grau d'interès",
       "cicloSuperiorInteresPlaceholder": "Ex. DAM, ASIR, Enginyeria Informàtica, ADE...",
       "interesesEspecificosTitulo": "Interessos específics",
-      "seccion5Titulo": "Inserció laboral (post-cicle)",
+      "seccion5Titulo": "Inserció laboral",
+      "seccion8Titulo": "Informe d'evidències",
       "seccion5InfoDesc": "Aquesta secció s'emplena en finalitzar el cicle o com a seguiment de l'alumnat egressat.",
       "estadoInsercionLabel": "Estat d'inserció laboral",
       "relacionCicloLabel": "Relació de la feina amb el cicle",
