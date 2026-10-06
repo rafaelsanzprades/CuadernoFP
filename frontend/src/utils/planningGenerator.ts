@@ -6,7 +6,7 @@ import { ModuleData, CursoData } from '@/types';
 // en vez de mostrar un curso completo (si "hoy" cae después de fin de curso)
 // o sin empezar (si cae antes de que arranque). Usado tanto para generar el
 // planning_ledger (más abajo) como para el auto-scroll del diario de clases
-// en /seguimiento?tab=clases (ver seguimiento/page.tsx).
+// en /sesiones?tab=lectivas (ver sesiones/page.tsx).
 export function getSimulatedToday(cursoData: CursoData): Date {
   const info_fechas = cursoData?.info_fechas || {};
   let simulatedToday = new Date();

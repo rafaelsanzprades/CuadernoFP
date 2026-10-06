@@ -410,13 +410,13 @@ export function VerificacionTab() {
       id: "seguimiento",
       icon: <ClipboardList className="w-5 h-5" />,
       title: t('campos.verificacion.diarioAulaTitulo', {defaultValue: 'Diario de aula'}),
-      href: "/seguimiento?tab=clases",
+      href: "/sesiones?tab=lectivas",
       hrefLabel: t('campos.verificacion.seguimientoLabel', {defaultValue: 'Seguimiento'}),
       status: sgmtCount === 0 ? "empty" : "ok",
       lines: sgmtCount === 0
         ? [t('campos.verificacion.sinEntradasDiario', {defaultValue: 'Sin entradas en el diario de aula'})]
         : [t('campos.verificacion.sesionesRegistradasDiario', {count: sgmtCount, defaultValue: '{{count}} sesiones registradas en el diario'})],
-      actionHref: sgmtCount === 0 ? "/seguimiento?tab=clases" : undefined,
+      actionHref: sgmtCount === 0 ? "/sesiones?tab=lectivas" : undefined,
       actionLabel: sgmtCount === 0 ? t('botones.verificacion.registrarPrimeraSesion', {defaultValue: 'Registrar primera sesión'}) : undefined,
     },
     {

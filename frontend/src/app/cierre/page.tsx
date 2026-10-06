@@ -1,31 +1,25 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BarChart, ClipboardList, Save, TrendingUp, User, FolderOpen, LineChart, Target, Shield, PieChart, Users } from "lucide-react";
+import { Save, TrendingUp, FolderOpen, Shield, CalendarRange, Target } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAppStore } from "@/store/useAppStore";
 import { loadCatalogForModule } from "@/services/catalogCache";
-import { isAlumnoActivo } from "@/utils/alumnado";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { useTranslation } from "react-i18next";
-import { AnalisisGrupalTab } from "@/components/features/analisis/AnalisisGrupalTab";
-import { AnalisisIndividualTab } from "@/components/features/analisis/AnalisisIndividualTab";
-import EstadisticasTab from "@/components/features/evaluacion/EstadisticasTab";
-import { InsercionExpedienteTab } from "@/components/features/alumnado/InsercionExpedienteTab";
-import { TendenciasProfesionalTab } from "@/components/features/alumnado/TendenciasProfesionalTab";
+import { PlanificacionMensualTab } from "@/components/features/dashboard/PlanificacionMensualTab";
+import { ProgresoRaTab } from "@/components/features/evaluacion/ProgresoRaTab";
 import { EqavetTab } from "@/components/features/modulo/EqavetTab";
 import { PropuestasTab } from "@/components/features/modulo/PropuestasTab";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
-import { IndiceAlumnadoPanel } from "@/components/features/alumnado/PanelPorAlumno";
 import { SectionIndex } from "@/components/ui/SectionIndex";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import Link from "next/link";
-import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
 import { getApiBase } from "@/services/apiBase";
 
 export default function ProgresoPage() {
@@ -44,8 +38,7 @@ export default function ProgresoPage() {
   const [saveMessage, setSaveMessage] = useState("");
   const [saveIsError, setSaveIsError] = useState(false);
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState("expediente");
-  const [analisisView, setAnalisisView] = useState<"grupal" | "individual">("grupal");
+  const [activeTab, setActiveTab] = useState("avance-ud");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -121,21 +114,6 @@ export default function ProgresoPage() {
     return <LoadingSpinner text={t('campos.calificaciones.cargandoDatosProgreso', {defaultValue: 'Cargando datos de progreso académico...'})} />;
   }
 
-  const df_al = cursoData?.df_al || [];
-  const df_eval = cursoData?.df_eval || [];
-  const df_act = moduleData?.df_act || [];
-
-  const df_evaluable = df_al.filter(isAlumnoActivo);
-  df_evaluable.sort((a: any, b: any) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
-
-  const acts_by_tri: Record<string, any[]> = { "1T": [], "2T": [], "3T": [] };
-  df_act.forEach((act: any) => {
-    if (act.id_act && String(act.id_act).trim() !== "") {
-      const tri = act.tri_act || "1T";
-      if (acts_by_tri[tri]) acts_by_tri[tri].push(act);
-    }
-  });
-
 
   // Ítem "reorganización Calificación" (2026-09-23, petición de Rafael): de 5
   // pestañas a 3, cada una con un switcher interno en vez de acordeones o
@@ -146,16 +124,14 @@ export default function ProgresoPage() {
   // comparten el mismo selector de alumnado, solo cambia si se ve un informe
   // formateado o la línea temporal en bruto).
   const TABS = [
-    { id: "expediente", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.cierre.expediente.label', {defaultValue: 'Expediente'})}</>, cleanLabel: t('tabs.cierre.expediente.label', {defaultValue: 'Expediente'}) },
-    { id: "resumen", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.resumen')}</>, cleanLabel: t('tabs.resumen') },
-    { id: "perfilTendencias", label: <><span className="inline-flex"><LineChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.perfilTendencias.label', {defaultValue: 'Tendencias'})}</>, cleanLabel: t('tabs.alumnado.perfilTendencias.label', {defaultValue: 'Tendencias'}) },
+    { id: "avance-ud", label: <><span className="inline-flex"><CalendarRange className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.agenda.avance.label', {defaultValue: 'Avance de UD'})}</>, cleanLabel: t('tabs.agenda.avance.label', {defaultValue: 'Avance de UD'}) },
+    { id: "progreso-ra-ud", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.progresoRaUd', {defaultValue: 'Progreso RA-UD'})}</>, cleanLabel: t('tabs.calificaciones.progresoRaUd', {defaultValue: 'Progreso RA-UD'}) },
     { id: "mejora", label: <><span className="inline-flex"><Shield className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.inicio.mejora.label', {defaultValue: 'Mejora'})}</>, cleanLabel: t('tabs.inicio.mejora.label', {defaultValue: 'Mejora'}) },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    resumen: t('tabs.calificaciones.resumen.desc', {defaultValue: 'Panel global de rendimiento: calificaciones medias, progreso por RA/UD, estadísticas y análisis comparativo.'}),
-    perfilTendencias: t('tabs.alumnado.perfilTendencias.desc', {defaultValue: 'Agregados y tendencias del perfil profesional del grupo, y tabla filtrable de todo el alumnado.'}),
-    expediente: t('tabs.cierre.expediente.desc', {defaultValue: 'Inserción laboral post-ciclo y expediente (línea temporal de evidencias) por alumnado.'}),
+    'avance-ud': t('tabs.agenda.avance.desc', {defaultValue: 'Planificación y seguimiento mensual de las unidades didácticas según lo impartido.'}),
+    'progreso-ra-ud': t('tabs.agenda.progresoRaUd.desc', {defaultValue: 'Progreso de los resultados de aprendizaje: nota del grupo, avance, horas y estado de las unidades didácticas de cada RA.'}),
     mejora: t('tabs.inicio.mejora.desc', {defaultValue: 'Gestión de la calidad, evaluación del proceso e indicadores para el módulo.'}),
   };
 
@@ -168,10 +144,6 @@ export default function ProgresoPage() {
   // el selector. mejora es una pestaña apilada normal (EqavetTab +
   // PropuestasTab).
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
-    resumen: [
-      { id: "calificaciones-resumen-estadisticas", label: t('tabs.calificaciones.estadisticas.label', {defaultValue: 'Estadísticas'})},
-      { id: "calificaciones-resumen-analisis", label: t('tabs.calificaciones.analisis.label', {defaultValue: 'Análisis'})},
-    ],
     mejora: [
       { id: "calificaciones-eqavet", label: t('checks.modulo.indicadoresCalidad', {defaultValue: 'Indicadores de calidad'}) },
       { id: "calificaciones-propuestas", label: t('campos.modulo.tituloPropuestasMejora', {defaultValue: 'Propuestas de Mejora (PDCA)'}) },
@@ -226,7 +198,6 @@ export default function ProgresoPage() {
                 SECTION_INDEX_ITEMS). */}
             <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
 
-            {activeTab === 'expediente' && <IndiceAlumnadoPanel className="mt-3" />}
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-3 px-8 pt-4 pb-12">
@@ -251,39 +222,6 @@ export default function ProgresoPage() {
               la app -- el switcher ocultaba 3 de cada 4 bloques sin razón
               una vez que la página ya tiene su propio índice de navegación
               rápida en el header. */}
-          {activeTab === "resumen" && (
-            <div className="space-y-8 animate-in fade-in duration-500">
-              <div className="space-y-3">
-              <SectionHeading id="calificaciones-resumen-estadisticas" icon={PieChart} scrollMt="260px">
-                {t('tabs.calificaciones.estadisticas.label', {defaultValue: 'Estadísticas'})}
-              </SectionHeading>
-              <EstadisticasTab />
-              </div>
-
-              <div className="space-y-3">
-              <SectionHeading id="calificaciones-resumen-analisis" icon={LineChart} scrollMt="260px">
-                {t('tabs.calificaciones.analisis.label', {defaultValue: 'Análisis'})}
-              </SectionHeading>
-              <div className="space-y-4">
-                <div className="inline-flex rounded-xl border border-[var(--glass-border)] bg-foreground/5 p-1">
-                  <button
-                    onClick={() => setAnalisisView("grupal")}
-                    className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${analisisView === "grupal" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
-                  >
-                    <ClipboardList className="w-4 h-4" /> {t('tabs.grupal')}
-                  </button>
-                  <button
-                    onClick={() => setAnalisisView("individual")}
-                    className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-body font-semibold transition-colors ${analisisView === "individual" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
-                  >
-                    <User className="w-4 h-4" /> {t('tabs.individual')}
-                  </button>
-                </div>
-                {analisisView === "grupal" ? <AnalisisGrupalTab /> : <AnalisisIndividualTab />}
-              </div>
-              </div>
-            </div>
-          )}
 
           {/* TAB 2: HISTÓRICO -- fusiona (2026-09-23) Histórico de cambios de
               nota y Reclamaciones: las dos son un registro que en la
@@ -299,16 +237,18 @@ export default function ProgresoPage() {
               <PropuestasTab />
             </div>
           )}
-          {activeTab === "perfilTendencias" && (
-            <div className="mt-4 animate-in fade-in duration-500">
-              <TendenciasProfesionalTab />
+          {activeTab === 'avance-ud' && (
+            <div className="mt-4">
+              <PlanificacionMensualTab />
             </div>
           )}
-          {activeTab === "expediente" && (
-            <div className="mt-4 animate-in fade-in duration-500">
-              <InsercionExpedienteTab />
+
+          {activeTab === 'progreso-ra-ud' && (
+            <div className="mt-4">
+              <ProgresoRaTab />
             </div>
           )}
+
           </MotionWrapper>
         </main>
       </div>

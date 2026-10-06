@@ -1,9 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import { BarChart, Target, ClipboardList, FileDown, BookMarked, FileText, Building2 } from "lucide-react";
+import { BarChart, Target, ClipboardList, FileDown, BookMarked, FileText, Building2, FileClock, TrendingUp } from "lucide-react";
 import { PanelPorAlumno, SeccionAcordeon } from "@/components/features/alumnado/PanelPorAlumno";
 import { BoletinesTab } from "@/components/features/alumnado/BoletinesTab";
 import { FeoeEmpresaAlumno } from "./FeoeEmpresaTab";
+import { getSimulatedToday } from "@/utils/planningGenerator";
+import { InsercionLaboral } from "@/components/features/alumnado/InsercionLaboral";
+import { ExpedienteTab } from "@/components/features/alumnado/ExpedienteTab";
 import { CalificarConRubricaModal } from "./CalificarConRubricaModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { LineChart, Line, ResponsiveContainer, YAxis } from "recharts";
@@ -19,7 +22,7 @@ import { useTranslation } from "react-i18next";
 import { getApiBase } from "@/services/apiBase";
 
 export function DetalleAlumnadoTab() {
-  const { activeModuleId, moduleData, cursoData, updateCursoData } = useAppStore();
+  const { activeModuleId, moduleData, cursoData, updateCursoData, dataSource } = useAppStore();
   const { t } = useTranslation();
   const { planningLedgerDmy } = useDynamicPlanning();
 
@@ -43,6 +46,19 @@ export function DetalleAlumnadoTab() {
   const df_indicadores = moduleData?.df_indicadores || [];
   const df_calificaciones = cursoData?.df_calificaciones || [];
   const info_fechas = cursoData?.info_fechas || {};
+  // Trimestre en curso (en DEMO, el de la fecha simulada): es el que se abre por
+  // defecto en las notas de cada alumno/a. Si hoy cae entre trimestres, el
+  // siguiente que empiece; pasado el último, el 3T.
+  const trimestreActual = (() => {
+    const hoy = dataSource === "demo" && cursoData ? getSimulatedToday(cursoData) : new Date();
+    const p = (n: number) => String(n).padStart(2, "0");
+    const iso = `${hoy.getFullYear()}-${p(hoy.getMonth() + 1)}-${p(hoy.getDate())}`;
+    for (const n of [1, 2, 3]) {
+      const fin = String(info_fechas[`fin_${n}t`] || "").slice(0, 10);
+      if (fin && iso <= fin) return `${n}T`;
+    }
+    return "3T";
+  })();
   const planning_ledger = planningLedgerDmy || {}; // claves dd/mm/aaaa
 
   const df_evaluable = [...df_al].filter(isAlumnoActivo);
@@ -256,7 +272,7 @@ export function DetalleAlumnadoTab() {
           // así que reutilizamos la función también para el override manual.
           const sigadOverride = evRow.Sigad_Override;
           const sigad = sigadOverride != null ? getSigadInfo(Number(sigadOverride)) : getSigadInfo(nota_prev);
-          const activeStudentTab = activeTabByStudent[al_id] || "1T";
+          const activeStudentTab = activeTabByStudent[al_id] || trimestreActual;
 
           // Motor JEG, modo automático (Indicador->CE->RA->Módulo, Ítem 42 punto 6, ver
           // utils/calificaciones.ts). Con el peso repartido igual entre indicadores
@@ -273,7 +289,10 @@ export function DetalleAlumnadoTab() {
             // (Ítem 42 punto 6) -- solo se aplica a la vía ordinaria.
             const topeActivo = notasCalc.ra_tope_activo[ra_id] || false;
 
-            const prop = nota_ra === null ? 0 : Math.min(100.0, Math.max(0.0, (nota_ra / 5.0) * 100.0));
+            // Grado de consecución en %: la nota 0-10 del RA x 10 (un 5 = 50%, el
+            // aprobado), igual que Progreso RA-UD. Antes era nota/5, y cualquier RA
+            // aprobado salía al 100% sin distinguir un 5 de un 10.
+            const prop = nota_ra === null ? 0 : Math.min(100.0, Math.max(0.0, nota_ra * 10));
 
             resultados_ra.push({
               id: ra_id, desc: info.desc, pond: info.pond, prop, nota: nota_ra, topeActivo,
@@ -417,8 +436,8 @@ export function DetalleAlumnadoTab() {
                         <div className="space-y-5">
                           {resultados_ra.map((r, idx) => {
                             let bar_color = "#dc3545";
-                            if (r.prop >= 100) bar_color = "#198754";
-                            else if (r.prop >= 80) bar_color = "#0d6efd";
+                            if (r.prop >= 90) bar_color = "#198754";
+                            else if (r.prop >= 70) bar_color = "#0d6efd";
                             else if (r.prop >= 50) bar_color = "#ffc107";
 
                             return (
@@ -436,7 +455,8 @@ export function DetalleAlumnadoTab() {
                                   </div>
                                   <div className="text-caption text-muted mb-3 line-clamp-1">{r.desc}</div>
 
-                                  <div className="w-full bg-background/50 rounded-full h-4.5 border border-white/5 overflow-hidden">
+                                  <div className="relative w-full bg-background/50 rounded-full h-4.5 border border-white/5 overflow-hidden">
+                                    <div className="absolute top-0 bottom-0 w-px bg-foreground/40 z-10" style={{ left: "50%" }} title={t('campos.evaluacion.marcaAprobado', {defaultValue: 'Aprobado (50%)'})} />
                                     <div
                                       className="h-full rounded-full transition-all duration-500 flex items-center justify-end pr-2 text-caption font-black text-foreground shadow-[inset_0_2px_4px_rgba(255,255,255,0.2)]"
                                       style={{ width: `${Math.max(r.prop, 5)}%`, backgroundColor: bar_color }}
@@ -530,6 +550,12 @@ export function DetalleAlumnadoTab() {
             </SeccionAcordeon>
             <SeccionAcordeon title={t('tabs.seguimiento.empresaFeoe.label', {defaultValue: 'Empresa FEOE'})} icon={<Building2 className="w-5 h-5 text-warning" />}>
               <FeoeEmpresaAlumno studentId={al.ID} />
+            </SeccionAcordeon>
+            <SeccionAcordeon title={t('campos.orientacion.seccion8Titulo', {defaultValue: 'Informe de evidencias'})} icon={<FileClock className="w-5 h-5 text-muted" />}>
+              <ExpedienteTab studentId={al.ID} />
+            </SeccionAcordeon>
+            <SeccionAcordeon title={t('campos.orientacion.seccion5Titulo', {defaultValue: 'Inserción laboral'})} icon={<TrendingUp className="w-5 h-5 text-info" />}>
+              <InsercionLaboral studentId={al.ID} />
             </SeccionAcordeon>
           </>
         )}

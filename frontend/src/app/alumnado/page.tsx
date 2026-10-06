@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { Activity, LayoutGrid, Save, Target, Users, AlertTriangle, Compass, Map, MessageSquare, Route, FolderOpen, Mail, Phone, Calendar, X } from "lucide-react";
+import { LayoutGrid, LineChart, Save, Target, Users, AlertTriangle, Compass, Map, MessageSquare, Route, FolderOpen, Mail, Phone, Calendar, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -14,8 +14,8 @@ import { ESTADOS_ALUMNO, type Alumnado } from "@/types";
 import { ESTADO_ALUMNO_COLOR, parseAlumnadoCSV } from "@/utils/alumnado";
 import { eliminarAlumnado, idProvisional, ordenarYRenumerarAlumnado } from "@/utils/renumerarAlumnado";
 
-import { ContextoGrupoTab } from "@/components/features/alumnado/ContextoGrupoTab";
 import { PlanoClaseTab } from "@/components/features/alumnado/PlanoClaseTab";
+import { TendenciasProfesionalTab } from "@/components/features/alumnado/TendenciasProfesionalTab";
 import { OrientacionIndividualTab } from "@/components/features/alumnado/OrientacionIndividualTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
@@ -47,7 +47,7 @@ function computeMilestoneDates(nacimiento?: string): { f16: string; f18: string 
 
 export default function AlumnadoPage() {
   const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, moduleData, activeModuleId, setModuleData } = useAppStore();
-  const [activeTab, setActiveTab] = useState("orientacion");
+  const [activeTab, setActiveTab] = useState("matricula");
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -56,6 +56,7 @@ export default function AlumnadoPage() {
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const TABS = [
+    { id: "matricula", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.matricula.label', {defaultValue: 'Matrícula'})}</>, cleanLabel: t('tabs.alumnado.matricula.label', {defaultValue: 'Matrícula'}) },
     // Antes sub-vistas de una sola pestaña "Perfil profesional" (switcher
     // interno) -- sacadas a pestañas principales el 2026-09-20 a petición de
     // Rafael ("luego veremos qué hacemos con ellas"). La sub-vista "Resumen"
@@ -63,8 +64,7 @@ export default function AlumnadoPage() {
     // debajo de los agregados) al comprobar que duplicaba en peor una tabla
     // que ya vivía ahí.
     { id: "orientacion", label: <><span className="inline-flex"><Compass className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.orientacion.label', {defaultValue: 'Orientación'})}</>, cleanLabel: t('tabs.alumnado.orientacion.label', {defaultValue: 'Orientación'}) },
-    { id: "matricula", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.matricula.label', {defaultValue: 'Matrícula'})}</>, cleanLabel: t('tabs.alumnado.matricula.label', {defaultValue: 'Matrícula'}) },
-    { id: "rasgos", label: <><span className="inline-flex"><Activity className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.rasgos.label', {defaultValue: 'Rasgos'})}</>, cleanLabel: t('tabs.alumnado.rasgos.label', {defaultValue: 'Rasgos'}) },
+    { id: "perfil", label: <><span className="inline-flex"><LineChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.perfilTendencias.label', {defaultValue: 'Perfil'})}</>, cleanLabel: t('tabs.alumnado.perfilTendencias.label', {defaultValue: 'Perfil'}) },
     { id: "plano", label: <><span className="inline-flex"><LayoutGrid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.agenda.planoAula.label', {defaultValue: 'Plano de aula'})}</>, cleanLabel: t('tabs.agenda.planoAula.label', {defaultValue: 'Plano de aula'}) },
   ];
 
@@ -72,17 +72,13 @@ export default function AlumnadoPage() {
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     matricula: t('tabs.alumnado.matricula.desc', {defaultValue: 'Gestión del listado de alumnado y ficha individual.'}),
+    perfil: t('tabs.alumnado.perfilTendencias.desc', {defaultValue: 'Agregados y tendencias del perfil profesional del grupo, y tabla filtrable de todo el alumnado.'}),
     plano: t('tabs.agenda.planoAula.desc', {defaultValue: 'Distribución y plano visual del aula.'}),
-    rasgos: t('tabs.alumnado.rasgos.desc', {defaultValue: 'Rasgos característicos del grupo y datos automáticos del grupo.'}),
     orientacion: t('tabs.alumnado.orientacion.desc', {defaultValue: 'Orientación profesional por alumno/a: motivación, experiencia laboral, aptitudes y aspiraciones.'}),
   };
 
   // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
-    rasgos: [
-      { id: "alumnado-datos-grupo", label: t('campos.alumnado.datosGrupoTitulo', {defaultValue: 'Datos del grupo (automático)'}) },
-      { id: "alumnado-rasgos-grupo", label: t('campos.alumnado.rasgosGrupoTitulo', {defaultValue: 'Rasgos característicos del grupo'}) },
-    ],
   };
 
   useEffect(() => {
@@ -485,15 +481,15 @@ export default function AlumnadoPage() {
             </>
           )}
 
-          {activeTab === "plano" && (
+          {activeTab === "perfil" && (
             <div className="mt-4">
-              <PlanoClaseTab />
+              <TendenciasProfesionalTab />
             </div>
           )}
 
-          {activeTab === "rasgos" && (
+          {activeTab === "plano" && (
             <div className="mt-4">
-              <ContextoGrupoTab />
+              <PlanoClaseTab />
             </div>
           )}
 

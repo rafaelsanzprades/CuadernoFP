@@ -81,7 +81,7 @@
         "desc": "Trazos característicos do grupo e datos automáticos do grupo."
       },
       "perfilTendencias": {
-        "label": "Tendencias",
+        "label": "Perfil",
         "desc": "Agregados e tendencias do perfil profesional do grupo, e táboa filtrable de todo o alumnado."
       },
       "academicas": {
@@ -91,11 +91,11 @@
     },
     "seguimiento": {
         "abandono": {
-          "label": "Risco de abandono",
+          "label": "Abandono",
           "desc": "Resumo do risco de abandono a partir da asistencia e das notas."
         },
       "clases": {
-        "label": "Clases",
+        "label": "Lectivas",
         "desc": "Diario de clases, sesións lectivas e rexistro de continxencias."
       },
       "asistencia": {
@@ -386,7 +386,7 @@
     "calendario": "Calendario",
     "alumnado": "Alumnado",
     "diario": "Diario",
-    "seguimiento": "Seguimento",
+    "sesiones": "Sesións",
     "calificaciones": "Cualificacións",
     "cierre": "Peche",
     "informes": "Informes",
@@ -427,13 +427,13 @@
   },
   "pages": {
     "agenda_title": "Clases",
-    "agenda_desc": "Notas, boletín e valoración na empresa (FEOE) por alumnado, e reclamacións.",
+    "agenda_desc": "Notas, boletín, valoración na empresa (FEOE), informe de evidencias e inserción laboral por alumnado, trimestral e reclamacións.",
     "alumnado_title": "Alumnado",
-    "alumnado_desc": "Xestión do alumnado, notas e orientación profesional.",
+    "alumnado_desc": "Matrícula, orientación profesional, perfil do grupo e plano de aula.",
     "diario_title": "Seguimento Diario",
     "diario_desc": "Diario de aula, continxencias, control de asistencia e alertas.",
     "evaluacion_title": "Cualificación",
-    "evaluacion_desc": "Resultados, cualificacións, analíticas e mellora da docencia (EQAVET).",
+    "evaluacion_desc": "Avance de UD e progreso dos RA, e mellora do módulo (EQAVET e PDCA).",
     "calendario_title": "Calendario",
     "calendario_desc": "Configura festivos, avaliacións e o teu horario semanal.",
     "modulo_title": "Configuración do Módulo",
@@ -457,7 +457,7 @@
     "ayuda_desc": "Guía de inicio, FAQ, acrónimos e contribucións da comunidade.",
     "contexto_desc": "Información xeral, características da contorna, alumnado e módulo.",
     "magia_desc": "Xeración da programación didáctica e informes.",
-    "seguimiento_desc": "Asistencia, risco de abandono, diario de clases, avance mensual de UD e progreso dos RA.",
+    "seguimiento_desc": "Asistencia, abandono e diario de sesións lectivas.",
     "metodologia_desc": "Estratexias metodolóxicas, recursos, espazos e atención á diversidade."
   },
   "common": {
@@ -505,10 +505,10 @@
     "metodologia": "Metodoloxía, recursos, plan de continxencia e elementos transversais.",
     "instrumentos": "Definición e pesos das ferramentas de avaliación.",
     "calendario": "Horario, trimestres, festivos, período FEOE, vista mensual e as túas clases de hoxe, a semana e a unidade en curso.",
-    "alumnado": "Fichas persoais e orientación profesional.",
-    "seguimiento": "Asistencia, risco de abandono, diario de clases, avance mensual de UD e progreso dos RA.",
-    "calificaciones": "Notas, boletín e valoración na empresa (FEOE) por alumnado, e reclamacións.",
-    "cierre": "Resultados e notas do curso, mellora do módulo (EQAVET e PDCA), tendencias do grupo, e inserción laboral e expediente por alumnado."
+    "alumnado": "Matrícula, orientación profesional, perfil do grupo e plano de aula.",
+    "sesiones": "Asistencia, abandono e diario de sesións lectivas.",
+    "calificaciones": "Notas, boletín, valoración na empresa (FEOE), informe de evidencias e inserción laboral por alumnado, trimestral e reclamacións.",
+    "cierre": "Avance de UD e progreso dos RA, e mellora do módulo (EQAVET e PDCA)."
   },
   "toasts": {
     "aiSettings": {

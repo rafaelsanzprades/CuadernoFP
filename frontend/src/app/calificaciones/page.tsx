@@ -25,7 +25,7 @@ export default function AgendaPage() {
     isWizardOpen, setWizardOpen, activeModuleId,
     moduleData, setModuleData, activeCursoId, cursoData, setCursoData,
   } = useAppStore();
-  const [activeTab, setActiveTab] = useState("academicas");
+  const [activeTab, setActiveTab] = useState("trimestral");
   const { data: modulesList, mutate: fetchModules } = useModulesList();
 
   useEffect(() => {
@@ -57,8 +57,8 @@ export default function AgendaPage() {
   // Alumnado, 2026-10-05) y Plano de aula.
   const reclamacionesPendientes = (cursoData?.df_reclamaciones || []).filter((r: any) => r.estado === "pendiente").length;
   const TABS = [
-    { id: "academicas", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.academicas.label', {defaultValue: 'Académicas'})}</>, cleanLabel: t('tabs.alumnado.academicas.label', {defaultValue: 'Académicas'}) },
     { id: "trimestral", label: <><span className="inline-flex"><BarChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.resumenTrimestral', {defaultValue: 'Trimestral'})}</>, cleanLabel: t('tabs.calificaciones.resumenTrimestral', {defaultValue: 'Trimestral'}) },
+    { id: "academicas", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.academicas.label', {defaultValue: 'Académicas'})}</>, cleanLabel: t('tabs.alumnado.academicas.label', {defaultValue: 'Académicas'}) },
     // Traída desde Cierre (antes pestaña "Histórico", 2026-10-05).
     { id: "reclamaciones", label: <><span className="inline-flex"><AlertOctagon className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.reclamaciones.label', {defaultValue: 'Reclamaciones'})}
         {reclamacionesPendientes > 0 && (
@@ -100,7 +100,7 @@ export default function AgendaPage() {
           <StickyPageHeader
             icon={Calendar}
             title={t('nav.calificaciones', { defaultValue: 'Calificaciones' })}
-            description={t('pages.agenda_desc', { defaultValue: 'Notas, boletín y valoración en la empresa (FEOE) por alumnado.' })}
+            description={t('pages.agenda_desc', { defaultValue: 'Notas, boletín, valoración en la empresa (FEOE), informe de evidencias e inserción laboral por alumnado, trimestral y reclamaciones.' })}
           >
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">

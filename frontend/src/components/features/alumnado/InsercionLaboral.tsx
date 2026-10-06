@@ -1,16 +1,11 @@
 "use client";
-import { FileClock, TrendingUp } from "lucide-react";
-import React from "react";
 import { useTranslation } from "react-i18next";
-import { PanelPorAlumno, SeccionAcordeon, useFichaProfesional } from "./PanelPorAlumno";
-import { ExpedienteTab } from "./ExpedienteTab";
+import { useFichaProfesional } from "./PanelPorAlumno";
 
-// Cierre -> Alumnado: lo que se rellena o consulta al terminar el curso, por
-// alumno/a -- inserción laboral post-ciclo y expediente (línea temporal de
-// evidencias). Traídas de Alumnado -> Orientación profesional (antiguas
-// secciones 5 y 8), 2026-10-05.
+// Inserción laboral post-ciclo de UN alumno/a (sección de Calificaciones ->
+// Académicas; antes en Cierre -> Expediente, 2026-10-05).
 
-function Insercion({ studentId }: { studentId: string }) {
+export function InsercionLaboral({ studentId }: { studentId: string }) {
   const { t } = useTranslation();
   const { renderInput, renderTextarea, renderSelect } = useFichaProfesional(studentId);
   return (
@@ -59,21 +54,3 @@ function Insercion({ studentId }: { studentId: string }) {
     </div>
   );
 }
-
-export const InsercionExpedienteTab = () => {
-  const { t } = useTranslation();
-  return (
-    <PanelPorAlumno>
-      {(al) => (
-        <>
-          <SeccionAcordeon defaultOpen title={t('campos.orientacion.seccion8Titulo', {defaultValue: 'Informe de evidencias'})} icon={<FileClock className="w-5 h-5 text-muted" />}>
-            <ExpedienteTab studentId={al.ID!} />
-          </SeccionAcordeon>
-          <SeccionAcordeon title={t('campos.orientacion.seccion5Titulo', {defaultValue: 'Inserción laboral'})} icon={<TrendingUp className="w-5 h-5 text-info" />}>
-            <Insercion studentId={al.ID!} />
-          </SeccionAcordeon>
-        </>
-      )}
-    </PanelPorAlumno>
-  );
-};

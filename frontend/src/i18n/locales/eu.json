@@ -81,7 +81,7 @@
         "desc": "Taldearen ezaugarri bereizgarriak eta taldearen datu automatikoak."
       },
       "perfilTendencias": {
-        "label": "Joerak",
+        "label": "Profila",
         "desc": "Taldearen lanbide-profilaren agregatuak eta joerak, eta ikasle guztien taula iragazgarria."
       },
       "academicas": {
@@ -91,11 +91,11 @@
     },
     "seguimiento": {
         "abandono": {
-          "label": "Uzte-arriskua",
+          "label": "Uztea",
           "desc": "Uzte-arriskuaren laburpena asistentzia eta notetan oinarrituta."
         },
       "clases": {
-        "label": "Eskolak",
+        "label": "Lektiboak",
         "desc": "Eskolen egunerokoa, saio lektiboak eta gorabeheren erregistroa."
       },
       "asistencia": {
@@ -386,7 +386,7 @@
     "calendario": "Egutegia",
     "alumnado": "Ikasleak",
     "diario": "Egunerokoa",
-    "seguimiento": "Segimendua",
+    "sesiones": "Saioak",
     "calificaciones": "Kalifikazioak",
     "cierre": "Itxiera",
     "informes": "Txostenak",
@@ -427,13 +427,13 @@
   },
   "pages": {
     "agenda_title": "Klaseak",
-    "agenda_desc": "Notak, buletina eta enpresako balorazioa (FEOE) ikasleka, eta erreklamazioak.",
+    "agenda_desc": "Notak, buletina, enpresako balorazioa (FEOE), ebidentzien txostena eta laneratzea ikasleka, hiruhilekoa eta erreklamazioak.",
     "alumnado_title": "Ikasleak",
-    "alumnado_desc": "Ikasleen kudeaketa, notak eta orientazio profesionala.",
+    "alumnado_desc": "Matrikula, lanbide-orientazioa, taldearen profila eta gelako plana.",
     "diario_title": "Eguneroko Segimendua",
     "diario_desc": "Ikasgelako egunerokoa, kontingentziak, asistentzia kontrola eta alertak.",
     "evaluacion_title": "Kalifikazioa",
-    "evaluacion_desc": "Emaitzak, kalifikazioak, analitikak eta irakaskuntzaren hobekuntza (EQAVET).",
+    "evaluacion_desc": "IUen eta IEen aurrerapena, eta moduluaren hobekuntza (EQAVET eta PDCA).",
     "calendario_title": "Egutegia",
     "calendario_desc": "Konfiguratu jaiegunak, ebaluazioak eta zure asteko ordutegia.",
     "modulo_title": "Moduluaren konfigurazioa",
@@ -457,7 +457,7 @@
     "ayuda_desc": "Hasierako gida, FAQ, akronimoak eta komunitatearen ekarpenak.",
     "contexto_desc": "Informazio orokorra, ingurunearen ezaugarriak, ikasleak eta modulua.",
     "magia_desc": "Programazio didaktikoaren eta txostenen sorrera.",
-    "seguimiento_desc": "Asistentzia, uzte-arriskua, klase-egunkaria, IUen hileko aurrerapena eta IEen aurrerapena.",
+    "seguimiento_desc": "Asistentzia, uztea eta saio lektiboen egunkaria.",
     "metodologia_desc": "Metodologia-estrategiak, baliabideak, espazioak eta aniztasunari arreta."
   },
   "common": {
@@ -505,10 +505,10 @@
     "metodologia": "Metodologia, baliabideak, kontingentzia-plana eta zeharkako elementuak.",
     "instrumentos": "Ebaluazio-tresnen definizioa eta pisuak.",
     "calendario": "Ordutegia, hiruhilekoak, jaiegunak, FEOE aldia, hileko ikuspegia eta gaurko klaseak, astea eta unitate aktiboa.",
-    "alumnado": "Fitxa pertsonalak eta lanbide-orientazioa.",
-    "seguimiento": "Asistentzia, uzte-arriskua, klase-egunkaria, IUen hileko aurrerapena eta IEen aurrerapena.",
-    "calificaciones": "Notak, buletina eta enpresako balorazioa (FEOE) ikasleka, eta erreklamazioak.",
-    "cierre": "Ikastaroaren emaitzak eta notak, moduluaren hobekuntza (EQAVET eta PDCA), taldearen joerak, eta laneratzea eta espedientea ikasleka."
+    "alumnado": "Matrikula, lanbide-orientazioa, taldearen profila eta gelako plana.",
+    "sesiones": "Asistentzia, uztea eta saio lektiboen egunkaria.",
+    "calificaciones": "Notak, buletina, enpresako balorazioa (FEOE), ebidentzien txostena eta laneratzea ikasleka, hiruhilekoa eta erreklamazioak.",
+    "cierre": "IUen eta IEen aurrerapena, eta moduluaren hobekuntza (EQAVET eta PDCA)."
   },
   "toasts": {
     "aiSettings": {
