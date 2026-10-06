@@ -1,5 +1,5 @@
 "use client";
-import { Calendar, FileEdit, Receipt, Scale, School, UserCircle, Settings, Info, ListChecks, Plus, Trash2, ChevronDown } from "lucide-react";
+import { Calendar, FileEdit, Receipt, School, UserCircle, Settings, Info, ListChecks, Plus, Trash2, ChevronDown } from "lucide-react";
 import { useEffect, useState, type CSSProperties } from "react";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
@@ -18,7 +18,7 @@ import { getApiBase } from "@/services/apiBase";
 // depender de que grid-cols-12 se genere correctamente en el build.
 const INSTR_GRID_STYLE: CSSProperties = {
   display: "grid",
-  gridTemplateColumns: "1fr 2fr 1fr 1fr 1fr 2.5rem",
+  gridTemplateColumns: "1fr 2fr 1fr 1fr 1fr 1fr 2.5rem",
   gap: "0.75rem",
 };
 
@@ -182,6 +182,14 @@ export function DatosTab() {
   const sum1t = instrumentosPct.reduce((a, r) => a + (Number(r.pct_1t) || 0), 0);
   const sum2t = instrumentosPct.reduce((a, r) => a + (Number(r.pct_2t) || 0), 0);
   const sum3t = instrumentosPct.reduce((a, r) => a + (Number(r.pct_3t) || 0), 0);
+
+  // Peso real de cada instrumento sobre la nota final del módulo: lo que vale
+  // en cada trimestre por lo que pesa ese trimestre (las recuperaciones no suman).
+  const pondTri = [Number(data.pond_1t) || 0, Number(data.pond_2t) || 0, Number(data.pond_3t) || 0];
+  const pctNotaFinal = (r: any) => r.categoria === "Recuperaciones"
+    ? null
+    : Math.round(((pondTri[0] * (Number(r.pct_1t) || 0) + pondTri[1] * (Number(r.pct_2t) || 0) + pondTri[2] * (Number(r.pct_3t) || 0)) / 100) * 10) / 10;
+  const sumaNotaFinal = Math.round(instrumentosPct.reduce((a, r) => a + (pctNotaFinal(r) || 0), 0) * 10) / 10;
 
   const updateInstrumentoPctField = (id: string, field: "categoria" | "nombre" | "pct_1t" | "pct_2t" | "pct_3t", value: string) => {
     const next = instrumentosPct.map(r => r.id === id
@@ -445,38 +453,12 @@ export function DatosTab() {
       {/* 5. Evaluación */}
       <div className="space-y-3">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <SectionHeading id="datos-ponderacion-trimestres" icon={Scale} scrollMt="260px" className="flex-1">
-          {t('campos.modulo.tituloPonderacionTrimestres', {defaultValue: '% Ponderación por trimestres'})}
-        </SectionHeading>
-        <span className={`text-body font-semibold px-3 py-1 rounded-full shrink-0 ${sumaTrimestres === 100 ? 'bg-success/10 text-success border border-success/30' : 'bg-danger/10 text-danger border border-danger/30'}`}>
-          {sumaTrimestres}% {sumaTrimestres !== 100 && t('campos.modulo.debeSumarCien', {defaultValue: '(Debe sumar 100%)'})}
-        </span>
-      </div>
-      <Card className="p-6 border-l-4 border-l-accent">
-        <div className="grid grid-cols-3 gap-6">
-          {[
-            ['pond_1t', t('checks.modulo.pond1erTrimestre', {defaultValue: '1er trimestre (%)'})],
-            ['pond_2t', t('checks.modulo.pond2doTrimestre', {defaultValue: '2º trimestre (%)'})],
-            ['pond_3t', t('checks.modulo.pond3erTrimestre', {defaultValue: '3er trimestre (%)'})],
-          ].map(([k, label]) => (
-            <Input
-              key={k}
-              label={label}
-              type="number" value={data[k] || 0} onChange={e => updateInfoModulo(k, Number(e.target.value))}
-              className="text-center"
-            />
-          ))}
-        </div>
-      </Card>
-      </div>
-
-      <div className="space-y-3">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <SectionHeading id="datos-instrumentos-evaluacion" icon={Receipt} scrollMt="260px" className="flex-1">
-          {t('campos.modulo.tituloInstrumentosEvaluacion', {defaultValue: '% Instrumentos de evaluación'})}
+          {t('campos.modulo.tituloPonderacionInstrumentos', {defaultValue: '% Ponderación e instrumentos de evaluación'})}
         </SectionHeading>
-        <div className="flex gap-2 shrink-0">
+        <div className="flex flex-wrap gap-2 shrink-0">
           {[
+            [t('campos.modulo.chipPesoTrimestres', {defaultValue: 'Trimestres'}), sumaTrimestres],
             [t('campos.modulo.chipTrim1', {defaultValue: '1er Trim.'}), sum1t],
             [t('campos.modulo.chipTrim2', {defaultValue: '2º Trim.'}), sum2t],
             [t('campos.modulo.chipTrim3', {defaultValue: '3er Trim.'}), sum3t],
@@ -489,12 +471,28 @@ export function DatosTab() {
       </div>
       <Card className="p-6 border-l-4 border-l-purple-500">
         <div className="space-y-2">
-          <div style={INSTR_GRID_STYLE} className="text-caption font-bold text-muted px-1">
+          <div style={INSTR_GRID_STYLE} className="items-end text-caption font-bold text-muted px-1">
             <span>{t('campos.modulo.colSeleccionTipo', {defaultValue: 'Selección del tipo'})}</span>
             <span>{t('campos.modulo.colDescripcionInstrumento', {defaultValue: 'Descripción del Instrumento de Evaluación (IE)'})}</span>
-            <span className="text-center">{t('campos.modulo.colTrimestre1', {defaultValue: '1er Trimestre'})}</span>
-            <span className="text-center">{t('campos.modulo.colTrimestre2', {defaultValue: '2º Trimestre'})}</span>
-            <span className="text-center">{t('campos.modulo.colTrimestre3', {defaultValue: '3er Trimestre'})}</span>
+            {([
+              ['pond_1t', t('campos.modulo.colTrimestre1', {defaultValue: '1er Trimestre'})],
+              ['pond_2t', t('campos.modulo.colTrimestre2', {defaultValue: '2º Trimestre'})],
+              ['pond_3t', t('campos.modulo.colTrimestre3', {defaultValue: '3er Trimestre'})],
+            ] as const).map(([k, label]) => (
+              <div key={k} className="flex flex-col items-center gap-1">
+                <span>{label}</span>
+                <div className="relative w-full" title={t('campos.modulo.pesoTrimestreTitulo', {defaultValue: 'Peso del trimestre en la nota final del módulo'})}>
+                  <input
+                    type="number"
+                    value={data[k] || 0}
+                    onChange={(e) => updateInfoModulo(k, Number(e.target.value))}
+                    className="bg-accent/10 border border-accent/40 rounded pl-2 pr-5 py-2 text-foreground text-center font-bold w-full"
+                  />
+                  <span className="absolute right-2 top-1/2 -translate-y-1/2 text-muted text-caption pointer-events-none">%</span>
+                </div>
+              </div>
+            ))}
+            <span className="text-center" title={t('campos.modulo.pctNotaFinalTitulo', {defaultValue: 'Lo que vale el instrumento sobre la nota final del módulo (su % en cada trimestre por el peso de ese trimestre)'})}>{t('campos.modulo.colNotaFinal', {defaultValue: '% nota final'})}</span>
             <span></span>
           </div>
           {instrumentosPct.map((row) => (
@@ -536,6 +534,9 @@ export function DatosTab() {
                   </div>
                 )
               ))}
+              <div className="text-center font-semibold text-foreground/80">
+                {pctNotaFinal(row) === null ? "-" : `${pctNotaFinal(row)}%`}
+              </div>
               <button
                 type="button"
                 onClick={() => removeInstrumentoPct(row.id)}
@@ -546,6 +547,15 @@ export function DatosTab() {
               </button>
             </div>
           ))}
+          <div style={INSTR_GRID_STYLE} className="items-center px-1 pt-2 border-t border-[var(--glass-border)] text-caption font-bold text-muted">
+            <span></span>
+            <span className="text-right">{t('common.total', {defaultValue: 'Total'})}</span>
+            {[sum1t, sum2t, sum3t].map((v, idx) => (
+              <span key={idx} className={`text-center ${v === 100 ? 'text-success' : 'text-danger'}`}>{v}%</span>
+            ))}
+            <span className={`text-center ${Math.round(sumaNotaFinal) === 100 ? 'text-success' : 'text-danger'}`}>{sumaNotaFinal}%</span>
+            <span></span>
+          </div>
           <button
             type="button"
             onClick={addInstrumentoPct}
