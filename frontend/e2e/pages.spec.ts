@@ -22,7 +22,7 @@ test.describe('Páginas principales', () => {
   });
 
   test('seguimiento carga correctamente', async ({ page }) => {
-    await page.goto('/seguimiento');
-    await expect(page.locator('main').getByText(/seguimiento|diario/i).first()).toBeVisible();
+    await page.goto('/sesiones');
+    await expect(page.locator('main').getByText(/sesiones|diario/i).first()).toBeVisible();
   });
 });

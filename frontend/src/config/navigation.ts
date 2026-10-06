@@ -39,10 +39,10 @@ export const navGroups = [
     sectionDescription: "Herramientas de seguimiento para el aula viva. Establece el calendario, administra el listado de alumnado, anota el progreso diario y evalúa.",
     items: [
       { href: "/calendario?tab=fechas", label: "Calendario", icon: Calendar, description: "Horario, trimestres, festivos, periodo FEOE, vista mensual y tus clases de hoy, la semana y la unidad en curso." },
-      { href: "/alumnado?tab=orientacion", label: "Alumnado", icon: Users, description: "Fichas personales, orientación profesional, tendencias del grupo." },
-      { href: "/calificaciones?tab=academicas", label: "Calificaciones", icon: CalendarDays, description: "Notas, boletín y valoración en la empresa (FEOE) por alumnado, y reclamaciones." },
-      { href: "/seguimiento?tab=asistencia", label: "Seguimiento", icon: TrendingUp, description: "Asistencia, riesgo de abandono, diario de clases, avance mensual de UD y progreso de RA." },
-      { href: "/cierre?tab=expediente", label: "Cierre", icon: Award, description: "Resultados y notas del curso, mejora del módulo (EQAVET y PDCA), tendencias del grupo e inserción laboral y expediente por alumnado." },
+      { href: "/alumnado?tab=matricula", label: "Alumnado", icon: Users, description: "Matrícula, orientación profesional, perfil del grupo y plano de aula." },
+      { href: "/calificaciones?tab=trimestral", label: "Calificaciones", icon: CalendarDays, description: "Notas, boletín, valoración en la empresa (FEOE), informe de evidencias e inserción laboral por alumnado, trimestral y reclamaciones." },
+      { href: "/sesiones?tab=lectivas", label: "Sesiones", icon: TrendingUp, description: "Asistencia, abandono y diario de sesiones lectivas." },
+      { href: "/cierre?tab=avance-ud", label: "Cierre", icon: Award, description: "Avance de UD y progreso de RA, y mejora del módulo (EQAVET y PDCA)." },
     ]
   }
 ];
@@ -92,28 +92,25 @@ export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "agenda", label: "Agenda" },
   ],
   "/alumnado": [
-    { id: "orientacion", label: "Orientación" },
     { id: "matricula", label: "Matrícula" },
-    { id: "rasgos", label: "Rasgos" },
+    { id: "orientacion", label: "Orientación" },
+    { id: "perfil", label: "Perfil" },
     { id: "plano", label: "Plano de aula" },
   ],
   "/calificaciones": [
-    { id: "academicas", label: "Académicas" },
     { id: "trimestral", label: "Trimestral" },
+    { id: "academicas", label: "Académicas" },
     { id: "reclamaciones", label: "Reclamaciones" },
     { id: "empresa-feoe", label: "Empresa FEOE" },
   ],
-  "/seguimiento": [
+  "/sesiones": [
+    { id: "lectivas", label: "Lectivas" },
     { id: "asistencia", label: "Asistencia" },
-    { id: "abandono", label: "Riesgo de abandono" },
-    { id: "clases", label: "Clases" },
-    { id: "avance-ud", label: "Avance de UD" },
-    { id: "progreso-ra-ud", label: "Progreso RA-UD" },
+    { id: "abandono", label: "Abandono" },
   ],
   "/cierre": [
-    { id: "expediente", label: "Expediente" },
-    { id: "resumen", label: "Resumen" },
-    { id: "perfilTendencias", label: "Tendencias" },
+    { id: "avance-ud", label: "Avance de UD" },
+    { id: "progreso-ra-ud", label: "Progreso RA-UD" },
     { id: "mejora", label: "Mejora" },
   ],
   "/normativa": [

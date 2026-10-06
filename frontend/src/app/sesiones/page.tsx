@@ -2,7 +2,7 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { TabSync } from "@/components/ui/TabSync";
 import { useTranslation } from "react-i18next";
-import { AlertTriangle, Target, Calendar, CalendarRange, FileEdit, MapPin, ClipboardCheck, FolderOpen } from "lucide-react";
+import { AlertTriangle, Calendar, FileEdit, MapPin, ClipboardCheck, FolderOpen } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -11,14 +11,12 @@ import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { getSimulatedToday } from "@/utils/planningGenerator";
 import { AlertaAbandonoTab } from "@/components/features/diario/AlertaAbandonoTab";
 import { AsistenciaTab } from "@/components/features/diario/AsistenciaTab";
-import { PlanificacionMensualTab } from "@/components/features/dashboard/PlanificacionMensualTab";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { IndiceAlumnadoPanel } from "@/components/features/alumnado/PanelPorAlumno";
 import { SectionIndex } from "@/components/ui/SectionIndex";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { ProgresoRaTab } from "@/components/features/evaluacion/ProgresoRaTab";
 import { RiesgoAcademicoTab } from "@/components/features/analisis/RiesgoAcademicoTab";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
@@ -80,23 +78,19 @@ export default function SeguimientoPage() {
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, dataSource } = useAppStore();
   const { t } = useTranslation();
   const TABS = [
+    { id: "lectivas", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.clases.label', {defaultValue: 'Lectivas'})}</span>, cleanLabel: t('tabs.seguimiento.clases.label', {defaultValue: 'Lectivas'}) },
     { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.asistencia.label', {defaultValue: 'Asistencia'})}</span>, cleanLabel: t('tabs.seguimiento.asistencia.label', {defaultValue: 'Asistencia'}) },
-    { id: "abandono", label: <span className="flex items-center gap-2"><AlertTriangle className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.abandono.label', {defaultValue: 'Riesgo de abandono'})}</span>, cleanLabel: t('tabs.seguimiento.abandono.label', {defaultValue: 'Riesgo de abandono'}) },
-    { id: "clases", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.clases.label', {defaultValue: 'Clases'})}</span>, cleanLabel: t('tabs.seguimiento.clases.label', {defaultValue: 'Clases'}) },
-    { id: "avance-ud", label: <span className="flex items-center gap-2"><CalendarRange className="w-4 h-4 shrink-0" /> {t('tabs.agenda.avance.label', {defaultValue: 'Avance de UD'})}</span>, cleanLabel: t('tabs.agenda.avance.label', {defaultValue: 'Avance de UD'}) },
-    { id: "progreso-ra-ud", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.calificaciones.progresoRaUd', {defaultValue: 'Progreso RA-UD'})}</span>, cleanLabel: t('tabs.calificaciones.progresoRaUd', {defaultValue: 'Progreso RA-UD'}) },
+    { id: "abandono", label: <span className="flex items-center gap-2"><AlertTriangle className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.abandono.label', {defaultValue: 'Abandono'})}</span>, cleanLabel: t('tabs.seguimiento.abandono.label', {defaultValue: 'Abandono'}) },
   ];
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    clases: t('tabs.seguimiento.clases.desc', {defaultValue: 'Diario de clases, sesiones lectivas y registro de contingencias.'}),
+    lectivas: t('tabs.seguimiento.clases.desc', {defaultValue: 'Diario de clases, sesiones lectivas y registro de contingencias.'}),
     abandono: t('tabs.seguimiento.abandono.desc', {defaultValue: 'Resumen de riesgo de abandono a partir de la asistencia y las notas.'}),
-    'progreso-ra-ud': t('tabs.agenda.progresoRaUd.desc', {defaultValue: 'Progreso de los resultados de aprendizaje: nota del grupo, avance, horas y estado de las unidades didácticas de cada RA.'}),
-    'avance-ud': t('tabs.agenda.avance.desc', {defaultValue: 'Planificación y seguimiento mensual de las unidades didácticas según lo impartido.'}),
     asistencia: t('tabs.seguimiento.asistencia.desc', {defaultValue: 'Control de asistencia del alumnado.'}),
   };
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
-  const [activeTab, setActiveTab] = useState("asistencia");
+  const [activeTab, setActiveTab] = useState("lectivas");
   const [allDiarioOpen, setAllDiarioOpen] = useState(false);
   // Calculado solo en cliente (useEffect, no en el cuerpo del render) para no
   // desincronizar el HTML servido por SSR del primer render en cliente — "hoy"
@@ -154,7 +148,7 @@ export default function SeguimientoPage() {
   // siempre "aterriza" a mitad de curso en vez de en la fecha real del
   // sistema, que normalmente cae fuera del curso académico de ejemplo.
   useEffect(() => {
-    if (activeTab !== 'clases' || !cursoData) return;
+    if (activeTab !== 'lectivas' || !cursoData) return;
     const lectivos = getTodosLosLectivos(cursoData);
     const referencia = dataSource === 'demo' ? getSimulatedToday(cursoData) : new Date();
     const targetDateStr = findFechaMasCercanaA(lectivos, referencia);
@@ -340,8 +334,8 @@ export default function SeguimientoPage() {
         <main className="flex-1 content-area overflow-y-auto scrollbar-hide">
           <StickyPageHeader
             icon={MapPin}
-            title={t('nav.seguimiento', { defaultValue: 'Seguimiento' })}
-            description={t('pages.seguimiento_desc', { defaultValue: 'Asistencia, riesgo de abandono, diario de clases, avance mensual de UD y progreso de RA.' })}
+            title={t('nav.sesiones', { defaultValue: 'Sesiones' })}
+            description={t('pages.seguimiento_desc', { defaultValue: 'Asistencia, abandono y diario de sesiones lectivas.' })}
           >
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
@@ -362,14 +356,14 @@ export default function SeguimientoPage() {
             </p>
 
             {/* Índice: meses dinámicos en Clases (Diario), bloques en Asistencia. */}
-            <SectionIndex items={activeTab === 'clases' ? diarioIndexItems : activeTab === 'abandono' ? abandonoIndexItems : []} bare onItemClick={abrirMesDiario} />
+            <SectionIndex items={activeTab === 'lectivas' ? diarioIndexItems : activeTab === 'abandono' ? abandonoIndexItems : []} bare onItemClick={abrirMesDiario} />
 
             {activeTab === 'asistencia' && <IndiceAlumnadoPanel className="mt-3" />}
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-4 px-8 pt-4">
 
-              {activeTab === 'clases' && (
+              {activeTab === 'lectivas' && (
                 <div className="mt-4">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
@@ -474,18 +468,6 @@ export default function SeguimientoPage() {
                     );
                   })}
                 </div>
-                </div>
-              )}
-
-              {activeTab === 'avance-ud' && (
-                <div className="mt-4">
-                  <PlanificacionMensualTab />
-                </div>
-              )}
-
-              {activeTab === 'progreso-ra-ud' && (
-                <div className="mt-4">
-                  <ProgresoRaTab />
                 </div>
               )}
 

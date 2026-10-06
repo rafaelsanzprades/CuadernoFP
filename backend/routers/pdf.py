@@ -350,7 +350,7 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 "texto_contingencia_libre": module_data.get("texto_contingencia_libre", ""),
                 "info_fechas": curso_data.get("info_fechas") or {},
                 # Solo curso_data: generatePlanning() en planningGenerator.ts (la
-                # previsión de /seguimiento?tab=avance que esta tabla replica)
+                # previsión de /sesiones?tab=avance-ud que esta tabla replica)
                 # lee únicamente cursoData.horario, sin fallback a moduleData —
                 # cualquier fallback aquí desincroniza la tabla del PD respecto a
                 # lo que ve el profesorado en la app.

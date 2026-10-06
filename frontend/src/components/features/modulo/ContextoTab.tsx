@@ -1,4 +1,5 @@
 "use client";
+import { ContextoGrupoTab, DatosGrupoAutomaticos } from "@/components/features/alumnado/ContextoGrupoTab";
 import { School, User, FileText, BookOpen, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import { NarrativeField } from "@/components/ui/NarrativeField";
@@ -477,8 +478,11 @@ export function ContextoTab() {
       <div className="glass-card p-6 border-t-4 border-t-purple-500">
         <div className="space-y-4">
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.contexto.datosContextualizacionGrupo', {defaultValue: 'Datos de contextualización del grupo'})}</label>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.contexto.datosContextualizacionGrupo', {defaultValue: 'Datos del grupo'})}</label>
+            <p className="text-caption text-muted mb-3">{t('campos.alumnado.datosGrupoDesc', {defaultValue: 'Los datos de arriba se calculan solos a partir del alumnado de Matrícula; los de abajo se escriben a mano.'})}</p>
+            <DatosGrupoAutomaticos />
+            <div className="h-4" />
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               <div>
                 <label className="text-caption text-muted mb-1 block">{t('campos.contexto.ratioHombres', {defaultValue: 'Ratio — Hombres'})}</label>
                 <input
@@ -494,15 +498,6 @@ export function ContextoTab() {
                   type="number" min="0"
                   value={config_contexto.ratio_mujeres ?? ""}
                   onChange={e => handleContextoChange("ratio_mujeres", e.target.value)}
-                  className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-2 text-foreground focus:border-info focus:outline-none"
-                />
-              </div>
-              <div>
-                <label className="text-caption text-muted mb-1 block">{t('campos.contexto.repetidores', {defaultValue: 'Repetidores'})}</label>
-                <input
-                  type="number" min="0"
-                  value={config_contexto.num_repetidores ?? ""}
-                  onChange={e => handleContextoChange("num_repetidores", e.target.value)}
                   className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-2 text-foreground focus:border-info focus:outline-none"
                 />
               </div>
@@ -545,6 +540,10 @@ export function ContextoTab() {
         </div>
       </div>
       </div>
+
+      {/* Rasgos y datos del grupo -- traídos de Alumnado (pestaña Rasgos,
+          eliminada el 2026-10-06), debajo de Alumnado (ACNEAE). */}
+      <ContextoGrupoTab />
 
       <div className="space-y-3">
       <SectionHeading id="contexto-modelo-simplificado" icon={BookOpen} scrollMt="260px">

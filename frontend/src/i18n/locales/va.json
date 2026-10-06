@@ -81,7 +81,7 @@
         "desc": "Trets característics del grup i dades automàtiques del grup."
       },
       "perfilTendencias": {
-        "label": "Tendències",
+        "label": "Perfil",
         "desc": "Agregats i tendències del perfil professional del grup, i taula filtrable de tot l'alumnat."
       },
       "academicas": {
@@ -91,11 +91,11 @@
     },
     "seguimiento": {
         "abandono": {
-          "label": "Risc d'abandonament",
+          "label": "Abandonament",
           "desc": "Resum de risc d'abandonament a partir de l'assistència i les notes."
         },
       "clases": {
-        "label": "Classes",
+        "label": "Lectives",
         "desc": "Diari de classes, sessions lectives i registre de contingències."
       },
       "asistencia": {
@@ -386,7 +386,7 @@
     "calendario": "Calendari",
     "alumnado": "Alumnat",
     "diario": "Diari",
-    "seguimiento": "Seguiment",
+    "sesiones": "Sessions",
     "calificaciones": "Qualificacions",
     "cierre": "Tancament",
     "informes": "Informes",
@@ -427,13 +427,13 @@
   },
   "pages": {
     "agenda_title": "Classes",
-    "agenda_desc": "Notes, butlletí i valoració a l'empresa (FEOE) per alumnat, i reclamacions.",
+    "agenda_desc": "Notes, butlletí, valoració a l'empresa (FEOE), informe d'evidències i inserció laboral per alumnat, trimestral i reclamacions.",
     "alumnado_title": "Alumnat",
-    "alumnado_desc": "Gestió de l'alumnat, notes i orientació professional.",
+    "alumnado_desc": "Matrícula, orientació professional, perfil del grup i plànol d'aula.",
     "diario_title": "Seguiment Diari",
     "diario_desc": "Diari d'aula, contingències, control d'assistència i alertes.",
     "evaluacion_title": "Qualificació",
-    "evaluacion_desc": "Resultats, qualificacions, analítiques i millora de la docència (EQAVET).",
+    "evaluacion_desc": "Avanç d'UD i progrés dels RA, i millora del mòdul (EQAVET i PDCA).",
     "calendario_title": "Calendari",
     "calendario_desc": "Configura festius, avaluacions i el teu horari setmanal.",
     "modulo_title": "Configuració del Mòdul",
@@ -457,7 +457,7 @@
     "ayuda_desc": "Guia d'inici, FAQ, acrònims i contribucions de la comunitat.",
     "contexto_desc": "Informació general, característiques de l'entorn, alumnat i mòdul.",
     "magia_desc": "Generació de la programació didàctica i informes.",
-    "seguimiento_desc": "Assistència, risc d'abandonament, diari de classes, avanç mensual d'UD i progrés dels RA.",
+    "seguimiento_desc": "Assistència, abandonament i diari de sessions lectives.",
     "metodologia_desc": "Estratègies metodològiques, recursos, espais i atenció a la diversitat."
   },
   "common": {
@@ -505,10 +505,10 @@
     "metodologia": "Metodologia, recursos, pla de contingència i elements transversals.",
     "instrumentos": "Definició i pesos de les eines d'avaluació.",
     "calendario": "Horari, trimestres, festius, període FEOE, vista mensual i les teues classes d'hui, la setmana i la unitat en curs.",
-    "alumnado": "Fitxes personals i orientació professional.",
-    "seguimiento": "Assistència, risc d'abandonament, diari de classes, avanç mensual d'UD i progrés dels RA.",
-    "calificaciones": "Notes, butlletí i valoració a l'empresa (FEOE) per alumnat, i reclamacions.",
-    "cierre": "Resultats i notes del curs, millora del mòdul (EQAVET i PDCA), tendències del grup, i inserció laboral i expedient per alumnat."
+    "alumnado": "Matrícula, orientació professional, perfil del grup i plànol d'aula.",
+    "sesiones": "Assistència, abandonament i diari de sessions lectives.",
+    "calificaciones": "Notes, butlletí, valoració a l'empresa (FEOE), informe d'evidències i inserció laboral per alumnat, trimestral i reclamacions.",
+    "cierre": "Avanç d'UD i progrés dels RA, i millora del mòdul (EQAVET i PDCA)."
   },
   "toasts": {
     "aiSettings": {

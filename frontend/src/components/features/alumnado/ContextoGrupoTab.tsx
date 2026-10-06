@@ -39,6 +39,46 @@ function StatCard({ label, value, sub }: { label: string; value: string | number
   );
 }
 
+// Datos del grupo calculados a partir del alumnado registrado (total, menores,
+// edad media, repetidores y franjas de edad). Se muestra dentro de
+// Contexto -> Alumnado (ACNEAE), junto a los datos que se escriben a mano.
+export function DatosGrupoAutomaticos() {
+  const { cursoData } = useAppStore();
+  const { t } = useTranslation();
+  const df_al = cursoData?.df_al || [];
+  const total = df_al.length;
+  const conEdad = df_al.filter((a: any) => typeof a.Edad === "number");
+  const menores = conEdad.filter((a: any) => a.Edad < 18).length;
+  const edadMedia = conEdad.length > 0
+    ? (conEdad.reduce((sum: number, a: any) => sum + a.Edad, 0) / conEdad.length).toFixed(1)
+    : "-";
+  const repetidores = df_al.filter((a: any) => a.Repite === true).length;
+  return (
+    <div>
+      {total === 0 ? (
+            <p className="text-body text-muted">{t('campos.alumnado.sinAlumnadoRegistrado', {defaultValue: 'Todavía no hay alumnado registrado en este curso.'})}</p>
+          ) : (
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <StatCard label={t('campos.alumnado.statTotal', {defaultValue: 'Alumnado total'})} value={total} />
+                <StatCard label={t('campos.alumnado.statMenoresEdad', {defaultValue: 'Menores de edad'})} value={menores} sub={`${Math.round((menores / total) * 100)}%`} />
+                <StatCard label={t('campos.alumnado.statEdadMedia', {defaultValue: 'Edad media'})} value={edadMedia} />
+                <StatCard label={t('campos.alumnado.statRepetidores', {defaultValue: 'Repetidores'})} value={repetidores} sub={`${Math.round((repetidores / total) * 100)}%`} />
+              </div>
+              <div>
+                <p className="text-caption font-semibold text-muted mb-1.5">{t('campos.alumnado.franjasEdadTitulo', {defaultValue: 'Franjas de edad'})}</p>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {EDAD_TRAMOS.map((tramo) => (
+                    <StatCard key={tramo.id} label={t(`campos.alumnado.tramoEdad_${tramo.i18nKey}`, {defaultValue: tramo.label})} value={conEdad.filter((a: any) => tramo.test(a.Edad)).length} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+    </div>
+  );
+}
+
 export function ContextoGrupoTab() {
   const { cursoData, updateCursoData, moduleData, updateModuleData } = useAppStore();
   const { t } = useTranslation();
@@ -107,45 +147,6 @@ export function ContextoGrupoTab() {
   return (
     <MotionWrapper>
       <div className="space-y-6">
-        <div className="mb-6 flex items-center gap-3">
-          <div className="p-2 bg-primary/10 rounded-lg text-primary">
-            <Users className="w-5 h-5" />
-          </div>
-          <div>
-            <h2 className="text-subheading font-bold text-[var(--text-primary)]">{t('campos.alumnado.contextoGrupoTitulo', {defaultValue: 'Contexto del grupo'})}</h2>
-            <p className="text-body text-muted-foreground">{t('campos.alumnado.contextoGrupoDesc', {defaultValue: 'Define las características psico-pedagógicas y sociológicas del alumnado (necesarias para la PD).'})}</p>
-          </div>
-        </div>
-
-        <div className="space-y-3">
-        <SectionHeading id="alumnado-datos-grupo" icon={BarChart2} scrollMt="260px">
-          {t('campos.alumnado.datosGrupoTitulo', {defaultValue: 'Datos del grupo (automático)'})}
-        </SectionHeading>
-        <div className="glass-card p-6 border-t-4 border-t-sky-500">
-          <p className="text-caption text-muted mb-4">{t('campos.alumnado.datosGrupoDesc', {defaultValue: 'Calculado a partir del alumnado registrado en esta pestaña de Curso. Ve a "Listado" para editar Edad/Repite si faltan.'})}</p>
-          {total === 0 ? (
-            <p className="text-body text-muted">{t('campos.alumnado.sinAlumnadoRegistrado', {defaultValue: 'Todavía no hay alumnado registrado en este curso.'})}</p>
-          ) : (
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <StatCard label={t('campos.alumnado.statTotal', {defaultValue: 'Alumnado total'})} value={total} />
-                <StatCard label={t('campos.alumnado.statMenoresEdad', {defaultValue: 'Menores de edad'})} value={menores} sub={`${Math.round((menores / total) * 100)}%`} />
-                <StatCard label={t('campos.alumnado.statEdadMedia', {defaultValue: 'Edad media'})} value={edadMedia} />
-                <StatCard label={t('campos.alumnado.statRepetidores', {defaultValue: 'Repetidores'})} value={repetidores} sub={`${Math.round((repetidores / total) * 100)}%`} />
-              </div>
-              <div>
-                <p className="text-caption font-semibold text-muted mb-1.5">{t('campos.alumnado.franjasEdadTitulo', {defaultValue: 'Franjas de edad'})}</p>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  {EDAD_TRAMOS.map((tramo) => (
-                    <StatCard key={tramo.id} label={t(`campos.alumnado.tramoEdad_${tramo.i18nKey}`, {defaultValue: tramo.label})} value={conEdad.filter((a: any) => tramo.test(a.Edad)).length} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-        </div>
-
         <div className="space-y-3">
         <SectionHeading id="alumnado-rasgos-grupo" icon={Activity} scrollMt="260px">
           {t('campos.alumnado.rasgosGrupoTitulo', {defaultValue: 'Rasgos característicos del grupo'})}
