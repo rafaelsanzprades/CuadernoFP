@@ -367,7 +367,7 @@ export default function SeguimientoPage() {
                 <div className="mt-4">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground">
-                    <FileEdit className="w-5 h-5 text-accent" /> Diario de clases y contingencias
+                    <FileEdit className="w-5 h-5 text-accent" /> Diario de sesiones lectivas
                   </h2>
                   <button
                     onClick={() => {

@@ -73,8 +73,7 @@ export default function ContextoConfigPage() {
       { id: "datos-centro-docente", label: t('campos.modulo.tituloCentroDocente', {defaultValue: 'Centro y docente'}) },
       { id: "datos-modulo-didactico", label: t('campos.modulo.tituloModuloDidactico', {defaultValue: 'Módulo didáctico'}) },
       { id: "datos-reglas-redondeo", label: t('campos.modulo.tituloReglasRedondeo', {defaultValue: 'Reglas de redondeo y compensación'}) },
-      { id: "datos-ponderacion-trimestres", label: t('campos.modulo.tituloPonderacionTrimestres', {defaultValue: '% Ponderación por trimestres'}) },
-      { id: "datos-instrumentos-evaluacion", label: t('campos.modulo.tituloInstrumentosEvaluacion', {defaultValue: '% Instrumentos de evaluación'}) },
+      { id: "datos-instrumentos-evaluacion", label: t('campos.modulo.tituloPonderacionInstrumentos', {defaultValue: '% Ponderación e instrumentos de evaluación'}) },
       { id: "datos-escalas-evaluacion", label: t('campos.modulo.tituloEscalasEvaluacion', {defaultValue: 'Escalas de evaluación cualitativas'}) },
     ],
     contextualizacion: [
