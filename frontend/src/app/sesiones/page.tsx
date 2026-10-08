@@ -2,7 +2,7 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { TabSync } from "@/components/ui/TabSync";
 import { useTranslation } from "react-i18next";
-import { AlertTriangle, Calendar, FileEdit, MapPin, ClipboardCheck, FolderOpen } from "lucide-react";
+import { AlertTriangle, Calendar, CalendarDays, FileEdit, MapPin, ClipboardCheck, FolderOpen } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -16,6 +16,7 @@ import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { IndiceAlumnadoPanel } from "@/components/features/alumnado/PanelPorAlumno";
 import { SectionIndex } from "@/components/ui/SectionIndex";
+import { AcumuladoTrimestralTab } from "@/components/features/diario/AcumuladoTrimestralTab";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { RiesgoAcademicoTab } from "@/components/features/analisis/RiesgoAcademicoTab";
 import Link from "next/link";
@@ -309,6 +310,7 @@ export default function SeguimientoPage() {
   const abandonoIndexItems = [
     { id: "seguimiento-riesgo-abandono", label: t('campos.analisis.controlFaltasAsistencia', { defaultValue: 'Control de faltas de asistencia' }) },
     { id: "calificaciones-riesgo-academico", label: t('campos.analisis.seguimientoRiesgo', { defaultValue: 'Control de rendimiento académico' }) },
+    { id: "seguimiento-acumulado-trimestral", label: t('campos.diario.acumuladoTrimestralTitulo', { defaultValue: 'Acumulado trimestral' }) },
   ];
   const abrirMesDiario = (id: string) => {
     const el = document.getElementById(id);
@@ -480,6 +482,12 @@ export default function SeguimientoPage() {
                     <AlertaAbandonoTab />
                   </div>
                   <RiesgoAcademicoTab />
+                  <div className="space-y-3">
+                    <SectionHeading id="seguimiento-acumulado-trimestral" icon={CalendarDays} scrollMt="260px">
+                      {t('campos.diario.acumuladoTrimestralTitulo', {defaultValue: 'Acumulado trimestral'})}
+                    </SectionHeading>
+                    <AcumuladoTrimestralTab />
+                  </div>
                 </div>
               )}
 

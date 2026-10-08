@@ -398,7 +398,7 @@ export const GUIA_PASOS: {
                     { label: "Acordeones", text: "Lista de alumnado a la izquierda (con el estado del día seleccionado, que se cambia con un clic) y, por alumno/a, \"Control de asistencia\" (marca Presente, Falta o Retraso día a día) y \"Acumulado trimestral\" (faltas por trimestre y semáforo de pérdida de evaluación continua)." },
                   ] },
                   { label: "Pestaña", text: "Lectivas", children: [{ label: "Texto", text: "Redacta qué se ha hecho en la clase." }] },
-                  { label: "Pestaña", text: "Abandono", children: [{ label: "Bloque", text: "Resumen de riesgo de abandono (Indicador 1.5 del Sistema Estatal), calculado solo a partir de la asistencia y las notas." }] },
+                  { label: "Pestaña", text: "Abandono", children: [{ label: "Bloque", text: "Resumen de riesgo de abandono (Indicador 1.5 del Sistema Estatal), calculado solo a partir de la asistencia y las notas; control de rendimiento académico (nota final < 5); y acumulado trimestral de faltas de todo el grupo con el semáforo de pérdida de evaluación continua." }] },
                 ],
               },
             ],

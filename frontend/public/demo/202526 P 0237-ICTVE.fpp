@@ -4,7 +4,7 @@
   "df_ud": [
     {
       "id_ud": "UD01",
-      "horas_ud": 25,
+      "horas_ud": 22,
       "ra_mappings": {
         "RA1": "RA1"
       },
@@ -19,7 +19,7 @@
     },
     {
       "id_ud": "UD02",
-      "horas_ud": 30,
+      "horas_ud": 27,
       "ra_mappings": {
         "RA1": "RA1"
       },
@@ -34,7 +34,7 @@
     },
     {
       "id_ud": "UD03",
-      "horas_ud": 15,
+      "horas_ud": 14,
       "ra_mappings": {
         "RA1": "RA1"
       },

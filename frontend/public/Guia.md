@@ -73,9 +73,10 @@ Vamos a pedirle al sistema que nos cree el archivo base de la programación carg
 ### 1.3. Definir el currículo, las unidades didácticas y las tareas competenciales
 - **Bloque:** Programación
   - **Página:** Currículo
-    - **Pestaña:** OG<-RA<-CE
+    - **Pestaña:** Relación RA <- CE
       - **Número:** Asignar el % de cada RA y de cada CE.
-      - **Bloque:** "Contribución RA→OG" (plegable, al final de la misma pestaña) — matriz de contribución de cada RA a los Objetivos Generales del título.
+    - **Pestaña:** Contribución OG <- RA
+      - **Bloque:** Matriz de contribución de cada RA a los Objetivos Generales del título.
     - **Pestaña:** Unidades didácticas
       - **Botón:** "Añadir nueva UD". Crea los temas.
       - **Tabla:** Haz clic en la intersección de la UD con el RA al que contribuye.

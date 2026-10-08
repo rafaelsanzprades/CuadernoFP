@@ -204,7 +204,7 @@ export function JegModeloTab() {
       </SectionHeading>
       <div className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] p-4">
         {ceOptions.length === 0 ? (
-          <p className="text-body text-muted">{t('campos.instrumentos.primeroAnadeCriterios', {defaultValue: 'Primero añade Criterios de evaluación en Currículo → OG<-RA<-CE.'})}</p>
+          <p className="text-body text-muted">{t('campos.instrumentos.primeroAnadeCriterios', {defaultValue: 'Primero añade Criterios de evaluación en Currículo › Relación RA <- CE.'})}</p>
         ) : (
           <div className="space-y-4">
             {ceOptions.map((ce: any) => {

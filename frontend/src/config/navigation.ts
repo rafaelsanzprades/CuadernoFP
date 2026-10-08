@@ -30,7 +30,7 @@ export const navGroups = [
       { href: "/catalogo?tab=familias", label: "Catálogo", icon: GraduationCap, description: "Familias, títulos, módulos y currículos (RA y CE)." },
       { href: "/contexto?tab=identificacion", label: "Contexto", icon: Compass, description: "Identificación, entorno, alumnado, evaluación y procedimientos de la programación." },
       { href: "/curriculo?tab=relacion-ra-ce", label: "Currículo", icon: Grid, description: "Contribución de los RA a los objetivos, ponderación RA-CE, unidades didácticas y tareas competenciales." },
-      { href: "/metodologia?tab=metodologias", label: "Metodologías", icon: Lightbulb, description: "Metodología, recursos, plan de contingencia y elementos transversales." },
+      { href: "/metodologias?tab=metodologias", label: "Metodologías", icon: Lightbulb, description: "Metodología, recursos, plan de contingencia y elementos transversales." },
       { href: "/instrumentos?tab=resumen", label: "Instrumentos", icon: Wrench, description: "Definición y pesos de las herramientas de evaluación." }
     ]
   },
@@ -76,7 +76,7 @@ export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "secuenciacion-ud", label: "Secuenciación de UD" },
     { id: "proyectos-retos", label: "Proyectos y retos" },
   ],
-  "/metodologia": [
+  "/metodologias": [
     { id: "metodologias", label: "Metodología e innovación" },
     { id: "instrumentos-recursos", label: "Instrumentos y recursos" },
     { id: "diversidad", label: "Atención a la diversidad" },
