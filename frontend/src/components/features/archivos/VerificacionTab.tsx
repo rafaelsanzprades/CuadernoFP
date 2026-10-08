@@ -90,7 +90,7 @@ function CheckCard({ item }: { item: CheckItem }) {
 export function VerificacionTab() {
   const { moduleData, cursoData, activeModuleId, activeCursoId, dataSource } = useAppStore();
   const { t } = useTranslation();
-  const dataSourceLabel = dataSource === 'demo' ? 'datos DEMO' : 'datos reales';
+  const dataSourceLabel = dataSource === 'demo' ? 'datos demo' : 'datos reales';
   const [nuevoCursoWizardOpen, setNuevoCursoWizardOpen] = useState(false);
 
   // ── Catálogo oficial (fijo) + resolución de familia/título del módulo activo ──
@@ -249,7 +249,7 @@ export function VerificacionTab() {
     {
       id: "instr",
       icon: <Wrench className="w-5 h-5" />,
-      title: t('campos.verificacion.instrumentosIndicadoresTitulo', {defaultValue: 'Instrumentos e Indicadores'}),
+      title: t('campos.verificacion.instrumentosIndicadoresTitulo', {defaultValue: 'Instrumentos e indicadores'}),
       href: "/instrumentos?tab=resumen",
       hrefLabel: t('nav.instrumentos', {defaultValue: 'Instrumentos'}),
       status: (instrCount === 0 || indCount === 0) ? "empty" : indSinCE > 0 ? "warning" : "ok",
@@ -481,9 +481,9 @@ export function VerificacionTab() {
                 <div className="text-caption text-muted mt-0.5">{t('campos.verificacion.titulosTotalesLabel', {defaultValue: 'Títulos totales'})}</div>
               </div>
               {[
-                { nivel: "Grado Básico", label: t('campos.verificacion.gradoBasicoLabel', {defaultValue: 'Grado Básico (GB/GM/GS)'}) },
-                { nivel: "Grado Medio", label: t('campos.verificacion.gradoMedioLabel', {defaultValue: 'Grado Medio (GB/GM/GS)'}) },
-                { nivel: "Grado Superior", label: t('campos.verificacion.gradoSuperiorLabel', {defaultValue: 'Grado Superior (GB/GM/GS)'}) },
+                { nivel: "Grado Básico", label: t('campos.verificacion.gradoBasicoLabel', {defaultValue: 'Grado básico (GB/GM/GS)'}) },
+                { nivel: "Grado Medio", label: t('campos.verificacion.gradoMedioLabel', {defaultValue: 'Grado medio (GB/GM/GS)'}) },
+                { nivel: "Grado Superior", label: t('campos.verificacion.gradoSuperiorLabel', {defaultValue: 'Grado superior (GB/GM/GS)'}) },
               ].map(({ nivel, label }) => (
                 <div key={nivel} className="text-center">
                   <div className="text-subheading font-bold text-foreground">{catalogPorNivel[nivel] ?? 0}</div>
@@ -559,7 +559,7 @@ export function VerificacionTab() {
           </SectionHeading>
           <div className="flex items-center gap-3 shrink-0">
             <span className="bg-foreground/5 border border-white/5 rounded-lg px-3 py-1 text-caption text-muted">
-              {t('campos.verificacion.cursoActivoLabel', {defaultValue: 'Curso Activo:'})} <span className="font-semibold text-foreground">{activeCursoId || "-"}</span>
+              {t('campos.verificacion.cursoActivoLabel', {defaultValue: 'Curso activo:'})} <span className="font-semibold text-foreground">{activeCursoId || "-"}</span>
             </span>
             {activeModuleId && (
               <Button

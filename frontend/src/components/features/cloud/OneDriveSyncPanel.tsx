@@ -35,7 +35,7 @@ export function OneDriveSyncPanel() {
   const handleConnect = async () => {
     if (oneDriveDisabledInTauri) return;
     if (dataSource === 'demo') {
-      toast.error(t('toasts.oneDrive.sinDemo', {defaultValue: "No puedes sincronizar en modo DEMO."}));
+      toast.error(t('toasts.oneDrive.sinDemo', {defaultValue: "No puedes sincronizar en modo demo."}));
       return;
     }
     if (!oneDriveClientId) {

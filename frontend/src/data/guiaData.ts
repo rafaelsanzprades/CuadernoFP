@@ -103,7 +103,7 @@ export const GUIA_PASOS: {
                 label: "Página", text: "Normativa",
                 children: [
                   { label: "Pestaña", text: "Autonomías", children: [
-                    { label: "Acción", text: "Selecciona tu Comunidad Autónoma en el mapa interactivo para cargar la normativa autonómica específica." },
+                    { label: "Acción", text: "Selecciona tu Comunidad autónoma en el mapa interactivo para cargar la normativa autonómica específica." },
                   ] },
                 ],
               },
@@ -116,7 +116,7 @@ export const GUIA_PASOS: {
                 label: "Página", text: "Catálogo",
                 children: [
                   { label: "Pestaña", text: "Familias", children: [{ label: "Acción", text: "Haz clic en la tarjeta de tu familia profesional." }] },
-                  { label: "Pestaña", text: "Títulos", children: [{ label: "Selector", text: "Familia profesional y Título. Selecciona tu ciclo formativo." }] },
+                  { label: "Pestaña", text: "Títulos", children: [{ label: "Selector", text: "Familia profesional y título. Selecciona tu ciclo formativo." }] },
                   { label: "Pestaña", text: "Módulos", children: [{ label: "Botón", text: '"Nueva programación", en el módulo deseado dentro de su curso (1º/2º).' }] },
                   { label: "Pestaña", text: "RA → CE", children: [{ label: "Acción", text: "Consulta de solo lectura del currículo oficial ya cargado: resultados de aprendizaje y criterios de evaluación de tu módulo, tal como los fija la normativa." }] },
                 ],
@@ -139,7 +139,7 @@ export const GUIA_PASOS: {
                   { label: "Pestaña", text: "Entorno", children: [{ label: "Bloque", text: "Contexto escolar (entorno geográfico y socioeconómico), actividades complementarias y extraescolares, y plan FEOE (modalidad, seguimiento y régimen dual)." }] },
                   { label: "Pestaña", text: "Alumnado", children: [{ label: "Bloque", text: "Alumnado con necesidades específicas (ACNEAE) y datos del grupo, rasgos característicos del grupo y evaluación inicial." }] },
                   { label: "Pestaña", text: "Evaluación", children: [{ label: "Bloque", text: "Reglas de redondeo y compensación, ponderación por trimestres e instrumentos de evaluación, y escalas cualitativas." }] },
-                  { label: "Pestaña", text: "Procedimientos", children: [{ label: "Bloque", text: "Modelo de recuperación, información al alumnado y procedimientos (pérdida de evaluación continua), criterios de calificación y textos del modelo Simplificado." }] },
+                  { label: "Pestaña", text: "Procedimientos", children: [{ label: "Bloque", text: "Modelo de recuperación, información al alumnado y procedimientos (pérdida de evaluación continua), criterios de calificación y textos del modelo simplificado." }] },
                 ],
               },
             ],
@@ -161,7 +161,7 @@ export const GUIA_PASOS: {
                     { label: "Número", text: "Asignar el % de cada RA y de cada CE." },
                   ] },
                   { label: "Pestaña", text: "Contribución OG <- RA", children: [
-                    { label: "Bloque", text: "Matriz de contribución de cada RA a los Objetivos Generales del título." },
+                    { label: "Bloque", text: "Matriz de contribución de cada RA a los objetivos generales del título." },
                   ] },
                   { label: "Pestaña", text: "Unidades didácticas", children: [
                     { label: "Botón", text: '"Añadir nueva UD". Crea los temas.' },
@@ -247,7 +247,7 @@ export const GUIA_PASOS: {
                     label: 'Bloque "Documentos de apoyo al currículo"', text: "Matriz RA ↔ UD, selector de UD y de tarea competencial, y matriz de cobertura CE × Instrumento — todo en un único bloque, en PDF (\"Vista previa\") o DOCX (\"Descarga editable\").",
                   },
                   {
-                    label: 'Bloque "Documentos programáticos por Comunidades autónomas"', text: 'Acordeón por Comunidad Autónoma (Aragón viene abierta por defecto; el resto muestra "próximamente"). Dentro de cada comunidad con contenido, tres niveles de programación, siempre en .docx editable:',
+                    label: 'Bloque "Documentos programáticos por Comunidades autónomas"', text: 'Acordeón por Comunidad autónoma (Aragón viene abierta por defecto; el resto muestra "próximamente"). Dentro de cada comunidad con contenido, tres niveles de programación, siempre en .docx editable:',
                     children: [
                       { label: "PD- (Resumen)", text: "Resumen de 1-2 folios para el alumnado." },
                       { label: "PD= (Simplificada)", text: "Formato oficial intermedio (~15-20 páginas)." },
@@ -282,7 +282,7 @@ export const GUIA_PASOS: {
                 children: [
                   { label: "Pestaña", text: "Datos", children: [
                     { label: "Botón", text: '"Iniciar curso (+ grupo)".' },
-                    { label: "Número", text: "Año Académico (ej. 2025-26)." },
+                    { label: "Número", text: "Año académico (ej. 2025-26)." },
                     { label: "Alfanumérico", text: "Letra / Grupo (ej. 1A-GM)." },
                     { label: "Botón", text: "Crear ahora." },
                   ] },
@@ -305,7 +305,7 @@ export const GUIA_PASOS: {
                   { label: "Pestaña", text: "Fechas y horario", children: [
                     { label: "Fecha", text: "Inicio y fin de curso, y trimestres." },
                     { label: "Horario", text: "Horas lectivas diarias." },
-                    { label: "Bloque", text: '"Periodo FEOE" (al final de la pestaña): inicio y fin de la Formación en Empresa u Organismo Equiparado, tipo de dual y horas/día.' },
+                    { label: "Bloque", text: '"Periodo FEOE" (al final de la pestaña): inicio y fin de la Formación en empresa u organismo equiparado, tipo de dual y horas/día.' },
                   ] },
                   { label: "Pestaña", text: "Eventos y festivos", children: [
                     { label: "Fecha", text: "Festivos o celebraciones, con calendario interactivo para marcarlos con un clic." },
@@ -332,7 +332,7 @@ export const GUIA_PASOS: {
                     { label: "Acordeones", text: "Orientación profesional por alumno/a, en dos secciones: \"Motivación y experiencia\" e \"Intereses y aspiraciones\". Se rellena al empezar el curso." },
                   ] },
                   { label: "Pestaña", text: "Matrícula", children: [
-                    { label: "Botón", text: "Importar CSV o Añadir Alumnado a mano." },
+                    { label: "Botón", text: "Importar CSV o añadir alumnado a mano." },
                   ] },
                   { label: "Pestaña", text: "Plano de aula", children: [
                     { label: "Acción", text: "Arrastrar al alumnado a sus mesas." },
@@ -360,7 +360,7 @@ export const GUIA_PASOS: {
             children: [
               { label: "Página", text: "Inicio", children: [
                 { label: "Pestaña", text: "Datos", children: [
-                  { label: "Acción", text: "Haz DOBLE CLIC sobre tu grupo, tu programación o tu curso guardados." },
+                  { label: "Acción", text: "Haz doble clic sobre tu grupo, tu programación o tu curso guardados." },
                 ] },
               ] },
             ],
@@ -474,16 +474,16 @@ export const GUIA_CATALOGO: GuiaCatalogoGrupo[] = [
     numero: "A.1",
     titulo: "Metodologías Activas",
     items: [
-      { code: "ABP", label: "Aprendizaje Basado en Proyectos" },
-      { code: "ABR", label: "Aprendizaje Basado en Retos" },
-      { code: "FLIP", label: "Flipped Classroom (Aula Invertida)" },
-      { code: "COLAB", label: "Aprendizaje Cooperativo / Colaborativo" },
-      { code: "SIM", label: "Simulación de Entornos Profesionales (Role-playing)" },
-      { code: "CASOS", label: "Método del Caso" },
-      { code: "GAMIF", label: "Gamificación / Aprendizaje Basado en Juegos" },
+      { code: "ABP", label: "Aprendizaje basado en proyectos" },
+      { code: "ABR", label: "Aprendizaje basado en retos" },
+      { code: "FLIP", label: "Flipped classroom (aula invertida)" },
+      { code: "COLAB", label: "Aprendizaje cooperativo / colaborativo" },
+      { code: "SIM", label: "Simulación de entornos profesionales (Role-playing)" },
+      { code: "CASOS", label: "Método del caso" },
+      { code: "GAMIF", label: "Gamificación / Aprendizaje basado en juegos" },
       { code: "ApS", label: "Aprendizaje-Servicio" },
-      { code: "DEMO", label: "Demostración Práctica" },
-      { code: "MAGIS", label: "Exposición Didáctica Interactiva apoyada en TIC" },
+      { code: "DEMO", label: "Demostración práctica" },
+      { code: "MAGIS", label: "Exposición didáctica interactiva apoyada en TIC" },
     ],
   },
   {
@@ -510,15 +510,15 @@ export const GUIA_CATALOGO: GuiaCatalogoGrupo[] = [
       { code: "AGRUP", label: "Agrupamientos flexibles y tutoría entre iguales" },
       { code: "TIEMPO", label: "Flexibilización en tiempos de ejecución" },
       { code: "MATERIAL", label: "Adaptación de materiales" },
-      { code: "ACNS", label: "Adaptaciones Curriculares No Significativas" },
-      { code: "AMPLIA", label: "Actividades de ampliación para Altas Capacidades" },
+      { code: "ACNS", label: "Adaptaciones curriculares no significativas" },
+      { code: "AMPLIA", label: "Actividades de ampliación para altas capacidades" },
     ],
   },
   {
     numero: "A.4",
-    titulo: "Plan de Contingencia",
+    titulo: "Plan de contingencia",
     items: [
-      { code: "CONT-ASINC", label: "Docencia telemática asíncrona (Aula Virtual)" },
+      { code: "CONT-ASINC", label: "Docencia telemática asíncrona (aula virtual)" },
       { code: "CONT-SINC", label: "Docencia telemática síncrona (Videoconferencia)" },
       { code: "CONT-AUT", label: "Dosier de tareas autoguiadas" },
     ],
@@ -531,9 +531,9 @@ export const GUIA_CATALOGO: GuiaCatalogoGrupo[] = [
       { code: "REC-TALLER", label: "Taller específico / Laboratorio" },
       { code: "REC-INFO", label: "Aula de informática" },
       { code: "REC-SOFT", label: "Software y simuladores específicos" },
-      { code: "REC-EVA", label: "Entorno Virtual de Aprendizaje (Aules, Moodle)" },
+      { code: "REC-EVA", label: "Entorno virtual de aprendizaje (Aules, Moodle)" },
       { code: "REC-BIBLIO", label: "Manuales y documentación técnica" },
-      { code: "REC-EPI", label: "Equipos de Protección Individual (EPIs)" },
+      { code: "REC-EPI", label: "Equipos de protección individual (EPIs)" },
     ],
   },
   {
@@ -550,9 +550,9 @@ export const GUIA_CATALOGO: GuiaCatalogoGrupo[] = [
     numero: "A.7",
     titulo: "Elementos Transversales",
     items: [
-      { code: "TRANS-ODS", label: "Objetivos de Desarrollo Sostenible (Agenda 2030)" },
+      { code: "TRANS-ODS", label: "Objetivos de desarrollo sostenible (Agenda 2030)" },
       { code: "TRANS-IGUALDAD", label: "Igualdad de género y corresponsabilidad" },
-      { code: "TRANS-PRL", label: "Cultura de Prevención de Riesgos Laborales" },
+      { code: "TRANS-PRL", label: "Cultura de prevención de riesgos laborales" },
       { code: "TRANS-TIC", label: "Fomento de la competencia digital y buen uso de internet" },
       { code: "TRANS-EMP", label: "Emprendimiento e iniciativa emprendedora" },
     ],

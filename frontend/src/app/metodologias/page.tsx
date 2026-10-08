@@ -73,23 +73,23 @@ export default function MetodologiaConfigPage() {
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
     metodologias: [
       { id: "metodologia-metodologia", label: t('campos.modulo.metodologiaTitulo', {defaultValue: 'Metodología'}) },
-      { id: "metodologia-innovacion", label: t('campos.modulo.tituloInnovacionIntermodularidad', {defaultValue: 'Innovación e Intermodularidad'}) },
+      { id: "metodologia-innovacion", label: t('campos.modulo.tituloInnovacionIntermodularidad', {defaultValue: 'Innovación e intermodularidad'}) },
     ],
     diversidad: [
-      { id: "metodologia-marco-inclusion", label: t('campos.modulo.marcoInclusionTitulo', {defaultValue: 'Marco de Inclusión (D 91/2024 Art. 29)'}) },
+      { id: "metodologia-marco-inclusion", label: t('campos.modulo.marcoInclusionTitulo', {defaultValue: 'Marco de inclusión (D 91/2024, art. 29)'}) },
       { id: "metodologia-f1-diversidad", label: t('campos.modulo.f1AtencionDiversidadTitulo', {defaultValue: 'Atención a la diversidad'}) },
-      { id: "metodologia-plan-dua", label: t('campos.modulo.planDuaTitulo', {defaultValue: 'Plan de Atención a la Diversidad (DUA)'}) },
+      { id: "metodologia-plan-dua", label: t('campos.modulo.planDuaTitulo', {defaultValue: 'Plan de atención a la diversidad (DUA)'}) },
       { id: "metodologia-acneae", label: t('campos.modulo.panelAcneaeTitulo', {defaultValue: 'Panel de ACNEAE'}) },
     ],
     contingencia: [
       { id: "metodologia-contingencia-medidas", label: t('campos.modulo.tituloMedidasContingencia', {defaultValue: 'Medidas de contingencia'}) },
       { id: "metodologia-contingencia-registro", label: t('campos.modulo.tituloRegistroEscenariosContingencia', {defaultValue: 'Registro de escenarios de contingencia'}) },
-      { id: "metodologia-contingencia-plan", label: t('campos.modulo.tituloPlanContingencia', {defaultValue: 'Plan de Contingencia'}) },
+      { id: "metodologia-contingencia-plan", label: t('campos.modulo.tituloPlanContingencia', {defaultValue: 'Plan de contingencia'}) },
     ],
     transversales: [
-      { id: "metodologia-transversales", label: t('campos.modulo.transversalesCompetenciasTitulo', {defaultValue: 'Transversales y Competencias'}) },
+      { id: "metodologia-transversales", label: t('campos.modulo.transversalesCompetenciasTitulo', {defaultValue: 'Transversales y competencias'}) },
       { id: "metodologia-digcomp", label: t('campos.modulo.competenciasDigitalesTitulo', {defaultValue: 'Competencias digitales (DigComp / DigCompEdu)'}) },
-      { id: "metodologia-estandares", label: t('campos.modulo.estandaresObjetivosTitulo', {defaultValue: 'Estándares y Objetivos (Currículo)'}) },
+      { id: "metodologia-estandares", label: t('campos.modulo.estandaresObjetivosTitulo', {defaultValue: 'Estándares y objetivos (currículo)'}) },
     ],
   };
 

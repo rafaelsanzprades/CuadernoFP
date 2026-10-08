@@ -25,7 +25,7 @@ export const RiesgoAcademicoTab = () => {
       const nota = Number(e.Nota_Final_FO) || 0;
       let riskLevel = t('campos.analisis.riesgoModerado', {defaultValue: '🟡 Moderado'});
       let riskColor = "text-warning";
-      if (nota < 3) { riskLevel = t('campos.analisis.riesgoMuyAlto', {defaultValue: 'Muy Alto'}); riskColor = "text-danger"; }
+      if (nota < 3) { riskLevel = t('campos.analisis.riesgoMuyAlto', {defaultValue: 'Muy alto'}); riskColor = "text-danger"; }
       else if (nota < 4) { riskLevel = t('campos.analisis.riesgoAlto', {defaultValue: '🟠 Alto'}); riskColor = "text-warning"; }
       
       return {

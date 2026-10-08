@@ -76,7 +76,7 @@ export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps)
           <div>
             <h2 id="modal-title" className="text-subheading font-bold flex items-center gap-2 text-foreground">
               <FileText className="w-5 h-5 text-accent" />
-              {t('campos.secuenciacion.disenoTareaCompetencialTitulo', {defaultValue: 'Diseño de la Tarea Competencial'})}
+              {t('campos.secuenciacion.disenoTareaCompetencialTitulo', {defaultValue: 'Diseño de la tarea competencial'})}
             </h2>
             <p className="text-body text-muted mt-1">
               <span className="font-mono text-accent mr-2">{task.ID || task.id_act}</span>

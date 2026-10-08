@@ -108,7 +108,7 @@ export function ProcedimientosTab({ bloques }: { bloques?: string[] } = {}) {
         {show("procedimientos-criterios-calificacion") && (
         <div className="space-y-3">
         <SectionHeading id="procedimientos-criterios-calificacion" scrollMt="260px">
-          {t('campos.evaluacion.tituloCriteriosCalificacionSimplificado', {defaultValue: 'Criterios de calificación (texto específico modelo Simplificado, pd=)'})}
+          {t('campos.evaluacion.tituloCriteriosCalificacionSimplificado', {defaultValue: 'Criterios de calificación (texto específico modelo simplificado, pd=)'})}
         </SectionHeading>
         <div className="glass-card p-6 border-t-4 border-t-teal-500">
           <p className="text-caption text-muted mb-3">{t('campos.evaluacion.criteriosCalificacionDesc', {defaultValue: 'Si se deja vacío, se genera automáticamente. Criterios de calificación y redondeo del módulo.'})}</p>

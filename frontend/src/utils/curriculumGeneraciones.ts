@@ -17,7 +17,7 @@ export interface InfoGeneracion {
 export const GENERACIONES_CURRICULO: Record<GeneracionCurriculo, InfoGeneracion> = {
   rd659_2023: {
     label: "RD 659/2023 (LO 3/2022)",
-    leyenda: "Currículo redactado bajo el Real Decreto 659/2023, desarrollo de la LO 3/2022. El Artículo 6 recoge las Cualificaciones profesionales y Unidades de Competencia del Catálogo Nacional de Cualificaciones Profesionales, y el Artículo 9 fija los Objetivos Generales del título.",
+    leyenda: "Currículo redactado bajo el Real Decreto 659/2023, desarrollo de la LO 3/2022. El Artículo 6 recoge las Cualificaciones profesionales y Unidades de Competencia del Catálogo Nacional de Cualificaciones Profesionales, y el Artículo 9 fija los objetivos generales del título.",
     tieneObjetivosGenerales: true,
   },
   reforma_2024: {

@@ -97,7 +97,7 @@ export function DiversidadTab() {
       {/* Marco de Inclusión */}
       <div className="space-y-3">
       <SectionHeading id="metodologia-marco-inclusion" icon={ShieldAlert} scrollMt="260px">
-        {t('campos.modulo.marcoInclusionTitulo', {defaultValue: 'Marco de Inclusión (D 91/2024 Art. 29)'})}
+        {t('campos.modulo.marcoInclusionTitulo', {defaultValue: 'Marco de inclusión (D 91/2024, art. 29)'})}
       </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-purple-500">
         <div className="space-y-6">
@@ -200,10 +200,10 @@ export function DiversidadTab() {
       </div>
       </div>
 
-      {/* Plan de Atención a la Diversidad (DUA) */}
+      {/* Plan de atención a la diversidad (DUA) */}
       <div className="space-y-3">
       <SectionHeading id="metodologia-plan-dua" icon={Puzzle} scrollMt="260px">
-        {t('campos.modulo.planDuaTitulo', {defaultValue: 'Plan de Atención a la Diversidad (DUA)'})}
+        {t('campos.modulo.planDuaTitulo', {defaultValue: 'Plan de atención a la diversidad (DUA)'})}
       </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-emerald-500">
         <div className="overflow-x-auto mb-4">
@@ -264,7 +264,7 @@ export function DiversidadTab() {
       </div>
       <div className="glass-card p-6 border-t-4 border-t-pink-500">
         <p className="text-caption text-muted mb-4">
-          {t('campos.modulo.panelAcneaeDesc', {defaultValue: 'Registro de Alumnado con Necesidad Específica de Apoyo Educativo y sus adaptaciones asociadas.'})}
+          {t('campos.modulo.panelAcneaeDesc', {defaultValue: 'Registro de alumnado con necesidad específica de apoyo educativo y sus adaptaciones asociadas.'})}
         </p>
 
         {acneae.length === 0 ? (
@@ -295,7 +295,7 @@ export function DiversidadTab() {
                     />
                   </div>
                   <div>
-                    <label className="text-caption font-semibold text-muted block mb-1">{t('campos.modulo.acneaeTipoNecesidadTitulo', {defaultValue: 'Tipo de Necesidad'})}</label>
+                    <label className="text-caption font-semibold text-muted block mb-1">{t('campos.modulo.acneaeTipoNecesidadTitulo', {defaultValue: 'Tipo de necesidad'})}</label>
                     <input 
                       type="text" 
                       value={student.tipoNecesidad}

@@ -92,10 +92,10 @@ export default function InicioPage() {
         useAppStore.getState().setPdFileSource({ type: 'none', fileName: name });
         toast.success(t('toasts.archivos.programacionCargada', {name, defaultValue: 'Programación {{name}} cargada.'}));
       } else {
-        toast.error(t('toasts.archivos.errorCargarProgramacionDemo', {defaultValue: "Error al cargar la programación DEMO."}));
+        toast.error(t('toasts.archivos.errorCargarProgramacionDemo', {defaultValue: "Error al cargar la programación demo."}));
       }
     } catch {
-      toast.error(t('toasts.archivos.errorCargarProgramacionDemo', {defaultValue: "Error al cargar la programación DEMO."}));
+      toast.error(t('toasts.archivos.errorCargarProgramacionDemo', {defaultValue: "Error al cargar la programación demo."}));
     }
   };
 
@@ -107,10 +107,10 @@ export default function InicioPage() {
         useAppStore.getState().setCursoFileSource({ type: 'none', fileName: name });
         toast.success(t('toasts.archivos.cursoCargado', {name, defaultValue: 'Curso {{name}} cargado.'}));
       } else {
-        toast.error(t('toasts.archivos.errorCargarCursoDemo', {defaultValue: "Error al cargar el curso DEMO."}));
+        toast.error(t('toasts.archivos.errorCargarCursoDemo', {defaultValue: "Error al cargar el curso demo."}));
       }
     } catch {
-      toast.error(t('toasts.archivos.errorCargarCursoDemo', {defaultValue: "Error al cargar el curso DEMO."}));
+      toast.error(t('toasts.archivos.errorCargarCursoDemo', {defaultValue: "Error al cargar el curso demo."}));
     }
   };
 
@@ -126,7 +126,7 @@ export default function InicioPage() {
   const switchToDemo = () => {
     setDataSource("demo");
     fileManager.loadDemoData();
-    toast.success(t('toasts.archivos.cambiadoDemo', {defaultValue: "Cambiado a datos DEMO."}));
+    toast.success(t('toasts.archivos.cambiadoDemo', {defaultValue: "Cambiado a datos demo."}));
   };
 
   const switchToLocal = () => {
@@ -180,7 +180,7 @@ export default function InicioPage() {
       return;
     }
     if (dataSource === 'demo') {
-      toast(t('toasts.archivos.modoDemoGuardarComoNuevo', {defaultValue: "Estás en modo DEMO. Guardando como nuevo archivo..."}), { icon: 'ℹ️' });
+      toast(t('toasts.archivos.modoDemoGuardarComoNuevo', {defaultValue: "Estás en modo demo. Guardando como nuevo archivo..."}), { icon: 'ℹ️' });
       return handleSaveAsPd();
     }
     const ok = await fileManager.saveProgramacion();
@@ -194,7 +194,7 @@ export default function InicioPage() {
       return;
     }
     if (dataSource === 'demo') {
-      toast(t('toasts.archivos.modoDemoGuardarComoNuevo', {defaultValue: "Estás en modo DEMO. Guardando como nuevo archivo..."}), { icon: 'ℹ️' });
+      toast(t('toasts.archivos.modoDemoGuardarComoNuevo', {defaultValue: "Estás en modo demo. Guardando como nuevo archivo..."}), { icon: 'ℹ️' });
       return handleSaveAsCurso();
     }
     const ok = await fileManager.saveCurso();
@@ -325,9 +325,9 @@ export default function InicioPage() {
     bienvenida: [
       { id: "bienvenida-descarga-escritorio", label: t('campos.inicio.aplicacionEscritorioTitulo', {defaultValue: 'Aplicación de escritorio para Windows'}) },
       { id: "bienvenida-contrib-telegram", label: t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'}) },
-      { id: "bienvenida-metodologia", label: t('campos.inicio.metodologiaEspecificaTitulo', {defaultValue: 'Metodología específica de Formación Profesional'}) },
+      { id: "bienvenida-metodologia", label: t('campos.inicio.metodologiaEspecificaTitulo', {defaultValue: 'Metodología específica de formación profesional'}) },
       { id: "bienvenida-mapa", label: t('campos.inicio.mapaWebTitulo', {defaultValue: 'Mapa del web'}) },
-      { id: "bienvenida-contrib-comunidades", label: t('campos.inicio.contribuidoresCcaaTitulo', {defaultValue: 'Contribuidores por Comunidad Autónoma'}) },
+      { id: "bienvenida-contrib-comunidades", label: t('campos.inicio.contribuidoresCcaaTitulo', {defaultValue: 'Contribuidores por comunidad autónoma'}) },
     ],
     verificacion: [
       { id: "verificacion-grupo", label: t('campos.verificacion.grupoTitulo', {defaultValue: 'General'}) },
@@ -337,7 +337,7 @@ export default function InicioPage() {
     datos: [
       { id: "datos-modo-datos", label: t('campos.archivos.modoDatosTitulo', {defaultValue: 'Modo de datos'}) },
       { id: "datos-archivos", label: t('campos.archivos.archivosTitulo', {defaultValue: 'Archivos'}) },
-      { id: "datos-nube", label: t('campos.archivos.nubeAsistenteTitulo', {defaultValue: 'Nube y Asistente IA'}) },
+      { id: "datos-nube", label: t('campos.archivos.nubeAsistenteTitulo', {defaultValue: 'Nube y asistente IA'}) },
       { id: "datos-privacidad", label: t('campos.archivos.privacidadDisenoTitulo', {defaultValue: 'Tu privacidad por diseño'}) },
     ],
   };
@@ -433,7 +433,7 @@ export default function InicioPage() {
                 </div>
                 <div className="flex-1 text-center md:text-left">
                   <p className="text-body text-muted leading-tight">
-                    {t('campos.inicio.grupoTelegramDesc', {defaultValue: 'Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad Autónoma.'})}
+                    {t('campos.inicio.grupoTelegramDesc', {defaultValue: 'Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad autónoma.'})}
                   </p>
                 </div>
                 <a
@@ -456,11 +456,11 @@ export default function InicioPage() {
                 fuera de Tauri no hay nada que revisar. */}
             <div className="space-y-3">
               <SectionHeading id="bienvenida-metodologia" icon={GraduationCap} scrollMt="260px">
-                {t('campos.inicio.metodologiaEspecificaTitulo', {defaultValue: 'Metodología específica de Formación Profesional'})}
+                {t('campos.inicio.metodologiaEspecificaTitulo', {defaultValue: 'Metodología específica de formación profesional'})}
               </SectionHeading>
               <Card className="p-6 border border-accent/20 bg-accent/5">
               <p className="text-body text-muted">
-                {t('campos.inicio.metodologiaEspecificaDesc', {defaultValue: 'Cuaderno FP sigue las referencias bibliográficas actualizadas a la nueva ley de FP, las orientaciones de la Inspección Educativa, los principales autores de referencia y las guías oficiales de las administraciones educativas: los Resultados de Aprendizaje (RA) son el eje causal del que se considera debe derivar todo lo demás en una programación didáctica.'})}
+                {t('campos.inicio.metodologiaEspecificaDesc', {defaultValue: 'Cuaderno FP sigue las referencias bibliográficas actualizadas a la nueva ley de FP, las orientaciones de la Inspección Educativa, los principales autores de referencia y las guías oficiales de las administraciones educativas: los Resultados de aprendizaje (RA) son el eje causal del que se considera debe derivar todo lo demás en una programación didáctica.'})}
               </p>
               <div className="flex flex-wrap items-center gap-x-3 gap-y-3 text-body font-semibold text-muted border-t border-[var(--glass-border)] pt-4 mt-4">
                 {[
@@ -568,7 +568,7 @@ export default function InicioPage() {
                     separación vertical respecto al Mapa del web. */}
                 <div className="space-y-3">
                   <SectionHeading id="bienvenida-contrib-comunidades" icon={Users} scrollMt="260px">
-                    {t('campos.inicio.contribuidoresCcaaTitulo', {defaultValue: 'Contribuidores por Comunidad Autónoma'})}
+                    {t('campos.inicio.contribuidoresCcaaTitulo', {defaultValue: 'Contribuidores por comunidad autónoma'})}
                   </SectionHeading>
                   <p className="text-muted">
                     {t('campos.inicio.contribuidoresCcaaDesc', {defaultValue: 'Mención especial al profesorado que está ayudando a mejorar y a integrar los currículos de las Comunidades Autónomas'})}
@@ -637,12 +637,12 @@ export default function InicioPage() {
                     {dataSource === 'demo' ? (
                       <>
                         <Cloud className="w-4 h-4 shrink-0" />
-                        <span><strong className="font-bold">DEMO:</strong> {t('campos.archivos.avisoDemoDesc', {defaultValue: 'datos de ejemplo, nada se guarda. Cambia a REALES para tus propios archivos.'})}</span>
+                        <span><strong className="font-bold">Demo:</strong> {t('campos.archivos.avisoDemoDesc', {defaultValue: 'datos de ejemplo, nada se guarda. Cambia a reales para tus propios archivos.'})}</span>
                       </>
                     ) : (
                       <>
                         <HardDrive className="w-4 h-4 shrink-0" />
-                        <span><strong className="font-bold">REAL:</strong> {t('campos.archivos.avisoRealDesc', {defaultValue: 'estás trabajando con tus propios archivos .fpg/.fpp/.fpc, guardados en tu equipo. Los cambios se guardan de verdad.'})}</span>
+                        <span><strong className="font-bold">Real:</strong> {t('campos.archivos.avisoRealDesc', {defaultValue: 'estás trabajando con tus propios archivos .fpg/.fpp/.fpc, guardados en tu equipo. Los cambios se guardan de verdad.'})}</span>
                       </>
                     )}
                   </div>
@@ -674,7 +674,7 @@ export default function InicioPage() {
                         {isDemoLoaded ? (
                           demoGroupFiles.length === 0 ? (
                             <div className="h-full flex items-center justify-center text-center p-4">
-                              <p className="text-body text-muted">{t('campos.archivos.sinGruposDemo', {defaultValue: 'No se han encontrado grupos DEMO.'})}</p>
+                              <p className="text-body text-muted">{t('campos.archivos.sinGruposDemo', {defaultValue: 'No se han encontrado grupos demo.'})}</p>
                             </div>
                           ) : (
                             demoGroupFiles.map(f => {
@@ -770,7 +770,7 @@ export default function InicioPage() {
                         {isDemoLoaded ? (
                           demoProgFiles.length === 0 ? (
                             <div className="h-full flex items-center justify-center text-center p-4">
-                              <p className="text-body text-muted">{t('campos.archivos.sinProgramacionesDemo', {defaultValue: 'No se han encontrado programaciones DEMO.'})}</p>
+                              <p className="text-body text-muted">{t('campos.archivos.sinProgramacionesDemo', {defaultValue: 'No se han encontrado programaciones demo.'})}</p>
                             </div>
                           ) : (
                             demoProgFiles.map(f => {
@@ -820,7 +820,7 @@ export default function InicioPage() {
                       <div className="flex flex-col gap-2 pt-4 mt-auto border-t border-[var(--glass-border)]">
                         {isDemoLoaded ? (
                           <Button onClick={handleLoadDemo} className="w-full bg-warning/20 hover:bg-warning/30 text-warning border border-warning/30">
-                            <Zap className="w-4 h-4 mr-2" /> {t('botones.archivos.recargarDemo', {defaultValue: 'Recargar DEMO'})}
+                            <Zap className="w-4 h-4 mr-2" /> {t('botones.archivos.recargarDemo', {defaultValue: 'Recargar demo'})}
                           </Button>
                         ) : (
                           <>
@@ -870,7 +870,7 @@ export default function InicioPage() {
                         {isDemoLoaded ? (
                           demoCursoFiles.length === 0 ? (
                             <div className="h-full flex items-center justify-center text-center p-4">
-                              <p className="text-body text-muted">{t('campos.archivos.sinCursosDemo', {defaultValue: 'No se han encontrado cursos DEMO.'})}</p>
+                              <p className="text-body text-muted">{t('campos.archivos.sinCursosDemo', {defaultValue: 'No se han encontrado cursos demo.'})}</p>
                             </div>
                           ) : (
                             demoCursoFiles.map(f => {
@@ -918,7 +918,7 @@ export default function InicioPage() {
                       <div className="flex flex-col gap-2 pt-4 mt-auto border-t border-[var(--glass-border)]">
                         {isDemoLoaded ? (
                           <Button onClick={handleLoadDemo} className="w-full bg-warning/20 hover:bg-warning/30 text-warning border border-warning/30">
-                            <Zap className="w-4 h-4 mr-2" /> {t('botones.archivos.recargarDemo', {defaultValue: 'Recargar DEMO'})}
+                            <Zap className="w-4 h-4 mr-2" /> {t('botones.archivos.recargarDemo', {defaultValue: 'Recargar demo'})}
                           </Button>
                         ) : (
                           <>
@@ -953,7 +953,7 @@ export default function InicioPage() {
                     "Asistente", eliminada -- petición de Rafael,
                     2026-09-30). */}
                 <SectionHeading id="datos-nube" icon={Cloud} scrollMt="260px" className="pt-2">
-                  {t('campos.archivos.nubeAsistenteTitulo', {defaultValue: 'Nube y Asistente IA'})}
+                  {t('campos.archivos.nubeAsistenteTitulo', {defaultValue: 'Nube y asistente IA'})}
                 </SectionHeading>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
                   <GoogleDriveSyncPanel />
@@ -1035,7 +1035,7 @@ export default function InicioPage() {
           <Card className="w-full max-w-xl p-6 shadow-2xl border-[var(--glass-border)]">
             <h2 id="validation-modal-title" className="text-subheading font-bold mb-4 flex items-center gap-2">
               <ShieldAlert className="w-5 h-5 text-warning" />
-              {t('campos.archivos.validacionEnlacesTitulo', {defaultValue: 'Validación de Enlaces del Workspace'})}
+              {t('campos.archivos.validacionEnlacesTitulo', {defaultValue: 'Validación de enlaces del workspace'})}
             </h2>
 
             {brokenLinks.length === 0 ? (

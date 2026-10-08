@@ -35,7 +35,7 @@ export function useOnboardingTour() {
         {
           element: "header button:has(svg:first-of-type)", // The save button
           popover: {
-            title: t('campos.onboarding.guardarDeshacerTitulo', {defaultValue: 'Guardar y Deshacer'}),
+            title: t('campos.onboarding.guardarDeshacerTitulo', {defaultValue: 'Guardar y deshacer'}),
             description: t('campos.onboarding.guardarDeshacerDesc', {defaultValue: 'Puedes guardar manualmente aquí, aunque hay autoguardado. También tienes flechas para Deshacer/Rehacer o puedes usar Ctrl+S y Ctrl+Z.'}),
             side: "bottom",
             align: "end"
@@ -45,7 +45,7 @@ export function useOnboardingTour() {
           element: "[href='/inicio?tab=bienvenida']", // Inicio -- pestaña Datos, dentro
           popover: {
             title: t('campos.onboarding.pestanaArchivosTitulo', {defaultValue: 'Pestaña de Datos'}),
-            description: t('campos.onboarding.pestanaArchivosDesc', {defaultValue: "Para empezar, ve a Inicio, abre la pestaña Datos y selecciona 'Datos DEMO' para explorar sin miedo."}),
+            description: t('campos.onboarding.pestanaArchivosDesc', {defaultValue: "Para empezar, ve a Inicio, abre la pestaña Datos y selecciona 'Datos demo' para explorar sin miedo."}),
             side: "right",
             align: "center"
           }

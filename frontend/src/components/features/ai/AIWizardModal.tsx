@@ -60,7 +60,7 @@ export function AIWizardModal({ isOpen, onClose, onSuccess }: AIWizardModalProps
       onClose();
     } catch (error: any) {
       console.error(error);
-      setErrorMsg(error.message || t('campos.ai.errorConexionAsistente', {defaultValue: 'Error de conexión con el Asistente'}));
+      setErrorMsg(error.message || t('campos.ai.errorConexionAsistente', {defaultValue: 'Error de conexión con el asistente'}));
     } finally {
       setIsProcessing(false);
     }

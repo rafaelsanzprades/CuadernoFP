@@ -484,7 +484,7 @@ export default function CalendarioPage() {
     const nombre = nombresMes[Number(m) - 1] + (mesesRepetidos.has(m) ? ` '${y.slice(2)}` : "");
     return {
       id: `eventos-mes-${k}`,
-      label: k === currentMonthKey ? `${t('campos.seguimiento.mesActualPrefijo', { defaultValue: 'ACTUAL' })}. ${nombre}` : nombre,
+      label: k === currentMonthKey ? `${t('campos.seguimiento.mesActualPrefijo', { defaultValue: 'Actual' })}. ${nombre}` : nombre,
     };
   });
 
@@ -844,8 +844,8 @@ export default function CalendarioPage() {
                           }}
                           className="w-full bg-foreground/10 border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground focus:border-orange-500 focus:outline-none"
                         >
-                          <option value="general">{t('campos.calendario.dualGeneral', {defaultValue: 'Dual General'})}</option>
-                          <option value="intensiva">{t('campos.calendario.dualIntensiva', {defaultValue: 'Dual Intensiva'})}</option>
+                          <option value="general">{t('campos.calendario.dualGeneral', {defaultValue: 'Dual general'})}</option>
+                          <option value="intensiva">{t('campos.calendario.dualIntensiva', {defaultValue: 'Dual intensiva'})}</option>
                         </select>
                       </div>
                       {/* Col 1.5: Selector de docencia */}

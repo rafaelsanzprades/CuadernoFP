@@ -112,7 +112,7 @@ export function AsistenciaTab() {
       <EmptyState
         icon={Users}
         title={t('tooltips.diario.ningunCursoActivo', {defaultValue: 'Ningún curso activo'})}
-        description={<>Para pasar lista necesitas tener un Curso activo con alumnado matriculados.</>}
+        description={<>Para pasar lista necesitas tener un curso activo con alumnado matriculados.</>}
         action={
           <Link href="/inicio?tab=datos" className="glass-button bg-accent/10 text-accent hover:bg-accent/20 px-6 py-3 rounded-lg font-bold flex items-center gap-2">
             Ir a Inicio <Settings className="w-5 h-5" />

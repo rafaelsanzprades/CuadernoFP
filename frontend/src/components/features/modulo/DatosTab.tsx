@@ -277,7 +277,7 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
             value={viewFamilyId}
             onChange={e => { setViewFamilyId(e.target.value); setViewDegreeId(""); setSelectedModuleCode(""); }}
           >
-            <option value="">{t('campos.modulo.placeholderSeleccionaFamilia', {defaultValue: '-- Selecciona Familia --'})}</option>
+            <option value="">{t('campos.modulo.placeholderSeleccionaFamilia', {defaultValue: '-- Selecciona familia --'})}</option>
             {families.map(f => (
               <option key={f.id} value={f.id}>{f.name}</option>
             ))}
@@ -318,8 +318,8 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
               onChange={e => updateModuleData('dual_regimen', e.target.value)}
             >
               <option value="ninguno">{t('checks.modulo.dualRegimenNinguno', {defaultValue: 'Ninguno / Tradicional'})}</option>
-              <option value="general">{t('checks.modulo.dualRegimenGeneral', {defaultValue: 'Dual General (25% - 35%)'})}</option>
-              <option value="intensivo">{t('checks.modulo.dualRegimenIntensivo', {defaultValue: 'Dual Intensivo (35% - 50%)'})}</option>
+              <option value="general">{t('checks.modulo.dualRegimenGeneral', {defaultValue: 'Dual general (25% - 35%)'})}</option>
+              <option value="intensivo">{t('checks.modulo.dualRegimenIntensivo', {defaultValue: 'Dual intensivo (35% - 50%)'})}</option>
             </Select>
           </div>
           <div className="col-span-1">
@@ -413,7 +413,7 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
               <div className="space-y-2">
                 <label className="text-body font-semibold text-foreground flex items-center gap-1.5">
                   {t('campos.modulo.notaMinimaAprobar', {defaultValue: 'Nota mínima para aprobar'})}
-                  <InfoTip>{t('campos.modulo.notaMinimaAprobarDesc', {defaultValue: 'Nota a partir de la cual un RA o Módulo se considera superado (típicamente 5.0).'})}</InfoTip>
+                  <InfoTip>{t('campos.modulo.notaMinimaAprobarDesc', {defaultValue: 'Nota a partir de la cual un RA o módulo se considera superado (típicamente 5.0).'})}</InfoTip>
                 </label>
                 <input
                   type="number"
@@ -441,7 +441,7 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
               <div className="space-y-2">
                 <label className="text-body font-semibold text-foreground flex items-center gap-1.5">
                   {t('campos.modulo.criteriosCompensablesRA', {defaultValue: 'Criterios compensables por RA'})}
-                  <InfoTip align="right">{t('campos.modulo.criteriosCompensablesDescPre', {defaultValue: 'Número máximo de Criterios suspensos que se permiten para aprobar un RA. '})}<strong>0</strong>{t('campos.modulo.criteriosCompensablesDescPost', {defaultValue: ' = cualquier CE suspenso del RA topa su nota justo por debajo del aprobado (comportamiento estricto); sube este número para permitir compensar N criterios suspensos dentro del mismo RA. Cuando el tope está activo para un alumno, aparece marcado en Alumnado → Notas. Ejemplo con 0: CE1.a=9.0 y CE1.b=4.9 al 50% dan una media de 6.95, pero al estar CE1.b suspenso el RA se topa en 4.9, no en 6.95.'})}</InfoTip>
+                  <InfoTip align="right">{t('campos.modulo.criteriosCompensablesDescPre', {defaultValue: 'Número máximo de criterios suspensos que se permiten para aprobar un RA. '})}<strong>0</strong>{t('campos.modulo.criteriosCompensablesDescPost', {defaultValue: ' = cualquier CE suspenso del RA topa su nota justo por debajo del aprobado (comportamiento estricto); sube este número para permitir compensar N criterios suspensos dentro del mismo RA. Cuando el tope está activo para un alumno, aparece marcado en Alumnado → Notas. Ejemplo con 0: CE1.a=9.0 y CE1.b=4.9 al 50% dan una media de 6.95, pero al estar CE1.b suspenso el RA se topa en 4.9, no en 6.95.'})}</InfoTip>
                 </label>
                 <input
                   type="number"
@@ -482,7 +482,7 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
         <div className="space-y-2">
           <div style={INSTR_GRID_STYLE} className="items-end text-caption font-bold text-muted px-1">
             <span>{t('campos.modulo.colSeleccionTipo', {defaultValue: 'Selección del tipo'})}</span>
-            <span>{t('campos.modulo.colDescripcionInstrumento', {defaultValue: 'Descripción del Instrumento de Evaluación (IE)'})}</span>
+            <span>{t('campos.modulo.colDescripcionInstrumento', {defaultValue: 'Descripción del instrumento de evaluación (IE)'})}</span>
             {([
               ['pond_1t', t('campos.modulo.colTrimestre1', {defaultValue: '1er Trimestre'})],
               ['pond_2t', t('campos.modulo.colTrimestre2', {defaultValue: '2º Trimestre'})],

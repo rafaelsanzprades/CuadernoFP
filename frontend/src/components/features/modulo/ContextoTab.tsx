@@ -91,9 +91,9 @@ const RASGOS_CONTEXTO_ESCOLAR = [
     grupo: "Oferta educativa", items: [
       { id: "ESC-ESO", label: "ESO" },
       { id: "ESC-BACHILLERATO", label: "Bachillerato" },
-      { id: "ESC-FPB", label: "FP Grado Básico" },
-      { id: "ESC-FPGM", label: "FP Grado Medio" },
-      { id: "ESC-FPGS", label: "FP Grado Superior" },
+      { id: "ESC-FPB", label: "FP grado básico" },
+      { id: "ESC-FPGM", label: "FP grado medio" },
+      { id: "ESC-FPGS", label: "FP grado superior" },
     ]
   },
 ];
@@ -545,7 +545,7 @@ export function ContextoTab({ bloques }: { bloques?: string[] } = {}) {
       {show("contexto-modelo-simplificado") && (
       <div className="space-y-3">
       <SectionHeading id="contexto-modelo-simplificado" icon={BookOpen} scrollMt="260px">
-        {t('campos.contexto.tituloModeloSimplificado', {defaultValue: 'Textos del modelo Simplificado (pd=)'})}
+        {t('campos.contexto.tituloModeloSimplificado', {defaultValue: 'Textos del modelo simplificado (pd=)'})}
       </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-teal-500">
         <p className="text-caption text-muted mb-4">

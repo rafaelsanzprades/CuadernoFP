@@ -19,22 +19,22 @@ export function MetodologiaTab() {
   };
 
   const METODOLOGIAS = [
-    { id: "ABP", label: t('checks.modulo.metABP', {defaultValue: 'Aprendizaje Basado en Proyectos'}) },
-    { id: "ABR", label: t('checks.modulo.metABR', {defaultValue: 'Aprendizaje Basado en Retos'}) },
-    { id: "FLIP", label: t('checks.modulo.metFLIP', {defaultValue: 'Flipped Classroom (Aula Invertida)'}) },
-    { id: "COLAB", label: t('checks.modulo.metCOLAB', {defaultValue: 'Aprendizaje Cooperativo / Colaborativo'}) },
-    { id: "SIM", label: t('checks.modulo.metSIM', {defaultValue: 'Simulación de Entornos Profesionales'}) },
-    { id: "CASOS", label: t('checks.modulo.metCASOS', {defaultValue: 'Método del Caso'}) },
-    { id: "GAMIF", label: t('checks.modulo.metGAMIF', {defaultValue: 'Gamificación / Aprendizaje Basado en Juegos'}) },
+    { id: "ABP", label: t('checks.modulo.metABP', {defaultValue: 'Aprendizaje basado en proyectos'}) },
+    { id: "ABR", label: t('checks.modulo.metABR', {defaultValue: 'Aprendizaje basado en retos'}) },
+    { id: "FLIP", label: t('checks.modulo.metFLIP', {defaultValue: 'Flipped classroom (aula invertida)'}) },
+    { id: "COLAB", label: t('checks.modulo.metCOLAB', {defaultValue: 'Aprendizaje cooperativo / colaborativo'}) },
+    { id: "SIM", label: t('checks.modulo.metSIM', {defaultValue: 'Simulación de entornos profesionales'}) },
+    { id: "CASOS", label: t('checks.modulo.metCASOS', {defaultValue: 'Método del caso'}) },
+    { id: "GAMIF", label: t('checks.modulo.metGAMIF', {defaultValue: 'Gamificación / Aprendizaje basado en juegos'}) },
     { id: "ApS", label: t('checks.modulo.metApS', {defaultValue: 'Aprendizaje-Servicio'}) },
-    { id: "DEMO", label: t('checks.modulo.metDEMO', {defaultValue: 'Demostración Práctica'}) },
-    { id: "MAGIS", label: t('checks.modulo.metMAGIS', {defaultValue: 'Exposición Didáctica Interactiva apoyada en TIC'}) },
-    { id: "ETHAZI", label: t('checks.modulo.metETHAZI', {defaultValue: 'Ethazi / Aprendizaje Colaborativo basado en Retos (ACbR)'}) },
-    { id: "AGIL", label: t('checks.modulo.metAGIL', {defaultValue: 'Metodologías Ágiles (Design Thinking, Lean Startup, Scrum)'}) },
-    { id: "CONTR", label: t('checks.modulo.metCONTR', {defaultValue: 'Contrato de Aprendizaje (Learning Contract)'}) },
-    { id: "DEBATE", label: t('checks.modulo.metDEBATE', {defaultValue: 'Debates y Diálogo Educativo'}) },
-    { id: "PARES", label: t('checks.modulo.metPARES', {defaultValue: 'Aprendizaje entre Pares (Peer Teaching)'}) },
-    { id: "ESTAC", label: t('checks.modulo.metESTAC', {defaultValue: 'Estaciones de Aprendizaje'}) }
+    { id: "DEMO", label: t('checks.modulo.metDEMO', {defaultValue: 'Demostración práctica'}) },
+    { id: "MAGIS", label: t('checks.modulo.metMAGIS', {defaultValue: 'Exposición didáctica interactiva apoyada en TIC'}) },
+    { id: "ETHAZI", label: t('checks.modulo.metETHAZI', {defaultValue: 'Ethazi / Aprendizaje colaborativo basado en retos (ACbR)'}) },
+    { id: "AGIL", label: t('checks.modulo.metAGIL', {defaultValue: 'Metodologías ágiles (Design thinking, Lean startup, Scrum)'}) },
+    { id: "CONTR", label: t('checks.modulo.metCONTR', {defaultValue: 'Contrato de aprendizaje (Learning contract)'}) },
+    { id: "DEBATE", label: t('checks.modulo.metDEBATE', {defaultValue: 'Debates y diálogo educativo'}) },
+    { id: "PARES", label: t('checks.modulo.metPARES', {defaultValue: 'Aprendizaje entre pares (Peer teaching)'}) },
+    { id: "ESTAC", label: t('checks.modulo.metESTAC', {defaultValue: 'Estaciones de aprendizaje'}) }
   ];
 
   const metodologias_seleccionadas = moduleData?.metodologias_seleccionadas || [];

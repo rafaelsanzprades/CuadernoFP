@@ -119,7 +119,7 @@ function CiclosContent() {
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     familias: t('tabs.catalogo.familias.desc', {defaultValue: 'Familias profesionales y sus ciclos formativos asociados, organizados por grado.'}),
-    'ecp-incual': t('tabs.normativa.ecp-incual.desc', {defaultValue: 'Estándares de Competencia Profesional (ECP) del Catálogo Nacional (INCUAL).'}),
+    'ecp-incual': t('tabs.normativa.ecp-incual.desc', {defaultValue: 'Estándares de competencia profesional (ECP) del Catálogo Nacional (INCUAL).'}),
     titulos: t('tabs.catalogo.titulos.desc', {defaultValue: 'Normativa estatal básica y currículo autonómico para ciclos formativos.'}),
     modulos: t('tabs.catalogo.modulos.desc', {defaultValue: 'Módulos de cada título organizados por curso académico, con sus horas.'}),
     'ra-ce': t('tabs.catalogo.ra-ce.desc', {defaultValue: 'Competencias específicas estructuradas en RA y CE (Art. 136, RD 659/2023).'})
@@ -129,8 +129,8 @@ function CiclosContent() {
   // de esta página son grids de tarjetas repetidas, sin índice).
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
     'ecp-incual': [
-      { id: "incual-crn", label: t('campos.catalogo.tituloCrn', {defaultValue: 'Centros de Referencia Nacional (CRN)'}) },
-      { id: "incual-ecp", label: t('campos.catalogo.tituloEcp', {defaultValue: 'Estándares de Competencia Profesional (ECP)'}) },
+      { id: "incual-crn", label: t('campos.catalogo.tituloCrn', {defaultValue: 'Centros de referencia nacional (CRN)'}) },
+      { id: "incual-ecp", label: t('campos.catalogo.tituloEcp', {defaultValue: 'Estándares de competencia profesional (ECP)'}) },
     ],
   };
 
@@ -495,7 +495,7 @@ function TabTitulo({ onSelectTitulo, globalSelection, updateGlobalSelection }: {
             return (
               <Card className="p-4 border-l-4 border-l-purple-500">
                 <div className="flex flex-wrap items-center gap-2 mb-1.5">
-                  <span className="text-caption font-semibold text-muted uppercase tracking-wider">{t('campos.catalogo.fuenteNormativaLabel', {defaultValue: 'Fuente normativa'})}</span>
+                  <span className="text-caption font-semibold text-muted tracking-wider">{t('campos.catalogo.fuenteNormativaLabel', {defaultValue: 'Fuente normativa'})}</span>
                   <Badge variant="default" className="font-mono">{info.label}</Badge>
                   {fuente.rd_numero && <span className="text-caption text-foreground/80">{fuente.rd_numero}{fuente.rd_fecha ? ` (${fuente.rd_fecha})` : ""}</span>}
                   {fuente.boe_url && (
@@ -825,7 +825,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
       {!selectedTitulo && (
         <Card className="p-12 text-center text-muted flex flex-col items-center justify-center gap-4">
           <BookOpen className="w-12 h-12" />
-          <p className="text-subheading">{t('campos.catalogo.seleccionaFamiliaTituloModulos', {defaultValue: 'Selecciona una Familia y un Título para ver los módulos organizados por curso.'})}</p>
+          <p className="text-subheading">{t('campos.catalogo.seleccionaFamiliaTituloModulos', {defaultValue: 'Selecciona una familia y un título para ver los módulos organizados por curso.'})}</p>
         </Card>
       )}
 
@@ -1133,7 +1133,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                         <div>
                           <h4 className="font-semibold text-body">{t('campos.catalogo.opcionNumero', {numero: i + 1, defaultValue: 'Opción {{numero}}'})}</h4>
                           <span className="text-caption text-muted">
-                            {grupo.es_conjunto ? t('campos.catalogo.debeAcreditarTodas', {defaultValue: 'Debes acreditar TODAS estas competencias:'}) : t('campos.catalogo.debeAcreditarUna', {defaultValue: 'Debes acreditar esta competencia:'})}
+                            {grupo.es_conjunto ? t('campos.catalogo.debeAcreditarTodas', {defaultValue: 'Debes acreditar todas estas competencias:'}) : t('campos.catalogo.debeAcreditarUna', {defaultValue: 'Debes acreditar esta competencia:'})}
                           </span>
                         </div>
                         {grupo.es_conjunto && <Badge variant="default" className="text-caption">{t('campos.catalogo.conjuntoRequerido', {defaultValue: 'Conjunto requerido'})}</Badge>}

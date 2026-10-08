@@ -104,7 +104,7 @@ export const BoletinesTab = ({ studentId }: { studentId: string }) => {
                 {/* Cabecera Oficial */}
                 <div className="border-b-2 border-accent pb-6 mb-8 flex justify-between items-start">
                   <div>
-                    <h1 className="text-heading font-black mb-2 tracking-tight">{t('campos.alumnado.informeEvaluacionTitulo', {defaultValue: 'INFORME DE EVALUACIÓN'})}</h1>
+                    <h1 className="text-heading font-black mb-2 tracking-tight">{t('campos.alumnado.informeEvaluacionTitulo', {defaultValue: 'Informe de evaluación'})}</h1>
                     <p className="text-subheading text-muted-foreground font-semibold flex items-center gap-2">
                       <GraduationCap className="w-5 h-5" /> {t('campos.alumnado.moduloLabel', {defaultValue: 'Módulo:'})} {info_modulo.codigo && resolveModuloNombre(activeModuleId, info_modulo.nombre) ? `${info_modulo.codigo} - ${resolveModuloNombre(activeModuleId, info_modulo.nombre)}` : info_modulo.modulo || t('campos.alumnado.moduloProfesionalFallback', {defaultValue: 'Módulo profesional'})}
                     </p>
@@ -156,7 +156,7 @@ export const BoletinesTab = ({ studentId }: { studentId: string }) => {
 
                   <div className="bg-foreground/5 p-6 rounded-xl border border-white/5 flex flex-col items-center">
                     <h3 className="text-subheading font-bold mb-4 flex items-center gap-2 w-full">
-                      <BarChartIcon className="w-5 h-5 text-success" /> {t('campos.alumnado.nivelLogroRaTitulo', {defaultValue: 'Nivel de Logro por RA'})}
+                      <BarChartIcon className="w-5 h-5 text-success" /> {t('campos.alumnado.nivelLogroRaTitulo', {defaultValue: 'Nivel de logro por RA'})}
                     </h3>
                     <div className="w-full h-[250px]">
                       <ResponsiveContainer width="100%" height="100%">
@@ -174,7 +174,7 @@ export const BoletinesTab = ({ studentId }: { studentId: string }) => {
 
                 {/* Desglose de Resultados */}
                 <h3 className="text-subheading font-bold mb-4 mt-8 flex items-center gap-2 border-b border-white/10 pb-2">
-                  <Award className="w-5 h-5 text-warning" /> {t('campos.alumnado.desgloseRaTitulo', {defaultValue: 'Desglose por Resultados de aprendizaje'})}
+                  <Award className="w-5 h-5 text-warning" /> {t('campos.alumnado.desgloseRaTitulo', {defaultValue: 'Desglose por resultados de aprendizaje'})}
                 </h3>
                 <div className="space-y-4">
                   {radarData.map((ra: any, i: number) => {
@@ -190,7 +190,7 @@ export const BoletinesTab = ({ studentId }: { studentId: string }) => {
                         </div>
                         <div className="w-24 text-right">
                           <span className={`text-caption font-bold px-2 py-1 rounded-full border ${isAprobado ? 'bg-success/10 text-success border-success/20' : 'bg-danger/10 text-danger border-danger/20'}`}>
-                            {isAprobado ? t('campos.alumnado.raSuperado', {defaultValue: 'SUPERADO'}) : t('campos.alumnado.raNoSuperado', {defaultValue: 'NO SUPER.'})}
+                            {isAprobado ? t('campos.alumnado.raSuperado', {defaultValue: 'Superado'}) : t('campos.alumnado.raNoSuperado', {defaultValue: 'No super.'})}
                           </span>
                         </div>
                       </div>

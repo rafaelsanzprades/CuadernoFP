@@ -176,7 +176,7 @@ export function SessionTable({
                                 {/* Segunda Línea: Identada y con MultiSelects */}
                                 <div className="flex items-center gap-4 pl-[7.5rem]">
                                   <div className="flex-1 flex flex-col">
-                                    <span className="text-caption text-muted-foreground tracking-wider mb-1 font-semibold">{t('campos.secuenciacion.aspectosClaveLabel', {defaultValue: 'Aspectos Clave'})}</span>
+                                    <span className="text-caption text-muted-foreground tracking-wider mb-1 font-semibold">{t('campos.secuenciacion.aspectosClaveLabel', {defaultValue: 'Aspectos clave'})}</span>
                                     <MultiSelectDropdown
                                       options={getAllAspectosClave()}
                                       selectedIds={ses.Aspectos_Clave ? ses.Aspectos_Clave.split(',').map(s => s.trim()).filter(Boolean) : []}

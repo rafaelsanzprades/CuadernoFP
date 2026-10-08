@@ -425,8 +425,8 @@
   "sidebar": {
     "en_obras": "Under Construction",
     "fecha": "Date",
-    "demo": "DEMO",
-    "reales": "REAL",
+    "demo": "Demo",
+    "reales": "Real",
     "abrir_grupo": "Open Group",
     "agenda": "Classes",
     "legal": "Legal"
@@ -540,7 +540,7 @@
     },
     "archivos": {
       "abrirCursoViaGrupo": "To open a course safely, double-click its associated group in the first column.",
-      "cambiadoDemo": "Switched to DEMO data.",
+      "cambiadoDemo": "Switched to demo data.",
       "cambiadoReal": "Switched to real local data. You can create or open files.",
       "carpetaCambiada": "Local folder changed.",
       "carpetaConectada": "Local folder connected.",
@@ -556,8 +556,8 @@
       "enlaceReparado": "Link repaired successfully.",
       "errorAbrirGrupo": "Error opening the group.",
       "errorAbrirProgramacion": "Error opening the programming.",
-      "errorCargarCursoDemo": "Error loading the DEMO course.",
-      "errorCargarProgramacionDemo": "Error loading the DEMO programming.",
+      "errorCargarCursoDemo": "Error loading the demo course.",
+      "errorCargarProgramacionDemo": "Error loading the demo programming.",
       "errorFormatoCurso": "Import error: the file does not have a valid course format.",
       "errorFormatoCursoArrastrar": "The file does not have a valid course format (.fpc).",
       "errorFormatoProgramacion": "Import error: the file does not have a valid programming format.",
@@ -567,7 +567,7 @@
       "errorReparEnlace": "Error repairing the link.",
       "grupoAbierto": "Group {{name}} opened successfully.",
       "grupoCargado": "Group {{name}} loaded.",
-      "modoDemoGuardarComoNuevo": "You are in DEMO mode. Saving as a new file...",
+      "modoDemoGuardarComoNuevo": "You are in demo mode. Saving as a new file...",
       "programacionAbierta": "Programming opened successfully.",
       "programacionAbiertaIcono": "Programming opened successfully",
       "programacionCargada": "Programming {{name}} loaded.",
@@ -619,14 +619,14 @@
     "googleDrive": {
       "autoguardadoActivado": "Cloud autosave enabled.",
       "autoguardadoDesactivado": "Cloud autosave disabled.",
-      "autoguardadoSinDemo": "Autosave is not available in DEMO mode.",
+      "autoguardadoSinDemo": "Autosave is not available in demo mode.",
       "conectado": "Google Drive connected successfully.",
       "conectando": "Connecting to Google Drive...",
       "desconectado": "Disconnected from Google Drive",
       "errorConectar": "Failed to connect to Google Drive.",
       "faltaClientId": "Enter your Google Client ID first.",
       "faltaConectar": "Connect your Google Drive account first.",
-      "sinDemo": "You can't sync with Drive in DEMO mode."
+      "sinDemo": "You can't sync with Drive in demo mode."
     },
     "header": {
       "paletaNoImplementada": "Command palette not implemented yet.",
@@ -645,10 +645,10 @@
     },
     "newFileWizard": {
       "cursoCreado": "Course {{name}} created successfully.",
-      "cursoDemoCreado": "DEMO course created successfully.",
+      "cursoDemoCreado": "Demo course created successfully.",
       "cursoYGrupoCreados": "Course {{name}} and its group created successfully.",
       "errorCrearCurso": "Error creating the course.",
-      "errorCrearCursoDemo": "Error creating the DEMO course.",
+      "errorCrearCursoDemo": "Error creating the demo course.",
       "errorCrearProgramacion": "Error creating the programming.",
       "programacionCreada": "Programming for {{name}} created successfully."
     },
@@ -668,7 +668,7 @@
       "desconectado": "Disconnected from OneDrive",
       "errorConectar": "Failed to connect to OneDrive.",
       "faltaClientId": "Enter your Microsoft Client ID first.",
-      "sinDemo": "You can't sync in DEMO mode."
+      "sinDemo": "You can't sync in demo mode."
     },
     "recientes": {
       "errorGenerico": "Error reopening the file.",
@@ -716,7 +716,7 @@
     },
     "archivos": {
       "cambiarCarpetaLocal": "Change local folder",
-      "cargarDatosDemo": "Load DEMO data",
+      "cargarDatosDemo": "Load demo data",
       "conectarCarpetaLocal": "Connect local folder",
       "crearAhora": "Create now",
       "crearCursoVacio": "Create empty course",
@@ -724,7 +724,7 @@
       "iniciarCursoGrupo": "Start course (+ group)",
       "irADocumentosPdx": "Go to MagIA",
       "nuevaCatalogo": "New (catalog)",
-      "recargarDemo": "Reload DEMO",
+      "recargarDemo": "Reload demo",
       "repararEnlace": "Repair link",
       "validarWorkspace": "Validate workspace"
     },
@@ -737,7 +737,7 @@
       "nuevaProgramacion": "New programming"
     },
     "cloud": {
-      "accionNoPermitidaDemo": "Action not allowed in DEMO mode",
+      "accionNoPermitidaDemo": "Action not allowed in demo mode",
       "conectarCuenta": "Connect account",
       "desconectar": "Disconnect"
     },
@@ -764,7 +764,7 @@
       "crearCurso": "Create course",
       "crearMisArchivos": "Create my files",
       "nuevoCursoDeEstaProgramacion": "New course from this programming",
-      "probarConDemo": "Try with DEMO",
+      "probarConDemo": "Try with demo",
       "reabrir": "Reopen",
       "seleccionarCsvAlumnado": "Select student CSV",
       "semanaActual": "Current week",
@@ -2060,7 +2060,7 @@
       "clientIdPlaceholder": "E.g.: 123456789-abcde.apps.googleusercontent.com",
       "clientIdTauriHint": "In the desktop app (Tauri) you need a \"Desktop app\" type Client ID, different from the one you use in the browser — you can register it in the same Google Cloud project.",
       "moduloDesconocido": "Unknown Module",
-      "cursoDemoNombre": "DEMO Course",
+      "cursoDemoNombre": "Demo Course",
       "usuarioMicrosoft": "Microsoft user",
       "oneDriveDescripcion": "Save your .fpp and .fpc files to your Microsoft OneDrive account. (Requires registration in the Azure portal).",
       "oneDriveProximamente": "Coming soon",
@@ -2204,7 +2204,7 @@
       "sinResultadosParaBusqueda": "No results found for \"{{termino}}\"",
       "tituloMapaCcaa": "Map of Autonomous Communities with VET curriculum",
       "instruccionMapaCcaa": "Click a community to see its detail. Source: ",
-      "badgeDemo": "DEMO",
+      "badgeDemo": "Demo",
       "mensajeSeleccionaCcaa": "Select an autonomous community on the map to see its detailed information.",
       "tituloTablaComunidades": "Table of autonomous communities",
       "badgeCiudadAutonoma": "Autonomous City",
@@ -2218,7 +2218,7 @@
       "infoCeutaMelillaTexto": " apply the Ministry's curriculum (BOE) directly, as they have no transferred powers in education.",
       "mapaSvgCreditoLabel": "SVG map:",
       "mapaSvgCreditoTexto": "(CC-BY-4.0) — Victor Cazanave.",
-      "demoEntornoLabel": "🌍 DEMO environment:",
+      "demoEntornoLabel": "🌍 demo environment:",
       "demoEntornoTexto": "This app's sample data uses Aragón's curriculum (BOA) as a reference.",
       "labelBoletinOficial": "Official Gazette",
       "badgeComunidadAutonoma": "Autonomous Community",
@@ -2312,20 +2312,20 @@
       "breadcrumbArchivos": "Files",
       "breadcrumbSeguridadPrivacidad": "Security and privacy",
       "modoDatosLabel": "Data mode:",
-      "avisoDemoDesc": "sample data, nothing is saved. Switch to REAL for your own files.",
+      "avisoDemoDesc": "sample data, nothing is saved. Switch to real for your own files.",
       "avisoRealDesc": "you are working with your own .fpg/.fpp/.fpc files, saved on your computer. Changes are actually saved.",
       "gruposEjemploDobleClic": "Sample groups. Double-click to load.",
       "tusGruposDobleClic": "Your saved groups. Double-click to load.",
-      "sinGruposDemo": "No DEMO groups found.",
+      "sinGruposDemo": "No demo groups found.",
       "usaBotonEnlazarCarpeta": "Use the button below to link your working folder.",
       "sinGrupos": "No groups found.",
       "programacionesTitulo": "Curriculum plans",
       "dobleClicCargarProgramacion": "Double-click to load a curriculum plan.",
-      "sinProgramacionesDemo": "No DEMO curriculum plans found.",
+      "sinProgramacionesDemo": "No demo curriculum plans found.",
       "sinProgramaciones": "No curriculum plans found.",
       "cursosTitulo": "Courses",
       "dobleClicCargarCurso": "Double-click to load a course.",
-      "sinCursosDemo": "No DEMO courses found.",
+      "sinCursosDemo": "No demo courses found.",
       "sinCursos": "No courses found.",
       "nubeLabel": "Cloud",
       "privacidadDisenoTitulo": "Your privacy by design",
@@ -2646,7 +2646,7 @@
       "guardarDeshacerTitulo": "Save and Undo",
       "guardarDeshacerDesc": "You can save manually here, although there's autosave. You also have arrows for Undo/Redo, or you can use Ctrl+S and Ctrl+Z.",
       "pestanaArchivosTitulo": "Files Tab",
-      "pestanaArchivosDesc": "To get started, go to Files and select 'DEMO Data' to explore without worry."
+      "pestanaArchivosDesc": "To get started, go to Files and select 'Demo Data' to explore without worry."
     },
     "ayuda": {
       "faq": {

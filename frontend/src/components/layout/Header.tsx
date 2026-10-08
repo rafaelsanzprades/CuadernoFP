@@ -153,7 +153,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [undo, redo, pastStatesLength, futureStatesLength, handleSave]);
 
-  let friendlyModuleName = t('campos.header.creaOAbreProgramacion', {defaultValue: 'Crea o abre una Programación'});
+  let friendlyModuleName = t('campos.header.creaOAbreProgramacion', {defaultValue: 'Crea o abre una programación'});
   if (activeModuleId) {
     const code = activeModuleId.split('-')[0];
     if (moduleData && moduleData.info_modulo) {
@@ -187,7 +187,7 @@ export default function Header({ title, breadcrumbSuffix }: { title?: React.Reac
     }
   }
 
-  let friendlyCursoName = t('campos.header.creaOAbreCurso', {defaultValue: 'Crea o abre un Curso'});
+  let friendlyCursoName = t('campos.header.creaOAbreCurso', {defaultValue: 'Crea o abre un curso'});
   if (activeCursoId) {
     const parts = activeCursoId.split('-');
     const rawYear = parts[parts.length - 1];

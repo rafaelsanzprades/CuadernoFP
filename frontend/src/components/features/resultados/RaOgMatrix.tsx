@@ -60,7 +60,7 @@ export function RaOgMatrix() {
     return (
       <Card className="p-8 text-center border-t-4 border-t-yellow-500">
         <p className="text-muted">
-          No hay Objetivos Generales o Resultados de aprendizaje configurados para este módulo.
+          No hay objetivos generales o resultados de aprendizaje configurados para este módulo.
         </p>
       </Card>
     );

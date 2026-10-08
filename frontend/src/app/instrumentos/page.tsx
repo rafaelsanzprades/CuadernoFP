@@ -64,7 +64,7 @@ export default function InstrumentosPage() {
   // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
     jeg: [
-      { id: "instrumentos-indicadores-ce", label: t('campos.instrumentos.indicadoresPorCeTitulo', {defaultValue: 'Indicadores por Criterio de Evaluación'}) },
+      { id: "instrumentos-indicadores-ce", label: t('campos.instrumentos.indicadoresPorCeTitulo', {defaultValue: 'Indicadores por criterio de evaluación'}) },
       { id: "instrumentos-grupos-evaluacion", label: t('campos.instrumentos.gruposEvaluacionTitulo', {defaultValue: 'Grupos de evaluación (GEv)'}) },
       { id: "instrumentos-instrumentos-jeg", label: t('campos.instrumentos.instrumentosModeloJegTitulo', {defaultValue: 'Instrumentos (modelo JEG)'}) },
       { id: "instrumentos-matriz-cobertura", label: t('campos.instrumentos.matrizCoberturaTitulo', { defaultValue: 'Matriz de cobertura CE × Instrumento' }) },

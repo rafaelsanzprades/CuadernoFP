@@ -47,13 +47,13 @@ export function InstrumentoConfigModal({ isOpen, onClose, instrumentoId, instrum
         </button>
         
         <h3 className="text-subheading font-bold mb-1 flex items-center gap-2">
-          <Settings2 className="w-5 h-5 text-indigo-400" /> {t('campos.instrumentos.configuracionAvanzada', {defaultValue: 'Configuración Avanzada'})}
+          <Settings2 className="w-5 h-5 text-indigo-400" /> {t('campos.instrumentos.configuracionAvanzada', {defaultValue: 'Configuración avanzada'})}
         </h3>
         <p className="text-body text-muted mb-6">{t('campos.instrumentos.instrumentoLabel', {id: instrumentoId, desc: instrumentoDesc, defaultValue: `Instrumento: ${instrumentoId} - ${instrumentoDesc}`})}</p>
 
         <div className="space-y-4">
           <div>
-            <label className="text-body font-semibold mb-1 block">{t('campos.instrumentos.tipoDatoEscala', {defaultValue: 'Tipo de dato y Escala'})}</label>
+            <label className="text-body font-semibold mb-1 block">{t('campos.instrumentos.tipoDatoEscala', {defaultValue: 'Tipo de dato y escala'})}</label>
             <p className="text-caption text-muted mb-2">{t('campos.instrumentos.escalaDescripcion', {defaultValue: 'Selecciona la escala de calificación para este instrumento.'})}</p>
             <select 
               value={config.escala || '0-10'} 
@@ -68,7 +68,7 @@ export function InstrumentoConfigModal({ isOpen, onClose, instrumentoId, instrum
           </div>
 
           <div>
-            <label className="text-body font-semibold mb-1 block">{t('campos.instrumentos.agenteEvaluacion', {defaultValue: 'Agente de Evaluación'})}</label>
+            <label className="text-body font-semibold mb-1 block">{t('campos.instrumentos.agenteEvaluacion', {defaultValue: 'Agente de evaluación'})}</label>
             <select 
               value={config.agente || 'Heteroevaluacion'} 
               onChange={(e) => onChange('agente', e.target.value)}

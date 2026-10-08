@@ -28,49 +28,49 @@ const NORMATIVA_ESTATAL: NormativaItem[] = [
   },
   {
     id: "RD_659_2023",
-    texto: "REAL DECRETO 659/2023, de 18 de julio, por el que se desarrolla la ordenación del Sistema de Formación Profesional (BOE núm. 174, de 22 de julio de 2023).",
+    texto: "Real decreto 659/2023, de 18 de julio, por el que se desarrolla la ordenación del Sistema de Formación Profesional (BOE núm. 174, de 22 de julio de 2023).",
     descripcion: "Desarrollo reglamentario del nuevo sistema de Formación Profesional.",
     link: "https://www.boe.es/buscar/act.php?id=BOE-A-2023-16889"
   },
   {
     id: "RD_498_2024",
-    texto: "REAL DECRETO 498/2024, de 21 de mayo, por el que se modifican determinados reales decretos por los que se establecen títulos de Formación Profesional de grado básico y se fijan sus enseñanzas mínimas (BOE núm. 129, de 28 de mayo de 2024).",
+    texto: "Real decreto 498/2024, de 21 de mayo, por el que se modifican determinados reales decretos por los que se establecen títulos de Formación Profesional de grado básico y se fijan sus enseñanzas mínimas (BOE núm. 129, de 28 de mayo de 2024).",
     descripcion: "Adaptación de los títulos de Grado Básico al Real Decreto 659/2023.",
     link: "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-10683"
   },
   {
     id: "RD_499_2024",
-    texto: "REAL DECRETO 499/2024, de 21 de mayo, por el que se modifican determinados reales decretos por los que se establecen títulos de Formación Profesional de grado medio y se fijan sus enseñanzas mínimas (BOE núm. 129, de 28 de mayo de 2024).",
+    texto: "Real decreto 499/2024, de 21 de mayo, por el que se modifican determinados reales decretos por los que se establecen títulos de Formación Profesional de grado medio y se fijan sus enseñanzas mínimas (BOE núm. 129, de 28 de mayo de 2024).",
     descripcion: "Adaptación de los títulos de Grado Medio al Real Decreto 659/2023.",
     link: "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-10684"
   },
   {
     id: "RD_500_2024",
-    texto: "REAL DECRETO 500/2024, de 21 de mayo, por el que se modifican determinados reales decretos por los que se establecen títulos de Formación Profesional de grado superior y se fijan sus enseñanzas mínimas (BOE núm. 129, de 28 de mayo de 2024).",
+    texto: "Real decreto 500/2024, de 21 de mayo, por el que se modifican determinados reales decretos por los que se establecen títulos de Formación Profesional de grado superior y se fijan sus enseñanzas mínimas (BOE núm. 129, de 28 de mayo de 2024).",
     descripcion: "Adaptación de los títulos de Grado Superior al Real Decreto 659/2023.",
     link: "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-10685"
   },
   {
     id: "RD_497_2024",
-    texto: "REAL DECRETO 497/2024, de 21 de mayo, por el que se modifican determinados reales decretos por los que se establecen, en el ámbito de la Formación Profesional, cursos de especialización de grado medio y superior y se fijan sus enseñanzas mínimas (BOE núm. 129, de 28 de mayo de 2024).",
+    texto: "Real decreto 497/2024, de 21 de mayo, por el que se modifican determinados reales decretos por los que se establecen, en el ámbito de la Formación Profesional, cursos de especialización de grado medio y superior y se fijan sus enseñanzas mínimas (BOE núm. 129, de 28 de mayo de 2024).",
     descripcion: "Adaptación de los Cursos de Especialización (Grado E) al Real Decreto 659/2023.",
     link: "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-10682"
   },
   {
     id: "RD_69_2025",
-    texto: "REAL DECRETO 69/2025, de 4 de febrero, por el que se desarrollan los elementos integrantes y los instrumentos de gestión del Sistema Nacional de Formación Profesional, y se modifica el Real Decreto 375/1999, de 5 de marzo, por el que se crea el Instituto Nacional de las Cualificaciones (BOE núm. 31, de 5 de febrero de 2025).",
+    texto: "Real decreto 69/2025, de 4 de febrero, por el que se desarrollan los elementos integrantes y los instrumentos de gestión del Sistema Nacional de Formación Profesional, y se modifica el Real Decreto 375/1999, de 5 de marzo, por el que se crea el Instituto Nacional de las Cualificaciones (BOE núm. 31, de 5 de febrero de 2025).",
     descripcion: "Elementos e instrumentos de gestión del sistema de FP.",
     link: "https://www.boe.es/buscar/doc.php?id=BOE-A-2025-2039"
   },
   {
     id: "RD_532_2025",
-    texto: "REAL DECRETO 532/2025, de 24 de junio, por el que se incluyen determinados estándares de competencias profesionales y se integran los estándares derivados de las antiguas unidades de competencia del Real Decreto 1128/2003, en el Catálogo Nacional de Estándares de Competencias Profesionales (BOE núm. 151, de 25 de junio de 2025).",
+    texto: "Real decreto 532/2025, de 24 de junio, por el que se incluyen determinados estándares de competencias profesionales y se integran los estándares derivados de las antiguas unidades de competencia del Real Decreto 1128/2003, en el Catálogo Nacional de Estándares de Competencias Profesionales (BOE núm. 151, de 25 de junio de 2025).",
     descripcion: "Integración de estándares de competencias profesionales en el Catálogo Nacional (ECP).",
     link: "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2025-13147"
   },
   {
     id: "RD_TITULO",
-    texto: "REAL DECRETO por el que se establece el título del grado D o E correspondiente.",
+    texto: "Real decreto por el que se establece el título del grado D o E correspondiente.",
     descripcion: "Normativa específica que crea el título y fija sus enseñanzas mínimas.",
     link: "https://todofp.es/que-estudiar.html"
   }
@@ -79,25 +79,25 @@ const NORMATIVA_ESTATAL: NormativaItem[] = [
 const NORMATIVA_AUTONOMICA_ARAGON: NormativaItem[] = [
   {
     id: "D_91_2024",
-    texto: "DECRETO 91/2024, de 5 de junio, del Gobierno de Aragón por el que se establece la Ordenación de la Formación Profesional del Grado D y del Grado E en la Comunidad Autónoma de Aragón (BOA núm. 109, de 06 de junio de 2024).",
+    texto: "DECRETO 91/2024, de 5 de junio, del Gobierno de Aragón por el que se establece la Ordenación de la Formación Profesional del Grado D y del Grado E en la Comunidad autónoma de Aragón (BOA núm. 109, de 06 de junio de 2024).",
     descripcion: "Ordenación autonómica de los grados D y E en Aragón.",
     link: "https://www.boa.aragon.es/"
   },
   {
     id: "O_841_2024",
-    texto: "ORDEN ECD/841/2024, de 25 de julio, por la que se regulan aspectos organizativos del currículo y se establecen los currículos de determinados Ciclos Formativos de Formación Profesional de Grado Básico para la Comunidad Autónoma de Aragón (BOA núm. 148, de 31 de julio de 2024).",
+    texto: "ORDEN ECD/841/2024, de 25 de julio, por la que se regulan aspectos organizativos del currículo y se establecen los currículos de determinados Ciclos Formativos de Formación Profesional de Grado Básico para la Comunidad autónoma de Aragón (BOA núm. 148, de 31 de julio de 2024).",
     descripcion: "Organización y currículo de Ciclos Formativos de Grado Básico.",
     link: "https://www.boa.aragon.es/"
   },
   {
     id: "O_842_2024",
-    texto: "ORDEN ECD/842/2024, de 25 de julio, por la que se regulan aspectos organizativos del currículo y se establecen los currículos de determinados Ciclos Formativos de Formación Profesional de Grado Medio para la Comunidad Autónoma de Aragón (BOA núm. 148, de 31 de julio de 2024).",
+    texto: "ORDEN ECD/842/2024, de 25 de julio, por la que se regulan aspectos organizativos del currículo y se establecen los currículos de determinados Ciclos Formativos de Formación Profesional de Grado Medio para la Comunidad autónoma de Aragón (BOA núm. 148, de 31 de julio de 2024).",
     descripcion: "Organización y currículo de Ciclos Formativos de Grado Medio.",
     link: "https://www.boa.aragon.es/"
   },
   {
     id: "O_843_2024",
-    texto: "ORDEN ECD/843/2024, de 25 de julio, por la que se regulan aspectos organizativos del currículo y se establecen los currículos de determinados Ciclos Formativos de Formación Profesional de Grado Superior para la Comunidad Autónoma de Aragón (BOA núm. 148, de 31 de julio de 2024).",
+    texto: "ORDEN ECD/843/2024, de 25 de julio, por la que se regulan aspectos organizativos del currículo y se establecen los currículos de determinados Ciclos Formativos de Formación Profesional de Grado Superior para la Comunidad autónoma de Aragón (BOA núm. 148, de 31 de julio de 2024).",
     descripcion: "Organización y currículo de Ciclos Formativos de Grado Superior.",
     link: "https://www.boa.aragon.es/"
   },
@@ -553,7 +553,7 @@ const NORMATIVA_AUTONOMICA_EXTREMADURA: NormativaItem[] = [
   },
   {
     id: "D_228_2014_EXT",
-    texto: "DECRETO 228/2014, de 14 de octubre, por el que se regula la respuesta educativa a la diversidad del alumnado en la Comunidad Autónoma de Extremadura (DOE núm. 202, de 21 de octubre de 2014).",
+    texto: "DECRETO 228/2014, de 14 de octubre, por el que se regula la respuesta educativa a la diversidad del alumnado en la Comunidad autónoma de Extremadura (DOE núm. 202, de 21 de octubre de 2014).",
     descripcion: "Atención a la diversidad en los centros educativos de Extremadura (norma general, aplicable también a FP).",
     link: "https://www.educarex.es/pub/cont/com/0004/documentos/D228,2014.pdf"
   },
@@ -751,7 +751,7 @@ const NORMATIVA_AUTONOMICA_MURCIA: NormativaItem[] = [
 const NORMATIVA_AUTONOMICA_PAISVASCO: NormativaItem[] = [
   {
     id: "D_32_2008_PV",
-    texto: "DECRETO 32/2008, de 26 de febrero, de ordenación general de la Formación Profesional del sistema educativo en la Comunidad Autónoma del País Vasco.",
+    texto: "DECRETO 32/2008, de 26 de febrero, de ordenación general de la Formación Profesional del sistema educativo en la Comunidad autónoma del País Vasco.",
     descripcion: "Ordenación general de la FP en el País Vasco.",
     link: "https://www.euskadi.eus/bopv2/datos/2008/03/0801360a.pdf"
   },
@@ -769,7 +769,7 @@ const NORMATIVA_AUTONOMICA_PAISVASCO: NormativaItem[] = [
   },
   {
     id: "D_83_2015_PV",
-    texto: "DECRETO 83/2015, de 2 de junio, por el que se establece la Formación Profesional Dual en Régimen de Alternancia en la Comunidad Autónoma del País Vasco.",
+    texto: "DECRETO 83/2015, de 2 de junio, por el que se establece la Formación Profesional Dual en Régimen de Alternancia en la Comunidad autónoma del País Vasco.",
     descripcion: "FP Dual en régimen de alternancia en el País Vasco.",
     link: "https://www.euskadi.eus/y22-bopv/es/bopv2/datos/2015/06/1502515a.pdf"
   },

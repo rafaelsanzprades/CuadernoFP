@@ -19,7 +19,7 @@ export function InnovacionTab() {
       {/* Innovación y Proyectos */}
       <div className="space-y-3">
       <SectionHeading id="metodologia-innovacion" icon={Rocket} scrollMt="260px">
-        {t('campos.modulo.tituloInnovacionIntermodularidad', {defaultValue: 'Innovación e Intermodularidad'})}
+        {t('campos.modulo.tituloInnovacionIntermodularidad', {defaultValue: 'Innovación e intermodularidad'})}
       </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-amber-500">
         <div className="space-y-6">
@@ -46,7 +46,7 @@ export function InnovacionTab() {
           </div>
 
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.medidasBilingueLabel', {defaultValue: 'Medidas complementarias en proyectos o bilingües (apartado L, modelo Simplificado, pd=)'})}</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.medidasBilingueLabel', {defaultValue: 'Medidas complementarias en proyectos o bilingües (apartado L, modelo simplificado, pd=)'})}</label>
             <p className="text-caption text-muted mb-2">{t('campos.modulo.medidasBilingueDesc', {defaultValue: 'En su caso, medidas para el tratamiento del módulo dentro de proyectos o itinerarios bilingües. Si se deja vacío, se indica que no aplica.'})}</p>
             <textarea
               value={config_contexto["texto_medidas_bilingue"] || ""}

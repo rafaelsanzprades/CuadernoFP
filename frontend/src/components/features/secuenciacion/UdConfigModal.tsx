@@ -75,7 +75,7 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
           <div>
             <h2 id="modal-title" className="text-subheading font-bold flex items-center gap-2 text-foreground">
               <Settings2 className="w-5 h-5 text-accent" />
-              {t('campos.secuenciacion.configuracionDetalladaUnidadTitulo', {defaultValue: 'Configuración Detallada de la Unidad'})}
+              {t('campos.secuenciacion.configuracionDetalladaUnidadTitulo', {defaultValue: 'Configuración detallada de la unidad'})}
             </h2>
             <p className="text-body text-muted mt-1">
               <span className="font-mono text-accent mr-2">{ud.id_ud}</span>

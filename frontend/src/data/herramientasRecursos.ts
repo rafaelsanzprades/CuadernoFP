@@ -29,9 +29,9 @@ export const RECURSOS_DIDACTICOS: RecursoDidactico[] = [
   // Software y plataformas TIC
   { id: "REC-SOFT-OFIMATICA", label: "Software ofimático (procesador, hoja de cálculo, presentaciones)", categoria: "Software y TIC" },
   { id: "REC-SOFT-ESPECIFICO", label: "Software específico del módulo / sector", categoria: "Software y TIC" },
-  { id: "REC-EVA", label: "Entorno Virtual de Aprendizaje (Aules / Moodle / Classroom)", categoria: "Software y TIC" },
+  { id: "REC-EVA", label: "Entorno virtual de aprendizaje (Aules / Moodle / Classroom)", categoria: "Software y TIC" },
   { id: "REC-CLASSROOM", label: "Google Classroom / Google Workspace for Education", categoria: "Software y TIC" },
-  { id: "REC-TEAMS", label: "Microsoft Teams para Educación / Microsoft 365 Educación", categoria: "Software y TIC" },
+  { id: "REC-TEAMS", label: "Microsoft Teams para educación / Microsoft 365 Educación", categoria: "Software y TIC" },
   { id: "REC-FORMS", label: "Formularios y cuestionarios online (Forms, Kahoot, Quizizz)", categoria: "Software y TIC" },
   { id: "REC-CAD", label: "Software de diseño asistido por ordenador (CAD/CAM)", categoria: "Software y TIC" },
   { id: "REC-SIMULADOR", label: "Software de simulación / entorno virtual de prácticas", categoria: "Software y TIC" },

@@ -54,7 +54,7 @@ export default function ErrorBoundary({
             className="w-full flex items-center justify-center gap-2 bg-foreground/10 hover:bg-foreground/20 text-foreground font-bold py-3 px-4 rounded-lg border border-white/5 transition-colors"
           >
             <RotateCcw className="w-4 h-4" />
-            {t('botones.error.reiniciarModoDemo', {defaultValue: 'Reiniciar a modo Demo'})}
+            {t('botones.error.reiniciarModoDemo', {defaultValue: 'Reiniciar a modo demo'})}
           </button>
         </div>
       </div>
