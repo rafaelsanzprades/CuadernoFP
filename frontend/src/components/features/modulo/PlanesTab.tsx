@@ -60,7 +60,7 @@ export function PlanesTab() {
       {/* FEOE */}
       <div className="space-y-3">
       <SectionHeading id="planes-feoe" icon={Building2} scrollMt="260px">
-        {t('campos.modulo.tituloFeoe', {defaultValue: 'FEOE. Formación en Empresa u Organismo Equiparado'})}
+        {t('campos.modulo.tituloFeoe', {defaultValue: 'FEOE. Formación en empresa u organismo equiparado'})}
       </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-blue-500">
         <div className="space-y-6">
@@ -70,7 +70,7 @@ export function PlanesTab() {
                 <Calculator className="w-[1.1em] h-[1.1em]" /> {t('campos.modulo.pesoFeoeTitulo', {defaultValue: 'Peso de la FEOE en tu módulo'})}
               </h3>
               <Link href="/contexto?tab=identificacion" className="text-caption text-info hover:underline">
-                {t('botones.modulo.editarEnIdentificacion', {defaultValue: 'Editar Horas FEOE / Carga lectiva en Identificación'})}
+                {t('botones.modulo.editarEnIdentificacion', {defaultValue: 'Editar horas FEOE / carga lectiva en Identificación'})}
               </Link>
             </div>
             <p className="text-caption text-muted">
@@ -158,7 +158,7 @@ export function PlanesTab() {
           />
 
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.feoeTextoSimplificadoTitulo', {defaultValue: 'FEOE (texto específico modelo Simplificado, pd=)'})}</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.feoeTextoSimplificadoTitulo', {defaultValue: 'FEOE (texto específico modelo simplificado, pd=)'})}</label>
             <p className="text-caption text-muted mb-2">{t('campos.modulo.feoeTextoSimplificadoAviso', {defaultValue: 'Si se deja vacío, se genera automáticamente a partir de los RA marcados como dualizables (is_dual).'})}</p>
             <textarea
               value={config_contexto.texto_feoe || ""}

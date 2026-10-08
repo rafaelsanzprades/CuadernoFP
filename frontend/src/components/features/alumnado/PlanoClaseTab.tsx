@@ -281,7 +281,7 @@ export const PlanoClaseTab = () => {
                       onChange={(e) => handleAssignSeat(r, c, e.target.value)}
                       className="w-full bg-foreground/15 border border-[var(--glass-border)] text-foreground text-caption rounded-lg px-2 py-1.5 focus:outline-none focus:border-accent transition-colors font-medium cursor-pointer"
                     >
-                      <option value="" className="bg-background text-foreground">{t('campos.alumnado.optionSinAsignar', {defaultValue: '-- Sin Asignar --'})}</option>
+                      <option value="" className="bg-background text-foreground">{t('campos.alumnado.optionSinAsignar', {defaultValue: '-- Sin asignar --'})}</option>
                       {activeStudents.map((al) => {
                         const isAssignedElsewhere =
                           assignedStudentIds.has(al.ID || '') &&
@@ -310,7 +310,7 @@ export const PlanoClaseTab = () => {
           
           {/* Teacher Desk */}
           <div className="w-1/3 min-w-[200px] border border-accent/30 bg-accent/5 hover:bg-accent/10 transition-colors duration-300 rounded-xl p-3.5 text-center text-accent font-extrabold text-caption tracking-widest flex items-center justify-center gap-2 shadow-lg">
-            <span>‍<span className="inline-flex"><School className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.mesaProfesorado', {defaultValue: 'Mesa del Profesorado / Pizarra'})}</span>
+            <span>‍<span className="inline-flex"><School className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.alumnado.mesaProfesorado', {defaultValue: 'Mesa del profesorado / pizarra'})}</span>
           </div>
         </div>
       </Card>

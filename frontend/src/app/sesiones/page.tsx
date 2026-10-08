@@ -303,7 +303,7 @@ export default function SeguimientoPage() {
   const diarioIndexItems = mesesIndice.map((m) => ({
     id: `diario-mes-${m}`,
     label: meses_num[m] === currentMonthNum
-      ? `${t('campos.seguimiento.mesActualPrefijo', { defaultValue: 'ACTUAL' })}. ${meses_nombres[m as keyof typeof meses_nombres]}`
+      ? `${t('campos.seguimiento.mesActualPrefijo', { defaultValue: 'Actual' })}. ${meses_nombres[m as keyof typeof meses_nombres]}`
       : meses_nombres[m as keyof typeof meses_nombres],
   }));
   // Riesgo de abandono: dos bloques (asistencia+notas, y nota final < 5).

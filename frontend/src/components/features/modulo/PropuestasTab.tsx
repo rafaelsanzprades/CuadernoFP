@@ -47,7 +47,7 @@ export function PropuestasTab() {
     <MotionWrapper>
       <div className="space-y-3">
       <SectionHeading id="calificaciones-propuestas" icon={CheckCircle2} scrollMt="260px">
-        {t('campos.modulo.tituloPropuestasMejora', {defaultValue: 'Propuestas de Mejora (PDCA)'})}
+        {t('campos.modulo.tituloPropuestasMejora', {defaultValue: 'Propuestas de mejora (PDCA)'})}
       </SectionHeading>
       <Card className="p-6 border-t-4 border-t-success">
         <p className="text-muted text-body mb-6">

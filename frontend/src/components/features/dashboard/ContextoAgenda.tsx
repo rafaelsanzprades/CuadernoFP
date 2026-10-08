@@ -166,7 +166,7 @@ export const ContextoAgenda = () => {
           </div>
           <div className="flex flex-col h-full justify-between relative z-10">
             <div>
-              <div className="flex items-center gap-2 mb-2 text-info font-bold uppercase tracking-wider text-sm">
+              <div className="flex items-center gap-2 mb-2 text-info font-bold tracking-wider text-sm">
                 <CalendarDays className="w-4 h-4" /> {t('campos.dashboard.udEnCursoLabel', {defaultValue: 'UD en curso'})}
               </div>
               {currentUdId ? (

@@ -125,7 +125,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
       // The user wants "C - 2025-26 - 1A-GM - ELE-203.json" roughly, but our fileManager takes cursoName and year.
       // E.g. "1A-GM - ELE-203"
       const pdFile = useAppStore.getState().pdFileSource.fileName || "";
-      const baseName = pdFile ? pdFile.replace('P - ', '').replace('.json', '') : t('campos.cloud.moduloDesconocido', {defaultValue: 'Módulo Desconocido'});
+      const baseName = pdFile ? pdFile.replace('P - ', '').replace('.json', '') : t('campos.cloud.moduloDesconocido', {defaultValue: 'Módulo desconocido'});
       
       const fullCursoName = `${cursoName} - ${baseName}`;
       
@@ -144,12 +144,12 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
   const handleCreateCursoDemo = async () => {
     setIsCreating(true);
     try {
-      const ok = await fileManager.createNewCursoFromDemo(t('campos.cloud.cursoDemoNombre', {defaultValue: 'Curso DEMO'}), getCurrentAcademicYear());
+      const ok = await fileManager.createNewCursoFromDemo(t('campos.cloud.cursoDemoNombre', {defaultValue: 'Curso demo'}), getCurrentAcademicYear());
       if (ok) {
-        toast.success(t('toasts.newFileWizard.cursoDemoCreado', {defaultValue: "Curso DEMO creado correctamente."}));
+        toast.success(t('toasts.newFileWizard.cursoDemoCreado', {defaultValue: "Curso demo creado correctamente."}));
         onClose();
       } else {
-        toast.error(t('toasts.newFileWizard.errorCrearCursoDemo', {defaultValue: "Error al crear el curso DEMO."}));
+        toast.error(t('toasts.newFileWizard.errorCrearCursoDemo', {defaultValue: "Error al crear el curso demo."}));
       }
     } finally {
       setIsCreating(false);
@@ -270,7 +270,7 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
                   
                   <div className="flex gap-2 text-left">
                     <div className="flex-1">
-                      <label className="text-caption text-muted font-medium mb-1 block">{t('campos.cloud.anioAcademico', {defaultValue: 'Año Académico'})}</label>
+                      <label className="text-caption text-muted font-medium mb-1 block">{t('campos.cloud.anioAcademico', {defaultValue: 'Año académico'})}</label>
                       <input 
                         type="text" 
                         value={cursoYear} 
@@ -305,10 +305,10 @@ export function NewFileWizard({ isOpen, onClose, fileType }: NewFileWizardProps)
                   className="bg-warning/5 border border-warning/20 rounded-xl p-6 text-center hover:bg-warning/10 hover:border-warning/40 transition-all group relative overflow-hidden"
                 >
                   <div className="absolute top-0 right-0 bg-warning text-warning-foreground text-caption font-bold px-2 py-1 rounded-bl-lg">
-                    {t('campos.cloud.recomendado', {defaultValue: 'RECOMENDADO'})}
+                    {t('campos.cloud.recomendado', {defaultValue: 'Recomendado'})}
                   </div>
                   <BookOpen className="w-12 h-12 text-warning/60 mx-auto mb-3 group-hover:text-warning transition-colors" />
-                  <p className="text-foreground font-medium group-hover:text-warning transition-colors">{t('botones.archivos.cargarDatosDemo', {defaultValue: 'Cargar datos DEMO'})}</p>
+                  <p className="text-foreground font-medium group-hover:text-warning transition-colors">{t('botones.archivos.cargarDatosDemo', {defaultValue: 'Cargar datos demo'})}</p>
                   <p className="text-body text-muted mt-2">{t('campos.cloud.generaCursoPrerellenado', {defaultValue: 'Genera un curso pre-rellenado con datos de ejemplo para explorar todas las funciones.'})}</p>
                 </button>
               </div>

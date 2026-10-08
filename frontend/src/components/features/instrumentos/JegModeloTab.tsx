@@ -200,7 +200,7 @@ export function JegModeloTab() {
       {/* Indicadores por CE */}
       <div className="space-y-3">
       <SectionHeading id="instrumentos-indicadores-ce" icon={Target} scrollMt="260px">
-        {t('campos.instrumentos.indicadoresPorCeTitulo', {defaultValue: 'Indicadores por Criterio de Evaluación'})}
+        {t('campos.instrumentos.indicadoresPorCeTitulo', {defaultValue: 'Indicadores por criterio de evaluación'})}
       </SectionHeading>
       <div className="bg-foreground/5 rounded-lg border border-[var(--glass-border)] p-4">
         {ceOptions.length === 0 ? (

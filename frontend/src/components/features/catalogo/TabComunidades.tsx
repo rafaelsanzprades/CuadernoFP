@@ -35,7 +35,7 @@ const COMUNIDADES: CCAA[] = [
     nombre: "Andalucía",
     siglas: "AN",
     bo: "BOJA",
-    boNombre: "Boletín Oficial de la Junta de Andalucía",
+    boNombre: "Boletín oficial de la Junta de Andalucía",
     portalNombre: "Portal de FP Andaluza",
     webCurriculo: "https://www.juntadeandalucia.es/educacion/portals/web/formacion-profesional-andaluza",
     color: "#10b981",
@@ -45,10 +45,10 @@ const COMUNIDADES: CCAA[] = [
     nombre: "Aragón",
     siglas: "AR",
     bo: "BOA",
-    boNombre: "Boletín Oficial de Aragón",
+    boNombre: "Boletín oficial de Aragón",
     portalNombre: "Educaragón - FP",
     webCurriculo: "https://educa.aragon.es/formaci%C3%B3n-profesional",
-    nota: "Currículo de referencia del entorno DEMO de esta aplicación.",
+    nota: "Currículo de referencia del entorno demo de esta aplicación.",
     color: "#3b82f6",
   },
   {
@@ -56,7 +56,7 @@ const COMUNIDADES: CCAA[] = [
     nombre: "Principado de Asturias",
     siglas: "AS",
     bo: "BOPA",
-    boNombre: "Boletín Oficial del Principado de Asturias",
+    boNombre: "Boletín oficial del Principado de Asturias",
     portalNombre: "Educastur - FP",
     webCurriculo: "https://www.educastur.es/estudiantes/formacion-profesional",
     color: "#8b5cf6",
@@ -77,7 +77,7 @@ const COMUNIDADES: CCAA[] = [
     nombre: "Canarias",
     siglas: "CN",
     bo: "BOC",
-    boNombre: "Boletín Oficial de Canarias",
+    boNombre: "Boletín oficial de Canarias",
     portalNombre: "Portal FP Canarias",
     webCurriculo: "https://www.gobiernodecanarias.org/educacion/web/formacion_profesional",
     color: "#ef4444",
@@ -87,7 +87,7 @@ const COMUNIDADES: CCAA[] = [
     nombre: "Cantabria",
     siglas: "CB",
     bo: "BOC",
-    boNombre: "Boletín Oficial de Cantabria",
+    boNombre: "Boletín oficial de Cantabria",
     portalNombre: "Educantabria - FP",
     webCurriculo: "https://www.educantabria.es/fp",
     color: "#ec4899",
@@ -107,7 +107,7 @@ const COMUNIDADES: CCAA[] = [
     nombre: "Castilla y León",
     siglas: "CL",
     bo: "BOCYL",
-    boNombre: "Boletín Oficial de Castilla y León",
+    boNombre: "Boletín oficial de Castilla y León",
     portalNombre: "Portal de FP JCyL",
     webCurriculo: "https://www.educa.jcyl.es/fp/es",
     color: "#6366f1",
@@ -149,7 +149,7 @@ const COMUNIDADES: CCAA[] = [
     nombre: "La Rioja",
     siglas: "RI",
     bo: "BOR",
-    boNombre: "Boletín Oficial de La Rioja",
+    boNombre: "Boletín oficial de La Rioja",
     portalNombre: "Portal FP La Rioja",
     webCurriculo: "https://fp.larioja.org/",
     color: "#a855f7",
@@ -159,7 +159,7 @@ const COMUNIDADES: CCAA[] = [
     nombre: "Comunidad de Madrid",
     siglas: "MA",
     bo: "BOCM",
-    boNombre: "Boletín Oficial de la Comunidad de Madrid",
+    boNombre: "Boletín oficial de la Comunidad de Madrid",
     portalNombre: "Comunidad de Madrid - FP",
     webCurriculo: "https://www.comunidad.madrid/servicios/educacion/formacion-profesional",
     color: "#e11d48",
@@ -169,7 +169,7 @@ const COMUNIDADES: CCAA[] = [
     nombre: "Región de Murcia",
     siglas: "MU",
     bo: "BORM",
-    boNombre: "Boletín Oficial de la Región de Murcia",
+    boNombre: "Boletín oficial de la Región de Murcia",
     portalNombre: "Llegarás Alto - FP Región de Murcia",
     webCurriculo: "https://www.llegarasalto.com/",
     color: "#ea580c",
@@ -179,7 +179,7 @@ const COMUNIDADES: CCAA[] = [
     nombre: "Comunidad Foral de Navarra",
     siglas: "NA",
     bo: "BON",
-    boNombre: "Boletín Oficial de Navarra",
+    boNombre: "Boletín oficial de Navarra",
     portalNombre: "Educación Navarra - FP",
     webCurriculo: "https://www.educacion.navarra.es/web/dpto/formacion-profesional",
     color: "#dc2626",
@@ -189,7 +189,7 @@ const COMUNIDADES: CCAA[] = [
     nombre: "País Vasco",
     siglas: "PV",
     bo: "BOPV",
-    boNombre: "Boletín Oficial del País Vasco",
+    boNombre: "Boletín oficial del País Vasco",
     portalNombre: "Euskadi.eus - FP",
     webCurriculo: "https://www.euskadi.eus/gobierno-vasco/fp-educacion/",
     nota: "Currículo disponible en castellano y euskera.",
@@ -211,10 +211,10 @@ const COMUNIDADES: CCAA[] = [
     nombre: "Ceuta",
     siglas: "CE",
     bo: "BOE",
-    boNombre: "Boletín Oficial del Estado",
+    boNombre: "Boletín oficial del Estado",
     portalNombre: "Portal Educativo Ceuta",
     webCurriculo: "https://www.educacionyfp.gob.es/contenidos/ba/ceuta-melilla/ceuta/portada.html",
-    nota: "Ciudad Autónoma. Aplica directamente el currículo del Ministerio (BOE). Sin path en el mapa SVG.",
+    nota: "Ciudad autónoma. Aplica directamente el currículo del Ministerio (BOE). Sin path en el mapa SVG.",
     color: "#78716c",
   },
   {
@@ -222,10 +222,10 @@ const COMUNIDADES: CCAA[] = [
     nombre: "Melilla",
     siglas: "ML",
     bo: "BOE",
-    boNombre: "Boletín Oficial del Estado",
+    boNombre: "Boletín oficial del Estado",
     portalNombre: "Portal Educativo Melilla",
     webCurriculo: "https://www.educacionyfp.gob.es/contenidos/ba/ceuta-melilla/melilla/portada.html",
-    nota: "Ciudad Autónoma. Aplica directamente el currículo del Ministerio (BOE). Sin path en el mapa SVG.",
+    nota: "Ciudad autónoma. Aplica directamente el currículo del Ministerio (BOE). Sin path en el mapa SVG.",
     color: "#78716c",
   },
 ];
@@ -372,7 +372,7 @@ export function TabComunidades({ searchQuery = "" }: Props) {
             <thead>
               <tr className="border-b">
                 <th className="text-left py-2 px-3 font-medium text-muted">#</th>
-                <th className="text-left py-2 px-3 font-medium text-muted">{t('tablas.catalogo.comunidadAutonoma', {defaultValue: 'Comunidad Autónoma'})}</th>
+                <th className="text-left py-2 px-3 font-medium text-muted">{t('tablas.catalogo.comunidadAutonoma', {defaultValue: 'Comunidad autónoma'})}</th>
                 <th className="text-left py-2 px-3 font-medium text-muted">{t('tablas.catalogo.siglas', {defaultValue: 'Siglas'})}</th>
                 <th className="text-left py-2 px-3 font-medium text-muted">{t('tablas.catalogo.portalOficial', {defaultValue: 'Portal oficial'})}</th>
                 <th className="text-left py-2 px-3 font-medium text-muted">{t('common.tipo', {defaultValue: 'Tipo'})}</th>
@@ -400,7 +400,7 @@ export function TabComunidades({ searchQuery = "" }: Props) {
                     <span className="inline-block w-3 h-3 rounded-full mr-2" style={{ backgroundColor: ccaa.color }} />
                     {ccaa.nombre}
                     {ccaa.id === "aragon" && (
-                      <Badge variant="info" className="ml-2 text-caption">{t('campos.catalogo.badgeDemo', {defaultValue: 'DEMO'})}</Badge>
+                      <Badge variant="info" className="ml-2 text-caption">{t('campos.catalogo.badgeDemo', {defaultValue: 'Demo'})}</Badge>
                     )}
                   </td>
                   <td className="py-2 px-3">{ccaa.siglas}</td>
@@ -417,7 +417,7 @@ export function TabComunidades({ searchQuery = "" }: Props) {
                   </td>
                   <td className="py-2 px-3">
                     {ccaa.bo === "BOE" ? (
-                      <Badge variant="info" className="text-caption">{t('campos.catalogo.badgeCiudadAutonoma', {defaultValue: 'Ciudad Autónoma'})}</Badge>
+                      <Badge variant="info" className="text-caption">{t('campos.catalogo.badgeCiudadAutonoma', {defaultValue: 'Ciudad autónoma'})}</Badge>
                     ) : (
                       <Badge variant="info" className="text-caption">{t('campos.catalogo.badgeCcaaSigla', {defaultValue: 'CCAA'})}</Badge>
                     )}
@@ -483,7 +483,7 @@ function DetalleCCAA({ ccaa }: { ccaa: CCAA }) {
       {ccaa.id === "aragon" && (
         <div className="p-3 rounded-lg bg-blue-50 border border-blue-200 dark:bg-blue-950/30 dark:border-blue-800">
           <p className="text-caption text-blue-800 dark:text-blue-300">
-            <strong>{t('campos.catalogo.demoEntornoLabel', {defaultValue: '🌍 Entorno DEMO:'})}</strong> {t('campos.catalogo.demoEntornoTexto', {defaultValue: 'Los datos de ejemplo de esta aplicación usan el currículo de Aragón (BOA) como referencia.'})}
+            <strong>{t('campos.catalogo.demoEntornoLabel', {defaultValue: '🌍 Entorno demo:'})}</strong> {t('campos.catalogo.demoEntornoTexto', {defaultValue: 'Los datos de ejemplo de esta aplicación usan el currículo de Aragón (BOA) como referencia.'})}
           </p>
         </div>
       )}
@@ -492,7 +492,7 @@ function DetalleCCAA({ ccaa }: { ccaa: CCAA }) {
         <div className="flex items-start gap-2">
           <BookOpen className="w-4 h-4 text-muted mt-0.5 shrink-0" />
           <div>
-            <p className="text-caption font-medium text-muted">{t('campos.catalogo.labelBoletinOficial', {defaultValue: 'Boletín Oficial'})}</p>
+            <p className="text-caption font-medium text-muted">{t('campos.catalogo.labelBoletinOficial', {defaultValue: 'Boletín oficial'})}</p>
             <p className="text-body">{ccaa.boNombre}</p>
           </div>
         </div>
@@ -501,7 +501,7 @@ function DetalleCCAA({ ccaa }: { ccaa: CCAA }) {
           <Globe className="w-4 h-4 text-muted mt-0.5 shrink-0" />
           <div>
             <p className="text-caption font-medium text-muted">{t('common.tipo', {defaultValue: 'Tipo'})}</p>
-            <p className="text-body">{ccaa.bo === "BOE" ? t('campos.catalogo.badgeCiudadAutonoma', {defaultValue: 'Ciudad Autónoma'}) : t('campos.catalogo.badgeComunidadAutonoma', {defaultValue: 'Comunidad Autónoma'})}</p>
+            <p className="text-body">{ccaa.bo === "BOE" ? t('campos.catalogo.badgeCiudadAutonoma', {defaultValue: 'Ciudad autónoma'}) : t('campos.catalogo.badgeComunidadAutonoma', {defaultValue: 'Comunidad autónoma'})}</p>
           </div>
         </div>
 

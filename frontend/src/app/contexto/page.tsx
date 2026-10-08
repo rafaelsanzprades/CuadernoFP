@@ -68,7 +68,7 @@ export default function ContextoConfigPage() {
     entorno: t('tabs.contexto.entorno.desc', {defaultValue: 'Entorno geográfico, socioeconómico, escolar e infraestructura, actividades complementarias y plan FEOE.'}),
     alumnado: t('tabs.contexto.alumnado.desc', {defaultValue: 'Alumnado con necesidades específicas (ACNEAE), datos y rasgos característicos del grupo y evaluación inicial.'}),
     evaluacion: t('tabs.contexto.evaluacion.desc', {defaultValue: 'Reglas de redondeo y compensación, ponderación por trimestres e instrumentos de evaluación, y escalas cualitativas.'}),
-    procedimientos: t('tabs.contexto.procedimientos.desc', {defaultValue: 'Información y procedimientos de evaluación, modelo de recuperación, criterios de calificación y textos del modelo Simplificado.'}),
+    procedimientos: t('tabs.contexto.procedimientos.desc', {defaultValue: 'Información y procedimientos de evaluación, modelo de recuperación, criterios de calificación y textos del modelo simplificado.'}),
   };
 
   // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
@@ -81,7 +81,7 @@ export default function ContextoConfigPage() {
     entorno: [
       { id: "contexto-escolar", label: t('campos.contexto.tituloContextoEscolar', {defaultValue: 'Contexto escolar'}) },
       { id: "contexto-actividades", label: t('campos.contexto.tituloActividades', {defaultValue: 'Actividades complementarias y extraescolares'}) },
-      { id: "planes-feoe", label: t('campos.modulo.tituloFeoe', {defaultValue: 'FEOE. Formación en Empresa u Organismo Equiparado'}) },
+      { id: "planes-feoe", label: t('campos.modulo.tituloFeoe', {defaultValue: 'FEOE. Formación en empresa u organismo equiparado'}) },
     ],
     alumnado: [
       { id: "contexto-alumnado-acneae", label: t('campos.contexto.tituloAlumnadoAcneae', {defaultValue: 'Alumnado (ACNEAE)'}) },
@@ -96,8 +96,8 @@ export default function ContextoConfigPage() {
     procedimientos: [
       { id: "procedimientos-modelo-recuperacion", label: t('campos.evaluacion.tituloModeloRecuperacion', {defaultValue: 'Modelo de recuperación'}) },
       { id: "procedimientos-informacion", label: t('campos.evaluacion.tituloInformacionProcedimientos', {defaultValue: 'Información y procedimientos'}) },
-      { id: "procedimientos-criterios-calificacion", label: t('campos.evaluacion.tituloCriteriosCalificacionSimplificado', {defaultValue: 'Criterios de calificación (texto específico modelo Simplificado, pd=)'}) },
-      { id: "contexto-modelo-simplificado", label: t('campos.contexto.tituloModeloSimplificado', {defaultValue: 'Textos del modelo Simplificado (pd=)'}) },
+      { id: "procedimientos-criterios-calificacion", label: t('campos.evaluacion.tituloCriteriosCalificacionSimplificado', {defaultValue: 'Criterios de calificación (texto específico modelo simplificado, pd=)'}) },
+      { id: "contexto-modelo-simplificado", label: t('campos.contexto.tituloModeloSimplificado', {defaultValue: 'Textos del modelo simplificado (pd=)'}) },
     ],
   };
 

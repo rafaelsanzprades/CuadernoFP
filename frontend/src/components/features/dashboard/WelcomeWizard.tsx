@@ -86,7 +86,7 @@ export function WelcomeWizard({ onComplete, fetchModules }: WelcomeWizardProps) 
               >
                 <div className="flex items-center gap-3 mb-3">
                   <Gift className="w-8 h-8 text-accent group-hover:scale-110 transition-transform" />
-                  <h3 className="text-subheading font-bold text-foreground">{t('botones.dashboard.probarConDemo', {defaultValue: 'Probar con DEMO'})}</h3>
+                  <h3 className="text-subheading font-bold text-foreground">{t('botones.dashboard.probarConDemo', {defaultValue: 'Probar con demo'})}</h3>
                 </div>
                 <p className="text-body text-muted">
                   {t('campos.dashboard.demoDescripcion', {defaultValue: 'Carga un Archivos de demostración con datos ficticios para explorar todas las funciones de la aplicación.'})}
@@ -111,7 +111,7 @@ export function WelcomeWizard({ onComplete, fetchModules }: WelcomeWizardProps) 
           {step === "CREATE_FORM" && (
             <div className="space-y-6">
               <div>
-                <label className="block text-body font-bold text-foreground mb-2">{t('campos.dashboard.nombreProgramacion', {defaultValue: 'Nombre de la Programación'})}</label>
+                <label className="block text-body font-bold text-foreground mb-2">{t('campos.dashboard.nombreProgramacion', {defaultValue: 'Nombre de la programación'})}</label>
                 <Input
                   value={newPdName}
                   onChange={(e) => setNewPdName(e.target.value)}
@@ -120,7 +120,7 @@ export function WelcomeWizard({ onComplete, fetchModules }: WelcomeWizardProps) 
                 <p className="text-caption text-muted mt-1">{t('campos.dashboard.nombreProgramacionAyuda', {defaultValue: 'Se creará un archivo vacío con este identificador.'})}</p>
               </div>
               <div>
-                <label className="block text-body font-bold text-foreground mb-2">{t('campos.dashboard.anioCurso', {defaultValue: 'Año del Curso'})}</label>
+                <label className="block text-body font-bold text-foreground mb-2">{t('campos.dashboard.anioCurso', {defaultValue: 'Año del curso'})}</label>
                 <Input
                   value={newCursoName}
                   onChange={(e) => setNewCursoName(e.target.value)}

@@ -427,7 +427,7 @@
   "sidebar": {
     "en_obras": "En Obres",
     "fecha": "Data",
-    "demo": "DEMO",
+    "demo": "Demo",
     "reales": "REALS",
     "abrir_grupo": "Obrir Grup",
     "agenda": "Classes",
@@ -542,7 +542,7 @@
     },
     "archivos": {
       "abrirCursoViaGrupo": "Per obrir un curs de manera segura, fes doble clic en el seu grup associat a la primera columna.",
-      "cambiadoDemo": "Canviat a dades DEMO.",
+      "cambiadoDemo": "Canviat a dades demo.",
       "cambiadoReal": "Canviat a dades reals en local. Pots crear o obrir arxius.",
       "carpetaCambiada": "Carpeta local canviada.",
       "carpetaConectada": "Carpeta local connectada.",
@@ -558,8 +558,8 @@
       "enlaceReparado": "Enllaç reparat correctament.",
       "errorAbrirGrupo": "Error en obrir el grup.",
       "errorAbrirProgramacion": "Error en obrir la programació.",
-      "errorCargarCursoDemo": "Error en carregar el curs DEMO.",
-      "errorCargarProgramacionDemo": "Error en carregar la programació DEMO.",
+      "errorCargarCursoDemo": "Error en carregar el curs demo.",
+      "errorCargarProgramacionDemo": "Error en carregar la programació demo.",
       "errorFormatoCurso": "Error en importar: l'arxiu no té un format vàlid de curs.",
       "errorFormatoCursoArrastrar": "L'arxiu no té un format vàlid de curs (.fpc).",
       "errorFormatoProgramacion": "Error en importar: l'arxiu no té un format vàlid de programació.",
@@ -569,7 +569,7 @@
       "errorReparEnlace": "Error en reparar l'enllaç.",
       "grupoAbierto": "Grup {{name}} obert correctament.",
       "grupoCargado": "Grup {{name}} carregat.",
-      "modoDemoGuardarComoNuevo": "Ets en mode DEMO. Desant com a arxiu nou...",
+      "modoDemoGuardarComoNuevo": "Ets en mode demo. Desant com a arxiu nou...",
       "programacionAbierta": "Programació oberta correctament.",
       "programacionAbiertaIcono": "Programació oberta correctament",
       "programacionCargada": "Programació {{name}} carregada.",
@@ -621,14 +621,14 @@
     "googleDrive": {
       "autoguardadoActivado": "Desat automàtic al núvol activat.",
       "autoguardadoDesactivado": "Desat automàtic al núvol desactivat.",
-      "autoguardadoSinDemo": "El desat automàtic no està disponible en mode DEMO.",
+      "autoguardadoSinDemo": "El desat automàtic no està disponible en mode demo.",
       "conectado": "Google Drive connectat correctament.",
       "conectando": "Connectant amb Google Drive...",
       "desconectado": "Desconnectat de Google Drive",
       "errorConectar": "Error en connectar amb Google Drive.",
       "faltaClientId": "Introdueix el teu Google Client ID primer.",
       "faltaConectar": "Connecta el teu compte de Google Drive primer.",
-      "sinDemo": "No pots sincronitzar amb Drive en mode DEMO."
+      "sinDemo": "No pots sincronitzar amb Drive en mode demo."
     },
     "header": {
       "paletaNoImplementada": "Paleta d'ordres encara no implementada.",
@@ -647,10 +647,10 @@
     },
     "newFileWizard": {
       "cursoCreado": "Curs {{name}} creat correctament.",
-      "cursoDemoCreado": "Curs DEMO creat correctament.",
+      "cursoDemoCreado": "Curs demo creat correctament.",
       "cursoYGrupoCreados": "Curs {{name}} i el seu grup creats correctament.",
       "errorCrearCurso": "Error en crear el curs.",
-      "errorCrearCursoDemo": "Error en crear el curs DEMO.",
+      "errorCrearCursoDemo": "Error en crear el curs demo.",
       "errorCrearProgramacion": "Error en crear la programació.",
       "programacionCreada": "Programació de {{name}} creada correctament."
     },
@@ -670,7 +670,7 @@
       "desconectado": "Desconnectat de OneDrive",
       "errorConectar": "Error en connectar amb OneDrive.",
       "faltaClientId": "Introdueix el teu Client ID de Microsoft primer.",
-      "sinDemo": "No pots sincronitzar en mode DEMO."
+      "sinDemo": "No pots sincronitzar en mode demo."
     },
     "recientes": {
       "errorGenerico": "Error en tornar a obrir l'arxiu.",
@@ -718,7 +718,7 @@
     },
     "archivos": {
       "cambiarCarpetaLocal": "Canviar carpeta local",
-      "cargarDatosDemo": "Carregar dades DEMO",
+      "cargarDatosDemo": "Carregar dades demo",
       "conectarCarpetaLocal": "Connectar carpeta local",
       "crearAhora": "Crear ara",
       "crearCursoVacio": "Crear curs buit",
@@ -726,7 +726,7 @@
       "iniciarCursoGrupo": "Iniciar curs (+ grup)",
       "irADocumentosPdx": "Anar a MagIA",
       "nuevaCatalogo": "Nova (catàleg)",
-      "recargarDemo": "Recarregar DEMO",
+      "recargarDemo": "Recarregar demo",
       "repararEnlace": "Reparar enllaç",
       "validarWorkspace": "Validar workspace"
     },
@@ -739,7 +739,7 @@
       "nuevaProgramacion": "Nova programació"
     },
     "cloud": {
-      "accionNoPermitidaDemo": "Acció no permesa en mode DEMO",
+      "accionNoPermitidaDemo": "Acció no permesa en mode demo",
       "conectarCuenta": "Connectar compte",
       "desconectar": "Desconnectar"
     },
@@ -766,7 +766,7 @@
       "crearCurso": "Crear curs",
       "crearMisArchivos": "Crear els meus arxius",
       "nuevoCursoDeEstaProgramacion": "Nou curs a partir d'aquesta programació",
-      "probarConDemo": "Provar amb DEMO",
+      "probarConDemo": "Provar amb demo",
       "reabrir": "Tornar a obrir",
       "seleccionarCsvAlumnado": "Seleccionar CSV d'alumnat",
       "semanaActual": "Setmana actual",
@@ -2062,7 +2062,7 @@
       "clientIdPlaceholder": "Ex: 123456789-abcde.apps.googleusercontent.com",
       "clientIdTauriHint": "A l'app d'escriptori (Tauri) necessites un Client ID de tipus \"Desktop app\", diferent del que fas servir al navegador — pots registrar-lo al mateix projecte de Google Cloud.",
       "moduloDesconocido": "Mòdul Desconegut",
-      "cursoDemoNombre": "Curs DEMO",
+      "cursoDemoNombre": "Curs demo",
       "usuarioMicrosoft": "Usuari de Microsoft",
       "oneDriveDescripcion": "Desa els teus fitxers .fpp i .fpc al teu compte de Microsoft OneDrive. (Requereix registre al portal d'Azure).",
       "oneDriveProximamente": "Pròximament",
@@ -2206,7 +2206,7 @@
       "sinResultadosParaBusqueda": "No s'han trobat resultats per a \"{{termino}}\"",
       "tituloMapaCcaa": "Mapa de CCAA amb currículum FP",
       "instruccionMapaCcaa": "Fes clic en una comunitat per veure'n el detall. Font: ",
-      "badgeDemo": "DEMO",
+      "badgeDemo": "Demo",
       "mensajeSeleccionaCcaa": "Selecciona una comunitat autònoma al mapa per veure'n la informació detallada.",
       "tituloTablaComunidades": "Taula de comunitats autònomes",
       "badgeCiudadAutonoma": "Ciutat Autònoma",
@@ -2220,7 +2220,7 @@
       "infoCeutaMelillaTexto": " apliquen directament el currículum del Ministeri (BOE), en no tenir competències transferides en matèria d'educació.",
       "mapaSvgCreditoLabel": "Mapa SVG:",
       "mapaSvgCreditoTexto": "(CC-BY-4.0) — Victor Cazanave.",
-      "demoEntornoLabel": "🌍 Entorn DEMO:",
+      "demoEntornoLabel": "🌍 Entorn demo:",
       "demoEntornoTexto": "Les dades d'exemple d'aquesta aplicació utilitzen el currículum d'Aragó (BOA) com a referència.",
       "labelBoletinOficial": "Butlletí Oficial",
       "badgeComunidadAutonoma": "Comunitat Autònoma",
@@ -2318,16 +2318,16 @@
       "avisoRealDesc": "estàs treballant amb els teus propis arxius .fpg/.fpp/.fpc, desats al teu equip. Els canvis es desen de veritat.",
       "gruposEjemploDobleClic": "Grups d'exemple. Doble clic per carregar.",
       "tusGruposDobleClic": "Els teus grups desats. Doble clic per carregar.",
-      "sinGruposDemo": "No s'han trobat grups DEMO.",
+      "sinGruposDemo": "No s'han trobat grups demo.",
       "usaBotonEnlazarCarpeta": "Utilitza el botó inferior per enllaçar la teva carpeta de treball.",
       "sinGrupos": "No s'han trobat grups.",
       "programacionesTitulo": "Programacions",
       "dobleClicCargarProgramacion": "Doble clic per carregar una programació.",
-      "sinProgramacionesDemo": "No s'han trobat programacions DEMO.",
+      "sinProgramacionesDemo": "No s'han trobat programacions demo.",
       "sinProgramaciones": "No s'han trobat programacions.",
       "cursosTitulo": "Cursos",
       "dobleClicCargarCurso": "Doble clic per carregar un curs.",
-      "sinCursosDemo": "No s'han trobat cursos DEMO.",
+      "sinCursosDemo": "No s'han trobat cursos demo.",
       "sinCursos": "No s'han trobat cursos.",
       "nubeLabel": "Núvol",
       "privacidadDisenoTitulo": "La teva privacitat per disseny",
@@ -2648,7 +2648,7 @@
       "guardarDeshacerTitulo": "Desa i Desfés",
       "guardarDeshacerDesc": "Pots desar manualment aquí, tot i que hi ha desat automàtic. També tens fletxes per a Desfer/Refer o pots fer servir Ctrl+S i Ctrl+Z.",
       "pestanaArchivosTitulo": "Pestanya d'Arxius",
-      "pestanaArchivosDesc": "Per començar, vés a Arxius i selecciona 'Dades DEMO' per explorar sense por."
+      "pestanaArchivosDesc": "Per començar, vés a Arxius i selecciona 'Dades demo' per explorar sense por."
     },
     "ayuda": {
       "faq": {

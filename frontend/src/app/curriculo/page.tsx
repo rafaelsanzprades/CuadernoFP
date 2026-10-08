@@ -702,7 +702,7 @@ export default function MatricesPage() {
                                           newCe[raCeIndexes[i]].peso_ce = share;
                                         });
                                         updateDataFrame("df_ce", newCe);
-                                        toast.success(t('toasts.curriculo.repartidoPorRelevancia', {defaultValue: 'Pesos recalculados a partir de la Relevancia de cada CE.'}));
+                                        toast.success(t('toasts.curriculo.repartidoPorRelevancia', {defaultValue: 'Pesos recalculados a partir de la relevancia de cada CE.'}));
                                       }}
                                       className="text-caption text-info hover:text-info font-semibold flex items-center gap-1"
                                     >
@@ -727,7 +727,7 @@ export default function MatricesPage() {
             {activeTab === "contribucion-og-ra" && (
               <div className="animate-in fade-in duration-500 w-full space-y-3">
                 <SectionHeading id="curriculo-contribucion-og-ra" icon={Link2} scrollMt="260px">
-                  {t('campos.curriculo.contribucionRaOgTitulo', {defaultValue: 'Contribución de los RA a los OG del Título'})}
+                  {t('campos.curriculo.contribucionRaOgTitulo', {defaultValue: 'Contribución de los RA a los OG del título'})}
                 </SectionHeading>
                 <RaOgMatrix />
               </div>
@@ -795,7 +795,7 @@ export default function MatricesPage() {
                           ))}
                           <th className="p-3 min-w-[200px]">{t('campos.curriculo.bloqueContenido', {defaultValue: 'Bloque de contenidos'})}</th>
                           <th className="p-3 text-center min-w-[90px]">{t('tablas.curriculo.objAbrev', {defaultValue: 'Obj'})}</th>
-                          <th className="p-3 min-w-[160px]">{t('tablas.curriculo.evalAbrev', {defaultValue: 'EVAL.'})}</th>
+                          <th className="p-3 min-w-[160px]">{t('tablas.curriculo.evalAbrev', {defaultValue: 'Eval.'})}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -1036,7 +1036,7 @@ export default function MatricesPage() {
                     <div className="text-center py-12">
                       <ClipboardList className="w-16 h-16 text-muted-foreground opacity-50 mx-auto mb-4" />
                       <h3 className="text-subheading font-bold mb-2">{t('campos.curriculo.sinUnidadesDidacticasTitulo', {defaultValue: 'No hay unidades didácticas'})}</h3>
-                      <p className="text-muted">{t('campos.curriculo.sinUnidadesDidacticasDesc1', {defaultValue: 'Aún no has creado ninguna Unidad didáctica (UD).'})}</p>
+                      <p className="text-muted">{t('campos.curriculo.sinUnidadesDidacticasDesc1', {defaultValue: 'Aún no has creado ninguna unidad didáctica (UD).'})}</p>
                       <p className="text-muted mt-1">{t('campos.curriculo.sinUnidadesDidacticasDesc2', {defaultValue: 'Para secuenciar sesiones, primero debes crear las UDs más arriba.'})}</p>
                     </div>
                   ) : (

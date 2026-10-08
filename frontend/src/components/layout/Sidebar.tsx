@@ -193,7 +193,7 @@ export default function Sidebar() {
                 >
                   <CalendarDays className="w-3.5 h-3.5 shrink-0" />
                   <span suppressHydrationWarning className="truncate">
-                    {t('sidebar.fecha', { defaultValue: 'Fecha' })} {dataSource === 'demo' ? 'DEMO' : 'REAL'}: {isMounted ? dateStr : ''}
+                    {t('sidebar.fecha', { defaultValue: 'Fecha' })} {dataSource === 'demo' ? 'demo' : 'real'}: {isMounted ? dateStr : ''}
                   </span>
                 </Link>
                 <div className="flex items-center justify-between w-full ml-0.5">

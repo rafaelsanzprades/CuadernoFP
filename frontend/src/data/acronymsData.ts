@@ -39,43 +39,43 @@ export const CATEGORY_ORDER: AcronymCategory[] = [
 export const acronymsData: AcronymItem[] = [
   {
     "id": 0,
-    "name": "AACC. Altas Capacidades",
+    "name": "AACC. altas capacidades",
     "description": "Estudiantes con habilidades sobresalientes que requieren atención personalizada",
     "category": "inclusion"
   },
   {
     "id": 1,
-    "name": "ABP. Aprendizaje Basado en Proyectos",
+    "name": "ABP. Aprendizaje basado en proyectos",
     "description": "Metodología pedagógica activa a través de proyectos significativos",
     "category": "metodologia"
   },
   {
     "id": 2,
-    "name": "ABR. Aprendizaje Basado en Retos",
+    "name": "ABR. Aprendizaje basado en retos",
     "description": "Enfoque didáctico centrado en resolver retos reales",
     "category": "metodologia"
   },
   {
     "id": 3,
-    "name": "AC-ACT. Aspectos Clave Actitudinales",
+    "name": "AC-ACT. Aspectos clave Actitudinales",
     "description": "Clasificación de aspectos clave de actitud y soft-skills (ej. Trabajo en equipo)",
     "category": "codificacion"
   },
   {
     "id": 4,
-    "name": "AC-NOR. Aspectos Clave de Normativa",
+    "name": "AC-NOR. Aspectos clave de Normativa",
     "description": "Clasificación de aspectos clave de normativa y seguridad (ej. PRL, EPI)",
     "category": "codificacion"
   },
   {
     "id": 5,
-    "name": "AC-PRO. Aspectos Clave Procedimentales",
+    "name": "AC-PRO. Aspectos clave Procedimentales",
     "description": "Clasificación de aspectos clave analíticos y procedimentales",
     "category": "codificacion"
   },
   {
     "id": 6,
-    "name": "AC-TEC. Aspectos Clave Técnicos",
+    "name": "AC-TEC. Aspectos clave Técnicos",
     "description": "Clasificación de aspectos clave técnicos y de ejecución",
     "category": "codificacion"
   },
@@ -177,91 +177,91 @@ export const acronymsData: AcronymItem[] = [
   },
   {
     "id": 21,
-    "name": "BOA. Boletín Oficial de Aragón",
+    "name": "BOA. Boletín oficial de Aragón",
     "description": "Medio oficial de publicación normativa del Gobierno de Aragón",
     "category": "boletines"
   },
   {
     "id": 22,
-    "name": "BOC. Boletín Oficial de Canarias",
+    "name": "BOC. Boletín oficial de Canarias",
     "description": "Medio oficial de publicación normativa del Gobierno de Canarias",
     "category": "boletines"
   },
   {
     "id": 23,
-    "name": "BOC. Boletín Oficial de Cantabria",
+    "name": "BOC. Boletín oficial de Cantabria",
     "description": "Medio oficial de publicación normativa del Gobierno de Cantabria",
     "category": "boletines"
   },
   {
     "id": 24,
-    "name": "BOCCE. Boletín Oficial de la Ciudad de Ceuta",
+    "name": "BOCCE. Boletín oficial de la Ciudad de Ceuta",
     "description": "Medio oficial de publicación normativa del Gobierno de Ceuta",
     "category": "boletines"
   },
   {
     "id": 25,
-    "name": "BOCM. Boletín Oficial de la Comunidad de Madrid",
+    "name": "BOCM. Boletín oficial de la Comunidad de Madrid",
     "description": "Medio oficial de publicación normativa del Gobierno de la Comunidad de Madrid",
     "category": "boletines"
   },
   {
     "id": 26,
-    "name": "BOCYL. Boletín Oficial de Castilla y León",
+    "name": "BOCYL. Boletín oficial de Castilla y León",
     "description": "Medio oficial de publicación normativa del Gobierno de Castilla y León",
     "category": "boletines"
   },
   {
     "id": 27,
-    "name": "BOE. Boletín Oficial del Estado",
+    "name": "BOE. Boletín oficial del Estado",
     "description": "Medio oficial de publicación normativa del Gobierno de España",
     "category": "boletines"
   },
   {
     "id": 28,
-    "name": "BOIB. Boletín Oficial de las Islas Baleares",
+    "name": "BOIB. Boletín oficial de las Islas Baleares",
     "description": "Medio oficial de publicación normativa del Gobierno de las Islas Baleares",
     "category": "boletines"
   },
   {
     "id": 29,
-    "name": "BOJA. Boletín Oficial de la Junta de Andalucía",
+    "name": "BOJA. Boletín oficial de la Junta de Andalucía",
     "description": "Medio oficial de publicación normativa del Gobierno de Andalucía",
     "category": "boletines"
   },
   {
     "id": 30,
-    "name": "BOME. Boletín Oficial de la Ciudad de Melilla",
+    "name": "BOME. Boletín oficial de la Ciudad de Melilla",
     "description": "Medio oficial de publicación normativa del Gobierno de Melilla",
     "category": "boletines"
   },
   {
     "id": 31,
-    "name": "BON. Boletín Oficial de Navarra",
+    "name": "BON. Boletín oficial de Navarra",
     "description": "Medio oficial de publicación normativa del Gobierno de Navarra",
     "category": "boletines"
   },
   {
     "id": 32,
-    "name": "BOPA. Boletín Oficial del Principado de Asturias",
+    "name": "BOPA. Boletín oficial del Principado de Asturias",
     "description": "Medio oficial de publicación normativa del Gobierno del Principado de Asturias",
     "category": "boletines"
   },
   {
     "id": 33,
-    "name": "BOPV. Boletín Oficial del País Vasco",
+    "name": "BOPV. Boletín oficial del País Vasco",
     "description": "Medio oficial de publicación normativa del Gobierno del País Vasco",
     "category": "boletines"
   },
   {
     "id": 34,
-    "name": "BOR. Boletín Oficial de La Rioja",
+    "name": "BOR. Boletín oficial de La Rioja",
     "description": "Medio oficial de publicación normativa del Gobierno de La Rioja",
     "category": "boletines"
   },
   {
     "id": 35,
-    "name": "BORM. Boletín Oficial de la Región de Murcia",
+    "name": "BORM. Boletín oficial de la Región de Murcia",
     "description": "Medio oficial de publicación normativa del Gobierno de la Región de Murcia",
     "category": "boletines"
   },
@@ -297,7 +297,7 @@ export const acronymsData: AcronymItem[] = [
   },
   {
     "id": 41,
-    "name": "CDD. Competencia Digital Docente",
+    "name": "CDD. Competencia digital Docente",
     "description": "Certificación de competencia digital del profesorado (6 áreas, 6 niveles)",
     "category": "inclusion"
   },
@@ -309,7 +309,7 @@ export const acronymsData: AcronymItem[] = [
   },
   {
     "id": 43,
-    "name": "CDI. Competencia Digital Individual",
+    "name": "CDI. Competencia digital Individual",
     "description": "Capacidad para usar eficazmente las TIC en diferentes contextos",
     "category": "inclusion"
   },
@@ -465,7 +465,7 @@ export const acronymsData: AcronymItem[] = [
   },
   {
     "id": 67,
-    "name": "DOCM. Boletín Oficial de Castilla-La Mancha",
+    "name": "DOCM. Boletín oficial de Castilla-La Mancha",
     "description": "Medio oficial de publicación normativa del Gobierno de Castilla-La Mancha",
     "category": "boletines"
   },
@@ -477,25 +477,25 @@ export const acronymsData: AcronymItem[] = [
   },
   {
     "id": 69,
-    "name": "DOE. Boletín Oficial de Extremadura",
+    "name": "DOE. Boletín oficial de Extremadura",
     "description": "Medio oficial de publicación normativa del Gobierno de Extremadura",
     "category": "boletines"
   },
   {
     "id": 70,
-    "name": "DOG. Boletín Oficial de Galicia",
+    "name": "DOG. Boletín oficial de Galicia",
     "description": "Medio oficial de publicación normativa del Gobierno de Galicia",
     "category": "boletines"
   },
   {
     "id": 71,
-    "name": "DOGC. Boletín Oficial de Cataluña",
+    "name": "DOGC. Boletín oficial de Cataluña",
     "description": "Medio oficial de publicación normativa del Gobierno de Cataluña",
     "category": "boletines"
   },
   {
     "id": 72,
-    "name": "DOGV. Boletín Oficial de la Comunidad Valenciana",
+    "name": "DOGV. Boletín oficial de la Comunidad Valenciana",
     "description": "Medio oficial de publicación normativa del Gobierno de la Comunidad Valenciana",
     "category": "boletines"
   },
@@ -639,13 +639,13 @@ export const acronymsData: AcronymItem[] = [
   },
   {
     "id": 95,
-    "name": "FP Dual General",
+    "name": "FP Dual general",
     "description": "Modalidad de formación en régimen general (25% al 35% de duración en la empresa)",
     "category": "inclusion"
   },
   {
     "id": 96,
-    "name": "FP Dual Intensiva",
+    "name": "FP Dual intensiva",
     "description": "Modalidad de formación en régimen intensivo con contrato de formación (al menos un 35% en la empresa)",
     "category": "inclusion"
   },
@@ -1197,7 +1197,7 @@ export const acronymsData: AcronymItem[] = [
   },
   {
     "id": 194,
-    "name": "FEOE. Formación en Empresa u Organismo Equiparado",
+    "name": "FEOE. Formación en empresa u organismo equiparado",
     "description": "Periodo formativo del alumnado en una empresa o entidad equiparada (FP Dual)",
     "category": "estructura_fp"
   },
@@ -1233,19 +1233,19 @@ export const acronymsData: AcronymItem[] = [
   },
   {
     "id": 200,
-    "name": "DigCompEdu. Marco Europeo de Competencia Digital para Educadores",
+    "name": "DigCompEdu. Marco Europeo de Competencia digital para Educadores",
     "description": "Marco de la Comisión Europea con 6 áreas de competencia digital docente (compromiso profesional, contenidos digitales, enseñanza y aprendizaje, evaluación y retroalimentación, empoderamiento del alumnado, desarrollo de la competencia digital del alumnado)",
     "category": "normativa"
   },
   {
     "id": 201,
-    "name": "ETHAZI. Modelo de Aprendizaje Colaborativo basado en Retos del País Vasco",
+    "name": "ETHAZI. Modelo de Aprendizaje colaborativo basado en retos del País Vasco",
     "description": "Metodología de Tknika (red de innovación de la FP vasca) estructurada en 11 pasos: plantear el reto, conectar, establecer parámetros, obtener información, generar alternativas, presentar propuestas, seleccionar, planificar, ejecutar, presentar resultados y reflexionar",
     "category": "metodologia"
   },
   {
     "id": 202,
-    "name": "ACbR. Aprendizaje Colaborativo basado en Retos",
+    "name": "ACbR. Aprendizaje colaborativo basado en retos",
     "description": "Nombre genérico del enfoque metodológico que aplica el modelo Ethazi",
     "category": "metodologia"
   },
@@ -1287,7 +1287,7 @@ export const acronymsData: AcronymItem[] = [
   },
   {
     "id": 209,
-    "name": "CONTR. Contrato de Aprendizaje (Learning Contract)",
+    "name": "CONTR. Contrato de aprendizaje (Learning contract)",
     "description": "Acuerdo individual entre docente y estudiante que fija objetivos, estrategias/recursos, evidencias y criterios de evaluación",
     "category": "metodologia"
   },
@@ -1299,13 +1299,13 @@ export const acronymsData: AcronymItem[] = [
   },
   {
     "id": 211,
-    "name": "PARES. Aprendizaje entre Pares (Peer Teaching)",
+    "name": "PARES. Aprendizaje entre pares (Peer teaching)",
     "description": "Metodología en la que el alumnado enseña y aprende de sus propios compañeros",
     "category": "metodologia"
   },
   {
     "id": 212,
-    "name": "ESTAC. Estaciones de Aprendizaje",
+    "name": "ESTAC. Estaciones de aprendizaje",
     "description": "Organización del aula en rincones o estaciones con actividades distintas y simultáneas por las que rota el alumnado",
     "category": "metodologia"
   }

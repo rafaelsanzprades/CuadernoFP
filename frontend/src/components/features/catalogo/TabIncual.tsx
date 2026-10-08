@@ -76,8 +76,8 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
     );
   }
 
-  const CRN_TITULO = t('campos.catalogo.tituloCrn', {defaultValue: 'Centros de Referencia Nacional (CRN)'});
-  const ECP_TITULO = t('campos.catalogo.tituloEcp', {defaultValue: 'Estándares de Competencia Profesional (ECP)'});
+  const CRN_TITULO = t('campos.catalogo.tituloCrn', {defaultValue: 'Centros de referencia nacional (CRN)'});
+  const ECP_TITULO = t('campos.catalogo.tituloEcp', {defaultValue: 'Estándares de competencia profesional (ECP)'});
 
   return (
     <div className="space-y-6 animate-in fade-in duration-300">
@@ -93,7 +93,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
         {/* Selector Familia */}
         <Card className="p-6 bg-gradient-to-br from-card to-accent/5 lg:col-span-2 flex flex-col justify-center gap-2">
           <label htmlFor="select-familia-incual" className="text-caption font-semibold text-muted tracking-wider">
-            {t('campos.catalogo.labelFamiliaProfesional', {defaultValue: 'Familia Profesional'})}
+            {t('campos.catalogo.labelFamiliaProfesional', {defaultValue: 'Familia profesional'})}
           </label>
           <div className="relative">
             <Award className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-purple-500 pointer-events-none" />
@@ -105,7 +105,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
               }}
               className="w-full bg-background/50 border border-[var(--glass-border)] rounded-xl pl-10 pr-4 py-3 text-body text-foreground font-semibold focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all cursor-pointer appearance-none"
             >
-              <option value="">{t('checks.catalogo.seleccionaFamilia', {defaultValue: '-- Selecciona Familia --'})}</option>
+              <option value="">{t('checks.catalogo.seleccionaFamilia', {defaultValue: '-- Selecciona familia --'})}</option>
               {families.map((f) => (
                 <option key={f.id} value={f.name}>{f.name}</option>
               ))}
@@ -155,7 +155,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
         </div>
       )}
 
-      {/* Centros de Referencia Nacional (CRN) -- separación extra + línea
+      {/* Centros de referencia nacional (CRN) -- separación extra + línea
           divisoria respecto a la fila del selector/grados de arriba, que si
           no quedaban demasiado pegadas */}
       {incualData && incualData.crn_centers && incualData.crn_centers.length > 0 && (
@@ -174,7 +174,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
         </Card>
       </div>
 
-      {/* Bloque 2 -- Estándares de Competencia Profesional (ECP) */}
+      {/* Bloque 2 -- Estándares de competencia profesional (ECP) */}
       {incualData && (
       <div className="space-y-3">
         <SectionHeading id="incual-ecp" icon={BookOpen} scrollMt="260px">{ECP_TITULO}</SectionHeading>

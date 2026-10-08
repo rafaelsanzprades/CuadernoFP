@@ -169,7 +169,7 @@ export default function LegalPage() {
                     <p><strong>Comunidad:</strong> <a href="https://t.me/cuadernofp" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">https://t.me/cuadernofp</a></p>
                     <p><strong>Código fuente:</strong> <a href="https://github.com/rafaelsanzprades/CuadernoFP" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">https://github.com/rafaelsanzprades/CuadernoFP</a></p>
                     <p><strong>Sitio web:</strong> <a href="https://cuadernofp.web.app/" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">https://cuadernofp.web.app/</a></p>
-                    <p><strong>Actividad:</strong> Herramienta de productividad docente para Formación Profesional.</p>
+                    <p><strong>Actividad:</strong> Herramienta de productividad docente para formación profesional.</p>
                   </div>
                 </section>
 
@@ -180,7 +180,7 @@ export default function LegalPage() {
                   </SectionHeading>
                   <div className="text-body text-foreground/80 leading-relaxed space-y-2">
                     <p>
-                      El acceso y uso de este sitio web atribuye la condición de <strong>Usuario</strong> e implica la aceptación plena de todas las condiciones incluidas en este Aviso Legal.
+                      El acceso y uso de este sitio web atribuye la condición de <strong>Usuario</strong> e implica la aceptación plena de todas las condiciones incluidas en este aviso legal.
                     </p>
                     <p>
                       El Usuario se compromete a hacer un uso adecuado de los contenidos y herramientas ofrecidos, conforme a la ley, la buena fe y el orden público. Queda prohibido:
@@ -254,8 +254,8 @@ export default function LegalPage() {
                     </p>
                     <ul className="list-disc list-inside text-muted space-y-1 ml-2 text-body">
                       <li><strong>Atribución (BY):</strong> Reconocer la autoría original (Rafael Sanz Prades) y enlazar a la licencia.</li>
-                      <li><strong>No Comercial (NC):</strong> No usar con fines comerciales o lucrativos.</li>
-                      <li><strong>Compartir Igual (SA):</strong> Los derivados deben distribuirse bajo la misma licencia.</li>
+                      <li><strong>No comercial (NC):</strong> No usar con fines comerciales o lucrativos.</li>
+                      <li><strong>Compartir igual (SA):</strong> Los derivados deben distribuirse bajo la misma licencia.</li>
                     </ul>
                   </div>
                 </section>
@@ -268,8 +268,8 @@ export default function LegalPage() {
                   <table className="w-full text-body text-left border-collapse">
                     <thead className="text-foreground/90 border-b border-[var(--glass-border)]">
                       <tr>
-                        <th className="py-3 font-semibold w-1/2 pr-4">{t('tablas.legal.loQueSiPuedes', {defaultValue: 'Lo que SÍ PUEDES hacer'})}</th>
-                        <th className="py-3 font-semibold w-1/2 pl-4">{t('tablas.legal.loQueNoPuedes', {defaultValue: 'Lo que NO PUEDES hacer'})}</th>
+                        <th className="py-3 font-semibold w-1/2 pr-4">{t('tablas.legal.loQueSiPuedes', {defaultValue: 'Lo que sí puedes hacer'})}</th>
+                        <th className="py-3 font-semibold w-1/2 pl-4">{t('tablas.legal.loQueNoPuedes', {defaultValue: 'Lo que no puedes hacer'})}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-[var(--glass-border)] text-foreground/80">
@@ -324,8 +324,8 @@ export default function LegalPage() {
                     Dado que la aplicación es estática y el procesamiento se realiza localmente en el navegador:
                   </p>
                   <ul className="list-disc list-inside ml-2 mt-2 space-y-2 text-body text-muted">
-                    <li>El <strong>Docente</strong> o su <strong>Centro Educativo</strong> actúa como el único <strong>Responsable del Tratamiento</strong> de los datos personales del alumnado.</li>
-                    <li>El desarrollador de esta herramienta (Rafael Sanz Prades) <strong>no actúa como Encargado del Tratamiento</strong>, ya que carece de acceso técnico a los datos introducidos.</li>
+                    <li>El <strong>Docente</strong> o su <strong>Centro educativo</strong> actúa como el único <strong>Responsable del tratamiento</strong> de los datos personales del alumnado.</li>
+                    <li>El desarrollador de esta herramienta (Rafael Sanz Prades) <strong>no actúa como encargado del tratamiento</strong>, ya que carece de acceso técnico a los datos introducidos.</li>
                   </ul>
                   <div className="mt-3 p-3 rounded-lg bg-warning/5 border border-warning/20 text-body text-foreground/80">
                     <strong>Importante:</strong> Si usas la sincronización con Google Drive, el tratamiento de datos en la nube se rige por las condiciones de Google Workspace for Education y el acuerdo de tu centro con Google.
@@ -343,7 +343,7 @@ export default function LegalPage() {
                   <ul className="list-disc list-inside ml-2 mt-2 space-y-2 text-body text-muted">
                     <li><strong>Disco local:</strong> En el navegador del usuario (IndexedDB y localStorage) para preferencias y datos de sesión.</li>
                     <li><strong>Archivos exportados:</strong> Formatos <code>.fpp</code> (Programación), <code>.fpc</code> (Curso) y <code>.fpg</code> (Grupo) que el docente guarda en su disco duro, USB o nube privada.</li>
-                    <li><strong>Google Drive (opcional):</strong> Bajo la cuenta institucional del profesorado, regulada por la Consejería de Educación o Centro Educativo.</li>
+                    <li><strong>Google Drive (opcional):</strong> Bajo la cuenta institucional del profesorado, regulada por la Consejería de Educación o Centro educativo.</li>
                   </ul>
                 </section>
 
@@ -353,7 +353,7 @@ export default function LegalPage() {
                     {t('campos.legal.derechosArcoTitulo', {defaultValue: 'Derechos del alumnado (ARCO)'})}
                   </SectionHeading>
                   <p className="text-body text-foreground/80 leading-relaxed">
-                    El alumnado (o sus tutores legales, en caso de menores) pueden ejercer sus derechos de <strong>Acceso, Rectificación, Cancelación y Oposición (ARCO)</strong> ante el Responsable del Tratamiento, que es el docente o centro educativo.
+                    El alumnado (o sus tutores legales, en caso de menores) pueden ejercer sus derechos de <strong>Acceso, rectificación, cancelación y oposición (ARCO)</strong> ante el Responsable del tratamiento, que es el docente o centro educativo.
                   </p>
                   <p className="text-body text-foreground/80 leading-relaxed">
                     Dado que esta aplicación no almacena datos en servidores externos, el ejercicio de estos derechos se gestiona directamente entre el alumnado y el profesorado, sin intermediación del desarrollador.

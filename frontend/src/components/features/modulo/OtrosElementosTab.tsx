@@ -14,11 +14,11 @@ export function OtrosElementosTab() {
   };
 
   const TRANSVERSALES = [
-    { id: "TRANS-DIG", label: t('checks.modulo.transDigital', {defaultValue: 'Competencia Digital / Tecnologías'}) },
-    { id: "TRANS-SOST", label: t('checks.modulo.transSostenibilidad', {defaultValue: 'Sostenibilidad y Transición Ecológica'}) },
-    { id: "TRANS-IGUAL", label: t('checks.modulo.transIgualdad', {defaultValue: 'Igualdad de Género'}) },
-    { id: "TRANS-PRL", label: t('checks.modulo.transPrl', {defaultValue: 'Prevención de Riesgos Laborales'}) },
-    { id: "TRANS-EMPRE", label: t('checks.modulo.transEmprendedora', {defaultValue: 'Cultura Emprendedora'}) }
+    { id: "TRANS-DIG", label: t('checks.modulo.transDigital', {defaultValue: 'Competencia digital / tecnologías'}) },
+    { id: "TRANS-SOST", label: t('checks.modulo.transSostenibilidad', {defaultValue: 'Sostenibilidad y transición ecológica'}) },
+    { id: "TRANS-IGUAL", label: t('checks.modulo.transIgualdad', {defaultValue: 'Igualdad de género'}) },
+    { id: "TRANS-PRL", label: t('checks.modulo.transPrl', {defaultValue: 'Prevención de riesgos laborales'}) },
+    { id: "TRANS-EMPRE", label: t('checks.modulo.transEmprendedora', {defaultValue: 'Cultura emprendedora'}) }
   ];
 
   const elementos_transversales = moduleData?.elementos_transversales || [];
@@ -37,13 +37,13 @@ export function OtrosElementosTab() {
   };
 
   const COMPETENCIAS_CLAVE = [
-    { id: "CL", label: t('checks.modulo.compClaveCL', {defaultValue: 'Comunicación Lingüística'}) },
-    { id: "CSTEM", label: t('checks.modulo.compClaveCSTEM', {defaultValue: 'Competencia Matemática y en Ciencia, Tecnología e Ingeniería'}) },
-    { id: "CD", label: t('checks.modulo.compClaveCD', {defaultValue: 'Competencia Digital'}) },
-    { id: "CPSAA", label: t('checks.modulo.compClaveCPSAA', {defaultValue: 'Competencia Personal, Social y de Aprender a Aprender'}) },
-    { id: "CCEC", label: t('checks.modulo.compClaveCCEC', {defaultValue: 'Competencia en Conciencia y Expresión Culturales'}) },
-    { id: "CE", label: t('checks.modulo.compClaveCE', {defaultValue: 'Competencia Emprendedora'}) },
-    { id: "CIEC", label: t('checks.modulo.compClaveCIEC', {defaultValue: 'Competencia Ciudadana'}) }
+    { id: "CL", label: t('checks.modulo.compClaveCL', {defaultValue: 'Comunicación lingüística'}) },
+    { id: "CSTEM", label: t('checks.modulo.compClaveCSTEM', {defaultValue: 'Competencia matemática y en ciencia, tecnología e ingeniería'}) },
+    { id: "CD", label: t('checks.modulo.compClaveCD', {defaultValue: 'Competencia digital'}) },
+    { id: "CPSAA", label: t('checks.modulo.compClaveCPSAA', {defaultValue: 'Competencia personal, social y de aprender a aprender'}) },
+    { id: "CCEC", label: t('checks.modulo.compClaveCCEC', {defaultValue: 'Competencia en conciencia y expresión culturales'}) },
+    { id: "CE", label: t('checks.modulo.compClaveCE', {defaultValue: 'Competencia emprendedora'}) },
+    { id: "CIEC", label: t('checks.modulo.compClaveCIEC', {defaultValue: 'Competencia ciudadana'}) }
   ];
 
   const digcompKey = (id: string) => `digcomp_${id.replace('.', '_')}`;
@@ -124,14 +124,14 @@ export function OtrosElementosTab() {
       {/* Competencias y Transversales */}
       <div className="space-y-3">
       <SectionHeading id="metodologia-transversales" icon={Layers} scrollMt="260px">
-        {t('campos.modulo.transversalesCompetenciasTitulo', {defaultValue: 'Transversales y Competencias'})}
+        {t('campos.modulo.transversalesCompetenciasTitulo', {defaultValue: 'Transversales y competencias'})}
       </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-cyan-500">
         <div className="space-y-6">
 
           <div>
             <label className="text-body font-semibold text-foreground mb-2 block flex items-center gap-2">
-              <Cpu className="w-4 h-4 text-muted" /> {t('campos.modulo.competenciasClaveTitulo', {defaultValue: 'Competencias Clave'})}
+              <Cpu className="w-4 h-4 text-muted" /> {t('campos.modulo.competenciasClaveTitulo', {defaultValue: 'Competencias clave'})}
             </label>
             <p className="text-caption text-muted mb-3">{t('campos.modulo.competenciasClaveDesc', {defaultValue: 'Selecciona las competencias clave (LOMLOE/LO 3/2022) que se desarrollarán en este módulo.'})}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -222,7 +222,7 @@ export function OtrosElementosTab() {
 
           <div>
             <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.digcompeduDocenteTitulo', {defaultValue: 'DigCompEdu — competencia digital docente'})}</label>
-            <p className="text-caption text-muted mb-3">{t('campos.modulo.digcompeduDocenteDesc', {defaultValue: 'Marco Europeo de Competencia Digital para Educadores. Selecciona las áreas que aplicarás al impartir este módulo.'})}</p>
+            <p className="text-caption text-muted mb-3">{t('campos.modulo.digcompeduDocenteDesc', {defaultValue: 'Marco Europeo de Competencia digital para Educadores. Selecciona las áreas que aplicarás al impartir este módulo.'})}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">
               {DIGCOMPEDU_AREAS.map((area) => {
                 const isSelected = digcompedu_areas.includes(area.id);
@@ -253,7 +253,7 @@ export function OtrosElementosTab() {
       {/* Desarrollo Curricular: ECP, CPE, OG */}
       <div className="space-y-3">
       <SectionHeading id="metodologia-estandares" icon={Layers} scrollMt="260px">
-        {t('campos.modulo.estandaresObjetivosTitulo', {defaultValue: 'Estándares y Objetivos (Currículo)'})}
+        {t('campos.modulo.estandaresObjetivosTitulo', {defaultValue: 'Estándares y objetivos (currículo)'})}
       </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-indigo-500">
         <div className="space-y-4">

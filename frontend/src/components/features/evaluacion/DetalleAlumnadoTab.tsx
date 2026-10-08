@@ -479,7 +479,7 @@ export function DetalleAlumnadoTab() {
                         </div>
                       </div>
 
-                      {/* BLOQUE 3: Plan de Trabajo Individual (ítem 23) — CE pendientes; convive
+                      {/* BLOQUE 3: Plan de trabajo individual (ítem 23) — CE pendientes; convive
                           con el texto libre de recuperación ya existente, no lo sustituye. */}
                       {(() => {
                         const cePendientes = df_ce.filter((ce: any) => {
@@ -492,7 +492,7 @@ export function DetalleAlumnadoTab() {
                           <div className="pt-6 border-t border-[var(--glass-border)] space-y-4">
                             <div className="flex items-center justify-between">
                               <h3 className="font-bold text-foreground flex items-center gap-2">
-                                <ClipboardList className="w-[1.2em] h-[1.2em]" /> {t('campos.evaluacion.planTrabajoIndividualTitulo', {defaultValue: 'Plan de Trabajo Individual'})}
+                                <ClipboardList className="w-[1.2em] h-[1.2em]" /> {t('campos.evaluacion.planTrabajoIndividualTitulo', {defaultValue: 'Plan de trabajo individual'})}
                               </h3>
                               <Button
                                 onClick={(e) => { e.stopPropagation(); handleGenerarInformeRefuerzo(al_id); }}

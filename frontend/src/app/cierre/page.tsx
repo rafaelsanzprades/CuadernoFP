@@ -150,7 +150,7 @@ export default function ProgresoPage() {
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
     mejora: [
       { id: "calificaciones-eqavet", label: t('checks.modulo.indicadoresCalidad', {defaultValue: 'Indicadores de calidad'}) },
-      { id: "calificaciones-propuestas", label: t('campos.modulo.tituloPropuestasMejora', {defaultValue: 'Propuestas de Mejora (PDCA)'}) },
+      { id: "calificaciones-propuestas", label: t('campos.modulo.tituloPropuestasMejora', {defaultValue: 'Propuestas de mejora (PDCA)'}) },
     ],
   };
 

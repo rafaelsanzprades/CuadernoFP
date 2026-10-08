@@ -21,7 +21,7 @@ export function AcumuladoTrimestralTab() {
       <div className="overflow-x-auto">
         <table className="w-full text-left text-body">
           <thead>
-            <tr className="border-b border-[var(--glass-border)] text-muted text-caption uppercase">
+            <tr className="border-b border-[var(--glass-border)] text-muted text-caption ">
               <th className="p-2">{t('campos.diario.acumAlumno', { defaultValue: 'Alumno/a' })}</th>
               <th className="p-2 text-center">1T</th>
               <th className="p-2 text-center">2T</th>

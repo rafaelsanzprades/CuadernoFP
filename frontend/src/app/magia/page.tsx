@@ -278,7 +278,7 @@ export default function MagiaPage() {
       return row;
     });
     const wsRa = XLSX.utils.aoa_to_sheet([
-      ["Leyenda de Resultados de Aprendizaje"],
+      ["Leyenda de Resultados de aprendizaje"],
       ...df_ra.map((ra: any, idx: number) => [`RA${idx + 1}`, ra.desc_ra || ""]),
       [],
     ]);
@@ -330,7 +330,7 @@ export default function MagiaPage() {
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    programacion: t('tabs.magia.programacion.desc', {defaultValue: 'Documentos de apoyo: matriz de currículo y documentos individuales de UD y Tareas.'}),
+    programacion: t('tabs.magia.programacion.desc', {defaultValue: 'Documentos de apoyo: matriz de currículo y documentos individuales de UD y tareas.'}),
     curso: t('tabs.magia.curso.desc', {defaultValue: 'Calendario, seguimiento, plano de aula, boletines y actas de evaluación del curso.'}),
     // Comparativa PDx (antes pestaña propia) se fusionó aquí al final, como
     // un bloque más -- petición de Rafael, 2026-09-30.
@@ -480,7 +480,7 @@ export default function MagiaPage() {
                             pestaña propia "Documentos PDx" / "Comunidades" -- traída aquí
                             debajo, 2026-09-25, petición de Rafael) ── */}
                         <SectionHeading id="magia-programacion-comunidades" icon={MapPin} scrollMt="260px">
-                          {t('campos.magia.documentosPorComunidadTitulo', {defaultValue: 'Programaciones didácticas por Comunidades Autónomas'})}
+                          {t('campos.magia.documentosPorComunidadTitulo', {defaultValue: 'Programaciones didácticas por comunidades autónomas'})}
                         </SectionHeading>
                         <Card className="p-6 border-t-4 border-t-purple-500">
                           <p className="text-body text-muted mb-6">{t('tabs.magia.documentosPdx.desc', {defaultValue: 'Genera y descarga las programaciones didácticas PD-, PD= y PD+ en formato editable, por comunidad autónoma.'})}</p>
@@ -510,7 +510,7 @@ export default function MagiaPage() {
 
                                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                                           <div>
-                                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.pdSuficienteAragonTitulo', {defaultValue: 'PD=. Programación didáctica Simplificada'})}</h3>
+                                            <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.pdSuficienteAragonTitulo', {defaultValue: 'PD=. Programación didáctica simplificada'})}</h3>
                                             <p className="text-body text-muted mb-6">{t('campos.magia.pdSuficienteAragonDesc', {defaultValue: 'Versión simplificada con los puntos de la Ley muy específica y concreta (no detalla secuenciación de aula ni extensa teoría).'})}</p>
                                           </div>
                                           <div className="mt-auto">
@@ -596,7 +596,7 @@ export default function MagiaPage() {
                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                           <div>
                             <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><Grid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.matrizRaUdTitulo', {defaultValue: 'Matriz RA ↔ UD'})}</h3>
-                            <p className="text-body text-muted mb-6">{t('campos.magia.matrizRaUdDesc', {defaultValue: 'Tabla cruzada de RA y su relación con las Unidades Didácticas.'})}</p>
+                            <p className="text-body text-muted mb-6">{t('campos.magia.matrizRaUdDesc', {defaultValue: 'Tabla cruzada de RA y su relación con las unidades didácticas.'})}</p>
                           </div>
                           <DualDownloadButtons type="matrices" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
                         </div>
@@ -611,7 +611,7 @@ export default function MagiaPage() {
                                 ))}
                               </select>
                             ) : (
-                              <p className="text-muted italic mb-4">{t('campos.magia.sinUdDefinidas', {defaultValue: 'No hay Unidades Didácticas definidas.'})}</p>
+                              <p className="text-muted italic mb-4">{t('campos.magia.sinUdDefinidas', {defaultValue: 'No hay unidades didácticas definidas.'})}</p>
                             )}
                           </div>
                           <Button
@@ -635,7 +635,7 @@ export default function MagiaPage() {
                                 ))}
                               </select>
                             ) : (
-                              <p className="text-muted italic mb-4">{t('campos.magia.sinTareasDefinidas', {defaultValue: 'No hay Tareas competenciales definidas.'})}</p>
+                              <p className="text-muted italic mb-4">{t('campos.magia.sinTareasDefinidas', {defaultValue: 'No hay tareas competenciales definidas.'})}</p>
                             )}
                           </div>
                           <Button
@@ -758,7 +758,7 @@ export default function MagiaPage() {
                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
                           <div>
                             <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.clasesPorUdTitulo', {defaultValue: 'Clases por UD'})}</h3>
-                            <p className="text-body text-muted mb-6">{t('campos.magia.clasesPorUdDesc', {defaultValue: 'Secuenciación de sesiones de cada Unidad didáctica.'})}</p>
+                            <p className="text-body text-muted mb-6">{t('campos.magia.clasesPorUdDesc', {defaultValue: 'Secuenciación de sesiones de cada unidad didáctica.'})}</p>
                           </div>
                           <DualDownloadButtons type="clases_ud" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
                         </div>

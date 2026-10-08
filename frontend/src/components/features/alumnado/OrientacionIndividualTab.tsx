@@ -32,8 +32,8 @@ function Ficha({ studentId }: { studentId: string }) {
                     ])}
                     {renderSelect("via_acceso", t('campos.orientacion.viaAccesoLabel', {defaultValue: 'Vía de acceso al ciclo'}), [
                       { value: "ESO", label: t('checks.orientacion.viaAcceso.eso', {defaultValue: 'ESO (título graduado)'}) },
-                      { value: "FPGB", label: t('checks.orientacion.viaAcceso.fpgb', {defaultValue: 'FP Grado Básico'}) },
-                      { value: "FPGM", label: t('checks.orientacion.viaAcceso.fpgm', {defaultValue: 'FP Grado Medio (a GS)'}) },
+                      { value: "FPGB", label: t('checks.orientacion.viaAcceso.fpgb', {defaultValue: 'FP grado básico'}) },
+                      { value: "FPGM", label: t('checks.orientacion.viaAcceso.fpgm', {defaultValue: 'FP grado medio (a GS)'}) },
                       { value: "Bachillerato", label: t('checks.orientacion.viaAcceso.bachillerato', {defaultValue: 'Bachillerato'}) },
                       { value: "Prueba acceso", label: t('checks.orientacion.viaAcceso.pruebaAcceso', {defaultValue: 'Prueba de acceso'}) },
                       { value: "Convalidación parcial", label: t('checks.orientacion.viaAcceso.convalidacionParcial', {defaultValue: 'Convalidación parcial'}) },
@@ -85,7 +85,7 @@ function Ficha({ studentId }: { studentId: string }) {
                         { value: "Desarrollo software", label: t('checks.orientacion.areaInteres.desarrolloSoftware', {defaultValue: 'Desarrollo software / programación'}) },
                         { value: "Sistemas / infraestructura", label: t('checks.orientacion.areaInteres.sistemasInfraestructura', {defaultValue: 'Sistemas / infraestructura'}) },
                         { value: "Ciberseguridad", label: t('checks.orientacion.areaInteres.ciberseguridad', {defaultValue: 'Ciberseguridad'}) },
-                        { value: "Datos / IA", label: t('checks.orientacion.areaInteres.datosIA', {defaultValue: 'Datos / IA / Machine Learning'}) },
+                        { value: "Datos / IA", label: t('checks.orientacion.areaInteres.datosIA', {defaultValue: 'Datos / IA / machine learning'}) },
                         { value: "Diseño / UX", label: t('checks.orientacion.areaInteres.disenoUX', {defaultValue: 'Diseño / UX / multimedia'}) },
                         { value: "Electrónica / hardware", label: t('checks.orientacion.areaInteres.electronicaHardware', {defaultValue: 'Electrónica / hardware'}) },
                         { value: "Atención al cliente", label: t('checks.orientacion.areaInteres.atencionCliente', {defaultValue: 'Atención al cliente / soporte'}) },

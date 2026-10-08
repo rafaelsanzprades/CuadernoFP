@@ -20,7 +20,7 @@ export function GoogleDriveSyncPanel() {
 
   const handleConnect = async () => {
     if (dataSource === 'demo') {
-      toast.error(t('toasts.googleDrive.sinDemo', {defaultValue: "No puedes sincronizar con Drive en modo DEMO."}));
+      toast.error(t('toasts.googleDrive.sinDemo', {defaultValue: "No puedes sincronizar con Drive en modo demo."}));
       return;
     }
     if (!googleClientId) {
@@ -72,7 +72,7 @@ export function GoogleDriveSyncPanel() {
 
   const toggleAutoSync = () => {
     if (dataSource === 'demo') {
-      toast.error(t('toasts.googleDrive.autoguardadoSinDemo', {defaultValue: "El autoguardado no está disponible en modo DEMO."}));
+      toast.error(t('toasts.googleDrive.autoguardadoSinDemo', {defaultValue: "El autoguardado no está disponible en modo demo."}));
       return;
     }
     if (!isDriveConnected) {
@@ -129,7 +129,7 @@ export function GoogleDriveSyncPanel() {
                 <Button 
                   onClick={handleConnect} 
                   className={`border transition-all ${dataSource === 'demo' ? 'bg-muted/20 text-muted border-muted/30 cursor-not-allowed opacity-70' : 'bg-[#4285F4]/20 text-[#4285F4] hover:bg-[#4285F4]/30 border-[#4285F4]/30'}`}
-                  title={dataSource === 'demo' ? t('botones.cloud.accionNoPermitidaDemo', {defaultValue: 'Acción no permitida en modo DEMO'}) : t('botones.cloud.conectarCuenta', {defaultValue: 'Conectar cuenta'})}
+                  title={dataSource === 'demo' ? t('botones.cloud.accionNoPermitidaDemo', {defaultValue: 'Acción no permitida en modo demo'}) : t('botones.cloud.conectarCuenta', {defaultValue: 'Conectar cuenta'})}
                 >
                   {t('botones.cloud.conectarCuenta', {defaultValue: 'Conectar cuenta'})}
                 </Button>
@@ -142,7 +142,7 @@ export function GoogleDriveSyncPanel() {
             <div>
               <h3 className="font-bold text-foreground flex items-center gap-2">
                 <RefreshCw className={`w-4 h-4 ${autoSyncDrive ? "text-success animate-spin-slow" : "text-muted"}`} />
-                {t('campos.cloud.autoguardadoAutomaticoTitulo', {defaultValue: 'Autoguardado Automático'})}
+                {t('campos.cloud.autoguardadoAutomaticoTitulo', {defaultValue: 'Autoguardado automático'})}
               </h3>
               <p className="text-body text-muted">
                 {t('campos.cloud.autoguardadoAutomaticoDesc', {defaultValue: 'Sube automáticamente a Drive cada vez que pulses "Guardar" en la app.'})}
@@ -154,7 +154,7 @@ export function GoogleDriveSyncPanel() {
               className={`w-14 h-8 rounded-full p-1 transition-colors ${
                 dataSource === 'demo' ? "bg-muted/20 cursor-not-allowed opacity-50" : autoSyncDrive ? "bg-success" : "bg-muted/30"
               }`}
-              title={dataSource === 'demo' ? t('botones.cloud.accionNoPermitidaDemo', {defaultValue: 'Acción no permitida en modo DEMO'}) : ""}
+              title={dataSource === 'demo' ? t('botones.cloud.accionNoPermitidaDemo', {defaultValue: 'Acción no permitida en modo demo'}) : ""}
             >
               <div className={`w-6 h-6 bg-white rounded-full shadow-md transform transition-transform ${autoSyncDrive ? "translate-x-6" : "translate-x-0"}`} />
             </button>

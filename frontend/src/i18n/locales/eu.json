@@ -425,7 +425,7 @@
   "sidebar": {
     "en_obras": "Lanetan",
     "fecha": "Data",
-    "demo": "DEMO",
+    "demo": "Demo",
     "reales": "ERREALAK",
     "abrir_grupo": "Ireki Taldea",
     "agenda": "Klaseak",
@@ -540,7 +540,7 @@
     },
     "archivos": {
       "abrirCursoViaGrupo": "Ikasturte bat modu seguruan irekitzeko, egin klik bikoitza lehen zutabeko elkartutako taldean.",
-      "cambiadoDemo": "DEMO datuetara aldatuta.",
+      "cambiadoDemo": "Demo datuetara aldatuta.",
       "cambiadoReal": "Datu errealetara aldatuta lokalean. Fitxategiak sortu edo ireki ditzakezu.",
       "carpetaCambiada": "Karpeta lokala aldatuta.",
       "carpetaConectada": "Karpeta lokala konektatuta.",
@@ -556,8 +556,8 @@
       "enlaceReparado": "Esteka ondo konpondu da.",
       "errorAbrirGrupo": "Errorea taldea irekitzean.",
       "errorAbrirProgramacion": "Errorea programazioa irekitzean.",
-      "errorCargarCursoDemo": "Errorea DEMO ikasturtea kargatzean.",
-      "errorCargarProgramacionDemo": "Errorea DEMO programazioa kargatzean.",
+      "errorCargarCursoDemo": "Errorea demo ikasturtea kargatzean.",
+      "errorCargarProgramacionDemo": "Errorea demo programazioa kargatzean.",
       "errorFormatoCurso": "Errorea inportatzean: fitxategiak ez du ikasturte-formatu baliozkorik.",
       "errorFormatoCursoArrastrar": "Fitxategiak ez du ikasturte-formatu baliozkorik (.fpc).",
       "errorFormatoProgramacion": "Errorea inportatzean: fitxategiak ez du programazio-formatu baliozkorik.",
@@ -567,7 +567,7 @@
       "errorReparEnlace": "Errorea esteka konpontzean.",
       "grupoAbierto": "{{name}} taldea ondo ireki da.",
       "grupoCargado": "{{name}} taldea kargatuta.",
-      "modoDemoGuardarComoNuevo": "DEMO moduan zaude. Fitxategi berri gisa gordetzen...",
+      "modoDemoGuardarComoNuevo": "Demo moduan zaude. Fitxategi berri gisa gordetzen...",
       "programacionAbierta": "Programazioa ondo ireki da.",
       "programacionAbiertaIcono": "Programazioa ondo ireki da",
       "programacionCargada": "{{name}} programazioa kargatuta.",
@@ -619,14 +619,14 @@
     "googleDrive": {
       "autoguardadoActivado": "Hodeiko gordetze automatikoa aktibatuta.",
       "autoguardadoDesactivado": "Hodeiko gordetze automatikoa desaktibatuta.",
-      "autoguardadoSinDemo": "Gordetze automatikoa ez dago erabilgarri DEMO moduan.",
+      "autoguardadoSinDemo": "Gordetze automatikoa ez dago erabilgarri demo moduan.",
       "conectado": "Google Drive ondo konektatu da.",
       "conectando": "Google Driverekin konektatzen...",
       "desconectado": "Google Drivetik deskonektatuta",
       "errorConectar": "Hutsegitea Google Driverekin konektatzean.",
       "faltaClientId": "Sartu zure Google Client ID-a lehenengo.",
       "faltaConectar": "Konektatu zure Google Drive kontua lehenengo.",
-      "sinDemo": "Ezin duzu Driverekin sinkronizatu DEMO moduan."
+      "sinDemo": "Ezin duzu Driverekin sinkronizatu demo moduan."
     },
     "header": {
       "paletaNoImplementada": "Komando-paleta oraindik ez dago inplementatuta.",
@@ -645,10 +645,10 @@
     },
     "newFileWizard": {
       "cursoCreado": "{{name}} ikasturtea ondo sortu da.",
-      "cursoDemoCreado": "DEMO ikasturtea ondo sortu da.",
+      "cursoDemoCreado": "Demo ikasturtea ondo sortu da.",
       "cursoYGrupoCreados": "{{name}} ikasturtea eta bere taldea ondo sortu dira.",
       "errorCrearCurso": "Errorea ikasturtea sortzean.",
-      "errorCrearCursoDemo": "Errorea DEMO ikasturtea sortzean.",
+      "errorCrearCursoDemo": "Errorea demo ikasturtea sortzean.",
       "errorCrearProgramacion": "Errorea programazioa sortzean.",
       "programacionCreada": "{{name}} moduluaren programazioa ondo sortu da."
     },
@@ -668,7 +668,7 @@
       "desconectado": "OneDrivetik deskonektatuta",
       "errorConectar": "Hutsegitea OneDriverekin konektatzean.",
       "faltaClientId": "Sartu zure Microsoft Client ID-a lehenengo.",
-      "sinDemo": "Ezin duzu sinkronizatu DEMO moduan."
+      "sinDemo": "Ezin duzu sinkronizatu demo moduan."
     },
     "recientes": {
       "errorGenerico": "Errorea fitxategia berriro irekitzean.",
@@ -716,7 +716,7 @@
     },
     "archivos": {
       "cambiarCarpetaLocal": "Karpeta lokala aldatu",
-      "cargarDatosDemo": "DEMO datuak kargatu",
+      "cargarDatosDemo": "Demo datuak kargatu",
       "conectarCarpetaLocal": "Karpeta lokala konektatu",
       "crearAhora": "Sortu orain",
       "crearCursoVacio": "Ikasturte hutsa sortu",
@@ -724,7 +724,7 @@
       "iniciarCursoGrupo": "Ikasturtea hasi (+ taldea)",
       "irADocumentosPdx": "Joan MagIA-ra",
       "nuevaCatalogo": "Berria (katalogoa)",
-      "recargarDemo": "DEMO birkargatu",
+      "recargarDemo": "Demo birkargatu",
       "repararEnlace": "Esteka konpondu",
       "validarWorkspace": "Workspace balioztatu"
     },
@@ -737,7 +737,7 @@
       "nuevaProgramacion": "Programazio berria"
     },
     "cloud": {
-      "accionNoPermitidaDemo": "Ekintza ez da baimenduta DEMO moduan",
+      "accionNoPermitidaDemo": "Ekintza ez da baimenduta demo moduan",
       "conectarCuenta": "Kontua konektatu",
       "desconectar": "Deskonektatu"
     },
@@ -2060,7 +2060,7 @@
       "clientIdPlaceholder": "Adib: 123456789-abcde.apps.googleusercontent.com",
       "clientIdTauriHint": "Mahaigaineko aplikazioan (Tauri) \"Desktop app\" motako Client ID bat behar duzu, nabigatzailean erabiltzen duzunaz bestelakoa — Google Cloud proiektu berean erregistra dezakezu.",
       "moduloDesconocido": "Modulu Ezezaguna",
-      "cursoDemoNombre": "DEMO Ikastaroa",
+      "cursoDemoNombre": "Demo Ikastaroa",
       "usuarioMicrosoft": "Microsoft erabiltzailea",
       "oneDriveDescripcion": "Gorde zure .fpp eta .fpc fitxategiak zure Microsoft OneDrive kontuan. (Azure ataritan izena ematea eskatzen du).",
       "oneDriveProximamente": "Laster",
@@ -2204,7 +2204,7 @@
       "sinResultadosParaBusqueda": "\"{{termino}}\" bilaketarako ez da emaitzarik aurkitu",
       "tituloMapaCcaa": "LHko curriculuma duten Autonomia Erkidegoen mapa",
       "instruccionMapaCcaa": "Egin klik erkidego batean bere xehetasunak ikusteko. Iturria: ",
-      "badgeDemo": "DEMO",
+      "badgeDemo": "Demo",
       "mensajeSeleccionaCcaa": "Hautatu autonomia erkidego bat mapan bere informazio zehatza ikusteko.",
       "tituloTablaComunidades": "Autonomia erkidegoen taula",
       "badgeCiudadAutonoma": "Hiri Autonomoa",
@@ -2218,7 +2218,7 @@
       "infoCeutaMelillaTexto": "k Ministerioaren curriculuma (BOE) zuzenean aplikatzen dute, hezkuntza arloan eskumenik transferitu gabe baitaude.",
       "mapaSvgCreditoLabel": "SVG mapa:",
       "mapaSvgCreditoTexto": "(CC-BY-4.0) — Victor Cazanave.",
-      "demoEntornoLabel": "🌍 DEMO ingurunea:",
+      "demoEntornoLabel": "🌍 demo ingurunea:",
       "demoEntornoTexto": "Aplikazio honen adibide-datuek Aragoiko curriculuma (BOA) hartzen dute erreferentziatzat.",
       "labelBoletinOficial": "Aldizkari Ofiziala",
       "badgeComunidadAutonoma": "Autonomia Erkidegoa",
@@ -2316,16 +2316,16 @@
       "avisoRealDesc": "zure .fpg/.fpp/.fpc fitxategiekin ari zara lanean, zure ekipoan gordeta. Aldaketak benetan gordetzen dira.",
       "gruposEjemploDobleClic": "Adibidezko taldeak. Klik bikoitza kargatzeko.",
       "tusGruposDobleClic": "Gordetako zure taldeak. Klik bikoitza kargatzeko.",
-      "sinGruposDemo": "Ez da DEMO talderik aurkitu.",
+      "sinGruposDemo": "Ez da demo talderik aurkitu.",
       "usaBotonEnlazarCarpeta": "Erabili beheko botoia laneko karpeta lotzeko.",
       "sinGrupos": "Ez da talderik aurkitu.",
       "programacionesTitulo": "Programazioak",
       "dobleClicCargarProgramacion": "Klik bikoitza programazio bat kargatzeko.",
-      "sinProgramacionesDemo": "Ez da DEMO programaziorik aurkitu.",
+      "sinProgramacionesDemo": "Ez da demo programaziorik aurkitu.",
       "sinProgramaciones": "Ez da programaziorik aurkitu.",
       "cursosTitulo": "Ikastaroak",
       "dobleClicCargarCurso": "Klik bikoitza ikastaro bat kargatzeko.",
-      "sinCursosDemo": "Ez da DEMO ikastarorik aurkitu.",
+      "sinCursosDemo": "Ez da demo ikastarorik aurkitu.",
       "sinCursos": "Ez da ikastarorik aurkitu.",
       "nubeLabel": "Hodeia",
       "privacidadDisenoTitulo": "Zure pribatutasuna diseinuz",
@@ -2646,7 +2646,7 @@
       "guardarDeshacerTitulo": "Gorde eta Desegin",
       "guardarDeshacerDesc": "Hemen eskuz gorde dezakezu, nahiz eta gordetze automatikoa egon. Desegin/Berregiteko geziak ere badituzu, edo Ctrl+S eta Ctrl+Z erabil ditzakezu.",
       "pestanaArchivosTitulo": "Fitxategien Fitxa",
-      "pestanaArchivosDesc": "Hasteko, joan Fitxategiak atalera eta hautatu 'DEMO Datuak' beldurrik gabe arakatzeko."
+      "pestanaArchivosDesc": "Hasteko, joan Fitxategiak atalera eta hautatu 'Demo Datuak' beldurrik gabe arakatzeko."
     },
     "ayuda": {
       "faq": {

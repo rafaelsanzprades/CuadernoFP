@@ -425,7 +425,7 @@
   "sidebar": {
     "en_obras": "En Obras",
     "fecha": "Data",
-    "demo": "DEMO",
+    "demo": "Demo",
     "reales": "REAIS",
     "abrir_grupo": "Abrir Grupo",
     "agenda": "Clases",
@@ -540,7 +540,7 @@
     },
     "archivos": {
       "abrirCursoViaGrupo": "Para abrir un curso de forma segura, fai dobre clic no seu grupo asociado na primeira columna.",
-      "cambiadoDemo": "Cambiado a datos DEMO.",
+      "cambiadoDemo": "Cambiado a datos demo.",
       "cambiadoReal": "Cambiado a datos reais en local. Podes crear ou abrir arquivos.",
       "carpetaCambiada": "Cartafol local cambiado.",
       "carpetaConectada": "Cartafol local conectado.",
@@ -556,8 +556,8 @@
       "enlaceReparado": "Ligazón reparada correctamente.",
       "errorAbrirGrupo": "Erro ao abrir o grupo.",
       "errorAbrirProgramacion": "Erro ao abrir a programación.",
-      "errorCargarCursoDemo": "Erro ao cargar o curso DEMO.",
-      "errorCargarProgramacionDemo": "Erro ao cargar a programación DEMO.",
+      "errorCargarCursoDemo": "Erro ao cargar o curso demo.",
+      "errorCargarProgramacionDemo": "Erro ao cargar a programación demo.",
       "errorFormatoCurso": "Erro ao importar: o arquivo non ten un formato válido de curso.",
       "errorFormatoCursoArrastrar": "O arquivo non ten un formato válido de curso (.fpc).",
       "errorFormatoProgramacion": "Erro ao importar: o arquivo non ten un formato válido de programación.",
@@ -567,7 +567,7 @@
       "errorReparEnlace": "Erro ao reparar a ligazón.",
       "grupoAbierto": "Grupo {{name}} aberto correctamente.",
       "grupoCargado": "Grupo {{name}} cargado.",
-      "modoDemoGuardarComoNuevo": "Estás en modo DEMO. Gardando como novo arquivo...",
+      "modoDemoGuardarComoNuevo": "Estás en modo demo. Gardando como novo arquivo...",
       "programacionAbierta": "Programación aberta correctamente.",
       "programacionAbiertaIcono": "Programación aberta correctamente",
       "programacionCargada": "Programación {{name}} cargada.",
@@ -619,14 +619,14 @@
     "googleDrive": {
       "autoguardadoActivado": "Gardado automático na nube activado.",
       "autoguardadoDesactivado": "Gardado automático na nube desactivado.",
-      "autoguardadoSinDemo": "O gardado automático non está dispoñible en modo DEMO.",
+      "autoguardadoSinDemo": "O gardado automático non está dispoñible en modo demo.",
       "conectado": "Google Drive conectado correctamente.",
       "conectando": "Conectando con Google Drive...",
       "desconectado": "Desconectado de Google Drive",
       "errorConectar": "Fallo ao conectar con Google Drive.",
       "faltaClientId": "Introduce o teu Google Client ID primeiro.",
       "faltaConectar": "Conecta a túa conta de Google Drive primeiro.",
-      "sinDemo": "Non podes sincronizar con Drive en modo DEMO."
+      "sinDemo": "Non podes sincronizar con Drive en modo demo."
     },
     "header": {
       "paletaNoImplementada": "Paleta de comandos aínda non implementada.",
@@ -645,10 +645,10 @@
     },
     "newFileWizard": {
       "cursoCreado": "Curso {{name}} creado correctamente.",
-      "cursoDemoCreado": "Curso DEMO creado correctamente.",
+      "cursoDemoCreado": "Curso demo creado correctamente.",
       "cursoYGrupoCreados": "Curso {{name}} e o seu grupo creados correctamente.",
       "errorCrearCurso": "Erro ao crear o curso.",
-      "errorCrearCursoDemo": "Erro ao crear o curso DEMO.",
+      "errorCrearCursoDemo": "Erro ao crear o curso demo.",
       "errorCrearProgramacion": "Erro ao crear a programación.",
       "programacionCreada": "Programación de {{name}} creada correctamente."
     },
@@ -668,7 +668,7 @@
       "desconectado": "Desconectado de OneDrive",
       "errorConectar": "Fallo ao conectar con OneDrive.",
       "faltaClientId": "Introduce o teu Client ID de Microsoft primeiro.",
-      "sinDemo": "Non podes sincronizar en modo DEMO."
+      "sinDemo": "Non podes sincronizar en modo demo."
     },
     "recientes": {
       "errorGenerico": "Erro ao reabrir o arquivo.",
@@ -716,7 +716,7 @@
     },
     "archivos": {
       "cambiarCarpetaLocal": "Cambiar cartafol local",
-      "cargarDatosDemo": "Cargar datos DEMO",
+      "cargarDatosDemo": "Cargar datos demo",
       "conectarCarpetaLocal": "Conectar cartafol local",
       "crearAhora": "Crear agora",
       "crearCursoVacio": "Crear curso baleiro",
@@ -724,7 +724,7 @@
       "iniciarCursoGrupo": "Iniciar curso (+ grupo)",
       "irADocumentosPdx": "Ir a MagIA",
       "nuevaCatalogo": "Nova (catálogo)",
-      "recargarDemo": "Recargar DEMO",
+      "recargarDemo": "Recargar demo",
       "repararEnlace": "Reparar ligazón",
       "validarWorkspace": "Validar workspace"
     },
@@ -737,7 +737,7 @@
       "nuevaProgramacion": "Nova programación"
     },
     "cloud": {
-      "accionNoPermitidaDemo": "Acción non permitida en modo DEMO",
+      "accionNoPermitidaDemo": "Acción non permitida en modo demo",
       "conectarCuenta": "Conectar conta",
       "desconectar": "Desconectar"
     },
@@ -764,7 +764,7 @@
       "crearCurso": "Crear curso",
       "crearMisArchivos": "Crear os meus arquivos",
       "nuevoCursoDeEstaProgramacion": "Novo curso a partir desta programación",
-      "probarConDemo": "Probar con DEMO",
+      "probarConDemo": "Probar con demo",
       "reabrir": "Reabrir",
       "seleccionarCsvAlumnado": "Seleccionar CSV de alumnado",
       "semanaActual": "Semana actual",
@@ -2060,7 +2060,7 @@
       "clientIdPlaceholder": "Ex: 123456789-abcde.apps.googleusercontent.com",
       "clientIdTauriHint": "Na app de escritorio (Tauri) precisas un Client ID de tipo \"Desktop app\", distinto do que usas no navegador — podes rexistralo no mesmo proxecto de Google Cloud.",
       "moduloDesconocido": "Módulo Descoñecido",
-      "cursoDemoNombre": "Curso DEMO",
+      "cursoDemoNombre": "Curso demo",
       "usuarioMicrosoft": "Usuario de Microsoft",
       "oneDriveDescripcion": "Garda os teus ficheiros .fpp e .fpc na túa conta de Microsoft OneDrive. (Require rexistro no portal de Azure).",
       "oneDriveProximamente": "Proximamente",
@@ -2204,7 +2204,7 @@
       "sinResultadosParaBusqueda": "Non se atoparon resultados para \"{{termino}}\"",
       "tituloMapaCcaa": "Mapa de CCAA con currículo FP",
       "instruccionMapaCcaa": "Fai clic nunha comunidade para ver o seu detalle. Fonte: ",
-      "badgeDemo": "DEMO",
+      "badgeDemo": "Demo",
       "mensajeSeleccionaCcaa": "Selecciona unha comunidade autónoma no mapa para ver a súa información detallada.",
       "tituloTablaComunidades": "Táboa de comunidades autónomas",
       "badgeCiudadAutonoma": "Cidade Autónoma",
@@ -2218,7 +2218,7 @@
       "infoCeutaMelillaTexto": " aplican directamente o currículo do Ministerio (BOE), ao non teren competencias transferidas en materia de educación.",
       "mapaSvgCreditoLabel": "Mapa SVG:",
       "mapaSvgCreditoTexto": "(CC-BY-4.0) — Victor Cazanave.",
-      "demoEntornoLabel": "🌍 Contorno DEMO:",
+      "demoEntornoLabel": "🌍 Contorno demo:",
       "demoEntornoTexto": "Os datos de exemplo desta aplicación usan o currículo de Aragón (BOA) como referencia.",
       "labelBoletinOficial": "Boletín Oficial",
       "badgeComunidadAutonoma": "Comunidade Autónoma",
@@ -2316,16 +2316,16 @@
       "avisoRealDesc": "estás traballando cos teus propios ficheiros .fpg/.fpp/.fpc, gardados no teu equipo. Os cambios gárdanse de verdade.",
       "gruposEjemploDobleClic": "Grupos de exemplo. Dobre clic para cargar.",
       "tusGruposDobleClic": "Os teus grupos gardados. Dobre clic para cargar.",
-      "sinGruposDemo": "Non se atoparon grupos DEMO.",
+      "sinGruposDemo": "Non se atoparon grupos demo.",
       "usaBotonEnlazarCarpeta": "Usa o botón inferior para ligar o teu cartafol de traballo.",
       "sinGrupos": "Non se atoparon grupos.",
       "programacionesTitulo": "Programacións",
       "dobleClicCargarProgramacion": "Dobre clic para cargar unha programación.",
-      "sinProgramacionesDemo": "Non se atoparon programacións DEMO.",
+      "sinProgramacionesDemo": "Non se atoparon programacións demo.",
       "sinProgramaciones": "Non se atoparon programacións.",
       "cursosTitulo": "Cursos",
       "dobleClicCargarCurso": "Dobre clic para cargar un curso.",
-      "sinCursosDemo": "Non se atoparon cursos DEMO.",
+      "sinCursosDemo": "Non se atoparon cursos demo.",
       "sinCursos": "Non se atoparon cursos.",
       "nubeLabel": "Nube",
       "privacidadDisenoTitulo": "A túa privacidade por deseño",
@@ -2646,7 +2646,7 @@
       "guardarDeshacerTitulo": "Gardar e Desfacer",
       "guardarDeshacerDesc": "Podes gardar manualmente aquí, aínda que hai gardado automático. Tamén tes frechas para Desfacer/Refacer ou podes usar Ctrl+S e Ctrl+Z.",
       "pestanaArchivosTitulo": "Pestana de Ficheiros",
-      "pestanaArchivosDesc": "Para comezar, vai a Ficheiros e selecciona 'Datos DEMO' para explorar sen medo."
+      "pestanaArchivosDesc": "Para comezar, vai a Ficheiros e selecciona 'Datos demo' para explorar sen medo."
     },
     "ayuda": {
       "faq": {

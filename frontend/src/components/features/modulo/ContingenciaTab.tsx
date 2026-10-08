@@ -145,10 +145,10 @@ export function ContingenciaTab() {
       </div>
       </div>
 
-      {/* Plan de Contingencia (textos) */}
+      {/* Plan de contingencia (textos) */}
       <div className="space-y-3">
       <SectionHeading id="metodologia-contingencia-plan" icon={ShieldAlert} scrollMt="260px">
-        {t('campos.modulo.tituloPlanContingencia', {defaultValue: 'Plan de Contingencia'})}
+        {t('campos.modulo.tituloPlanContingencia', {defaultValue: 'Plan de contingencia'})}
       </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-rose-500">
         <div className="space-y-4">

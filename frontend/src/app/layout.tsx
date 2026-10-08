@@ -14,7 +14,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "Cuaderno FP",
-  description: "Cuaderno FP para Ciclos Formativos",
+  description: "Cuaderno FP para ciclos formativos",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
