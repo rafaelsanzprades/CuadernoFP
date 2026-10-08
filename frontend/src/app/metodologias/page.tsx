@@ -25,7 +25,7 @@ export default function MetodologiaConfigPage() {
   const { t } = useTranslation();
   const { activeModuleId, moduleData, setModuleData } = useAppStore();
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("metodologias");
+  const [activeTab, setActiveTab] = useState("estrategias");
 
   useEffect(() => {
     fetch(`${getApiBase()}/api/module/${activeModuleId}`)
@@ -52,7 +52,7 @@ export default function MetodologiaConfigPage() {
   }, [activeModuleId, setModuleData]);
 
   const TABS = [
-    { id: "metodologias", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.metodologia.label', {defaultValue: 'Metodología e innovación'})}</span>, cleanLabel: t('tabs.metodologia.metodologia.label', {defaultValue: 'Metodología e innovación'}) },
+    { id: "estrategias", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.metodologia.label', {defaultValue: 'Estrategias e innovación'})}</span>, cleanLabel: t('tabs.metodologia.metodologia.label', {defaultValue: 'Estrategias e innovación'}) },
     { id: "instrumentos-recursos", label: <span className="flex items-center gap-2"><Wrench className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.instrumentosRecursos.label', {defaultValue: 'Instrumentos y recursos'})}</span>, cleanLabel: t('tabs.metodologia.instrumentosRecursos.label', {defaultValue: 'Instrumentos y recursos'}) },
     { id: "diversidad", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.diversidad.label', {defaultValue: 'Atención a la diversidad'})}</span>, cleanLabel: t('tabs.metodologia.diversidad.label', {defaultValue: 'Atención a la diversidad'}) },
     { id: "contingencia", label: <span className="flex items-center gap-2"><Shield className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.contingencia.label', {defaultValue: 'Plan de contingencia'})}</span>, cleanLabel: t('tabs.metodologia.contingencia.label', {defaultValue: 'Plan de contingencia'}) },
@@ -62,7 +62,7 @@ export default function MetodologiaConfigPage() {
   const activeTabCleanLabel = TABS.find(tab => tab.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    metodologias: t('tabs.metodologia.metodologia.desc', {defaultValue: 'Estrategias metodológicas y coordinación docente, e innovación e intermodularidad.'}),
+    estrategias: t('tabs.metodologia.metodologia.desc', {defaultValue: 'Estrategias metodológicas y coordinación docente, e innovación e intermodularidad.'}),
     'instrumentos-recursos': t('tabs.metodologia.instrumentosRecursos.desc', {defaultValue: 'Instrumentos de evaluación seleccionados y recursos y espacios necesarios.'}),
     diversidad: t('tabs.metodologia.diversidad.desc', {defaultValue: 'Marco de inclusión, atención a la diversidad, plan DUA y panel de alumnado ACNEAE.'}),
     contingencia: t('tabs.metodologia.contingencia.desc', {defaultValue: 'Planes de contingencia y adaptación ante situaciones excepcionales.'}),
@@ -174,7 +174,7 @@ export default function MetodologiaConfigPage() {
           <MotionWrapper className="px-8 pt-4 pb-12">
 
             <div className="space-y-6">
-              {activeTab === 'metodologias' && <><MetodologiaTab /><InnovacionTab /></>}
+              {activeTab === 'estrategias' && <><MetodologiaTab /><InnovacionTab /></>}
               {activeTab === 'instrumentos-recursos' && <EvaluacionRecursosTab />}
               {activeTab === 'diversidad' && <DiversidadTab />}
               {activeTab === 'contingencia' && <ContingenciaTab />}

@@ -190,7 +190,7 @@ export const GUIA_PASOS: {
               {
                 label: "Página", text: "Metodologías",
                 children: [
-                  { label: "Pestaña", text: "Metodología e innovación", children: [{ label: "Bloque", text: "Metodologías activas (ABP, retos, etc.) y coordinación docente, e innovación e intermodularidad." }] },
+                  { label: "Pestaña", text: "Estrategias e innovación", children: [{ label: "Bloque", text: "Metodologías activas (ABP, retos, etc.) y coordinación docente, e innovación e intermodularidad." }] },
                   { label: "Pestaña", text: "Instrumentos y recursos", children: [{ label: "Bloque", text: "Catálogo de instrumentos de evaluación y recursos y espacios necesarios (aula, taller, software...)." }] },
                   { label: "Pestaña", text: "Atención a la diversidad", children: [{ label: "Bloque", text: "Marco de inclusión, atención a la diversidad, plan DUA y panel de alumnado ACNEAE (nombre, tipo de necesidad y adaptaciones de evaluación y acceso)." }] },
                   { label: "Pestaña", text: "Plan de contingencia", children: [{ label: "Texto", text: "Docencia telemática, tareas autoguiadas." }] },
