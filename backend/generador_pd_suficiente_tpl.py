@@ -74,12 +74,6 @@ MODELO_RECUPERACION_LABELS = {
     "EvFE": "EvFE — Evaluación final extraordinaria (segunda convocatoria)",
 }
 
-COMPLEMENTARIAS_LABELS = {
-    "COMP-VISITA": "Visita técnica a empresa",
-    "COMP-CHARLA": "Charla de expertos",
-    "COMP-TALLER": "Taller práctico externo",
-}
-
 CONTINGENCIA_LABELS = {
     "CONT-ASINC": "Docencia telemática asíncrona",
     "CONT-SINC": "Docencia telemática síncrona",
@@ -510,18 +504,24 @@ def _build_context(data: dict) -> dict:
         data.get("textos_pd_bibliografia") or config.get("G3_bibliografia") or ""
     )
 
-    # ── SECCIÓN K: ACTIVIDADES COMPLEMENTARIAS Y EXTRAESCOLARES — solo
-    # complementarias (en horario lectivo, evaluables); las extraescolares
-    # no forman parte de la programación didáctica (van en la PGA), mismo
-    # criterio ya documentado en InnovacionTab.tsx ─────────────────────
-    actividades_compl = data.get("actividades_complementarias") or []
+    # ── SECCIÓN K: ACTIVIDADES COMPLEMENTARIAS Y EXTRAESCOLARES — una línea por
+    # cada actividad de df_ace (Contexto -> Entorno), con su incidencia en la
+    # evaluación (art. 100.2 del Decreto 91/2024). Las extraescolares se incluyen
+    # si el docente las ha registrado ────────────────────────────────────────
     list_k = []
-    if actividades_compl:
-        nombres = [COMPLEMENTARIAS_LABELS.get(a, a) for a in actividades_compl]
-        list_k.append("Actividades complementarias previstas: " + ", ".join(nombres) + ".")
-    h1_complementarias = config.get("H1_complementarias", "")
-    if h1_complementarias:
-        list_k.append(h1_complementarias)
+    for r in (data.get("df_ace") or []):
+        if not isinstance(r, dict) or not (r.get("Actividad") or "").strip():
+            continue
+        partes = [f"{(r.get('Tipo') or 'Complementaria')}: {r['Actividad'].strip()}"]
+        if r.get("RA_Vinculados"):
+            partes.append(f"RA vinculados: {r['RA_Vinculados']}")
+        if r.get("Trimestre"):
+            partes.append(f"trimestre: {r['Trimestre']}")
+        if r.get("Entidad"):
+            partes.append(f"entidad: {r['Entidad']}")
+        if r.get("Evaluacion"):
+            partes.append(f"incidencia en la evaluación: {r['Evaluacion']}")
+        list_k.append("; ".join(partes) + ".")
     if not list_k:
         list_k.append(
             f"Dado que existe una estrecha interdependencia entre los módulos y el "

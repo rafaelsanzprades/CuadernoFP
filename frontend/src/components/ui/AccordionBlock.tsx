@@ -2,6 +2,7 @@ import React from "react";
 import { ChevronDown } from "lucide-react";
 
 interface AccordionBlockProps {
+  id?: string;
   title: string | React.ReactNode;
   icon?: React.ReactNode;
   children: React.ReactNode;
@@ -12,6 +13,7 @@ interface AccordionBlockProps {
 }
 
 export function AccordionBlock({
+  id,
   title,
   icon,
   children,
@@ -22,6 +24,7 @@ export function AccordionBlock({
 }: AccordionBlockProps) {
   return (
     <details
+      id={id}
       className={[
         "group rounded-xl border border-[var(--glass-border)] bg-[var(--glass-bg)] overflow-hidden [&_summary::-webkit-details-marker]:hidden mb-4 shadow-sm",
         className

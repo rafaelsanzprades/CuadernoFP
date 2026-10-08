@@ -19,7 +19,7 @@ function Ficha({ studentId }: { studentId: string }) {
   const { renderInput, renderTextarea, renderSelect, renderCheckbox } = useFichaProfesional(studentId);
   return (
     <>
-      <SeccionAcordeon defaultOpen title={t('campos.orientacion.seccion1Titulo', {defaultValue: 'Motivación y experiencia'})} icon={<><Target className="w-5 h-5 text-info" /><Briefcase className="w-5 h-5 text-warning -ml-1" /></>}>
+      <SeccionAcordeon title={t('campos.orientacion.seccion1Titulo', {defaultValue: 'Motivación y experiencia'})} icon={<><Target className="w-5 h-5 text-info" /><Briefcase className="w-5 h-5 text-warning -ml-1" /></>}>
         <div className="bg-background/20 border border-white/5 rounded-xl p-5 space-y-5">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {renderSelect("motivo_eleccion", t('campos.orientacion.motivoEleccionLabel', {defaultValue: 'Motivo de elección del ciclo'}), [

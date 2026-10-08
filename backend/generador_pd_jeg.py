@@ -468,43 +468,29 @@ def _build_context(data: dict) -> dict:
         context["medidas_inclusion"] = str(inc_list)
     context["texto_inclusion_libre"] = data.get("texto_inclusion_libre", "")
 
-    # --- Actividades complementarias ---
-    act_list = data.get("actividades_complementarias", [])
-    if isinstance(act_list, list) and len(act_list) > 0:
-        act = act_list[0] if isinstance(act_list[0], dict) else {"titulo": str(act_list[0])}
-        context["actividad1_titulo"] = act.get("titulo", "")
-        context["actividad1_tipo"] = act.get("tipo", "complementaria")
-        context["actividad1_ra"] = act.get("ra", "")
-        context["actividad1_temporizacion"] = act.get("temporizacion", "")
-        context["actividad1_entidad"] = act.get("entidad", "")
-        # actividades_complementarias en la app real es solo una lista de
-        # strings (checklist en InnovacionTab.tsx), no objetos con
-        # "descripcion" -- sin este fallback, la descripcion sale siempre
-        # vacia para todo el mundo real, mostrando solo el titulo.
-        context["actividad1_descripcion"] = act.get("descripcion") or act.get("titulo", "")
-        context["actividad1_evaluacion"] = act.get("evaluacion", "")
-    else:
-        context.update({
-            "actividad1_titulo": "", "actividad1_tipo": "", "actividad1_ra": "",
-            "actividad1_temporizacion": "", "actividad1_entidad": "",
-            "actividad1_descripcion": "", "actividad1_evaluacion": "",
-        })
-
-    if isinstance(act_list, list) and len(act_list) > 1:
-        act = act_list[1] if isinstance(act_list[1], dict) else {"titulo": str(act_list[1])}
-        context["actividad2_titulo"] = act.get("titulo", "")
-        context["actividad2_tipo"] = act.get("tipo", "complementaria")
-        context["actividad2_ra"] = act.get("ra", "")
-        context["actividad2_temporizacion"] = act.get("temporizacion", "")
-        context["actividad2_entidad"] = act.get("entidad", "")
-        context["actividad2_descripcion"] = act.get("descripcion") or act.get("titulo", "")
-        context["actividad2_evaluacion"] = act.get("evaluacion", "")
-    else:
-        context.update({
-            "actividad2_titulo": "", "actividad2_tipo": "", "actividad2_ra": "",
-            "actividad2_temporizacion": "", "actividad2_entidad": "",
-            "actividad2_descripcion": "", "actividad2_evaluacion": "",
-        })
+    # --- Actividades complementarias y extraescolares (df_ace, Contexto -> Entorno) ---
+    # Cada fila de df_ace: Tipo, Actividad, RA_Vinculados, Trimestre, Entidad, Evaluacion.
+    act_list = [
+        {
+            "titulo": r.get("Actividad", ""),
+            "tipo": (r.get("Tipo") or "Complementaria").lower(),
+            "ra": r.get("RA_Vinculados", ""),
+            "temporizacion": r.get("Trimestre", ""),
+            "entidad": r.get("Entidad", ""),
+            "descripcion": r.get("Actividad", ""),
+            "evaluacion": r.get("Evaluacion", ""),
+        }
+        for r in (data.get("df_ace") or []) if isinstance(r, dict) and r.get("Actividad")
+    ]
+    for n in (1, 2):
+        act = act_list[n - 1] if len(act_list) >= n else {}
+        context[f"actividad{n}_titulo"] = act.get("titulo", "")
+        context[f"actividad{n}_tipo"] = act.get("tipo", "")
+        context[f"actividad{n}_ra"] = act.get("ra", "")
+        context[f"actividad{n}_temporizacion"] = act.get("temporizacion", "")
+        context[f"actividad{n}_entidad"] = act.get("entidad", "")
+        context[f"actividad{n}_descripcion"] = act.get("descripcion", "")
+        context[f"actividad{n}_evaluacion"] = act.get("evaluacion", "")
 
     # --- Plan de contingencia ---
     cont_list = data.get("medidas_contingencia", [])

@@ -36,7 +36,7 @@ export function ActividadesComplementariasTab() {
   return (
     <div className="space-y-3">
       <SectionHeading id="contexto-actividades" icon={Bus} scrollMt="260px">
-        {t('campos.contexto.tituloActividades', {defaultValue: 'Complementarias y extraescolares'})}
+        {t('campos.contexto.tituloActividades', {defaultValue: 'Actividades complementarias y extraescolares'})}
       </SectionHeading>
       <Card className="p-6 border-t-4 border-t-[#14a085]">
         <div className="overflow-x-auto mb-4">

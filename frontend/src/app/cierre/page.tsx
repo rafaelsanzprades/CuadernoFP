@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { Save, TrendingUp, FolderOpen, Shield, CalendarRange, Target } from "lucide-react";
+import { Save, TrendingUp, FolderOpen, Shield, CalendarRange, Target, FileText } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -10,6 +10,8 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { useTranslation } from "react-i18next";
+import { ExpedienteAlumnoTab } from "@/components/features/alumnado/ExpedienteAlumnoTab";
+import { IndiceAlumnadoPanel } from "@/components/features/alumnado/PanelPorAlumno";
 import { PlanificacionMensualTab } from "@/components/features/dashboard/PlanificacionMensualTab";
 import { ProgresoRaTab } from "@/components/features/evaluacion/ProgresoRaTab";
 import { EqavetTab } from "@/components/features/modulo/EqavetTab";
@@ -38,7 +40,7 @@ export default function ProgresoPage() {
   const [saveMessage, setSaveMessage] = useState("");
   const [saveIsError, setSaveIsError] = useState(false);
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState("avance-ud");
+  const [activeTab, setActiveTab] = useState("expediente");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -124,12 +126,14 @@ export default function ProgresoPage() {
   // comparten el mismo selector de alumnado, solo cambia si se ve un informe
   // formateado o la línea temporal en bruto).
   const TABS = [
+    { id: "expediente", label: <><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.cierre.expediente.label', {defaultValue: 'Expediente'})}</>, cleanLabel: t('tabs.cierre.expediente.label', {defaultValue: 'Expediente'}) },
     { id: "avance-ud", label: <><span className="inline-flex"><CalendarRange className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.agenda.avance.label', {defaultValue: 'Avance de UD'})}</>, cleanLabel: t('tabs.agenda.avance.label', {defaultValue: 'Avance de UD'}) },
     { id: "progreso-ra-ud", label: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.calificaciones.progresoRaUd', {defaultValue: 'Progreso RA-UD'})}</>, cleanLabel: t('tabs.calificaciones.progresoRaUd', {defaultValue: 'Progreso RA-UD'}) },
     { id: "mejora", label: <><span className="inline-flex"><Shield className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.inicio.mejora.label', {defaultValue: 'Mejora'})}</>, cleanLabel: t('tabs.inicio.mejora.label', {defaultValue: 'Mejora'}) },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
+    expediente: t('tabs.cierre.expediente.desc', {defaultValue: 'Boletín individual, informe de evidencias e inserción laboral por alumnado.'}),
     'avance-ud': t('tabs.agenda.avance.desc', {defaultValue: 'Planificación y seguimiento mensual de las unidades didácticas según lo impartido.'}),
     'progreso-ra-ud': t('tabs.agenda.progresoRaUd.desc', {defaultValue: 'Progreso de los resultados de aprendizaje: nota del grupo, avance, horas y estado de las unidades didácticas de cada RA.'}),
     mejora: t('tabs.inicio.mejora.desc', {defaultValue: 'Gestión de la calidad, evaluación del proceso e indicadores para el módulo.'}),
@@ -198,6 +202,8 @@ export default function ProgresoPage() {
                 SECTION_INDEX_ITEMS). */}
             <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
 
+            {activeTab === 'expediente' && <IndiceAlumnadoPanel className="mt-3" />}
+
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-3 px-8 pt-4 pb-12">
@@ -249,6 +255,11 @@ export default function ProgresoPage() {
             </div>
           )}
 
+          {activeTab === "expediente" && (
+            <div className="mt-4 animate-in fade-in duration-500">
+              <ExpedienteAlumnoTab />
+            </div>
+          )}
           </MotionWrapper>
         </main>
       </div>

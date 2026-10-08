@@ -77,7 +77,7 @@ export const GUIA_PASOS: {
         nodes: [
           { label: "Programación didáctica", text: 'Es el "molde" teórico (.fpp). Contiene la normativa (resultados de aprendizaje y criterios de evaluación) y las unidades didácticas. Se diseña una vez y se puede reutilizar en cursos posteriores.' },
           { label: "Curso", text: 'Es la "instancia" real (.fpc). Representa al alumnado físico, sus calificaciones, faltas de asistencia y calendario en un año académico específico (ej. 2025-26).' },
-          { label: "Bloques", text: "3 grupos en el sidebar — General (Inicio, Ayuda, MagIA, Normativa, Legal), Programación (Catálogo, Contexto, Currículo, Metodología, Instrumento — el diseño teórico del módulo) y Curso (Calendario, Alumnado, Calificaciones, Sesiones, Cierre — el aula real). Esta misma guía vive dentro de Ayuda, pestaña Guía (no en Inicio ni en MagIA); esa misma página Ayuda tiene también FAQ, Acrónimos y Contribuciones para consultas rápidas." },
+          { label: "Bloques", text: "3 grupos en el sidebar — General (Inicio, Ayuda, MagIA, Normativa, Legal), Programación (Catálogo, Contexto, Currículo, Metodologías, Instrumentos — el diseño teórico del módulo) y Curso (Calendario, Alumnado, Calificaciones, Sesiones, Cierre — el aula real). Esta misma guía vive dentro de Ayuda, pestaña Guía (no en Inicio ni en MagIA); esa misma página Ayuda tiene también FAQ, Acrónimos y Contribuciones para consultas rápidas." },
         ],
       },
     ],
@@ -135,10 +135,11 @@ export const GUIA_PASOS: {
               {
                 label: "Página", text: "Contexto",
                 children: [
-                  { label: "Pestaña", text: "Identificación", children: [{ label: "Texto", text: "Centro educativo y Profesorado." }] },
-                  { label: "Pestaña", text: "Contextualización", children: [{ label: "Bloque", text: "Entorno geográfico, socioeconómico y contexto escolar." }] },
-                  { label: "Pestaña", text: "Plan FEOE", children: [{ label: "Bloque", text: "Modalidad, seguimiento y régimen dual de la Formación en Empresa u Organismo Equiparado (FEOE)." }] },
-                  { label: "Pestaña", text: "Evaluación y calificación", children: [{ label: "Bloque", text: "Información al alumnado, pérdida de evaluación continua y recuperación." }] },
+                  { label: "Pestaña", text: "Identificación", children: [{ label: "Bloque", text: "Centro y docente, módulo didáctico y datos de autoría y publicidad de la programación." }] },
+                  { label: "Pestaña", text: "Entorno", children: [{ label: "Bloque", text: "Contexto escolar (entorno geográfico y socioeconómico), actividades complementarias y extraescolares, y plan FEOE (modalidad, seguimiento y régimen dual)." }] },
+                  { label: "Pestaña", text: "Alumnado", children: [{ label: "Bloque", text: "Alumnado con necesidades específicas (ACNEAE) y datos del grupo, rasgos característicos del grupo y evaluación inicial." }] },
+                  { label: "Pestaña", text: "Evaluación", children: [{ label: "Bloque", text: "Reglas de redondeo y compensación, ponderación por trimestres e instrumentos de evaluación, y escalas cualitativas." }] },
+                  { label: "Pestaña", text: "Procedimientos", children: [{ label: "Bloque", text: "Modelo de recuperación, información al alumnado y procedimientos (pérdida de evaluación continua), criterios de calificación y textos del modelo Simplificado." }] },
                 ],
               },
             ],
@@ -148,7 +149,7 @@ export const GUIA_PASOS: {
       },
       {
         numero: "1.3",
-        titulo: "Definir el currículo, las unidades didácticas y las tareas competenciales",
+        titulo: "Definir el currículo, las unidades didácticas y los proyectos y retos",
         nodes: [
           {
             label: "Bloque", text: "Programación",
@@ -156,21 +157,22 @@ export const GUIA_PASOS: {
               {
                 label: "Página", text: "Currículo",
                 children: [
-                  { label: "Pestaña", text: "OG<-RA<-CE", children: [
+                  { label: "Pestaña", text: "Relación RA <- CE", children: [
                     { label: "Número", text: "Asignar el % de cada RA y de cada CE." },
-                    { label: "Bloque", text: '"Contribución RA→OG" (plegable, al final de la misma pestaña) — matriz de contribución de cada RA a los Objetivos Generales del título.' },
+                  ] },
+                  { label: "Pestaña", text: "Contribución OG <- RA", children: [
+                    { label: "Bloque", text: "Matriz de contribución de cada RA a los Objetivos Generales del título." },
                   ] },
                   { label: "Pestaña", text: "Unidades didácticas", children: [
                     { label: "Botón", text: '"Añadir nueva UD". Crea los temas.' },
                     { label: "Tabla", text: "Haz clic en la intersección de la UD con el RA al que contribuye." },
-                    { label: "Bloque", text: "Secuenciación de UD (arrastra para reordenar sesiones) y tabla resumen de relaciones RA-UD para verificar de un vistazo qué UD cubre cada RA — todo dentro de esta misma pestaña." },
+                    { label: "Columnas", text: "A la derecha de los RA: \"Bloque de contenidos\" (texto libre para agrupar UD), y, de solo lectura, los objetivos generales (OG) y los instrumentos de evaluación de cada UD. Con ellas la tabla cubre la relación UD ↔ contenidos ↔ RA ↔ OG del Art. 100 del Decreto 91/2024; el PDF/DOCX de MagIA se descarga desde esta misma pestaña." },
                   ] },
-                  { label: "Pestaña", text: "Tareas competenciales", children: [
-                    { label: "Botón", text: '"Añadir nueva tarea competencial".' },
-                    { label: "Selector", text: "Instrumento (codificado) con el que se evalúa cada tarea." },
+                  { label: "Pestaña", text: "Secuenciación de UD", children: [
+                    { label: "Bloque", text: "Secuenciación de las sesiones de cada UD (arrastra para reordenar sesiones) y tabla resumen de relaciones RA-UD para verificar de un vistazo qué UD cubre cada RA." },
                   ] },
-                  { label: "Pestaña", text: "Contenidos → UD", children: [
-                    { label: "Acción", text: "Reparte los contenidos oficiales del currículo entre tus Unidades didácticas, para comprobar que ninguno se queda sin asignar." },
+                  { label: "Pestaña", text: "Proyectos y retos", children: [
+                    { label: "Bloque", text: '"Proyectos y retos" (opcional; art. 109 del Decreto 91/2024 si el módulo participa en un proyecto o reto): botón "Añadir proyecto o reto" y selector del instrumento (codificado) con el que se evalúa.' },
                   ] },
                 ],
               },
@@ -186,12 +188,13 @@ export const GUIA_PASOS: {
             label: "Bloque", text: "Programación",
             children: [
               {
-                label: "Página", text: "Metodología",
+                label: "Página", text: "Metodologías",
                 children: [
-                  { label: "Pestaña", text: "Metodología e inclusión", children: [{ label: "Selector", text: "Metodologías Activas (ABP, Retos, etc.) y medidas de atención a la diversidad, en la misma pestaña." }] },
-                  { label: "Pestaña", text: "Recursos", children: [{ label: "Selector", text: "Recursos y espacios necesarios (aula, taller, software...) y catálogo de instrumentos de evaluación." }] },
+                  { label: "Pestaña", text: "Metodología e innovación", children: [{ label: "Bloque", text: "Metodologías activas (ABP, retos, etc.) y coordinación docente, e innovación e intermodularidad." }] },
+                  { label: "Pestaña", text: "Instrumentos y recursos", children: [{ label: "Bloque", text: "Catálogo de instrumentos de evaluación y recursos y espacios necesarios (aula, taller, software...)." }] },
+                  { label: "Pestaña", text: "Atención a la diversidad", children: [{ label: "Bloque", text: "Marco de inclusión, atención a la diversidad, plan DUA y panel de alumnado ACNEAE (nombre, tipo de necesidad y adaptaciones de evaluación y acceso)." }] },
                   { label: "Pestaña", text: "Plan de contingencia", children: [{ label: "Texto", text: "Docencia telemática, tareas autoguiadas." }] },
-                  { label: "Pestaña", text: "Transversales", children: [{ label: "Texto", text: "Proyectos de innovación e interdisciplinariedad." }] },
+                  { label: "Pestaña", text: "Transversales", children: [{ label: "Texto", text: "Elementos transversales, competencias clave y digitales, y estándares y objetivos del currículo." }] },
                 ],
               },
             ],
@@ -206,7 +209,7 @@ export const GUIA_PASOS: {
             label: "Bloque", text: "Programación",
             children: [
               {
-                label: "Página", text: "Instrumento",
+                label: "Página", text: "Instrumentos",
                 children: [
                   { label: "Pestaña", text: "Resumen", children: [{ label: "Tabla", text: "Visión global de los instrumentos por trimestre (nº y % de peso)." }] },
                   { label: "Pestaña", text: "Trimestres", children: [
@@ -325,16 +328,16 @@ export const GUIA_PASOS: {
               {
                 label: "Página", text: "Alumnado",
                 children: [
-                  { label: "Pestaña", text: "Matrícula", children: [
-                    { label: "Botón", text: "Importar CSV o Añadir Alumnado a mano." },
-                  ] },
                   { label: "Pestaña", text: "Orientación", children: [
                     { label: "Acordeones", text: "Orientación profesional por alumno/a, en dos secciones: \"Motivación y experiencia\" e \"Intereses y aspiraciones\". Se rellena al empezar el curso." },
                   ] },
-                  { label: "Pestaña", text: "Perfil", children: [{ label: "Tablas", text: "Agregados y tendencias del perfil profesional del grupo (motivación, experiencia, aptitudes e intención al terminar) y tabla filtrable de todo el alumnado." }] },
+                  { label: "Pestaña", text: "Matrícula", children: [
+                    { label: "Botón", text: "Importar CSV o Añadir Alumnado a mano." },
+                  ] },
                   { label: "Pestaña", text: "Plano de aula", children: [
                     { label: "Acción", text: "Arrastrar al alumnado a sus mesas." },
                   ] },
+                  { label: "Pestaña", text: "Perfil", children: [{ label: "Tablas", text: "Agregados y tendencias del perfil profesional del grupo (motivación, experiencia, aptitudes e intención al terminar) y tabla filtrable de todo el alumnado." }] },
                 ],
               },
             ],
@@ -391,10 +394,10 @@ export const GUIA_PASOS: {
               {
                 label: "Página", text: "Sesiones",
                 children: [
-                  { label: "Pestaña", text: "Lectivas", children: [{ label: "Texto", text: "Redacta qué se ha hecho en la clase." }] },
                   { label: "Pestaña", text: "Asistencia", children: [
                     { label: "Acordeones", text: "Lista de alumnado a la izquierda (con el estado del día seleccionado, que se cambia con un clic) y, por alumno/a, \"Control de asistencia\" (marca Presente, Falta o Retraso día a día) y \"Acumulado trimestral\" (faltas por trimestre y semáforo de pérdida de evaluación continua)." },
                   ] },
+                  { label: "Pestaña", text: "Lectivas", children: [{ label: "Texto", text: "Redacta qué se ha hecho en la clase." }] },
                   { label: "Pestaña", text: "Abandono", children: [{ label: "Bloque", text: "Resumen de riesgo de abandono (Indicador 1.5 del Sistema Estatal), calculado solo a partir de la asistencia y las notas." }] },
                 ],
               },
@@ -413,16 +416,17 @@ export const GUIA_PASOS: {
               {
                 label: "Página", text: "Calificaciones",
                 children: [
-                  { label: "Pestaña", text: "Trimestral", children: [{ label: "Tablas", text: "Notas del grupo por instrumento y trimestre." }] },
                   { label: "Pestaña", text: "Académicas", children: [
-                    { label: "Acordeones", text: "Por alumno/a, en cinco secciones: \"Notas\" (teclea las notas y calcula al vuelo — es el único punto de entrada de calificaciones numéricas de la app), \"Boletín individual\" en pantalla con botón de impresión y \"Empresa FEOE\" (transcribe las valoraciones del tutor de empresa, 1-4, Anexo XI b, para los CE marcados FEOE en Currículo), \"Informe de evidencias\" (línea temporal de calificaciones, reclamaciones, asistencia y diario) e \"Inserción laboral\"." },
+                    { label: "Acordeones", text: "Por alumno/a, en dos secciones: \"Notas\" (teclea las notas y calcula al vuelo — es el único punto de entrada de calificaciones numéricas de la app) y \"Empresa FEOE\" (transcribe las valoraciones del tutor de empresa, 1-4, Anexo XI b, para los CE marcados FEOE en Currículo)." },
                   ] },
+                  { label: "Pestaña", text: "Trimestral", children: [{ label: "Tablas", text: "Notas del grupo por instrumento y trimestre." }] },
                   { label: "Pestaña", text: "Reclamaciones", children: [{ label: "Bloques", text: '"Cambios de nota" (registro de cada cambio, con fecha, agente y motivo) y "Reclamaciones" (registra y resuelve reclamaciones de nota, con generación de justificante).' }] },
                 ],
               },
               {
                 label: "Página", text: "Cierre (mayormente de solo lectura, resume lo anterior)",
                 children: [
+                  { label: "Pestaña", text: "Expediente", children: [{ label: "Acordeones", text: "Por alumno/a: \"Boletín individual de calificaciones\" (con botón de impresión), \"Informe de evidencias\" (línea temporal de calificaciones, reclamaciones, asistencia y diario) e \"Inserción laboral\"." }] },
                   { label: "Pestaña", text: "Mejora", children: [{ label: "Acción", text: "Indicadores de calidad EQAVET y propuestas de mejora del módulo, de cara a la memoria final de curso." }] },
                   { label: "Pestaña", text: "Avance de UD", children: [{ label: "Acción", text: "Planificación y seguimiento mensual de las unidades didácticas según lo impartido (UD × mes)." }] },
                   { label: "Pestaña", text: "Progreso RA-UD", children: [{ label: "Acción", text: "Una tarjeta por RA con la nota mínima, media y máxima del grupo, su avance, sus horas y el estado de sus UD: completada, en curso o pendiente; los RA sin docencia todavía aparecen atenuados." }] },

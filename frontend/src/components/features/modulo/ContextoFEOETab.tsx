@@ -21,7 +21,7 @@ export function ContextoFEOETab() {
         </h2>
         <div className="space-y-4">
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.a1JustificacionLabel', {defaultValue: 'A1. Justificación de la programación'})}</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.a1JustificacionLabel', {defaultValue: 'Justificación de la programación'})}</label>
             <p className="text-caption text-muted mb-2">{t('campos.modulo.a1JustificacionDesc', {defaultValue: 'Base legislativa que fundamenta esta programación.'})}</p>
             <textarea
               value={config_contexto["A1_justificacion"] || ""}
@@ -31,7 +31,7 @@ export function ContextoFEOETab() {
             />
           </div>
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.a2ContextualizacionLabel', {defaultValue: 'A2. Contextualización'})}</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.a2ContextualizacionLabel', {defaultValue: 'Contextualización'})}</label>
             <p className="text-caption text-muted mb-2">{t('campos.modulo.a2ContextualizacionDesc', {defaultValue: 'Análisis del contexto donde se imparte la formación.'})}</p>
             <textarea
               value={config_contexto["A2_contextualizacion"] || ""}
@@ -41,7 +41,7 @@ export function ContextoFEOETab() {
             />
           </div>
           <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.b3VinculacionEmpresaLabel', {defaultValue: 'B3. Vinculación con la empresa colaboradora'})}</label>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.b3VinculacionEmpresaLabel', {defaultValue: 'Vinculación con la empresa colaboradora'})}</label>
             <p className="text-caption text-muted mb-2">{t('campos.modulo.b3VinculacionEmpresaDesc', {defaultValue: 'Relación entre el módulo y la formación en la empresa.'})}</p>
             <textarea
               value={config_contexto["B3_vinculacion_empresa"] || ""}

@@ -13,7 +13,7 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
         <div className="flex text-muted border-b border-[var(--glass-border)] pb-2 mb-2 items-center">
           <div className="w-16">{t('tablas.calendario.id', {defaultValue: 'Id'})}</div>
           <div className="w-48 pr-2">{t('tablas.secuenciacion.raCeSlash', {defaultValue: 'RA/CE'})}</div>
-          <div className="flex-1 pr-2">{t('campos.secuenciacion.tareaLabel', {defaultValue: 'Tarea'})}</div>
+          <div className="flex-1 pr-2">{t('campos.secuenciacion.tareaLabel', {defaultValue: 'Proyecto o reto'})}</div>
           <div className="w-10"></div>
         </div>
         <div className="space-y-2">
@@ -44,14 +44,14 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
                     <button 
                       onClick={() => setEditingTask(tc)}
                       className="p-1.5 hover:bg-foreground/10 rounded-md text-muted hover:text-accent transition-colors"
-                      title={t('tooltips.secuenciacion.configurarTarea', {defaultValue: 'Configurar tarea competencial'})}
+                      title={t('tooltips.secuenciacion.configurarTarea', {defaultValue: 'Configurar proyecto o reto'})}
                     >
                       <Settings className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => handleDeleteTarea(globalIdx)}
                       className="p-1.5 text-danger/70 hover:bg-danger/10 hover:text-danger rounded-md font-bold transition-colors"
-                      title={t('tooltips.secuenciacion.eliminarTarea', {defaultValue: 'Eliminar tarea'})}
+                      title={t('tooltips.secuenciacion.eliminarTarea', {defaultValue: 'Eliminar proyecto o reto'})}
                     >
                       <X className="w-4 h-4" />
                     </button>
@@ -93,7 +93,7 @@ export function TaskTable({ df_tareas, handleUpdateTarea, handleAddTarea, handle
           onClick={handleAddTarea}
           className="text-body text-info hover:text-info font-semibold flex items-center gap-1"
         >
-          <Plus className="w-4 h-4" /> {t('botones.secuenciacion.anadirNuevaTareaCompetencial', {defaultValue: 'Añadir nueva tarea competencial'})}
+          <Plus className="w-4 h-4" /> {t('botones.secuenciacion.anadirNuevaTareaCompetencial', {defaultValue: 'Añadir proyecto o reto'})}
         </button>
       </div>
       {editingTask && (

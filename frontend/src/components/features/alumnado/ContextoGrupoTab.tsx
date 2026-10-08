@@ -43,7 +43,7 @@ function StatCard({ label, value, sub }: { label: string; value: string | number
 // edad media, repetidores y franjas de edad). Se muestra dentro de
 // Contexto -> Alumnado (ACNEAE), junto a los datos que se escriben a mano.
 export function DatosGrupoAutomaticos() {
-  const { cursoData } = useAppStore();
+  const { cursoData, moduleData } = useAppStore();
   const { t } = useTranslation();
   const df_al = cursoData?.df_al || [];
   const total = df_al.length;
@@ -53,17 +53,20 @@ export function DatosGrupoAutomaticos() {
     ? (conEdad.reduce((sum: number, a: any) => sum + a.Edad, 0) / conEdad.length).toFixed(1)
     : "-";
   const repetidores = df_al.filter((a: any) => a.Repite === true).length;
+  // ACNEAE: el número de alumnos registrados en Metodología -> Atención a la diversidad.
+  const nAcneae = (moduleData?.config_contexto?.acneae || []).length;
   return (
     <div>
       {total === 0 ? (
             <p className="text-body text-muted">{t('campos.alumnado.sinAlumnadoRegistrado', {defaultValue: 'Todavía no hay alumnado registrado en este curso.'})}</p>
           ) : (
             <div className="space-y-4">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                 <StatCard label={t('campos.alumnado.statTotal', {defaultValue: 'Alumnado total'})} value={total} />
                 <StatCard label={t('campos.alumnado.statMenoresEdad', {defaultValue: 'Menores de edad'})} value={menores} sub={`${Math.round((menores / total) * 100)}%`} />
                 <StatCard label={t('campos.alumnado.statEdadMedia', {defaultValue: 'Edad media'})} value={edadMedia} />
                 <StatCard label={t('campos.alumnado.statRepetidores', {defaultValue: 'Repetidores'})} value={repetidores} sub={`${Math.round((repetidores / total) * 100)}%`} />
+                <StatCard label={t('campos.contexto.acneae', {defaultValue: 'ACNEAE'})} value={nAcneae} sub={t('campos.contexto.acneaeSegunPanel', {defaultValue: 'Según el panel de Metodología'})} />
               </div>
               <div>
                 <p className="text-caption font-semibold text-muted mb-1.5">{t('campos.alumnado.franjasEdadTitulo', {defaultValue: 'Franjas de edad'})}</p>

@@ -78,8 +78,8 @@ export default function SeguimientoPage() {
   const { activeModuleId, moduleData, setModuleData, activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, dataSource } = useAppStore();
   const { t } = useTranslation();
   const TABS = [
-    { id: "lectivas", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.clases.label', {defaultValue: 'Lectivas'})}</span>, cleanLabel: t('tabs.seguimiento.clases.label', {defaultValue: 'Lectivas'}) },
     { id: "asistencia", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.asistencia.label', {defaultValue: 'Asistencia'})}</span>, cleanLabel: t('tabs.seguimiento.asistencia.label', {defaultValue: 'Asistencia'}) },
+    { id: "lectivas", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.clases.label', {defaultValue: 'Lectivas'})}</span>, cleanLabel: t('tabs.seguimiento.clases.label', {defaultValue: 'Lectivas'}) },
     { id: "abandono", label: <span className="flex items-center gap-2"><AlertTriangle className="w-4 h-4 shrink-0" /> {t('tabs.seguimiento.abandono.label', {defaultValue: 'Abandono'})}</span>, cleanLabel: t('tabs.seguimiento.abandono.label', {defaultValue: 'Abandono'}) },
   ];
   const TAB_DESCRIPTIONS: Record<string, string> = {
@@ -90,7 +90,7 @@ export default function SeguimientoPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
-  const [activeTab, setActiveTab] = useState("lectivas");
+  const [activeTab, setActiveTab] = useState("asistencia");
   const [allDiarioOpen, setAllDiarioOpen] = useState(false);
   // Calculado solo en cliente (useEffect, no en el cuerpo del render) para no
   // desincronizar el HTML servido por SSR del primer render en cliente — "hoy"

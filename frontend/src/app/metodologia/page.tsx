@@ -1,7 +1,7 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import { Target, CheckCircle2, Layers, FolderOpen, Lightbulb, Settings, Shield } from "lucide-react";
+import { Target, Wrench, Users, Layers, FolderOpen, Lightbulb, Settings, Shield } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Sidebar from "@/components/layout/Sidebar";
@@ -25,7 +25,7 @@ export default function MetodologiaConfigPage() {
   const { t } = useTranslation();
   const { activeModuleId, moduleData, setModuleData } = useAppStore();
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("metodologia");
+  const [activeTab, setActiveTab] = useState("metodologias");
 
   useEffect(() => {
     fetch(`${getApiBase()}/api/module/${activeModuleId}`)
@@ -52,8 +52,9 @@ export default function MetodologiaConfigPage() {
   }, [activeModuleId, setModuleData]);
 
   const TABS = [
-    { id: "metodologia", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.metodologia.label', {defaultValue: 'Metodología e inclusión'})}</span>, cleanLabel: t('tabs.metodologia.metodologia.label', {defaultValue: 'Metodología e inclusión'}) },
-    { id: "recursos", label: <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.recursos.label', {defaultValue: 'Recursos'})}</span>, cleanLabel: t('tabs.metodologia.recursos.label', {defaultValue: 'Recursos'}) },
+    { id: "metodologias", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.metodologia.label', {defaultValue: 'Metodología e innovación'})}</span>, cleanLabel: t('tabs.metodologia.metodologia.label', {defaultValue: 'Metodología e innovación'}) },
+    { id: "instrumentos-recursos", label: <span className="flex items-center gap-2"><Wrench className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.instrumentosRecursos.label', {defaultValue: 'Instrumentos y recursos'})}</span>, cleanLabel: t('tabs.metodologia.instrumentosRecursos.label', {defaultValue: 'Instrumentos y recursos'}) },
+    { id: "diversidad", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.diversidad.label', {defaultValue: 'Atención a la diversidad'})}</span>, cleanLabel: t('tabs.metodologia.diversidad.label', {defaultValue: 'Atención a la diversidad'}) },
     { id: "contingencia", label: <span className="flex items-center gap-2"><Shield className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.contingencia.label', {defaultValue: 'Plan de contingencia'})}</span>, cleanLabel: t('tabs.metodologia.contingencia.label', {defaultValue: 'Plan de contingencia'}) },
     { id: "transversales", label: <span className="flex items-center gap-2"><Layers className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.transversales.label', {defaultValue: 'Transversales'})}</span>, cleanLabel: t('tabs.metodologia.transversales.label', {defaultValue: 'Transversales'}) },
   ];
@@ -61,18 +62,22 @@ export default function MetodologiaConfigPage() {
   const activeTabCleanLabel = TABS.find(tab => tab.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    metodologia: t('tabs.metodologia.metodologia.desc', {defaultValue: 'Estrategias metodológicas, coordinación docente, atención a la diversidad (DUA) y panel de alumnado ACNEAE.'}),
-    recursos: t('tabs.metodologia.recursos.desc', {defaultValue: 'Instrumentos de evaluación seleccionados y recursos y espacios necesarios.'}),
+    metodologias: t('tabs.metodologia.metodologia.desc', {defaultValue: 'Estrategias metodológicas y coordinación docente, e innovación e intermodularidad.'}),
+    'instrumentos-recursos': t('tabs.metodologia.instrumentosRecursos.desc', {defaultValue: 'Instrumentos de evaluación seleccionados y recursos y espacios necesarios.'}),
+    diversidad: t('tabs.metodologia.diversidad.desc', {defaultValue: 'Marco de inclusión, atención a la diversidad, plan DUA y panel de alumnado ACNEAE.'}),
     contingencia: t('tabs.metodologia.contingencia.desc', {defaultValue: 'Planes de contingencia y adaptación ante situaciones excepcionales.'}),
-    transversales: t('tabs.metodologia.transversales.desc', {defaultValue: 'Elementos transversales, competencias clave, competencias digitales, estándares y objetivos del currículo, innovación e intermodularidad, y actividades complementarias y extraescolares.'}),
+    transversales: t('tabs.metodologia.transversales.desc', {defaultValue: 'Elementos transversales, competencias clave, competencias digitales y estándares y objetivos del currículo.'}),
   };
 
   // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
-    metodologia: [
+    metodologias: [
       { id: "metodologia-metodologia", label: t('campos.modulo.metodologiaTitulo', {defaultValue: 'Metodología'}) },
+      { id: "metodologia-innovacion", label: t('campos.modulo.tituloInnovacionIntermodularidad', {defaultValue: 'Innovación e Intermodularidad'}) },
+    ],
+    diversidad: [
       { id: "metodologia-marco-inclusion", label: t('campos.modulo.marcoInclusionTitulo', {defaultValue: 'Marco de Inclusión (D 91/2024 Art. 29)'}) },
-      { id: "metodologia-f1-diversidad", label: t('campos.modulo.f1AtencionDiversidadTitulo', {defaultValue: 'F1. Atención a la diversidad'}) },
+      { id: "metodologia-f1-diversidad", label: t('campos.modulo.f1AtencionDiversidadTitulo', {defaultValue: 'Atención a la diversidad'}) },
       { id: "metodologia-plan-dua", label: t('campos.modulo.planDuaTitulo', {defaultValue: 'Plan de Atención a la Diversidad (DUA)'}) },
       { id: "metodologia-acneae", label: t('campos.modulo.panelAcneaeTitulo', {defaultValue: 'Panel de ACNEAE'}) },
     ],
@@ -85,7 +90,6 @@ export default function MetodologiaConfigPage() {
       { id: "metodologia-transversales", label: t('campos.modulo.transversalesCompetenciasTitulo', {defaultValue: 'Transversales y Competencias'}) },
       { id: "metodologia-digcomp", label: t('campos.modulo.competenciasDigitalesTitulo', {defaultValue: 'Competencias digitales (DigComp / DigCompEdu)'}) },
       { id: "metodologia-estandares", label: t('campos.modulo.estandaresObjetivosTitulo', {defaultValue: 'Estándares y Objetivos (Currículo)'}) },
-      { id: "metodologia-innovacion", label: t('campos.modulo.tituloInnovacionIntermodularidad', {defaultValue: 'Innovación e Intermodularidad'}) },
     ],
   };
 
@@ -141,7 +145,7 @@ export default function MetodologiaConfigPage() {
         <main id="main-content" tabIndex={-1} className="flex-1 content-area overflow-y-auto scrollbar-hide">
           <StickyPageHeader
             icon={Lightbulb}
-            title={t('nav.metodologia', { defaultValue: 'Metodología' })}
+            title={t('nav.metodologia', { defaultValue: 'Metodologías' })}
             description={t('pages.metodologia_desc', { defaultValue: 'Estrategias metodológicas, recursos, espacios y atención a la diversidad.' })}
           >
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -170,10 +174,11 @@ export default function MetodologiaConfigPage() {
           <MotionWrapper className="px-8 pt-4 pb-12">
 
             <div className="space-y-6">
-              {activeTab === 'metodologia' && <><MetodologiaTab /><DiversidadTab /></>}
-              {activeTab === 'recursos' && <EvaluacionRecursosTab />}
+              {activeTab === 'metodologias' && <><MetodologiaTab /><InnovacionTab /></>}
+              {activeTab === 'instrumentos-recursos' && <EvaluacionRecursosTab />}
+              {activeTab === 'diversidad' && <DiversidadTab />}
               {activeTab === 'contingencia' && <ContingenciaTab />}
-              {activeTab === 'transversales' && <><OtrosElementosTab /><InnovacionTab /></>}
+              {activeTab === 'transversales' && <OtrosElementosTab />}
             </div>
 
           </MotionWrapper>

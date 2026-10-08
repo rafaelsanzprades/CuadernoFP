@@ -47,7 +47,7 @@ function computeMilestoneDates(nacimiento?: string): { f16: string; f18: string 
 
 export default function AlumnadoPage() {
   const { activeCursoId, cursoData, setCursoData, updateCursoData, saveCursoData, moduleData, activeModuleId, setModuleData } = useAppStore();
-  const [activeTab, setActiveTab] = useState("matricula");
+  const [activeTab, setActiveTab] = useState("orientacion");
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -56,16 +56,16 @@ export default function AlumnadoPage() {
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const TABS = [
+    { id: "orientacion", label: <><span className="inline-flex"><Compass className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.orientacion.label', {defaultValue: 'Orientación'})}</>, cleanLabel: t('tabs.alumnado.orientacion.label', {defaultValue: 'Orientación'}) },
     { id: "matricula", label: <><span className="inline-flex"><Users className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.matricula.label', {defaultValue: 'Matrícula'})}</>, cleanLabel: t('tabs.alumnado.matricula.label', {defaultValue: 'Matrícula'}) },
+    { id: "plano", label: <><span className="inline-flex"><LayoutGrid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.agenda.planoAula.label', {defaultValue: 'Plano de aula'})}</>, cleanLabel: t('tabs.agenda.planoAula.label', {defaultValue: 'Plano de aula'}) },
     // Antes sub-vistas de una sola pestaña "Perfil profesional" (switcher
     // interno) -- sacadas a pestañas principales el 2026-09-20 a petición de
     // Rafael ("luego veremos qué hacemos con ellas"). La sub-vista "Resumen"
     // se plegó de nuevo, ese mismo día, dentro de Tendencias (segundo bloque,
     // debajo de los agregados) al comprobar que duplicaba en peor una tabla
     // que ya vivía ahí.
-    { id: "orientacion", label: <><span className="inline-flex"><Compass className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.orientacion.label', {defaultValue: 'Orientación'})}</>, cleanLabel: t('tabs.alumnado.orientacion.label', {defaultValue: 'Orientación'}) },
     { id: "perfil", label: <><span className="inline-flex"><LineChart className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.alumnado.perfilTendencias.label', {defaultValue: 'Perfil'})}</>, cleanLabel: t('tabs.alumnado.perfilTendencias.label', {defaultValue: 'Perfil'}) },
-    { id: "plano", label: <><span className="inline-flex"><LayoutGrid className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.agenda.planoAula.label', {defaultValue: 'Plano de aula'})}</>, cleanLabel: t('tabs.agenda.planoAula.label', {defaultValue: 'Plano de aula'}) },
   ];
 
   const activeTabCleanLabel = TABS.find(t_tab => t_tab.id === activeTab)?.cleanLabel;

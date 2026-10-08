@@ -236,7 +236,7 @@ function IaButton({ onClick, loading, disabled }: IaButtonProps) {
   );
 }
 
-export function ContextoTab() {
+export function ContextoTab({ bloques }: { bloques?: string[] } = {}) {
   const { t } = useTranslation();
   const { moduleData, updateModuleData, cursoData, activeModuleId } = useAppStore();
   const [generandoIA, setGenerandoIA] = useState<Record<string, boolean>>({});
@@ -343,9 +343,12 @@ export function ContextoTab() {
       ? { grupo: "Vía de acceso predominante", id: "AL-VIA-BACHILLERATO", label: "Bachillerato", motivo: nivelModulo }
       : undefined;
 
+  const show = (id: string) => !bloques || bloques.includes(id);
+
   return (
     <>
       <div className="space-y-6 animate-in fade-in duration-500">
+      {show("contexto-escolar") && (
       <div className="space-y-3">
       <SectionHeading id="contexto-escolar" icon={School} scrollMt="260px">
         {t('campos.contexto.tituloContextoEscolar', {defaultValue: 'Contexto escolar'})}
@@ -461,16 +464,18 @@ export function ContextoTab() {
         </div>
       </div>
       </div>
+      )}
 
       {/* Actividades complementarias y extraescolares -- traídas de Calendario
           (2026-10-03, petición de Rafael), tras Contexto escolar. */}
-      <ActividadesComplementariasTab />
+      {show("contexto-actividades") && <ActividadesComplementariasTab />}
 
       {/* Plan FEOE -- traído aquí desde su propia pestaña "Plan FEOE"
           (eliminada, petición de Rafael, 2026-09-30), como bloque previo a
           Alumnado (ACNEAE). */}
-      <PlanesTab />
+      {show("planes-feoe") && <PlanesTab />}
 
+      {show("contexto-alumnado-acneae") && (
       <div className="space-y-3">
       <SectionHeading id="contexto-alumnado-acneae" icon={User} scrollMt="260px">
         {t('campos.contexto.tituloAlumnadoAcneae', {defaultValue: 'Alumnado (ACNEAE)'})}
@@ -482,7 +487,7 @@ export function ContextoTab() {
             <p className="text-caption text-muted mb-3">{t('campos.alumnado.datosGrupoDesc', {defaultValue: 'Los datos de arriba se calculan solos a partir del alumnado de Matrícula; los de abajo se escriben a mano.'})}</p>
             <DatosGrupoAutomaticos />
             <div className="h-4" />
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               <div>
                 <label className="text-caption text-muted mb-1 block">{t('campos.contexto.ratioHombres', {defaultValue: 'Ratio — Hombres'})}</label>
                 <input
@@ -510,15 +515,6 @@ export function ContextoTab() {
                   className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-2 text-foreground focus:border-info focus:outline-none"
                 />
               </div>
-              <div>
-                <label className="text-caption text-muted mb-1 block">{t('campos.contexto.acneae', {defaultValue: 'ACNEAE'})}</label>
-                <input
-                  type="number" min="0"
-                  value={config_contexto.num_acneae ?? ""}
-                  onChange={e => handleContextoChange("num_acneae", e.target.value)}
-                  className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-2 text-foreground focus:border-info focus:outline-none"
-                />
-              </div>
             </div>
           </div>
           <div>
@@ -540,11 +536,13 @@ export function ContextoTab() {
         </div>
       </div>
       </div>
+      )}
 
       {/* Rasgos y datos del grupo -- traídos de Alumnado (pestaña Rasgos,
           eliminada el 2026-10-06), debajo de Alumnado (ACNEAE). */}
-      <ContextoGrupoTab />
+      {show("alumnado-rasgos-grupo") && <ContextoGrupoTab />}
 
+      {show("contexto-modelo-simplificado") && (
       <div className="space-y-3">
       <SectionHeading id="contexto-modelo-simplificado" icon={BookOpen} scrollMt="260px">
         {t('campos.contexto.tituloModeloSimplificado', {defaultValue: 'Textos del modelo Simplificado (pd=)'})}
@@ -575,7 +573,9 @@ export function ContextoTab() {
         </div>
       </div>
       </div>
+      )}
 
+      {show("contexto-autoria-publicidad") && (
       <div className="space-y-3">
       <SectionHeading id="contexto-autoria-publicidad" icon={FileText} scrollMt="260px">
         {t('campos.contexto.tituloAutoriaPublicidad', {defaultValue: 'Datos de autoría y publicidad'})}
@@ -595,6 +595,7 @@ export function ContextoTab() {
         </div>
       </div>
       </div>
+      )}
     </div>
     </>
   );

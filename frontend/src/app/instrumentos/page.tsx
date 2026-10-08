@@ -465,7 +465,7 @@ export default function InstrumentosPage() {
         <main className="flex-1 content-area overflow-y-auto scrollbar-hide">
           <StickyPageHeader
             icon={Wrench}
-            title={t('nav.instrumentos', {defaultValue: 'Instrumento'})}
+            title={t('nav.instrumentos', {defaultValue: 'Instrumentos'})}
             description={t('pages.instrumentos_desc')}
           >
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">

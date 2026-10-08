@@ -34,7 +34,7 @@ const DEFAULT_ESCALAS_EVALUACION = [
   { id: "eev_sb", nombre: "Sobresaliente (SB)", coeficiente: 9.5 },
 ];
 
-export function DatosTab() {
+export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
   const { t } = useTranslation();
   const {
     moduleData,
@@ -207,11 +207,14 @@ export function DatosTab() {
     updateModuleData("instrumentos_pct_trimestre", instrumentosPct.filter(r => r.id !== id));
   };
 
+  const show = (id: string) => !bloques || bloques.includes(id);
+
   return (
     <>
       <div className="space-y-8 animate-in fade-in duration-500">
       
       {/* 1. Centro y docente */}
+      {show("datos-centro-docente") && (
       <div className="space-y-3">
       <SectionHeading id="datos-centro-docente" icon={School} scrollMt="260px">
         {t('campos.modulo.tituloCentroDocente', {defaultValue: 'Centro y docente'})}
@@ -259,8 +262,10 @@ export function DatosTab() {
         </div>
       </Card>
       </div>
+      )}
 
       {/* 2. Módulo didáctico */}
+      {show("datos-modulo-didactico") && (
       <div className="space-y-3">
       <SectionHeading id="datos-modulo-didactico" icon={FileEdit} scrollMt="260px">
         {t('campos.modulo.tituloModuloDidactico', {defaultValue: 'Módulo didáctico'})}
@@ -388,8 +393,10 @@ export function DatosTab() {
         </div>
       </Card>
       </div>
+      )}
 
       {/* Reglas de redondeo y compensación */}
+      {show("datos-reglas-redondeo") && (
       <div className="space-y-3">
       <SectionHeading id="datos-reglas-redondeo" icon={Settings} scrollMt="260px">
         {t('campos.modulo.tituloReglasRedondeo', {defaultValue: 'Reglas de redondeo y compensación'})}
@@ -449,8 +456,10 @@ export function DatosTab() {
         })()}
       </Card>
       </div>
+      )}
 
       {/* 5. Evaluación */}
+      {show("datos-instrumentos-evaluacion") && (
       <div className="space-y-3">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <SectionHeading id="datos-instrumentos-evaluacion" icon={Receipt} scrollMt="260px" className="flex-1">
@@ -566,8 +575,10 @@ export function DatosTab() {
         </div>
       </Card>
       </div>
+      )}
 
       {/* 7. Escalas de evaluación cualitativas (EEv) */}
+      {show("datos-escalas-evaluacion") && (
       <div className="space-y-3">
       <SectionHeading id="datos-escalas-evaluacion" icon={ListChecks} scrollMt="260px">
         {t('campos.modulo.tituloEscalasEvaluacion', {defaultValue: 'Escalas de evaluación cualitativas'})}
@@ -645,6 +656,7 @@ export function DatosTab() {
         })()}
       </Card>
       </div>
+      )}
 
     </div>
     </>

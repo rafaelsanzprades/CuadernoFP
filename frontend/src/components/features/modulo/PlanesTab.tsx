@@ -112,7 +112,7 @@ export function PlanesTab() {
               <p className="text-body text-foreground/80">
                 {t('campos.modulo.moduloNoDualizadoDesc', {defaultValue: 'Este módulo no está dualizado todavía: no hay ningún CE marcado como FEOE.'})}
               </p>
-              <Link href="/curriculo?tab=ponderacion-ra-ce" className="text-caption text-info hover:underline shrink-0">
+              <Link href="/curriculo?tab=relacion-ra-ce" className="text-caption text-info hover:underline shrink-0">
                 {t('botones.modulo.marcarCeComoFeoe', {defaultValue: 'Marcar CE como FEOE en Currículo'})}
               </Link>
             </div>

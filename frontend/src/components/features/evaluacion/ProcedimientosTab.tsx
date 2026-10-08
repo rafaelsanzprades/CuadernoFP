@@ -15,7 +15,7 @@ const MODELO_RECUPERACION = [
   { id: "EvFE", label: "EvFE — Evaluación final extraordinaria (segunda convocatoria)" },
 ];
 
-export function ProcedimientosTab() {
+export function ProcedimientosTab({ bloques }: { bloques?: string[] } = {}) {
   const { t } = useTranslation();
   const { moduleData, updateModuleData } = useAppStore();
   const config_contexto = moduleData?.config_contexto || {};
@@ -33,19 +33,12 @@ export function ProcedimientosTab() {
     handleChange("modelo_recuperacion", updated);
   };
 
+  const show = (id: string) => !bloques || bloques.includes(id);
+
   return (
     <MotionWrapper>
       <div className="space-y-6">
-        <div className="mb-6 flex items-center gap-3">
-          <div className="p-2 bg-primary/10 rounded-lg text-primary">
-            <Scale className="w-5 h-5" />
-          </div>
-          <div>
-            <h2 className="text-subheading font-bold text-[var(--text-primary)]">{t('campos.evaluacion.tituloProcedimientosNormativos', {defaultValue: 'Procedimientos normativos'})}</h2>
-            <p className="text-body text-muted-foreground">{t('campos.evaluacion.procedimientosNormativosDesc', {defaultValue: 'Configura los aspectos normativos y burocráticos de la evaluación para la Programación Didáctica.'})}</p>
-          </div>
-        </div>
-
+        {show("procedimientos-modelo-recuperacion") && (
         <div className="space-y-3">
         <SectionHeading id="procedimientos-modelo-recuperacion" scrollMt="260px">
           {t('campos.evaluacion.tituloModeloRecuperacion', {defaultValue: 'Modelo de recuperación'})}
@@ -78,7 +71,9 @@ export function ProcedimientosTab() {
           />
         </div>
         </div>
+        )}
 
+        {show("procedimientos-informacion") && (
         <div className="space-y-3">
         <SectionHeading id="procedimientos-informacion" icon={MessageCircle} scrollMt="260px">
           {t('campos.evaluacion.tituloInformacionProcedimientos', {defaultValue: 'Información y procedimientos'})}
@@ -108,7 +103,9 @@ export function ProcedimientosTab() {
           </div>
         </div>
         </div>
+        )}
 
+        {show("procedimientos-criterios-calificacion") && (
         <div className="space-y-3">
         <SectionHeading id="procedimientos-criterios-calificacion" scrollMt="260px">
           {t('campos.evaluacion.tituloCriteriosCalificacionSimplificado', {defaultValue: 'Criterios de calificación (texto específico modelo Simplificado, pd=)'})}
@@ -123,10 +120,12 @@ export function ProcedimientosTab() {
           />
         </div>
         </div>
+        )}
 
+        {show("procedimientos-evaluacion-inicial") && (
         <div className="space-y-3">
         <SectionHeading id="procedimientos-evaluacion-inicial" scrollMt="260px">
-          {t('campos.evaluacion.tituloEvaluacionInicial', {defaultValue: 'Evaluación inicial (apartado E, modelo Simplificado, pd=)'})}
+          {t('campos.evaluacion.tituloEvaluacionInicial', {defaultValue: 'Evaluación inicial'})}
         </SectionHeading>
         <div className="glass-card p-6 border-t-4 border-t-cyan-500">
           <p className="text-caption text-muted mb-3">{t('campos.evaluacion.evaluacionInicialDesc', {defaultValue: 'Instrumento diagnóstico, contenidos evaluados y consecuencias de sus resultados en la programación. Si se deja vacío, se genera un texto genérico.'})}</p>
@@ -138,6 +137,7 @@ export function ProcedimientosTab() {
           />
         </div>
         </div>
+        )}
       </div>
     </MotionWrapper>
   );
