@@ -54,3 +54,6 @@ firebase-debug.log
 pdf_debug.log
 retry_deploy.js
 test_dockerfile
+
+# Configuración local de Claude Code (lanzador de vista previa, tareas programadas)
+.claude/

@@ -98,13 +98,9 @@ Planes de adaptación ante situaciones excepcionales — mapea a §N · Plan de 
 
 ## 📋 Programación: Currículo
 
-> **Actualizado 2026-09-20:** "Contribución RA en OG" dejó de ser una pestaña propia — se fusionó como
-> bloque plegable (colapsado por defecto) al final de "Ponderación RA<-CE", que a la vez se renombró a
-> "OG<-RA<-CE" para reflejar que ahora vive ahí. Currículo pasó así de 5 a 4 pestañas.
+### Pestañas: Relación RA <- CE y Contribución OG <- RA
 
-### Pestaña: OG<-RA<-CE
-
-Incluye, al final (bloque plegable "Contribución RA→OG"), la matriz de contribución de cada RA a los
+"Contribución OG <- RA" (pestaña propia de Currículo) contiene la matriz de contribución de cada RA a los
 Objetivos Generales (OG) del título — no tiene apartado propio en PD-/PD=/PD+, se usa como herramienta
 interna de coherencia curricular.
 
@@ -288,7 +284,7 @@ Entrada de calificaciones numéricas por alumnado y tarea — es el único punto
 ### Pestaña: Empresa FEOE
 
 Transcripción de la valoración del tutor de empresa (escala 1-4, Anexo XI b) para los CE marcados FEOE
-en Currículo → OG<-RA<-CE — sin apartado propio en PD-/PD=/PD+; la nota entra en el motor JEG como un
+en Currículo › Relación RA <- CE — sin apartado propio en PD-/PD=/PD+; la nota entra en el motor JEG como un
 instrumento más.
 
 ---

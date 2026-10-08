@@ -56,7 +56,7 @@ export function FeoeEmpresaAlumno({ studentId }: { studentId: string }) {
   const df_instr = moduleData?.df_instr || [];
 
   // La designación de qué CE evalúa el tutor de empresa es la misma que
-  // is_dual (FEOE) en Currículo->OG<-RA<-CE -- antes había aquí un checkbox
+  // is_dual (FEOE) en Currículo › Relación RA <- CE -- antes había aquí un checkbox
   // propio (campo "feoe") que duplicaba esa selección sin enterarse de ella;
   // se unificaron el 2026-09-20 a petición de Rafael.
   const ceDesignados = df_ce.filter((ce: any) => ce.is_dual === true);
@@ -159,7 +159,7 @@ export function FeoeEmpresaAlumno({ studentId }: { studentId: string }) {
   if (ceDesignados.length === 0) {
     return (
         <Card className="p-8 text-center border-l-4 border-l-amber-500">
-          <p className="text-foreground/80">{t('campos.feoe.marcaAlMenosUnCe', {defaultValue: 'Este módulo no está dualizado: marca al menos un CE como FEOE en Currículo -> OG<-RA<-CE para empezar a registrar valoraciones de empresa.'})}</p>
+          <p className="text-foreground/80">{t('campos.feoe.marcaAlMenosUnCe', {defaultValue: 'Este módulo no está dualizado: marca al menos un CE como FEOE en Currículo › Relación RA <- CE para empezar a registrar valoraciones de empresa.'})}</p>
           <div className="flex items-center justify-center gap-3 mt-4">
             <Link href="/curriculo?tab=relacion-ra-ce">
               <Button variant="secondary" className="gap-2">

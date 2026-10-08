@@ -132,7 +132,7 @@ export default function MatricesPage() {
 
   const df_ra = moduleData?.df_ra || [];
   const df_ud = moduleData?.df_ud || [];
-  // OG de cada UD (los de los RA marcados en su fila, vía la matriz OG<-RA) e
+  // OG de cada UD (los de los RA marcados en su fila, vía la matriz OG <- RA) e
   // instrumentos que la evalúan -- columnas de solo lectura de la tabla de UD
   // (antes pestaña "Contenidos -> UD", integrada el 2026-10-08).
   const df_act_ud = moduleData?.df_act || [];
@@ -974,6 +974,32 @@ export default function MatricesPage() {
                   )}
                 </Card>
                 </div>
+
+                <details className="glass-card p-4 group">
+                  <summary className="cursor-pointer text-body font-semibold flex items-center gap-2">
+                    {t('campos.curriculo.contenidosPorUdTitulo', {defaultValue: 'Contenidos por UD (según la secuenciación)'})}
+                  </summary>
+                  <div className="mt-3 space-y-3">
+                    {df_ud.map((ud: any) => {
+                      const conts = df_sesiones
+                        .filter((ses: any) => ses.id_ud === ud.id_ud && (ses.Contenidos || "").trim())
+                        .map((ses: any) => String(ses.Contenidos).trim());
+                      const unicos = Array.from(new Set(conts));
+                      return (
+                        <div key={ud.id_ud}>
+                          <p className="text-body font-semibold"><span className="text-accent">{ud.id_ud}</span> {ud.desc_ud}</p>
+                          {unicos.length > 0 ? (
+                            <ul className="list-disc pl-6 text-body text-muted">
+                              {unicos.map((c, i) => <li key={i}>{c}</li>)}
+                            </ul>
+                          ) : (
+                            <p className="text-caption text-muted pl-1">{t('campos.curriculo.contenidosPorUdVacio', {defaultValue: 'Sin contenidos escritos en la secuenciación.'})}</p>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </details>
 
               </div>
             )}

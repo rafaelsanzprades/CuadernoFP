@@ -203,7 +203,7 @@ def _build_context(data: dict) -> dict:
         "textos_pd_procedimientos_normativos": data.get("textos_pd_procedimientos_normativos", ""),
         # La plantilla solo tiene un placeholder para todo "Plan de contingencia" -> combina profesorado +
         # alumnado + interrupción generalizada desde config_contexto (ContingenciaTab,
-        # /metodologia?tab=contingencia), mismo motivo que arriba.
+        # /metodologias?tab=contingencia), mismo motivo que arriba.
         "textos_pd_plan_contingencia": "\n\n".join(filter(None, [
             config.get("contingencia_profesor", ""),
             config.get("contingencia_alumnado", ""),

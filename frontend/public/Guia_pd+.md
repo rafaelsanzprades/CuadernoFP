@@ -38,13 +38,13 @@ A continuación, se detalla el índice oficial de la Programación Didáctica se
 - **Dónde:** `Programación` › `Catálogo` → Pestaña `Títulos` (Artículo 5 del currículo oficial)
 
 ### 2.4 Objetivos generales (OG)
-- **Dónde:** `Programación` › `Currículo` → Pestaña `OG<-RA<-CE` (bloque "Contribución RA→OG", plegable al final de la misma pestaña)
+- **Dónde:** `Programación` › `Currículo` → Pestaña `Contribución OG <- RA`
 
 ### 2.5 Resultados de aprendizaje (RA) y criterios de evaluación (CE)
-- **Dónde:** `Programación` › `Currículo` → Pestaña `OG<-RA<-CE`
+- **Dónde:** `Programación` › `Currículo` → Pestaña `Relación RA <- CE`
 
 ### 2.6 Contenidos (C)
-- **Dónde:** `Programación` › `Currículo` → Pestaña `OG<-RA<-CE` (integrado con cada RA)
+- **Dónde:** `Programación` › `Currículo` → Pestaña `Relación RA <- CE` (integrado con cada RA)
 
 ### 2.7 Relación entre los elementos curriculares
 - **Dónde:** `Programación` › `Currículo` → Pestaña `Unidades didácticas` (matriz e informe de relación RA-UD, integrados en la misma pestaña)
@@ -100,7 +100,7 @@ A continuación, se detalla el índice oficial de la Programación Didáctica se
 - **Dónde:** `Programación` › `Contexto` → Pestaña `Plan FEOE`
 
 ### 4.7 Criterios de calificación y ponderación
-- **Dónde:** `Programación` › `Currículo` → Pestaña `OG<-RA<-CE` / `Curso` › `Seguimiento` → Pestaña `Notas`
+- **Dónde:** `Programación` › `Currículo` → Pestaña `Relación RA <- CE` / `Curso` › `Seguimiento` → Pestaña `Notas`
 
 ### 4.8 Plan de recuperación de módulos pendientes
 - **Dónde:** `Programación` › `Contexto` → Pestaña `Evaluación y calificación`

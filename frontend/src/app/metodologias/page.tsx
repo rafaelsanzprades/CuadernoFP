@@ -145,7 +145,7 @@ export default function MetodologiaConfigPage() {
         <main id="main-content" tabIndex={-1} className="flex-1 content-area overflow-y-auto scrollbar-hide">
           <StickyPageHeader
             icon={Lightbulb}
-            title={t('nav.metodologia', { defaultValue: 'Metodologías' })}
+            title={t('nav.metodologias', { defaultValue: 'Metodologías' })}
             description={t('pages.metodologia_desc', { defaultValue: 'Estrategias metodológicas, recursos, espacios y atención a la diversidad.' })}
           >
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">

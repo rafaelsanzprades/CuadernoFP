@@ -359,7 +359,7 @@ export default function MagiaPage() {
     // que el resto de acordeones de la app.
     'analisis-pdx': [
       { id: "comparativa-contexto", label: t('nav.contexto', {defaultValue: 'Contexto'}) },
-      { id: "comparativa-metodologia", label: t('nav.metodologia', {defaultValue: 'Metodologías'}) },
+      { id: "comparativa-metodologia", label: t('nav.metodologias', {defaultValue: 'Metodologías'}) },
       { id: "comparativa-curriculo", label: t('nav.curriculo', {defaultValue: 'Currículo'}) },
       { id: "comparativa-instrumento", label: t('nav.instrumentos', {defaultValue: 'Instrumentos'}) },
       { id: "comparativa-magia-descargas", label: 'MagIA (Descargas)' },
